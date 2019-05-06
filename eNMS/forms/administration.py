@@ -1,4 +1,3 @@
-from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
     DateField,
@@ -11,7 +10,7 @@ from wtforms import (
     SelectMultipleField,
 )
 
-from eNMS.forms import metaform
+from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import import_classes, user_permissions
 
@@ -20,7 +19,7 @@ class ParametersForm:
     action = "saveParameters"
 
 
-class ViewParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
+class ViewParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="view")
     default_longitude = FloatField("Default Longitude")
     default_latitude = FloatField("Default Latitude")
@@ -37,26 +36,26 @@ class ViewParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
     )
 
 
-class ClusterParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
+class ClusterParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="cluster")
     cluster_scan_protocol = SelectField(choices=(("http", "HTTP"), ("https", "HTTPS")))
     cluster_scan_subnet = StringField("Cluster Scan Subnet")
     cluster_scan_timeout = FloatField("Cluster Scan Timeout")
 
 
-class GitParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
+class GitParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="git")
     git_configurations = StringField("Git Configurations Repository")
     git_automation = StringField("Git Automation Repository")
 
 
-class SshParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
+class SshParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="ssh")
     gotty_start_port = FloatField("Start port")
     gotty_end_port = FloatField("End port")
 
 
-class NotificationsParametersForm(FlaskForm, ParametersForm, metaclass=metaform):
+class NotificationsParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="notifications")
     mail_sender = StringField("Mail Sender Address")
     mail_recipients = StringField("Mail Recipients (separated by comma)")
@@ -67,7 +66,7 @@ class NotificationsParametersForm(FlaskForm, ParametersForm, metaclass=metaform)
     slack_channel = StringField("Slack Channel")
 
 
-class DatabaseDeletionForm(FlaskForm, metaclass=metaform):
+class DatabaseDeletionForm(BaseForm):
     action = "databaseDeletion"
     form_type = HiddenField(default="database_deletion")
     clear_logs_date = DateField("Clear Logs Older than")
@@ -77,12 +76,12 @@ class DatabaseDeletionForm(FlaskForm, metaclass=metaform):
     )
 
 
-class InstanceDeletionForm(FlaskForm, metaclass=metaform):
+class InstanceDeletionForm(BaseForm):
     template = "instance_deletion"
     form_type = HiddenField(default="instance_deletion")
 
 
-class ServerForm(FlaskForm, metaclass=metaform):
+class ServerForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="server")
     id = HiddenField()
@@ -92,7 +91,7 @@ class ServerForm(FlaskForm, metaclass=metaform):
     weight = IntegerField("Weigth")
 
 
-class ServerFilteringForm(FlaskForm, metaclass=metaform):
+class ServerFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="server_filtering")
     name = StringField("Name")
@@ -102,14 +101,14 @@ class ServerFilteringForm(FlaskForm, metaclass=metaform):
     status = StringField("Status")
 
 
-class LoginForm(FlaskForm, metaclass=metaform):
+class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     authentication_method = SelectField("Authentication Method", choices=())
     name = StringField("Name")
     password = PasswordField("Password")
 
 
-class DatabaseMigrationsForm(FlaskForm, metaclass=metaform):
+class DatabaseMigrationsForm(BaseForm):
     template = "database_migration"
     form_type = HiddenField(default="database_migration")
     empty_database_before_import = BooleanField("Empty Database before Import")
@@ -119,7 +118,7 @@ class DatabaseMigrationsForm(FlaskForm, metaclass=metaform):
     )
 
 
-class UserForm(FlaskForm, metaclass=metaform):
+class UserForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="user")
     id = HiddenField()
@@ -131,14 +130,14 @@ class UserForm(FlaskForm, metaclass=metaform):
     pools = MultipleInstanceField("Pools", instance_type="Pool")
 
 
-class UserFilteringForm(FlaskForm, metaclass=metaform):
+class UserFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="user_filtering")
     name = StringField("Name")
     email = StringField("Email")
 
 
-class LogFilteringForm(FlaskForm, metaclass=metaform):
+class LogFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="log_filtering")
     source_ip_address = StringField("Source IP Address")

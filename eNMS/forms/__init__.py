@@ -1,7 +1,9 @@
 from ast import literal_eval
 from collections import defaultdict
 from flask_login import current_user
+from flask_wtf import FlaskForm
 from wtforms.fields.core import UnboundField
+from wtforms.form import FormMeta
 
 from eNMS.forms.fields import field_types
 from eNMS.models import property_types
@@ -11,6 +13,16 @@ form_actions = {}
 form_classes = {}
 form_properties = defaultdict(dict)
 form_templates = {}
+
+
+class MetaForm(FormMeta):
+    def __new__(meta, name, bases, attrs):
+        cls = type.__new__(meta, name, bases, attrs)
+        return cls
+
+
+class BaseForm(FlaskForm, metaclass=MetaForm):
+    pass
 
 
 def metaform(*args, **kwargs):

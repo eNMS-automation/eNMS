@@ -69,7 +69,7 @@ class AnsiblePlaybookService(Service):
         }
 
 
-class AnsiblePlaybookForm(ServiceForm, ValidationForm, metaclass=metaform):
+class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="AnsiblePlaybookService")
     has_targets = BooleanField()
     playbook_path = StringField()

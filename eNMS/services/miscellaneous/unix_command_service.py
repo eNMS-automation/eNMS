@@ -38,6 +38,6 @@ class UnixCommandService(Service):
         }
 
 
-class UnixCommandForm(ServiceForm, ValidationForm, metaclass=metaform):
+class UnixCommandForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="UnixCommandService")
     command = StringField()

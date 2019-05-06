@@ -5,12 +5,12 @@ from eNMS.forms import metaform
 from eNMS.forms.fields import DateField, MultipleInstanceField, InstanceField
 
 
-class DeviceAutomationForm(FlaskForm, metaclass=metaform):
+class DeviceAutomationForm(FlaskForm):
     form_type = HiddenField(default="device_automation")
     jobs = MultipleInstanceField("Jobs", instance_type="Job")
 
 
-class JobForm(FlaskForm, metaclass=metaform):
+class JobForm(FlaskForm):
     template = "object"
     form_type = HiddenField(default="job")
     id = HiddenField()
@@ -43,17 +43,17 @@ class JobForm(FlaskForm, metaclass=metaform):
     operating_system = StringField("Operating System")
 
 
-class ServiceForm(JobForm, metaclass=metaform):
+class ServiceForm(JobForm):
     template = "service"
     form_type = HiddenField(default="service")
 
 
-class WorkflowForm(JobForm, metaclass=metaform):
+class WorkflowForm(JobForm):
     template = "workflow"
     form_type = HiddenField(default="workflow")
 
 
-class JobFilteringForm(FlaskForm, metaclass=metaform):
+class JobFilteringForm(FlaskForm):
     action = "filter"
     form_type = HiddenField(default="job filtering")
     name = StringField("Name")
@@ -69,27 +69,27 @@ class JobFilteringForm(FlaskForm, metaclass=metaform):
     time_between_retries = StringField("Time between retries (in seconds)")
 
 
-class ServiceFilteringForm(JobFilteringForm, metaclass=metaform):
+class ServiceFilteringForm(JobFilteringForm):
     form_type = HiddenField(default="service_filtering")
 
 
-class WorkflowFilteringForm(JobFilteringForm, metaclass=metaform):
+class WorkflowFilteringForm(JobFilteringForm):
     form_type = HiddenField(default="workflow_filtering")
 
 
-class CompareResultsForm(FlaskForm, metaclass=metaform):
+class CompareResultsForm(FlaskForm):
     template = "results"
     form_type = HiddenField(default="results")
     display = SelectField("Version to display", choices=())
     compare_with = SelectField("Compare Against", choices=())
 
 
-class AddJobsForm(FlaskForm, metaclass=metaform):
+class AddJobsForm(FlaskForm):
     form_type = HiddenField(default="add_jobs")
     add_jobs = MultipleInstanceField("Add jobs", instance_type="Job")
 
 
-class WorkflowBuilderForm(FlaskForm, metaclass=metaform):
+class WorkflowBuilderForm(FlaskForm):
     form_type = HiddenField(default="workflow_builder")
     workflow = InstanceField("Workflow", instance_type="Workflow")
 
@@ -103,14 +103,14 @@ def configure_form(cls: FlaskForm) -> FlaskForm:
 
 
 @configure_form
-class LogAutomationForm(FlaskForm, metaclass=metaform):
+class LogAutomationForm(FlaskForm):
     form_type = HiddenField(default="logrule")
     id = HiddenField()
     name = StringField("Name")
     jobs = MultipleInstanceField("Jobs", instance_type="Job")
 
 
-class TaskForm(FlaskForm, metaclass=metaform):
+class TaskForm(FlaskForm):
     template = "base"
     form_type = HiddenField(default="task")
     id = HiddenField()

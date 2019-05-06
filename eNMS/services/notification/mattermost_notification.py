@@ -32,7 +32,7 @@ class MattermostNotificationService(Service):
         return {"success": True, "result": str(result)}
 
 
-class MattermostNotificationForm(ServiceForm, metaclass=metaform):
+class MattermostNotificationForm(ServiceForm):
     form_type = HiddenField(default="MattermostNotificationService")
     channel = StringField()
     body = StringField(widget=TextArea(), render_kw={"rows": 5})

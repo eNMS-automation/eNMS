@@ -48,7 +48,7 @@ class NapalmTracerouteService(Service):
         return {"success": "success" in traceroute, "result": traceroute}
 
 
-class NapalmTracerouteForm(ServiceForm, metaclass=metaform):
+class NapalmTracerouteForm(ServiceForm):
     form_type = HiddenField(default="NapalmTracerouteService")
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField()

@@ -70,7 +70,7 @@ class NapalmBackupService(Service):
         return {"success": True, "result": "Get Config via Napalm"}
 
 
-class NapalmBackupForm(ServiceForm, metaclass=metaform):
+class NapalmBackupForm(ServiceForm):
     form_type = HiddenField(default="NapalmBackupService")
     number_of_configuration = IntegerField(default=10)
     driver = SelectField(choices=controller.NAPALM_DRIVERS)

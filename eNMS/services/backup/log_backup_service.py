@@ -61,7 +61,7 @@ class LogBackupService(Service):
         }
 
 
-class LogBackupForm(ServiceForm, metaclass=metaform):
+class LogBackupForm(ServiceForm):
     form_type = HiddenField(default="LogBackupService")
     protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
     delete_folder = BooleanField()

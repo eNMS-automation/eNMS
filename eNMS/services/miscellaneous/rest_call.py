@@ -82,7 +82,7 @@ class RestCallService(Service):
         }
 
 
-class RestCallForm(ServiceForm, ValidationForm, metaclass=metaform):
+class RestCallForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="RestCallService")
     has_targets = BooleanField()
     call_type = SelectField(

@@ -80,7 +80,7 @@ class ExampleService(Service):
         return {"success": True, "result": "example"}
 
 
-class ExampleForm(ServiceForm, metaclass=metaform):
+class ExampleForm(ServiceForm):
     form_type = HiddenField(default="ExampleService")
     string1 = SelectField(
         choices=[("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]

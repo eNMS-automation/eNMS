@@ -65,7 +65,7 @@ class NetmikoValidationService(Service):
         }
 
 
-class NetmikoValidationForm(ServiceForm, ValidationForm, metaclass=metaform):
+class NetmikoValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = StringField()
     conversion_method = SelectField(

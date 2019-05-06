@@ -67,7 +67,7 @@ class NetmikoDataExtractionService(Service):
         return {"result": result, "success": True}
 
 
-class NetmikoDataExtractionForm(ServiceForm, metaclass=metaform):
+class NetmikoDataExtractionForm(ServiceForm):
     form_type = HiddenField(default="NetmikoDataExtractionService")
     variable1 = StringField()
     command1 = StringField()

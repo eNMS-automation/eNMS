@@ -136,6 +136,6 @@ class SwissArmyKnifeService(Service):
         return {"success": True, "uptime_less_5000": uptime_less_than_50000}
 
 
-class SwissArmyKnifeForm(ServiceForm, metaclass=metaform):
+class SwissArmyKnifeForm(ServiceForm):
     form_type = HiddenField(default="SwissArmyKnifeService")
     has_targets = BooleanField()

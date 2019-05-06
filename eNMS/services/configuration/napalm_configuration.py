@@ -37,7 +37,7 @@ class NapalmConfigurationService(Service):
         return {"success": True, "result": f"Config push ({config})"}
 
 
-class NapalmConfigurationForm(ServiceForm, metaclass=metaform):
+class NapalmConfigurationForm(ServiceForm):
     form_type = HiddenField(default="NapalmConfigurationService")
     action = SelectField(
         choices=(

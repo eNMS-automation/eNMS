@@ -75,7 +75,7 @@ class GenericFileTransferService(Service):
         return {"success": success, "result": result}
 
 
-class GenericFileTransferForm(ServiceForm, metaclass=metaform):
+class GenericFileTransferForm(ServiceForm):
     form_type = HiddenField(default="GenericFileTransferService")
     direction = SelectField(choices=(("get", "Get"), ("put", "Put")))
     protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))

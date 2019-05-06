@@ -56,7 +56,7 @@ class NetmikoFileTransferService(Service):
         return {"success": True, "result": transfer_dict}
 
 
-class NetmikoFileTransferForm(ServiceForm, metaclass=metaform):
+class NetmikoFileTransferForm(ServiceForm):
     form_type = HiddenField(default="NetmikoFileTransferService")
     source_file = StringField(validators=[InputRequired()])
     dest_file = StringField(validators=[InputRequired()])

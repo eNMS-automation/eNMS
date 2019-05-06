@@ -70,7 +70,7 @@ class PingService(Service):
             return {"success": all(result.values()), "result": result}
 
 
-class PingServiceForm(ServiceForm, metaclass=metaform):
+class PingServiceForm(ServiceForm):
     form_type = HiddenField(default="PingServiceService")
     protocol = SelectField(choices=(("ICMP", "ICMP Ping"), ("TCP", "TCP Ping")))
     ports = StringField()

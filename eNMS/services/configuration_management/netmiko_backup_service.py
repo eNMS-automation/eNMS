@@ -82,7 +82,7 @@ class NetmikoBackupService(Service):
         return {"success": True, "result": f"Command: {self.configuration_command}"}
 
 
-class NetmikoBackupForm(ServiceForm, metaclass=metaform):
+class NetmikoBackupForm(ServiceForm):
     form_type = HiddenField(default="NetmikoBackupService")
     number_of_configuration = IntegerField(default=10)
     configuration_command = StringField()

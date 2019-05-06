@@ -58,7 +58,7 @@ class DatabaseBackupService(Service):
         }
 
 
-class DatabaseBackupForm(ServiceForm, metaclass=metaform):
+class DatabaseBackupForm(ServiceForm):
     form_type = HiddenField(default="DatabaseBackupService")
     protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
     delete_folder = BooleanField()

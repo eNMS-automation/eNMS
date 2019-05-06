@@ -32,7 +32,7 @@ class NapalmRollbackService(Service):
         return {"success": True, "result": "Rollback successful"}
 
 
-class NapalmRollbackForm(ServiceForm, metaclass=metaform):
+class NapalmRollbackForm(ServiceForm):
     form_type = HiddenField(default="NapalmRollbackService")
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField(default=True)

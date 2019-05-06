@@ -52,7 +52,7 @@ class NapalmGettersService(Service):
         }
 
 
-class NapalmGettersForm(ServiceForm, ValidationForm, metaclass=metaform):
+class NapalmGettersForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="NapalmGettersService")
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField(default=True)

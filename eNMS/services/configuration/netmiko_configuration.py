@@ -47,7 +47,7 @@ class NetmikoConfigurationService(Service):
         return {"success": True, "result": f"configuration OK {config}"}
 
 
-class NetmikoConfigurationForm(ServiceForm, metaclass=metaform):
+class NetmikoConfigurationForm(ServiceForm):
     form_type = HiddenField(default="NetmikoConfigurationService")
     content = StringField(widget=TextArea(), render_kw={"rows": 5})
     enable_mode = BooleanField()

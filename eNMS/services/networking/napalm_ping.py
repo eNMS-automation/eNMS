@@ -52,7 +52,7 @@ class NapalmPingService(Service):
         return {"success": "success" in ping, "result": ping}
 
 
-class NapalmPingForm(ServiceForm, metaclass=metaform):
+class NapalmPingForm(ServiceForm):
     form_type = HiddenField(default="NapalmPingService")
     count = IntegerField()
     driver = SelectField(choices=controller.NAPALM_DRIVERS)

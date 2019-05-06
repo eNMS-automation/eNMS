@@ -31,7 +31,7 @@ class SlackNotificationService(Service):
         return {"success": True, "result": str(result)}
 
 
-class SlackNotificationForm(ServiceForm, metaclass=metaform):
+class SlackNotificationForm(ServiceForm):
     form_type = HiddenField(default="SlackNotificationService")
     channel = StringField("Channel")
     token = StringField()

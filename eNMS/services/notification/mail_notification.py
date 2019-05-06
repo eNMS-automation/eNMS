@@ -37,7 +37,7 @@ class MailNotificationService(Service):
         return {"success": True, "result": str(message)}
 
 
-class MailNotificationForm(ServiceForm, metaclass=metaform):
+class MailNotificationForm(ServiceForm):
     form_type = HiddenField(default="MailNotificationService")
     title = StringField()
     sender = StringField()

@@ -45,7 +45,7 @@ def configure_pool_form(cls: FlaskForm) -> FlaskForm:
     return cls
 
 
-class ConnectionForm(FlaskForm, metaclass=metaform):
+class ConnectionForm(FlaskForm):
     template = "connection"
     form_type = HiddenField(default="connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
@@ -56,13 +56,13 @@ class ConnectionForm(FlaskForm, metaclass=metaform):
     address = SelectField(choices=address_choices)
 
 
-class ObjectFilteringForm(FlaskForm, metaclass=metaform):
+class ObjectFilteringForm(FlaskForm):
     action = "filter"
     form_type = HiddenField(default="object_filtering")
     pools = MultipleInstanceField("Pools", instance_type="Pool")
 
 
-class ObjectForm(FlaskForm, metaclass=metaform):
+class ObjectForm(FlaskForm):
     form_type = HiddenField(default="object")
     name = StringField("Name")
     description = StringField("Description")
@@ -72,7 +72,7 @@ class ObjectForm(FlaskForm, metaclass=metaform):
 
 
 @configure_device_form
-class DeviceFilteringForm(ObjectFilteringForm, ObjectForm, metaclass=metaform):
+class DeviceFilteringForm(ObjectFilteringForm, ObjectForm):
     form_type = HiddenField(default="device_filtering")
     current_configuration = StringField("Current Configuration")
     subtype = StringField("Subtype")
@@ -87,7 +87,7 @@ class DeviceFilteringForm(ObjectFilteringForm, ObjectForm, metaclass=metaform):
 
 
 @configure_device_form
-class DeviceForm(ObjectForm, metaclass=metaform):
+class DeviceForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="device")
     id = HiddenField()
@@ -105,7 +105,7 @@ class DeviceForm(ObjectForm, metaclass=metaform):
     netmiko_driver = SelectField("Netmiko Driver", choices=controller.NETMIKO_DRIVERS)
 
 
-class LinkForm(ObjectForm, metaclass=metaform):
+class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
@@ -114,7 +114,7 @@ class LinkForm(ObjectForm, metaclass=metaform):
     destination = InstanceField("Destination", instance_type="Device")
 
 
-class LinkFilteringForm(ObjectForm, ObjectFilteringForm, metaclass=metaform):
+class LinkFilteringForm(ObjectForm, ObjectFilteringForm):
     form_type = HiddenField(default="link_filtering")
     subtype = StringField("Subtype")
     source_name = StringField("Source")
@@ -122,7 +122,7 @@ class LinkFilteringForm(ObjectForm, ObjectFilteringForm, metaclass=metaform):
 
 
 @configure_pool_form
-class PoolForm(FlaskForm, metaclass=metaform):
+class PoolForm(FlaskForm):
     template = "pool"
     form_type = HiddenField(default="pool")
     id = HiddenField()
@@ -140,7 +140,7 @@ class PoolForm(FlaskForm, metaclass=metaform):
     never_update = BooleanField("Never update (for manually selected pools)")
 
 
-class PoolFilteringForm(FlaskForm, metaclass=metaform):
+class PoolFilteringForm(FlaskForm):
     action = filter
     form_type = HiddenField(default="pool_filtering")
     name = StringField("Name")
@@ -150,19 +150,19 @@ class PoolFilteringForm(FlaskForm, metaclass=metaform):
     operator = StringField("Match Condition")
 
 
-class PoolObjectsForm(FlaskForm, metaclass=metaform):
+class PoolObjectsForm(FlaskForm):
     form_type = HiddenField(default="pool_objects")
     devices = MultipleInstanceField("Devices", instance_type="Device")
     links = MultipleInstanceField("Links", instance_type="Link")
 
 
-class ExcelImportForm(FlaskForm, metaclass=metaform):
+class ExcelImportForm(FlaskForm):
     template = "topology_import"
     form_type = HiddenField(default="excel_import")
     replace = BooleanField("Replace Existing Topology")
 
 
-class OpenNmsForm(FlaskForm, metaclass=metaform):
+class OpenNmsForm(FlaskForm):
     action = "queryOpenNMS"
     form_type = HiddenField(default="opennms")
     opennms_rest_api = StringField("REST API URL")
@@ -172,7 +172,7 @@ class OpenNmsForm(FlaskForm, metaclass=metaform):
     password = PasswordField("Password")
 
 
-class NetboxForm(FlaskForm, metaclass=metaform):
+class NetboxForm(FlaskForm):
     action = "queryNetbox"
     form_type = HiddenField(default="netbox")
     netbox_address = StringField("URL", default="http://0.0.0.0:8000")
@@ -180,7 +180,7 @@ class NetboxForm(FlaskForm, metaclass=metaform):
     netbox_type = SelectField(choices=tuple(controller.device_subtypes.items()))
 
 
-class LibreNmsForm(FlaskForm, metaclass=metaform):
+class LibreNmsForm(FlaskForm):
     action = "queryLibreNMS"
     form_type = HiddenField(default="librenms")
     librenms_address = StringField("URL", default="http://librenms.example.com")
@@ -190,20 +190,20 @@ class LibreNmsForm(FlaskForm, metaclass=metaform):
     librenms_token = PasswordField("Token")
 
 
-class ExportForm(FlaskForm, metaclass=metaform):
+class ExportForm(FlaskForm):
     action = "exportTopology"
     form_type = HiddenField(default="excel_export")
     export_filename = StringField("Filename")
 
 
-class GoogleEarthForm(FlaskForm, metaclass=metaform):
+class GoogleEarthForm(FlaskForm):
     form_type = HiddenField(default="google_earth_export")
     name = StringField("Name")
     label_size = IntegerField("Label Size", default=1)
     line_width = IntegerField("Link Width", default=2)
 
 
-class CompareConfigurationsForm(FlaskForm, metaclass=metaform):
+class CompareConfigurationsForm(FlaskForm):
     template = "configuration"
     form_type = HiddenField(default="configuration")
     display = SelectField("Version to display", choices=())

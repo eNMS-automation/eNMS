@@ -76,7 +76,7 @@ class NetmikoPromptsService(Service):
         }
 
 
-class NetmikoPromptsForm(ServiceForm, ValidationForm, metaclass=metaform):
+class NetmikoPromptsForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="NetmikoPromptsService")
     command = StringField()
     confirmation1 = StringField()

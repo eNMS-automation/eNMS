@@ -25,6 +25,6 @@ class UpdateInventoryService(Service):
         return {"success": True, "result": "properties updated"}
 
 
-class UpdateInventoryForm(ServiceForm, metaclass=metaform):
+class UpdateInventoryForm(ServiceForm):
     form_type = HiddenField(default="UpdateInventoryService")
     update_dictionary = DictField()

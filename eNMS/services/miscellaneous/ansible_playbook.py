@@ -5,7 +5,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 from wtforms import BooleanField, HiddenField, StringField
 
-from eNMS.database_helpers import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField

@@ -16,7 +16,7 @@ from yaml import dump, load, BaseLoader
 from eNMS.controller import controller
 from eNMS.default import create_default
 from eNMS.forms.administration import LoginForm
-from eNMS.database_helpers import delete_all, export, factory, fetch, fetch_all, get_one
+from eNMS.database import delete_all, export, factory, fetch, fetch_all, get_one
 
 
 class AdministrationDispatcher:

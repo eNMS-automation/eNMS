@@ -1,7 +1,7 @@
 from typing import Any, Optional, Set, Tuple
 
 from eNMS.controller import controller
-from eNMS.database_helpers import fetch
+from eNMS.database import fetch
 
 
 def threaded_job(

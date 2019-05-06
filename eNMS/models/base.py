@@ -3,9 +3,8 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
 from eNMS.controller import controller
+from eNMS.database import Base, fetch, objectify
 from eNMS.models import cls_to_properties, property_types, relationships
-from eNMS.database_helpers import fetch, objectify
-from eNMS.database import Base
 from eNMS.properties import dont_migrate, private_properties
 
 

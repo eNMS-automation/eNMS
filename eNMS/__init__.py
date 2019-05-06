@@ -9,11 +9,10 @@ from typing import Any, Optional, Tuple, Type, Union
 from eNMS.cli import configure_cli
 from eNMS.config import Config
 from eNMS.controller import controller
+from eNMS.database import fetch, get_one
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties
-from eNMS.database import init_db
-from eNMS.database_helpers import fetch, get_one
 from eNMS.modules import bp, csrf, login_manager, mail_client
 from eNMS.models import model_inspection, property_types, service_classes
 from eNMS.models.logging import SyslogServer

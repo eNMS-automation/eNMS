@@ -9,7 +9,7 @@ from typing import Union
 
 from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
-from eNMS.database_helpers import delete, factory, fetch
+from eNMS.database import delete, factory, fetch
 from eNMS.modules import auth
 
 

@@ -16,7 +16,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.controller import controller
-from eNMS.database_helpers import (
+from eNMS.database import (
     delete_all,
     factory,
     fetch,

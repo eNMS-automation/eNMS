@@ -56,7 +56,7 @@ link_table_properties: List[str] = object_common_properties[1:] + [
     "destination_name",
 ]
 
-pool_table_properties: List[str] = base_properties + [
+pool_table_properties: List[str] = base_properties[1:] + [
     "never_update",
     "longitude",
     "latitude",

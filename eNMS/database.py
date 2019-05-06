@@ -1,12 +1,18 @@
 from contextlib import contextmanager
 from logging import info
 from os import environ
-from sqlalchemy import create_engine, event
+from sqlalchemy import Boolean, create_engine, event, Float, Integer, PickleType
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 from typing import Any, Generator, List, Tuple
 
-from eNMS.models import classes
+from eNMS.models import (
+    cls_to_properties,
+    classes,
+    service_classes,
+    property_types,
+    relationships,
+)
 
 engine = create_engine(
     "sqlite:///database.db?check_same_thread=False", convert_unicode=True
@@ -20,17 +26,6 @@ Base = declarative_base()
 
 SMALL_STRING_LENGTH = int(environ.get("SMALL_STRING_LENGTH", 255))
 LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
-
-
-from sqlalchemy import Boolean, Float, Integer, PickleType
-from sqlalchemy.inspection import inspect
-from eNMS.models import (
-    cls_to_properties,
-    classes,
-    service_classes,
-    property_types,
-    relationships,
-)
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)

@@ -16,8 +16,8 @@ form_templates = {}
 
 
 class MetaForm(FormMeta):
-    def __new__(meta, name, bases, attrs):
-        cls = type.__new__(meta, name, bases, attrs)
+    def __new__(cls, name, bases, attrs):
+        cls = type.__new__(cls, name, bases, attrs)
         if name == "BaseForm":
             return cls
         form_type = cls.form_type.kwargs["default"]

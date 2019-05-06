@@ -4,7 +4,7 @@ from typing import Any, List
 
 from eNMS.controller import controller
 from eNMS.database import Base, fetch, objectify, Session
-from eNMS.models import cls_to_properties, property_types, relationships
+from eNMS.models import model_properties, property_types, relationships
 from eNMS.properties import dont_migrate, private_properties
 
 
@@ -55,7 +55,7 @@ class AbstractBase(Base):
 
     def get_properties(self, export=False) -> dict:
         result = {}
-        for property in cls_to_properties[self.type]:
+        for property in model_properties[self.type]:
             value = getattr(self, property)
             if property in private_properties:
                 continue

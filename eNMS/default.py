@@ -3,7 +3,7 @@ from uuid import getnode
 
 from eNMS.controller import controller
 from eNMS.database import factory, fetch, get_one, Session
-from eNMS.models import classes, cls_to_properties
+from eNMS.models import models, model_properties
 
 
 def configure_server_id() -> None:
@@ -52,11 +52,11 @@ def create_default_pools() -> None:
 
 def create_default_parameters(app: Flask) -> None:
     if not get_one("Parameters"):
-        parameters = classes["Parameters"]()
+        parameters = models["Parameters"]()
         parameters.update(
             **{
                 property: controller.config[property.upper()]
-                for property in cls_to_properties["Parameters"]
+                for property in model_properties["Parameters"]
                 if property.upper() in controller.config
             }
         )

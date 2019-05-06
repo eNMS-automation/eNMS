@@ -13,7 +13,7 @@ from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher
 from eNMS.forms import form_actions, form_classes, form_templates
 from eNMS.forms.automation import ServiceTableForm
-from eNMS.models import classes
+from eNMS.models import models
 from eNMS.properties import filtering_properties, table_fixed_columns, table_properties
 
 
@@ -24,7 +24,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         return instance
 
     def filtering(self, table: str) -> dict:
-        model = classes.get(table, classes["Device"])
+        model = models.get(table, models["Device"])
         properties = table_properties[table]
         try:
             order_property = properties[int(request.args["order[0][column]"])]
@@ -40,7 +40,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         if table in ("device", "link", "configuration"):
             pools = [int(id) for id in request.args.getlist("form[pools][]")]
             if pools:
-                result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
+                result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
         return {
             "jsonify": True,
             "draw": int(request.args["draw"]),
@@ -83,7 +83,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
             service_table_form = ServiceTableForm(request.form)
             service_table_form.services.choices = [
                 (service, service)
-                for service in classes
+                for service in models
                 if service != "Service" and service.endswith("Service")
             ]
             table_dict["service_table_form"] = service_table_form

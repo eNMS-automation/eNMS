@@ -26,7 +26,7 @@ from eNMS.database import (
     objectify,
     Session,
 )
-from eNMS.models import classes
+from eNMS.models import models
 from eNMS.properties import (
     filtering_properties,
     table_properties,
@@ -79,7 +79,7 @@ class InventoryDispatcher:
         return dict(
             properties=type_to_diagram_properties,
             counters={
-                **{cls: len(fetch_all_visible(cls)) for cls in classes},
+                **{cls: len(fetch_all_visible(cls)) for cls in models},
                 **{
                     "Running services": len(
                         [
@@ -278,7 +278,7 @@ class InventoryDispatcher:
 
     def view_filtering(self, filter_type: str):
         obj_type = filter_type.split("_")[0]
-        model = classes[obj_type]
+        model = models[obj_type]
         constraints = []
         for property in filtering_properties[obj_type]:
             value = request.form[property]
@@ -287,5 +287,5 @@ class InventoryDispatcher:
         result = Session.query(model).filter(and_(*constraints))
         pools = [int(id) for id in request.form["pools"]]
         if pools:
-            result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))
+            result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
         return [d.view_properties for d in result.all()]

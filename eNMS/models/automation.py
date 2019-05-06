@@ -26,7 +26,7 @@ from xmltodict import parse
 
 from eNMS.concurrent import threaded_job, device_process
 from eNMS.controller import controller
-from eNMS.database import fetch, get_one, SMALL_STRING_LENGTH
+from eNMS.database import fetch, get_one, SMALL_STRING_LENGTH, Session, session_scope
 from eNMS.models import metamodel
 from eNMS.models.associations import (
     job_device_table,
@@ -101,7 +101,7 @@ class Job(AbstractBase, metaclass=metamodel):
         for pool in self.pools:
             targets |= set(pool.devices)
         self.number_of_targets = len(targets)
-        db.session.commit()
+        Session.commit()
         return targets
 
     def job_sources(self, workflow: "Workflow", subtype: str = "all") -> List["Job"]:
@@ -175,7 +175,7 @@ class Job(AbstractBase, metaclass=metamodel):
     ) -> Tuple[dict, str]:
         parameters = get_one("Parameters")
         logs = workflow.logs if workflow else self.logs
-        with controller.session_scope() as session:
+        with session_scope() as session:
             logs.append(f"{self.type} {self.name}: Starting.")
             self.is_running, self.state, self.logs = True, {}, []
             session.merge(workflow or self)
@@ -190,7 +190,7 @@ class Job(AbstractBase, metaclass=metamodel):
             results["results"]["devices"] = {}
         now = controller.get_time()
         for i in range(self.number_of_retries + 1):
-            with controller.session_scope() as session:
+            with session_scope() as session:
                 logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
                 self.completed = self.failed = 0
                 session.merge(workflow or self)
@@ -226,7 +226,7 @@ class Job(AbstractBase, metaclass=metamodel):
                     break
                 else:
                     sleep(self.time_between_retries)
-        with controller.session_scope():
+        with session_scope() as session:
             logs.append(f"{self.type} {self.name}: Finished.")
             self.results[now] = {**results, "logs": list(logs)}
             logs = []
@@ -472,7 +472,7 @@ class Workflow(Job, metaclass=metamodel):
         self.state = {"jobs": {}}
         if device:
             self.state["current_device"] = device.name
-        db.session.commit()
+        Session.commit()
         jobs: List[Job] = [self.jobs[0]]
         visited: Set = set()
         results: dict = {"success": False}
@@ -484,7 +484,7 @@ class Workflow(Job, metaclass=metamodel):
                 continue
             visited.add(job)
             self.state["current_job"] = job.get_properties()
-            db.session.commit()
+            Session.commit()
             log = f"Workflow {self.name}: job {job.name}"
             if device:
                 log += f" on {device.name}"
@@ -494,7 +494,7 @@ class Workflow(Job, metaclass=metamodel):
             )
             success = job_results["results"]["success"]
             self.state["jobs"][job.id] = success
-            db.session.commit()
+            Session.commit()
             edge_type_to_follow = "success" if success else "failure"
             for successor in job.job_successors(self, edge_type_to_follow):
                 if successor not in visited:
@@ -618,18 +618,18 @@ class Task(AbstractBase, metaclass=metamodel):
     def pause(self) -> None:
         controller.scheduler.pause_job(self.aps_job_id)
         self.is_active = False
-        db.session.commit()
+        Session.commit()
 
     def resume(self) -> None:
         self.schedule()
         controller.scheduler.resume_job(self.aps_job_id)
         self.is_active = True
-        db.session.commit()
+        Session.commit()
 
     def delete_task(self) -> None:
         if controller.scheduler.get_job(self.aps_job_id):
             controller.scheduler.remove_job(self.aps_job_id)
-        db.session.commit()
+        Session.commit()
 
     def kwargs(self) -> Tuple[dict, dict]:
         default = {

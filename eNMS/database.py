@@ -39,12 +39,12 @@ def objectify(model: str, object_list: List[int]) -> List[Any]:
 
 
 def delete(model: str, **kwargs: Any) -> dict:
-    instance = session.query(classes[model]).filter_by(**kwargs).first()
+    instance = Session.query(classes[model]).filter_by(**kwargs).first()
     if hasattr(instance, "type") and instance.type == "Task":
         instance.delete_task()
     serialized_instance = instance.serialized
-    session.delete(instance)
-    session.commit()
+    Session.delete(instance)
+    Session.commit()
     return serialized_instance
 
 
@@ -52,7 +52,7 @@ def delete_all(*models: str) -> None:
     for model in models:
         for instance in fetch_all(model):
             delete(model, id=instance.id)
-    session.commit()
+    Session.commit()
 
 
 def choices(model: str) -> List[Tuple[int, str]]:
@@ -64,8 +64,7 @@ def export(model: str) -> List[dict]:
 
 
 def get_one(model: str) -> Any:
-    with session_scope() as session:
-        return session.query(classes[model]).one()
+    return Session.query(classes[model]).one()
 
 
 def factory(cls_name: str, **kwargs: Any) -> Any:

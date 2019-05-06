@@ -10,11 +10,10 @@ from sqlalchemy.orm import relationship
 from typing import Any, List
 from yaml import load
 
-from eNMS.database import fetch, fetch_all, SMALL_STRING_LENGTH
+from eNMS.database import db, fetch, fetch_all, SMALL_STRING_LENGTH
 from eNMS.models import metamodel
 from eNMS.models.associations import pool_user_table
 from eNMS.models.base import Base
-from eNMS.modules import db
 
 
 class Server(Base, metaclass=metamodel):

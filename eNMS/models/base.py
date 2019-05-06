@@ -4,8 +4,7 @@ from typing import Any, List
 
 from eNMS.controller import controller
 from eNMS.models import cls_to_properties, property_types, relationships
-from eNMS.modules import db
-from eNMS.database import fetch, objectify
+from eNMS.database import db, fetch, objectify
 from eNMS.properties import dont_migrate, private_properties
 
 

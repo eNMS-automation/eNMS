@@ -2,9 +2,8 @@ from flask import Flask
 from uuid import getnode
 
 from eNMS.controller import controller
-from eNMS.modules import db
+from eNMS.database import db, factory, integrity_rollback, fetch, get_one
 from eNMS.models import classes, cls_to_properties
-from eNMS.database import factory, integrity_rollback, fetch, get_one
 
 
 def configure_server_id() -> None:

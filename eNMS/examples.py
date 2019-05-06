@@ -2,8 +2,7 @@ from flask import Flask
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
-from eNMS.modules import db
-from eNMS.database import factory, fetch
+from eNMS.database import db, factory, fetch
 
 
 def create_example_pools() -> None:

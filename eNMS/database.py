@@ -60,7 +60,6 @@ def model_inspection(mapper, cls):
             "model": relation.mapper.class_.__tablename__,
             "list": relation.uselist,
         }
-    print(classes)
 
 
 def fetch(model: str, **kwargs: Any) -> Any:

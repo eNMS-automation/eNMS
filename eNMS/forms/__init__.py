@@ -18,6 +18,36 @@ form_templates = {}
 class MetaForm(FormMeta):
     def __new__(meta, name, bases, attrs):
         cls = type.__new__(meta, name, bases, attrs)
+        print(meta, name, bases, attrs)
+        if name == "BaseForm":
+            return cls
+        form_type = cls.form_type.kwargs["default"]
+        form_classes[form_type] = cls
+        form_templates[form_type] = getattr(cls, "template", "base")
+        form_actions[form_type] = getattr(cls, "action", None)
+        properties = {
+            field_name: field_types[field.field_class]
+            for field_name, field in attrs.items()
+            if isinstance(field, UnboundField) and field.field_class in field_types
+        }
+        property_names.update(
+            {
+                field_name: field.args[0]
+                for field_name, field in attrs.items()
+                if isinstance(field, UnboundField) and field.args
+            }
+        )
+        form_properties[form_type].update(properties)
+        property_types.update(properties)
+        for base in cls.__bases__:
+            if not hasattr(base, "form_type"):
+                continue
+            base_form_type = base.form_type.kwargs["default"]
+            if base_form_type == "service":
+                cls.service_fields = list(properties)
+            if getattr(base, "abstract_service", False):
+                cls.service_fields.extend(form_properties[base_form_type])
+            form_properties[form_type].update(form_properties[base_form_type])
         return cls
 
 
@@ -27,33 +57,6 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 def metaform(*args, **kwargs):
     cls = type(*args, **kwargs)
-    form_type = cls.form_type.kwargs["default"]
-    form_classes[form_type] = cls
-    form_templates[form_type] = getattr(cls, "template", "base")
-    form_actions[form_type] = getattr(cls, "action", None)
-    properties = {
-        field_name: field_types[field.field_class]
-        for field_name, field in args[-1].items()
-        if isinstance(field, UnboundField) and field.field_class in field_types
-    }
-    property_names.update(
-        {
-            field_name: field.args[0]
-            for field_name, field in args[-1].items()
-            if isinstance(field, UnboundField) and field.args
-        }
-    )
-    form_properties[form_type].update(properties)
-    property_types.update(properties)
-    for base in cls.__bases__:
-        if not hasattr(base, "form_type"):
-            continue
-        base_form_type = base.form_type.kwargs["default"]
-        if base_form_type == "service":
-            cls.service_fields = list(properties)
-        if getattr(base, "abstract_service", False):
-            cls.service_fields.extend(form_properties[base_form_type])
-        form_properties[form_type].update(form_properties[base_form_type])
     return cls
 
 

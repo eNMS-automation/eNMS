@@ -1,5 +1,8 @@
+from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy.model import DefaultMeta, Model
 from os import environ
 from sqlalchemy import exc
+from sqlalchemy.ext.declarative import declarative_base
 from typing import Any, Callable, List, Tuple
 
 from eNMS.modules import db
@@ -7,6 +10,20 @@ from eNMS.models import classes
 
 SMALL_STRING_LENGTH = int(environ.get("SMALL_STRING_LENGTH", 255))
 LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
+
+
+class CustomMeta(DefaultMeta):
+    def __init__(cls, name, bases, d):
+        print(cls, name)
+        super(CustomMeta, cls).__init__(name, bases, d)
+
+    # custom class-only methods could go here
+
+
+db = SQLAlchemy(
+    model_class=declarative_base(cls=Model, metaclass=CustomMeta, name="Model"),
+    session_options={"expire_on_commit": False, "autoflush": False},
+)
 
 
 def fetch(model: str, **kwargs: Any) -> db.Model:

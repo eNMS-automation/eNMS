@@ -22,7 +22,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
         return instance
 
-    def filtering(self, table: str) -> dict:
+    def filtering(self, session, table: str) -> dict:
         model = classes.get(table, classes["Device"])
         properties = table_properties[table]
         try:
@@ -35,7 +35,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
             value = request.args.get(f"form[{property}]")
             if value:
                 constraints.append(getattr(model, property).contains(value))
-        result = db.session.query(model).filter(and_(*constraints)).order_by(order)
+        result = session.query(model).filter(and_(*constraints)).order_by(order)
         if table in ("device", "link", "configuration"):
             pools = [int(id) for id in request.args.getlist("form[pools][]")]
             if pools:
@@ -43,7 +43,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         return {
             "jsonify": True,
             "draw": int(request.args["draw"]),
-            "recordsTotal": len(model.query.all()),
+            "recordsTotal": len(session.query(model).all()),
             "recordsFiltered": len(result.all()),
             "data": [
                 [getattr(obj, property) for property in properties]
@@ -71,7 +71,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         info(f"{current_user.name}: GET {cls} {instance.name} ({id})")
         return instance.serialized
 
-    def table(self, table_type: str) -> dict:
+    def table(self, _, table_type: str) -> dict:
         return dict(
             properties=table_properties[table_type],
             fixed_columns=table_fixed_columns[table_type],

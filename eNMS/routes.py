@@ -3,6 +3,7 @@ from flask_login import current_user
 from logging import info, warning
 from werkzeug.wrappers.response import Response
 
+from eNMS.database_helpers import session_scope
 from eNMS.dispatcher import dispatcher
 from eNMS.forms import form_classes, form_postprocessing
 from eNMS.modules import bp
@@ -22,7 +23,8 @@ def get_route(page: str) -> Response:
         )
         return current_app.login_manager.unauthorized()
     func, *args = page.split("-")
-    ctx = getattr(dispatcher, func)(*args) or {}
+    with session_scope() as session:
+        ctx = getattr(dispatcher, func)(session, *args) or {}
     if not isinstance(ctx, dict):
         return ctx
     ctx["endpoint"] = page
@@ -58,8 +60,8 @@ def post_route(page: str) -> Response:
         request.form = form_postprocessing(request.form)
     func, *args = page.split("-")
     # try:
-    result = getattr(dispatcher, func)(*args)
-    db.session.commit()
+    with session_scope() as session:
+        result = getattr(dispatcher, func)(session, *args)
     return result if type(result) == Response else jsonify(result)
     # except Exception as e:
     #     return jsonify({"error": str(e)})

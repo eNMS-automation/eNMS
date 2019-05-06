@@ -13,7 +13,7 @@ from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher
 from eNMS.forms import form_actions, form_classes, form_templates
 from eNMS.forms.automation import ServiceTableForm
-from eNMS.models import classes, service_classes
+from eNMS.models import classes
 from eNMS.properties import filtering_properties, table_fixed_columns, table_properties
 
 
@@ -82,7 +82,9 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         if table_type == "service":
             service_table_form = ServiceTableForm(request.form)
             service_table_form.services.choices = [
-                (service, service) for service in service_classes
+                (service, service)
+                for service in classes
+                if service != "Service" and service.endswith("Service")
             ]
             table_dict["service_table_form"] = service_table_form
         return table_dict

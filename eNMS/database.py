@@ -6,13 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 from typing import Any, Generator, List, Tuple
 
-from eNMS.models import (
-    cls_to_properties,
-    classes,
-    service_classes,
-    property_types,
-    relationships,
-)
+from eNMS.models import cls_to_properties, classes, property_types, relationships
 
 engine = create_engine(
     "sqlite:///database.db?check_same_thread=False", convert_unicode=True
@@ -46,8 +40,6 @@ def model_inspection(mapper, cls):
     if hasattr(cls, "parent_cls"):
         cls_to_properties[cls.__tablename__].extend(cls_to_properties[cls.parent_cls])
     model = {cls.__tablename__: cls, cls.__tablename__.lower(): cls}
-    if classes.get("Service") and issubclass(cls, classes["Service"]):
-        service_classes[cls.__tablename__] = cls
     classes.update(model)
     for relation in mapper.relationships:
         property = str(relation).split(".")[1]

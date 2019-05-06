@@ -13,9 +13,8 @@ from eNMS.controller import controller
 from eNMS.database import Base, engine, fetch, get_one, Session
 from eNMS.default import create_default
 from eNMS.examples import create_examples
-from eNMS.forms import form_properties
+from eNMS.forms import form_properties, property_types
 from eNMS.extensions import bp, csrf, login_manager, mail_client
-from eNMS.models import property_types, service_classes
 from eNMS.models.logging import SyslogServer
 from eNMS.models.administration import User
 from eNMS.properties import property_names
@@ -65,7 +64,6 @@ def configure_context_processor(app) -> None:
             "names": property_names,
             "parameters": get_one("Parameters").serialized,
             "property_types": {k: str(v) for k, v in property_types.items()},
-            "services_classes": sorted(service_classes),
         }
 
 

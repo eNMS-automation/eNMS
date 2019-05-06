@@ -72,7 +72,9 @@ def fetch_all(model: str) -> Tuple[Any]:
 
 
 def fetch_all_visible(model: str) -> List[Any]:
-    return [instance for instance in classes[model].query.all() if instance.visible]
+    return [
+        instance for instance in Session.query(classes[model]).all() if instance.visible
+    ]
 
 
 def objectify(model: str, object_list: List[int]) -> List[Any]:

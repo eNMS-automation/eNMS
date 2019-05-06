@@ -3,7 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
 from eNMS.controller import controller
-from eNMS.database import Base, fetch, objectify
+from eNMS.database import Base, fetch, objectify, Session
 from eNMS.models import cls_to_properties, property_types, relationships
 from eNMS.properties import dont_migrate, private_properties
 
@@ -95,7 +95,7 @@ class AbstractBase(Base):
                 objects |= set(getattr(pool, f"{cls.class_type}s"))
             return list(objects)
         else:
-            return cls.query.all()
+            return Session.query(cls).all()
 
     @property
     def serialized(self) -> dict:

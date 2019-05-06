@@ -84,7 +84,7 @@ class SyslogUDPHandler(BaseRequestHandler):
             data = str(bytes.decode(self.request[0].strip()))
             source, _ = self.client_address
             log_rules = []
-            for log_rule in LogRule.query.all():
+            for log_rule in Session.query(LogRule).all():
                 source_match = (
                     search(log_rule.source_ip, source)
                     if log_rule.source_ip_regex

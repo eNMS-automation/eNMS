@@ -11,7 +11,6 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
-from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.controller import controller
 from eNMS.database import factory, fetch_all, get_one

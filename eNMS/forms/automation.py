@@ -1,7 +1,6 @@
-from flask_wtf import FlaskForm
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
-from eNMS.forms import metaform
+from eNMS.forms import BaseForm
 from eNMS.forms.fields import DateField, MultipleInstanceField, InstanceField
 
 

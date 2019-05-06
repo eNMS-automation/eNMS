@@ -1,4 +1,3 @@
-from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
     FloatField,
@@ -10,7 +9,7 @@ from wtforms import (
 )
 
 from eNMS.controller import controller
-from eNMS.forms import metaform
+from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField, InstanceField
 from eNMS.properties import pool_link_properties, pool_device_properties
 

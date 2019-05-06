@@ -9,7 +9,6 @@ from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.controller import controller
 from eNMS.database import fetch_all, SMALL_STRING_LENGTH
-from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device

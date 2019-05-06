@@ -2,7 +2,6 @@ from sqlalchemy import Column, ForeignKey, Integer, PickleType
 from sqlalchemy.ext.mutable import MutableDict
 from wtforms import HiddenField
 
-from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models.automation import Service

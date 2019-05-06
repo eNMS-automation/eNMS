@@ -55,11 +55,6 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
     pass
 
 
-def metaform(*args, **kwargs):
-    cls = type(*args, **kwargs)
-    return cls
-
-
 def form_postprocessing(form):
     data = {**form.to_dict(), **{"creator": current_user.name}}
     for property, field_type in form_properties[form.get("form_type")].items():

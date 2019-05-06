@@ -1,8 +1,7 @@
-from flask_wtf import FlaskForm
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.forms import metaform
+from eNMS.forms import BaseForm
 from eNMS.forms.fields import DictField
 
 

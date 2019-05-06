@@ -4,7 +4,7 @@
   "description": "A enterprise-grade vendor-agnostic network automation platform.",
   "scripts": {
     "prettier": "prettier --check eNMS/**/*",
-    "lint": "eslint ."
+    "lint": "eslint --config linting/.eslintrc --ignore-path linting/.eslintignore ."
   },
   "engines": {
     "node": "8.11.3"

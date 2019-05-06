@@ -1,6 +1,7 @@
 /*
 global
 action: false
+alertify: false
 call: false
 fCall: false
 L: false
@@ -28,7 +29,7 @@ const subtypeSizes = {
   server: [18, 12],
   switch: [18, 12],
   site: [22, 22],
-}
+};
 
 let selectedObject;
 let markersArray = [];

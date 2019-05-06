@@ -3,6 +3,8 @@ global
 action: false
 alertify: false
 call: false
+configureForm: false
+createPanel: false
 editService: false
 fCall: false
 partial: false

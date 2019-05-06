@@ -1,9 +1,11 @@
 /*
 global
 alertify: false
+csrf_token: false
 formProperties: false
 jsPanel: false
 NProgress: false
+page: false
 panelCode: false
 propertyTypes: false
 saveService: false
@@ -91,8 +93,7 @@ function doc(page) {
       "https://enms.readthedocs.io/en/latest/inventory/objects.html",
     user_management:
       "https://enms.readthedocs.io/en/latest/security/access.html",
-    view:
-    "https://enms.readthedocs.io/en/latest/views/geographical_view.html",
+    view: "https://enms.readthedocs.io/en/latest/views/geographical_view.html",
     workflow_builder:
       "https://enms.readthedocs.io/en/latest/workflows/index.html",
   }[page];
@@ -101,9 +102,12 @@ function doc(page) {
 
 $.ajaxSetup({
   beforeSend: function(xhr, settings) {
-      if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-          xhr.setRequestHeader("X-CSRFToken", csrf_token);
-      }
+    if (
+      !/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) &&
+      !this.crossDomain
+    ) {
+      xhr.setRequestHeader("X-CSRFToken", csrf_token);
+    }
   },
 });
 

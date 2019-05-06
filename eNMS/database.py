@@ -24,7 +24,13 @@ LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
 
 from sqlalchemy import Boolean, Float, Integer, PickleType
 from sqlalchemy.inspection import inspect
-from eNMS.models import cls_to_properties, classes, service_classes, property_types
+from eNMS.models import (
+    cls_to_properties,
+    classes,
+    service_classes,
+    property_types,
+    relationships,
+)
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
@@ -50,10 +56,11 @@ def model_inspection(mapper, cls):
     classes.update(model)
     for relation in mapper.relationships:
         property = str(relation).split(".")[1]
-        relationships[model_name][property] = {
+        relationships[cls.__tablename__][property] = {
             "model": relation.mapper.class_.__tablename__,
             "list": relation.uselist,
         }
+    print(classes)
 
 
 def fetch(model: str, **kwargs: Any) -> Any:
@@ -98,7 +105,7 @@ def export(model: str) -> List[dict]:
 
 
 def get_one(model: str) -> Any:
-    return Session.query(classes[model]).one()
+    return Session.query(classes[model]).one_or_none()
 
 
 def factory(cls_name: str, **kwargs: Any) -> Any:

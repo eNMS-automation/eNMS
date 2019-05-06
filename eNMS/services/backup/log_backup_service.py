@@ -11,7 +11,6 @@ from eNMS.controller import controller
 from eNMS.database import fetch_all, SMALL_STRING_LENGTH
 from eNMS.forms import metaform
 from eNMS.forms.automation import ServiceForm
-from eNMS.models import metamodel
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 

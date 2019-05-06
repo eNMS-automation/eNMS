@@ -23,7 +23,6 @@ from eNMS.models.associations import (
     job_device_table,
     job_pool_table,
 )
-from eNMS.models import metamodel
 from eNMS.models.base import AbstractBase
 from eNMS.properties import pool_link_properties, pool_device_properties
 

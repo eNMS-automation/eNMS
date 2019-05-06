@@ -27,7 +27,6 @@ from xmltodict import parse
 from eNMS.concurrent import threaded_job, device_process
 from eNMS.controller import controller
 from eNMS.database import fetch, get_one, SMALL_STRING_LENGTH, Session, session_scope
-from eNMS.models import metamodel
 from eNMS.models.associations import (
     job_device_table,
     job_log_rule_table,

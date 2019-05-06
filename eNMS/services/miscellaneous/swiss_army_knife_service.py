@@ -16,7 +16,6 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.controller import controller
 from eNMS.database import factory, fetch_all, get_one
 from eNMS.modules import mail_client
-from eNMS.models import metamodel
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 

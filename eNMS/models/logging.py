@@ -7,7 +7,6 @@ from typing import List
 
 from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH
-from eNMS.models import metamodel
 from eNMS.models.associations import job_log_rule_table, log_rule_log_table
 from eNMS.models.base import AbstractBase
 

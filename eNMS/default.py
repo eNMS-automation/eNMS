@@ -51,6 +51,7 @@ def create_default_pools() -> None:
 
 
 def create_default_parameters(app: Flask) -> None:
+    print(get_one("Parameters"))
     if not get_one("Parameters"):
         parameters = classes["Parameters"]()
         parameters.update(

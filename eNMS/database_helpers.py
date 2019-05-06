@@ -20,19 +20,11 @@ Session = scoped_session(
 
 
 def fetch(model: str, session=None, **kwargs: Any) -> Any:
-    if session:
-        return session.query(classes[model]).filter_by(**kwargs).first()
-    else:
-        with session_scope() as session:
-            return session.query(classes[model]).filter_by(**kwargs).first()
+    return Session.query(classes[model]).filter_by(**kwargs).first()
 
 
 def fetch_all(model: str, session=None) -> Tuple[Any]:
-    if session:
-        return session.query(classes[model]).all()
-    else:
-        with session_scope() as session:
-            return session.query(classes[model]).all()
+    return Session.query(classes[model]).all()
 
 
 def fetch_all_visible(model: str) -> List[Any]:
@@ -85,8 +77,8 @@ def factory(cls_name: str, session=None, **kwargs: Any) -> Any:
         instance.update(**kwargs)
     else:
         instance = classes[cls_name](**kwargs)
-        session.add(instance)
-    session.commit()
+        Session.add(instance)
+    Session.commit()
     return instance
 
 

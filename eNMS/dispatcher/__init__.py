@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 from typing import List
 
 from eNMS.forms import form_actions, form_classes, form_templates
-from eNMS.database import delete, factory, fetch, fetch_all_visible
+from eNMS.database import delete, factory, fetch, fetch_all_visible, Session
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher
@@ -22,7 +22,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
         return instance
 
-    def filtering(self, session, table: str) -> dict:
+    def filtering(self, table: str) -> dict:
         model = classes.get(table, classes["Device"])
         properties = table_properties[table]
         try:
@@ -35,7 +35,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
             value = request.args.get(f"form[{property}]")
             if value:
                 constraints.append(getattr(model, property).contains(value))
-        result = session.query(model).filter(and_(*constraints)).order_by(order)
+        result = Session.query(model).filter(and_(*constraints)).order_by(order)
         if table in ("device", "link", "configuration"):
             pools = [int(id) for id in request.args.getlist("form[pools][]")]
             if pools:
@@ -43,7 +43,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         return {
             "jsonify": True,
             "draw": int(request.args["draw"]),
-            "recordsTotal": len(session.query(model).all()),
+            "recordsTotal": len(Session.query(model).all()),
             "recordsFiltered": len(result.all()),
             "data": [
                 [getattr(obj, property) for property in properties]

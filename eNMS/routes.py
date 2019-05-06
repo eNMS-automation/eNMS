@@ -59,7 +59,7 @@ def post_route(page: str) -> Response:
         request.form = form_postprocessing(request.form)
     func, *args = page.split("-")
     # try:
-    result = getattr(dispatcher, func)(session, *args)
+    result = getattr(dispatcher, func)(*args)
     return result if type(result) == Response else jsonify(result)
     # except Exception as e:
     #     return jsonify({"error": str(e)})

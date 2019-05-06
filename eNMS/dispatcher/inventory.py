@@ -24,6 +24,7 @@ from eNMS.database import (
     fetch_all_visible,
     get_one,
     objectify,
+    Session,
 )
 from eNMS.models import classes
 from eNMS.properties import (
@@ -189,7 +190,7 @@ class InventoryDispatcher:
         parameters = get_one("Parameters")
         login, password = parameters.opennms_login, request.form["password"]
         parameters.update(**request.form)
-        db.session.commit()
+        Session.commit()
         json_devices = http_get(
             parameters.opennms_devices,
             headers={"Accept": "application/json"},
@@ -242,10 +243,10 @@ class InventoryDispatcher:
                     except Exception as e:
                         info(f"{str(values)} could not be imported ({str(e)})")
                         result = "Partial import (see logs)."
-                db.session.commit()
+                Session.commit()
         for pool in fetch_all("Pool"):
             pool.compute_pool()
-        db.session.commit()
+        Session.commit()
         info("Inventory import: Done.")
         return result
 
@@ -283,7 +284,7 @@ class InventoryDispatcher:
             value = request.form[property]
             if value:
                 constraints.append(getattr(model, property).contains(value))
-        result = db.session.query(model).filter(and_(*constraints))
+        result = Session.query(model).filter(and_(*constraints))
         pools = [int(id) for id in request.form["pools"]]
         if pools:
             result = result.filter(model.pools.any(classes["pool"].id.in_(pools)))

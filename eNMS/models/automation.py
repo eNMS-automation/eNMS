@@ -283,29 +283,21 @@ class Job(Base, metaclass=metamodel):
             return self.get_results(payload, device, workflow)
         elif targets:
             manager = Manager()
-            results = manager.dict({"devices": {}})
-            logs = manager.list()
+            device_results, logs = manager.dict(), manager.list()
             if self.multiprocessing:
                 lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
                 pool = Pool(processes=processes)
-                args = (
-                    self.id,
-                    lock,
-                    results,
-                    logs,
-                    payload,
-                    workflow.id if workflow else 0,
-                )
+                args = (self.id, lock, results, logs, payload, getattr(workflow, "id"))
                 pool.map(device_process, [(device.id, *args) for device in targets])
                 pool.close()
                 pool.join()
             else:
-                results["devices"] = {
+                device_results["devices"] = {
                     device.name: self.get_results(payload, device, workflow)
                     for device in targets
                 }
-            return results
+            return {"devices": device_results}
         else:
             return self.get_results(payload)
 

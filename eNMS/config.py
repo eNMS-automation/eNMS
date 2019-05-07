@@ -16,6 +16,8 @@ class Config(object):
     MAIL_SENDER = environ.get("MAIL_SENDER", "enms@enms.fr")
     MAIL_RECIPIENTS = environ.get("MAIL_RECIPIENTS", "")
 
+    CACHE_TYPE = "simple"
+
 
 class DebugConfig(Config):
     DEBUG = True

@@ -13,7 +13,7 @@ from werkzeug.wrappers.response import Response
 
 from eNMS.dispatcher import dispatcher
 from eNMS.forms import form_classes, form_postprocessing
-from eNMS.extensions import bp
+from eNMS.extensions import bp, cache
 
 
 @bp.route("/")
@@ -22,6 +22,7 @@ def site_root() -> Response:
 
 
 @bp.route("/<page>", methods=["GET", "POST"])
+@cache.cached(timeout=50)
 def route(page: str) -> Response:
     print(request.form)
     if not current_user.is_authenticated:

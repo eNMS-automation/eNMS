@@ -14,7 +14,7 @@ from eNMS.database import Base, engine, fetch, get_one, Session
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties, property_types
-from eNMS.extensions import bp, csrf, login_manager, mail_client, toolbar
+from eNMS.extensions import bp, cache, csrf, login_manager, mail_client, toolbar
 from eNMS.models.logging import SyslogServer
 from eNMS.models.administration import User
 from eNMS.properties import property_names
@@ -27,6 +27,7 @@ def register_modules(app: Flask) -> None:
     app.register_blueprint(bp)
     login_manager.init_app(app)
     mail_client.init_app(app)
+    cache.init_app(app)
     csrf.init_app(app)
     FlaskCLI(app)
     toolbar.init_app(app)

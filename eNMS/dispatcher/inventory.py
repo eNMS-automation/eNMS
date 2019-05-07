@@ -26,7 +26,6 @@ from eNMS.database import (
     objectify,
     Session,
 )
-from eNMS.extensions import cache
 from eNMS.models import models
 from eNMS.properties import (
     filtering_properties,
@@ -264,7 +263,6 @@ class InventoryDispatcher:
         else:
             fetch("Pool", id=int(pool_id)).compute_pool()
 
-    @cache.cached(timeout=50)
     def view(self, view_type: str) -> dict:
         return dict(
             template="pages/view",

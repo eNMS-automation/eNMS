@@ -9,6 +9,7 @@ from wtforms import (
 from typing import Any
 
 from eNMS.database import choices
+from eNMS.forms import BaseForm
 
 
 class DateField(StringField):
@@ -34,7 +35,7 @@ class MultipleInstanceField(SelectMultipleField):
         super().__init__(*args, **kwargs)
         self.choices = choices(instance_type)
 
-    def pre_validate(self, form):
+    def pre_validate(self, form: BaseForm) -> None:
         pass
 
 

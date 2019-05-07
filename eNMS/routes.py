@@ -22,7 +22,6 @@ def site_root() -> Response:
 
 
 @bp.route("/<page>", methods=["GET", "POST"])
-@cache.cached(timeout=10000)
 def route(page: str) -> Response:
     print(request.form)
     if not current_user.is_authenticated:

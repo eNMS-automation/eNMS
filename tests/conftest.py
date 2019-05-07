@@ -30,12 +30,14 @@ def user_client() -> Iterator[FlaskClient]:
     Base.metadata.drop_all(bind=engine)
     remove(app.path / "database.db")
     client = app.test_client()
-    login = {
-        "name": "admin",
-        "password": "admin",
-        "authentication_method": "Local User",
-    }
     with app.app_context():
-        client.post("/login", data=login)
+        client.post(
+            "/login",
+            data={
+                "name": "admin",
+                "password": "admin",
+                "authentication_method": "Local User",
+            },
+        )
         yield client
     remove(app.path / "database.db")

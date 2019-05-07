@@ -23,13 +23,12 @@ def site_root() -> Response:
 
 @bp.route("/<page>", methods=["GET", "POST"])
 def route(page: str) -> Response:
-    print(current_user.is_authenticated)
+    print(page, request.method, request.form)
     if not current_user.is_authenticated:
         warning(
             f"Unauthenticated {request.method} request from "
             f"{request.remote_addr} calling the endpoint {request.url}"
         )
-        print(request.method, page)
         if request.method == "POST":
             return dispatcher.login() if page == "login" else False
         if request.method == "GET" and page != "login":
@@ -48,9 +47,9 @@ def route(page: str) -> Response:
     elif request.method == "GET":
         if func == "filtering":
             return jsonify(result)
-        result["endpoint"] = page
         return render_template(
-            f"{result.pop('template', 'pages/' + page)}.html", **result
+            f"{result.pop('template', 'pages/' + page)}.html",
+            **{"endpoint": page, **result},
         )
     else:
         form_type = request.form.get("form_type")

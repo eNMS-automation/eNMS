@@ -23,7 +23,7 @@ def site_root() -> Response:
 
 @bp.route("/<page>", methods=["GET", "POST"])
 def route(page: str) -> Response:
-    print(page, "ttt" * 100)
+    print(request.form)
     if not current_user.is_authenticated:
         warning(
             f"Unauthenticated {request.method} request from "
@@ -41,24 +41,23 @@ def route(page: str) -> Response:
     func, *args = page.split("-")
     if not hasattr(dispatcher, func):
         abort(404)
-    result = getattr(dispatcher, func)(*args)
-    if isinstance(result, Response) or isinstance(result, str):
-        return result
-    elif request.method == "GET":
-        if func == "filtering":
-            return jsonify(result)
-        return render_template(
-            f"{result.pop('template', 'pages/' + page)}.html",
-            **{"endpoint": page, **result},
-        )
-    else:
+    if request.method == "POST":
         form_type = request.form.get("form_type")
         if form_type:
             form = form_classes[form_type](request.form)
             if not form.validate_on_submit():
                 return jsonify({"invalid_form": True, **{"errors": form.errors}})
             request.form = form_postprocessing(request.form)
-        try:
-            return jsonify(result)
-        except Exception as e:
-            return jsonify({"error": str(e)})
+    try:
+        result = getattr(dispatcher, func)(*args)
+    except Exception as e:
+        result = {"error": str(e)}
+    if isinstance(result, Response) or isinstance(result, str):
+        return result
+    elif request.method == "POST" or func == "filtering":
+        return jsonify(result)
+    else:
+        return render_template(
+            f"{result.pop('template', 'pages/' + page)}.html",
+            **{"endpoint": page, **result},
+        )

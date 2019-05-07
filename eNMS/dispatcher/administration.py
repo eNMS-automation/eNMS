@@ -42,7 +42,6 @@ class AdministrationDispatcher:
         }
 
     def login(self) -> Union[Response, str]:
-        print(request.form)
         if request.method == "POST":
             name, password = request.form["name"], request.form["password"]
             try:

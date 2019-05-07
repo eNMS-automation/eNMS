@@ -153,7 +153,7 @@ class Job(AbstractBase):
             }
         )
 
-    def git_push(self, results):
+    def git_push(self, results: dict) -> None:
         path_git_folder = Path.cwd() / "git" / "automation"
         with open(path_git_folder / self.name, "w") as file:
             file.write(controller.str_dict(results))
@@ -193,7 +193,9 @@ class Job(AbstractBase):
                 logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
                 self.completed = self.failed = 0
                 session.merge(workflow or self)
-            attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
+            attempt, logs = self.run(
+                payload, job_from_workflow_targets, targets, workflow
+            )
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -245,7 +247,7 @@ class Job(AbstractBase):
         payload: dict,
         device: Optional["Device"] = None,
         workflow: Optional["Workflow"] = None,
-    ) -> dict:
+    ) -> Tuple[dict, list]:
         logs = []
         try:
             if device:
@@ -272,14 +274,15 @@ class Job(AbstractBase):
         job_from_workflow_targets: bool,
         targets: Optional[Set["Device"]] = None,
         workflow: Optional["Workflow"] = None,
-    ) -> dict:
+    ) -> Tuple[dict, list]:
         if job_from_workflow_targets:
             assert targets is not None
             device, = targets
             return self.get_results(payload, device, workflow)
         elif targets:
             manager = Manager()
-            results, logs = manager.dict({"devices": {}}), manager.list()
+            results: dict = manager.dict({"devices": {}})
+            logs: List[str] = manager.list()
             if self.multiprocessing:
                 lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
@@ -300,7 +303,7 @@ class Job(AbstractBase):
                     device.name: self.get_results(payload, device, workflow)[0]
                     for device in targets
                 }
-            return results
+            return results, logs
         else:
             return self.get_results(payload)
 

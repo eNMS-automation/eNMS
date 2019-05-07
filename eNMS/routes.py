@@ -23,7 +23,6 @@ def site_root() -> Response:
 
 @bp.route("/<page>", methods=["GET", "POST"])
 def route(page: str) -> Response:
-    print(request.form)
     if not current_user.is_authenticated:
         warning(
             f"Unauthenticated {request.method} request from "

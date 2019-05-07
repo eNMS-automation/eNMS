@@ -9,7 +9,6 @@ from ldap3 import Connection, NTLM, SUBTREE
 from os import listdir, makedirs
 from os.path import exists
 from requests import get as http_get
-from typing import Union
 from werkzeug.wrappers import Response
 from yaml import dump, load, BaseLoader
 
@@ -169,13 +168,13 @@ class AdministrationDispatcher:
             create_default(current_app)
         return status
 
-    def save_parameters(self, parameter_type: str) -> bool:
+    def save_parameters(self, parameter_type: str) -> None:
         parameters = get_one("Parameters")
         parameters.update(**request.form)
         if parameter_type == "git":
             parameters.get_git_content(current_app)
 
-    def scan_cluster(self):
+    def scan_cluster(self) -> None:
         parameters = get_one("Parameters")
         protocol = parameters.cluster_scan_protocol
         for ip_address in IPv4Network(parameters.cluster_scan_subnet):

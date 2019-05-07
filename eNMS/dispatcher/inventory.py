@@ -9,7 +9,7 @@ from requests import get as http_get
 from simplekml import Kml
 from sqlalchemy import and_
 from subprocess import Popen
-from typing import Union
+from typing import List, Union
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError

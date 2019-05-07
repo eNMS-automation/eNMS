@@ -5,11 +5,12 @@ from flask.wrappers import Response
 from logging import info
 from psutil import cpu_percent
 from uuid import getnode
-from typing import Union
+from typing import Optional, Union
 
 from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
 from eNMS.database import delete, factory, fetch
+from eNMS.dispatcher import dispatcher
 from eNMS.extensions import auth
 
 
@@ -109,20 +110,23 @@ class UpdateInstance(Resource):
 class Migrate(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction: str) -> Union[bool, str]:
-        return getattr(controller, f"migrate_{direction}")()
+    def post(self, direction: str) -> Optional[str]:
+        return getattr(dispatcher, f"migration_{direction}")()
 
 
 class Topology(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction: str) -> Union[bool, str]:
+    def post(self, direction: str) -> Optional[str]:
         if direction == "import":
             data = request.form.to_dict()
             data["replace"] = True if data["replace"] == "True" else False
-            return controller.object_import(data, request.files["file"])
+            request.form = data
+            return dispatcher.import_topology()
         else:
-            return controller.object_export(request.get_json(), current_app.path)
+            request.form = request.get_json()
+            dispatcher.export_topology()
+            return None
 
 
 def configure_rest_api(app: Flask) -> None:

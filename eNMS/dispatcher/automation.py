@@ -91,7 +91,7 @@ class AutomationDispatcher:
             )
         return new_workflow.serialized
 
-    def get_git_content(self):
+    def get_git_content(self) -> None:
         parameters = get_one("Parameters")
         parameters.get_git_content(current_app)
 

@@ -49,7 +49,7 @@ class AdministrationDispatcher:
                     user = fetch("User", name=name)
                     if user and password == user.password:
                         login_user(user)
-                        return redirect(url_for("bp.get_route", page="dashboard"))
+                        return redirect(url_for("bp.route", page="dashboard"))
                 elif request.form["authentication_method"] == "LDAP Domain":
                     with Connection(
                         controller.ldap_client,
@@ -82,12 +82,12 @@ class AdministrationDispatcher:
                                 user["permissions"] = ["Admin"]
                             new_user = factory("User", **user)
                             login_user(new_user)
-                            return redirect(url_for("bp.get_route", page="dashboard"))
+                            return redirect(url_for("bp.route", page="dashboard"))
                 elif request.form["authentication_method"] == "TACACS":
                     if controller.tacacs_client.authenticate(name, password).valid:
                         user = factory("User", **{"name": name, "password": password})
                         login_user(user)
-                        return redirect(url_for("bp.get_route", page="dashboard"))
+                        return redirect(url_for("bp.route", page="dashboard"))
                 abort(403)
             except Exception as e:
                 info(f"Authentication failed ({str(e)})")
@@ -101,11 +101,11 @@ class AdministrationDispatcher:
                 authentication_methods.append(("TACACS",) * 2)
             login_form.authentication_method.choices = authentication_methods
             return render_template("login.html", login_form=login_form)
-        return redirect(url_for("bp.get_route", page="dashboard"))
+        return redirect(url_for("bp.route", page="dashboard"))
 
     def logout(self) -> Response:
         logout_user()
-        return redirect(url_for("bp.get_route", page="login"))
+        return redirect(url_for("bp.route", page="login"))
 
     def migration_export(self) -> None:
         for cls_name in request.form["import_export_types"]:

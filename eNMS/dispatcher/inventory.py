@@ -186,7 +186,7 @@ class InventoryDispatcher:
                 },
             )
 
-    def query_opennms(self):
+    def query_opennms(self) -> None:
         parameters = get_one("Parameters")
         login, password = parameters.opennms_login, request.form["password"]
         parameters.update(**request.form)
@@ -276,7 +276,7 @@ class InventoryDispatcher:
             "links": [d.view_properties for d in fetch_all("Link")],
         }
 
-    def view_filtering(self, filter_type: str):
+    def view_filtering(self, filter_type: str) -> List[dict]:
         obj_type = filter_type.split("_")[0]
         model = models[obj_type]
         constraints = []

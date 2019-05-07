@@ -55,7 +55,7 @@ class Controller:
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
         self.USE_TACACS = int(environ.get("USE_TACACS", False))
         self.USE_LDAP = int(environ.get("USE_LDAP", False))
@@ -64,13 +64,13 @@ class Controller:
         self.custom_properties = self.load_custom_properties()
         self.configure_scheduler()
         if self.USE_TACACS:
-            self.configure_tacacs_server()
+            self.configure_tacacs_client()
         if self.USE_LDAP:
             self.configure_ldap_client()
         if self.USE_VAULT:
             self.configure_vault_client()
 
-    def init_app(self, app: Flask):
+    def init_app(self, app: Flask) -> None:
         self.app = app
         self.create_google_earth_styles()
         self.configure_logs()
@@ -136,8 +136,8 @@ class Controller:
         self.LDAP_ADMIN_GROUP = environ.get("LDAP_ADMIN_GROUP", "").split(",")
         self.ldap_client = Server(environ.get("LDAP_SERVER"), get_info=ALL)
 
-    def configure_tacacs_server(self) -> None:
-        self.tacacs_server = TACACSClient(
+    def configure_tacacs_client(self) -> None:
+        self.tacacs_client = TACACSClient(
             environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
         )
 
@@ -154,8 +154,8 @@ class Controller:
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
 
-    def create_google_earth_styles(self):
-        self.google_earth_styles = {}
+    def create_google_earth_styles(self) -> None:
+        self.google_earth_styles: Dict[str, Style] = {}
         for subtype in self.device_subtypes:
             point_style = Style()
             point_style.labelstyle.color = Color.blue
@@ -169,7 +169,7 @@ class Controller:
             line_style.linestyle.color = kml_color
             self.google_earth_styles[subtype] = line_style
 
-    def get_time(self):
+    def get_time(self) -> str:
         return str(datetime.now()).replace("-", "+")
 
     def load_config(self) -> dict:

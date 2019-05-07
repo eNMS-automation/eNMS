@@ -2,7 +2,6 @@ from copy import deepcopy
 from datetime import datetime
 from flask import abort, current_app, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user
-from flask.wrappers import Response
 from ipaddress import IPv4Network
 from json import loads
 from logging import info
@@ -11,6 +10,7 @@ from os import listdir, makedirs
 from os.path import exists
 from requests import get as http_get
 from typing import Union
+from werkzeug.wrappers import Response
 from yaml import dump, load, BaseLoader
 
 from eNMS.controller import controller
@@ -41,7 +41,7 @@ class AdministrationDispatcher:
             for attr in ("status", "cpu_load")
         }
 
-    def login(self) -> Union[Response, str]:
+    def login(self) -> Response:
         if request.method == "POST":
             name, password = request.form["name"], request.form["password"]
             try:
@@ -169,13 +169,13 @@ class AdministrationDispatcher:
             create_default(current_app)
         return status
 
-    def save_parameters(self, parameter_type) -> bool:
+    def save_parameters(self, parameter_type: str) -> bool:
         parameters = get_one("Parameters")
         parameters.update(**request.form)
         if parameter_type == "git":
             parameters.get_git_content(current_app)
 
-    def scan_cluster(self) -> bool:
+    def scan_cluster(self):
         parameters = get_one("Parameters")
         protocol = parameters.cluster_scan_protocol
         for ip_address in IPv4Network(parameters.cluster_scan_subnet):

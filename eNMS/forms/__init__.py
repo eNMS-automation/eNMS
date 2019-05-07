@@ -11,19 +11,19 @@ from eNMS.properties import property_names
 
 form_actions = {}
 form_classes = {}
-form_properties = defaultdict(dict)
+form_properties: dict = defaultdict(dict)
 form_templates = {}
 
 
 class MetaForm(FormMeta):
-    def __new__(cls, name, bases, attrs):
-        cls = type.__new__(cls, name, bases, attrs)
+    def __new__(cls, name, bases, attrs) -> FlaskForm:
+        form = type.__new__(cls, name, bases, attrs)
         if name == "BaseForm":
-            return cls
-        form_type = cls.form_type.kwargs["default"]
-        form_classes[form_type] = cls
-        form_templates[form_type] = getattr(cls, "template", "base")
-        form_actions[form_type] = getattr(cls, "action", None)
+            return form
+        form_type = form.form_type.kwargs["default"]
+        form_classes[form_type] = form
+        form_templates[form_type] = getattr(form, "template", "base")
+        form_actions[form_type] = getattr(form, "action", None)
         properties = {
             field_name: field_types[field.field_class]
             for field_name, field in attrs.items()
@@ -38,16 +38,16 @@ class MetaForm(FormMeta):
         )
         form_properties[form_type].update(properties)
         property_types.update(properties)
-        for base in cls.__bases__:
+        for base in form.__bases__:
             if not hasattr(base, "form_type"):
                 continue
             base_form_type = base.form_type.kwargs["default"]
             if base_form_type == "service":
-                cls.service_fields = list(properties)
+                form.service_fields = list(properties)
             if getattr(base, "abstract_service", False):
-                cls.service_fields.extend(form_properties[base_form_type])
+                form.service_fields.extend(form_properties[base_form_type])
             form_properties[form_type].update(form_properties[base_form_type])
-        return cls
+        return form
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
@@ -55,6 +55,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 
 def form_postprocessing(form):
+    print(form, type(form))
     data = {**form.to_dict(), **{"creator": current_user.name}}
     for property, field_type in form_properties[form.get("form_type")].items():
         if field_type in ("object-list", "multiselect"):

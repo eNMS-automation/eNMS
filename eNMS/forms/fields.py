@@ -1,3 +1,5 @@
+from flask_wtf import FlaskForm
+from typing import Any
 from wtforms import (
     BooleanField,
     FloatField,
@@ -6,10 +8,8 @@ from wtforms import (
     StringField,
     SelectMultipleField,
 )
-from typing import Any
 
 from eNMS.database import choices
-from eNMS.forms import BaseForm
 
 
 class DateField(StringField):
@@ -35,7 +35,7 @@ class MultipleInstanceField(SelectMultipleField):
         super().__init__(*args, **kwargs)
         self.choices = choices(instance_type)
 
-    def pre_validate(self, form: BaseForm) -> None:
+    def pre_validate(self, form: FlaskForm) -> None:
         pass
 
 

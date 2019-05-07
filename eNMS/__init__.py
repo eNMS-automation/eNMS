@@ -5,7 +5,7 @@ from logging import info
 from os import environ
 from pathlib import Path
 from sqlalchemy.orm import configure_mappers
-from typing import Any, Tuple, Type
+from typing import Any, Optional, Tuple, Type
 
 from eNMS.cli import configure_cli
 from eNMS.config import Config
@@ -53,13 +53,13 @@ def configure_database(app: Flask) -> None:
             create_examples(app)
 
     @app.teardown_appcontext
-    def cleanup(exc):
+    def cleanup(exc_or_none: Optional[Exception]) -> None:
         Session.remove()
 
 
-def configure_context_processor(app) -> None:
+def configure_context_processor(app: Flask) -> None:
     @app.context_processor
-    def inject_properties():
+    def inject_properties() -> dict:
         return {
             "form_properties": form_properties,
             "names": property_names,

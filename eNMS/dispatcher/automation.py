@@ -91,7 +91,7 @@ class AutomationDispatcher:
             )
         return new_workflow.serialized
 
-    def get_git_content(self) -> bool:
+    def get_git_content(self):
         parameters = get_one("Parameters")
         parameters.get_git_content(current_app)
 
@@ -125,7 +125,7 @@ class AutomationDispatcher:
         )
         return job.serialized
 
-    def save_device_jobs(self, device_id: int) -> bool:
+    def save_device_jobs(self, device_id: int) -> None:
         fetch("Device", id=device_id).jobs = objectify("Job", request.form["jobs"])
 
     def save_positions(self, workflow_id: int) -> str:
@@ -149,7 +149,7 @@ class AutomationDispatcher:
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 
-    def calendar(self):
+    def calendar(self) -> dict:
         tasks = {}
         for task in fetch_all("Task"):
             # javascript dates range from 0 to 11, we must account for that by
@@ -171,10 +171,10 @@ class AutomationDispatcher:
             tasks[task.name] = {**task.serialized, **{"date": js_date}}
         return dict(tasks=tasks)
 
-    def scheduler(self, action: str) -> bool:
+    def scheduler(self, action: str) -> None:
         getattr(controller.scheduler, action)()
 
-    def task_action(self, action: str, task_id: int) -> bool:
+    def task_action(self, action: str, task_id: int) -> None:
         getattr(fetch("Task", id=task_id), action)()
 
     def workflow_builder(self) -> dict:

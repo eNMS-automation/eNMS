@@ -2,12 +2,13 @@ from typing import Any, Optional, Set, Tuple
 
 from eNMS.controller import controller
 from eNMS.database import fetch, session_scope
+from eNMS.models.inventory import Device
 
 
 def threaded_job(
     job_id: int,
     aps_job_id: Optional[str] = None,
-    targets: Optional[Set["Device"]] = None,
+    targets: Optional[Set[Device]] = None,
     payload: Optional[dict] = None,
 ) -> None:
     with controller.app.app_context():
@@ -20,9 +21,7 @@ def threaded_job(
             session.commit()
 
 
-def device_process(
-    args: Tuple["Device", dict, dict, Optional["Workflow"], Any]
-) -> None:
+def device_process(args: Tuple[Device, dict, dict, Optional["Workflow"], Any]) -> None:
     with controller.app.app_context():
         with session_scope() as session:
             device, service, lock, results, logs, payload, workflow = args

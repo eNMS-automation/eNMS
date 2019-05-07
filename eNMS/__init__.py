@@ -27,7 +27,6 @@ def register_modules(app: Flask) -> None:
     app.register_blueprint(bp)
     login_manager.init_app(app)
     mail_client.init_app(app)
-    cache.init_app(app)
     csrf.init_app(app)
     FlaskCLI(app)
     toolbar.init_app(app)

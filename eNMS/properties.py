@@ -97,7 +97,7 @@ server_table_properties = base_properties[1:] + [
 
 user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
-log_public_properties: List[str] = ["origin", "severity", "content"]
+log_public_properties: List[str] = ["origin", "severity", "name"]
 
 log_rule_table_properties: List[str] = ["name"] + log_public_properties
 

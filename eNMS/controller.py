@@ -96,9 +96,9 @@ class Controller:
             ],
         )
 
-    def log(self, severity, content):
-        factory("Log", **{"origin": "eNMS", "severity": severity, "content": content})
-        log_severity[severity](content)
+    def log(self, severity, name):
+        factory("Log", **{"origin": "eNMS", "severity": severity, "name": name})
+        self.log_severity[severity](name)
 
     def configure_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(

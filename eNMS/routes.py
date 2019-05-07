@@ -29,21 +29,13 @@ def route(page: str) -> Response:
             "warning",
             (
                 f"Unauthenticated {request.method} request from "
-                f"{request.remote_addr} calling the endpoint {request.url}"
+                f"'{request.remote_addr}' calling the endpoint '{request.url}'"
             ),
         )
         if request.method == "POST":
             return dispatcher.login() if page == "login" else False
         if request.method == "GET" and page != "login":
             return current_app.login_manager.unauthorized()
-    else:
-        controller.log(
-            "info",
-            (
-                f"User '{current_user.name}' {request.remote_addr} "
-                f"on the endpoint '{request.url}' ({request.method})"
-            ),
-        )
     func, *args = page.split("-")
     if not hasattr(dispatcher, func):
         abort(404)

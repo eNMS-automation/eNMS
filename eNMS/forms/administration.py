@@ -140,6 +140,6 @@ class UserFilteringForm(BaseForm):
 class LogFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="log_filtering")
-    origin = StringField()
-    severity = StringField()
-    content = StringField()
+    origin = StringField("Origin")
+    severity = StringField("Severity")
+    name = StringField()

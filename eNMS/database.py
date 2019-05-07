@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from flask_login import current_user
 from logging import info
 from os import environ
 from sqlalchemy import Boolean, create_engine, event, Float, Integer, PickleType
@@ -99,11 +100,9 @@ def get_one(model: str) -> Any:
 
 
 def factory(cls_name: str, **kwargs: Any) -> Any:
-    if "id" in kwargs:
-        if kwargs["id"]:
-            instance = fetch(cls_name, id=kwargs["id"])
-        else:
-            instance = kwargs.pop("id")
+    instance_id = kwargs.pop("id", 0)
+    if instance_id:
+        instance = fetch(cls_name, id=instance_id)
     else:
         instance = fetch(cls_name, name=kwargs["name"])
     if instance:

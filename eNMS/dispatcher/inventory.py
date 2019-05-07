@@ -146,7 +146,7 @@ class InventoryDispatcher:
 
     def get_device_logs(self, device_id: int) -> Union[str, bool]:
         device_logs = [
-            log.content
+            log.name
             for log in fetch_all("Log")
             if log.source == fetch("Device", id=device_id).ip_address
         ]

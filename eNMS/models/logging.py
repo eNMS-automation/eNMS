@@ -17,7 +17,7 @@ class Log(AbstractBase):
     id = Column(Integer, primary_key=True)
     origin = Column(String(SMALL_STRING_LENGTH), default="")
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
-    content = Column(String(SMALL_STRING_LENGTH), default="")
+    name = Column(String(SMALL_STRING_LENGTH), default="")
     log_rules = relationship(
         "LogRule", secondary=log_rule_log_table, back_populates="logs"
     )
@@ -29,9 +29,6 @@ class Log(AbstractBase):
             Delete</button>"""
         ]
 
-    def __repr__(self) -> str:
-        return self.content
-
 
 class LogRule(AbstractBase):
 
@@ -39,8 +36,8 @@ class LogRule(AbstractBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
     origin = Column(String(SMALL_STRING_LENGTH), default="")
-    source_ip_regex = Column(Boolean, default=False)
-    content = Column(String(SMALL_STRING_LENGTH), default="")
+    origin_regex = Column(Boolean, default=False)
+    name = Column(String(SMALL_STRING_LENGTH), default="")
     content_regex = Column(Boolean, default=False)
     logs = relationship("Log", secondary=log_rule_log_table, back_populates="log_rules")
     jobs = relationship("Job", secondary=job_log_rule_table, back_populates="log_rules")
@@ -92,9 +89,9 @@ class SyslogUDPHandler(BaseRequestHandler):
                     else log_rule.origin in source
                 )
                 content_match = (
-                    search(log_rule.content, data)
+                    search(log_rule.name, data)
                     if log_rule.content_regex
-                    else log_rule.content in data
+                    else log_rule.name in data
                 )
                 if source_match and content_match:
                     log_rules.append(log_rule)

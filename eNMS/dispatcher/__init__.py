@@ -7,6 +7,7 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from typing import List
 
+from eNMS.controller import controller
 from eNMS.database import delete, factory, fetch, fetch_all_visible, Session
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
@@ -20,7 +21,7 @@ from eNMS.properties import filtering_properties, table_fixed_columns, table_pro
 class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispatcher):
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         instance = delete(cls, id=instance_id)
-        info(f'{current_user.name}: DELETE {cls} {instance["name"]} ({id})')
+        controller.log("info", f"{current_user.name} DELETED {cls} '{instance.name}'.")
         return instance
 
     def filtering(self, table: str) -> dict:
@@ -92,8 +93,8 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
     def update(self, cls: str) -> dict:
         try:
             instance = factory(cls, **request.form)
-            info(
-                f"{current_user.name}: UPDATE {cls} " f"{instance.name} ({instance.id})"
+            controller.log(
+                "info", f"{current_user.name} UPDATED {cls} '{instance.name}'."
             )
             return instance.serialized
         except JSONDecodeError:

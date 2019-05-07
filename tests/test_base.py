@@ -51,7 +51,6 @@ def test_authentication(base_client: FlaskClient) -> None:
 def test_urls(user_client: FlaskClient) -> None:
     for page in pages:
         r = user_client.get(page, follow_redirects=True)
-        print(page)
         assert r.status_code == 200
     r = user_client.get("/logout", follow_redirects=True)
     test_authentication(user_client)

@@ -53,7 +53,12 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
 
+class TestConfig(DebugConfig):
+    WTF_CSRF_ENABLED = False
+
+
 config_dict: Dict[str, Type[Config]] = {
-    "Production": ProductionConfig,
     "Debug": DebugConfig,
+    "Production": ProductionConfig,
+    "Test": TestConfig,
 }

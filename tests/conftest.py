@@ -11,19 +11,18 @@ from eNMS.database import Base, engine, Session
 
 @fixture
 def base_client() -> Iterator[FlaskClient]:
-    app = create_app(Path.cwd(), config_dict["Debug"])
+    app = create_app(Path.cwd(), config_dict["Test"])
     app_context = app.app_context()
     app_context.push()
     Session.close()
     Base.metadata.drop_all(bind=engine)
     remove(app.path / "database.db")
     yield app.test_client()
-    remove(app.path / "database.db")
 
 
 @fixture
 def user_client() -> Iterator[FlaskClient]:
-    app = create_app(Path.cwd(), config_dict["Debug"])
+    app = create_app(Path.cwd(), config_dict["Test"])
     app_context = app.app_context()
     app_context.push()
     Session.close()
@@ -40,4 +39,3 @@ def user_client() -> Iterator[FlaskClient]:
             },
         )
         yield client
-    remove(app.path / "database.db")

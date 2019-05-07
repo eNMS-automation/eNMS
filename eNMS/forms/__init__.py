@@ -2,6 +2,8 @@ from ast import literal_eval
 from collections import defaultdict
 from flask_login import current_user
 from flask_wtf import FlaskForm
+from typing import Callable, Dict
+from werkzeug.datastructures import ImmutableMultiDict
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
@@ -13,11 +15,16 @@ form_actions = {}
 form_classes = {}
 form_properties: dict = defaultdict(dict)
 form_templates = {}
+field_conversion: Dict[str, Callable] = {
+    "dict": literal_eval,
+    "float": float,
+    "int": int,
+}
 
 
 class MetaForm(FormMeta):
-    def __new__(cls, name, bases, attrs) -> FlaskForm:
-        form = type.__new__(cls, name, bases, attrs)
+    def __new__(cls: type, name: str, bases: tuple, attrs: dict) -> FlaskForm:
+        form: FlaskForm = type.__new__(cls, name, bases, attrs)
         if name == "BaseForm":
             return form
         form_type = form.form_type.kwargs["default"]
@@ -54,8 +61,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
     pass
 
 
-def form_postprocessing(form):
-    print(form, type(form))
+def form_postprocessing(form: ImmutableMultiDict) -> dict:
     data = {**form.to_dict(), **{"creator": current_user.name}}
     for property, field_type in form_properties[form.get("form_type")].items():
         if field_type in ("object-list", "multiselect"):
@@ -63,9 +69,7 @@ def form_postprocessing(form):
         elif field_type == "bool":
             data[property] = property in form
         elif field_type in ("dict", "float", "int"):
-            data[property] = {"dict": literal_eval, "float": float, "int": int}[
-                field_type
-            ](form[property])
+            data[property] = field_conversion[field_type](form[property])
     return data
 
 

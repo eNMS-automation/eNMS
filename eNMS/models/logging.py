@@ -15,7 +15,8 @@ class Log(AbstractBase):
 
     __tablename__ = type = "Log"
     id = Column(Integer, primary_key=True)
-    source_ip = Column(String(SMALL_STRING_LENGTH), default="")
+    origin = Column(String(SMALL_STRING_LENGTH), default="")
+    severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
     content = Column(String(SMALL_STRING_LENGTH), default="")
     log_rules = relationship(
         "LogRule", secondary=log_rule_log_table, back_populates="logs"
@@ -37,7 +38,7 @@ class LogRule(AbstractBase):
     __tablename__ = type = "LogRule"
     id = Column(Integer, primary_key=True)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    source_ip = Column(String(SMALL_STRING_LENGTH), default="")
+    origin = Column(String(SMALL_STRING_LENGTH), default="")
     source_ip_regex = Column(Boolean, default=False)
     content = Column(String(SMALL_STRING_LENGTH), default="")
     content_regex = Column(Boolean, default=False)
@@ -86,9 +87,9 @@ class SyslogUDPHandler(BaseRequestHandler):
             log_rules = []
             for log_rule in Session.query(LogRule).all():
                 source_match = (
-                    search(log_rule.source_ip, source)
+                    search(log_rule.origin, source)
                     if log_rule.source_ip_regex
-                    else log_rule.source_ip in source
+                    else log_rule.origin in source
                 )
                 content_match = (
                     search(log_rule.content, data)

@@ -140,5 +140,6 @@ class UserFilteringForm(BaseForm):
 class LogFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="log_filtering")
-    source_ip_address = StringField("Source IP Address")
-    content = StringField("Content")
+    origin = StringField()
+    severity = StringField()
+    content = StringField()

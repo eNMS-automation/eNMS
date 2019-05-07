@@ -99,8 +99,8 @@ class WorkflowBuilderForm(BaseForm):
 
 
 def configure_form(cls: BaseForm) -> BaseForm:
-    cls.properties = ("source_ip", "content")
-    for property in ("source_ip", "content"):
+    cls.properties = ("origin", "content")
+    for property in ("origin", "content"):
         setattr(cls, property, StringField(property))
         setattr(cls, property + "_regex", BooleanField("Regex"))
     return cls

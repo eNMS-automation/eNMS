@@ -6,7 +6,7 @@ from importlib import import_module
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
 from ldap3 import ALL, Server
-from logging import basicConfig, StreamHandler
+from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
@@ -18,6 +18,8 @@ from string import punctuation
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, Set
 from yaml import load, BaseLoader
+
+from eNMS.database import factory
 
 
 class Controller:
@@ -54,6 +56,8 @@ class Controller:
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
+
+    log_severity = {"error": error, "info": info, "warning": warning}
 
     def __init__(self) -> None:
         self.USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
@@ -92,6 +96,10 @@ class Controller:
             ],
         )
 
+    def log(self, severity, content):
+        factory("Log", **{"origin": "eNMS", "severity": severity, "content": content})
+        log_severity[severity](content)
+
     def configure_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(
             {
@@ -126,8 +134,8 @@ class Controller:
                 module = module_from_spec(spec)
                 try:
                     spec.loader.exec_module(module)
-                except InvalidRequestError:
-                    continue
+                except InvalidRequestError as e:
+                    error(f"Error loading custom service '{file}' ({str(e)})")
 
     def configure_ldap_client(self) -> None:
         self.LDAP_SERVER = environ.get("LDAP_SERVER")

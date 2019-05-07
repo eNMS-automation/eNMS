@@ -15,7 +15,8 @@ def base_client() -> Iterator[FlaskClient]:
     app_context = app.app_context()
     app_context.push()
     Session.close()
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.drop_all(bind=engine)
+    remove(app.path / "database.db")
     yield app.test_client()
     remove(app.path / "database.db")
 
@@ -26,7 +27,8 @@ def user_client() -> Iterator[FlaskClient]:
     app_context = app.app_context()
     app_context.push()
     Session.close()
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.drop_all(bind=engine)
+    remove(app.path / "database.db")
     client = app.test_client()
     login = {
         "name": "admin",

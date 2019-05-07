@@ -10,56 +10,39 @@ from eNMS.extensions import bp
 
 @bp.route("/")
 def site_root() -> Response:
-    return redirect(url_for("bp.get_route", page="login"))
+    return redirect(url_for("bp.route", page="login"))
 
 
-@bp.route("/<page>")
-def get_route(page: str) -> Response:
-    if not current_user.is_authenticated and page != "login":
-        warning(
-            f"Unauthenticated GET request from {request.remote_addr} "
-            f" calling the endpoint {request.url}"
-        )
-        return current_app.login_manager.unauthorized()
-    func, *args = page.split("-")
-    ctx = getattr(dispatcher, func)(*args) or {}
-    if not isinstance(ctx, dict):
-        return ctx
-    ctx["endpoint"] = page
-    info(
-        f"User '{current_user.name}' from {request.remote_addr} "
-        f"calling the endpoint {page} (GET)"
-    )
-    if func == "filtering":
-        return jsonify(ctx)
-    return render_template(f"{ctx.pop('template', 'pages/' + page)}.html", **ctx)
-
-
-@bp.route("/<page>", methods=["POST"])
-def post_route(page: str) -> Response:
-    print(request.form)
+@bp.route("/<page>", methods=["GET", "POST"])
+def route(page: str) -> Response:
     if not current_user.is_authenticated:
-        if page == "login":
-            return dispatcher.login()
-        else:
-            warning(
-                f"Unauthenticated POST request ({request.remote_addr})"
-                f"calling the endpoint {request.url}"
-            )
-            return False
+        warning(
+            f"Unauthenticated {request.method} request from "
+            f"{request.remote_addr} calling the endpoint {request.url}"
+        )
+        if request.method == "POST":
+            return dispatcher.login() if page == "login" else False
+        if request.method == "GET" and page != "login":
+            return current_app.login_manager.unauthorized()
     info(
         f"User '{current_user.name}' {request.remote_addr} "
-        f"calling the endpoint {request.url} (POST)"
+        f"on the endpoint '{request.url}' ({request.method})"
     )
-    form_type = request.form.get("form_type")
-    if form_type:
-        form = form_classes[form_type](request.form)
-        if not form.validate_on_submit():
-            return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        request.form = form_postprocessing(request.form)
     func, *args = page.split("-")
-    # try:
     result = getattr(dispatcher, func)(*args)
-    return result if type(result) == Response else jsonify(result)
-    # except Exception as e:
-    #     return jsonify({"error": str(e)})
+    if func == "filtering":
+        return jsonify(ctx)
+    elif request.method == "GET":
+        result["endpoint"] = page
+        return render_template(f"{ctx.pop('template', 'pages/' + page)}.html", **ctx)
+    else:
+        form_type = request.form.get("form_type")
+        if form_type:
+            form = form_classes[form_type](request.form)
+            if not form.validate_on_submit():
+                return jsonify({"invalid_form": True, **{"errors": form.errors}})
+            request.form = form_postprocessing(request.form)
+        try:
+            return result if type(result) == Response else jsonify(result)
+        except Exception as e:
+            return jsonify({"error": str(e)})

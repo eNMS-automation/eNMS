@@ -1,7 +1,7 @@
 from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.database import fetch_all
+from eNMS.database import fetch_all, Session
 
 from tests.test_base import check_pages
 from tests.test_objects import create_from_file

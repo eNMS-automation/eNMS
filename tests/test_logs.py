@@ -1,7 +1,6 @@
 from flask.testing import FlaskClient
 
-from eNMS import db
-from eNMS.database import fetch_all
+from eNMS.database import fetch_all, Session
 from eNMS.models.logging import Log
 
 from tests.test_base import check_pages
@@ -22,6 +21,6 @@ def test_create_logs(user_client: FlaskClient) -> None:
     for log in (log1, log2):
         kwargs = {"ip_address": "192.168.1.88", "content": log, "log_rules": []}
         log_object = Log(**kwargs)
-        db.session.add(log_object)
-        db.session.commit()
+        Session.add(log_object)
+        Session.commit()
     assert len(fetch_all("Log")) == 2

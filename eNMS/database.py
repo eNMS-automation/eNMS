@@ -3,7 +3,9 @@ from logging import info
 from os import environ
 from sqlalchemy import Boolean, create_engine, event, Float, Integer, PickleType
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm.mapper import Mapper
 from typing import Any, Generator, List, Tuple
 
 from eNMS.models import model_properties, models, property_types, relationships
@@ -23,7 +25,7 @@ LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 16))
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
-def model_inspection(mapper, cls):
+def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
     for col in cls.__table__.columns:
         model_properties[cls.__tablename__].append(col.key)
         if col.type == PickleType and col.default.arg == []:

@@ -37,6 +37,7 @@ def get_route(page: str) -> Response:
 
 @bp.route("/<page>", methods=["POST"])
 def post_route(page: str) -> Response:
+    print(request.form)
     if not current_user.is_authenticated:
         if page == "login":
             return dispatcher.login()

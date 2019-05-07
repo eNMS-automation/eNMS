@@ -1,6 +1,7 @@
 apscheduler
 dicttoxml
 flask
+flask_caching
 flask_cli
 flask_debugtoolbar
 flask_httpauth

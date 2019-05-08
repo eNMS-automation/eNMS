@@ -400,6 +400,20 @@ class Service(Job):
             success = self.match_dictionary(result)
         return success if not self.negative_logic else not success
 
+    def sub_dict(self, input: dict, variables: dict) -> dict:
+        return {
+            self.sub(k, variables)
+            if isinstance(k, str)
+            else k: (
+                self.sub(v, variables)
+                if isinstance(v, str)
+                else self.sub_dict(v, variables)
+                if isinstance(v, dict)
+                else v
+            )
+            for k, v in input.items()
+        }
+
     def match_dictionary(self, result: dict, match: Optional[dict] = None) -> bool:
         if self.validation_method == "dict_equal":
             return result == self.dict_match

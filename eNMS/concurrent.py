@@ -29,6 +29,4 @@ def device_process(
     service = fetch("Service", id=service_id)
     device_result, log = service.get_results(payload, device, workflow)
     with lock:
-        all_results = results["devices"]
-        all_results[device.name] = device_result
-        results["devices"] = all_results
+        results["devices"][device.name] = device_result

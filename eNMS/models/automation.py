@@ -276,7 +276,7 @@ class Job(AbstractBase):
             return self.get_results(payload, device, workflow)
         elif targets:
             manager = Manager()
-            results: dict = manager.dict({"devices": {}})
+            results: dict = manager.dict({"devices": manager.dict()})
             logs: List[str] = manager.list()
             if self.multiprocessing:
                 lock = manager.Lock()

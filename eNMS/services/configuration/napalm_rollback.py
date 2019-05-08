@@ -3,7 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.controller import controller
-from eNMS.database.functions import SMALL_STRING_LENGTH
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models.automation import Service

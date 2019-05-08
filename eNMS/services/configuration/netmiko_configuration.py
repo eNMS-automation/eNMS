@@ -10,7 +10,7 @@ from wtforms import (
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
-from eNMS.database.functions import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device

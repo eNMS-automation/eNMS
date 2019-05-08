@@ -2,7 +2,7 @@ from flask import Flask
 from uuid import getnode
 
 from eNMS.controller import controller
-from eNMS.database import factory, fetch, get_one, Session
+from eNMS.database.functions import factory, fetch, get_one, Session
 from eNMS.models import models, model_properties
 
 

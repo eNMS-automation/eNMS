@@ -10,7 +10,14 @@ from typing import Any, Optional, Tuple, Type
 from eNMS.cli import configure_cli
 from eNMS.config import Config
 from eNMS.controller import controller
-from eNMS.database import Base, configure_events, engine, fetch, get_one, Session
+from eNMS.database.functions import (
+    Base,
+    configure_events,
+    engine,
+    fetch,
+    get_one,
+    Session,
+)
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties, property_types

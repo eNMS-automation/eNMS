@@ -3,7 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
 from eNMS.controller import controller
-from eNMS.database import Base, fetch, objectify, Session
+from eNMS.database.functions import Base, fetch, objectify, Session
 from eNMS.models import model_properties, property_types, relationships
 from eNMS.properties import dont_migrate, private_properties
 

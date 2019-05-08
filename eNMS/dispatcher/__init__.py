@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 from typing import List
 
 from eNMS.controller import controller
-from eNMS.database import delete, factory, fetch, fetch_all_visible, Session
+from eNMS.database.functions import delete, factory, fetch, fetch_all_visible, Session
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher

@@ -3,7 +3,7 @@ from flask_login import current_user
 from logging import info
 from typing import Any, Generator, List, Tuple
 
-from eNMS.database import Session
+from eNMS.database.functions import Session
 from eNMS.models import models
 
 

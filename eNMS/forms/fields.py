@@ -9,7 +9,7 @@ from wtforms import (
     SelectMultipleField,
 )
 
-from eNMS.database import choices
+from eNMS.database.functions import choices
 
 
 class DateField(StringField):

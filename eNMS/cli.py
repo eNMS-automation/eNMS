@@ -6,7 +6,7 @@ from pathlib import Path
 from werkzeug.serving import run_simple
 
 from eNMS.controller import controller
-from eNMS.database import delete, factory, fetch
+from eNMS.database.functions import delete, factory, fetch
 
 
 def configure_cli(app: Flask) -> None:

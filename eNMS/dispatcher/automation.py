@@ -7,7 +7,14 @@ from typing import Any, Dict
 
 from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
-from eNMS.database import delete, factory, fetch, fetch_all, get_one, objectify
+from eNMS.database.functions import (
+    delete,
+    factory,
+    fetch,
+    fetch_all,
+    get_one,
+    objectify,
+)
 from eNMS.forms.automation import WorkflowBuilderForm
 
 

@@ -1,7 +1,6 @@
 from multiprocessing import Lock
-from typing import Any, List, Optional, Set, Tuple
+from typing import List, Optional, Set, Tuple
 
-from eNMS.controller import controller
 from eNMS.database import fetch, session_scope
 from eNMS.models.inventory import Device
 

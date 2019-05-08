@@ -1,10 +1,11 @@
-from sqlalchemy import Boolean, create_engine, event, Float, Integer, PickleType
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Boolean, event, Float, Integer, PickleType
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm.mapper import Mapper
 
 from eNMS.controller import controller
+from eNMS.database.functions import factory
 from eNMS.models import model_properties, models, property_types, relationships
+from eNMS.models.base import Base
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
@@ -46,4 +47,3 @@ def configure_events():
                 "name": f"{target} has been modified.",
             },
         )
-        controller.log_severity[severity](name)

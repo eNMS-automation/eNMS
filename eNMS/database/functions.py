@@ -1,10 +1,10 @@
 from contextlib import contextmanager
 from flask_login import current_user
 from logging import info
-from os import environ
-
-from sqlalchemy.orm.mapper import Mapper
 from typing import Any, Generator, List, Tuple
+
+from eNMS.database import Session
+from eNMS.models import models
 
 
 def fetch(model: str, **kwargs: Any) -> Any:

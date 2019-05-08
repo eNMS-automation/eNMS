@@ -21,6 +21,9 @@ from typing import Any, Dict, Set
 from yaml import load, BaseLoader
 
 
+from eNMS.database.functions import factory
+
+
 class Controller:
 
     device_subtypes: Dict[str, str] = {
@@ -94,6 +97,14 @@ class Controller:
                 StreamHandler(),
             ],
         )
+
+    def log(self, severity, content) -> None:
+        factory(
+            "Log",
+            commit=False,
+            **{"origin": "eNMS", "severity": severity, "name": content},
+        )
+        self.log_severity[severity](content)
 
     def configure_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(

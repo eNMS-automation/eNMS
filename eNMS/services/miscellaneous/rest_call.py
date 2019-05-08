@@ -65,6 +65,7 @@ class RestCallService(Service):
                 auth=HTTPBasicAuth(self.username, self.password),
                 **kwargs,
             )
+            print(response, type(response), loads(response))
         if response.status_code != 200:
             return {"success": False, "response_code": response.status_code}
         result = (

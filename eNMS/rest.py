@@ -38,7 +38,7 @@ class RestAutomation(Resource):
 
     def post(self) -> Union[str, dict]:
         try:
-            errors, targets, data = [], set(), request.get_json()
+            errors, targets, data = [], set(), request.get_json(force=True)
             job = fetch("Job", name=data["name"])
             if job.is_running:
                 return {"error": "Job is already running."}
@@ -104,9 +104,7 @@ class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
     def post(self, cls: str) -> dict:
-        print(request)
-        print(request.get_json())
-        return factory(cls, **request.get_json()).serialized
+        return factory(cls, **request.get_json(force=True)).serialized
 
 
 class Migrate(Resource):
@@ -126,7 +124,7 @@ class Topology(Resource):
             request.form = data
             return dispatcher.import_topology()
         else:
-            request.form = request.get_json()
+            request.form = request.get_json(force=True)
             dispatcher.export_topology()
             return None
 

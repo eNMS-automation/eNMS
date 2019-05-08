@@ -23,17 +23,11 @@ def threaded_job(
 def device_process(
     args: Tuple[int, int, Lock, dict, List[str], dict, Optional[int]]
 ) -> None:
-    with controller.app.app_context():
-        with session_scope() as session:
-            device_id, service_id, lock, results, logs, payload, workflow_id = args
-            device = fetch("Device", id=device_id)
-            workflow = fetch("Workflow", id=workflow_id)
-            service = fetch("Service", id=service_id)
-            device_result, log = service.get_results(payload, device, workflow)
-            with lock:
-                logs.extend(log)
-                all_results = results["devices"]
-                all_results[device.name] = device_result
-                results["devices"] = all_results
-                setattr(workflow or service, "logs", list(logs))
-                session.merge(workflow or service)
+    device_id, service_id, lock, results, logs, payload, workflow_id = args
+    device = fetch("Device", id=device_id)
+    workflow = fetch("Workflow", id=workflow_id)
+    service = fetch("Service", id=service_id)
+    device_result, log = service.get_results(payload, device, workflow)
+    all_results = results["devices"]
+    all_results[device.name] = device_result
+    results["devices"] = all_results

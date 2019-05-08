@@ -1,3 +1,4 @@
+from sqlalchemy import Boolean, create_engine, event, Float, Integer, PickleType
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -31,3 +32,18 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
             "model": relation.mapper.class_.__tablename__,
             "list": relation.uselist,
         }
+
+
+def configure_events():
+    @event.listens_for(Base, "after_update", propagate=True)
+    def model_inspection(mapper: Mapper, connection, target) -> None:
+        factory(
+            "Log",
+            commit=False,
+            **{
+                "origin": "eNMS",
+                "severity": "info",
+                "name": f"{target} has been modified.",
+            },
+        )
+        controller.log_severity[severity](name)

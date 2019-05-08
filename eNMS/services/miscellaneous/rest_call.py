@@ -58,13 +58,11 @@ class RestCallService(Service):
                 rest_url, auth=HTTPBasicAuth(self.username, self.password), **kwargs
             )
         else:
-            response = loads(
-                self.request_dict[self.call_type](
-                    rest_url,
-                    data=dumps(self.sub_dict(self.payload, locals())),
-                    auth=HTTPBasicAuth(self.username, self.password),
-                    **kwargs,
-                )
+            response = self.request_dict[self.call_type](
+                rest_url,
+                data=dumps(self.sub_dict(self.payload, locals())),
+                auth=HTTPBasicAuth(self.username, self.password),
+                **kwargs,
             )
         if response.status_code != 200:
             return {"success": False, "response_code": response.status_code}

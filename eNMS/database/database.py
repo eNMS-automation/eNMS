@@ -2,13 +2,14 @@ from contextlib import contextmanager
 from flask_login import current_user
 from logging import info
 from os import environ
-from sqlalchemy import Boolean, create_engine, Float, Integer, PickleType
+from sqlalchemy import Boolean, create_engine, event, Float, Integer, PickleType
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm.mapper import Mapper
 from typing import Any, Generator, List, Tuple
 
+from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
 
 engine = create_engine(
@@ -99,7 +100,7 @@ def get_one(model: str) -> Any:
     return Session.query(models[model]).one_or_none()
 
 
-def factory(cls_name: str, **kwargs: Any) -> Any:
+def factory(cls_name: str, commit=True, **kwargs: Any) -> Any:
     instance_id = kwargs.pop("id", 0)
     if instance_id:
         instance = fetch(cls_name, id=instance_id)
@@ -110,8 +111,24 @@ def factory(cls_name: str, **kwargs: Any) -> Any:
     else:
         instance = models[cls_name](**kwargs)
         Session.add(instance)
-    Session.commit()
+    if commit:
+        Session.commit()
     return instance
+
+
+def configure_events():
+    @event.listens_for(Base, "after_update", propagate=True)
+    def model_inspection(mapper: Mapper, connection, target) -> None:
+        factory(
+            "Log",
+            commit=False,
+            **{
+                "origin": "eNMS",
+                "severity": "info",
+                "name": f"{target} has been modified.",
+            },
+        )
+        controller.log_severity[severity](name)
 
 
 @contextmanager

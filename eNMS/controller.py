@@ -20,8 +20,6 @@ from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, Set
 from yaml import load, BaseLoader
 
-from eNMS.database import factory
-
 
 class Controller:
 
@@ -79,7 +77,6 @@ class Controller:
         self.app = app
         self.create_google_earth_styles()
         self.configure_logs()
-        self.configure_sql_events()
 
     def configure_logs(self) -> None:
         basicConfig(
@@ -97,15 +94,6 @@ class Controller:
                 StreamHandler(),
             ],
         )
-
-    def configure_sql_events(self):
-        @event.listens_for(Base, "after_insert", propagate=True)
-        def model_inspection(mapper: Mapper, connection, target) -> None:
-            self.log(f"{target} has been created.")
-
-    def log(self, severity, name):
-        factory("Log", **{"origin": "eNMS", "severity": severity, "name": name})
-        self.log_severity[severity](name)
 
     def configure_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(

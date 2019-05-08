@@ -10,7 +10,7 @@ from typing import Any, Optional, Tuple, Type
 from eNMS.cli import configure_cli
 from eNMS.config import Config
 from eNMS.controller import controller
-from eNMS.database import Base, engine, fetch, get_one, Session
+from eNMS.database import Base, configure_events, engine, fetch, get_one, Session
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties, property_types
@@ -48,6 +48,7 @@ def configure_database(app: Flask) -> None:
     def initialize_database() -> None:
         Base.metadata.create_all(bind=engine)
         configure_mappers()
+        configure_events()
         create_default(app)
         if controller.config["CREATE_EXAMPLES"]:
             create_examples(app)

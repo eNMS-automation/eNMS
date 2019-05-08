@@ -20,10 +20,9 @@ psutil
 psycopg2
 pynetbox
 pyyaml
-slackclient
+slackclient>=1.3,<2
 simplekml
 tacacs_plus
-websocket-client
 wtforms
 xlrd
 xlwt

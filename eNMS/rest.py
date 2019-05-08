@@ -11,7 +11,7 @@ from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.dispatcher import dispatcher
-from eNMS.extensions import auth
+from eNMS.extensions import auth, csrf
 
 
 @auth.get_password
@@ -104,6 +104,8 @@ class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
     def post(self, cls: str) -> dict:
+        print(request)
+        print(request.get_json())
         return factory(cls, **request.get_json()).serialized
 
 
@@ -130,7 +132,7 @@ class Topology(Resource):
 
 
 def configure_rest_api(app: Flask) -> None:
-    api = Api(app)
+    api = Api(app, decorators=[csrf.exempt])
     api.add_resource(Heartbeat, "/rest/is_alive")
     api.add_resource(RestAutomation, "/rest/run_job")
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")

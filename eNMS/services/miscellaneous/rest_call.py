@@ -58,6 +58,7 @@ class RestCallService(Service):
                 rest_url, auth=HTTPBasicAuth(self.username, self.password), **kwargs
             )
         else:
+            print(dumps(self.sub_dict(self.payload, locals())), kwargs)
             response = self.request_dict[self.call_type](
                 rest_url,
                 data=dumps(self.sub_dict(self.payload, locals())),

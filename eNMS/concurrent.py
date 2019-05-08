@@ -12,14 +12,13 @@ def threaded_job(
     targets: Optional[Set[Device]] = None,
     payload: Optional[dict] = None,
 ) -> None:
-    with controller.app.app_context():
-        with session_scope() as session:
-            task = fetch("Task", creation_time=aps_job_id)
-            job = fetch("Job", id=job_id)
-            if targets:
-                targets = {fetch("Device", id=device_id) for device_id in targets}
-            job.try_run(targets=targets, payload=payload, task=task)
-            session.commit()
+
+    task = fetch("Task", creation_time=aps_job_id)
+    job = fetch("Job", id=job_id)
+    if targets:
+        targets = {fetch("Device", id=device_id) for device_id in targets}
+    job.try_run(targets=targets, payload=payload, task=task)
+    # session.commit()
 
 
 def device_process(

@@ -24,7 +24,7 @@ class DebugConfig(Config):
         "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
     )
     MAIL_DEBUG = 1
-    DEBUG_TB_PROFILER_ENABLED = True
+    DEBUG_TB_PROFILER_ENABLED = False
 
 
 class ProductionConfig(Config):

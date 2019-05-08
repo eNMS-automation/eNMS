@@ -46,10 +46,10 @@ def route(page: str) -> Response:
             if not form.validate_on_submit():
                 return jsonify({"invalid_form": True, **{"errors": form.errors}})
             request.form = form_postprocessing(request.form)
-    try:
-        result = getattr(dispatcher, func)(*args)
-    except Exception as e:
-        result = {"error": str(e)}
+    # try:
+    result = getattr(dispatcher, func)(*args)
+    # except Exception as e:
+    # result = {"error": str(e)}
     if isinstance(result, Response) or isinstance(result, str):
         return result
     elif request.method == "POST" or func == "filtering":

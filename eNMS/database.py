@@ -2,7 +2,7 @@ from contextlib import contextmanager
 from flask_login import current_user
 from logging import info
 from os import environ
-from sqlalchemy import Boolean, create_engine, event, Float, Integer, PickleType
+from sqlalchemy import Boolean, create_engine, Float, Integer, PickleType
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm import scoped_session, sessionmaker

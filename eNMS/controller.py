@@ -12,6 +12,7 @@ from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from os import environ
 from pathlib import Path
+from sqlalchemy import event
 from sqlalchemy.exc import InvalidRequestError
 from simplekml import Color, Style
 from string import punctuation
@@ -78,6 +79,7 @@ class Controller:
         self.app = app
         self.create_google_earth_styles()
         self.configure_logs()
+        self.configure_sql_events()
 
     def configure_logs(self) -> None:
         basicConfig(
@@ -95,6 +97,11 @@ class Controller:
                 StreamHandler(),
             ],
         )
+
+    def configure_sql_events(self):
+        @event.listens_for(Base, "after_insert", propagate=True)
+        def model_inspection(mapper: Mapper, connection, target) -> None:
+            self.log(f"{target} has been created.")
 
     def log(self, severity, name):
         factory("Log", **{"origin": "eNMS", "severity": severity, "name": name})

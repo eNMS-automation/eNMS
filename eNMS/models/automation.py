@@ -167,6 +167,7 @@ class Job(AbstractBase):
 
     def try_run(
         self,
+        session,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         workflow: Optional["Workflow"] = None,
@@ -174,10 +175,8 @@ class Job(AbstractBase):
     ) -> Tuple[dict, str]:
         parameters = get_one("Parameters")
         logs = workflow.logs if workflow else self.logs
-        """ with session_scope() as session:
-            logs.append(f"{self.type} {self.name}: Starting.")
-            self.is_running, self.state, self.logs = True, {}, []
-            session.merge(workflow or self) """
+        logs = [f"{self.type} {self.name}: Starting."]
+        self.is_running, self.state = True, {}
         results: dict = {"results": {}}
         if not payload:
             payload = {}
@@ -189,11 +188,9 @@ class Job(AbstractBase):
             results["results"]["devices"] = {}
         now = controller.get_time()
         for i in range(self.number_of_retries + 1):
-            """ with session_scope() as session:
-                logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
-                self.completed = self.failed = 0
-                session.merge(workflow or self) """
-            attempt, logs = self.run(
+            logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
+            self.completed = self.failed = 0
+            attempt, run_logs = self.run(
                 payload, job_from_workflow_targets, targets, workflow
             )
             if has_targets and not job_from_workflow_targets:
@@ -227,15 +224,13 @@ class Job(AbstractBase):
                     break
                 else:
                     sleep(self.time_between_retries)
-        with session_scope() as session:
-            logs.append(f"{self.type} {self.name}: Finished.")
-            self.results[now] = {**results, "logs": list(logs)}
-            logs = []
-            self.is_running, self.state = False, {}
-            self.completed = self.failed = 0
-            session.merge(workflow or self)
-            if task and not task.frequency:
-                task.is_active = False
+        logs.append(f"{self.type} {self.name}: Finished.")
+        self.results[now] = {**results, "logs": list(logs)}
+        logs = []
+        self.is_running, self.state = False, {}
+        self.completed = self.failed = 0
+        if task and not task.frequency:
+            task.is_active = False
         if not workflow and self.send_notification:
             self.notify(results, now)
         if self.push_to_git and parameters.git_automation:

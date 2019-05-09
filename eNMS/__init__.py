@@ -16,7 +16,7 @@ from eNMS.database.functions import fetch, get_one
 from eNMS.default import create_default
 from eNMS.examples import create_examples
 from eNMS.forms import form_properties, property_types
-from eNMS.extensions import bp, csrf, login_manager, mail_client, toolbar
+from eNMS.extensions import assets, bp, csrf, login_manager, mail_client, toolbar
 from eNMS.models.logging import SyslogServer
 from eNMS.models.administration import User
 from eNMS.properties import property_names
@@ -27,6 +27,7 @@ import eNMS.routes  # noqa: F401
 
 def register_modules(app: Flask) -> None:
     app.register_blueprint(bp)
+    assets.init_app(app)
     login_manager.init_app(app)
     mail_client.init_app(app)
     csrf.init_app(app)
@@ -83,6 +84,10 @@ def configure_errors(app: Flask) -> None:
     @app.errorhandler(404)
     def not_found_error(error: Any) -> Tuple[str, int]:
         return render_template("errors/page_404.html"), 404
+
+
+def configure_assets(app: Flask):
+    pass
 
 
 def configure_syslog_server() -> None:

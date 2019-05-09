@@ -3,11 +3,9 @@ from typing import Dict, Type
 
 
 class Config(object):
-
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
     SQLALCHEMY_RECORD_QUERIES = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
     MAIL_SERVER = environ.get("MAIL_SERVER", "smtp.googlemail.com")
     MAIL_PORT = int(environ.get("MAIL_PORT", "587"))
     MAIL_USE_TLS = int(environ.get("MAIL_USE_TLS", True))
@@ -17,27 +15,19 @@ class Config(object):
     MAIL_RECIPIENTS = environ.get("MAIL_RECIPIENTS", "")
 
 
-class DebugConfig(Config):
+class DefaultConfig(Config):
     DEBUG = True
-
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
-
     SQLALCHEMY_DATABASE_URI = environ.get(
         "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
     )
-
     MAIL_DEBUG = 1
-
-    DEBUG_TB_PROFILER_ENABLED = False
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
+    DEBUG_TB_ENABLED = False
 
 
 class ProductionConfig(Config):
     DEBUG = False
-
-    # In production, the secret MUST be provided as an environment variable.
     SECRET_KEY = environ.get("ENMS_SECRET_KEY")
-
     SQLALCHEMY_DATABASE_URI = environ.get(
         "ENMS_DATABASE_URL",
         "postgresql://{}:{}@{}:{}/{}".format(
@@ -48,19 +38,23 @@ class ProductionConfig(Config):
             environ.get("POSTGRES_DB", "enms"),
         ),
     )
-
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
 
 
-class TestConfig(DebugConfig):
+class TestConfig(DefaultConfig):
     WTF_CSRF_ENABLED = False
     DEBUG_TB_ENABLED = False
 
 
+class DevelopConfig(DefaultConfig):
+    DEBUG_TB_PROFILER_ENABLED = True
+
+
 config_dict: Dict[str, Type[Config]] = {
-    "Debug": DebugConfig,
+    "Default": DefaultConfig,
+    "Develop": DevelopConfig,
     "Production": ProductionConfig,
     "Test": TestConfig,
 }

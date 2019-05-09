@@ -5,7 +5,7 @@ from sys import exit
 from eNMS import create_app
 from eNMS.config import config_dict
 
-get_config_mode = environ.get("ENMS_CONFIG_MODE", "Debug")
+get_config_mode = environ.get("ENMS_CONFIG_MODE", "Default")
 
 try:
     config_mode = config_dict[get_config_mode.capitalize()]

@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "description": "A enterprise-grade vendor-agnostic network automation platform.",
   "scripts": {
-    "prettier": "prettier --check eNMS/**/*",
+    "prettier": "prettier --config linting/.prettierrc --ignore-path linting/.prettierignore --check eNMS/**/*",
     "lint": "eslint --config linting/.eslintrc --ignore-path linting/.eslintignore ."
   },
   "engines": {

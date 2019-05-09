@@ -1,5 +1,7 @@
 **/*.min.js
 **/*.min.css
+**/bundles
+**/.webassets-cache
 *.py
 *.html
 *.png

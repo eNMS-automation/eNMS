@@ -12,10 +12,11 @@
       {% endblock meta %}
       <title>eNMS | {% block title %}{% endblock %}</title>
       {% block stylesheets %}
+        <link href="{{ url_for('static', filename='modules/base/2_bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         {% assets "css_all" %}
-          <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+          <link href="{{ ASSET_URL }}" rel="stylesheet">
         {% endassets %}
-        <link href="{{ url_for('static', filename='base.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='modules/base/base.min.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
     {% endblock head %}
   </head>

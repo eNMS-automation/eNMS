@@ -75,8 +75,12 @@ class RestCallService(Service):
                     **kwargs,
                 )
             )
-        if response.status_code != 200:
-            return {"success": False, "response_code": response.status_code}
+        if response.status_code not in range(200, 205):
+            return {
+                "success": False,
+                "response_code": response.status_code,
+                "response": response.text,
+            }
         result = (
             response.json() if self.call_type in ("GET", "DELETE") else response.content
         )

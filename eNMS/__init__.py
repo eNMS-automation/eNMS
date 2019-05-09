@@ -90,13 +90,14 @@ def configure_errors(app: Flask) -> None:
 
 def configure_assets(app: Flask):
     js = Bundle(
-        "modules/jquery/jquery.min.js",
-        "modules/moment/moment.min.js",
-        "modules/**/*.min.js",
-        output="bundles/eNMS.js",
+        "modules/base/jquery/jquery.min.js",
+        "modules/base/moment/moment.min.js",
+        "modules/base/**/*.min.js",
+        output="bundles/base.js",
     )
-    print(js)
+    css = Bundle("modules/base/**/*.css", output="bundles/base.css")
     assets.register("js_all", js)
+    assets.register("css_all", js)
 
 
 def configure_syslog_server() -> None:

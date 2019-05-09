@@ -12,14 +12,9 @@
       {% endblock meta %}
       <title>eNMS | {% block title %}{% endblock %}</title>
       {% block stylesheets %}
-        <link href="{{ url_for('static', filename='modules/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='modules/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='modules/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='modules/nprogress/nprogress.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='modules/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='modules/alertifyjs/css/alertify.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='modules/panel/jspanel.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='modules/difflib/diffview.min.css') }}" rel="stylesheet">
+        {% assets "css_all" %}
+          <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
         <link href="{{ url_for('static', filename='base.min.css') }}" rel="stylesheet">
       {% endblock stylesheets %}
     {% endblock head %}

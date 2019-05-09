@@ -48,3 +48,7 @@ git/automation/*
 git/configurations/*
 !git/automation/.gitkeep
 !git/configurations/.gitkeep
+
+# Exclude Assets Bundle
+eNMS/static/bundles
+eNMS/static/.webassets-cache

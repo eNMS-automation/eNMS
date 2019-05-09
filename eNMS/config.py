@@ -45,10 +45,10 @@ class ProductionConfig(Config):
 
 class TestConfig(DefaultConfig):
     WTF_CSRF_ENABLED = False
-    DEBUG_TB_ENABLED = False
 
 
 class DevelopConfig(DefaultConfig):
+    DEBUG_TB_ENABLED = True
     DEBUG_TB_PROFILER_ENABLED = True
 
 

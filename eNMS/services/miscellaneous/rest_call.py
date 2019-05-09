@@ -65,7 +65,7 @@ class RestCallService(Service):
                 auth=HTTPBasicAuth(self.username, self.password),
                 **kwargs,
             )
-        if response.status_code not in range(200, 205):
+        if response.status_code not in range(200, 300):
             return {
                 "success": False,
                 "response_code": response.status_code,

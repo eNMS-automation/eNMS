@@ -2,9 +2,6 @@
 
 {% block stylesheets %}
   {{ super() }}
-  {% if type == "pool" %}
-    <link href="{{ url_for('static', filename='modules/vis/vis-network.min.css') }}" rel="stylesheet">
-  {% endif %}
 {% endblock stylesheets %}
 
 {% block content %}
@@ -67,8 +64,7 @@
   {% if type in ("configuration", "device", "link", "pool") %}
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>
   {% endif %}
-  {% if type == "pool" %}
-    <script src="{{ url_for('static', filename='modules/vis/vis.min.js') }}"></script>
+  {% if type == "pool" %}>
     <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
   {% elif type in ("service", "task", "workflow") %}
     <script src="{{ url_for('static', filename='automation.js') }}"></script>

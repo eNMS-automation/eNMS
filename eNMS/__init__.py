@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-from flask_assets import Bundle
 from flask_cli import FlaskCLI
 from flask.wrappers import Request
 from glob import glob
@@ -9,6 +8,7 @@ from pathlib import Path
 from sqlalchemy.orm import configure_mappers
 from typing import Any, Optional, Tuple, Type
 
+from eNMS.assets import base_js_bundle, base_css_bundle
 from eNMS.cli import configure_cli
 from eNMS.config import Config
 from eNMS.controller import controller
@@ -89,8 +89,6 @@ def configure_errors(app: Flask) -> None:
 
 
 def configure_assets(app: Flask):
-    base_js_bundle = Bundle("modules/base/**/*.min.js", output="bundles/base.js")
-    base_css_bundle = Bundle("modules/base/**/*.css", output="bundles/base.css")
     assets.register("js_all", base_js_bundle)
     assets.register("css_all", base_css_bundle)
 

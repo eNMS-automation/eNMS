@@ -63,7 +63,7 @@
 
 {% block javascripts %}
   {{ super()}}
-  <script src="{{ url_for('static', filename='modules/echarts/echarts.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/dashboard/echarts.min.js') }}"></script>
   <script>
     const counters = {{ counters|tojson|safe }};
   </script>

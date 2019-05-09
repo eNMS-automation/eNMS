@@ -4,11 +4,8 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('static', filename='modules/leaflet/leaflet.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='modules/leaflet-markercluster/leaflet.markercluster.min.css') }}" rel="stylesheet">
-  {% if view_type == 'site' %}
-    <link href="{{ url_for('static', filename='modules/vis/vis-network.min.css') }}" rel="stylesheet">
-  {% endif %}
+  <link href="{{ url_for('static', filename='lib/view/leaflet/leaflet.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='lib/view/leaflet-markercluster/leaflet.markercluster.min.css') }}" rel="stylesheet">
   <style>
     #map { height:85vh; }
     #network { height:85vh; }
@@ -88,10 +85,9 @@
     let view = '{{ view }}';
     let viewType = "{{ view_type }}"
   </script>
-  <script src="{{ url_for('static', filename='modules/vis/vis.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='modules/webgl-earth/api.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='modules/leaflet/leaflet.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='modules/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/view/webgl-earth/api.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/view/leaflet/leaflet.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/view/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
   <script src="{{ url_for('static', filename='inventory.js') }}"></script>
   <script src="{{ url_for('static', filename='view.js') }}"></script>
   <script src="{{ url_for('static', filename='logicalView.js') }}"></script>

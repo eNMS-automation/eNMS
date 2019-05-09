@@ -19,20 +19,25 @@ class Config(object):
 
 class DebugConfig(Config):
     DEBUG = True
+
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
+
     SQLALCHEMY_DATABASE_URI = environ.get(
         "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
     )
+
     MAIL_DEBUG = 1
+
     DEBUG_TB_PROFILER_ENABLED = False
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
 class ProductionConfig(Config):
     DEBUG = False
+
     # In production, the secret MUST be provided as an environment variable.
     SECRET_KEY = environ.get("ENMS_SECRET_KEY")
 
-    # Database
     SQLALCHEMY_DATABASE_URI = environ.get(
         "ENMS_DATABASE_URL",
         "postgresql://{}:{}@{}:{}/{}".format(
@@ -44,7 +49,6 @@ class ProductionConfig(Config):
         ),
     )
 
-    # Security
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
@@ -52,6 +56,7 @@ class ProductionConfig(Config):
 
 class TestConfig(DebugConfig):
     WTF_CSRF_ENABLED = False
+    DEBUG_TB_ENABLED = False
 
 
 config_dict: Dict[str, Type[Config]] = {

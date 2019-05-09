@@ -407,6 +407,8 @@ class Service(Job):
             else k: (
                 self.sub(v, variables)
                 if isinstance(v, str)
+                else [self.sub(x, variables) for x in v]
+                if isinstance(v, list)
                 else self.sub_dict(v, variables)
                 if isinstance(v, dict)
                 else v

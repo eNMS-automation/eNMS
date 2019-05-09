@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_assets import Bundle
 from flask_cli import FlaskCLI
 from flask.wrappers import Request
 from glob import glob
@@ -89,8 +90,8 @@ def configure_errors(app: Flask) -> None:
 
 
 def configure_assets(app: Flask):
-    assets.register("js_all", base_js_bundle)
-    assets.register("css_all", base_css_bundle)
+    assets.register("js", Bundle("modules/base/**/*.js", output="bundles/base.js"))
+    assets.register("css", base_css_bundle)
 
 
 def configure_syslog_server() -> None:

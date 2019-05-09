@@ -42,9 +42,6 @@
         </div>
       </div>
       {% block javascripts %}
-        {% assets "js_all" %}
-          <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
         <script>
           const page = "{{ endpoint }}";
           const parameters = {{ parameters|tojson|safe }};
@@ -54,7 +51,9 @@
           let action = {};
           let csrf_token = "{{ csrf_token() }}";
         </script>
-        <script src="{{ url_for('static', filename='base.js') }}"></script>
+        {% assets "js_all" %}
+          <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
       {% endblock %}
     {% endblock body %}
   </body>

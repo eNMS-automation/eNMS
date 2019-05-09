@@ -1,6 +1,8 @@
 from flask import Flask, render_template
-from flask.wrappers import Request
+from flask_assets import Bundle
 from flask_cli import FlaskCLI
+from flask.wrappers import Request
+from glob import glob
 from logging import info
 from os import environ
 from pathlib import Path
@@ -87,7 +89,14 @@ def configure_errors(app: Flask) -> None:
 
 
 def configure_assets(app: Flask):
-    pass
+    js = Bundle(
+        "modules/jquery/jquery.min.js",
+        "modules/moment/moment.min.js",
+        "modules/**/*.min.js",
+        output="bundles/eNMS.js",
+    )
+    print(js)
+    assets.register("js_all", js)
 
 
 def configure_syslog_server() -> None:
@@ -107,6 +116,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_context_processor(app)
     configure_rest_api(app)
     configure_errors(app)
+    configure_assets(app)
     controller.load_services()
     configure_cli(app)
     if controller.USE_SYSLOG:

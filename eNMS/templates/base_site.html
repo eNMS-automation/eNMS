@@ -48,19 +48,9 @@
         </div>
       </div>
       {% block javascripts %}
-        <script src="{{ url_for('static', filename='modules/jquery/jquery.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/bootstrap/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/nprogress/nprogress.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/bootstrap-select/bootstrap-select.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/moment/moment.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/parsleyjs/parsley.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/alertifyjs/alertify.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/panel/jspanel.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/datatables/dataTables.bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/smart-wizard/jquery.smartWizard.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='modules/difflib/diffview.min.js') }}"></script>
+        {% assets "js_all" %}
+          <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
         <script>
           const page = "{{ endpoint }}";
           const parameters = {{ parameters|tojson|safe }};

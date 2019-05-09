@@ -12,7 +12,7 @@
       {% endblock meta %}
       <title>eNMS | {% block title %}{% endblock %}</title>
       {% block stylesheets %}
-        {% assets "css_all" %}
+        {% assets "css" %}
           <link href="{{ ASSET_URL }}" rel="stylesheet">
         {% endassets %}
       {% endblock stylesheets %}
@@ -51,7 +51,7 @@
           let action = {};
           let csrf_token = "{{ csrf_token() }}";
         </script>
-        {% assets "js_all" %}
+        {% assets "js" %}
           <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
       {% endblock %}

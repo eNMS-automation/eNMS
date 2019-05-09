@@ -9,7 +9,6 @@ from pathlib import Path
 from sqlalchemy.orm import configure_mappers
 from typing import Any, Optional, Tuple, Type
 
-from eNMS.assets import base_js_bundle, base_css_bundle
 from eNMS.cli import configure_cli
 from eNMS.config import Config
 from eNMS.controller import controller
@@ -90,8 +89,18 @@ def configure_errors(app: Flask) -> None:
 
 
 def configure_assets(app: Flask):
-    assets.register("js", Bundle("modules/base/**/*.js", output="bundles/base.js"))
-    assets.register("css", base_css_bundle)
+    assets.register(
+        "js", Bundle("lib/base/**/*.js", "base/base.js", output="bundles/base.js")
+    )
+    assets.register(
+        "css",
+        Bundle(
+            "lib/base/3_bootstrap/css/bootstrap.min.css",
+            "lib/base/**/*.css",
+            "base/base.min.css",
+            output="bundles/base.css",
+        ),
+    )
 
 
 def configure_syslog_server() -> None:

@@ -13,7 +13,7 @@ from werkzeug.wrappers import Response
 from yaml import dump, load, BaseLoader
 
 from eNMS.controller import controller
-from eNMS.default import create_default
+from eNMS.database.default import create_default
 from eNMS.forms.administration import LoginForm
 from eNMS.database.functions import (
     delete_all,

@@ -13,10 +13,10 @@ from eNMS.cli import configure_cli
 from eNMS.config import Config
 from eNMS.controller import controller
 from eNMS.database import Base, engine, Session
+from eNMS.database.default import create_default
 from eNMS.database.events import configure_events
+from eNMS.database.examples import create_examples
 from eNMS.database.functions import fetch, get_one
-from eNMS.default import create_default
-from eNMS.examples import create_examples
 from eNMS.forms import form_properties, property_types
 from eNMS.extensions import assets, bp, csrf, login_manager, mail_client, toolbar
 from eNMS.models.logging import SyslogServer

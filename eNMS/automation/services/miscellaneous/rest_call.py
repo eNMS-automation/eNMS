@@ -67,13 +67,11 @@ class RestCallService(Service):
                 rest_url, auth=HTTPBasicAuth(self.username, self.password), **kwargs
             )
         else:
-            response = loads(
-                self.request_dict[self.call_type](
-                    rest_url,
-                    data=dumps(self.sub_dict(self.payload, locals())),
-                    auth=HTTPBasicAuth(self.username, self.password),
-                    **kwargs,
-                )
+            response = self.request_dict[self.call_type](
+                rest_url,
+                data=dumps(self.sub_dict(self.payload, locals())),
+                auth=HTTPBasicAuth(self.username, self.password),
+                **kwargs,
             )
         if response.status_code not in range(200, 205):
             return {
@@ -81,9 +79,7 @@ class RestCallService(Service):
                 "response_code": response.status_code,
                 "response": response.text,
             }
-        result = (
-            response.json() if self.call_type in ("GET", "DELETE") else response.content
-        )
+        result = response.json()
         match = self.sub(self.content_match, locals())
         return {
             "url": rest_url,

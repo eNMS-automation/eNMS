@@ -213,6 +213,7 @@ class Job(Base):
             self.completed = self.failed = 0
         if not workflow and self.send_notification:
             self.notify(results, now)
+        db.session.commit()
         return results, now
 
     def get_results(

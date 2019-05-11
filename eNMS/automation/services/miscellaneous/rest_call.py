@@ -1,4 +1,4 @@
-from json import dumps, loads
+from json import dumps
 from requests import (
     get as rest_get,
     post as rest_post,

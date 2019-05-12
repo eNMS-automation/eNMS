@@ -23,6 +23,8 @@ from yaml import load, BaseLoader
 
 from eNMS.database import Session
 from eNMS.database.functions import factory
+from eNMS.forms import field_conversion
+from eNMS.models import property_types
 
 
 class Controller:
@@ -179,8 +181,10 @@ class Controller:
                 continue
             properties = sheet.row_values(0)
             for row_index in range(1, sheet.nrows):
-                values = dict(zip(properties, sheet.row_values(row_index)))
-                values["dont_update_pools"] = True
+                values = {"dont_update_pools": True}
+                for index, property in enumerate(properties):
+                    func = field_conversion[property_types[property]]
+                    values[property] = func(sheet.row_values(row_index)[index])
                 try:
                     factory(obj_type, **values).serialized
                 except Exception as e:

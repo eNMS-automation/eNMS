@@ -13,7 +13,7 @@ from eNMS.properties import dont_track
 def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
     for col in cls.__table__.columns:
         model_properties[cls.__tablename__].append(col.key)
-        if col.type == PickleType and col.default.arg == []:
+        if col.type == PickleType and isinstance(col.default.arg, list):
             property_types[col.key] = "list"
         else:
             column_type = {

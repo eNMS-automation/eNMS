@@ -76,11 +76,11 @@ class DeviceFilteringForm(ObjectFilteringForm, ObjectForm):
     current_configuration = StringField("Current Configuration")
     subtype = StringField("Subtype")
     ip_address = StringField("IP Address")
-    port = StringField("Port")
+    port = IntegerField("Port")
     operating_system = StringField("Operating System")
     os_version = StringField("OS Version")
-    longitude = StringField("Longitude")
-    latitude = StringField("Latitude")
+    longitude = FloatField("Longitude")
+    latitude = FloatField("Latitude")
     napalm_driver = StringField("NAPALM Driver")
     netmiko_driver = StringField("Netmiko Driver")
 
@@ -144,8 +144,8 @@ class PoolFilteringForm(BaseForm):
     form_type = HiddenField(default="pool_filtering")
     name = StringField("Name")
     description = StringField("Description")
-    longitude = StringField("Longitude")
-    latitude = StringField("Latitude")
+    longitude = FloatField("Longitude")
+    latitude = FloatField("Latitude")
     operator = StringField("Match Condition")
 
 

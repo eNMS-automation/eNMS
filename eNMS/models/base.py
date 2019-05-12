@@ -31,13 +31,14 @@ class AbstractBase(Base):
             return super().__getattribute__(property)
 
     def __setattr__(self, property: str, value: Any) -> None:
-        if property in private_properties and controller.USE_VAULT:
+        if property in private_properties:
             if not value:
                 return
-            controller.vault_client.write(
-                f"secret/data/{self.__tablename__}/{self.name}/{property}",
-                data={property: value},
-            )
+            if controller.USE_VAULT:
+                controller.vault_client.write(
+                    f"secret/data/{self.__tablename__}/{self.name}/{property}",
+                    data={property: value},
+                )
         else:
             super().__setattr__(property, value)
 

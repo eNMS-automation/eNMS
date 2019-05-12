@@ -19,6 +19,8 @@ field_conversion: Dict[str, Callable] = {
     "dict": literal_eval,
     "float": float,
     "int": int,
+    "list": str,
+    "str": str,
 }
 
 
@@ -68,7 +70,7 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
             data[property] = form.getlist(property)
         elif field_type == "bool":
             data[property] = property in form
-        elif field_type in ("dict", "float", "int"):
+        elif field_type in field_conversion:
             data[property] = field_conversion[field_type](form[property])
     return data
 

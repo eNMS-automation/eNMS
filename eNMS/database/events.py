@@ -1,3 +1,4 @@
+from flask_login import current_user
 from sqlalchemy import Boolean, event, Float, Integer, PickleType
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.mapper import Mapper
@@ -36,14 +37,16 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
 
 
 def configure_events():
-    @event.listens_for(Base, "after_update", propagate=True)
-    def model_inspection(mapper: Mapper, connection, target) -> None:
+    @event.listens_for(Base, "init", propagate=True)
+    def log_instance_update(target, args, kwargs) -> None:
+        if "type" not in target.__dict__:
+            return
         factory(
             "Log",
             commit=False,
             **{
                 "origin": "eNMS",
                 "severity": "info",
-                "name": f"{target} has been modified.",
+                "name": f"New {target.__dict__['type']} created by {current_user.name}: {kwargs['name']}",
             },
         )

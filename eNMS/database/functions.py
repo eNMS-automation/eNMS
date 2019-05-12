@@ -16,8 +16,8 @@ def fetch_all(model: str) -> Tuple[Any]:
     return Session.query(models[model]).all()
 
 
-def count(model: str) -> Tuple[Any]:
-    return Session.query(func.count(models[model].id)).scalar()
+def count(model: str, **kwargs: Any) -> Tuple[Any]:
+    return Session.query(func.count(models[model].id)).filter_by(**kwargs).scalar()
 
 
 def objectify(model: str, object_list: List[int]) -> List[Any]:

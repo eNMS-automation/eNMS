@@ -75,32 +75,15 @@ class InventoryDispatcher:
     def counters(self, property: str, type: str) -> Counter:
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
-    def all_counters(self):
-        pass
-
     def dashboard(self) -> dict:
         return dict(
             properties=type_to_diagram_properties,
             counters={
                 **{cls: count(cls) for cls in models},
                 **{
-                    "Running services": len(
-                        [
-                            service
-                            for service in fetch_all("Service")
-                            if service.status == "Running"
-                        ]
-                    ),
-                    "Running workflows": len(
-                        [
-                            workflow
-                            for workflow in fetch_all("Workflow")
-                            if workflow.status == "Running"
-                        ]
-                    ),
-                    "Scheduled tasks": len(
-                        [task for task in fetch_all("Task") if task.status == "Active"]
-                    ),
+                    "Running services": count("Service", status="Running"),
+                    "Running workflows": count("Workflow", status="Running"),
+                    "Scheduled tasks": count("Task", status="Active"),
                 },
             },
         )

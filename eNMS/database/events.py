@@ -6,7 +6,7 @@ from sqlalchemy.orm.mapper import Mapper
 from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.models.base import Base
-from eNMS.properties.properties import dont_track
+from eNMS.properties.database import dont_track_changes
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
@@ -64,7 +64,7 @@ def configure_events():
         state, changes = inspect(target), []
         for attr in state.attrs:
             hist = state.get_history(attr.key, True)
-            if not hist.has_changes() or attr.key in dont_track:
+            if not hist.has_changes() or attr.key in dont_track_changes:
                 continue
             changes.append(f"{attr.key}: {hist.deleted} => {hist.added}")
         if changes:

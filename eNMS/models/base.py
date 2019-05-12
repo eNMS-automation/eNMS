@@ -6,7 +6,7 @@ from eNMS.controller import controller
 from eNMS.database import Base, Session
 from eNMS.database.functions import fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
-from eNMS.properties.properties import dont_migrate, private_properties
+from eNMS.properties.database import dont_migrate, private_properties
 
 
 class AbstractBase(Base):

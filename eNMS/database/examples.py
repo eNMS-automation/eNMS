@@ -2,6 +2,7 @@ from flask import Flask
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 
+from eNMS.controller import controller
 from eNMS.database.functions import factory, fetch, Session
 
 
@@ -33,18 +34,8 @@ def create_example_pools() -> None:
 
 
 def create_network_topology(app: Flask) -> None:
-    with open(app.path / "projects" / "usa.xls", "rb") as f:
-        book = open_workbook(file_contents=f.read())
-        for object_type in ("Device", "Link"):
-            try:
-                sheet = book.sheet_by_name(object_type)
-            except XLRDError:
-                continue
-            properties = sheet.row_values(0)
-            for row_index in range(1, sheet.nrows):
-                values = dict(zip(properties, sheet.row_values(row_index)))
-                factory(object_type, **values)
-            Session.commit()
+    with open(app.path / "projects" / "usa.xls", "rb") as file:
+        controller.topology_import(file)
 
 
 def create_example_services() -> None:

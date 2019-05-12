@@ -1,10 +1,10 @@
 from flask_login import current_user
-from sqlalchemy import Boolean, event, Float, Integer, PickleType
+from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.mapper import Mapper
+from sqlalchemy.orm.session import Session
 
 from eNMS.controller import controller
-from eNMS.database.functions import factory
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.models.base import Base
 
@@ -38,7 +38,7 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
 
 def configure_events():
     @event.listens_for(Base, "init", propagate=True)
-    def log_instance_update(target, args, kwargs) -> None:
+    def log_instance_creation(target, args, kwargs) -> None:
         if "type" not in target.__dict__:
             return
         controller.log(
@@ -47,15 +47,26 @@ def configure_events():
         )
 
     @event.listens_for(Base, "before_delete", propagate=True)
-    def receive_after_delete(mapper, connection, target):
+    def log_instance_deletion(mapper, connection, target):
         controller.log(
             "info",
             f"User '{getattr(current_user, 'name', 'admin')}' DELETED {target.type} '{target.name}'.",
         )
 
     @event.listens_for(Base, "after_update", propagate=True)
-    def receive_after_update(mapper, connection, target):
-        controller.log(
-            "info",
-            f"User '{getattr(current_user, 'name', 'admin')}' UPDATED {target.type} '{target.name}'.",
-        )
+    def log_instance_update(mapper, connection, target):
+        state = inspect(target)
+        changes = []
+        for attr in state.attrs:
+            hist = state.get_history(attr.key, True)
+            if not hist.has_changes():
+                continue
+            changes.append(f"{attr.key}: {hist.deleted} => {hist.added}")
+        if changes:
+            controller.log(
+                "info",
+                (
+                    f"User '{getattr(current_user, 'name', 'admin')}' UPDATED ",
+                    f"{target.type} '{target.name}': {'|'.join(changes)}.",
+                ),
+            )

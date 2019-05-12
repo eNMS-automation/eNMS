@@ -18,7 +18,7 @@ class Log(AbstractBase):
     id = Column(Integer, primary_key=True)
     origin = Column(String(SMALL_STRING_LENGTH), default="")
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
-    name = Column(String(SMALL_STRING_LENGTH), default="")
+    content = Column(String(SMALL_STRING_LENGTH), default="")
     time = Column(String(SMALL_STRING_LENGTH), default="")
     log_rules = relationship(
         "LogRule", secondary=log_rule_log_table, back_populates="logs"

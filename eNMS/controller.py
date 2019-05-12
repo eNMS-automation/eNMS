@@ -102,7 +102,7 @@ class Controller:
         factory(
             "Log",
             commit=False,
-            **{"origin": "eNMS", "severity": severity, "name": content},
+            **{"origin": "eNMS", "severity": severity, "content": content},
         )
         self.log_severity[severity](content)
 

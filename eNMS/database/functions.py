@@ -54,10 +54,10 @@ def get_one(model: str) -> Any:
 
 
 def factory(cls_name: str, commit=True, **kwargs: Any) -> Any:
-    instance_id = kwargs.pop("id", 0)
+    instance, instance_id = None, kwargs.pop("id", 0)
     if instance_id:
         instance = fetch(cls_name, id=instance_id)
-    else:
+    elif "name" in kwargs:
         instance = fetch(cls_name, name=kwargs["name"])
     if instance:
         instance.update(**kwargs)

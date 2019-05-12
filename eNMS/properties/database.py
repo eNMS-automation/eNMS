@@ -1,5 +1,16 @@
 from typing import Dict, List
 
+import_classes = [
+    "User",
+    "Device",
+    "Link",
+    "Pool",
+    "Service",
+    "Workflow",
+    "WorkflowEdge",
+    "Task",
+]
+
 private_properties: List[str] = ["password", "enable_password"]
 
 dont_track_changes = ["positions"]

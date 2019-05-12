@@ -8,7 +8,6 @@
 
 {% block content %}
   <div class="right_col" role="main">
-    <!-- top tiles -->
     <div class="row tile_count">
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>
@@ -35,7 +34,6 @@
         <div class="count">{{ counters['User'] }}</div>
       </div>
     </div>
-    <!-- /top tiles -->
     <div class="row">
       {% for type, type_properties in properties.items() %}
         {% set properties = device_properties if type == 'device' else link_properties %}

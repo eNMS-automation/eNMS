@@ -209,14 +209,3 @@ type_to_diagram_properties: Dict[str, List[str]] = {
     "Workflow": workflow_diagram_properties,
     "Task": task_diagram_properties,
 }
-
-import_classes = [
-    "User",
-    "Device",
-    "Link",
-    "Pool",
-    "Service",
-    "Workflow",
-    "WorkflowEdge",
-    "Task",
-]

@@ -12,7 +12,7 @@ from wtforms import (
 
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField
-from eNMS.properties.properties import import_classes
+from eNMS.properties.database import import_classes
 
 
 class ParametersForm:

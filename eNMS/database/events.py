@@ -5,7 +5,7 @@ from sqlalchemy.orm.mapper import Mapper
 
 from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.models.base import Base
+from eNMS.database.base import Base
 from eNMS.properties.database import dont_track_changes
 
 

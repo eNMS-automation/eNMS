@@ -34,7 +34,7 @@ from eNMS.models.associations import (
     job_pool_table,
     job_workflow_table,
 )
-from eNMS.models.base import AbstractBase
+from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device
 
 

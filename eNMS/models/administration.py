@@ -13,7 +13,7 @@ from yaml import load
 from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch, fetch_all
 from eNMS.models.associations import pool_user_table
-from eNMS.models.base import AbstractBase
+from eNMS.database.base import AbstractBase
 
 
 class Server(AbstractBase):

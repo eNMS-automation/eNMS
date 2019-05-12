@@ -36,7 +36,6 @@
     </div>
     <div class="row">
       {% for type, type_properties in properties.items() %}
-        {% set properties = device_properties if type == 'device' else link_properties %}
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="x_panel">
             <div class="x_title">

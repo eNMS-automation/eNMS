@@ -2,9 +2,9 @@ from typing import Dict, List
 
 from eNMS import controller
 
-base_properties: List[str] = ["id", "name", "description"]
-
-object_common_properties: List[str] = base_properties + [
+object_common_properties: List[str] = [
+    "name",
+    "description",
     "subtype",
     "model",
     "location",
@@ -23,12 +23,10 @@ device_properties = list(controller.custom_properties) + [
     "username",
 ]
 
-device_table_properties: List[str] = (
-    object_common_properties[1:] + device_properties[:-3]
-)
+device_table_properties: List[str] = (object_common_properties + device_properties[:-3])
 
 pool_device_properties: List[str] = (
-    object_common_properties[1:] + device_properties[:-1] + ["current_configuration"]
+    object_common_properties + device_properties[:-1] + ["current_configuration"]
 )
 
 device_configuration_properties: List[str] = [
@@ -54,7 +52,9 @@ link_table_properties: List[str] = object_common_properties[1:] + [
     "destination_name",
 ]
 
-pool_table_properties: List[str] = base_properties[1:] + [
+pool_table_properties: List[str] = [
+    "name",
+    "description",
     "never_update",
     "longitude",
     "latitude",
@@ -86,7 +86,9 @@ workflow_table_properties: List[str] = [
 
 user_table_properties: List[str] = ["name", "email"]
 
-server_table_properties = base_properties[1:] + [
+server_table_properties = [
+    "name",
+    "description",
     "ip_address",
     "weight",
     "status",

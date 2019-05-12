@@ -145,6 +145,7 @@ class UserFilteringForm(BaseForm):
 class LogFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="log_filtering")
+    time = StringField("Time")
     origin = StringField("Origin")
     severity = StringField("Severity")
     name = StringField()

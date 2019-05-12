@@ -43,7 +43,7 @@ const panelSize = {
   device_filtering: "700 700",
   server_filtering: "700 300",
   ssh: "700 200",
-  log_filtering: "700 200",
+  log_filtering: "700 250",
   results: "1000 600",
   service_filtering: "1000 500",
   user_filtering: "700 200",

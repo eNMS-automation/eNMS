@@ -25,7 +25,7 @@ from eNMS.models.associations import (
     job_pool_table,
 )
 from eNMS.models.base import AbstractBase
-from eNMS.properties import pool_link_properties, pool_device_properties
+from eNMS.properties.properties import pool_link_properties, pool_device_properties
 
 
 class Object(AbstractBase):

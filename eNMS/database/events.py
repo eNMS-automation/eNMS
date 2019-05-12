@@ -6,7 +6,7 @@ from sqlalchemy.orm.mapper import Mapper
 from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.models.base import Base
-from eNMS.properties import dont_track
+from eNMS.properties.properties import dont_track
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)

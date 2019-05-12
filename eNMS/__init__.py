@@ -20,7 +20,7 @@ from eNMS.forms import form_properties, property_types
 from eNMS.extensions import assets, bp, csrf, login_manager, mail_client, toolbar
 from eNMS.models.logging import SyslogServer
 from eNMS.models.administration import User
-from eNMS.properties import property_names
+from eNMS.properties.properties import property_names
 from eNMS.rest import configure_rest_api
 
 import eNMS.routes  # noqa: F401

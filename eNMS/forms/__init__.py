@@ -1,4 +1,3 @@
-from ast import literal_eval
 from collections import defaultdict
 from flask_login import current_user
 from flask_wtf import FlaskForm
@@ -9,19 +8,13 @@ from wtforms.form import FormMeta
 
 from eNMS.forms.fields import field_types
 from eNMS.models import property_types
-from eNMS.properties import property_names
+from eNMS.properties import field_conversion
+from eNMS.properties.properties import property_names
 
 form_actions = {}
 form_classes = {}
 form_properties: dict = defaultdict(dict)
 form_templates = {}
-field_conversion: Dict[str, Callable] = {
-    "dict": literal_eval,
-    "float": float,
-    "int": int,
-    "list": str,
-    "str": str,
-}
 
 
 class MetaForm(FormMeta):

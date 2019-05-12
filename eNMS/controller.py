@@ -23,8 +23,8 @@ from yaml import load, BaseLoader
 
 from eNMS.database import Session
 from eNMS.database.functions import factory
-from eNMS.forms import field_conversion
 from eNMS.models import property_types
+from eNMS.properties import field_conversion
 
 
 class Controller:

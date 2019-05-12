@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 from flask_login import current_user
 from logging import info
+from sqlalchemy import func
 from typing import Any, Generator, List, Tuple
 
 from eNMS.database import Session
@@ -15,10 +16,8 @@ def fetch_all(model: str) -> Tuple[Any]:
     return Session.query(models[model]).all()
 
 
-def fetch_all_visible(model: str) -> List[Any]:
-    return [
-        instance for instance in Session.query(models[model]).all() if instance.visible
-    ]
+def count(model: str) -> Tuple[Any]:
+    return Session.query(func.count(models[model].id)).scalar()
 
 
 def objectify(model: str, object_list: List[int]) -> List[Any]:

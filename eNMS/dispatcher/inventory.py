@@ -17,11 +17,11 @@ from xlwt import Workbook
 
 from eNMS.controller import controller
 from eNMS.database.functions import (
+    count,
     delete_all,
     factory,
     fetch,
     fetch_all,
-    fetch_all_visible,
     get_one,
     objectify,
     Session,
@@ -75,11 +75,14 @@ class InventoryDispatcher:
     def counters(self, property: str, type: str) -> Counter:
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
+    def all_counters(self):
+        pass
+
     def dashboard(self) -> dict:
         return dict(
             properties=type_to_diagram_properties,
             counters={
-                **{cls: len(fetch_all_visible(cls)) for cls in models},
+                **{cls: count(cls) for cls in models},
                 **{
                     "Running services": len(
                         [

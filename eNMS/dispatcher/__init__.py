@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 from typing import List
 
 from eNMS.controller import controller
-from eNMS.database.functions import delete, factory, fetch, fetch_all_visible, Session
+from eNMS.database.functions import delete, factory, fetch, Session
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher
@@ -66,7 +66,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
 
     def get_all(self, cls: str) -> List[dict]:
         info(f"{current_user.name}: GET ALL {cls}")
-        return [instance.get_properties() for instance in fetch_all_visible(cls)]
+        return [instance.get_properties() for instance in fetch_all(cls)]
 
     def get(self, cls: str, id: str) -> dict:
         instance = fetch(cls, id=id)

@@ -106,8 +106,10 @@ class Device(CustomDevice):
 
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
+        print(kwargs)
         if kwargs.get("dont_update_pools", False):
             return
+        print(self)
         for pool in fetch_all("Pool"):
             if pool.never_update:
                 continue
@@ -213,6 +215,8 @@ class Link(Object):
             {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
         )
         super().update(**kwargs)
+        if kwargs.get("dont_update_pools", False):
+            return
         for pool in fetch_all("Pool"):
             if pool.never_update:
                 continue

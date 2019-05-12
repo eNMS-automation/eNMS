@@ -4,7 +4,7 @@ from typing import Callable, Dict
 field_conversion: Dict[str, Callable] = {
     "dict": literal_eval,
     "float": float,
-    "int": int,
+    "integer": int,
     "list": str,
     "str": str,
 }

@@ -97,7 +97,7 @@ server_table_properties = base_properties[1:] + [
 
 user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
 
-log_public_properties: List[str] = ["origin", "severity", "name"]
+log_public_properties: List[str] = ["time", "origin", "severity", "name"]
 
 log_rule_table_properties: List[str] = ["name"] + log_public_properties
 
@@ -163,7 +163,7 @@ table_fixed_columns: Dict[str, List[str]] = {
     "device": ["Automation", "Connect", "Edit", "Duplicate", "Delete"],
     "server": ["Edit", "Duplicate", "Delete"],
     "link": ["Edit", "Duplicate", "Delete"],
-    "log": ["Delete"],
+    "log": [],
     "logrule": ["Edit", "Delete"],
     "service": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
     "task": ["Action", "Edit", "Duplicate", "Delete"],

@@ -43,11 +43,19 @@ def configure_events():
             return
         controller.log(
             "info",
-            f"New {target.__dict__['type']} created by {current_user.name}: {kwargs['name']}",
+            f"User '{getattr(current_user, 'name', 'admin')}' CREATED {target.__dict__['type']} '{kwargs['name']}'",
         )
 
     @event.listens_for(Base, "before_delete", propagate=True)
     def receive_after_delete(mapper, connection, target):
         controller.log(
-            "info", f"User '{current_user.name}' DELETED {target.type} '{target.name}'."
+            "info",
+            f"User '{getattr(current_user, 'name', 'admin')}' DELETED {target.type} '{target.name}'.",
+        )
+
+    @event.listens_for(Base, "after_update", propagate=True)
+    def receive_after_update(mapper, connection, target):
+        controller.log(
+            "info",
+            f"User '{getattr(current_user, 'name', 'admin')}' UPDATED {target.type} '{target.name}'.",
         )

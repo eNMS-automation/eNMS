@@ -63,12 +63,10 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         )
 
     def get_all(self, cls: str) -> List[dict]:
-        info(f"{current_user.name}: GET ALL {cls}")
         return [instance.get_properties() for instance in fetch_all(cls)]
 
     def get(self, cls: str, id: str) -> dict:
         instance = fetch(cls, id=id)
-        info(f"{current_user.name}: GET {cls} {instance.name} ({id})")
         return instance.serialized
 
     def table(self, table_type: str) -> dict:
@@ -91,9 +89,6 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
     def update(self, cls: str) -> dict:
         try:
             instance = factory(cls, **request.form)
-            controller.log(
-                "info", f"{current_user.name} UPDATED {cls} '{instance.name}'."
-            )
             return instance.serialized
         except JSONDecodeError:
             return {"error": "Invalid JSON syntax (JSON field)"}

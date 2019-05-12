@@ -1,3 +1,4 @@
+from datetime import datetime
 from re import search
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
@@ -18,16 +19,17 @@ class Log(AbstractBase):
     origin = Column(String(SMALL_STRING_LENGTH), default="")
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
     name = Column(String(SMALL_STRING_LENGTH), default="")
+    time = Column(String(SMALL_STRING_LENGTH), default="")
     log_rules = relationship(
         "LogRule", secondary=log_rule_log_table, back_populates="logs"
     )
 
+    def update(self, **kwargs: str) -> None:
+        kwargs["time"] = str(datetime.now())
+        super().update(**kwargs)
+
     def generate_row(self, table: str) -> List[str]:
-        return [
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="deleteInstance('Log', '{self.id}', '{self.name}')">
-            Delete</button>"""
-        ]
+        return []
 
 
 class LogRule(AbstractBase):

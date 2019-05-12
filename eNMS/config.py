@@ -50,6 +50,7 @@ class TestConfig(DefaultConfig):
 class DevelopConfig(DefaultConfig):
     DEBUG_TB_ENABLED = True
     DEBUG_TB_PROFILER_ENABLED = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
 config_dict: Dict[str, Type[Config]] = {

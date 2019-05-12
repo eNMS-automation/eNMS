@@ -8,3 +8,5 @@ field_conversion: Dict[str, Callable] = {
     "list": str,
     "str": str,
 }
+
+property_names: Dict[str, str] = {}

@@ -8,8 +8,7 @@ from wtforms.form import FormMeta
 
 from eNMS.forms.fields import field_types
 from eNMS.models import property_types
-from eNMS.properties import field_conversion
-from eNMS.properties.properties import property_names
+from eNMS.properties import field_conversion, property_names
 
 form_actions = {}
 form_classes = {}

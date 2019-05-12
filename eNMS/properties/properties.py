@@ -95,8 +95,6 @@ server_table_properties = base_properties[1:] + [
     "cpu_load",
 ]
 
-user_permissions: List[str] = ["Admin", "Connect to device", "View", "Edit"]
-
 log_public_properties: List[str] = ["time", "origin", "severity", "content"]
 
 log_rule_table_properties: List[str] = ["name"] + log_public_properties
@@ -212,10 +210,6 @@ type_to_diagram_properties: Dict[str, List[str]] = {
     "Service": service_diagram_properties,
     "Workflow": workflow_diagram_properties,
     "Task": task_diagram_properties,
-}
-
-property_names: Dict[str, str] = {
-    k: v["property_name"] for k, v in controller.custom_properties.items()
 }
 
 import_classes = [

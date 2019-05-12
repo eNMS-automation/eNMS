@@ -22,9 +22,9 @@ from xlrd.biffh import XLRDError
 from yaml import load, BaseLoader
 
 from eNMS.database import Session
-from eNMS.database.functions import factory
+from eNMS.database.functions import factory, fetch_all
 from eNMS.models import property_types
-from eNMS.properties import field_conversion
+from eNMS.properties import field_conversion, property_names
 
 
 class Controller:
@@ -191,6 +191,9 @@ class Controller:
                     info(f"{str(values)} could not be imported ({str(e)})")
                     result = "Partial import (see logs)."
             Session.commit()
+        for pool in fetch_all("Pool"):
+            pool.compute_pool()
+        Session.commit()
         return result
 
     def create_google_earth_styles(self) -> None:
@@ -248,9 +251,14 @@ class Controller:
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")
         if not filepath:
-            return {}
-        with open(filepath, "r") as properties:
-            return load(properties, Loader=BaseLoader)
+            custom_properties = {}
+        else:
+            with open(filepath, "r") as properties:
+                custom_properties = load(properties, Loader=BaseLoader)
+        property_names.update(
+            {k: v["property_name"] for k, v in custom_properties.items()}
+        )
+        return custom_properties
 
     def str_dict(self, input: Any, depth: int = 0) -> str:
         tab = "\t" * depth

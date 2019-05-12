@@ -212,9 +212,6 @@ class InventoryDispatcher:
             delete_all("Device")
         if controller.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             result = controller.topology_import(file)
-        for pool in fetch_all("Pool"):
-            pool.compute_pool()
-        Session.commit()
         info("Inventory import: Done.")
         return result
 

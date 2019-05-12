@@ -12,7 +12,7 @@ from wtforms import (
 
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField
-from eNMS.properties.properties import import_classes, user_permissions
+from eNMS.properties.properties import import_classes
 
 
 class ParametersForm:
@@ -125,7 +125,12 @@ class UserForm(BaseForm):
     name = StringField("Name")
     password = PasswordField("Password")
     email = StringField("Email")
-    permission_choices = [(p, p) for p in user_permissions]
+    permission_choices = [
+        ("Admin", "Admin"),
+        ("Connect to device", "Connect to device"),
+        ("View", "View"),
+        ("Edit", "Edit"),
+    ]
     permissions = SelectMultipleField("Permissions", choices=permission_choices)
     pools = MultipleInstanceField("Pools", instance_type="Pool")
 

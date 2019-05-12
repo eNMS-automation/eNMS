@@ -8,7 +8,6 @@ from flask import (
     url_for,
 )
 from flask_login import current_user
-from logging import info, warning
 from werkzeug.wrappers.response import Response
 
 from eNMS.controller import controller

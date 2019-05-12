@@ -1,14 +1,11 @@
 from flask import request
-from flask_login import current_user
 from flask_wtf import FlaskForm
 from json.decoder import JSONDecodeError
-from logging import info
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from typing import List
 
-from eNMS.controller import controller
-from eNMS.database.functions import delete, factory, fetch, Session
+from eNMS.database.functions import delete, factory, fetch, fetch_all, Session
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.dispatcher.inventory import InventoryDispatcher

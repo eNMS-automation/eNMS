@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import current_app, Flask, jsonify, make_response, request
+from flask import Flask, jsonify, make_response, request
 from flask_restful import Api, Resource
 from flask.wrappers import Response
 from logging import info

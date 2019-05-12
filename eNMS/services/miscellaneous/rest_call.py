@@ -1,4 +1,4 @@
-from json import dumps, loads
+from json import dumps
 from requests import (
     get as rest_get,
     post as rest_post,
@@ -58,7 +58,6 @@ class RestCallService(Service):
                 rest_url, auth=HTTPBasicAuth(self.username, self.password), **kwargs
             )
         else:
-            print(dumps(self.sub_dict(self.payload, locals())), kwargs)
             response = self.request_dict[self.call_type](
                 rest_url,
                 data=dumps(self.sub_dict(self.payload, locals())),
@@ -71,9 +70,7 @@ class RestCallService(Service):
                 "response_code": response.status_code,
                 "response": response.text,
             }
-        result = (
-            response.json() if self.call_type in ("GET", "DELETE") else response.content
-        )
+        result = response.json()
         match = self.sub(self.content_match, locals())
         return {
             "url": rest_url,

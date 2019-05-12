@@ -2,7 +2,6 @@ from flask_login import current_user
 from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.mapper import Mapper
-from sqlalchemy.orm.session import Session
 
 from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
@@ -44,14 +43,20 @@ def configure_events():
             return
         controller.log(
             "info",
-            f"User '{getattr(current_user, 'name', 'admin')}' CREATED {target.__dict__['type']} '{kwargs['name']}'",
+            (
+                f"User '{getattr(current_user, 'name', 'admin')}' CREATED "
+                f"{target.__dict__['type']} '{kwargs['name']}'"
+            ),
         )
 
     @event.listens_for(Base, "before_delete", propagate=True)
     def log_instance_deletion(mapper, connection, target):
         controller.log(
             "info",
-            f"User '{getattr(current_user, 'name', 'admin')}' DELETED {target.type} '{target.name}'.",
+            (
+                f"User '{getattr(current_user, 'name', 'admin')}' DELETED "
+                f"{target.type} '{target.name}'."
+            ),
         )
 
     @event.listens_for(Base, "after_update", propagate=True)

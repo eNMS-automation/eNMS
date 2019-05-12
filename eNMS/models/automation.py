@@ -27,7 +27,7 @@ from xmltodict import parse
 from eNMS.concurrent import threaded_job, device_process
 from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH
-from eNMS.database.functions import fetch, get_one, session_scope
+from eNMS.database.functions import fetch, get_one
 from eNMS.models.associations import (
     job_device_table,
     job_log_rule_table,
@@ -174,7 +174,6 @@ class Job(AbstractBase):
         workflow: Optional["Workflow"] = None,
         task: Optional["Task"] = None,
     ) -> Tuple[dict, str]:
-        parameters = get_one("Parameters")
         logs = workflow.logs if workflow else self.logs
         logs = [f"{self.type} {self.name}: Starting."]
         self.is_running, self.state = True, {}
@@ -234,8 +233,7 @@ class Job(AbstractBase):
             task.is_active = False
         if not workflow and self.send_notification:
             self.notify(results, now)
-        if self.push_to_git and parameters.git_automation:
-            self.git_push(results)
+        Session.commit()
         return results, now
 
     def get_results(

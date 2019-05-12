@@ -11,8 +11,6 @@ from sqlalchemy import and_
 from subprocess import Popen
 from typing import List, Union
 from werkzeug.utils import secure_filename
-from xlrd import open_workbook
-from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.controller import controller
@@ -212,9 +210,8 @@ class InventoryDispatcher:
         file = request.files["file"]
         if request.form["replace"]:
             delete_all("Device")
-        result = "Topology successfully imported."
         if controller.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
-            controller.topology_import(file)
+            result = controller.topology_import(file)
         for pool in fetch_all("Pool"):
             pool.compute_pool()
         Session.commit()

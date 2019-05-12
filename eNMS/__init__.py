@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from flask_assets import Bundle
 from flask_cli import FlaskCLI
 from flask.wrappers import Request
-from glob import glob
 from logging import info
 from os import environ
 from pathlib import Path

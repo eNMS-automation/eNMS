@@ -12,12 +12,13 @@ from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from os import environ
 from pathlib import Path
-from sqlalchemy import event
 from sqlalchemy.exc import InvalidRequestError
 from simplekml import Color, Style
 from string import punctuation
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, Set
+from xlrd import open_workbook
+from xlrd.biffh import XLRDError
 from yaml import load, BaseLoader
 
 from eNMS.database import Session
@@ -170,6 +171,7 @@ class Controller:
 
     def topology_import(self, file):
         book = open_workbook(file_contents=file.read())
+        result = "Topology successfully imported."
         for obj_type in ("Device", "Link"):
             try:
                 sheet = book.sheet_by_name(obj_type)
@@ -185,6 +187,7 @@ class Controller:
                     info(f"{str(values)} could not be imported ({str(e)})")
                     result = "Partial import (see logs)."
             Session.commit()
+        return result
 
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}

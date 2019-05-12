@@ -27,15 +27,6 @@ pool_device_properties: List[str] = (
     object_common_properties + device_properties[:-1] + ["current_configuration"]
 )
 
-device_configuration_properties: List[str] = [
-    "name",
-    "model",
-    "last_failure",
-    "last_runtime",
-    "last_update",
-    "last_status",
-]
-
 link_properties: List[str] = object_common_properties + [
     "source_name",
     "destination_name",

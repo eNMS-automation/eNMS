@@ -4,6 +4,15 @@ from eNMS.properties.properties import device_properties, object_common_properti
 
 device_table_properties: List[str] = object_common_properties + device_properties[:-3]
 
+device_configuration_properties: List[str] = [
+    "name",
+    "model",
+    "last_failure",
+    "last_runtime",
+    "last_update",
+    "last_status",
+]
+
 link_table_properties: List[str] = object_common_properties[1:] + [
     "source_name",
     "destination_name",

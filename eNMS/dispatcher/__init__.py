@@ -12,7 +12,7 @@ from eNMS.dispatcher.inventory import InventoryDispatcher
 from eNMS.forms import form_actions, form_classes, form_templates
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
-from eNMS.properties.properties import (
+from eNMS.properties.table import (
     filtering_properties,
     table_fixed_columns,
     table_properties,

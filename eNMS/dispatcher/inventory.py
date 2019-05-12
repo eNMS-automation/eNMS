@@ -25,8 +25,8 @@ from eNMS.database.functions import (
     Session,
 )
 from eNMS.models import models
-from eNMS.properties.diagrams import type_to_diagram_properties
-from eNMS.properties.properties import filtering_properties, table_properties
+from eNMS.properties.diagram import type_to_diagram_properties
+from eNMS.properties.table import filtering_properties, table_properties
 
 
 class InventoryDispatcher:

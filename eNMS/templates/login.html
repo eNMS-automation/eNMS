@@ -10,9 +10,7 @@
 {% block body_class %} login {% endblock body_class %}
 
 {% block body %}
-  <!-- jQuery -->
   <script src="{{ url_for('static', filename='lib/base/1_jquery/jquery.min.js') }}"></script>
-  <!-- Parsley -->
   <script src="{{ url_for('static', filename='lib/base/9_parsleyjs/parsley.min.js') }}"></script>
   <div class="login_wrapper">
     <section class="login_content">
@@ -21,7 +19,7 @@
         <h1>Sign in</h1>
         <label>Authentication method</label>
         <div>
-          {{ login_form.authentication_method(class="form-control required") }}
+          {{ login_form.authentication_method(class="form-control") }}
         </div><br>
         <div>
           {{ login_form.name(class="form-control required", placeholder="Name") }}

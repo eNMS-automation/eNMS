@@ -39,6 +39,8 @@ class AbstractBase(Base):
                     f"secret/data/{self.__tablename__}/{self.name}/{property}",
                     data={property: value},
                 )
+            else:
+                super().__setattr__(property, value)
         else:
             super().__setattr__(property, value)
 

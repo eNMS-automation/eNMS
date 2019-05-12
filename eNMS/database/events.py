@@ -41,12 +41,13 @@ def configure_events():
     def log_instance_update(target, args, kwargs) -> None:
         if "type" not in target.__dict__:
             return
-        factory(
-            "Log",
-            commit=False,
-            **{
-                "origin": "eNMS",
-                "severity": "info",
-                "name": f"New {target.__dict__['type']} created by {current_user.name}: {kwargs['name']}",
-            },
+        controller.log(
+            "info",
+            f"New {target.__dict__['type']} created by {current_user.name}: {kwargs['name']}",
+        )
+
+    @event.listens_for(Base, "before_delete", propagate=True)
+    def receive_after_delete(mapper, connection, target):
+        controller.log(
+            "info", f"User '{current_user.name}' DELETED {target.type} '{target.name}'."
         )

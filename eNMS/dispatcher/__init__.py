@@ -20,9 +20,7 @@ from eNMS.properties import filtering_properties, table_fixed_columns, table_pro
 
 class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispatcher):
     def delete_instance(self, cls: str, instance_id: int) -> dict:
-        instance = delete(cls, id=instance_id)
-        controller.log("info", f"{current_user.name} DELETED {cls} '{instance.name}'.")
-        return instance
+        return delete(cls, id=instance_id)
 
     def filtering(self, table: str) -> dict:
         model = models.get(table, models["Device"])

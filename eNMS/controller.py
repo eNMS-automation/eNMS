@@ -20,7 +20,7 @@ from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, Set
 from yaml import load, BaseLoader
 
-
+from eNMS.database import Session
 from eNMS.database.functions import factory
 
 
@@ -167,6 +167,24 @@ class Controller:
         allowed_syntax = "." in name
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
+
+    def topology_import(self, file):
+        book = open_workbook(file_contents=file.read())
+        for obj_type in ("Device", "Link"):
+            try:
+                sheet = book.sheet_by_name(obj_type)
+            except XLRDError:
+                continue
+            properties = sheet.row_values(0)
+            for row_index in range(1, sheet.nrows):
+                values = dict(zip(properties, sheet.row_values(row_index)))
+                values["dont_update_pools"] = True
+                try:
+                    factory(obj_type, **values).serialized
+                except Exception as e:
+                    info(f"{str(values)} could not be imported ({str(e)})")
+                    result = "Partial import (see logs)."
+            Session.commit()
 
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}

@@ -214,22 +214,7 @@ class InventoryDispatcher:
             delete_all("Device")
         result = "Topology successfully imported."
         if controller.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
-            book = open_workbook(file_contents=file.read())
-            for obj_type in ("Device", "Link"):
-                try:
-                    sheet = book.sheet_by_name(obj_type)
-                except XLRDError:
-                    continue
-                properties = sheet.row_values(0)
-                for row_index in range(1, sheet.nrows):
-                    values = dict(zip(properties, sheet.row_values(row_index)))
-                    values["dont_update_pools"] = True
-                    try:
-                        factory(obj_type, **values).serialized
-                    except Exception as e:
-                        info(f"{str(values)} could not be imported ({str(e)})")
-                        result = "Partial import (see logs)."
-                Session.commit()
+            controller.topology_import(file)
         for pool in fetch_all("Pool"):
             pool.compute_pool()
         Session.commit()

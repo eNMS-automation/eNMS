@@ -70,6 +70,7 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
             data[property] = property in form
         elif field_type in ("dict", "float", "int"):
             data[property] = field_conversion[field_type](form[property])
+    print(data)
     return data
 
 

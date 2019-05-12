@@ -229,6 +229,10 @@ import_classes = [
     "Task",
 ]
 
+# Properties which changes should trigger a log
+
+dont_track = ["positions"]
+
 # Properties that shouldn't be in the migration files
 
 dont_migrate: Dict[str, List[str]] = {

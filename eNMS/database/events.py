@@ -7,6 +7,7 @@ from sqlalchemy.orm.session import Session
 from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.models.base import Base
+from eNMS.properties import dont_track
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
@@ -55,18 +56,17 @@ def configure_events():
 
     @event.listens_for(Base, "after_update", propagate=True)
     def log_instance_update(mapper, connection, target):
-        state = inspect(target)
-        changes = []
+        state, changes = inspect(target), []
         for attr in state.attrs:
             hist = state.get_history(attr.key, True)
-            if not hist.has_changes():
+            if not hist.has_changes() or attr.key in dont_track:
                 continue
             changes.append(f"{attr.key}: {hist.deleted} => {hist.added}")
         if changes:
             controller.log(
                 "info",
                 (
-                    f"User '{getattr(current_user, 'name', 'admin')}' UPDATED ",
-                    f"{target.type} '{target.name}': {'|'.join(changes)}.",
+                    f"User '{getattr(current_user, 'name', 'admin')}' UPDATED "
+                    f"{target.type} '{target.name}': {' | '.join(changes)}."
                 ),
             )

@@ -2,17 +2,17 @@ from typing import Dict, List
 
 from eNMS import controller
 
-object_diagram_properties: List[str] = ["model", "vendor", "subtype", "location"]
+object_properties: List[str] = ["model", "vendor", "subtype", "location"]
 
-device_diagram_properties: List[str] = (
-    object_diagram_properties
+device_properties: List[str] = (
+    object_properties
     + ["operating_system", "os_version", "port"]
     + list(p for p, v in controller.custom_properties.items() if v["add_to_dashboard"])
 )
 
-user_diagram_properties: List[str] = ["name"]
+user_properties: List[str] = ["name"]
 
-service_diagram_properties: List[str] = [
+service_properties: List[str] = [
     "vendor",
     "operating_system",
     "creator",
@@ -24,9 +24,9 @@ service_diagram_properties: List[str] = [
     "time_between_retries",
 ]
 
-workflow_diagram_properties: List[str] = service_diagram_properties
+workflow_properties: List[str] = service_properties
 
-task_diagram_properties: List[str] = [
+task_properties: List[str] = [
     "status",
     "periodic",
     "frequency",
@@ -36,10 +36,10 @@ task_diagram_properties: List[str] = [
 ]
 
 type_to_diagram_properties: Dict[str, List[str]] = {
-    "Device": device_diagram_properties,
-    "Link": object_diagram_properties,
-    "User": user_diagram_properties,
-    "Service": service_diagram_properties,
-    "Workflow": workflow_diagram_properties,
-    "Task": task_diagram_properties,
+    "Device": device_properties,
+    "Link": object_properties,
+    "User": user_properties,
+    "Service": service_properties,
+    "Workflow": workflow_properties,
+    "Task": task_properties,
 }

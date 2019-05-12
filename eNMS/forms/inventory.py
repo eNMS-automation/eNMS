@@ -11,7 +11,7 @@ from wtforms import (
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField, InstanceField
-from eNMS.properties.properties import pool_link_properties, pool_device_properties
+from eNMS.properties.objects import pool_link_properties, pool_device_properties
 
 
 def configure_device_form(cls: BaseForm) -> BaseForm:

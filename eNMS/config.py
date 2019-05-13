@@ -13,6 +13,7 @@ class Config(object):
     MAIL_PASSWORD = environ.get("MAIL_PASSWORD")
     MAIL_SENDER = environ.get("MAIL_SENDER", "enms@enms.fr")
     MAIL_RECIPIENTS = environ.get("MAIL_RECIPIENTS", "")
+    CACHE_TYPE = "simple"
 
 
 class DefaultConfig(Config):

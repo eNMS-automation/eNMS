@@ -29,6 +29,8 @@ from eNMS.properties import field_conversion, property_names
 
 class Controller:
 
+    cache = ["administration", "dashboard", "form", "view", "table"]
+
     device_subtypes: Dict[str, str] = {
         "antenna": "Antenna",
         "firewall": "Firewall",
@@ -84,9 +86,8 @@ class Controller:
         self.create_google_earth_styles()
         self.configure_logs()
 
-    def configure_cache(self, *args, **kwargs):
-        print(args, kwargs)
-        return True
+    def unless_cache(self, *args, **kwargs):
+        return kwargs["page"].split("-")[0] not in self.cache
 
     def configure_logs(self) -> None:
         basicConfig(

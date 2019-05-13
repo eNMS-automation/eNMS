@@ -203,7 +203,7 @@ function clearResults(id) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function runJob(id) {
+function runJob(id, realTimeUpdate) {
   call(`/run_job-${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
     if (typeof workflowBuilder !== "undefined") {
@@ -213,7 +213,8 @@ function runJob(id) {
         getJobState(id);
       }
     }
-    showLogs(id);
+    console.log(realTimeUpdate);
+    if (realTimeUpdate) showLogs(id);
   });
 }
 

@@ -65,7 +65,6 @@ class Job(AbstractBase):
     waiting_time = Column(Integer, default=0)
     creator = Column(String(SMALL_STRING_LENGTH), default="admin")
     push_to_git = Column(Boolean, default=False)
-    real_time_update = Column(Boolean, default=False)
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
     )
@@ -195,7 +194,10 @@ class Job(AbstractBase):
             )
             self.completed = self.failed = 0
             Session.commit()
-            attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
+            attempt, logs = self.run(
+                payload, job_from_workflow_targets, targets, workflow
+            )
+            current_job.logs.extend(logs)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -229,7 +231,6 @@ class Job(AbstractBase):
                     sleep(self.time_between_retries)
         current_job.logs.append(f"{self.type} {self.name}: Finished.")
         self.results[now] = {**results, "logs": list(current_job.logs)}
-        current_job.logs = []
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         if task and not task.frequency:
@@ -262,10 +263,10 @@ class Job(AbstractBase):
                 "result": chr(10).join(format_exc().splitlines()),
             }
         current_job = workflow or self
-        current_job.completed += 1
-        current_job.failed += 1 - results["success"]
-        current_job.logs.extend(logs)
-        if current_job.real_time_update and not current_job.multiprocessing:
+        if not current_job.multiprocessing:
+            current_job.completed += 1
+            current_job.failed += 1 - results["success"]
+            current_job.logs.extend(logs)
             Session.commit()
         return results, logs
 
@@ -283,11 +284,19 @@ class Job(AbstractBase):
         elif targets:
             manager = Manager()
             results: dict = manager.dict({"devices": manager.dict()})
+            logs: list = manager.list()
             if self.multiprocessing:
                 lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
                 pool = Pool(processes=processes)
-                args = (self.id, lock, results, payload, getattr(workflow, "id", None))
+                args = (
+                    self.id,
+                    lock,
+                    results,
+                    logs,
+                    payload,
+                    getattr(workflow, "id", None),
+                )
                 pool.map(device_process, [(device.id, *args) for device in targets])
                 pool.close()
                 pool.join()
@@ -296,7 +305,7 @@ class Job(AbstractBase):
                     device.name: self.get_results(payload, device, workflow)[0]
                     for device in targets
                 }
-            return results
+            return results, logs
         else:
             return self.get_results(payload)
 
@@ -316,7 +325,8 @@ class Service(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{self.id}')">Run</button>""",
+            onclick="runJob('{self.id}', {'true' if self.real_time_update else 'false'})">
+            Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"

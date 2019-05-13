@@ -1,6 +1,7 @@
 from multiprocessing import Lock
 from typing import List, Optional, Set, Tuple
 
+from eNMS.database import engine
 from eNMS.database.functions import fetch, session_scope
 from eNMS.models.inventory import Device
 
@@ -20,16 +21,13 @@ def threaded_job(
 
 
 def device_process(
-    args: Tuple[int, int, Lock, dict, List[str], dict, Optional[int]]
+    args: Tuple[int, int, Lock, dict, list, List[str], dict, Optional[int]]
 ) -> None:
     device_id, service_id, lock, results, logs, payload, workflow_id = args
     device = fetch("Device", id=device_id)
     workflow = fetch("Workflow", id=workflow_id)
     service = fetch("Service", id=service_id)
-    device_result, log = service.get_results(payload, device, workflow)
-    results["devices"][device.name] = device_result
-    current_job = workflow or service
-    if current_job.real_time_update:
-        with lock:
-            with session_scope() as session:
-                session.merge(workflow or self)
+    device_result, device_log = service.get_results(payload, device, workflow)
+    with lock:
+        results["devices"][device.name] = device_result
+        logs.extend(device_log)

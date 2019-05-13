@@ -84,6 +84,10 @@ class Controller:
         self.create_google_earth_styles()
         self.configure_logs()
 
+    def configure_cache(self, *args, **kwargs):
+        print(args, kwargs)
+        return True
+
     def configure_logs(self) -> None:
         basicConfig(
             level=getattr(

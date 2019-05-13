@@ -14,7 +14,7 @@ from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.dispatcher import dispatcher
 from eNMS.forms import form_classes, form_postprocessing
-from eNMS.extensions import bp
+from eNMS.extensions import bp, cache
 
 
 @bp.route("/")
@@ -23,6 +23,7 @@ def site_root() -> Response:
 
 
 @bp.route("/<page>", methods=["GET", "POST"])
+@cache.cached(timeout=60, unless=controller.configure_cache)
 def route(page: str) -> Response:
     if not current_user.is_authenticated:
         controller.log(

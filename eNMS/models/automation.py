@@ -65,6 +65,7 @@ class Job(AbstractBase):
     waiting_time = Column(Integer, default=0)
     creator = Column(String(SMALL_STRING_LENGTH), default="admin")
     push_to_git = Column(Boolean, default=False)
+    real_time_update = Column(Boolean, default=False)
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
     )
@@ -174,9 +175,9 @@ class Job(AbstractBase):
         workflow: Optional["Workflow"] = None,
         task: Optional["Task"] = None,
     ) -> Tuple[dict, str]:
-        logs = workflow.logs if workflow else self.logs
-        logs = [f"{self.type} {self.name}: Starting."]
         self.is_running, self.state = True, {}
+        current_job.logs = [f"{self.type} {self.name}: Starting."]
+        Session.commit()
         results: dict = {"results": {}}
         if not payload:
             payload = {}
@@ -188,8 +189,11 @@ class Job(AbstractBase):
             results["results"]["devices"] = {}
         now = controller.get_time()
         for i in range(self.number_of_retries + 1):
-            logs.append(f"Running {self.type} {self.name} (attempt n°{i + 1})")
+            current_job.logs.append(
+                f"Running {self.type} {self.name} (attempt n°{i + 1})"
+            )
             self.completed = self.failed = 0
+            Session.commit()
             attempt, run_logs = self.run(
                 payload, job_from_workflow_targets, targets, workflow
             )
@@ -224,16 +228,16 @@ class Job(AbstractBase):
                     break
                 else:
                     sleep(self.time_between_retries)
-        logs.append(f"{self.type} {self.name}: Finished.")
-        self.results[now] = {**results, "logs": list(logs)}
-        logs = []
+        current_job.logs.append(f"{self.type} {self.name}: Finished.")
+        self.results[now] = {**results, "logs": list(current_job.logs)}
+        current_job.logs = []
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         if task and not task.frequency:
             task.is_active = False
+        Session.commit()
         if not workflow and self.send_notification:
             self.notify(results, now)
-        Session.commit()
         return results, now
 
     def get_results(
@@ -260,6 +264,7 @@ class Job(AbstractBase):
             }
         self.completed += 1
         self.failed += 1 - results["success"]
+        getattr(workflow or self, "logs").extend(logs)
         return results, logs
 
     def run(
@@ -276,19 +281,11 @@ class Job(AbstractBase):
         elif targets:
             manager = Manager()
             results: dict = manager.dict({"devices": manager.dict()})
-            logs: List[str] = manager.list()
             if self.multiprocessing:
                 lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
                 pool = Pool(processes=processes)
-                args = (
-                    self.id,
-                    lock,
-                    results,
-                    logs,
-                    payload,
-                    getattr(workflow, "id", None),
-                )
+                args = (self.id, lock, results, payload, getattr(workflow, "id", None))
                 pool.map(device_process, [(device.id, *args) for device in targets])
                 pool.close()
                 pool.join()

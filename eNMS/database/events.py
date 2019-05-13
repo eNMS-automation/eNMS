@@ -72,6 +72,6 @@ def configure_events():
                 "info",
                 (
                     f"User '{getattr(current_user, 'name', 'admin')}' UPDATED "
-                    f"{target.type} '{target.name}': {' | '.join(changes)}."
+                    f"{target.type} '{target.name}' ({' | '.join(changes)})."
                 ),
             )

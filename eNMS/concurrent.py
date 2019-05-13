@@ -28,3 +28,8 @@ def device_process(
     service = fetch("Service", id=service_id)
     device_result, log = service.get_results(payload, device, workflow)
     results["devices"][device.name] = device_result
+    current_job = workflow or service
+    if current_job.real_time_update:
+        with lock:
+            with session_scope() as session:
+                session.merge(workflow or self)

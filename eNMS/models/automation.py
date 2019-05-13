@@ -175,6 +175,7 @@ class Job(AbstractBase):
         workflow: Optional["Workflow"] = None,
         task: Optional["Task"] = None,
     ) -> Tuple[dict, str]:
+        current_job = workflow or self
         self.is_running, self.state = True, {}
         current_job.logs = [f"{self.type} {self.name}: Starting."]
         Session.commit()
@@ -194,9 +195,7 @@ class Job(AbstractBase):
             )
             self.completed = self.failed = 0
             Session.commit()
-            attempt, run_logs = self.run(
-                payload, job_from_workflow_targets, targets, workflow
-            )
+            attempt = self.run(payload, job_from_workflow_targets, targets, workflow)
             if has_targets and not job_from_workflow_targets:
                 assert targets is not None
                 for device in set(targets):
@@ -262,9 +261,12 @@ class Job(AbstractBase):
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
-        self.completed += 1
-        self.failed += 1 - results["success"]
-        getattr(workflow or self, "logs").extend(logs)
+        current_job = workflow or self
+        current_job.completed += 1
+        current_job.failed += 1 - results["success"]
+        current_job.logs.extend(logs)
+        if current_job.real_time_update and not current_job.multiprocessing:
+            Session.commit()
         return results, logs
 
     def run(
@@ -294,7 +296,7 @@ class Job(AbstractBase):
                     device.name: self.get_results(payload, device, workflow)[0]
                     for device in targets
                 }
-            return results, logs
+            return results
         else:
             return self.get_results(payload)
 

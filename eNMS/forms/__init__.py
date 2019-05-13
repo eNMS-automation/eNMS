@@ -62,7 +62,7 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
             data[property] = form.getlist(property)
         elif field_type == "bool":
             data[property] = property in form
-        elif field_type in field_conversion:
+        elif field_type in field_conversion and property in data:
             data[property] = field_conversion[field_type](form[property])
     return data
 

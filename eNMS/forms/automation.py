@@ -18,6 +18,7 @@ class JobForm(BaseForm):
     description = StringField("Description")
     devices = MultipleInstanceField("Devices", instance_type="Device")
     multiprocessing = BooleanField("Multiprocessing")
+    real_time_update = BooleanField("Real-time Update")
     max_processes = IntegerField("Maximum number of processes", default=50)
     credentials = SelectField(
         "Credentials",

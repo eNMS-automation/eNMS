@@ -11,6 +11,7 @@ from flask_login import current_user
 from werkzeug.wrappers.response import Response
 
 from eNMS.controller import controller
+from eNMS.database import Session
 from eNMS.dispatcher import dispatcher
 from eNMS.forms import form_classes, form_postprocessing
 from eNMS.extensions import bp
@@ -47,6 +48,7 @@ def route(page: str) -> Response:
             request.form = form_postprocessing(request.form)
     # try:
     result = getattr(dispatcher, func)(*args)
+    Session.commit()
     # except Exception as e:
     # result = {"error": str(e)}
     if isinstance(result, Response) or isinstance(result, str):

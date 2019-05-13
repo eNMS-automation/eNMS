@@ -325,7 +325,7 @@ class Service(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{self.id}', {'true' if self.real_time_update else 'false'})">
+            onclick="runJob('{self.id}', {'true' if not self.multiprocessing else 'false'})">
             Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",

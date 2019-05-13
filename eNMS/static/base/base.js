@@ -251,6 +251,10 @@ function createPanel(name, title, id, processing, type, duplicate) {
     },
     dragit: {
       opacity: 0.6,
+      containment: 0,
+    },
+    resizeit: {
+      containment: 0,
     },
   });
 }

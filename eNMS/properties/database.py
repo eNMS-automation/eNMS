@@ -13,7 +13,7 @@ import_classes = [
 
 private_properties: List[str] = ["password", "enable_password"]
 
-dont_track_changes = ["positions"]
+dont_track_changes = ["positions", "logs", "results", "completed", "failed"]
 
 dont_migrate: Dict[str, List[str]] = {
     "Device": ["jobs", "source", "destination", "pools"],

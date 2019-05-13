@@ -148,4 +148,4 @@ class LogFilteringForm(BaseForm):
     time = StringField("Time")
     origin = StringField("Origin")
     severity = StringField("Severity")
-    name = StringField()
+    content = StringField("Content")

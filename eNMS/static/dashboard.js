@@ -307,23 +307,25 @@ function drawDiagrams(objects, type) {
   });
 }
 
-$.each(defaultProperties, function(type, property) {
-  $(`#${type}-properties`).on("change", function() {
-    call(`/counters-${this.value}-${type}`, function(objects) {
-      drawDiagrams(objects, type);
+$(function() {
+  call(`/dashboard_init`, function(result) {
+    for (const type of ["Device", "Link", "User"]) {
+      $(`#count-${type}`).text(result.counters[type]);
+    }
+    for (const type of ["Service", "Workflow", "Task"]) {
+      activeNumber = result.counters[`active-${type}`];
+      $(`#count-${type}`).text(`${result.counters[type]} (${activeNumber})`);
+    }
+    for (const [objects, type] of Object.entries(result.properties)) {
+      drawDiagrams(type, objects);
+    }
+  });
+
+  $.each(defaultProperties, function(type, property) {
+    $(`#${type}-properties`).on("change", function() {
+      call(`/counters-${this.value}-${type}`, function(objects) {
+        drawDiagrams(objects, type);
+      });
     });
   });
-});
-
-call(`/dashboard_init`, function(result) {
-  for (const type of ["Device", "Link", "User"]) {
-    $(`#count-${type}`).text(result.counters[type]);
-  }
-  for (const type of ["Service", "Workflow", "Task"]) {
-    activeNumber = result.counters[`active-${type}`];
-    $(`#count-${type}`).text(`${result.counters[type]} (${activeNumber})`);
-  }
-  for (const [objects, type] of Object.entries(result.properties)) {
-    drawDiagrams(type, objects);
-  }
 });

@@ -3,7 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from wtforms import BooleanField, HiddenField, SelectMultipleField, SelectField
 
 from eNMS.controller import controller
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.forms.services import ValidationForm
@@ -18,7 +18,7 @@ class NapalmGettersService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
-    content_match = Column(String(SMALL_STRING_LENGTH), default="")
+    content_match = Column(String(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)

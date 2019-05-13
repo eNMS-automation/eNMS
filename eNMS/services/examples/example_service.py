@@ -53,7 +53,7 @@ class ExampleService(Service):
     # the "a_list" property will be displayed as a multiple selection list
     # list, with the values contained in "a_list_values".
     a_list = Column(MutableList.as_mutable(PickleType))
-    # Text area where a python dictionnary is expected
+    # Text area where a python dictionary is expected
     a_dict = Column(MutableDict.as_mutable(PickleType))
     # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
     boolean1 = Column(Boolean, default=False)
@@ -71,7 +71,7 @@ class ExampleService(Service):
         # self.boolean1, etc)
         # You can look at how default services (netmiko, napalm, etc.) are
         # implemented in the /services subfolders (/netmiko, /napalm, etc).
-        # "results" is a dictionnary that will be displayed in the logs.
+        # "results" is a dictionary that will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.
         # In a workflow, the "success" value will determine whether to move

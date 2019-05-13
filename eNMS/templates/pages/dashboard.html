@@ -11,27 +11,27 @@
     <div class="row tile_count">
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>
-        <div class="count">{{ counters['Device'] }}</div>
+        <div id="count-Device" class="count"></div>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-clock-o"></i> Links</span>
-        <div class="count">{{ counters['Link'] }}</div>
+        <div id="count-Link" class="count"></div>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> Services (Currently running)</span>
-        <div class="count">{{ counters['Service'] }} ({{ counters['Running services'] }})</div>
+        <div id="count-Service" class="count"></div>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> Workflows (Currently running)</span>
-        <div class="count">{{ counters['Workflow'] }} ({{ counters['Running workflows'] }})</div>
+        <div id="count-Workflow" class="count"></div>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> Tasks (Currently scheduled)</span>
-        <div class="count">{{ counters['Task'] }} ({{ counters['Scheduled tasks'] }})</div>
+        <div id="count-Task" class="count"></div>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> Users</span>
-        <div class="count">{{ counters['User'] }}</div>
+        <div id="count-User" class="count"></div>
       </div>
     </div>
     <div class="row">
@@ -61,8 +61,5 @@
 {% block javascripts %}
   {{ super()}}
   <script src="{{ url_for('static', filename='lib/dashboard/echarts.min.js') }}"></script>
-  <script>
-    const counters = {{ counters|tojson|safe }};
-  </script>
   <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
 {% endblock javascripts %}

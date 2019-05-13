@@ -2,6 +2,8 @@ from typing import Dict, List
 
 from eNMS import controller
 
+diagram_classes = ["Device", "Link", "User", "Service", "Workflow", "Task"]
+
 object_properties: List[str] = ["model", "vendor", "subtype", "location"]
 
 device_properties: List[str] = (

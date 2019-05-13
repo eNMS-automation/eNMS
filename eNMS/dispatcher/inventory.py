@@ -25,7 +25,7 @@ from eNMS.database.functions import (
     Session,
 )
 from eNMS.models import models
-from eNMS.properties.diagram import type_to_diagram_properties
+from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 from eNMS.properties.table import filtering_properties, table_properties
 
 
@@ -71,17 +71,26 @@ class InventoryDispatcher:
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
     def dashboard(self) -> dict:
-        return dict(
-            properties=type_to_diagram_properties,
-            counters={
-                **{cls: count(cls) for cls in models},
+        return dict(properties=type_to_diagram_properties)
+
+    def dashboard_init(self) -> dict:
+        return {
+            "counters": {
+                **{cls: count(cls) for cls in diagram_classes},
                 **{
                     "Running services": count("Service", status="Running"),
                     "Running workflows": count("Workflow", status="Running"),
                     "Scheduled tasks": count("Task", status="Active"),
                 },
             },
-        )
+            "properties": {
+                cls: Counter(
+                    str(getattr(instance, type_to_diagram_properties[cls][0]))
+                    for instance in fetch_all(cls)
+                )
+                for cls in diagram_classes
+            },
+        }
 
     def export_topology(self) -> None:
         workbook = Workbook()

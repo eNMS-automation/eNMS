@@ -1,7 +1,7 @@
 <form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" autocomplete="off">
   {{ form.csrf_token() }}
   {{ form.form_type() }}
-  <div class="modal-body" style="height:100%;">
+  <div class="modal-body">
     <fieldset>
       <div class="item">
         {{ form.replace() }}

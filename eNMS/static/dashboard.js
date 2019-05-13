@@ -238,6 +238,7 @@ function drawDiagrams(objects, type) {
       name: key,
     });
   }
+
   const link = echarts.init(document.getElementById(type), theme);
   link.setOption({
     tooltip: {
@@ -315,5 +316,14 @@ $.each(defaultProperties, function(type, property) {
 });
 
 call(`/dashboard_init`, function(result) {
-  console.log(result)
+  for (const type of ["Device", "Link", "User"]) {
+    $(`#count-${type}`).text(result.counters[type]);
+  }
+  for (const type of ["Service", "Workflow", "Task"]) {
+    activeNumber = result.counters[`active-${type}`];
+    $(`#count-${type}`).text(`${result.counters[type]} (${activeNumber})`);
+  }
+  for (const [objects, type] of Object.entries(result.properties)) {
+    drawDiagrams(type, objects);
+  }
 });

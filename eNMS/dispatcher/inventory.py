@@ -78,9 +78,9 @@ class InventoryDispatcher:
             "counters": {
                 **{cls: count(cls) for cls in diagram_classes},
                 **{
-                    "Running services": count("Service", status="Running"),
-                    "Running workflows": count("Workflow", status="Running"),
-                    "Scheduled tasks": count("Task", status="Active"),
+                    "active-Service": count("Service", status="Running"),
+                    "active-Workflow": count("Workflow", status="Running"),
+                    "active-Task": count("Task", status="Active"),
                 },
             },
             "properties": {

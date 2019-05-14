@@ -57,7 +57,6 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         self.app = app
         self.config.update(app.config)
         self.path = app.path
-        self.create_default_parameters()
         self.create_google_earth_styles()
         self.configure_logs()
 

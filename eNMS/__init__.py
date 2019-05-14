@@ -54,6 +54,7 @@ def configure_database(app: Flask) -> None:
         Base.metadata.create_all(bind=engine)
         configure_mappers()
         configure_events()
+        controller.create_default_parameters()
         create_default(app)
         if controller.config["CREATE_EXAMPLES"]:
             create_examples(app)

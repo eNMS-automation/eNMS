@@ -90,9 +90,6 @@ class AutomationController:
             )
         return new_workflow.serialized
 
-    def get_git_content(self) -> None:
-        self.get_git_content()
-
     def get_job_logs(self, id: int) -> dict:
         job = fetch("Job", id=id)
         return {"logs": job.logs, "running": job.is_running}

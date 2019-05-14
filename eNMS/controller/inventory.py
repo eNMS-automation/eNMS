@@ -110,7 +110,7 @@ class InventoryController:
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):
-            repo = getattr(self, f"git_{repository_type}")
+            repo = getattr(self.parameters, f"git_{repository_type}")
             if not repo:
                 continue
             local_path = self.path / "git" / repository_type

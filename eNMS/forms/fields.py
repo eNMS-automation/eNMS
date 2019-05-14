@@ -25,6 +25,7 @@ class DictField(StringField):
 class InstanceField(SelectField):
     def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
         instance_type = kwargs.pop("instance_type")
+        kwargs["coerce"] = int
         super().__init__(*args, **kwargs)
         self.choices = choices(instance_type)
 

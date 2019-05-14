@@ -110,7 +110,7 @@ class LogAutomationForm(BaseForm):
 
 
 class TaskForm(BaseForm):
-    template = "base"
+    template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
     is_active = BooleanField("Is Active")

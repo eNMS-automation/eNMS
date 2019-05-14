@@ -399,7 +399,7 @@ class Service(Job):
             success = self.match_dictionary(result, match)
         return success if not self.negative_logic else not success
 
-    def sub(input, variables: dict) -> dict:
+    def sub(self, input, variables: dict) -> dict:
         r = compile("{{(.*?)}}")
 
         def replace(match) -> str:

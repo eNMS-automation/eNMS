@@ -119,12 +119,12 @@ function refreshLogs(firstTime, id) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function showLogs(id) {
+function showLogs(id, name) {
   if ($(`#logs-${id}`).length == 0) {
     jsPanel.create({
       theme: "dark filled",
       border: "medium",
-      headerTitle: "Logs",
+      headerTitle: `Logs - ${name}`,
       position: "center-top 0 58",
       contentSize: "650 600",
       contentOverflow: "hidden scroll",

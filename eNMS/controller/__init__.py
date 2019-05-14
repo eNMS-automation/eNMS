@@ -19,6 +19,7 @@ from typing import Any, Set
 from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.default import DefaultController
+from eNMS.controller.examples import ExamplesController
 from eNMS.controller.inventory import InventoryController
 from eNMS.database.functions import count, factory, fetch_all, get_one
 from eNMS.models import models
@@ -29,6 +30,7 @@ class Controller(
     AdministrationController,
     AutomationController,
     DefaultController,
+    ExamplesController,
     InventoryController,
 ):
 
@@ -59,12 +61,18 @@ class Controller(
         if self.USE_VAULT:
             self.configure_vault_client()
 
-    def init_app(self, app: Flask) -> None:
+    def initialize_app(self, app: Flask) -> None:
         self.app = app
         self.config.update(app.config)
         self.path = app.path
         self.create_google_earth_styles()
         self.configure_logs()
+
+    def initialize_database(self):
+        self.create_default_parameters()
+        self.create_default()
+        if self.config["CREATE_EXAMPLES"]:
+            self.create_examples()
 
     @property
     def parameters(self):

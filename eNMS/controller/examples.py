@@ -33,7 +33,7 @@ class ExamplesController:
 
     def create_network_topology(self) -> None:
         with open(self.path / "projects" / "usa.xls", "rb") as file:
-            controller.topology_import(file)
+            self.topology_import(file)
 
     def create_example_services(self) -> None:
         for service in (
@@ -411,11 +411,11 @@ class ExamplesController:
             workflow.jobs[index].positions["Workflow_of_workflows"] = x * 10, y * 10
 
     def create_examples(self) -> None:
-        create_example_pools()
-        create_network_topology()
-        create_example_services()
-        create_netmiko_workflow()
-        create_napalm_workflow()
-        create_payload_transfer_workflow()
-        create_workflow_of_workflows()
+        self.create_example_pools()
+        self.create_network_topology()
+        self.create_example_services()
+        self.create_netmiko_workflow()
+        self.create_napalm_workflow()
+        self.create_payload_transfer_workflow()
+        self.create_workflow_of_workflows()
         Session.commit()

@@ -13,7 +13,6 @@ from eNMS.config import Config
 from eNMS.controller import controller
 from eNMS.database import Base, engine, Session
 from eNMS.database.events import configure_events
-from eNMS.database.examples import create_examples
 from eNMS.database.functions import fetch, get_one
 from eNMS.forms import form_properties, property_types
 from eNMS.extensions import assets, bp, cache, csrf, login_manager, mail_client, toolbar
@@ -34,7 +33,7 @@ def register_modules(app: Flask) -> None:
     login_manager.init_app(app)
     mail_client.init_app(app)
     toolbar.init_app(app)
-    controller.init_app(app)
+    controller.initialize_app(app)
 
 
 def configure_login_manager(app: Flask) -> None:
@@ -53,10 +52,7 @@ def configure_database(app: Flask) -> None:
         Base.metadata.create_all(bind=engine)
         configure_mappers()
         configure_events()
-        controller.create_default_parameters()
-        controller.create_default()
-        if controller.config["CREATE_EXAMPLES"]:
-            create_examples(app)
+        controller.initialize_database()
 
     @app.teardown_appcontext
     def cleanup(exc_or_none: Optional[Exception]) -> None:

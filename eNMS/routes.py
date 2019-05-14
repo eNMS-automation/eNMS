@@ -75,11 +75,14 @@ def filtering(table: str) -> dict:
 
 @bp.route("/form-<form_type>")
 def form(form_type: str) -> dict:
-    return dict(
-        action=form_actions.get(form_type),
-        form=form_classes.get(form_type, FlaskForm)(request.form),
-        form_type=form_type,
-        template=f"forms/{form_templates.get(form_type, 'base')}_form",
+    return render_template(
+        f"forms/{form_templates.get(form_type, 'base')}_form.html"
+        ** {
+            "endpoint": "dashboard",
+            "action": form_actions.get(form_type),
+            "form": form_actions.get(form_type),
+            "form_type": form_type,
+        }
     )
 
 
@@ -105,7 +108,7 @@ def table(table_type: str) -> dict:
 @bp.route("/dashboard")
 def dashboard() -> dict:
     return render_template(
-        f"dashboard.html",
+        f"pages/dashboard.html",
         **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
     )
 

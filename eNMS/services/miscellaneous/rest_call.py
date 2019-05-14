@@ -74,10 +74,14 @@ class RestCallService(Service):
                 "response": response.text,
             }
         result = response.json()
-        match = self.sub(self.content_match, locals())
+        match = (
+            self.sub(self.content_match, locals())
+            if self.validation_method == "text"
+            else self.sub(self.dict_match, locals())
+        )
         return {
             "url": rest_url,
-            "match": match if self.validation_method == "text" else self.dict_match,
+            "match": match,
             "negative_logic": self.negative_logic,
             "result": result,
             "success": self.match_content(result, match),

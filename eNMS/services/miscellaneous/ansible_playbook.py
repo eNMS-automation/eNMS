@@ -55,13 +55,17 @@ class AnsiblePlaybookService(Service):
             result = loads(result)
         except JSONDecodeError:
             pass
+        match = (
+            self.sub(self.content_match, locals())
+            if self.validation_method == "text"
+            else self.sub(self.dict_match, locals())
+        )
         if self.validation_method == "text":
-            success = self.match_content(
-                str(result), self.sub(self.content_match, locals())
-            )
+            success = self.match_content(str(result), match)
         else:
-            success = self.match_dictionary(result)
+            success = self.match_dictionary(result, match)
         return {
+            "match": match,
             "negative_logic": self.negative_logic,
             "result": result,
             "success": success,

@@ -27,7 +27,7 @@ class MattermostNotificationService(Service):
         result = post(
             parameters.mattermost_url,
             verify=parameters.mattermost_verify_certificate,
-            data=dumps({"channel": channel, "text": self.body}),
+            data=dumps({"channel": channel, "text": self.sub(self.body, locals())}),
         )
         return {"success": True, "result": str(result)}
 

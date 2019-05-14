@@ -24,7 +24,7 @@ class NetmikoFileTransferService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     source_file = Column(String(SMALL_STRING_LENGTH), default="")
-    dest_file = Column(String(SMALL_STRING_LENGTH), default="")
+    destination_file = Column(String(SMALL_STRING_LENGTH), default="")
     direction = Column(String(SMALL_STRING_LENGTH), default="")
     disable_md5 = Column(Boolean, default=False)
     driver = Column(String(SMALL_STRING_LENGTH), default="")
@@ -41,10 +41,12 @@ class NetmikoFileTransferService(Service):
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         self.logs.append("Transferring file {self.source_file} on {device.name}")
+        source = self.sub(self.source_file, locals())
+        destination = self.sub(self.destination_file, locals())
         transfer_dict = file_transfer(
             netmiko_handler,
-            source_file=self.source_file,
-            dest_file=self.dest_file,
+            source_file=source,
+            dest_file=destination,
             file_system=self.file_system,
             direction=self.direction,
             overwrite_file=self.overwrite_file,
@@ -58,7 +60,7 @@ class NetmikoFileTransferService(Service):
 class NetmikoFileTransferForm(ServiceForm):
     form_type = HiddenField(default="NetmikoFileTransferService")
     source_file = StringField(validators=[InputRequired()])
-    dest_file = StringField(validators=[InputRequired()])
+    destination_file = StringField(validators=[InputRequired()])
     file_system = StringField()
     direction = SelectField(choices=(("put", "Upload"), ("get", "Download")))
     driver = SelectField(choices=controller.NETMIKO_SCP_DRIVERS)

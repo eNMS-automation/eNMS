@@ -26,7 +26,7 @@ class SlackNotificationService(Service):
         channel = self.channel or parameters.slack_channel
         self.logs.append(f"Sending Slack notification on {channel}")
         result = slack_client.api_call(
-            "chat.postMessage", channel=channel, text=self.body
+            "chat.postMessage", channel=channel, text=self.sub(self.body, locals())
         )
         return {"success": True, "result": str(result)}
 

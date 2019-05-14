@@ -26,9 +26,6 @@ class GenericFileTransferService(Service):
     load_known_host_keys = Column(Boolean, default=False)
     look_for_keys = Column(Boolean, default=False)
     source_file_includes_globbing = Column(Boolean, default=False)
-    source_file_includes_globbing_name = (
-        "Source file includes glob pattern (Put Direction only)"
-    )
 
     __mapper_args__ = {"polymorphic_identity": "GenericFileTransferService"}
 
@@ -38,17 +35,17 @@ class GenericFileTransferService(Service):
             ssh_client.set_missing_host_key_policy(AutoAddPolicy())
         if self.load_known_host_keys:
             ssh_client.load_system_host_keys()
-        source_file = self.sub(self.source_file, locals())
-        self.logs.append("Transferring file {source_file} on {device.name}")
-        success, result = True, f"File {source_file} transferred successfully"
+        source = self.sub(self.source_file, locals())
+        destination = self.sub(self.destination_file, locals())
+        self.logs.append("Transferring file {source} on {device.name}")
+        success, result = True, f"File {source} transferred successfully"
         ssh_client.connect(
             device.ip_address,
             username=device.username,
             password=device.password,
             look_for_keys=self.look_for_keys,
         )
-        source = self.sub(self.source_file, locals())
-        destination = self.sub(self.destination_file, locals())
+
         if self.source_file_includes_globbing:
             glob_source_file_list = glob(source, recursive=False)
             if not glob_source_file_list:
@@ -65,11 +62,7 @@ class GenericFileTransferService(Service):
                 info(f"Preparing to transfer glob file {glob_source}")
                 self.transfer_file(ssh_client, pairs)
         else:
-            self.transfer_file(
-                ssh_client,
-                self.sub(self.source_file, locals()),
-                self.sub(self.destination_file, locals()),
-            )
+            self.transfer_file(ssh_client, source, destination)
         ssh_client.close()
         return {"success": success, "result": result}
 

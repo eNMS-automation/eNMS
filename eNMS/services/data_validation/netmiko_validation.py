@@ -54,10 +54,14 @@ class NetmikoValidationService(Service):
         command = self.sub(self.command, locals())
         self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
         result = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
-        match = self.sub(self.content_match, locals())
+        match = (
+            self.sub(self.content_match, locals())
+            if self.validation_method == "text"
+            else self.sub(self.dict_match, locals())
+        )
         netmiko_handler.disconnect()
         return {
-            "match": match if self.validation_method == "text" else self.dict_match,
+            "match": match,
             "negative_logic": self.negative_logic,
             "result": result,
             "success": self.match_content(result, match),

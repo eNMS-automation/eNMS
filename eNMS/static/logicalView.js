@@ -8,6 +8,8 @@ vis: false
 */
 
 let selected; // eslint-disable-line no-unused-vars
+let logicalDevices = [];
+let logicalLinks = [];
 
 /**
  * Convert device to Vis node.
@@ -15,12 +17,14 @@ let selected; // eslint-disable-line no-unused-vars
  * @return {node}
  */
 function deviceToNode(device) {
-  return {
+  logicalDevice = {
     id: device.id,
     label: device.name,
     image: `/static/images/2D/${device.subtype}.gif`,
     shape: "image",
   };
+  logicalDevices[device.id] = device;
+  return logicalDevice;
 }
 
 /**
@@ -29,11 +33,13 @@ function deviceToNode(device) {
  * @return {edge}
  */
 function linkToEdge(link) {
-  return {
+  logicalLink = {
     id: link.id,
     from: link.source_id,
     to: link.destination_id,
-  };
+  }
+  logicalLinks[link.id] = link;
+  return logicalLink;
 }
 
 /**
@@ -90,9 +96,9 @@ function displayPool(poolId, nodes, edges) {
     if (typeof node !== "undefined") {
       $(".menu").hide();
       $(".rc-device-menu").show();
-      selected = node;
+      selected = logicalDevices[node];
     } else if (typeof edge !== "undefined") {
-      selected = edge;
+      selected = LogicalLinks[edge];
       $(".menu").hide();
       $(".rc-link-menu").show();
     } else {

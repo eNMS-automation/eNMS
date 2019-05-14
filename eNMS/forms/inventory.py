@@ -13,6 +13,7 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField, InstanceField
 from eNMS.properties.objects import (
     device_subtypes,
+    link_subtypes,
     pool_link_properties,
     pool_device_properties,
 )

@@ -25,7 +25,13 @@ from eNMS.database import Session
 from eNMS.database.functions import factory, fetch_all
 from eNMS.models import property_types
 from eNMS.properties import field_conversion, property_names
-from eNMS.properties.objects import device_subtypes, link_colors, link_subtypes
+from eNMS.properties.objects import (
+    device_properties,
+    device_subtypes,
+    link_colors,
+    link_subtypes,
+    pool_device_properties,
+)
 
 
 class Controller:
@@ -193,7 +199,7 @@ class Controller:
             self.google_earth_styles[subtype] = point_style
         for subtype in link_subtypes:
             line_style = Style()
-            color = self.link_colors[subtype]
+            color = link_colors[subtype]
             kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]
             line_style.linestyle.color = kml_color
             self.google_earth_styles[subtype] = line_style
@@ -245,6 +251,8 @@ class Controller:
         property_names.update(
             {k: v["property_name"] for k, v in custom_properties.items()}
         )
+        for object_properties in (device_properties, pool_device_properties):
+            object_properties.extend(list(custom_properties))
         return custom_properties
 
     def str_dict(self, input: Any, depth: int = 0) -> str:

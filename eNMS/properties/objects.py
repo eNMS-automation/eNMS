@@ -1,7 +1,5 @@
 from typing import Dict, List
 
-from eNMS import controller
-
 device_subtypes: Dict[str, str] = {
     "antenna": "Antenna",
     "firewall": "Firewall",
@@ -40,7 +38,7 @@ object_common_properties: List[str] = [
     "vendor",
 ]
 
-device_properties = list(controller.custom_properties) + [
+device_properties = [
     "operating_system",
     "os_version",
     "netmiko_driver",

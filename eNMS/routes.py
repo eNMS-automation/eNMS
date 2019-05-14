@@ -39,7 +39,7 @@ def site_root() -> Response:
     return redirect(url_for("bp.route", page="login"))
 
 
-@bp.route("/filtering")
+@bp.route("/filtering-<table>")
 def filtering(table: str) -> dict:
     model = models.get(table, models["Device"])
     properties = table_properties[table]
@@ -58,22 +58,24 @@ def filtering(table: str) -> dict:
         pools = [int(id) for id in request.args.getlist("form[pools][]")]
         if pools:
             result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
-    return {
-        "jsonify": True,
-        "draw": int(request.args["draw"]),
-        "recordsTotal": len(Session.query(model).all()),
-        "recordsFiltered": len(result.all()),
-        "data": [
-            [getattr(obj, property) for property in properties]
-            + obj.generate_row(table)
-            for obj in result.limit(int(request.args["length"]))
-            .offset(int(request.args["start"]))
-            .all()
-        ],
-    }
+    return jsonify(
+        {
+            "draw": int(request.args["draw"]),
+            "recordsTotal": len(Session.query(model).all()),
+            "recordsFiltered": len(result.all()),
+            "data": [
+                [getattr(obj, property) for property in properties]
+                + obj.generate_row(table)
+                for obj in result.limit(int(request.args["length"]))
+                .offset(int(request.args["start"]))
+                .all()
+            ],
+        }
+    )
 
 
 @bp.route("/form-<form_type>")
+@cache.cached(timeout=0)
 def form(form_type: str) -> dict:
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html"
@@ -87,13 +89,13 @@ def form(form_type: str) -> dict:
 
 
 @bp.route("/table-<table_type>")
+@cache.cached(timeout=0)
 def table(table_type: str) -> dict:
-    table_dict = dict(
-        properties=table_properties[table_type],
-        fixed_columns=table_fixed_columns[table_type],
-        type=table_type,
-        template="pages/table",
-    )
+    table_dict = {
+        "properties": table_properties[table_type],
+        "fixed_columns": table_fixed_columns[table_type],
+        "type": table_type,
+    }
     if table_type == "service":
         service_table_form = ServiceTableForm(request.form)
         service_table_form.services.choices = [
@@ -102,10 +104,13 @@ def table(table_type: str) -> dict:
             if service != "Service" and service.endswith("Service")
         ]
         table_dict["service_table_form"] = service_table_form
-    return table_dict
+    return render_template(
+        f"pages/table.html", **{"endpoint": "dashboard", **table_dict}
+    )
 
 
 @bp.route("/dashboard")
+@cache.cached(timeout=0)
 def dashboard() -> dict:
     return render_template(
         f"pages/dashboard.html",
@@ -114,12 +119,14 @@ def dashboard() -> dict:
 
 
 @bp.route("/workflow_builder")
+@cache.cached(timeout=0)
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
     return dict(workflow=workflow.serialized if workflow else None)
 
 
 @bp.route("/calendar")
+@cache.cached(timeout=0)
 def calendar() -> dict:
     return {}
 
@@ -139,6 +146,7 @@ def download_configuration(name: str) -> Response:
 
 
 @bp.route("/administration")
+@cache.cached(timeout=0)
 def administration() -> dict:
     return render_template(
         f"administration.html",
@@ -214,8 +222,7 @@ def logout() -> Response:
     return redirect(url_for("bp.route", page="login"))
 
 
-@bp.route("/<page>", methods=["GET", "POST"])
-@cache.cached(timeout=0, unless=controller.unless_cache)
+@bp.route("/<page>", methods=["POST"])
 def route(page: str) -> Response:
     if not current_user.is_authenticated:
         controller.log(
@@ -225,27 +232,18 @@ def route(page: str) -> Response:
                 f"'{request.remote_addr}' calling the endpoint '{request.url}'"
             ),
         )
-        if request.method == "POST":
-            return dispatcher.login() if page == "login" else False
-        if request.method == "GET" and page != "login":
-            return current_app.login_manager.unauthorized()
+        return False
     func, *args = page.split("-")
-
-    if request.method == "POST":
-        form_type = request.form.get("form_type")
-        if form_type:
-            form = form_classes[form_type](request.form)
-            if not form.validate_on_submit():
-                return jsonify({"invalid_form": True, **{"errors": form.errors}})
-            request.form = form_postprocessing(request.form)
+    form_type = request.form.get("form_type")
+    if form_type:
+        form = form_classes[form_type](request.form)
+        if not form.validate_on_submit():
+            return jsonify({"invalid_form": True, **{"errors": form.errors}})
+        request.form = form_postprocessing(request.form)
     # try:
     # if not hasattr(dispatcher, func):
     #    abort(404)
-    result = getattr(controller, func)(*args)
+    result = jsonify(getattr(controller, func)(*args))
     Session.commit()
     # except Exception as e:
     # result = {"error": str(e)}
-    if isinstance(result, Response) or isinstance(result, str):
-        return result
-    elif request.method == "POST" or func == "filtering":
-        return jsonify(result)

@@ -227,7 +227,7 @@ function createNode(node, nodeType) {
   marker.on("contextmenu", function(e) {
     $(".menu").hide();
     $(`.rc-${nodeType}-menu`).show();
-    selectedObject = node.id; // eslint-disable-line no-undef
+    selectedObject = node; // eslint-disable-line no-undef
   });
   if (currentView == "2D") {
     marker.addTo(map);
@@ -262,7 +262,7 @@ function createLink2d(link) {
   polyline.on("contextmenu", function(e) {
     $(".menu").hide();
     $(".rc-link-menu").show();
-    selectedObject = this.link_id; // eslint-disable-line no-undef
+    selectedObject = this.link; // eslint-disable-line no-undef
   });
   polyline.bindTooltip(link.name, {
     permanent: false,

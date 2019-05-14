@@ -158,10 +158,10 @@ function updatePool(pool) {
 }
 
 Object.assign(action, {
-  "Device properties": (d) => showTypePanel("device", d),
-  "Link properties": (l) => showTypePanel("link", l),
-  "Pool properties": (p) => showTypePanel("pool", p),
-  Connect: (id) => showPanel("connection", id),
-  Configuration: (id) => showConfigurationPanel('{self.id}'),
-  Automation: (id) => showPanel("device_automation", id),
+  "Device properties": (d) => showTypePanel("device", d.id),
+  "Link properties": (l) => showTypePanel("link", l.id),
+  "Pool properties": (p) => showTypePanel("pool", p.id),
+  Connect: (d) => showPanel("connection", d.id),
+  Configuration: (d) => showConfigurationPanel(d.id, d.name),
+  Automation: (d) => showPanel("device_automation", d.id),
 });

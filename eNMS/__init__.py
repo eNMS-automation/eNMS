@@ -30,10 +30,10 @@ def register_modules(app: Flask) -> None:
     app.register_blueprint(bp)
     assets.init_app(app)
     cache.init_app(app)
-    login_manager.init_app(app)
-    mail_client.init_app(app)
     csrf.init_app(app)
     FlaskCLI(app)
+    login_manager.init_app(app)
+    mail_client.init_app(app)
     toolbar.init_app(app)
     controller.init_app(app)
 

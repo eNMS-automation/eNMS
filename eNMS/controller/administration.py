@@ -12,9 +12,7 @@ from requests import get as http_get
 from werkzeug.wrappers import Response
 from yaml import dump, load, BaseLoader
 
-from eNMS.controller import controller
 from eNMS.database.default import create_default
-from eNMS.forms.administration import LoginForm
 from eNMS.database.functions import (
     delete_all,
     export,
@@ -27,8 +25,8 @@ from eNMS.database.functions import (
 
 class AdministrationController:
     def database_helpers(self) -> None:
-        delete_all(*request.form["deletion_types"])
-        clear_logs_date = request.form["clear_logs_date"]
+        delete_all(*parameters["deletion_types"])
+        clear_logs_date = parameters["clear_logs_date"]
         if clear_logs_date:
             clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
             for job in fetch_all("Job"):
@@ -45,23 +43,21 @@ class AdministrationController:
         }
 
     def migration_export(self) -> None:
-        for cls_name in request.form["import_export_types"]:
-            path = current_app.path / "migrations" / request.form["name"]
+        for cls_name in parameters["import_export_types"]:
+            path = current_app.path / "migrations" / parameters["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 dump(export(cls_name), migration_file, default_flow_style=False)
 
     def migration_import(self) -> str:
-        status, types = "Import successful.", request.form["import_export_types"]
+        status, types = "Import successful.", parameters["import_export_types"]
         workflows: list = []
         edges: list = []
-        if request.form.get("empty_database_before_import", False):
+        if parameters.get("empty_database_before_import", False):
             delete_all(*types)
         for cls in types:
-            path = (
-                current_app.path / "migrations" / request.form["name"] / f"{cls}.yaml"
-            )
+            path = current_app.path / "migrations" / parameters["name"] / f"{cls}.yaml"
             with open(path, "r") as migration_file:
                 objects = load(migration_file, Loader=BaseLoader)
                 if cls == "Workflow":
@@ -102,13 +98,13 @@ class AdministrationController:
             except Exception as e:
                 info(f"{str(edge)} could not be imported ({str(e)})")
                 status = "Partial import (see logs)."
-        if request.form.get("empty_database_before_import", False):
+        if parameters.get("empty_database_before_import", False):
             create_default(current_app)
         return status
 
     def save_parameters(self, parameter_type: str) -> None:
         parameters = get_one("Parameters")
-        parameters.update(**request.form)
+        parameters.update(**parameters)
         if parameter_type == "git":
             parameters.get_git_content(current_app)
 
@@ -121,7 +117,7 @@ class AdministrationController:
                     f"{protocol}://{ip_address}/rest/is_alive",
                     timeout=parameters.cluster_scan_timeout,
                 ).json()
-                if controller.config["CLUSTER_ID"] != server.pop("cluster_id"):
+                if self.config["CLUSTER_ID"] != server.pop("cluster_id"):
                     continue
                 factory("Server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:

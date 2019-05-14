@@ -7,8 +7,8 @@ from sqlalchemy.exc import IntegrityError
 from typing import List
 
 from eNMS.database.functions import delete, factory, fetch, fetch_all, Session
-from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.forms import form_actions, form_classes, form_templates
+from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
@@ -19,7 +19,7 @@ from eNMS.properties.table import (
 )
 
 
-class Dispatcher(AdministrationDispatcher):
+class Dispatcher:
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         return delete(cls, id=instance_id)
 

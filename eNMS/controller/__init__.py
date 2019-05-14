@@ -16,13 +16,15 @@ from string import punctuation
 from tacacs_plus.client import TACACSClient
 from typing import Any, Set
 
+from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
 from eNMS.database.functions import count, factory, fetch_all, get_one
+from eNMS.models import models
 from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 
 
-class Controller(AutomationController, InventoryController):
+class Controller(AdministrationController, AutomationController, InventoryController):
 
     cache = [
         "administration",
@@ -55,12 +57,26 @@ class Controller(AutomationController, InventoryController):
         self.app = app
         self.config.update(app.config)
         self.path = app.path
+        self.create_default_parameters()
         self.create_google_earth_styles()
         self.configure_logs()
 
     @property
     def parameters(self):
         return get_one("Parameters")
+
+    def create_default_parameters(self) -> None:
+        if not get_one("Parameters"):
+            parameters = models["Parameters"]()
+            parameters.update(
+                **{
+                    property: self.config[property.upper()]
+                    for property in model_properties["Parameters"]
+                    if property.upper() in self.config
+                }
+            )
+            Session.add(parameters)
+            Session.commit()
 
     def unless_cache(self, *args, **kwargs):
         page = kwargs["page"].split("-")[0]

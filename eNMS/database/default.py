@@ -1,7 +1,6 @@
 from flask import Flask
 from uuid import getnode
 
-from eNMS.controller import controller
 from eNMS.database.functions import factory, fetch, get_one, Session
 from eNMS.models import models, model_properties
 
@@ -48,20 +47,6 @@ def create_default_pools() -> None:
         },
     ):
         factory("Pool", **pool)
-
-
-def create_default_parameters(app: Flask) -> None:
-    if not get_one("Parameters"):
-        parameters = models["Parameters"]()
-        parameters.update(
-            **{
-                property: controller.config[property.upper()]
-                for property in model_properties["Parameters"]
-                if property.upper() in controller.config
-            }
-        )
-        Session.add(parameters)
-        Session.commit()
 
 
 def create_default_services() -> None:
@@ -162,7 +147,7 @@ def create_default_tasks(app: Flask) -> None:
             "description": "Monitor eNMS cluster",
             "job": fetch("Service", name="cluster_monitoring").id,
             "frequency": 15,
-            "is_active": controller.config["CLUSTER"],
+            "is_active": False,
         },
     ]
     for task in tasks:

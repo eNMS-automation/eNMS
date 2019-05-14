@@ -48,7 +48,7 @@ class LogBackupService(Service):
             password=device.password,
             look_for_keys=False,
         )
-        destination = f"{self.destination_path}/logs_{now}.tgz"
+        destination = f"{self.sub(self.destination_path, locals())}/logs_{now}.tgz"
         self.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
         if self.delete_folder:

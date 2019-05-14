@@ -396,7 +396,7 @@ class Service(Job):
                 and not self.content_match_regex
             )
         else:
-            success = self.match_dictionary(result)
+            success = self.match_dictionary(result, match)
         return success if not self.negative_logic else not success
 
     def sub(input, variables: dict) -> dict:
@@ -417,12 +417,10 @@ class Service(Job):
 
         return rec(input)
 
-    def match_dictionary(self, result: dict, match: Optional[dict] = None) -> bool:
+    def match_dictionary(self, result: dict, match: dict) -> bool:
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:
-            if match is None:
-                match = deepcopy(self.dict_match)
             for k, v in result.items():
                 if isinstance(v, dict):
                     self.match_dictionary(v, match)

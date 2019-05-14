@@ -41,10 +41,14 @@ class NapalmGettersService(Service):
                 result[getter] = getattr(napalm_driver, getter)()
             except Exception as e:
                 result[getter] = f"{getter} failed because of {e}"
-        match = self.sub(self.content_match, locals())
+        match = (
+            self.sub(self.content_match, locals())
+            if self.validation_method == "text"
+            else self.sub(self.dict_match, locals())
+        )
         napalm_driver.close()
         return {
-            "match": match if self.validation_method == "text" else self.dict_match,
+            "match": match,
             "negative_logic": self.negative_logic,
             "result": result,
             "success": self.match_content(result, match),

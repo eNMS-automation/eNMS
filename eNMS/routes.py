@@ -23,7 +23,7 @@ def site_root() -> Response:
 
 
 @bp.route("/<page>", methods=["GET", "POST"])
-@cache.cached(timeout=60, unless=controller.unless_cache)
+@cache.cached(timeout=0, unless=controller.unless_cache)
 def route(page: str) -> Response:
     if not current_user.is_authenticated:
         controller.log(

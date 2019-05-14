@@ -8,10 +8,10 @@ from typing import List
 from eNMS.database.functions import delete, factory, fetch, fetch_all, Session
 from eNMS.dispatcher.administration import AdministrationDispatcher
 from eNMS.dispatcher.automation import AutomationDispatcher
-from eNMS.dispatcher.inventory import InventoryDispatcher
 from eNMS.forms import form_actions, form_classes, form_templates
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
+from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 from eNMS.properties.table import (
     filtering_properties,
     table_fixed_columns,
@@ -19,7 +19,7 @@ from eNMS.properties.table import (
 )
 
 
-class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispatcher):
+class Dispatcher(AutomationDispatcher, AdministrationDispatcher):
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         return delete(cls, id=instance_id)
 
@@ -94,6 +94,9 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
             return {"error": "Invalid JSON syntax (JSON field)"}
         except IntegrityError:
             return {"error": "An object with the same name already exists"}
+
+    def dashboard(self) -> dict:
+        return dict(properties=type_to_diagram_properties)
 
 
 dispatcher = Dispatcher()

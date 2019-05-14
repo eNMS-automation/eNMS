@@ -1,4 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+from collections import Counter
 from datetime import datetime
 from flask import Flask
 from hvac import Client as VaultClient
@@ -17,7 +18,7 @@ from typing import Any, Set
 
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
-from eNMS.database.functions import factory, get_one
+from eNMS.database.functions import count, factory, get_one
 
 
 class Controller(AutomationController, InventoryController):
@@ -145,6 +146,25 @@ class Controller(AutomationController, InventoryController):
         if self.vault_client.sys.is_sealed() and environ.get("UNSEAL_VAULT"):
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
+
+    def count_models(self):
+        return {
+            "counters": {
+                **{cls: count(cls) for cls in diagram_classes},
+                **{
+                    "active-Service": count("Service", status="Running"),
+                    "active-Workflow": count("Workflow", status="Running"),
+                    "active-Task": count("Task", status="Active"),
+                },
+            },
+            "properties": {
+                cls: Counter(
+                    str(getattr(instance, type_to_diagram_properties[cls][0]))
+                    for instance in fetch_all(cls)
+                )
+                for cls in diagram_classes
+            },
+        }
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name

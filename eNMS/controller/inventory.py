@@ -3,14 +3,29 @@ from datetime import datetime
 from difflib import SequenceMatcher
 from logging import info
 from os import environ
+from pynetbox import api as netbox_api
+from requests import get as http_get
+from sqlalchemy import and_
+from subprocess import Popen
 from simplekml import Color, Kml, Style
-from typing import Dict, Union
+from typing import Dict, List, Union
+from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
+from xlwt import Workbook
 from yaml import load, BaseLoader
 
 from eNMS.database import Session
-from eNMS.database.functions import factory, fetch, fetch_all
+from eNMS.database.functions import (
+    count,
+    delete_all,
+    factory,
+    fetch,
+    fetch_all,
+    get_one,
+    objectify,
+    Session,
+)
 from eNMS.models import property_types
 from eNMS.properties import field_conversion, property_names
 from eNMS.properties.objects import (
@@ -73,6 +88,12 @@ class InventoryController:
         ]
         return "\n".join(device_logs)
 
+    def clear_configurations(self, device_id: int) -> None:
+        fetch("Device", id=device_id).configurations = {}
+
+    def counters(self, property: str, type: str) -> Counter:
+        return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
+
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}
         for subtype in device_subtypes:
@@ -106,6 +127,21 @@ class InventoryController:
         filepath = self.app.path / "google_earth" / f'{parameters["name"]}.kmz'
         kml_file.save(filepath)
 
+    def export_topology(self, filename: str) -> None:
+        workbook = Workbook()
+        if "." not in filename:
+            filename += ".xls"
+        for obj_type in ("Device", "Link"):
+            sheet = workbook.add_sheet(obj_type)
+            for index, property in enumerate(table_properties[obj_type]):
+                sheet.write(0, index, property)
+                for obj_index, obj in enumerate(fetch_all(obj_type), 1):
+                    sheet.write(obj_index, index, getattr(obj, property))
+        workbook.save(self.path / "projects" / filename)
+
+    def get_configurations(self, device_id: int) -> dict:
+        return fetch("Device", id=device_id).get_configurations()
+
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")
         if not filepath:
@@ -119,6 +155,74 @@ class InventoryController:
         for object_properties in (device_properties, pool_device_properties):
             object_properties.extend(list(custom_properties))
         return custom_properties
+
+    def query_netbox(self) -> None:
+        nb = netbox_api(parameters["netbox_address"], token=parameters["netbox_token"])
+        for device in nb.dcim.devices.all():
+            device_ip = device.primary_ip4 or device.primary_ip6
+            factory(
+                "Device",
+                **{
+                    "name": device.name,
+                    "ip_address": str(device_ip).split("/")[0],
+                    "subtype": parameters["netbox_type"],
+                    "longitude": 0.0,
+                    "latitude": 0.0,
+                },
+            )
+
+    def query_librenms(self) -> None:
+        devices = http_get(
+            f'{parameters["librenms_address"]}/api/v0/devices',
+            headers={"X-Auth-Token": parameters["librenms_token"]},
+        ).json()["devices"]
+        for device in devices:
+            factory(
+                "Device",
+                **{
+                    "name": device["hostname"],
+                    "ip_address": device["ip"] or device["hostname"],
+                    "subtype": parameters["librenms_type"],
+                    "longitude": 0.0,
+                    "latitude": 0.0,
+                },
+            )
+
+    def query_opennms(self) -> None:
+        parameters = get_one("Parameters")
+        login, password = parameters.opennms_login, parameters["password"]
+        parameters.update(**parameters)
+        Session.commit()
+        json_devices = http_get(
+            parameters.opennms_devices,
+            headers={"Accept": "application/json"},
+            auth=(login, password),
+        ).json()["node"]
+        devices = {
+            device["id"]: {
+                "name": device.get("label", device["id"]),
+                "description": device["assetRecord"].get("description", ""),
+                "location": device["assetRecord"].get("building", ""),
+                "vendor": device["assetRecord"].get("manufacturer", ""),
+                "model": device["assetRecord"].get("modelNumber", ""),
+                "operating_system": device.get("operatingSystem", ""),
+                "os_version": device["assetRecord"].get("sysDescription", ""),
+                "longitude": device["assetRecord"].get("longitude", 0.0),
+                "latitude": device["assetRecord"].get("latitude", 0.0),
+                "subtype": parameters["subtype"],
+            }
+            for device in json_devices
+        }
+        for device in list(devices):
+            link = http_get(
+                f"{parameters.opennms_rest_api}/nodes/{device}/ipinterfaces",
+                headers={"Accept": "application/json"},
+                auth=(login, password),
+            ).json()
+            for interface in link["ipInterface"]:
+                if interface["snmpPrimary"] == "P":
+                    devices[device]["ip_address"] = interface["ipAddress"]
+                    factory("Device", **devices[device])
 
     def topology_import(self, file):
         book = open_workbook(file_contents=file.read())
@@ -144,3 +248,48 @@ class InventoryController:
             pool.compute_pool()
         Session.commit()
         return result
+
+    def import_topology(self) -> str:
+        file = request.files["file"]
+        if parameters["replace"]:
+            delete_all("Device")
+        if controller.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
+            result = controller.topology_import(file)
+        info("Inventory import: Done.")
+        return result
+
+    def save_pool_objects(self, pool_id: int) -> dict:
+        pool = fetch("Pool", id=pool_id)
+        pool.devices = objectify("Device", parameters["devices"])
+        pool.links = objectify("Link", parameters["links"])
+        return pool.serialized
+
+    def update_pools(self, pool_id: str) -> None:
+        if pool_id == "all":
+            for pool in fetch_all("Pool"):
+                pool.compute_pool()
+        else:
+            fetch("Pool", id=int(pool_id)).compute_pool()
+
+    def view(self, view_type: str) -> dict:
+        return dict(template="pages/view", link_colors=link_colors, view_type=view_type)
+
+    def get_view_topology(self) -> dict:
+        return {
+            "devices": [d.view_properties for d in fetch_all("Device")],
+            "links": [d.view_properties for d in fetch_all("Link")],
+        }
+
+    def view_filtering(self, filter_type: str) -> List[dict]:
+        obj_type = filter_type.split("_")[0]
+        model = models[obj_type]
+        constraints = []
+        for property in filtering_properties[obj_type]:
+            value = parameters[property]
+            if value:
+                constraints.append(getattr(model, property).contains(value))
+        result = Session.query(model).filter(and_(*constraints))
+        pools = [int(id) for id in parameters["pools"]]
+        if pools:
+            result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
+        return [d.view_properties for d in result.all()]

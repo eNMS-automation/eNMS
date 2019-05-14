@@ -49,6 +49,7 @@ class TestConfig(DefaultConfig):
 
 
 class DevelopConfig(DefaultConfig):
+    DEVELOP = True
     DEBUG_TB_ENABLED = True
     DEBUG_TB_PROFILER_ENABLED = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False

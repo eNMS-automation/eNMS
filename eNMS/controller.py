@@ -29,7 +29,15 @@ from eNMS.properties import field_conversion, property_names
 
 class Controller:
 
-    cache = ["administration", "dashboard", "form", "view", "table", "workflow_builder"]
+    cache = [
+        "administration",
+        "calendar",
+        "dashboard",
+        "form",
+        "view",
+        "table",
+        "workflow_builder",
+    ]
 
     device_subtypes: Dict[str, str] = {
         "antenna": "Antenna",
@@ -83,11 +91,13 @@ class Controller:
 
     def init_app(self, app: Flask) -> None:
         self.app = app
+        self.config.update(app.config)
         self.create_google_earth_styles()
         self.configure_logs()
 
     def unless_cache(self, *args, **kwargs):
-        return kwargs["page"].split("-")[0] not in self.cache
+        page = kwargs["page"].split("-")[0]
+        return self.config["DEVELOP"] or page not in self.cache
 
     def configure_logs(self) -> None:
         basicConfig(

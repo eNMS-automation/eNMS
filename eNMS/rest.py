@@ -10,7 +10,6 @@ from typing import Optional, Union
 from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
 from eNMS.database.functions import delete, factory, fetch
-from eNMS.dispatcher import dispatcher
 from eNMS.extensions import auth, csrf
 
 
@@ -111,7 +110,7 @@ class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction: str) -> Optional[str]:
-        return getattr(dispatcher, f"migration_{direction}")()
+        return getattr(controller, f"migration_{direction}")()
 
 
 class Topology(Resource):
@@ -122,10 +121,10 @@ class Topology(Resource):
             data = request.form.to_dict()
             data["replace"] = True if data["replace"] == "True" else False
             request.form = data
-            return dispatcher.import_topology()
+            return controller.import_topology()
         else:
             request.form = request.get_json(force=True)
-            dispatcher.export_topology()
+            controller.export_topology()
             return None
 
 

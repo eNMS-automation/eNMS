@@ -9,7 +9,7 @@ from flask import (
     session,
     url_for,
 )
-from flask_login import current_user
+from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from flask.wrappers import Response
 from json.decoder import JSONDecodeError
@@ -40,6 +40,7 @@ def site_root() -> Response:
 
 
 @bp.route("/filtering-<table>")
+@login_required
 def filtering(table: str) -> dict:
     model = models.get(table, models["Device"])
     properties = table_properties[table]
@@ -76,6 +77,7 @@ def filtering(table: str) -> dict:
 
 @bp.route("/form-<form_type>")
 @cache.cached(timeout=0)
+@login_required
 def form(form_type: str) -> dict:
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html"
@@ -90,6 +92,7 @@ def form(form_type: str) -> dict:
 
 @bp.route("/table-<table_type>")
 @cache.cached(timeout=0)
+@login_required
 def table(table_type: str) -> dict:
     table_dict = {
         "properties": table_properties[table_type],
@@ -111,6 +114,7 @@ def table(table_type: str) -> dict:
 
 @bp.route("/dashboard")
 @cache.cached(timeout=0)
+@login_required
 def dashboard() -> dict:
     return render_template(
         f"pages/dashboard.html",
@@ -120,6 +124,7 @@ def dashboard() -> dict:
 
 @bp.route("/workflow_builder")
 @cache.cached(timeout=0)
+@login_required
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
     return dict(workflow=workflow.serialized if workflow else None)
@@ -127,11 +132,13 @@ def workflow_builder() -> dict:
 
 @bp.route("/calendar")
 @cache.cached(timeout=0)
+@login_required
 def calendar() -> dict:
     return {}
 
 
 @bp.route("/download_configuration-<name>")
+@login_required
 def download_configuration(name: str) -> Response:
     try:
         return send_file(
@@ -147,6 +154,7 @@ def download_configuration(name: str) -> Response:
 
 @bp.route("/administration")
 @cache.cached(timeout=0)
+@login_required
 def administration() -> dict:
     return render_template(
         f"administration.html",
@@ -217,6 +225,7 @@ def login() -> Response:
 
 
 @bp.route("/logout")
+@login_required
 def logout() -> Response:
     logout_user()
     return redirect(url_for("bp.route", page="login"))
@@ -232,7 +241,7 @@ def route(page: str) -> Response:
                 f"'{request.remote_addr}' calling the endpoint '{request.url}'"
             ),
         )
-        return False
+        abort(403)
     func, *args = page.split("-")
     form_type = request.form.get("form_type")
     if form_type:
@@ -241,8 +250,8 @@ def route(page: str) -> Response:
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         request.form = form_postprocessing(request.form)
     # try:
-    # if not hasattr(dispatcher, func):
-    #    abort(404)
+    if not hasattr(controller, func):
+        abort(404)
     result = jsonify(getattr(controller, func)(*args))
     Session.commit()
     # except Exception as e:

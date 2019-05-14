@@ -89,6 +89,47 @@ class InventoryController:
         ]
         return "\n".join(device_logs)
 
+    def update_database_configurations_from_git(self) -> None:
+        for dir in scandir(self.path / "git" / "configurations"):
+            if dir.name == ".git":
+                continue
+            device = fetch("Device", name=dir.name)
+            if device:
+                with open(Path(dir.path) / "data.yml") as data:
+                    parameters = load(data)
+                    device.update(**parameters)
+                    with open(Path(dir.path) / dir.name) as f:
+                        time = parameters["last_update"]
+                        device.current_configuration = device.configurations[
+                            time
+                        ] = f.read()
+        Session.commit()
+        for pool in fetch_all("Pool"):
+            if pool.device_current_configuration:
+                pool.compute_pool()
+
+    def get_git_content(self) -> None:
+        for repository_type in ("configurations", "automation"):
+            repo = getattr(self, f"git_{repository_type}")
+            if not repo:
+                continue
+            local_path = self.path / "git" / repository_type
+            for file in scandir(local_path):
+                if file.name == ".gitkeep":
+                    remove(file)
+            try:
+                Repo.clone_from(repo, local_path)
+                if repository_type == "configurations":
+                    self.update_database_configurations_from_git()
+            except Exception as e:
+                info(f"Cannot clone {repository_type} git repository ({str(e)})")
+                try:
+                    Repo(local_path).remotes.origin.pull()
+                    if repository_type == "configurations":
+                        self.update_database_configurations_from_git()
+                except Exception as e:
+                    info(f"Cannot pull {repository_type} git repository ({str(e)})")
+
     def clear_configurations(self, device_id: int) -> None:
         fetch("Device", id=device_id).configurations = {}
 

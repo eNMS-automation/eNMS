@@ -156,6 +156,6 @@ class DefaultController:
         self.create_default_pools()
         self.create_default_services()
         self.create_default_workflows()
-        self.create_default_tasks(app)
-        self.parameters.get_git_content(app)
+        self.create_default_tasks()
+        self.get_git_content()
         Session.commit()

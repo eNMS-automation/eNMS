@@ -78,47 +78,6 @@ class Parameters(AbstractBase):
         self.gotty_port_index = -1
         super().update(**kwargs)
 
-    def update_database_configurations_from_git(self, app: Flask) -> None:
-        for dir in scandir(app.path / "git" / "configurations"):
-            if dir.name == ".git":
-                continue
-            device = fetch("Device", name=dir.name)
-            if device:
-                with open(Path(dir.path) / "data.yml") as data:
-                    parameters = load(data)
-                    device.update(**parameters)
-                    with open(Path(dir.path) / dir.name) as f:
-                        time = parameters["last_update"]
-                        device.current_configuration = device.configurations[
-                            time
-                        ] = f.read()
-        Session.commit()
-        for pool in fetch_all("Pool"):
-            if pool.device_current_configuration:
-                pool.compute_pool()
-
-    def get_git_content(self, app: Flask) -> None:
-        for repository_type in ("configurations", "automation"):
-            repo = getattr(self, f"git_{repository_type}")
-            if not repo:
-                continue
-            local_path = app.path / "git" / repository_type
-            for file in scandir(local_path):
-                if file.name == ".gitkeep":
-                    remove(file)
-            try:
-                Repo.clone_from(repo, local_path)
-                if repository_type == "configurations":
-                    self.update_database_configurations_from_git(app)
-            except Exception as e:
-                info(f"Cannot clone {repository_type} git repository ({str(e)})")
-                try:
-                    Repo(local_path).remotes.origin.pull()
-                    if repository_type == "configurations":
-                        self.update_database_configurations_from_git(app)
-                except Exception as e:
-                    info(f"Cannot pull {repository_type} git repository ({str(e)})")
-
     @property
     def gotty_range(self) -> int:
         return self.gotty_end_port - self.gotty_start_port

@@ -12,7 +12,6 @@ from eNMS.cli import configure_cli
 from eNMS.config import Config
 from eNMS.controller import controller
 from eNMS.database import Base, engine, Session
-from eNMS.database.default import create_default
 from eNMS.database.events import configure_events
 from eNMS.database.examples import create_examples
 from eNMS.database.functions import fetch, get_one
@@ -55,7 +54,7 @@ def configure_database(app: Flask) -> None:
         configure_mappers()
         configure_events()
         controller.create_default_parameters()
-        create_default(app)
+        controller.create_default()
         if controller.config["CREATE_EXAMPLES"]:
             create_examples(app)
 

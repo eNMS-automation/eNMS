@@ -12,7 +12,6 @@ from requests import get as http_get
 from werkzeug.wrappers import Response
 from yaml import dump, load, BaseLoader
 
-from eNMS.database.default import create_default
 from eNMS.database.functions import (
     delete_all,
     export,
@@ -99,14 +98,14 @@ class AdministrationController:
                 info(f"{str(edge)} could not be imported ({str(e)})")
                 status = "Partial import (see logs)."
         if parameters.get("empty_database_before_import", False):
-            create_default(current_app)
+            self.create_default()
         return status
 
     def save_parameters(self, parameter_type: str) -> None:
         parameters = get_one("Parameters")
         parameters.update(**parameters)
         if parameter_type == "git":
-            parameters.get_git_content(current_app)
+            self.get_git_content()
 
     def scan_cluster(self) -> None:
         parameters = get_one("Parameters")

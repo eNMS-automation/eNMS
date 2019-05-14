@@ -18,13 +18,19 @@ from typing import Any, Set
 
 from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
+from eNMS.controller.default import DefaultController
 from eNMS.controller.inventory import InventoryController
 from eNMS.database.functions import count, factory, fetch_all, get_one
 from eNMS.models import models
 from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 
 
-class Controller(AdministrationController, AutomationController, InventoryController):
+class Controller(
+    AdministrationController,
+    AutomationController,
+    DefaultController,
+    InventoryController,
+):
 
     cache = [
         "administration",

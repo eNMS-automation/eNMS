@@ -117,5 +117,74 @@ class Dispatcher(AdministrationDispatcher):
         except FileNotFoundError:
             return jsonify("No configuration stored")
 
+    def administration(self) -> dict:
+        return dict(folders=listdir(current_app.path / "migrations"))
+
+    def login(self) -> Response:
+        if request.method == "POST":
+            name, password = request.form["name"], request.form["password"]
+            try:
+                if request.form["authentication_method"] == "Local User":
+                    user = fetch("User", name=name)
+                    if user and password == user.password:
+                        login_user(user)
+                        return redirect(url_for("bp.route", page="dashboard"))
+                elif request.form["authentication_method"] == "LDAP Domain":
+                    with Connection(
+                        controller.ldap_client,
+                        user=f"{controller.LDAP_USERDN}\\{name}",
+                        password=password,
+                        auto_bind=True,
+                        authentication=NTLM,
+                    ) as connection:
+                        connection.search(
+                            controller.LDAP_BASEDN,
+                            f"(&(objectClass=person)(samaccountname={name}))",
+                            search_scope=SUBTREE,
+                            get_operational_attributes=True,
+                            attributes=["cn", "memberOf", "mail"],
+                        )
+                        json_response = loads(connection.response_to_json())["entries"][
+                            0
+                        ]
+                        if json_response:
+                            user = {
+                                "name": name,
+                                "password": password,
+                                "email": json_response["attributes"].get("mail", ""),
+                            }
+                            if any(
+                                group in s
+                                for group in controller.LDAP_ADMIN_GROUP
+                                for s in json_response["attributes"]["memberOf"]
+                            ):
+                                user["permissions"] = ["Admin"]
+                            new_user = factory("User", **user)
+                            login_user(new_user)
+                            return redirect(url_for("bp.route", page="dashboard"))
+                elif request.form["authentication_method"] == "TACACS":
+                    if controller.tacacs_client.authenticate(name, password).valid:
+                        user = factory("User", **{"name": name, "password": password})
+                        login_user(user)
+                        return redirect(url_for("bp.route", page="dashboard"))
+                abort(403)
+            except Exception as e:
+                info(f"Authentication failed ({str(e)})")
+                abort(403)
+        if not current_user.is_authenticated:
+            login_form = LoginForm(request.form)
+            authentication_methods = [("Local User",) * 2]
+            if controller.USE_LDAP:
+                authentication_methods.append(("LDAP Domain",) * 2)
+            if controller.USE_TACACS:
+                authentication_methods.append(("TACACS",) * 2)
+            login_form.authentication_method.choices = authentication_methods
+            return render_template("login.html", login_form=login_form)
+        return redirect(url_for("bp.route", page="dashboard"))
+
+    def logout(self) -> Response:
+        logout_user()
+        return redirect(url_for("bp.route", page="login"))
+
 
 dispatcher = Dispatcher()

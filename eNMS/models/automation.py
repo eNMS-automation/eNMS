@@ -376,14 +376,6 @@ class Service(Job):
             optional_args=optional_args,
         )
 
-    def sub(self, data: str, variables: dict) -> str:
-        r = compile("{{(.*?)}}")
-
-        def replace_with_locals(match: Any) -> str:
-            return str(eval(match.group()[2:-2], variables))
-
-        return r.sub(replace_with_locals, data)
-
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())
 
@@ -407,21 +399,23 @@ class Service(Job):
             success = self.match_dictionary(result)
         return success if not self.negative_logic else not success
 
-    def sub_dict(self, input: dict, variables: dict) -> dict:
-        return {
-            self.sub(k, variables)
-            if isinstance(k, str)
-            else k: (
-                self.sub(v, variables)
-                if isinstance(v, str)
-                else [self.sub(x, variables) for x in v]
-                if isinstance(v, list)
-                else self.sub_dict(v, variables)
-                if isinstance(v, dict)
-                else v
-            )
-            for k, v in input.items()
-        }
+    def sub(input, variables: dict) -> dict:
+        r = compile("{{(.*?)}}")
+
+        def replace(match) -> str:
+            return str(eval(match.group()[2:-2], variables))
+
+        def rec(input):
+            if isinstance(input, str):
+                return r.sub(replace, input)
+            elif isinstance(input, list):
+                return [rec(x) for x in input]
+            elif isinstance(input, dict):
+                return {rec(k): rec(v) for k, v in input.items()}
+            else:
+                return input
+
+        return rec(input)
 
     def match_dictionary(self, result: dict, match: Optional[dict] = None) -> bool:
         if self.validation_method == "dict_equal":

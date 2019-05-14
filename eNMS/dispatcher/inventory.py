@@ -1,12 +1,11 @@
 from collections import Counter
 from datetime import datetime
-from difflib import SequenceMatcher
+
 from flask import current_app, request
 from flask_login import current_user
 from logging import info
 from pynetbox import api as netbox_api
 from requests import get as http_get
-from simplekml import Kml
 from sqlalchemy import and_
 from subprocess import Popen
 from typing import List, Union
@@ -107,41 +106,16 @@ class InventoryDispatcher:
         workbook.save(current_app.path / "projects" / filename)
 
     def export_to_google_earth(self) -> None:
-        kml_file = Kml()
-        for device in fetch_all("Device"):
-            point = kml_file.newpoint(name=device.name)
-            point.coords = [(device.longitude, device.latitude)]
-            point.style = controller.google_earth_styles[device.subtype]
-            point.style.labelstyle.scale = request.form["label_size"]
-        for link in fetch_all("Link"):
-            line = kml_file.newlinestring(name=link.name)
-            line.coords = [
-                (link.source.longitude, link.source.latitude),
-                (link.destination.longitude, link.destination.latitude),
-            ]
-            line.style = controller.google_earth_styles[link.subtype]
-            line.style.linestyle.width = request.form["line_width"]
-        filepath = current_app.path / "google_earth" / f'{request.form["name"]}.kmz'
-        kml_file.save(filepath)
+        controller.export_to_google_earth(request.form)
 
     def get_configurations(self, device_id: int) -> dict:
         return fetch("Device", id=device_id).get_configurations()
 
-    def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
-        device = fetch("Device", id=device_id)
-        d1, d2 = [datetime.strptime(d, "%Y+%m+%d %H:%M:%S.%f") for d in (v1, v2)]
-        first = device.configurations[d1].splitlines()
-        second = device.configurations[d2].splitlines()
-        opcodes = SequenceMatcher(None, first, second).get_opcodes()
-        return {"first": first, "second": second, "opcodes": opcodes}
+    def get_configuration_diff(self, *args) -> dict:
+        return controller.get_configuration_diff(*args)
 
     def get_device_logs(self, device_id: int) -> Union[str, bool]:
-        device_logs = [
-            log.name
-            for log in fetch_all("Log")
-            if log.source == fetch("Device", id=device_id).ip_address
-        ]
-        return "\n".join(device_logs)
+        return controller.get_device_logs(device_id)
 
     def query_netbox(self) -> None:
         nb = netbox_api(

@@ -67,8 +67,7 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher, InventoryDispat
         return [instance.get_properties() for instance in fetch_all(cls)]
 
     def get(self, cls: str, id: str) -> dict:
-        instance = fetch(cls, id=id)
-        return instance.serialized
+        return fetch(cls, id=id).serialized
 
     def table(self, table_type: str) -> dict:
         table_dict = dict(

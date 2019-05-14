@@ -52,6 +52,7 @@ class Controller(AutomationController, InventoryController):
     def init_app(self, app: Flask) -> None:
         self.app = app
         self.config.update(app.config)
+        self.path = app.path
         self.create_google_earth_styles()
         self.configure_logs()
 

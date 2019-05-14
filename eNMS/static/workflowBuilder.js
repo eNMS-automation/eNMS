@@ -112,23 +112,6 @@ function switchToWorkflow(workflowId) {
   });
 }
 
-if (workflow) {
-  $("#current-workflow").val(workflow.id);
-  displayWorkflow(workflow);
-} else {
-  workflow = $("#current-workflow").val();
-  if (workflow) {
-    switchToWorkflow(workflow);
-  } else {
-    alertify.notify(
-      `You must create a workflow in the
-    'Workflow management' page first.`,
-      "error",
-      5
-    );
-  }
-}
-
 /**
  * Add an existing job to the workflow.
  */
@@ -428,5 +411,26 @@ function getWorkflowState() {
 }
 
 (function() {
+  call("/get_all-workflow", function(workflows) {
+    for (let i = 0; i < workflows.length; i++) {
+      $('#current-workflow').append(`<option value="${workflows[i].id}">${workflows[i].name}</option>`);
+    }
+    if (workflow) {
+      $("#current-workflow").val(workflow.id);
+      displayWorkflow(workflow);
+    } else {
+      workflow = $("#current-workflow").val();
+      if (workflow) {
+        switchToWorkflow(workflow);
+      } else {
+        alertify.notify(
+          `You must create a workflow in the
+        'Workflow management' page first.`,
+          "error",
+          5
+        );
+      }
+    }
+  });
   getWorkflowState();
 })();

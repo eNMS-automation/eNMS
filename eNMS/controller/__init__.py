@@ -14,7 +14,7 @@ from pathlib import Path
 from sqlalchemy.exc import InvalidRequestError
 from string import punctuation
 from tacacs_plus.client import TACACSClient
-from typing import Any, Set
+from typing import Any, List, Set
 
 from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
@@ -90,6 +90,24 @@ class Controller(
             )
             Session.add(parameters)
             Session.commit()
+
+    def delete_instance(self, cls: str, instance_id: int) -> dict:
+        return delete(cls, id=instance_id)
+
+    def get(self, cls: str, id: str) -> dict:
+        return fetch(cls, id=id).serialized
+
+    def get_all(self, cls: str) -> List[dict]:
+        return [instance.get_properties() for instance in fetch_all(cls)]
+
+    def update(self, cls: str) -> dict:
+        try:
+            instance = factory(cls, **request.form)
+            return instance.serialized
+        except JSONDecodeError:
+            return {"error": "Invalid JSON syntax (JSON field)"}
+        except IntegrityError:
+            return {"error": "An object with the same name already exists"}
 
     def unless_cache(self, *args, **kwargs):
         page = kwargs["page"].split("-")[0]

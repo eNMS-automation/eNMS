@@ -20,9 +20,6 @@ from eNMS.properties.table import (
 
 
 class Dispatcher:
-    def delete_instance(self, cls: str, instance_id: int) -> dict:
-        return delete(cls, id=instance_id)
-
     def filtering(self, table: str) -> dict:
         model = models.get(table, models["Device"])
         properties = table_properties[table]
@@ -63,12 +60,6 @@ class Dispatcher:
             template=f"forms/{form_templates.get(form_type, 'base')}_form",
         )
 
-    def get_all(self, cls: str) -> List[dict]:
-        return [instance.get_properties() for instance in fetch_all(cls)]
-
-    def get(self, cls: str, id: str) -> dict:
-        return fetch(cls, id=id).serialized
-
     def table(self, table_type: str) -> dict:
         table_dict = dict(
             properties=table_properties[table_type],
@@ -85,15 +76,6 @@ class Dispatcher:
             ]
             table_dict["service_table_form"] = service_table_form
         return table_dict
-
-    def update(self, cls: str) -> dict:
-        try:
-            instance = factory(cls, **request.form)
-            return instance.serialized
-        except JSONDecodeError:
-            return {"error": "Invalid JSON syntax (JSON field)"}
-        except IntegrityError:
-            return {"error": "An object with the same name already exists"}
 
     def dashboard(self) -> dict:
         return dict(properties=type_to_diagram_properties)

@@ -18,7 +18,8 @@ from typing import Any, Set
 
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
-from eNMS.database.functions import count, factory, get_one
+from eNMS.database.functions import count, factory, fetch_all, get_one
+from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 
 
 class Controller(AutomationController, InventoryController):

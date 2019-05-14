@@ -38,8 +38,7 @@ def route(page: str) -> Response:
         if request.method == "GET" and page != "login":
             return current_app.login_manager.unauthorized()
     func, *args = page.split("-")
-    if not hasattr(dispatcher, func):
-        abort(404)
+
     if request.method == "POST":
         form_type = request.form.get("form_type")
         if form_type:
@@ -48,7 +47,9 @@ def route(page: str) -> Response:
                 return jsonify({"invalid_form": True, **{"errors": form.errors}})
             request.form = form_postprocessing(request.form)
     # try:
-    result = getattr(dispatcher, func)(*args)
+    # if not hasattr(dispatcher, func):
+    #    abort(404)
+    result = getattr(dispatcher if request.method == "GET" else controller, func)(*args)
     Session.commit()
     # except Exception as e:
     # result = {"error": str(e)}

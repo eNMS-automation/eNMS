@@ -6,11 +6,11 @@ diagram_classes = ["Device", "Link", "User", "Service", "Workflow", "Task"]
 
 object_properties: List[str] = ["model", "vendor", "subtype", "location"]
 
-device_properties: List[str] = (
-    object_properties
-    + ["operating_system", "os_version", "port"]
-    + list(p for p, v in controller.custom_properties.items() if v["add_to_dashboard"])
-)
+device_properties: List[str] = object_properties + [
+    "operating_system",
+    "os_version",
+    "port",
+]
 
 user_properties: List[str] = ["name"]
 

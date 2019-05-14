@@ -28,6 +28,7 @@ from eNMS.database.functions import (
 )
 from eNMS.models import property_types
 from eNMS.properties import field_conversion, property_names
+from eNMS.properties.diagram import device_properties, diagram_classes
 from eNMS.properties.objects import (
     device_properties,
     device_subtypes,
@@ -154,6 +155,9 @@ class InventoryController:
         )
         for object_properties in (device_properties, pool_device_properties):
             object_properties.extend(list(custom_properties))
+        device_properties.extend(
+            list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
+        )
         return custom_properties
 
     def query_netbox(self) -> None:

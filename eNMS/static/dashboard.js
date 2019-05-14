@@ -308,7 +308,7 @@ function drawDiagrams(objects, type) {
 }
 
 $(function() {
-  call(`/dashboard_init`, function(result) {
+  call(`/count_models`, function(result) {
     for (const type of ["Device", "Link", "User"]) {
       $(`#count-${type}`).text(result.counters[type]);
     }

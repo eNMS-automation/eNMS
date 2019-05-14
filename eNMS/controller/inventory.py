@@ -23,6 +23,40 @@ from eNMS.properties.objects import (
 
 
 class InventoryController:
+    def connection(self, device_id: int, parameters: dict) -> dict:
+        device = fetch("Device", id=device_id)
+        cmd = [str(current_app.path / "applications" / "gotty"), "-w"]
+        port, protocol = self.parameters.get_gotty_port(), parameters["protocol"]
+        address = getattr(device, parameters["address"])
+        cmd.extend(["-p", str(port)])
+        if "accept-once" in parameters:
+            cmd.append("--once")
+        if "multiplexing" in parameters:
+            cmd.extend(f"tmux new -A -s gotty{port}".split())
+        if controller.config["GOTTY_BYPASS_KEY_PROMPT"]:
+            options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        else:
+            options = ""
+        if protocol == "telnet":
+            cmd.extend(f"telnet {address}".split())
+        elif "authentication" in parameters:
+            if parameters["credentials"] == "device":
+                login, pwd = device.username, device.password
+            else:
+                login, pwd = current_user.name, current_user.password
+            cmd.extend(f"sshpass -p {pwd} ssh {options} {login}@{address}".split())
+        else:
+            cmd.extend(f"ssh {options} {address}".split())
+        if protocol != "telnet":
+            cmd.extend(f"-p {device.port}".split())
+        Popen(cmd)
+        return {
+            "device": device.name,
+            "port": port,
+            "redirection": controller.config["GOTTY_PORT_REDIRECTION"],
+            "server_addr": controller.config["ENMS_SERVER_ADDR"],
+        }
+
     def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
         device = fetch("Device", id=device_id)
         d1, d2 = [datetime.strptime(d, "%Y+%m+%d %H:%M:%S.%f") for d in (v1, v2)]

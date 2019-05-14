@@ -17,7 +17,7 @@ from typing import Any, Set
 
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
-from eNMS.database.functions import factory
+from eNMS.database.functions import factory, get_one
 
 
 class Controller(AutomationController, InventoryController):
@@ -55,6 +55,10 @@ class Controller(AutomationController, InventoryController):
         self.path = app.path
         self.create_google_earth_styles()
         self.configure_logs()
+
+    @property
+    def parameters(self):
+        return get_one("Parameters")
 
     def unless_cache(self, *args, **kwargs):
         page = kwargs["page"].split("-")[0]

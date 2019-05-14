@@ -82,7 +82,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    let link_colors = {{ link_colors|tojson|safe }};
+    let linkColors = {{ link_colors|tojson|safe }};
     let view = '{{ view }}';
     let viewType = "{{ view_type }}"
   </script>

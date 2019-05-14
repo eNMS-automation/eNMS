@@ -249,7 +249,7 @@ function createLink2d(link) {
   );
   const pointList = [pointA, pointB];
   const polyline = new L.PolylineClusterable(pointList, {
-    color: link_colors[link.subtype],
+    color: linkColors[link.subtype],
     weight: 3,
     opacity: 1,
     smoothFactor: 1,

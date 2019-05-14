@@ -25,6 +25,7 @@ from eNMS.database import Session
 from eNMS.database.functions import factory, fetch_all
 from eNMS.models import property_types
 from eNMS.properties import field_conversion, property_names
+from eNMS.properties.objects import device_subtypes, link_colors, link_subtypes
 
 
 class Controller:
@@ -184,13 +185,13 @@ class Controller:
 
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}
-        for subtype in self.device_subtypes:
+        for subtype in device_subtypes:
             point_style = Style()
             point_style.labelstyle.color = Color.blue
             path_icon = f"{self.app.path}/eNMS/views/static/images/2D/{subtype}.gif"
             point_style.iconstyle.icon.href = path_icon
             self.google_earth_styles[subtype] = point_style
-        for subtype in self.link_subtypes:
+        for subtype in link_subtypes:
             line_style = Style()
             color = self.link_colors[subtype]
             kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]

@@ -26,6 +26,7 @@ from eNMS.database.functions import (
 )
 from eNMS.models import models
 from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
+from eNMS.properties.objects import link_colors
 from eNMS.properties.table import filtering_properties, table_properties
 
 
@@ -235,11 +236,7 @@ class InventoryDispatcher:
             fetch("Pool", id=int(pool_id)).compute_pool()
 
     def view(self, view_type: str) -> dict:
-        return dict(
-            template="pages/view",
-            link_colors=controller.link_colors,
-            view_type=view_type,
-        )
+        return dict(template="pages/view", link_colors=link_colors, view_type=view_type)
 
     def get_view_topology(self) -> dict:
         return {

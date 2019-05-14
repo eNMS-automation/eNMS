@@ -21,6 +21,8 @@ from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from yaml import load, BaseLoader
 
+from eNMS.controller.automation import AutomationController
+from eNMS.controller.inventory import InventoryController
 from eNMS.database import Session
 from eNMS.database.functions import factory, fetch_all
 from eNMS.models import property_types
@@ -34,7 +36,7 @@ from eNMS.properties.objects import (
 )
 
 
-class Controller:
+class Controller(AutomationController, InventoryController):
 
     cache = [
         "administration",

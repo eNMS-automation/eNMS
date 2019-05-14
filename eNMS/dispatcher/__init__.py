@@ -1,5 +1,6 @@
-from flask import request
+from flask import current_app, jsonify, request, send_file, session
 from flask_wtf import FlaskForm
+from flask.wrappers import Response
 from json.decoder import JSONDecodeError
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
@@ -7,7 +8,6 @@ from typing import List
 
 from eNMS.database.functions import delete, factory, fetch, fetch_all, Session
 from eNMS.dispatcher.administration import AdministrationDispatcher
-from eNMS.dispatcher.automation import AutomationDispatcher
 from eNMS.forms import form_actions, form_classes, form_templates
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
@@ -19,7 +19,7 @@ from eNMS.properties.table import (
 )
 
 
-class Dispatcher(AutomationDispatcher, AdministrationDispatcher):
+class Dispatcher(AdministrationDispatcher):
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         return delete(cls, id=instance_id)
 
@@ -97,6 +97,25 @@ class Dispatcher(AutomationDispatcher, AdministrationDispatcher):
 
     def dashboard(self) -> dict:
         return dict(properties=type_to_diagram_properties)
+
+    def workflow_builder(self) -> dict:
+        workflow = fetch("Workflow", id=session.get("workflow", None))
+        return dict(workflow=workflow.serialized if workflow else None)
+
+    def calendar(self) -> dict:
+        return {}
+
+    def download_configuration(self, name: str) -> Response:
+        try:
+            return send_file(
+                filename_or_fp=str(
+                    current_app.path / "git" / "configurations" / name / name
+                ),
+                as_attachment=True,
+                attachment_filename=f"configuration_{name}.txt",
+            )
+        except FileNotFoundError:
+            return jsonify("No configuration stored")
 
 
 dispatcher = Dispatcher()

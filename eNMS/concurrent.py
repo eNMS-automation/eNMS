@@ -2,13 +2,12 @@ from multiprocessing import Lock
 from typing import List, Optional, Set, Tuple
 
 from eNMS.database.functions import fetch, session_scope
-from eNMS.models.inventory import Device
 
 
 def threaded_job(
     job_id: int,
     aps_job_id: Optional[str] = None,
-    targets: Optional[Set[Device]] = None,
+    targets: Optional[Set["Device"]] = None,
     payload: Optional[dict] = None,
 ) -> None:
     with session_scope() as session:

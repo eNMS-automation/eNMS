@@ -25,8 +25,5 @@
 {% block javascripts %}
   {{ super() }}
   <script src="{{ url_for('static', filename='lib/calendar/fullcalendar.min.js') }}"></script>
-  <script>
-    var tasks = {{ tasks|tojson|safe }};
-  </script>
   <script src="{{ url_for('static', filename='calendar.js') }}"></script>
 {% endblock javascripts %}

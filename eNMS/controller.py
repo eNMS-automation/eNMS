@@ -29,7 +29,7 @@ from eNMS.properties import field_conversion, property_names
 
 class Controller:
 
-    cache = ["administration", "dashboard", "form", "view", "table"]
+    cache = ["administration", "dashboard", "form", "view", "table", "workflow_builder"]
 
     device_subtypes: Dict[str, str] = {
         "antenna": "Antenna",

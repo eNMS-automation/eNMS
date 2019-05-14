@@ -156,6 +156,9 @@ class AutomationDispatcher:
         return {"first": first, "second": second, "opcodes": opcodes}
 
     def calendar(self) -> dict:
+        return {}
+
+    def calendar_init(self) -> dict:
         tasks = {}
         for task in fetch_all("Task"):
             # javascript dates range from 0 to 11, we must account for that by
@@ -175,7 +178,7 @@ class AutomationDispatcher:
                 ).split(",")
             ]
             tasks[task.name] = {**task.serialized, **{"date": js_date}}
-        return dict(tasks=tasks)
+        return tasks
 
     def scheduler(self, action: str) -> None:
         getattr(controller.scheduler, action)()

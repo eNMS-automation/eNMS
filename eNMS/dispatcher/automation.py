@@ -15,7 +15,6 @@ from eNMS.database.functions import (
     get_one,
     objectify,
 )
-from eNMS.forms.automation import WorkflowBuilderForm
 
 
 class AutomationDispatcher:
@@ -186,7 +185,4 @@ class AutomationDispatcher:
 
     def workflow_builder(self) -> dict:
         workflow = fetch("Workflow", id=session.get("workflow", None))
-        return dict(
-            workflow=workflow.serialized if workflow else None,
-            workflow_builder_form=WorkflowBuilderForm(request.form),
-        )
+        return dict(workflow=workflow.serialized if workflow else None)

@@ -93,11 +93,6 @@ class ServiceTableForm(BaseForm):
     services = SelectField(choices=())
 
 
-class WorkflowBuilderForm(BaseForm):
-    form_type = HiddenField(default="workflow_builder")
-    workflow = InstanceField("Workflow", instance_type="Workflow")
-
-
 def configure_form(cls: BaseForm) -> BaseForm:
     cls.properties = ("origin", "name")
     for property in ("origin", "name"):

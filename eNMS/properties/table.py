@@ -1,13 +1,10 @@
 from typing import Dict, List
 
-from eNMS.properties.objects import (
-    device_properties as device_class_properties,
-    object_common_properties,
-)
+from eNMS.properties.objects import device_properties, object_common_properties
 
-device_properties: List[str] = object_common_properties + device_class_properties[:-3]
+device_table_properties: List[str] = object_common_properties + device_properties[:-3]
 
-configuration_properties: List[str] = [
+configuration_table_properties: List[str] = [
     "name",
     "model",
     "last_failure",
@@ -16,12 +13,12 @@ configuration_properties: List[str] = [
     "last_status",
 ]
 
-link_properties: List[str] = object_common_properties[1:] + [
+link_table_properties: List[str] = object_common_properties[1:] + [
     "source_name",
     "destination_name",
 ]
 
-pool_properties: List[str] = [
+pool_table_properties: List[str] = [
     "name",
     "description",
     "never_update",
@@ -30,7 +27,7 @@ pool_properties: List[str] = [
     "object_number",
 ]
 
-service_properties: List[str] = [
+service_table_properties: List[str] = [
     "name",
     "type",
     "description",
@@ -41,7 +38,7 @@ service_properties: List[str] = [
     "progress",
 ]
 
-workflow_properties: List[str] = [
+workflow_table_properties: List[str] = [
     "name",
     "description",
     "creator",
@@ -53,9 +50,9 @@ workflow_properties: List[str] = [
     "progress",
 ]
 
-user_properties: List[str] = ["name", "email"]
+user_table_properties: List[str] = ["name", "email"]
 
-server_properties = [
+server_table_properties = [
     "name",
     "description",
     "ip_address",
@@ -64,11 +61,11 @@ server_properties = [
     "cpu_load",
 ]
 
-log_properties: List[str] = ["time", "origin", "severity", "content"]
+log_table_properties: List[str] = ["time", "origin", "severity", "content"]
 
-log_rule_properties: List[str] = ["name"] + log_properties
+log_rule_table_properties: List[str] = ["name"] + log_properties
 
-task_properties: List[str] = [
+task_table_properties: List[str] = [
     "name",
     "description",
     "job_name",
@@ -84,17 +81,17 @@ task_properties: List[str] = [
 ]
 
 table_properties: Dict[str, List[str]] = {
-    "configuration": configuration_properties,
-    "device": device_properties,
-    "server": server_properties,
-    "link": link_properties,
-    "log": log_properties,
-    "logrule": log_rule_properties,
-    "pool": pool_properties,
-    "service": service_properties,
-    "task": task_properties,
-    "user": user_properties,
-    "workflow": workflow_properties,
+    "configuration": configuration_table_properties,
+    "device": device_table_properties,
+    "server": server_table_properties,
+    "link": link_table_properties,
+    "log": log_table_properties,
+    "logrule": log_rule_table_properties,
+    "pool": pool_table_properties,
+    "service": service_table_properties,
+    "task": task_table_properties,
+    "user": user_table_properties,
+    "workflow": workflow_table_properties,
 }
 
 job_filtering_properties = {
@@ -112,16 +109,16 @@ job_filtering_properties = {
 }
 
 filtering_properties: Dict[str, List[str]] = {
-    "configuration": configuration_properties + ["current_configuration"],
-    "device": device_properties + ["current_configuration"],
-    "server": server_properties,
-    "link": link_properties,
-    "log": log_properties,
-    "logrule": log_rule_properties,
-    "pool": pool_properties,
+    "configuration": configuration_table_properties + ["current_configuration"],
+    "device": device_table_properties + ["current_configuration"],
+    "server": server_table_properties,
+    "link": link_table_properties,
+    "log": log_table_properties,
+    "logrule": log_rule_table_properties,
+    "pool": pool_table_properties,
     "service": job_filtering_properties,
-    "task": task_properties,
-    "user": user_properties,
+    "task": task_table_properties,
+    "user": user_table_properties,
     "workflow": job_filtering_properties,
 }
 

@@ -120,7 +120,7 @@ function importTopology() {
  */
 // eslint-disable-next-line
 function saveParameters(type) {
-  fCall(`/save_parameters-${type}`, `#${type}-form`, function() {
+  fCall(`/save_parameters/${type}`, `#${type}-form`, function() {
     alertify.notify("Parameters saved.", "success", 5);
   });
   $(`#${type}`).remove();

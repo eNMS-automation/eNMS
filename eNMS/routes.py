@@ -243,7 +243,7 @@ def get_requests_sink(_) -> Response:
 def route(page: str) -> Response:
     f, *args = page.split("-")
     if f not in controller.valid_post_endpoints:
-        abort(404)
+        return jsonify({"error": "Invalid POST request."})
     form_type, kwargs = request.form.get("form_type"), {}
     if form_type:
         form = form_classes[form_type](request.form)

@@ -296,7 +296,7 @@ class InventoryController:
         return result
 
     def import_topology(self, **kwargs: Union[str, List[int]]) -> str:
-        file = request.files["file"]
+        file = kwargs["file"]
         if kwargs["replace"]:
             delete_all("Device")
         if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):

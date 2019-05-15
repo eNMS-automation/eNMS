@@ -78,13 +78,13 @@ def filtering(table: str) -> dict:
 @login_required
 def form(form_type: str) -> dict:
     return render_template(
-        f"forms/{form_templates.get(form_type, 'base')}_form.html"
-        ** {
+        f"forms/{form_templates.get(form_type, 'base')}_form.html",
+        **{
             "endpoint": "dashboard",
             "action": form_actions.get(form_type),
-            "form": form_actions.get(form_type),
+            "form": form_classes[form_type](request.form),
             "form_type": form_type,
-        }
+        },
     )
 
 
@@ -165,7 +165,7 @@ def download_configuration(name: str) -> Response:
 @login_required
 def administration() -> dict:
     return render_template(
-        f"administration.html",
+        f"pages/administration.html",
         **{
             "endpoint": "administration",
             "folders": listdir(current_app.path / "migrations"),
@@ -218,15 +218,14 @@ def route(page: str) -> Response:
         abort(403)
     func, *args = page.split("-")
     form_type = request.form.get("form_type")
-    if form_type:
-        form = form_classes[form_type](request.form)
-        if not form.validate_on_submit():
-            return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        request.form = form_postprocessing(request.form)
+    form = form_classes[form_type](request.form)
+    if not form.validate_on_submit():
+        return jsonify({"invalid_form": True, **{"errors": form.errors}})
+    kwargs = form_postprocessing(request.form)
     # try:
     if not hasattr(controller, func):
         abort(404)
-    return jsonify(getattr(controller, func)(*args))
+    return jsonify(getattr(controller, func)(*args, **kwargs))
     Session.commit()
     # except Exception as e:
     # result = {"error": str(e)}

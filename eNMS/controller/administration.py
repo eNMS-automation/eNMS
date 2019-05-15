@@ -14,7 +14,6 @@ from eNMS.database.functions import delete_all, export, factory, fetch, fetch_al
 
 class AdministrationController:
     def authenticate_user(self, **kwargs) -> bool:
-        print(kwargs)
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":
             user = fetch("User", name=name)

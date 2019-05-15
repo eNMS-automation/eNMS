@@ -1,4 +1,5 @@
 from collections import defaultdict
+from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from werkzeug.datastructures import ImmutableMultiDict
@@ -55,7 +56,11 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 
 def form_postprocessing(form: ImmutableMultiDict) -> dict:
-    data = {**form.to_dict(), **{"creator": current_user.name}}
+    data = {**form.to_dict(), **{"user": current_user}}
+    print(request.files)
+    if request.files:
+        print(request.files["file"])
+        data["file"] = request.files["file"]
     for property, field_type in form_properties[form.get("form_type")].items():
         if field_type in ("object-list", "multiselect"):
             data[property] = form.getlist(property)

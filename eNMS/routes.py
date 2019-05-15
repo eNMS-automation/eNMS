@@ -12,12 +12,12 @@ from flask import (
 from flask_login import current_user, login_required, login_user, logout_user
 from flask.wrappers import Response
 from logging import info
+from os import listdir
 from sqlalchemy import and_
-from werkzeug.wrappers.response import Response
 
 from eNMS.controller import controller
 from eNMS.database import Session
-from eNMS.database.functions import factory, fetch
+from eNMS.database.functions import fetch
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
@@ -166,12 +166,26 @@ def download_configuration(name: str) -> Response:
 def administration() -> dict:
     return render_template(
         f"administration.html",
-        **{"endpoint": page, "folders": listdir(current_app.path / "migrations")},
+        **{
+            "endpoint": "administration",
+            "folders": listdir(current_app.path / "migrations"),
+        },
     )
 
 
 @bp.route("/login", methods=["GET", "POST"])
 def login() -> Response:
+    if request.method == "POST":
+        try:
+            user = controller.authenticate_user(**request.form.to_dict())
+            if user:
+                login_user(user)
+                return redirect(url_for("bp.route", page="dashboard"))
+            else:
+                abort(403)
+        except Exception as e:
+            info(f"Authentication failed ({str(e)})")
+            abort(403)
     if not current_user.is_authenticated:
         login_form = LoginForm(request.form)
         authentication_methods = [("Local User",) * 2]
@@ -181,17 +195,6 @@ def login() -> Response:
             authentication_methods.append(("TACACS",) * 2)
         login_form.authentication_method.choices = authentication_methods
         return render_template("login.html", login_form=login_form)
-    if request.method == "POST":
-        try:
-            user = controller.authenticate_user(**request.form)
-            if user:
-                login_user(new_user)
-                return redirect(url_for("bp.route", page="dashboard"))
-            else:
-                abort(403)
-        except Exception as e:
-            info(f"Authentication failed ({str(e)})")
-            abort(403)
     return redirect(url_for("bp.route", page="dashboard"))
 
 

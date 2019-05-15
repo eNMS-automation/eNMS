@@ -4,24 +4,17 @@ from ipaddress import IPv4Network
 from json import loads
 from logging import info
 from ldap3 import Connection, NTLM, SUBTREE
-from os import listdir, makedirs
+from os import makedirs
 from os.path import exists
 from requests import get as http_get
-from werkzeug.wrappers import Response
 from yaml import dump, load, BaseLoader
 
-from eNMS.database.functions import (
-    delete_all,
-    export,
-    factory,
-    fetch,
-    fetch_all,
-    get_one,
-)
+from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
 
 
 class AdministrationController:
     def authenticate_user(self, **kwargs) -> bool:
+        print(kwargs)
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":
             user = fetch("User", name=name)
@@ -80,7 +73,7 @@ class AdministrationController:
 
     def migration_export(self, **kwargs) -> None:
         for cls_name in kwargs["import_export_types"]:
-            path = current_app.path / "migrations" / kwargs["name"]
+            path = self.path / "migrations" / kwargs["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
@@ -93,7 +86,7 @@ class AdministrationController:
         if kwargs.get("empty_database_before_import", False):
             delete_all(*types)
         for cls in types:
-            path = current_app.path / "migrations" / kwargs["name"] / f"{cls}.yaml"
+            path = self.path / "migrations" / kwargs["name"] / f"{cls}.yaml"
             with open(path, "r") as migration_file:
                 objects = load(migration_file, Loader=BaseLoader)
                 if cls == "Workflow":

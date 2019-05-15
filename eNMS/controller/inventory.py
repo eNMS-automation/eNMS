@@ -60,7 +60,7 @@ class InventoryController:
             if kwargs["credentials"] == "device":
                 login, pwd = device.username, device.password
             else:
-                login, pwd = current_user.name, current_user.password
+                login, pwd = kwargs["user"].name, kwargs["user"].password
             cmd.extend(f"sshpass -p {pwd} ssh {options} {login}@{address}".split())
         else:
             cmd.extend(f"ssh {options} {address}".split())

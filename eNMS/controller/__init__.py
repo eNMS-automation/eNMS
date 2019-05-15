@@ -46,6 +46,21 @@ class Controller(
         "workflow_builder",
     ]
 
+    valid_post_endpoints = [
+        "count_models",
+        "database_helpers",
+        "delete_instance",
+        "get",
+        "get_all",
+        "get_cluster_status",
+        "migration_export",
+        "migration_import",
+        "save_parameters",
+        "scan_cluster",
+        "update",
+        "update_parameters",
+    ]
+
     log_severity = {"error": error, "info": info, "warning": warning}
 
     def __init__(self) -> None:

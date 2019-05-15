@@ -237,20 +237,22 @@ def get_requests_sink(_) -> Response:
     abort(404)
 
 
-@bp.route("/<page>", methods=["POST"])
+@bp.route("/", defaults={"path": ""})
+@bp.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
-    func, *args = page.split("-")
+    f, *args = page.split("-")
+    if f not in controller.valid_post_endpoints:
+        abort(404)
     form_type, kwargs = request.form.get("form_type"), {}
     if form_type:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         kwargs = form_postprocessing(request.form)
-    if not hasattr(controller, func):
-        abort(404)
+
     # try:
 
-    return jsonify(getattr(controller, func)(*args, **kwargs))
+    return jsonify(getattr(controller, f)(*args, **kwargs))
     # except Exception as e:
     # result = {"error": str(e)}

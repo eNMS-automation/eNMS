@@ -57,9 +57,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
 
 def form_postprocessing(form: ImmutableMultiDict) -> dict:
     data = {**form.to_dict(), **{"user": current_user}}
-    print(request.files)
     if request.files:
-        print(request.files["file"])
         data["file"] = request.files["file"]
     for property, field_type in form_properties[form.get("form_type")].items():
         if field_type in ("object-list", "multiselect"):

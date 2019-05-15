@@ -135,14 +135,20 @@ def dashboard() -> dict:
 @login_required
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
-    return dict(workflow=workflow.serialized if workflow else None)
+    return render_template(
+        f"pages/workflow_builder.html",
+        **{
+            "endpoint": "workflow_builder",
+            "workflow": workflow.serialized if workflow else None,
+        },
+    )
 
 
 @bp.route("/calendar")
 @cache.cached(timeout=0)
 @login_required
 def calendar() -> dict:
-    return {}
+    return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
 
 @bp.route("/download_configuration-<name>")
@@ -217,11 +223,12 @@ def route(page: str) -> Response:
         )
         abort(403)
     func, *args = page.split("-")
-    form_type = request.form.get("form_type")
-    form = form_classes[form_type](request.form)
-    if not form.validate_on_submit():
-        return jsonify({"invalid_form": True, **{"errors": form.errors}})
-    kwargs = form_postprocessing(request.form)
+    form_type, kwargs = request.form.get("form_type"), {}
+    if form_type:
+        form = form_classes[form_type](request.form)
+        if not form.validate_on_submit():
+            return jsonify({"invalid_form": True, **{"errors": form.errors}})
+        kwargs = form_postprocessing(request.form)
     # try:
     if not hasattr(controller, func):
         abort(404)

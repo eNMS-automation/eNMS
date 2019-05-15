@@ -70,13 +70,10 @@ class Controller(
 
     def initialize_database(self):
         self.parameters = self.create_default_parameters()
+        print(self.parameters)
         self.create_default()
         if self.config["CREATE_EXAMPLES"]:
             self.create_examples()
-
-    @property
-    def parameters(self):
-        return get_one("Parameters")
 
     def create_default_parameters(self) -> None:
         if not get_one("Parameters"):
@@ -90,7 +87,9 @@ class Controller(
             )
             Session.add(parameters)
             Session.commit()
-            return parameters.serialized
+            return parameters.get_properties()
+        else:
+            return get_one("Parameters").get_properties()
 
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         return delete(cls, id=instance_id)

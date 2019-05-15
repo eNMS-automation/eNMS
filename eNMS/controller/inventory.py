@@ -8,7 +8,7 @@ from requests import get as http_get
 from sqlalchemy import and_
 from subprocess import Popen
 from simplekml import Color, Kml, Style
-from typing import Dict, List, Union
+from typing import Any, Dict, List, Union
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -39,15 +39,15 @@ from eNMS.properties.objects import (
 
 
 class InventoryController:
-    def connection(self, device_id: int, parameters: dict) -> dict:
+    def connection(self, device_id: int, **kwargs: Any) -> dict:
         device = fetch("Device", id=device_id)
-        cmd = [str(current_app.path / "applications" / "gotty"), "-w"]
-        port, protocol = self.parameters.get_gotty_port(), parameters["protocol"]
-        address = getattr(device, parameters["address"])
+        cmd = [str(self.path / "applications" / "gotty"), "-w"]
+        port, protocol = self.parameters.get_gotty_port(), kwargs["protocol"]
+        address = getattr(device, kwargs["address"])
         cmd.extend(["-p", str(port)])
-        if "accept-once" in parameters:
+        if "accept-once" in kwargs:
             cmd.append("--once")
-        if "multiplexing" in parameters:
+        if "multiplexing" in kwargs:
             cmd.extend(f"tmux new -A -s gotty{port}".split())
         if controller.config["GOTTY_BYPASS_KEY_PROMPT"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
@@ -55,8 +55,8 @@ class InventoryController:
             options = ""
         if protocol == "telnet":
             cmd.extend(f"telnet {address}".split())
-        elif "authentication" in parameters:
-            if parameters["credentials"] == "device":
+        elif "authentication" in kwargs:
+            if kwargs["credentials"] == "device":
                 login, pwd = device.username, device.password
             else:
                 login, pwd = current_user.name, current_user.password
@@ -110,7 +110,7 @@ class InventoryController:
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):
-            repo = getattr(self.parameters, f"git_{repository_type}")
+            repo = self.parameters[f"git_{repository_type}"]
             if not repo:
                 continue
             local_path = self.path / "git" / repository_type
@@ -151,13 +151,13 @@ class InventoryController:
             line_style.linestyle.color = kml_color
             self.google_earth_styles[subtype] = line_style
 
-    def export_to_google_earth(self, parameters) -> None:
+    def export_to_google_earth(self, **kwargs: Any) -> None:
         kml_file = Kml()
         for device in fetch_all("Device"):
             point = kml_file.newpoint(name=device.name)
             point.coords = [(device.longitude, device.latitude)]
             point.style = self.google_earth_styles[device.subtype]
-            point.style.labelstyle.scale = parameters["label_size"]
+            point.style.labelstyle.scale = kwargs["label_size"]
         for link in fetch_all("Link"):
             line = kml_file.newlinestring(name=link.name)
             line.coords = [
@@ -165,8 +165,8 @@ class InventoryController:
                 (link.destination.longitude, link.destination.latitude),
             ]
             line.style = self.google_earth_styles[link.subtype]
-            line.style.linestyle.width = parameters["line_width"]
-        filepath = self.app.path / "google_earth" / f'{parameters["name"]}.kmz'
+            line.style.linestyle.width = kwargs["line_width"]
+        filepath = self.app.path / "google_earth" / f'{kwargs["name"]}.kmz'
         kml_file.save(filepath)
 
     def export_topology(self, filename: str) -> None:
@@ -201,8 +201,8 @@ class InventoryController:
         )
         return custom_properties
 
-    def query_netbox(self) -> None:
-        nb = netbox_api(parameters["netbox_address"], token=parameters["netbox_token"])
+    def query_netbox(self, **kwargs: str) -> None:
+        nb = netbox_api(kwargs["netbox_address"], token=kwargs["netbox_token"])
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
             factory(
@@ -210,16 +210,16 @@ class InventoryController:
                 **{
                     "name": device.name,
                     "ip_address": str(device_ip).split("/")[0],
-                    "subtype": parameters["netbox_type"],
+                    "subtype": kwargs["netbox_type"],
                     "longitude": 0.0,
                     "latitude": 0.0,
                 },
             )
 
-    def query_librenms(self) -> None:
+    def query_librenms(self, **kwargs: str) -> None:
         devices = http_get(
-            f'{parameters["librenms_address"]}/api/v0/devices',
-            headers={"X-Auth-Token": parameters["librenms_token"]},
+            f'{kwargs["librenms_address"]}/api/v0/devices',
+            headers={"X-Auth-Token": kwargs["librenms_token"]},
         ).json()["devices"]
         for device in devices:
             factory(
@@ -227,19 +227,19 @@ class InventoryController:
                 **{
                     "name": device["hostname"],
                     "ip_address": device["ip"] or device["hostname"],
-                    "subtype": parameters["librenms_type"],
+                    "subtype": kwargs["librenms_type"],
                     "longitude": 0.0,
                     "latitude": 0.0,
                 },
             )
 
-    def query_opennms(self) -> None:
+    def query_opennms(self, **kwargs: str) -> None:
         parameters = get_one("Parameters")
-        login, password = parameters.opennms_login, parameters["password"]
+        login, password = self.parameters.opennms_login, parameters["password"]
         parameters.update(**parameters)
         Session.commit()
         json_devices = http_get(
-            parameters.opennms_devices,
+            self.parameters.opennms_devices,
             headers={"Accept": "application/json"},
             auth=(login, password),
         ).json()["node"]
@@ -254,13 +254,13 @@ class InventoryController:
                 "os_version": device["assetRecord"].get("sysDescription", ""),
                 "longitude": device["assetRecord"].get("longitude", 0.0),
                 "latitude": device["assetRecord"].get("latitude", 0.0),
-                "subtype": parameters["subtype"],
+                "subtype": kwargs["subtype"],
             }
             for device in json_devices
         }
         for device in list(devices):
             link = http_get(
-                f"{parameters.opennms_rest_api}/nodes/{device}/ipinterfaces",
+                f"{self.parameters.opennms_rest_api}/nodes/{device}/ipinterfaces",
                 headers={"Accept": "application/json"},
                 auth=(login, password),
             ).json()
@@ -294,19 +294,19 @@ class InventoryController:
         Session.commit()
         return result
 
-    def import_topology(self) -> str:
+    def import_topology(self, **kwargs: Union[str, List[int]]) -> str:
         file = request.files["file"]
-        if parameters["replace"]:
+        if kwargs["replace"]:
             delete_all("Device")
         if controller.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             result = controller.topology_import(file)
         info("Inventory import: Done.")
         return result
 
-    def save_pool_objects(self, pool_id: int) -> dict:
+    def save_pool_objects(self, pool_id: int, kwargs: List[int]) -> dict:
         pool = fetch("Pool", id=pool_id)
-        pool.devices = objectify("Device", parameters["devices"])
-        pool.links = objectify("Link", parameters["links"])
+        pool.devices = objectify("Device", kwargs["devices"])
+        pool.links = objectify("Link", kwargs["links"])
         return pool.serialized
 
     def update_pools(self, pool_id: str) -> None:
@@ -322,16 +322,16 @@ class InventoryController:
             "links": [d.view_properties for d in fetch_all("Link")],
         }
 
-    def view_filtering(self, filter_type: str) -> List[dict]:
+    def view_filtering(self, filter_type: str, **kwargs) -> List[dict]:
         obj_type = filter_type.split("_")[0]
         model = models[obj_type]
         constraints = []
         for property in filtering_properties[obj_type]:
-            value = parameters[property]
+            value = kwargs[property]
             if value:
                 constraints.append(getattr(model, property).contains(value))
         result = Session.query(model).filter(and_(*constraints))
-        pools = [int(id) for id in parameters["pools"]]
+        pools = [int(id) for id in kwargs["pools"]]
         if pools:
             result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
         return [d.view_properties for d in result.all()]

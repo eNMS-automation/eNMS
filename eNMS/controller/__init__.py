@@ -291,6 +291,7 @@ class Controller(
             "DEFAULT_MARKER": environ.get("DEFAULT_MARKER", "Image"),
             "CREATE_EXAMPLES": int(environ.get("CREATE_EXAMPLES", True)),
             "CUSTOM_SERVICES_PATH": environ.get("CUSTOM_SERVICES_PATH"),
+            "ENMS_CONFIG_MODE": environ.get("ENMS_CONFIG_MODE"),
             "ENMS_LOG_LEVEL": environ.get("ENMS_LOG_LEVEL", "DEBUG").upper(),
             "ENMS_SERVER_ADDR": environ.get("ENMS_SERVER_ADDR"),
             "GIT_AUTOMATION": environ.get("GIT_AUTOMATION", ""),

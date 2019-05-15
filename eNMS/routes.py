@@ -237,22 +237,22 @@ def get_requests_sink(_) -> Response:
     abort(404)
 
 
-@bp.route("/", methods=["POST"], defaults={"path": ""})
+@bp.route("/", methods=["POST"])
 @bp.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
-    f, *args = page.split("/")
+    (f, *args), kwargs = page.split("/"), {}
     if f not in controller.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})
-    form_type, kwargs = request.form.get("form_type"), {}
+    form_type = request.form.get("form_type")
     if form_type:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         kwargs = form_postprocessing(request.form)
-
-    # try:
-
-    return jsonify(getattr(controller, f)(*args, **kwargs))
-    # except Exception as e:
-    # result = {"error": str(e)}
+    try:
+        return jsonify(getattr(controller, f)(*args, **kwargs))
+    except Exception as e:
+        if controller.config["ENMS_CONFIG_MODE"]:
+            raise
+        return jsonify({"error": str(e)})

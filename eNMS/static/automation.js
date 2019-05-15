@@ -235,7 +235,7 @@ function showWorkflowModalDuplicate(id) {
 // eslint-disable-next-line
 function duplicateWorkflow(id) {
   $("#edit-workflow").modal("hide");
-  fCall(`/duplicate_workflow-${id}`, "#edit-workflow-form", (workflow) => {
+  fCall(`/duplicate_workflow/${id}`, "#edit-workflow-form", (workflow) => {
     table.ajax.reload(null, false);
     alertify.notify("Workflow successfully duplicated", "success", 5);
   });

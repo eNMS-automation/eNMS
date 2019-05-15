@@ -273,7 +273,7 @@ class Controller(
         return allowed_syntax and allowed_extension
 
     def get_time(self) -> str:
-        return str(datetime.now()).replace("-", "+")
+        return str(datetime.now())
 
     def load_config(self) -> dict:
         return {

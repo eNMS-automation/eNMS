@@ -32,7 +32,7 @@ function saveDeviceJobs(id) {
  */
 // eslint-disable-next-line
 function sshConnection(id) {
-  fCall(`/connection-${id}`, `#connection-parameters-form-${id}`, function(
+  fCall(`/connection/${id}`, `#connection-parameters-form-${id}`, function(
     result
   ) {
     let url = result.server_addr;
@@ -117,7 +117,7 @@ function configureCallbacks(id) {
     $(`#configurations-${id}`).empty();
     const v1 = $(`#display-${id}`).val();
     const v2 = $(`#compare_with-${id}`).val();
-    call(`/get_diff-${id}/${v1}/${v2}`, function(data) {
+    call(`/get_diff/${id}/${v1}/${v2}`, function(data) {
       $(`#configurations-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,
@@ -138,7 +138,7 @@ function configureCallbacks(id) {
  */
 // eslint-disable-next-line
 function savePoolObjects(id) {
-  fCall(`/save_pool_objects-${id}`, `#pool-objects-form-${id}`, function() {
+  fCall(`/save_pool_objects/${id}`, `#pool-objects-form-${id}`, function() {
     alertify.notify("Changes saved.", "success", 5);
     $(`#pool_objects-${id}`).remove();
   });

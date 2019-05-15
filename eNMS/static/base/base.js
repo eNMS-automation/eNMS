@@ -421,7 +421,7 @@ function processInstance(type, instance) {
 // eslint-disable-next-line
 function processData(type, id) {
   fCall(
-    `/update-${type}`,
+    `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
       if (typeof table != "undefined") table.ajax.reload(null, false);

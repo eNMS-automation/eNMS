@@ -32,13 +32,32 @@ from eNMS.properties.table import (
 )
 
 
+def monitor_requests(function: Callable) -> Callable:
+    @login_required
+    @wraps(f)
+    def decorated_function(*args: Any, **kwargs: Any) -> Any:
+        if not current_user.is_authenticated:
+            controller.log(
+                "warning",
+                (
+                    f"Unauthorized {request.method} request from "
+                    f"'{request.remote_addr}' calling the endpoint '{request.url}'"
+                ),
+            )
+            abort(403)
+        else:
+            return func(*args, **kwargs)
+
+    return decorated_function
+
+
 @bp.route("/")
 def site_root() -> Response:
     return redirect(url_for("bp.route", page="login"))
 
 
 @bp.route("/filtering-<table>")
-@login_required
+@monitor_requests
 def filtering(table: str) -> dict:
     model = models.get(table, models["Device"])
     properties = table_properties[table]
@@ -75,7 +94,7 @@ def filtering(table: str) -> dict:
 
 @bp.route("/form-<form_type>")
 @cache.cached(timeout=0)
-@login_required
+@monitor_requests
 def form(form_type: str) -> dict:
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",
@@ -90,7 +109,7 @@ def form(form_type: str) -> dict:
 
 @bp.route("/view-<view_type>")
 @cache.cached(timeout=0)
-@login_required
+@monitor_requests
 def view(view_type: str) -> dict:
     return render_template(
         f"pages/view.html",
@@ -100,7 +119,7 @@ def view(view_type: str) -> dict:
 
 @bp.route("/table-<table_type>")
 @cache.cached(timeout=0)
-@login_required
+@monitor_requests
 def table(table_type: str) -> dict:
     table_dict = {
         "properties": table_properties[table_type],
@@ -122,7 +141,7 @@ def table(table_type: str) -> dict:
 
 @bp.route("/dashboard")
 @cache.cached(timeout=0)
-@login_required
+@monitor_requests
 def dashboard() -> dict:
     return render_template(
         f"pages/dashboard.html",
@@ -132,7 +151,7 @@ def dashboard() -> dict:
 
 @bp.route("/workflow_builder")
 @cache.cached(timeout=0)
-@login_required
+@monitor_requests
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
     return render_template(
@@ -146,7 +165,7 @@ def workflow_builder() -> dict:
 
 @bp.route("/calendar")
 @cache.cached(timeout=0)
-@login_required
+@monitor_requests
 def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
@@ -168,7 +187,7 @@ def download_configuration(name: str) -> Response:
 
 @bp.route("/administration")
 @cache.cached(timeout=0)
-@login_required
+@monitor_requests
 def administration() -> dict:
     return render_template(
         f"pages/administration.html",
@@ -205,23 +224,22 @@ def login() -> Response:
 
 
 @bp.route("/logout")
-@login_required
+@monitor_requests
 def logout() -> Response:
     logout_user()
     return redirect(url_for("bp.route", page="login"))
 
 
+@bp.route("/<_>")
+@monitor_requests
+def get_requests_sink(_) -> Response:
+    abort(404)
+
+
 @bp.route("/<page>", methods=["POST"])
+@monitor_requests
 def route(page: str) -> Response:
-    if not current_user.is_authenticated:
-        controller.log(
-            "warning",
-            (
-                f"Unauthenticated {request.method} request from "
-                f"'{request.remote_addr}' calling the endpoint '{request.url}'"
-            ),
-        )
-        abort(403)
+
     func, *args = page.split("-")
     form_type, kwargs = request.form.get("form_type"), {}
     if form_type:
@@ -229,10 +247,10 @@ def route(page: str) -> Response:
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         kwargs = form_postprocessing(request.form)
-    # try:
     if not hasattr(controller, func):
         abort(404)
+    # try:
+
     return jsonify(getattr(controller, func)(*args, **kwargs))
-    Session.commit()
     # except Exception as e:
     # result = {"error": str(e)}

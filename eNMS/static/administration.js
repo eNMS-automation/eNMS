@@ -16,7 +16,7 @@ updateProperty: false
 // eslint-disable-next-line
 function showParametersPanel(type) {
   createPanel(type, `${type} Parameters`, 0, () => {
-    call("/get-parameters-1", function(parameters) {
+    call("/get/parameters/1", function(parameters) {
       for (const [property, value] of Object.entries(parameters)) {
         updateProperty($(`#${property}`), property, value);
       }
@@ -130,7 +130,7 @@ function saveParameters(type) {
  * Get Cluster Status.
  */
 function getClusterStatus() {
-  call("/admin/get_cluster_status", function(cluster) {
+  call("/get_cluster_status", function(cluster) {
     table.ajax.reload(null, false);
     setTimeout(getClusterStatus, 15000);
   });
@@ -196,7 +196,7 @@ function getGitContent() {
  */
 // eslint-disable-next-line
 function scheduler(action) {
-  call(`/scheduler-${action}`, function() {
+  call(`/scheduler/${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);
   });
 }

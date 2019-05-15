@@ -80,7 +80,7 @@ function displayResult(results, id) {
  * @param {id} id - Job id.
  */
 function displayResults(id) {
-  call(`/get_job_results-${id}`, (results) => {
+  call(`/get_job_results/${id}`, (results) => {
     $(`#display-${id},#compare_with-${id}`).empty();
     const times = Object.keys(results);
     times.forEach((option) => {
@@ -104,7 +104,7 @@ function displayResults(id) {
 // eslint-disable-next-line
 function refreshLogs(firstTime, id) {
   if (refreshJob[id]) {
-    call(`/get_job_logs-${id}`, (job) => {
+    call(`/get_job_logs/${id}`, (job) => {
       $(`#logs-${id}`).text(job.logs.join("\n"));
       if (!job.running || $(`#logs-${id}`).length == 0) {
         refreshJob[id] = false;
@@ -159,7 +159,7 @@ function showResultsPanel(id, name) {
 // eslint-disable-next-line
 function configureCallbacks(id) {
   $(`#display-${id}`).on("change", function() {
-    call(`/get_job_results-${id}`, (results) => {
+    call(`/get_job_results/${id}`, (results) => {
       displayResult(results, id);
       $(`#compare_with-${id}`).val($(`#display-${id}`).val());
     });
@@ -169,7 +169,7 @@ function configureCallbacks(id) {
     $(`#display_results-${id}`).empty();
     const v1 = $(`#display-${id}`).val();
     const v2 = $(`#compare_with-${id}`).val();
-    call(`/get_results_diff-${id}-${v1}-${v2}`, function(data) {
+    call(`/get_results_diff/${id}/${v1}/${v2}`, function(data) {
       $(`#display_results-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,
@@ -191,7 +191,7 @@ function configureCallbacks(id) {
  */
 // eslint-disable-next-line
 function clearResults(id) {
-  call(`/clear_results-${id}`, () => {
+  call(`/clear_results/${id}`, () => {
     $(`#display_results-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Results cleared.", "success", 5);
     $(`#results-${id}`).remove();
@@ -204,7 +204,7 @@ function clearResults(id) {
  */
 // eslint-disable-next-line
 function runJob(id, realTimeUpdate) {
-  call(`/run_job-${id}`, function(job) {
+  call(`/run_job/${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
     if (typeof workflowBuilder !== "undefined") {
       if (job.type == "Workflow") {
@@ -248,7 +248,7 @@ function duplicateWorkflow(id) {
 // eslint-disable-next-line
 function pauseTask(id) {
   // eslint-disable-line no-unused-vars
-  call(`/pause_task-${id}`, function(result) {
+  call(`/pause_task/${id}`, function(result) {
     $(`#pause-resume-${id}`)
       .attr("onclick", `resumeTask('${id}')`)
       .text("Resume");
@@ -263,7 +263,7 @@ function pauseTask(id) {
 // eslint-disable-next-line
 function resumeTask(id) {
   // eslint-disable-line no-unused-vars
-  call(`/resume_task-${id}`, function(result) {
+  call(`/resume_task/${id}`, function(result) {
     $(`#pause-resume-${id}`)
       .attr("onclick", `pauseTask('${id}')`)
       .text("Pause");

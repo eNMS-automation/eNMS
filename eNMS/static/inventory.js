@@ -72,7 +72,7 @@ function showConfigurationPanel(id, name) {
  * @param {int} id - Device ID.
  */
 function displayConfigurations(id) {
-  call(`/get_configurations-${id}`, (configurations) => {
+  call(`/get_configurations/${id}`, (configurations) => {
     $(`#display-${id},#compare_with-${id}`).empty();
     const times = Object.keys(configurations);
     times.forEach((option) => {
@@ -93,7 +93,7 @@ function displayConfigurations(id) {
  */
 // eslint-disable-next-line
 function clearConfigurations(id) {
-  call(`/clear_configurations-${id}`, () => {
+  call(`/clear_configurations/${id}`, () => {
     $(`#configurations-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Configurations cleared.", "success", 5);
     $(`#configuration-${id}`).remove();
@@ -106,7 +106,7 @@ function clearConfigurations(id) {
 // eslint-disable-next-line
 function configureCallbacks(id) {
   $(`#display-${id}`).on("change", function() {
-    call(`/get_configurations-${id}`, (configurations) => {
+    call(`/get_configurations/${id}`, (configurations) => {
       $(`#configurations-${id}`).text(
         configurations[$(`#display-${id}`).val()]
       );
@@ -117,7 +117,7 @@ function configureCallbacks(id) {
     $(`#configurations-${id}`).empty();
     const v1 = $(`#display-${id}`).val();
     const v2 = $(`#compare_with-${id}`).val();
-    call(`/get_diff-${id}-${v1}-${v2}`, function(data) {
+    call(`/get_diff-${id}/${v1}/${v2}`, function(data) {
       $(`#configurations-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,
@@ -151,7 +151,7 @@ function savePoolObjects(id) {
 // eslint-disable-next-line
 function updatePool(pool) {
   alertify.notify("Update starting...", "success", 5);
-  call(`/update_pool-${pool}`, function() {
+  call(`/update_pool/${pool}`, function() {
     table.ajax.reload(null, false);
     alertify.notify("Update successful.", "success", 5);
   });

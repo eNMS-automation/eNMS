@@ -203,7 +203,7 @@ function serializeForm(form) {
  */
 // eslint-disable-next-line
 function deleteInstance(type, id) {
-  call(`/delete_instance-${type}-${id}`, function(result) {
+  call(`/delete_instance/${type}/${id}`, function(result) {
     $(`#instance_deletion-${id}`).remove();
     table
       .row($(`#${id}`))
@@ -273,7 +273,7 @@ function showPanel(type, id) {
 // eslint-disable-next-line
 function showPoolObjectsPanel(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
-    call(`/get-pool-${id}`, function(pool) {
+    call(`/get/pool/${id}`, function(pool) {
       $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
       $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
     });
@@ -355,7 +355,7 @@ function showTypePanel(type, id, duplicate) {
     function(panel) {
       if (type == "workflow" || type.includes("Service")) panelCode(type, id);
       if (id) {
-        call(`/get-${type}-${id}`, function(instance) {
+        call(`/get/${type}/${id}`, function(instance) {
           panel.setHeaderTitle(
             `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
           );

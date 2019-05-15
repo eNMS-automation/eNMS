@@ -62,7 +62,7 @@ function showPoolView(poolId) {
       containment: [5, 5, 5, 5],
     },
   });
-  call(`/get-pool-${poolId}`, function(pool) {
+  call(`/get/pool/${poolId}`, function(pool) {
     $(`#network-${poolId}`).contextMenu({
       menuSelector: "#contextMenu",
       menuSelected: function(invokedOn, selectedMenu) {

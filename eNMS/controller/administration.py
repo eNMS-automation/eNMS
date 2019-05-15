@@ -21,9 +21,9 @@ from eNMS.database.functions import (
 
 
 class AdministrationController:
-    def database_helpers(self) -> None:
-        delete_all(*parameters["deletion_types"])
-        clear_logs_date = parameters["clear_logs_date"]
+    def database_helpers(self, **kwargs) -> None:
+        delete_all(*kwargs["deletion_types"])
+        clear_logs_date = kwargs["clear_logs_date"]
         if clear_logs_date:
             clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
             for job in fetch_all("Job"):
@@ -39,22 +39,22 @@ class AdministrationController:
             for attr in ("status", "cpu_load")
         }
 
-    def migration_export(self) -> None:
-        for cls_name in parameters["import_export_types"]:
-            path = current_app.path / "migrations" / parameters["name"]
+    def migration_export(self, **kwargs) -> None:
+        for cls_name in kwargs["import_export_types"]:
+            path = current_app.path / "migrations" / kwargs["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 dump(export(cls_name), migration_file, default_flow_style=False)
 
-    def migration_import(self) -> str:
-        status, types = "Import successful.", parameters["import_export_types"]
+    def migration_import(self, **kwargs) -> str:
+        status, types = "Import successful.", kwargs["import_export_types"]
         workflows: list = []
         edges: list = []
-        if parameters.get("empty_database_before_import", False):
+        if kwargs.get("empty_database_before_import", False):
             delete_all(*types)
         for cls in types:
-            path = current_app.path / "migrations" / parameters["name"] / f"{cls}.yaml"
+            path = current_app.path / "migrations" / kwargs["name"] / f"{cls}.yaml"
             with open(path, "r") as migration_file:
                 objects = load(migration_file, Loader=BaseLoader)
                 if cls == "Workflow":
@@ -95,17 +95,17 @@ class AdministrationController:
             except Exception as e:
                 info(f"{str(edge)} could not be imported ({str(e)})")
                 status = "Partial import (see logs)."
-        if parameters.get("empty_database_before_import", False):
+        if kwargs.get("empty_database_before_import", False):
             self.create_default()
         return status
 
-    def save_parameters(self, parameter_type: str) -> None:
+    def save_parameters(self, parameter_type: str, **kwargs) -> None:
         parameters = get_one("Parameters")
-        parameters.update(**parameters)
+        parameters.update(**kwargs)
         if parameter_type == "git":
             self.get_git_content()
 
-    def scan_cluster(self) -> None:
+    def scan_cluster(self, **kwargs) -> None:
         parameters = get_one("Parameters")
         protocol = parameters.cluster_scan_protocol
         for ip_address in IPv4Network(parameters.cluster_scan_subnet):

@@ -69,7 +69,7 @@ class Controller(
         self.configure_logs()
 
     def initialize_database(self):
-        self.create_default_parameters()
+        self.parameters = self.create_default_parameters()
         self.create_default()
         if self.config["CREATE_EXAMPLES"]:
             self.create_examples()
@@ -90,6 +90,7 @@ class Controller(
             )
             Session.add(parameters)
             Session.commit()
+            return parameters.serialized
 
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         return delete(cls, id=instance_id)

@@ -231,7 +231,7 @@ def logout() -> Response:
     return redirect(url_for("bp.route", page="login"))
 
 
-@bp.route("/<_>")
+@bp.route("/<path:_>")
 @monitor_requests
 def get_requests_sink(_) -> Response:
     abort(404)

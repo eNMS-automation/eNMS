@@ -100,19 +100,17 @@ class AdministrationController:
         return status
 
     def save_parameters(self, parameter_type: str, **kwargs) -> None:
-        parameters = get_one("Parameters")
-        parameters.update(**kwargs)
+        self.update_parameters(**kwargs)
         if parameter_type == "git":
             self.get_git_content()
 
     def scan_cluster(self, **kwargs) -> None:
-        parameters = get_one("Parameters")
-        protocol = parameters.cluster_scan_protocol
-        for ip_address in IPv4Network(parameters.cluster_scan_subnet):
+        protocol = self.parameters["cluster_scan_protocol"]
+        for ip_address in IPv4Network(self.parameters["cluster_scan_subnet"]):
             try:
                 server = http_get(
                     f"{protocol}://{ip_address}/rest/is_alive",
-                    timeout=parameters.cluster_scan_timeout,
+                    timeout=self.parameters["cluster_scan_timeout"],
                 ).json()
                 if self.config["CLUSTER_ID"] != server.pop("cluster_id"):
                     continue

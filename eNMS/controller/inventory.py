@@ -1,8 +1,10 @@
 from collections import Counter
 from datetime import datetime
 from difflib import SequenceMatcher
+from git import Repo
 from logging import info
-from os import environ
+from os import environ, scandir, remove
+from pathlib import Path
 from pynetbox import api as netbox_api
 from requests import get as http_get
 from sqlalchemy import and_
@@ -17,18 +19,16 @@ from yaml import load, BaseLoader
 
 from eNMS.database import Session
 from eNMS.database.functions import (
-    count,
     delete_all,
     factory,
     fetch,
     fetch_all,
     get_one,
     objectify,
-    Session,
 )
-from eNMS.models import property_types
+from eNMS.models import models, property_types
 from eNMS.properties import field_conversion, property_names
-from eNMS.properties.diagram import device_properties, diagram_classes
+from eNMS.properties.diagram import device_diagram_properties
 from eNMS.properties.objects import (
     device_properties,
     device_subtypes,
@@ -36,6 +36,7 @@ from eNMS.properties.objects import (
     link_subtypes,
     pool_device_properties,
 )
+from eNMS.properties.table import filtering_properties, table_properties
 
 
 class InventoryController:
@@ -49,7 +50,7 @@ class InventoryController:
             cmd.append("--once")
         if "multiplexing" in kwargs:
             cmd.extend(f"tmux new -A -s gotty{port}".split())
-        if controller.config["GOTTY_BYPASS_KEY_PROMPT"]:
+        if self.parameters["GOTTY_BYPASS_KEY_PROMPT"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
@@ -69,8 +70,8 @@ class InventoryController:
         return {
             "device": device.name,
             "port": port,
-            "redirection": controller.config["GOTTY_PORT_REDIRECTION"],
-            "server_addr": controller.config["ENMS_SERVER_ADDR"],
+            "redirection": self.parameters["GOTTY_PORT_REDIRECTION"],
+            "server_addr": self.parameters["ENMS_SERVER_ADDR"],
         }
 
     def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
@@ -298,8 +299,8 @@ class InventoryController:
         file = request.files["file"]
         if kwargs["replace"]:
             delete_all("Device")
-        if controller.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
-            result = controller.topology_import(file)
+        if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
+            result = self.topology_import(file)
         info("Inventory import: Done.")
         return result
 

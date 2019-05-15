@@ -6,12 +6,13 @@ from hvac import Client as VaultClient
 from importlib import import_module
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
+from json.decoder import JSONDecodeError
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
 from os import environ
 from pathlib import Path
-from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from string import punctuation
 from tacacs_plus.client import TACACSClient
 from typing import Any, List, Set
@@ -21,8 +22,9 @@ from eNMS.controller.automation import AutomationController
 from eNMS.controller.default import DefaultController
 from eNMS.controller.examples import ExamplesController
 from eNMS.controller.inventory import InventoryController
-from eNMS.database.functions import count, factory, fetch_all, get_one
-from eNMS.models import models
+from eNMS.database import Session
+from eNMS.database.functions import count, delete, factory, fetch, fetch_all, get_one
+from eNMS.models import models, model_properties
 from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 
 
@@ -103,9 +105,9 @@ class Controller(
     def get_all(self, cls: str) -> List[dict]:
         return [instance.get_properties() for instance in fetch_all(cls)]
 
-    def update(self, cls: str) -> dict:
+    def update(self, cls: str, **kwargs) -> dict:
         try:
-            instance = factory(cls, **request.form)
+            instance = factory(cls, **kwargs)
             return instance.serialized
         except JSONDecodeError:
             return {"error": "Invalid JSON syntax (JSON field)"}

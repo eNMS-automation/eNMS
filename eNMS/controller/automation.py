@@ -4,7 +4,7 @@ from flask import request, session
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from re import search, sub
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from eNMS.concurrent import threaded_job
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
@@ -33,9 +33,9 @@ class AutomationController:
         fetch("Workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(self, workflow_id: int) -> Dict[str, Any]:
+    def add_jobs_to_workflow(self, workflow_id: int, **kwargs) -> Dict[str, Any]:
         workflow = fetch("Workflow", id=workflow_id)
-        jobs = objectify("Job", request.form["add_jobs"])
+        jobs = objectify("Job", kwargs["add_jobs"])
         for job in jobs:
             job.workflows.append(workflow)
         now = self.get_time()
@@ -58,9 +58,9 @@ class AutomationController:
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
 
-    def duplicate_workflow(self, workflow_id: int) -> dict:
+    def duplicate_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
         parent_workflow = fetch("Workflow", id=workflow_id)
-        new_workflow = factory("Workflow", **request.form)
+        new_workflow = factory("Workflow", **kwargs)
         for job in parent_workflow.jobs:
             new_workflow.jobs.append(job)
             job.positions[new_workflow.name] = job.positions[parent_workflow.name]
@@ -113,8 +113,8 @@ class AutomationController:
         )
         return job.serialized
 
-    def save_device_jobs(self, device_id: int) -> None:
-        fetch("Device", id=device_id).jobs = objectify("Job", request.form["jobs"])
+    def save_device_jobs(self, device_id: int, **kwargs: List[int]) -> None:
+        fetch("Device", id=device_id).jobs = objectify("Job", kwargs["jobs"])
 
     def save_positions(self, workflow_id: int) -> str:
         now = self.get_time()

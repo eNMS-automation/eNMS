@@ -1,6 +1,3 @@
-from xlrd import open_workbook
-from xlrd.biffh import XLRDError
-
 from eNMS.database.functions import factory, fetch, Session
 
 

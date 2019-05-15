@@ -1,7 +1,6 @@
 from collections import defaultdict
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from typing import Callable, Dict
 from werkzeug.datastructures import ImmutableMultiDict
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta

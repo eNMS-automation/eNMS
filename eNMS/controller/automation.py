@@ -1,20 +1,13 @@
 from datetime import datetime
 from difflib import SequenceMatcher
-from flask import current_app, jsonify, request, send_file, session
+from flask import request, session
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from re import search, sub
 from typing import Any, Dict
 
 from eNMS.concurrent import threaded_job
-from eNMS.database.functions import (
-    delete,
-    factory,
-    fetch,
-    fetch_all,
-    get_one,
-    objectify,
-)
+from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
 
 
 class AutomationController:

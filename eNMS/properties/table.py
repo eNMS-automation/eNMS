@@ -1,6 +1,9 @@
 from typing import Dict, List
 
-from eNMS.properties.objects import device_properties, object_common_properties
+from eNMS.properties.objects import (
+    device_properties as device_class_properties,
+    object_common_properties,
+)
 
 device_properties: List[str] = object_common_properties + device_properties[:-3]
 

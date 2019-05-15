@@ -1,8 +1,6 @@
-from flask import Flask
 from uuid import getnode
 
-from eNMS.database.functions import factory, fetch, get_one, Session
-from eNMS.models import models, model_properties
+from eNMS.database.functions import factory, fetch, Session
 
 
 class DefaultController:

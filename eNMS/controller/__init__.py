@@ -70,7 +70,6 @@ class Controller(
 
     def initialize_database(self):
         self.parameters = self.create_default_parameters()
-        print(self.parameters)
         self.create_default()
         if self.config["CREATE_EXAMPLES"]:
             self.create_examples()
@@ -90,6 +89,10 @@ class Controller(
             return parameters.get_properties()
         else:
             return get_one("Parameters").get_properties()
+
+    def update_parameters(self, **kwargs):
+        get_one("Parameters").update(**kwargs)
+        self.parameters.update(kwargs)
 
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         return delete(cls, id=instance_id)

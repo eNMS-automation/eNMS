@@ -316,9 +316,6 @@ class InventoryController:
         else:
             fetch("Pool", id=int(pool_id)).compute_pool()
 
-    def view(self, view_type: str) -> dict:
-        return dict(template="pages/view", link_colors=link_colors, view_type=view_type)
-
     def get_view_topology(self) -> dict:
         return {
             "devices": [d.view_properties for d in fetch_all("Device")],

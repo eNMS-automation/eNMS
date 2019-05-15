@@ -9,24 +9,22 @@ from flask import (
     session,
     url_for,
 )
-from flask_login import current_user, login_required, logout_user
-from flask_wtf import FlaskForm
+from flask_login import current_user, login_required, login_user, logout_user
 from flask.wrappers import Response
-from json.decoder import JSONDecodeError
+from logging import info
 from sqlalchemy import and_
-from sqlalchemy.exc import IntegrityError
-from typing import List
 from werkzeug.wrappers.response import Response
 
 from eNMS.controller import controller
 from eNMS.database import Session
-from eNMS.database.functions import delete, factory, fetch, fetch_all, Session
+from eNMS.database.functions import factory, fetch
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.extensions import bp, cache
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
+from eNMS.properties.objects import link_colors
 from eNMS.properties.table import (
     filtering_properties,
     table_fixed_columns,
@@ -87,6 +85,16 @@ def form(form_type: str) -> dict:
             "form": form_actions.get(form_type),
             "form_type": form_type,
         }
+    )
+
+
+@bp.route("/view-<view_type>")
+@cache.cached(timeout=0)
+@login_required
+def view(view_type: str) -> dict:
+    return render_template(
+        f"pages/view.html",
+        **{"endpoint": "view", "link_colors": link_colors, "view_type": view_type},
     )
 
 
@@ -252,7 +260,7 @@ def route(page: str) -> Response:
     # try:
     if not hasattr(controller, func):
         abort(404)
-    result = jsonify(getattr(controller, func)(*args))
+    return jsonify(getattr(controller, func)(*args))
     Session.commit()
     # except Exception as e:
     # result = {"error": str(e)}

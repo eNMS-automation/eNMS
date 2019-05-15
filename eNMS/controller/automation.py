@@ -36,7 +36,7 @@ class AutomationController:
                 "destination": destination,
             },
         )
-        now = controller.get_time()
+        now = self.get_time()
         fetch("Workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
@@ -45,7 +45,7 @@ class AutomationController:
         jobs = objectify("Job", request.form["add_jobs"])
         for job in jobs:
             job.workflows.append(workflow)
-        now = controller.get_time()
+        now = self.get_time()
         workflow.last_modified = now
         return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
@@ -54,14 +54,14 @@ class AutomationController:
 
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
         delete("WorkflowEdge", id=edge_id)
-        now = controller.get_time()
+        now = self.get_time()
         fetch("Workflow", id=workflow_id).last_modified = now
         return now
 
     def delete_node(self, workflow_id: int, job_id: int) -> dict:
         workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
         workflow.jobs.remove(job)
-        now = controller.get_time()
+        now = self.get_time()
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
 
@@ -111,8 +111,8 @@ class AutomationController:
                 return {"error": "Set devices or pools as targets first."}
             if not job.has_targets and targets:
                 return {"error": "This service should not have targets configured."}
-        controller.scheduler.add_job(
-            id=controller.get_time(),
+        self.scheduler.add_job(
+            id=self.get_time(),
             func=threaded_job,
             run_date=datetime.now(),
             args=[job.id],
@@ -124,7 +124,7 @@ class AutomationController:
         fetch("Device", id=device_id).jobs = objectify("Job", request.form["jobs"])
 
     def save_positions(self, workflow_id: int) -> str:
-        now = controller.get_time()
+        now = self.get_time()
         workflow = fetch("Workflow", id=workflow_id)
         workflow.last_modified = now
         session["workflow"] = workflow.id
@@ -135,10 +135,10 @@ class AutomationController:
 
     def get_results_diff(self, job_id: int, v1: str, v2: str) -> dict:
         job = fetch("Job", id=job_id)
-        first = controller.str_dict(
+        first = self.str_dict(
             dict(reversed(sorted(job.results[v1].items())))
         ).splitlines()
-        second = controller.str_dict(
+        second = self.str_dict(
             dict(reversed(sorted(job.results[v2].items())))
         ).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
@@ -167,7 +167,7 @@ class AutomationController:
         return tasks
 
     def scheduler(self, action: str) -> None:
-        getattr(controller.scheduler, action)()
+        getattr(self.scheduler, action)()
 
     def task_action(self, action: str, task_id: int) -> None:
         getattr(fetch("Task", id=task_id), action)()

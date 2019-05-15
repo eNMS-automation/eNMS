@@ -11,9 +11,11 @@ from flask import (
 )
 from flask_login import current_user, login_required, login_user, logout_user
 from flask.wrappers import Response
+from functools import wraps
 from logging import info
 from os import listdir
 from sqlalchemy import and_
+from typing import Any, Callable
 
 from eNMS.controller import controller
 from eNMS.database import Session
@@ -33,8 +35,7 @@ from eNMS.properties.table import (
 
 
 def monitor_requests(function: Callable) -> Callable:
-    @login_required
-    @wraps(f)
+    @wraps(function)
     def decorated_function(*args: Any, **kwargs: Any) -> Any:
         if not current_user.is_authenticated:
             controller.log(
@@ -46,7 +47,7 @@ def monitor_requests(function: Callable) -> Callable:
             )
             abort(403)
         else:
-            return func(*args, **kwargs)
+            return function(*args, **kwargs)
 
     return decorated_function
 
@@ -239,7 +240,6 @@ def get_requests_sink(_) -> Response:
 @bp.route("/<page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
-
     func, *args = page.split("-")
     form_type, kwargs = request.form.get("form_type"), {}
     if form_type:

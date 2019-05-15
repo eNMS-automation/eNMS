@@ -142,6 +142,7 @@ class Controller(
             **{"origin": "eNMS", "severity": severity, "content": content},
         )
         self.log_severity[severity](content)
+        Session.commit()
 
     def configure_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(

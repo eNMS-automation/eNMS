@@ -21,6 +21,45 @@ from eNMS.database.functions import (
 
 
 class AdministrationController:
+    def authenticate_user(self, **kwargs) -> bool:
+        name, password = kwargs["name"], kwargs["password"]
+        if kwargs["authentication_method"] == "Local User":
+            user = fetch("User", name=name)
+            if user and password == user.password:
+                return user
+        elif kwargs["authentication_method"] == "LDAP Domain":
+            with Connection(
+                self.ldap_client,
+                user=f"{self.LDAP_USERDN}\\{name}",
+                password=password,
+                auto_bind=True,
+                authentication=NTLM,
+            ) as connection:
+                connection.search(
+                    self.LDAP_BASEDN,
+                    f"(&(objectClass=person)(samaccountname={name}))",
+                    search_scope=SUBTREE,
+                    get_operational_attributes=True,
+                    attributes=["cn", "memberOf", "mail"],
+                )
+                json_response = loads(connection.response_to_json())["entries"][0]
+                if json_response:
+                    user = {
+                        "name": name,
+                        "password": password,
+                        "email": json_response["attributes"].get("mail", ""),
+                    }
+                    if any(
+                        group in s
+                        for group in self.LDAP_ADMIN_GROUP
+                        for s in json_response["attributes"]["memberOf"]
+                    ):
+                        user["permissions"] = ["Admin"]
+                    return factory("User", **user)
+        elif kwargs["authentication_method"] == "TACACS":
+            if self.tacacs_client.authenticate(name, password).valid:
+                return factory("User", **{"name": name, "password": password})
+
     def database_helpers(self, **kwargs) -> None:
         delete_all(*kwargs["deletion_types"])
         clear_logs_date = kwargs["clear_logs_date"]

@@ -197,7 +197,7 @@ class InventoryController:
         )
         for object_properties in (device_properties, pool_device_properties):
             object_properties.extend(list(custom_properties))
-        device_properties.extend(
+        device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
         )
         return custom_properties

@@ -24,7 +24,7 @@ service_diagram_properties: List[str] = [
     "time_between_retries",
 ]
 
-workflow_diagram_properties: List[str] = service_properties
+workflow_diagram_properties: List[str] = service_diagram_properties
 
 task_diagram_properties: List[str] = [
     "status",

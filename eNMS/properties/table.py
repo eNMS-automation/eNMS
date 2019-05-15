@@ -63,7 +63,7 @@ server_table_properties = [
 
 log_table_properties: List[str] = ["time", "origin", "severity", "content"]
 
-log_rule_table_properties: List[str] = ["name"] + log_properties
+log_rule_table_properties: List[str] = ["name"] + log_table_properties
 
 task_table_properties: List[str] = [
     "name",

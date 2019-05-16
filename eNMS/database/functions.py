@@ -60,7 +60,6 @@ def factory(cls_name: str, **kwargs: Any) -> Any:
         instance.update(**kwargs)
     else:
         instance = models[cls_name](**kwargs)
-        print("ttt" * 100)
         Session.add(instance)
     return instance
 

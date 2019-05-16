@@ -122,6 +122,7 @@ class AutomationController:
         workflow.last_modified = now
         session["workflow"] = workflow.id
         for job_id, position in request.json.items():
+            print(job_id, position)
             job = fetch("Job", id=job_id)
             job.positions[workflow.name] = (position["x"], position["y"])
         return now

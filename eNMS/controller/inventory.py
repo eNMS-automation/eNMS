@@ -292,7 +292,6 @@ class InventoryController:
             Session.commit()
         for pool in fetch_all("Pool"):
             pool.compute_pool()
-        Session.commit()
         return result
 
     def import_topology(self, **kwargs: Union[str, List[int]]) -> str:

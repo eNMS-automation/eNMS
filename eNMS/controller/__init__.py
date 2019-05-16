@@ -183,13 +183,8 @@ class Controller(
         )
 
     def log(self, severity, content) -> None:
-        factory(
-            "Log",
-            commit=False,
-            **{"origin": "eNMS", "severity": severity, "content": content},
-        )
+        factory("Log", **{"origin": "eNMS", "severity": severity, "content": content})
         self.log_severity[severity](content)
-        Session.commit()
 
     def configure_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(

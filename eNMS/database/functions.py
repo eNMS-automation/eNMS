@@ -29,7 +29,6 @@ def delete(model: str, **kwargs: Any) -> dict:
         instance.delete_task()
     serialized_instance = instance.serialized
     Session.delete(instance)
-    Session.commit()
     return serialized_instance
 
 
@@ -37,7 +36,6 @@ def delete_all(*models: str) -> None:
     for model in models:
         for instance in fetch_all(model):
             delete(model, id=instance.id)
-    Session.commit()
 
 
 def choices(model: str) -> List[Tuple[int, str]]:
@@ -52,7 +50,7 @@ def get_one(model: str) -> Any:
     return Session.query(models[model]).one_or_none()
 
 
-def factory(cls_name: str, commit=True, **kwargs: Any) -> Any:
+def factory(cls_name: str, **kwargs: Any) -> Any:
     instance, instance_id = None, kwargs.pop("id", 0)
     if instance_id:
         instance = fetch(cls_name, id=instance_id)
@@ -62,9 +60,8 @@ def factory(cls_name: str, commit=True, **kwargs: Any) -> Any:
         instance.update(**kwargs)
     else:
         instance = models[cls_name](**kwargs)
+        print("ttt" * 100)
         Session.add(instance)
-    if commit:
-        Session.commit()
     return instance
 
 

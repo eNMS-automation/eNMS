@@ -193,6 +193,7 @@ class ExamplesController:
                 "operating_system": "eos",
             },
         )
+        Session.commit()
         workflow.jobs.extend(services)
         edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
         for x, y in edges:
@@ -249,6 +250,7 @@ class ExamplesController:
                 "operating_system": "eos",
             },
         )
+        Session.commit()
         workflow.jobs.extend(services)
         edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
         for x, y in edges:
@@ -330,9 +332,8 @@ class ExamplesController:
                 "operating_system": "eos",
             },
         )
+        Session.commit()
         workflow.jobs.extend(services)
-
-        # create workflow edges with following schema:
         positions = [
             (-20, 0),
             (50, 0),
@@ -410,6 +411,7 @@ class ExamplesController:
     def create_examples(self) -> None:
         self.create_example_pools()
         self.create_network_topology()
+        Session.commit()
         self.create_example_services()
         self.create_netmiko_workflow()
         self.create_napalm_workflow()

@@ -36,16 +36,6 @@ class Controller(
     InventoryController,
 ):
 
-    cache = [
-        "administration",
-        "calendar",
-        "dashboard",
-        "form",
-        "view",
-        "table",
-        "workflow_builder",
-    ]
-
     valid_post_endpoints = [
         "add_edge",
         "add_jobs_to_workflow",
@@ -161,10 +151,6 @@ class Controller(
             return {"error": "Invalid JSON syntax (JSON field)"}
         except IntegrityError:
             return {"error": "An object with the same name already exists"}
-
-    def unless_cache(self, *args, **kwargs):
-        page = kwargs["page"].split("-")[0]
-        return self.config["DEVELOP"] or page not in self.cache
 
     def configure_logs(self) -> None:
         basicConfig(

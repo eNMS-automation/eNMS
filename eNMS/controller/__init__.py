@@ -70,6 +70,7 @@ class Controller(
         "query_librenms",
         "query_opennms",
         "reset_status",
+        "run_job",
         "save_device_jobs",
         "save_parameters",
         "save_pool_objects",

@@ -105,8 +105,12 @@ class DeviceForm(ObjectForm):
     username = StringField("Username")
     password = PasswordField("Password")
     enable_password = PasswordField("'Enable' Password")
-    napalm_driver = SelectField("NAPALM Driver", choices=controller.NAPALM_DRIVERS)
-    netmiko_driver = SelectField("Netmiko Driver", choices=controller.NETMIKO_DRIVERS)
+    napalm_driver = SelectField(
+        "NAPALM Driver", choices=controller.NAPALM_DRIVERS, default="ios"
+    )
+    netmiko_driver = SelectField(
+        "Netmiko Driver", choices=controller.NETMIKO_DRIVERS, default="cisco_ios"
+    )
 
 
 class LinkForm(ObjectForm):

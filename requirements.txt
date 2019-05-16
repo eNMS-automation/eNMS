@@ -13,6 +13,7 @@ gunicorn
 hvac
 jinja2
 ldap3
+mysqlclient
 napalm
 netmiko
 pathlib

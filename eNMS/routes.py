@@ -57,7 +57,7 @@ def site_root() -> Response:
     return redirect(url_for("bp.route", page="login"))
 
 
-@bp.route("/filtering-<table>")
+@bp.route("/filtering/<table>")
 @monitor_requests
 def filtering(table: str) -> dict:
     model = models.get(table, models["Device"])
@@ -93,7 +93,7 @@ def filtering(table: str) -> dict:
     )
 
 
-@bp.route("/form-<form_type>")
+@bp.route("/form/<form_type>")
 @cache.cached(timeout=0)
 @monitor_requests
 def form(form_type: str) -> dict:
@@ -108,7 +108,7 @@ def form(form_type: str) -> dict:
     )
 
 
-@bp.route("/view-<view_type>")
+@bp.route("/view/<view_type>")
 @cache.cached(timeout=0)
 @monitor_requests
 def view(view_type: str) -> dict:

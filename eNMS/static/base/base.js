@@ -240,7 +240,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     contentSize: panelSize[name] || "1000 600",
     position: "center-top 0 10",
     contentAjax: {
-      url: `../form-${name}`,
+      url: `../form/${name}`,
       done: function(panel) {
         panel.content.innerHTML = this.responseText;
         panel.setHeaderTitle(title);
@@ -453,7 +453,7 @@ function initTable(type) {
     scrollX: true,
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
-      url: `/filtering-${type}`,
+      url: `/filtering/${type}`,
       data: (d) => {
         d.form = serializeForm(`#${type}_filtering-form`);
       },

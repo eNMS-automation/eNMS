@@ -251,7 +251,9 @@ def route(page: str) -> Response:
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         kwargs = form_postprocessing(request.form)
     try:
-        return jsonify(getattr(controller, f)(*args, **kwargs))
+        result = getattr(controller, f)(*args, **kwargs)
+        Session.commit()
+        return jsonify(result)
     except Exception as e:
         if controller.config["ENMS_CONFIG_MODE"]:
             raise

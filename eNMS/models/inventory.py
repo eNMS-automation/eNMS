@@ -126,7 +126,7 @@ class Device(CustomDevice):
         if table == "device":
             return [
                 f"""<button type="button" class="btn btn-info btn-xs"
-                onclick="showPanel('device_automation', '{self.id}')">
+                onclick="showDeviceAutomationPanel({self.id})">
                 Automation</button>""",
                 f"""<button type="button" class="btn btn-success btn-xs"
                 onclick="showPanel('connection', '{self.id}')">Connect</button>""",

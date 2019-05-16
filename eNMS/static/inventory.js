@@ -75,8 +75,7 @@ function showConfigurationPanel(id, name) {
 function showDeviceAutomationPanel(id) {
   call(`/get/device/${id}`, function(device) {
     createPanel('device_automation', "Device Automation", id, () => {
-      $("#jobs").selectpicker("deselectAll");
-      $("#jobs").selectpicker("val", device.jobs.map((d) => d.id));
+      $(`#jobs-${id}`).selectpicker("val", device.jobs.map((d) => d.id));
     });
   });
 }

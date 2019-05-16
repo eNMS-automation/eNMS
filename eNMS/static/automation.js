@@ -213,7 +213,6 @@ function runJob(id, realTimeUpdate) {
         getJobState(id);
       }
     }
-    console.log(realTimeUpdate);
     if (realTimeUpdate) showLogs(id);
   });
 }

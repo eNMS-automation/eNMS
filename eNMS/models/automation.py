@@ -167,7 +167,6 @@ class Job(AbstractBase):
 
     def try_run(
         self,
-        session,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         workflow: Optional["Workflow"] = None,
@@ -178,13 +177,9 @@ class Job(AbstractBase):
         current_job.logs = [f"{self.type} {self.name}: Starting."]
         Session.commit()
         results: dict = {"results": {}}
-        if not payload:
-            payload = {}
-        job_from_workflow_targets = bool(workflow and targets)
-        if not targets and getattr(self, "use_workflow_targets", True):
-            targets = self.compute_targets()
-        has_targets = bool(targets)
-        if has_targets and not job_from_workflow_targets:
+        payload = payload or {}
+        targets = targets or self.compute_targets()
+        if targets:
             results["results"]["devices"] = {}
         now = controller.get_time()
         for i in range(self.number_of_retries + 1):
@@ -193,11 +188,9 @@ class Job(AbstractBase):
             )
             self.completed = self.failed = 0
             Session.commit()
-            attempt, logs = self.run(
-                payload, job_from_workflow_targets, targets, workflow
-            )
+            attempt, logs = self.run(payload, targets, workflow)
             current_job.logs.extend(logs)
-            if has_targets and not job_from_workflow_targets:
+            if targets:
                 assert targets is not None
                 for device in set(targets):
                     if not attempt["devices"][device.name]["success"]:
@@ -207,7 +200,7 @@ class Job(AbstractBase):
                     ]
                     targets.remove(device)
                 if not targets:
-                    results["results"]["success"] = True
+                    results["success"] = True
                     break
                 else:
                     if self.number_of_retries:
@@ -215,7 +208,7 @@ class Job(AbstractBase):
                     if i != self.number_of_retries:
                         sleep(self.time_between_retries)
                     else:
-                        results["results"]["success"] = False
+                        results["success"] = False
                         for device in targets:
                             results["results"]["devices"][device.name] = attempt[
                                 "devices"
@@ -272,15 +265,12 @@ class Job(AbstractBase):
     def run(
         self,
         payload: dict,
-        job_from_workflow_targets: bool,
         targets: Optional[Set["Device"]] = None,
         workflow: Optional["Workflow"] = None,
     ) -> Tuple[dict, list]:
-        if job_from_workflow_targets:
-            assert targets is not None
-            device, = targets
-            return self.get_results(payload, device, workflow)
-        elif targets:
+        if not targets:
+            return self.get_results(payload)
+        else:
             manager = Manager()
             results: dict = manager.dict({"devices": manager.dict()})
             logs: list = manager.list()
@@ -305,8 +295,6 @@ class Job(AbstractBase):
                     for device in targets
                 }
             return results, logs
-        else:
-            return self.get_results(payload)
 
 
 class Service(Job):
@@ -497,14 +485,11 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            log = f"Workflow {self.name}: job {job.name}"
+            targets = {device} if device else None
+            job_results, _ = job.try_run(results, targets=targets, workflow=self)
             if device:
-                log += f" on {device.name}"
-            info(log)
-            job_results, _ = job.try_run(
-                results, {device} if device else None, workflow=self
-            )
-            success = job_results["results"]["success"]
+                job_results = job_results["results"]["devices"][device.name]
+            success = job_results["success"]
             self.state["jobs"][job.id] = success
             Session.commit()
             edge_type_to_follow = "success" if success else "failure"

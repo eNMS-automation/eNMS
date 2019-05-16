@@ -83,6 +83,7 @@ class Controller(
         "save_device_jobs",
         "save_parameters",
         "save_pool_objects",
+        "save_positions",
         "scan_cluster",
         "scheduler",
         "task_action",

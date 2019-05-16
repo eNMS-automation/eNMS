@@ -159,6 +159,7 @@ class PoolFilteringForm(BaseForm):
 
 
 class PoolObjectsForm(BaseForm):
+    template = "pool_objects"
     form_type = HiddenField(default="pool_objects")
     devices = MultipleInstanceField("Devices", instance_type="Device")
     links = MultipleInstanceField("Links", instance_type="Link")

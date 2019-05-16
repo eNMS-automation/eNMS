@@ -268,19 +268,6 @@ function showPanel(type, id) {
 }
 
 /**
- * Show Pool Objects.
- */
-// eslint-disable-next-line
-function showPoolObjectsPanel(id) {
-  createPanel("pool_objects", "Pool Objects", id, function() {
-    call(`/get/pool/${id}`, function(pool) {
-      $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
-      $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
-    });
-  });
-}
-
-/**
  * Show Deletion Panel
  */
 // eslint-disable-next-line

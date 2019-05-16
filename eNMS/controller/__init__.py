@@ -80,7 +80,6 @@ class Controller(
         "topology_import",
         "update",
         "update_parameters",
-        "update_pool",
         "update_pools",
         "view_filtering",
     ]

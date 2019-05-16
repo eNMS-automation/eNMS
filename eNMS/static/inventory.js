@@ -158,13 +158,26 @@ function savePoolObjects(id) {
 }
 
 /**
+ * Show Pool Objects.
+ */
+// eslint-disable-next-line
+function showPoolObjectsPanel(id) {
+  createPanel("pool_objects", "Pool Objects", id, function() {
+    call(`/get/pool/${id}`, function(pool) {
+      $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
+      $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
+    });
+  });
+}
+
+/**
  * Update one or all pools.
  * @param {pool} pool - Id of a pool or 'all'.
  */
 // eslint-disable-next-line
 function updatePool(pool) {
   alertify.notify("Update starting...", "success", 5);
-  call(`/update_pool/${pool}`, function() {
+  call(`/update_pools/${pool}`, function() {
     table.ajax.reload(null, false);
     alertify.notify("Update successful.", "success", 5);
   });

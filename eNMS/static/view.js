@@ -60,7 +60,7 @@ if (currentView == "3D") {
 
 for (const [key, value] of Object.entries(subtypeSizes)) {
   window[`icon_${key}`] = L.icon({
-    iconUrl: `static/images/2D/${key}.gif`,
+    iconUrl: `../static/images/2D/${key}.gif`,
     iconSize: value,
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
@@ -184,7 +184,7 @@ function createNode3d(node, nodeType) {
   if (markerType == "Image") {
     marker = WE.marker(
       [node.latitude, node.longitude],
-      `static/images/3D/${nodeType == "device" ? "router" : "site"}.gif`,
+      `../static/images/3D/${nodeType == "device" ? "router" : "site"}.gif`,
       15,
       10
     ).addTo(earth);

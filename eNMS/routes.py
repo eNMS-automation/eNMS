@@ -118,7 +118,7 @@ def view(view_type: str) -> dict:
     )
 
 
-@bp.route("/table-<table_type>")
+@bp.route("/table/<table_type>")
 @cache.cached(timeout=0)
 @monitor_requests
 def table(table_type: str) -> dict:
@@ -171,7 +171,7 @@ def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
 
-@bp.route("/download_configuration-<name>")
+@bp.route("/download_configuration/<name>")
 @login_required
 def download_configuration(name: str) -> Response:
     try:

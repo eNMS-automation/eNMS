@@ -68,7 +68,6 @@ def configure_context_processor(app: Flask) -> None:
             "names": property_names,
             "parameters": get_one("Parameters").serialized,
             "property_types": {k: str(v) for k, v in property_types.items()},
-            "user": current_user.serialized,
         }
 
 

@@ -109,7 +109,6 @@ def form(form_type: str) -> dict:
 
 
 @bp.route("/view/<view_type>")
-@cache.cached(timeout=0)
 @monitor_requests
 def view(view_type: str) -> dict:
     return render_template(

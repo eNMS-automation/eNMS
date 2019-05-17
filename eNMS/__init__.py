@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_assets import Bundle
 from flask_cli import FlaskCLI
+from flask_login import current_user
 from flask.wrappers import Request
 from logging import info
 from os import environ
@@ -67,6 +68,7 @@ def configure_context_processor(app: Flask) -> None:
             "names": property_names,
             "parameters": get_one("Parameters").serialized,
             "property_types": {k: str(v) for k, v in property_types.items()},
+            "user": current_user.serialized,
         }
 
 

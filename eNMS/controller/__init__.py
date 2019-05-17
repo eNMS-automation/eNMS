@@ -111,7 +111,7 @@ class Controller(
     def initialize_database(self):
         self.create_default_parameters()
         self.create_default()
-        if self.config["CREATE_EXAMPLES"]:
+        if self.config["create_examples"]:
             self.create_examples()
 
     def create_default_parameters(self) -> None:
@@ -119,9 +119,9 @@ class Controller(
             parameters = models["Parameters"]()
             parameters.update(
                 **{
-                    property: self.config[property.upper()]
+                    property: self.config[property]
                     for property in model_properties["Parameters"]
-                    if property.upper() in self.config
+                    if property in self.config
                 }
             )
             Session.add(parameters)
@@ -138,31 +138,31 @@ class Controller(
             ),
             "cluster_scan_protocol": environ.get("CLUSTER_SCAN_PROTOCOL", "http"),
             "cluster_scan_timeout": float(environ.get("CLUSTER_SCAN_TIMEOUT", 0.05)),
-            "DEFAULT_LONGITUDE": float(environ.get("DEFAULT_LONGITUDE", -96.0)),
-            "DEFAULT_LATITUDE": float(environ.get("DEFAULT_LATITUDE", 33.0)),
-            "DEFAULT_ZOOM_LEVEL": int(environ.get("DEFAULT_ZOOM_LEVEL", 5)),
-            "DEFAULT_VIEW": environ.get("DEFAULT_VIEW", "2D"),
-            "DEFAULT_MARKER": environ.get("DEFAULT_MARKER", "Image"),
-            "CREATE_EXAMPLES": int(environ.get("CREATE_EXAMPLES", True)),
-            "CUSTOM_SERVICES_PATH": environ.get("CUSTOM_SERVICES_PATH"),
-            "ENMS_CONFIG_MODE": environ.get("ENMS_CONFIG_MODE"),
-            "ENMS_LOG_LEVEL": environ.get("ENMS_LOG_LEVEL", "DEBUG").upper(),
-            "ENMS_SERVER_ADDR": environ.get("ENMS_SERVER_ADDR"),
-            "GIT_AUTOMATION": environ.get("GIT_AUTOMATION", ""),
-            "GIT_CONFIGURATIONS": environ.get("GIT_CONFIGURATIONS", ""),
-            "GOTTY_PORT_REDIRECTION": int(environ.get("GOTTY_PORT_REDIRECTION", False)),
-            "GOTTY_BYPASS_KEY_PROMPT": environ.get("GOTTY_BYPASS_KEY_PROMPT"),
-            "GOTTY_PORT": -1,
-            "GOTTY_START_PORT": int(environ.get("GOTTY_START_PORT", 9000)),
-            "GOTTY_END_PORT": int(environ.get("GOTTY_END_PORT", 9100)),
-            "MATTERMOST_URL": environ.get("MATTERMOST_URL", ""),
-            "MATTERMOST_CHANNEL": environ.get("MATTERMOST_CHANNEL", ""),
-            "MATTERMOST_VERIFY_CERTIFICATE": int(
+            "default_longitude": float(environ.get("DEFAULT_LONGITUDE", -96.0)),
+            "default_latitude": float(environ.get("DEFAULT_LATITUDE", 33.0)),
+            "default_zoom_level": int(environ.get("DEFAULT_ZOOM_LEVEL", 5)),
+            "default_view": environ.get("DEFAULT_VIEW", "2D"),
+            "default_marker": environ.get("DEFAULT_MARKER", "Image"),
+            "create_examples": int(environ.get("CREATE_EXAMPLES", True)),
+            "custom_services_path": environ.get("CUSTOM_SERVICES_PATH"),
+            "enms_config_mode": environ.get("ENMS_CONFIG_MODE"),
+            "enms_log_level": environ.get("ENMS_LOG_LEVEL", "DEBUG").upper(),
+            "enms_server_addr": environ.get("ENMS_SERVER_ADDR"),
+            "git_automation": environ.get("GIT_AUTOMATION", ""),
+            "git_configuration": environ.get("GIT_CONFIGURATIONS", ""),
+            "gotty_port_redirection": int(environ.get("GOTTY_PORT_REDIRECTION", False)),
+            "gotty_bypass_key_prompt": environ.get("GOTTY_BYPASS_KEY_PROMPT"),
+            "gotty_port": -1,
+            "gotty_start_port": int(environ.get("GOTTY_START_PORT", 9000)),
+            "gotty_end_port": int(environ.get("GOTTY_END_PORT", 9100)),
+            "mattermost_url": environ.get("MATTERMOST_URL", ""),
+            "mattermost_channel": environ.get("MATTERMOST_CHANNEL", ""),
+            "mattermost_verify_certificate": int(
                 environ.get("MATTERMOST_VERIFY_CERTIFICATE", True)
             ),
-            "POOL_FILTER": environ.get("POOL_FILTER", "All objects"),
-            "SLACK_TOKEN": environ.get("SLACK_TOKEN", ""),
-            "SLACK_CHANNEL": environ.get("SLACK_CHANNEL", ""),
+            "pool_filter": environ.get("POOL_FILTER", "All objects"),
+            "slack_token": environ.get("SLACK_TOKEN", ""),
+            "slack_channel": environ.get("SLACK_CHANNEL", ""),
         }
 
     def update_parameters(self, **kwargs):
@@ -189,9 +189,7 @@ class Controller(
 
     def configure_logs(self) -> None:
         basicConfig(
-            level=getattr(
-                import_module("logging"), controller.config["ENMS_LOG_LEVEL"]
-            ),
+            level=getattr(import_module("logging"), self.config["enms_log_level"]),
             format="%(asctime)s %(levelname)-8s %(message)s",
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[
@@ -228,14 +226,14 @@ class Controller(
 
     def load_services(self) -> None:
         path_services = [self.app.path / "eNMS" / "services"]
-        custom_services_path = self.config["CUSTOM_SERVICES_PATH"]
+        custom_services_path = self.config["custom_services_path"]
         if custom_services_path:
             path_services.append(Path(custom_services_path))
         for path in path_services:
             for file in path.glob("**/*.py"):
                 if "init" in str(file):
                     continue
-                if not self.config["CREATE_EXAMPLES"] and "examples" in str(file):
+                if not self.config["create_examples"] and "examples" in str(file):
                     continue
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
                 assert isinstance(spec.loader, Loader)

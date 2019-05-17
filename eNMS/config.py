@@ -3,9 +3,7 @@ from typing import Dict, Type
 
 
 class Config(object):
-    SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
-    SQLALCHEMY_RECORD_QUERIES = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    CACHE_TYPE = "simple"
     MAIL_SERVER = environ.get("MAIL_SERVER", "smtp.googlemail.com")
     MAIL_PORT = int(environ.get("MAIL_PORT", "587"))
     MAIL_USE_TLS = int(environ.get("MAIL_USE_TLS", True))
@@ -13,6 +11,9 @@ class Config(object):
     MAIL_PASSWORD = environ.get("MAIL_PASSWORD")
     MAIL_SENDER = environ.get("MAIL_SENDER", "enms@enms.fr")
     MAIL_RECIPIENTS = environ.get("MAIL_RECIPIENTS", "")
+    SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
+    SQLALCHEMY_RECORD_QUERIES = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class DefaultConfig(Config):

@@ -23,7 +23,7 @@ from eNMS.database.functions import fetch
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
-from eNMS.extensions import bp
+from eNMS.extensions import bp, cache
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
 from eNMS.properties.objects import link_colors
@@ -94,6 +94,7 @@ def filtering(table: str) -> dict:
 
 
 @bp.route("/form/<form_type>")
+@cache.cached(timeout=0)
 @monitor_requests
 def form(form_type: str) -> dict:
     return render_template(
@@ -108,6 +109,7 @@ def form(form_type: str) -> dict:
 
 
 @bp.route("/view/<view_type>")
+@cache.cached(timeout=0)
 @monitor_requests
 def view(view_type: str) -> dict:
     return render_template(
@@ -117,6 +119,7 @@ def view(view_type: str) -> dict:
 
 
 @bp.route("/table/<table_type>")
+@cache.cached(timeout=0)
 @monitor_requests
 def table(table_type: str) -> dict:
     table_dict = {
@@ -138,6 +141,7 @@ def table(table_type: str) -> dict:
 
 
 @bp.route("/dashboard")
+@cache.cached(timeout=0)
 @monitor_requests
 def dashboard() -> dict:
     return render_template(
@@ -147,6 +151,7 @@ def dashboard() -> dict:
 
 
 @bp.route("/workflow_builder")
+@cache.cached(timeout=0)
 @monitor_requests
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
@@ -160,6 +165,7 @@ def workflow_builder() -> dict:
 
 
 @bp.route("/calendar")
+@cache.cached(timeout=0)
 @monitor_requests
 def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
@@ -181,6 +187,7 @@ def download_configuration(name: str) -> Response:
 
 
 @bp.route("/administration")
+@cache.cached(timeout=0)
 @monitor_requests
 def administration() -> dict:
     return render_template(

@@ -1,5 +1,6 @@
 from flask_login import current_user
 from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
+from sqlalchemy.engine.base import Connection
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.mapper import Mapper
 
@@ -36,9 +37,9 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
         }
 
 
-def configure_events():
+def configure_events() -> None:
     @event.listens_for(Base, "init", propagate=True)
-    def log_instance_creation(target, args, kwargs) -> None:
+    def log_instance_creation(target: Base, args: tuple, kwargs: dict) -> None:
         if "type" not in target.__dict__:
             return
         controller.log(
@@ -50,7 +51,9 @@ def configure_events():
         )
 
     @event.listens_for(Base, "before_delete", propagate=True)
-    def log_instance_deletion(mapper, connection, target):
+    def log_instance_deletion(
+        mapper: Mapper, connection: Connection, target: Base
+    ) -> None:
         controller.log(
             "info",
             (
@@ -60,7 +63,9 @@ def configure_events():
         )
 
     @event.listens_for(Base, "after_update", propagate=True)
-    def log_instance_update(mapper, connection, target):
+    def log_instance_update(
+        mapper: Mapper, connection: Connection, target: Base
+    ) -> None:
         state, changes = inspect(target), []
         for attr in state.attrs:
             hist = state.get_history(attr.key, True)

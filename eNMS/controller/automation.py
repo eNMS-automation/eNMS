@@ -160,7 +160,7 @@ class AutomationController(BaseController):
             tasks[task.name] = {**task.serialized, **{"date": js_date}}
         return tasks
 
-    def scheduler(self, action: str) -> None:
+    def scheduler_action(self, action: str) -> None:
         getattr(self.scheduler, action)()
 
     def task_action(self, action: str, task_id: int) -> None:

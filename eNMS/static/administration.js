@@ -196,7 +196,7 @@ function getGitContent() {
  */
 // eslint-disable-next-line
 function scheduler(action) {
-  call(`/scheduler/${action}`, function() {
+  call(`/scheduler_action/${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);
   });
 }

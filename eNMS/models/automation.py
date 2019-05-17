@@ -19,7 +19,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 from traceback import format_exc
-from typing import Any, List, Optional, Set, Tuple
+from typing import Any, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 
 from eNMS.concurrent import threaded_job, device_process
@@ -368,7 +368,7 @@ class Service(Job):
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())
 
-    def match_content(self, result: Any, match: str) -> bool:
+    def match_content(self, result: Any, match: Union[str, dict]) -> bool:
         if getattr(self, "conversion_method", False):
             if self.conversion_method == "json":
                 result = load(result)
@@ -376,6 +376,7 @@ class Service(Job):
                 result = parse(result)
         if getattr(self, "validation_method", "text") == "text":
             result = str(result)
+            assert isinstance(match, str)
             if self.delete_spaces_before_matching:
                 match, result = map(self.space_deleter, (match, result))
             success = (
@@ -385,16 +386,17 @@ class Service(Job):
                 and not self.content_match_regex
             )
         else:
+            assert isinstance(match, dict)
             success = self.match_dictionary(result, match)
         return success if not self.negative_logic else not success
 
     def sub(self, input: Any, variables: dict) -> dict:
         r = compile("{{(.*?)}}")
 
-        def replace(match: str) -> str:
+        def replace(match: Match) -> str:
             return str(eval(match.group()[2:-2], variables))
 
-        def rec(input):
+        def rec(input: Any) -> Any:
             if isinstance(input, str):
                 return r.sub(replace, input)
             elif isinstance(input, list):

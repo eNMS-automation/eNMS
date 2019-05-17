@@ -1,6 +1,7 @@
 from flask.testing import FlaskClient
 
-from eNMS.database import fetch_all, Session
+from eNMS.database import Session
+from eNMS.database.functions import fetch_all
 from eNMS.models.logging import Log
 
 from tests.test_base import check_pages

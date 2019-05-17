@@ -18,7 +18,7 @@ def threaded_job(
 
 
 def device_process(
-    args: Tuple[int, int, Lock, dict, list, List[str], dict, Optional[int]]
+    args: Tuple[int, int, Lock, dict, list, dict, Optional[int]]
 ) -> None:
     device_id, service_id, lock, results, logs, payload, workflow_id = args
     device = fetch("Device", id=device_id)

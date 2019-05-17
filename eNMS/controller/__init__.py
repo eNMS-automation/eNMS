@@ -88,7 +88,7 @@ class Controller(
     log_severity = {"error": error, "info": info, "warning": warning}
 
     def __getattr__(self, property: str) -> Any:
-        return self.config.get(property, super().__getattr__(property))
+        return self.config[property]
 
     def __init__(self) -> None:
         self.USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
@@ -152,7 +152,7 @@ class Controller(
             "enms_log_level": environ.get("ENMS_LOG_LEVEL", "DEBUG").upper(),
             "enms_server_addr": environ.get("ENMS_SERVER_ADDR"),
             "git_automation": environ.get("GIT_AUTOMATION", ""),
-            "git_configuration": environ.get("GIT_CONFIGURATIONS", ""),
+            "git_configurations": environ.get("GIT_CONFIGURATIONS", ""),
             "gotty_port_redirection": int(environ.get("GOTTY_PORT_REDIRECTION", False)),
             "gotty_bypass_key_prompt": environ.get("GOTTY_BYPASS_KEY_PROMPT"),
             "gotty_port": -1,

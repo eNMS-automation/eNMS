@@ -41,9 +41,9 @@ from eNMS.properties.table import filtering_properties, table_properties
 
 class InventoryController:
     def get_gotty_port(self):
-        self.config["GOTTY_PORT"] += 1
-        range = self.config["GOTTY_END_PORT"] - self.config["GOTTY_START_PORT"]
-        return self.config["GOTTY_START_PORT"] + self.config["GOTTY_START_PORT"] % range
+        self.config["gotty_port"] += 1
+        range = self.gotty_end_port - self.gotty_start_port
+        return self.gotty_start_port + self.gotty_port % range
 
     def connection(self, device_id: int, **kwargs: Any) -> dict:
         device = fetch("Device", id=device_id)
@@ -55,7 +55,7 @@ class InventoryController:
             cmd.append("--once")
         if "multiplexing" in kwargs:
             cmd.extend(f"tmux new -A -s gotty{port}".split())
-        if self.config["GOTTY_BYPASS_KEY_PROMPT"]:
+        if self.gotty_bypass_key_prompt:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
@@ -75,8 +75,8 @@ class InventoryController:
         return {
             "device": device.name,
             "port": port,
-            "redirection": self.config["GOTTY_PORT_REDIRECTION"],
-            "server_addr": self.config["ENMS_SERVER_ADDR"],
+            "redirection": self.gotty_port_redirection,
+            "server_addr": self.enms_server_addr,
         }
 
     def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
@@ -116,7 +116,7 @@ class InventoryController:
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):
-            repo = self.config[f"git_{repository_type}"]
+            repo = getattr(self, f"git_{repository_type}")
             if not repo:
                 continue
             local_path = self.path / "git" / repository_type

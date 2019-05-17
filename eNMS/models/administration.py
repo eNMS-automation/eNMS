@@ -72,15 +72,6 @@ class Parameters(AbstractBase):
         self.gotty_port_index = -1
         super().update(**kwargs)
 
-    @property
-    def gotty_range(self) -> int:
-        return self.gotty_end_port - self.gotty_start_port
-
-    def get_gotty_port(self) -> int:
-        self.gotty_port_index += 1
-        Session.commit()
-        return self.gotty_start_port + self.gotty_port_index % self.gotty_range
-
 
 class User(AbstractBase, UserMixin):
 

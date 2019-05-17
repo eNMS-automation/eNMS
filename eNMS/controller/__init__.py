@@ -281,6 +281,8 @@ class Controller(
             "GIT_CONFIGURATIONS": environ.get("GIT_CONFIGURATIONS", ""),
             "GOTTY_PORT_REDIRECTION": int(environ.get("GOTTY_PORT_REDIRECTION", False)),
             "GOTTY_BYPASS_KEY_PROMPT": environ.get("GOTTY_BYPASS_KEY_PROMPT"),
+            "GOTTY_PORT": -1,
+            "GOTTY_PORT_PORT": int(environ.get("GOTTY_START_PORT", 9000)),
             "GOTTY_START_PORT": int(environ.get("GOTTY_START_PORT", 9000)),
             "GOTTY_END_PORT": int(environ.get("GOTTY_END_PORT", 9100)),
             "MATTERMOST_URL": environ.get("MATTERMOST_URL", ""),

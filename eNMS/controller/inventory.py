@@ -40,6 +40,14 @@ from eNMS.properties.table import filtering_properties, table_properties
 
 
 class InventoryController:
+    def get_gotty_port(self):
+        self.parameters["GOTTY_PORT"] += 1
+        range = self.parameters["GOTTY_END_PORT"] - self.parameters["GOTTY_START_PORT"]
+        return (
+            self.parameters["GOTTY_START_PORT"]
+            + self.parameters["GOTTY_START_PORT"] % range
+        )
+
     def connection(self, device_id: int, **kwargs: Any) -> dict:
         device = fetch("Device", id=device_id)
         cmd = [str(self.path / "applications" / "gotty"), "-w"]

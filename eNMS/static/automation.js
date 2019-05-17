@@ -60,6 +60,7 @@ function saveService(service) {
  */
 function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
+  console.log(value);
   $(`#display_results-${id}`).text(
     value
     ? JSON.stringify(
@@ -70,7 +71,7 @@ function displayResult(results, id) {
         ),
       null,
       2
-    ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+    ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").replace(/\\"/g, '"')
     : "No results yet."
   );
 }

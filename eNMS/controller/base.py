@@ -80,18 +80,14 @@ class BaseController:
         return self.config[property]
 
     def __init__(self) -> None:
-        self.USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
-        self.USE_TACACS = int(environ.get("USE_TACACS", False))
-        self.USE_LDAP = int(environ.get("USE_LDAP", False))
-        self.USE_VAULT = int(environ.get("USE_VAULT", False))
         self.custom_properties = self.load_custom_properties()
         self.config = self.load_config()
         self.configure_scheduler()
-        if self.USE_TACACS:
+        if self.use_tacacs:
             self.configure_tacacs_client()
-        if self.USE_LDAP:
+        if self.use_ldap:
             self.configure_ldap_client()
-        if self.USE_VAULT:
+        if self.use_vault:
             self.configure_vault_client()
 
     def initialize_app(self, app: Flask) -> None:
@@ -155,6 +151,10 @@ class BaseController:
             "pool_filter": environ.get("POOL_FILTER", "All objects"),
             "slack_token": environ.get("SLACK_TOKEN", ""),
             "slack_channel": environ.get("SLACK_CHANNEL", ""),
+            "use_ldap": int(environ.get("USE_LDAP", False)),
+            "use_syslog": int(environ.get("USE_SYSLOG", False)),
+            "use_tacacs": int(environ.get("USE_TACACS", False)),
+            "use_vault": int(environ.get("USE_VAULT", False)),
         }
 
     def update_parameters(self, **kwargs):

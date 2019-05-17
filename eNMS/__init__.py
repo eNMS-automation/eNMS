@@ -119,7 +119,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_assets(app)
     controller.load_services()
     configure_cli(app)
-    if controller.USE_SYSLOG:
+    if controller.use_syslog:
         configure_syslog_server()
     info("eNMS starting")
     return app

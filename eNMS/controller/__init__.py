@@ -92,8 +92,8 @@ class Controller(
         self.USE_TACACS = int(environ.get("USE_TACACS", False))
         self.USE_LDAP = int(environ.get("USE_LDAP", False))
         self.USE_VAULT = int(environ.get("USE_VAULT", False))
-        self.config = self.load_config()
         self.custom_properties = self.load_custom_properties()
+        self.config = self.load_config()
         self.configure_scheduler()
         if self.USE_TACACS:
             self.configure_tacacs_client()
@@ -104,13 +104,12 @@ class Controller(
 
     def initialize_app(self, app: Flask) -> None:
         self.app = app
-        self.config.update(app.config)
         self.path = app.path
         self.create_google_earth_styles()
         self.configure_logs()
 
     def initialize_database(self):
-        self.parameters = self.create_default_parameters()
+        self.create_default_parameters()
         self.create_default()
         if self.config["CREATE_EXAMPLES"]:
             self.create_examples()
@@ -127,9 +126,44 @@ class Controller(
             )
             Session.add(parameters)
             Session.commit()
-            return parameters.get_properties()
         else:
-            return get_one("Parameters").get_properties()
+            self.config.update(get_one("Parameters").get_properties())
+
+    def load_config(self) -> dict:
+        return {
+            "cluster": int(environ.get("CLUSTER", False)),
+            "cluster_id": int(environ.get("CLUSTER_ID", True)),
+            "cluster_scan_subnet": environ.get(
+                "CLUSTER_SCAN_SUBNET", "192.168.105.0/24"
+            ),
+            "cluster_scan_protocol": environ.get("CLUSTER_SCAN_PROTOCOL", "http"),
+            "cluster_scan_timeout": float(environ.get("CLUSTER_SCAN_TIMEOUT", 0.05)),
+            "DEFAULT_LONGITUDE": float(environ.get("DEFAULT_LONGITUDE", -96.0)),
+            "DEFAULT_LATITUDE": float(environ.get("DEFAULT_LATITUDE", 33.0)),
+            "DEFAULT_ZOOM_LEVEL": int(environ.get("DEFAULT_ZOOM_LEVEL", 5)),
+            "DEFAULT_VIEW": environ.get("DEFAULT_VIEW", "2D"),
+            "DEFAULT_MARKER": environ.get("DEFAULT_MARKER", "Image"),
+            "CREATE_EXAMPLES": int(environ.get("CREATE_EXAMPLES", True)),
+            "CUSTOM_SERVICES_PATH": environ.get("CUSTOM_SERVICES_PATH"),
+            "ENMS_CONFIG_MODE": environ.get("ENMS_CONFIG_MODE"),
+            "ENMS_LOG_LEVEL": environ.get("ENMS_LOG_LEVEL", "DEBUG").upper(),
+            "ENMS_SERVER_ADDR": environ.get("ENMS_SERVER_ADDR"),
+            "GIT_AUTOMATION": environ.get("GIT_AUTOMATION", ""),
+            "GIT_CONFIGURATIONS": environ.get("GIT_CONFIGURATIONS", ""),
+            "GOTTY_PORT_REDIRECTION": int(environ.get("GOTTY_PORT_REDIRECTION", False)),
+            "GOTTY_BYPASS_KEY_PROMPT": environ.get("GOTTY_BYPASS_KEY_PROMPT"),
+            "GOTTY_PORT": -1,
+            "GOTTY_START_PORT": int(environ.get("GOTTY_START_PORT", 9000)),
+            "GOTTY_END_PORT": int(environ.get("GOTTY_END_PORT", 9100)),
+            "MATTERMOST_URL": environ.get("MATTERMOST_URL", ""),
+            "MATTERMOST_CHANNEL": environ.get("MATTERMOST_CHANNEL", ""),
+            "MATTERMOST_VERIFY_CERTIFICATE": int(
+                environ.get("MATTERMOST_VERIFY_CERTIFICATE", True)
+            ),
+            "POOL_FILTER": environ.get("POOL_FILTER", "All objects"),
+            "SLACK_TOKEN": environ.get("SLACK_TOKEN", ""),
+            "SLACK_CHANNEL": environ.get("SLACK_CHANNEL", ""),
+        }
 
     def update_parameters(self, **kwargs):
         get_one("Parameters").update(**kwargs)
@@ -257,43 +291,6 @@ class Controller(
 
     def get_time(self) -> str:
         return str(datetime.now())
-
-    def load_config(self) -> dict:
-        return {
-            "CLUSTER": int(environ.get("CLUSTER", False)),
-            "CLUSTER_ID": int(environ.get("CLUSTER_ID", True)),
-            "CLUSTER_SCAN_SUBNET": environ.get(
-                "CLUSTER_SCAN_SUBNET", "192.168.105.0/24"
-            ),
-            "CLUSTER_SCAN_PROTOCOL": environ.get("CLUSTER_SCAN_PROTOCOL", "http"),
-            "CLUSTER_SCAN_TIMEOUT": float(environ.get("CLUSTER_SCAN_TIMEOUT", 0.05)),
-            "DEFAULT_LONGITUDE": float(environ.get("DEFAULT_LONGITUDE", -96.0)),
-            "DEFAULT_LATITUDE": float(environ.get("DEFAULT_LATITUDE", 33.0)),
-            "DEFAULT_ZOOM_LEVEL": int(environ.get("DEFAULT_ZOOM_LEVEL", 5)),
-            "DEFAULT_VIEW": environ.get("DEFAULT_VIEW", "2D"),
-            "DEFAULT_MARKER": environ.get("DEFAULT_MARKER", "Image"),
-            "CREATE_EXAMPLES": int(environ.get("CREATE_EXAMPLES", True)),
-            "CUSTOM_SERVICES_PATH": environ.get("CUSTOM_SERVICES_PATH"),
-            "ENMS_CONFIG_MODE": environ.get("ENMS_CONFIG_MODE"),
-            "ENMS_LOG_LEVEL": environ.get("ENMS_LOG_LEVEL", "DEBUG").upper(),
-            "ENMS_SERVER_ADDR": environ.get("ENMS_SERVER_ADDR"),
-            "GIT_AUTOMATION": environ.get("GIT_AUTOMATION", ""),
-            "GIT_CONFIGURATIONS": environ.get("GIT_CONFIGURATIONS", ""),
-            "GOTTY_PORT_REDIRECTION": int(environ.get("GOTTY_PORT_REDIRECTION", False)),
-            "GOTTY_BYPASS_KEY_PROMPT": environ.get("GOTTY_BYPASS_KEY_PROMPT"),
-            "GOTTY_PORT": -1,
-            "GOTTY_PORT_PORT": int(environ.get("GOTTY_START_PORT", 9000)),
-            "GOTTY_START_PORT": int(environ.get("GOTTY_START_PORT", 9000)),
-            "GOTTY_END_PORT": int(environ.get("GOTTY_END_PORT", 9100)),
-            "MATTERMOST_URL": environ.get("MATTERMOST_URL", ""),
-            "MATTERMOST_CHANNEL": environ.get("MATTERMOST_CHANNEL", ""),
-            "MATTERMOST_VERIFY_CERTIFICATE": int(
-                environ.get("MATTERMOST_VERIFY_CERTIFICATE", True)
-            ),
-            "POOL_FILTER": environ.get("POOL_FILTER", "All objects"),
-            "SLACK_TOKEN": environ.get("SLACK_TOKEN", ""),
-            "SLACK_CHANNEL": environ.get("SLACK_CHANNEL", ""),
-        }
 
     def str_dict(self, input: Any, depth: int = 0) -> str:
         tab = "\t" * depth

@@ -41,24 +41,21 @@ from eNMS.properties.table import filtering_properties, table_properties
 
 class InventoryController:
     def get_gotty_port(self):
-        self.parameters["GOTTY_PORT"] += 1
-        range = self.parameters["GOTTY_END_PORT"] - self.parameters["GOTTY_START_PORT"]
-        return (
-            self.parameters["GOTTY_START_PORT"]
-            + self.parameters["GOTTY_START_PORT"] % range
-        )
+        self.config["GOTTY_PORT"] += 1
+        range = self.config["GOTTY_END_PORT"] - self.config["GOTTY_START_PORT"]
+        return self.config["GOTTY_START_PORT"] + self.config["GOTTY_START_PORT"] % range
 
     def connection(self, device_id: int, **kwargs: Any) -> dict:
         device = fetch("Device", id=device_id)
         cmd = [str(self.path / "applications" / "gotty"), "-w"]
-        port, protocol = self.parameters.get_gotty_port(), kwargs["protocol"]
+        port, protocol = self.get_gotty_port(), kwargs["protocol"]
         address = getattr(device, kwargs["address"])
         cmd.extend(["-p", str(port)])
         if "accept-once" in kwargs:
             cmd.append("--once")
         if "multiplexing" in kwargs:
             cmd.extend(f"tmux new -A -s gotty{port}".split())
-        if self.parameters["GOTTY_BYPASS_KEY_PROMPT"]:
+        if self.config["GOTTY_BYPASS_KEY_PROMPT"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
@@ -78,8 +75,8 @@ class InventoryController:
         return {
             "device": device.name,
             "port": port,
-            "redirection": self.parameters["GOTTY_PORT_REDIRECTION"],
-            "server_addr": self.parameters["ENMS_SERVER_ADDR"],
+            "redirection": self.config["GOTTY_PORT_REDIRECTION"],
+            "server_addr": self.config["ENMS_SERVER_ADDR"],
         }
 
     def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
@@ -119,7 +116,7 @@ class InventoryController:
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):
-            repo = self.parameters[f"git_{repository_type}"]
+            repo = self.config[f"git_{repository_type}"]
             if not repo:
                 continue
             local_path = self.path / "git" / repository_type
@@ -244,11 +241,11 @@ class InventoryController:
 
     def query_opennms(self, **kwargs: str) -> None:
         parameters = get_one("Parameters")
-        login, password = self.parameters.opennms_login, parameters["password"]
+        login, password = self.config["opennms_login"], parameters["password"]
         parameters.update(**parameters)
         Session.commit()
         json_devices = http_get(
-            self.parameters.opennms_devices,
+            self.config["opennms_devices"],
             headers={"Accept": "application/json"},
             auth=(login, password),
         ).json()["node"]
@@ -269,7 +266,7 @@ class InventoryController:
         }
         for device in list(devices):
             link = http_get(
-                f"{self.parameters.opennms_rest_api}/nodes/{device}/ipinterfaces",
+                f"{self.config['opennms_rest_api']}/nodes/{device}/ipinterfaces",
                 headers={"Accept": "application/json"},
                 auth=(login, password),
             ).json()

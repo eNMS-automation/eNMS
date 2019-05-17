@@ -174,7 +174,10 @@ class Job(AbstractBase):
     ) -> Tuple[dict, str]:
         current_job = workflow or self
         self.is_running, self.state = True, {}
-        current_job.logs = [f"{self.type} {self.name}: Starting."]
+        if workflow:
+            current_job.logs.extend([f"{self.type} {self.name}: Starting."])
+        else:
+            current_job.logs = [f"{self.type} {self.name}: Starting."]
         Session.commit()
         results: dict = {"results": {}}
         payload = payload or {}

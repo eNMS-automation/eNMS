@@ -5,7 +5,7 @@ alertify: false
 call: false
 fCall: false
 L: false
-link_colors: false
+linkColors: false
 parameters: false
 showPoolView: false
 showTypePanel: false

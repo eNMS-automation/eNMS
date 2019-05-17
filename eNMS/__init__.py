@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask_assets import Bundle
 from flask_cli import FlaskCLI
-from flask_login import current_user
 from flask.wrappers import Request
 from logging import info
 from os import environ

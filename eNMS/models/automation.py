@@ -3,7 +3,6 @@ from datetime import datetime
 from git import Repo
 from git.exc import GitCommandError
 from json import load
-from logging import info
 from multiprocessing import Manager
 from multiprocessing.pool import Pool
 from napalm import get_network_driver

@@ -17,7 +17,7 @@ let logicalLinks = [];
  * @return {node}
  */
 function deviceToNode(device) {
-  logicalDevice = {
+  const logicalDevice = {
     id: device.id,
     label: device.name,
     image: `/static/images/2D/${device.subtype}.gif`,
@@ -33,11 +33,11 @@ function deviceToNode(device) {
  * @return {edge}
  */
 function linkToEdge(link) {
-  logicalLink = {
+  const logicalLink = {
     id: link.id,
     from: link.source_id,
     to: link.destination_id,
-  }
+  };
   logicalLinks[link.id] = link;
   return logicalLink;
 }
@@ -98,7 +98,7 @@ function displayPool(poolId, nodes, edges) {
       $(".rc-device-menu").show();
       selected = logicalDevices[node];
     } else if (typeof edge !== "undefined") {
-      selected = LogicalLinks[edge];
+      selected = logicalLinks[edge];
       $(".menu").hide();
       $(".rc-link-menu").show();
     } else {

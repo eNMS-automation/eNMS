@@ -413,7 +413,9 @@ function getWorkflowState() {
 (function() {
   call("/get_all/workflow", function(workflows) {
     for (let i = 0; i < workflows.length; i++) {
-      $('#current-workflow').append(`<option value="${workflows[i].id}">${workflows[i].name}</option>`);
+      $("#current-workflow").append(
+        `<option value="${workflows[i].id}">${workflows[i].name}</option>`
+      );
     }
     if (workflow) {
       $("#current-workflow").val(workflow.id);

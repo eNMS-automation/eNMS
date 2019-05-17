@@ -18,14 +18,7 @@ from xlwt import Workbook
 from yaml import load, BaseLoader
 
 from eNMS.database import Session
-from eNMS.database.functions import (
-    delete_all,
-    factory,
-    fetch,
-    fetch_all,
-    get_one,
-    objectify,
-)
+from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, property_types
 from eNMS.properties import field_conversion, property_names
 from eNMS.properties.diagram import device_diagram_properties

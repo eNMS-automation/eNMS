@@ -1,7 +1,7 @@
 /*
 global
+call: false
 showTypePanel: false
-tasks: false
 */
 
 const taskManagement = false; // eslint-disable-line no-unused-vars

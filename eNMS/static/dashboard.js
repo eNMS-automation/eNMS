@@ -313,7 +313,7 @@ $(function() {
       $(`#count-${type}`).text(result.counters[type]);
     }
     for (const type of ["Service", "Workflow", "Task"]) {
-      activeNumber = result.counters[`active-${type}`];
+      const activeNumber = result.counters[`active-${type}`];
       $(`#count-${type}`).text(`${result.counters[type]} (${activeNumber})`);
     }
     for (const [objects, type] of Object.entries(result.properties)) {

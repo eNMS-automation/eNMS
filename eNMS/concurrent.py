@@ -1,7 +1,7 @@
 from multiprocessing import Lock
 from typing import List, Optional, Set, Tuple
 
-from eNMS.database.functions import fetch, session_scope
+from eNMS.database.functions import fetch
 
 
 def threaded_job(

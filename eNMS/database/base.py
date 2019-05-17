@@ -57,7 +57,7 @@ class AbstractBase(Base):
                 value = value not in (False, "false")
             setattr(self, property, value)
 
-    def get_properties(self, export=False) -> dict:
+    def get_properties(self, export: bool = False) -> dict:
         result = {}
         for property in model_properties[self.type]:
             value = getattr(self, property)

@@ -7,14 +7,16 @@ from ldap3 import Connection, NTLM, SUBTREE
 from os import makedirs
 from os.path import exists
 from requests import get as http_get
+from typing import Any, Union
 from yaml import dump, load, BaseLoader
 
 from eNMS.controller.base import BaseController
+from eNMS.database import Base
 from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
 
 
 class AdministrationController(BaseController):
-    def authenticate_user(self, **kwargs) -> bool:
+    def authenticate_user(self, **kwargs: str) -> Base:
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":
             user = fetch("User", name=name)
@@ -53,7 +55,7 @@ class AdministrationController(BaseController):
             if self.tacacs_client.authenticate(name, password).valid:
                 return factory("User", **{"name": name, "password": password})
 
-    def database_helpers(self, **kwargs) -> None:
+    def database_helpers(self, **kwargs: Any) -> None:
         delete_all(*kwargs["deletion_types"])
         clear_logs_date = kwargs["clear_logs_date"]
         if clear_logs_date:
@@ -71,7 +73,7 @@ class AdministrationController(BaseController):
             for attr in ("status", "cpu_load")
         }
 
-    def migration_export(self, **kwargs) -> None:
+    def migration_export(self, **kwargs: Union[list, str]) -> None:
         for cls_name in kwargs["import_export_types"]:
             path = self.path / "migrations" / kwargs["name"]
             if not exists(path):
@@ -79,7 +81,7 @@ class AdministrationController(BaseController):
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 dump(export(cls_name), migration_file, default_flow_style=False)
 
-    def migration_import(self, **kwargs) -> str:
+    def migration_import(self, **kwargs: Any) -> str:
         status, types = "Import successful.", kwargs["import_export_types"]
         workflows: list = []
         edges: list = []
@@ -131,12 +133,12 @@ class AdministrationController(BaseController):
             self.create_default()
         return status
 
-    def save_parameters(self, parameter_type: str, **kwargs) -> None:
+    def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:
         self.update_parameters(**kwargs)
         if parameter_type == "git":
             self.get_git_content()
 
-    def scan_cluster(self, **kwargs) -> None:
+    def scan_cluster(self, **kwargs: Union[float, str]) -> None:
         protocol = self.parameters["cluster_scan_protocol"]
         for ip_address in IPv4Network(self.parameters["cluster_scan_subnet"]):
             try:

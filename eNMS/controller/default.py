@@ -92,6 +92,7 @@ class DefaultController(BaseController):
                 "hidden": True,
             },
         ):
+            assert isinstance(service, dict)
             factory(service.pop("type"), **service)
 
     def create_default_workflows(self) -> None:
@@ -104,6 +105,7 @@ class DefaultController(BaseController):
                 "use_workflow_targets": False,
             },
         )
+        Session.commit()
         Session.add(workflow)
         workflow.jobs.extend(
             [

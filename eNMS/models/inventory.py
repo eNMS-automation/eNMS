@@ -116,7 +116,7 @@ class Device(CustomDevice):
             elif self in pool.devices:
                 pool.devices.remove(self)
 
-    def get_configurations(self):
+    def get_configurations(self) -> dict:
         return {
             str(date): configuration
             for date, configuration in self.configurations.items()

@@ -3,7 +3,7 @@ from typing import List
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.controller import controller
-from eNMS.database import fetch, fetch_all
+from eNMS.database.functions import fetch, fetch_all
 
 from tests.test_base import check_pages
 

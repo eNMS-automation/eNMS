@@ -34,7 +34,9 @@ class AutomationController(BaseController):
         fetch("Workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(self, workflow_id: int, **kwargs) -> Dict[str, Any]:
+    def add_jobs_to_workflow(
+        self, workflow_id: int, **kwargs: List[int]
+    ) -> Dict[str, Any]:
         workflow = fetch("Workflow", id=workflow_id)
         jobs = objectify("Job", kwargs["add_jobs"])
         for job in jobs:

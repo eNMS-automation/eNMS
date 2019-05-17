@@ -2,7 +2,7 @@ from flask.testing import FlaskClient
 from requests import get, post, put
 from requests.auth import HTTPBasicAuth
 
-from eNMS.functions import fetch_all
+from eNMS.database.functions import fetch_all
 
 from tests.test_base import check_blueprints
 

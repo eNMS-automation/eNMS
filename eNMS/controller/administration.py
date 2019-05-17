@@ -144,7 +144,7 @@ class AdministrationController(BaseController):
                     f"{protocol}://{ip_address}/rest/is_alive",
                     timeout=self.parameters["cluster_scan_timeout"],
                 ).json()
-                if self.config["CLUSTER_ID"] != server.pop("cluster_id"):
+                if self.cluster_id != server.pop("cluster_id"):
                     continue
                 factory("Server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:

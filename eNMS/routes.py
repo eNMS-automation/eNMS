@@ -10,12 +10,12 @@ from flask import (
     url_for,
 )
 from flask_login import current_user, login_required, login_user, logout_user
-from flask.wrappers import Response
 from functools import wraps
 from logging import info
 from os import listdir
 from sqlalchemy import and_
 from typing import Any, Callable
+from werkzeug.wrappers import Response
 
 from eNMS.controller import controller
 from eNMS.database import Session
@@ -120,7 +120,8 @@ def view(view_type: str) -> dict:
 @bp.route("/table/<table_type>")
 @monitor_requests
 def table(table_type: str) -> dict:
-    table_dict = {
+    kwargs = {
+        "endpoint": "dashboard",
         "properties": table_properties[table_type],
         "fixed_columns": table_fixed_columns[table_type],
         "type": table_type,
@@ -132,10 +133,8 @@ def table(table_type: str) -> dict:
             for service in models
             if service != "Service" and service.endswith("Service")
         ]
-        table_dict["service_table_form"] = service_table_form
-    return render_template(
-        f"pages/table.html", **{"endpoint": "dashboard", **table_dict}
-    )
+        kwargs["service_table_form"] = service_table_form
+    return render_template(f"pages/table.html", **kwargs)
 
 
 @bp.route("/dashboard")
@@ -227,7 +226,7 @@ def logout() -> Response:
 
 @bp.route("/<path:_>")
 @monitor_requests
-def get_requests_sink(_) -> Response:
+def get_requests_sink(_: str) -> Response:
     abort(404)
 
 
@@ -235,7 +234,8 @@ def get_requests_sink(_) -> Response:
 @bp.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
-    (f, *args), kwargs = page.split("/"), {}
+    (f, *args) = page.split("/")
+    kwargs: dict = {}
     if f not in controller.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})
     form_type = request.form.get("form_type")
@@ -249,6 +249,6 @@ def route(page: str) -> Response:
         Session.commit()
         return jsonify(result)
     except Exception as e:
-        if controller.config["ENMS_CONFIG_MODE"] == "Develop":
+        if controller.enms_config_mode == "Develop":
             raise
         return jsonify({"error": str(e)})

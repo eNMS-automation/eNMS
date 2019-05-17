@@ -142,7 +142,7 @@ class DefaultController(BaseController):
                 "description": "Monitor eNMS cluster",
                 "job": fetch("Service", name="cluster_monitoring").id,
                 "frequency": 15,
-                "is_active": self.config["cluster"],
+                "is_active": self.cluster,
             },
         ]
         for task in tasks:

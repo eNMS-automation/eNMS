@@ -27,7 +27,7 @@ class Heartbeat(Resource):
     def get(self) -> dict:
         return {
             "name": getnode(),
-            "cluster_id": controller.config["CLUSTER_ID"],
+            "cluster_id": controller.cluster_id,
             "cpu_load": cpu_percent(),
         }
 

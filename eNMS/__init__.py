@@ -84,7 +84,7 @@ def configure_errors(app: Flask) -> None:
         return render_template("errors/page_404.html"), 404
 
 
-def configure_assets(app: Flask):
+def configure_assets(app: Flask) -> None:
     assets.register(
         "js", Bundle("lib/base/**/*.js", "base/base.js", output="bundles/base.js")
     )

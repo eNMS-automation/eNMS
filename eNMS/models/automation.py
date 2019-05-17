@@ -388,10 +388,10 @@ class Service(Job):
             success = self.match_dictionary(result, match)
         return success if not self.negative_logic else not success
 
-    def sub(self, input, variables: dict) -> dict:
+    def sub(self, input: Any, variables: dict) -> dict:
         r = compile("{{(.*?)}}")
 
-        def replace(match) -> str:
+        def replace(match: str) -> str:
             return str(eval(match.group()[2:-2], variables))
 
         def rec(input):

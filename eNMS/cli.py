@@ -47,7 +47,7 @@ def configure_cli(app: Flask) -> None:
     def develop(info: ScriptInfo) -> None:
         app = DispatchingApp(info.load_app)
         path_services = [Path.cwd() / "eNMS" / "automation" / "services"]
-        custom_services_path = controller.config["CUSTOM_SERVICES_PATH"]
+        custom_services_path = controller.custom_services_path
         if custom_services_path:
             path_services.append(Path(custom_services_path))
         extra_files = [file for path in path_services for file in path.glob("**/*.py")]

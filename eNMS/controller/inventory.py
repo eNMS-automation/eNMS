@@ -240,12 +240,10 @@ class InventoryController:
             )
 
     def query_opennms(self, **kwargs: str) -> None:
-        parameters = get_one("Parameters")
-        login, password = self.config["opennms_login"], parameters["password"]
-        parameters.update(**parameters)
+        login, password = self.opennms_login, kwargs["password"]
         Session.commit()
         json_devices = http_get(
-            self.config["opennms_devices"],
+            self.opennms_devices,
             headers={"Accept": "application/json"},
             auth=(login, password),
         ).json()["node"]
@@ -266,7 +264,7 @@ class InventoryController:
         }
         for device in list(devices):
             link = http_get(
-                f"{self.config['opennms_rest_api']}/nodes/{device}/ipinterfaces",
+                f"{self.opennms_rest_api}/nodes/{device}/ipinterfaces",
                 headers={"Accept": "application/json"},
                 auth=(login, password),
             ).json()

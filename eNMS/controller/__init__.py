@@ -87,6 +87,9 @@ class Controller(
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
+    def __getattr__(self, property: str) -> Any:
+        return self.config.get(property, super().__getattr__(property))
+
     def __init__(self) -> None:
         self.USE_SYSLOG = int(environ.get("USE_SYSLOG", False))
         self.USE_TACACS = int(environ.get("USE_TACACS", False))
@@ -111,7 +114,7 @@ class Controller(
     def initialize_database(self):
         self.create_default_parameters()
         self.create_default()
-        if self.config["create_examples"]:
+        if self.create_examples:
             self.create_examples()
 
     def create_default_parameters(self) -> None:
@@ -189,7 +192,7 @@ class Controller(
 
     def configure_logs(self) -> None:
         basicConfig(
-            level=getattr(import_module("logging"), self.config["enms_log_level"]),
+            level=getattr(import_module("logging"), self.enms_log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[
@@ -226,14 +229,13 @@ class Controller(
 
     def load_services(self) -> None:
         path_services = [self.app.path / "eNMS" / "services"]
-        custom_services_path = self.config["custom_services_path"]
-        if custom_services_path:
-            path_services.append(Path(custom_services_path))
+        if self.custom_services_path:
+            path_services.append(Path(self.custom_services_path))
         for path in path_services:
             for file in path.glob("**/*.py"):
                 if "init" in str(file):
                     continue
-                if not self.config["create_examples"] and "examples" in str(file):
+                if not self.create_examples and "examples" in str(file):
                     continue
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
                 assert isinstance(spec.loader, Loader)

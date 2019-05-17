@@ -23,13 +23,13 @@ class AdministrationController(BaseController):
         elif kwargs["authentication_method"] == "LDAP Domain":
             with Connection(
                 self.ldap_client,
-                user=f"{self.LDAP_USERDN}\\{name}",
+                user=f"{self.ldap_userdn}\\{name}",
                 password=password,
                 auto_bind=True,
                 authentication=NTLM,
             ) as connection:
                 connection.search(
-                    self.LDAP_BASEDN,
+                    self.ldap_basedn,
                     f"(&(objectClass=person)(samaccountname={name}))",
                     search_scope=SUBTREE,
                     get_operational_attributes=True,
@@ -44,7 +44,7 @@ class AdministrationController(BaseController):
                     }
                     if any(
                         group in s
-                        for group in self.LDAP_ADMIN_GROUP
+                        for group in self.ldap_admin_group
                         for s in json_response["attributes"]["memberOf"]
                     ):
                         user["permissions"] = ["Admin"]

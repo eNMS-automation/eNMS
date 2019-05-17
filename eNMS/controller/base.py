@@ -143,6 +143,10 @@ class BaseController:
             "gotty_port": -1,
             "gotty_start_port": int(environ.get("GOTTY_START_PORT", 9000)),
             "gotty_end_port": int(environ.get("GOTTY_END_PORT", 9100)),
+            "ldap_server": environ.get("LDAP_SERVER"),
+            "ldap_userdn": environ.get("LDAP_USERDN"),
+            "ldap_basedn": environ.get("LDAP_BASEDN"),
+            "ldap_admin_group": environ.get("LDAP_ADMIN_GROUP", "").split(","),
             "mattermost_url": environ.get("MATTERMOST_URL", ""),
             "mattermost_channel": environ.get("MATTERMOST_CHANNEL", ""),
             "mattermost_verify_certificate": int(
@@ -151,10 +155,14 @@ class BaseController:
             "pool_filter": environ.get("POOL_FILTER", "All objects"),
             "slack_token": environ.get("SLACK_TOKEN", ""),
             "slack_channel": environ.get("SLACK_CHANNEL", ""),
+            "tacacs_addr": environ.get("TACACS_ADDR"),
+            "tacacs_password": environ.get("TACACS_PASSWORD"),
+            "unseal_vault": environ.get("UNSEAL_VAULT"),
             "use_ldap": int(environ.get("USE_LDAP", False)),
             "use_syslog": int(environ.get("USE_SYSLOG", False)),
             "use_tacacs": int(environ.get("USE_TACACS", False)),
             "use_vault": int(environ.get("USE_VAULT", False)),
+            "vault_addr": environ.get("VAULT_ADDR"),
         }
 
     def update_parameters(self, **kwargs):
@@ -235,22 +243,16 @@ class BaseController:
                     error(f"Error loading custom service '{file}' ({str(e)})")
 
     def configure_ldap_client(self) -> None:
-        self.LDAP_SERVER = environ.get("LDAP_SERVER")
-        self.LDAP_USERDN = environ.get("LDAP_USERDN")
-        self.LDAP_BASEDN = environ.get("LDAP_BASEDN")
-        self.LDAP_ADMIN_GROUP = environ.get("LDAP_ADMIN_GROUP", "").split(",")
-        self.ldap_client = Server(environ.get("LDAP_SERVER"), get_info=ALL)
+        self.ldap_client = Server(self.ldap_server, get_info=ALL)
 
     def configure_tacacs_client(self) -> None:
-        self.tacacs_client = TACACSClient(
-            environ.get("TACACS_ADDR"), 49, environ.get("TACACS_PASSWORD")
-        )
+        self.tacacs_client = TACACSClient(self.tacacs_addr, 49, self.tacacs_password)
 
     def configure_vault_client(self) -> None:
         self.vault_client = VaultClient()
-        self.vault_client.url = environ.get("VAULT_ADDR")
+        self.vault_client.url = self.vault_addr
         self.vault_client.token = environ.get("VAULT_TOKEN")
-        if self.vault_client.sys.is_sealed() and environ.get("UNSEAL_VAULT"):
+        if self.vault_client.sys.is_sealed() and self.unseal_vault:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 

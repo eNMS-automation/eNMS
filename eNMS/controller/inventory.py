@@ -17,6 +17,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 from yaml import load, BaseLoader
 
+from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, property_types
@@ -32,7 +33,7 @@ from eNMS.properties.objects import (
 from eNMS.properties.table import filtering_properties, table_properties
 
 
-class InventoryController:
+class InventoryController(BaseController):
     def get_gotty_port(self):
         self.config["gotty_port"] += 1
         range = self.gotty_end_port - self.gotty_start_port

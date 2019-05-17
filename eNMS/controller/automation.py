@@ -7,10 +7,11 @@ from re import search, sub
 from typing import Any, Dict, List
 
 from eNMS.concurrent import threaded_job
+from eNMS.controller.base import BaseController
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
 
 
-class AutomationController:
+class AutomationController(BaseController):
 
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)

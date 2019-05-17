@@ -9,10 +9,11 @@ from os.path import exists
 from requests import get as http_get
 from yaml import dump, load, BaseLoader
 
+from eNMS.controller.base import BaseController
 from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
 
 
-class AdministrationController:
+class AdministrationController(BaseController):
     def authenticate_user(self, **kwargs) -> bool:
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":

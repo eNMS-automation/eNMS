@@ -1,9 +1,10 @@
 from uuid import getnode
 
+from eNMS.controller.base import BaseController
 from eNMS.database.functions import factory, fetch, Session
 
 
-class DefaultController:
+class DefaultController(BaseController):
     def configure_server_id(self) -> None:
         factory(
             "Server",

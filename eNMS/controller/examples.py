@@ -1,7 +1,9 @@
 from eNMS.database.functions import factory, fetch, Session
 
+from eNMS.controller.base import BaseController
 
-class ExamplesController:
+
+class ExamplesController(BaseController):
     def create_example_pools(self) -> None:
         for pool in (
             {

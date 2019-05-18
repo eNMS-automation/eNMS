@@ -111,5 +111,5 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_assets(app)
     controller.load_services()
     configure_cli(app)
-    info("eNMS starting")
+    controller.log("info", "eNMS starting")
     return app

@@ -20,6 +20,7 @@ from typing import Any, List, Set
 from eNMS.database import Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
 from eNMS.models import models, model_properties
+from eNMS.models.logging import SyslogServer
 from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 
 
@@ -90,7 +91,7 @@ class BaseController:
         if self.use_vault:
             self.configure_vault_client()
         if self.use_syslog:
-            configure_syslog_server()
+            self.configure_syslog_server()
 
     def initialize_app(self, app: Flask) -> None:
         self.app = app

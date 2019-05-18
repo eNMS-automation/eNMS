@@ -167,7 +167,7 @@ class BaseController:
 
     def update_parameters(self, **kwargs):
         get_one("Parameters").update(**kwargs)
-        self.parameters.update(kwargs)
+        self.config.update(kwargs)
 
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         return delete(cls, id=instance_id)

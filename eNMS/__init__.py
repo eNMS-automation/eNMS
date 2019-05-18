@@ -13,7 +13,7 @@ from eNMS.config import Config
 from eNMS.controller import controller
 from eNMS.database import Base, engine, Session
 from eNMS.database.events import configure_events
-from eNMS.database.functions import fetch, get_one
+from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
 from eNMS.extensions import assets, bp, cache, csrf, login_manager, mail_client, toolbar
 from eNMS.models.logging import SyslogServer
@@ -65,7 +65,7 @@ def configure_context_processor(app: Flask) -> None:
         return {
             "form_properties": form_properties,
             "names": property_names,
-            "parameters": get_one("Parameters").serialized,
+            "parameters": controller.config,
             "property_types": {k: str(v) for k, v in property_types.items()},
         }
 

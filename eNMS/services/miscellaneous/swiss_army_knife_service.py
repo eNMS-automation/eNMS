@@ -38,15 +38,14 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def mail_feedback_notification(self, payload: dict) -> dict:
-        parameters = get_one("Parameters")
         name = f"{payload['job']['name']}"
         recipients = payload["job"]["mail_recipient"].split(
             ","
-        ) or parameters.mail_recipients.split(",")
+        ) or controller.mail_recipients.split(",")
         self.logs.append(f"Sending mail notification for {name}")
         message = Message(
             f"{name} ({'PASS' if payload['result'] else 'FAILED'})",
-            sender=parameters.mail_sender,
+            sender=controller.mail_sender,
             recipients=recipients,
             body=payload["content"],
         )
@@ -66,39 +65,36 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def slack_feedback_notification(self, payload: dict) -> dict:
-        parameters = get_one("Parameters")
-        slack_client = SlackClient(parameters.slack_token)
+        slack_client = SlackClient(controller.slack_token)
         self.logs.append(f"Sending Slack notification for {payload['job']['name']}")
         result = slack_client.api_call(
             "chat.postMessage",
-            channel=parameters.slack_channel,
+            channel=controller.slack_channel,
             text=controller.str_dict(payload["content"]),
         )
         return {"success": True, "result": str(result)}
 
     def mattermost_feedback_notification(self, payload: dict) -> dict:
-        parameters = get_one("Parameters")
         self.logs.append(
             f"Sending Mattermost notification for {payload['job']['name']}"
         )
         post(
-            parameters.mattermost_url,
-            verify=parameters.mattermost_verify_certificate,
+            controller.mattermost_url,
+            verify=controller.mattermost_verify_certificate,
             data=dumps(
-                {"channel": parameters.mattermost_channel, "text": payload["content"]}
+                {"channel": controller.mattermost_channel, "text": payload["content"]}
             ),
         )
         return {"success": True}
 
     def cluster_monitoring(self, payload: dict) -> dict:
-        parameters = get_one("Parameters")
-        protocol = parameters.cluster_scan_protocol
+        protocol = controller.cluster_scan_protocol
         for instance in fetch_all("Instance"):
             factory(
                 "Instance",
                 **get(
                     f"{protocol}://{instance.ip_address}/rest/is_alive",
-                    timeout=parameters.cluster_scan_timeout,
+                    timeout=controller.cluster_scan_timeout,
                 ).json(),
             )
         return {"success": True}
@@ -113,8 +109,7 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def git_push_configurations(self, payload: dict) -> dict:
-        parameters = get_one("Parameters")
-        if parameters.git_configurations:
+        if controller.git_configurations:
             repo = Repo(Path.cwd() / "git" / "configurations")
             try:
                 repo.remotes.origin.pull()

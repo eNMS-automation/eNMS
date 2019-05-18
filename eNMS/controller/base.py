@@ -103,7 +103,7 @@ class BaseController:
             self.create_examples()
 
     def create_default_parameters(self) -> None:
-        parameters = Session.query("Parameters").one_or_none()
+        parameters = Session.query(models["Parameters"]).one_or_none()
         if not parameters:
             parameters = models["Parameters"]()
             parameters.update(
@@ -167,7 +167,7 @@ class BaseController:
         }
 
     def update_parameters(self, **kwargs):
-        Session.query("Parameters").one().update(**kwargs)
+        Session.query(models["Parameters"]).one().update(**kwargs)
         self.config.update(kwargs)
 
     def delete_instance(self, cls: str, instance_id: int) -> dict:

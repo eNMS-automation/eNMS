@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('static', filename='lib/calendar/fullcalendar.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='lib/full_calendar/fullcalendar.min.css') }}" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -23,6 +23,6 @@
 
 {% block javascripts %}
   {{ super() }}
-  <script src="{{ url_for('static', filename='lib/calendar/fullcalendar.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/full_calendar/fullcalendar.min.js') }}"></script>
   <script src="{{ url_for('static', filename='calendar.js') }}"></script>
 {% endblock javascripts %}

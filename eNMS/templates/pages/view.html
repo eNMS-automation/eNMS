@@ -4,8 +4,8 @@
 
 {% block stylesheets %}
   {{ super() }}
-  <link href="{{ url_for('static', filename='lib/view/leaflet/leaflet.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='lib/view/leaflet-markercluster/leaflet.markercluster.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}" rel="stylesheet">
   <style>
     #map { height:85vh; }
     #network { height:85vh; }
@@ -86,9 +86,9 @@
     let view = '{{ view }}';
     let viewType = "{{ view_type }}"
   </script>
-  <script src="{{ url_for('static', filename='lib/view/webgl-earth/api.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='lib/view/leaflet/leaflet.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='lib/view/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/webgl-earth/api.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
   <script src="{{ url_for('static', filename='inventory.js') }}"></script>
   <script src="{{ url_for('static', filename='view.js') }}"></script>
   <script src="{{ url_for('static', filename='logicalView.js') }}"></script>

@@ -58,7 +58,6 @@ function parseObject(obj) {
     if (typeof obj[k] === 'object' && obj[k] !== null) {
       parseObject(obj[k])
     } else if (obj.hasOwnProperty(k) && typeof obj[k] === 'string') {
-      console.log(obj[k]);
       obj[k] = obj[k].replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").split("\n");
     }
   }
@@ -71,11 +70,9 @@ function parseObject(obj) {
  */
 function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
-  parseObject(value);
-  console.log(value);
   let container = document.getElementById(`display_results-${id}`);
   const options = { mode: 'view' };
-  let editor = new JSONEditor(container, options, value);
+  let editor = new JSONEditor(container, options, parseObject(value););
   
 }
 

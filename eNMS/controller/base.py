@@ -158,6 +158,8 @@ class BaseController:
             "pool_filter": environ.get("POOL_FILTER", "All objects"),
             "slack_token": environ.get("SLACK_TOKEN", ""),
             "slack_channel": environ.get("SLACK_CHANNEL", ""),
+            "syslog_addr": environ.get("SYSLOG_ADDR", "0.0.0.0"),
+            "syslog_port": int(environ.get("SYSLOG_PORT", 514)),
             "tacacs_addr": environ.get("TACACS_ADDR"),
             "tacacs_password": environ.get("TACACS_PASSWORD"),
             "unseal_vault": environ.get("UNSEAL_VAULT"),
@@ -260,9 +262,7 @@ class BaseController:
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def configure_syslog_server(self) -> None:
-        self.syslog_server = SyslogServer(
-            environ.get("SYSLOG_ADDR", "0.0.0.0"), int(environ.get("SYSLOG_PORT", 514))
-        )
+        self.syslog_server = SyslogServer(self.syslog_addr, self.syslog_port)
         self.syslog_server.start()
 
     def count_models(self):

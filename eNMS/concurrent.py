@@ -1,5 +1,5 @@
 from multiprocessing import Lock
-from typing import List, Optional, Set, Tuple
+from typing import Optional, Set, Tuple
 
 from eNMS.database.functions import fetch
 

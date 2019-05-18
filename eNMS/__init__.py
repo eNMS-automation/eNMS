@@ -2,8 +2,6 @@ from flask import Flask, render_template
 from flask_assets import Bundle
 from flask_cli import FlaskCLI
 from flask.wrappers import Request
-from logging import info
-from os import environ
 from pathlib import Path
 from sqlalchemy.orm import configure_mappers
 from typing import Any, Optional, Tuple, Type
@@ -16,7 +14,6 @@ from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
 from eNMS.extensions import assets, bp, cache, csrf, login_manager, mail_client, toolbar
-from eNMS.models.logging import SyslogServer
 from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
@@ -111,5 +108,4 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_assets(app)
     controller.load_services()
     configure_cli(app)
-    controller.log("info", "eNMS starting")
     return app

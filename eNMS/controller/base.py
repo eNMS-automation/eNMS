@@ -20,8 +20,8 @@ from typing import Any, List, Set
 from eNMS.database import Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
 from eNMS.models import models, model_properties
-from eNMS.models.logging import SyslogServer
 from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
+from eNMS.syslog import SyslogServer
 
 
 class BaseController:

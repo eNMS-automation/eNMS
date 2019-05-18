@@ -1,5 +1,9 @@
+from re import search
 from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
+
+from eNMS.database import Session
+from eNMS.database.functions import factory, fetch_all
 
 
 class SyslogServer:
@@ -21,7 +25,7 @@ class SyslogUDPHandler(BaseRequestHandler):
         data = str(bytes.decode(self.request[0].strip()))
         source, _ = self.client_address
         log_rules = []
-        for log_rule in Session.query(LogRule).all():
+        for log_rule in fetch_all("LogRule"):
             source_match = (
                 search(log_rule.origin, source)
                 if log_rule.source_ip_regex
@@ -37,6 +41,8 @@ class SyslogUDPHandler(BaseRequestHandler):
                 for job in log_rule.jobs:
                     job.try_run()
         if log_rules:
-            log = Log(**{"source": source, "date": data, "log_rules": log_rules})
+            log = factory(
+                "Log", **{"source": source, "date": data, "log_rules": log_rules}
+            )
             Session.add(log)
             Session.commit()

@@ -1,10 +1,9 @@
 from datetime import datetime
-from re import search
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 from typing import List
 
-from eNMS.database import Session, SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
+from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.models.associations import job_log_rule_table, log_rule_log_table
 from eNMS.database.base import AbstractBase
 

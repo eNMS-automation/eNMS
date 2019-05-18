@@ -36,30 +36,28 @@ let markersArray = [];
 let polylinesArray = [];
 let currentView;
 let dimension;
+let layer2D = L.tileLayer(layers["osm"]);;
+let layer3D = WE.tileLayer(layers["gm"]);;
 let markerType;
 let earth;
 let map;
+let markers = L.markerClusterGroup();
 
 call("/get/parameters/1", function(parameters) {
   currentView = parameters.default_view;
   dimension = currentView.substring(0, 2);
   markerType = parameters.default_marker;
-
-  $("#earth").className = dimension == "3D" ? "front" : "back";
-  $("#map").className = dimension == "3D" ? "back" : "front";
-
   map = L.map("map", { preferCanvas: true }).setView(
     [parameters.default_latitude, parameters.default_longitude],
     parameters.default_zoom_level
   );
   earth = WE.map("earth", { sky: true, atmosphere: true });
 
-  const osmLayer = L.tileLayer(layers["osm"]);
-  map.addLayer(osmLayer);
-  let layer2D = osmLayer;
-  let layer3D = WE.tileLayer(layers["gm"]);
+  layer2D = 
+  layer3D = 
+
+  map.addLayer(layer2D);
   layer3D.addTo(earth);
-  let markers = L.markerClusterGroup();
 
   if (currentView == "3D") {
     $("#map").css("visibility", "hidden");

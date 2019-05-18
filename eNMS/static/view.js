@@ -44,6 +44,10 @@ call("/get/parameters/1", function(parameters) {
   currentView = parameters.default_view;
   dimension = currentView.substring(0, 2);
   markerType = parameters.default_marker;
+
+  $("#earth").className = dimension == "3D" ? "front" : "back";
+  $("#map").className = dimension == "3D" ? "back" : "front";
+
   map = L.map("map", { preferCanvas: true }).setView(
     [parameters.default_latitude, parameters.default_longitude],
     parameters.default_zoom_level
@@ -111,11 +115,6 @@ L.PolylineClusterable = L.Polyline.extend({
  */
 // eslint-disable-next-line
 function switchView(newView) {
-  console.log(markersArray);
-  console.log(markersArray);
-  console.log(markersArray);
-  console.log(markersArray);
-  console.log(1);
   deleteAll();
   const newDimension = newView.substring(0, 2);
   if (dimension != newDimension) {
@@ -258,7 +257,6 @@ function createNode(node, nodeType) {
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = node; // eslint-disable-line no-undef
   });
-  console.log(currentView, map, marker);
   if (currentView == "2D") {
     marker.addTo(map);
   } else if (currentView == "2DC") {
@@ -451,7 +449,3 @@ function filter(type) {
     alertify.notify("Filter applied.", "success", 5);
   });
 }
-
-(function() {
-  
-})();

@@ -52,6 +52,12 @@ def monitor_requests(function: Callable) -> Callable:
     return decorated_function
 
 
+@bp.route("/<path:_>")
+@monitor_requests
+def get_requests_sink(_: str) -> Response:
+    abort(404)
+
+
 @bp.route("/")
 def site_root() -> Response:
     return redirect(url_for("bp.route", page="login"))
@@ -138,6 +144,7 @@ def table(table_type: str) -> dict:
 
 
 @bp.route("/dashboard")
+@cache.cached(timeout=0)
 @monitor_requests
 def dashboard() -> dict:
     return render_template(
@@ -160,6 +167,7 @@ def workflow_builder() -> dict:
 
 
 @bp.route("/calendar")
+@cache.cached(timeout=0)
 @monitor_requests
 def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
@@ -181,6 +189,7 @@ def download_configuration(name: str) -> Response:
 
 
 @bp.route("/administration")
+@cache.cached(timeout=0)
 @monitor_requests
 def administration() -> dict:
     return render_template(
@@ -222,12 +231,6 @@ def login() -> Response:
 def logout() -> Response:
     logout_user()
     return redirect(url_for("bp.route", page="login"))
-
-
-@bp.route("/<path:_>")
-@monitor_requests
-def get_requests_sink(_: str) -> Response:
-    abort(404)
 
 
 @bp.route("/", methods=["POST"])

@@ -34,29 +34,53 @@ const subtypeSizes = {
 let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
-let currentView = parameters.default_view;
-let dimension = currentView.substring(0, 2);
-let markerType = parameters.default_marker;
+let currentView;
+let dimension;
+let markerType;
+let earth;
+let map;
 
-const map = L.map("map", { preferCanvas: true }).setView(
-  [parameters.default_latitude, parameters.default_longitude],
-  parameters.default_zoom_level
-);
-const options = { sky: true, atmosphere: true };
-const earth = WE.map("earth", options);
+call("/get/parameters/1", function(parameters) {
+  currentView = parameters.default_view;
+  dimension = currentView.substring(0, 2);
+  markerType = parameters.default_marker;
+  map = L.map("map", { preferCanvas: true }).setView(
+    [parameters.default_latitude, parameters.default_longitude],
+    parameters.default_zoom_level
+  );
+  earth = WE.map("earth", { sky: true, atmosphere: true });
 
-const osmLayer = L.tileLayer(layers["osm"]);
-map.addLayer(osmLayer);
-let layer2D = osmLayer;
-let layer3D = WE.tileLayer(layers["gm"]);
-layer3D.addTo(earth);
-let markers = L.markerClusterGroup();
+  const osmLayer = L.tileLayer(layers["osm"]);
+  map.addLayer(osmLayer);
+  let layer2D = osmLayer;
+  let layer3D = WE.tileLayer(layers["gm"]);
+  layer3D.addTo(earth);
+  let markers = L.markerClusterGroup();
 
-if (currentView == "3D") {
-  $("#map").css("visibility", "hidden");
-} else {
-  $("#earth").css("visibility", "hidden");
-}
+  if (currentView == "3D") {
+    $("#map").css("visibility", "hidden");
+  } else {
+    $("#earth").css("visibility", "hidden");
+  }
+
+  map.on("click", function(e) {
+    selectedObject = null;
+  });
+  
+  earth.on("click", function(e) {
+    $(".menu").hide();
+    $(".geo-menu").show();
+  });
+  
+  map.on("contextmenu", function() {
+    if (!selectedObject) {
+      $(".menu").hide();
+      $(".geo-menu").show();
+    }
+  });
+
+  switchView(currentView);
+});
 
 for (const [key, value] of Object.entries(subtypeSizes)) {
   window[`icon_${key}`] = L.icon({
@@ -87,6 +111,11 @@ L.PolylineClusterable = L.Polyline.extend({
  */
 // eslint-disable-next-line
 function switchView(newView) {
+  console.log(markersArray);
+  console.log(markersArray);
+  console.log(markersArray);
+  console.log(markersArray);
+  console.log(1);
   deleteAll();
   const newDimension = newView.substring(0, 2);
   if (dimension != newDimension) {
@@ -229,6 +258,7 @@ function createNode(node, nodeType) {
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = node; // eslint-disable-line no-undef
   });
+  console.log(currentView, map, marker);
   if (currentView == "2D") {
     marker.addTo(map);
   } else if (currentView == "2DC") {
@@ -358,22 +388,6 @@ function deleteAll() {
   deleteAllLinks();
 }
 
-map.on("click", function(e) {
-  selectedObject = null;
-});
-
-earth.on("click", function(e) {
-  $(".menu").hide();
-  $(".geo-menu").show();
-});
-
-map.on("contextmenu", function() {
-  if (!selectedObject) {
-    $(".menu").hide();
-    $(".geo-menu").show();
-  }
-});
-
 Object.assign(action, {
   // eslint-disable-line no-unused-vars
   "Open Street Map": () => switchLayer("osm"),
@@ -439,5 +453,5 @@ function filter(type) {
 }
 
 (function() {
-  switchView(currentView);
+  
 })();

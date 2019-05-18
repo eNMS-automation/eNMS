@@ -6,7 +6,6 @@ from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 from typing import List
 
-from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.models.associations import job_log_rule_table, log_rule_log_table
 from eNMS.database.base import AbstractBase
@@ -80,26 +79,25 @@ class SyslogServer(AbstractBase):
 
 class SyslogUDPHandler(BaseRequestHandler):
     def handle(self) -> None:
-        with controller.app.app_context():
-            data = str(bytes.decode(self.request[0].strip()))
-            source, _ = self.client_address
-            log_rules = []
-            for log_rule in Session.query(LogRule).all():
-                source_match = (
-                    search(log_rule.origin, source)
-                    if log_rule.source_ip_regex
-                    else log_rule.origin in source
-                )
-                content_match = (
-                    search(log_rule.name, data)
-                    if log_rule.content_regex
-                    else log_rule.name in data
-                )
-                if source_match and content_match:
-                    log_rules.append(log_rule)
-                    for job in log_rule.jobs:
-                        job.try_run()
-            if log_rules:
-                log = Log(**{"source": source, "date": data, "log_rules": log_rules})
-                Session.add(log)
-                Session.commit()
+        data = str(bytes.decode(self.request[0].strip()))
+        source, _ = self.client_address
+        log_rules = []
+        for log_rule in Session.query(LogRule).all():
+            source_match = (
+                search(log_rule.origin, source)
+                if log_rule.source_ip_regex
+                else log_rule.origin in source
+            )
+            content_match = (
+                search(log_rule.name, data)
+                if log_rule.content_regex
+                else log_rule.name in data
+            )
+            if source_match and content_match:
+                log_rules.append(log_rule)
+                for job in log_rule.jobs:
+                    job.try_run()
+        if log_rules:
+            log = Log(**{"source": source, "date": data, "log_rules": log_rules})
+            Session.add(log)
+            Session.commit()

@@ -89,6 +89,8 @@ class BaseController:
             self.configure_ldap_client()
         if self.use_vault:
             self.configure_vault_client()
+        if self.use_syslog:
+            configure_syslog_server()
 
     def initialize_app(self, app: Flask) -> None:
         self.app = app
@@ -256,6 +258,12 @@ class BaseController:
         if self.vault_client.sys.is_sealed() and self.unseal_vault:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
+
+    def configure_syslog_server(self) -> None:
+        self.syslog_server = SyslogServer(
+            environ.get("SYSLOG_ADDR", "0.0.0.0"), int(environ.get("SYSLOG_PORT", 514))
+        )
+        self.syslog_server.start()
 
     def count_models(self):
         return {

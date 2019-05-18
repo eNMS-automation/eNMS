@@ -3,8 +3,8 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Text
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
+from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
-from eNMS.database.functions import get_one
 from eNMS.forms.automation import ServiceForm
 from eNMS.extensions import mail_client
 from eNMS.models.automation import Service
@@ -23,12 +23,11 @@ class MailNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
 
     def job(self, _) -> dict:
-        parameters = get_one("Parameters")
         if self.recipients:
             recipients = self.recipients.split(",")
         else:
-            recipients = parameters.mail_sender.split(",")
-        sender = self.sender or parameters.mail_sender
+            recipients = controller.mail_sender.split(",")
+        sender = self.sender or controller.mail_sender
         title = self.sub(self.title, locals())
         body = self.sub(self.body, locals())
         self.logs.append(f"Sending mail {title} to {sender}")

@@ -13,7 +13,7 @@ from wtforms import BooleanField, HiddenField
 
 from eNMS.forms.automation import ServiceForm
 from eNMS.controller import controller
-from eNMS.database.functions import factory, fetch_all, get_one
+from eNMS.database.functions import factory, fetch_all
 from eNMS.extensions import mail_client
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device

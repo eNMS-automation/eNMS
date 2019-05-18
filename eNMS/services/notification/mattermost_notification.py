@@ -4,8 +4,8 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Text
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
+from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
-from eNMS.database.functions import get_one
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
 
@@ -21,12 +21,11 @@ class MattermostNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
 
     def job(self, _) -> dict:
-        parameters = get_one("Parameters")
-        channel = self.channel or parameters.mattermost_channel
+        channel = self.channel or controller.mattermost_channel
         self.logs.append(f"Sending Mattermost notification on {channel}")
         result = post(
-            parameters.mattermost_url,
-            verify=parameters.mattermost_verify_certificate,
+            controller.mattermost_url,
+            verify=controller.mattermost_verify_certificate,
             data=dumps({"channel": channel, "text": self.sub(self.body, locals())}),
         )
         return {"success": True, "result": str(result)}

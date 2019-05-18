@@ -234,7 +234,7 @@ def get_requests_sink(_: str) -> Response:
 @bp.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
-    (f, *args) = page.split("/")
+    f, *args = page.split("/")
     kwargs: dict = {}
     if f not in controller.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})

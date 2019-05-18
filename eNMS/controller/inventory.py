@@ -34,7 +34,7 @@ from eNMS.properties.table import filtering_properties, table_properties
 
 
 class InventoryController(BaseController):
-    def get_gotty_port(self):
+    def get_gotty_port(self) -> int:
         self.config["gotty_port"] += 1
         range = self.gotty_end_port - self.gotty_start_port
         return self.gotty_start_port + self.gotty_port % range
@@ -187,7 +187,7 @@ class InventoryController(BaseController):
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")
         if not filepath:
-            custom_properties = {}
+            custom_properties: dict = {}
         else:
             with open(filepath, "r") as properties:
                 custom_properties = load(properties, Loader=BaseLoader)

@@ -112,7 +112,7 @@ class ExamplesController(BaseController):
                 "multiprocessing": True,
             },
         ):
-            factory(service.pop("type"), **service)
+            factory(service.pop("type"), **service)  # type: ignore
 
     def create_netmiko_workflow(self) -> None:
         services = []
@@ -183,7 +183,7 @@ class ExamplesController(BaseController):
                 "time_between_retries": 1,
             },
         ):
-            instance = factory(service.pop("type"), **service)
+            instance = factory(service.pop("type"), **service)  # type: ignore
             services.append(instance)
         workflow = factory(
             "Workflow",
@@ -321,7 +321,7 @@ class ExamplesController(BaseController):
                 }
             ]
         ):
-            instance = factory(service.pop("type"), **service)
+            instance = factory(service.pop("type"), **service)  # type: ignore
             services.append(instance)
         workflow = factory(
             "Workflow",

@@ -15,6 +15,7 @@ table: false
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const panelSize = {
+  add_jobs: "800 500",
   device: "700 600",
   server: "600 250",
   link: "700 400",
@@ -52,6 +53,7 @@ const panelSize = {
 };
 
 const panelName = {
+  add_jobs: "Add jobs",
   configuration: "Configuration",
   connection: "Connect to device",
   database_deletion: "Database Deletion",

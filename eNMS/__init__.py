@@ -86,14 +86,13 @@ def configure_errors(app: Flask) -> None:
 
 def configure_assets(app: Flask) -> None:
     assets.register(
-        "js", Bundle("lib/base/**/*.js", "base/base.js", output="bundles/base.js")
+        "js", Bundle("lib/base/**/*.js", "base.js", output="bundles/base.js")
     )
     assets.register(
         "css",
         Bundle(
             "lib/base/3_bootstrap/css/bootstrap.min.css",
             "lib/base/**/*.css",
-            "base/base.min.css",
             output="bundles/base.css",
         ),
     )

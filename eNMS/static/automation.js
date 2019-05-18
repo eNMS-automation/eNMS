@@ -53,6 +53,16 @@ function saveService(service) {
   }
 }
 
+function parseObject(obj) {
+  for (var k in obj) {
+    if (typeof obj[k] === 'object' && obj[k] !== null) {
+      parseObject(obj[k])
+    } else if (obj.hasOwnProperty(k) && obj[k] === 'string') {
+      obj[k].replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").replace(/\\"/g, `"`)
+    }
+  }
+}
+
 /**
  * Display result.
  * @param {results} results - Results.
@@ -60,19 +70,11 @@ function saveService(service) {
  */
 function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
-  $(`#display_results-${id}`).text(
-    value
-    ? JSON.stringify(
-        Object.fromEntries(
-          Object.entries(value)
-            .sort()
-            .reverse()
-        ),
-      null,
-      2
-    ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").replace(/\\"/g, `"`)
-    : "No results yet."
-  );
+
+  let container = document.getElementById(`display_results-${id}`);
+  const options = { mode: 'view' };
+  let editor = new JSONEditor(container, options, value);
+  parseObject(value);
 }
 
 /**

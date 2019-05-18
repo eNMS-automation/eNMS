@@ -18,7 +18,7 @@ from tacacs_plus.client import TACACSClient
 from typing import Any, List, Set
 
 from eNMS.database import Session
-from eNMS.database.functions import count, delete, factory, fetch, fetch_all, get_one
+from eNMS.database.functions import count, delete, factory, fetch, fetch_all
 from eNMS.models import models, model_properties
 from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 
@@ -103,7 +103,8 @@ class BaseController:
             self.create_examples()
 
     def create_default_parameters(self) -> None:
-        if not get_one("Parameters"):
+        parameters = Session.query("Parameters").one_or_none()
+        if not parameters:
             parameters = models["Parameters"]()
             parameters.update(
                 **{
@@ -115,7 +116,7 @@ class BaseController:
             Session.add(parameters)
             Session.commit()
         else:
-            self.config.update(get_one("Parameters").get_properties())
+            self.config.update(parameters.get_properties())
 
     def load_config(self) -> dict:
         return {
@@ -166,7 +167,7 @@ class BaseController:
         }
 
     def update_parameters(self, **kwargs):
-        get_one("Parameters").update(**kwargs)
+        Session.query("Parameters").one().update(**kwargs)
         self.config.update(kwargs)
 
     def delete_instance(self, cls: str, instance_id: int) -> dict:

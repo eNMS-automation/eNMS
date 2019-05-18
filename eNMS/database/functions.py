@@ -46,10 +46,6 @@ def export(model: str) -> List[dict]:
     return [instance.to_dict(export=True) for instance in models[model].visible()]
 
 
-def get_one(model: str) -> Any:
-    return Session.query(models[model]).one_or_none()
-
-
 def factory(cls_name: str, **kwargs: Any) -> Any:
     instance, instance_id = None, kwargs.pop("id", 0)
     if instance_id:

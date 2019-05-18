@@ -52,15 +52,149 @@ def monitor_requests(function: Callable) -> Callable:
     return decorated_function
 
 
+@bp.route("/")
+def site_root() -> Response:
+    return redirect(url_for("bp.route", page="login"))
+
+
 @bp.route("/<path:_>")
 @monitor_requests
 def get_requests_sink(_: str) -> Response:
     abort(404)
 
 
-@bp.route("/")
-def site_root() -> Response:
+@bp.route("/login", methods=["GET", "POST"])
+def login() -> Response:
+    if request.method == "POST":
+        try:
+            user = controller.authenticate_user(**request.form.to_dict())
+            if user:
+                login_user(user)
+                return redirect(url_for("bp.route", page="dashboard"))
+            else:
+                abort(403)
+        except Exception as e:
+            info(f"Authentication failed ({str(e)})")
+            abort(403)
+    if not current_user.is_authenticated:
+        login_form = LoginForm(request.form)
+        authentication_methods = [("Local User",) * 2]
+        if controller.use_ldap:
+            authentication_methods.append(("LDAP Domain",) * 2)
+        if controller.use_tacacs:
+            authentication_methods.append(("TACACS",) * 2)
+        login_form.authentication_method.choices = authentication_methods
+        return render_template("login.html", login_form=login_form)
+    return redirect(url_for("bp.route", page="dashboard"))
+
+
+@bp.route("/logout")
+@monitor_requests
+def logout() -> Response:
+    logout_user()
     return redirect(url_for("bp.route", page="login"))
+
+
+@bp.route("/administration")
+@cache.cached(timeout=0)
+@monitor_requests
+def administration() -> dict:
+    return render_template(
+        f"pages/administration.html",
+        **{
+            "endpoint": "administration",
+            "folders": listdir(current_app.path / "migrations"),
+        },
+    )
+
+
+@bp.route("/dashboard")
+@cache.cached(timeout=0)
+@monitor_requests
+def dashboard() -> dict:
+    return render_template(
+        f"pages/dashboard.html",
+        **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
+    )
+
+
+@bp.route("/table/<table_type>")
+@monitor_requests
+def table(table_type: str) -> dict:
+    kwargs = {
+        "endpoint": "dashboard",
+        "properties": table_properties[table_type],
+        "fixed_columns": table_fixed_columns[table_type],
+        "type": table_type,
+    }
+    if table_type == "service":
+        service_table_form = ServiceTableForm(request.form)
+        service_table_form.services.choices = [
+            (service, service)
+            for service in models
+            if service != "Service" and service.endswith("Service")
+        ]
+        kwargs["service_table_form"] = service_table_form
+    return render_template(f"pages/table.html", **kwargs)
+
+
+@bp.route("/view/<view_type>")
+@monitor_requests
+def view(view_type: str) -> dict:
+    return render_template(
+        f"pages/view.html",
+        **{"endpoint": "view", "link_colors": link_colors, "view_type": view_type},
+    )
+
+
+@bp.route("/workflow_builder")
+@monitor_requests
+def workflow_builder() -> dict:
+    workflow = fetch("Workflow", id=session.get("workflow", None))
+    return render_template(
+        f"pages/workflow_builder.html",
+        **{
+            "endpoint": "workflow_builder",
+            "workflow": workflow.serialized if workflow else None,
+        },
+    )
+
+
+@bp.route("/calendar")
+@cache.cached(timeout=0)
+@monitor_requests
+def calendar() -> dict:
+    return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
+
+
+@bp.route("/form/<form_type>")
+@cache.cached(timeout=0)
+@monitor_requests
+def form(form_type: str) -> dict:
+    return render_template(
+        f"forms/{form_templates.get(form_type, 'base')}_form.html",
+        **{
+            "endpoint": "dashboard",
+            "action": form_actions.get(form_type),
+            "form": form_classes[form_type](request.form),
+            "form_type": form_type,
+        },
+    )
+
+
+@bp.route("/download_configuration/<name>")
+@login_required
+def download_configuration(name: str) -> Response:
+    try:
+        return send_file(
+            filename_or_fp=str(
+                current_app.path / "git" / "configurations" / name / name
+            ),
+            as_attachment=True,
+            attachment_filename=f"configuration_{name}.txt",
+        )
+    except FileNotFoundError:
+        return jsonify("No configuration stored")
 
 
 @bp.route("/filtering/<table>")
@@ -97,140 +231,6 @@ def filtering(table: str) -> dict:
             ],
         }
     )
-
-
-@bp.route("/form/<form_type>")
-@cache.cached(timeout=0)
-@monitor_requests
-def form(form_type: str) -> dict:
-    return render_template(
-        f"forms/{form_templates.get(form_type, 'base')}_form.html",
-        **{
-            "endpoint": "dashboard",
-            "action": form_actions.get(form_type),
-            "form": form_classes[form_type](request.form),
-            "form_type": form_type,
-        },
-    )
-
-
-@bp.route("/view/<view_type>")
-@monitor_requests
-def view(view_type: str) -> dict:
-    return render_template(
-        f"pages/view.html",
-        **{"endpoint": "view", "link_colors": link_colors, "view_type": view_type},
-    )
-
-
-@bp.route("/table/<table_type>")
-@monitor_requests
-def table(table_type: str) -> dict:
-    kwargs = {
-        "endpoint": "dashboard",
-        "properties": table_properties[table_type],
-        "fixed_columns": table_fixed_columns[table_type],
-        "type": table_type,
-    }
-    if table_type == "service":
-        service_table_form = ServiceTableForm(request.form)
-        service_table_form.services.choices = [
-            (service, service)
-            for service in models
-            if service != "Service" and service.endswith("Service")
-        ]
-        kwargs["service_table_form"] = service_table_form
-    return render_template(f"pages/table.html", **kwargs)
-
-
-@bp.route("/dashboard")
-@cache.cached(timeout=0)
-@monitor_requests
-def dashboard() -> dict:
-    return render_template(
-        f"pages/dashboard.html",
-        **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
-    )
-
-
-@bp.route("/workflow_builder")
-@monitor_requests
-def workflow_builder() -> dict:
-    workflow = fetch("Workflow", id=session.get("workflow", None))
-    return render_template(
-        f"pages/workflow_builder.html",
-        **{
-            "endpoint": "workflow_builder",
-            "workflow": workflow.serialized if workflow else None,
-        },
-    )
-
-
-@bp.route("/calendar")
-@cache.cached(timeout=0)
-@monitor_requests
-def calendar() -> dict:
-    return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
-
-
-@bp.route("/download_configuration/<name>")
-@login_required
-def download_configuration(name: str) -> Response:
-    try:
-        return send_file(
-            filename_or_fp=str(
-                current_app.path / "git" / "configurations" / name / name
-            ),
-            as_attachment=True,
-            attachment_filename=f"configuration_{name}.txt",
-        )
-    except FileNotFoundError:
-        return jsonify("No configuration stored")
-
-
-@bp.route("/administration")
-@cache.cached(timeout=0)
-@monitor_requests
-def administration() -> dict:
-    return render_template(
-        f"pages/administration.html",
-        **{
-            "endpoint": "administration",
-            "folders": listdir(current_app.path / "migrations"),
-        },
-    )
-
-
-@bp.route("/login", methods=["GET", "POST"])
-def login() -> Response:
-    if request.method == "POST":
-        try:
-            user = controller.authenticate_user(**request.form.to_dict())
-            if user:
-                login_user(user)
-                return redirect(url_for("bp.route", page="dashboard"))
-            else:
-                abort(403)
-        except Exception as e:
-            info(f"Authentication failed ({str(e)})")
-            abort(403)
-    if not current_user.is_authenticated:
-        login_form = LoginForm(request.form)
-        authentication_methods = [("Local User",) * 2]
-        if controller.use_ldap:
-            authentication_methods.append(("LDAP Domain",) * 2)
-        if controller.use_tacacs:
-            authentication_methods.append(("TACACS",) * 2)
-        login_form.authentication_method.choices = authentication_methods
-        return render_template("login.html", login_form=login_form)
-    return redirect(url_for("bp.route", page="dashboard"))
-
-
-@bp.route("/logout")
-@monitor_requests
-def logout() -> Response:
-    logout_user()
-    return redirect(url_for("bp.route", page="login"))
 
 
 @bp.route("/", methods=["POST"])

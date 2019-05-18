@@ -88,7 +88,7 @@ class AddJobsForm(BaseForm):
     template = "base"
     action = "addJobToWorkflow"
     form_type = HiddenField(default="add_jobs")
-    add_jobs = MultipleInstanceField("Add jobs", instance_type="Job")
+    jobs = MultipleInstanceField("Add jobs", instance_type="Job")
 
 
 class ServiceTableForm(BaseForm):

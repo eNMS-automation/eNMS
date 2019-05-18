@@ -38,7 +38,7 @@ class AutomationController(BaseController):
         self, workflow_id: int, **kwargs: List[int]
     ) -> Dict[str, Any]:
         workflow = fetch("Workflow", id=workflow_id)
-        jobs = objectify("Job", kwargs["add_jobs"])
+        jobs = objectify("Job", kwargs["jobs"])
         for job in jobs:
             job.workflows.append(workflow)
         now = self.get_time()

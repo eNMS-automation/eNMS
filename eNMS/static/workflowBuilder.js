@@ -126,10 +126,9 @@ function addJobToWorkflow() {
     );
   } else {
     const url = `/add_jobs_to_workflow/${workflow.id}`;
-    fCall(url, "#add-job-form", function(result) {
+    fCall(url, "#add_jobs-form", function(result) {
       lastModified = result.update_time;
       result.jobs.forEach((job) => {
-        $("#add-job").remove();
         if (graph.findNode(job.id).length == 0) {
           nodes.add(jobToNode(job));
           alertify.notify(
@@ -292,18 +291,6 @@ function savePositions() {
         alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
       }
     },
-  });
-}
-
-/**
- * Add jobs to the workflow.
- */
-// eslint-disable-next-line
-function addJobPanel() {
-  createPanel("add-job", "400 500", "../add_jobs_form", function(panel) {
-    panel.content.innerHTML = this.responseText;
-    panel.setHeaderTitle("Add jobs to the worflow");
-    configureForm("add_jobs");
   });
 }
 

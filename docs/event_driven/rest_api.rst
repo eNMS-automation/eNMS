@@ -6,12 +6,15 @@ In this section, instance refers to any device, link, service, workflow, or task
 
 eNMS has a ReST API allowing to:
 
-- retrieve an instance.
-- delete an instance
-- create an instance
-- update an instance
-- run a Service instance or a Workflow.
-- make sure eNMS is alive.
+- run an already created Service instance or a Workflow
+- make sure eNMS is alive
+- retrieve a device
+- delete a device
+- retrieve the current configuration of an device
+- create a device
+- update a device
+- initiate a database backup or restore (also used for version upgrade migration)
+- initiate a device inventory bulk import or export
 
 This ReST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
 
@@ -185,7 +188,7 @@ Example of python script to import programmatically:
  with open(Path.cwd() / 'project_name.xls', 'rb') as f:
      post(
          'https://IP/rest/topology/import',
-         data={'replace': True},
+         data={'replace': True, 'update_pools': False},
          files={'file': f},
          auth=HTTPBasicAuth('admin', 'admin')
      )

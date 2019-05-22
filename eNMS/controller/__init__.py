@@ -128,31 +128,31 @@ class Controller(
     log_severity = {"error": error, "info": info, "warning": warning}
 
     def __init__(self) -> None:
-        self.load_variables()
+        self.init_variables()
         self.custom_properties = self.load_custom_properties()
-        self.configure_scheduler()
+        self.init_scheduler()
         if self.use_tacacs:
             self.configure_tacacs_client()
         if self.use_ldap:
-            self.configure_ldap_client()
+            self.init_ldap_client()
         if self.use_vault:
-            self.configure_vault_client()
+            self.init_vault_client()
         if self.use_syslog:
-            self.configure_syslog_server()
+            self.init_syslog_server()
 
-    def initialize_app(self, app: Flask) -> None:
+    def init_app(self, app: Flask) -> None:
         self.app = app
         self.path = app.path
         self.create_google_earth_styles()
-        self.configure_logs()
+        self.init_logs()
 
-    def initialize_database(self):
-        self.create_default_parameters()
+    def init_database(self):
+        self.init_parameters()
         self.create_default()
         if self.create_examples:
             self.examples_creation()
 
-    def create_default_parameters(self) -> None:
+    def init_parameters(self) -> None:
         parameters = Session.query(models["Parameters"]).one_or_none()
         if not parameters:
             parameters = models["Parameters"]()
@@ -166,9 +166,11 @@ class Controller(
             Session.add(parameters)
             Session.commit()
         else:
-            self.__dict__.update(parameters.get_properties())
+            for parameter in self.parameters:
+                if hasattr(parameters, parameter):
+                    setattr(self, parameter, getattr(parameters, parameter))
 
-    def configure_logs(self) -> None:
+    def init_logs(self) -> None:
         basicConfig(
             level=getattr(import_module("logging"), self.enms_log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",
@@ -183,7 +185,7 @@ class Controller(
             ],
         )
 
-    def configure_scheduler(self) -> None:
+    def init_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(
             {
                 "apscheduler.jobstores.default": {
@@ -202,7 +204,7 @@ class Controller(
 
         self.scheduler.start()
 
-    def load_variables(self) -> None:
+    def init_variables(self) -> None:
         self.cluster = int(environ.get("CLUSTER", False))
         self.cluster_id = int(environ.get("CLUSTER_ID", True))
         self.cluster_scan_subnet = environ.get(
@@ -250,7 +252,7 @@ class Controller(
         self.use_vault = int(environ.get("USE_VAULT", False))
         self.vault_addr = environ.get("VAULT_ADDR")
 
-    def load_services(self) -> None:
+    def init_services(self) -> None:
         path_services = [self.app.path / "eNMS" / "services"]
         if self.custom_services_path:
             path_services.append(Path(self.custom_services_path))
@@ -268,13 +270,13 @@ class Controller(
                 except InvalidRequestError as e:
                     error(f"Error loading custom service '{file}' ({str(e)})")
 
-    def configure_ldap_client(self) -> None:
+    def init_ldap_client(self) -> None:
         self.ldap_client = Server(self.ldap_server, get_info=ALL)
 
     def configure_tacacs_client(self) -> None:
         self.tacacs_client = TACACSClient(self.tacacs_addr, 49, self.tacacs_password)
 
-    def configure_vault_client(self) -> None:
+    def init_vault_client(self) -> None:
         self.vault_client = VaultClient()
         self.vault_client.url = self.vault_addr
         self.vault_client.token = environ.get("VAULT_TOKEN")
@@ -282,7 +284,7 @@ class Controller(
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
-    def configure_syslog_server(self) -> None:
+    def init_syslog_server(self) -> None:
         self.syslog_server = SyslogServer(self.syslog_addr, self.syslog_port)
         self.syslog_server.start()
 

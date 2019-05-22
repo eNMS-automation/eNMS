@@ -30,7 +30,7 @@ def register_modules(app: Flask) -> None:
     login_manager.init_app(app)
     mail_client.init_app(app)
     toolbar.init_app(app)
-    controller.initialize_app(app)
+    controller.init_app(app)
 
 
 def configure_login_manager(app: Flask) -> None:
@@ -45,11 +45,11 @@ def configure_login_manager(app: Flask) -> None:
 
 def configure_database(app: Flask) -> None:
     @app.before_first_request
-    def initialize_database() -> None:
+    def init_database() -> None:
         Base.metadata.create_all(bind=engine)
         configure_mappers()
         configure_events()
-        controller.initialize_database()
+        controller.init_database()
 
     @app.teardown_appcontext
     def cleanup(exc_or_none: Optional[Exception]) -> None:
@@ -106,6 +106,6 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_rest_api(app)
     configure_errors(app)
     configure_assets(app)
-    controller.load_services()
+    controller.init_services()
     configure_cli(app)
     return app

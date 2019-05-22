@@ -136,7 +136,7 @@ class Controller(
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
         if self.use_tacacs:
-            self.configure_tacacs_client()
+            self.init_tacacs_client()
         if self.use_ldap:
             self.init_ldap_client()
         if self.use_vault:
@@ -181,7 +181,7 @@ class Controller(
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[
                 RotatingFileHandler(
-                    self.app.path / "logs" / "app_logs" / "enms.log",
+                    self.path / "logs" / "app_logs" / "enms.log",
                     maxBytes=20_000_000,
                     backupCount=10,
                 ),
@@ -215,7 +215,7 @@ class Controller(
             setattr(self, parameter, func(value))
 
     def init_services(self) -> None:
-        path_services = [self.app.path / "eNMS" / "services"]
+        path_services = [self.path / "eNMS" / "services"]
         if self.custom_services_path:
             path_services.append(Path(self.custom_services_path))
         for path in path_services:
@@ -235,7 +235,7 @@ class Controller(
     def init_ldap_client(self) -> None:
         self.ldap_client = Server(self.ldap_server, get_info=ALL)
 
-    def configure_tacacs_client(self) -> None:
+    def init_tacacs_client(self) -> None:
         self.tacacs_client = TACACSClient(self.tacacs_addr, 49, self.tacacs_password)
 
     def init_vault_client(self) -> None:

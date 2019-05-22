@@ -141,7 +141,7 @@ class InventoryController(BaseController):
         for subtype in device_subtypes:
             point_style = Style()
             point_style.labelstyle.color = Color.blue
-            path_icon = f"{self.app.path}/eNMS/views/static/images/2D/{subtype}.gif"
+            path_icon = f"{self.path}/eNMS/views/static/images/2D/{subtype}.gif"
             point_style.iconstyle.icon.href = path_icon
             self.google_earth_styles[subtype] = point_style
         for subtype in link_subtypes:
@@ -166,7 +166,7 @@ class InventoryController(BaseController):
             ]
             line.style = self.google_earth_styles[link.subtype]
             line.style.linestyle.width = kwargs["line_width"]
-        filepath = self.app.path / "google_earth" / f'{kwargs["name"]}.kmz'
+        filepath = self.path / "projects" / "google_earth" / f'{kwargs["name"]}.kmz'
         kml_file.save(filepath)
 
     def export_topology(self, filename: str) -> None:
@@ -179,7 +179,7 @@ class InventoryController(BaseController):
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))
-        workbook.save(self.path / "projects" / filename)
+        workbook.save(self.path / "projects" / "spreadsheets" / filename)
 
     def get_configurations(self, device_id: int) -> dict:
         return fetch("Device", id=device_id).get_configurations()

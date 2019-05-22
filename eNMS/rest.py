@@ -125,9 +125,7 @@ class Topology(Resource):
                 }
             )
         else:
-            request.form = request.get_json(force=True)
-            controller.export_topology()
-            return None
+            controller.export_topology(**request.get_json(force=True))
 
 
 def configure_rest_api(app: Flask) -> None:

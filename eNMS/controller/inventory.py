@@ -169,12 +169,13 @@ class InventoryController(BaseController):
         filepath = self.path / "projects" / "google_earth" / f'{kwargs["name"]}.kmz'
         kml_file.save(filepath)
 
-    def export_topology(self, filename: str) -> None:
+    def export_topology(self, **kwargs) -> None:
         workbook = Workbook()
+        filename = kwargs["export_filename"]
         if "." not in filename:
             filename += ".xls"
-        for obj_type in ("Device", "Link"):
-            sheet = workbook.add_sheet(obj_type)
+        for obj_type in ("device", "link"):
+            sheet = workbook.add_sheet(obj_type.capitalize())
             for index, property in enumerate(table_properties[obj_type]):
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):

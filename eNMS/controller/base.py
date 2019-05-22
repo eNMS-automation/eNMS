@@ -1,8 +1,6 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 from collections import Counter
 from datetime import datetime
 from json.decoder import JSONDecodeError
-from os import environ
 from sqlalchemy.exc import IntegrityError
 from string import punctuation
 from typing import Any, List, Set

@@ -410,7 +410,7 @@ class ExamplesController(BaseController):
         for index, (x, y) in enumerate(positions):
             workflow.jobs[index].positions["Workflow_of_workflows"] = x * 10, y * 10
 
-    def create_examples(self) -> None:
+    def examples_creation(self) -> None:
         self.create_example_pools()
         self.create_network_topology()
         Session.commit()

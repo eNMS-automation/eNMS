@@ -1,3 +1,4 @@
+from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
 from hvac import Client as VaultClient
 from importlib import import_module
@@ -29,6 +30,51 @@ class Controller(
     ExamplesController,
     InventoryController,
 ):
+
+    parameters = [
+        "cluster",
+        "cluster_id",
+        "cluster_scan_subnet",
+        "cluster_scan_protocol",
+        "cluster_scan_timeout",
+        "default_longitude",
+        "default_latitude",
+        "default_zoom_level",
+        "default_view",
+        "default_marker",
+        "create_examples",
+        "custom_services_path",
+        "enms_config_mode",
+        "enms_log_level",
+        "enms_server_addr",
+        "git_automation",
+        "git_configurations",
+        "gotty_port_redirection",
+        "gotty_bypass_key_prompt",
+        "gotty_port",
+        "gotty_start_port",
+        "gotty_end_port",
+        "ldap_server",
+        "ldap_userdn",
+        "ldap_basedn",
+        "ldap_admin_group",
+        "mattermost_url",
+        "mattermost_channel",
+        "mattermost_verify_certificate",
+        "pool_filter",
+        "slack_token",
+        "slack_channel",
+        "syslog_addr",
+        "syslog_port",
+        "tacacs_addr",
+        "tacacs_password",
+        "unseal_vault",
+        "use_ldap",
+        "use_syslog",
+        "use_tacacs",
+        "use_vault",
+        "vault_addr",
+    ]
 
     valid_post_endpoints = [
         "add_edge",
@@ -81,9 +127,6 @@ class Controller(
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
-    def __getattr__(self, property: str) -> Any:
-        return self.config[property]
-
     def __init__(self) -> None:
         self.load_variables()
         self.custom_properties = self.load_custom_properties()
@@ -107,7 +150,7 @@ class Controller(
         self.create_default_parameters()
         self.create_default()
         if self.create_examples:
-            self.create_examples()
+            self.examples_creation()
 
     def create_default_parameters(self) -> None:
         parameters = Session.query(models["Parameters"]).one_or_none()
@@ -123,7 +166,7 @@ class Controller(
             Session.add(parameters)
             Session.commit()
         else:
-            self.config.update(parameters.get_properties())
+            self.__dict__.update(parameters.get_properties())
 
     def configure_logs(self) -> None:
         basicConfig(
@@ -156,6 +199,7 @@ class Controller(
                 "apscheduler.job_defaults.max_instances": "3",
             }
         )
+
         self.scheduler.start()
 
     def load_variables(self) -> None:

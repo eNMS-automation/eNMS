@@ -31,7 +31,7 @@ class ExamplesController(BaseController):
             factory("Pool", **pool)
 
     def create_network_topology(self) -> None:
-        with open(self.path / "projects" / "usa.xls", "rb") as file:
+        with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)
 
     def create_example_services(self) -> None:

@@ -14,7 +14,7 @@ from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
 class BaseController:
     @property
     def config(self):
-        return {parameter: getattr(self, parameter) for parameter in self.parameters}
+        return {parameter: getattr(self, parameter) for parameter, _ in self.parameters}
 
     def update_parameters(self, **kwargs):
         Session.query(models["Parameters"]).one().update(**kwargs)

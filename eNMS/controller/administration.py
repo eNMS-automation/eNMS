@@ -46,7 +46,7 @@ class AdministrationController(BaseController):
                     }
                     if any(
                         group in s
-                        for group in self.ldap_admin_group
+                        for group in self.ldap_admin_group.split(",")
                         for s in json_response["attributes"]["memberOf"]
                     ):
                         user["permissions"] = ["Admin"]

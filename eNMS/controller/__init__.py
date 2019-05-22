@@ -32,48 +32,48 @@ class Controller(
 ):
 
     parameters = [
-        "cluster",
-        "cluster_id",
-        "cluster_scan_subnet",
-        "cluster_scan_protocol",
-        "cluster_scan_timeout",
-        "default_longitude",
-        "default_latitude",
-        "default_zoom_level",
-        "default_view",
-        "default_marker",
-        "create_examples",
-        "custom_services_path",
-        "enms_config_mode",
-        "enms_log_level",
-        "enms_server_addr",
-        "git_automation",
-        "git_configurations",
-        "gotty_port_redirection",
-        "gotty_bypass_key_prompt",
-        "gotty_port",
-        "gotty_start_port",
-        "gotty_end_port",
-        "ldap_server",
-        "ldap_userdn",
-        "ldap_basedn",
-        "ldap_admin_group",
-        "mattermost_url",
-        "mattermost_channel",
-        "mattermost_verify_certificate",
-        "pool_filter",
-        "slack_token",
-        "slack_channel",
-        "syslog_addr",
-        "syslog_port",
-        "tacacs_addr",
-        "tacacs_password",
-        "unseal_vault",
-        "use_ldap",
-        "use_syslog",
-        "use_tacacs",
-        "use_vault",
-        "vault_addr",
+        ("cluster", False),
+        ("cluster_id", True),
+        ("cluster_scan_subnet", "192.168.105.0/24"),
+        ("cluster_scan_protocol", "http"),
+        ("cluster_scan_timeout", 0.05),
+        ("default_longitude", -96.0),
+        ("default_latitude", 33.0),
+        ("default_zoom_level", 5),
+        ("default_view", "2D"),
+        ("default_marker", "Image"),
+        ("create_examples", True),
+        ("custom_services_path", ""),
+        ("enms_config_mode", ""),
+        ("enms_log_level", "DEBUG"),
+        ("enms_server_addr", ""),
+        ("git_automation", ""),
+        ("git_configurations", ""),
+        ("gotty_port_redirection", False),
+        ("gotty_bypass_key_prompt", ""),
+        ("gotty_port", -1),
+        ("gotty_start_port", 9000),
+        ("gotty_end_port", 9100),
+        ("ldap_server", ""),
+        ("ldap_userdn", ""),
+        ("ldap_basedn", ""),
+        ("ldap_admin_group", ""),
+        ("mattermost_url", ""),
+        ("mattermost_channel", ""),
+        ("mattermost_verify_certificate", True),
+        ("pool_filter", "All objects"),
+        ("slack_token", ""),
+        ("slack_channel", ""),
+        ("syslog_addr", "0.0.0.0"),
+        ("syslog_port", 514),
+        ("tacacs_addr", ""),
+        ("tacacs_password", ""),
+        ("unseal_vault", ""),
+        ("use_ldap", False),
+        ("use_syslog", False),
+        ("use_tacacs", False),
+        ("use_vault", False),
+        ("vault_addr", ""),
     ]
 
     valid_post_endpoints = [
@@ -166,7 +166,7 @@ class Controller(
             Session.add(parameters)
             Session.commit()
         else:
-            for parameter in self.parameters:
+            for parameter, _ in self.parameters:
                 if hasattr(parameters, parameter):
                     setattr(self, parameter, getattr(parameters, parameter))
 
@@ -205,52 +205,10 @@ class Controller(
         self.scheduler.start()
 
     def init_variables(self) -> None:
-        self.cluster = int(environ.get("CLUSTER", False))
-        self.cluster_id = int(environ.get("CLUSTER_ID", True))
-        self.cluster_scan_subnet = environ.get(
-            "CLUSTER_SCAN_SUBNET", "192.168.105.0/24"
-        )
-        self.cluster_scan_protocol = environ.get("CLUSTER_SCAN_PROTOCOL", "http")
-        self.cluster_scan_timeout = float(environ.get("CLUSTER_SCAN_TIMEOUT", 0.05))
-        self.default_longitude = float(environ.get("DEFAULT_LONGITUDE", -96.0))
-        self.default_latitude = float(environ.get("DEFAULT_LATITUDE", 33.0))
-        self.default_zoom_level = int(environ.get("DEFAULT_ZOOM_LEVEL", 5))
-        self.default_view = environ.get("DEFAULT_VIEW", "2D")
-        self.default_marker = environ.get("DEFAULT_MARKER", "Image")
-        self.create_examples = int(environ.get("CREATE_EXAMPLES", True))
-        self.custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
-        self.enms_config_mode = environ.get("ENMS_CONFIG_MODE")
-        self.enms_log_level = environ.get("ENMS_LOG_LEVEL", "DEBUG").upper()
-        self.enms_server_addr = environ.get("ENMS_SERVER_ADDR")
-        self.git_automation = environ.get("GIT_AUTOMATION", "")
-        self.git_configurations = environ.get("GIT_CONFIGURATIONS", "")
-        self.gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
-        self.gotty_bypass_key_prompt = environ.get("GOTTY_BYPASS_KEY_PROMPT")
-        self.gotty_port = -1
-        self.gotty_start_port = int(environ.get("GOTTY_START_PORT", 9000))
-        self.gotty_end_port = int(environ.get("GOTTY_END_PORT", 9100))
-        self.ldap_server = environ.get("LDAP_SERVER")
-        self.ldap_userdn = environ.get("LDAP_USERDN")
-        self.ldap_basedn = environ.get("LDAP_BASEDN")
-        self.ldap_admin_group = environ.get("LDAP_ADMIN_GROUP", "").split(",")
-        self.mattermost_url = environ.get("MATTERMOST_URL", "")
-        self.mattermost_channel = environ.get("MATTERMOST_CHANNEL", "")
-        self.mattermost_verify_certificate = int(
-            environ.get("MATTERMOST_VERIFY_CERTIFICATE", True)
-        )
-        self.pool_filter = environ.get("POOL_FILTER", "All objects")
-        self.slack_token = environ.get("SLACK_TOKEN", "")
-        self.slack_channel = environ.get("SLACK_CHANNEL", "")
-        self.syslog_addr = environ.get("SYSLOG_ADDR", "0.0.0.0")
-        self.syslog_port = int(environ.get("SYSLOG_PORT", 514))
-        self.tacacs_addr = environ.get("TACACS_ADDR")
-        self.tacacs_password = environ.get("TACACS_PASSWORD")
-        self.unseal_vault = environ.get("UNSEAL_VAULT")
-        self.use_ldap = int(environ.get("USE_LDAP", False))
-        self.use_syslog = int(environ.get("USE_SYSLOG", False))
-        self.use_tacacs = int(environ.get("USE_TACACS", False))
-        self.use_vault = int(environ.get("USE_VAULT", False))
-        self.vault_addr = environ.get("VAULT_ADDR")
+        for parameter, default in self.parameters:
+            value = environ.get(parameter.upper()) or default
+            func = int if isinstance(default, bool) else type(default)
+            setattr(self, parameter, func(value))
 
     def init_services(self) -> None:
         path_services = [self.app.path / "eNMS" / "services"]

@@ -386,6 +386,7 @@ class ExamplesController(BaseController):
                 "operating_system": "eos",
             },
         )
+        Session.commit()
         workflow.jobs.extend(
             [
                 fetch("Job", name="payload_transfer_workflow"),

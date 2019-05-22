@@ -103,7 +103,7 @@ def administration() -> dict:
         f"pages/administration.html",
         **{
             "endpoint": "administration",
-            "folders": listdir(current_app.path / "migrations"),
+            "folders": listdir(current_app.path / "projects" / "migrations"),
         },
     )
 

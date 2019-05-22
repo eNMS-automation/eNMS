@@ -75,7 +75,7 @@ class AdministrationController(BaseController):
 
     def migration_export(self, **kwargs: Union[list, str]) -> None:
         for cls_name in kwargs["import_export_types"]:
-            path = self.path / "migrations" / kwargs["name"]
+            path = self.path / "projects" / "migrations" / kwargs["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
@@ -88,7 +88,9 @@ class AdministrationController(BaseController):
         if kwargs.get("empty_database_before_import", False):
             delete_all(*types)
         for cls in types:
-            path = self.path / "migrations" / kwargs["name"] / f"{cls}.yaml"
+            path = (
+                self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"
+            )
             with open(path, "r") as migration_file:
                 objects = load(migration_file, Loader=BaseLoader)
                 if cls == "Workflow":

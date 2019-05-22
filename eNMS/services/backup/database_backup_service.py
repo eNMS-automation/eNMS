@@ -30,12 +30,14 @@ class DatabaseBackupService(Service):
 
     def job(self, payload: dict, device: Device) -> dict:
         now = controller.strip_all(controller.get_time())
-        source = Path.cwd() / "migrations" / f"backup_{now}.tgz"
+        source = Path.cwd() / "projects" / "migrations" / f"backup_{now}.tgz"
         controller.migrate_export(
             Path.cwd(), {"import_export_types": import_classes, "name": f"backup_{now}"}
         )
         with open_tar(source, "w:gz") as tar:
-            tar.add(Path.cwd() / "migrations" / f"backup_{now}", arcname="/")
+            tar.add(
+                Path.cwd() / "projects" / "migrations" / f"backup_{now}", arcname="/"
+            )
         ssh_client = SSHClient()
         ssh_client.set_missing_host_key_policy(AutoAddPolicy())
         ssh_client.connect(
@@ -48,7 +50,7 @@ class DatabaseBackupService(Service):
         self.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
         if self.delete_folder:
-            rmtree(Path.cwd() / "migrations" / f"backup_{now}")
+            rmtree(Path.cwd() / "projects" / "migrations" / f"backup_{now}")
         if self.delete_archive:
             remove(source)
         return {

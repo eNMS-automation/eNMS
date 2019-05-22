@@ -127,6 +127,10 @@ class Controller(
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
+    @property
+    def config(self):
+        return {parameter: getattr(self, parameter) for parameter, _ in self.parameters}
+
     def __init__(self) -> None:
         self.init_variables()
         self.custom_properties = self.load_custom_properties()

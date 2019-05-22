@@ -52,10 +52,6 @@ call("/get/parameters/1", function(parameters) {
     parameters.default_zoom_level
   );
   earth = WE.map("earth", { sky: true, atmosphere: true });
-
-  layer2D = 
-  layer3D = 
-
   map.addLayer(layer2D);
   layer3D.addTo(earth);
 

@@ -15,6 +15,7 @@ table: false
 */
 
 let refreshJob = {};
+let currentResults = {};
 
 /**
  * Open service panel
@@ -54,14 +55,15 @@ function saveService(service) {
 }
 
 function parseObject(obj) {
-  for (var k in obj) {
-    if (typeof obj[k] === 'object' && obj[k] !== null) {
-      parseObject(obj[k])
-    } else if (obj.hasOwnProperty(k) && typeof obj[k] === 'string') {
-      obj[k] = obj[k].replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").split("\n");
+  objClone = JSON.parse(JSON.stringify(obj));
+  for (var k in objClone) {
+    if (typeof objClone[k] === 'objCloneect' && obj[k] !== null) {
+      parseObject(objClone[k])
+    } else if (objClone.hasOwnProperty(k) && typeof objClone[k] === 'string') {
+      objClone[k] = objClone[k].replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").split("\n");
     }
   }
-  return obj;
+  return objClone;
 }
 
 /**
@@ -69,12 +71,18 @@ function parseObject(obj) {
  * @param {results} results - Results.
  * @param {id} id - Job id.
  */
-function displayResult(results, id) {
+function displayResult(id, results) {
+  if (results) {
+    currentResults = results;
+  } else {
+    results = currentResults;
+  }
   const value = results[$(`#display-${id}`).val()];
   if (!value) {
     $(`#display_results-${id}`).text("No results yet.");
   }
-  else if (false) {
+  else if ($(`input[name="type"]:checked`).val() == "json") {
+    $(`#display_results-${id}`).empty();
     let container = document.getElementById(`display_results-${id}`);
     const options = { mode: 'view' };
     let editor = new JSONEditor(container, options, parseObject(value));
@@ -113,7 +121,7 @@ function displayResults(id) {
 
     $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
     $(`#display-${id},#compare_with-${id}`).selectpicker("refresh");
-    displayResult(results, id);
+    displayResult(id, results);
   });
 }
 
@@ -180,7 +188,7 @@ function showResultsPanel(id, name) {
 function configureCallbacks(id) {
   $(`#display-${id}`).on("change", function() {
     call(`/get_job_results/${id}`, (results) => {
-      displayResult(results, id);
+      displayResult(id, results);
       $(`#compare_with-${id}`).val($(`#display-${id}`).val());
     });
   });
@@ -202,6 +210,10 @@ function configureCallbacks(id) {
         })
       );
     });
+  });
+
+  $(`#display-text-${id},#display-json-${id}`).on("click", function() {
+    displayResult(id);
   });
 }
 

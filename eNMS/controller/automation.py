@@ -8,6 +8,7 @@ from typing import Any, Dict, List
 
 from eNMS.concurrent import threaded_job
 from eNMS.controller.base import BaseController
+from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
 
 
@@ -30,6 +31,7 @@ class AutomationController(BaseController):
                 "destination": destination,
             },
         )
+        Session.commit()
         now = self.get_time()
         fetch("Workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}

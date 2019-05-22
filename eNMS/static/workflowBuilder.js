@@ -165,8 +165,9 @@ function deleteNode(id) {
  * @param {edge} edge - Edge to add to the workflow.
  */
 function saveEdge(edge) {
-  const param = `${workflow.id}-${edge.subtype}-${edge.from}-${edge.to}`;
+  const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call(`/add_edge/${param}`, function(result) {
+    console.log(result);
     lastModified = result.update_time;
     edges.add(edgeToEdge(result.edge));
     graph.addEdgeMode();

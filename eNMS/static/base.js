@@ -448,6 +448,9 @@ function initTable(type) {
       },
     },
   });
+  if (type == "log") {
+    table.order([0, "desc"]).draw();
+  }
   return table;
 }
 

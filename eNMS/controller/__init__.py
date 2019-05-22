@@ -85,7 +85,7 @@ class Controller(
         "connection",
         "counters",
         "count_models",
-        "database_helpers",
+        "database_deletion",
         "delete_edge",
         "delete_instance",
         "delete_node",

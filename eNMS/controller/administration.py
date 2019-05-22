@@ -55,9 +55,10 @@ class AdministrationController(BaseController):
             if self.tacacs_client.authenticate(name, password).valid:
                 return factory("User", **{"name": name, "password": password})
 
-    def database_helpers(self, **kwargs: Any) -> None:
+    def database_deletion(self, **kwargs: Any) -> None:
         delete_all(*kwargs["deletion_types"])
         clear_logs_date = kwargs["clear_logs_date"]
+        print(clear_logs_date)
         if clear_logs_date:
             clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
             for job in fetch_all("Job"):

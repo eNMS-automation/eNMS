@@ -1,6 +1,5 @@
 from wtforms import (
     BooleanField,
-    DateField,
     FloatField,
     HiddenField,
     IntegerField,
@@ -11,7 +10,7 @@ from wtforms import (
 )
 
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import MultipleInstanceField
+from eNMS.forms.fields import DateField, MultipleInstanceField
 from eNMS.properties.database import import_classes
 
 

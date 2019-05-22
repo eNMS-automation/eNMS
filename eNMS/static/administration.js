@@ -164,7 +164,7 @@ function migrationsImport() {
 // eslint-disable-next-line
 function databaseDeletion() {
   alertify.notify("Starting to delete...", "success", 5);
-  fCall("/database_helpers", "#deletion-form", function(result) {
+  fCall("/database_deletion", "#database_deletion-form", function(result) {
     alertify.notify("Deletion done.", "success", 5);
     $("#deletion-form").remove();
   });

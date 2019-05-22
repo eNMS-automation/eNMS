@@ -4,16 +4,29 @@
   <button class="btn btn-default btn-file btn-id" value="clearResults" style="width:100%;">
     Clear
   </button>
-  <button id="refresh-results-button" class="btn btn-default btn-file" onclick="refreshResults(true)" style="width:100%;">
-    Trigger periodic Refresh
-  </button><br><br>
-  <label class="control-label col-md-2 col-sm-2 col-xs-12">Display :</label>
   <div class="col-md-10 col-sm-10 col-xs-12">
-    {{ form.display(class="form-control add-id") }}
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Display :</label>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      {{ form.display(class="form-control add-id") }}
+    </div>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Compare With :</label>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      {{ form.compare_with(class="form-control add-id") }}
+    </div>
   </div>
-  <label class="control-label col-md-2 col-sm-2 col-xs-12">Compare With :</label>
-  <div class="col-md-10 col-sm-10 col-xs-12">
-    {{ form.compare_with(class="form-control add-id") }}
+  <div class="col-md-2 col-sm-2 col-xs-12">
+    <div class="radio">
+      <label>
+        <input type="radio" checked="" value="Text" id="Text" name="type" class="add-id">
+        SSH
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" value="JSON" id="JSON" name="type" class="add-id">
+        Telnet
+      </label>
+    </div>
   </div>
   <hr><hr><hr><hr>
   <div class="row">

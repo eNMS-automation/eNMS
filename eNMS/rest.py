@@ -118,10 +118,12 @@ class Topology(Resource):
 
     def post(self, direction: str) -> Optional[str]:
         if direction == "import":
-            data = request.form.to_dict()
-            data["replace"] = True if data["replace"] == "True" else False
-            request.form = data
-            return controller.import_topology()
+            return controller.import_topology(
+                **{
+                    "replace": request.form["replace"] == "True",
+                    "file": request.files["file"],
+                }
+            )
         else:
             request.form = request.get_json(force=True)
             controller.export_topology()

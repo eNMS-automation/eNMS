@@ -61,6 +61,7 @@ function parseObject(obj) {
       obj[k] = obj[k].replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").split("\n");
     }
   }
+  return obj;
 }
 
 /**
@@ -70,10 +71,28 @@ function parseObject(obj) {
  */
 function displayResult(results, id) {
   const value = results[$(`#display-${id}`).val()];
-  let container = document.getElementById(`display_results-${id}`);
-  const options = { mode: 'view' };
-  let editor = new JSONEditor(container, options, parseObject(value););
-  
+  if (!value) {
+    $(`#display_results-${id}`).text("No results yet.");
+  }
+  else if (false) {
+    let container = document.getElementById(`display_results-${id}`);
+    const options = { mode: 'view' };
+    let editor = new JSONEditor(container, options, parseObject(value));
+  } else {
+    $(`#display_results-${id}`).html(
+      `<pre>${
+        JSON.stringify(
+          Object.fromEntries(
+            Object.entries(value)
+              .sort()
+              .reverse()
+          ),
+          null,
+          2
+        ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+      }</pre>`
+    );
+  }
 }
 
 /**

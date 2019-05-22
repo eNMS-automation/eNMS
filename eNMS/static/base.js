@@ -19,7 +19,7 @@ const panelSize = {
   cluster: "700 200",
   connection: "400 500",
   configuration: "700 700",
-  database_deletion: "700 300",
+  database_deletion: "700 400",
   database_migration: "700 300",
   device: "700 600",
   device_automation: "800 500",

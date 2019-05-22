@@ -97,7 +97,10 @@ function displayResult(id, results) {
           ),
           null,
           2
-        ).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+        )
+        .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+        .replace(/\\"/g, '"')
+        .replace(/\\\\/g, '\\')
       }</pre>`
     );
   }

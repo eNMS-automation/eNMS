@@ -204,6 +204,7 @@ class ExportForm(BaseForm):
 
 
 class GoogleEarthForm(BaseForm):
+    action = "exportToGoogleEarth"
     form_type = HiddenField(default="google_earth_export")
     name = StringField("Name")
     label_size = IntegerField("Label Size", default=1)

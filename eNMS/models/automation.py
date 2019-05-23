@@ -178,7 +178,7 @@ class Job(AbstractBase):
             current_job.logs.extend([f"{self.type} {self.name}: Starting."])
         else:
             current_job.logs = [f"{self.type} {self.name}: Starting."]
-        if not current_job.multiprocessing:
+        if not workflow:
             Session.commit()
         results: dict = {"results": {}}
         payload = payload or {}
@@ -191,7 +191,7 @@ class Job(AbstractBase):
                 f"Running {self.type} {self.name} (attempt n°{i + 1})"
             )
             self.completed = self.failed = 0
-            if not current_job.multiprocessing:
+            if not workflow:
                 Session.commit()
             attempt, logs = self.run(payload, targets, workflow)
             current_job.logs.extend(logs)
@@ -232,7 +232,7 @@ class Job(AbstractBase):
         self.completed = self.failed = 0
         if task and not task.frequency:
             task.is_active = False
-        if not current_job.multiprocessing:
+        if not workflow:
             Session.commit()
         if not workflow and self.send_notification:
             self.notify(results, now)

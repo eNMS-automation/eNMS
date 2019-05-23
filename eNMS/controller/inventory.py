@@ -35,7 +35,7 @@ from eNMS.properties.table import filtering_properties, table_properties
 
 class InventoryController(BaseController):
     def get_gotty_port(self) -> int:
-        self.config["gotty_port"] += 1
+        self.gotty_port += 1
         range = self.gotty_end_port - self.gotty_start_port
         return self.gotty_start_port + self.gotty_port % range
 

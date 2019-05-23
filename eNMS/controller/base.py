@@ -44,7 +44,7 @@ class BaseController:
     git_automation = environ.get("GIT_AUTOMATION")
     git_configurations = environ.get("GIT_CONFIGURATIONS")
     gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
-    gotty_bypass_key_prompt = environ.get("GOTTY_BYPASS_KEY_PROMPT")
+    gotty_bypass_key_prompt = int(environ.get("GOTTY_BYPASS_KEY_PROMPT", False))
     gotty_port = -1
     gotty_start_port = environ.get("GOTTY_START_PORT", 9000)
     gotty_end_port = environ.get("GOTTY_END_PORT", 9100)

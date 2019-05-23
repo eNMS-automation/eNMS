@@ -55,8 +55,9 @@ function showPoolView(poolId) {
     headerTitle: "Pool view",
     position: "center-top 0 58",
     contentSize: "1000 600",
-    content:
-      `<div id="network-${poolId}" style="height:100%; width:100%;"></div>`,
+    content: `
+      <div id="network-${poolId}" style="height:100%; width:100%;"></div>
+    `,
     dragit: {
       opacity: 0.7,
       containment: [5, 5, 5, 5],

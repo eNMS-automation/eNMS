@@ -6,7 +6,6 @@ call: false
 fCall: false
 L: false
 linkColors: false
-parameters: false
 showPoolView: false
 showTypePanel: false
 viewType: false
@@ -36,8 +35,8 @@ let markersArray = [];
 let polylinesArray = [];
 let currentView;
 let dimension;
-let layer2D = L.tileLayer(layers["osm"]);;
-let layer3D = WE.tileLayer(layers["gm"]);;
+let layer2D = L.tileLayer(layers["osm"]);
+let layer3D = WE.tileLayer(layers["gm"]);
 let markerType;
 let earth;
 let map;
@@ -64,12 +63,12 @@ call("/get/parameters/1", function(parameters) {
   map.on("click", function(e) {
     selectedObject = null;
   });
-  
+
   earth.on("click", function(e) {
     $(".menu").hide();
     $(".geo-menu").show();
   });
-  
+
   map.on("contextmenu", function() {
     if (!selectedObject) {
       $(".menu").hide();
@@ -180,15 +179,17 @@ function changeMarker(type) {
  */
 // eslint-disable-next-line
 function createNode2d(node, nodeType) {
-  const marker = markerType == "Circle Marker"
-    ? L.circleMarker([node.latitude, node.longitude])
-    : markerType == "Circle"
-    ? L.circle([node.latitude, node.longitude])
-    : L.marker([node.latitude, node.longitude]);
+  const marker =
+    markerType == "Circle Marker"
+      ? L.circleMarker([node.latitude, node.longitude])
+      : markerType == "Circle"
+      ? L.circle([node.latitude, node.longitude])
+      : L.marker([node.latitude, node.longitude]);
   if (markerType == "Image") {
-    marker.icon = nodeType === "device"
-      ? marker.icon = window[`icon_${node.subtype}`] || routerIcon
-      : marker.icon = window["icon_site"];
+    marker.icon =
+      nodeType === "device"
+        ? (marker.icon = window[`icon_${node.subtype}`] || routerIcon)
+        : (marker.icon = window["icon_site"]);
     marker.setIcon(marker.icon);
   }
   marker.bindTooltip(node["name"], { permanent: false });

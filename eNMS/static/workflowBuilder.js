@@ -3,13 +3,12 @@ global
 action: false
 alertify: false
 call: false
-configureForm: false
-createPanel: false
 editService: false
 fCall: false
 partial: false
 runJob: false
 showLogs: false
+showPanel: false
 showResultsPanel: false
 showTypePanel: false
 vis: false
@@ -167,7 +166,6 @@ function deleteNode(id) {
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call(`/add_edge/${param}`, function(result) {
-    console.log(result);
     lastModified = result.update_time;
     edges.add(edgeToEdge(result.edge));
     graph.addEdgeMode();

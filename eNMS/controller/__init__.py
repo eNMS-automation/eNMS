@@ -11,7 +11,6 @@ from os import environ
 from pathlib import Path
 from sqlalchemy.exc import InvalidRequestError
 from tacacs_plus.client import TACACSClient
-from typing import Any
 
 from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController

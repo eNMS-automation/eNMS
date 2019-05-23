@@ -7,6 +7,7 @@ diffview: false
 fCall: false
 getJobState: false
 getWorkflowState: false
+JSONEditor: false
 jsPanel: false
 nodes: true
 page: false
@@ -54,13 +55,20 @@ function saveService(service) {
   }
 }
 
+/**
+ * Parse object to break strings into list for JSON display.
+ * @param {obj} obj - Object.
+ * @return {obj}.
+ */
 function parseObject(obj) {
-  objClone = JSON.parse(JSON.stringify(obj));
-  for (var k in objClone) {
-    if (typeof objClone[k] === 'objCloneect' && obj[k] !== null) {
-      parseObject(objClone[k])
-    } else if (objClone.hasOwnProperty(k) && typeof objClone[k] === 'string') {
-      objClone[k] = objClone[k].replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").split("\n");
+  let objClone = JSON.parse(JSON.stringify(obj));
+  for (let k in objClone) {
+    if (typeof objClone[k] === "object" && obj[k] !== null) {
+      parseObject(objClone[k]);
+    } else if (objClone.hasOwnProperty(k) && typeof objClone[k] === "string") {
+      objClone[k] = objClone[k]
+        .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+        .split("\n");
     }
   }
   return objClone;
@@ -68,8 +76,8 @@ function parseObject(obj) {
 
 /**
  * Display result.
- * @param {results} results - Results.
  * @param {id} id - Job id.
+ * @param {results} results - Results.
  */
 function displayResult(id, results) {
   if (results) {
@@ -80,28 +88,25 @@ function displayResult(id, results) {
   const value = results[$(`#display-${id}`).val()];
   if (!value) {
     $(`#display_results-${id}`).text("No results yet.");
-  }
-  else if ($(`input[name="type"]:checked`).val() == "json") {
+  } else if ($(`input[name="type"]:checked`).val() == "json") {
     $(`#display_results-${id}`).empty();
     let container = document.getElementById(`display_results-${id}`);
-    const options = { mode: 'view' };
-    let editor = new JSONEditor(container, options, parseObject(value));
+    const options = { mode: "view" };
+    new JSONEditor(container, options, parseObject(value));
   } else {
     $(`#display_results-${id}`).html(
-      `<pre>${
-        JSON.stringify(
-          Object.fromEntries(
-            Object.entries(value)
-              .sort()
-              .reverse()
-          ),
-          null,
-          2
-        )
+      `<pre>${JSON.stringify(
+        Object.fromEntries(
+          Object.entries(value)
+            .sort()
+            .reverse()
+        ),
+        null,
+        2
+      )
         .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
-        .replace(/\\"/g, '"')
-        .replace(/\\\\/g, '\\')
-      }</pre>`
+        .replace(/\\"/g, `"`)
+        .replace(/\\\\/g, "\\")}</pre>`
     );
   }
 }

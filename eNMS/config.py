@@ -19,9 +19,6 @@ class Config(object):
 class DefaultConfig(Config):
     DEBUG = True
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
-    SQLALCHEMY_DATABASE_URI = environ.get(
-        "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
-    )
     MAIL_DEBUG = 1
     DEBUG_TB_ENABLED = False
 

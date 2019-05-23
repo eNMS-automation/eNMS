@@ -96,7 +96,7 @@ function displayConfigurations(id) {
       );
     });
     $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
-    $(`#display-${id},#compare_with-${id}`).selectpicker("render");
+    $(`#display-${id},#compare_with-${id}`).selectpicker("refresh");
     $(`#configurations-${id}`).text(configurations[$(`#display-${id}`).val()]);
   });
 }
@@ -130,7 +130,7 @@ function configureCallbacks(id) {
     $(`#configurations-${id}`).empty();
     const v1 = $(`#display-${id}`).val();
     const v2 = $(`#compare_with-${id}`).val();
-    call(`/get_diff/${id}/${v1}/${v2}`, function(data) {
+    call(`/get_configuration_diff/${id}/${v1}/${v2}`, function(data) {
       $(`#configurations-${id}`).append(
         diffview.buildView({
           baseTextLines: data.first,

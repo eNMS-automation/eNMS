@@ -6,7 +6,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField
 from yaml import dump
 
 from eNMS.controller import controller
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models.automation import Service
@@ -54,18 +54,19 @@ class NapalmBackupService(Service):
                 last_config = device.configurations[max(device.configurations)]
                 if config == last_config:
                     return {"success": True, "result": "no change"}
-            device.configurations[now] = device.current_configuration = config
+            device.configurations[str(now)] = device.current_configuration = config
             with open(path_device_config / device.name, "w") as file:
                 file.write(config)
-            device.last_update = now
+            device.last_update = str(now)
             self.generate_yaml_file(path_device_config, device)
         except Exception as e:
             device.last_status = "Failure"
-            device.last_failure = now
+            device.last_failure = str(now)
             self.generate_yaml_file(path_device_config, device)
             return {"success": False, "result": str(e)}
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
+        Session.commit()
         return {"success": True, "result": "Get Config via Napalm"}
 
 

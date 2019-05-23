@@ -65,20 +65,20 @@ class NetmikoBackupService(Service):
                 last_config = device.configurations[max(device.configurations)]
                 if config == last_config:
                     return {"success": True, "result": "no change"}
-            device.configurations[now] = device.current_configuration = config
+            device.configurations[str(now)] = device.current_configuration = config
             with open(path_device_config / device.name, "w") as file:
                 file.write(config)
-            device.last_update = now
-            Session.commit()
+            device.last_update = str(now)
             self.generate_yaml_file(path_device_config, device)
         except Exception as e:
             netmiko_handler.disconnect()
             device.last_status = "Failure"
-            device.last_failure = now
+            device.last_failure = str(now)
             self.generate_yaml_file(path_device_config, device)
             return {"success": False, "result": str(e)}
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
+        Session.commit()
         return {"success": True, "result": f"Command: {self.configuration_command}"}
 
 

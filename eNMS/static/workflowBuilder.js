@@ -5,7 +5,6 @@ alertify: false
 call: false
 editService: false
 fCall: false
-partial: false
 runJob: false
 showLogs: false
 showPanel: false
@@ -348,7 +347,7 @@ function getJobState(id) {
       colorJob(id, "#89CFF0");
       $("#status").text("Status: Running.");
       $("#current-job").text(`Current job: ${service.name}.`);
-      setTimeout(partial(getJobState, id), 1500);
+      setTimeout(() => getJobState(id), 1500);
     } else {
       $("#status").text("Status: Idle.");
       $("#current-job").empty();

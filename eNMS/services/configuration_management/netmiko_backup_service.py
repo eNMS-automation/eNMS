@@ -12,7 +12,7 @@ from wtforms import (
 from yaml import dump
 
 from eNMS.controller import controller
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -69,6 +69,7 @@ class NetmikoBackupService(Service):
             with open(path_device_config / device.name, "w") as file:
                 file.write(config)
             device.last_update = now
+            Session.commit()
             self.generate_yaml_file(path_device_config, device)
         except Exception as e:
             netmiko_handler.disconnect()

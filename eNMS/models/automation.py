@@ -137,7 +137,7 @@ class Job(AbstractBase):
                     if device_results["success"]
                 )
                 summary.append(f"\n\nPASS:\n{passed}")
-        server_url = controller.config.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
+        server_url = controller.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
         results_url = f"{server_url}/automation/results/{self.id}/{now}"
         summary.append(f"Results: {results_url}")
         return "\n\n".join(summary)

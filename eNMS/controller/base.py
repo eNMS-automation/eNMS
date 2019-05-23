@@ -26,50 +26,50 @@ from eNMS.syslog import SyslogServer
 
 class BaseController:
 
-    parameters = [
-        ("cluster", False),
-        ("cluster_id", True),
-        ("cluster_scan_subnet", "192.168.105.0/24"),
-        ("cluster_scan_protocol", "http"),
-        ("cluster_scan_timeout", 0.05),
-        ("default_longitude", -96.0),
-        ("default_latitude", 33.0),
-        ("default_zoom_level", 5),
-        ("default_view", "2D"),
-        ("default_marker", "Image"),
-        ("create_examples", True),
-        ("custom_services_path", ""),
-        ("enms_config_mode", ""),
-        ("enms_log_level", "DEBUG"),
-        ("enms_server_addr", ""),
-        ("git_automation", ""),
-        ("git_configurations", ""),
-        ("gotty_port_redirection", False),
-        ("gotty_bypass_key_prompt", ""),
-        ("gotty_port", -1),
-        ("gotty_start_port", 9000),
-        ("gotty_end_port", 9100),
-        ("ldap_server", ""),
-        ("ldap_userdn", ""),
-        ("ldap_basedn", ""),
-        ("ldap_admin_group", ""),
-        ("mattermost_url", ""),
-        ("mattermost_channel", ""),
-        ("mattermost_verify_certificate", True),
-        ("pool_filter", "All objects"),
-        ("slack_token", ""),
-        ("slack_channel", ""),
-        ("syslog_addr", "0.0.0.0"),
-        ("syslog_port", 514),
-        ("tacacs_addr", ""),
-        ("tacacs_password", ""),
-        ("unseal_vault", ""),
-        ("use_ldap", False),
-        ("use_syslog", False),
-        ("use_tacacs", False),
-        ("use_vault", False),
-        ("vault_addr", ""),
-    ]
+    cluster = int(environ.get("CLUSTER", False))
+    cluster_id = int(environ.get("CLUSTER_ID", True))
+    cluster_scan_subnet = environ.get("CLUSER_SCAN_SUBNET", "192.168.105.0/24")
+    cluster_scan_protocol = environ.get("CLUSTER_SCAN_PROTOCOL", "http")
+    cluster_scan_timeout = environ.get("CLUSTER_SCAN_TIMEOUT", 0.05)
+    default_longitude = environ.get("DEFAULT_LONGITUDE", -96.0)
+    default_latitude = environ.get("DEFAULT_LATITUDE", 33.0)
+    default_zoom_level = environ.get("DEFAULT_ZOOM_LEVEL", 5)
+    default_view = environ.get("DEFAULT_VIEW", "2D")
+    default_marker = environ.get("DEFAULT_MARKER", "Image")
+    create_examples = int(environ.get("CREATE_EXAMPLES", True))
+    custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
+    enms_config_mode = environ.get("ENMS_CONFIG_MODE", "Debug")
+    enms_log_level = environ.get("ENMS_LOG_LEVEL", "DEBUG")
+    enms_server_addr = environ.get("ENMS_SERVER_ADDR")
+    git_automation = environ.get("GIT_AUTOMATION")
+    git_configurations = environ.get("GIT_CONFIGURATIONS")
+    gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
+    gotty_bypass_key_prompt = environ.get("GOTTY_BYPASS_KEY_PROMPT")
+    gotty_port = -1
+    gotty_start_port = environ.get("GOTTY_START_PORT", 9000)
+    gotty_end_port = environ.get("GOTTY_END_PORT", 9100)
+    ldap_server = environ.get("LDAP_SERVER")
+    ldap_userdn = environ.get("LDAP_USERDN")
+    ldap_basedn = environ.get("LDAP_BASEDN")
+    ldap_admin_group = environ.get("LDAP_ADMIN_GROUP")
+    mattermost_url = environ.get("MATTERMOST_URL")
+    mattermost_channel = environ.get("MATTERMOST_CHANNEL")
+    mattermost_verify_certificate = int(
+        environ.get("MATTERMOST_VERIFY_CERTIFICATE", True)
+    )
+    pool_filter = environ.get("POOL_FILTER", "All objects")
+    slack_token = environ.get("SLACK_TOKEN")
+    slack_channel = environ.get("SLACK_CHANNEL")
+    syslog_addr = environ.get("SYSLOG_ADDR", "0.0.0.0")
+    syslog_port = environ.get("SYSLOG_PORT", 514)
+    tacacs_addr = environ.get("TACACS_ADDR")
+    tacacs_password = environ.get("TACACS_PASSWORD")
+    unseal_vault = environ.get("UNSEAL_VAULT")
+    use_ldap = int(environ.get("USE_LDAP", False))
+    use_syslog = int(environ.get("USE_SYSLOG", False))
+    use_tacacs = int(environ.get("USE_TACACS", False))
+    use_vault = int(environ.get("USE_VAULT", False))
+    vault_addr = environ.get("VAULT_ADDR")
 
     valid_post_endpoints = [
         "add_edge",
@@ -124,10 +124,11 @@ class BaseController:
 
     @property
     def config(self):
-        return {parameter: getattr(self, parameter) for parameter, _ in self.parameters}
+        parameters = Session.query(models["Parameters"]).one_or_none()
+        print(parameters.get_properties())
+        return parameters.get_properties() if parameters else {}
 
     def __init__(self) -> None:
-        self.init_variables()
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
         if self.use_tacacs:
@@ -157,17 +158,17 @@ class BaseController:
             parameters = models["Parameters"]()
             parameters.update(
                 **{
-                    property: self.config[property]
+                    property: getattr(self, property)
                     for property in model_properties["Parameters"]
-                    if property in self.config
+                    if hasattr(self, property)
                 }
             )
             Session.add(parameters)
             Session.commit()
         else:
-            for parameter, _ in self.parameters:
-                if hasattr(parameters, parameter):
-                    setattr(self, parameter, getattr(parameters, parameter))
+            for parameter in parameters.get_properties():
+                print(parameter)
+                setattr(self, parameter, getattr(parameters, parameter))
 
     def init_logs(self) -> None:
         basicConfig(
@@ -202,12 +203,6 @@ class BaseController:
         )
 
         self.scheduler.start()
-
-    def init_variables(self) -> None:
-        for parameter, default in self.parameters:
-            value = environ.get(parameter.upper()) or default
-            func = int if isinstance(default, bool) else type(default)
-            setattr(self, parameter, func(value))
 
     def init_services(self) -> None:
         path_services = [self.path / "eNMS" / "services"]

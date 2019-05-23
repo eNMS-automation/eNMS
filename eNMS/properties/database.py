@@ -15,6 +15,8 @@ private_properties: List[str] = ["password", "enable_password"]
 
 dont_track_changes = [
     "completed",
+    "configurations",
+    "current_configuration",
     "current_device",
     "current_job",
     "failed",

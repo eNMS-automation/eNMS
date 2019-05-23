@@ -178,7 +178,8 @@ class Job(AbstractBase):
             current_job.logs.extend([f"{self.type} {self.name}: Starting."])
         else:
             current_job.logs = [f"{self.type} {self.name}: Starting."]
-        Session.commit()
+        if not current_job.multiprocessing:
+            Session.commit()
         results: dict = {"results": {}}
         payload = payload or {}
         targets = targets or self.compute_targets()
@@ -190,7 +191,8 @@ class Job(AbstractBase):
                 f"Running {self.type} {self.name} (attempt n°{i + 1})"
             )
             self.completed = self.failed = 0
-            Session.commit()
+            if not current_job.multiprocessing:
+                Session.commit()
             attempt, logs = self.run(payload, targets, workflow)
             current_job.logs.extend(logs)
             if targets:
@@ -230,7 +232,8 @@ class Job(AbstractBase):
         self.completed = self.failed = 0
         if task and not task.frequency:
             task.is_active = False
-        Session.commit()
+        if not current_job.multiprocessing:
+            Session.commit()
         if not workflow and self.send_notification:
             self.notify(results, now)
         return results, now
@@ -274,10 +277,10 @@ class Job(AbstractBase):
         if not targets:
             return self.get_results(payload)
         else:
-            manager = Manager()
-            results: dict = manager.dict({"devices": manager.dict()})
-            logs: list = manager.list()
             if self.multiprocessing:
+                manager = Manager()
+                results: dict = manager.dict({"devices": manager.dict()})
+                logs: list = manager.list()
                 lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
                 pool = Pool(processes=processes)
@@ -293,6 +296,7 @@ class Job(AbstractBase):
                 pool.close()
                 pool.join()
             else:
+                results, logs = {"devices": {}}, []
                 results["devices"] = {
                     device.name: self.get_results(payload, device, workflow)[0]
                     for device in targets
@@ -477,7 +481,8 @@ class Workflow(Job):
         self.state = {"jobs": {}}
         if device:
             self.state["current_device"] = device.name
-        Session.commit()
+        if not self.multiprocessing:
+            Session.commit()
         jobs: List[Job] = [self.jobs[0]]
         visited: Set = set()
         results: dict = {"success": False}
@@ -489,14 +494,16 @@ class Workflow(Job):
                 continue
             visited.add(job)
             self.state["current_job"] = job.get_properties()
-            Session.commit()
+            if not self.multiprocessing:
+                Session.commit()
             targets = {device} if device else None
             job_results, _ = job.try_run(results, targets=targets, workflow=self)
             if device:
                 job_results = job_results["results"]["devices"][device.name]
             success = job_results["success"]
             self.state["jobs"][job.id] = success
-            Session.commit()
+            if not self.multiprocessing:
+                Session.commit()
             edge_type_to_follow = "success" if success else "failure"
             for successor in job.job_successors(self, edge_type_to_follow):
                 if successor not in visited:

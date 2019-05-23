@@ -20,11 +20,11 @@ def threaded_job(
 def device_process(
     args: Tuple[int, int, Lock, dict, list, dict, Optional[int]]
 ) -> None:
-    device_id, service_id, lock, results, logs, payload, workflow_id = args
+    device_id, job_id, lock, results, logs, payload, workflow_id = args
     device = fetch("Device", id=device_id)
     workflow = fetch("Workflow", id=workflow_id)
-    service = fetch("Service", id=service_id)
-    device_result, device_log = service.get_results(payload, device, workflow)
+    job = fetch("Job", id=job_id)
+    device_result, device_log = job.get_results(payload, device, workflow)
     with lock:
         results["devices"][device.name] = device_result
         logs.extend(device_log)

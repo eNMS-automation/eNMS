@@ -125,7 +125,6 @@ class BaseController:
     @property
     def config(self):
         parameters = Session.query(models["Parameters"]).one_or_none()
-        print(parameters.get_properties())
         return parameters.get_properties() if parameters else {}
 
     def __init__(self) -> None:
@@ -167,7 +166,6 @@ class BaseController:
             Session.commit()
         else:
             for parameter in parameters.get_properties():
-                print(parameter)
                 setattr(self, parameter, getattr(parameters, parameter))
 
     def init_logs(self) -> None:

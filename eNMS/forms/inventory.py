@@ -90,6 +90,14 @@ class DeviceFilteringForm(ObjectFilteringForm, ObjectForm):
     netmiko_driver = StringField("Netmiko Driver")
 
 
+class ConfigurationFilteringForm(DeviceFilteringForm):
+    form_type = HiddenField(default="configuration_filtering")
+    last_failure = StringField("Last failure")
+    last_runtime = StringField("Last runtime")
+    last_update = StringField("Last update")
+    last_status = StringField("Last status")
+
+
 @configure_device_form
 class DeviceForm(ObjectForm):
     template = "object"

@@ -94,7 +94,7 @@ table_properties: Dict[str, List[str]] = {
     "workflow": workflow_table_properties,
 }
 
-job_filtering_properties = {
+job_filtering_properties = [
     "name",
     "type",
     "description",
@@ -106,7 +106,7 @@ job_filtering_properties = {
     "mail_recipient",
     "number_of_retries",
     "time_between_retries",
-}
+]
 
 filtering_properties: Dict[str, List[str]] = {
     "configuration": configuration_table_properties + ["current_configuration"],

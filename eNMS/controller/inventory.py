@@ -2,7 +2,7 @@ from collections import Counter
 from difflib import SequenceMatcher
 from git import Repo
 from logging import info
-from os import environ, scandir, remove
+from os import scandir, remove
 from pathlib import Path
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -14,21 +14,14 @@ from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
-from yaml import load, BaseLoader
+from yaml import load
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, property_types
-from eNMS.properties import field_conversion, property_names
-from eNMS.properties.diagram import device_diagram_properties
-from eNMS.properties.objects import (
-    device_properties,
-    device_subtypes,
-    link_colors,
-    link_subtypes,
-    pool_device_properties,
-)
+from eNMS.properties import field_conversion
+from eNMS.properties.objects import device_subtypes, link_colors, link_subtypes
 from eNMS.properties.table import filtering_properties, table_properties
 
 
@@ -182,23 +175,6 @@ class InventoryController(BaseController):
 
     def get_configurations(self, device_id: int) -> dict:
         return fetch("Device", id=device_id).get_configurations()
-
-    def load_custom_properties(self) -> dict:
-        filepath = environ.get("PATH_CUSTOM_PROPERTIES")
-        if not filepath:
-            custom_properties: dict = {}
-        else:
-            with open(filepath, "r") as properties:
-                custom_properties = load(properties, Loader=BaseLoader)
-        property_names.update(
-            {k: v["property_name"] for k, v in custom_properties.items()}
-        )
-        for object_properties in (device_properties, pool_device_properties):
-            object_properties.extend(list(custom_properties))
-        device_diagram_properties.extend(
-            list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
-        )
-        return custom_properties
 
     def query_netbox(self, **kwargs: str) -> None:
         nb = netbox_api(kwargs["netbox_address"], token=kwargs["netbox_token"])

@@ -16,11 +16,18 @@ from string import punctuation
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from tacacs_plus.client import TACACSClient
 from typing import Any, List, Set
+from yaml import load, BaseLoader
 
 from eNMS.database import Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
 from eNMS.models import models, model_properties
-from eNMS.properties.diagram import diagram_classes, type_to_diagram_properties
+from eNMS.properties import property_names
+from eNMS.properties.diagram import (
+    device_diagram_properties,
+    diagram_classes,
+    type_to_diagram_properties,
+)
+from eNMS.properties.objects import device_properties, pool_device_properties
 from eNMS.syslog import SyslogServer
 
 
@@ -123,7 +130,7 @@ class BaseController:
     log_severity = {"error": error, "info": info, "warning": warning}
 
     @property
-    def config(self):
+    def config(self) -> dict:
         parameters = Session.query(models["Parameters"]).one_or_none()
         return parameters.get_properties() if parameters else {}
 
@@ -150,6 +157,23 @@ class BaseController:
         self.create_default()
         if self.create_examples:
             self.examples_creation()
+
+    def load_custom_properties(self) -> dict:
+        filepath = environ.get("PATH_CUSTOM_PROPERTIES")
+        if not filepath:
+            custom_properties: dict = {}
+        else:
+            with open(filepath, "r") as properties:
+                custom_properties = load(properties, Loader=BaseLoader)
+        property_names.update(
+            {k: v["property_name"] for k, v in custom_properties.items()}
+        )
+        for object_properties in (device_properties, pool_device_properties):
+            object_properties.extend(list(custom_properties))
+        device_diagram_properties.extend(
+            list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
+        )
+        return custom_properties
 
     def init_parameters(self) -> None:
         parameters = Session.query(models["Parameters"]).one_or_none()

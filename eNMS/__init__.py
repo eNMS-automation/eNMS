@@ -4,10 +4,10 @@ from flask_cli import FlaskCLI
 from flask.wrappers import Request, Response
 from pathlib import Path
 from sqlalchemy.orm import configure_mappers
-from typing import Any, Optional, Tuple, Type
+from typing import Any, Optional, Tuple
 
 from eNMS.cli import configure_cli
-from eNMS.config import Config
+from eNMS.config import config_mapper
 from eNMS.controller import controller
 from eNMS.database import Base, engine, Session
 from eNMS.database.events import configure_events
@@ -112,9 +112,10 @@ def configure_authentication() -> None:
         return make_response(jsonify({"message": "Unauthorized access"}), 403)
 
 
-def create_app(path: Path, config_class: Type[Config]) -> Flask:
+def create_app(path: Path, config: str) -> Flask:
     app = Flask(__name__, static_folder="static")
-    app.config.from_object(config_class)  # type: ignore
+    app.config.from_object(config_mapper[config.capitalize()])  # type: ignore
+    app.mode = app.config["MODE"]
     app.path = path
     register_modules(app)
     configure_login_manager(app)
@@ -122,7 +123,8 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_context_processor(app)
     configure_rest_api(app)
     configure_errors(app)
-    # configure_assets(app)
+    if app.mode == "Test":
+        configure_assets(app)
     configure_authentication()
     controller.init_services()
     configure_cli(app)

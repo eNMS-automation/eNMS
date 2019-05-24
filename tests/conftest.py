@@ -5,13 +5,12 @@ from pytest import fixture
 from typing import Iterator
 
 from eNMS import create_app
-from eNMS.config import config_dict
 from eNMS.database import Base, engine, Session
 
 
 @fixture
 def base_client() -> Iterator[FlaskClient]:
-    app = create_app(Path.cwd(), config_dict["Test"])
+    app = create_app(Path.cwd(), "Test")
     app_context = app.app_context()
     app_context.push()
     Session.close()
@@ -22,7 +21,7 @@ def base_client() -> Iterator[FlaskClient]:
 
 @fixture
 def user_client() -> Iterator[FlaskClient]:
-    app = create_app(Path.cwd(), config_dict["Test"])
+    app = create_app(Path.cwd(), "Test")
     app_context = app.app_context()
     app_context.push()
     Session.close()

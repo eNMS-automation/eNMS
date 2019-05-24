@@ -14,6 +14,7 @@ class Config(object):
 
 
 class DefaultConfig(Config):
+    MODE = "default"
     DEBUG = True
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
     MAIL_DEBUG = 1
@@ -21,6 +22,7 @@ class DefaultConfig(Config):
 
 
 class DevelopConfig(DefaultConfig):
+    MODE = "develop"
     DEVELOP = True
     DEBUG_TB_ENABLED = True
     DEBUG_TB_PROFILER_ENABLED = True
@@ -28,6 +30,7 @@ class DevelopConfig(DefaultConfig):
 
 
 class ProductionConfig(Config):
+    MODE = "production"
     DEBUG = False
     SECRET_KEY = environ.get("ENMS_SECRET_KEY")
     SESSION_COOKIE_HTTPONLY = True
@@ -36,11 +39,12 @@ class ProductionConfig(Config):
 
 
 class TestConfig(DefaultConfig):
+    MODE = "test"
     CACHE_TYPE = "null"
     WTF_CSRF_ENABLED = False
 
 
-config_dict: Dict[str, Type[Config]] = {
+config_mapper: Dict[str, Type[Config]] = {
     "Default": DefaultConfig,
     "Develop": DevelopConfig,
     "Production": ProductionConfig,

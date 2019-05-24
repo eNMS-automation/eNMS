@@ -311,7 +311,7 @@ function resumeTask(id) {
 }
 
 (function() {
-  if (page == "table-service") {
+  if (page == "table/service") {
     $("#service-type").selectpicker({
       liveSearch: true,
     });

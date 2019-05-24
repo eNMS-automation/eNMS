@@ -20,6 +20,13 @@ class DefaultConfig(Config):
     DEBUG_TB_ENABLED = False
 
 
+class DevelopConfig(DefaultConfig):
+    DEVELOP = True
+    DEBUG_TB_ENABLED = True
+    DEBUG_TB_PROFILER_ENABLED = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
+
+
 class ProductionConfig(Config):
     DEBUG = False
     SECRET_KEY = environ.get("ENMS_SECRET_KEY")
@@ -30,13 +37,6 @@ class ProductionConfig(Config):
 
 class TestConfig(DefaultConfig):
     WTF_CSRF_ENABLED = False
-
-
-class DevelopConfig(DefaultConfig):
-    DEVELOP = True
-    DEBUG_TB_ENABLED = True
-    DEBUG_TB_PROFILER_ENABLED = True
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
 config_dict: Dict[str, Type[Config]] = {

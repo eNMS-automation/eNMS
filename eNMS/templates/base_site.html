@@ -44,6 +44,7 @@
       {% block javascripts %}
         <script>
           const page = "{{ endpoint }}";
+          console.log(page);
           const parameters = {{ parameters|tojson|safe }};
           const formProperties = {{ form_properties|tojson|safe }};
           const names = {{ names|tojson|safe }};

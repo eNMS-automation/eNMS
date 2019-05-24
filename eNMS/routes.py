@@ -122,18 +122,20 @@ def dashboard() -> dict:
 @monitor_requests
 def table(table_type: str) -> dict:
     kwargs = {
-        "endpoint": "dashboard",
+        "endpoint": f"table/{table_type}",
         "properties": table_properties[table_type],
         "fixed_columns": table_fixed_columns[table_type],
         "type": table_type,
     }
     if table_type == "service":
         service_table_form = ServiceTableForm(request.form)
-        service_table_form.services.choices = [
-            (service, service)
-            for service in models
-            if service != "Service" and service.endswith("Service")
-        ]
+        service_table_form.services.choices = sorted(
+            [
+                (service, service)
+                for service in models
+                if service != "Service" and service.endswith("Service")
+            ]
+        )
         kwargs["service_table_form"] = service_table_form
     return render_template(f"pages/table.html", **kwargs)
 
@@ -174,7 +176,7 @@ def form(form_type: str) -> dict:
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",
         **{
-            "endpoint": "dashboard",
+            "endpoint": f"form/{form_type}",
             "action": form_actions.get(form_type),
             "form": form_classes[form_type](request.form),
             "form_type": form_type,
@@ -248,7 +250,9 @@ def route(page: str) -> Response:
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         kwargs = form_postprocessing(request.form)
     try:
+        print("iii" * 100)
         result = getattr(controller, f)(*args, **kwargs)
+        print(result, "ttt" * 100)
         Session.commit()
         return jsonify(result)
     except Exception as e:

@@ -1,7 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, make_response, render_template
 from flask_assets import Bundle
 from flask_cli import FlaskCLI
-from flask.wrappers import Request
+from flask.wrappers import Request, Response
 from pathlib import Path
 from sqlalchemy.orm import configure_mappers
 from typing import Any, Optional, Tuple, Type
@@ -13,7 +13,15 @@ from eNMS.database import Base, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
-from eNMS.extensions import assets, cache, csrf, login_manager, mail_client, toolbar
+from eNMS.extensions import (
+    assets,
+    auth,
+    cache,
+    csrf,
+    login_manager,
+    mail_client,
+    toolbar,
+)
 from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
@@ -94,6 +102,16 @@ def configure_assets(app: Flask) -> None:
     )
 
 
+def configure_authentication() -> None:
+    @auth.get_password
+    def get_password(username: str) -> str:
+        return getattr(fetch("User", name=username), "password", False)
+
+    @auth.error_handler
+    def unauthorized() -> Response:
+        return make_response(jsonify({"message": "Unauthorized access"}), 403)
+
+
 def create_app(path: Path, config_class: Type[Config]) -> Flask:
     app = Flask(__name__, static_folder="static")
     app.config.from_object(config_class)  # type: ignore
@@ -105,6 +123,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_rest_api(app)
     configure_errors(app)
     configure_assets(app)
+    configure_authentication()
     controller.init_services()
     configure_cli(app)
     return app

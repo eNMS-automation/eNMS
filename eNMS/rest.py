@@ -1,7 +1,6 @@
 from datetime import datetime
-from flask import Flask, jsonify, make_response, request
+from flask import Flask, request
 from flask_restful import Api, Resource
-from flask.wrappers import Response
 from logging import info
 from psutil import cpu_percent
 from uuid import getnode
@@ -11,16 +10,6 @@ from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.extensions import auth, csrf
-
-
-@auth.get_password
-def get_password(username: str) -> str:
-    return getattr(fetch("User", name=username), "password", False)
-
-
-@auth.error_handler
-def unauthorized() -> Response:
-    return make_response(jsonify({"message": "Unauthorized access"}), 403)
 
 
 class Heartbeat(Resource):

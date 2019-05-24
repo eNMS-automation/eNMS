@@ -34,7 +34,7 @@ from eNMS.properties.table import (
     table_properties,
 )
 
-bp = Blueprint("bp", __name__, template_folder="templates")
+blueprint = Blueprint("blueprint", __name__, template_folder="templates")
 
 
 def monitor_requests(function: Callable) -> Callable:
@@ -55,25 +55,25 @@ def monitor_requests(function: Callable) -> Callable:
     return decorated_function
 
 
-@bp.route("/")
+@blueprint.route("/")
 def site_root() -> Response:
-    return redirect(url_for("bp.route", page="login"))
+    return redirect(url_for("blueprint.route", page="login"))
 
 
-@bp.route("/<path:_>")
+@blueprint.route("/<path:_>")
 @monitor_requests
 def get_requests_sink(_: str) -> Response:
     abort(404)
 
 
-@bp.route("/login", methods=["GET", "POST"])
+@blueprint.route("/login", methods=["GET", "POST"])
 def login() -> Response:
     if request.method == "POST":
         try:
             user = controller.authenticate_user(**request.form.to_dict())
             if user:
                 login_user(user)
-                return redirect(url_for("bp.route", page="dashboard"))
+                return redirect(url_for("blueprint.route", page="dashboard"))
             else:
                 abort(403)
         except Exception as e:
@@ -88,17 +88,17 @@ def login() -> Response:
             authentication_methods.append(("TACACS",) * 2)
         login_form.authentication_method.choices = authentication_methods
         return render_template("login.html", login_form=login_form)
-    return redirect(url_for("bp.route", page="dashboard"))
+    return redirect(url_for("blueprint.route", page="dashboard"))
 
 
-@bp.route("/logout")
+@blueprint.route("/logout")
 @monitor_requests
 def logout() -> Response:
     logout_user()
-    return redirect(url_for("bp.route", page="login"))
+    return redirect(url_for("blueprint.route", page="login"))
 
 
-@bp.route("/administration")
+@blueprint.route("/administration")
 @cache.cached(timeout=0)
 @monitor_requests
 def administration() -> dict:
@@ -111,7 +111,7 @@ def administration() -> dict:
     )
 
 
-@bp.route("/dashboard")
+@blueprint.route("/dashboard")
 @cache.cached(timeout=0)
 @monitor_requests
 def dashboard() -> dict:
@@ -121,7 +121,7 @@ def dashboard() -> dict:
     )
 
 
-@bp.route("/table/<table_type>")
+@blueprint.route("/table/<table_type>")
 @monitor_requests
 def table(table_type: str) -> dict:
     kwargs = {
@@ -141,7 +141,7 @@ def table(table_type: str) -> dict:
     return render_template(f"pages/table.html", **kwargs)
 
 
-@bp.route("/view/<view_type>")
+@blueprint.route("/view/<view_type>")
 @monitor_requests
 def view(view_type: str) -> dict:
     return render_template(
@@ -150,7 +150,7 @@ def view(view_type: str) -> dict:
     )
 
 
-@bp.route("/workflow_builder")
+@blueprint.route("/workflow_builder")
 @monitor_requests
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
@@ -163,14 +163,14 @@ def workflow_builder() -> dict:
     )
 
 
-@bp.route("/calendar")
+@blueprint.route("/calendar")
 @cache.cached(timeout=0)
 @monitor_requests
 def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
 
-@bp.route("/form/<form_type>")
+@blueprint.route("/form/<form_type>")
 @cache.cached(timeout=0)
 @monitor_requests
 def form(form_type: str) -> dict:
@@ -185,7 +185,7 @@ def form(form_type: str) -> dict:
     )
 
 
-@bp.route("/download_configuration/<name>")
+@blueprint.route("/download_configuration/<name>")
 @login_required
 def download_configuration(name: str) -> Response:
     try:
@@ -200,7 +200,7 @@ def download_configuration(name: str) -> Response:
         return jsonify("No configuration stored")
 
 
-@bp.route("/filtering/<table>")
+@blueprint.route("/filtering/<table>")
 @monitor_requests
 def filtering(table: str) -> dict:
     model = models.get(table, models["Device"])
@@ -236,8 +236,8 @@ def filtering(table: str) -> dict:
     )
 
 
-@bp.route("/", methods=["POST"])
-@bp.route("/<path:page>", methods=["POST"])
+@blueprint.route("/", methods=["POST"])
+@blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
     f, *args = page.split("/")

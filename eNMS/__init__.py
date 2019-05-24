@@ -17,11 +17,11 @@ from eNMS.extensions import assets, cache, csrf, login_manager, mail_client, too
 from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
-from eNMS.routes import bp
+from eNMS.routes import blueprint
 
 
 def register_modules(app: Flask) -> None:
-    app.register_blueprint(bp)
+    app.register_blueprint(blueprint)
     assets.init_app(app)
     cache.init_app(app)
     csrf.init_app(app)

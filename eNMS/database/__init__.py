@@ -7,6 +7,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 engine = create_engine(
     environ.get("ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"),
     convert_unicode=True,
+    pool_pre_ping=True,
 )
 
 Session = scoped_session(

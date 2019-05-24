@@ -11,9 +11,6 @@ class Config(object):
     MAIL_PASSWORD = environ.get("MAIL_PASSWORD")
     MAIL_SENDER = environ.get("MAIL_SENDER", "enms@enms.fr")
     MAIL_RECIPIENTS = environ.get("MAIL_RECIPIENTS", "")
-    SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
-    SQLALCHEMY_RECORD_QUERIES = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class DefaultConfig(Config):

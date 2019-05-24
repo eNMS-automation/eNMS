@@ -1,5 +1,4 @@
-from multiprocessing import Lock
-from typing import Optional, Set, Tuple
+from typing import Optional
 
 from eNMS.database.functions import fetch
 
@@ -7,7 +6,7 @@ from eNMS.database.functions import fetch
 def threaded_job(
     job_id: int,
     aps_job_id: Optional[str] = None,
-    targets: Optional[Set["Device"]] = None,
+    targets: Optional[set] = None,
     payload: Optional[dict] = None,
 ) -> None:
     task = fetch("Task", creation_time=aps_job_id)
@@ -17,9 +16,7 @@ def threaded_job(
     job.try_run(targets=targets, payload=payload, task=task)
 
 
-def device_process(
-    args: Tuple[int, int, Lock, dict, list, dict, Optional[int]]
-) -> None:
+def device_process(args: tuple) -> None:
     device_id, job_id, lock, results, logs, payload, workflow_id = args
     device = fetch("Device", id=device_id)
     workflow = fetch("Workflow", id=workflow_id)

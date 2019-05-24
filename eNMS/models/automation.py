@@ -34,7 +34,7 @@ from eNMS.models.associations import (
 )
 from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device
-from eNMS.models.logging import Log
+from eNMS.models.logging import Log  # noqa: F401
 
 
 class Job(AbstractBase):

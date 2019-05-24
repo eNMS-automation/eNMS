@@ -9,11 +9,6 @@ from eNMS.models import models, model_properties
 
 
 class Controller(AdministrationController, AutomationController, InventoryController):
-    @property
-    def config(self) -> dict:
-        parameters = Session.query(models["Parameters"]).one_or_none()
-        return parameters.get_properties() if parameters else {}
-
     def configure_server_id(self) -> None:
         factory(
             "Server",

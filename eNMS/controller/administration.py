@@ -132,7 +132,7 @@ class AdministrationController(BaseController):
                 info(f"{str(edge)} could not be imported ({str(e)})")
                 status = "Partial import (see logs)."
         if kwargs.get("empty_database_before_import", False):
-            self.create_default()
+            self.create_default()  # type: ignore
         return status
 
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:
@@ -141,12 +141,11 @@ class AdministrationController(BaseController):
             self.get_git_content()
 
     def scan_cluster(self, **kwargs: Union[float, str]) -> None:
-        protocol = self.parameters["cluster_scan_protocol"]
-        for ip_address in IPv4Network(self.parameters["cluster_scan_subnet"]):
+        for ip_address in IPv4Network(self.cluster_scan_subnet):
             try:
                 server = http_get(
-                    f"{protocol}://{ip_address}/rest/is_alive",
-                    timeout=self.parameters["cluster_scan_timeout"],
+                    f"{self.cluster_scan_protocol}://{ip_address}/rest/is_alive",
+                    timeout=self.cluster_scan_timeout,
                 ).json()
                 if self.cluster_id != server.pop("cluster_id"):
                     continue

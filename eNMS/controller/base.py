@@ -66,7 +66,7 @@ class BaseController:
     ldap_server = environ.get("LDAP_SERVER")
     ldap_userdn = environ.get("LDAP_USERDN")
     ldap_basedn = environ.get("LDAP_BASEDN")
-    ldap_admin_group = environ.get("LDAP_ADMIN_GROUP")
+    ldap_admin_group = environ.get("LDAP_ADMIN_GROUP", "")
     mattermost_url = environ.get("MATTERMOST_URL")
     mattermost_channel = environ.get("MATTERMOST_CHANNEL")
     mattermost_verify_certificate = int(
@@ -139,6 +139,11 @@ class BaseController:
     ]
 
     log_severity = {"error": error, "info": info, "warning": warning}
+
+    @property
+    def config(self) -> dict:
+        parameters = Session.query(models["Parameters"]).one_or_none()
+        return parameters.get_properties() if parameters else {}
 
     def __init__(self) -> None:
         self.custom_properties = self.load_custom_properties()

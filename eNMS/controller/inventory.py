@@ -6,7 +6,7 @@ from requests import get as http_get
 from sqlalchemy import and_
 from subprocess import Popen
 from simplekml import Kml
-from typing import Any, IO, List, Union
+from typing import Any, BinaryIO, List, Union
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -181,7 +181,7 @@ class InventoryController(BaseController):
                     devices[device]["ip_address"] = interface["ipAddress"]
                     factory("Device", **devices[device])
 
-    def topology_import(self, file: IO[str]) -> str:
+    def topology_import(self, file: BinaryIO) -> str:
         book = open_workbook(file_contents=file.read())
         result = "Topology successfully imported."
         for obj_type in ("Device", "Link"):

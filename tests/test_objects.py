@@ -2,8 +2,8 @@ from flask.testing import FlaskClient
 from typing import List
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.controller import controller
 from eNMS.database.functions import fetch, fetch_all
+from eNMS.properties.objects import device_subtypes, link_subtypes
 
 from tests.test_base import check_pages
 
@@ -46,11 +46,11 @@ def define_link(subtype: str, source: str, destination: str) -> ImmutableMultiDi
 
 @check_pages("table-device", "table-link", "view-network")
 def test_manual_object_creation(user_client: FlaskClient) -> None:
-    for subtype in controller.device_subtypes:
+    for subtype in device_subtypes:
         for description in ("desc1", "desc2"):
             obj_dict = define_device(subtype, description)
             user_client.post("/update-device", data=obj_dict)
-    for subtype in controller.link_subtypes:
+    for subtype in link_subtypes:
         devices = fetch_all("Device")
         for source in devices[:3]:
             for destination in devices[:3]:

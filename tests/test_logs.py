@@ -17,7 +17,7 @@ log2 = (
 )
 
 
-@check_pages("table-log")
+@check_pages("table/log")
 def test_create_logs(user_client: FlaskClient) -> None:
     for log in (log1, log2):
         kwargs = {"ip_address": "192.168.1.88", "content": log, "log_rules": []}

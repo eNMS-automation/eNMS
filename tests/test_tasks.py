@@ -28,10 +28,10 @@ scheduled_task = ImmutableMultiDict(
 )
 
 
-@check_pages("table-task", "calendar")
+@check_pages("table/task", "calendar")
 def test_netmiko_napalm_config(user_client: FlaskClient) -> None:
     create_from_file(user_client, "europe.xls")
-    user_client.post("/update-task", data=instant_task)
+    user_client.post("/update/task", data=instant_task)
     assert len(fetch_all("Task")) == 3
-    user_client.post("/update-task", data=scheduled_task)
+    user_client.post("/update/task", data=scheduled_task)
     assert len(fetch_all("Task")) == 4

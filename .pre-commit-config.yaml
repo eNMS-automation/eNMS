@@ -9,4 +9,7 @@ repos:
       hooks:
       -   id: flake8
           args: ['--config=linting/.flake8']
-      
+  - repo: https://github.com/prettier/prettier
+    sha: 1.12.1
+    hooks:
+      - id: prettier

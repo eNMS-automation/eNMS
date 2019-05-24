@@ -13,12 +13,11 @@ from eNMS.database import Base, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
-from eNMS.extensions import assets, bp, cache, csrf, login_manager, mail_client, toolbar
+from eNMS.extensions import assets, cache, csrf, login_manager, mail_client, toolbar
 from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
-
-import eNMS.routes  # noqa: F401
+from eNMS.routes import bp
 
 
 def register_modules(app: Flask) -> None:

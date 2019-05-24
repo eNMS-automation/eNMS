@@ -1,5 +1,6 @@
 from flask import (
     abort,
+    Blueprint,
     current_app,
     jsonify,
     redirect,
@@ -23,7 +24,7 @@ from eNMS.database.functions import fetch
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
-from eNMS.extensions import bp, cache
+from eNMS.extensions import cache
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
 from eNMS.properties.objects import link_colors
@@ -32,6 +33,8 @@ from eNMS.properties.table import (
     table_fixed_columns,
     table_properties,
 )
+
+bp = Blueprint("bp", __name__, template_folder="templates")
 
 
 def monitor_requests(function: Callable) -> Callable:
@@ -130,11 +133,9 @@ def table(table_type: str) -> dict:
     if table_type == "service":
         service_table_form = ServiceTableForm(request.form)
         service_table_form.services.choices = sorted(
-            [
-                (service, service)
-                for service in models
-                if service != "Service" and service.endswith("Service")
-            ]
+            (service, service)
+            for service in models
+            if service != "Service" and service.endswith("Service")
         )
         kwargs["service_table_form"] = service_table_form
     return render_template(f"pages/table.html", **kwargs)
@@ -250,9 +251,7 @@ def route(page: str) -> Response:
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         kwargs = form_postprocessing(request.form)
     try:
-        print("iii" * 100)
         result = getattr(controller, f)(*args, **kwargs)
-        print(result, "ttt" * 100)
         Session.commit()
         return jsonify(result)
     except Exception as e:

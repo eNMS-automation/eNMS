@@ -36,6 +36,7 @@ class ProductionConfig(Config):
 
 
 class TestConfig(DefaultConfig):
+    CACHE_TYPE = "null"
     WTF_CSRF_ENABLED = False
 
 

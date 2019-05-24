@@ -1,27 +1,16 @@
 from flask.testing import FlaskClient
 
+from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import fetch_all
-from eNMS.models.logging import Log
 
 from tests.test_base import check_pages
 
 
-log1 = (
-    "<189>19: *May  5 05:26:27.523: %LINEPROTO-5-UPDOWN: Line protocol on"
-    "Interface FastEthernet0/0, changed state to up"
-)
-log2 = (
-    "<189>20: *May  5 05:26:30.275: %LINEPROTO-5-UPDOWN: Line protocol on"
-    "Interface FastEthernet0/0, changed state to down"
-)
-
-
 @check_pages("table/log")
 def test_create_logs(user_client: FlaskClient) -> None:
-    for log in (log1, log2):
-        kwargs = {"ip_address": "192.168.1.88", "content": log, "log_rules": []}
-        log_object = Log(**kwargs)
-        Session.add(log_object)
+    number_of_logs = len(fetch_all("Log"))
+    for i in range(10):
+        controller.log("warning", str(i))
         Session.commit()
-    assert len(fetch_all("Log")) == 2
+    assert len(fetch_all("Log")) == number_of_logs + 10

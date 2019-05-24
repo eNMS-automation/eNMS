@@ -122,7 +122,7 @@ def create_app(path: Path, config_class: Type[Config]) -> Flask:
     configure_context_processor(app)
     configure_rest_api(app)
     configure_errors(app)
-    configure_assets(app)
+    # configure_assets(app)
     configure_authentication()
     controller.init_services()
     configure_cli(app)

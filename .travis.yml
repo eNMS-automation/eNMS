@@ -14,7 +14,7 @@ matrix:
       script:
         - black --check --verbose .
         - flake8
-        - mypy .
+        - mypy --config-file linting/mypy.ini .
         - coverage run --source=./eNMS -m pytest
       after_success:
         - coveralls

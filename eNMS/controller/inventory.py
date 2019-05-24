@@ -1,27 +1,22 @@
 from collections import Counter
 from difflib import SequenceMatcher
-from git import Repo
 from logging import info
-from os import scandir, remove
-from pathlib import Path
 from pynetbox import api as netbox_api
 from requests import get as http_get
 from sqlalchemy import and_
 from subprocess import Popen
-from simplekml import Color, Kml, Style
-from typing import Any, Dict, List, Union
+from simplekml import Kml
+from typing import Any, IO, List, Union
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
 from xlwt import Workbook
-from yaml import load
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, property_types
 from eNMS.properties import field_conversion
-from eNMS.properties.objects import device_subtypes, link_colors, link_subtypes
 from eNMS.properties.table import filtering_properties, table_properties
 
 
@@ -80,67 +75,11 @@ class InventoryController(BaseController):
         ]
         return "\n".join(device_logs)
 
-    def update_database_configurations_from_git(self) -> None:
-        for dir in scandir(self.path / "git" / "configurations"):
-            if dir.name == ".git":
-                continue
-            device = fetch("Device", name=dir.name)
-            if device:
-                with open(Path(dir.path) / "data.yml") as data:
-                    parameters = load(data)
-                    device.update(**parameters)
-                    with open(Path(dir.path) / dir.name) as f:
-                        time = parameters["last_update"]
-                        device.current_configuration = device.configurations[
-                            time
-                        ] = f.read()
-        Session.commit()
-        for pool in fetch_all("Pool"):
-            if pool.device_current_configuration:
-                pool.compute_pool()
-
-    def get_git_content(self) -> None:
-        for repository_type in ("configurations", "automation"):
-            repo = getattr(self, f"git_{repository_type}")
-            if not repo:
-                continue
-            local_path = self.path / "git" / repository_type
-            for file in scandir(local_path):
-                if file.name == ".gitkeep":
-                    remove(file)
-            try:
-                Repo.clone_from(repo, local_path)
-                if repository_type == "configurations":
-                    self.update_database_configurations_from_git()
-            except Exception as e:
-                info(f"Cannot clone {repository_type} git repository ({str(e)})")
-                try:
-                    Repo(local_path).remotes.origin.pull()
-                    if repository_type == "configurations":
-                        self.update_database_configurations_from_git()
-                except Exception as e:
-                    info(f"Cannot pull {repository_type} git repository ({str(e)})")
-
     def clear_configurations(self, device_id: int) -> None:
         fetch("Device", id=device_id).configurations = {}
 
     def counters(self, property: str, type: str) -> Counter:
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
-
-    def create_google_earth_styles(self) -> None:
-        self.google_earth_styles: Dict[str, Style] = {}
-        for subtype in device_subtypes:
-            point_style = Style()
-            point_style.labelstyle.color = Color.blue
-            path_icon = f"{self.path}/eNMS/views/static/images/2D/{subtype}.gif"
-            point_style.iconstyle.icon.href = path_icon
-            self.google_earth_styles[subtype] = point_style
-        for subtype in link_subtypes:
-            line_style = Style()
-            color = link_colors[subtype]
-            kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]
-            line_style.linestyle.color = kml_color
-            self.google_earth_styles[subtype] = line_style
 
     def export_to_google_earth(self, **kwargs: Any) -> None:
         kml_file = Kml()
@@ -160,7 +99,7 @@ class InventoryController(BaseController):
         filepath = self.path / "projects" / "google_earth" / f'{kwargs["name"]}.kmz'
         kml_file.save(filepath)
 
-    def export_topology(self, **kwargs) -> None:
+    def export_topology(self, **kwargs: str) -> None:
         workbook = Workbook()
         filename = kwargs["export_filename"]
         if "." not in filename:
@@ -242,7 +181,7 @@ class InventoryController(BaseController):
                     devices[device]["ip_address"] = interface["ipAddress"]
                     factory("Device", **devices[device])
 
-    def topology_import(self, file):
+    def topology_import(self, file: IO[str]) -> str:
         book = open_workbook(file_contents=file.read())
         result = "Topology successfully imported."
         for obj_type in ("Device", "Link"):
@@ -266,7 +205,7 @@ class InventoryController(BaseController):
             pool.compute_pool()
         return result
 
-    def import_topology(self, **kwargs: Union[str, List[int]]) -> str:
+    def import_topology(self, **kwargs: Any) -> str:
         file = kwargs["file"]
         if kwargs["replace"]:
             delete_all("Device")
@@ -276,7 +215,7 @@ class InventoryController(BaseController):
         info("Inventory import: Done.")
         return result
 
-    def save_pool_objects(self, pool_id: int, kwargs: List[int]) -> dict:
+    def save_pool_objects(self, pool_id: int, kwargs: Any) -> dict:
         pool = fetch("Pool", id=pool_id)
         pool.devices = objectify("Device", kwargs["devices"])
         pool.links = objectify("Link", kwargs["links"])
@@ -295,7 +234,7 @@ class InventoryController(BaseController):
             "links": [d.view_properties for d in fetch_all("Link")],
         }
 
-    def view_filtering(self, filter_type: str, **kwargs) -> List[dict]:
+    def view_filtering(self, filter_type: str, **kwargs: Any) -> List[dict]:
         obj_type = filter_type.split("_")[0]
         model = models[obj_type]
         constraints = []

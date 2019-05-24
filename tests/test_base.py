@@ -13,7 +13,7 @@ pages: tuple = (
     "/table-device",
     "/table-link",
     "/table-log",
-    "/table-logrule",
+    "/table-event",
     "/table-pool",
     "/table-service",
     "/table-user",

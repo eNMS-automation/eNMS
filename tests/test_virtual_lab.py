@@ -4,10 +4,10 @@ from requests.auth import HTTPBasicAuth
 
 from eNMS.database.functions import fetch_all
 
-from tests.test_base import check_blueprints
+from tests.test_base import check_pages
 
 
-@check_blueprints("/inventory")
+@check_pages("/table/device")
 def test_rest_api_basic(user_client: FlaskClient) -> None:
     assert len(fetch_all("Device")) == 28
     post(
@@ -62,7 +62,7 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
     assert result["description"] == "New" and len(fetch_all("Workflow")) == 6
 
 
-@check_blueprints("/automation")
+@check_pages("/table/service", "/table/workflow")
 def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
     result = post(
         "http://192.168.105.2:5000/rest/run_job",
@@ -83,7 +83,7 @@ def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
     assert result["results"]["success"] and len(result) == 2
 
 
-@check_blueprints("/automation")
+@check_pages("/table/service", "/table/workflow")
 def test_netmiko_workflow(user_client: FlaskClient) -> None:
     result = post(
         "http://192.168.105.2:5000/rest/run_job",
@@ -115,7 +115,7 @@ def test_netmiko_workflow(user_client: FlaskClient) -> None:
     assert result["results"]["success"] and len(result) == 2
 
 
-@check_blueprints("/automation")
+@check_pages("/table/service", "/table/workflow")
 def test_napalm_workflow(user_client: FlaskClient) -> None:
     result = post(
         "http://192.168.105.2:5000/rest/run_job",

@@ -2,6 +2,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from collections import Counter
 from datetime import datetime
 from flask import Flask
+from git import Repo
 from hvac import Client as VaultClient
 from importlib import import_module
 from importlib.abc import Loader
@@ -10,24 +11,31 @@ from json.decoder import JSONDecodeError
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
-from os import environ
+from os import environ, remove, scandir
 from pathlib import Path
+from simplekml import Color, Style
 from string import punctuation
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from tacacs_plus.client import TACACSClient
-from typing import Any, List, Set
-from yaml import load, BaseLoader
+from typing import Any, Dict, List, Set
+from yaml import BaseLoader, load
 
 from eNMS.database import Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
-from eNMS.models import models, model_properties
 from eNMS.properties import property_names
 from eNMS.properties.diagram import (
     device_diagram_properties,
     diagram_classes,
     type_to_diagram_properties,
 )
-from eNMS.properties.objects import device_properties, pool_device_properties
+from eNMS.models import models
+from eNMS.properties.objects import (
+    device_properties,
+    device_subtypes,
+    link_colors,
+    link_subtypes,
+    pool_device_properties,
+)
 from eNMS.syslog import SyslogServer
 
 
@@ -53,8 +61,8 @@ class BaseController:
     gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
     gotty_bypass_key_prompt = int(environ.get("GOTTY_BYPASS_KEY_PROMPT", False))
     gotty_port = -1
-    gotty_start_port = environ.get("GOTTY_START_PORT", 9000)
-    gotty_end_port = environ.get("GOTTY_END_PORT", 9100)
+    gotty_start_port = int(environ.get("GOTTY_START_PORT", 9000))
+    gotty_end_port = int(environ.get("GOTTY_END_PORT", 9100))
     ldap_server = environ.get("LDAP_SERVER")
     ldap_userdn = environ.get("LDAP_USERDN")
     ldap_basedn = environ.get("LDAP_BASEDN")
@@ -64,11 +72,14 @@ class BaseController:
     mattermost_verify_certificate = int(
         environ.get("MATTERMOST_VERIFY_CERTIFICATE", True)
     )
+    opennms_login = environ.get("OPENNMS_LOGIN")
+    opennms_devices = environ.get("OPENNMS_DEVICES", "")
+    opennms_rest_api = environ.get("OPENNMS_REST_API")
     pool_filter = environ.get("POOL_FILTER", "All objects")
     slack_token = environ.get("SLACK_TOKEN")
     slack_channel = environ.get("SLACK_CHANNEL")
     syslog_addr = environ.get("SYSLOG_ADDR", "0.0.0.0")
-    syslog_port = environ.get("SYSLOG_PORT", 514)
+    syslog_port = int(environ.get("SYSLOG_PORT", 514))
     tacacs_addr = environ.get("TACACS_ADDR")
     tacacs_password = environ.get("TACACS_PASSWORD")
     unseal_vault = environ.get("UNSEAL_VAULT")
@@ -129,11 +140,6 @@ class BaseController:
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
-    @property
-    def config(self) -> dict:
-        parameters = Session.query(models["Parameters"]).one_or_none()
-        return parameters.get_properties() if parameters else {}
-
     def __init__(self) -> None:
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
@@ -152,11 +158,42 @@ class BaseController:
         self.create_google_earth_styles()
         self.init_logs()
 
-    def init_database(self):
-        self.init_parameters()
-        self.create_default()
-        if self.create_examples:
-            self.examples_creation()
+    def create_google_earth_styles(self) -> None:
+        self.google_earth_styles: Dict[str, Style] = {}
+        for subtype in device_subtypes:
+            point_style = Style()
+            point_style.labelstyle.color = Color.blue
+            path_icon = f"{self.path}/eNMS/views/static/images/2D/{subtype}.gif"
+            point_style.iconstyle.icon.href = path_icon
+            self.google_earth_styles[subtype] = point_style
+        for subtype in link_subtypes:
+            line_style = Style()
+            color = link_colors[subtype]
+            kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]
+            line_style.linestyle.color = kml_color
+            self.google_earth_styles[subtype] = line_style
+
+    def get_git_content(self) -> None:
+        for repository_type in ("configurations", "automation"):
+            repo = getattr(self, f"git_{repository_type}")
+            if not repo:
+                continue
+            local_path = self.path / "git" / repository_type
+            for file in scandir(local_path):
+                if file.name == ".gitkeep":
+                    remove(file)
+            try:
+                Repo.clone_from(repo, local_path)
+                if repository_type == "configurations":
+                    self.update_database_configurations_from_git()
+            except Exception as e:
+                info(f"Cannot clone {repository_type} git repository ({str(e)})")
+                try:
+                    Repo(local_path).remotes.origin.pull()
+                    if repository_type == "configurations":
+                        self.update_database_configurations_from_git()
+                except Exception as e:
+                    info(f"Cannot pull {repository_type} git repository ({str(e)})")
 
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")
@@ -174,23 +211,6 @@ class BaseController:
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
         )
         return custom_properties
-
-    def init_parameters(self) -> None:
-        parameters = Session.query(models["Parameters"]).one_or_none()
-        if not parameters:
-            parameters = models["Parameters"]()
-            parameters.update(
-                **{
-                    property: getattr(self, property)
-                    for property in model_properties["Parameters"]
-                    if hasattr(self, property)
-                }
-            )
-            Session.add(parameters)
-            Session.commit()
-        else:
-            for parameter in parameters.get_properties():
-                setattr(self, parameter, getattr(parameters, parameter))
 
     def init_logs(self) -> None:
         basicConfig(
@@ -262,7 +282,7 @@ class BaseController:
         self.syslog_server = SyslogServer(self.syslog_addr, self.syslog_port)
         self.syslog_server.start()
 
-    def update_parameters(self, **kwargs):
+    def update_parameters(self, **kwargs: Any) -> None:
         Session.query(models["Parameters"]).one().update(**kwargs)
         self.config.update(kwargs)
 
@@ -275,7 +295,7 @@ class BaseController:
     def get_all(self, cls: str) -> List[dict]:
         return [instance.get_properties() for instance in fetch_all(cls)]
 
-    def update(self, cls: str, **kwargs) -> dict:
+    def update(self, cls: str, **kwargs: Any) -> dict:
         try:
             instance = factory(cls, **kwargs)
             return instance.serialized
@@ -284,11 +304,11 @@ class BaseController:
         except IntegrityError:
             return {"error": "An object with the same name already exists"}
 
-    def log(self, severity, content) -> None:
+    def log(self, severity: str, content: str) -> None:
         factory("Log", **{"origin": "eNMS", "severity": severity, "content": content})
         self.log_severity[severity](content)
 
-    def count_models(self):
+    def count_models(self) -> dict:
         return {
             "counters": {
                 **{cls: count(cls) for cls in diagram_classes},
@@ -332,3 +352,22 @@ class BaseController:
 
     def strip_all(self, input: str) -> str:
         return input.translate(str.maketrans("", "", f"{punctuation} "))
+
+    def update_database_configurations_from_git(self) -> None:
+        for dir in scandir(self.path / "git" / "configurations"):
+            if dir.name == ".git":
+                continue
+            device = fetch("Device", name=dir.name)
+            if device:
+                with open(Path(dir.path) / "data.yml") as data:
+                    parameters = load(data)
+                    device.update(**parameters)
+                    with open(Path(dir.path) / dir.name) as f:
+                        time = parameters["last_update"]
+                        device.current_configuration = device.configurations[
+                            time
+                        ] = f.read()
+        Session.commit()
+        for pool in fetch_all("Pool"):
+            if pool.device_current_configuration:
+                pool.compute_pool()

@@ -13,7 +13,7 @@ matrix:
         - pip install -r requirements_dev.txt
       script:
         - black --check --verbose .
-        - flake8
+        - flake8 --config linting/.flake8 .
         - mypy --config-file linting/mypy.ini .
         - coverage run --source=./eNMS -m pytest
       after_success:

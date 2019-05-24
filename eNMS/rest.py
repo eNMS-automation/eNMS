@@ -115,6 +115,7 @@ class Topology(Resource):
             )
         else:
             controller.export_topology(**request.get_json(force=True))
+            return None
 
 
 def configure_rest_api(app: Flask) -> None:

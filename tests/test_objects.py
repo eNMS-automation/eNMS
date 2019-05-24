@@ -13,11 +13,10 @@ def define_device(subtype: str, description: str) -> ImmutableMultiDict:
         [
             ("form_type", "device"),
             ("name", subtype + description),
-            ("type", "Device"),
             ("description", description),
             ("location", "paris"),
             ("vendor", "Cisco"),
-            ("type", subtype),
+            ("subtype", subtype),
             ("ip_address", subtype + description),
             ("operating_system", "IOS"),
             ("os_version", "1.4.4.2"),
@@ -28,18 +27,17 @@ def define_device(subtype: str, description: str) -> ImmutableMultiDict:
     )
 
 
-def define_link(subtype: str, source: str, destination: str) -> ImmutableMultiDict:
+def define_link(subtype: str, source: int, destination: int) -> ImmutableMultiDict:
     return ImmutableMultiDict(
         [
             ("form_type", "link"),
             ("name", f"{subtype}: {source} to {destination}"),
-            ("type", "Link"),
             ("description", "description"),
             ("location", "Los Angeles"),
             ("vendor", "Juniper"),
-            ("type", subtype),
-            ("source_name", source),
-            ("destination_name", destination),
+            ("subtype", subtype),
+            ("source", source),
+            ("destination", destination),
         ]
     )
 
@@ -54,15 +52,15 @@ def test_manual_object_creation(user_client: FlaskClient) -> None:
         devices = fetch_all("Device")
         for source in devices[:3]:
             for destination in devices[:3]:
-                obj_dict = define_link(subtype, source.name, destination.name)
+                obj_dict = define_link(subtype, source.id, destination.id)
                 user_client.post("/update/link", data=obj_dict)
     assert len(fetch_all("Device")) == 44
     assert len(fetch_all("Link")) == 82
 
 
 def create_from_file(client: FlaskClient, file: str) -> None:
-    with open(client.application.path / "projects" / file, "rb") as f:
-        data = {"file": f, "replace": True}
+    with open(client.application.path / "projects" / "spreadsheets" / file, "rb") as f:
+        data = {"form_type": "excel_import", "file": f, "replace": False}
         client.post("/import_topology", data=data)
 
 

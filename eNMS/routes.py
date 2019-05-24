@@ -240,6 +240,7 @@ def filtering(table: str) -> dict:
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
+    print(page, request.form)
     f, *args = page.split("/")
     kwargs: dict = {}
     if f not in controller.valid_post_endpoints:

@@ -24,25 +24,21 @@ class SyslogUDPHandler(BaseRequestHandler):
     def handle(self) -> None:
         data = str(bytes.decode(self.request[0].strip()))
         source, _ = self.client_address
-        log_rules = []
-        for log_rule in fetch_all("LogRule"):
+        events = []
+        for event in fetch_all("Event"):
             source_match = (
-                search(log_rule.origin, source)
-                if log_rule.source_ip_regex
-                else log_rule.origin in source
+                search(event.origin, source)
+                if event.source_ip_regex
+                else event.origin in source
             )
             content_match = (
-                search(log_rule.name, data)
-                if log_rule.content_regex
-                else log_rule.name in data
+                search(event.name, data) if event.content_regex else event.name in data
             )
             if source_match and content_match:
-                log_rules.append(log_rule)
-                for job in log_rule.jobs:
+                events.append(event)
+                for job in event.jobs:
                     job.try_run()
-        if log_rules:
-            log = factory(
-                "Log", **{"source": source, "date": data, "log_rules": log_rules}
-            )
+        if events:
+            log = factory("Log", **{"source": source, "date": data, "events": events})
             Session.add(log)
             Session.commit()

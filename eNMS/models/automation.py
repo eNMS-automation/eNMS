@@ -28,7 +28,7 @@ from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch
 from eNMS.models.associations import (
     job_device_table,
-    job_log_rule_table,
+    job_event_table,
     job_pool_table,
     job_workflow_table,
 )
@@ -69,9 +69,7 @@ class Job(AbstractBase):
     )
     devices = relationship("Device", secondary=job_device_table, back_populates="jobs")
     pools = relationship("Pool", secondary=job_pool_table, back_populates="jobs")
-    log_rules = relationship(
-        "LogRule", secondary=job_log_rule_table, back_populates="jobs"
-    )
+    events = relationship("Event", secondary=job_event_table, back_populates="jobs")
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(
         String(SMALL_STRING_LENGTH), default="mail_feedback_notification"

@@ -1,5 +1,4 @@
 from collections import Counter
-from datetime import datetime
 from difflib import SequenceMatcher
 from git import Repo
 from logging import info

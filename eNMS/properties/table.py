@@ -63,7 +63,7 @@ server_table_properties = [
 
 log_table_properties: List[str] = ["time", "origin", "severity", "content"]
 
-log_rule_table_properties: List[str] = ["name"] + log_table_properties
+event_table_properties: List[str] = ["name"] + log_table_properties
 
 task_table_properties: List[str] = [
     "name",
@@ -86,7 +86,7 @@ table_properties: Dict[str, List[str]] = {
     "server": server_table_properties,
     "link": link_table_properties,
     "log": log_table_properties,
-    "logrule": log_rule_table_properties,
+    "event": event_table_properties,
     "pool": pool_table_properties,
     "service": service_table_properties,
     "task": task_table_properties,
@@ -114,7 +114,7 @@ filtering_properties: Dict[str, List[str]] = {
     "server": server_table_properties,
     "link": link_table_properties,
     "log": log_table_properties,
-    "logrule": log_rule_table_properties,
+    "event": event_table_properties,
     "pool": pool_table_properties,
     "service": job_filtering_properties,
     "task": task_table_properties,
@@ -128,7 +128,7 @@ table_fixed_columns: Dict[str, List[str]] = {
     "server": ["Edit", "Duplicate", "Delete"],
     "link": ["Edit", "Duplicate", "Delete"],
     "log": [],
-    "logrule": ["Edit", "Delete"],
+    "event": ["Edit", "Delete"],
     "service": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
     "task": ["Action", "Edit", "Duplicate", "Delete"],
     "user": ["Edit", "Duplicate", "Delete"],

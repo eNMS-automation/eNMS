@@ -16,18 +16,18 @@ job_pool_table: Table = Table(
     Column("job_id", Integer, ForeignKey("Job.id")),
 )
 
-log_rule_log_table: Table = Table(
-    "log_rule_log_association",
+event_log_table: Table = Table(
+    "event_log_association",
     Base.metadata,
     Column("log_id", Integer, ForeignKey("Log.id")),
-    Column("log_rule_id", Integer, ForeignKey("LogRule.id")),
+    Column("event_id", Integer, ForeignKey("Event.id")),
 )
 
-job_log_rule_table: Table = Table(
-    "job_log_rule_association",
+job_event_table: Table = Table(
+    "job_event_association",
     Base.metadata,
     Column("job_id", Integer, ForeignKey("Job.id")),
-    Column("log_rule_id", Integer, ForeignKey("LogRule.id")),
+    Column("event_id", Integer, ForeignKey("Event.id")),
 )
 
 job_workflow_table: Table = Table(

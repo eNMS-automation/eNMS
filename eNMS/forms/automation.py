@@ -106,7 +106,7 @@ def configure_form(cls: BaseForm) -> BaseForm:
 
 @configure_form
 class LogAutomationForm(BaseForm):
-    form_type = HiddenField(default="logrule")
+    form_type = HiddenField(default="event")
     id = HiddenField()
     name = StringField("Name")
     jobs = MultipleInstanceField("Jobs", instance_type="Job")

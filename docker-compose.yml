@@ -3,7 +3,8 @@ services:
   db:
     restart: always
     image: postgres:latest
-    env_file: .env-pgsql
+    environment:
+     - ENMS_DATABASE_URL=postgresql://enms:enms@db:5432/enms
     expose:
       - 5432
     networks:

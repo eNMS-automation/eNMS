@@ -105,7 +105,8 @@ def configure_form(cls: BaseForm) -> BaseForm:
 
 
 @configure_form
-class LogAutomationForm(BaseForm):
+class EventForm(BaseForm):
+    template = "event"
     form_type = HiddenField(default="event")
     id = HiddenField()
     name = StringField("Name")

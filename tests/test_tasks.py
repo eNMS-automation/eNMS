@@ -11,6 +11,8 @@ instant_task = ImmutableMultiDict(
     [
         ("form_type", "task"),
         ("name", "instant_task"),
+        ("frequency_unit", "seconds"),
+        ("scheduling_mode", "standard"),
         ("start-task", "run-now"),
         ("job", "2"),
     ]
@@ -20,6 +22,8 @@ scheduled_task = ImmutableMultiDict(
     [
         ("form_type", "task"),
         ("name", "scheduled_task"),
+        ("frequency_unit", "seconds"),
+        ("scheduling_mode", "standard"),
         ("start_date", "30/03/2018 19:10:13"),
         ("end_date", "06/04/2018 19:10:13"),
         ("frequency", "3600"),

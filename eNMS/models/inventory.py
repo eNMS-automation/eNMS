@@ -273,6 +273,7 @@ class Pool(AbstractPool):
     parent_cls = "AbstractPool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
+    last_modified = Column(String(SMALL_STRING_LENGTH), default="")
     description = Column(String(SMALL_STRING_LENGTH), default="")
     operator = Column(String(SMALL_STRING_LENGTH), default="all")
     devices = relationship(

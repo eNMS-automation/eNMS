@@ -45,6 +45,7 @@ class Job(AbstractBase):
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
+    last_modified = Column(String(SMALL_STRING_LENGTH), default="")
     description = Column(String(SMALL_STRING_LENGTH), default="")
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
@@ -443,7 +444,6 @@ class Workflow(Job):
     parent_cls = "Job"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     use_workflow_targets = Column(Boolean, default=True)
-    last_modified = Column(String(SMALL_STRING_LENGTH), default="")
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship("WorkflowEdge", back_populates="workflow")
 

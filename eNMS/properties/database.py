@@ -20,6 +20,7 @@ dont_track_changes = [
     "current_device",
     "current_job",
     "failed",
+    "last_modified",
     "logs",
     "positions",
     "results",
@@ -29,11 +30,12 @@ dont_track_changes = [
 dont_migrate: Dict[str, List[str]] = {
     "Device": ["jobs", "source", "destination", "pools"],
     "Link": ["pools"],
-    "Pool": ["object_number"],
+    "Pool": ["last_modified", "object_number"],
     "Service": [
         "sources",
         "destinations",
         "results",
+        "last_modified",
         "logs",
         "state",
         "tasks",

@@ -20,6 +20,7 @@ link_table_properties: List[str] = object_common_properties[1:] + [
 
 pool_table_properties: List[str] = [
     "name",
+    "last_modified",
     "description",
     "never_update",
     "longitude",
@@ -29,6 +30,7 @@ pool_table_properties: List[str] = [
 
 service_table_properties: List[str] = [
     "name",
+    "last_modified",
     "type",
     "description",
     "creator",
@@ -40,6 +42,7 @@ service_table_properties: List[str] = [
 
 workflow_table_properties: List[str] = [
     "name",
+    "last_modified",
     "description",
     "creator",
     "vendor",

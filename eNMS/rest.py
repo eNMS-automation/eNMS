@@ -8,8 +8,31 @@ from typing import Optional, Union
 
 from eNMS.concurrent import threaded_job
 from eNMS.controller import controller
+from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.extensions import auth, csrf
+
+
+class CreatePool(Resource):
+    decorators = [auth.login_required]
+
+    def post(self) -> dict:
+        data = request.get_json(force=True)
+        factory(
+            "Pool",
+            **{
+                "name": data["name"],
+                "devices": [
+                    fetch("Device", name=name).id for name in data.get("devices", "")
+                ],
+                "links": [
+                    fetch("Link", name=name).id for name in data.get("links", "")
+                ],
+                "never_update": True,
+            },
+        )
+        Session.commit()
+        return data
 
 
 class Heartbeat(Resource):
@@ -21,7 +44,43 @@ class Heartbeat(Resource):
         }
 
 
-class RestAutomation(Resource):
+class GetInstance(Resource):
+    decorators = [auth.login_required]
+
+    def get(self, cls: str, name: str) -> dict:
+        return fetch(cls, name=name).serialized
+
+    def delete(self, cls: str, name: str) -> dict:
+        result = delete(fetch(cls, name=name))
+        Session.commit()
+        return result
+
+
+class GetConfiguration(Resource):
+    decorators = [auth.login_required]
+
+    def get(self, name: str) -> str:
+        device = fetch("Device", name=name)
+        return device.configurations[max(device.configurations)]
+
+
+class UpdateInstance(Resource):
+    decorators = [auth.login_required]
+
+    def post(self, cls: str) -> dict:
+        result = factory(cls, **request.get_json(force=True)).serialized
+        Session.commit()
+        return result
+
+
+class Migrate(Resource):
+    decorators = [auth.login_required]
+
+    def post(self, direction: str) -> Optional[str]:
+        return getattr(controller, f"migration_{direction}")()
+
+
+class RunJob(Resource):
     decorators = [auth.login_required]
 
     def post(self) -> Union[str, dict]:
@@ -70,38 +129,6 @@ class RestAutomation(Resource):
             }
 
 
-class GetInstance(Resource):
-    decorators = [auth.login_required]
-
-    def get(self, cls: str, name: str) -> dict:
-        return fetch(cls, name=name).serialized
-
-    def delete(self, cls: str, name: str) -> dict:
-        return delete(fetch(cls, name=name))
-
-
-class GetConfiguration(Resource):
-    decorators = [auth.login_required]
-
-    def get(self, name: str) -> str:
-        device = fetch("Device", name=name)
-        return device.configurations[max(device.configurations)]
-
-
-class UpdateInstance(Resource):
-    decorators = [auth.login_required]
-
-    def post(self, cls: str) -> dict:
-        return factory(cls, **request.get_json(force=True)).serialized
-
-
-class Migrate(Resource):
-    decorators = [auth.login_required]
-
-    def post(self, direction: str) -> Optional[str]:
-        return getattr(controller, f"migration_{direction}")()
-
-
 class Topology(Resource):
     decorators = [auth.login_required]
 
@@ -120,8 +147,9 @@ class Topology(Resource):
 
 def configure_rest_api(app: Flask) -> None:
     api = Api(app, decorators=[csrf.exempt])
+    api.add_resource(CreatePool, "/rest/create_pool")
     api.add_resource(Heartbeat, "/rest/is_alive")
-    api.add_resource(RestAutomation, "/rest/run_job")
+    api.add_resource(RunJob, "/rest/run_job")
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
     api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")

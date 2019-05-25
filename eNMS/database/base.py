@@ -80,10 +80,10 @@ class AbstractBase(Base):
                 continue
             if relation["list"]:
                 properties[property] = [
-                    obj.id if export else obj.get_properties() for obj in value
+                    obj.name if export else obj.get_properties() for obj in value
                 ]
             else:
-                properties[property] = value.id if export else value.get_properties()
+                properties[property] = value.name if export else value.get_properties()
         if export:
             for property in no_migrate:
                 properties.pop(property, None)

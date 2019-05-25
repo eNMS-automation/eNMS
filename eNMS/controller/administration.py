@@ -11,8 +11,9 @@ from typing import Any, Union
 from yaml import dump, load, BaseLoader
 
 from eNMS.controller.base import BaseController
-from eNMS.database import Base
+from eNMS.database import Base, Session
 from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
+from eNMS.models import relationships
 
 
 class AdministrationController(BaseController):
@@ -83,10 +84,10 @@ class AdministrationController(BaseController):
 
     def migration_import(self, **kwargs: Any) -> str:
         status, types = "Import successful.", kwargs["import_export_types"]
-        workflows: list = []
-        edges: list = []
         if kwargs.get("empty_database_before_import", False):
-            delete_all(*types)
+            for type in types:
+                delete_all(type)
+                Session.commit()
         for cls in types:
             path = (
                 self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"
@@ -94,45 +95,42 @@ class AdministrationController(BaseController):
             with open(path, "r") as migration_file:
                 objects = load(migration_file, Loader=BaseLoader)
                 if cls == "Workflow":
-                    workflows = deepcopy(objects)
+                    workflow_jobs = {
+                        workflow["name"]: workflow.pop("jobs") for workflow in objects
+                    }
                 if cls == "WorkflowEdge":
-                    edges = deepcopy(objects)
-                    continue
+                    workflow_edges = deepcopy(objects)
+                for obj in objects:
+                    for property, relation in relationships[cls].items():
+                        if property not in obj:
+                            continue
+                        elif relation["list"]:
+                            obj[property] = [
+                                fetch(relation["model"], name=name).id
+                                for name in obj[property]
+                            ]
+                        else:
+                            obj[property] = fetch(
+                                relation["model"], name=obj[property]
+                            ).id
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "Service" else cls
-                    # 1) We cannot import workflow edges before workflow, because a
-                    # workflow edge is defined by the workflow it belongs to.
-                    # Therefore, we import workflow before workflow edges but
-                    # strip off the edges, because they do not exist at this stage.
-                    # Edges will be defined later on upon importing workflow edges.
-                    # 2) At this stage, we cannot import jobs, because if workflows
-                    # A (ID 1) and B (ID 2) are created, and B is added to A as a
-                    # subworkflow, we won't be able to create A as B is one of its
-                    # jobs and does not exist yet. To work around this, we will
-                    # strip off the jobs at this stage, and reimport workflows a
-                    # second time at the end.
-                    if cls == "Workflow":
-                        obj["edges"], obj["jobs"] = [], []
                     try:
                         factory(obj_cls, **obj)
+                        Session.commit()
                     except Exception as e:
                         info(f"{str(obj)} could not be imported ({str(e)})")
                         status = "Partial import (see logs)."
-        for workflow in workflows:
-            workflow["edges"] = []
-            try:
-                factory("Workflow", **workflow)
-            except Exception as e:
-                info(f"{str(workflow)} could not be imported ({str(e)})")
-                status = "Partial import (see logs)."
-        for edge in edges:
-            try:
-                factory("WorkflowEdge", **edge)
-            except Exception as e:
-                info(f"{str(edge)} could not be imported ({str(e)})")
-                status = "Partial import (see logs)."
-        if kwargs.get("empty_database_before_import", False):
-            self.create_default()  # type: ignore
+        for name, jobs in workflow_jobs.items():
+            fetch("Workflow", name=name).jobs = [
+                fetch("Job", name=name) for name in jobs
+            ]
+            Session.commit()
+        for edge in workflow_edges:
+            for property in ("source", "destination", "workflow"):
+                edge[property] = fetch("Job", name=edge[property]).id
+            factory("WorkflowEdge", **edge)
+            Session.commit()
         return status
 
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:

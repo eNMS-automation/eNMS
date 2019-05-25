@@ -28,10 +28,11 @@ dont_track_changes = [
 ]
 
 dont_migrate: Dict[str, List[str]] = {
-    "Device": ["jobs", "source", "destination", "pools"],
-    "Link": ["pools"],
-    "Pool": ["last_modified", "object_number"],
+    "Device": ["id", "jobs", "source", "destination", "pools"],
+    "Link": ["id", "pools"],
+    "Pool": ["id", "last_modified", "object_number"],
     "Service": [
+        "id",
         "sources",
         "destinations",
         "results",
@@ -45,6 +46,7 @@ dont_migrate: Dict[str, List[str]] = {
         "tasks",
     ],
     "Task": [
+        "id",
         "job_name",
         "next_run_time",
         "is_active",
@@ -52,6 +54,8 @@ dont_migrate: Dict[str, List[str]] = {
         "status",
     ],
     "Workflow": [
+        "edges",
+        "id",
         "sources",
         "destinations",
         "last_modified",
@@ -63,4 +67,5 @@ dont_migrate: Dict[str, List[str]] = {
         "workflows",
         "tasks",
     ],
+    "WorkflowEdge": ["id", "source_id", "destination_id", "workflow_id"],
 }

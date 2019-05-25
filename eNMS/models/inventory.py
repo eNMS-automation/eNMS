@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Union
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch, fetch_all
-from eNMS.models.associations import (
+from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
     pool_user_table,

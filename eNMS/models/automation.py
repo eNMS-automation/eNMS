@@ -26,7 +26,7 @@ from eNMS.concurrent import threaded_job, device_process
 from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch
-from eNMS.models.associations import (
+from eNMS.database.associations import (
     job_device_table,
     job_event_table,
     job_pool_table,

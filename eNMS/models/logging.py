@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from typing import List
 
 from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
-from eNMS.models.associations import job_event_table, event_log_table
+from eNMS.database.associations import job_event_table, event_log_table
 from eNMS.database.base import AbstractBase
 
 

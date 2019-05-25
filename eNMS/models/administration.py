@@ -6,7 +6,7 @@ from typing import Any, List
 
 
 from eNMS.database import SMALL_STRING_LENGTH
-from eNMS.models.associations import pool_user_table
+from eNMS.database.associations import pool_user_table
 from eNMS.database.base import AbstractBase
 
 

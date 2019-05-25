@@ -161,6 +161,7 @@ class PoolFilteringForm(BaseForm):
     form_type = HiddenField(default="pool_filtering")
     name = StringField("Name")
     description = StringField("Description")
+    last_modified = StringField("Last modified")
     longitude = FloatField("Longitude")
     latitude = FloatField("Latitude")
     operator = StringField("Match Condition")

@@ -57,6 +57,7 @@ class JobFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="job filtering")
     name = StringField("Name")
+    last_modified = StringField("Last modified")
     type = StringField("Service Type")
     description = StringField("Description")
     creator = StringField("Creator")

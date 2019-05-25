@@ -303,6 +303,7 @@ class BaseController:
     def update(self, cls: str, **kwargs: Any) -> dict:
         try:
             instance = factory(cls, **kwargs)
+            instance.last_modified = self.get_time()
             return instance.serialized
         except JSONDecodeError:
             return {"error": "Invalid JSON syntax (JSON field)"}

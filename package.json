@@ -4,15 +4,15 @@
   "description": "A enterprise-grade vendor-agnostic network automation platform.",
   "scripts": {
     "prettier": "prettier --config linting/.prettierrc --ignore-path linting/.prettierignore --check eNMS/**/*",
-    "lint": "eslint --config linting/.eslintrc --ignore-path linting/.eslintignore '.'"
+    "lint": "eslint --config linting/.eslintrc --ignore-path linting/.eslintignore ."
   },
   "engines": {
-    "node": "8.11.3"
+    "node": "12.3.1"
   },
   "devDependencies": {
-    "eslint": "5.0.0",
+    "eslint": "5.16.0",
     "eslint-config-google": "0.9.1",
-    "prettier": "^1.16.4"
+    "prettier": "^1.17.1"
   },
   "repository": {
     "type": "git",

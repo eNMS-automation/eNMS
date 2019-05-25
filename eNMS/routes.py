@@ -248,16 +248,13 @@ def route(page: str) -> Response:
     if form_type:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
-            print(form.errors)
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         kwargs = form_postprocessing(request.form)
     try:
-        print(f, args, kwargs)
         result = getattr(controller, f)(*args, **kwargs)
         Session.commit()
         return jsonify(result)
     except Exception as e:
-        print(str(e))
         if controller.enms_config_mode == "Develop":
             raise
         return jsonify({"error": str(e)})

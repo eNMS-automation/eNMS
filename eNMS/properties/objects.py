@@ -61,4 +61,4 @@ link_properties: List[str] = object_common_properties + [
     "destination",
 ]
 
-pool_link_properties: List[str] = link_properties[1:-2]
+pool_link_properties: List[str] = link_properties[:-2]

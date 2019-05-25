@@ -3,7 +3,12 @@ from typing import List
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database.functions import fetch, fetch_all
-from eNMS.properties.objects import device_subtypes, link_subtypes
+from eNMS.properties.objects import (
+    device_subtypes,
+    link_subtypes,
+    pool_link_properties,
+    pool_device_properties,
+)
 
 from tests.test_base import check_pages
 
@@ -102,33 +107,41 @@ def test_link_deletion(user_client: FlaskClient) -> None:
     assert len(fetch_all("Link")) == 38
 
 
-pool1 = ImmutableMultiDict(
-    [
-        ("name", "pool1"),
-        ("operator", "all"),
-        ("device_location", "france|spain"),
-        ("device_location_match", "regex"),
-        ("link_name", "link[1|2]."),
-        ("link_name_match", "regex"),
-    ]
-)
+pool1 = {
+    "form_type": "pool",
+    "name": "pool1",
+    "operator": "all",
+    "device_location": "france|spain",
+    "device_location_match": "regex",
+    "link_name": "link[1|2].",
+    "link_name_match": "regex",
+}
 
-pool2 = ImmutableMultiDict(
-    [
-        ("name", "pool2"),
-        ("operator", "all"),
-        ("device_location", "france"),
-        ("link_name", "l.*k\\S3"),
-        ("link_name_match", "regex"),
-    ]
-)
+pool2 = {
+    "form_type": "pool",
+    "name": "pool2",
+    "operator": "all",
+    "device_location": "france",
+    "link_name": "l.*k\\S3",
+    "link_name_match": "regex",
+}
+
+
+def create_pool(pool: dict) -> dict:
+    for property in pool_device_properties:
+        if f"device_{property}_match" not in pool:
+            pool[f"device_{property}_match"] = "inclusion"
+    for property in pool_link_properties:
+        if f"link_{property}_match" not in pool:
+            pool[f"link_{property}_match"] = "inclusion"
+    return pool
 
 
 @check_pages("table/device", "table/link", "view/network")
 def test_pool_management(user_client: FlaskClient) -> None:
     create_from_file(user_client, "europe.xls")
-    user_client.post("/update/pool", data=pool1)
-    user_client.post("/update/pool", data=pool2)
+    user_client.post("/update/pool", data=create_pool(pool1))
+    user_client.post("/update/pool", data=create_pool(pool2))
     p1, p2 = fetch("Pool", name="pool1"), fetch("Pool", name="pool2")
     assert len(p1.devices) == 21
     assert len(p1.links) == 20

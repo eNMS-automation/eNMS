@@ -123,7 +123,7 @@ def create_app(path: Path, config: str) -> Flask:
     configure_context_processor(app)
     configure_rest_api(app)
     configure_errors(app)
-    if app.mode != "Test":
+    if app.mode != "test":
         configure_assets(app)
     configure_authentication()
     controller.init_services()

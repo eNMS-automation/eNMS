@@ -59,7 +59,6 @@ class AbstractBase(Base):
 
     def get_properties(self, export: bool = False) -> dict:
         result = {}
-        print(model_properties[self.type])
         for property in model_properties[self.type]:
             value = getattr(self, property)
             if property in private_properties:

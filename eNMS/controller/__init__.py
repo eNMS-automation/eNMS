@@ -39,13 +39,13 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                 "name": "Devices only",
                 "description": "Devices only",
                 "link_name": "^$",
-                "link_name_regex": "y",
+                "link_name_match": "regex",
             },
             {
                 "name": "Links only",
                 "description": "Links only",
                 "device_name": "^$",
-                "device_name_regex": "y",
+                "device_name_match": "regex",
             },
         ):
             factory("Pool", **pool)

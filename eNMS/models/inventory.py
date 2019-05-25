@@ -43,30 +43,27 @@ class Object(AbstractBase):
     vendor = Column(String(SMALL_STRING_LENGTH), default="")
 
 
-CustomDevice: Any = (
-    type(
-        "CustomDevice",
-        (Object,),
-        {
-            "__tablename__": "CustomDevice",
-            "__mapper_args__": {"polymorphic_identity": "CustomDevice"},
-            "id": Column(Integer, ForeignKey("Object.id"), primary_key=True),
-            **{
-                property: Column(
-                    {
-                        "boolean": Boolean,
-                        "float": Float,
-                        "integer": Integer,
-                        "string": Text(LARGE_STRING_LENGTH),
-                    }[values["type"]],
-                    default=values["default"],
-                )
-                for property, values in controller.custom_properties.items()
-            },
+CustomDevice: Any = type(
+    "CustomDevice",
+    (Object,),
+    {
+        "__tablename__": "CustomDevice",
+        "__mapper_args__": {"polymorphic_identity": "CustomDevice"},
+        "parent_cls": "Object",
+        "id": Column(Integer, ForeignKey("Object.id"), primary_key=True),
+        **{
+            property: Column(
+                {
+                    "boolean": Boolean,
+                    "float": Float,
+                    "integer": Integer,
+                    "string": Text(LARGE_STRING_LENGTH),
+                }[values["type"]],
+                default=values["default"],
+            )
+            for property, values in controller.custom_properties.items()
         },
-    )
-    if controller.custom_properties
-    else Object
+    },
 )
 
 
@@ -75,7 +72,7 @@ class Device(CustomDevice):
     __tablename__ = "Device"
     __mapper_args__ = {"polymorphic_identity": "Device"}
     class_type = "device"
-    parent_cls = "Object"
+    parent_cls = "CustomDevice"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
     operating_system = Column(String(SMALL_STRING_LENGTH), default="")
     os_version = Column(String(SMALL_STRING_LENGTH), default="")
@@ -273,6 +270,7 @@ AbstractPool: Any = type(
 class Pool(AbstractPool):
 
     __tablename__ = type = "Pool"
+    parent_cls = "AbstractPool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
     description = Column(String(SMALL_STRING_LENGTH), default="")

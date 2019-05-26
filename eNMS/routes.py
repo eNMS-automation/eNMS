@@ -154,8 +154,15 @@ def view(view_type: str) -> dict:
 @monitor_requests
 def workflow_builder() -> dict:
     workflow = fetch("Workflow", id=session.get("workflow", None))
+    service_table_form = ServiceTableForm(request.form)
+    service_table_form.services.choices = sorted(
+        (service, service)
+        for service in models
+        if service != "Service" and service.endswith("Service")
+    )
     return render_template(
         f"pages/workflow_builder.html",
+        service_table_form=service_table_form,
         **{
             "endpoint": "workflow_builder",
             "workflow": workflow.serialized if workflow else None,

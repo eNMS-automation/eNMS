@@ -20,9 +20,9 @@
           <div style="min-height:90vh;" class="x_content">
             <div class="page-title">
               {% if type == "service" %}
-              <button style="background:transparent; border:none; color:transparent; width: 20vw;">
-                {{ service_table_form.services(id="service-type", class="form-control") }}
-              </button>
+                <button style="background:transparent; border:none; color:transparent; width: 20vw;">
+                  {{ service_table_form.services(id="service-type", class="form-control") }}
+                </button>
               {% endif %}
               {% if type not in ("configuration", "log") %}
                 {% set func = "openServicePanel" if type == "service" else "showTypePanel" %}

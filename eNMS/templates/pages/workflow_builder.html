@@ -12,13 +12,21 @@
       <div class="col-md-12 col-xs-12">
         <div class="x_panel">
           <div class="x_content">
-            <div class="btn-group" style="z-index:2; position: absolute; top:10px;">  
+            <div class="btn-group" style="z-index:2; position: absolute; right: 5vw">  
               <strong><p id="status"></p></strong>
               <strong><p id="current-job"></p></strong>
               <strong><p id="current-device"></p></strong>
             </div>
-            <div class="btn-group" style="z-index:2; position: absolute; left:35vw; top:10px;">
+            <div class="btn-group" style="z-index:2; position: absolute; left:35vw;">
               <select id="current-workflow" class="form-control"></select>
+            </div>
+            <div>
+              <button style="background:transparent; border:none; color:transparent; width: 20vw;">
+                {{ service_table_form.services(id="service-type", class="form-control") }}
+              </button>
+              <button class="btn btn-primary btn-file" onclick="openServicePanel()">
+                Create
+              </button>
             </div>
             <div id="network" style="height:80vh; width:100%;></div>
             <div class="ln_solid"></div>

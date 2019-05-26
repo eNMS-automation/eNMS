@@ -419,6 +419,9 @@ function getWorkflowState() {
         );
       }
     }
+    $("#current-workflow").selectpicker({
+      liveSearch: true,
+    });
   });
   getWorkflowState();
 })();

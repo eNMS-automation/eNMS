@@ -311,7 +311,7 @@ function resumeTask(id) {
 }
 
 (function() {
-  if (page == "table/service") {
+  if (page == "table/service" || page == "workflow_builder") {
     $("#service-type").selectpicker({
       liveSearch: true,
     });

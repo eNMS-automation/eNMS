@@ -61,17 +61,15 @@ function saveService(service) {
  * @return {obj}.
  */
 function parseObject(obj) {
-  let objClone = JSON.parse(JSON.stringify(obj));
-  for (let k in objClone) {
-    if (typeof objClone[k] === "object" && obj[k] !== null) {
-      parseObject(objClone[k]);
-    } else if (objClone.hasOwnProperty(k) && typeof objClone[k] === "string") {
-      objClone[k] = objClone[k]
-        .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
-        .split("\n");
+  for (let k in obj) {
+    if (typeof obj[k] === "object" && obj[k] !== null) {
+      parseObject(obj[k]);
+    } else if (obj.hasOwnProperty(k) && typeof obj[k] === "string") {
+      const lines = obj[k].replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").split("\n");
+      if (lines.length > 1) obj[k] = lines;
     }
   }
-  return objClone;
+  return obj;
 }
 
 /**
@@ -90,9 +88,11 @@ function displayResult(id, results) {
     $(`#display_results-${id}`).text("No results yet.");
   } else if ($(`input[name="type"]:checked`).val() == "json") {
     $(`#display_results-${id}`).empty();
-    let container = document.getElementById(`display_results-${id}`);
-    const options = { mode: "view" };
-    new JSONEditor(container, options, parseObject(value));
+    new JSONEditor(
+      document.getElementById(`display_results-${id}`),
+      { mode: "view" },
+      parseObject(JSON.parse(JSON.stringify(value)))
+    );
   } else {
     $(`#display_results-${id}`).html(
       `<pre>${JSON.stringify(

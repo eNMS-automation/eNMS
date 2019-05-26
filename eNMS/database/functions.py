@@ -8,7 +8,7 @@ from eNMS.exceptions import InstanceNotFoundException
 from eNMS.models import models
 
 
-def fetch(model: str, allow_none=True, **kwargs: Any) -> Any:
+def fetch(model: str, allow_none=False, **kwargs: Any) -> Any:
     result = Session.query(models[model]).filter_by(**kwargs).first()
     if result or allow_none:
         return Session.query(models[model]).filter_by(**kwargs).first()
@@ -56,7 +56,7 @@ def factory(cls_name: str, **kwargs: Any) -> Any:
     if instance_id:
         instance = fetch(cls_name, id=instance_id)
     elif "name" in kwargs:
-        instance = fetch(cls_name, name=kwargs["name"])
+        instance = fetch(cls_name, allow_none=True, name=kwargs["name"])
     if instance:
         instance.update(**kwargs)
     else:

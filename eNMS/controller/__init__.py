@@ -21,7 +21,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         )
 
     def create_default_users(self) -> None:
-        if not fetch("User", name="admin"):
+        if not fetch("User", allow_none=True, name="admin"):
             factory(
                 "User",
                 **{
@@ -152,7 +152,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             },
         ]
         for task in tasks:
-            if not fetch("Task", name=task["name"]):
+            if not fetch("Task", allow_none=True, name=task["name"]):
                 factory("Task", **task)
 
     def init_parameters(self) -> None:

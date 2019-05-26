@@ -43,7 +43,7 @@ def register_modules(app: Flask) -> None:
 def configure_login_manager(app: Flask) -> None:
     @login_manager.user_loader
     def user_loader(id: int) -> User:
-        return fetch("User", id=id)
+        return fetch("User", allow_none=True, id=id)
 
     @login_manager.request_loader
     def request_loader(request: Request) -> User:

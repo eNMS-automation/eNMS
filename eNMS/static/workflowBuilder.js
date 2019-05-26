@@ -298,6 +298,7 @@ Object.assign(action, {
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => runJob(job.id),
   Results: (job) => showResultsPanel(job.id, job.label),
+  "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () => showResultsPanel(workflow.id, workflow.name),
   "Workflow Logs": () => showLogs(workflow.id),

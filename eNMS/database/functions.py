@@ -4,11 +4,16 @@ from sqlalchemy import func
 from typing import Any, Generator, List, Tuple
 
 from eNMS.database import Session
+from eNMS.exceptions import InstanceNotFoundException
 from eNMS.models import models
 
 
-def fetch(model: str, **kwargs: Any) -> Any:
-    return Session.query(models[model]).filter_by(**kwargs).first()
+def fetch(model: str, allow_none=True, **kwargs: Any) -> Any:
+    result = Session.query(models[model]).filter_by(**kwargs).first()
+    if result or allow_none:
+        return Session.query(models[model]).filter_by(**kwargs).first()
+    else:
+        raise InstanceNotFoundException
 
 
 def fetch_all(model: str) -> Tuple[Any]:

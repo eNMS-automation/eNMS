@@ -271,6 +271,30 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                 "multiprocessing": True,
             },
             {
+                "type": "NetmikoTextfsmExtractionService",
+                "name": "netmiko_textfsm_extraction",
+                "description": "Variables extraction with Netmiko/TextFSM",
+                "driver": "arista_eos",
+                "fast_cli": True,
+                "command": "show ip route",
+                "textfsm_template": (
+                    "Value Filldown PROTOCOL (\S+\s\S+?|\w?)\n"
+                    "Value Filldown NETWORK (\d+.\d+.\d+.\d+)\n"
+                    "Value Filldown MASK (\d+)\n"
+                    "Value DISTANCE (\d+)\n"
+                    "Value METRIC (\d+)\n"
+                    "Value DIRECT (directly)\n"
+                    "Value Required NEXT_HOP (connected|\d+\.\d+\.\d+\.\d+)\n"
+                    "Value INTERFACE (\S+)\n\n"
+                    "Start\n"
+                    "  ^\s+${PROTOCOL}\s+${NETWORK}/${MASK}\s+"
+                    "(?:\[${DISTANCE}/${METRIC}\]|is\s+${DIRECT})(?:.+?)"
+                    "${NEXT_HOP},\s+${INTERFACE}$$ -> Next.Record"
+                ),
+                "devices": [fetch("Device", name="Washington").id],
+                "multiprocessing": True,
+            },
+            {
                 "type": "NapalmBackupService",
                 "name": "napalm_configuration_backup",
                 "description": "Test Configuration Management",

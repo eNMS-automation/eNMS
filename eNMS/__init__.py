@@ -47,7 +47,7 @@ def configure_login_manager(app: Flask) -> None:
 
     @login_manager.request_loader
     def request_loader(request: Request) -> User:
-        return fetch("User", name=request.form.get("name"))
+        return fetch("User", allow_none=True, name=request.form.get("name"))
 
 
 def configure_database(app: Flask) -> None:

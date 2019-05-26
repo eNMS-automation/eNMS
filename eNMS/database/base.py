@@ -47,7 +47,6 @@ class AbstractBase(Base):
     def update(self, **kwargs: Any) -> None:
         relation = relationships[self.__tablename__]
         modified = False
-        print(kwargs)
         for property, value in kwargs.items():
             if not hasattr(self, property):
                 continue
@@ -61,7 +60,12 @@ class AbstractBase(Base):
                 value = value not in (False, "false")
             old_value = getattr(self, property)
             if old_value != value:
-                if isinstance(value, list) and set(value) == set(old_value):
+                print(property, value, old_value)
+                if (
+                    isinstance(value, list)
+                    and old_value
+                    and set(value) == set(old_value)
+                ):
                     continue
                 modified = True
                 setattr(self, property, value)

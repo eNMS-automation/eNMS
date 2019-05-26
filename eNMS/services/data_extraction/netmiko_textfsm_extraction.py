@@ -1,4 +1,6 @@
+from io import StringIO
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
+from textfsm import TextFSM
 from wtforms import (
     BooleanField,
     FloatField,
@@ -23,7 +25,7 @@ class NetmikoTextfsmExtractionService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     command = Column(String(SMALL_STRING_LENGTH), default="")
-    template = Column(Text(LARGE_STRING_LENGTH), default="")
+    textfsm_template = Column(Text(LARGE_STRING_LENGTH), default="")
     driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
@@ -37,15 +39,17 @@ class NetmikoTextfsmExtractionService(Service):
         netmiko_handler = self.netmiko_connection(device)
         command = self.sub(self.command, locals())
         self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
-        result = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
+        output = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
+        textfsm_template = TextFSM(StringIO(self.textfsm_template))
+        result = textfsm_template.ParseText(output)
         netmiko_handler.disconnect()
-        return {"result": result, "success": True}
+        return {"result": result, "output": output, "success": True}
 
 
-class NetmikoDataExtractionForm(ServiceForm):
+class NetmikoTextfsmExtractionForm(ServiceForm):
     form_type = HiddenField(default="NetmikoTextfsmExtractionService")
     command = StringField()
-    template = StringField(widget=TextArea(), render_kw={"rows": 5})
+    textfsm_template = StringField(widget=TextArea(), render_kw={"rows": 5})
     driver = SelectField(choices=controller.NETMIKO_DRIVERS)
     use_device_driver = BooleanField(default=True)
     fast_cli = BooleanField()

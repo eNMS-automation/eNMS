@@ -27,6 +27,7 @@ slackclient>=1.3,<2
 simplekml
 sqlalchemy
 tacacs_plus
+textfsm
 wtforms
 xlrd
 xlwt

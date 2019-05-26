@@ -1,0 +1,111 @@
+## Renaming
+
+NetmikoDataExtractionService -> NetmikoRegexExtractionService
+
+## New services
+
+
+
+## Panel instead of Bootstrap modals
+
+I am now using panels everywhere instead of modals.
+Modals are blocking, which prevents from displaying two object modals of the same window
+at the same time (for example, to compare device/service/workflow properties...).
+Panels are more flexible, you can change the size, "dock" them, and minimize them.
+
+## Filtering system
+
+The table filtering system no longer uses inputs above table headers.
+There are several reasons for this change:
+
+- less resource-intensive for the server, a search is only triggered when the filter button is pressed, and not
+everytime a key is pressed like before.
+
+- possibility the search with criteria even if they are not table properties:
+* filter by pools for links/device/configuration...
+* filter by OS in the configuration table, even though OS is not a property of the configuration table
+* filter by configuration in the device table, even though configuration is not a property of the device table, ETC ETC..)
+
+- right now, you cannot choose whether you filter by "equality" (A == B), "inclusion" (A in B), or regex; it's only inclusion.
+Eventually, I want to add equality AND regex for all properties in this filter window... similarly to what already exists for pools, but for table filtering.
+
+- in the view, you can now filter links and devices with those table.
+That means filter the view per device pools, configuration, model, OS, link subtype, pools etc...
+That wasn't possible before.
+
+- this was messing up with the alignment of the table headers (bug you've already reported).
+
+## String lengths
+
+- Instead of having all string length to 255, there are now two string length: 255 and 2 ** 10.
+These lengths are default values, you can change them by setting the env variables:
+"SMALL_STRING_LENGTH" and "LARGE_STRING_LENGTH".
+The large string length is used where it makes sense (content match, etc).
+
+## Dependencies
+
+- Added Webassets: before, all javascript dependencies were served independently, which means a lot
+of calls to the server were made to retrieve them.
+Now all dependencies are automatically bundled in a single js file.
+- Added Flask cache: pages that are static are now cached by eNMS (performance improvement).
+- Removed Flask-SQLalchemy. Was obfuscatign the way SQLalchemy works (wrt session management in particular),
+now we use SQLalchemy directly.
+
+## NSOT vs eNMS
+
+We discussed one of the things NSOT was doing compared to eNMS was:
+"a)  NSOT keeps a well defined changelog for each device.
+This serves as a record in the case that an inventory change causes a device to fail, etc"
+There is a now a changelog in eNMS too.
+Each time you create, update or delete anything, a log is created.
+If it is an update, eNMS tells you exactly which fields were updated (old and new values),
+when, and by whom.
+
+## Switch from Multithreading to Multiprocessing.
+
+Multiprocessing is now actual multiprocessing and not multithreading, as we discussed.
+It works fine with SQL Alchemy, but I'm having trouble making it work with MySQL. I always had, so I'm
+not sure this is specific to multiprocessing.
+Switching to multiprocessing is the first step to using a task queue like Dramatiq or Celery, because
+there is no pickling issue anymore (I'm using ID instead of actual object instances).
+
+## Real-time update
+
+Real-time update was causing many issues with multithreading, but it's even worse with multiprocessing.
+I couldn't find a way to make it work, so I removed the database commit inside a process.
+Instead, multiple processes will share a Manager.list() "log" variable when logs of all processes will be stored,
+but the content of that list will only be available when the run is finished.
+This means that:
+- when multiprocessing is disabled, the real-time logging system still works: a window pops up and display the results
+in real-time.
+- otherwise, with multiprocessing enabled, you can only see the logs at the end of the run.
+
+The way I see it, this isn't such a big deal: having logs displayed in real-time is mainly for troubleshooting purposes,
+when you're testing a service/workflow. When you know the service is working alright, you use multiprocessing and
+you don't need real-time logs; this is more like a production use-case.
+
+## From the TODO list
+
+- multiprocssing. currently using ThreadPool, which create paramiko "broken pipe' and very high pool count outside of ien-ap and inside.
+Consider switching to standard pool.
+>>> Done. Next step would be to add dramatiq/celery support. That being said, I don't think it will 
+actually prevent the paramiko broken pipe issue. I've run some tests where the last message I get is "[chan 0] EOF received (0)",
+and then nothing happens. I don't really see much improvement compared to multithreading... but since we needed an implementation
+where args can be pickled for the future task queue implementation, this is a step in the right direction anyway.
+
+- Ability to create a Pool given a list of devices
+>>> Done. This is a new endpoint in the REST API called "create_pool", you can create a pool by sending a POST request
+where the payload contains the name of the pools, and two lists: devices (list of device names) and links (link names).
+
+- Add 'Type of Service' label under the 'Edit service xXxxxxxxx' Label on Steps1,2,3,4 of Service Creation Panel
+>>> Done.
+
+- propagate sub_dict variable substitution to a) header and param fields of rest_call service, and b) to other services that have dictionary_match fields
+>>> Done, I think I added it everywhere where it makes sense.
+
+- Workflow column headers are OFF and don't align
+>>> Done.
+
+- iEN-AP gui Automation/Service Mangement - "Duplicate" feature is behaving like the "Edit" feature, (i.e. the service is being modified not duplicated when "Duplicate" is used). Observed on VM 65.224.102.89, which was built on April 13, 2019, 7:51 p.m & 65.224.102.73, which was built on April 23, 2019, 5:17 p.m.
+>>> Should be fixed.
+

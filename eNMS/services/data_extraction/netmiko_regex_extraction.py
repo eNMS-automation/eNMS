@@ -16,9 +16,9 @@ from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
 
-class NetmikoDataExtractionService(Service):
+class NetmikoRegexExtractionService(Service):
 
-    __tablename__ = "NetmikoDataExtractionService"
+    __tablename__ = "NetmikoRegexExtractionService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
@@ -38,7 +38,7 @@ class NetmikoDataExtractionService(Service):
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {"polymorphic_identity": "NetmikoDataExtractionService"}
+    __mapper_args__ = {"polymorphic_identity": "NetmikoRegexExtractionService"}
 
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
@@ -67,7 +67,7 @@ class NetmikoDataExtractionService(Service):
 
 
 class NetmikoDataExtractionForm(ServiceForm):
-    form_type = HiddenField(default="NetmikoDataExtractionService")
+    form_type = HiddenField(default="NetmikoRegexExtractionService")
     variable1 = StringField()
     command1 = StringField()
     regular_expression1 = StringField()

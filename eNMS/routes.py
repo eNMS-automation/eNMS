@@ -153,7 +153,7 @@ def view(view_type: str) -> dict:
 @blueprint.route("/workflow_builder")
 @monitor_requests
 def workflow_builder() -> dict:
-    workflow = fetch("Workflow", id=session.get("workflow", None))
+    workflow = fetch("Workflow", allow_none=True, id=session.get("workflow", None))
     service_table_form = ServiceTableForm(request.form)
     service_table_form.services.choices = sorted(
         (service, service)

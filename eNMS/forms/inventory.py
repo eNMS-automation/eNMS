@@ -7,6 +7,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
+from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
@@ -172,6 +173,8 @@ class PoolObjectsForm(BaseForm):
     form_type = HiddenField(default="pool_objects")
     devices = MultipleInstanceField("Devices", instance_type="Device")
     links = MultipleInstanceField("Links", instance_type="Link")
+    string_devices = StringField(widget=TextArea(), render_kw={"rows": 5})
+    string_links = StringField(widget=TextArea(), render_kw={"rows": 5})
 
 
 class ExcelImportForm(BaseForm):

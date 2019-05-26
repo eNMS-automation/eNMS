@@ -217,8 +217,20 @@ class InventoryController(BaseController):
 
     def save_pool_objects(self, pool_id: int, **kwargs: Any) -> dict:
         pool = fetch("Pool", id=pool_id)
-        pool.devices = objectify("Device", kwargs["devices"])
-        pool.links = objectify("Link", kwargs["links"])
+        for obj_type in ("device", "link"):
+            string_value = kwargs[f"string_{obj_type}s"]
+            setattr(
+                pool,
+                f"{obj_type}s",
+                (
+                    [
+                        fetch(obj_type, name=name)
+                        for name in string_value.strip().split(",")
+                    ]
+                    if string_value
+                    else objectify(obj_type, kwargs[f"{obj_type}s"])
+                ),
+            )
         return pool.serialized
 
     def update_pools(self, pool_id: str) -> None:

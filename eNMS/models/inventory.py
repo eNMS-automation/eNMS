@@ -37,7 +37,6 @@ class Object(AbstractBase):
     hidden = Column(Boolean, default=False)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
     subtype = Column(String(SMALL_STRING_LENGTH), default="")
-    icon = Column(String(SMALL_STRING_LENGTH), default="")
     description = Column(String(SMALL_STRING_LENGTH), default="")
     model = Column(String(SMALL_STRING_LENGTH), default="")
     location = Column(String(SMALL_STRING_LENGTH), default="")
@@ -75,6 +74,7 @@ class Device(CustomDevice):
     class_type = "device"
     parent_cls = "CustomDevice"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
+    icon = Column(String(SMALL_STRING_LENGTH), default="")
     operating_system = Column(String(SMALL_STRING_LENGTH), default="")
     os_version = Column(String(SMALL_STRING_LENGTH), default="")
     ip_address = Column(String(SMALL_STRING_LENGTH), default="")
@@ -164,6 +164,7 @@ class Link(Object):
     class_type = "link"
     parent_cls = "Object"
     id = Column(Integer, ForeignKey("Object.id"), primary_key=True)
+    color = Column(String(SMALL_STRING_LENGTH), default="")
     source_id = Column(Integer, ForeignKey("Device.id"))
     destination_id = Column(Integer, ForeignKey("Device.id"))
     source = relationship(
@@ -188,7 +189,8 @@ class Link(Object):
         node_properties = ("id", "longitude", "latitude")
         return {
             **{
-                property: getattr(self, property) for property in ("id", "name", "icon")
+                property: getattr(self, property)
+                for property in ("id", "name", "color")
             },
             **{
                 f"source_{property}": getattr(self.source, property)

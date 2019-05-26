@@ -15,13 +15,13 @@ object_common_properties: List[str] = [
     "name",
     "description",
     "subtype",
-    "icon",
     "model",
     "location",
     "vendor",
 ]
 
 device_properties = [
+    "icon",
     "operating_system",
     "os_version",
     "netmiko_driver",
@@ -38,6 +38,7 @@ pool_device_properties: List[str] = (
 )
 
 link_properties: List[str] = object_common_properties + [
+    "color",
     "source_name",
     "destination_name",
     "source",

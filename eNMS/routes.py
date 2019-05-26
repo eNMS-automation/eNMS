@@ -27,7 +27,6 @@ from eNMS.forms.automation import ServiceTableForm
 from eNMS.extensions import cache
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
-from eNMS.properties.objects import link_colors
 from eNMS.properties.table import (
     filtering_properties,
     table_fixed_columns,
@@ -145,8 +144,7 @@ def table(table_type: str) -> dict:
 @monitor_requests
 def view(view_type: str) -> dict:
     return render_template(
-        f"pages/view.html",
-        **{"endpoint": "view", "link_colors": link_colors, "view_type": view_type},
+        f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
     )
 
 

@@ -5,7 +5,6 @@ alertify: false
 call: false
 fCall: false
 L: false
-linkColors: false
 showPoolView: false
 showTypePanel: false
 viewType: false
@@ -272,7 +271,7 @@ function createLink2d(link) {
   );
   const pointList = [pointA, pointB];
   const polyline = new L.PolylineClusterable(pointList, {
-    color: linkColors[link.icon],
+    color: link.color,
     weight: 3,
     opacity: 1,
     smoothFactor: 1,

@@ -8,7 +8,7 @@ from eNMS.exceptions import InstanceNotFoundException
 from eNMS.models import models
 
 
-def fetch(model: str, allow_none=False, **kwargs: Any) -> Any:
+def fetch(model: str, allow_none: bool = False, **kwargs: Any) -> Any:
     result = Session.query(models[model]).filter_by(**kwargs).first()
     if result or allow_none:
         return Session.query(models[model]).filter_by(**kwargs).first()

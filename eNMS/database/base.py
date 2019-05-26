@@ -60,7 +60,6 @@ class AbstractBase(Base):
                 value = value not in (False, "false")
             old_value = getattr(self, property)
             if old_value != value:
-                print(property, value, old_value)
                 if (
                     isinstance(value, list)
                     and old_value

@@ -32,8 +32,6 @@ from eNMS.models import models
 from eNMS.properties.objects import (
     device_properties,
     device_icons,
-    link_colors,
-    link_icons,
     pool_device_properties,
 )
 from eNMS.syslog import SyslogServer
@@ -171,12 +169,6 @@ class BaseController:
             path_icon = f"{self.path}/eNMS/views/static/images/2D/{icon}.gif"
             point_style.iconstyle.icon.href = path_icon
             self.google_earth_styles[icon] = point_style
-        for icon in link_icons:
-            line_style = Style()
-            color = link_colors[icon]
-            kml_color = "#ff" + color[-2:] + color[3:5] + color[1:3]
-            line_style.linestyle.color = kml_color
-            self.google_earth_styles[icon] = line_style
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):

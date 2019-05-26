@@ -5,7 +5,7 @@ from pynetbox import api as netbox_api
 from requests import get as http_get
 from sqlalchemy import and_
 from subprocess import Popen
-from simplekml import Kml
+from simplekml import Kml, Style
 from typing import Any, BinaryIO, List, Union
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
@@ -94,7 +94,9 @@ class InventoryController(BaseController):
                 (link.source.longitude, link.source.latitude),
                 (link.destination.longitude, link.destination.latitude),
             ]
-            line.style = self.google_earth_styles[link.icon]
+            line.style = Style()
+            kml_color = "#ff" + link.color[-2:] + link.color[3:5] + link.color[1:3]
+            line.style.linestyle.color = kml_color
             line.style.linestyle.width = kwargs["line_width"]
         filepath = self.path / "projects" / "google_earth" / f'{kwargs["name"]}.kmz'
         kml_file.save(filepath)

@@ -13,8 +13,8 @@ from eNMS.controller import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField, InstanceField
 from eNMS.properties.objects import (
-    device_subtypes,
-    link_subtypes,
+    device_icons,
+    link_icons,
     pool_link_properties,
     pool_device_properties,
 )
@@ -71,6 +71,7 @@ class ObjectForm(BaseForm):
     form_type = HiddenField(default="object")
     name = StringField("Name")
     description = StringField("Description")
+    subtype = StringField("Subtype")
     location = StringField("Location")
     vendor = StringField("Vendor")
     model = StringField("Model")
@@ -81,6 +82,7 @@ class DeviceFilteringForm(ObjectFilteringForm, ObjectForm):
     form_type = HiddenField(default="device_filtering")
     current_configuration = StringField("Current Configuration")
     subtype = StringField("Subtype")
+    icon = StringField("Icon")
     ip_address = StringField("IP Address")
     port = StringField("Port")
     operating_system = StringField("Operating System")
@@ -104,7 +106,7 @@ class DeviceForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="device")
     id = HiddenField()
-    subtype = SelectField("Subtype", choices=tuple(device_subtypes.items()))
+    icon = SelectField("Icon", choices=tuple(device_icons.items()))
     ip_address = StringField("IP address")
     port = IntegerField("Port", default=22)
     operating_system = StringField("Operating System")
@@ -126,7 +128,7 @@ class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
-    subtype = SelectField("Subtype", choices=tuple(link_subtypes.items()))
+    icon = SelectField("Icon", choices=tuple(link_icons.items()))
     source = InstanceField("Source", instance_type="Device")
     destination = InstanceField("Destination", instance_type="Device")
 
@@ -134,6 +136,7 @@ class LinkForm(ObjectForm):
 class LinkFilteringForm(ObjectForm, ObjectFilteringForm):
     form_type = HiddenField(default="link_filtering")
     subtype = StringField("Subtype")
+    icon = StringField("Icon")
     source_name = StringField("Source")
     destination_name = StringField("Destination")
 
@@ -188,7 +191,6 @@ class OpenNmsForm(BaseForm):
     form_type = HiddenField(default="opennms")
     opennms_rest_api = StringField("REST API URL")
     opennms_devices = StringField("Devices")
-    subtype = SelectField("Subtype", choices=tuple(device_subtypes.items()))
     opennms_login = StringField("Login")
     password = PasswordField("Password")
 
@@ -198,14 +200,12 @@ class NetboxForm(BaseForm):
     form_type = HiddenField(default="netbox")
     netbox_address = StringField("URL", default="http://0.0.0.0:8000")
     netbox_token = PasswordField("Token")
-    netbox_type = SelectField(choices=tuple(device_subtypes.items()))
 
 
 class LibreNmsForm(BaseForm):
     action = "queryLibreNMS"
     form_type = HiddenField(default="librenms")
     librenms_address = StringField("URL", default="http://librenms.example.com")
-    librenms_type = SelectField("Subtype", choices=tuple(device_subtypes.items()))
     librenms_token = PasswordField("Token")
 
 

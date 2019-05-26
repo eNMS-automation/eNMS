@@ -86,7 +86,7 @@ class InventoryController(BaseController):
         for device in fetch_all("Device"):
             point = kml_file.newpoint(name=device.name)
             point.coords = [(device.longitude, device.latitude)]
-            point.style = self.google_earth_styles[device.subtype]
+            point.style = self.google_earth_styles[device.icon]
             point.style.labelstyle.scale = kwargs["label_size"]
         for link in fetch_all("Link"):
             line = kml_file.newlinestring(name=link.name)
@@ -94,7 +94,7 @@ class InventoryController(BaseController):
                 (link.source.longitude, link.source.latitude),
                 (link.destination.longitude, link.destination.latitude),
             ]
-            line.style = self.google_earth_styles[link.subtype]
+            line.style = self.google_earth_styles[link.icon]
             line.style.linestyle.width = kwargs["line_width"]
         filepath = self.path / "projects" / "google_earth" / f'{kwargs["name"]}.kmz'
         kml_file.save(filepath)
@@ -124,7 +124,6 @@ class InventoryController(BaseController):
                 **{
                     "name": device.name,
                     "ip_address": str(device_ip).split("/")[0],
-                    "subtype": kwargs["netbox_type"],
                     "longitude": 0.0,
                     "latitude": 0.0,
                 },
@@ -141,7 +140,6 @@ class InventoryController(BaseController):
                 **{
                     "name": device["hostname"],
                     "ip_address": device["ip"] or device["hostname"],
-                    "subtype": kwargs["librenms_type"],
                     "longitude": 0.0,
                     "latitude": 0.0,
                 },
@@ -166,7 +164,6 @@ class InventoryController(BaseController):
                 "os_version": device["assetRecord"].get("sysDescription", ""),
                 "longitude": device["assetRecord"].get("longitude", 0.0),
                 "latitude": device["assetRecord"].get("latitude", 0.0),
-                "subtype": kwargs["subtype"],
             }
             for device in json_devices
         }

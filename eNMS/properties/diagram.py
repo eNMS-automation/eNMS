@@ -2,7 +2,13 @@ from typing import Dict, List
 
 diagram_classes = ["Device", "Link", "User", "Service", "Workflow", "Task"]
 
-object_diagram_properties: List[str] = ["model", "vendor", "subtype", "location"]
+object_diagram_properties: List[str] = [
+    "model",
+    "vendor",
+    "subtype",
+    "icon",
+    "location",
+]
 
 device_diagram_properties: List[str] = object_diagram_properties + [
     "operating_system",

@@ -20,7 +20,7 @@ function deviceToNode(device) {
   const logicalDevice = {
     id: device.id,
     label: device.name,
-    image: `/static/images/2D/${device.subtype}.gif`,
+    image: `/static/images/2D/${device.icon}.gif`,
     shape: "image",
   };
   logicalDevices[device.id] = device;

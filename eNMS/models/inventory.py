@@ -37,6 +37,7 @@ class Object(AbstractBase):
     hidden = Column(Boolean, default=False)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
     subtype = Column(String(SMALL_STRING_LENGTH), default="")
+    icon = Column(String(SMALL_STRING_LENGTH), default="")
     description = Column(String(SMALL_STRING_LENGTH), default="")
     model = Column(String(SMALL_STRING_LENGTH), default="")
     location = Column(String(SMALL_STRING_LENGTH), default="")
@@ -98,7 +99,7 @@ class Device(CustomDevice):
     def view_properties(self) -> Dict[str, Any]:
         return {
             property: getattr(self, property)
-            for property in ("id", "name", "subtype", "latitude", "longitude")
+            for property in ("id", "name", "icon", "latitude", "longitude")
         }
 
     def update(self, **kwargs: Any) -> None:
@@ -187,8 +188,7 @@ class Link(Object):
         node_properties = ("id", "longitude", "latitude")
         return {
             **{
-                property: getattr(self, property)
-                for property in ("id", "name", "subtype")
+                property: getattr(self, property) for property in ("id", "name", "icon")
             },
             **{
                 f"source_{property}": getattr(self.source, property)

@@ -18,7 +18,7 @@ const layers = {
   nasa: "http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg",
 };
 
-const subtypeSizes = {
+const iconSizes = {
   antenna: [18, 12],
   firewall: [18, 12],
   host: [18, 12],
@@ -79,7 +79,7 @@ call("/get/parameters/1", function(parameters) {
   switchView(currentView);
 });
 
-for (const [key, value] of Object.entries(subtypeSizes)) {
+for (const [key, value] of Object.entries(iconSizes)) {
   window[`icon_${key}`] = L.icon({
     iconUrl: `../static/images/2D/${key}.gif`,
     iconSize: value,
@@ -188,7 +188,7 @@ function createNode2d(node, nodeType) {
   if (markerType == "Image") {
     marker.icon =
       nodeType === "device"
-        ? (marker.icon = window[`icon_${node.subtype}`] || routerIcon)
+        ? (marker.icon = window[`icon_${node.icon}`] || routerIcon)
         : (marker.icon = window["icon_site"]);
     marker.setIcon(marker.icon);
   }
@@ -272,7 +272,7 @@ function createLink2d(link) {
   );
   const pointList = [pointA, pointB];
   const polyline = new L.PolylineClusterable(pointList, {
-    color: linkColors[link.subtype],
+    color: linkColors[link.icon],
     weight: 3,
     opacity: 1,
     smoothFactor: 1,

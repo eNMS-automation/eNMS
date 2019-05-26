@@ -14,7 +14,6 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField, InstanceField
 from eNMS.properties.objects import (
     device_icons,
-    link_icons,
     pool_link_properties,
     pool_device_properties,
 )
@@ -128,9 +127,9 @@ class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
-    icon = SelectField("Icon", choices=tuple(link_icons.items()))
     source = InstanceField("Source", instance_type="Device")
     destination = InstanceField("Destination", instance_type="Device")
+    color = StringField("Color")
 
 
 class LinkFilteringForm(ObjectForm, ObjectFilteringForm):
@@ -139,6 +138,7 @@ class LinkFilteringForm(ObjectForm, ObjectFilteringForm):
     icon = StringField("Icon")
     source_name = StringField("Source")
     destination_name = StringField("Destination")
+    color = StringField("Color")
 
 
 @configure_pool_form

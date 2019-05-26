@@ -83,9 +83,6 @@ class User(AbstractBase, UserMixin):
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(String(SMALL_STRING_LENGTH))
 
-    def __init__(self, **kwargs: Any) -> None:
-        super().__init__(**kwargs)
-
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-primary btn-xs"

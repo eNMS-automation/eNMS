@@ -46,7 +46,11 @@ class AbstractBase(Base):
 
     def update(self, **kwargs: Any) -> None:
         relation = relationships[self.__tablename__]
+        modified = False
+        print(kwargs)
         for property, value in kwargs.items():
+            if not hasattr(self, property):
+                continue
             property_type = property_types.get(property, None)
             if property in relation:
                 if relation[property]["list"]:
@@ -55,7 +59,14 @@ class AbstractBase(Base):
                     value = fetch(relation[property]["model"], id=value)
             if property_type == "bool":
                 value = value not in (False, "false")
-            setattr(self, property, value)
+            old_value = getattr(self, property)
+            if old_value != value:
+                if isinstance(value, list) and set(value) == set(old_value):
+                    continue
+                modified = True
+                setattr(self, property, value)
+        if modified:
+            self.last_modified = controller.get_time()
 
     def get_properties(self, export: bool = False) -> dict:
         result = {}

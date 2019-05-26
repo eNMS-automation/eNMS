@@ -215,7 +215,7 @@ class InventoryController(BaseController):
         info("Inventory import: Done.")
         return result
 
-    def save_pool_objects(self, pool_id: int, kwargs: Any) -> dict:
+    def save_pool_objects(self, pool_id: int, **kwargs: Any) -> dict:
         pool = fetch("Pool", id=pool_id)
         pool.devices = objectify("Device", kwargs["devices"])
         pool.links = objectify("Link", kwargs["links"])

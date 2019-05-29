@@ -166,7 +166,7 @@ class BaseController:
         for icon in device_icons:
             point_style = Style()
             point_style.labelstyle.color = Color.blue
-            path_icon = f"{self.path}/eNMS/views/static/images/2D/{icon}.gif"
+            path_icon = f"{self.path}/eNMS/static/images/2D/{icon}.gif"
             point_style.iconstyle.icon.href = path_icon
             self.google_earth_styles[icon] = point_style
 

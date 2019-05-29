@@ -74,7 +74,7 @@ class Device(CustomDevice):
     class_type = "device"
     parent_cls = "CustomDevice"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
-    icon = Column(String(SMALL_STRING_LENGTH), default="")
+    icon = Column(String(SMALL_STRING_LENGTH), default="router")
     operating_system = Column(String(SMALL_STRING_LENGTH), default="")
     os_version = Column(String(SMALL_STRING_LENGTH), default="")
     ip_address = Column(String(SMALL_STRING_LENGTH), default="")
@@ -164,7 +164,7 @@ class Link(Object):
     class_type = "link"
     parent_cls = "Object"
     id = Column(Integer, ForeignKey("Object.id"), primary_key=True)
-    color = Column(String(SMALL_STRING_LENGTH), default="")
+    color = Column(String(SMALL_STRING_LENGTH), default="#000000")
     source_id = Column(Integer, ForeignKey("Device.id"))
     destination_id = Column(Integer, ForeignKey("Device.id"))
     source = relationship(

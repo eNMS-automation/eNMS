@@ -95,7 +95,7 @@ class InventoryController(BaseController):
                 (link.destination.longitude, link.destination.latitude),
             ]
             line.style = Style()
-            kml_color = "#ff" + link.color[-2:] + link.color[3:5] + link.color[1:3]
+            kml_color = f"ff{link.color[5:]}{link.color[3:5]}{link.color[1:3]}"
             line.style.linestyle.color = kml_color
             line.style.linestyle.width = kwargs["line_width"]
         filepath = self.path / "projects" / "google_earth" / f'{kwargs["name"]}.kmz'

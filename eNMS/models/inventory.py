@@ -145,7 +145,7 @@ class Device(CustomDevice):
                 if self.configurations
                 else "",
                 f"""<label class="btn btn-default btn-xs btn-file"
-                style="width:100%;"><a href="download_configuration/{self.name}">
+                style="width:100%;"><a href="/download_configuration/{self.name}">
                 Download</a></label>"""
                 if self.configurations
                 else "",

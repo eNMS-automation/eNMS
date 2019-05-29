@@ -132,9 +132,9 @@ table_fixed_columns: Dict[str, List[str]] = {
     "link": ["Edit", "Duplicate", "Delete"],
     "log": [],
     "event": ["Edit", "Delete"],
-    "service": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
+    "service": ["Logs", "Results", "Run", "Edit", "Duplicate", "Export", "Delete"],
     "task": ["Action", "Edit", "Duplicate", "Delete"],
     "user": ["Edit", "Duplicate", "Delete"],
     "pool": ["Visualize", "Edit", "Update", "Duplicate", "Edit objects", "Delete"],
-    "workflow": ["Logs", "Results", "Run", "Edit", "Duplicate", "Delete"],
+    "workflow": ["Logs", "Results", "Run", "Edit", "Duplicate", "Export", "Delete"],
 }

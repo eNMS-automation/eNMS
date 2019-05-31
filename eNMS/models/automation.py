@@ -103,7 +103,7 @@ class Job(AbstractBase):
         return targets
 
     def adjacent_jobs(
-        self, direction: str, workflow: "Workflow", *subtypes: str
+        self, workflow: "Workflow", direction: str, *subtypes: str
     ) -> List["Job"]:
         return [
             getattr(x, direction)
@@ -495,20 +495,26 @@ class Workflow(Job):
         ]
 
     def compute_valid_targets(self, job, results):
-        targets = (
-            self.compute_targets()
-            if self.use_workflow_targets
-            else job.compute_targets()
-        )
-        valid_targets = set(targets)
-        for edge_type in ("success", "failure"):
-            expected_result = True if edge_type == "success" else False
-            for previous_job in job.adjacent_jobs(self, "source", edge_type):
-                device_results = results[previous_job.name]["results"]["devices"]
-                for target in targets:
-                    if device_results[target.name]["success"] != expected_result:
-                        valid_targets.remove(target)
-        return valid_targets
+        if not job.has_targets:
+            return set()
+        elif self.use_workflow_targets:
+            targets = self.compute_targets()
+            valid_targets = set(targets)
+            for edge_type in ("success", "failure"):
+                expected_result = True if edge_type == "success" else False
+                for previous_job in job.adjacent_jobs(self, "source", edge_type):
+                    if not previous_job.has_targets:
+                        continue
+                    device_results = results[previous_job.name]["results"]["devices"]
+                    for target in targets:
+                        if (
+                            target.name not in device_results
+                            or device_results[target.name]["success"] != expected_result
+                        ):
+                            valid_targets.remove(target)
+            return valid_targets
+        else:
+            return job.compute_targets()
 
     def build_results(
         self,
@@ -536,10 +542,12 @@ class Workflow(Job):
             results["results"][job.name] = job_results
             success = job_results["results"]["success"]
             self.state["jobs"][job.id] = success
-            edge_type_to_follow = "success" if success else "failure"
-            for successor in job.adjacent_jobs(
-                self, "destination", edge_type_to_follow
-            ):
+            edge_to_follow = "success" if success else "failure"
+            if self.use_workflow_targets and job.has_targets:
+                allowed_edges = ["success", "failure"]
+            else:
+                allowed_edges = [edge_to_follow]
+            for successor in job.adjacent_jobs(self, "destination", *allowed_edges):
                 if successor not in visited:
                     jobs.append(successor)
                 if successor == self.jobs[1]:

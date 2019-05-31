@@ -5,6 +5,21 @@ NetmikoDataExtractionService -> NetmikoRegexExtractionService
 ## New services
 
 
+## New Workflow system
+
+Two modes:
+- "Use workflow targets"
+- "Use service targets"
+
+In "Use service targets" mode, jobs run on their own targets. A job is considered successful
+if it ran successfully on all of its targets (if it fails at least one target, it failed).
+The "Use service targets" mode must be used for specific workflows where services have different targets.
+For example, a first service would run on devices A, B, C and the next one on devices D, E.
+
+In "Use workflow targets" mode, the workflow will run on its own targets (devices configured at service level
+are ignored). Devices are independent from each other: one device may run on all jobs in the workflow
+if it is successful while another one could stop at the first step: they run the workflow independently and
+will likely follow different path in the workflow depending on whether they fail or pass services thoughout the workflow.
 
 ## Panel instead of Bootstrap modals
 

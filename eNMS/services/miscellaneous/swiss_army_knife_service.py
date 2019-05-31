@@ -102,7 +102,7 @@ class SwissArmyKnifeService(Service):
     def poller_service(self, payload: dict) -> dict:
         for service in fetch_all("Service"):
             if getattr(service, "configuration_backup_service", False):
-                service.try_run()
+                service.run()
         for pool in fetch_all("Pool"):
             if pool.device_current_configuration:
                 pool.compute_pool()

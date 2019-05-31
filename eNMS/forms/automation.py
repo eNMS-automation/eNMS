@@ -51,6 +51,7 @@ class ServiceForm(JobForm):
 class WorkflowForm(JobForm):
     template = "workflow"
     form_type = HiddenField(default="workflow")
+    use_workflow_targets = BooleanField("Use Workflow Targets")
 
 
 class JobFilteringForm(BaseForm):

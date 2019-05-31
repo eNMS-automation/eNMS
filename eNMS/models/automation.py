@@ -102,18 +102,13 @@ class Job(AbstractBase):
         Session.commit()
         return targets
 
-    def job_sources(self, workflow: "Workflow", subtype: str = "all") -> List["Job"]:
+    def adjacent_jobs(
+        self, direction: str, workflow: "Workflow", *subtypes: str
+    ) -> List["Job"]:
         return [
-            x.source
-            for x in self.sources
-            if (subtype == "all" or x.subtype == subtype) and x.workflow == workflow
-        ]
-
-    def job_successors(self, workflow: "Workflow", subtype: str = "all") -> List["Job"]:
-        return [
-            x.destination
-            for x in self.destinations
-            if (subtype == "all" or x.subtype == subtype) and x.workflow == workflow
+            getattr(x, direction)
+            for x in getattr(self, f"{direction}s")
+            if x.subtype in subtypes and x.workflow == workflow
         ]
 
     def build_notification(self, results: dict, now: str) -> str:
@@ -142,7 +137,7 @@ class Job(AbstractBase):
         return "\n\n".join(summary)
 
     def notify(self, results: dict, time: str) -> None:
-        fetch("Job", name=self.send_notification_method).try_run(
+        fetch("Job", name=self.send_notification_method).run(
             {
                 "job": self.serialized,
                 "results": self.results,
@@ -164,84 +159,48 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def try_run(
-        self,
-        payload: Optional[dict] = None,
-        targets: Optional[Set["Device"]] = None,
-        workflow: Optional["Workflow"] = None,
-        task: Optional["Task"] = None,
-    ) -> Tuple[dict, str]:
-        current_job = workflow or self
+    def init_run(self, parent):
+        current_job = parent or self
         self.is_running, self.state = True, {}
-        if workflow:
+        if parent:
             current_job.logs.extend([f"{self.type} {self.name}: Starting."])
         else:
             current_job.logs = [f"{self.type} {self.name}: Starting."]
-        if not workflow:
+        if not parent:
             Session.commit()
-        results: dict = {"results": {}}
-        payload = payload or {}
-        targets = targets or self.compute_targets()
-        if targets:
-            results["results"]["devices"] = {}
-        now = controller.get_time()
-        for i in range(self.number_of_retries + 1):
-            current_job.logs.append(
-                f"Running {self.type} {self.name} (attempt n°{i + 1})"
-            )
-            self.completed = self.failed = 0
-            if not workflow:
-                Session.commit()
-            attempt, logs = self.run(payload, targets, workflow)
-            current_job.logs.extend(logs)
-            if targets:
-                assert targets is not None
-                for device in set(targets):
-                    if not attempt["devices"][device.name]["success"]:
-                        continue
-                    results["results"]["devices"][device.name] = attempt["devices"][
-                        device.name
-                    ]
-                    targets.remove(device)
-                if not targets:
-                    results["success"] = True
-                    break
-                else:
-                    if self.number_of_retries:
-                        results[f"Attempts {i + 1}"] = attempt
-                    if i != self.number_of_retries:
-                        sleep(self.time_between_retries)
-                    else:
-                        results["success"] = False
-                        for device in targets:
-                            results["results"]["devices"][device.name] = attempt[
-                                "devices"
-                            ][device.name]
-            else:
-                if self.number_of_retries:
-                    results[f"Attempts {i + 1}"] = attempt
-                if attempt["success"] or i == self.number_of_retries:
-                    results["results"] = attempt
-                    break
-                else:
-                    sleep(self.time_between_retries)
+
+    def end_run(self, runtime, results, parent, task):
+        current_job = parent or self
         current_job.logs.append(f"{self.type} {self.name}: Finished.")
-        self.results[now] = {**results, "logs": list(current_job.logs)}
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         if task and not task.frequency:
             task.is_active = False
-        if not workflow:
+        if not parent:
             Session.commit()
-        if not workflow and self.send_notification:
-            self.notify(results, now)
-        return results, now
+        if not parent and self.send_notification:
+            self.notify(results, runtime)
+
+    def run(
+        self,
+        payload: Optional[dict] = None,
+        targets: Optional[Set["Device"]] = None,
+        parent: Optional["Workflow"] = None,
+        task: Optional["Task"] = None,
+    ) -> Tuple[dict, str]:
+        current_job = parent or self
+        runtime = controller.get_time()
+        self.init_run(parent)
+        results = self.build_results(payload, targets, parent)
+        self.results[runtime] = {**results, "logs": list(current_job.logs)}
+        self.end_run(runtime, results, parent, task)
+        return results, runtime
 
     def get_results(
         self,
         payload: dict,
         device: Optional["Device"] = None,
-        workflow: Optional["Workflow"] = None,
+        parent: Optional["Workflow"] = None,
     ) -> Tuple[dict, list]:
         logs = []
         try:
@@ -259,7 +218,7 @@ class Job(AbstractBase):
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
-        current_job = workflow or self
+        current_job = parent or self
         if not current_job.multiprocessing:
             current_job.completed += 1
             current_job.failed += 1 - results["success"]
@@ -267,11 +226,11 @@ class Job(AbstractBase):
             Session.commit()
         return results, logs
 
-    def run(
+    def device_run(
         self,
         payload: dict,
         targets: Optional[Set["Device"]] = None,
-        workflow: Optional["Workflow"] = None,
+        parent: Optional["Workflow"] = None,
     ) -> Tuple[dict, list]:
         if not targets:
             return self.get_results(payload)
@@ -289,7 +248,7 @@ class Job(AbstractBase):
                     results,
                     logs,
                     payload,
-                    getattr(workflow, "id", None),
+                    getattr(parent, "id", None),
                 )
                 pool.map(device_process, [(device.id, *args) for device in targets])
                 pool.close()
@@ -297,7 +256,7 @@ class Job(AbstractBase):
             else:
                 results, logs = {"devices": {}}, []
                 results["devices"] = {
-                    device.name: self.get_results(payload, device, workflow)[0]
+                    device.name: self.get_results(payload, device, parent)[0]
                     for device in targets
                 }
             return results, logs
@@ -309,6 +268,60 @@ class Service(Job):
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     __mapper_args__ = {"polymorphic_identity": "Service"}
     parent_cls = "Job"
+
+    def build_results(
+        self,
+        payload: Optional[dict] = None,
+        targets: Optional[Set["Device"]] = None,
+        parent: Optional["Workflow"] = None,
+    ) -> Tuple[dict, str]:
+        current_job = parent or self
+        results: dict = {"results": {}}
+        if self.has_targets and not targets:
+            targets = self.compute_targets()
+        if targets:
+            results["results"]["devices"] = {}
+        for i in range(self.number_of_retries + 1):
+            current_job.logs.append(
+                f"Running {self.type} {self.name} (attempt n°{i + 1})"
+            )
+            self.completed = self.failed = 0
+            if not parent:
+                Session.commit()
+            attempt, logs = self.device_run(payload or {}, targets, parent)
+            current_job.logs.extend(logs)
+            if targets:
+                assert targets is not None
+                for device in set(targets):
+                    if not attempt["devices"][device.name]["success"]:
+                        continue
+                    results["results"]["devices"][device.name] = attempt["devices"][
+                        device.name
+                    ]
+                    targets.remove(device)
+                if not targets:
+                    results["results"]["success"] = True
+                    break
+                else:
+                    if self.number_of_retries:
+                        results[f"Attempt {i + 1}"] = attempt
+                    if i != self.number_of_retries:
+                        sleep(self.time_between_retries)
+                    else:
+                        results["results"]["success"] = False
+                        for device in targets:
+                            results["results"]["devices"][device.name] = attempt[
+                                "devices"
+                            ][device.name]
+            else:
+                if self.number_of_retries:
+                    results[f"Attempts {i + 1}"] = attempt
+                if attempt["success"] or i == self.number_of_retries:
+                    results["results"] = attempt
+                    break
+                else:
+                    sleep(self.time_between_retries)
+        return results
 
     def generate_row(self, table: str) -> List[str]:
         return [
@@ -481,40 +494,56 @@ class Workflow(Job):
             Delete</button>""",
         ]
 
-    def job(self, payload: dict, device: Optional["Device"] = None) -> dict:
+    def compute_valid_targets(self, job, results):
+        targets = (
+            self.compute_targets()
+            if self.use_workflow_targets
+            else job.compute_targets()
+        )
+        valid_targets = set(targets)
+        for edge_type in ("success", "failure"):
+            expected_result = True if edge_type == "success" else False
+            for previous_job in job.adjacent_jobs(self, "source", edge_type):
+                device_results = results[previous_job.name]["results"]["devices"]
+                for target in targets:
+                    if device_results[target.name]["success"] != expected_result:
+                        valid_targets.remove(target)
+        return valid_targets
+
+    def build_results(
+        self,
+        payload: Optional[dict] = None,
+        targets: Optional[Set["Device"]] = None,
+        parent: Optional["Workflow"] = None,
+    ) -> Tuple[dict, str]:
         self.state = {"jobs": {}}
-        if device:
-            self.state["current_device"] = device.name
-        if not self.multiprocessing:
-            Session.commit()
         jobs: List[Job] = [self.jobs[0]]
         visited: Set = set()
-        results: dict = {"success": False}
+        results: dict = {"results": {}, "success": False}
+        if self.use_workflow_targets and not targets:
+            targets = self.compute_targets()
         while jobs:
             job = jobs.pop()
             if any(
-                node not in visited for node in job.job_sources(self, "prerequisite")
+                node not in visited
+                for node in job.adjacent_jobs(self, "source", "prerequisite")
             ):
                 continue
             visited.add(job)
             self.state["current_job"] = job.get_properties()
-            if not self.multiprocessing:
-                Session.commit()
-            targets = {device} if device else None
-            job_results, _ = job.try_run(results, targets=targets, workflow=self)
-            if device:
-                job_results = job_results["results"]["devices"][device.name]
-            success = job_results["success"]
+            valid_targets = self.compute_valid_targets(job, results["results"])
+            job_results, _ = job.run(results, targets=valid_targets, parent=self)
+            results["results"][job.name] = job_results
+            success = job_results["results"]["success"]
             self.state["jobs"][job.id] = success
-            if not self.multiprocessing:
-                Session.commit()
             edge_type_to_follow = "success" if success else "failure"
-            for successor in job.job_successors(self, edge_type_to_follow):
+            for successor in job.adjacent_jobs(
+                self, "destination", edge_type_to_follow
+            ):
                 if successor not in visited:
                     jobs.append(successor)
                 if successor == self.jobs[1]:
                     results["success"] = True
-            results[job.name] = job_results
             sleep(job.waiting_time)
         return results
 

@@ -40,7 +40,7 @@ def configure_cli(app: Flask) -> None:
         if payload:
             payload = loads(payload)
         job = fetch("Job", name=name)
-        echo(controller.str_dict(job.try_run(targets=targets, payload=payload)[0]))
+        echo(controller.str_dict(job.run(targets=targets, payload=payload)[0]))
 
     @app.cli.command()
     @pass_script_info

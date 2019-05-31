@@ -13,7 +13,7 @@ def threaded_job(
     job = fetch("Job", id=job_id)
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
-    job.try_run(targets=targets, payload=payload, task=task)
+    job.run(targets=targets, payload=payload, task=task)
 
 
 def device_process(args: tuple) -> None:

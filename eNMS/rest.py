@@ -124,7 +124,7 @@ class RunJob(Resource):
             return {**job.serialized, "errors": errors}
         else:
             return {
-                **job.try_run(targets=targets, payload=data.get("payload"))[0],
+                **job.run(targets=targets, payload=data.get("payload"))[0],
                 "errors": errors,
             }
 

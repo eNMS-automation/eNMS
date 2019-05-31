@@ -37,7 +37,7 @@ class SyslogUDPHandler(BaseRequestHandler):
             if source_match and content_match:
                 events.append(event)
                 for job in event.jobs:
-                    job.try_run()
+                    job.run()
         if events:
             log = factory("Log", **{"source": source, "date": data, "events": events})
             Session.add(log)

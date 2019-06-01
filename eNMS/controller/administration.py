@@ -133,6 +133,17 @@ class AdministrationController(BaseController):
             Session.commit()
         return status
 
+    def export_job(self, job_id: str) -> None:
+        job = fetch("Job", id=job_id)
+        path = self.path / "projects" / "exports"
+        folder = "workflows" if job.type == "Workflow" else "services"
+        if job.type == "Workflow":
+            for sub_job in job.jobs:
+                with open(path / "services" / f"{sub_job.name}.json", "w") as file:
+                    dump(sub_job.to_dict(export=True), file)
+        with open(path / folder / f"{job.name}.json", "w") as file:
+            dump(job.to_dict(export=True), file)
+
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:
         self.update_parameters(**kwargs)
         if parameter_type == "git":

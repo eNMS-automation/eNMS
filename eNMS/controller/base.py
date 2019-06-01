@@ -101,6 +101,7 @@ class BaseController:
         "delete_instance",
         "delete_node",
         "duplicate_workflow",
+        "export_job",
         "export_to_google_earth",
         "export_topology",
         "get",

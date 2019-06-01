@@ -296,6 +296,17 @@ function pauseTask(id) {
 }
 
 /**
+ * Export a job.
+ * @param {int} id - Job ID.
+ */
+// eslint-disable-next-line
+function exportJob(id) {
+  call(`/export_job/${id}`, () => {
+    alertify.notify("Export successful.", "success", 5);
+  });
+}
+
+/**
  * Resume a task.
  * @param {id} id - Task id.
  */

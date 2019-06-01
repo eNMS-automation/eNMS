@@ -338,9 +338,9 @@ class Service(Job):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}', true)">
             Duplicate</button>""",
-            f"""<label class="btn btn-default btn-xs btn-file"
-            style="width:100%;"><a href="/export_job/{self.name}">
-            Export</a></label>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="exportJob('{self.id}')">
+            Export</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="showDeletionPanel('service', '{self.id}', '{self.name}')">
             Delete</button>""",
@@ -486,9 +486,9 @@ class Workflow(Job):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showWorkflowModalDuplicate('{self.id}')">
             Duplicate</button>""",
-            f"""<label class="btn btn-default btn-xs btn-file"
-            style="width:100%;"><a href="/export_job/{self.name}">
-            Export</a></label>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="exportJob('{self.id}')">
+            Export</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="showDeletionPanel('workflow', '{self.id}', '{self.name}')">
             Delete</button>""",

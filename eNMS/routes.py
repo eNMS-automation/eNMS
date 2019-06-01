@@ -205,16 +205,6 @@ def download_configuration(name: str) -> Response:
         return jsonify("No configuration stored")
 
 
-@blueprint.route("/export_job/<name>")
-@login_required
-def export_job(name: str) -> Response:
-    return Response(
-        str(fetch("Job", name=name).to_dict(export=True)),
-        mimetype="application/json",
-        headers={"Content-Disposition": f"attachment;filename={name}.json"},
-    )
-
-
 @blueprint.route("/filtering/<table>")
 @monitor_requests
 def filtering(table: str) -> dict:

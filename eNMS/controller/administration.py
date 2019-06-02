@@ -134,25 +134,29 @@ class AdministrationController(BaseController):
         return status
 
     def import_jobs(self) -> None:
-        for folder in ("services", "workflows"):
+        for folder in ("Service", "Workflow", "WorkflowEdge"):
             path = self.path / "projects" / "exports" / folder
             for file in scandir(path):
+                print(file.name)
                 if file.name == ".gitkeep":
                     continue
                 with open(path / file.name, "r") as job_dict:
                     job = load(job_dict, Loader=BaseLoader)
-                    model = "Workflow" if folder == "workflows" else job.pop("type")
+                    model = job.pop("type") if folder == "Service" else folder
                     factory(model, **self.import_object(model, job))
+            Session.commit()
 
     def export_job(self, job_id: str) -> None:
         job = fetch("Job", id=job_id)
         path = self.path / "projects" / "exports"
-        folder = "workflows" if job.type == "Workflow" else "services"
         if job.type == "Workflow":
             for sub_job in job.jobs:
-                with open(path / "services" / f"{sub_job.name}.yaml", "w") as file:
+                with open(path / "Service" / f"{sub_job.name}.yaml", "w") as file:
                     dump(sub_job.to_dict(export=True), file)
-        with open(path / folder / f"{job.name}.yaml", "w") as file:
+            for edge in job.edges:
+                with open(path / "WorkflowEdge" / f"{edge.id}.yaml", "w") as file:
+                    dump(edge.to_dict(export=True), file)
+        with open(path / job.type / f"{job.name}.yaml", "w") as file:
             dump(job.to_dict(export=True), file)
 
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:

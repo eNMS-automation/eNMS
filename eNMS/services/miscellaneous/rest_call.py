@@ -1,4 +1,4 @@
-from json import dumps
+from json import dumps, JSONDecodeError
 from requests import (
     get as rest_get,
     post as rest_post,
@@ -30,6 +30,7 @@ class RestCallService(Service):
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     params = Column(MutableDict.as_mutable(PickleType), default={})
     headers = Column(MutableDict.as_mutable(PickleType), default={})
+    verify_ssl_certificate = Column(Boolean, default=True)
     timeout = Column(Integer, default=15)
     validation_method = Column(String(SMALL_STRING_LENGTH), default="")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
@@ -58,13 +59,17 @@ class RestCallService(Service):
         }
         if self.call_type in ("GET", "DELETE"):
             response = self.request_dict[self.call_type](
-                rest_url, auth=HTTPBasicAuth(self.username, self.password), **kwargs
+                rest_url,
+                auth=HTTPBasicAuth(self.username, self.password),
+                verify=self.verify_ssl_certificate,
+                **kwargs,
             )
         else:
             response = self.request_dict[self.call_type](
                 rest_url,
                 data=dumps(self.sub(self.payload, locals())),
                 auth=HTTPBasicAuth(self.username, self.password),
+                verify=self.verify_ssl_certificate,
                 **kwargs,
             )
         if response.status_code not in range(200, 300):
@@ -73,7 +78,10 @@ class RestCallService(Service):
                 "response_code": response.status_code,
                 "response": response.text,
             }
-        result = response.json()
+        try:
+            result = response.json()
+        except JSONDecodeError as e:
+            result = {"response": str(response), "exception": str(e)}
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"
@@ -98,6 +106,7 @@ class RestCallForm(ServiceForm, ValidationForm):
     payload = DictField()
     params = DictField()
     headers = DictField()
+    verify_ssl_certificate = BooleanField("Verify SSL Certificate")
     timeout = IntegerField(default=15)
     username = StringField()
     password = StringField()

@@ -50,7 +50,7 @@ function panelCode(type, id) {
  */
 // eslint-disable-next-line
 function saveService(service) {
-  if (typeof workflowBuilder !== "undefined") {
+  if (page == "workflow_builder") {
     nodes.update({ id: service.id, label: service.name });
   }
 }
@@ -246,7 +246,7 @@ function clearResults(id) {
 function runJob(id, realTimeUpdate) {
   call(`/run_job/${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
-    if (typeof workflowBuilder !== "undefined") {
+    if (page == "workflow_builder") {
       if (job.type == "Workflow") {
         getWorkflowState();
       } else {

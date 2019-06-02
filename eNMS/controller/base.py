@@ -28,6 +28,7 @@ from eNMS.properties.diagram import (
     diagram_classes,
     type_to_diagram_properties,
 )
+from eNMS.properties.table import device_table_properties
 from eNMS.models import models
 from eNMS.properties.objects import (
     device_properties,
@@ -204,11 +205,16 @@ class BaseController:
         property_names.update(
             {k: v["pretty_name"] for k, v in custom_properties.items()}
         )
-        for object_properties in (device_properties, pool_device_properties):
+        for object_properties in (
+            device_properties,
+            device_table_properties,
+            pool_device_properties,
+        ):
             object_properties.extend(list(custom_properties))
         device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
         )
+        print(custom_properties)
         return custom_properties
 
     def init_logs(self) -> None:

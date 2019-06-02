@@ -159,7 +159,17 @@ function migrationsImport() {
 }
 
 /**
- * Database Helpers.
+ * Import Jobs
+ */
+// eslint-disable-next-line
+function importJobs() {
+  call("/import_jobs", () => {
+    alertify.notify("Export successful.", "success", 5);
+  });
+}
+
+/**
+ * Database Deletion.
  */
 // eslint-disable-next-line
 function databaseDeletion() {

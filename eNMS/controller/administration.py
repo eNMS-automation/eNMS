@@ -4,7 +4,7 @@ from ipaddress import IPv4Network
 from json import loads
 from logging import info
 from ldap3 import Connection, NTLM, SUBTREE
-from os import makedirs
+from os import makedirs, scandir
 from os.path import exists
 from requests import get as http_get
 from typing import Any, Union
@@ -82,6 +82,18 @@ class AdministrationController(BaseController):
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 dump(export(cls_name), migration_file, default_flow_style=False)
 
+    def import_object(self, model, obj) -> dict:
+        for property, relation in relationships[model].items():
+            if property not in obj:
+                continue
+            elif relation["list"]:
+                obj[property] = [
+                    fetch(relation["model"], name=name).id for name in obj[property]
+                ]
+            else:
+                obj[property] = fetch(relation["model"], name=obj[property]).id
+        return obj
+
     def migration_import(self, **kwargs: Any) -> str:
         status, types = "Import successful.", kwargs["import_export_types"]
         if kwargs.get("empty_database_before_import", False):
@@ -100,19 +112,7 @@ class AdministrationController(BaseController):
                     }
                 if cls == "WorkflowEdge":
                     workflow_edges = deepcopy(objects)
-                for obj in objects:
-                    for property, relation in relationships[cls].items():
-                        if property not in obj:
-                            continue
-                        elif relation["list"]:
-                            obj[property] = [
-                                fetch(relation["model"], name=name).id
-                                for name in obj[property]
-                            ]
-                        else:
-                            obj[property] = fetch(
-                                relation["model"], name=obj[property]
-                            ).id
+                objects = [self.import_object(cls, obj) for obj in objects]
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "Service" else cls
                     try:
@@ -133,15 +133,26 @@ class AdministrationController(BaseController):
             Session.commit()
         return status
 
+    def import_jobs(self) -> None:
+        for folder in ("services", "workflows"):
+            path = self.path / "projects" / "exports" / folder
+            for file in scandir(path):
+                if file.name == ".gitkeep":
+                    continue
+                with open(path / file.name, "r") as job_dict:
+                    job = load(job_dict, Loader=BaseLoader)
+                    model = "Workflow" if folder == "workflows" else job.pop("type")
+                    factory(model, **self.import_object(model, job))
+
     def export_job(self, job_id: str) -> None:
         job = fetch("Job", id=job_id)
         path = self.path / "projects" / "exports"
         folder = "workflows" if job.type == "Workflow" else "services"
         if job.type == "Workflow":
             for sub_job in job.jobs:
-                with open(path / "services" / f"{sub_job.name}.json", "w") as file:
+                with open(path / "services" / f"{sub_job.name}.yaml", "w") as file:
                     dump(sub_job.to_dict(export=True), file)
-        with open(path / folder / f"{job.name}.json", "w") as file:
+        with open(path / folder / f"{job.name}.yaml", "w") as file:
             dump(job.to_dict(export=True), file)
 
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:

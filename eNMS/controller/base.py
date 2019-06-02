@@ -115,6 +115,7 @@ class BaseController:
         "get_job_results",
         "get_results_diff",
         "get_view_topology",
+        "import_jobs",
         "import_topology",
         "migration_export",
         "migration_import",

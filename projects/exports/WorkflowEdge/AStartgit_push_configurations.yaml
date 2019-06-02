@@ -1,0 +1,5 @@
+destination: git_push_configurations
+name: 33-success:1->7
+source: Start
+subtype: success
+workflow: A

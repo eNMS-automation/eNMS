@@ -121,7 +121,8 @@ function addJobsToWorkflow(jobs) {
       5
     );
   } else {
-    jobs = jobs || $("#jobs").val().join("-");
+    jobs = $("#jobs").length ? $("#jobs").val().join("-") : jobs;
+    console.log(jobs)
     call(`/add_jobs_to_workflow/${workflow.id}/${jobs}`, function(result) {
       lastModified = result.update_time;
       result.jobs.forEach((job) => {

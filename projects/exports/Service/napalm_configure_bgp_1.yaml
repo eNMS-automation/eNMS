@@ -1,0 +1,36 @@
+completed: 0
+creator: admin
+credentials: device
+description: Configure BGP Peering with Napalm
+devices:
+- Washington
+display_only_failed_nodes: true
+events: []
+failed: 0
+hidden: false
+last_modified: '2019-06-02 19:54:57.305499'
+local_as: 100
+loopback: Lo100
+loopback_ip: 100.1.1.1
+mail_recipient: ''
+max_processes: 5
+multiprocessing: false
+name: napalm_configure_bgp_1
+neighbor_ip: 100.1.2.1
+number_of_retries: 0
+number_of_targets: 0
+operating_system: ''
+pools: []
+positions:
+  A: !!python/tuple
+  - 132
+  - 91
+push_to_git: false
+remote_as: 200
+send_notification: false
+send_notification_method: mail_feedback_notification
+time_between_retries: 10
+type: ConfigureBgpService
+vendor: ''
+vrf_name: configure_BGP_test
+waiting_time: 0

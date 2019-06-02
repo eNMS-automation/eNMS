@@ -1,0 +1,5 @@
+destination: test_log_backup_service
+name: 33-failure:2->13
+source: End
+subtype: failure
+workflow: A

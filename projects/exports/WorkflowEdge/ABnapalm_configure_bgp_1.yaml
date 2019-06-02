@@ -1,0 +1,5 @@
+destination: napalm_configure_bgp_1
+name: 33-success:34->11
+source: B
+subtype: success
+workflow: A

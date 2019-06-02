@@ -1,0 +1,45 @@
+completed: 0
+creator: admin
+credentials: device
+description: Start point of a workflow
+devices: []
+display_only_failed_nodes: true
+events: []
+failed: 0
+has_targets: false
+hidden: true
+last_modified: '2019-06-02 19:54:52.271591'
+mail_recipient: ''
+max_processes: 5
+multiprocessing: false
+name: Start
+number_of_retries: 0
+number_of_targets: 0
+operating_system: ''
+pools: []
+positions:
+  A: !!python/tuple
+  - 0
+  - 0
+  Configuration Management Workflow: !!python/tuple
+  - -300
+  - 0
+  Napalm_VRF_workflow: !!python/tuple
+  - -200
+  - 0
+  Netmiko_VRF_workflow: !!python/tuple
+  - -200
+  - 0
+  Workflow_of_workflows: !!python/tuple
+  - -300
+  - 0
+  payload_transfer_workflow: !!python/tuple
+  - -200
+  - 0
+push_to_git: false
+send_notification: false
+send_notification_method: mail_feedback_notification
+time_between_retries: 10
+type: SwissArmyKnifeService
+vendor: ''
+waiting_time: 0

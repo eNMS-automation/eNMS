@@ -153,7 +153,8 @@ class AdministrationController(BaseController):
                 with open(path / "Service" / f"{sub_job.name}.yaml", "w") as file:
                     dump(sub_job.to_dict(export=True), file)
             for edge in job.edges:
-                with open(path / "WorkflowEdge" / f"{edge.id}.yaml", "w") as file:
+                name = f"{edge.workflow}{edge.source}{edge.destination}"
+                with open(path / "WorkflowEdge" / f"{name}.yaml", "w") as file:
                     dump(edge.to_dict(export=True), file)
         with open(path / job.type / f"{job.name}.yaml", "w") as file:
             dump(job.to_dict(export=True), file)

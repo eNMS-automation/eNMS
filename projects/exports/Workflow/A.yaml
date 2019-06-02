@@ -1,0 +1,34 @@
+completed: 0
+creator: admin
+credentials: device
+description: ''
+devices: []
+display_only_failed_nodes: false
+events: []
+failed: 0
+hidden: false
+jobs:
+- Start
+- End
+- B
+- test_log_backup_service
+- napalm_configure_bgp_1
+- git_push_configurations
+last_modified: '2019-06-02 20:19:58.380464'
+mail_recipient: ''
+max_processes: 50
+multiprocessing: false
+name: A
+number_of_retries: 0
+number_of_targets: 0
+operating_system: ''
+pools: []
+positions: {}
+push_to_git: false
+send_notification: false
+send_notification_method: mail_feedback_notification
+time_between_retries: 10
+type: Workflow
+use_workflow_targets: false
+vendor: ''
+waiting_time: 0

@@ -12,16 +12,16 @@ from eNMS.properties.objects import (
 from tests.test_base import check_pages
 
 
-def define_device(subtype: str, description: str) -> ImmutableMultiDict:
+def define_device(icon: str, description: str) -> ImmutableMultiDict:
     return ImmutableMultiDict(
         [
             ("form_type", "device"),
-            ("name", subtype + description),
+            ("name", icon + description),
             ("description", description),
             ("location", "paris"),
             ("vendor", "Cisco"),
-            ("subtype", subtype),
-            ("ip_address", subtype + description),
+            ("icon", icon),
+            ("ip_address", icon + description),
             ("operating_system", "IOS"),
             ("os_version", "1.4.4.2"),
             ("longitude", "12"),
@@ -47,9 +47,9 @@ def define_link(source: int, destination: int) -> ImmutableMultiDict:
 
 @check_pages("table/device", "table/link", "view/network")
 def test_manual_object_creation(user_client: FlaskClient) -> None:
-    for subtype in device_icons:
+    for icon in device_icons:
         for description in ("desc1", "desc2"):
-            obj_dict = define_device(subtype, description)
+            obj_dict = define_device(icon, description)
             user_client.post("/update/device", data=obj_dict)
     devices = fetch_all("Device")
     for source in devices[:3]:
@@ -57,7 +57,7 @@ def test_manual_object_creation(user_client: FlaskClient) -> None:
             obj_dict = define_link(source.id, destination.id)
             user_client.post("/update/link", data=obj_dict)
     assert len(fetch_all("Device")) == 44
-    assert len(fetch_all("Link")) == 9
+    assert len(fetch_all("Link")) == 37
 
 
 def create_from_file(client: FlaskClient, file: str) -> None:

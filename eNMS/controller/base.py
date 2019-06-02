@@ -297,6 +297,7 @@ class BaseController:
     def update(self, cls: str, **kwargs: Any) -> dict:
         try:
             instance = factory(cls, **kwargs)
+            Session.commit()
             return instance.serialized
         except JSONDecodeError:
             return {"error": "Invalid JSON syntax (JSON field)"}

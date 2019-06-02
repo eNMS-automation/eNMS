@@ -9,6 +9,7 @@ page: false
 panelCode: false
 propertyTypes: false
 saveService: false
+saveWorkflow: false
 table: false
 */
 
@@ -416,6 +417,7 @@ function processData(type, id) {
       if (typeof table != "undefined") table.ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("Service")) saveService(instance);
+      if (type === "workflow") saveWorkflow(instance);
       alertify.notify(
         `${type.toUpperCase()} '${instance.name}' ${
           id ? "updated" : "created"

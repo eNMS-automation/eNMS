@@ -56,6 +56,20 @@ function saveService(service) {
 }
 
 /**
+ * Save a workflow.
+ * @param {workflow object} workflow - Workflow instance.
+ */
+// eslint-disable-next-line
+function saveWorkflow(workflow) {
+  if (page == "workflow_builder") {
+    $("#current-workflow").append(
+      `<option value="${workflow.id}">${workflow.name}</option>`
+    );
+    $("#current-workflow").selectpicker("refresh");
+  }
+}
+
+/**
  * Parse object to break strings into list for JSON display.
  * @param {obj} obj - Object.
  * @return {obj}.

@@ -36,11 +36,9 @@ class AutomationController(BaseController):
         fetch("Workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(
-        self, workflow_id: int, **kwargs: List[int]
-    ) -> Dict[str, Any]:
+    def add_jobs_to_workflow(self, workflow_id: int, jobs: str) -> Dict[str, Any]:
         workflow = fetch("Workflow", id=workflow_id)
-        jobs = objectify("Job", kwargs["jobs"])
+        jobs = objectify("Job", jobs.split("-"))
         for job in jobs:
             job.workflows.append(workflow)
         now = self.get_time()
@@ -123,7 +121,7 @@ class AutomationController(BaseController):
 
     def save_positions(self, workflow_id: int) -> str:
         now = self.get_time()
-        workflow = fetch("Workflow", id=workflow_id)
+        workflow = fetch("Workflow", allow_none=True, id=workflow_id)
         workflow.last_modified = now
         session["workflow"] = workflow.id
         for job_id, position in request.json.items():

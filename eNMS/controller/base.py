@@ -202,7 +202,7 @@ class BaseController:
             with open(filepath, "r") as properties:
                 custom_properties = load(properties, Loader=BaseLoader)
         property_names.update(
-            {k: v["property_name"] for k, v in custom_properties.items()}
+            {k: v["pretty_name"] for k, v in custom_properties.items()}
         )
         for object_properties in (device_properties, pool_device_properties):
             object_properties.extend(list(custom_properties))

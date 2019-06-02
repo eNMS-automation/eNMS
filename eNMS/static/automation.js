@@ -49,9 +49,13 @@ function panelCode(type, id) {
  * @param {service} service - Service instance.
  */
 // eslint-disable-next-line
-function saveService(service) {
+function saveService(service, id) {
   if (page == "workflow_builder") {
-    nodes.update({ id: service.id, label: service.name });
+    if (id) {
+      nodes.update({ id: id, label: service.name });
+    } else {
+      addJobsToWorkflow([service.id])
+    }
   }
 }
 
@@ -60,12 +64,15 @@ function saveService(service) {
  * @param {workflow object} workflow - Workflow instance.
  */
 // eslint-disable-next-line
-function saveWorkflow(workflow) {
+function saveWorkflow(newWorkflow) {
   if (page == "workflow_builder") {
     $("#current-workflow").append(
-      `<option value="${workflow.id}">${workflow.name}</option>`
+      `<option value="${newWorkflow.id}">${newWorkflow.name}</option>`
     );
+    $("#current-workflow").val(newWorkflow.id);
     $("#current-workflow").selectpicker("refresh");
+    workflow = newWorkflow;
+    displayWorkflow(workflow);
   }
 }
 

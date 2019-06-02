@@ -4,7 +4,6 @@ action: false
 alertify: false
 call: false
 editService: false
-fCall: false
 runJob: false
 showLogs: false
 showPanel: false
@@ -113,7 +112,7 @@ function switchToWorkflow(workflowId) {
  * Add an existing job to the workflow.
  */
 // eslint-disable-next-line
-function addJobToWorkflow() {
+function addJobsToWorkflow(jobs) {
   if (!workflow) {
     alertify.notify(
       `You must create a workflow in the
@@ -122,8 +121,8 @@ function addJobToWorkflow() {
       5
     );
   } else {
-    const url = `/add_jobs_to_workflow/${workflow.id}`;
-    fCall(url, "#add_jobs-form", function(result) {
+    jobs = jobs || $("#jobs").val().join("-");
+    call(`/add_jobs_to_workflow/${workflow.id}/${jobs}`, function(result) {
       lastModified = result.update_time;
       result.jobs.forEach((job) => {
         $("#add_jobs").remove();
@@ -135,7 +134,7 @@ function addJobToWorkflow() {
             5
           );
         } else {
-          alertify.notify(`Job '${job.name}' already in workflow.`, "error", 5);
+          alertify.notify(`${job.type} '${job.name}' already in workflow.`, "error", 5);
         }
       });
     });

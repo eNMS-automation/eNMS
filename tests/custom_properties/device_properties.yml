@@ -9,3 +9,45 @@ property2:
   default: "10.145.14.1"
   add_to_dashboard: True
   is_address: True
+console1:
+    pretty_name: Console 1
+    type: string
+    default: "None"
+    add_to_dashboard: False
+    is_address: True
+console2:
+    pretty_name: Console 2
+    type: string
+    default: "None"
+    add_to_dashboard: False
+    is_address: True
+network:
+    pretty_name: Network
+    type: string
+    default: "None"
+    add_to_dashboard: True
+fqdn:
+    pretty_name: FQDN
+    type: string
+    default: "None"
+    add_to_dashboard: True
+us_address:
+    pretty_name: Address
+    type: string
+    default: "None"
+    add_to_dashboard: False
+us_city:
+    pretty_name: City
+    type: string
+    default: "None"
+    add_to_dashboard: False
+us_state:
+    pretty_name: State
+    type: string
+    default: "None"
+    add_to_dashboard: False
+us_zip:
+    pretty_name: zip
+    type: string
+    default: "None"
+    add_to_dashboard: False

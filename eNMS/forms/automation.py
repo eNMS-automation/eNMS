@@ -88,7 +88,7 @@ class CompareResultsForm(BaseForm):
 
 class AddJobsForm(BaseForm):
     template = "base"
-    action = "addJobToWorkflow"
+    action = "addJobsToWorkflow"
     form_type = HiddenField(default="add_jobs")
     jobs = MultipleInstanceField("Add jobs", instance_type="Job")
 

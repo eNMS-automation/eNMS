@@ -33,6 +33,7 @@ from eNMS.database.associations import (
     job_workflow_table,
 )
 from eNMS.database.base import AbstractBase
+from eNMS.exceptions import VariableSubstitutionError
 from eNMS.models.inventory import Device
 from eNMS.models.logging import Log  # noqa: F401
 
@@ -420,7 +421,19 @@ class Service(Job):
         r = compile("{{(.*?)}}")
 
         def replace(match: Match) -> str:
-            return str(eval(match.group()[2:-2], variables))
+            try:
+                return str(eval(match.group()[2:-2], variables))
+            except AttributeError:
+                raise VariableSubstitutionError(
+                    "The variable subtitution mechanism failed."
+                    " If you are using the 'device' variable, "
+                    "check that the service has targets."
+                )
+            except NameError:
+                raise VariableSubstitutionError(
+                    "The variable subtitution mechanism failed."
+                    " Check that all variables are defined."
+                )
 
         def rec(input: Any) -> Any:
             if isinstance(input, str):

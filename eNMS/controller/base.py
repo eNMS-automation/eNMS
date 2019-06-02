@@ -214,7 +214,6 @@ class BaseController:
         device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
         )
-        print(custom_properties)
         return custom_properties
 
     def init_logs(self) -> None:

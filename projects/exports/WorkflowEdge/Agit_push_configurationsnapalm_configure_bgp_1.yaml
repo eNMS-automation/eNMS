@@ -1,5 +1,0 @@
-destination: napalm_configure_bgp_1
-name: 33-prerequisite:7->11
-source: git_push_configurations
-subtype: prerequisite
-workflow: A

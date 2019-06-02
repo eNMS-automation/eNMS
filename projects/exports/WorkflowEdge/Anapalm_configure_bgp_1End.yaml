@@ -1,5 +1,0 @@
-destination: End
-name: 33-prerequisite:11->2
-source: napalm_configure_bgp_1
-subtype: prerequisite
-workflow: A

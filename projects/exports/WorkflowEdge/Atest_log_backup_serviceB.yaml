@@ -1,5 +1,0 @@
-destination: B
-name: 33-prerequisite:13->34
-source: test_log_backup_service
-subtype: prerequisite
-workflow: A

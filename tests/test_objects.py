@@ -4,8 +4,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database.functions import fetch, fetch_all
 from eNMS.properties.objects import (
-    device_subtypes,
-    link_subtypes,
+    device_icons,
     pool_link_properties,
     pool_device_properties,
 )
@@ -32,15 +31,14 @@ def define_device(subtype: str, description: str) -> ImmutableMultiDict:
     )
 
 
-def define_link(subtype: str, source: int, destination: int) -> ImmutableMultiDict:
+def define_link(source: int, destination: int) -> ImmutableMultiDict:
     return ImmutableMultiDict(
         [
             ("form_type", "link"),
-            ("name", f"{subtype}: {source} to {destination}"),
+            ("name", f"{source} to {destination}"),
             ("description", "description"),
             ("location", "Los Angeles"),
             ("vendor", "Juniper"),
-            ("subtype", subtype),
             ("source", source),
             ("destination", destination),
         ]
@@ -49,18 +47,17 @@ def define_link(subtype: str, source: int, destination: int) -> ImmutableMultiDi
 
 @check_pages("table/device", "table/link", "view/network")
 def test_manual_object_creation(user_client: FlaskClient) -> None:
-    for subtype in device_subtypes:
+    for subtype in device_icons:
         for description in ("desc1", "desc2"):
             obj_dict = define_device(subtype, description)
             user_client.post("/update/device", data=obj_dict)
-    for subtype in link_subtypes:
-        devices = fetch_all("Device")
-        for source in devices[:3]:
-            for destination in devices[:3]:
-                obj_dict = define_link(subtype, source.id, destination.id)
-                user_client.post("/update/link", data=obj_dict)
+    devices = fetch_all("Device")
+    for source in devices[:3]:
+        for destination in devices[:3]:
+            obj_dict = define_link(source.id, destination.id)
+            user_client.post("/update/link", data=obj_dict)
     assert len(fetch_all("Device")) == 44
-    assert len(fetch_all("Link")) == 82
+    assert len(fetch_all("Link")) == 9
 
 
 def create_from_file(client: FlaskClient, file: str) -> None:

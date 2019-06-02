@@ -82,7 +82,7 @@ class AdministrationController(BaseController):
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 dump(export(cls_name), migration_file, default_flow_style=False)
 
-    def import_object(self, model, obj) -> dict:
+    def import_object(self, model: str, obj: dict) -> dict:
         for property, relation in relationships[model].items():
             if property not in obj:
                 continue
@@ -137,7 +137,6 @@ class AdministrationController(BaseController):
         for folder in ("Service", "Workflow", "WorkflowEdge"):
             path = self.path / "projects" / "exports" / folder
             for file in scandir(path):
-                print(file.name)
                 if file.name == ".gitkeep":
                     continue
                 with open(path / file.name, "r") as job_dict:

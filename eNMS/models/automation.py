@@ -159,7 +159,7 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def init_run(self, parent):
+    def init_run(self, parent: Optional["Workflow"]) -> None:
         current_job = parent or self
         self.is_running, self.state = True, {}
         if parent:
@@ -169,7 +169,13 @@ class Job(AbstractBase):
         if not parent:
             Session.commit()
 
-    def end_run(self, runtime, results, parent, task):
+    def end_run(
+        self,
+        runtime: str,
+        results: dict,
+        parent: Optional["Workflow"],
+        task: Optional["Task"],
+    ) -> None:
         current_job = parent or self
         current_job.logs.append(f"{self.type} {self.name}: Finished.")
         self.is_running, self.state = False, {}
@@ -274,7 +280,7 @@ class Service(Job):
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Workflow"] = None,
-    ) -> Tuple[dict, str]:
+    ) -> dict:
         current_job = parent or self
         results: dict = {"results": {}}
         if self.has_targets and not targets:
@@ -494,7 +500,7 @@ class Workflow(Job):
             Delete</button>""",
         ]
 
-    def compute_valid_targets(self, job, results):
+    def compute_valid_targets(self, job: Job, results: dict) -> Set[Device]:
         if not job.has_targets:
             return set()
         elif self.use_workflow_targets:
@@ -521,7 +527,7 @@ class Workflow(Job):
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Workflow"] = None,
-    ) -> Tuple[dict, str]:
+    ) -> dict:
         self.state = {"jobs": {}}
         jobs: List[Job] = [self.jobs[0]]
         visited: Set = set()

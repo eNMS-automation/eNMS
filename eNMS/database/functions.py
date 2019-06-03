@@ -13,7 +13,10 @@ def fetch(model: str, allow_none: bool = False, **kwargs: Any) -> Any:
     if result or allow_none:
         return Session.query(models[model]).filter_by(**kwargs).first()
     else:
-        raise InstanceNotFoundException
+        raise InstanceNotFoundException(
+            f"There is no {model} in the database "
+            f"with the following characteristics: {kwargs}"
+        )
 
 
 def fetch_all(model: str) -> Tuple[Any]:

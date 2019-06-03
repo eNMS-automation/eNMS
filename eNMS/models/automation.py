@@ -113,13 +113,23 @@ class Job(AbstractBase):
         ]
 
     def notify(self, results: dict, time: str) -> None:
+        notification = [
+            f"Job: {self.name} ({self.type})",
+            f"Runtime: {time}",
+            f'Status: {"PASS" if results["success"] else "FAILED"}',
+        ]
+        notification.extend(self.job_notification(results))
+        notification.append(
+            f"Results: {controller.enms_server_addr}/view_job_results"
+            f"/{self.id}/{time.replace(' ', '$')}"
+        )
         fetch("Job", name=self.send_notification_method).run(
             {
                 "job": self.serialized,
                 "results": self.results,
                 "runtime": time,
                 "result": results["success"],
-                "content": self.build_notification(results, time),
+                "content": "\n\n".join(notification),
             }
         )
 
@@ -251,32 +261,23 @@ class Service(Job):
     __mapper_args__ = {"polymorphic_identity": "Service"}
     parent_cls = "Job"
 
-    def build_notification(self, results: dict, now: str) -> str:
-        summary = [
-            f"Job: {self.name} ({self.type})",
-            f"Runtime: {now}",
-            f'Status: {"PASS" if results["success"] else "FAILED"}',
-        ]
+    def job_notification(self, results: dict) -> str:
+        notification = []
         if "devices" in results["results"] and not results["success"]:
             failed = "\n".join(
                 device
                 for device, device_results in results["results"]["devices"].items()
                 if not device_results["success"]
             )
-            summary.append(f"FAILED\n{failed}")
+            notification.append(f"FAILED\n{failed}")
             if not self.display_only_failed_nodes:
                 passed = "\n".join(
                     device
                     for device, device_results in results["results"]["devices"].items()
                     if device_results["success"]
                 )
-                summary.append(f"\n\nPASS:\n{passed}")
-        results_url = (
-            f"{controller.enms_server_addr}/view_job_results"
-            f"/{self.id}/{now.replace(' ', '$')}"
-        )
-        summary.append(f"Results: {results_url}")
-        return "\n\n".join(summary)
+                notification.append(f"\n\nPASS:\n{passed}")
+        return notification
 
     def build_results(
         self,
@@ -492,17 +493,8 @@ class Workflow(Job):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    def build_notification(self, results: dict, now: str) -> str:
-        summary = [
-            f"Job: {self.name} ({self.type})",
-            f"Runtime: {now}",
-            f'Status: {"PASS" if results["success"] else "FAILED"}',
-        ]
-        results_url = (
-            f"{controller.enms_server_addr}/automation/results/{self.id}/{now}"
-        )
-        summary.append(f"Results: {results_url}")
-        return "\n\n".join(summary)
+    def job_notification(self, results: dict) -> str:
+        return []
 
     def generate_row(self, table: str) -> List[str]:
         return [
@@ -573,9 +565,8 @@ class Workflow(Job):
             valid_targets = self.compute_valid_targets(job, results["results"])
             job_results, _ = job.run(results, targets=valid_targets, parent=self)
             results["results"][job.name] = job_results
-            success = job_results["results"]["success"]
-            self.state["jobs"][job.id] = success
-            edge_to_follow = "success" if success else "failure"
+            self.state["jobs"][job.id] = job_results["success"]
+            edge_to_follow = "success" if job_results["success"] else "failure"
             if self.use_workflow_targets and job.has_targets:
                 allowed_edges = ["success", "failure"]
             else:

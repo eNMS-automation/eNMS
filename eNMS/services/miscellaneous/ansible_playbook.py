@@ -3,6 +3,7 @@ from json.decoder import JSONDecodeError
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
+from typing import Optional
 from wtforms import BooleanField, HiddenField, StringField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
@@ -32,7 +33,7 @@ class AnsiblePlaybookService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         arguments = self.sub(self.arguments, locals()).split()
         command, extra_args = ["ansible-playbook"], {}
         if self.pass_device_properties:

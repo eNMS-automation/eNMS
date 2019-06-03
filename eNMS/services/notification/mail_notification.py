@@ -1,5 +1,6 @@
 from flask_mail import Message
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
+from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
@@ -8,6 +9,7 @@ from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.extensions import mail_client
 from eNMS.models.automation import Service
+from eNMS.models.inventory import Device
 
 
 class MailNotificationService(Service):
@@ -23,7 +25,7 @@ class MailNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
 
-    def job(self, device) -> dict:
+    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         if self.recipients:
             recipients = self.recipients.split(",")
         else:

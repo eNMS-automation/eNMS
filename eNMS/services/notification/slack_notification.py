@@ -1,5 +1,6 @@
 from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
+from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
@@ -7,6 +8,7 @@ from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
+from eNMS.models.inventory import Device
 
 
 class SlackNotificationService(Service):
@@ -21,7 +23,7 @@ class SlackNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}
 
-    def job(self, device) -> dict:
+    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         slack_client = SlackClient(self.token or controller.slack_token)
         channel = self.sub(self.channel, locals()) or controller.slack_channel
         self.logs.append(f"Sending Slack notification on {channel}")

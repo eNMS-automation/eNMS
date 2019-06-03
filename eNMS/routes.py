@@ -190,6 +190,12 @@ def form(form_type: str) -> dict:
     )
 
 
+@blueprint.route("/view_job_results/<int:job_id>/<runtime>")
+@login_required
+def view_job_results(job_id: int, runtime: str) -> Response:
+    return jsonify(fetch("Job", id=job_id).results[runtime.replace("$", " ")])
+
+
 @blueprint.route("/download_configuration/<name>")
 @login_required
 def download_configuration(name: str) -> Response:

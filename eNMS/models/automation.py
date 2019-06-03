@@ -112,39 +112,13 @@ class Job(AbstractBase):
             if x.subtype in subtypes and x.workflow == workflow
         ]
 
-    def build_notification(self, results: dict, now: str) -> str:
-        summary = [
-            f"Job: {self.name} ({self.type})",
-            f"Runtime: {now}",
-            f'Status: {"PASS" if results["results"]["success"] else "FAILED"}',
-        ]
-        if "devices" in results["results"] and not results["results"]["success"]:
-            failed = "\n".join(
-                device
-                for device, device_results in results["results"]["devices"].items()
-                if not device_results["success"]
-            )
-            summary.append(f"FAILED\n{failed}")
-            if not self.display_only_failed_nodes:
-                passed = "\n".join(
-                    device
-                    for device, device_results in results["results"]["devices"].items()
-                    if device_results["success"]
-                )
-                summary.append(f"\n\nPASS:\n{passed}")
-        results_url = (
-            f"{controller.enms_server_addr}/automation/results/{self.id}/{now}"
-        )
-        summary.append(f"Results: {results_url}")
-        return "\n\n".join(summary)
-
     def notify(self, results: dict, time: str) -> None:
         fetch("Job", name=self.send_notification_method).run(
             {
                 "job": self.serialized,
                 "results": self.results,
                 "runtime": time,
-                "result": results["results"]["success"],
+                "result": results["success"],
                 "content": self.build_notification(results, time),
             }
         )
@@ -277,6 +251,33 @@ class Service(Job):
     __mapper_args__ = {"polymorphic_identity": "Service"}
     parent_cls = "Job"
 
+    def build_notification(self, results: dict, now: str) -> str:
+        summary = [
+            f"Job: {self.name} ({self.type})",
+            f"Runtime: {now}",
+            f'Status: {"PASS" if results["success"] else "FAILED"}',
+        ]
+        if "devices" in results["results"] and not results["success"]:
+            failed = "\n".join(
+                device
+                for device, device_results in results["results"]["devices"].items()
+                if not device_results["success"]
+            )
+            summary.append(f"FAILED\n{failed}")
+            if not self.display_only_failed_nodes:
+                passed = "\n".join(
+                    device
+                    for device, device_results in results["results"]["devices"].items()
+                    if device_results["success"]
+                )
+                summary.append(f"\n\nPASS:\n{passed}")
+        results_url = (
+            f"{controller.enms_server_addr}/view_job_results"
+            f"/{self.id}/{now.replace(' ', '$')}"
+        )
+        summary.append(f"Results: {results_url}")
+        return "\n\n".join(summary)
+
     def build_results(
         self,
         payload: Optional[dict] = None,
@@ -284,7 +285,7 @@ class Service(Job):
         parent: Optional["Workflow"] = None,
     ) -> dict:
         current_job = parent or self
-        results: dict = {"results": {}}
+        results: dict = {"results": {}, "success": False}
         if self.has_targets and not targets:
             targets = self.compute_targets()
         if targets:
@@ -308,7 +309,7 @@ class Service(Job):
                     ]
                     targets.remove(device)
                 if not targets:
-                    results["results"]["success"] = True
+                    results["success"] = True
                     break
                 else:
                     if self.number_of_retries:
@@ -316,7 +317,6 @@ class Service(Job):
                     if i != self.number_of_retries:
                         sleep(self.time_between_retries)
                     else:
-                        results["results"]["success"] = False
                         for device in targets:
                             results["results"]["devices"][device.name] = attempt[
                                 "devices"
@@ -326,6 +326,7 @@ class Service(Job):
                     results[f"Attempts {i + 1}"] = attempt
                 if attempt["success"] or i == self.number_of_retries:
                     results["results"] = attempt
+                    results["success"] = attempt["success"]
                     break
                 else:
                     sleep(self.time_between_retries)
@@ -490,6 +491,18 @@ class Workflow(Job):
         super().__init__(**kwargs)
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
+
+    def build_notification(self, results: dict, now: str) -> str:
+        summary = [
+            f"Job: {self.name} ({self.type})",
+            f"Runtime: {now}",
+            f'Status: {"PASS" if results["success"] else "FAILED"}',
+        ]
+        results_url = (
+            f"{controller.enms_server_addr}/automation/results/{self.id}/{now}"
+        )
+        summary.append(f"Results: {results_url}")
+        return "\n\n".join(summary)
 
     def generate_row(self, table: str) -> List[str]:
         return [

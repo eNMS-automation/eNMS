@@ -1,5 +1,5 @@
 from flask_mail import Message
-from sqlalchemy import Column, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
@@ -15,6 +15,7 @@ class MailNotificationService(Service):
     __tablename__ = "MailNotificationService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    has_targets = Column(Boolean, default=False)
     title = Column(String(SMALL_STRING_LENGTH), default="")
     sender = Column(String(SMALL_STRING_LENGTH), default="")
     recipients = Column(String(SMALL_STRING_LENGTH), default="")
@@ -22,7 +23,7 @@ class MailNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
 
-    def job(self, _) -> dict:
+    def job(self, device) -> dict:
         if self.recipients:
             recipients = self.recipients.split(",")
         else:

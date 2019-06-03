@@ -54,7 +54,7 @@ class BaseController:
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
     enms_config_mode = environ.get("ENMS_CONFIG_MODE", "Debug")
     enms_log_level = environ.get("ENMS_LOG_LEVEL", "DEBUG")
-    enms_server_addr = environ.get("ENMS_SERVER_ADDR")
+    enms_server_addr = environ.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
     git_automation = environ.get("GIT_AUTOMATION")
     git_configurations = environ.get("GIT_CONFIGURATIONS")
     gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))

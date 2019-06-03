@@ -101,16 +101,19 @@ you don't need real-time logs; this is more like a production use-case.
 
 ## From the TODO list
 
-- multiprocssing. currently using ThreadPool, which create paramiko "broken pipe' and very high pool count outside of ien-ap and inside.
+- multiprocessing. currently using ThreadPool, which create paramiko "broken pipe' and very high pool count outside of ien-ap and inside.
 Consider switching to standard pool.
->>> Done. Next step would be to add dramatiq/celery support. That being said, I don't think it will 
+>>> Done. Next step would be to add dramatiq/celery support. That being said, I don't think multiprocessing will 
 actually prevent the paramiko broken pipe issue. I've run some tests where the last message I get is "[chan 0] EOF received (0)",
 and then nothing happens. I don't really see much improvement compared to multithreading... but since we needed an implementation
 where args can be pickled for the future task queue implementation, this is a step in the right direction anyway.
 
 - Ability to create a Pool given a list of devices
->>> Done. This is a new endpoint in the REST API called "create_pool", you can create a pool by sending a POST request
+>>> Done in two different ways:
+* There is a new endpoint in the REST API called "create_pool", you can create a pool by sending a POST request
 where the payload contains the name of the pools, and two lists: devices (list of device names) and links (link names).
+* From the pool management table, when you select "Edit Objects", you can now copy/paste a string with all device / link names,
+separated by a comma. When these fields are not empty, eNMS will ignore what is selected in the drop-down lists.
 
 - Add 'Type of Service' label under the 'Edit service xXxxxxxxx' Label on Steps1,2,3,4 of Service Creation Panel
 >>> Done.
@@ -123,4 +126,11 @@ where the payload contains the name of the pools, and two lists: devices (list o
 
 - iEN-AP gui Automation/Service Mangement - "Duplicate" feature is behaving like the "Edit" feature, (i.e. the service is being modified not duplicated when "Duplicate" is used). Observed on VM 65.224.102.89, which was built on April 13, 2019, 7:51 p.m & 65.224.102.73, which was built on April 23, 2019, 5:17 p.m.
 >>> Should be fixed.
+
+- Add exception in fetch/fetch_all when on_error is specified and other cases where func method() might return None.
+>>> fetch now has a new "allow_none" keyword argument that defaults to False.
+In a few places where None is allowed, it is explicitly set to True.
+When fetch returns None and None is not allowed, eNMS will raise an InstanceNotFoundException.
+However, I didn't implement such a mechanism for fetch_all: fetch_all is always allowed to return an empty list,
+there is no reason to forbid it.
 

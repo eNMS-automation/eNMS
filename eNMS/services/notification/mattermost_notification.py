@@ -1,6 +1,6 @@
 from json import dumps
 from requests import post
-from sqlalchemy import Column, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
@@ -15,13 +15,14 @@ class MattermostNotificationService(Service):
     __tablename__ = "MattermostNotificationService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    has_targets = Column(Boolean, default=False)
     channel = Column(String(SMALL_STRING_LENGTH), default="")
     body = Column(Text(LARGE_STRING_LENGTH), default="")
 
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
 
-    def job(self, _) -> dict:
-        channel = self.channel or controller.mattermost_channel
+    def job(self, device) -> dict:
+        channel = self.sub(self.channel, locals()) or controller.mattermost_channel
         self.logs.append(f"Sending Mattermost notification on {channel}")
         result = post(
             controller.mattermost_url,

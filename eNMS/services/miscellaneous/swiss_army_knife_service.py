@@ -43,6 +43,9 @@ class SwissArmyKnifeService(Service):
             ","
         ) or controller.mail_recipients.split(",")
         self.logs.append(f"Sending mail notification for {name}")
+        print("ttt" * 100, controller.mail_sender)
+        app_context = controller.app.app_context()
+        app_context.push()
         message = Message(
             f"{name} ({'PASS' if payload['result'] else 'FAILED'})",
             sender=controller.mail_sender,

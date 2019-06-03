@@ -32,9 +32,11 @@ class MailNotificationService(Service):
         title = self.sub(self.title, locals())
         body = self.sub(self.body, locals())
         self.logs.append(f"Sending mail {title} to {sender}")
+        app_context = controller.app.app_context()
+        app_context.push()
         message = Message(title, sender=sender, recipients=recipients, body=body)
         mail_client.send(message)
-        return {"success": True, "result": str(message)}
+        return {"success": True, "result": {}}
 
 
 class MailNotificationForm(ServiceForm):

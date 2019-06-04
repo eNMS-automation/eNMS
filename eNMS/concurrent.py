@@ -1,5 +1,6 @@
 from typing import Optional
 
+from eNMS.database import Session
 from eNMS.database.functions import fetch
 
 
@@ -14,6 +15,7 @@ def threaded_job(
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
     job.run(targets=targets, payload=payload, task=task)
+    Session.remove()
 
 
 def device_process(args: tuple) -> None:

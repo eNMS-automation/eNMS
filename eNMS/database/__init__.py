@@ -10,9 +10,7 @@ engine = create_engine(
     pool_pre_ping=True,
 )
 
-Session = scoped_session(
-    sessionmaker(expire_on_commit=False, autoflush=False, bind=engine)
-)
+Session = scoped_session(sessionmaker(autoflush=False, bind=engine))
 
 Base = declarative_base()
 

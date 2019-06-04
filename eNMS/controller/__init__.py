@@ -469,6 +469,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             [
                 {
                     "name": "GET_device",
+                    "has_targets": True,
                     "type": "RestCallService",
                     "description": "Use GET ReST call on eNMS ReST API",
                     "username": "admin",
@@ -503,6 +504,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             + [
                 {
                     "name": "process_payload1",
+                    "has_targets": True,
                     "type": "SwissArmyKnifeService",
                     "description": "Process Payload in example workflow",
                     "waiting_time": 0,

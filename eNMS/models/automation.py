@@ -261,7 +261,7 @@ class Service(Job):
     __mapper_args__ = {"polymorphic_identity": "Service"}
     parent_cls = "Job"
 
-    def job_notification(self, results: dict) -> str:
+    def job_notification(self, results: dict) -> List[str]:
         notification = []
         if "devices" in results["results"] and not results["success"]:
             failed = "\n".join(
@@ -493,7 +493,7 @@ class Workflow(Job):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    def job_notification(self, results: dict) -> str:
+    def job_notification(self, results: dict) -> list:
         return []
 
     def generate_row(self, table: str) -> List[str]:
@@ -563,7 +563,9 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             valid_targets = self.compute_valid_targets(job, results["results"])
-            job_results, _ = job.run(results, targets=valid_targets, parent=self)
+            job_results, _ = job.run(
+                results["results"], targets=valid_targets, parent=self
+            )
             results["results"][job.name] = job_results
             self.state["jobs"][job.id] = job_results["success"]
             edge_to_follow = "success" if job_results["success"] else "failure"

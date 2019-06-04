@@ -36,9 +36,9 @@ class AutomationController(BaseController):
         fetch("Workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(self, workflow_id: int, jobs: str) -> Dict[str, Any]:
+    def add_jobs_to_workflow(self, workflow_id: int, job_ids: str) -> Dict[str, Any]:
         workflow = fetch("Workflow", id=workflow_id)
-        jobs = objectify("Job", jobs.split("-"))
+        jobs = objectify("Job", [int(job_id) for job_id in job_ids.split("-")])
         for job in jobs:
             job.workflows.append(workflow)
         now = self.get_time()

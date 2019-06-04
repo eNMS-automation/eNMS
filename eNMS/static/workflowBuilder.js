@@ -121,7 +121,11 @@ function addJobsToWorkflow(jobs) {
       5
     );
   } else {
-    jobs = $("#jobs").length ? $("#jobs").val().join("-") : jobs;
+    jobs = $("#jobs").length
+      ? $("#jobs")
+          .val()
+          .join("-")
+      : jobs;
     call(`/add_jobs_to_workflow/${workflow.id}/${jobs}`, function(result) {
       lastModified = result.update_time;
       result.jobs.forEach((job) => {
@@ -135,7 +139,9 @@ function addJobsToWorkflow(jobs) {
           );
         } else {
           alertify.notify(
-            `${job.type} '${job.name}' already in workflow.`, "error", 5
+            `${job.type} '${job.name}' already in workflow.`,
+            "error",
+            5
           );
         }
       });

@@ -1,9 +1,11 @@
 /*
 global
+addJobsToWorkflow: false
 alertify: false
 call: false
 createPanel: false
 diffview: false
+displayWorkflow: false
 fCall: false
 getJobState: false
 getWorkflowState: false
@@ -13,6 +15,7 @@ nodes: true
 page: false
 showTypePanel: false
 table: false
+workflow: true
 */
 
 let refreshJob = {};
@@ -54,7 +57,7 @@ function saveService(service, id) {
     if (id) {
       nodes.update({ id: id, label: service.name });
     } else {
-      addJobsToWorkflow([service.id])
+      addJobsToWorkflow([service.id]);
     }
   }
 }

@@ -4,13 +4,6 @@ from typing import Dict, Type
 
 class Config(object):
     CACHE_TYPE = "simple"
-    MAIL_SERVER = environ.get("MAIL_SERVER", "smtp.googlemail.com")
-    MAIL_PORT = int(environ.get("MAIL_PORT", "587"))
-    MAIL_USE_TLS = int(environ.get("MAIL_USE_TLS", True))
-    MAIL_USERNAME = environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = environ.get("MAIL_PASSWORD")
-    MAIL_SENDER = environ.get("MAIL_SENDER", "enms@enms.fr")
-    MAIL_RECIPIENTS = environ.get("MAIL_RECIPIENTS", "")
 
 
 class DefaultConfig(Config):

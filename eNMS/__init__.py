@@ -13,15 +13,7 @@ from eNMS.database import Base, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
-from eNMS.extensions import (
-    assets,
-    auth,
-    cache,
-    csrf,
-    login_manager,
-    mail_client,
-    toolbar,
-)
+from eNMS.extensions import assets, auth, cache, csrf, login_manager, toolbar
 from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
@@ -35,7 +27,6 @@ def register_modules(app: Flask) -> None:
     csrf.init_app(app)
     FlaskCLI(app)
     login_manager.init_app(app)
-    mail_client.init_app(app)
     toolbar.init_app(app)
     controller.init_app(app)
 

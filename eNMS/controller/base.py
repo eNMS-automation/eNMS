@@ -1,6 +1,10 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from collections import Counter
 from datetime import datetime
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.utils import COMMASPACE, formatdate
 from flask import Flask
 from git import Repo
 from hvac import Client as VaultClient
@@ -14,6 +18,7 @@ from logging.handlers import RotatingFileHandler
 from os import environ, remove, scandir
 from pathlib import Path
 from simplekml import Color, Style
+from smtplib import SMTP
 from string import punctuation
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from tacacs_plus.client import TACACSClient
@@ -346,6 +351,33 @@ class BaseController:
 
     def get_time(self) -> str:
         return str(datetime.now())
+
+    def send_email(
+        self,
+        subject: str,
+        content: str,
+        sender: str = None,
+        recipients: List[str] = None,
+        filename: str = None,
+        file_content: str = None,
+    ) -> None:
+        sender = sender or self.mail_sender
+        recipients = recipients or self.mail_recipients
+        message = MIMEMultipart()
+        message["From"] = sender
+        message["To"] = COMMASPACE.join(recipients)
+        message["Date"] = formatdate(localtime=True)
+        message["Subject"] = subject
+        message.attach(MIMEText(content))
+        attached_file = MIMEApplication(file_content, Name=filename)
+        attached_file["Content-Disposition"] = 'attachment; filename="{filename}"'
+        message.attach(attached_file)
+        server = SMTP(self.mail_server, self.mail_port)
+        if self.mail_use_tls:
+            server.starttls()
+            server.login(self.mail_username, self.mail_username)
+        server.sendmail(sender, recipients, message.as_string())
+        server.close()
 
     def str_dict(self, input: Any, depth: int = 0) -> str:
         tab = "\t" * depth

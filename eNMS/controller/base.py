@@ -369,13 +369,14 @@ class BaseController:
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject
         message.attach(MIMEText(content))
-        attached_file = MIMEApplication(file_content, Name=filename)
-        attached_file["Content-Disposition"] = 'attachment; filename="{filename}"'
-        message.attach(attached_file)
+        if filename:
+            attached_file = MIMEApplication(file_content, Name=filename)
+            attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
+            message.attach(attached_file)
         server = SMTP(self.mail_server, self.mail_port)
         if self.mail_use_tls:
             server.starttls()
-            server.login(self.mail_username, self.mail_username)
+            server.login(self.mail_username, self.mail_password)
         server.sendmail(sender, recipients, message.as_string())
         server.close()
 

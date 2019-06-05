@@ -1,9 +1,7 @@
-from flask_mail import Message
 from git import Repo
 from git.exc import GitCommandError
 from json import dumps
 from logging import info
-from os import remove
 from pathlib import Path
 from requests import post, get
 from slackclient import SlackClient
@@ -14,7 +12,6 @@ from wtforms import BooleanField, HiddenField
 from eNMS.forms.automation import ServiceForm
 from eNMS.controller import controller
 from eNMS.database.functions import factory, fetch_all
-from eNMS.extensions import mail_client
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
@@ -39,31 +36,17 @@ class SwissArmyKnifeService(Service):
 
     def mail_feedback_notification(self, payload: dict) -> dict:
         name = f"{payload['job']['name']}"
-        recipients = payload["job"]["mail_recipient"].split(
-            ","
-        ) or controller.mail_recipients.split(",")
-        self.logs.append(f"Sending mail notification for {name}")
-        app_context = controller.app.app_context()
-        app_context.push()
-        message = Message(
-            f"{name} ({'PASS' if payload['result'] else 'FAILED'})",
-            sender=controller.mail_sender,
-            recipients=recipients,
-            body=payload["content"],
-        )
+        recipients = payload["job"]["mail_recipient"].split(",")
         runtime = payload["runtime"].replace(".", "").replace(":", "")
         filename = f"results-{runtime}.txt"
-        with open(filename, "w") as file:
-            file.write(controller.str_dict(payload["results"][payload["runtime"]]))
-        with open(filename, "r") as file:
-            message.attach(
-                filename,
-                "text/plain",
-                file.read(),
-                disposition=f"attachment; filename={filename}",
-            )
-        remove(filename)
-        mail_client.send(message)
+        self.logs.append(f"Sending mail notification for {name}")
+        controller.send_email(
+            f"{name} ({'PASS' if payload['result'] else 'FAILED'})",
+            payload["content"],
+            recipients=recipients,
+            filename=filename,
+            file_content=controller.str_dict(payload["results"][payload["runtime"]]),
+        )
         return {"success": True}
 
     def slack_feedback_notification(self, payload: dict) -> dict:

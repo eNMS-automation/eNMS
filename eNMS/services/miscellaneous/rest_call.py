@@ -81,7 +81,7 @@ class RestCallService(Service):
         try:
             result = response.json()
         except JSONDecodeError as e:
-            result = {"response": str(response), "exception": str(e)}
+            result = dumps({"response": str(response), "exception": str(e)})
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"

@@ -1,4 +1,5 @@
 from apscheduler.triggers.cron import CronTrigger
+from collections import defaultdict
 from datetime import datetime
 from git import Repo
 from git.exc import GitCommandError
@@ -19,7 +20,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 from traceback import format_exc
-from typing import Any, List, Match, Optional, Set, Tuple, Union
+from typing import Any, Generator, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 
 from eNMS.concurrent import threaded_job, device_process
@@ -104,13 +105,11 @@ class Job(AbstractBase):
         return targets
 
     def adjacent_jobs(
-        self, workflow: "Workflow", direction: str, *subtypes: str
-    ) -> List["Job"]:
-        return [
-            getattr(x, direction)
-            for x in getattr(self, f"{direction}s")
-            if x.subtype in subtypes and x.workflow == workflow
-        ]
+        self, workflow: "Workflow", direction: str, subtype: str
+    ) -> Generator["Job", None, None]:
+        for x in getattr(self, f"{direction}s"):
+            if x.subtype == subtype and x.workflow == workflow:
+                yield getattr(x, direction)
 
     def notify(self, results: dict, time: str) -> None:
         notification = [
@@ -519,27 +518,33 @@ class Workflow(Job):
             Delete</button>""",
         ]
 
-    def compute_valid_targets(self, job: Job, results: dict) -> Set[Device]:
+    def compute_valid_devices(self, job: Job, allowed_devices: dict) -> Set[Device]:
         if not job.has_targets:
             return set()
         elif self.use_workflow_targets:
-            targets = self.compute_targets()
-            valid_targets = set(targets)
-            for edge_type in ("success", "failure"):
-                expected_result = True if edge_type == "success" else False
-                for previous_job in job.adjacent_jobs(self, "source", edge_type):
-                    if not previous_job.has_targets:
-                        continue
-                    device_results = results[previous_job.name]["results"]["devices"]
-                    for target in targets:
-                        if (
-                            target.name not in device_results
-                            or device_results[target.name]["success"] != expected_result
-                        ):
-                            valid_targets.remove(target)
-            return valid_targets
+            return allowed_devices[job.name]
         else:
             return job.compute_targets()
+
+    def workflow_targets_processing(
+        self, allowed_devices: dict, job: Job, results: dict
+    ) -> Generator[Job, None, None]:
+        failed_devices, passed_devices = set(), set()
+        if job.has_targets:
+            for name, device_results in results["results"]["devices"].items():
+                if device_results["success"]:
+                    passed_devices.add(fetch("Device", name=name))
+                else:
+                    failed_devices.add(fetch("Device", name=name))
+        else:
+            if results["success"]:
+                passed_devices = allowed_devices[job.name]
+            else:
+                failed_devices = allowed_devices[job.name]
+        for devices, edge in ((passed_devices, "success"), (failed_devices, "failure")):
+            for successor in job.adjacent_jobs(self, "destination", edge):
+                allowed_devices[successor.name] |= devices
+                yield successor
 
     def build_results(
         self,
@@ -551,8 +556,9 @@ class Workflow(Job):
         jobs: List[Job] = [self.jobs[0]]
         visited: Set = set()
         results: dict = {"results": {}, "success": False}
-        if self.use_workflow_targets and not targets:
-            targets = self.compute_targets()
+        allowed_devices: dict = defaultdict(set)
+        if self.use_workflow_targets:
+            allowed_devices["Start"] = targets or self.compute_targets()
         while jobs:
             job = jobs.pop()
             if any(
@@ -562,18 +568,23 @@ class Workflow(Job):
                 continue
             visited.add(job)
             self.state["current_job"] = job.get_properties()
-            valid_targets = self.compute_valid_targets(job, results["results"])
+            valid_devices = self.compute_valid_devices(job, allowed_devices)
             job_results, _ = job.run(
-                results["results"], targets=valid_targets, parent=self
+                results["results"], targets=valid_devices, parent=self
             )
             results["results"][job.name] = job_results
             self.state["jobs"][job.id] = job_results["success"]
-            edge_to_follow = "success" if job_results["success"] else "failure"
-            if self.use_workflow_targets and job.has_targets:
-                allowed_edges = ["success", "failure"]
+            if self.use_workflow_targets:
+                successors = self.workflow_targets_processing(
+                    allowed_devices, job, job_results
+                )
             else:
-                allowed_edges = [edge_to_follow]
-            for successor in job.adjacent_jobs(self, "destination", *allowed_edges):
+                successors = job.adjacent_jobs(
+                    self,
+                    "destination",
+                    "success" if job_results["success"] else "failure",
+                )
+            for successor in successors:
                 if successor not in visited:
                     jobs.append(successor)
                 if successor == self.jobs[1]:

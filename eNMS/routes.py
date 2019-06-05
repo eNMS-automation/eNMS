@@ -11,7 +11,7 @@ from flask import (
     url_for,
 )
 from flask_login import current_user, login_required, login_user, logout_user
-from functools import lru_cache, wraps
+from functools import wraps
 from logging import info
 from os import listdir
 from sqlalchemy import and_
@@ -97,7 +97,6 @@ def logout() -> Response:
 
 
 @blueprint.route("/administration")
-@lru_cache(maxsize=None)
 @monitor_requests
 def administration() -> dict:
     return render_template(
@@ -110,7 +109,6 @@ def administration() -> dict:
 
 
 @blueprint.route("/dashboard")
-@lru_cache(maxsize=None)
 @monitor_requests
 def dashboard() -> dict:
     return render_template(
@@ -168,14 +166,12 @@ def workflow_builder() -> dict:
 
 
 @blueprint.route("/calendar")
-@lru_cache(maxsize=None)
 @monitor_requests
 def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
 
 @blueprint.route("/form/<form_type>")
-@lru_cache(maxsize=None)
 @monitor_requests
 def form(form_type: str) -> dict:
     return render_template(

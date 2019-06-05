@@ -33,6 +33,7 @@ def check_pages(*pages: str) -> Callable:
         def wrapper(user_client: FlaskClient) -> None:
             function(user_client)
             for page in pages:
+                print(page)
                 r = user_client.get(page, follow_redirects=True)
                 assert r.status_code == 200
 

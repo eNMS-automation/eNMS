@@ -5,7 +5,6 @@ class DefaultConfig:
     MODE = "default"
     DEBUG = True
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
-    MAIL_DEBUG = 1
     DEBUG_TB_ENABLED = False
 
 

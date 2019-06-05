@@ -36,14 +36,13 @@ class SwissArmyKnifeService(Service):
 
     def mail_feedback_notification(self, payload: dict) -> dict:
         name = f"{payload['job']['name']}"
-        recipients = payload["job"]["mail_recipient"].split(",")
         runtime = payload["runtime"].replace(".", "").replace(":", "")
         filename = f"results-{runtime}.txt"
         self.logs.append(f"Sending mail notification for {name}")
         controller.send_email(
             f"{name} ({'PASS' if payload['result'] else 'FAILED'})",
             payload["content"],
-            recipients=recipients,
+            recipients=payload["job"]["mail_recipient"],
             filename=filename,
             file_content=controller.str_dict(payload["results"][payload["runtime"]]),
         )

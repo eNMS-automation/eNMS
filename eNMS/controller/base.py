@@ -4,7 +4,7 @@ from datetime import datetime
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.utils import COMMASPACE, formatdate
+from email.utils import formatdate
 from flask import Flask
 from git import Repo
 from hvac import Client as VaultClient
@@ -22,7 +22,7 @@ from smtplib import SMTP
 from string import punctuation
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from tacacs_plus.client import TACACSClient
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Optional, Set, Union
 from yaml import BaseLoader, load
 
 from eNMS.database import Session
@@ -356,25 +356,27 @@ class BaseController:
         self,
         subject: str,
         content: str,
-        sender: str = None,
-        recipients: List[str] = None,
-        filename: str = None,
-        file_content: str = None,
+        sender: Optional[str] = None,
+        recipients: Optional[str] = None,
+        filename: Optional[str] = None,
+        file_content: Optional[Union[str, bytes]] = None,
     ) -> None:
         sender = sender or self.mail_sender
         recipients = recipients or self.mail_recipients
         message = MIMEMultipart()
         message["From"] = sender
-        message["To"] = COMMASPACE.join(recipients)
+        message["To"] = ", ".join(recipients)
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject
         message.attach(MIMEText(content))
         if filename:
+            assert file_content
             attached_file = MIMEApplication(file_content, Name=filename)
             attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
             message.attach(attached_file)
         server = SMTP(self.mail_server, self.mail_port)
         if self.mail_use_tls:
+            assert self.mail_username and self.mail_password
             server.starttls()
             server.login(self.mail_username, self.mail_password)
         server.sendmail(sender, recipients, message.as_string())

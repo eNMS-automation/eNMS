@@ -2,7 +2,30 @@
 
 NetmikoDataExtractionService -> NetmikoRegexExtractionService
 
+## Changes to the custom services
+
+Before, eNMS was creating the custom form by looking at the properties of the custom service model.
+Now, each time you create a custom service, you'll need to create a "Custom form" too.
+The idea is the decouple the service model (what's stored in the database) from the form (UI only).
+This change is not backward compatible and for all existing custom services, you will need to create a custom form.
+
+Having a custom form along with the custom service model makes sense for many reasons:
+- The order in which properties are displayed in the form now longer depends on the order in which properties are defined in the model.
+- You can now set default values for your form.
+- You will no longer use "property_values = ..." and "property_length = ..." and "property_textarea = ...".
+The values of a list, maximum length of a string, and whether or not a text field is a "textarea" is controlled from the form, as it should have been from the beginning.
+
+The following problems will be fixed by this change:
+- Marc reportd the default value was ignored for the "textarea" fields: now it's working.
+- You can define complex validation mechanism. WTforms provides you with a number of "validators" (https://wtforms.readthedocs.io/en/stable/validators.html)
+to check that the user input is an email address, IP address, etc.
+But if you need something more complex, you can define your own "validation function" to compute whether or not the form is valid based on user inputs:
+see here for custom validators: https://wtforms.readthedocs.io/en/stable/validators.html#custom-validators
+
 ## New services
+
+- TextFSM service: uses Netmiko to connect to a device, extract variables from the result with a TextFSM template.
+- Python Snippet Service implemented by Marc
 
 
 ## New Workflow system
@@ -91,13 +114,13 @@ I couldn't find a way to make it work, so I removed the database commit inside a
 Instead, multiple processes will share a Manager.list() "log" variable when logs of all processes will be stored,
 but the content of that list will only be available when the run is finished.
 This means that:
-- when multiprocessing is disabled, the real-time logging system still works: a window pops up and display the results
+- when multiprocessing is disabled, the real-time logging system still works: a window pops up and display the logs
 in real-time.
 - otherwise, with multiprocessing enabled, you can only see the logs at the end of the run.
 
-The way I see it, this isn't such a big deal: having logs displayed in real-time is mainly for troubleshooting purposes,
+The way I see it, this isn't such a big deal: having logs displayed in real-time is useful mainly for troubleshooting purposes,
 when you're testing a service/workflow. When you know the service is working alright, you use multiprocessing and
-you don't need real-time logs; this is more like a production use-case.
+you don't need real-time logs.
 
 ## From the TODO list
 

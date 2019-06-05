@@ -85,7 +85,6 @@ The large string length is used where it makes sense (content match, etc).
 - Added Webassets: before, all javascript dependencies were served independently, which means a lot
 of calls to the server were made to retrieve them.
 Now all dependencies are automatically bundled in a single js file.
-- Added Flask cache: pages that are static are now cached by eNMS (performance improvement).
 - Removed Flask-SQLalchemy. Was obfuscatign the way SQLalchemy works (wrt session management in particular),
 now we use SQLalchemy directly.
 

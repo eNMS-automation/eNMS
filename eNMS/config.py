@@ -1,12 +1,7 @@
 from os import environ
-from typing import Dict, Type
 
 
-class Config(object):
-    CACHE_TYPE = "simple"
-
-
-class DefaultConfig(Config):
+class DefaultConfig:
     MODE = "default"
     DEBUG = True
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
@@ -22,7 +17,7 @@ class DevelopConfig(DefaultConfig):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
-class ProductionConfig(Config):
+class ProductionConfig:
     MODE = "production"
     DEBUG = False
     SECRET_KEY = environ.get("ENMS_SECRET_KEY")
@@ -33,11 +28,10 @@ class ProductionConfig(Config):
 
 class TestConfig(DefaultConfig):
     MODE = "test"
-    CACHE_TYPE = "null"
     WTF_CSRF_ENABLED = False
 
 
-config_mapper: Dict[str, Type[Config]] = {
+config_mapper: dict = {
     "Default": DefaultConfig,
     "Develop": DevelopConfig,
     "Production": ProductionConfig,

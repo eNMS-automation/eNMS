@@ -11,7 +11,7 @@ from flask import (
     url_for,
 )
 from flask_login import current_user, login_required, login_user, logout_user
-from functools import wraps
+from functools import lru_cache, wraps
 from logging import info
 from os import listdir
 from sqlalchemy import and_
@@ -24,7 +24,6 @@ from eNMS.database.functions import fetch
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
-from eNMS.extensions import cache
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
 from eNMS.properties.table import (
@@ -98,7 +97,7 @@ def logout() -> Response:
 
 
 @blueprint.route("/administration")
-@cache.cached(timeout=0)
+@lru_cache(maxsize=None)
 @monitor_requests
 def administration() -> dict:
     return render_template(
@@ -111,7 +110,7 @@ def administration() -> dict:
 
 
 @blueprint.route("/dashboard")
-@cache.cached(timeout=0)
+@lru_cache(maxsize=None)
 @monitor_requests
 def dashboard() -> dict:
     return render_template(
@@ -169,14 +168,14 @@ def workflow_builder() -> dict:
 
 
 @blueprint.route("/calendar")
-@cache.cached(timeout=0)
+@lru_cache(maxsize=None)
 @monitor_requests
 def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
 
 @blueprint.route("/form/<form_type>")
-@cache.cached(timeout=0)
+@lru_cache(maxsize=None)
 @monitor_requests
 def form(form_type: str) -> dict:
     return render_template(

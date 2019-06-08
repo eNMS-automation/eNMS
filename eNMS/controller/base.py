@@ -363,9 +363,11 @@ class BaseController:
     ) -> None:
         sender = sender or self.mail_sender
         recipients = recipients or self.mail_recipients
+        if not recipients:
+            return
         message = MIMEMultipart()
         message["From"] = sender
-        message["To"] = ", ".join(recipients)
+        message["To"] = recipients
         message["Date"] = formatdate(localtime=True)
         message["Subject"] = subject
         message.attach(MIMEText(content))

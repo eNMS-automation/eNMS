@@ -28,7 +28,7 @@ class MailNotificationService(Service):
             self.sub(self.title, locals()),
             self.sub(self.body, locals()),
             sender=self.sender,
-            recipients=self.recipients.split(","),
+            recipients=self.recipients,
         )
         return {"success": True, "result": {}}
 

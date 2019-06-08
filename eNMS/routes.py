@@ -11,7 +11,7 @@ from flask import (
     url_for,
 )
 from flask_login import current_user, login_required, login_user, logout_user
-from functools import wraps
+from functools import lru_cache, wraps
 from logging import info
 from os import listdir
 from sqlalchemy import and_
@@ -98,6 +98,7 @@ def logout() -> Response:
 
 @blueprint.route("/administration")
 @monitor_requests
+@lru_cache(maxsize=None)
 def administration() -> dict:
     return render_template(
         f"pages/administration.html",
@@ -110,6 +111,7 @@ def administration() -> dict:
 
 @blueprint.route("/dashboard")
 @monitor_requests
+@lru_cache(maxsize=None)
 def dashboard() -> dict:
     return render_template(
         f"pages/dashboard.html",
@@ -139,6 +141,7 @@ def table(table_type: str) -> dict:
 
 @blueprint.route("/view/<view_type>")
 @monitor_requests
+@lru_cache(maxsize=None)
 def view(view_type: str) -> dict:
     return render_template(
         f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
@@ -167,12 +170,14 @@ def workflow_builder() -> dict:
 
 @blueprint.route("/calendar")
 @monitor_requests
+@lru_cache(maxsize=None)
 def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
+@lru_cache(maxsize=None)
 def form(form_type: str) -> dict:
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",

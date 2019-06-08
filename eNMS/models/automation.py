@@ -124,7 +124,7 @@ class Job(AbstractBase):
         )
         fetch("Job", name=self.send_notification_method).run(
             {
-                "job": self.serialized,
+                "job": self.get_properties(),
                 "results": self.results,
                 "runtime": time,
                 "result": results["success"],

@@ -156,3 +156,8 @@ When fetch returns None and None is not allowed, eNMS will raise an InstanceNotF
 However, I didn't implement such a mechanism for fetch_all: fetch_all is always allowed to return an empty list,
 there is no reason to forbid it.
 
+
+questions:
+
+- targets: different for each device or the same ? is YaQL also used to fetch the targets from the payload ?
+- YaQL targets extraction: IP address or name ?

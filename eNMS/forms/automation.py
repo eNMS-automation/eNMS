@@ -46,7 +46,6 @@ class JobForm(BaseForm):
     def validate(self):
         if not super().validate():
             return False
-        print(controller.mail_recipients)
         if (
             self.send_notification.data
             and self.send_notification_method.data == "mail_feedback_notification"

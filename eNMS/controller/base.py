@@ -191,21 +191,26 @@ class BaseController:
             if not repo:
                 continue
             local_path = self.path / "git" / repository_type
-            for file in scandir(local_path):
-                if file.name == ".gitkeep":
-                    remove(file)
-            try:
-                Repo.clone_from(repo, local_path)
-                if repository_type == "configurations":
-                    self.update_database_configurations_from_git()
-            except Exception as e:
-                info(f"Cannot clone {repository_type} git repository ({str(e)})")
+            repo_contents_exist = False
+            for entry in scandir(local_path):
+                if entry.name == ".gitkeep":
+                    remove(entry)
+                if entry.name == ".git":
+                    repo_contents_exist = True
+            if repo_contents_exist:
                 try:
                     Repo(local_path).remotes.origin.pull()
                     if repository_type == "configurations":
                         self.update_database_configurations_from_git()
                 except Exception as e:
                     info(f"Cannot pull {repository_type} git repository ({str(e)})")
+            else:
+                try:
+                    Repo.clone_from(repo, local_path)
+                    if repository_type == "configurations":
+                        self.update_database_configurations_from_git()
+                except Exception as e:
+                    info(f"Cannot clone {repository_type} git repository ({str(e)})")
 
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")

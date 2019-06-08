@@ -156,7 +156,8 @@ class AdministrationController(BaseController):
                 name = f"{edge.workflow}{edge.source}{edge.destination}"
                 with open(path / "WorkflowEdge" / f"{name}.yaml", "w") as file:
                     dump(edge.to_dict(export=True), file)
-        with open(path / job.type / f"{job.name}.yaml", "w") as file:
+        job_type = "Workflow" if job.type == "Workflow" else "Service"
+        with open(path / job_type / f"{job.name}.yaml", "w") as file:
             dump(job.to_dict(export=True), file)
 
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:

@@ -1,5 +1,6 @@
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
+from eNMS.controller import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import DateField, MultipleInstanceField, InstanceField
 
@@ -41,6 +42,22 @@ class JobForm(BaseForm):
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
+
+    def validate(self):
+        if not super().validate():
+            return False
+        print(controller.mail_recipients)
+        if (
+            self.send_notification.data
+            and self.send_notification_method.data == "mail_feedback_notification"
+            and not self.mail_recipient.data
+            and not controller.mail_recipients
+        ):
+            self.mail_recipient.errors.append(
+                "Please add at least one recipient" " for the mail notification."
+            )
+            return False
+        return True
 
 
 class ServiceForm(JobForm):

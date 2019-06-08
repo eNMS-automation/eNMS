@@ -300,7 +300,7 @@ class BaseController:
 
     def update_parameters(self, **kwargs: Any) -> None:
         Session.query(models["Parameters"]).one().update(**kwargs)
-        self.config.update(kwargs)
+        self.__dict__.update(**kwargs)
 
     def delete_instance(self, cls: str, instance_id: int) -> dict:
         return delete(cls, id=instance_id)
@@ -363,8 +363,6 @@ class BaseController:
     ) -> None:
         sender = sender or self.mail_sender
         recipients = recipients or self.mail_recipients
-        if not recipients:
-            return
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients

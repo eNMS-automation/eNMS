@@ -139,8 +139,8 @@ class AdministrationController(BaseController):
         for file in scandir(path / "services"):
             if file.name == ".gitkeep":
                 continue
-            with open(file.path, "r") as instance:
-                instance = load(instance, Loader=BaseLoader)
+            with open(file.path, "r") as instance_file:
+                instance = load(instance_file, Loader=BaseLoader)
                 model = instance.pop("type")
                 factory(model, **self.import_object(model, instance))
         Session.commit()
@@ -150,8 +150,8 @@ class AdministrationController(BaseController):
             for instance_type in ("jobs", "workflow", "edges"):
                 path_job = path / "workflows" / workflow / instance_type
                 for file in scandir(path_job):
-                    with open(path_job / file.name, "r") as instance:
-                        instance = load(instance, Loader=BaseLoader)
+                    with open(path_job / file.name, "r") as instance_file:
+                        instance = load(instance_file, Loader=BaseLoader)
                         model = instance.pop("type")
                         factory(model, **self.import_object(model, instance))
                 Session.commit()

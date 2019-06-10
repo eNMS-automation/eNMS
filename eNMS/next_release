@@ -25,7 +25,7 @@ see here for custom validators: https://wtforms.readthedocs.io/en/stable/validat
 ## New services
 
 - TextFSM service: uses Netmiko to connect to a device, extract variables from the result with a TextFSM template.
-- Python Snippet Service implemented by Marc
+- Python Snippet Service implemented by Marc now included by default.
 
 
 ## New Workflow system
@@ -160,8 +160,25 @@ there is no reason to forbid it.
 >>> Done.
 
 - Import/export support for individual services and workflows: This allows engineers to send their latest workflow via email or check it into git so they are included when their VM is rebuilt. Note: Row id's should not be exposed outside of the database, i.e. should not exist in an export.
->>> Done. Exporting a workflow will also export its services BUT it doesn't work with sub-workflows at this point.
+>>> Done. They are exported in the "projects/exported_jobs" folder.
 
+- Need a programmatic “Email Helper” function/method which can be used in custom services and swiss_army_knife:
+payload to send in body (might accept html format…)
+recipients
+subject line
+option to attach a specific result
+>>> Done: the function is called "send_email", you can import it and use it in your own services.
+I have tested it with .txt files only, not .html, but perhaps it works too, you should try it.
+
+- Default value for a text area not displayed
+>>> Fixed.
+
+- CREATE SERVICE AND WORKFLOW from workflow builder. Add context menu option in Workflow Builder to create new service instance.
+>>> Done: the service creation is not in the context menu but a button in the workflow builder instead. Workflow creation from context menu.
+
+- Manually selected devices in Pools get corrupted if changes are made to the indexes of the Names. Pool manual selected devices need to be stored by Device.Name. This also affects devices that are 'Selected' in Service Instances: once the indexing gets 'off' the selected devices are shifted to some other devices. (Do we need a way to remove all selected devices from service instances in case this happens??): Exported data should not contain id's. Foreign key refs should be by name
+>>> The migration system now uses names instead of ID, which makes them more robust to ID shifts in the database, and also easier to understand/modify.
+The problem is that your current migration files contain ID so this change is not backward compatible: I will update your migration files to switch from ID to names myself.
 
 questions:
 

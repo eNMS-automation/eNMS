@@ -43,7 +43,7 @@ class JobForm(BaseForm):
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
 
-    def validate(self):
+    def validate(self) -> bool:
         if not super().validate():
             return False
         if (

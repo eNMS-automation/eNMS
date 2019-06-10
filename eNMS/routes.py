@@ -14,7 +14,6 @@ from flask_login import current_user, login_required, login_user, logout_user
 from functools import lru_cache, wraps
 from logging import info
 from os import listdir
-from sqlalchemy import and_
 from typing import Any, Callable
 from werkzeug.wrappers import Response
 
@@ -26,11 +25,8 @@ from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
-from eNMS.properties.table import (
-    filtering_properties,
-    table_fixed_columns,
-    table_properties,
-)
+from eNMS.properties.table import table_fixed_columns, table_properties
+
 
 blueprint = Blueprint("blueprint", __name__, template_folder="templates")
 
@@ -211,48 +207,11 @@ def download_configuration(name: str) -> Response:
         return jsonify("No configuration stored")
 
 
-@blueprint.route("/filtering/<table>")
-@monitor_requests
-def filtering(table: str) -> dict:
-    model = models.get(table, models["Device"])
-    properties = table_properties[table]
-    try:
-        order_property = properties[int(request.args["order[0][column]"])]
-    except IndexError:
-        order_property = "name"
-    order = getattr(getattr(model, order_property), request.args["order[0][dir]"])()
-    constraints = []
-    for property in filtering_properties[table]:
-        value = request.args.get(f"form[{property}]")
-        if value:
-            constraints.append(getattr(model, property).contains(value))
-    result = Session.query(model).filter(and_(*constraints)).order_by(order)
-    if table in ("device", "link", "configuration"):
-        pools = [int(id) for id in request.args.getlist("form[pools][]")]
-        if pools:
-            result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
-    return jsonify(
-        {
-            "draw": int(request.args["draw"]),
-            "recordsTotal": len(Session.query(model).all()),
-            "recordsFiltered": len(result.all()),
-            "data": [
-                [getattr(obj, property) for property in properties]
-                + obj.generate_row(table)
-                for obj in result.limit(int(request.args["length"]))
-                .offset(int(request.args["start"]))
-                .all()
-            ],
-        }
-    )
-
-
 @blueprint.route("/", methods=["POST"])
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
     f, *args = page.split("/")
-    kwargs: dict = {}
     if f not in controller.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})
     form_type = request.form.get("form_type")
@@ -260,9 +219,10 @@ def route(page: str) -> Response:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        kwargs = form_postprocessing(request.form)
+        result = getattr(controller, f)(*args, **form_postprocessing(request.form))
+    else:
+        result = getattr(controller, f)(*args, request.form)
     try:
-        result = getattr(controller, f)(*args, **kwargs)
         Session.commit()
         return jsonify(result)
     except Exception as e:

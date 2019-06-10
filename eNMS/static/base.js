@@ -445,6 +445,7 @@ function initTable(type) {
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
       url: `/filtering/${type}`,
+      type: "POST",
       data: (d) => {
         d.form = serializeForm(`#${type}_filtering-form`);
       },

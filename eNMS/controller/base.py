@@ -20,9 +20,11 @@ from pathlib import Path
 from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
+from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, List, Optional, Set, Union
+from werkzeug.datastructures import ImmutableMultiDict
 from yaml import BaseLoader, load
 
 from eNMS.database import Session
@@ -33,7 +35,11 @@ from eNMS.properties.diagram import (
     diagram_classes,
     type_to_diagram_properties,
 )
-from eNMS.properties.table import device_table_properties
+from eNMS.properties.table import (
+    device_table_properties,
+    filtering_properties,
+    table_properties,
+)
 from eNMS.models import models
 from eNMS.properties.objects import (
     device_properties,
@@ -117,6 +123,7 @@ class BaseController:
         "export_job",
         "export_to_google_earth",
         "export_topology",
+        "filtering",
         "get",
         "get_all",
         "get_cluster_status",
@@ -347,6 +354,37 @@ class BaseController:
                 )
                 for cls in diagram_classes
             },
+        }
+
+    def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
+        model = models.get(table, models["Device"])
+        properties = table_properties[table]
+        try:
+            order_property = properties[int(kwargs["order[0][column]"])]
+        except IndexError:
+            order_property = "name"
+        order = getattr(getattr(model, order_property), kwargs["order[0][dir]"])()
+        constraints = []
+        for property in filtering_properties[table]:
+            value = kwargs.get(f"form[{property}]")
+            if value:
+                constraints.append(getattr(model, property).contains(value))
+        result = Session.query(model).filter(and_(*constraints)).order_by(order)
+        if table in ("device", "link", "configuration"):
+            pools = [int(id) for id in kwargs.getlist("form[pools][]")]
+            if pools:
+                result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
+        return {
+            "draw": int(kwargs["draw"]),
+            "recordsTotal": len(Session.query(model).all()),
+            "recordsFiltered": len(result.all()),
+            "data": [
+                [getattr(obj, property) for property in properties]
+                + obj.generate_row(table)
+                for obj in result.limit(int(kwargs["length"]))
+                .offset(int(kwargs["start"]))
+                .all()
+            ],
         }
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:

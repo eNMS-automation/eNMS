@@ -81,6 +81,10 @@
         <div class='form-group'>
           {{ form.send_notification_method(id=form_type + '-send_notification_method', class="form-control add-id") }}
         </div>
+        <label><label for="notification_body">Notification Body</label></label>
+        <div class='form-group'>
+          {{ form.notification_body(id=form_type + '-notification_body', class="form-control add-id") }}
+        </div>
         <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
         <div class='form-group'>
           {{ form.mail_recipient(id=form_type + '-mail_recipient', class="form-control add-id") }}

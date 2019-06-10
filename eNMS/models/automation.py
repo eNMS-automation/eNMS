@@ -13,7 +13,16 @@ from pathlib import Path
 from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
-from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import (
+    Boolean,
+    case,
+    Column,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String,
+    Text,
+)
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.mutable import MutableDict, MutableList
@@ -25,7 +34,7 @@ from xmltodict import parse
 
 from eNMS.concurrent import threaded_job, device_process
 from eNMS.controller import controller
-from eNMS.database import Session, SMALL_STRING_LENGTH
+from eNMS.database import Session, LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch
 from eNMS.database.associations import (
     job_device_table,
@@ -77,6 +86,7 @@ class Job(AbstractBase):
     send_notification_method = Column(
         String(SMALL_STRING_LENGTH), default="mail_feedback_notification"
     )
+    notification_body = Text(LARGE_STRING_LENGTH)
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(PickleType), default=[])

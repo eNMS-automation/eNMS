@@ -1,4 +1,5 @@
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
+from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
@@ -35,6 +36,9 @@ class JobForm(BaseForm):
             ("slack_feedback_notification", "Slack"),
             ("mattermost_feedback_notification", "Mattermost"),
         ),
+    )
+    notification_body = StringField(
+        "Notification Body", widget=TextArea(), render_kw={"rows": 5}
     )
     display_only_failed_nodes = BooleanField("Display only Failed Devices")
     mail_recipient = StringField("Mail Recipients (separated by comma)")

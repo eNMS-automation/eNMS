@@ -476,6 +476,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                     "password": "admin",
                     "waiting_time": 0,
                     "devices": devices,
+                    "validation_method": "text",
                     "content_match": "",
                     "call_type": "GET",
                     "url": "http://127.0.0.1:5000/rest/instance/device/{{device.name}}",

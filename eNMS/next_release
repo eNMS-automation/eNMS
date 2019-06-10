@@ -180,3 +180,14 @@ I have tested it with .txt files only, not .html, but perhaps it works too, you 
 >>> The migration system now uses names instead of ID, which makes them more robust to ID shifts in the database, and also easier to understand/modify.
 The problem is that your current migration files contain ID so this change is not backward compatible: I will update your migration files to switch from ID to names myself.
 
+- add verify ssl certification option rest service + Ryan's changes
+>>> Done.
+
+- rest_call service needs better error message for AttributeError exception for the case where {{device.name}} or other is used, but 'has targets' not selected
+>>> Done, it'll look like that: eNMS.exceptions.VariableSubstitutionError: The variable subtitution mechanism failed. If you are using the 'device' variable, check that the service has targets.",
+
+- Include a last modified date on services, workflows, and pools: The last modified date should only be changed when the pool definition is changed. The list of devices in the pool is not part of the pool definition.
+>>> Done like you wanted for pools (even though I told you it wasn't possible at first): the last modified property will not be modified when you update the pool objects.
+
+- Replace subtypes with more meaningful options	Use iEN subtypes instead of: Antenna, Firewall, Host, etc.
+>>> Subtype is now left for the user: I no longer use it as an "icon" for the views.

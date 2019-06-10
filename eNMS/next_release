@@ -180,7 +180,3 @@ I have tested it with .txt files only, not .html, but perhaps it works too, you 
 >>> The migration system now uses names instead of ID, which makes them more robust to ID shifts in the database, and also easier to understand/modify.
 The problem is that your current migration files contain ID so this change is not backward compatible: I will update your migration files to switch from ID to names myself.
 
-questions:
-
-- targets: different for each device or the same ? is YaQL also used to fetch the targets from the payload ?
-- YaQL targets extraction: IP address or name ?

@@ -64,9 +64,11 @@ class AutomationController(BaseController):
     def duplicate_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
         parent_workflow = fetch("Workflow", id=workflow_id)
         new_workflow = factory("Workflow", **kwargs)
+        Session.commit()
         for job in parent_workflow.jobs:
             new_workflow.jobs.append(job)
             job.positions[new_workflow.name] = job.positions[parent_workflow.name]
+        Session.commit()
         for edge in parent_workflow.edges:
             subtype, src, destination = edge.subtype, edge.source, edge.destination
             new_workflow.edges.append(
@@ -74,8 +76,8 @@ class AutomationController(BaseController):
                     "WorkflowEdge",
                     **{
                         "name": (
-                            f"{new_workflow.id}-{subtype}:",
-                            f"{src.id}->{destination.id}",
+                            f"{new_workflow.id}-{subtype}:"
+                            f"{src.id}->{destination.id}"
                         ),
                         "workflow": new_workflow.id,
                         "subtype": subtype,

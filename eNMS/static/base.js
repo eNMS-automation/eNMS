@@ -350,6 +350,9 @@ function showTypePanel(type, id, duplicate) {
             `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
           );
           processInstance(type, instance);
+          if (type == "workflow" && duplicate) {
+            $(`#workflow-btn-${id}`).attr("onclick", `duplicateWorkflow(${id})`);
+          }
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);

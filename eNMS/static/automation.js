@@ -286,21 +286,11 @@ function runJob(id, realTimeUpdate) {
  * @param {id} id - Instance ID.
  */
 // eslint-disable-next-line
-function showWorkflowModalDuplicate(id) {
-  $("#workflow-button").attr("onclick", `duplicateWorkflow(${id})`);
-  showTypePanel("workflow", id, true);
-}
-
-/**
- * Display instance modal for editing.
- * @param {id} id - Instance ID.
- */
-// eslint-disable-next-line
 function duplicateWorkflow(id) {
-  $("#edit-workflow").modal("hide");
-  fCall(`/duplicate_workflow/${id}`, "#edit-workflow-form", (workflow) => {
+  fCall(`/duplicate_workflow/${id}`, `#edit-workflow-form-${id}`, (workflow) => {
     table.ajax.reload(null, false);
-    alertify.notify("Workflow successfully duplicated", "success", 5);
+    $(`#workflow-${id}`).remove();
+    alertify.notify("Workflow successfully duplicated.", "success", 5);
   });
 }
 

@@ -508,7 +508,7 @@ class Workflow(Job):
             onclick="showTypePanel('workflow', '{self.id}')">
             Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showWorkflowModalDuplicate('{self.id}')">
+            onclick="showTypePanel('workflow', '{self.id}', true)">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="exportJob('{self.id}')">

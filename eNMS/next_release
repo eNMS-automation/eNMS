@@ -159,7 +159,7 @@ there is no reason to forbid it.
 - Edit/Create Workflow - email address override field is missing and should be added to match service instance panel
 >>> Done.
 
-- import/export for individual service instances and workflows
+- Import/export support for individual services and workflows: This allows engineers to send their latest workflow via email or check it into git so they are included when their VM is rebuilt. Note: Row id's should not be exposed outside of the database, i.e. should not exist in an export.
 >>> Done. Exporting a workflow will also export its services BUT it doesn't work with sub-workflows at this point.
 
 

@@ -4,8 +4,9 @@ from ipaddress import IPv4Network
 from json import loads
 from logging import info
 from ldap3 import Connection, NTLM, SUBTREE
-from os import makedirs, scandir
+from os import listdir, makedirs, scandir
 from os.path import exists
+from pathlib import Path
 from requests import get as http_get
 from typing import Any, Union
 from yaml import dump, load, BaseLoader
@@ -134,31 +135,51 @@ class AdministrationController(BaseController):
         return status
 
     def import_jobs(self) -> None:
-        for folder in ("Service", "Workflow", "WorkflowEdge"):
-            path = self.path / "projects" / "exports" / folder
-            for file in scandir(path):
-                if file.name == ".gitkeep":
-                    continue
-                with open(path / file.name, "r") as job_dict:
-                    job = load(job_dict, Loader=BaseLoader)
-                    model = job.pop("type") if folder == "Service" else folder
-                    factory(model, **self.import_object(model, job))
-            Session.commit()
+        path = self.path / "projects" / "exported_jobs"
+        for file in scandir(path / "services"):
+            if file.name == ".gitkeep":
+                continue
+            with open(file.path, "r") as instance:
+                instance = load(instance, Loader=BaseLoader)
+                model = instance.pop("type")
+                factory(model, **self.import_object(model, instance))
+        Session.commit()
+        for workflow in listdir(path / "workflows"):
+            if workflow == ".gitkeep":
+                continue
+            for instance_type in ("jobs", "workflow", "edges"):
+                path_job = path / "workflows" / workflow / instance_type
+                for file in scandir(path_job):
+                    with open(path_job / file.name, "r") as instance:
+                        instance = load(instance, Loader=BaseLoader)
+                        model = instance.pop("type")
+                        factory(model, **self.import_object(model, instance))
+                Session.commit()
 
     def export_job(self, job_id: str) -> None:
         job = fetch("Job", id=job_id)
-        path = self.path / "projects" / "exports"
         if job.type == "Workflow":
+            path = self.path / "projects" / "exported_jobs" / "workflows" / job.name
+            path.mkdir(parents=True, exist_ok=True)
+            for instance_type in ("jobs", "workflow", "edges"):
+                Path(path / instance_type).mkdir(parents=True, exist_ok=True)
             for sub_job in job.jobs:
-                with open(path / "Service" / f"{sub_job.name}.yaml", "w") as file:
-                    dump(sub_job.to_dict(export=True), file)
+                with open(path / "jobs" / f"{sub_job.name}.yaml", "w") as file:
+                    sub_job_as_dict = sub_job.to_dict(export=True)
+                    if sub_job.type == "Workflow":
+                        sub_job_as_dict["type"] = "Workflow"
+                    dump(sub_job_as_dict, file)
             for edge in job.edges:
                 name = f"{edge.workflow}{edge.source}{edge.destination}"
-                with open(path / "WorkflowEdge" / f"{name}.yaml", "w") as file:
-                    dump(edge.to_dict(export=True), file)
-        job_type = "Workflow" if job.type == "Workflow" else "Service"
-        with open(path / job_type / f"{job.name}.yaml", "w") as file:
-            dump(job.to_dict(export=True), file)
+                with open(path / "edges" / f"{name}.yaml", "w") as file:
+                    edge = {**edge.to_dict(export=True), "type": "WorkflowEdge"}
+                    dump(edge, file)
+            with open(path / "workflow" / f"{job.name}.yaml", "w") as file:
+                dump({**job.to_dict(export=True), "type": "Workflow"}, file)
+        else:
+            path = self.path / "projects" / "exported_jobs" / "services"
+            with open(path / f"{job.name}.yaml", "w") as file:
+                dump(job.to_dict(export=True), file)
 
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:
         self.update_parameters(**kwargs)

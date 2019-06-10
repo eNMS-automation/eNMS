@@ -164,7 +164,7 @@ function migrationsImport() {
 // eslint-disable-next-line
 function importJobs() {
   call("/import_jobs", () => {
-    alertify.notify("Export successful.", "success", 5);
+    alertify.notify("Import successful.", "success", 5);
   });
 }
 

@@ -220,8 +220,10 @@ def route(page: str) -> Response:
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         result = getattr(controller, f)(*args, **form_postprocessing(request.form))
-    else:
+    elif f == "filtering":
         result = getattr(controller, f)(*args, request.form)
+    else:
+        result = getattr(controller, f)(*args)
     try:
         Session.commit()
         return jsonify(result)

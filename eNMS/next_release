@@ -65,8 +65,10 @@ everytime a key is pressed like before.
 
 - right now, you cannot choose whether you filter by "equality" (A == B), "inclusion" (A in B), or regex; it's only inclusion.
 Eventually, I want to add equality AND regex for all properties in this filter window... similarly to what already exists for pools, but for table filtering.
+I also want to add a case sensitive tick box. 
+To display all this, a proper window is needed.
 
-- in the view, you can now filter links and devices with those table.
+- in the view, you can now filter links and devices with those tables.
 That means filter the view per device pools, configuration, model, OS, link subtype, pools etc...
 That wasn't possible before.
 

@@ -18,11 +18,11 @@ table: false
  */
 // eslint-disable-next-line
 function saveDeviceJobs(id) {
-  fCall(`/save_device_jobs/${id}`, `#${id}-device-automation-form`, function(
+  fCall(`/save_device_jobs/${id}`, `#device-automation-form-${id}`, function(
     device
   ) {
     alertify.notify("Changes saved.", "success", 5);
-    $(`#automation-panel-${id}`).remove();
+    $(`#device_automation-${id}`).remove();
   });
 }
 

@@ -8,12 +8,13 @@ from tests.test_base import check_pages
 
 netmiko_ping = ImmutableMultiDict(
     [
-        ("form_type", "service"),
+        ("form_type", "NetmikoConfigurationService"),
         ("name", "netmiko_ping"),
         ("credentials", "user"),
         ("send_notification_method", "mail_feedback_notification"),
         ("validation_method", "text"),
         ("waiting_time", "0"),
+        ("query_property_type", "ip_address"),
         ("devices", "1"),
         ("devices", "2"),
         ("description", ""),
@@ -35,6 +36,7 @@ file_transfer_service = ImmutableMultiDict(
         ("send_notification_method", "mail_feedback_notification"),
         ("validation_method", "text"),
         ("waiting_time", "0"),
+        ("query_property_type", "ip_address"),
         ("devices", "1"),
         ("devices", "2"),
         ("description", ""),
@@ -53,16 +55,17 @@ file_transfer_service = ImmutableMultiDict(
 def test_base_services(user_client: FlaskClient) -> None:
     user_client.post("/update/NetmikoConfigurationService", data=netmiko_ping)
     assert len(fetch_all("NetmikoConfigurationService")) == 3
-    assert len(fetch_all("Service")) == 28
+    assert len(fetch_all("Service")) == 30
     user_client.post("/update/NetmikoFileTransferService", data=file_transfer_service)
     assert len(fetch_all("NetmikoFileTransferService")) == 1
-    assert len(fetch_all("Service")) == 29
+    assert len(fetch_all("Service")) == 31
 
 
 getters_dict = ImmutableMultiDict(
     [
         ("form_type", "NapalmGettersService"),
         ("name", "napalm_getters_service"),
+        ("query_property_type", "ip_address"),
         ("credentials", "user"),
         ("send_notification_method", "mail_feedback_notification"),
         ("validation_method", "text"),
@@ -77,6 +80,7 @@ getters_dict = ImmutableMultiDict(
 
 @check_pages("table/service")
 def test_getters_service(user_client: FlaskClient) -> None:
+    assert len(fetch_all("NapalmGettersService")) == 4
     user_client.post("/update/NapalmGettersService", data=getters_dict)
     assert len(fetch_all("NapalmGettersService")) == 5
 
@@ -85,6 +89,7 @@ ansible_service = ImmutableMultiDict(
     [
         ("form_type", "AnsiblePlaybookService"),
         ("name", "testttt"),
+        ("query_property_type", "ip_address"),
         ("credentials", "user"),
         ("send_notification_method", "mail_feedback_notification"),
         ("validation_method", "text"),
@@ -104,4 +109,4 @@ ansible_service = ImmutableMultiDict(
 def test_ansible_services(user_client: FlaskClient) -> None:
     user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
     assert len(fetch_all("AnsiblePlaybookService")) == 1
-    assert len(fetch_all("Service")) == 28
+    assert len(fetch_all("Service")) == 30

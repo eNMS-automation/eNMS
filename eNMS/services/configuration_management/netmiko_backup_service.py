@@ -25,6 +25,7 @@ class NetmikoBackupService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     configuration_backup_service = True
     has_targets = True
+    privileged_mode = Column(Boolean, default=False)
     number_of_configuration = Column(Integer, default=10)
     configuration_command = Column(String(SMALL_STRING_LENGTH), default="")
     driver = Column(String(SMALL_STRING_LENGTH), default="")
@@ -84,6 +85,7 @@ class NetmikoBackupService(Service):
 
 class NetmikoBackupForm(ServiceForm):
     form_type = HiddenField(default="NetmikoBackupService")
+    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     number_of_configuration = IntegerField(default=10)
     configuration_command = StringField()
     driver = SelectField(choices=controller.NETMIKO_DRIVERS)

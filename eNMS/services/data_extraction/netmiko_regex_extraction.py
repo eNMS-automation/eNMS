@@ -22,6 +22,7 @@ class NetmikoRegexExtractionService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
+    privileged_mode = Column(Boolean, default=False)
     variable1 = Column(String(SMALL_STRING_LENGTH), default="")
     command1 = Column(String(SMALL_STRING_LENGTH), default="")
     regular_expression1 = Column(Text(LARGE_STRING_LENGTH), default="")
@@ -68,6 +69,7 @@ class NetmikoRegexExtractionService(Service):
 
 class NetmikoDataExtractionForm(ServiceForm):
     form_type = HiddenField(default="NetmikoRegexExtractionService")
+    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     variable1 = StringField()
     command1 = StringField()
     regular_expression1 = StringField()

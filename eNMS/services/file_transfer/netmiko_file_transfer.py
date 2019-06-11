@@ -23,6 +23,7 @@ class NetmikoFileTransferService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
+    privileged_mode = Column(Boolean, default=False)
     source_file = Column(String(SMALL_STRING_LENGTH), default="")
     destination_file = Column(String(SMALL_STRING_LENGTH), default="")
     direction = Column(String(SMALL_STRING_LENGTH), default="")
@@ -59,6 +60,7 @@ class NetmikoFileTransferService(Service):
 
 class NetmikoFileTransferForm(ServiceForm):
     form_type = HiddenField(default="NetmikoFileTransferService")
+    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     source_file = StringField(validators=[InputRequired()])
     destination_file = StringField(validators=[InputRequired()])
     file_system = StringField()

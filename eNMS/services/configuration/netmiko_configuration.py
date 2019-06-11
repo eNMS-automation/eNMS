@@ -23,7 +23,7 @@ class NetmikoConfigurationService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     content = Column(Text(LARGE_STRING_LENGTH), default="")
-    enable_mode = Column(Boolean, default=False)
+    privileged_mode = Column(Boolean, default=False)
     driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
@@ -35,8 +35,6 @@ class NetmikoConfigurationService(Service):
 
     def job(self, payload: dict, device: Device) -> dict:
         netmiko_handler = self.netmiko_connection(device)
-        if self.enable_mode:
-            netmiko_handler.enable()
         config = self.sub(self.content, locals())
         self.logs.append(f"Pushing configuration on {device.name} (Netmiko)")
         netmiko_handler.send_config_set(
@@ -49,7 +47,7 @@ class NetmikoConfigurationService(Service):
 class NetmikoConfigurationForm(ServiceForm):
     form_type = HiddenField(default="NetmikoConfigurationService")
     content = StringField(widget=TextArea(), render_kw={"rows": 5})
-    enable_mode = BooleanField()
+    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     driver = SelectField(choices=controller.NETMIKO_DRIVERS)
     use_device_driver = BooleanField(default=True)
     fast_cli = BooleanField()

@@ -375,7 +375,7 @@ class Service(Job):
 
     def netmiko_connection(self, device: "Device") -> ConnectHandler:
         username, password = self.get_credentials(device)
-        return ConnectHandler(
+        netmiko_handler = ConnectHandler(
             device_type=(
                 device.netmiko_driver if self.use_device_driver else self.driver
             ),
@@ -387,6 +387,9 @@ class Service(Job):
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
         )
+        if self.privileged_mode:
+            netmiko_handler.enable()
+        return netmiko_handler
 
     def napalm_connection(self, device: "Device") -> NetworkDriver:
         username, password = self.get_credentials(device)

@@ -24,6 +24,7 @@ class NetmikoTextfsmExtractionService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
+    privileged_mode = Column(Boolean, default=False)
     command = Column(String(SMALL_STRING_LENGTH), default="")
     textfsm_template = Column(Text(LARGE_STRING_LENGTH), default="")
     driver = Column(String(SMALL_STRING_LENGTH), default="")
@@ -48,6 +49,7 @@ class NetmikoTextfsmExtractionService(Service):
 
 class NetmikoTextfsmExtractionForm(ServiceForm):
     form_type = HiddenField(default="NetmikoTextfsmExtractionService")
+    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     command = StringField()
     textfsm_template = StringField(widget=TextArea(), render_kw={"rows": 5})
     driver = SelectField(choices=controller.NETMIKO_DRIVERS)

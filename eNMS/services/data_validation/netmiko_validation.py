@@ -32,6 +32,7 @@ class NetmikoValidationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
+    privileged_mode = Column(Boolean, default=False)
     command = Column(String(SMALL_STRING_LENGTH), default="")
     conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
@@ -70,6 +71,7 @@ class NetmikoValidationService(Service):
 
 class NetmikoValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
+    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     command = StringField()
     conversion_method = SelectField(
         choices=(

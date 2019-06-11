@@ -23,6 +23,7 @@ class NetmikoPromptsService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
+    privileged_mode = Column(Boolean, default=False)
     command = Column(String(SMALL_STRING_LENGTH), default="")
     confirmation1 = Column(String(LARGE_STRING_LENGTH), default="")
     response1 = Column(String(SMALL_STRING_LENGTH), default="")
@@ -77,6 +78,7 @@ class NetmikoPromptsService(Service):
 
 class NetmikoPromptsForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="NetmikoPromptsService")
+    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     command = StringField()
     confirmation1 = StringField()
     response1 = StringField()

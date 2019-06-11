@@ -24,19 +24,19 @@
         <div class="main_container">
           {% block sidebar %}
             <div class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}">
-              {% include "structure/sidebar.html" %}
+              {% include "sidebar.html" %}
             </div>
           {% endblock sidebar %}
           {% block header %}
             <div class="top_nav">
-              {% include "structure/header.html" %}
+              {% include "header.html" %}
             </div>
           {% endblock header %}
           {% block content %}
           {% endblock content %}
           {% block footer %}
             <footer>
-              {% include "structure/footer.html" %}
+              {% include "footer.html" %}
             </footer>
           {% endblock footer %}
         </div>

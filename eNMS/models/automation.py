@@ -25,7 +25,7 @@ from xmltodict import parse
 
 from eNMS.concurrent import threaded_job, device_process
 from eNMS.controller import controller
-from eNMS.database import Session, SMALL_STRING_LENGTH
+from eNMS.database import CustomMediumBlobPickle, Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch
 from eNMS.database.associations import (
     job_device_table,
@@ -54,7 +54,7 @@ class Job(AbstractBase):
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
-    results = Column(MutableDict.as_mutable(PickleType), default={})
+    results = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     is_running = Column(Boolean, default=False)
     number_of_targets = Column(Integer, default=0)
     completed = Column(Integer, default=0)
@@ -80,7 +80,7 @@ class Job(AbstractBase):
     custom_notification = Column(Boolean, default=False)
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
-    logs = Column(MutableList.as_mutable(PickleType), default=[])
+    logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])
 
     @hybrid_property
     def status(self) -> str:

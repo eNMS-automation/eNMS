@@ -66,7 +66,7 @@ class ExampleService(Service):
     an_integer = Column(Integer, default=0)
     # Number range
     number_in_range = Column(Integer, default=5)
-    # regex
+    # Regular expression
     regex = Column(String(SMALL_STRING_LENGTH), default="")
     # URL
     url = Column(String(SMALL_STRING_LENGTH), default="")
@@ -96,8 +96,8 @@ class ExampleService(Service):
         # The parameters of the service can be accessed with self (self.string1,
         # self.boolean1, etc)
         # You can look at how default services (netmiko, napalm, etc.) are
-        # implemented in the /services subfolders (/netmiko, /napalm, etc).
-        # "results" is a dictionary that will be displayed in the logs.
+        # implemented in the /services subfolders.
+        # The resulting dictionary will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.
         # In a workflow, the "success" value will determine whether to move

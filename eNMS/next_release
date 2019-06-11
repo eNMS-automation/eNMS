@@ -195,5 +195,8 @@ The problem is that your current migration files contain ID so this change is no
 >>> We had a call with Aaron, I think the problem was the length of the URL (too long when too many custom properties).
 I am no longer using a GET request to display the table, but a POST request instead. Should be fixed now...
 
+- git clone only when needed
+>>> I integrated Marc code when fetching configurations from git: first check that whether or not the repository exists,
+then pull if it exists, clone otherwise.
 
 

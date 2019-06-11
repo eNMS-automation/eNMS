@@ -103,7 +103,7 @@ class AutomationController(BaseController):
         job = fetch("Job", id=job_id)
         if job.is_running:
             return {"error": "Job is already running."}
-        targets = job.compute_targets()
+        targets = job.compute_devices()
         if hasattr(job, "has_targets"):
             if job.has_targets and not targets:
                 return {"error": "Set devices or pools as targets first."}

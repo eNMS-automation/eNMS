@@ -22,6 +22,7 @@ from time import sleep
 from traceback import format_exc
 from typing import Any, Generator, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
+from yaql import factory
 
 from eNMS.concurrent import threaded_job, device_process
 from eNMS.controller import controller
@@ -98,13 +99,20 @@ class Job(AbstractBase):
         else:
             return "N/A"
 
-    def compute_targets(self) -> Set["Device"]:
-        targets = set(self.devices)
-        for pool in self.pools:
-            targets |= set(pool.devices)
-        self.number_of_targets = len(targets)
-        Session.commit()
-        return targets
+    def compute_devices(self, payload: Optional[dict] = None) -> Set["Device"]:
+        if self.define_devices_from_payload:
+            engine = factory.YaqlFactory().create()
+            order = engine(self.yaql_query).evaluate(data=payload)
+            devices = [
+                fetch("Device", **{self.query_property_type: value}) for value in order
+            ]
+        else:
+            devices = set(self.devices)
+            for pool in self.pools:
+                devices |= set(pool.devices)
+            self.number_of_targets = len(devices)
+            Session.commit()
+        return devices
 
     def adjacent_jobs(
         self, workflow: "Workflow", direction: str, subtype: str
@@ -290,7 +298,7 @@ class Service(Job):
         current_job = parent or self
         results: dict = {"results": {}, "success": False}
         if self.has_targets and not targets:
-            targets = self.compute_targets()
+            targets = self.compute_devices(payload)
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
@@ -521,13 +529,15 @@ class Workflow(Job):
             Delete</button>""",
         ]
 
-    def compute_valid_devices(self, job: Job, allowed_devices: dict) -> Set[Device]:
+    def compute_valid_devices(
+        self, job: Job, allowed_devices: dict, payload: dict
+    ) -> Set[Device]:
         if not job.has_targets:
             return set()
         elif self.use_workflow_targets:
             return allowed_devices[job.name]
         else:
-            return job.compute_targets()
+            return job.compute_devices(payload)
 
     def workflow_targets_processing(
         self, allowed_devices: dict, job: Job, results: dict
@@ -561,7 +571,7 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            allowed_devices["Start"] = targets or self.compute_targets()
+            allowed_devices["Start"] = targets or self.compute_devices(payload)
         while jobs:
             job = jobs.pop()
             if any(
@@ -571,7 +581,7 @@ class Workflow(Job):
                 continue
             visited.add(job)
             self.state["current_job"] = job.get_properties()
-            valid_devices = self.compute_valid_devices(job, allowed_devices)
+            valid_devices = self.compute_valid_devices(job, allowed_devices, payload)
             job_results, _ = job.run(
                 results["results"], targets=valid_devices, parent=self
             )

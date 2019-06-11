@@ -30,3 +30,4 @@ wtforms
 xlrd
 xlwt
 xmltodict
+yaql

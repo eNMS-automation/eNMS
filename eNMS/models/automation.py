@@ -49,8 +49,6 @@ class Job(AbstractBase):
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
     last_modified = Column(String(SMALL_STRING_LENGTH), default="")
     description = Column(String(SMALL_STRING_LENGTH), default="")
-    multiprocessing = Column(Boolean, default=False)
-    max_processes = Column(Integer, default=5)
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
@@ -188,6 +186,34 @@ class Job(AbstractBase):
         self.end_run(runtime, results, parent, task)
         return results, runtime
 
+
+class Service(Job):
+
+    __tablename__ = "Service"
+    id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
+    __mapper_args__ = {"polymorphic_identity": "Service"}
+    multiprocessing = Column(Boolean, default=False)
+    max_processes = Column(Integer, default=5)
+    parent_cls = "Job"
+
+    def job_notification(self, results: dict) -> List[str]:
+        notification = []
+        if "devices" in results["results"] and not results["success"]:
+            failed = "\n".join(
+                device
+                for device, device_results in results["results"]["devices"].items()
+                if not device_results["success"]
+            )
+            notification.append(f"FAILED\n{failed}")
+            if not self.display_only_failed_nodes:
+                passed = "\n".join(
+                    device
+                    for device, device_results in results["results"]["devices"].items()
+                    if device_results["success"]
+                )
+                notification.append(f"\n\nPASS:\n{passed}")
+        return notification
+
     def get_results(
         self,
         payload: dict,
@@ -252,32 +278,6 @@ class Job(AbstractBase):
                     for device in targets
                 }
             return results, logs
-
-
-class Service(Job):
-
-    __tablename__ = "Service"
-    id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
-    __mapper_args__ = {"polymorphic_identity": "Service"}
-    parent_cls = "Job"
-
-    def job_notification(self, results: dict) -> List[str]:
-        notification = []
-        if "devices" in results["results"] and not results["success"]:
-            failed = "\n".join(
-                device
-                for device, device_results in results["results"]["devices"].items()
-                if not device_results["success"]
-            )
-            notification.append(f"FAILED\n{failed}")
-            if not self.display_only_failed_nodes:
-                passed = "\n".join(
-                    device
-                    for device, device_results in results["results"]["devices"].items()
-                    if device_results["success"]
-                )
-                notification.append(f"\n\nPASS:\n{passed}")
-        return notification
 
     def build_results(
         self,

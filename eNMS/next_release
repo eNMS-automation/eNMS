@@ -199,4 +199,5 @@ I am no longer using a GET request to display the table, but a POST request inst
 >>> I integrated Marc code when fetching configurations from git: first check that whether or not the repository exists,
 then pull if it exists, clone otherwise.
 
-
+- can you change Device.configurations from PickleType to EnmsMediumBlobPickle?
+>>> Done. I added PickleType and used it for job.logs, job.results and device.configurations.

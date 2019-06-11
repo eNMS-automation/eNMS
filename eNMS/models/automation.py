@@ -236,11 +236,10 @@ class Service(Job):
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
-        current_job = parent or self
-        if not current_job.multiprocessing:
-            current_job.completed += 1
-            current_job.failed += 1 - results["success"]
-            current_job.logs.extend(logs)
+        if not parent and not self.multiprocessing:
+            self.completed += 1
+            self.failed += 1 - results["success"]
+            self.logs.extend(logs)
             Session.commit()
         return results, logs
 

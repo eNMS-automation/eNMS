@@ -121,16 +121,6 @@
         <div class='form-group'>
           {{ form.pools(id='workflow-pools', class="form-control add-id") }}
         </div>
-        <fieldset>
-          <div class="item">
-            <input id="workflow-multiprocessing" name="multiprocessing" class="add-id" type="checkbox" value="y">
-            <label>Multiprocessing</label>
-          </div>
-        </fieldset>
-        <label><label for="max_processes">Maximum number of processes</label></label>
-        <div class='form-group'>
-          {{ form.max_processes(id='workflow-max_processes', class="form-control add-id") }}
-        </div>
         <label><label for="credentials">Credentials</label></label>
         <div class='form-group'>
           {{ form.credentials(id='workflow-credentials', class="form-control add-id") }}

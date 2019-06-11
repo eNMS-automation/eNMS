@@ -19,8 +19,6 @@ class JobForm(BaseForm):
     name = StringField("Name")
     description = StringField("Description")
     devices = MultipleInstanceField("Devices", instance_type="Device")
-    multiprocessing = BooleanField("Multiprocessing")
-    max_processes = IntegerField("Maximum number of processes", default=50)
     credentials = SelectField(
         "Credentials",
         choices=(("device", "Device Credentials"), ("user", "User Credentials")),
@@ -63,6 +61,8 @@ class JobForm(BaseForm):
 class ServiceForm(JobForm):
     template = "service"
     form_type = HiddenField(default="service")
+    multiprocessing = BooleanField("Multiprocessing")
+    max_processes = IntegerField("Maximum number of processes", default=50)
 
 
 class WorkflowForm(JobForm):

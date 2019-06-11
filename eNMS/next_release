@@ -190,3 +190,10 @@ The problem is that your current migration files contain ID so this change is no
 
 - Replace subtypes with more meaningful options	Use iEN subtypes instead of: Antenna, Firewall, Host, etc.
 >>> Subtype is now left for the user: I no longer use it as an "icon" for the views.
+
+- Limitation on the number of custom properties.
+>>> We had a call with Aaron, I think the problem was the length of the URL (too long when too many custom properties).
+I am no longer using a GET request to display the table, but a POST request instead. Should be fixed now...
+
+
+

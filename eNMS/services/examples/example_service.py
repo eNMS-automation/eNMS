@@ -28,7 +28,16 @@ from wtforms import (
     SelectField,
     StringField,
 )
-from wtforms.validators import Length
+from wtforms.validators import (
+    Email,
+    InputRequired,
+    IPAddress,
+    Length,
+    MacAddress,
+    NumberRange,
+    Regexp,
+    URL,
+)
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
@@ -46,8 +55,19 @@ class ExampleService(Service):
     string1 = Column(String(SMALL_STRING_LENGTH), default="")
     # the "string2" property will be displayed as a text area.
     string2 = Column(String(SMALL_STRING_LENGTH), default="")
-    # Text area
+    # string3 is mandatory: in the custom form, the DataRequired validator is used.
+    mail_address = Column(String(SMALL_STRING_LENGTH), default="")
+    # IP and MAC address
+    ip_address = Column(String(SMALL_STRING_LENGTH), default="")
+    mac_address = Column(String(SMALL_STRING_LENGTH), default="")
+    # Integer field
     an_integer = Column(Integer, default=0)
+    # Number range
+    number_in_range = Column(Integer, default=5)
+    # regex
+    regex = Column(String(SMALL_STRING_LENGTH), default="")
+    # URL
+    url = Column(String(SMALL_STRING_LENGTH), default="")
     # Text area
     a_float = Column(Float, default=0.0)
     # the "a_list" property will be displayed as a multiple selection list
@@ -84,7 +104,29 @@ class ExampleForm(ServiceForm):
     string1 = SelectField(
         choices=[("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
     )
-    string2 = StringField("String 2 !", [Length(min=4, max=25)])
+    string2 = StringField("String 2 (required)", [InputRequired()])
+    mail_address = StringField("Mail address", [Length(min=7, max=25), Email()])
+    ip_address = StringField(
+        "IP address",
+        [
+            IPAddress(
+                ipv4=True,
+                message="Please enter an IPv4 address for the IP address field",
+            )
+        ],
+    )
+    mac_address = StringField("MAC address", [MacAddress()])
+    number_in_range = IntegerField("Number in range", [NumberRange(min=3, max=8)])
+    regex = StringField("Regular expression", [Regexp(r".*")])
+    url = StringField(
+        "URL",
+        [
+            URL(
+                require_tld=True,
+                message="An URL with TLD is required for the url field",
+            )
+        ],
+    )
     an_integer = IntegerField()
     a_float = FloatField()
     a_list = SelectMultipleField(

@@ -102,10 +102,10 @@ class Job(AbstractBase):
     def compute_devices(self, payload: Optional[dict] = None) -> Set["Device"]:
         if self.define_devices_from_payload:
             engine = factory.YaqlFactory().create()
-            order = engine(self.yaql_query).evaluate(data=payload)
-            devices = [
-                fetch("Device", **{self.query_property_type: value}) for value in order
-            ]
+            devices = {
+                fetch("Device", **{self.query_property_type: value})
+                for value in engine(self.yaql_query).evaluate(data=payload)
+            }
         else:
             devices = set(self.devices)
             for pool in self.pools:
@@ -544,7 +544,8 @@ class Workflow(Job):
     ) -> Generator[Job, None, None]:
         failed_devices, passed_devices = set(), set()
         if job.has_targets:
-            for name, device_results in results["results"]["devices"].items():
+            devices = results["results"].get("devices", {})
+            for name, device_results in devices.items():
                 if device_results["success"]:
                     passed_devices.add(fetch("Device", name=name))
                 else:

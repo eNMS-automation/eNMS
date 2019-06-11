@@ -20,49 +20,44 @@ class PythonSnippetService(Service):
 
     def job(self, payload: dict, device: Optional[Device] = None) -> dict:
 
-        # Compile the Python code
         try:
             code_object = compile(self.source_code, "user_python_code", "exec")
         except Exception as exc:
             self.logs.append(f"Compile error: {str(exc)}")
             return {"success": False, " result": {"step": "compile", "error": str(exc)}}
 
-        # Mechanism to save the result from within the snippet
-        _code_result_ = {}  # Set by save_result()
+        _code_result_ = {}
 
-        class TerminateException(Exception):  # Raised to terminate the script
+        class TerminateException(Exception):
             pass
 
         def save_result(success, result, **kwargs):
-            # Don't replace existing dictionary
             _code_result_.update({"success": success, "result": result, **kwargs})
             if kwargs.get("exit"):
                 raise TerminateException()
 
-        # Support for global and service variables
         def get_var(name: str, service: Optional[str] = None):
-            if service:  # Access service local variable
+            if service:
                 svc_result = payload.get(service)
                 if not svc_result:
                     raise Exception(
                         f"get_var: Service not found in payload: '{service}'"
                     )
                 return svc_result.get(name)
-            else:  # Access global variable
+            else:
                 payload.setdefault("variables", {}).get(name)
 
         def set_var(name: str, value: Any, service: Optional[str] = None):
-            if service:  # Access service local variable
+            if service:
                 svc_result = payload.get(service)
                 if not svc_result:
                     raise Exception(
                         f"set_var: Service not found in payload: '{service}'"
                     )
                 svc_result[name] = value
-            else:  # Access global variable
+            else:
                 payload.setdefault("variables", {})[name] = value
 
-        # Setup the environment
         locals = {
             "device": device,
             "payload": payload,
@@ -73,11 +68,10 @@ class PythonSnippetService(Service):
             "set_var": set_var,
         }
 
-        # Execute the snippet, allowing built-ins, and locals
         try:
             exec(code_object, {}, locals)
         except TerminateException:
-            pass  # Ignore - clean exit from middle of snippet
+            pass  # Clean exit from middle of snippet
         except Exception as exc:
             self.logs.append(f"Execution error: {str(exc)}")
             return {

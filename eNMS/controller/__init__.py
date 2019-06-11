@@ -410,6 +410,60 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         for index, (x, y) in enumerate(positions):
             workflow.jobs[index].positions["Netmiko_VRF_workflow"] = x * 10, y * 10
 
+    def create_yaql_payload_workflow(self) -> None:
+        services = []
+        for service in (
+            {
+                "type": "PythonSnippetService",
+                "name": "add_devices_to_payload",
+                "description": "Add devices to the payload",
+                "source_code": (
+                    "set_var('devices', ['Washington', 'Dallas'])\n"
+                    "save_result(True, {})"
+                ),
+            },
+            {
+                "type": "NetmikoValidationService",
+                "name": "netmiko_check_vrf_test2",
+                "define_devices_from_payload": True,
+                "yaql_query": "$.variables.devices",
+                "query_property_type": "name",
+                "vendor": "Arista",
+                "operating_system": "eos",
+                "driver": "arista_eos",
+                "command": "show vrf",
+                "content_match": "test",
+                "fast_cli": True,
+                "timeout": 3,
+            },
+        ):
+            instance = factory(service.pop("type"), **service)  # type: ignore
+            services.append(instance)
+        workflow = factory(
+            "Workflow",
+            **{
+                "name": "YaQL_test_worflow",
+                "description": "Test YaQL device selection mechanism",
+            },
+        )
+        Session.commit()
+        workflow.jobs.extend(services)
+        edges = [(0, 2), (2, 3), (3, 1)]
+        for x, y in edges:
+            factory(
+                "WorkflowEdge",
+                **{
+                    "name": f"{workflow.name} {x} -> {y}",
+                    "workflow": workflow.id,
+                    "subtype": "success",
+                    "source": workflow.jobs[x].id,
+                    "destination": workflow.jobs[y].id,
+                },
+            )
+        positions = [(-20, 0), (20, 0), (0, -15), (0, 15)]
+        for index, (x, y) in enumerate(positions):
+            workflow.jobs[index].positions["YaQL_test_worflow"] = x * 10, y * 10
+
     def create_napalm_workflow(self) -> None:
         devices = [
             fetch("Device", name="Washington").id,
@@ -629,6 +683,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         self.create_netmiko_workflow()
         self.create_napalm_workflow()
         self.create_payload_transfer_workflow()
+        self.create_yaql_payload_workflow()
         self.create_workflow_of_workflows()
         Session.commit()
 

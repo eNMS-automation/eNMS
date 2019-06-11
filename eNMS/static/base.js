@@ -351,7 +351,10 @@ function showTypePanel(type, id, duplicate) {
           );
           processInstance(type, instance);
           if (type == "workflow" && duplicate) {
-            $(`#workflow-btn-${id}`).attr("onclick", `duplicateWorkflow(${id})`);
+            $(`#workflow-btn-${id}`).attr(
+              "onclick",
+              `duplicateWorkflow(${id})`
+            );
           }
         });
       } else {

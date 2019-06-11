@@ -96,6 +96,7 @@ There is a now a changelog in eNMS too.
 Each time you create, update or delete anything, a log is created.
 If it is an update, eNMS tells you exactly which fields were updated (old and new values),
 when, and by whom.
+This is available in the Home section, page "Logs".
 
 ## Switch from Multithreading to Multiprocessing.
 
@@ -201,3 +202,9 @@ then pull if it exists, clone otherwise.
 
 - can you change Device.configurations from PickleType to EnmsMediumBlobPickle?
 >>> Done. I added PickleType and used it for job.logs, job.results and device.configurations.
+
+- - We need to provide an extra option for all Netmiko Services called 'execute in privileged mode' and if selected, .enable() is called on the Netmiko Connecthander object before issuing the command.
+>>> I added the code Marc sent me.
+
+- - Select targets from payload feature, with YaQL
+>>> Done. I added a workflow called "YaQL test" to give you an example of how it works.

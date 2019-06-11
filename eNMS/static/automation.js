@@ -287,11 +287,15 @@ function runJob(id, realTimeUpdate) {
  */
 // eslint-disable-next-line
 function duplicateWorkflow(id) {
-  fCall(`/duplicate_workflow/${id}`, `#edit-workflow-form-${id}`, (workflow) => {
-    table.ajax.reload(null, false);
-    $(`#workflow-${id}`).remove();
-    alertify.notify("Workflow successfully duplicated.", "success", 5);
-  });
+  fCall(
+    `/duplicate_workflow/${id}`,
+    `#edit-workflow-form-${id}`,
+    (workflow) => {
+      table.ajax.reload(null, false);
+      $(`#workflow-${id}`).remove();
+      alertify.notify("Workflow successfully duplicated.", "success", 5);
+    }
+  );
 }
 
 /**

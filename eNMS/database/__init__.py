@@ -17,7 +17,7 @@ dialect = Session.bind.dialect.name
 Base = declarative_base()
 
 SMALL_STRING_LENGTH = int(environ.get("SMALL_STRING_LENGTH", 255))
-LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 10))
+LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 15))
 
 
 class CustomMediumBlobPickle(PickleType):

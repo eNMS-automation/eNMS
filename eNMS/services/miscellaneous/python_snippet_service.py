@@ -97,7 +97,7 @@ class PythonSnippetForm(ServiceForm):
     has_targets = BooleanField()
     source_code = StringField(
         widget=TextArea(),
-        render_kw={"rows": 5},
+        render_kw={"rows": 15},
         default="""
 # The following input variables are available: payload, device
 # You must call save_result() to return a result:

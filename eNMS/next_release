@@ -1,3 +1,13 @@
+## Changes to the organization of the app
+
+Before, the application was organized in different folder by themes: inventory, automation, etc.
+This is no longer the case.
+I've done a lot of reading about how to best structure a web application and a recurring idea was to decouple the 
+web framework (HTTP router + REST API basically) from the application logic.
+The application logic and the web framework were previously entangled in the files called "routes.py" in each folder.
+Now, the application logic is in the "controller" folder.
+If we ever want to move away from Flask (to an asynchronous framework for example), this will be very easy with the new organization.
+
 ## Renaming
 
 NetmikoDataExtractionService -> NetmikoRegexExtractionService
@@ -35,7 +45,7 @@ Two modes:
 
 In "Use service targets" mode, jobs run on their own targets. A job is considered successful
 if it ran successfully on all of its targets (if it fails at least one target, it failed).
-The "Use service targets" mode must be used for specific workflows where services have different targets.
+The "Use service targets" mode can be used for workflows where services have different targets.
 For example, a first service would run on devices A, B, C and the next one on devices D, E.
 
 In "Use workflow targets" mode, the workflow will run on its own targets (devices configured at service level
@@ -46,22 +56,22 @@ will likely follow different path in the workflow depending on whether they fail
 ## Panel instead of Bootstrap modals
 
 I am now using panels everywhere instead of modals.
-Modals are blocking, which prevents from displaying two object modals of the same window
-at the same time (for example, to compare device/service/workflow properties...).
+Modals are blocking, which prevents the useer from displaying two modals at the same time (for example, to compare device/service/workflow properties...).
 Panels are more flexible, you can change the size, "dock" them, and minimize them.
 
 ## Filtering system
 
 The table filtering system no longer uses inputs above table headers.
+
 There are several reasons for this change:
 
 - less resource-intensive for the server, a search is only triggered when the filter button is pressed, and not
 everytime a key is pressed like before.
 
-- possibility the search with criteria even if they are not table properties:
+- possibility to search with criteria even if they are not in the table:
 * filter by pools for links/device/configuration...
 * filter by OS in the configuration table, even though OS is not a property of the configuration table
-* filter by configuration in the device table, even though configuration is not a property of the device table, ETC ETC..)
+* filter by configuration in the device table, even though configuration is not a property of the device table, ETC..
 
 - right now, you cannot choose whether you filter by "equality" (A == B), "inclusion" (A in B), or regex; it's only inclusion.
 Eventually, I want to add equality AND regex for all properties in this filter window... similarly to what already exists for pools, but for table filtering.
@@ -69,24 +79,24 @@ I also want to add a case sensitive tick box.
 To display all this, a proper window is needed.
 
 - in the view, you can now filter links and devices with those tables.
-That means filter the view per device pools, configuration, model, OS, link subtype, pools etc...
+That means filtering the view per device pools, configuration, model, OS, link subtype, pools etc...
 That wasn't possible before.
 
-- this was messing up with the alignment of the table headers (bug you've already reported).
+- this was messing up with the alignment of the table headers (bug you've reported).
 
 ## String lengths
 
-- Instead of having all string length to 255, there are now two string length: 255 and 2 ** 10.
+- Instead of having all string length to 255, there are now two string length: 255 and 2 ** 15.
 These lengths are default values, you can change them by setting the env variables:
 "SMALL_STRING_LENGTH" and "LARGE_STRING_LENGTH".
-The large string length is used where it makes sense (content match, etc).
+The large string length is used when it makes sense (content match, etc).
 
 ## Dependencies
 
 - Added Webassets: before, all javascript dependencies were served independently, which means a lot
 of calls to the server were made to retrieve them.
 Now all dependencies are automatically bundled in a single js file.
-- Removed Flask-SQLalchemy. Was obfuscatign the way SQLalchemy works (wrt session management in particular),
+- Removed Flask-SQLalchemy. Was obfuscating the way SQLalchemy works (wrt session management in particular),
 now we use SQLalchemy directly.
 
 ## NSOT vs eNMS
@@ -112,7 +122,7 @@ there is no pickling issue anymore (I'm using ID instead of actual object instan
 
 Real-time update was causing many issues with multithreading, but it's even worse with multiprocessing.
 I couldn't find a way to make it work, so I removed the database commit inside a process.
-Instead, multiple processes will share a Manager.list() "log" variable when logs of all processes will be stored,
+Instead, multiple processes will share a Manager.list() "log" variable where logs of all processes will be stored,
 but the content of that list will only be available when the run is finished.
 This means that:
 - when multiprocessing is disabled, the real-time logging system still works: a window pops up and display the logs
@@ -120,7 +130,7 @@ in real-time.
 - otherwise, with multiprocessing enabled, you can only see the logs at the end of the run.
 
 The way I see it, this isn't such a big deal: having logs displayed in real-time is useful mainly for troubleshooting purposes,
-when you're testing a service/workflow. When you know the service is working alright, you use multiprocessing and
+when you're testing a service/workflow. When you know the service is working fine, you use multiprocessing and
 you don't need real-time logs.
 
 ## From the TODO list
@@ -205,8 +215,11 @@ then pull if it exists, clone otherwise.
 - can you change Device.configurations from PickleType to EnmsMediumBlobPickle?
 >>> Done. I added PickleType and used it for job.logs, job.results and device.configurations.
 
-- - We need to provide an extra option for all Netmiko Services called 'execute in privileged mode' and if selected, .enable() is called on the Netmiko Connecthander object before issuing the command.
+- We need to provide an extra option for all Netmiko Services called 'execute in privileged mode' and if selected, .enable() is called on the Netmiko Connecthander object before issuing the command.
 >>> I added the code Marc sent me.
 
-- - Select targets from payload feature, with YaQL
+- Select targets from payload feature, with YaQL
 >>> Done. I added a workflow called "YaQL test" to give you an example of how it works.
+
+- remove icon from the device table + driver
+- python snippet change

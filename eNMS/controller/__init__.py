@@ -217,6 +217,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                 "an_integer": 10,
                 "number_in_range": 7,
                 "regex": "abbbbcc",
+                "exclusion_field": "d",
                 "url": "https://www.google.fr/",
                 "a_float": 5.0,
                 "a_list": ["a", "b"],

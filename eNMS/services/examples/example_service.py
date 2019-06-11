@@ -34,9 +34,11 @@ from wtforms.validators import (
     IPAddress,
     Length,
     MacAddress,
+    NoneOf,
     NumberRange,
     Regexp,
     URL,
+    ValidationError,
 )
 
 from eNMS.database import SMALL_STRING_LENGTH
@@ -68,8 +70,12 @@ class ExampleService(Service):
     regex = Column(String(SMALL_STRING_LENGTH), default="")
     # URL
     url = Column(String(SMALL_STRING_LENGTH), default="")
+    # Exclusion field
+    exclusion_field = Column(String(SMALL_STRING_LENGTH), default="")
     # Text area
     a_float = Column(Float, default=0.0)
+    # Integer with custom validator
+    custom_integer = Column(Integer, default=0)
     # the "a_list" property will be displayed as a multiple selection list
     # list, with the values contained in "a_list_values".
     a_list = Column(MutableList.as_mutable(PickleType))
@@ -127,11 +133,31 @@ class ExampleForm(ServiceForm):
             )
         ],
     )
+    exclusion_field = StringField(
+        "Exclusion field",
+        [
+            NoneOf(
+                ("a", "b", "c"),
+                message=(
+                    "'a', 'b', and 'c' are not valid " "inputs for the exclusion field"
+                ),
+            )
+        ],
+    )
     an_integer = IntegerField()
     a_float = FloatField()
+    custom_integer = IntegerField("Custom Integer")
     a_list = SelectMultipleField(
         choices=[("value1", "Value 1"), ("value2", "Value 2"), ("value3", "Value 3")]
     )
     a_dict = DictField()
     boolean1 = BooleanField()
     boolean2 = BooleanField("Boolean N°1")
+
+    def validate_custom_integer(self, field: IntegerField) -> None:
+        product = self.an_integer.data * self.a_float.data
+        if field.data > product:
+            raise ValidationError(
+                "Custom integer must be less than the "
+                "product of 'An integer' and 'A float'"
+            )

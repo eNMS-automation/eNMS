@@ -530,7 +530,7 @@ class Workflow(Job):
         ]
 
     def compute_valid_devices(
-        self, job: Job, allowed_devices: dict, payload: dict
+        self, job: Job, allowed_devices: dict, payload: Optional[dict] = None
     ) -> Set[Device]:
         if not job.has_targets:
             return set()

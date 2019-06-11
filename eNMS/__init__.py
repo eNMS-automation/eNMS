@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response, redirect, render_template, url_for
+from flask import Flask, jsonify, make_response, render_template
 from flask_assets import Bundle
 from flask_cli import FlaskCLI
 from flask.wrappers import Request, Response
@@ -67,11 +67,11 @@ def configure_context_processor(app: Flask) -> None:
 def configure_errors(app: Flask) -> None:
     @login_manager.unauthorized_handler
     def unauthorized_handler() -> Tuple[str, int]:
-        return redirect(url_for("blueprint.route", page="login"))
+        return render_template("page_403.html"), 403
 
     @app.errorhandler(403)
     def authorization_required(error: Any) -> Tuple[str, int]:
-        return redirect(url_for("blueprint.route", page="login"))
+        return render_template("page_403.html"), 403
 
     @app.errorhandler(404)
     def not_found_error(error: Any) -> Tuple[str, int]:

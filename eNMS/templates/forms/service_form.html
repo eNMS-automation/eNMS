@@ -119,6 +119,20 @@
         </fieldset>
       </div>
       <div id="step-4">
+        <fieldset>
+          <div class="item">
+            <input id="{{ form_type }}-define_devices_from_payload" name="define_devices_from_payload" class="add-id" type="checkbox" value="y">
+            <label>Define devices from payload</label>
+          </div>
+        </fieldset>
+        <label><label for="yaql_query">YaQL Query</label></label>
+        <div class='form-group'>
+          {{ form.yaql_query(id=form_type + '-yaql_query', class="form-control add-id") }}
+        </div>
+        <label><label for="query_property_type">Query Property Type</label></label>
+        <div class='form-group'>
+          {{ form.query_property_type(id=form_type + '-query_property_type', class="form-control add-id") }}
+        </div>
         <label><label for="devices">Devices</label></label>
         <div class='form-group'>
           {{ form.devices(id=form_type + '-devices', class="form-control add-id") }}

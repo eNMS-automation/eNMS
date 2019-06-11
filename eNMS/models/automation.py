@@ -68,6 +68,9 @@ class Job(AbstractBase):
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
     )
+    define_devices_from_payload = Column(Boolean, default=False)
+    yaql_query = Column(String(SMALL_STRING_LENGTH), default="")
+    query_property_type = Column(String(SMALL_STRING_LENGTH), default="ip_address")
     devices = relationship("Device", secondary=job_device_table, back_populates="jobs")
     pools = relationship("Pool", secondary=job_pool_table, back_populates="jobs")
     events = relationship("Event", secondary=job_event_table, back_populates="jobs")

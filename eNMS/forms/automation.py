@@ -18,6 +18,11 @@ class JobForm(BaseForm):
     type = StringField("Service Type")
     name = StringField("Name")
     description = StringField("Description")
+    define_devices_from_payload = BooleanField("Define Devices from Payload")
+    yaql_query = StringField("YaQL Query")
+    query_property_type = SelectField(
+        "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
+    )
     devices = MultipleInstanceField("Devices", instance_type="Device")
     credentials = SelectField(
         "Credentials",

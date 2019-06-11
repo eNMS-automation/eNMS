@@ -16,7 +16,7 @@ Having a custom form along with the custom service model makes sense for many re
 The values of a list, maximum length of a string, and whether or not a text field is a "textarea" is controlled from the form, as it should have been from the beginning.
 
 The following problems will be fixed by this change:
-- Marc reportd the default value was ignored for the "textarea" fields: now it's working.
+- Marc reported the default value was ignored for the "textarea" fields: now it's working.
 - You can define complex validation mechanism. WTforms provides you with a number of "validators" (https://wtforms.readthedocs.io/en/stable/validators.html)
 to check that the user input is an email address, IP address, etc.
 But if you need something more complex, you can define your own "validation function" to compute whether or not the form is valid based on user inputs:
@@ -26,7 +26,6 @@ see here for custom validators: https://wtforms.readthedocs.io/en/stable/validat
 
 - TextFSM service: uses Netmiko to connect to a device, extract variables from the result with a TextFSM template.
 - Python Snippet Service implemented by Marc now included by default.
-
 
 ## New Workflow system
 

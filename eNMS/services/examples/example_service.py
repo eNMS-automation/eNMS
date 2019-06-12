@@ -1,24 +1,14 @@
 # This class serves as a template example for the user to understand
 # how to implement their own custom services to eNMS.
-# It can be removed if you are deploying eNMS in production.
 
-# Each new service must inherit from the "Service" class.
-# eNMS will automatically generate a form in the web GUI by looking at the
-# SQL parameters of the class.
-# By default, a property (String, Float, Integer) will be displayed in the GUI
-# with a text area for the input.
-# If the property in a Boolean, it will be displayed as a tick box instead.
-# If the class contains a "property_name_values" property with a list of
-# values, it will be displayed:
-# - as a multiple selection list if the property is an SQL "MutableList".
-# - as a single selection drop-down list in all other cases.
-# If you want to see a few examples of services, you can have a look at the
-# /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
+# To create a new service in eNMS, you need to implement:
+# - A service class, which defines the service parameters stored in the database.
+# - A service form, which defines what is displayd in the GUI.
 
-# Importing SQL Alchemy column types to handle all of the types of
-# form additions that the user could have.
+# SQL Alchemy Column types
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
+# WTForms Fields
 from wtforms import (
     BooleanField,
     FloatField,
@@ -28,6 +18,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
+# WTForms Field Validators
 from wtforms.validators import (
     Email,
     InputRequired,
@@ -52,36 +43,27 @@ class ExampleService(Service):
     __tablename__ = "ExampleService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    # the "string1" property will be displayed as a drop-down list, because
-    # there is an associated "string1_values" property in the class.
+    # The following fields will be stored in the database as:
+    # - String
     string1 = Column(String(SMALL_STRING_LENGTH), default="")
-    # the "string2" property will be displayed as a text area.
     string2 = Column(String(SMALL_STRING_LENGTH), default="")
-    # string3 is mandatory: in the custom form, the DataRequired validator is used.
     mail_address = Column(String(SMALL_STRING_LENGTH), default="")
-    # IP and MAC address
     ip_address = Column(String(SMALL_STRING_LENGTH), default="")
     mac_address = Column(String(SMALL_STRING_LENGTH), default="")
-    # Integer field
-    an_integer = Column(Integer, default=0)
-    # Number range
-    number_in_range = Column(Integer, default=5)
-    # Regular expression
     regex = Column(String(SMALL_STRING_LENGTH), default="")
-    # URL
     url = Column(String(SMALL_STRING_LENGTH), default="")
-    # Exclusion field
     exclusion_field = Column(String(SMALL_STRING_LENGTH), default="")
-    # Text area
-    a_float = Column(Float, default=0.0)
-    # Integer with custom validator
+    # - Integer
+    an_integer = Column(Integer, default=0)
+    number_in_range = Column(Integer, default=5)
     custom_integer = Column(Integer, default=0)
-    # the "a_list" property will be displayed as a multiple selection list
-    # list, with the values contained in "a_list_values".
+    # - Float
+    a_float = Column(Float, default=0.0)
+    # - List
     a_list = Column(MutableList.as_mutable(PickleType))
-    # Text area where a python dictionary is expected
+    # - Dictionary
     a_dict = Column(MutableDict.as_mutable(PickleType))
-    # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
+    # - Boolean
     boolean1 = Column(Boolean, default=False)
     boolean2 = Column(Boolean, default=False)
 
@@ -96,7 +78,7 @@ class ExampleService(Service):
         # The parameters of the service can be accessed with self (self.string1,
         # self.boolean1, etc)
         # You can look at how default services (netmiko, napalm, etc.) are
-        # implemented in the /services subfolders.
+        # implemented in other folders.
         # The resulting dictionary will be displayed in the logs.
         # It must contain at least a key "success" that indicates whether
         # the execution of the service was a success or a failure.

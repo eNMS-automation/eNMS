@@ -2,7 +2,10 @@
 Services
 ========
 
-A service is a Python class that performs an action. You can define all the parameters you need as SQL Alchemy columns: eNMS will inspect the class parameters to automatically generate a service creation form in the web UI.
+A service is a Python script that performs an action.
+A service is defined by:
+- A database model. You can define all the parameters you need as SQL Alchemy columns: this is what eNMS stores in the database.
+- A form. It defines what is displayed in the UI, and it validates that the user input is correct.
 
 In ``eNMS/eNMS/automation/services/examples``, you will find the file ``example_service.py`` with a service template that you can use as starting point to create your own services. 
 This file contains the following code :
@@ -94,12 +97,10 @@ This file contains the following code :
 
   service_classes["ExampleService"] = ExampleService
 
-When the application starts, it loads all python files in ``eNMS/eNMS/automation/services``, and adds all models to the database.
-You can create instances of that service from the web UI.
+When the application starts, it loads all python files in ``eNMS/eNMS/services``, and adds all models to the database.
+You can create instances of a service from the web UI.
 
-eNMS looks at the class parameters (SQL Alchemy columns) to auto-generate a form for the user to create new instances of that service.
-Parameters with _values sets the options in selection lists. Parameters with _name set the display name, or pretty-printed name in the UI.
-Parameters with _length restricts text input to a maximum length for length-sensitive APIs.
+eNMS looks at the form class to auto-generate a form for the user to create new instances of that service.
 
 For the ``ExampleService`` class displayed above, the SQL columns are the following ones:
 
@@ -108,8 +109,6 @@ For the ``ExampleService`` class displayed above, the SQL columns are the follow
       string1 = Column(String)
       # the "string2" property will be displayed as a text area.
       string2 = Column(String)
-      string2_name = "String 2 !"
-      string2_length = 5
       # Text area
       an_integer = Column(Integer)
       # Text area
@@ -121,20 +120,7 @@ For the ``ExampleService`` class displayed above, the SQL columns are the follow
       a_dict = Column(MutableDict.as_mutable(PickleType))
       # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
       boolean1 = Column(Boolean)
-      boolean1_name = "Boolean N°1"
       boolean2 = Column(Boolean)
-
-      # these values will be displayed in a single selection drop-down list,
-      # for the property "a_list".
-      string1_values = [("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
-
-      # these values will be displayed in a multiple selection list,
-      # for the property "a_list".
-      a_list_values = [
-          ("value1", "Value 1"),
-          ("value2", "Value 2"),
-          ("value3", "Value 3"),
-      ]
 
 Here is the associated auto-generated form:
 

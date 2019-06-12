@@ -2,15 +2,15 @@
 Pools
 ============
 
-Pools allow the user to create groups of objects. They can be used to filter the view, but also to target an automation task to a specific subset of devices.
+Pools allow the user to create groups of objects. They can be used to filter the inventory tables and the view, but also to target an automation task to a specific subset of devices.
 A pool is defined as a combination of values (or regular expressions) for the properties of an object (in the inventory). 
 
-If the properties of an inventory object matches **all** pool properties, the object will belong to the pool.
+If the properties of an inventory object matches the pool properties (**any of them**, or **all of them**), the object will belong to the pool.
 
 Pool Management
 ---------------
 
-Pools can be created, updated, duplicated and deleted in :guilabel:`Inventory/Pool Management`, and they can be
+Pools can be created, updated, duplicated and deleted from the :guilabel:`Inventory / Pool Management` page, and they can be
 edited to manually select Objects instead of using criteria based on properties to select them. Additionally, a logical
 view force diagram of a pool is available using the ``Visualize`` button.
 
@@ -18,8 +18,7 @@ view force diagram of a pool is available using the ``Visualize`` button.
    :alt: Pool Management
    :align: center
 
-.. note:: When you add a new device A whose properties are matched by pool B, A is not automatically added to B (it didn't exist when B was last updated). To manually update the pools with all new objects, you can click on the ``Update pool`` button.
-.. note:: By default, the devices and links within a pool are determined based on the pool properties. However, the ``Edit objects`` button lets you define the pool devices and links by selecting them directly.
+.. note:: When you add a new device A whose properties are matched by pool B, A is automatically added to B.
 
 A first example
 ---------------
@@ -67,6 +66,18 @@ selected. This prevents manually selected pools from being re-calculated based o
 a pool that has some criteria specified as well as some manually specified devices, it is advised to have 2 pools-one with the criteria
 specified and another with the manually selected devices.  When running a job, multiple pools and multiple devices can be specified, and
 the job will run against all specified objects.
+
+Manual definition
+-----------------
+
+By default, the devices and links within a pool are determined based on the pool properties. However, the ``Edit objects`` button lets you define the pool devices and links by selecting them directly instead.
+There are two ways to manually select the objects of a pool:
+* By selecting them from a drop-down list.
+* By copy/pasting a string made of devices' and links' names, separated by a comma.
+
+.. image:: /_static/inventory/pools/manual_definition.png
+   :alt: Manual definition of a pool
+   :align: center
 
 How Pools get Updated
 ---------------------

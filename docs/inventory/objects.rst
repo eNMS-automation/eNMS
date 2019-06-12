@@ -39,7 +39,7 @@ Creation via external API
 *************************
 
 Another way to create your network is to query an external API: OpenNMS, Netbox, or LibreNMS.
-This can be done from the :guilabel:`Admin / Administration` page.
+This can be done from the :guilabel:`Admin / Administration` page, column "Topology Import".
 
 OpenNMS
 -------

@@ -222,4 +222,6 @@ then pull if it exists, clone otherwise.
 >>> Done. I added a workflow called "YaQL test" to give you an example of how it works.
 
 - remove icon from the device table + driver
+>>> Done.
+
 - python snippet change

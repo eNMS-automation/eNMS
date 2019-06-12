@@ -1,8 +1,13 @@
 from typing import Dict, List
 
-from eNMS.properties.objects import device_properties, object_common_properties
+from eNMS.properties.objects import object_common_properties
 
-device_table_properties: List[str] = object_common_properties + device_properties[:-3]
+device_table_properties: List[str] = object_common_properties + [
+    "operating_system",
+    "os_version",
+    "ip_address",
+    "port",
+]
 
 configuration_table_properties: List[str] = [
     "name",

@@ -3,6 +3,7 @@ from typing import Any, Optional
 from wtforms import BooleanField, HiddenField, StringField
 from wtforms.widgets import TextArea
 
+from eNMS.database import LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
@@ -14,7 +15,7 @@ class PythonSnippetService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    source_code = Column(Text)
+    source_code = Column(Text(LARGE_STRING_LENGTH))
 
     __mapper_args__ = {"polymorphic_identity": "PythonSnippetService"}
 

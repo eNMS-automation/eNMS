@@ -14,7 +14,7 @@ Pools can be created, updated, duplicated and deleted from the :guilabel:`Invent
 edited to manually select Objects instead of using criteria based on properties to select them. Additionally, a logical
 view force diagram of a pool is available using the ``Visualize`` button.
 
-.. image:: /_static/inventory/pools/pool_management.png
+.. image:: /_static/inventory/pool_management/pool_management.png
    :alt: Pool Management
    :align: center
 
@@ -23,7 +23,7 @@ view force diagram of a pool is available using the ``Visualize`` button.
 A first example
 ---------------
 
-.. image:: /_static/inventory/pools/device_filtering.png
+.. image:: /_static/inventory/pool_management/device_filtering.png
    :alt: Device Filtering
    :align: center
 
@@ -39,7 +39,7 @@ In summary, all Cisco routers or switches whose name begins with ``node`` will m
 A pool of links
 ---------------
 
-.. image:: /_static/inventory/pools/link_filtering.png
+.. image:: /_static/inventory/pool_management/link_filtering.png
    :alt: Link filtering
    :align: center
 
@@ -75,7 +75,7 @@ There are two ways to manually select the objects of a pool:
 * By selecting them from a drop-down list.
 * By copy/pasting a string made of devices' and links' names, separated by a comma.
 
-.. image:: /_static/inventory/pools/manual_definition.png
+.. image:: /_static/inventory/pool_management/manual_definition.png
    :alt: Manual definition of a pool
    :align: center
 
@@ -113,7 +113,7 @@ Filter the view with a pool
 Pools can be used as filters for the geographical views.  You can switch between pools with the drop-down list in the
 top-right corner of the screen (framed in red below).
 
-.. image:: /_static/inventory/pools/view_filter.png
+.. image:: /_static/inventory/pool_management/view_filter.png
    :alt: Apply a filter to the view
    :align: center
 
@@ -122,7 +122,7 @@ Use a pool as target of a Service or a Workflow
 
 You can select multiple devices, as well as multiple pools as targets.
 
-.. image:: /_static/inventory/pools/target_pool.png
+.. image:: /_static/inventory/pool_management/target_pool.png
    :alt: Use a pool as a target
    :align: center
 

@@ -251,8 +251,13 @@ When you create a new Service Instance, the form will also contain multiple sele
    :alt: Target selection
    :align: center
 
-The service will run on all selected devices in parallel (multiprocessing). If you select pools, it will run on the union of all devices in the selected pools.
-Some services have no target device at all, depending on what the service does.
+There are two ways to select devices:
+
+- Directly from the "Devices" and "Pools" drop-down. The service will run on all selected devices, as well as on the devices of all selected pools.
+- From the payload when the service runs inside a workflow. You can tick the ``Define devices from payload`` box and write a YaQL query to extract devices (either IP address or names) from the payload.
+
+A service can run on its devices either sequentially, or in parallel if the ``Multiprocessing`` checkbox is ticked.
+Some services have no devices at all: it depends on what the service is doing.
 
 Variable substitution
 ---------------------
@@ -294,14 +299,6 @@ In addition to text matching, for some services where output is either expected 
 A few options are available to the user:
 - ``Negative logic``: the result is inverted: a success becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
 - ``Delete spaces before matching``: the output returned by the device will be stripped from all spaces and newlines, as those can sometimes result in false negative.
-
-
-Run multiple services
----------------------
-
-- Service instance tasks will run in parallel to other service instance tasks as long as they are standalone and do not exist within a workflow.
-- Service Instance (and workflows) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
-- If multiple inventory devices are selected within the individual service instance definitions (but not at the workflow instance level, since that overrides any devices selected for the individual service instances), these will run in parallel.
 
 Retry mechanism
 ---------------

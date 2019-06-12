@@ -1,6 +1,6 @@
-========
-Security
-========
+==============
+Administration
+==============
 
 .. toctree::
    :maxdepth: 1

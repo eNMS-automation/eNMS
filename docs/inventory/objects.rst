@@ -5,11 +5,7 @@ Objects
 Type of objects
 ---------------
 
-There are different types of devices and links available in eNMS.
-
-* **Device**: router, switch, optical switch, server, host, antenna, regenerator, firewall.
-* **Link**: ethernet link, optical link, etherchannel (LAG), optical channel, pseudowire, BGP peering.
-
+There are two types of objects available in eNMS: devices and links.
 Each type of device (resp. link) has a specific icon (resp. color) when displayed graphically:
     
 .. image:: /_static/inventory/objects/object_types.png
@@ -19,24 +15,24 @@ Each type of device (resp. link) has a specific icon (resp. color) when displaye
 Creation
 --------
 
-Inventory can be created from the :guilabel:`inventory/device_management` and :guilabel:`inventory/link_management` page, in two different ways:
+Inventory can be created in two different ways:
 
-* Manually, by entering the value of each property in a form (one by one).
-* By importing an Excel file (.xls, .xlsx).
+* Manually, from the :guilabel:`Inventory / Device Management` page and :guilabel:`Inventory / Link Management` page, by entering the value of each property in a form (one by one).
+* All at once, from the :guilabel:`Admin / Administration` page by importing an Excel file (.xls, .xlsx).
 
-.. note:: Note: the workbook/tab names and column names in the Excel file should exactly match the examples provided with eNMS.
+.. note:: Note: the workbook/tab names and column names in the Excel file should exactly match the examples provided with eNMS in the :guilabel:`projects/spreadsheets` folder.
 
 .. note:: eNMS currently has no way to check the spreadsheet import for valid data, nor duplicates. It is important to pass good data to eNMS.
 
 Manual creation
 ***************
 
-Clicking on the ``Add a new device`` or ``Add a new link`` buttons will open a form with the list of all properties of the object.
+Clicking on the ``Create`` button will open a form with the list of all properties of the object.
 
 Fill the form and click on the ``Submit`` button.
 
 .. image:: /_static/inventory/objects/object_creation.png
-   :alt: Device and link creation forms
+   :alt: Device creation form
    :align: center
 
 Creation via import

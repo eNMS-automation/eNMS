@@ -7,5 +7,5 @@ Inventory
 
    objects
    configuration_management
-   pools
+   pool_management
    web_connection

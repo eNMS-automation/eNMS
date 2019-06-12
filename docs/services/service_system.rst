@@ -204,51 +204,22 @@ This file contains the following code :
               )
 
 
-When the application starts, it loads all python files in ``eNMS/eNMS/services``, and adds all models to the database.
+When the application starts, it loads all python files in ``eNMS/eNMS/services``, and adds all models to the database. Inside the ``eNMS/eNMS/automation/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
 You can create instances of a service from the web UI.
-
 eNMS looks at the form class to auto-generate a form for the user to create new instances of that service.
 
-For the ``ExampleService`` class displayed above, the SQL columns are the following ones:
-
-::
-
-      string1 = Column(String)
-      # the "string2" property will be displayed as a text area.
-      string2 = Column(String)
-      # Text area
-      an_integer = Column(Integer)
-      # Text area
-      a_float = Column(Float)
-      # the "a_list" property will be displayed as a multiple selection list
-      # list, with the values contained in "a_list_values".
-      a_list = Column(MutableList.as_mutable(PickleType))
-      # Text area where a python dictionary is expected
-      a_dict = Column(MutableDict.as_mutable(PickleType))
-      # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
-      boolean1 = Column(Boolean)
-      boolean2 = Column(Boolean)
-
-Here is the associated auto-generated form:
+For the ``ExampleService`` service displayed above, the associated auto-generated form is the following (not all fields are displayed):
 
 .. image:: /_static/services/service_system/example_service.png
    :alt: Example service
    :align: center
 
-The rules for the auto-generation of service forms are the following:
-- A String, Integer or Float property is by default displayed as a text area. However, if the service class has another property whose name is ``<property_name>_values``, eNMS will generate a drop-down list to choose a value from instead. In the aforementioned example, ``operating_system`` is a String column that will be displayed as a text area in the web UI. On the other hand, ``vendor`` is a String column and the class has a ``vendor_values`` property that contains a list of possible values: the ``vendor`` property will be displayed as a (single-selection) drop-down list.
-- A Boolean property is displayed as a checkbox.
-- A MutableList property is displayed as a multi-selection list. It must have an associated "_values" property containing the list of values that can be selected.
-- A MutableDict property is displayed as a text area. You can write a dictionary in that text area: it will be converted to an actual python dictionary.
-
-Inside the ``eNMS/eNMS/automation/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
-
-eNMS comes with a list of "default" services based on network automation frameworks such as ``netmiko``, ``napalm``, ``nornir`` and ``ansible``.
+eNMS comes with a list of "default" services based on network automation frameworks such as ``netmiko``, ``napalm`` and ``ansible``.
 
 Custom Services Path
 --------------------
 
-By default, eNMS will scan the ``eNMS/eNMS/automation/services`` folder to instantiate all services you created in that folder.
+By default, eNMS will scan the ``eNMS/eNMS/services`` folder to instantiate all services you created in that folder.
 If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory, so that you can safely pull the latest code from Github), you can set the ``CUSTOM_SERVICES_PATH`` environment variable to the path of the folder that contains your custom services.
 
 Service Management
@@ -264,17 +235,17 @@ From the :guilabel:`automation/service_management` page, you can:
 
 - Start a Service Instance (``Run`` button).
 - View and compare the logs of the Service Instance.
-- Edit the Service Instance properties.
+- Edit or duplicate the Service Instance.
+- Export the Service Instance: the service instance will be exported as a YaML file in the ``projects/exported_jobs`` directory. This allows migrating service instances from one VM to another if you are using different VM.
 - Delete the Service Instance.
 
 When running a service instance, the device progress (current device/total devices selected to run) will be displayed in the table, unless Multiprocessing is selected to run the devices in parallel, in which case eNMS cannot keep track of how many devices are completed until the service instance finishes.
-
 Each field in the table allows for searching that field by inclusion match. The Status field however, needs to perform an exact search, so fully input 'Running' or 'Idle' to search.
 
 Service devices
 ---------------
 
-When you create a new Service Instance, the form will also contain multiple selection fields for you to select "target devices".
+When you create a new Service Instance, the form will also contain multiple selection fields for you to select "devices".
 
 .. image:: /_static/services/service_system/target_selection.png
    :alt: Target selection

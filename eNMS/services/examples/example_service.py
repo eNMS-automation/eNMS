@@ -8,6 +8,7 @@
 # SQL Alchemy Column types
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
+
 # WTForms Fields
 from wtforms import (
     BooleanField,
@@ -18,6 +19,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
+
 # WTForms Field Validators
 from wtforms.validators import (
     Email,

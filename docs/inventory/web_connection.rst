@@ -16,11 +16,7 @@ Port allocation
 
 By default, eNMS will use the range of ports [9000, 9099]. eNMS uses a rotation system to allocate these ports sequentially as user requests come in.
 
-You can change this range directly from the web UI, in :guilabel:`admin/parameters` :
- 
-.. image:: /_static/inventory/web_connection/port_allocation.png
-   :alt: GoTTY default range of ports
-   :align: center
+You can change this range directly from the web UI, in the :guilabel:`Admin / Administration` page, button ``SSH Terminal``.
 
 Custom URL
 ----------
@@ -104,11 +100,11 @@ You can configure the following parameters :
 - Automatically authenticate (SSH only): eNMS will use the credentials stored in the Vault (production mode) or the database (test mode) to automatically authenticate to the network device. eNMS uses ``sshpass`` for the authentication: it must be installed if you activate the automatic authentication (``sudo apt-get install sshpass``). By default, eNMS uses the user credentials for the authentication (the ones you use to log in to eNMS). However, it can be configured to use the device credentials instead (the credentials that you can specify when creating a new device).
 - Protocol: SSH or Telnet.
 
-From the views
+From the Views
 **************
 
-You can also connect to a device from the geographical or logical view. Double-clicking on a device opens the property panel of that device. This window contains the same ``Connect`` button as in the :guilabel:`objects/device_management` page.
+You can also connect to a device by clicking on the right-click menu entry ``Connect``:
 
-.. image:: /_static/inventory/web_connection/connect_from_view.png
-   :alt: Connection window
-   :align: center
+- From the geographical view in :guilabel:`Views / Network View` and :guilabel:`Views / Site View`
+- From the pool logical visualization in :guilabel:`Inventory / Pool Management` (button ``Visualize``)
+

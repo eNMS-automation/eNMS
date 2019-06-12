@@ -6,7 +6,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from re import search, sub
 from typing import Any, Dict, List
 
-from eNMS.concurrent import threaded_job
+from eNMS.concurrency import threaded_job
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify

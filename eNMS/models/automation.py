@@ -24,7 +24,7 @@ from typing import Any, Generator, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 from yaql import factory
 
-from eNMS.concurrent import threaded_job, device_process
+from eNMS.concurrency import threaded_job, device_process
 from eNMS.controller import controller
 from eNMS.database import CustomMediumBlobPickle, Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch

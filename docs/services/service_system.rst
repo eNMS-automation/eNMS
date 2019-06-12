@@ -14,28 +14,42 @@ This file contains the following code :
 
   # This class serves as a template example for the user to understand
   # how to implement their own custom services to eNMS.
-  # It can be removed if you are deploying eNMS in production.
 
-  # Each new service must inherit from the "Service" class.
-  # eNMS will automatically generate a form in the web GUI by looking at the
-  # SQL parameters of the class.
-  # By default, a property (String, Float, Integer) will be displayed in the GUI
-  # with a text area for the input.
-  # If the property in a Boolean, it will be displayed as a tick box instead.
-  # If the class contains a "property_name_values" property with a list of
-  # values, it will be displayed:
-  # - as a multiple selection list if the property is an SQL "MutableList".
-  # - as a single selection drop-down list in all other cases.
-  # If you want to see a few examples of services, you can have a look at the
-  # /netmiko, /napalm and /miscellaneous subfolders in /eNMS/eNMS/services.
+  # To create a new service in eNMS, you need to implement:
+  # - A service class, which defines the service parameters stored in the database.
+  # - A service form, which defines what is displayd in the GUI.
 
-  # Importing SQL Alchemy column types to handle all of the types of
-  # form additions that the user could have.
+  # SQL Alchemy Column types
   from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
   from sqlalchemy.ext.mutable import MutableDict, MutableList
+  # WTForms Fields
+  from wtforms import (
+      BooleanField,
+      FloatField,
+      HiddenField,
+      IntegerField,
+      SelectMultipleField,
+      SelectField,
+      StringField,
+  )
+  # WTForms Field Validators
+  from wtforms.validators import (
+      Email,
+      InputRequired,
+      IPAddress,
+      Length,
+      MacAddress,
+      NoneOf,
+      NumberRange,
+      Regexp,
+      URL,
+      ValidationError,
+  )
 
-  from eNMS.automation.models import Service
-  from eNMS.base.classes import service_classes
+  from eNMS.database import SMALL_STRING_LENGTH
+  from eNMS.forms.automation import ServiceForm
+  from eNMS.forms.fields import DictField
+  from eNMS.models.automation import Service
 
 
   class ExampleService(Service):
@@ -43,38 +57,29 @@ This file contains the following code :
       __tablename__ = "ExampleService"
 
       id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-      # the "string1" property will be displayed as a drop-down list, because
-      # there is an associated "string1_values" property in the class.
-      string1 = Column(String)
-      # the "string2" property will be displayed as a text area.
-      string2 = Column(String)
-      string2_name = "String 2 !"
-      string2_length = 5
-      # Text area
-      an_integer = Column(Integer)
-      # Text area
-      a_float = Column(Float)
-      # the "a_list" property will be displayed as a multiple selection list
-      # list, with the values contained in "a_list_values".
+      # The following fields will be stored in the database as:
+      # - String
+      string1 = Column(String(SMALL_STRING_LENGTH), default="")
+      string2 = Column(String(SMALL_STRING_LENGTH), default="")
+      mail_address = Column(String(SMALL_STRING_LENGTH), default="")
+      ip_address = Column(String(SMALL_STRING_LENGTH), default="")
+      mac_address = Column(String(SMALL_STRING_LENGTH), default="")
+      regex = Column(String(SMALL_STRING_LENGTH), default="")
+      url = Column(String(SMALL_STRING_LENGTH), default="")
+      exclusion_field = Column(String(SMALL_STRING_LENGTH), default="")
+      # - Integer
+      an_integer = Column(Integer, default=0)
+      number_in_range = Column(Integer, default=5)
+      custom_integer = Column(Integer, default=0)
+      # - Float
+      a_float = Column(Float, default=0.0)
+      # - List
       a_list = Column(MutableList.as_mutable(PickleType))
-      # Text area where a python dictionary is expected
+      # - Dictionary
       a_dict = Column(MutableDict.as_mutable(PickleType))
-      # "boolean1" and "boolean2" will be displayed as tick boxes in the GUI.
-      boolean1 = Column(Boolean)
-      boolean1_name = "Boolean N°1"
-      boolean2 = Column(Boolean)
-
-      # these values will be displayed in a single selection drop-down list,
-      # for the property "a_list".
-      string1_values = [("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
-
-      # these values will be displayed in a multiple selection list,
-      # for the property "a_list".
-      a_list_values = [
-          ("value1", "Value 1"),
-          ("value2", "Value 2"),
-          ("value3", "Value 3"),
-      ]
+      # - Boolean
+      boolean1 = Column(Boolean, default=False)
+      boolean2 = Column(Boolean, default=False)
 
       __mapper_args__ = {"polymorphic_identity": "ExampleService"}
 
@@ -82,12 +87,13 @@ This file contains the following code :
       # can also take device as a parameter for these types of services.
       # def job(self, device, payload):
       def job(self, payload: dict) -> dict:
+          self.logs.append(f"Real-time logs displayed when the service is running.")
           # The "job" function is called when the service is executed.
           # The parameters of the service can be accessed with self (self.string1,
           # self.boolean1, etc)
           # You can look at how default services (netmiko, napalm, etc.) are
-          # implemented in the /services subfolders (/netmiko, /napalm, etc).
-          # "results" is a dictionary that will be displayed in the logs.
+          # implemented in other folders.
+          # The resulting dictionary will be displayed in the logs.
           # It must contain at least a key "success" that indicates whether
           # the execution of the service was a success or a failure.
           # In a workflow, the "success" value will determine whether to move
@@ -95,7 +101,108 @@ This file contains the following code :
           return {"success": True, "result": "example"}
 
 
-  service_classes["ExampleService"] = ExampleService
+  class ExampleForm(ServiceForm):
+      # Each service model must have an corresponding form.
+      # The purpose of a form is twofold:
+      # - Define how the service is displayed in the UI
+      # - Check for each field that the user input is valid.
+      # A service cannot be created/updated until all fields are validated.
+
+      # The following line is mandatory: the default value must point
+      # to the service.
+      form_type = HiddenField(default="ExampleService")
+
+      # string1 is defined as a "SelectField": it will be displayed as a
+      # drop-down list in the UI.
+      string1 = SelectField(
+          choices=[("cisco", "Cisco"), ("juniper", "Juniper"), ("arista", "Arista")]
+      )
+
+      # String2 is a StringField, which is displayed as a standard textbox.
+      # The "InputRequired" validator is used: this field is mandatory.
+      string2 = StringField("String 2 (required)", [InputRequired()])
+
+      # The main address field uses two validators:
+      # - The input length must be comprised between 7 and 25 characters
+      # - The input syntax must match that of an email address.
+      mail_address = StringField("Mail address", [Length(min=7, max=25), Email()])
+
+      # This IP address validator will ensure the user input is a valid IPv4 address.
+      # If it isn't, you can set the error message to be displayed in the GUI.
+      ip_address = StringField(
+          "IP address",
+          [
+              IPAddress(
+                  ipv4=True,
+                  message="Please enter an IPv4 address for the IP address field",
+              )
+          ],
+      )
+
+      # MAC address validator
+      mac_address = StringField("MAC address", [MacAddress()])
+
+      # The NumberRange validator will ensure the user input is an integer
+      # between 3 and 8.
+      number_in_range = IntegerField("Number in range", [NumberRange(min=3, max=8)])
+
+      # The Regexp field will ensure the user input matches the regular expression.
+      regex = StringField("Regular expression", [Regexp(r".*")])
+
+      # URL validation, with or without TLD.
+      url = StringField(
+          "URL",
+          [
+              URL(
+                  require_tld=True,
+                  message="An URL with TLD is required for the url field",
+              )
+          ],
+      )
+
+      # The NoneOf validator lets you define forbidden value for a field.
+      exclusion_field = StringField(
+          "Exclusion field",
+          [
+              NoneOf(
+                  ("a", "b", "c"),
+                  message=(
+                      "'a', 'b', and 'c' are not valid " "inputs for the exclusion field"
+                  ),
+              )
+          ],
+      )
+      an_integer = IntegerField()
+      a_float = FloatField()
+
+      # If validator the user input is more complex, you can create a python function
+      # to implement the validation mechanism.
+      # Here, the custom_integer field will be validated by the "validate_custom_integer"
+      # function below.
+      # That function will check that the custom integer value is superior to the product
+      # of "an_integer" and "a_float".
+      # You must raise a "ValidationError" when the validation fails.
+      custom_integer = IntegerField("Custom Integer")
+
+      # A SelectMultipleField will be displayed as a drop-down list that allows
+      # multiple selection.
+      a_list = SelectMultipleField(
+          choices=[("value1", "Value 1"), ("value2", "Value 2"), ("value3", "Value 3")]
+      )
+      a_dict = DictField()
+
+      # A BooleanField is displayed as a check box.
+      boolean1 = BooleanField()
+      boolean2 = BooleanField("Boolean N°1")
+
+      def validate_custom_integer(self, field: IntegerField) -> None:
+          product = self.an_integer.data * self.a_float.data
+          if field.data > product:
+              raise ValidationError(
+                  "Custom integer must be less than the "
+                  "product of 'An integer' and 'A float'"
+              )
+
 
 When the application starts, it loads all python files in ``eNMS/eNMS/services``, and adds all models to the database.
 You can create instances of a service from the web UI.

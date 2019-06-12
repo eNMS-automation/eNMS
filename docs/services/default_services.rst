@@ -29,6 +29,34 @@ Parameters common to all services
     - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
     - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
 
+Parameters common to all services that validate data
+----------------------------------------------------
+
+- ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
+- ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
+- ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
+- ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
+- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
+- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+
+Parameters common to the services that use netmiko
+--------------------------------------------------
+
+- ``Privileged mode`` If checked, Netmiko should enter enable mode on the device before applying the above configuration block 
+- ``Driver`` Which Netmiko driver to use when connecting to the device
+- ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+- ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
+- ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
+- ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
+- ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
+
+Parameters common to the services that use Napalm
+-------------------------------------------------
+
+- ``Driver`` Which Napalm driver to use when connecting to the device
+- ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+- ``Optional arguments`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
+
 Netmiko Configuration Service
 -----------------------------
 
@@ -44,13 +72,7 @@ If this property is disabled, eNMS will use the ``driver`` property defined in t
 Configuration parameters for creating this service instance:
 
 - ``Content`` Paste a configuration block of text here for applying to the target device(s)
-- ``Driver`` Which Netmiko driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-- ``Enter Enable mode`` If checked, Netmiko should enter enable mode on the device before applying the above configuration block
-- ``Fast Cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
-- ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-- ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
-- ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
++ Netmiko parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
@@ -77,12 +99,7 @@ Configuration parameters for creating this service instance:
 - ``Variable3`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
 - ``Command3`` CLI command to send to the device via SSH
 - ``Regular Expression3`` Regular expression match to use in filtering the response data from the command
-- ``Driver`` Which Netmiko driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-- ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
-- ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-- ``Delay Factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
-- ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
++ Netmiko Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
@@ -102,15 +119,11 @@ Configuration parameters for creating this service instance:
 - ``Destination file`` Destination file; absolute path and filename to send the file to
 - ``Direction`` Upload or Download from the perspective of running on the device
 - ``disable_md5`` Disable checksum validation following the transfer
-- ``driver`` Which Netmiko file transfer driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
 - ``File system`` Mounted filesystem for storage on the default. For example, disk1:
 - ``inline_transfer`` Cisco specific method of transferring files between internal components of the device
 - ``overwrite_file`` If checked, overwrite the file at the destination if it exists
 - ``Source file`` Source absolute path and filename of the file to send
-- ``Fast Cli`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
-- ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-- ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
++ Netmiko parameters
 
 Netmiko Prompts Service
 -----------------------
@@ -131,18 +144,11 @@ Configuration parameters for creating this service instance:
 - ``confirmation3`` third expected confirmation question prompted by the device
 - ``response3`` response to third confirmation question prompted by the device
 - ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
-- ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
-- ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
-- ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
-- ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
-- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
-- ``Driver`` Which Netmiko driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-- ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
-- ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-- ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
-- ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
+
++ Validation parameters
++ Netmiko parameters
+
+
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
@@ -163,18 +169,8 @@ There is a ``command`` field and a ``pattern`` field. eNMS will check if the exp
 Configuration parameters for creating this service instance:
 - ``Command`` CLI command to send to the device
 - ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
-- ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
-- ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
-- ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
-- ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
-- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
-- ``Driver`` Which Netmiko driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-- ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
-- ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
-- ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
-- ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
++ Netmiko Parameters
++ Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
@@ -195,9 +191,7 @@ Configuration parameters for creating this service instance:
     - ``Load merge``: add the service configuration to the existing configuration of the target
     - ``Load replace``: replace the configuration of the target with the service configuration
 - ``Content`` Paste a configuration block of text here for applying to the target device(s)
-- ``Driver`` Which Napalm driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-- ``Optional arguments`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
+- + Napalm Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
@@ -214,9 +208,7 @@ If this property is disabled, eNMS will use the ``driver`` property defined in t
    :align: center
 
 Configuration parameters for creating this service instance:
-- ``Driver`` Which Napalm driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-- ``Optional arguments`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
+- Napalm parameters
 
 Napalm Getters service
 ----------------------
@@ -231,16 +223,9 @@ If this property is disabled, eNMS will use the ``driver`` property defined in t
    :align: center
 
 Configuration parameters for creating this service instance:
-- ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
-- ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
-- ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
-- ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
-- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
-- ``Driver`` Which Napalm driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+- Napalm Parameters
+- Validation Parameters
 - ``Getters`` Napalm getters (standard retrieval APIs) are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix)
-- ``Optional Arguments`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content_match` input field of its configuration form.
 
@@ -258,10 +243,8 @@ Note that the iosxr driver does not support ping, but you can use the ios driver
    :align: center
 
 Configuration parameters for creating this service instance:
+- Napalm parameters
 - ``count``: Number of ping packets to send
-- ``Driver`` Which Napalm driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-- ``Optional arguments`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 - ``size`` Size of the ping packet payload to send in bytes
 - ``Source IP address`` Override the source ip address of the ping packet with this provided IP
 - ``Timeout`` Seconds to wait before declaring timeout
@@ -282,9 +265,7 @@ Note that the iosxr driver does not support ping, but you can use the ios driver
    :align: center
 
 Configuration parameters for creating this service instance:
-- ``Driver`` Which Napalm driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
-- ``Optional arguments`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
+- Napalm parameters
 - ``Source IP address`` Override the source ip address of the ping packet with this provided IP
 - ``Timeout`` Seconds to wait before declaring timeout
 - ``ttl`` Time to Live parameter, which tells routers when to discard this packet because it has been in the network too long (too many hops)
@@ -305,14 +286,9 @@ Configuration parameters for creating this service instance:
 - ``Has targets`` If checked, indicates that the selected inventory devices should be passed to the playbook as its inventory using -i. Alternatively, if not checked, the ansible playbook can reference its own inventory internally using host: inventory_group and by providing an alternative inventory
 - ``playbook_path`` path and filename to the Ansible Playbook. For example, if the playbooks subdirectory is located inside the eNMS project directory:  playbooks/juniper_get_facts.yml
 - ``arguments`` ansible-playbook command line options, which are documented here: (https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
-- ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
-- ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
-- ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
-- ``Dictionary Match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
-- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
 - ``options`` Additional --extra-vars to be passed to the playbook using the syntax {'key1':value1, 'key2': value2}.  All inventory properties are automatically passed to the playbook using --extra-vars (if pass_device_properties is selected below). These options are appended.
 - ``Pass device properties to the playbook`` Pass inventory properties using --extra-vars to the playbook if checked (along with the options dictionary provided above).
+- Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `playbook_path` and `content_match` input fields of its configuration form.
 
@@ -334,14 +310,9 @@ Configuration parameters for creating this service instance:
 - ``Parameters`` Additional parameters to pass in the request. From the requests library, params can be a dictionary, list of tuples or bytes that are sent in the body of the request.
 - ``Headers`` Dictionary of HTTP Header information to send with the request, such as the type of data to be passed. For example, {"accept":"application/json","content-type":"application/json"}
 - ``Timeout`` Requests library timeout, which is the Float value in seconds to wait for the server to send data before giving up
-- ``Validation Method``: ``Text match``, ``dictionary Equality`` or ``dictionary Inclusion``. Text match means that the result is converted into a string, and eNMS can check (via ``content_match`` / ``content_match_regex``) whether there is a match or not. dictionary Equality / Inclusion means that eNMS will check the results against a dictionary specified by the user (via ``dictionary match`` property).
-- ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
-- ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
-- ``Dictionary match``: dictionary against which the results must be checked (in case ``Validation Method`` is set to either ``dictionary Equality`` or ``dictionary Inclusion``.
-- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
 - ``Username`` Username to use for authenticating with the ReST server
 - ``Password`` Password to use for authenticating with the ReST server
+- Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
@@ -408,9 +379,6 @@ Implements a UNIX command to the target device.
 
 Configuration parameters for creating this service instance:
 - ``Command``: UNIX command to run on the device
-- ``Content Match`` expected response string to receive back (if any). Multi-line strings are supported. If no content_match is provided, the command will succeed if the connection was successfully made and command executed.
-- ``Match content against Regular expression`` Enables regex parsing in the content_match field if checked; otherwise, content_match is expected to be literal string match.
-- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+- Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.

@@ -94,7 +94,6 @@ def logout() -> Response:
 
 @blueprint.route("/administration")
 @monitor_requests
-@lru_cache(maxsize=None)
 def administration() -> dict:
     return render_template(
         f"pages/administration.html",
@@ -107,7 +106,6 @@ def administration() -> dict:
 
 @blueprint.route("/dashboard")
 @monitor_requests
-@lru_cache(maxsize=None)
 def dashboard() -> dict:
     return render_template(
         f"pages/dashboard.html",
@@ -137,7 +135,6 @@ def table(table_type: str) -> dict:
 
 @blueprint.route("/view/<view_type>")
 @monitor_requests
-@lru_cache(maxsize=None)
 def view(view_type: str) -> dict:
     return render_template(
         f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
@@ -166,7 +163,6 @@ def workflow_builder() -> dict:
 
 @blueprint.route("/calendar")
 @monitor_requests
-@lru_cache(maxsize=None)
 def calendar() -> dict:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 

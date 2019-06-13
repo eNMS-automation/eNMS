@@ -163,6 +163,7 @@ class TaskForm(BaseForm):
         choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling")),
     )
 
+
 class TaskFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="task_filtering")

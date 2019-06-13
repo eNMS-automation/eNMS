@@ -1,9 +1,6 @@
 from click import argument, echo, option
 from flask import Flask
-from flask.cli import DispatchingApp, pass_script_info, ScriptInfo
 from json import loads
-from pathlib import Path
-from werkzeug.serving import run_simple
 
 from eNMS.controller import controller
 from eNMS.database.functions import delete, factory, fetch

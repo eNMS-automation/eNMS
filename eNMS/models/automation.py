@@ -592,7 +592,6 @@ class Workflow(Job):
             )
             results["results"][job.name] = job_results
             self.state["jobs"][job.id] = job_results["success"]
-            Session.commit()
             if self.use_workflow_targets:
                 successors = self.workflow_targets_processing(
                     allowed_devices, job, job_results

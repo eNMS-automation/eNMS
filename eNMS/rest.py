@@ -77,7 +77,9 @@ class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction: str) -> Optional[str]:
-        return getattr(controller, f"migration_{direction}")()
+        return getattr(controller, f"migration_{direction}")(
+            **request.get_json(force=True)
+        )
 
 
 class RunJob(Resource):

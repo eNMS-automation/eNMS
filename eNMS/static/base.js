@@ -46,6 +46,7 @@ const panelSize = {
   service_filtering: "1000 500",
   ssh: "700 200",
   task: "900 500",
+  task_filtering: "900 400",
   user: "600 300",
   user_filtering: "700 200",
   view: "700 300",
@@ -65,6 +66,7 @@ const panelName = {
   server_filtering: "Server Filtering",
   log_filtering: "Log Filtering",
   service_filtering: "Service Filtering",
+  task_filtering: "Task Filtering",
   user_filtering: "User Filtering",
   workflow_filtering: "Workflow Filtering",
 };

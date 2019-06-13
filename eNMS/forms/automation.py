@@ -162,3 +162,14 @@ class TaskForm(BaseForm):
         "Scheduling Mode",
         choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling")),
     )
+
+class TaskFilteringForm(BaseForm):
+    action = "filter"
+    form_type = HiddenField(default="task_filtering")
+    name = StringField("Name")
+    description = StringField("Description")
+    is_active = StringField("Is Active")
+    start_date = StringField("Start Date")
+    end_date = StringField("End Date")
+    frequency = StringField("Frequency")
+    job_name = StringField("Job")

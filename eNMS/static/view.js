@@ -302,7 +302,7 @@ function createLink2d(link) {
  */
 // eslint-disable-next-line
 function createLink3d(link) {
-  const color = link.color;
+  const color = link.color.trimRight();
   const polygonSD = WE.polygon(
     [
       [link.source_latitude, link.source_longitude],

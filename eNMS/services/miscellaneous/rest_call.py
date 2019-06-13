@@ -1,4 +1,4 @@
-from json import dumps, JSONDecodeError
+from json import dumps
 from requests import (
     get as rest_get,
     post as rest_post,
@@ -32,6 +32,7 @@ class RestCallService(Service):
     headers = Column(MutableDict.as_mutable(PickleType), default={})
     verify_ssl_certificate = Column(Boolean, default=True)
     timeout = Column(Integer, default=15)
+    conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
@@ -78,10 +79,7 @@ class RestCallService(Service):
                 "response_code": response.status_code,
                 "response": response.text,
             }
-        try:
-            result = response.json()
-        except JSONDecodeError as e:
-            result = dumps({"response": str(response), "exception": str(e)})
+        result = self.convert_result(response.text)
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"
@@ -112,3 +110,10 @@ class RestCallForm(ServiceForm, ValidationForm):
     password = StringField()
     pass_device_properties = BooleanField()
     options = DictField()
+    conversion_method = SelectField(
+        choices=(
+            ("text", "Text"),
+            ("json", "Json dictionary"),
+            ("xml", "XML dictionary"),
+        )
+    )

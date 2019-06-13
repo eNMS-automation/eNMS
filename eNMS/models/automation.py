@@ -3,7 +3,8 @@ from collections import defaultdict
 from datetime import datetime
 from git import Repo
 from git.exc import GitCommandError
-from json import load
+from json import loads
+from json.decoder import JSONDecodeError
 from multiprocessing import Manager
 from multiprocessing.pool import Pool
 from napalm import get_network_driver
@@ -22,6 +23,7 @@ from time import sleep
 from traceback import format_exc
 from typing import Any, Generator, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
+from xml.parsers.expat import ExpatError
 from yaql import factory
 
 from eNMS.concurrency import threaded_job, device_process
@@ -411,12 +413,28 @@ class Service(Job):
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())
 
-    def match_content(self, result: Any, match: Union[str, dict]) -> bool:
-        if getattr(self, "conversion_method", False):
-            if self.conversion_method == "json":
-                result = load(result)
-            elif self.conversion_method == "xml":
+    def convert_result(self, result: Any):
+        if self.conversion_method == "json":
+            try:
+                result = loads(result)
+            except JSONDecodeError as e:
+                result = {
+                    "success": False,
+                    "error": "Conversion from JSON to dict failed",
+                    "exception": str(e),
+                }
+        elif self.conversion_method == "xml":
+            try:
                 result = parse(result)
+            except ExpatError as e:
+                result = {
+                    "success": False,
+                    "error": "Conversion from XML to dict failed",
+                    "exception": str(e),
+                }
+        return result
+
+    def match_content(self, result: Any, match: Union[str, dict]) -> bool:
         if getattr(self, "validation_method", "text") == "text":
             result = str(result)
             assert isinstance(match, str)

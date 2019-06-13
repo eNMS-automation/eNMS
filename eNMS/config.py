@@ -5,7 +5,6 @@ class DefaultConfig:
     MODE = "default"
     DEBUG = True
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
-    WTF_CSRF_ENABLED = False
     WTF_CSRF_TIME_LIMIT = None
     DEBUG_TB_ENABLED = False
 
@@ -21,7 +20,6 @@ class DevelopConfig(DefaultConfig):
 class ProductionConfig:
     MODE = "production"
     DEBUG = False
-    WTF_CSRF_ENABLED = False
     SECRET_KEY = environ.get("ENMS_SECRET_KEY")
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True

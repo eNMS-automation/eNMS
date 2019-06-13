@@ -1,10 +1,9 @@
-from json import dumps, loads
-from json.decoder import JSONDecodeError
+from json import dumps
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 from typing import Optional
-from wtforms import BooleanField, HiddenField, StringField
+from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
@@ -22,6 +21,7 @@ class AnsiblePlaybookService(Service):
     has_targets = Column(Boolean, default=False)
     playbook_path = Column(String(SMALL_STRING_LENGTH), default="")
     arguments = Column(String(SMALL_STRING_LENGTH), default="")
+    conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
@@ -52,24 +52,17 @@ class AnsiblePlaybookService(Service):
             result = result.decode("utf-8")
         except AttributeError:
             pass
-        try:
-            result = loads(result)
-        except JSONDecodeError:
-            pass
+        result = self.convert_result(result)
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"
             else self.sub(self.dict_match, locals())
         )
-        if self.validation_method == "text":
-            success = self.match_content(str(result), match)
-        else:
-            success = self.match_dictionary(result, match)
         return {
             "match": match,
             "negative_logic": self.negative_logic,
             "result": result,
-            "success": success,
+            "success": self.match_content(result, match),
         }
 
 
@@ -80,3 +73,10 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     arguments = StringField()
     pass_device_properties = BooleanField()
     options = DictField()
+    conversion_method = SelectField(
+        choices=(
+            ("text", "Text"),
+            ("json", "Json dictionary"),
+            ("xml", "XML dictionary"),
+        )
+    )

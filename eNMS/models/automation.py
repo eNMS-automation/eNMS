@@ -414,25 +414,18 @@ class Service(Job):
         return "".join(input.split())
 
     def convert_result(self, result: Any):
-        if self.conversion_method == "json":
-            try:
-                result = loads(result)
-            except JSONDecodeError as e:
-                result = {
-                    "success": False,
-                    "error": "Conversion from JSON to dict failed",
-                    "exception": str(e),
-                }
-        elif self.conversion_method == "xml":
-            try:
-                result = parse(result)
-            except ExpatError as e:
-                result = {
-                    "success": False,
-                    "error": "Conversion from XML to dict failed",
-                    "exception": str(e),
-                }
-        return result
+        try:
+            if self.conversion_method == "json":
+                return loads(result)
+            elif self.conversion_method == "xml":
+                return parse(result)
+        except ExpatError, JSONDecodeError as e:
+            return {
+                "success": False,
+                "text_response": result,
+                "error": f"Conversion to {self.conversion_method} failed",
+                "exception": str(e),
+            }
 
     def match_content(self, result: Any, match: Union[str, dict]) -> bool:
         if getattr(self, "validation_method", "text") == "text":

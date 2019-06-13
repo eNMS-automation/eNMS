@@ -41,21 +41,3 @@ def configure_cli(app: Flask) -> None:
             payload = loads(payload)
         job = fetch("Job", name=name)
         echo(controller.str_dict(job.run(targets=targets, payload=payload)[0]))
-
-    @app.cli.command()
-    @pass_script_info
-    def develop(info: ScriptInfo) -> None:
-        app = DispatchingApp(info.load_app)
-        path_services = [Path.cwd() / "eNMS" / "automation" / "services"]
-        custom_services_path = controller.custom_services_path
-        if custom_services_path:
-            path_services.append(Path(custom_services_path))
-        extra_files = [file for path in path_services for file in path.glob("**/*.py")]
-        run_simple(
-            "0.0.0.0",
-            5000,
-            app,
-            use_reloader=True,
-            use_debugger=True,
-            extra_files=extra_files,
-        )

@@ -22,18 +22,20 @@ The base code for a job function is the following:
 
 ::
 
-  def job(self, payload):
-      # The "job" function is called when the service is executed.
-      # The parameters of the service can be accessed with self (self.vendor,
-      # self.boolean1, etc)
-      # You can look at how default services (netmiko, napalm, etc.) are
-      # implemented in the /services subfolders (/netmiko, /napalm, etc).
-      # "results" is a dictionary that will be displayed in the logs.
-      # It must contain at least a key "success" that indicates whether
-      # the execution of the service was a success or a failure.
-      # In a workflow, the "success" value will determine whether to move
-      # forward with a "Success" edge or a "Failure" edge.
-      return {'success': True, 'result': 'example'}
+    def job(self, payload: dict) -> dict:
+        self.logs.append(f"Real-time logs displayed when the service is running.")
+        # The "job" function is called when the service is executed.
+        # The parameters of the service can be accessed with self (self.string1,
+        # self.boolean1, etc)
+        # You can look at how default services (netmiko, napalm, etc.) are
+        # implemented in other folders.
+        # The resulting dictionary will be displayed in the logs.
+        # It must contain at least a key "success" that indicates whether
+        # the execution of the service was a success or a failure.
+        # In a workflow, the "success" value will determine whether to move
+        # forward with a "Success" edge or a "Failure" edge.
+        return {"success": True, "result": "example"}
+
 
 The dictionary that is returned by ``job`` is the payload of the job, i.e the information that will be transferred to the next jobs to run in the workflow. It MUST contain a key ``success``, to tell eNMS whether the job was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
   
@@ -45,32 +47,35 @@ The results of the job ``get_facts`` is the following:
 
 ::
 
-  "get_facts": {
-      "success": true,
-      "devices": {
-          "router8": {
-              "success": true,
-              "result": {
-                  "get_facts": {
-                      "uptime": 60,
-                      "vendor": "Cisco",
-                      "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
-                      "serial_number": "FHK111813HZ",
-                      "model": "1841",
-                      "hostname": "test",
-                      "fqdn": "test.pynms.fr",
-                      "interface_list": [
-                          "FastEthernet0/0",
-                          "FastEthernet0/1",
-                          "Serial0/0/0",
-                          "Loopback22",
-                          "Loopback100"
-                      ]
-                  }
+    "get_facts": {
+      "results": {
+        "devices": {
+          "Washington": {
+            "match": "",
+            "negative_logic": false,
+            "result": {
+              "get_facts": {
+                "fqdn": "localhost",
+                "hostname": "localhost",
+                "interface_list": [
+                  "Loopback11",
+                  "Loopback15",
+                  "Loopback16",
+                  "Management1"
+                ],
+                "model": "vEOS",
+                "os_version": "4.21.1.1F-10146868.42111F",
+                "serial_number": "",
+                "uptime": 13159,
+                "vendor": "Arista"
               }
+            },
+            "success": true
           }
-      }
-  },
+        }
+      },
+      "success": false
+    }
 
 Consequently, the ``payload`` variable received by ``process_payload1`` will look like this:
 
@@ -78,31 +83,34 @@ Consequently, the ``payload`` variable received by ``process_payload1`` will loo
 
   {
     "get_facts": {
-        "success": true,
+      "results": {
         "devices": {
-            "router8": {
-                "success": true,
-                "result": {
-                    "get_facts": {
-                        "uptime": 60,
-                        "vendor": "Cisco",
-                        "os_version": "1841 Software (C1841-SPSERVICESK9-M), Version 12.4(8), RELEASE SOFTWARE (fc1)",
-                        "serial_number": "FHK111813HZ",
-                        "model": "1841",
-                        "hostname": "test",
-                        "fqdn": "test.pynms.fr",
-                        "interface_list": [
-                            "FastEthernet0/0",
-                            "FastEthernet0/1",
-                            "Serial0/0/0",
-                            "Loopback22",
-                            "Loopback100"
-                        ]
-                    }
-                }
-            }
+          "Washington": {
+            "match": "",
+            "negative_logic": false,
+            "result": {
+              "get_facts": {
+                "fqdn": "localhost",
+                "hostname": "localhost",
+                "interface_list": [
+                  "Loopback11",
+                  "Loopback15",
+                  "Loopback16",
+                  "Management1"
+                ],
+                "model": "vEOS",
+                "os_version": "4.21.1.1F-10146868.42111F",
+                "serial_number": "",
+                "uptime": 13159,
+                "vendor": "Arista"
+              }
+            },
+            "success": true
+          }
         }
-    },
+      },
+      "success": false
+    }
     "get_interfaces": {...},
     "get_config": {...},
     etc...
@@ -112,25 +120,17 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 
 ::
 
-  def job(self, payload):
-      get_int = payload['get_interfaces']
-      r8_int = get_int['devices']['router8']['result']['get_interfaces']
-      speed_fa0 = r8_int['FastEthernet0/0']['speed']
-      speed_fa1 = r8_int['FastEthernet0/1']['speed']
-      same_speed = speed_fa0 == speed_fa1
+    def process_payload1(self, payload: dict, device: Device) -> dict:
+        get_facts = payload["get_facts"]["results"]["devices"][device.name]
+        # we use the name of the device to get the result for that particular
+        # device.
+        # all of the other inventory properties of the device are available
+        # to use, including custom properties.
+        uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000
+        return {"success": True, "uptime_less_5000": uptime_less_than_50000}
 
-      get_facts = payload['get_facts']
-      r8_facts = get_facts['devices']['router8']['result']['get_facts']
-      uptime_less_than_50000 = r8_facts['uptime'] < 50000
-      return {
-          'success': True,
-          'result': {
-              'same_speed_fa0_fa1': same_speed,
-              'uptime_less_5000': uptime_less_than_50000
-          }
-      }
 
-This ``job`` function reuses the Napalm getters of two jobs of the workflow (one of which, ``get_facts``, is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
+This ``job`` function reuses the results of the Napalm getter ``get_facts`` (which is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
 
 .. tip:: You can run a job directly from the Workflow Builder to see if it passes (and rerun if it fails), and also which payload the job returns.
 

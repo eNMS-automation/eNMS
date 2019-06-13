@@ -81,26 +81,15 @@ Workflow devices
 
 When you create a workflow, just like with services instances, the form will also contain multiple selection fields for you to select "target devices". There is also an option to select 'Use Workflow Targets'; if this is selected, the devices for the workflow will be used for execution.  If it is not selected, the devices selected at the individual service level will be used for execution.
 
-``Multiprocessing`` allows for multiple devices to be operated upon simultaneously:
-- If Multiprocessing is disabled at the workflow level, and ``Use Workflow Targets`` has been selected, the workflow will run on each device sequentially (device after device). Devices configured at service level are ignored.
-- If Multiprocessing is enabled at the workflow level, and ``Use Workflow Targets`` has been selected, the workflow will run independently and in parallel on each of the selected devices (given that the max number of processes is not exceeded). Each device will run its own independent copy of the workflow regardless of the status of the other devices. Devices configured at service level are also ignored.
-- If devices are selected at service level, and ``Use Workflow Targets`` has NOT been selected, and the service level Multiprocessing property is disabled, each service will run on its own selected devices sequentially (device after device), and note that the device list for each service may be different. In this case, the workflow level 'Multiprocessing' parameter is ignored.
-- If devices are selected at service level, and ``Use Workflow Targets`` has NOT been selected, and the service level Multiprocessing property is enabled, each device for a given service will run in parallel to the other devices (all selected devices running at the same time), but the workflow will stop and wait for all devices to have finished the service job before moving on to the next service in the workflow. In this case, the workflow level 'Multiprocessing' parameter is ignored.
+In "Use service targets" mode, jobs run on their own targets. A job is considered successful if it ran successfully on all of its targets (if it fails at least one target, it failed).
+The "Use service targets" mode can be used for workflows where services have different targets (for example, a first service would run on devices A, B, C and the next one on devices D, E).
 
-It is important to note that if you don't select any device at workflow level, then each job of the workflow will be run on its own devices sequentially or in parallel, depending on the value of the "multiprocessing" property of the service job. If the job fails for at least one device, it is considered to have failed and the workflow will stop.
-However, if you select devices at workflow level and enable ``Use Workflow Targets``, with ``Multiprocessing`` enabled, the workflow will run for each device independently of the others (the workflow may succeed for one device, and stop at the very first task for another device due to failure).
-
-In other words:
-- Service Instance tasks (and Sub-workflow tasks) that exist inside of a workflow will run in sequential order as defined in the workflow builder.
-- If multiple inventory devices are selected within the workflow definition with ``Use Workflow Targets`` enabled, these will run independently from each other (in parallel if the ``multiprocessing`` property is activated, sequentially otherwise, while following the sequential rules of the workflow.)
-- If multiple inventory devices are selected within the individual service instance definitions with ``Use Workflow Targets`` disabled, these will run in parallel if Multiprocessing is enabled at the service level, otherwise they will run sequentially (device after device), but each service instance step is required to be completed by all devices before moving to the next step in the workflow.
-
-The status of a workflow will be updated in real-time in the Workflow Builder.
+In "Use workflow targets" mode, the workflow will run on its own targets (all devices configured at service level are ignored). Devices are independent from each other: one device may run on all jobs in the workflow if it is successful while another one could stop at the first step: they run the workflow independently and will likely follow different path in the workflow depending on whether they fail or pass services thoughout the workflow.
 
 Success of a Workflow
 ---------------------
 
-The behavior of the workflow is such that the workflow is considered to have an overall Success status if the END job is reached. So, the END job should only be reached by a success edge when the overall status of the workflow is considered successful. If a particular service job fails, then the workflow should just stop there (with the workflow thus having an overall Failure status), or it should call a cleanup/remediation job (after which the workflow will just stop there). In the event that a failure edge reaches END, the overall status of the workflow will be success.
+The behavior of the workflow is such that the workflow is considered to have an overall Success status if the END job is reached (whether it be by a ``Success`` or ``Failure`` edge). So, the END job should only be reached by an edge when the overall status of the workflow is considered successful. If a particular service job fails, then the workflow should just stop there (with the workflow thus having an overall Failure status), or it should call a cleanup/remediation job (after which the workflow will just stop there).
 
 Position saving
 ---------------

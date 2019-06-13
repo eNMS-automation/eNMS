@@ -91,6 +91,7 @@ ansible_service = ImmutableMultiDict(
         ("name", "testttt"),
         ("query_property_type", "ip_address"),
         ("credentials", "user"),
+        ("conversion_method", "text"),
         ("send_notification_method", "mail_feedback_notification"),
         ("validation_method", "text"),
         ("waiting_time", "0"),

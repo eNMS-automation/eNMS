@@ -413,19 +413,20 @@ class Service(Job):
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())
 
-    def convert_result(self, result: Any):
+    def convert_result(self, result: Any) -> Union[str, dict]:
         try:
             if self.conversion_method == "json":
-                return loads(result)
+                result = loads(result)
             elif self.conversion_method == "xml":
-                return parse(result)
-        except ExpatError, JSONDecodeError as e:
-            return {
+                result = parse(result)
+        except (ExpatError, JSONDecodeError) as e:
+            result = {
                 "success": False,
                 "text_response": result,
                 "error": f"Conversion to {self.conversion_method} failed",
                 "exception": str(e),
             }
+        return result
 
     def match_content(self, result: Any, match: Union[str, dict]) -> bool:
         if getattr(self, "validation_method", "text") == "text":

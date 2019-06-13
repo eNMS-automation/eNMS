@@ -585,12 +585,14 @@ class Workflow(Job):
                 continue
             visited.add(job)
             self.state["current_job"] = job.get_properties()
+            Session.commit()
             valid_devices = self.compute_valid_devices(job, allowed_devices, payload)
             job_results, _ = job.run(
                 results["results"], targets=valid_devices, parent=self
             )
             results["results"][job.name] = job_results
             self.state["jobs"][job.id] = job_results["success"]
+            Session.commit()
             if self.use_workflow_targets:
                 successors = self.workflow_targets_processing(
                     allowed_devices, job, job_results

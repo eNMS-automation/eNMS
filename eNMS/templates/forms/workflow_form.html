@@ -113,6 +113,14 @@
             <label>Use Workflow Targets</label>
           </div>
         </fieldset>
+        <label><label for="devices">Devices</label></label>
+        <div class='form-group'>
+          {{ form.devices(id='workflow-devices', class="form-control add-id") }}
+        </div>
+        <label><label for="pools">Pools</label></label>
+        <div class='form-group'>
+          {{ form.pools(id='workflow-pools', class="form-control add-id") }}
+        </div>
         <fieldset>
           <div class="item">
             <input id="workflow-define_devices_from_payload" name="define_devices_from_payload" class="add-id" type="checkbox" value="y">
@@ -126,14 +134,6 @@
         <label><label for="query_property_type">Query Property Type</label></label>
         <div class='form-group'>
           {{ form.query_property_type(id='workflow-query_property_type', class="form-control add-id") }}
-        </div>
-        <label><label for="devices">Devices</label></label>
-        <div class='form-group'>
-          {{ form.devices(id='workflow-devices', class="form-control add-id") }}
-        </div>
-        <label><label for="pools">Pools</label></label>
-        <div class='form-group'>
-          {{ form.pools(id='workflow-pools', class="form-control add-id") }}
         </div>
         <label><label for="credentials">Credentials</label></label>
         <div class='form-group'>

@@ -119,6 +119,14 @@
         </fieldset>
       </div>
       <div id="step-4">
+          <label><label for="devices">Devices</label></label>
+          <div class='form-group'>
+            {{ form.devices(id=form_type + '-devices', class="form-control add-id") }}
+          </div>
+          <label><label for="pools">Pools</label></label>
+          <div class='form-group'>
+            {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
+          </div>
         <fieldset>
           <div class="item">
             <input id="{{ form_type }}-define_devices_from_payload" name="define_devices_from_payload" class="add-id" type="checkbox" value="y">
@@ -132,14 +140,6 @@
         <label><label for="query_property_type">Query Property Type</label></label>
         <div class='form-group'>
           {{ form.query_property_type(id=form_type + '-query_property_type', class="form-control add-id") }}
-        </div>
-        <label><label for="devices">Devices</label></label>
-        <div class='form-group'>
-          {{ form.devices(id=form_type + '-devices', class="form-control add-id") }}
-        </div>
-        <label><label for="pools">Pools</label></label>
-        <div class='form-group'>
-          {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">

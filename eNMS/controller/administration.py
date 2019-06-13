@@ -52,10 +52,12 @@ class AdministrationController(BaseController):
                         for s in json_response["attributes"]["memberOf"]
                     ):
                         user["permissions"] = ["Admin"]
-                    return factory("User", **user)
+                    user = factory("User", **user)
         elif kwargs["authentication_method"] == "TACACS":
             if self.tacacs_client.authenticate(name, password).valid:
-                return factory("User", **{"name": name, "password": password})
+                user = factory("User", **{"name": name, "password": password})
+        Session.commit()
+        return user
 
     def database_deletion(self, **kwargs: Any) -> None:
         delete_all(*kwargs["deletion_types"])

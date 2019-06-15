@@ -70,7 +70,7 @@ class PingService(Service):
 
 
 class PingServiceForm(ServiceForm):
-    form_type = HiddenField(default="PingServiceService")
+    form_type = HiddenField(default="PingService")
     protocol = SelectField(choices=(("ICMP", "ICMP Ping"), ("TCP", "TCP Ping")))
     ports = StringField()
     count = IntegerField(default=5)

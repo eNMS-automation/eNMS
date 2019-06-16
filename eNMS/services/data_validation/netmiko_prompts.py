@@ -1,4 +1,13 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String, Text
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String,
+    Text,
+)
 from sqlalchemy.ext.mutable import MutableDict
 from wtforms import (
     BooleanField,

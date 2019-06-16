@@ -52,7 +52,7 @@ class GetInstance(Resource):
         try:
             return fetch(cls, name=name).serialized
         except InstanceNotFoundException:
-            return f"{cls} {name} not found."
+            return {"error": f"{cls} {name} not found."}
 
     def delete(self, cls: str, name: str) -> dict:
         result = delete(fetch(cls, name=name))

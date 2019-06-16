@@ -236,7 +236,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     $(`#${panelId}`).css("zIndex", ++topZ);
     return;
   }
-  isFilteringPanel = panelId.includes("filtering");
+  const isFilteringPanel = panelId.includes("filtering");
   return jsPanel.create({
     id: panelId,
     border: "2px solid #2A3F52",
@@ -263,7 +263,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     resizeit: {
       containment: 0,
     },
-    onbeforeclose: function (panel, status) {
+    onbeforeclose: function(panel, status) {
       if (isFilteringPanel) $(`#${panelId}`).hide();
       return isFilteringPanel;
     },

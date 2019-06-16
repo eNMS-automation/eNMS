@@ -25,7 +25,7 @@ class PythonSnippetService(Service):
             code_object = compile(self.source_code, "user_python_code", "exec")
         except Exception as exc:
             self.logs.append(f"Compile error: {str(exc)}")
-            return {"success": False, " result": {"step": "compile", "error": str(exc)}}
+            return {"success": False, "result": {"step": "compile", "error": str(exc)}}
 
         _code_result_ = {}
 
@@ -59,7 +59,8 @@ class PythonSnippetService(Service):
             else:
                 payload.setdefault("variables", {})[name] = value
 
-        locals = {
+        globals = {
+            "__builtins__": __builtins__,
             "device": device,
             "payload": payload,
             "_code_result_": _code_result_,
@@ -70,7 +71,7 @@ class PythonSnippetService(Service):
         }
 
         try:
-            exec(code_object, {}, locals)
+            exec(code_object, globals)
         except TerminateException:
             pass  # Clean exit from middle of snippet
         except Exception as exc:
@@ -109,5 +110,5 @@ class PythonSnippetForm(ServiceForm):
 #    log("important message")
 
 result = {}
-save_result(success=True, result=result}""",
+save_result(success=True, result=result)""",
     )

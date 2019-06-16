@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from wtforms import (
     BooleanField,
@@ -25,15 +25,15 @@ class NetmikoPromptsService(Service):
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
     command = Column(String(SMALL_STRING_LENGTH), default="")
-    confirmation1 = Column(String(LARGE_STRING_LENGTH), default="")
+    confirmation1 = Column(Text(LARGE_STRING_LENGTH), default="")
     response1 = Column(String(SMALL_STRING_LENGTH), default="")
-    confirmation2 = Column(String(LARGE_STRING_LENGTH), default="")
+    confirmation2 = Column(Text(LARGE_STRING_LENGTH), default="")
     response2 = Column(String(SMALL_STRING_LENGTH), default="")
-    confirmation3 = Column(String(LARGE_STRING_LENGTH), default="")
+    confirmation3 = Column(Text(LARGE_STRING_LENGTH), default="")
     response3 = Column(String(SMALL_STRING_LENGTH), default="")
     conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
-    content_match = Column(String(LARGE_STRING_LENGTH), default="")
+    content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)

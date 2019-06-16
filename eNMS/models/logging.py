@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String, Text
 from sqlalchemy.orm import relationship
 from typing import List
 
@@ -14,7 +14,7 @@ class Log(AbstractBase):
     id = Column(Integer, primary_key=True)
     origin = Column(String(SMALL_STRING_LENGTH), default="")
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
-    content = Column(String(LARGE_STRING_LENGTH), default="")
+    content = Column(Text(LARGE_STRING_LENGTH), default="")
     time = Column(String(SMALL_STRING_LENGTH), default="")
     events = relationship("Event", secondary=event_log_table, back_populates="logs")
 

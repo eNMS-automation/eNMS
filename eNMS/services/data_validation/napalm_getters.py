@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from wtforms import BooleanField, HiddenField, SelectMultipleField, SelectField
 
@@ -18,7 +18,7 @@ class NapalmGettersService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
-    content_match = Column(String(LARGE_STRING_LENGTH), default="")
+    content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
     negative_logic = Column(Boolean, default=False)

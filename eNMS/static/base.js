@@ -236,6 +236,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     $(`#${panelId}`).css("zIndex", ++topZ);
     return;
   }
+  isFilteringPanel = panelId.includes("filtering");
   return jsPanel.create({
     id: panelId,
     border: "2px solid #2A3F52",
@@ -252,6 +253,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
         configureForm(name);
         preprocessForm(panel, id, type, duplicate);
         if (processing) processing(panel);
+        if (isFilteringPanel) $(`#${panelId}`).hide();
       },
     },
     dragit: {
@@ -260,6 +262,10 @@ function createPanel(name, title, id, processing, type, duplicate) {
     },
     resizeit: {
       containment: 0,
+    },
+    onbeforeclose: function (panel, status) {
+      if (isFilteringPanel) $(`#${panelId}`).hide();
+      return isFilteringPanel;
     },
   });
 }
@@ -270,6 +276,14 @@ function createPanel(name, title, id, processing, type, duplicate) {
 // eslint-disable-next-line
 function showPanel(type, id) {
   createPanel(type, panelName[type] || type, id);
+}
+
+/**
+ * Show Filtering Panel
+ */
+// eslint-disable-next-line
+function showFilteringPanel(type) {
+  $(`#${type}`).show();
 }
 
 /**
@@ -445,6 +459,8 @@ function processData(type, id) {
  */
 // eslint-disable-next-line
 function initTable(type) {
+  showPanel(`${type}_filtering`);
+  $(`${type}_filtering`).hide();
   // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
     serverSide: true,
@@ -469,7 +485,8 @@ function initTable(type) {
  * Server-side table filtering.
  */
 // eslint-disable-next-line
-function filter() {
+function filter(formType) {
+  $(`#${formType}`).hide();
   table.ajax.reload(null, false);
   alertify.notify("Filter applied.", "success", 5);
 }
@@ -479,7 +496,7 @@ function filter() {
  */
 // eslint-disable-next-line
 function undoFilter(formType) {
-  $(`#${formType}`).remove();
+  $(`#${formType}`).hide();
   table.ajax.reload(null, false);
   alertify.notify("Filter removed.", "success", 5);
 }

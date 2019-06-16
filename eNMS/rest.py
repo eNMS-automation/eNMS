@@ -10,6 +10,7 @@ from eNMS.concurrency import threaded_job
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
+from eNMS.exceptions import InstanceNotFoundException
 from eNMS.extensions import auth, csrf
 
 
@@ -48,7 +49,10 @@ class GetInstance(Resource):
     decorators = [auth.login_required]
 
     def get(self, cls: str, name: str) -> dict:
-        return fetch(cls, name=name).serialized
+        try:
+            return fetch(cls, name=name).serialized
+        except InstanceNotFoundException:
+            return f"{cls} {name} not found."
 
     def delete(self, cls: str, name: str) -> dict:
         result = delete(fetch(cls, name=name))

@@ -36,10 +36,10 @@
                 </button>
               {% endif %}
               <button class="btn btn-info btn-file" onclick="showFilteringPanel('{{ type }}_filtering')">
-                Filter
+                Advanced Search
               </button>
               <button class="btn btn-info btn-file" onclick="undoFilter('{{ type }}_filtering')">
-                Undo Filter
+                Clear Search
               </button>
             </div>
             <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -62,7 +62,8 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    let table = initTable("{{ type }}");
+    let [table, filteringPanel] = initTable("{{ type }}");
+    console.log(table,filteringPanel);
   </script>
   {% if type in ("configuration", "device", "link", "pool") %}
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>

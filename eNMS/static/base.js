@@ -25,6 +25,7 @@ const panelSize = {
   device: "700 500",
   device_automation: "800 500",
   device_filtering: "700 500",
+  event_filtering: "500 150",
   excel_import: "400 150",
   excel_export: "400 150",
   git: "900 200",
@@ -62,6 +63,7 @@ const panelName = {
   database_migration: "Database Migration",
   device_automation: "Device Automation",
   device_filtering: "Device Filtering",
+  event_filtering: "Event Filtering",
   excel_export: "Export Topology as an Excel file",
   server_filtering: "Server Filtering",
   log_filtering: "Log Filtering",
@@ -253,7 +255,6 @@ function createPanel(name, title, id, processing, type, duplicate) {
         configureForm(name);
         preprocessForm(panel, id, type, duplicate);
         if (processing) processing(panel);
-        if (isFilteringPanel) $(`#${panelId}`).hide();
       },
     },
     dragit: {
@@ -264,9 +265,10 @@ function createPanel(name, title, id, processing, type, duplicate) {
       containment: 0,
     },
     onbeforeclose: function(panel, status) {
-      if (isFilteringPanel) $(`#${panelId}`).hide();
+      if (isFilteringPanel) panel.minimize();
       return !isFilteringPanel;
     },
+    setStatus: isFilteringPanel ? "minimized" : "normalized",
   });
 }
 
@@ -275,7 +277,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
  */
 // eslint-disable-next-line
 function showPanel(type, id) {
-  createPanel(type, panelName[type] || type, id);
+  return createPanel(type, panelName[type] || type, id);
 }
 
 /**
@@ -283,7 +285,7 @@ function showPanel(type, id) {
  */
 // eslint-disable-next-line
 function showFilteringPanel(type) {
-  $(`#${type}`).show();
+  filteringPanel.normalize(); //$(`#${type}`).show();
 }
 
 /**
@@ -459,8 +461,8 @@ function processData(type, id) {
  */
 // eslint-disable-next-line
 function initTable(type) {
-  showPanel(`${type}_filtering`);
-  $(`${type}_filtering`).hide();
+  const filteringPanel = showPanel(`${type}_filtering`);
+  //$(`${type}_filtering`).hide();
   // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
     serverSide: true,
@@ -478,7 +480,7 @@ function initTable(type) {
   if (type == "log") {
     table.order([0, "desc"]).draw();
   }
-  return table;
+  return [table, filteringPanel];
 }
 
 /**
@@ -486,7 +488,6 @@ function initTable(type) {
  */
 // eslint-disable-next-line
 function filter(formType) {
-  $(`#${formType}`).hide();
   table.ajax.reload(null, false);
   alertify.notify("Filter applied.", "success", 5);
 }
@@ -496,7 +497,8 @@ function filter(formType) {
  */
 // eslint-disable-next-line
 function undoFilter(formType) {
-  $(`#${formType}`).hide();
+  $(`#${formType}-form`)[0].reset();
+  filteringPanel.minimize();
   table.ajax.reload(null, false);
   alertify.notify("Filter removed.", "success", 5);
 }

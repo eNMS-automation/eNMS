@@ -2,6 +2,7 @@
 global
 alertify: false
 csrf_token: false
+filteringPanel: false
 formProperties: false
 jsPanel: false
 NProgress: false
@@ -52,7 +53,7 @@ const panelSize = {
   user_filtering: "700 200",
   view: "700 300",
   workflow: "1000 600",
-  workflow_filtering: "1000 500",
+  workflow_filtering: "1000 600",
 };
 
 const panelName = {
@@ -285,7 +286,7 @@ function showPanel(type, id) {
  */
 // eslint-disable-next-line
 function showFilteringPanel(type) {
-  filteringPanel.normalize(); //$(`#${type}`).show();
+  filteringPanel.normalize();
 }
 
 /**
@@ -454,6 +455,34 @@ function processData(type, id) {
 }
 
 /**
+ * Create Table Search Headers.
+ */
+// eslint-disable-next-line
+function createSearchHeaders() {
+  $("#table thead tr")
+    .clone(true)
+    .appendTo("#table thead");
+  $("#table thead tr:eq(1) th").each(function(i) {
+    const title = $(this).text();
+    if (title == "Name") {
+      $(this).html(
+        `<input type="text" class="form-control" style="width: 100%;"/>`
+      );
+      $("input", this).on("keyup change", function() {
+        if (table.column(i).search() !== this.value) {
+          table
+            .column(i)
+            .search(this.value)
+            .draw();
+        }
+      });
+    } else {
+      $(this).empty();
+    }
+  });
+}
+
+/**
  * Datatable per-column search.
  * @param {cls} cls - Object class.
  * @param {type} type - Table type.
@@ -462,7 +491,7 @@ function processData(type, id) {
 // eslint-disable-next-line
 function initTable(type) {
   const filteringPanel = showPanel(`${type}_filtering`);
-  //$(`${type}_filtering`).hide();
+  // createSearchHeaders();
   // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
     serverSide: true,

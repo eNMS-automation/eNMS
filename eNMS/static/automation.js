@@ -14,6 +14,7 @@ jsPanel: false
 nodes: true
 page: false
 showTypePanel: false
+refreshTable: false
 table: false
 workflow: true
 */
@@ -346,6 +347,6 @@ function resumeTask(id) {
     });
   }
   if (page == "table/service" || page == "table/workflow") {
-    refreshTable(1000);
+    refreshTable(3000);
   }
 })();

@@ -203,11 +203,11 @@ class Job(AbstractBase):
 class Service(Job):
 
     __tablename__ = "Service"
-    id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     __mapper_args__ = {"polymorphic_identity": "Service"}
+    parent_cls = "Job"
+    id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
-    parent_cls = "Job"
 
     def job_notification(self, results: dict) -> List[str]:
         notification = []

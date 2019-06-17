@@ -12,8 +12,9 @@ from eNMS.properties.database import dont_track_changes
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
 def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
+    name = cls.__tablename__
     for col in cls.__table__.columns:
-        model_properties[cls.__tablename__].append(col.key)
+        model_properties[name].append(col.key)
         if col.type == PickleType and isinstance(col.default.arg, list):
             property_types[col.key] = "list"
         else:
@@ -26,12 +27,14 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
             if col.key not in property_types:
                 property_types[col.key] = column_type
     if hasattr(cls, "parent_cls"):
-        model_properties[cls.__tablename__].extend(model_properties[cls.parent_cls])
-    model = {cls.__tablename__: cls, cls.__tablename__.lower(): cls}
+        model_properties[name].extend(model_properties[cls.parent_cls])
+    if "Service" in name and name != "Service":
+        model_properties[name].extend(model_properties["Service"])
+    model = {name: cls, name.lower(): cls}
     models.update(model)
     for relation in mapper.relationships:
         property = str(relation).split(".")[1]
-        relationships[cls.__tablename__][property] = {
+        relationships[name][property] = {
             "model": relation.mapper.class_.__tablename__,
             "list": relation.uselist,
         }

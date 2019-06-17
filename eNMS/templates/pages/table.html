@@ -62,8 +62,8 @@
 {% block javascripts %}
   {{ super()}}
   <script>
-    let [table, filteringPanel] = initTable("{{ type }}");
-    console.log(table,filteringPanel);
+    const type = "{{ type }}";
+    let [table, filteringPanel] = initTable(type);
   </script>
   {% if type in ("configuration", "device", "link", "pool") %}
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>

@@ -345,4 +345,7 @@ function resumeTask(id) {
       liveSearch: true,
     });
   }
+  if (page == "table/service" || page == "table/workflow") {
+    refreshTable(1000);
+  }
 })();

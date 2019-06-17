@@ -11,7 +11,7 @@ from flask import (
     url_for,
 )
 from flask_login import current_user, login_required, login_user, logout_user
-from functools import lru_cache, wraps
+from functools import wraps
 from logging import info
 from os import listdir
 from typing import Any, Callable
@@ -169,7 +169,6 @@ def calendar() -> dict:
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
-@lru_cache(maxsize=None)
 def form(form_type: str) -> dict:
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",

@@ -61,6 +61,9 @@
 
 {% block javascripts %}
   {{ super()}}
+  <script>
+    let table = initTable("{{ type }}");
+  </script>
   {% if type in ("configuration", "device", "link", "pool") %}
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>
   {% endif %}
@@ -71,7 +74,4 @@
   {% elif type == "instance" %}
     <script src="{{ url_for('static', filename='administration.js') }}"></script>
   {% endif %}
-  <script>
-    let table = initTable("{{ type }}");
-  </script>
 {% endblock javascripts %}

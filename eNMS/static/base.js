@@ -508,7 +508,7 @@ function undoFilter(formType) {
 // eslint-disable-next-line
 function refreshTable(interval) {
   table.ajax.reload(null, false);
-  setTimeout(() => refreshTable(interval), 5000);
+  setTimeout(() => refreshTable(interval), 3000);
 }
 
 /**

@@ -174,3 +174,9 @@ class TaskFilteringForm(BaseForm):
     end_date = StringField("End Date")
     frequency = StringField("Frequency")
     job_name = StringField("Job")
+
+
+class EventFilteringForm(BaseForm):
+    action = "filter"
+    form_type = HiddenField(default="event_filtering")
+    name = StringField("Name")

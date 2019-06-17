@@ -571,6 +571,8 @@ class Workflow(Job):
             else:
                 failed_devices = allowed_devices[job.name]
         for devices, edge in ((passed_devices, "success"), (failed_devices, "failure")):
+            if not devices:
+                continue
             for successor in job.adjacent_jobs(self, "destination", edge):
                 allowed_devices[successor.name] |= devices
                 yield successor

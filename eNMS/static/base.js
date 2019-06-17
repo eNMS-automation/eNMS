@@ -8,10 +8,12 @@ jsPanel: false
 NProgress: false
 page: false
 panelCode: false
+properties: false
 propertyTypes: false
 saveService: false
 saveWorkflow: false
 table: false
+type: false
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
@@ -459,26 +461,11 @@ function processData(type, id) {
  */
 // eslint-disable-next-line
 function createSearchHeaders() {
-  $("#table thead tr")
-    .clone(true)
-    .appendTo("#table thead");
-  $("#table thead tr:eq(1) th").each(function(i) {
-    const title = $(this).text();
-    if (title == "Name") {
-      $(this).html(
-        `<input type="text" class="form-control" style="width: 100%;"/>`
-      );
-      $("input", this).on("keyup change", function() {
-        if (table.column(i).search() !== this.value) {
-          table
-            .column(i)
-            .search(this.value)
-            .draw();
-        }
-      });
-    } else {
-      $(this).empty();
-    }
+  properties.forEach((property) => {
+    $(`#search-${property}`).on("keyup change", function() {
+      $(`#${type}_filtering-${property}`).val($(this).val());
+      table.ajax.reload(null, false);
+    });
   });
 }
 
@@ -491,7 +478,7 @@ function createSearchHeaders() {
 // eslint-disable-next-line
 function initTable(type) {
   const filteringPanel = showPanel(`${type}_filtering`);
-  // createSearchHeaders();
+  createSearchHeaders();
   // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
     serverSide: true,

@@ -49,6 +49,12 @@
                     <th>{{ names.get(field, field) }}</th>
                   {% endfor %}
                 </tr>
+                {% for property in properties %}
+                  <th><input id="search-{{ property }}" type="text" class="form-control" style="width: 100%;"></th>
+                {% endfor %}
+                {% for field in fixed_columns %}
+                  <th>N/A</th>
+                {% endfor %}
               </thead>
               <tbody></tbody>
             </table>
@@ -62,6 +68,7 @@
 {% block javascripts %}
   {{ super()}}
   <script>
+    const properties = {{ properties|tojson|safe }};
     const type = "{{ type }}";
     let [table, filteringPanel] = initTable(type);
   </script>

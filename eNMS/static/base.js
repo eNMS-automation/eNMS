@@ -250,11 +250,11 @@ function createPanel(name, title, id, processing, type, duplicate) {
     contentOverflow: "hidden scroll",
     contentSize: panelSize[name] || "1000 600",
     position: "center-top 0 10",
+    headerTitle: title,
     contentAjax: {
       url: `../form/${name}`,
       done: function(panel) {
         panel.content.innerHTML = this.responseText;
-        panel.setHeaderTitle(title);
         configureForm(name);
         preprocessForm(panel, id, type, duplicate);
         if (processing) processing(panel);

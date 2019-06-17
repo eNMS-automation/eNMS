@@ -265,7 +265,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     },
     onbeforeclose: function(panel, status) {
       if (isFilteringPanel) $(`#${panelId}`).hide();
-      return isFilteringPanel;
+      return !isFilteringPanel;
     },
   });
 }

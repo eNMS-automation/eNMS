@@ -1,7 +1,7 @@
 from typing import Optional
 
-from eNMS.database import Session
-from eNMS.database.functions import fetch
+from eNMS.database import engine
+from eNMS.database.functions import fetch, session_scope
 
 
 def threaded_job(
@@ -15,15 +15,16 @@ def threaded_job(
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
     job.run(targets=targets, payload=payload, task=task)
-    Session.remove()
 
 
 def device_process(args: tuple) -> None:
-    device_id, job_id, lock, results, logs, payload, workflow_id = args
-    device = fetch("Device", id=device_id)
-    workflow = fetch("Workflow", allow_none=True, id=workflow_id)
-    job = fetch("Job", id=job_id)
-    device_result, device_log = job.get_results(payload, device, workflow)
-    with lock:
-        results["devices"][device.name] = device_result
-        logs.extend(device_log)
+    engine.dispose()
+    with session_scope() as session:
+        device_id, job_id, lock, results, logs, payload, workflow_id = args
+        device = fetch("Device", session=session, id=device_id)
+        workflow = fetch("Workflow", allow_none=True, session=session, id=workflow_id)
+        job = fetch("Job", session=session, id=job_id)
+        device_result, device_log = job.get_results(payload, device, workflow)
+        with lock:
+            results["devices"][device.name] = device_result
+            logs.extend(device_log)

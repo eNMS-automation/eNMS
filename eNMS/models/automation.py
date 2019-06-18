@@ -275,7 +275,6 @@ class Service(Job):
                 logs: list = manager.list()
                 lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
-                pool = Pool(processes=processes)
                 args = (
                     self.id,
                     lock,
@@ -284,7 +283,9 @@ class Service(Job):
                     payload,
                     getattr(parent, "id", None),
                 )
-                pool.map(device_process, [(device.id, *args) for device in targets])
+                process_args = [(device.id, *args) for device in targets]
+                pool = Pool(processes=processes)
+                pool.map(device_process, process_args)
                 pool.close()
                 pool.join()
             else:
@@ -315,6 +316,8 @@ class Service(Job):
             if not parent:
                 Session.commit()
             attempt, logs = self.device_run(payload or {}, targets, parent)
+            Session.rollback()
+            Session.commit()
             current_job.logs.extend(logs)
             if targets:
                 assert targets is not None

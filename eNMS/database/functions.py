@@ -3,15 +3,18 @@ from logging import info
 from sqlalchemy import func
 from typing import Any, Generator, List, Tuple
 
-from eNMS.database import Session
+from eNMS.database import Session, session_factory
 from eNMS.exceptions import InstanceNotFoundException
 from eNMS.models import models
 
 
-def fetch(model: str, allow_none: bool = False, **kwargs: Any) -> Any:
-    result = Session.query(models[model]).filter_by(**kwargs).first()
+def fetch(
+    model: str, allow_none: bool = False, session: Any = None, **kwargs: Any
+) -> Any:
+    sess = session or Session
+    result = sess.query(models[model]).filter_by(**kwargs).first()
     if result or allow_none:
-        return Session.query(models[model]).filter_by(**kwargs).first()
+        return result
     else:
         raise InstanceNotFoundException(
             f"There is no {model} in the database "
@@ -70,7 +73,7 @@ def factory(cls_name: str, **kwargs: Any) -> Any:
 
 @contextmanager
 def session_scope() -> Generator:
-    session = Session()  # type: ignore
+    session = session_factory()[1]()  # type: ignore
     try:
         yield session
         session.commit()

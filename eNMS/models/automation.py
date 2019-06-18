@@ -5,6 +5,7 @@ from git import Repo
 from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
+from logging import info
 from multiprocessing import Manager
 from multiprocessing.pool import Pool
 from napalm import get_network_driver
@@ -236,11 +237,14 @@ class Service(Job):
         logs = []
         try:
             if device:
-                logs.append(f"Running {self.type} on {device.name}.")
+                log = f"Running {self.type} on {device.name}."
+                info(log)
+                logs.append(log)
                 results = self.job(payload, device)
                 success = "SUCCESS" if results["success"] else "FAILURE"
                 logs.append(f"Finished running service on {device.name}. ({success})")
             else:
+                info(f"Running {self.type}")
                 results = self.job(payload)
         except Exception:
             if device:

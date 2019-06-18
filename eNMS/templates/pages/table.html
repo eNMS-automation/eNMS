@@ -66,7 +66,7 @@
 {% endblock content %}
 
 {% block javascripts %}
-  {{ super()}}
+  {{ super() }}
   <script>
     const properties = {{ properties|tojson|safe }};
     const type = "{{ type }}";

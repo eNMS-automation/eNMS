@@ -161,7 +161,7 @@ class PoolForm(BaseForm):
 
 
 class PoolFilteringForm(BaseForm):
-    action = filter
+    action = "filter"
     form_type = HiddenField(default="pool_filtering")
     name = StringField("Name")
     description = StringField("Description")

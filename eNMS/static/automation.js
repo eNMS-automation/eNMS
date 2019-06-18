@@ -278,7 +278,7 @@ function runJob(id, realTimeUpdate) {
         getJobState(id);
       }
     }
-    if (realTimeUpdate) showLogs(id);
+    if (realTimeUpdate) showLogs(id, job.name);
   });
 }
 

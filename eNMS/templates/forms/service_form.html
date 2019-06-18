@@ -161,7 +161,11 @@
           {% if form[field_name].type == "BooleanField" %}
             <fieldset>
               <div class="item">
-                {{ form[field_name](id="{}-{}".format(form_type, field_name), class="add-id") }}
+                {% if form[field_name].default %}
+                  {{ form[field_name](id="{}-{}".format(form_type, field_name), class="add-id", checked=True) }}
+                {% else %}
+                  {{ form[field_name](id="{}-{}".format(form_type, field_name), class="add-id") }}
+                {% endif %}
                 <label>{{ form[field_name].label }}</label>
               </div>
             </fieldset>

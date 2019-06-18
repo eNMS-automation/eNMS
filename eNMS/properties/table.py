@@ -18,7 +18,7 @@ configuration_table_properties: List[str] = [
     "last_status",
 ]
 
-link_table_properties: List[str] = object_common_properties[1:] + [
+link_table_properties: List[str] = object_common_properties + [
     "source_name",
     "destination_name",
 ]

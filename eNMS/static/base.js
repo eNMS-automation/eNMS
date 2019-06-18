@@ -287,7 +287,7 @@ function showPanel(type, id) {
  * Show Filtering Panel
  */
 // eslint-disable-next-line
-function showFilteringPanel(type) {
+function showFilteringPanel() {
   filteringPanel.normalize();
 }
 

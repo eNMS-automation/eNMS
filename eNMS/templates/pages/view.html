@@ -64,11 +64,11 @@
             </div>
             {% if view_type == 'network' %}
               <div class="btn-group-horizontal" style="width: 20vw; z-index:1; position: absolute; top: 10px; right:5vw;">
-                <button class="btn btn-success btn-file" onclick="showPanel('device_filtering')">
-                  Filter devices
+                <button class="btn btn-success btn-file" onclick="showViewFilteringPanel('device')">
+                  Filter Devices
                 </button>
-                <button class="btn btn-success btn-file" onclick="showPanel('link_filtering')">
-                  Filter links
+                <button class="btn btn-success btn-file" onclick="showViewFilteringPanel('link')">
+                  Filter Links
                 </button>
               </div>
             {% endif %}
@@ -83,7 +83,9 @@
   {{ super()}}
   <script>
     let view = '{{ view }}';
-    let viewType = "{{ view_type }}"
+    let viewType = "{{ view_type }}";
+    const deviceFilteringPanel = showPanel(`device_filtering`);
+    const linkFilteringPanel = showPanel(`link_filtering`);
   </script>
   <script src="{{ url_for('static', filename='lib/webgl-earth/api.min.js') }}"></script>
   <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>

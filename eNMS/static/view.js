@@ -443,3 +443,11 @@ function filter(type) {
     alertify.notify("Filter applied.", "success", 5);
   });
 }
+
+/**
+ * Show View Filtering Panel
+ */
+// eslint-disable-next-line
+function showViewFilteringPanel(type) {
+  (type == "device" ? deviceFilteringPanel : linkFilteringPanel).normalize();
+}

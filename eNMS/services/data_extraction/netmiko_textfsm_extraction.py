@@ -56,5 +56,5 @@ class NetmikoTextfsmExtractionForm(ServiceForm):
     use_device_driver = BooleanField(default=True)
     fast_cli = BooleanField()
     timeout = IntegerField(default=10)
-    delay_factor = FloatField(default=1.)
-    global_delay_factor = FloatField(default=1.)
+    delay_factor = FloatField(default=1.0)
+    global_delay_factor = FloatField(default=1.0)

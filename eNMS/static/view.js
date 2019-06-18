@@ -3,8 +3,10 @@ global
 action: false
 alertify: false
 call: false
+deviceFilteringPanel: false
 fCall: false
 L: false
+linkFilteringPanel: false
 showPoolView: false
 showTypePanel: false
 viewType: false

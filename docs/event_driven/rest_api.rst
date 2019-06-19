@@ -13,6 +13,7 @@ eNMS has a ReST API allowing to:
 - retrieve the current configuration of an device
 - create a device
 - update a device
+- retrieve a list of devices matching a specific set of parameters
 - initiate a database backup or restore (also used for version upgrade migration)
 - initiate a device inventory bulk import or export
 
@@ -95,6 +96,20 @@ Retrieve or delete an instance
    :alt: GET method to retrieve a device
    :align: center
 
+Retrieve a list of instances with a query
+*****************************************
+
+You can retrieve in one query all instances that match a given set of parameters.
+
+::
+
+ # via a GET method to the following URL
+ https://<IP_address>/rest/query/<instance_type>?parameter1=value1&parameter2=value2...
+
+ Example: http://enms_url/rest/query/device?port=22&operating_system=eos (returns all devices whose port is 22 and operating system EOS)
+ Example: http://enms_url/rest/query/device (returns all devices)
+
+.. note:: As shown in the second example, if no parameters are provided, the API will return all instances of the requested instance type.
 
 Retrieve the current configuration for a device
 ***********************************************

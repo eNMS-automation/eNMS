@@ -225,3 +225,5 @@ then pull if it exists, clone otherwise.
 >>> Done.
 
 - python snippet change
+
+- Improved error message when device is not found in the REST API (404 error code)

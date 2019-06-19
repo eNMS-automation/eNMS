@@ -45,6 +45,17 @@ class Heartbeat(Resource):
         }
 
 
+class Query(Resource):
+    decorators = [auth.login_required]
+
+    def get(self, cls: str) -> dict:
+        results = fetch(cls, all_matches=True, **request.args.to_dict())
+        if results:
+            return [result.get_properties() for result in results]
+        else:
+            return abort(404, message=f"No match found.")
+
+
 class GetInstance(Resource):
     decorators = [auth.login_required]
 
@@ -156,6 +167,7 @@ def configure_rest_api(app: Flask) -> None:
     api.add_resource(CreatePool, "/rest/create_pool")
     api.add_resource(Heartbeat, "/rest/is_alive")
     api.add_resource(RunJob, "/rest/run_job")
+    api.add_resource(Query, "/rest/query/<string:cls>")
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
     api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")

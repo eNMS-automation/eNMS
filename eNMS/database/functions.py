@@ -9,10 +9,15 @@ from eNMS.models import models
 
 
 def fetch(
-    model: str, allow_none: bool = False, session: Any = None, **kwargs: Any
+    model: str,
+    allow_none: bool = False,
+    session: Any = None,
+    all_matches=False,
+    **kwargs: Any,
 ) -> Any:
     sess = session or Session
-    result = sess.query(models[model]).filter_by(**kwargs).first()
+    query = sess.query(models[model]).filter_by(**kwargs)
+    result = query.all() if all_matches else query.first()
     if result or allow_none:
         return result
     else:

@@ -17,7 +17,7 @@ There are three types of geographical displays available.
 The classic 2D map is based on the :guilabel:`Leaflet` JavaScript library.
 All devices and links are displayed on a 2D representation of the Earth, based on the ``Google Mercator (EPSG:3857)`` projection.
 
-The classic 2D map works well for small networks (less than 2000 devices), when there are no colocated devices (colocated devices cannot be distinguished from one another).
+The classic 2D map works well for small networks (less than 10000 devices), when there are no colocated devices (colocated devices cannot be distinguished from one another).
 
 .. image:: /_static/views/geographical_view/2D_map.png
    :alt: Classic 2D map
@@ -74,8 +74,18 @@ NASA tiles
    :alt: NASA
    :align: center
 
-Switch between views
---------------------
+Marker Types
+------------
 
-The default view can be configured from the :guilabel:`Admin / Administration Panel` page.
-You can switch to any view from the right-click menu.
+There are three different types of markers: images, circle, and circle marker.
+Images can take a lot of time to display if you have a big network; in that case, it is best to use circles or circle markers for scalability.
+
+.. image:: /_static/views/geographical_view/circle_markers.png
+   :alt: Circle Markers
+   :align: center
+
+Change the view
+---------------
+
+You can change the type of view, marker and tiles from the right-click menu.
+You can also configure, from the :guilabel:`Admin / Administration Panel` page, which are used by default when you open the view.

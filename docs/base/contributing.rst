@@ -4,13 +4,21 @@
 Contributing
 ============
 
-Contributions are welcome. If you want to contribute, you should join the #enms channel in the networktocode slack (http://networktocode.herokuapp.com/).
+Contributions are welcome. If you want to contribute, you can join the #enms channel in the networktocode slack (http://networktocode.herokuapp.com/).
 
 For developers
 --------------
 
-eNMS uses flake8 to make sure that the python code is PEP8-compliant, eslint to make sure the javascript code is compliant with google standards for javascript, and pytest for the test suite.
-There is a dedicated ``requirements_dev.txt`` file to install these libraries:
+eNMS uses :
+
+- Black for python code formatting
+- Flake8 to make sure that the python code is PEP8-compliant
+- Mypy for python static type hinting
+- Prettier for javascript code formatting
+- Eslint to make sure the javascript code is compliant with google standards for javascript
+- Pytest for the test suite.
+
+There is a dedicated ``requirements_dev.txt`` file to install these python libraries:
 
 ::
 

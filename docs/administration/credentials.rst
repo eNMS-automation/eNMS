@@ -25,5 +25,6 @@ The credentials of a device are a property of the device itself within the inven
 
 They are stored in the Hashicorp Vault, or in the database if no Vault has been configured.
 The credentials of a device are :
-- a username and password (authentication).
-- an "enable password" required on some devices to enter the "enable" mode.
+
+- a ``username`` and a ``password`` (authentication).
+- an ``enable password`` required on some devices to enter the "enable" mode.

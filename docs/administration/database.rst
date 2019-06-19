@@ -7,13 +7,13 @@ Backup & Restore and Database Migration
 
 From the ``Admin / Administration`` page, eNMS also supports backup and restore, as well as migration from one eNMS version to another, utilizing an Import and Export feature.
 
-By providing the directory name inside (eNMS_HOME)/projects/migrations/ and selecting which eNMS object types to export/backup, eNMS serializes the stored objects for those object types into a yaml file for each subsystem. These yaml files can then be copied into a directory (also in (eNMS_HOME)/projects/migrations/) on a new VM instance of eNMS, and then the Import function can be used to import/restore the configuration and living data of those object types.
-
-Please note that the exported backup files do not contain the secure credentials for each of the inventory devices in plain text, as credentials are considered to be stored in a Vault in production mode.
+By providing a directory name and selecting which eNMS object types to export/backup, eNMS serializes the stored objects in the directory ``(eNMS_HOME)/projects/migrations/directory_name``. These yaml files can then be copied into the same directory (``(eNMS_HOME)/projects/migrations/``) on a new VM instance of eNMS, and then the Import function can be used to import/restore the configuration and living data of those object types.
 
 .. image:: /_static/administration/migrations.png
    :alt: Migrations
    :align: center
+
+.. note:: the exported backup files do not contain the secure credentials for each of the inventory devices in plain text, as credentials are considered to be stored in a Vault in production mode.
 
 .. note:: If you are migrating data on an existing instance of eNMS, you can choose tick the option ``Empty Database before Import`` to empty the database before starting the migration.
 
@@ -30,8 +30,6 @@ There is also a Mass Deletion function that allows for deleting all objects of a
 Miscellaneous
 *************
 
-Fetch Git Configurations and Update Devices - this feature will retrieve configurations from the git 'configurations' repository and load those into the database for each matching inventory device. This is performed automatically when eNMS starts up: the git configurations repository is quietly cloned and loaded into the database. This feature allows for manual pulling of updated configurations data.
-
-Pause and Resume Scheduler - this feature will pause and resume all scheduler tasks currently waiting to run
-
-Reset Job Statuses - when a service or workflow fails, it is sometimes stuck in a "Running" mode and cannot be executed. This button will reset the status of all services and workflows.
+- ``Fetch Git Configurations and Update Devices``: this feature will retrieve configurations from the git 'configurations' repository and load those into the database for each matching inventory device. This is performed automatically when eNMS starts up: the git configurations repository is quietly cloned and loaded into the database. This feature allows for manual pulling of updated configurations data.
+- ``Pause and Resume Scheduler``: this feature will pause and resume all scheduler tasks currently waiting to run.
+- ``Reset Job Statuses``: when a service or workflow fails, it is sometimes stuck in a "Running" mode and cannot be executed. This button will reset the status of all services and workflows.

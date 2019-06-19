@@ -2,8 +2,8 @@
 Services
 ========
 
-A service is a Python script that performs an action.
-A service is defined by:
+A service is a Python script that performs an action. A service is defined by:
+
 - A database model. You can define all the parameters you need as SQL Alchemy columns: this is what eNMS stores in the database.
 - A form. It defines what is displayed in the UI, and it validates that the user input is correct.
 

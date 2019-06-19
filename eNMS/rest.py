@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Flask, request
-from flask_restful import Api, Resource
+from flask_restful import abort, Api, Resource
 from logging import info
 from psutil import cpu_percent
 from uuid import getnode
@@ -52,7 +52,7 @@ class GetInstance(Resource):
         try:
             return fetch(cls, name=name).serialized
         except InstanceNotFoundException:
-            return {"error": f"{cls} {name} not found."}
+            return abort(404, message=f"{cls} {name} not found.")
 
     def delete(self, cls: str, name: str) -> dict:
         result = delete(fetch(cls, name=name))

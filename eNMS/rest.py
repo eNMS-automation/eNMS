@@ -48,7 +48,7 @@ class Heartbeat(Resource):
 class Query(Resource):
     decorators = [auth.login_required]
 
-    def get(self, cls: str) -> dict:
+    def get(self, cls: str) -> Union[dict, list]:
         try:
             results = fetch(cls, all_matches=True, **request.args.to_dict())
             return [result.get_properties() for result in results]

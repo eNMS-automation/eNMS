@@ -12,7 +12,7 @@ def fetch(
     model: str,
     allow_none: bool = False,
     session: Any = None,
-    all_matches=False,
+    all_matches: bool = False,
     **kwargs: Any,
 ) -> Any:
     sess = session or Session

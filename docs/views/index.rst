@@ -7,4 +7,3 @@ Views
 
    geographical_view
    site_view
-   bindings

@@ -6,5 +6,5 @@ Views
    :maxdepth: 1
 
    geographical_view
-   logical_view
+   site_view
    bindings

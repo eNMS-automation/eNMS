@@ -389,6 +389,7 @@ class Service(Job):
                 device.netmiko_driver if self.use_device_driver else self.driver
             ),
             ip=device.ip_address,
+            port=getattr(device, "port"),
             username=username,
             password=password,
             secret=device.enable_password,

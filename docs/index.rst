@@ -6,14 +6,6 @@ General
 
    base/index
 
-Administration
-==============
-
-.. toctree::
-   :maxdepth: 2
-
-   administration/index
-
 Inventory
 =========
 
@@ -61,6 +53,14 @@ Event-driven automation
    :maxdepth: 2
 
    event_driven/index
+
+Administration
+==============
+
+.. toctree::
+   :maxdepth: 2
+
+   administration/index
 
 License
 =======

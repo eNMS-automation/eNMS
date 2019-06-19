@@ -14,7 +14,7 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
 Device configuration
 --------------------
 
-All devices are listed in the :guilabel:`inventory/configuration_management` page. By default, configurations are retrieved by a service called ``Configuration Backup Service``, which:
+All devices are listed in the :guilabel:`Inventory / Configuration Management` page. By default, configurations are retrieved by a service called ``Configuration Backup Service``, which:
   - Uses Netmiko to fetch the configuration
   - Updates the device ``configuration`` property (a python dictionary that contains the most recent configurations)
   - Writes the configuration to a local text file (located in eNMS/git/configurations)
@@ -24,7 +24,7 @@ All devices are listed in the :guilabel:`inventory/configuration_management` pag
    :align: center
 
 For some devices, the configuration cannot be retrieved with only a netmiko command. You can create your own configuration backup service(s) if need be. Targets are defined at the service level, like any other services.
-The task ``poller_task`` will periodically run all services whose ``configuration_backup_service`` parameter is set to ``True``, as shown in the default configuration backup service here: https://github.com/afourmy/eNMS/blob/master/eNMS/automation/services/configuration_management/configuration_backup_service.py#L15
+The task ``poller_task`` will periodically run all services whose ``configuration_backup_service`` parameter is set to ``True``, as shown in the default configuration backup service `here <https://github.com/afourmy/eNMS/blob/master/eNMS/services/configuration_management/netmiko_backup_service.py#L26>`_
 
 Configure polling
 -----------------

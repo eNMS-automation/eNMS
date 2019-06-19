@@ -26,5 +26,5 @@ def device_process(args: tuple) -> None:
         job = fetch("Job", session=session, id=job_id)
         device_result, device_log = job.get_results(payload, device, workflow)
         with lock:
-            results["devices"][device.name] = device_result
+            results[device.name] = device_result
             logs.extend(device_log)

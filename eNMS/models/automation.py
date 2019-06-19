@@ -271,14 +271,14 @@ class Service(Job):
         else:
             if self.multiprocessing:
                 manager = Manager()
-                results: dict = manager.dict({"devices": manager.dict()})
+                device_results: dict = manager.dict()
                 logs: list = manager.list()
                 lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
                 args = (
                     self.id,
                     lock,
-                    results,
+                    device_results,
                     logs,
                     payload,
                     getattr(parent, "id", None),
@@ -288,6 +288,7 @@ class Service(Job):
                 pool.map(device_process, process_args)
                 pool.close()
                 pool.join()
+                results = {"devices": device_results}
             else:
                 results, logs = {"devices": {}}, []
                 results["devices"] = {

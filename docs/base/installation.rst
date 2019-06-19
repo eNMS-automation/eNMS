@@ -116,12 +116,12 @@ In case this environment variable is not set, eNMS will default to using a SQLit
 Run eNMS with a PostgreSQL database
 -----------------------------------
 
-In production, it is advised to use a PostgreSQL database to store data. This can be hosted locally or on a remote server. 
+In production, it is advised to use a MySQL or PostgreSQL database to store data. This can be hosted locally or on a remote server. 
 
 .. note:: The installation instructions provided here have been tested to work on Ubuntu 16.04 and CentOS 7.4. The particular commands needed to install dependencies on other distributions may vary significantly.
 
-Installation on Ubuntu
-**********************
+PostgreSQL Installation on Ubuntu
+*********************************
 
 If a recent enough version of PostgreSQL is not available through your distribution's package manager, you'll need to install it from an official PostgreSQL repository.
 
@@ -130,7 +130,7 @@ If a recent enough version of PostgreSQL is not available through your distribut
  sudo apt-get update
  sudo apt-get install -y postgresql libpq-dev
 
-Installation on Centos
+PostgreSQL Installation on Centos
 **********************
 
 Centos: CentOS 7.4 does not ship with a recent enough version of PostgreSQL, so it will need to be installed from an external repository. The instructions below show the installation of PostgreSQL 9.6.
@@ -155,8 +155,8 @@ Then, start the service and enable it to run at boot:
  systemctl start postgresql-9.6
  systemctl enable postgresql-9.6
 
-Database creation
-*****************
+PostgreSQL Database creation
+****************************
 
 At a minimum, we need to create a database for eNMS and assign it a username and password for authentication. This is done with the following commands.
 
@@ -174,35 +174,36 @@ You can verify that authentication works issuing the following command and provi
 
 If successful, you will enter a enms prompt. Type \q to exit.
 
-Export PostgreSQL variables
-***************************
+Export PostgreSQL variable
+**************************
 
-The configuration file contains the SQL Alchemy configuration:
-
-::
-
- # Database
- SQLALCHEMY_DATABASE_URI = environ.get(
-     'ENMS_DATABASE_URL',
-     'postgresql://{}:{}@{}:{}/{}'.format(
-         environ.get('POSTGRES_USER', 'enms'),
-         environ.get('POSTGRES_PASSWORD'),
-         environ.get('POSTGRES_HOST', 'localhost'),
-         environ.get('POSTGRES_PORT', 5432),
-         environ.get('POSTGRES_DB', 'enms')
-     )
- )
-
-You need to export each variable with its value:
+The database used is controlled by the ``ENMS_DATABASE_URL`` environment variable. It must be set to the PostgreSQL database URL.
 
 ::
 
- export POSTGRES_USER=your-username
- export POSTGRES_PASSWORD=your-password
- etc...
+ export ENMS_DATABASE_URL=postgresql://enms:strong-password-here@localhost:5432/enms
+
+Run eNMS with a MySQL database
+------------------------------
+
+PostgreSQL Installation on Ubuntu
+*********************************
+
+::
+
+ sudo apt-get update
+ sudo apt install -y mysql-server python3-mysqldb
+
+PostgreSQL Database creation
+****************************
+
+::
+
+ sudo apt-get update
+ sudo apt install -y mysql-server python3-mysqldb
 
 LDAP/Active Directory Integration
-*********************************
+---------------------------------
 
 The following environment variables (with example values) control how eNMS integrates with LDAP/Active Directory for user authentication. eNMS first checks to see if the user exists locally inside eNMS. If not and if LDAP/Active Directory is enabled, eNMS tries to authenticate against LDAP/AD using the pure python ldap3 library, and if successful, that user gets added to eNMS locally.
 
@@ -224,7 +225,7 @@ The following environment variables (with example values) control how eNMS integ
 
 
 GIT Integration
-***************
+---------------
 
 To enable sending device configs captured by configuration management, as well as service and workflow job logs, to GIT for revision control you will need to configure the following:
 

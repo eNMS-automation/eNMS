@@ -37,7 +37,7 @@ This pool enforces the following conditions:
  * type: ``Router|Switch`` --- matches routers and switches (devices which type is either ``Router``, or ``Switch``.
  * vendor: ``Cisco`` --- for this property, the regular expression box is not ticked. This means the value must be exactly ``Cisco``.
 
-In summary, all Cisco routers or switches whose name begins with ``node`` will match these conditions, and they will be a member of the pool.
+In summary, all ``Cisco`` ``routers or switches`` whose name begins with ``node`` will match these conditions, and they will be a member of the pool.
 
 .. note:: All properties left with empty fields are simply ignored.
 
@@ -52,7 +52,7 @@ This pool enforces the following conditions:
  * type: ``Ethernet link`` --- matches all Ethernet links.
  * source: ``bnet6`` --- matches all links whose source is the device ``bnet6``.
 
-In summary, all Ethernet links starting from the device ``bnet6`` will be part of the pool.
+In summary, all ``Ethernet`` links starting from the device ``bnet6`` will be part of the pool.
 
 Default pools
 -------------
@@ -77,8 +77,9 @@ Manual definition
 
 By default, the devices and links within a pool are determined based on the pool properties. However, the ``Edit objects`` button lets you define the pool devices and links by selecting them directly instead.
 There are two ways to manually select the objects of a pool:
-* By selecting them from a drop-down list.
-* By copy/pasting a string made of devices' and links' names, separated by a comma.
+
+- By selecting them from a drop-down list.
+- By copy/pasting a string made of devices' and links' names, separated by a comma.
 
 .. image:: /_static/inventory/pool_management/manual_definition.png
    :alt: Manual definition of a pool
@@ -97,13 +98,12 @@ All pools are updated (as long as their 'never update' flag is not set):
 - when a device is manually added to the inventory
 - when a device is modified
 - after pulling or cloning the content from the git configuration repository
-- when the `poller service` runs (service responsible for fetching all device configurations), all pools for which "device_current_configuration" is not empty are updated (and only those).
+- when the `poller service` runs (service responsible for fetching all device configurations), all pools for which the device ``Current Configuration`` is not empty are updated (and only those).
 
 Pools are manually updated:
 
 - when you click on the update button of a pool in pool management
 - when you click on the "update all pools" in pool management
-
 
 Pools based on Configuration
 ----------------------------
@@ -115,11 +115,11 @@ be searched for the pool.
 Filter the view with a pool
 ---------------------------
 
-Pools can be used as filters for the geographical views.  You can switch between pools with the drop-down list in the
-top-right corner of the screen (framed in red below).
+Pools can be used as filters for the inventory devices and links tables, as well as the geographical views. You can click on the ``Filter Devices`` and ``Filter Links`` buttons to open the "Advanced Search" panel.
+These panels both contain a ``Pools`` drop-down list (multiple selection) to filter objects in the view.
 
 .. image:: /_static/inventory/pool_management/view_filter.png
-   :alt: Apply a filter to the view
+   :alt: Pool filtering of the view
    :align: center
 
 Use a pool as target of a Service or a Workflow
@@ -134,6 +134,5 @@ You can select multiple devices, as well as multiple pools as targets.
 Use a pool to restrict an eNMS user to a subset of objects
 ----------------------------------------------------------
 
-From the :guilabel:`Admin/User Management` panel, you can select a pool used as a database filtering mechanism for a particular user.
-All mechanisms and all pages in eNMS will be restricted to the objects of that pool for that particular user. The exception is Service and Workflows
-that have been already configured to run against particular set of devices and links. If those devices and links are outside of the pool that the user is restricted to, the user will still be able to see them.
+From the :guilabel:`Admin / User Management` panel, you can select a pool used as a database filtering mechanism for a particular user.
+All mechanisms and all pages in eNMS will be restricted to the objects of that pool for that particular user. The exception is Service and Workflows that have been already configured to run against particular set of devices and links. If those devices and links are outside of the pool that the user is restricted to, the user will still be able to see them.

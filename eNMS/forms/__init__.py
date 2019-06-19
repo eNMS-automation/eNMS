@@ -72,10 +72,8 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
 
 
 def filtering_form_generator() -> None:
-    kwargs = {}
     for table, properties in filtering_properties.items():
-        if table != "device":
-            continue
+        kwargs = {}
         if table in ("device", "link", "configuration"):
             kwargs["pools"] = MultipleInstanceField("Pools", instance_type="Pool")
         type(

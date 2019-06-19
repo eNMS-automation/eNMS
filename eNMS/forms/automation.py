@@ -76,31 +76,6 @@ class WorkflowForm(JobForm):
     use_workflow_targets = BooleanField("Use Workflow Targets")
 
 
-class JobFilteringForm(BaseForm):
-    action = "filter"
-    form_type = HiddenField(default="job filtering")
-    name = StringField("Name")
-    last_modified = StringField("Last modified")
-    type = StringField("Service Type")
-    description = StringField("Description")
-    creator = StringField("Creator")
-    max_processes = StringField("Maximum number of processes")
-    credentials = StringField("Credentials")
-    waiting_time = StringField("Waiting Time")
-    send_notification_method = StringField("Notification Method")
-    mail_recipient = StringField("Mail Recipient")
-    number_of_retries = StringField("Number of retries")
-    time_between_retries = StringField("Time between retries (in seconds)")
-
-
-class ServiceFilteringForm(JobFilteringForm):
-    form_type = HiddenField(default="service_filtering")
-
-
-class WorkflowFilteringForm(JobFilteringForm):
-    form_type = HiddenField(default="workflow_filtering")
-
-
 class CompareResultsForm(BaseForm):
     template = "results"
     form_type = HiddenField(default="results")
@@ -162,21 +137,3 @@ class TaskForm(BaseForm):
         "Scheduling Mode",
         choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling")),
     )
-
-
-class TaskFilteringForm(BaseForm):
-    action = "filter"
-    form_type = HiddenField(default="task_filtering")
-    name = StringField("Name")
-    description = StringField("Description")
-    is_active = StringField("Is Active")
-    start_date = StringField("Start Date")
-    end_date = StringField("End Date")
-    frequency = StringField("Frequency")
-    job_name = StringField("Job")
-
-
-class EventFilteringForm(BaseForm):
-    action = "filter"
-    form_type = HiddenField(default="event_filtering")
-    name = StringField("Name")

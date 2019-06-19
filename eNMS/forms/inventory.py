@@ -60,11 +60,6 @@ class ConnectionForm(BaseForm):
     address = SelectField(choices=address_choices)
 
 
-class ObjectFilteringForm(BaseForm):
-    action = "filter"
-    form_type = HiddenField(default="object_filtering")
-
-
 class ObjectForm(BaseForm):
     form_type = HiddenField(default="object")
     name = StringField("Name")
@@ -107,15 +102,6 @@ class LinkForm(ObjectForm):
     color = StringField("Color")
 
 
-class LinkFilteringForm(ObjectForm, ObjectFilteringForm):
-    form_type = HiddenField(default="link_filtering")
-    subtype = StringField("Subtype")
-    icon = StringField("Icon")
-    source_name = StringField("Source")
-    destination_name = StringField("Destination")
-    color = StringField("Color")
-
-
 @configure_pool_form
 class PoolForm(BaseForm):
     template = "pool"
@@ -133,17 +119,6 @@ class PoolForm(BaseForm):
         ),
     )
     never_update = BooleanField("Never update (for manually selected pools)")
-
-
-class PoolFilteringForm(BaseForm):
-    action = "filter"
-    form_type = HiddenField(default="pool_filtering")
-    name = StringField("Name")
-    description = StringField("Description")
-    last_modified = StringField("Last modified")
-    longitude = FloatField("Longitude")
-    latitude = FloatField("Latitude")
-    operator = StringField("Match Condition")
 
 
 class PoolObjectsForm(BaseForm):

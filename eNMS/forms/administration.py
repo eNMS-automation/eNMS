@@ -90,16 +90,6 @@ class ServerForm(BaseForm):
     weight = IntegerField("Weigth")
 
 
-class ServerFilteringForm(BaseForm):
-    action = "filter"
-    form_type = HiddenField(default="server_filtering")
-    name = StringField("Name")
-    description = StringField("Description")
-    ip_address = StringField("IP address")
-    weight = StringField("Weigth")
-    status = StringField("Status")
-
-
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     authentication_method = SelectField("Authentication Method", choices=())
@@ -132,19 +122,3 @@ class UserForm(BaseForm):
     ]
     permissions = SelectMultipleField("Permissions", choices=permission_choices)
     pools = MultipleInstanceField("Pools", instance_type="Pool")
-
-
-class UserFilteringForm(BaseForm):
-    action = "filter"
-    form_type = HiddenField(default="user_filtering")
-    name = StringField("Name")
-    email = StringField("Email")
-
-
-class LogFilteringForm(BaseForm):
-    action = "filter"
-    form_type = HiddenField(default="log_filtering")
-    time = StringField("Time")
-    origin = StringField("Origin")
-    severity = StringField("Severity")
-    content = StringField("Content")

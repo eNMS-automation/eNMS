@@ -5,17 +5,22 @@ Pools
 Pools allow the user to create groups of objects. They can be used to filter the inventory tables and the view, but also to target an automation task to a specific subset of devices.
 A pool is defined as a combination of values (or regular expressions) for the properties of an object (in the inventory). 
 
-If the properties of an inventory object matches the pool properties (**any of them**, or **all of them**), the object will belong to the pool.
+If the properties of an inventory object matches the pool properties (``any of them``, or ``all of them`` depending on your needs), the object will belong to the pool.
 
 Pool Management
 ---------------
 
 Pools can be created, updated, duplicated and deleted from the :guilabel:`Inventory / Pool Management` page, and they can be
-edited to manually select Objects instead of using criteria based on properties to select them. Additionally, a logical
-view force diagram of a pool is available using the ``Visualize`` button.
+edited to manually select Objects instead of using criteria based on properties to select them.
 
 .. image:: /_static/inventory/pool_management/pool_management.png
    :alt: Pool Management
+   :align: center
+
+Additionally, a logical view force diagram of a pool is available using the ``Visualize`` button.
+
+.. image:: /_static/inventory/pool_management/pool_visualization.png
+   :alt: Pool Visualization
    :align: center
 
 .. note:: When you add a new device A whose properties are matched by pool B, A is automatically added to B.

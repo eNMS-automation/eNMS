@@ -194,13 +194,20 @@ PostgreSQL Installation on Ubuntu
  sudo apt-get update
  sudo apt install -y mysql-server python3-mysqldb
 
-PostgreSQL Database creation
-****************************
+MySQL Database creation
+***********************
 
 ::
 
- sudo apt-get update
- sudo apt install -y mysql-server python3-mysqldb
+ sudo mysql
+ CREATE USER 'enms'@'localhost' IDENTIFIED BY 'enms';
+ GRANT ALL PRIVILEGES ON *.* TO 'enms'@'localhost' WITH GRANT OPTION;
+
+Export MySQL variable
+*********************
+
+::
+ export ENMS_DATABASE_URL=mysql://enms:enms@localhost/mysql
 
 LDAP/Active Directory Integration
 ---------------------------------

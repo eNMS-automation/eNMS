@@ -5,9 +5,9 @@ Services
 A service is a Python script that performs an action. A service is defined by:
 
 - A database model. You can define all the parameters you need as SQL Alchemy columns: this is what eNMS stores in the database.
-- A form. It defines what is displayed in the UI, and it validates that the user input is correct.
+- A form. It defines what is displayed in the UI, and it validates the user inputs.
 
-In ``eNMS/eNMS/automation/services/examples``, you will find the file ``example_service.py`` with a service template that you can use as starting point to create your own services. 
+In ``eNMS/eNMS/services/examples``, you will find the file ``example_service.py`` with a service template that you can use as starting point to create your own services. 
 This file contains the following code :
 
 ::
@@ -204,7 +204,7 @@ This file contains the following code :
               )
 
 
-When the application starts, it loads all python files in ``eNMS/eNMS/services``, and adds all models to the database. Inside the ``eNMS/eNMS/automation/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
+When the application starts, it loads all python files in ``eNMS/eNMS/services``, and adds all models to the database. Inside the ``eNMS/eNMS/services`` folder, you are free to create subfolders to organize your own services any way you want: eNMS will automatically detect all python files. After adding a new custom service, you must reload the application before it appears in the web UI.
 You can create instances of a service from the web UI.
 eNMS looks at the form class to auto-generate a form for the user to create new instances of that service.
 
@@ -234,21 +234,21 @@ Once a service has been customized with parameters, devices selected, etc, we re
 From the :guilabel:`automation/service_management` page, you can:
 
 - Start a Service Instance (``Run`` button).
-- View and compare the logs of the Service Instance.
+- View and compare the results of the Service Instance.
 - Edit or duplicate the Service Instance.
 - Export the Service Instance: the service instance will be exported as a YaML file in the ``projects/exported_jobs`` directory. This allows migrating service instances from one VM to another if you are using different VM.
 - Delete the Service Instance.
 
 When running a service instance, the device progress (current device/total devices selected to run) will be displayed in the table, unless Multiprocessing is selected to run the devices in parallel, in which case eNMS cannot keep track of how many devices are completed until the service instance finishes.
-Each field in the table allows for searching that field by inclusion match. The Status field however, needs to perform an exact search, so fully input 'Running' or 'Idle' to search.
+Each field in the table allows for searching that field by inclusion match.
 
 Service devices
 ---------------
 
 When you create a new Service Instance, the form will also contain multiple selection fields for you to select "devices".
 
-.. image:: /_static/services/service_system/target_selection.png
-   :alt: Target selection
+.. image:: /_static/services/service_system/device_selection.png
+   :alt: Device selection
    :align: center
 
 There are two ways to select devices:
@@ -288,15 +288,19 @@ Result Validation
 -----------------
 
 For some services, the success or failure of the service is decided by a "Validation" process.
-The validation consists in:
-- Either looking for a string in the output of the service
-- Or matching the output of the service against a regular expression
+The validation can consist in:
+
+- Looking for a string in the output of the service.
+- Matching the output of the service against a regular expression.
+- Anything else: you can implement any validation mechanism you want in your custom services.
 
 In addition to text matching, for some services where output is either expected in JSON/dictionary format, or where expected XML output can be converted to dictionary format, matching against a dictionary becomes possible:
+
 - Dictionary matching can be by inclusion:  Are my provided key:value pairs included in the output?
 - Dictionary matching can be by equality: Are my provided key:value pairs exactly matching the output key:value pairs?
 
 A few options are available to the user:
+
 - ``Negative logic``: the result is inverted: a success becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
 - ``Delete spaces before matching``: the output returned by the device will be stripped from all spaces and newlines, as those can sometimes result in false negative.
 
@@ -329,6 +333,7 @@ Service notification
 When a service (or a workflow) finishes, you can choose to receive a notification that contains the logs of the service (whether it was successful or not for each device, etc).
 
 There are three types of notification:
+
 - Mail notification: eNMS sends a mail to an address of your choice.
 - Slack notification: eNMS sends a message to a channel of your choice.
 - Mattermost notification: same as Slack, with Mattermost.
@@ -343,13 +348,13 @@ To set up the mail system, you must export the following environment variables b
   MAIL_USERNAME = environ.get('MAIL_USERNAME')
   MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
 
-From the :guilabel:`admin/administration` panel, you must configure the sender and recipient addresses of the mail (Mail notification), as well as an Incoming webhook URL and channel for the Mattermost/Slack notifications.
+From the :guilabel:`Admin / Administration` panel, you must configure the sender and recipient addresses of the mail (Mail notification), as well as an Incoming webhook URL and channel for the Mattermost/Slack notifications.
 
 .. image:: /_static/services/service_system/notifications.png
    :alt: Notification
    :align: center
 
-The ``Mail Recipients`` parameter must be set for the mail system to work; the `Admin/Administration` panel parameter can
+The ``Mail Recipients`` parameter must be set for the mail system to work; the `Admin / Administration` panel parameter can
 also be overriden from Step2 of the Service Instance and Workflow configuration panels. For Mail notification, there is
 also an option in the Service Instance configuration to display only failed objects in the email summary versus seeing a
 list of all passed and failed objects.

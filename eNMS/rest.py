@@ -49,11 +49,11 @@ class Query(Resource):
     decorators = [auth.login_required]
 
     def get(self, cls: str) -> dict:
-        results = fetch(cls, all_matches=True, **request.args.to_dict())
-        if results:
+        try:
+            results = fetch(cls, all_matches=True, **request.args.to_dict())
             return [result.get_properties() for result in results]
-        else:
-            return abort(404, message=f"No match found.")
+        except InstanceNotFoundException:
+            return abort(404, message=f"There are no such {cls}s.")
 
 
 class GetInstance(Resource):

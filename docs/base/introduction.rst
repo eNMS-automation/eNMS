@@ -42,14 +42,14 @@ A dashboard provides a graphical overview of all objects with dynamic charts.
 Network visualization
 *********************
 
-Once created, eNMS can display your network:
-  - geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
+Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...):
+  - Network View: each device is displayed on the map at its GPS coordinates.
 
   .. image:: /_static/base/enms.png
     :alt: Geographical View
     :align: center
 
-  - logically with a force-based algorithm (`d3.js`).
+  - Site View: colocated devices can be grouped into geographical sites (building, campus, ...). eNMS then uses a force-based algorithm to display a "logical" view of the site's internal devices.
 
   .. image:: /_static/base/logical_view.png
     :alt: Logical View

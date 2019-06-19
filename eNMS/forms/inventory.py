@@ -63,7 +63,6 @@ class ConnectionForm(BaseForm):
 class ObjectFilteringForm(BaseForm):
     action = "filter"
     form_type = HiddenField(default="object_filtering")
-    pools = MultipleInstanceField("Pools", instance_type="Pool")
 
 
 class ObjectForm(BaseForm):
@@ -74,30 +73,6 @@ class ObjectForm(BaseForm):
     location = StringField("Location")
     vendor = StringField("Vendor")
     model = StringField("Model")
-
-
-@configure_device_form
-class DeviceFilteringForm(ObjectFilteringForm, ObjectForm):
-    form_type = HiddenField(default="device_filtering")
-    current_configuration = StringField("Current Configuration")
-    subtype = StringField("Subtype")
-    icon = StringField("Icon")
-    ip_address = StringField("IP Address")
-    port = StringField("Port")
-    operating_system = StringField("Operating System")
-    os_version = StringField("OS Version")
-    longitude = StringField("Longitude")
-    latitude = StringField("Latitude")
-    napalm_driver = StringField("NAPALM Driver")
-    netmiko_driver = StringField("Netmiko Driver")
-
-
-class ConfigurationFilteringForm(DeviceFilteringForm):
-    form_type = HiddenField(default="configuration_filtering")
-    last_failure = StringField("Last failure")
-    last_runtime = StringField("Last runtime")
-    last_update = StringField("Last update")
-    last_status = StringField("Last status")
 
 
 @configure_device_form

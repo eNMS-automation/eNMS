@@ -34,7 +34,6 @@ Complete List of Environment Variables
   # - export ENMS_DATABASE_URL=mysql://root:password@localhost/enms
   # Uncomment for SQLite Mode:
   - export ENMS_DATABASE_URL=sqlite:///database.db?check_same_thread=False
-  - export SQLITE_WAL_MODE=1     (to enable multiprocessing support in sqlite)
   - export PATH_CUSTOM_PROPERTIES=/home/user/eNMS/eNMS_properties.yml
   - export CREATE_EXAMPLES=0
   - export MAIL_SERVER=smtp.company.com

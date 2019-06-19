@@ -296,30 +296,26 @@ Migration, Backup, and Restore
 
 The eNMS migration system handles exporting the complete database content into JSON files based on eNMS object types.
 These migration files are used for migrating from one version of eNMS to the next version. They are also used for Backup and Restore of eNMS.
-The migration system is accessed from :guilabel:`Admin/Advanced` or from the ReST API.
+The migration system is accessed from the :guilabel:`Admin / Administration` or from the ReST API.
 Device inventory data is included in the exported migration files, and new devices can be added by importing the Topology Spreadsheet, so these
 mechanisms can work together to manage your data:
 
 When creating a new instance of eNMS (backup instance, new version of eNMS):
   - Install eNMS; note that eNMS has an empty database when installed the first time
-  - Run the :guilabel:`Admin/Advanced/Migration/Import` either from the UI or from the ReST API. Select 'Empty_database_before_import' = True, specify
-    the location of the file to import, and select all object types to be imported: "User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"
+  - Run the :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API. Select 'Empty_database_before_import' = True, specify
+    the location of the file to import, and select all object types to be imported: "User", "Device", "Link", "Pool", "Service", "Workflow", "WorkflowEdge", "Task"
   - Next, run the :guilabel:`Inventory/Import & Export/Import and Export Topology` and specify the Excel Spreadsheet to overlay
     new Device and topology data. Make sure not to select 'replace on import' to prevent overwriting the device data from the migration import.
-    Select 'update pools on import' to dynamically have pool selection criteria re-applied to the entire inventory contents
-  - Multiple topology spreadsheets can be added as overlays if desired. Selection of 'update pools on import' can be deferred to run only after the last import.
 
-When backing up eNMS, it is only necessary to perform :guilabel:`Admin/Advanced/Migration/Export` either from the UI or from the ReST API.
+When backing up eNMS, it is only necessary to perform :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API.
   - Select a directory name for storing the migration files into, and select all object types to Export
-  - the Topology Export of device and link data from :guilabel:`Inventory/Import & Export/Import and Export Topology` is not needed for Backup.
+  - the Topology Export of device and link data from :guilabel:`Admin / Administration / Topology Import` and :guilabel:`Admin / Administration / Topology Export` is not needed for Backup.
     It is intended for sharing of device and link data.
 
 Advanced: Migrating Services and Workflows to a new instance with a different inventory:
   - The migration files contain JSON representations of database relationships. Loading a mismatched set of migration files could result in database corruption, so be careful.
-  - The Service and Workflow .yaml migration files also contain the list of devices that are selected for each job. If tnose devices do not exactly exist on the new instance,
+  - The Service and Workflow .yaml migration files also contain the list of devices that are selected for each job. If those devices do not exactly exist on the new instance,
     selected devices and pools need to be cleared on all services and workflows before exporting to files. This will allow those services and workflows to be migrated to the new instance.
   - Files needed to migrate: Service.yaml, Workflow.yaml, WorkflowEdge.yaml
 
-What if I only want to Import new devices or links to eNMS:
-  - Then perform import of the topology spreadsheet using :guilabel:`Inventory/Import & Export/Import and Export Topology`
-  - Make sure 'replace on import' is not selected, and select 'update pools on import'
+If I only want to Import new devices or links to eNMS, perform import of the topology spreadsheet using :guilabel:`Admin / Administration / Topology Import and Export`.

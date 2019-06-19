@@ -3,7 +3,7 @@ from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from werkzeug.datastructures import ImmutableMultiDict
-from wtforms import HiddenField, StringField
+from wtforms import HiddenField, SelectField, StringField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
@@ -84,13 +84,23 @@ def filtering_form_generator() -> None:
                 "form_type": HiddenField(default=f"{table}_filtering"),
                 **{
                     **{property: StringField() for property in properties},
-                    **kwargs
+                    **{
+                        f"{property}_regex": SelectField(
+                            choices=(
+                                ("inclusion", "Inclusion"),
+                                ("equality", "Equality"),
+                                ("regex", "Regular Expression"),
+                            )
+                        )
+                        for property in properties
+                    },
+                    **kwargs,
                 },
             },
         )
 
-filtering_form_generator()
 
+filtering_form_generator()
 
 
 import eNMS.forms.inventory  # noqa: F401

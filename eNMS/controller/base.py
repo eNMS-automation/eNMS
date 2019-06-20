@@ -460,7 +460,7 @@ class BaseController:
                     device.update(**parameters)
                     with open(Path(dir.path) / dir.name) as f:
                         device.current_configuration = device.configurations[
-                            parameters["last_update"]
+                            str(parameters["last_update"])
                         ] = f.read()
         Session.commit()
         for pool in fetch_all("Pool"):

@@ -18,7 +18,7 @@
             {% if form[property].type == "StringField" %}
               <td>{{ names.get(property, property) }}</td>
               <td>{{ form[property](id=id, class="form-control") }}</td>
-              <td>{{ form[property + "_regex"](id=id + "_regex", class="form-control") }}</td>
+              <td>{{ form[property + "_filter"](id=id + "_filter", class="form-control") }}</td>
             {% else %}
               <td>{{ names.get(property, property) }}</td>
               <td colspan="2">{{ form[property](id=id, class="form-control") }}</td>
@@ -29,6 +29,6 @@
     </table>
   </div>
   <center>
-    <button type="button" class="btn btn-success" onclick="{{ action }}('{{ form_type }}')">Save</button>
+    <button type="button" class="btn btn-success" onclick="filter('{{ form_type }}')">Save</button>
   </center>
 </form>

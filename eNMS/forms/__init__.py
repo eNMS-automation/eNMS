@@ -80,14 +80,13 @@ def filtering_form_generator() -> None:
             f"{table.capitalize()}FilteringForm",
             (BaseForm,),
             {
-                "action": "filter",
                 "template": "filtering",
                 "properties": list(kwargs) + properties,
                 "form_type": HiddenField(default=f"{table}_filtering"),
                 **{
                     **{property: StringField() for property in properties},
                     **{
-                        f"{property}_regex": SelectField(
+                        f"{property}_filter": SelectField(
                             choices=(
                                 ("inclusion", "Inclusion"),
                                 ("equality", "Equality"),

@@ -353,6 +353,7 @@ class BaseController:
     def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
         model = models.get(table, models["Device"])
         properties = table_properties[table]
+        print(kwargs)
         try:
             order_property = properties[int(kwargs["order[0][column]"])]
         except IndexError:
@@ -361,8 +362,15 @@ class BaseController:
         constraints = []
         for property in filtering_properties[table]:
             value = kwargs.get(f"form[{property}]")
-            if value:
-                constraints.append(getattr(model, property).contains(value))
+            
+            if not value:
+                continue
+            filter = kwargs.get(f"form[{property}_filter]")
+            if filter == "equality":
+                constraint = getattr(model, property) == value
+            else:
+                constraint = getattr(model, property).contains(value)
+            constraints.append(constraint)
         result = Session.query(model).filter(and_(*constraints)).order_by(order)
         if table in ("device", "link", "configuration"):
             pools = [int(id) for id in kwargs.getlist("form[pools][]")]

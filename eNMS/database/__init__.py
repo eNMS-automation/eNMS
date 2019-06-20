@@ -36,7 +36,6 @@ def session_factory() -> Any:
 
 engine, Session = session_factory()
 Base = declarative_base()
-print(DIALECT)
 
 
 class CustomMediumBlobPickle(PickleType):

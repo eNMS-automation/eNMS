@@ -25,7 +25,6 @@ class TestConfig(DefaultConfig):
 
 config_mapper: dict = {
     "Default": DefaultConfig,
-    "Develop": DevelopConfig,
     "Production": ProductionConfig,
     "Test": TestConfig,
 }

@@ -2,7 +2,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField, String
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DateField, MultipleInstanceField, InstanceField
+from eNMS.forms.fields import DateField, DictField, MultipleInstanceField, InstanceField
 
 
 class DeviceAutomationForm(BaseForm):
@@ -137,3 +137,6 @@ class TaskForm(BaseForm):
         "Scheduling Mode",
         choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling")),
     )
+    devices = MultipleInstanceField("Devices", instance_type="Device")
+    pools = MultipleInstanceField("Pools", instance_type="Pool")
+    payload = DictField("Payload")

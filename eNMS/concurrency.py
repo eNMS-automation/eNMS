@@ -28,3 +28,14 @@ def device_process(args: tuple) -> None:
         with lock:
             results[device.name] = device_result
             logs.extend(device_log)
+
+
+def device_thread(args: tuple) -> None:
+    device_id, job_id, lock, results, logs, payload, workflow_id = args
+    device = fetch("Device", id=device_id)
+    workflow = fetch("Workflow", allow_none=True, id=workflow_id)
+    job = fetch("Job", id=job_id)
+    device_result, device_log = job.get_results(payload, device, workflow)
+    with lock:
+        results[device.name] = device_result
+        logs.extend(device_log)

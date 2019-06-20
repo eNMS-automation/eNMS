@@ -227,3 +227,5 @@ then pull if it exists, clone otherwise.
 - python snippet change
 
 - Improved error message when device is not found in the REST API (404 error code)
+
+- new env variable: Pool size AND max overflow, to document

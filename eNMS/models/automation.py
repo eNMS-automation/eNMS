@@ -6,8 +6,8 @@ from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
 from logging import info
-from multiprocessing import Manager
-from multiprocessing.pool import Pool
+from multiprocessing import Lock, Manager
+from multiprocessing.pool import Pool, ThreadPool
 from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
@@ -27,7 +27,7 @@ from xmltodict import parse
 from xml.parsers.expat import ExpatError
 from yaql import factory
 
-from eNMS.concurrency import threaded_job, device_process
+from eNMS.concurrency import threaded_job, device_process, device_thread
 from eNMS.controller import controller
 from eNMS.database import CustomMediumBlobPickle, Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch
@@ -269,7 +269,7 @@ class Service(Job):
         if not targets:
             return self.get_results(payload)
         else:
-            if self.multiprocessing:
+            if self.multiprocessing == "multiprocessing":
                 manager = Manager()
                 device_results: dict = manager.dict()
                 logs: list = manager.list()
@@ -286,6 +286,24 @@ class Service(Job):
                 process_args = [(device.id, *args) for device in targets]
                 pool = Pool(processes=processes)
                 pool.map(device_process, process_args)
+                pool.close()
+                pool.join()
+                results = {"devices": device_results}
+            elif self.multiprocessing:
+                device_results, logs = {}, []
+                thread_lock = Lock()
+                processes = min(len(targets), self.max_processes)
+                args = (  # type: ignore
+                    self.id,
+                    thread_lock,
+                    device_results,
+                    logs,
+                    payload,
+                    getattr(parent, "id", None),
+                )
+                process_args = [(device.id, *args) for device in targets]
+                pool = ThreadPool(processes=processes)
+                pool.map(device_thread, process_args)
                 pool.close()
                 pool.join()
                 results = {"devices": device_results}

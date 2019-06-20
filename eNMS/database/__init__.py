@@ -11,8 +11,10 @@ def session_factory() -> Any:
         environ.get(
             "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
         ),
+        max_overflow=int(environ.get("MAX_OVERFLOW", 10)),
         convert_unicode=True,
         pool_pre_ping=True,
+        pool_size=int(environ.get("POOL_SIZE", 1000)),
     )
     return engine, scoped_session(sessionmaker(autoflush=False, bind=engine))
 

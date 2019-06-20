@@ -6,16 +6,7 @@ class DefaultConfig:
     DEBUG = True
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
     WTF_CSRF_TIME_LIMIT = None
-    DEBUG_TB_ENABLED = False
     ERROR_404_HELP = False
-
-
-class DevelopConfig(DefaultConfig):
-    MODE = "develop"
-    DEVELOP = True
-    DEBUG_TB_ENABLED = True
-    DEBUG_TB_PROFILER_ENABLED = True
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
 class ProductionConfig:

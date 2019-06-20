@@ -3,7 +3,6 @@ dicttoxml
 flask
 flask_assets
 flask_cli
-flask_debugtoolbar
 flask_httpauth
 flask_login
 flask-restful

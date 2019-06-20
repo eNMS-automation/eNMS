@@ -83,9 +83,14 @@ class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
     def post(self, cls: str) -> dict:
-        result = factory(cls, **request.get_json(force=True)).serialized
-        Session.commit()
-        return result
+        try:
+            data = request.get_json(force=True)
+            object_data = controller.objectify_from_name(cls.capitalize(), data)
+            result = factory(cls, **object_data).serialized
+            Session.commit()
+            return result
+        except Exception as exc:
+            abort(500, message=f"Update failed ({exc})")
 
 
 class Migrate(Resource):

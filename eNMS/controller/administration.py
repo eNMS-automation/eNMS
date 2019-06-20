@@ -85,7 +85,7 @@ class AdministrationController(BaseController):
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 dump(export(cls_name), migration_file, default_flow_style=False)
 
-    def import_object(self, model: str, obj: dict) -> dict:
+    def objectify_from_name(self, model: str, obj: dict) -> dict:
         for property, relation in relationships[model].items():
             if property not in obj:
                 continue
@@ -115,7 +115,7 @@ class AdministrationController(BaseController):
                     }
                 if cls == "WorkflowEdge":
                     workflow_edges = deepcopy(objects)
-                objects = [self.import_object(cls, obj) for obj in objects]
+                objects = [self.objectify_from_name(cls, obj) for obj in objects]
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "Service" else cls
                     try:
@@ -144,7 +144,7 @@ class AdministrationController(BaseController):
             with open(file.path, "r") as instance_file:
                 instance = load(instance_file, Loader=BaseLoader)
                 model = instance.pop("type")
-                factory(model, **self.import_object(model, instance))
+                factory(model, **self.objectify_from_name(model, instance))
         Session.commit()
         for workflow in listdir(path / "workflows"):
             if workflow == ".gitkeep":
@@ -155,7 +155,7 @@ class AdministrationController(BaseController):
                     with open(path_job / file.name, "r") as instance_file:
                         instance = load(instance_file, Loader=BaseLoader)
                         model = instance.pop("type")
-                        factory(model, **self.import_object(model, instance))
+                        factory(model, **self.objectify_from_name(model, instance))
                 Session.commit()
 
     def export_job(self, job_id: str) -> None:

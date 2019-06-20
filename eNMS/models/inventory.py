@@ -18,6 +18,8 @@ from eNMS.database.associations import (
     pool_user_table,
     job_device_table,
     job_pool_table,
+    task_device_table,
+    task_pool_table,
 )
 from eNMS.database.base import AbstractBase
 from eNMS.properties.objects import pool_link_properties, pool_device_properties
@@ -88,6 +90,7 @@ class Device(CustomDevice):
     last_update = Column(String(SMALL_STRING_LENGTH), default="Never")
     last_runtime = Column(Float, default=0.0)
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
+    tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
     @property
@@ -280,6 +283,7 @@ class Pool(AbstractPool):
     latitude = Column(Float, default=0.0)
     longitude = Column(Float, default=0.0)
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
+    tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)
 

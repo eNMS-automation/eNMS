@@ -6,7 +6,6 @@ class DefaultConfig:
     DEBUG = True
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
     WTF_CSRF_TIME_LIMIT = None
-    WTF_CSRF_CHECK_DEFAULT = False
     DEBUG_TB_ENABLED = False
     ERROR_404_HELP = False
 

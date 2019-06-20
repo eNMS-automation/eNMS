@@ -36,6 +36,8 @@ from eNMS.database.associations import (
     job_event_table,
     job_pool_table,
     job_workflow_table,
+    task_device_table,
+    task_pool_table,
 )
 from eNMS.database.base import AbstractBase
 from eNMS.exceptions import VariableSubstitutionError
@@ -695,6 +697,9 @@ class Task(AbstractBase):
     end_date = Column(String(SMALL_STRING_LENGTH))
     crontab_expression = Column(String(SMALL_STRING_LENGTH))
     is_active = Column(Boolean, default=False)
+    payload = Column(MutableDict.as_mutable(PickleType), default={})
+    devices = relationship("Device", secondary=task_device_table, back_populates="tasks")
+    pools = relationship("Pool", secondary=task_pool_table, back_populates="tasks")
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="tasks")
     job_name = association_proxy("job", "name")

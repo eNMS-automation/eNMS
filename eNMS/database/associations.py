@@ -16,6 +16,20 @@ job_pool_table: Table = Table(
     Column("job_id", Integer, ForeignKey("Job.id")),
 )
 
+task_device_table: Table = Table(
+    "task_device_association",
+    Base.metadata,
+    Column("device_id", Integer, ForeignKey("Device.id")),
+    Column("task_id", Integer, ForeignKey("Task.id")),
+)
+
+task_pool_table: Table = Table(
+    "task_pool_association",
+    Base.metadata,
+    Column("pool_id", Integer, ForeignKey("Pool.id")),
+    Column("task_id", Integer, ForeignKey("Task.id")),
+)
+
 event_log_table: Table = Table(
     "event_log_association",
     Base.metadata,

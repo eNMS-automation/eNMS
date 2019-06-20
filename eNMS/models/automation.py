@@ -698,7 +698,9 @@ class Task(AbstractBase):
     crontab_expression = Column(String(SMALL_STRING_LENGTH))
     is_active = Column(Boolean, default=False)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
-    devices = relationship("Device", secondary=task_device_table, back_populates="tasks")
+    devices = relationship(
+        "Device", secondary=task_device_table, back_populates="tasks"
+    )
     pools = relationship("Pool", secondary=task_pool_table, back_populates="tasks")
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="tasks")
@@ -782,12 +784,23 @@ class Task(AbstractBase):
             controller.scheduler.remove_job(self.aps_job_id)
         Session.commit()
 
+    def compute_targets(self):
+        targets = {device.id for device in self.devices}
+        for pool in self.pools:
+            targets |= {device.id for device in pool.devices}
+        return targets
+
     def kwargs(self) -> Tuple[dict, dict]:
         default = {
             "id": self.aps_job_id,
             "func": threaded_job,
             "replace_existing": True,
-            "args": [self.job.id, self.aps_job_id],
+            "args": [
+                self.job.id,
+                self.aps_job_id,
+                self.compute_targets(),
+                self.payload,
+            ],
         }
         if self.scheduling_mode == "cron":
             self.periodic = True

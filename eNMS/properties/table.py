@@ -127,7 +127,7 @@ filtering_properties: Dict[str, List[str]] = {
     "event": event_table_properties,
     "pool": pool_table_properties,
     "service": job_filtering_properties,
-    "task": task_table_properties,
+    "task": task_table_properties[:-2],
     "user": user_table_properties,
     "workflow": job_filtering_properties,
 }

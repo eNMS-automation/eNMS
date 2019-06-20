@@ -13,7 +13,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.controller.base import BaseController
-from eNMS.database import Session
+from eNMS.database import DIALECT, Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, property_types
 from eNMS.properties import field_conversion
@@ -251,8 +251,17 @@ class InventoryController(BaseController):
         constraints = []
         for property in filtering_properties[obj_type]:
             value = kwargs[property]
-            if value:
-                constraints.append(getattr(model, property).contains(value))
+            if not value:
+                continue
+            filter = kwargs.get(f"form[{property}_filter]")
+            if filter == "equality":
+                constraint = getattr(model, property) == value
+            elif filter == "inclusion" or DIALECT == "sqlite":
+                constraint = getattr(model, property).contains(value)
+            else:
+                operator = "regexp" if DIALECT == "mysql" else "~"
+                constraint = getattr(model, property).op(operator)(value)
+            constraints.append(constraint)
         result = Session.query(model).filter(and_(*constraints))
         pools = [int(id) for id in kwargs["pools"]]
         if pools:

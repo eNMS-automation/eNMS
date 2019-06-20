@@ -1,0 +1,18 @@
+<form id="{{ form_type }}-form" class="form-horizontal form-label-left" method="post" autocomplete="off">
+  <div class="modal-body">
+    <div class="form-group">
+    {{ form.csrf_token() }}
+    {{ form.form_type() }}
+    {% for property in form.properties %}
+      {% set id = "{}-{}".format(form_type, property) %}
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ names.get(property, property) }}</label>
+      <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form[property](id=id, class="form-control") }}
+      </div><br><br>
+    {% endfor %}
+    </div>
+  </div>
+  <center>
+    <button type="button" class="btn btn-success" onclick="{{ action }}('{{ form_type }}')">Save</button>
+  </center>
+</form>

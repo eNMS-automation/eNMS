@@ -76,11 +76,14 @@ def filtering_form_generator() -> None:
         kwargs = {}
         if table in ("device", "link", "configuration"):
             kwargs["pools"] = MultipleInstanceField("Pools", instance_type="Pool")
+        print(list(kwargs) + properties)
         type(
             f"{table.capitalize()}FilteringForm",
             (BaseForm,),
             {
                 "action": "filter",
+                "template": "filtering",
+                "properties": list(kwargs) + properties,
                 "form_type": HiddenField(default=f"{table}_filtering"),
                 **{
                     **{property: StringField() for property in properties},

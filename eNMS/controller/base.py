@@ -21,13 +21,13 @@ from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_
-from sqlalchemy.exc import IntegrityError, InvalidRequestError
+from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, List, Optional, Set, Union
 from werkzeug.datastructures import ImmutableMultiDict
 from yaml import BaseLoader, load
 
-from eNMS.database import Session
+from eNMS.database import DIALECT, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
 from eNMS.properties import property_names
 from eNMS.properties.diagram import (
@@ -353,7 +353,6 @@ class BaseController:
     def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
         model = models.get(table, models["Device"])
         properties = table_properties[table]
-        print(kwargs)
         try:
             order_property = properties[int(kwargs["order[0][column]"])]
         except IndexError:
@@ -362,32 +361,37 @@ class BaseController:
         constraints = []
         for property in filtering_properties[table]:
             value = kwargs.get(f"form[{property}]")
-            
             if not value:
                 continue
             filter = kwargs.get(f"form[{property}_filter]")
             if filter == "equality":
                 constraint = getattr(model, property) == value
-            else:
+            elif filter == "inclusion" or DIALECT == "sqlite":
                 constraint = getattr(model, property).contains(value)
+            else:
+                operator = "regexp" if DIALECT == "mysql" else "~"
+                constraint = getattr(model, property).op(operator)(value)
             constraints.append(constraint)
         result = Session.query(model).filter(and_(*constraints)).order_by(order)
         if table in ("device", "link", "configuration"):
             pools = [int(id) for id in kwargs.getlist("form[pools][]")]
             if pools:
                 result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
-        return {
-            "draw": int(kwargs["draw"]),
-            "recordsTotal": len(Session.query(model).all()),
-            "recordsFiltered": len(result.all()),
-            "data": [
-                [getattr(obj, property) for property in properties]
-                + obj.generate_row(table)
-                for obj in result.limit(int(kwargs["length"]))
-                .offset(int(kwargs["start"]))
-                .all()
-            ],
-        }
+        try:
+            return {
+                "draw": int(kwargs["draw"]),
+                "recordsTotal": len(Session.query(model).all()),
+                "recordsFiltered": len(result.all()),
+                "data": [
+                    [getattr(obj, property) for property in properties]
+                    + obj.generate_row(table)
+                    for obj in result.limit(int(kwargs["length"]))
+                    .offset(int(kwargs["start"]))
+                    .all()
+                ],
+            }
+        except InterfaceError:
+            return {"error": "Filtering error: wrong input"}
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name

@@ -35,11 +35,10 @@ def session_factory() -> Any:
 
 
 engine, Session = session_factory()
-dialect = Session.bind.dialect.name
-
 Base = declarative_base()
+print(DIALECT)
 
 
 class CustomMediumBlobPickle(PickleType):
-    if dialect == "mysql":
+    if DIALECT == "mysql":
         impl = MSMediumBlob

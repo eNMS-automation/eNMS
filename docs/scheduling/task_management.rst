@@ -55,3 +55,10 @@ and where any of the fields can be defaulted to any with wildcard '*', and there
 - ``30 4 1 * 0,6``	at 4:30 on the 1st day of every month, plus on Sun and Sat
 - ``00,30 * * * *``   at 00 and 30 minutes past every hour
 - ``30 9 * * * *``    at 9:30 am every day
+
+Targets and payload
+*******************
+
+When creating a task, you can select a list of devices and pools. If these fields are left empty, the job will run on its own targets.
+Otherwise, the task targets (all selected devices, plus all devices of all selected pools) will override the job targets when the job runs.
+A task can also have a payload (dictionary) that will be passed to the job when it runs.

@@ -130,6 +130,19 @@ Create or update an instance
  # via a POST or PUT method to the following URL
  https://<IP_address>/rest/instance/<instance_type>
 
+Example of payload to schedule a task from the REST API: this payload will create (or update if it already exists) the task ``test``.
+
+::
+
+ {
+    "name": "test",
+    "job": "netmiko_check_vrf_test",
+	"is_active": true,
+	"devices": ["Baltimore"],
+	"start_date": "20/06/2019 23:15:15"
+ }
+
+This task schedules the service ``netmiko_check_vrf_test`` to run at ``20/06/2019 23:15:15`` on the device whose name is ``Baltimore``.
 
 Migrations
 **********

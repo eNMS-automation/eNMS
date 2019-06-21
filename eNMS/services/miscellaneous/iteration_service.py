@@ -1,13 +1,9 @@
-from sqlalchemy import Column, ForeignKey, Integer, PickleType
+from sqlalchemy import Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
-from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.ext.mutable import MutableDict, MutableList
-from sqlalchemy.orm import backref, relationship
-from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
+from sqlalchemy.orm import relationship
+from wtforms import HiddenField, SelectField
 
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField
 from eNMS.models.automation import Service
@@ -29,10 +25,18 @@ class IterationService(Service):
     __mapper_args__ = {"polymorphic_identity": "IterationService"}
 
     def job(self, payload: dict) -> dict:
-        devices = self.compute_devices() if self.origin_of_targets == "iteration" else self.iterated_job.devices
+        devices = (
+            self.compute_devices()
+            if self.origin_of_targets == "iteration"
+            else self.iterated_job.devices
+        )
         payload[self.name] = self.iteration_values
-        results, _ = self.job.run(payload, devices, self)
-        return {"success": True, "result": results}
+        results, _ = self.iterated_job.run(payload, devices, self)
+        return {
+            "Iterated devices": [device.name for device in devices],
+            "Iteration values": self.iteration_values,
+            **results,
+        }
 
 
 class IterationForm(ServiceForm):

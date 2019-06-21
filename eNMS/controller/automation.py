@@ -103,12 +103,6 @@ class AutomationController(BaseController):
         job = fetch("Job", id=job_id)
         if job.is_running:
             return {"error": "Job is already running."}
-        targets = job.compute_devices()
-        if hasattr(job, "has_targets"):
-            if job.has_targets and not targets:
-                return {"error": "Set devices or pools as targets first."}
-            if not job.has_targets and targets:
-                return {"error": "This service should not have targets configured."}
         self.scheduler.add_job(
             id=self.get_time(),
             func=threaded_job,

@@ -45,6 +45,7 @@ const panelSize = {
   pool: "800 600",
   pool_filtering: "700 500",
   pool_objects: "700 550",
+  restart_workflow: "600 200",
   results: "1000 700",
   server: "600 250",
   server_filtering: "700 450",
@@ -75,6 +76,7 @@ const panelName = {
   link_filtering: "Link Filtering",
   log_filtering: "Log Filtering",
   pool_filtering: "Pool Filtering",
+  restart_workflow: "Restart Workflow",
   service_filtering: "Service Filtering",
   task_filtering: "Task Filtering",
   user_filtering: "User Filtering",
@@ -312,7 +314,9 @@ function showDeletionPanel(type, id, name) {
  * @param {bool} duplicate - Duplicate instance.
  */
 function preprocessForm(panel, id, type, duplicate) {
+  console.log(panel)
   panel.querySelectorAll(".add-id").forEach((el) => {
+    console.log("test", id)
     if (duplicate && ["name", "id"].includes(el.name)) return;
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });

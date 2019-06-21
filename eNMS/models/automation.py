@@ -267,7 +267,7 @@ class Service(Job):
         payload: dict,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
-    ) -> Tuple[dict, list]
+    ) -> Tuple[dict, list]:
         if not targets:
             return self.get_results(payload)
         else:

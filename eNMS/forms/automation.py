@@ -84,10 +84,10 @@ class CompareResultsForm(BaseForm):
 
 
 class RestartWorkflowForm(BaseForm):
-    template = "base"
+    template = "restart_workflow"
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    payload = SelectField("Payload", choices=())
+    payload_version = SelectField("Payload Version", choices=())
 
 
 class AddJobsForm(BaseForm):

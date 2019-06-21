@@ -112,8 +112,18 @@ function switchToWorkflow(workflowId) {
  * Restart Workflow from selected job.
  */
 // eslint-disable-next-line
-function restartWorkflow() {
-  console.log("test")
+function restartWorkflow(job) {
+  showPanel("restart_workflow", job.id)
+  call(`/get_job_results/${job.id}`, function(results) {
+    Object.keys(results).forEach((option) => {
+      $(`#payload_version-${job.id}`).append(
+        $("<option></option>")
+          .attr("value", option)
+          .text(option)
+      );
+    });
+    $(`#payload_version-${job.id}`).selectpicker("refresh");
+  });
 }
 
 /**
@@ -312,7 +322,7 @@ Object.assign(action, {
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => runJob(job.id),
   Results: (job) => showResultsPanel(job.id, job.label),
-  "Restart Workflow From Here": showPanel("restart_workflow"),
+  "Restart Workflow": (job) => restartWorkflow(job),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () => showResultsPanel(workflow.id, workflow.name),

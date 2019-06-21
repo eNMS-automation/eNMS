@@ -151,7 +151,6 @@ function displayResults(id) {
           .text(option)
       );
     });
-
     $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
     $(`#display-${id},#compare_with-${id}`).selectpicker("refresh");
     displayResult(id, results);

@@ -784,7 +784,7 @@ class Task(AbstractBase):
             controller.scheduler.remove_job(self.aps_job_id)
         Session.commit()
 
-    def compute_targets(self):
+    def compute_targets(self) -> Set[int]:
         targets = {device.id for device in self.devices}
         for pool in self.pools:
             targets |= {device.id for device in pool.devices}

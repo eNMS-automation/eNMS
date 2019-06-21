@@ -90,7 +90,7 @@ class UpdateInstance(Resource):
             Session.commit()
             return result
         except Exception as exc:
-            abort(500, message=f"Update failed ({exc})")
+            return abort(500, message=f"Update failed ({exc})")
 
 
 class Migrate(Resource):

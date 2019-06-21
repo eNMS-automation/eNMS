@@ -30,11 +30,11 @@ class IterationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "IterationService"}
 
-    def compute_devices(self, **kwargs) -> Set["Device"]:
+    def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.origin_of_targets == "iteration":
-            return super().compute_devices(**kwargs)
+            return super().compute_devices(payload)
         else:
-            return self.iterated_job.compute_devices(**kwargs)
+            return self.iterated_job.compute_devices(payload)
 
     def job(self, payload: dict, device: Optional[Device] = None) -> dict:
         if self.origin_of_values == "iteration_values":
@@ -46,10 +46,11 @@ class IterationService(Service):
             values = self.iteration_values[device.name]
         else:
             values = self.iteration_values
+        results = {}
         for value in values:
-            payload["iteration_value"] = value
-            results, _ = self.iterated_job.job(payload, device, self)
-        return {"Iteration values": values, **results}
+            payload["iteration_variable"] = value
+            results[value] = self.iterated_job.job(payload, device)
+        return {"success": True, "Iteration values": values, **results}
 
 
 class IterationForm(ServiceForm):
@@ -61,12 +62,12 @@ class IterationForm(ServiceForm):
             ("iterated", "Use Targets from Iterated Service"),
         )
     )
-    origin_of_targets = SelectField(
+    origin_of_values = SelectField(
         choices=(
-            ("iteration_values", "Iteration Values Dictionary in this form"),
+            ("iteration_values", "Iteration Values Dictionary below"),
             ("yaql", "YaQL Query on the Payload"),
         )
     )
     iteration_values = DictField()
     yaql_query = StringField()
-    has_targets = BooleanField()
+    per_device_values = BooleanField()

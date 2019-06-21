@@ -20,7 +20,7 @@ In the :guilabel:`Automation / Workflow Management` page, click on the button ``
 The new workflow will be automatically added to the table of workflows.
 From the same page, workflows can be edited, deleted, and duplicated. They can also be ran, and their result logs examined.
 
-.. image:: /_static/workflows/workflow_system/workflow_management.png
+.. image:: /_static/workflows/workflow_management.png
    :alt: Workflow management
    :align: center
 
@@ -48,7 +48,7 @@ The ``general right-click menu`` contains the following entries:
 - Workflow Logs
 - Refresh View
 
-.. image:: /_static/workflows/workflow_system/workflow_background_menu.png
+.. image:: /_static/workflows/workflow_background_menu.png
    :alt: Workflow management
    :align: center
 
@@ -59,7 +59,7 @@ From the ``job-specific right-click menu``, you can:
 - Display the Results
 - Delete a job (remove from the workflow)
 
-.. image:: /_static/workflows/workflow_system/workflow_job_menu.png
+.. image:: /_static/workflows/workflow_job_menu.png
    :alt: Workflow management
    :align: center
 

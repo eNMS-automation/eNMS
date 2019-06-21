@@ -410,7 +410,11 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         for index, (x, y) in enumerate(positions):
             workflow.jobs[index].positions["Netmiko_VRF_workflow"] = x * 10, y * 10
 
-    def create_yaql_payload_workflow(self) -> None:
+    def create_yaql_iteration_workflow(self) -> None:
+        devices = [
+            fetch("Device", name="Washington").id,
+            fetch("Device", name="Austin").id,
+        ]
         services = []
         for service in (
             {
@@ -424,7 +428,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             },
             {
                 "type": "NetmikoValidationService",
-                "name": "netmiko_check_vrf_test2",
+                "name": "netmiko_yaql_defined_devices",
                 "define_devices_from_payload": True,
                 "yaql_query": "$.variables.devices",
                 "query_property_type": "name",
@@ -439,6 +443,29 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         ):
             instance = factory(service.pop("type"), **service)  # type: ignore
             services.append(instance)
+        factory("NetmikoValidationService", **{
+            "name": "Iterated_netmiko_service",
+            "devices": devices,
+            "description": 'Check the iteration mechanism',
+            "waiting_time": 0,
+            "vendor": "Arista",
+            "operating_system": "eos",
+            "driver": "arista_eos",
+            "command": "show vrf",
+            "content_match": "{{payload['iteration_variable']}}",
+            "fast_cli": True,
+            "timeout": 3,
+        })
+        Session.commit()
+        services.append(factory("IterationService", **{
+            "name": "Iteration_service",
+            "origin_of_targets": "iteration",
+            "iterated_job": fetch("Service", name="Iterated_netmiko_service").id,
+            "description": "Test the iteration mechanism",
+            "devices": [fetch("Device", name="Washington").id],
+            "iteration_values": {"a": 0, "b": 0},
+            "multiprocessing": True,
+        }))
         workflow = factory(
             "Workflow",
             **{
@@ -448,7 +475,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         )
         Session.commit()
         workflow.jobs.extend(services)
-        edges = [(0, 2), (2, 3), (3, 1)]
+        edges = [(0, 2), (2, 3), (3, 4), (4, 1)]
         for x, y in edges:
             factory(
                 "WorkflowEdge",
@@ -460,7 +487,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                     "destination": workflow.jobs[y].id,
                 },
             )
-        positions = [(-20, 0), (20, 0), (0, -15), (0, 15)]
+        positions = [(-20, 0), (30, 0), (0, -20), (0, 0), (0, 20)]
         for index, (x, y) in enumerate(positions):
             workflow.jobs[index].positions["YaQL_test_worflow"] = x * 10, y * 10
 
@@ -683,7 +710,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         self.create_netmiko_workflow()
         self.create_napalm_workflow()
         self.create_payload_transfer_workflow()
-        self.create_yaql_payload_workflow()
+        self.create_yaql_iteration_workflow()
         self.create_workflow_of_workflows()
         Session.commit()
 

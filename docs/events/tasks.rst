@@ -13,7 +13,7 @@ You need to:
 - Choose a start date.
 - (Optional) Choose a frequency and an end date. If a ``Frequency`` is defined, the job will run periodically, in which case you can also choose an ``End date`` if you want the task to automatically stop running. If you define a frequency but no ``End date``, the task will run indefinitely until you manually stop it.
 
-.. image:: /_static/schedule/create_task.png
+.. image:: /_static/events/create_task.png
    :alt: Schedule from view
    :align: center
 
@@ -32,7 +32,7 @@ Tasks can be:
 
 Active/Resumed tasks display the time that they will next be run by the Scheduler, as well as the amount of time until the next run.
 
-.. image:: /_static/schedule/task_management.png
+.. image:: /_static/events/task_management.png
    :alt: Task management
    :align: center
 

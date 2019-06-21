@@ -116,7 +116,11 @@ Consequently, the ``payload`` variable received by ``process_payload1`` will loo
     etc...
   }
 
-If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the ``job`` function of ``process_payload1`` could look like:
+Use of a SwissArmyKnifeService instance to process the payload
+--------------------------------------------------------------
+
+When the only purpose of a function is to process the payload to build a "result" set or simply to determine whether the workflow is a "success" or not, the service itself does not have have any variable "parameters". It is not necessary to create a new Service (and therefore a new class, in a new file) for each of them. Instead, you can group them all in the SwissArmyKnifeService class, and add a method called after the name of the instance. The SwissArmyKnifeService class acts as a "job multiplexer" (see the ``SwissArmyKnifeService`` section of the doc).
+If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the function of ``process_payload1`` could look like:
 
 ::
 
@@ -135,56 +139,6 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 
 
 This ``job`` function reuses the results of the Napalm getter ``get_facts`` (which is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
+From the web UI, you can then create an Service Instance of ``SwissArmyKnifeService`` called ``process_payload1``, and add that instance in the workflow. When the service instance is called, eNMS will automatically use the ``process_payload1`` method, and process the payload accordingly.
 
 .. tip:: You can run a job directly from the Workflow Builder to see if it passes (and rerun if it fails), and also which payload the job returns.
-
-Use of a SwissArmyKnifeService instance to process the payload
---------------------------------------------------------------
-
-When the only purpose of a function is to process the payload to build a "result" set or simply to determine whether the workflow is a "success" or not, the service itself does not have have any variable "parameters". It is not necessary to create a new Service (and therefore a new class, in a new file) for each of them. Instead, you can group them all in the SwissArmyKnifeService class, and add a method called after the name of the instance. The SwissArmyKnifeService class acts as a "job multiplexer" (see the ``SwissArmyKnifeService`` section of the doc).
-
-This is what the SwissArmyKnifeService class would look like with the last example:
-
-::
-
-  class SwissArmyKnifeService(Service):
-  
-      __tablename__ = 'SwissArmyKnifeService'
-  
-      id = Column(Integer, ForeignKey('Service.id'), primary_key=True)
-      has_targets = Column(Boolean)
-  
-      __mapper_args__ = {
-          'polymorphic_identity': 'swiss_army_knife_service',
-      }
-  
-      def job(self, *args):
-          return getattr(self, self.name)(*args)
-  
-      # Instance call "job1" with has_targets set to True
-      def job1(self, device, payload):
-          return {'success': True, 'result': ''}
-  
-      # Instance call "job2" with has_targets set to False
-      def job2(self, payload):
-          return {'success': True, 'result': ''}
-  
-      def process_payload1(self, payload):
-          get_int = payload['get_interfaces']
-          r8_int = get_int['devices']['router8']['result']['get_interfaces']
-          speed_fa0 = r8_int['FastEthernet0/0']['speed']
-          speed_fa1 = r8_int['FastEthernet0/1']['speed']
-          same_speed = speed_fa0 == speed_fa1
-  
-          get_facts = payload['get_facts']
-          r8_facts = get_facts['devices']['router8']['result']['get_facts']
-          uptime_less_than_50000 = r8_facts['uptime'] < 50000
-          return {
-              'success': True,
-              'result': {
-                  'same_speed_fa0_fa1': same_speed,
-                  'uptime_less_5000': uptime_less_than_50000
-              }
-          }
-
-From the web UI, you can then create an Service Instance of ``SwissArmyKnifeService`` called ``process_payload1``, and add that instance in the workflow. When the service instance is called, eNMS will automatically use the ``process_payload1`` method, and process the payload accordingly.

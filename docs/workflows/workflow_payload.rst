@@ -9,7 +9,7 @@ If a job ``A`` must be executed before a job ``B`` in the workflow, eNMS must be
 
 In the example below, the job ``process_payload1`` uses the results from ``get_facts`` and ``get_interfaces``. By creating two prerequisite edges (from ``get_facts`` to ``process_payload1`` and from ``get_interfaces`` to ``process_payload1``), we ensure that eNMS will not run ``process_payload1`` until both ``get_interfaces`` and ``get_config`` have been executed.
 
-.. image:: /_static/workflows/other_workflows/payload_transfer_workflow.png
+.. image:: /_static/workflows/payload_transfer_workflow.png
    :alt: Payload Transfer Workflow
    :align: center
 
@@ -121,13 +121,17 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 ::
 
     def process_payload1(self, payload: dict, device: Device) -> dict:
-        get_facts = payload["get_facts"]["results"]["devices"][device.name]
         # we use the name of the device to get the result for that particular
         # device.
-        # all of the other inventory properties of the device are available
-        # to use, including custom properties.
+        get_facts = payload["get_facts"]["results"]["devices"][device.name]
+        get_interfaces = payload["get_interfaces"]["results"]["devices"][device.name]
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000
-        return {"success": True, "uptime_less_5000": uptime_less_than_50000}
+        mgmg1_is_up = get_interfaces["result"]["get_interfaces"]["Management1"]["is_up"]
+        return {
+            "success": True,
+            "uptime_less_5000": uptime_less_than_50000,
+            "Management1 is UP": mgmg1_is_up,
+        }
 
 
 This ``job`` function reuses the results of the Napalm getter ``get_facts`` (which is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.

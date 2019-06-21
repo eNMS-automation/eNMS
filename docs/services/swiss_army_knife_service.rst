@@ -33,15 +33,6 @@ Let's take a look at how the ``Swiss Army Knife Service`` is implemented:
     def job2(self, payload):
         return {'success': True, 'result': ''}
 
-     def process_payload1(self, payload: dict, device: Device) -> dict:
-         get_facts = payload["get_facts"]["results"]["devices"][device.name]
-         # we use the name of the device to get the result for that particular
-         # device.
-         # all of the other inventory properties of the device are available
-         # to use, including custom properties.
-         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000
-         return {"success": True, "uptime_less_5000": uptime_less_than_50000}
-
 The ``job`` function of ``SwissArmyKnifeService`` will run the class method of ``SwissArmyKnifeService`` with the same name as the instance itself.
 
 In other words, with the above code, you can create two instances of SwissArmyKnifeService from the web UI: one named "job1" and the other named "job2". The SwissArmyKnifeService class will take care of calling the right "job" function based on the name of the instance.

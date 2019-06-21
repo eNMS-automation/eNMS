@@ -106,13 +106,17 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def process_payload1(self, payload: dict, device: Device) -> dict:
-        get_facts = payload["get_facts"]["results"]["devices"][device.name]
         # we use the name of the device to get the result for that particular
         # device.
-        # all of the other inventory properties of the device are available
-        # to use, including custom properties.
+        get_facts = payload["get_facts"]["results"]["devices"][device.name]
+        get_interfaces = payload["get_interfaces"]["results"]["devices"][device.name]
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000
-        return {"success": True, "uptime_less_5000": uptime_less_than_50000}
+        mgmg1_is_up = get_interfaces["result"]["get_interfaces"]["Management1"]["is_up"]
+        return {
+            "success": True,
+            "uptime_less_5000": uptime_less_than_50000,
+            "Management1 is UP": mgmg1_is_up,
+        }
 
 
 class SwissArmyKnifeForm(ServiceForm):

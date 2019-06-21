@@ -6,5 +6,5 @@ Administration
    :maxdepth: 1
 
    credentials
-   access
+   RBAC
    database

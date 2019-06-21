@@ -1,6 +1,6 @@
-=================
-Role-based access
-=================
+=========================
+Role-based Access Control
+=========================
 
 When you create a new user from the :guilabel:`admin / User Management` page, you get to specify what the user can and cannot do.
 

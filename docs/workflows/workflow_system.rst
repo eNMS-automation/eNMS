@@ -5,6 +5,7 @@ Workflow System
 A workflow is comprised of one or more jobs that when followed from start to end will execute an activity, such as a software upgrade. These jobs are constructed into a directed graph instructing the machine which job is next. The jobs in the workflow can be either a service or another workflow. A service can range from a simple query to a more complex set of commands.
 
 Each job in eNMS returns a boolean value:
+
 - ``True`` if it ran successfully.
 - ``False`` otherwise.
 
@@ -15,13 +16,15 @@ Workflows are created and managed from the :guilabel:`Automation / Workflow Mana
 Workflow Management
 -------------------
 
-In the :guilabel:`Automation / Workflow Management` page, click on the button ``Add a new workflow`` and fill the workflow creation form.
+In the :guilabel:`Automation / Workflow Management` page, click on the button ``Create`` and fill the workflow creation form.
 The new workflow will be automatically added to the table of workflows.
 From the same page, workflows can be edited, deleted, and duplicated. They can also be ran, and their result logs examined.
 
 .. image:: /_static/workflows/workflow_system/workflow_management.png
    :alt: Workflow management
    :align: center
+
+Workflows can also be created from the Workflow Builder page.
 
 Workflow Builder
 ----------------
@@ -50,6 +53,7 @@ The ``general right-click menu`` contains the following entries:
    :align: center
 
 From the ``job-specific right-click menu``, you can:
+
 - Edit a job (service or workflow)
 - Run a job (service or workflow)
 - Display the Results
@@ -79,26 +83,30 @@ A job can also be configured to "retry"  if the results returned are not as desi
 Workflow devices
 ----------------
 
-When you create a workflow, just like with services instances, the form will also contain multiple selection fields for you to select "target devices". There is also an option to select 'Use Workflow Targets'; if this is selected, the devices for the workflow will be used for execution.  If it is not selected, the devices selected at the individual service level will be used for execution.
+When you create a workflow, just like with services instances, the form will also contain multiple selection fields for you to select "target devices", as well as an option ``Use Workflow Targets``:
 
-In "Use service targets" mode, jobs run on their own targets. A job is considered successful if it ran successfully on all of its targets (if it fails at least one target, it failed).
+- If selected, the devices for the workflow will be used for execution.
+- If not selected, the devices selected at the individual service level will be used for execution.
+
+
+If ``Use Workflow Targets`` is unticked, jobs will run on their own targets. A job is considered successful if it ran successfully on all of its targets (if it fails on at least one target, it is considered to have failed).
 The "Use service targets" mode can be used for workflows where services have different targets (for example, a first service would run on devices A, B, C and the next one on devices D, E).
 
-In "Use workflow targets" mode, the workflow will run on its own targets (all devices configured at service level are ignored). Devices are independent from each other: one device may run on all jobs in the workflow if it is successful while another one could stop at the first step: they run the workflow independently and will likely follow different path in the workflow depending on whether they fail or pass services thoughout the workflow.
+If ``Use Workflow Targets`` is ticked, the workflow will run on its own targets (all devices configured at service level are ignored). Devices are independent from each other: one device may run on all jobs in the workflow if it is successful while another one could stop at the first step: they run the workflow independently and will likely follow different path in the workflow depending on whether they fail or pass services thoughout the workflow.
 
 Success of a Workflow
 ---------------------
 
-The behavior of the workflow is such that the workflow is considered to have an overall Success status if the END job is reached (whether it be by a ``Success`` or ``Failure`` edge). So, the END job should only be reached by an edge when the overall status of the workflow is considered successful. If a particular service job fails, then the workflow should just stop there (with the workflow thus having an overall Failure status), or it should call a cleanup/remediation job (after which the workflow will just stop there).
+The behavior of the workflow is such that the workflow is considered to have an overall Success status if the END job is reached. So, the END job should only be reached by an edge when the overall status of the workflow is considered successful. If a particular service job fails, then the workflow should just stop there (with the workflow thus having an overall Failure status), or it should call a cleanup/remediation job (after which the workflow will just stop there).
 
 Position saving
 ---------------
 
-Note that ``position data`` in the Workflow Builder graph is saved to the database only when the user navigates away from the graph.
+Note that the positions of the jobs of a workflow in the Workflow Builder page is saved to the database only when the user navigates away from the workflow.
 - Upon leaving the Workflow Builder page.
 - When switching to another workflow.
 
-All other changes to the Workflow Builder graph are saved immediately.
+All other changes to the Workflow Builder are saved immediately.
 
 Automatic refresh
 -----------------

@@ -65,6 +65,7 @@ class PythonSnippetService(Service):
             "payload": payload,
             "_code_result_": _code_result_,
             "get_var": get_var,
+            "log": self.logs.append,
             "save_result": save_result,
             "set_var": set_var,
         }

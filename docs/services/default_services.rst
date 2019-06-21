@@ -61,19 +61,11 @@ Netmiko Configuration Service
 -----------------------------
 
 Uses Netmiko to send a list of commands to be configured on the devices.
-The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ``True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
-
-.. image:: /_static/services/default_services/netmiko_configuration.png
-   :alt: Netmiko Configuration service
-   :align: center
 
 Configuration parameters for creating this service instance:
 
 - All Netmiko parameters (see above)
 - ``Content`` Paste a configuration block of text here for applying to the target device(s).
-
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
@@ -82,10 +74,6 @@ Netmiko Data Extraction Service
 
 Uses Netmiko to send commands to a device and uses a regular expression for each command to capture the matching data to a user define variable name.
 The user defined variables are then used in subsequent services within a workflow and can be accessed from the UI form via: ``{{payload[data extraction service instance name]["result"][variable name]}}``
-
-.. image:: /_static/services/default_services/netmiko_validation.png
-   :alt: Netmiko Validation service
-   :align: center
 
 Configuration parameters for creating this service instance:
 - All Netmiko parameters (see above)
@@ -106,10 +94,6 @@ Netmiko File Transfer Service
 
 Uses Netmiko to send a file to a device, or retrieve a file from a device.
 
-.. image:: /_static/services/default_services/netmiko_file_transfer.png
-   :alt: Netmiko File Transfer service
-   :align: center
-
 Configuration parameters for creating this service instance:
 - All Netmiko parameters (see above)
 - ``Destination file`` Destination file; absolute path and filename to send the file to
@@ -125,10 +109,6 @@ Netmiko Prompts Service
 
 Similar to Netmiko Validation Service, but expects up to 3 interactive prompts for your remote command, such as 'Are you sure? Y/N'.
 This service allows the user to specify the expected prompt and response to send for it.
-
-.. image:: /_static/services/default_services/netmiko_prompts.png
-   :alt: Netmiko Prompts service
-   :align: center
 
 Configuration parameters for creating this service instance:
 - All Netmiko parameters (see above)
@@ -151,10 +131,6 @@ Uses Netmiko to send commands to a device and validates the output to determine 
 
 There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
 
-.. image:: /_static/services/default_services/netmiko_validation.png
-   :alt: Netmiko Validation service
-   :align: center
-
 Configuration parameters for creating this service instance:
 - All Netmiko parameters (see above)
 - All Validation parameters (see above)
@@ -167,10 +143,6 @@ Napalm Configuration service
 ----------------------------
 
 Uses Napalm to configure a device.
-
-.. image:: /_static/services/default_services/napalm_configuration.png
-   :alt: Napalm Configuration service
-   :align: center
 
 Configuration parameters for creating this service instance:
 - All Napalm parameters (see above)
@@ -186,10 +158,6 @@ Napalm Rollback Service
 
 Use Napalm to rollback a configuration.
 
-.. image:: /_static/services/default_services/napalm_rollback.png
-   :alt: Napalm Rollback service
-   :align: center
-
 Configuration parameters for creating this service instance:
 - All Napalm parameters (see above)
 
@@ -197,10 +165,6 @@ Napalm Getters service
 ----------------------
 
 Uses Napalm to retrieve a list of getters whose output is displayed in the logs. The output can be validated with a command / pattern mechanism like the ``Netmiko Validation Service``.
-
-.. image:: /_static/services/default_services/napalm_getters.png
-   :alt: Napalm Getters service
-   :align: center
 
 Configuration parameters for creating this service instance:
 - All Validation parameters (see above)
@@ -214,10 +178,6 @@ Napalm Ping service
 
 Uses Napalm to connect to the selected target devices and performs a ping to a designated target. The output contains ping round trip time statistics.
 Note that the iosxr driver does not support ping, but you can use the ios driver in its place by not selecting ``use_device_driver``.
-
-.. image:: /_static/services/default_services/napalm_ping.png
-   :alt: Napalm Ping service
-   :align: center
 
 Configuration parameters for creating this service instance:
 - All Napalm parameters (see above)
@@ -251,10 +211,6 @@ An ``Ansible Playbook`` service sends an ansible playbook to the devices.
 The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
 An option allows inventory devices to be selected, such that the Ansible Playbook is run on each device in the selection. Another option allows device properties from the inventory to be passed to the ansible playbook as a dictionary.
 
-.. image:: /_static/services/default_services/ansible_playbook.png
-   :alt: Ansible Playbook service
-   :align: center
-
 Configuration parameters for creating this service instance:
 - All Validation parameters (see above)
 - ``Has targets`` If checked, indicates that the selected inventory devices should be passed to the playbook as its inventory using -i. Alternatively, if not checked, the ansible playbook can reference its own inventory internally using host: inventory_group and by providing an alternative inventory
@@ -271,10 +227,6 @@ ReST Call Service
 Send a ReST call (GET, POST, PUT or DELETE) to a URL with optional payload.
 The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
 
-.. image:: /_static/services/default_services/rest_call.png
-   :alt: ReST Call service
-   :align: center
-
 Configuration parameters for creating this service instance:
 - All Validation parameters (see above)
 - ``Has targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
@@ -286,7 +238,6 @@ Configuration parameters for creating this service instance:
 - ``Timeout`` Requests library timeout, which is the Float value in seconds to wait for the server to send data before giving up
 - ``Username`` Username to use for authenticating with the ReST server
 - ``Password`` Password to use for authenticating with the ReST server
-- Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
@@ -297,10 +248,6 @@ Update the properties of one or several devices in eNMS inventory.
 This service takes a dictionary as input: all key/value pairs of that dictionary are used to update properties in the inventory.
 Example: if you create a workflow to perform the upgrade of a device, you might want to change the value of the ``operating_system`` property in eNMS to keep the inventory up-to-date.
 
-.. image:: /_static/services/default_services/update_inventory.png
-   :alt: Update Inventory service
-   :align: center
-
 Configuration parameters for creating this service instance:
 - ``Update dictionary`` Dictionary of properties to be updated. For example, the dictionary to update the "Model" and operating_system property of all target devices: ``{"model":"ao", "operating_system":"13.4.2"}``.
 
@@ -308,10 +255,6 @@ Generic File Transfer Service
 -----------------------------
 
 Transfer a single file to/from the eNMS server to the device using either SFTP or SCP.
-
-.. image:: /_static/services/default_services/generic_file_transfer.png
-   :alt: Generic File Transfer service
-   :align: center
 
 Configuration parameters for creating this service instance:
 - ``Direction`` Get or Put the file from/to the target device's filesystem
@@ -330,10 +273,6 @@ Ping Service
 
 Implements a Ping from this automation server to the selected devices from inventory using either ICMP or TCP.
 
-.. image:: /_static/services/default_services/ping_service.png
-   :alt: Ping service
-   :align: center
-
 Configuration parameters for creating this service instance:
 - ``Protocol``: Use either ICMP or TCP packets to ping the devices
 - ``Ports`` Which ports to ping (should be formatted as a list of ports separated by a comma, for example "22,23,49").
@@ -346,10 +285,6 @@ UNIX Command Service
 --------------------
 
 Implements a UNIX command to the target device.
-
-.. image:: /_static/services/default_services/unix_command_service.png
-   :alt: UNIX Command service
-   :align: center
 
 Configuration parameters for creating this service instance:
 - ``Command``: UNIX command to run on the device

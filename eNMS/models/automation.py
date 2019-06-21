@@ -159,7 +159,7 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def init_run(self, parent: Optional["Workflow"]) -> None:
+    def init_run(self, parent: Optional["Job"]) -> None:
         current_job = parent or self
         self.is_running, self.state = True, {}
         if parent:
@@ -173,7 +173,7 @@ class Job(AbstractBase):
         self,
         runtime: str,
         results: dict,
-        parent: Optional["Workflow"],
+        parent: Optional["Job"],
         task: Optional["Task"],
     ) -> None:
         current_job = parent or self
@@ -191,7 +191,7 @@ class Job(AbstractBase):
         self,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
-        parent: Optional["Workflow"] = None,
+        parent: Optional["Job"] = None,
         task: Optional["Task"] = None,
     ) -> Tuple[dict, str]:
         current_job = parent or self
@@ -234,7 +234,7 @@ class Service(Job):
         self,
         payload: dict,
         device: Optional["Device"] = None,
-        parent: Optional["Workflow"] = None,
+        parent: Optional["Job"] = None,
     ) -> Tuple[dict, list]:
         logs = []
         try:
@@ -266,7 +266,7 @@ class Service(Job):
         self,
         payload: dict,
         targets: Optional[Set["Device"]] = None,
-        parent: Optional["Workflow"] = None,
+        parent: Optional["Job"] = None,
     ) -> Tuple[dict, list]:
         if not targets:
             return self.get_results(payload)
@@ -321,7 +321,7 @@ class Service(Job):
         self,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
-        parent: Optional["Workflow"] = None,
+        parent: Optional["Job"] = None,
     ) -> dict:
         current_job = parent or self
         results: dict = {"results": {}, "success": False}
@@ -610,7 +610,7 @@ class Workflow(Job):
         self,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
-        parent: Optional["Workflow"] = None,
+        parent: Optional["Job"] = None,
     ) -> dict:
         self.state = {"jobs": {}}
         jobs: List[Job] = [self.jobs[0]]

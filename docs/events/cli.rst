@@ -2,7 +2,7 @@
 CLI interface
 =============
 
-eNMS has a CLI interface available for developers, with the following operations:
+eNMS has a CLI interface with the following operations:
 
 Fetch an object from the database
 ----------------------------------

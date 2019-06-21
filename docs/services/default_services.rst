@@ -44,7 +44,7 @@ Parameters common to the services that use netmiko
 
 - ``Privileged mode`` If checked, Netmiko should enter enable mode on the device before applying the above configuration block 
 - ``Driver`` Which Netmiko driver to use when connecting to the device
-- ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
+- ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used. By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device. A **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69.
 - ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
 - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
 - ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
@@ -62,7 +62,7 @@ Netmiko Configuration Service
 
 Uses Netmiko to send a list of commands to be configured on the devices.
 The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
+By default, this property is set to ``True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
 If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
 
 .. image:: /_static/services/default_services/netmiko_configuration.png
@@ -71,8 +71,9 @@ If this property is disabled, eNMS will use the ``driver`` property defined in t
 
 Configuration parameters for creating this service instance:
 
-- ``Content`` Paste a configuration block of text here for applying to the target device(s)
-+ Netmiko parameters
+- All Netmiko parameters (see above)
+- ``Content`` Paste a configuration block of text here for applying to the target device(s).
+
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
@@ -80,16 +81,14 @@ Netmiko Data Extraction Service
 -------------------------------
 
 Uses Netmiko to send commands to a device and uses a regular expression for each command to capture the matching data to a user define variable name.
-The user defined variables are then used in subsequent services within a workflow and can be accessed from the UI form via: {{payload[data extraction service instance name]["result"][variable name]}}
-The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
+The user defined variables are then used in subsequent services within a workflow and can be accessed from the UI form via: ``{{payload[data extraction service instance name]["result"][variable name]}}``
 
 .. image:: /_static/services/default_services/netmiko_validation.png
    :alt: Netmiko Validation service
    :align: center
 
 Configuration parameters for creating this service instance:
+- All Netmiko parameters (see above)
 - ``Variable1`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
 - ``Command1`` CLI command to send to the device via SSH
 - ``Regular Expression1`` Regular expression match to use in filtering the response data from the command
@@ -99,23 +98,20 @@ Configuration parameters for creating this service instance:
 - ``Variable3`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
 - ``Command3`` CLI command to send to the device via SSH
 - ``Regular Expression3`` Regular expression match to use in filtering the response data from the command
-+ Netmiko Parameters
 
-.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the ``command`` input field of its configuration form.
 
 Netmiko File Transfer Service
 -----------------------------
 
 Uses Netmiko to send a file to a device, or retrieve a file from a device.
-The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``FILE_TRANSFER_MAP`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L141).
 
 .. image:: /_static/services/default_services/netmiko_file_transfer.png
    :alt: Netmiko File Transfer service
    :align: center
 
 Configuration parameters for creating this service instance:
+- All Netmiko parameters (see above)
 - ``Destination file`` Destination file; absolute path and filename to send the file to
 - ``Direction`` Upload or Download from the perspective of running on the device
 - ``disable_md5`` Disable checksum validation following the transfer
@@ -123,7 +119,6 @@ Configuration parameters for creating this service instance:
 - ``inline_transfer`` Cisco specific method of transferring files between internal components of the device
 - ``overwrite_file`` If checked, overwrite the file at the destination if it exists
 - ``Source file`` Source absolute path and filename of the file to send
-+ Netmiko parameters
 
 Netmiko Prompts Service
 -----------------------
@@ -136,6 +131,8 @@ This service allows the user to specify the expected prompt and response to send
    :align: center
 
 Configuration parameters for creating this service instance:
+- All Netmiko parameters (see above)
+- All Validation parameters (see above)
 - ``Command`` CLI command to send to the device
 - ``confirmation1`` first expected confirmation question prompted by the device
 - ``response1`` response to first confirmation question prompted by the device
@@ -145,20 +142,12 @@ Configuration parameters for creating this service instance:
 - ``response3`` response to third confirmation question prompted by the device
 - ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
 
-+ Validation parameters
-+ Netmiko parameters
-
-
-
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
 Netmiko Validation Service
 --------------------------
 
 Uses Netmiko to send commands to a device and validates the output to determine the state of that device. See the ``Workflow`` section for examples of how it is used in a workflow.
-The netmiko driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69).
 
 There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
 
@@ -167,10 +156,10 @@ There is a ``command`` field and a ``pattern`` field. eNMS will check if the exp
    :align: center
 
 Configuration parameters for creating this service instance:
+- All Netmiko parameters (see above)
+- All Validation parameters (see above)
 - ``Command`` CLI command to send to the device
 - ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
-+ Netmiko Parameters
-+ Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
@@ -178,20 +167,17 @@ Napalm Configuration service
 ----------------------------
 
 Uses Napalm to configure a device.
-The napalm driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 
 .. image:: /_static/services/default_services/napalm_configuration.png
    :alt: Napalm Configuration service
    :align: center
 
 Configuration parameters for creating this service instance:
+- All Napalm parameters (see above)
 - ``Action`` There are two types of operations:
     - ``Load merge``: add the service configuration to the existing configuration of the target
     - ``Load replace``: replace the configuration of the target with the service configuration
 - ``Content`` Paste a configuration block of text here for applying to the target device(s)
-- + Napalm Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
@@ -199,32 +185,26 @@ Napalm Rollback Service
 -----------------------
 
 Use Napalm to rollback a configuration.
-The napalm driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 
 .. image:: /_static/services/default_services/napalm_rollback.png
    :alt: Napalm Rollback service
    :align: center
 
 Configuration parameters for creating this service instance:
-- Napalm parameters
+- All Napalm parameters (see above)
 
 Napalm Getters service
 ----------------------
 
 Uses Napalm to retrieve a list of getters whose output is displayed in the logs. The output can be validated with a command / pattern mechanism like the ``Netmiko Validation Service``.
-The napalm driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 
 .. image:: /_static/services/default_services/napalm_getters.png
    :alt: Napalm Getters service
    :align: center
 
 Configuration parameters for creating this service instance:
-- Napalm Parameters
-- Validation Parameters
+- All Validation parameters (see above)
+- All Napalm parameters (see above)
 - ``Getters`` Napalm getters (standard retrieval APIs) are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix)
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content_match` input field of its configuration form.
@@ -233,9 +213,6 @@ Napalm Ping service
 -------------------
 
 Uses Napalm to connect to the selected target devices and performs a ping to a designated target. The output contains ping round trip time statistics.
-The napalm driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
 Note that the iosxr driver does not support ping, but you can use the ios driver in its place by not selecting ``use_device_driver``.
 
 .. image:: /_static/services/default_services/napalm_ping.png
@@ -243,7 +220,7 @@ Note that the iosxr driver does not support ping, but you can use the ios driver
    :align: center
 
 Configuration parameters for creating this service instance:
-- Napalm parameters
+- All Napalm parameters (see above)
 - ``count``: Number of ping packets to send
 - ``size`` Size of the ping packet payload to send in bytes
 - ``Source IP address`` Override the source ip address of the ping packet with this provided IP
@@ -255,17 +232,13 @@ Napalm Traceroute service
 -------------------------
 
 Uses Napalm to connect to the selected target devices and performs a traceroute to a designated target.
-The napalm driver used for this service depends on the value of the property ``use_device_driver``.
-By default, this property is set to ```True`` and eNMS uses the driver defined in the ``napalm_driver`` property of the device.
-If this property is disabled, eNMS will use the ``driver`` property defined in the service instead (a **driver** can be selected among all available napalm drivers. The list of drivers is built upon napalm ``SUPPORTED DRIVERS`` (https://github.com/napalm-automation/napalm/blob/develop/napalm/_SUPPORTED_DRIVERS.py).
-Note that the iosxr driver does not support ping, but you can use the ios driver in its place by not selecting ``use_device_driver``.
 
 .. image:: /_static/services/default_services/napalm_traceroute.png
    :alt: Napalm Traceroute service
    :align: center
 
 Configuration parameters for creating this service instance:
-- Napalm parameters
+- All Napalm parameters (see above)
 - ``Source IP address`` Override the source ip address of the ping packet with this provided IP
 - ``Timeout`` Seconds to wait before declaring timeout
 - ``ttl`` Time to Live parameter, which tells routers when to discard this packet because it has been in the network too long (too many hops)
@@ -283,12 +256,12 @@ An option allows inventory devices to be selected, such that the Ansible Playboo
    :align: center
 
 Configuration parameters for creating this service instance:
+- All Validation parameters (see above)
 - ``Has targets`` If checked, indicates that the selected inventory devices should be passed to the playbook as its inventory using -i. Alternatively, if not checked, the ansible playbook can reference its own inventory internally using host: inventory_group and by providing an alternative inventory
 - ``playbook_path`` path and filename to the Ansible Playbook. For example, if the playbooks subdirectory is located inside the eNMS project directory:  playbooks/juniper_get_facts.yml
 - ``arguments`` ansible-playbook command line options, which are documented here: (https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
 - ``options`` Additional --extra-vars to be passed to the playbook using the syntax {'key1':value1, 'key2': value2}.  All inventory properties are automatically passed to the playbook using --extra-vars (if pass_device_properties is selected below). These options are appended.
 - ``Pass device properties to the playbook`` Pass inventory properties using --extra-vars to the playbook if checked (along with the options dictionary provided above).
-- Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `playbook_path` and `content_match` input fields of its configuration form.
 
@@ -303,6 +276,7 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
    :align: center
 
 Configuration parameters for creating this service instance:
+- All Validation parameters (see above)
 - ``Has targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
 - ``Type of call`` ReST type operation to be performed: GET, POST, PUT, DELETE
 - ``URL`` URL to make the ReST connection to

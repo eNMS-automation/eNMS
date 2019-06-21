@@ -24,7 +24,7 @@ class IterationService(Service):
         "Job", primaryjoin="Job.id == IterationService.iterated_job_id"
     )
     origin_of_values = Column(String(SMALL_STRING_LENGTH), default="iteration_values")
-    yaql_query = Column(String(SMALL_STRING_LENGTH), default="")
+    yaql_query_values = Column(String(SMALL_STRING_LENGTH), default="")
     iteration_values = Column(MutableDict.as_mutable(PickleType), default={})
     per_device_values = Column(Boolean, default=False)
 
@@ -41,11 +41,11 @@ class IterationService(Service):
             values = self.iteration_values
         else:
             engine = factory.YaqlFactory().create()
-            values = engine(self.yaql_query).evaluate(data=payload)
+            values = engine(self.yaql_query_values).evaluate(data=payload)
         if self.per_device_values:
-            values = self.iteration_values[device.name]
+            values = values[device.name]
         else:
-            values = self.iteration_values
+            values = values
         results = {}
         for value in values:
             payload["iteration_variable"] = value
@@ -69,5 +69,5 @@ class IterationForm(ServiceForm):
         )
     )
     iteration_values = DictField()
-    yaql_query = StringField()
+    yaql_query_values = StringField()
     per_device_values = BooleanField()

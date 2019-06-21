@@ -109,6 +109,14 @@ function switchToWorkflow(workflowId) {
 }
 
 /**
+ * Restart Workflow from selected job.
+ */
+// eslint-disable-next-line
+function restartWorkflow() {
+  console.log("test")
+}
+
+/**
  * Add an existing job to the workflow.
  */
 // eslint-disable-next-line
@@ -304,6 +312,7 @@ Object.assign(action, {
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => runJob(job.id),
   Results: (job) => showResultsPanel(job.id, job.label),
+  "Restart Workflow From Here": showPanel("restart_workflow"),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () => showResultsPanel(workflow.id, workflow.name),

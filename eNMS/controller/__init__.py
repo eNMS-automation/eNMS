@@ -423,6 +423,9 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                 "description": "Add devices to the payload",
                 "source_code": (
                     "set_var('devices', ['Washington', 'Dallas'])\n"
+                    "set_var('iteration_devices',\n"
+                    "{'Washington': ['Loopback101', 'Loopback15'],\n"
+                    "'Austin': ['Loopback9', 'Loopback1000']})\n"
                     "save_result(True, {})"
                 ),
             },
@@ -446,48 +449,63 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         factory("NetmikoValidationService", **{
             "name": "Iterated_netmiko_service",
             "devices": devices,
-            "description": 'Check the iteration mechanism',
+            "description": 'Check the iteration mechanism (interfaces)',
             "waiting_time": 0,
             "vendor": "Arista",
             "operating_system": "eos",
             "driver": "arista_eos",
-            "command": "show vrf",
-            "content_match": "{{payload['iteration_variable']}}",
+            "command": "show interface {{payload['iteration_variable']}}",
+            "content_match": "255.255.255.255",
             "fast_cli": True,
             "timeout": 3,
         })
         Session.commit()
-        services.append(factory("IterationService", **{
-            "name": "Iteration_service",
-            "origin_of_targets": "iteration",
-            "iterated_job": fetch("Service", name="Iterated_netmiko_service").id,
-            "description": "Test the iteration mechanism",
-            "devices": [fetch("Device", name="Washington").id],
-            "iteration_values": {"a": 0, "b": 0},
-            "multiprocessing": True,
-        }))
+        for service in (
+            {
+                "name": "Iteration_service_simple",
+                "origin_of_targets": "iteration",
+                "origin_of_values": "iteration_values",
+                "iterated_job": fetch("Service", name="Iterated_netmiko_service").id,
+                "description": "Test the iteration mechanism (Iteration values)",
+                "devices": devices,
+                "iteration_values": {"Loopback11": 0, "Loopback15": 0},
+            },
+            {
+                "name": "Iteration_service_yaql",
+                "origin_of_targets": "iterated",
+                "origin_of_values": "yaql",
+                "yaql_query_values": "$.variables.iteration_devices",
+                "per_device_values": True,
+                "iterated_job": fetch("Service", name="Iterated_netmiko_service").id,
+                "description": "Test the iteration mechanism (YaQL values)",
+                "iteration_values": {"Loopback11": 0, "Loopback15": 0},
+            },
+        ):
+            services.append(factory("IterationService", **service))  # type: ignore
         workflow = factory(
             "Workflow",
             **{
                 "name": "YaQL_test_worflow",
                 "description": "Test YaQL device selection mechanism",
+                "use_workflow_targets": False,
             },
         )
         Session.commit()
         workflow.jobs.extend(services)
-        edges = [(0, 2), (2, 3), (3, 4), (4, 1)]
+        edges = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 1)]
         for x, y in edges:
-            factory(
-                "WorkflowEdge",
-                **{
-                    "name": f"{workflow.name} {x} -> {y}",
-                    "workflow": workflow.id,
-                    "subtype": "success",
-                    "source": workflow.jobs[x].id,
-                    "destination": workflow.jobs[y].id,
-                },
-            )
-        positions = [(-20, 0), (30, 0), (0, -20), (0, 0), (0, 20)]
+            for edge_type in ("success", "failure"):
+                factory(
+                    "WorkflowEdge",
+                    **{
+                        "name": f"{edge_type}: {workflow.name} {x} -> {y}",
+                        "workflow": workflow.id,
+                        "subtype": edge_type,
+                        "source": workflow.jobs[x].id,
+                        "destination": workflow.jobs[y].id,
+                    },
+                )
+        positions = [(-20, 0), (20, 0), (0, -15), (0, -5), (0, 5), (0, 15)]
         for index, (x, y) in enumerate(positions):
             workflow.jobs[index].positions["YaQL_test_worflow"] = x * 10, y * 10
 

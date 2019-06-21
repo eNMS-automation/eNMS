@@ -267,7 +267,7 @@ class Service(Job):
         payload: dict,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
-    ) -> Tuple[dict, list]:
+    ) -> Tuple[dict, list]
         if not targets:
             return self.get_results(payload)
         else:
@@ -337,7 +337,6 @@ class Service(Job):
             if not parent:
                 Session.commit()
             attempt, logs = self.device_run(payload or {}, targets, parent)
-            Session.rollback()
             Session.commit()
             current_job.logs.extend(logs)
             if targets:
@@ -629,7 +628,7 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            valid_devices = self.compute_valid_devices(job, allowed_devices, payload)
+            valid_devices = self.compute_valid_devices(job, allowed_devices, results["results"])
             job_results, _ = job.run(
                 results["results"], targets=valid_devices, parent=self
             )

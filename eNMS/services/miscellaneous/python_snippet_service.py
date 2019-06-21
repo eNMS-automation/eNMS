@@ -91,6 +91,7 @@ class PythonSnippetService(Service):
                 "success": False,
                 "result": {"error": "Result not set by user code on service instance"},
             }
+
         return _code_result_
 
 

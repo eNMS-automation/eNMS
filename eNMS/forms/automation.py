@@ -83,6 +83,13 @@ class CompareResultsForm(BaseForm):
     compare_with = SelectField("Compare Against", choices=())
 
 
+class RestartWorkflowForm(BaseForm):
+    template = "base"
+    action = "restartWorkflow"
+    form_type = HiddenField(default="restart_workflow")
+    payload = SelectField("Payload", choices=())
+
+
 class AddJobsForm(BaseForm):
     template = "base"
     action = "addJobsToWorkflow"

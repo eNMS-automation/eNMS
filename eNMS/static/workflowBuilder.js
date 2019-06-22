@@ -109,20 +109,33 @@ function switchToWorkflow(workflowId) {
 }
 
 /**
- * Restart Workflow from selected job.
+ * Display "Restart Workflow" panel.
  */
 // eslint-disable-next-line
-function restartWorkflow(job) {
-  showPanel("restart_workflow", job.id)
-  call(`/get_job_results/${job.id}`, function(results) {
-    Object.keys(results).forEach((option) => {
-      $(`#payload_version-${job.id}`).append(
-        $("<option></option>")
-          .attr("value", option)
-          .text(option)
-      );
+function showRestartPanel(job) {
+  showPanel("restart_workflow", job.id, function() {
+    call(`/get_job_results/${workflow.id}`, function(results) {
+      Object.keys(results).forEach((option) => {
+        $(`#payload_version-${job.id}`).append(
+          $("<option></option>")
+            .attr("value", option)
+            .text(option)
+        );
+      });
+      $(`#payload_version-${job.id}`).selectpicker("refresh");
     });
-    $(`#payload_version-${job.id}`).selectpicker("refresh");
+  });
+}
+
+/**
+ * Restart Workflow.
+ */
+// eslint-disable-next-line
+function restartWorkflow(id) {
+  const version = $(`#payload_version-${id}`).val();
+  call(`/restart_workflow/${workflow.id}/${id}/${version}`, function(workflow) {
+    alertify.notify(`Workflow '${workflow.name}' started.`, "success", 5);
+    getWorkflowState();
   });
 }
 
@@ -322,7 +335,7 @@ Object.assign(action, {
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => runJob(job.id),
   Results: (job) => showResultsPanel(job.id, job.label),
-  "Restart Workflow": (job) => restartWorkflow(job),
+  "Restart Workflow": (job) => showRestartPanel(job),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () => showResultsPanel(workflow.id, workflow.name),

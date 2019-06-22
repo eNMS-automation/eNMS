@@ -99,10 +99,24 @@ class AutomationController(BaseController):
         for job in fetch_all("Job"):
             job.is_running = False
 
+    def restart_workflow(self, workflow_id: int, job_id: int, version: str) -> dict:
+        workflow = fetch("Workflow", id=workflow_id)
+        payload = workflow.results[version]
+        if workflow.is_running:
+            return {"error": "Workflow is already running."}
+        self.scheduler.add_job(
+            id=self.get_time(),
+            func=threaded_job,
+            run_date=datetime.now(),
+            args=[workflow_id, None, None, payload, job_id],
+            trigger="date",
+        )
+        return workflow.serialized
+
     def run_job(self, job_id: int) -> dict:
         job = fetch("Job", id=job_id)
         if job.is_running:
-            return {"error": "Job is already running."}
+            return {"error": f"{job.type} is already running."}
         self.scheduler.add_job(
             id=self.get_time(),
             func=threaded_job,

@@ -446,19 +446,22 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         ):
             instance = factory(service.pop("type"), **service)  # type: ignore
             services.append(instance)
-        factory("NetmikoValidationService", **{
-            "name": "Iterated_netmiko_service",
-            "devices": devices,
-            "description": 'Check the iteration mechanism (interfaces)',
-            "waiting_time": 0,
-            "vendor": "Arista",
-            "operating_system": "eos",
-            "driver": "arista_eos",
-            "command": "show interface {{payload['iteration_variable']}}",
-            "content_match": "255.255.255.255",
-            "fast_cli": True,
-            "timeout": 3,
-        })
+        factory(
+            "NetmikoValidationService",
+            **{
+                "name": "Iterated_netmiko_service",
+                "devices": devices,
+                "description": "Check the iteration mechanism (interfaces)",
+                "waiting_time": 0,
+                "vendor": "Arista",
+                "operating_system": "eos",
+                "driver": "arista_eos",
+                "command": "show interface {{payload['iteration_variable']}}",
+                "content_match": "255.255.255.255",
+                "fast_cli": True,
+                "timeout": 3,
+            },
+        )
         Session.commit()
         for service in (
             {

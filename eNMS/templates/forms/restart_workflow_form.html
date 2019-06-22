@@ -1,14 +1,11 @@
 {{ form.csrf_token() }}
 {{ form.form_type() }}
 <div class="modal-body">
-  <div class="col-md-10 col-sm-10 col-xs-12">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12">Payload :</label>
-    <div class="col-md-9 col-sm-9 col-xs-12">
-      {{ form.payload_version(class="form-control add-id") }}
-    </div>
-  </div>
-  <div class="row">
-    <button class="btn btn-default btn-file btn-id" value="restartWorkflow" style="width:100%;">
-      Run
-    </button>
+  <label class="control-label col-md-3 col-sm-3 col-xs-12">Payload Version</label>
+  <div class="col-md-9 col-sm-9 col-xs-12">
+    {{ form.payload_version(class="form-control add-id") }}
+  </div><br><br><br>
+  <center>
+    <button type="button" class="btn btn-primary btn-id add-id" value="restartWorkflow">Run</button>
+  </center>
 </div>

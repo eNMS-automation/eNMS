@@ -193,6 +193,7 @@ class Job(AbstractBase):
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
         task: Optional["Task"] = None,
+        origin: Optional["Job"] = None,
     ) -> Tuple[dict, str]:
         current_job = parent or self
         runtime = controller.get_time()
@@ -628,7 +629,9 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            valid_devices = self.compute_valid_devices(job, allowed_devices, results["results"])
+            valid_devices = self.compute_valid_devices(
+                job, allowed_devices, results["results"]
+            )
             job_results, _ = job.run(
                 results["results"], targets=valid_devices, parent=self
             )

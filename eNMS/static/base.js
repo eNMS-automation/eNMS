@@ -286,8 +286,8 @@ function createPanel(name, title, id, processing, type, duplicate) {
  * Generic Show Panel
  */
 // eslint-disable-next-line
-function showPanel(type, id) {
-  return createPanel(type, panelName[type] || type, id);
+function showPanel(type, id, processing) {
+  return createPanel(type, panelName[type] || type, id, processing);
 }
 
 /**
@@ -314,9 +314,7 @@ function showDeletionPanel(type, id, name) {
  * @param {bool} duplicate - Duplicate instance.
  */
 function preprocessForm(panel, id, type, duplicate) {
-  console.log(panel)
   panel.querySelectorAll(".add-id").forEach((el) => {
-    console.log("test", id)
     if (duplicate && ["name", "id"].includes(el.name)) return;
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });

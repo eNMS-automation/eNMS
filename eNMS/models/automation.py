@@ -198,7 +198,7 @@ class Job(AbstractBase):
         current_job = parent or self
         runtime = controller.get_time()
         self.init_run(parent)
-        results = self.build_results(payload, targets, parent)
+        results = self.build_results(payload, targets, parent, origin)
         self.results[runtime] = {**results, "logs": list(current_job.logs)}
         self.end_run(runtime, results, parent, task)
         return results, runtime
@@ -323,6 +323,7 @@ class Service(Job):
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
+        *other,
     ) -> dict:
         current_job = parent or self
         results: dict = {"results": {}, "success": False}
@@ -611,14 +612,17 @@ class Workflow(Job):
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
+        origin: Optional["Job"] = None,
     ) -> dict:
         self.state = {"jobs": {}}
-        jobs: List[Job] = [self.jobs[0]]
+        if not origin:
+            origin = self.jobs[0]
+        jobs: List[Job] = [origin]
         visited: Set = set()
-        results: dict = {"results": {}, "success": False}
+        results: dict = {"results": payload, "success": False}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            allowed_devices["Start"] = targets or self.compute_devices(payload)
+            allowed_devices[origin.name] = targets or self.compute_devices(payload)
         while jobs:
             job = jobs.pop()
             if any(

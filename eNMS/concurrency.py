@@ -13,8 +13,8 @@ def threaded_job(
 ) -> None:
     task = fetch("Task", allow_none=True, creation_time=aps_job_id)
     job = fetch("Job", id=job_id)
-    origin = fetch("Job", id=origin_id)
-    print(payload, origin)
+    origin = fetch("Job", allow_none=True, id=origin_id)
+    print("ttt"*100, payload)
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
     job.run(targets=targets, payload=payload, task=task, origin=origin)

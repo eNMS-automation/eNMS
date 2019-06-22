@@ -133,8 +133,8 @@ function showRestartPanel(job) {
 // eslint-disable-next-line
 function restartWorkflow(id) {
   const version = $(`#payload_version-${id}`).val();
-  call(`/restart_workflow/${workflow.id}/${id}/${version}`, function(workflow) {
-    alertify.notify(`Workflow '${workflow.name}' started.`, "success", 5);
+  call(`/restart_workflow/${workflow.id}/${id}/${version}`, function(name) {
+    alertify.notify(`Workflow '${name}' started.`, "success", 5);
     getWorkflowState();
   });
 }

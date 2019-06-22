@@ -43,7 +43,7 @@ class NetmikoRegexExtractionService(Service):
     __mapper_args__ = {"polymorphic_identity": "NetmikoRegexExtractionService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        netmiko_handler = self.netmiko_connection(device)
+        netmiko_handler = self.netmiko_connection(device, parent)
         result, success = {}, True
         for i in range(1, 4):
             variable = getattr(self, f"variable{i}")
@@ -64,7 +64,8 @@ class NetmikoRegexExtractionService(Service):
                 "output": output,
                 "value": match,
             }
-        netmiko_handler.disconnect()
+        if not parent:
+            netmiko_handler.disconnect()
         return {"result": result, "success": True}
 
 

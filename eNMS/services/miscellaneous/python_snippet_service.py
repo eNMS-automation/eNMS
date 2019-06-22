@@ -19,7 +19,12 @@ class PythonSnippetService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PythonSnippetService"}
 
-    def job(self, payload: dict, device: Optional[Device] = None, parent: Optional[Job] = None) -> dict:
+    def job(
+        self,
+        payload: dict,
+        device: Optional[Device] = None,
+        parent: Optional[Job] = None,
+    ) -> dict:
 
         try:
             code_object = compile(self.source_code, "user_python_code", "exec")

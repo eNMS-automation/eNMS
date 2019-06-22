@@ -58,7 +58,7 @@ class NetmikoPromptsService(Service):
     __mapper_args__ = {"polymorphic_identity": "NetmikoPromptsService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        netmiko_handler = self.netmiko_connection(device)
+        netmiko_handler = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
         self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
         result = netmiko_handler.send_command_timing(
@@ -77,7 +77,8 @@ class NetmikoPromptsService(Service):
                         self.response3, delay_factor=self.delay_factor
                     )
         match = self.sub(self.content_match, locals())
-        netmiko_handler.disconnect()
+        if not parent:
+            netmiko_handler.disconnect()
         return {
             "expected": match if self.validation_method == "text" else self.dict_match,
             "negative_logic": self.negative_logic,

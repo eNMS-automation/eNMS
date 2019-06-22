@@ -38,13 +38,14 @@ class NetmikoTextfsmExtractionService(Service):
     __mapper_args__ = {"polymorphic_identity": "NetmikoTextfsmExtractionService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        netmiko_handler = self.netmiko_connection(device)
+        netmiko_handler = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
         self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
         output = netmiko_handler.send_command(command, delay_factor=self.delay_factor)
         textfsm_template = TextFSM(StringIO(self.textfsm_template))
         result = textfsm_template.ParseText(output)
-        netmiko_handler.disconnect()
+        if not parent:
+            netmiko_handler.disconnect()
         return {"result": result, "output": output, "success": True}
 
 

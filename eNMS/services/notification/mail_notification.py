@@ -23,7 +23,12 @@ class MailNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
 
-    def job(self, payload: dict, device: Optional[Device] = None, parent: Optional[Job] = None) -> dict:
+    def job(
+        self,
+        payload: dict,
+        device: Optional[Device] = None,
+        parent: Optional[Job] = None,
+    ) -> dict:
         controller.send_email(
             self.sub(self.title, locals()),
             self.sub(self.body, locals()),

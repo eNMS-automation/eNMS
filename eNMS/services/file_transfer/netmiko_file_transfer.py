@@ -41,7 +41,7 @@ class NetmikoFileTransferService(Service):
     __mapper_args__ = {"polymorphic_identity": "NetmikoFileTransferService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        netmiko_handler = self.netmiko_connection(device)
+        netmiko_handler = self.netmiko_connection(device, parent)
         self.logs.append("Transferring file {self.source_file} on {device.name}")
         source = self.sub(self.source_file, locals())
         destination = self.sub(self.destination_file, locals())
@@ -55,7 +55,8 @@ class NetmikoFileTransferService(Service):
             disable_md5=self.disable_md5,
             inline_transfer=self.inline_transfer,
         )
-        netmiko_handler.disconnect()
+        if not parent:
+            netmiko_handler.disconnect()
         return {"success": True, "result": transfer_dict}
 
 

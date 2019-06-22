@@ -89,10 +89,6 @@ class Job(AbstractBase):
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])
 
-    def __init__(self, **kwargs: Any) -> None:
-        self.connections_cache = {}
-        super().__init__(**kwargs)
-
     @hybrid_property
     def status(self) -> str:
         return "Running" if self.is_running else "Idle"
@@ -180,6 +176,13 @@ class Job(AbstractBase):
         parent: Optional["Job"],
         task: Optional["Task"],
     ) -> None:
+        for library in ("netmiko", "napalm"):
+            connections = controller.connections_cache[library].pop(self.name, None)
+            if not connections:
+                continue
+            for device, conn in connections.items():
+                info(f"Closing Netmiko Connection to {device}")
+                conn.disconnect() if library == "netmiko" else conn.close()
         current_job = parent or self
         current_job.logs.append(f"{self.type} {self.name}: Finished.")
         self.is_running, self.state = False, {}
@@ -247,12 +250,12 @@ class Service(Job):
                 log = f"Running {self.type} on {device.name}."
                 info(log)
                 logs.append(log)
-                results = self.job(payload, device)
+                results = self.job(payload, device, parent)
                 success = "SUCCESS" if results["success"] else "FAILURE"
                 logs.append(f"Finished running service on {device.name}. ({success})")
             else:
                 info(f"Running {self.type}")
-                results = self.job(payload)
+                results = self.job(payload, parent)
         except Exception:
             if device:
                 logs.append(f"Finished running service on {device.name}. (FAILURE)")
@@ -409,8 +412,10 @@ class Service(Job):
         )
 
     def netmiko_connection(self, device: "Device", parent: "Job") -> ConnectHandler:
-        if parent and parent.connections_cache.get(device):
-            return parent.connections_cache[device]
+        if getattr(parent, "name", None) in controller.connections_cache["netmiko"]:
+            parent_connection = controller.connections_cache["netmiko"].get(parent.name)
+            if parent_connection and device.name in parent_connection:
+                return parent_connection[device.name]
         username, password = self.get_credentials(device)
         netmiko_handler = ConnectHandler(
             device_type=(
@@ -428,7 +433,9 @@ class Service(Job):
         if self.privileged_mode:
             netmiko_handler.enable()
         if parent:
-            parent.connections_cache[device] = netmiko_handler
+            controller.connections_cache["netmiko"][parent.name][
+                device.name
+            ] = netmiko_handler
         return netmiko_handler
 
     def napalm_connection(self, device: "Device") -> NetworkDriver:
@@ -627,7 +634,7 @@ class Workflow(Job):
             origin = self.jobs[0]
         jobs: List[Job] = [origin]
         visited: Set = set()
-        results: dict = {"results": payload, "success": False}
+        results: dict = {"results": payload or {}, "success": False}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
             allowed_devices[origin.name] = targets or self.compute_devices(payload)

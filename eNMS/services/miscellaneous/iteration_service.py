@@ -36,7 +36,12 @@ class IterationService(Service):
         else:
             return self.iterated_job.compute_devices(payload)
 
-    def job(self, payload: dict, device: Optional[Device] = None, parent: Optional[Job] = None) -> dict:
+    def job(
+        self,
+        payload: dict,
+        device: Optional[Device] = None,
+        parent: Optional[Job] = None,
+    ) -> dict:
         if self.origin_of_values == "iteration_values":
             values = self.iteration_values
         else:

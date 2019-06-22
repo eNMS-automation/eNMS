@@ -1,1 +1,4 @@
-- Iteration Service
+- Iteration Service (missing: GUI ?)
+- Connection Cache
+- Services now have access to an additional parameter via their job function: "parent"
+Parent is the workflow if the service runs within a workflow, and the service when the service runs as part of an iteration service.

@@ -89,6 +89,10 @@ class Job(AbstractBase):
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])
 
+    def __init__(self, **kwargs: Any) -> None:
+        self.connections_cache = {}
+        super().__init__(**kwargs)
+
     @hybrid_property
     def status(self) -> str:
         return "Running" if self.is_running else "Idle"
@@ -404,7 +408,9 @@ class Service(Job):
             else (device.username, device.password)
         )
 
-    def netmiko_connection(self, device: "Device") -> ConnectHandler:
+    def netmiko_connection(self, device: "Device", parent: "Job") -> ConnectHandler:
+        if parent and parent.connections_cache.get(device):
+            return parent.connections_cache[device]
         username, password = self.get_credentials(device)
         netmiko_handler = ConnectHandler(
             device_type=(
@@ -421,6 +427,8 @@ class Service(Job):
         )
         if self.privileged_mode:
             netmiko_handler.enable()
+        if parent:
+            parent.connections_cache[device] = netmiko_handler
         return netmiko_handler
 
     def napalm_connection(self, device: "Device") -> NetworkDriver:

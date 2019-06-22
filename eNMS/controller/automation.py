@@ -102,7 +102,6 @@ class AutomationController(BaseController):
     def restart_workflow(self, workflow_id: int, job_id: int, version: str) -> dict:
         workflow = fetch("Workflow", id=workflow_id)
         payload = workflow.results[version]["results"] if version != "null" else {}
-        print(payload)
         if workflow.is_running:
             return {"error": "Workflow is already running."}
         self.scheduler.add_job(

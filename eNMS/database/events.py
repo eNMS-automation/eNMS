@@ -39,7 +39,6 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
             "list": relation.uselist,
         }
 
-
 def configure_events() -> None:
     @event.listens_for(Base, "init", propagate=True)
     def log_instance_creation(target: Base, args: tuple, kwargs: dict) -> None:

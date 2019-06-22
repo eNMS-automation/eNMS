@@ -17,33 +17,22 @@ from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
-class NetmikoRegexExtractionService(Service):
+class PayloadRegexExtractionService(Service):
 
-    __tablename__ = "NetmikoRegexExtractionService"
+    __tablename__ = "PayloadRegexExtractionService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    privileged_mode = Column(Boolean, default=False)
     variable1 = Column(String(SMALL_STRING_LENGTH), default="")
-    command1 = Column(String(SMALL_STRING_LENGTH), default="")
     regular_expression1 = Column(Text(LARGE_STRING_LENGTH), default="")
     variable2 = Column(String(SMALL_STRING_LENGTH), default="")
-    command2 = Column(String(SMALL_STRING_LENGTH), default="")
     regular_expression2 = Column(Text(LARGE_STRING_LENGTH), default="")
     variable3 = Column(String(SMALL_STRING_LENGTH), default="")
-    command3 = Column(String(SMALL_STRING_LENGTH), default="")
     regular_expression3 = Column(Text(LARGE_STRING_LENGTH), default="")
-    driver = Column(String(SMALL_STRING_LENGTH), default="")
-    use_device_driver = Column(Boolean, default=True)
-    fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=10.0)
-    delay_factor = Column(Float, default=1.0)
-    global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {"polymorphic_identity": "NetmikoRegexExtractionService"}
+    __mapper_args__ = {"polymorphic_identity": "PayloadRegexExtractionService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        netmiko_handler = self.netmiko_connection(device, parent)
         result, success = {}, True
         for i in range(1, 4):
             variable = getattr(self, f"variable{i}")
@@ -51,7 +40,6 @@ class NetmikoRegexExtractionService(Service):
             if not variable:
                 continue
             command = self.sub(getattr(self, f"command{i}"), locals())
-            self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
             output = netmiko_handler.send_command(
                 command, delay_factor=self.delay_factor
             )
@@ -69,21 +57,11 @@ class NetmikoRegexExtractionService(Service):
         return {"result": result, "success": True}
 
 
-class NetmikoDataExtractionForm(ServiceForm):
-    form_type = HiddenField(default="NetmikoRegexExtractionService")
-    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
+class PayloadDataExtractionForm(ServiceForm):
+    form_type = HiddenField(default="PayloadRegexExtractionService")
     variable1 = StringField()
-    command1 = StringField()
     regular_expression1 = StringField()
     variable2 = StringField()
-    command2 = StringField()
     regular_expression2 = StringField()
     variable3 = StringField()
-    command3 = StringField()
     regular_expression3 = StringField()
-    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
-    use_device_driver = BooleanField(default=True)
-    fast_cli = BooleanField()
-    timeout = IntegerField(default=10)
-    delay_factor = FloatField(default=1.0)
-    global_delay_factor = FloatField(default=1.0)

@@ -85,7 +85,7 @@ class UpdateInstance(Resource):
     def post(self, cls: str) -> dict:
         try:
             data = request.get_json(force=True)
-            object_data = controller.objectify_from_name(cls.capitalize(), data)
+            object_data = controller.objectify(cls.capitalize(), data)
             result = factory(cls, **object_data).serialized
             Session.commit()
             return result

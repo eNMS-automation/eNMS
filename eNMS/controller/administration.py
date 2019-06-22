@@ -85,7 +85,7 @@ class AdministrationController(BaseController):
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 dump(export(cls_name), migration_file, default_flow_style=False)
 
-    def objectify_from_name(self, model: str, obj: dict) -> dict:
+    def objectify(self, model: str, obj: dict) -> dict:
         for property, relation in relationships[model].items():
             if property not in obj:
                 continue
@@ -94,6 +94,7 @@ class AdministrationController(BaseController):
                     fetch(relation["model"], name=name).id for name in obj[property]
                 ]
             else:
+                print(property, obj[property])
                 obj[property] = fetch(relation["model"], name=obj[property]).id
         return obj
 
@@ -115,9 +116,11 @@ class AdministrationController(BaseController):
                     }
                 if cls == "WorkflowEdge":
                     workflow_edges = deepcopy(objects)
-                objects = [self.objectify_from_name(cls, obj) for obj in objects]
+                if cls == "Service":
+                    objects.sort(key=lambda s: s["type"] == "IterationService")
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "Service" else cls
+                    obj = self.objectify(obj_cls, obj)
                     try:
                         factory(obj_cls, **obj)
                         Session.commit()
@@ -144,7 +147,7 @@ class AdministrationController(BaseController):
             with open(file.path, "r") as instance_file:
                 instance = load(instance_file, Loader=BaseLoader)
                 model = instance.pop("type")
-                factory(model, **self.objectify_from_name(model, instance))
+                factory(model, **self.objectify(model, instance))
         Session.commit()
         for workflow in listdir(path / "workflows"):
             if workflow == ".gitkeep":
@@ -155,7 +158,7 @@ class AdministrationController(BaseController):
                     with open(path_job / file.name, "r") as instance_file:
                         instance = load(instance_file, Loader=BaseLoader)
                         model = instance.pop("type")
-                        factory(model, **self.objectify_from_name(model, instance))
+                        factory(model, **self.objectify(model, instance))
                 Session.commit()
 
     def export_job(self, job_id: str) -> None:

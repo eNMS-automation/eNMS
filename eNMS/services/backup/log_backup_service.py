@@ -5,13 +5,14 @@ from os import makedirs, remove
 from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
+from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch_all
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -29,7 +30,7 @@ class LogBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "LogBackupService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         path_backup = Path.cwd() / "logs" / "job_logs"
         now = controller.strip_all(controller.get_time())
         path_dir = path_backup / f"logs_{now}"

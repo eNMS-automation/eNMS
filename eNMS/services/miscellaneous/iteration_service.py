@@ -8,7 +8,7 @@ from yaql import factory
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -36,7 +36,7 @@ class IterationService(Service):
         else:
             return self.iterated_job.compute_devices(payload)
 
-    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
+    def job(self, payload: dict, device: Optional[Device] = None, parent: Optional[Job] = None) -> dict:
         if self.origin_of_values == "iteration_values":
             values = self.iteration_values
         else:

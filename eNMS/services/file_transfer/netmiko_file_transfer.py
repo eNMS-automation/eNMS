@@ -1,5 +1,6 @@
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from typing import Optional
 from wtforms import (
     BooleanField,
     FloatField,
@@ -13,7 +14,7 @@ from wtforms.validators import InputRequired
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -39,7 +40,7 @@ class NetmikoFileTransferService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoFileTransferService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         self.logs.append("Transferring file {self.source_file} on {device.name}")
         source = self.sub(self.source_file, locals())

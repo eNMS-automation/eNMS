@@ -1,5 +1,6 @@
 from re import findall
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
+from typing import Optional
 from wtforms import (
     BooleanField,
     FloatField,
@@ -12,7 +13,7 @@ from wtforms import (
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -41,7 +42,7 @@ class NetmikoRegexExtractionService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoRegexExtractionService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_handler = self.netmiko_connection(device)
         result, success = {}, True
         for i in range(1, 4):

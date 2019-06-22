@@ -2,6 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
+from typing import Optional
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField
 from yaml import dump
 
@@ -9,7 +10,7 @@ from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -37,7 +38,7 @@ class NapalmBackupService(Service):
         with open(path / "data.yml", "w") as file:
             dump(data, file, default_flow_style=False)
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         try:
             now = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"

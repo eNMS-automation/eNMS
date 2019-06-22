@@ -1,5 +1,6 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
+from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
@@ -7,7 +8,7 @@ from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -25,7 +26,7 @@ class NapalmConfigurationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmConfigurationService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         self.logs.append(f"Pushing configuration on {device.name} (Napalm)")

@@ -6,7 +6,7 @@ from wtforms import HiddenField, StringField
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -24,7 +24,7 @@ class UnixCommandService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "UnixCommandService"}
 
-    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
+    def job(self, payload: dict, device: Optional[Device] = None, parent: Optional[Job] = None) -> dict:
         command = self.sub(self.command, locals())
         match = self.sub(self.content_match, locals())
         self.logs.append(f"Running Unix command ({command}) on {device.name}")

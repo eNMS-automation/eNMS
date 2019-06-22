@@ -8,7 +8,7 @@ from wtforms.widgets import TextArea
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -23,7 +23,7 @@ class MattermostNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
 
-    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
+    def job(self, payload: dict, device: Optional[Device] = None, parent: Optional[Job] = None) -> dict:
         channel = self.sub(self.channel, locals()) or controller.mattermost_channel
         self.logs.append(f"Sending Mattermost notification on {channel}")
         result = post(

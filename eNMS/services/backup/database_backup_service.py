@@ -4,12 +4,13 @@ from os import remove
 from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
+from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 from eNMS.properties.database import import_classes
 
@@ -28,7 +29,7 @@ class DatabaseBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         now = controller.strip_all(controller.get_time())
         source = Path.cwd() / "projects" / "migrations" / f"backup_{now}.tgz"
         controller.migrate_export(

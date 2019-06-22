@@ -8,6 +8,7 @@
 # SQL Alchemy Column types
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
+from typing import Optional
 
 # WTForms Fields
 from wtforms import (
@@ -37,7 +38,7 @@ from wtforms.validators import (
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 
 
 class ExampleService(Service):
@@ -74,7 +75,7 @@ class ExampleService(Service):
     # Some services will take action or interrogate a device. The job method
     # can also take device as a parameter for these types of services.
     # def job(self, device, payload):
-    def job(self, payload: dict) -> dict:
+    def job(self, payload: dict, parent: Optional[Job] = None) -> dict:
         self.logs.append(f"Real-time logs displayed when the service is running.")
         # The "job" function is called when the service is executed.
         # The parameters of the service can be accessed with self (self.string1,

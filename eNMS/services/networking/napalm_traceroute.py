@@ -1,12 +1,13 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
+from typing import Optional
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -27,7 +28,7 @@ class NapalmTracerouteService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmTracerouteService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         destination = self.sub(self.destination_ip, locals())

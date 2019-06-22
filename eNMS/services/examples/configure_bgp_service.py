@@ -1,9 +1,10 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
+from typing import Optional
 from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -23,7 +24,7 @@ class ConfigureBgpService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ConfigureBgpService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         napalm_driver = self.napalm_connection(device)
         napalm_driver.open()
         config = f"""

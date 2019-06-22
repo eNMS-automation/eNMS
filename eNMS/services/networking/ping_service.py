@@ -1,11 +1,12 @@
 from socket import error, gaierror, socket, timeout
 from subprocess import check_output
 from sqlalchemy import Column, ForeignKey, Integer, String
+from typing import Optional
 from wtforms import HiddenField, IntegerField, SelectField, StringField
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -24,7 +25,7 @@ class PingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PingService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         if self.protocol == "ICMP":
             command = ["ping"]
             for x, property in (

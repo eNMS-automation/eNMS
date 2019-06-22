@@ -1,14 +1,15 @@
 from glob import glob
+from logging import info
 from os.path import split
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
-from logging import info
+from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.validators import InputRequired
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -29,7 +30,7 @@ class GenericFileTransferService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "GenericFileTransferService"}
 
-    def job(self, payload: dict, device: Device) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         ssh_client = SSHClient()
         if self.missing_host_key_policy:
             ssh_client.set_missing_host_key_policy(AutoAddPolicy())

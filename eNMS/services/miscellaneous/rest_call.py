@@ -15,7 +15,7 @@ from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.forms.services import ValidationForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -51,7 +51,7 @@ class RestCallService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "RestCallService"}
 
-    def job(self, payload: dict, device: Optional[Device] = None) -> dict:
+    def job(self, payload: dict, device: Optional[Device] = None, parent: Optional[Job] = None) -> dict:
         rest_url = self.sub(self.url, locals())
         self.logs.append(f"Sending REST call to {rest_url}")
         kwargs = {

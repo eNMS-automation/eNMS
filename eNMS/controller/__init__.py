@@ -436,6 +436,36 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                 ),
                 "multiprocessing": True,
             },
+            {
+                "type": "PayloadValidationService",
+                "name": "payload_validate_dict",
+                "description": "Payload Validate Dict",
+                "query": (
+                    "$.payload_textfsm_extraction.results.devices"
+                    ".{{device.name}}.result.regex_variable"
+                ),
+                "validation_method": "dict_included",
+                "dict_match": {"value": ["1.1.1.1", "2.2.2.2", "3.3.3.3"]},
+                "waiting_time": 0,
+                "vendor": "Arista",
+                "operating_system": "eos",
+                "content_match": "",
+            },
+            {
+                "type": "PayloadValidationService",
+                "name": "payload_validate_text",
+                "description": "Payload Validate Text",
+                "query": (
+                    "$.payload_textfsm_extraction.results.devices"
+                    ".{{device.name}}.result.textfsm_variable.value[0][-1]"
+                ),
+                "validation_method": "text",
+                "content_match": "(\d\.){3}\d",
+                "waiting_time": 0,
+                "vendor": "Arista",
+                "operating_system": "eos",
+                "content_match": "",
+            },
         ):
             instance = factory(service.pop("type"), **service)  # type: ignore
             services.append(instance)
@@ -450,7 +480,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         )
         Session.commit()
         workflow.jobs.extend(services)
-        edges = [(0, 2), (2, 3), (3, 1)]
+        edges = [(0, 2), (2, 3), (3, 4), (4, 1)]
         for x, y in edges:
             factory(
                 "WorkflowEdge",
@@ -462,7 +492,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                     "destination": workflow.jobs[y].id,
                 },
             )
-        positions = [(-20, 0), (30, 0), (0, -30), (0, 15)]
+        positions = [(-20, 0), (30, 0), (0, 0), (0, -30), (0, 15)]
         for index, (x, y) in enumerate(positions):
             workflow.jobs[index].positions["payload_extraction_validation_worflow"] = (
                 x * 10,

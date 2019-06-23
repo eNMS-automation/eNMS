@@ -9,7 +9,7 @@ class StringValidationForm(BaseForm):
     form_type = HiddenField(default="string_service_validation")
     abstract_service = True
     content_match = StringField(
-        "Content Match", widget=TextArea(), render_kw={"rows": 5}
+        "Content Match", widget=TextArea(), render_kw={"rows": 8}
     )
     content_match_regex = BooleanField("Match content with Regular Expression")
     negative_logic = BooleanField("Negative logic")
@@ -42,7 +42,7 @@ class ValidationForm(BaseForm):
         ),
     )
     content_match = StringField(
-        "Content Match", widget=TextArea(), render_kw={"rows": 5}
+        "Content Match", widget=TextArea(), render_kw={"rows": 8}
     )
     content_match_regex = BooleanField("Match content with Regular Expression")
     dict_match = DictField("Dictionary to Match Against")

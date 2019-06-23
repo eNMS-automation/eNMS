@@ -18,12 +18,8 @@ class NapalmGettersService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
-    content_match = Column(Text(LARGE_STRING_LENGTH), default="")
-    content_match_regex = Column(Boolean, default=False)
+    validation_method = Column(String(SMALL_STRING_LENGTH), default="dict_equal")
     dict_match = Column(MutableDict.as_mutable(PickleType), default={})
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
     driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     getters = Column(MutableList.as_mutable(PickleType), default=[])

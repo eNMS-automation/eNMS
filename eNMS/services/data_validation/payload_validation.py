@@ -18,6 +18,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
+from yaql import factory
 
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
@@ -33,6 +34,7 @@ class PayloadValidationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
+    query = Column(String(SMALL_STRING_LENGTH), default="")
     conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
@@ -44,6 +46,8 @@ class PayloadValidationService(Service):
     __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
+        engine = factory.YaqlFactory().create()
+        result = engine(self.query).evaluate(data=payload)
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"

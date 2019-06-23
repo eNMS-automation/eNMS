@@ -27,9 +27,9 @@ from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
-class ValidationService(Service):
+class PayloadValidationService(Service):
 
-    __tablename__ = "ValidationService"
+    __tablename__ = "PayloadValidationService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
@@ -41,7 +41,7 @@ class ValidationService(Service):
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
 
-    __mapper_args__ = {"polymorphic_identity": "ValidationService"}
+    __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         match = (
@@ -57,8 +57,8 @@ class ValidationService(Service):
         }
 
 
-class ValidationForm(ServiceForm, ValidationForm):
-    form_type = HiddenField(default="ValidationService")
+class PayloadValidationForm(ServiceForm, ValidationForm):
+    form_type = HiddenField(default="PayloadValidationService")
     conversion_method = SelectField(
         choices=(
             ("text", "Text"),
@@ -66,18 +66,3 @@ class ValidationForm(ServiceForm, ValidationForm):
             ("xml", "XML dictionary"),
         )
     )
-    validation_method = SelectField(
-        "Validation Method",
-        choices=(
-            ("text", "Validation by text match"),
-            ("dict_equal", "Validation by dictionary equality"),
-            ("dict_included", "Validation by dictionary inclusion"),
-        ),
-    )
-    content_match = StringField(
-        "Content Match", widget=TextArea(), render_kw={"rows": 5}
-    )
-    content_match_regex = BooleanField("Match content with Regular Expression")
-    dict_match = DictField("Dictionary to Match Against")
-    negative_logic = BooleanField("Negative logic")
-    delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")

@@ -7,7 +7,7 @@ from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.forms.services import ValidationForm
+from eNMS.forms.services import DictValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -56,7 +56,7 @@ class NapalmGettersService(Service):
         }
 
 
-class NapalmGettersForm(ServiceForm, ValidationForm):
+class NapalmGettersForm(ServiceForm, DictValidationForm):
     form_type = HiddenField(default="NapalmGettersService")
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField(default=True)

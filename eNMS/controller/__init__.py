@@ -391,6 +391,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             fetch("Device", name="Washington").id,
             fetch("Device", name="Austin").id,
         ]
+        services = []
         for service in (
             {
                 "type": "NetmikoValidationService",
@@ -407,10 +408,17 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             },
             {
                 "type": "PayloadExtractionService",
+                "has_targets": True,
                 "name": "payload_textfsm_extraction",
                 "description": "Variables extraction with Netmiko/TextFSM",
+                "variable1": "simple_variable",
+                "query1": "$.netmiko_show_ip_route.results.devices.{{device.name}}.success",
+                "variable2": "regex_variable",
+                "query2": "$.netmiko_show_ip_route.results.devices.{{device.name}}.result",
+                "match_type2": "regex",
+                "match2": "(\d.*)/32",
                 "variable3": "textfsm_variable",
-                "query3": "",
+                "query3": "$.netmiko_show_ip_route.results.devices.{{device.name}}.result",
                 "match_type3": "textfsm",
                 "match3": (
                     "Value Filldown PROTOCOL (\S+\s\S+?|\w?)\n"

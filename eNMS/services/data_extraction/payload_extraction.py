@@ -21,15 +21,15 @@ class PayloadExtractionService(Service):
     has_targets = Column(Boolean, default=False)
     variable1 = Column(String(SMALL_STRING_LENGTH), default="")
     query1 = Column(String(SMALL_STRING_LENGTH), default="")
-    match_type1 = Column(String(SMALL_STRING_LENGTH), default="")
+    match_type1 = Column(String(SMALL_STRING_LENGTH), default="none")
     match1 = Column(Text(LARGE_STRING_LENGTH), default="")
     variable2 = Column(String(SMALL_STRING_LENGTH), default="")
     query2 = Column(String(SMALL_STRING_LENGTH), default="")
-    match_type2 = Column(String(SMALL_STRING_LENGTH), default="")
+    match_type2 = Column(String(SMALL_STRING_LENGTH), default="none")
     match2 = Column(Text(LARGE_STRING_LENGTH), default="")
     variable3 = Column(String(SMALL_STRING_LENGTH), default="")
     query3 = Column(String(SMALL_STRING_LENGTH), default="")
-    match_type3 = Column(String(SMALL_STRING_LENGTH), default="")
+    match_type3 = Column(String(SMALL_STRING_LENGTH), default="none")
     match3 = Column(Text(LARGE_STRING_LENGTH), default="")
 
     __mapper_args__ = {"polymorphic_identity": "PayloadExtractionService"}
@@ -45,7 +45,8 @@ class PayloadExtractionService(Service):
             variable = getattr(self, f"variable{i}")
             if not variable:
                 continue
-            query = getattr(self, f"query{i}")
+            query = self.sub(getattr(self, f"query{i}"), locals())
+            print("ttt" * 200, query, payload)
             try:
                 engine = factory.YaqlFactory().create()
                 value = engine(query).evaluate(data=payload)
@@ -55,13 +56,17 @@ class PayloadExtractionService(Service):
                 continue
             match_type = getattr(self, f"match_type{i}")
             match = getattr(self, f"match{i}")
-            result[variable] = {"query": query, "match_type": match_type}
-            if match_type == "none":
-                result["value"] = value
-            elif match_type == "regex":
-                result["value"] = findall(match, value)
-            else:
-                result["value"] = TextFSM(StringIO(match)).ParseText(value)
+            result[variable] = {
+                "query": query,
+                "match_type": match_type,
+                "value": (
+                    value
+                    if match_type == "none"
+                    else findall(match, value)
+                    if match_type == "regex"
+                    else TextFSM(StringIO(match)).ParseText(value)
+                ),
+            }
         return {"result": result, "success": success}
 
 

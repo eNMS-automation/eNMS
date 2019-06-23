@@ -94,7 +94,6 @@ class AdministrationController(BaseController):
                     fetch(relation["model"], name=name).id for name in obj[property]
                 ]
             else:
-                print(property, obj[property])
                 obj[property] = fetch(relation["model"], name=obj[property]).id
         return obj
 

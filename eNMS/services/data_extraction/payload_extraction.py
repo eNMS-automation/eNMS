@@ -1,19 +1,12 @@
 from io import StringIO
 from re import findall
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Column, ForeignKey, Integer, String, Text
 from textfsm import TextFSM
 from typing import Optional
-from wtforms import (
-    BooleanField,
-    FloatField,
-    HiddenField,
-    IntegerField,
-    SelectField,
-    StringField,
-)
+from wtforms import HiddenField, SelectField, StringField
+from wtforms.widgets import TextArea
 from yaql import factory
 
-from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Job, Service
@@ -48,8 +41,13 @@ class PayloadExtractionService(Service):
             if not variable:
                 continue
             query = getattr(self, f"query{i}")
-            engine = factory.YaqlFactory().create()
-            value = engine(query).evaluate(data=payload)
+            try:
+                engine = factory.YaqlFactory().create()
+                value = engine(query).evaluate(data=payload)
+            except Exception as exc:
+                success = False
+                result[variable] = f"Wrong YaQL query for {variable} ({exc})"
+                continue
             match_type = getattr(self, f"match_type{i}")
             match = getattr(self, f"match{i}")
             result[variable] = {"query": query, "match_type": match_type}
@@ -59,7 +57,7 @@ class PayloadExtractionService(Service):
                 result["value"] = findall(match, value)
             else:
                 result["value"] = TextFSM(StringIO(match)).ParseText(value)
-        return {"result": result, "success": True}
+        return {"result": result, "success": success}
 
 
 match_choices = (

@@ -278,30 +278,6 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                 "multiprocessing": True,
             },
             {
-                "type": "NetmikoTextfsmExtractionService",
-                "name": "netmiko_textfsm_extraction",
-                "description": "Variables extraction with Netmiko/TextFSM",
-                "driver": "arista_eos",
-                "fast_cli": True,
-                "command": "show ip route",
-                "textfsm_template": (
-                    "Value Filldown PROTOCOL (\S+\s\S+?|\w?)\n"
-                    "Value Filldown NETWORK (\d+.\d+.\d+.\d+)\n"
-                    "Value Filldown MASK (\d+)\n"
-                    "Value DISTANCE (\d+)\n"
-                    "Value METRIC (\d+)\n"
-                    "Value DIRECT (directly)\n"
-                    "Value Required NEXT_HOP (connected|\d+\.\d+\.\d+\.\d+)\n"
-                    "Value INTERFACE (\S+)\n\n"
-                    "Start\n"
-                    "  ^\s+${PROTOCOL}\s+${NETWORK}/${MASK}\s+"
-                    "(?:\[${DISTANCE}/${METRIC}\]|is\s+${DIRECT})(?:.+?)"
-                    "${NEXT_HOP},\s+${INTERFACE}$$ -> Next.Record"
-                ),
-                "devices": [fetch("Device", name="Washington").id],
-                "multiprocessing": True,
-            },
-            {
                 "type": "NapalmBackupService",
                 "name": "napalm_configuration_backup",
                 "description": "Test Configuration Management",
@@ -409,6 +385,81 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         positions = [(-20, 0), (20, 0), (0, -15), (0, -5), (0, 5), (0, 15)]
         for index, (x, y) in enumerate(positions):
             workflow.jobs[index].positions["Netmiko_VRF_workflow"] = x * 10, y * 10
+
+    def create_payload_extraction_validation_workflow(self) -> None:
+        devices = [
+            fetch("Device", name="Washington").id,
+            fetch("Device", name="Austin").id,
+        ]
+        for service in (
+            {
+                "type": "NetmikoValidationService",
+                "name": "netmiko_show_ip_route",
+                "description": "Show IP route",
+                "waiting_time": 0,
+                "vendor": "Arista",
+                "operating_system": "eos",
+                "driver": "arista_eos",
+                "command": "show ip route",
+                "content_match": "",
+                "fast_cli": True,
+                "timeout": 3,
+            },
+            {
+                "type": "PayloadExtractionService",
+                "name": "payload_textfsm_extraction",
+                "description": "Variables extraction with Netmiko/TextFSM",
+                "variable3": "textfsm_variable",
+                "query3": "",
+                "match_type3": "textfsm",
+                "match3": (
+                    "Value Filldown PROTOCOL (\S+\s\S+?|\w?)\n"
+                    "Value Filldown NETWORK (\d+.\d+.\d+.\d+)\n"
+                    "Value Filldown MASK (\d+)\n"
+                    "Value DISTANCE (\d+)\n"
+                    "Value METRIC (\d+)\n"
+                    "Value DIRECT (directly)\n"
+                    "Value Required NEXT_HOP (connected|\d+\.\d+\.\d+\.\d+)\n"
+                    "Value INTERFACE (\S+)\n\n"
+                    "Start\n"
+                    "  ^\s+${PROTOCOL}\s+${NETWORK}/${MASK}\s+"
+                    "(?:\[${DISTANCE}/${METRIC}\]|is\s+${DIRECT})(?:.+?)"
+                    "${NEXT_HOP},\s+${INTERFACE}$$ -> Next.Record"
+                ),
+                "multiprocessing": True,
+            },
+        ):
+            instance = factory(service.pop("type"), **service)  # type: ignore
+            services.append(instance)
+        workflow = factory(
+            "Workflow",
+            **{
+                "name": "payload_extraction_validation_worflow",
+                "description": "Test the payload extraction and validation mechanisms",
+                "use_workflow_targets": True,
+                "devices": devices,
+            },
+        )
+        Session.commit()
+        workflow.jobs.extend(services)
+        edges = [(0, 2), (2, 3), (3, 1)]
+        for x, y in edges:
+            factory(
+                "WorkflowEdge",
+                **{
+                    "name": f"{workflow.name} {x} -> {y}",
+                    "workflow": workflow.id,
+                    "subtype": "success",
+                    "source": workflow.jobs[x].id,
+                    "destination": workflow.jobs[y].id,
+                },
+            )
+        positions = [(-20, 0), (30, 0), (0, -30), (0, 15)]
+        for index, (x, y) in enumerate(positions):
+            workflow.jobs[index].positions["payload_extraction_validation_worflow"] = (
+                x * 10,
+                y * 10,
+            )
 
     def create_yaql_iteration_workflow(self) -> None:
         devices = [
@@ -732,6 +783,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         self.create_napalm_workflow()
         self.create_payload_transfer_workflow()
         self.create_yaql_iteration_workflow()
+        self.create_payload_extraction_validation_workflow()
         self.create_workflow_of_workflows()
         Session.commit()
 

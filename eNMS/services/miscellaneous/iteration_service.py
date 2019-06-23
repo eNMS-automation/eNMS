@@ -17,7 +17,7 @@ class IterationService(Service):
     __tablename__ = "IterationService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    has_targets = True
+    has_targets = Column(Boolean, default=False)
     origin_of_targets = Column(String(SMALL_STRING_LENGTH), default="iteration")
     iterated_job_id = Column(Integer, ForeignKey("Job.id"))
     iterated_job = relationship(
@@ -60,6 +60,7 @@ class IterationService(Service):
 
 class IterationForm(ServiceForm):
     form_type = HiddenField(default="IterationService")
+    has_targets = BooleanField()
     iterated_job = InstanceField("Iterated Job", instance_type="Job")
     origin_of_targets = SelectField(
         choices=(

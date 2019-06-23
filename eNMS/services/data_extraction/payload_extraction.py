@@ -1,9 +1,9 @@
 from io import StringIO
 from re import findall
-from sqlalchemy import Column, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from textfsm import TextFSM
 from typing import Optional
-from wtforms import HiddenField, SelectField, StringField
+from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 from yaql import factory
 
@@ -18,7 +18,7 @@ class PayloadExtractionService(Service):
     __tablename__ = "PayloadExtractionService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    has_targets = True
+    has_targets = Column(Boolean, default=False)
     variable1 = Column(String(SMALL_STRING_LENGTH), default="")
     query1 = Column(String(SMALL_STRING_LENGTH), default="")
     match_type1 = Column(String(SMALL_STRING_LENGTH), default="")
@@ -34,7 +34,12 @@ class PayloadExtractionService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PayloadExtractionService"}
 
-    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
+    def job(
+        self,
+        payload: dict,
+        device: Optional[Device] = None,
+        parent: Optional[Job] = None,
+    ) -> dict:
         result, success = {}, True
         for i in range(1, 4):
             variable = getattr(self, f"variable{i}")
@@ -69,6 +74,7 @@ match_choices = (
 
 class PayloadExtractionForm(ServiceForm):
     form_type = HiddenField(default="PayloadExtractionService")
+    has_targets = BooleanField()
     variable1 = StringField()
     query1 = StringField()
     match_type1 = SelectField(choices=match_choices)

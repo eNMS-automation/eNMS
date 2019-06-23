@@ -46,7 +46,6 @@ class PayloadExtractionService(Service):
             if not variable:
                 continue
             query = self.sub(getattr(self, f"query{i}"), locals())
-            print("ttt" * 200, query, payload)
             try:
                 engine = factory.YaqlFactory().create()
                 value = engine(query).evaluate(data=payload)

@@ -46,14 +46,16 @@ class PayloadValidationService(Service):
     __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
+        query = self.sub(self.query, locals())
         engine = factory.YaqlFactory().create()
-        result = engine(self.query).evaluate(data=payload)
+        result = engine(query).evaluate(data=payload)
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"
             else self.sub(self.dict_match, locals())
         )
         return {
+            "query": query,
             "match": match,
             "negative_logic": self.negative_logic,
             "result": result,

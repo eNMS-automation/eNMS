@@ -213,7 +213,6 @@ def route(page: str) -> Response:
     if form_type:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
-            print(form.errors)
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
         result = getattr(controller, f)(*args, **form_postprocessing(request.form))
     elif f == "filtering":

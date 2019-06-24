@@ -2,6 +2,7 @@
 global
 alertify: false
 csrf_token: false
+documentationUrl: false
 filteringPanel: false
 formProperties: false
 jsPanel: false
@@ -92,29 +93,19 @@ let topZ = 1000;
 // eslint-disable-next-line
 function doc(page) {
   let endpoint = {
-    administration:
-      "security/access.html",
+    administration: "security/access.html",
     advanced: "base/migrations.html",
-    calendar:
-      "scheduling/task_management.html",
-    configuration_management:
-      "inventory/objects.html",
+    calendar: "scheduling/task_management.html",
+    configuration_management: "inventory/objects.html",
     dashboard: "base/introduction.html",
-    device_management:
-      "inventory/objects.html",
-    import_export:
-      "inventory/objects.html",
-    server_management:
-      "security/access.html",
-    link_management:
-      "inventory/objects.html",
-    user_management:
-      "security/access.html",
+    device_management: "inventory/objects.html",
+    import_export: "inventory/objects.html",
+    server_management: "security/access.html",
+    link_management: "inventory/objects.html",
+    user_management: "security/access.html",
     view: "views/geographical_view.html",
-    workflow_builder:
-      "workflows/index.html",
+    workflow_builder: "workflows/index.html",
   }[page];
-  console.log(`${documentationUrl}${endpoint}`);
   $("#doc-link").attr("href", `${documentationUrl}${endpoint}`);
 }
 

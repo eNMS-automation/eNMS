@@ -38,6 +38,9 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             },
         )
 
+    def update_admin_user(self) -> None:
+        factory("User", **{"name": "admin", "password": "admin"})
+
     def init_database(self) -> None:
         self.init_parameters()
         self.configure_server_id()
@@ -45,7 +48,9 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             name="examples" if self.create_examples else "default",
             import_export_types=import_classes,
         )
+        self.update_admin_user()
         self.get_git_content()
+        Session.commit()
 
 
 controller = Controller()

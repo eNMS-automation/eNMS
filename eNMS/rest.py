@@ -4,7 +4,7 @@ from flask_restful import abort, Api, Resource
 from logging import info
 from psutil import cpu_percent
 from uuid import getnode
-from typing import Optional, Union
+from typing import Dict, Optional, Union
 
 from eNMS.concurrency import threaded_job
 from eNMS.controller import controller
@@ -13,12 +13,15 @@ from eNMS.database.functions import delete, factory, fetch
 from eNMS.exceptions import InstanceNotFoundException
 from eNMS.extensions import auth, csrf
 
-allowed_controller_endpoints = [
-    "get_cluster_status",
-    "get_git_content",
-    "update_database_configurations_from_git",
-]
 
+def create_controller_resources() -> Dict[str, Resource]:
+    return {
+        endpoint: type(
+            endpoint,
+            (Resource,),
+            {"decorators": [auth.login_required], "post": getattr(controller, endpoint)},
+        ) for endpoint in controller.valid_rest_endpoints
+    }
 
 
 class CreatePool(Resource):
@@ -176,6 +179,8 @@ class Topology(Resource):
 
 def configure_rest_api(app: Flask) -> None:
     api = Api(app, decorators=[csrf.exempt])
+    for endpoint, resource in create_controller_resources().items():
+        api.add_resource(resource, f"/rest/{endpoint}")
     api.add_resource(CreatePool, "/rest/create_pool")
     api.add_resource(Heartbeat, "/rest/is_alive")
     api.add_resource(RunJob, "/rest/run_job")

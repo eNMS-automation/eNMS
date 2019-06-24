@@ -156,6 +156,13 @@ class BaseController:
         "view_filtering",
     ]
 
+    valid_rest_endpoints = [
+        "get_cluster_status",
+        "get_git_content",
+        "update_all_pools",
+        "update_database_configurations_from_git",
+    ]
+
     log_severity = {"error": error, "info": info, "warning": warning}
 
     @property

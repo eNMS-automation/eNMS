@@ -7,3 +7,4 @@ Parent is the workflow if the service runs within a workflow, and the service wh
 - Task targets and payload to override the scheduled jobs'
 - /!\ Custom services now receive an additional "parent" parameter. If the service runs within a workflow, this parent will be the workflow.
 - - PRIORITY: split string and dict validation: done. You now have a dedicated string validation form.
+- added a bunch of useful endpoints to the rest api: "update_database_configurations_from_git", "update_all_pools", "get_git_content"

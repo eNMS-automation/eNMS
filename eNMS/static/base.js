@@ -91,30 +91,31 @@ let topZ = 1000;
  */
 // eslint-disable-next-line
 function doc(page) {
-  let url = {
+  let endpoint = {
     administration:
-      "https://enms.readthedocs.io/en/latest/security/access.html",
-    advanced: "https://enms.readthedocs.io/en/latest/base/migrations.html",
+      "security/access.html",
+    advanced: "base/migrations.html",
     calendar:
-      "https://enms.readthedocs.io/en/latest/scheduling/task_management.html",
+      "scheduling/task_management.html",
     configuration_management:
-      "https://enms.readthedocs.io/en/latest/inventory/objects.html",
-    dashboard: "https://enms.readthedocs.io/en/latest/base/introduction.html",
+      "inventory/objects.html",
+    dashboard: "base/introduction.html",
     device_management:
-      "https://enms.readthedocs.io/en/latest/inventory/objects.html",
+      "inventory/objects.html",
     import_export:
-      "https://enms.readthedocs.io/en/latest/inventory/objects.html",
+      "inventory/objects.html",
     server_management:
-      "https://enms.readthedocs.io/en/latest/security/access.html",
+      "security/access.html",
     link_management:
-      "https://enms.readthedocs.io/en/latest/inventory/objects.html",
+      "inventory/objects.html",
     user_management:
-      "https://enms.readthedocs.io/en/latest/security/access.html",
-    view: "https://enms.readthedocs.io/en/latest/views/geographical_view.html",
+      "security/access.html",
+    view: "views/geographical_view.html",
     workflow_builder:
-      "https://enms.readthedocs.io/en/latest/workflows/index.html",
+      "workflows/index.html",
   }[page];
-  $("#doc-link").attr("href", url);
+  console.log(`${documentationUrl}${endpoint}`);
+  $("#doc-link").attr("href", `${documentationUrl}${endpoint}`);
 }
 
 $.ajaxSetup({

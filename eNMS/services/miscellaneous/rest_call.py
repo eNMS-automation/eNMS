@@ -93,6 +93,8 @@ class RestCallService(Service):
         return {
             "url": rest_url,
             "match": match,
+            "status_code": response.status_code,
+            "headers": dict(response.headers),
             "negative_logic": self.negative_logic,
             "result": result,
             "success": self.match_content(result, match),

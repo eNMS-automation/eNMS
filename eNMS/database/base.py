@@ -83,6 +83,8 @@ class AbstractBase(Base):
                     value = list(value)
                 if isinstance(value, MutableDict):
                     value = dict(value)
+                if value is None:
+                    continue
             result[property] = value
         return result
 

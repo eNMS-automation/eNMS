@@ -6,6 +6,7 @@ from eNMS.controller.inventory import InventoryController
 from eNMS.database import Session
 from eNMS.database.functions import factory, fetch
 from eNMS.models import models, model_properties
+from eNMS.properties.database import import_classes
 
 
 class Controller(AdministrationController, AutomationController, InventoryController):
@@ -799,37 +800,14 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         for index, (x, y) in enumerate(positions):
             workflow.jobs[index].positions["Workflow_of_workflows"] = x * 10, y * 10
 
-    def create_default(self) -> None:
+    def init_database(self) -> None:
         self.init_parameters()
         self.configure_server_id()
-        self.migration_import(name="default", import_export_types=["User", "Pool", "Service", "Workflow", "Task"])
-        """ self.create_default_users()
-        self.create_default_pools()
-        self.create_default_services()
-        Session.commit()
-        self.create_default_workflows()
-        Session.commit()
-        self.create_default_tasks()"""
+        self.migration_import(
+            name="examples" if self.create_examples else "default",
+            import_export_types=import_classes
+        )
         self.get_git_content()
-
-    def examples_creation(self) -> None:
-        pass
-        """         self.create_example_pools()
-        self.create_network_topology()
-        Session.commit()
-        self.create_example_services()
-        self.create_netmiko_workflow()
-        self.create_napalm_workflow()
-        self.create_payload_transfer_workflow()
-        self.create_yaql_iteration_workflow()
-        self.create_payload_extraction_validation_workflow()
-        self.create_workflow_of_workflows()
-        Session.commit() """
-
-    def init_database(self) -> None:
-        self.create_default()
-        if self.create_examples:
-            self.examples_creation()
 
 
 controller = Controller()

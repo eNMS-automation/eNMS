@@ -3,32 +3,32 @@
   credentials: device
   custom_notification: false
   define_devices_from_payload: false
-  description: Start point of a workflow
+  description: Poll configuration and push to gitlab
   devices: []
   display_only_failed_nodes: true
   events: []
   failed: 0
-  has_targets: false
-  hidden: true
-  last_modified: '2019-06-24 07:19:52.482457'
+  hidden: false
+  jobs:
+  - Start
+  - End
+  - poller_service
+  - git_push_configurations
+  last_modified: '2019-06-24 07:24:53.716312'
   mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: Start
+  name: Configuration Management Workflow
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
   pools: []
-  positions:
-    Configuration Management Workflow: !!python/tuple
-    - -300
-    - 0
+  positions: {}
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: Workflow
+  use_workflow_targets: false
   vendor: ''
   waiting_time: 0
   yaql_query: ''
@@ -37,33 +37,78 @@
   credentials: device
   custom_notification: false
   define_devices_from_payload: false
-  description: End point of a workflow
-  devices: []
+  description: Create and delete a VRF with Netmiko
+  devices:
+  - Washington
+  - Austin
   display_only_failed_nodes: true
   events: []
   failed: 0
-  has_targets: false
-  hidden: true
-  last_modified: '2019-06-24 07:19:52.491375'
+  hidden: false
+  jobs:
+  - Start
+  - End
+  - netmiko_create_vrf_test
+  - netmiko_check_vrf_test
+  - netmiko_delete_vrf_test
+  - netmiko_check_no_vrf_test
+  last_modified: '2019-06-24 07:24:56.577030'
   mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: End
+  name: Netmiko_VRF_workflow
   number_of_retries: 0
   number_of_targets: 0
-  operating_system: ''
+  operating_system: eos
+  pools: []
+  positions: {}
+  push_to_git: false
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: true
+  vendor: Arista
+  waiting_time: 0
+  yaql_query: ''
+- completed: 0
+  creator: admin
+  credentials: device
+  custom_notification: false
+  define_devices_from_payload: false
+  description: Create and delete a VRF with Napalm
+  devices:
+  - Washington
+  - Austin
+  display_only_failed_nodes: true
+  events: []
+  failed: 0
+  hidden: false
+  jobs:
+  - Start
+  - End
+  - napalm_create_vrf_test
+  - netmiko_check_vrf_test
+  - netmiko_delete_vrf_test
+  - netmiko_check_no_vrf_test
+  last_modified: '2019-06-24 07:24:56.936726'
+  mail_recipient: ''
+  name: Napalm_VRF_workflow
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: eos
   pools: []
   positions:
-    Configuration Management Workflow: !!python/tuple
+    Workflow_of_workflows: !!python/tuple
+    - 0
     - 200
-    - 0
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
-  type: SwissArmyKnifeService
-  vendor: ''
+  type: Workflow
+  use_workflow_targets: true
+  vendor: Arista
   waiting_time: 0
   yaql_query: ''
 - completed: 0
@@ -71,182 +116,32 @@
   credentials: device
   custom_notification: false
   define_devices_from_payload: false
-  description: Mail notification (service logs)
-  devices: []
+  description: ReST call, Napalm getters, etc
+  devices:
+  - Washington
+  - Austin
   display_only_failed_nodes: true
   events: []
   failed: 0
-  has_targets: false
   hidden: false
-  last_modified: '2019-06-24 07:19:52.498504'
+  jobs:
+  - Start
+  - End
+  - GET_device
+  - get_facts
+  - get_interfaces
+  - get_interfaces_ip
+  - get_config
+  - process_payload1
+  last_modified: '2019-06-24 07:24:57.343588'
   mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: mail_feedback_notification
+  name: payload_transfer_workflow
   number_of_retries: 0
   number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  time_between_retries: 10
-  type: SwissArmyKnifeService
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  custom_notification: false
-  define_devices_from_payload: false
-  description: Slack notification (service logs)
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: false
-  last_modified: '2019-06-24 07:19:52.506127'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: slack_feedback_notification
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  time_between_retries: 10
-  type: SwissArmyKnifeService
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  custom_notification: false
-  define_devices_from_payload: false
-  description: Mattermost notification (service logs)
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: false
-  last_modified: '2019-06-24 07:19:52.514554'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: mattermost_feedback_notification
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  time_between_retries: 10
-  type: SwissArmyKnifeService
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  custom_notification: false
-  define_devices_from_payload: false
-  description: Monitor eNMS cluster
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: false
-  last_modified: '2019-06-24 07:19:52.522003'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: cluster_monitoring
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  time_between_retries: 10
-  type: SwissArmyKnifeService
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  custom_notification: false
-  define_devices_from_payload: false
-  description: Push configurations to Gitlab
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: false
-  last_modified: '2019-06-24 07:19:52.529269'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: git_push_configurations
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
+  operating_system: eos
   pools: []
   positions:
-    Configuration Management Workflow: !!python/tuple
-    - 0
-    - 300
-  push_to_git: false
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  time_between_retries: 10
-  type: SwissArmyKnifeService
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  custom_notification: false
-  define_devices_from_payload: false
-  description: Configuration Management Poller
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: true
-  last_modified: '2019-06-24 07:19:52.536926'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: poller_service
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    Configuration Management Workflow: !!python/tuple
+    Workflow_of_workflows: !!python/tuple
     - 0
     - -200
   push_to_git: false
@@ -254,7 +149,118 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: Workflow
+  use_workflow_targets: false
+  vendor: Arista
+  waiting_time: 0
+  yaql_query: ''
+- completed: 0
+  creator: admin
+  credentials: device
+  custom_notification: false
+  define_devices_from_payload: false
+  description: Test YaQL device selection mechanism
+  devices: []
+  display_only_failed_nodes: true
+  events: []
+  failed: 0
+  hidden: false
+  jobs:
+  - Start
+  - End
+  - add_devices_to_payload
+  - netmiko_yaql_defined_devices
+  - Iteration_service_simple
+  - Iteration_service_yaql
+  last_modified: '2019-06-24 07:24:57.941133'
+  mail_recipient: ''
+  name: YaQL_test_worflow
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: false
   vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- completed: 0
+  creator: admin
+  credentials: device
+  custom_notification: false
+  define_devices_from_payload: false
+  description: Test the payload extraction and validation mechanisms
+  devices:
+  - Washington
+  - Austin
+  display_only_failed_nodes: true
+  events: []
+  failed: 0
+  hidden: false
+  jobs:
+  - Start
+  - End
+  - netmiko_show_ip_route
+  - payload_extraction
+  - payload_validate_dict
+  - payload_validate_text
+  last_modified: '2019-06-24 07:24:58.363519'
+  mail_recipient: ''
+  name: payload_extraction_validation_worflow
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- completed: 0
+  creator: admin
+  credentials: device
+  custom_notification: false
+  define_devices_from_payload: false
+  description: Test the inner workflow system
+  devices:
+  - Washington
+  display_only_failed_nodes: true
+  events: []
+  failed: 0
+  hidden: false
+  jobs:
+  - Start
+  - End
+  - payload_transfer_workflow
+  - get_interfaces
+  - Napalm_VRF_workflow
+  last_modified: '2019-06-24 07:24:58.639163'
+  mail_recipient: ''
+  name: Workflow_of_workflows
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: eos
+  pools: []
+  positions: {}
+  push_to_git: false
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: true
+  vendor: Arista
   waiting_time: 0
   yaql_query: ''

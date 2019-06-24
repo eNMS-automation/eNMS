@@ -1,0 +1,215 @@
+- destination: poller_service
+  name: Configuration Management Workflow 0 -> 2 (True)
+  source: Start
+  subtype: success
+  workflow: Configuration Management Workflow
+- destination: git_push_configurations
+  name: Configuration Management Workflow 2 -> 3 (True)
+  source: poller_service
+  subtype: success
+  workflow: Configuration Management Workflow
+- destination: git_push_configurations
+  name: Configuration Management Workflow 2 -> 3 (False)
+  source: poller_service
+  subtype: failure
+  workflow: Configuration Management Workflow
+- destination: End
+  name: Configuration Management Workflow 3 -> 1 (True)
+  source: git_push_configurations
+  subtype: success
+  workflow: Configuration Management Workflow
+- destination: netmiko_create_vrf_test
+  name: Netmiko_VRF_workflow 0 -> 2
+  source: Start
+  subtype: success
+  workflow: Netmiko_VRF_workflow
+- destination: netmiko_check_vrf_test
+  name: Netmiko_VRF_workflow 2 -> 3
+  source: netmiko_create_vrf_test
+  subtype: success
+  workflow: Netmiko_VRF_workflow
+- destination: netmiko_delete_vrf_test
+  name: Netmiko_VRF_workflow 3 -> 4
+  source: netmiko_check_vrf_test
+  subtype: success
+  workflow: Netmiko_VRF_workflow
+- destination: netmiko_check_no_vrf_test
+  name: Netmiko_VRF_workflow 4 -> 5
+  source: netmiko_delete_vrf_test
+  subtype: success
+  workflow: Netmiko_VRF_workflow
+- destination: End
+  name: Netmiko_VRF_workflow 5 -> 1
+  source: netmiko_check_no_vrf_test
+  subtype: success
+  workflow: Netmiko_VRF_workflow
+- destination: napalm_create_vrf_test
+  name: Napalm_VRF_workflow 0 -> 2
+  source: Start
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: netmiko_check_vrf_test
+  name: Napalm_VRF_workflow 2 -> 3
+  source: napalm_create_vrf_test
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: netmiko_delete_vrf_test
+  name: Napalm_VRF_workflow 3 -> 4
+  source: netmiko_check_vrf_test
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: netmiko_check_no_vrf_test
+  name: Napalm_VRF_workflow 4 -> 5
+  source: netmiko_delete_vrf_test
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: End
+  name: Napalm_VRF_workflow 5 -> 1
+  source: netmiko_check_no_vrf_test
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: GET_device
+  name: payload_transfer_workflow:success 0 -> 2
+  source: Start
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: get_facts
+  name: payload_transfer_workflow:success 2 -> 3
+  source: GET_device
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: get_interfaces
+  name: payload_transfer_workflow:success 2 -> 4
+  source: GET_device
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: get_interfaces_ip
+  name: payload_transfer_workflow:success 3 -> 5
+  source: get_facts
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: get_config
+  name: payload_transfer_workflow:success 5 -> 6
+  source: get_interfaces_ip
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: process_payload1
+  name: payload_transfer_workflow:success 6 -> 7
+  source: get_config
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: process_payload1
+  name: payload_transfer_workflow:success 4 -> 7
+  source: get_interfaces
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: End
+  name: payload_transfer_workflow:success 7 -> 1
+  source: process_payload1
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: process_payload1
+  name: payload_transfer_workflow:prerequisite 4 -> 7
+  source: get_interfaces
+  subtype: prerequisite
+  workflow: payload_transfer_workflow
+- destination: process_payload1
+  name: payload_transfer_workflow:prerequisite 3 -> 7
+  source: get_facts
+  subtype: prerequisite
+  workflow: payload_transfer_workflow
+- destination: add_devices_to_payload
+  name: 'success: YaQL_test_worflow 0 -> 2'
+  source: Start
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: add_devices_to_payload
+  name: 'failure: YaQL_test_worflow 0 -> 2'
+  source: Start
+  subtype: failure
+  workflow: YaQL_test_worflow
+- destination: netmiko_yaql_defined_devices
+  name: 'success: YaQL_test_worflow 2 -> 3'
+  source: add_devices_to_payload
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: netmiko_yaql_defined_devices
+  name: 'failure: YaQL_test_worflow 2 -> 3'
+  source: add_devices_to_payload
+  subtype: failure
+  workflow: YaQL_test_worflow
+- destination: Iteration_service_simple
+  name: 'success: YaQL_test_worflow 3 -> 4'
+  source: netmiko_yaql_defined_devices
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: Iteration_service_simple
+  name: 'failure: YaQL_test_worflow 3 -> 4'
+  source: netmiko_yaql_defined_devices
+  subtype: failure
+  workflow: YaQL_test_worflow
+- destination: Iteration_service_yaql
+  name: 'success: YaQL_test_worflow 4 -> 5'
+  source: Iteration_service_simple
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: Iteration_service_yaql
+  name: 'failure: YaQL_test_worflow 4 -> 5'
+  source: Iteration_service_simple
+  subtype: failure
+  workflow: YaQL_test_worflow
+- destination: End
+  name: 'success: YaQL_test_worflow 5 -> 1'
+  source: Iteration_service_yaql
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: End
+  name: 'failure: YaQL_test_worflow 5 -> 1'
+  source: Iteration_service_yaql
+  subtype: failure
+  workflow: YaQL_test_worflow
+- destination: netmiko_show_ip_route
+  name: payload_extraction_validation_worflow 0 -> 2
+  source: Start
+  subtype: success
+  workflow: payload_extraction_validation_worflow
+- destination: payload_extraction
+  name: payload_extraction_validation_worflow 2 -> 3
+  source: netmiko_show_ip_route
+  subtype: success
+  workflow: payload_extraction_validation_worflow
+- destination: payload_validate_dict
+  name: payload_extraction_validation_worflow 3 -> 4
+  source: payload_extraction
+  subtype: success
+  workflow: payload_extraction_validation_worflow
+- destination: payload_validate_text
+  name: payload_extraction_validation_worflow 4 -> 5
+  source: payload_validate_dict
+  subtype: success
+  workflow: payload_extraction_validation_worflow
+- destination: End
+  name: payload_extraction_validation_worflow 5 -> 1
+  source: payload_validate_text
+  subtype: success
+  workflow: payload_extraction_validation_worflow
+- destination: payload_transfer_workflow
+  name: Workflow_of_workflows 0 -> 2
+  source: Start
+  subtype: success
+  workflow: Workflow_of_workflows
+- destination: get_interfaces
+  name: Workflow_of_workflows 2 -> 3
+  source: payload_transfer_workflow
+  subtype: success
+  workflow: Workflow_of_workflows
+- destination: Napalm_VRF_workflow
+  name: Workflow_of_workflows 3 -> 4
+  source: get_interfaces
+  subtype: success
+  workflow: Workflow_of_workflows
+- destination: End
+  name: Workflow_of_workflows 4 -> 1
+  source: Napalm_VRF_workflow
+  subtype: success
+  workflow: Workflow_of_workflows

@@ -9,4 +9,4 @@
 - Task targets and payload to override the scheduled jobs'
 - Workflow Restartability: you can click on a step of a workflow, and choose a payload version.
 - There is now have a dedicated string validation form.
-- added a bunch of useful endpoints to the rest api: "update_database_configurations_from_git", "update_all_pools", "get_git_content"
+- New rest api POST ENDPOINTS: "update_database_configurations_from_git", "update_all_pools", "get_git_content"

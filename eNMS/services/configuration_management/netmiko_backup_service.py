@@ -53,17 +53,15 @@ class NetmikoBackupService(Service):
             path_configurations = Path.cwd() / "git" / "configurations"
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
-            netmiko_handler = self.netmiko_connection(device, parent)
+            netmiko_connection = self.netmiko_connection(device, parent)
             try:
-                netmiko_handler.enable()
+                netmiko_connection.enable()
             except Exception:
                 pass
             self.logs.append(f"Fetching configuration on {device.name} (Netmiko)")
-            config = netmiko_handler.send_command(self.configuration_command)
+            config = netmiko_connection.send_command(self.configuration_command)
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
-            if not parent:
-                netmiko_handler.disconnect()
             if device.configurations:
                 last_config = device.configurations[max(device.configurations)]
                 if config == last_config:
@@ -74,8 +72,6 @@ class NetmikoBackupService(Service):
             device.last_update = str(now)
             self.generate_yaml_file(path_device_config, device)
         except Exception as e:
-            if not parent:
-                netmiko_handler.disconnect()
             device.last_status = "Failure"
             device.last_failure = str(now)
             self.generate_yaml_file(path_device_config, device)

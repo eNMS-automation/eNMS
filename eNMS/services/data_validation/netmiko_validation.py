@@ -52,19 +52,17 @@ class NetmikoValidationService(Service):
     __mapper_args__ = {"polymorphic_identity": "NetmikoValidationService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        netmiko_handler = self.netmiko_connection(device, parent)
+        netmiko_connection = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
         self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
         result = self.convert_result(
-            netmiko_handler.send_command(command, delay_factor=self.delay_factor)
+            netmiko_connection.send_command(command, delay_factor=self.delay_factor)
         )
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"
             else self.sub(self.dict_match, locals())
         )
-        if not parent:
-            netmiko_handler.disconnect()
         return {
             "match": match,
             "negative_logic": self.negative_logic,

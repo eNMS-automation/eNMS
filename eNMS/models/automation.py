@@ -439,7 +439,11 @@ class Service(Job):
             ] = netmiko_handler
         return netmiko_handler
 
-    def napalm_connection(self, device: "Device") -> NetworkDriver:
+    def napalm_connection(self, device: "Device", parent: "Job") -> NetworkDriver:
+        if getattr(parent, "name", None) in controller.connections_cache["napalm"]:
+            parent_connection = controller.connections_cache["napalm"].get(parent.name)
+            if parent_connection and device.name in parent_connection:
+                return parent_connection[device.name]
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:
@@ -449,12 +453,17 @@ class Service(Job):
         driver = get_network_driver(
             device.napalm_driver if self.use_device_driver else self.driver
         )
-        return driver(
+        napalm_handler = driver(
             hostname=device.ip_address,
             username=username,
             password=password,
             optional_args=optional_args,
         )
+        if parent:
+            controller.connections_cache["napalm"][parent.name][
+                device.name
+            ] = napalm_handler
+        return napalm_handler
 
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())

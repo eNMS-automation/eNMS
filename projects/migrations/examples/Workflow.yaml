@@ -150,7 +150,7 @@
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: false
+  use_workflow_targets: true
   vendor: Arista
   waiting_time: 0
   yaql_query: ''

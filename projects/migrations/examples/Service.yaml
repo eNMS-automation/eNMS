@@ -889,7 +889,7 @@
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
-  validation_method: dict_equal
+  validation_method: dict_included
   vendor: ''
   waiting_time: 0
   yaql_query: ''
@@ -934,7 +934,7 @@
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
-  validation_method: dict_equal
+  validation_method: dict_included
   vendor: ''
   waiting_time: 0
   yaql_query: ''
@@ -976,7 +976,7 @@
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
-  validation_method: dict_equal
+  validation_method: dict_included
   vendor: ''
   waiting_time: 0
   yaql_query: ''
@@ -1018,7 +1018,7 @@
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
-  validation_method: dict_equal
+  validation_method: dict_included
   vendor: ''
   waiting_time: 0
   yaql_query: ''
@@ -1393,7 +1393,7 @@
   display_only_failed_nodes: true
   events: []
   failed: 0
-  has_targets: false
+  has_targets: true
   hidden: false
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
@@ -1436,7 +1436,7 @@
   display_only_failed_nodes: true
   events: []
   failed: 0
-  has_targets: false
+  has_targets: true
   hidden: false
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29

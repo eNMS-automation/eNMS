@@ -38,10 +38,9 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             },
         )
 
-    def update_admin_user(self) -> None:
+    def update_credentials(self) -> None:
         factory("User", **{"name": "admin", "password": "admin"})
-
-    def update_network_topology(self) -> None:
+        factory("Service", **{"name": "GET_device", "password": "admin"})
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)
 
@@ -50,11 +49,9 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         self.configure_server_id()
         if self.create_examples:
             self.migration_import(name="examples", import_export_types=import_classes)
-            self.update_network_topology()
+            self.update_credentials()
         else:
             self.migration_import(name="default", import_export_types=import_classes)
-        self.update_admin_user()
-
         self.get_git_content()
         Session.commit()
 

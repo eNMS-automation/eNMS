@@ -59,6 +59,7 @@ def configure_context_processor(app: Flask) -> None:
             "form_properties": form_properties,
             "names": property_names,
             "parameters": controller.config,
+            "documentation_url": controller.documentation_url,
             "property_types": {k: str(v) for k, v in property_types.items()},
         }
 

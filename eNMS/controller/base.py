@@ -57,6 +57,7 @@ class BaseController:
     default_zoom_level = environ.get("DEFAULT_ZOOM_LEVEL", 5)
     default_view = environ.get("DEFAULT_VIEW", "2D")
     default_marker = environ.get("DEFAULT_MARKER", "Image")
+    documentation_url = environ.get("DOCUMENTATION_URL", "https://enms.readthedocs.io/en/latest/")
     create_examples = int(environ.get("CREATE_EXAMPLES", True))
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
     enms_config_mode = environ.get("ENMS_CONFIG_MODE", "Debug")

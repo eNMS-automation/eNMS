@@ -75,4 +75,3 @@ class NapalmBackupForm(ServiceForm):
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField(default=True)
     optional_args = DictField()
-

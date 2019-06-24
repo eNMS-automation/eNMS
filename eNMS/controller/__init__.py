@@ -48,12 +48,13 @@ class Controller(AdministrationController, AutomationController, InventoryContro
     def init_database(self) -> None:
         self.init_parameters()
         self.configure_server_id()
-        self.migration_import(
-            name="examples" if self.create_examples else "default",
-            import_export_types=import_classes,
-        )
+        if self.create_examples:
+            self.migration_import(name="examples", import_export_types=import_classes)
+            self.update_network_topology()
+        else:
+            self.migration_import(name="default", import_export_types=import_classes)
         self.update_admin_user()
-        self.update_network_topology()
+
         self.get_git_content()
         Session.commit()
 

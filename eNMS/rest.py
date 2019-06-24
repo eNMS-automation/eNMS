@@ -19,8 +19,12 @@ def create_controller_resources() -> Dict[str, Resource]:
         endpoint: type(
             endpoint,
             (Resource,),
-            {"decorators": [auth.login_required], "post": getattr(controller, endpoint)},
-        ) for endpoint in controller.valid_rest_endpoints
+            {
+                "decorators": [auth.login_required],
+                "post": getattr(controller, endpoint),
+            },
+        )
+        for endpoint in controller.valid_rest_endpoints
     }
 
 

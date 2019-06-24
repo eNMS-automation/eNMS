@@ -1,10 +1,12 @@
 - Iteration Service (missing: GUI ?)
-- Connection Cache
-- Services now have access to an additional parameter via their job function: "parent"
-Parent is the workflow if the service runs within a workflow, and the service when the service runs as part of an iteration service.
+- Connection Cache for Netmiko and Napalm
+- /!\ Custom services now receive an additional "parent" parameter: 
+*** if the service runs within a workflow, this parent will be the workflow.
+*** if the service runs as part of an iteration service, it is the iteration service.
 - Payload Extraction Service (both text/dict, regex and YaQL)
+- Payload Validation Service
 - Task scheduling via REST API
 - Task targets and payload to override the scheduled jobs'
-- /!\ Custom services now receive an additional "parent" parameter. If the service runs within a workflow, this parent will be the workflow.
-- - PRIORITY: split string and dict validation: done. You now have a dedicated string validation form.
+- Workflow Restartability: you can click on a step of a workflow, and choose a payload version.
+- There is now have a dedicated string validation form.
 - added a bunch of useful endpoints to the rest api: "update_database_configurations_from_git", "update_all_pools", "get_git_content"

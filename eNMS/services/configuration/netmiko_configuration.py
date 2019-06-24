@@ -31,9 +31,10 @@ class NetmikoConfigurationService(Service):
     timeout = Column(Integer, default=1.0)
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
+    commit_configuration = Column(Boolean, default=False)
     exit_config_mode = Column(Boolean, default=True)
-    strip_prompt = Column(Boolean, default=True)
-    strip_command = Column(Boolean, default=True)
+    strip_prompt = Column(Boolean, default=False)
+    strip_command = Column(Boolean, default=False)
     config_mode_command = Column(String(SMALL_STRING_LENGTH), default="")
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
@@ -50,6 +51,8 @@ class NetmikoConfigurationService(Service):
             strip_command=self.strip_command,
             config_mode_command=self.config_mode_command,
         )
+        if self.commit_configuration:
+            netmiko_connection.commit()
         return {"success": True, "result": f"configuration OK {config}"}
 
 
@@ -63,6 +66,7 @@ class NetmikoConfigurationForm(ServiceForm):
     timeout = IntegerField(default=10)
     delay_factor = FloatField(default=1.0)
     global_delay_factor = FloatField(default=1.0)
+    commit_configuration = BooleanField()
     exit_config_mode = BooleanField()
     strip_prompt = BooleanField()
     strip_command = BooleanField()

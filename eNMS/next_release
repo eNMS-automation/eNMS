@@ -10,3 +10,5 @@
 - Workflow Restartability: you can click on a step of a workflow, and choose a payload version.
 - There is now have a dedicated string validation form.
 - New rest api POST ENDPOINTS: "update_database_configurations_from_git", "update_all_pools", "get_git_content"
+- Netmiko configuration service: add default parameter + option commit() for IOS XR
+- New Env variable for the base documentation link: DOCUMENTATION_URL (must end with a slash)

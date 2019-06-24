@@ -31,6 +31,10 @@ class NetmikoConfigurationService(Service):
     timeout = Column(Integer, default=1.0)
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
+    exit_config_mode = Column(Boolean, default=True)
+    strip_prompt = Column(Boolean, default=True)
+    strip_command = Column(Boolean, default=True)
+    config_mode_command = Column(String(SMALL_STRING_LENGTH), default="")
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
 
@@ -39,7 +43,12 @@ class NetmikoConfigurationService(Service):
         config = self.sub(self.content, locals())
         self.logs.append(f"Pushing configuration on {device.name} (Netmiko)")
         netmiko_connection.send_config_set(
-            config.splitlines(), delay_factor=self.delay_factor
+            config.splitlines(),
+            delay_factor=self.delay_factor,
+            exit_config_mode=self.exit_config_mode,
+            strip_prompt=self.strip_prompt,
+            strip_command=self.strip_command,
+            config_mode_command=self.config_mode_command,
         )
         return {"success": True, "result": f"configuration OK {config}"}
 
@@ -54,3 +63,7 @@ class NetmikoConfigurationForm(ServiceForm):
     timeout = IntegerField(default=10)
     delay_factor = FloatField(default=1.0)
     global_delay_factor = FloatField(default=1.0)
+    exit_config_mode = BooleanField()
+    strip_prompt = BooleanField()
+    strip_command = BooleanField()
+    config_mode_command = StringField()

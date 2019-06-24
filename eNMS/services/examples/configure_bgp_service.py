@@ -26,7 +26,6 @@ class ConfigureBgpService(Service):
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         napalm_driver = self.napalm_connection(device, parent)
-        napalm_driver.open()
         config = f"""
             ip vrf {self.vrf_name}
             rd {self.local_as}:235
@@ -47,9 +46,8 @@ class ConfigureBgpService(Service):
         """
         config = "\n".join(config.splitlines())
         self.logs.append(f"Pushing BGP configuration on {device.name} (Napalm)")
-        getattr(napalm_driver, "load_merge_candidate")(config=config)
-        napalm_driver.commit_config()
-        napalm_driver.close()
+        getattr(napalm_connection, "load_merge_candidate")(config=config)
+        napalm_connection.commit_config()
         return {"success": True, "result": f"Config push ({config})"}
 
 

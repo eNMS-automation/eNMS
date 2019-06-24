@@ -44,11 +44,9 @@ class NapalmBackupService(Service):
             path_configurations = Path.cwd() / "git" / "configurations"
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
-            napalm_driver = self.napalm_connection(device, parent)
-            napalm_driver.open()
+            napalm_connection = self.napalm_connection(device, parent)
             self.logs.append(f"Fetching configuration on {device.name} (Napalm)")
-            config = controller.str_dict(napalm_driver.get_config())
-            napalm_driver.close()
+            config = controller.str_dict(napalm_connection.get_config())
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
             if device.configurations:
@@ -77,3 +75,4 @@ class NapalmBackupForm(ServiceForm):
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField(default=True)
     optional_args = DictField()
+

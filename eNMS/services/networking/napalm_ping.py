@@ -31,15 +31,14 @@ class NapalmPingService(Service):
     __mapper_args__ = {"polymorphic_identity": "NapalmPingService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        napalm_driver = self.napalm_connection(device, parent)
-        napalm_driver.open()
+        napalm_connection = self.napalm_connection(device, parent)
         destination = self.sub(self.destination_ip, locals())
         source = self.sub(self.source_ip, locals())
         self.logs.append(
             f"Running napalm ping from {source}"
             f"to {destination} on {device.ip_address}"
         )
-        ping = napalm_driver.ping(
+        ping = napalm_connection.ping(
             destination=destination,
             source=source,
             vrf=self.vrf,
@@ -48,7 +47,6 @@ class NapalmPingService(Service):
             size=self.size or 100,
             count=self.count or 5,
         )
-        napalm_driver.close()
         return {"success": "success" in ping, "result": ping}
 
 

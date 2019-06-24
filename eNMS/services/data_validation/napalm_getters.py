@@ -28,14 +28,13 @@ class NapalmGettersService(Service):
     __mapper_args__ = {"polymorphic_identity": "NapalmGettersService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        napalm_driver, result = self.napalm_connection(device, parent), {}
-        napalm_driver.open()
+        napalm_connection, result = self.napalm_connection(device, parent), {}
         self.logs.append(
             f"Fetching NAPALM getters ({', '.join(self.getters)}) on {device.name}"
         )
         for getter in self.getters:
             try:
-                result[getter] = getattr(napalm_driver, getter)()
+                result[getter] = getattr(napalm_connection, getter)()
             except Exception as e:
                 result[getter] = f"{getter} failed because of {e}"
         match = (
@@ -43,7 +42,6 @@ class NapalmGettersService(Service):
             if self.validation_method == "text"
             else self.sub(self.dict_match, locals())
         )
-        napalm_driver.close()
         return {
             "match": match,
             "negative_logic": self.negative_logic,

@@ -27,13 +27,11 @@ class NapalmConfigurationService(Service):
     __mapper_args__ = {"polymorphic_identity": "NapalmConfigurationService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        napalm_driver = self.napalm_connection(device, parent)
+        napalm_connection = self.napalm_connection(device, parent)
         self.logs.append(f"Pushing configuration on {device.name} (Napalm)")
         config = "\n".join(self.sub(self.content, locals()).splitlines())
-        getattr(napalm_driver, self.action)(config=config)
-        napalm_driver.commit_config()
-        if not parent:
-            napalm_driver.close()
+        getattr(napalm_connection, self.action)(config=config)
+        napalm_connection.commit_config()
         return {"success": True, "result": f"Config push ({config})"}
 
 

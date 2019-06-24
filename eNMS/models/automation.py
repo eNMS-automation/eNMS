@@ -331,7 +331,7 @@ class Service(Job):
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
-        *other,
+        *other: Any,
     ) -> dict:
         current_job = parent or self
         results: dict = {"results": {}, "success": False}
@@ -632,14 +632,13 @@ class Workflow(Job):
         origin: Optional["Job"] = None,
     ) -> dict:
         self.state = {"jobs": {}}
-        if not origin:
-            origin = self.jobs[0]
-        jobs: List[Job] = [origin]
+        start_job = origin or self.jobs[0]
+        jobs: list = [start_job]
         visited: Set = set()
         results: dict = {"results": payload or {}, "success": False}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            allowed_devices[origin.name] = targets or self.compute_devices(payload)
+            allowed_devices[start_job.name] = targets or self.compute_devices(payload)
         while jobs:
             job = jobs.pop()
             if any(

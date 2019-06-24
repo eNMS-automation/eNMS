@@ -18,7 +18,10 @@ class AutomationController(BaseController):
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
-    connections_cache = {"napalm": defaultdict(dict), "netmiko": defaultdict(dict)}
+    connections_cache: dict = {
+        "napalm": defaultdict(dict),
+        "netmiko": defaultdict(dict),
+    }
 
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int

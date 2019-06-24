@@ -4,7 +4,7 @@ from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
 from eNMS.database import Session
-from eNMS.database.functions import factory, fetch
+from eNMS.database.functions import factory
 from eNMS.models import models, model_properties
 from eNMS.properties.database import import_classes
 
@@ -40,10 +40,10 @@ class Controller(AdministrationController, AutomationController, InventoryContro
 
     def init_database(self) -> None:
         self.init_parameters()
-        self.configure_server_id() 
+        self.configure_server_id()
         self.migration_import(
             name="examples" if self.create_examples else "default",
-            import_export_types=import_classes
+            import_export_types=import_classes,
         )
         self.get_git_content()
 

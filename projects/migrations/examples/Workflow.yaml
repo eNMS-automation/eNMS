@@ -14,7 +14,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-06-24 07:24:53.716312'
+  last_modified: '2019-06-24 10:14:18.797715'
   mail_recipient: ''
   name: Configuration Management Workflow
   number_of_retries: 0
@@ -52,11 +52,11 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-06-24 07:24:56.577030'
+  last_modified: '2019-06-24 10:14:18.876557'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: eos
   pools: []
   positions: {}
@@ -88,19 +88,19 @@
   - End
   - napalm_create_vrf_test
   - netmiko_check_vrf_test
-  - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-06-24 07:24:56.936726'
+  - napalm_rollback
+  last_modified: '2019-06-24 10:19:37.762568'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: !!python/tuple
-    - 0
-    - 200
+    Workflow_of_workflows:
+    - '0'
+    - '200'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -133,7 +133,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-06-24 07:24:57.343588'
+  last_modified: '2019-06-24 10:14:19.015710'
   mail_recipient: ''
   name: payload_transfer_workflow
   number_of_retries: 0
@@ -141,9 +141,9 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: !!python/tuple
-    - 0
-    - -200
+    Workflow_of_workflows:
+    - '0'
+    - '-200'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -172,7 +172,7 @@
   - netmiko_yaql_defined_devices
   - Iteration_service_simple
   - Iteration_service_yaql
-  last_modified: '2019-06-24 07:24:57.941133'
+  last_modified: '2019-06-24 10:14:19.068461'
   mail_recipient: ''
   name: YaQL_test_worflow
   number_of_retries: 0
@@ -210,7 +210,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-06-24 07:24:58.363519'
+  last_modified: '2019-06-24 10:14:19.136625'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   number_of_retries: 0
@@ -246,7 +246,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-06-24 07:24:58.639163'
+  last_modified: '2019-06-24 10:14:19.201650'
   mail_recipient: ''
   name: Workflow_of_workflows
   number_of_retries: 0

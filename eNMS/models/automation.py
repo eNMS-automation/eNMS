@@ -440,9 +440,11 @@ class Service(Job):
         return netmiko_handler
 
     def napalm_connection(self, device: "Device", parent: "Job") -> NetworkDriver:
+        print("ooooo"*100, controller.connections_cache)
         if getattr(parent, "name", None) in controller.connections_cache["napalm"]:
             parent_connection = controller.connections_cache["napalm"].get(parent.name)
             if parent_connection and device.name in parent_connection:
+                print(self)
                 return parent_connection[device.name]
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
@@ -459,6 +461,7 @@ class Service(Job):
             password=password,
             optional_args=optional_args,
         )
+        napalm_handler.open()
         if parent:
             controller.connections_cache["napalm"][parent.name][
                 device.name

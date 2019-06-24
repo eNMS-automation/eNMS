@@ -53,16 +53,6 @@
   source: napalm_create_vrf_test
   subtype: success
   workflow: Napalm_VRF_workflow
-- destination: netmiko_delete_vrf_test
-  name: Napalm_VRF_workflow 3 -> 4
-  source: netmiko_check_vrf_test
-  subtype: success
-  workflow: Napalm_VRF_workflow
-- destination: netmiko_check_no_vrf_test
-  name: Napalm_VRF_workflow 4 -> 5
-  source: netmiko_delete_vrf_test
-  subtype: success
-  workflow: Napalm_VRF_workflow
 - destination: End
   name: Napalm_VRF_workflow 5 -> 1
   source: netmiko_check_no_vrf_test
@@ -213,3 +203,13 @@
   source: Napalm_VRF_workflow
   subtype: success
   workflow: Workflow_of_workflows
+- destination: napalm_rollback
+  name: 38-success:17->43
+  source: netmiko_check_vrf_test
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: netmiko_check_no_vrf_test
+  name: 38-success:43->19
+  source: napalm_rollback
+  subtype: success
+  workflow: Napalm_VRF_workflow

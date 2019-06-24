@@ -41,6 +41,10 @@ class Controller(AdministrationController, AutomationController, InventoryContro
     def update_admin_user(self) -> None:
         factory("User", **{"name": "admin", "password": "admin"})
 
+    def update_network_topology(self) -> None:
+        with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
+            self.topology_import(file)
+
     def init_database(self) -> None:
         self.init_parameters()
         self.configure_server_id()
@@ -49,6 +53,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             import_export_types=import_classes,
         )
         self.update_admin_user()
+        self.update_network_topology()
         self.get_git_content()
         Session.commit()
 

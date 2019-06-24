@@ -28,12 +28,12 @@ class NapalmConfigurationService(Service):
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         napalm_driver = self.napalm_connection(device, parent)
-        napalm_driver.open()
         self.logs.append(f"Pushing configuration on {device.name} (Napalm)")
         config = "\n".join(self.sub(self.content, locals()).splitlines())
         getattr(napalm_driver, self.action)(config=config)
         napalm_driver.commit_config()
-        napalm_driver.close()
+        if not parent:
+            napalm_driver.close()
         return {"success": True, "result": f"Config push ({config})"}
 
 

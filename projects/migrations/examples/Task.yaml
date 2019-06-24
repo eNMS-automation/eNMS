@@ -5,7 +5,7 @@
   frequency: 3600
   frequency_unit: seconds
   job: Configuration Management Workflow
-  job_id: 9
+  job_id: 36
   name: Poller
   payload: {}
   pools: []

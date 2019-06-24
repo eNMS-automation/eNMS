@@ -103,6 +103,7 @@ class AdministrationController(BaseController):
             for type in types:
                 delete_all(type)
                 Session.commit()
+        workflow_edges = []
         for cls in types:
             path = (
                 self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"

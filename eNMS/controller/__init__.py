@@ -802,17 +802,19 @@ class Controller(AdministrationController, AutomationController, InventoryContro
     def create_default(self) -> None:
         self.init_parameters()
         self.configure_server_id()
-        self.create_default_users()
+        self.migration_import(name="default", import_export_types=["User", "Pool", "Service", "Workflow", "Task"])
+        """ self.create_default_users()
         self.create_default_pools()
         self.create_default_services()
         Session.commit()
         self.create_default_workflows()
         Session.commit()
-        self.create_default_tasks()
+        self.create_default_tasks()"""
         self.get_git_content()
 
     def examples_creation(self) -> None:
-        self.create_example_pools()
+        pass
+        """         self.create_example_pools()
         self.create_network_topology()
         Session.commit()
         self.create_example_services()
@@ -822,7 +824,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         self.create_yaql_iteration_workflow()
         self.create_payload_extraction_validation_workflow()
         self.create_workflow_of_workflows()
-        Session.commit()
+        Session.commit() """
 
     def init_database(self) -> None:
         self.create_default()

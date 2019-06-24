@@ -1,0 +1,20 @@
+- destination: poller_service
+  name: Configuration Management Workflow 0 -> 2 (True)
+  source: Start
+  subtype: success
+  workflow: Configuration Management Workflow
+- destination: git_push_configurations
+  name: Configuration Management Workflow 2 -> 3 (True)
+  source: poller_service
+  subtype: success
+  workflow: Configuration Management Workflow
+- destination: git_push_configurations
+  name: Configuration Management Workflow 2 -> 3 (False)
+  source: poller_service
+  subtype: failure
+  workflow: Configuration Management Workflow
+- destination: End
+  name: Configuration Management Workflow 3 -> 1 (True)
+  source: git_push_configurations
+  subtype: success
+  workflow: Configuration Management Workflow

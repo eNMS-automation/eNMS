@@ -456,10 +456,11 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                 "description": "Payload Validate Text",
                 "query": (
                     "$.payload_extraction.results.devices"
-                    ".{{device.name}}.result.textfsm_variable.value[0][-1]"
+                    ".{{device.name}}.result.textfsm_variable.value[0][1]"
                 ),
                 "validation_method": "text",
                 "content_match": "(\d\.){3}\d",
+                "content_match_regex": True,
                 "waiting_time": 0,
                 "vendor": "Arista",
                 "operating_system": "eos",

@@ -1,5 +1,6 @@
 from apscheduler.triggers.cron import CronTrigger
 from collections import defaultdict
+from copy import deepcopy
 from datetime import datetime
 from git import Repo
 from git.exc import GitCommandError
@@ -524,12 +525,13 @@ class Service(Job):
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:
+            match_copy = deepcopy(match)
             for k, v in result.items():
                 if isinstance(v, dict):
-                    self.match_dictionary(v, match)
-                elif k in match and match[k] == v:
-                    match.pop(k)
-            return not match
+                    self.match_dictionary(v, match_copy)
+                elif k in match_copy and match_copy[k] == v:
+                    match_copy.pop(k)
+            return not match_copy
 
     def transfer_file(
         self, ssh_client: SSHClient, files: List[Tuple[str, str]]

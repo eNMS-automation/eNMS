@@ -175,9 +175,10 @@ function showPoolObjectsPanel(id) {
  * @param {pool} pool - Id of a pool or 'all'.
  */
 // eslint-disable-next-line
-function updatePool(pool) {
+function updatePools(pool) {
   alertify.notify("Update starting...", "success", 5);
-  call(`/update_pools/${pool}`, function() {
+  endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools"; 
+  call(endpoint, function() {
     table.ajax.reload(null, false);
     alertify.notify("Update successful.", "success", 5);
   });

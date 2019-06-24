@@ -300,7 +300,7 @@ class Pool(AbstractPool):
             onclick="showTypePanel('pool', '{self.id}')">
             Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="updatePool('{self.id}')">Update</button>""",
+            onclick="updatePools('{self.id}')">Update</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('pool', '{self.id}', true)">
             Duplicate</button>""",

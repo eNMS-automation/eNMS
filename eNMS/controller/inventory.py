@@ -232,12 +232,12 @@ class InventoryController(BaseController):
             )
         return pool.serialized
 
-    def update_pools(self, pool_id: str) -> None:
-        if pool_id == "all":
-            for pool in fetch_all("Pool"):
-                pool.compute_pool()
-        else:
-            fetch("Pool", id=int(pool_id)).compute_pool()
+    def update_pool(self, pool_id: str) -> None:
+        fetch("Pool", id=int(pool_id)).compute_pool()
+
+    def update_all_pools(self) -> None:
+        for pool in fetch_all("Pool"):
+            pool.compute_pool()
 
     def get_view_topology(self) -> dict:
         return {

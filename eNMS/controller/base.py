@@ -151,7 +151,8 @@ class BaseController:
         "topology_import",
         "update",
         "update_parameters",
-        "update_pools",
+        "update_pool",
+        "update_all_pools",
         "view_filtering",
     ]
 

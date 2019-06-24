@@ -13,6 +13,13 @@ from eNMS.database.functions import delete, factory, fetch
 from eNMS.exceptions import InstanceNotFoundException
 from eNMS.extensions import auth, csrf
 
+allowed_controller_endpoints = [
+    "get_cluster_status",
+    "get_git_content",
+    "update_database_configurations_from_git",
+]
+
+
 
 class CreatePool(Resource):
     decorators = [auth.login_required]

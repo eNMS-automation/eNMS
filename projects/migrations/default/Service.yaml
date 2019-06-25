@@ -15,6 +15,8 @@
   max_processes: 5
   multiprocessing: false
   name: Start
+  color: pink
+  shape: circle
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -49,6 +51,8 @@
   max_processes: 5
   multiprocessing: false
   name: End
+  color: 'pink'
+  shape: 'circle'
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''

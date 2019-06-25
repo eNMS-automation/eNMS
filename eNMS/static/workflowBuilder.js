@@ -224,19 +224,16 @@ function deleteEdge(edgeId) {
  * @return {visJob}.
  */
 function jobToNode(job) {
-  let color;
-  if (job.name == "Start" || job.name == "End") {
-    color = "pink";
-  } else {
-    color = "#D2E5FF";
-  }
+  console.log(job)
   return {
     id: job.id,
+    shape: job.shape,
+    size: job.size,
     label: job.name,
     type: job.type,
     x: job.positions[workflow.name] ? job.positions[workflow.name][0] : 0,
     y: job.positions[workflow.name] ? job.positions[workflow.name][1] : 0,
-    color: color,
+    color: job.color,
   };
 }
 

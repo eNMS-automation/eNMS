@@ -89,6 +89,9 @@ class Job(AbstractBase):
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])
+    shape = Column(String(SMALL_STRING_LENGTH), default="box")
+    size = Column(Integer, default=10)
+    color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
 
     @hybrid_property
     def status(self) -> str:

@@ -112,9 +112,8 @@ class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction: str) -> Optional[str]:
-        return getattr(controller, f"migration_{direction}")(
-            **request.get_json(force=True)
-        )
+        kwargs = request.get_json(force=True)
+        return getattr(controller, f"migration_{direction}")(**kwargs)
 
 
 class RunJob(Resource):
@@ -169,7 +168,7 @@ class RunJob(Resource):
 class Topology(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction: str) -> Optional[str]:
+    def post(self, direction: str) -> str:
         if direction == "import":
             return controller.import_topology(
                 **{
@@ -179,7 +178,7 @@ class Topology(Resource):
             )
         else:
             controller.export_topology(**request.get_json(force=True))
-            return None
+            return "Topology Export successfully executed."
 
 
 def configure_rest_api(app: Flask) -> None:

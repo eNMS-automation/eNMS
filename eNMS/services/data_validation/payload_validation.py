@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import HiddenField, SelectField
+from wtforms import HiddenField, SelectField, StringField
 from yaql import factory
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
@@ -55,3 +55,4 @@ class PayloadValidationForm(ServiceForm, ValidationForm):
             ("xml", "XML dictionary"),
         )
     )
+    query = StringField()

@@ -58,6 +58,7 @@ class PayloadExtractionService(Service):
             result[variable] = {
                 "query": query,
                 "match_type": match_type,
+                "match": match,
                 "value": (
                     value
                     if match_type == "none"

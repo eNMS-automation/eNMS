@@ -1,5 +1,6 @@
-- Iteration Service (missing: GUI ?)
+- Iteration Service
 - Connection Cache for Netmiko and Napalm
+- Custom Notification header
 - /!\ Custom services now receive an additional "parent" parameter: 
 *** if the service runs within a workflow, this parent will be the workflow.
 *** if the service runs as part of an iteration service, it is the iteration service.
@@ -13,6 +14,6 @@
 - Netmiko configuration service: add default parameter + option commit() for IOS XR
 - way to configure the base URL for each of the documentation links on the various pages: New Env variable for the base documentation link: DOCUMENTATION_URL (must end with a slash)
 - Workflow Restartability: workflow can be restarted from any job with payload from previous version
-- Rest Call Service: add rest headers and status code in the result
+- Rest Call Service: added rest headers and status code in the result
 - Add new customization properties for a job display in the workflow builder: shape, size and color.
-- Custom Notification header
+- Table filtering

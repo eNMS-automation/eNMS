@@ -36,6 +36,11 @@ class IterationService(Service):
         else:
             return self.iterated_job.compute_devices(payload)
 
+    def get_properties(self, **kwargs):
+        result = super().get_properties(**kwargs)
+        result["iterated_job"] = self.iterated_job.name
+        return result
+
     def job(
         self,
         payload: dict,

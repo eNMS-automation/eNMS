@@ -55,6 +55,7 @@ let lastModified;
 function displayWorkflow(wf) {
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
+  wf.jobs.filter((s) => s.type == "IterationService").map(drawIterationService);
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function(properties) {
@@ -234,6 +235,17 @@ function jobToNode(job) {
     x: job.positions[workflow.name] ? job.positions[workflow.name][0] : 0,
     y: job.positions[workflow.name] ? job.positions[workflow.name][1] : 0,
   };
+}
+
+function drawIterationService(service) {
+  edges.add({
+    id: -service.id,
+    label: service.iterated_job,
+    from: service.id,
+    to: service.id,
+    color: "black",
+    arrows: { to: { enabled: true } },
+  });
 }
 
 /**

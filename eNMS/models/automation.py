@@ -90,7 +90,7 @@ class Job(AbstractBase):
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])
     shape = Column(String(SMALL_STRING_LENGTH), default="box")
-    size = Column(Integer, default=10)
+    size = Column(Integer, default=40)
     color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
 
     @hybrid_property

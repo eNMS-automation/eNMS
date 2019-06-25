@@ -46,6 +46,20 @@ class JobForm(BaseForm):
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
+    shape = SelectField(
+        "Shape",
+        choices=(
+            ("box", "Box"),
+            ("circle", "Circle"),
+            ("square", "Square"),
+            ("diamond", "Diamond"),
+            ("triangle", "Triangle"),
+            ("ellipse", "Ellipse"),
+            ("database", "Database"),
+        ),
+    )
+    size = IntegerField("Size")
+    color = StringField("Color")
 
     def validate(self) -> bool:
         if not super().validate():

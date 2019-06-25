@@ -224,16 +224,15 @@ function deleteEdge(edgeId) {
  * @return {visJob}.
  */
 function jobToNode(job) {
-  console.log(job)
   return {
     id: job.id,
     shape: job.shape,
+    color: job.color,
     size: job.size,
     label: job.name,
     type: job.type,
     x: job.positions[workflow.name] ? job.positions[workflow.name][0] : 0,
     y: job.positions[workflow.name] ? job.positions[workflow.name][1] : 0,
-    color: job.color,
   };
 }
 
@@ -387,7 +386,7 @@ function getJobState(id) {
     } else {
       $("#status").text("Status: Idle.");
       $("#current-job").empty();
-      colorJob(id, "#D2E5FF");
+      colorJob(id, job.color);
     }
   });
 }
@@ -424,7 +423,7 @@ function getWorkflowState() {
           }
         } else {
           $("#current-device,#current-job").empty();
-          wf.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
+          wf.jobs.forEach((job) => colorJob(job.id, job.color));
         }
         setTimeout(getWorkflowState, wf.is_running ? 700 : 15000);
       }

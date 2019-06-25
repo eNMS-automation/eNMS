@@ -78,6 +78,7 @@ class AbstractBase(Base):
             if property in private_properties or property in ignore_properties:
                 continue
             value = getattr(self, property)
+            print(self, property, value)
             if export:
                 if isinstance(value, MutableList):
                     value = list(value)

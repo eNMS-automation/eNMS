@@ -4,7 +4,7 @@ from flask_restful import abort, Api, Resource
 from logging import info
 from psutil import cpu_percent
 from uuid import getnode
-from typing import Dict, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 from eNMS.concurrency import threaded_job
 from eNMS.controller import controller
@@ -15,17 +15,18 @@ from eNMS.extensions import auth, csrf
 
 
 def create_controller_resources() -> Dict[str, Resource]:
-    return {
-        endpoint: type(
-            endpoint,
-            (Resource,),
-            {
-                "decorators": [auth.login_required],
-                "post": getattr(controller, endpoint),
-            },
+    endpoints = {}
+    for endpoint in controller.valid_rest_endpoints:
+
+        def post(_: Any, ep: str = endpoint) -> str:
+            getattr(controller, ep)()
+            Session.commit()
+            return f"Endpoint {ep} successfully executed."
+
+        endpoints[endpoint] = type(
+            endpoint, (Resource,), {"decorators": [auth.login_required], "post": post}
         )
-        for endpoint in controller.valid_rest_endpoints
-    }
+    return endpoints
 
 
 class CreatePool(Resource):

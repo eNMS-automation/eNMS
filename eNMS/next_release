@@ -13,3 +13,4 @@
 - Netmiko configuration service: add default parameter + option commit() for IOS XR
 - New Env variable for the base documentation link: DOCUMENTATION_URL (must end with a slash)
 - Workflow Restartability: workflow can be restarted from any job with payload from previous version
+- Rest Call Service: add rest headers and status code in the result

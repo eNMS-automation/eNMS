@@ -99,7 +99,7 @@ class Job(AbstractBase):
     send_notification_method = Column(
         String(SMALL_STRING_LENGTH), default="mail_feedback_notification"
     )
-    notification_header = Column(String(LARGE_STRING_LENGTH), default="")
+    notification_header = Column(Text(LARGE_STRING_LENGTH), default="")
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])

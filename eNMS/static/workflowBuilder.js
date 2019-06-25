@@ -356,7 +356,7 @@ $("#network").contextMenu({
  * Start the workflow.
  */
 function runWorkflow() {
-  workflow.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
+  workflow.jobs.forEach((job) => colorJob(job.id, job.color));
   runJob(workflow.id);
 }
 
@@ -366,9 +366,7 @@ function runWorkflow() {
  * @param {color} color - Node color.
  */
 function colorJob(id, color) {
-  if (id != 1 && id != 2) {
-    nodes.update({ id: id, color: color });
-  }
+  nodes.update({ id: id, color: color });
 }
 
 /**

@@ -225,7 +225,7 @@ class Service(Job):
     max_processes = Column(Integer, default=5)
 
     def job_notification(self, results: dict) -> List[str]:
-        notification = []
+        notification = self.notification_header.splitlines()
         if "devices" in results["results"] and not results["success"]:
             failed = "\n".join(
                 device
@@ -579,7 +579,7 @@ class Workflow(Job):
             end.positions[self.name] = (500, 0)
 
     def job_notification(self, results: dict) -> list:
-        return []
+        return self.notification_header.splitlines()
 
     def generate_row(self, table: str) -> List[str]:
         return [

@@ -81,12 +81,10 @@
         <div class='form-group'>
           {{ form.send_notification_method(id='workflow-send_notification_method', class="form-control add-id") }}
         </div>
-        <fieldset>
-          <div class="item">
-            <input id="workflow-custom_notification" name="custom_notification" type="checkbox" class="add-id" value="y">
-            <label>Custom Notification</label>
-          </div>
-        </fieldset>
+        <label><label for="notification_header">Notification Header</label></label>
+        <div class='form-group'>
+          {{ form.notification_header(id='workflow-notification_header', class="form-control add-id") }}
+        </div>
         <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
         <div class='form-group'>
           {{ form.mail_recipient(id='workflow-mail_recipient', class="form-control add-id") }}

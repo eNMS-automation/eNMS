@@ -38,8 +38,10 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             },
         )
 
-    def update_credentials(self) -> None:
+    def create_admin_user(self) -> None:
         factory("User", **{"name": "admin", "password": "admin"})
+
+    def update_credentials(self) -> None:
         factory("Service", **{"name": "GET_device", "password": "admin"})
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)
@@ -47,6 +49,8 @@ class Controller(AdministrationController, AutomationController, InventoryContro
     def init_database(self) -> None:
         self.init_parameters()
         self.configure_server_id()
+        self.create_admin_user()
+        Session.commit()
         if self.create_examples:
             self.migration_import(name="examples", import_export_types=import_classes)
             self.update_credentials()

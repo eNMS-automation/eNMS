@@ -78,7 +78,7 @@ class User(AbstractBase, UserMixin):
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)
     email = Column(String(SMALL_STRING_LENGTH))
-    name = Column(String(SMALL_STRING_LENGTH), unique=True)
+    name = Column(String(SMALL_STRING_LENGTH))
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(String(SMALL_STRING_LENGTH))

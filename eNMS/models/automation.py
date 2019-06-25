@@ -30,7 +30,12 @@ from yaql import factory
 
 from eNMS.concurrency import threaded_job, device_process, device_thread
 from eNMS.controller import controller
-from eNMS.database import CustomMediumBlobPickle, LARGE_STRING_LENGTH, Session, SMALL_STRING_LENGTH
+from eNMS.database import (
+    CustomMediumBlobPickle,
+    LARGE_STRING_LENGTH,
+    Session,
+    SMALL_STRING_LENGTH,
+)
 from eNMS.database.functions import fetch
 from eNMS.database.associations import (
     job_device_table,

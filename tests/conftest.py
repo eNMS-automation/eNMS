@@ -1,11 +1,10 @@
 from flask.testing import FlaskClient
-from os import remove
 from pathlib import Path
 from pytest import fixture
 from typing import Iterator
 
 from eNMS import create_app
-from eNMS.database import Base, engine, Session
+from eNMS.database import Session
 
 
 @fixture
@@ -14,8 +13,6 @@ def base_client() -> Iterator[FlaskClient]:
     app_context = app.app_context()
     app_context.push()
     Session.close()
-    Base.metadata.drop_all(bind=engine)
-    remove(app.path / "database.db")
     yield app.test_client()
 
 
@@ -25,8 +22,6 @@ def user_client() -> Iterator[FlaskClient]:
     app_context = app.app_context()
     app_context.push()
     Session.close()
-    Base.metadata.drop_all(bind=engine)
-    remove(app.path / "database.db")
     client = app.test_client()
     with app.app_context():
         client.post(

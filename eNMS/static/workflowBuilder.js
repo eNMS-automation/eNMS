@@ -237,6 +237,10 @@ function jobToNode(job) {
   };
 }
 
+/**
+ * Draw edge to self for iteration service.
+ * @param {service} service - Service object.
+ */
 function drawIterationService(service) {
   edges.add({
     id: -service.id,
@@ -396,7 +400,7 @@ function getJobState(id) {
     } else {
       $("#status").text("Status: Idle.");
       $("#current-job").empty();
-      colorJob(id, job.color);
+      colorJob(id, service.color);
     }
   });
 }

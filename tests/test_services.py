@@ -25,6 +25,7 @@ netmiko_ping = ImmutableMultiDict(
         ("netmiko_type", "show_commands"),
         ("driver", "cisco_xr_ssh"),
         ("global_delay_factor", "1.0"),
+        ("shape", "box"),
     ]
 )
 
@@ -47,6 +48,7 @@ file_transfer_service = ImmutableMultiDict(
         ("dest_file", "path/to/destination"),
         ("file_system", "flash:"),
         ("direction", "put"),
+        ("shape", "box"),
     ]
 )
 
@@ -74,6 +76,7 @@ getters_dict = ImmutableMultiDict(
         ("getters", "get_interfaces"),
         ("getters", "get_interfaces_ip"),
         ("getters", "get_lldp_neighbors"),
+        ("shape", "box"),
     ]
 )
 
@@ -102,6 +105,7 @@ ansible_service = ImmutableMultiDict(
         ("operating_system", ""),
         ("playbook_path", "test.yml"),
         ("arguments", "--ask-vault"),
+        ("shape", "box"),
     ]
 )
 
@@ -110,4 +114,4 @@ ansible_service = ImmutableMultiDict(
 def test_ansible_services(user_client: FlaskClient) -> None:
     user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
     assert len(fetch_all("AnsiblePlaybookService")) == 1
-    assert len(fetch_all("Service")) == 37
+    assert len(fetch_all("Service")) == 40

@@ -45,7 +45,7 @@ def configure_database(app: Flask) -> None:
         Base.metadata.create_all(bind=engine)
         configure_mappers()
         configure_events()
-        if not fetch("User", name="admin"):
+        if not fetch("User", allow_none=True, name="admin"):
             controller.init_database()
 
     @app.teardown_appcontext

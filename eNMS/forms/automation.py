@@ -1,4 +1,5 @@
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
+from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
@@ -39,7 +40,7 @@ class JobForm(BaseForm):
             ("mattermost_feedback_notification", "Mattermost"),
         ),
     )
-    custom_notification = BooleanField("Custom Notification")
+    notification_header = StringField(widget=TextArea(), render_kw={"rows": 5})
     display_only_failed_nodes = BooleanField("Display only Failed Devices")
     mail_recipient = StringField("Mail Recipients (separated by comma)")
     number_of_retries = IntegerField("Number of retries", default=0)

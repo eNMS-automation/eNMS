@@ -1,7 +1,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Start point of a workflow
   devices: []
@@ -55,7 +55,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: End point of a workflow
   devices: []
@@ -109,7 +109,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Mail notification (service logs)
   devices: []
@@ -140,7 +140,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Slack notification (service logs)
   devices: []
@@ -171,7 +171,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Mattermost notification (service logs)
   devices: []
@@ -202,7 +202,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Monitor eNMS cluster
   devices: []
@@ -233,7 +233,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Push configurations to Gitlab
   devices: []
@@ -267,7 +267,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Configuration Management Poller
   devices: []
@@ -310,7 +310,7 @@
   creator: admin
   credentials: device
   custom_integer: 0
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Example
   devices:
@@ -350,7 +350,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Configure BGP Peering with Napalm
   devices:
@@ -387,7 +387,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
@@ -426,7 +426,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
@@ -461,7 +461,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
@@ -497,7 +497,7 @@
   configuration_command: show running-config
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Test Configuration Management
   devices:
@@ -535,7 +535,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Test Configuration Management
   devices:
@@ -571,7 +571,7 @@
   content: vrf definition test
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   description: Create a VRF "test" with Netmiko
@@ -617,7 +617,7 @@
   conversion_method: text
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -667,7 +667,7 @@
   content: no vrf definition test
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   description: Delete VRF "test"
@@ -716,7 +716,7 @@
   conversion_method: text
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -769,7 +769,7 @@
     '
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Create a VRF "test" with Napalm
   devices:
@@ -811,7 +811,7 @@
   conversion_method: text
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Use GET ReST call on eNMS ReST API
@@ -858,7 +858,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: 'Getter: get_facts'
   devices:
@@ -900,7 +900,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: 'Getter: get_interfaces'
   devices:
@@ -945,7 +945,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: 'Getter: get_interfaces_ip'
   devices:
@@ -987,7 +987,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: 'Getter: get_config'
   devices:
@@ -1029,7 +1029,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Process Payload in example workflow
   devices:
@@ -1065,7 +1065,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Add devices to the payload
   devices: []
@@ -1112,7 +1112,7 @@
   conversion_method: text
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: true
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1160,7 +1160,7 @@
   conversion_method: text
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1207,7 +1207,7 @@
   conversion_method: text
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1251,7 +1251,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Payload Variables Extraction with Regex/TextFSM
   devices: []
@@ -1305,7 +1305,7 @@
   conversion_method: text
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Dict
@@ -1350,7 +1350,7 @@
   conversion_method: text
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Text
@@ -1388,7 +1388,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Test the iteration mechanism (Iteration values)
   devices:
@@ -1433,7 +1433,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Test the iteration mechanism (YaQL values)
   devices: []
@@ -1476,7 +1476,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: ''
   devices: []

@@ -1,7 +1,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Start point of a workflow
   devices: []
@@ -37,7 +37,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: End point of a workflow
   devices: []
@@ -73,7 +73,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Mail notification (service logs)
   devices: []
@@ -104,7 +104,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Slack notification (service logs)
   devices: []
@@ -135,7 +135,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Mattermost notification (service logs)
   devices: []
@@ -166,7 +166,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Monitor eNMS cluster
   devices: []
@@ -197,7 +197,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Push configurations to Gitlab
   devices: []
@@ -231,7 +231,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Configuration Management Poller
   devices: []

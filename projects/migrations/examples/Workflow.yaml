@@ -1,7 +1,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Poll configuration and push to gitlab
   devices: []
@@ -35,7 +35,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Create and delete a VRF with Netmiko
   devices:
@@ -73,7 +73,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Create and delete a VRF with Napalm
   devices:
@@ -114,7 +114,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: ReST call, Napalm getters, etc
   devices:
@@ -157,7 +157,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Test YaQL device selection mechanism
   devices: []
@@ -193,7 +193,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Test the payload extraction and validation mechanisms
   devices:
@@ -231,7 +231,7 @@
 - completed: 0
   creator: admin
   credentials: device
-  custom_notification: false
+  notification_header: ''
   define_devices_from_payload: false
   description: Test the inner workflow system
   devices:

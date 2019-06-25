@@ -30,7 +30,7 @@ from yaql import factory
 
 from eNMS.concurrency import threaded_job, device_process, device_thread
 from eNMS.controller import controller
-from eNMS.database import CustomMediumBlobPickle, Session, SMALL_STRING_LENGTH
+from eNMS.database import CustomMediumBlobPickle, LARGE_STRING_LENGTH, Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch
 from eNMS.database.associations import (
     job_device_table,
@@ -85,7 +85,7 @@ class Job(AbstractBase):
     send_notification_method = Column(
         String(SMALL_STRING_LENGTH), default="mail_feedback_notification"
     )
-    custom_notification = Column(Boolean, default=False)
+    notification_header = Column(String(LARGE_STRING_LENGTH), default="")
     display_only_failed_nodes = Column(Boolean, default=True)
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])

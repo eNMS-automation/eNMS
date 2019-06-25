@@ -16,7 +16,16 @@ from pathlib import Path
 from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
-from sqlalchemy import Boolean, case, Column, ForeignKey, Integer, PickleType, String
+from sqlalchemy import (
+    Boolean,
+    case,
+    Column,
+    ForeignKey,
+    Integer,
+    PickleType,
+    String,
+    Text,
+)
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.mutable import MutableDict, MutableList

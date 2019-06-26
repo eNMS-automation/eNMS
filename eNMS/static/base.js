@@ -92,15 +92,22 @@ let topZ = 1000;
  */
 // eslint-disable-next-line
 function doc(page) {
+  console.log(page);
   let endpoint = {
     administration: "security/access.html",
     calendar: "scheduling/task_management.html",
-    "table/device": "inventory/objects.html",
     dashboard: "base/introduction.html",
     "table/configuration": "inventory/objects.html",
-    "table/server": "security/access.html",
+    "table/device": "inventory/objects.html",
+    "table/event": "",
     "table/link": "inventory/objects.html",
+    "table/log": "",
+    "table/pool": "",
+    "table/server": "security/access.html",
+    "table/service": "",
+    "table/task": "",
     "table/user": "security/access.html",
+    "table/workflow": "",
     view: "views/geographical_view.html",
     workflow_builder: "workflows/index.html",
   }[page];

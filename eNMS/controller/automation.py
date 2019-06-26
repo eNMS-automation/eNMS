@@ -118,7 +118,7 @@ class AutomationController(BaseController):
         )
         return workflow.name
 
-    def run_job(self, job_id: int, asynchronous=True) -> dict:
+    def run_job(self, job_id: int, asynchronous: bool = True) -> dict:
         job = fetch("Job", id=job_id)
         if job.is_running:
             return {"error": f"{job.type} is already running."}

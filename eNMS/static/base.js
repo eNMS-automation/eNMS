@@ -95,12 +95,12 @@ function doc(page) {
   let endpoint = {
     administration: "security/access.html",
     calendar: "scheduling/task_management.html",
-    'table/device': "inventory/objects.html",
+    "table/device": "inventory/objects.html",
     dashboard: "base/introduction.html",
-    'table/configuration': "inventory/objects.html",
-    'table/server': "security/access.html",
-    'table/link': "inventory/objects.html",
-    'table/user': "security/access.html",
+    "table/configuration": "inventory/objects.html",
+    "table/server": "security/access.html",
+    "table/link": "inventory/objects.html",
+    "table/user": "security/access.html",
     view: "views/geographical_view.html",
     workflow_builder: "workflows/index.html",
   }[page];

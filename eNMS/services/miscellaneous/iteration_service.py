@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
-from typing import Optional, Set
+from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from yaql import factory
 

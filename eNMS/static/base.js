@@ -94,15 +94,13 @@ let topZ = 1000;
 function doc(page) {
   let endpoint = {
     administration: "security/access.html",
-    advanced: "base/migrations.html",
     calendar: "scheduling/task_management.html",
-    configuration_management: "inventory/objects.html",
+    'table/device': "inventory/objects.html",
     dashboard: "base/introduction.html",
-    device_management: "inventory/objects.html",
-    import_export: "inventory/objects.html",
-    server_management: "security/access.html",
-    link_management: "inventory/objects.html",
-    user_management: "security/access.html",
+    'table/configuration': "inventory/objects.html",
+    'table/server': "security/access.html",
+    'table/link': "inventory/objects.html",
+    'table/user': "security/access.html",
     view: "views/geographical_view.html",
     workflow_builder: "workflows/index.html",
   }[page];

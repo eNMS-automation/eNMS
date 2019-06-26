@@ -1,5 +1,5 @@
 - Iteration Service
-- Connection Cache for Netmiko and Napalm
+- Connection Cache for Netmiko and Napalm. Test cached connection with netmiko find_prompt / napalm is_valid.
 - Custom Notification header
 - /!\ Custom services now receive an additional "parent" parameter: 
 *** if the service runs within a workflow, this parent will be the workflow.

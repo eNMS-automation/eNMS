@@ -102,7 +102,7 @@ class PythonSnippetService(Service):
 
 class PythonSnippetForm(ServiceForm):
     form_type = HiddenField(default="PythonSnippetService")
-    has_targets = BooleanField()
+    has_targets = BooleanField("Has Target Devices")
     source_code = StringField(
         widget=TextArea(),
         render_kw={"rows": 15},

@@ -79,7 +79,7 @@ match_choices = (
 
 class PayloadExtractionForm(ServiceForm):
     form_type = HiddenField(default="PayloadExtractionService")
-    has_targets = BooleanField()
+    has_targets = BooleanField("Has Target Devices")
     variable1 = StringField()
     query1 = StringField()
     match_type1 = SelectField(choices=match_choices)

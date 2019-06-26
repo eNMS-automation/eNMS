@@ -121,4 +121,4 @@ class SwissArmyKnifeService(Service):
 
 class SwissArmyKnifeForm(ServiceForm):
     form_type = HiddenField(default="SwissArmyKnifeService")
-    has_targets = BooleanField()
+    has_targets = BooleanField("Has Target Devices")

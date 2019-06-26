@@ -73,7 +73,7 @@ class AnsiblePlaybookService(Service):
 
 class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="AnsiblePlaybookService")
-    has_targets = BooleanField()
+    has_targets = BooleanField("Has Target Devices")
     playbook_path = StringField()
     arguments = StringField()
     pass_device_properties = BooleanField()

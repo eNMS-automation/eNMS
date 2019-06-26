@@ -48,16 +48,6 @@
   source: Start
   subtype: success
   workflow: Napalm_VRF_workflow
-- destination: netmiko_check_vrf_test
-  name: Napalm_VRF_workflow 2 -> 3
-  source: napalm_create_vrf_test
-  subtype: success
-  workflow: Napalm_VRF_workflow
-- destination: End
-  name: Napalm_VRF_workflow 5 -> 1
-  source: netmiko_check_no_vrf_test
-  subtype: success
-  workflow: Napalm_VRF_workflow
 - destination: GET_device
   name: payload_transfer_workflow:success 0 -> 2
   source: Start
@@ -168,16 +158,6 @@
   source: Napalm_VRF_workflow
   subtype: success
   workflow: Workflow_of_workflows
-- destination: napalm_rollback
-  name: 38-success:17->43
-  source: netmiko_check_vrf_test
-  subtype: success
-  workflow: Napalm_VRF_workflow
-- destination: netmiko_check_no_vrf_test
-  name: 38-success:43->19
-  source: napalm_rollback
-  subtype: success
-  workflow: Napalm_VRF_workflow
 - destination: netmiko_check_vrf_test
   name: 41-success:28->17
   source: netmiko_yaql_defined_devices
@@ -198,3 +178,23 @@
   source: iteration_yaql_payload
   subtype: success
   workflow: YaQL_test_worflow
+- destination: netmiko_check_vrf_napalm
+  name: 40-success:20->45
+  source: napalm_create_vrf_test
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: napalm_rollback
+  name: 40-success:45->34
+  source: netmiko_check_vrf_napalm
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: netmiko_check_no_vrf_napalm
+  name: 40-success:34->46
+  source: napalm_rollback
+  subtype: success
+  workflow: Napalm_VRF_workflow
+- destination: End
+  name: 40-success:46->2
+  source: netmiko_check_no_vrf_napalm
+  subtype: success
+  workflow: Napalm_VRF_workflow

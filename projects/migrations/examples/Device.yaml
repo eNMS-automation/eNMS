@@ -98,8 +98,60 @@
       \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
       !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
       \   no shutdown\n!\nend\n\ncandidate: "
+    '2019-06-27 00:14:51.308452': "! Command: show running-config\n! device: localhost\
+      \ (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver\
+      \ qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
+      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
+      !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n\
+      \   ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
+      !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n\
+      !\nmanagement api http-commands\n   no shutdown\n!\nend"
+    '2019-06-27 00:14:57.316319': "\nstartup: ! Command: show startup-config\n! Startup-config\
+      \ last modified at  Wed Jun 26 14:42:41 2019 by admin\n! device: localhost (vEOS,\
+      \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp\
+      \ default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
+      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
+      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
+      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
+      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
+      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
+      \   no shutdown\n!\nend\n\nrunning: ! Command: show running-config\n! device:\
+      \ localhost (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\n\
+      transceiver qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n\
+      !\nusername admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
+      !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n\
+      \   ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
+      !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n\
+      !\nmanagement api http-commands\n   no shutdown\n!\nend\n\ncandidate: "
+    '2019-06-27 00:23:34.466720': "! Command: show running-config\n! device: localhost\
+      \ (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver\
+      \ qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
+      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
+      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
+      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
+      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
+      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
+      \   no shutdown\n!\nend"
+    '2019-06-27 00:23:40.448295': "\nstartup: ! Command: show startup-config\n! Startup-config\
+      \ last modified at  Wed Jun 26 21:50:59 2019 by admin\n! device: localhost (vEOS,\
+      \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp\
+      \ default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
+      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
+      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
+      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
+      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
+      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
+      \   no shutdown\n!\nend\n\nrunning: ! Command: show running-config\n! device:\
+      \ localhost (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\n\
+      transceiver qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n\
+      !\nusername admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
+      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
+      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
+      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
+      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
+      \   no shutdown\n!\nend\n\ncandidate: "
   current_configuration: "\nstartup: ! Command: show startup-config\n! Startup-config\
-    \ last modified at  Wed Jun 26 13:31:05 2019 by admin\n! device: localhost (vEOS,\
+    \ last modified at  Wed Jun 26 21:50:59 2019 by admin\n! device: localhost (vEOS,\
     \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp default-mode\
     \ 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername admin role network-admin\
     \ secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
@@ -121,9 +173,9 @@
   icon: router
   ip_address: 192.168.105.5
   last_failure: Never
-  last_runtime: 0.57474
+  last_runtime: 0.512161
   last_status: Success
-  last_update: '2019-06-26 15:31:27.690951'
+  last_update: '2019-06-27 00:23:40.448295'
   latitude: 38.89511
   location: Washington
   longitude: -77.03637

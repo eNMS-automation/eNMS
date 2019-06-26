@@ -8,13 +8,14 @@
   display_only_failed_nodes: true
   events: []
   failed: 0
+  has_targets: true
   hidden: false
   jobs:
   - Start
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-06-26 15:15:41.070057'
+  last_modified: '2019-06-27 01:13:35.706105'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -43,10 +44,10 @@
   description: Create and delete a VRF with Netmiko
   devices:
   - Washington
-  - Austin
   display_only_failed_nodes: true
   events: []
   failed: 0
+  has_targets: true
   hidden: false
   jobs:
   - Start
@@ -55,12 +56,12 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-06-26 15:15:41.165602'
+  last_modified: '2019-06-27 01:13:35.834484'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
+  number_of_targets: 1
   operating_system: eos
   pools: []
   positions: {}
@@ -87,15 +88,16 @@
   display_only_failed_nodes: true
   events: []
   failed: 0
+  has_targets: true
   hidden: false
   jobs:
   - Start
   - End
   - napalm_create_vrf_test
-  - netmiko_check_vrf_test
-  - netmiko_check_no_vrf_test
   - napalm_rollback
-  last_modified: '2019-06-26 15:30:47.180480'
+  - netmiko_check_vrf_napalm
+  - netmiko_check_no_vrf_napalm
+  last_modified: '2019-06-27 01:19:41.266300'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -130,6 +132,7 @@
   display_only_failed_nodes: true
   events: []
   failed: 0
+  has_targets: true
   hidden: false
   jobs:
   - Start
@@ -140,7 +143,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-06-26 15:28:21.041664'
+  last_modified: '2019-06-27 01:13:35.992773'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -175,6 +178,7 @@
   display_only_failed_nodes: true
   events: []
   failed: 0
+  has_targets: true
   hidden: false
   jobs:
   - Start
@@ -185,7 +189,7 @@
   - Iteration_service_yaql
   - netmiko_check_vrf_test
   - iteration_yaql_payload
-  last_modified: '2019-06-26 15:15:41.467936'
+  last_modified: '2019-06-27 01:13:36.056134'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -217,6 +221,7 @@
   display_only_failed_nodes: true
   events: []
   failed: 0
+  has_targets: true
   hidden: false
   jobs:
   - Start
@@ -225,7 +230,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-06-26 15:32:20.574586'
+  last_modified: '2019-06-27 01:13:36.223140'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -257,6 +262,7 @@
   display_only_failed_nodes: true
   events: []
   failed: 0
+  has_targets: true
   hidden: false
   jobs:
   - Start
@@ -264,7 +270,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-06-26 15:15:41.635678'
+  last_modified: '2019-06-27 01:13:36.300214'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''

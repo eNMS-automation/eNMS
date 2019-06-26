@@ -59,8 +59,8 @@ class JobForm(BaseForm):
             ("database", "Database"),
         ),
     )
-    size = IntegerField("Size")
-    color = StringField("Color")
+    size = IntegerField("Size", default=40)
+    color = StringField("Color", default="#D2E5FF")
 
     def validate(self) -> bool:
         if not super().validate():

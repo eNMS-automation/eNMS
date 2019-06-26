@@ -92,7 +92,6 @@ let topZ = 1000;
  */
 // eslint-disable-next-line
 function doc(page) {
-  console.log(page);
   let endpoint = {
     administration: "security/access.html",
     calendar: "scheduling/task_management.html",

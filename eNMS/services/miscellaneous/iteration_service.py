@@ -65,9 +65,12 @@ class IterationForm(ServiceForm):
             ("yaql_query", "YaQL Query on the Payload"),
         ),
     )
-    user_provided_values = DictField("User-provided Values for the Iteration")
-    yaql_query_values = StringField("YaQL query on the payload to get the Values")
-    variable_name = StringField("Name of the Variable in the Payload")
-    iterated_job = InstanceField(
-        "What Job to Iterate for each Value on each Device", instance_type="Job"
+    user_provided_values = DictField(
+        "Iteration Values for Iteration: User provided "
+        "(Expect dictionary {'all' : [...]} or {'device-name' : [...], ...})"
     )
+    yaql_query_values = StringField(
+        "Iteration Values for Iteration: YaQL query on the payload"
+    )
+    variable_name = StringField("Name of the Variable in the Payload")
+    iterated_job = InstanceField("Job to run for each Value", instance_type="Job")

@@ -21,7 +21,7 @@ class NapalmPingService(Service):
     driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
-    size = Column(Integer, default=0)
+    packet_size = Column(Integer, default=0)
     destination_ip = Column(String(SMALL_STRING_LENGTH), default="")
     source_ip = Column(String(SMALL_STRING_LENGTH), default="")
     timeout = Column(Integer, default=0)
@@ -44,7 +44,7 @@ class NapalmPingService(Service):
             vrf=self.vrf,
             ttl=self.ttl or 255,
             timeout=self.timeout or 2,
-            size=self.size or 100,
+            size=self.packet_size or 100,
             count=self.count or 5,
         )
         return {"success": "success" in ping, "result": ping}
@@ -56,7 +56,7 @@ class NapalmPingForm(ServiceForm):
     driver = SelectField(choices=controller.NAPALM_DRIVERS)
     use_device_driver = BooleanField()
     optional_args = DictField()
-    size = IntegerField()
+    packet_size = IntegerField()
     destination_ip = StringField()
     source_ip = StringField()
     timeout = IntegerField()

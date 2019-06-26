@@ -465,7 +465,7 @@ class BaseController:
         for dir in scandir(self.path / "git" / "configurations"):
             if dir.name == ".git":
                 continue
-            device = fetch("Device", name=dir.name)
+            device = fetch("Device", allow_none=True, name=dir.name)
             if device:
                 with open(Path(dir.path) / "data.yml") as data:
                     parameters = load(data)

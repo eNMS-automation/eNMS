@@ -41,7 +41,7 @@
         <tbody>
           {% for property in form.device_properties %}
             <tr>
-            <td>{{ names[property] }}</td>
+            <td>{{ names.get(property, property) }}</td>
             <td>{{ form['device_' + property](id="pool-" + 'device_' + property, class="form-control add-id") }}</td>
             <td>{{ form['device_' + property + '_match'](id="pool-" +'device_' + property + '_match', class="form-control add-id") }}</td>
             </tr>
@@ -63,7 +63,7 @@
         <tbody>
         {% for property in form.link_properties %}
           <tr>
-          <td>{{ names[property] }}</td>
+          <td>{{ names.get(property, property) }}</td>
           <td>{{ form['link_' + property](id="pool-" + 'link_' + property, class="form-control add-id") }}</td>
           <td>{{ form['link_' + property + '_match'](id="pool-" +'link_' + property + '_match', class="form-control add-id") }}</td>
           </tr>

@@ -433,7 +433,11 @@ class Service(Job):
         if getattr(parent, "name", None) in controller.connections_cache["netmiko"]:
             parent_connection = controller.connections_cache["netmiko"].get(parent.name)
             if parent_connection and device.name in parent_connection:
-                return parent_connection[device.name]
+                try:
+                    parent_connection[device.name].find_prompt()
+                    return parent_connection[device.name]
+                except ValueError:
+                    parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
         netmiko_connection = ConnectHandler(
             device_type=(
@@ -460,7 +464,10 @@ class Service(Job):
         if getattr(parent, "name", None) in controller.connections_cache["napalm"]:
             parent_connection = controller.connections_cache["napalm"].get(parent.name)
             if parent_connection and device.name in parent_connection:
-                return parent_connection[device.name]
+                if parent_connection[device.name].is_alive():
+                    return parent_connection[device.name]
+                else:
+                    parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:

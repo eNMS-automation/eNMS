@@ -717,9 +717,8 @@ class Workflow(Job):
             start_devices = allowed_devices[start_job.name]
             end_devices = allowed_devices["End"]
             results["devices"] = {
-                device.name: {
-                    "success": device in end_devices
-                } for device in start_devices
+                device.name: {"success": device in end_devices}
+                for device in start_devices
             }
             results["success"] = start_devices == end_devices
         return results

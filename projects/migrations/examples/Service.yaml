@@ -920,7 +920,7 @@
   time_between_retries: 10
   timeout: 15
   type: RestCallService
-  url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
+  rest_url: http://127.0.0.1:5000/rest/instance/device/{{device.name}}
   username: admin
   validation_method: text
   vendor: ''

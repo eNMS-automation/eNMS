@@ -26,7 +26,7 @@ class RestCallService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     call_type = Column(String(SMALL_STRING_LENGTH), default="")
-    url = Column(String(SMALL_STRING_LENGTH), default="")
+    rest_url = Column(String(SMALL_STRING_LENGTH), default="")
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     params = Column(MutableDict.as_mutable(PickleType), default={})
     headers = Column(MutableDict.as_mutable(PickleType), default={})
@@ -57,7 +57,7 @@ class RestCallService(Service):
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:
-        rest_url = self.sub(self.url, locals())
+        rest_url = self.sub(self.rest_url, locals())
         self.logs.append(f"Sending REST call to {rest_url}")
         kwargs = {
             p: self.sub(getattr(self, p), locals())
@@ -107,7 +107,7 @@ class RestCallForm(ServiceForm, ValidationForm):
     call_type = SelectField(
         choices=(("GET", "GET"), ("POST", "POST"), ("PUT", "PUT"), ("DELETE", "DELETE"))
     )
-    url = StringField()
+    rest_url = StringField()
     payload = DictField()
     params = DictField()
     headers = DictField()

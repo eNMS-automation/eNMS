@@ -118,17 +118,20 @@ class AutomationController(BaseController):
         )
         return workflow.name
 
-    def run_job(self, job_id: int) -> dict:
+    def run_job(self, job_id: int, asynchronous=True) -> dict:
         job = fetch("Job", id=job_id)
         if job.is_running:
             return {"error": f"{job.type} is already running."}
-        self.scheduler.add_job(
-            id=self.get_time(),
-            func=threaded_job,
-            run_date=datetime.now(),
-            args=[job.id],
-            trigger="date",
-        )
+        if asynchronous:
+            self.scheduler.add_job(
+                id=self.get_time(),
+                func=threaded_job,
+                run_date=datetime.now(),
+                args=[job.id],
+                trigger="date",
+            )
+        else:
+            job.run()
         return job.serialized
 
     def save_device_jobs(self, device_id: int, **kwargs: List[int]) -> None:

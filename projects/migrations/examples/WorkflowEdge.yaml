@@ -113,50 +113,15 @@
   source: Start
   subtype: success
   workflow: YaQL_test_worflow
-- destination: add_devices_to_payload
-  name: 'failure: YaQL_test_worflow 0 -> 2'
-  source: Start
-  subtype: failure
-  workflow: YaQL_test_worflow
 - destination: netmiko_yaql_defined_devices
   name: 'success: YaQL_test_worflow 2 -> 3'
   source: add_devices_to_payload
   subtype: success
   workflow: YaQL_test_worflow
-- destination: netmiko_yaql_defined_devices
-  name: 'failure: YaQL_test_worflow 2 -> 3'
-  source: add_devices_to_payload
-  subtype: failure
-  workflow: YaQL_test_worflow
-- destination: Iteration_service_simple
-  name: 'success: YaQL_test_worflow 3 -> 4'
-  source: netmiko_yaql_defined_devices
-  subtype: success
-  workflow: YaQL_test_worflow
-- destination: Iteration_service_simple
-  name: 'failure: YaQL_test_worflow 3 -> 4'
-  source: netmiko_yaql_defined_devices
-  subtype: failure
-  workflow: YaQL_test_worflow
 - destination: Iteration_service_yaql
   name: 'success: YaQL_test_worflow 4 -> 5'
   source: Iteration_service_simple
   subtype: success
-  workflow: YaQL_test_worflow
-- destination: Iteration_service_yaql
-  name: 'failure: YaQL_test_worflow 4 -> 5'
-  source: Iteration_service_simple
-  subtype: failure
-  workflow: YaQL_test_worflow
-- destination: End
-  name: 'success: YaQL_test_worflow 5 -> 1'
-  source: Iteration_service_yaql
-  subtype: success
-  workflow: YaQL_test_worflow
-- destination: End
-  name: 'failure: YaQL_test_worflow 5 -> 1'
-  source: Iteration_service_yaql
-  subtype: failure
   workflow: YaQL_test_worflow
 - destination: netmiko_show_ip_route
   name: payload_extraction_validation_worflow 0 -> 2
@@ -213,3 +178,23 @@
   source: napalm_rollback
   subtype: success
   workflow: Napalm_VRF_workflow
+- destination: netmiko_check_vrf_test
+  name: 41-success:28->17
+  source: netmiko_yaql_defined_devices
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: Iteration_service_simple
+  name: 41-success:17->35
+  source: netmiko_check_vrf_test
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: iteration_yaql_payload
+  name: 41-success:36->44
+  source: Iteration_service_yaql
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: End
+  name: 41-success:44->2
+  source: iteration_yaql_payload
+  subtype: success
+  workflow: YaQL_test_worflow

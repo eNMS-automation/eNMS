@@ -14,7 +14,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-06-26 13:24:07.500802'
+  last_modified: '2019-06-26 13:32:31.421601'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -55,7 +55,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-06-26 13:24:07.685637'
+  last_modified: '2019-06-26 13:32:31.506797'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -96,7 +96,7 @@
   - netmiko_check_vrf_test
   - netmiko_check_no_vrf_test
   - napalm_rollback
-  last_modified: '2019-06-26 13:24:07.768865'
+  last_modified: '2019-06-26 13:32:31.592168'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -142,7 +142,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-06-26 13:24:07.849090'
+  last_modified: '2019-06-26 13:32:31.670692'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -172,7 +172,8 @@
   credentials: device
   define_devices_from_payload: false
   description: Test YaQL device selection mechanism
-  devices: []
+  devices:
+  - Washington
   display_only_failed_nodes: true
   events: []
   failed: 0
@@ -184,12 +185,14 @@
   - netmiko_yaql_defined_devices
   - Iteration_service_simple
   - Iteration_service_yaql
-  last_modified: '2019-06-26 13:24:07.901875'
+  - netmiko_check_vrf_test
+  - iteration_yaql_payload
+  last_modified: '2019-06-26 14:39:50.202167'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 1
   operating_system: ''
   pools: []
   positions: {}
@@ -201,7 +204,7 @@
   size: 40
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: false
+  use_workflow_targets: true
   vendor: ''
   waiting_time: 0
   yaql_query: ''
@@ -225,7 +228,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-06-26 13:24:07.972309'
+  last_modified: '2019-06-26 13:32:31.796902'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -264,7 +267,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-06-26 13:24:08.054252'
+  last_modified: '2019-06-26 13:32:31.863023'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''

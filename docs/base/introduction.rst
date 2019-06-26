@@ -51,9 +51,9 @@ Once created, eNMS can display your network geographically on a 2D or 3D world m
 
   - Site View: colocated devices can be grouped into geographical sites (building, campus, ...). eNMS then uses a force-based algorithm to display a "logical" view of the site's internal devices.
 
-  .. image:: /_static/base/logical_view.png
-    :alt: Logical View
-    :align: center
+.. image:: /_static/views/site_view/site_view.png
+   :alt: Logical view
+   :align: center
 
 You can click on a device to display its properties or start a Web SSH terminal session.
 

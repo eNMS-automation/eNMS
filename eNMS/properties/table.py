@@ -122,7 +122,7 @@ job_filtering_properties = [
 
 filtering_properties: Dict[str, List[str]] = {
     "configuration": device_table_properties
-    + configuration_table_properties
+    + configuration_table_properties[2:]
     + ["current_configuration"],
     "device": device_table_properties + ["current_configuration"],
     "server": server_table_properties,

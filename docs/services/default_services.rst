@@ -76,6 +76,7 @@ Uses Netmiko to send commands to a device and uses a regular expression for each
 The user defined variables are then used in subsequent services within a workflow and can be accessed from the UI form via: ``{{payload[data extraction service instance name]["result"][variable name]}}``
 
 Configuration parameters for creating this service instance:
+
 - All Netmiko parameters (see above)
 - ``Variable1`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
 - ``Command1`` CLI command to send to the device via SSH
@@ -95,6 +96,7 @@ Netmiko File Transfer Service
 Uses Netmiko to send a file to a device, or retrieve a file from a device.
 
 Configuration parameters for creating this service instance:
+
 - All Netmiko parameters (see above)
 - ``Destination file`` Destination file; absolute path and filename to send the file to
 - ``Direction`` Upload or Download from the perspective of running on the device
@@ -111,6 +113,7 @@ Similar to Netmiko Validation Service, but expects up to 3 interactive prompts f
 This service allows the user to specify the expected prompt and response to send for it.
 
 Configuration parameters for creating this service instance:
+
 - All Netmiko parameters (see above)
 - All Validation parameters (see above)
 - ``Command`` CLI command to send to the device
@@ -132,6 +135,7 @@ Uses Netmiko to send commands to a device and validates the output to determine 
 There is a ``command`` field and a ``pattern`` field. eNMS will check if the expected pattern can be found in the output of the command. The values for a ``pattern`` field can also be a regular expression.
 
 Configuration parameters for creating this service instance:
+
 - All Netmiko parameters (see above)
 - All Validation parameters (see above)
 - ``Command`` CLI command to send to the device
@@ -145,6 +149,7 @@ Napalm Configuration service
 Uses Napalm to configure a device.
 
 Configuration parameters for creating this service instance:
+
 - All Napalm parameters (see above)
 - ``Action`` There are two types of operations:
     - ``Load merge``: add the service configuration to the existing configuration of the target
@@ -159,6 +164,7 @@ Napalm Rollback Service
 Use Napalm to rollback a configuration.
 
 Configuration parameters for creating this service instance:
+
 - All Napalm parameters (see above)
 
 Napalm Getters service
@@ -167,6 +173,7 @@ Napalm Getters service
 Uses Napalm to retrieve a list of getters whose output is displayed in the logs. The output can be validated with a command / pattern mechanism like the ``Netmiko Validation Service``.
 
 Configuration parameters for creating this service instance:
+
 - All Validation parameters (see above)
 - All Napalm parameters (see above)
 - ``Getters`` Napalm getters (standard retrieval APIs) are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix)
@@ -180,6 +187,7 @@ Uses Napalm to connect to the selected target devices and performs a ping to a d
 Note that the iosxr driver does not support ping, but you can use the ios driver in its place by not selecting ``use_device_driver``.
 
 Configuration parameters for creating this service instance:
+
 - All Napalm parameters (see above)
 - ``count``: Number of ping packets to send
 - ``size`` Size of the ping packet payload to send in bytes
@@ -193,11 +201,8 @@ Napalm Traceroute service
 
 Uses Napalm to connect to the selected target devices and performs a traceroute to a designated target.
 
-.. image:: /_static/services/default_services/napalm_traceroute.png
-   :alt: Napalm Traceroute service
-   :align: center
-
 Configuration parameters for creating this service instance:
+
 - All Napalm parameters (see above)
 - ``Source IP address`` Override the source ip address of the ping packet with this provided IP
 - ``Timeout`` Seconds to wait before declaring timeout
@@ -212,6 +217,7 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
 An option allows inventory devices to be selected, such that the Ansible Playbook is run on each device in the selection. Another option allows device properties from the inventory to be passed to the ansible playbook as a dictionary.
 
 Configuration parameters for creating this service instance:
+
 - All Validation parameters (see above)
 - ``Has targets`` If checked, indicates that the selected inventory devices should be passed to the playbook as its inventory using -i. Alternatively, if not checked, the ansible playbook can reference its own inventory internally using host: inventory_group and by providing an alternative inventory
 - ``playbook_path`` path and filename to the Ansible Playbook. For example, if the playbooks subdirectory is located inside the eNMS project directory:  playbooks/juniper_get_facts.yml
@@ -228,6 +234,7 @@ Send a ReST call (GET, POST, PUT or DELETE) to a URL with optional payload.
 The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
 
 Configuration parameters for creating this service instance:
+
 - All Validation parameters (see above)
 - ``Has targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
 - ``Type of call`` ReST type operation to be performed: GET, POST, PUT, DELETE
@@ -249,6 +256,7 @@ This service takes a dictionary as input: all key/value pairs of that dictionary
 Example: if you create a workflow to perform the upgrade of a device, you might want to change the value of the ``operating_system`` property in eNMS to keep the inventory up-to-date.
 
 Configuration parameters for creating this service instance:
+
 - ``Update dictionary`` Dictionary of properties to be updated. For example, the dictionary to update the "Model" and operating_system property of all target devices: ``{"model":"ao", "operating_system":"13.4.2"}``.
 
 Generic File Transfer Service
@@ -257,6 +265,7 @@ Generic File Transfer Service
 Transfer a single file to/from the eNMS server to the device using either SFTP or SCP.
 
 Configuration parameters for creating this service instance:
+
 - ``Direction`` Get or Put the file from/to the target device's filesystem
 - ``Protocol`` Use SCP or SFTP to perform the transfer
 - ``Source file`` For Get, source file is the path-plus-filename on the device to retrieve to the eNMS server. For Put, source file is the path-plus-filename on the eNMS server to send to the device.
@@ -274,6 +283,7 @@ Ping Service
 Implements a Ping from this automation server to the selected devices from inventory using either ICMP or TCP.
 
 Configuration parameters for creating this service instance:
+
 - ``Protocol``: Use either ICMP or TCP packets to ping the devices
 - ``Ports`` Which ports to ping (should be formatted as a list of ports separated by a comma, for example "22,23,49").
 - ``count``: Number of ping packets to send
@@ -285,6 +295,17 @@ UNIX Command Service
 --------------------
 
 Implements a UNIX command to the target device.
+
+Configuration parameters for creating this service instance:
+- ``Command``: UNIX command to run on the device
+- Validation Parameters
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
+
+Iteration Service
+-----------------
+
+Execute a service multiple times with different values.
 
 Configuration parameters for creating this service instance:
 - ``Command``: UNIX command to run on the device

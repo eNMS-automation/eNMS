@@ -23,7 +23,7 @@ class DictField(StringField):
 
 
 class InstanceField(SelectField):
-    def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         instance_type = kwargs.pop("instance_type")
         kwargs["coerce"] = int
         super().__init__(*args, **kwargs)
@@ -31,7 +31,7 @@ class InstanceField(SelectField):
 
 
 class MultipleInstanceField(SelectMultipleField):
-    def __init__(self, model: str, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         instance_type = kwargs.pop("instance_type")
         super().__init__(*args, **kwargs)
         self.choices = choices(instance_type)

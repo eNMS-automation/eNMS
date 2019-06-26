@@ -1,7 +1,7 @@
-- completed: 0
+- color: pink
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Start point of a workflow
   devices: []
@@ -10,13 +10,12 @@
   failed: 0
   has_targets: false
   hidden: true
-  last_modified: '2019-06-24 10:14:16.330881'
+  last_modified: '2019-06-26 13:24:05.414942'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: Start
-  color: pink
-  shape: circle
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -25,9 +24,9 @@
     Configuration Management Workflow:
     - '-300'
     - '0'
-    Napalm_VRF_workflow: !!python/tuple
-    - -200
-    - 0
+    Napalm_VRF_workflow:
+    - '-200'
+    - '0'
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
@@ -47,15 +46,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: circle
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: pink
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: End point of a workflow
   devices: []
@@ -64,13 +65,12 @@
   failed: 0
   has_targets: false
   hidden: true
-  last_modified: '2019-06-24 10:14:16.391614'
+  last_modified: '2019-06-26 13:24:05.472759'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: End
-  color: pink
-  shape: circle
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -79,9 +79,9 @@
     Configuration Management Workflow:
     - '200'
     - '0'
-    Napalm_VRF_workflow: !!python/tuple
-    - 200
-    - 0
+    Napalm_VRF_workflow:
+    - '200'
+    - '0'
     Netmiko_VRF_workflow:
     - '200'
     - '0'
@@ -101,15 +101,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: circle
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Mail notification (service logs)
   devices: []
@@ -118,11 +120,12 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-24 10:14:16.436875'
+  last_modified: '2019-06-26 13:24:05.510608'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: mail_feedback_notification
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -132,15 +135,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Slack notification (service logs)
   devices: []
@@ -149,11 +154,12 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-24 10:14:16.488769'
+  last_modified: '2019-06-26 13:24:05.554032'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: slack_feedback_notification
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -163,15 +169,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Mattermost notification (service logs)
   devices: []
@@ -180,11 +188,12 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-24 10:14:16.533613'
+  last_modified: '2019-06-26 13:24:05.604758'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: mattermost_feedback_notification
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -194,15 +203,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Monitor eNMS cluster
   devices: []
@@ -211,11 +222,12 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-24 10:14:16.586457'
+  last_modified: '2019-06-26 13:24:05.652666'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: cluster_monitoring
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -225,15 +237,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Push configurations to Gitlab
   devices: []
@@ -242,11 +256,12 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-24 10:14:16.635345'
+  last_modified: '2019-06-26 13:24:05.688022'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: git_push_configurations
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -259,15 +274,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Configuration Management Poller
   devices: []
@@ -276,11 +293,12 @@
   failed: 0
   has_targets: false
   hidden: true
-  last_modified: '2019-06-24 10:14:16.690492'
+  last_modified: '2019-06-26 13:24:05.722510'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: poller_service
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -293,6 +311,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -306,11 +326,11 @@
   an_integer: 10
   boolean1: true
   boolean2: false
+  color: '#D2E5FF'
   completed: 0
   creator: admin
   credentials: device
   custom_integer: 0
-  notification_header: ''
   define_devices_from_payload: false
   description: Example
   devices:
@@ -321,13 +341,14 @@
   failed: 0
   hidden: false
   ip_address: 10.1.1.1
-  last_modified: '2019-06-24 10:14:16.760310'
+  last_modified: '2019-06-26 13:24:05.773609'
   mac_address: FF:FF:FF:FF:FF:FF
   mail_address: aaa@gmail.com
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: Example1
+  notification_header: ''
   number_in_range: 7
   number_of_retries: 0
   number_of_targets: 0
@@ -339,6 +360,8 @@
   regex: abbbbcc
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -347,10 +370,10 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Configure BGP Peering with Napalm
   devices:
@@ -359,7 +382,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-24 10:14:16.832073'
+  last_modified: '2019-06-26 13:24:05.831327'
   local_as: 100
   loopback: Lo100
   loopback_ip: 100.1.1.1
@@ -368,6 +391,7 @@
   multiprocessing: false
   name: napalm_configure_bgp_1
   neighbor_ip: 100.1.2.1
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -378,16 +402,18 @@
   remote_as: 200
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: ConfigureBgpService
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
@@ -398,7 +424,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-24 10:14:16.901492'
+  last_modified: '2019-06-26 13:24:05.889384'
   load_known_host_keys: false
   look_for_keys: false
   mail_recipient: ''
@@ -406,6 +432,7 @@
   missing_host_key_policy: true
   multiprocessing: false
   name: test_file_transfer_service
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -416,6 +443,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
   time_between_retries: 10
@@ -423,10 +452,10 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
@@ -438,11 +467,12 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-24 10:14:16.969129'
+  last_modified: '2019-06-26 13:24:05.944428'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: test_log_backup_service
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -453,15 +483,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: LogBackupService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
@@ -473,11 +505,12 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-24 10:14:17.046216'
+  last_modified: '2019-06-26 13:24:05.999407'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: test_database_backup_service
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -488,16 +521,18 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: DatabaseBackupService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   configuration_command: show running-config
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Test Configuration Management
   devices:
@@ -509,11 +544,12 @@
   fast_cli: false
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-24 10:14:17.109498'
+  last_modified: '2019-06-26 13:24:06.055129'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
   name: netmiko_configuration_backup
+  notification_header: ''
   number_of_configuration: 10
   number_of_retries: 0
   number_of_targets: 0
@@ -525,6 +561,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   timeout: 10
   type: NetmikoBackupService
@@ -532,10 +570,10 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Test Configuration Management
   devices:
@@ -545,11 +583,12 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-24 10:14:17.176527'
+  last_modified: '2019-06-26 13:24:06.115030'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
   name: napalm_configuration_backup
+  notification_header: ''
   number_of_configuration: 10
   number_of_retries: 0
   number_of_targets: 0
@@ -561,17 +600,21 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: NapalmBackupService
   use_device_driver: true
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  commit_configuration: false
+  completed: 0
+  config_mode_command: ''
   content: vrf definition test
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   description: Create a VRF "test" with Netmiko
@@ -581,15 +624,17 @@
   display_only_failed_nodes: true
   driver: arista_eos
   events: []
+  exit_config_mode: true
   failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-24 10:14:17.255887'
+  last_modified: '2019-06-26 13:24:06.180686'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_create_vrf_test
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -603,6 +648,10 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  strip_command: false
+  strip_prompt: false
   time_between_retries: 10
   timeout: 3
   type: NetmikoConfigurationService
@@ -610,14 +659,14 @@
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- command: show vrf
+- color: '#D2E5FF'
+  command: show vrf
   completed: 0
   content_match: test
   content_match_regex: false
   conversion_method: text
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -633,20 +682,21 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-24 10:14:17.333382'
+  last_modified: '2019-06-26 13:24:06.248385'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_check_vrf_test
   negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
   pools: []
   positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 0
-    - -50
+    Napalm_VRF_workflow:
+    - '0'
+    - '-50'
     Netmiko_VRF_workflow:
     - '0'
     - '-50'
@@ -655,6 +705,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -663,11 +715,13 @@
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  commit_configuration: false
+  completed: 0
+  config_mode_command: ''
   content: no vrf definition test
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   description: Delete VRF "test"
@@ -677,15 +731,17 @@
   display_only_failed_nodes: true
   driver: arista_eos
   events: []
+  exit_config_mode: true
   failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-24 10:14:17.427212'
+  last_modified: '2019-06-26 13:24:06.315734'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_delete_vrf_test
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -702,6 +758,10 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  strip_command: false
+  strip_prompt: false
   time_between_retries: 10
   timeout: 3
   type: NetmikoConfigurationService
@@ -709,14 +769,14 @@
   vendor: Arista
   waiting_time: 1
   yaql_query: ''
-- command: show vrf
+- color: '#D2E5FF'
+  command: show vrf
   completed: 0
   content_match: ^((?!test)[\s\S])*$
   content_match_regex: true
   conversion_method: text
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -732,20 +792,21 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-24 10:14:17.501046'
+  last_modified: '2019-06-26 13:24:06.376521'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_check_no_vrf_test
   negative_logic: false
+  notification_header: ''
   number_of_retries: 2
   number_of_targets: 0
   operating_system: eos
   pools: []
   positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 0
-    - 150
+    Napalm_VRF_workflow:
+    - '0'
+    - '150'
     Netmiko_VRF_workflow:
     - '0'
     - '150'
@@ -754,6 +815,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 1
   timeout: 3
   type: NetmikoValidationService
@@ -763,13 +826,13 @@
   waiting_time: 0
   yaql_query: ''
 - action: load_merge_candidate
+  color: '#D2E5FF'
   completed: 0
   content: 'vrf definition test
 
     '
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Create a VRF "test" with Napalm
   devices:
@@ -780,24 +843,27 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-24 10:14:17.598736'
+  last_modified: '2019-06-26 13:24:06.439234'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: napalm_create_vrf_test
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
   optional_args: {}
   pools: []
   positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 0
-    - -150
+    Napalm_VRF_workflow:
+    - '0'
+    - '-150'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: NapalmConfigurationService
   use_device_driver: true
@@ -805,13 +871,13 @@
   waiting_time: 0
   yaql_query: ''
 - call_type: GET
+  color: '#D2E5FF'
   completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Use GET ReST call on eNMS ReST API
@@ -825,12 +891,13 @@
   has_targets: true
   headers: {}
   hidden: false
-  last_modified: '2019-06-24 10:14:17.676748'
+  last_modified: '2019-06-26 13:24:13.685451'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
   name: GET_device
   negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -845,6 +912,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   timeout: 15
   type: RestCallService
@@ -855,10 +924,10 @@
   verify_ssl_certificate: true
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: 'Getter: get_facts'
   devices:
@@ -872,11 +941,13 @@
   getters:
   - get_facts
   hidden: false
-  last_modified: '2019-06-24 10:14:17.753957'
+  last_modified: '2019-06-26 13:24:06.577380'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: get_facts
+  negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -890,6 +961,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -897,10 +970,10 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: 'Getter: get_interfaces'
   devices:
@@ -914,11 +987,13 @@
   getters:
   - get_interfaces
   hidden: false
-  last_modified: '2019-06-24 10:14:17.828222'
+  last_modified: '2019-06-26 13:24:06.650901'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: get_interfaces
+  negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -935,6 +1010,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -942,10 +1019,10 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: 'Getter: get_interfaces_ip'
   devices:
@@ -959,11 +1036,13 @@
   getters:
   - get_interfaces_ip
   hidden: false
-  last_modified: '2019-06-24 10:14:17.898392'
+  last_modified: '2019-06-26 13:24:06.721160'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: get_interfaces_ip
+  negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -977,6 +1056,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -984,10 +1065,10 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: 'Getter: get_config'
   devices:
@@ -1001,11 +1082,13 @@
   getters:
   - get_config
   hidden: false
-  last_modified: '2019-06-24 10:14:17.972887'
+  last_modified: '2019-06-26 13:24:06.784419'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: get_config
+  negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -1019,6 +1102,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1026,10 +1111,10 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Process Payload in example workflow
   devices:
@@ -1040,11 +1125,12 @@
   failed: 0
   has_targets: true
   hidden: false
-  last_modified: '2019-06-24 10:14:18.051711'
+  last_modified: '2019-06-26 13:24:06.848461'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: process_payload1
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -1057,15 +1143,17 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Add devices to the payload
   devices: []
@@ -1074,11 +1162,12 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-24 10:14:18.112133'
+  last_modified: '2019-06-26 13:24:06.892129'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: add_devices_to_payload
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -1091,6 +1180,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   source_code: 'set_var(''devices'', [''Washington'', ''Dallas''])
 
     set_var(''iteration_devices'',
@@ -1105,14 +1196,14 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- command: show vrf
+- color: '#D2E5FF'
+  command: show vrf
   completed: 0
   content_match: test
   content_match_regex: false
   conversion_method: text
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: true
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1126,12 +1217,13 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-24 10:14:18.172882'
+  last_modified: '2019-06-26 13:24:06.934380'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_yaql_defined_devices
   negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -1145,6 +1237,8 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -1153,14 +1247,14 @@
   vendor: Arista
   waiting_time: 0
   yaql_query: $.variables.devices
-- command: show interface {{payload['iteration_variable']}}
+- color: '#D2E5FF'
+  command: show interface {{payload['value']}}
   completed: 0
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1176,12 +1270,13 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-24 10:14:18.249202'
+  last_modified: '2019-06-26 13:24:06.993553'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: Iterated_netmiko_service
   negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -1192,6 +1287,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -1200,14 +1297,14 @@
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- command: show ip route
+- color: '#D2E5FF'
+  command: show ip route
   completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1221,12 +1318,13 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-24 10:14:18.296365'
+  last_modified: '2019-06-26 13:24:07.034336'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_show_ip_route
   negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -1240,6 +1338,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -1248,10 +1348,10 @@
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Payload Variables Extraction with Regex/TextFSM
   devices: []
@@ -1260,7 +1360,7 @@
   failed: 0
   has_targets: true
   hidden: false
-  last_modified: '2019-06-24 10:14:18.348364'
+  last_modified: '2019-06-26 13:24:07.076051'
   mail_recipient: ''
   match1: ''
   match2: (\d.*)/32
@@ -1276,6 +1376,7 @@
   max_processes: 5
   multiprocessing: true
   name: payload_extraction
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -1291,6 +1392,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: PayloadExtractionService
   variable1: simple_variable
@@ -1299,13 +1402,13 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Dict
@@ -1319,12 +1422,13 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-24 10:14:18.414590'
+  last_modified: '2019-06-26 13:24:07.120356'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: payload_validate_dict
   negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -1338,19 +1442,21 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: dict_included
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: text
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Text
@@ -1360,12 +1466,13 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-24 10:14:18.462289'
+  last_modified: '2019-06-26 13:24:07.171903'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: payload_validate_text
   negative_logic: false
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -1379,16 +1486,57 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
+  define_devices_from_payload: false
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  driver: eos
+  events: []
+  failed: 0
+  hidden: false
+  last_modified: '2019-06-26 13:24:07.210413'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: napalm_rollback
   notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  optional_args: {}
+  pools: []
+  positions:
+    Napalm_VRF_workflow:
+    - '3'
+    - '47'
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  time_between_retries: 10
+  type: NapalmRollbackService
+  use_device_driver: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  completed: 0
+  creator: admin
+  credentials: device
   define_devices_from_payload: false
   description: Test the iteration mechanism (Iteration values)
   devices:
@@ -1401,20 +1549,16 @@
   hidden: false
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  iteration_values:
-    Loopback11: '0'
-    Loopback15: '0'
-  last_modified: '2019-06-24 10:14:18.559504'
+  last_modified: '2019-06-26 13:24:07.287948'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: Iteration_service_simple
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  origin_of_targets: iteration
-  origin_of_values: iteration_values
-  per_device_values: false
+  origin_of_values: user_provided_values
   pools: []
   positions:
     YaQL_test_worflow:
@@ -1424,16 +1568,22 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: IterationService
+  user_provided_values:
+    all:
+    - Loopback11
+    - Loopback15
+  variable_name: value
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-  yaql_query_values: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Test the iteration mechanism (YaQL values)
   devices: []
@@ -1444,20 +1594,16 @@
   hidden: false
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  iteration_values:
-    Loopback11: '0'
-    Loopback15: '0'
-  last_modified: '2019-06-24 10:14:18.640796'
+  last_modified: '2019-06-26 13:30:03.740267'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: Iteration_service_yaql
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  origin_of_targets: iterated
-  origin_of_values: yaql
-  per_device_values: true
+  origin_of_values: yaql_query
   pools: []
   positions:
     YaQL_test_worflow:
@@ -1467,45 +1613,12 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: IterationService
+  user_provided_values: {}
+  variable_name: value
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
-  yaql_query_values: $.variables.iteration_devices
-- completed: 0
-  creator: admin
-  credentials: device
-  notification_header: ''
-  define_devices_from_payload: false
-  description: ''
-  devices: []
-  display_only_failed_nodes: false
-  driver: eos
-  events: []
-  failed: 0
-  hidden: false
-  last_modified: '2019-06-24 10:19:13.189185'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: napalm_rollback
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  optional_args: {}
-  pools: []
-  positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 3
-    - 47
-  push_to_git: false
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  time_between_retries: 10
-  type: NapalmRollbackService
-  use_device_driver: true
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
+  yaql_query_values: $.variables.iteration_devices.{{device.name}}

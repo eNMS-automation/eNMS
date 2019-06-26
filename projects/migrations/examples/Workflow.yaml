@@ -1,7 +1,7 @@
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Poll configuration and push to gitlab
   devices: []
@@ -14,9 +14,10 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-06-24 10:14:18.797715'
+  last_modified: '2019-06-26 13:24:07.500802'
   mail_recipient: ''
   name: Configuration Management Workflow
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -26,16 +27,18 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: false
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Create and delete a VRF with Netmiko
   devices:
@@ -52,9 +55,10 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-06-24 10:14:18.876557'
+  last_modified: '2019-06-26 13:24:07.685637'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 2
   operating_system: eos
@@ -64,16 +68,18 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Create and delete a VRF with Napalm
   devices:
@@ -90,9 +96,10 @@
   - netmiko_check_vrf_test
   - netmiko_check_no_vrf_test
   - napalm_rollback
-  last_modified: '2019-06-24 10:19:37.762568'
+  last_modified: '2019-06-26 13:24:07.768865'
   mail_recipient: ''
   name: Napalm_VRF_workflow
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 2
   operating_system: eos
@@ -105,16 +112,18 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: ReST call, Napalm getters, etc
   devices:
@@ -133,9 +142,10 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-06-24 10:14:19.015710'
+  last_modified: '2019-06-26 13:24:07.849090'
   mail_recipient: ''
   name: payload_transfer_workflow
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -148,16 +158,18 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
   vendor: Arista
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Test YaQL device selection mechanism
   devices: []
@@ -172,9 +184,10 @@
   - netmiko_yaql_defined_devices
   - Iteration_service_simple
   - Iteration_service_yaql
-  last_modified: '2019-06-24 10:14:19.068461'
+  last_modified: '2019-06-26 13:24:07.901875'
   mail_recipient: ''
   name: YaQL_test_worflow
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -184,16 +197,18 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: false
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Test the payload extraction and validation mechanisms
   devices:
@@ -210,9 +225,10 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-06-24 10:14:19.136625'
+  last_modified: '2019-06-26 13:24:07.972309'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -222,16 +238,18 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- completed: 0
+- color: '#D2E5FF'
+  completed: 0
   creator: admin
   credentials: device
-  notification_header: ''
   define_devices_from_payload: false
   description: Test the inner workflow system
   devices:
@@ -246,9 +264,10 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-06-24 10:14:19.201650'
+  last_modified: '2019-06-26 13:24:08.054252'
   mail_recipient: ''
   name: Workflow_of_workflows
+  notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
@@ -258,6 +277,8 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true

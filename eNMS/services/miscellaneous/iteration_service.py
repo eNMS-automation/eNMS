@@ -22,11 +22,12 @@ class IterationService(Service):
     iterated_job = relationship(
         "Job", primaryjoin="Job.id == IterationService.iterated_job_id"
     )
-    origin_of_values = Column(String(SMALL_STRING_LENGTH), default="iteration_values")
+    origin_of_values = Column(
+        String(SMALL_STRING_LENGTH), default="user_provided_values"
+    )
     yaql_query_values = Column(String(SMALL_STRING_LENGTH), default="")
-    iteration_values = Column(MutableDict.as_mutable(PickleType), default={})
+    user_provided_values = Column(MutableDict.as_mutable(PickleType), default={})
     variable_name = Column(String(SMALL_STRING_LENGTH), default="value")
-    per_device_values = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "IterationService"}
 
@@ -39,8 +40,11 @@ class IterationService(Service):
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:
-        if self.origin_of_values == "iteration_values":
-            values = self.iteration_values.get(device.name if self.per_device_values else "all")
+        if self.origin_of_values == "user_provided_values":
+            if device.name in self.user_provided_values:
+                values = self.user_provided_values[device.name]
+            else:
+                values = self.user_provided_values["all"]
         else:
             query = self.sub(self.yaql_query_values, locals())
             values = factory.YaqlFactory().create()(query).evaluate(data=payload)
@@ -54,20 +58,16 @@ class IterationService(Service):
 class IterationForm(ServiceForm):
     form_type = HiddenField(default="IterationService")
     has_targets = BooleanField()
-    origin_of_targets = SelectField(
-        choices=(
-            ("iteration", "Use Targets from Iteration Service"),
-            ("iterated", "Use Targets from Iterated Service"),
-        )
-    )
     origin_of_values = SelectField(
+        "Where Values come from",
         choices=(
-            ("iteration_values", "Iteration Values Dictionary below"),
-            ("yaql", "YaQL Query on the Payload"),
-        )
+            ("user_provided_values", "User-provided Values (dictionary)"),
+            ("yaql_query", "YaQL Query on the Payload"),
+        ),
     )
-    iteration_values = DictField()
-    yaql_query_values = StringField()
-    per_device_values = BooleanField()
+    user_provided_values = DictField("User-provided Values for the Iteration")
+    yaql_query_values = StringField("YaQL query on the payload to get the Values")
     variable_name = StringField("Name of the Variable in the Payload")
-    iterated_job = InstanceField("What Job to Iterate", instance_type="Job")
+    iterated_job = InstanceField(
+        "What Job to Iterate for each Value on each Device", instance_type="Job"
+    )

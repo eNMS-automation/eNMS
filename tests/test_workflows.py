@@ -1,11 +1,11 @@
 from flask.testing import FlaskClient
-from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.database.functions import fetch_all
+from eNMS.database.functions import fetch, fetch_all
 
 from tests.test_base import check_pages
 
 
-@check_pages("table/workflow")
+@check_pages("table/workflow_builder")
 def test_workflow_creation(user_client: FlaskClient) -> None:
-    assert len(fetch_all("Workflow")) == 7
+    for workflow in fetch_all("Workflow"):
+        assert netmiko_workflow.run()[0]["success"]

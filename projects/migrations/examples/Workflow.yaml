@@ -14,7 +14,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-06-26 13:32:31.421601'
+  last_modified: '2019-06-26 15:15:41.070057'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -55,7 +55,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-06-26 13:32:31.506797'
+  last_modified: '2019-06-26 15:15:41.165602'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -84,7 +84,6 @@
   description: Create and delete a VRF with Napalm
   devices:
   - Washington
-  - Austin
   display_only_failed_nodes: true
   events: []
   failed: 0
@@ -96,12 +95,12 @@
   - netmiko_check_vrf_test
   - netmiko_check_no_vrf_test
   - napalm_rollback
-  last_modified: '2019-06-26 13:32:31.592168'
+  last_modified: '2019-06-26 15:30:47.180480'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
+  number_of_targets: 1
   operating_system: eos
   pools: []
   positions:
@@ -128,7 +127,6 @@
   description: ReST call, Napalm getters, etc
   devices:
   - Washington
-  - Austin
   display_only_failed_nodes: true
   events: []
   failed: 0
@@ -142,12 +140,12 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-06-26 13:32:31.670692'
+  last_modified: '2019-06-26 15:28:21.041664'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 1
   operating_system: eos
   pools: []
   positions:
@@ -187,7 +185,7 @@
   - Iteration_service_yaql
   - netmiko_check_vrf_test
   - iteration_yaql_payload
-  last_modified: '2019-06-26 14:39:50.202167'
+  last_modified: '2019-06-26 15:15:41.467936'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -216,7 +214,6 @@
   description: Test the payload extraction and validation mechanisms
   devices:
   - Washington
-  - Austin
   display_only_failed_nodes: true
   events: []
   failed: 0
@@ -228,12 +225,12 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-06-26 13:32:31.796902'
+  last_modified: '2019-06-26 15:32:20.574586'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 1
   operating_system: ''
   pools: []
   positions: {}
@@ -267,12 +264,12 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-06-26 13:32:31.863023'
+  last_modified: '2019-06-26 15:15:41.635678'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 1
   operating_system: eos
   pools: []
   positions: {}

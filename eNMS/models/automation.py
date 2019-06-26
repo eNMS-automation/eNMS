@@ -586,6 +586,7 @@ class Workflow(Job):
     __tablename__ = "Workflow"
     __mapper_args__ = {"polymorphic_identity": "Workflow"}
     parent_cls = "Job"
+    has_targets = Column(Boolean, default=True)
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     use_workflow_targets = Column(Boolean, default=True)
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
@@ -640,7 +641,10 @@ class Workflow(Job):
     ) -> Generator[Job, None, None]:
         failed_devices, passed_devices = set(), set()
         if job.has_targets:
-            devices = results["results"].get("devices", {})
+            if job.type == "Workflow":
+                devices = results["devices"]
+            else:
+                devices = results["results"].get("devices", {})
             for name, device_results in devices.items():
                 if device_results["success"]:
                     passed_devices.add(fetch("Device", name=name))
@@ -689,7 +693,6 @@ class Workflow(Job):
             job_results, _ = job.run(
                 results["results"], targets=valid_devices, parent=self
             )
-            results["results"][job.name] = job_results
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:
                 successors = self.workflow_targets_processing(
@@ -701,12 +704,24 @@ class Workflow(Job):
                     "destination",
                     "success" if job_results["success"] else "failure",
                 )
+            if job.type == "Workflow":
+                job_results["jobs"] = job_results.pop("results")
+            results["results"][job.name] = job_results
             for successor in successors:
                 if successor not in visited:
                     jobs.append(successor)
-                if successor == self.jobs[1]:
+                if not self.has_targets and successor == self.jobs[1]:
                     results["success"] = True
             sleep(job.waiting_time)
+        if self.has_targets:
+            start_devices = allowed_devices[start_job.name]
+            end_devices = allowed_devices["End"]
+            results["devices"] = {
+                device.name: {
+                    "success": device in end_devices
+                } for device in start_devices
+            }
+            results["success"] = start_devices == end_devices
         return results
 
 

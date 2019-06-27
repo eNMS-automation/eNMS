@@ -24,12 +24,12 @@
       <div class="form-group">
         {{ form.operator(id="pool-operator", class="form-control required add-id", placeholder="Operator") }}
       </div>
-    <fieldset>
-      <div class="item">
-        {{ form['never_update'](id="pool-never_update", class="add-id") }}
-        <label>Never update (for manually selected pools)</label>
-      </div>
-    </fieldset><br>
+      <fieldset>
+        <div class="item">
+          {{ form['never_update'](id="pool-never_update", class="add-id") }}
+          <label>Never update (for manually selected pools)</label>
+        </div>
+      </fieldset><br>
       <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
           <tr>
@@ -70,7 +70,6 @@
         {% endfor %}
         </tbody>
       </table>
-      </div>
       <div class="ln_solid"></div>
       <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
         <center>

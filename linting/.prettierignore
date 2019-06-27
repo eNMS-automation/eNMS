@@ -3,7 +3,6 @@
 **/bundles
 **/.webassets-cache
 *.py
-*.html
 *.png
 *.gif
 *.otf

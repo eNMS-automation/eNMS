@@ -1,6 +1,5 @@
 <form id="{{ form_type }}-form" class="form-horizontal form-label-left" method="post" autocomplete="off">
   <div class="modal-body">
-    <div class="form-group">
     {{ form.csrf_token() }}
     {{ form.form_type() }}
     <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">

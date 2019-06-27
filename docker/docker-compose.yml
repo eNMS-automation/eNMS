@@ -11,7 +11,10 @@ services:
       - db_network
   enms:
     restart: always
-    env_file: .env
+    environment:
+     - ENMS_SECRET_KEY=docker
+     - ENMS_CONFIG_MODE=Production
+     - USE_VAULT=0
     build: .
     ports:
       - "5000:5000"

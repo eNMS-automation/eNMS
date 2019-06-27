@@ -223,6 +223,6 @@ def route(page: str) -> Response:
         Session.commit()
         return jsonify(result)
     except Exception as e:
-        if controller.enms_config_mode == "Develop":
+        if controller.enms_config_mode == "Debug":
             raise
         return jsonify({"error": str(e)})

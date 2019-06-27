@@ -3,6 +3,7 @@ from flask import Flask
 from json import loads
 
 from eNMS.controller import controller
+from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 
 
@@ -17,13 +18,17 @@ def configure_cli(app: Flask) -> None:
     @argument("table")
     @argument("properties")
     def update(table: str, properties: str) -> None:
-        echo(controller.str_dict(factory(table, **loads(properties)).get_properties()))
+        factory(table, **loads(properties)).get_properties()
+        Session.commit()
+        echo(controller.str_dict())
 
     @app.cli.command(name="delete")
     @argument("table")
     @argument("name")
     def cli_delete(table: str, name: str) -> None:
-        echo(controller.str_dict(delete(table, name=name)))
+        device = delete(table, name=name)
+        Session.commit()
+        echo(controller.str_dict(device))
 
     @app.cli.command(name="run_job")
     @argument("name")
@@ -36,5 +41,6 @@ def configure_cli(app: Flask) -> None:
             targets = set()
         if payload:
             payload = loads(payload)
-        job = fetch("Job", name=name)
-        echo(controller.str_dict(job.run(targets=targets, payload=payload)[0]))
+        results = fetch("Job", name=name).run(targets=targets, payload=payload)[0]
+        Session.commit()
+        echo(controller.str_dict(results))

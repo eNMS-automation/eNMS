@@ -1,71 +1,77 @@
-{% extends "base_site.html" %}
-
-{% block title %} Workflow Builder {% endblock title %}
-
-{% block stylesheets %}
-  {{ super() }}
-{% endblock stylesheets %}
-
-{% block content %}
-  <div class="right_col" role="main">
-    <div class="row">
-      <div class="col-md-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content">
-            <div class="btn-group" style="z-index:2; position: absolute; right: 5vw">  
-              <strong><p id="status"></p></strong>
-              <strong><p id="current-job"></p></strong>
-              <strong><p id="current-device"></p></strong>
-            </div>
-            <div class="btn-group" style="z-index:2; position: absolute; left:35vw;">
-              <select id="current-workflow" class="form-control"></select>
-            </div>
-            <div>
-              <button style="background:transparent; border:none; color:transparent; width: 20vw;">
-                {{ service_table_form.services(id="service-type", class="form-control") }}
-              </button>
-              <button class="btn btn-primary btn-file" onclick="openServicePanel()">
-                Create
-              </button>
-            </div>
-            <div id="network" style="height:80vh; width:100%;"></div>
-            <div class="ln_solid"></div>
-            <div class="form-group">
-            </div>
+{% extends "base_site.html" %} {% block title %} Workflow Builder {% endblock
+title %} {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {%
+block content %}
+<div class="right_col" role="main">
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content">
+          <div
+            class="btn-group"
+            style="z-index:2; position: absolute; right: 5vw"
+          >
+            <strong><p id="status"></p></strong>
+            <strong><p id="current-job"></p></strong>
+            <strong><p id="current-device"></p></strong>
           </div>
+          <div
+            class="btn-group"
+            style="z-index:2; position: absolute; left:35vw;"
+          >
+            <select id="current-workflow" class="form-control"></select>
+          </div>
+          <div>
+            <button
+              style="background:transparent; border:none; color:transparent; width: 20vw;"
+            >
+              {{ service_table_form.services(id="service-type",
+              class="form-control") }}
+            </button>
+            <button
+              class="btn btn-primary btn-file"
+              onclick="openServicePanel()"
+            >
+              Create
+            </button>
+          </div>
+          <div id="network" style="height:80vh; width:100%;"></div>
+          <div class="ln_solid"></div>
+          <div class="form-group"></div>
         </div>
       </div>
     </div>
   </div>
-  <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li class="node-selection"><a tabindex="-1" href="#">Edit</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Run</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Results</a></li>
-    <li class="node-selection"><a tabindex="-1" href="#">Restart Workflow</a></li>
-    <li class="node-selection edge-selection"><a tabindex="-1" href="#">Delete</a></li>
-    <li class="dropdown-submenu global">
-      <a class="menu-submenu menu-layer" tabindex="-1" href="#">Change Mode<span class="caret-right"></span></a>
-      <ul class="dropdown-menu">
-        <li><a tabindex="-1" href="#">Create 'Success' edge</a></li>
-        <li><a tabindex="-1" href="#">Create 'Failure' edge</a></li>
-        <li><a tabindex="-1" href="#">Create 'Prerequisite' edge</a></li>
-        <li><a tabindex="-1" href="#">Move Nodes</a></li>
-      </ul>
-    </li>
-    <li class="global"><a tabindex="-1" href="#">Create Workflow</a></li>
-    <li class="global"><a tabindex="-1" href="#">Add to Workflow</a></li>
-    <li class="global"><a tabindex="-1" href="#">Run Workflow</a></li>
-    <li class="global"><a tabindex="-1" href="#">Edit Workflow</a></li>
-    <li class="global"><a tabindex="-1" href="#">Workflow Results</a></li>
-    <li class="global"><a tabindex="-1" href="#">Workflow Logs</a></li>
-  </ul>
-{% endblock content %}
-
-{% block javascripts %}
-  {{ super()}}
-  <script>
-    let workflow = {{ workflow|tojson|safe }};
-  </script>
-  <script src="{{ url_for('static', filename='automation.js') }}"></script>
-  <script src="{{ url_for('static', filename='workflowBuilder.js') }}"></script>
+</div>
+<ul id="contextMenu" class="dropdown-menu" role="menu">
+  <li class="node-selection"><a tabindex="-1" href="#">Edit</a></li>
+  <li class="node-selection"><a tabindex="-1" href="#">Run</a></li>
+  <li class="node-selection"><a tabindex="-1" href="#">Results</a></li>
+  <li class="node-selection"><a tabindex="-1" href="#">Restart Workflow</a></li>
+  <li class="node-selection edge-selection">
+    <a tabindex="-1" href="#">Delete</a>
+  </li>
+  <li class="dropdown-submenu global">
+    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+      >Change Mode<span class="caret-right"></span
+    ></a>
+    <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Create 'Success' edge</a></li>
+      <li><a tabindex="-1" href="#">Create 'Failure' edge</a></li>
+      <li><a tabindex="-1" href="#">Create 'Prerequisite' edge</a></li>
+      <li><a tabindex="-1" href="#">Move Nodes</a></li>
+    </ul>
+  </li>
+  <li class="global"><a tabindex="-1" href="#">Create Workflow</a></li>
+  <li class="global"><a tabindex="-1" href="#">Add to Workflow</a></li>
+  <li class="global"><a tabindex="-1" href="#">Run Workflow</a></li>
+  <li class="global"><a tabindex="-1" href="#">Edit Workflow</a></li>
+  <li class="global"><a tabindex="-1" href="#">Workflow Results</a></li>
+  <li class="global"><a tabindex="-1" href="#">Workflow Logs</a></li>
+</ul>
+{% endblock content %} {% block javascripts %} {{ super()}}
+<script>
+  let workflow = {{ workflow|tojson|safe }};
+</script>
+<script src="{{ url_for('static', filename='automation.js') }}"></script>
+<script src="{{ url_for('static', filename='workflowBuilder.js') }}"></script>
 {% endblock javascripts %}

@@ -1,8 +1,16 @@
-<form id="{{ form_type }}-form" class="form-horizontal form-label-left" method="post" autocomplete="off">
+<form
+  id="{{ form_type }}-form"
+  class="form-horizontal form-label-left"
+  method="post"
+  autocomplete="off"
+>
   <div class="modal-body">
-    {{ form.csrf_token() }}
-    {{ form.form_type() }}
-    <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+    {{ form.csrf_token() }} {{ form.form_type() }}
+    <table
+      class="table table-striped table-bordered dt-responsive nowrap"
+      cellspacing="0"
+      width="100%"
+    >
       <thead>
         <tr>
           <th>Property</th>
@@ -11,23 +19,32 @@
         </tr>
       </thead>
       <tbody>
-        {% for property in form.properties %}
-          {% set id = "{}-{}".format(form_type, property) %}
-          <tr>
-            {% if form[property].type == "StringField" %}
-              <td>{{ names.get(property, property) }}</td>
-              <td>{{ form[property](id=id, class="form-control") }}</td>
-              <td>{{ form[property + "_filter"](id=id + "_filter", class="form-control") }}</td>
-            {% else %}
-              <td>{{ names.get(property, property) }}</td>
-              <td colspan="2">{{ form[property](id=id, class="form-control") }}</td>
-            {% endif %}
-          </tr>
+        {% for property in form.properties %} {% set id =
+        "{}-{}".format(form_type, property) %}
+        <tr>
+          {% if form[property].type == "StringField" %}
+          <td>{{ names.get(property, property) }}</td>
+          <td>{{ form[property](id=id, class="form-control") }}</td>
+          <td>
+            {{ form[property + "_filter"](id=id + "_filter",
+            class="form-control") }}
+          </td>
+          {% else %}
+          <td>{{ names.get(property, property) }}</td>
+          <td colspan="2">{{ form[property](id=id, class="form-control") }}</td>
+          {% endif %}
+        </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
   <center>
-    <button type="button" class="btn btn-success" onclick="filter('{{ form_type }}')">Save</button>
+    <button
+      type="button"
+      class="btn btn-success"
+      onclick="filter('{{ form_type }}')"
+    >
+      Save
+    </button>
   </center>
 </form>

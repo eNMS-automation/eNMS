@@ -1,159 +1,209 @@
-{% extends "base_site.html" %}
-
-{% block title %} Administration {% endblock title %}
-
-{% block stylesheets %}
-  {{ super() }}
-  <style>
-    .btn-group-vertical > .btn{
-      margin-bottom:20px;
-    }
-  </style>
-{% endblock stylesheets %}
-
-{% block content %}
-  <div class="right_col" role="main">
-    <div class="row">
-      <div class="col-md-2 col-sm-2 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content" style="min-height:80vh;">
-            <div class="x_title">
-              <h4 class="text-center">Parameters</h4>
-            </div><br>
-            <center>
-              <div class="btn-group-vertical" style="width:100%">
-                <button type="button" class="btn btn-primary btn-file" onclick="showParametersPanel('view')">
-                  Geographical View
-                </button>
-                <button type="button" class="btn btn-primary btn-file" onclick="showParametersPanel('ssh')">
-                  SSH Terminal
-                </button>
-                <button type="button" class="btn btn-primary btn-file" onclick="showParametersPanel('notifications')">
-                  Notifications
-                </button>
-                <button type="button" class="btn btn-primary btn-file" onclick="showParametersPanel('git')">
-                  Gitlab
-                </button>
-                <button type="button" class="btn btn-primary btn-file" onclick="showParametersPanel('cluster')">
-                  Cluster Management
-                </button>
-              </div>
-            </center>
+{% extends "base_site.html" %} {% block title %} Administration {% endblock
+title %} {% block stylesheets %} {{ super() }}
+<style>
+  .btn-group-vertical > .btn {
+    margin-bottom: 20px;
+  }
+</style>
+{% endblock stylesheets %} {% block content %}
+<div class="right_col" role="main">
+  <div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content" style="min-height:80vh;">
+          <div class="x_title">
+            <h4 class="text-center">Parameters</h4>
           </div>
+          <br />
+          <center>
+            <div class="btn-group-vertical" style="width:100%">
+              <button
+                type="button"
+                class="btn btn-primary btn-file"
+                onclick="showParametersPanel('view')"
+              >
+                Geographical View
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-file"
+                onclick="showParametersPanel('ssh')"
+              >
+                SSH Terminal
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-file"
+                onclick="showParametersPanel('notifications')"
+              >
+                Notifications
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-file"
+                onclick="showParametersPanel('git')"
+              >
+                Gitlab
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-file"
+                onclick="showParametersPanel('cluster')"
+              >
+                Cluster Management
+              </button>
+            </div>
+          </center>
         </div>
       </div>
-      <div class="col-md-2 col-sm-2 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content" style="min-height:80vh;">
-            <div class="x_title">
-              <h4 class="text-center">Database</h4>
-            </div><br>
-            <center>
-              <div class="btn-group-vertical" style="width:100%">
-                <button class="btn btn-primary btn-file" onclick="showPanel('database_migration')">
-                  Migration
-                </button>
-                <button class="btn btn-primary btn-file" onclick="showPanel('database_deletion')">
-                  Deletion
-                </button>
-                <button class="btn btn-primary btn-file" onclick="importJobs()">
-                  Import Jobs
-                </button>
-              </div>
-            </center>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content" style="min-height:80vh;">
+          <div class="x_title">
+            <h4 class="text-center">Database</h4>
           </div>
+          <br />
+          <center>
+            <div class="btn-group-vertical" style="width:100%">
+              <button
+                class="btn btn-primary btn-file"
+                onclick="showPanel('database_migration')"
+              >
+                Migration
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="showPanel('database_deletion')"
+              >
+                Deletion
+              </button>
+              <button class="btn btn-primary btn-file" onclick="importJobs()">
+                Import Jobs
+              </button>
+            </div>
+          </center>
         </div>
       </div>
-      <div class="col-md-2 col-sm-2 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content" style="min-height:80vh;">
-            <div class="x_title">
-              <h4 class="text-center">Scheduler</h4>
-            </div><br>
-            <center>
-              <div class="btn-group-vertical" style="width:100%">
-                <button class="btn btn-primary btn-file" onclick="scheduler('pause')">
-                  Pause Scheduler
-                </button>
-                <button class="btn btn-primary btn-file" onclick="scheduler('resume')">
-                  Resume Scheduler
-                </button>
-              </div>
-            </center>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content" style="min-height:80vh;">
+          <div class="x_title">
+            <h4 class="text-center">Scheduler</h4>
           </div>
+          <br />
+          <center>
+            <div class="btn-group-vertical" style="width:100%">
+              <button
+                class="btn btn-primary btn-file"
+                onclick="scheduler('pause')"
+              >
+                Pause Scheduler
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="scheduler('resume')"
+              >
+                Resume Scheduler
+              </button>
+            </div>
+          </center>
         </div>
       </div>
-      <div class="col-md-2 col-sm-2 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content" style="min-height:80vh;">
-            <div class="x_title">
-              <h4 class="text-center">Topology Import</h4>
-            </div><br>
-            <center>
-              <div class="btn-group-vertical" style="width:100%">
-                <button class="btn btn-primary btn-file" onclick="showImportTopologyPanel()">
-                  Excel
-                </button>
-                <button class="btn btn-primary btn-file" onclick="showPanel('opennms')">
-                  OpenNMS
-                </button>
-                <button class="btn btn-primary btn-file" onclick="showPanel('netbox')">
-                  Netbox
-                </button>
-                <button class="btn btn-primary btn-file" onclick="showPanel('librenms')">
-                  LibreNMS
-                </button>
-              </div>
-            </center>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content" style="min-height:80vh;">
+          <div class="x_title">
+            <h4 class="text-center">Topology Import</h4>
           </div>
+          <br />
+          <center>
+            <div class="btn-group-vertical" style="width:100%">
+              <button
+                class="btn btn-primary btn-file"
+                onclick="showImportTopologyPanel()"
+              >
+                Excel
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="showPanel('opennms')"
+              >
+                OpenNMS
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="showPanel('netbox')"
+              >
+                Netbox
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="showPanel('librenms')"
+              >
+                LibreNMS
+              </button>
+            </div>
+          </center>
         </div>
       </div>
-      <div class="col-md-2 col-sm-2 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content" style="min-height:80vh;">
-            <div class="x_title">
-              <h4 class="text-center">Topology Export</h4>
-            </div><br>
-            <center>
-              <div class="btn-group-vertical" style="width:100%">
-                <button class="btn btn-primary btn-file" onclick="showPanel('excel_export')">
-                  Excel
-                </button>
-                <button class="btn btn-primary btn-file" onclick="showPanel('google_earth_export')">
-                  Google Earth
-                </button>
-              </div>
-            </center>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content" style="min-height:80vh;">
+          <div class="x_title">
+            <h4 class="text-center">Topology Export</h4>
           </div>
+          <br />
+          <center>
+            <div class="btn-group-vertical" style="width:100%">
+              <button
+                class="btn btn-primary btn-file"
+                onclick="showPanel('excel_export')"
+              >
+                Excel
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="showPanel('google_earth_export')"
+              >
+                Google Earth
+              </button>
+            </div>
+          </center>
         </div>
       </div>
-      <div class="col-md-2 col-sm-2 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content" style="min-height:80vh;">
-            <div class="x_title">
-              <h4 class="text-center">Miscellaneous</h4>
-            </div><br>
-            <center>
-              <div class="btn-group-vertical" style="width:100%">
-                <button class="btn btn-primary btn-file" onclick="getGitContent()">
-                  Fetch Git Configurations
-                </button>
-                <button class="btn btn-primary btn-file" onclick="resetStatus()">
-                  Reset Job Statuses
-                </button>
-                <button class="btn btn-primary btn-file" onclick="scanCluster()">
-                  Scan Cluster Subnet
-                </button>
-              </div>
-            </center>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content" style="min-height:80vh;">
+          <div class="x_title">
+            <h4 class="text-center">Miscellaneous</h4>
           </div>
+          <br />
+          <center>
+            <div class="btn-group-vertical" style="width:100%">
+              <button
+                class="btn btn-primary btn-file"
+                onclick="getGitContent()"
+              >
+                Fetch Git Configurations
+              </button>
+              <button class="btn btn-primary btn-file" onclick="resetStatus()">
+                Reset Job Statuses
+              </button>
+              <button class="btn btn-primary btn-file" onclick="scanCluster()">
+                Scan Cluster Subnet
+              </button>
+            </div>
+          </center>
         </div>
       </div>
     </div>
   </div>
-{% endblock content %}
-
-{% block javascripts %}
-  {{ super()}}
-  <script src="{{ url_for('static', filename='administration.js') }}"></script>
+</div>
+{% endblock content %} {% block javascripts %} {{ super()}}
+<script src="{{ url_for('static', filename='administration.js') }}"></script>
 {% endblock javascripts %}

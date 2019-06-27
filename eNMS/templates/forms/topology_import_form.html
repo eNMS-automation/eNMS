@@ -1,6 +1,11 @@
-<form id="import-form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" autocomplete="off">
-  {{ form.csrf_token() }}
-  {{ form.form_type() }}
+<form
+  id="import-form"
+  class="form-horizontal form-label-left"
+  enctype="multipart/form-data"
+  method="post"
+  autocomplete="off"
+>
+  {{ form.csrf_token() }} {{ form.form_type() }}
   <div class="modal-body">
     <fieldset>
       <div class="item">
@@ -8,8 +13,14 @@
         <label>Replace on import</label>
       </div>
     </fieldset>
-    <label class="btn btn-default btn-file" style="width:100%;">Import Network Topology
-      <input id="file" name="file" style="visibility:hidden; display:none" type="file">
+    <label class="btn btn-default btn-file" style="width:100%;"
+      >Import Network Topology
+      <input
+        id="file"
+        name="file"
+        style="visibility:hidden; display:none"
+        type="file"
+      />
     </label>
   </div>
 </form>

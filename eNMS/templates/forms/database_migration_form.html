@@ -1,16 +1,26 @@
-<form id="migration-form" data-parsley-validate class="form-horizontal form-label-left" method="post" autocomplete="off">
-  {{ form.csrf_token() }}
-  {{ form.form_type() }}
+<form
+  id="migration-form"
+  data-parsley-validate
+  class="form-horizontal form-label-left"
+  method="post"
+  autocomplete="off"
+>
+  {{ form.csrf_token() }} {{ form.form_type() }}
   <div class="modal-body">
     <div>
       <label>Empty Database before Import</label>
-      {{ form.empty_database_before_import() }}<br><br>
+      {{ form.empty_database_before_import() }}<br /><br />
       <label>
-        Directory pathname to use in eNMS_HOME/projects/migrations :<br>
+        Directory pathname to use in eNMS_HOME/projects/migrations :<br />
         Example: "10312018_backup"
       </label>
       <div class="form-group">
-        <input class="form-control required" list="versions" id="name" name="name" />
+        <input
+          class="form-control required"
+          list="versions"
+          id="name"
+          name="name"
+        />
         <datalist id="versions"></datalist>
       </div>
     </div>
@@ -22,8 +32,20 @@
     </div>
     <div class="form-group">
       <div class="col-md-e col-sm-9 col-xs-12 col-md-offset-5">
-        <button type="button" class="btn btn-success" onclick="migrationsImport()">Import</button>
-        <button type="button" class="btn btn-success" onclick="migrationsExport()">Export</button>
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="migrationsImport()"
+        >
+          Import
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="migrationsExport()"
+        >
+          Export
+        </button>
       </div>
     </div>
   </div>

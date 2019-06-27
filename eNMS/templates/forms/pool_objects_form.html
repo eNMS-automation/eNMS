@@ -1,25 +1,36 @@
-<form id="pool-objects-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
-  {{ form.csrf_token() }}
-  {{ form.form_type() }}
+<form
+  id="pool-objects-form"
+  data-parsley-validate
+  class="form-horizontal form-label-left add-id"
+  method="post"
+  autocomplete="off"
+>
+  {{ form.csrf_token() }} {{ form.form_type() }}
   <div class="modal-body">
     <label>Devices</label>
-    <div class='form-group'>
+    <div class="form-group">
       {{ form.devices(class="form-control add-id") }}
     </div>
     <label>Links</label>
-    <div class='form-group'>
+    <div class="form-group">
       {{ form.links(class="form-control add-id") }}
     </div>
     <label>Define devices from string</label>
-    <div class='form-group'>
+    <div class="form-group">
       {{ form.string_devices(class="form-control add-id") }}
     </div>
     <label>Define links from string</label>
-    <div class='form-group'>
+    <div class="form-group">
       {{ form.string_links(class="form-control add-id") }}
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-id add-id" value="savePoolObjects">Save</button>
+    <button
+      type="button"
+      class="btn btn-success btn-id add-id"
+      value="savePoolObjects"
+    >
+      Save
+    </button>
   </div>
 </form>

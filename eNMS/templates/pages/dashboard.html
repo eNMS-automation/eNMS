@@ -1,65 +1,62 @@
-{% extends "base_site.html" %}
-
-{% block title %} Dashboard {% endblock title %}
-
-{% block stylesheets %}
-  {{ super() }}
-{% endblock stylesheets %}
-
-{% block content %}
-  <div class="right_col" role="main">
-    <div class="row tile_count">
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>
-        <div id="count-Device" class="count"></div>
-      </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-clock-o"></i> Links</span>
-        <div id="count-Link" class="count"></div>
-      </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Services (Currently running)</span>
-        <div id="count-Service" class="count"></div>
-      </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Workflows (Currently running)</span>
-        <div id="count-Workflow" class="count"></div>
-      </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Tasks (Currently scheduled)</span>
-        <div id="count-Task" class="count"></div>
-      </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Users</span>
-        <div id="count-User" class="count"></div>
-      </div>
+{% extends "base_site.html" %} {% block title %} Dashboard {% endblock title %}
+{% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block
+content %}
+<div class="right_col" role="main">
+  <div class="row tile_count">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>
+      <div id="count-Device" class="count"></div>
     </div>
-    <div class="row">
-      {% for type, type_properties in properties.items() %}
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h4 class="text-center">{{ type|capitalize }}s</h4>
-            </div>
-            <div class="x_content">
-              <div class="form-group">
-                <select id="{{ type }}-properties" class="form-control">
-                  {% for property in type_properties %}
-                    <option value="{{ property }}">{{ names[property] }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div id="{{ type }}" style="height:550px;"></div>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-clock-o"></i> Links</span>
+      <div id="count-Link" class="count"></div>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"
+        ><i class="fa fa-user"></i> Services (Currently running)</span
+      >
+      <div id="count-Service" class="count"></div>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"
+        ><i class="fa fa-user"></i> Workflows (Currently running)</span
+      >
+      <div id="count-Workflow" class="count"></div>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"
+        ><i class="fa fa-user"></i> Tasks (Currently scheduled)</span
+      >
+      <div id="count-Task" class="count"></div>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <span class="count_top"><i class="fa fa-user"></i> Users</span>
+      <div id="count-User" class="count"></div>
     </div>
   </div>
-{% endblock content %}
-
-{% block javascripts %}
-  {{ super() }}
-  <script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+  <div class="row">
+    {% for type, type_properties in properties.items() %}
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h4 class="text-center">{{ type|capitalize }}s</h4>
+        </div>
+        <div class="x_content">
+          <div class="form-group">
+            <select id="{{ type }}-properties" class="form-control">
+              {% for property in type_properties %}
+              <option value="{{ property }}">{{ names[property] }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div id="{{ type }}" style="height:550px;"></div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %} {% block javascripts %} {{ super() }}
+<script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
 {% endblock javascripts %}

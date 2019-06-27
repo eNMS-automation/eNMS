@@ -1,7 +1,10 @@
-{{ form.csrf_token() }}
-{{ form.form_type() }}
+{{ form.csrf_token() }} {{ form.form_type() }}
 <div class="modal-body">
-  <button class="btn btn-default btn-file btn-id" value="clearResults" style="width:100%;">
+  <button
+    class="btn btn-default btn-file btn-id"
+    value="clearResults"
+    style="width:100%;"
+  >
     Clear
   </button>
   <div class="col-md-10 col-sm-10 col-xs-12">
@@ -9,7 +12,9 @@
     <div class="col-md-9 col-sm-9 col-xs-12">
       {{ form.display(class="form-control add-id") }}
     </div>
-    <label class="control-label col-md-3 col-sm-3 col-xs-12">Compare With :</label>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+      >Compare With :</label
+    >
     <div class="col-md-9 col-sm-9 col-xs-12">
       {{ form.compare_with(class="form-control add-id") }}
     </div>
@@ -17,18 +22,34 @@
   <div class="col-md-2 col-sm-2 col-xs-12">
     <div class="radio">
       <label>
-        <input type="radio" checked="" value="text" id="display-text" name="type" class="add-id">
+        <input
+          type="radio"
+          checked=""
+          value="text"
+          id="display-text"
+          name="type"
+          class="add-id"
+        />
         Text
       </label>
     </div>
     <div class="radio">
       <label>
-        <input type="radio" value="json" id="display-json" name="type" class="add-id">
+        <input
+          type="radio"
+          value="json"
+          id="display-json"
+          name="type"
+          class="add-id"
+        />
         JSON
       </label>
     </div>
   </div>
-  <hr><hr><hr><hr>
+  <hr />
+  <hr />
+  <hr />
+  <hr />
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div id="display_results" class="add-id"></div>

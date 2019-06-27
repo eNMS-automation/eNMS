@@ -1,14 +1,23 @@
-<form id="edit-{{ form_type }}-form" data-parsley-validate class="form-horizontal form-label-left add-id" method="post" autocomplete="off">
-  {{ form.csrf_token() }}
-  {{ form.form_type(value=form_type) }}
-  {{ form.id(id=form_type + '-id', class="add-id") }}
+<form
+  id="edit-{{ form_type }}-form"
+  data-parsley-validate
+  class="form-horizontal form-label-left add-id"
+  method="post"
+  autocomplete="off"
+>
+  {{ form.csrf_token() }} {{ form.form_type(value=form_type) }} {{
+  form.id(id=form_type + '-id', class="add-id") }}
   <div class="modal-body">
-    <div id="{{ form_type }}-wizard" class="form_wizard wizard_horizontal add-id">
+    <div
+      id="{{ form_type }}-wizard"
+      class="form_wizard wizard_horizontal add-id"
+    >
       <ul class="wizard_steps">
         <li>
           <a href="#step-1">
             <span class="step_no">1</span>
-            <span class="step_descr">Step 1<br>
+            <span class="step_descr"
+              >Step 1<br />
               <small>General</small>
             </span>
           </a>
@@ -16,7 +25,8 @@
         <li>
           <a href="#step-2">
             <span class="step_no">2</span>
-            <span class="step_descr">Step 2<br>
+            <span class="step_descr"
+              >Step 2<br />
               <small>Notification</small>
             </span>
           </a>
@@ -24,7 +34,8 @@
         <li>
           <a href="#step-3">
             <span class="step_no">3</span>
-            <span class="step_descr">Step 3<br>
+            <span class="step_descr"
+              >Step 3<br />
               <small>Advanced</small>
             </span>
           </a>
@@ -32,7 +43,8 @@
         <li>
           <a href="#step-4">
             <span class="step_no">4</span>
-            <span class="step_descr">Step 4<br>
+            <span class="step_descr"
+              >Step 4<br />
               <small>Devices</small>
             </span>
           </a>
@@ -40,7 +52,8 @@
         <li>
           <a href="#step-5">
             <span class="step_no">5</span>
-            <span class="step_descr">Step 5<br>
+            <span class="step_descr"
+              >Step 5<br />
               <small>Specific</small>
             </span>
           </a>
@@ -49,35 +62,42 @@
       <div id="step-1">
         <div style="width: 100%; height: 50%;">
           <label><label for="name">Type</label></label>
-          <div class='form-group'>
-            {{ form.type(id=form_type + '-class', class="form-control add-id") }}
+          <div class="form-group">
+            {{ form.type(id=form_type + '-class', class="form-control add-id")
+            }}
           </div>
           <label><label for="name">Name</label></label>
-          <div class='form-group'>
-            {{ form.name(id=form_type + '-name', class="form-control add-id required") }}
+          <div class="form-group">
+            {{ form.name(id=form_type + '-name', class="form-control add-id
+            required") }}
           </div>
           <label><label for="description">Description</label></label>
-          <div class='form-group'>
-            {{ form.description(id=form_type + '-description', class="form-control add-id") }}
+          <div class="form-group">
+            {{ form.description(id=form_type + '-description',
+            class="form-control add-id") }}
           </div>
           <label><label for="vendor">Vendor</label></label>
-          <div class='form-group'>
-            {{ form.vendor(id=form_type + '-vendor', class="form-control add-id") }}
+          <div class="form-group">
+            {{ form.vendor(id=form_type + '-vendor', class="form-control
+            add-id") }}
           </div>
           <label><label for="operating_system">Operating System</label></label>
-          <div class='form-group'>
-            {{ form.operating_system(id=form_type + '-operating_system', class="form-control add-id") }}
+          <div class="form-group">
+            {{ form.operating_system(id=form_type + '-operating_system',
+            class="form-control add-id") }}
           </div>
           <label><label for="shape">Shape</label></label>
-          <div class='form-group'>
-            {{ form.shape(id=form_type + '-shape', class="form-control add-id") }}
+          <div class="form-group">
+            {{ form.shape(id=form_type + '-shape', class="form-control add-id")
+            }}
           </div>
           <label><label for="color">Color</label></label>
-          <div class='form-group'>
-            {{ form.color(id=form_type + '-color', class="form-control add-id") }}
+          <div class="form-group">
+            {{ form.color(id=form_type + '-color', class="form-control add-id")
+            }}
           </div>
           <label><label for="size">Size</label></label>
-          <div class='form-group'>
+          <div class="form-group">
             {{ form.size(id=form_type + '-size', class="form-control add-id") }}
           </div>
         </div>
@@ -85,113 +105,180 @@
       <div id="step-2">
         <fieldset>
           <div class="item">
-            <input id="{{ form_type }}-send_notification" name="send_notification" type="checkbox" class="add-id" value="y">
+            <input
+              id="{{ form_type }}-send_notification"
+              name="send_notification"
+              type="checkbox"
+              class="add-id"
+              value="y"
+            />
             <label>Send notification</label>
           </div>
         </fieldset>
-        <label><label for="send_notification_method">Send Notification Method</label></label>
-        <div class='form-group'>
-          {{ form.send_notification_method(id=form_type + '-send_notification_method', class="form-control add-id") }}
+        <label
+          ><label for="send_notification_method"
+            >Send Notification Method</label
+          ></label
+        >
+        <div class="form-group">
+          {{ form.send_notification_method(id=form_type +
+          '-send_notification_method', class="form-control add-id") }}
         </div>
-        <label><label for="notification_header">Notification Header</label></label>
-        <div class='form-group'>
-          {{ form.notification_header(id=form_type + '-notification_header', class="form-control add-id") }}
+        <label
+          ><label for="notification_header">Notification Header</label></label
+        >
+        <div class="form-group">
+          {{ form.notification_header(id=form_type + '-notification_header',
+          class="form-control add-id") }}
         </div>
-        <label><label for="mail_recipient">Mail Recipients (separated by comma)</label></label>
-        <div class='form-group'>
-          {{ form.mail_recipient(id=form_type + '-mail_recipient', class="form-control add-id") }}
+        <label
+          ><label for="mail_recipient"
+            >Mail Recipients (separated by comma)</label
+          ></label
+        >
+        <div class="form-group">
+          {{ form.mail_recipient(id=form_type + '-mail_recipient',
+          class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="{{ form_type }}-display_only_failed_nodes" name="display_only_failed_nodes"  class="add-id" type="checkbox" value="y">
+            <input
+              id="{{ form_type }}-display_only_failed_nodes"
+              name="display_only_failed_nodes"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
             <label>Display only failed nodes</label>
           </div>
         </fieldset>
       </div>
       <div id="step-3">
         <label><label for="number_of_retries">Number of retries</label></label>
-        <div class='form-group'>
-          {{ form.number_of_retries(id=form_type + '-number_of_retries', class="form-control add-id") }}
+        <div class="form-group">
+          {{ form.number_of_retries(id=form_type + '-number_of_retries',
+          class="form-control add-id") }}
         </div>
-        <label><label for="time_between_retries">Time between retries (in seconds)</label></label>
-        <div class='form-group'>
-          {{ form.time_between_retries(id=form_type + '-time_between_retries', class="form-control add-id") }}
+        <label
+          ><label for="time_between_retries"
+            >Time between retries (in seconds)</label
+          ></label
+        >
+        <div class="form-group">
+          {{ form.time_between_retries(id=form_type + '-time_between_retries',
+          class="form-control add-id") }}
         </div>
-        <label><label for="waiting_time">Waiting time (in seconds)</label></label>
-        <div class='form-group'>
-          {{ form.waiting_time(id=form_type + '-waiting_time', class="form-control add-id") }}
+        <label
+          ><label for="waiting_time">Waiting time (in seconds)</label></label
+        >
+        <div class="form-group">
+          {{ form.waiting_time(id=form_type + '-waiting_time',
+          class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="{{ form_type }}-push_to_git" name="push_to_git" class="add-id" type="checkbox" value="y">
+            <input
+              id="{{ form_type }}-push_to_git"
+              name="push_to_git"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
             <label>Push to git</label>
           </div>
         </fieldset>
       </div>
       <div id="step-4">
         <label><label for="devices">Devices</label></label>
-        <div class='form-group'>
-          {{ form.devices(id=form_type + '-devices', class="form-control add-id") }}
+        <div class="form-group">
+          {{ form.devices(id=form_type + '-devices', class="form-control
+          add-id") }}
         </div>
         <label><label for="pools">Pools</label></label>
-        <div class='form-group'>
+        <div class="form-group">
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="{{ form_type }}-define_devices_from_payload" name="define_devices_from_payload" class="add-id" type="checkbox" value="y">
+            <input
+              id="{{ form_type }}-define_devices_from_payload"
+              name="define_devices_from_payload"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
             <label>Define devices from payload</label>
           </div>
         </fieldset>
         <label><label for="yaql_query">YaQL Query</label></label>
-        <div class='form-group'>
-          {{ form.yaql_query(id=form_type + '-yaql_query', class="form-control add-id") }}
+        <div class="form-group">
+          {{ form.yaql_query(id=form_type + '-yaql_query', class="form-control
+          add-id") }}
         </div>
-        <label><label for="query_property_type">Query Property Type</label></label>
-        <div class='form-group'>
-          {{ form.query_property_type(id=form_type + '-query_property_type', class="form-control add-id") }}
+        <label
+          ><label for="query_property_type">Query Property Type</label></label
+        >
+        <div class="form-group">
+          {{ form.query_property_type(id=form_type + '-query_property_type',
+          class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
-            <input id="{{ form_type }}-multiprocessing" name="multiprocessing" class="add-id" type="checkbox" value="y">
+            <input
+              id="{{ form_type }}-multiprocessing"
+              name="multiprocessing"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
             <label>Multiprocessing</label>
           </div>
         </fieldset>
-        <label><label for="max_processes">Maximum number of processes</label></label>
-        <div class='form-group'>
-          {{ form.max_processes(id=form_type + '-max_processes', class="form-control add-id") }}
+        <label
+          ><label for="max_processes">Maximum number of processes</label></label
+        >
+        <div class="form-group">
+          {{ form.max_processes(id=form_type + '-max_processes',
+          class="form-control add-id") }}
         </div>
         <label><label for="credentials">Credentials</label></label>
-        <div class='form-group'>
-          {{ form.credentials(id=form_type + '-credentials', class="form-control add-id") }}
+        <div class="form-group">
+          {{ form.credentials(id=form_type + '-credentials', class="form-control
+          add-id") }}
         </div>
       </div>
       <div id="step-5">
-        {% for field_name in form.service_fields %}
-          {% if form[field_name].type == "BooleanField" %}
-            <fieldset>
-              <div class="item">
-                {% if form[field_name].default %}
-                  {{ form[field_name](id="{}-{}".format(form_type, field_name), class="add-id", checked=True) }}
-                {% else %}
-                  {{ form[field_name](id="{}-{}".format(form_type, field_name), class="add-id") }}
-                {% endif %}
-                <label>{{ form[field_name].label }}</label>
-              </div>
-            </fieldset>
-          {% else %}
+        {% for field_name in form.service_fields %} {% if form[field_name].type
+        == "BooleanField" %}
+        <fieldset>
+          <div class="item">
+            {% if form[field_name].default %} {{
+            form[field_name](id="{}-{}".format(form_type, field_name),
+            class="add-id", checked=True) }} {% else %} {{
+            form[field_name](id="{}-{}".format(form_type, field_name),
+            class="add-id") }} {% endif %}
             <label>{{ form[field_name].label }}</label>
-            <div class='form-group'>
-              {{ form[field_name](id="{}-{}".format(form_type, field_name), class="form-control add-id") }}
-            </div>
-          {% endif %}
-        {% endfor %}
+          </div>
+        </fieldset>
+        {% else %}
+        <label>{{ form[field_name].label }}</label>
+        <div class="form-group">
+          {{ form[field_name](id="{}-{}".format(form_type, field_name),
+          class="form-control add-id") }}
+        </div>
+        {% endif %} {% endfor %}
       </div>
     </div>
   </div>
   <div class="modal-footer">
     <center>
-      <button type="button" class="btn btn-success pull-right add-id btn-id" value="processData">Save</button>
+      <button
+        type="button"
+        class="btn btn-success pull-right add-id btn-id"
+        value="processData"
+      >
+        Save
+      </button>
     </center>
   </div>
 </form>

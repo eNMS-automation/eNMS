@@ -55,12 +55,13 @@ file_transfer_service = ImmutableMultiDict(
 
 @check_pages("table/service")
 def test_base_services(user_client: FlaskClient) -> None:
+    number_of_services = len(fetch_all("Service"))
     user_client.post("/update/NetmikoConfigurationService", data=netmiko_ping)
     assert len(fetch_all("NetmikoConfigurationService")) == 3
-    assert len(fetch_all("Service")) == 38
+    assert len(fetch_all("Service")) == number_of_services + 1
     user_client.post("/update/NetmikoFileTransferService", data=file_transfer_service)
     assert len(fetch_all("NetmikoFileTransferService")) == 1
-    assert len(fetch_all("Service")) == 39
+    assert len(fetch_all("Service")) == number_of_services + 2
 
 
 getters_dict = ImmutableMultiDict(
@@ -83,9 +84,9 @@ getters_dict = ImmutableMultiDict(
 
 @check_pages("table/service")
 def test_getters_service(user_client: FlaskClient) -> None:
-    assert len(fetch_all("NapalmGettersService")) == 4
+    number_of_napalm_services = len(fetch_all("NapalmGettersService"))
     user_client.post("/update/NapalmGettersService", data=getters_dict)
-    assert len(fetch_all("NapalmGettersService")) == 5
+    assert len(fetch_all("NapalmGettersService")) == number_of_napalm_services + 1
 
 
 ansible_service = ImmutableMultiDict(
@@ -112,6 +113,7 @@ ansible_service = ImmutableMultiDict(
 
 @check_pages("table/service")
 def test_ansible_services(user_client: FlaskClient) -> None:
+    number_of_services = len(fetch_all("Service"))
     user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
     assert len(fetch_all("AnsiblePlaybookService")) == 1
-    assert len(fetch_all("Service")) == 41
+    assert len(fetch_all("Service")) == number_of_services + 1

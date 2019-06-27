@@ -42,4 +42,7 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
         json={"name": "new_workflow", "description": "New"},
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
-    assert result["description"] == "New" and len(fetch_all("Workflow")) == number_of_workflows + 1
+    assert (
+        result["description"] == "New"
+        and len(fetch_all("Workflow")) == number_of_workflows + 1
+    )

@@ -4,18 +4,17 @@ from flask_cli import FlaskCLI
 from flask.wrappers import Request, Response
 from pathlib import Path
 from sqlalchemy.orm import configure_mappers
-from typing import Any, Optional, Tuple
+from typing import Any, Tuple
 
 from eNMS.cli import configure_cli
 from eNMS.config import config_mapper
 from eNMS.controller import controller
-from eNMS.database import Base, engine, Session
+from eNMS.database import Base, engine
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
 from eNMS.extensions import assets, auth, csrf, login_manager
 from eNMS.models.administration import User
-from eNMS.models.automation import Job
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
 from eNMS.routes import blueprint

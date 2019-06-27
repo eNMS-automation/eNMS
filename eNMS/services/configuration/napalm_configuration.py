@@ -30,7 +30,6 @@ class NapalmConfigurationService(Service):
         napalm_connection = self.napalm_connection(device, parent)
         self.logs.append(f"Pushing configuration on {device.name} (Napalm)")
         config = "\n".join(self.sub(self.content, locals()).splitlines())
-        print(napalm_connection, config, self.action, "tttt"*200)
         getattr(napalm_connection, self.action)(config=config)
         napalm_connection.commit_config()
         return {"success": True, "result": f"Config push ({config})"}

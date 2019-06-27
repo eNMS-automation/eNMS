@@ -18,9 +18,9 @@ def configure_cli(app: Flask) -> None:
     @argument("table")
     @argument("properties")
     def update(table: str, properties: str) -> None:
-        factory(table, **loads(properties)).get_properties()
+        result = factory(table, **loads(properties)).get_properties()
         Session.commit()
-        echo(controller.str_dict())
+        echo(controller.str_dict(result))
 
     @app.cli.command(name="delete")
     @argument("table")

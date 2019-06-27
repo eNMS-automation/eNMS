@@ -43,13 +43,20 @@ Start eNMS with gunicorn :
  ./boot.sh
 
 
-Start eNMS as a docker container :
+Start eNMS as a docker container with a SQLite database:
 
 ::
 
  # download & run the container
  sudo docker build -t enms -f docker/Dockerfile .
  sudo docker run -it -d -p 5000:5000 --name enms enms
+
+Start eNMS as a docker container with a PostgreSQL database:
+
+::
+
+ # download & run the container
+ sudo docker-compose -f docker/docker-compose.yml up -d
 
 Once eNMS is running, you can go to http://127.0.0.1:5000, and log in with the admin account (``admin`` / ``admin``).
 

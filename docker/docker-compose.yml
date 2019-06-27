@@ -15,7 +15,9 @@ services:
      - ENMS_SECRET_KEY=docker
      - ENMS_CONFIG_MODE=Production
      - USE_VAULT=0
-    build: .
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
     ports:
       - "5000:5000"
     networks:

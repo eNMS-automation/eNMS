@@ -705,7 +705,7 @@ class Workflow(Job):
                     "success" if job_results["success"] else "failure",
                 )
             if job.type == "Workflow":
-                job_results["jobs"] = job_results.pop("results")
+                job_results.pop("results")
             results["results"][job.name] = job_results
             for successor in successors:
                 if successor not in visited:

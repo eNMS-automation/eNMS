@@ -346,7 +346,6 @@ function configureForm(form, id) {
         useCurrent: false,
       });
     } else {
-      console.log(property, type);
       el.selectpicker({
         liveSearch: true,
         actionsBox: true,

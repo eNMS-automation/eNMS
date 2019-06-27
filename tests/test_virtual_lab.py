@@ -9,7 +9,7 @@ from tests.test_base import check_pages
 
 @check_pages("table/device")
 def test_rest_api_basic(user_client: FlaskClient) -> None:
-    assert len(fetch_all("Device")) == 28
+    number_of_devices = len(fetch_all("Device"))
     post(
         "http://192.168.105.2:5000/rest/instance/device",
         json={"name": "new_router", "model": "Cisco"},
@@ -60,88 +60,3 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
     assert result["description"] == "New" and len(fetch_all("Workflow")) == 6
-
-
-@check_pages("table/service", "table/workflow")
-def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "payload_transfer_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 2
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "payload_transfer_workflow", "multiprocessing": True},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "payload_transfer_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 2
-
-
-@check_pages("table/service", "table/workflow")
-def test_netmiko_workflow(user_client: FlaskClient) -> None:
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Netmiko_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 2
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "Netmiko_VRF_workflow", "multiprocessing": True},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Netmiko_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 2
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "Netmiko_VRF_workflow", "use_workflow_targets": False},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Netmiko_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 2
-
-
-@check_pages("table/service", "table/workflow")
-def test_napalm_workflow(user_client: FlaskClient) -> None:
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Napalm_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 2
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "Napalm_VRF_workflow", "multiprocessing": True},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Napalm_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 2
-    post(
-        "http://192.168.105.2:5000/rest/instance/Workflow",
-        json={"name": "Napalm_VRF_workflow", "use_workflow_targets": False},
-        auth=HTTPBasicAuth("admin", "admin"),
-    )
-    result = post(
-        "http://192.168.105.2:5000/rest/run_job",
-        json={"name": "Napalm_VRF_workflow"},
-        auth=HTTPBasicAuth("admin", "admin"),
-    ).json()
-    assert result["results"]["success"] and len(result) == 2

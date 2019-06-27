@@ -10,7 +10,7 @@
   failed: 0
   has_targets: false
   hidden: true
-  last_modified: '2019-06-27 01:13:32.853892'
+  last_modified: '2019-06-27 09:23:37.597727'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -24,18 +24,18 @@
     Configuration Management Workflow:
     - '-300'
     - '0'
-    Napalm_VRF_workflow: !!python/tuple
-    - -200
-    - 0
+    Napalm_VRF_workflow:
+    - '-200'
+    - '0'
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
     Workflow_of_workflows:
     - '-300'
     - '0'
-    YaQL_test_worflow:
-    - '-359'
-    - '-163'
+    YaQL_test_worflow: !!python/tuple
+    - -359
+    - -163
     payload_extraction_validation_worflow:
     - '-200'
     - '0'
@@ -65,7 +65,7 @@
   failed: 0
   has_targets: false
   hidden: true
-  last_modified: '2019-06-27 01:13:32.928148'
+  last_modified: '2019-06-27 09:23:37.664716'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -79,18 +79,18 @@
     Configuration Management Workflow:
     - '200'
     - '0'
-    Napalm_VRF_workflow: !!python/tuple
-    - 200
-    - 0
+    Napalm_VRF_workflow:
+    - '200'
+    - '0'
     Netmiko_VRF_workflow:
     - '200'
     - '0'
     Workflow_of_workflows:
     - '300'
     - '0'
-    YaQL_test_worflow:
-    - '-9'
-    - '294'
+    YaQL_test_worflow: !!python/tuple
+    - -9
+    - 294
     payload_extraction_validation_worflow:
     - '200'
     - '0'
@@ -120,7 +120,7 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-27 01:13:32.967408'
+  last_modified: '2019-06-27 09:23:37.702437'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -154,7 +154,7 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-27 01:13:33.006651'
+  last_modified: '2019-06-27 09:23:37.740524'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -188,7 +188,7 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-27 01:13:33.048228'
+  last_modified: '2019-06-27 09:23:37.784725'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -222,7 +222,7 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-27 01:13:33.088427'
+  last_modified: '2019-06-27 09:23:37.825962'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -256,7 +256,7 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-27 01:13:33.128494'
+  last_modified: '2019-06-27 09:23:37.866309'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -293,7 +293,7 @@
   failed: 0
   has_targets: false
   hidden: true
-  last_modified: '2019-06-27 01:13:33.167916'
+  last_modified: '2019-06-27 09:23:37.908624'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -341,7 +341,7 @@
   failed: 0
   hidden: false
   ip_address: 10.1.1.1
-  last_modified: '2019-06-27 01:13:33.233297'
+  last_modified: '2019-06-27 09:23:37.969813'
   mac_address: FF:FF:FF:FF:FF:FF
   mail_address: aaa@gmail.com
   mail_recipient: ''
@@ -382,7 +382,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.302833'
+  last_modified: '2019-06-27 09:23:38.035994'
   local_as: 100
   loopback: Lo100
   loopback_ip: 100.1.1.1
@@ -424,7 +424,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.374200'
+  last_modified: '2019-06-27 09:23:38.108921'
   load_known_host_keys: false
   look_for_keys: false
   mail_recipient: ''
@@ -467,7 +467,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.459671'
+  last_modified: '2019-06-27 09:23:38.177298'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -505,7 +505,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.556845'
+  last_modified: '2019-06-27 09:23:38.264763'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -544,7 +544,7 @@
   fast_cli: false
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.630171'
+  last_modified: '2019-06-27 09:23:38.351364'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -583,7 +583,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.696299'
+  last_modified: '2019-06-27 09:23:38.438531'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -629,7 +629,7 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.777689'
+  last_modified: '2019-06-27 09:23:38.579466'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -682,7 +682,7 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.869675'
+  last_modified: '2019-06-27 09:23:38.689999'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -700,9 +700,9 @@
     Netmiko_VRF_workflow:
     - '0'
     - '-50'
-    YaQL_test_worflow:
-    - '201'
-    - '-89'
+    YaQL_test_worflow: !!python/tuple
+    - 147
+    - -14
   privileged_mode: false
   push_to_git: false
   query_property_type: ip_address
@@ -739,7 +739,7 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-27 01:13:33.959754'
+  last_modified: '2019-06-27 09:23:38.805970'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -795,7 +795,7 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-27 01:13:34.139949'
+  last_modified: '2019-06-27 09:23:38.912064'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -807,9 +807,9 @@
   operating_system: eos
   pools: []
   positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 0
-    - 150
+    Napalm_VRF_workflow:
+    - '0'
+    - '150'
     Netmiko_VRF_workflow:
     - '0'
     - '150'
@@ -844,7 +844,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:19:48.700113'
+  last_modified: '2019-06-27 09:23:39.003967'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -856,9 +856,9 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 0
-    - -150
+    Napalm_VRF_workflow:
+    - '0'
+    - '-150'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -892,7 +892,7 @@
   has_targets: true
   headers: {}
   hidden: false
-  last_modified: '2019-06-27 01:13:42.059672'
+  last_modified: '2019-06-27 09:23:48.897555'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -942,7 +942,7 @@
   getters:
   - get_facts
   hidden: false
-  last_modified: '2019-06-27 01:13:34.604249'
+  last_modified: '2019-06-27 09:23:39.344904'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -988,7 +988,7 @@
   getters:
   - get_interfaces
   hidden: false
-  last_modified: '2019-06-27 01:13:34.762176'
+  last_modified: '2019-06-27 09:23:39.433444'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1037,7 +1037,7 @@
   getters:
   - get_interfaces_ip
   hidden: false
-  last_modified: '2019-06-27 01:13:34.841571'
+  last_modified: '2019-06-27 09:23:39.527597'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1083,7 +1083,7 @@
   getters:
   - get_config
   hidden: false
-  last_modified: '2019-06-27 01:13:34.923574'
+  last_modified: '2019-06-27 09:23:39.614356'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1126,7 +1126,7 @@
   failed: 0
   has_targets: true
   hidden: false
-  last_modified: '2019-06-27 01:13:34.989494'
+  last_modified: '2019-06-27 09:23:39.696705'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1163,7 +1163,7 @@
   failed: 0
   has_targets: false
   hidden: false
-  last_modified: '2019-06-27 01:13:35.027392'
+  last_modified: '2019-06-27 09:23:39.758048'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1174,9 +1174,9 @@
   operating_system: ''
   pools: []
   positions:
-    YaQL_test_worflow:
-    - '3'
-    - '-144'
+    YaQL_test_worflow: !!python/tuple
+    - 3
+    - -144
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -1200,7 +1200,7 @@
 - color: '#D2E5FF'
   command: show vrf
   completed: 0
-  content_match: test
+  content_match: ''
   content_match_regex: false
   conversion_method: text
   creator: admin
@@ -1218,7 +1218,7 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-27 01:13:35.067923'
+  last_modified: '2019-06-27 09:25:25.350807'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1230,9 +1230,9 @@
   operating_system: eos
   pools: []
   positions:
-    YaQL_test_worflow:
-    - '-336'
-    - '11'
+    YaQL_test_worflow: !!python/tuple
+    - -336
+    - 11
   privileged_mode: false
   push_to_git: false
   query_property_type: name
@@ -1271,7 +1271,7 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-27 01:13:35.130222'
+  last_modified: '2019-06-27 09:23:39.904052'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1319,7 +1319,7 @@
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
-  last_modified: '2019-06-27 01:13:35.175121'
+  last_modified: '2019-06-27 09:23:39.962288'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1361,7 +1361,7 @@
   failed: 0
   has_targets: true
   hidden: false
-  last_modified: '2019-06-27 01:13:35.214915'
+  last_modified: '2019-06-27 09:23:40.031292'
   mail_recipient: ''
   match1: ''
   match2: (\d.*)/32
@@ -1423,7 +1423,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:13:35.256292'
+  last_modified: '2019-06-27 09:23:40.098733'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1467,7 +1467,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:13:35.294982'
+  last_modified: '2019-06-27 09:23:40.157517'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1507,7 +1507,7 @@
   events: []
   failed: 0
   hidden: false
-  last_modified: '2019-06-27 01:13:35.332584'
+  last_modified: '2019-06-27 09:23:40.214161'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1519,9 +1519,9 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 3
-    - 47
+    Napalm_VRF_workflow:
+    - '3'
+    - '47'
   push_to_git: false
   query_property_type: name
   send_notification: false
@@ -1531,6 +1531,108 @@
   time_between_retries: 10
   type: NapalmRollbackService
   use_device_driver: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  command: show vrf
+  completed: 0
+  content_match: napalm
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  define_devices_from_payload: false
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  events: []
+  failed: 0
+  fast_cli: true
+  global_delay_factor: 1.0
+  hidden: false
+  last_modified: '2019-06-27 09:23:40.276780'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: netmiko_check_vrf_napalm
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Napalm_VRF_workflow:
+    - '10'
+    - '-32'
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  command: show vrf
+  completed: 0
+  content_match: napalm
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  define_devices_from_payload: false
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  events: []
+  failed: 0
+  fast_cli: true
+  global_delay_factor: 1.0
+  hidden: false
+  last_modified: '2019-06-27 09:23:40.342205'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: netmiko_check_no_vrf_napalm
+  negative_logic: true
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Napalm_VRF_workflow:
+    - '9'
+    - '139'
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
   vendor: ''
   waiting_time: 0
   yaql_query: ''
@@ -1550,7 +1652,7 @@
   hidden: false
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-06-27 01:13:35.411336'
+  last_modified: '2019-06-27 09:23:40.508667'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1562,9 +1664,9 @@
   origin_of_values: user_provided_values
   pools: []
   positions:
-    YaQL_test_worflow:
-    - '367'
-    - '83'
+    YaQL_test_worflow: !!python/tuple
+    - -293
+    - 92
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -1596,7 +1698,7 @@
   hidden: false
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-06-27 01:13:35.473367'
+  last_modified: '2019-06-27 09:23:40.618065'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1608,9 +1710,9 @@
   origin_of_values: yaql_query
   pools: []
   positions:
-    YaQL_test_worflow:
-    - '-56'
-    - '47'
+    YaQL_test_worflow: !!python/tuple
+    - 195
+    - 124
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -1639,7 +1741,7 @@
   hidden: false
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-06-27 01:13:35.528258'
+  last_modified: '2019-06-27 09:23:40.703998'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1651,9 +1753,9 @@
   origin_of_values: yaql_query
   pools: []
   positions:
-    YaQL_test_worflow:
-    - '-93'
-    - '195'
+    YaQL_test_worflow: !!python/tuple
+    - -337
+    - 233
   push_to_git: false
   query_property_type: name
   send_notification: false
@@ -1668,105 +1770,3 @@
   waiting_time: 0
   yaql_query: ''
   yaql_query_values: $.netmiko_check_vrf_test.results.devices.{{device.name}}.match
-- color: '#D2E5FF'
-  command: show vrf
-  completed: 0
-  content_match: napalm
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  define_devices_from_payload: false
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: arista_eos
-  events: []
-  failed: 0
-  fast_cli: true
-  global_delay_factor: 1.0
-  hidden: false
-  last_modified: '2019-06-27 01:19:33.999226'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: netmiko_check_vrf_napalm
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 10
-    - -32
-  privileged_mode: false
-  push_to_git: false
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  time_between_retries: 10
-  timeout: 10
-  type: NetmikoValidationService
-  use_device_driver: true
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- color: '#D2E5FF'
-  command: show vrf
-  completed: 0
-  content_match: napalm
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  define_devices_from_payload: false
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: arista_eos
-  events: []
-  failed: 0
-  fast_cli: true
-  global_delay_factor: 1.0
-  hidden: false
-  last_modified: '2019-06-27 01:19:24.745213'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: netmiko_check_no_vrf_napalm
-  negative_logic: true
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    Napalm_VRF_workflow: !!python/tuple
-    - 9
-    - 139
-  privileged_mode: false
-  push_to_git: false
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  time_between_retries: 10
-  timeout: 10
-  type: NetmikoValidationService
-  use_device_driver: true
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''

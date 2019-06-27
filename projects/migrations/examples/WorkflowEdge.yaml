@@ -103,11 +103,6 @@
   source: Start
   subtype: success
   workflow: YaQL_test_worflow
-- destination: netmiko_yaql_defined_devices
-  name: 'success: YaQL_test_worflow 2 -> 3'
-  source: add_devices_to_payload
-  subtype: success
-  workflow: YaQL_test_worflow
 - destination: Iteration_service_yaql
   name: 'success: YaQL_test_worflow 4 -> 5'
   source: Iteration_service_simple
@@ -158,26 +153,6 @@
   source: Napalm_VRF_workflow
   subtype: success
   workflow: Workflow_of_workflows
-- destination: netmiko_check_vrf_test
-  name: 41-success:28->17
-  source: netmiko_yaql_defined_devices
-  subtype: success
-  workflow: YaQL_test_worflow
-- destination: Iteration_service_simple
-  name: 41-success:17->35
-  source: netmiko_check_vrf_test
-  subtype: success
-  workflow: YaQL_test_worflow
-- destination: iteration_yaql_payload
-  name: 41-success:36->44
-  source: Iteration_service_yaql
-  subtype: success
-  workflow: YaQL_test_worflow
-- destination: End
-  name: 41-success:44->2
-  source: iteration_yaql_payload
-  subtype: success
-  workflow: YaQL_test_worflow
 - destination: netmiko_check_vrf_napalm
   name: 40-success:20->45
   source: napalm_create_vrf_test
@@ -198,3 +173,13 @@
   source: netmiko_check_no_vrf_napalm
   subtype: success
   workflow: Napalm_VRF_workflow
+- destination: Iteration_service_simple
+  name: 44-success:27->37
+  source: add_devices_to_payload
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: End
+  name: 44-success:38->2
+  source: Iteration_service_yaql
+  subtype: success
+  workflow: YaQL_test_worflow

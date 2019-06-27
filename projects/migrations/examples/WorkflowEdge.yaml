@@ -48,21 +48,6 @@
   source: Start
   subtype: success
   workflow: Napalm_VRF_workflow
-- destination: GET_device
-  name: payload_transfer_workflow:success 0 -> 2
-  source: Start
-  subtype: success
-  workflow: payload_transfer_workflow
-- destination: get_facts
-  name: payload_transfer_workflow:success 2 -> 3
-  source: GET_device
-  subtype: success
-  workflow: payload_transfer_workflow
-- destination: get_interfaces
-  name: payload_transfer_workflow:success 2 -> 4
-  source: GET_device
-  subtype: success
-  workflow: payload_transfer_workflow
 - destination: get_interfaces_ip
   name: payload_transfer_workflow:success 3 -> 5
   source: get_facts
@@ -183,3 +168,13 @@
   source: Iteration_service_yaql
   subtype: success
   workflow: YaQL_test_worflow
+- destination: get_facts
+  name: 43-success:1->22
+  source: Start
+  subtype: success
+  workflow: payload_transfer_workflow
+- destination: get_interfaces
+  name: 43-success:1->23
+  source: Start
+  subtype: success
+  workflow: payload_transfer_workflow

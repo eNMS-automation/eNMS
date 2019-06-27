@@ -32,6 +32,9 @@ const dsoptions = {
     enabled: false,
     addNode: function(data, callback) {},
     addEdge: function(data, callback) {
+      if (data.from == 2) {
+        alertify.notify("You cannot draw an edge from the End.", "error", 5);
+      }
       if (data.from != data.to) {
         data.subtype = edgeType;
         saveEdge(data);

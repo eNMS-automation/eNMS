@@ -7,6 +7,8 @@ from sqlalchemy.orm.mapper import Mapper
 from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.database.base import Base
+from eNMS.database.functions import fetch_all
+from eNMS.models.automation import Workflow
 from eNMS.properties.database import dont_track_changes
 
 
@@ -83,3 +85,9 @@ def configure_events() -> None:
                     f"{target.type} '{target.name}' ({' | '.join(changes)})."
                 ),
             )
+
+    @event.listens_for(Workflow.name, 'set')
+    def workflow_name_update(workflow, new_name, old_name, *args):
+        for job in fetch_all("Job"):
+            if old_name in job.positions:
+                job.positions[new_name] = job.positions.pop(old_name)

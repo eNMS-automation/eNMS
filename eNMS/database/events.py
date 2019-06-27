@@ -3,10 +3,13 @@ from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
 from sqlalchemy.engine.base import Connection
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.mapper import Mapper
+from typing import Any
 
 from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.database.base import Base
+from eNMS.database.functions import fetch_all
+from eNMS.models.automation import Workflow
 from eNMS.properties.database import dont_track_changes
 
 
@@ -83,3 +86,11 @@ def configure_events() -> None:
                     f"{target.type} '{target.name}' ({' | '.join(changes)})."
                 ),
             )
+
+    @event.listens_for(Workflow.name, "set")
+    def workflow_name_update(
+        workflow: Base, new_name: str, old_name: str, *args: Any
+    ) -> None:
+        for job in fetch_all("Job"):
+            if old_name in job.positions:
+                job.positions[new_name] = job.positions.pop(old_name)

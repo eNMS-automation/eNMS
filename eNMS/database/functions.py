@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 from logging import info
+from re import search
 from sqlalchemy import func
 from typing import Any, Generator, List, Tuple
 
@@ -74,6 +75,14 @@ def factory(cls_name: str, **kwargs: Any) -> Any:
         instance = models[cls_name](**kwargs)
         Session.add(instance)
     return instance
+
+
+def handle_exception(exc: str) -> str:
+    match = search("UNIQUE constraint failed: (\w+).(\w+)", exc)
+    if match:
+        return f"There already is a {match.group(1)} with the same {match.group(2)}."
+    else:
+        return exc
 
 
 @contextmanager

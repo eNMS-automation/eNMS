@@ -447,7 +447,7 @@ function processData(type, id) {
       if (typeof table != "undefined") table.ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("Service")) saveService(instance, id);
-      if (type === "workflow") saveWorkflow(instance);
+      if (type === "workflow" && !id) saveWorkflow(instance);
       alertify.notify(
         `${type.toUpperCase()} '${instance.name}' ${
           id ? "updated" : "created"

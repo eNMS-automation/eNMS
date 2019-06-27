@@ -219,7 +219,7 @@ An option allows inventory devices to be selected, such that the Ansible Playboo
 Configuration parameters for creating this service instance:
 
 - All Validation parameters (see above)
-- ``Has targets`` If checked, indicates that the selected inventory devices should be passed to the playbook as its inventory using -i. Alternatively, if not checked, the ansible playbook can reference its own inventory internally using host: inventory_group and by providing an alternative inventory
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices should be passed to the playbook as its inventory using -i. Alternatively, if not checked, the ansible playbook can reference its own inventory internally using host: inventory_group and by providing an alternative inventory
 - ``playbook_path`` path and filename to the Ansible Playbook. For example, if the playbooks subdirectory is located inside the eNMS project directory:  playbooks/juniper_get_facts.yml
 - ``arguments`` ansible-playbook command line options, which are documented here: (https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
 - ``options`` Additional --extra-vars to be passed to the playbook using the syntax {'key1':value1, 'key2': value2}.  All inventory properties are automatically passed to the playbook using --extra-vars (if pass_device_properties is selected below). These options are appended.
@@ -236,7 +236,7 @@ The output can be validated with a command / pattern mechanism, like the ``Netmi
 Configuration parameters for creating this service instance:
 
 - All Validation parameters (see above)
-- ``Has targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
 - ``Type of call`` ReST type operation to be performed: GET, POST, PUT, DELETE
 - ``URL`` URL to make the ReST connection to
 - ``Payload`` The data to be sent in POST Or PUT operation
@@ -308,7 +308,14 @@ Iteration Service
 Execute a service multiple times with different values.
 
 Configuration parameters for creating this service instance:
-- ``Command``: UNIX command to run on the device
-- Validation Parameters
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
+- ``Where Values come from`` The values over which the service iterates can either come from a user-provided dictionary, or be retrieved from the payload with a YaQL query.
+- ``Iteration Values for Iteration: User provided`` A dictionary that contains the iteration values. If the iteration values are common to all devices, the dictionary must have a unique key `all` associated to the value,
+for example `{"all": [1, 2, 3]}`. However, if the values are different for each device, the keys must be device names, for example `{"device1": [1, 2], "device2": [3, 4]}`.
+- ``Iteration Values for Iteration: YaQL query on the payload``: a YaQL query on the payload to fetch the iteration values. This field supports variable substitution, such that you can retrieve different values in the payload for each device
+by using `{{device.name}}` in the query.
+- ``Iteration Variable Name``: the value is sent to the "iterated job" via the payload, where it is associated to a variable. You can choose the name of the variable with this field.
+If you set this variable to `value`, the payload passed to the iterated service will contain a key `value` associated to the iteration value.
+- ``Job to run for each Value``: the job to execute.
 
-.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `YaQL query` input field.

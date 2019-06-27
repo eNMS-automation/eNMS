@@ -1,61 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% block head %}
-      {% block meta %}
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}" />
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="google" content="notranslate">
-      {% endblock meta %}
-      <title>eNMS | {% block title %}{% endblock %}</title>
-      {% block stylesheets %}
-        {% assets "css" %}
-          <link href="{{ ASSET_URL }}" rel="stylesheet">
-        {% endassets %}
-      {% endblock stylesheets %}
-    {% endblock head %}
+    {% block head %} {% block meta %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='images/logo.png') }}"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google" content="notranslate" />
+    {% endblock meta %}
+    <title>eNMS | {% block title %}{% endblock %}</title>
+    {% block stylesheets %} {% assets "css" %}
+    <link href="{{ ASSET_URL }}" rel="stylesheet" />
+    {% endassets %} {% endblock stylesheets %} {% endblock head %}
   </head>
   <body class="{% block body_class %}nav-md {% endblock body_class %}">
     {% block body %}
-      <div class="container body">
-        <div class="main_container">
-          {% block sidebar %}
-            <div class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}">
-              {% include "sidebar.html" %}
-            </div>
-          {% endblock sidebar %}
-          {% block header %}
-            <div class="top_nav">
-              {% include "header.html" %}
-            </div>
-          {% endblock header %}
-          {% block content %}
-          {% endblock content %}
-          {% block footer %}
-            <footer>
-              {% include "footer.html" %}
-            </footer>
-          {% endblock footer %}
+    <div class="container body">
+      <div class="main_container">
+        {% block sidebar %}
+        <div
+          class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}"
+        >
+          {% include "sidebar.html" %}
         </div>
+        {% endblock sidebar %} {% block header %}
+        <div class="top_nav">
+          {% include "header.html" %}
+        </div>
+        {% endblock header %} {% block content %} {% endblock content %} {%
+        block footer %}
+        <footer>
+          {% include "footer.html" %}
+        </footer>
+        {% endblock footer %}
       </div>
-      {% block javascripts %}
-        <script>
-          const page = "{{ endpoint }}";
-          const documentationUrl = "{{ documentation_url }}";
-          const parameters = {{ parameters|tojson|safe }};
-          const formProperties = {{ form_properties|tojson|safe }};
-          const names = {{ names|tojson|safe }};
-          const propertyTypes = {{ property_types|tojson|safe }};
-          let action = {};
-          let csrf_token = "{{ csrf_token() }}";
-        </script>
-        {% assets "js" %}
-          <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
-      {% endblock %}
-    {% endblock body %}
+    </div>
+    {% block javascripts %}
+    <script>
+      const page = "{{ endpoint }}";
+      const documentationUrl = "{{ documentation_url }}";
+      const parameters = {{ parameters|tojson|safe }};
+      const formProperties = {{ form_properties|tojson|safe }};
+      const names = {{ names|tojson|safe }};
+      const propertyTypes = {{ property_types|tojson|safe }};
+      let action = {};
+      let csrf_token = "{{ csrf_token() }}";
+    </script>
+    {% assets "js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %} {% endblock %} {% endblock body %}
   </body>
 </html>

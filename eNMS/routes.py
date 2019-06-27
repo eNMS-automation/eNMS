@@ -19,7 +19,7 @@ from werkzeug.wrappers import Response
 
 from eNMS.controller import controller
 from eNMS.database import Session
-from eNMS.database.functions import fetch
+from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
@@ -222,7 +222,8 @@ def route(page: str) -> Response:
     try:
         Session.commit()
         return jsonify(result)
-    except Exception as e:
+    except Exception as exc:
+        Session.rollback()
         if controller.enms_config_mode == "Develop":
             raise
-        return jsonify({"error": str(e)})
+        return jsonify({"error": handle_exception(str(exc))})

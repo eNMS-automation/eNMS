@@ -4,7 +4,9 @@ services:
     restart: always
     image: postgres:latest
     environment:
-     - ENMS_DATABASE_URL=postgresql://enms:enms@db:5432/enms
+     - POSTGRES_USER=enms
+     - POSTGRES_PASSWORD=enms
+     - POSTGRES_DB=enms
     expose:
       - 5432
     networks:
@@ -12,6 +14,7 @@ services:
   enms:
     restart: always
     environment:
+     - ENMS_DATABASE_URL=postgresql://enms:enms@db:5432/enms
      - ENMS_SECRET_KEY=docker
      - ENMS_CONFIG_MODE=Production
      - USE_VAULT=0

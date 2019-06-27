@@ -447,6 +447,7 @@ function getWorkflowState() {
 
 (function() {
   call("/get_all/workflow", function(workflows) {
+    workflows.sort((a, b) => a.name.localeCompare(b.name));
     for (let i = 0; i < workflows.length; i++) {
       $("#current-workflow").append(
         `<option value="${workflows[i].id}">${workflows[i].name}</option>`

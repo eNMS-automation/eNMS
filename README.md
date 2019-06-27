@@ -194,7 +194,8 @@ ___
     Log in (default credentials: admin / admin)
 
 ## Quick start as a docker container
-    docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
+    sudo docker build -t enms -f docker/Dockerfile .
+    sudo docker run -it -d -p 5000:5000 --name enms enms
     Log in (default credentials: admin / admin)
 
 ## Deploy eNMS in production

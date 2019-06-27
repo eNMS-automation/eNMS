@@ -48,7 +48,8 @@ Start eNMS as a docker container :
 ::
 
  # download & run the container
- docker run -d -p 5000:5000 --name enms --restart always afourmy/enms
+ sudo docker build -t enms -f docker/Dockerfile .
+ sudo docker run -it -d -p 5000:5000 --name enms enms
 
 Once eNMS is running, you can go to http://127.0.0.1:5000, and log in with the admin account (``admin`` / ``admin``).
 

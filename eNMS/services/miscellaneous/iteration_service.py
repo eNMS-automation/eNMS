@@ -72,5 +72,5 @@ class IterationForm(ServiceForm):
     yaql_query_values = StringField(
         "Iteration Values for Iteration: YaQL query on the payload"
     )
-    variable_name = StringField("Name of the Variable in the Payload")
+    variable_name = StringField("Iteration Variable Name")
     iterated_job = InstanceField("Job to run for each Value", instance_type="Job")

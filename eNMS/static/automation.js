@@ -64,6 +64,15 @@ function saveService(service, id) {
 }
 
 /**
+ * Save a service.
+ * @param {service} service - Service instance.
+ */
+// eslint-disable-next-line
+function copyResultsToClipboard(id) {
+  return id;
+}
+
+/**
  * Save a workflow.
  * @param {workflow object} workflow - Workflow instance.
  */

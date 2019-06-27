@@ -1,5 +1,4 @@
-- configurations: {}
-  description: Jackson
+- description: Jackson
   hidden: false
   icon: router
   ip_address: 192.168.1.85
@@ -22,8 +21,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: PaloAlto
+- description: PaloAlto
   hidden: false
   icon: router
   ip_address: 192.168.1.86
@@ -46,8 +44,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Austin
+- description: Austin
   hidden: false
   icon: router
   ip_address: 192.168.105.9
@@ -70,113 +67,8 @@
   type: Device
   username: admin
   vendor: Arista
-- configurations:
-    '2019-06-26 15:31:21.342343': "! Command: show running-config\n! device: localhost\
-      \ (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver\
-      \ qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
-      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
-      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
-      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
-      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
-      \   no shutdown\n!\nend"
-    '2019-06-26 15:31:27.690951': "\nstartup: ! Command: show startup-config\n! Startup-config\
-      \ last modified at  Wed Jun 26 13:31:05 2019 by admin\n! device: localhost (vEOS,\
-      \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp\
-      \ default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
-      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
-      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
-      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
-      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
-      \   no shutdown\n!\nend\n\nrunning: ! Command: show running-config\n! device:\
-      \ localhost (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\n\
-      transceiver qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n\
-      !\nusername admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
-      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
-      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
-      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
-      \   no shutdown\n!\nend\n\ncandidate: "
-    '2019-06-27 00:14:51.308452': "! Command: show running-config\n! device: localhost\
-      \ (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver\
-      \ qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
-      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n\
-      \   ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
-      !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n\
-      !\nmanagement api http-commands\n   no shutdown\n!\nend"
-    '2019-06-27 00:14:57.316319': "\nstartup: ! Command: show startup-config\n! Startup-config\
-      \ last modified at  Wed Jun 26 14:42:41 2019 by admin\n! device: localhost (vEOS,\
-      \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp\
-      \ default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
-      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
-      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
-      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
-      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
-      \   no shutdown\n!\nend\n\nrunning: ! Command: show running-config\n! device:\
-      \ localhost (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\n\
-      transceiver qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n\
-      !\nusername admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n\
-      \   ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
-      !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n\
-      !\nmanagement api http-commands\n   no shutdown\n!\nend\n\ncandidate: "
-    '2019-06-27 00:23:34.466720': "! Command: show running-config\n! device: localhost\
-      \ (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver\
-      \ qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
-      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
-      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
-      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
-      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
-      \   no shutdown\n!\nend"
-    '2019-06-27 00:23:40.448295': "\nstartup: ! Command: show startup-config\n! Startup-config\
-      \ last modified at  Wed Jun 26 21:50:59 2019 by admin\n! device: localhost (vEOS,\
-      \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp\
-      \ default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
-      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
-      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
-      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
-      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
-      \   no shutdown\n!\nend\n\nrunning: ! Command: show running-config\n! device:\
-      \ localhost (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\n\
-      transceiver qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n\
-      !\nusername admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\nvrf definition test\n!\ninterface Loopback11\n   ip address 1.1.1.1/32\n\
-      !\ninterface Loopback15\n   ip address 2.2.2.2/32\n!\ninterface Loopback16\n\
-      \   ip address 3.3.3.3/32\n!\ninterface Management1\n   ip address 192.168.105.5/24\n\
-      !\nno ip routing\nno ip routing vrf test\n!\nmanagement api http-commands\n\
-      \   no shutdown\n!\nend\n\ncandidate: "
-    '2019-06-27 09:24:03.591585': "! Command: show running-config\n! device: localhost\
-      \ (vEOS, EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver\
-      \ qsfp default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
-      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n\
-      \   ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
-      !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n\
-      !\nmanagement api http-commands\n   no shutdown\n!\nend"
-    '2019-06-27 09:24:09.833558': "\nstartup: ! Command: show startup-config\n! Startup-config\
-      \ last modified at  Thu Jun 27 07:22:40 2019 by admin\n! device: localhost (vEOS,\
-      \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp\
-      \ default-mode 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername\
-      \ admin role network-admin secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n\
-      \   ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
-      !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n\
-      !\nmanagement api http-commands\n   no shutdown\n!\nend\n\nrunning: ! Command:\
-      \ show running-config\n! device: localhost (vEOS, EOS-4.21.1.1F)\n!\n! boot\
-      \ system flash:/vEOS-lab.swi\n!\ntransceiver qsfp default-mode 4x10G\n!\nspanning-tree\
-      \ mode mstp\n!\nno aaa root\n!\nusername admin role network-admin secret sha512\
-      \ $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-      !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n\
-      \   ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
-      !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n\
-      !\nmanagement api http-commands\n   no shutdown\n!\nend\n\ncandidate: "
-  current_configuration: "\nstartup: ! Command: show startup-config\n! Startup-config\
-    \ last modified at  Thu Jun 27 07:22:40 2019 by admin\n! device: localhost (vEOS,\
+- current_configuration: "\nstartup: ! Command: show startup-config\n! Startup-config\
+    \ last modified at  Thu Jun 27 07:29:03 2019 by admin\n! device: localhost (vEOS,\
     \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp default-mode\
     \ 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername admin role network-admin\
     \ secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
@@ -197,9 +89,9 @@
   icon: router
   ip_address: 192.168.105.5
   last_failure: Never
-  last_runtime: 0.567026
+  last_runtime: 0.507507
   last_status: Success
-  last_update: '2019-06-27 09:24:09.833558'
+  last_update: '2019-06-27 09:30:01.217537'
   latitude: 38.89511
   location: Washington
   longitude: -77.03637
@@ -215,8 +107,7 @@
   type: Device
   username: admin
   vendor: Arista
-- configurations: {}
-  description: Chicago
+- description: Chicago
   hidden: false
   icon: router
   ip_address: 192.168.1.188
@@ -239,8 +130,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: SanJose
+- description: SanJose
   hidden: false
   icon: router
   ip_address: 192.168.1.187
@@ -263,8 +153,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: SanDiego
+- description: SanDiego
   hidden: false
   icon: router
   ip_address: 10.0.0.12
@@ -287,8 +176,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Dallas
+- description: Dallas
   hidden: false
   icon: router
   ip_address: 10.0.0.100
@@ -311,8 +199,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Philadelphia
+- description: Philadelphia
   hidden: false
   icon: router
   ip_address: 10.0.0.101
@@ -335,8 +222,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: LosAngeles
+- description: LosAngeles
   hidden: false
   icon: optical_switch
   ip_address: 10.0.0.13
@@ -359,8 +245,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Detroit
+- description: Detroit
   hidden: false
   icon: router
   ip_address: 10.0.0.14
@@ -383,8 +268,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Richmond
+- description: Richmond
   hidden: false
   icon: router
   ip_address: 10.0.0.15
@@ -407,8 +291,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Atlanta
+- description: Atlanta
   hidden: false
   icon: router
   ip_address: 10.0.0.102
@@ -431,8 +314,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Boston
+- description: Boston
   hidden: false
   icon: router
   ip_address: 10.0.0.103
@@ -455,8 +337,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Houston
+- description: Houston
   hidden: false
   icon: router
   ip_address: 10.0.0.104
@@ -479,8 +360,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Baltimore
+- description: Baltimore
   hidden: false
   icon: router
   ip_address: 10.0.0.105
@@ -503,8 +383,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: Cleveland
+- description: Cleveland
   hidden: false
   icon: router
   ip_address: 10.0.0.106
@@ -527,8 +406,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: Columbus
+- description: Columbus
   hidden: false
   icon: router
   ip_address: 10.0.0.107
@@ -551,8 +429,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: Cincinnati
+- description: Cincinnati
   hidden: false
   icon: router
   ip_address: 10.0.0.108
@@ -575,8 +452,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: Cambridge
+- description: Cambridge
   hidden: false
   icon: router
   ip_address: 10.0.0.109
@@ -599,8 +475,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: Minneapolis
+- description: Minneapolis
   hidden: false
   icon: router
   ip_address: 10.0.0.110
@@ -623,8 +498,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: NewYork
+- description: NewYork
   hidden: false
   icon: router
   ip_address: 192.168.1.88
@@ -647,8 +521,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: Sacramento
+- description: Sacramento
   hidden: false
   icon: router
   ip_address: 10.0.0.111
@@ -671,8 +544,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: SanFrancisco
+- description: SanFrancisco
   hidden: false
   icon: router
   ip_address: 192.168.1.89
@@ -695,8 +567,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: Orange
+- description: Orange
   hidden: false
   icon: router
   ip_address: 10.0.0.114
@@ -719,8 +590,7 @@
   type: Device
   username: cisco
   vendor: Juniper
-- configurations: {}
-  description: Oakland
+- description: Oakland
   hidden: false
   icon: router
   ip_address: 10.0.0.112
@@ -743,8 +613,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Denver
+- description: Denver
   hidden: false
   icon: router
   ip_address: 10.0.0.113
@@ -767,8 +636,7 @@
   type: Device
   username: cisco
   vendor: Cisco
-- configurations: {}
-  description: Denver
+- description: Denver
   hidden: false
   icon: router
   ip_address: 127.0.0.1

@@ -15,6 +15,7 @@ from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
 from eNMS.extensions import assets, auth, csrf, login_manager
 from eNMS.models.administration import User
+from eNMS.models.automation import Job
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
 from eNMS.routes import blueprint
@@ -40,17 +41,11 @@ def configure_login_manager(app: Flask) -> None:
 
 
 def configure_database(app: Flask) -> None:
-    @app.before_first_request
-    def init_database() -> None:
-        Base.metadata.create_all(bind=engine)
-        configure_mappers()
-        configure_events()
-        if not fetch("User", allow_none=True, name="admin"):
-            controller.init_database()
-
-    @app.teardown_appcontext
-    def cleanup(exc_or_none: Optional[Exception]) -> None:
-        Session.remove()
+    Base.metadata.create_all(bind=engine)
+    configure_mappers()
+    configure_events()
+    if not fetch("User", allow_none=True, name="admin"):
+        controller.init_database()
 
 
 def configure_context_processor(app: Flask) -> None:
@@ -110,13 +105,13 @@ def create_app(path: Path, config: str) -> Flask:
     app.path = path
     register_modules(app)
     configure_login_manager(app)
+    controller.init_services()
     configure_database(app)
+    configure_cli(app)
     configure_context_processor(app)
     configure_rest_api(app)
     configure_errors(app)
     if app.mode != "test":
         configure_assets(app)
     configure_authentication()
-    controller.init_services()
-    configure_cli(app)
     return app

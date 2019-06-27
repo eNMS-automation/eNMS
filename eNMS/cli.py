@@ -25,7 +25,7 @@ def configure_cli(app: Flask) -> None:
     def cli_delete(table: str, name: str) -> None:
         echo(controller.str_dict(delete(table, name=name)))
 
-    @app.cli.command()
+    @app.cli.command(name="run_job")
     @argument("name")
     @option("--devices")
     @option("--payload")

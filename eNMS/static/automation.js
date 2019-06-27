@@ -64,6 +64,31 @@ function saveService(service, id) {
 }
 
 /**
+ * Save a service.
+ * @param {service} service - Service instance.
+ */
+// eslint-disable-next-line
+function copyResultsToClipboard(id) {
+  $(`#display-text-${id}`).prop("checked", true);
+  displayResult(id);
+  node = document.getElementById(`display_results-${id}`);
+  if (document.body.createTextRange) {
+    const range = document.body.createTextRange();
+    range.moveToElementText(node);
+    range.select();
+  } else if (window.getSelection) {
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  } else {
+    alertify.notify("Selection not supported by your browser", "error", 5);
+  }
+  document.execCommand("copy");
+}
+
+/**
  * Save a workflow.
  * @param {workflow object} workflow - Workflow instance.
  */

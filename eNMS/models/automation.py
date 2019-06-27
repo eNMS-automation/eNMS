@@ -117,7 +117,7 @@ class Job(AbstractBase):
 
     @property
     def progress(self) -> str:
-        if self.is_running:
+        if self.is_running and not self.multiprocessing:
             return f"{self.completed}/{self.number_of_targets} ({self.failed} failed)"
         else:
             return "N/A"

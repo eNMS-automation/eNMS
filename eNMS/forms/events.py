@@ -58,6 +58,12 @@ class ChangelogForm(BaseForm):
     id = HiddenField()
     severity = SelectField(
         "Severity",
-        choices=(("info", "Info"), ("warning", "Warning"), ("error", "Error")),
+        choices=(
+            ("debug", "Debug"),
+            ("info", "Info"),
+            ("warning", "Warning"),
+            ("error", "Error"),
+            ("critical", "Critical"),
+        ),
     )
-    content = StringField(widget=TextArea(), render_kw={"rows": 5})
+    content = StringField(widget=TextArea(), render_kw={"rows": 8})

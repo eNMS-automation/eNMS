@@ -21,6 +21,8 @@ const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
 const panelSize = {
   add_jobs: "800 500",
+  changelog: "700 300",
+  changelog_filtering: "700 300",
   cluster: "700 200",
   connection: "400 500",
   configuration: "700 700",
@@ -75,10 +77,11 @@ const panelName = {
   excel_export: "Export Topology as an Excel file",
   server_filtering: "Server Filtering",
   link_filtering: "Link Filtering",
-  log_filtering: "Log Filtering",
+  changelog_filtering: "Changelog Filtering",
   pool_filtering: "Pool Filtering",
   restart_workflow: "Restart Workflow",
   service_filtering: "Service Filtering",
+  syslog_filtering: "Syslog Filtering",
   task_filtering: "Task Filtering",
   user_filtering: "User Filtering",
   workflow_filtering: "Workflow Filtering",
@@ -448,8 +451,9 @@ function processData(type, id) {
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("Service")) saveService(instance, id);
       if (type === "workflow" && !id) saveWorkflow(instance);
+
       alertify.notify(
-        `${type.toUpperCase()} '${instance.name}' ${
+        `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${
           id ? "updated" : "created"
         }.`,
         "success",
@@ -496,7 +500,7 @@ function initTable(type) {
       },
     },
   });
-  if (type == "log") {
+  if (type == "changelog" || type == "syslog") {
     table.order([0, "desc"]).draw();
   }
   return [table, filteringPanel];
@@ -529,7 +533,7 @@ function undoFilter(formType) {
 // eslint-disable-next-line
 function refreshTable(interval) {
   table.ajax.reload(null, false);
-  setTimeout(() => refreshTable(interval), 3000);
+  setTimeout(() => refreshTable(interval), interval);
 }
 
 /**

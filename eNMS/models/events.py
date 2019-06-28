@@ -30,8 +30,7 @@ from eNMS.database.base import AbstractBase
 
 class Task(AbstractBase):
 
-    __tablename__ = "Task"
-    type = "Task"
+    __tablename__ = type = "Task"
     id = Column(Integer, primary_key=True)
     aps_job_id = Column(String(SMALL_STRING_LENGTH))
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
@@ -180,39 +179,42 @@ class Task(AbstractBase):
             controller.scheduler.reschedule_job(default.pop("id"), **trigger)
 
 
-class Syslog(AbstractBase):
+class Baselog(AbstractBase):
 
-    __tablename__ = type = "Syslog"
+    __tablename__ = "Baselog"
+    type = Column(String(SMALL_STRING_LENGTH), default="")
+    __mapper_args__ = {"polymorphic_identity": "Baselog", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     time = Column(String(SMALL_STRING_LENGTH), default="")
-    origin = Column(Text(LARGE_STRING_LENGTH), default="")
     content = Column(Text(LARGE_STRING_LENGTH), default="")
+
+    def update(self, **kwargs: str) -> None:
+        kwargs["time"] = str(datetime.now())
+        super().update(**kwargs)
+
+    def generate_row(self, table: str) -> List[str]:
+        return []
+
+
+class Syslog(Baselog):
+
+    __tablename__ = "Syslog"
+    __mapper_args__ = {"polymorphic_identity": "Syslog"}
+    parent_cls = "Baselog"
+    id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
+    origin = Column(Text(LARGE_STRING_LENGTH), default="")
     events = relationship(
         "Event", secondary=event_syslog_table, back_populates="syslogs"
     )
 
-    def update(self, **kwargs: str) -> None:
-        kwargs["time"] = str(datetime.now())
-        super().update(**kwargs)
 
-    def generate_row(self, table: str) -> List[str]:
-        return []
+class Changelog(Baselog):
 
-
-class Changelog(AbstractBase):
-
-    __tablename__ = type = "Changelog"
-    id = Column(Integer, primary_key=True)
-    time = Column(String(SMALL_STRING_LENGTH), default="")
+    __tablename__ = "Changelog"
+    __mapper_args__ = {"polymorphic_identity": "Changelog"}
+    parent_cls = "Baselog"
+    id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
-    content = Column(Text(LARGE_STRING_LENGTH), default="")
-
-    def update(self, **kwargs: str) -> None:
-        kwargs["time"] = str(datetime.now())
-        super().update(**kwargs)
-
-    def generate_row(self, table: str) -> List[str]:
-        return []
 
 
 class Event(AbstractBase):

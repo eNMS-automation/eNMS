@@ -23,8 +23,10 @@ class SyslogServer:
 class SyslogUDPHandler(BaseRequestHandler):
     def handle(self) -> None:
         data = str(bytes.decode(self.request[0].strip()))
-        source, _ = self.client_address
-        events = []
+        print(data)
+        origin, _ = self.client_address
+        print(origin)
+        """ events = []
         for event in fetch_all("Event"):
             source_match = (
                 search(event.origin, source)
@@ -37,8 +39,7 @@ class SyslogUDPHandler(BaseRequestHandler):
             if source_match and content_match:
                 events.append(event)
                 for job in event.jobs:
-                    job.run()
-        if events:
-            log = factory("Log", **{"source": source, "date": data, "events": events})
-            Session.add(log)
-            Session.commit()
+                    job.run() """
+        log = factory("Syslog", **{"origin": origin, "content": data, "events": events})
+        Session.add(log)
+        Session.commit()

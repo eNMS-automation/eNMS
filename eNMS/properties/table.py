@@ -73,9 +73,11 @@ server_table_properties = [
     "cpu_load",
 ]
 
-log_table_properties: List[str] = ["time", "origin", "severity", "content"]
+syslog_table_properties: List[str] = ["time", "origin", "severity", "content"]
 
-event_table_properties: List[str] = ["name"] + log_table_properties
+changelog_table_properties: List[str] = ["time", "origin", "severity", "content"]
+
+event_table_properties: List[str] = ["name"] + syslog_table_properties
 
 task_table_properties: List[str] = [
     "name",
@@ -93,14 +95,15 @@ task_table_properties: List[str] = [
 ]
 
 table_properties: Dict[str, List[str]] = {
+    "changelog": changelog_table_properties,
     "configuration": configuration_table_properties,
     "device": device_table_properties,
-    "server": server_table_properties,
-    "link": link_table_properties,
-    "log": log_table_properties,
     "event": event_table_properties,
+    "link": link_table_properties,
     "pool": pool_table_properties,
+    "server": server_table_properties,
     "service": service_table_properties,
+    "syslog": syslog_table_properties,
     "task": task_table_properties,
     "user": user_table_properties,
     "workflow": workflow_table_properties,
@@ -121,29 +124,31 @@ job_filtering_properties = [
 ]
 
 filtering_properties: Dict[str, List[str]] = {
+    "changelog": changelog_table_properties,
     "configuration": device_table_properties
     + configuration_table_properties[2:]
     + ["current_configuration"],
     "device": device_table_properties + ["current_configuration"],
-    "server": server_table_properties,
-    "link": link_table_properties,
-    "log": log_table_properties,
     "event": event_table_properties,
+    "link": link_table_properties,
     "pool": pool_table_properties,
+    "server": server_table_properties,
     "service": job_filtering_properties,
+    "syslog": syslog_table_properties,
     "task": task_table_properties[:-2],
     "user": user_table_properties,
     "workflow": job_filtering_properties,
 }
 
 table_fixed_columns: Dict[str, List[str]] = {
+    "changelog": [],
     "configuration": ["Configuration", "Download", "Edit"],
     "device": ["Automation", "Connect", "Edit", "Duplicate", "Delete"],
-    "server": ["Edit", "Duplicate", "Delete"],
-    "link": ["Edit", "Duplicate", "Delete"],
-    "log": [],
     "event": ["Edit", "Delete"],
+    "link": ["Edit", "Duplicate", "Delete"],
+    "server": ["Edit", "Duplicate", "Delete"],
     "service": ["Logs", "Results", "Run", "Edit", "Duplicate", "Export", "Delete"],
+    "syslog": [],
     "task": ["Action", "Edit", "Duplicate", "Delete"],
     "user": ["Edit", "Duplicate", "Delete"],
     "pool": ["Visualize", "Edit", "Update", "Duplicate", "Edit objects", "Delete"],

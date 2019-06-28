@@ -57,7 +57,7 @@ from eNMS.database.associations import (
 from eNMS.database.base import AbstractBase
 from eNMS.exceptions import VariableSubstitutionError
 from eNMS.models.inventory import Device
-from eNMS.models.logging import Log  # noqa: F401
+from eNMS.models.logging import Syslog  # noqa: F401
 
 
 class Job(AbstractBase):

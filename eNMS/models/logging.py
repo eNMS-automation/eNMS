@@ -4,13 +4,13 @@ from sqlalchemy.orm import relationship
 from typing import List
 
 from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
-from eNMS.database.associations import job_event_table, event_log_table
+from eNMS.database.associations import job_event_table, event_syslog_table
 from eNMS.database.base import AbstractBase
 
 
 class Syslog(AbstractBase):
 
-    __tablename__ = type = "Log"
+    __tablename__ = type = "Syslog"
     id = Column(Integer, primary_key=True)
     content = Column(Text(LARGE_STRING_LENGTH), default="")
     time = Column(String(SMALL_STRING_LENGTH), default="")
@@ -26,7 +26,7 @@ class Syslog(AbstractBase):
 
 class ChangeLog(AbstractBase):
 
-    __tablename__ = type = "Log"
+    __tablename__ = type = "ChangeLog"
     id = Column(Integer, primary_key=True)
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
     content = Column(Text(LARGE_STRING_LENGTH), default="")

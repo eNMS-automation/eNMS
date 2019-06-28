@@ -1,6 +1,7 @@
 from flask.testing import FlaskClient
 
 from eNMS.controller import controller
+from eNMS.database import Session
 from eNMS.database.functions import fetch, fetch_all
 
 from tests.conftest import check_pages
@@ -36,3 +37,12 @@ def test_user_management(user_client: FlaskClient) -> None:
     user1 = fetch("User", name="user1")
     user_client.post("/delete_instance/user/{}".format(user1.id))
     assert len(fetch_all("User")) == 3
+
+
+@check_pages("table/log")
+def test_create_logs(user_client: FlaskClient) -> None:
+    number_of_logs = len(fetch_all("Changelog"))
+    for i in range(10):
+        controller.log("warning", str(i))
+        Session.commit()
+    assert len(fetch_all("Changelog")) == number_of_logs + 10

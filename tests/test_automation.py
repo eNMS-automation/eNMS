@@ -1,9 +1,9 @@
 from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.database.functions import fetch_all
+from eNMS.database.functions import fetch, fetch_all
 
-from tests.test_base import check_pages
+from tests.conftest import check_pages
 
 
 netmiko_ping = ImmutableMultiDict(
@@ -53,17 +53,6 @@ file_transfer_service = ImmutableMultiDict(
 )
 
 
-@check_pages("table/service")
-def test_base_services(user_client: FlaskClient) -> None:
-    number_of_services = len(fetch_all("Service"))
-    user_client.post("/update/NetmikoConfigurationService", data=netmiko_ping)
-    assert len(fetch_all("NetmikoConfigurationService")) == 3
-    assert len(fetch_all("Service")) == number_of_services + 1
-    user_client.post("/update/NetmikoFileTransferService", data=file_transfer_service)
-    assert len(fetch_all("NetmikoFileTransferService")) == 1
-    assert len(fetch_all("Service")) == number_of_services + 2
-
-
 getters_dict = ImmutableMultiDict(
     [
         ("form_type", "NapalmGettersService"),
@@ -80,13 +69,6 @@ getters_dict = ImmutableMultiDict(
         ("shape", "box"),
     ]
 )
-
-
-@check_pages("table/service")
-def test_getters_service(user_client: FlaskClient) -> None:
-    number_of_napalm_services = len(fetch_all("NapalmGettersService"))
-    user_client.post("/update/NapalmGettersService", data=getters_dict)
-    assert len(fetch_all("NapalmGettersService")) == number_of_napalm_services + 1
 
 
 ansible_service = ImmutableMultiDict(
@@ -112,8 +94,21 @@ ansible_service = ImmutableMultiDict(
 
 
 @check_pages("table/service")
-def test_ansible_services(user_client: FlaskClient) -> None:
+def test_base_services(user_client: FlaskClient) -> None:
     number_of_services = len(fetch_all("Service"))
+    user_client.post("/update/NetmikoConfigurationService", data=netmiko_ping)
+    assert len(fetch_all("NetmikoConfigurationService")) == 3
+    user_client.post("/update/NetmikoFileTransferService", data=file_transfer_service)
+    assert len(fetch_all("NetmikoFileTransferService")) == 1
+    number_of_napalm_services = len(fetch_all("NapalmGettersService"))
+    user_client.post("/update/NapalmGettersService", data=getters_dict)
+    assert len(fetch_all("NapalmGettersService")) == number_of_napalm_services + 1
     user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
     assert len(fetch_all("AnsiblePlaybookService")) == 1
-    assert len(fetch_all("Service")) == number_of_services + 1
+    assert len(fetch_all("Service")) == number_of_services + 4
+
+
+@check_pages("table/workflow")
+def test_yaql_test_worflow(user_client: FlaskClient) -> None:
+    workflow = fetch("Workflow", name="YaQL_test_worflow")
+    assert workflow.run()[0]["success"]

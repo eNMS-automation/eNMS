@@ -3,7 +3,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database.functions import fetch_all
 
-from tests.test_base import check_pages
+from tests.conftest import check_pages
 from tests.test_objects import create_from_file
 
 

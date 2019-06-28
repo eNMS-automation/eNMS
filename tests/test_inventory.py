@@ -9,7 +9,7 @@ from eNMS.properties.objects import (
     pool_device_properties,
 )
 
-from tests.test_base import check_pages
+from tests.conftest import check_pages
 
 
 def define_device(icon: str, description: str) -> ImmutableMultiDict:

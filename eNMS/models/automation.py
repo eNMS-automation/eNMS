@@ -246,14 +246,14 @@ class Service(Job):
                 for device, device_results in results["results"]["devices"].items()
                 if not device_results["success"]
             )
-            notification.append(f"FAILED\n{failed}")
+            notification.append(f"FAILED :\n{failed}")
             if not self.display_only_failed_nodes:
                 passed = "\n".join(
                     device
                     for device, device_results in results["results"]["devices"].items()
                     if device_results["success"]
                 )
-                notification.append(f"\n\nPASS:\n{passed}")
+                notification.append(f"\n\nPASS :\n{passed}")
         return notification
 
     def get_results(

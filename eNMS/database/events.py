@@ -68,7 +68,7 @@ def configure_events() -> None:
             ),
         )
 
-    @event.listens_for(Base, "after_update", propagate=True)
+    @event.listens_for(Base, "before_update", propagate=True)
     def log_instance_update(
         mapper: Mapper, connection: Connection, target: Base
     ) -> None:

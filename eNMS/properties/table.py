@@ -75,7 +75,7 @@ server_table_properties = [
 
 syslog_table_properties: List[str] = ["time", "origin", "content"]
 
-changelog_table_properties: List[str] = ["time", "severity", "content"]
+changelog_table_properties: List[str] = ["time", "user", "severity", "content"]
 
 event_table_properties: List[str] = ["name"] + syslog_table_properties
 

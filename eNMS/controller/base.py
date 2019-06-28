@@ -6,6 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
 from flask import Flask
+from flask_login import current_user
 from git import Repo
 from hvac import Client as VaultClient
 from importlib import import_module
@@ -340,7 +341,7 @@ class BaseController:
             return {"error": "An object with the same name already exists"}
 
     def log(self, severity: str, content: str) -> None:
-        factory("Changelog", **{"severity": severity, "content": content})
+        factory("Changelog", **{"severity": severity, "content": content, "user": getattr(current_user, "name", "admin")})
         self.log_severity[severity](content)
 
     def count_models(self) -> dict:

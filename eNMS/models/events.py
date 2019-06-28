@@ -202,7 +202,7 @@ class Syslog(Baselog):
     __mapper_args__ = {"polymorphic_identity": "Syslog"}
     parent_cls = "Baselog"
     id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
-    origin = Column(Text(LARGE_STRING_LENGTH), default="")
+    source = Column(Text(LARGE_STRING_LENGTH), default="")
     events = relationship(
         "Event", secondary=event_syslog_table, back_populates="syslogs"
     )
@@ -215,6 +215,7 @@ class Changelog(Baselog):
     parent_cls = "Baselog"
     id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
+    user = Column(Text(LARGE_STRING_LENGTH), default="")
 
 
 class Event(AbstractBase):

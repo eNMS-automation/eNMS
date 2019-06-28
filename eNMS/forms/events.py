@@ -1,4 +1,5 @@
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
+from wtforms.widgets import TextArea
 
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import DateField, DictField, MultipleInstanceField, InstanceField
@@ -59,4 +60,4 @@ class ChangelogForm(BaseForm):
         "Severity",
         choices=(("info", "Info"), ("warning", "Warning"), ("error", "Error")),
     )
-    content = StringField("Content")
+    content = StringField(widget=TextArea(), render_kw={"rows": 5})

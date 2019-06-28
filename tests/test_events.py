@@ -1,10 +1,12 @@
 from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
+from eNMS.controller import controller
+from eNMS.database import Session
 from eNMS.database.functions import fetch_all
 
 from tests.conftest import check_pages
-from tests.test_objects import create_from_file
+from tests.test_inventory import create_from_file
 
 
 instant_task = ImmutableMultiDict(
@@ -39,3 +41,12 @@ def test_netmiko_napalm_config(user_client: FlaskClient) -> None:
     assert len(fetch_all("Task")) == 3
     user_client.post("/update/task", data=scheduled_task)
     assert len(fetch_all("Task")) == 4
+
+
+@check_pages("table/changelog")
+def test_create_logs(user_client: FlaskClient) -> None:
+    number_of_logs = len(fetch_all("Changelog"))
+    for i in range(10):
+        controller.log("warning", str(i))
+        Session.commit()
+    assert len(fetch_all("Changelog")) == number_of_logs + 10

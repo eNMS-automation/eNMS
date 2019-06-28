@@ -2,7 +2,7 @@ from flask.testing import FlaskClient
 from typing import List
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.database.functions import fetch, fetch_all
+from eNMS.database.functions import delete_all, fetch, fetch_all
 from eNMS.properties.objects import (
     device_icons,
     pool_link_properties,
@@ -47,6 +47,7 @@ def define_link(source: int, destination: int) -> ImmutableMultiDict:
 
 @check_pages("table/device", "table/link", "view/network")
 def test_manual_object_creation(user_client: FlaskClient) -> None:
+    delete_all("Device", "Link")
     for icon in device_icons:
         for description in ("desc1", "desc2"):
             obj_dict = define_device(icon, description)
@@ -56,8 +57,8 @@ def test_manual_object_creation(user_client: FlaskClient) -> None:
         for destination in devices[:3]:
             obj_dict = define_link(source.id, destination.id)
             user_client.post("/update/link", data=obj_dict)
-    assert len(fetch_all("Device")) == 44
-    assert len(fetch_all("Link")) == 37
+    assert len(fetch_all("Device")) == 16
+    assert len(fetch_all("Link")) == 9
 
 
 def create_from_file(client: FlaskClient, file: str) -> None:

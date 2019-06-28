@@ -236,7 +236,7 @@ class Event(AbstractBase):
             Delete</button>""",
         ]
 
-    def match_log(self, source, content) -> List[str]:
+    def match_log(self, source: str, content: str) -> None:
         source_match = (
             search(self.log_source, source)
             if self.log_source_regex
@@ -247,7 +247,6 @@ class Event(AbstractBase):
             if self.log_content_regex
             else self.log_content in content
         )
-        print(self, source, content, source_match, content_match)
         if source_match and content_match:
             for job in self.jobs:
                 job.run()

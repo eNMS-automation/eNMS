@@ -24,7 +24,7 @@ stylesheets %} {% block content %} {% if type == "pool" %}
               {{ service_table_form.services(id="service-type",
               class="form-control") }}
             </button>
-            {% endif %} {% if type not in ("configuration", "log") %} {% set
+            {% endif %} {% if type not in ("configuration", "syslog") %} {% set
             func = "openServicePanel" if type == "service" else "showTypePanel"
             %}
             <button

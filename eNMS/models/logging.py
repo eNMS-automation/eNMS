@@ -25,9 +25,9 @@ class Syslog(AbstractBase):
         return []
 
 
-class ChangeLog(AbstractBase):
+class Changelog(AbstractBase):
 
-    __tablename__ = type = "ChangeLog"
+    __tablename__ = type = "Changelog"
     id = Column(Integer, primary_key=True)
     time = Column(String(SMALL_STRING_LENGTH), default="")
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")

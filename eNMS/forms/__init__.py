@@ -104,4 +104,5 @@ def filtering_form_generator() -> None:
 filtering_form_generator()
 
 
+import eNMS.forms.events  # noqa: F401
 import eNMS.forms.inventory  # noqa: F401

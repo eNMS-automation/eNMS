@@ -73,7 +73,7 @@ server_table_properties = [
     "cpu_load",
 ]
 
-syslog_table_properties: List[str] = ["time", "origin", "content"]
+syslog_table_properties: List[str] = ["time", "source", "content"]
 
 changelog_table_properties: List[str] = ["time", "user", "severity", "content"]
 

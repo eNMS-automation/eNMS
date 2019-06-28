@@ -3,7 +3,7 @@ from socketserver import BaseRequestHandler, UDPServer
 from threading import Thread
 
 from eNMS.database import Session
-from eNMS.database.functions import factory, fetch_all
+from eNMS.database.functions import fetch, factory, fetch_all
 
 
 class SyslogServer:
@@ -27,7 +27,7 @@ class SyslogUDPHandler(BaseRequestHandler):
         address = self.client_address[0]
         device = fetch("Device", allow_none=True, ip_address=address)
         source = device.name if device else address
-        print(origin)
+        print(source)
         """ events = []
         for event in fetch_all("Event"):
             source_match = (
@@ -42,6 +42,8 @@ class SyslogUDPHandler(BaseRequestHandler):
                 events.append(event)
                 for job in event.jobs:
                     job.run() """
-        log = factory("Syslog", **{"source": source, "content": content, "events": events})
+        log = factory(
+            "Syslog", **{"source": source, "content": content, "events": []}
+        )
         Session.add(log)
         Session.commit()

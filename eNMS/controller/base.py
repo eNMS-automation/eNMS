@@ -341,7 +341,14 @@ class BaseController:
             return {"error": "An object with the same name already exists"}
 
     def log(self, severity: str, content: str) -> None:
-        factory("Changelog", **{"severity": severity, "content": content, "user": getattr(current_user, "name", "admin")})
+        factory(
+            "Changelog",
+            **{
+                "severity": severity,
+                "content": content,
+                "user": getattr(current_user, "name", "admin"),
+            },
+        )
         self.log_severity[severity](content)
 
     def count_models(self) -> dict:

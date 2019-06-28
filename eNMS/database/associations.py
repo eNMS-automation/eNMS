@@ -30,13 +30,6 @@ task_pool_table: Table = Table(
     Column("task_id", Integer, ForeignKey("Task.id")),
 )
 
-event_syslog_table: Table = Table(
-    "event_syslog_association",
-    Base.metadata,
-    Column("syslog_id", Integer, ForeignKey("Syslog.id")),
-    Column("event_id", Integer, ForeignKey("Event.id")),
-)
-
 job_event_table: Table = Table(
     "job_event_association",
     Base.metadata,

@@ -1,7 +1,7 @@
 <form
   id="edit-event-form"
   data-parsley-validate
-  class="form-horizontal form-label-left"
+  class="form-horizontal form-label-left add-id"
   method="post"
   autocomplete="off"
 >
@@ -30,11 +30,11 @@
         <tr>
           <td>{{ names[property] }}</td>
           <td>
-            {{ form[property](id='event-' + property, class="form-control") }}
+            {{ form[property](id='event-' + property, class="form-control add-id") }}
           </td>
           <td>
             {{ form[property + '_regex'](id='event-' + property + '_regex',
-            class="form-control") }}
+            class="form-control add-id") }}
           </td>
         </tr>
         {% endfor %}
@@ -42,7 +42,7 @@
     </table>
     <label>Services or Workflows</label>
     <div class="form-group">
-      {{ form.jobs(id='event-jobs', class="form-control required", size=20) }}
+      {{ form.jobs(id='event-jobs', class="form-control required add-id", size=20) }}
     </div>
     <div class="ln_solid"></div>
     <div class="form-group">
@@ -50,8 +50,8 @@
         <button
           id="save"
           type="button"
-          class="btn btn-success"
-          onclick="processData('event')"
+          class="btn btn-success btn-id add-id"
+          value="processData"
         >
           Save
         </button>

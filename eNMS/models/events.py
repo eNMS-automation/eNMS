@@ -21,7 +21,6 @@ from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.database.associations import (
     job_event_table,
-    event_syslog_table,
     task_device_table,
     task_pool_table,
 )
@@ -203,9 +202,6 @@ class Syslog(Baselog):
     parent_cls = "Baselog"
     id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
     source = Column(Text(LARGE_STRING_LENGTH), default="")
-    events = relationship(
-        "Event", secondary=event_syslog_table, back_populates="syslogs"
-    )
 
 
 class Changelog(Baselog):
@@ -227,9 +223,6 @@ class Event(AbstractBase):
     source_regex = Column(Boolean, default=False)
     content = Column(String(SMALL_STRING_LENGTH), default="")
     content_regex = Column(Boolean, default=False)
-    syslogs = relationship(
-        "Syslog", secondary=event_syslog_table, back_populates="events"
-    )
     jobs = relationship("Job", secondary=job_event_table, back_populates="events")
 
     def generate_row(self, table: str) -> List[str]:

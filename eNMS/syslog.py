@@ -22,12 +22,8 @@ class SyslogServer:
 
 class SyslogUDPHandler(BaseRequestHandler):
     def handle(self) -> None:
-        content = str(bytes.decode(self.request[0].strip()))
         address = self.client_address[0]
         device = fetch("Device", allow_none=True, ip_address=address)
-        source = device.name if device else address
-        log = factory(
-            "Syslog", **{"source": source, "content": content}
-        )
+        log = factory("Syslog", **{"source": device.name if device else address, "content": str(bytes.decode(self.request[0].strip()))})
         Session.add(log)
         Session.commit()

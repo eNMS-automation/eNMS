@@ -8,15 +8,29 @@ from eNMS.database.associations import job_event_table, event_log_table
 from eNMS.database.base import AbstractBase
 
 
-class Log(AbstractBase):
+class Syslog(AbstractBase):
 
     __tablename__ = type = "Log"
     id = Column(Integer, primary_key=True)
-    origin = Column(String(SMALL_STRING_LENGTH), default="")
+    content = Column(Text(LARGE_STRING_LENGTH), default="")
+    time = Column(String(SMALL_STRING_LENGTH), default="")
+    events = relationship("Event", secondary=event_syslog_table, back_populates="syslogs")
+
+    def update(self, **kwargs: str) -> None:
+        kwargs["time"] = str(datetime.now())
+        super().update(**kwargs)
+
+    def generate_row(self, table: str) -> List[str]:
+        return []
+
+
+class ChangeLog(AbstractBase):
+
+    __tablename__ = type = "Log"
+    id = Column(Integer, primary_key=True)
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
     content = Column(Text(LARGE_STRING_LENGTH), default="")
     time = Column(String(SMALL_STRING_LENGTH), default="")
-    events = relationship("Event", secondary=event_log_table, back_populates="logs")
 
     def update(self, **kwargs: str) -> None:
         kwargs["time"] = str(datetime.now())
@@ -35,7 +49,7 @@ class Event(AbstractBase):
     origin_regex = Column(Boolean, default=False)
     name = Column(String(SMALL_STRING_LENGTH), default="")
     content_regex = Column(Boolean, default=False)
-    logs = relationship("Log", secondary=event_log_table, back_populates="events")
+    syslogs = relationship("Syslog", secondary=event_syslog_table, back_populates="events")
     jobs = relationship("Job", secondary=job_event_table, back_populates="events")
 
     def generate_row(self, table: str) -> List[str]:

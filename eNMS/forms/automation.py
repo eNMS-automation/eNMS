@@ -118,8 +118,8 @@ class ServiceTableForm(BaseForm):
 
 
 def configure_form(cls: BaseForm) -> BaseForm:
-    cls.properties = ("origin", "name")
-    for property in ("origin", "name"):
+    cls.properties = ("origin", "content")
+    for property in ("origin", "content"):
         setattr(cls, property, StringField(property))
         setattr(cls, property + "_regex", BooleanField("Regex"))
     return cls

@@ -12,8 +12,9 @@ class Syslog(AbstractBase):
 
     __tablename__ = type = "Syslog"
     id = Column(Integer, primary_key=True)
-    content = Column(Text(LARGE_STRING_LENGTH), default="")
     time = Column(String(SMALL_STRING_LENGTH), default="")
+    origin = Column(Text(LARGE_STRING_LENGTH), default="")
+    content = Column(Text(LARGE_STRING_LENGTH), default="")
     events = relationship("Event", secondary=event_syslog_table, back_populates="syslogs")
 
     def update(self, **kwargs: str) -> None:
@@ -28,9 +29,9 @@ class ChangeLog(AbstractBase):
 
     __tablename__ = type = "ChangeLog"
     id = Column(Integer, primary_key=True)
+    time = Column(String(SMALL_STRING_LENGTH), default="")
     severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
     content = Column(Text(LARGE_STRING_LENGTH), default="")
-    time = Column(String(SMALL_STRING_LENGTH), default="")
 
     def update(self, **kwargs: str) -> None:
         kwargs["time"] = str(datetime.now())

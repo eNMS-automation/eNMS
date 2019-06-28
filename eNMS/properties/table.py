@@ -73,9 +73,9 @@ server_table_properties = [
     "cpu_load",
 ]
 
-syslog_table_properties: List[str] = ["time", "origin", "severity", "content"]
+syslog_table_properties: List[str] = ["time", "origin", "content"]
 
-changelog_table_properties: List[str] = ["time", "origin", "severity", "content"]
+changelog_table_properties: List[str] = ["time", "severity", "content"]
 
 event_table_properties: List[str] = ["name"] + syslog_table_properties
 

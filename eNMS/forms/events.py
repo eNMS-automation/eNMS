@@ -6,8 +6,8 @@ from eNMS.forms.fields import DateField, DictField, MultipleInstanceField, Insta
 
 
 def configure_form(cls: BaseForm) -> BaseForm:
-    cls.properties = ("source", "content")
-    for property in ("source", "content"):
+    cls.properties = ("log_source", "log_content")
+    for property in ("log_source", "log_content"):
         setattr(cls, property, StringField(property))
         setattr(cls, property + "_regex", BooleanField("Regex"))
     return cls

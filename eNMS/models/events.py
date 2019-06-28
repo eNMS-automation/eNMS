@@ -1,5 +1,6 @@
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
+from re import search
 from sqlalchemy import (
     Boolean,
     case,
@@ -219,10 +220,10 @@ class Event(AbstractBase):
     __tablename__ = type = "Event"
     id = Column(Integer, primary_key=True)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    source = Column(String(SMALL_STRING_LENGTH), default="")
-    source_regex = Column(Boolean, default=False)
-    content = Column(String(SMALL_STRING_LENGTH), default="")
-    content_regex = Column(Boolean, default=False)
+    log_source = Column(String(SMALL_STRING_LENGTH), default="")
+    log_source_regex = Column(Boolean, default=False)
+    log_content = Column(String(SMALL_STRING_LENGTH), default="")
+    log_content_regex = Column(Boolean, default=False)
     jobs = relationship("Job", secondary=job_event_table, back_populates="events")
 
     def generate_row(self, table: str) -> List[str]:
@@ -236,8 +237,17 @@ class Event(AbstractBase):
         ]
 
     def match_log(self, source, content) -> List[str]:
-        source_match = search(self.source, source) if self.source_regex else self.source in source
-        content_match = search(self.content, content) if self.content_regex else self.content in content
+        source_match = (
+            search(self.log_source, source)
+            if self.log_source_regex
+            else self.log_source in source
+        )
+        content_match = (
+            search(self.log_content, content)
+            if self.log_content_regex
+            else self.log_content in content
+        )
+        print(self, source, content, source_match, content_match)
         if source_match and content_match:
             for job in self.jobs:
                 job.run()

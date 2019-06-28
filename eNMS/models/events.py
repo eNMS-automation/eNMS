@@ -223,9 +223,9 @@ class Event(AbstractBase):
     __tablename__ = type = "Event"
     id = Column(Integer, primary_key=True)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    origin = Column(String(SMALL_STRING_LENGTH), default="")
-    origin_regex = Column(Boolean, default=False)
-    name = Column(String(SMALL_STRING_LENGTH), default="")
+    source = Column(String(SMALL_STRING_LENGTH), default="")
+    source_regex = Column(Boolean, default=False)
+    content = Column(String(SMALL_STRING_LENGTH), default="")
     content_regex = Column(Boolean, default=False)
     syslogs = relationship(
         "Syslog", secondary=event_syslog_table, back_populates="events"
@@ -241,3 +241,10 @@ class Event(AbstractBase):
             onclick="deleteInstance('event', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]
+
+    def match_log(self, source, content) -> List[str]:
+        source_match = search(self.source, source) if self.source_regex else self.source in source
+        content_match = search(self.content, content) if self.content_regex else self.content in content
+        if source_match and content_match:
+            for job in self.jobs:
+                job.run()

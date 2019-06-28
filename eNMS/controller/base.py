@@ -106,6 +106,30 @@ class BaseController:
     use_vault = int(environ.get("USE_VAULT", False))
     vault_addr = environ.get("VAULT_ADDR")
 
+    valid_pages = [
+        "/administration",
+        "/calendar",
+        "/dashboard",
+        "/login",
+        "/table/changelog",
+        "/table/configuration",
+        "/table/device",
+        "/table/link",
+        "/table/event",
+        "/table/pool",
+        "/table/service",
+        "/table/user",
+        "/table/server",
+        "/table/syslog",
+        "/table/task",
+        "/table/workflow",
+        "/view/network",
+        "/view/site",
+        "/workflow_builder",
+    ]
+
+    free_access_pages = ["/", "/login"]
+
     valid_post_endpoints = [
         "add_edge",
         "add_jobs_to_workflow",

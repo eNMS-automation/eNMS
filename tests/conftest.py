@@ -1,7 +1,7 @@
 from flask.testing import FlaskClient
 from pathlib import Path
 from pytest import fixture
-from typing import Iterator
+from typing import Callable, Iterator
 
 from eNMS import create_app
 from eNMS.database import Session
@@ -33,3 +33,16 @@ def user_client() -> Iterator[FlaskClient]:
             },
         )
         yield client
+
+
+def check_pages(*pages: str) -> Callable:
+    def decorator(function: Callable) -> Callable:
+        def wrapper(user_client: FlaskClient) -> None:
+            function(user_client)
+            for page in pages:
+                r = user_client.get(page, follow_redirects=True)
+                assert r.status_code == 200
+
+        return wrapper
+
+    return decorator

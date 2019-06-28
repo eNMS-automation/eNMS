@@ -1,8 +1,24 @@
 from flask.testing import FlaskClient
 
+from eNMS.controller import controller
 from eNMS.database.functions import fetch, fetch_all
 
-from tests.test_base import check_pages
+from tests.conftest import check_pages
+
+
+def test_authentication(base_client: FlaskClient) -> None:
+    for page in controller.valid_pages:
+        expected_code = 200 if page in controller.free_access_pages else 403
+        r = base_client.get(page)
+        assert r.status_code == expected_code
+
+
+def test_urls(user_client: FlaskClient) -> None:
+    for page in controller.valid_pages:
+        r = user_client.get(page, follow_redirects=True)
+        assert r.status_code == 200
+    r = user_client.get("/logout", follow_redirects=True)
+    test_authentication(user_client)
 
 
 @check_pages("table/user")

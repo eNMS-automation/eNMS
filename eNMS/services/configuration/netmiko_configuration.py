@@ -66,6 +66,13 @@ class NetmikoConfigurationForm(ServiceForm, NetmikoForm):
     strip_command = BooleanField()
     config_mode_command = StringField()
     groups = {
-        "Main Parameters": ["command", "conversion_method"],
+        "Main Parameters": [
+            "content",
+            "commit_configuration",
+            "exit_config_mode",
+            "strip_prompt",
+            "strip_command",
+            "config_mode_command",
+        ],
         "Netmiko Parameters": NetmikoForm.group,
     }

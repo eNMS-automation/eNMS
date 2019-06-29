@@ -85,6 +85,16 @@ class NetmikoDataExtractionForm(ServiceForm, NetmikoForm):
     command3 = StringField()
     regular_expression3 = StringField()
     groups = {
-        "Main Parameters": ["command", "conversion_method"],
+        "Main Parameters": [
+            "variable1",
+            "command1",
+            "regular_expression1",
+            "variable2",
+            "command2",
+            "regular_expression2",
+            "variable3",
+            "command3",
+            "regular_expression3",
+        ],
         "Netmiko Parameters": NetmikoForm.group,
     }

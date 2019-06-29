@@ -88,6 +88,6 @@ class NetmikoBackupForm(ServiceForm, NetmikoForm):
     number_of_configuration = IntegerField(default=10)
     configuration_command = StringField()
     groups = {
-        "Main Parameters": ["command", "conversion_method"],
+        "Main Parameters": ["number_of_configuration", "configuration_command"],
         "Netmiko Parameters": NetmikoForm.group,
     }

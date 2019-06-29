@@ -61,16 +61,22 @@ class NetmikoFileTransferService(Service):
 
 class NetmikoFileTransferForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoFileTransferService")
-    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     source_file = StringField(validators=[InputRequired()])
     destination_file = StringField(validators=[InputRequired()])
     file_system = StringField()
     direction = SelectField(choices=(("put", "Upload"), ("get", "Download")))
-    driver = SelectField(choices=controller.NETMIKO_SCP_DRIVERS)
     disable_md5 = BooleanField()
-    use_device_driver = BooleanField()
     inline_transfer = BooleanField()
     overwrite_file = BooleanField()
-    fast_cli = BooleanField()
-    timeout = IntegerField(default=1)
-    global_delay_factor = FloatField(default=1.0)
+    groups = {
+        "Main Parameters": [
+            "source_file",
+            "destination_file",
+            "file_system",
+            "direction",
+            "disable_md5",
+            "inline_transfer",
+            "overwrite_file",
+        ],
+        "Netmiko Parameters": NetmikoForm.group,
+    }

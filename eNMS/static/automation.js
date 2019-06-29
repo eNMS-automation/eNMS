@@ -71,7 +71,7 @@ function saveService(service, id) {
 function copyResultsToClipboard(id) {
   $(`#display-text-${id}`).prop("checked", true);
   displayResult(id);
-  node = document.getElementById(`display_results-${id}`);
+  let node = document.getElementById(`display_results-${id}`);
   if (document.body.createTextRange) {
     const range = document.body.createTextRange();
     range.moveToElementText(node);

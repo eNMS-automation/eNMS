@@ -1,5 +1,6 @@
 apscheduler
 dicttoxml
+fabric
 flask
 flask_assets
 flask_cli

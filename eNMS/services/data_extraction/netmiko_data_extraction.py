@@ -42,7 +42,7 @@ class NetmikoDataExtractionService(Service):
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:
-        netmiko_connection = self.netmiko_connection(device)
+        netmiko_connection = self.netmiko_connection(device, parent)
         result, success = {}, True
         for i in range(1, 4):
             variable = getattr(self, f"variable{i}")

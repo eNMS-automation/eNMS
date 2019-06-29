@@ -1,6 +1,0 @@
-destination: netmiko_check_vrf_napalm
-name: 40-success:20->45
-source: napalm_create_vrf_test
-subtype: success
-type: WorkflowEdge
-workflow: Napalm_VRF_workflow

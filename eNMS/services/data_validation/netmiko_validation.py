@@ -14,6 +14,7 @@ from wtforms import HiddenField, SelectField, StringField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm, ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -65,7 +66,7 @@ class NetmikoValidationService(Service):
 
 class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
-    command = StringField()
+    command = SubstitutionField()
     conversion_method = SelectField(
         choices=(
             ("text", "Text"),

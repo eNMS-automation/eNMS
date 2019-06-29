@@ -1,0 +1,12 @@
+- Extend the custom property definition for services to allow grouping such that a dropdown is displayed
+with each group name, and only properties for the selected group are visible.
+As we add new validation types, the custom page is getting long and confusing.
+Some mechanism is needed to reduce the clutter. A secondary goal is to prevent invalid combinations
+from being defined, but that's a more complex problem.
+>>> Done.
+
+- Initial Payload: now available from the UI for services and workflows.
+
+- Substitution field now have a specific color to let you know it supports substitution.
+
+- Bug fixes.

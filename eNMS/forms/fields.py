@@ -40,6 +40,12 @@ class MultipleInstanceField(SelectMultipleField):
         pass
 
 
+class SubstitutionField(StringField):
+    def __call__(self, *args: Any, **kwargs: Any) -> None:
+        kwargs["style"] = "background-color: #e8f0f7"
+        return super().__call__(*args, **kwargs)
+
+
 field_types = {
     BooleanField: "bool",
     DateField: "date",

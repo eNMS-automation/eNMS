@@ -421,6 +421,14 @@ class BaseController:
             pools = [int(id) for id in kwargs.getlist("form[pools][]")]
             if pools:
                 result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
+        if table == "service":
+            workflows = [int(id) for id in kwargs.getlist("form[workflows]")]
+            if workflows:
+                result = result.filter(model.workflows.any(models["workflow"].id.in_(workflows)))
+        if table == "workflow":
+            services = [int(id) for id in kwargs.getlist("form[services]")]
+            if services:
+                result = result.filter(model.jobs.any(models["service"].id.in_(services)))
         try:
             return {
                 "draw": int(kwargs["draw"]),

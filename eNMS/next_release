@@ -9,4 +9,7 @@ from being defined, but that's a more complex problem.
 
 - Substitution field now have a specific color to let you know it supports substitution.
 
+- could you add a dialog box to select which jobs in the exported_jobs folder to import?
+>>> Done.
+
 - Bug fixes.

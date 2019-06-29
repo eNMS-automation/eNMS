@@ -7,7 +7,7 @@ from wtforms import HiddenField, SelectField, StringField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
-from eNMS.forms.fields import field_types, MultipleInstanceField
+from eNMS.forms.fields import field_types, InstanceField, MultipleInstanceField
 from eNMS.models import property_types
 from eNMS.properties import field_conversion, property_names
 from eNMS.properties.table import filtering_properties
@@ -76,6 +76,10 @@ def filtering_form_generator() -> None:
         kwargs = {}
         if table in ("device", "link", "configuration"):
             kwargs["pools"] = MultipleInstanceField("Pools", instance_type="Pool")
+        if table == "service":
+            kwargs["workflows"] = InstanceField("Workflows", instance_type="Workflow")
+        if table == "workflow":
+            kwargs["services"] = InstanceField("Services", instance_type="Service")
         type(
             f"{table.capitalize()}FilteringForm",
             (BaseForm,),

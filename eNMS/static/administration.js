@@ -148,6 +148,22 @@ function migrationsExport() {
 }
 
 /**
+ * Open Database Migration Panel.
+ */
+// eslint-disable-next-line
+function showMigrationPanel() {
+  showPanel("database_migration", null, () => {
+    let list = document.getElementById("versions");
+    folders.forEach((item) => {
+      console.log(item);
+      let option = document.createElement('option');
+      option.textContent = option.value = item;   
+      list.appendChild(option);
+    });
+  });
+}
+
+/**
  * Import all for migration.
  */
 // eslint-disable-next-line
@@ -240,11 +256,7 @@ function scanCluster() {
 }
 
 (function() {
-  if (page == "advanced") {
-    folders.forEach((f) => {
-      $("#versions").append(`<option value='${f}'></option>`);
-    });
-  } else if (page == "server_management") {
+  if (page == "server_management") {
     getClusterStatus();
   }
 })();

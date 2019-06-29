@@ -32,7 +32,7 @@ class PayloadValidationService(Service):
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         query = self.sub(self.query, locals())
         engine = factory.YaqlFactory().create()
-        result = engine(query).evaluate(data=payload)
+        result = self.convert_result(engine(query).evaluate(data=payload))
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"

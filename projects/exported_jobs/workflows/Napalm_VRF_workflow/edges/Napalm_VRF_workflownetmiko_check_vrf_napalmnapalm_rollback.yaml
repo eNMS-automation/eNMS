@@ -1,0 +1,6 @@
+destination: napalm_rollback
+name: 40-success:45->34
+source: netmiko_check_vrf_napalm
+subtype: success
+type: WorkflowEdge
+workflow: Napalm_VRF_workflow

@@ -1,0 +1,6 @@
+destination: netmiko_create_vrf_test
+name: Netmiko_VRF_workflow 0 -> 2
+source: Start
+subtype: success
+type: WorkflowEdge
+workflow: Netmiko_VRF_workflow

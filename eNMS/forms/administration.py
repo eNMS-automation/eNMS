@@ -10,7 +10,7 @@ from wtforms import (
 )
 
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DateField, MultipleInstanceField
+from eNMS.forms.fields import DateField, MultipleInstanceField, NoValidationSelectMultipleField
 from eNMS.properties.database import import_classes
 
 
@@ -108,9 +108,9 @@ class DatabaseMigrationsForm(BaseForm):
 
 
 class ImportJobs(BaseForm):
-    template = "base"
+    action = "importJobs"
     form_type = HiddenField(default="import_jobs")
-    jobs_to_import = SelectMultipleField(
+    jobs_to_import = NoValidationSelectMultipleField(
         "Jobs to import", choices=()
     )
 

@@ -179,8 +179,9 @@ function showImportJobsPanel() {
  */
 // eslint-disable-next-line
 function importJobs() {
-  call("/import_jobs", () => {
+  fCall("/import_jobs", "#import_jobs-form", function(result) {
     alertify.notify("Import successful.", "success", 5);
+    $("#import_jobs").remove();
   });
 }
 

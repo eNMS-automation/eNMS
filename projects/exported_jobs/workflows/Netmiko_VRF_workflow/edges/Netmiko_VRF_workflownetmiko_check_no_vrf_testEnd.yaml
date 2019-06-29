@@ -1,0 +1,6 @@
+destination: End
+name: Netmiko_VRF_workflow 5 -> 1
+source: netmiko_check_no_vrf_test
+subtype: success
+type: WorkflowEdge
+workflow: Netmiko_VRF_workflow

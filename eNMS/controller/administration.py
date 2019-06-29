@@ -139,10 +139,11 @@ class AdministrationController(BaseController):
             Session.commit()
         return status
 
-    def import_jobs(self) -> None:
+    def import_jobs(self, **kwargs: Any) -> None:
+        jobs = kwargs["jobs_to_import"]
         path = self.path / "projects" / "exported_jobs"
         for file in scandir(path / "services"):
-            if file.name == ".gitkeep":
+            if file.name == ".gitkeep" or file.name not in jobs:
                 continue
             with open(file.path, "r") as instance_file:
                 instance = load(instance_file, Loader=BaseLoader)
@@ -150,7 +151,7 @@ class AdministrationController(BaseController):
                 factory(model, **self.objectify(model, instance))
         Session.commit()
         for workflow in listdir(path / "workflows"):
-            if workflow == ".gitkeep":
+            if workflow == ".gitkeep" or workflow not in jobs:
                 continue
             for instance_type in ("jobs", "workflow", "edges"):
                 path_job = path / "workflows" / workflow / instance_type

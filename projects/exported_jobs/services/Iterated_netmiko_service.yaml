@@ -1,0 +1,51 @@
+color: '#D2E5FF'
+command: show interface {{payload['value']}}
+completed: 0
+content_match: 255.255.255.255
+content_match_regex: false
+conversion_method: text
+creator: admin
+credentials: device
+define_devices_from_payload: false
+delay_factor: 1.0
+delete_spaces_before_matching: false
+description: Check the iteration mechanism (interfaces)
+devices:
+- Washington
+- Austin
+dict_match: {}
+display_only_failed_nodes: true
+driver: arista_eos
+events: []
+failed: 0
+fast_cli: true
+global_delay_factor: 1.0
+hidden: false
+last_modified: '2019-06-29 17:13:32.362250'
+mail_recipient: ''
+max_processes: 5
+multiprocessing: false
+name: Iterated_netmiko_service
+negative_logic: false
+notification_header: ''
+number_of_retries: 0
+number_of_targets: 0
+operating_system: eos
+payload: {}
+pools: []
+positions: {}
+privileged_mode: false
+push_to_git: false
+query_property_type: ip_address
+send_notification: false
+send_notification_method: mail_feedback_notification
+shape: box
+size: 40
+time_between_retries: 10
+timeout: 3
+type: NetmikoValidationService
+use_device_driver: true
+validation_method: text
+vendor: Arista
+waiting_time: 0
+yaql_query: ''

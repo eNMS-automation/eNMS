@@ -62,6 +62,11 @@ class SubstitutionField(StringField):
         return super().__call__(*args, **kwargs)
 
 
+class NoValidationSelectMultipleField(SelectMultipleField):
+    def pre_validate(self, form: FlaskForm) -> None:
+        pass
+
+
 field_types = {
     BooleanField: "bool",
     DateField: "date",
@@ -73,6 +78,7 @@ field_types = {
     InstanceField: "object",
     SelectField: "list",
     SelectMultipleField: "multiselect",
+    NoValidationSelectMultipleField: "multiselect",
     StringField: "str",
     SubstitutionField: "str",
 }

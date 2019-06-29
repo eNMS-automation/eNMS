@@ -42,7 +42,6 @@ class Controller(AdministrationController, AutomationController, InventoryContro
         factory("User", **{"name": "admin", "password": "admin"})
 
     def update_credentials(self) -> None:
-        factory("Service", **{"name": "GET_device", "password": "admin"})
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)
 

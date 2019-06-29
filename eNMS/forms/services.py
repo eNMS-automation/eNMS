@@ -10,13 +10,13 @@ from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DictField
+from eNMS.forms.fields import DictField, DictSubstitutionField, SubstitutionField
 
 
 class StringValidationForm(BaseForm):
     form_type = HiddenField(default="string_service_validation")
     abstract_service = True
-    content_match = StringField(
+    content_match = SubstitutionField(
         "Content Match", widget=TextArea(), render_kw={"rows": 8}
     )
     content_match_regex = BooleanField("Match content with Regular Expression")
@@ -40,7 +40,7 @@ class DictValidationForm(BaseForm):
             ("dict_included", "Validation by dictionary inclusion"),
         ),
     )
-    dict_match = DictField("Dictionary to Match Against")
+    dict_match = DictSubstitutionField("Dictionary to Match Against")
     negative_logic = BooleanField("Negative logic")
     group = ["validation_method", "dict_match", "negative_logic"]
 
@@ -56,11 +56,11 @@ class ValidationForm(BaseForm):
             ("dict_included", "Validation by dictionary inclusion"),
         ),
     )
-    content_match = StringField(
+    content_match = SubstitutionField(
         "Content Match", widget=TextArea(), render_kw={"rows": 8}
     )
     content_match_regex = BooleanField("Match content with Regular Expression")
-    dict_match = DictField("Dictionary to Match Against")
+    dict_match = DictSubstitutionField("Dictionary to Match Against")
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
     group = [

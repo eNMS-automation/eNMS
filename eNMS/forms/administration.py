@@ -107,6 +107,14 @@ class DatabaseMigrationsForm(BaseForm):
     )
 
 
+class ImportJobs(BaseForm):
+    template = "base"
+    form_type = HiddenField(default="import_jobs")
+    jobs_to_import = SelectMultipleField(
+        "Jobs to import", choices=()
+    )
+
+
 class UserForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="user")

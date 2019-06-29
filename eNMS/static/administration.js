@@ -163,9 +163,21 @@ function migrationsImport() {
  */
 // eslint-disable-next-line
 function importJobs() {
+  showPanel("import_jobs", null, () => {
+    let list = document.getElementById("jobs_to_import");
+    console.log(list.length);
+    jobs.forEach((item) => {
+      console.log(item);
+      let option = document.createElement('option');
+      option.textContent = option.value = item;   
+      list.appendChild(option);
+    });
+  });
+  /*
   call("/import_jobs", () => {
     alertify.notify("Import successful.", "success", 5);
   });
+  */
 }
 
 /**

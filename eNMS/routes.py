@@ -95,11 +95,13 @@ def logout() -> Response:
 @blueprint.route("/administration")
 @monitor_requests
 def administration() -> dict:
+    jobs_path = current_app.path / "projects" / "exported_jobs"
     return render_template(
         f"pages/administration.html",
         **{
             "endpoint": "administration",
             "folders": listdir(current_app.path / "projects" / "migrations"),
+            "jobs": listdir(jobs_path / "services") + listdir(jobs_path / "workflows"),
         },
     )
 

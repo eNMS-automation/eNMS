@@ -2,17 +2,9 @@ from datetime import datetime
 from pathlib import Path
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from typing import Optional
-from wtforms import (
-    BooleanField,
-    FloatField,
-    HiddenField,
-    IntegerField,
-    SelectField,
-    StringField,
-)
+from wtforms import HiddenField, IntegerField, StringField
 from yaml import dump
 
-from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NetmikoForm

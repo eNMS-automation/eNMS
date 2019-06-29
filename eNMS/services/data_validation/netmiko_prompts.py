@@ -10,16 +10,8 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import (
-    BooleanField,
-    FloatField,
-    HiddenField,
-    IntegerField,
-    SelectField,
-    StringField,
-)
+from wtforms import HiddenField, SelectField, StringField
 
-from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NetmikoForm, StringValidationForm

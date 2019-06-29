@@ -1,13 +1,11 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import BooleanField, HiddenField, SelectField, StringField
+from wtforms import HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device

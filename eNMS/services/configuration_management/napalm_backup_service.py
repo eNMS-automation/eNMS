@@ -3,13 +3,12 @@ from pathlib import Path
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import BooleanField, HiddenField, IntegerField, SelectField
+from wtforms import HiddenField, IntegerField
 from yaml import dump
 
 from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device

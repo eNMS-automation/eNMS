@@ -22,6 +22,12 @@ class DictField(StringField):
         super().__init__(*args, **kwargs)
 
 
+class DictSubstitutionField(DictField):
+    def __call__(self, *args: Any, **kwargs: Any) -> str:
+        kwargs["style"] = "background-color: #e8f0f7"
+        return super().__call__(*args, **kwargs)
+
+
 class InstanceField(SelectField):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         instance_type = kwargs.pop("instance_type")
@@ -50,6 +56,7 @@ field_types = {
     BooleanField: "bool",
     DateField: "date",
     DictField: "dict",
+    DictSubstitutionField: "dict",
     FloatField: "float",
     IntegerField: "integer",
     MultipleInstanceField: "object-list",

@@ -13,7 +13,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField, String
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField, SubstitutionField
+from eNMS.forms.fields import DictField, DictSubstitutionField, SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -108,9 +108,9 @@ class RestCallForm(ServiceForm, ValidationForm):
         choices=(("GET", "GET"), ("POST", "POST"), ("PUT", "PUT"), ("DELETE", "DELETE"))
     )
     rest_url = SubstitutionField()
-    payload = DictField()
-    params = DictField()
-    headers = DictField()
+    payload = DictSubstitutionField()
+    params = DictSubstitutionField()
+    headers = DictSubstitutionField()
     verify_ssl_certificate = BooleanField("Verify SSL Certificate")
     timeout = IntegerField(default=15)
     username = StringField()
@@ -124,3 +124,20 @@ class RestCallForm(ServiceForm, ValidationForm):
             ("xml", "XML dictionary"),
         )
     )
+    groups = {
+        "Main Parameters": [
+            "call_type",
+            "rest_url",
+            "payload",
+            "params",
+            "headers",
+            "verify_ssl_certificate",
+            "timeout",
+            "username",
+            "password",
+            "pass_device_properties",
+            "options",
+            "conversion_method",
+        ],
+        "Validation Parameters": ValidationForm.group,
+    }

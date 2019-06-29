@@ -13,6 +13,7 @@ from wtforms.widgets import TextArea
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -56,7 +57,7 @@ class NetmikoConfigurationService(Service):
         return {"success": True, "result": f"configuration OK {config}"}
 
 
-class NetmikoConfigurationForm(ServiceForm):
+class NetmikoConfigurationForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoConfigurationService")
     content = StringField(widget=TextArea(), render_kw={"rows": 5})
     privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")

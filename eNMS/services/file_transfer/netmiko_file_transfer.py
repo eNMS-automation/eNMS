@@ -14,6 +14,7 @@ from wtforms.validators import InputRequired
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -58,7 +59,7 @@ class NetmikoFileTransferService(Service):
         return {"success": True, "result": transfer_dict}
 
 
-class NetmikoFileTransferForm(ServiceForm):
+class NetmikoFileTransferForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoFileTransferService")
     privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     source_file = StringField(validators=[InputRequired()])

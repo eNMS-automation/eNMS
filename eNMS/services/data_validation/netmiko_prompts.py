@@ -22,7 +22,7 @@ from wtforms import (
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import StringValidationForm
+from eNMS.forms.services import NetmikoForm, StringValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -85,7 +85,7 @@ class NetmikoPromptsService(Service):
         }
 
 
-class NetmikoPromptsForm(ServiceForm, StringValidationForm):
+class NetmikoPromptsForm(ServiceForm, NetmikoForm, StringValidationForm):
     form_type = HiddenField(default="NetmikoPromptsService")
     privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     command = StringField()

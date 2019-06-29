@@ -15,6 +15,7 @@ from yaml import dump
 from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -82,7 +83,7 @@ class NetmikoBackupService(Service):
         return {"success": True, "result": f"Command: {self.configuration_command}"}
 
 
-class NetmikoBackupForm(ServiceForm):
+class NetmikoBackupForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoBackupService")
     privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     number_of_configuration = IntegerField(default=10)

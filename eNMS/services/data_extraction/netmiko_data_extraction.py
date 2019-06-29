@@ -13,6 +13,7 @@ from wtforms import (
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -72,7 +73,7 @@ class NetmikoDataExtractionService(Service):
         return {"result": result, "success": True}
 
 
-class NetmikoDataExtractionForm(ServiceForm):
+class NetmikoDataExtractionForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoDataExtractionService")
     privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     variable1 = StringField()

@@ -75,7 +75,6 @@ class NetmikoDataExtractionService(Service):
 
 class NetmikoDataExtractionForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoDataExtractionService")
-    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     variable1 = StringField()
     command1 = StringField()
     regular_expression1 = StringField()
@@ -85,9 +84,7 @@ class NetmikoDataExtractionForm(ServiceForm, NetmikoForm):
     variable3 = StringField()
     command3 = StringField()
     regular_expression3 = StringField()
-    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
-    use_device_driver = BooleanField(default=True)
-    fast_cli = BooleanField()
-    timeout = IntegerField(default=10)
-    delay_factor = FloatField(default=1.0)
-    global_delay_factor = FloatField(default=1.0)
+    groups = {
+        "Main Parameters": ["command", "conversion_method"],
+        "Netmiko Parameters": NetmikoForm.group,
+    }

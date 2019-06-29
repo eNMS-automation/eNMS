@@ -15,6 +15,12 @@ class StringValidationForm(BaseForm):
     content_match_regex = BooleanField("Match content with Regular Expression")
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
+    group = [
+        "content_match",
+        "content_match_regex",
+        "negative_logic",
+        "delete_spaces_before_matching",
+    ]
 
 
 class DictValidationForm(BaseForm):
@@ -29,6 +35,7 @@ class DictValidationForm(BaseForm):
     )
     dict_match = DictField("Dictionary to Match Against")
     negative_logic = BooleanField("Negative logic")
+    group = ["validation_method", "dict_match", "negative_logic"]
 
 
 class ValidationForm(BaseForm):

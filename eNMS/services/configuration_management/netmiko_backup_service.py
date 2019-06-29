@@ -85,12 +85,9 @@ class NetmikoBackupService(Service):
 
 class NetmikoBackupForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoBackupService")
-    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     number_of_configuration = IntegerField(default=10)
     configuration_command = StringField()
-    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
-    use_device_driver = BooleanField(default=True)
-    fast_cli = BooleanField()
-    timeout = IntegerField(default=10)
-    delay_factor = FloatField(default=1.0)
-    global_delay_factor = FloatField(default=1.0)
+    groups = {
+        "Main Parameters": ["command", "conversion_method"],
+        "Netmiko Parameters": NetmikoForm.group,
+    }

@@ -60,15 +60,12 @@ class NetmikoConfigurationService(Service):
 class NetmikoConfigurationForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoConfigurationService")
     content = StringField(widget=TextArea(), render_kw={"rows": 5})
-    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
-    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
-    use_device_driver = BooleanField(default=True)
-    fast_cli = BooleanField()
-    timeout = IntegerField(default=10)
-    delay_factor = FloatField(default=1.0)
-    global_delay_factor = FloatField(default=1.0)
     commit_configuration = BooleanField()
     exit_config_mode = BooleanField()
     strip_prompt = BooleanField()
     strip_command = BooleanField()
     config_mode_command = StringField()
+    groups = {
+        "Main Parameters": ["command", "conversion_method"],
+        "Netmiko Parameters": NetmikoForm.group,
+    }

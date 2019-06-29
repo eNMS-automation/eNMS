@@ -7,7 +7,7 @@ from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.forms.services import DictValidationForm
+from eNMS.forms.services import DictValidationForm, NapalmForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -51,10 +51,8 @@ class NapalmGettersService(Service):
         }
 
 
-class NapalmGettersForm(ServiceForm, DictValidationForm):
+class NapalmGettersForm(ServiceForm, NapalmForm, DictValidationForm):
     form_type = HiddenField(default="NapalmGettersService")
-    driver = SelectField(choices=controller.NAPALM_DRIVERS)
-    use_device_driver = BooleanField(default=True)
     getters = SelectMultipleField(
         choices=(
             ("get_arp_table", "ARP table"),
@@ -80,4 +78,3 @@ class NapalmGettersForm(ServiceForm, DictValidationForm):
             ("is_alive", "Is alive"),
         )
     )
-    optional_args = DictField()

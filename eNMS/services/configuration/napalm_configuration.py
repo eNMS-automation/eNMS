@@ -8,6 +8,7 @@ from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
+from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -35,7 +36,7 @@ class NapalmConfigurationService(Service):
         return {"success": True, "result": f"Config push ({config})"}
 
 
-class NapalmConfigurationForm(ServiceForm):
+class NapalmConfigurationForm(ServiceForm, NapalmForm):
     form_type = HiddenField(default="NapalmConfigurationService")
     action = SelectField(
         choices=(
@@ -44,6 +45,3 @@ class NapalmConfigurationForm(ServiceForm):
         )
     )
     content = StringField(widget=TextArea(), render_kw={"rows": 5})
-    driver = SelectField(choices=controller.NAPALM_DRIVERS)
-    use_device_driver = BooleanField(default=True)
-    optional_args = DictField()

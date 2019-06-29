@@ -92,3 +92,16 @@ class NetmikoForm(BaseForm):
         "delay_factor",
         "global_delay_factor",
     ]
+
+
+class NapalmForm(BaseForm):
+    form_type = HiddenField(default="napalm")
+    abstract_service = True
+    driver = SelectField(choices=controller.NAPALM_DRIVERS)
+    use_device_driver = BooleanField(default=True)
+    optional_args = DictField()
+    group = [
+        "driver",
+        "use_device_driver",
+        "optional_args",
+    ]

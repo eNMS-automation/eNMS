@@ -7,6 +7,7 @@ from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
+from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -50,15 +51,16 @@ class NapalmPingService(Service):
         return {"success": "success" in ping, "result": ping}
 
 
-class NapalmPingForm(ServiceForm):
+class NapalmPingForm(ServiceForm, NapalmForm):
     form_type = HiddenField(default="NapalmPingService")
     count = IntegerField()
-    driver = SelectField(choices=controller.NAPALM_DRIVERS)
-    use_device_driver = BooleanField()
-    optional_args = DictField()
     packet_size = IntegerField()
     destination_ip = StringField()
     source_ip = StringField()
     timeout = IntegerField()
     ttl = IntegerField()
     vrf = StringField()
+    groups = {
+        "Napalm Parameters": NapalmForm.group,
+        "Ping Parameters": ["count", "packet_size", "destination_ip", "source_ip", "timeout", "ttl", "vrf"],
+    }

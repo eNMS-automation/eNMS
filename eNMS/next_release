@@ -12,4 +12,16 @@ from being defined, but that's a more complex problem.
 - could you add a dialog box to select which jobs in the exported_jobs folder to import?
 >>> Done.
 
+- Service Management could benefit from having a reverse lookup field or button:
+"Show me all of the workflows that this service instance participates in" ...
+similar to the 'Automation' button for devices.
+Ability to display the workflows for a service instance and sort by same.
+>>> This is done, but not exactly like the "Automation button" for devices, because the purpose is not the same.
+The automation button for devices lets you remove devices from one or more pools.
+However, there is no need to remove a service instance from one or more workflow
+(this is something you'd do from the workflow builder instead, where you see what the service is doing).
+Instead, I'm using this "Advanced Search" filtering to implement this feature.
+Just like you can filter devices and links per pool, you can now filter services per workflow (show all services that belong to a workflow)
+and filter workflows per service (show all workflows that contain this service).
+
 - Bug fixes.

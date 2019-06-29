@@ -21,6 +21,7 @@ from wtforms import (
 
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.forms import form_properties
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
@@ -97,5 +98,6 @@ class NetmikoValidationForm(ServiceForm, ValidationForm):
             "timeout",
             "delay_factor",
             "global_delay_factor",
-        ]
+        ],
+        "Validation Parameters": ValidationForm.group,
     }

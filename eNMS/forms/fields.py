@@ -1,4 +1,6 @@
 from flask_wtf import FlaskForm
+from json import loads
+from json.decoder import JSONDecodeError
 from typing import Any
 from wtforms import (
     BooleanField,
@@ -8,6 +10,7 @@ from wtforms import (
     StringField,
     SelectMultipleField,
 )
+from wtforms.validators import ValidationError
 
 from eNMS.database.functions import choices
 
@@ -20,6 +23,13 @@ class DictField(StringField):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         kwargs["default"] = kwargs.get("default", "{}")
         super().__init__(*args, **kwargs)
+
+    def pre_validate(self, form: FlaskForm) -> bool:
+        try:
+            loads(self.data)
+        except JSONDecodeError:
+            raise ValidationError("Invalid JSON dictionary.")
+        return True
 
 
 class DictSubstitutionField(DictField):

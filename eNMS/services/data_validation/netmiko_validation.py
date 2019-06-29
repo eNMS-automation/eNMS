@@ -11,19 +11,14 @@ from sqlalchemy import (
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import (
-    BooleanField,
-    FloatField,
     HiddenField,
-    IntegerField,
     SelectField,
     StringField,
 )
 
-from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
-from eNMS.forms import form_properties
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import ValidationForm
+from eNMS.forms.services import NetmikoForm, ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -74,7 +69,6 @@ class NetmikoValidationService(Service):
 
 class NetmikoValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
-    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     command = StringField()
     conversion_method = SelectField(
         choices=(
@@ -83,21 +77,7 @@ class NetmikoValidationForm(ServiceForm, ValidationForm):
             ("xml", "XML dictionary"),
         )
     )
-    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
-    use_device_driver = BooleanField(default=True)
-    fast_cli = BooleanField()
-    timeout = IntegerField(default=10)
-    delay_factor = FloatField(default=1.0)
-    global_delay_factor = FloatField(default=1.0)
     groups = {
-        "Netmiko Parameters": [
-            "driver",
-            "use_device_driver",
-            "privileged_mode",
-            "fast_cli",
-            "timeout",
-            "delay_factor",
-            "global_delay_factor",
-        ],
+        "Netmiko Parameters": NetmikoForm.group,
         "Validation Parameters": ValidationForm.group,
     }

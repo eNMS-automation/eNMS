@@ -1,6 +1,7 @@
-from wtforms import BooleanField, HiddenField, SelectField, StringField
+from wtforms import BooleanField, FloatField, HiddenField, IntegerField, SelectField, StringField
 from wtforms.widgets import TextArea
 
+from eNMS.controller import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import DictField
 
@@ -55,4 +56,23 @@ class ValidationForm(BaseForm):
         "dict_match",
         "negative_logic",
         "delete_spaces_before_matching",
+    ]
+
+
+class NetmikoForm(BaseForm):
+    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
+    use_device_driver = BooleanField(default=True)
+    privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
+    fast_cli = BooleanField()
+    timeout = IntegerField(default=10)
+    delay_factor = FloatField(default=1.0)
+    global_delay_factor = FloatField(default=1.0)
+    group = [
+        "driver",
+        "use_device_driver",
+        "privileged_mode",
+        "fast_cli",
+        "timeout",
+        "delay_factor",
+        "global_delay_factor",
     ]

@@ -60,6 +60,8 @@ class ValidationForm(BaseForm):
 
 
 class NetmikoForm(BaseForm):
+    form_type = HiddenField(default="netmiko")
+    abstract_service = True
     driver = SelectField(choices=controller.NETMIKO_DRIVERS)
     use_device_driver = BooleanField(default=True)
     privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")

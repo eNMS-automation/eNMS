@@ -67,7 +67,7 @@ class NetmikoValidationService(Service):
         }
 
 
-class NetmikoValidationForm(ServiceForm, ValidationForm):
+class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = StringField()
     conversion_method = SelectField(
@@ -78,6 +78,7 @@ class NetmikoValidationForm(ServiceForm, ValidationForm):
         )
     )
     groups = {
+        "Main Parameters": ["command", "conversion_method"],
         "Netmiko Parameters": NetmikoForm.group,
         "Validation Parameters": ValidationForm.group,
     }

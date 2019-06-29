@@ -253,15 +253,16 @@
         </div>
       </div>
       <div id="step-5" style="height: 100%">
+        {% set groups = form.groups or {"Default": form.service_fields} %}
         {% if form.groups %}
           <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-          {% for group_name, fields in form["groups"].items() %}
-            <div class="panel">
-              <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <h4 class="panel-title">{{ group_name }}</h4>
+          {% for group_name, fields in groups.items() %}
+            <div class="panel" style="border-color: #000">
+              <a class="panel-heading collapsed" style="background-color:#ddd;" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <h4 class="panel-title" style="color:#000;">{{ group_name }}</h4>
               </a>
-              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
+              <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body" style="background-color:#fafafa;">
                   {% for field_name in fields %}
                     {% if form[field_name].type == "BooleanField" %}
                       <fieldset>

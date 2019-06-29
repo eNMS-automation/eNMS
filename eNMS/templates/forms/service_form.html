@@ -256,7 +256,7 @@
         {% set groups = form.groups or {"Parameters": form.service_fields} %}
         <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
         {% for group_name, fields in groups.items() %}
-          {% set group_id = group_name.replace(" ", "") %}
+          {% set group_id = range(10000) | random %}
           <div class="panel" style="border-color: #000">
             <a class="panel-heading collapsed" style="background-color:#ddd;" role="tab" id="heading-{{ group_id }}" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ group_id }}" aria-expanded="false" aria-controls="collapse-{{ group_id }}">
               <h4 class="panel-title" style="color:#000;">{{ group_name }}</h4>

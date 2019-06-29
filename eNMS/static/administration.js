@@ -159,13 +159,12 @@ function migrationsImport() {
 }
 
 /**
- * Import Jobs
+ * Open Import Jobs Panel.
  */
 // eslint-disable-next-line
-function importJobs() {
+function showImportJobsPanel() {
   showPanel("import_jobs", null, () => {
     let list = document.getElementById("jobs_to_import");
-    console.log(list.length);
     jobs.forEach((item) => {
       console.log(item);
       let option = document.createElement('option');
@@ -173,11 +172,16 @@ function importJobs() {
       list.appendChild(option);
     });
   });
-  /*
+}
+
+/**
+ * Import Jobs
+ */
+// eslint-disable-next-line
+function importJobs() {
   call("/import_jobs", () => {
     alertify.notify("Import successful.", "success", 5);
   });
-  */
 }
 
 /**

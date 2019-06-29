@@ -5,6 +5,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -51,7 +52,7 @@ class NetmikoConfigurationService(Service):
 
 class NetmikoConfigurationForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoConfigurationService")
-    content = StringField(widget=TextArea(), render_kw={"rows": 5})
+    content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     commit_configuration = BooleanField()
     exit_config_mode = BooleanField()
     strip_prompt = BooleanField()

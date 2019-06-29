@@ -12,6 +12,7 @@ from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch_all
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -67,4 +68,4 @@ class LogBackupForm(ServiceForm):
     protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
     delete_folder = BooleanField()
     delete_archive = BooleanField()
-    destination_path = StringField()
+    destination_path = SubstitutionField()

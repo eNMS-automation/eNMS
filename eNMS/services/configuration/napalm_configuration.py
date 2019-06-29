@@ -6,6 +6,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -42,4 +43,4 @@ class NapalmConfigurationForm(ServiceForm, NapalmForm):
             ("load_replace_candidate", "Load replace"),
         )
     )
-    content = StringField(widget=TextArea(), render_kw={"rows": 5})
+    content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})

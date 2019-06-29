@@ -13,7 +13,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField, String
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField
+from eNMS.forms.fields import DictField, SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -107,7 +107,7 @@ class RestCallForm(ServiceForm, ValidationForm):
     call_type = SelectField(
         choices=(("GET", "GET"), ("POST", "POST"), ("PUT", "PUT"), ("DELETE", "DELETE"))
     )
-    rest_url = StringField()
+    rest_url = SubstitutionField()
     payload = DictField()
     params = DictField()
     headers = DictField()

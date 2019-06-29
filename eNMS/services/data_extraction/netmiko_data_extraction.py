@@ -5,6 +5,7 @@ from wtforms import HiddenField, StringField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -68,13 +69,13 @@ class NetmikoDataExtractionService(Service):
 class NetmikoDataExtractionForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoDataExtractionService")
     variable1 = StringField()
-    command1 = StringField()
+    command1 = SubstitutionField()
     regular_expression1 = StringField()
     variable2 = StringField()
-    command2 = StringField()
+    command2 = SubstitutionField()
     regular_expression2 = StringField()
     variable3 = StringField()
-    command3 = StringField()
+    command3 = SubstitutionField()
     regular_expression3 = StringField()
     groups = {
         "Main Parameters": [

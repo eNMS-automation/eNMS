@@ -6,6 +6,7 @@ from wtforms.validators import InputRequired
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -53,8 +54,8 @@ class NetmikoFileTransferService(Service):
 
 class NetmikoFileTransferForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoFileTransferService")
-    source_file = StringField(validators=[InputRequired()])
-    destination_file = StringField(validators=[InputRequired()])
+    source_file = SubstitutionField(validators=[InputRequired()])
+    destination_file = SubstitutionField(validators=[InputRequired()])
     file_system = StringField()
     direction = SelectField(choices=(("put", "Upload"), ("get", "Download")))
     disable_md5 = BooleanField()

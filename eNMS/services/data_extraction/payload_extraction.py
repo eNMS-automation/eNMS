@@ -9,6 +9,7 @@ from yaql import factory
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -81,14 +82,14 @@ class PayloadExtractionForm(ServiceForm):
     form_type = HiddenField(default="PayloadExtractionService")
     has_targets = BooleanField("Has Target Devices")
     variable1 = StringField()
-    query1 = StringField()
+    query1 = SubstitutionField()
     match_type1 = SelectField(choices=match_choices)
     match1 = StringField(widget=TextArea(), render_kw={"rows": 5})
     variable2 = StringField()
-    query2 = StringField()
+    query2 = SubstitutionField()
     match_type2 = SelectField(choices=match_choices)
     match2 = StringField(widget=TextArea(), render_kw={"rows": 5})
     variable3 = StringField()
-    query3 = StringField()
+    query3 = SubstitutionField()
     match_type3 = SelectField(choices=match_choices)
     match3 = StringField(widget=TextArea(), render_kw={"rows": 5})

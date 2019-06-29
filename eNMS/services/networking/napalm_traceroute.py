@@ -5,6 +5,7 @@ from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -47,8 +48,8 @@ class NapalmTracerouteService(Service):
 
 class NapalmTracerouteForm(ServiceForm, NapalmForm):
     form_type = HiddenField(default="NapalmTracerouteService")
-    destination_ip = StringField()
-    source_ip = StringField()
+    destination_ip = SubstitutionField()
+    source_ip = SubstitutionField()
     timeout = IntegerField()
     ttl = IntegerField()
     vrf = StringField()

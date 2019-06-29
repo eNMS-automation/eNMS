@@ -7,7 +7,7 @@ from yaql import factory
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField, InstanceField
+from eNMS.forms.fields import DictField, InstanceField, SubstitutionField
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -69,7 +69,7 @@ class IterationForm(ServiceForm):
         "Iteration Values for Iteration: User provided "
         "(Expect dictionary {'all' : [...]} or {'device-name' : [...], ...})"
     )
-    yaql_query_values = StringField(
+    yaql_query_values = SubstitutionField(
         "Iteration Values for Iteration: YaQL query on the payload"
     )
     variable_name = StringField("Iteration Variable Name")

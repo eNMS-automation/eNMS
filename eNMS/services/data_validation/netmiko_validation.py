@@ -89,5 +89,13 @@ class NetmikoValidationForm(ServiceForm, ValidationForm):
     delay_factor = FloatField(default=1.0)
     global_delay_factor = FloatField(default=1.0)
     groups = {
-        "group1": ["fast_cli", "timeout"]
+        "Netmiko Parameters": [
+            "driver",
+            "use_device_driver",
+            "privileged_mode",
+            "fast_cli",
+            "timeout",
+            "delay_factor",
+            "global_delay_factor",
+        ]
     }

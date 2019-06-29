@@ -253,25 +253,50 @@
         </div>
       </div>
       <div id="step-5">
-        {% for field_name in form.service_fields %} {% if form[field_name].type
-        == "BooleanField" %}
-        <fieldset>
-          <div class="item">
-            {% if form[field_name].default %} {{
-            form[field_name](id="{}-{}".format(form_type, field_name),
-            class="add-id", checked=True) }} {% else %} {{
-            form[field_name](id="{}-{}".format(form_type, field_name),
-            class="add-id") }} {% endif %}
-            <label>{{ form[field_name].label }}</label>
-          </div>
-        </fieldset>
+        {% if form.groups %}
+          {% for group_name, fields in form["groups"].items() %}
+            {% for field_name in fields %}
+              {% if form[field_name].type == "BooleanField" %}
+                <fieldset>
+                  <div class="item">
+                    {% if form[field_name].default %} {{
+                    form[field_name](id="{}-{}".format(form_type, field_name),
+                    class="add-id", checked=True) }} {% else %} {{
+                    form[field_name](id="{}-{}".format(form_type, field_name),
+                    class="add-id") }} {% endif %}
+                    <label>{{ form[field_name].label }}</label>
+                  </div>
+                </fieldset>
+                {% else %}
+                <label>{{ form[field_name].label }}</label>
+                <div class="form-group">
+                  {{ form[field_name](id="{}-{}".format(form_type, field_name),
+                  class="form-control add-id") }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
         {% else %}
-        <label>{{ form[field_name].label }}</label>
-        <div class="form-group">
-          {{ form[field_name](id="{}-{}".format(form_type, field_name),
-          class="form-control add-id") }}
-        </div>
-        {% endif %} {% endfor %}
+          {% for field_name in form.service_fields %} {% if form[field_name].type
+          == "BooleanField" %}
+          <fieldset>
+            <div class="item">
+              {% if form[field_name].default %} {{
+              form[field_name](id="{}-{}".format(form_type, field_name),
+              class="add-id", checked=True) }} {% else %} {{
+              form[field_name](id="{}-{}".format(form_type, field_name),
+              class="add-id") }} {% endif %}
+              <label>{{ form[field_name].label }}</label>
+            </div>
+          </fieldset>
+          {% else %}
+          <label>{{ form[field_name].label }}</label>
+          <div class="form-group">
+            {{ form[field_name](id="{}-{}".format(form_type, field_name),
+            class="form-control add-id") }}
+          </div>
+          {% endif %} {% endfor %}
+          {% endif %}
       </div>
     </div>
   </div>

@@ -88,3 +88,6 @@ class NetmikoValidationForm(ServiceForm, ValidationForm):
     timeout = IntegerField(default=10)
     delay_factor = FloatField(default=1.0)
     global_delay_factor = FloatField(default=1.0)
+    groups = {
+        "group1": ["fast_cli", "timeout"]
+    }

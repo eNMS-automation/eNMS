@@ -41,7 +41,7 @@ class MultipleInstanceField(SelectMultipleField):
 
 
 class SubstitutionField(StringField):
-    def __call__(self, *args: Any, **kwargs: Any) -> None:
+    def __call__(self, *args: Any, **kwargs: Any) -> str:
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
@@ -57,4 +57,5 @@ field_types = {
     SelectField: "list",
     SelectMultipleField: "multiselect",
     StringField: "str",
+    SubstitutionField: "str",
 }

@@ -6,6 +6,7 @@ from wtforms.widgets import TextArea
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -40,7 +41,7 @@ class MailNotificationService(Service):
 
 class MailNotificationForm(ServiceForm):
     form_type = HiddenField(default="MailNotificationService")
-    title = StringField()
+    title = SubstitutionField()
     sender = StringField()
     recipients = StringField()
-    body = StringField(widget=TextArea(), render_kw={"rows": 5})
+    body = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})

@@ -6,6 +6,7 @@ from yaql import factory
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -55,4 +56,4 @@ class PayloadValidationForm(ServiceForm, ValidationForm):
             ("xml", "XML dictionary"),
         )
     )
-    query = StringField()
+    query = SubstitutionField()

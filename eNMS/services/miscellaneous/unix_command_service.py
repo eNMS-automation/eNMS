@@ -5,6 +5,7 @@ from wtforms import HiddenField, StringField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -44,4 +45,4 @@ class UnixCommandService(Service):
 
 class UnixCommandForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="UnixCommandService")
-    command = StringField()
+    command = SubstitutionField()

@@ -101,6 +101,7 @@ class Job(AbstractBase):
     shape = Column(String(SMALL_STRING_LENGTH), default="box")
     size = Column(Integer, default=40)
     color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
+    payload = Column(MutableDict.as_mutable(PickleType), default={})
 
     @hybrid_property
     def status(self) -> str:

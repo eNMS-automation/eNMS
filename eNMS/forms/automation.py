@@ -3,7 +3,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import MultipleInstanceField
+from eNMS.forms.fields import DictField, MultipleInstanceField
 
 
 class DeviceAutomationForm(BaseForm):
@@ -61,6 +61,7 @@ class JobForm(BaseForm):
     )
     size = IntegerField("Size", default=40)
     color = StringField("Color", default="#D2E5FF")
+    payload = DictField()
 
     def validate(self) -> bool:
         if not super().validate():
@@ -72,7 +73,7 @@ class JobForm(BaseForm):
             and not controller.mail_recipients
         ):
             self.mail_recipient.errors.append(
-                "Please add at least one recipient" " for the mail notification."
+                "Please add at least one recipient for the mail notification."
             )
             return False
         return True

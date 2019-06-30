@@ -203,10 +203,12 @@ function fCall(url, form, callback) {
  */
 function serializeForm(form) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
-  let result = { pools: [] };
+  let result = {};
   data.forEach((property) => {
-    if (property.name == "pools") {
-      result.pools.push(property.value);
+    console.log(property)
+    if (["pools", "services", "workflows"].includes(property.name)) {
+      if (!(property.name in result)) result[property.name] = [];
+      result[property.name].push(property.value);
     } else {
       result[property.name] = property.value;
     }

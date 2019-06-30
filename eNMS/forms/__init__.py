@@ -77,9 +77,9 @@ def filtering_form_generator() -> None:
         if table in ("device", "link", "configuration"):
             kwargs["pools"] = MultipleInstanceField("Pools", instance_type="Pool")
         if table == "service":
-            kwargs["workflows"] = InstanceField("Workflows", instance_type="Workflow")
+            kwargs["workflows"] = MultipleInstanceField("Workflows", instance_type="Workflow")
         if table == "workflow":
-            kwargs["services"] = InstanceField("Services", instance_type="Service")
+            kwargs["services"] = MultipleInstanceField("Services", instance_type="Service")
         type(
             f"{table.capitalize()}FilteringForm",
             (BaseForm,),

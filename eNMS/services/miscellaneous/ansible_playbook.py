@@ -75,9 +75,12 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="AnsiblePlaybookService")
     has_targets = BooleanField("Has Target Devices")
     playbook_path = SubstitutionField()
-    arguments = SubstitutionField()
-    pass_device_properties = BooleanField()
-    options = DictField()
+    arguments = SubstitutionField("Arguments (Ansible command line options)")
+    pass_device_properties = BooleanField(
+        "Pass Device Inventory Properties (to be used "
+        "in the playbook as {{name}} or {{ip_address}})"
+    )
+    options = DictField("Options (passed to ansible as -e extra args)")
     conversion_method = SelectField(
         choices=(
             ("text", "Text"),

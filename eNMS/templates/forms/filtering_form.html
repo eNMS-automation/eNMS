@@ -6,6 +6,10 @@
 >
   <div class="modal-body">
     {{ form.csrf_token() }} {{ form.form_type() }}
+    <label>Match Condition</label>
+    <div class="form-group">
+      {{ form.operator(id="operator", class="form-control required") }}
+    </div>
     <table
       class="table table-striped table-bordered dt-responsive nowrap"
       cellspacing="0"

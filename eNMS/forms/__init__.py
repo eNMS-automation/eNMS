@@ -91,6 +91,13 @@ def filtering_form_generator() -> None:
                 "template": "filtering",
                 "properties": list(kwargs) + properties,
                 "form_type": HiddenField(default=f"{table}_filtering"),
+                "operator": SelectField(
+                    "Match Condition",
+                    choices=(
+                        ("all", "Match if all properties match"),
+                        ("any", "Match if any property matches"),
+                    ),
+                ),
                 **{
                     **{property: StringField() for property in properties},
                     **{

@@ -33,4 +33,6 @@ and filter workflows per services (show all workflows that contain these service
 - a) provide a new checkbox option: 'include result link in summary' (we can then decide to remove the link for some reports that other teams want to see)
 >>> Done.
 
+- Advanced search improvement: you can now choose between: all properties must match / any property must match (like for pools).
+
 - Bug fixes.

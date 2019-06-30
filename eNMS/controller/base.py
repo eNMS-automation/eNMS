@@ -21,7 +21,7 @@ from pathlib import Path
 from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, List, Optional, Set, Union
@@ -397,6 +397,7 @@ class BaseController:
     def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
         model = models.get(table, models["Device"])
         properties = table_properties[table]
+        operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
         try:
             order_property = properties[int(kwargs["order[0][column]"])]
         except IndexError:
@@ -413,10 +414,10 @@ class BaseController:
             elif filter == "inclusion" or DIALECT == "sqlite":
                 constraint = getattr(model, property).contains(value)
             else:
-                operator = "regexp" if DIALECT == "mysql" else "~"
-                constraint = getattr(model, property).op(operator)(value)
+                regex_operator = "regexp" if DIALECT == "mysql" else "~"
+                constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
-        result = Session.query(model).filter(and_(*constraints)).order_by(order)
+        result = Session.query(model).filter(operator(*constraints)).order_by(order)
         if table in ("device", "link", "configuration"):
             pools = [int(id) for id in kwargs.getlist("form[pools][]")]
             if pools:

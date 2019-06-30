@@ -41,6 +41,7 @@ class JobForm(BaseForm):
         ),
     )
     notification_header = StringField(widget=TextArea(), render_kw={"rows": 5})
+    include_link_in_summary = BooleanField("Include Result Link in Summary")
     display_only_failed_nodes = BooleanField("Display only Failed Devices")
     mail_recipient = StringField("Mail Recipients (separated by comma)")
     number_of_retries = IntegerField("Number of retries", default=0)

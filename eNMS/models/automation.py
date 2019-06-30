@@ -96,6 +96,7 @@ class Job(AbstractBase):
     )
     notification_header = Column(Text(LARGE_STRING_LENGTH), default="")
     display_only_failed_nodes = Column(Boolean, default=True)
+    include_link_in_summary = Column(Boolean, default=True)
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
     logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])
     shape = Column(String(SMALL_STRING_LENGTH), default="box")
@@ -147,10 +148,11 @@ class Job(AbstractBase):
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]
         notification.extend(self.job_notification(results))
-        notification.append(
-            f"Results: {controller.enms_server_addr}/view_job_results"
-            f"/{self.id}/{time.replace(' ', '$')}"
-        )
+        if self.include_link_in_summary:
+            notification.append(
+                f"Results: {controller.enms_server_addr}/view_job_results"
+                f"/{self.id}/{time.replace(' ', '$')}"
+            )
         fetch("Job", name=self.send_notification_method).run(
             {
                 "job": self.get_properties(),

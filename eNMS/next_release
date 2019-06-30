@@ -21,7 +21,7 @@ The automation button for devices lets you remove devices from one or more pools
 However, there is no need to remove a service instance from one or more workflow
 (this is something you'd do from the workflow builder instead, where you see what the service is doing).
 Instead, I'm using this "Advanced Search" filtering to implement this feature.
-Just like you can filter devices and links per pool, you can now filter services per workflow (show all services that belong to a workflow)
-and filter workflows per service (show all workflows that contain this service).
+Just like you can filter devices and links per pool, you can now filter services per workflows (show all services that belong to one or more workflows)
+and filter workflows per services (show all workflows that contain these services).
 
 - Bug fixes.

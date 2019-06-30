@@ -155,7 +155,6 @@ function showMigrationPanel() {
   showPanel("database_migration", null, () => {
     let list = document.getElementById("versions");
     folders.forEach((item) => {
-      console.log(item);
       let option = document.createElement('option');
       option.textContent = option.value = item;   
       list.appendChild(option);
@@ -182,7 +181,6 @@ function showImportJobsPanel() {
   showPanel("import_jobs", null, () => {
     let list = document.getElementById("jobs_to_import");
     jobs.forEach((item) => {
-      console.log(item);
       let option = document.createElement('option');
       option.textContent = option.value = item;   
       list.appendChild(option);

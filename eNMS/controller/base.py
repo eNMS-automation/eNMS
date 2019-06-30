@@ -174,6 +174,7 @@ class BaseController:
         "save_pool_objects",
         "save_positions",
         "scan_cluster",
+        "scan_playbook_folder",
         "scheduler",
         "task_action",
         "topology_import",

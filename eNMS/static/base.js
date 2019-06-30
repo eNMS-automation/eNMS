@@ -417,9 +417,11 @@ function showTypePanel(type, id, duplicate) {
         panel.setHeaderTitle(`Create a New ${type}`);
       }
       loadScript(`../static/services/${type}.js`).then(() => {
-        
-      }, () => {
-        console.log('fail to load script');
+        try {
+          job();
+        } catch (e) {
+          alertify.notify("Failed to load script", "error", 5);
+        }
       });
     },
     type,

@@ -185,3 +185,6 @@ class AutomationController(BaseController):
 
     def task_action(self, action: str, task_id: int) -> None:
         getattr(fetch("Task", id=task_id), action)()
+
+    def scan_playbook_folder(self):
+        return [1, 2, 3]

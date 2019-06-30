@@ -88,3 +88,13 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
             ("xml", "XML dictionary"),
         )
     )
+    groups = {
+        "Main Parameters": [
+            "playbook_path",
+            "arguments",
+            "pass_device_properties",
+            "options",
+            "conversion_method",
+        ],
+        "Validation Parameters": ValidationForm.group,
+    }

@@ -4,7 +4,7 @@ from os.path import split
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from typing import Optional
-from wtforms import BooleanField, HiddenField, SelectField, StringField
+from wtforms import BooleanField, HiddenField, SelectField
 from wtforms.validators import InputRequired
 
 from eNMS.database import SMALL_STRING_LENGTH

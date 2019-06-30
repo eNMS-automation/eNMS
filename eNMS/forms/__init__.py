@@ -7,7 +7,7 @@ from wtforms import HiddenField, SelectField, StringField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
-from eNMS.forms.fields import field_types, InstanceField, MultipleInstanceField
+from eNMS.forms.fields import field_types, MultipleInstanceField
 from eNMS.models import property_types
 from eNMS.properties import field_conversion, property_names
 from eNMS.properties.table import filtering_properties

@@ -2,7 +2,7 @@ from json import dumps
 from requests import post
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from typing import Optional
-from wtforms import HiddenField, StringField
+from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller

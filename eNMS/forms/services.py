@@ -1,11 +1,4 @@
-from wtforms import (
-    BooleanField,
-    FloatField,
-    HiddenField,
-    IntegerField,
-    SelectField,
-    StringField,
-)
+from wtforms import BooleanField, FloatField, HiddenField, IntegerField, SelectField
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller

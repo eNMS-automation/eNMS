@@ -5,7 +5,9 @@ call: false
 createPanel: false
 fCall: false
 folders: false
+jobs: false
 page: false
+showPanel: false
 table: false
 updateProperty: false
 */
@@ -155,8 +157,8 @@ function showMigrationPanel() {
   showPanel("database_migration", null, () => {
     let list = document.getElementById("versions");
     folders.forEach((item) => {
-      let option = document.createElement('option');
-      option.textContent = option.value = item;   
+      let option = document.createElement("option");
+      option.textContent = option.value = item;
       list.appendChild(option);
     });
   });
@@ -181,8 +183,8 @@ function showImportJobsPanel() {
   showPanel("import_jobs", null, () => {
     let list = document.getElementById("jobs_to_import");
     jobs.forEach((item) => {
-      let option = document.createElement('option');
-      option.textContent = option.value = item;   
+      let option = document.createElement("option");
+      option.textContent = option.value = item;
       list.appendChild(option);
     });
   });

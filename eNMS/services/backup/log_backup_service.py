@@ -6,7 +6,7 @@ from shutil import rmtree
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from tarfile import open as open_tar
 from typing import Optional
-from wtforms import BooleanField, HiddenField, SelectField, StringField
+from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH

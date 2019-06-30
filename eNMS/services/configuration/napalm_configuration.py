@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import HiddenField, SelectField, StringField
+from wtforms import HiddenField, SelectField
 from wtforms.widgets import TextArea
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH

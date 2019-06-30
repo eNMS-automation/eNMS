@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String,
 from sqlalchemy.ext.mutable import MutableDict
 from subprocess import check_output
 from typing import Optional
-from wtforms import BooleanField, HiddenField, SelectField, StringField
+from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm

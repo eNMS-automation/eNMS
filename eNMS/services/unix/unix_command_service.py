@@ -1,7 +1,7 @@
 from subprocess import check_output
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from typing import Optional
-from wtforms import HiddenField, StringField
+from wtforms import HiddenField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm

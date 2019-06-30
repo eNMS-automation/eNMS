@@ -1,7 +1,7 @@
 from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.database.functions import fetch, fetch_all
+from eNMS.database.functions import fetch_all
 
 from tests.conftest import check_pages
 
@@ -106,9 +106,3 @@ def test_base_services(user_client: FlaskClient) -> None:
     user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
     assert len(fetch_all("AnsiblePlaybookService")) == 1
     assert len(fetch_all("Service")) == number_of_services + 4
-
-
-@check_pages("table/workflow")
-def test_yaql_test_worflow(user_client: FlaskClient) -> None:
-    workflow = fetch("Workflow", name="YaQL_test_worflow")
-    assert workflow.run()[0]["success"]

@@ -39,3 +39,9 @@ def test_payload_transfer_workflow(user_client: FlaskClient) -> None:
 def test_workflow_of_workflows(user_client: FlaskClient) -> None:
     workflow = fetch("Workflow", name="Workflow_of_workflows")
     assert workflow.run()[0]["success"]
+
+
+@check_pages("table/workflow")
+def test_yaql_test_worflow(user_client: FlaskClient) -> None:
+    workflow = fetch("Workflow", name="YaQL_test_worflow")
+    assert workflow.run()[0]["success"]

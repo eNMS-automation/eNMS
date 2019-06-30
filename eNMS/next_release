@@ -41,4 +41,7 @@ load the service creation panel for an ansible service, the "playbook path" fiel
 YaML (both .yml and .yaml) files in that directory.
 By default, if PLAYBOOK_PATH is not provided, eNMS will search in "eNMS/playbooks"
 
+- New Custom Service Front End mechanism:
+custom javascript can be dynamically loaded when a service creation form is opened.
+
 - Bug fixes.

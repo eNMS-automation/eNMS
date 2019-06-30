@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, make_response, render_template
 from flask_assets import Bundle
-from flask_cli import FlaskCLI
 from flask.wrappers import Request, Response
 from pathlib import Path
 from sqlalchemy.orm import configure_mappers
@@ -24,7 +23,6 @@ def register_modules(app: Flask) -> None:
     app.register_blueprint(blueprint)
     assets.init_app(app)
     csrf.init_app(app)
-    FlaskCLI(app)
     login_manager.init_app(app)
     controller.init_app(app)
 

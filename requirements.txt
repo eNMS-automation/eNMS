@@ -3,7 +3,6 @@ dicttoxml
 fabric
 flask
 flask_assets
-flask_cli
 flask_httpauth
 flask_login
 flask-restful

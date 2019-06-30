@@ -35,4 +35,10 @@ and filter workflows per services (show all workflows that contain these service
 
 - Advanced search improvement: you can now choose between: all properties must match / any property must match (like for pools).
 
+- New environment variable: PLAYBOOK_PATH 
+This tells eNMS where your ansible playbook are located. eNMS uses that location for the ansible service: when you
+load the service creation panel for an ansible service, the "playbook path" field will automatically propose all the
+YaML (both .yml and .yaml) files in that directory.
+By default, if PLAYBOOK_PATH is not provided, eNMS will search in "eNMS/playbooks"
+
 - Bug fixes.

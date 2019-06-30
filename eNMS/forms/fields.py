@@ -62,6 +62,11 @@ class SubstitutionField(StringField):
         return super().__call__(*args, **kwargs)
 
 
+class NoValidationSelectField(SelectField):
+    def pre_validate(self, form: FlaskForm) -> None:
+        pass
+
+
 class NoValidationSelectMultipleField(SelectMultipleField):
     def pre_validate(self, form: FlaskForm) -> None:
         pass
@@ -73,12 +78,13 @@ field_types = {
     DictField: "dict",
     DictSubstitutionField: "dict",
     FloatField: "float",
+    InstanceField: "object",
     IntegerField: "integer",
     MultipleInstanceField: "object-list",
-    InstanceField: "object",
+    NoValidationSelectMultipleField: "multiselect",
+    NoValidationSelectField: "list",
     SelectField: "list",
     SelectMultipleField: "multiselect",
-    NoValidationSelectMultipleField: "multiselect",
     StringField: "str",
     SubstitutionField: "str",
 }

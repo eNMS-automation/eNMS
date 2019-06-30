@@ -418,7 +418,7 @@ function showTypePanel(type, id, duplicate) {
       }
       loadScript(`../static/services/${type}.js`).then(() => {
         try {
-          job();
+          job(id);
         } catch (e) {
           alertify.notify("Failed to load script", "error", 5);
         }

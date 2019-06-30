@@ -7,7 +7,7 @@ from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField, SubstitutionField
+from eNMS.forms.fields import DictField, NoValidationSelectField, SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -74,7 +74,7 @@ class AnsiblePlaybookService(Service):
 class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="AnsiblePlaybookService")
     has_targets = BooleanField("Has Target Devices")
-    playbook_path = SubstitutionField()
+    playbook_path = NoValidationSelectField("Playbook Path", choices=())
     arguments = SubstitutionField("Arguments (Ansible command line options)")
     pass_device_properties = BooleanField(
         "Pass Device Inventory Properties (to be used "

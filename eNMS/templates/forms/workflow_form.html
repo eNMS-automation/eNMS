@@ -112,13 +112,18 @@
           {{ form.notification_header(id='workflow-notification_header',
           class="form-control add-id") }}
         </div>
-        <label
-          ><label for="include_link_in_summary">Include Result Link in Summary</label></label
-        >
-        <div class="form-group">
-          {{ form.include_link_in_summary(id='workflow-include_link_in_summary',
-          class="form-control add-id") }}
-        </div>
+        <fieldset>
+          <div class="item">
+            <input
+              id="workflow-include_link_in_summary"
+              name="include_link_in_summary"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Include Result Link in Summary</label>
+          </div>
+        </fieldset>
         <label
           ><label for="mail_recipient"
             >Mail Recipients (separated by comma)</label

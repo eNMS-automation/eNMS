@@ -422,7 +422,7 @@ class Service(Job):
 
     def get_credentials(self, device: "Device") -> Tuple[str, str]:
         return (
-            (self.creator.name, self.creator.password)
+            controller.get_user_credentials()
             if self.credentials == "user"
             else (device.username, device.password)
         )

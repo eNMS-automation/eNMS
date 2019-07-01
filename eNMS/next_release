@@ -44,4 +44,20 @@ By default, if PLAYBOOK_PATH is not provided, eNMS will search in "eNMS/playbook
 - New Custom Service Front End mechanism:
 custom javascript can be dynamically loaded when a service creation form is opened.
 
+- Netmiko Validation - error handling for illegal option combinations.
+>>> I added an error if the conversion method is set to text but the validation is set to dict, or vice-versa.
+This is the only illegal combination I can think of.
+I cannot forbid to leave the "text match" (resp "dict match") empty (resp empty dict), because in the netmiko validation,
+the user might want to have no validation at all for example (just retrieve the output).
+Similarly, I don't want to forbid having validation set to "text", and a non-empty dict in the "dict match" field:
+the user might be testing different things, switching between "no conversion" and "text conversion", that kind of thing.
+
+- Rest Call Service should give better error if Wrong password or No password is used.
+>>> When I detect a 401 code, I now add an explicit "error" key in the result that says "Wrong credentials supplied.".
+
+- 401 response with no body to rest call service causes excpetion, should give error 'Authorization Failed"
+I wasn't able to reproduce this. I changed eNMS REST API to return 401 instead of 403 when the credentials is wrong, 
+and I tried having it return an empty response, but I couldn't get the REST service to fail with an exception.
+I would need access to the API of yours that causes an exception to add a fix.
+
 - Bug fixes.

@@ -92,7 +92,7 @@ def configure_authentication() -> None:
 
     @auth.error_handler
     def unauthorized() -> Response:
-        return make_response(jsonify({"message": "Unauthorized access"}), 403)
+        return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
 def create_app(path: Path, config: str) -> Flask:

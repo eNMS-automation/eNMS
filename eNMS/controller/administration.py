@@ -1,5 +1,6 @@
 from copy import deepcopy
 from datetime import datetime
+from flask_login import current_user
 from ipaddress import IPv4Network
 from json import loads
 from logging import info
@@ -58,6 +59,9 @@ class AdministrationController(BaseController):
                 user = factory("User", **{"name": name, "password": password})
         Session.commit()
         return user
+
+    def get_user_credentials(self):
+        return (current_user.name, current_user.password)
 
     def database_deletion(self, **kwargs: Any) -> None:
         delete_all(*kwargs["deletion_types"])

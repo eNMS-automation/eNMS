@@ -79,11 +79,14 @@ class RestCallService(Service):
                 **kwargs,
             )
         if response.status_code not in range(200, 300):
-            return {
+            result = {
                 "success": False,
                 "response_code": response.status_code,
                 "response": response.text,
             }
+            if response.status_code == 401:
+                result["error"] = "Wrong credentials supplied."
+            return result
         result = self.convert_result(response.text)
         match = (
             self.sub(self.content_match, locals())

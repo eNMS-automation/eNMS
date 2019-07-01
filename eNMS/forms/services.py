@@ -87,7 +87,6 @@ class ValidationForm(BaseForm):
                 f" and the validation method to '{self.validation_method.data}' :"
                 " these do not match."
             )
-        print(valid_form, conversion_validation_mismatch)
         return valid_form and not conversion_validation_mismatch
 
 

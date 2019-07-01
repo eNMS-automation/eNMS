@@ -142,8 +142,12 @@ class InventoryController(BaseController):
                 **{
                     "name": device["hostname"],
                     "ip_address": device["ip"] or device["hostname"],
-                    "longitude": 0.0,
-                    "latitude": 0.0,
+                    "model": device["hardware"],
+                    "operating_system": device["os"],
+                    "os_version": device["version"],
+                    "location": device["location"],
+                    "longitude": device["lng"],
+                    "latitude": device["lat"],
                 },
             )
 

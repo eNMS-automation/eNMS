@@ -64,6 +64,7 @@ class ValidationForm(BaseForm):
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
     group = [
+        "conversion_method",
         "validation_method",
         "content_match",
         "content_match_regex",
@@ -71,6 +72,23 @@ class ValidationForm(BaseForm):
         "negative_logic",
         "delete_spaces_before_matching",
     ]
+
+    def validate(self) -> bool:
+        valid_form = super().validate()
+        conversion_validation_mismatch = (
+            self.conversion_method.data == "text"
+            and self.validation_method.data != "text"
+            or self.conversion_method.data != "text"
+            and self.validation_method.data == "text"
+        )
+        if conversion_validation_mismatch:
+            self.conversion_method.errors.append(
+                f"The conversion method is set to '{self.conversion_method.data}'"
+                f" and the validation method to '{self.validation_method.data}' :"
+                " these do not match."
+            )
+        print(valid_form, conversion_validation_mismatch)
+        return valid_form and not conversion_validation_mismatch
 
 
 class NetmikoForm(BaseForm):

@@ -15,7 +15,7 @@ from wtforms import HiddenField, SelectField, StringField
 from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import NetmikoForm, StringValidationForm
+from eNMS.forms.services import NetmikoForm, ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -78,7 +78,7 @@ class NetmikoPromptsService(Service):
         }
 
 
-class NetmikoPromptsForm(ServiceForm, NetmikoForm, StringValidationForm):
+class NetmikoPromptsForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoPromptsService")
     command = SubstitutionField()
     confirmation1 = StringField()
@@ -87,13 +87,6 @@ class NetmikoPromptsForm(ServiceForm, NetmikoForm, StringValidationForm):
     response2 = StringField()
     confirmation3 = StringField()
     response3 = StringField()
-    conversion_method = SelectField(
-        choices=(
-            ("text", "Text"),
-            ("json", "Json dictionary"),
-            ("xml", "XML dictionary"),
-        )
-    )
     groups = {
         "Main Parameters": [
             "command",
@@ -103,8 +96,7 @@ class NetmikoPromptsForm(ServiceForm, NetmikoForm, StringValidationForm):
             "response2",
             "confirmation3",
             "response3",
-            "conversion_method",
         ],
         "Netmiko Parameters": NetmikoForm.group,
-        "String Validation Parameters": StringValidationForm.group,
+        "String Validation Parameters": ValidationForm.group,
     }

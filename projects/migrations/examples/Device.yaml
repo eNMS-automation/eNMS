@@ -67,24 +67,7 @@
   type: Device
   username: admin
   vendor: Arista
-- current_configuration: "\nstartup: ! Command: show startup-config\n! Startup-config\
-    \ last modified at  Thu Jun 27 07:29:03 2019 by admin\n! device: localhost (vEOS,\
-    \ EOS-4.21.1.1F)\n!\n! boot system flash:/vEOS-lab.swi\n!\ntransceiver qsfp default-mode\
-    \ 4x10G\n!\nspanning-tree mode mstp\n!\nno aaa root\n!\nusername admin role network-admin\
-    \ secret sha512 $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-    !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n \
-    \  ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
-    !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n!\n\
-    management api http-commands\n   no shutdown\n!\nend\n\nrunning: ! Command: show\
-    \ running-config\n! device: localhost (vEOS, EOS-4.21.1.1F)\n!\n! boot system\
-    \ flash:/vEOS-lab.swi\n!\ntransceiver qsfp default-mode 4x10G\n!\nspanning-tree\
-    \ mode mstp\n!\nno aaa root\n!\nusername admin role network-admin secret sha512\
-    \ $6$TdKvpqqBZzkdqicX$y7jjIlZ5fKfsRSf7Dnu4.ib.csw6wge2B8JOhnX9GaMg0Qyc8utC9SZP3fM0IFvnks8GOu/rWNS.KHeHUPiZ60\n\
-    !\ninterface Loopback11\n   ip address 1.1.1.1/32\n!\ninterface Loopback15\n \
-    \  ip address 2.2.2.2/32\n!\ninterface Loopback16\n   ip address 3.3.3.3/32\n\
-    !\ninterface Management1\n   ip address 192.168.105.5/24\n!\nno ip routing\n!\n\
-    management api http-commands\n   no shutdown\n!\nend\n\ncandidate: "
-  description: Washington
+- description: Washington
   hidden: false
   icon: router
   ip_address: 192.168.105.5

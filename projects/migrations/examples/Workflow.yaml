@@ -16,7 +16,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-01 10:06:52.293636'
+  last_modified: '2019-07-01 17:22:47.260487'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -58,7 +58,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-01 10:09:05.676996'
+  last_modified: '2019-07-01 17:22:47.391222'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -102,7 +102,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-01 10:06:52.554226'
+  last_modified: '2019-07-01 17:22:47.511189'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -149,7 +149,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-01 10:06:52.648119'
+  last_modified: '2019-07-01 17:22:47.608961'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -194,7 +194,7 @@
   - add_devices_to_payload
   - Iteration_service_simple
   - Iteration_service_yaql
-  last_modified: '2019-07-01 10:06:52.760710'
+  last_modified: '2019-07-01 17:22:47.724259'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -237,7 +237,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-01 10:06:52.858404'
+  last_modified: '2019-07-01 17:22:47.833543'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -279,7 +279,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-01 10:06:52.958757'
+  last_modified: '2019-07-01 17:22:47.973915'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''

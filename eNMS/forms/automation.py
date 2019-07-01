@@ -65,19 +65,18 @@ class JobForm(BaseForm):
     payload = DictField()
 
     def validate(self) -> bool:
-        if not super().validate():
-            return False
-        if (
+        valid_form = super().validate()
+        no_recipient_error = (
             self.send_notification.data
             and self.send_notification_method.data == "mail_feedback_notification"
             and not self.mail_recipient.data
             and not controller.mail_recipients
-        ):
+        )
+        if no_recipient_error:
             self.mail_recipient.errors.append(
                 "Please add at least one recipient for the mail notification."
             )
-            return False
-        return True
+        return valid_form and not no_recipient_error
 
 
 class ServiceForm(JobForm):

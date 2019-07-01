@@ -81,20 +81,12 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
         "in the playbook as {{name}} or {{ip_address}})"
     )
     options = DictField("Options (passed to ansible as -e extra args)")
-    conversion_method = SelectField(
-        choices=(
-            ("text", "Text"),
-            ("json", "Json dictionary"),
-            ("xml", "XML dictionary"),
-        )
-    )
     groups = {
         "Main Parameters": [
             "playbook_path",
             "arguments",
             "pass_device_properties",
             "options",
-            "conversion_method",
         ],
         "Validation Parameters": ValidationForm.group,
     }

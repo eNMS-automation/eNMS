@@ -4,7 +4,7 @@ from requests.auth import HTTPBasicAuth
 
 from eNMS.database.functions import fetch_all
 
-from tests.test_base import check_pages
+from tests.conftest import check_pages
 
 
 @check_pages("table/device")

@@ -2,7 +2,7 @@ from flask.testing import FlaskClient
 
 from eNMS.database.functions import fetch
 
-from tests.test_base import check_pages
+from tests.conftest import check_pages
 
 
 @check_pages("table/workflow")

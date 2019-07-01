@@ -708,10 +708,10 @@ class Workflow(Job):
             for successor in successors:
                 if successor not in visited:
                     jobs.append(successor)
-                if not self.has_targets and successor == self.jobs[1]:
+                if not self.use_workflow_targets and successor == self.jobs[1]:
                     results["success"] = True
             sleep(job.waiting_time)
-        if self.has_targets:
+        if self.use_workflow_targets:
             start_devices = allowed_devices[start_job.name]
             end_devices = allowed_devices["End"]
             results["devices"] = {

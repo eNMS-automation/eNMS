@@ -5,10 +5,12 @@ csrf_token: false
 documentationUrl: false
 filteringPanel: false
 formProperties: false
+job: false
 jsPanel: false
 NProgress: false
 page: false
 panelCode: false
+Promise: false
 properties: false
 propertyTypes: false
 saveService: false
@@ -131,19 +133,32 @@ $.ajaxSetup({
 
 const loadScript = (source, beforeEl, async = true, defer = true) => {
   return new Promise((resolve, reject) => {
-    let script = document.createElement('script');
-    const prior = beforeEl || document.getElementsByTagName('script')[0];
+    let script = document.createElement("script");
+    const prior = beforeEl || document.getElementsByTagName("script")[0];
 
     script.async = async;
     script.defer = defer;
 
+    /**
+     * Open new tab at the provided URL.
+     * @param {_} _ - _.
+     * @param {boolean} isAbort - Abort.
+     */
     function onloadHander(_, isAbort) {
-      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+      if (
+        isAbort ||
+        !script.readyState ||
+        /loaded|complete/.test(script.readyState)
+      ) {
         script.onload = null;
         script.onreadystatechange = null;
         script = undefined;
 
-        if (isAbort) { reject(); } else { resolve(); }
+        if (isAbort) {
+          reject();
+        } else {
+          resolve();
+        }
       }
     }
 
@@ -153,7 +168,7 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
     script.src = source;
     prior.parentNode.insertBefore(script, prior);
   });
-}
+};
 
 /**
  * Open new tab at the provided URL.

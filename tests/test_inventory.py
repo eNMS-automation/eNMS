@@ -145,7 +145,7 @@ def test_pool_management(user_client: FlaskClient) -> None:
     assert len(p1.links) == 20
     assert len(p2.devices) == 12
     assert len(p2.links) == 4
-    assert len(fetch_all("Pool")) == 8
+    assert len(fetch_all("Pool")) == 9
     user_client.post(f"/delete_instance/pool/{p1.id}")
     user_client.post(f"/delete_instance/pool/{p2.id}")
-    assert len(fetch_all("Pool")) == 6
+    assert len(fetch_all("Pool")) == 7

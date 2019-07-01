@@ -10,7 +10,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import HiddenField, SelectField, StringField
+from wtforms import HiddenField, StringField
 
 from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm

@@ -2,7 +2,6 @@ from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
-from glob import glob
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path
@@ -188,7 +187,7 @@ class AutomationController(BaseController):
     def task_action(self, action: str, task_id: int) -> None:
         getattr(fetch("Task", id=task_id), action)()
 
-    def scan_playbook_folder(self):
+    def scan_playbook_folder(self) -> list:
         path = Path(self.playbook_path or self.path / "playbooks")
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sum(playbooks, [])

@@ -9,7 +9,7 @@ from os import listdir, makedirs, scandir
 from os.path import exists
 from pathlib import Path
 from requests import get as http_get
-from typing import Any, Union
+from typing import Any, Tuple, Union
 from yaml import dump, load, BaseLoader
 
 from eNMS.controller.base import BaseController
@@ -60,7 +60,7 @@ class AdministrationController(BaseController):
         Session.commit()
         return user
 
-    def get_user_credentials(self):
+    def get_user_credentials(self) -> Tuple[str, str]:
         return (current_user.name, current_user.password)
 
     def database_deletion(self, **kwargs: Any) -> None:

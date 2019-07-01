@@ -49,11 +49,4 @@ class PayloadValidationService(Service):
 
 class PayloadValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="PayloadValidationService")
-    conversion_method = SelectField(
-        choices=(
-            ("text", "Text"),
-            ("json", "Json dictionary"),
-            ("xml", "XML dictionary"),
-        )
-    )
     query = SubstitutionField()

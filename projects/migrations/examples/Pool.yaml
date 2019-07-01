@@ -60,7 +60,6 @@
   - Oakland
   - Denver
   - Aserver
-  jobs: []
   latitude: 0.0
   link_color: ''
   link_color_match: inclusion
@@ -177,7 +176,6 @@
   - Oakland
   - Denver
   - Aserver
-  jobs: []
   latitude: 0.0
   link_color: ''
   link_color_match: inclusion
@@ -238,7 +236,6 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  jobs: []
   latitude: 0.0
   link_color: ''
   link_color_match: inclusion
@@ -341,7 +338,6 @@
   - Orange
   - Denver
   - Aserver
-  jobs: []
   latitude: 37.77
   link_color: ''
   link_color_match: inclusion
@@ -448,7 +444,6 @@
   - SanFrancisco
   - Orange
   - Oakland
-  jobs: []
   latitude: 40.71
   link_color: ''
   link_color_match: inclusion
@@ -549,7 +544,6 @@
   - Cambridge
   - Minneapolis
   - SanFrancisco
-  jobs: []
   latitude: 41.87
   link_color: ''
   link_color_match: inclusion
@@ -601,6 +595,67 @@
   longitude: -87.62
   name: Datacenter Chicago
   never_update: false
+  operator: all
+  tasks: []
+  users: []
+- description: ''
+  device_current_configuration: ''
+  device_current_configuration_match: inclusion
+  device_description: ''
+  device_description_match: inclusion
+  device_icon: ''
+  device_icon_match: inclusion
+  device_ip_address: ''
+  device_ip_address_match: inclusion
+  device_latitude: ''
+  device_latitude_match: inclusion
+  device_location: ''
+  device_location_match: inclusion
+  device_longitude: ''
+  device_longitude_match: inclusion
+  device_model: ''
+  device_model_match: inclusion
+  device_name: ''
+  device_name_match: inclusion
+  device_napalm_driver: ''
+  device_napalm_driver_match: inclusion
+  device_netmiko_driver: ''
+  device_netmiko_driver_match: inclusion
+  device_operating_system: ''
+  device_operating_system_match: inclusion
+  device_os_version: ''
+  device_os_version_match: inclusion
+  device_port: ''
+  device_port_match: inclusion
+  device_subtype: ''
+  device_subtype_match: inclusion
+  device_vendor: ''
+  device_vendor_match: inclusion
+  devices:
+  - Washington
+  latitude: 0.0
+  link_color: ''
+  link_color_match: inclusion
+  link_description: ''
+  link_description_match: inclusion
+  link_destination_name: ''
+  link_destination_name_match: inclusion
+  link_location: ''
+  link_location_match: inclusion
+  link_model: ''
+  link_model_match: inclusion
+  link_name: ''
+  link_name_match: inclusion
+  link_source_name: ''
+  link_source_name_match: inclusion
+  link_subtype: ''
+  link_subtype_match: inclusion
+  link_vendor: ''
+  link_vendor_match: inclusion
+  links: []
+  longitude: 0.0
+  name: Washington
+  never_update: true
   operator: all
   tasks: []
   users: []

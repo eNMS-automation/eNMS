@@ -41,6 +41,13 @@ class DictValidationForm(BaseForm):
 class ValidationForm(BaseForm):
     form_type = HiddenField(default="service_validation")
     abstract_service = True
+    conversion_method = SelectField(
+        choices=(
+            ("text", "Text"),
+            ("json", "Json dictionary"),
+            ("xml", "XML dictionary"),
+        )
+    )
     validation_method = SelectField(
         "Validation Method",
         choices=(

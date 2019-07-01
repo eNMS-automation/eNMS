@@ -10,18 +10,20 @@
   failed: 0
   has_targets: true
   hidden: false
+  include_link_in_summary: true
   jobs:
   - Start
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-06-27 09:40:51.659936'
+  last_modified: '2019-07-01 10:06:52.293636'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
+  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -42,13 +44,13 @@
   credentials: device
   define_devices_from_payload: false
   description: Create and delete a VRF with Netmiko
-  devices:
-  - Washington
+  devices: []
   display_only_failed_nodes: true
   events: []
   failed: 0
   has_targets: true
   hidden: false
+  include_link_in_summary: true
   jobs:
   - Start
   - End
@@ -56,14 +58,16 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-06-27 09:40:51.735593'
+  last_modified: '2019-07-01 10:09:05.676996'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
   operating_system: eos
-  pools: []
+  payload: {}
+  pools:
+  - Washington
   positions: {}
   push_to_git: false
   query_property_type: ip_address
@@ -90,6 +94,7 @@
   failed: 0
   has_targets: true
   hidden: false
+  include_link_in_summary: true
   jobs:
   - Start
   - End
@@ -97,13 +102,14 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-06-27 09:40:51.802297'
+  last_modified: '2019-07-01 10:06:52.554226'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
   operating_system: eos
+  payload: {}
   pools: []
   positions:
     Workflow_of_workflows:
@@ -134,6 +140,7 @@
   failed: 0
   has_targets: true
   hidden: false
+  include_link_in_summary: true
   jobs:
   - Start
   - End
@@ -142,13 +149,14 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-06-27 09:41:39.987978'
+  last_modified: '2019-07-01 10:06:52.648119'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
   operating_system: eos
+  payload: {}
   pools: []
   positions:
     Workflow_of_workflows:
@@ -179,19 +187,21 @@
   failed: 0
   has_targets: true
   hidden: false
+  include_link_in_summary: true
   jobs:
   - Start
   - End
   - add_devices_to_payload
   - Iteration_service_simple
   - Iteration_service_yaql
-  last_modified: '2019-06-27 09:40:51.932161'
+  last_modified: '2019-07-01 10:06:52.760710'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
   operating_system: ''
+  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -219,6 +229,7 @@
   failed: 0
   has_targets: true
   hidden: false
+  include_link_in_summary: true
   jobs:
   - Start
   - End
@@ -226,13 +237,14 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-06-27 09:40:52.001322'
+  last_modified: '2019-07-01 10:06:52.858404'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
   operating_system: ''
+  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -260,19 +272,21 @@
   failed: 0
   has_targets: true
   hidden: false
+  include_link_in_summary: true
   jobs:
   - Start
   - End
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-06-27 09:40:52.080954'
+  last_modified: '2019-07-01 10:06:52.958757'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
   operating_system: eos
+  payload: {}
   pools: []
   positions: {}
   push_to_git: false

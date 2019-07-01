@@ -117,13 +117,6 @@ class RestCallForm(ServiceForm, ValidationForm):
     password = StringField()
     pass_device_properties = BooleanField()
     options = DictField()
-    conversion_method = SelectField(
-        choices=(
-            ("text", "Text"),
-            ("json", "Json dictionary"),
-            ("xml", "XML dictionary"),
-        )
-    )
     groups = {
         "Main Parameters": [
             "call_type",
@@ -137,7 +130,6 @@ class RestCallForm(ServiceForm, ValidationForm):
             "password",
             "pass_device_properties",
             "options",
-            "conversion_method",
         ],
         "Validation Parameters": ValidationForm.group,
     }

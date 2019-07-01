@@ -26,7 +26,15 @@ dont_track_changes = [
 ]
 
 dont_migrate: Dict[str, List[str]] = {
-    "Device": ["id", "configurations", "current_configuration", "jobs", "source", "destination", "pools"],
+    "Device": [
+        "id",
+        "configurations",
+        "current_configuration",
+        "jobs",
+        "source",
+        "destination",
+        "pools",
+    ],
     "Link": ["id", "pools"],
     "Pool": ["id", "jobs", "last_modified", "object_number"],
     "Service": [

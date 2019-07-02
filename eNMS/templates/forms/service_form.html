@@ -263,6 +263,20 @@
           {{ form.credentials(id=form_type + '-credentials', class="form-control
           add-id") }}
         </div>
+        <label
+          ><label for="custom_username">Custom Username</label></label
+        >
+        <div class="form-group">
+          {{ form.custom_username(id=form_type + '-custom_username',
+          class="form-control add-id") }}
+        </div>
+        <label
+          ><label for="custom_password">Custom Password</label></label
+        >
+        <div class="form-group">
+          {{ form.custom_password(id=form_type + '-custom_password',
+          class="form-control add-id") }}
+        </div>
       </div>
       <div id="step-5" style="height: 100%">
         {% set groups = form.groups or {"Parameters": form.service_fields} %}

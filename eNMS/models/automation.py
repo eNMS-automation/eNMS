@@ -103,6 +103,8 @@ class Job(AbstractBase):
     size = Column(Integer, default=40)
     color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
     payload = Column(MutableDict.as_mutable(PickleType), default={})
+    custom_username = Column(String(SMALL_STRING_LENGTH), default="")
+    custom_password = Column(String(SMALL_STRING_LENGTH), default="")
 
     @hybrid_property
     def status(self) -> str:
@@ -425,6 +427,11 @@ class Service(Job):
             controller.get_user_credentials()
             if self.credentials == "user"
             else (device.username, device.password)
+            if self.credentials == "device"
+            else (
+                self.sub(self.custom_username, locals()),
+                self.sub(self.custom_password, locals()),
+            )
         )
 
     def netmiko_connection(self, device: "Device", parent: "Job") -> ConnectHandler:

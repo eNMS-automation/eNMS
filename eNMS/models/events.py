@@ -32,17 +32,17 @@ class Task(AbstractBase):
 
     __tablename__ = type = "Task"
     id = Column(Integer, primary_key=True)
-    aps_job_id = Column(String(SMALL_STRING_LENGTH))
+    aps_job_id = Column(String(SMALL_STRING_LENGTH), default="")
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    description = Column(String(SMALL_STRING_LENGTH))
-    creation_time = Column(String(SMALL_STRING_LENGTH))
+    description = Column(String(SMALL_STRING_LENGTH), default="")
+    creation_time = Column(String(SMALL_STRING_LENGTH), default="")
     scheduling_mode = Column(String(SMALL_STRING_LENGTH), default="standard")
     periodic = Column(Boolean)
     frequency = Column(Integer)
     frequency_unit = Column(String(SMALL_STRING_LENGTH), default="seconds")
-    start_date = Column(String(SMALL_STRING_LENGTH))
-    end_date = Column(String(SMALL_STRING_LENGTH))
-    crontab_expression = Column(String(SMALL_STRING_LENGTH))
+    start_date = Column(String(SMALL_STRING_LENGTH), default="")
+    end_date = Column(String(SMALL_STRING_LENGTH), default="")
+    crontab_expression = Column(String(SMALL_STRING_LENGTH), default="")
     is_active = Column(Boolean, default=False)
     payload = Column(MutableDict.as_mutable(PickleType), default={})
     devices = relationship(

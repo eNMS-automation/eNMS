@@ -424,31 +424,17 @@ class BaseController:
                 regex_operator = "regexp" if DIALECT == "mysql" else "~"
                 constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
-        result = Session.query(model).filter(operator(*constraints)).order_by(order)
         relation = table.capitalize() if table != "configuration" else "Device"
-        print(relation)
         for related_model, relation_properties in relationships[relation].items():
-            print(kwargs)
             relation_ids = [int(id) for id in kwargs.getlist(f"form[{related_model}][]")]
-            print(relation_ids)
-            if relation_ids:
-                result = result.filter(getattr(model, related_model).any(models[relation_properties["model"]].id.in_(relation_ids)))
-        """ if table in ("device", "link", "configuration"):
-            pools = 
-            if pools:pool
-                
-        if table == "service":
-            workflows = [int(id) for id in kwargs.getlist("form[workflows][]")]
-            if workflows:
-                result = result.filter(
-                    model.workflows.any(models["workflow"].id.in_(workflows))
-                )
-        if table == "workflow":
-            services = [int(id) for id in kwargs.getlist("form[services][]")]
-            if services:
-                result = result.filter(
-                    model.jobs.any(models["service"].id.in_(services))
-                ) """
+            if not relation_ids:
+                continue
+            if relation_properties["list"]:
+                constraint = getattr(model, related_model).any(models[relation_properties["model"]].id.in_(relation_ids))
+            else:
+                constraint = or_(getattr(model, related_model).has(id=relation_id) for relation_id in relation_ids)
+            constraints.append(constraint)
+        result = Session.query(model).filter(operator(*constraints)).order_by(order)
         try:
             return {
                 "draw": int(kwargs["draw"]),

@@ -23,6 +23,7 @@ from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
+from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, List, Optional, Set, Union
 from werkzeug.datastructures import ImmutableMultiDict
@@ -53,6 +54,7 @@ class BaseController:
     cluster_scan_subnet = environ.get("CLUSER_SCAN_SUBNET", "192.168.105.0/24")
     cluster_scan_protocol = environ.get("CLUSTER_SCAN_PROTOCOL", "http")
     cluster_scan_timeout = environ.get("CLUSTER_SCAN_TIMEOUT", 0.05)
+    custom_code_path = environ.get("CUSTOM_CODE_PATH")
     default_longitude = environ.get("DEFAULT_LONGITUDE", -96.0)
     default_latitude = environ.get("DEFAULT_LATITUDE", 33.0)
     default_zoom_level = environ.get("DEFAULT_ZOOM_LEVEL", 5)
@@ -211,6 +213,8 @@ class BaseController:
             self.init_vault_client()
         if self.use_syslog:
             self.init_syslog_server()
+        if self.custom_code_path:
+            sys_path.append(self.custom_code_path)
 
     def init_app(self, app: Flask) -> None:
         self.app = app

@@ -31,7 +31,7 @@ from yaml import BaseLoader, load
 
 from eNMS.database import DIALECT, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
-from eNMS.properties import property_names
+from eNMS.properties import private_properties, property_names
 from eNMS.properties.diagram import (
     device_diagram_properties,
     diagram_classes,
@@ -274,6 +274,9 @@ class BaseController:
             properties_table["device"].extend(list(custom_properties))
         device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
+        )
+        private_properties.extend(
+            list(p for p, v in custom_properties.items() if v["private"])
         )
         return custom_properties
 

@@ -13,7 +13,6 @@ class ProductionConfig:
     MODE = "production"
     DEBUG = False
     SECRET_KEY = environ.get("ENMS_SECRET_KEY")
-    SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
 

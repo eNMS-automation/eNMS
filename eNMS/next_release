@@ -1,0 +1,6 @@
+- New env variable: CUSTOM_CODE_PATH. Lets you define a path to a folder that contains custom code that 
+you can use in your custom services.
+
+- Advanced search: per relationship system
+
+- Bug fixes

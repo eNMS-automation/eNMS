@@ -8,10 +8,13 @@ from eNMS.properties.table import filtering_properties
 
 def filtering_form_generator() -> None:
     for table, properties in filtering_properties.items():
-        model = table.capitalize() if table != "configuration" else "Device"
-        kwargs = {}
-        for related_model, relation_properties in relationships[model].items():
-            kwargs[related_model] = MultipleInstanceField(related_model, instance_type=relation_properties["model"])
+        table_model = table.capitalize() if table != "configuration" else "Device"
+        kwargs = {
+            model: MultipleInstanceField(
+                model.capitalize(), instance_type=relation["model"]
+            )
+            for model, relation in relationships[table_model].items()
+        }
         type(
             f"{table.capitalize()}FilteringForm",
             (BaseForm,),

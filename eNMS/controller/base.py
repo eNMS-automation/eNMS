@@ -426,13 +426,20 @@ class BaseController:
             constraints.append(constraint)
         relation = table.capitalize() if table != "configuration" else "Device"
         for related_model, relation_properties in relationships[relation].items():
-            relation_ids = [int(id) for id in kwargs.getlist(f"form[{related_model}][]")]
+            relation_ids = [
+                int(id) for id in kwargs.getlist(f"form[{related_model}][]")
+            ]
             if not relation_ids:
                 continue
             if relation_properties["list"]:
-                constraint = getattr(model, related_model).any(models[relation_properties["model"]].id.in_(relation_ids))
+                constraint = getattr(model, related_model).any(
+                    models[relation_properties["model"]].id.in_(relation_ids)
+                )
             else:
-                constraint = or_(getattr(model, related_model).has(id=relation_id) for relation_id in relation_ids)
+                constraint = or_(
+                    getattr(model, related_model).has(id=relation_id)
+                    for relation_id in relation_ids
+                )
             constraints.append(constraint)
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         try:

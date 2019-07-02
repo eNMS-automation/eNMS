@@ -27,7 +27,7 @@ from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, List, Optional, Set, Union
 from werkzeug.datastructures import ImmutableMultiDict
-from yaml import BaseLoader, load
+from yaml import load
 
 from eNMS.database import DIALECT, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
@@ -272,12 +272,15 @@ class BaseController:
             object_properties.extend(list(custom_properties))
         for properties_table in table_properties, filtering_properties:
             properties_table["device"].extend(
-                list(p for p, v in custom_properties.items() if not v.get("private", False))
+                list(
+                    p
+                    for p, v in custom_properties.items()
+                    if not v.get("private", False)
+                )
             )
         device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
         )
-        print(custom_properties.items())
         private_properties.extend(
             list(p for p, v in custom_properties.items() if v.get("private", False))
         )

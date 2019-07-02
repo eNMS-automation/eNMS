@@ -3,14 +3,13 @@ from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from werkzeug.datastructures import ImmutableMultiDict
-from wtforms import HiddenField, SelectField, StringField
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
-from eNMS.forms.fields import field_types, MultipleInstanceField
+from eNMS.forms.fields import field_types
 from eNMS.models import property_types
 from eNMS.properties import field_conversion, property_names
-from eNMS.properties.table import filtering_properties
+
 
 form_actions = {}
 form_classes = {}
@@ -71,53 +70,6 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
     return data
 
 
-def filtering_form_generator() -> None:
-    for table, properties in filtering_properties.items():
-        kwargs = {}
-        if table in ("device", "link", "configuration"):
-            kwargs["pools"] = MultipleInstanceField("Pools", instance_type="Pool")
-        if table == "service":
-            kwargs["workflows"] = MultipleInstanceField(
-                "Workflows", instance_type="Workflow"
-            )
-        if table == "workflow":
-            kwargs["services"] = MultipleInstanceField(
-                "Services", instance_type="Service"
-            )
-        type(
-            f"{table.capitalize()}FilteringForm",
-            (BaseForm,),
-            {
-                "template": "filtering",
-                "properties": list(kwargs) + properties,
-                "form_type": HiddenField(default=f"{table}_filtering"),
-                "operator": SelectField(
-                    "Match Condition",
-                    choices=(
-                        ("all", "Match if all properties match"),
-                        ("any", "Match if any property matches"),
-                    ),
-                ),
-                **{
-                    **{property: StringField() for property in properties},
-                    **{
-                        f"{property}_filter": SelectField(
-                            choices=(
-                                ("inclusion", "Inclusion"),
-                                ("equality", "Equality"),
-                                ("regex", "Regular Expression"),
-                            )
-                        )
-                        for property in properties
-                    },
-                    **kwargs,
-                },
-            },
-        )
-
-
-filtering_form_generator()
-
-
 import eNMS.forms.events  # noqa: F401
+import eNMS.forms.filtering  # noqa: F401
 import eNMS.forms.inventory  # noqa: F401

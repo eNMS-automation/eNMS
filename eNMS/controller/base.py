@@ -307,6 +307,13 @@ class BaseController:
 
         self.scheduler.start()
 
+    def init_forms(self) -> None:
+
+        """ from importlib import import_module
+
+        for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
+            import_module(file) """
+
     def init_services(self) -> None:
         path_services = [self.path / "eNMS" / "services"]
         if self.custom_services_path:

@@ -70,6 +70,5 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
     return data
 
 
-import eNMS.forms.events  # noqa: F401
-import eNMS.forms.filtering  # noqa: F401
-import eNMS.forms.inventory  # noqa: F401
+""" import eNMS.forms.events  # noqa: F401
+import eNMS.forms.inventory  # noqa: F401 """

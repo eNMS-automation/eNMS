@@ -7,7 +7,7 @@ from eNMS.properties.table import filtering_properties
 
 
 def filtering_form_generator() -> None:
-    print(relationships)
+    print("tttt"*100, relationships)
     for table, properties in filtering_properties.items():
         kwargs = {}
 

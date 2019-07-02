@@ -308,11 +308,12 @@ class BaseController:
         self.scheduler.start()
 
     def init_forms(self) -> None:
-
-        """ from importlib import import_module
-
+        from sys import modules
+        
         for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
-            import_module(file) """
+            print(len(modules))
+            spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
+            spec.loader.exec_module(module_from_spec(spec))
 
     def init_services(self) -> None:
         path_services = [self.path / "eNMS" / "services"]

@@ -47,6 +47,7 @@
       const formProperties = {{ form_properties|tojson|safe }};
       const names = {{ names|tojson|safe }};
       const propertyTypes = {{ property_types|tojson|safe }};
+      const relations = {{ relations|tojson|safe }};
       let action = {};
       let csrf_token = "{{ csrf_token() }}";
     </script>

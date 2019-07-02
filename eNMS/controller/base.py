@@ -30,6 +30,7 @@ from yaml import BaseLoader, load
 
 from eNMS.database import DIALECT, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
+from eNMS.models import models, relationships
 from eNMS.properties import property_names
 from eNMS.properties.diagram import (
     device_diagram_properties,
@@ -37,7 +38,6 @@ from eNMS.properties.diagram import (
     type_to_diagram_properties,
 )
 from eNMS.properties.table import filtering_properties, table_properties
-from eNMS.models import models
 from eNMS.properties.objects import (
     device_properties,
     device_icons,
@@ -308,10 +308,7 @@ class BaseController:
         self.scheduler.start()
 
     def init_forms(self) -> None:
-        from sys import modules
-        
         for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
-            print(len(modules))
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))
 
@@ -428,10 +425,18 @@ class BaseController:
                 constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
-        if table in ("device", "link", "configuration"):
-            pools = [int(id) for id in kwargs.getlist("form[pools][]")]
-            if pools:
-                result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
+        relation = table.capitalize() if table != "configuration" else "Device"
+        print(relation)
+        for related_model, relation_properties in relationships[relation].items():
+            print(kwargs)
+            relation_ids = [int(id) for id in kwargs.getlist(f"form[{related_model}][]")]
+            print(relation_ids)
+            if relation_ids:
+                result = result.filter(getattr(model, related_model).any(models[relation_properties["model"]].id.in_(relation_ids)))
+        """ if table in ("device", "link", "configuration"):
+            pools = 
+            if pools:pool
+                
         if table == "service":
             workflows = [int(id) for id in kwargs.getlist("form[workflows][]")]
             if workflows:
@@ -443,7 +448,7 @@ class BaseController:
             if services:
                 result = result.filter(
                     model.jobs.any(models["service"].id.in_(services))
-                )
+                ) """
         try:
             return {
                 "draw": int(kwargs["draw"]),

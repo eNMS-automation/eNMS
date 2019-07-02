@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, make_response, render_template
 from flask_assets import Bundle
 from flask.wrappers import Request, Response
+from itertools import chain
 from pathlib import Path
 from sqlalchemy.orm import configure_mappers
 from typing import Any, Tuple
@@ -13,13 +14,14 @@ from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
 from eNMS.extensions import assets, auth, csrf, login_manager
+from eNMS.models import relationships
 from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.rest import configure_rest_api
 from eNMS.routes import blueprint
 
 
-def register_modules(app: Flask) -> None:
+def register_extensions(app: Flask) -> None:
     app.register_blueprint(blueprint)
     assets.init_app(app)
     csrf.init_app(app)
@@ -54,6 +56,7 @@ def configure_context_processor(app: Flask) -> None:
             "parameters": controller.config,
             "documentation_url": controller.documentation_url,
             "property_types": {k: str(v) for k, v in property_types.items()},
+            "relations": list(set(chain.from_iterable(relationships.values()))),
         }
 
 
@@ -100,7 +103,7 @@ def create_app(path: Path, config: str) -> Flask:
     app.config.from_object(config_mapper[config.capitalize()])  # type: ignore
     app.mode = app.config["MODE"]
     app.path = path
-    register_modules(app)
+    register_extensions(app)
     configure_login_manager(app)
     controller.init_services()
     configure_database(app)

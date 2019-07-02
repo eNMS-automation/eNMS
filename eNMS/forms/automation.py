@@ -75,7 +75,7 @@ class JobForm(BaseForm):
     )
     size = IntegerField("Size", default=40)
     color = StringField("Color", default="#D2E5FF")
-    payload = DictField()
+    initial_payload = DictField()
 
     def validate(self) -> bool:
         valid_form = super().validate()

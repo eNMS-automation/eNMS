@@ -146,7 +146,7 @@ class Task(AbstractBase):
                 self.job.id,
                 self.aps_job_id,
                 self.compute_targets(),
-                self.payload,
+                self.initial_payload,
             ],
         }
         if self.scheduling_mode == "cron":

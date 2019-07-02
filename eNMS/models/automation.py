@@ -102,7 +102,7 @@ class Job(AbstractBase):
     shape = Column(String(SMALL_STRING_LENGTH), default="box")
     size = Column(Integer, default=40)
     color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
-    payload = Column(MutableDict.as_mutable(PickleType), default={})
+    initial_payload = Column(MutableDict.as_mutable(PickleType), default={})
     custom_username = Column(String(SMALL_STRING_LENGTH), default="")
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
 

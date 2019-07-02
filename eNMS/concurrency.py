@@ -14,7 +14,7 @@ def threaded_job(
     task = fetch("Task", allow_none=True, creation_time=aps_job_id or "")
     job = fetch("Job", id=job_id)
     origin = fetch("Job", allow_none=True, id=origin_id)
-    payload = payload or job.payload
+    payload = payload or job.initial_payload
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
     job.run(targets=targets, payload=payload, task=task, origin=origin)

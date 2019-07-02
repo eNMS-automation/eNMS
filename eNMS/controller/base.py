@@ -264,7 +264,7 @@ class BaseController:
             custom_properties: dict = {}
         else:
             with open(filepath, "r") as properties:
-                custom_properties = load(properties, Loader=BaseLoader)
+                custom_properties = load(properties)
         property_names.update(
             {k: v["pretty_name"] for k, v in custom_properties.items()}
         )
@@ -272,13 +272,14 @@ class BaseController:
             object_properties.extend(list(custom_properties))
         for properties_table in table_properties, filtering_properties:
             properties_table["device"].extend(
-                list(p for p, v in custom_properties.items() if not v["private"])
+                list(p for p, v in custom_properties.items() if not v.get("private", False))
             )
         device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
         )
+        print(custom_properties.items())
         private_properties.extend(
-            list(p for p, v in custom_properties.items() if v["private"])
+            list(p for p, v in custom_properties.items() if v.get("private", False))
         )
         return custom_properties
 

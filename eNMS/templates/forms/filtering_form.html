@@ -27,14 +27,18 @@
         "{}-{}".format(form_type, property) %}
         <tr>
           {% if form[property].type == "StringField" %}
-          <td>{{ names.get(property, property.replace("_", " ").capitalize() ) }}</td>
+          <td>
+            {{ names.get(property, property.replace("_", " ").capitalize() ) }}
+          </td>
           <td>{{ form[property](id=id, class="form-control") }}</td>
           <td>
             {{ form[property + "_filter"](id=id + "_filter",
             class="form-control") }}
           </td>
           {% else %}
-          <td>{{ names.get(property, property.replace("_", " ").capitalize() ) }}</td>
+          <td>
+            {{ names.get(property, property.replace("_", " ").capitalize() ) }}
+          </td>
           <td colspan="2">{{ form[property](id=id, class="form-control") }}</td>
           {% endif %}
         </tr>

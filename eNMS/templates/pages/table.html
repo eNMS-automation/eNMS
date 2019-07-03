@@ -60,7 +60,9 @@ stylesheets %} {% block content %} {% if type == "pool" %}
             <thead>
               <tr>
                 {% for field in properties + fixed_columns %}
-                <th>{{ names.get(field, field.replace("_", " ").capitalize() ) }}</th>
+                <th>
+                  {{ names.get(field, field.replace("_", " ").capitalize() ) }}
+                </th>
                 {% endfor %}
               </tr>
               {% for property in properties %}

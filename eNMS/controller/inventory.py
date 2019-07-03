@@ -131,8 +131,8 @@ class InventoryController(BaseController):
                     "location": str(device.site),
                     "vendor": str(device.device_type.manufacturer),
                     "operating_system": str(device.platform),
-                    "longitude": str(nb.dcim.sites.get(name = device.site).longitude),
-                    "latitude": str(nb.dcim.sites.get(name = device.site).latitude),
+                    "longitude": str(nb.dcim.sites.get(name=device.site).longitude),
+                    "latitude": str(nb.dcim.sites.get(name=device.site).latitude),
                 },
             )
 

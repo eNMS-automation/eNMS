@@ -417,7 +417,7 @@ function getWorkflowState() {
       if (wf.last_modified !== lastModified) {
         displayWorkflow(wf);
       }
-      $("#status").text(`Status: ${wf.status}.`);
+      $("#status").text(`Status: ${wf.is_running ? "Running" : "Idle"}.`);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_device) {

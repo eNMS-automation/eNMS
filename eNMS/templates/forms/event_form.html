@@ -20,7 +20,7 @@
       <thead>
         <tr>
           {% for property in form.properties %}
-          <th>{{ names[property] }}</th>
+          <th>{{ names.get(property, property.replace("_", " ").capitalize() ) }}</th>
           {% endfor %}
           <th>Regex</th>
         </tr>
@@ -28,7 +28,7 @@
       <tbody>
         {% for property in form.properties %}
         <tr>
-          <td>{{ names.get(property, property|capitalize ) }}</td>
+          <td>{{ names.get(property, property.replace("_", " ").capitalize() ) }}</td>
           <td>
             {{ form[property](id='event-' + property, class="form-control
             add-id") }}

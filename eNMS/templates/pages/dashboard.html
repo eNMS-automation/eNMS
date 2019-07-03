@@ -45,7 +45,7 @@ content %}
           <div class="form-group">
             <select id="{{ type }}-properties" class="form-control">
               {% for property in type_properties %}
-              <option value="{{ property }}">{{ names[property] }}</option>
+              <option value="{{ property }}">{{ names.get(property, property.replace("_", " ").capitalize() ) }}</option>
               {% endfor %}
             </select>
           </div>

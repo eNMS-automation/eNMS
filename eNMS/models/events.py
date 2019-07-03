@@ -44,7 +44,7 @@ class Task(AbstractBase):
     end_date = Column(String(SMALL_STRING_LENGTH), default="")
     crontab_expression = Column(String(SMALL_STRING_LENGTH), default="")
     is_active = Column(Boolean, default=False)
-    payload = Column(MutableDict.as_mutable(PickleType), default={})
+    initial_payload = Column(MutableDict.as_mutable(PickleType), default={})
     devices = relationship(
         "Device", secondary=task_device_table, back_populates="tasks"
     )

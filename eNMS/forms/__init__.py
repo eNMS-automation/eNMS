@@ -68,7 +68,3 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
         elif field_type in field_conversion and property in data:
             data[property] = field_conversion[field_type](form[property])
     return data
-
-
-""" import eNMS.forms.events  # noqa: F401
-import eNMS.forms.inventory  # noqa: F401 """

@@ -2,6 +2,7 @@ from flask_login import current_user
 from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
 from sqlalchemy.engine.base import Connection
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
+from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.orm.mapper import Mapper
 from typing import Any
 
@@ -77,14 +78,19 @@ def configure_events() -> None:
             hist = state.get_history(attr.key, True)
             if not hist.has_changes() or attr.key in dont_track_changes:
                 continue
-            changes.append(f"{attr.key}: {hist.deleted} => {hist.added}")
+            change = f"{attr.key}: "
+            if type(getattr(target, attr.key)) == InstrumentedList:
+                if hist.deleted:
+                    change += f"DELETED: {hist.deleted}"
+                if hist.added:
+                    change += f"{' / ' if hist.deleted else ''}ADDED: {hist.added}"
+            else:
+                change += f"'{hist.deleted[0]}' => '{hist.added[0]}'"
+            changes.append(change)
         if changes:
             controller.log(
                 "info",
-                (
-                    f"User '{getattr(current_user, 'name', 'admin')}' UPDATED "
-                    f"{target.type} '{target.name}' ({' | '.join(changes)})."
-                ),
+                f"UPDATE: {target.type} '{target.name}': ({' | '.join(changes)})."
             )
 
     @event.listens_for(Workflow.name, "set")

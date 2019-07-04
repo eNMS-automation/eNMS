@@ -152,7 +152,7 @@ class Device(CustomDevice):
             ]
 
     def __repr__(self) -> str:
-        return f"{self.name} ({self.model})"
+        return f"{self.name} ({self.model})" if self.model else self.name
 
 
 class Link(Object):

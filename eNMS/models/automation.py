@@ -102,7 +102,9 @@ class Job(AbstractBase):
     shape = Column(String(SMALL_STRING_LENGTH), default="box")
     size = Column(Integer, default=40)
     color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
-    payload = Column(MutableDict.as_mutable(PickleType), default={})
+    initial_payload = Column(MutableDict.as_mutable(PickleType), default={})
+    custom_username = Column(String(SMALL_STRING_LENGTH), default="")
+    custom_password = Column(String(SMALL_STRING_LENGTH), default="")
 
     @hybrid_property
     def status(self) -> str:
@@ -425,6 +427,11 @@ class Service(Job):
             controller.get_user_credentials()
             if self.credentials == "user"
             else (device.username, device.password)
+            if self.credentials == "device"
+            else (
+                self.sub(self.custom_username, locals()),
+                self.sub(self.custom_password, locals()),
+            )
         )
 
     def netmiko_connection(self, device: "Device", parent: "Job") -> ConnectHandler:
@@ -726,8 +733,8 @@ class WorkflowEdge(AbstractBase):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
-    name = Column(String(SMALL_STRING_LENGTH))
-    subtype = Column(String(SMALL_STRING_LENGTH))
+    name = Column(String(SMALL_STRING_LENGTH), default="")
+    subtype = Column(String(SMALL_STRING_LENGTH), default="")
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
         "Job",

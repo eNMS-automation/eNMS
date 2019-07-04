@@ -431,13 +431,15 @@ function showTypePanel(type, id, duplicate) {
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
       }
-      loadScript(`../static/services/${type}.js`).then(() => {
-        try {
-          job(id);
-        } catch (e) {
-          alertify.notify("Failed to load script", "error", 5);
-        }
-      });
+      if (type.includes("Service")) {
+        loadScript(`../static/services/${type}.js`).then(() => {
+          try {
+            job(id);
+          } catch (e) {
+            alertify.notify("Failed to load script", "error", 5);
+          }
+        });
+      }
     },
     type,
     duplicate

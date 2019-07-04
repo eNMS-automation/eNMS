@@ -126,8 +126,13 @@ class InventoryController(BaseController):
                 **{
                     "name": device.name,
                     "ip_address": str(device_ip).split("/")[0],
-                    "longitude": 0.0,
-                    "latitude": 0.0,
+                    "subtype": str(device.device_role),
+                    "model": str(device.device_type),
+                    "location": str(device.site),
+                    "vendor": str(device.device_type.manufacturer),
+                    "operating_system": str(device.platform),
+                    "longitude": str(nb.dcim.sites.get(name=device.site).longitude),
+                    "latitude": str(nb.dcim.sites.get(name=device.site).latitude),
                 },
             )
 

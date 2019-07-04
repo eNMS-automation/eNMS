@@ -13,8 +13,7 @@ class ProductionConfig:
     MODE = "production"
     DEBUG = False
     SECRET_KEY = environ.get("ENMS_SECRET_KEY")
-    REMEMBER_COOKIE_HTTPONLY = True
-    REMEMBER_COOKIE_DURATION = 3600
+    WTF_CSRF_TIME_LIMIT = None
 
 
 class TestConfig(DefaultConfig):

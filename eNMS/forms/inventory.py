@@ -12,6 +12,7 @@ from wtforms.widgets import TextArea
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField, InstanceField
+from eNMS.properties import private_properties
 from eNMS.properties.objects import (
     device_icons,
     pool_link_properties,
@@ -21,7 +22,8 @@ from eNMS.properties.objects import (
 
 def configure_device_form(cls: BaseForm) -> BaseForm:
     for property in controller.custom_properties:
-        setattr(cls, property, StringField())
+        field = PasswordField if property in private_properties else StringField
+        setattr(cls, property, field())
     return cls
 
 

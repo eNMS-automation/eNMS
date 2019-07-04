@@ -163,10 +163,10 @@ function addJobsToWorkflow(jobs) {
       : jobs;
     call(`/add_jobs_to_workflow/${workflow.id}/${jobs}`, function(result) {
       lastModified = result.update_time;
-      result.jobs.forEach((job) => {
+      result.jobs.forEach((job, index) => {
         $("#add_jobs").remove();
         if (graph.findNode(job.id).length == 0) {
-          nodes.add(jobToNode(job));
+          nodes.add(jobToNode(job, index));
           alertify.notify(
             `Job '${job.name}' added to the workflow.`,
             "success",
@@ -225,9 +225,10 @@ function deleteEdge(edgeId) {
 /**
  * Convert job object to Vis job node.
  * @param {job} job - Job object.
+ * @param {int} index - Stairstep display when adding jobs.
  * @return {visJob}.
  */
-function jobToNode(job) {
+function jobToNode(job, index) {
   return {
     id: job.id,
     shape: job.shape,
@@ -235,8 +236,16 @@ function jobToNode(job) {
     size: job.size,
     label: job.name,
     type: job.type,
-    x: job.positions[workflow.name] ? job.positions[workflow.name][0] : 0,
-    y: job.positions[workflow.name] ? job.positions[workflow.name][1] : 0,
+    x: job.positions[workflow.name]
+      ? job.positions[workflow.name][0]
+      : index
+      ? -300
+      : 0,
+    y: job.positions[workflow.name]
+      ? job.positions[workflow.name][1]
+      : index
+      ? index * 50 - 300
+      : 0,
   };
 }
 
@@ -356,7 +365,7 @@ Object.assign(action, {
   "Workflow Results": () => showResultsPanel(workflow.id, workflow.name),
   "Workflow Logs": () => showLogs(workflow.id),
   "Add to Workflow": () => showPanel("add_jobs"),
-  Delete: deleteSelection,
+  "Remove from Workflow": deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),
   "Create 'Failure' edge": () => switchMode("failure"),
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
@@ -417,7 +426,7 @@ function getWorkflowState() {
       if (wf.last_modified !== lastModified) {
         displayWorkflow(wf);
       }
-      $("#status").text(`Status: ${wf.status}.`);
+      $("#status").text(`Status: ${wf.is_running ? "Running" : "Idle"}.`);
       if (wf.id == workflow.id) {
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_device) {

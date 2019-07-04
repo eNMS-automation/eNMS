@@ -23,15 +23,16 @@ from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
+from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, List, Optional, Set, Union
 from werkzeug.datastructures import ImmutableMultiDict
-from yaml import BaseLoader, load
+from yaml import load
 
 from eNMS.database import DIALECT, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
 from eNMS.models import models, relationships
-from eNMS.properties import property_names
+from eNMS.properties import private_properties, property_names
 from eNMS.properties.diagram import (
     device_diagram_properties,
     diagram_classes,
@@ -53,6 +54,7 @@ class BaseController:
     cluster_scan_subnet = environ.get("CLUSER_SCAN_SUBNET", "192.168.105.0/24")
     cluster_scan_protocol = environ.get("CLUSTER_SCAN_PROTOCOL", "http")
     cluster_scan_timeout = environ.get("CLUSTER_SCAN_TIMEOUT", 0.05)
+    custom_code_path = environ.get("CUSTOM_CODE_PATH")
     default_longitude = environ.get("DEFAULT_LONGITUDE", -96.0)
     default_latitude = environ.get("DEFAULT_LATITUDE", 33.0)
     default_zoom_level = environ.get("DEFAULT_ZOOM_LEVEL", 5)
@@ -211,6 +213,8 @@ class BaseController:
             self.init_vault_client()
         if self.use_syslog:
             self.init_syslog_server()
+        if self.custom_code_path:
+            sys_path.append(self.custom_code_path)
 
     def init_app(self, app: Flask) -> None:
         self.app = app
@@ -260,16 +264,25 @@ class BaseController:
             custom_properties: dict = {}
         else:
             with open(filepath, "r") as properties:
-                custom_properties = load(properties, Loader=BaseLoader)
+                custom_properties = load(properties)
         property_names.update(
             {k: v["pretty_name"] for k, v in custom_properties.items()}
         )
         for object_properties in (device_properties, pool_device_properties):
             object_properties.extend(list(custom_properties))
         for properties_table in table_properties, filtering_properties:
-            properties_table["device"].extend(list(custom_properties))
+            properties_table["device"].extend(
+                list(
+                    p
+                    for p, v in custom_properties.items()
+                    if not v.get("private", False)
+                )
+            )
         device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
+        )
+        private_properties.extend(
+            list(p for p, v in custom_properties.items() if v.get("private", False))
         )
         return custom_properties
 

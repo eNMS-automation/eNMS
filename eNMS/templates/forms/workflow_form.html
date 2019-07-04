@@ -147,9 +147,10 @@
         </fieldset>
       </div>
       <div id="step-3">
-        <label><label for="payload">Payload</label></label>
+        <label><label for="initial_payload">Initial Payload</label></label>
         <div class="form-group">
-          {{ form.payload(id='workflow-payload', class="form-control add-id") }}
+          {{ form.initial_payload(id='workflow-initial_payload',
+          class="form-control add-id") }}
         </div>
         <label><label for="number_of_retries">Number of retries</label></label>
         <div class="form-group">
@@ -246,6 +247,16 @@
         <div class="form-group">
           {{ form.credentials(id='workflow-credentials', class="form-control
           add-id") }}
+        </div>
+        <label><label for="custom_username">Custom Username</label></label>
+        <div class="form-group">
+          {{ form.custom_username(id='workflow-custom_username',
+          class="form-control add-id") }}
+        </div>
+        <label><label for="custom_password">Custom Password</label></label>
+        <div class="form-group">
+          {{ form.custom_password(id='workflow-custom_password',
+          class="form-control add-id") }}
         </div>
       </div>
     </div>

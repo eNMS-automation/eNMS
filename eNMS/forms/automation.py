@@ -1,4 +1,11 @@
-from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
+from wtforms import (
+    BooleanField,
+    HiddenField,
+    IntegerField,
+    PasswordField,
+    SelectField,
+    StringField,
+)
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
@@ -27,8 +34,14 @@ class JobForm(BaseForm):
     devices = MultipleInstanceField("Devices", instance_type="Device")
     credentials = SelectField(
         "Credentials",
-        choices=(("device", "Device Credentials"), ("user", "User Credentials")),
+        choices=(
+            ("device", "Device Credentials"),
+            ("user", "User Credentials"),
+            ("custom", "Custom Credentials"),
+        ),
     )
+    custom_username = StringField("Custom Username")
+    custom_password = PasswordField("Custom Password")
     pools = MultipleInstanceField("Pools", instance_type="Pool")
     waiting_time = IntegerField("Waiting time (in seconds)", default=0)
     send_notification = BooleanField("Send a notification")
@@ -62,7 +75,7 @@ class JobForm(BaseForm):
     )
     size = IntegerField("Size", default=40)
     color = StringField("Color", default="#D2E5FF")
-    payload = DictField()
+    initial_payload = DictField()
 
     def validate(self) -> bool:
         valid_form = super().validate()

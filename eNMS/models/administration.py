@@ -77,11 +77,11 @@ class User(AbstractBase, UserMixin):
 
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)
-    email = Column(String(SMALL_STRING_LENGTH))
-    name = Column(String(SMALL_STRING_LENGTH))
+    email = Column(String(SMALL_STRING_LENGTH), default="")
+    name = Column(String(SMALL_STRING_LENGTH), default="")
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
-    password = Column(String(SMALL_STRING_LENGTH))
+    password = Column(String(SMALL_STRING_LENGTH), default="")
 
     def generate_row(self, table: str) -> List[str]:
         return [

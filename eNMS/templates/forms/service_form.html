@@ -166,10 +166,10 @@
         </fieldset>
       </div>
       <div id="step-3">
-        <label><label for="payload">Payload</label></label>
+        <label><label for="initial_payload">Initial Payload</label></label>
         <div class="form-group">
-          {{ form.payload(id=form_type + '-payload', class="form-control
-          add-id") }}
+          {{ form.initial_payload(id=form_type + '-initial_payload',
+          class="form-control add-id") }}
         </div>
         <label><label for="number_of_retries">Number of retries</label></label>
         <div class="form-group">
@@ -262,6 +262,16 @@
         <div class="form-group">
           {{ form.credentials(id=form_type + '-credentials', class="form-control
           add-id") }}
+        </div>
+        <label><label for="custom_username">Custom Username</label></label>
+        <div class="form-group">
+          {{ form.custom_username(id=form_type + '-custom_username',
+          class="form-control add-id") }}
+        </div>
+        <label><label for="custom_password">Custom Password</label></label>
+        <div class="form-group">
+          {{ form.custom_password(id=form_type + '-custom_password',
+          class="form-control add-id") }}
         </div>
       </div>
       <div id="step-5" style="height: 100%">

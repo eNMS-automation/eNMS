@@ -15,7 +15,7 @@ function job(id) {
     playbooks.forEach((playbook) => {
       let option = document.createElement("option");
       option.textContent = option.value = playbook;
-      field.appendChild(option);
+      field.append(option);
     });
     field.selectpicker("refresh");
   });

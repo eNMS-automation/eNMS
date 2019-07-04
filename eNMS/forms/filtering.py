@@ -14,6 +14,7 @@ def filtering_form_generator() -> None:
                 model.capitalize(), instance_type=relation["model"]
             )
             for model, relation in relationships[table_model].items()
+            if model != "edges"
         }
         type(
             f"{table.capitalize()}FilteringForm",

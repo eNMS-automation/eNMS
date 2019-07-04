@@ -55,6 +55,22 @@ from eNMS.models.inventory import Device
 from eNMS.models.events import Task  # noqa: F401
 
 
+class Result(AbstractBase):
+
+    __tablename__ = type = "Result"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(SMALL_STRING_LENGTH), default="")
+    content = Column(MutableDict.as_mutable(PickleType), default={})
+    job_id = Column(Integer, ForeignKey("Job.id"))
+    job = relationship(
+        "Job", back_populates="edges", foreign_keys="Result.job_id"
+    )
+    device_id = Column(Integer, ForeignKey("Device.id"))
+    device = relationship(
+        "Device", back_populates="edges", foreign_keys="Result.device_id"
+    )
+
+
 class Job(AbstractBase):
 
     __tablename__ = "Job"

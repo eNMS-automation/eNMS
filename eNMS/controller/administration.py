@@ -68,12 +68,8 @@ class AdministrationController(BaseController):
         clear_logs_date = kwargs["clear_logs_date"]
         if clear_logs_date:
             clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
-            for job in fetch_all("Job"):
-                job.logs = {
-                    date: log
-                    for date, log in job.logs.items()
-                    if datetime.strptime(date, "%Y-%m-%d-%H:%M:%S.%f") > clear_date
-                }
+            #TODO reimplement
+            pass
 
     def get_cluster_status(self) -> dict:
         return {

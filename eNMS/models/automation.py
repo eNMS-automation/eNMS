@@ -192,41 +192,6 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def init_run(self, parent: Optional["Job"]) -> None:
-        current_job = parent or self
-        self.is_running, self.state = True, {}
-        if parent:
-            current_job.logs.extend([f"{self.type} {self.name}: Starting."])
-        else:
-            current_job.logs = [f"{self.type} {self.name}: Starting."]
-        if not parent:
-            Session.commit()
-
-    def end_run(
-        self,
-        runtime: str,
-        results: dict,
-        parent: Optional["Job"],
-        task: Optional["Task"],
-    ) -> None:
-        for library in ("netmiko", "napalm"):
-            connections = controller.connections_cache[library].pop(self.name, None)
-            if not connections:
-                continue
-            for device, conn in connections.items():
-                info(f"Closing Netmiko Connection to {device}")
-                conn.disconnect() if library == "netmiko" else conn.close()
-        current_job = parent or self
-        current_job.logs.append(f"{self.type} {self.name}: Finished.")
-        self.is_running, self.state = False, {}
-        self.completed = self.failed = 0
-        if task and not task.frequency:
-            task.is_active = False
-        if not parent:
-            Session.commit()
-        if not parent and self.send_notification:
-            self.notify(results, runtime)
-
     def run(
         self,
         payload: Optional[dict] = None,
@@ -235,11 +200,28 @@ class Job(AbstractBase):
         task: Optional["Task"] = None,
         origin: Optional["Job"] = None,
     ) -> Tuple[dict, str]:
-        current_job = parent or self
-        runtime = controller.get_time()
-        self.init_run(parent)
+        logs, runtime = [], controller.get_time()
+        self.is_running, self.state = True, {}
+        logs.append([f"{self.type} {self.name}: Starting."])
+        if not parent:
+            Session.commit()
         results = self.build_results(payload, targets, parent, origin)
-        self.end_run(runtime, results, parent, task)
+        for library in ("netmiko", "napalm"):
+            connections = controller.connections_cache[library].pop(self.name, None)
+            if not connections:
+                continue
+            for device, conn in connections.items():
+                info(f"Closing Netmiko Connection to {device}")
+                conn.disconnect() if library == "netmiko" else conn.close()
+        logs.append(f"{self.type} {self.name}: Finished.")
+        self.is_running, self.state = False, {}
+        self.completed = self.failed = 0
+        if task and not task.frequency:
+            task.is_active = False
+        if not parent:
+            Session.commit()
+        if not parent and self.send_notification:
+            self.notify(results, runtime)
         return results, runtime
 
 

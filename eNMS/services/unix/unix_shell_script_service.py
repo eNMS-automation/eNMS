@@ -27,7 +27,9 @@ class UnixShellScriptService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "UnixShellScriptService"}
 
-    def job(self, payload: dict, device: Optional[Device] = None, *args) -> dict:
+    def job(
+        self, payload: dict, logs: list, device: Optional[Device] = None, *args
+    ) -> dict:
         username, password = self.get_credentials(device)
 
         fabric_connection = Connection(
@@ -38,7 +40,7 @@ class UnixShellScriptService(Service):
         )
         source_code = self.sub(self.source_code, locals())
         match = self.sub(self.content_match, locals())
-        self.logs.append(f"Running Unix Shell Script {self.name} on {device.name}")
+        logs.append(f"Running Unix Shell Script {self.name} on {device.name}")
         script_file_name = "unix_shell_script_service.sh"
         with StringIO(self.source_code) as script_file:
             fabric_connection.put(script_file, script_file_name)

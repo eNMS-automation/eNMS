@@ -64,9 +64,7 @@ class Result(AbstractBase):
     result = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableList.as_mutable(PickleType), default=[])
     job_id = Column(Integer, ForeignKey("Job.id"))
-    job = relationship(
-        "Job", back_populates="results", foreign_keys="Result.job_id"
-    )
+    job = relationship("Job", back_populates="results", foreign_keys="Result.job_id")
     device_id = Column(Integer, ForeignKey("Device.id"))
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
@@ -287,13 +285,16 @@ class Service(Job):
                 results = self.job(payload, device, parent, logs)
                 success = "SUCCESS" if results["success"] else "FAILURE"
                 logs.append(f"Finished running service on {device.name}. ({success})")
-                result = factory("Result", **{
-                    "timestamp": datetime.now(),
-                    "result": results,
-                    "logs": logs,
-                    "job": self.id,
-                    "device": device.id,
-                })
+                result = factory(
+                    "Result",
+                    **{
+                        "timestamp": datetime.now(),
+                        "result": results,
+                        "logs": logs,
+                        "job": self.id,
+                        "device": device.id,
+                    },
+                )
             else:
                 info(f"Running {self.type}")
                 results = self.job(payload, parent)
@@ -304,13 +305,16 @@ class Service(Job):
             }
             if device:
                 logs.append(f"Finished running service on {device.name}. (FAILURE)")
-                result = factory("Result", **{
-                    "timestamp": datetime.now(),
-                    "result": results,
-                    "logs": logs,
-                    "job": self.id,
-                    "device": device.id,
-                })
+                result = factory(
+                    "Result",
+                    **{
+                        "timestamp": datetime.now(),
+                        "result": results,
+                        "logs": logs,
+                        "job": self.id,
+                        "device": device.id,
+                    },
+                )
         if not parent and not self.multiprocessing:
             self.completed += 1
             self.failed += 1 - results["success"]

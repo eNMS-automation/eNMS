@@ -22,6 +22,7 @@ class PythonSnippetService(Service):
     def job(
         self,
         payload: dict,
+        logs: list,
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:
@@ -29,7 +30,7 @@ class PythonSnippetService(Service):
         try:
             code_object = compile(self.source_code, "user_python_code", "exec")
         except Exception as exc:
-            self.logs.append(f"Compile error: {str(exc)}")
+            logs.append(f"Compile error: {str(exc)}")
             return {"success": False, "result": {"step": "compile", "error": str(exc)}}
 
         _code_result_ = {}
@@ -70,7 +71,7 @@ class PythonSnippetService(Service):
             "payload": payload,
             "_code_result_": _code_result_,
             "get_var": get_var,
-            "log": self.logs.append,
+            "log": logs.append,
             "save_result": save_result,
             "set_var": set_var,
         }
@@ -80,7 +81,7 @@ class PythonSnippetService(Service):
         except TerminateException:
             pass  # Clean exit from middle of snippet
         except Exception as exc:
-            self.logs.append(f"Execution error: {str(exc)}")
+            logs.append(f"Execution error: {str(exc)}")
             return {
                 "success": False,
                 "result": {
@@ -91,7 +92,7 @@ class PythonSnippetService(Service):
             }
 
         if not _code_result_:
-            self.logs.append("Error: Result not set by user code on service instance")
+            logs.append("Error: Result not set by user code on service instance")
             _code_result_ = {
                 "success": False,
                 "result": {"error": "Result not set by user code on service instance"},

@@ -90,7 +90,7 @@ def configure_events() -> None:
         if changes:
             controller.log(
                 "info",
-                f"UPDATE: {target.type} '{target.name}': ({' | '.join(changes)})."
+                f"UPDATE: {target.type} '{target.name}': ({' | '.join(changes)}).",
             )
 
     @event.listens_for(Workflow.name, "set")

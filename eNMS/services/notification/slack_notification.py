@@ -27,12 +27,13 @@ class SlackNotificationService(Service):
     def job(
         self,
         payload: dict,
+        logs: list,
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:
         slack_client = SlackClient(self.token or controller.slack_token)
         channel = self.sub(self.channel, locals()) or controller.slack_channel
-        self.logs.append(f"Sending Slack notification on {channel}")
+        logs.append(f"Sending Slack notification on {channel}")
         result = slack_client.api_call(
             "chat.postMessage", channel=channel, text=self.sub(self.body, locals())
         )

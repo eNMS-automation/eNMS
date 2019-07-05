@@ -36,6 +36,7 @@ class AnsiblePlaybookService(Service):
     def job(
         self,
         payload: dict,
+        logs: list,
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:
@@ -51,7 +52,7 @@ class AnsiblePlaybookService(Service):
         if self.has_targets:
             command.extend(["-i", device.ip_address + ","])
         command.append(self.sub(self.playbook_path, locals()))
-        self.logs.append(f"Sending Ansible playbook: {' '.join(command + arguments)}")
+        logs.append(f"Sending Ansible playbook: {' '.join(command + arguments)}")
         result = check_output(command + arguments)
         try:
             result = result.decode("utf-8")

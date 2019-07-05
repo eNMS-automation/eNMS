@@ -27,11 +27,12 @@ class MattermostNotificationService(Service):
     def job(
         self,
         payload: dict,
+        logs: list,
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:
         channel = self.sub(self.channel, locals()) or controller.mattermost_channel
-        self.logs.append(f"Sending Mattermost notification on {channel}")
+        logs.append(f"Sending Mattermost notification on {channel}")
         result = post(
             controller.mattermost_url,
             verify=controller.mattermost_verify_certificate,

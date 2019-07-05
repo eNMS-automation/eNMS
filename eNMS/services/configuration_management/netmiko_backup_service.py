@@ -40,7 +40,14 @@ class NetmikoBackupService(Service):
         with open(path / "data.yml", "w") as file:
             dump(data, file, default_flow_style=False)
 
-    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
+    def job(
+        self,
+        payload: dict,
+        logs: list,
+        device: Device,
+        logs: list,
+        parent: Optional[Job] = None,
+    ) -> dict:
         try:
             now = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"
@@ -51,7 +58,7 @@ class NetmikoBackupService(Service):
                 netmiko_connection.enable()
             except Exception:
                 pass
-            self.logs.append(f"Fetching configuration on {device.name} (Netmiko)")
+            logs.append(f"Fetching configuration on {device.name} (Netmiko)")
             config = netmiko_connection.send_command(self.configuration_command)
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()

@@ -1,5 +1,6 @@
 from collections import defaultdict
 from copy import deepcopy
+from datetime import datetime
 from git import Repo
 from git.exc import GitCommandError
 from json import loads
@@ -59,15 +60,16 @@ class Result(AbstractBase):
 
     __tablename__ = type = "Result"
     id = Column(Integer, primary_key=True)
-    name = Column(String(SMALL_STRING_LENGTH), default="")
+    timestamp = Column(String(SMALL_STRING_LENGTH), default="")
     content = Column(MutableDict.as_mutable(PickleType), default={})
+    logs = Column(MutableList.as_mutable(PickleType), default=[])
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship(
-        "Job", back_populates="edges", foreign_keys="Result.job_id"
+        "Job", back_populates="results", foreign_keys="Result.job_id"
     )
     device_id = Column(Integer, ForeignKey("Device.id"))
     device = relationship(
-        "Device", back_populates="edges", foreign_keys="Result.device_id"
+        "Device", back_populates="results", foreign_keys="Result.device_id"
     )
 
 
@@ -84,7 +86,6 @@ class Job(AbstractBase):
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
-    results = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     is_running = Column(Boolean, default=False)
     number_of_targets = Column(Integer, default=0)
     completed = Column(Integer, default=0)
@@ -121,6 +122,7 @@ class Job(AbstractBase):
     initial_payload = Column(MutableDict.as_mutable(PickleType), default={})
     custom_username = Column(String(SMALL_STRING_LENGTH), default="")
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
+    results = relationship("Result", back_populates="job")
 
     @hybrid_property
     def status(self) -> str:
@@ -240,7 +242,7 @@ class Job(AbstractBase):
         runtime = controller.get_time()
         self.init_run(parent)
         results = self.build_results(payload, targets, parent, origin)
-        self.results[runtime] = {**results, "logs": list(current_job.logs)}
+        #self.results[runtime] = {**results, "logs": }
         self.end_run(runtime, results, parent, task)
         return results, runtime
 
@@ -285,6 +287,13 @@ class Service(Job):
                 info(log)
                 logs.append(log)
                 results = self.job(payload, device, parent)
+                result = Result({
+                    "timestamp": datetime.now(),
+                    "result": results,
+                    "logs": list(current_job.logs),
+                    "job": self,
+                    "device": device,
+                })
                 success = "SUCCESS" if results["success"] else "FAILURE"
                 logs.append(f"Finished running service on {device.name}. ({success})")
             else:

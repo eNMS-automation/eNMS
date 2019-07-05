@@ -167,10 +167,10 @@ function displayResult(id, results) {
  */
 function displayResults(id) {
   call(`/get_job_results/${id}`, (results) => {
-    $(`#display-${id},#compare_with-${id}`).empty();
+    $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
     const times = Object.keys(results);
     times.forEach((option) => {
-      $(`#display-${id},#compare_with-${id}`).append(
+      $(`#timestamp-${id},#timestamp_compare-${id}`).append(
         $("<option></option>")
           .attr("value", option)
           .text(option)

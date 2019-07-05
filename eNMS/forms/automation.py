@@ -108,8 +108,10 @@ class WorkflowForm(JobForm):
 class CompareResultsForm(BaseForm):
     template = "results"
     form_type = HiddenField(default="results")
-    display = SelectField("Version to display", choices=())
-    compare_with = SelectField("Compare Against", choices=())
+    timestamp = SelectField("Version", choices=())
+    device = SelectField("Device", choices=())
+    timestamp_compare = SelectField("Version", choices=())
+    device_compare = SelectField("Device", choices=())
 
 
 class RestartWorkflowForm(BaseForm):

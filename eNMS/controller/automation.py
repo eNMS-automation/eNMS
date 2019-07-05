@@ -99,7 +99,8 @@ class AutomationController(BaseController):
         return {"logs": job.logs, "running": job.is_running}
 
     def get_job_results(self, id: int) -> dict:
-        return fetch("Job", id=id).results
+        print(fetch("Result", job_id=id).get_properties())
+        return fetch("Result", job_id=id).get_properties()
 
     def reset_status(self) -> None:
         for job in fetch_all("Job"):

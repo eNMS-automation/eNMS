@@ -39,7 +39,7 @@ class NapalmBackupService(Service):
             dump(data, file, default_flow_style=False)
 
     def job(
-        self, payload: dict, logs: list, device: Device, parent: Optional[Job] = None
+        self, payload: dict, device: Device, parent: Optional[Job] = None
     ) -> dict:
         try:
             now = datetime.now()
@@ -47,7 +47,7 @@ class NapalmBackupService(Service):
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
             napalm_connection = self.napalm_connection(device, parent)
-            logs.append(f"Fetching configuration on {device.name} (Napalm)")
+            self.logger(f"Fetching configuration on {device.name} (Napalm)")
             config = controller.str_dict(napalm_connection.get_config())
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()

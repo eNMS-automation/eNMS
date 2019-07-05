@@ -27,7 +27,7 @@ class PingService(Service):
     __mapper_args__ = {"polymorphic_identity": "PingService"}
 
     def job(
-        self, payload: dict, logs: list, device: Device, parent: Optional[Job] = None
+        self, payload: dict, device: Device, parent: Optional[Job] = None
     ) -> dict:
         if self.protocol == "ICMP":
             command = ["ping"]
@@ -41,7 +41,7 @@ class PingService(Service):
                 if value:
                     command.extend(f"-{x} {value}".split())
             command.append(device.ip_address)
-            logs.append(f"Running ping ({command})")
+            self.logger(f"Running ping ({command})")
             try:
                 output = check_output(command).decode().strip().splitlines()
             except CalledProcessError:

@@ -32,7 +32,7 @@ class GenericFileTransferService(Service):
     __mapper_args__ = {"polymorphic_identity": "GenericFileTransferService"}
 
     def job(
-        self, payload: dict, logs: list, device: Device, parent: Optional[Job] = None
+        self, payload: dict, device: Device, parent: Optional[Job] = None
     ) -> dict:
         ssh_client = SSHClient()
         if self.missing_host_key_policy:
@@ -41,7 +41,7 @@ class GenericFileTransferService(Service):
             ssh_client.load_system_host_keys()
         source = self.sub(self.source_file, locals())
         destination = self.sub(self.destination_file, locals())
-        logs.append("Transferring file {source} on {device.name}")
+        self.logger("Transferring file {source} on {device.name}")
         success, result = True, f"File {source} transferred successfully"
         ssh_client.connect(
             device.ip_address,

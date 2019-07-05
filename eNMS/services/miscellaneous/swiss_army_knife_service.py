@@ -34,12 +34,12 @@ class SwissArmyKnifeService(Service):
     def End(self, _: dict, device: Optional[Device] = None) -> dict:  # noqa: N802
         return {"success": True}
 
-    def mail_feedback_notification(self, payload: dict, logs: list, *args) -> dict:
+    def mail_feedback_notification(self, payload: dict, *args) -> dict:
         name = f"{payload['job']['name']}"
         recipients = payload["job"]["mail_recipient"]
         runtime = payload["runtime"].replace(".", "").replace(":", "")
         filename = f"results-{runtime}.txt"
-        logs.append(f"Sending mail notification for {name}")
+        self.logger(f"Sending mail notification for {name}")
         controller.send_email(
             f"{name} ({'PASS' if payload['result'] else 'FAILED'})",
             payload["content"],
@@ -49,9 +49,9 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True}
 
-    def slack_feedback_notification(self, payload: dict, logs: list, *args) -> dict:
+    def slack_feedback_notification(self, payload: dict, *args) -> dict:
         slack_client = SlackClient(controller.slack_token)
-        logs.append(f"Sending Slack notification for {payload['job']['name']}")
+        self.logger(f"Sending Slack notification for {payload['job']['name']}")
         result = slack_client.api_call(
             "chat.postMessage",
             channel=controller.slack_channel,
@@ -60,9 +60,9 @@ class SwissArmyKnifeService(Service):
         return {"success": True, "result": str(result)}
 
     def mattermost_feedback_notification(
-        self, payload: dict, logs: list, *args
+        self, payload: dict, *args
     ) -> dict:
-        logs.append(f"Sending Mattermost notification for {payload['job']['name']}")
+        self.logger(f"Sending Mattermost notification for {payload['job']['name']}")
         post(
             controller.mattermost_url,
             verify=controller.mattermost_verify_certificate,

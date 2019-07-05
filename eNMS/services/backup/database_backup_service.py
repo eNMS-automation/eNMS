@@ -31,7 +31,7 @@ class DatabaseBackupService(Service):
     __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}
 
     def job(
-        self, payload: dict, logs: list, device: Device, parent: Optional[Job] = None
+        self, payload: dict, device: Device, parent: Optional[Job] = None
     ) -> dict:
         now = controller.strip_all(controller.get_time())
         source = Path.cwd() / "projects" / "migrations" / f"backup_{now}.tgz"

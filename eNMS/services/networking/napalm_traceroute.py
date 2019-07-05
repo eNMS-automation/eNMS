@@ -29,12 +29,12 @@ class NapalmTracerouteService(Service):
     __mapper_args__ = {"polymorphic_identity": "NapalmTracerouteService"}
 
     def job(
-        self, payload: dict, logs: list, device: Device, parent: Optional[Job] = None
+        self, payload: dict, device: Device, parent: Optional[Job] = None
     ) -> dict:
         napalm_connection = self.napalm_connection(device, parent)
         destination = self.sub(self.destination_ip, locals())
         source = self.sub(self.source_ip, locals())
-        logs.append(
+        self.logger(
             f"Running napalm traceroute from {source}"
             f"to {destination} on {device.ip_address}"
         )

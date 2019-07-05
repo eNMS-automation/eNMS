@@ -62,7 +62,6 @@ class Result(AbstractBase):
     id = Column(Integer, primary_key=True)
     timestamp = Column(String(SMALL_STRING_LENGTH), default="")
     result = Column(MutableDict.as_mutable(PickleType), default={})
-    logs = Column(MutableList.as_mutable(PickleType), default=[])
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="results", foreign_keys="Result.job_id")
     device_id = Column(Integer, ForeignKey("Device.id"))
@@ -192,6 +191,9 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
+    def logger(log: str) -> None:
+        info(log)
+
     def run(
         self,
         payload: Optional[dict] = None,
@@ -200,9 +202,9 @@ class Job(AbstractBase):
         task: Optional["Task"] = None,
         origin: Optional["Job"] = None,
     ) -> Tuple[dict, str]:
-        logs, runtime = [], controller.get_time()
+        runtime = controller.get_time()
         self.is_running, self.state = True, {}
-        logs.append([f"{self.type} {self.name}: Starting."])
+        self.logger([f"{self.type} {self.name}: Starting."])
         if not parent:
             Session.commit()
         results = self.build_results(payload, targets, parent, origin)
@@ -213,7 +215,7 @@ class Job(AbstractBase):
             for device, conn in connections.items():
                 info(f"Closing Netmiko Connection to {device}")
                 conn.disconnect() if library == "netmiko" else conn.close()
-        logs.append(f"{self.type} {self.name}: Finished.")
+        self.logger(f"{self.type} {self.name}: Finished.")
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         if task and not task.frequency:
@@ -258,21 +260,20 @@ class Service(Job):
         device: Optional["Device"] = None,
         parent: Optional["Job"] = None,
     ) -> Tuple[dict, list]:
-        logs = []
+
         try:
             if device:
                 log = f"Running {self.type} on {device.name}."
                 info(log)
-                logs.append(log)
-                results = self.job(payload, device, parent, logs)
+                self.logger(log)
+                results = self.job(payload, device, parent)
                 success = "SUCCESS" if results["success"] else "FAILURE"
-                logs.append(f"Finished running service on {device.name}. ({success})")
+                self.logger(f"Finished running service on {device.name}. ({success})")
                 result = factory(
                     "Result",
                     **{
                         "timestamp": datetime.now(),
                         "result": results,
-                        "logs": logs,
                         "job": self.id,
                         "device": device.id,
                     },
@@ -286,13 +287,12 @@ class Service(Job):
                 "result": chr(10).join(format_exc().splitlines()),
             }
             if device:
-                logs.append(f"Finished running service on {device.name}. (FAILURE)")
+                self.logger(f"Finished running service on {device.name}. (FAILURE)")
                 result = factory(
                     "Result",
                     **{
                         "timestamp": datetime.now(),
                         "result": results,
-                        "logs": logs,
                         "job": self.id,
                         "device": device.id,
                     },
@@ -301,7 +301,7 @@ class Service(Job):
             self.completed += 1
             self.failed += 1 - results["success"]
             Session.commit()
-        return results, logs
+        return results
 
     def device_run(
         self,
@@ -315,14 +315,12 @@ class Service(Job):
             if self.multiprocessing == "multiprocessing":
                 manager = Manager()
                 device_results: dict = manager.dict()
-                logs: list = manager.list()
                 lock = manager.Lock()
                 processes = min(len(targets), self.max_processes)
                 args = (
                     self.id,
                     lock,
                     device_results,
-                    logs,
                     payload,
                     getattr(parent, "id", None),
                 )
@@ -333,14 +331,13 @@ class Service(Job):
                 pool.join()
                 results = {"devices": device_results}
             elif self.multiprocessing:
-                device_results, logs = {}, []
+                device_results = {}
                 thread_lock = Lock()
                 processes = min(len(targets), self.max_processes)
                 args = (  # type: ignore
                     self.id,
                     thread_lock,
                     device_results,
-                    logs,
                     payload,
                     getattr(parent, "id", None),
                 )
@@ -351,12 +348,12 @@ class Service(Job):
                 pool.join()
                 results = {"devices": device_results}
             else:
-                results, logs = {"devices": {}}, []
+                results = {"devices": {}}
                 results["devices"] = {
                     device.name: self.get_results(payload, device, parent)[0]
                     for device in targets
                 }
-            return results, logs
+            return results
 
     def build_results(
         self,
@@ -365,22 +362,20 @@ class Service(Job):
         parent: Optional["Job"] = None,
         *other: Any,
     ) -> dict:
-        current_job = parent or self
         results: dict = {"results": {}, "success": False}
         if self.has_targets and not targets:
             targets = self.compute_devices(payload)
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
-            current_job.logs.append(
+            self.logger(
                 f"Running {self.type} {self.name} (attempt n°{i + 1})"
             )
             self.completed = self.failed = 0
             if not parent:
                 Session.commit()
-            attempt, logs = self.device_run(payload or {}, targets, parent)
+            attempt = self.device_run(payload or {}, targets, parent)
             Session.commit()
-            current_job.logs.extend(logs)
             if targets:
                 assert targets is not None
                 for device in set(targets):

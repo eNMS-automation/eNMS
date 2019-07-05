@@ -27,7 +27,6 @@ class MailNotificationService(Service):
     def job(
         self,
         payload: dict,
-        logs: list,
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:

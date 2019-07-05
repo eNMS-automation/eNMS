@@ -95,8 +95,7 @@ class AutomationController(BaseController):
         return new_workflow.serialized
 
     def get_job_logs(self, id: int) -> dict:
-        job = fetch("Job", id=id)
-        return {"logs": job.logs, "running": job.is_running}
+        pass
 
     def get_job_results(self, id: int) -> dict:
         results = fetch("Result", allow_none=True, all_matches=True, job_id=id)

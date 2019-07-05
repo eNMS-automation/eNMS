@@ -54,12 +54,11 @@ class RestCallService(Service):
     def job(
         self,
         payload: dict,
-        logs: list,
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:
         rest_url = self.sub(self.rest_url, locals())
-        logs.append(f"Sending REST call to {rest_url}")
+        self.logger(f"Sending REST call to {rest_url}")
         kwargs = {
             p: self.sub(getattr(self, p), locals())
             for p in ("headers", "params", "timeout")

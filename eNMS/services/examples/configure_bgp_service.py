@@ -25,7 +25,7 @@ class ConfigureBgpService(Service):
     __mapper_args__ = {"polymorphic_identity": "ConfigureBgpService"}
 
     def job(
-        self, payload: dict, logs: list, device: Device, parent: Optional[Job] = None
+        self, payload: dict, device: Device, parent: Optional[Job] = None
     ) -> dict:
         napalm_connection = self.napalm_connection(device, parent)
         config = f"""
@@ -47,7 +47,7 @@ class ConfigureBgpService(Service):
             exit-address-family
         """
         config = "\n".join(config.splitlines())
-        logs.append(f"Pushing BGP configuration on {device.name} (Napalm)")
+        self.logger(f"Pushing BGP configuration on {device.name} (Napalm)")
         getattr(napalm_connection, "load_merge_candidate")(config=config)
         napalm_connection.commit_config()
         return {"success": True, "result": f"Config push ({config})"}

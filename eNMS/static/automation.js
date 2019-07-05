@@ -189,15 +189,18 @@ function displayResults(id) {
  */
 // eslint-disable-next-line
 function refreshLogs(firstTime, id) {
+  /*
   if (refreshJob[id]) {
     call(`/get_job_logs/${id}`, (job) => {
-      $(`#logs-${id}`).text(job.logs.join("\n"));
+      //TODO
+      //$(`#logs-${id}`).text(THE LOGS HERE);
       if (!job.running || $(`#logs-${id}`).length == 0) {
         refreshJob[id] = false;
       }
     });
     setTimeout(() => refreshLogs(false, id), 500);
   }
+  */
 }
 
 /**

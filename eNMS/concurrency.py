@@ -27,7 +27,7 @@ def device_process(args: tuple) -> None:
         device = fetch("Device", session=session, id=device_id)
         workflow = fetch("Workflow", allow_none=True, session=session, id=workflow_id)
         job = fetch("Job", session=session, id=job_id)
-        device_result, device_log = job.get_results(payload, device, workflow)
+        device_result = job.get_results(payload, device, workflow)
         with lock:
             results[device.name] = device_result
 
@@ -37,6 +37,6 @@ def device_thread(args: tuple) -> None:
     device = fetch("Device", id=device_id)
     workflow = fetch("Workflow", allow_none=True, id=workflow_id)
     job = fetch("Job", id=job_id)
-    device_result, device_log = job.get_results(payload, device, workflow)
+    device_result = job.get_results(payload, device, workflow)
     with lock:
         results[device.name] = device_result

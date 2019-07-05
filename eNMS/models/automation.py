@@ -191,7 +191,7 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def logger(log: str) -> None:
+    def logger(self, log: str) -> None:
         info(log)
 
     def run(
@@ -204,7 +204,7 @@ class Job(AbstractBase):
     ) -> Tuple[dict, str]:
         runtime = controller.get_time()
         self.is_running, self.state = True, {}
-        self.logger([f"{self.type} {self.name}: Starting."])
+        self.logger(f"{self.type} {self.name}: Starting.")
         if not parent:
             Session.commit()
         results = self.build_results(payload, targets, parent, origin)
@@ -221,6 +221,11 @@ class Job(AbstractBase):
         if task and not task.frequency:
             task.is_active = False
         if not parent:
+            factory("Result", **{
+                "timestamp": runtime,
+                "result": results,
+                "job": self.id,
+            })
             Session.commit()
         if not parent and self.send_notification:
             self.notify(results, runtime)
@@ -350,7 +355,7 @@ class Service(Job):
             else:
                 results = {"devices": {}}
                 results["devices"] = {
-                    device.name: self.get_results(payload, device, parent)[0]
+                    device.name: self.get_results(payload, device, parent)
                     for device in targets
                 }
             return results

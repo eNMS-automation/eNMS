@@ -33,7 +33,7 @@ from traceback import format_exc
 from typing import Any, Generator, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
-from yaql import factory
+from yaql import factory as yaql_factory
 
 from eNMS.concurrency import device_process, device_thread
 from eNMS.controller import controller
@@ -43,7 +43,7 @@ from eNMS.database import (
     Session,
     SMALL_STRING_LENGTH,
 )
-from eNMS.database.functions import fetch
+from eNMS.database.functions import factory, fetch
 from eNMS.database.associations import (
     job_device_table,
     job_event_table,
@@ -61,7 +61,7 @@ class Result(AbstractBase):
     __tablename__ = type = "Result"
     id = Column(Integer, primary_key=True)
     timestamp = Column(String(SMALL_STRING_LENGTH), default="")
-    content = Column(MutableDict.as_mutable(PickleType), default={})
+    result = Column(MutableDict.as_mutable(PickleType), default={})
     logs = Column(MutableList.as_mutable(PickleType), default=[])
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship(
@@ -115,7 +115,6 @@ class Job(AbstractBase):
     display_only_failed_nodes = Column(Boolean, default=True)
     include_link_in_summary = Column(Boolean, default=True)
     mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
-    logs = Column(MutableList.as_mutable(CustomMediumBlobPickle), default=[])
     shape = Column(String(SMALL_STRING_LENGTH), default="box")
     size = Column(Integer, default=40)
     color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
@@ -141,7 +140,7 @@ class Job(AbstractBase):
 
     def compute_devices(self, payload: Optional[dict] = None) -> Set["Device"]:
         if self.define_devices_from_payload:
-            engine = factory.YaqlFactory().create()
+            engine = yaql_factory.YaqlFactory().create()
             devices = {
                 fetch("Device", **{self.query_property_type: value})
                 for value in engine(self.yaql_query).evaluate(data=payload)
@@ -176,7 +175,7 @@ class Job(AbstractBase):
         fetch("Job", name=self.send_notification_method).run(
             {
                 "job": self.get_properties(),
-                "results": self.results,
+                "results": results,
                 "runtime": time,
                 "result": results["success"],
                 "content": "\n\n".join(notification),
@@ -242,7 +241,6 @@ class Job(AbstractBase):
         runtime = controller.get_time()
         self.init_run(parent)
         results = self.build_results(payload, targets, parent, origin)
-        #self.results[runtime] = {**results, "logs": }
         self.end_run(runtime, results, parent, task)
         return results, runtime
 
@@ -286,30 +284,36 @@ class Service(Job):
                 log = f"Running {self.type} on {device.name}."
                 info(log)
                 logs.append(log)
-                results = self.job(payload, device, parent)
-                result = Result({
-                    "timestamp": datetime.now(),
-                    "result": results,
-                    "logs": list(current_job.logs),
-                    "job": self,
-                    "device": device,
-                })
+                results = self.job(payload, device, parent, logs)
                 success = "SUCCESS" if results["success"] else "FAILURE"
                 logs.append(f"Finished running service on {device.name}. ({success})")
+                result = factory("Result", **{
+                    "timestamp": datetime.now(),
+                    "result": results,
+                    "logs": logs,
+                    "job": self.id,
+                    "device": device.id,
+                })
             else:
                 info(f"Running {self.type}")
                 results = self.job(payload, parent)
         except Exception:
-            if device:
-                logs.append(f"Finished running service on {device.name}. (FAILURE)")
             results = {
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
+            if device:
+                logs.append(f"Finished running service on {device.name}. (FAILURE)")
+                result = factory("Result", **{
+                    "timestamp": datetime.now(),
+                    "result": results,
+                    "logs": logs,
+                    "job": self.id,
+                    "device": device.id,
+                })
         if not parent and not self.multiprocessing:
             self.completed += 1
             self.failed += 1 - results["success"]
-            self.logs.extend(logs)
             Session.commit()
         return results, logs
 

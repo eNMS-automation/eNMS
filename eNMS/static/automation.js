@@ -167,6 +167,7 @@ function displayResult(id, results) {
  */
 function displayResults(id) {
   call(`/get_job_results/${id}`, (results) => {
+    console.log(results);
     $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
     const times = Object.keys(results);
     times.forEach((option) => {

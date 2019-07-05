@@ -12,5 +12,3 @@ field_conversion: Dict[str, Callable] = {
 property_names: Dict[str, str] = {}
 
 private_properties: List[str] = ["password", "enable_password", "custom_password"]
-
-ignore_properties: List[str] = ["results", "logs"]

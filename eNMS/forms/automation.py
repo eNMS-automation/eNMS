@@ -10,7 +10,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DictField, MultipleInstanceField
+from eNMS.forms.fields import DictField, MultipleInstanceField, NoValidationSelectField
 
 
 class DeviceAutomationForm(BaseForm):
@@ -108,12 +108,12 @@ class WorkflowForm(JobForm):
 class CompareResultsForm(BaseForm):
     template = "results"
     form_type = HiddenField(default="results")
-    timestamp = SelectField("Version", choices=())
+    timestamp = NoValidationSelectField("Version", choices=())
     device = SelectField("Device", choices=(
         ("global", "Global Result"),
         ("all", "All devices"),
     ))
-    timestamp_compare = SelectField("Version", choices=())
+    timestamp_compare = NoValidationSelectField("Version", choices=())
     device_compare = SelectField("Device", choices=(
         ("global", "Global Result"),
         ("all", "All devices"),

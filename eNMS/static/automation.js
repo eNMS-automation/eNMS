@@ -128,36 +128,33 @@ function parseObject(obj) {
  * @param {results} results - Results.
  */
 function displayResult(id, results) {
-  if (results) {
+  fCall(`/get_job_results/${id}`, `#results-form-${id}`, (results) => {
     currentResults = results;
-  } else {
-    results = currentResults;
-  }
-  const value = results[$(`#display-${id}`).val()];
-  if (!value) {
-    $(`#display_results-${id}`).text("No results yet.");
-  } else if ($(`input[name="type"]:checked`).val() == "json") {
-    $(`#display_results-${id}`).empty();
-    new JSONEditor(
-      document.getElementById(`display_results-${id}`),
-      { mode: "view" },
-      parseObject(JSON.parse(JSON.stringify(value)))
-    );
-  } else {
-    $(`#display_results-${id}`).html(
-      `<pre>${JSON.stringify(
-        Object.fromEntries(
-          Object.entries(value)
-            .sort()
-            .reverse()
-        ),
-        null,
-        2
-      )
-        .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
-        .replace(/\\"/g, `"`)
-        .replace(/\\\\/g, "\\")}</pre>`
-    );
+    if (!results) {
+      $(`#display_results-${id}`).text("No results yet.");
+    } else if ($(`input[name="type"]:checked`).val() == "json") {
+      $(`#display_results-${id}`).empty();
+      new JSONEditor(
+        document.getElementById(`display_results-${id}`),
+        { mode: "view" },
+        parseObject(JSON.parse(JSON.stringify(results)))
+      );
+    } else {
+      $(`#display_results-${id}`).html(
+        `<pre>${JSON.stringify(
+          Object.fromEntries(
+            Object.entries(results)
+              .sort()
+              .reverse()
+          ),
+          null,
+          2
+        )
+          .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+          .replace(/\\"/g, `"`)
+          .replace(/\\\\/g, "\\")}</pre>`
+      );
+    }
   }
 }
 
@@ -166,20 +163,20 @@ function displayResult(id, results) {
  * @param {id} id - Job id.
  */
 function displayResults(id) {
-  call(`/get_job_results/${id}`, (results) => {
-    const timestamps = results.map((r) => r.timestamp);
+  call(`/get_job_timestamps`, (results) => {
+    const timestamps = [...new Set(results.map((r) => r.timestamp))];
     $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
     timestamps.forEach((timestamp) => {
-      console.log(timestamp)
       $(`#timestamp-${id},#timestamp_compare-${id}`).append(
         $("<option></option>")
           .attr("value", timestamp)
           .text(timestamp)
       );
     });
-    $(`#timestamp-${id},#timestamp_compare-${id}`).val(timestamps[timestamps.length - 1]);
+    mostRecent = timestamps[timestamps.length - 1];
+    $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
-    displayResult(id, results);
+    displayResult(id);
   });
 }
 

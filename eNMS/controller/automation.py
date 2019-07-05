@@ -97,9 +97,13 @@ class AutomationController(BaseController):
     def get_job_logs(self, id: int) -> dict:
         pass
 
-    def get_job_results(self, id: int) -> dict:
-        results = fetch("Result", allow_none=True, all_matches=True, job_id=id)
-        return [result.get_properties() for result in results] if results else []
+    def get_job_results(self, id: int, **kwargs) -> dict:
+        results_search = {"allow_none": True, "all_matches": True, "job_id": id}
+        if kwargs["device"] == "global":
+            fetch("Result", job_id=id, device_id=None, timestamp=kwargs["timestamp"])
+        else:
+            results = fetch("Result", **results_search)
+            return {result.device_name: result.result for result in results}
 
     def reset_status(self) -> None:
         for job in fetch_all("Job"):

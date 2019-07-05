@@ -1,6 +1,5 @@
 from collections import defaultdict
 from copy import deepcopy
-from datetime import datetime
 from git import Repo
 from git.exc import GitCommandError
 from json import loads
@@ -25,6 +24,7 @@ from sqlalchemy import (
     String,
     Text,
 )
+from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import backref, relationship
@@ -68,6 +68,7 @@ class Result(AbstractBase):
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
     )
+    device_name = association_proxy("device", "name")
 
 
 class Job(AbstractBase):
@@ -297,7 +298,7 @@ class Service(Job):
                 result = factory(
                     "Result",
                     **{
-                        "timestamp": datetime.now(),
+                        "timestamp": runtime,
                         "result": results,
                         "job": self.id,
                         "device": device.id,

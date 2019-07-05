@@ -109,9 +109,15 @@ class CompareResultsForm(BaseForm):
     template = "results"
     form_type = HiddenField(default="results")
     timestamp = SelectField("Version", choices=())
-    device = SelectField("Device", choices=())
+    device = SelectField("Device", choices=(
+        ("global", "Global Result"),
+        ("all", "All devices"),
+    ))
     timestamp_compare = SelectField("Version", choices=())
-    device_compare = SelectField("Device", choices=())
+    device_compare = SelectField("Device", choices=(
+        ("global", "Global Result"),
+        ("all", "All devices"),
+    ))
 
 
 class RestartWorkflowForm(BaseForm):

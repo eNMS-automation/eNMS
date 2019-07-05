@@ -207,7 +207,7 @@ class Job(AbstractBase):
         self.logger(f"{self.type} {self.name}: Starting.")
         if not parent:
             Session.commit()
-        results = self.build_results(payload, targets, parent, origin)
+        results = self.build_results(runtime, payload, targets, parent, origin)
         for library in ("netmiko", "napalm"):
             connections = controller.connections_cache[library].pop(self.name, None)
             if not connections:
@@ -261,6 +261,7 @@ class Service(Job):
 
     def get_results(
         self,
+        runtime: str,
         payload: dict,
         device: Optional["Device"] = None,
         parent: Optional["Job"] = None,
@@ -277,7 +278,7 @@ class Service(Job):
                 result = factory(
                     "Result",
                     **{
-                        "timestamp": datetime.now(),
+                        "timestamp": runtime,
                         "result": results,
                         "job": self.id,
                         "device": device.id,
@@ -310,6 +311,7 @@ class Service(Job):
 
     def device_run(
         self,
+        runtime: str,
         payload: dict,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
@@ -326,6 +328,7 @@ class Service(Job):
                     self.id,
                     lock,
                     device_results,
+                    runtime,
                     payload,
                     getattr(parent, "id", None),
                 )
@@ -343,6 +346,7 @@ class Service(Job):
                     self.id,
                     thread_lock,
                     device_results,
+                    runtime,
                     payload,
                     getattr(parent, "id", None),
                 )
@@ -355,13 +359,14 @@ class Service(Job):
             else:
                 results = {"devices": {}}
                 results["devices"] = {
-                    device.name: self.get_results(payload, device, parent)
+                    device.name: self.get_results(runtime, payload, device, parent)
                     for device in targets
                 }
             return results
 
     def build_results(
         self,
+        runtime: str,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
@@ -379,7 +384,7 @@ class Service(Job):
             self.completed = self.failed = 0
             if not parent:
                 Session.commit()
-            attempt = self.device_run(payload or {}, targets, parent)
+            attempt = self.device_run(runtime, payload or {}, targets, parent)
             Session.commit()
             if targets:
                 assert targets is not None

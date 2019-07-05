@@ -167,18 +167,18 @@ function displayResult(id, results) {
  */
 function displayResults(id) {
   call(`/get_job_results/${id}`, (results) => {
-    console.log(results);
+    const timestamps = results.map((r) => r.timestamp);
     $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
-    const times = Object.keys(results);
-    times.forEach((option) => {
+    timestamps.forEach((timestamp) => {
+      console.log(timestamp)
       $(`#timestamp-${id},#timestamp_compare-${id}`).append(
         $("<option></option>")
-          .attr("value", option)
-          .text(option)
+          .attr("value", timestamp)
+          .text(timestamp)
       );
     });
-    $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
-    $(`#display-${id},#compare_with-${id}`).selectpicker("refresh");
+    $(`#timestamp-${id},#timestamp_compare-${id}`).val(timestamps[timestamps.length - 1]);
+    $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
     displayResult(id, results);
   });
 }

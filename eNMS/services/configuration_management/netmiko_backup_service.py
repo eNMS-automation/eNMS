@@ -41,12 +41,7 @@ class NetmikoBackupService(Service):
             dump(data, file, default_flow_style=False)
 
     def job(
-        self,
-        payload: dict,
-        logs: list,
-        device: Device,
-        logs: list,
-        parent: Optional[Job] = None,
+        self, payload: dict, logs: list, device: Device, parent: Optional[Job] = None
     ) -> dict:
         try:
             now = datetime.now()

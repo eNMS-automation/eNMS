@@ -34,12 +34,7 @@ class NetmikoConfigurationService(Service):
     __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
 
     def job(
-        self,
-        payload: dict,
-        logs: list,
-        device: Device,
-        logs: list,
-        parent: Optional[Job] = None,
+        self, payload: dict, logs: list, device: Device, parent: Optional[Job] = None
     ) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
         config = self.sub(self.content, locals())

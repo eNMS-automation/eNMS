@@ -160,6 +160,7 @@ class BaseController:
         "get_git_content",
         "get_job_logs",
         "get_job_results",
+        "get_job_timestamps",
         "get_results_diff",
         "get_view_topology",
         "import_jobs",

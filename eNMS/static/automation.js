@@ -129,6 +129,7 @@ function parseObject(obj) {
  */
 function displayResult(id, results) {
   fCall(`/get_job_results/${id}`, `#results-form-${id}`, (results) => {
+    console.log(results)
     currentResults = results;
     if (!results) {
       $(`#display_results-${id}`).text("No results yet.");
@@ -155,7 +156,7 @@ function displayResult(id, results) {
           .replace(/\\\\/g, "\\")}</pre>`
       );
     }
-  }
+  });
 }
 
 /**
@@ -163,8 +164,7 @@ function displayResult(id, results) {
  * @param {id} id - Job id.
  */
 function displayResults(id) {
-  call(`/get_job_timestamps`, (results) => {
-    const timestamps = [...new Set(results.map((r) => r.timestamp))];
+  call(`/get_job_timestamps/${id}`, (timestamps) => {
     $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
     timestamps.forEach((timestamp) => {
       $(`#timestamp-${id},#timestamp_compare-${id}`).append(

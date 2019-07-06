@@ -167,7 +167,7 @@ function displayResults(id) {
  * Display results.
  * @param {id} id - Job id.
  */
-function getTimestamps(id) {
+function getTimestamps(id, isWorkflow) {
   call(`/get_job_timestamps/${id}`, (timestamps) => {
     $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
     timestamps.forEach((timestamp) => {
@@ -180,7 +180,10 @@ function getTimestamps(id) {
     mostRecent = timestamps[timestamps.length - 1];
     $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
-    if (timestamps) updateDeviceList(id, mostRecent);
+    if (timestamps) {
+      func = isWorkflow ? updateWorkflowList : updateServiceList;
+      func(id, mostRecent);
+    }
   });
 }
 
@@ -188,8 +191,8 @@ function getTimestamps(id) {
  * Display results.
  * @param {id} id - Job id.
  */
-function updateDeviceList(id, timestamp) {
-  call(`/get_job_timestamp_devices/${id}/${timestamp}`, (devices) => {
+function updateServiceList(id, timestamp) {
+  call(`/get_service_results_list/${id}/${timestamp}`, (devices) => {
     $(`#device-${id},#device_compare-${id}`).empty();
     devices.forEach((device) => {
       $(`#device-${id},#device_compare-${id}`).append(
@@ -199,6 +202,25 @@ function updateDeviceList(id, timestamp) {
       );
     });
     $(`#device-${id},#device_compare-${id}`).selectpicker("refresh");
+    displayResults(id);
+  });
+}
+
+/**
+ * Display results.
+ * @param {id} id - Job id.
+ */
+function updateWorkflowList(id, timestamp) {
+  call(`/get_workflow_results_list/${id}/${timestamp}`, (jobs) => {
+    $(`#job-${id},#job_compare-${id}`).empty();
+    jobs.forEach((job) => {
+      $(`#job-${id},#job_compare-${id}`).append(
+        $("<option></option>")
+          .attr("value", job[0])
+          .text(job[1])
+      );
+    });
+    $(`#job-${id},#job_compare-${id}`).selectpicker("refresh");
     displayResults(id);
   });
 }
@@ -267,13 +289,17 @@ function showResultsPanel(id, name, isWorkflow) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function configureCallbacks(id) {
+function configureCallbacks(id, isWorkflow) {
   $(`#device-${id}`).on("change", function() {
-    displayResults(id);
+    displayResults(id, isWorkflow);
   });
 
   $(`#timestamp-${id}`).on("change", function() {
-    updateDeviceList(id, this.value);
+    (isWorkflow ? updateWorkflowList : updateServiceList)(id, this.value);
+  });
+
+  $(`#job-${id}`).on("change", function() {
+    (isWorkflow ? updateWorkflowList : updateServiceList)(id, this.value);
   });
 
   $(`#compare_with-${id}`).on("change", function() {
@@ -296,7 +322,7 @@ function configureCallbacks(id) {
   });
 
   $(`#display-text-${id},#display-json-${id}`).on("click", function() {
-    displayResults(id);
+    displayResults(id, isWorkflow);
   });
 }
 

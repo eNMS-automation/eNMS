@@ -69,6 +69,8 @@ class Result(AbstractBase):
         "Device", back_populates="results", foreign_keys="Result.device_id"
     )
     device_name = association_proxy("device", "name")
+    workflow_id = Column(Integer, ForeignKey("Workflow.id"))
+    workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
 
 
 class Job(AbstractBase):
@@ -223,7 +225,13 @@ class Job(AbstractBase):
             task.is_active = False
         if not parent:
             factory(
-                "Result", **{"timestamp": runtime, "result": results, "job": self.id}
+                "Result",
+                **{
+                    "timestamp": runtime,
+                    "result": results,
+                    "job": self.id,
+                    "workflow": parent.id if parent else None,
+                },
             )
             Session.commit()
         if not parent and self.send_notification:
@@ -281,6 +289,7 @@ class Service(Job):
                         "result": results,
                         "job": self.id,
                         "device": device.id,
+                        "workflow": parent.id if parent else None,
                     },
                 )
             else:
@@ -300,6 +309,7 @@ class Service(Job):
                         "result": results,
                         "job": self.id,
                         "device": device.id,
+                        "workflow": parent.id if parent else None,
                     },
                 )
         if not parent and not self.multiprocessing:

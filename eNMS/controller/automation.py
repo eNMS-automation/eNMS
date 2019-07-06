@@ -101,7 +101,7 @@ class AutomationController(BaseController):
         results = fetch("Result", job_id=id, allow_none=True, all_matches=True)
         return list(set(result.timestamp for result in results))
 
-    def get_job_timestamp_devices(self, id: int, timestamp: str) -> dict:
+    def get_service_results_list(self, id: int, timestamp: str) -> dict:
         defaults = [("global", "Global Result"), ("all", "All devices")]
         return defaults + [
             (result.device_id, result.device_name)
@@ -113,6 +113,20 @@ class AutomationController(BaseController):
                 all_matches=True,
             )
             if result.device_id
+        ]
+
+    def get_workflow_results_list(self, id: int, timestamp: str) -> dict:
+        defaults = [("global", "Global Result"), ("all", "All devices")]
+        return defaults + [
+            (result.job_id, result.job_name)
+            for result in fetch(
+                "Result",
+                job_id=id,
+                timestamp=timestamp,
+                allow_none=True,
+                all_matches=True,
+            )
+            if result.job_id
         ]
 
     def get_job_results(self, id: int, **kwargs) -> dict:
@@ -132,7 +146,10 @@ class AutomationController(BaseController):
             }
         else:
             return fetch(
-                "Result", job_id=id, device_id=kwargs["device"], timestamp=kwargs["timestamp"]
+                "Result",
+                job_id=id,
+                device_id=kwargs["device"],
+                timestamp=kwargs["timestamp"],
             ).result
 
     def reset_status(self) -> None:

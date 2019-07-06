@@ -61,9 +61,11 @@ class Result(AbstractBase):
     __tablename__ = type = "Result"
     id = Column(Integer, primary_key=True)
     timestamp = Column(String(SMALL_STRING_LENGTH), default="")
+    parent_timestamp = Column(String(SMALL_STRING_LENGTH), default="")
     result = Column(MutableDict.as_mutable(PickleType), default={})
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="results", foreign_keys="Result.job_id")
+    job_name = association_proxy("job", "name")
     device_id = Column(Integer, ForeignKey("Device.id"))
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
@@ -202,6 +204,7 @@ class Job(AbstractBase):
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
+        parent_runtime: Optional[str] = None,
         task: Optional["Task"] = None,
         origin: Optional["Job"] = None,
     ) -> Tuple[dict, str]:
@@ -210,7 +213,9 @@ class Job(AbstractBase):
         self.logger(f"{self.type} {self.name}: Starting.")
         if not parent:
             Session.commit()
-        results = self.build_results(runtime, payload, targets, parent, origin)
+        results = self.build_results(
+            runtime, payload, targets, parent, parent_runtime, origin
+        )
         for library in ("netmiko", "napalm"):
             connections = controller.connections_cache[library].pop(self.name, None)
             if not connections:
@@ -224,15 +229,10 @@ class Job(AbstractBase):
         if task and not task.frequency:
             task.is_active = False
         if not parent:
-            factory(
-                "Result",
-                **{
-                    "timestamp": runtime,
-                    "result": results,
-                    "job": self.id,
-                    "workflow": parent.id if parent else None,
-                },
-            )
+            results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
+            if parent:
+                results_kwargs["workflow"] = parent.id
+            factory("Result", **results_kwargs)
             Session.commit()
         if not parent and self.send_notification:
             self.notify(results, runtime)
@@ -272,6 +272,7 @@ class Service(Job):
         payload: dict,
         device: Optional["Device"] = None,
         parent: Optional["Job"] = None,
+        parent_runtime: Optional[str] = None,
     ) -> Tuple[dict, list]:
 
         try:
@@ -290,6 +291,7 @@ class Service(Job):
                         "job": self.id,
                         "device": device.id,
                         "workflow": parent.id if parent else None,
+                        "parent_runtime": parent_runtime,
                     },
                 )
             else:
@@ -310,6 +312,7 @@ class Service(Job):
                         "job": self.id,
                         "device": device.id,
                         "workflow": parent.id if parent else None,
+                        "parent_runtime": parent_runtime,
                     },
                 )
         if not parent and not self.multiprocessing:
@@ -324,9 +327,10 @@ class Service(Job):
         payload: dict,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
+        parent_runtime: Optional[str] = None,
     ) -> Tuple[dict, list]:
         if not targets:
-            return self.get_results(payload)
+            return self.get_results(runtime, payload)
         else:
             if self.multiprocessing == "multiprocessing":
                 manager = Manager()
@@ -340,6 +344,7 @@ class Service(Job):
                     runtime,
                     payload,
                     getattr(parent, "id", None),
+                    parent_runtime,
                 )
                 process_args = [(device.id, *args) for device in targets]
                 pool = Pool(processes=processes)
@@ -358,6 +363,7 @@ class Service(Job):
                     runtime,
                     payload,
                     getattr(parent, "id", None),
+                    parent_runtime,
                 )
                 process_args = [(device.id, *args) for device in targets]
                 pool = ThreadPool(processes=processes)
@@ -368,7 +374,9 @@ class Service(Job):
             else:
                 results = {"devices": {}}
                 results["devices"] = {
-                    device.name: self.get_results(runtime, payload, device, parent)
+                    device.name: self.get_results(
+                        runtime, payload, device, parent, parent_runtime
+                    )
                     for device in targets
                 }
             return results
@@ -379,6 +387,7 @@ class Service(Job):
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
+        parent_runtime: Optional[str] = None,
         *other: Any,
     ) -> dict:
         results: dict = {"results": {}, "success": False}
@@ -391,7 +400,9 @@ class Service(Job):
             self.completed = self.failed = 0
             if not parent:
                 Session.commit()
-            attempt = self.device_run(runtime, payload or {}, targets, parent)
+            attempt = self.device_run(
+                runtime, payload or {}, targets, parent, parent_runtime
+            )
             Session.commit()
             if targets:
                 assert targets is not None
@@ -696,6 +707,7 @@ class Workflow(Job):
 
     def build_results(
         self,
+        runtime,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,

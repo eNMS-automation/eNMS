@@ -212,6 +212,7 @@ function updateServiceList(id, timestamp) {
  */
 function updateWorkflowList(id, timestamp) {
   call(`/get_workflow_results_list/${id}/${timestamp}`, (jobs) => {
+    console.log(jobs)
     $(`#job-${id},#job_compare-${id}`).empty();
     jobs.forEach((job) => {
       $(`#job-${id},#job_compare-${id}`).append(

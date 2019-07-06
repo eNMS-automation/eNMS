@@ -164,6 +164,7 @@ class BaseController:
         "get_service_results_list",
         "get_results_diff",
         "get_view_topology",
+        "get_workflow_results_list",
         "import_jobs",
         "import_topology",
         "migration_export",

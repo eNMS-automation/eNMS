@@ -222,11 +222,9 @@ class Job(AbstractBase):
         if task and not task.frequency:
             task.is_active = False
         if not parent:
-            factory("Result", **{
-                "timestamp": runtime,
-                "result": results,
-                "job": self.id,
-            })
+            factory(
+                "Result", **{"timestamp": runtime, "result": results, "job": self.id}
+            )
             Session.commit()
         if not parent and self.send_notification:
             self.notify(results, runtime)
@@ -379,9 +377,7 @@ class Service(Job):
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
-            self.logger(
-                f"Running {self.type} {self.name} (attempt n°{i + 1})"
-            )
+            self.logger(f"Running {self.type} {self.name} (attempt n°{i + 1})")
             self.completed = self.failed = 0
             if not parent:
                 Session.commit()

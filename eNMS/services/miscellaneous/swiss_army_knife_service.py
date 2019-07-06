@@ -59,9 +59,7 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True, "result": str(result)}
 
-    def mattermost_feedback_notification(
-        self, payload: dict, *args
-    ) -> dict:
+    def mattermost_feedback_notification(self, payload: dict, *args) -> dict:
         self.logger(f"Sending Mattermost notification for {payload['job']['name']}")
         post(
             controller.mattermost_url,

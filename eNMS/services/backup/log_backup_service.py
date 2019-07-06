@@ -31,15 +31,13 @@ class LogBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "LogBackupService"}
 
-    def job(
-        self, payload: dict, device: Device, parent: Optional[Job] = None
-    ) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         path_backup = Path.cwd() / "logs" / "job_logs"
         now = controller.strip_all(controller.get_time())
         path_dir = path_backup / f"logs_{now}"
         source = path_backup / f"logs_{now}.tgz"
         makedirs(path_dir)
-        #TODO TO REIMPLEMENT LOG BACKUP
+        # TODO TO REIMPLEMENT LOG BACKUP
         """ for job in fetch_all("Job"):
             with open(path_dir / f"{job.name}.json", "w") as log_file:
                 dump(logs, log_file) """

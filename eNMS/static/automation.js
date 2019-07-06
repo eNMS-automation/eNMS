@@ -122,40 +122,44 @@ function parseObject(obj) {
   return obj;
 }
 
+function formatResults(id, results) {
+  if (!results) results = currentResults;
+  if (!results) {
+    $(`#display_results-${id}`).text("No results yet.");
+  } else if ($(`input[name="type"]:checked`).val() == "json") {
+    $(`#display_results-${id}`).empty();
+    new JSONEditor(
+      document.getElementById(`display_results-${id}`),
+      { mode: "view" },
+      parseObject(JSON.parse(JSON.stringify(results)))
+    );
+  } else {
+    $(`#display_results-${id}`).html(
+      `<pre>${JSON.stringify(
+        Object.fromEntries(
+          Object.entries(results)
+            .sort()
+            .reverse()
+        ),
+        null,
+        2
+      )
+        .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+        .replace(/\\"/g, `"`)
+        .replace(/\\\\/g, "\\")}</pre>`
+    );
+  }
+}
+
 /**
  * Display result.
  * @param {id} id - Job id.
  * @param {results} results - Results.
  */
-function displayResult(id, results) {
+function displayResults(id) {
   fCall(`/get_job_results/${id}`, `#results-form-${id}`, (results) => {
-    console.log(results)
     currentResults = results;
-    if (!results) {
-      $(`#display_results-${id}`).text("No results yet.");
-    } else if ($(`input[name="type"]:checked`).val() == "json") {
-      $(`#display_results-${id}`).empty();
-      new JSONEditor(
-        document.getElementById(`display_results-${id}`),
-        { mode: "view" },
-        parseObject(JSON.parse(JSON.stringify(results)))
-      );
-    } else {
-      $(`#display_results-${id}`).html(
-        `<pre>${JSON.stringify(
-          Object.fromEntries(
-            Object.entries(results)
-              .sort()
-              .reverse()
-          ),
-          null,
-          2
-        )
-          .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
-          .replace(/\\"/g, `"`)
-          .replace(/\\\\/g, "\\")}</pre>`
-      );
-    }
+    formatResults(id, results);
   });
 }
 
@@ -163,7 +167,7 @@ function displayResult(id, results) {
  * Display results.
  * @param {id} id - Job id.
  */
-function displayResults(id) {
+function getTimestamps(id) {
   call(`/get_job_timestamps/${id}`, (timestamps) => {
     $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
     timestamps.forEach((timestamp) => {
@@ -176,7 +180,26 @@ function displayResults(id) {
     mostRecent = timestamps[timestamps.length - 1];
     $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
-    displayResult(id);
+    displayResults(id);
+    updateDeviceList(id, mostRecent);
+  });
+}
+
+/**
+ * Display results.
+ * @param {id} id - Job id.
+ */
+function updateDeviceList(id, timestamp) {
+  call(`/get_job_timestamp_devices/${id}/${timestamp}`, (devices) => {
+    devices.forEach((device) => {
+      console.log(device[0]);
+      $(`#device-${id},#device_compare-${id}`).append(
+        $("<option></option>")
+          .attr("value", device[0])
+          .text(device[1])
+      );
+    });
+    $(`#device-${id},#device_compare-${id}`).selectpicker("refresh");
   });
 }
 
@@ -234,7 +257,7 @@ function showLogs(id, name) {
 function showResultsPanel(id, name) {
   createPanel("results", `Results - ${name}`, id, function() {
     configureCallbacks(id);
-    displayResults(id);
+    getTimestamps(id);
   });
 }
 
@@ -244,11 +267,13 @@ function showResultsPanel(id, name) {
  */
 // eslint-disable-next-line
 function configureCallbacks(id) {
-  $(`#display-${id}`).on("change", function() {
-    call(`/get_job_results/${id}`, (results) => {
-      displayResult(id, results);
-      $(`#compare_with-${id}`).val($(`#display-${id}`).val());
-    });
+  $(`#device-${id}`).on("change", function() {
+    displayResults(id);
+  });
+
+  $(`#timestamp-${id}`).on("change", function() {
+    updateDeviceList(id, this.value);
+    displayResults(id);
   });
 
   $(`#compare_with-${id}`).on("change", function() {
@@ -271,7 +296,7 @@ function configureCallbacks(id) {
   });
 
   $(`#display-text-${id},#display-json-${id}`).on("click", function() {
-    displayResult(id);
+    displayResults(id);
   });
 }
 

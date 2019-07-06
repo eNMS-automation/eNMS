@@ -29,9 +29,7 @@ class PayloadValidationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
 
-    def job(
-        self, payload: dict, device: Device, parent: Optional[Job] = None
-    ) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         query = self.sub(self.query, locals())
         engine = factory.YaqlFactory().create()
         result = self.convert_result(engine(query).evaluate(data=payload))

@@ -24,9 +24,7 @@ class ConfigureBgpService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ConfigureBgpService"}
 
-    def job(
-        self, payload: dict, device: Device, parent: Optional[Job] = None
-    ) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         napalm_connection = self.napalm_connection(device, parent)
         config = f"""
             ip vrf {self.vrf_name}

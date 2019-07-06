@@ -109,15 +109,13 @@ class CompareResultsForm(BaseForm):
     template = "results"
     form_type = HiddenField(default="results")
     timestamp = NoValidationSelectField("Version", choices=())
-    device = SelectField("Device", choices=(
-        ("global", "Global Result"),
-        ("all", "All devices"),
-    ))
+    device = NoValidationSelectField(
+        "Device", choices=(("global", "Global Result"), ("all", "All devices"))
+    )
     timestamp_compare = NoValidationSelectField("Version", choices=())
-    device_compare = SelectField("Device", choices=(
-        ("global", "Global Result"),
-        ("all", "All devices"),
-    ))
+    device_compare = NoValidationSelectField(
+        "Device", choices=(("global", "Global Result"), ("all", "All devices"))
+    )
 
 
 class RestartWorkflowForm(BaseForm):

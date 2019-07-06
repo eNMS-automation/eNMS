@@ -68,7 +68,7 @@ class AdministrationController(BaseController):
         clear_logs_date = kwargs["clear_logs_date"]
         if clear_logs_date:
             clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
-            #TODO reimplement
+            # TODO reimplement
             pass
 
     def get_cluster_status(self) -> dict:

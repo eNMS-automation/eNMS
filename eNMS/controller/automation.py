@@ -101,14 +101,33 @@ class AutomationController(BaseController):
         results = fetch("Result", job_id=id, allow_none=True, all_matches=True)
         return list(set(result.timestamp for result in results))
 
+    def get_job_timestamp_devices(self, id: int, timestamp: str) -> dict:
+        return [
+            (result.device_id, result.device_name)
+            for result in fetch(
+                "Result",
+                job_id=id,
+                timestamp=timestamp,
+                allow_none=True,
+                all_matches=True,
+            )
+            if result.device_id
+        ]
+
     def get_job_results(self, id: int, **kwargs) -> dict:
         print(id, kwargs)
         results_search = {"allow_none": True, "all_matches": True, "job_id": id}
         if kwargs["device"] == "global":
-            return fetch("Result", job_id=id, device_id=None, timestamp=kwargs["timestamp"]).result
+            return fetch(
+                "Result", job_id=id, device_id=None, timestamp=kwargs["timestamp"]
+            ).result
         else:
             results = fetch("Result", **results_search)
-            return {result.device_name: result.result for result in results}
+            return {
+                result.device_name: result.result
+                for result in results
+                if result.device_id
+            }
 
     def reset_status(self) -> None:
         for job in fetch_all("Job"):

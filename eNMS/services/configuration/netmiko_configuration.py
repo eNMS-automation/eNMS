@@ -33,9 +33,7 @@ class NetmikoConfigurationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
 
-    def job(
-        self, payload: dict, device: Device, parent: Optional[Job] = None
-    ) -> dict:
+    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
         config = self.sub(self.content, locals())
         self.logger(f"Pushing configuration on {device.name} (Netmiko)")

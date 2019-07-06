@@ -180,8 +180,7 @@ function getTimestamps(id) {
     mostRecent = timestamps[timestamps.length - 1];
     $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
-    displayResults(id);
-    updateDeviceList(id, mostRecent);
+    if (timestamps) updateDeviceList(id, mostRecent);
   });
 }
 
@@ -191,8 +190,8 @@ function getTimestamps(id) {
  */
 function updateDeviceList(id, timestamp) {
   call(`/get_job_timestamp_devices/${id}/${timestamp}`, (devices) => {
+    $(`#device-${id},#device_compare-${id}`).empty();
     devices.forEach((device) => {
-      console.log(device[0]);
       $(`#device-${id},#device_compare-${id}`).append(
         $("<option></option>")
           .attr("value", device[0])
@@ -200,6 +199,7 @@ function updateDeviceList(id, timestamp) {
       );
     });
     $(`#device-${id},#device_compare-${id}`).selectpicker("refresh");
+    displayResults(id);
   });
 }
 
@@ -273,7 +273,6 @@ function configureCallbacks(id) {
 
   $(`#timestamp-${id}`).on("change", function() {
     updateDeviceList(id, this.value);
-    displayResults(id);
   });
 
   $(`#compare_with-${id}`).on("change", function() {

@@ -630,7 +630,7 @@ class Workflow(Job):
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogs('{self.id}')"></i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showResultsPanel('{self.id}', '{self.name}')">
+            onclick="showResultsPanel('{self.id}', '{self.name}', true)">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}')">Run</button>""",

@@ -118,6 +118,13 @@ class CompareResultsForm(BaseForm):
     )
 
 
+class CompareWorkflowResultsForm(CompareResultsForm):
+    template = "workflow_results"
+    form_type = HiddenField(default="workflow_results")
+    job = NoValidationSelectField("Job", choices=())
+    job_compare = NoValidationSelectField("Job", choices=())
+
+
 class RestartWorkflowForm(BaseForm):
     template = "restart_workflow"
     action = "restartWorkflow"

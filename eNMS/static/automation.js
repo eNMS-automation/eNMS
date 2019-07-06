@@ -254,10 +254,11 @@ function showLogs(id, name) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function showResultsPanel(id, name) {
-  createPanel("results", `Results - ${name}`, id, function() {
-    configureCallbacks(id);
-    getTimestamps(id);
+function showResultsPanel(id, name, isWorkflow) {
+  form = isWorkflow ? "workflow_results" : "results";
+  createPanel(form, `Results - ${name}`, id, function() {
+    configureCallbacks(id, isWorkflow);
+    getTimestamps(id, isWorkflow);
   });
 }
 

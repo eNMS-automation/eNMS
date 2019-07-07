@@ -134,21 +134,28 @@ class AutomationController(BaseController):
             timestamp = "timestamp"
         request = {timestamp: kw["timestamp"]}
         job = kw.get("job", id)
-        if job != "global":
+        if job not in ("all", "global"):
             request["job_id"] = job
         device = kw["device"]
-        if device != "global":
-            request["device_id"] = None if device == "global" else device
-        if kw["device"] == "all":
+        if device == "all" or job == "all":
             request.update({
                 "allow_none": True,
                 "all_matches": True,
-            }
-            results = fetch("Result", **request)
+            })
+        else:
+            request["device_id"] = None if device == "global" else device
+        results = fetch("Result", **request)
+        if device == "all":
             return {
                 result.device_name: result.result
                 for result in results
                 if result.device_id
+            }
+        elif job == "all":
+            return {
+                result.job_name: result.result
+                for result in results
+                if result.job_id
             }
         else:
             return fetch("Result", **request).result

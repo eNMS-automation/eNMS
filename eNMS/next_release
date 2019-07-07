@@ -1,3 +1,4 @@
 - Fix for Rest Call Service
+- Rename query to YaQL query for payload services
 - Remove credentials for workflow
 - Other minor bug fix.

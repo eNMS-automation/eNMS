@@ -49,4 +49,4 @@ class PayloadValidationService(Service):
 
 class PayloadValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="PayloadValidationService")
-    query = SubstitutionField()
+    query = SubstitutionField("YaQL query")

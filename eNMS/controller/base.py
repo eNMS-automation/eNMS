@@ -12,6 +12,7 @@ from hvac import Client as VaultClient
 from importlib import import_module
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
+from json import load
 from json.decoder import JSONDecodeError
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
@@ -220,6 +221,7 @@ class BaseController:
         self.app = app
         self.path = app.path
         self.create_google_earth_styles()
+        self.fetch_version()
         self.init_logs()
 
     def create_google_earth_styles(self) -> None:
@@ -230,6 +232,10 @@ class BaseController:
             path_icon = f"{self.path}/eNMS/static/images/2D/{icon}.gif"
             point_style.iconstyle.icon.href = path_icon
             self.google_earth_styles[icon] = point_style
+
+    def fetch_version(self) -> None:
+        with open(self.path / "package.json") as package_file:
+            self.version = load(package_file)["version"]
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):

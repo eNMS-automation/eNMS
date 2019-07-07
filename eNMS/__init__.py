@@ -49,11 +49,12 @@ def configure_context_processor(app: Flask) -> None:
     @app.context_processor
     def inject_properties() -> dict:
         return {
+            "documentation_url": controller.documentation_url,
             "form_properties": form_properties,
             "names": property_names,
             "parameters": controller.config,
-            "documentation_url": controller.documentation_url,
             "property_types": {k: str(v) for k, v in property_types.items()},
+            "version": controller.version,
         }
 
 

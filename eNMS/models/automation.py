@@ -276,46 +276,32 @@ class Service(Job):
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,
     ) -> Tuple[dict, list]:
+        kwargs = {"timestamp": runtime, "job": self.id}
+        if parent:
+            kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
+        if device:
+            kwargs["device"] = device.id
+        self.logger(f"Running {self.type} {f'on {device.name}.' if device else '.'}")
         try:
             if device:
-                log = f"Running {self.type} on {device.name}."
-                info(log)
-                self.logger(log)
                 results = self.job(payload, device, parent)
-                success = "SUCCESS" if results["success"] else "FAILURE"
-                self.logger(f"Finished running service on {device.name}. ({success})")
-                result = factory(
-                    "Result",
-                    **{
-                        "timestamp": runtime,
-                        "result": results,
-                        "job": self.id,
-                        "device": device.id,
-                        "workflow": parent.id if parent else None,
-                        "parent_timestamp": parent_timestamp,
-                    },
-                )
             else:
-                info(f"Running {self.type}")
                 results = self.job(payload, parent)
         except Exception:
             results = {
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
-            if device:
-                self.logger(f"Finished running service on {device.name}. (FAILURE)")
-                result = factory(
-                    "Result",
-                    **{
-                        "timestamp": runtime,
-                        "result": results,
-                        "job": self.id,
-                        "device": device.id,
-                        "workflow": parent.id if parent else None,
-                        "parent_timestamp": parent_timestamp,
-                    },
-                )
+        self.logger(
+            f"Finished running {self.type} '{self.name}'"
+            f"({'SUCCESS' if results['success'] else 'FAILURE'})"
+            f" on {device.name}."
+            if device
+            else "."
+        )
+
+        print("tttt"*100, results, kwargs)
+        result = factory("Result", result=results, **kwargs)
         if not parent and not self.multiprocessing:
             self.completed += 1
             self.failed += 1 - results["success"]

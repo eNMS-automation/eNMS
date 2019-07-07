@@ -292,7 +292,7 @@ function showResultsPanel(id, name, isWorkflow) {
 // eslint-disable-next-line
 function configureCallbacks(id, isWorkflow) {
   $(`#device-${id}`).on("change", function() {
-    displayResults(id, isWorkflow);
+    displayResults(id, id);
   });
 
   $(`#timestamp-${id}`).on("change", function() {

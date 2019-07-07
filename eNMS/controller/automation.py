@@ -104,15 +104,10 @@ class AutomationController(BaseController):
     def get_results_device_list(self, id: int, **kw) -> dict:
         defaults = [("global", "Global Result"), ("all", "All devices")]
         timestamp_key = "parent_timestamp" if "job" in kw else "timestamp"
-        request = {"job_id": id, timestamp_key: kw["timestamp"]}
+        request = {"job_id": id, timestamp_key: kw.get("timestamp")}
         return defaults + [
             (result.device_id, result.device_name)
-            for result in fetch(
-                "Result",
-                allow_none=True,
-                all_matches=True,
-                **request
-            )
+            for result in fetch("Result", allow_none=True, all_matches=True, **request)
             if result.device_id
         ]
 
@@ -148,7 +143,7 @@ class AutomationController(BaseController):
                 "job_id": id,
                 timestamp: kw["timestamp"],
             }
-            results = fetch("Result", **results_search)
+            results = fetch("Result", **request)
             return {
                 result.device_name: result.result
                 for result in results

@@ -1,5 +1,5 @@
 - Fix for Rest Call Service has_targets
 - Rename query to YaQL query for payload services
 - Remove credentials for workflow
-- change packet size to 56 by default in PingService
+- change packet size + TTL by default in PingService
 - Other minor bug fix.

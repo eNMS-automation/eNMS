@@ -323,7 +323,7 @@ function configureCallbacks(id, isWorkflow) {
   });
 
   $(`#display-text-${id},#display-json-${id}`).on("click", function() {
-    displayResults(id, isWorkflow);
+    displayResults(id, id);
   });
 }
 

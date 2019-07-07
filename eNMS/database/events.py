@@ -76,10 +76,10 @@ def configure_events() -> None:
     ) -> None:
         state, changes = inspect(target), []
         for attr in state.attrs:
-            if attr.key in private_properties:
+            if attr.key in private_properties or attr.key in dont_track_changes:
                 continue
             hist = state.get_history(attr.key, True)
-            if not hist.has_changes() or attr.key in dont_track_changes:
+            if not hist.has_changes():
                 continue
             change = f"{attr.key}: "
             if type(getattr(target, attr.key)) == InstrumentedList:

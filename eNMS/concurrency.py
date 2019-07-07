@@ -23,24 +23,24 @@ def threaded_job(
 def device_process(args: tuple) -> None:
     engine.dispose()
     with session_scope() as session:
-        device_id, job_id, lock, results, runtime, payload, workflow_id, parent_runtime = (
+        device_id, job_id, lock, results, runtime, payload, workflow_id, parent_timestamp = (
             args
         )
         device = fetch("Device", session=session, id=device_id)
         workflow = fetch("Workflow", allow_none=True, session=session, id=workflow_id)
         job = fetch("Job", session=session, id=job_id)
         device_result = job.get_results(
-            runtime, payload, device, workflow, parent_runtime
+            runtime, payload, device, workflow, parent_timestamp
         )
         with lock:
             results[device.name] = device_result
 
 
 def device_thread(args: tuple) -> None:
-    device_id, job_id, lock, results, payload, workflow_id, parent_runtime = args
+    device_id, job_id, lock, results, payload, workflow_id, parent_timestamp = args
     device = fetch("Device", id=device_id)
     workflow = fetch("Workflow", allow_none=True, id=workflow_id)
     job = fetch("Job", id=job_id)
-    device_result = job.get_results(runtime, payload, device, workflow, parent_runtime)
+    device_result = job.get_results(runtime, payload, device, workflow, parent_timestamp)
     with lock:
         results[device.name] = device_result

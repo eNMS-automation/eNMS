@@ -4,7 +4,7 @@ from git import Repo
 from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
-from logging import info
+from logging import DEBUG, FileHandler, Formatter, getLogger, info
 from multiprocessing import Lock, Manager
 from multiprocessing.pool import Pool, ThreadPool
 from napalm import get_network_driver
@@ -132,6 +132,14 @@ class Job(AbstractBase):
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
     results = relationship("Result", back_populates="job")
 
+    def __init__(self, **kwargs: Any) -> None:
+        self.logger = getLogger(kwargs["name"])
+        self.logger.setLevel(DEBUG)
+        fh = FileHandler(controller.path / "logs" / "job_logs" / f"{kwargs['name'].log}")
+        formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        fh.setFormatter(formatter)
+        self.logger.addHandler(fh)
+
     @hybrid_property
     def status(self) -> str:
         return "Running" if self.is_running else "Idle"
@@ -203,7 +211,7 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def logger(self, log: str) -> None:
+    def log(self, log: str) -> None:
         info(log)
 
     def run(
@@ -219,7 +227,7 @@ class Job(AbstractBase):
         if not parent_timestamp:
             parent_timestamp = runtime
         self.is_running, self.state = True, {}
-        self.logger(f"{self.type} {self.name}: Starting.")
+        self.log(f"{self.type} {self.name}: Starting.")
         if not parent:
             Session.commit()
         results = self.build_results(
@@ -232,7 +240,7 @@ class Job(AbstractBase):
             for device, conn in connections.items():
                 info(f"Closing Netmiko Connection to {device}")
                 conn.disconnect() if library == "netmiko" else conn.close()
-        self.logger(f"{self.type} {self.name}: Finished.")
+        self.log(f"{self.type} {self.name}: Finished.")
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         if task and not task.frequency:
@@ -288,7 +296,7 @@ class Service(Job):
             kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
         if device:
             kwargs["device"] = device.id
-        self.logger(f"Running {self.type} {f'on {device.name}.' if device else '.'}")
+        self.logf"Running {self.type} {f'on {device.name}.' if device else '.'}")
         try:
             if device:
                 results = self.job(payload, device, parent)
@@ -299,7 +307,7 @@ class Service(Job):
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
-        self.logger(
+        self.log
             f"Finished running {self.type} '{self.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
             f" on {device.name}."
@@ -388,7 +396,7 @@ class Service(Job):
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
-            self.logger(f"Running {self.type} {self.name} (attempt n°{i + 1})")
+            self.logf"Running {self.type} {self.name} (attempt n°{i + 1})")
             self.completed = self.failed = 0
             if not parent:
                 Session.commit()

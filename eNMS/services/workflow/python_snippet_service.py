@@ -29,7 +29,7 @@ class PythonSnippetService(Service):
         try:
             code_object = compile(self.source_code, "user_python_code", "exec")
         except Exception as exc:
-            self.logger(f"Compile error: {str(exc)}")
+            self.logf"Compile error: {str(exc)}")
             return {"success": False, "result": {"step": "compile", "error": str(exc)}}
 
         _code_result_ = {}
@@ -80,7 +80,7 @@ class PythonSnippetService(Service):
         except TerminateException:
             pass  # Clean exit from middle of snippet
         except Exception as exc:
-            self.logger(f"Execution error: {str(exc)}")
+            self.logf"Execution error: {str(exc)}")
             return {
                 "success": False,
                 "result": {
@@ -91,7 +91,7 @@ class PythonSnippetService(Service):
             }
 
         if not _code_result_:
-            self.logger("Error: Result not set by user code on service instance")
+            self.log"Error: Result not set by user code on service instance")
             _code_result_ = {
                 "success": False,
                 "result": {"error": "Result not set by user code on service instance"},

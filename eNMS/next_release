@@ -3,4 +3,8 @@ you can use in your custom services.
 
 - Advanced search: per relationship system
 
+- eNMS version is now displayed in the UI. The version number is read from the package.json file.
+
+- Refactoring of the results.
+
 - Bug fixes

@@ -51,7 +51,7 @@ class AnsiblePlaybookService(Service):
         if self.has_targets:
             command.extend(["-i", device.ip_address + ","])
         command.append(self.sub(self.playbook_path, locals()))
-        self.logger(f"Sending Ansible playbook: {' '.join(command + arguments)}")
+        self.logf"Sending Ansible playbook: {' '.join(command + arguments)}")
         result = check_output(command + arguments)
         try:
             result = result.decode("utf-8")

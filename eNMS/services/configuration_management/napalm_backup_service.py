@@ -45,7 +45,7 @@ class NapalmBackupService(Service):
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
             napalm_connection = self.napalm_connection(device, parent)
-            self.logger(f"Fetching configuration on {device.name} (Napalm)")
+            self.logf"Fetching configuration on {device.name} (Napalm)")
             config = controller.str_dict(napalm_connection.get_config())
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()

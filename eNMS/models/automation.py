@@ -4,7 +4,7 @@ from git import Repo
 from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
-from logging import DEBUG, FileHandler, Formatter, getLogger, info
+from logging import FileHandler, Formatter, getLogger, INFO
 from multiprocessing import Lock, Manager
 from multiprocessing.pool import Pool, ThreadPool
 from napalm import get_network_driver
@@ -134,7 +134,7 @@ class Job(AbstractBase):
 
     def __init__(self, **kwargs: Any) -> None:
         logger = getLogger(kwargs["name"])
-        logger.setLevel(DEBUG)
+        logger.setLevel(INFO)
         filename = f"{controller.strip_all(kwargs['name'])}.log"
         fh = FileHandler(controller.path / "logs" / "job_logs" / filename)
         formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -242,7 +242,7 @@ class Job(AbstractBase):
             if not connections:
                 continue
             for device, conn in connections.items():
-                info(f"Closing Netmiko Connection to {device}")
+                self.log(parent, "info", f"Closing Netmiko Connection to {device}")
                 conn.disconnect() if library == "netmiko" else conn.close()
         self.log(parent, "info", f"{self.type} {self.name}: Finished.")
         self.is_running, self.state = False, {}

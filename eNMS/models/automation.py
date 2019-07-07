@@ -660,7 +660,6 @@ class Workflow(Job):
                 passed_devices = allowed_devices[job.name]
             else:
                 failed_devices = allowed_devices[job.name]
-        print("tttt"*100, job, passed_devices, failed_devices)
         for devices, edge in ((passed_devices, "success"), (failed_devices, "failure")):
             if not devices:
                 continue

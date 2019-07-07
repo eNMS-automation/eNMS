@@ -299,8 +299,6 @@ class Service(Job):
             if device
             else "."
         )
-
-        print("tttt"*100, results, kwargs)
         result = factory("Result", result=results, **kwargs)
         if not parent and not self.multiprocessing:
             self.completed += 1

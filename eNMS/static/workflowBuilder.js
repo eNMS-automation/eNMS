@@ -362,7 +362,7 @@ Object.assign(action, {
   "Restart Workflow": (job) => showRestartPanel(job),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
-  "Workflow Results": () => showResultsPanel(workflow.id, workflow.name),
+  "Workflow Results": () => showResultsPanel(workflow.id, workflow.name, true),
   "Workflow Logs": () => showLogs(workflow.id),
   "Add to Workflow": () => showPanel("add_jobs"),
   "Remove from Workflow": deleteSelection,

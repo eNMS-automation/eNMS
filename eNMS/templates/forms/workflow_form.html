@@ -190,18 +190,6 @@
         <fieldset>
           <div class="item">
             <input
-              id="workflow-has_targets"
-              name="has_targets"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Has Targets</label>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="item">
-            <input
               id="workflow-use_workflow_targets"
               name="use_workflow_targets"
               class="add-id"
@@ -241,21 +229,6 @@
         >
         <div class="form-group">
           {{ form.query_property_type(id='workflow-query_property_type',
-          class="form-control add-id") }}
-        </div>
-        <label><label for="credentials">Credentials</label></label>
-        <div class="form-group">
-          {{ form.credentials(id='workflow-credentials', class="form-control
-          add-id") }}
-        </div>
-        <label><label for="custom_username">Custom Username</label></label>
-        <div class="form-group">
-          {{ form.custom_username(id='workflow-custom_username',
-          class="form-control add-id") }}
-        </div>
-        <label><label for="custom_password">Custom Password</label></label>
-        <div class="form-group">
-          {{ form.custom_password(id='workflow-custom_password',
           class="form-control add-id") }}
         </div>
       </div>

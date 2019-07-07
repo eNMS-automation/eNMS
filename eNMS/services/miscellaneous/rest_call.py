@@ -4,6 +4,7 @@ from requests import (
     post as rest_post,
     put as rest_put,
     delete as rest_delete,
+    patch as rest_patch,
 )
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
@@ -47,6 +48,7 @@ class RestCallService(Service):
         "POST": rest_post,
         "PUT": rest_put,
         "DELETE": rest_delete,
+        "PATCH": rest_patch,
     }
 
     __mapper_args__ = {"polymorphic_identity": "RestCallService"}
@@ -108,7 +110,13 @@ class RestCallForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="RestCallService")
     has_targets = BooleanField("Has Target Devices")
     call_type = SelectField(
-        choices=(("GET", "GET"), ("POST", "POST"), ("PUT", "PUT"), ("DELETE", "DELETE"))
+        choices=(
+            ("GET", "GET"),
+            ("POST", "POST"),
+            ("PUT", "PUT"),
+            ("DELETE", "DELETE"),
+            ("PATCH", "PATCH"),
+        )
     )
     rest_url = SubstitutionField()
     payload = DictSubstitutionField()

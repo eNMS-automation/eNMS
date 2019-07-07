@@ -334,7 +334,6 @@ function configureCallbacks(id, isWorkflow) {
 // eslint-disable-next-line
 function clearResults(id) {
   call(`/clear_results/${id}`, () => {
-    $(`#display_results-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Results cleared.", "success", 5);
     $(`#results-${id}`).remove();
   });

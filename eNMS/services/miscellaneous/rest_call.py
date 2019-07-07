@@ -122,6 +122,7 @@ class RestCallForm(ServiceForm, ValidationForm):
     options = DictField()
     groups = {
         "Main Parameters": [
+            "has_targets",
             "call_type",
             "rest_url",
             "payload",

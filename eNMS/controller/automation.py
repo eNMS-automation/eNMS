@@ -116,14 +116,14 @@ class AutomationController(BaseController):
             if result.device_id
         ]
 
-    def get_workflow_results_list(self, id: int, timestamp: str) -> dict:
+    def get_workflow_results_list(self, id: int, **kw) -> dict:
         defaults = [("global", "Global Result"), ("all", "All jobs")]
         return defaults + [
             (result.job_id, result.job_name)
             for result in fetch(
                 "Result",
                 workflow_id=id,
-                parent_timestamp=timestamp,
+                parent_timestamp=kw["timestamp"],
                 allow_none=True,
                 all_matches=True,
             )

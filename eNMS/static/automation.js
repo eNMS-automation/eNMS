@@ -122,19 +122,19 @@ function parseObject(obj) {
   return obj;
 }
 
-function formatResults(id, results) {
+function formatResults(results, id, formId) {
   if (!results) results = currentResults;
   if (!results) {
-    $(`#display_results-${id}`).text("No results yet.");
+    $(`#display_results-${formId}`).text("No results yet.");
   } else if ($(`input[name="type"]:checked`).val() == "json") {
-    $(`#display_results-${id}`).empty();
+    $(`#display_results-${formId}`).empty();
     new JSONEditor(
-      document.getElementById(`display_results-${id}`),
+      document.getElementById(`display_results-${formId}`),
       { mode: "view" },
       parseObject(JSON.parse(JSON.stringify(results)))
     );
   } else {
-    $(`#display_results-${id}`).html(
+    $(`#display_results-${formId}`).html(
       `<pre>${JSON.stringify(
         Object.fromEntries(
           Object.entries(results)
@@ -156,10 +156,10 @@ function formatResults(id, results) {
  * @param {id} id - Job id.
  * @param {results} results - Results.
  */
-function displayResults(id, parentId) {
-  fCall(`/get_job_results/${id}`, `#results-form-${parentId || id}`, (results) => {
+function displayResults(id, formId) {
+  fCall(`/get_job_results/${id}`, `#results-form-${formId}`, (results) => {
     currentResults = results;
-    formatResults(id, results);
+    formatResults(results, id, formId);
   });
 }
 
@@ -191,18 +191,18 @@ function getTimestamps(id, isWorkflow) {
  * @param {id} id - Job id.
  */
 function updateDeviceList(id, parentId) {
-  fCall(`/get_results_device_list/${id}`, `#results-form-${parentId || id}`, (devices) => {
-    console.log(devices)
-    $(`#device-${id},#device_compare-${id}`).empty();
+  formId = parentId || id;
+  fCall(`/get_results_device_list/${id}`, `#results-form-${formId}`, (devices) => {
+    $(`#device-${formId},#device_compare-${formId}`).empty();
     devices.forEach((device) => {
-      $(`#device-${id},#device_compare-${id}`).append(
+      $(`#device-${formId},#device_compare-${formId}`).append(
         $("<option></option>")
           .attr("value", device[0])
           .text(device[1])
       );
     });
-    $(`#device-${id},#device_compare-${id}`).selectpicker("refresh");
-    displayResults(id, parentId);
+    $(`#device-${formId},#device_compare-${formId}`).selectpicker("refresh");
+    displayResults(id, formId);
   });
 }
 
@@ -210,8 +210,8 @@ function updateDeviceList(id, parentId) {
  * Display results.
  * @param {id} id - Job id.
  */
-function updateWorkflowList(id, timestamp) {
-  call(`/get_workflow_results_list/${id}/${timestamp}`, (jobs) => {
+function updateWorkflowList(id) {
+  fCall(`/get_workflow_results_list/${id}`, `#results-form-${id}`, (jobs) => {
     console.log(jobs)
     $(`#job-${id},#job_compare-${id}`).empty();
     jobs.forEach((job) => {
@@ -222,7 +222,7 @@ function updateWorkflowList(id, timestamp) {
       );
     });
     $(`#job-${id},#job_compare-${id}`).selectpicker("refresh");
-    displayResults(id);
+    displayResults(id, id);
   });
 }
 

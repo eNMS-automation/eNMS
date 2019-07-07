@@ -129,15 +129,16 @@ class AutomationController(BaseController):
             if result.job_id
         ]
 
-    def get_job_results(self, id: int, **kwargs) -> dict:
-        results_search = {"allow_none": True, "all_matches": True, "job_id": id}
-        if "timestamp" not in kwargs:
+    def get_job_results(self, id: int, **kw) -> dict:
+        
+        if "timestamp" not in kw:
             return None
-        if kwargs["device"] == "global":
-            return fetch(
-                "Result", job_id=id, device_id=None, timestamp=kwargs["timestamp"]
-            ).result
-        elif kwargs["device"] == "all":
+        timestamp = "parent_timestamp" if "job" in kw else "timestamp"
+        if kw["device"] == "global":
+            request = {"job_id": id, "device_id": None, timestamp: kw["timestamp"]}
+            return fetch("Result", **request).result
+        elif kw["device"] == "all":
+            request = {"allow_none": True, "all_matches": True, "job_id": id}
             results = fetch("Result", **results_search)
             return {
                 result.device_name: result.result
@@ -145,12 +146,8 @@ class AutomationController(BaseController):
                 if result.device_id
             }
         else:
-            return fetch(
-                "Result",
-                job_id=id,
-                device_id=kwargs["device"],
-                timestamp=kwargs["timestamp"],
-            ).result
+            request = {"job_id": id, "device_id": kw["device"], timestamp: kw["timestamp"]}
+            return fetch("Result", **request).result
 
     def reset_status(self) -> None:
         for job in fetch_all("Job"):

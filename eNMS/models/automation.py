@@ -737,7 +737,10 @@ class Workflow(Job):
                 job, allowed_devices, results["results"]
             )
             job_results, _ = job.run(
-                results["results"], targets=valid_devices, parent=self, parent_timestamp=parent_timestamp
+                results["results"],
+                targets=valid_devices,
+                parent=self,
+                parent_timestamp=parent_timestamp,
             )
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

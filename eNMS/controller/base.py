@@ -161,7 +161,7 @@ class BaseController:
         "get_job_logs",
         "get_job_results",
         "get_job_timestamps",
-        "get_service_results_list",
+        "get_results_device_list",
         "get_results_diff",
         "get_view_topology",
         "get_workflow_results_list",

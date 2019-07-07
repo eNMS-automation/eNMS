@@ -181,8 +181,7 @@ function getTimestamps(id, isWorkflow) {
     $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
     if (timestamps) {
-      func = isWorkflow ? updateWorkflowList : updateServiceList;
-      func(id, mostRecent);
+      (isWorkflow ? updateWorkflowList : updateDeviceList)(id);
     }
   });
 }
@@ -191,8 +190,9 @@ function getTimestamps(id, isWorkflow) {
  * Display results.
  * @param {id} id - Job id.
  */
-function updateServiceList(id, timestamp, parentId) {
-  call(`/get_service_results_list/${id}/${timestamp}`, (devices) => {
+function updateDeviceList(id, parentId) {
+  fCall(`/get_results_device_list/${id}`, `#results-form-${parentId || id}`, (devices) => {
+    console.log(devices)
     $(`#device-${id},#device_compare-${id}`).empty();
     devices.forEach((device) => {
       $(`#device-${id},#device_compare-${id}`).append(
@@ -296,11 +296,11 @@ function configureCallbacks(id, isWorkflow) {
   });
 
   $(`#timestamp-${id}`).on("change", function() {
-    (isWorkflow ? updateWorkflowList : updateServiceList)(id, this.value);
+    (isWorkflow ? updateWorkflowList : updateDeviceList)(id);
   });
 
   $(`#job-${id}`).on("change", function() {
-    updateServiceList(this.value, $(`#timestamp-${id}`).val(), id);
+    updateDeviceList(this.value, id);
   });
 
   $(`#compare_with-${id}`).on("change", function() {

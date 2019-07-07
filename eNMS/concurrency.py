@@ -41,6 +41,8 @@ def device_thread(args: tuple) -> None:
     device = fetch("Device", id=device_id)
     workflow = fetch("Workflow", allow_none=True, id=workflow_id)
     job = fetch("Job", id=job_id)
-    device_result = job.get_results(runtime, payload, device, workflow, parent_timestamp)
+    device_result = job.get_results(
+        runtime, payload, device, workflow, parent_timestamp
+    )
     with lock:
         results[device.name] = device_result

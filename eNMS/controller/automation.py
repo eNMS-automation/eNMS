@@ -101,16 +101,17 @@ class AutomationController(BaseController):
         results = fetch("Result", job_id=id, allow_none=True, all_matches=True)
         return list(set(result.timestamp for result in results))
 
-    def get_service_results_list(self, id: int, timestamp: str) -> dict:
+    def get_results_device_list(self, id: int, **kw) -> dict:
         defaults = [("global", "Global Result"), ("all", "All devices")]
+        timestamp_key = "parent_timestamp" if "job" in kw else "timestamp"
+        request = {"job_id": id, timestamp_key: kw["timestamp"]}
         return defaults + [
             (result.device_id, result.device_name)
             for result in fetch(
                 "Result",
-                job_id=id,
-                timestamp=timestamp,
                 allow_none=True,
                 all_matches=True,
+                **request
             )
             if result.device_id
         ]
@@ -130,15 +131,23 @@ class AutomationController(BaseController):
         ]
 
     def get_job_results(self, id: int, **kw) -> dict:
-        
         if "timestamp" not in kw:
             return None
-        timestamp = "parent_timestamp" if "job" in kw else "timestamp"
+        workflow_result = "job" in kw
+        if workflow_result and kw["job"] != "global":
+            timestamp = "parent_timestamp"
+        else:
+            timestamp = "timestamp"
         if kw["device"] == "global":
             request = {"job_id": id, "device_id": None, timestamp: kw["timestamp"]}
             return fetch("Result", **request).result
         elif kw["device"] == "all":
-            request = {"allow_none": True, "all_matches": True, "job_id": id}
+            request = {
+                "allow_none": True,
+                "all_matches": True,
+                "job_id": id,
+                timestamp: kw["timestamp"],
+            }
             results = fetch("Result", **results_search)
             return {
                 result.device_name: result.result
@@ -146,7 +155,11 @@ class AutomationController(BaseController):
                 if result.device_id
             }
         else:
-            request = {"job_id": id, "device_id": kw["device"], timestamp: kw["timestamp"]}
+            request = {
+                "job_id": id,
+                "device_id": kw["device"],
+                timestamp: kw["timestamp"],
+            }
             return fetch("Result", **request).result
 
     def reset_status(self) -> None:

@@ -39,7 +39,7 @@ class GenericFileTransferService(Service):
             ssh_client.load_system_host_keys()
         source = self.sub(self.source_file, locals())
         destination = self.sub(self.destination_file, locals())
-        self.log("Transferring file {source} on {device.name}")
+        self.log(parent, "info", "Transferring file {source} on {device.name}")
         success, result = True, f"File {source} transferred successfully"
         ssh_client.connect(
             device.ip_address,

@@ -28,7 +28,7 @@ class NapalmGettersService(Service):
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         napalm_connection, result = self.napalm_connection(device, parent), {}
-        self.log(
+        self.log(parent, "info", 
             f"Fetching NAPALM getters ({', '.join(self.getters)}) on {device.name}"
         )
         for getter in self.getters:

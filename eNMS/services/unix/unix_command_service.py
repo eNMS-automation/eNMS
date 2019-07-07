@@ -33,7 +33,7 @@ class UnixCommandService(Service):
     ) -> dict:
         command = self.sub(self.command, locals())
         match = self.sub(self.content_match, locals())
-        self.log(f"Running Unix command ({command}) on {device.name}")
+        self.log(parent, "info", f"Running Unix command ({command}) on {device.name}")
         result = check_output(command.split()).decode()
         return {
             "success": self.match_content(result, match),

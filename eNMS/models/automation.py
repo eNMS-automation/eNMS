@@ -140,7 +140,6 @@ class Job(AbstractBase):
         formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         fh.setFormatter(formatter)
         logger.addHandler(fh)
-        controller.job_loggers[kwargs["name"]] = logger
         super().__init__(**kwargs)
 
     @hybrid_property
@@ -214,12 +213,10 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    @property
-    def logger(self) -> Any:
-        return controller.job_loggers[controller.strip_all(self.name)]
-
-    def log(self, log: str) -> None:
-        self.logger.info(log)
+    def log(self, parent, severity, log: str) -> None:
+        getattr(getLogger(self.name), severity)(log)
+        if parent:
+            getattr(getLogger(parent.name), severity)(log)
 
     def run(
         self,
@@ -234,7 +231,7 @@ class Job(AbstractBase):
         if not parent_timestamp:
             parent_timestamp = runtime
         self.is_running, self.state = True, {}
-        self.log(f"{self.type} {self.name}: Starting.")
+        self.log(parent, "info", f"{self.type} {self.name}: Starting.")
         if not parent:
             Session.commit()
         results = self.build_results(
@@ -247,7 +244,7 @@ class Job(AbstractBase):
             for device, conn in connections.items():
                 info(f"Closing Netmiko Connection to {device}")
                 conn.disconnect() if library == "netmiko" else conn.close()
-        self.log(f"{self.type} {self.name}: Finished.")
+        self.log(parent, "info", f"{self.type} {self.name}: Finished.")
         self.is_running, self.state = False, {}
         self.completed = self.failed = 0
         if task and not task.frequency:
@@ -303,7 +300,7 @@ class Service(Job):
             kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
         if device:
             kwargs["device"] = device.id
-        self.log(f"Running {self.type} {f'on {device.name}.' if device else '.'}")
+        self.log(parent, "info", f"Running {self.type} {f'on {device.name}.' if device else '.'}")
         try:
             if device:
                 results = self.job(payload, device, parent)
@@ -314,7 +311,7 @@ class Service(Job):
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
-        self.log(
+        self.log(parent, "info", 
             f"Finished running {self.type} '{self.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
             f" on {device.name}."
@@ -403,7 +400,7 @@ class Service(Job):
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
-            self.log(f"Running {self.type} {self.name} (attempt n°{i + 1})")
+            self.log(parent, "info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             self.completed = self.failed = 0
             if not parent:
                 Session.commit()

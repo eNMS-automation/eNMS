@@ -105,15 +105,15 @@ class AutomationController(BaseController):
         defaults = [("global", "Global Result"), ("all", "All devices")]
         timestamp_key = "parent_timestamp" if "job" in kw else "timestamp"
         request = {"job_id": kw.get("job", id), timestamp_key: kw.get("timestamp")}
-        return defaults + [
+        return defaults + list(set(
             (result.device_id, result.device_name)
             for result in fetch("Result", allow_none=True, all_matches=True, **request)
             if result.device_id
-        ]
+        ))
 
     def get_workflow_results_list(self, id: int, **kw) -> dict:
         defaults = [("global", "Global Result"), ("all", "All jobs")]
-        return defaults + [
+        return defaults + list(set(
             (result.job_id, result.job_name)
             for result in fetch(
                 "Result",
@@ -123,7 +123,7 @@ class AutomationController(BaseController):
                 all_matches=True,
             )
             if result.job_id
-        ]
+        ))
 
     def get_job_results(self, id: int, **kw) -> dict:
         if "timestamp" not in kw:

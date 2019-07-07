@@ -133,12 +133,15 @@ class Job(AbstractBase):
     results = relationship("Result", back_populates="job")
 
     def __init__(self, **kwargs: Any) -> None:
-        self.logger = getLogger(kwargs["name"])
-        self.logger.setLevel(DEBUG)
-        fh = FileHandler(controller.path / "logs" / "job_logs" / f"{kwargs['name'].log}")
+        logger = getLogger(kwargs["name"])
+        logger.setLevel(DEBUG)
+        filename = f"{controller.strip_all(kwargs['name'])}.log"
+        fh = FileHandler(controller.path / "logs" / "job_logs" / filename)
         formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         fh.setFormatter(formatter)
-        self.logger.addHandler(fh)
+        logger.addHandler(fh)
+        controller.job_loggers[kwargs["name"]] = logger
+        super().__init__(**kwargs)
 
     @hybrid_property
     def status(self) -> str:
@@ -211,8 +214,12 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
+    @property
+    def logger(self) -> Any:
+        return controller.job_loggers[controller.strip_all(self.name)]
+
     def log(self, log: str) -> None:
-        info(log)
+        self.logger.info(log)
 
     def run(
         self,
@@ -296,7 +303,7 @@ class Service(Job):
             kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
         if device:
             kwargs["device"] = device.id
-        self.logf"Running {self.type} {f'on {device.name}.' if device else '.'}")
+        self.log(f"Running {self.type} {f'on {device.name}.' if device else '.'}")
         try:
             if device:
                 results = self.job(payload, device, parent)
@@ -307,7 +314,7 @@ class Service(Job):
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
-        self.log
+        self.log(
             f"Finished running {self.type} '{self.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
             f" on {device.name}."
@@ -396,7 +403,7 @@ class Service(Job):
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
-            self.logf"Running {self.type} {self.name} (attempt n°{i + 1})")
+            self.log(f"Running {self.type} {self.name} (attempt n°{i + 1})")
             self.completed = self.failed = 0
             if not parent:
                 Session.commit()

@@ -47,7 +47,7 @@ class NetmikoValidationService(Service):
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
-        self.logf"Sending '{command}' on {device.name} (Netmiko)")
+        self.log(f"Sending '{command}' on {device.name} (Netmiko)")
         result = self.convert_result(
             netmiko_connection.send_command(command, delay_factor=self.delay_factor)
         )

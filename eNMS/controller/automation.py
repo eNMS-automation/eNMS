@@ -23,6 +23,7 @@ class AutomationController(BaseController):
         "napalm": defaultdict(dict),
         "netmiko": defaultdict(dict),
     }
+    job_loggers = {}
 
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int

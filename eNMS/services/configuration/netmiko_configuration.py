@@ -36,7 +36,7 @@ class NetmikoConfigurationService(Service):
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
         config = self.sub(self.content, locals())
-        self.logf"Pushing configuration on {device.name} (Netmiko)")
+        self.log(f"Pushing configuration on {device.name} (Netmiko)")
         netmiko_connection.send_config_set(
             config.splitlines(),
             delay_factor=self.delay_factor,

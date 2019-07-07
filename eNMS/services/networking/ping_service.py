@@ -21,8 +21,8 @@ class PingService(Service):
     ports = Column(String(SMALL_STRING_LENGTH), default="")
     count = Column(Integer, default=5)
     timeout = Column(Integer, default=2)
-    ttl = Column(Integer, default=0)
-    packet_size = Column(Integer, default=0)
+    ttl = Column(Integer, default=60)
+    packet_size = Column(Integer, default=56)
 
     __mapper_args__ = {"polymorphic_identity": "PingService"}
 
@@ -80,5 +80,5 @@ class PingServiceForm(ServiceForm):
     ports = StringField()
     count = IntegerField(default=5)
     timeout = IntegerField(default=2)
-    ttl = IntegerField(default=0)
-    packet_size = IntegerField(default=0)
+    ttl = IntegerField(default=60)
+    packet_size = IntegerField(default=56)

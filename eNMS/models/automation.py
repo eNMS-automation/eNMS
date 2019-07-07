@@ -657,7 +657,7 @@ class Workflow(Job):
     def compute_valid_devices(
         self, job: Job, allowed_devices: dict, payload: Optional[dict] = None
     ) -> Set[Device]:
-        if not job.has_targets:
+        if job.type != "Workflow" and not job.has_targets:
             return set()
         elif self.use_workflow_targets:
             return allowed_devices[job.name]
@@ -668,7 +668,7 @@ class Workflow(Job):
         self, allowed_devices: dict, job: Job, results: dict
     ) -> Generator[Job, None, None]:
         failed_devices, passed_devices = set(), set()
-        if job.has_targets:
+        if job.type == "Workflow" or job.has_targets:
             if job.type == "Workflow":
                 devices = results["devices"]
             else:

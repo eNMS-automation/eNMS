@@ -239,12 +239,12 @@ function jobToNode(job, index) {
     x: job.positions[workflow.name]
       ? job.positions[workflow.name][0]
       : index
-      ? -300
+      ? -50
       : 0,
     y: job.positions[workflow.name]
       ? job.positions[workflow.name][1]
       : index
-      ? index * 50 - 300
+      ? index * 50 - 50
       : 0,
   };
 }

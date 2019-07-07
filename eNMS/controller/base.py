@@ -12,7 +12,7 @@ from hvac import Client as VaultClient
 from importlib import import_module
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
-from json import load
+from json import load as json_load
 from json.decoder import JSONDecodeError
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
@@ -235,7 +235,7 @@ class BaseController:
 
     def fetch_version(self) -> None:
         with open(self.path / "package.json") as package_file:
-            self.version = load(package_file)["version"]
+            self.version = json_load(package_file)["version"]
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):

@@ -11,6 +11,7 @@ from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.database.base import Base
 from eNMS.database.functions import fetch_all
 from eNMS.models.automation import Workflow
+from eNMS.properties import private_properties
 from eNMS.properties.database import dont_track_changes
 
 
@@ -75,6 +76,8 @@ def configure_events() -> None:
     ) -> None:
         state, changes = inspect(target), []
         for attr in state.attrs:
+            if attr.key in private_properties:
+                continue
             hist = state.get_history(attr.key, True)
             if not hist.has_changes() or attr.key in dont_track_changes:
                 continue

@@ -52,7 +52,8 @@ class AutomationController(BaseController):
         return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
     def clear_results(self, job_id: int) -> None:
-        fetch("Job", id=job_id).results = {}
+        for result in fetch("Result", all_matches=True, job_id=job_id):
+            Session.delete(result)
 
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
         delete("WorkflowEdge", id=edge_id)

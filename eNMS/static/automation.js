@@ -70,7 +70,7 @@ function saveService(service, id) {
 // eslint-disable-next-line
 function copyResultsToClipboard(id) {
   $(`#display-text-${id}`).prop("checked", true);
-  displayResult(id);
+  displayResults(id, id);
   let node = document.getElementById(`display_results-${id}`);
   if (document.body.createTextRange) {
     const range = document.body.createTextRange();

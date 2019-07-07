@@ -74,6 +74,13 @@ class Result(AbstractBase):
     workflow_id = Column(Integer, ForeignKey("Workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
 
+    def __repr__(self):
+        return f"{self.job_name} ({self.timestamp})"
+
+    @property
+    def name(self):
+        return repr(self)
+
 
 class Job(AbstractBase):
 

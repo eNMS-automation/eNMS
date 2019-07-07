@@ -2,6 +2,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Start point of a workflow
   devices: []
@@ -11,7 +12,8 @@
   has_targets: false
   hidden: true
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:44.678415'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.151868'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -20,7 +22,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     Configuration Management Workflow:
@@ -32,6 +33,9 @@
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
+    Workflow with separate failure / success path: !!python/tuple
+    - -118
+    - -3
     Workflow_of_workflows:
     - '-300'
     - '0'
@@ -59,6 +63,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: End point of a workflow
   devices: []
@@ -68,7 +73,8 @@
   has_targets: false
   hidden: true
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:44.842336'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.229355'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -77,7 +83,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     Configuration Management Workflow:
@@ -89,6 +94,9 @@
     Netmiko_VRF_workflow:
     - '200'
     - '0'
+    Workflow with separate failure / success path: !!python/tuple
+    - 500
+    - 0
     Workflow_of_workflows:
     - '300'
     - '0'
@@ -116,6 +124,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Mail notification (service logs)
   devices: []
@@ -125,7 +134,8 @@
   has_targets: false
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:44.878975'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.267851'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -134,7 +144,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -152,6 +161,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Slack notification (service logs)
   devices: []
@@ -161,7 +171,8 @@
   has_targets: false
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:44.920625'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.310283'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -170,7 +181,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -188,6 +198,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Mattermost notification (service logs)
   devices: []
@@ -197,7 +208,8 @@
   has_targets: false
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:44.953174'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.352969'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -206,7 +218,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -224,6 +235,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Monitor eNMS cluster
   devices: []
@@ -233,7 +245,8 @@
   has_targets: false
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:44.988121'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.390689'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -242,7 +255,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -260,6 +272,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Push configurations to Gitlab
   devices: []
@@ -269,7 +282,8 @@
   has_targets: false
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.028285'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.428892'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -278,7 +292,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     Configuration Management Workflow:
@@ -299,6 +312,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Configuration Management Poller
   devices: []
@@ -308,7 +322,8 @@
   has_targets: false
   hidden: true
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.060412'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.458865'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -317,7 +332,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     Configuration Management Workflow:
@@ -347,6 +361,7 @@
   creator: admin
   credentials: device
   custom_integer: 0
+  custom_username: ''
   define_devices_from_payload: false
   description: Example
   devices:
@@ -357,8 +372,9 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
+  initial_payload: {}
   ip_address: 10.1.1.1
-  last_modified: '2019-07-01 17:22:45.111637'
+  last_modified: '2019-07-07 16:25:01.512730'
   mac_address: FF:FF:FF:FF:FF:FF
   mail_address: aaa@gmail.com
   mail_recipient: ''
@@ -370,7 +386,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -392,6 +407,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Configure BGP Peering with Napalm
   devices:
@@ -401,7 +417,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.166270'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.585626'
   local_as: 100
   loopback: Lo100
   loopback_ip: 100.1.1.1
@@ -414,7 +431,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -434,6 +450,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
@@ -445,7 +462,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.221215'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.662398'
   load_known_host_keys: false
   look_for_keys: false
   mail_recipient: ''
@@ -457,7 +475,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   protocol: scp
@@ -478,6 +495,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
@@ -490,7 +508,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.281728'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.747893'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -499,7 +518,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   protocol: scp
@@ -518,6 +536,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
@@ -530,7 +549,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.334762'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.850828'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -539,7 +559,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   protocol: scp
@@ -559,6 +578,7 @@
   configuration_command: show running-config
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Test Configuration Management
   devices:
@@ -571,7 +591,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.386034'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:01.921744'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -581,7 +602,6 @@
   number_of_retries: 0
   number_of_targets: 1
   operating_system: ''
-  payload: {}
   pools: []
   positions: {}
   privileged_mode: false
@@ -602,6 +622,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Test Configuration Management
   devices:
@@ -612,7 +633,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.440530'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.037065'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -623,7 +645,6 @@
   number_of_targets: 1
   operating_system: ''
   optional_args: {}
-  payload: {}
   pools: []
   positions: {}
   push_to_git: false
@@ -645,6 +666,7 @@
   content: vrf definition test
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   description: Create a VRF "test" with Netmiko
@@ -660,7 +682,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.503979'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.211911'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -669,7 +692,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions:
     Netmiko_VRF_workflow:
@@ -699,6 +721,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -715,7 +738,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.592666'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.333418'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -725,7 +749,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions:
     Napalm_VRF_workflow:
@@ -734,6 +757,9 @@
     Netmiko_VRF_workflow:
     - '0'
     - '-50'
+    Workflow with separate failure / success path: !!python/tuple
+    - 84
+    - -3
     YaQL_test_worflow:
     - '147'
     - '-14'
@@ -759,6 +785,7 @@
   content: no vrf definition test
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   description: Delete VRF "test"
@@ -774,7 +801,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.694952'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.424042'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -783,7 +811,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions:
     Napalm_VRF_workflow:
@@ -816,6 +843,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -832,7 +860,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.778672'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.504347'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -842,7 +871,6 @@
   number_of_retries: 2
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions:
     Napalm_VRF_workflow:
@@ -851,6 +879,9 @@
     Netmiko_VRF_workflow:
     - '0'
     - '150'
+    Workflow with separate failure / success path: !!python/tuple
+    - 52
+    - -2
   privileged_mode: false
   push_to_git: false
   query_property_type: ip_address
@@ -872,6 +903,7 @@
   content: "vrf definition napalm\r\n"
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Create a VRF "test" with Napalm
   devices:
@@ -883,7 +915,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.857326'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.590426'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -893,7 +926,6 @@
   number_of_targets: 0
   operating_system: eos
   optional_args: {}
-  payload: {}
   pools: []
   positions:
     Napalm_VRF_workflow:
@@ -919,6 +951,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Use REST call is_alive
@@ -931,7 +964,8 @@
   headers: {}
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.912269'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.651372'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -945,6 +979,9 @@
   payload: {}
   pools: []
   positions:
+    Workflow with separate failure / success path: !!python/tuple
+    - 232
+    - 134
     payload_transfer_workflow:
     - '-50'
     - '0'
@@ -968,6 +1005,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: 'Getter: get_facts'
   devices:
@@ -982,7 +1020,8 @@
   - get_facts
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:45.976682'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.731758'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -993,9 +1032,11 @@
   number_of_targets: 0
   operating_system: ''
   optional_args: {}
-  payload: {}
   pools: []
   positions:
+    Workflow with separate failure / success path: !!python/tuple
+    - 214
+    - -132
     payload_transfer_workflow:
     - '-50'
     - '-100'
@@ -1016,6 +1057,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: 'Getter: get_interfaces'
   devices:
@@ -1030,7 +1072,8 @@
   - get_interfaces
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.041377'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.826779'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1041,7 +1084,6 @@
   number_of_targets: 0
   operating_system: ''
   optional_args: {}
-  payload: {}
   pools: []
   positions:
     Workflow_of_workflows:
@@ -1067,6 +1109,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: 'Getter: get_interfaces_ip'
   devices:
@@ -1081,7 +1124,8 @@
   - get_interfaces_ip
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.099591'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:02.922877'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1092,7 +1136,6 @@
   number_of_targets: 0
   operating_system: ''
   optional_args: {}
-  payload: {}
   pools: []
   positions:
     payload_transfer_workflow:
@@ -1115,6 +1158,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: 'Getter: get_config'
   devices:
@@ -1129,7 +1173,8 @@
   - get_config
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.160157'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.013946'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1140,7 +1185,6 @@
   number_of_targets: 0
   operating_system: ''
   optional_args: {}
-  payload: {}
   pools: []
   positions:
     payload_transfer_workflow:
@@ -1163,6 +1207,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Process Payload in example workflow
   devices:
@@ -1174,7 +1219,8 @@
   has_targets: true
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.219874'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.096609'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1183,7 +1229,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     payload_transfer_workflow:
@@ -1204,6 +1249,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Add devices to the payload
   devices: []
@@ -1213,7 +1259,8 @@
   has_targets: false
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.263923'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.164866'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1222,7 +1269,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     YaQL_test_worflow:
@@ -1256,6 +1302,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: true
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1270,7 +1317,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.309967'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.216887'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1280,7 +1328,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions:
     YaQL_test_worflow:
@@ -1309,6 +1356,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1325,7 +1373,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.370640'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.294546'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1335,7 +1384,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions: {}
   privileged_mode: false
@@ -1361,6 +1409,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1375,7 +1424,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.419480'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.345986'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1385,7 +1435,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions:
     payload_extraction_validation_worflow:
@@ -1410,6 +1459,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Payload Variables Extraction with Regex/TextFSM
   devices: []
@@ -1419,7 +1469,8 @@
   has_targets: true
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.466206'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.409142'
   mail_recipient: ''
   match1: ''
   match2: (\d.*)/32
@@ -1439,7 +1490,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     payload_extraction_validation_worflow:
@@ -1469,6 +1519,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Dict
@@ -1483,7 +1534,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.519252'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.468467'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1493,7 +1545,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions:
     payload_extraction_validation_worflow:
@@ -1519,6 +1570,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Text
@@ -1529,7 +1581,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.568376'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.513103'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1539,7 +1592,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: eos
-  payload: {}
   pools: []
   positions:
     payload_extraction_validation_worflow:
@@ -1562,6 +1614,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: ''
   devices: []
@@ -1571,7 +1624,8 @@
   failed: 0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.611275'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.557215'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1581,7 +1635,6 @@
   number_of_targets: 0
   operating_system: ''
   optional_args: {}
-  payload: {}
   pools: []
   positions:
     Napalm_VRF_workflow:
@@ -1607,6 +1660,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1621,7 +1675,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.660025'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.603554'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1631,7 +1686,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     Napalm_VRF_workflow:
@@ -1660,6 +1714,7 @@
   conversion_method: text
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
@@ -1674,7 +1729,8 @@
   global_delay_factor: 1.0
   hidden: false
   include_link_in_summary: true
-  last_modified: '2019-07-01 17:22:46.700087'
+  initial_payload: {}
+  last_modified: '2019-07-07 16:25:03.645328'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1684,7 +1740,6 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  payload: {}
   pools: []
   positions:
     Napalm_VRF_workflow:
@@ -1709,6 +1764,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Test the iteration mechanism (Iteration values)
   devices:
@@ -1720,9 +1776,10 @@
   has_targets: true
   hidden: false
   include_link_in_summary: true
+  initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-01 17:22:46.825148'
+  last_modified: '2019-07-07 16:25:03.718682'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1732,7 +1789,6 @@
   number_of_targets: 2
   operating_system: ''
   origin_of_values: user_provided_values
-  payload: {}
   pools: []
   positions:
     YaQL_test_worflow:
@@ -1759,6 +1815,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: Test the iteration mechanism (YaQL values)
   devices: []
@@ -1768,9 +1825,10 @@
   has_targets: true
   hidden: false
   include_link_in_summary: true
+  initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-01 17:22:46.900693'
+  last_modified: '2019-07-07 16:25:03.803083'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1780,7 +1838,6 @@
   number_of_targets: 0
   operating_system: ''
   origin_of_values: yaql_query
-  payload: {}
   pools: []
   positions:
     YaQL_test_worflow:
@@ -1804,6 +1861,7 @@
   completed: 0
   creator: admin
   credentials: device
+  custom_username: ''
   define_devices_from_payload: false
   description: ''
   devices: []
@@ -1813,9 +1871,10 @@
   has_targets: true
   hidden: false
   include_link_in_summary: true
+  initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-01 17:22:46.983481'
+  last_modified: '2019-07-07 16:25:03.857611'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1825,7 +1884,6 @@
   number_of_targets: 0
   operating_system: ''
   origin_of_values: yaql_query
-  payload: {}
   pools: []
   positions:
     YaQL_test_worflow:

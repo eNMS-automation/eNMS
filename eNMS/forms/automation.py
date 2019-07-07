@@ -32,16 +32,6 @@ class JobForm(BaseForm):
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
     devices = MultipleInstanceField("Devices", instance_type="Device")
-    credentials = SelectField(
-        "Credentials",
-        choices=(
-            ("device", "Device Credentials"),
-            ("user", "User Credentials"),
-            ("custom", "Custom Credentials"),
-        ),
-    )
-    custom_username = StringField("Custom Username")
-    custom_password = PasswordField("Custom Password")
     pools = MultipleInstanceField("Pools", instance_type="Pool")
     waiting_time = IntegerField("Waiting time (in seconds)", default=0)
     send_notification = BooleanField("Send a notification")
@@ -95,6 +85,16 @@ class JobForm(BaseForm):
 class ServiceForm(JobForm):
     template = "service"
     form_type = HiddenField(default="service")
+    credentials = SelectField(
+        "Credentials",
+        choices=(
+            ("device", "Device Credentials"),
+            ("user", "User Credentials"),
+            ("custom", "Custom Credentials"),
+        ),
+    )
+    custom_username = StringField("Custom Username")
+    custom_password = PasswordField("Custom Password")
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
 

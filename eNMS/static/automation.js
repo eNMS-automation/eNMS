@@ -354,7 +354,17 @@ function runJob(id, realTimeUpdate) {
         getJobState(id);
       }
     }
-    if (realTimeUpdate) showLogs(id, job.name);
+    if (false) {
+      showLogs(id, job.name);
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', `/stream_logs/${job.name}`);
+      xhr.send();
+
+      setInterval(function() {
+        console.log(xhr.responseText);
+        //output.textContent = xhr.responseText;
+      }, 1000);
+    }
   });
 }
 

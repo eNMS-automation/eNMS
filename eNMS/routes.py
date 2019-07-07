@@ -6,6 +6,7 @@ from flask import (
     redirect,
     render_template,
     request,
+    Response as FlaskResponse,
     send_file,
     session,
     url_for,
@@ -14,6 +15,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from functools import wraps
 from logging import info
 from os import listdir
+from time import sleep
 from typing import Any, Callable
 from werkzeug.wrappers import Response
 
@@ -204,14 +206,16 @@ def download_configuration(name: str) -> Response:
         return jsonify("No configuration stored")
 
 
-@blueprint.route('/stream_logs/<service>')
-def stream_logs():
+@blueprint.route('/stream_logs/<job_name>')
+def stream_logs(job_name):
+    job = fetch("Job", name=job_name)
     def generate():
-        with open(f"{controller.strip_all(service)}.log") as log_file:
-            while True:
+        path = controller.path / "logs" / "job_logs"
+        with open(path / f"{controller.strip_all(job_name)}.log") as log_file:
+            while job.is_running:
                 yield log_file.read()
                 sleep(1)
-    return blueprint.response_class(generate(), mimetype='text/plain')
+    return FlaskResponse(generate(), mimetype='text/plain')
 
 
 @blueprint.route("/", methods=["POST"])

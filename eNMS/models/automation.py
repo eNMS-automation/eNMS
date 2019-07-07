@@ -133,14 +133,17 @@ class Job(AbstractBase):
     results = relationship("Result", back_populates="job")
 
     def __init__(self, **kwargs: Any) -> None:
-        logger = getLogger(kwargs["name"])
+        super().__init__(**kwargs)
+        self.configure_logger()
+
+    def configure_logger(self) -> None:
+        logger = getLogger(self.name)
         logger.setLevel(INFO)
-        filename = f"{controller.strip_all(kwargs['name'])}.log"
+        filename = f"{controller.strip_all(self.name)}.log"
         fh = FileHandler(controller.path / "logs" / "job_logs" / filename)
         formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         fh.setFormatter(formatter)
         logger.addHandler(fh)
-        super().__init__(**kwargs)
 
     @hybrid_property
     def status(self) -> str:

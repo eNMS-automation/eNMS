@@ -19,7 +19,7 @@ table: false
 workflow: true
 */
 
-let refreshJob = {};
+
 let currentResults = {};
 
 /**
@@ -227,26 +227,6 @@ function updateWorkflowList(id) {
 }
 
 /**
- * Display logs.
- * @param {firstTime} firstTime - First time.
- */
-// eslint-disable-next-line
-function refreshLogs(firstTime, id) {
-  /*
-  if (refreshJob[id]) {
-    call(`/get_job_logs/${id}`, (job) => {
-      //TODO
-      //$(`#logs-${id}`).text(THE LOGS HERE);
-      if (!job.running || $(`#logs-${id}`).length == 0) {
-        refreshJob[id] = false;
-      }
-    });
-    setTimeout(() => refreshLogs(false, id), 500);
-  }
-  */
-}
-
-/**
  * Show the results modal for a job.
  * @param {id} id - Job id.
  */
@@ -258,7 +238,7 @@ function showLogs(id, name) {
       border: "medium",
       headerTitle: `Logs - ${name}`,
       position: "center-top 0 58",
-      contentSize: "850 600",
+      contentSize: "1250 600",
       contentOverflow: "hidden scroll",
       content: `<pre id="logs-${id}" style="border: 0;\
         background-color: transparent; color: white;"></pre>`,
@@ -268,8 +248,6 @@ function showLogs(id, name) {
       },
     });
   }
-  refreshJob[id] = true;
-  refreshLogs(true, id);
 }
 
 /**

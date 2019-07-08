@@ -6,7 +6,6 @@ from flask import (
     redirect,
     render_template,
     request,
-    Response as FlaskResponse,
     send_file,
     session,
     url_for,
@@ -219,7 +218,7 @@ def stream_logs(job_name):
                 if data:
                     print(data)
                     yield data
-    return FlaskResponse(response=generate(), status=200,
+    return Response(response=generate(), status=200,
         mimetype="text/event-stream",
         content_type="text/event-stream"
     )

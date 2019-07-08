@@ -354,15 +354,16 @@ function runJob(id, realTimeUpdate) {
         getJobState(id);
       }
     }
-    if (false) {
+    if (true) {
       showLogs(id, job.name);
-      let xhr = new XMLHttpRequest();
-      xhr.open('GET', `/stream_logs/${job.name}`);
-      xhr.send();
-
-      setInterval(function() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', `/stream_logs/${job.name}`, true);
+      xhr.send(null);
+      xhr.onreadystatechange = function(){
         console.log(xhr.responseText);
-        //output.textContent = xhr.responseText;
+      };
+      setInterval(function() {
+        console.log(xhr.response);
       }, 1000);
     }
   });

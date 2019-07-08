@@ -211,10 +211,14 @@ def stream_logs(job_name):
     job = fetch("Job", name=job_name)
     def generate():
         path = controller.path / "logs" / "job_logs"
-        with open(path / f"{controller.strip_all(job_name)}.log") as log_file:
-            while job.is_running:
-                yield log_file.read()
+        with open(path / f"{controller.strip_all(job_name)}.log") as file:
+            file.seek(0,2)
+            while True:
                 sleep(1)
+                data = file.readline()
+                if data:
+                    print(data)
+                    yield data
     return FlaskResponse(generate(), mimetype='text/plain')
 
 

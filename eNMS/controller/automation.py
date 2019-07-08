@@ -97,11 +97,9 @@ class AutomationController(BaseController):
         return new_workflow.serialized
 
     def get_job_logs(self, name) -> dict:
-        job = fetch("Job", id=id)
-        path = controller.path / "logs" / "job_logs" / controller.strip_all(name)
-        proc = Popen(['tail', '-n', n + offset, f], stdout=PIPE)
-        lines = proc.stdout.readlines()
-        return lines[:, -offset]
+        path = self.path / "logs" / "job_logs" / f"{self.strip_all(name)}.log"
+        proc = Popen(['tail', '-n', "1000", path], stdout=PIPE)
+        return proc.stdout.readlines()
 
     def get_job_timestamps(self, id: int) -> dict:
         results = fetch("Result", job_id=id, allow_none=True, all_matches=True)

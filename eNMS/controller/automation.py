@@ -6,6 +6,7 @@ from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path
 from re import search, sub
+from subprocess import PIPE, Popen
 from typing import Any, Dict, List
 
 from eNMS.concurrency import threaded_job
@@ -95,12 +96,16 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, id: int) -> dict:
-        pass
+    def get_job_logs(self, name) -> dict:
+        job = fetch("Job", id=id)
+        path = controller.path / "logs" / "job_logs" / controller.strip_all(name)
+        proc = Popen(['tail', '-n', n + offset, f], stdout=PIPE)
+        lines = proc.stdout.readlines()
+        return lines[:, -offset]
 
     def get_job_timestamps(self, id: int) -> dict:
         results = fetch("Result", job_id=id, allow_none=True, all_matches=True)
-        return list(set(result.timestamp for result in results))
+        return sorted(set(result.timestamp for result in results))
 
     def get_results_device_list(self, id: int, **kw) -> dict:
         defaults = [("global", "Global Result"), ("all", "All devices")]

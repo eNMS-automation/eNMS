@@ -207,7 +207,6 @@ def download_configuration(name: str) -> Response:
 
 @blueprint.route('/stream_logs/<job_name>')
 def stream_logs(job_name):
-    job = fetch("Job", name=job_name)
     def generate():
         path = controller.path / "logs" / "job_logs"
         with open(path / f"{controller.strip_all(job_name)}.log") as file:
@@ -215,16 +214,12 @@ def stream_logs(job_name):
             counter = 0
             while counter < 10:
                 data = file.readline()
+                counter = 0 if data else counter + 1
                 if data:
-                    counter = 0
                     yield data
                 else:
-                    counter += 1
                     sleep(3 * counter)
-    return Response(response=generate(), status=200,
-        mimetype="text/event-stream",
-        content_type="text/event-stream"
-    )
+    return Response(response=generate(), mimetype="text/plain")
 
 
 @blueprint.route("/", methods=["POST"])

@@ -447,7 +447,7 @@ class Service(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogs('{self.id}', '{self.name}')"></i>Logs</a></button>""",
+            onclick="showLogs('{self.name}')"></i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}')">
             </i>Results</a></button>""",

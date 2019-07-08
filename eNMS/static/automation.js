@@ -342,7 +342,6 @@ function refreshLogs(id, name) {
   
   let timer;
   timer = setInterval(function() {
-    console.log("test");
     handleNewData()
     if (xhr.readyState == XMLHttpRequest.DONE) {
       clearInterval(timer);

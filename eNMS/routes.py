@@ -212,12 +212,15 @@ def stream_logs(job_name):
         path = controller.path / "logs" / "job_logs"
         with open(path / f"{controller.strip_all(job_name)}.log") as file:
             file.seek(0,2)
-            while True:
-                sleep(0.5)
+            counter = 0
+            while counter < 10:
                 data = file.readline()
                 if data:
-                    print(data)
+                    counter = 0
                     yield data
+                else:
+                    counter += 1
+                    sleep(3 * counter)
     return Response(response=generate(), status=200,
         mimetype="text/event-stream",
         content_type="text/event-stream"

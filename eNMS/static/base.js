@@ -544,6 +544,11 @@ function initTable(type) {
     serverSide: true,
     orderCellsTop: true,
     scrollX: true,
+    fnDrawCallback: () => {
+      $(".paginate_button > a").on("focus", function() {
+        $(this).blur();
+      });
+    },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
       url: `/filtering/${type}`,

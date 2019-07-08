@@ -318,11 +318,45 @@ function clearResults(id) {
 }
 
 /**
+ * Refresh the logs
+ * @param {id} id - Job ID.
+ */
+// eslint-disable-next-line
+function refreshLogs(id, name) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', `/stream_logs/${name}`, true);
+  xhr.send(null);
+  
+  let position = 0;
+  function handleNewData() {
+    // the response text include the entire response so far
+    // split the messages, then take the messages that haven't been handled yet
+    // position tracks how many messages have been handled
+    // messages end with a newline, so split will always show one extra empty message at the end
+    let messages = xhr.responseText.split('\n');
+    messages.slice(position, -1).forEach(function(value) {
+        $(`#logs-${id}`).append(`${value}<br>`);
+    });
+    position = messages.length - 1;
+  }
+  
+  let timer;
+  timer = setInterval(function() {
+    handleNewData()
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      clearInterval(timer);
+    }
+  }, 1000);
+}
+
+/**
  * Run job.
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function runJob(id, realTimeUpdate) {
+function runJob(id, name) {
+  showLogs(id, name);
+  refreshLogs(id, name);
   call(`/run_job/${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
     if (page == "workflow_builder") {
@@ -331,35 +365,6 @@ function runJob(id, realTimeUpdate) {
       } else {
         getJobState(id);
       }
-    }
-    if (true) {
-      showLogs(id, job.name);
-      
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', `/stream_logs/${job.name}`, true);
-      xhr.send(null);
-
-      let position = 0;
-      function handleNewData() {
-        // the response text include the entire response so far
-        // split the messages, then take the messages that haven't been handled yet
-        // position tracks how many messages have been handled
-        // messages end with a newline, so split will always show one extra empty message at the end
-        let messages = xhr.responseText.split('\n');
-        messages.slice(position, -1).forEach(function(value) {
-            $(`#logs-${id}`).append(`${value}<br>`);
-        });
-        position = messages.length - 1;
-      }
-
-      let timer;
-      timer = setInterval(function() {
-          handleNewData()
-          if (xhr.readyState == XMLHttpRequest.DONE) {
-              clearInterval(timer);
-              latest.textContent = 'Done';
-          }
-      }, 1000);
     }
   });
 }

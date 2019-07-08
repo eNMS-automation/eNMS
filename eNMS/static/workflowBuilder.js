@@ -357,7 +357,7 @@ function savePositions() {
 Object.assign(action, {
   "Run Workflow": runWorkflow,
   Edit: (job) => showTypePanel(job.type, job.id),
-  Run: (job) => runJob(job.id),
+  Run: (job) => runJob(job.id, job.name),
   Results: (job) => showResultsPanel(job.id, job.label),
   "Restart Workflow": (job) => showRestartPanel(job),
   "Create Workflow": () => showTypePanel("workflow"),
@@ -385,7 +385,7 @@ $("#network").contextMenu({
  */
 function runWorkflow() {
   workflow.jobs.forEach((job) => colorJob(job.id, job.color));
-  runJob(workflow.id);
+  runJob(workflow.id, workflow.name);
 }
 
 /**

@@ -452,8 +452,7 @@ class Service(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{self.id}',
-            {'true' if not self.multiprocessing else 'false'})">Run</button>""",
+            onclick="runJob('{self.id}', '{self.name}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -661,7 +660,7 @@ class Workflow(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}', true)">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{self.id}')">Run</button>""",
+            onclick="runJob('{self.id}', '{self.name}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('workflow', '{self.id}')">
             Edit</button>""",

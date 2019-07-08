@@ -214,12 +214,15 @@ def stream_logs(job_name):
         with open(path / f"{controller.strip_all(job_name)}.log") as file:
             file.seek(0,2)
             while True:
-                sleep(1)
+                sleep(0.5)
                 data = file.readline()
                 if data:
                     print(data)
                     yield data
-    return FlaskResponse(generate(), mimetype='text/plain')
+    return FlaskResponse(response=generate(), status=200,
+        mimetype="text/event-stream",
+        content_type="text/event-stream"
+    )
 
 
 @blueprint.route("/", methods=["POST"])

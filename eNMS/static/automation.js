@@ -252,13 +252,13 @@ function refreshLogs(firstTime, id) {
  */
 // eslint-disable-next-line
 function showLogs(id, name) {
-  if ($(`#logs-${id}`).length == 0) {
+  if (!$(`#logs-${id}`).length) {
     jsPanel.create({
       theme: "dark filled",
       border: "medium",
       headerTitle: `Logs - ${name}`,
       position: "center-top 0 58",
-      contentSize: "650 600",
+      contentSize: "850 600",
       contentOverflow: "hidden scroll",
       content: `<pre id="logs-${id}" style="border: 0;\
         background-color: transparent; color: white;"></pre>`,
@@ -356,14 +356,22 @@ function runJob(id, realTimeUpdate) {
     }
     if (true) {
       showLogs(id, job.name);
+      
       var xhr = new XMLHttpRequest();
       xhr.open('GET', `/stream_logs/${job.name}`, true);
       xhr.send(null);
       xhr.onreadystatechange = function(){
         console.log(xhr.responseText);
       };
-      setInterval(function() {
-        console.log(xhr.response);
+      let timer;
+      timer = setInterval(function() {
+          // check the response for new data
+          $(`#logs-${id}`).append(`${xhr.responseText}<br>`);
+          // stop checking once the response has ended
+          if (xhr.readyState == XMLHttpRequest.DONE) {
+              clearInterval(timer);
+              latest.textContent = 'Done';
+          }
       }, 1000);
     }
   });

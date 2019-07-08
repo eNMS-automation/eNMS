@@ -7,4 +7,9 @@ you can use in your custom services.
 
 - Refactoring of the results.
 
+- Refactoring of the logs. One logger per service in "logs" folder. Real-time logs is now working
+even with multiprocessing enabled.
+
+- Bug in tables: jump to bottom after page 1 when table is refreshed: fixed.
+
 - Bug fixes

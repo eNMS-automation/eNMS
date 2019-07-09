@@ -12,4 +12,6 @@ even with multiprocessing enabled.
 
 - Bug in tables: jump to bottom after page 1 when table is refreshed: fixed.
 
+- Panel repaint bug when pulling it down: fixed.
+
 - Bug fixes

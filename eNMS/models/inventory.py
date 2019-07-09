@@ -1,13 +1,5 @@
 from re import search
-from sqlalchemy import (
-    Boolean,
-    Column,
-    Float,
-    ForeignKey,
-    Integer,
-    String,
-    Text,
-)
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship

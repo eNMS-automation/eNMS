@@ -43,5 +43,5 @@ class CustomMediumBlobPickle(PickleType):
         impl = MSMediumBlob
 
 
-class CustomFloat(Numeric if DIALECT == "mysql" else Float):
+class CustomFloat(Numeric if DIALECT == "mysql" else Float):  # type: ignore
     pass

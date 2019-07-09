@@ -14,7 +14,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField, String
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField, DictSubstitutionField, SubstitutionField
+from eNMS.forms.fields import DictSubstitutionField, SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device

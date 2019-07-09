@@ -1,3 +1,4 @@
 - Add input validation for dictionary fields (eg not valid if input is a list)
 - Remove unused options in the REST Call service
-- 
+- Switch latitude and longitude to Numeric SQL type instead of Float (MySQL round issue)
+- Add version control system: version displayed in the UI

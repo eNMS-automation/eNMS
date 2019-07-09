@@ -219,7 +219,7 @@ def stream_logs(job_name):
                     yield data
                 else:
                     sleep(3 * counter)
-    return Response(response=generate(), mimetype="text/plain")
+    return Response(response=generate(), mimetype="text/html")
 
 
 @blueprint.route("/", methods=["POST"])

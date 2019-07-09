@@ -213,7 +213,6 @@ function updateDeviceList(id, parentId) {
  */
 function updateJobList(id) {
   fCall(`/get_workflow_results_list/${id}`, `#results-form-${id}`, (jobs) => {
-    console.log(jobs)
     $(`#job-${id},#job_compare-${id}`).empty();
     jobs.forEach((job) => {
       $(`#job-${id},#job_compare-${id}`).append(
@@ -328,20 +327,16 @@ function refreshLogs(id, name) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', `/stream_logs/${name}`, true);
   xhr.send(null);
-  
+
   let position = 0;
   function handleNewData() {
-    // the response text include the entire response so far
-    // split the messages, then take the messages that haven't been handled yet
-    // position tracks how many messages have been handled
-    // messages end with a newline, so split will always show one extra empty message at the end
     let messages = xhr.responseText.split('\n');
     messages.slice(position, -1).forEach(function(value) {
-        $(`#logs-${id}`).append(`${value}<br>`);
+      $(`#logs-${id}`).append(`${value}<br>`);
     });
     position = messages.length - 1;
   }
-  
+
   let timer;
   timer = setInterval(function() {
     handleNewData()

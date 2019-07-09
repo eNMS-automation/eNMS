@@ -1,9 +1,9 @@
+from decimal import Decimal
 from flask import Flask, jsonify, make_response, render_template
 from flask_assets import Bundle
 from flask.json import JSONEncoder
 from flask.wrappers import Request, Response
 from pathlib import Path
-from sqlalchemy import Numeric
 from sqlalchemy.orm import configure_mappers
 from typing import Any, Tuple
 
@@ -32,9 +32,9 @@ def register_modules(app: Flask) -> None:
 def configure_encoder(app: Flask) -> None:
     class CustomJSONEncoder(JSONEncoder):
         def default(self, obj: Any) -> Any:
-            if isinstance(obj, Numeric):
+            if isinstance(obj, Decimal):
                 return str(obj)
-            return JSONEncoder.default(self, obj)
+            return super().default(obj)
 
     app.json_encoder = CustomJSONEncoder
 

@@ -1,5 +1,1 @@
-- Fix for Rest Call Service has_targets
-- Rename query to YaQL query for payload services
-- Remove credentials for workflow
-- change packet size + TTL by default in PingService
-- Other minor bug fix.
+- Add input validation for dictionary fields (eg not valid if input is a list)

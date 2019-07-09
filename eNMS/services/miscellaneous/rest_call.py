@@ -126,8 +126,6 @@ class RestCallForm(ServiceForm, ValidationForm):
     timeout = IntegerField(default=15)
     username = StringField()
     password = StringField()
-    pass_device_properties = BooleanField()
-    options = DictField()
     groups = {
         "Main Parameters": [
             "has_targets",
@@ -140,8 +138,6 @@ class RestCallForm(ServiceForm, ValidationForm):
             "timeout",
             "username",
             "password",
-            "pass_device_properties",
-            "options",
         ],
         "Validation Parameters": ValidationForm.group,
     }

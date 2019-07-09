@@ -146,15 +146,16 @@ class AutomationController(BaseController):
         else:
             timestamp = "parent_timestamp"
         request = {timestamp: kw["timestamp"]}
-        if job not in ("global", "all"):
+        if job not in ("global", "all", None):
             request["job_id"] = job
         else:
             request["job_id"] = id
         if device == "all" or job == "all":
             request["all_matches"] = True
-        elif device not in ("global", "all"):
+        if device not in ("global", "all"):
             request["device_id"] = device
-        print(request)
+        if device == "global":
+            request["device_id"] = None
         results = fetch("Result", allow_none=True, **request)
         if not results:
             return None

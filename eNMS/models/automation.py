@@ -240,6 +240,7 @@ class Job(AbstractBase):
         results = self.build_results(
             runtime, payload, targets, parent, parent_timestamp, origin
         )
+        results
         for library in ("netmiko", "napalm"):
             connections = controller.connections_cache[library].pop(self.name, None)
             if not connections:
@@ -252,7 +253,10 @@ class Job(AbstractBase):
         self.completed = self.failed = 0
         if task and not task.frequency:
             task.is_active = False
-        results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
+        global_results = deepcopy(results)
+        global_results.pop("results")
+        global_results["properties"] = self.get_properties()
+        results_kwargs = {"timestamp": runtime, "result": global_results, "job": self.id}
         if parent:
             results_kwargs["workflow"] = parent.id
             results_kwargs["parent_timestamp"] = parent_timestamp

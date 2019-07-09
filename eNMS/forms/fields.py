@@ -19,6 +19,25 @@ class DateField(StringField):
     pass
 
 
+class JsonField(StringField):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        kwargs["default"] = kwargs.get("default", "{}")
+        super().__init__(*args, **kwargs)
+
+    def pre_validate(self, form: FlaskForm) -> bool:
+        try:
+            result = loads(self.data)
+        except JSONDecodeError:
+            raise ValidationError("Invalid JSON object.")
+        return True
+
+
+class JsonSubstitutionField(JsonField):
+    def __call__(self, *args: Any, **kwargs: Any) -> str:
+        kwargs["style"] = "background-color: #e8f0f7"
+        return super().__call__(*args, **kwargs)
+
+
 class DictField(StringField):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         kwargs["default"] = kwargs.get("default", "{}")

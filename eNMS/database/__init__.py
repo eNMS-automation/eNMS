@@ -1,5 +1,5 @@
 from os import environ
-from sqlalchemy import create_engine, PickleType
+from sqlalchemy import create_engine, Float, Numeric, PickleType
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -41,3 +41,7 @@ Base = declarative_base()
 class CustomMediumBlobPickle(PickleType):
     if DIALECT == "mysql":
         impl = MSMediumBlob
+
+
+class CustomFloat(Numeric if DIALECT == "mysql" else Float):
+    pass

@@ -253,10 +253,8 @@ class Job(AbstractBase):
         self.completed = self.failed = 0
         if task and not task.frequency:
             task.is_active = False
-        global_results = deepcopy(results)
-        global_results.pop("results")
-        global_results["properties"] = self.get_properties()
-        results_kwargs = {"timestamp": runtime, "result": global_results, "job": self.id}
+        results["properties"] = self.to_dict(True)
+        results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
         if parent:
             results_kwargs["workflow"] = parent.id
             results_kwargs["parent_timestamp"] = parent_timestamp

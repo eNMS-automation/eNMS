@@ -9,6 +9,15 @@ you can use in your custom services.
 
 - Refactoring of the logs. One logger per service in "logs" folder. Real-time logs is now working
 even with multiprocessing enabled.
+NGINX CONF: proxy buffering MUST BE DISABLED. (eg
+
+    location / {
+        proxy_pass http://localhost:5000/;
+        proxy_buffering off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+)
 
 - Bug in tables: jump to bottom after page 1 when table is refreshed: fixed.
 

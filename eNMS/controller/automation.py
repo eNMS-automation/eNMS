@@ -137,24 +137,23 @@ class AutomationController(BaseController):
         service_result_window = "job" not in kw
         job, device = kw.get("job"), kw["device"]
 
-        if service_result_window:
-            timestamp = "timestamp"
-        elif job == "global" and device == "global":
+        if service_result_window or job == "global":
             timestamp = "timestamp"
         else:
             timestamp = "parent_timestamp"
         request = {timestamp: kw["timestamp"]}
         if job not in ("global", "all", None):
             request["job_id"] = job
-        else:
+        elif job != "all":
             request["job_id"] = id
         if device == "all" or job == "all":
             request["all_matches"] = True
-        if device not in ("global", "all"):
+        if device not in ("global", "all") and job != "global":
             request["device_id"] = device
         if device == "global":
             request["device_id"] = None
         results = fetch("Result", allow_none=True, **request)
+        print(request, results)
         if not results:
             return None
         if device == "all":
@@ -169,6 +168,8 @@ class AutomationController(BaseController):
                 for result in results
                 if result.job_id
             }
+        elif device == "all" and job == "all":
+            return {result.name: result.result for result in results}
         else:
             return results.result
 

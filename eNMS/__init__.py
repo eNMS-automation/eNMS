@@ -1,5 +1,7 @@
+from decimal import Decimal
 from flask import Flask, jsonify, make_response, render_template
 from flask_assets import Bundle
+from flask.json import JSONEncoder
 from flask.wrappers import Request, Response
 from itertools import chain
 from pathlib import Path
@@ -27,6 +29,16 @@ def register_extensions(app: Flask) -> None:
     csrf.init_app(app)
     login_manager.init_app(app)
     controller.init_app(app)
+
+
+def configure_encoder(app: Flask) -> None:
+    class CustomJSONEncoder(JSONEncoder):
+        def default(self, obj: Any) -> Any:
+            if isinstance(obj, Decimal):
+                return str(obj)
+            return super().default(obj)
+
+    app.json_encoder = CustomJSONEncoder
 
 
 def configure_login_manager(app: Flask) -> None:
@@ -108,6 +120,7 @@ def create_app(path: Path, config: str) -> Flask:
     app.mode = app.config["MODE"]
     app.path = path
     register_extensions(app)
+    configure_encoder(app)
     configure_login_manager(app)
     controller.init_services()
     configure_database(app)

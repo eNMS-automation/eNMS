@@ -14,7 +14,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField, String
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField, DictSubstitutionField, SubstitutionField
+from eNMS.forms.fields import DictSubstitutionField, SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -126,8 +126,6 @@ class RestCallForm(ServiceForm, ValidationForm):
     timeout = IntegerField(default=15)
     username = StringField()
     password = StringField()
-    pass_device_properties = BooleanField()
-    options = DictField()
     groups = {
         "Main Parameters": [
             "has_targets",
@@ -140,8 +138,6 @@ class RestCallForm(ServiceForm, ValidationForm):
             "timeout",
             "username",
             "password",
-            "pass_device_properties",
-            "options",
         ],
         "Validation Parameters": ValidationForm.group,
     }

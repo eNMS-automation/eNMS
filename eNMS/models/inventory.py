@@ -1,5 +1,14 @@
 from re import search
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    Numeric,
+    String,
+    Text,
+)
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
@@ -7,7 +16,6 @@ from typing import Any, Dict, List, Union
 
 from eNMS.controller import controller
 from eNMS.database import (
-    CustomFloat,
     CustomMediumBlobPickle,
     LARGE_STRING_LENGTH,
     SMALL_STRING_LENGTH,
@@ -76,8 +84,8 @@ class Device(CustomDevice):
     operating_system = Column(String(SMALL_STRING_LENGTH), default="")
     os_version = Column(String(SMALL_STRING_LENGTH), default="")
     ip_address = Column(String(SMALL_STRING_LENGTH), default="")
-    longitude = Column(CustomFloat(18, 8), default=0.0)
-    latitude = Column(CustomFloat(18, 8), default=0.0)
+    longitude = Column(Numeric(18, 8), default=0.0)
+    latitude = Column(Numeric(18, 8), default=0.0)
     port = Column(Integer, default=22)
     username = Column(String(SMALL_STRING_LENGTH), default="")
     password = Column(String(SMALL_STRING_LENGTH), default="")

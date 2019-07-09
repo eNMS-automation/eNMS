@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, make_response, render_template
 from flask_assets import Bundle
+from flask.json import JSONEncoder
 from flask.wrappers import Request, Response
 from pathlib import Path
+from sqlalchemy import Numeric
 from sqlalchemy.orm import configure_mappers
 from typing import Any, Tuple
 
@@ -25,6 +27,16 @@ def register_modules(app: Flask) -> None:
     csrf.init_app(app)
     login_manager.init_app(app)
     controller.init_app(app)
+
+
+def configure_encoder(app: Flask) -> None:
+    class CustomJSONEncoder(JSONEncoder):
+        def default(self, obj: Any) -> Any:
+            if isinstance(obj, Numeric):
+                return str(obj)
+            return JSONEncoder.default(self, obj)
+
+    app.json_encoder = CustomJSONEncoder
 
 
 def configure_login_manager(app: Flask) -> None:
@@ -102,6 +114,7 @@ def create_app(path: Path, config: str) -> Flask:
     app.mode = app.config["MODE"]
     app.path = path
     register_modules(app)
+    configure_encoder(app)
     configure_login_manager(app)
     controller.init_services()
     configure_database(app)

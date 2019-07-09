@@ -1,5 +1,5 @@
 from re import search
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text, Float
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, Numeric, String, Text
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
@@ -75,8 +75,8 @@ class Device(CustomDevice):
     operating_system = Column(String(SMALL_STRING_LENGTH), default="")
     os_version = Column(String(SMALL_STRING_LENGTH), default="")
     ip_address = Column(String(SMALL_STRING_LENGTH), default="")
-    longitude = Column(Float, default=0.0)
-    latitude = Column(Float, default=0.0)
+    longitude = Column(Numeric(18, 8), default=0.0)
+    latitude = Column(Numeric(18, 8), default=0.0)
     port = Column(Integer, default=22)
     username = Column(String(SMALL_STRING_LENGTH), default="")
     password = Column(String(SMALL_STRING_LENGTH), default="")

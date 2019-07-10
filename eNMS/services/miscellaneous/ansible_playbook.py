@@ -83,6 +83,7 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     options = DictField("Options (passed to ansible as -e extra args)")
     groups = {
         "Main Parameters": [
+            "has_targets",
             "playbook_path",
             "arguments",
             "pass_device_properties",

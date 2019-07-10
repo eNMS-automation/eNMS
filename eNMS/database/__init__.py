@@ -1,3 +1,5 @@
+from decimal import Decimal
+from flask.json import JSONEncoder
 from os import environ
 from sqlalchemy import create_engine, PickleType
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
@@ -41,3 +43,10 @@ Base = declarative_base()
 class CustomMediumBlobPickle(PickleType):
     if DIALECT == "mysql":
         impl = MSMediumBlob
+
+
+class CustomJSONEncoder(JSONEncoder):
+    def default(self, obj: Any) -> Any:
+        if isinstance(obj, Decimal):
+            return str(obj)
+        return super().default(obj)

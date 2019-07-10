@@ -1,7 +1,5 @@
-from decimal import Decimal
 from flask import Flask, jsonify, make_response, render_template
 from flask_assets import Bundle
-from flask.json import JSONEncoder
 from flask.wrappers import Request, Response
 from pathlib import Path
 from sqlalchemy.orm import configure_mappers
@@ -10,7 +8,7 @@ from typing import Any, Tuple
 from eNMS.cli import configure_cli
 from eNMS.config import config_mapper
 from eNMS.controller import controller
-from eNMS.database import Base, engine
+from eNMS.database import Base, CustomJSONEncoder, engine
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
@@ -29,16 +27,6 @@ def register_modules(app: Flask) -> None:
     controller.init_app(app)
 
 
-def configure_encoder(app: Flask) -> None:
-    class CustomJSONEncoder(JSONEncoder):
-        def default(self, obj: Any) -> Any:
-            if isinstance(obj, Decimal):
-                return str(obj)
-            return super().default(obj)
-
-    app.json_encoder = CustomJSONEncoder
-
-
 def configure_login_manager(app: Flask) -> None:
     @login_manager.user_loader
     def user_loader(id: int) -> User:
@@ -53,6 +41,7 @@ def configure_database(app: Flask) -> None:
     Base.metadata.create_all(bind=engine)
     configure_mappers()
     configure_events()
+    app.json_encoder = CustomJSONEncoder
     if not fetch("User", allow_none=True, name="admin"):
         controller.init_database()
 
@@ -114,7 +103,6 @@ def create_app(path: Path, config: str) -> Flask:
     app.mode = app.config["MODE"]
     app.path = path
     register_modules(app)
-    configure_encoder(app)
     configure_login_manager(app)
     controller.init_services()
     configure_database(app)

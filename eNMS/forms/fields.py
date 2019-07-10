@@ -28,7 +28,7 @@ class JsonField(StringField):
         try:
             dumps(self.data)
         except TypeError:
-            raise ValueError('This field contains invalid JSON')
+            raise ValueError("This field contains invalid JSON")
 
 
 class JsonSubstitutionField(JsonField):

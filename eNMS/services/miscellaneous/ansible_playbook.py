@@ -5,7 +5,7 @@ from subprocess import check_output
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import CustomJSONEncoder, LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, NoValidationSelectField, SubstitutionField
 from eNMS.forms.services import ValidationForm
@@ -43,11 +43,12 @@ class AnsiblePlaybookService(Service):
         command, extra_args = ["ansible-playbook"], {}
         if self.pass_device_properties:
             extra_args = device.get_properties()
+            print(extra_args)
             extra_args["password"] = device.password
         if self.options:
             extra_args.update(self.options)
         if extra_args:
-            command.extend(["-e", dumps(extra_args)])
+            command.extend(["-e", f"'{dumps(extra_args, cls=CustomJSONEncoder)}'"])
         if self.has_targets:
             command.extend(["-i", device.ip_address + ","])
         command.append(self.sub(self.playbook_path, locals()))
@@ -94,7 +95,9 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
 
     def validate(self) -> bool:
         valid_form = super().validate()
-        pass_properties_error = self.pass_device_properties.data and not self.has_targets.data
+        pass_properties_error = (
+            self.pass_device_properties.data and not self.has_targets.data
+        )
         if pass_properties_error:
             self.pass_device_properties.errors.append(
                 "'pass device properties' requires 'has device targets' to be selected."

@@ -1,5 +1,5 @@
 - Fix Ansible AJAX bug: form not properly populated.
-- Make Ansible playbooks alphabetically sorted.
+- Ansible playbooks are now alphabetically sorted.
 - New JSON field for REST payload: now accept any valid JSON object, including list.
 - Netmiko command length now up to 2 ** 15 characters long
 - New netmiko option for netmiko validation service
@@ -8,3 +8,11 @@
 3. Strip Prompt - checkbox (pass to send_command() as strip_prompt) - should default to True
 4. Strip Command - checkbox (pass to send_command() as strip_command) - should default to True
 - Added missing has_targets for the Ansible service
+- New Ansible service error: if has_targets is NOT selected, but pass_device_properties IS selected,
+then a RED alert box indicates that "pass device properties requires has device targets to be selected".
+- Ansible service no longer passes the device configuration when "pass device properties" is ticked
+- Changed ansible command syntax when pass device properties is ticked:
+BEFORE:
+ansible-playbook -e {<json stuff>} -i ip_address,  /path/to/playbook.yml
+NOW:
+ansible-playbook -e '{<json stuff>}' -i ip_address, /path/to/playbook.yml

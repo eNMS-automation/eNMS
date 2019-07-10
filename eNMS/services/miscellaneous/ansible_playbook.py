@@ -91,3 +91,12 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
         ],
         "Validation Parameters": ValidationForm.group,
     }
+
+    def validate(self) -> bool:
+        valid_form = super().validate()
+        pass_properties_error = self.pass_device_properties.data and not self.has_targets.data
+        if pass_properties_error:
+            self.pass_device_properties.errors.append(
+                "'pass device properties' requires 'has device targets' to be selected."
+            )
+        return valid_form and not pass_properties_error

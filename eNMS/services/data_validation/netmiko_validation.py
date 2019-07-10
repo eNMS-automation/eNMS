@@ -78,8 +78,8 @@ class NetmikoValidationService(Service):
 class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = SubstitutionField()
-    expect_str = Column(String(SMALL_STRING_LENGTH), default="")
-    auto_find_prompt = StringField()
+    expect_str = StringField()
+    auto_find_prompt = BooleanField()
     strip_prompt = BooleanField()
     strip_command = BooleanField()
     groups = {

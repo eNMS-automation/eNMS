@@ -2,3 +2,8 @@
 - Make Ansible playbooks alphabetically sorted.
 - New JSON field for REST payload: now accept any valid JSON object, including list.
 - Netmiko command length now up to 2 ** 15 characters long
+- New netmiko option for netmiko validation service
+1. Label: Optional End-of-output regex:   New Textbox in the Netmiko Parameters group
+2. Auto Find Prompt - checkbox (pass to send_command() as auto_find_prompt) - should default to True
+3. Strip Prompt - checkbox (pass to send_command() as strip_prompt) - should default to True
+4. Strip Command - checkbox (pass to send_command() as strip_command) - should default to True

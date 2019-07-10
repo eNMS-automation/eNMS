@@ -27,7 +27,7 @@ class NetmikoValidationService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
-    command = Column(String(LARGE_STRING_LENGTH), default="")
+    command = Column(Text(LARGE_STRING_LENGTH), default="")
     conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")

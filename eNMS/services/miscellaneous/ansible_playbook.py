@@ -43,7 +43,6 @@ class AnsiblePlaybookService(Service):
         command, extra_args = ["ansible-playbook"], {}
         if self.pass_device_properties:
             extra_args = device.get_properties()
-            print(extra_args)
             extra_args["password"] = device.password
         if self.options:
             extra_args.update(self.options)

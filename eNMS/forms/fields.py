@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from json import dumps, loads
+from json import loads
 from json.decoder import JSONDecodeError
 from typing import Any
 from wtforms import (
@@ -23,12 +23,12 @@ class JsonField(StringField):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
-    def pre_validate(self, form):
-        super().pre_validate(form)
+    def pre_validate(self, form: FlaskForm) -> bool:
         try:
-            dumps(self.data)
-        except TypeError:
-            raise ValueError("This field contains invalid JSON")
+            loads(self.data)
+        except JSONDecodeError:
+            raise ValidationError("This field contains invalid JSON.")
+        return True
 
 
 class JsonSubstitutionField(JsonField):

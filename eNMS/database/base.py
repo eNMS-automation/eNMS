@@ -1,5 +1,4 @@
 from flask_login import current_user as user
-from json import loads
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 

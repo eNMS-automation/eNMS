@@ -41,7 +41,7 @@ class NetmikoValidationService(Service):
     timeout = Column(Integer, default=10.0)
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
-    expect_str = Column(String(SMALL_STRING_LENGTH), default="")
+    expect_string = Column(String(SMALL_STRING_LENGTH), default="")
     auto_find_prompt = Column(Boolean, default=True)
     strip_prompt = Column(Boolean, default=True)
     strip_command = Column(Boolean, default=True)
@@ -56,7 +56,7 @@ class NetmikoValidationService(Service):
             netmiko_connection.send_command(
                 command,
                 delay_factor=self.delay_factor,
-                expect_str=self.expect_str,
+                expect_string=self.expect_string or None,
                 auto_find_prompt=self.auto_find_prompt,
                 strip_prompt=self.strip_prompt,
                 strip_command=self.strip_command,
@@ -78,14 +78,14 @@ class NetmikoValidationService(Service):
 class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = SubstitutionField()
-    expect_str = StringField()
+    expect_string = StringField()
     auto_find_prompt = BooleanField()
     strip_prompt = BooleanField()
     strip_command = BooleanField()
     groups = {
         "Main Parameters": [
             "command",
-            "expect_str",
+            "expect_string",
             "auto_find_prompt",
             "strip_prompt",
             "strip_command",

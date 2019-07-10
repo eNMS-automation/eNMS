@@ -10,7 +10,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import HiddenField
+from wtforms import BooleanField, HiddenField, StringField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
@@ -41,6 +41,10 @@ class NetmikoValidationService(Service):
     timeout = Column(Integer, default=10.0)
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
+    expect_str = Column(String(SMALL_STRING_LENGTH), default="")
+    auto_find_prompt = Column(Boolean, default=True)
+    strip_prompt = Column(Boolean, default=True)
+    strip_command = Column(Boolean, default=True)
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoValidationService"}
 
@@ -49,7 +53,14 @@ class NetmikoValidationService(Service):
         command = self.sub(self.command, locals())
         self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
         result = self.convert_result(
-            netmiko_connection.send_command(command, delay_factor=self.delay_factor)
+            netmiko_connection.send_command(
+                command,
+                delay_factor=self.delay_factor,
+                expect_str=self.expect_str,
+                auto_find_prompt=self.auto_find_prompt,
+                strip_prompt=self.strip_prompt,
+                strip_command=self.strip_command,
+            )
         )
         match = (
             self.sub(self.content_match, locals())
@@ -67,8 +78,12 @@ class NetmikoValidationService(Service):
 class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = SubstitutionField()
+    expect_str = Column(String(SMALL_STRING_LENGTH), default="")
+    auto_find_prompt = StringField()
+    strip_prompt = BooleanField()
+    strip_command = BooleanField()
     groups = {
-        "Main Parameters": ["command"],
+        "Main Parameters": ["command", "expect_str", "auto_find_prompt", "strip_prompt", "strip_command"],
         "Netmiko Parameters": NetmikoForm.group,
         "Validation Parameters": ValidationForm.group,
     }

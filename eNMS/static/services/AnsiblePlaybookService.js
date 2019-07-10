@@ -18,5 +18,9 @@ function job(id) {
       field.append(option);
     });
     field.selectpicker("refresh");
+    call(`/get/AnsiblePlaybookService/${id}`, function(instance) {
+      console.log(instance);
+      processInstance("AnsiblePlaybookService", instance);
+    });
   });
 }

@@ -60,8 +60,6 @@ class AbstractBase(Base):
                     value = fetch(relation[property]["model"], id=value)
             if property_type == "bool":
                 value = value not in (False, "false")
-            if property == "payload":
-                print(value, type(value))
             old_value = getattr(self, property)
             if old_value != value:
                 if (

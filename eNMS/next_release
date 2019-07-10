@@ -1,4 +1,4 @@
-- Add input validation for dictionary fields (eg not valid if input is a list)
-- Remove unused options in the REST Call service
-- Switch latitude and longitude to Numeric SQL type instead of Float (MySQL round issue)
-- Add version control system: version displayed in the UI
+- Fix Ansible AJAX bug: form not properly populated.
+- Make Ansible playbooks alphabetically sorted.
+- New JSON field for REST payload: now accept any valid JSON object, including list.
+- Netmiko command length now up to 2 ** 15 characters long

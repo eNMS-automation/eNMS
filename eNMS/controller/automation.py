@@ -190,4 +190,4 @@ class AutomationController(BaseController):
     def scan_playbook_folder(self) -> list:
         path = Path(self.playbook_path or self.path / "playbooks")
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
-        return sum(playbooks, [])
+        return sorted(sum(playbooks, []))

@@ -1,4 +1,5 @@
 from flask_login import current_user as user
+from json import loads
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
@@ -59,6 +60,8 @@ class AbstractBase(Base):
                     value = fetch(relation[property]["model"], id=value)
             if property_type == "bool":
                 value = value not in (False, "false")
+            if property_type == "json":
+                value = loads(value)
             old_value = getattr(self, property)
             if old_value != value:
                 if (

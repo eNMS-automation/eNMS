@@ -456,7 +456,7 @@ function updateProperty(el, property, value) {
   const propertyType = propertyTypes[property] || "str";
   if (propertyType.includes("bool") || property.includes("regex")) {
     el.prop("checked", value);
-  } else if (propertyType.includes("dict")) {
+  } else if (propertyType.includes("dict") || propertyType == "json") {
     el.val(value ? JSON.stringify(value) : "{}");
   } else if (
     ["list", "multiselect", "object", "object-list"].includes(propertyType)

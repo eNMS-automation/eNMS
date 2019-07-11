@@ -10,8 +10,8 @@ processInstance: false
  */
 // eslint-disable-next-line
 function job(id) {
-  if (!id) return;
   call(`/scan_playbook_folder`, function(playbooks) {
+    console.log(playbooks)
     const fieldId = id ? `playbook_path-${id}` : "playbook_path";
     const field = $(`#AnsiblePlaybookService-${fieldId}`);
     playbooks.forEach((playbook) => {
@@ -20,8 +20,10 @@ function job(id) {
       field.append(option);
     });
     field.selectpicker("refresh");
-    call(`/get/AnsiblePlaybookService/${id}`, function(instance) {
-      processInstance("AnsiblePlaybookService", instance);
-    });
+    if (id) {
+      call(`/get/AnsiblePlaybookService/${id}`, function(instance) {
+        processInstance("AnsiblePlaybookService", instance);
+      });
+    }
   });
 }

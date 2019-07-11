@@ -79,9 +79,9 @@ class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = SubstitutionField()
     expect_string = StringField()
-    auto_find_prompt = BooleanField()
-    strip_prompt = BooleanField()
-    strip_command = BooleanField()
+    auto_find_prompt = BooleanField(default=True)
+    strip_prompt = BooleanField(default=True)
+    strip_command = BooleanField(default=True)
     groups = {
         "Main Parameters": [
             "command",

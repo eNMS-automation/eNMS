@@ -9,12 +9,17 @@ from requests import (
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.types import JSON
 from typing import Optional
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictSubstitutionField, SubstitutionField
+from eNMS.forms.fields import (
+    DictSubstitutionField,
+    JsonSubstitutionField,
+    SubstitutionField,
+)
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -28,7 +33,7 @@ class RestCallService(Service):
     has_targets = Column(Boolean, default=False)
     call_type = Column(String(SMALL_STRING_LENGTH), default="")
     rest_url = Column(String(SMALL_STRING_LENGTH), default="")
-    payload = Column(MutableDict.as_mutable(PickleType), default={})
+    payload = Column(JSON, default={})
     params = Column(MutableDict.as_mutable(PickleType), default={})
     headers = Column(MutableDict.as_mutable(PickleType), default={})
     verify_ssl_certificate = Column(Boolean, default=True)
@@ -119,7 +124,7 @@ class RestCallForm(ServiceForm, ValidationForm):
         )
     )
     rest_url = SubstitutionField()
-    payload = DictSubstitutionField()
+    payload = JsonSubstitutionField()
     params = DictSubstitutionField()
     headers = DictSubstitutionField()
     verify_ssl_certificate = BooleanField("Verify SSL Certificate")

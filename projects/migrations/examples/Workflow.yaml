@@ -18,7 +18,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-07 16:25:04.087101'
+  last_modified: '2019-07-11 13:51:15.830066'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -61,7 +61,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-07 16:25:04.201367'
+  last_modified: '2019-07-11 13:51:15.976792'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -106,7 +106,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-07 16:25:04.310600'
+  last_modified: '2019-07-11 13:51:16.123506'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -154,7 +154,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-07 16:25:04.418977'
+  last_modified: '2019-07-11 13:51:16.278485'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -200,7 +200,7 @@
   - add_devices_to_payload
   - Iteration_service_simple
   - Iteration_service_yaql
-  last_modified: '2019-07-07 16:25:04.518977'
+  last_modified: '2019-07-11 13:51:16.377412'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -244,7 +244,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-07 16:25:04.629515'
+  last_modified: '2019-07-11 13:51:16.484598'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -287,7 +287,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-07 16:25:04.730765'
+  last_modified: '2019-07-11 13:51:16.587237'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''
@@ -331,7 +331,7 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-07 16:49:40.345012'
+  last_modified: '2019-07-11 13:51:16.718029'
   mail_recipient: ''
   name: Workflow with separate failure / success path
   notification_header: ''

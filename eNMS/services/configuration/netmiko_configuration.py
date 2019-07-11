@@ -54,7 +54,7 @@ class NetmikoConfigurationForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="NetmikoConfigurationService")
     content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     commit_configuration = BooleanField()
-    exit_config_mode = BooleanField()
+    exit_config_mode = BooleanField(default=True)
     strip_prompt = BooleanField()
     strip_command = BooleanField()
     config_mode_command = StringField()

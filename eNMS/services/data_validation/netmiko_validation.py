@@ -10,7 +10,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import HiddenField
+from wtforms import BooleanField, HiddenField, StringField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
@@ -27,7 +27,7 @@ class NetmikoValidationService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
-    command = Column(String(SMALL_STRING_LENGTH), default="")
+    command = Column(Text(LARGE_STRING_LENGTH), default="")
     conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
@@ -41,6 +41,10 @@ class NetmikoValidationService(Service):
     timeout = Column(Integer, default=10.0)
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
+    expect_string = Column(String(SMALL_STRING_LENGTH), default="")
+    auto_find_prompt = Column(Boolean, default=True)
+    strip_prompt = Column(Boolean, default=True)
+    strip_command = Column(Boolean, default=True)
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoValidationService"}
 
@@ -49,7 +53,14 @@ class NetmikoValidationService(Service):
         command = self.sub(self.command, locals())
         self.log(parent, "info", f"Sending '{command}' on {device.name} (Netmiko)")
         result = self.convert_result(
-            netmiko_connection.send_command(command, delay_factor=self.delay_factor)
+            netmiko_connection.send_command(
+                command,
+                delay_factor=self.delay_factor,
+                expect_string=self.expect_string or None,
+                auto_find_prompt=self.auto_find_prompt,
+                strip_prompt=self.strip_prompt,
+                strip_command=self.strip_command,
+            )
         )
         match = (
             self.sub(self.content_match, locals())
@@ -67,8 +78,18 @@ class NetmikoValidationService(Service):
 class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = SubstitutionField()
+    expect_string = StringField()
+    auto_find_prompt = BooleanField(default=True)
+    strip_prompt = BooleanField(default=True)
+    strip_command = BooleanField(default=True)
     groups = {
-        "Main Parameters": ["command"],
+        "Main Parameters": [
+            "command",
+            "expect_string",
+            "auto_find_prompt",
+            "strip_prompt",
+            "strip_command",
+        ],
         "Netmiko Parameters": NetmikoForm.group,
         "Validation Parameters": ValidationForm.group,
     }

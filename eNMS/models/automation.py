@@ -641,7 +641,9 @@ class Workflow(Job):
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     use_workflow_targets = Column(Boolean, default=True)
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
-    edges = relationship("WorkflowEdge", back_populates="workflow")
+    edges = relationship(
+        "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
+    )
 
     def __init__(self, **kwargs: Any) -> None:
         end = fetch("Service", name="End")

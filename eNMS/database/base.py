@@ -63,7 +63,7 @@ class AbstractBase(Base):
             if old_value != value:
                 if (
                     isinstance(value, list)
-                    and old_value
+                    and isinstance(old_value, list)
                     and set(value) == set(old_value)
                 ):
                     continue

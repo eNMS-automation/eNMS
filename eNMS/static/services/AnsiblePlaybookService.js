@@ -1,6 +1,7 @@
 /*
 global
 call: false
+processInstance: false
 */
 
 /**
@@ -18,5 +19,8 @@ function job(id) {
       field.append(option);
     });
     field.selectpicker("refresh");
+    call(`/get/AnsiblePlaybookService/${id}`, function(instance) {
+      processInstance("AnsiblePlaybookService", instance);
+    });
   });
 }

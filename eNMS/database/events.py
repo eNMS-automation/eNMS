@@ -4,6 +4,7 @@ from sqlalchemy.engine.base import Connection
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.orm.mapper import Mapper
+from sqlalchemy.types import JSON
 from typing import Any
 
 from eNMS.controller import controller
@@ -27,6 +28,7 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
                 Boolean: "bool",
                 Integer: "int",
                 Float: "float",
+                JSON: "dict",
                 PickleType: "dict",
             }.get(type(col.type), "str")
             if col.key not in property_types:

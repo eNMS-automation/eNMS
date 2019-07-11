@@ -7,7 +7,11 @@ from wtforms import BooleanField, HiddenField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictSubstitutionField, NoValidationSelectField, SubstitutionField
+from eNMS.forms.fields import (
+    DictSubstitutionField,
+    NoValidationSelectField,
+    SubstitutionField,
+)
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device

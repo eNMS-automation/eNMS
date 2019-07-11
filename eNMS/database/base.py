@@ -61,12 +61,6 @@ class AbstractBase(Base):
                 value = value not in (False, "false")
             old_value = getattr(self, property)
             if old_value != value:
-                if (
-                    isinstance(value, list)
-                    and isinstance(old_value, list)
-                    and set(value) == set(old_value)
-                ):
-                    continue
                 modified = True
                 setattr(self, property, value)
         if modified:

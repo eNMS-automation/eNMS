@@ -10,6 +10,7 @@ processInstance: false
  */
 // eslint-disable-next-line
 function job(id) {
+  if (!id) return;
   call(`/scan_playbook_folder`, function(playbooks) {
     const fieldId = id ? `playbook_path-${id}` : "playbook_path";
     const field = $(`#AnsiblePlaybookService-${fieldId}`);

@@ -8,7 +8,7 @@ from typing import Any, Tuple
 from eNMS.cli import configure_cli
 from eNMS.config import config_mapper
 from eNMS.controller import controller
-from eNMS.database import Base, CustomJSONEncoder, engine
+from eNMS.database import Base, engine
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties, property_types
@@ -41,7 +41,6 @@ def configure_database(app: Flask) -> None:
     Base.metadata.create_all(bind=engine)
     configure_mappers()
     configure_events()
-    app.json_encoder = CustomJSONEncoder
     if not fetch("User", allow_none=True, name="admin"):
         controller.init_database()
 

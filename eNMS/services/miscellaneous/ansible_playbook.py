@@ -5,7 +5,7 @@ from subprocess import check_output
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
-from eNMS.database import CustomJSONEncoder, LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, NoValidationSelectField, SubstitutionField
 from eNMS.forms.services import ValidationForm
@@ -47,7 +47,7 @@ class AnsiblePlaybookService(Service):
         if self.options:
             extra_args.update(self.options)
         if extra_args:
-            command.extend(["-e", f"'{dumps(extra_args, cls=CustomJSONEncoder)}'"])
+            command.extend(["-e", f"'{dumps(extra_args)}'"])
         if self.has_targets:
             command.extend(["-i", device.ip_address + ","])
         command.append(self.sub(self.playbook_path, locals()))

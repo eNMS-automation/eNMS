@@ -16,3 +16,5 @@ BEFORE:
 ansible-playbook -e {<json stuff>} -i ip_address,  /path/to/playbook.yml
 NOW:
 ansible-playbook -e '{<json stuff>}' -i ip_address, /path/to/playbook.yml
+- Store coordinates as string instead of float (MySQL rounding issues)
+- fix REST API query bug

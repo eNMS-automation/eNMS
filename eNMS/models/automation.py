@@ -451,7 +451,7 @@ class Service(Job):
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogHistory('{self.id}', '{self.name}')"></i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showResultsPanel('{self.id}', '{self.name}')">
+            onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}', '{self.name}')">Run</button>""",
@@ -661,7 +661,7 @@ class Workflow(Job):
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogHistory('{self.id}', '{self.name}')"></i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showResultsPanel('{self.id}', '{self.name}', true)">
+            onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="runJob('{self.id}', '{self.name}')">Run</button>""",

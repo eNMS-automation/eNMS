@@ -167,8 +167,8 @@ function displayResults(id, formId) {
  * Display results.
  * @param {id} id - Job id.
  */
-function getTimestamps(id, isWorkflow) {
-  call(`/get_job_timestamps/${id}`, (timestamps) => {
+function getTimestamps(id, type) {
+  call(`/get_timestamps/${type}/${id}`, (timestamps) => {
     $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
     timestamps.forEach((timestamp) => {
       $(`#timestamp-${id},#timestamp_compare-${id}`).append(
@@ -182,7 +182,7 @@ function getTimestamps(id, isWorkflow) {
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
     if (timestamps) {
       updateDeviceList(id)
-      if (isWorkflow) updateJobList(id);
+      if (type == "workflow" || type == "device") updateJobList(id);
     }
   });
 }
@@ -211,8 +211,8 @@ function updateDeviceList(id, parentId) {
  * Display results.
  * @param {id} id - Job id.
  */
-function updateJobList(id) {
-  fCall(`/get_workflow_results_list/${id}`, `#results-form-${id}`, (jobs) => {
+function updateJobList(id, type) {
+  fCall(`/get_job_list/${type}/${id}`, `#results-form-${id}`, (jobs) => {
     $(`#job-${id},#job_compare-${id}`).empty();
     jobs.forEach((job) => {
       $(`#job-${id},#job_compare-${id}`).append(
@@ -255,11 +255,10 @@ function showLogs(id, name) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function showResultsPanel(id, name, isWorkflow) {
-  form = isWorkflow ? "workflow_results" : "results";
-  createPanel(form, `Results - ${name}`, id, function() {
-    configureCallbacks(id, isWorkflow);
-    getTimestamps(id, isWorkflow);
+function showResultsPanel(id, name, type) {
+  createPanel(`${type}_results`, `Results - ${name}`, id, function() {
+    configureCallbacks(id, type);
+    getTimestamps(id, type);
   });
 }
 
@@ -268,19 +267,23 @@ function showResultsPanel(id, name, isWorkflow) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function configureCallbacks(id, isWorkflow) {
-  $(`#device-${id}`).on("change", function() {
-    displayResults(id, id);
-  });
+function configureCallbacks(id, type) {
+  if (type != "device") {
+    $(`#device-${id}`).on("change", function() {
+      displayResults(id, id);
+    });
+  }
 
   $(`#timestamp-${id}`).on("change", function() {
-    updateDeviceList(id);
-    if (isWorkflow) updateJobList(id);
+    if (type != "device") updateDeviceList(id);
+    if (type != "service") updateJobList(id, type);
   });
 
-  $(`#job-${id}`).on("change", function() {
-    displayResults(id, id);
-  });
+  if (type != "service") {
+    $(`#job-${id}`).on("change", function() {
+      displayResults(id, id);
+    });
+  }
 
   $(`#compare_with-${id}`).on("change", function() {
     $(`#display_results-${id}`).empty();
@@ -442,8 +445,5 @@ function resumeTask(id) {
     $("#service-type").selectpicker({
       liveSearch: true,
     });
-  }
-  if (page == "table/service" || page == "table/workflow") {
-    refreshTable(3000);
   }
 })();

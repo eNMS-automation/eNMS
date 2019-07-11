@@ -72,6 +72,5 @@ block content %}
 <script>
   let workflow = {{ workflow|tojson|safe }};
 </script>
-<script src="{{ url_for('static', filename='automation.js') }}"></script>
 <script src="{{ url_for('static', filename='workflowBuilder.js') }}"></script>
 {% endblock javascripts %}

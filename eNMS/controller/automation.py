@@ -101,8 +101,9 @@ class AutomationController(BaseController):
         proc = Popen(['tail', '-n', "1000", path], stdout=PIPE)
         return proc.stdout.readlines()
 
-    def get_job_timestamps(self, id: int) -> dict:
-        results = fetch("Result", job_id=id, allow_none=True, all_matches=True)
+    def get_timestamps(self, type: str, id: int) -> dict:
+        id_kwarg = {"device_id" if type == "device" else "job_id": id}
+        results = fetch("Result", allow_none=True, all_matches=True, **id_kwarg)
         return sorted(set(result.timestamp for result in results))
 
     def get_results_device_list(self, id: int, **kw) -> dict:
@@ -117,16 +118,28 @@ class AutomationController(BaseController):
             if result.device_id
         ))
 
-    def get_workflow_results_list(self, id: int, **kw) -> dict:
+    def get_job_list(self, results_type: str, id: int, **kw) -> dict:
+        id_kwarg = {"device_id" if results_type == "device" else "job_id": id}
         defaults = [("global", "Global Result"), ("all", "All jobs")]
+        print(list(set(
+            (result.job_id, result.job_name)
+            for result in fetch(
+                "Result",
+                parent_timestamp=kw.get("timestamp"),
+                allow_none=True,
+                all_matches=True,
+                **id_kwarg,
+            )
+            if result.job_id
+        )))
         return defaults + list(set(
             (result.job_id, result.job_name)
             for result in fetch(
                 "Result",
-                workflow_id=id,
                 parent_timestamp=kw.get("timestamp"),
                 allow_none=True,
                 all_matches=True,
+                **id_kwarg,
             )
             if result.job_id
         ))

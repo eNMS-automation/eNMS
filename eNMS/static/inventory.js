@@ -164,31 +164,10 @@ function updatePools(pool) {
 // eslint-disable-next-line
 function showDeviceResultsPanel(id, name, isWorkflow) {
   createPanel("device_results", `Results - ${name}`, id, function() {
-    configureDeviceCallbacks(id);
-    getDeviceTimestamps(id);
+    configureCallbacks(id, type);
+    getTimestamps(id, type);
   });
 }
-
-/**
- * Configure display & comparison callbacks
- * @param {id} id - Job id.
- */
-// eslint-disable-next-line
-function configureDeviceCallbacks(id) {
-
-  $(`#timestamp-${id}`).on("change", function() {
-    updateJobList(id);
-  });
-
-  $(`#job-${id}`).on("change", function() {
-    displayResults(id, id);
-  });
-
-  $(`#display-text-${id},#display-json-${id}`).on("click", function() {
-    displayResults(id, id);
-  });
-}
-
 
 Object.assign(action, {
   "Device properties": (d) => showTypePanel("device", d.id),

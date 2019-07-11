@@ -68,19 +68,6 @@ function showConfigurationPanel(id, name) {
 }
 
 /**
- * Display the device automation modal.
- * @param {id} id - Device id.
- */
-// eslint-disable-next-line
-function showDeviceAutomationPanel(id) {
-  call(`/get/device/${id}`, function(device) {
-    createPanel("device_automation", "Device Automation", id, () => {
-      $(`#jobs-${id}`).selectpicker("val", device.jobs.map((d) => d.id));
-    });
-  });
-}
-
-/**
  * Display configurations.
  * @param {int} id - Device ID.
  */

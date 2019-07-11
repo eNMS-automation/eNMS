@@ -121,17 +121,6 @@ class AutomationController(BaseController):
     def get_job_list(self, results_type: str, id: int, **kw) -> dict:
         id_kwarg = {"device_id" if results_type == "device" else "job_id": id}
         defaults = [("global", "Global Result"), ("all", "All jobs")]
-        print(list(set(
-            (result.job_id, result.job_name)
-            for result in fetch(
-                "Result",
-                parent_timestamp=kw.get("timestamp"),
-                allow_none=True,
-                all_matches=True,
-                **id_kwarg,
-            )
-            if result.job_id
-        )))
         return defaults + list(set(
             (result.job_id, result.job_name)
             for result in fetch(
@@ -148,8 +137,7 @@ class AutomationController(BaseController):
         if "timestamp" not in kw:
             return None
         service_result_window = "job" not in kw
-        job, device = kw.get("job"), kw["device"]
-
+        job, device = kw.get("job"), kw.get("device")
         if service_result_window or job == "global":
             timestamp = "timestamp"
         else:
@@ -157,14 +145,16 @@ class AutomationController(BaseController):
         request = {timestamp: kw["timestamp"]}
         if job not in ("global", "all", None):
             request["job_id"] = job
-        elif job != "all":
+        elif device and job != "all":
             request["job_id"] = id
         if device == "all" or job == "all":
             request["all_matches"] = True
-        if device not in ("global", "all") and job != "global":
+        if device not in ("global", "all", None) and job != "global":
             request["device_id"] = device
         if device == "global":
             request["device_id"] = None
+        elif not device:
+            request["device_id"] = id
         results = fetch("Result", allow_none=True, **request)
         print(request, results)
         if not results:

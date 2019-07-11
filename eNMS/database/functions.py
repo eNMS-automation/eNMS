@@ -20,8 +20,6 @@ def fetch(
     query = sess.query(models[model]).filter_by(**kwargs)
     result = query.all() if all_matches else query.first()
     if result or allow_none:
-        if result:
-            result.get_properties()
         return result
     else:
         raise InstanceNotFoundException(

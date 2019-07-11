@@ -65,6 +65,7 @@ class Query(Resource):
 
     def get(self, cls: str) -> Union[dict, list]:
         try:
+            print(request.args.to_dict())
             results = fetch(cls, all_matches=True, **request.args.to_dict())
             return [result.get_properties() for result in results]
         except InstanceNotFoundException:

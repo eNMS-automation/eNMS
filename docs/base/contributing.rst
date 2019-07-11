@@ -60,3 +60,32 @@ If you are updating the documentation, you can build a local version of the docs
  # build a local version of the docs
  cd /docs
  make html
+
+eNMS architecture
+-----------------
+
+eNMS architecture follows the Model - View - Controller pattern (MVC).
+
+The view is the GUI. It relies on:
+- HTML templates with the Jinja2 template engine, located in eNMS/templates
+- JavaScript. The JavaScript code is located in eNMS/static.
+Changing from one page to another page in eNMS menu results in a GET request, everything else is an AJAX POST request.
+- wtforms, a python library to define form (properties of the form and type of property), as well as validate them. All forms are in eNMS/forms.
+
+The Controller is located in eNMS/controller. It defines what needs to be done whenever a POST request is received.
+In most web project (no matter what framework is used: Flask, Django, etc), the application logic and the framework are entangled in "routes". eNMS is built around the idea that the application logic and the framework should be completely decoupled.
+Flask is used in eNMS as nothing more than a HTTP router and a session management library. Flask routes are all contained in eNMS/routes.py. There is a single route for all POST requests. This route redirects the request to the appropriate function of the controller.
+The advantage of this design is that, if the need ever arises to move away from Flask to another web framework, there is almost nothing to be done.
+
+The "Model" is based on SQL Alchemy. Althought there is a library called "flask_sqlalchemy" to ease the integration of Flask and SQL Alchemy, it is not used in eNMS on purpose, for the reason mentioned above and generally to have the least possible interdependency among requirements.
+All models are contained in eNMS/models.
+
+The models, controller, and forms are all separated in different "categories":
+- Administration: user management, database migration and deletion, import and export of the topology, etc.
+- Inventory: devices, links, pools, and configuration management.
+- Automation: services, workflow, workflow management.
+- Scheduling: task, calendar, and events (event-driven automation).
+
+eNMS uses metaclasses and SQL Alchemy events to understand the model, by inspecting an object definition at creation time.
+- Forms have a metaform in eNMS/forms/__init__.
+- Models are inspected by the SQL Alchemy "mapper_configured" event, in eNMS/database/events.py

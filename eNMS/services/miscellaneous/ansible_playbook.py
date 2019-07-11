@@ -7,7 +7,7 @@ from wtforms import BooleanField, HiddenField
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField, NoValidationSelectField, SubstitutionField
+from eNMS.forms.fields import DictSubstitutionField, NoValidationSelectField, SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -45,7 +45,7 @@ class AnsiblePlaybookService(Service):
             extra_args = device.get_properties()
             extra_args["password"] = device.password
         if self.options:
-            extra_args.update(self.options)
+            extra_args.update(self.sub(self.options, locals()))
         if extra_args:
             command.extend(["-e", f"'{dumps(extra_args)}'"])
         if self.has_targets:
@@ -80,7 +80,7 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
         "Pass Device Inventory Properties (to be used "
         "in the playbook as {{name}} or {{ip_address}})"
     )
-    options = DictField("Options (passed to ansible as -e extra args)")
+    options = DictSubstitutionField("Options (passed to ansible as -e extra args)")
     groups = {
         "Main Parameters": [
             "has_targets",

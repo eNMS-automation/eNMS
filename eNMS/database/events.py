@@ -81,6 +81,7 @@ def configure_events() -> None:
                 continue
             changes.append(f"{attr.key}: {hist.deleted} => {hist.added}")
         if changes:
+            target.last_modified = controller.get_time()
             controller.log(
                 "info",
                 (

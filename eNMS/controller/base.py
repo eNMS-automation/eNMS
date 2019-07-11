@@ -176,7 +176,6 @@ class BaseController:
         "reset_status",
         "restart_workflow",
         "run_job",
-        "save_device_jobs",
         "save_parameters",
         "save_pool_objects",
         "save_positions",

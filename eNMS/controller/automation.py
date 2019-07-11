@@ -207,9 +207,6 @@ class AutomationController(BaseController):
             job.run()
         return job.serialized
 
-    def save_device_jobs(self, device_id: int, **kwargs: List[int]) -> None:
-        fetch("Device", id=device_id).jobs = objectify("Job", kwargs["jobs"])
-
     def save_positions(self, workflow_id: int) -> str:
         now = self.get_time()
         workflow = fetch("Workflow", allow_none=True, id=workflow_id)

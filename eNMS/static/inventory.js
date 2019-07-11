@@ -13,20 +13,6 @@ table: false
 */
 
 /**
- * Update device jobs.
- * @param {id} id - Device id.
- */
-// eslint-disable-next-line
-function saveDeviceJobs(id) {
-  fCall(`/save_device_jobs/${id}`, `#device-automation-form-${id}`, function(
-    device
-  ) {
-    alertify.notify("Changes saved.", "success", 5);
-    $(`#device_automation-${id}`).remove();
-  });
-}
-
-/**
  * Start an SSH session to the device.
  * @param {id} id - Device id.
  */

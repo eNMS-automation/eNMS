@@ -6,9 +6,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 32.29876
+  latitude: '32.29876'
   location: Jackson
-  longitude: -90.18481
+  longitude: '-90.18481'
   model: Cisco
   name: Jackson
   napalm_driver: eos
@@ -29,9 +29,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 37.44188
+  latitude: '37.44188'
   location: PaloAlto
-  longitude: -122.14302
+  longitude: '-122.14302'
   model: Cisco
   name: PaloAlto
   napalm_driver: eos
@@ -52,9 +52,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 30.26715
+  latitude: '30.26715'
   location: Austin
-  longitude: -97.74306
+  longitude: '-97.74306'
   model: Arista
   name: Austin
   napalm_driver: eos
@@ -75,9 +75,9 @@
   last_runtime: 0.507507
   last_status: Success
   last_update: '2019-06-27 09:30:01.217537'
-  latitude: 38.89511
+  latitude: '38.89511'
   location: Washington
-  longitude: -77.03637
+  longitude: '-77.03637'
   model: Arista
   name: Washington
   napalm_driver: eos
@@ -98,9 +98,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 41.85003
+  latitude: '41.85003'
   location: Chicago
-  longitude: -87.65005
+  longitude: '-87.65005'
   model: Cisco
   name: Chicago
   napalm_driver: eos
@@ -121,9 +121,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 37.33939
+  latitude: '37.33939'
   location: SanJose
-  longitude: -121.89496
+  longitude: '-121.89496'
   model: Cisco
   name: SanJose
   napalm_driver: eos
@@ -144,9 +144,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 32.71533
+  latitude: '32.71533'
   location: SanDiego
-  longitude: -117.15726
+  longitude: '-117.15726'
   model: Cisco
   name: SanDiego
   napalm_driver: eos
@@ -167,9 +167,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 32.78306
+  latitude: '32.78306'
   location: Dallas
-  longitude: -96.80667
+  longitude: '-96.80667'
   model: Cisco
   name: Dallas
   napalm_driver: eos
@@ -190,9 +190,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 39.95234
+  latitude: '39.95234'
   location: Philadelphia
-  longitude: -75.16379
+  longitude: '-75.16379'
   model: Cisco
   name: Philadelphia
   napalm_driver: eos
@@ -213,9 +213,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 34.05223
+  latitude: '34.05223'
   location: LosAngeles
-  longitude: -118.24368
+  longitude: '-118.24368'
   model: Cisco
   name: LosAngeles
   napalm_driver: eos
@@ -236,9 +236,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 42.33143
+  latitude: '42.33143'
   location: Detroit
-  longitude: -83.04575
+  longitude: '-83.04575'
   model: Cisco
   name: Detroit
   napalm_driver: eos
@@ -259,9 +259,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 37.55376
+  latitude: '37.55376'
   location: Richmond
-  longitude: -77.46026
+  longitude: '-77.46026'
   model: Cisco
   name: Richmond
   napalm_driver: eos
@@ -282,9 +282,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 33.749
+  latitude: '33.749'
   location: Atlanta
-  longitude: -84.38798
+  longitude: '-84.38798'
   model: Cisco
   name: Atlanta
   napalm_driver: eos
@@ -305,9 +305,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 42.35843
+  latitude: '42.35843'
   location: Boston
-  longitude: -71.05977
+  longitude: '-71.05977'
   model: Cisco
   name: Boston
   napalm_driver: eos
@@ -328,9 +328,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 29.76328
+  latitude: '29.76328'
   location: Houston
-  longitude: -95.36327
+  longitude: '-95.36327'
   model: Cisco
   name: Houston
   napalm_driver: eos
@@ -351,9 +351,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 39.29038
+  latitude: '39.29038'
   location: Baltimore
-  longitude: -76.61219
+  longitude: '-76.61219'
   model: Juniper
   name: Baltimore
   napalm_driver: eos
@@ -374,9 +374,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 41.4995
+  latitude: '41.4995'
   location: Cleveland
-  longitude: -81.69541
+  longitude: '-81.69541'
   model: Juniper
   name: Cleveland
   napalm_driver: eos
@@ -397,9 +397,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 39.96118
+  latitude: '39.96118'
   location: Columbus
-  longitude: -82.99879
+  longitude: '-82.99879'
   model: Juniper
   name: Columbus
   napalm_driver: eos
@@ -420,9 +420,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 39.162
+  latitude: '39.162'
   location: Cincinnati
-  longitude: -84.45689
+  longitude: '-84.45689'
   model: Juniper
   name: Cincinnati
   napalm_driver: eos
@@ -443,9 +443,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 42.3751
+  latitude: '42.3751'
   location: Cambridge
-  longitude: -71.10561
+  longitude: '-71.10561'
   model: Juniper
   name: Cambridge
   napalm_driver: eos
@@ -466,9 +466,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 44.97997
+  latitude: '44.97997'
   location: Minneapolis
-  longitude: -93.26384
+  longitude: '-93.26384'
   model: Juniper
   name: Minneapolis
   napalm_driver: eos
@@ -489,9 +489,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 40.71427
+  latitude: '40.71427'
   location: NewYork
-  longitude: -74.00597
+  longitude: '-74.00597'
   model: Juniper
   name: NewYork
   napalm_driver: eos
@@ -512,9 +512,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 38.58157
+  latitude: '38.58157'
   location: Sacramento
-  longitude: -121.4944
+  longitude: '-121.4944'
   model: Juniper
   name: Sacramento
   napalm_driver: eos
@@ -535,9 +535,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 37.77493
+  latitude: '37.77493'
   location: SanFrancisco
-  longitude: -122.41942
+  longitude: '-122.41942'
   model: Juniper
   name: SanFrancisco
   napalm_driver: eos
@@ -558,9 +558,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 33.78779
+  latitude: '33.78779'
   location: Orange
-  longitude: -117.85311
+  longitude: '-117.85311'
   model: Juniper
   name: Orange
   napalm_driver: eos
@@ -581,9 +581,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 37.80437
+  latitude: '37.80437'
   location: Oakland
-  longitude: -122.2708
+  longitude: '-122.2708'
   model: Cisco
   name: Oakland
   napalm_driver: eos
@@ -604,9 +604,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 39.73915
+  latitude: '39.73915'
   location: Denver
-  longitude: -104.9847
+  longitude: '-104.9847'
   model: Cisco
   name: Denver
   napalm_driver: eos
@@ -627,9 +627,9 @@
   last_runtime: 0.0
   last_status: Never
   last_update: Never
-  latitude: 48.0
+  latitude: '48.0'
   location: Paris
-  longitude: 2.0
+  longitude: '2.0'
   model: Cisco
   name: Aserver
   napalm_driver: eos

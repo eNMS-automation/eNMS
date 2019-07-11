@@ -90,7 +90,7 @@ stylesheets %} {% block content %} {% if type == "pool" %}
   const properties = {{ properties|tojson|safe }};
   const type = "{{ type }}";
   let [table, filteringPanel] = initTable(type);
-  console.log(type)
+  if (["service", "workflow", "task"].includes(type))
   refreshTable(3000);
 </script>
 {% if type == "pool" %}

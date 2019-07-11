@@ -199,7 +199,7 @@ class Job(AbstractBase):
             if not connections:
                 continue
             for device, conn in connections.items():
-                info(f"Closing Netmiko Connection to {device}")
+                info(f"Closing {library} Connection to {device}")
                 conn.disconnect() if library == "netmiko" else conn.close()
         current_job = parent or self
         current_job.logs.append(f"{self.type} {self.name}: Finished.")
@@ -459,10 +459,9 @@ class Service(Job):
         )
         if self.privileged_mode:
             netmiko_connection.enable()
-        if parent:
-            controller.connections_cache["netmiko"][parent.name][
-                device.name
-            ] = netmiko_connection
+        controller.connections_cache["netmiko"][parent.name if parent else self.name][
+            device.name
+        ] = netmiko_connection
         return netmiko_connection
 
     def napalm_connection(self, device: "Device", parent: "Job") -> NetworkDriver:

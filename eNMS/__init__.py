@@ -12,7 +12,7 @@ from eNMS.controller import controller
 from eNMS.database import Base, engine
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
-from eNMS.forms import form_properties, property_types
+from eNMS.forms import form_properties
 from eNMS.extensions import assets, auth, csrf, login_manager
 from eNMS.models import relationships
 from eNMS.models.administration import User
@@ -58,7 +58,6 @@ def configure_context_processor(app: Flask) -> None:
             "form_properties": form_properties,
             "names": property_names,
             "parameters": controller.config,
-            "property_types": {k: str(v) for k, v in property_types.items()},
             "relations": list(set(chain.from_iterable(relationships.values()))),
             "version": controller.version,
         }

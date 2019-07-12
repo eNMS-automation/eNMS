@@ -12,7 +12,7 @@ page: false
 panelCode: false
 Promise: false
 properties: false
-propertyTypes: false
+relations: false
 saveService: false
 saveWorkflow: false
 table: false
@@ -454,7 +454,6 @@ function showTypePanel(type, id, duplicate) {
  */
 function updateProperty(el, property, value) {
   const propertyType = formProperties[type][property] || "str";
-  console.log(propertyType);
   if (propertyType.includes("bool") || property.includes("regex")) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict") || propertyType == "json") {

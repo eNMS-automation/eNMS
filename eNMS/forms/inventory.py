@@ -10,7 +10,7 @@ from wtforms import (
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
-from eNMS.forms import BaseForm
+from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import MultipleInstanceField, InstanceField
 from eNMS.properties import private_properties
 from eNMS.properties.objects import (
@@ -73,6 +73,7 @@ class ObjectForm(BaseForm):
 
 
 @configure_device_form
+@configure_relationships("Device")
 class DeviceForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="device")
@@ -95,12 +96,11 @@ class DeviceForm(ObjectForm):
     )
 
 
+@configure_relationships("Link")
 class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")
     id = HiddenField()
-    source = InstanceField("Source", instance_type="Device")
-    destination = InstanceField("Destination", instance_type="Device")
     color = StringField("Color")
 
 

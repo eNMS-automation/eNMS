@@ -40,6 +40,8 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
     model = {name: cls, name.lower(): cls}
     models.update(model)
     for relation in mapper.relationships:
+        if getattr(relation.mapper.class_, "private", False):
+            continue
         property = str(relation).split(".")[1]
         relationships[name][property] = {
             "model": relation.mapper.class_.__tablename__,

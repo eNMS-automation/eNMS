@@ -58,6 +58,7 @@ class AbstractBase(Base):
                     value = fetch(relation[property]["model"], id=value)
             if property_type == "bool":
                 value = value not in (False, "false")
+            print(property, value)
             setattr(self, property, value)
 
     def get_properties(self, export: bool = False) -> dict:

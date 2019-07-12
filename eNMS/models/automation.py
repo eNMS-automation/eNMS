@@ -59,6 +59,7 @@ from eNMS.models.events import Task  # noqa: F401
 class Result(AbstractBase):
 
     __tablename__ = type = "Result"
+    private = True
     id = Column(Integer, primary_key=True)
     timestamp = Column(String(SMALL_STRING_LENGTH), default="")
     parent_timestamp = Column(String(SMALL_STRING_LENGTH), default="")

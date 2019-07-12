@@ -2,12 +2,13 @@ from collections import defaultdict
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
+from typing import Callable
 from werkzeug.datastructures import ImmutableMultiDict
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
 
-from eNMS.forms.fields import field_types
-from eNMS.models import property_types
+from eNMS.forms.fields import field_types, InstanceField, MultipleInstanceField
+from eNMS.models import property_types, relationships
 from eNMS.properties import field_conversion, property_names
 
 
@@ -68,3 +69,15 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
         elif field_type in field_conversion and property in data:
             data[property] = field_conversion[field_type](form[property])
     return data
+
+
+def configure_relationships(model: str) -> Callable:
+    def decorator(cls: BaseForm) -> BaseForm:
+        form_type = cls.form_type.kwargs["default"]
+        for related_model, relation in relationships[model].items():
+            field = MultipleInstanceField if relation["list"] else InstanceField
+            field_type = "object-list" if relation["list"] else "object"
+            form_properties[form_type][related_model] = field_type
+            setattr(cls, related_model, field(instance_type=relation["model"]))
+        return cls
+    return decorator

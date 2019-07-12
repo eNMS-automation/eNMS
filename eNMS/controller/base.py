@@ -387,6 +387,7 @@ class BaseController:
         return [instance.get_properties() for instance in fetch_all(cls)]
 
     def update(self, cls: str, **kwargs: Any) -> dict:
+        print(kwargs)
         try:
             instance = factory(cls, **kwargs)
             Session.commit()

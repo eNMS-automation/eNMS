@@ -1,4 +1,3 @@
-from flask_login import current_user
 from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
 from sqlalchemy.engine.base import Connection
 from sqlalchemy.ext.declarative.api import DeclarativeMeta

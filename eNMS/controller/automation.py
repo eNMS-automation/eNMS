@@ -2,13 +2,12 @@ from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
-from logging import FileHandler, Formatter, getLogger, INFO
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path
 from re import search, sub
 from subprocess import PIPE, Popen
-from typing import Any, Dict, List
+from typing import Any, Dict, Optional
 
 from eNMS.concurrency import threaded_job
 from eNMS.controller.base import BaseController
@@ -97,17 +96,17 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, name) -> dict:
+    def get_job_logs(self, name: str) -> list:
         path = self.path / "logs" / "job_logs" / f"{self.strip_all(name)}.log"
         proc = Popen(["tail", "-n", "1000", path], stdout=PIPE)
         return proc.stdout.readlines()
 
-    def get_timestamps(self, type: str, id: int) -> dict:
+    def get_timestamps(self, type: str, id: int) -> list:
         id_kwarg = {"device_id" if type == "device" else "job_id": id}
         results = fetch("Result", allow_none=True, all_matches=True, **id_kwarg)
         return sorted(set((result.timestamp, result.name) for result in results))
 
-    def get_results_device_list(self, id: int, **kw) -> dict:
+    def get_results_device_list(self, id: int, **kw: Any) -> list:
         defaults = [("global", "Global Result"), ("all", "All devices")]
         timestamp_key = "parent_timestamp" if "job" in kw else "timestamp"
         request = {timestamp_key: kw.get("timestamp")}
@@ -123,7 +122,7 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_job_list(self, results_type: str, id: int, **kw) -> dict:
+    def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
         id_kwarg = {"device_id" if results_type == "device" else "job_id": id}
         defaults = [("global", "Global Result"), ("all", "All jobs")]
         return defaults + list(
@@ -140,7 +139,7 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_job_results(self, id: int, **kw) -> dict:
+    def get_job_results(self, id: int, **kw: Any) -> Optional[dict]:
         if "timestamp" not in kw:
             return None
         service_result_window = "job" not in kw
@@ -267,12 +266,3 @@ class AutomationController(BaseController):
         path = Path(self.playbook_path or self.path / "playbooks")
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
-
-    def configure_logger(self, job_name) -> None:
-        logger = getLogger(job_name)
-        logger.setLevel(INFO)
-        filename = f"{self.strip_all(job_name)}.log"
-        fh = FileHandler(self.path / "logs" / "job_logs" / filename)
-        formatter = Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-        fh.setFormatter(formatter)
-        logger.addHandler(fh)

@@ -10,11 +10,7 @@ from wtforms import (
 )
 
 from eNMS.forms import BaseForm, configure_relationships
-from eNMS.forms.fields import (
-    DateField,
-    MultipleInstanceField,
-    NoValidationSelectMultipleField,
-)
+from eNMS.forms.fields import NoValidationSelectMultipleField
 from eNMS.properties.database import import_classes
 
 

@@ -15,7 +15,7 @@ from importlib.util import spec_from_file_location, module_from_spec
 from json import load as json_load
 from json.decoder import JSONDecodeError
 from ldap3 import ALL, Server
-from logging import basicConfig, error, info, StreamHandler, warning
+from logging import basicConfig, error, FileHandler, Formatter, getLogger, INFO, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
 from os import environ, remove, scandir
 from pathlib import Path
@@ -309,6 +309,15 @@ class BaseController:
             ],
         )
 
+    def configure_logger(self, job_name: str) -> None:
+        logger = getLogger(job_name)
+        logger.setLevel(INFO)
+        filename = f"{self.strip_all(job_name)}.log"
+        fh = FileHandler(self.path / "logs" / "job_logs" / filename)
+        formatter = Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+
     def init_job_loggers(self) -> None:
         for job in fetch_all("Job"):
             self.configure_logger(job.name)
@@ -335,7 +344,7 @@ class BaseController:
     def init_forms(self) -> None:
         for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
-            spec.loader.exec_module(module_from_spec(spec))
+            spec.loader.exec_module(module_from_spec(spec))  # type: ignore
 
     def init_services(self) -> None:
         path_services = [self.path / "eNMS" / "services"]
@@ -387,7 +396,6 @@ class BaseController:
         return [instance.get_properties() for instance in fetch_all(cls)]
 
     def update(self, cls: str, **kwargs: Any) -> dict:
-        print(kwargs)
         try:
             instance = factory(cls, **kwargs)
             Session.commit()

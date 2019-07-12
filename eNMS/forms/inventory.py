@@ -1,6 +1,5 @@
 from wtforms import (
     BooleanField,
-    FloatField,
     HiddenField,
     IntegerField,
     PasswordField,
@@ -11,7 +10,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm, configure_relationships
-from eNMS.forms.fields import MultipleInstanceField, InstanceField
+from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import private_properties
 from eNMS.properties.objects import (
     device_icons,

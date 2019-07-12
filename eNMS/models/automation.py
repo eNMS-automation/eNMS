@@ -26,7 +26,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.ext.mutable import MutableDict, MutableList
+from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 from traceback import format_exc
@@ -37,12 +37,7 @@ from yaql import factory as yaql_factory
 
 from eNMS.concurrency import device_process, device_thread
 from eNMS.controller import controller
-from eNMS.database import (
-    CustomMediumBlobPickle,
-    LARGE_STRING_LENGTH,
-    Session,
-    SMALL_STRING_LENGTH,
-)
+from eNMS.database import LARGE_STRING_LENGTH, Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import factory, fetch
 from eNMS.database.associations import (
     job_device_table,
@@ -321,7 +316,7 @@ class Service(Job):
             if device
             else ".",
         )
-        result = factory("Result", result=results, **kwargs)
+        factory("Result", result=results, **kwargs)
         if not parent and not self.multiprocessing:
             self.completed += 1
             self.failed += 1 - results["success"]
@@ -449,7 +444,8 @@ class Service(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogHistory('{self.id}', '{self.name}')"></i>Logs</a></button>""",
+            onclick="showLogHistory('{self.id}', '{self.name}')">
+            </i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
@@ -658,7 +654,8 @@ class Workflow(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogHistory('{self.id}', '{self.name}')"></i>Logs</a></button>""",
+            onclick="showLogHistory('{self.id}', '{self.name}')">
+            </i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
             </i>Results</a></button>""",

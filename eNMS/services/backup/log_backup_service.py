@@ -1,4 +1,3 @@
-from json import dump
 from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
 from os import makedirs, remove
@@ -10,7 +9,6 @@ from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
-from eNMS.database.functions import fetch_all
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Job, Service

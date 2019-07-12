@@ -8,7 +8,7 @@ from wtforms.widgets import TextArea
 from eNMS.database import LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import StringValidationForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
 
@@ -27,7 +27,12 @@ class UnixShellScriptService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "UnixShellScriptService"}
 
-    def job(self, payload: dict, device: Optional[Device] = None, *args) -> dict:
+    def job(
+        self,
+        payload: dict,
+        device: Optional[Device] = None,
+        parent: Optional[Job] = None,
+    ) -> dict:
         username, password = self.get_credentials(device)
 
         fabric_connection = Connection(

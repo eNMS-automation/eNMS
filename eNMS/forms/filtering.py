@@ -1,7 +1,7 @@
 from wtforms import HiddenField, SelectField, StringField
 
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import InstanceField, MultipleInstanceField
+from eNMS.forms.fields import MultipleInstanceField
 from eNMS.models import relationships
 from eNMS.properties.table import filtering_properties
 

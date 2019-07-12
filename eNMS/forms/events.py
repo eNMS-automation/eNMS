@@ -2,7 +2,7 @@ from wtforms import BooleanField, HiddenField, IntegerField, SelectField, String
 from wtforms.widgets import TextArea
 
 from eNMS.forms import BaseForm, configure_relationships
-from eNMS.forms.fields import DateField, DictField, MultipleInstanceField, InstanceField
+from eNMS.forms.fields import DateField, DictField, MultipleInstanceField
 
 
 def configure_form(cls: BaseForm) -> BaseForm:

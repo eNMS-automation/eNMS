@@ -1,7 +1,7 @@
 from wtforms import HiddenField, SelectField, StringField
 
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import MultipleInstanceField
+from eNMS.forms.fields import InstanceField, MultipleInstanceField
 from eNMS.models import relationships
 from eNMS.properties.table import filtering_properties
 
@@ -10,7 +10,7 @@ def filtering_form_generator() -> None:
     for table, properties in filtering_properties.items():
         table_model = table.capitalize() if table != "configuration" else "Device"
         kwargs = {
-            model: MultipleInstanceField(
+            model: (MultipleInstanceField if relation["list"] else InstanceField)(
                 model.capitalize(), instance_type=relation["model"]
             )
             for model, relation in relationships[table_model].items()

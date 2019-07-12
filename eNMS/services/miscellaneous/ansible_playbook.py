@@ -51,7 +51,7 @@ class AnsiblePlaybookService(Service):
         if self.options:
             extra_args.update(self.sub(self.options, locals()))
         if extra_args:
-            command.extend(["-e", f"'{dumps(extra_args)}'"])
+            command.extend(["-e", dumps(extra_args)])
         if self.has_targets:
             command.extend(["-i", device.ip_address + ","])
         command.append(self.sub(self.playbook_path, locals()))

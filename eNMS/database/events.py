@@ -96,6 +96,7 @@ def configure_events() -> None:
                 )
             changes.append(change)
         if changes:
+            target.last_modified = controller.get_time()
             controller.log(
                 "info",
                 f"UPDATE: {target.type} '{target.name}': ({' | '.join(changes)}).",

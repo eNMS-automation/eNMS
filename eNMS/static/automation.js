@@ -14,7 +14,6 @@ jsPanel: false
 nodes: true
 page: false
 showTypePanel: false
-refreshTable: false
 table: false
 workflow: true
 */
@@ -121,6 +120,12 @@ function parseObject(obj) {
   return obj;
 }
 
+/**
+ * Format results.
+ * @param {results} results - Results.
+ * @param {id} id - Job id.
+ * @param {id} formId - Form ID.
+ */
 function formatResults(results, id, formId) {
   if (!results) results = currentResults;
   if (!results) {
@@ -153,7 +158,7 @@ function formatResults(results, id, formId) {
 /**
  * Display result.
  * @param {id} id - Job id.
- * @param {results} results - Results.
+ * @param {formId} formId - Form ID.
  */
 function displayResults(id, formId) {
   fCall(`/get_job_results/${id}`, `#results-form-${formId}`, (results) => {
@@ -165,6 +170,7 @@ function displayResults(id, formId) {
 /**
  * Display results.
  * @param {id} id - Job id.
+ * @param {type} type - Timestamp Type.
  */
 function getTimestamps(id, type) {
   call(`/get_timestamps/${type}/${id}`, (timestamps) => {
@@ -176,7 +182,7 @@ function getTimestamps(id, type) {
           .text(timestamp[1])
       );
     });
-    mostRecent = timestamps[timestamps.length - 1];
+    const mostRecent = timestamps[timestamps.length - 1];
     $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
     if (timestamps) {
@@ -189,9 +195,10 @@ function getTimestamps(id, type) {
 /**
  * Display results.
  * @param {id} id - Job id.
+ * @param {parentId} parentId - Parent ID.
  */
 function updateDeviceList(id, parentId) {
-  formId = parentId || id;
+  const formId = parentId || id;
   fCall(
     `/get_results_device_list/${id}`,
     `#results-form-${formId}`,
@@ -213,6 +220,7 @@ function updateDeviceList(id, parentId) {
 /**
  * Display results.
  * @param {id} id - Job id.
+ * @param {type} type - Timestamp Type.
  */
 function updateJobList(id, type) {
   fCall(`/get_job_list/${type}/${id}`, `#results-form-${id}`, (jobs) => {
@@ -330,11 +338,13 @@ function clearResults(id) {
  */
 // eslint-disable-next-line
 function refreshLogs(id, name) {
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   xhr.open("GET", `/stream_logs/${name}`, true);
   xhr.send(null);
 
-  let position = 0;
+  /**
+   * Handle real-time logs data.
+   */
   function handleNewData() {
     let messages = xhr.responseText.split("\n");
     messages.slice(position, -1).forEach(function(value) {
@@ -343,6 +353,7 @@ function refreshLogs(id, name) {
     position = messages.length - 1;
   }
 
+  let position = 0;
   let timer;
   timer = setInterval(function() {
     handleNewData();

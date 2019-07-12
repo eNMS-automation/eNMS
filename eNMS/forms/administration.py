@@ -24,8 +24,8 @@ class ParametersForm:
 
 class ViewParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="view")
-    default_longitude = FloatField("Default Longitude")
-    default_latitude = FloatField("Default Latitude")
+    default_longitude = StringField("Default Longitude")
+    default_latitude = StringField("Default Latitude")
     default_zoom_level = IntegerField("Default Zoom Level")
     default_view = SelectField(
         choices=(("2D", "2D"), ("2DC", "Clusterized 2D"), ("3D", "3D"))

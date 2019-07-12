@@ -53,24 +53,14 @@ def configure_events() -> None:
         if "type" not in target.__dict__ or "log" in target.type:
             return
         controller.log(
-            "info",
-            (
-                f"User '{getattr(current_user, 'name', 'admin')}' CREATED "
-                f"{target.__dict__['type']} '{kwargs['name']}'"
-            ),
+            "info", f"CREATION: {target.__dict__['type']} '{kwargs['name']}'"
         )
 
     @event.listens_for(Base, "before_delete", propagate=True)
     def log_instance_deletion(
         mapper: Mapper, connection: Connection, target: Base
     ) -> None:
-        controller.log(
-            "info",
-            (
-                f"User '{getattr(current_user, 'name', 'admin')}' DELETED "
-                f"{target.type} '{target.name}'."
-            ),
-        )
+        controller.log("info", f"DELETION: {target.type} '{target.name}'")
 
     @event.listens_for(Base, "before_update", propagate=True)
     def log_instance_update(
@@ -99,20 +89,17 @@ def configure_events() -> None:
             target.last_modified = controller.get_time()
             controller.log(
                 "info",
-                f"UPDATE: {target.type} '{target.name}': ({' | '.join(changes)}).",
+                f"UPDATE: {target.type} '{target.name}': ({' | '.join(changes)})",
             )
 
     @event.listens_for(Workflow.name, "set")
     def workflow_name_update(
         workflow: Base, new_name: str, old_name: str, *args: Any
     ) -> None:
-        print("tttt"*100)
         for job in fetch_all("Job"):
             if old_name in job.positions:
                 job.positions[new_name] = job.positions.pop(old_name)
 
     @event.listens_for(Job.name, "set", propagate=True)
-    def job_name_update(
-        job: Base, new_name: str, old_name: str, *args: Any
-    ) -> None:
+    def job_name_update(job: Base, new_name: str, old_name: str, *args: Any) -> None:
         controller.configure_logger(new_name)

@@ -111,8 +111,8 @@ class PoolForm(BaseForm):
     id = HiddenField()
     name = StringField("Name")
     description = StringField("Description")
-    longitude = FloatField("Longitude", default=0.0)
-    latitude = FloatField("Latitude", default=0.0)
+    longitude = StringField("Longitude", default=0.0)
+    latitude = StringField("Latitude", default=0.0)
     operator = SelectField(
         "Match Condition",
         choices=(

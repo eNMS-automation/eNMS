@@ -37,7 +37,9 @@ def device_process(args: tuple) -> None:
 
 
 def device_thread(args: tuple) -> None:
-    device_id, job_id, lock, results, runtime, payload, workflow_id, parent_timestamp = args
+    device_id, job_id, lock, results, runtime, payload, workflow_id, parent_timestamp = (
+        args
+    )
     device = fetch("Device", id=device_id)
     workflow = fetch("Workflow", allow_none=True, id=workflow_id)
     job = fetch("Job", id=job_id)

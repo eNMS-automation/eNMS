@@ -281,8 +281,8 @@ class Pool(AbstractPool):
         "Device", secondary=pool_device_table, back_populates="pools"
     )
     links = relationship("Link", secondary=pool_link_table, back_populates="pools")
-    latitude = Column(Float, default=0.0)
-    longitude = Column(Float, default=0.0)
+    latitude = Column(String(SMALL_STRING_LENGTH), default="0.0")
+    longitude = Column(String(SMALL_STRING_LENGTH), default="0.0")
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")

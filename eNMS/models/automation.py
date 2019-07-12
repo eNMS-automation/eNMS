@@ -296,7 +296,11 @@ class Service(Job):
             kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
         if device:
             kwargs["device"] = device.id
-        self.log(parent, "info", f"Running {self.type} {f'on {device.name}.' if device else '.'}")
+        self.log(
+            parent,
+            "info",
+            f"Running {self.type} {f'on {device.name}.' if device else '.'}",
+        )
         try:
             if device:
                 results = self.job(payload, device, parent)
@@ -307,12 +311,14 @@ class Service(Job):
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
             }
-        self.log(parent, "info", 
+        self.log(
+            parent,
+            "info",
             f"Finished running {self.type} '{self.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
             f" on {device.name}."
             if device
-            else "."
+            else ".",
         )
         result = factory("Result", result=results, **kwargs)
         if not parent and not self.multiprocessing:
@@ -396,7 +402,9 @@ class Service(Job):
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
-            self.log(parent, "info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
+            self.log(
+                parent, "info", f"Running {self.type} {self.name} (attempt n°{i + 1})"
+            )
             self.completed = self.failed = 0
             if not parent:
                 Session.commit()

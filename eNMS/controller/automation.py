@@ -99,7 +99,7 @@ class AutomationController(BaseController):
 
     def get_job_logs(self, name) -> dict:
         path = self.path / "logs" / "job_logs" / f"{self.strip_all(name)}.log"
-        proc = Popen(['tail', '-n', "1000", path], stdout=PIPE)
+        proc = Popen(["tail", "-n", "1000", path], stdout=PIPE)
         return proc.stdout.readlines()
 
     def get_timestamps(self, type: str, id: int) -> dict:
@@ -113,26 +113,32 @@ class AutomationController(BaseController):
         request = {timestamp_key: kw.get("timestamp")}
         if kw.get("job") not in ("global", "all"):
             request["job_id"] = kw.get("job", id)
-        return defaults + list(set(
-            (result.device_id, result.device_name)
-            for result in fetch("Result", allow_none=True, all_matches=True, **request)
-            if result.device_id
-        ))
+        return defaults + list(
+            set(
+                (result.device_id, result.device_name)
+                for result in fetch(
+                    "Result", allow_none=True, all_matches=True, **request
+                )
+                if result.device_id
+            )
+        )
 
     def get_job_list(self, results_type: str, id: int, **kw) -> dict:
         id_kwarg = {"device_id" if results_type == "device" else "job_id": id}
         defaults = [("global", "Global Result"), ("all", "All jobs")]
-        return defaults + list(set(
-            (result.job_id, result.job_name)
-            for result in fetch(
-                "Result",
-                parent_timestamp=kw.get("timestamp"),
-                allow_none=True,
-                all_matches=True,
-                **id_kwarg,
+        return defaults + list(
+            set(
+                (result.job_id, result.job_name)
+                for result in fetch(
+                    "Result",
+                    parent_timestamp=kw.get("timestamp"),
+                    allow_none=True,
+                    all_matches=True,
+                    **id_kwarg,
+                )
+                if result.job_id
             )
-            if result.job_id
-        ))
+        )
 
     def get_job_results(self, id: int, **kw) -> dict:
         if "timestamp" not in kw:
@@ -157,7 +163,6 @@ class AutomationController(BaseController):
         elif not device:
             request["device_id"] = id
         results = fetch("Result", allow_none=True, **request)
-        print(request, results)
         if not results:
             return None
         if device == "all":
@@ -168,9 +173,7 @@ class AutomationController(BaseController):
             }
         elif job == "all":
             return {
-                result.job_name: result.result
-                for result in results
-                if result.job_id
+                result.job_name: result.result for result in results if result.job_id
             }
         elif device == "all" and job == "all":
             return {result.name: result.result for result in results}
@@ -270,6 +273,6 @@ class AutomationController(BaseController):
         logger.setLevel(INFO)
         filename = f"{self.strip_all(job_name)}.log"
         fh = FileHandler(self.path / "logs" / "job_logs" / filename)
-        formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        formatter = Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
         fh.setFormatter(formatter)
         logger.addHandler(fh)

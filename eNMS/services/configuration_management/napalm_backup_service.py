@@ -7,7 +7,7 @@ from wtforms import HiddenField, IntegerField
 from yaml import dump
 
 from eNMS.controller import controller
-from eNMS.database import Session, SMALL_STRING_LENGTH
+from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Job, Service
@@ -65,7 +65,6 @@ class NapalmBackupService(Service):
             return {"success": False, "result": str(e)}
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
-        Session.commit()
         return {"success": True, "result": "Get Config via Napalm"}
 
 

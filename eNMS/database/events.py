@@ -90,7 +90,10 @@ def configure_events() -> None:
                 if hist.added:
                     change += f"{' / ' if hist.deleted else ''}ADDED: {hist.added}"
             else:
-                change += f"'{hist.deleted[0]}' => '{hist.added[0]}'"
+                change += (
+                    f"'{hist.deleted[0] if hist.deleted else None}' => "
+                    f"'{hist.added[0] if hist.added else None}'"
+                )
             changes.append(change)
         if changes:
             controller.log(

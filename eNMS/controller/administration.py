@@ -65,11 +65,6 @@ class AdministrationController(BaseController):
 
     def database_deletion(self, **kwargs: Any) -> None:
         delete_all(*kwargs["deletion_types"])
-        clear_logs_date = kwargs["clear_logs_date"]
-        if clear_logs_date:
-            clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
-            # TODO reimplement
-            pass
 
     def get_cluster_status(self) -> dict:
         return {

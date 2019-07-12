@@ -104,7 +104,7 @@ class AutomationController(BaseController):
     def get_timestamps(self, type: str, id: int) -> dict:
         id_kwarg = {"device_id" if type == "device" else "job_id": id}
         results = fetch("Result", allow_none=True, all_matches=True, **id_kwarg)
-        return sorted(set(result.timestamp for result in results))
+        return sorted(set((result.timestamp, result.name) for result in results))
 
     def get_results_device_list(self, id: int, **kw) -> dict:
         defaults = [("global", "Global Result"), ("all", "All devices")]

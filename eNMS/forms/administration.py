@@ -72,7 +72,6 @@ class NotificationsParametersForm(BaseForm, ParametersForm):
 class DatabaseDeletionForm(BaseForm):
     action = "databaseDeletion"
     form_type = HiddenField(default="database_deletion")
-    clear_logs_date = DateField("Clear Logs Older than")
     deletion_choices = [(p, p) for p in import_classes]
     deletion_types = SelectMultipleField(
         "Instances to delete", choices=deletion_choices

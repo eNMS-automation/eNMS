@@ -173,8 +173,8 @@ function getTimestamps(id, type) {
     timestamps.forEach((timestamp) => {
       $(`#timestamp-${id},#timestamp_compare-${id}`).append(
         $("<option></option>")
-          .attr("value", timestamp)
-          .text(timestamp)
+          .attr("value", timestamp[0])
+          .text(timestamp[1])
       );
     });
     mostRecent = timestamps[timestamps.length - 1];

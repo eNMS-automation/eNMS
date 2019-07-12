@@ -75,7 +75,7 @@ class Result(AbstractBase):
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
 
     def __repr__(self):
-        return f"{self.job_name} ({self.timestamp})"
+        return f"{self.timestamp} ({self.job_name})"
 
     @property
     def name(self):

@@ -4,7 +4,7 @@ from git import Repo
 from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
-from logging import FileHandler, Formatter, getLogger, INFO
+from logging import getLogger
 from multiprocessing import Lock, Manager
 from multiprocessing.pool import Pool, ThreadPool
 from napalm import get_network_driver
@@ -134,16 +134,7 @@ class Job(AbstractBase):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.configure_logger()
-
-    def configure_logger(self) -> None:
-        logger = getLogger(self.name)
-        logger.setLevel(INFO)
-        filename = f"{controller.strip_all(self.name)}.log"
-        fh = FileHandler(controller.path / "logs" / "job_logs" / filename)
-        formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        fh.setFormatter(formatter)
-        logger.addHandler(fh)
+        controller.configure_logger(self.name)
 
     @hybrid_property
     def status(self) -> str:

@@ -11,7 +11,7 @@ from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.database.base import Base
 from eNMS.database.functions import fetch_all
-from eNMS.models.automation import Workflow
+from eNMS.models.automation import Job, Workflow
 from eNMS.properties import private_properties
 from eNMS.properties.database import dont_track_changes
 
@@ -105,6 +105,13 @@ def configure_events() -> None:
     def workflow_name_update(
         workflow: Base, new_name: str, old_name: str, *args: Any
     ) -> None:
+        print("tttt"*100)
         for job in fetch_all("Job"):
             if old_name in job.positions:
                 job.positions[new_name] = job.positions.pop(old_name)
+
+    @event.listens_for(Job.name, "set", propagate=True)
+    def job_name_update(
+        job: Base, new_name: str, old_name: str, *args: Any
+    ) -> None:
+        controller.configure_logger(new_name)

@@ -311,7 +311,7 @@ class BaseController:
 
     def init_job_loggers(self) -> None:
         for job in fetch_all("Job"):
-            job.configure_logger()
+            self.configure_logger(job.name)
 
     def init_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(

@@ -2,6 +2,7 @@ from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
+from logging import FileHandler, Formatter, getLogger, INFO
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path
@@ -263,3 +264,12 @@ class AutomationController(BaseController):
         path = Path(self.playbook_path or self.path / "playbooks")
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
+
+    def configure_logger(self, job_name) -> None:
+        logger = getLogger(job_name)
+        logger.setLevel(INFO)
+        filename = f"{self.strip_all(job_name)}.log"
+        fh = FileHandler(self.path / "logs" / "job_logs" / filename)
+        formatter = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)

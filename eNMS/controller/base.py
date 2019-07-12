@@ -15,7 +15,17 @@ from importlib.util import spec_from_file_location, module_from_spec
 from json import load as json_load
 from json.decoder import JSONDecodeError
 from ldap3 import ALL, Server
-from logging import basicConfig, error, FileHandler, Formatter, getLogger, INFO, info, StreamHandler, warning
+from logging import (
+    basicConfig,
+    error,
+    FileHandler,
+    Formatter,
+    getLogger,
+    INFO,
+    info,
+    StreamHandler,
+    warning,
+)
 from logging.handlers import RotatingFileHandler
 from os import environ, remove, scandir
 from pathlib import Path

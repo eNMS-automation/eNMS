@@ -2,7 +2,6 @@ from collections import defaultdict
 from flask import request
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from typing import Callable
 from werkzeug.datastructures import ImmutableMultiDict
 from wtforms.fields.core import UnboundField
 from wtforms.form import FormMeta
@@ -71,7 +70,7 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
     return data
 
 
-def configure_relationships(cls: BaseForm) -> Callable:
+def configure_relationships(cls: BaseForm) -> BaseForm:
     form_type = cls.form_type.kwargs["default"]
     for related_model, relation in relationships[form_type.capitalize()].items():
         field = MultipleInstanceField if relation["list"] else InstanceField

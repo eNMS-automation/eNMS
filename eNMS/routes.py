@@ -15,7 +15,7 @@ from functools import wraps
 from logging import info
 from os import listdir
 from time import sleep
-from typing import Any, Callable
+from typing import Any, Callable, Generator
 from werkzeug.wrappers import Response
 
 from eNMS.controller import controller
@@ -206,8 +206,8 @@ def download_configuration(name: str) -> Response:
 
 
 @blueprint.route("/stream_logs/<job_name>")
-def stream_logs(job_name):
-    def generate():
+def stream_logs(job_name: str) -> Response:
+    def generate() -> Generator:
         path = controller.path / "logs" / "job_logs"
         with open(path / f"{controller.strip_all(job_name)}.log") as file:
             file.seek(0, 2)

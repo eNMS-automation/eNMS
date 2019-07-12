@@ -19,7 +19,6 @@ table: false
 workflow: true
 */
 
-
 let currentResults = {};
 
 /**
@@ -181,7 +180,7 @@ function getTimestamps(id, type) {
     $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
     if (timestamps) {
-      updateDeviceList(id)
+      updateDeviceList(id);
       if (type == "workflow" || type == "device") updateJobList(id);
     }
   });
@@ -193,18 +192,22 @@ function getTimestamps(id, type) {
  */
 function updateDeviceList(id, parentId) {
   formId = parentId || id;
-  fCall(`/get_results_device_list/${id}`, `#results-form-${formId}`, (devices) => {
-    $(`#device-${formId},#device_compare-${formId}`).empty();
-    devices.forEach((device) => {
-      $(`#device-${formId},#device_compare-${formId}`).append(
-        $("<option></option>")
-          .attr("value", device[0])
-          .text(device[1])
-      );
-    });
-    $(`#device-${formId},#device_compare-${formId}`).selectpicker("refresh");
-    displayResults(id, formId);
-  });
+  fCall(
+    `/get_results_device_list/${id}`,
+    `#results-form-${formId}`,
+    (devices) => {
+      $(`#device-${formId},#device_compare-${formId}`).empty();
+      devices.forEach((device) => {
+        $(`#device-${formId},#device_compare-${formId}`).append(
+          $("<option></option>")
+            .attr("value", device[0])
+            .text(device[1])
+        );
+      });
+      $(`#device-${formId},#device_compare-${formId}`).selectpicker("refresh");
+      displayResults(id, formId);
+    }
+  );
 }
 
 /**
@@ -328,12 +331,12 @@ function clearResults(id) {
 // eslint-disable-next-line
 function refreshLogs(id, name) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', `/stream_logs/${name}`, true);
+  xhr.open("GET", `/stream_logs/${name}`, true);
   xhr.send(null);
 
   let position = 0;
   function handleNewData() {
-    let messages = xhr.responseText.split('\n');
+    let messages = xhr.responseText.split("\n");
     messages.slice(position, -1).forEach(function(value) {
       $(`#logs-${id}`).append(`${value}<br>`);
     });
@@ -342,7 +345,7 @@ function refreshLogs(id, name) {
 
   let timer;
   timer = setInterval(function() {
-    handleNewData()
+    handleNewData();
     if (xhr.readyState == XMLHttpRequest.DONE) {
       clearInterval(timer);
     }

@@ -70,11 +70,11 @@ class Result(AbstractBase):
     workflow_id = Column(Integer, ForeignKey("Workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.timestamp} ({self.job_name})"
 
     @property
-    def name(self):
+    def name(self) -> str:
         return repr(self)
 
 
@@ -203,7 +203,7 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def log(self, parent, severity, log: str) -> None:
+    def log(self, parent: Optional["Job"], severity: str, log: str) -> None:
         getattr(getLogger(self.name), severity)(log)
         if parent:
             getattr(getLogger(parent.name), severity)(log)
@@ -286,7 +286,7 @@ class Service(Job):
         device: Optional["Device"] = None,
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,
-    ) -> Tuple[dict, list]:
+    ) -> dict:
         kwargs = {"timestamp": runtime, "job": self.id}
         if parent:
             kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
@@ -330,7 +330,7 @@ class Service(Job):
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,
-    ) -> Tuple[dict, list]:
+    ) -> dict:
         if not targets:
             return self.get_results(runtime, payload)
         else:
@@ -713,7 +713,7 @@ class Workflow(Job):
 
     def build_results(
         self,
-        runtime,
+        runtime: str,
         payload: Optional[dict] = None,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,

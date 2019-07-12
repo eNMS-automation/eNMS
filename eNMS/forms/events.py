@@ -1,7 +1,7 @@
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.forms import BaseForm
+from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import DateField, DictField, MultipleInstanceField, InstanceField
 
 
@@ -22,6 +22,7 @@ class EventForm(BaseForm):
     jobs = MultipleInstanceField("Jobs", instance_type="Job")
 
 
+@configure_relationships
 class TaskForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="task")
@@ -42,13 +43,10 @@ class TaskForm(BaseForm):
         ),
     )
     crontab_expression = StringField("Crontab Expression")
-    job = InstanceField("Job", instance_type="Job")
     scheduling_mode = SelectField(
         "Scheduling Mode",
         choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling")),
     )
-    devices = MultipleInstanceField("Devices", instance_type="Device")
-    pools = MultipleInstanceField("Pools", instance_type="Pool")
     payload = DictField("Payload")
 
 

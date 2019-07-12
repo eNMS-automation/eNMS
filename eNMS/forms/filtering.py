@@ -10,7 +10,7 @@ def filtering_form_generator() -> None:
     for table, properties in filtering_properties.items():
         table_model = table.capitalize() if table != "configuration" else "Device"
         kwargs = {
-            model: (MultipleInstanceField if relation["list"] else InstanceField)(
+            model: MultipleInstanceField(
                 model.capitalize(), instance_type=relation["model"]
             )
             for model, relation in relationships[table_model].items()

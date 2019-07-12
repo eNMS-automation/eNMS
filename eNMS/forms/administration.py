@@ -9,7 +9,7 @@ from wtforms import (
     SelectMultipleField,
 )
 
-from eNMS.forms import BaseForm
+from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import (
     DateField,
     MultipleInstanceField,
@@ -116,6 +116,7 @@ class ImportJobs(BaseForm):
     jobs_to_import = NoValidationSelectMultipleField("Jobs to import", choices=())
 
 
+@configure_relationships
 class UserForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="user")
@@ -130,4 +131,3 @@ class UserForm(BaseForm):
         ("Edit", "Edit"),
     ]
     permissions = SelectMultipleField("Permissions", choices=permission_choices)
-    pools = MultipleInstanceField("Pools", instance_type="Pool")

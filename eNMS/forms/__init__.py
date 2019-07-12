@@ -71,14 +71,11 @@ def form_postprocessing(form: ImmutableMultiDict) -> dict:
     return data
 
 
-def configure_relationships(model: str) -> Callable:
-    def decorator(cls: BaseForm) -> BaseForm:
-        form_type = cls.form_type.kwargs["default"]
-        for related_model, relation in relationships[model].items():
-            field = MultipleInstanceField if relation["list"] else InstanceField
-            field_type = "object-list" if relation["list"] else "object"
-            print(model, related_model, field_type)
-            form_properties[form_type][related_model] = field_type
-            setattr(cls, related_model, field(instance_type=relation["model"]))
-        return cls
-    return decorator
+def configure_relationships(cls: BaseForm) -> Callable:
+    form_type = cls.form_type.kwargs["default"]
+    for related_model, relation in relationships[form_type.capitalize()].items():
+        field = MultipleInstanceField if relation["list"] else InstanceField
+        field_type = "object-list" if relation["list"] else "object"
+        form_properties[form_type][related_model] = field_type
+        setattr(cls, related_model, field(instance_type=relation["model"]))
+    return cls

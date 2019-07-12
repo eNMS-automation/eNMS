@@ -453,7 +453,8 @@ function showTypePanel(type, id, duplicate) {
  * @param {string} value - Property value.
  */
 function updateProperty(el, property, value) {
-  const propertyType = propertyTypes[property] || "str";
+  const propertyType = formProperties[type][property] || "str";
+  console.log(propertyType);
   if (propertyType.includes("bool") || property.includes("regex")) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict") || propertyType == "json") {
@@ -486,7 +487,7 @@ function processInstance(type, instance) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
-    updateProperty(el, property, value);
+    updateProperty(el, property, value, type);
   }
 }
 

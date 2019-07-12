@@ -20,7 +20,7 @@ function showParametersPanel(type) {
   createPanel(type, `${type} Parameters`, 0, () => {
     call("/get/parameters/1", function(parameters) {
       for (const [property, value] of Object.entries(parameters)) {
-        updateProperty($(`#${property}`), property, value);
+        updateProperty($(`#${property}`), property, value, type);
       }
     });
   });

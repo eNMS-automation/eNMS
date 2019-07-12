@@ -13,12 +13,6 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import DictField, MultipleInstanceField, NoValidationSelectField
 
 
-class DeviceAutomationForm(BaseForm):
-    template = "device_automation"
-    form_type = HiddenField(default="device_automation")
-    jobs = MultipleInstanceField("Jobs", instance_type="Job")
-
-
 class JobForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="job")

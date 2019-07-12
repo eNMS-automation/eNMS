@@ -73,7 +73,7 @@ class ObjectForm(BaseForm):
 
 
 @configure_device_form
-@configure_relationships("Device")
+@configure_relationships
 class DeviceForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="device")
@@ -96,7 +96,7 @@ class DeviceForm(ObjectForm):
     )
 
 
-@configure_relationships("Link")
+@configure_relationships
 class LinkForm(ObjectForm):
     template = "object"
     form_type = HiddenField(default="link")

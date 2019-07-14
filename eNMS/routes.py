@@ -14,7 +14,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from functools import wraps
 from logging import info
 from os import listdir
-from typing import Any, Callable, Union
+from typing import Any, Callable
 from werkzeug.wrappers import Response
 
 from eNMS.controller import controller

@@ -14,7 +14,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from functools import wraps
 from logging import info
 from os import listdir
-from typing import Any, Callable
+from typing import Any, Callable, Union
 from werkzeug.wrappers import Response
 
 from eNMS.controller import controller
@@ -61,7 +61,7 @@ def get_requests_sink(_: str) -> Response:
 
 
 @blueprint.route("/login", methods=["GET", "POST"])
-def login() -> Response:
+def login() -> Any:
     if request.method == "POST":
         try:
             user = controller.authenticate_user(**request.form.to_dict())
@@ -94,7 +94,7 @@ def logout() -> Response:
 
 @blueprint.route("/administration")
 @monitor_requests
-def administration() -> dict:
+def administration() -> str:
     jobs_path = current_app.path / "projects" / "exported_jobs"
     return render_template(
         f"pages/administration.html",
@@ -108,7 +108,7 @@ def administration() -> dict:
 
 @blueprint.route("/dashboard")
 @monitor_requests
-def dashboard() -> dict:
+def dashboard() -> str:
     return render_template(
         f"pages/dashboard.html",
         **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
@@ -117,7 +117,7 @@ def dashboard() -> dict:
 
 @blueprint.route("/table/<table_type>")
 @monitor_requests
-def table(table_type: str) -> dict:
+def table(table_type: str) -> str:
     kwargs = {
         "endpoint": f"table/{table_type}",
         "properties": table_properties[table_type],
@@ -137,7 +137,7 @@ def table(table_type: str) -> dict:
 
 @blueprint.route("/view/<view_type>")
 @monitor_requests
-def view(view_type: str) -> dict:
+def view(view_type: str) -> str:
     return render_template(
         f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
     )
@@ -145,7 +145,7 @@ def view(view_type: str) -> dict:
 
 @blueprint.route("/workflow_builder")
 @monitor_requests
-def workflow_builder() -> dict:
+def workflow_builder() -> str:
     workflow = fetch("Workflow", allow_none=True, id=session.get("workflow", None))
     service_table_form = ServiceTableForm(request.form)
     service_table_form.services.choices = sorted(
@@ -165,13 +165,13 @@ def workflow_builder() -> dict:
 
 @blueprint.route("/calendar")
 @monitor_requests
-def calendar() -> dict:
+def calendar() -> str:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
-def form(form_type: str) -> dict:
+def form(form_type: str) -> str:
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",
         **{

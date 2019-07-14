@@ -139,11 +139,12 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_job_results(self, id: int, **kw: Any) -> Optional[dict]:
-        if "timestamp" not in kw:
+    def get_job_results(self, id: int, compare=False, **kw: Any) -> Optional[dict]:
+        comp = "compare" if compare else ""
+        if f"timestamp{comp}" not in kw:
             return None
         service_result_window = "job" not in kw
-        job, device = kw.get("job"), kw.get("device")
+        job, device = kw.get(f"job{comp}"), kw.get(f"device{comp}")
         if service_result_window or job == "global":
             timestamp = "timestamp"
         else:
@@ -178,6 +179,9 @@ class AutomationController(BaseController):
             return {result.name: result.result for result in results}
         else:
             return results.result
+
+    def compare_job_results(self, id):
+        return "a"
 
     def reset_status(self) -> None:
         for job in fetch_all("Job"):

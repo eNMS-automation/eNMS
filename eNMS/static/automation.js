@@ -19,6 +19,7 @@ workflow: true
 */
 
 let currentResults = {};
+let compareResults = false;
 
 /**
  * Open service panel
@@ -161,7 +162,7 @@ function formatResults(results, id, formId) {
  * @param {formId} formId - Form ID.
  */
 function displayResults(id, formId) {
-  fCall(`/get_job_results/${id}`, `#results-form-${formId}`, (results) => {
+  fCall(`/${compare ? "compare" : "get"}_job_results/${id}`, `#results-form-${formId}`, (results) => {
     currentResults = results;
     formatResults(results, id, formId);
   });
@@ -280,18 +281,20 @@ function showResultsPanel(id, name, type) {
 // eslint-disable-next-line
 function configureCallbacks(id, type) {
   if (type != "device") {
-    $(`#device-${id}`).on("change", function() {
+    $(`#device-${id},#device_compare-${id}`).on("change", function() {
+      compareResults = this.id.includes("compare");
       displayResults(id, id);
     });
   }
 
-  $(`#timestamp-${id}`).on("change", function() {
+  $(`#timestamp-${id},#timestamp_compare-${id}`).on("change", function() {
+    compareResults = this.id.includes("compare");
     if (type != "device") updateDeviceList(id);
     if (type != "service") updateJobList(id, type);
   });
 
   if (type != "service") {
-    $(`#job-${id}`).on("change", function() {
+    $(`#job-${id},#job_compare-${id}`).on("change", function() {
       displayResults(id, id);
     });
   }

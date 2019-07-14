@@ -173,7 +173,7 @@ class BaseController:
         "get_job_logs",
         "get_job_results",
         "get_timestamps",
-        "get_results_device_list",
+        "get_device_list",
         "get_results_diff",
         "get_view_topology",
         "get_job_list",

@@ -106,7 +106,7 @@ class AutomationController(BaseController):
         results = fetch("Result", allow_none=True, all_matches=True, **id_kwarg)
         return sorted(set((result.timestamp, result.name) for result in results))
 
-    def get_results_device_list(self, id: int, **kw: Any) -> list:
+    def get_device_list(self, id: int, **kw: Any) -> list:
         defaults = [("global", "Global Result"), ("all", "All devices")]
         timestamp_key = "parent_timestamp" if "job" in kw else "timestamp"
         request = {timestamp_key: kw.get("timestamp")}
@@ -122,7 +122,7 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
+    def get_job_list(self, results_type: str, id: int, compare:**kw: Any) -> list:
         id_kwarg = {"device_id" if results_type == "device" else "job_id": id}
         defaults = [("global", "Global Result"), ("all", "All jobs")]
         return defaults + list(
@@ -233,17 +233,6 @@ class AutomationController(BaseController):
             job = fetch("Job", id=job_id)
             job.positions[workflow.name] = (position["x"], position["y"])
         return now
-
-    def get_results_diff(self, job_id: int, v1: str, v2: str) -> dict:
-        job = fetch("Job", id=job_id)
-        first = self.str_dict(
-            dict(reversed(sorted(job.results[v1].items())))
-        ).splitlines()
-        second = self.str_dict(
-            dict(reversed(sorted(job.results[v2].items())))
-        ).splitlines()
-        opcodes = SequenceMatcher(None, first, second).get_opcodes()
-        return {"first": first, "second": second, "opcodes": opcodes}
 
     def calendar_init(self) -> dict:
         tasks = {}

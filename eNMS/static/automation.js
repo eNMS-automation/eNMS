@@ -132,6 +132,7 @@ function formatResults(results, id, formId) {
   if (!results) {
     $(`#display_results-${formId}`).text("No results yet.");
   } else if (compareResults) {
+    $(`#display_results-${formId}`).empty();
     $(`#display_results-${formId}`).append(
       diffview.buildView({
         baseTextLines: results.first,
@@ -213,7 +214,7 @@ function getTimestamps(id, type) {
 function updateDeviceList(id, parentId) {
   const formId = parentId || id;
   fCall(
-    `/get_results_device_list/${id}`,
+    `/get_device_list/${id}`,
     `#results-form-${formId}`,
     (devices) => {
       $(`#device-${formId},#device_compare-${formId}`).empty();

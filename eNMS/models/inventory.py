@@ -123,7 +123,7 @@ class Device(CustomDevice):
         if table == "device":
             return [
                 f"""<button type="button" class="btn btn-info btn-xs"
-                onclick="showDeviceResultsPanel('{self.id}', '{self.name}')">
+                onclick="showResultsPanel('{self.id}', '{self.name}', 'device')">
                 </i>Results</a></button>""",
                 f"""<button type="button" class="btn btn-success btn-xs"
                 onclick="showPanel('connection', '{self.id}')">Connect</button>""",

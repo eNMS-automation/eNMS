@@ -102,8 +102,9 @@ class AutomationController(BaseController):
         return proc.stdout.readlines()
 
     def get_timestamps(self, type: str, id: int) -> list:
-        id_kwarg = {f"device_id" if type == "device" else f"job_id": id}
+        id_kwarg = {"device_id" if type == "device" else "job_id": id}
         results = fetch("Result", allow_none=True, all_matches=True, **id_kwarg)
+        print(request, id_kwarg)
         return sorted(set((result.timestamp, result.name) for result in results))
 
     def get_device_list(self, id: int, **kw: Any) -> list:
@@ -125,7 +126,7 @@ class AutomationController(BaseController):
 
     def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
-        id_kwarg = {f"device{comp}_id" if results_type == "device" else f"job{comp}_id": id}
+        id_kwarg = {f"device_id" if results_type == "device" else f"job_id": id}
         defaults = [("global", "Global Result"), ("all", "All jobs")]
         return defaults + list(
             set(

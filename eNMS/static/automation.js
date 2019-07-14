@@ -200,8 +200,8 @@ function getTimestamps(id, type) {
     $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
     if (timestamps) {
-      updateDeviceList(id);
-      if (type == "workflow" || type == "device") updateJobList(id);
+      updateDeviceList(id, id, true);
+      if (type == "workflow" || type == "device") updateJobList(id, type, true);
     }
   });
 }
@@ -211,22 +211,27 @@ function getTimestamps(id, type) {
  * @param {id} id - Job id.
  * @param {parentId} parentId - Parent ID.
  */
-function updateDeviceList(id, parentId) {
+function updateDeviceList(id, parentId, updateBoth) {
   const formId = parentId || id;
   fCall(
     `/get_device_list/${id}`,
     `#results-form-${formId}`,
     (devices) => {
-      comp = $(`compare_${formId}`).is(':checked') ? "_compare" : "";
-      $(`#device${comp}-${formId}`).empty();
+      if (updateBoth) {
+        ids = `#device-${formId},#device_compare-${formId}`;
+      } else {
+        comp = $(`#compare-${formId}`).is(':checked') ? "_compare" : "";
+        ids = `#device${comp}-${formId}`;
+      }
+      $(ids).empty();
       devices.forEach((device) => {
-        $(`#device${comp}-${formId}`).append(
+        $(ids).append(
           $("<option></option>")
             .attr("value", device[0])
             .text(device[1])
         );
       });
-      $(`#device${comp}-${formId}`).selectpicker("refresh");
+      $(ids).selectpicker("refresh");
       displayResults(id, formId);
     }
   );
@@ -237,18 +242,23 @@ function updateDeviceList(id, parentId) {
  * @param {id} id - Job id.
  * @param {type} type - Timestamp Type.
  */
-function updateJobList(id, type) {
+function updateJobList(id, type, updateBoth) {
   fCall(`/get_job_list/${type}/${id}`, `#results-form-${id}`, (jobs) => {
-    comp = $(`compare_${formId}`).is(':checked') ? "_compare" : "";
-    $(`#job${comp}-${id}`).empty();
+    if (updateBoth) {
+      ids = `#job-${id},#job_compare-${id}`;
+    } else {
+      comp = $(`#compare-${id}`).is(':checked') ? "_compare" : "";
+      ids = `#job${comp}-${id}`;
+    }
+    $(ids).empty();
     jobs.forEach((job) => {
-      $(`#job${comp}-${id}`).append(
+      $(ids).append(
         $("<option></option>")
           .attr("value", job[0])
           .text(job[1])
       );
     });
-    $(`#job${comp}-${id}`).selectpicker("refresh");
+    $(ids).selectpicker("refresh");
     displayResults(id, id);
   });
 }
@@ -303,7 +313,6 @@ function configureCallbacks(id, type) {
   }
 
   $(`#timestamp-${id},#timestamp_compare-${id}`).on("change", function() {
-    console.log($(`#compare-${id}`), this.id.includes("compare"));
     $(`#compare-${id}`).prop('checked', this.id.includes("compare"));
     if (type != "device") updateDeviceList(id);
     if (type != "service") updateJobList(id, type);

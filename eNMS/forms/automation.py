@@ -116,6 +116,7 @@ class CompareResultsForm(BaseForm):
 class CompareWorkflowResultsForm(CompareResultsForm):
     template = "workflow_results"
     form_type = HiddenField(default="workflow_results")
+    compare = BooleanField(default=False)
     job = NoValidationSelectField(
         "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
     )
@@ -127,6 +128,7 @@ class CompareWorkflowResultsForm(CompareResultsForm):
 class CompareDeviceResultsForm(BaseForm):
     template = "device_results"
     form_type = HiddenField(default="device_results")
+    compare = BooleanField(default=False)
     timestamp = NoValidationSelectField("Version", choices=())
     timestamp_compare = NoValidationSelectField("Version", choices=())
     job = NoValidationSelectField(

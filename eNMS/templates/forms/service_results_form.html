@@ -5,6 +5,7 @@
   method="post"
 >
   {{ form.csrf_token() }} {{ form.form_type() }}
+  {{ form.compare(class="form-control add-id", style="display:none;") }}
   <div class="modal-body">
     <button
       type="button"

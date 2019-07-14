@@ -102,6 +102,7 @@ class WorkflowForm(JobForm):
 class CompareResultsForm(BaseForm):
     template = "service_results"
     form_type = HiddenField(default="service_results")
+    compare = BooleanField(default=False)
     timestamp = NoValidationSelectField("Version", choices=())
     device = NoValidationSelectField(
         "Device", choices=(("global", "Global Result"), ("all", "All devices"))

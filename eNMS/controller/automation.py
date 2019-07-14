@@ -102,16 +102,17 @@ class AutomationController(BaseController):
         return proc.stdout.readlines()
 
     def get_timestamps(self, type: str, id: int) -> list:
-        id_kwarg = {"device_id" if type == "device" else "job_id": id}
+        id_kwarg = {f"device_id" if type == "device" else f"job_id": id}
         results = fetch("Result", allow_none=True, all_matches=True, **id_kwarg)
         return sorted(set((result.timestamp, result.name) for result in results))
 
     def get_device_list(self, id: int, **kw: Any) -> list:
+        comp = "_compare" if kw["compare"] else ""
         defaults = [("global", "Global Result"), ("all", "All devices")]
         timestamp_key = "parent_timestamp" if "job" in kw else "timestamp"
-        request = {timestamp_key: kw.get("timestamp")}
-        if kw.get("job") not in ("global", "all"):
-            request["job_id"] = kw.get("job", id)
+        request = {timestamp_key: kw.get(f"timestamp{comp}")}
+        if kw.get(f"job{comp}") not in ("global", "all"):
+            request["job_id"] = kw.get(f"job{comp}", id)
         return defaults + list(
             set(
                 (result.device_id, result.device_name)
@@ -122,15 +123,16 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_job_list(self, results_type: str, id: int, compare:**kw: Any) -> list:
-        id_kwarg = {"device_id" if results_type == "device" else "job_id": id}
+    def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
+        comp = "_compare" if kw["compare"] else ""
+        id_kwarg = {f"device{comp}_id" if results_type == "device" else f"job{comp}_id": id}
         defaults = [("global", "Global Result"), ("all", "All jobs")]
         return defaults + list(
             set(
                 (result.job_id, result.job_name)
                 for result in fetch(
                     "Result",
-                    parent_timestamp=kw.get("timestamp"),
+                    parent_timestamp=kw.get(f"timestamp{comp}"),
                     allow_none=True,
                     all_matches=True,
                     **id_kwarg,
@@ -139,8 +141,8 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_job_results(self, id: int, compare=False, **kw: Any) -> Optional[dict]:
-        comp = "_compare" if compare else ""
+    def get_job_results(self, id: int, **kw: Any) -> Optional[dict]:
+        comp = "_compare" if kw["compare"] else ""
         if f"timestamp{comp}" not in kw:
             return None
         service_result_window = "job" not in kw
@@ -181,6 +183,7 @@ class AutomationController(BaseController):
             return results.result
 
     def compare_job_results(self, id, **kwargs):
+        kwargs.pop("compare")
         first = self.str_dict(
             self.str_dict(self.get_job_results(id, **kwargs))
         ).splitlines()

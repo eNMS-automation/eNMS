@@ -140,7 +140,7 @@ class AutomationController(BaseController):
         )
 
     def get_job_results(self, id: int, compare=False, **kw: Any) -> Optional[dict]:
-        comp = "compare" if compare else ""
+        comp = "_compare" if compare else ""
         if f"timestamp{comp}" not in kw:
             return None
         service_result_window = "job" not in kw
@@ -180,8 +180,15 @@ class AutomationController(BaseController):
         else:
             return results.result
 
-    def compare_job_results(self, id):
-        return "a"
+    def compare_job_results(self, id, **kwargs):
+        first = self.str_dict(
+            self.str_dict(self.get_job_results(id, **kwargs))
+        ).splitlines()
+        second = self.str_dict(
+            self.get_job_results(id, compare=True, **kwargs)
+        ).splitlines()
+        opcodes = SequenceMatcher(None, first, second).get_opcodes()
+        return {"first": first, "second": second, "opcodes": opcodes}
 
     def reset_status(self) -> None:
         for job in fetch_all("Job"):

@@ -131,6 +131,18 @@ function formatResults(results, id, formId) {
   if (!results) results = currentResults;
   if (!results) {
     $(`#display_results-${formId}`).text("No results yet.");
+  } else if (compareResults) {
+    $(`#display_results-${formId}`).append(
+      diffview.buildView({
+        baseTextLines: results.first,
+        newTextLines: results.second,
+        opcodes: results.opcodes,
+        baseTextName: $(`#timestamp-${id}`).val(),
+        newTextName: $(`#timestamp_compare-${id}`).val(),
+        contextSize: null,
+        viewType: 0,
+      })
+    );
   } else if ($(`input[name="type"]:checked`).val() == "json") {
     $(`#display_results-${formId}`).empty();
     new JSONEditor(
@@ -162,7 +174,7 @@ function formatResults(results, id, formId) {
  * @param {formId} formId - Form ID.
  */
 function displayResults(id, formId) {
-  fCall(`/${compare ? "compare" : "get"}_job_results/${id}`, `#results-form-${formId}`, (results) => {
+  fCall(`/${compareResults ? "compare" : "get"}_job_results/${id}`, `#results-form-${formId}`, (results) => {
     currentResults = results;
     formatResults(results, id, formId);
   });
@@ -295,28 +307,10 @@ function configureCallbacks(id, type) {
 
   if (type != "service") {
     $(`#job-${id},#job_compare-${id}`).on("change", function() {
+      compareResults = this.id.includes("compare");
       displayResults(id, id);
     });
   }
-
-  $(`#compare_with-${id}`).on("change", function() {
-    $(`#display_results-${id}`).empty();
-    const v1 = $(`#display-${id}`).val();
-    const v2 = $(`#compare_with-${id}`).val();
-    call(`/get_results_diff/${id}/${v1}/${v2}`, function(data) {
-      $(`#display_results-${id}`).append(
-        diffview.buildView({
-          baseTextLines: data.first,
-          newTextLines: data.second,
-          opcodes: data.opcodes,
-          baseTextName: `${v1}`,
-          newTextName: `${v2}`,
-          contextSize: null,
-          viewType: 0,
-        })
-      );
-    });
-  });
 
   $(`#display-text-${id},#display-json-${id}`).on("click", function() {
     displayResults(id, id);

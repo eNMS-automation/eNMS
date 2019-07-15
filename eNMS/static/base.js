@@ -51,7 +51,7 @@ const panelSize = {
   pool: "800 600",
   pool_filtering: "700 500",
   pool_objects: "700 550",
-  restart_workflow: "600 500",
+  restart_workflow: "700 500",
   results: "1000 700",
   server: "600 250",
   server_filtering: "700 450",

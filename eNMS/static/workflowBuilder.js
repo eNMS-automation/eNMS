@@ -120,7 +120,7 @@ function showRestartPanel() {
   showPanel("restart_workflow", null, function() {
     call(`/get_timestamps/workflow/${workflow.id}`, function(timestamps) {
       workflow.jobs.forEach((job) => {
-        $("#payloads_to_include,#start_point").append(
+        $("#payloads_to_include,#start_points").append(
           $("<option></option>")
             .attr("value", job.name)
             .text(job.name)
@@ -133,7 +133,7 @@ function showRestartPanel() {
             .text(timestamp[0])
         );
       });
-      $("#payload_version,#payloads_to_include,#start_point").selectpicker("refresh");
+      $("#payload_version,#payloads_to_include,#start_points").selectpicker("refresh");
     });
   });
 }
@@ -142,8 +142,8 @@ function showRestartPanel() {
  * Restart Workflow.
  */
 // eslint-disable-next-line
-function restartWorkflow(id) {
-  fCall(`/restart_workflow/${workflow.id}/${id}`, "#restart_workflow-form", function(name) {
+function restartWorkflow() {
+  fCall(`/restart_workflow/${workflow.id}`, "#restart_workflow-form", function(name) {
     alertify.notify(`Workflow '${name}' restarted.`, "success", 5);
     getWorkflowState();
   });

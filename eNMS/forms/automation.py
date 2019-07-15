@@ -11,7 +11,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DictField, MultipleInstanceField, NoValidationSelectField
+from eNMS.forms.fields import DictField, MultipleInstanceField, NoValidationSelectField, NoValidationMultipleSelectField
 
 
 class JobForm(BaseForm):
@@ -152,9 +152,9 @@ class CompareDeviceResultsForm(BaseForm):
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    payload_version = SelectField("Payload Version", choices=())
-    start_points = SelectMultipleField("Start Points", choices=())
-    payloads_to_include = SelectMultipleField("Payloads to Include", choices=())
+    payload_version = NoValidationSelectField("Payload Version", choices=())
+    payloads_to_include = NoValidationSelectMultipleField("Payloads to Include", choices=())
+    start_points = NoValidationSelectMultipleField("Start Points", choices=())
 
 
 class AddJobsForm(BaseForm):

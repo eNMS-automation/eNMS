@@ -130,7 +130,7 @@ function formatResults(results, id, formId) {
   if (!results) results = currentResults;
   if (!results) {
     $(`#display_results-${formId}`).text("No results yet.");
-  } else if ($(`compare_${formId}`).is(':checked')) {
+  } else if ($(`#view_type-${id}`).val() == "compare") {
     $(`#display_results-${formId}`).empty();
     $(`#display_results-${formId}`).append(
       diffview.buildView({
@@ -143,7 +143,7 @@ function formatResults(results, id, formId) {
         viewType: 0,
       })
     );
-  } else if ($(`input[name="type"]:checked`).val() == "json") {
+  } else if ($(`#view_type-${id}`).val() == "json") {
     $(`#display_results-${formId}`).empty();
     new JSONEditor(
       document.getElementById(`display_results-${formId}`),
@@ -174,8 +174,8 @@ function formatResults(results, id, formId) {
  * @param {formId} formId - Form ID.
  */
 function displayResults(id, formId) {
-  const compareResults = $(`compare_${formId}`).is(':checked');
-  fCall(`/${compareResults ? "compare" : "get"}_job_results/${id}`, `#results-form-${formId}`, (results) => {
+  const url = $(`#view_type-${id}`).val() == "compare" ? "compare" : "get";
+  fCall(`/${url}_job_results/${id}`, `#results-form-${formId}`, (results) => {
     currentResults = results;
     formatResults(results, id, formId);
   });
@@ -250,6 +250,7 @@ function updateJobList(id, type, updateBoth) {
       comp = $(`#compare-${id}`).is(':checked') ? "_compare" : "";
       ids = `#job${comp}-${id}`;
     }
+    console.log(jobs);
     $(ids).empty();
     jobs.forEach((job) => {
       $(ids).append(
@@ -325,7 +326,8 @@ function configureCallbacks(id, type) {
     });
   }
 
-  $(`#display-text-${id},#display-json-${id}`).on("click", function() {
+  $(`#view_type-${id}`).on("click", function() {
+    console.log("test");
     displayResults(id, id);
   });
 }

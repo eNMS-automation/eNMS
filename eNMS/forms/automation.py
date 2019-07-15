@@ -103,6 +103,9 @@ class CompareResultsForm(BaseForm):
     template = "service_results"
     form_type = HiddenField(default="service_results")
     compare = BooleanField(default=False)
+    view_type = SelectField(
+        "View", choices=(("text", "Text"), ("json", "JSON"), ("compare", "Compare"))
+    )
     timestamp = NoValidationSelectField("Version", choices=())
     device = NoValidationSelectField(
         "Device", choices=(("global", "Global Result"), ("all", "All devices"))
@@ -117,6 +120,9 @@ class CompareWorkflowResultsForm(CompareResultsForm):
     template = "workflow_results"
     form_type = HiddenField(default="workflow_results")
     compare = BooleanField(default=False)
+    view_type = SelectField(
+        "View", choices=(("text", "Text"), ("json", "JSON"), ("compare", "Compare"))
+    )
     job = NoValidationSelectField(
         "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
     )
@@ -129,6 +135,9 @@ class CompareDeviceResultsForm(BaseForm):
     template = "device_results"
     form_type = HiddenField(default="device_results")
     compare = BooleanField(default=False)
+    view_type = SelectField(
+        "View", choices=(("text", "Text"), ("json", "JSON"), ("compare", "Compare"))
+    )
     timestamp = NoValidationSelectField("Version", choices=())
     timestamp_compare = NoValidationSelectField("Version", choices=())
     job = NoValidationSelectField(

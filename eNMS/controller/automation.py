@@ -126,7 +126,6 @@ class AutomationController(BaseController):
 
     def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
-        id_kwarg = {f"device_id" if results_type == "device" else f"job_id": id}
         defaults = [("global", "Global Result"), ("all", "All jobs")]
         return defaults + list(
             set(
@@ -136,7 +135,6 @@ class AutomationController(BaseController):
                     parent_timestamp=kw.get(f"timestamp{comp}"),
                     allow_none=True,
                     all_matches=True,
-                    **id_kwarg,
                 )
                 if result.job_id
             )
@@ -152,7 +150,7 @@ class AutomationController(BaseController):
             timestamp = "timestamp"
         else:
             timestamp = "parent_timestamp"
-        request = {timestamp: kw["timestamp"]}
+        request = {timestamp: kw[f"timestamp{comp}"]}
         if job not in ("global", "all", None):
             request["job_id"] = job
         elif device and job != "all":
@@ -166,6 +164,7 @@ class AutomationController(BaseController):
         elif not device:
             request["device_id"] = id
         results = fetch("Result", allow_none=True, **request)
+        print(request, results)
         if not results:
             return None
         if device == "all":
@@ -186,7 +185,7 @@ class AutomationController(BaseController):
     def compare_job_results(self, id, **kwargs):
         kwargs.pop("compare")
         first = self.str_dict(
-            self.str_dict(self.get_job_results(id, **kwargs))
+            self.str_dict(self.get_job_results(id, compare=False, **kwargs))
         ).splitlines()
         second = self.str_dict(
             self.get_job_results(id, compare=True, **kwargs)

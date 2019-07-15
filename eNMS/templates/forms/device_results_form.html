@@ -7,6 +7,7 @@
   {{ form.csrf_token() }} {{ form.form_type() }}
   {{ form.compare(class="form-control add-id", style="display:none;") }}
   <div class="modal-body">
+    {{ form.view_type(class="form-control add-id") }}
     <button
       type="button"
       class="btn btn-default btn-file btn-id"
@@ -23,31 +24,6 @@
     >
       Copy to clipboard
     </button>
-    <div class="radio">
-      <label>
-        <input
-          type="radio"
-          checked=""
-          value="text"
-          id="display-text"
-          name="type"
-          class="add-id"
-        />
-        Text
-      </label>
-    </div>
-    <div class="radio">
-      <label>
-        <input
-          type="radio"
-          value="json"
-          id="display-json"
-          name="type"
-          class="add-id"
-        />
-        JSON
-      </label>
-    </div>
     <hr />
     <table
       class="table table-striped table-bordered dt-responsive nowrap"

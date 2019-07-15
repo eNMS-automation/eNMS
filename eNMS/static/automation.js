@@ -250,7 +250,6 @@ function updateJobList(id, type, updateBoth) {
       comp = $(`#compare-${id}`).is(':checked') ? "_compare" : "";
       ids = `#job${comp}-${id}`;
     }
-    console.log(jobs);
     $(ids).empty();
     jobs.forEach((job) => {
       $(ids).append(
@@ -326,8 +325,7 @@ function configureCallbacks(id, type) {
     });
   }
 
-  $(`#view_type-${id}`).on("click", function() {
-    console.log("test");
+  $(`#view_type-${id}`).on("change", function() {
     displayResults(id, id);
   });
 }

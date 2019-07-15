@@ -23,31 +23,11 @@
     >
       Copy to clipboard
     </button>
-    <div class="radio">
-      <label>
-        <input
-          type="radio"
-          checked=""
-          value="text"
-          id="display-text"
-          name="type"
-          class="add-id"
-        />
-        Text
-      </label>
-    </div>
-    <div class="radio">
-      <label>
-        <input
-          type="radio"
-          value="json"
-          id="display-json"
-          name="type"
-          class="add-id"
-        />
-        JSON
-      </label>
-    </div>
+    <button
+    style="background:transparent; border:none; color:transparent; width: 20vw;"
+  >
+      {{ form.view_type(class="form-control add-id") }}
+    </button>
     <hr />
     <table
       class="table table-striped table-bordered dt-responsive nowrap"

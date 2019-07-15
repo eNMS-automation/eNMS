@@ -334,27 +334,7 @@ class Service(Job):
         if not targets:
             return self.get_results(runtime, payload)
         else:
-            if self.multiprocessing == "multiprocessing":
-                manager = Manager()
-                device_results: dict = manager.dict()
-                lock = manager.Lock()
-                processes = min(len(targets), self.max_processes)
-                args = (
-                    self.id,
-                    lock,
-                    device_results,
-                    runtime,
-                    payload,
-                    getattr(parent, "id", None),
-                    parent_timestamp,
-                )
-                process_args = [(device.id, *args) for device in targets]
-                pool = Pool(processes=processes)
-                pool.map(device_process, process_args)
-                pool.close()
-                pool.join()
-                results = {"devices": device_results}
-            elif self.multiprocessing:
+            if self.multiprocessing:
                 device_results = {}
                 thread_lock = Lock()
                 processes = min(len(targets), self.max_processes)

@@ -88,7 +88,7 @@ function displayWorkflow(wf) {
       if (job.type == "Workflow") {
         switchToWorkflow(node);
       } else {
-        editService(node);
+        showTypePanel(job.type, job.id);
       }
     }
   });

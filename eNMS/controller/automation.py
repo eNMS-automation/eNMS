@@ -200,7 +200,6 @@ class AutomationController(BaseController):
         payload = fetch("Result", job_id=workflow_id, timestamp=kwargs["payload_version"]).result["results"]
         payload_jobs = set(payload) & set(kwargs["payloads_to_include"])
         payload = {k: payload[k] for k in payload if k in payload_jobs}
-        print(payload)
         if workflow.is_running:
             return {"error": "Workflow is already running."}
         self.scheduler.add_job(

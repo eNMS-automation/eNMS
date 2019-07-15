@@ -35,7 +35,7 @@ from xmltodict import parse
 from xml.parsers.expat import ExpatError
 from yaql import factory as yaql_factory
 
-from eNMS.concurrency import device_process, device_thread
+from eNMS.concurrency import device_thread
 from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, Session, SMALL_STRING_LENGTH
 from eNMS.database.functions import factory, fetch

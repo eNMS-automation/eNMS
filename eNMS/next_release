@@ -22,7 +22,6 @@ and at other times wants to see all devices run for a service.
 a. Collapsable sections: Moving around in the data is overwhelming. 
 >>> Done.
 
-
 - Refactoring of the logs. One logger per service in "logs" folder. Real-time logs is now working
 even with multiprocessing enabled.
 NGINX CONF: proxy buffering MUST BE DISABLED. (eg
@@ -40,6 +39,13 @@ NGINX CONF: proxy buffering MUST BE DISABLED. (eg
 - you can still select a version of the payload
 - you can now choose exactly what jobs you want to see included in that payload
 - you can select not just one but multiple start points for the workflow
+
+- make custom credentials blue / substitution fields
+>>> Done.
+
+- One minor change would be helpful: The dropdown with previous payloads defaults to the oldest payload.
+Can you make it default to the latest payload instead, that's almost always what a user would choose.
+>>> Done.
 
 - Bug in tables: jump to bottom after page 1 when table is refreshed: fixed.
 

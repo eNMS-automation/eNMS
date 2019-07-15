@@ -138,6 +138,7 @@ function showRestartPanel() {
             .text(timestamp[0])
         );
       });
+      $("#payload_version").val(timestamps[timestamps.length - 1]);
       $("#payload_version,#payloads_to_include,#start_points").selectpicker("refresh");
     });
   });

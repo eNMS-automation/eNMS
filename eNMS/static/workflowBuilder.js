@@ -118,15 +118,22 @@ function switchToWorkflow(workflowId) {
 // eslint-disable-next-line
 function showRestartPanel(job) {
   showPanel("restart_workflow", job.id, function() {
-    call(`/get_timestamps/${job.type}/${workflow.id}`, function(results) {
-      results.forEach((option) => {
-        $(`#payload_version-${job.id}`).append(
+    call(`/get_timestamps/workflow/${workflow.id}`, function(timestamps) {
+      workflow.jobs.forEach((job) => {
+        $("#payloads_to_include,#start_point").append(
           $("<option></option>")
-            .attr("value", option[0])
-            .text(option[0])
+            .attr("value", job.name)
+            .text(job.name)
         );
       });
-      $(`#payload_version-${job.id}`).selectpicker("refresh");
+      timestamps.forEach((timestamp) => {
+        $("#payload_version").append(
+          $("<option></option>")
+            .attr("value", timestamp[0])
+            .text(timestamp[0])
+        );
+      });
+      $("#payload_version,#payloads_to_include,#start_point").selectpicker("refresh");
     });
   });
 }

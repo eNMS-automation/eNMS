@@ -4,6 +4,7 @@ from wtforms import (
     IntegerField,
     PasswordField,
     SelectField,
+    SelectMultipleField,
     StringField,
 )
 from wtforms.widgets import TextArea
@@ -149,11 +150,11 @@ class CompareDeviceResultsForm(BaseForm):
 
 
 class RestartWorkflowForm(BaseForm):
-    template = "restart_workflow"
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     payload_version = SelectField("Payload Version", choices=())
-    jobs = MultipleInstanceField("Payloads to include", instance_type="Job")
+    start_point = SelectMultipleField("Start Point", choices=())
+    payloads_to_include = SelectMultipleField("Payloads to Include", choices=())
 
 
 class AddJobsForm(BaseForm):

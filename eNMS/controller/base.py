@@ -177,6 +177,7 @@ class BaseController:
         "get_results_diff",
         "get_view_topology",
         "get_job_list",
+        "get_workflow_restart_info",
         "import_jobs",
         "import_topology",
         "migration_export",

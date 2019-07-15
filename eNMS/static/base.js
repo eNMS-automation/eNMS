@@ -128,6 +128,12 @@ $.ajaxSetup({
     ) {
       xhr.setRequestHeader("X-CSRFToken", csrf_token);
     }
+    if (!settings.url.includes("filtering")) {
+      document.body.style.cursor = 'progress';
+    }
+  },
+  complete: function() {
+    document.body.style.cursor = 'default';
   },
 });
 
@@ -504,7 +510,6 @@ function processData(type, id) {
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("Service")) saveService(instance, id);
       if (type === "workflow" && !id) saveWorkflow(instance);
-
       alertify.notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${
           id ? "updated" : "created"

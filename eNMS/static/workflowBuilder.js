@@ -178,7 +178,7 @@ function addJobsToWorkflow(jobs) {
       result.jobs.forEach((job, index) => {
         $("#add_jobs").remove();
         if (graph.findNode(job.id).length == 0) {
-          nodes.add(jobToNode(job, index));
+          nodes.add(jobToNode(job, index + 1));
           alertify.notify(
             `Job '${job.name}' added to the workflow.`,
             "success",
@@ -250,14 +250,10 @@ function jobToNode(job, index) {
     type: job.type,
     x: job.positions[workflow.name]
       ? job.positions[workflow.name][0]
-      : index
-      ? -50
-      : 0,
+      : index ? index * 50 - 50 : 0,
     y: job.positions[workflow.name]
       ? job.positions[workflow.name][1]
-      : index
-      ? index * 50 - 50
-      : 0,
+      : index ? index * 50 - 200 : 0
   };
 }
 

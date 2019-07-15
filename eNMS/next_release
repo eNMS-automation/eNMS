@@ -53,4 +53,12 @@ Can you make it default to the latest payload instead, that's almost always what
 
 - Relationship are now displayed in the edit window: you can edit which service/workflow a device/task is a target of, etc...
 
+- I added a pool using a regex that had 2 negative lookahead.
+I pressed the SAVE button and it basically acted unresponsive (but was in fact running to calculate
+the pool).  After about 10 seconds, I pressed the SAVE button again, and then I saw 2 green alert
+boxes saying that my Pool was created.   It looks like only 1 pool got created, but this needs a
+more immediate response. Perhaps this is the time to put in that spinning GIF that Marc likes to
+indicate that its 'working...'
+>>> Done.
+
 - Bug fixes

@@ -113,7 +113,6 @@ class AutomationController(BaseController):
         request = {timestamp_key: kw.get(f"timestamp{comp}")}
         if kw.get(f"job{comp}") not in ("global", "all"):
             request["job_id"] = kw.get(f"job{comp}", id)
-        print(request)
         return defaults + list(
             set(
                 (result.device_id, result.device_name)
@@ -197,9 +196,10 @@ class AutomationController(BaseController):
             job.is_running = False
 
     def restart_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
-        print(kwargs)
         workflow = fetch("Workflow", id=workflow_id)
-        payload = fetch("Result", job_id=workflow_id, timestamp=version).result
+        payload = fetch("Result", job_id=workflow_id, timestamp=kwargs["payload_version"]).result["results"]
+        payload_jobs = set(payload) & set(kwargs["payloads_to_include"])
+        payload = {k: payload[k] for k in payload if k in payload_jobs}
         print(payload)
         if workflow.is_running:
             return {"error": "Workflow is already running."}
@@ -207,7 +207,7 @@ class AutomationController(BaseController):
             id=self.get_time(),
             func=threaded_job,
             run_date=datetime.now(),
-            args=[workflow_id, None, None, payload, job_id],
+            args=[workflow_id, None, None, payload, kwargs["start_points"]],
             trigger="date",
         )
         return workflow.name

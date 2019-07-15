@@ -120,9 +120,14 @@ function showRestartPanel() {
   showPanel("restart_workflow", null, function() {
     call(`/get_timestamps/workflow/${workflow.id}`, function(timestamps) {
       workflow.jobs.forEach((job) => {
-        $("#payloads_to_include,#start_points").append(
+        $("#payloads_to_include").append(
           $("<option></option>")
             .attr("value", job.name)
+            .text(job.name)
+        );
+        $("#start_points").append(
+          $("<option></option>")
+            .attr("value", job.id)
             .text(job.name)
         );
       });

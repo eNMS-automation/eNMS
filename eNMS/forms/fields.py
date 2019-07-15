@@ -6,6 +6,7 @@ from wtforms import (
     BooleanField,
     FloatField,
     IntegerField,
+    PasswordField,
     SelectField,
     StringField,
     SelectMultipleField,
@@ -82,6 +83,12 @@ class SubstitutionField(StringField):
         return super().__call__(*args, **kwargs)
 
 
+class PasswordSubstitutionField(PasswordField):
+    def __call__(self, *args: Any, **kwargs: Any) -> str:
+        kwargs["style"] = "background-color: #e8f0f7"
+        return super().__call__(*args, **kwargs)
+
+
 class NoValidationSelectField(SelectField):
     def pre_validate(self, form: FlaskForm) -> None:
         pass
@@ -105,6 +112,7 @@ field_types = {
     MultipleInstanceField: "object-list",
     NoValidationSelectMultipleField: "multiselect",
     NoValidationSelectField: "list",
+    PasswordSubstitutionField: "str",
     SelectField: "list",
     SelectMultipleField: "multiselect",
     StringField: "str",

@@ -16,6 +16,8 @@ from eNMS.forms.fields import (
     MultipleInstanceField,
     NoValidationSelectField,
     NoValidationSelectMultipleField,
+    PasswordSubstitutionField,
+    SubstitutionField,
 )
 
 
@@ -93,8 +95,8 @@ class ServiceForm(JobForm):
             ("custom", "Custom Credentials"),
         ),
     )
-    custom_username = StringField("Custom Username")
-    custom_password = PasswordField("Custom Password")
+    custom_username = SubstitutionField("Custom Username")
+    custom_password = PasswordSubstitutionField("Custom Password")
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
 

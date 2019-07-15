@@ -13,7 +13,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:13.267126'
+  last_modified: '2019-07-16 01:03:15.296103'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -74,7 +74,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:13.321547'
+  last_modified: '2019-07-16 01:03:28.857401'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -973,7 +973,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.520356'
+  last_modified: '2019-07-16 00:47:56.918114'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -983,7 +983,8 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  params: {}
+  params:
+    verify: false
   payload:
     a: b
     c:
@@ -1273,7 +1274,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.857147'
+  last_modified: '2019-07-16 01:03:15.457888'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1795,6 +1796,8 @@
   yaql_query: ''
 - color: '#D2E5FF'
   completed: 0
+  conversion_property: name
+  convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
@@ -1812,7 +1815,7 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-11 13:51:15.363239'
+  last_modified: '2019-07-16 01:03:18.129921'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1825,8 +1828,8 @@
   pools: []
   positions:
     YaQL_test_worflow:
-    - '-293'
-    - '92'
+    - '-342'
+    - '2'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -1846,6 +1849,8 @@
   yaql_query_values: ''
 - color: '#D2E5FF'
   completed: 0
+  conversion_property: name
+  convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
@@ -1861,7 +1866,7 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-11 13:51:15.441585'
+  last_modified: '2019-07-16 01:03:21.757485'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1874,8 +1879,8 @@
   pools: []
   positions:
     YaQL_test_worflow:
-    - '195'
-    - '124'
+    - '-358'
+    - '192'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -1892,6 +1897,8 @@
   yaql_query_values: $.variables.iteration_devices.{{device.name}}
 - color: '#D2E5FF'
   completed: 0
+  conversion_property: name
+  convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
@@ -1936,3 +1943,51 @@
   waiting_time: 0
   yaql_query: ''
   yaql_query_values: $.netmiko_check_vrf_test.results.devices.{{device.name}}.match
+- color: '#D2E5FF'
+  completed: 0
+  conversion_property: name
+  convert_values_to_devices: true
+  creator: admin
+  credentials: device
+  custom_username: ''
+  define_devices_from_payload: false
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  failed: 0
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iterated_job: netmiko_check_vrf_test
+  iterated_job_id: 17
+  last_modified: '2019-07-16 01:03:28.645589'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Iteration_YaQL_derived_targets
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  origin_of_values: yaql_query
+  pools: []
+  positions:
+    YaQL_test_worflow:
+    - '84'
+    - '131'
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  time_between_retries: 10
+  type: IterationService
+  user_provided_values: {}
+  variable_name: ''
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+  yaql_query_values: $.derived_targets.{{device.name}}

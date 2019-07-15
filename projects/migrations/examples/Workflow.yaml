@@ -18,7 +18,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-11 13:51:15.830066'
+  last_modified: '2019-07-16 00:31:00.738018'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -61,7 +61,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-11 13:51:15.976792'
+  last_modified: '2019-07-16 00:31:00.830875'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -106,7 +106,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-11 13:51:16.123506'
+  last_modified: '2019-07-16 00:31:00.926377'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -154,7 +154,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-11 13:51:16.278485'
+  last_modified: '2019-07-16 00:31:01.033439'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -193,14 +193,19 @@
   has_targets: true
   hidden: false
   include_link_in_summary: true
-  initial_payload: {}
+  initial_payload:
+    derived_targets:
+      Washington:
+      - Austin
+      - Baltimore
   jobs:
   - Start
   - End
   - add_devices_to_payload
   - Iteration_service_simple
   - Iteration_service_yaql
-  last_modified: '2019-07-11 13:51:16.377412'
+  - Iteration_YaQL_derived_targets
+  last_modified: '2019-07-16 01:03:28.861728'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -244,7 +249,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-11 13:51:16.484598'
+  last_modified: '2019-07-16 00:31:01.194480'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -287,7 +292,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-11 13:51:16.587237'
+  last_modified: '2019-07-16 00:31:01.277701'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''
@@ -331,7 +336,7 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-11 13:51:16.718029'
+  last_modified: '2019-07-16 00:31:01.370109'
   mail_recipient: ''
   name: Workflow with separate failure / success path
   notification_header: ''

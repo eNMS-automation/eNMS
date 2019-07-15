@@ -163,11 +163,6 @@
   source: add_devices_to_payload
   subtype: success
   workflow: YaQL_test_worflow
-- destination: End
-  name: 44-success:38->2
-  source: Iteration_service_yaql
-  subtype: success
-  workflow: YaQL_test_worflow
 - destination: get_facts
   name: 43-success:1->22
   source: Start
@@ -203,3 +198,13 @@
   source: netmiko_check_no_vrf_test
   subtype: success
   workflow: Workflow with separate failure / success path
+- destination: Iteration_YaQL_derived_targets
+  name: 44-success:38->48
+  source: Iteration_service_yaql
+  subtype: success
+  workflow: YaQL_test_worflow
+- destination: End
+  name: 44-success:48->2
+  source: Iteration_YaQL_derived_targets
+  subtype: success
+  workflow: YaQL_test_worflow

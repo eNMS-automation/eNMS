@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 from eNMS.database import engine
 from eNMS.database.functions import fetch, session_scope
@@ -9,15 +9,16 @@ def threaded_job(
     aps_job_id: Optional[str] = None,
     targets: Optional[set] = None,
     payload: Optional[dict] = None,
-    origin_id: Optional[int] = None,
+    start_points: Optional[List[int]] = None,
 ) -> None:
     task = fetch("Task", allow_none=True, creation_time=aps_job_id or "")
     job = fetch("Job", id=job_id)
-    origin = fetch("Job", allow_none=True, id=origin_id)
+    if start_points:
+        start_points = [fetch("Job", id=id) for id in start_points]
     payload = payload or job.initial_payload
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
-    job.run(targets=targets, payload=payload, task=task, origin=origin)
+    job.run(targets=targets, payload=payload, task=task, start_points=start_points)
 
 
 def device_process(args: tuple) -> None:

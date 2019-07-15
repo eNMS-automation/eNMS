@@ -51,7 +51,7 @@ const panelSize = {
   pool: "800 600",
   pool_filtering: "700 500",
   pool_objects: "700 550",
-  restart_workflow: "600 200",
+  restart_workflow: "600 500",
   results: "1000 700",
   server: "600 250",
   server_filtering: "700 450",
@@ -452,7 +452,7 @@ function showTypePanel(type, id, duplicate) {
  * @param {string} property - Property name.
  * @param {string} value - Property value.
  */
-function updateProperty(el, property, value) {
+function updateProperty(el, property, value, type) {
   const propertyType = formProperties[type][property] || "str";
   if (propertyType.includes("bool") || property.includes("regex")) {
     el.prop("checked", value);

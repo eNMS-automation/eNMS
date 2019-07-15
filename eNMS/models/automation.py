@@ -216,7 +216,7 @@ class Job(AbstractBase):
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,
         task: Optional["Task"] = None,
-        origin: Optional["Job"] = None,
+        start_points: Optional[List["Job"]] = None,
     ) -> Tuple[dict, str]:
         runtime = controller.get_time()
         if not parent_timestamp:
@@ -226,9 +226,8 @@ class Job(AbstractBase):
         if not parent:
             Session.commit()
         results = self.build_results(
-            runtime, payload, targets, parent, parent_timestamp, origin
+            runtime, payload, targets, parent, parent_timestamp, start_points
         )
-        results
         for library in ("netmiko", "napalm"):
             connections = controller.connections_cache[library].pop(self.name, None)
             if not connections:
@@ -719,16 +718,17 @@ class Workflow(Job):
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,
-        origin: Optional["Job"] = None,
+        start_points: Optional[List["Job"]] = None,
     ) -> dict:
         self.state = {"jobs": {}}
-        start_job = origin or self.jobs[0]
-        jobs: list = [start_job]
+        jobs: list = start_points or [self.jobs[0]]
         visited: Set = set()
         results: dict = {"results": payload or {}, "success": False}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            allowed_devices[start_job.name] = targets or self.compute_devices(payload)
+            initial_targets = targets or self.compute_devices(payload)
+            for job in jobs:
+                allowed_devices[job.name] = initial_targets
         while jobs:
             job = jobs.pop()
             if any(
@@ -769,13 +769,12 @@ class Workflow(Job):
                     results["success"] = True
             sleep(job.waiting_time)
         if self.use_workflow_targets:
-            start_devices = allowed_devices[start_job.name]
             end_devices = allowed_devices["End"]
             results["devices"] = {
                 device.name: {"success": device in end_devices}
-                for device in start_devices
+                for device in initial_targets
             }
-            results["success"] = start_devices == end_devices
+            results["success"] = initial_targets == end_devices
         return results
 
 

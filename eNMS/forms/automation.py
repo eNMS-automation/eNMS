@@ -153,7 +153,7 @@ class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     payload_version = SelectField("Payload Version", choices=())
-    start_point = SelectMultipleField("Start Point", choices=())
+    start_points = SelectMultipleField("Start Points", choices=())
     payloads_to_include = SelectMultipleField("Payloads to Include", choices=())
 
 

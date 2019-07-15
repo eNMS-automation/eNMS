@@ -101,10 +101,6 @@ class AutomationController(BaseController):
         proc = Popen(["tail", "-n", "1000", path], stdout=PIPE)
         return proc.stdout.readlines()
 
-    def get_workflow_restart_info(self, workflow_id: int) -> dict:
-        results = fetch("Result", all_matches=True, job_id=workflow_id)
-        return {result.timestamp: list(result.result["results"]) for result in results}
-
     def get_timestamps(self, type: str, id: int) -> list:
         id_kwarg = {"device_id" if type == "device" else "job_id": id}
         results = fetch("Result", allow_none=True, all_matches=True, **id_kwarg)

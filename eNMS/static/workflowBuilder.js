@@ -116,8 +116,8 @@ function switchToWorkflow(workflowId) {
  * Display "Restart Workflow" panel.
  */
 // eslint-disable-next-line
-function showRestartPanel(job) {
-  showPanel("restart_workflow", job.id, function() {
+function showRestartPanel() {
+  showPanel("restart_workflow", null, function() {
     call(`/get_timestamps/workflow/${workflow.id}`, function(timestamps) {
       workflow.jobs.forEach((job) => {
         $("#payloads_to_include,#start_point").append(
@@ -365,7 +365,7 @@ Object.assign(action, {
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => runJob(job.id, job.name),
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
-  "Restart Workflow": (job) => showRestartPanel(job),
+  "Restart Workflow": () => showRestartPanel(),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () =>

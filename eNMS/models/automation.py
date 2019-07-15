@@ -206,6 +206,7 @@ class Job(AbstractBase):
     def log(self, parent: Optional["Job"], severity: str, log: str) -> None:
         getattr(getLogger(self.name), severity)(log)
         if parent:
+            print(self, parent)
             getattr(getLogger(parent.name), severity)(log)
 
     def run(

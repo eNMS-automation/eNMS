@@ -5,7 +5,23 @@ you can use in your custom services.
 
 - eNMS version is now displayed in the UI. The version number is read from the package.json file.
 
-- Refactoring of the results.
+- Refactoring of the results:
+Ideally, the results window for a service/workflow should let you browse the results not only per runtime,
+but also devices
+>>> Done.
+
+- Also at times, a workflow user wants to see the services run for a device,
+>>> Done.
+
+and at other times wants to see all devices run for a service.
+>>> Done.
+
+1. View by device: In order list of services run on a specific device
+>>> Done.
+
+a. Collapsable sections: Moving around in the data is overwhelming. 
+>>> Done.
+
 
 - Refactoring of the logs. One logger per service in "logs" folder. Real-time logs is now working
 even with multiprocessing enabled.
@@ -22,5 +38,7 @@ NGINX CONF: proxy buffering MUST BE DISABLED. (eg
 - Bug in tables: jump to bottom after page 1 when table is refreshed: fixed.
 
 - Panel repaint bug when pulling it down: fixed.
+
+- Relationship are now displayed in the edit window: you can edit which service/workflow a device/task is a target of, etc...
 
 - Bug fixes

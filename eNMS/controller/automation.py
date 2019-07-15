@@ -113,6 +113,7 @@ class AutomationController(BaseController):
         request = {timestamp_key: kw.get(f"timestamp{comp}")}
         if kw.get(f"job{comp}") not in ("global", "all"):
             request["job_id"] = kw.get(f"job{comp}", id)
+        print(request)
         return defaults + list(
             set(
                 (result.device_id, result.device_name)

@@ -52,20 +52,16 @@ class IterationService(Service):
             query = self.sub(self.yaql_query_values, locals())
             values = factory.YaqlFactory().create()(query).evaluate(data=payload)
         if self.convert_values_to_devices:
-            results, devices = {}, []
+            results, devices = {}, set()
             for value in values:
                 device = fetch("Device", **{self.conversion_property: value})
                 if not device:
                     results[value] = "Error: no corresponding device"
                 else:
-                    devices.append(device)
-            print("tttt"*100, devices)
-            for device in devices:
-                try:
-                    result = self.iterated_job.job(payload, device, parent or self)
-                except Exception as e:
-                    result = str(e)
-                results[device.name] = result
+                    devices.add(device)
+            results = self.iterated_job.run(
+                payload=payload, targets=devices, parent=parent or self
+            )[0]
         else:
             results = {
                 value: self.iterated_job.job(

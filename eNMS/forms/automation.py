@@ -153,6 +153,7 @@ class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     payload_version = SelectField("Payload Version", choices=())
+    jobs = MultipleInstanceField("Payloads to include", instance_type="Job")
 
 
 class AddJobsForm(BaseForm):

@@ -118,12 +118,12 @@ function switchToWorkflow(workflowId) {
 // eslint-disable-next-line
 function showRestartPanel(job) {
   showPanel("restart_workflow", job.id, function() {
-    call(`/get_job_results/${workflow.id}`, function(results) {
-      Object.keys(results).forEach((option) => {
+    call(`/get_timestamps/${job.type}/${workflow.id}`, function(results) {
+      results.forEach((option) => {
         $(`#payload_version-${job.id}`).append(
           $("<option></option>")
-            .attr("value", option)
-            .text(option)
+            .attr("value", option[0])
+            .text(option[0])
         );
       });
       $(`#payload_version-${job.id}`).selectpicker("refresh");
@@ -136,9 +136,8 @@ function showRestartPanel(job) {
  */
 // eslint-disable-next-line
 function restartWorkflow(id) {
-  const version = $(`#payload_version-${id}`).val();
-  call(`/restart_workflow/${workflow.id}/${id}/${version}`, function(name) {
-    alertify.notify(`Workflow '${name}' started.`, "success", 5);
+  fCall(`/restart_workflow/${workflow.id}/${id}`, "#restart_workflow-form", function(name) {
+    alertify.notify(`Workflow '${name}' restarted.`, "success", 5);
     getWorkflowState();
   });
 }

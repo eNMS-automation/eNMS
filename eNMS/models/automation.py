@@ -126,7 +126,9 @@ class Job(AbstractBase):
             engine = factory.YaqlFactory().create()
             devices = set()
             for value in engine(self.yaql_query).evaluate(data=payload):
-                device = fetch("Device", allow_none=True, **{self.query_property_type: value})
+                device = fetch(
+                    "Device", allow_none=True, **{self.query_property_type: value}
+                )
                 if device:
                     devices.add(device)
         else:

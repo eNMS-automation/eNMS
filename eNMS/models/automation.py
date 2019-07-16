@@ -124,10 +124,11 @@ class Job(AbstractBase):
     def compute_devices(self, payload: Optional[dict] = None) -> Set["Device"]:
         if self.define_devices_from_payload:
             engine = factory.YaqlFactory().create()
-            devices = {
-                fetch("Device", **{self.query_property_type: value})
-                for value in engine(self.yaql_query).evaluate(data=payload)
-            }
+            devices = set()
+            for value in engine(self.yaql_query).evaluate(data=payload):
+                device = fetch("Device", allow_none=True, **{self.query_property_type: value})
+                if device:
+                    devices.add(device)
         else:
             devices = set(self.devices)
             for pool in self.pools:

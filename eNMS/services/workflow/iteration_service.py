@@ -69,10 +69,10 @@ class IterationService(Service):
             )[0]
             if fail_results:
                 results["results"]["devices"].update(fail_results)
-                results["results"]["success"] = False
-            success = results["results"]["success"]
+                results["success"] = False
+            success = results["success"]
         else:
-            results = {}
+            results, success = {}, True
             for value in values:
                 result = self.iterated_job.job(
                     {self.variable_name: value, **payload}, device

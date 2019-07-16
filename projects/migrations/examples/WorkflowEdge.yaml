@@ -198,13 +198,13 @@
   source: netmiko_check_no_vrf_test
   subtype: success
   workflow: Workflow with separate failure / success path
-- destination: Iteration_YaQL_derived_targets
-  name: 44-success:38->48
-  source: Iteration_service_yaql
-  subtype: success
-  workflow: YaQL_test_worflow
 - destination: End
   name: 44-success:48->2
   source: Iteration_YaQL_derived_targets
   subtype: success
+  workflow: YaQL_test_worflow
+- destination: Iteration_YaQL_derived_targets
+  name: 45-failure:38->40
+  source: Iteration_service_yaql
+  subtype: failure
   workflow: YaQL_test_worflow

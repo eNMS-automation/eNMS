@@ -51,6 +51,7 @@ class NetmikoValidationService(Service):
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
+        expect_string = self.sub(self.expect_string, locals())
         self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
         result = self.convert_result(
             netmiko_connection.send_command(
@@ -78,7 +79,7 @@ class NetmikoValidationService(Service):
 class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = SubstitutionField()
-    expect_string = StringField()
+    expect_string = SubstitutionField()
     auto_find_prompt = BooleanField(default=True)
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)

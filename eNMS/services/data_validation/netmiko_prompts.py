@@ -57,17 +57,20 @@ class NetmikoPromptsService(Service):
         result = netmiko_connection.send_command_timing(
             command, delay_factor=self.delay_factor
         )
-        if self.response1 and self.confirmation1 in result:
+        response1 = self.sub(self.response1, locals())
+        if response1 and self.sub(self.confirmation1, locals()) in result:
             result = netmiko_connection.send_command_timing(
-                self.response1, delay_factor=self.delay_factor
+                response1, delay_factor=self.delay_factor
             )
-            if self.response2 and self.confirmation2 in result:
+            response2 = self.sub(self.response2, locals())
+            if response2 and self.sub(self.confirmation2, locals()) in result:
                 result = netmiko_connection.send_command_timing(
-                    self.response2, delay_factor=self.delay_factor
+                    response2, delay_factor=self.delay_factor
                 )
-                if self.response3 and self.confirmation3 in result:
+                response3 = self.sub(self.response3, locals())
+                if response3 and self.sub(self.confirmation3, locals()) in result:
                     result = netmiko_connection.send_command_timing(
-                        self.response3, delay_factor=self.delay_factor
+                        response3, delay_factor=self.delay_factor
                     )
         match = self.sub(self.content_match, locals())
         return {
@@ -81,12 +84,12 @@ class NetmikoPromptsService(Service):
 class NetmikoPromptsForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoPromptsService")
     command = SubstitutionField()
-    confirmation1 = StringField()
-    response1 = StringField()
-    confirmation2 = StringField()
-    response2 = StringField()
-    confirmation3 = StringField()
-    response3 = StringField()
+    confirmation1 = SubstitutionField()
+    response1 = SubstitutionField()
+    confirmation2 = SubstitutionField()
+    response2 = SubstitutionField()
+    confirmation3 = SubstitutionField()
+    response3 = SubstitutionField()
     groups = {
         "Main Parameters": [
             "command",

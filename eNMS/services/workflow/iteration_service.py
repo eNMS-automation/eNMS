@@ -52,24 +52,35 @@ class IterationService(Service):
             query = self.sub(self.yaql_query_values, locals())
             values = factory.YaqlFactory().create()(query).evaluate(data=payload)
         if self.convert_values_to_devices:
-            results, devices = {}, set()
+            fail_results, devices = {}, set()
             for value in values:
-                device = fetch("Device", **{self.conversion_property: value})
+                device = fetch(
+                    "Device", allow_none=True, **{self.conversion_property: value}
+                )
                 if not device:
-                    results[value] = "Error: no corresponding device"
+                    fail_results[value] = {
+                        "result": "Error: no corresponding device",
+                        "success": False,
+                    }
                 else:
                     devices.add(device)
             results = self.iterated_job.run(
                 payload=payload, targets=devices, parent=parent or self
             )[0]
+            if fail_results:
+                results["results"]["devices"].update(fail_results)
+                results["results"]["success"] = False
+            success = results["results"]["success"]
         else:
-            results = {
-                value: self.iterated_job.job(
+            results = {}
+            for value in values:
+                result = self.iterated_job.job(
                     {self.variable_name: value, **payload}, device
                 )
-                for value in values
-            }
-        return {"success": True, "Iteration values": values, **results}
+                results[value] = result
+                if not result["success"]:
+                    success = False
+        return {"success": success, "Iteration values": values, **results}
 
 
 class IterationForm(ServiceForm):

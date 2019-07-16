@@ -7,3 +7,9 @@ to fix MySQL db has gone away bug
 - Generic file transfer fix
 - Exported jobs not updated (cached).
 Now done front-end: should be updated every time you reopen the window.
+- password field in rest call: no clear-text password on screen anymore
+- YaQL query bug device not found
+Temporary fix: if a device is not found it is silently ignored instead of making the service fail.
+Let's perhaps discuss, once you've pulled the new changes, if it is still needed to be able to define
+the service targets at service level versus using an iteration service.
+- fix multiprocessing bug.

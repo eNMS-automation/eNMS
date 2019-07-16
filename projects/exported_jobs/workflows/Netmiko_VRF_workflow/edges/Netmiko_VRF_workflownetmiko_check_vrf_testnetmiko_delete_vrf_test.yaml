@@ -1,6 +1,0 @@
-destination: netmiko_delete_vrf_test
-name: Netmiko_VRF_workflow 3 -> 4
-source: netmiko_check_vrf_test
-subtype: success
-type: WorkflowEdge
-workflow: Netmiko_VRF_workflow

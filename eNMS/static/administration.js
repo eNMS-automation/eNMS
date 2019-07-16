@@ -176,17 +176,26 @@ function migrationsImport() {
 }
 
 /**
- * Open Import Jobs Panel.
+ * Refresh Exported Job
  */
-// eslint-disable-next-line
-function showImportJobsPanel() {
-  showPanel("import_jobs", null, () => {
+function refreshExportedJobs() {
+  call("/get_exported_jobs", function(cluster) {
     let list = document.getElementById("jobs_to_import");
     jobs.forEach((item) => {
       let option = document.createElement("option");
       option.textContent = option.value = item;
       list.appendChild(option);
     });
+  });
+}
+
+/**
+ * Open Import Jobs Panel.
+ */
+// eslint-disable-next-line
+function showImportJobsPanel() {
+  showPanel("import_jobs", null, () => {
+    refreshExportedJobs()
   });
 }
 

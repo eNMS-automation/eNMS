@@ -101,7 +101,6 @@ def administration() -> str:
         **{
             "endpoint": "administration",
             "folders": listdir(current_app.path / "projects" / "migrations"),
-            "jobs": listdir(jobs_path / "services") + listdir(jobs_path / "workflows"),
         },
     )
 

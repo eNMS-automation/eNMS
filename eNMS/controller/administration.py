@@ -191,6 +191,10 @@ class AdministrationController(BaseController):
             with open(path / f"{job.name}.yaml", "w") as file:
                 dump(job.to_dict(export=True), file)
 
+    def get_exported_jobs(self) -> None:
+        jobs_path = self.path / "projects" / "exported_jobs"
+        return listdir(jobs_path / "services") + listdir(jobs_path / "workflows")
+
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:
         self.update_parameters(**kwargs)
         if parameter_type == "git":

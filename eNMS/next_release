@@ -1,1 +1,9 @@
 - Improve the Iteration Service: support for conversion to targets
+- add more substitution field netmiko services
+Netmiko Validation - expect string
+Netmiko Prompts - All of the ConfirmationX and ResponseX fields
+- New option for database engine creation: pool_recycle set to 3600
+to fix MySQL db has gone away bug
+- Generic file transfer fix
+- Exported jobs not updated (cached).
+Now done front-end: should be updated every time you reopen the window.

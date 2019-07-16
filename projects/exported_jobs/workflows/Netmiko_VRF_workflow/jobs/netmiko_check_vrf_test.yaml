@@ -1,0 +1,69 @@
+auto_find_prompt: true
+color: '#D2E5FF'
+command: show vrf
+completed: 0
+content_match: test
+content_match_regex: false
+conversion_method: text
+creator: admin
+credentials: device
+custom_username: ''
+define_devices_from_payload: false
+delay_factor: 1.0
+delete_spaces_before_matching: false
+description: Check that the vrf "test" is configured
+devices:
+- Washington
+- Austin
+dict_match: {}
+display_only_failed_nodes: true
+driver: arista_eos
+events: []
+expect_string: ''
+failed: 0
+fast_cli: true
+global_delay_factor: 1.0
+hidden: false
+include_link_in_summary: true
+initial_payload: {}
+last_modified: '2019-07-11 13:51:14.261026'
+mail_recipient: ''
+max_processes: 5
+multiprocessing: false
+name: netmiko_check_vrf_test
+negative_logic: false
+notification_header: ''
+number_of_retries: 0
+number_of_targets: 0
+operating_system: eos
+pools: []
+positions:
+  Napalm_VRF_workflow:
+  - '0'
+  - '-50'
+  Netmiko_VRF_workflow:
+  - '0'
+  - '-50'
+  Workflow with separate failure / success path:
+  - '84'
+  - '-3'
+  YaQL_test_worflow:
+  - '147'
+  - '-14'
+privileged_mode: false
+push_to_git: false
+query_property_type: ip_address
+send_notification: false
+send_notification_method: mail_feedback_notification
+shape: box
+size: 40
+strip_command: true
+strip_prompt: true
+time_between_retries: 10
+timeout: 3
+type: NetmikoValidationService
+use_device_driver: true
+validation_method: text
+vendor: Arista
+waiting_time: 0
+yaql_query: ''

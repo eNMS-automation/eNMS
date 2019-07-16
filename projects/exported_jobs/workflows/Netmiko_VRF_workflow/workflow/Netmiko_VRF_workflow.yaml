@@ -1,0 +1,44 @@
+color: '#D2E5FF'
+completed: 0
+creator: admin
+credentials: device
+custom_username: ''
+define_devices_from_payload: false
+description: Create and delete a VRF with Netmiko
+devices: []
+display_only_failed_nodes: true
+events: []
+failed: 0
+has_targets: true
+hidden: false
+include_link_in_summary: true
+initial_payload: {}
+jobs:
+- Start
+- End
+- netmiko_create_vrf_test
+- netmiko_check_vrf_test
+- netmiko_delete_vrf_test
+- netmiko_check_no_vrf_test
+last_modified: '2019-07-16 09:23:43.454833'
+mail_recipient: ''
+name: Netmiko_VRF_workflow
+notification_header: ''
+number_of_retries: 0
+number_of_targets: 1
+operating_system: eos
+pools:
+- Washington
+positions: {}
+push_to_git: false
+query_property_type: ip_address
+send_notification: false
+send_notification_method: mail_feedback_notification
+shape: box
+size: 40
+time_between_retries: 10
+type: Workflow
+use_workflow_targets: true
+vendor: Arista
+waiting_time: 0
+yaql_query: ''

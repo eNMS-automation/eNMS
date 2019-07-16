@@ -1,0 +1,6 @@
+destination: End
+name: 40-success:46->2
+source: netmiko_check_no_vrf_napalm
+subtype: success
+type: WorkflowEdge
+workflow: Napalm_VRF_workflow

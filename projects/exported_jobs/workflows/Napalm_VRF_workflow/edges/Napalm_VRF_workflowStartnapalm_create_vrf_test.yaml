@@ -1,0 +1,6 @@
+destination: napalm_create_vrf_test
+name: Napalm_VRF_workflow 0 -> 2
+source: Start
+subtype: success
+type: WorkflowEdge
+workflow: Napalm_VRF_workflow

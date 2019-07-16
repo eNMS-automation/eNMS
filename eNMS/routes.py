@@ -95,7 +95,6 @@ def logout() -> Response:
 @blueprint.route("/administration")
 @monitor_requests
 def administration() -> str:
-    jobs_path = current_app.path / "projects" / "exported_jobs"
     return render_template(
         f"pages/administration.html",
         **{

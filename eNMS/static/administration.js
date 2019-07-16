@@ -185,6 +185,7 @@ function refreshExportedJobs() {
       option.textContent = option.value = item;
       list.appendChild(option);
     });
+    $("#jobs_to_import").selectpicker("refresh");
   });
 }
 
@@ -194,7 +195,7 @@ function refreshExportedJobs() {
 // eslint-disable-next-line
 function showImportJobsPanel() {
   showPanel("import_jobs", null, () => {
-    refreshExportedJobs()
+    refreshExportedJobs();
   });
 }
 

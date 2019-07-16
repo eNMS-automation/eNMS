@@ -191,7 +191,7 @@ class AdministrationController(BaseController):
             with open(path / f"{job.name}.yaml", "w") as file:
                 dump(job.to_dict(export=True), file)
 
-    def get_exported_jobs(self) -> None:
+    def get_exported_jobs(self) -> list:
         jobs_path = self.path / "projects" / "exported_jobs"
         return listdir(jobs_path / "services") + listdir(jobs_path / "workflows")
 

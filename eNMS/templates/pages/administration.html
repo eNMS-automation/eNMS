@@ -211,6 +211,5 @@ title %} {% block stylesheets %} {{ super() }}
 <script src="{{ url_for('static', filename='administration.js') }}"></script>
 <script>
   const folders = {{ folders|tojson|safe }};
-  const jobs = {{ jobs|tojson|safe }};
 </script>
 {% endblock javascripts %}

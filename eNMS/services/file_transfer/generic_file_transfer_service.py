@@ -64,7 +64,7 @@ class GenericFileTransferService(Service):
                 info(f"Preparing to transfer glob file {glob_source}")
                 self.transfer_file(ssh_client, pairs)
         else:
-            self.transfer_file(ssh_client, source, destination)
+            self.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
         return {"success": success, "result": result}
 

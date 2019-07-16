@@ -5,7 +5,6 @@ call: false
 createPanel: false
 fCall: false
 folders: false
-jobs: false
 page: false
 showPanel: false
 table: false
@@ -179,7 +178,7 @@ function migrationsImport() {
  * Refresh Exported Job
  */
 function refreshExportedJobs() {
-  call("/get_exported_jobs", function(cluster) {
+  call("/get_exported_jobs", function(jobs) {
     let list = document.getElementById("jobs_to_import");
     jobs.forEach((item) => {
       let option = document.createElement("option");

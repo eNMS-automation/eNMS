@@ -158,6 +158,7 @@ class BaseController:
         "get_configurations",
         "get_configuration_diff",
         "get_device_logs",
+        "get_exported_jobs",
         "get_git_content",
         "get_job_logs",
         "get_job_results",

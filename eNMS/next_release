@@ -14,3 +14,4 @@ Let's perhaps discuss, once you've pulled the new changes, if it is still needed
 the service targets at service level versus using an iteration service.
 - fix multiprocessing bug.
 - refactoring of the workflow system to allow substitution in YaQL query when use workflow targets in enabled.
+- Improve Netmiko Prompt so that it fails if confirmation not in result.

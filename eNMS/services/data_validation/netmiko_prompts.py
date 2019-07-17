@@ -68,7 +68,10 @@ class NetmikoPromptsService(Service):
             confirmation2 = self.sub(self.confirmation2, locals())
             response2 = self.sub(self.response2, locals())
             if response2 and confirmation2 not in result:
-                return {"success": False, "result": f"'{confirmation2}' not in '{result}'"}
+                return {
+                    "success": False,
+                    "result": f"'{confirmation2}' not in '{result}'",
+                }
             elif response2:
                 result = netmiko_connection.send_command_timing(
                     response2, delay_factor=self.delay_factor

@@ -233,3 +233,23 @@
   source: netmiko_check_no_vrf_napalm
   subtype: failure
   workflow: yaql_query_workflow
+- destination: Test Netmiko Prompt Service
+  name: 51-success:1->52
+  source: Start
+  subtype: success
+  workflow: 'Netmiko advanced: prompts, multiline, etc'
+- destination: Test Netmiko Multiline Validation Service fail
+  name: 51-failure:52->53
+  source: Test Netmiko Prompt Service
+  subtype: failure
+  workflow: 'Netmiko advanced: prompts, multiline, etc'
+- destination: End
+  name: 51-success:54->2
+  source: Test Netmiko Multiline Validation Service Pass
+  subtype: success
+  workflow: 'Netmiko advanced: prompts, multiline, etc'
+- destination: Test Netmiko Multiline Validation Service Pass
+  name: 51-failure:53->54
+  source: Test Netmiko Multiline Validation Service fail
+  subtype: failure
+  workflow: 'Netmiko advanced: prompts, multiline, etc'

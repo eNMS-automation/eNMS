@@ -13,7 +13,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 17:06:23.987106'
+  last_modified: '2019-07-17 23:30:50.147134'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -31,8 +31,8 @@
     - '-200'
     - '0'
     'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 0
-    - 0
+    - -164
+    - -96
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
@@ -80,7 +80,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 17:06:43.960776'
+  last_modified: '2019-07-17 23:31:08.105007'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -98,8 +98,8 @@
     - '200'
     - '0'
     'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 500
-    - 0
+    - 634
+    - 187
     Netmiko_VRF_workflow:
     - '200'
     - '0'
@@ -2098,7 +2098,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 23:18:47.133005'
+  last_modified: '2019-07-17 23:31:01.492323'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2111,8 +2111,8 @@
   pools: []
   positions:
     'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 126
-    - -97
+    - 86
+    - -208
   privileged_mode: false
   push_to_git: false
   query_property_type: name
@@ -2133,7 +2133,7 @@
   yaql_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
-  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
+  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
   completed: 0
   creator: admin
   credentials: device
@@ -2153,12 +2153,12 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 23:21:46.157359'
+  last_modified: '2019-07-17 23:31:04.351977'
   mail_recipient: ''
-  matches: "Protocols\r\n\r\nInterface\r\n"
+  matches: "Protocols\r\n\r\nInterface\r\nbipbipbop"
   max_processes: 50
   multiprocessing: false
-  name: Test Netmiko Multiline Validation Service
+  name: Test Netmiko Multiline Validation Service fail
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
@@ -2166,8 +2166,61 @@
   pools: []
   positions:
     'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 299
-    - 14
+    - -116
+    - 174
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: MultilineNetmikoValidationService
+  use_device_driver: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  define_devices_from_payload: false
+  delay_factor: 1.0
+  description: ''
+  devices:
+  - Washington
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-17 23:31:07.827817'
+  mail_recipient: ''
+  matches: "Protocols\r\n\r\nInterface"
+  max_processes: 50
+  multiprocessing: false
+  name: Test Netmiko Multiline Validation Service Pass
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
+    - 458
+    - -128
   privileged_mode: false
   push_to_git: false
   query_property_type: name

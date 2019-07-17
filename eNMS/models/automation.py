@@ -124,9 +124,7 @@ class Job(AbstractBase):
     def compute_devices(
         self, payload: Optional[dict], device: Optional["Device"] = None
     ) -> Set["Device"]:
-        if self.type != "Workflow" and not self.has_targets:
-            return set()
-        elif self.define_devices_from_payload:
+        if self.define_devices_from_payload:
             query = self.sub(self.yaql_query, locals())
             engine = factory.YaqlFactory().create()
             devices = set()
@@ -640,6 +638,16 @@ class Workflow(Job):
             Delete</button>""",
         ]
 
+    def compute_valid_devices(
+        self, job: Job, allowed_devices: dict, payload: Optional[dict] = None
+    ) -> Set[Device]:
+        if job.type != "Workflow" and not job.has_targets:
+            return set()
+        elif self.use_workflow_targets:
+            return allowed_devices[job.name]
+        else:
+            return job.compute_devices(payload)
+
     def workflow_targets_processing(
         self, allowed_devices: dict, job: Job, results: dict
     ) -> Generator[Job, None, None]:
@@ -706,9 +714,11 @@ class Workflow(Job):
                     "success": success,
                 }
             else:
-                targets = allowed_devices[job.name] if self.use_workflow_targets else job.compute_devices(payload)
+                valid_devices = self.compute_valid_devices(
+                    job, allowed_devices, results["results"]
+                )
                 job_results = job.run(
-                    results["results"], targets=targets, parent=self
+                    results["results"], targets=valid_devices, parent=self
                 )[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

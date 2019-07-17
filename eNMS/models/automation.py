@@ -127,9 +127,11 @@ class Job(AbstractBase):
         if not self.has_targets:
             return set()
         elif self.define_devices_from_payload:
+            query = self.sub(self.yaql_query, locals())
             engine = factory.YaqlFactory().create()
             devices = set()
-            for value in engine(self.yaql_query).evaluate(data=payload):
+            print(query, payload, device)
+            for value in engine(query).evaluate(data=payload):
                 device = fetch(
                     "Device", allow_none=True, **{self.query_property_type: value}
                 )
@@ -695,13 +697,13 @@ class Workflow(Job):
                 if self.use_workflow_targets
                 else job.compute_devices(payload)
             )
-            if any(device.yaql_query for device in base_targets):
+            if "{{device" in job.yaql_query:
                 device_results, success = {}, True
                 for base_target in base_targets:
                     derived_targets = job.compute_devices(payload, base_target)
                     derived_target_result = job.run(
                         results["results"], targets=derived_targets, parent=self
-                    )
+                    )[0]
                     device_results[base_target.name] = derived_target_result
                     if not derived_target_result["success"]:
                         success = False
@@ -710,9 +712,9 @@ class Workflow(Job):
                     "success": success,
                 }
             else:
-                job_results, _ = job.run(
+                job_results = job.run(
                     results["results"], targets=targets, parent=self
-                )
+                )[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:
                 successors = self.workflow_targets_processing(

@@ -27,7 +27,8 @@ class MultilineNetmikoValidationService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
-    validate_commands = Column(MutableDict.as_mutable(PickleType), default={})
+    commands = Column(Text(LARGE_STRING_LENGTH), default="")
+    matches = Column(Text(LARGE_STRING_LENGTH), default="")
     driver = Column(String(SMALL_STRING_LENGTH), default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
@@ -39,16 +40,22 @@ class MultilineNetmikoValidationService(Service):
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
-        expect_string = self.sub(self.expect_string, locals())
-        for command, validation in self.validate_commands.items():
-            command = self.sub(command, locals())
-            match = self.sub(match, locals())
+        commands = list(filter(None, self.sub(self.commands, locals()).splitlines()))
+        matches = list(filter(None, self.sub(self.matches, locals()).splitlines()))
+        results = {"success": True}
+        for command, match in zip(commands, matches):
+
             result = self.convert_result(
                 netmiko_connection.send_command(
                     command,
                     delay_factor=self.delay_factor,
                 )
             )
+            success = match in result
+            results[command] = {"match": match, "result": result, "success": success}
+            if not success:
+                success = False
+                break
         return {
             "match": match,
             "result": result,
@@ -58,8 +65,8 @@ class MultilineNetmikoValidationService(Service):
 
 class MultilineNetmikoValidationForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="MultilineNetmikoValidationService")
-    anchor = HiddenField()
-    expect_string = SubstitutionField()
+    commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 10})
+    matches = SubstitutionField(widget=TextArea(), render_kw={"rows": 10})
     groups = {
         "Main Parameters": [
 

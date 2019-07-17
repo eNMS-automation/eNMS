@@ -18,7 +18,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-17 01:26:52.453639'
+  last_modified: '2019-07-17 15:32:25.068014'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -61,7 +61,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-17 01:32:01.464841'
+  last_modified: '2019-07-17 15:32:25.145148'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -106,7 +106,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-17 01:26:52.768604'
+  last_modified: '2019-07-17 15:32:25.255367'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -154,7 +154,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-17 01:26:52.898077'
+  last_modified: '2019-07-17 15:32:25.352449'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -206,7 +206,7 @@
   - Iteration_service_simple
   - Iteration_service_yaql
   - Iteration_YaQL_derived_targets
-  last_modified: '2019-07-17 01:35:11.417896'
+  last_modified: '2019-07-17 15:32:25.429498'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -250,7 +250,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-17 01:26:53.149741'
+  last_modified: '2019-07-17 15:32:25.507167'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -293,7 +293,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-17 01:26:53.229644'
+  last_modified: '2019-07-17 15:32:25.576776'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''
@@ -337,12 +337,60 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-17 01:26:53.314390'
+  last_modified: '2019-07-17 15:32:25.644163'
   mail_recipient: ''
   name: Workflow with separate failure / success path
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 2
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  define_devices_from_payload: false
+  description: ''
+  devices:
+  - Washington
+  - Chicago
+  display_only_failed_nodes: false
+  events: []
+  failed: 0
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload:
+    Chicago:
+    - Baltimore
+    - San Francisco
+    Washington:
+    - Austin
+    - Dallas
+  jobs:
+  - Start
+  - End
+  - Device_from_yaql_query
+  last_modified: '2019-07-17 15:36:34.790503'
+  mail_recipient: ''
+  name: yaql_query_workflow
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}

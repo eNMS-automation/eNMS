@@ -208,3 +208,13 @@
   source: Iteration_service_yaql
   subtype: failure
   workflow: YaQL_test_worflow
+- destination: Device_from_yaql_query
+  name: 49-success:1->50
+  source: Start
+  subtype: success
+  workflow: yaql_query_workflow
+- destination: End
+  name: 49-success:50->2
+  source: Device_from_yaql_query
+  subtype: success
+  workflow: yaql_query_workflow

@@ -1,12 +1,4 @@
-from sqlalchemy import (
-    Boolean,
-    Column,
-    Float,
-    ForeignKey,
-    Integer,
-    String,
-    Text,
-)
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
 from typing import Optional
 from wtforms import HiddenField
 from wtforms.widgets import TextArea
@@ -34,6 +26,10 @@ class MultilineNetmikoValidationService(Service):
     timeout = Column(Integer, default=10.0)
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
+    expect_string = Column(String(SMALL_STRING_LENGTH), default="")
+    auto_find_prompt = Column(Boolean, default=True)
+    strip_prompt = Column(Boolean, default=True)
+    strip_command = Column(Boolean, default=True)
 
     __mapper_args__ = {"polymorphic_identity": "MultilineNetmikoValidationService"}
 
@@ -47,6 +43,10 @@ class MultilineNetmikoValidationService(Service):
                 netmiko_connection.send_command(
                     command,
                     delay_factor=self.delay_factor,
+                    expect_string=self.expect_string or None,
+                    auto_find_prompt=self.auto_find_prompt,
+                    strip_prompt=self.strip_prompt,
+                    strip_command=self.strip_command,
                 )
             )
             success = match in result
@@ -59,19 +59,38 @@ class MultilineNetmikoValidationService(Service):
 
 class MultilineNetmikoValidationForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="MultilineNetmikoValidationService")
-    commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 10}, default="""
+    commands = SubstitutionField(
+        widget=TextArea(),
+        render_kw={"rows": 10},
+        default="""
 command1
 command2
 command3
-etc...""")
-    matches = SubstitutionField(widget=TextArea(), render_kw={"rows": 10}, default="""
+etc...""",
+    )
+    matches = SubstitutionField(
+        widget=TextArea(),
+        render_kw={"rows": 10},
+        default="""
 expected string for command1
 expected string for command2
 expected string for command3
 If you're not expecting anything (you don't need to validate the result),
 leave an EMPTY LINE to keep the order intact.
-etc...""")
+etc...""",
+    )
+    expect_string = SubstitutionField()
+    auto_find_prompt = BooleanField(default=True)
+    strip_prompt = BooleanField(default=True)
+    strip_command = BooleanField(default=True)
     groups = {
-        "Main Parameters": ["commands", "matches"],
+        "Main Parameters": [
+            "commands",
+            "matches",
+            "expect_string",
+            "auto_find_prompt",
+            "strip_prompt",
+            "strip_command",
+        ],
         "Netmiko Parameters": NetmikoForm.group,
     }

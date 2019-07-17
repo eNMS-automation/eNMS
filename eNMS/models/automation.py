@@ -121,8 +121,12 @@ class Job(AbstractBase):
         else:
             return "N/A"
 
-    def compute_devices(self, payload: Optional[dict] = None) -> Set["Device"]:
-        if self.define_devices_from_payload:
+    def compute_devices(
+        self, payload: Optional[dict], device: Optional["Device"] = None
+    ) -> Set["Device"]:
+        if not self.has_targets:
+            return set()
+        elif self.define_devices_from_payload:
             engine = factory.YaqlFactory().create()
             devices = set()
             for value in engine(self.yaql_query).evaluate(data=payload):
@@ -635,16 +639,6 @@ class Workflow(Job):
             Delete</button>""",
         ]
 
-    def compute_valid_devices(
-        self, job: Job, allowed_devices: dict, payload: Optional[dict] = None
-    ) -> Set[Device]:
-        if job.type != "Workflow" and not job.has_targets:
-            return set()
-        elif self.use_workflow_targets:
-            return allowed_devices[job.name]
-        else:
-            return job.compute_devices(payload)
-
     def workflow_targets_processing(
         self, allowed_devices: dict, job: Job, results: dict
     ) -> Generator[Job, None, None]:
@@ -696,12 +690,29 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            valid_devices = self.compute_valid_devices(
-                job, allowed_devices, results["results"]
+            base_targets = (
+                allowed_devices[job.name]
+                if self.use_workflow_targets
+                else job.compute_devices(payload)
             )
-            job_results, _ = job.run(
-                results["results"], targets=valid_devices, parent=self
-            )
+            if any(device.yaql_query for device in base_targets):
+                device_results, success = {}, True
+                for base_target in base_targets:
+                    derived_targets = job.compute_devices(payload, base_target)
+                    derived_target_result = job.run(
+                        results["results"], targets=derived_targets, parent=self
+                    )
+                    device_results[base_target.name] = derived_target_result
+                    if not derived_target_result["success"]:
+                        success = False
+                job_results = {
+                    "results": {"devices": device_results},
+                    "success": success,
+                }
+            else:
+                job_results, _ = job.run(
+                    results["results"], targets=targets, parent=self
+                )
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:
                 successors = self.workflow_targets_processing(

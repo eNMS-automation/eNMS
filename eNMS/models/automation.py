@@ -124,13 +124,12 @@ class Job(AbstractBase):
     def compute_devices(
         self, payload: Optional[dict], device: Optional["Device"] = None
     ) -> Set["Device"]:
-        if not self.has_targets:
+        if self.type != "Workflow" and not self.has_targets:
             return set()
         elif self.define_devices_from_payload:
             query = self.sub(self.yaql_query, locals())
             engine = factory.YaqlFactory().create()
             devices = set()
-            print(query, payload, device)
             for value in engine(query).evaluate(data=payload):
                 device = fetch(
                     "Device", allow_none=True, **{self.query_property_type: value}
@@ -692,14 +691,9 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            base_targets = (
-                allowed_devices[job.name]
-                if self.use_workflow_targets
-                else job.compute_devices(payload)
-            )
-            if "{{device" in job.yaql_query:
+            if self.use_workflow_targets and job.define_devices_from_payload:
                 device_results, success = {}, True
-                for base_target in base_targets:
+                for base_target in allowed_devices[job.name]:
                     derived_targets = job.compute_devices(payload, base_target)
                     derived_target_result = job.run(
                         results["results"], targets=derived_targets, parent=self
@@ -712,6 +706,7 @@ class Workflow(Job):
                     "success": success,
                 }
             else:
+                targets = allowed_devices[job.name] if self.use_workflow_targets else job.compute_devices(payload)
                 job_results = job.run(
                     results["results"], targets=targets, parent=self
                 )[0]

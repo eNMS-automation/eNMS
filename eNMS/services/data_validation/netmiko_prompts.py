@@ -53,36 +53,43 @@ class NetmikoPromptsService(Service):
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
+        results = {}
         self.logs.append(f"Sending '{command}' on {device.name} (Netmiko)")
         result = netmiko_connection.send_command_timing(
             command, delay_factor=self.delay_factor
         )
         response1 = self.sub(self.response1, locals())
         confirmation1 = self.sub(self.confirmation1, locals())
+        results[command] = {"result": result, "match": confirmation1}
         if confirmation1 not in result:
-            return {"success": False, "result": f"'{confirmation1}' not in '{result}'"}
+            results.update({"success": False, "result": f"'{confirmation1}' not in '{result}'"})
+            return results
         elif response1:
             result = netmiko_connection.send_command_timing(
                 response1, delay_factor=self.delay_factor
             )
             confirmation2 = self.sub(self.confirmation2, locals())
+            results[response1].update({"result": result, "match": confirmation2})
             response2 = self.sub(self.response2, locals())
             if confirmation2 not in result:
-                return {
-                    "success": False,
-                    "result": f"'{confirmation2}' not in '{result}'",
-                }
+                results.update({
+                        "success": False,
+                        "result": f"'{confirmation2}' not in '{result}'",
+                    })
+                return results
             elif response2:
                 result = netmiko_connection.send_command_timing(
                     response2, delay_factor=self.delay_factor
                 )
                 confirmation3 = self.sub(self.confirmation3, locals())
+                results[response2].update({"result": result, "match": confirmation3})
                 response3 = self.sub(self.response3, locals())
                 if confirmation3 not in result:
-                    return {
+                    results.update({
                         "success": False,
                         "result": f"'{confirmation3}' not in '{result}'",
-                    }
+                    })
+                    return results
                 elif response3:
                     result = netmiko_connection.send_command_timing(
                         response3, delay_factor=self.delay_factor

@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
 from typing import Optional
-from wtforms import HiddenField
+from wtforms import BooleanField, HiddenField
 from wtforms.widgets import TextArea
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
@@ -37,17 +37,17 @@ class MultilineNetmikoValidationService(Service):
         netmiko_connection = self.netmiko_connection(device, parent)
         commands = self.commands.strip().splitlines()
         matches = self.matches.strip().splitlines()
+        if len(commands) > len(matches):
+            matches.extend([""] * (len(commands) - len(matches)))
         results = {"success": True}
         for command, match in zip(commands, matches):
-            result = self.convert_result(
-                netmiko_connection.send_command(
-                    command,
-                    delay_factor=self.delay_factor,
-                    expect_string=self.expect_string or None,
-                    auto_find_prompt=self.auto_find_prompt,
-                    strip_prompt=self.strip_prompt,
-                    strip_command=self.strip_command,
-                )
+            result = netmiko_connection.send_command(
+                command,
+                delay_factor=self.delay_factor,
+                expect_string=self.expect_string or None,
+                auto_find_prompt=self.auto_find_prompt,
+                strip_prompt=self.strip_prompt,
+                strip_command=self.strip_command,
             )
             success = match in result
             results[command] = {"match": match, "result": result, "success": success}

@@ -30,6 +30,9 @@
     Napalm_VRF_workflow:
     - '-200'
     - '0'
+    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
+    - 0
+    - 0
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
@@ -48,9 +51,9 @@
     payload_transfer_workflow:
     - '-200'
     - '0'
-    yaql_query_workflow: !!python/tuple
-    - -164
-    - 15
+    yaql_query_workflow:
+    - '-164'
+    - '15'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -94,6 +97,9 @@
     Napalm_VRF_workflow:
     - '200'
     - '0'
+    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
+    - 500
+    - 0
     Netmiko_VRF_workflow:
     - '200'
     - '0'
@@ -112,9 +118,9 @@
     payload_transfer_workflow:
     - '500'
     - '0'
-    yaql_query_workflow: !!python/tuple
-    - 651
-    - 20
+    yaql_query_workflow:
+    - '651'
+    - '20'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
@@ -771,9 +777,9 @@
     YaQL_test_worflow:
     - '147'
     - '-14'
-    yaql_query_workflow: !!python/tuple
-    - 414
-    - -154
+    yaql_query_workflow:
+    - '414'
+    - '-154'
   privileged_mode: false
   push_to_git: false
   query_property_type: ip_address
@@ -897,9 +903,9 @@
     Workflow with separate failure / success path:
     - '52'
     - '-2'
-    yaql_query_workflow: !!python/tuple
-    - 337
-    - -145
+    yaql_query_workflow:
+    - '337'
+    - '-145'
   privileged_mode: false
   push_to_git: false
   query_property_type: ip_address
@@ -1789,9 +1795,9 @@
     Napalm_VRF_workflow:
     - '9'
     - '139'
-    yaql_query_workflow: !!python/tuple
-    - 245
-    - 32
+    yaql_query_workflow:
+    - '245'
+    - '32'
   privileged_mode: false
   push_to_git: false
   query_property_type: name
@@ -1809,6 +1815,64 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show vrf
+  completed: 0
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  define_devices_from_payload: true
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-17 17:06:41.065700'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: true
+  name: Device_from_yaql_query
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    yaql_query_workflow:
+    - '-5'
+    - '-147'
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: $.{{device.name}}
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2006,22 +2070,79 @@
   waiting_time: 0
   yaql_query: ''
   yaql_query_values: $.derived_targets.{{device.name}}
-- auto_find_prompt: true
-  color: '#D2E5FF'
+- color: '#D2E5FF'
   command: show vrf
   completed: 0
+  confirmation1: Protocols
+  confirmation2: Interfaces
+  confirmation3: bipbipbop
   content_match: ''
   content_match_regex: false
   conversion_method: text
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: true
+  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
-  devices: []
+  devices:
+  - Washington
   dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-17 23:18:47.133005'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Test Netmiko Prompt Service
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 1
+  operating_system: ''
+  pools: []
+  positions:
+    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
+    - 126
+    - -97
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  response1: show vrf
+  response2: show vrf
+  response3: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoPromptsService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  define_devices_from_payload: false
+  delay_factor: 1.0
+  description: ''
+  devices:
+  - Washington
   display_only_failed_nodes: false
   driver: a10
   events: []
@@ -2032,21 +2153,21 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 17:06:41.065700'
+  last_modified: '2019-07-17 23:21:46.157359'
   mail_recipient: ''
+  matches: "Protocols\r\n\r\nInterface\r\n"
   max_processes: 50
-  multiprocessing: true
-  name: Device_from_yaql_query
-  negative_logic: false
+  multiprocessing: false
+  name: Test Netmiko Multiline Validation Service
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 1
   operating_system: ''
   pools: []
   positions:
-    yaql_query_workflow: !!python/tuple
-    - -5
-    - -147
+    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
+    - 299
+    - 14
   privileged_mode: false
   push_to_git: false
   query_property_type: name
@@ -2058,9 +2179,8 @@
   strip_prompt: true
   time_between_retries: 10
   timeout: 10
-  type: NetmikoValidationService
+  type: MultilineNetmikoValidationService
   use_device_driver: true
-  validation_method: text
   vendor: ''
   waiting_time: 0
-  yaql_query: $.{{device.name}}
+  yaql_query: ''

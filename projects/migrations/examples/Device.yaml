@@ -93,7 +93,7 @@
 - description: Chicago
   hidden: false
   icon: router
-  ip_address: 192.168.105.5
+  ip_address: 192.168.1.188
   last_failure: Never
   last_runtime: 0.0
   last_status: Never

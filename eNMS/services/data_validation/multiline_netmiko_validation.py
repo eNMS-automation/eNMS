@@ -4,18 +4,17 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     Integer,
-    PickleType,
     String,
     Text,
 )
-from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import BooleanField, HiddenField
+from wtforms import HiddenField
+from wtforms.widgets import TextArea
 
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import NetmikoForm, ValidationForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 
@@ -40,11 +39,10 @@ class MultilineNetmikoValidationService(Service):
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
-        commands = list(filter(None, self.sub(self.commands, locals()).splitlines()))
-        matches = list(filter(None, self.sub(self.matches, locals()).splitlines()))
+        commands = self.commands.strip().splitlines()
+        matches = self.matches.strip().splitlines()
         results = {"success": True}
         for command, match in zip(commands, matches):
-
             result = self.convert_result(
                 netmiko_connection.send_command(
                     command,
@@ -54,22 +52,26 @@ class MultilineNetmikoValidationService(Service):
             success = match in result
             results[command] = {"match": match, "result": result, "success": success}
             if not success:
-                success = False
+                results["success"] = False
                 break
-        return {
-            "match": match,
-            "result": result,
-            "success": True,
-        }
+        return results
 
 
 class MultilineNetmikoValidationForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="MultilineNetmikoValidationService")
-    commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 10})
-    matches = SubstitutionField(widget=TextArea(), render_kw={"rows": 10})
+    commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 10}, default="""
+command1
+command2
+command3
+etc...""")
+    matches = SubstitutionField(widget=TextArea(), render_kw={"rows": 10}, default="""
+expected string for command1
+expected string for command2
+expected string for command3
+If you're not expecting anything (you don't need to validate the result),
+leave an EMPTY LINE to keep the order intact.
+etc...""")
     groups = {
-        "Main Parameters": [
-
-        ],
+        "Main Parameters": ["commands", "matches"],
         "Netmiko Parameters": NetmikoForm.group,
     }

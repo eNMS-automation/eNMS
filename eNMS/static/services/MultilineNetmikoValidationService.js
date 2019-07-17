@@ -8,8 +8,10 @@ global
  */
 // eslint-disable-next-line
 function job(id) {
-
-  const fieldId = id ? `playbook_path-${id}` : "playbook_path";
-  const field = $(`#AnsiblePlaybookService-${fieldId}`);
+  console.log("test");
+  const fieldId = id ? `anchor-${id}` : "anchor";
+  const anchor = $(`#MultilineNetmikoValidationService-${fieldId}`);
+  console.log(anchor)
+  console.log(anchor.length);
 
 }

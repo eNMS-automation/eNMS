@@ -58,7 +58,7 @@ class MultilineNetmikoValidationService(Service):
 
 class MultilineNetmikoValidationForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="MultilineNetmikoValidationService")
-    command = SubstitutionField()
+    anchor = HiddenField()
     expect_string = SubstitutionField()
     groups = {
         "Main Parameters": [

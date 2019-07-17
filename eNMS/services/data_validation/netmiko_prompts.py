@@ -58,17 +58,29 @@ class NetmikoPromptsService(Service):
             command, delay_factor=self.delay_factor
         )
         response1 = self.sub(self.response1, locals())
-        if response1 and self.sub(self.confirmation1, locals()) in result:
+        confirmation1 = self.sub(self.confirmation1, locals())
+        if response1 and confirmation1 not in result:
+            return {"success": False, "result": f"'{confirmation1}' not in '{result}'"}
+        elif response1:
             result = netmiko_connection.send_command_timing(
                 response1, delay_factor=self.delay_factor
             )
+            confirmation2 = self.sub(self.confirmation2, locals())
             response2 = self.sub(self.response2, locals())
-            if response2 and self.sub(self.confirmation2, locals()) in result:
+            if response2 and confirmation2 not in result:
+                return {"success": False, "result": f"'{confirmation2}' not in '{result}'"}
+            elif response2:
                 result = netmiko_connection.send_command_timing(
                     response2, delay_factor=self.delay_factor
                 )
+                confirmation3 = self.sub(self.confirmation3, locals())
                 response3 = self.sub(self.response3, locals())
-                if response3 and self.sub(self.confirmation3, locals()) in result:
+                if response3 and confirmation3 not in result:
+                    return {
+                        "success": False,
+                        "result": f"'{confirmation3}' not in '{result}'",
+                    }
+                elif response3:
                     result = netmiko_connection.send_command_timing(
                         response3, delay_factor=self.delay_factor
                     )

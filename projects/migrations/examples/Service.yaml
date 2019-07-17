@@ -13,7 +13,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 17:00:21.942460'
+  last_modified: '2019-07-17 17:06:23.987106'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -77,7 +77,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:21:18.304698'
+  last_modified: '2019-07-17 17:06:43.960776'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -747,7 +747,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 17:00:40.160226'
+  last_modified: '2019-07-17 17:05:05.312147'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -772,8 +772,8 @@
     - '147'
     - '-14'
     yaql_query_workflow: !!python/tuple
-    - 459
-    - -140
+    - 414
+    - -154
   privileged_mode: false
   push_to_git: false
   query_property_type: ip_address
@@ -876,7 +876,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:20:47.963783'
+  last_modified: '2019-07-17 17:06:43.703337'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -897,6 +897,9 @@
     Workflow with separate failure / success path:
     - '52'
     - '-2'
+    yaql_query_workflow: !!python/tuple
+    - 337
+    - -145
   privileged_mode: false
   push_to_git: false
   query_property_type: ip_address
@@ -1771,7 +1774,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:15.274768'
+  last_modified: '2019-07-17 17:06:42.695141'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1786,6 +1789,9 @@
     Napalm_VRF_workflow:
     - '9'
     - '139'
+    yaql_query_workflow: !!python/tuple
+    - 245
+    - 32
   privileged_mode: false
   push_to_git: false
   query_property_type: name
@@ -2026,7 +2032,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 17:00:39.087330'
+  last_modified: '2019-07-17 17:06:41.065700'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: true

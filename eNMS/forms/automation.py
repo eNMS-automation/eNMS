@@ -10,7 +10,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DictField, MultipleInstanceField
+from eNMS.forms.fields import DictField, MultipleInstanceField, SubstitutionField
 
 
 class DeviceAutomationForm(BaseForm):
@@ -26,7 +26,7 @@ class JobForm(BaseForm):
     type = StringField("Service Type")
     name = StringField("Name")
     description = StringField("Description")
-    yaql_query = StringField("YaQL Query")
+    yaql_query = SubstitutionField("YaQL Query")
     query_property_type = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )

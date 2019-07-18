@@ -1,3 +1,4 @@
+from apscheduler.jobstores.base import JobLookupError
 from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
@@ -185,7 +186,10 @@ class AutomationController(BaseController):
         getattr(self.scheduler, action)()
 
     def task_action(self, action: str, task_id: int) -> None:
-        getattr(fetch("Task", id=task_id), action)()
+        try:
+            getattr(fetch("Task", id=task_id), action)()
+        except JobLookupError:
+            return {"error": "This task no longer exists."}
 
     def scan_playbook_folder(self) -> list:
         path = Path(self.playbook_path or self.path / "playbooks")

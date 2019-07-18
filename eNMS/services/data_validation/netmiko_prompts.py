@@ -62,9 +62,7 @@ class NetmikoPromptsService(Service):
         confirmation1 = self.sub(self.confirmation1, locals())
         results[command] = {"result": result, "match": confirmation1}
         if confirmation1 not in result:
-            results.update(
-                {"success": False, "result": result, "match": confirmation1}
-            )
+            results.update({"success": False, "result": result, "match": confirmation1})
             return results
         elif response1:
             result = netmiko_connection.send_command_timing(
@@ -87,11 +85,7 @@ class NetmikoPromptsService(Service):
                 response3 = self.sub(self.response3, locals())
                 if confirmation3 not in result:
                     results.update(
-                        {
-                            "success": False,
-                            "result": result,
-                            "match": confirmation3,
-                        }
+                        {"success": False, "result": result, "match": confirmation3}
                     )
                     return results
                 elif response3:

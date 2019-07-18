@@ -71,7 +71,7 @@ def factory(cls_name: str, must_be_new=False, **kwargs: Any) -> Any:
         instance = fetch(cls_name, allow_none=True, name=kwargs["name"])
     if instance:
         if must_be_new:
-            raise Exception(f"There already exists an {cls_name} with the same name.")
+            raise Exception(f"There already is a {cls_name} with the same name.")
         else:
             instance.update(**kwargs)
     else:

@@ -20,7 +20,7 @@ from wtforms import (
     StringField,
 )
 
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import CustomMediumBlobPickle, LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictSubstitutionField,
@@ -39,17 +39,17 @@ class RestCallService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     call_type = Column(String(SMALL_STRING_LENGTH), default="")
-    rest_url = Column(String(SMALL_STRING_LENGTH), default="")
+    rest_url = Column(Text(LARGE_STRING_LENGTH), default="")
     payload = Column(JSON, default={})
-    params = Column(MutableDict.as_mutable(PickleType), default={})
-    headers = Column(MutableDict.as_mutable(PickleType), default={})
+    params = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
+    headers = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     verify_ssl_certificate = Column(Boolean, default=True)
     timeout = Column(Integer, default=15)
     conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
+    dict_match = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
     username = Column(String(SMALL_STRING_LENGTH), default="")

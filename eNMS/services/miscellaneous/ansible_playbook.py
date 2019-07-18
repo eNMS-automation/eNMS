@@ -5,7 +5,7 @@ from subprocess import check_output
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import CustomMediumBlobPickle, LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictSubstitutionField,
@@ -29,7 +29,7 @@ class AnsiblePlaybookService(Service):
     validation_method = Column(String(SMALL_STRING_LENGTH), default="")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
+    dict_match = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
     options = Column(MutableDict.as_mutable(PickleType), default={})

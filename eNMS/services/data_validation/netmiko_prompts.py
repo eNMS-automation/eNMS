@@ -12,7 +12,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import HiddenField
 
-from eNMS.database import SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
+from eNMS.database import CustomMediumBlobPickle, SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm, ValidationForm
@@ -38,7 +38,7 @@ class NetmikoPromptsService(Service):
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
+    dict_match = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
     driver = Column(String(SMALL_STRING_LENGTH), default="")

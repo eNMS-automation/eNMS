@@ -35,8 +35,7 @@ class MultilineNetmikoValidationService(Service):
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
-        commands = self.commands.strip().splitlines()
-        matches = self.matches.strip().splitlines()
+        commands, matches = self.commands.splitlines(), self.matches.splitlines()
         if len(commands) > len(matches):
             matches.extend([""] * (len(commands) - len(matches)))
         results = {"success": True}

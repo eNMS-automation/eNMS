@@ -13,7 +13,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 23:30:50.147134'
+  last_modified: '2019-07-17 23:39:37.300981'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -31,8 +31,8 @@
     - '-200'
     - '0'
     'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - -164
-    - -96
+    - -279
+    - -158
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
@@ -80,7 +80,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 23:31:08.105007'
+  last_modified: '2019-07-17 23:39:55.160884'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2071,7 +2071,7 @@
   yaql_query: ''
   yaql_query_values: $.derived_targets.{{device.name}}
 - color: '#D2E5FF'
-  command: show vrf
+  command: show vrf a
   completed: 0
   confirmation1: Protocols
   confirmation2: Interfaces
@@ -2098,7 +2098,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 23:31:01.492323'
+  last_modified: '2019-07-17 23:50:50.182454'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2116,8 +2116,8 @@
   privileged_mode: false
   push_to_git: false
   query_property_type: name
-  response1: show vrf
-  response2: show vrf
+  response1: show vrf b
+  response2: show vrf c
   response3: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2153,7 +2153,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 23:31:04.351977'
+  last_modified: '2019-07-17 23:39:51.432100'
   mail_recipient: ''
   matches: "Protocols\r\n\r\nInterface\r\nbipbipbop"
   max_processes: 50
@@ -2166,8 +2166,8 @@
   pools: []
   positions:
     'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - -116
-    - 174
+    - -69
+    - 122
   privileged_mode: false
   push_to_git: false
   query_property_type: name
@@ -2206,7 +2206,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 23:31:07.827817'
+  last_modified: '2019-07-17 23:39:54.924028'
   mail_recipient: ''
   matches: "Protocols\r\n\r\nInterface"
   max_processes: 50
@@ -2219,8 +2219,8 @@
   pools: []
   positions:
     'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 458
-    - -128
+    - 524
+    - -154
   privileged_mode: false
   push_to_git: false
   query_property_type: name

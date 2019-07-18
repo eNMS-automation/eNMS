@@ -13,7 +13,6 @@ from importlib import import_module
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
 from json import load as json_load
-from json.decoder import JSONDecodeError
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
@@ -378,11 +377,17 @@ class BaseController:
 
     def update(self, cls: str, **kwargs: Any) -> dict:
         try:
-            instance = factory(cls, **kwargs)
+            must_be_new = kwargs["id"] == ""
+            instance = factory(cls, must_be_new=must_be_new, **kwargs)
             Session.flush()
             return instance.serialized
         except Exception as exc:
             Session.rollback()
+            if isinstance(exc, IntegrityError):
+                return {"error": (
+                    f"There already exists a {cls} "
+                    "with the same name"
+                )}
             return {"error": str(exc)}
 
     def log(self, severity: str, content: str) -> None:

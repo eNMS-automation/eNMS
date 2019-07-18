@@ -63,14 +63,17 @@ def export(model: str) -> List[dict]:
     return [instance.to_dict(export=True) for instance in models[model].visible()]
 
 
-def factory(cls_name: str, **kwargs: Any) -> Any:
+def factory(cls_name: str, must_be_new=False, **kwargs: Any) -> Any:
     instance, instance_id = None, kwargs.pop("id", 0)
     if instance_id:
         instance = fetch(cls_name, id=instance_id)
     elif "name" in kwargs:
         instance = fetch(cls_name, allow_none=True, name=kwargs["name"])
     if instance:
-        instance.update(**kwargs)
+        if must_be_new:
+            raise Exception(f"There already exists an {cls_name} with the same name.")
+        else:
+            instance.update(**kwargs)
     else:
         instance = models[cls_name](**kwargs)
         Session.add(instance)

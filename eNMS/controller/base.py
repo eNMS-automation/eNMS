@@ -384,9 +384,7 @@ class BaseController:
         except Exception as exc:
             Session.rollback()
             if isinstance(exc, IntegrityError):
-                return {
-                    "error": (f"There already is a {cls} with the same name")
-                }
+                return {"error": (f"There already is a {cls} with the same name")}
             return {"error": str(exc)}
 
     def log(self, severity: str, content: str) -> None:

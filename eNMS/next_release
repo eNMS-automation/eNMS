@@ -11,3 +11,5 @@ used to select the job's targets.
 - Pausing an Active Task throws an exception > fixed
 - Connection cache: - Need to handle OSError as well as Value Error exception.
 - rest call service URL length + headers/param + dict match large fields
+- when creating a service, creator is always set to admin
+- services cannot be filtered per OS/vendor

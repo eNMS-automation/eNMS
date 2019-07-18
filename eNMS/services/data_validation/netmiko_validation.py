@@ -12,7 +12,11 @@ from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
-from eNMS.database import CustomMediumBlobPickle, LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import (
+    CustomMediumBlobPickle,
+    LARGE_STRING_LENGTH,
+    SMALL_STRING_LENGTH,
+)
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm, ValidationForm

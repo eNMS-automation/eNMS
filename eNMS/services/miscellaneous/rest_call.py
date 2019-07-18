@@ -20,7 +20,11 @@ from wtforms import (
     StringField,
 )
 
-from eNMS.database import CustomMediumBlobPickle, LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import (
+    CustomMediumBlobPickle,
+    LARGE_STRING_LENGTH,
+    SMALL_STRING_LENGTH,
+)
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictSubstitutionField,

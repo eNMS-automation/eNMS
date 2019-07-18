@@ -62,33 +62,37 @@ class NetmikoPromptsService(Service):
         confirmation1 = self.sub(self.confirmation1, locals())
         results[command] = {"result": result, "match": confirmation1}
         if confirmation1 not in result:
-            results.update({"success": False, "result": f"'{confirmation1}' not in '{result}'"})
+            results.update(
+                {"success": False, "result": result, "match": confirmation1}
+            )
             return results
         elif response1:
             result = netmiko_connection.send_command_timing(
                 response1, delay_factor=self.delay_factor
             )
             confirmation2 = self.sub(self.confirmation2, locals())
-            results[response1].update({"result": result, "match": confirmation2})
+            results[response1] = {"result": result, "match": confirmation2}
             response2 = self.sub(self.response2, locals())
             if confirmation2 not in result:
-                results.update({
-                        "success": False,
-                        "result": f"'{confirmation2}' not in '{result}'",
-                    })
+                results.update(
+                    {"success": False, "result": result, "match": confirmation2}
+                )
                 return results
             elif response2:
                 result = netmiko_connection.send_command_timing(
                     response2, delay_factor=self.delay_factor
                 )
                 confirmation3 = self.sub(self.confirmation3, locals())
-                results[response2].update({"result": result, "match": confirmation3})
+                results[response2] = {"result": result, "match": confirmation3}
                 response3 = self.sub(self.response3, locals())
                 if confirmation3 not in result:
-                    results.update({
-                        "success": False,
-                        "result": f"'{confirmation3}' not in '{result}'",
-                    })
+                    results.update(
+                        {
+                            "success": False,
+                            "result": result,
+                            "match": confirmation3,
+                        }
+                    )
                     return results
                 elif response3:
                     result = netmiko_connection.send_command_timing(

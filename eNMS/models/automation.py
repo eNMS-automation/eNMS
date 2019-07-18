@@ -84,7 +84,6 @@ class Job(AbstractBase):
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
     )
-    define_devices_from_payload = Column(Boolean, default=False)
     yaql_query = Column(String(SMALL_STRING_LENGTH), default="")
     query_property_type = Column(String(SMALL_STRING_LENGTH), default="ip_address")
     devices = relationship("Device", secondary=job_device_table, back_populates="jobs")
@@ -124,7 +123,7 @@ class Job(AbstractBase):
     def compute_devices(
         self, payload: Optional[dict], device: Optional["Device"] = None
     ) -> Set["Device"]:
-        if self.define_devices_from_payload:
+        if self.yaql_query:
             query = self.sub(self.yaql_query, locals())
             engine = factory.YaqlFactory().create()
             devices = set()
@@ -699,7 +698,7 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            if self.use_workflow_targets and job.define_devices_from_payload:
+            if self.use_workflow_targets and job.yaql_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     derived_targets = job.compute_devices(payload, base_target)

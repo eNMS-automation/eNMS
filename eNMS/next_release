@@ -1,1 +1,4 @@
 - Improve Netmiko Prompt so that it fails if confirmation not in result.
+- Rename YaQL query label
+- Remove "define devices from payload" tickbox: if YaQL query is not empty, it will be
+used to select the job's targets.

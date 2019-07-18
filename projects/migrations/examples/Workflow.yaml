@@ -429,7 +429,7 @@
   - Test Netmiko Prompt Service
   - Test Netmiko Multiline Validation Service fail
   - Test Netmiko Multiline Validation Service Pass
-  last_modified: '2019-07-17 23:39:55.169382'
+  last_modified: '2019-07-18 12:24:26.695039'
   mail_recipient: ''
   name: 'Netmiko advanced: prompts, multiline, etc'
   notification_header: ''

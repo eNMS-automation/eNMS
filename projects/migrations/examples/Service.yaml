@@ -2133,7 +2133,7 @@
   yaql_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
-  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
+  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
   completed: 0
   creator: admin
   credentials: device
@@ -2153,9 +2153,9 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 23:39:51.432100'
+  last_modified: '2019-07-18 12:31:10.004870'
   mail_recipient: ''
-  matches: "Protocols\r\n\r\nInterface\r\nbipbipbop"
+  matches: "\r\n\r\nInterface\r\nbipbipbop\r\n\r\n"
   max_processes: 50
   multiprocessing: false
   name: Test Netmiko Multiline Validation Service fail
@@ -2219,8 +2219,8 @@
   pools: []
   positions:
     'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 524
-    - -154
+    - 456
+    - -146
   privileged_mode: false
   push_to_git: false
   query_property_type: name

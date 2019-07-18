@@ -1,7 +1,12 @@
-- Improve Netmiko Prompt so that it fails if confirmation not in result.
+- In Netmiko Prompts, we are not handling the cases where confirmation1,2,3 exists(is provided by user),
+but is not received in the response1,2,3, then in that case, the result/service should fail...
+- New Netmiko Multiline Service where the validation is a simple single line text.
+The user could only use it to chain very simple commands where no complicated logic could be used
+parse response. In this way it would look like the prompt service and keep the form fairly simple.
 - Rename YaQL query label, make yaql query a substitution field.
 - Remove "define devices from payload" tickbox: if YaQL query is not empty, it will be
 used to select the job's targets.
 - When creating a new object, error if there already is an instance with the same name.
 - Fix dictionary match mechanism (recursive function not returning result)
 - Pausing an Active Task throws an exception > fixed
+- Connection cache: - Need to handle OSError as well as Value Error exception.

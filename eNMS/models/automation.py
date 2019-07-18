@@ -446,7 +446,7 @@ class Service(Job):
                 try:
                     parent_connection[device.name].find_prompt()
                     return parent_connection[device.name]
-                except ValueError:
+                except OSError, ValueError:
                     parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
         netmiko_connection = ConnectHandler(

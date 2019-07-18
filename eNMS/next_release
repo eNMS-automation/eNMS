@@ -2,4 +2,6 @@
 - Rename YaQL query label, make yaql query a substitution field.
 - Remove "define devices from payload" tickbox: if YaQL query is not empty, it will be
 used to select the job's targets.
-- When creating a new object, error if there already exists an instance with the same name.
+- When creating a new object, error if there already is an instance with the same name.
+- Fix dictionary match mechanism (recursive function not returning result)
+- Pausing an Active Task throws an exception > fixed

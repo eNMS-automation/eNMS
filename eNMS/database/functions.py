@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from flask_login import current_user
 from logging import info
 from re import search
 from sqlalchemy import func
@@ -75,6 +76,7 @@ def factory(cls_name: str, must_be_new=False, **kwargs: Any) -> Any:
         else:
             instance.update(**kwargs)
     else:
+        kwargs["creator"] = current_user.name
         instance = models[cls_name](**kwargs)
         Session.add(instance)
     return instance

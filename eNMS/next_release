@@ -10,3 +10,4 @@ used to select the job's targets.
 - Fix dictionary match mechanism (recursive function not returning result)
 - Pausing an Active Task throws an exception > fixed
 - Connection cache: - Need to handle OSError as well as Value Error exception.
+- rest call service URL length + headers/param + dict match large fields

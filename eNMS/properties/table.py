@@ -113,6 +113,8 @@ job_filtering_properties = [
     "name",
     "type",
     "description",
+    "vendor",
+    "operating_system",
     "creator",
     "max_processes",
     "credentials",

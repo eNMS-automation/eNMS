@@ -379,12 +379,11 @@ class BaseController:
     def update(self, cls: str, **kwargs: Any) -> dict:
         try:
             instance = factory(cls, **kwargs)
-            Session.commit()
+            Session.flush()
             return instance.serialized
-        except JSONDecodeError:
-            return {"error": "Invalid JSON syntax (JSON field)"}
-        except IntegrityError:
-            return {"error": "An object with the same name already exists"}
+        except Exception as exc:
+            Session.rollback()
+            return {"error": str(exc)}
 
     def log(self, severity: str, content: str) -> None:
         factory(

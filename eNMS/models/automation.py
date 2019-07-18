@@ -571,7 +571,7 @@ class Service(Job):
             match_copy = deepcopy(match)
             for k, v in result.items():
                 if isinstance(v, dict):
-                    self.match_dictionary(v, match_copy)
+                    return self.match_dictionary(v, match_copy)
                 elif k in match_copy and match_copy[k] == v:
                     match_copy.pop(k)
             return not match_copy

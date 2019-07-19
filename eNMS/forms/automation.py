@@ -48,7 +48,7 @@ class JobForm(BaseForm):
     mail_recipient = StringField("Mail Recipients (separated by comma)")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
-    clear_connection_cache = BooleanField("Clear Connection Cache")
+    start_new_connection = BooleanField("Start New Connection")
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     shape = SelectField(

@@ -19,3 +19,12 @@ used to select the job's targets.
 and leaves the workflow in a running state.
 >>> Fixed, now if one of the derived targets does not exist, the base target will fail.
 It collects the names of all invalid devices, not just the first.
+- - concurrent display of a workfow: colors not updated except for the one who ran the workflow >>> fixed.
+- workflow job running not refreshed (wrong job) >>> fixed
+- Can you modify to change/update the timeout for each service when
+the connection is retrieved from the cache? >>> done
+- Also need a new option to 'Start New Connection' for a service instance --
+we need this for services that will change the prompt via config change.
+The cached connection needs to be closed and new connection established based on the new prompt.
+"Start new connection" checkbox that gets a new connection at the start of the service.
+>>> done

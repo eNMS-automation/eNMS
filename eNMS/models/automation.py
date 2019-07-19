@@ -104,7 +104,7 @@ class Job(AbstractBase):
     initial_payload = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     custom_username = Column(String(SMALL_STRING_LENGTH), default="")
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
-    clear_connection_cache = Column(Boolean, default=False)
+    start_new_connection = Column(Boolean, default=False)
 
     @hybrid_property
     def status(self) -> str:
@@ -451,7 +451,7 @@ class Service(Job):
         if getattr(parent, "name", None) in controller.connections_cache["netmiko"]:
             parent_connection = controller.connections_cache["netmiko"].get(parent.name)
             if parent_connection and device.name in parent_connection:
-                if self.clear_connection_cache:
+                if self.start_new_connection:
                     parent_connection.pop(device.name).disconnect()
                 else:
                     try:
@@ -488,7 +488,7 @@ class Service(Job):
             parent_connection = controller.connections_cache["napalm"].get(parent.name)
             if parent_connection and device.name in parent_connection:
                 if (
-                    self.clear_connection_cache
+                    self.start_new_connection
                     or not parent_connection[device.name].is_alive()
                 ):
                     parent_connection.pop(device.name).close()

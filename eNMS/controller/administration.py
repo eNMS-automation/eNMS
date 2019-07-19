@@ -8,6 +8,7 @@ from ldap3 import Connection, NTLM, SUBTREE
 from os import listdir, makedirs, scandir
 from os.path import exists
 from pathlib import Path
+from shutil import rmtree
 from requests import get as http_get
 from tarfile import open as open_tar
 from typing import Any, Tuple, Union
@@ -162,14 +163,18 @@ class AdministrationController(BaseController):
         for workflow in listdir(path / "workflows"):
             if workflow == ".gitkeep" or workflow not in jobs:
                 continue
+            workflow_name = workflow.split(".")[0]
+            with open_tar(path / "workflows" / workflow) as tar_file:
+                tar_file.extractall(path=path / "workflows")
             for instance_type in ("jobs", "workflow", "edges"):
-                path_job = path / "workflows" / workflow / instance_type
+                path_job = path / "workflows" / workflow_name / instance_type
                 for file in scandir(path_job):
                     with open(path_job / file.name, "r") as instance_file:
                         instance = load(instance_file, Loader=BaseLoader)
                         model = instance.pop("type")
                         factory(model, **self.objectify(model, instance))
                 Session.commit()
+            rmtree(path / "workflows" / workflow_name)
 
     def export_job(self, job_id: str) -> None:
         job = fetch("Job", id=job_id)
@@ -197,7 +202,7 @@ class AdministrationController(BaseController):
                     job_as_dict.pop(relation)
                 dump({**job_as_dict, "type": "Workflow"}, file)
             with open_tar(f"{path}.tgz", "w:gz") as tar:
-                tar.add(path, arcname="/")
+                tar.add(path, arcname=job.name)
         else:
             path = self.path / "projects" / "exported_jobs" / "services"
             with open(path / f"{job.name}.yaml", "w") as file:

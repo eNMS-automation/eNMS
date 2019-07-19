@@ -1,6 +1,0 @@
-destination: Test netmiko prompts pass
-name: 54-failure:38->55
-source: Test Netmiko Prompt Service
-subtype: failure
-type: WorkflowEdge
-workflow: Netmiko prompts

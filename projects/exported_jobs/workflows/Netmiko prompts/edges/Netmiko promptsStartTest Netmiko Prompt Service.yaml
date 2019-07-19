@@ -1,6 +1,0 @@
-destination: Test Netmiko Prompt Service
-name: 51-success:1->52
-source: Start
-subtype: success
-type: WorkflowEdge
-workflow: Netmiko prompts

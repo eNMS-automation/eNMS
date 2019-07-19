@@ -207,6 +207,18 @@
         <div class="form-group">
           {{ form.pools(id='workflow-pools', class="form-control add-id") }}
         </div>
+        <fieldset>
+          <div class="item">
+            <input
+              id="workflow-clear_connection_cache"
+              name="clear_connection_cache"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Clear Connection Cache</label>
+          </div>
+        </fieldset>
         <label><label for="yaql_query">YaQL Query (populating will supersede service target in a parent workflow)</label></label>
         <div class="form-group">
           {{ form.yaql_query(id='workflow-yaql_query', class="form-control

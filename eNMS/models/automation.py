@@ -452,7 +452,7 @@ class Service(Job):
             parent_connection = controller.connections_cache["netmiko"].get(parent.name)
             if parent_connection and device.name in parent_connection:
                 if self.clear_connection_cache:
-                    parent_connection.pop(device.name)
+                    parent_connection.pop(device.name).disconnect()
                 else:
                     try:
                         parent_connection[device.name].find_prompt()
@@ -488,7 +488,7 @@ class Service(Job):
                     self.clear_connection_cache
                     or not parent_connection[device.name].is_alive()
                 ):
-                    parent_connection.pop(device.name)
+                    parent_connection.pop(device.name).close()
                 else:
                     return parent_connection[device.name]
         username, password = self.get_credentials(device)

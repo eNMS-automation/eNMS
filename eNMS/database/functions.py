@@ -76,7 +76,7 @@ def factory(cls_name: str, must_be_new=False, **kwargs: Any) -> Any:
         else:
             instance.update(**kwargs)
     else:
-        kwargs["creator"] = current_user.name
+        kwargs["creator"] = getattr(current_user, "name", "admin")
         instance = models[cls_name](**kwargs)
         Session.add(instance)
     return instance

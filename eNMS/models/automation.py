@@ -126,13 +126,10 @@ class Job(AbstractBase):
         if self.yaql_query:
             query = self.sub(self.yaql_query, locals())
             engine = factory.YaqlFactory().create()
-            devices = set()
-            for value in engine(query).evaluate(data=payload):
-                device = fetch(
-                    "Device", allow_none=True, **{self.query_property_type: value}
-                )
-                if device:
-                    devices.add(device)
+            devices = {
+                fetch("Device", **{self.query_property_type: value})
+                for value in engine(query).evaluate(data=payload)
+            }
         else:
             devices = set(self.devices)
             for pool in self.pools:
@@ -358,7 +355,10 @@ class Service(Job):
         current_job = parent or self
         results: dict = {"results": {}, "success": False}
         if self.has_targets and not targets:
-            targets = self.compute_devices(payload)
+            try:
+                targets = self.compute_devices(payload)
+            except Exception as exc:
+                return {"success": False, "error": str(exc)}
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
@@ -701,13 +701,16 @@ class Workflow(Job):
             if self.use_workflow_targets and job.yaql_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
-                    derived_targets = job.compute_devices(payload, base_target)
-                    derived_target_result = job.run(
-                        results["results"], targets=derived_targets, parent=self
-                    )[0]
-                    device_results[base_target.name] = derived_target_result
-                    if not derived_target_result["success"]:
-                        success = False
+                    try:
+                        derived_targets = job.compute_devices(payload, base_target)
+                        derived_target_result = job.run(
+                            results["results"], targets=derived_targets, parent=self
+                        )[0]
+                        device_results[base_target.name] = derived_target_result
+                        if not derived_target_result["success"]:
+                            success = False
+                    except Exception as exc:
+                        device_results[base_target.name] = {"success": False, "error": str(exc)}
                 job_results = {
                     "results": {"devices": device_results},
                     "success": success,

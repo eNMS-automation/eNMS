@@ -13,3 +13,5 @@ used to select the job's targets.
 - rest call service URL length + headers/param + dict match large fields
 - when creating a service, creator is always set to admin
 - services cannot be filtered per OS/vendor
+- remove devices and poools when exporting service or workflow
+- compress exported workflow as tgz archive

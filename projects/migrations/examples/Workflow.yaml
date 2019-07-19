@@ -3,7 +3,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Poll configuration and push to gitlab
   devices: []
   display_only_failed_nodes: true
@@ -18,7 +17,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-17 23:06:03.136798'
+  last_modified: '2019-07-19 11:24:51.801363'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -44,7 +43,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Create and delete a VRF with Netmiko
   devices: []
   display_only_failed_nodes: true
@@ -61,7 +59,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-17 23:06:03.275354'
+  last_modified: '2019-07-19 11:24:51.884351'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -88,7 +86,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Create and delete a VRF with Napalm
   devices:
   - Washington
@@ -106,7 +103,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-17 23:06:03.374452'
+  last_modified: '2019-07-19 11:24:51.966354'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -135,7 +132,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ReST call, Napalm getters, etc
   devices:
   - Washington
@@ -154,7 +150,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-17 23:06:03.505039'
+  last_modified: '2019-07-19 11:24:52.052855'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -183,7 +179,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test YaQL device selection mechanism
   devices:
   - Washington
@@ -206,7 +201,7 @@
   - Iteration_service_simple
   - Iteration_service_yaql
   - Iteration_YaQL_derived_targets
-  last_modified: '2019-07-17 23:06:03.662983'
+  last_modified: '2019-07-19 11:24:52.138750'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -232,7 +227,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the payload extraction and validation mechanisms
   devices:
   - Washington
@@ -250,7 +244,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-17 23:06:03.787246'
+  last_modified: '2019-07-19 11:24:52.220069'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -276,7 +270,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the inner workflow system
   devices:
   - Washington
@@ -293,7 +286,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-17 23:06:03.894348'
+  last_modified: '2019-07-19 11:24:52.292959'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''
@@ -319,7 +312,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Workflow with separate failure / success path
   devices:
   - Austin
@@ -337,7 +329,7 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-17 23:06:03.977986'
+  last_modified: '2019-07-19 11:24:52.413880'
   mail_recipient: ''
   name: Workflow with separate failure / success path
   notification_header: ''
@@ -363,7 +355,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ''
   devices:
   - Washington
@@ -378,6 +369,7 @@
     Chicago:
     - Baltimore
     - Non existing
+    - Non existing2
     Washington:
     - Washington
   jobs:
@@ -386,7 +378,7 @@
   - Device_from_yaql_query
   - netmiko_check_no_vrf_test
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-17 23:06:04.109147'
+  last_modified: '2019-07-19 11:25:25.750841'
   mail_recipient: ''
   name: yaql_query_workflow
   notification_header: ''
@@ -412,7 +404,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ''
   devices:
   - Washington
@@ -429,7 +420,7 @@
   - Test Netmiko Prompt Service
   - Test Netmiko Multiline Validation Service fail
   - Test Netmiko Multiline Validation Service Pass
-  last_modified: '2019-07-18 12:24:26.695039'
+  last_modified: '2019-07-19 11:24:52.574849'
   mail_recipient: ''
   name: 'Netmiko advanced: prompts, multiline, etc'
   notification_header: ''

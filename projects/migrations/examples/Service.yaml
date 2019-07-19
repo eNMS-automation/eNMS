@@ -3,7 +3,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Start point of a workflow
   devices: []
   display_only_failed_nodes: true
@@ -30,9 +29,9 @@
     Napalm_VRF_workflow:
     - '-200'
     - '0'
-    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - -279
-    - -158
+    'Netmiko advanced: prompts, multiline, etc':
+    - '-279'
+    - '-158'
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
@@ -70,7 +69,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: End point of a workflow
   devices: []
   display_only_failed_nodes: true
@@ -97,9 +95,9 @@
     Napalm_VRF_workflow:
     - '200'
     - '0'
-    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 634
-    - 187
+    'Netmiko advanced: prompts, multiline, etc':
+    - '634'
+    - '187'
     Netmiko_VRF_workflow:
     - '200'
     - '0'
@@ -137,7 +135,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Mail notification (service logs)
   devices: []
   display_only_failed_nodes: true
@@ -174,7 +171,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Slack notification (service logs)
   devices: []
   display_only_failed_nodes: true
@@ -211,7 +207,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Mattermost notification (service logs)
   devices: []
   display_only_failed_nodes: true
@@ -248,7 +243,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Monitor eNMS cluster
   devices: []
   display_only_failed_nodes: true
@@ -285,7 +279,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Push configurations to Gitlab
   devices: []
   display_only_failed_nodes: true
@@ -325,7 +318,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Configuration Management Poller
   devices: []
   display_only_failed_nodes: true
@@ -374,7 +366,6 @@
   credentials: device
   custom_integer: 0
   custom_username: ''
-  define_devices_from_payload: false
   description: Example
   devices:
   - Washington
@@ -420,7 +411,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Configure BGP Peering with Napalm
   devices:
   - Washington
@@ -463,7 +453,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
   devices:
@@ -508,7 +497,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
   description: Test the log backup service
@@ -549,7 +537,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
   description: Test the log backup service
@@ -591,7 +578,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test Configuration Management
   devices:
   - Washington
@@ -635,7 +621,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test Configuration Management
   devices:
   - Washington
@@ -679,7 +664,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   description: Create a VRF "test" with Netmiko
   devices:
@@ -735,7 +719,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is configured
@@ -805,7 +788,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   description: Delete VRF "test"
   devices:
@@ -864,7 +846,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is NOT configured
@@ -930,7 +911,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Create a VRF "test" with Napalm
   devices:
   - Washington
@@ -978,7 +958,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Use REST call is_alive
   devices: []
@@ -1038,7 +1017,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: 'Getter: get_facts'
   devices:
   - Washington
@@ -1090,7 +1068,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: 'Getter: get_interfaces'
   devices:
   - Washington
@@ -1142,7 +1119,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: 'Getter: get_interfaces_ip'
   devices:
   - Washington
@@ -1191,7 +1167,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: 'Getter: get_config'
   devices:
   - Washington
@@ -1240,7 +1215,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Process Payload in example workflow
   devices:
   - Washington
@@ -1282,7 +1256,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Add devices to the payload
   devices: []
   display_only_failed_nodes: true
@@ -1336,7 +1309,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: true
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1394,7 +1366,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
@@ -1451,7 +1422,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Show IP route
@@ -1504,7 +1474,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Payload Variables Extraction with Regex/TextFSM
   devices: []
   display_only_failed_nodes: true
@@ -1564,7 +1533,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Dict
   devices: []
@@ -1615,7 +1583,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Text
   devices: []
@@ -1659,7 +1626,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -1706,7 +1672,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1764,7 +1729,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1825,7 +1789,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: true
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1874,13 +1837,176 @@
   waiting_time: 0
   yaql_query: $.{{device.name}}
 - color: '#D2E5FF'
+  command: show vrf a
+  completed: 0
+  confirmation1: Protocols
+  confirmation2: Interfaces
+  confirmation3: bipbipbop
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices:
+  - Washington
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-17 23:50:50.182454'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Test Netmiko Prompt Service
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 1
+  operating_system: ''
+  pools: []
+  positions:
+    'Netmiko advanced: prompts, multiline, etc':
+    - '86'
+    - '-208'
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  response1: show vrf b
+  response2: show vrf c
+  response3: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoPromptsService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  description: ''
+  devices:
+  - Washington
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-18 12:31:10.004870'
+  mail_recipient: ''
+  matches: "\r\n\r\nInterface\r\nbipbipbop\r\n\r\n"
+  max_processes: 50
+  multiprocessing: false
+  name: Test Netmiko Multiline Validation Service fail
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 1
+  operating_system: ''
+  pools: []
+  positions:
+    'Netmiko advanced: prompts, multiline, etc':
+    - '-69'
+    - '122'
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: MultilineNetmikoValidationService
+  use_device_driver: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  description: ''
+  devices:
+  - Washington
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-17 23:39:54.924028'
+  mail_recipient: ''
+  matches: "Protocols\r\n\r\nInterface"
+  max_processes: 50
+  multiprocessing: false
+  name: Test Netmiko Multiline Validation Service Pass
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Netmiko advanced: prompts, multiline, etc':
+    - '456'
+    - '-146'
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: MultilineNetmikoValidationService
+  use_device_driver: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
   completed: 0
   conversion_property: name
   convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the iteration mechanism (Iteration values)
   devices:
   - Washington
@@ -1933,7 +2059,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the iteration mechanism (YaQL values)
   devices: []
   display_only_failed_nodes: true
@@ -1981,7 +2106,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -2029,7 +2153,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -2070,170 +2193,3 @@
   waiting_time: 0
   yaql_query: ''
   yaql_query_values: $.derived_targets.{{device.name}}
-- color: '#D2E5FF'
-  command: show vrf a
-  completed: 0
-  confirmation1: Protocols
-  confirmation2: Interfaces
-  confirmation3: bipbipbop
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  define_devices_from_payload: false
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices:
-  - Washington
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  failed: 0
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-07-17 23:50:50.182454'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: Test Netmiko Prompt Service
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 1
-  operating_system: ''
-  pools: []
-  positions:
-    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 86
-    - -208
-  privileged_mode: false
-  push_to_git: false
-  query_property_type: name
-  response1: show vrf b
-  response2: show vrf c
-  response3: ''
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  time_between_retries: 10
-  timeout: 10
-  type: NetmikoPromptsService
-  use_device_driver: true
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
-  completed: 0
-  creator: admin
-  credentials: device
-  custom_username: ''
-  define_devices_from_payload: false
-  delay_factor: 1.0
-  description: ''
-  devices:
-  - Washington
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  failed: 0
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-07-18 12:31:10.004870'
-  mail_recipient: ''
-  matches: "\r\n\r\nInterface\r\nbipbipbop\r\n\r\n"
-  max_processes: 50
-  multiprocessing: false
-  name: Test Netmiko Multiline Validation Service fail
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 1
-  operating_system: ''
-  pools: []
-  positions:
-    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - -69
-    - 122
-  privileged_mode: false
-  push_to_git: false
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: MultilineNetmikoValidationService
-  use_device_driver: true
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
-  completed: 0
-  creator: admin
-  credentials: device
-  custom_username: ''
-  define_devices_from_payload: false
-  delay_factor: 1.0
-  description: ''
-  devices:
-  - Washington
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  failed: 0
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-07-17 23:39:54.924028'
-  mail_recipient: ''
-  matches: "Protocols\r\n\r\nInterface"
-  max_processes: 50
-  multiprocessing: false
-  name: Test Netmiko Multiline Validation Service Pass
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'Netmiko advanced: prompts, multiline, etc': !!python/tuple
-    - 456
-    - -146
-  privileged_mode: false
-  push_to_git: false
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: MultilineNetmikoValidationService
-  use_device_driver: true
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''

@@ -15,3 +15,7 @@ used to select the job's targets.
 - services cannot be filtered per OS/vendor
 - remove devices and poools when exporting service or workflow
 - compress exported workflow as tgz archive
+- Using a YAQL query to pull devices results in the stacktrace below if the service name is incorrect,
+and leaves the workflow in a running state.
+>>> Fixed, now if one of the derived targets does not exist, the base target will fail.
+It collects the names of all invalid devices, not just the first.

@@ -126,10 +126,15 @@ class Job(AbstractBase):
         if self.yaql_query:
             query = self.sub(self.yaql_query, locals())
             engine = factory.YaqlFactory().create()
-            devices = {
-                fetch("Device", **{self.query_property_type: value})
-                for value in engine(query).evaluate(data=payload)
-            }
+            devices, not_found = set(), set()
+            for value in engine(query).evaluate(data=payload):
+                device = fetch("Device", allow_none=True, **{self.query_property_type: value})
+                if device:
+                    devices.add(device)
+                else:
+                    not_found.add(value)
+            if not_found:
+                raise Exception(f"YaQL query invalid targets: {', '.join(not_found)}")
         else:
             devices = set(self.devices)
             for pool in self.pools:

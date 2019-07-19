@@ -1,0 +1,6 @@
+destination: Device_from_yaql_query
+name: 49-success:1->50
+source: Start
+subtype: success
+type: WorkflowEdge
+workflow: yaql_query_workflow

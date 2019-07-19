@@ -180,6 +180,8 @@ class AdministrationController(BaseController):
             for sub_job in job.jobs:
                 with open(path / "jobs" / f"{sub_job.name}.yaml", "w") as file:
                     sub_job_as_dict = sub_job.to_dict(export=True)
+                    for relation in ("devices", "pools", "events"):
+                        sub_job_as_dict.pop(relation)
                     if sub_job.type == "Workflow":
                         sub_job_as_dict["type"] = "Workflow"
                     dump(sub_job_as_dict, file)
@@ -193,7 +195,10 @@ class AdministrationController(BaseController):
         else:
             path = self.path / "projects" / "exported_jobs" / "services"
             with open(path / f"{job.name}.yaml", "w") as file:
-                dump(job.to_dict(export=True), file)
+                job_as_dict.to_dict(export=True)
+                for relation in ("devices", "pools", "events"):
+                    job_as_dict.pop(relation)
+                dump(job_as_dict, file)
 
     def get_exported_jobs(self) -> list:
         jobs_path = self.path / "projects" / "exported_jobs"

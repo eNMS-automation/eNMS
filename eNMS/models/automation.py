@@ -707,7 +707,6 @@ class Workflow(Job):
             allowed_devices[start_job.name] = targets or self.compute_devices(payload)
         while jobs:
             job = jobs.pop()
-            print("tttt"*500, job)
             if any(
                 node not in visited
                 for node in job.adjacent_jobs(self, "source", "prerequisite")

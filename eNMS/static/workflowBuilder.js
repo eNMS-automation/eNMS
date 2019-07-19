@@ -108,6 +108,7 @@ function switchToWorkflow(workflowId) {
   call(`/get/workflow/${workflowId}`, function(result) {
     workflow = result;
     graph = displayWorkflow(result);
+    getWorkflowState();
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }

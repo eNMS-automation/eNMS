@@ -426,14 +426,9 @@ function getWorkflowState() {
       if (wf.last_modified !== lastModified) {
         displayWorkflow(wf);
       }
-      $("#status").text(`Status: ${wf.is_running ? "Running" : "Idle"}.`);
-      if (wf.id == workflow.id) {
+      if (wf.id == workflow.id && wf.is_running) {
+        $("#status").text("Status: Running");
         if (Object.keys(wf.state).length !== 0) {
-          if (wf.state.current_device) {
-            $("#current-device").text(
-              `Current device: ${wf.state.current_device}.`
-            );
-          }
           if (wf.state.current_job) {
             colorJob(wf.state.current_job.id, "#89CFF0");
             $("#current-job").text(
@@ -451,7 +446,10 @@ function getWorkflowState() {
           $("#current-device,#current-job").empty();
           wf.jobs.forEach((job) => colorJob(job.id, job.color));
         }
-        setTimeout(getWorkflowState, wf.is_running ? 700 : 15000);
+        setTimeout(getWorkflowState, wf.is_running ? 2000 : 15000);
+      } else {
+        $("#status").text("Status: Idle");
+        $("#current-job").empty();
       }
     });
   }

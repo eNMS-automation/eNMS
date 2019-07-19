@@ -455,8 +455,11 @@ class Service(Job):
                     parent_connection.pop(device.name).disconnect()
                 else:
                     try:
-                        parent_connection[device.name].find_prompt()
-                        return parent_connection[device.name]
+                        connection = parent_connection[device.name]
+                        connection.find_prompt()
+                        for property in ("fast_cli", "timeout", "global_delay_factor"):
+                            setattr(connection, property, getattr(self, property))
+                        return connection
                     except (OSError, ValueError):
                         parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
@@ -704,6 +707,7 @@ class Workflow(Job):
             allowed_devices[start_job.name] = targets or self.compute_devices(payload)
         while jobs:
             job = jobs.pop()
+            print("tttt"*500, job)
             if any(
                 node not in visited
                 for node in job.adjacent_jobs(self, "source", "prerequisite")

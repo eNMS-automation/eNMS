@@ -100,11 +100,13 @@ def configure_events() -> None:
                 job.positions[new_name] = job.positions.pop(old_name)
 
     @event.listens_for(Pool, "checkout")
-    def ping_connection(dbapi_connection, connection_record, connection_proxy):
+    def ping_connection(
+        dbapi_connection: Any, connection_record: Any, connection_proxy: Any
+    ) -> None:
         cursor = dbapi_connection.cursor()
         try:
             cursor.execute("SELECT 1")
-        except:
+        except Exception:
             connection_proxy._pool.dispose()
             raise exc.DisconnectionError()
         cursor.close()

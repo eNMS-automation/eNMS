@@ -17,7 +17,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-19 11:24:51.801363'
+  last_modified: '2019-07-19 15:40:08.004153'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -32,6 +32,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: false
@@ -59,7 +60,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-19 11:24:51.884351'
+  last_modified: '2019-07-19 15:40:08.085138'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -75,6 +76,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -103,7 +105,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-19 11:24:51.966354'
+  last_modified: '2019-07-19 15:40:08.175277'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -121,6 +123,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -150,7 +153,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-19 11:24:52.052855'
+  last_modified: '2019-07-19 15:40:08.294894'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -168,6 +171,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -201,7 +205,7 @@
   - Iteration_service_simple
   - Iteration_service_yaql
   - Iteration_YaQL_derived_targets
-  last_modified: '2019-07-19 11:24:52.138750'
+  last_modified: '2019-07-19 15:40:08.374674'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -216,6 +220,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -244,7 +249,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-19 11:24:52.220069'
+  last_modified: '2019-07-19 15:40:08.467576'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -259,6 +264,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -286,7 +292,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-19 11:24:52.292959'
+  last_modified: '2019-07-19 15:40:08.562075'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''
@@ -301,6 +307,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -329,7 +336,7 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-19 11:24:52.413880'
+  last_modified: '2019-07-19 15:40:08.645723'
   mail_recipient: ''
   name: Workflow with separate failure / success path
   notification_header: ''
@@ -344,6 +351,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -378,7 +386,7 @@
   - Device_from_yaql_query
   - netmiko_check_no_vrf_test
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-19 11:25:25.750841'
+  last_modified: '2019-07-19 15:40:08.734523'
   mail_recipient: ''
   name: yaql_query_workflow
   notification_header: ''
@@ -393,6 +401,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -418,11 +427,10 @@
   - Start
   - End
   - Test Netmiko Prompt Service
-  - Test Netmiko Multiline Validation Service fail
-  - Test Netmiko Multiline Validation Service Pass
-  last_modified: '2019-07-19 11:24:52.574849'
+  - Test netmiko prompts pass
+  last_modified: '2019-07-19 15:42:28.142966'
   mail_recipient: ''
-  name: 'Netmiko advanced: prompts, multiline, etc'
+  name: Netmiko prompts
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
@@ -435,6 +443,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true

@@ -237,19 +237,14 @@
   name: 51-success:1->52
   source: Start
   subtype: success
-  workflow: 'Netmiko advanced: prompts, multiline, etc'
-- destination: Test Netmiko Multiline Validation Service fail
-  name: 51-failure:52->53
+  workflow: Netmiko prompts
+- destination: Test netmiko prompts pass
+  name: 54-failure:38->55
   source: Test Netmiko Prompt Service
   subtype: failure
-  workflow: 'Netmiko advanced: prompts, multiline, etc'
+  workflow: Netmiko prompts
 - destination: End
-  name: 51-success:54->2
-  source: Test Netmiko Multiline Validation Service Pass
+  name: 54-success:55->2
+  source: Test netmiko prompts pass
   subtype: success
-  workflow: 'Netmiko advanced: prompts, multiline, etc'
-- destination: Test Netmiko Multiline Validation Service Pass
-  name: 51-failure:53->54
-  source: Test Netmiko Multiline Validation Service fail
-  subtype: failure
-  workflow: 'Netmiko advanced: prompts, multiline, etc'
+  workflow: Netmiko prompts

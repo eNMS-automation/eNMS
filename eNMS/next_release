@@ -1,8 +1,6 @@
 - In Netmiko Prompts, we are not handling the cases where confirmation1,2,3 exists(is provided by user),
 but is not received in the response1,2,3, then in that case, the result/service should fail...
-- New Netmiko Multiline Service where the validation is a simple single line text.
-The user could only use it to chain very simple commands where no complicated logic could be used
-parse response. In this way it would look like the prompt service and keep the form fairly simple.
+>>> should work now, to be tested.
 - Rename YaQL query label, make yaql query a substitution field.
 - Remove "define devices from payload" tickbox: if YaQL query is not empty, it will be
 used to select the job's targets.

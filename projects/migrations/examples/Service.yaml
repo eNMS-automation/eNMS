@@ -12,7 +12,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 23:39:37.300981'
+  last_modified: '2019-07-19 15:41:43.671114'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -29,9 +29,9 @@
     Napalm_VRF_workflow:
     - '-200'
     - '0'
-    'Netmiko advanced: prompts, multiline, etc':
-    - '-279'
-    - '-158'
+    Netmiko prompts: !!python/tuple
+    - -279
+    - -158
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
@@ -59,6 +59,7 @@
   send_notification_method: mail_feedback_notification
   shape: circle
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -78,7 +79,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 23:39:55.160884'
+  last_modified: '2019-07-19 15:41:59.904951'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -95,9 +96,9 @@
     Napalm_VRF_workflow:
     - '200'
     - '0'
-    'Netmiko advanced: prompts, multiline, etc':
-    - '634'
-    - '187'
+    Netmiko prompts: !!python/tuple
+    - 634
+    - 187
     Netmiko_VRF_workflow:
     - '200'
     - '0'
@@ -125,6 +126,7 @@
   send_notification_method: mail_feedback_notification
   shape: circle
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -161,6 +163,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -197,6 +200,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -233,6 +237,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -269,6 +274,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -308,6 +314,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -347,6 +354,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -398,6 +406,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -442,6 +451,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: ConfigureBgpService
   vendor: ''
@@ -487,6 +497,7 @@
   size: 40
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
+  start_new_connection: false
   time_between_retries: 10
   type: GenericFileTransferService
   vendor: ''
@@ -527,6 +538,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: LogBackupService
   vendor: ''
@@ -567,6 +579,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: DatabaseBackupService
   vendor: ''
@@ -609,6 +622,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: NetmikoBackupService
@@ -650,6 +664,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmBackupService
   use_device_driver: true
@@ -700,6 +715,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -770,6 +786,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -827,6 +844,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -894,6 +912,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 1
@@ -943,6 +962,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmConfigurationService
   use_device_driver: true
@@ -1003,6 +1023,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   timeout: 15
   type: RestCallService
@@ -1056,6 +1077,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1107,6 +1129,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1155,6 +1178,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1203,6 +1227,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1246,6 +1271,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -1294,6 +1320,7 @@
     ''Austin'': [''Loopback9'', ''Loopback1000'']})
 
     save_result(True, {})'
+  start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1346,6 +1373,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1402,6 +1430,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1459,6 +1488,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1517,6 +1547,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: PayloadExtractionService
   variable1: simple_variable
@@ -1569,6 +1600,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: dict_included
@@ -1615,6 +1647,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
@@ -1656,6 +1689,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmRollbackService
   use_device_driver: true
@@ -1709,6 +1743,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1769,6 +1804,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1826,6 +1862,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1863,7 +1900,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 23:50:50.182454'
+  last_modified: '2019-07-19 15:41:54.851596'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1875,9 +1912,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Netmiko advanced: prompts, multiline, etc':
-    - '86'
-    - '-208'
+    Netmiko prompts: !!python/tuple
+    - 22
+    - -74
   privileged_mode: false
   push_to_git: false
   query_property_type: name
@@ -1888,115 +1925,12 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: NetmikoPromptsService
   use_device_driver: true
   validation_method: text
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
-  completed: 0
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  description: ''
-  devices:
-  - Washington
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  failed: 0
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-07-18 12:31:10.004870'
-  mail_recipient: ''
-  matches: "\r\n\r\nInterface\r\nbipbipbop\r\n\r\n"
-  max_processes: 50
-  multiprocessing: false
-  name: Test Netmiko Multiline Validation Service fail
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 1
-  operating_system: ''
-  pools: []
-  positions:
-    'Netmiko advanced: prompts, multiline, etc':
-    - '-69'
-    - '122'
-  privileged_mode: false
-  push_to_git: false
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: MultilineNetmikoValidationService
-  use_device_driver: true
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  commands: "show vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf\r\nshow vrf"
-  completed: 0
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  description: ''
-  devices:
-  - Washington
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  failed: 0
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-07-17 23:39:54.924028'
-  mail_recipient: ''
-  matches: "Protocols\r\n\r\nInterface"
-  max_processes: 50
-  multiprocessing: false
-  name: Test Netmiko Multiline Validation Service Pass
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'Netmiko advanced: prompts, multiline, etc':
-    - '456'
-    - '-146'
-  privileged_mode: false
-  push_to_git: false
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: MultilineNetmikoValidationService
-  use_device_driver: true
   vendor: ''
   waiting_time: 0
   yaql_query: ''
@@ -2041,6 +1975,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: IterationService
   user_provided_values:
@@ -2091,6 +2026,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -2138,6 +2074,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 10
+  start_new_connection: false
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -2185,6 +2122,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -2193,3 +2131,63 @@
   waiting_time: 0
   yaql_query: ''
   yaql_query_values: $.derived_targets.{{device.name}}
+- color: '#D2E5FF'
+  command: show vrf
+  completed: 0
+  confirmation1: Protocols
+  confirmation2: Interfaces
+  confirmation3: ''
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-19 15:41:59.683776'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Test netmiko prompts pass
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Netmiko prompts: !!python/tuple
+    - 307
+    - 43
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  response1: show vrf
+  response2: ''
+  response3: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoPromptsService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''

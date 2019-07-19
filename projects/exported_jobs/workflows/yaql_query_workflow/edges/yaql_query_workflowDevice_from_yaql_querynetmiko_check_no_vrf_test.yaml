@@ -1,6 +1,0 @@
-destination: netmiko_check_no_vrf_test
-name: 49-success:50->19
-source: Device_from_yaql_query
-subtype: success
-type: WorkflowEdge
-workflow: yaql_query_workflow

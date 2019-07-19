@@ -1,6 +1,0 @@
-destination: netmiko_check_no_vrf_napalm
-name: 49-failure:50->36
-source: Device_from_yaql_query
-subtype: failure
-type: WorkflowEdge
-workflow: yaql_query_workflow

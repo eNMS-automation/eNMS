@@ -191,11 +191,14 @@ class AdministrationController(BaseController):
                     edge = {**edge.to_dict(export=True), "type": "WorkflowEdge"}
                     dump(edge, file)
             with open(path / "workflow" / f"{job.name}.yaml", "w") as file:
-                dump({**job.to_dict(export=True), "type": "Workflow"}, file)
+                job_as_dict = job.to_dict(export=True)
+                for relation in ("devices", "pools", "events"):
+                    job_as_dict.pop(relation)
+                dump({**job_as_dict, "type": "Workflow"}, file)
         else:
             path = self.path / "projects" / "exported_jobs" / "services"
             with open(path / f"{job.name}.yaml", "w") as file:
-                job_as_dict.to_dict(export=True)
+                job_as_dict = job.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)
                 dump(job_as_dict, file)

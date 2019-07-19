@@ -1,6 +1,0 @@
-destination: End
-name: 49-failure:36->2
-source: netmiko_check_no_vrf_napalm
-subtype: failure
-type: WorkflowEdge
-workflow: yaql_query_workflow

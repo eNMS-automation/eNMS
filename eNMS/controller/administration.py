@@ -9,6 +9,7 @@ from os import listdir, makedirs, scandir
 from os.path import exists
 from pathlib import Path
 from requests import get as http_get
+from tarfile import open as open_tar
 from typing import Any, Tuple, Union
 from yaml import dump, load, BaseLoader
 
@@ -195,6 +196,8 @@ class AdministrationController(BaseController):
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)
                 dump({**job_as_dict, "type": "Workflow"}, file)
+            with open_tar(f"{path}.tgz", "w:gz") as tar:
+                tar.add(path, arcname="/")
         else:
             path = self.path / "projects" / "exported_jobs" / "services"
             with open(path / f"{job.name}.yaml", "w") as file:

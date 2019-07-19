@@ -1,0 +1,6 @@
+destination: End
+name: 54-success:55->2
+source: Test netmiko prompts pass
+subtype: success
+type: WorkflowEdge
+workflow: Netmiko prompts

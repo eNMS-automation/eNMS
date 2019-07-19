@@ -104,6 +104,7 @@ class Job(AbstractBase):
     initial_payload = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     custom_username = Column(String(SMALL_STRING_LENGTH), default="")
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
+    clear_connection_cache = Column(Boolean, default=False)
 
     @hybrid_property
     def status(self) -> str:
@@ -128,7 +129,9 @@ class Job(AbstractBase):
             engine = factory.YaqlFactory().create()
             devices, not_found = set(), set()
             for value in engine(query).evaluate(data=payload):
-                device = fetch("Device", allow_none=True, **{self.query_property_type: value})
+                device = fetch(
+                    "Device", allow_none=True, **{self.query_property_type: value}
+                )
                 if device:
                     devices.add(device)
                 else:
@@ -448,11 +451,14 @@ class Service(Job):
         if getattr(parent, "name", None) in controller.connections_cache["netmiko"]:
             parent_connection = controller.connections_cache["netmiko"].get(parent.name)
             if parent_connection and device.name in parent_connection:
-                try:
-                    parent_connection[device.name].find_prompt()
-                    return parent_connection[device.name]
-                except (OSError, ValueError):
+                if self.clear_connection_cache:
                     parent_connection.pop(device.name)
+                else:
+                    try:
+                        parent_connection[device.name].find_prompt()
+                        return parent_connection[device.name]
+                    except (OSError, ValueError):
+                        parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
         netmiko_connection = ConnectHandler(
             device_type=(
@@ -478,10 +484,13 @@ class Service(Job):
         if getattr(parent, "name", None) in controller.connections_cache["napalm"]:
             parent_connection = controller.connections_cache["napalm"].get(parent.name)
             if parent_connection and device.name in parent_connection:
-                if parent_connection[device.name].is_alive():
-                    return parent_connection[device.name]
-                else:
+                if (
+                    self.clear_connection_cache
+                    or not parent_connection[device.name].is_alive()
+                ):
                     parent_connection.pop(device.name)
+                else:
+                    return parent_connection[device.name]
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:
@@ -715,7 +724,10 @@ class Workflow(Job):
                         if not derived_target_result["success"]:
                             success = False
                     except Exception as exc:
-                        device_results[base_target.name] = {"success": False, "error": str(exc)}
+                        device_results[base_target.name] = {
+                            "success": False,
+                            "error": str(exc),
+                        }
                 job_results = {
                     "results": {"devices": device_results},
                     "success": success,

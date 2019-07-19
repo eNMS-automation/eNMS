@@ -1,13 +1,4 @@
-from sqlalchemy import (
-    Boolean,
-    Column,
-    Float,
-    ForeignKey,
-    Integer,
-    PickleType,
-    String,
-    Text,
-)
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import HiddenField

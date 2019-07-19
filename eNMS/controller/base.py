@@ -377,7 +377,7 @@ class BaseController:
 
     def update(self, cls: str, **kwargs: Any) -> dict:
         try:
-            must_be_new = kwargs["id"] == ""
+            must_be_new = kwargs.get("id") == ""
             instance = factory(cls, must_be_new=must_be_new, **kwargs)
             Session.flush()
             return instance.serialized

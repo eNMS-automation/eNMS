@@ -7,7 +7,7 @@ from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path
 from re import search, sub
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from eNMS.concurrency import threaded_job
 from eNMS.controller.base import BaseController
@@ -185,9 +185,9 @@ class AutomationController(BaseController):
     def scheduler_action(self, action: str) -> None:
         getattr(self.scheduler, action)()
 
-    def task_action(self, action: str, task_id: int) -> None:
+    def task_action(self, action: str, task_id: int) -> Optional[dict]:
         try:
-            getattr(fetch("Task", id=task_id), action)()
+            return getattr(fetch("Task", id=task_id), action)()
         except JobLookupError:
             return {"error": "This task no longer exists."}
 

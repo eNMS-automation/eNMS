@@ -4,6 +4,7 @@ from os import environ
 class DefaultConfig:
     MODE = "default"
     DEBUG = True
+    JSON_SORT_KEYS = False
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
     WTF_CSRF_TIME_LIMIT = None
     ERROR_404_HELP = False

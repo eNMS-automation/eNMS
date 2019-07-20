@@ -312,16 +312,17 @@ class Service(Job):
             "info",
             f"Running {self.type} {f'on {device.name}.' if device else '.'}",
         )
+        results = {"timestamp": runtime}
         try:
             if device:
-                results = self.job(payload, device, parent)
+                results.update(self.job(payload, device, parent))
             else:
-                results = self.job(payload, parent)
+                results.update(self.job(payload, parent))
         except Exception:
-            results = {
+            results.update({
                 "success": False,
                 "result": chr(10).join(format_exc().splitlines()),
-            }
+            })
         self.log(
             parent,
             "info",
@@ -387,7 +388,7 @@ class Service(Job):
         parent_timestamp: Optional[str] = None,
         *other: Any,
     ) -> dict:
-        results: dict = {"results": {}, "success": False}
+        results: dict = {"results": {}, "success": False, "timestamp": runtime}
         if self.has_targets and not targets:
             try:
                 targets = self.compute_devices(payload)
@@ -730,7 +731,7 @@ class Workflow(Job):
         self.state = {"jobs": {}}
         jobs: list = start_points or [self.jobs[0]]
         visited: Set = set()
-        results: dict = {"results": payload or {}, "success": False}
+        results: dict = {"results": payload or {}, "success": False, "timestamp": runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
             initial_targets = targets or self.compute_devices(payload)

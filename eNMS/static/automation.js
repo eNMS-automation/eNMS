@@ -152,15 +152,7 @@ function formatResults(results, id, formId) {
     );
   } else {
     $(`#display_results-${formId}`).html(
-      `<pre>${JSON.stringify(
-        Object.fromEntries(
-          Object.entries(results)
-            .sort()
-            .reverse()
-        ),
-        null,
-        2
-      )
+      `<pre>${JSON.stringify(results, null, 2)
         .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
         .replace(/\\"/g, `"`)
         .replace(/\\\\/g, "\\")}</pre>`

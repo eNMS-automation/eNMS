@@ -1,5 +1,6 @@
 from apscheduler.jobstores.base import JobLookupError
 from collections import defaultdict
+from collections.abc import Iterable
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
@@ -171,9 +172,13 @@ class AutomationController(BaseController):
         elif not device:
             request["device_id"] = id
         results = fetch("Result", allow_none=True, **request)
+        if isinstance(results, Iterable):
+            results.sort(key=attrgetter("timestamp"))
         if not results:
             return None
-        if device == "all":
+        if device == "all" and job == "all":
+            return {result.name: result.result for result in results}
+        elif device == "all":
             return {
                 result.device_name: result.result
                 for result in results
@@ -183,8 +188,6 @@ class AutomationController(BaseController):
             return {
                 result.job_name: result.result for result in results if result.job_id
             }
-        elif device == "all" and job == "all":
-            return {result.name: result.result for result in results}
         else:
             return results.result
 

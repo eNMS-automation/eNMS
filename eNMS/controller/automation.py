@@ -5,6 +5,7 @@ from difflib import SequenceMatcher
 from flask import request, session
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from operator import attrgetter
 from pathlib import Path
 from re import search, sub
 from subprocess import PIPE, Popen
@@ -127,15 +128,21 @@ class AutomationController(BaseController):
     def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         defaults = [("global", "Global Result"), ("all", "All jobs")]
-        return defaults + list(
-            set(
-                (result.job_id, result.job_name)
-                for result in fetch(
+        print(fetch(
                     "Result",
                     parent_timestamp=kw.get(f"timestamp{comp}"),
                     allow_none=True,
                     all_matches=True,
-                )
+                ))
+        return defaults + list(
+            dict.fromkeys(
+                (result.job_id, result.job_name)
+                for result in sorted(fetch(
+                    "Result",
+                    parent_timestamp=kw.get(f"timestamp{comp}"),
+                    allow_none=True,
+                    all_matches=True,
+                ), key=attrgetter("timestamp"))
                 if result.job_id
             )
         )
@@ -198,7 +205,9 @@ class AutomationController(BaseController):
 
     def restart_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
         workflow = fetch("Workflow", id=workflow_id)
-        payload = fetch("Result", job_id=workflow_id, timestamp=kwargs["payload_version"]).result["results"]
+        payload = fetch(
+            "Result", job_id=workflow_id, timestamp=kwargs["payload_version"]
+        ).result["results"]
         payload_jobs = set(payload) & set(kwargs["payloads_to_include"])
         payload = {k: payload[k] for k in payload if k in payload_jobs}
         if workflow.is_running:

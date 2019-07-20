@@ -37,7 +37,12 @@ from yaql import factory as yaql_factory
 
 from eNMS.concurrency import device_thread
 from eNMS.controller import controller
-from eNMS.database import LARGE_STRING_LENGTH, Session, SMALL_STRING_LENGTH
+from eNMS.database import (
+    CustomMediumBlobPickle,
+    LARGE_STRING_LENGTH,
+    Session,
+    SMALL_STRING_LENGTH,
+)
 from eNMS.database.functions import factory, fetch
 from eNMS.database.associations import (
     job_device_table,
@@ -170,6 +175,7 @@ class Job(AbstractBase):
                 devices |= set(pool.devices)
             self.number_of_targets = len(devices)
             Session.commit()
+        print(self, devices)
         return devices
 
     def adjacent_jobs(
@@ -729,6 +735,7 @@ class Workflow(Job):
         if self.use_workflow_targets:
             initial_targets = targets or self.compute_devices(payload)
             for job in jobs:
+                print(job, initial_targets)
                 allowed_devices[job.name] = initial_targets
         while jobs:
             job = jobs.pop()
@@ -746,7 +753,10 @@ class Workflow(Job):
                     try:
                         derived_targets = job.compute_devices(payload, base_target)
                         derived_target_result = job.run(
-                            results["results"], targets=derived_targets, parent=self, parent_timestamp=parent_timestamp,
+                            results["results"],
+                            targets=derived_targets,
+                            parent=self,
+                            parent_timestamp=parent_timestamp,
                         )[0]
                         device_results[base_target.name] = derived_target_result
                         if not derived_target_result["success"]:
@@ -764,8 +774,12 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     job, allowed_devices, results["results"]
                 )
+                print(job, valid_devices)
                 job_results = job.run(
-                    results["results"], targets=valid_devices, parent=self, parent_timestamp=parent_timestamp,
+                    results["results"],
+                    targets=valid_devices,
+                    parent=self,
+                    parent_timestamp=parent_timestamp,
                 )[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

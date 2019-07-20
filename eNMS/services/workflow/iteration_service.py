@@ -6,6 +6,7 @@ from wtforms import BooleanField, HiddenField, SelectField, StringField
 from yaql import factory
 
 from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database.functions import fetch
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField, SubstitutionField
 from eNMS.models.automation import Job, Service
@@ -27,6 +28,8 @@ class IterationService(Service):
     )
     yaql_query_values = Column(String(SMALL_STRING_LENGTH), default="")
     user_provided_values = Column(MutableDict.as_mutable(PickleType), default={})
+    convert_values_to_devices = Column(Boolean, default=False)
+    conversion_property = Column(String(SMALL_STRING_LENGTH), default="name")
     variable_name = Column(String(SMALL_STRING_LENGTH), default="value")
 
     __mapper_args__ = {"polymorphic_identity": "IterationService"}
@@ -48,11 +51,36 @@ class IterationService(Service):
         else:
             query = self.sub(self.yaql_query_values, locals())
             values = factory.YaqlFactory().create()(query).evaluate(data=payload)
-        results = {
-            value: self.iterated_job.job({self.variable_name: value, **payload}, device)
-            for value in values
-        }
-        return {"success": True, "Iteration values": values, **results}
+        if self.convert_values_to_devices:
+            fail_results, devices = {}, set()
+            for value in values:
+                device = fetch(
+                    "Device", allow_none=True, **{self.conversion_property: value}
+                )
+                if not device:
+                    fail_results[value] = {
+                        "result": "Error: no corresponding device",
+                        "success": False,
+                    }
+                else:
+                    devices.add(device)
+            results = self.iterated_job.run(
+                payload=payload, targets=devices, parent=parent or self
+            )[0]
+            if fail_results:
+                results["results"]["devices"].update(fail_results)
+                results["success"] = False
+            success = results["success"]
+        else:
+            results, success = {}, True
+            for value in values:
+                result = self.iterated_job.job(
+                    {self.variable_name: value, **payload}, device
+                )
+                results[value] = result
+                if not result["success"]:
+                    success = False
+        return {"success": success, "Iteration values": values, **results}
 
 
 class IterationForm(ServiceForm):
@@ -71,6 +99,11 @@ class IterationForm(ServiceForm):
     )
     yaql_query_values = SubstitutionField(
         "Iteration Values for Iteration: YaQL query on the payload"
+    )
+    convert_values_to_devices = BooleanField("Convert values to devices")
+    conversion_property = SelectField(
+        "Property used for the conversion to devices",
+        choices=(("name", "Name"), ("ip_address", "IP address")),
     )
     variable_name = StringField("Iteration Variable Name")
     iterated_job = InstanceField("Job to run for each Value", instance_type="Job")

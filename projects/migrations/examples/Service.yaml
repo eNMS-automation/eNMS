@@ -3,7 +3,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Start point of a workflow
   devices: []
   display_only_failed_nodes: true
@@ -13,7 +12,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:13.267126'
+  last_modified: '2019-07-19 15:41:43.671114'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -30,6 +29,9 @@
     Napalm_VRF_workflow:
     - '-200'
     - '0'
+    Netmiko prompts: !!python/tuple
+    - -279
+    - -158
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
@@ -48,12 +50,16 @@
     payload_transfer_workflow:
     - '-200'
     - '0'
+    yaql_query_workflow:
+    - '-164'
+    - '15'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   shape: circle
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -64,7 +70,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: End point of a workflow
   devices: []
   display_only_failed_nodes: true
@@ -74,7 +79,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:13.321547'
+  last_modified: '2019-07-19 15:41:59.904951'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -91,6 +96,9 @@
     Napalm_VRF_workflow:
     - '200'
     - '0'
+    Netmiko prompts: !!python/tuple
+    - 634
+    - 187
     Netmiko_VRF_workflow:
     - '200'
     - '0'
@@ -109,12 +117,16 @@
     payload_transfer_workflow:
     - '500'
     - '0'
+    yaql_query_workflow:
+    - '651'
+    - '20'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   shape: circle
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -125,7 +137,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Mail notification (service logs)
   devices: []
   display_only_failed_nodes: true
@@ -152,6 +163,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -162,7 +174,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Slack notification (service logs)
   devices: []
   display_only_failed_nodes: true
@@ -189,6 +200,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -199,7 +211,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Mattermost notification (service logs)
   devices: []
   display_only_failed_nodes: true
@@ -226,6 +237,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -236,7 +248,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Monitor eNMS cluster
   devices: []
   display_only_failed_nodes: true
@@ -263,6 +274,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -273,7 +285,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Push configurations to Gitlab
   devices: []
   display_only_failed_nodes: true
@@ -303,6 +314,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -313,7 +325,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Configuration Management Poller
   devices: []
   display_only_failed_nodes: true
@@ -343,6 +354,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -362,7 +374,6 @@
   credentials: device
   custom_integer: 0
   custom_username: ''
-  define_devices_from_payload: false
   description: Example
   devices:
   - Washington
@@ -395,6 +406,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -408,7 +420,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Configure BGP Peering with Napalm
   devices:
   - Washington
@@ -440,6 +451,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: ConfigureBgpService
   vendor: ''
@@ -451,7 +463,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
   devices:
@@ -486,6 +497,7 @@
   size: 40
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
+  start_new_connection: false
   time_between_retries: 10
   type: GenericFileTransferService
   vendor: ''
@@ -496,7 +508,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
   description: Test the log backup service
@@ -527,6 +538,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: LogBackupService
   vendor: ''
@@ -537,7 +549,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_archive: true
   delete_folder: true
   description: Test the log backup service
@@ -568,6 +579,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: DatabaseBackupService
   vendor: ''
@@ -579,7 +591,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test Configuration Management
   devices:
   - Washington
@@ -611,6 +622,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: NetmikoBackupService
@@ -623,7 +635,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test Configuration Management
   devices:
   - Washington
@@ -653,6 +664,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmBackupService
   use_device_driver: true
@@ -667,7 +679,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   description: Create a VRF "test" with Netmiko
   devices:
@@ -683,14 +694,14 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.190608'
+  last_modified: '2019-07-17 16:20:45.768306'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_create_vrf_test
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
@@ -704,6 +715,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -723,7 +735,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is configured
@@ -741,7 +752,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.261026'
+  last_modified: '2019-07-17 17:05:05.312147'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -749,7 +760,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
@@ -765,6 +776,9 @@
     YaQL_test_worflow:
     - '147'
     - '-14'
+    yaql_query_workflow:
+    - '414'
+    - '-154'
   privileged_mode: false
   push_to_git: false
   query_property_type: ip_address
@@ -772,6 +786,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -790,7 +805,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   description: Delete VRF "test"
   devices:
@@ -806,14 +820,14 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.338284'
+  last_modified: '2019-07-17 16:20:47.676246'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_delete_vrf_test
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
@@ -830,6 +844,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -849,7 +864,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is NOT configured
@@ -867,7 +881,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.416249'
+  last_modified: '2019-07-17 17:06:43.703337'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -875,7 +889,7 @@
   negative_logic: true
   notification_header: ''
   number_of_retries: 2
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
@@ -888,6 +902,9 @@
     Workflow with separate failure / success path:
     - '52'
     - '-2'
+    yaql_query_workflow:
+    - '337'
+    - '-145'
   privileged_mode: false
   push_to_git: false
   query_property_type: ip_address
@@ -895,6 +912,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 1
@@ -912,7 +930,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Create a VRF "test" with Napalm
   devices:
   - Washington
@@ -924,14 +941,14 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.476818'
+  last_modified: '2019-07-17 16:09:49.035721'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: napalm_create_vrf_test
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: eos
   optional_args: {}
   pools: []
@@ -945,6 +962,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmConfigurationService
   use_device_driver: true
@@ -960,7 +978,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Use REST call is_alive
   devices: []
@@ -973,7 +990,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.520356'
+  last_modified: '2019-07-16 00:47:56.918114'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -983,7 +1000,8 @@
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  params: {}
+  params:
+    verify: 'false'
   payload:
     a: b
     c:
@@ -1005,6 +1023,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   timeout: 15
   type: RestCallService
@@ -1019,7 +1038,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: 'Getter: get_facts'
   devices:
   - Washington
@@ -1034,7 +1052,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.583874'
+  last_modified: '2019-07-17 16:09:34.480417'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1042,7 +1060,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1059,6 +1077,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1071,7 +1090,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: 'Getter: get_interfaces'
   devices:
   - Washington
@@ -1086,7 +1104,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.645938'
+  last_modified: '2019-07-17 16:09:43.900174'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1094,7 +1112,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1111,6 +1129,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1123,7 +1142,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: 'Getter: get_interfaces_ip'
   devices:
   - Washington
@@ -1138,7 +1156,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.698744'
+  last_modified: '2019-07-17 16:09:37.962595'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1146,7 +1164,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1160,6 +1178,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1172,7 +1191,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: 'Getter: get_config'
   devices:
   - Washington
@@ -1187,7 +1205,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.755156'
+  last_modified: '2019-07-17 16:09:41.474516'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1195,7 +1213,7 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1209,6 +1227,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1221,7 +1240,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Process Payload in example workflow
   devices:
   - Washington
@@ -1233,14 +1251,14 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.814025'
+  last_modified: '2019-07-17 16:09:41.728236'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: process_payload1
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: ''
   pools: []
   positions:
@@ -1253,6 +1271,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -1263,7 +1282,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Add devices to the payload
   devices: []
   display_only_failed_nodes: true
@@ -1273,7 +1291,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:14.857147'
+  last_modified: '2019-07-17 01:31:19.040112'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1302,6 +1320,7 @@
     ''Austin'': [''Loopback9'', ''Loopback1000'']})
 
     save_result(True, {})'
+  start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1317,7 +1336,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: true
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1355,6 +1373,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1375,7 +1394,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
@@ -1412,6 +1430,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1432,7 +1451,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Show IP route
@@ -1470,6 +1488,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1485,7 +1504,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Payload Variables Extraction with Regex/TextFSM
   devices: []
   display_only_failed_nodes: true
@@ -1529,6 +1547,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: PayloadExtractionService
   variable1: simple_variable
@@ -1545,7 +1564,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Dict
   devices: []
@@ -1582,6 +1600,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: dict_included
@@ -1596,7 +1615,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delete_spaces_before_matching: false
   description: Payload Validate Text
   devices: []
@@ -1629,6 +1647,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
@@ -1640,7 +1659,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -1671,6 +1689,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: NapalmRollbackService
   use_device_driver: true
@@ -1687,7 +1706,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1703,7 +1721,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:15.237643'
+  last_modified: '2019-07-17 16:09:49.406275'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1725,6 +1743,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1745,7 +1764,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1761,7 +1779,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:15.274768'
+  last_modified: '2019-07-17 17:06:42.695141'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1776,6 +1794,9 @@
     Napalm_VRF_workflow:
     - '9'
     - '139'
+    yaql_query_workflow:
+    - '245'
+    - '32'
   privileged_mode: false
   push_to_git: false
   query_property_type: name
@@ -1783,6 +1804,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1793,12 +1815,132 @@
   vendor: ''
   waiting_time: 0
   yaql_query: ''
-- color: '#D2E5FF'
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show vrf
   completed: 0
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-17 17:06:41.065700'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: true
+  name: Device_from_yaql_query
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    yaql_query_workflow:
+    - '-5'
+    - '-147'
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: $.{{device.name}}
+- color: '#D2E5FF'
+  command: show vrf a
+  completed: 0
+  confirmation1: Protocols
+  confirmation2: Interfaces
+  confirmation3: bipbipbop
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices:
+  - Washington
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-19 15:41:54.851596'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Test Netmiko Prompt Service
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 1
+  operating_system: ''
+  pools: []
+  positions:
+    Netmiko prompts: !!python/tuple
+    - 22
+    - -74
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  response1: show vrf b
+  response2: show vrf c
+  response3: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoPromptsService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  completed: 0
+  conversion_property: name
+  convert_values_to_devices: false
+  creator: admin
+  credentials: device
+  custom_username: ''
   description: Test the iteration mechanism (Iteration values)
   devices:
   - Washington
@@ -1812,7 +1954,7 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-11 13:51:15.363239'
+  last_modified: '2019-07-17 01:31:21.764382'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1825,14 +1967,15 @@
   pools: []
   positions:
     YaQL_test_worflow:
-    - '-293'
-    - '92'
+    - '-342'
+    - '2'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: IterationService
   user_provided_values:
@@ -1846,10 +1989,11 @@
   yaql_query_values: ''
 - color: '#D2E5FF'
   completed: 0
+  conversion_property: name
+  convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the iteration mechanism (YaQL values)
   devices: []
   display_only_failed_nodes: true
@@ -1861,7 +2005,7 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-11 13:51:15.441585'
+  last_modified: '2019-07-17 01:31:25.323382'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1874,14 +2018,15 @@
   pools: []
   positions:
     YaQL_test_worflow:
-    - '195'
-    - '124'
+    - '-358'
+    - '192'
   push_to_git: false
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -1892,10 +2037,11 @@
   yaql_query_values: $.variables.iteration_devices.{{device.name}}
 - color: '#D2E5FF'
   completed: 0
+  conversion_property: name
+  convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -1928,6 +2074,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 10
+  start_new_connection: false
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -1936,3 +2083,111 @@
   waiting_time: 0
   yaql_query: ''
   yaql_query_values: $.netmiko_check_vrf_test.results.devices.{{device.name}}.match
+- color: '#D2E5FF'
+  completed: 0
+  conversion_property: name
+  convert_values_to_devices: true
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  failed: 0
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iterated_job: netmiko_check_vrf_test
+  iterated_job_id: 17
+  last_modified: '2019-07-17 01:31:26.262754'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Iteration_YaQL_derived_targets
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  origin_of_values: yaql_query
+  pools: []
+  positions:
+    YaQL_test_worflow:
+    - '84'
+    - '131'
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  time_between_retries: 10
+  type: IterationService
+  user_provided_values: {}
+  variable_name: ''
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+  yaql_query_values: $.derived_targets.{{device.name}}
+- color: '#D2E5FF'
+  command: show vrf
+  completed: 0
+  confirmation1: Protocols
+  confirmation2: Interfaces
+  confirmation3: ''
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-19 15:41:59.683776'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Test netmiko prompts pass
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Netmiko prompts: !!python/tuple
+    - 307
+    - 43
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  response1: show vrf
+  response2: ''
+  response3: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoPromptsService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''

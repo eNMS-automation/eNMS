@@ -1,3 +1,4 @@
+from ast import literal_eval
 from flask_wtf import FlaskForm
 from json import loads
 from json.decoder import JSONDecodeError
@@ -45,9 +46,9 @@ class DictField(StringField):
 
     def pre_validate(self, form: FlaskForm) -> bool:
         try:
-            result = loads(self.data)
-        except JSONDecodeError:
-            raise ValidationError("Invalid JSON dictionary.")
+            result = literal_eval(self.data)
+        except Exception:
+            raise ValidationError("Invalid dictionary.")
         if not isinstance(result, dict):
             raise ValidationError("This field only accepts dictionaries.")
         return True

@@ -1,10 +1,14 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import HiddenField
 from yaql import factory
 
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import (
+    CustomMediumBlobPickle,
+    LARGE_STRING_LENGTH,
+    SMALL_STRING_LENGTH,
+)
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import ValidationForm
@@ -23,7 +27,7 @@ class PayloadValidationService(Service):
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
+    dict_match = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
 

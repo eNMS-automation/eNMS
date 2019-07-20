@@ -62,7 +62,7 @@ def get_requests_sink(_: str) -> Response:
 
 
 @blueprint.route("/login", methods=["GET", "POST"])
-def login() -> Response:
+def login() -> Any:
     if request.method == "POST":
         try:
             user = controller.authenticate_user(**request.form.to_dict())
@@ -95,21 +95,19 @@ def logout() -> Response:
 
 @blueprint.route("/administration")
 @monitor_requests
-def administration() -> dict:
-    jobs_path = current_app.path / "projects" / "exported_jobs"
+def administration() -> str:
     return render_template(
         f"pages/administration.html",
         **{
             "endpoint": "administration",
             "folders": listdir(current_app.path / "projects" / "migrations"),
-            "jobs": listdir(jobs_path / "services") + listdir(jobs_path / "workflows"),
         },
     )
 
 
 @blueprint.route("/dashboard")
 @monitor_requests
-def dashboard() -> dict:
+def dashboard() -> str:
     return render_template(
         f"pages/dashboard.html",
         **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
@@ -118,7 +116,7 @@ def dashboard() -> dict:
 
 @blueprint.route("/table/<table_type>")
 @monitor_requests
-def table(table_type: str) -> dict:
+def table(table_type: str) -> str:
     kwargs = {
         "endpoint": f"table/{table_type}",
         "properties": table_properties[table_type],
@@ -138,7 +136,7 @@ def table(table_type: str) -> dict:
 
 @blueprint.route("/view/<view_type>")
 @monitor_requests
-def view(view_type: str) -> dict:
+def view(view_type: str) -> str:
     return render_template(
         f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
     )
@@ -146,7 +144,7 @@ def view(view_type: str) -> dict:
 
 @blueprint.route("/workflow_builder")
 @monitor_requests
-def workflow_builder() -> dict:
+def workflow_builder() -> str:
     workflow = fetch("Workflow", allow_none=True, id=session.get("workflow", None))
     service_table_form = ServiceTableForm(request.form)
     service_table_form.services.choices = sorted(
@@ -166,13 +164,13 @@ def workflow_builder() -> dict:
 
 @blueprint.route("/calendar")
 @monitor_requests
-def calendar() -> dict:
+def calendar() -> str:
     return render_template(f"pages/calendar.html", **{"endpoint": "calendar"})
 
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
-def form(form_type: str) -> dict:
+def form(form_type: str) -> str:
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",
         **{

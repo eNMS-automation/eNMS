@@ -13,7 +13,6 @@ from importlib import import_module
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
 from json import load as json_load
-from json.decoder import JSONDecodeError
 from ldap3 import ALL, Server
 from logging import (
     basicConfig,
@@ -169,6 +168,7 @@ class BaseController:
         "get_configurations",
         "get_configuration_diff",
         "get_device_logs",
+        "get_exported_jobs",
         "get_git_content",
         "get_job_logs",
         "get_job_results",
@@ -408,13 +408,15 @@ class BaseController:
 
     def update(self, cls: str, **kwargs: Any) -> dict:
         try:
-            instance = factory(cls, **kwargs)
-            Session.commit()
+            must_be_new = kwargs.get("id") == ""
+            instance = factory(cls, must_be_new=must_be_new, **kwargs)
+            Session.flush()
             return instance.serialized
-        except JSONDecodeError:
-            return {"error": "Invalid JSON syntax (JSON field)"}
-        except IntegrityError:
-            return {"error": "An object with the same name already exists"}
+        except Exception as exc:
+            Session.rollback()
+            if isinstance(exc, IntegrityError):
+                return {"error": (f"There already is a {cls} with the same name")}
+            return {"error": str(exc)}
 
     def log(self, severity: str, content: str) -> None:
         factory(

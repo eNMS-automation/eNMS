@@ -3,7 +3,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Poll configuration and push to gitlab
   devices: []
   display_only_failed_nodes: true
@@ -18,7 +17,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-11 13:51:15.830066'
+  last_modified: '2019-07-19 15:40:08.004153'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -33,6 +32,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: false
@@ -44,7 +44,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Create and delete a VRF with Netmiko
   devices: []
   display_only_failed_nodes: true
@@ -61,7 +60,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-11 13:51:15.976792'
+  last_modified: '2019-07-19 15:40:08.085138'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -77,6 +76,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -88,7 +88,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Create and delete a VRF with Napalm
   devices:
   - Washington
@@ -106,7 +105,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-11 13:51:16.123506'
+  last_modified: '2019-07-19 15:40:08.175277'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -124,6 +123,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -135,7 +135,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: ReST call, Napalm getters, etc
   devices:
   - Washington
@@ -154,7 +153,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-11 13:51:16.278485'
+  last_modified: '2019-07-19 15:40:08.294894'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -172,6 +171,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -183,7 +183,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test YaQL device selection mechanism
   devices:
   - Washington
@@ -193,14 +192,20 @@
   has_targets: true
   hidden: false
   include_link_in_summary: true
-  initial_payload: {}
+  initial_payload:
+    derived_targets:
+      Washington:
+      - Washington
+      - Baltimore
+      - Fake device
   jobs:
   - Start
   - End
   - add_devices_to_payload
   - Iteration_service_simple
   - Iteration_service_yaql
-  last_modified: '2019-07-11 13:51:16.377412'
+  - Iteration_YaQL_derived_targets
+  last_modified: '2019-07-19 15:40:08.374674'
   mail_recipient: ''
   name: YaQL_test_worflow
   notification_header: ''
@@ -215,6 +220,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -226,7 +232,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the payload extraction and validation mechanisms
   devices:
   - Washington
@@ -244,7 +249,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-11 13:51:16.484598'
+  last_modified: '2019-07-19 15:40:08.467576'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -259,6 +264,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -270,7 +276,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Test the inner workflow system
   devices:
   - Washington
@@ -287,7 +292,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-11 13:51:16.587237'
+  last_modified: '2019-07-19 15:40:08.562075'
   mail_recipient: ''
   name: Workflow_of_workflows
   notification_header: ''
@@ -302,6 +307,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -313,7 +319,6 @@
   creator: admin
   credentials: device
   custom_username: ''
-  define_devices_from_payload: false
   description: Workflow with separate failure / success path
   devices:
   - Austin
@@ -331,7 +336,7 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-11 13:51:16.718029'
+  last_modified: '2019-07-19 15:40:08.645723'
   mail_recipient: ''
   name: Workflow with separate failure / success path
   notification_header: ''
@@ -346,6 +351,99 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_new_connection: false
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices:
+  - Washington
+  - Chicago
+  display_only_failed_nodes: false
+  events: []
+  failed: 0
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload:
+    Chicago:
+    - Baltimore
+    - Non existing
+    - Non existing2
+    Washington:
+    - Washington
+  jobs:
+  - Start
+  - End
+  - Device_from_yaql_query
+  - netmiko_check_no_vrf_test
+  - netmiko_check_no_vrf_napalm
+  last_modified: '2019-07-19 15:40:08.734523'
+  mail_recipient: ''
+  name: yaql_query_workflow
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 2
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: true
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices:
+  - Washington
+  display_only_failed_nodes: false
+  events: []
+  failed: 0
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  jobs:
+  - Start
+  - End
+  - Test Netmiko Prompt Service
+  - Test netmiko prompts pass
+  last_modified: '2019-07-19 15:42:28.142966'
+  mail_recipient: ''
+  name: Netmiko prompts
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 1
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true

@@ -1,8 +1,10 @@
-from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
+from flask_login import current_user
+from sqlalchemy import Boolean, event, exc, Float, inspect, Integer, PickleType
 from sqlalchemy.engine.base import Connection
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.orm.mapper import Mapper
+from sqlalchemy.pool import Pool
 from sqlalchemy.types import JSON
 from typing import Any
 
@@ -104,3 +106,15 @@ def configure_events() -> None:
     @event.listens_for(Job.name, "set", propagate=True)
     def job_name_update(job: Base, new_name: str, old_name: str, *args: Any) -> None:
         controller.configure_logger(new_name)
+
+    @event.listens_for(Pool, "checkout")
+    def ping_connection(
+        dbapi_connection: Any, connection_record: Any, connection_proxy: Any
+    ) -> None:
+        cursor = dbapi_connection.cursor()
+        try:
+            cursor.execute("SELECT 1")
+        except Exception:
+            connection_proxy._pool.dispose()
+            raise exc.DisconnectionError()
+        cursor.close()

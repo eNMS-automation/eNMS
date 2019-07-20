@@ -106,7 +106,6 @@ class Job(AbstractBase):
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
     )
-    define_devices_from_payload = Column(Boolean, default=False)
     yaql_query = Column(String(SMALL_STRING_LENGTH), default="")
     query_property_type = Column(String(SMALL_STRING_LENGTH), default="ip_address")
     devices = relationship("Device", secondary=job_device_table, back_populates="jobs")
@@ -123,9 +122,10 @@ class Job(AbstractBase):
     shape = Column(String(SMALL_STRING_LENGTH), default="box")
     size = Column(Integer, default=40)
     color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
-    initial_payload = Column(MutableDict.as_mutable(PickleType), default={})
+    initial_payload = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     custom_username = Column(String(SMALL_STRING_LENGTH), default="")
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
+    start_new_connection = Column(Boolean, default=False)
     results = relationship("Result", back_populates="job")
 
     def __init__(self, **kwargs: Any) -> None:
@@ -147,13 +147,23 @@ class Job(AbstractBase):
         else:
             return "N/A"
 
-    def compute_devices(self, payload: Optional[dict] = None) -> Set["Device"]:
-        if self.define_devices_from_payload:
-            engine = yaql_factory.YaqlFactory().create()
-            devices = {
-                fetch("Device", **{self.query_property_type: value})
-                for value in engine(self.yaql_query).evaluate(data=payload)
-            }
+    def compute_devices(
+        self, payload: Optional[dict], device: Optional["Device"] = None
+    ) -> Set["Device"]:
+        if self.yaql_query:
+            query = self.sub(self.yaql_query, locals())
+            engine = factory.YaqlFactory().create()
+            devices, not_found = set(), set()
+            for value in engine(query).evaluate(data=payload):
+                device = fetch(
+                    "Device", allow_none=True, **{self.query_property_type: value}
+                )
+                if device:
+                    devices.add(device)
+                else:
+                    not_found.add(value)
+            if not_found:
+                raise Exception(f"YaQL query invalid targets: {', '.join(not_found)}")
         else:
             devices = set(self.devices)
             for pool in self.pools:
@@ -373,7 +383,10 @@ class Service(Job):
     ) -> dict:
         results: dict = {"results": {}, "success": False}
         if self.has_targets and not targets:
-            targets = self.compute_devices(payload)
+            try:
+                targets = self.compute_devices(payload)
+            except Exception as exc:
+                return {"success": False, "error": str(exc)}
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
@@ -459,11 +472,17 @@ class Service(Job):
         if getattr(parent, "name", None) in controller.connections_cache["netmiko"]:
             parent_connection = controller.connections_cache["netmiko"].get(parent.name)
             if parent_connection and device.name in parent_connection:
-                try:
-                    parent_connection[device.name].find_prompt()
-                    return parent_connection[device.name]
-                except ValueError:
-                    parent_connection.pop(device.name)
+                if self.start_new_connection:
+                    parent_connection.pop(device.name).disconnect()
+                else:
+                    try:
+                        connection = parent_connection[device.name]
+                        connection.find_prompt()
+                        for property in ("fast_cli", "timeout", "global_delay_factor"):
+                            setattr(connection, property, getattr(self, property))
+                        return connection
+                    except (OSError, ValueError):
+                        parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
         netmiko_connection = ConnectHandler(
             device_type=(
@@ -489,10 +508,13 @@ class Service(Job):
         if getattr(parent, "name", None) in controller.connections_cache["napalm"]:
             parent_connection = controller.connections_cache["napalm"].get(parent.name)
             if parent_connection and device.name in parent_connection:
-                if parent_connection[device.name].is_alive():
-                    return parent_connection[device.name]
+                if (
+                    self.start_new_connection
+                    or not parent_connection[device.name].is_alive()
+                ):
+                    parent_connection.pop(device.name).close()
                 else:
-                    parent_connection.pop(device.name)
+                    return parent_connection[device.name]
         username, password = self.get_credentials(device)
         optional_args = self.optional_args
         if not optional_args:
@@ -587,7 +609,7 @@ class Service(Job):
             match_copy = deepcopy(match)
             for k, v in result.items():
                 if isinstance(v, dict):
-                    self.match_dictionary(v, match_copy)
+                    return self.match_dictionary(v, match_copy)
                 elif k in match_copy and match_copy[k] == v:
                     match_copy.pop(k)
             return not match_copy
@@ -718,15 +740,33 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            valid_devices = self.compute_valid_devices(
-                job, allowed_devices, results["results"]
-            )
-            job_results, _ = job.run(
-                results["results"],
-                targets=valid_devices,
-                parent=self,
-                parent_timestamp=parent_timestamp,
-            )
+            if self.use_workflow_targets and job.yaql_query:
+                device_results, success = {}, True
+                for base_target in allowed_devices[job.name]:
+                    try:
+                        derived_targets = job.compute_devices(payload, base_target)
+                        derived_target_result = job.run(
+                            results["results"], targets=derived_targets, parent=self, parent_timestamp=parent_timestamp,
+                        )[0]
+                        device_results[base_target.name] = derived_target_result
+                        if not derived_target_result["success"]:
+                            success = False
+                    except Exception as exc:
+                        device_results[base_target.name] = {
+                            "success": False,
+                            "error": str(exc),
+                        }
+                job_results = {
+                    "results": {"devices": device_results},
+                    "success": success,
+                }
+            else:
+                valid_devices = self.compute_valid_devices(
+                    job, allowed_devices, results["results"]
+                )
+                job_results = job.run(
+                    results["results"], targets=valid_devices, parent=self, parent_timestamp=parent_timestamp,
+                )[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:
                 successors = self.workflow_targets_processing(

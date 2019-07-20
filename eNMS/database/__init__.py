@@ -29,6 +29,7 @@ def session_factory() -> Any:
         ),
         convert_unicode=True,
         pool_pre_ping=True,
+        pool_recycle=3600,
         **kwargs
     )
     return engine, scoped_session(sessionmaker(autoflush=False, bind=engine))

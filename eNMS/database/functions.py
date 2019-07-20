@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from flask_login import current_user
 from logging import info
 from re import search
 from sqlalchemy import func
@@ -70,8 +71,12 @@ def factory(cls_name: str, **kwargs: Any) -> Any:
     elif "name" in kwargs:
         instance = fetch(cls_name, allow_none=True, name=kwargs["name"])
     if instance:
-        instance.update(**kwargs)
+        if kwargs.get("must_be_new"):
+            raise Exception(f"There already is a {cls_name} with the same name.")
+        else:
+            instance.update(**kwargs)
     else:
+        kwargs["creator"] = getattr(current_user, "name", "admin")
         instance = models[cls_name](**kwargs)
         Session.add(instance)
     return instance

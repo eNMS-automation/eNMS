@@ -69,3 +69,7 @@ It seems more natural to edit the service when it's double clicked.  What do you
 >>> Done.
 
 - Bug fixes
+
+- Improvement import/export workflow system
+
+- Fix for "MySQL server has gone away"

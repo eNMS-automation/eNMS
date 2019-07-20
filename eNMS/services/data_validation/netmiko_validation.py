@@ -1,18 +1,13 @@
-from sqlalchemy import (
-    Boolean,
-    Column,
-    Float,
-    ForeignKey,
-    Integer,
-    PickleType,
-    String,
-    Text,
-)
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import BooleanField, HiddenField, StringField
+from wtforms import BooleanField, HiddenField
 
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database import (
+    CustomMediumBlobPickle,
+    LARGE_STRING_LENGTH,
+    SMALL_STRING_LENGTH,
+)
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm, ValidationForm
@@ -32,7 +27,7 @@ class NetmikoValidationService(Service):
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
     content_match = Column(Text(LARGE_STRING_LENGTH), default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict.as_mutable(PickleType), default={})
+    dict_match = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
     driver = Column(String(SMALL_STRING_LENGTH), default="")
@@ -52,6 +47,7 @@ class NetmikoValidationService(Service):
         netmiko_connection = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
         self.log(parent, "info", f"Sending '{command}' on {device.name} (Netmiko)")
+        expect_string = self.sub(self.expect_string, locals())
         result = self.convert_result(
             netmiko_connection.send_command(
                 command,
@@ -78,7 +74,7 @@ class NetmikoValidationService(Service):
 class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="NetmikoValidationService")
     command = SubstitutionField()
-    expect_string = StringField()
+    expect_string = SubstitutionField()
     auto_find_prompt = BooleanField(default=True)
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)

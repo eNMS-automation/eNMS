@@ -21,6 +21,12 @@ from eNMS.forms.fields import (
 )
 
 
+class DeviceAutomationForm(BaseForm):
+    template = "device_automation"
+    form_type = HiddenField(default="device_automation")
+    jobs = MultipleInstanceField("Jobs", instance_type="Job")
+
+
 class JobForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="job")
@@ -28,8 +34,7 @@ class JobForm(BaseForm):
     type = StringField("Service Type")
     name = StringField("Name")
     description = StringField("Description")
-    define_devices_from_payload = BooleanField("Define Devices from Payload")
-    yaql_query = StringField("YaQL Query")
+    yaql_query = SubstitutionField("YaQL Query")
     query_property_type = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
@@ -51,6 +56,7 @@ class JobForm(BaseForm):
     mail_recipient = StringField("Mail Recipients (separated by comma)")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
+    start_new_connection = BooleanField("Start New Connection")
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     shape = SelectField(

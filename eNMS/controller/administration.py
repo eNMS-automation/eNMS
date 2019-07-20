@@ -7,7 +7,9 @@ from ldap3 import Connection, NTLM, SUBTREE
 from os import listdir, makedirs, scandir
 from os.path import exists
 from pathlib import Path
+from shutil import rmtree
 from requests import get as http_get
+from tarfile import open as open_tar
 from typing import Any, Tuple, Union
 from yaml import dump, load, BaseLoader
 
@@ -120,7 +122,11 @@ class AdministrationController(BaseController):
                         Session.commit()
                     except Exception as e:
                         info(f"{str(obj)} could not be imported ({str(e)})")
+                        if cls in ("Service", "Workflow"):
+                            Session.commit()
                         status = "Partial import (see logs)."
+                    if cls not in ("Service", "Workflow"):
+                        Session.commit()
         for name, jobs in workflow_jobs.items():
             fetch("Workflow", name=name).jobs = [
                 fetch("Job", name=name) for name in jobs
@@ -147,14 +153,18 @@ class AdministrationController(BaseController):
         for workflow in listdir(path / "workflows"):
             if workflow == ".gitkeep" or workflow not in jobs:
                 continue
+            workflow_name = workflow.split(".")[0]
+            with open_tar(path / "workflows" / workflow) as tar_file:
+                tar_file.extractall(path=path / "workflows")
             for instance_type in ("jobs", "workflow", "edges"):
-                path_job = path / "workflows" / workflow / instance_type
+                path_job = path / "workflows" / workflow_name / instance_type
                 for file in scandir(path_job):
                     with open(path_job / file.name, "r") as instance_file:
                         instance = load(instance_file, Loader=BaseLoader)
                         model = instance.pop("type")
                         factory(model, **self.objectify(model, instance))
                 Session.commit()
+            rmtree(path / "workflows" / workflow_name)
 
     def export_job(self, job_id: str) -> None:
         job = fetch("Job", id=job_id)
@@ -166,6 +176,8 @@ class AdministrationController(BaseController):
             for sub_job in job.jobs:
                 with open(path / "jobs" / f"{sub_job.name}.yaml", "w") as file:
                     sub_job_as_dict = sub_job.to_dict(export=True)
+                    for relation in ("devices", "pools", "events"):
+                        sub_job_as_dict.pop(relation)
                     if sub_job.type == "Workflow":
                         sub_job_as_dict["type"] = "Workflow"
                     dump(sub_job_as_dict, file)
@@ -175,11 +187,23 @@ class AdministrationController(BaseController):
                     edge = {**edge.to_dict(export=True), "type": "WorkflowEdge"}
                     dump(edge, file)
             with open(path / "workflow" / f"{job.name}.yaml", "w") as file:
-                dump({**job.to_dict(export=True), "type": "Workflow"}, file)
+                job_as_dict = job.to_dict(export=True)
+                for relation in ("devices", "pools", "events"):
+                    job_as_dict.pop(relation)
+                dump({**job_as_dict, "type": "Workflow"}, file)
+            with open_tar(f"{path}.tgz", "w:gz") as tar:
+                tar.add(path, arcname=job.name)
         else:
             path = self.path / "projects" / "exported_jobs" / "services"
             with open(path / f"{job.name}.yaml", "w") as file:
-                dump(job.to_dict(export=True), file)
+                job_as_dict = job.to_dict(export=True)
+                for relation in ("devices", "pools", "events"):
+                    job_as_dict.pop(relation)
+                dump(job_as_dict, file)
+
+    def get_exported_jobs(self) -> list:
+        jobs_path = self.path / "projects" / "exported_jobs"
+        return listdir(jobs_path / "services") + listdir(jobs_path / "workflows")
 
     def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:
         self.update_parameters(**kwargs)

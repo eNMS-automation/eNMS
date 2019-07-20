@@ -5,7 +5,6 @@ call: false
 createPanel: false
 fCall: false
 folders: false
-jobs: false
 page: false
 showPanel: false
 table: false
@@ -176,17 +175,27 @@ function migrationsImport() {
 }
 
 /**
- * Open Import Jobs Panel.
+ * Refresh Exported Job
  */
-// eslint-disable-next-line
-function showImportJobsPanel() {
-  showPanel("import_jobs", null, () => {
+function refreshExportedJobs() {
+  call("/get_exported_jobs", function(jobs) {
     let list = document.getElementById("jobs_to_import");
     jobs.forEach((item) => {
       let option = document.createElement("option");
       option.textContent = option.value = item;
       list.appendChild(option);
     });
+    $("#jobs_to_import").selectpicker("refresh");
+  });
+}
+
+/**
+ * Open Import Jobs Panel.
+ */
+// eslint-disable-next-line
+function showImportJobsPanel() {
+  showPanel("import_jobs", null, () => {
+    refreshExportedJobs();
   });
 }
 

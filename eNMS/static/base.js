@@ -33,6 +33,7 @@ const panelSize = {
   database_migration: "700 300",
   device: "700 500",
   device_filtering: "700 600",
+  device_results: "1200 700",
   event_filtering: "700 400",
   excel_import: "400 150",
   excel_export: "400 150",
@@ -51,7 +52,7 @@ const panelSize = {
   pool_filtering: "700 500",
   pool_objects: "700 550",
   restart_workflow: "700 500",
-  results: "1000 700",
+  service_results: "1200 700",
   server: "600 250",
   server_filtering: "700 450",
   service: "1000 600",
@@ -64,6 +65,7 @@ const panelSize = {
   view: "700 300",
   workflow: "1000 600",
   workflow_filtering: "1000 600",
+  workflow_results: "1200 700",
 };
 
 const panelName = {

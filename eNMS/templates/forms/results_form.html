@@ -8,25 +8,27 @@
   {{ form.compare(class="form-control add-id", style="display:none;") }}
   <div class="modal-body">
     <button
-    style="background:transparent; border:none; color:transparent; width: 20vw;"
+    style="background:transparent; border:none; color:transparent; width: 10vw;"
   >
       {{ form.view_type(class="form-control add-id") }}
     </button>
     {% if form_type != "device_results" %}
       <button
-      style="background:transparent; border:none; color:transparent; width: 20vw;"
+      style="background:transparent; border:none; color:transparent; width: 10vw;"
     >
         {{ form.success_type(class="form-control add-id") }}
       </button>
     {% endif %}
-    <button
-      type="button"
-      class="btn btn-default btn-file btn-id"
-      value="clearResults"
-      style="width:20%;"
-    >
-      Clear
-    </button>
+    {% if form_type != "device_results" %}
+      <button
+        type="button"
+        class="btn btn-default btn-file btn-id"
+        value="clearResults"
+        style="width:20%;"
+      >
+        Clear
+      </button>
+      {% endif %}
     <button
       type="button"
       class="btn btn-default btn-file btn-id"

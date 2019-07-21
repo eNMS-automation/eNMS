@@ -49,12 +49,21 @@
             </span>
           </a>
         </li>
+        <li>
+          <a href="#step-5">
+            <span class="step_no">5</span>
+            <span class="step_descr"
+              >Step 5<br />
+              <small>Workflow</small>
+            </span>
+          </a>
+        </li>
         {% if form_type != "workflow" %}
           <li>
-            <a href="#step-5">
-              <span class="step_no">5</span>
+            <a href="#step-6">
+              <span class="step_no">6</span>
               <span class="step_descr"
-                >Step 5<br />
+                >Step 6<br />
                 <small>Specific</small>
               </span>
             </a>
@@ -89,20 +98,6 @@
           <div class="form-group">
             {{ form.operating_system(id=form_type + '-operating_system',
             class="form-control add-id") }}
-          </div>
-          <label><label for="shape">Shape</label></label>
-          <div class="form-group">
-            {{ form.shape(id=form_type + '-shape', class="form-control add-id")
-            }}
-          </div>
-          <label><label for="color">Color</label></label>
-          <div class="form-group">
-            {{ form.color(id=form_type + '-color', class="form-control add-id")
-            }}
-          </div>
-          <label><label for="size">Size</label></label>
-          <div class="form-group">
-            {{ form.size(id=form_type + '-size', class="form-control add-id") }}
           </div>
         </div>
       </div>
@@ -189,13 +184,6 @@
           {{ form.time_between_retries(id=form_type + '-time_between_retries',
           class="form-control add-id") }}
         </div>
-        <label
-          ><label for="waiting_time">Waiting time (in seconds)</label></label
-        >
-        <div class="form-group">
-          {{ form.waiting_time(id=form_type + '-waiting_time',
-          class="form-control add-id") }}
-        </div>
         <fieldset>
           <div class="item">
             <input
@@ -232,35 +220,6 @@
         <label><label for="pools">Pools</label></label>
         <div class="form-group">
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
-        </div>
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-start_new_connection"
-              name="start_new_connection"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Start New Connection</label>
-          </div>
-        </fieldset>
-        <label
-          ><label for="yaql_query"
-            >YaQL Query (populating will supersede service target in a parent
-            workflow)</label
-          ></label
-        >
-        <div class="form-group">
-          {{ form.yaql_query(id=form_type + '-yaql_query', class="form-control
-          add-id") }}
-        </div>
-        <label
-          ><label for="query_property_type">Query Property Type</label></label
-        >
-        <div class="form-group">
-          {{ form.query_property_type(id=form_type + '-query_property_type',
-          class="form-control add-id") }}
         </div>
         {% if form_type != "workflow" %}
           <fieldset>
@@ -299,8 +258,60 @@
           </div>
         {% endif %}
       </div>
+      <div id="step-5">
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-start_new_connection"
+              name="start_new_connection"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Start New Connection</label>
+          </div>
+        </fieldset>
+        <label
+          ><label for="yaql_query"
+            >YaQL Query (populating will supersede service target in a parent
+            workflow)</label
+          ></label
+        >
+        <div class="form-group">
+          {{ form.yaql_query(id=form_type + '-yaql_query', class="form-control
+          add-id") }}
+        </div>
+        <label
+          ><label for="query_property_type">Query Property Type</label></label
+        >
+        <div class="form-group">
+          {{ form.query_property_type(id=form_type + '-query_property_type',
+          class="form-control add-id") }}
+        </div>
+        <label
+          ><label for="waiting_time">Waiting time (in seconds)</label></label
+        >
+        <div class="form-group">
+          {{ form.waiting_time(id=form_type + '-waiting_time',
+          class="form-control add-id") }}
+        </div>
+        <label><label for="shape">Shape</label></label>
+        <div class="form-group">
+          {{ form.shape(id=form_type + '-shape', class="form-control add-id")
+          }}
+        </div>
+        <label><label for="color">Color</label></label>
+        <div class="form-group">
+          {{ form.color(id=form_type + '-color', class="form-control add-id")
+          }}
+        </div>
+        <label><label for="size">Size</label></label>
+        <div class="form-group">
+          {{ form.size(id=form_type + '-size', class="form-control add-id") }}
+        </div>
+      </div>
       {% if form_type != "workflow" %}
-        <div id="step-5" style="height: 100%">
+        <div id="step-6" style="height: 100%">
           {% set groups = form.groups or {"Parameters": form.service_fields} %}
           <div
             class="accordion"

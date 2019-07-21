@@ -36,7 +36,7 @@
             <span class="step_no">3</span>
             <span class="step_descr"
               >Step 3<br />
-              <small>Advanced</small>
+              <small>Devices</small>
             </span>
           </a>
         </li>
@@ -45,25 +45,16 @@
             <span class="step_no">4</span>
             <span class="step_descr"
               >Step 4<br />
-              <small>Devices</small>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="#step-5">
-            <span class="step_no">5</span>
-            <span class="step_descr"
-              >Step 5<br />
               <small>Workflow</small>
             </span>
           </a>
         </li>
         {% if form_type != "workflow" %}
           <li>
-            <a href="#step-6">
-              <span class="step_no">6</span>
+            <a href="#step-5">
+              <span class="step_no">5</span>
               <span class="step_descr"
-                >Step 6<br />
+                >Step 5<br />
                 <small>Specific</small>
               </span>
             </a>
@@ -99,6 +90,37 @@
             {{ form.operating_system(id=form_type + '-operating_system',
             class="form-control add-id") }}
           </div>
+          <label><label for="initial_payload">Initial Payload</label></label>
+          <div class="form-group">
+            {{ form.initial_payload(id=form_type + '-initial_payload',
+            class="form-control add-id") }}
+          </div>
+          <label><label for="number_of_retries">Number of retries</label></label>
+          <div class="form-group">
+            {{ form.number_of_retries(id=form_type + '-number_of_retries',
+            class="form-control add-id") }}
+          </div>
+          <label
+            ><label for="time_between_retries"
+              >Time between retries (in seconds)</label
+            ></label
+          >
+          <div class="form-group">
+            {{ form.time_between_retries(id=form_type + '-time_between_retries',
+            class="form-control add-id") }}
+          </div>
+          <fieldset>
+            <div class="item">
+              <input
+                id="{{ form_type }}-push_to_git"
+                name="push_to_git"
+                class="add-id"
+                type="checkbox"
+                value="y"
+              />
+              <label>Push to git</label>
+            </div>
+          </fieldset>
         </div>
       </div>
       <div id="step-2">
@@ -165,39 +187,6 @@
         </fieldset>
       </div>
       <div id="step-3">
-        <label><label for="initial_payload">Initial Payload</label></label>
-        <div class="form-group">
-          {{ form.initial_payload(id=form_type + '-initial_payload',
-          class="form-control add-id") }}
-        </div>
-        <label><label for="number_of_retries">Number of retries</label></label>
-        <div class="form-group">
-          {{ form.number_of_retries(id=form_type + '-number_of_retries',
-          class="form-control add-id") }}
-        </div>
-        <label
-          ><label for="time_between_retries"
-            >Time between retries (in seconds)</label
-          ></label
-        >
-        <div class="form-group">
-          {{ form.time_between_retries(id=form_type + '-time_between_retries',
-          class="form-control add-id") }}
-        </div>
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-push_to_git"
-              name="push_to_git"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Push to git</label>
-          </div>
-        </fieldset>
-      </div>
-      <div id="step-4">
         {% if form_type == "workflow" %}
           <fieldset>
             <div class="item">
@@ -258,7 +247,7 @@
           </div>
         {% endif %}
       </div>
-      <div id="step-5">
+      <div id="step-4">
         <fieldset>
           <div class="item">
             <input
@@ -311,7 +300,7 @@
         </div>
       </div>
       {% if form_type != "workflow" %}
-        <div id="step-6" style="height: 100%">
+        <div id="step-5" style="height: 100%">
           {% set groups = form.groups or {"Parameters": form.service_fields} %}
           <div
             class="accordion"

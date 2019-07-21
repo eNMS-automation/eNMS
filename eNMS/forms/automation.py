@@ -22,7 +22,7 @@ from eNMS.forms.fields import (
 
 
 class JobForm(BaseForm):
-    template = "object"
+    template = "job"
     form_type = HiddenField(default="job")
     id = HiddenField()
     type = StringField("Service Type")
@@ -85,7 +85,6 @@ class JobForm(BaseForm):
 
 
 class ServiceForm(JobForm):
-    template = "service"
     form_type = HiddenField(default="service")
     credentials = SelectField(
         "Credentials",
@@ -102,7 +101,6 @@ class ServiceForm(JobForm):
 
 
 class WorkflowForm(JobForm):
-    template = "workflow"
     form_type = HiddenField(default="workflow")
     use_workflow_targets = BooleanField("Use Workflow Targets")
 

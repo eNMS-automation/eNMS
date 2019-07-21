@@ -12,11 +12,13 @@
   >
       {{ form.view_type(class="form-control add-id") }}
     </button>
-    <button
-    style="background:transparent; border:none; color:transparent; width: 10vw;"
-  >
-      {{ form.success_type(class="form-control add-id") }}
-    </button>
+    {% if form_type != "device_results" %}
+      <button
+      style="background:transparent; border:none; color:transparent; width: 10vw;"
+    >
+        {{ form.success_type(class="form-control add-id") }}
+      </button>
+    {% endif %}
     <button
       type="button"
       class="btn btn-default btn-file btn-id"
@@ -71,17 +73,19 @@
             </td>
           </tr>
         {% endif %}
-        <tr>
-          <td>
-            Device
-          </td>
-          <td>
-            {{ form.device(class="form-control add-id") }}
-          </td>
-          <td>
-            {{ form.device_compare(class="form-control add-id") }}
-          </td>
-        </tr>
+        {% if form_type != "device_results" %}
+          <tr>
+            <td>
+              Device
+            </td>
+            <td>
+              {{ form.device(class="form-control add-id") }}
+            </td>
+            <td>
+              {{ form.device_compare(class="form-control add-id") }}
+            </td>
+          </tr>
+        {% endif %}
       </tbody>
     </table>
     <hr />

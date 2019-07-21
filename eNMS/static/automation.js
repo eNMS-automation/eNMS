@@ -191,7 +191,8 @@ function getTimestamps(id, type) {
     const mostRecent = timestamps[timestamps.length - 1];
     $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
     $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
-    if (timestamps) {
+    if (timestamps && type != "device") {
+      console.log(type);
       updateDeviceList(id, id, true);
       if (type == "workflow" || type == "device") updateJobList(id, type, true);
     }

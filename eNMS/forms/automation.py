@@ -113,29 +113,40 @@ class WorkflowForm(JobForm):
     use_workflow_targets = BooleanField("Use Workflow Targets")
 
 
-class CompareResultsForm(BaseForm):
+class ResultsForm(BaseForm):
     template = "results"
-    form_type = HiddenField(default="service_results")
     compare = BooleanField(default=False)
     view_type = SelectField(
         "View", choices=(("text", "Display as text"), ("json", "Display as JSON"), ("compare", "Compare both versions"))
     )
+    timestamp = NoValidationSelectField("Version", choices=())
+    timestamp_compare = NoValidationSelectField("Version", choices=())
+
+
+class ServiceResultsForm(ResultsForm):
+    form_type = HiddenField(default="service_results")
     success_type = SelectField(
         "View", choices=(("all", "All results"), ("success", "Successful results"), ("failure", "Failed results"))
     )
-    timestamp = NoValidationSelectField("Version", choices=())
     device = NoValidationSelectField(
         "Device", choices=(("global", "Global Result"), ("all", "All devices"))
     )
-    timestamp_compare = NoValidationSelectField("Version", choices=())
     device_compare = NoValidationSelectField(
         "Device", choices=(("global", "Global Result"), ("all", "All devices"))
     )
 
 
-class CompareWorkflowResultsForm(CompareResultsForm):
+class WorkflowResultsForm(ResultsForm):
     form_type = HiddenField(default="workflow_results")
-    compare = BooleanField(default=False)
+    success_type = SelectField(
+        "View", choices=(("all", "All results"), ("success", "Successful results"), ("failure", "Failed results"))
+    )
+    device = NoValidationSelectField(
+        "Device", choices=(("global", "Global Result"), ("all", "All devices"))
+    )
+    device_compare = NoValidationSelectField(
+        "Device", choices=(("global", "Global Result"), ("all", "All devices"))
+    )
     job = NoValidationSelectField(
         "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
     )
@@ -144,15 +155,8 @@ class CompareWorkflowResultsForm(CompareResultsForm):
     )
 
 
-class CompareDeviceResultsForm(BaseForm):
-    template = "device_results"
+class DeviceResultsForm(BaseForm):
     form_type = HiddenField(default="device_results")
-    compare = BooleanField(default=False)
-    view_type = SelectField(
-        "View", choices=(("text", "Display as text"), ("json", "Display as JSON"), ("compare", "Compare both versions"))
-    )
-    timestamp = NoValidationSelectField("Version", choices=())
-    timestamp_compare = NoValidationSelectField("Version", choices=())
     job = NoValidationSelectField(
         "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
     )

@@ -8,6 +8,11 @@
   {{ form.compare(class="form-control add-id", style="display:none;") }}
   <div class="modal-body">
     <button
+    style="background:transparent; border:none; color:transparent; width: 10vw;"
+  >
+      {{ form.view_type(class="form-control add-id") }}
+    </button>
+    <button
       type="button"
       class="btn btn-default btn-file btn-id"
       value="clearResults"
@@ -17,16 +22,11 @@
     </button>
     <button
       type="button"
-      class="btn btn-primary btn-file btn-id"
+      class="btn btn-default btn-file btn-id"
       value="copyResultsToClipboard"
       style="width:20%;"
     >
       Copy to clipboard
-    </button>
-    <button
-    style="background:transparent; border:none; color:transparent; width: 10vw;"
-  >
-      {{ form.view_type(class="form-control add-id") }}
     </button>
     <hr />
     <table

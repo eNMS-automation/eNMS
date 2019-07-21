@@ -376,7 +376,7 @@ function preprocessForm(panel, id, type, duplicate) {
     } else {
       $(el).attr("onclick", type ? `${el.value}("${type}")` : `${el.value}()`);
     }
-  });
+  });     
 }
 
 /**
@@ -467,7 +467,6 @@ function updateProperty(el, property, value, type) {
   } else if (
     ["list", "multiselect", "object", "object-list"].includes(propertyType)
   ) {
-    console.log(property, value)
     try {
       el.selectpicker("deselectAll");
     } catch {
@@ -758,7 +757,6 @@ function initSidebar() {
       const scroll = $(window)[scrollDir]();
       const menu = $(settings.menuSelector)[direction]();
       let position = mouse + scroll;
-      // opening menu would pass the side of the page
       if (mouse + menu > win && menu < mouse) {
         position -= menu;
       }

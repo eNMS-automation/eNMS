@@ -21,12 +21,6 @@ from eNMS.forms.fields import (
 )
 
 
-class DeviceAutomationForm(BaseForm):
-    template = "device_automation"
-    form_type = HiddenField(default="device_automation")
-    jobs = MultipleInstanceField("Jobs", instance_type="Job")
-
-
 class JobForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="job")
@@ -115,6 +109,7 @@ class WorkflowForm(JobForm):
 
 class ResultsForm(BaseForm):
     template = "results"
+    form_type = HiddenField(default="results")
     compare = BooleanField(default=False)
     view_type = SelectField(
         "View", choices=(("text", "Display as text"), ("json", "Display as JSON"), ("compare", "Compare both versions"))
@@ -155,7 +150,7 @@ class WorkflowResultsForm(ResultsForm):
     )
 
 
-class DeviceResultsForm(BaseForm):
+class DeviceResultsForm(ResultsForm):
     form_type = HiddenField(default="device_results")
     job = NoValidationSelectField(
         "Job", choices=(("global", "Global Result"), ("all", "All jobs"))

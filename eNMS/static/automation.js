@@ -462,7 +462,4 @@ function resumeTask(id) {
       liveSearch: true,
     });
   }
-  if (["service", "workflow", "task"].includes(page.substring(6))) {
-    refreshTable(3000);
-  }
 })();

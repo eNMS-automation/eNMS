@@ -129,12 +129,6 @@ class AutomationController(BaseController):
     def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         defaults = [("global", "Global Result"), ("all", "All jobs")]
-        print(fetch(
-                    "Result",
-                    parent_timestamp=kw.get(f"timestamp{comp}"),
-                    allow_none=True,
-                    all_matches=True,
-                ))
         return defaults + list(
             dict.fromkeys(
                 (result.job_id, result.job_name)
@@ -166,6 +160,8 @@ class AutomationController(BaseController):
             request["job_id"] = id
         if device == "all" or job == "all":
             request["all_matches"] = True
+            if kw["success_type"] != "all":
+                request["success"] = kw["success_type"] == "success"
         if device not in ("global", "all", None) and job != "global":
             request["device_id"] = device
         if device == "global":

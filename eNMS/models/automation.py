@@ -64,6 +64,7 @@ class Result(AbstractBase):
     timestamp = Column(String(SMALL_STRING_LENGTH), default="")
     parent_timestamp = Column(String(SMALL_STRING_LENGTH), default="")
     result = Column(MutableDict.as_mutable(PickleType), default={})
+    success = Column(Boolean, default=False)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="results", foreign_keys="Result.job_id")
     job_name = association_proxy("job", "name")
@@ -74,6 +75,10 @@ class Result(AbstractBase):
     device_name = association_proxy("device", "name")
     workflow_id = Column(Integer, ForeignKey("Workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.success = self.result["success"]
 
     def __repr__(self) -> str:
         return f"{self.timestamp} ({self.job_name})"

@@ -399,7 +399,6 @@ function configureForm(form, id) {
         useCurrent: false,
       });
     } else {
-      console.log(property, type);
       el.selectpicker({
         liveSearch: true,
         actionsBox: true,
@@ -468,7 +467,11 @@ function updateProperty(el, property, value, type) {
   } else if (
     ["list", "multiselect", "object", "object-list"].includes(propertyType)
   ) {
-    el.selectpicker("deselectAll");
+    console.log(property, value)
+    try {
+      el.selectpicker("deselectAll");
+    } catch {
+    }
     el.selectpicker(
       "val",
       propertyType === "object"

@@ -317,7 +317,7 @@ function configureCallbacks(id, type) {
     });
   }
 
-  $(`#view_type-${id}`).on("change", function() {
+  $(`#view_type-${id},#success_type-${id}`).on("change", function() {
     displayResults(id, id);
   });
 }

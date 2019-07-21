@@ -58,6 +58,19 @@
             {{ form.timestamp_compare(class="form-control add-id") }}
           </td>
         </tr>
+        {% if form_type == "workflow_results" %}
+          <tr>
+            <td>
+              Job
+            </td>
+            <td>
+              {{ form.job(class="form-control add-id") }}
+            </td>
+            <td>
+              {{ form.job_compare(class="form-control add-id") }}
+            </td>
+          </tr>
+        {% endif %}
         <tr>
           <td>
             Device

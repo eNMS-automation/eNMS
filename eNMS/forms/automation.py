@@ -114,7 +114,7 @@ class WorkflowForm(JobForm):
 
 
 class CompareResultsForm(BaseForm):
-    template = "service_results"
+    template = "results"
     form_type = HiddenField(default="service_results")
     compare = BooleanField(default=False)
     view_type = SelectField(
@@ -134,7 +134,6 @@ class CompareResultsForm(BaseForm):
 
 
 class CompareWorkflowResultsForm(CompareResultsForm):
-    template = "workflow_results"
     form_type = HiddenField(default="workflow_results")
     compare = BooleanField(default=False)
     job = NoValidationSelectField(

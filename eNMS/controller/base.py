@@ -326,7 +326,9 @@ class BaseController:
         filename = f"{self.strip_all(job_name)}.log"
         if not logger.handlers:
             fh = FileHandler(self.path / "logs" / "job_logs" / filename)
-            formatter = Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+            formatter = Formatter(
+                "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+            )
             fh.setFormatter(formatter)
             logger.addHandler(fh)
 

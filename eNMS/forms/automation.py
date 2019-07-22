@@ -110,7 +110,12 @@ class ResultsForm(BaseForm):
     form_type = HiddenField(default="results")
     compare = BooleanField(default=False)
     view_type = SelectField(
-        "View", choices=(("text", "Display as text"), ("json", "Display as JSON"), ("compare", "Compare both versions"))
+        "View",
+        choices=(
+            ("text", "Display as text"),
+            ("json", "Display as JSON"),
+            ("compare", "Compare both versions"),
+        ),
     )
     timestamp = NoValidationSelectField("Version", choices=())
     timestamp_compare = NoValidationSelectField("Version", choices=())
@@ -119,7 +124,12 @@ class ResultsForm(BaseForm):
 class ServiceResultsForm(ResultsForm):
     form_type = HiddenField(default="service_results")
     success_type = SelectField(
-        "View", choices=(("all", "All results"), ("success", "Successful results"), ("failure", "Failed results"))
+        "View",
+        choices=(
+            ("all", "All results"),
+            ("success", "Successful results"),
+            ("failure", "Failed results"),
+        ),
     )
     device = NoValidationSelectField(
         "Device", choices=(("global", "Global Result"), ("all", "All devices"))
@@ -132,7 +142,12 @@ class ServiceResultsForm(ResultsForm):
 class WorkflowResultsForm(ResultsForm):
     form_type = HiddenField(default="workflow_results")
     success_type = SelectField(
-        "View", choices=(("all", "All results"), ("success", "Successful results"), ("failure", "Failed results"))
+        "View",
+        choices=(
+            ("all", "All results"),
+            ("success", "Successful results"),
+            ("failure", "Failed results"),
+        ),
     )
     device = NoValidationSelectField(
         "Device", choices=(("global", "Global Result"), ("all", "All devices"))

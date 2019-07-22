@@ -142,9 +142,19 @@ class Job(AbstractBase):
         super().__init__(**kwargs)
         controller.configure_logger(self.name)
 
-    def get_payload_variable(self, payload: dict, name: str, service: Optional[str] = None):
+    def payload_editor(
+        self,
+        payload: dict,
+        name: str,
+        value: Optional[Any] = None,
+        service: Optional[str] = None,
+        device: Optional[str] = None,
+        section_name: Optional[str] = None,
+    ):
         if service:
-            service_result = payload.get(service)
+            payload = payload.get(service)
+        if device:
+            payload = payload["devices"].get(device)
             if not service_result:
                 raise Exception(
                     f"Get Payload Variable: Service '{service}' not found in payload."
@@ -153,7 +163,9 @@ class Job(AbstractBase):
         else:
             payload.setdefault("variables", {}).get(name)
 
-    def set_payload_variable(self, payload: dict, name: str, value: Any, service: Optional[str] = None):
+    def set_payload_variable(
+        self, payload: dict, name: str, value: Any, service: Optional[str] = None
+    ):
         if service:
             service_result = payload.get(service)
             if not service_result:
@@ -164,7 +176,7 @@ class Job(AbstractBase):
         else:
             payload.setdefault("variables", {})[name] = value
 
-    def get_payload_pool(self, payload: dict, name: str, device: Optional[str] = None):
+    def get_payload_pool(self, payload: dict, name: str):
         if device:
             device_payload = payload.get(device)
             if not device_payload:
@@ -175,7 +187,9 @@ class Job(AbstractBase):
         else:
             payload.setdefault("pools", {}).get(name)
 
-    def set_payload_pool(self, payload: dict, name: str, value: Any, device: Optional[str] = None):
+    def set_payload_pool(
+        self, payload: dict, name: str, value: Any, device: Optional[str] = None
+    ):
         if device:
             device_payload = payload.get(device)
             if not device_payload:
@@ -368,10 +382,9 @@ class Service(Job):
             else:
                 results.update(self.job(payload, parent))
         except Exception:
-            results.update({
-                "success": False,
-                "result": chr(10).join(format_exc().splitlines()),
-            })
+            results.update(
+                {"success": False, "result": chr(10).join(format_exc().splitlines())}
+            )
         self.log(
             parent,
             "info",
@@ -780,7 +793,11 @@ class Workflow(Job):
         self.state = {"jobs": {}}
         jobs: list = start_points or [self.jobs[0]]
         visited: Set = set()
-        results: dict = {"results": payload or {}, "success": False, "timestamp": runtime}
+        results: dict = {
+            "results": payload or {},
+            "success": False,
+            "timestamp": runtime,
+        }
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
             initial_targets = targets or self.compute_devices(payload)

@@ -132,12 +132,15 @@ class AutomationController(BaseController):
         return defaults + list(
             dict.fromkeys(
                 (result.job_id, result.job_name)
-                for result in sorted(fetch(
-                    "Result",
-                    parent_timestamp=kw.get(f"timestamp{comp}"),
-                    allow_none=True,
-                    all_matches=True,
-                ), key=attrgetter("timestamp"))
+                for result in sorted(
+                    fetch(
+                        "Result",
+                        parent_timestamp=kw.get(f"timestamp{comp}"),
+                        allow_none=True,
+                        all_matches=True,
+                    ),
+                    key=attrgetter("timestamp"),
+                )
                 if result.job_id
             )
         )

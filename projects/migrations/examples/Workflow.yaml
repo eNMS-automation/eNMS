@@ -458,6 +458,7 @@
   description: ''
   devices:
   - Washington
+  - Chicago
   display_only_failed_nodes: false
   events: []
   failed: 0
@@ -468,12 +469,14 @@
   jobs:
   - Start
   - End
-  last_modified: ''
+  - Payload editor, no devices
+  - Payload editor, with device
+  last_modified: '2019-07-22 22:56:19.036642'
   mail_recipient: ''
-  name: 'YaQL Workflow: Set/var methods for variables and pools'
+  name: 'YaQL Workflow: payload editor and pool helper'
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
+  number_of_targets: 2
   operating_system: ''
   pools: []
   positions: {}

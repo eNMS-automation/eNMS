@@ -12,7 +12,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-22 20:55:36.308604'
+  last_modified: '2019-07-22 22:56:17.982963'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -41,6 +41,9 @@
     Workflow_of_workflows:
     - '-300'
     - '0'
+    'YaQL Workflow: payload editor and pool helper': !!python/tuple
+    - -326
+    - 45
     YaQL_test_worflow:
     - '-359'
     - '-163'
@@ -79,7 +82,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-19 15:41:59.904951'
+  last_modified: '2019-07-22 22:56:18.904398'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -108,9 +111,9 @@
     Workflow_of_workflows:
     - '300'
     - '0'
-    'YaQL Workflow: Set/var methods for variables and pools': !!python/tuple
-    - 500
-    - 0
+    'YaQL Workflow: payload editor and pool helper': !!python/tuple
+    - 743
+    - 14
     YaQL_test_worflow:
     - '-9'
     - '294'
@@ -2187,3 +2190,95 @@
   waiting_time: 0
   yaql_query: ''
   yaql_query_values: $.derived_targets.{{device.name}}
+- color: '#D2E5FF'
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  failed: 0
+  has_targets: false
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-22 22:56:18.289949'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Payload editor, no devices
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'YaQL Workflow: payload editor and pool helper': !!python/tuple
+    - -158
+    - -272
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable_service\"\
+    , 10556, service=\"Payload editor, no devices\")\r\nset_var(\"variable\", \"variable_in_variables\"\
+    , \"variables\")\r\nsave_result(success=True, result={})"
+  start_new_connection: false
+  time_between_retries: 10
+  type: PythonSnippetService
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  completed: 0
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices:
+  - Washington
+  - Chicago
+  display_only_failed_nodes: false
+  events: []
+  failed: 0
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-22 22:56:18.634277'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Payload editor, with device
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'YaQL Workflow: payload editor and pool helper': !!python/tuple
+    - -93
+    - 163
+  push_to_git: false
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  source_code: "set_var(\"variable1\", 999, device=\"{{device.name}}\")\r\nset_var(\"\
+    variable2\", \"1000\", device=\"{{device.name}}\", section=\"variables\")\r\n\
+    set_var(\"service_and_device_variable\", \"1000\", device=\"{{device.name}}\"\
+    , service=\"Payload editor, with device\")\r\nset_var(\"iteration_simple\", \"\
+    192.168.105.5\", \"pools\")\r\nset_var(\"iteration_device\", [\"Baltimore\", \"\
+    Austin\"], \"pools\", device=\"{{device.name}}\")\r\nsave_result(success=True,\
+    \ result={})"
+  start_new_connection: false
+  time_between_retries: 10
+  type: PythonSnippetService
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''

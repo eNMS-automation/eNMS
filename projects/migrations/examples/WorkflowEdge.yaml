@@ -243,8 +243,18 @@
   source: Test Netmiko Prompt Service
   subtype: failure
   workflow: Netmiko prompts
-- destination: End
-  name: 54-success:55->2
-  source: Test netmiko prompts pass
+- destination: Payload editor, no devices
+  name: 54-success:1->55
+  source: Start
   subtype: success
-  workflow: Netmiko prompts
+  workflow: 'YaQL Workflow: payload editor and pool helper'
+- destination: Payload editor, with device
+  name: 54-success:55->56
+  source: Payload editor, no devices
+  subtype: success
+  workflow: 'YaQL Workflow: payload editor and pool helper'
+- destination: End
+  name: 54-success:56->2
+  source: Payload editor, with device
+  subtype: success
+  workflow: 'YaQL Workflow: payload editor and pool helper'

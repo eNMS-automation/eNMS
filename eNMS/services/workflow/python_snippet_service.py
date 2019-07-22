@@ -45,6 +45,9 @@ class PythonSnippetService(Service):
         def get_set_var(*args, **kwargs):
             self.payload_helper(payload, *args, **kwargs)
 
+        def pool_helper(*args, **kwargs):
+            self.payload_helper(payload, *args, section_name="pools", **kwargs)
+
         def log(*args):
             self.log(parent, *args)
 
@@ -58,6 +61,7 @@ class PythonSnippetService(Service):
             "parent": parent,
             "save_result": save_result,
             "set_var": get_set_var,
+            "pool_helper": pool_helper,
         }
 
         try:

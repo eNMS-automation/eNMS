@@ -203,7 +203,6 @@ class Job(AbstractBase):
                 devices |= set(pool.devices)
             self.number_of_targets = len(devices)
             Session.commit()
-        print(self, devices)
         return devices
 
     def adjacent_jobs(
@@ -767,7 +766,6 @@ class Workflow(Job):
         if self.use_workflow_targets:
             initial_targets = targets or self.compute_devices(payload)
             for job in jobs:
-                print(job, initial_targets)
                 allowed_devices[job.name] = initial_targets
         while jobs:
             job = jobs.pop()
@@ -806,7 +804,6 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     job, allowed_devices, results["results"]
                 )
-                print(job, valid_devices)
                 job_results = job.run(
                     results["results"],
                     targets=valid_devices,

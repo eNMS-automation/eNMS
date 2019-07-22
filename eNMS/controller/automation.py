@@ -146,7 +146,6 @@ class AutomationController(BaseController):
         )
 
     def get_job_results(self, id: int, **kw: Any) -> Optional[dict]:
-        print(kw)
         comp = "_compare" if kw["compare"] else ""
         if f"timestamp{comp}" not in kw:
             return None

@@ -376,7 +376,24 @@ function preprocessForm(panel, id, type, duplicate) {
     } else {
       $(el).attr("onclick", type ? `${el.value}("${type}")` : `${el.value}()`);
     }
-  });     
+  });
+  $('[data-type]').each(function() {
+
+    const picker = $(this)
+    list = picker.next().next();
+    list.contextMenu({
+      menuSelector: "#contextMenu",
+      menuSelected: function(invokedOn, selectedMenu) {
+        const row = selectedMenu.text();
+        action[row](selectedObject);
+        selectedObject = null;
+      },
+    });
+    $(list).on('contextmenu', function(ev) {
+      console.log(ev.target.text);
+    });
+    console.log($(this).attr("data-type"));
+  });
 }
 
 /**

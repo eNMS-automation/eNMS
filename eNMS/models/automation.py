@@ -142,7 +142,7 @@ class Job(AbstractBase):
         super().__init__(**kwargs)
         controller.configure_logger(self.name)
 
-    def get_var(self, name: str, service: Optional[str] = None):
+    def get_payload_variable(self, name: str, service: Optional[str] = None):
         if service:
             service_result = payload.get(service)
             if not service_result:
@@ -153,7 +153,7 @@ class Job(AbstractBase):
         else:
             payload.setdefault("variables", {}).get(name)
 
-    def set_var(self, name: str, value: Any, service: Optional[str] = None):
+    def set_payload_variable(self, name: str, value: Any, service: Optional[str] = None):
         if service:
             service_result = payload.get(service)
             if not service_result:

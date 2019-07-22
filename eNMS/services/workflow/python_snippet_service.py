@@ -42,8 +42,8 @@ class PythonSnippetService(Service):
             if kwargs.get("exit"):
                 raise TerminateException()
 
-        def edit_payload(*args, **kwargs):
-            self.payload_variable(payload, *args)
+        def get_set_var(*args, **kwargs):
+            self.payload_helper(payload, *args, **kwargs)
 
         def log(*args):
             self.log(parent, *args)
@@ -53,11 +53,11 @@ class PythonSnippetService(Service):
             "device": device,
             "payload": payload,
             "_code_result_": _code_result_,
-            "get_var": edit_payload,
+            "get_var": get_set_var,
             "log": log,
             "parent": parent,
             "save_result": save_result,
-            "set_var": edit_payload,
+            "set_var": get_set_var,
         }
 
         try:

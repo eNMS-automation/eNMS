@@ -142,7 +142,7 @@ class Job(AbstractBase):
         super().__init__(**kwargs)
         controller.configure_logger(self.name)
 
-    def payload_editor(
+    def payload_helper(
         self,
         payload: dict,
         name: str,
@@ -164,12 +164,6 @@ class Job(AbstractBase):
             if name not in payload:
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
-
-    def payload_variable(self, *args, **kwargs):
-        return self.payload_editor(*args, section_name="variables", **kwargs)
-
-    def payload_pool(self, *args, **kwargs):
-        return self.payload_editor(*args, section_name="pools", **kwargs)
 
     @hybrid_property
     def status(self) -> str:

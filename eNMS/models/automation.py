@@ -142,25 +142,47 @@ class Job(AbstractBase):
         super().__init__(**kwargs)
         controller.configure_logger(self.name)
 
-    def get_payload_variable(self, name: str, service: Optional[str] = None):
+    def get_payload_variable(self, payload: dict, name: str, service: Optional[str] = None):
         if service:
             service_result = payload.get(service)
             if not service_result:
                 raise Exception(
-                    f"get_var: Service not found in payload: '{service}'"
+                    f"Get Payload Variable: Service '{service}' not found in payload."
                 )
             return service_result.get(name)
         else:
             payload.setdefault("variables", {}).get(name)
 
-    def set_payload_variable(self, name: str, value: Any, service: Optional[str] = None):
+    def set_payload_variable(self, payload: dict, name: str, value: Any, service: Optional[str] = None):
         if service:
             service_result = payload.get(service)
             if not service_result:
                 raise Exception(
-                    f"set_var: Service not found in payload: '{service}'"
+                    f"Set Payload Variable: Service '{service}' not found in payload."
                 )
             service_result[name] = value
+        else:
+            payload.setdefault("variables", {})[name] = value
+
+    def get_payload_pool(self, payload: dict, name: str, device: Optional[str] = None):
+        if device:
+            device_payload = payload.get(device)
+            if not device_payload:
+                raise Exception(
+                    f"Get Payload Pool: Service '{service}' not found in payload."
+                )
+            return device_payload.get(name)
+        else:
+            payload.setdefault("pools", {}).get(name)
+
+    def set_payload_pool(self, payload: dict, name: str, value: Any, device: Optional[str] = None):
+        if device:
+            device_payload = payload.get(device)
+            if not device_payload:
+                raise Exception(
+                    f"Set Payload Variable: Service '{device}' not found in payload."
+                )
+            device_payload[name] = value
         else:
             payload.setdefault("variables", {})[name] = value
 

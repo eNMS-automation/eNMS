@@ -142,6 +142,28 @@ class Job(AbstractBase):
         super().__init__(**kwargs)
         controller.configure_logger(self.name)
 
+    def get_var(self, name: str, service: Optional[str] = None):
+        if service:
+            service_result = payload.get(service)
+            if not service_result:
+                raise Exception(
+                    f"get_var: Service not found in payload: '{service}'"
+                )
+            return service_result.get(name)
+        else:
+            payload.setdefault("variables", {}).get(name)
+
+    def set_var(self, name: str, value: Any, service: Optional[str] = None):
+        if service:
+            service_result = payload.get(service)
+            if not service_result:
+                raise Exception(
+                    f"set_var: Service not found in payload: '{service}'"
+                )
+            service_result[name] = value
+        else:
+            payload.setdefault("variables", {})[name] = value
+
     @hybrid_property
     def status(self) -> str:
         return "Running" if self.is_running else "Idle"

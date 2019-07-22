@@ -42,28 +42,6 @@ class PythonSnippetService(Service):
             if kwargs.get("exit"):
                 raise TerminateException()
 
-        def get_var(name: str, service: Optional[str] = None):
-            if service:
-                svc_result = payload.get(service)
-                if not svc_result:
-                    raise Exception(
-                        f"get_var: Service not found in payload: '{service}'"
-                    )
-                return svc_result.get(name)
-            else:
-                payload.setdefault("variables", {}).get(name)
-
-        def set_var(name: str, value: Any, service: Optional[str] = None):
-            if service:
-                svc_result = payload.get(service)
-                if not svc_result:
-                    raise Exception(
-                        f"set_var: Service not found in payload: '{service}'"
-                    )
-                svc_result[name] = value
-            else:
-                payload.setdefault("variables", {})[name] = value
-
         globals = {
             "__builtins__": __builtins__,
             "device": device,

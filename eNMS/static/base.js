@@ -378,10 +378,8 @@ function preprocessForm(panel, id, type, duplicate) {
     }
   });
   $('[data-type]').each(function() {
-
-    const picker = $(this)
-    list = picker.next().next();
-    list.contextMenu({
+    list = $(this).next().next();
+    $(list).contextMenu({
       menuSelector: "#contextMenu",
       menuSelected: function(invokedOn, selectedMenu) {
         const row = selectedMenu.text();

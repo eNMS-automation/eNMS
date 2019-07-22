@@ -1,16 +1,5 @@
 {% extends "base_site.html" %} {% block stylesheets %} {{ super() }} {% endblock
 stylesheets %} {% block content %} {% if type == "pool" %}
-<ul id="contextMenu" class="dropdown-menu" role="menu">
-  <li class="menu"><a tabindex="-1" href="#">AA</a></li>
-  <li class="menu rc-device-menu">
-    <a tabindex="-1" href="#">Device properties</a>
-  </li>
-  <li class="menu rc-device-menu"><a tabindex="-1" href="#">Connect</a></li>
-  <li class="menu rc-device-menu"><a tabindex="-1" href="#">Automation</a></li>
-  <li class="menu rc-link-menu">
-    <a tabindex="-1" href="#">Link properties</a>
-  </li>
-</ul>
 {% endif %}
 <div class="right_col" role="main">
   <div class="row">

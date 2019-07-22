@@ -157,8 +157,9 @@ class Job(AbstractBase):
             payload = payload["devices"].get(device)
         if section_name and value:
             payload.setdefault(section_name, {})
-        if not value:
-            return payload[name] = value
+            payload = payload[section_name]
+        if value:
+            payload[name] = value
         else:
             if name not in payload:
                 raise Exception(f"Payload Editor: {name} not found in f{payload}.")

@@ -12,7 +12,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-19 15:41:43.671114'
+  last_modified: '2019-07-22 20:55:36.308604'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -29,9 +29,9 @@
     Napalm_VRF_workflow:
     - '-200'
     - '0'
-    Netmiko prompts: !!python/tuple
-    - -279
-    - -158
+    Netmiko prompts:
+    - '-279'
+    - '-158'
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
@@ -96,9 +96,9 @@
     Napalm_VRF_workflow:
     - '200'
     - '0'
-    Netmiko prompts: !!python/tuple
-    - 634
-    - 187
+    Netmiko prompts:
+    - '634'
+    - '187'
     Netmiko_VRF_workflow:
     - '200'
     - '0'
@@ -108,6 +108,9 @@
     Workflow_of_workflows:
     - '300'
     - '0'
+    'YaQL Workflow: Set/var methods for variables and pools': !!python/tuple
+    - 500
+    - 0
     YaQL_test_worflow:
     - '-9'
     - '294'
@@ -752,7 +755,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 17:05:05.312147'
+  last_modified: '2019-07-22 20:55:48.372160'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1291,7 +1294,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 01:31:19.040112'
+  last_modified: '2019-07-22 20:55:36.576236'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1311,15 +1314,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
-  source_code: 'set_var(''devices'', [''Washington'', ''Dallas''])
-
-    set_var(''iteration_devices'',
-
-    {''Washington'': [''Loopback101'', ''Loopback15''],
-
-    ''Austin'': [''Loopback9'', ''Loopback1000'']})
-
-    save_result(True, {})'
+  source_code: "set_var('iteration_devices',\r\n{'Washington': ['Loopback101', 'Loopback15'],\r\
+    \n'Austin': ['Loopback9', 'Loopback1000']})\r\nsave_result(True, {})"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService
@@ -1912,14 +1908,74 @@
   operating_system: ''
   pools: []
   positions:
-    Netmiko prompts: !!python/tuple
-    - 22
-    - -74
+    Netmiko prompts:
+    - '22'
+    - '-74'
   privileged_mode: false
   push_to_git: false
   query_property_type: name
   response1: show vrf b
   response2: show vrf c
+  response3: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoPromptsService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+  yaql_query: ''
+- color: '#D2E5FF'
+  command: show vrf
+  completed: 0
+  confirmation1: Protocols
+  confirmation2: Interfaces
+  confirmation3: ''
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-19 15:41:59.683776'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Test netmiko prompts pass
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Netmiko prompts:
+    - '307'
+    - '43'
+  privileged_mode: false
+  push_to_git: false
+  query_property_type: name
+  response1: show vrf
+  response2: ''
   response3: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1954,7 +2010,7 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-17 01:31:21.764382'
+  last_modified: '2019-07-22 20:55:39.326778'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2005,7 +2061,7 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 29
-  last_modified: '2019-07-17 01:31:25.323382'
+  last_modified: '2019-07-22 20:55:43.220815'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2101,7 +2157,7 @@
   initial_payload: {}
   iterated_job: netmiko_check_vrf_test
   iterated_job_id: 17
-  last_modified: '2019-07-17 01:31:26.262754'
+  last_modified: '2019-07-22 20:55:48.544135'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2131,63 +2187,3 @@
   waiting_time: 0
   yaql_query: ''
   yaql_query_values: $.derived_targets.{{device.name}}
-- color: '#D2E5FF'
-  command: show vrf
-  completed: 0
-  confirmation1: Protocols
-  confirmation2: Interfaces
-  confirmation3: ''
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  failed: 0
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-07-19 15:41:59.683776'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: Test netmiko prompts pass
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    Netmiko prompts: !!python/tuple
-    - 307
-    - 43
-  privileged_mode: false
-  push_to_git: false
-  query_property_type: name
-  response1: show vrf
-  response2: ''
-  response3: ''
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  start_new_connection: false
-  time_between_retries: 10
-  timeout: 10
-  type: NetmikoPromptsService
-  use_device_driver: true
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
-  yaql_query: ''

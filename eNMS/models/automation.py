@@ -162,7 +162,7 @@ class Job(AbstractBase):
             payload[name] = value
         else:
             if name not in payload:
-                raise Exception(f"Payload Editor: {name} not found in f{payload}.")
+                raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
 
     def payload_variable(self, *args, **kwargs):

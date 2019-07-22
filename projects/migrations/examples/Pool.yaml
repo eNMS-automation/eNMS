@@ -60,7 +60,7 @@
   - Oakland
   - Denver
   - Aserver
-  latitude: 0.0
+  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -108,7 +108,7 @@
   - link25
   - link26
   - link27
-  longitude: 0.0
+  longitude: '0.0'
   name: All objects
   never_update: false
   operator: all
@@ -176,7 +176,7 @@
   - Oakland
   - Denver
   - Aserver
-  latitude: 0.0
+  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -196,7 +196,7 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: 0.0
+  longitude: '0.0'
   name: Devices only
   never_update: false
   operator: all
@@ -236,7 +236,7 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  latitude: 0.0
+  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -284,7 +284,7 @@
   - link25
   - link26
   - link27
-  longitude: 0.0
+  longitude: '0.0'
   name: Links only
   never_update: false
   operator: all
@@ -338,7 +338,7 @@
   - Orange
   - Denver
   - Aserver
-  latitude: 37.77
+  latitude: '37.77'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -386,7 +386,7 @@
   - link25
   - link26
   - link27
-  longitude: -122.43
+  longitude: '-122.43'
   name: Datacenter San Francisco
   never_update: false
   operator: all
@@ -444,7 +444,7 @@
   - SanFrancisco
   - Orange
   - Oakland
-  latitude: 40.71
+  latitude: '40.71'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -492,7 +492,7 @@
   - link25
   - link26
   - link27
-  longitude: -74.0
+  longitude: '-74.0'
   name: Datacenter New York
   never_update: false
   operator: all
@@ -544,7 +544,7 @@
   - Cambridge
   - Minneapolis
   - SanFrancisco
-  latitude: 41.87
+  latitude: '41.87'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -592,7 +592,7 @@
   - link25
   - link26
   - link27
-  longitude: -87.62
+  longitude: '-87.62'
   name: Datacenter Chicago
   never_update: false
   operator: all
@@ -633,7 +633,7 @@
   device_vendor_match: inclusion
   devices:
   - Washington
-  latitude: 0.0
+  latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -653,7 +653,7 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: 0.0
+  longitude: '0.0'
   name: Washington
   never_update: true
   operator: all

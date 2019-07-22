@@ -47,11 +47,11 @@ class PythonSnippetService(Service):
             "device": device,
             "payload": payload,
             "_code_result_": _code_result_,
-            "get_var": self.get_payload_variable,
+            "get_var": self.payload_variable,
             "log": self.log,
             "parent": parent,
             "save_result": save_result,
-            "set_var": self.set_payload_variable,
+            "set_var": self.payload_variable,
         }
 
         try:

@@ -155,50 +155,20 @@ class Job(AbstractBase):
             payload = payload.get(service)
         if device:
             payload = payload["devices"].get(device)
-            if not service_result:
-                raise Exception(
-                    f"Get Payload Variable: Service '{service}' not found in payload."
-                )
-            return service_result.get(name)
+        if section_name and value:
+            payload.setdefault(section_name, {})
+        if not value:
+            return payload[name] = value
         else:
-            payload.setdefault("variables", {}).get(name)
+            if name not in payload:
+                raise Exception(f"Payload Editor: {name} not found in f{payload}.")
+            return payload[name]
 
-    def set_payload_variable(
-        self, payload: dict, name: str, value: Any, service: Optional[str] = None
-    ):
-        if service:
-            service_result = payload.get(service)
-            if not service_result:
-                raise Exception(
-                    f"Set Payload Variable: Service '{service}' not found in payload."
-                )
-            service_result[name] = value
-        else:
-            payload.setdefault("variables", {})[name] = value
+    def payload_variable(self, *args, **kwargs):
+        return self.payload_editor(*args, section_name="variables", **kwargs)
 
-    def get_payload_pool(self, payload: dict, name: str):
-        if device:
-            device_payload = payload.get(device)
-            if not device_payload:
-                raise Exception(
-                    f"Get Payload Pool: Service '{service}' not found in payload."
-                )
-            return device_payload.get(name)
-        else:
-            payload.setdefault("pools", {}).get(name)
-
-    def set_payload_pool(
-        self, payload: dict, name: str, value: Any, device: Optional[str] = None
-    ):
-        if device:
-            device_payload = payload.get(device)
-            if not device_payload:
-                raise Exception(
-                    f"Set Payload Variable: Service '{device}' not found in payload."
-                )
-            device_payload[name] = value
-        else:
-            payload.setdefault("variables", {})[name] = value
+    def payload_pool(self, *args, **kwargs):
+        return self.payload_editor(*args, section_name="pools", **kwargs)
 
     @hybrid_property
     def status(self) -> str:

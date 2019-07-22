@@ -147,11 +147,13 @@ class Job(AbstractBase):
         payload: dict,
         name: str,
         value: Optional[Any] = None,
+        section: Optional[str] = None,
         service: Optional[str] = None,
         device: Optional[str] = None,
-        section_name: Optional[str] = None,
     ):
         if service:
+            payload.setdefault("services", {})
+            payload = payload["services"]
             payload.setdefault(service, {})
             payload = payload[service]
         if device:
@@ -159,9 +161,9 @@ class Job(AbstractBase):
             payload = payload["devices"]
             payload.setdefault(device, {})
             payload = payload[device]
-        if section_name and value:
-            payload.setdefault(section_name, {})
-            payload = payload[section_name]
+        if section:
+            payload.setdefault(section, {})
+            payload = payload[section]
         if value:
             payload[name] = value
         else:

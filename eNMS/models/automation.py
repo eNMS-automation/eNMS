@@ -152,9 +152,13 @@ class Job(AbstractBase):
         section_name: Optional[str] = None,
     ):
         if service:
-            payload = payload.get(service)
+            payload.setdefault(service, {})
+            payload = payload[service]
         if device:
-            payload = payload["devices"].get(device)
+            payload.setdefault("devices", {})
+            payload = payload["devices"]
+            payload.setdefault(device, {})
+            payload = payload[device]
         if section_name and value:
             payload.setdefault(section_name, {})
             payload = payload[section_name]

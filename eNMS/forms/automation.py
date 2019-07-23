@@ -161,6 +161,7 @@ class WorkflowResultsForm(ResultsForm):
     job_compare = NoValidationSelectField(
         "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
     )
+    payload_query = StringField("Payload Query")
 
 
 class DeviceResultsForm(ResultsForm):

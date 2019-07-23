@@ -125,19 +125,20 @@ function formatResults(results, id, formId) {
       modes: ['text', 'view'],
       onEvent: function(node, event) {
         if (event.type === 'click') {
-          var path = '';
-          for (var i = 0; i < node.path.length; i++) {
-            var element = node.path[i];
-            if (typeof element === 'number') {
-              path += '[' + element + ']'
-            } else {
-              if (!path.length) {
-                path += "payload";
+          if (node.path[0] == "results") {
+            let path = '';
+            for (let i = 0; i < node.path.length; i++) {
+              let element = node.path[i];
+              if (typeof element === 'number') {
+                path += `[${element}]`
               } else {
-                path += `["${element}"]`;
+                path += path.length ? `["${element}"]` : "payload";
               }
             }
+          } else {
+            path = "N/A"
           }
+          $(`#payload_query-${id}`).val(path)
         }
       },
     };

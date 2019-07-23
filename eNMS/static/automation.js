@@ -149,7 +149,6 @@ function formatResults(results, id, formId) {
       mode: $(`#view_type-${id}`).val(),
       modes: ['text', 'view'],
       onEvent: function(node, event) {
-        console.log(event.type);
         if (event.type === 'click') {
           var path = '';
           for (var i = 0; i < node.path.length; i++) {

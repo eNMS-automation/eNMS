@@ -5,7 +5,7 @@ from typing import Optional
 from wtforms import HiddenField, IntegerField, StringField
 from yaml import dump
 
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Job, Service
@@ -73,6 +73,7 @@ class NetmikoBackupService(Service):
             return {"success": False, "result": str(e)}
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
+        Session.commit()
         return {"success": True, "result": f"Command: {self.configuration_command}"}
 
 

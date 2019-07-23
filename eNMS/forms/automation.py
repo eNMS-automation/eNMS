@@ -112,8 +112,8 @@ class ResultsForm(BaseForm):
     view_type = SelectField(
         "View",
         choices=(
-            ("text", "Display as text"),
             ("view", "Display as JSON"),
+            ("text", "Display as text"),
             ("compare", "Compare both versions"),
         ),
     )

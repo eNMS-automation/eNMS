@@ -125,8 +125,8 @@ function formatResults(results, id, formId) {
       modes: ['text', 'view'],
       onEvent: function(node, event) {
         if (event.type === 'click') {
+          let path = "";
           if (node.path[0] == "results") {
-            let path = '';
             for (let i = 0; i < node.path.length; i++) {
               let element = node.path[i];
               if (typeof element === 'number') {

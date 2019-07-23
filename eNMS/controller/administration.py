@@ -1,5 +1,4 @@
 from copy import deepcopy
-from datetime import datetime
 from flask_login import current_user
 from ipaddress import IPv4Network
 from json import loads
@@ -67,15 +66,6 @@ class AdministrationController(BaseController):
 
     def database_deletion(self, **kwargs: Any) -> None:
         delete_all(*kwargs["deletion_types"])
-        clear_logs_date = kwargs["clear_logs_date"]
-        if clear_logs_date:
-            clear_date = datetime.strptime(clear_logs_date, "%d/%m/%Y %H:%M:%S")
-            for job in fetch_all("Job"):
-                job.logs = {
-                    date: log
-                    for date, log in job.logs.items()
-                    if datetime.strptime(date, "%Y-%m-%d-%H:%M:%S.%f") > clear_date
-                }
 
     def get_cluster_status(self) -> dict:
         return {
@@ -178,16 +168,13 @@ class AdministrationController(BaseController):
 
     def export_job(self, job_id: str) -> None:
         job = fetch("Job", id=job_id)
-        job_name = self.strip_all(job.name)
         if job.type == "Workflow":
-            path = self.path / "projects" / "exported_jobs" / "workflows" / job_name
+            path = self.path / "projects" / "exported_jobs" / "workflows" / job.filename
             path.mkdir(parents=True, exist_ok=True)
             for instance_type in ("jobs", "workflow", "edges"):
                 Path(path / instance_type).mkdir(parents=True, exist_ok=True)
             for sub_job in job.jobs:
-                with open(
-                    path / "jobs" / f"{self.strip_all(sub_job.name)}.yaml", "w"
-                ) as file:
+                with open(path / "jobs" / f"{sub_job.filename}.yaml", "w") as file:
                     sub_job_as_dict = sub_job.to_dict(export=True)
                     for relation in ("devices", "pools", "events"):
                         sub_job_as_dict.pop(relation)
@@ -195,20 +182,21 @@ class AdministrationController(BaseController):
                         sub_job_as_dict["type"] = "Workflow"
                     dump(sub_job_as_dict, file)
             for edge in job.edges:
-                name = f"{edge.workflow}{edge.source}{edge.destination}"
+                name = self.strip_all(f"{edge.workflow}{edge.source}{edge.destination}")
                 with open(path / "edges" / f"{name}.yaml", "w") as file:
                     edge = {**edge.to_dict(export=True), "type": "WorkflowEdge"}
                     dump(edge, file)
-            with open(path / "workflow" / f"{job_name}.yaml", "w") as file:
+            with open(path / "workflow" / f"{job.filename}.yaml", "w") as file:
                 job_as_dict = job.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)
                 dump({**job_as_dict, "type": "Workflow"}, file)
             with open_tar(f"{path}.tgz", "w:gz") as tar:
-                tar.add(path, arcname=job_name)
+                tar.add(path, arcname=job.filename)
+            rmtree(path)
         else:
             path = self.path / "projects" / "exported_jobs" / "services"
-            with open(path / f"{job_name}.yaml", "w") as file:
+            with open(path / f"{job.filename}.yaml", "w") as file:
                 job_as_dict = job.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)

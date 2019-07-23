@@ -196,7 +196,7 @@ class Job(AbstractBase):
 
             def payload_helper(*args, **kwargs):
                 return self.payload_helper(payload, *args, **kwargs)
-            
+
             context = create_context()
             context.register_function(payload_helper, name="payload_helper")
             devices, not_found = set(), set()

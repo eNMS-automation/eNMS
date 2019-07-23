@@ -33,7 +33,7 @@ from traceback import format_exc
 from typing import Any, Generator, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
-from yaql import factory as yaql_factory
+from yaql import create_context, factory as yaql_factory
 
 from eNMS.concurrency import device_thread
 from eNMS.controller import controller
@@ -151,6 +151,7 @@ class Job(AbstractBase):
         service: Optional[str] = None,
         device: Optional[str] = None,
     ):
+        print("tttt"*200, name, value, section)
         if service:
             payload.setdefault("services", {})
             payload = payload["services"]
@@ -191,9 +192,15 @@ class Job(AbstractBase):
     ) -> Set["Device"]:
         if self.yaql_query:
             query = self.sub(self.yaql_query, locals())
-            engine = factory.YaqlFactory().create()
+            engine = yaql_factory.YaqlFactory().create()
+
+            def payload_helper(*args, **kwargs):
+                return self.payload_helper(payload, *args, **kwargs)
+            
+            context = create_context()
+            context.register_function(payload_helper, name="payload_helper")
             devices, not_found = set(), set()
-            for value in engine(query).evaluate(data=payload):
+            for value in engine(query).evaluate(data=payload, context=context):
                 device = fetch(
                     "Device", allow_none=True, **{self.query_property_type: value}
                 )
@@ -787,7 +794,7 @@ class Workflow(Job):
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:
-                        derived_targets = job.compute_devices(payload, base_target)
+                        derived_targets = job.compute_devices(results["results"], base_target)
                         derived_target_result = job.run(
                             results["results"],
                             targets=derived_targets,

@@ -43,7 +43,7 @@ class PythonSnippetService(Service):
                 raise TerminateException()
 
         def get_set_var(*args, **kwargs):
-            self.payload_helper(payload, *args, **kwargs)
+            return self.payload_helper(payload, *args, **kwargs)
 
         def log(*args):
             self.log(parent, *args)
@@ -58,7 +58,6 @@ class PythonSnippetService(Service):
             "parent": parent,
             "save_result": save_result,
             "set_var": get_set_var,
-            "pool_helper": pool_helper,
         }
 
         try:

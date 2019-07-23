@@ -267,7 +267,7 @@ function showLogs(id, name) {
       border: "medium",
       headerTitle: `Logs - ${name}`,
       position: "center-top 0 58",
-      contentSize: "1250 600",
+      contentSize: "1450 600",
       contentOverflow: "hidden scroll",
       content: `<pre id="logs-${id}" style="border: 0;\
         background-color: transparent; color: white;"></pre>`,

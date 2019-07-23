@@ -113,7 +113,7 @@ class ResultsForm(BaseForm):
         "View",
         choices=(
             ("text", "Display as text"),
-            ("json", "Display as JSON"),
+            ("view", "Display as JSON"),
             ("compare", "Compare both versions"),
         ),
     )

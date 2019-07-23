@@ -143,19 +143,34 @@ function formatResults(results, id, formId) {
         viewType: 0,
       })
     );
-  } else if ($(`#view_type-${id}`).val() == "json") {
+  } else {
     $(`#display_results-${formId}`).empty();
+    const options = {
+      mode: $(`#view_type-${id}`).val(),
+      modes: ['text', 'view'],
+      onEvent: function(node, event) {
+        console.log(event.type);
+        if (event.type === 'click') {
+          var path = '';
+          for (var i = 0; i < node.path.length; i++) {
+            var element = node.path[i];
+            if (typeof element === 'number') {
+              path += '[' + element + ']'
+            } else {
+              if (!path.length) {
+                path += "payload";
+              } else {
+                path += `["${element}"]`;
+              }
+            }
+          }
+        }
+      },
+    };
     new JSONEditor(
       document.getElementById(`display_results-${formId}`),
-      { mode: "view" },
+      options,
       parseObject(JSON.parse(JSON.stringify(results)))
-    );
-  } else {
-    $(`#display_results-${formId}`).html(
-      `<pre>${JSON.stringify(results, null, 2)
-        .replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
-        .replace(/\\"/g, `"`)
-        .replace(/\\\\/g, "\\")}</pre>`
     );
   }
 }

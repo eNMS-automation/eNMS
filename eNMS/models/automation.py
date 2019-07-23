@@ -769,9 +769,11 @@ class Workflow(Job):
     ) -> dict:
         self.state = {"jobs": {}}
         jobs: list = start_points or [self.jobs[0]]
+        if not payload:
+            payload = {}
         visited: Set = set()
         results: dict = {
-            "results": payload or {},
+            "results": {},
             "success": False,
             "timestamp": runtime,
         }
@@ -794,9 +796,9 @@ class Workflow(Job):
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:
-                        derived_targets = job.compute_devices(results["results"], base_target)
+                        derived_targets = job.compute_devices(payload, base_target)
                         derived_target_result = job.run(
-                            results["results"],
+                            payload,
                             targets=derived_targets,
                             parent=self,
                             parent_timestamp=parent_timestamp,
@@ -815,10 +817,10 @@ class Workflow(Job):
                 }
             else:
                 valid_devices = self.compute_valid_devices(
-                    job, allowed_devices, results["results"]
+                    job, allowed_devices, payload
                 )
                 job_results = job.run(
-                    results["results"],
+                    payload,
                     targets=valid_devices,
                     parent=self,
                     parent_timestamp=parent_timestamp,
@@ -834,8 +836,7 @@ class Workflow(Job):
                     "destination",
                     "success" if job_results["success"] else "failure",
                 )
-            if job.type == "Workflow":
-                job_results.pop("results")
+            payload[job.name] = job_results
             results["results"][job.name] = job_results
             for successor in successors:
                 if successor not in visited:

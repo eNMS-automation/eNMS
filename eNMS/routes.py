@@ -240,6 +240,7 @@ def route(page: str) -> Response:
         result = getattr(controller, f)(*args)
     try:
         Session.commit()
+        print(result)
         return jsonify(result)
     except Exception as exc:
         Session.rollback()

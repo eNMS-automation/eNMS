@@ -1,5 +1,5 @@
 - aps_job_id: Poller
-  creation_time: '2019-07-22 19:36:28.435763'
+  creation_time: '2019-07-23 15:48:56.035805'
   crontab_expression: ''
   description: Back-up device configurations
   devices: []
@@ -8,13 +8,13 @@
   frequency_unit: seconds
   initial_payload: {}
   job: Configuration Management Workflow
-  job_id: 44
+  job_id: 46
   name: Poller
   pools: []
   scheduling_mode: standard
   start_date: ''
 - aps_job_id: Cluster Monitoring
-  creation_time: '2019-07-22 19:36:28.492639'
+  creation_time: '2019-07-23 15:48:56.076864'
   crontab_expression: ''
   description: Monitor eNMS cluster
   devices: []
@@ -28,3 +28,19 @@
   pools: []
   scheduling_mode: standard
   start_date: ''
+- aps_job_id: '2019-07-23 20:28:20.243451'
+  creation_time: '2019-07-23 20:28:20.243451'
+  crontab_expression: ''
+  description: ''
+  devices: []
+  end_date: ''
+  frequency: 25
+  frequency_unit: seconds
+  initial_payload: {}
+  job: Start
+  job_id: 1
+  name: fefsfsefsef
+  periodic: true
+  pools: []
+  scheduling_mode: standard
+  start_date: 23/07/2019 20:36:04

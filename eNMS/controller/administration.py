@@ -178,13 +178,16 @@ class AdministrationController(BaseController):
 
     def export_job(self, job_id: str) -> None:
         job = fetch("Job", id=job_id)
+        job_name = self.strip_all(job.name)
         if job.type == "Workflow":
-            path = self.path / "projects" / "exported_jobs" / "workflows" / job.name
+            path = self.path / "projects" / "exported_jobs" / "workflows" / job_name
             path.mkdir(parents=True, exist_ok=True)
             for instance_type in ("jobs", "workflow", "edges"):
                 Path(path / instance_type).mkdir(parents=True, exist_ok=True)
             for sub_job in job.jobs:
-                with open(path / "jobs" / f"{sub_job.name}.yaml", "w") as file:
+                with open(
+                    path / "jobs" / f"{self.strip_all(sub_job.name)}.yaml", "w"
+                ) as file:
                     sub_job_as_dict = sub_job.to_dict(export=True)
                     for relation in ("devices", "pools", "events"):
                         sub_job_as_dict.pop(relation)
@@ -196,16 +199,16 @@ class AdministrationController(BaseController):
                 with open(path / "edges" / f"{name}.yaml", "w") as file:
                     edge = {**edge.to_dict(export=True), "type": "WorkflowEdge"}
                     dump(edge, file)
-            with open(path / "workflow" / f"{job.name}.yaml", "w") as file:
+            with open(path / "workflow" / f"{job_name}.yaml", "w") as file:
                 job_as_dict = job.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)
                 dump({**job_as_dict, "type": "Workflow"}, file)
             with open_tar(f"{path}.tgz", "w:gz") as tar:
-                tar.add(path, arcname=job.name)
+                tar.add(path, arcname=job_name)
         else:
             path = self.path / "projects" / "exported_jobs" / "services"
-            with open(path / f"{job.name}.yaml", "w") as file:
+            with open(path / f"{job_name}.yaml", "w") as file:
                 job_as_dict = job.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)

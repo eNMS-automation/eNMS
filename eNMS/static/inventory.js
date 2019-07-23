@@ -172,6 +172,29 @@ function showDeviceResultsPanel(id, name, type) {
   });
 }
 
+/**
+ * Copy configuration to Clipboard.
+ * @param {id} id - Device ID.
+ */
+// eslint-disable-next-line
+function copyResultsToClipboard(id) {
+  let node = document.getElementById(`configurations-${id}`);
+  if (document.body.createTextRange) {
+    const range = document.body.createTextRange();
+    range.moveToElementText(node);
+    range.select();
+  } else if (window.getSelection) {
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  } else {
+    alertify.notify("Selection not supported by your browser", "error", 5);
+  }
+  document.execCommand("copy");
+}
+
 Object.assign(action, {
   "Device properties": (d) => showTypePanel("device", d.id),
   "Link properties": (l) => showTypePanel("link", l.id),

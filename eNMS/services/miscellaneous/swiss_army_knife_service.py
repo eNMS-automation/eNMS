@@ -26,16 +26,16 @@ class SwissArmyKnifeService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "SwissArmyKnifeService"}
 
-    def job(self, *args):
-        return getattr(self, self.name)(*args)
+    def job(self, *args, **kwargs):
+        return getattr(self, self.name)(*args, **kwargs)
 
-    def Start(self, _: dict, device: Optional[Device] = None) -> dict:  # noqa: N802
+    def Start(self, *args, **kwargs) -> dict:  # noqa: N802
         return {"success": True}
 
-    def End(self, _: dict, device: Optional[Device] = None) -> dict:  # noqa: N802
+    def End(self, *args, **kwargs) -> dict:  # noqa: N802
         return {"success": True}
 
-    def mail_feedback_notification(self, payload: dict) -> dict:
+    def mail_feedback_notification(self, payload: dict, *args, **kwargs) -> dict:
         name = f"{payload['job']['name']}"
         recipients = payload["job"]["mail_recipient"]
         runtime = payload["runtime"].replace(".", "").replace(":", "")
@@ -49,7 +49,7 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True}
 
-    def slack_feedback_notification(self, payload: dict) -> dict:
+    def slack_feedback_notification(self, payload: dict, *args, **kwargs) -> dict:
         slack_client = SlackClient(controller.slack_token)
         result = slack_client.api_call(
             "chat.postMessage",
@@ -58,7 +58,7 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True, "result": str(result)}
 
-    def mattermost_feedback_notification(self, payload: dict) -> dict:
+    def mattermost_feedback_notification(self, payload: dict, *args, **kwargs) -> dict:
         post(
             controller.mattermost_url,
             verify=controller.mattermost_verify_certificate,
@@ -68,7 +68,7 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True}
 
-    def cluster_monitoring(self, payload: dict, *args) -> dict:
+    def cluster_monitoring(self, payload: dict, *args, **kwargs) -> dict:
         protocol = controller.cluster_scan_protocol
         for instance in fetch_all("Instance"):
             factory(
@@ -80,7 +80,7 @@ class SwissArmyKnifeService(Service):
             )
         return {"success": True}
 
-    def poller_service(self, payload: dict, *args) -> dict:
+    def poller_service(self, payload: dict, *args, **kwargs) -> dict:
         for service in fetch_all("Service"):
             if getattr(service, "configuration_backup_service", False):
                 service.run()
@@ -90,7 +90,7 @@ class SwissArmyKnifeService(Service):
                 pool.compute_pool()
         return {"success": True}
 
-    def git_push_configurations(self, payload: dict, *args) -> dict:
+    def git_push_configurations(self, payload: dict, *args, **kwargs) -> dict:
         if controller.git_configurations:
             repo = Repo(Path.cwd() / "git" / "configurations")
             try:
@@ -102,7 +102,7 @@ class SwissArmyKnifeService(Service):
             repo.remotes.origin.push()
         return {"success": True}
 
-    def process_payload1(self, payload: dict, device: Device, *args) -> dict:
+    def process_payload1(self, payload: dict, device: Device, *args, **kwargs) -> dict:
         # we use the name of the device to get the result for that particular
         # device.
         get_facts = payload["get_facts"]["results"]["devices"][device.name]

@@ -74,6 +74,18 @@ It seems more natural to edit the service when it's double clicked.  What do you
 
 - Copy to clipboard for device configuration
 
-- New Autofind path to payload value mechanism
+- when clicking on a key or value in the json format of the results: have an option to get the python query path to payload value
 
 - Fix bug subworkflow edit panel
+
+- results dict are now ordered
+
+- Export Jobs needs to automatically delete devices and pools
+
+- Marc’s suggestion to create workflow-based-pools (derived pools) from yaql queries that can be used with the existing pool mechanism for subsequent services
+
+- Copy to the clipboard was not creating valid jSON (was this fixed?)
+
+- Service should fail if a YaQL query produces a device target that does not match inventory/database
+
+- Issue with timeout and other parameters not getting updated for subsequent services using cached Netmiko connections. Ability to close a cached connection and re-originate the connection in a service.

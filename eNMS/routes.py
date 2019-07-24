@@ -185,7 +185,9 @@ def form(form_type: str) -> str:
 @blueprint.route("/view_job_results/<int:job_id>/<runtime>")
 @login_required
 def view_job_results(job_id: int, runtime: str) -> Response:
-    return f"<pre>{fetch("Result", job_id=job_id, timestamp=runtime.replace("$", " ")).result)}</pre>"
+    timestamp = runtime.replace("$", " ")
+    result = fetch("Result", job_id=job_id, timestamp=timestamp).result
+    return f"<pre>{controller.str_dict(result)}</pre>"
 
 
 @blueprint.route("/download_configuration/<name>")

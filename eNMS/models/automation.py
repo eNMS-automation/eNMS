@@ -191,6 +191,8 @@ class Job(AbstractBase):
             except Exception as exc:
                 raise Exception(f"Python Query Failure: {str(e)}")
             devices, not_found = set(), set()
+            if isinstance(values, str):
+                values = [values]
             for value in values:
                 device = fetch(
                     "Device", allow_none=True, **{self.query_property_type: value}

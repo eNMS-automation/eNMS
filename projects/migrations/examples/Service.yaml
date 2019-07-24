@@ -12,7 +12,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 15:49:47.839865'
+  last_modified: '2019-07-24 20:10:38.064490'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -47,9 +47,9 @@
     payload_transfer_workflow:
     - '-200'
     - '0'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -326
-    - 45
+    'python Workflow: payload editor and pool helper':
+    - '-326'
+    - '45'
     python_query_workflow:
     - '-164'
     - '15'
@@ -82,7 +82,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 15:49:55.072560'
+  last_modified: '2019-07-24 20:10:45.447208'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -117,9 +117,9 @@
     payload_transfer_workflow:
     - '500'
     - '0'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 462
-    - -203
+    'python Workflow: payload editor and pool helper':
+    - '462'
+    - '-203'
     python_query_workflow:
     - '651'
     - '20'
@@ -700,7 +700,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 21:39:01.818761'
+  last_modified: '2019-07-24 19:57:07.245710'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -758,7 +758,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 21:39:02.830536'
+  last_modified: '2019-07-24 19:57:08.214349'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -826,7 +826,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 21:39:06.231239'
+  last_modified: '2019-07-24 19:57:11.610843'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -887,7 +887,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 21:39:08.412478'
+  last_modified: '2019-07-24 19:57:13.792731'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -947,7 +947,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 14:38:08.702446'
+  last_modified: '2019-07-24 20:09:43.688021'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1668,7 +1668,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 14:38:13.507555'
+  last_modified: '2019-07-24 20:09:49.603685'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1721,7 +1721,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 14:38:10.007974'
+  last_modified: '2019-07-24 20:09:45.541990'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1779,7 +1779,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 14:38:14.484069'
+  last_modified: '2019-07-24 20:09:50.574617'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2008,7 +2008,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-24 15:49:48.127182'
+  last_modified: '2019-07-24 20:17:52.032463'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2019,9 +2019,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -158
-    - -272
+    'python Workflow: payload editor and pool helper':
+    - '-158'
+    - '-272'
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2029,9 +2029,9 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
-  source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable_service\"\
-    , 10556, service=\"Payload editor, no devices\")\r\nset_var(\"variable\", \"variable_in_variables\"\
-    , \"variables\")\r\nsave_result(success=True, result={})"
+  source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
+    \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
+    \ result={})"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService
@@ -2053,7 +2053,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-24 15:49:48.411794'
+  last_modified: '2019-07-24 20:20:00.713578'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2064,9 +2064,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -93
-    - 163
+    'python Workflow: payload editor and pool helper':
+    - '-93'
+    - '163'
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2076,13 +2076,128 @@
   size: 40
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"service_and_device_variable\"\
-    , \"1000\", device=device.name, service=\"Payload editor, with device\")\r\nset_var(\"\
-    iteration_simple\", \"192.168.105.5\", \"pools\")\r\nset_var(\"iteration_device\"\
-    , [\"Washington\", \"Austin\"], \"pools\", device=device.name)\r\nsave_result(success=True,\
-    \ result={})"
+    , \"1000\", device=device.name, section=self.name)\r\nset_var(\"iteration_simple\"\
+    , \"192.168.105.5\", \"pools\")\r\nset_var(\"iteration_device\", [\"Washington\"\
+    , \"Austin\"], \"pools\", device=device.name)\r\nsave_result(success=True, result={})"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show vrf {{payload["pools"]["iteration_simple"]}}
+  completed: 0
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  events: []
+  expect_string: ''
+  failed: 0
+  fast_cli: true
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-24 20:20:10.939890'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Show vrf with payload helper
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'python Workflow: payload editor and pool helper':
+    - '166'
+    - '-247'
+  privileged_mode: false
+  push_to_git: false
+  python_query: get_var("iteration_device", section="pools", device=device.name)
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 1
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show vrf test
+  completed: 0
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  failed: 0
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-24 20:10:45.224125'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Show vrf with python query
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'python Workflow: payload editor and pool helper':
+    - '300'
+    - '132'
+  privileged_mode: false
+  push_to_git: false
+  python_query: payload["pools"]["iteration_simple"]
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -2280,121 +2395,5 @@
   type: IterationService
   user_provided_values: {}
   variable_name: ''
-  vendor: ''
-  waiting_time: 0
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  command: show vrf {{payload["pools"]["iteration_simple"]}}
-  completed: 0
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: arista_eos
-  events: []
-  expect_string: ''
-  failed: 0
-  fast_cli: true
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-07-24 15:49:52.683237'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: Show vrf with payload helper
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 166
-    - -247
-  privileged_mode: false
-  push_to_git: false
-  python_query: payload_helper("iteration_device", section="pools", device=device.name)
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 1
-  type: NetmikoValidationService
-  use_device_driver: true
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  command: show vrf test
-  completed: 0
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  failed: 0
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-07-24 15:49:54.864062'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: Show vrf with python query
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 300
-    - 132
-  privileged_mode: false
-  push_to_git: false
-  python_query: payload["pools"]["iteration_simple"]
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: NetmikoValidationService
-  use_device_driver: true
-  validation_method: text
   vendor: ''
   waiting_time: 0

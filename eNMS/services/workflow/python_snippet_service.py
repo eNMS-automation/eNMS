@@ -57,6 +57,7 @@ class PythonSnippetService(Service):
             "log": log,
             "parent": parent,
             "save_result": save_result,
+            "service": self,
             "set_var": get_set_var,
         }
 

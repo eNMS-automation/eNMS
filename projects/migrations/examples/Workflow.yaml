@@ -17,7 +17,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-24 12:57:05.166534'
+  last_modified: '2019-07-24 19:53:34.182477'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -45,7 +45,8 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Netmiko
-  devices: []
+  devices:
+  - Austin
   display_only_failed_nodes: true
   events: []
   failed: 0
@@ -60,12 +61,12 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-24 12:57:05.274022'
+  last_modified: '2019-07-24 19:57:14.317245'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
+  number_of_targets: 2
   operating_system: eos
   pools:
   - Washington
@@ -105,7 +106,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-24 14:38:14.901393'
+  last_modified: '2019-07-24 20:09:51.044634'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -153,7 +154,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-24 14:38:05.194753'
+  last_modified: '2019-07-24 19:53:34.508642'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -205,7 +206,7 @@
   - Iteration_service_simple
   - Iteration_service_python
   - Iteration_python_derived_targets
-  last_modified: '2019-07-24 12:57:05.590110'
+  last_modified: '2019-07-24 19:53:34.633187'
   mail_recipient: ''
   name: python_test_worflow
   notification_header: ''
@@ -249,7 +250,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-24 12:57:05.770573'
+  last_modified: '2019-07-24 19:53:34.740612'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -292,7 +293,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-24 14:38:15.178037'
+  last_modified: '2019-07-24 19:53:34.823335'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -336,7 +337,7 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-24 12:57:06.032978'
+  last_modified: '2019-07-24 19:53:34.907387'
   mail_recipient: ''
   name: Workflow with separate failure / success path
   notification_header: ''
@@ -386,7 +387,7 @@
   - Device_from_python_query
   - netmiko_check_no_vrf_test
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-24 12:57:06.132718'
+  last_modified: '2019-07-24 19:53:35.004820'
   mail_recipient: ''
   name: python_query_workflow
   notification_header: ''
@@ -428,7 +429,7 @@
   - End
   - Test Netmiko Prompt Service
   - Test netmiko prompts pass
-  last_modified: '2019-07-24 12:57:06.256601'
+  last_modified: '2019-07-24 19:53:35.102363'
   mail_recipient: ''
   name: Netmiko prompts
   notification_header: ''
@@ -473,7 +474,7 @@
   - Payload editor, with device
   - Show vrf with payload helper
   - Show vrf with python query
-  last_modified: '2019-07-24 15:50:17.452528'
+  last_modified: '2019-07-24 20:10:45.570420'
   mail_recipient: ''
   name: 'python Workflow: payload editor and pool helper'
   notification_header: ''

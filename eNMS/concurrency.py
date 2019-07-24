@@ -10,6 +10,7 @@ def threaded_job(
     targets: Optional[set] = None,
     payload: Optional[dict] = None,
     start_points: Optional[List[int]] = None,
+    runtime: Optional[str] = None,
 ) -> None:
     task = fetch("Task", allow_none=True, creation_time=aps_job_id or "")
     job = fetch("Job", id=job_id)
@@ -18,7 +19,7 @@ def threaded_job(
     payload = payload or job.initial_payload
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
-    job.run(targets=targets, payload=payload, task=task, start_points=start_points)
+    job.run(targets=targets, payload=payload, task=task, start_points=start_points, runtime=runtime)
 
 
 def device_thread(args: tuple) -> None:

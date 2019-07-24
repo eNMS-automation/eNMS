@@ -149,12 +149,14 @@ class RunJob(Resource):
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)
+        print("ttt"*100, handle_asynchronously)
         if handle_asynchronously:
+            runtime = controller.get_time()
             controller.scheduler.add_job(
-                id=controller.get_time(),
+                id=runtime,
                 func=threaded_job,
                 run_date=datetime.now(),
-                args=[job.id, None, [d.id for d in targets], data.get("payload")],
+                args=[job.id, None, [d.id for d in targets], data.get("payload"), runtime],
                 trigger="date",
             )
             return {**job.serialized, "errors": errors}

@@ -260,8 +260,9 @@ class Job(AbstractBase):
         parent_timestamp: Optional[str] = None,
         task: Optional["Task"] = None,
         start_points: Optional[List["Job"]] = None,
+        runtime: Optional[str] = None,
     ) -> Tuple[dict, str]:
-        runtime = controller.get_time()
+        runtime = runtime or controller.get_time()
         if not parent_timestamp:
             parent_timestamp = runtime
         self.is_running, self.state = True, {}
@@ -374,7 +375,9 @@ class Service(Job):
         parent_timestamp: Optional[str] = None,
     ) -> dict:
         if not targets:
-            return self.get_results(runtime, payload)
+            results = self.get_results(runtime, payload)
+            factory("Result", result=results["results"], **results["kwargs"])
+            return results["results"]
         else:
             if self.multiprocessing:
                 device_results = {}

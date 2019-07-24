@@ -111,3 +111,17 @@ which would aid in trouble shooting & perhaps in ordering the Result.
 then other users can't not see the progress of that workflow without refreshing their browser.
 For the user who did not start the Workflow the Workflow appears idle, would be nice for all
 users to be able to track progress of workflow.
+
+- New GET Result Endpoint for the REST API to get the result of a job run asynchronously
+
+- The async flag on run_job is broken (it uses the string value as a boolean)
+>>> Couldn't reproduce
+
+- Sync run_jobs for a service return the service results, but workflows don't.
+Obviously, you don't want a very long waited synchronous request,
+but that could happen for a service or a workflow.
+>>> Couldn't reproduce
+
+- If async run_job was invoked, is there a way to check the job status
+or collect the results after completion
+>>> Done

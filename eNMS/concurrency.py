@@ -19,7 +19,13 @@ def threaded_job(
     payload = payload or job.initial_payload
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
-    job.run(targets=targets, payload=payload, task=task, start_points=start_points, runtime=runtime)
+    job.run(
+        targets=targets,
+        payload=payload,
+        task=task,
+        start_points=start_points,
+        runtime=runtime,
+    )
 
 
 def device_thread(args: tuple) -> None:

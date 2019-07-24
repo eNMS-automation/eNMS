@@ -180,8 +180,10 @@ class Job(AbstractBase):
         self, payload: Optional[dict], device: Optional["Device"] = None
     ) -> Set["Device"]:
         if self.python_query:
+
             def get_var(*args, **kwargs):
                 return self.payload_helper(payload, *args, **kwargs)
+
             try:
                 values = eval(self.python_query, locals())
             except Exception as exc:
@@ -215,7 +217,7 @@ class Job(AbstractBase):
                 yield getattr(x, direction)
 
     def notify(self, results: dict) -> None:
-        runtime = results['timestamp']
+        runtime = results["timestamp"]
         notification = [
             f"Job: {self.name} ({self.type})",
             f"Runtime: {runtime}",
@@ -407,7 +409,9 @@ class Service(Job):
             results = {"devices": {}}
             for device_name, device_result in device_results.items():
                 results["devices"][device_name] = device_result["results"]
-                factory("Result", result=device_result["results"], **device_result["kwargs"])
+                factory(
+                    "Result", result=device_result["results"], **device_result["kwargs"]
+                )
             return results
 
     def build_results(
@@ -763,11 +767,7 @@ class Workflow(Job):
         jobs: list = start_points or [self.jobs[0]]
         payload = deepcopy(payload)
         visited: Set = set()
-        results: dict = {
-            "results": {},
-            "success": False,
-            "timestamp": runtime,
-        }
+        results: dict = {"results": {}, "success": False, "timestamp": runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
             initial_targets = targets or self.compute_devices(results["results"])

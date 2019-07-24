@@ -94,6 +94,14 @@ class GetConfiguration(Resource):
         return device.configurations[max(device.configurations)]
 
 
+class GetResult(Resource):
+    decorators = [auth.login_required]
+
+    def get(self, name: str, timestamp: str) -> str:
+        job = fetch("Job", name=name)
+        return fetch("Result", job_id=job.id, timestamp=timestamp).result
+
+
 class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
@@ -149,17 +157,23 @@ class RunJob(Resource):
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)
-        print("ttt"*100, handle_asynchronously)
         if handle_asynchronously:
             runtime = controller.get_time()
             controller.scheduler.add_job(
                 id=runtime,
                 func=threaded_job,
                 run_date=datetime.now(),
-                args=[job.id, None, [d.id for d in targets], data.get("payload"), runtime],
+                args=[
+                    job.id,
+                    None,
+                    [d.id for d in targets],
+                    data.get("payload"),
+                    None,
+                    runtime,
+                ],
                 trigger="date",
             )
-            return {**job.serialized, "errors": errors}
+            return {"errors": errors, "runtime": runtime, **job.get_properties()}
         else:
             return {
                 **job.run(targets=targets, payload=data.get("payload"))[0],
@@ -194,5 +208,6 @@ def configure_rest_api(app: Flask) -> None:
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
     api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
+    api.add_resource(GetResult, "/rest/result/<string:name>/<string:timestamp>")
     api.add_resource(Migrate, "/rest/migrate/<string:direction>")
     api.add_resource(Topology, "/rest/topology/<string:direction>")

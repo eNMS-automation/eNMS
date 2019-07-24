@@ -151,7 +151,6 @@ class Job(AbstractBase):
         service: Optional[str] = None,
         device: Optional[str] = None,
     ):
-        print("tttt"*200, name, value, section)
         if service:
             payload.setdefault("services", {})
             payload = payload["services"]
@@ -190,17 +189,15 @@ class Job(AbstractBase):
     def compute_devices(
         self, payload: Optional[dict], device: Optional["Device"] = None
     ) -> Set["Device"]:
-        if self.yaql_query:
-            query = self.sub(self.yaql_query, locals())
-            engine = yaql_factory.YaqlFactory().create()
-
+        if self.python_query:
             def payload_helper(*args, **kwargs):
                 return self.payload_helper(payload, *args, **kwargs)
-
-            context = create_context()
-            context.register_function(payload_helper, name="payload_helper")
+            try:
+                values = eval(self.python_query, locals())
+            except Exception as exc:
+                raise Exception(f"Python Query Failure: {str(e)}")
             devices, not_found = set(), set()
-            for value in engine(query).evaluate(data=payload, context=context):
+            for value in values:
                 device = fetch(
                     "Device", allow_none=True, **{self.query_property_type: value}
                 )

@@ -330,8 +330,7 @@ class Service(Job):
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,
     ) -> dict:
-        device_runtime = controller.get_time()
-        kwargs = {"timestamp": device_runtime, "job": self.id}
+        kwargs = {"timestamp": runtime, "job": self.id}
         if parent:
             kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
         if device:
@@ -341,7 +340,7 @@ class Service(Job):
             "info",
             f"Running {self.type} {f'on {device.name}.' if device else '.'}",
         )
-        results = {"timestamp": device_runtime}
+        results = {"timestamp": runtime}
         try:
             if device:
                 results.update(self.job(payload, device, parent))

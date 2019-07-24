@@ -147,7 +147,6 @@ class Job(AbstractBase):
         name: str,
         value: Optional[Any] = None,
         section: Optional[str] = None,
-        service: Optional[str] = None,
         device: Optional[str] = None,
     ):
         if device:
@@ -181,7 +180,7 @@ class Job(AbstractBase):
         self, payload: Optional[dict], device: Optional["Device"] = None
     ) -> Set["Device"]:
         if self.python_query:
-            def payload_helper(*args, **kwargs):
+            def get_var(*args, **kwargs):
                 return self.payload_helper(payload, *args, **kwargs)
             try:
                 values = eval(self.python_query, locals())

@@ -150,9 +150,6 @@ class Job(AbstractBase):
         service: Optional[str] = None,
         device: Optional[str] = None,
     ):
-        if service:
-            payload = payload.setdefault("services", {})
-            payload = payload.setdefault(service, {})
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})
@@ -334,7 +331,8 @@ class Service(Job):
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,
     ) -> dict:
-        kwargs = {"timestamp": runtime, "job": self.id}
+        device_runtime = controller.get_time()
+        kwargs = {"timestamp": device_runtime, "job": self.id}
         if parent:
             kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
         if device:
@@ -344,7 +342,7 @@ class Service(Job):
             "info",
             f"Running {self.type} {f'on {device.name}.' if device else '.'}",
         )
-        results = {"timestamp": runtime}
+        results = {"timestamp": device_runtime}
         try:
             if device:
                 results.update(self.job(payload, device, parent))

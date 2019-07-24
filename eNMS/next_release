@@ -74,7 +74,11 @@ It seems more natural to edit the service when it's double clicked.  What do you
 
 - Copy to clipboard for device configuration
 
-- when clicking on a key or value in the json format of the results: have an option to get the python query path to payload value
+- Navigating Payload in order get a path to extract data to use in another service
+can be difficult and varies based on YaQL/Python. While viewing the Result of a Workflow
+they would like to be able to select the data they want to use and get either a YaQL or
+Python path to be able to paste into another service which will extract the data from payload
+for use.
 
 - Fix bug subworkflow edit panel
 
@@ -82,10 +86,28 @@ It seems more natural to edit the service when it's double clicked.  What do you
 
 - Export Jobs needs to automatically delete devices and pools
 
-- Marc’s suggestion to create workflow-based-pools (derived pools) from yaql queries that can be used with the existing pool mechanism for subsequent services
+- Marc’s suggestion to create workflow-based-pools (derived pools) from yaql queries
+that can be used with the existing pool mechanism for subsequent services
 
 - Copy to the clipboard was not creating valid jSON (was this fixed?)
 
-- Service should fail if a YaQL query produces a device target that does not match inventory/database
+- Service should fail if a YaQL query produces a device target that
+does not matchinventory/database
 
-- Issue with timeout and other parameters not getting updated for subsequent services using cached Netmiko connections. Ability to close a cached connection and re-originate the connection in a service.
+- Issue with timeout and other parameters not getting updated for subsequent services
+using cached Netmiko connections.
+Ability to close a cached connection and re-originate the connection in a service.
+
+- When the Result of a Workflow are viewed as JSON the order of the Services
+within the Workflow are not sequential with the order in which they were run.
+
+- Need some way to be able to see logs for Multiprocessing several devices when using
+workflow/service.
+
+- It would also be nice if the start time of each Service within a Workflow was displayed,
+which would aid in trouble shooting & perhaps in ordering the Result.
+
+- If one user or ReST call was made to start a workflow,
+then other users can't not see the progress of that workflow without refreshing their browser.
+For the user who did not start the Workflow the Workflow appears idle, would be nice for all
+users to be able to track progress of workflow.

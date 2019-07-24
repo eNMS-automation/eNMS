@@ -116,7 +116,7 @@ class Job(AbstractBase):
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
     )
-    yaql_query = Column(String(SMALL_STRING_LENGTH), default="")
+    python_query = Column(String(SMALL_STRING_LENGTH), default="")
     query_property_type = Column(String(SMALL_STRING_LENGTH), default="ip_address")
     devices = relationship("Device", secondary=job_device_table, back_populates="jobs")
     pools = relationship("Pool", secondary=job_pool_table, back_populates="jobs")
@@ -789,7 +789,7 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            if self.use_workflow_targets and job.yaql_query:
+            if self.use_workflow_targets and job.python_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:

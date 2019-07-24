@@ -28,7 +28,7 @@ class JobForm(BaseForm):
     type = StringField("Service Type")
     name = StringField("Name")
     description = StringField("Description")
-    yaql_query = SubstitutionField("YaQL Query")
+    python_query = SubstitutionField("Python Query")
     query_property_type = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )

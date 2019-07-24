@@ -3,7 +3,6 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
-from yaql import factory
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch
@@ -26,7 +25,7 @@ class IterationService(Service):
     origin_of_values = Column(
         String(SMALL_STRING_LENGTH), default="user_provided_values"
     )
-    yaql_query_values = Column(String(SMALL_STRING_LENGTH), default="")
+    python_query_values = Column(String(SMALL_STRING_LENGTH), default="")
     user_provided_values = Column(MutableDict.as_mutable(PickleType), default={})
     convert_values_to_devices = Column(Boolean, default=False)
     conversion_property = Column(String(SMALL_STRING_LENGTH), default="name")
@@ -49,8 +48,7 @@ class IterationService(Service):
             else:
                 values = self.user_provided_values["all"]
         else:
-            query = self.sub(self.yaql_query_values, locals())
-            values = factory.YaqlFactory().create()(query).evaluate(data=payload)
+            values = eval(self.python_query_values, locals())
         if self.convert_values_to_devices:
             fail_results, devices = {}, set()
             for value in values:
@@ -90,15 +88,15 @@ class IterationForm(ServiceForm):
         "Where Values come from",
         choices=(
             ("user_provided_values", "User-provided Values (dictionary)"),
-            ("yaql_query", "YaQL Query on the Payload"),
+            ("python_query", "Python Query on the Payload"),
         ),
     )
     user_provided_values = DictField(
         "Iteration Values for Iteration: User provided "
         "(Expect dictionary {'all' : [...]} or {'device-name' : [...], ...})"
     )
-    yaql_query_values = SubstitutionField(
-        "Iteration Values for Iteration: YaQL query on the payload"
+    python_query_values = StringField(
+        "Iteration Values for Iteration: Python query on the payload"
     )
     convert_values_to_devices = BooleanField("Convert values to devices")
     conversion_property = SelectField(

@@ -31,4 +31,4 @@
   use_workflow_targets: false
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''

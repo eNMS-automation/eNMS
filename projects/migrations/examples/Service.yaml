@@ -41,10 +41,10 @@
     Workflow_of_workflows:
     - '-300'
     - '0'
-    'YaQL Workflow: payload editor and pool helper':
+    'python Workflow: payload editor and pool helper':
     - '-326'
     - '45'
-    YaQL_test_worflow:
+    python_test_worflow:
     - '-359'
     - '-163'
     payload_extraction_validation_worflow:
@@ -53,7 +53,7 @@
     payload_transfer_workflow:
     - '-200'
     - '0'
-    yaql_query_workflow:
+    python_query_workflow:
     - '-164'
     - '15'
   push_to_git: false
@@ -67,7 +67,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: pink
   completed: 0
   creator: admin
@@ -111,10 +111,10 @@
     Workflow_of_workflows:
     - '300'
     - '0'
-    'YaQL Workflow: payload editor and pool helper':
+    'python Workflow: payload editor and pool helper':
     - '743'
     - '14'
-    YaQL_test_worflow:
+    python_test_worflow:
     - '-9'
     - '294'
     payload_extraction_validation_worflow:
@@ -123,7 +123,7 @@
     payload_transfer_workflow:
     - '500'
     - '0'
-    yaql_query_workflow:
+    python_query_workflow:
     - '651'
     - '20'
   push_to_git: false
@@ -137,7 +137,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -174,7 +174,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -211,7 +211,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -248,7 +248,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -285,7 +285,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -325,7 +325,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -365,7 +365,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - a_dict: {}
   a_float: 5.0
   a_list:
@@ -420,7 +420,7 @@
   url: https://www.google.fr/
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -463,7 +463,7 @@
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -508,7 +508,7 @@
   type: GenericFileTransferService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -549,7 +549,7 @@
   type: LogBackupService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -590,7 +590,7 @@
   type: DatabaseBackupService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   configuration_command: show running-config
@@ -635,7 +635,7 @@
   use_device_driver: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -676,7 +676,7 @@
   use_device_driver: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   commit_configuration: false
   completed: 0
@@ -730,7 +730,7 @@
   use_device_driver: true
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -779,10 +779,10 @@
     Workflow with separate failure / success path:
     - '84'
     - '-3'
-    YaQL_test_worflow:
+    python_test_worflow:
     - '147'
     - '-14'
-    yaql_query_workflow:
+    python_query_workflow:
     - '414'
     - '-154'
   privileged_mode: false
@@ -802,7 +802,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   commit_configuration: false
   completed: 0
@@ -859,7 +859,7 @@
   use_device_driver: true
   vendor: Arista
   waiting_time: 1
-  yaql_query: ''
+  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -908,7 +908,7 @@
     Workflow with separate failure / success path:
     - '52'
     - '-2'
-    yaql_query_workflow:
+    python_query_workflow:
     - '337'
     - '-145'
   privileged_mode: false
@@ -928,7 +928,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - action: load_merge_candidate
   color: '#D2E5FF'
   completed: 0
@@ -974,7 +974,7 @@
   use_device_driver: true
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - call_type: GET
   color: '#D2E5FF'
   completed: 0
@@ -1038,7 +1038,7 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1090,7 +1090,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1142,7 +1142,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1191,7 +1191,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1240,7 +1240,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1282,7 +1282,7 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1308,7 +1308,7 @@
   operating_system: ''
   pools: []
   positions:
-    YaQL_test_worflow:
+    python_test_worflow:
     - '3'
     - '-144'
   push_to_git: false
@@ -1324,7 +1324,7 @@
   type: PythonSnippetService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -1354,7 +1354,7 @@
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
-  name: netmiko_yaql_defined_devices
+  name: netmiko_python_defined_devices
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1362,7 +1362,7 @@
   operating_system: eos
   pools: []
   positions:
-    YaQL_test_worflow:
+    python_test_worflow:
     - '-336'
     - '11'
   privileged_mode: false
@@ -1382,7 +1382,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  yaql_query: $.variables.devices
+  python_query: payload['variables']['devices']
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show interface {{payload['value']}}
@@ -1439,7 +1439,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show ip route
@@ -1497,7 +1497,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1554,7 +1554,7 @@
   variable3: textfsm_variable
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   content_match: ''
@@ -1605,7 +1605,7 @@
   validation_method: dict_included
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   content_match: (\d\.){3}\d
@@ -1652,7 +1652,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1694,7 +1694,7 @@
   use_device_driver: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -1752,7 +1752,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -1793,7 +1793,7 @@
     Napalm_VRF_workflow:
     - '9'
     - '139'
-    yaql_query_workflow:
+    python_query_workflow:
     - '245'
     - '32'
   privileged_mode: false
@@ -1813,7 +1813,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -1843,7 +1843,7 @@
   mail_recipient: ''
   max_processes: 50
   multiprocessing: true
-  name: Device_from_yaql_query
+  name: Device_from_python_query
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1851,7 +1851,7 @@
   operating_system: ''
   pools: []
   positions:
-    yaql_query_workflow:
+    python_query_workflow:
     - '-5'
     - '-147'
   privileged_mode: false
@@ -1871,7 +1871,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  yaql_query: $.{{device.name}}
+  python_query: payload[device.name]
 - color: '#D2E5FF'
   command: show vrf a
   completed: 0
@@ -1932,7 +1932,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   command: show vrf
   completed: 0
@@ -1992,7 +1992,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -2018,7 +2018,7 @@
   operating_system: ''
   pools: []
   positions:
-    'YaQL Workflow: payload editor and pool helper':
+    'python Workflow: payload editor and pool helper':
     - '-158'
     - '-272'
   push_to_git: false
@@ -2035,7 +2035,7 @@
   type: PythonSnippetService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -2063,7 +2063,7 @@
   operating_system: ''
   pools: []
   positions:
-    'YaQL Workflow: payload editor and pool helper':
+    'python Workflow: payload editor and pool helper':
     - '-93'
     - '163'
   push_to_git: false
@@ -2083,7 +2083,7 @@
   type: PythonSnippetService
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2116,7 +2116,7 @@
   origin_of_values: user_provided_values
   pools: []
   positions:
-    YaQL_test_worflow:
+    python_test_worflow:
     - '-342'
     - '2'
   push_to_git: false
@@ -2135,8 +2135,8 @@
   variable_name: value
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
-  yaql_query_values: ''
+  python_query: ''
+  python_query_values: ''
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2144,7 +2144,7 @@
   creator: admin
   credentials: device
   custom_username: ''
-  description: Test the iteration mechanism (YaQL values)
+  description: Test the iteration mechanism (python values)
   devices: []
   display_only_failed_nodes: true
   events: []
@@ -2159,15 +2159,15 @@
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
-  name: Iteration_service_yaql
+  name: Iteration_service_python
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  origin_of_values: yaql_query
+  origin_of_values: python_query
   pools: []
   positions:
-    YaQL_test_worflow:
+    python_test_worflow:
     - '-358'
     - '192'
   push_to_git: false
@@ -2183,8 +2183,8 @@
   variable_name: value
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
-  yaql_query_values: $.variables.iteration_devices.{{device.name}}
+  python_query: ''
+  python_query_values: payload['variables']['iteration_devices'][device.name]
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2207,15 +2207,15 @@
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
-  name: iteration_yaql_payload
+  name: iteration_python_payload
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  origin_of_values: yaql_query
+  origin_of_values: python_query
   pools: []
   positions:
-    YaQL_test_worflow:
+    python_test_worflow:
     - '-337'
     - '233'
   push_to_git: false
@@ -2231,8 +2231,8 @@
   variable_name: value
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
-  yaql_query_values: $.netmiko_check_vrf_test.results.devices.{{device.name}}.match
+  python_query: ''
+  python_query_values: payload['netmiko_check_vrf_test']['results']['devices'][device.name]['match']
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2255,15 +2255,15 @@
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
-  name: Iteration_YaQL_derived_targets
+  name: Iteration_python_derived_targets
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
-  origin_of_values: yaql_query
+  origin_of_values: python_query
   pools: []
   positions:
-    YaQL_test_worflow:
+    python_test_worflow:
     - '84'
     - '131'
   push_to_git: false
@@ -2279,5 +2279,5 @@
   variable_name: ''
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
-  yaql_query_values: $.derived_targets.{{device.name}}
+  python_query: ''
+  python_query_values: payload['derived_targets'][device.name]

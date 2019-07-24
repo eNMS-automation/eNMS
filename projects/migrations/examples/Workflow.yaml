@@ -38,7 +38,7 @@
   use_workflow_targets: false
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -82,7 +82,7 @@
   use_workflow_targets: true
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -129,7 +129,7 @@
   use_workflow_targets: true
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -177,13 +177,13 @@
   use_workflow_targets: true
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
   credentials: device
   custom_username: ''
-  description: Test YaQL device selection mechanism
+  description: Test python device selection mechanism
   devices:
   - Washington
   display_only_failed_nodes: true
@@ -203,11 +203,11 @@
   - End
   - add_devices_to_payload
   - Iteration_service_simple
-  - Iteration_service_yaql
-  - Iteration_YaQL_derived_targets
+  - Iteration_service_python
+  - Iteration_python_derived_targets
   last_modified: '2019-07-23 15:48:56.518257'
   mail_recipient: ''
-  name: YaQL_test_worflow
+  name: python_test_worflow
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 1
@@ -226,7 +226,7 @@
   use_workflow_targets: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -270,7 +270,7 @@
   use_workflow_targets: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -313,7 +313,7 @@
   use_workflow_targets: true
   vendor: Arista
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -357,7 +357,7 @@
   use_workflow_targets: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -383,12 +383,12 @@
   jobs:
   - Start
   - End
-  - Device_from_yaql_query
+  - Device_from_python_query
   - netmiko_check_no_vrf_test
   - netmiko_check_no_vrf_napalm
   last_modified: '2019-07-23 15:48:56.903849'
   mail_recipient: ''
-  name: yaql_query_workflow
+  name: python_query_workflow
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 2
@@ -407,7 +407,7 @@
   use_workflow_targets: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -449,7 +449,7 @@
   use_workflow_targets: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -473,7 +473,7 @@
   - Payload editor, with device
   last_modified: '2019-07-23 15:48:57.079166'
   mail_recipient: ''
-  name: 'YaQL Workflow: payload editor and pool helper'
+  name: 'python Workflow: payload editor and pool helper'
   notification_header: ''
   number_of_retries: 0
   number_of_targets: 2
@@ -492,4 +492,4 @@
   use_workflow_targets: true
   vendor: ''
   waiting_time: 0
-  yaql_query: ''
+  python_query: ''

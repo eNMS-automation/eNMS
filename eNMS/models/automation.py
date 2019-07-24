@@ -216,24 +216,23 @@ class Job(AbstractBase):
             if x.subtype == subtype and x.workflow == workflow:
                 yield getattr(x, direction)
 
-    def notify(self, results: dict, time: str) -> None:
+    def notify(self, results: dict) -> None:
+        runtime = results['timestamp']
         notification = [
             f"Job: {self.name} ({self.type})",
-            f"Runtime: {time}",
+            f"Runtime: {runtime}",
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]
         notification.extend(self.job_notification(results))
         if self.include_link_in_summary:
             notification.append(
                 f"Results: {controller.enms_server_addr}/view_job_results"
-                f"/{self.id}/{time.replace(' ', '$')}"
+                f"/{self.id}/{runtime.replace(' ', '$')}"
             )
         fetch("Job", name=self.send_notification_method).run(
             {
                 "job": self.get_properties(),
                 "results": results,
-                "runtime": time,
-                "result": results["success"],
                 "content": "\n\n".join(notification),
             }
         )
@@ -294,7 +293,7 @@ class Job(AbstractBase):
         factory("Result", **results_kwargs)
         Session.commit()
         if not parent and self.send_notification:
-            self.notify(results, runtime)
+            self.notify(results)
         return results, runtime
 
 

@@ -253,8 +253,13 @@
   source: Payload editor, no devices
   subtype: success
   workflow: 'python Workflow: payload editor and pool helper'
-- destination: End
-  name: 54-success:56->2
+- destination: Show vrf with payload helper
+  name: 56-success:41->57
   source: Payload editor, with device
+  subtype: success
+  workflow: 'python Workflow: payload editor and pool helper'
+- destination: End
+  name: 56-success:57->2
+  source: Show vrf with payload helper
   subtype: success
   workflow: 'python Workflow: payload editor and pool helper'

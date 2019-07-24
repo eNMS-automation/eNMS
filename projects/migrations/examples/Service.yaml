@@ -12,7 +12,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 21:58:59.314710'
+  last_modified: '2019-07-24 13:06:05.979739'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -41,22 +41,23 @@
     Workflow_of_workflows:
     - '-300'
     - '0'
-    'python Workflow: payload editor and pool helper':
-    - '-326'
-    - '45'
-    python_test_worflow:
-    - '-359'
-    - '-163'
     payload_extraction_validation_worflow:
     - '-200'
     - '0'
     payload_transfer_workflow:
     - '-200'
     - '0'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - -326
+    - 45
     python_query_workflow:
     - '-164'
     - '15'
+    python_test_worflow:
+    - '-359'
+    - '-163'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -67,7 +68,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: pink
   completed: 0
   creator: admin
@@ -82,7 +82,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 21:39:08.673245'
+  last_modified: '2019-07-24 12:59:48.585230'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -111,22 +111,23 @@
     Workflow_of_workflows:
     - '300'
     - '0'
-    'python Workflow: payload editor and pool helper':
-    - '743'
-    - '14'
-    python_test_worflow:
-    - '-9'
-    - '294'
     payload_extraction_validation_worflow:
     - '200'
     - '0'
     payload_transfer_workflow:
     - '500'
     - '0'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 743
+    - 14
     python_query_workflow:
     - '651'
     - '20'
+    python_test_worflow:
+    - '-9'
+    - '294'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -137,7 +138,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -164,6 +164,7 @@
   pools: []
   positions: {}
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -174,7 +175,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -201,6 +201,7 @@
   pools: []
   positions: {}
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -211,7 +212,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -238,6 +238,7 @@
   pools: []
   positions: {}
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -248,7 +249,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -275,6 +275,7 @@
   pools: []
   positions: {}
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -285,7 +286,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -315,6 +315,7 @@
     - '0'
     - '300'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -325,7 +326,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -355,6 +355,7 @@
     - '0'
     - '-200'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -365,7 +366,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - a_dict: {}
   a_float: 5.0
   a_list:
@@ -406,6 +406,7 @@
   pools: []
   positions: {}
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   regex: abbbbcc
   send_notification: false
@@ -420,7 +421,6 @@
   url: https://www.google.fr/
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -451,6 +451,7 @@
   pools: []
   positions: {}
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   remote_as: 200
   send_notification: false
@@ -463,7 +464,6 @@
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -496,6 +496,7 @@
   positions: {}
   protocol: scp
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -508,7 +509,6 @@
   type: GenericFileTransferService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -539,6 +539,7 @@
   positions: {}
   protocol: scp
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -549,7 +550,6 @@
   type: LogBackupService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -580,6 +580,7 @@
   positions: {}
   protocol: scp
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -590,7 +591,6 @@
   type: DatabaseBackupService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   configuration_command: show running-config
@@ -623,6 +623,7 @@
   positions: {}
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -635,7 +636,6 @@
   use_device_driver: true
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -665,6 +665,7 @@
   pools: []
   positions: {}
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -676,7 +677,6 @@
   use_device_driver: true
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   commit_configuration: false
   completed: 0
@@ -716,6 +716,7 @@
     - '-150'
   privileged_mode: true
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -730,7 +731,6 @@
   use_device_driver: true
   vendor: Arista
   waiting_time: 0
-  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -779,14 +779,15 @@
     Workflow with separate failure / success path:
     - '84'
     - '-3'
-    python_test_worflow:
-    - '147'
-    - '-14'
     python_query_workflow:
     - '414'
     - '-154'
+    python_test_worflow:
+    - '147'
+    - '-14'
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -802,7 +803,6 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   commit_configuration: false
   completed: 0
@@ -845,6 +845,7 @@
     - '50'
   privileged_mode: true
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -859,7 +860,6 @@
   use_device_driver: true
   vendor: Arista
   waiting_time: 1
-  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -913,6 +913,7 @@
     - '-145'
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -928,7 +929,6 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  python_query: ''
 - action: load_merge_candidate
   color: '#D2E5FF'
   completed: 0
@@ -947,7 +947,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:09:49.035721'
+  last_modified: '2019-07-24 12:59:00.990268'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -963,6 +963,7 @@
     - '0'
     - '-150'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -974,7 +975,6 @@
   use_device_driver: true
   vendor: Arista
   waiting_time: 0
-  python_query: ''
 - call_type: GET
   color: '#D2E5FF'
   completed: 0
@@ -1023,6 +1023,7 @@
     - '-50'
     - '0'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   rest_url: http://127.0.0.1:5000/rest/is_alive
   send_notification: false
@@ -1038,7 +1039,6 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1058,7 +1058,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:09:34.480417'
+  last_modified: '2019-07-24 12:58:56.237055'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1078,6 +1078,7 @@
     - '-50'
     - '-100'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1090,7 +1091,6 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1110,7 +1110,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:09:43.900174'
+  last_modified: '2019-07-24 12:58:58.209554'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1130,6 +1130,7 @@
     - '150'
     - '100'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1142,7 +1143,6 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1162,7 +1162,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:09:37.962595'
+  last_modified: '2019-07-24 12:58:56.591585'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1179,6 +1179,7 @@
     - '150'
     - '-100'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1191,7 +1192,6 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1211,7 +1211,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:09:41.474516'
+  last_modified: '2019-07-24 12:58:57.205092'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1228,6 +1228,7 @@
     - '300'
     - '-100'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1240,7 +1241,6 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1257,7 +1257,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:09:41.728236'
+  last_modified: '2019-07-24 12:58:57.438475'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1272,6 +1272,7 @@
     - '300'
     - '0'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1282,7 +1283,6 @@
   type: SwissArmyKnifeService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1312,6 +1312,7 @@
     - '3'
     - '-144'
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1324,7 +1325,6 @@
   type: PythonSnippetService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -1367,6 +1367,7 @@
     - '11'
   privileged_mode: false
   push_to_git: false
+  python_query: payload['variables']['devices']
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1382,7 +1383,6 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  python_query: payload['variables']['devices']
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show interface {{payload['value']}}
@@ -1424,6 +1424,7 @@
   positions: {}
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1439,7 +1440,6 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show ip route
@@ -1482,6 +1482,7 @@
     - '-150'
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1497,7 +1498,6 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1538,6 +1538,7 @@
     - '0'
     - '-50'
   push_to_git: false
+  python_query: ''
   query1: $.netmiko_show_ip_route.results.devices.{{device.name}}.success
   query2: $.netmiko_show_ip_route.results.devices.{{device.name}}.result
   query3: $.netmiko_show_ip_route.results.devices.{{device.name}}.result
@@ -1554,7 +1555,6 @@
   variable3: textfsm_variable
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   content_match: ''
@@ -1593,6 +1593,7 @@
     - '0'
     - '50'
   push_to_git: false
+  python_query: ''
   query: $.payload_extraction.results.devices.{{device.name}}.result.regex_variable
   query_property_type: ip_address
   send_notification: false
@@ -1605,7 +1606,6 @@
   validation_method: dict_included
   vendor: Arista
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   content_match: (\d\.){3}\d
@@ -1640,6 +1640,7 @@
     - '0'
     - '150'
   push_to_git: false
+  python_query: ''
   query: $.payload_extraction.results.devices.{{device.name}}.result.textfsm_variable.value[0][1]
   query_property_type: ip_address
   send_notification: false
@@ -1652,7 +1653,6 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -1667,7 +1667,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:15.198268'
+  last_modified: '2019-07-24 12:59:05.802178'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1683,6 +1683,7 @@
     - '3'
     - '47'
   push_to_git: false
+  python_query: ''
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1694,7 +1695,6 @@
   use_device_driver: true
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -1720,7 +1720,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 16:09:49.406275'
+  last_modified: '2019-07-24 12:59:02.565557'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1737,6 +1737,7 @@
     - '-32'
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1752,7 +1753,6 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -1778,7 +1778,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-17 17:06:42.695141'
+  last_modified: '2019-07-24 12:59:06.676956'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1798,6 +1798,7 @@
     - '32'
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1813,7 +1814,6 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
@@ -1856,6 +1856,7 @@
     - '-147'
   privileged_mode: false
   push_to_git: false
+  python_query: payload[device.name]
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1871,7 +1872,6 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  python_query: payload[device.name]
 - color: '#D2E5FF'
   command: show vrf a
   completed: 0
@@ -1916,6 +1916,7 @@
     - '-74'
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: name
   response1: show vrf b
   response2: show vrf c
@@ -1932,7 +1933,6 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   command: show vrf
   completed: 0
@@ -1976,6 +1976,7 @@
     - '43'
   privileged_mode: false
   push_to_git: false
+  python_query: ''
   query_property_type: name
   response1: show vrf
   response2: ''
@@ -1992,7 +1993,6 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -2007,7 +2007,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-22 22:56:18.289949'
+  last_modified: '2019-07-24 13:06:06.257304'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2018,10 +2018,11 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '-158'
-    - '-272'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - -158
+    - -272
   push_to_git: false
+  python_query: ''
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2035,7 +2036,6 @@
   type: PythonSnippetService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   creator: admin
@@ -2052,7 +2052,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-23 21:58:58.333956'
+  last_modified: '2019-07-24 13:06:06.524415'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2063,10 +2063,11 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '-93'
-    - '163'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - -93
+    - 163
   push_to_git: false
+  python_query: ''
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2076,14 +2077,13 @@
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"service_and_device_variable\"\
     , \"1000\", device=device.name, service=\"Payload editor, with device\")\r\nset_var(\"\
     iteration_simple\", \"192.168.105.5\", \"pools\")\r\nset_var(\"iteration_device\"\
-    , [\"Baltimore\", \"Austin\"], \"pools\", device=device.name)\r\nsave_result(success=True,\
+    , [\"Washington\", \"Austin\"], \"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
   waiting_time: 0
-  python_query: ''
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2120,6 +2120,8 @@
     - '-342'
     - '2'
   push_to_git: false
+  python_query: ''
+  python_query_values: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2135,8 +2137,6 @@
   variable_name: value
   vendor: ''
   waiting_time: 0
-  python_query: ''
-  python_query_values: ''
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2171,6 +2171,8 @@
     - '-358'
     - '192'
   push_to_git: false
+  python_query: ''
+  python_query_values: payload['variables']['iteration_devices'][device.name]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2183,8 +2185,6 @@
   variable_name: value
   vendor: ''
   waiting_time: 0
-  python_query: ''
-  python_query_values: payload['variables']['iteration_devices'][device.name]
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2219,6 +2219,8 @@
     - '-337'
     - '233'
   push_to_git: false
+  python_query: ''
+  python_query_values: payload['netmiko_check_vrf_test']['results']['devices'][device.name]['match']
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2231,8 +2233,6 @@
   variable_name: value
   vendor: ''
   waiting_time: 0
-  python_query: ''
-  python_query_values: payload['netmiko_check_vrf_test']['results']['devices'][device.name]['match']
 - color: '#D2E5FF'
   completed: 0
   conversion_property: name
@@ -2267,6 +2267,8 @@
     - '84'
     - '131'
   push_to_git: false
+  python_query: ''
+  python_query_values: payload['derived_targets'][device.name]
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2279,5 +2281,61 @@
   variable_name: ''
   vendor: ''
   waiting_time: 0
-  python_query: ''
-  python_query_values: payload['derived_targets'][device.name]
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show vrf {{payload["pools"]["iteration_simple"]}}
+  completed: 0
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  events: []
+  expect_string: ''
+  failed: 0
+  fast_cli: true
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-07-24 13:06:10.719656'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: Show vrf with payload helper
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  number_of_targets: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 166
+    - -247
+  privileged_mode: false
+  push_to_git: false
+  python_query: payload_helper("iteration_device", section="pools", device=device.name)
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 1
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0

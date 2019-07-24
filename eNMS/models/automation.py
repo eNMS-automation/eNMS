@@ -151,18 +151,13 @@ class Job(AbstractBase):
         device: Optional[str] = None,
     ):
         if service:
-            payload.setdefault("services", {})
-            payload = payload["services"]
-            payload.setdefault(service, {})
-            payload = payload[service]
+            payload = payload.setdefault("services", {})
+            payload = payload.setdefault(service, {})
         if device:
-            payload.setdefault("devices", {})
-            payload = payload["devices"]
-            payload.setdefault(device, {})
-            payload = payload[device]
+            payload = payload.setdefault("devices", {})
+            payload = payload.setdefault(device, {})
         if section:
-            payload.setdefault(section, {})
-            payload = payload[section]
+            payload = payload.setdefault(section, {})
         if value:
             payload[name] = value
         else:

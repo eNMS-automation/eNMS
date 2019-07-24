@@ -340,7 +340,7 @@ class Service(Job):
             "info",
             f"Running {self.type} {f'on {device.name}.' if device else '.'}",
         )
-        results = {"timestamp": runtime}
+        results = {"timestamp": controller.get_time()}
         try:
             if device:
                 results.update(self.job(payload, device, parent))
@@ -359,12 +359,11 @@ class Service(Job):
             if device
             else ".",
         )
-        factory("Result", result=results, **kwargs)
         if not parent and not self.multiprocessing:
             self.completed += 1
             self.failed += 1 - results["success"]
             Session.commit()
-        return results
+        return {"results": results, "kwargs": kwargs}
 
     def device_run(
         self,
@@ -395,15 +394,17 @@ class Service(Job):
                 pool.map(device_thread, process_args)
                 pool.close()
                 pool.join()
-                results = {"devices": device_results}
             else:
-                results = {"devices": {}}
-                results["devices"] = {
+                device_results = {
                     device.name: self.get_results(
                         runtime, payload, device, parent, parent_timestamp
                     )
                     for device in targets
                 }
+            results = {"devices": {}}
+            for device_name, device_result in device_results.items():
+                results["devices"][device_name] = device_result["results"]
+                factory("Result", result=device_result["results"], **device_result["kwargs"])
             return results
 
     def build_results(

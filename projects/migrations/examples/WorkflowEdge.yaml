@@ -84,15 +84,15 @@
   subtype: prerequisite
   workflow: payload_transfer_workflow
 - destination: add_devices_to_payload
-  name: 'success: YaQL_test_worflow 0 -> 2'
+  name: 'success: python_test_worflow 0 -> 2'
   source: Start
   subtype: success
-  workflow: YaQL_test_worflow
-- destination: Iteration_service_yaql
-  name: 'success: YaQL_test_worflow 4 -> 5'
+  workflow: python_test_worflow
+- destination: Iteration_service_python
+  name: 'success: python_test_worflow 4 -> 5'
   source: Iteration_service_simple
   subtype: success
-  workflow: YaQL_test_worflow
+  workflow: python_test_worflow
 - destination: netmiko_show_ip_route
   name: payload_extraction_validation_worflow 0 -> 2
   source: Start
@@ -162,7 +162,7 @@
   name: 44-success:27->37
   source: add_devices_to_payload
   subtype: success
-  workflow: YaQL_test_worflow
+  workflow: python_test_worflow
 - destination: get_facts
   name: 43-success:1->22
   source: Start
@@ -200,39 +200,39 @@
   workflow: Workflow with separate failure / success path
 - destination: End
   name: 44-success:48->2
-  source: Iteration_YaQL_derived_targets
+  source: Iteration_python_derived_targets
   subtype: success
-  workflow: YaQL_test_worflow
-- destination: Iteration_YaQL_derived_targets
+  workflow: python_test_worflow
+- destination: Iteration_python_derived_targets
   name: 45-failure:38->40
-  source: Iteration_service_yaql
+  source: Iteration_service_python
   subtype: failure
-  workflow: YaQL_test_worflow
-- destination: Device_from_yaql_query
+  workflow: python_test_worflow
+- destination: Device_from_python_query
   name: 49-success:1->50
   source: Start
   subtype: success
-  workflow: yaql_query_workflow
+  workflow: python_query_workflow
 - destination: netmiko_check_no_vrf_test
   name: 49-success:50->19
-  source: Device_from_yaql_query
+  source: Device_from_python_query
   subtype: success
-  workflow: yaql_query_workflow
+  workflow: python_query_workflow
 - destination: End
   name: 49-success:19->2
   source: netmiko_check_no_vrf_test
   subtype: success
-  workflow: yaql_query_workflow
+  workflow: python_query_workflow
 - destination: netmiko_check_no_vrf_napalm
   name: 49-failure:50->36
-  source: Device_from_yaql_query
+  source: Device_from_python_query
   subtype: failure
-  workflow: yaql_query_workflow
+  workflow: python_query_workflow
 - destination: End
   name: 49-failure:36->2
   source: netmiko_check_no_vrf_napalm
   subtype: failure
-  workflow: yaql_query_workflow
+  workflow: python_query_workflow
 - destination: Test Netmiko Prompt Service
   name: 51-success:1->52
   source: Start
@@ -247,14 +247,14 @@
   name: 54-success:1->55
   source: Start
   subtype: success
-  workflow: 'YaQL Workflow: payload editor and pool helper'
+  workflow: 'python Workflow: payload editor and pool helper'
 - destination: Payload editor, with device
   name: 54-success:55->56
   source: Payload editor, no devices
   subtype: success
-  workflow: 'YaQL Workflow: payload editor and pool helper'
+  workflow: 'python Workflow: payload editor and pool helper'
 - destination: End
   name: 54-success:56->2
   source: Payload editor, with device
   subtype: success
-  workflow: 'YaQL Workflow: payload editor and pool helper'
+  workflow: 'python Workflow: payload editor and pool helper'

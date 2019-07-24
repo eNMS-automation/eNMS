@@ -1,8 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import HiddenField
-from yaql import factory
+from wtforms import HiddenField, StringField
 
 from eNMS.database import (
     CustomMediumBlobPickle,
@@ -10,7 +9,6 @@ from eNMS.database import (
     SMALL_STRING_LENGTH,
 )
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
@@ -34,9 +32,7 @@ class PayloadValidationService(Service):
     __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
 
     def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
-        query = self.sub(self.query, locals())
-        engine = factory.YaqlFactory().create()
-        result = self.convert_result(engine(query).evaluate(data=payload))
+        result = self.convert_result(eval(self.query, locals()))
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"
@@ -53,4 +49,4 @@ class PayloadValidationService(Service):
 
 class PayloadValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="PayloadValidationService")
-    query = SubstitutionField("YaQL query")
+    query = StringField("Python Query")

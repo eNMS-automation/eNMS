@@ -33,7 +33,6 @@ from traceback import format_exc
 from typing import Any, Generator, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
-from yaql import create_context, factory as yaql_factory
 
 from eNMS.concurrency import device_thread
 from eNMS.controller import controller
@@ -206,7 +205,7 @@ class Job(AbstractBase):
                 else:
                     not_found.add(value)
             if not_found:
-                raise Exception(f"YaQL query invalid targets: {', '.join(not_found)}")
+                raise Exception(f"Python query invalid targets: {', '.join(not_found)}")
         else:
             devices = set(self.devices)
             for pool in self.pools:

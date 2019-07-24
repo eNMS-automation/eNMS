@@ -151,7 +151,19 @@ class Task(AbstractBase):
         }
         if self.scheduling_mode == "cron":
             self.periodic = True
-            trigger = {"trigger": CronTrigger.from_crontab(self.crontab_expression)}
+            expression = self.crontab_expression.split()
+            mapping = {
+                "0": "sun",
+                "1": "mon",
+                "2": "tue",
+                "3": "wed",
+                "4": "thu",
+                "5": "fri",
+                "6": "sat",
+                "7": "sun",
+            }
+            expression[-1] = ",".join(mapping[day] for day in expression[-1].split(","))
+            trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
         elif self.frequency:
             self.periodic = True
             frequency_in_seconds = (

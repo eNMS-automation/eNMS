@@ -765,8 +765,7 @@ class Workflow(Job):
     ) -> dict:
         self.state = {"jobs": {}}
         jobs: list = start_points or [self.jobs[0]]
-        if not payload:
-            payload = {}
+        payload = deepcopy(payload)
         visited: Set = set()
         results: dict = {
             "results": {},
@@ -775,7 +774,7 @@ class Workflow(Job):
         }
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            initial_targets = targets or self.compute_devices(payload)
+            initial_targets = targets or self.compute_devices(results["results"])
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
         while jobs:
@@ -833,7 +832,7 @@ class Workflow(Job):
                     "success" if job_results["success"] else "failure",
                 )
             payload[job.name] = job_results
-            results["results"][job.name] = job_results
+            results["results"].update(payload)
             for successor in successors:
                 if successor not in visited:
                     jobs.append(successor)

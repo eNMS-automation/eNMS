@@ -259,7 +259,12 @@
   subtype: success
   workflow: 'python Workflow: payload editor and pool helper'
 - destination: End
-  name: 56-success:57->2
-  source: Show vrf with payload helper
+  name: 56-success:58->2
+  source: Show vrf with python query
   subtype: success
+  workflow: 'python Workflow: payload editor and pool helper'
+- destination: Show vrf with python query
+  name: 56-failure:57->58
+  source: Show vrf with payload helper
+  subtype: failure
   workflow: 'python Workflow: payload editor and pool helper'

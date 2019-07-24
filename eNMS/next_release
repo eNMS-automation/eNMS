@@ -125,3 +125,12 @@ but that could happen for a service or a workflow.
 - If async run_job was invoked, is there a way to check the job status
 or collect the results after completion
 >>> Done
+
+12.  API Options to be able call a workflow and be returned the status of “Workflow Started”
+with “Workflow Instance ID”. The “Workflow Instance ID” would be use to send API query to check on status.
+>>> Done, it returns the name and the runtime, then you can make a GET request to /result/name/runtime
+
+- Also an option to say if Status of “Workflow Instance ID” is Complete
+then send the results of the Workflow.
+>>> That is a notification ?
+You cannot push a notification to the end user via REST.

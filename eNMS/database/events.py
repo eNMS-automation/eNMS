@@ -1,10 +1,8 @@
-from flask_login import current_user
-from sqlalchemy import Boolean, event, exc, Float, inspect, Integer, PickleType
+from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
 from sqlalchemy.engine.base import Connection
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.orm.mapper import Mapper
-from sqlalchemy.pool import Pool
 from sqlalchemy.types import JSON
 from typing import Any
 

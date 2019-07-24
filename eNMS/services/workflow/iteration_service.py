@@ -7,7 +7,7 @@ from wtforms import BooleanField, HiddenField, SelectField, StringField
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.database.functions import fetch
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import DictField, InstanceField, SubstitutionField
+from eNMS.forms.fields import DictField, InstanceField
 from eNMS.models.automation import Job, Service
 from eNMS.models.inventory import Device
 

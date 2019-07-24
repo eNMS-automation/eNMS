@@ -39,7 +39,7 @@ class PayloadValidationService(Service):
             else self.sub(self.dict_match, locals())
         )
         return {
-            "query": query,
+            "query": self.query,
             "match": match,
             "negative_logic": self.negative_logic,
             "result": result,

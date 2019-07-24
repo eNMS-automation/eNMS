@@ -6,7 +6,6 @@ from pathlib import Path
 from requests import post, get
 from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
-from typing import Optional
 from wtforms import BooleanField, HiddenField
 
 from eNMS.forms.automation import ServiceForm

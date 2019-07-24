@@ -1,7 +1,6 @@
 from typing import List, Optional
 
-from eNMS.database import engine
-from eNMS.database.functions import fetch, session_scope
+from eNMS.database.functions import fetch
 
 
 def threaded_job(

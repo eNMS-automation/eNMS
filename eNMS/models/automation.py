@@ -5,8 +5,8 @@ from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
 from logging import getLogger
-from multiprocessing import Lock, Manager
-from multiprocessing.pool import Pool, ThreadPool
+from multiprocessing import Lock
+from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
@@ -187,7 +187,7 @@ class Job(AbstractBase):
             try:
                 values = eval(self.python_query, locals())
             except Exception as exc:
-                raise Exception(f"Python Query Failure: {str(e)}")
+                raise Exception(f"Python Query Failure: {str(exc)}")
             devices, not_found = set(), set()
             if isinstance(values, str):
                 values = [values]

@@ -2,9 +2,7 @@ from wtforms import (
     BooleanField,
     HiddenField,
     IntegerField,
-    PasswordField,
     SelectField,
-    SelectMultipleField,
     StringField,
 )
 from wtforms.widgets import TextArea

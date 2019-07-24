@@ -10,7 +10,7 @@ from operator import attrgetter
 from pathlib import Path
 from re import search, sub
 from subprocess import PIPE, Popen
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from eNMS.concurrency import threaded_job
 from eNMS.controller.base import BaseController

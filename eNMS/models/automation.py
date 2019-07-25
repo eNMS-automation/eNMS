@@ -285,7 +285,7 @@ class Job(AbstractBase):
         except Exception as exc:
             result = (
                 f"Running {self.type} '{self.name}' raised the following exception:\n"
-                f"{str(exc)}\n\nRun aborted..."
+                f"{chr(10).join(format_exc().splitlines())}\n\nRun aborted..."
             )
             self.log(parent, "error", result)
             results = {"success": False, "results": result}

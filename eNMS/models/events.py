@@ -36,7 +36,7 @@ class Task(AbstractBase):
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
     description = Column(String(SMALL_STRING_LENGTH), default="")
     creation_time = Column(String(SMALL_STRING_LENGTH), default="")
-    scheduling_mode = Column(String(SMALL_STRING_LENGTH), default="cron")
+    scheduling_mode = Column(String(SMALL_STRING_LENGTH), default="standard")
     periodic = Column(Boolean)
     frequency = Column(Integer)
     frequency_unit = Column(String(SMALL_STRING_LENGTH), default="seconds")

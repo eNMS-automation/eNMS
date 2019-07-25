@@ -422,7 +422,7 @@ function colorJob(id, color) {
 // eslint-disable-next-line
 function getJobState(id) {
   call(`/get/service/${id}`, function(service) {
-    if (service.is_running) {
+    if (service.status == "Running") {
       colorJob(id, "#89CFF0");
       $("#status").text("Status: Running.");
       $("#current-job").text(`Current job: ${service.name}.`);
@@ -444,7 +444,7 @@ function getWorkflowState() {
       if (wf.last_modified !== lastModified) {
         displayWorkflow(wf);
       }
-      if (wf.id == workflow.id && wf.is_running) {
+      if (wf.id == workflow.id && wf.status == "Running") {
         $("#status").text("Status: Running");
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_job) {
@@ -464,7 +464,7 @@ function getWorkflowState() {
           $("#current-device,#current-job").empty();
           wf.jobs.forEach((job) => colorJob(job.id, job.color));
         }
-        setTimeout(getWorkflowState, wf.is_running ? 2000 : 15000);
+        setTimeout(getWorkflowState, wf.status == "Running" ? 2000 : 15000);
       } else {
         $("#status").text("Status: Idle");
         $("#current-job").empty();

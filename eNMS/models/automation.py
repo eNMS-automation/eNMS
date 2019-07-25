@@ -100,7 +100,7 @@ class Job(AbstractBase):
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
-    is_running = Column(Boolean, default=False)
+    status = Column(String(SMALL_STRING_LENGTH), default="Idle")
     number_of_targets = Column(Integer, default=0)
     completed = Column(Integer, default=0)
     failed = Column(Integer, default=0)
@@ -161,21 +161,13 @@ class Job(AbstractBase):
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
 
-    @hybrid_property
-    def status(self) -> str:
-        return "Running" if self.is_running else "Idle"
-
-    @status.expression  # type: ignore
-    def status(cls) -> str:  # noqa: N805
-        return case([(cls.is_running, "Running")], else_="Idle")
-
     @property
     def filename(self) -> str:
         return controller.strip_all(self.name)
 
     @property
     def progress(self) -> str:
-        if self.is_running and not getattr(self, "multiprocessing", False):
+        if self.status == "Running" and not getattr(self, "multiprocessing", False):
             return f"{self.completed}/{self.number_of_targets} ({self.failed} failed)"
         else:
             return "N/A"
@@ -271,7 +263,7 @@ class Job(AbstractBase):
         runtime = runtime or controller.get_time()
         if not parent_timestamp:
             parent_timestamp = runtime
-        self.is_running, self.state = True, {}
+        self.status, self.state = "Running", {}
         self.log(parent, "info", f"{self.type} {self.name}: Starting.")
         if not parent:
             Session.commit()
@@ -288,7 +280,7 @@ class Job(AbstractBase):
                 self.log(parent, "info", f"Closing {library} Connection to {device}")
                 conn.disconnect() if library == "netmiko" else conn.close()
         self.log(parent, "info", f"{self.type} {self.name}: Finished.")
-        self.is_running, self.state = False, {}
+        self.status, self.state = "Idle", {}
         self.completed = self.failed = 0
         if task and not task.frequency:
             task.is_active = False

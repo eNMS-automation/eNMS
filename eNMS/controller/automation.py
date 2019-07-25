@@ -202,7 +202,7 @@ class AutomationController(BaseController):
 
     def reset_status(self) -> None:
         for job in fetch_all("Job"):
-            job.is_running = False
+            job.status = "Idle"
 
     def restart_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
         workflow = fetch("Workflow", id=workflow_id)
@@ -211,7 +211,7 @@ class AutomationController(BaseController):
         ).result["results"]
         payload_jobs = set(payload) & set(kwargs["payloads_to_include"])
         payload = {k: payload[k] for k in payload if k in payload_jobs}
-        if workflow.is_running:
+        if workflow.status == "Running":
             return {"error": "Workflow is already running."}
         self.scheduler.add_job(
             id=self.get_time(),
@@ -224,7 +224,7 @@ class AutomationController(BaseController):
 
     def run_job(self, job_id: int, asynchronous: bool = True) -> dict:
         job = fetch("Job", id=job_id)
-        if job.is_running:
+        if job.status == "Running":
             return {"error": f"{job.type} is already running."}
         if asynchronous:
             self.scheduler.add_job(

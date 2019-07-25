@@ -151,8 +151,9 @@ of netmiko library.
 
 - The progress of a job (number of devices completed, failed) now works with multiprocessing.
 
-- Slash are now forbidden in names (path conflict with the Vault)
->>> To do during migration: remove all slashes from your names
+- service names need extra validation to ensure that they are valid directory/filenames
+in linux (no ‘/‘ characters)
+>>> Done. To do during migration: remove all slashes from your names
 
 - When a Workflow fails and threw an exception, but does not finish in the UI,
 the only way to know is by watching var/logs/messages (syslogs).
@@ -161,3 +162,10 @@ When the workflow fails and becomes stale eNMS needs to set is_running status to
 so Workflow can be re-run and return some error message or put into results.
 >>> This shouldn't happen anymore... I'm now catching all exception at a higher level in the code.
 If it happens again and you need to use the "Reset status" button please tell me.
+
+- For compiled commands where payload extraction is being used it is helpful to see
+what was sent to the device. Also, many times the results received from device
+do not match the expected results and an error of expect string never returned may be
+in the Workflow Result. In both cases if the user was able to see what is being sent
+to the device and what was being received from the device it would allow the user to be able
+to adjust/correct their Service to produce the desired results. 

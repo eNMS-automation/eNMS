@@ -267,7 +267,7 @@ class Job(AbstractBase):
         if not parent_timestamp:
             parent_timestamp = runtime
         self.status, self.state = "Running", {}
-        self.log(parent, "info", f"{self.type} {self.name}: Starting.")
+        self.log(parent, "info", f"{self.type} {self.name}: Starting")
         Session.commit()
         if not payload:
             payload = {}
@@ -282,7 +282,7 @@ class Job(AbstractBase):
                 for device, conn in connections.items():
                     self.log(parent, "info", f"Closing {library} Connection to {device}")
                     conn.disconnect() if library == "netmiko" else conn.close()
-            self.log(parent, "info", f"{self.type} {self.name}: Finished.")
+            self.log(parent, "info", f"{self.type} {self.name}: Finished")
         except Exception as exc:
             result = (
                 f"Running {self.type} '{self.name}' raised the following exception:\n"
@@ -352,7 +352,7 @@ class Service(Job):
         self.log(
             parent,
             "info",
-            f"Running {self.type} {f'on {device.name}.' if device else '.'}",
+            f"Running {self.type}{f' on {device.name}' if device else ''}",
         )
         results: Dict[Any, Any] = {"timestamp": controller.get_time()}
         try:
@@ -369,9 +369,7 @@ class Service(Job):
             "info",
             f"Finished running {self.type} '{self.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
-            f" on {device.name}."
-            if device
-            else ".",
+            f"{f' on {device.name}' if device else ''}"
         )
         controller.job_db[self.name]["completed"] += 1
         controller.job_db[self.name]["failed"] += 1 - results["success"]

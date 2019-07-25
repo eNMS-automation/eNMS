@@ -6,7 +6,6 @@ from sqlalchemy import func
 from typing import Any, Generator, List, Tuple
 
 from eNMS.database import Session, session_factory
-from eNMS.exceptions import InstanceNotFoundException
 from eNMS.models import models
 
 
@@ -23,7 +22,7 @@ def fetch(
     if result or allow_none:
         return result
     else:
-        raise InstanceNotFoundException(
+        raise Exception(
             f"There is no {model} in the database "
             f"with the following characteristics: {kwargs}"
         )

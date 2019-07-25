@@ -50,7 +50,6 @@ from eNMS.database.associations import (
     job_workflow_table,
 )
 from eNMS.database.base import AbstractBase
-from eNMS.exceptions import VariableSubstitutionError
 from eNMS.models.inventory import Device
 from eNMS.models.events import Task  # noqa: F401
 

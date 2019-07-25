@@ -10,7 +10,6 @@ from eNMS.concurrency import threaded_job
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
-from eNMS.exceptions import InstanceNotFoundException
 from eNMS.extensions import auth, csrf
 
 
@@ -67,7 +66,7 @@ class Query(Resource):
         try:
             results = fetch(cls, all_matches=True, **request.args.to_dict())
             return [result.get_properties() for result in results]
-        except InstanceNotFoundException:
+        except Exception:
             return abort(404, message=f"There are no such {cls}s.")
 
 
@@ -77,7 +76,7 @@ class GetInstance(Resource):
     def get(self, cls: str, name: str) -> dict:
         try:
             return fetch(cls, name=name).serialized
-        except InstanceNotFoundException:
+        except Exception:
             return abort(404, message=f"{cls} {name} not found.")
 
     def delete(self, cls: str, name: str) -> dict:

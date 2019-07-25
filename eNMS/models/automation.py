@@ -170,6 +170,10 @@ class Job(AbstractBase):
         return case([(cls.is_running, "Running")], else_="Idle")
 
     @property
+    def filename(self) -> str:
+        return controller.strip_all(self.name)
+
+    @property
     def progress(self) -> str:
         if self.is_running and not getattr(self, "multiprocessing", False):
             return f"{self.completed}/{self.number_of_targets} ({self.failed} failed)"

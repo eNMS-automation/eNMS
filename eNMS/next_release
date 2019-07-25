@@ -169,3 +169,5 @@ do not match the expected results and an error of expect string never returned m
 in the Workflow Result. In both cases if the user was able to see what is being sent
 to the device and what was being received from the device it would allow the user to be able
 to adjust/correct their Service to produce the desired results. 
+
+- Credentials are now hidden when using gotty.

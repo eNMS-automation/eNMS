@@ -280,7 +280,9 @@ class Job(AbstractBase):
                 if not connections:
                     continue
                 for device, conn in connections.items():
-                    self.log(parent, "info", f"Closing {library} Connection to {device}")
+                    self.log(
+                        parent, "info", f"Closing {library} Connection to {device}"
+                    )
                     conn.disconnect() if library == "netmiko" else conn.close()
             self.log(parent, "info", f"{self.type} {self.name}: Finished")
         except Exception as exc:
@@ -369,7 +371,7 @@ class Service(Job):
             "info",
             f"Finished running {self.type} '{self.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
-            f"{f' on {device.name}' if device else ''}"
+            f"{f' on {device.name}' if device else ''}",
         )
         controller.job_db[self.name]["completed"] += 1
         controller.job_db[self.name]["failed"] += 1 - results["success"]

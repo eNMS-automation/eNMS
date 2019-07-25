@@ -207,9 +207,13 @@ class AutomationController(BaseController):
 
     def restart_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
         workflow = fetch("Workflow", id=workflow_id)
-        payload = fetch(
-            "Result", job_id=workflow_id, timestamp=kwargs["payload_version"]
-        ).result["results"]
+        result = fetch(
+            "Result",
+            allow_none=True,
+            job_id=workflow_id,
+            timestamp=kwargs.get("payload_version"),
+        )
+        payload = result.result["results"] if result else {}
         payload_jobs = set(payload) & set(kwargs["payloads_to_include"])
         payload = {k: payload[k] for k in payload if k in payload_jobs}
         if workflow.status == "Running":

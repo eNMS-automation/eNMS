@@ -69,7 +69,7 @@ def factory(cls_name: str, **kwargs: Any) -> Any:
     instance, instance_id = None, kwargs.pop("id", 0)
     if instance_id:
         instance = fetch(cls_name, id=instance_id)
-    elif "name" in kwargs:            
+    elif "name" in kwargs:
         instance = fetch(cls_name, allow_none=True, name=kwargs["name"])
     if instance:
         if kwargs.get("must_be_new"):

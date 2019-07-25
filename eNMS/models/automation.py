@@ -267,24 +267,33 @@ class Job(AbstractBase):
             parent_timestamp = runtime
         self.status, self.state = "Running", {}
         self.log(parent, "info", f"{self.type} {self.name}: Starting.")
-        if not parent:
-            Session.commit()
+        Session.commit()
         if not payload:
             payload = {}
-        results = self.build_results(
-            runtime, payload, targets, parent, parent_timestamp, start_points
-        )
-        for library in ("netmiko", "napalm"):
-            connections = controller.connections_cache[library].pop(self.name, None)
-            if not connections:
-                continue
-            for device, conn in connections.items():
-                self.log(parent, "info", f"Closing {library} Connection to {device}")
-                conn.disconnect() if library == "netmiko" else conn.close()
-        self.log(parent, "info", f"{self.type} {self.name}: Finished.")
-        self.status, self.state = "Idle", {}
-        controller.job_progress[self.name]["completed"] = 0
-        controller.job_progress[self.name]["failed"] = 0
+        try:
+            results = self.build_results(
+                runtime, payload, targets, parent, parent_timestamp, start_points
+            )
+            for library in ("netmiko", "napalm"):
+                connections = controller.connections_cache[library].pop(self.name, None)
+                if not connections:
+                    continue
+                for device, conn in connections.items():
+                    self.log(parent, "info", f"Closing {library} Connection to {device}")
+                    conn.disconnect() if library == "netmiko" else conn.close()
+            self.log(parent, "info", f"{self.type} {self.name}: Finished.")
+        except Exception as exc:
+            result = (
+                f"Running {self.type} '{self.name}' raised the following exception:\n"
+                f"{str(exc)}\n\nRun aborted..."
+            )
+            self.log(parent, "error", result)
+            results = {"success": False, "results": result}
+        finally:
+            self.status, self.state = "Idle", {}
+            controller.job_progress[self.name]["completed"] = 0
+            controller.job_progress[self.name]["failed"] = 0
+            Session.commit()
         if task and not task.frequency:
             task.is_active = False
         results["properties"] = self.to_dict(True)
@@ -784,6 +793,7 @@ class Workflow(Job):
                 for node in job.adjacent_jobs(self, "source", "prerequisite")
             ):
                 continue
+            a+= 1
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()

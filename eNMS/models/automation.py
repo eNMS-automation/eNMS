@@ -165,12 +165,14 @@ class Job(AbstractBase):
     @property
     def progress(self) -> str:
         if self.status == "Running":
-            progress = controller.job_progress[self.name]
-            print(progress)
-            return (
-                f"{progress['completed']}/{progress['number_of_targets']}"
-                f" ({progress['failed']} failed)"
-            )
+            progress = controller.job_db[self.name]
+            try:
+                return (
+                    f"{progress['completed']}/{progress['number_of_targets']}"
+                    f" ({progress['failed']} failed)"
+                )
+            except KeyError:
+                return "Error"
         else:
             return "N/A"
 
@@ -203,7 +205,7 @@ class Job(AbstractBase):
             devices = set(self.devices)
             for pool in self.pools:
                 devices |= set(pool.devices)
-            controller.job_progress[self.name]["number_of_targets"] = len(devices)
+            controller.job_db[self.name]["number_of_targets"] = len(devices)
             Session.commit()
         return devices
 
@@ -291,8 +293,8 @@ class Job(AbstractBase):
             results = {"success": False, "results": result}
         finally:
             self.status, self.state = "Idle", {}
-            controller.job_progress[self.name]["completed"] = 0
-            controller.job_progress[self.name]["failed"] = 0
+            controller.job_db[self.name]["completed"] = 0
+            controller.job_db[self.name]["failed"] = 0
             Session.commit()
         if task and not task.frequency:
             task.is_active = False
@@ -372,8 +374,8 @@ class Service(Job):
             if device
             else ".",
         )
-        controller.job_progress[self.name]["completed"] += 1
-        controller.job_progress[self.name]["failed"] += 1 - results["success"]
+        controller.job_db[self.name]["completed"] += 1
+        controller.job_db[self.name]["failed"] += 1 - results["success"]
         return {"results": results, "kwargs": kwargs}
 
     def device_run(
@@ -443,8 +445,8 @@ class Service(Job):
             self.log(
                 parent, "info", f"Running {self.type} {self.name} (attempt n°{i + 1})"
             )
-            controller.job_progress[self.name]["completed"] = 0
-            controller.job_progress[self.name]["failed"] = 0
+            controller.job_db[self.name]["completed"] = 0
+            controller.job_db[self.name]["failed"] = 0
             if not parent:
                 Session.commit()
             attempt = self.device_run(
@@ -634,13 +636,13 @@ class Service(Job):
             try:
                 return str(eval(match.group()[2:-2], variables))
             except AttributeError:
-                raise VariableSubstitutionError(
+                raise Exception(
                     "The variable subtitution mechanism failed."
                     " If you are using the 'device' variable, "
                     "check that the service has targets."
                 )
             except NameError:
-                raise VariableSubstitutionError(
+                raise Exception(
                     "The variable subtitution mechanism failed."
                     " Check that all variables are defined."
                 )
@@ -793,7 +795,6 @@ class Workflow(Job):
                 for node in job.adjacent_jobs(self, "source", "prerequisite")
             ):
                 continue
-            a+= 1
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()

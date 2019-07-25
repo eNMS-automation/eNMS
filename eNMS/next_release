@@ -150,3 +150,6 @@ of netmiko library.
 - Netmiko session logs are now displayed in the logs window.
 
 - The progress of a job (number of devices completed, failed) now works with multiprocessing.
+
+- Slash are now forbidden in names (path conflict with the Vault)
+>>> To do during migration: remove all slashes from your names

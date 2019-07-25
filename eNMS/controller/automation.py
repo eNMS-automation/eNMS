@@ -171,7 +171,7 @@ class AutomationController(BaseController):
         elif not device:
             request["device_id"] = id
         results = fetch("Result", allow_none=True, **request)
-        if isinstance(results, Iterable):
+        if isinstance(results, list):
             results.sort(key=attrgetter("timestamp"))
         if not results:
             return None
@@ -190,7 +190,7 @@ class AutomationController(BaseController):
         else:
             return results.result
 
-    def compare_job_results(self, id, **kwargs):
+    def compare_job_results(self, id: int, **kwargs: Any) -> dict:
         kwargs.pop("compare")
         first = self.str_dict(
             self.str_dict(self.get_job_results(id, compare=False, **kwargs))

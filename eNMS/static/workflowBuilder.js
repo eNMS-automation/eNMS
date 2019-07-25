@@ -140,7 +140,9 @@ function showRestartPanel() {
         );
       });
       $("#payload_version").val(timestamps[timestamps.length - 1]);
-      $("#payload_version,#payloads_to_include,#start_points").selectpicker("refresh");
+      $("#payload_version,#payloads_to_include,#start_points").selectpicker(
+        "refresh"
+      );
     });
   });
 }
@@ -150,7 +152,9 @@ function showRestartPanel() {
  */
 // eslint-disable-next-line
 function restartWorkflow() {
-  fCall(`/restart_workflow/${workflow.id}`, "#restart_workflow-form", function(name) {
+  fCall(`/restart_workflow/${workflow.id}`, "#restart_workflow-form", function(
+    name
+  ) {
     alertify.notify(`Workflow '${name}' restarted.`, "success", 5);
     getWorkflowState();
   });
@@ -251,10 +255,14 @@ function jobToNode(job, index) {
     type: job.type,
     x: job.positions[workflow.name]
       ? job.positions[workflow.name][0]
-      : index ? index * 50 - 50 : 0,
+      : index
+      ? index * 50 - 50
+      : 0,
     y: job.positions[workflow.name]
       ? job.positions[workflow.name][1]
-      : index ? index * 50 - 200 : 0
+      : index
+      ? index * 50 - 200
+      : 0,
   };
 }
 

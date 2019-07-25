@@ -30,7 +30,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 from traceback import format_exc
-from typing import Any, Generator, List, Match, Optional, Set, Tuple, Union
+from typing import Any, Dict, Generator, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
@@ -75,8 +75,8 @@ class Result(AbstractBase):
     workflow_id = Column(Integer, ForeignKey("Workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
         self.success = self.result["success"]
 
     def __repr__(self) -> str:
@@ -148,7 +148,7 @@ class Job(AbstractBase):
         value: Optional[Any] = None,
         section: Optional[str] = None,
         device: Optional[str] = None,
-    ):
+    ) -> Any:
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})
@@ -177,11 +177,11 @@ class Job(AbstractBase):
             return "N/A"
 
     def compute_devices(
-        self, payload: Optional[dict], device: Optional["Device"] = None
+        self, payload: dict, device: Optional["Device"] = None
     ) -> Set["Device"]:
         if self.python_query:
 
-            def get_var(*args, **kwargs):
+            def get_var(*args: Any, **kwargs: Any) -> Any:
                 return self.payload_helper(payload, *args, **kwargs)
 
             try:
@@ -271,6 +271,8 @@ class Job(AbstractBase):
         self.log(parent, "info", f"{self.type} {self.name}: Starting.")
         if not parent:
             Session.commit()
+        if not payload:
+            payload = {}
         results = self.build_results(
             runtime, payload, targets, parent, parent_timestamp, start_points
         )
@@ -343,7 +345,7 @@ class Service(Job):
             "info",
             f"Running {self.type} {f'on {device.name}.' if device else '.'}",
         )
-        results = {"timestamp": controller.get_time()}
+        results: Dict[Any, Any] = {"timestamp": controller.get_time()}
         try:
             if device:
                 results.update(self.job(payload, device, parent))
@@ -382,7 +384,7 @@ class Service(Job):
             return results["results"]
         else:
             if self.multiprocessing:
-                device_results = {}
+                device_results: dict = {}
                 thread_lock = Lock()
                 processes = min(len(targets), self.max_processes)
                 args = (  # type: ignore
@@ -417,7 +419,7 @@ class Service(Job):
     def build_results(
         self,
         runtime: str,
-        payload: Optional[dict] = None,
+        payload: dict,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,
@@ -719,7 +721,7 @@ class Workflow(Job):
         ]
 
     def compute_valid_devices(
-        self, job: Job, allowed_devices: dict, payload: Optional[dict] = None
+        self, job: Job, allowed_devices: dict, payload: dict
     ) -> Set[Device]:
         if job.type != "Workflow" and not job.has_targets:
             return set()
@@ -757,7 +759,7 @@ class Workflow(Job):
     def build_results(
         self,
         runtime: str,
-        payload: Optional[dict] = None,
+        payload: dict,
         targets: Optional[Set["Device"]] = None,
         parent: Optional["Job"] = None,
         parent_timestamp: Optional[str] = None,

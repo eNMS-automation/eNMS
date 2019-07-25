@@ -50,25 +50,25 @@
           </a>
         </li>
         {% if form_type != "workflow" %}
-          <li>
-            <a href="#step-5">
-              <span class="step_no">5</span>
-              <span class="step_descr"
-                >Step 5<br />
-                <small>Specific</small>
-              </span>
-            </a>
-          </li>
+        <li>
+          <a href="#step-5">
+            <span class="step_no">5</span>
+            <span class="step_descr"
+              >Step 5<br />
+              <small>Specific</small>
+            </span>
+          </a>
+        </li>
         {% endif %}
       </ul>
       <div id="step-1">
         <div style="width: 100%; height: 50%;">
           {% if form_type != "workflow" %}
-            <label><label for="name">Type</label></label>
-            <div class="form-group">
-              {{ form.type(id=form_type + '-class', class="form-control add-id")
-              }}
-            </div>
+          <label><label for="name">Type</label></label>
+          <div class="form-group">
+            {{ form.type(id=form_type + '-class', class="form-control add-id")
+            }}
+          </div>
           {% endif %}
           <label><label for="name">Name</label></label>
           <div class="form-group">
@@ -95,7 +95,9 @@
             {{ form.initial_payload(id=form_type + '-initial_payload',
             class="form-control add-id") }}
           </div>
-          <label><label for="number_of_retries">Number of retries</label></label>
+          <label
+            ><label for="number_of_retries">Number of retries</label></label
+          >
           <div class="form-group">
             {{ form.number_of_retries(id=form_type + '-number_of_retries',
             class="form-control add-id") }}
@@ -188,18 +190,18 @@
       </div>
       <div id="step-3">
         {% if form_type == "workflow" %}
-          <fieldset>
-            <div class="item">
-              <input
-                id="workflow-use_workflow_targets"
-                name="use_workflow_targets"
-                class="add-id"
-                type="checkbox"
-                value="y"
-              />
-              <label>Use Workflow Targets</label>
-            </div>
-          </fieldset>
+        <fieldset>
+          <div class="item">
+            <input
+              id="workflow-use_workflow_targets"
+              name="use_workflow_targets"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Use Workflow Targets</label>
+          </div>
+        </fieldset>
         {% endif %}
         <label><label for="devices">Devices</label></label>
         <div class="form-group">
@@ -211,40 +213,40 @@
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
         {% if form_type != "workflow" %}
-          <fieldset>
-            <div class="item">
-              <input
-                id="{{ form_type }}-multiprocessing"
-                name="multiprocessing"
-                class="add-id"
-                type="checkbox"
-                value="y"
-              />
-              <label>Multiprocessing</label>
-            </div>
-          </fieldset>
-          <label
-            ><label for="max_processes">Maximum number of processes</label></label
-          >
-          <div class="form-group">
-            {{ form.max_processes(id=form_type + '-max_processes',
-            class="form-control add-id") }}
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-multiprocessing"
+              name="multiprocessing"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Multiprocessing</label>
           </div>
-          <label><label for="credentials">Credentials</label></label>
-          <div class="form-group">
-            {{ form.credentials(id=form_type + '-credentials', class="form-control
-            add-id") }}
-          </div>
-          <label><label for="custom_username">Custom Username</label></label>
-          <div class="form-group">
-            {{ form.custom_username(id=form_type + '-custom_username',
-            class="form-control add-id") }}
-          </div>
-          <label><label for="custom_password">Custom Password</label></label>
-          <div class="form-group">
-            {{ form.custom_password(id=form_type + '-custom_password',
-            class="form-control add-id") }}
-          </div>
+        </fieldset>
+        <label
+          ><label for="max_processes">Maximum number of processes</label></label
+        >
+        <div class="form-group">
+          {{ form.max_processes(id=form_type + '-max_processes',
+          class="form-control add-id") }}
+        </div>
+        <label><label for="credentials">Credentials</label></label>
+        <div class="form-group">
+          {{ form.credentials(id=form_type + '-credentials', class="form-control
+          add-id") }}
+        </div>
+        <label><label for="custom_username">Custom Username</label></label>
+        <div class="form-group">
+          {{ form.custom_username(id=form_type + '-custom_username',
+          class="form-control add-id") }}
+        </div>
+        <label><label for="custom_password">Custom Password</label></label>
+        <div class="form-group">
+          {{ form.custom_password(id=form_type + '-custom_password',
+          class="form-control add-id") }}
+        </div>
         {% endif %}
       </div>
       <div id="step-4">
@@ -267,8 +269,8 @@
           ></label
         >
         <div class="form-group">
-          {{ form.python_query(id=form_type + '-python_query', class="form-control
-          add-id") }}
+          {{ form.python_query(id=form_type + '-python_query',
+          class="form-control add-id") }}
         </div>
         <label
           ><label for="query_property_type">Query Property Type</label></label
@@ -286,13 +288,11 @@
         </div>
         <label><label for="shape">Shape</label></label>
         <div class="form-group">
-          {{ form.shape(id=form_type + '-shape', class="form-control add-id")
-          }}
+          {{ form.shape(id=form_type + '-shape', class="form-control add-id") }}
         </div>
         <label><label for="color">Color</label></label>
         <div class="form-group">
-          {{ form.color(id=form_type + '-color', class="form-control add-id")
-          }}
+          {{ form.color(id=form_type + '-color', class="form-control add-id") }}
         </div>
         <label><label for="size">Size</label></label>
         <div class="form-group">
@@ -300,62 +300,62 @@
         </div>
       </div>
       {% if form_type != "workflow" %}
-        <div id="step-5" style="height: 100%">
-          {% set groups = form.groups or {"Parameters": form.service_fields} %}
-          <div
-            class="accordion"
-            id="accordion"
-            role="tablist"
-            aria-multiselectable="true"
-          >
-            {% for group_name, fields in groups.items() %} {% set group_id =
-            range(10000) | random %}
-            <div class="panel" style="border-color: #000">
-              <a
-                class="panel-heading collapsed"
-                style="background-color:#ddd;"
-                role="tab"
-                id="heading-{{ group_id }}"
-                data-toggle="collapse"
-                data-parent="#accordion"
-                href="#collapse-{{ group_id }}"
-                aria-expanded="false"
-                aria-controls="collapse-{{ group_id }}"
-              >
-                <h4 class="panel-title" style="color:#000;">{{ group_name }}</h4>
-              </a>
-              <div
-                id="collapse-{{ group_id }}"
-                class="panel-collapse collapse in"
-                role="tabpanel"
-                aria-labelledby="heading-{{ group_id }}"
-              >
-                <div class="panel-body" style="background-color:#fafafa;">
-                  {% for field_name in fields %} {% if form[field_name].type ==
-                  "BooleanField" %}
-                  <fieldset>
-                    <div class="item">
-                      {% if form[field_name].default %} {{
-                      form[field_name](id="{}-{}".format(form_type, field_name),
-                      class="add-id", checked=True) }} {% else %} {{
-                      form[field_name](id="{}-{}".format(form_type, field_name),
-                      class="add-id") }} {% endif %}
-                      <label>{{ form[field_name].label }}</label>
-                    </div>
-                  </fieldset>
-                  {% else %}
-                  <label>{{ form[field_name].label }}</label>
-                  <div class="form-group">
-                    {{ form[field_name](id="{}-{}".format(form_type, field_name),
-                    class="form-control add-id") }}
+      <div id="step-5" style="height: 100%">
+        {% set groups = form.groups or {"Parameters": form.service_fields} %}
+        <div
+          class="accordion"
+          id="accordion"
+          role="tablist"
+          aria-multiselectable="true"
+        >
+          {% for group_name, fields in groups.items() %} {% set group_id =
+          range(10000) | random %}
+          <div class="panel" style="border-color: #000">
+            <a
+              class="panel-heading collapsed"
+              style="background-color:#ddd;"
+              role="tab"
+              id="heading-{{ group_id }}"
+              data-toggle="collapse"
+              data-parent="#accordion"
+              href="#collapse-{{ group_id }}"
+              aria-expanded="false"
+              aria-controls="collapse-{{ group_id }}"
+            >
+              <h4 class="panel-title" style="color:#000;">{{ group_name }}</h4>
+            </a>
+            <div
+              id="collapse-{{ group_id }}"
+              class="panel-collapse collapse in"
+              role="tabpanel"
+              aria-labelledby="heading-{{ group_id }}"
+            >
+              <div class="panel-body" style="background-color:#fafafa;">
+                {% for field_name in fields %} {% if form[field_name].type ==
+                "BooleanField" %}
+                <fieldset>
+                  <div class="item">
+                    {% if form[field_name].default %} {{
+                    form[field_name](id="{}-{}".format(form_type, field_name),
+                    class="add-id", checked=True) }} {% else %} {{
+                    form[field_name](id="{}-{}".format(form_type, field_name),
+                    class="add-id") }} {% endif %}
+                    <label>{{ form[field_name].label }}</label>
                   </div>
-                  {% endif %} {% endfor %}
+                </fieldset>
+                {% else %}
+                <label>{{ form[field_name].label }}</label>
+                <div class="form-group">
+                  {{ form[field_name](id="{}-{}".format(form_type, field_name),
+                  class="form-control add-id") }}
                 </div>
+                {% endif %} {% endfor %}
               </div>
             </div>
-            {% endfor %}
           </div>
+          {% endfor %}
         </div>
+      </div>
       {% endif %}
     </div>
   </div>

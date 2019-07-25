@@ -129,11 +129,11 @@ $.ajaxSetup({
       xhr.setRequestHeader("X-CSRFToken", csrf_token);
     }
     if (!settings.url.includes("filtering")) {
-      document.body.style.cursor = 'progress';
+      document.body.style.cursor = "progress";
     }
   },
   complete: function() {
-    document.body.style.cursor = 'default';
+    document.body.style.cursor = "default";
   },
 });
 
@@ -376,7 +376,7 @@ function preprocessForm(panel, id, type, duplicate) {
     } else {
       $(el).attr("onclick", type ? `${el.value}("${type}")` : `${el.value}()`);
     }
-  });     
+  });
 }
 
 /**
@@ -470,8 +470,7 @@ function updateProperty(el, property, value, type) {
   ) {
     try {
       el.selectpicker("deselectAll");
-    } catch {
-    }
+    } catch {}
     el.selectpicker(
       "val",
       propertyType === "object"

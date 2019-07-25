@@ -122,23 +122,23 @@ function formatResults(results, id, formId) {
     $(`#display_results-${formId}`).empty();
     const options = {
       mode: $(`#view_type-${id}`).val(),
-      modes: ['text', 'view'],
+      modes: ["text", "view"],
       onEvent: function(node, event) {
-        if (event.type === 'click') {
+        if (event.type === "click") {
           let path = "";
           if (node.path[0] == "results") {
             for (let i = 0; i < node.path.length; i++) {
               let element = node.path[i];
-              if (typeof element === 'number') {
-                path += `[${element}]`
+              if (typeof element === "number") {
+                path += `[${element}]`;
               } else {
                 path += path.length ? `["${element}"]` : "payload";
               }
             }
           } else {
-            path = "N/A"
+            path = "N/A";
           }
-          $(`#payload_query-${id}`).val(path)
+          $(`#payload_query-${id}`).val(path);
         }
       },
     };
@@ -195,28 +195,24 @@ function getTimestamps(id, type) {
  */
 function updateDeviceList(id, parentId, updateBoth) {
   const formId = parentId || id;
-  fCall(
-    `/get_device_list/${id}`,
-    `#results-form-${formId}`,
-    (devices) => {
-      if (updateBoth) {
-        ids = `#device-${formId},#device_compare-${formId}`;
-      } else {
-        comp = $(`#compare-${formId}`).is(':checked') ? "_compare" : "";
-        ids = `#device${comp}-${formId}`;
-      }
-      $(ids).empty();
-      devices.forEach((device) => {
-        $(ids).append(
-          $("<option></option>")
-            .attr("value", device[0])
-            .text(device[1])
-        );
-      });
-      $(ids).selectpicker("refresh");
-      displayResults(id, formId);
+  fCall(`/get_device_list/${id}`, `#results-form-${formId}`, (devices) => {
+    if (updateBoth) {
+      ids = `#device-${formId},#device_compare-${formId}`;
+    } else {
+      comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
+      ids = `#device${comp}-${formId}`;
     }
-  );
+    $(ids).empty();
+    devices.forEach((device) => {
+      $(ids).append(
+        $("<option></option>")
+          .attr("value", device[0])
+          .text(device[1])
+      );
+    });
+    $(ids).selectpicker("refresh");
+    displayResults(id, formId);
+  });
 }
 
 /**
@@ -229,7 +225,7 @@ function updateJobList(id, type, updateBoth) {
     if (updateBoth) {
       ids = `#job-${id},#job_compare-${id}`;
     } else {
-      comp = $(`#compare-${id}`).is(':checked') ? "_compare" : "";
+      comp = $(`#compare-${id}`).is(":checked") ? "_compare" : "";
       ids = `#job${comp}-${id}`;
     }
     $(ids).empty();
@@ -289,20 +285,20 @@ function showResultsPanel(id, name, type) {
 function configureCallbacks(id, type) {
   if (type != "device") {
     $(`#device-${id},#device_compare-${id}`).on("change", function() {
-      $(`#compare-${id}`).prop('checked', this.id.includes("compare"));
+      $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
       displayResults(id, id);
     });
   }
 
   $(`#timestamp-${id},#timestamp_compare-${id}`).on("change", function() {
-    $(`#compare-${id}`).prop('checked', this.id.includes("compare"));
+    $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
     if (type != "device") updateDeviceList(id);
     if (type != "service") updateJobList(id, type);
   });
 
   if (type != "service") {
     $(`#job-${id},#job_compare-${id}`).on("change", function() {
-      $(`#compare-${id}`).prop('checked', this.id.includes("compare"));
+      $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
       displayResults(id, id);
     });
   }

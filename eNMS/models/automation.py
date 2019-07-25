@@ -538,6 +538,7 @@ class Service(Job):
             password=password,
             secret=device.enable_password,
             fast_cli=self.fast_cli,
+            session_log=controller.path / "logs" / "job_logs" / f"{self.filename}.log",
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
         )

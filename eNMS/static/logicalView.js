@@ -64,7 +64,7 @@ function showPoolView(poolId) {
     },
   });
   call(`/get/pool/${poolId}`, function(pool) {
-    $(`#network-${poolId}`).({
+    $(`#network-${poolId}`).contextMenu({
       menuSelector: "#contextMenu",
       menuSelected: function(invokedOn, selectedMenu) {
         const row = selectedMenu.text();

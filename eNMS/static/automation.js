@@ -192,14 +192,16 @@ function getTimestamps(id, type) {
  * Display results.
  * @param {id} id - Job id.
  * @param {parentId} parentId - Parent ID.
+ * @param {boolean} updateBoth - update both device lists.
  */
 function updateDeviceList(id, parentId, updateBoth) {
   const formId = parentId || id;
   fCall(`/get_device_list/${id}`, `#results-form-${formId}`, (devices) => {
+    let ids;
     if (updateBoth) {
       ids = `#device-${formId},#device_compare-${formId}`;
     } else {
-      comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
+      const comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
       ids = `#device${comp}-${formId}`;
     }
     $(ids).empty();
@@ -219,13 +221,15 @@ function updateDeviceList(id, parentId, updateBoth) {
  * Display results.
  * @param {id} id - Job id.
  * @param {type} type - Timestamp Type.
+ * @param {boolean} updateBoth - update both job lists.
  */
 function updateJobList(id, type, updateBoth) {
   fCall(`/get_job_list/${type}/${id}`, `#results-form-${id}`, (jobs) => {
+    let ids;
     if (updateBoth) {
       ids = `#job-${id},#job_compare-${id}`;
     } else {
-      comp = $(`#compare-${id}`).is(":checked") ? "_compare" : "";
+      const comp = $(`#compare-${id}`).is(":checked") ? "_compare" : "";
       ids = `#job${comp}-${id}`;
     }
     $(ids).empty();

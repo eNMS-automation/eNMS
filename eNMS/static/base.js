@@ -458,6 +458,7 @@ function showTypePanel(type, id, duplicate) {
  * @param {jQuery} el - Property in the DOM.
  * @param {string} property - Property name.
  * @param {string} value - Property value.
+ * @param {string} type - Property type.
  */
 function updateProperty(el, property, value, type) {
   const propertyType = formProperties[type][property] || "str";
@@ -470,7 +471,9 @@ function updateProperty(el, property, value, type) {
   ) {
     try {
       el.selectpicker("deselectAll");
-    } catch {}
+    } catch (e) {
+      // ignore
+    }
     el.selectpicker(
       "val",
       propertyType === "object"

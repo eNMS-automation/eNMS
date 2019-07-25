@@ -1,6 +1,5 @@
 from apscheduler.jobstores.base import JobLookupError
 from collections import defaultdict
-from collections.abc import Iterable
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session

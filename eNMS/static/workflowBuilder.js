@@ -3,7 +3,7 @@ global
 action: false
 alertify: false
 call: false
-editService: false
+fCall: false
 runJob: false
 showLogs: false
 showPanel: false

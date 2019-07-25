@@ -28,19 +28,3 @@
   pools: []
   scheduling_mode: standard
   start_date: ''
-- aps_job_id: '2019-07-23 20:28:20.243451'
-  creation_time: '2019-07-24 19:53:34.102292'
-  crontab_expression: ''
-  description: ''
-  devices: []
-  end_date: ''
-  frequency: 25
-  frequency_unit: seconds
-  initial_payload: {}
-  job: Start
-  job_id: 1
-  name: fefsfsefsef
-  periodic: true
-  pools: []
-  scheduling_mode: standard
-  start_date: 23/07/2019 20:36:04

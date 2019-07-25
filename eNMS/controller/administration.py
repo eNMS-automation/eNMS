@@ -24,8 +24,7 @@ class AdministrationController(BaseController):
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":
             user = fetch("User", allow_none=True, name=name)
-            if user and password == user.password:
-                return user
+            return user if user and password == user.password else False
         elif kwargs["authentication_method"] == "LDAP Domain":
             with Connection(
                 self.ldap_client,

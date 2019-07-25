@@ -12,16 +12,12 @@ import_classes = [
 ]
 
 dont_track_changes = [
-    "completed",
     "configurations",
     "current_configuration",
     "current_device",
     "current_job",
-    "failed",
     "last_modified",
-    "logs",
     "positions",
-    "results",
     "state",
 ]
 
@@ -41,8 +37,6 @@ dont_migrate: Dict[str, List[str]] = {
         "id",
         "sources",
         "destinations",
-        "results",
-        "logs",
         "state",
         "tasks",
         "status",
@@ -62,8 +56,6 @@ dont_migrate: Dict[str, List[str]] = {
         "id",
         "sources",
         "destinations",
-        "results",
-        "logs",
         "state",
         "status",
         "workflows",

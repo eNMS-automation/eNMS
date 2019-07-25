@@ -35,7 +35,7 @@
     Netmiko_VRF_workflow:
     - '-200'
     - '0'
-    Workflow with separate failure / success path:
+    Workflow with separate failure - success path:
     - '-118'
     - '-3'
     Workflow_of_workflows:
@@ -105,7 +105,7 @@
     Netmiko_VRF_workflow:
     - '200'
     - '0'
-    Workflow with separate failure / success path:
+    Workflow with separate failure - success path:
     - '500'
     - '0'
     Workflow_of_workflows:
@@ -776,7 +776,7 @@
     Netmiko_VRF_workflow:
     - '0'
     - '-50'
-    Workflow with separate failure / success path:
+    Workflow with separate failure - success path:
     - '84'
     - '-3'
     python_query_workflow:
@@ -905,7 +905,7 @@
     Netmiko_VRF_workflow:
     - '0'
     - '150'
-    Workflow with separate failure / success path:
+    Workflow with separate failure - success path:
     - '52'
     - '-2'
     python_query_workflow:
@@ -1016,7 +1016,7 @@
     - '3'
   pools: []
   positions:
-    Workflow with separate failure / success path:
+    Workflow with separate failure - success path:
     - '232'
     - '134'
     payload_transfer_workflow:
@@ -1071,7 +1071,7 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow with separate failure / success path:
+    Workflow with separate failure - success path:
     - '214'
     - '-132'
     payload_transfer_workflow:

@@ -115,6 +115,8 @@ users to be able to track progress of workflow.
 - New GET Result Endpoint for the REST API to get the result of a job run asynchronously
 
 - The async flag on run_job is broken (it uses the string value as a boolean)
+- Issue remaining with external rest api and async flag in run_job.
+Need to fix ambiguity about how to pass this parameter
 >>> Couldn't reproduce
 
 - Sync run_jobs for a service return the service results, but workflows don't.
@@ -134,3 +136,17 @@ with “Workflow Instance ID”. The “Workflow Instance ID” would be use to 
 then send the results of the Workflow.
 >>> That is a notification ?
 You cannot push a notification to the end user via REST.
+
+- When the Result of a Workflow are viewed as JSON it would be nice if the Service(s) that failed could be in red.
+>>> I believe that's no longer an issue now that you can filter per success/failed results.
+
+- Users were spending a fair amount of time watching the var/logs/messages (syslogs) to troubleshoot issues, this feedback should be in UI.
+>>> Added netmiko logs in the logs window. Won't be working well with multithreading because 
+of netmiko library.
+
+- While in either of the Workflow Management or Service Management pages if you type Running into the Status search box it does not filter as expected. 
+>>> Fixed.
+
+- Netmiko session logs are now displayed in the logs window.
+
+- The progress of a job (number of devices completed, failed) now works with multiprocessing.

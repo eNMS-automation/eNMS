@@ -120,6 +120,7 @@ job_filtering_properties = [
     "credentials",
     "waiting_time",
     "send_notification_method",
+    "status",
     "mail_recipient",
     "number_of_retries",
     "time_between_retries",

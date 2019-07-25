@@ -167,8 +167,13 @@ class Job(AbstractBase):
 
     @property
     def progress(self) -> str:
-        if self.status == "Running" and not getattr(self, "multiprocessing", False):
-            return f"{self.completed}/{self.number_of_targets} ({self.failed} failed)"
+        if self.status == "Running":
+            progress = controller.job_progress[self.name]
+            print(progress)
+            return (
+                f"{progress['completed']}/{progress['number_of_targets']}"
+                f" ({progress['failed']} failed)"
+            )
         else:
             return "N/A"
 
@@ -201,7 +206,7 @@ class Job(AbstractBase):
             devices = set(self.devices)
             for pool in self.pools:
                 devices |= set(pool.devices)
-            self.number_of_targets = len(devices)
+            controller.job_progress[self.name]["number_of_targets"] = len(devices)
             Session.commit()
         return devices
 
@@ -281,7 +286,8 @@ class Job(AbstractBase):
                 conn.disconnect() if library == "netmiko" else conn.close()
         self.log(parent, "info", f"{self.type} {self.name}: Finished.")
         self.status, self.state = "Idle", {}
-        self.completed = self.failed = 0
+        controller.job_progress[self.name]["completed"] = 0
+        controller.job_progress[self.name]["failed"] = 0
         if task and not task.frequency:
             task.is_active = False
         results["properties"] = self.to_dict(True)
@@ -360,10 +366,8 @@ class Service(Job):
             if device
             else ".",
         )
-        if not parent and not self.multiprocessing:
-            self.completed += 1
-            self.failed += 1 - results["success"]
-            Session.commit()
+        controller.job_progress[self.name]["completed"] += 1
+        controller.job_progress[self.name]["failed"] += 1 - results["success"]
         return {"results": results, "kwargs": kwargs}
 
     def device_run(
@@ -433,7 +437,8 @@ class Service(Job):
             self.log(
                 parent, "info", f"Running {self.type} {self.name} (attempt n°{i + 1})"
             )
-            self.completed = self.failed = 0
+            controller.job_progress[self.name]["completed"] = 0
+            controller.job_progress[self.name]["failed"] = 0
             if not parent:
                 Session.commit()
             attempt = self.device_run(

@@ -74,6 +74,7 @@ class AnsiblePlaybookService(Service):
             else self.sub(self.dict_match, locals())
         )
         return {
+            "command": ' '.join(command + arguments),
             "match": match,
             "negative_logic": self.negative_logic,
             "result": result,

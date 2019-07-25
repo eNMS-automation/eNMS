@@ -49,7 +49,8 @@ class NetmikoPromptsService(Service):
         netmiko_connection = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
         self.log(parent, "info", f"Sending '{command}' on {device.name} (Netmiko)")
-        results = {}
+        commands = [command]
+        results = {"commands": commands}
         result = netmiko_connection.send_command_timing(
             command, delay_factor=self.delay_factor
         )
@@ -64,6 +65,7 @@ class NetmikoPromptsService(Service):
                 response1, delay_factor=self.delay_factor
             )
             confirmation2 = self.sub(self.confirmation2, locals())
+            commands.append(confirmation2)
             results[response1] = {"result": result, "match": confirmation2}
             response2 = self.sub(self.response2, locals())
             if confirmation2 not in result:
@@ -76,6 +78,7 @@ class NetmikoPromptsService(Service):
                     response2, delay_factor=self.delay_factor
                 )
                 confirmation3 = self.sub(self.confirmation3, locals())
+                commands.append(confirmation3)
                 results[response2] = {"result": result, "match": confirmation3}
                 response3 = self.sub(self.response3, locals())
                 if confirmation3 not in result:
@@ -89,6 +92,7 @@ class NetmikoPromptsService(Service):
                     )
         match = self.sub(self.content_match, locals())
         return {
+            "commands": commands,
             "expected": match if self.validation_method == "text" else self.dict_match,
             "negative_logic": self.negative_logic,
             "result": result,

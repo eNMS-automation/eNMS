@@ -153,3 +153,11 @@ of netmiko library.
 
 - Slash are now forbidden in names (path conflict with the Vault)
 >>> To do during migration: remove all slashes from your names
+
+- When a Workflow fails and threw an exception, but does not finish in the UI,
+the only way to know is by watching var/logs/messages (syslogs).
+In this case, the Workflow appears to be hung or still running to the typical user.
+When the workflow fails and becomes stale eNMS needs to set is_running status to false,
+so Workflow can be re-run and return some error message or put into results.
+>>> This shouldn't happen anymore... I'm now catching all exception at a higher level in the code.
+If it happens again and you need to use the "Reset status" button please tell me.

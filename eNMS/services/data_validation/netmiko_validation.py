@@ -64,6 +64,7 @@ class NetmikoValidationService(Service):
             else self.sub(self.dict_match, locals())
         )
         return {
+            "command": command,
             "match": match,
             "negative_logic": self.negative_logic,
             "result": result,

@@ -107,8 +107,9 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs["runtime"] or controller.get_time()
-        if not kwargs["parent_timestamp"]:
-            self.parent_timestamp = runtime
+        if not kwargs.get("parent_timestamp"):
+            self.parent_timestamp = self.runtime
+        super().__init__(**kwargs)
 
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name})"
@@ -261,7 +262,7 @@ class Run(AbstractBase):
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
-            results = self.job.build_results(self, targets, start_points)
+            results = self.job.build_results(self, start_points)
             for library in ("netmiko", "napalm"):
                 connections = controller.connections_cache[library].pop(self.runtime, None)
                 if not connections:
@@ -292,7 +293,7 @@ class Run(AbstractBase):
             print(results_kwargs)
             factory("Result", **results_kwargs)
             Session.commit()
-        if not parent and self.job.send_notification:
+        if not self.workflow and self.job.send_notification:
             self.job.notify(results)
         return results, self.runtime
 
@@ -485,10 +486,10 @@ class Service(Job):
             return results
 
     def build_results(
-        self, run: "Run", targets: Optional[Set["Device"]] = None, *other: Any
+        self, run: "Run", *other: Any
     ) -> dict:
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
-        if self.has_targets and not targets:
+        if self.has_targets and not run.targets:
             try:
                 targets = run.compute_devices()
             except Exception as exc:
@@ -743,7 +744,6 @@ class Workflow(Job):
     def build_results(
         self,
         run: "Run",
-        targets: Optional[Set["Device"]] = None,
         start_points: Optional[List["Job"]] = None,
     ) -> dict:
         self.state = {"jobs": {}}
@@ -753,7 +753,7 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            initial_targets = targets or run.compute_devices(results["results"])
+            initial_targets = run.targets or run.compute_devices(results["results"])
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
         while jobs:

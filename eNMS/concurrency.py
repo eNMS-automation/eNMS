@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from eNMS.database import Session
 from eNMS.database.functions import factory, fetch
 
 
@@ -16,16 +17,16 @@ def threaded_job(
     if start_points:
         start_points = [fetch("Job", id=id) for id in start_points]
     payload = payload or job.initial_payload
-    if targets:
-        targets = {fetch("Device", id=device_id) for device_id in targets}
-    run = factory("Run", **{
-        "job": job_id,
-        "targets": targets,
+    run_args = {
+        "job": job.id,
         "payload": payload,
-        "task": task.id,
-        "start_points": start_points,
         "runtime": runtime,
-    })
+    }
+    if targets:
+        run_args["targets"] = targets
+    if task:
+        run_args["task"] = task
+    run = factory("Run", **run_args)
     run.run()
 
 

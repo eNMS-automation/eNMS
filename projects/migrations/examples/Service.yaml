@@ -1,5 +1,4 @@
 - color: pink
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -7,7 +6,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: true
   include_link_in_summary: true
@@ -19,7 +17,6 @@
   name: Start
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -69,7 +66,6 @@
   vendor: ''
   waiting_time: 0
 - color: pink
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -77,7 +73,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: true
   include_link_in_summary: true
@@ -89,7 +84,6 @@
   name: End
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -139,7 +133,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -147,7 +140,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: false
   include_link_in_summary: true
@@ -159,7 +151,6 @@
   name: mail_feedback_notification
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -176,7 +167,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -184,7 +174,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: false
   include_link_in_summary: true
@@ -196,7 +185,6 @@
   name: slack_feedback_notification
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -213,7 +201,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -221,7 +208,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: false
   include_link_in_summary: true
@@ -233,7 +219,6 @@
   name: mattermost_feedback_notification
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -250,7 +235,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -258,7 +242,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: false
   include_link_in_summary: true
@@ -270,7 +253,6 @@
   name: cluster_monitoring
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -287,7 +269,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -295,7 +276,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: false
   include_link_in_summary: true
@@ -307,7 +287,6 @@
   name: git_push_configurations
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -327,7 +306,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -335,7 +313,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: true
   include_link_in_summary: true
@@ -347,7 +324,6 @@
   name: poller_service
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -375,7 +351,6 @@
   boolean1: true
   boolean2: false
   color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_integer: 0
@@ -386,7 +361,6 @@
   display_only_failed_nodes: true
   events: []
   exclusion_field: d
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -401,7 +375,6 @@
   notification_header: ''
   number_in_range: 7
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -422,7 +395,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -431,7 +403,6 @@
   - Washington
   display_only_failed_nodes: true
   events: []
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -446,7 +417,6 @@
   neighbor_ip: 100.1.2.1
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -465,7 +435,6 @@
   vrf_name: configure_BGP_test
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -476,7 +445,6 @@
   direction: get
   display_only_failed_nodes: true
   events: []
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -490,7 +458,6 @@
   name: test_file_transfer_service
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -510,7 +477,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -522,7 +488,6 @@
   - Aserver
   display_only_failed_nodes: true
   events: []
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -533,7 +498,6 @@
   name: test_database_backup_service
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -551,7 +515,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   configuration_command: show running-config
   creator: admin
   credentials: device
@@ -562,7 +525,6 @@
   display_only_failed_nodes: true
   driver: ''
   events: []
-  failed: 0
   fast_cli: false
   global_delay_factor: 1.0
   hidden: false
@@ -576,7 +538,6 @@
   notification_header: ''
   number_of_configuration: 10
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: ''
   pools: []
   positions: {}
@@ -596,7 +557,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -606,7 +566,6 @@
   display_only_failed_nodes: true
   driver: ''
   events: []
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -618,7 +577,6 @@
   notification_header: ''
   number_of_configuration: 10
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: ''
   optional_args: {}
   pools: []
@@ -638,7 +596,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   commit_configuration: false
-  completed: 0
   config_mode_command: ''
   content: vrf definition test
   creator: admin
@@ -653,7 +610,6 @@
   driver: arista_eos
   events: []
   exit_config_mode: true
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -666,7 +622,6 @@
   name: netmiko_create_vrf_test
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
@@ -693,7 +648,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
-  completed: 0
   content_match: test
   content_match_regex: false
   conversion_method: text
@@ -711,7 +665,6 @@
   driver: arista_eos
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -725,7 +678,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
@@ -764,7 +716,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   commit_configuration: false
-  completed: 0
   config_mode_command: ''
   content: no vrf definition test
   creator: admin
@@ -779,7 +730,6 @@
   driver: arista_eos
   events: []
   exit_config_mode: true
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -792,7 +742,6 @@
   name: netmiko_delete_vrf_test
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
@@ -822,7 +771,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
-  completed: 0
   content_match: test
   content_match_regex: true
   conversion_method: text
@@ -840,7 +788,6 @@
   driver: arista_eos
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -854,7 +801,6 @@
   negative_logic: true
   notification_header: ''
   number_of_retries: 2
-  number_of_targets: 2
   operating_system: eos
   pools: []
   positions:
@@ -890,7 +836,6 @@
   waiting_time: 0
 - action: load_merge_candidate
   color: '#D2E5FF'
-  completed: 0
   content: "vrf definition napalm\r\n"
   creator: admin
   credentials: device
@@ -902,7 +847,6 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -913,7 +857,6 @@
   name: napalm_create_vrf_test
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: eos
   optional_args: {}
   pools: []
@@ -936,7 +879,6 @@
   waiting_time: 0
 - call_type: GET
   color: '#D2E5FF'
-  completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -949,7 +891,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   headers: {}
   hidden: false
@@ -963,7 +904,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   params:
     verify: 'false'
@@ -999,7 +939,6 @@
   verify_ssl_certificate: true
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1011,7 +950,6 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
-  failed: 0
   getters:
   - get_facts
   hidden: false
@@ -1025,7 +963,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1051,7 +988,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1063,7 +999,6 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
-  failed: 0
   getters:
   - get_interfaces
   hidden: false
@@ -1077,7 +1012,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1103,7 +1037,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1115,7 +1048,6 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
-  failed: 0
   getters:
   - get_interfaces_ip
   hidden: false
@@ -1129,7 +1061,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1152,7 +1083,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1164,7 +1094,6 @@
   display_only_failed_nodes: true
   driver: eos
   events: []
-  failed: 0
   getters:
   - get_config
   hidden: false
@@ -1178,7 +1107,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1201,7 +1129,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1211,7 +1138,6 @@
   - Austin
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -1223,7 +1149,6 @@
   name: process_payload1
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   pools: []
   positions:
@@ -1243,7 +1168,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1251,7 +1175,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: false
   hidden: false
   include_link_in_summary: true
@@ -1263,7 +1186,6 @@
   name: add_devices_to_payload
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -1287,7 +1209,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
-  completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1303,7 +1224,6 @@
   driver: arista_eos
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -1317,7 +1237,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: eos
   pools: []
   positions:
@@ -1345,7 +1264,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show interface {{payload['value']}}
-  completed: 0
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -1363,7 +1281,6 @@
   driver: arista_eos
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -1377,7 +1294,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: eos
   pools: []
   positions: {}
@@ -1402,7 +1318,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show ip route
-  completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1419,7 +1334,6 @@
   driver: arista_eos
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -1433,7 +1347,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: eos
   pools: []
   positions:
@@ -1459,7 +1372,6 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1467,7 +1379,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -1490,7 +1401,6 @@
   name: payload_extraction
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -1516,7 +1426,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1533,7 +1442,6 @@
     - 3.3.3.3
   display_only_failed_nodes: true
   events: []
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1545,7 +1453,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: eos
   pools: []
   positions:
@@ -1567,7 +1474,6 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: text
@@ -1580,7 +1486,6 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1592,7 +1497,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: eos
   pools: []
   positions:
@@ -1614,7 +1518,6 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1623,7 +1526,6 @@
   display_only_failed_nodes: false
   driver: eos
   events: []
-  failed: 0
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1634,7 +1536,6 @@
   name: napalm_rollback
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   optional_args: {}
   pools: []
@@ -1658,7 +1559,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
-  completed: 0
   content_match: napalm
   content_match_regex: false
   conversion_method: text
@@ -1674,7 +1574,6 @@
   driver: arista_eos
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -1688,7 +1587,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -1716,7 +1614,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
-  completed: 0
   content_match: napalm
   content_match_regex: false
   conversion_method: text
@@ -1732,7 +1629,6 @@
   driver: arista_eos
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -1746,7 +1642,6 @@
   negative_logic: true
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -1777,7 +1672,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf
-  completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1793,7 +1687,6 @@
   driver: a10
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: false
   global_delay_factor: 1.0
   hidden: false
@@ -1807,7 +1700,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -1834,7 +1726,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   command: show vrf a
-  completed: 0
   confirmation1: Protocols
   confirmation2: Interfaces
   confirmation3: bipbipbop
@@ -1853,7 +1744,6 @@
   display_only_failed_nodes: false
   driver: a10
   events: []
-  failed: 0
   fast_cli: false
   global_delay_factor: 1.0
   hidden: false
@@ -1867,7 +1757,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: ''
   pools: []
   positions:
@@ -1895,7 +1784,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   command: show vrf
-  completed: 0
   confirmation1: Protocols
   confirmation2: Interfaces
   confirmation3: ''
@@ -1913,7 +1801,6 @@
   display_only_failed_nodes: false
   driver: a10
   events: []
-  failed: 0
   fast_cli: false
   global_delay_factor: 1.0
   hidden: false
@@ -1927,7 +1814,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -1954,7 +1840,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -1962,7 +1847,6 @@
   devices: []
   display_only_failed_nodes: false
   events: []
-  failed: 0
   has_targets: false
   hidden: false
   include_link_in_summary: false
@@ -1974,7 +1858,6 @@
   name: Payload editor, no devices
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -1997,7 +1880,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -2007,19 +1889,17 @@
   - Chicago
   display_only_failed_nodes: false
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-24 20:20:00.713578'
+  last_modified: '2019-07-26 12:18:59.935546'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
   name: Payload editor, with device
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -2034,8 +1914,7 @@
   shape: box
   size: 40
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
-    , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"service_and_device_variable\"\
-    , \"1000\", device=device.name, section=self.name)\r\nset_var(\"iteration_simple\"\
+    , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
     , \"192.168.105.5\", \"pools\")\r\nset_var(\"iteration_device\", [\"Washington\"\
     , \"Austin\"], \"pools\", device=device.name)\r\nsave_result(success=True, result={})"
   start_new_connection: false
@@ -2046,7 +1925,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf {{payload["pools"]["iteration_simple"]}}
-  completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2062,7 +1940,6 @@
   driver: arista_eos
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: true
   global_delay_factor: 1.0
   hidden: false
@@ -2076,7 +1953,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -2104,7 +1980,6 @@
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show vrf test
-  completed: 0
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2120,7 +1995,6 @@
   driver: a10
   events: []
   expect_string: ''
-  failed: 0
   fast_cli: false
   global_delay_factor: 1.0
   hidden: false
@@ -2134,7 +2008,6 @@
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions:
@@ -2160,7 +2033,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   conversion_property: name
   convert_values_to_devices: false
   creator: admin
@@ -2172,13 +2044,12 @@
   - Austin
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
-  iterated_job_id: 29
+  iterated_job_id: 28
   last_modified: '2019-07-22 20:55:39.326778'
   mail_recipient: ''
   max_processes: 5
@@ -2186,7 +2057,6 @@
   name: Iteration_service_simple
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   origin_of_values: user_provided_values
   pools: []
@@ -2213,7 +2083,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   conversion_property: name
   convert_values_to_devices: false
   creator: admin
@@ -2223,13 +2092,12 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
-  iterated_job_id: 29
+  iterated_job_id: 28
   last_modified: '2019-07-22 20:55:43.220815'
   mail_recipient: ''
   max_processes: 5
@@ -2237,7 +2105,6 @@
   name: Iteration_service_python
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   origin_of_values: python_query
   pools: []
@@ -2261,7 +2128,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   conversion_property: name
   convert_values_to_devices: false
   creator: admin
@@ -2271,13 +2137,12 @@
   devices: []
   display_only_failed_nodes: false
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
-  iterated_job_id: 29
+  iterated_job_id: 28
   last_modified: '2019-07-11 13:51:15.506459'
   mail_recipient: ''
   max_processes: 50
@@ -2285,7 +2150,6 @@
   name: iteration_python_payload
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   origin_of_values: python_query
   pools: []
@@ -2309,7 +2173,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   conversion_property: name
   convert_values_to_devices: true
   creator: admin
@@ -2319,13 +2182,12 @@
   devices: []
   display_only_failed_nodes: false
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
   iterated_job: netmiko_check_vrf_test
-  iterated_job_id: 17
+  iterated_job_id: 16
   last_modified: '2019-07-22 20:55:48.544135'
   mail_recipient: ''
   max_processes: 50
@@ -2333,7 +2195,6 @@
   name: Iteration_python_derived_targets
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   origin_of_values: python_query
   pools: []

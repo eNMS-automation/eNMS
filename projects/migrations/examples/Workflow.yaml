@@ -1,5 +1,4 @@
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -7,7 +6,6 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -17,12 +15,11 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-24 19:53:34.182477'
+  last_modified: '2019-07-26 12:17:18.380667'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
@@ -40,7 +37,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -49,7 +45,6 @@
   - Austin
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -61,12 +56,11 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-24 19:57:14.317245'
+  last_modified: '2019-07-26 12:17:18.511531'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: eos
   pools:
   - Washington
@@ -85,7 +79,6 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -94,7 +87,6 @@
   - Washington
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -106,12 +98,11 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-24 20:09:51.044634'
+  last_modified: '2019-07-26 12:17:18.666696'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: eos
   pools: []
   positions:
@@ -132,7 +123,6 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -141,7 +131,6 @@
   - Washington
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -154,12 +143,11 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-24 19:53:34.508642'
+  last_modified: '2019-07-26 12:17:18.809775'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: eos
   pools: []
   positions:
@@ -180,7 +168,6 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -189,7 +176,6 @@
   - Washington
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -206,12 +192,11 @@
   - Iteration_service_simple
   - Iteration_service_python
   - Iteration_python_derived_targets
-  last_modified: '2019-07-24 19:53:34.633187'
+  last_modified: '2019-07-26 12:17:18.924214'
   mail_recipient: ''
   name: python_test_worflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: ''
   pools: []
   positions: {}
@@ -229,7 +214,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -238,7 +222,6 @@
   - Washington
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -250,12 +233,11 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-24 19:53:34.740612'
+  last_modified: '2019-07-26 12:17:19.029379'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: ''
   pools: []
   positions: {}
@@ -273,7 +255,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -282,7 +263,6 @@
   - Washington
   display_only_failed_nodes: true
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: true
@@ -293,12 +273,11 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-24 19:53:34.823335'
+  last_modified: '2019-07-26 12:17:19.120453'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: eos
   pools: []
   positions: {}
@@ -316,7 +295,6 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -326,7 +304,6 @@
   - Washington
   display_only_failed_nodes: false
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: false
@@ -337,12 +314,11 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-24 19:53:34.907387'
+  last_modified: '2019-07-26 12:17:19.232993'
   mail_recipient: ''
   name: Workflow with separate failure - success path
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   pools: []
   positions: {}
@@ -360,7 +336,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -370,7 +345,6 @@
   - Chicago
   display_only_failed_nodes: false
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: false
@@ -387,12 +361,11 @@
   - Device_from_python_query
   - netmiko_check_no_vrf_test
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-24 19:53:35.004820'
+  last_modified: '2019-07-26 12:17:19.328832'
   mail_recipient: ''
   name: python_query_workflow
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   pools: []
   positions: {}
@@ -410,7 +383,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -419,7 +391,6 @@
   - Washington
   display_only_failed_nodes: false
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: false
@@ -429,12 +400,11 @@
   - End
   - Test Netmiko Prompt Service
   - Test netmiko prompts pass
-  last_modified: '2019-07-24 19:53:35.102363'
+  last_modified: '2019-07-26 12:17:19.420817'
   mail_recipient: ''
   name: Netmiko prompts
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 1
   operating_system: ''
   pools: []
   positions: {}
@@ -452,7 +422,6 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  completed: 0
   creator: admin
   credentials: device
   custom_username: ''
@@ -462,7 +431,6 @@
   - Chicago
   display_only_failed_nodes: false
   events: []
-  failed: 0
   has_targets: true
   hidden: false
   include_link_in_summary: false
@@ -474,12 +442,11 @@
   - Payload editor, with device
   - Show vrf with payload helper
   - Show vrf with python query
-  last_modified: '2019-07-24 20:10:45.570420'
+  last_modified: '2019-07-26 12:17:19.518371'
   mail_recipient: ''
   name: 'python Workflow: payload editor and pool helper'
   notification_header: ''
   number_of_retries: 0
-  number_of_targets: 2
   operating_system: ''
   pools: []
   positions: {}

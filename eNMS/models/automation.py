@@ -92,7 +92,7 @@ class Run(AbstractBase):
     private = True
     id = Column(Integer, primary_key=True)
     status = Column(String(SMALL_STRING_LENGTH), default="Running")
-    timestamp = Column(String(SMALL_STRING_LENGTH), default="")
+    runtime = Column(String(SMALL_STRING_LENGTH), default="")
     parent_timestamp = Column(String(SMALL_STRING_LENGTH), default="")
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
@@ -367,7 +367,7 @@ class Service(Job):
     def get_results(
         self, run: "Run", payload: dict, device: Optional["Device"] = None
     ) -> dict:
-        kwargs = {"timestamp": run.timestamp, "job": self.id}
+        kwargs = {"timestamp": run.runtime, "job": self.id}
         if run.workflow:
             kwargs.update(
                 workflow=run.workflow.id, parent_timestamp=run.parent_timestamp
@@ -408,7 +408,7 @@ class Service(Job):
                 thread_lock = Lock()
                 processes = min(len(targets), self.max_processes)
                 args = (  # type: ignore
-                    run.timestamp,
+                    run.runtime,
                     thread_lock,
                     device_results,
                     payload,
@@ -438,7 +438,7 @@ class Service(Job):
         targets: Optional[Set["Device"]] = None,
         *other: Any,
     ) -> dict:
-        results: dict = {"results": {}, "success": False, "timestamp": run.timestamp}
+        results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         if self.has_targets and not targets:
             try:
                 targets = self.compute_devices(payload)
@@ -448,7 +448,6 @@ class Service(Job):
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
             run.log(
-                run.workflow,
                 "info",
                 f"Running {self.type} {self.name} (attempt n°{i + 1})",
             )
@@ -775,7 +774,7 @@ class Workflow(Job):
         jobs: list = start_points or [self.jobs[0]]
         payload = deepcopy(payload)
         visited: Set = set()
-        results: dict = {"results": {}, "success": False, "timestamp": run.timestamp}
+        results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
             initial_targets = targets or self.compute_devices(results["results"])
@@ -797,7 +796,10 @@ class Workflow(Job):
                     try:
                         derived_targets = job.compute_devices(payload, base_target)
                         derived_target_result = job.run(
-                            run, payload, targets=derived_targets
+                            payload,
+                            targets=derived_targets,
+                            parent=run.workflow,
+                            parent_timestamp=run.parent_timestamp,
                         )[0]
                         device_results[base_target.name] = derived_target_result
                         if not derived_target_result["success"]:
@@ -815,7 +817,12 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     job, allowed_devices, payload
                 )
-                job_results = job.run(run, payload, targets=valid_devices)[0]
+                job_results = job.run(
+                    payload,
+                    targets=valid_devices,
+                    parent=run.workflow,
+                    parent_timestamp=run.parent_timestamp,
+                )[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:
                 successors = self.workflow_targets_processing(

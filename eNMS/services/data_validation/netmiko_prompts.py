@@ -45,10 +45,16 @@ class NetmikoPromptsService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoPromptsService"}
 
-    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
+    def job(
+        self,
+        payload: dict,
+        timestamp: str,
+        device: Device,
+        parent: Optional[Job] = None,
+    ) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
         command = self.sub(self.command, locals())
-        self.log(parent, "info", f"Sending '{command}' on {device.name} (Netmiko)")
+        self.log(timestamp, "info", f"Sending '{command}' on {device.name} (Netmiko)")
         commands = [command]
         results = {"commands": commands}
         result = netmiko_connection.send_command_timing(

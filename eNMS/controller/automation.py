@@ -27,6 +27,7 @@ class AutomationController(BaseController):
         "netmiko": defaultdict(dict),
     }
     job_db: dict = defaultdict(dict)
+    job_logs: dict = defaultdict(list)
 
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int
@@ -99,10 +100,8 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, name: str) -> list:
-        path = self.path / "logs" / "job_logs" / f"{self.strip_all(name)}.log"
-        proc = Popen(["tail", "-n", "1000", path], stdout=PIPE)
-        return proc.stdout.readlines()
+    def get_job_logs(self, runtime: str) -> list:
+        return "\n".join(self.job_logs[runtime])
 
     def get_timestamps(self, type: str, id: int) -> list:
         id_kwarg = {"device_id" if type == "device" else "job_id": id}
@@ -231,17 +230,18 @@ class AutomationController(BaseController):
         job = fetch("Job", id=job_id)
         if job.status == "Running":
             return {"error": f"{job.type} is already running."}
+        runtime = self.get_time()
         if asynchronous:
             self.scheduler.add_job(
                 id=self.get_time(),
                 func=threaded_job,
                 run_date=datetime.now(),
-                args=[job.id],
+                args=[job.id, None, None, None, None, runtime],
                 trigger="date",
             )
         else:
-            job.run()
-        return job.serialized
+            job.run(runtime=runtime)
+        return {**job.serialized, "runtime": runtime}
 
     def save_positions(self, workflow_id: int) -> str:
         now = self.get_time()

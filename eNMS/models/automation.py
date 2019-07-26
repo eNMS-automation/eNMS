@@ -248,10 +248,8 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def log(self, parent: Optional["Job"], severity: str, log: str) -> None:
-        getattr(getLogger(self.name), severity)(log)
-        if parent:
-            getattr(getLogger(parent.name), severity)(log)
+    def log(self, timestamp: str, severity: str, log: str) -> None:
+        controller.job_logs[timestamp].append(f"{severity} - {log}")
 
     def run(
         self,
@@ -267,7 +265,7 @@ class Job(AbstractBase):
         if not parent_timestamp:
             parent_timestamp = runtime
         self.status, self.state = "Running", {}
-        self.log(parent, "info", f"{self.type} {self.name}: Starting")
+        self.log(runtime, "info", f"{self.type} {self.name}: Starting")
         Session.commit()
         if not payload:
             payload = {}
@@ -284,28 +282,28 @@ class Job(AbstractBase):
                         parent, "info", f"Closing {library} Connection to {device}"
                     )
                     conn.disconnect() if library == "netmiko" else conn.close()
-            self.log(parent, "info", f"{self.type} {self.name}: Finished")
+            self.log(runtime, "info", f"{self.type} {self.name}: Finished")
         except Exception as exc:
             result = (
                 f"Running {self.type} '{self.name}' raised the following exception:\n"
                 f"{chr(10).join(format_exc().splitlines())}\n\nRun aborted..."
             )
-            self.log(parent, "error", result)
+            self.log(runtime, "error", result)
             results = {"success": False, "results": result}
         finally:
             self.status, self.state = "Idle", {}
             controller.job_db[self.name]["completed"] = 0
             controller.job_db[self.name]["failed"] = 0
+            results["logs"] = controller.job_logs.pop(runtime)
+            if task and not task.frequency:
+                task.is_active = False
+            results["properties"] = self.to_dict(True)
+            results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
+            if parent:
+                results_kwargs["workflow"] = parent.id
+                results_kwargs["parent_timestamp"] = parent_timestamp
+            factory("Result", **results_kwargs)
             Session.commit()
-        if task and not task.frequency:
-            task.is_active = False
-        results["properties"] = self.to_dict(True)
-        results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
-        if parent:
-            results_kwargs["workflow"] = parent.id
-            results_kwargs["parent_timestamp"] = parent_timestamp
-        factory("Result", **results_kwargs)
-        Session.commit()
         if not parent and self.send_notification:
             self.notify(results)
         return results, runtime
@@ -352,22 +350,22 @@ class Service(Job):
         if device:
             kwargs["device"] = device.id
         self.log(
-            parent,
+            runtime,
             "info",
             f"Running {self.type}{f' on {device.name}' if device else ''}",
         )
         results: Dict[Any, Any] = {"timestamp": controller.get_time()}
         try:
             if device:
-                results.update(self.job(payload, device, parent))
+                results.update(self.job(payload, runtime, device, parent))
             else:
-                results.update(self.job(payload, parent))
+                results.update(self.job(payload, runtime, parent))
         except Exception:
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
         self.log(
-            parent,
+            runtime,
             "info",
             f"Finished running {self.type} '{self.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"

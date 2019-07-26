@@ -329,30 +329,13 @@ function clearResults(id) {
  * @param {id} id - Job ID.
  */
 // eslint-disable-next-line
-function refreshLogs(id, name) {
-  let xhr = new XMLHttpRequest();
-  xhr.open("GET", `/stream_logs/${name}`, true);
-  xhr.send(null);
-
-  /**
-   * Handle real-time logs data.
-   */
-  function handleNewData() {
-    let messages = xhr.responseText.split("\n");
-    messages.slice(position, -1).forEach(function(value) {
-      $(`#logs-${id}`).append(`${value}<br>`);
-    });
-    position = messages.length - 1;
-  }
-
-  let position = 0;
-  let timer;
-  timer = setInterval(function() {
-    handleNewData();
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-      clearInterval(timer);
+function refreshLogs(id, name, runtime) {
+  call(`/get_job_logs/${runtime}`, function(logs) {
+    if (logs) {
+      $(`#logs-${id}`).text(logs);
+      setTimeout(() => refreshLogs(id, name, runtime), 1500);
     }
-  }, 1000);
+  });
 }
 
 /**
@@ -362,9 +345,9 @@ function refreshLogs(id, name) {
 // eslint-disable-next-line
 function runJob(id, name) {
   showLogs(id, name);
-  refreshLogs(id, name);
   call(`/run_job/${id}`, function(job) {
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
+    refreshLogs(id, name, job.runtime);
     if (page == "workflow_builder") {
       if (job.type == "Workflow") {
         getWorkflowState(true);

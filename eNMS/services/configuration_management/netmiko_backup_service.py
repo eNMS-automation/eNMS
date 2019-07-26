@@ -40,7 +40,13 @@ class NetmikoBackupService(Service):
         with open(path / "data.yml", "w") as file:
             dump(data, file, default_flow_style=False)
 
-    def job(self, payload: dict, device: Device, parent: Optional[Job] = None) -> dict:
+    def job(
+        self,
+        payload: dict,
+        timestamp: str,
+        device: Device,
+        parent: Optional[Job] = None,
+    ) -> dict:
         try:
             now = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"

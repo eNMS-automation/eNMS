@@ -409,7 +409,7 @@ class Service(Job):
         targets: Optional[Set["Device"]] = None,
     ) -> dict:
         if not targets:
-            results = self.get_results(runtime, payload)
+            results = self.get_results(run, payload)
             factory("Result", result=results["results"], **results["kwargs"])
             return results["results"]
         else:
@@ -418,13 +418,10 @@ class Service(Job):
                 thread_lock = Lock()
                 processes = min(len(targets), self.max_processes)
                 args = (  # type: ignore
-                    self.id,
+                    run.timestamp
                     thread_lock,
                     device_results,
-                    runtime,
                     payload,
-                    getattr(parent, "id", None),
-                    parent_timestamp,
                 )
                 process_args = [(device.id, *args) for device in targets]
                 pool = ThreadPool(processes=processes)
@@ -434,7 +431,7 @@ class Service(Job):
             else:
                 device_results = {
                     device.name: self.get_results(
-                        runtime, payload, device, parent, parent_timestamp
+                        run, payload, device
                     )
                     for device in targets
                 }

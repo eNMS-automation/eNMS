@@ -256,13 +256,7 @@ class Run(AbstractBase):
             Session.commit()
         return devices
 
-    def run(
-        self,
-        targets: Optional[Set["Device"]] = None,
-        task: Optional["Task"] = None,
-        start_points: Optional[List["Job"]] = None,
-        runtime: Optional[str] = None,
-    ) -> Tuple[dict, str]:
+    def run(self, start_points: Optional[List["Job"]] = None) -> Tuple[dict, str]:
         self.job.status, self.job.state = "Running", {}
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
@@ -777,12 +771,13 @@ class Workflow(Job):
                 for base_target in allowed_devices[job.name]:
                     try:
                         derived_targets = run.compute_devices(payload, base_target)
-                        derived_target_result = job.run(
-                            payload,
-                            targets=derived_targets,
-                            parent=self,
-                            parent_timestamp=run.parent_timestamp,
-                        )[0]
+                        job_run = factory("Run", **{
+                            "payload": payload,
+                            "targets": derived_targets,
+                            "parent": self,
+                            "parent_timestamp": run.parent_timestamp,
+                        })
+                        derived_target_result = job_run.run()
                         device_results[base_target.name] = derived_target_result
                         if not derived_target_result["success"]:
                             success = False
@@ -799,12 +794,13 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     run, job, allowed_devices, payload
                 )
-                job_results = job.run(
-                    payload,
-                    targets=valid_devices,
-                    parent=self,
-                    parent_timestamp=run.parent_timestamp,
-                )[0]
+                job_run = factory("Run", **{
+                    "payload": payload,
+                    "targets": valid_devices,
+                    "parent": self,
+                    "parent_timestamp": run.parent_timestamp,
+                })
+                job_results = job_run.run()[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:
                 successors = self.workflow_targets_processing(

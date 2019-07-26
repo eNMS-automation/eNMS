@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from eNMS.database.functions import fetch
+from eNMS.database.functions import factory, fetch
 
 
 def threaded_job(
@@ -18,13 +18,15 @@ def threaded_job(
     payload = payload or job.initial_payload
     if targets:
         targets = {fetch("Device", id=device_id) for device_id in targets}
-    job.run(
-        targets=targets,
-        payload=payload,
-        task=task,
-        start_points=start_points,
-        runtime=runtime,
-    )
+    run = factory("Run", **{
+        "job": job_id,
+        "targets": targets,
+        "payload": payload,
+        "task": task.id,
+        "start_points": start_points,
+        "runtime": runtime,
+    })
+    run.run()
 
 
 def device_thread(args: tuple) -> None:

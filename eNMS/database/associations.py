@@ -9,6 +9,13 @@ job_device_table: Table = Table(
     Column("job_id", Integer, ForeignKey("Job.id")),
 )
 
+run_device_table: Table = Table(
+    "run_device_association",
+    Base.metadata,
+    Column("device_id", Integer, ForeignKey("Device.id")),
+    Column("run_id", Integer, ForeignKey("Run.id")),
+)
+
 job_pool_table: Table = Table(
     "job_pool_association",
     Base.metadata,

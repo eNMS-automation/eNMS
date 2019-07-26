@@ -120,7 +120,9 @@ class Run(AbstractBase):
 
     def netmiko_connection(self, device: "Device") -> ConnectHandler:
         if self.parent_timestamp in controller.connections_cache["netmiko"]:
-            parent_connection = controller.connections_cache["netmiko"].get(self.parent_timestamp)
+            parent_connection = controller.connections_cache["netmiko"].get(
+                self.parent_timestamp
+            )
             if parent_connection and device.name in parent_connection:
                 if self.job.start_new_connection:
                     parent_connection.pop(device.name).disconnect()
@@ -157,7 +159,9 @@ class Run(AbstractBase):
 
     def napalm_connection(self, device: "Device") -> NetworkDriver:
         if self.parent_timestamp in controller.connections_cache["napalm"]:
-            parent_connection = controller.connections_cache["napalm"].get(self.parent_timestamp)
+            parent_connection = controller.connections_cache["napalm"].get(
+                self.parent_timestamp
+            )
             if parent_connection and device.name in parent_connection:
                 if (
                     self.job.start_new_connection
@@ -465,9 +469,7 @@ class Service(Job):
                 notification.append(f"\n\nPASS :\n{passed}")
         return notification
 
-    def device_run(
-        self, run: "Run", targets: Optional[Set["Device"]] = None
-    ) -> dict:
+    def device_run(self, run: "Run", targets: Optional[Set["Device"]] = None) -> dict:
         if not targets:
             results = run.get_results()
             factory("Result", result=results["results"], **results["kwargs"])
@@ -477,11 +479,7 @@ class Service(Job):
                 device_results: dict = {}
                 thread_lock = Lock()
                 processes = min(len(targets), self.max_processes)
-                args = (  # type: ignore
-                    run.runtime,
-                    thread_lock,
-                    device_results,
-                )
+                args = (run.runtime, thread_lock, device_results)  # type: ignore
                 process_args = [(device.id, *args) for device in targets]
                 pool = ThreadPool(processes=processes)
                 pool.map(device_thread, process_args)
@@ -489,8 +487,7 @@ class Service(Job):
                 pool.join()
             else:
                 device_results = {
-                    device.name: run.get_results(device)
-                    for device in targets
+                    device.name: run.get_results(device) for device in targets
                 }
             results = {"devices": {}}
             for device_name, device_result in device_results.items():
@@ -501,10 +498,7 @@ class Service(Job):
             return results
 
     def build_results(
-        self,
-        run: "Run",
-        targets: Optional[Set["Device"]] = None,
-        *other: Any,
+        self, run: "Run", targets: Optional[Set["Device"]] = None, *other: Any
     ) -> dict:
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         if self.has_targets and not targets:
@@ -515,10 +509,7 @@ class Service(Job):
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
-            run.log(
-                "info",
-                f"Running {self.type} {self.name} (attempt n°{i + 1})",
-            )
+            run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             controller.job_db[run.runtime]["completed"] = 0
             controller.job_db[run.runtime]["failed"] = 0
             if not run.workflow:

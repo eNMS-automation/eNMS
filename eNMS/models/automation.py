@@ -255,7 +255,7 @@ class Run(AbstractBase):
             )
         if device:
             kwargs["device"] = device.id
-        self.log("info", f"Running {self.type}{f' on {device.name}' if device else ''}")
+        self.log("info", f"Running {self.job.type}{f' on {device.name}' if device else ''}")
         results: Dict[Any, Any] = {"timestamp": controller.get_time()}
         try:
             if device:
@@ -268,7 +268,7 @@ class Run(AbstractBase):
             )
         self.log(
             "info",
-            f"Finished running {self.type} '{self.name}'"
+            f"Finished running {self.job.type} '{self.job.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
             f"{f' on {device.name}' if device else ''}",
         )
@@ -279,7 +279,7 @@ class Run(AbstractBase):
     def log(self, severity: str, log: str) -> None:
         log = f"{controller.get_time()} - {severity} - {log}"
         controller.run_logs[self.runtime].append(log)
-        if self.parent_timestamp:
+        if self.workflow:
             controller.run_logs[self.parent_timestamp].append(log)
 
     @property

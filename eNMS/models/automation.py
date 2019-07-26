@@ -103,6 +103,12 @@ class Run(AbstractBase):
     def __repr__(self) -> str:
         return f"{self.timestamp} ({self.job_name})"
 
+    def log(self, severity: str, log: str) -> None:
+        log = f"{controller.get_time()} - {severity} - {log}"
+        controller.run_logs[self.timestamp].append(log)
+        if self.parent_timestamp:
+            controller.run_logs[self.parent_timestamp].append(log)
+
     @property
     def name(self) -> str:
         return repr(self)
@@ -268,11 +274,6 @@ class Job(AbstractBase):
             pass
         repo.remotes.origin.push()
 
-    def log(self, timestamp: str, severity: str, log: str) -> None:
-        controller.job_logs[timestamp].append(
-            f"{controller.get_time()} - {severity} - {log}"
-        )
-
     def run(
         self,
         payload: Optional[dict] = None,
@@ -301,9 +302,7 @@ class Job(AbstractBase):
         if not payload:
             payload = {}
         try:
-            results = self.build_results(
-                runtime, payload, targets, parent, parent_timestamp, start_points
-            )
+            results = self.build_results(run, payload, targets, start_points)
             for library in ("netmiko", "napalm"):
                 connections = controller.connections_cache[library].pop(self.name, None)
                 if not connections:
@@ -313,7 +312,7 @@ class Job(AbstractBase):
                         parent, "info", f"Closing {library} Connection to {device}"
                     )
                     conn.disconnect() if library == "netmiko" else conn.close()
-            self.log(runtime, "info", f"{self.type} {self.name}: Finished")
+            run.log(runtime, "info", f"{self.type} {self.name}: Finished")
         except Exception as exc:
             result = (
                 f"Running {self.type} '{self.name}' raised the following exception:\n"
@@ -325,7 +324,7 @@ class Job(AbstractBase):
             self.status, self.state = "Idle", {}
             controller.job_db[self.name]["completed"] = 0
             controller.job_db[self.name]["failed"] = 0
-            results["logs"] = controller.job_logs.pop(runtime)
+            results["logs"] = controller.run_logs.pop(runtime)
             if task and not task.frequency:
                 task.is_active = False
             results["properties"] = self.to_dict(True)

@@ -27,7 +27,7 @@ class AutomationController(BaseController):
         "netmiko": defaultdict(dict),
     }
     job_db: dict = defaultdict(dict)
-    job_logs: dict = defaultdict(list)
+    run_logs: dict = defaultdict(list)
 
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int
@@ -101,7 +101,7 @@ class AutomationController(BaseController):
         return new_workflow.serialized
 
     def get_job_logs(self, runtime: str) -> list:
-        return "\n".join(self.job_logs[runtime])
+        return "\n".join(self.run_logs[runtime])
 
     def get_timestamps(self, type: str, id: int) -> list:
         id_kwarg = {"device_id" if type == "device" else "job_id": id}

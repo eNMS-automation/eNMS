@@ -4,6 +4,7 @@ alertify: false
 csrf_token: false
 documentationUrl: false
 filteringPanel: false
+filteringProperties: false
 formProperties: false
 job: false
 jsPanel: false
@@ -533,6 +534,8 @@ function processData(type, id) {
 // eslint-disable-next-line
 function createSearchHeaders() {
   properties.forEach((property) => {
+    console.log(property, (!filteringProperties.includes(property)));
+    if (!filteringProperties.includes(property)) return;
     $(`#search-${property}`).on("keyup change", function() {
       $(`#${type}_filtering-${property}`).val($(this).val());
       table.ajax.reload(null, false);

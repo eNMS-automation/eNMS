@@ -81,6 +81,7 @@ stylesheets %} {% block content %} {% if type == "pool" %} {% endif %}
 {% endblock content %} {% block javascripts %} {{ super() }}
 <script>
   const properties = {{ properties|tojson|safe }};
+  const filteringProperties = {{ filtering_properties|tojson|safe }};
   const type = "{{ type }}";
   let [table, filteringPanel] = initTable(type);
   if (["service", "workflow", "task"].includes(type))

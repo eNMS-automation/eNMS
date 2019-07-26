@@ -103,70 +103,6 @@ class Run(AbstractBase):
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name})"
 
-    def start(
-        self,
-        payload: Optional[dict] = None,
-        targets: Optional[Set["Device"]] = None,
-        parent: Optional["Job"] = None,
-        parent_timestamp: Optional[str] = None,
-        task: Optional["Task"] = None,
-        start_points: Optional[List["Job"]] = None,
-        runtime: Optional[str] = None,
-    ) -> Tuple[dict, str]:
-        runtime = runtime or controller.get_time()
-        if not parent_timestamp:
-            parent_timestamp = runtime
-        run_args = {
-                "job": self.id,
-                "runtime": runtime,
-                "targets": targets,
-                "parent_timestamp": parent_timestamp,
-            }
-        if parent:
-            run_args["workflow"] = parent.id
-        run = Run(**run_args)
-        self.status, self.state = "Running", {}
-        run.log("info", f"{self.type} {self.name}: Starting")
-        Session.commit()
-        if not payload:
-            payload = {}
-        try:
-            results = self.build_results(run, payload, targets, start_points)
-            for library in ("netmiko", "napalm"):
-                connections = controller.connections_cache[library].pop(self.name, None)
-                if not connections:
-                    continue
-                for device, conn in connections.items():
-                    run.log("info", f"Closing {library} Connection to {device}")
-                    conn.disconnect() if library == "netmiko" else conn.close()
-            run.log("info", f"{self.type} {self.name}: Finished")
-        except Exception as exc:
-            result = (
-                f"Running {self.type} '{self.name}' raised the following exception:\n"
-                f"{chr(10).join(format_exc().splitlines())}\n\nRun aborted..."
-            )
-            run.log("error", result)
-            results = {"success": False, "results": result}
-        finally:
-            self.status, self.state = "Idle", {}
-            controller.job_db[self.name]["completed"] = 0
-            controller.job_db[self.name]["failed"] = 0
-            results["logs"] = controller.run_logs.pop(runtime)
-            if task and not task.frequency:
-                task.is_active = False
-            results["properties"] = self.to_dict(True)
-            results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
-            print(self, parent)
-            if parent:
-                results_kwargs["workflow"] = parent.id
-                results_kwargs["parent_timestamp"] = parent_timestamp
-            print(results_kwargs)
-            factory("Result", **results_kwargs)
-            Session.commit()
-        if not parent and self.send_notification:
-            self.notify(results)
-        return results, runtime
-
     def log(self, severity: str, log: str) -> None:
         log = f"{controller.get_time()} - {severity} - {log}"
         controller.run_logs[self.runtime].append(log)
@@ -337,6 +273,70 @@ class Job(AbstractBase):
         except GitCommandError:
             pass
         repo.remotes.origin.push()
+
+    def run(
+        self,
+        payload: Optional[dict] = None,
+        targets: Optional[Set["Device"]] = None,
+        parent: Optional["Job"] = None,
+        parent_timestamp: Optional[str] = None,
+        task: Optional["Task"] = None,
+        start_points: Optional[List["Job"]] = None,
+        runtime: Optional[str] = None,
+    ) -> Tuple[dict, str]:
+        runtime = runtime or controller.get_time()
+        if not parent_timestamp:
+            parent_timestamp = runtime
+        run_args = {
+                "job": self.id,
+                "runtime": runtime,
+                "targets": targets,
+                "parent_timestamp": parent_timestamp,
+            }
+        if parent:
+            run_args["workflow"] = parent.id
+        run = Run(**run_args)
+        self.status, self.state = "Running", {}
+        run.log("info", f"{self.type} {self.name}: Starting")
+        Session.commit()
+        if not payload:
+            payload = {}
+        try:
+            results = self.build_results(run, payload, targets, start_points)
+            for library in ("netmiko", "napalm"):
+                connections = controller.connections_cache[library].pop(self.name, None)
+                if not connections:
+                    continue
+                for device, conn in connections.items():
+                    run.log("info", f"Closing {library} Connection to {device}")
+                    conn.disconnect() if library == "netmiko" else conn.close()
+            run.log("info", f"{self.type} {self.name}: Finished")
+        except Exception as exc:
+            result = (
+                f"Running {self.type} '{self.name}' raised the following exception:\n"
+                f"{chr(10).join(format_exc().splitlines())}\n\nRun aborted..."
+            )
+            run.log("error", result)
+            results = {"success": False, "results": result}
+        finally:
+            self.status, self.state = "Idle", {}
+            controller.job_db[self.name]["completed"] = 0
+            controller.job_db[self.name]["failed"] = 0
+            results["logs"] = controller.run_logs.pop(runtime)
+            if task and not task.frequency:
+                task.is_active = False
+            results["properties"] = self.to_dict(True)
+            results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
+            print(self, parent)
+            if parent:
+                results_kwargs["workflow"] = parent.id
+                results_kwargs["parent_timestamp"] = parent_timestamp
+            print(results_kwargs)
+            factory("Result", **results_kwargs)
+            Session.commit()
+        if not parent and self.send_notification:
+            self.notify(results)
+        return results, runtime
 
 
 class Service(Job):

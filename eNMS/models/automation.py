@@ -118,6 +118,76 @@ class Run(AbstractBase):
         else:
             return "N/A"
 
+    def netmiko_connection(self, device: "Device") -> ConnectHandler:
+        if self.parent_timestamp in controller.connections_cache["netmiko"]:
+            parent_connection = controller.connections_cache["netmiko"].get(self.parent_timestamp)
+            if parent_connection and device.name in parent_connection:
+                if self.job.start_new_connection:
+                    parent_connection.pop(device.name).disconnect()
+                else:
+                    try:
+                        connection = parent_connection[device.name]
+                        connection.find_prompt()
+                        for property in ("fast_cli", "timeout", "global_delay_factor"):
+                            setattr(connection, property, getattr(self.job, property))
+                        return connection
+                    except (OSError, ValueError):
+                        parent_connection.pop(device.name)
+        username, password = self.job.get_credentials(device)
+        netmiko_connection = ConnectHandler(
+            device_type=(
+                device.netmiko_driver if self.job.use_device_driver else self.job.driver
+            ),
+            ip=device.ip_address,
+            port=getattr(device, "port"),
+            username=username,
+            password=password,
+            secret=device.enable_password,
+            fast_cli=self.job.fast_cli,
+            timeout=self.job.timeout,
+            global_delay_factor=self.job.global_delay_factor,
+        )
+        if self.job.privileged_mode:
+            netmiko_connection.enable()
+        if self.workflow:
+            controller.connections_cache["netmiko"][self.parent_timestamp][
+                device.name
+            ] = netmiko_connection
+        return netmiko_connection
+
+    def napalm_connection(self, device: "Device") -> NetworkDriver:
+        if self.parent_timestamp in controller.connections_cache["napalm"]:
+            parent_connection = controller.connections_cache["napalm"].get(self.parent_timestamp)
+            if parent_connection and device.name in parent_connection:
+                if (
+                    self.job.start_new_connection
+                    or not parent_connection[device.name].is_alive()
+                ):
+                    parent_connection.pop(device.name).close()
+                else:
+                    return parent_connection[device.name]
+        username, password = self.job.get_credentials(device)
+        optional_args = self.job.optional_args
+        if not optional_args:
+            optional_args = {}
+        if "secret" not in optional_args:
+            optional_args["secret"] = device.enable_password
+        driver = get_network_driver(
+            device.napalm_driver if self.job.use_device_driver else self.job.driver
+        )
+        napalm_connection = driver(
+            hostname=device.ip_address,
+            username=username,
+            password=password,
+            optional_args=optional_args,
+        )
+        napalm_connection.open()
+        if self.workflow:
+            controller.connections_cache["napalm"][self.parent_timestamp][
+                device.name
+            ] = napalm_connection
+        return napalm_connection
+
     def payload_helper(
         self,
         payload: dict,
@@ -174,7 +244,7 @@ class Run(AbstractBase):
         return devices
 
     def get_results(self, device: Optional["Device"] = None) -> dict:
-        kwargs = {"timestamp": self.runtime, "job": self.id}
+        kwargs = {"timestamp": self.runtime, "job": self.job.id}
         if self.workflow:
             kwargs.update(
                 workflow=self.workflow_id, parent_timestamp=self.parent_timestamp
@@ -319,7 +389,7 @@ class Job(AbstractBase):
         if not parent_timestamp:
             parent_timestamp = runtime
         run_args = {
-            "job": self.job.id,
+            "job": self.id,
             "payload": payload,
             "runtime": runtime,
             "targets": targets,
@@ -328,43 +398,43 @@ class Job(AbstractBase):
         if parent:
             run_args["workflow"] = parent.id
         run = Run(**run_args)
-        self.job.status, self.job.state = "Running", {}
-        run.log("info", f"{self.job.type} {self.job.name}: Starting")
+        self.status, self.state = "Running", {}
+        run.log("info", f"{self.type} {self.name}: Starting")
         Session.commit()
         try:
-            results = self.job.build_results(run, targets, start_points)
+            results = self.build_results(run, targets, start_points)
             for library in ("netmiko", "napalm"):
-                connections = controller.connections_cache[library].pop(self.runtime, None)
+                connections = controller.connections_cache[library].pop(runtime, None)
                 if not connections:
                     continue
                 for device, conn in connections.items():
                     run.log("info", f"Closing {library} Connection to {device}")
                     conn.disconnect() if library == "netmiko" else conn.close()
-            run.log("info", f"{self.job.type} {self.job.name}: Finished")
+            run.log("info", f"{self.type} {self.name}: Finished")
         except Exception as exc:
             result = (
-                f"Running {self.job.type} '{self.job.name}' raised the following exception:\n"
+                f"Running {self.type} '{self.name}' raised the following exception:\n"
                 f"{chr(10).join(format_exc().splitlines())}\n\nRun aborted..."
             )
             run.log("error", result)
             results = {"success": False, "results": result}
         finally:
-            self.job.status, self.job.state = "Idle", {}
+            self.status, self.state = "Idle", {}
             controller.job_db[runtime]["completed"] = 0
             controller.job_db[runtime]["failed"] = 0
             results["logs"] = controller.run_logs.pop(runtime)
             if task and not task.frequency:
                 task.is_active = False
-            results["properties"] = self.job.to_dict(True)
-            results_kwargs = {"timestamp": runtime, "result": results, "job": self.job.id}
+            results["properties"] = self.to_dict(True)
+            results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
             if parent:
                 results_kwargs["workflow"] = parent.id
                 results_kwargs["parent_timestamp"] = parent_timestamp
             print(results_kwargs)
             factory("Result", **results_kwargs)
             Session.commit()
-        if not parent and self.job.send_notification:
-            self.job.notify(results)
+        if not parent and self.send_notification:
+            self.notify(results)
         return results, runtime
 
 
@@ -519,75 +589,6 @@ class Service(Job):
                 self.sub(self.custom_password, locals()),
             )
         )
-
-    def netmiko_connection(self, device: "Device", parent: "Job") -> ConnectHandler:
-        if getattr(parent, "name", None) in controller.connections_cache["netmiko"]:
-            parent_connection = controller.connections_cache["netmiko"].get(parent.name)
-            if parent_connection and device.name in parent_connection:
-                if self.start_new_connection:
-                    parent_connection.pop(device.name).disconnect()
-                else:
-                    try:
-                        connection = parent_connection[device.name]
-                        connection.find_prompt()
-                        for property in ("fast_cli", "timeout", "global_delay_factor"):
-                            setattr(connection, property, getattr(self, property))
-                        return connection
-                    except (OSError, ValueError):
-                        parent_connection.pop(device.name)
-        username, password = self.get_credentials(device)
-        netmiko_connection = ConnectHandler(
-            device_type=(
-                device.netmiko_driver if self.use_device_driver else self.driver
-            ),
-            ip=device.ip_address,
-            port=getattr(device, "port"),
-            username=username,
-            password=password,
-            secret=device.enable_password,
-            fast_cli=self.fast_cli,
-            timeout=self.timeout,
-            global_delay_factor=self.global_delay_factor,
-        )
-        if self.privileged_mode:
-            netmiko_connection.enable()
-        controller.connections_cache["netmiko"][parent.name if parent else self.name][
-            device.name
-        ] = netmiko_connection
-        return netmiko_connection
-
-    def napalm_connection(self, device: "Device", parent: "Job") -> NetworkDriver:
-        if getattr(parent, "name", None) in controller.connections_cache["napalm"]:
-            parent_connection = controller.connections_cache["napalm"].get(parent.name)
-            if parent_connection and device.name in parent_connection:
-                if (
-                    self.start_new_connection
-                    or not parent_connection[device.name].is_alive()
-                ):
-                    parent_connection.pop(device.name).close()
-                else:
-                    return parent_connection[device.name]
-        username, password = self.get_credentials(device)
-        optional_args = self.optional_args
-        if not optional_args:
-            optional_args = {}
-        if "secret" not in optional_args:
-            optional_args["secret"] = device.enable_password
-        driver = get_network_driver(
-            device.napalm_driver if self.use_device_driver else self.driver
-        )
-        napalm_connection = driver(
-            hostname=device.ip_address,
-            username=username,
-            password=password,
-            optional_args=optional_args,
-        )
-        napalm_connection.open()
-        if parent:
-            controller.connections_cache["napalm"][parent.name][
-                device.name
-            ] = napalm_connection
-        return napalm_connection
 
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())

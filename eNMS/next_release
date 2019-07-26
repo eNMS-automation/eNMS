@@ -22,17 +22,8 @@ and at other times wants to see all devices run for a service.
 a. Collapsable sections: Moving around in the data is overwhelming. 
 >>> Done.
 
-- Refactoring of the logs. One logger per service in "logs" folder. Real-time logs is now working
+- Refactoring of the logs: real-time logs is now working
 even with multiprocessing enabled.
-NGINX CONF: proxy buffering MUST BE DISABLED. (eg
-
-    location / {
-        proxy_pass http://localhost:5000/;
-        proxy_buffering off;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-)
 
 - Workflow restartability
 >>> I improved the workflow restartability system:

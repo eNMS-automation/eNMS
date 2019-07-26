@@ -43,16 +43,10 @@ class NetmikoValidationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoValidationService"}
 
-    def job(
-        self,
-        payload: dict,
-        timestamp: str,
-        device: Device,
-        parent: Optional[Job] = None,
-    ) -> dict:
-        netmiko_connection = self.netmiko_connection(device, parent)
+    def job(self, run: "Run", payload: dict, device: Device) -> dict:
+        netmiko_connection = self.netmiko_connection(device, run.workflow)
         command = self.sub(self.command, locals())
-        self.log(timestamp, "info", f"Sending '{command}' on {device.name} (Netmiko)")
+        run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")
         expect_string = self.sub(self.expect_string, locals())
         result = self.convert_result(
             netmiko_connection.send_command(

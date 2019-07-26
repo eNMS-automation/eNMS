@@ -508,7 +508,7 @@ class BaseController:
             assert self.mail_username and self.mail_password
             server.starttls()
             server.login(self.mail_username, self.mail_password)
-        server.sendmail(sender, recipients, message.as_string())
+        server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 
     def str_dict(self, input: Any, depth: int = 0) -> str:

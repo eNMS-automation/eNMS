@@ -312,13 +312,13 @@ class Job(AbstractBase):
                         parent, "info", f"Closing {library} Connection to {device}"
                     )
                     conn.disconnect() if library == "netmiko" else conn.close()
-            run.log(runtime, "info", f"{self.type} {self.name}: Finished")
+            run.log("info", f"{self.type} {self.name}: Finished")
         except Exception as exc:
             result = (
                 f"Running {self.type} '{self.name}' raised the following exception:\n"
                 f"{chr(10).join(format_exc().splitlines())}\n\nRun aborted..."
             )
-            self.log(runtime, "error", result)
+            run.log("error", result)
             results = {"success": False, "results": result}
         finally:
             self.status, self.state = "Idle", {}
@@ -368,33 +368,30 @@ class Service(Job):
 
     def get_results(
         self,
-        runtime: str,
+        run: "Run",
         payload: dict,
         device: Optional["Device"] = None,
-        parent: Optional["Job"] = None,
-        parent_timestamp: Optional[str] = None,
     ) -> dict:
-        kwargs = {"timestamp": runtime, "job": self.id}
+        kwargs = {"timestamp": run.timestamp, "job": self.id}
         if parent:
             kwargs.update(workflow=parent.id, parent_timestamp=parent_timestamp)
         if device:
             kwargs["device"] = device.id
-        self.log(
-            runtime,
+        run.log(
             "info",
             f"Running {self.type}{f' on {device.name}' if device else ''}",
         )
         results: Dict[Any, Any] = {"timestamp": controller.get_time()}
         try:
             if device:
-                results.update(self.job(payload, runtime, device, parent))
+                results.update(self.job(run, payload, device))
             else:
-                results.update(self.job(payload, runtime, parent))
+                results.update(self.job(run, payload))
         except Exception:
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
-        self.log(
+        run.log(
             runtime,
             "info",
             f"Finished running {self.type} '{self.name}'"
@@ -407,11 +404,9 @@ class Service(Job):
 
     def device_run(
         self,
-        runtime: str,
+        run: "Run",
         payload: dict,
         targets: Optional[Set["Device"]] = None,
-        parent: Optional["Job"] = None,
-        parent_timestamp: Optional[str] = None,
     ) -> dict:
         if not targets:
             results = self.get_results(runtime, payload)
@@ -453,14 +448,12 @@ class Service(Job):
 
     def build_results(
         self,
-        runtime: str,
+        run: "Run",
         payload: dict,
         targets: Optional[Set["Device"]] = None,
-        parent: Optional["Job"] = None,
-        parent_timestamp: Optional[str] = None,
         *other: Any,
     ) -> dict:
-        results: dict = {"results": {}, "success": False, "timestamp": runtime}
+        results: dict = {"results": {}, "success": False, "timestamp": run.timestamp}
         if self.has_targets and not targets:
             try:
                 targets = self.compute_devices(payload)
@@ -469,16 +462,14 @@ class Service(Job):
         if targets:
             results["results"]["devices"] = {}
         for i in range(self.number_of_retries + 1):
-            self.log(
+            run.log(
                 parent, "info", f"Running {self.type} {self.name} (attempt n°{i + 1})"
             )
             controller.job_db[self.name]["completed"] = 0
             controller.job_db[self.name]["failed"] = 0
             if not parent:
                 Session.commit()
-            attempt = self.device_run(
-                runtime, payload or {}, targets, parent, parent_timestamp
-            )
+            attempt = self.device_run(run, payload or {}, targets)
             Session.commit()
             if targets:
                 assert targets is not None
@@ -788,18 +779,16 @@ class Workflow(Job):
 
     def build_results(
         self,
-        runtime: str,
+        run: "Run",
         payload: dict,
         targets: Optional[Set["Device"]] = None,
-        parent: Optional["Job"] = None,
-        parent_timestamp: Optional[str] = None,
         start_points: Optional[List["Job"]] = None,
     ) -> dict:
         self.state = {"jobs": {}}
         jobs: list = start_points or [self.jobs[0]]
         payload = deepcopy(payload)
         visited: Set = set()
-        results: dict = {"results": {}, "success": False, "timestamp": runtime}
+        results: dict = {"results": {}, "success": False, "timestamp": run.timestamp}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
             initial_targets = targets or self.compute_devices(results["results"])
@@ -821,10 +810,9 @@ class Workflow(Job):
                     try:
                         derived_targets = job.compute_devices(payload, base_target)
                         derived_target_result = job.run(
+                            run,
                             payload,
                             targets=derived_targets,
-                            parent=self,
-                            parent_timestamp=parent_timestamp,
                         )[0]
                         device_results[base_target.name] = derived_target_result
                         if not derived_target_result["success"]:
@@ -843,10 +831,9 @@ class Workflow(Job):
                     job, allowed_devices, payload
                 )
                 job_results = job.run(
+                    run,
                     payload,
                     targets=valid_devices,
-                    parent=self,
-                    parent_timestamp=parent_timestamp,
                 )[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

@@ -359,19 +359,6 @@ function runJob(id, name) {
 }
 
 /**
- * Show Log History.
- * @param {name} name - Job name.
- */
-// eslint-disable-next-line
-function showLogHistory(id, name) {
-  call(`/get_job_logs/${name}`, function(result) {
-    showLogs(id, name);
-    $(`#logs-${id}`).empty();
-    result.forEach((line) => $(`#logs-${id}`).append(line));
-  });
-}
-
-/**
  * Display instance modal for editing.
  * @param {id} id - Instance ID.
  */

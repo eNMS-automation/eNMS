@@ -205,24 +205,6 @@ def download_configuration(name: str) -> Response:
         return jsonify("No configuration stored")
 
 
-@blueprint.route("/stream_logs/<job_name>")
-def stream_logs(job_name: str) -> Response:
-    def generate() -> Generator:
-        path = controller.path / "logs" / "job_logs"
-        with open(path / f"{controller.strip_all(job_name)}.log") as file:
-            file.seek(0, 2)
-            counter = 0
-            while counter < 10:
-                data = file.readline()
-                counter = 0 if data else counter + 1
-                if data:
-                    yield data
-                else:
-                    sleep(3 * counter)
-
-    return Response(response=generate(), mimetype="text/html")
-
-
 @blueprint.route("/", methods=["POST"])
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests

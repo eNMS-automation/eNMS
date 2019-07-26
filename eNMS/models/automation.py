@@ -486,9 +486,6 @@ class Service(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogHistory('{self.id}', '{self.name}')">
-            </i>Logs</a></button>""",
-            f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
@@ -708,9 +705,6 @@ class Workflow(Job):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogHistory('{self.id}', '{self.name}')">
-            </i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
             </i>Results</a></button>""",

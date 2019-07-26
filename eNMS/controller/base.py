@@ -312,7 +312,7 @@ class BaseController:
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[
                 RotatingFileHandler(
-                    self.path / "logs" / "app_logs" / "enms.log",
+                    self.path / "logs" / "enms.log",
                     maxBytes=20_000_000,
                     backupCount=10,
                 ),

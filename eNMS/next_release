@@ -24,6 +24,8 @@ a. Collapsable sections: Moving around in the data is overwhelming.
 
 - Refactoring of the logs: real-time logs is now working
 even with multiprocessing enabled.
+LOG FOLDER CHANGE: there is no more logs/app_logs and logs/job_logs. job_logs no longer exist,
+and the content of app_logs in now in /logs.
 
 - Workflow restartability
 >>> I improved the workflow restartability system:

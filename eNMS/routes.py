@@ -26,7 +26,7 @@ from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
-from eNMS.properties.table import table_fixed_columns, table_properties
+from eNMS.properties.table import filtering_properties, table_fixed_columns, table_properties
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="templates")
@@ -120,6 +120,7 @@ def table(table_type: str) -> str:
     kwargs = {
         "endpoint": f"table/{table_type}",
         "properties": table_properties[table_type],
+        "filtering_properties": filtering_properties[table_type],
         "fixed_columns": table_fixed_columns[table_type],
         "type": table_type,
     }

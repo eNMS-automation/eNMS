@@ -401,7 +401,7 @@ function configureForm(form, id) {
       });
     } else {
       el.selectpicker({
-        liveSearch: true,
+        liveSearch: !el.attr('class').includes("no-search"),
         actionsBox: true,
       });
     }

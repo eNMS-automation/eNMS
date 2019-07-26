@@ -133,10 +133,6 @@ class Job(AbstractBase):
     start_new_connection = Column(Boolean, default=False)
     results = relationship("Result", back_populates="job")
 
-    def __init__(self, **kwargs: Any) -> None:
-        super().__init__(**kwargs)
-        controller.configure_logger(self.name)
-
     def payload_helper(
         self,
         payload: dict,

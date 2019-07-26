@@ -320,22 +320,6 @@ class BaseController:
             ],
         )
 
-    def configure_logger(self, job_name: str) -> None:
-        logger = getLogger(job_name)
-        logger.setLevel(INFO)
-        filename = f"{self.strip_all(job_name)}.log"
-        if not logger.handlers:
-            fh = FileHandler(self.path / "logs" / "job_logs" / filename)
-            formatter = Formatter(
-                "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-            )
-            fh.setFormatter(formatter)
-            logger.addHandler(fh)
-
-    def init_job_loggers(self) -> None:
-        for job in fetch_all("Job"):
-            self.configure_logger(job.name)
-
     def init_scheduler(self) -> None:
         self.scheduler = BackgroundScheduler(
             {

@@ -100,7 +100,3 @@ def configure_events() -> None:
         for job in fetch_all("Job"):
             if old_name in job.positions:
                 job.positions[new_name] = job.positions.pop(old_name)
-
-    @event.listens_for(Job.name, "set", propagate=True)
-    def job_name_update(job: Base, new_name: str, old_name: str, *args: Any) -> None:
-        controller.configure_logger(new_name)

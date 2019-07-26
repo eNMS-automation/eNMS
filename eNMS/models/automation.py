@@ -97,6 +97,7 @@ class Run(AbstractBase):
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
     job_name = association_proxy("job", "name")
+    payload = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     workflow_id = Column(Integer, ForeignKey("Workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
 
@@ -288,21 +289,20 @@ class Job(AbstractBase):
         if not parent_timestamp:
             parent_timestamp = runtime
         run_args = {
-                "job": self.id,
-                "runtime": runtime,
-                "targets": targets,
-                "parent_timestamp": parent_timestamp,
-            }
+            "job": self.id,
+            "payload": payload,
+            "runtime": runtime,
+            "targets": targets,
+            "parent_timestamp": parent_timestamp,
+        }
         if parent:
             run_args["workflow"] = parent.id
         run = Run(**run_args)
         self.status, self.state = "Running", {}
         run.log("info", f"{self.type} {self.name}: Starting")
         Session.commit()
-        if not payload:
-            payload = {}
         try:
-            results = self.build_results(run, payload, targets, start_points)
+            results = self.build_results(run, targets, start_points)
             for library in ("netmiko", "napalm"):
                 connections = controller.connections_cache[library].pop(self.name, None)
                 if not connections:
@@ -367,7 +367,7 @@ class Service(Job):
         return notification
 
     def get_results(
-        self, run: "Run", payload: dict, device: Optional["Device"] = None
+        self, run: "Run", device: Optional["Device"] = None
     ) -> dict:
         kwargs = {"timestamp": run.runtime, "job": self.id}
         if run.workflow:
@@ -380,9 +380,9 @@ class Service(Job):
         results: Dict[Any, Any] = {"timestamp": controller.get_time()}
         try:
             if device:
-                results.update(self.job(run, payload, device))
+                results.update(self.job(run, device))
             else:
-                results.update(self.job(run, payload))
+                results.update(self.job(run))
         except Exception:
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
@@ -398,10 +398,10 @@ class Service(Job):
         return {"results": results, "kwargs": kwargs}
 
     def device_run(
-        self, run: "Run", payload: dict, targets: Optional[Set["Device"]] = None
+        self, run: "Run", targets: Optional[Set["Device"]] = None
     ) -> dict:
         if not targets:
-            results = self.get_results(run, payload)
+            results = self.get_results(run)
             factory("Result", result=results["results"], **results["kwargs"])
             return results["results"]
         else:
@@ -413,7 +413,6 @@ class Service(Job):
                     run.runtime,
                     thread_lock,
                     device_results,
-                    payload,
                 )
                 process_args = [(device.id, *args) for device in targets]
                 pool = ThreadPool(processes=processes)
@@ -422,7 +421,7 @@ class Service(Job):
                 pool.join()
             else:
                 device_results = {
-                    device.name: self.get_results(run, payload, device)
+                    device.name: self.get_results(run, device)
                     for device in targets
                 }
             results = {"devices": {}}
@@ -436,14 +435,13 @@ class Service(Job):
     def build_results(
         self,
         run: "Run",
-        payload: dict,
         targets: Optional[Set["Device"]] = None,
         *other: Any,
     ) -> dict:
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         if self.has_targets and not targets:
             try:
-                targets = self.compute_devices(payload)
+                targets = self.compute_devices(run.payload)
             except Exception as exc:
                 return {"success": False, "error": str(exc)}
         if targets:
@@ -457,7 +455,7 @@ class Service(Job):
             controller.job_db[self.name]["failed"] = 0
             if not run.workflow:
                 Session.commit()
-            attempt = self.device_run(run, payload or {}, targets)
+            attempt = self.device_run(run, targets)
             Session.commit()
             if targets:
                 assert targets is not None
@@ -768,13 +766,12 @@ class Workflow(Job):
     def build_results(
         self,
         run: "Run",
-        payload: dict,
         targets: Optional[Set["Device"]] = None,
         start_points: Optional[List["Job"]] = None,
     ) -> dict:
         self.state = {"jobs": {}}
         jobs: list = start_points or [self.jobs[0]]
-        payload = deepcopy(payload)
+        payload = deepcopy(run.payload)
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         allowed_devices: dict = defaultdict(set)

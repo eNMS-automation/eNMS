@@ -26,7 +26,11 @@ from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
-from eNMS.properties.table import filtering_properties, table_fixed_columns, table_properties
+from eNMS.properties.table import (
+    filtering_properties,
+    table_fixed_columns,
+    table_properties,
+)
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="templates")

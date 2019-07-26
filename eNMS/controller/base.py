@@ -312,9 +312,7 @@ class BaseController:
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[
                 RotatingFileHandler(
-                    self.path / "logs" / "enms.log",
-                    maxBytes=20_000_000,
-                    backupCount=10,
+                    self.path / "logs" / "enms.log", maxBytes=20_000_000, backupCount=10
                 ),
                 StreamHandler(),
             ],

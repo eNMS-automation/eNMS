@@ -86,6 +86,28 @@ class Result(AbstractBase):
         return repr(self)
 
 
+class Run(AbstractBase):
+
+    __tablename__ = type = "Run"
+    private = True
+    id = Column(Integer, primary_key=True)
+    status = Column(String(SMALL_STRING_LENGTH), default="Running")
+    timestamp = Column(String(SMALL_STRING_LENGTH), default="")
+    parent_timestamp = Column(String(SMALL_STRING_LENGTH), default="")
+    job_id = Column(Integer, ForeignKey("Job.id"))
+    job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
+    job_name = association_proxy("job", "name")
+    workflow_id = Column(Integer, ForeignKey("Workflow.id"))
+    workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
+
+    def __repr__(self) -> str:
+        return f"{self.timestamp} ({self.job_name})"
+
+    @property
+    def name(self) -> str:
+        return repr(self)
+
+
 class Job(AbstractBase):
 
     __tablename__ = "Job"
@@ -132,6 +154,7 @@ class Job(AbstractBase):
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
     start_new_connection = Column(Boolean, default=False)
     results = relationship("Result", back_populates="job")
+    runs = relationship("Run", back_populates="job")
 
     def payload_helper(
         self,
@@ -246,7 +269,9 @@ class Job(AbstractBase):
         repo.remotes.origin.push()
 
     def log(self, timestamp: str, severity: str, log: str) -> None:
-        controller.job_logs[timestamp].append(f"{controller.get_time()} - {severity} - {log}")
+        controller.job_logs[timestamp].append(
+            f"{controller.get_time()} - {severity} - {log}"
+        )
 
     def run(
         self,
@@ -261,6 +286,15 @@ class Job(AbstractBase):
         runtime = runtime or controller.get_time()
         if not parent_timestamp:
             parent_timestamp = runtime
+        run = Run(
+            **{
+                "job": self.id,
+                "runtime": runtime,
+                "targets": targets,
+                "parent": getattr(parent, "id", None),
+                "parent_timestamp": parent_timestamp,
+            }
+        )
         self.status, self.state = "Running", {}
         self.log(runtime, "info", f"{self.type} {self.name}: Starting")
         Session.commit()

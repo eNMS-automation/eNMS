@@ -141,6 +141,7 @@ class Job(AbstractBase):
         section: Optional[str] = None,
         device: Optional[str] = None,
     ) -> Any:
+        payload = payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})

@@ -44,6 +44,7 @@ class AnsiblePlaybookService(Service):
     def job(
         self,
         payload: dict,
+        timestamp: str,
         device: Optional[Device] = None,
         parent: Optional[Job] = None,
     ) -> dict:

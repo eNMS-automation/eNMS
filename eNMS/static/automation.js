@@ -102,6 +102,7 @@ function parseObject(obj) {
  * @param {id} formId - Form ID.
  */
 function formatResults(results, id, formId) {
+  $(`#results-table`).css('background-color', 'red');
   if (!results) results = currentResults;
   if (!results) {
     $(`#display_results-${formId}`).text("No results yet.");

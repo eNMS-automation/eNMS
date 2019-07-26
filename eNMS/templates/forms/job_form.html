@@ -212,6 +212,23 @@
         <div class="form-group">
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
+        <label
+          ><label for="python_query"
+            >Python Query (populating will supersede device targets in a parent
+            workflow)</label
+          ></label
+        >
+        <div class="form-group">
+            {{ form.python_query(id=form_type + '-python_query',
+            class="form-control add-id") }}
+          </div>
+          <label
+            ><label for="query_property_type">Query Property Type</label></label
+          >
+          <div class="form-group">
+            {{ form.query_property_type(id=form_type + '-query_property_type',
+            class="form-control add-id") }}
+        </div>
         {% if form_type != "workflow" %}
         <fieldset>
           <div class="item">
@@ -262,23 +279,6 @@
             <label>Start New Connection</label>
           </div>
         </fieldset>
-        <label
-          ><label for="python_query"
-            >Python Query (populating will supersede service target in a parent
-            workflow)</label
-          ></label
-        >
-        <div class="form-group">
-          {{ form.python_query(id=form_type + '-python_query',
-          class="form-control add-id") }}
-        </div>
-        <label
-          ><label for="query_property_type">Query Property Type</label></label
-        >
-        <div class="form-group">
-          {{ form.query_property_type(id=form_type + '-query_property_type',
-          class="form-control add-id") }}
-        </div>
         <label
           ><label for="waiting_time">Waiting time (in seconds)</label></label
         >

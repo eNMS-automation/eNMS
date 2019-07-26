@@ -400,8 +400,9 @@ function configureForm(form, id) {
         useCurrent: false,
       });
     } else {
+      const elClass = el.attr('class');
       el.selectpicker({
-        liveSearch: !el.attr('class').includes("no-search"),
+        liveSearch: elClass ? !elClass.includes("no-search") : false,
         actionsBox: true,
       });
     }

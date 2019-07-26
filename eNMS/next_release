@@ -61,7 +61,7 @@ more immediate response. Perhaps this is the time to put in that spinning GIF th
 indicate that its 'working...'
 >>> Done.
 
-- spread service in a startsteps in the workflow builder.
+- spread service in a stairsteps in the workflow builder.
 >>> Done.
 
 - In the workflow builder, double clicking on a service puts it into Move mode.

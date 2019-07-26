@@ -156,7 +156,7 @@ function restartWorkflow() {
     name
   ) {
     alertify.notify(`Workflow '${name}' restarted.`, "success", 5);
-    getWorkflowState();
+    getWorkflowState(true);
   });
 }
 
@@ -438,13 +438,13 @@ function getJobState(id) {
 /**
  * Get Workflow State.
  */
-function getWorkflowState() {
+function getWorkflowState(first) {
   if (workflow && workflow.id) {
     call(`/get/workflow/${workflow.id}`, function(wf) {
       if (wf.last_modified !== lastModified) {
         displayWorkflow(wf);
       }
-      if (wf.id == workflow.id && wf.status == "Running") {
+      if (wf.id == workflow.id && (first || wf.status == "Running")) {
         $("#status").text("Status: Running");
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_job) {

@@ -367,7 +367,7 @@ function runJob(id, name) {
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
     if (page == "workflow_builder") {
       if (job.type == "Workflow") {
-        getWorkflowState();
+        getWorkflowState(true);
       } else {
         getJobState(id);
       }

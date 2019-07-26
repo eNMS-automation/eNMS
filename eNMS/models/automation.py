@@ -104,6 +104,104 @@ class Run(AbstractBase):
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name})"
 
+    @property
+    def progress(self) -> str:
+        if self.status == "Running":
+            progress = controller.job_db[self.runtime]
+            try:
+                return (
+                    f"{progress['completed']}/{progress['number_of_targets']}"
+                    f" ({progress['failed']} failed)"
+                )
+            except KeyError:
+                return "Error"
+        else:
+            return "N/A"
+
+    def payload_helper(
+        self,
+        payload: dict,
+        name: str,
+        value: Optional[Any] = None,
+        section: Optional[str] = None,
+        device: Optional[str] = None,
+    ) -> Any:
+        payload = payload.setdefault("variables", {})
+        if device:
+            payload = payload.setdefault("devices", {})
+            payload = payload.setdefault(device, {})
+        if section:
+            payload = payload.setdefault(section, {})
+        if value:
+            payload[name] = value
+        else:
+            if name not in payload:
+                raise Exception(f"Payload Editor: {name} not found in {payload}.")
+            return payload[name]
+
+    def compute_devices(
+        self, payload: Optional[dict] = None, device: Optional["Device"] = None
+    ) -> Set["Device"]:
+        payload = payload or self.payload
+        if self.job.python_query:
+
+            def get_var(*args: Any, **kwargs: Any) -> Any:
+                return self.payload_helper(payload, *args, **kwargs)
+
+            try:
+                values = eval(self.job.python_query, locals())
+            except Exception as exc:
+                raise Exception(f"Python Query Failure: {str(exc)}")
+            devices, not_found = set(), set()
+            if isinstance(values, str):
+                values = [values]
+            for value in values:
+                device = fetch(
+                    "Device", allow_none=True, **{self.job.query_property_type: value}
+                )
+                if device:
+                    devices.add(device)
+                else:
+                    not_found.add(value)
+            if not_found:
+                raise Exception(f"Python query invalid targets: {', '.join(not_found)}")
+        else:
+            devices = set(self.job.devices)
+            for pool in self.job.pools:
+                devices |= set(pool.devices)
+            controller.job_db[self.runtime]["number_of_targets"] = len(devices)
+            Session.commit()
+        return devices
+
+    def get_results(self, device: Optional["Device"] = None) -> dict:
+        kwargs = {"timestamp": self.runtime, "job": self.id}
+        if self.workflow:
+            kwargs.update(
+                workflow=self.workflow_id, parent_timestamp=self.parent_timestamp
+            )
+        if device:
+            kwargs["device"] = device.id
+        self.log("info", f"Running {self.type}{f' on {device.name}' if device else ''}")
+        results: Dict[Any, Any] = {"timestamp": controller.get_time()}
+        try:
+            if device:
+                results.update(self.job.job(self, device))
+            else:
+                results.update(self.job.job(self))
+        except Exception:
+            results.update(
+                {"success": False, "result": chr(10).join(format_exc().splitlines())}
+            )
+        self.log(
+            "info",
+            f"Finished running {self.type} '{self.name}'"
+            f"({'SUCCESS' if results['success'] else 'FAILURE'})"
+            f"{f' on {device.name}' if device else ''}",
+        )
+        controller.job_db[self.runtime]["completed"] += 1
+        controller.job_db[self.runtime]["failed"] += 1 - results["success"]
+        return {"results": results, "kwargs": kwargs}
+
     def log(self, severity: str, log: str) -> None:
         log = f"{controller.get_time()} - {severity} - {log}"
         controller.run_logs[self.runtime].append(log)
@@ -163,77 +261,9 @@ class Job(AbstractBase):
     results = relationship("Result", back_populates="job")
     runs = relationship("Run", back_populates="job")
 
-    def payload_helper(
-        self,
-        payload: dict,
-        name: str,
-        value: Optional[Any] = None,
-        section: Optional[str] = None,
-        device: Optional[str] = None,
-    ) -> Any:
-        payload = payload.setdefault("variables", {})
-        if device:
-            payload = payload.setdefault("devices", {})
-            payload = payload.setdefault(device, {})
-        if section:
-            payload = payload.setdefault(section, {})
-        if value:
-            payload[name] = value
-        else:
-            if name not in payload:
-                raise Exception(f"Payload Editor: {name} not found in {payload}.")
-            return payload[name]
-
     @property
     def filename(self) -> str:
         return controller.strip_all(self.name)
-
-    @property
-    def progress(self) -> str:
-        if self.status == "Running":
-            progress = controller.job_db[self.name]
-            try:
-                return (
-                    f"{progress['completed']}/{progress['number_of_targets']}"
-                    f" ({progress['failed']} failed)"
-                )
-            except KeyError:
-                return "Error"
-        else:
-            return "N/A"
-
-    def compute_devices(
-        self, payload: dict, device: Optional["Device"] = None
-    ) -> Set["Device"]:
-        if self.python_query:
-
-            def get_var(*args: Any, **kwargs: Any) -> Any:
-                return self.payload_helper(payload, *args, **kwargs)
-
-            try:
-                values = eval(self.python_query, locals())
-            except Exception as exc:
-                raise Exception(f"Python Query Failure: {str(exc)}")
-            devices, not_found = set(), set()
-            if isinstance(values, str):
-                values = [values]
-            for value in values:
-                device = fetch(
-                    "Device", allow_none=True, **{self.query_property_type: value}
-                )
-                if device:
-                    devices.add(device)
-                else:
-                    not_found.add(value)
-            if not_found:
-                raise Exception(f"Python query invalid targets: {', '.join(not_found)}")
-        else:
-            devices = set(self.devices)
-            for pool in self.pools:
-                devices |= set(pool.devices)
-            controller.job_db[self.name]["number_of_targets"] = len(devices)
-            Session.commit()
-        return devices
 
     def adjacent_jobs(
         self, workflow: "Workflow", direction: str, subtype: str
@@ -289,7 +319,7 @@ class Job(AbstractBase):
         if not parent_timestamp:
             parent_timestamp = runtime
         run_args = {
-            "job": self.id,
+            "job": self.job.id,
             "payload": payload,
             "runtime": runtime,
             "targets": targets,
@@ -298,44 +328,43 @@ class Job(AbstractBase):
         if parent:
             run_args["workflow"] = parent.id
         run = Run(**run_args)
-        self.status, self.state = "Running", {}
-        run.log("info", f"{self.type} {self.name}: Starting")
+        self.job.status, self.job.state = "Running", {}
+        run.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
-            results = self.build_results(run, targets, start_points)
+            results = self.job.build_results(run, targets, start_points)
             for library in ("netmiko", "napalm"):
-                connections = controller.connections_cache[library].pop(self.name, None)
+                connections = controller.connections_cache[library].pop(self.runtime, None)
                 if not connections:
                     continue
                 for device, conn in connections.items():
                     run.log("info", f"Closing {library} Connection to {device}")
                     conn.disconnect() if library == "netmiko" else conn.close()
-            run.log("info", f"{self.type} {self.name}: Finished")
+            run.log("info", f"{self.job.type} {self.job.name}: Finished")
         except Exception as exc:
             result = (
-                f"Running {self.type} '{self.name}' raised the following exception:\n"
+                f"Running {self.job.type} '{self.job.name}' raised the following exception:\n"
                 f"{chr(10).join(format_exc().splitlines())}\n\nRun aborted..."
             )
             run.log("error", result)
             results = {"success": False, "results": result}
         finally:
-            self.status, self.state = "Idle", {}
-            controller.job_db[self.name]["completed"] = 0
-            controller.job_db[self.name]["failed"] = 0
+            self.job.status, self.job.state = "Idle", {}
+            controller.job_db[runtime]["completed"] = 0
+            controller.job_db[runtime]["failed"] = 0
             results["logs"] = controller.run_logs.pop(runtime)
             if task and not task.frequency:
                 task.is_active = False
-            results["properties"] = self.to_dict(True)
-            results_kwargs = {"timestamp": runtime, "result": results, "job": self.id}
-            print(self, parent)
+            results["properties"] = self.job.to_dict(True)
+            results_kwargs = {"timestamp": runtime, "result": results, "job": self.job.id}
             if parent:
                 results_kwargs["workflow"] = parent.id
                 results_kwargs["parent_timestamp"] = parent_timestamp
             print(results_kwargs)
             factory("Result", **results_kwargs)
             Session.commit()
-        if not parent and self.send_notification:
-            self.notify(results)
+        if not parent and self.job.send_notification:
+            self.job.notify(results)
         return results, runtime
 
 
@@ -366,42 +395,11 @@ class Service(Job):
                 notification.append(f"\n\nPASS :\n{passed}")
         return notification
 
-    def get_results(
-        self, run: "Run", device: Optional["Device"] = None
-    ) -> dict:
-        kwargs = {"timestamp": run.runtime, "job": self.id}
-        if run.workflow:
-            kwargs.update(
-                workflow=run.workflow.id, parent_timestamp=run.parent_timestamp
-            )
-        if device:
-            kwargs["device"] = device.id
-        run.log("info", f"Running {self.type}{f' on {device.name}' if device else ''}")
-        results: Dict[Any, Any] = {"timestamp": controller.get_time()}
-        try:
-            if device:
-                results.update(self.job(run, device))
-            else:
-                results.update(self.job(run))
-        except Exception:
-            results.update(
-                {"success": False, "result": chr(10).join(format_exc().splitlines())}
-            )
-        run.log(
-            "info",
-            f"Finished running {self.type} '{self.name}'"
-            f"({'SUCCESS' if results['success'] else 'FAILURE'})"
-            f"{f' on {device.name}' if device else ''}",
-        )
-        controller.job_db[self.name]["completed"] += 1
-        controller.job_db[self.name]["failed"] += 1 - results["success"]
-        return {"results": results, "kwargs": kwargs}
-
     def device_run(
         self, run: "Run", targets: Optional[Set["Device"]] = None
     ) -> dict:
         if not targets:
-            results = self.get_results(run)
+            results = run.get_results()
             factory("Result", result=results["results"], **results["kwargs"])
             return results["results"]
         else:
@@ -421,7 +419,7 @@ class Service(Job):
                 pool.join()
             else:
                 device_results = {
-                    device.name: self.get_results(run, device)
+                    device.name: run.get_results(device)
                     for device in targets
                 }
             results = {"devices": {}}
@@ -441,7 +439,7 @@ class Service(Job):
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         if self.has_targets and not targets:
             try:
-                targets = self.compute_devices(run.payload)
+                targets = run.compute_devices()
             except Exception as exc:
                 return {"success": False, "error": str(exc)}
         if targets:
@@ -451,8 +449,8 @@ class Service(Job):
                 "info",
                 f"Running {self.type} {self.name} (attempt n°{i + 1})",
             )
-            controller.job_db[self.name]["completed"] = 0
-            controller.job_db[self.name]["failed"] = 0
+            controller.job_db[run.runtime]["completed"] = 0
+            controller.job_db[run.runtime]["failed"] = 0
             if not run.workflow:
                 Session.commit()
             attempt = self.device_run(run, targets)
@@ -728,14 +726,14 @@ class Workflow(Job):
         ]
 
     def compute_valid_devices(
-        self, job: Job, allowed_devices: dict, payload: dict
+        self, run: Run, job: Job, allowed_devices: dict, payload: dict
     ) -> Set[Device]:
         if job.type != "Workflow" and not job.has_targets:
             return set()
         elif self.use_workflow_targets:
             return allowed_devices[job.name]
         else:
-            return job.compute_devices(payload)
+            return run.compute_devices(payload)
 
     def workflow_targets_processing(
         self, allowed_devices: dict, job: Job, results: dict
@@ -776,7 +774,7 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            initial_targets = targets or self.compute_devices(results["results"])
+            initial_targets = targets or run.compute_devices(results["results"])
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
         while jobs:
@@ -793,7 +791,7 @@ class Workflow(Job):
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:
-                        derived_targets = job.compute_devices(payload, base_target)
+                        derived_targets = run.compute_devices(payload, base_target)
                         derived_target_result = job.run(
                             payload,
                             targets=derived_targets,
@@ -814,7 +812,7 @@ class Workflow(Job):
                 }
             else:
                 valid_devices = self.compute_valid_devices(
-                    job, allowed_devices, payload
+                    run, job, allowed_devices, payload
                 )
                 job_results = job.run(
                     payload,

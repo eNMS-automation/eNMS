@@ -30,6 +30,6 @@ def threaded_job(
 def device_thread(args: tuple) -> None:
     device = fetch("Device", id=args[0])
     run = fetch("Run", timestamp=args[1])
-    device_result = run.job.get_results(run, device)
+    device_result = run.get_results(device)
     with args[2]:
         args[3][device.name] = device_result

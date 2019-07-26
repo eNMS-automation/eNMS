@@ -44,7 +44,6 @@ service_table_properties: List[str] = [
     "number_of_retries",
     "time_between_retries",
     "status",
-    "progress",
 ]
 
 workflow_table_properties: List[str] = [
@@ -59,7 +58,6 @@ workflow_table_properties: List[str] = [
     "number_of_retries",
     "time_between_retries",
     "status",
-    "progress",
 ]
 
 user_table_properties: List[str] = ["name", "email"]

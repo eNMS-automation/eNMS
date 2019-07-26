@@ -106,7 +106,7 @@ class Run(AbstractBase):
     task = relationship("Task", foreign_keys="Run.task_id")
 
     def __init__(self, **kwargs):
-        self.runtime = kwargs["runtime"] or controller.get_time()
+        self.runtime = kwargs.get("runtime") or controller.get_time()
         if not kwargs.get("parent_timestamp"):
             self.parent_timestamp = self.runtime
         super().__init__(**kwargs)
@@ -290,7 +290,7 @@ class Run(AbstractBase):
             if self.workflow:
                 results_kwargs["workflow"] = self.workflow.id
                 results_kwargs["parent_timestamp"] = self.parent_timestamp
-            print(results_kwargs)
+            print(self.job, self.workflow, self.parent_timestamp)
             factory("Result", **results_kwargs)
             Session.commit()
         if not self.workflow and self.job.send_notification:
@@ -489,7 +489,8 @@ class Service(Job):
         self, run: "Run", *other: Any
     ) -> dict:
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
-        if self.has_targets and not run.targets:
+        targets = run.targets
+        if self.has_targets and not targets:
             try:
                 targets = run.compute_devices()
             except Exception as exc:
@@ -772,9 +773,10 @@ class Workflow(Job):
                     try:
                         derived_targets = run.compute_devices(payload, base_target)
                         job_run = factory("Run", **{
+                            "job": job.id,
                             "payload": payload,
-                            "targets": derived_targets,
-                            "parent": self,
+                            "targets": [t.id for t in derived_targets],
+                            "workflow": self.id,
                             "parent_timestamp": run.parent_timestamp,
                         })
                         derived_target_result = job_run.run()
@@ -795,11 +797,13 @@ class Workflow(Job):
                     run, job, allowed_devices, payload
                 )
                 job_run = factory("Run", **{
+                    "job": job.id,
                     "payload": payload,
-                    "targets": valid_devices,
-                    "parent": self,
+                    "targets": [d.id for d in valid_devices],
+                    "workflow": self.id,
                     "parent_timestamp": run.parent_timestamp,
                 })
+                print("aaa"*100, job_run, job_run.workflow)
                 job_results = job_run.run()[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

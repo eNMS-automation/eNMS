@@ -96,9 +96,9 @@ class GetConfiguration(Resource):
 class GetResult(Resource):
     decorators = [auth.login_required]
 
-    def get(self, name: str, timestamp: str) -> str:
+    def get(self, name: str, runtime: str) -> str:
         job = fetch("Job", name=name)
-        return fetch("Result", job_id=job.id, timestamp=timestamp).result
+        return fetch("Result", job_id=job.id, runtime=runtime).result
 
 
 class UpdateInstance(Resource):
@@ -207,6 +207,6 @@ def configure_rest_api(app: Flask) -> None:
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")
     api.add_resource(GetConfiguration, "/rest/configuration/<string:name>")
-    api.add_resource(GetResult, "/rest/result/<string:name>/<string:timestamp>")
+    api.add_resource(GetResult, "/rest/result/<string:name>/<string:runtime>")
     api.add_resource(Migrate, "/rest/migrate/<string:direction>")
     api.add_resource(Topology, "/rest/topology/<string:direction>")

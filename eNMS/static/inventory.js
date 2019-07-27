@@ -6,7 +6,7 @@ call: false
 createPanel: false
 diffview: false
 fCall: false
-getTimestamps: false
+getRuntimes: false
 openUrl: false
 showPanel: false
 showTypePanel: false
@@ -162,13 +162,13 @@ function updatePools(pool) {
  * Show the results modal for a job.
  * @param {id} id - Job id.
  * @param {name} name - Name.
- * @param {type} type - Timestamp Type.
+ * @param {type} type - Runtime Type.
  */
 // eslint-disable-next-line
 function showDeviceResultsPanel(id, name, type) {
   createPanel("device_results", `Results - ${name}`, id, function() {
     configureCallbacks(id, type);
-    getTimestamps(id, type);
+    getRuntimes(id, type);
   });
 }
 

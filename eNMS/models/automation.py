@@ -67,6 +67,7 @@ class Result(AbstractBase):
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
     )
+    device_name = association_proxy("device", "name")
 
 
 class Run(AbstractBase):
@@ -77,7 +78,7 @@ class Run(AbstractBase):
     success = Column(Boolean, default=False)
     status = Column(String(SMALL_STRING_LENGTH), default="Running")
     runtime = Column(String(SMALL_STRING_LENGTH), default="")
-    parent_timestamp = Column(String(SMALL_STRING_LENGTH), default="")
+    parent_runtime = Column(String(SMALL_STRING_LENGTH), default="")
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
     job_name = association_proxy("job", "name")
@@ -90,8 +91,8 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or controller.get_time()
-        if not kwargs.get("parent_timestamp"):
-            self.parent_timestamp = self.runtime
+        if not kwargs.get("parent_runtime"):
+            self.parent_runtime = self.runtime
         super().__init__(**kwargs)
 
     def __repr__(self) -> str:
@@ -115,9 +116,9 @@ class Run(AbstractBase):
             return "N/A"
 
     def netmiko_connection(self, device: "Device") -> ConnectHandler:
-        if self.parent_timestamp in controller.connections_cache["netmiko"]:
+        if self.parent_runtime in controller.connections_cache["netmiko"]:
             parent_connection = controller.connections_cache["netmiko"].get(
-                self.parent_timestamp
+                self.parent_runtime
             )
             if parent_connection and device.name in parent_connection:
                 if self.job.start_new_connection:
@@ -147,15 +148,15 @@ class Run(AbstractBase):
         if self.job.privileged_mode:
             netmiko_connection.enable()
         if self.workflow:
-            controller.connections_cache["netmiko"][self.parent_timestamp][
+            controller.connections_cache["netmiko"][self.parent_runtime][
                 device.name
             ] = netmiko_connection
         return netmiko_connection
 
     def napalm_connection(self, device: "Device") -> NetworkDriver:
-        if self.parent_timestamp in controller.connections_cache["napalm"]:
+        if self.parent_runtime in controller.connections_cache["napalm"]:
             parent_connection = controller.connections_cache["napalm"].get(
-                self.parent_timestamp
+                self.parent_runtime
             )
             if parent_connection and device.name in parent_connection:
                 if (
@@ -182,7 +183,7 @@ class Run(AbstractBase):
         )
         napalm_connection.open()
         if self.workflow:
-            controller.connections_cache["napalm"][self.parent_timestamp][
+            controller.connections_cache["napalm"][self.parent_runtime][
                 device.name
             ] = napalm_connection
         return napalm_connection
@@ -283,7 +284,7 @@ class Run(AbstractBase):
 
     def get_results(self, payload: dict, device: Optional["Device"] = None) -> dict:
         self.log("info", f"Running {self.job.type}{f' on {device.name}' if device else ''}")
-        results: Dict[Any, Any] = {"timestamp": controller.get_time()}
+        results: Dict[Any, Any] = {"runtime": controller.get_time()}
         try:
             if device:
                 results.update(self.job.job(self, payload, device))
@@ -308,7 +309,7 @@ class Run(AbstractBase):
         log = f"{controller.get_time()} - {severity} - {log}"
         controller.run_logs[self.runtime].append(log)
         if self.workflow:
-            controller.run_logs[self.parent_timestamp].append(log)
+            controller.run_logs[self.parent_runtime].append(log)
 
     def notify(self, results: dict) -> None:
         notification = [
@@ -460,7 +461,7 @@ class Service(Job):
     def build_results(
         self, run: "Run", payload: dict, *other: Any
     ) -> dict:
-        results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
+        results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         targets = run.targets
         if self.has_targets and not targets:
             try:
@@ -725,7 +726,7 @@ class Workflow(Job):
         jobs: list = start_points or [self.jobs[0]]
         payload = deepcopy(payload)
         visited: Set = set()
-        results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
+        results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
             initial_targets = set(run.targets or run.compute_devices(results["results"]))
@@ -750,7 +751,7 @@ class Workflow(Job):
                             "job": job.id,
                             "targets": [t.id for t in derived_targets],
                             "workflow": self.id,
-                            "parent_timestamp": run.parent_timestamp,
+                            "parent_runtime": run.parent_runtime,
                         })
                         derived_target_result = job_run.run(payload)
                         device_results[base_target.name] = derived_target_result
@@ -773,7 +774,7 @@ class Workflow(Job):
                     "job": job.id,
                     "targets": [d.id for d in valid_devices],
                     "workflow": self.id,
-                    "parent_timestamp": run.parent_timestamp,
+                    "parent_runtime": run.parent_runtime,
                 })
                 job_results = job_run.run(payload)[0]
             self.state["jobs"][job.id] = job_results["success"]

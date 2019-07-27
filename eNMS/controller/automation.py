@@ -103,27 +103,28 @@ class AutomationController(BaseController):
     def get_job_logs(self, runtime: str) -> list:
         return "\n".join(self.run_logs[runtime])
 
-    def get_timestamps(self, type: str, id: int) -> list:
+    def get_runtimes(self, type: str, id: int) -> list:
         if type == "device":
             results = fetch("Result", allow_none=True, all_matches=True, device_id=id)
             runs = [result.run for result in results]
         else:
             runs = fetch("Run", allow_none=True, all_matches=True, job_id=id)
-        return sorted(set((run.runtime, run.id) for run in runs))
+        return sorted(set((run.runtime, run.runtime) for run in runs))
 
     def get_device_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         defaults = [("global", "Global Result"), ("all", "All devices")]
-        timestamp_key = "parent_timestamp" if "job" in kw else "timestamp"
-        request = {timestamp_key: kw.get(f"timestamp{comp}")}
+        runtime_key = "parent_runtime" if "job" in kw else "runtime"
+        request = {runtime_key: kw.get(f"runtime{comp}")}
         if kw.get(f"job{comp}") not in ("global", "all"):
             request["job_id"] = kw.get(f"job{comp}", id)
+        runs = fetch("Run", allow_none=True, **request)
+        if not runs:
+            return defaults
         return defaults + list(
             set(
                 (result.device_id, result.device_name)
-                for result in fetch(
-                    "Result", allow_none=True, all_matches=True, **request
-                )
+                for result in runs.results
                 if result.device_id
             )
         )
@@ -133,64 +134,34 @@ class AutomationController(BaseController):
         defaults = [("global", "Global Result"), ("all", "All jobs")]
         return defaults + list(
             dict.fromkeys(
-                (result.job_id, result.job_name)
-                for result in sorted(
+                (run.job_id, run.job.name)
+                for run in sorted(
                     fetch(
-                        "Result",
-                        parent_timestamp=kw.get(f"timestamp{comp}"),
+                        "Run",
+                        parent_runtime=kw.get(f"runtime{comp}"),
                         allow_none=True,
                         all_matches=True,
                     ),
-                    key=attrgetter("timestamp"),
+                    key=attrgetter("runtime"),
                 )
                 if result.job_id
             )
         )
 
+    def get_results(self, runtime
+
     def get_job_results(self, id: int, **kw: Any) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
-        if f"timestamp{comp}" not in kw:
+        if f"runtime{comp}" not in kw:
             return None
         service_result_window = "job" not in kw
         job, device = kw.get(f"job{comp}"), kw.get(f"device{comp}")
+        runtime = kw.get(f"runtime{comp}")
         if service_result_window or job == "global":
-            timestamp = "timestamp"
+            runtime_key = "runtime"
         else:
-            timestamp = "parent_timestamp"
-        request = {timestamp: kw[f"timestamp{comp}"]}
-        if job not in ("global", "all", None):
-            request["job_id"] = job
-        elif device and job != "all":
-            request["job_id"] = id
-        if device == "all" or job == "all":
-            request["all_matches"] = True
-            if kw["success_type"] != "all":
-                request["success"] = kw["success_type"] == "success"
-        if device not in ("global", "all", None) and job != "global":
-            request["device_id"] = device
-        if device == "global":
-            request["device_id"] = None
-        elif not device:
-            request["device_id"] = id
-        results = fetch("Result", allow_none=True, **request)
-        if isinstance(results, list):
-            results.sort(key=attrgetter("timestamp"))
-        if not results:
-            return None
-        if device == "all" and job == "all":
-            return {result.name: result.result for result in results}
-        elif device == "all":
-            return {
-                result.device_name: result.result
-                for result in results
-                if result.device_id
-            }
-        elif job == "all":
-            return {
-                result.job_name: result.result for result in results if result.job_id
-            }
-        else:
-            return results.result
+            runtime_key = "parent_runtime"
+        return self.get_results(job=job, device=device, **{runtime: 
 
     def compare_job_results(self, id: int, **kwargs: Any) -> dict:
         kwargs.pop("compare")
@@ -213,7 +184,7 @@ class AutomationController(BaseController):
             "Result",
             allow_none=True,
             job_id=workflow_id,
-            timestamp=kwargs.get("payload_version"),
+            runtime=kwargs.get("payload_version"),
         )
         payload = result.result["results"] if result else {}
         payload_jobs = set(payload) & set(kwargs["payloads_to_include"])

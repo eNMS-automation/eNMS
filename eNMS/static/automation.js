@@ -113,8 +113,8 @@ function formatResults(results, id, formId) {
         baseTextLines: results.first,
         newTextLines: results.second,
         opcodes: results.opcodes,
-        baseTextName: $(`#timestamp-${id}`).val(),
-        newTextName: $(`#timestamp_compare-${id}`).val(),
+        baseTextName: $(`#runtime-${id}`).val(),
+        newTextName: $(`#runtime_compare-${id}`).val(),
         contextSize: null,
         viewType: 0,
       })
@@ -167,22 +167,22 @@ function displayResults(id, formId) {
 /**
  * Display results.
  * @param {id} id - Job id.
- * @param {type} type - Timestamp Type.
+ * @param {type} type - Runtime Type.
  */
-function getTimestamps(id, type) {
-  call(`/get_timestamps/${type}/${id}`, (timestamps) => {
-    $(`#timestamp-${id},#timestamp_compare-${id}`).empty();
-    timestamps.forEach((timestamp) => {
-      $(`#timestamp-${id},#timestamp_compare-${id}`).append(
+function getRuntimes(id, type) {
+  call(`/get_runtimes/${type}/${id}`, (runtimes) => {
+    $(`#runtime-${id},#runtime_compare-${id}`).empty();
+    runtimes.forEach((runtime) => {
+      $(`#runtime-${id},#runtime_compare-${id}`).append(
         $("<option></option>")
-          .attr("value", timestamp[0])
-          .text(timestamp[1])
+          .attr("value", runtime[0])
+          .text(runtime[1])
       );
     });
-    const mostRecent = timestamps[timestamps.length - 1];
-    $(`#timestamp-${id},#timestamp_compare-${id}`).val(mostRecent);
-    $(`#timestamp-${id},#timestamp_compare-${id}`).selectpicker("refresh");
-    if (timestamps) {
+    const mostRecent = runtimes[runtimes.length - 1];
+    $(`#runtime-${id},#runtime_compare-${id}`).val(mostRecent);
+    $(`#runtime-${id},#runtime_compare-${id}`).selectpicker("refresh");
+    if (runtimes) {
       updateDeviceList(id, id, true);
       if (type == "workflow" || type == "device") updateJobList(id, type, true);
     }
@@ -221,7 +221,7 @@ function updateDeviceList(id, parentId, updateBoth) {
 /**
  * Display results.
  * @param {id} id - Job id.
- * @param {type} type - Timestamp Type.
+ * @param {type} type - Runtime Type.
  * @param {boolean} updateBoth - update both job lists.
  */
 function updateJobList(id, type, updateBoth) {
@@ -278,7 +278,7 @@ function showLogs(id, name) {
 function showResultsPanel(id, name, type) {
   createPanel(`${type}_results`, `Results - ${name}`, id, function() {
     configureCallbacks(id, type);
-    getTimestamps(id, type);
+    getRuntimes(id, type);
   });
 }
 
@@ -295,7 +295,7 @@ function configureCallbacks(id, type) {
     });
   }
 
-  $(`#timestamp-${id},#timestamp_compare-${id}`).on("change", function() {
+  $(`#runtime-${id},#runtime_compare-${id}`).on("change", function() {
     $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
     if (type != "device") updateDeviceList(id);
     if (type != "service") updateJobList(id, type);

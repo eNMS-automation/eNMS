@@ -109,8 +109,8 @@ class ResultsForm(BaseForm):
             ("compare", "Compare both versions"),
         ),
     )
-    timestamp = NoValidationSelectField("Version", choices=())
-    timestamp_compare = NoValidationSelectField("Version", choices=())
+    runtime = NoValidationSelectField("Version", choices=())
+    runtime_compare = NoValidationSelectField("Version", choices=())
 
 
 class ServiceResultsForm(ResultsForm):

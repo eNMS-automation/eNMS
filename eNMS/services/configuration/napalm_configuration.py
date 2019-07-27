@@ -34,7 +34,7 @@ class NapalmConfigurationService(Service):
         parent: Optional[Job] = None,
     ) -> dict:
         napalm_connection = self.napalm_connection(device, parent)
-        self.log(timestamp, "info", f"Pushing configuration on {device.name} (Napalm)")
+        run.log("info", f"Pushing configuration on {device.name} (Napalm)")
         config = "\n".join(self.sub(self.content, locals()).splitlines())
         getattr(napalm_connection, self.action)(config=config)
         napalm_connection.commit_config()

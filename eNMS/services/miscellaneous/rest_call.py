@@ -69,15 +69,9 @@ class RestCallService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "RestCallService"}
 
-    def job(
-        self,
-        payload: dict,
-        timestamp: str,
-        device: Optional[Device] = None,
-        parent: Optional[Job] = None,
-    ) -> dict:
+    def job(self, run: "Run", device: Device) -> dict:
         rest_url = self.sub(self.rest_url, locals())
-        self.log(timestamp, "info", f"Sending REST call to {rest_url}")
+        run.log("info", f"Sending REST call to {rest_url}")
         kwargs = {
             p: self.sub(getattr(self, p), locals())
             for p in ("headers", "params", "timeout")

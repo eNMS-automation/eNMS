@@ -30,7 +30,7 @@ class PythonSnippetService(Service):
         try:
             code_object = compile(self.source_code, "user_python_code", "exec")
         except Exception as exc:
-            self.log(timestamp, "info", f"Compile error: {str(exc)}")
+            run.log("info", f"Compile error: {str(exc)}")
             return {"success": False, "result": {"step": "compile", "error": str(exc)}}
 
         _code_result_ = {}
@@ -47,7 +47,7 @@ class PythonSnippetService(Service):
             return self.payload_helper(payload, *args, **kwargs)
 
         def log(*args):
-            self.log(timestamp, *args)
+            run.log(*args)
 
         globals = {
             "__builtins__": __builtins__,
@@ -66,7 +66,7 @@ class PythonSnippetService(Service):
         except TerminateException:
             pass  # Clean exit from middle of snippet
         except Exception as exc:
-            self.log(timestamp, "info", f"Execution error: {str(exc)}")
+            run.log("info", f"Execution error: {str(exc)}")
             return {
                 "success": False,
                 "result": {

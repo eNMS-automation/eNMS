@@ -33,7 +33,7 @@ class SlackNotificationService(Service):
     ) -> dict:
         slack_client = SlackClient(self.token or controller.slack_token)
         channel = self.sub(self.channel, locals()) or controller.slack_channel
-        self.log(timestamp, "info", f"Sending Slack notification on {channel}")
+        run.log("info", f"Sending Slack notification on {channel}")
         result = slack_client.api_call(
             "chat.postMessage", channel=channel, text=self.sub(self.body, locals())
         )

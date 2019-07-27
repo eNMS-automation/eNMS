@@ -45,7 +45,7 @@ class PingService(Service):
                 if value:
                     command.extend(f"-{x} {value}".split())
             command.append(device.ip_address)
-            self.log(timestamp, "info", f"Running ping ({command})")
+            run.log("info", f"Running ping ({command})")
             try:
                 output = check_output(command).decode().strip().splitlines()
             except CalledProcessError:

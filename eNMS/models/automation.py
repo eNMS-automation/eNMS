@@ -291,7 +291,6 @@ class Run(AbstractBase):
             if self.workflow:
                 results_kwargs["workflow"] = self.workflow.id
                 results_kwargs["parent_timestamp"] = self.parent_timestamp
-            print(self.job, self.workflow, self.parent_timestamp)
             factory("Result", **results_kwargs)
             Session.commit()
         if not self.workflow and self.job.send_notification:
@@ -804,7 +803,6 @@ class Workflow(Job):
                     "workflow": self.id,
                     "parent_timestamp": run.parent_timestamp,
                 })
-                print("aaa"*100, job_run, job_run.workflow)
                 job_results = job_run.run()[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

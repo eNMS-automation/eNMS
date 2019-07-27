@@ -104,9 +104,12 @@ class AutomationController(BaseController):
         return "\n".join(self.run_logs[runtime])
 
     def get_timestamps(self, type: str, id: int) -> list:
-        id_kwarg = {"device_id" if type == "device" else "job_id": id}
-        results = fetch("Result", allow_none=True, all_matches=True, **id_kwarg)
-        return sorted(set((result.timestamp, result.name) for result in results))
+        if type == "device":
+            results = fetch("Result", allow_none=True, all_matches=True, device_id=id)
+            runs = [result.run for result in results]
+        else:
+            runs = fetch("Run", allow_none=True, all_matches=True, job_id=id)
+        return sorted(set((run.runtime, run.id) for run in runs))
 
     def get_device_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""

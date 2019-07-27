@@ -86,7 +86,7 @@ class Run(AbstractBase):
     targets = relationship("Device", secondary=run_device_table, back_populates="runs")
     task_id = Column(Integer, ForeignKey("Task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
-    results = relationship("Result", back_populates="job")
+    results = relationship("Result", back_populates="run")
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or controller.get_time()
@@ -276,7 +276,7 @@ class Run(AbstractBase):
         return results, self.runtime
 
     def create_result(self, results: dict, device: Optional["Device"] = None):
-        result_kw = {"run": self.id, "results": results}
+        result_kw = {"run": self, "results": results}
         if device:
             result_kw["device"] = device.id
         factory("Result", **result_kw)

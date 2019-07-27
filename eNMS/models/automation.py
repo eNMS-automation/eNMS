@@ -756,9 +756,9 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False, "timestamp": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            initial_targets = run.targets or run.compute_devices(results["results"])
+            initial_targets = set(run.targets or run.compute_devices(results["results"]))
             for job in jobs:
-                allowed_devices[job.name] = set(initial_targets)
+                allowed_devices[job.name] = initial_targets
         while jobs:
             job = jobs.pop()
             if any(
@@ -803,7 +803,6 @@ class Workflow(Job):
                     "workflow": self.id,
                     "parent_timestamp": run.parent_timestamp,
                 })
-                
                 job_results = job_run.run(payload)[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

@@ -101,7 +101,7 @@ class SwissArmyKnifeService(Service):
             repo.remotes.origin.push()
         return {"success": True}
 
-    def process_run.payload1(self, run: "Run", device: Device) -> dict:
+    def process_payload1(self, run: "Run", device: Device) -> dict:
         # we use the name of the device to get the result for that particular
         # device.
         get_facts = run.payload["get_facts"]["results"]["devices"][device.name]

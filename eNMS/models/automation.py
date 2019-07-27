@@ -147,10 +147,9 @@ class Run(AbstractBase):
                     except (OSError, ValueError):
                         parent_connection.pop(device.name)
         username, password = self.job.get_credentials(device)
+        driver = device.netmiko_driver if self.job.use_device_driver else self.job.driver
         netmiko_connection = ConnectHandler(
-            device_type=(
-                device.netmiko_driver if self.job.use_device_driver else self.job.driver
-            ),
+            device_type=driver,
             ip=device.ip_address,
             port=getattr(device, "port"),
             username=username,
@@ -205,13 +204,12 @@ class Run(AbstractBase):
 
     def payload_helper(
         self,
-        payload: dict,
         name: str,
         value: Optional[Any] = None,
         section: Optional[str] = None,
         device: Optional[str] = None,
     ) -> Any:
-        payload = payload.setdefault("variables", {})
+        payload = run.payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})

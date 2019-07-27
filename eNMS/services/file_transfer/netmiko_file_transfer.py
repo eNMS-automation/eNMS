@@ -36,9 +36,7 @@ class NetmikoFileTransferService(Service):
 
     def job(self, run: "Run", device: Device) -> dict:
         netmiko_connection = self.netmiko_connection(device, parent)
-        self.log(
-            parent, "info", "Transferring file {self.source_file} on {device.name}"
-        )
+        run.log("info", "Transferring file {self.source_file} on {device.name}")
         source = self.sub(self.source_file, locals())
         destination = self.sub(self.destination_file, locals())
         transfer_dict = file_transfer(

@@ -110,6 +110,7 @@ class Run(AbstractBase):
         if not kwargs.get("parent_timestamp"):
             self.parent_timestamp = self.runtime
         super().__init__(**kwargs)
+        self.run()
 
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name})"

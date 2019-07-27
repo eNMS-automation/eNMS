@@ -6,7 +6,7 @@ from psutil import cpu_percent
 from uuid import getnode
 from typing import Any, Dict, Optional, Union
 
-from eNMS.concurrency import threaded_job
+from eNMS.concurrency import job_thread
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
@@ -160,7 +160,7 @@ class RunJob(Resource):
             runtime = controller.get_time()
             controller.scheduler.add_job(
                 id=runtime,
-                func=threaded_job,
+                func=job_thread,
                 run_date=datetime.now(),
                 args=[
                     job.id,

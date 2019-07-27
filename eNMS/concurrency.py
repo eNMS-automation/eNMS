@@ -4,7 +4,7 @@ from eNMS.database import Session
 from eNMS.database.functions import factory, fetch
 
 
-def threaded_job(
+def job_thread(
     job_id: int,
     aps_job_id: Optional[str] = None,
     targets: Optional[set] = None,
@@ -26,8 +26,7 @@ def threaded_job(
         run_args["targets"] = targets
     if task:
         run_args["task"] = task
-    run = factory("Run", **run_args)
-    run.run()
+    factory("Run", **run_args)
 
 
 def device_thread(args: tuple) -> None:

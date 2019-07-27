@@ -11,7 +11,7 @@ from re import search, sub
 from subprocess import PIPE, Popen
 from typing import Any, Dict, Optional
 
-from eNMS.concurrency import threaded_job
+from eNMS.concurrency import job_thread
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
@@ -219,7 +219,7 @@ class AutomationController(BaseController):
             return {"error": "Workflow is already running."}
         self.scheduler.add_job(
             id=self.get_time(),
-            func=threaded_job,
+            func=job_thread,
             run_date=datetime.now(),
             args=[workflow_id, None, None, payload, kwargs["start_points"]],
             trigger="date",
@@ -234,7 +234,7 @@ class AutomationController(BaseController):
         if asynchronous:
             self.scheduler.add_job(
                 id=self.get_time(),
-                func=threaded_job,
+                func=job_thread,
                 run_date=datetime.now(),
                 args=[job.id, None, None, None, None, runtime],
                 trigger="date",

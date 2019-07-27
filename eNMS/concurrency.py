@@ -19,19 +19,19 @@ def job_thread(
     payload = payload or job.initial_payload
     run_args = {
         "job": job.id,
-        "payload": payload,
         "runtime": runtime,
     }
     if targets:
         run_args["targets"] = targets
     if task:
         run_args["task"] = task
-    factory("Run", **run_args)
+    run = factory("Run", **run_args)
+    run.run(payload)
 
 
 def device_thread(args: tuple) -> None:
     device = fetch("Device", id=args[0])
     run = fetch("Run", timestamp=args[1])
-    device_result = run.get_results(device)
-    with args[2]:
-        args[3][device.name] = device_result
+    device_result = run.get_results(device, args[2])
+    with args[3]:
+        args[4][device.name] = device_result

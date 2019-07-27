@@ -25,7 +25,7 @@ class UnixCommandService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "UnixCommandService"}
 
-    def job(self, run: "Run", device: Device) -> dict:
+    def job(self, run: "Run", payload: dict, device: Device) -> dict:
         command = self.sub(self.command, locals())
         match = self.sub(self.content_match, locals())
         run.log("info", f"Running Unix command ({command}) on {device.name}")

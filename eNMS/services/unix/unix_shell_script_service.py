@@ -27,7 +27,7 @@ class UnixShellScriptService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "UnixShellScriptService"}
 
-    def job(self, run: "Run", device: Device) -> dict:
+    def job(self, run: "Run", payload: dict, device: Device) -> dict:
         username, password = self.get_credentials(device)
 
         fabric_connection = Connection(

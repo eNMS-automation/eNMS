@@ -33,7 +33,7 @@ class PayloadExtractionService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PayloadExtractionService"}
 
-    def job(self, run: "Run", device: Optional[Device] = None) -> dict:
+    def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         result, success = {}, True
         for i in range(1, 4):
             variable = getattr(self, f"variable{i}")

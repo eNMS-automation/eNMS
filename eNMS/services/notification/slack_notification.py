@@ -24,7 +24,7 @@ class SlackNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}
 
-    def job(self, run: "Run", device: Optional[Device] = None) -> dict:
+    def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         slack_client = SlackClient(self.token or controller.slack_token)
         channel = self.sub(self.channel, locals()) or controller.slack_channel
         run.log("info", f"Sending Slack notification on {channel}")

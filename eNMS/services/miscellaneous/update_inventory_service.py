@@ -19,7 +19,7 @@ class UpdateInventoryService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "UpdateInventoryService"}
 
-    def job(self, run: "Run", device: Device) -> dict:
+    def job(self, run: "Run", payload: dict, device: Device) -> dict:
         for property, value in self.update_dictionary.items():
             setattr(device, property, value)
         return {"success": True, "result": "properties updated"}

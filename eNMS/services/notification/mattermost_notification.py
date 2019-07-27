@@ -24,7 +24,7 @@ class MattermostNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
 
-    def job(self, run: "Run", device: Optional[Device] = None) -> dict:
+    def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         channel = self.sub(self.channel, locals()) or controller.mattermost_channel
         run.log("info", f"Sending Mattermost notification on {channel}")
         result = post(

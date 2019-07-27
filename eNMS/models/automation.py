@@ -60,31 +60,13 @@ class Result(AbstractBase):
     __tablename__ = type = "Result"
     private = True
     id = Column(Integer, primary_key=True)
-    timestamp = Column(String(SMALL_STRING_LENGTH), default="")
-    parent_timestamp = Column(String(SMALL_STRING_LENGTH), default="")
     result = Column(MutableDict.as_mutable(PickleType), default={})
-    success = Column(Boolean, default=False)
-    job_id = Column(Integer, ForeignKey("Job.id"))
-    job = relationship("Job", back_populates="results", foreign_keys="Result.job_id")
-    job_name = association_proxy("job", "name")
+    run_id = Column(Integer, ForeignKey("Run.id"))
+    run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     device_id = Column(Integer, ForeignKey("Device.id"))
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
     )
-    device_name = association_proxy("device", "name")
-    workflow_id = Column(Integer, ForeignKey("Workflow.id"))
-    workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
-
-    def __init__(self, **kwargs: Any) -> None:
-        super().__init__(**kwargs)
-        self.success = self.result["success"]
-
-    def __repr__(self) -> str:
-        return f"{self.timestamp} ({self.job_name})"
-
-    @property
-    def name(self) -> str:
-        return repr(self)
 
 
 class Run(AbstractBase):
@@ -92,6 +74,7 @@ class Run(AbstractBase):
     __tablename__ = type = "Run"
     private = True
     id = Column(Integer, primary_key=True)
+    success = Column(Boolean, default=False)
     status = Column(String(SMALL_STRING_LENGTH), default="Running")
     runtime = Column(String(SMALL_STRING_LENGTH), default="")
     parent_timestamp = Column(String(SMALL_STRING_LENGTH), default="")
@@ -103,6 +86,7 @@ class Run(AbstractBase):
     targets = relationship("Device", secondary=run_device_table, back_populates="runs")
     task_id = Column(Integer, ForeignKey("Task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
+    results = relationship("Result", back_populates="job")
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or controller.get_time()
@@ -285,24 +269,19 @@ class Run(AbstractBase):
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = self.job.to_dict(True)
-            results_kwargs = {"timestamp": self.runtime, "result": results, "job": self.job.id}
-            if self.workflow:
-                results_kwargs["workflow"] = self.workflow.id
-                results_kwargs["parent_timestamp"] = self.parent_timestamp
-            factory("Result", **results_kwargs)
+            self.create_result(results)
             Session.commit()
         if not self.workflow and self.job.send_notification:
             self.notify(results)
         return results, self.runtime
 
-    def get_results(self, payload: dict, device: Optional["Device"] = None) -> dict:
-        kwargs = {"timestamp": self.runtime, "job": self.job.id}
-        if self.workflow:
-            kwargs.update(
-                workflow=self.workflow_id, parent_timestamp=self.parent_timestamp
-            )
+    def create_result(self, results: dict, device: Optional["Device"] = None):
+        result_kw = {"run": self.id, "results": results}
         if device:
-            kwargs["device"] = device.id
+            result_kw["device"] = device.id
+        factory("Result", **result_kw)
+
+    def get_results(self, payload: dict, device: Optional["Device"] = None) -> dict:
         self.log("info", f"Running {self.job.type}{f' on {device.name}' if device else ''}")
         results: Dict[Any, Any] = {"timestamp": controller.get_time()}
         try:
@@ -322,7 +301,8 @@ class Run(AbstractBase):
         )
         controller.job_db[self.runtime]["completed"] += 1
         controller.job_db[self.runtime]["failed"] += 1 - results["success"]
-        return {"results": results, "kwargs": kwargs}
+        self.create_result(results, device)
+        return results
 
     def log(self, severity: str, log: str) -> None:
         log = f"{controller.get_time()} - {severity} - {log}"
@@ -403,7 +383,6 @@ class Job(AbstractBase):
     custom_username = Column(String(SMALL_STRING_LENGTH), default="")
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
     start_new_connection = Column(Boolean, default=False)
-    results = relationship("Result", back_populates="job")
     runs = relationship("Run", back_populates="job")
 
     @property
@@ -459,9 +438,7 @@ class Service(Job):
 
     def device_run(self, run: "Run", payload: dict, targets: Optional[Set["Device"]] = None) -> dict:
         if not targets:
-            results = run.get_results(payload)
-            factory("Result", result=results["results"], **results["kwargs"])
-            return results["results"]
+            return run.get_results(payload)
         else:
             if self.multiprocessing:
                 device_results: dict = {}
@@ -477,12 +454,7 @@ class Service(Job):
                 device_results = {
                     device.name: run.get_results(payload, device) for device in targets
                 }
-            results = {"devices": {}}
-            for device_name, device_result in device_results.items():
-                results["devices"][device_name] = device_result["results"]
-                factory(
-                    "Result", result=device_result["results"], **device_result["kwargs"]
-                )
+            results = {"devices": device_results}
             return results
 
     def build_results(

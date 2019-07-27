@@ -31,7 +31,7 @@ def run_job(
 
 def device_thread(args: tuple) -> None:
     device = fetch("Device", id=args[0])
-    run = fetch("Run", timestamp=args[1])
-    device_result = run.get_results(device, args[2])
+    run = fetch("Run", runtime=args[1])
+    device_result = run.get_results(args[2], device)
     with args[3]:
         args[4][device.name] = device_result

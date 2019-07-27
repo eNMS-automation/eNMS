@@ -292,7 +292,7 @@ class Run(AbstractBase):
             factory("Result", **results_kwargs)
             Session.commit()
         if not self.workflow and self.job.send_notification:
-            self.job.notify(results)
+            self.notify(results)
         return results, self.runtime
 
     def get_results(self, payload: dict, device: Optional["Device"] = None) -> dict:
@@ -329,6 +329,29 @@ class Run(AbstractBase):
         controller.run_logs[self.runtime].append(log)
         if self.workflow:
             controller.run_logs[self.parent_timestamp].append(log)
+
+    def notify(self, results: dict) -> None:
+        notification = [
+            f"Job: {self.job.name} ({self.job.type})",
+            f"Runtime: {self.runtime}",
+            f'Status: {"PASS" if results["success"] else "FAILED"}',
+        ]
+        notification.extend(self.job.job_notification(results))
+        if self.job.include_link_in_summary:
+            notification.append(
+                f"Results: {controller.enms_server_addr}/view_job_results"
+                f"/{self.id}/{self.runtime.replace(' ', '$')}"
+            )
+        notification_payload =             {
+                "job": self.job.get_properties(),
+                "results": results,
+                "content": "\n\n".join(notification),
+            }
+        notification_run = factory("Run", {
+            "job": fetch("Job", name=self.job.send_notification_method).id
+        })
+        notification_run.run(notification_payload)
+
 
     @property
     def name(self) -> str:
@@ -393,27 +416,6 @@ class Job(AbstractBase):
         for x in getattr(self, f"{direction}s"):
             if x.subtype == subtype and x.workflow == workflow:
                 yield getattr(x, direction)
-
-    def notify(self, results: dict) -> None:
-        runtime = results["timestamp"]
-        notification = [
-            f"Job: {self.name} ({self.type})",
-            f"Runtime: {runtime}",
-            f'Status: {"PASS" if results["success"] else "FAILED"}',
-        ]
-        notification.extend(self.job_notification(results))
-        if self.include_link_in_summary:
-            notification.append(
-                f"Results: {controller.enms_server_addr}/view_job_results"
-                f"/{self.id}/{runtime.replace(' ', '$')}"
-            )
-        fetch("Job", name=self.send_notification_method).run(
-            {
-                "job": self.get_properties(),
-                "results": results,
-                "content": "\n\n".join(notification),
-            }
-        )
 
     def git_push(self, results: dict) -> None:
         path_git_folder = Path.cwd() / "git" / "automation"

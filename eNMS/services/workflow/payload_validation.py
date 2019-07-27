@@ -19,7 +19,7 @@ class PayloadValidationService(Service):
     __tablename__ = "PayloadValidationService"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
-    has_targets = True
+    has_targets = Column(Boolean, default=False)
     query = Column(String(SMALL_STRING_LENGTH), default="")
     conversion_method = Column(String(SMALL_STRING_LENGTH), default="text")
     validation_method = Column(String(SMALL_STRING_LENGTH), default="text")
@@ -31,13 +31,7 @@ class PayloadValidationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
 
-    def job(
-        self,
-        payload: dict,
-        timestamp: str,
-        device: Device,
-        parent: Optional[Job] = None,
-    ) -> dict:
+    def job(self, run: "Run", device: Optional[Device] = None) -> dict:
         result = self.convert_result(eval(self.query, locals()))
         match = (
             self.sub(self.content_match, locals())

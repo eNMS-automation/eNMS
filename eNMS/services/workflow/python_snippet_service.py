@@ -19,20 +19,12 @@ class PythonSnippetService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "PythonSnippetService"}
 
-    def job(
-        self,
-        payload: dict,
-        timestamp: str,
-        device: Optional[Device] = None,
-        parent: Optional[Job] = None,
-    ) -> dict:
-
+    def job(self, run: "Run", device: Optional[Device] = None) -> dict:
         try:
             code_object = compile(self.source_code, "user_python_code", "exec")
         except Exception as exc:
             run.log("info", f"Compile error: {str(exc)}")
             return {"success": False, "result": {"step": "compile", "error": str(exc)}}
-
         _code_result_ = {}
 
         class TerminateException(Exception):

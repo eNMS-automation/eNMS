@@ -36,13 +36,7 @@ class IterationService(Service):
     def get_properties(self, *args):
         return {"iterated_job": self.iterated_job.name, **super().get_properties(*args)}
 
-    def job(
-        self,
-        payload: dict,
-        timestamp: str,
-        device: Optional[Device] = None,
-        parent: Optional[Job] = None,
-    ) -> dict:
+    def job(self, run: "Run", device: Optional[Device] = None) -> dict:
         if self.origin_of_values == "user_provided_values":
             if device.name in self.user_provided_values:
                 values = self.user_provided_values[device.name]

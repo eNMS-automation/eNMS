@@ -26,16 +26,9 @@ class NapalmGettersService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "NapalmGettersService"}
 
-    def job(
-        self,
-        payload: dict,
-        timestamp: str,
-        device: Device,
-        parent: Optional[Job] = None,
-    ) -> dict:
+    def job(self, run: "Run", device: Device) -> dict:
         napalm_connection, result = self.napalm_connection(device, parent), {}
-        self.log(
-            parent,
+        run.log(
             "info",
             f"Fetching NAPALM getters ({', '.join(self.getters)}) on {device.name}",
         )

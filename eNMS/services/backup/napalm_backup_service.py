@@ -44,7 +44,7 @@ class NapalmBackupService(Service):
             path_configurations = Path.cwd() / "git" / "configurations"
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
-            napalm_connection = self.napalm_connection(device, parent)
+            napalm_connection = run.napalm_connection(device)
             run.log("info", f"Fetching configuration on {device.name} (Napalm)")
             config = controller.str_dict(napalm_connection.get_config())
             device.last_status = "Success"

@@ -35,7 +35,7 @@ class NetmikoFileTransferService(Service):
     __mapper_args__ = {"polymorphic_identity": "NetmikoFileTransferService"}
 
     def job(self, run: "Run", device: Device) -> dict:
-        netmiko_connection = self.netmiko_connection(device, parent)
+        netmiko_connection = run.netmiko_connection(device)
         run.log("info", "Transferring file {self.source_file} on {device.name}")
         source = self.sub(self.source_file, locals())
         destination = self.sub(self.destination_file, locals())

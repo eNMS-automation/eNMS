@@ -27,7 +27,7 @@ class NapalmConfigurationService(Service):
     __mapper_args__ = {"polymorphic_identity": "NapalmConfigurationService"}
 
     def job(self, run: "Run", device: Device) -> dict:
-        napalm_connection = self.napalm_connection(device, parent)
+        napalm_connection = run.napalm_connection(device)
         run.log("info", f"Pushing configuration on {device.name} (Napalm)")
         config = "\n".join(self.sub(self.content, locals()).splitlines())
         getattr(napalm_connection, self.action)(config=config)

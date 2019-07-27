@@ -46,7 +46,7 @@ class NetmikoBackupService(Service):
             path_configurations = Path.cwd() / "git" / "configurations"
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
-            netmiko_connection = self.netmiko_connection(device, parent)
+            netmiko_connection = run.netmiko_connection(device)
             try:
                 netmiko_connection.enable()
             except Exception:

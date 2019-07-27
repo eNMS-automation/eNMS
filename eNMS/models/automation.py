@@ -347,7 +347,7 @@ class Run(AbstractBase):
                 "results": results,
                 "content": "\n\n".join(notification),
             }
-        notification_run = factory("Run", {
+        notification_run = factory("Run", **{
             "job": fetch("Job", name=self.job.send_notification_method).id
         })
         notification_run.run(notification_payload)
@@ -719,10 +719,11 @@ class Workflow(Job):
     def workflow_targets_processing(
         self, allowed_devices: dict, job: Job, results: dict
     ) -> Generator[Job, None, None]:
+        
         failed_devices, passed_devices = set(), set()
         if job.type == "Workflow" or job.has_targets:
             if job.type == "Workflow":
-                devices = results["devices"]
+                devices = results.get("devices", {})
             else:
                 devices = results["results"].get("devices", {})
             for name, device_results in devices.items():
@@ -757,7 +758,7 @@ class Workflow(Job):
         if self.use_workflow_targets:
             initial_targets = run.targets or run.compute_devices(results["results"])
             for job in jobs:
-                allowed_devices[job.name] = initial_targets
+                allowed_devices[job.name] = set(initial_targets)
         while jobs:
             job = jobs.pop()
             if any(
@@ -802,6 +803,7 @@ class Workflow(Job):
                     "workflow": self.id,
                     "parent_timestamp": run.parent_timestamp,
                 })
+                
                 job_results = job_run.run(payload)[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

@@ -8,10 +8,11 @@ from slackclient import SlackClient
 from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField
 
-from eNMS.forms.automation import ServiceForm
+from eNMS.concurrency import run_job
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import factory, fetch_all
+from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
 from eNMS.models.inventory import Device
 
@@ -82,7 +83,7 @@ class SwissArmyKnifeService(Service):
     def poller_service(self, run: "Run", payload: dict) -> dict:
         for service in fetch_all("Service"):
             if getattr(service, "configuration_backup_service", False):
-                service.run()
+                run_job(service.id)
         Session.commit()
         for pool in fetch_all("Pool"):
             if pool.device_current_configuration:

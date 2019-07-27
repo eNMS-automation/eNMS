@@ -113,6 +113,9 @@ class Run(AbstractBase):
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name})"
 
+    def generate_row(self, table: str) -> List[str]:
+        return []
+
     @property
     def progress(self) -> str:
         if self.status == "Running":

@@ -4,7 +4,7 @@ from eNMS.database import Session
 from eNMS.database.functions import factory, fetch
 
 
-def job_thread(
+def run_job(
     job_id: int,
     aps_job_id: Optional[str] = None,
     targets: Optional[set] = None,

@@ -17,7 +17,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 from typing import Any, List, Optional, Set, Tuple
 
-from eNMS.concurrency import job_thread
+from eNMS.concurrency import run_job
 from eNMS.controller import controller
 from eNMS.database import Session, SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
 from eNMS.database.associations import (
@@ -140,7 +140,7 @@ class Task(AbstractBase):
     def kwargs(self) -> Tuple[dict, dict]:
         default = {
             "id": self.aps_job_id,
-            "func": job_thread,
+            "func": run_job,
             "replace_existing": True,
             "args": [
                 self.job.id,

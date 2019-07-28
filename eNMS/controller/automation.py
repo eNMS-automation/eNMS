@@ -174,10 +174,14 @@ class AutomationController(BaseController):
         if "all" not in job:
             return self.get_service_results(job, runtime, device, job)
         request = {"parent_runtime": runtime, "all_matches": True}
-        if job != "all":
-            request["success"] = device == "all passed"
+        if job in ("all passed", "all failed"):
+            request["success"] = job == "all passed"
         runs = fetch("Run", allow_none=True, **request)
-
+        return {
+            run.job_name: {r.device_name: r.result for r in run.results}
+            for run in runs
+            if run.job_id != int(id)
+        }
 
     def get_service_results(self, id: int, runtime, device, job) -> Optional[dict]:
         runtime_key = "parent_runtime" if job else "runtime"
@@ -187,13 +191,11 @@ class AutomationController(BaseController):
         run = fetch("Run", allow_none=True, **request)
         if not run:
             return
-        results = run.results
         if "all" not in device:
             device_id = None if device == "global" else int(device)
-            results = [r for r in results if device_id == r.device_id]
-            return results[0].result
+            return next(r for r in run.results if device_id == r.device_id).result
         else:
-            return {r.device_name: r.result for r in results if r.device_id}
+            return {r.device_name: r.result for r in run.results if r.device_id}
 
     def compare_job_results(self, id: int, **kwargs: Any) -> dict:
         kwargs.pop("compare")

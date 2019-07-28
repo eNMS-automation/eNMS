@@ -183,8 +183,11 @@ function getRuntimes(type, id) {
     $(`#runtime-${id},#runtime_compare-${id}`).val(mostRecent);
     $(`#runtime-${id},#runtime_compare-${id}`).selectpicker("refresh");
     if (runtimes) {
-      updateDeviceList(type, id, id, true);
-      if (type == "workflow" || type == "device") updateJobList(type, id, true);
+      if (type == "workflow" || type == "device") {
+        updateJobList(type, id, true);
+      } else {
+        updateDeviceList(type, id, id, true);
+      }
     }
   });
 }
@@ -225,7 +228,6 @@ function updateDeviceList(type, id, parentId, updateBoth) {
  * @param {boolean} updateBoth - update both job lists.
  */
 function updateJobList(type, id, updateBoth) {
-  console.log("test");
   fCall(`/get_job_list/${id}`, `#results-form-${id}`, (jobs) => {
     let ids;
     if (updateBoth) {
@@ -244,7 +246,6 @@ function updateJobList(type, id, updateBoth) {
     });
     $(ids).selectpicker("refresh");
     updateDeviceList(type, id, id, updateBoth);
-    displayResults(type, id, id);
   });
 }
 

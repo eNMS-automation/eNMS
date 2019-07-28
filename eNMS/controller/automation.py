@@ -3,7 +3,6 @@ from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
-from itertools import chain
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import attrgetter
@@ -160,6 +159,7 @@ class AutomationController(BaseController):
 
     def get_results(self, type: str, id: int, **kw) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
+        print(kw)
         return getattr(self, f"get_{type}_results")(
             id,
             **{
@@ -170,25 +170,24 @@ class AutomationController(BaseController):
         )
 
     def get_workflow_results(self, id: int, runtime, device, job) -> Optional[dict]:
-        request = {"parent_runtime": runtime}
-        print(id, runtime, job)
-        if "all" not in device and job != "global":
-            print(job, runtime, device)
+        print(device, job)
+        if "all" not in job:
             return self.get_service_results(job, runtime, device, job)
+        request = {"parent_runtime": runtime, "all_matches": True}
+        if job != "all":
+            request["success"] = device == "all passed"
+        runs = fetch("Run", allow_none=True, **request)
+
 
     def get_service_results(self, id: int, runtime, device, job) -> Optional[dict]:
         runtime_key = "parent_runtime" if job else "runtime"
         request = {runtime_key: runtime, "job_id": id}
-        if "all" in device:
-            request["all_matches"] = True
-            if device != "all":
-                request["success"] = device == "all passed"
-        runs = fetch("Run", allow_none=True, **request)
-        if isinstance(runs, list):
-            runs.sort(key=attrgetter("runtime"))
-        else:
-            runs = [runs]
-        results = list(chain.from_iterable(run.results for run in runs))
+        if device in ("all passed", "all failed"):
+            request["success"] = device == "all passed"
+        run = fetch("Run", allow_none=True, **request)
+        if not run:
+            return
+        results = run.results
         if "all" not in device:
             device_id = None if device == "global" else int(device)
             results = [r for r in results if device_id == r.device_id]

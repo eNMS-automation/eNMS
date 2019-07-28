@@ -286,6 +286,7 @@ class Run(AbstractBase):
         return results, self.runtime
 
     def create_result(self, results: dict, device: Optional["Device"] = None):
+        self.success = results["success"]
         result_kw = {"run": self, "result": results}
         if device:
             result_kw["device"] = device.id

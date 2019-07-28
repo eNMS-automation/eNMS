@@ -102,11 +102,7 @@ class ResultsForm(BaseForm):
     form_type = HiddenField(default="results")
     compare = BooleanField(default=False)
     view_type = SelectField(
-        "View",
-        choices=(
-            ("view", "Display as JSON"),
-            ("text", "Display as text"),
-        ),
+        "View", choices=(("view", "Display as JSON"), ("text", "Display as text"))
     )
     runtime = NoValidationSelectField("Version", choices=())
     runtime_compare = NoValidationSelectField("Version", choices=())

@@ -114,45 +114,21 @@ class ResultsForm(BaseForm):
 
 class ServiceResultsForm(ResultsForm):
     form_type = HiddenField(default="service_results")
-    choices = (
-        ("global", "Entire runtime payload"),
-        ("all", "All devices"),
-        ("all failed", "All devices that failed"),
-        ("all passed", "All devices that passed"),
-    )
     device = NoValidationSelectField("Device", choices=())
     device_compare = NoValidationSelectField("Device", choices=())
 
 
 class WorkflowResultsForm(ResultsForm):
     form_type = HiddenField(default="workflow_results")
-    device_choices = (
-        ("global", "Entire runtime payload"),
-        ("all", "All devices"),
-        ("all failed", "All devices that failed"),
-        ("all passed", "All devices that passed"),
-    )
-    job_choices = (
-        ("global", "Entire runtime payload"),
-        ("all", "All jobs"),
-        ("all failed", "All jobs that failed"),
-        ("all passed", "All jobs that passed"),
-    )
-    device = NoValidationSelectField("Device", choices=device_choices)
-    device_compare = NoValidationSelectField("Device", choices=device_choices)
-    job = NoValidationSelectField("Job", choices=job_choices)
-    job_compare = NoValidationSelectField("Job", choices=job_choices)
+    device = NoValidationSelectField("Device", choices=())
+    device_compare = NoValidationSelectField("Device", choices=())
+    job = NoValidationSelectField("Job", choices=())
+    job_compare = NoValidationSelectField("Job", choices=())
     payload_query = StringField("Payload Query")
 
 
 class DeviceResultsForm(ResultsForm):
     form_type = HiddenField(default="device_results")
-    job = NoValidationSelectField(
-        "Job", choices=(("global", "Entire runtime payload"), ("all", "All jobs"))
-    )
-    job_compare = NoValidationSelectField(
-        "Job", choices=(("global", "Entire runtime payload"), ("all", "All jobs"))
-    )
 
 
 class RestartWorkflowForm(BaseForm):

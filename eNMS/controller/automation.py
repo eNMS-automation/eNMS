@@ -119,11 +119,15 @@ class AutomationController(BaseController):
             ("all failed", "All devices that failed"),
             ("all passed", "All devices that passed"),
         ]
-        runtime_key = "parent_runtime" if "job" in kw else "runtime"
-        request = {runtime_key: kw.get(f"runtime{comp}")}
-        if kw.get(f"job{comp}") not in ("global", "all"):
-            request["job_id"] = kw.get(f"job{comp}", id)
+        if "runtime" not in kw:
+            request = {"id": id}
+        else:
+            runtime_key = "parent_runtime" if "job" in kw else "runtime"
+            request = {runtime_key: kw.get(f"runtime{comp}", id)}
+            if kw.get(f"job{comp}") not in ("global", "all"):
+                request["job_id"] = kw.get(f"job{comp}", id)
         runs = fetch("Run", allow_none=True, **request)
+        print(runs)
         if not runs:
             return defaults
         return defaults + list(
@@ -167,6 +171,11 @@ class AutomationController(BaseController):
                 "job": kw.get(f"job{comp}"),
             },
         )
+
+    def get_run_results(self, id: int, device, **kw) -> Optional[dict]:
+        print(id, device)
+        run = fetch("Run", allow_none=True, id=id)
+        return self.get_service_results(run.job.id, run.runtime, device, None) 
 
     def get_device_results(self, id: int, runtime, **_) -> Optional[dict]:
         run = fetch("Run", allow_none=True, runtime=runtime)

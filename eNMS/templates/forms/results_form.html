@@ -44,6 +44,7 @@
         </tr>
       </thead>
       <tbody>
+        {% if form_type != "run_results" %}
         <tr>
           <td>
             Runtime
@@ -55,7 +56,7 @@
             {{ form.runtime_compare(class="form-control add-id") }}
           </td>
         </tr>
-        {% if form_type == "workflow_results" %}
+        {% endif %} {% if form_type == "workflow_results" %}
         <tr>
           <td>
             Job

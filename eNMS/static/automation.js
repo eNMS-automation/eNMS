@@ -157,7 +157,7 @@ function formatResults(results, id, formId, compare) {
  */
 function displayResults(type, id, formId, compare) {
   const url = compare ? "compare" : "get";
-  if ($(`#runtime-${id}`).val()) {
+  if ($(`#runtime-${id}`).val() || type == "run") {
     fCall(`/${url}_results/${type}/${id}`, `#results-form-${formId}`, (results) => {
       currentResults = results;
       formatResults(results, id, formId, compare);
@@ -301,11 +301,15 @@ function configureCallbacks(id, type) {
     });
   }
 
-  $(`#runtime-${id},#runtime_compare-${id}`).on("change", function() {
-    $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-    if (type != "device") updateDeviceList(type, id);
-    if (type != "service") updateJobList(type, id);
-  });
+  if (type != "run") {
+    $(`#runtime-${id},#runtime_compare-${id}`).on("change", function() {
+      $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
+      if (type != "device") updateDeviceList(type, id);
+      if (type != "service") updateJobList(type, id);
+    });
+  } else {
+    updateDeviceList(type, id)
+  }
 
   if (type != "service") {
     $(`#job-${id},#job_compare-${id}`).on("change", function() {

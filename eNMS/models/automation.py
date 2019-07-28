@@ -60,6 +60,7 @@ class Result(AbstractBase):
     __tablename__ = type = "Result"
     private = True
     id = Column(Integer, primary_key=True)
+    success = Column(Boolean, default=False)
     result = Column(MutableDict.as_mutable(PickleType), default={})
     run_id = Column(Integer, ForeignKey("Run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
@@ -68,6 +69,10 @@ class Result(AbstractBase):
         "Device", back_populates="results", foreign_keys="Result.device_id"
     )
     device_name = association_proxy("device", "name")
+
+    def __init__(self, **kwargs):
+        self.success = kwargs["result"]["success"]
+        super().__init__(**kwargs)
 
     def __repr__(self):
         return f"{self.run} {self.device_name}"
@@ -105,6 +110,9 @@ class Run(AbstractBase):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogs('{self.runtime}', '{self.job_name}')">
+            </i>Logs</a></button>""",
+            f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'run')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -121,7 +129,7 @@ class Run(AbstractBase):
                     f" ({progress['failed']} failed)"
                 )
             except KeyError:
-                return "Error"
+                return "N/A"
         else:
             return "N/A"
 
@@ -280,6 +288,7 @@ class Run(AbstractBase):
             results = {"success": False, "results": result}
         finally:
             self.job.status, self.job.state = "Idle", {}
+            self.status = f"Completed ({'success' if self.success else 'failure'})"
             controller.job_db[self.runtime]["completed"] = 0
             controller.job_db[self.runtime]["failed"] = 0
             results["logs"] = controller.run_logs.pop(self.runtime)

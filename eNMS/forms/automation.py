@@ -127,6 +127,12 @@ class DeviceResultsForm(ResultsForm):
     form_type = HiddenField(default="device_results")
 
 
+class RunResultsForm(ResultsForm):
+    form_type = HiddenField(default="run_results")
+    device = NoValidationSelectField("Device", choices=())
+    device_compare = NoValidationSelectField("Device", choices=())
+
+
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")

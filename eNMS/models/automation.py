@@ -87,6 +87,7 @@ class Run(AbstractBase):
     job_name = association_proxy("job", "name")
     workflow_id = Column(Integer, ForeignKey("Workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
+    workflow_name = association_proxy("workflow", "name")
     targets = relationship("Device", secondary=run_device_table, back_populates="runs")
     task_id = Column(Integer, ForeignKey("Task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
@@ -102,7 +103,13 @@ class Run(AbstractBase):
         return f"{self.runtime} ({self.job_name})"
 
     def generate_row(self, table: str) -> List[str]:
-        return []
+        return [
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showResultsPanel('{self.id}', '{self.name}', 'run')">
+            </i>Results</a></button>""",
+            f"""<button type="button" class="btn btn-primary btn-xs"
+            onclick="showTypePanel('{self.type}', '{self.id}')">View</button>""",
+        ]
 
     @property
     def progress(self) -> str:

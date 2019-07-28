@@ -115,7 +115,7 @@ class AutomationController(BaseController):
     def get_device_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         defaults = [
-            ("global", "Entire runtime payload"),
+            ("global", "Entire job payload"),
             ("all", "All devices"),
             ("all failed", "All devices that failed"),
             ("all passed", "All devices that passed"),
@@ -135,10 +135,9 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
+    def get_job_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         defaults = [
-            ("global", "Entire runtime payload"),
             ("all", "All jobs"),
             ("all failed", "All jobs that failed"),
             ("all passed", "All jobs that passed"),
@@ -155,7 +154,7 @@ class AutomationController(BaseController):
                     ),
                     key=attrgetter("runtime"),
                 )
-                if result.job_id
+                if run.job_id
             )
         )
 
@@ -172,9 +171,14 @@ class AutomationController(BaseController):
 
     def get_workflow_results(self, id: int, runtime, device, job) -> Optional[dict]:
         request = {"parent_runtime": runtime}
+        print(id, runtime, job)
+        if "all" not in device and job != "global":
+            print(job, runtime, device)
+            return self.get_service_results(job, runtime, device, job)
 
-    def get_service_results(self, id: int, runtime, device, **_) -> Optional[dict]:
-        request = {"runtime": runtime}
+    def get_service_results(self, id: int, runtime, device, job) -> Optional[dict]:
+        runtime_key = "parent_runtime" if job else "runtime"
+        request = {runtime_key: runtime, "job_id": id}
         if "all" in device:
             request["all_matches"] = True
             if device != "all":

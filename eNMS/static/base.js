@@ -535,7 +535,6 @@ function processData(type, id) {
 // eslint-disable-next-line
 function createSearchHeaders() {
   properties.forEach((property) => {
-    console.log(property, (!filteringProperties.includes(property)));
     if (!filteringProperties.includes(property)) return;
     $(`#search-${property}`).on("keyup change", function() {
       $(`#${type}_filtering-${property}`).val($(this).val());

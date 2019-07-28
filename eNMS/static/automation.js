@@ -184,7 +184,7 @@ function getRuntimes(type, id) {
     $(`#runtime-${id},#runtime_compare-${id}`).selectpicker("refresh");
     if (runtimes) {
       updateDeviceList(type, id, id, true);
-      if (type == "workflow" || type == "device") updateJobList(id, type, true);
+      if (type == "workflow" || type == "device") updateJobList(type, id, true);
     }
   });
 }
@@ -225,7 +225,8 @@ function updateDeviceList(type, id, parentId, updateBoth) {
  * @param {boolean} updateBoth - update both job lists.
  */
 function updateJobList(type, id, updateBoth) {
-  fCall(`/get_job_list/${type}/${id}`, `#results-form-${id}`, (jobs) => {
+  console.log("test");
+  fCall(`/get_job_list/${id}`, `#results-form-${id}`, (jobs) => {
     let ids;
     if (updateBoth) {
       ids = `#job-${id},#job_compare-${id}`;
@@ -242,6 +243,7 @@ function updateJobList(type, id, updateBoth) {
       );
     });
     $(ids).selectpicker("refresh");
+    updateDeviceList(type, id, id, updateBoth);
     displayResults(type, id, id);
   });
 }
@@ -304,7 +306,7 @@ function configureCallbacks(id, type) {
   if (type != "service") {
     $(`#job-${id},#job_compare-${id}`).on("change", function() {
       $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      displayResults(type, id, id);
+      updateDeviceList(type, id);
     });
   }
 

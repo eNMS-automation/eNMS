@@ -136,10 +136,10 @@ function formatResults(results, id, formId) {
                 path += path.length ? `["${element}"]` : "payload";
               }
             }
+            $(`#payload_query-${id}`).val(path).show();
           } else {
-            path = "N/A";
+            $(`#payload_query-${id}`).hide()
           }
-          $(`#payload_query-${id}`).val(path);
         }
       },
     };

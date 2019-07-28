@@ -159,7 +159,6 @@ class AutomationController(BaseController):
 
     def get_results(self, type: str, id: int, **kw) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
-        print(kw)
         return getattr(self, f"get_{type}_results")(
             id,
             **{
@@ -169,17 +168,19 @@ class AutomationController(BaseController):
             },
         )
 
+    def get_device_results(self, id: int, runtime, **_) -> Optional[dict]:
+        run = fetch("Run", allow_none=True, runtime=runtime)
+        return next(r.result for r in run.results if r.device_id == int(id))
+
     def get_workflow_results(self, id: int, runtime, device, job) -> Optional[dict]:
-        print(device, job)
         if "all" not in job:
             return self.get_service_results(job, runtime, device, job)
         request = {"parent_runtime": runtime, "all_matches": True}
         if job in ("all passed", "all failed"):
             request["success"] = job == "all passed"
-        runs = fetch("Run", allow_none=True, **request)
         return {
-            run.job_name: {r.device_name: r.result for r in run.results}
-            for run in runs
+            run.job_name: next(r.result for r in run.results if not r.device_id)
+            for run in fetch("Run", allow_none=True, **request)
             if run.job_id != int(id)
         }
 

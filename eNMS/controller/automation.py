@@ -198,13 +198,13 @@ class AutomationController(BaseController):
         else:
             return {r.device_name: r.result for r in run.results if r.device_id}
 
-    def compare_job_results(self, id: int, **kwargs: Any) -> dict:
+    def compare_results(self, *args: Any, **kwargs: Any) -> dict:
         kwargs.pop("compare")
         first = self.str_dict(
-            self.str_dict(self.get_job_results(id, compare=False, **kwargs))
+            self.str_dict(self.get_results(*args, compare=False, **kwargs))
         ).splitlines()
         second = self.str_dict(
-            self.get_job_results(id, compare=True, **kwargs)
+            self.get_results(*args, compare=True, **kwargs)
         ).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}

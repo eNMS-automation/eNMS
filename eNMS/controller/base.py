@@ -149,7 +149,7 @@ class BaseController:
         "calendar_init",
         "clear_results",
         "clear_configurations",
-        "compare_job_results",
+        "compare_results",
         "connection",
         "counters",
         "count_models",

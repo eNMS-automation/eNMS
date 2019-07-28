@@ -101,12 +101,11 @@ function parseObject(obj) {
  * @param {id} id - Job id.
  * @param {id} formId - Form ID.
  */
-function formatResults(results, id, formId) {
-  $(`#results-table`).css('background-color', 'red');
+function formatResults(results, id, formId, compare) {
   if (!results) results = currentResults;
   if (!results) {
     $(`#display_results-${formId}`).text("No results yet.");
-  } else if ($(`#view_type-${id}`).val() == "compare") {
+  } else if (compare) {
     $(`#display_results-${formId}`).empty();
     $(`#display_results-${formId}`).append(
       diffview.buildView({
@@ -156,12 +155,16 @@ function formatResults(results, id, formId) {
  * @param {id} id - Job id.
  * @param {formId} formId - Form ID.
  */
-function displayResults(type, id, formId) {
-  const url = $(`#view_type-${id}`).val() == "compare" ? "compare" : "get";
-  fCall(`/${url}_results/${type}/${id}`, `#results-form-${formId}`, (results) => {
-    currentResults = results;
-    formatResults(results, id, formId);
-  });
+function displayResults(type, id, formId, compare) {
+  const url = compare ? "compare" : "get";
+  if ($(`#runtime-${id}`).val()) {
+    fCall(`/${url}_results/${type}/${id}`, `#results-form-${formId}`, (results) => {
+      currentResults = results;
+      formatResults(results, id, formId, compare);
+    });
+  } else {
+    $(`#display_results-${formId}`).text("No results yet.");
+  }
 }
 
 /**
@@ -311,8 +314,12 @@ function configureCallbacks(id, type) {
     });
   }
 
-  $(`#view_type-${id},#success_type-${id}`).on("change", function() {
+  $(`#view_type-${id}`).on("change", function() {
     displayResults(type, id, id);
+  });
+
+  $(`#compare-btn-${id}`).click(function() {
+    displayResults(type, id, id, true);
   });
 }
 

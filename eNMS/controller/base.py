@@ -171,7 +171,7 @@ class BaseController:
         "get_exported_jobs",
         "get_git_content",
         "get_job_logs",
-        "get_job_results",
+        "get_results",
         "get_runtimes",
         "get_device_list",
         "get_results_diff",

@@ -149,6 +149,9 @@ class AutomationController(BaseController):
             )
         )
 
+    def get_results(self, type: str, id: int, **kw) -> Optional[dict]:
+        return getattr(self, f"get_{type}_results")(id, **kw)
+
     def get_workflow_results(self, id: int, **kw: Any) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
         if f"runtime{comp}" not in kw:
@@ -187,9 +190,8 @@ class AutomationController(BaseController):
     def get_service_results(self, id: int, **kw: Any) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
         device = kw.get(f"device{comp}")
-        runtime = "runtime"
-        request = {runtime: kw[f"runtime{comp}"]}
-        if device == "all" or job == "all":
+        request = {"runtime": kw[f"runtime{comp}"]}
+        if device == "all":
             request["all_matches"] = True
             if kw["success_type"] != "all":
                 request["success"] = kw["success_type"] == "success"

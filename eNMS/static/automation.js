@@ -156,9 +156,9 @@ function formatResults(results, id, formId) {
  * @param {id} id - Job id.
  * @param {formId} formId - Form ID.
  */
-function displayResults(id, formId) {
+function displayResults(type, id, formId) {
   const url = $(`#view_type-${id}`).val() == "compare" ? "compare" : "get";
-  fCall(`/${url}_job_results/${id}`, `#results-form-${formId}`, (results) => {
+  fCall(`/${url}_results/${type}/${id}`, `#results-form-${formId}`, (results) => {
     currentResults = results;
     formatResults(results, id, formId);
   });
@@ -169,7 +169,7 @@ function displayResults(id, formId) {
  * @param {id} id - Job id.
  * @param {type} type - Runtime Type.
  */
-function getRuntimes(id, type) {
+function getRuntimes(type, id) {
   call(`/get_runtimes/${type}/${id}`, (runtimes) => {
     $(`#runtime-${id},#runtime_compare-${id}`).empty();
     runtimes.forEach((runtime) => {
@@ -183,7 +183,7 @@ function getRuntimes(id, type) {
     $(`#runtime-${id},#runtime_compare-${id}`).val(mostRecent);
     $(`#runtime-${id},#runtime_compare-${id}`).selectpicker("refresh");
     if (runtimes) {
-      updateDeviceList(id, id, true);
+      updateDeviceList(type, id, id, true);
       if (type == "workflow" || type == "device") updateJobList(id, type, true);
     }
   });
@@ -278,7 +278,7 @@ function showLogs(id, name) {
 function showResultsPanel(id, name, type) {
   createPanel(`${type}_results`, `Results - ${name}`, id, function() {
     configureCallbacks(id, type);
-    getRuntimes(id, type);
+    getRuntimes(type, id);
   });
 }
 

@@ -115,19 +115,17 @@ class ResultsForm(BaseForm):
 
 class ServiceResultsForm(ResultsForm):
     form_type = HiddenField(default="service_results")
-    success_type = SelectField(
-        "View",
-        choices=(
-            ("all", "All results"),
-            ("success", "Successful results"),
-            ("failure", "Failed results"),
-        ),
-    )
+    choices = (
+            ("global", "Entire runtime payload"),
+            ("all", "All devices"),
+            ("all failed", "All devices that failed"),
+            ("all passed", "All devices that passed"),
+            )
     device = NoValidationSelectField(
-        "Device", choices=(("global", "Global Result"), ("all", "All devices"))
+        "Device", choices=choices
     )
     device_compare = NoValidationSelectField(
-        "Device", choices=(("global", "Global Result"), ("all", "All devices"))
+        "Device", choices=choices
     )
 
 

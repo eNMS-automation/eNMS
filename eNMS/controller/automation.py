@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
+from itertools import chain
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import attrgetter
@@ -148,20 +149,65 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_results(self, runtime
-
-    def get_job_results(self, id: int, **kw: Any) -> Optional[dict]:
+    def get_workflow_results(self, id: int, **kw: Any) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
         if f"runtime{comp}" not in kw:
             return None
         service_result_window = "job" not in kw
         job, device = kw.get(f"job{comp}"), kw.get(f"device{comp}")
-        runtime = kw.get(f"runtime{comp}")
         if service_result_window or job == "global":
-            runtime_key = "runtime"
+            runtime = "runtime"
         else:
-            runtime_key = "parent_runtime"
-        return self.get_results(job=job, device=device, **{runtime: 
+            runtime = "parent_runtime"
+        request = {runtime: kw[f"runtime{comp}"]}
+        if job not in ("global", "all", None):
+            request["job_id"] = job
+        elif device and job != "all":
+            request["job_id"] = id
+        if device == "all" or job == "all":
+            request["all_matches"] = True
+            if kw["success_type"] != "all":
+                request["success"] = kw["success_type"] == "success"
+        runs = fetch("Run", allow_none=True, **request)
+        if isinstance(runs, list):
+            runs.sort(key=attrgetter("runtime"))
+        else:
+            runs = [runs]
+        results = list(chain.from_iterable(run.results for run in runs))
+        if device != "all":
+            device_id = None if device == "global" else int(device)
+            results = [r for r in results if device_id == r.device_id]
+        else:
+            results = [r for r in results if r.device_id]
+        if len(results) == 1:
+            return results[0].result
+        else:
+            return {r.device_name: r.result for r in results}
+
+    def get_service_results(self, id: int, **kw: Any) -> Optional[dict]:
+        comp = "_compare" if kw["compare"] else ""
+        device = kw.get(f"device{comp}")
+        runtime = "runtime"
+        request = {runtime: kw[f"runtime{comp}"]}
+        if device == "all" or job == "all":
+            request["all_matches"] = True
+            if kw["success_type"] != "all":
+                request["success"] = kw["success_type"] == "success"
+        runs = fetch("Run", allow_none=True, **request)
+        if isinstance(runs, list):
+            runs.sort(key=attrgetter("runtime"))
+        else:
+            runs = [runs]
+        results = list(chain.from_iterable(run.results for run in runs))
+        if device != "all":
+            device_id = None if device == "global" else int(device)
+            results = [r for r in results if device_id == r.device_id]
+        else:
+            results = [r for r in results if r.device_id]
+        if len(results) == 1:
+            return results[0].result
+        else:
+            return {r.device_name: r.result for r in results}
 
     def compare_job_results(self, id: int, **kwargs: Any) -> dict:
         kwargs.pop("compare")

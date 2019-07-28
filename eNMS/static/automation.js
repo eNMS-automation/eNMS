@@ -195,7 +195,7 @@ function getRuntimes(id, type) {
  * @param {parentId} parentId - Parent ID.
  * @param {boolean} updateBoth - update both device lists.
  */
-function updateDeviceList(id, parentId, updateBoth) {
+function updateDeviceList(type, id, parentId, updateBoth) {
   const formId = parentId || id;
   fCall(`/get_device_list/${id}`, `#results-form-${formId}`, (devices) => {
     let ids;
@@ -214,7 +214,7 @@ function updateDeviceList(id, parentId, updateBoth) {
       );
     });
     $(ids).selectpicker("refresh");
-    displayResults(id, formId);
+    displayResults(type, id, formId);
   });
 }
 
@@ -224,7 +224,7 @@ function updateDeviceList(id, parentId, updateBoth) {
  * @param {type} type - Runtime Type.
  * @param {boolean} updateBoth - update both job lists.
  */
-function updateJobList(id, type, updateBoth) {
+function updateJobList(type, id, updateBoth) {
   fCall(`/get_job_list/${type}/${id}`, `#results-form-${id}`, (jobs) => {
     let ids;
     if (updateBoth) {
@@ -242,7 +242,7 @@ function updateJobList(id, type, updateBoth) {
       );
     });
     $(ids).selectpicker("refresh");
-    displayResults(id, id);
+    displayResults(type, id, id);
   });
 }
 
@@ -291,25 +291,25 @@ function configureCallbacks(id, type) {
   if (type != "device") {
     $(`#device-${id},#device_compare-${id}`).on("change", function() {
       $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      displayResults(id, id);
+      displayResults(type, id, id);
     });
   }
 
   $(`#runtime-${id},#runtime_compare-${id}`).on("change", function() {
     $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-    if (type != "device") updateDeviceList(id);
-    if (type != "service") updateJobList(id, type);
+    if (type != "device") updateDeviceList(type, id);
+    if (type != "service") updateJobList(type, id);
   });
 
   if (type != "service") {
     $(`#job-${id},#job_compare-${id}`).on("change", function() {
       $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      displayResults(id, id);
+      displayResults(type, id, id);
     });
   }
 
   $(`#view_type-${id},#success_type-${id}`).on("change", function() {
-    displayResults(id, id);
+    displayResults(type, id, id);
   });
 }
 

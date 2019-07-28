@@ -69,6 +69,9 @@ class Result(AbstractBase):
     )
     device_name = association_proxy("device", "name")
 
+    def __repr__(self):
+        return f"{self.run} {self.device_name}"
+
 
 class Run(AbstractBase):
 
@@ -277,7 +280,7 @@ class Run(AbstractBase):
         return results, self.runtime
 
     def create_result(self, results: dict, device: Optional["Device"] = None):
-        result_kw = {"run": self, "results": results}
+        result_kw = {"run": self, "result": results}
         if device:
             result_kw["device"] = device.id
         factory("Result", **result_kw)

@@ -76,6 +76,12 @@ class JobForm(BaseForm):
         return valid_form and not no_recipient_error
 
 
+class RunForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="run")
+    id = HiddenField()
+
+
 class ServiceForm(JobForm):
     form_type = HiddenField(default="service")
     credentials = SelectField(

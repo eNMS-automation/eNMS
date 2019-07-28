@@ -116,7 +116,7 @@ class Run(AbstractBase):
             onclick="showResultsPanel('{self.id}', '{self.name}', 'run')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}')">View</button>""",
+            onclick="showTypePanel('run', '{self.id}')">View</button>""",
         ]
 
     @property

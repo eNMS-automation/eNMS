@@ -88,6 +88,8 @@ class AbstractBase(Base):
                     obj.name if export else obj.get_properties() for obj in value
                 ]
             else:
+                if not value:
+                    continue
                 properties[property] = value.name if export else value.get_properties()
         if export:
             for property in no_migrate:

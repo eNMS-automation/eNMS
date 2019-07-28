@@ -106,7 +106,6 @@ class ResultsForm(BaseForm):
         choices=(
             ("view", "Display as JSON"),
             ("text", "Display as text"),
-            ("compare", "Compare both versions"),
         ),
     )
     runtime = NoValidationSelectField("Version", choices=())
@@ -121,8 +120,8 @@ class ServiceResultsForm(ResultsForm):
         ("all failed", "All devices that failed"),
         ("all passed", "All devices that passed"),
     )
-    device = NoValidationSelectField("Device", choices=choices)
-    device_compare = NoValidationSelectField("Device", choices=choices)
+    device = NoValidationSelectField("Device", choices=())
+    device_compare = NoValidationSelectField("Device", choices=())
 
 
 class WorkflowResultsForm(ResultsForm):
@@ -149,10 +148,10 @@ class WorkflowResultsForm(ResultsForm):
 class DeviceResultsForm(ResultsForm):
     form_type = HiddenField(default="device_results")
     job = NoValidationSelectField(
-        "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
+        "Job", choices=(("global", "Entire runtime payload"), ("all", "All jobs"))
     )
     job_compare = NoValidationSelectField(
-        "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
+        "Job", choices=(("global", "Entire runtime payload"), ("all", "All jobs"))
     )
 
 

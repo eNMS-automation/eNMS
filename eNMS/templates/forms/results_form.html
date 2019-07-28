@@ -8,26 +8,28 @@
   form.compare(class="form-control add-id", style="display:none;") }}
   <div class="modal-body">
     <button
-      style="background:transparent; border:none; color:transparent; width: 10vw;"
+      style="background:transparent; border:none; color:transparent; width: 20vw;"
     >
       {{ form.view_type(class="form-control no-search add-id") }}
     </button>
-    {% if form_type != "device_results" %}
-    <button
-      style="background:transparent; border:none; color:transparent; width: 10vw;"
-    >
-      {{ form.success_type(class="form-control no-search add-id") }}
-    </button>
-    {% endif %} {% if form_type != "device_results" %}
     <button
       type="button"
-      class="btn btn-default btn-file btn-id"
-      value="clearResults"
+      class="btn btn-default btn-primary btn-id"
+      value="compareResults"
       style="width:20%;"
     >
-      Clear
-    </button>
-    {% endif %}
+      Compare
+  </button>
+  {% if form_type != "device_results" %}
+  <button
+    type="button"
+    class="btn btn-default btn-file btn-id"
+    value="clearResults"
+    style="width:20%;"
+  >
+    Clear
+  </button>
+  {% endif %}
     <hr />
     <table
       class="table table-striped table-bordered dt-responsive nowrap"

@@ -114,7 +114,8 @@ class AutomationController(BaseController):
 
     def get_device_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
-        defaults = [("global", "Global Result"), ("all", "All devices")]
+        defaults = [("global", "Entire runtime payload"), ("all", "All devices"), ("all failed", "All devices that failed"),
+        ("all passed", "All devices that passed"),]
         runtime_key = "parent_runtime" if "job" in kw else "runtime"
         request = {runtime_key: kw.get(f"runtime{comp}")}
         if kw.get(f"job{comp}") not in ("global", "all"):
@@ -132,7 +133,8 @@ class AutomationController(BaseController):
 
     def get_job_list(self, results_type: str, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
-        defaults = [("global", "Global Result"), ("all", "All jobs")]
+        defaults = [("global", "Entire runtime payload"), ("all", "All jobs"), ("all failed", "All jobs that failed"),
+        ("all passed", "All jobs that passed")]
         return defaults + list(
             dict.fromkeys(
                 (run.job_id, run.job.name)
@@ -189,8 +191,12 @@ class AutomationController(BaseController):
 
     def get_service_results(self, id: int, **kw: Any) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
+        runtime = kw.get(f"runtime{comp}")
+        if not runtime:
+            return
+        
         device = kw.get(f"device{comp}")
-        request = {"runtime": kw[f"runtime{comp}"]}
+        request = {"runtime": runtime}
         if device == "all":
             request["all_matches"] = True
             if kw["success_type"] != "all":

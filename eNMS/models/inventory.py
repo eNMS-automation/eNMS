@@ -286,6 +286,7 @@ class Pool(AbstractPool):
     latitude = Column(String(SMALL_STRING_LENGTH), default="0.0")
     longitude = Column(String(SMALL_STRING_LENGTH), default="0.0")
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
+    runs = relationship("Run", secondary=run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)

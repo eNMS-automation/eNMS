@@ -49,6 +49,7 @@ from eNMS.database.associations import (
     job_pool_table,
     job_workflow_table,
     run_device_table,
+    run_pool_table,
 )
 from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device
@@ -93,7 +94,9 @@ class Run(AbstractBase):
     workflow_id = Column(Integer, ForeignKey("Workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
     workflow_name = association_proxy("workflow", "name")
-    targets = relationship("Device", secondary=run_device_table, back_populates="runs")
+    devices = relationship("Device", secondary=run_device_table, back_populates="runs")
+    pools = relationship("Pool", secondary=run_pool_table, back_populates="runs")
+    initial_payload = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     task_id = Column(Integer, ForeignKey("Task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
     results = relationship("Result", back_populates="run")
@@ -231,7 +234,11 @@ class Run(AbstractBase):
     def compute_devices(
         self, payload: Optional[dict] = None, device: Optional["Device"] = None
     ) -> Set["Device"]:
-        if self.job.python_query:
+        if self.devices or self.pools:
+            devices = set(self.devices)
+            for pool in self.pools:
+                devices |= set(pool.devices)
+        elif self.job.python_query:
 
             def get_var(*args: Any, **kwargs: Any) -> Any:
                 return self.payload_helper(payload, *args, **kwargs)
@@ -257,8 +264,8 @@ class Run(AbstractBase):
             devices = set(self.job.devices)
             for pool in self.job.pools:
                 devices |= set(pool.devices)
-            controller.job_db[self.runtime]["number_of_targets"] = len(devices)
-            Session.commit()
+        controller.job_db[self.runtime]["number_of_targets"] = len(devices)
+        Session.commit()
         return devices
 
     def run(
@@ -494,8 +501,8 @@ class Service(Job):
 
     def build_results(self, run: "Run", payload: dict, *other: Any) -> dict:
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
-        targets = run.targets
-        if self.has_targets and not targets:
+
+        if self.has_targets:
             try:
                 targets = run.compute_devices()
             except Exception as exc:
@@ -758,9 +765,7 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            initial_targets = set(
-                run.targets or run.compute_devices(results["results"])
-            )
+            initial_targets = run.compute_devices(results["results"])
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
         while jobs:

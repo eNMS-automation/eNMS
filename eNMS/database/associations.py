@@ -9,6 +9,13 @@ job_device_table: Table = Table(
     Column("job_id", Integer, ForeignKey("Job.id")),
 )
 
+job_pool_table: Table = Table(
+    "job_pool_association",
+    Base.metadata,
+    Column("pool_id", Integer, ForeignKey("Pool.id")),
+    Column("job_id", Integer, ForeignKey("Job.id")),
+)
+
 run_device_table: Table = Table(
     "run_device_association",
     Base.metadata,
@@ -16,11 +23,11 @@ run_device_table: Table = Table(
     Column("run_id", Integer, ForeignKey("Run.id")),
 )
 
-job_pool_table: Table = Table(
-    "job_pool_association",
+run_pool_table: Table = Table(
+    "run_pool_association",
     Base.metadata,
     Column("pool_id", Integer, ForeignKey("Pool.id")),
-    Column("job_id", Integer, ForeignKey("Job.id")),
+    Column("run_id", Integer, ForeignKey("Run.id")),
 )
 
 task_device_table: Table = Table(

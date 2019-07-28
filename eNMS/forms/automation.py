@@ -116,41 +116,33 @@ class ResultsForm(BaseForm):
 class ServiceResultsForm(ResultsForm):
     form_type = HiddenField(default="service_results")
     choices = (
-            ("global", "Entire runtime payload"),
-            ("all", "All devices"),
-            ("all failed", "All devices that failed"),
-            ("all passed", "All devices that passed"),
-            )
-    device = NoValidationSelectField(
-        "Device", choices=choices
+        ("global", "Entire runtime payload"),
+        ("all", "All devices"),
+        ("all failed", "All devices that failed"),
+        ("all passed", "All devices that passed"),
     )
-    device_compare = NoValidationSelectField(
-        "Device", choices=choices
-    )
+    device = NoValidationSelectField("Device", choices=choices)
+    device_compare = NoValidationSelectField("Device", choices=choices)
 
 
 class WorkflowResultsForm(ResultsForm):
     form_type = HiddenField(default="workflow_results")
-    success_type = SelectField(
-        "View",
-        choices=(
-            ("all", "All results"),
-            ("success", "Successful results"),
-            ("failure", "Failed results"),
-        ),
+    device_choices = (
+        ("global", "Entire runtime payload"),
+        ("all", "All devices"),
+        ("all failed", "All devices that failed"),
+        ("all passed", "All devices that passed"),
     )
-    device = NoValidationSelectField(
-        "Device", choices=(("global", "Global Result"), ("all", "All devices"))
+    job_choices = (
+        ("global", "Entire runtime payload"),
+        ("all", "All jobs"),
+        ("all failed", "All jobs that failed"),
+        ("all passed", "All jobs that passed"),
     )
-    device_compare = NoValidationSelectField(
-        "Device", choices=(("global", "Global Result"), ("all", "All devices"))
-    )
-    job = NoValidationSelectField(
-        "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
-    )
-    job_compare = NoValidationSelectField(
-        "Job", choices=(("global", "Global Result"), ("all", "All jobs"))
-    )
+    device = NoValidationSelectField("Device", choices=device_choices)
+    device_compare = NoValidationSelectField("Device", choices=device_choices)
+    job = NoValidationSelectField("Job", choices=job_choices)
+    job_compare = NoValidationSelectField("Job", choices=job_choices)
     payload_query = StringField("Payload Query")
 
 

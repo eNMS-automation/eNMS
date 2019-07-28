@@ -77,10 +77,7 @@ changelog_table_properties: List[str] = ["time", "user", "severity", "content"]
 
 event_table_properties: List[str] = ["name", "log_source", "log_content"]
 
-run_table_properties: List[str] = [
-    "runtime",
-    "job_name",
-]
+run_table_properties: List[str] = ["runtime", "job_name"]
 
 task_table_properties: List[str] = [
     "name",

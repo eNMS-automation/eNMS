@@ -136,7 +136,9 @@ class Run(AbstractBase):
                     except (OSError, ValueError):
                         parent_connection.pop(device.name)
         username, password = self.job.get_credentials(device)
-        driver = device.netmiko_driver if self.job.use_device_driver else self.job.driver
+        driver = (
+            device.netmiko_driver if self.job.use_device_driver else self.job.driver
+        )
         netmiko_connection = ConnectHandler(
             device_type=driver,
             ip=device.ip_address,
@@ -244,14 +246,18 @@ class Run(AbstractBase):
             Session.commit()
         return devices
 
-    def run(self, payload, start_points: Optional[List["Job"]] = None) -> Tuple[dict, str]:
+    def run(
+        self, payload, start_points: Optional[List["Job"]] = None
+    ) -> Tuple[dict, str]:
         self.job.status, self.job.state = "Running", {}
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
             results = self.job.build_results(self, payload, start_points)
             for library in ("netmiko", "napalm"):
-                connections = controller.connections_cache[library].pop(self.runtime, None)
+                connections = controller.connections_cache[library].pop(
+                    self.runtime, None
+                )
                 if not connections:
                     continue
                 for device, conn in connections.items():
@@ -286,7 +292,9 @@ class Run(AbstractBase):
         factory("Result", **result_kw)
 
     def get_results(self, payload: dict, device: Optional["Device"] = None) -> dict:
-        self.log("info", f"Running {self.job.type}{f' on {device.name}' if device else ''}")
+        self.log(
+            "info", f"Running {self.job.type}{f' on {device.name}' if device else ''}"
+        )
         results: Dict[Any, Any] = {"runtime": controller.get_time()}
         try:
             if device:
@@ -326,16 +334,15 @@ class Run(AbstractBase):
                 f"Results: {controller.enms_server_addr}/view_job_results"
                 f"/{self.id}/{self.runtime.replace(' ', '$')}"
             )
-        notification_payload =             {
-                "job": self.job.get_properties(),
-                "results": results,
-                "content": "\n\n".join(notification),
-            }
-        notification_run = factory("Run", **{
-            "job": fetch("Job", name=self.job.send_notification_method).id
-        })
+        notification_payload = {
+            "job": self.job.get_properties(),
+            "results": results,
+            "content": "\n\n".join(notification),
+        }
+        notification_run = factory(
+            "Run", **{"job": fetch("Job", name=self.job.send_notification_method).id}
+        )
         notification_run.run(notification_payload)
-
 
     @property
     def name(self) -> str:
@@ -440,7 +447,9 @@ class Service(Job):
                 notification.append(f"\n\nPASS :\n{passed}")
         return notification
 
-    def device_run(self, run: "Run", payload: dict, targets: Optional[Set["Device"]] = None) -> dict:
+    def device_run(
+        self, run: "Run", payload: dict, targets: Optional[Set["Device"]] = None
+    ) -> dict:
         if not targets:
             return run.get_results(payload)
         else:
@@ -448,7 +457,12 @@ class Service(Job):
                 device_results: dict = {}
                 thread_lock = Lock()
                 processes = min(len(targets), self.max_processes)
-                args = (run.runtime, payload, thread_lock, device_results)  # type: ignore
+                args = (
+                    run.runtime,
+                    payload,
+                    thread_lock,
+                    device_results,
+                )  # type: ignore
                 process_args = [(device.id, *args) for device in targets]
                 pool = ThreadPool(processes=processes)
                 pool.map(device_thread, process_args)
@@ -461,9 +475,7 @@ class Service(Job):
             results = {"devices": device_results}
             return results
 
-    def build_results(
-        self, run: "Run", payload: dict, *other: Any
-    ) -> dict:
+    def build_results(self, run: "Run", payload: dict, *other: Any) -> dict:
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         targets = run.targets
         if self.has_targets and not targets:
@@ -695,7 +707,7 @@ class Workflow(Job):
     def workflow_targets_processing(
         self, allowed_devices: dict, job: Job, results: dict
     ) -> Generator[Job, None, None]:
-        
+
         failed_devices, passed_devices = set(), set()
         if job.type == "Workflow" or job.has_targets:
             if job.type == "Workflow":
@@ -720,10 +732,7 @@ class Workflow(Job):
                 yield successor
 
     def build_results(
-        self,
-        run: "Run",
-        payload: dict,
-        start_points: Optional[List["Job"]] = None,
+        self, run: "Run", payload: dict, start_points: Optional[List["Job"]] = None
     ) -> dict:
         self.state = {"jobs": {}}
         jobs: list = start_points or [self.jobs[0]]
@@ -732,7 +741,9 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if self.use_workflow_targets:
-            initial_targets = set(run.targets or run.compute_devices(results["results"]))
+            initial_targets = set(
+                run.targets or run.compute_devices(results["results"])
+            )
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
         while jobs:
@@ -750,12 +761,15 @@ class Workflow(Job):
                 for base_target in allowed_devices[job.name]:
                     try:
                         derived_targets = run.compute_devices(payload, base_target)
-                        job_run = factory("Run", **{
-                            "job": job.id,
-                            "targets": [t.id for t in derived_targets],
-                            "workflow": self.id,
-                            "parent_runtime": run.parent_runtime,
-                        })
+                        job_run = factory(
+                            "Run",
+                            **{
+                                "job": job.id,
+                                "targets": [t.id for t in derived_targets],
+                                "workflow": self.id,
+                                "parent_runtime": run.parent_runtime,
+                            },
+                        )
                         derived_target_result = job_run.run(payload)
                         device_results[base_target.name] = derived_target_result
                         if not derived_target_result["success"]:
@@ -773,12 +787,15 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     run, job, allowed_devices, payload
                 )
-                job_run = factory("Run", **{
-                    "job": job.id,
-                    "targets": [d.id for d in valid_devices],
-                    "workflow": self.id,
-                    "parent_runtime": run.parent_runtime,
-                })
+                job_run = factory(
+                    "Run",
+                    **{
+                        "job": job.id,
+                        "targets": [d.id for d in valid_devices],
+                        "workflow": self.id,
+                        "parent_runtime": run.parent_runtime,
+                    },
+                )
                 job_results = job_run.run(payload)[0]
             self.state["jobs"][job.id] = job_results["success"]
             if self.use_workflow_targets:

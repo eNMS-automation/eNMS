@@ -17,10 +17,7 @@ def run_job(
     if start_points:
         start_points = [fetch("Job", id=id) for id in start_points]
     payload = payload or job.initial_payload
-    run_args = {
-        "job": job.id,
-        "runtime": runtime,
-    }
+    run_args = {"job": job.id, "runtime": runtime}
     if targets:
         run_args["targets"] = targets
     if task:

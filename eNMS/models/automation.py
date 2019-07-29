@@ -82,6 +82,7 @@ class Run(AbstractBase):
     __tablename__ = type = "Run"
     private = True
     id = Column(Integer, primary_key=True)
+    properties = Column(MutableDict.as_mutable(PickleType), default={})
     success = Column(Boolean, default=False)
     status = Column(String(SMALL_STRING_LENGTH), default="Running")
     runtime = Column(String(SMALL_STRING_LENGTH), default="")
@@ -95,6 +96,9 @@ class Run(AbstractBase):
     task_id = Column(Integer, ForeignKey("Task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
     results = relationship("Result", back_populates="run")
+
+    def __getattr__(self, property: str) -> Any:
+        return self.properties.get(property, super().__getattr__(property))
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or controller.get_time()
@@ -551,7 +555,7 @@ class Service(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{self.id}', '{self.name}')">Run</button>""",
+            onclick="showRunPanel('{self.type}', '{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"

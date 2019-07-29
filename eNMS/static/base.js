@@ -413,10 +413,10 @@ function configureForm(form, id) {
  * Display instance modal for editing.
  * @param {type} type - Type.
  * @param {id} id - Instance ID.
- * @param {duplicate} duplicate - Edit versus duplicate.
+ * @param {mode} mode - Edit, duplicate or run.
  */
 // eslint-disable-next-line
-function showTypePanel(type, id, duplicate) {
+function showTypePanel(type, id, mode) {
   if (type == "Workflow") type = "workflow";
   createPanel(
     type,
@@ -426,11 +426,10 @@ function showTypePanel(type, id, duplicate) {
       if (type == "workflow" || type.includes("Service")) panelCode(type, id);
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {
-          panel.setHeaderTitle(
-            `${duplicate ? "Duplicate" : "Edit"} ${type} - ${instance.name}`
-          );
+          const title = mode == "duplicate" ? "Duplicate" : "Edit";
+          panel.setHeaderTitle(`${title} ${type} - ${instance.name}`);
           processInstance(type, instance);
-          if (type == "workflow" && duplicate) {
+          if (type == "workflow" && mode == "duplicate") {
             $(`#workflow-btn-${id}`).attr(
               "onclick",
               `duplicateWorkflow(${id})`
@@ -451,7 +450,7 @@ function showTypePanel(type, id, duplicate) {
       }
     },
     type,
-    duplicate
+    mode == "duplicate"
   );
 }
 

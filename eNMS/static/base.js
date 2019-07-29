@@ -438,7 +438,7 @@ function showTypePanel(type, id, mode) {
           if (mode == "run") {
             $(`#${type}-btn-${id}`).attr(
               "onclick",
-              `runJob(${id}, '${instance.name}')`
+              `runJob('${type}', ${id}, '${instance.name}')`
             );
           }
         });

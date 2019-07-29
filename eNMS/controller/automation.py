@@ -243,17 +243,19 @@ class AutomationController(BaseController):
         )
         return workflow.name
 
-    def run_job(self, job_id: int, asynchronous: bool = True) -> dict:
-        job = fetch("Job", id=job_id)
+    def run_job(self, **kwargs) -> dict:
+        kwargs.pop("user")
+        job = fetch("Job", name=kwargs["name"])
         if job.status == "Running":
             return {"error": f"{job.type} is already running."}
         runtime = self.get_time()
-        if asynchronous:
+        if kwargs.get("asynchronous", True):
             self.scheduler.add_job(
                 id=self.get_time(),
                 func=run_job,
                 run_date=datetime.now(),
-                args=[job.id, None, None, None, None, runtime],
+                args=[runtime, kwargs.pop("id")], 
+                kwargs=kwargs,
                 trigger="date",
             )
         else:

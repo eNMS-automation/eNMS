@@ -257,13 +257,16 @@ function updateJobList(type, id, updateBoth) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function showLogs(id, name) {
+function showLogs(id, job) {
   if (!$(`#logs-${id}`).length) {
     jsPanel.create({
       theme: "dark filled",
       border: "medium",
-      headerTitle: `Logs - ${name}`,
+      headerTitle: `Logs - ${job.name}`,
       position: "center-top 0 58",
+      callback: function() {
+        refreshLogs(id, job.runtime);
+      },
       contentSize: "1450 600",
       contentOverflow: "hidden scroll",
       content: `<pre id="logs-${id}" style="border: 0;\
@@ -344,11 +347,11 @@ function clearResults(id) {
  * @param {id} id - Job ID.
  */
 // eslint-disable-next-line
-function refreshLogs(id, name, runtime) {
+function refreshLogs(id, runtime) {
   call(`/get_job_logs/${runtime}`, function(logs) {
     if (logs) {
       $(`#logs-${id}`).text(logs);
-      setTimeout(() => refreshLogs(id, name, runtime), 1500);
+      setTimeout(() => refreshLogs(id, runtime), 1500);
     }
   });
 }
@@ -358,11 +361,11 @@ function refreshLogs(id, name, runtime) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function runJob(id, name) {
-  showLogs(id, name);
-  call(`/run_job/${id}`, function(job) {
+function runJob(type, id, name) {
+  fCall(`/run_job`, `#edit-${type}-form-${id}`, function(job) {
+    console.log(job);
+    showLogs(id, job);
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
-    refreshLogs(id, name, job.runtime);
     if (page == "workflow_builder") {
       if (job.type == "Workflow") {
         getWorkflowState(true);

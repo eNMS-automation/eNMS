@@ -34,7 +34,7 @@ from typing import Any, Dict, Generator, List, Match, Optional, Set, Tuple, Unio
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
-from eNMS.concurrency import device_thread
+from eNMS.concurrency import get_device_result
 from eNMS.controller import controller
 from eNMS.database import (
     CustomMediumBlobPickle,
@@ -482,7 +482,7 @@ class Service(Job):
                 )  # type: ignore
                 process_args = [(device.id, *args) for device in targets]
                 pool = ThreadPool(processes=processes)
-                pool.map(device_thread, process_args)
+                pool.map(get_device_result, process_args)
                 pool.close()
                 pool.join()
             else:

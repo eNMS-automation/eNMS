@@ -16,20 +16,6 @@ job_pool_table: Table = Table(
     Column("job_id", Integer, ForeignKey("Job.id")),
 )
 
-run_device_table: Table = Table(
-    "run_device_association",
-    Base.metadata,
-    Column("device_id", Integer, ForeignKey("Device.id")),
-    Column("run_id", Integer, ForeignKey("Run.id")),
-)
-
-run_pool_table: Table = Table(
-    "run_pool_association",
-    Base.metadata,
-    Column("pool_id", Integer, ForeignKey("Pool.id")),
-    Column("run_id", Integer, ForeignKey("Run.id")),
-)
-
 task_device_table: Table = Table(
     "task_device_association",
     Base.metadata,

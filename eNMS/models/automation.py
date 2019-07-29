@@ -48,8 +48,6 @@ from eNMS.database.associations import (
     job_event_table,
     job_pool_table,
     job_workflow_table,
-    run_device_table,
-    run_pool_table,
 )
 from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device

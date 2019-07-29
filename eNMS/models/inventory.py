@@ -18,7 +18,6 @@ from eNMS.database.associations import (
     pool_user_table,
     job_device_table,
     job_pool_table,
-    run_device_table,
     task_device_table,
     task_pool_table,
 )

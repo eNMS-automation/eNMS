@@ -350,7 +350,9 @@ class Run(AbstractBase):
 
     def run_notification(self, results: dict) -> List[str]:
         notification = self["notification_header"].splitlines()
-        if "devices" in results["results"] and not results["success"]:
+        if self.job.type == "Workflow":
+            return notification
+        elif "devices" in results["results"] and not results["success"]:
             failed = "\n".join(
                 device
                 for device, device_results in results["results"]["devices"].items()
@@ -402,38 +404,38 @@ class Run(AbstractBase):
 
     def convert_result(self, result: Any) -> Union[str, dict]:
         try:
-            if self.conversion_method == "json":
+            if self["conversion_method"] == "json":
                 result = loads(result)
-            elif self.conversion_method == "xml":
+            elif self["conversion_method"] == "xml":
                 result = parse(result)
         except (ExpatError, JSONDecodeError) as e:
             result = {
                 "success": False,
                 "text_response": result,
-                "error": f"Conversion to {self.conversion_method} failed",
+                "error": f"Conversion to {self['conversion_method']} failed",
                 "exception": str(e),
             }
         return result
 
     def match_content(self, result: Any, match: Union[str, dict]) -> bool:
-        if getattr(self, "validation_method", "text") == "text":
+        if self.get("validation_method", "text") == "text":
             result = str(result)
             assert isinstance(match, str)
-            if self.delete_spaces_before_matching:
-                match, result = map(self.space_deleter, (match, result))
+            if self["delete_spaces_before_matching"]:
+                match, result = map(self["space_deleter"], (match, result))
             success = (
-                self.content_match_regex
+                self["content_match_regex"]
                 and bool(search(match, result))
                 or match in result
-                and not self.content_match_regex
+                and not self["content_match_regex"]
             )
         else:
             assert isinstance(match, dict)
             success = self.match_dictionary(result, match)
-        return success if not self.negative_logic else not success
+        return success if not self["negative_logic"] else not success
 
     def match_dictionary(self, result: dict, match: dict) -> bool:
-        if self.validation_method == "dict_equal":
+        if self["validation_method"] == "dict_equal":
             return result == self.dict_match
         else:
             match_copy = deepcopy(match)
@@ -447,15 +449,15 @@ class Run(AbstractBase):
     def transfer_file(
         self, ssh_client: SSHClient, files: List[Tuple[str, str]]
     ) -> None:
-        if self.protocol == "sftp":
+        if self["protocol"] == "sftp":
             sftp = ssh_client.open_sftp()
             for source, destination in files:
-                getattr(sftp, self.direction)(source, destination)
+                getattr(sftp, self["direction"])(source, destination)
             sftp.close()
         else:
             with SCPClient(ssh_client.get_transport()) as scp:
                 for source, destination in files:
-                    getattr(scp, self.direction)(source, destination)
+                    getattr(scp, self["direction"])(source, destination)
 
     @property
     def name(self) -> str:
@@ -696,9 +698,6 @@ class Workflow(Job):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    def job_notification(self, results: dict) -> list:
-        return self.notification_header.splitlines()
-
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
@@ -725,7 +724,7 @@ class Workflow(Job):
     ) -> Set[Device]:
         if job.type != "Workflow" and not job.has_targets:
             return set()
-        elif self.use_workflow_targets:
+        elif run["use_workflow_targets"]:
             return allowed_devices[job.name]
         else:
             return run.compute_devices(payload)
@@ -766,7 +765,7 @@ class Workflow(Job):
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
-        if self.use_workflow_targets:
+        if run["use_workflow_targets"]:
             initial_targets = run.compute_devices(results["results"])
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
@@ -780,7 +779,7 @@ class Workflow(Job):
             visited.add(job)
             self.state["current_job"] = job.get_properties()
             Session.commit()
-            if self.use_workflow_targets and job.python_query:
+            if run["use_workflow_targets"] and job.python_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:
@@ -822,7 +821,7 @@ class Workflow(Job):
                 )
                 job_results = job_run.run(payload)[0]
             self.state["jobs"][job.id] = job_results["success"]
-            if self.use_workflow_targets:
+            if run["use_workflow_targets"]:
                 successors = self.workflow_targets_processing(
                     allowed_devices, job, job_results
                 )
@@ -837,10 +836,10 @@ class Workflow(Job):
             for successor in successors:
                 if successor not in visited:
                     jobs.append(successor)
-                if not self.use_workflow_targets and successor == self.jobs[1]:
+                if not run["use_workflow_targets"] and successor == self.jobs[1]:
                     results["success"] = True
             sleep(job.waiting_time)
-        if self.use_workflow_targets:
+        if run["use_workflow_targets"]:
             end_devices = allowed_devices["End"]
             results["devices"] = {
                 device.name: {"success": device in end_devices}

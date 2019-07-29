@@ -96,7 +96,7 @@ class NetmikoPromptsService(Service):
             "expected": match if self.validation_method == "text" else self.dict_match,
             "negative_logic": self.negative_logic,
             "result": result,
-            "success": self.match_content(result, match),
+            "success": run.match_content(result, match),
         }
 
 

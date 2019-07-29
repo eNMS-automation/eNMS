@@ -113,7 +113,7 @@ class RestCallService(Service):
             "headers": dict(response.headers),
             "negative_logic": self.negative_logic,
             "result": result,
-            "success": self.match_content(result, match),
+            "success": run.match_content(result, match),
         }
 
 

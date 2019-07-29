@@ -31,7 +31,7 @@ class UnixCommandService(Service):
         run.log("info", f"Running Unix command ({command}) on {device.name}")
         result = check_output(command.split()).decode()
         return {
-            "success": self.match_content(result, match),
+            "success": run.match_content(result, match),
             "match": match,
             "negative_logic": self.negative_logic,
             "result": result,

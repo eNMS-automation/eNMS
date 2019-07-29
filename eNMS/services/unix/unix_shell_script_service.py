@@ -59,7 +59,7 @@ class UnixShellScriptService(Service):
             "match": match,
             "negative_logic": self.negative_logic,
             "result": f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}",
-            "success": result.ok and self.match_content(result, match),
+            "success": result.ok and run.match_content(result, match),
         }
 
 

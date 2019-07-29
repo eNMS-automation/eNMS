@@ -49,7 +49,7 @@ class DatabaseBackupService(Service):
             look_for_keys=False,
         )
         destination = f"{self.sub(self.destination_path, locals())}/backup_{now}.tgz"
-        self.transfer_file(ssh_client, [(source, destination)])
+        run.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
         if self.delete_folder:
             rmtree(Path.cwd() / "projects" / "migrations" / f"backup_{now}")

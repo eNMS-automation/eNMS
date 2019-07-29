@@ -27,7 +27,7 @@ class PingService(Service):
     __mapper_args__ = {"polymorphic_identity": "PingService"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
-        if self.protocol == "ICMP":
+        if run["protocol"] == "ICMP":
             command = ["ping"]
             for x, property in (
                 ("c", "count"),
@@ -50,7 +50,7 @@ class PingService(Service):
             return {
                 "success": True,
                 "result": {
-                    "probes_sent": self.count,
+                    "probes_sent": run["count"],
                     "packet_loss": loss,
                     "rtt_min": timing[0],
                     "rtt_max": timing[2],
@@ -61,9 +61,9 @@ class PingService(Service):
             }
         else:
             result = {}
-            for port in map(int, self.ports.split(",")):
+            for port in map(int, run["ports"].split(",")):
                 s = socket()
-                s.settimeout(self.timeout)
+                s.settimeout(run["timeout"])
                 try:
                     connection = not s.connect_ex((device.ip_address, port))
                 except (gaierror, timeout, error):

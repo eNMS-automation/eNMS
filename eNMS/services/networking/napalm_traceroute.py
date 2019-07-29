@@ -30,8 +30,8 @@ class NapalmTracerouteService(Service):
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection = run.napalm_connection(device)
-        destination = self.sub(self.destination_ip, locals())
-        source = self.sub(self.source_ip, locals())
+        destination = self.sub(run["destination_ip"], locals())
+        source = self.sub(run["source_ip"], locals())
         run.log(
             "info",
             f"Running napalm traceroute from {source}"
@@ -39,10 +39,10 @@ class NapalmTracerouteService(Service):
         )
         traceroute = napalm_connection.traceroute(
             destination=destination,
-            source=self.source,
-            vrf=self.vrf,
-            ttl=self.ttl or 255,
-            timeout=self.timeout or 2,
+            source=run["source"],
+            vrf=run["vrf"],
+            ttl=run["ttl"] or 255,
+            timeout=run["timeout"] or 2,
         )
         return {"success": "success" in traceroute, "result": traceroute}
 

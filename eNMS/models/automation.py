@@ -575,7 +575,7 @@ class Service(Job):
     def build_results(self, run: "Run", payload: dict, *other: Any) -> dict:
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
 
-        if self.has_targets:
+        if run["has_targets"]:
             try:
                 targets = run.compute_devices()
             except Exception as exc:

@@ -5,9 +5,9 @@ from eNMS.database.functions import factory, fetch
 
 
 def run_job(runtime, job_id, **properties) -> None:
-    run = factory("Run", **{"runtime": runtime, "job": job_id})
+    run = factory("Run", runtime=runtime, job=job_id)
     run.properties = properties
-    run.run(payload)
+    run.run()
 
 
 def get_device_result(args: tuple) -> None:

@@ -262,13 +262,13 @@ class Run(AbstractBase):
         return devices
 
     def run(
-        self, payload, start_points: Optional[List["Job"]] = None
+        self, payload: Optional[dict] = None, start_points: Optional[List["Job"]] = None
     ) -> Tuple[dict, str]:
         self.job.status, self.job.state = "Running", {}
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
-            results = self.job.build_results(self, payload, start_points)
+            results = self.job.build_results(self, payload or self.payload, start_points)
             for library in ("netmiko", "napalm"):
                 connections = controller.connections_cache[library].pop(
                     self.runtime, None

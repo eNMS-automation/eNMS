@@ -42,18 +42,18 @@ class AnsiblePlaybookService(Service):
     __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        arguments = self.sub(self.arguments, locals()).split()
+        arguments = self.sub(run["arguments"], locals()).split()
         command, extra_args = ["ansible-playbook"], {}
-        if self.pass_device_properties:
+        if run["pass_device_properties"]:
             extra_args = device.get_properties()
             extra_args["password"] = device.password
-        if self.options:
-            extra_args.update(self.sub(self.options, locals()))
+        if run["options"]:
+            extra_args.update(self.sub(run["options"], locals()))
         if extra_args:
             command.extend(["-e", dumps(extra_args)])
-        if self.has_targets:
+        if run["has_targets"]:
             command.extend(["-i", device.ip_address + ","])
-        command.append(self.sub(self.playbook_path, locals()))
+        command.append(self.sub(run["playbook_path"], locals()))
         run.log("info", f"Sending Ansible playbook: {' '.join(command + arguments)}")
         result = check_output(command + arguments)
         try:
@@ -62,14 +62,14 @@ class AnsiblePlaybookService(Service):
             pass
         result = run.convert_result(result)
         match = (
-            self.sub(self.content_match, locals())
-            if self.validation_method == "text"
-            else self.sub(self.dict_match, locals())
+            self.sub(run["content_match"], locals())
+            if run["validation_method"] == "text"
+            else self.sub(run["dict_match"], locals())
         )
         return {
             "command": " ".join(command + arguments),
             "match": match,
-            "negative_logic": self.negative_logic,
+            "negative_logic": run["negative_logic"],
             "result": result,
             "success": run.match_content(result, match),
         }

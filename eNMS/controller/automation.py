@@ -127,7 +127,6 @@ class AutomationController(BaseController):
             if kw.get(f"job{comp}") not in ("global", "all"):
                 request["job_id"] = kw.get(f"job{comp}", id)
         runs = fetch("Run", allow_none=True, **request)
-        print(runs)
         if not runs:
             return defaults
         return defaults + list(
@@ -244,7 +243,8 @@ class AutomationController(BaseController):
         return workflow.name
 
     def run_job(self, **kwargs) -> dict:
-        kwargs.pop("user")
+        for property in ("user", "csrf_token", "form_type"):
+            kwargs.pop(property, None)
         job = fetch("Job", name=kwargs["name"])
         if job.status == "Running":
             return {"error": f"{job.type} is already running."}

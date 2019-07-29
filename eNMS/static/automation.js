@@ -363,7 +363,6 @@ function refreshLogs(id, runtime) {
 // eslint-disable-next-line
 function runJob(type, id, name) {
   fCall(`/run_job`, `#edit-${type}-form-${id}`, function(job) {
-    console.log(job);
     showLogs(id, job);
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
     if (page == "workflow_builder") {

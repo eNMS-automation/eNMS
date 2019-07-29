@@ -146,7 +146,7 @@ class Run(AbstractBase):
                 self.parent_runtime
             )
             if parent_connection and device.name in parent_connection:
-                if self.job.start_new_connection:
+                if self.start_new_connection:
                     parent_connection.pop(device.name).disconnect()
                 else:
                     try:
@@ -159,7 +159,7 @@ class Run(AbstractBase):
                         parent_connection.pop(device.name)
         username, password = self.job.get_credentials(device)
         driver = (
-            device.netmiko_driver if self.job.use_device_driver else self.job.driver
+            device.netmiko_driver if self["use_device_driver"] else self.job.driver
         )
         netmiko_connection = ConnectHandler(
             device_type=driver,
@@ -168,11 +168,11 @@ class Run(AbstractBase):
             username=username,
             password=password,
             secret=device.enable_password,
-            fast_cli=self.job.fast_cli,
-            timeout=self.job.timeout,
-            global_delay_factor=self.job.global_delay_factor,
+            fast_cli=self["fast_cli"],
+            timeout=self["timeout"],
+            global_delay_factor=self["global_delay_factor"],
         )
-        if self.job.privileged_mode:
+        if self["privileged_mode"]:
             netmiko_connection.enable()
         if self.workflow:
             controller.connections_cache["netmiko"][self.parent_runtime][
@@ -302,7 +302,7 @@ class Run(AbstractBase):
             results["logs"] = controller.run_logs.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
-            results["properties"] = self.job.to_dict(True)
+            results["properties"] = {"run": self.properties, "service": self.job.to_dict(True)}
             self.create_result(results)
             Session.commit()
         if not self.workflow and self.job.send_notification:
@@ -478,7 +478,7 @@ class Service(Job):
         if not targets:
             return run.get_results(payload)
         else:
-            if self.multiprocessing:
+            if run["multiprocessing"]:
                 device_results: dict = {}
                 thread_lock = Lock()
                 processes = min(len(targets), self.max_processes)

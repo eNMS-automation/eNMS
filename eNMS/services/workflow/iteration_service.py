@@ -34,21 +34,21 @@ class IterationService(Service):
     __mapper_args__ = {"polymorphic_identity": "IterationService"}
 
     def get_properties(self, *args):
-        return {"iterated_job": self.iterated_job.name, **super().get_properties(*args)}
+        return {"iterated_job": run["iterated_job.name"], **super().get_properties(*args)}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        if self.origin_of_values == "user_provided_values":
-            if device.name in self.user_provided_values:
-                values = self.user_provided_values[device.name]
+        if run["origin_of_values"] == "user_provided_values":
+            if device.name in run["user_provided_values"]:
+                values = run["user_provided_values"][device.name]
             else:
-                values = self.user_provided_values["all"]
+                values = run["user_provided_values"]["all"]
         else:
-            values = eval(self.python_query_values, locals())
-        if self.convert_values_to_devices:
+            values = eval(run["python_query_values"], locals())
+        if run["convert_values_to_devices"]:
             fail_results, devices = {}, set()
             for value in values:
                 device = fetch(
-                    "Device", allow_none=True, **{self.conversion_property: value}
+                    "Device", allow_none=True, **{run["conversion_property"]: value}
                 )
                 if not device:
                     fail_results[value] = {
@@ -57,7 +57,7 @@ class IterationService(Service):
                     }
                 else:
                     devices.add(device)
-            results = self.iterated_job.run(
+            results = run["iterated_job"].run(
                 payload=payload, targets=devices, parent=parent or self
             )[0]
             if fail_results:
@@ -67,8 +67,8 @@ class IterationService(Service):
         else:
             results, success = {}, True
             for value in values:
-                result = self.iterated_job.job(
-                    {self.variable_name: value, **payload}, device
+                result = run["iterated_job"].job(
+                    {run["variable_name"]: value, **payload}, device
                 )
                 results[value] = result
                 if not result["success"]:

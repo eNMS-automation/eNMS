@@ -272,13 +272,13 @@ class AutomationController(BaseController):
             job.positions[workflow.name] = (position["x"], position["y"])
         return now
 
-    def calendar_init(self) -> dict:
-        tasks = {}
-        for task in fetch_all("Task"):
+    def calendar_init(self, type) -> dict:
+        results = {}
+        for instance in fetch_all(type):
             # javascript dates range from 0 to 11, we must account for that by
             # substracting 1 to the month for the date to be properly displayed in
             # the calendar
-            date = task.next_run_time
+            date = getattr(instance, "next_run_time" if type == "task" else "runtime")
             if not date:
                 continue
             python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
@@ -291,8 +291,8 @@ class AutomationController(BaseController):
                     date,
                 ).split(",")
             ]
-            tasks[task.name] = {**task.serialized, **{"date": js_date}}
-        return tasks
+            results[instance.name] = {**instance.serialized, **{"date": js_date}}
+        return results
 
     def scheduler_action(self, action: str) -> None:
         getattr(self.scheduler, action)()

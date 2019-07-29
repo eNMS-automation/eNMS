@@ -4,13 +4,13 @@ call: false
 showTypePanel: false
 */
 
-const taskManagement = false; // eslint-disable-line no-unused-vars
+console.log();
 
 $(function() {
   if (typeof $.fn.fullCalendar === "undefined") {
     return;
   }
-  call(`/calendar_init`, function(tasks) {
+  call(`/calendar_init/${calendarType}`, function(tasks) {
     let events = [];
     for (const [name, properties] of Object.entries(tasks)) {
       events.push({

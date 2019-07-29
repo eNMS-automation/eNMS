@@ -17,6 +17,9 @@
   </div>
 </div>
 {% endblock content %} {% block javascripts %} {{ super() }}
+<script>
+  const calendarType = "{{ calendar_type }}";
+</script>
 <script src="{{ url_for('static', filename='lib/full_calendar/fullcalendar.min.js') }}"></script>
 <script src="{{ url_for('static', filename='calendar.js') }}"></script>
 {% endblock javascripts %}

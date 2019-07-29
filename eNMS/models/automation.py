@@ -159,7 +159,7 @@ class Run(AbstractBase):
                         parent_connection.pop(device.name)
         username, password = self.job.get_credentials(device)
         driver = (
-            device.netmiko_driver if self["use_device_driver"] else self.job.driver
+            device.netmiko_driver if self["use_device_driver"] else self["driver"]
         )
         netmiko_connection = ConnectHandler(
             device_type=driver,
@@ -200,7 +200,7 @@ class Run(AbstractBase):
         if "secret" not in optional_args:
             optional_args["secret"] = device.enable_password
         driver = get_network_driver(
-            device.napalm_driver if self.job.use_device_driver else self.job.driver
+            device.napalm_driver if self["use_device_driver"] else self["driver"]
         )
         napalm_connection = driver(
             hostname=device.ip_address,
@@ -217,12 +217,13 @@ class Run(AbstractBase):
 
     def payload_helper(
         self,
+        payload: dict,
         name: str,
         value: Optional[Any] = None,
         section: Optional[str] = None,
         device: Optional[str] = None,
     ) -> Any:
-        payload = run.payload.setdefault("variables", {})
+        payload = payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})
@@ -305,7 +306,7 @@ class Run(AbstractBase):
             results["properties"] = {"run": self.properties, "service": self.job.to_dict(True)}
             self.create_result(results)
             Session.commit()
-        if not self.workflow and self.job.send_notification:
+        if not self.workflow and self["send_notification"]:
             self.notify(results)
         return results, self.runtime
 
@@ -347,14 +348,32 @@ class Run(AbstractBase):
         if self.workflow:
             controller.run_logs[self.parent_runtime].append(log)
 
+    def run_notification(self, results: dict) -> List[str]:
+        notification = self["notification_header"].splitlines()
+        if "devices" in results["results"] and not results["success"]:
+            failed = "\n".join(
+                device
+                for device, device_results in results["results"]["devices"].items()
+                if not device_results["success"]
+            )
+            notification.append(f"FAILED :\n{failed}")
+            if not self.display_only_failed_nodes:
+                passed = "\n".join(
+                    device
+                    for device, device_results in results["results"]["devices"].items()
+                    if device_results["success"]
+                )
+                notification.append(f"\n\nPASS :\n{passed}")
+        return notification
+
     def notify(self, results: dict) -> None:
         notification = [
             f"Job: {self.job.name} ({self.job.type})",
             f"Runtime: {self.runtime}",
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]
-        notification.extend(self.job.job_notification(results))
-        if self.job.include_link_in_summary:
+        notification.extend(self.run_notification(results))
+        if self["include_link_in_summary"]:
             notification.append(
                 f"Results: {controller.enms_server_addr}/view_job_results"
                 f"/{self.id}/{self.runtime.replace(' ', '$')}"
@@ -365,7 +384,7 @@ class Run(AbstractBase):
             "content": "\n\n".join(notification),
         }
         notification_run = factory(
-            "Run", **{"job": fetch("Job", name=self.job.send_notification_method).id}
+            "Run", **{"job": fetch("Job", name=self["send_notification_method"]).id}
         )
         notification_run.run(notification_payload)
 
@@ -453,24 +472,6 @@ class Service(Job):
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
-
-    def job_notification(self, results: dict) -> List[str]:
-        notification = self.notification_header.splitlines()
-        if "devices" in results["results"] and not results["success"]:
-            failed = "\n".join(
-                device
-                for device, device_results in results["results"]["devices"].items()
-                if not device_results["success"]
-            )
-            notification.append(f"FAILED :\n{failed}")
-            if not self.display_only_failed_nodes:
-                passed = "\n".join(
-                    device
-                    for device, device_results in results["results"]["devices"].items()
-                    if device_results["success"]
-                )
-                notification.append(f"\n\nPASS :\n{passed}")
-        return notification
 
     def device_run(
         self, run: "Run", payload: dict, targets: Optional[Set["Device"]] = None

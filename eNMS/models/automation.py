@@ -157,7 +157,7 @@ class Run(AbstractBase):
                         return connection
                     except (OSError, ValueError):
                         parent_connection.pop(device.name)
-        username, password = self.job.get_credentials(device)
+        username, password = self.get_credentials(device)
         driver = (
             device.netmiko_driver if self["use_device_driver"] else self["driver"]
         )
@@ -193,7 +193,7 @@ class Run(AbstractBase):
                     parent_connection.pop(device.name).close()
                 else:
                     return parent_connection[device.name]
-        username, password = self.job.get_credentials(device)
+        username, password = self.get_credentials(device)
         optional_args = self.job.optional_args
         if not optional_args:
             optional_args = {}
@@ -357,7 +357,7 @@ class Run(AbstractBase):
                 if not device_results["success"]
             )
             notification.append(f"FAILED :\n{failed}")
-            if not self.display_only_failed_nodes:
+            if not self["display_only_failed_nodes"]:
                 passed = "\n".join(
                     device
                     for device, device_results in results["results"]["devices"].items()
@@ -387,6 +387,75 @@ class Run(AbstractBase):
             "Run", **{"job": fetch("Job", name=self["send_notification_method"]).id}
         )
         notification_run.run(notification_payload)
+
+    def get_credentials(self, device: "Device") -> Tuple[str, str]:
+        return (
+            controller.get_user_credentials()
+            if self["credentials"] == "user"
+            else (device.username, device.password)
+            if self["credentials"] == "device"
+            else (
+                self.sub(self.job.custom_username, locals()),
+                self.sub(self.job.custom_password, locals()),
+            )
+        )
+
+    def convert_result(self, result: Any) -> Union[str, dict]:
+        try:
+            if self.conversion_method == "json":
+                result = loads(result)
+            elif self.conversion_method == "xml":
+                result = parse(result)
+        except (ExpatError, JSONDecodeError) as e:
+            result = {
+                "success": False,
+                "text_response": result,
+                "error": f"Conversion to {self.conversion_method} failed",
+                "exception": str(e),
+            }
+        return result
+
+    def match_content(self, result: Any, match: Union[str, dict]) -> bool:
+        if getattr(self, "validation_method", "text") == "text":
+            result = str(result)
+            assert isinstance(match, str)
+            if self.delete_spaces_before_matching:
+                match, result = map(self.space_deleter, (match, result))
+            success = (
+                self.content_match_regex
+                and bool(search(match, result))
+                or match in result
+                and not self.content_match_regex
+            )
+        else:
+            assert isinstance(match, dict)
+            success = self.match_dictionary(result, match)
+        return success if not self.negative_logic else not success
+
+    def match_dictionary(self, result: dict, match: dict) -> bool:
+        if self.validation_method == "dict_equal":
+            return result == self.dict_match
+        else:
+            match_copy = deepcopy(match)
+            for k, v in result.items():
+                if isinstance(v, dict):
+                    return self.match_dictionary(v, match_copy)
+                elif k in match_copy and match_copy[k] == v:
+                    match_copy.pop(k)
+            return not match_copy
+
+    def transfer_file(
+        self, ssh_client: SSHClient, files: List[Tuple[str, str]]
+    ) -> None:
+        if self.protocol == "sftp":
+            sftp = ssh_client.open_sftp()
+            for source, destination in files:
+                getattr(sftp, self.direction)(source, destination)
+            sftp.close()
+        else:
+            with SCPClient(ssh_client.get_transport()) as scp:
+                for source, destination in files:
+                    getattr(scp, self.direction)(source, destination)
 
     @property
     def name(self) -> str:
@@ -482,7 +551,7 @@ class Service(Job):
             if run["multiprocessing"]:
                 device_results: dict = {}
                 thread_lock = Lock()
-                processes = min(len(targets), self.max_processes)
+                processes = min(len(targets), run["max_processes"])
                 args = (
                     run.runtime,
                     payload,
@@ -511,7 +580,7 @@ class Service(Job):
                 return {"success": False, "error": str(exc)}
         if targets:
             results["results"]["devices"] = {}
-        for i in range(self.number_of_retries + 1):
+        for i in range(run["number_of_retries"] + 1):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             controller.job_db[run.runtime]["completed"] = 0
             controller.job_db[run.runtime]["failed"] = 0
@@ -532,24 +601,24 @@ class Service(Job):
                     results["success"] = True
                     break
                 else:
-                    if self.number_of_retries:
+                    if run["number_of_retries"]:
                         results[f"Attempt {i + 1}"] = attempt
-                    if i != self.number_of_retries:
-                        sleep(self.time_between_retries)
+                    if i != run["number_of_retries"]:
+                        sleep(run["time_between_retries"])
                     else:
                         for device in targets:
                             results["results"]["devices"][device.name] = attempt[
                                 "devices"
                             ][device.name]
             else:
-                if self.number_of_retries:
+                if run["number_of_retries"]:
                     results[f"Attempts {i + 1}"] = attempt
-                if attempt["success"] or i == self.number_of_retries:
+                if attempt["success"] or i == run["number_of_retries"]:
                     results["results"] = attempt
                     results["success"] = attempt["success"]
                     break
                 else:
-                    sleep(self.time_between_retries)
+                    sleep(run["time_between_retries"])
         return results
 
     def generate_row(self, table: str) -> List[str]:
@@ -572,52 +641,8 @@ class Service(Job):
             Delete</button>""",
         ]
 
-    def get_credentials(self, device: "Device") -> Tuple[str, str]:
-        return (
-            controller.get_user_credentials()
-            if self.credentials == "user"
-            else (device.username, device.password)
-            if self.credentials == "device"
-            else (
-                self.sub(self.custom_username, locals()),
-                self.sub(self.custom_password, locals()),
-            )
-        )
-
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())
-
-    def convert_result(self, result: Any) -> Union[str, dict]:
-        try:
-            if self.conversion_method == "json":
-                result = loads(result)
-            elif self.conversion_method == "xml":
-                result = parse(result)
-        except (ExpatError, JSONDecodeError) as e:
-            result = {
-                "success": False,
-                "text_response": result,
-                "error": f"Conversion to {self.conversion_method} failed",
-                "exception": str(e),
-            }
-        return result
-
-    def match_content(self, result: Any, match: Union[str, dict]) -> bool:
-        if getattr(self, "validation_method", "text") == "text":
-            result = str(result)
-            assert isinstance(match, str)
-            if self.delete_spaces_before_matching:
-                match, result = map(self.space_deleter, (match, result))
-            success = (
-                self.content_match_regex
-                and bool(search(match, result))
-                or match in result
-                and not self.content_match_regex
-            )
-        else:
-            assert isinstance(match, dict)
-            success = self.match_dictionary(result, match)
-        return success if not self.negative_logic else not success
 
     def sub(self, input: Any, variables: dict) -> dict:
         r = compile("{{(.*?)}}")
@@ -648,31 +673,6 @@ class Service(Job):
                 return input
 
         return rec(input)
-
-    def match_dictionary(self, result: dict, match: dict) -> bool:
-        if self.validation_method == "dict_equal":
-            return result == self.dict_match
-        else:
-            match_copy = deepcopy(match)
-            for k, v in result.items():
-                if isinstance(v, dict):
-                    return self.match_dictionary(v, match_copy)
-                elif k in match_copy and match_copy[k] == v:
-                    match_copy.pop(k)
-            return not match_copy
-
-    def transfer_file(
-        self, ssh_client: SSHClient, files: List[Tuple[str, str]]
-    ) -> None:
-        if self.protocol == "sftp":
-            sftp = ssh_client.open_sftp()
-            for source, destination in files:
-                getattr(sftp, self.direction)(source, destination)
-            sftp.close()
-        else:
-            with SCPClient(ssh_client.get_transport()) as scp:
-                for source, destination in files:
-                    getattr(scp, self.direction)(source, destination)
 
 
 class Workflow(Job):

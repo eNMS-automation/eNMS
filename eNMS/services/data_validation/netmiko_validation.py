@@ -48,7 +48,7 @@ class NetmikoValidationService(Service):
         command = self.sub(self.command, locals())
         run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")
         expect_string = self.sub(self.expect_string, locals())
-        result = self.convert_result(
+        result = run.convert_result(
             netmiko_connection.send_command(
                 command,
                 delay_factor=self.delay_factor,

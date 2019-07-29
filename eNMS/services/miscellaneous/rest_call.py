@@ -100,7 +100,7 @@ class RestCallService(Service):
             if response.status_code == 401:
                 result["error"] = "Wrong credentials supplied."
             return result
-        result = self.convert_result(response.text)
+        result = run.convert_result(response.text)
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"

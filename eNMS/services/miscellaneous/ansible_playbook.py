@@ -60,7 +60,7 @@ class AnsiblePlaybookService(Service):
             result = result.decode("utf-8")
         except AttributeError:
             pass
-        result = self.convert_result(result)
+        result = run.convert_result(result)
         match = (
             self.sub(self.content_match, locals())
             if self.validation_method == "text"

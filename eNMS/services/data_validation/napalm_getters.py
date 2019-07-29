@@ -30,21 +30,21 @@ class NapalmGettersService(Service):
         napalm_connection, result = run.napalm_connection(device), {}
         run.log(
             "info",
-            f"Fetching NAPALM getters ({', '.join(self.getters)}) on {device.name}",
+            f"Fetching NAPALM getters ({', '.join(run['getters'])}) on {device.name}",
         )
-        for getter in self.getters:
+        for getter in run["getters"]:
             try:
                 result[getter] = getattr(napalm_connection, getter)()
             except Exception as e:
                 result[getter] = f"{getter} failed because of {e}"
         match = (
-            self.sub(self.content_match, locals())
-            if self.validation_method == "text"
-            else self.sub(self.dict_match, locals())
+            self.sub(run["content_match"], locals())
+            if run["validation_method"] == "text"
+            else self.sub(run["dict_match"], locals())
         )
         return {
             "match": match,
-            "negative_logic": self.negative_logic,
+            "negative_logic": run["negative_logic,
             "result": result,
             "success": run.match_content(result, match),
         }

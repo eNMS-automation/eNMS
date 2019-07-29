@@ -45,28 +45,28 @@ class NetmikoValidationService(Service):
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
-        command = self.sub(self.command, locals())
+        command = self.sub(run["command"], locals())
         run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")
-        expect_string = self.sub(self.expect_string, locals())
+        expect_string = self.sub(run["expect_string"], locals())
         result = run.convert_result(
             netmiko_connection.send_command(
                 command,
-                delay_factor=self.delay_factor,
-                expect_string=self.expect_string or None,
-                auto_find_prompt=self.auto_find_prompt,
-                strip_prompt=self.strip_prompt,
-                strip_command=self.strip_command,
+                delay_factor=run["delay_factor"],
+                expect_string=run["expect_string"] or None,
+                auto_find_prompt=run["auto_find_prompt"],
+                strip_prompt=run["strip_prompt"],
+                strip_command=run["strip_command"],
             )
         )
         match = (
-            self.sub(self.content_match, locals())
-            if self.validation_method == "text"
-            else self.sub(self.dict_match, locals())
+            self.sub(run["content_match"], locals())
+            if run["validation_method"] == "text"
+            else self.sub(run["dict_match"], locals())
         )
         return {
             "command": command,
             "match": match,
-            "negative_logic": self.negative_logic,
+            "negative_logic": run["negative_logic"],
             "result": result,
             "success": run.match_content(result, match),
         }

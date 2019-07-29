@@ -42,7 +42,7 @@ from eNMS.database import (
     Session,
     SMALL_STRING_LENGTH,
 )
-from eNMS.database.functions import factory, fetch
+from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.associations import (
     job_device_table,
     job_event_table,
@@ -105,6 +105,14 @@ class Run(AbstractBase):
 
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name})"
+
+    def __getitem__(self, key):
+        if key in self.properties:
+            return convert_value(self.job.type, key, self.properties[key], "id")
+        elif hasattr(self.job, key):
+            return getattr(self.job, key)
+        else:
+            raise AttributeError
 
     def generate_row(self, table: str) -> List[str]:
         return [
@@ -230,7 +238,7 @@ class Run(AbstractBase):
     def compute_devices(
         self, payload: Optional[dict] = None, device: Optional["Device"] = None
     ) -> Set["Device"]:
-        print(self.properties)
+
         if self.job.python_query:
 
             def get_var(*args: Any, **kwargs: Any) -> Any:
@@ -254,8 +262,8 @@ class Run(AbstractBase):
             if not_found:
                 raise Exception(f"Python query invalid targets: {', '.join(not_found)}")
         else:
-            devices = set(self.job.devices)
-            for pool in self.job.pools:
+            devices = set(self["devices"])
+            for pool in self["pools"]:
                 devices |= set(pool.devices)
         controller.job_db[self.runtime]["number_of_targets"] = len(devices)
         Session.commit()
@@ -268,7 +276,7 @@ class Run(AbstractBase):
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
-            results = self.job.build_results(self, payload or self.payload, start_points)
+            results = self.job.build_results(self, self["initial_payload"], start_points)
             for library in ("netmiko", "napalm"):
                 connections = controller.connections_cache[library].pop(
                     self.runtime, None

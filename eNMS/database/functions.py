@@ -6,7 +6,7 @@ from sqlalchemy import func
 from typing import Any, Generator, List, Tuple
 
 from eNMS.database import Session, session_factory
-from eNMS.models import models
+from eNMS.models import models, relationships
 
 
 def fetch(
@@ -38,6 +38,16 @@ def count(model: str, **kwargs: Any) -> Tuple[Any]:
 
 def objectify(model: str, object_list: List[int]) -> List[Any]:
     return [fetch(model, id=object_id) for object_id in object_list]
+
+
+def convert_value(model: str, attr: str, value: str, value_type: str) -> dict:
+    relation = relationships[model].get(attr)
+    if not relation:
+        return value
+    if relation["list"]:
+        return [fetch(relation["model"], **{value_type: v}) for v in value]
+    else:
+        return fetch(relation["model"], **{value_type: value})
 
 
 def delete(model: str, **kwargs: Any) -> dict:

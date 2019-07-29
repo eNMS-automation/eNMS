@@ -436,10 +436,11 @@ function showTypePanel(type, id, mode) {
             );
           }
           if (mode == "run") {
-            $(`#${type}-btn-${id}`).attr(
-              "onclick",
-              `runJob('${type}', ${id}, '${instance.name}')`
-            );
+            $(`#${type}-btn-${id}`)
+              .removeClass("btn-success")
+              .addClass("btn-primary")
+              .attr("onclick", `runJob('${type}', ${id}, '${instance.name}')`)
+              .text('Run');
           }
         });
       } else {

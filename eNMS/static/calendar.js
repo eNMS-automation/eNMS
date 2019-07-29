@@ -29,7 +29,11 @@ $(function() {
       selectable: true,
       selectHelper: true,
       eventClick: function(calEvent, jsEvent, view) {
-        showTypePanel("task", calEvent.id);
+        if (calendarType == "task") {
+          showTypePanel("task", calEvent.id);
+        } else {
+          showResultsPanel(calEvent.id, calEvent.title, 'run');
+        }
       },
       editable: true,
       events: events,

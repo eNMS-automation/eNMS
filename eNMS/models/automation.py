@@ -577,14 +577,12 @@ class Service(Job):
 
     def build_results(self, run: "Run", payload: dict, *other: Any) -> dict:
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
-
         if run["has_targets"]:
             try:
                 targets = run.compute_devices()
+                results["results"]["devices"] = {}
             except Exception as exc:
-                return {"success": False, "error": str(exc)}
-        if targets:
-            results["results"]["devices"] = {}
+                return {"success": False, "error": str(exc)}   
         for i in range(run["number_of_retries"] + 1):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             controller.job_db[run.runtime]["completed"] = 0
@@ -707,7 +705,7 @@ class Workflow(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="runJob('{self.id}', '{self.name}')">Run</button>""",
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('workflow', '{self.id}')">
             Edit</button>""",

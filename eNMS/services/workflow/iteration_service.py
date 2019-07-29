@@ -35,7 +35,7 @@ class IterationService(Service):
 
     def get_properties(self, *args):
         return {
-            "iterated_job": run["iterated_job.name"],
+            "iterated_job": self.iterated_job.name,
             **super().get_properties(*args),
         }
 

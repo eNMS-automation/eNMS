@@ -36,13 +36,13 @@ class UnixShellScriptService(Service):
             user=username,
             connect_kwargs={"password": password},
         )
-        source_code = self.sub(self.source_code, locals())
-        match = self.sub(self.content_match, locals())
+        source_code = self.sub(run["source_code"], locals())
+        match = self.sub(run["content_match"], locals())
         run.log("info", f"Running Unix Shell Script {self.name} on {device.name}")
         script_file_name = "unix_shell_script_service.sh"
-        with StringIO(self.source_code) as script_file:
+        with StringIO(run["source_code"]) as script_file:
             fabric_connection.put(script_file, script_file_name)
-            if self.privileged_mode:
+            if run["privileged_mode"]:
                 if not device.enable_password:
                     raise Exception(
                         f"Service {self.name} requested privileged mode on device "
@@ -57,7 +57,7 @@ class UnixShellScriptService(Service):
 
         return {
             "match": match,
-            "negative_logic": self.negative_logic,
+            "negative_logic": run["negative_logic"],
             "result": f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}",
             "success": result.ok and run.match_content(result, match),
         }

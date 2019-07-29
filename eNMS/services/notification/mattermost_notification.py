@@ -25,12 +25,12 @@ class MattermostNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        channel = self.sub(self.channel, locals()) or controller.mattermost_channel
+        channel = self.sub(run["channel"], locals()) or controller.mattermost_channel
         run.log("info", f"Sending Mattermost notification on {channel}")
         result = post(
             controller.mattermost_url,
             verify=controller.mattermost_verify_certificate,
-            data=dumps({"channel": channel, "text": self.sub(self.body, locals())}),
+            data=dumps({"channel": channel, "text": self.sub(run["body"], locals())}),
         )
         return {"success": True, "result": str(result)}
 

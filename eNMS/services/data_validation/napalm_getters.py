@@ -44,7 +44,7 @@ class NapalmGettersService(Service):
         )
         return {
             "match": match,
-            "negative_logic": run["negative_logic,
+            "negative_logic": run["negative_logic"],
             "result": result,
             "success": run.match_content(result, match),
         }

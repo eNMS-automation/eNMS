@@ -173,7 +173,7 @@ class AutomationController(BaseController):
 
     def get_run_results(self, id: int, device, **kw) -> Optional[dict]:
         run = fetch("Run", allow_none=True, id=id)
-        return self.get_service_results(run.job.id, run.runtime, device, None) 
+        return self.get_service_results(run.job.id, run.runtime, device, None)
 
     def get_device_results(self, id: int, runtime, **_) -> Optional[dict]:
         run = fetch("Run", allow_none=True, runtime=runtime)
@@ -254,7 +254,7 @@ class AutomationController(BaseController):
                 id=self.get_time(),
                 func=run_job,
                 run_date=datetime.now(),
-                args=[runtime, kwargs.pop("id")], 
+                args=[runtime, kwargs.pop("id")],
                 kwargs=kwargs,
                 trigger="date",
             )

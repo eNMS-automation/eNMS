@@ -158,9 +158,7 @@ class Run(AbstractBase):
                     except (OSError, ValueError):
                         parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
-        driver = (
-            device.netmiko_driver if self["use_device_driver"] else self["driver"]
-        )
+        driver = device.netmiko_driver if self["use_device_driver"] else self["driver"]
         netmiko_connection = ConnectHandler(
             device_type=driver,
             ip=device.ip_address,
@@ -277,7 +275,9 @@ class Run(AbstractBase):
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
-            results = self.job.build_results(self, self["initial_payload"], start_points)
+            results = self.job.build_results(
+                self, self["initial_payload"], start_points
+            )
             for library in ("netmiko", "napalm"):
                 connections = controller.connections_cache[library].pop(
                     self.runtime, None
@@ -303,7 +303,10 @@ class Run(AbstractBase):
             results["logs"] = controller.run_logs.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
-            results["properties"] = {"run": self.properties, "service": self.job.to_dict(True)}
+            results["properties"] = {
+                "run": self.properties,
+                "service": self.job.to_dict(True),
+            }
             self.create_result(results)
             Session.commit()
         if not self.workflow and self["send_notification"]:

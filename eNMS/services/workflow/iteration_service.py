@@ -34,7 +34,10 @@ class IterationService(Service):
     __mapper_args__ = {"polymorphic_identity": "IterationService"}
 
     def get_properties(self, *args):
-        return {"iterated_job": run["iterated_job.name"], **super().get_properties(*args)}
+        return {
+            "iterated_job": run["iterated_job.name"],
+            **super().get_properties(*args),
+        }
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         if run["origin_of_values"] == "user_provided_values":

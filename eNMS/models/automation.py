@@ -97,9 +97,6 @@ class Run(AbstractBase):
     task = relationship("Task", foreign_keys="Run.task_id")
     results = relationship("Result", back_populates="run")
 
-    def __getattr__(self, property: str) -> Any:
-        return self.properties.get(property, super().__getattr__(property))
-
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or controller.get_time()
         if not kwargs.get("parent_runtime"):
@@ -233,11 +230,8 @@ class Run(AbstractBase):
     def compute_devices(
         self, payload: Optional[dict] = None, device: Optional["Device"] = None
     ) -> Set["Device"]:
-        if self.devices or self.pools:
-            devices = set(self.devices)
-            for pool in self.pools:
-                devices |= set(pool.devices)
-        elif self.job.python_query:
+        print(self.properties)
+        if self.job.python_query:
 
             def get_var(*args: Any, **kwargs: Any) -> Any:
                 return self.payload_helper(payload, *args, **kwargs)
@@ -555,11 +549,11 @@ class Service(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showRunPanel('{self.type}', '{self.id}')">Run</button>""",
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', true)">
+            onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="exportJob('{self.id}')">
@@ -707,7 +701,7 @@ class Workflow(Job):
             onclick="showTypePanel('workflow', '{self.id}')">
             Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('workflow', '{self.id}', true)">
+            onclick="showTypePanel('workflow', '{self.id}', 'duplicate')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="exportJob('{self.id}')">

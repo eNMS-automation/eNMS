@@ -130,7 +130,7 @@ class Device(CustomDevice):
                 f"""<button type="button" class="btn btn-primary btn-xs"
                 onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
                 f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypePanel('device', '{self.id}', true)">
+                onclick="showTypePanel('device', '{self.id}', 'duplicate')">
                 Duplicate</button>""",
                 f"""<button type="button" class="btn btn-danger btn-xs"
                 onclick="showDeletionPanel('device', '{self.id}', '{self.name}')">
@@ -226,7 +226,7 @@ class Link(Object):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('link', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('link', '{self.id}', true)">Duplicate
+            onclick="showTypePanel('link', '{self.id}', 'duplicate')">Duplicate
             </button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="showDeletionPanel('link', '{self.id}'), '{self.name}'">
@@ -303,7 +303,7 @@ class Pool(AbstractPool):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="updatePools('{self.id}')">Update</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('pool', '{self.id}', true)">
+            onclick="showTypePanel('pool', '{self.id}', 'duplicate')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showPoolObjectsPanel('{self.id}')">Edit objects</button>""",

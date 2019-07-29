@@ -74,7 +74,7 @@ class Task(AbstractBase):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('task', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('task', '{self.id}', true)">
+            onclick="showTypePanel('task', '{self.id}', 'duplicate')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="showDeletionPanel('task', '{self.id}', '{self.name}')">

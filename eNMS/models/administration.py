@@ -26,7 +26,7 @@ class Server(AbstractBase):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('server', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('server', '{self.id}', true)">
+            onclick="showTypePanel('server', '{self.id}', 'duplicate')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="showDeletionPanel('server', '{self.id}', '{self.name}')">
@@ -88,7 +88,7 @@ class User(AbstractBase, UserMixin):
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('user', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('user', '{self.id}', true)">
+            onclick="showTypePanel('user', '{self.id}', 'duplicate')">
             Duplicate</button>""",
             f"""<button type="button" class="btn btn-danger btn-xs"
             onclick="showDeletionPanel('user', '{self.id}', '{self.name}')">

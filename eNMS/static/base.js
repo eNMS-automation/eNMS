@@ -435,6 +435,12 @@ function showTypePanel(type, id, mode) {
               `duplicateWorkflow(${id})`
             );
           }
+          if (mode == "run") {
+            $(`#${type}-btn-${id}`).attr(
+              "onclick",
+              `runJob(${id}, '${instance.name}')`
+            );
+          }
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);

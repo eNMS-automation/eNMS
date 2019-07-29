@@ -354,17 +354,6 @@ function refreshLogs(id, name, runtime) {
 }
 
 /**
- * Show Run Panel.
- * @param {id} id - Job id.
- * @param {name} name - Job name.
- */
-// eslint-disable-next-line
-function runJob(type, id) {
-  showTypePanel(type, id);
-  
-}
-
-/**
  * Run job.
  * @param {id} id - Job id.
  */

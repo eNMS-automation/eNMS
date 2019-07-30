@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
+from itertools import chain
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import attrgetter
@@ -127,7 +128,8 @@ class AutomationController(BaseController):
             request = {runtime_key: kw.get(f"runtime{comp}", id)}
             if kw.get(f"job{comp}") not in ("global", "all"):
                 request["job_id"] = kw.get(f"job{comp}", id)
-        runs = fetch("Run", allow_none=True, **request)
+        runs = fetch("Run", allow_none=True, all_matches=True, **request)
+        results = chain.from_iterable(r.results for r in runs)
         if not runs:
             return defaults
         return {
@@ -135,7 +137,7 @@ class AutomationController(BaseController):
                 defaults + list(
                     set(
                         (result.device_id, result.device_name)
-                        for result in runs.results
+                        for result in results
                         if result.device_id
                     )
                 )
@@ -143,9 +145,9 @@ class AutomationController(BaseController):
             "workflow_devices": (
                 defaults + list(
                     set(
-                        (result.device_id, result.device_name)
-                        for result in runs.results
-                        if result.device_id
+                        (run.workflow_device_id, run.workflow_device.name)
+                        for run in runs
+                        if run.workflow_device_id
                     )
                 )
             ),

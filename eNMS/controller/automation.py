@@ -15,6 +15,7 @@ from eNMS.concurrency import run_job
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
+from eNMS.models import models
 
 
 class AutomationController(BaseController):
@@ -129,30 +130,26 @@ class AutomationController(BaseController):
         runs = fetch("Run", allow_none=True, **request)
         if not runs:
             return defaults
-        return defaults + list(
-            set(
-                (result.device_id, result.device_name)
-                for result in runs.results
-                if result.device_id
-            )
-        )
-
-    def get_workflow_device_list(self, id: int, **kw: Any) -> list:
-        comp = "_compare" if kw["compare"] else ""
-        request = {
-            "parent_runtime": kw.get(f"runtime{comp}"),
-            "job_id": f"job{comp}",
+        return {
+            "devices": (
+                defaults + list(
+                    set(
+                        (result.device_id, result.device_name)
+                        for result in runs.results
+                        if result.device_id
+                    )
+                )
+            ),
+            "workflow_devices": (
+                defaults + list(
+                    set(
+                        (result.device_id, result.device_name)
+                        for result in runs.results
+                        if result.device_id
+                    )
+                )
+            ),
         }
-        runs = fetch("Run", allow_none=True, **request)
-        if not runs:
-            return defaults
-        return defaults + list(
-            set(
-                (result.device_id, result.device_name)
-                for result in runs.results
-                if result.device_id
-            )
-        )
 
     def get_job_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""

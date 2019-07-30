@@ -10,7 +10,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-30 18:06:28.132426'
+  last_modified: '2019-07-30 22:38:14.579347'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1853,7 +1853,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-30 18:06:28.428026'
+  last_modified: '2019-07-30 22:38:14.878322'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1895,7 +1895,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-30 18:07:15.291436'
+  last_modified: '2019-07-30 22:38:15.227655'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1948,7 +1948,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-24 20:20:10.939890'
+  last_modified: '2019-07-30 22:38:18.872041'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1964,7 +1964,7 @@
     - '-247'
   privileged_mode: false
   push_to_git: false
-  python_query: get_var("iteration_device", section="pools", device=device.name)
+  python_query: get_var("iteration_device", section="pools", device=workflow_device.name)
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2003,7 +2003,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-24 20:10:45.224125'
+  last_modified: '2019-07-30 22:38:19.321270'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false

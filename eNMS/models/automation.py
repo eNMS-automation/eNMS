@@ -219,7 +219,7 @@ class Run(AbstractBase):
         payload: dict,
         name: str,
         value: Optional[Any] = None,
-        service = Optional[str] = None,
+        service: Optional[str] = None,
         section: Optional[str] = None,
         device: Optional[str] = None,
     ) -> Any:

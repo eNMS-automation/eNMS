@@ -36,10 +36,7 @@ class PythonSnippetService(Service):
                 raise TerminateException()
 
         def get_set_var(*args, **kwargs):
-            return self.payload_helper(payload, *args, **kwargs)
-
-        def log(*args):
-            run.log(*args)
+            return run.payload_helper(payload, *args, **kwargs)
 
         globals = {
             "__builtins__": __builtins__,
@@ -47,8 +44,8 @@ class PythonSnippetService(Service):
             "payload": payload,
             "_code_result_": _code_result_,
             "get_var": get_set_var,
-            "log": log,
-            "parent": parent,
+            "log": run.log,
+            "parent": run.workflow,
             "save_result": save_result,
             "set_var": get_set_var,
         }

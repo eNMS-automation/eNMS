@@ -260,16 +260,17 @@ function updateJobList(type, id, updateBoth) {
 function showLogs(id, job) {
   if (!$(`#logs-${id}`).length) {
     jsPanel.create({
+      id: `logs-${id}`,
       theme: "dark filled",
       border: "medium",
       headerTitle: `Logs - ${job.name}`,
       position: "center-top 0 58",
       callback: function() {
-        refreshLogs(id, job.runtime);
+        refreshLogs(id, job);
       },
       contentSize: "1450 600",
       contentOverflow: "hidden scroll",
-      content: `<pre id="logs-${id}" style="border: 0;\
+      content: `<pre id="log-text-${id}" style="border: 0;\
         background-color: transparent; color: white;"></pre>`,
       dragit: {
         opacity: 0.7,
@@ -347,11 +348,15 @@ function clearResults(id) {
  * @param {id} id - Job ID.
  */
 // eslint-disable-next-line
-function refreshLogs(id, runtime) {
-  call(`/get_job_logs/${runtime}`, function(logs) {
+function refreshLogs(id, job) {
+  call(`/get_job_logs/${job.runtime}`, function(logs) {
     if (logs) {
-      $(`#logs-${id}`).text(logs);
-      setTimeout(() => refreshLogs(id, runtime), 1500);
+      $(`#logs-text-${id}`).text(logs);
+      setTimeout(() => refreshLogs(id, job), 1500);
+    } else {
+      $(`#logs-${id}`).remove();
+      const jobType = job.type == "workflow" ? "workflow" : "service";
+      showResultsPanel(id, job.name, jobType);
     }
   });
 }

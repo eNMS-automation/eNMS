@@ -273,6 +273,17 @@ class Run(AbstractBase):
         Session.commit()
         return devices
 
+    def close_connection_cache(self):
+        for library in ("netmiko", "napalm"):
+            connections = controller.connections_cache[library].pop(
+                self.runtime, None
+            )
+            if not connections:
+                continue
+            for device, conn in connections.items():
+                self.log("info", f"Closing {library} Connection to {device}")
+                conn.disconnect() if library == "netmiko" else conn.close()
+
     def run(
         self, payload: Optional[dict] = None, start_points: Optional[List["Job"]] = None
     ) -> Tuple[dict, str]:
@@ -283,15 +294,7 @@ class Run(AbstractBase):
             results = self.job.build_results(
                 self, payload or self["initial_payload"], start_points
             )
-            for library in ("netmiko", "napalm"):
-                connections = controller.connections_cache[library].pop(
-                    self.runtime, None
-                )
-                if not connections:
-                    continue
-                for device, conn in connections.items():
-                    self.log("info", f"Closing {library} Connection to {device}")
-                    conn.disconnect() if library == "netmiko" else conn.close()
+            self.close_connection_cache()
             self.log("info", f"{self.job.type} {self.job.name}: Finished")
         except Exception as exc:
             result = (
@@ -348,7 +351,8 @@ class Run(AbstractBase):
         )
         controller.job_db[self.runtime]["completed"] += 1
         controller.job_db[self.runtime]["failed"] += 1 - results["success"]
-        self.create_result(results, device)
+        if device:
+            self.create_result(results, device)
         return results
 
     def log(self, severity: str, log: str) -> None:

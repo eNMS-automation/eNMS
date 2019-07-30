@@ -351,11 +351,13 @@ function clearResults(id) {
 function refreshLogs(id, job) {
   call(`/get_job_logs/${job.runtime}`, function(logs) {
     if (logs) {
-      $(`#logs-text-${id}`).text(logs);
+      $(`#log-text-${id}`).text(logs);
       setTimeout(() => refreshLogs(id, job), 1500);
     } else {
       $(`#logs-${id}`).remove();
-      const jobType = job.type == "workflow" ? "workflow" : "service";
+      console.log(job.type);
+      const jobType = job.type == "Workflow" ? "workflow" : "service";
+      console.log(jobType);
       showResultsPanel(id, job.name, jobType);
     }
   });

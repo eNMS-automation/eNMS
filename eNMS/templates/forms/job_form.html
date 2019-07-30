@@ -62,11 +62,11 @@
         {% endif %}
       </ul>
       <div id="step-1">
-        <div style="width: 100%; height: 50%;">
+        <div style="width: 100%;">
           {% if form_type != "workflow" %}
           <label class="no-run">Type</label>
           <div class="form-group">
-            {{ form.type(id=form_type + '-class', class="form-control add-id")
+            {{ form.type(id=form_type + '-class', class="form-control no-run add-id")
             }}
           </div>
           {% endif %}
@@ -275,7 +275,7 @@
         </div>
       </div>
       {% if form_type != "workflow" %}
-      <div id="step-5" style="height: 100%">
+      <div id="step-5">
         {% set groups = form.groups or {"Parameters": form.service_fields} %}
         <div
           class="accordion"

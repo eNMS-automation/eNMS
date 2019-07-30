@@ -87,8 +87,8 @@ class Run(AbstractBase):
     status = Column(String(SMALL_STRING_LENGTH), default="Running")
     runtime = Column(String(SMALL_STRING_LENGTH), default="")
     endtime = Column(String(SMALL_STRING_LENGTH), default="")
-    parent_device_id = Column(Integer, ForeignKey("Device.id"))
-    parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
+    workflow_device_id = Column(Integer, ForeignKey("Device.id"))
+    workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(String(SMALL_STRING_LENGTH), default="")
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
@@ -248,7 +248,7 @@ class Run(AbstractBase):
                 return self.payload_helper(payload, *args, **kwargs)
 
             try:
-                values = eval(self.job.python_query, {"parent_device": self.parent_device, **locals()})
+                values = eval(self.job.python_query, {"workflow_device": self.workflow_device, **locals()})
             except Exception as exc:
                 raise Exception(f"Python Query Failure: {str(exc)}")
             devices, not_found = set(), set()
@@ -796,7 +796,7 @@ class Workflow(Job):
                             "Run",
                             job=job.id,
                             workflow=self.id,
-                            parent_device=base_target.id,
+                            workflow_device=base_target.id,
                             parent_runtime=run.parent_runtime,
                         )
                         derived_target_result = job_run.run(payload)[0]

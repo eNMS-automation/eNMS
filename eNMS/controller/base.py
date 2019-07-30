@@ -174,6 +174,7 @@ class BaseController:
         "get_results",
         "get_runtimes",
         "get_device_list",
+        "get_workflow_device_list",
         "get_results_diff",
         "get_view_topology",
         "get_job_list",

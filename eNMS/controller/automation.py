@@ -137,6 +137,23 @@ class AutomationController(BaseController):
             )
         )
 
+    def get_workflow_device_list(self, id: int, **kw: Any) -> list:
+        comp = "_compare" if kw["compare"] else ""
+        request = {
+            "parent_runtime": kw.get(f"runtime{comp}"),
+            "job_id": f"job{comp}",
+        }
+        runs = fetch("Run", allow_none=True, **request)
+        if not runs:
+            return defaults
+        return defaults + list(
+            set(
+                (result.device_id, result.device_name)
+                for result in runs.results
+                if result.device_id
+            )
+        )
+
     def get_job_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         defaults = [

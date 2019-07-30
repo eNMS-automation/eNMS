@@ -122,6 +122,8 @@ class ServiceResultsForm(ResultsForm):
 
 class WorkflowResultsForm(ResultsForm):
     form_type = HiddenField(default="workflow_results")
+    workflow_device = NoValidationSelectField("Device", choices=())
+    workflow_device_compare = NoValidationSelectField("Device", choices=())
     device = NoValidationSelectField("Device", choices=())
     device_compare = NoValidationSelectField("Device", choices=())
     job = NoValidationSelectField("Job", choices=())

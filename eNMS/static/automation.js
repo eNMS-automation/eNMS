@@ -220,19 +220,23 @@ function updateDeviceList(type, id, parentId, updateBoth) {
       );
     });
     $(ids).selectpicker("refresh");
-    displayResults(type, id, formId);
+    if (type == "workflow") {
+      updateParentDeviceList(type, id, parentId, updateBoth);
+    } else {
+      displayResults(type, id, formId);
+    }
   });
 }
 
 function updateParentDeviceList(type, id, parentId, updateBoth) {
   const formId = parentId || id;
-  fCall(`/get_device_list/${id}`, `#results-form-${formId}`, (devices) => {
+  fCall(`/get_workflow_device_list/${id}`, `#results-form-${formId}`, (devices) => {
     let ids;
     if (updateBoth) {
-      ids = `#device-${formId},#device_compare-${formId}`;
+      ids = `#workflow_device-${formId},#workflow_device_compare-${formId}`;
     } else {
       const comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
-      ids = `#device${comp}-${formId}`;
+      ids = `#workflow_device${comp}-${formId}`;
     }
     $(ids).empty();
     devices.forEach((device) => {

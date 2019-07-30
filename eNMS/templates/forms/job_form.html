@@ -154,11 +154,7 @@
             <label>Include Result Link in Summary</label>
           </div>
         </fieldset>
-        <label
-          ><label for="mail_recipient"
-            >Mail Recipients (separated by comma)</label
-          ></label
-        >
+        <label>Mail Recipients (separated by comma)</label>
         <div class="form-group">
           {{ form.mail_recipient(id=form_type + '-mail_recipient',
           class="form-control add-id") }}
@@ -191,28 +187,23 @@
           </div>
         </fieldset>
         {% endif %}
-        <label><label for="devices">Devices</label></label>
+        <label for="devices">Devices</label>
         <div class="form-group">
           {{ form.devices(id=form_type + '-devices', class="form-control
           add-id") }}
         </div>
-        <label><label for="pools">Pools</label></label>
+        <label for="pools">Pools</label>
         <div class="form-group">
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
-        <label
-          ><label for="python_query"
+        <label class="no-run"
             >Python Query (populating will supersede device targets in a parent
-            workflow)</label
-          ></label
-        >
+            workflow)</label>
         <div class="form-group">
             {{ form.python_query(id=form_type + '-python_query',
             class="form-control no-run add-id") }}
           </div>
-          <label
-            ><label for="query_property_type">Query Property Type</label></label
-          >
+          <label class="no-run">Query Property Type</label>
           <div class="form-group">
             {{ form.query_property_type(id=form_type + '-query_property_type',
             class="form-control no-run add-id") }}
@@ -230,24 +221,22 @@
             <label>Multiprocessing</label>
           </div>
         </fieldset>
-        <label
-          ><label for="max_processes">Maximum number of processes</label></label
-        >
+        <label>Maximum number of processes</label>
         <div class="form-group">
           {{ form.max_processes(id=form_type + '-max_processes',
           class="form-control add-id") }}
         </div>
-        <label><label for="credentials">Credentials</label></label>
+        <label>Credentials</label>
         <div class="form-group">
           {{ form.credentials(id=form_type + '-credentials', class="form-control
           add-id") }}
         </div>
-        <label><label for="custom_username">Custom Username</label></label>
+        <label class="no-run">Custom Username</label>
         <div class="form-group">
           {{ form.custom_username(id=form_type + '-custom_username',
           class="form-control no-run add-id") }}
         </div>
-        <label><label for="custom_password">Custom Password</label></label>
+        <label class="no-run">Custom Password</label>
         <div class="form-group">
           {{ form.custom_password(id=form_type + '-custom_password',
           class="form-control no-run add-id") }}
@@ -264,25 +253,23 @@
               type="checkbox"
               value="y"
             />
-            <label>Start New Connection</label>
+            <label class="no-run">Start New Connection</label>
           </div>
         </fieldset>
-        <label
-          ><label for="waiting_time">Waiting time (in seconds)</label></label
-        >
+        <label class="no-run">Waiting time (in seconds)</label>
         <div class="form-group">
           {{ form.waiting_time(id=form_type + '-waiting_time',
           class="form-control no-run add-id") }}
         </div>
-        <label><label for="shape">Shape</label></label>
+        <label><label class="no-run">Shape</label>
         <div class="form-group">
           {{ form.shape(id=form_type + '-shape', class="form-control no-run add-id") }}
         </div>
-        <label><label for="color">Color</label></label>
+        <label><label class="no-run">Color</label>
         <div class="form-group">
           {{ form.color(id=form_type + '-color', class="form-control no-run add-id") }}
         </div>
-        <label><label for="size">Size</label></label>
+        <label><label class="no-run">Size</label>
         <div class="form-group">
           {{ form.size(id=form_type + '-size', class="form-control no-run add-id") }}
         </div>

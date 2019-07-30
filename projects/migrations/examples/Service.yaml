@@ -10,7 +10,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 20:10:38.064490'
+  last_modified: '2019-07-30 18:06:28.132426'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1442,6 +1442,7 @@
     - 3.3.3.3
   display_only_failed_nodes: true
   events: []
+  has_targets: false
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1486,6 +1487,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
+  has_targets: false
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1851,7 +1853,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-24 20:17:52.032463'
+  last_modified: '2019-07-30 18:06:28.428026'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1893,7 +1895,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-26 12:18:59.935546'
+  last_modified: '2019-07-30 18:07:15.291436'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1915,8 +1917,9 @@
   size: 40
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
-    , \"192.168.105.5\", \"pools\")\r\nset_var(\"iteration_device\", [\"Washington\"\
-    , \"Austin\"], \"pools\", device=device.name)\r\nsave_result(success=True, result={})"
+    , \"192.168.105.5\", section=\"pools\")\r\nset_var(\"iteration_device\", [\"Washington\"\
+    , \"Austin\"], section=\"pools\", device=device.name)\r\nsave_result(success=True,\
+    \ result={})"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService

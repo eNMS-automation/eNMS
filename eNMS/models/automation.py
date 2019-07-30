@@ -87,6 +87,8 @@ class Run(AbstractBase):
     status = Column(String(SMALL_STRING_LENGTH), default="Running")
     runtime = Column(String(SMALL_STRING_LENGTH), default="")
     endtime = Column(String(SMALL_STRING_LENGTH), default="")
+    parent_device_id = Column(Integer, ForeignKey("Device.id"))
+    parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     parent_runtime = Column(String(SMALL_STRING_LENGTH), default="")
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
@@ -233,22 +235,19 @@ class Run(AbstractBase):
         if section:
             payload = payload.setdefault(section, {})
         if value:
-            print(value)
             payload[name] = value
         else:
             if name not in payload:
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
 
-    def compute_devices(
-        self, payload: Optional[dict] = None, device: Optional["Device"] = None
-    ) -> Set["Device"]:
-
+    def compute_devices(self, payload: Optional[dict] = None) -> Set["Device"]:
         if self.job.python_query:
 
             def get_var(*args: Any, **kwargs: Any) -> Any:
                 return self.payload_helper(payload, *args, **kwargs)
 
+            parent_device = run.parent_device
             try:
                 values = eval(self.job.python_query, locals())
             except Exception as exc:
@@ -589,7 +588,7 @@ class Service(Job):
         targets = {}
         if run["has_targets"]:
             try:
-                targets = run.compute_devices()
+                targets = run.compute_devices(payload)
                 results["results"]["devices"] = {}
             except Exception as exc:
                 return {"success": False, "error": str(exc)}
@@ -794,17 +793,14 @@ class Workflow(Job):
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:
-                        derived_targets = run.compute_devices(payload, base_target)
                         job_run = factory(
                             "Run",
-                            **{
-                                "job": job.id,
-                                "targets": [t.id for t in derived_targets],
-                                "workflow": self.id,
-                                "parent_runtime": run.parent_runtime,
-                            },
+                            job=job.id,
+                            workflow=self.id,
+                            parent_device=base_target.id,
+                            parent_runtime=run.parent_runtime,
                         )
-                        derived_target_result = job_run.run(payload)
+                        derived_target_result = job_run.run(payload)[0]
                         device_results[base_target.name] = derived_target_result
                         if not derived_target_result["success"]:
                             success = False

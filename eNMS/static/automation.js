@@ -286,7 +286,7 @@ function showLogs(id, job) {
 // eslint-disable-next-line
 function showResultsPanel(id, name, type) {
   createPanel(`${type}_results`, `Results - ${name}`, id, function() {
-    configureCallbacks(id, type);
+    configureResultsCallbacks(id, type);
     getRuntimes(type, id);
   });
 }
@@ -296,7 +296,7 @@ function showResultsPanel(id, name, type) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function configureCallbacks(id, type) {
+function configureResultsCallbacks(id, type) {
   if (type != "device") {
     $(`#device-${id},#device_compare-${id}`).on("change", function() {
       $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
@@ -372,6 +372,7 @@ function runJob(type, id, name) {
         getJobState(id);
       }
     }
+    $(`#${type}-${id}`).remove();
   });
 }
 

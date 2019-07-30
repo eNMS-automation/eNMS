@@ -79,6 +79,7 @@ event_table_properties: List[str] = ["name", "log_source", "log_content"]
 
 run_table_properties: List[str] = [
     "runtime",
+    "endtime",
     "job_name",
     "workflow_name",
     "status",

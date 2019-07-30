@@ -579,7 +579,7 @@ function initTable(type) {
       },
     },
   });
-  if (type == "changelog" || type == "syslog") {
+  if (type == "changelog" || type == "syslog" || type == "run") {
     table.order([0, "desc"]).draw();
   }
   return [table, filteringPanel];

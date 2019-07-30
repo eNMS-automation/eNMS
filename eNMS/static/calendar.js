@@ -15,7 +15,8 @@ $(function() {
         title: name,
         id: properties.id,
         description: properties.description,
-        start: new Date(...properties.date),
+        start: new Date(...properties.start),
+        end: new Date(...properties.end),
       });
     }
     $("#calendar").fullCalendar({
@@ -26,7 +27,7 @@ $(function() {
       },
       selectable: true,
       selectHelper: true,
-      eventClick: function(calEvent, jsEvent, view) {
+      eventClick: function(calEvent) {
         if (calendarType == "task") {
           showTypePanel("task", calEvent.id);
         } else {

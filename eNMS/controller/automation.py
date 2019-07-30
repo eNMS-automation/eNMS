@@ -186,7 +186,7 @@ class AutomationController(BaseController):
         if job in ("all passed", "all failed"):
             request["success"] = job == "all passed"
         return {
-            run.job_name: next(r.result for r in run.results if not r.device_id)
+            run.job_name: next((r.result for r in run.results if not r.device_id), None)
             for run in fetch("Run", allow_none=True, **request)
             if run.job_id != int(id)
         }
@@ -272,28 +272,29 @@ class AutomationController(BaseController):
             job.positions[workflow.name] = (position["x"], position["y"])
         return now
 
+    def convert_date(self, date: str) -> list:
+        python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
+        month = "{:02}".format((int(python_month) - 1) % 12)
+        return [
+            int(i)
+            for i in sub(
+                r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
+                r"\1," + month + r",\3,\4,\5",
+                date,
+            ).split(",")
+        ]
+
     def calendar_init(self, type) -> dict:
         results = {}
         for instance in fetch_all(type):
-            # javascript dates range from 0 to 11, we must account for that by
-            # substracting 1 to the month for the date to be properly displayed in
-            # the calendar
             if getattr(instance, "workflow", None):
                 continue
+            results[instance.name] = instance.serialized
             date = getattr(instance, "next_run_time" if type == "task" else "runtime")
-            if not date:
-                continue
-            python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
-            month = "{:02}".format((int(python_month) - 1) % 12)
-            js_date = [
-                int(i)
-                for i in sub(
-                    r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
-                    r"\1," + month + r",\3,\4,\5",
-                    date,
-                ).split(",")
-            ]
-            results[instance.name] = {**instance.serialized, **{"date": js_date}}
+            if date:
+                results[instance.name]["start"] = self.convert_date(date)
+            if type == "run":
+                results[instance.name]["end"] = self.convert_date(instance.endtime)
         return results
 
     def scheduler_action(self, action: str) -> None:

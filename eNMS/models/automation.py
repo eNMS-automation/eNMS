@@ -86,6 +86,7 @@ class Run(AbstractBase):
     success = Column(Boolean, default=False)
     status = Column(String(SMALL_STRING_LENGTH), default="Running")
     runtime = Column(String(SMALL_STRING_LENGTH), default="")
+    endtime = Column(String(SMALL_STRING_LENGTH), default="")
     parent_runtime = Column(String(SMALL_STRING_LENGTH), default="")
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
@@ -146,7 +147,7 @@ class Run(AbstractBase):
                 self.parent_runtime
             )
             if parent_connection and device.name in parent_connection:
-                if self.start_new_connection:
+                if self.job.start_new_connection:
                     parent_connection.pop(device.name).disconnect()
                 else:
                     try:
@@ -276,7 +277,7 @@ class Run(AbstractBase):
         Session.commit()
         try:
             results = self.job.build_results(
-                self, self["initial_payload"], start_points
+                self, payload or self["initial_payload"], start_points
             )
             for library in ("netmiko", "napalm"):
                 connections = controller.connections_cache[library].pop(
@@ -300,6 +301,7 @@ class Run(AbstractBase):
             self.status = f"Completed ({'success' if self.success else 'failure'})"
             controller.job_db[self.runtime]["completed"] = 0
             controller.job_db[self.runtime]["failed"] = 0
+            results["endtime"] = self.endtime = controller.get_time()
             results["logs"] = controller.run_logs.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
@@ -421,7 +423,7 @@ class Run(AbstractBase):
         return result
 
     def match_content(self, result: Any, match: Union[str, dict]) -> bool:
-        if self.get("validation_method", "text") == "text":
+        if self["validation_method"] == "text":
             result = str(result)
             assert isinstance(match, str)
             if self["delete_spaces_before_matching"]:
@@ -577,6 +579,7 @@ class Service(Job):
 
     def build_results(self, run: "Run", payload: dict, *other: Any) -> dict:
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
+        targets = {}
         if run["has_targets"]:
             try:
                 targets = run.compute_devices()
@@ -811,15 +814,8 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     run, job, allowed_devices, payload
                 )
-                job_run = factory(
-                    "Run",
-                    **{
-                        "job": job.id,
-                        "targets": [d.id for d in valid_devices],
-                        "workflow": self.id,
-                        "parent_runtime": run.parent_runtime,
-                    },
-                )
+                job_run = factory("Run", job=job.id, workflow=self.id, parent_runtime=run.parent_runtime)
+                job_run.properties = {"devices": [d.id for d in valid_devices]}
                 job_results = job_run.run(payload)[0]
             self.state["jobs"][job.id] = job_results["success"]
             if run["use_workflow_targets"]:

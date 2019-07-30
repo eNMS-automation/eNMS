@@ -233,6 +233,7 @@ class Run(AbstractBase):
         if section:
             payload = payload.setdefault(section, {})
         if value:
+            print(value)
             payload[name] = value
         else:
             if name not in payload:
@@ -275,9 +276,7 @@ class Run(AbstractBase):
 
     def close_connection_cache(self):
         for library in ("netmiko", "napalm"):
-            connections = controller.connections_cache[library].pop(
-                self.runtime, None
-            )
+            connections = controller.connections_cache[library].pop(self.runtime, None)
             if not connections:
                 continue
             for device, conn in connections.items():
@@ -593,7 +592,7 @@ class Service(Job):
                 targets = run.compute_devices()
                 results["results"]["devices"] = {}
             except Exception as exc:
-                return {"success": False, "error": str(exc)}   
+                return {"success": False, "error": str(exc)}
         for i in range(run["number_of_retries"] + 1):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             controller.job_db[run.runtime]["completed"] = 0
@@ -822,7 +821,12 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     run, job, allowed_devices, payload
                 )
-                job_run = factory("Run", job=job.id, workflow=self.id, parent_runtime=run.parent_runtime)
+                job_run = factory(
+                    "Run",
+                    job=job.id,
+                    workflow=self.id,
+                    parent_runtime=run.parent_runtime,
+                )
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 job_results = job_run.run(payload)[0]
             self.state["jobs"][job.id] = job_results["success"]

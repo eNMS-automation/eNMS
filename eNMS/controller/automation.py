@@ -278,9 +278,7 @@ class AutomationController(BaseController):
         return [
             int(i)
             for i in sub(
-                r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*",
-                r"\1," + month + r",\3,\4,\5",
-                date,
+                r"(\d+)-(\d+)-(\d+) (\d+):(\d+).*", r"\1," + month + r",\3,\4,\5", date
             ).split(",")
         ]
 

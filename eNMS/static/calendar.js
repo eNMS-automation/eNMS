@@ -4,8 +4,6 @@ call: false
 showTypePanel: false
 */
 
-console.log();
-
 $(function() {
   if (typeof $.fn.fullCalendar === "undefined") {
     return;

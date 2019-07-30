@@ -64,49 +64,43 @@
       <div id="step-1">
         <div style="width: 100%; height: 50%;">
           {% if form_type != "workflow" %}
-          <label><label for="name">Type</label></label>
+          <label class="no-run">Type</label>
           <div class="form-group">
             {{ form.type(id=form_type + '-class', class="form-control add-id")
             }}
           </div>
           {% endif %}
-          <label><label for="name">Name</label></label>
+          <label class="no-run">Name</label>
           <div class="form-group">
             {{ form.name(id=form_type + '-name', class="form-control no-run add-id
             required") }}
           </div>
-          <label><label for="description">Description</label></label>
+          <label class="no-run">Description</label>
           <div class="form-group">
             {{ form.description(id=form_type + '-description',
-            class="form-control add-id") }}
+            class="form-control no-run add-id") }}
           </div>
-          <label><label for="vendor">Vendor</label></label>
+          <label class="no-run">Vendor</label>
           <div class="form-group">
             {{ form.vendor(id=form_type + '-vendor', class="form-control
-            add-id") }}
+            no-run add-id") }}
           </div>
-          <label><label for="operating_system">Operating System</label></label>
+          <label class="no-run">Operating System</label>
           <div class="form-group">
             {{ form.operating_system(id=form_type + '-operating_system',
-            class="form-control add-id") }}
+            class="form-control no-run add-id") }}
           </div>
-          <label><label for="initial_payload">Initial Payload</label></label>
+          <label>Initial Payload</label>
           <div class="form-group">
             {{ form.initial_payload(id=form_type + '-initial_payload',
             class="form-control add-id") }}
           </div>
-          <label
-            ><label for="number_of_retries">Number of retries</label></label
-          >
+          <label>Number of retries</label>
           <div class="form-group">
             {{ form.number_of_retries(id=form_type + '-number_of_retries',
             class="form-control add-id") }}
           </div>
-          <label
-            ><label for="time_between_retries"
-              >Time between retries (in seconds)</label
-            ></label
-          >
+          <label>Time between retries (in seconds)</label>
           <div class="form-group">
             {{ form.time_between_retries(id=form_type + '-time_between_retries',
             class="form-control add-id") }}
@@ -138,18 +132,12 @@
             <label>Send notification</label>
           </div>
         </fieldset>
-        <label
-          ><label for="send_notification_method"
-            >Send Notification Method</label
-          ></label
-        >
+        <label>Send Notification Method</label>
         <div class="form-group">
           {{ form.send_notification_method(id=form_type +
           '-send_notification_method', class="form-control add-id") }}
         </div>
-        <label
-          ><label for="notification_header">Notification Header</label></label
-        >
+        <label>Notification Header</label>
         <div class="form-group">
           {{ form.notification_header(id=form_type + '-notification_header',
           class="form-control add-id") }}
@@ -220,14 +208,14 @@
         >
         <div class="form-group">
             {{ form.python_query(id=form_type + '-python_query',
-            class="form-control add-id") }}
+            class="form-control no-run add-id") }}
           </div>
           <label
             ><label for="query_property_type">Query Property Type</label></label
           >
           <div class="form-group">
             {{ form.query_property_type(id=form_type + '-query_property_type',
-            class="form-control add-id") }}
+            class="form-control no-run add-id") }}
         </div>
         {% if form_type != "workflow" %}
         <fieldset>
@@ -257,12 +245,12 @@
         <label><label for="custom_username">Custom Username</label></label>
         <div class="form-group">
           {{ form.custom_username(id=form_type + '-custom_username',
-          class="form-control add-id") }}
+          class="form-control no-run add-id") }}
         </div>
         <label><label for="custom_password">Custom Password</label></label>
         <div class="form-group">
           {{ form.custom_password(id=form_type + '-custom_password',
-          class="form-control add-id") }}
+          class="form-control no-run add-id") }}
         </div>
         {% endif %}
       </div>
@@ -272,7 +260,7 @@
             <input
               id="{{ form_type }}-start_new_connection"
               name="start_new_connection"
-              class="add-id"
+              class="no-run add-id"
               type="checkbox"
               value="y"
             />
@@ -284,19 +272,19 @@
         >
         <div class="form-group">
           {{ form.waiting_time(id=form_type + '-waiting_time',
-          class="form-control add-id") }}
+          class="form-control no-run add-id") }}
         </div>
         <label><label for="shape">Shape</label></label>
         <div class="form-group">
-          {{ form.shape(id=form_type + '-shape', class="form-control add-id") }}
+          {{ form.shape(id=form_type + '-shape', class="form-control no-run add-id") }}
         </div>
         <label><label for="color">Color</label></label>
         <div class="form-group">
-          {{ form.color(id=form_type + '-color', class="form-control add-id") }}
+          {{ form.color(id=form_type + '-color', class="form-control no-run add-id") }}
         </div>
         <label><label for="size">Size</label></label>
         <div class="form-group">
-          {{ form.size(id=form_type + '-size', class="form-control add-id") }}
+          {{ form.size(id=form_type + '-size', class="form-control no-run add-id") }}
         </div>
       </div>
       {% if form_type != "workflow" %}

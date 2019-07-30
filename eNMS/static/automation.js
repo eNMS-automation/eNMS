@@ -224,6 +224,29 @@ function updateDeviceList(type, id, parentId, updateBoth) {
   });
 }
 
+function updateParentDeviceList(type, id, parentId, updateBoth) {
+  const formId = parentId || id;
+  fCall(`/get_device_list/${id}`, `#results-form-${formId}`, (devices) => {
+    let ids;
+    if (updateBoth) {
+      ids = `#device-${formId},#device_compare-${formId}`;
+    } else {
+      const comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
+      ids = `#device${comp}-${formId}`;
+    }
+    $(ids).empty();
+    devices.forEach((device) => {
+      $(ids).append(
+        $("<option></option>")
+          .attr("value", device[0])
+          .text(device[1])
+      );
+    });
+    $(ids).selectpicker("refresh");
+    displayResults(type, id, formId);
+  });
+}
+
 /**
  * Display results.
  * @param {id} id - Job id.

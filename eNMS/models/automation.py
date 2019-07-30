@@ -247,9 +247,8 @@ class Run(AbstractBase):
             def get_var(*args: Any, **kwargs: Any) -> Any:
                 return self.payload_helper(payload, *args, **kwargs)
 
-            parent_device = run.parent_device
             try:
-                values = eval(self.job.python_query, locals())
+                values = eval(self.job.python_query, {"parent_device": self.parent_device, **locals()})
             except Exception as exc:
                 raise Exception(f"Python Query Failure: {str(exc)}")
             devices, not_found = set(), set()

@@ -143,7 +143,7 @@ class AutomationController(BaseController):
                 )
             ),
             "workflow_devices": (
-                defaults + list(
+                [("", "")] + list(
                     set(
                         (run.workflow_device_id, run.workflow_device.name)
                         for run in runs
@@ -184,6 +184,7 @@ class AutomationController(BaseController):
                 "runtime": kw.get(f"runtime{comp}"),
                 "device": kw.get(f"device{comp}"),
                 "job": kw.get(f"job{comp}"),
+                "workflow_device": kw.get(f"workflow_device{comp}"),
             },
         )
 
@@ -195,10 +196,11 @@ class AutomationController(BaseController):
         run = fetch("Run", allow_none=True, runtime=runtime)
         return next(r.result for r in run.results if r.device_id == int(id))
 
-    def get_workflow_results(self, id: int, runtime, device, job) -> Optional[dict]:
+    def get_workflow_results(self, id: int, runtime, device, job, workflow_device) -> Optional[dict]:
         if "all" not in job:
             return self.get_service_results(job, runtime, device, job)
         request = {"parent_runtime": runtime, "all_matches": True}
+        print("aa"*100, workflow_device)
         if job in ("all passed", "all failed"):
             request["success"] = job == "all passed"
         return {

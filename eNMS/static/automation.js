@@ -205,16 +205,17 @@ function updateDeviceList(type, id, parentId, updateBoth) {
   const formId = parentId || id;
   fCall(`/get_device_list/${id}`, `#results-form-${formId}`, (result) => {
     let ids;
-    let parentIds;
+    let workflowIds;
     if (updateBoth) {
       ids = `#device-${formId},#device_compare-${formId}`;
-      parentIds = `#parent_device-${formId},#parent_device_compare-${formId}`;
+      workflowIds = `#workflow_device-${formId},#workflow_device_compare-${formId}`;
     } else {
       const comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
       ids = `#device${comp}-${formId}`;
-      parentIds = `#parent_device${comp}-${formId}`;
+      workflowIds = `#workflow_device${comp}-${formId}`;
     }
-    $(ids, parentIds).empty();
+    $(ids).empty();
+    $(workflowIds).empty();
     result.devices.forEach((device) => {
       $(ids).append(
         $("<option></option>")
@@ -223,13 +224,15 @@ function updateDeviceList(type, id, parentId, updateBoth) {
       );
     });
     result.workflow_devices.forEach((device) => {
-      $(parentIds).append(
+      console.log(device);
+      $(workflowIds).append(
         $("<option></option>")
           .attr("value", device[0])
           .text(device[1])
       );
     });
-    $(ids, parentIds).selectpicker("refresh");
+    $(ids).selectpicker("refresh");
+    $(workflowIds).selectpicker("refresh");
     displayResults(type, id, formId);
   });
 }

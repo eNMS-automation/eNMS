@@ -219,10 +219,14 @@ class Run(AbstractBase):
         payload: dict,
         name: str,
         value: Optional[Any] = None,
+        service = Optional[str] = None,
         section: Optional[str] = None,
         device: Optional[str] = None,
     ) -> Any:
-        payload = payload.setdefault("variables", {})
+        if not service:
+            payload = payload.setdefault("variables", {})
+        else:
+            payload = payload[service]
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})

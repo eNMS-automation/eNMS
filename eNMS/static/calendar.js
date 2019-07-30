@@ -16,7 +16,6 @@ $(function() {
         id: properties.id,
         description: properties.description,
         start: new Date(...properties.start),
-        end: new Date(...properties.end),
       });
     }
     $("#calendar").fullCalendar({

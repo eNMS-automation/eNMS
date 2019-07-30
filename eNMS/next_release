@@ -164,3 +164,7 @@ to the device and what was being received from the device it would allow the use
 to adjust/correct their Service to produce the desired results. 
 
 - Credentials are now hidden when using gotty.
+
+- Job Parametrization.
+
+- New Run mechanism: run table + run calendar

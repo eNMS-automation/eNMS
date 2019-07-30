@@ -293,8 +293,6 @@ class AutomationController(BaseController):
             date = getattr(instance, "next_run_time" if type == "task" else "runtime")
             if date:
                 results[instance.name]["start"] = self.convert_date(date)
-            if type == "run":
-                results[instance.name]["end"] = self.convert_date(instance.endtime)
         return results
 
     def scheduler_action(self, action: str) -> None:

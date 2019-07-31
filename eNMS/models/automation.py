@@ -410,8 +410,8 @@ class Run(AbstractBase):
             else (device.username, device.password)
             if self["credentials"] == "device"
             else (
-                self.sub(self.job.custom_username, locals()),
-                self.sub(self.job.custom_password, locals()),
+                run.sub(self.job.custom_username, locals()),
+                run.sub(self.job.custom_password, locals()),
             )
         )
 

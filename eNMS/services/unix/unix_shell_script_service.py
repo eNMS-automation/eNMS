@@ -36,8 +36,8 @@ class UnixShellScriptService(Service):
             user=username,
             connect_kwargs={"password": password},
         )
-        source_code = self.sub(run["source_code"], locals())
-        match = self.sub(run["content_match"], locals())
+        source_code = run.sub(run["source_code"], locals())
+        match = run.sub(run["content_match"], locals())
         run.log("info", f"Running Unix Shell Script {self.name} on {device.name}")
         script_file_name = "unix_shell_script_service.sh"
         with StringIO(run["source_code"]) as script_file:

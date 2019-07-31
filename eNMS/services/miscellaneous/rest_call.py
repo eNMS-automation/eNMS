@@ -70,10 +70,10 @@ class RestCallService(Service):
     __mapper_args__ = {"polymorphic_identity": "RestCallService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        rest_url = self.sub(run["rest_url"], locals())
+        rest_url = run.sub(run["rest_url"], locals())
         run.log("info", f"Sending REST call to {rest_url}")
         kwargs = {
-            p: self.sub(getattr(self, p), locals())
+            p: run.sub(getattr(self, p), locals())
             for p in ("headers", "params", "timeout")
         }
         if run["call_type"] in ("GET", "DELETE"):
@@ -86,7 +86,7 @@ class RestCallService(Service):
         else:
             response = self.request_dict[run["call_type"]](
                 rest_url,
-                data=dumps(self.sub(run["payload"], locals())),
+                data=dumps(run.sub(run["payload"], locals())),
                 auth=HTTPBasicAuth(self.username, self.password),
                 verify=run["verify_ssl_certificate"],
                 **kwargs,
@@ -102,9 +102,9 @@ class RestCallService(Service):
             return result
         result = run.convert_result(response.text)
         match = (
-            self.sub(run["content_match"], locals())
+            run.sub(run["content_match"], locals())
             if run["validation_method"] == "text"
-            else self.sub(run["dict_match"], locals())
+            else run.sub(run["dict_match"], locals())
         )
         return {
             "url": rest_url,

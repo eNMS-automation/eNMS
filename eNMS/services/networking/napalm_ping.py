@@ -32,8 +32,8 @@ class NapalmPingService(Service):
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection = run.napalm_connection(device)
-        destination = self.sub(run["destination_ip"], locals())
-        source = self.sub(run["source_ip"], locals())
+        destination = run.sub(run["destination_ip"], locals())
+        source = run.sub(run["source_ip"], locals())
         run.log(
             "info",
             f"Running napalm ping from {source}"

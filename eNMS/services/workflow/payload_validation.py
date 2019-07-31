@@ -34,9 +34,9 @@ class PayloadValidationService(Service):
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         result = run.convert_result(eval(run["query"], locals()))
         match = (
-            self.sub(run["content_match"], locals())
+            run.sub(run["content_match"], locals())
             if run["validation_method"] == "text"
-            else self.sub(run["dict_match"], locals())
+            else run.sub(run["dict_match"], locals())
         )
         return {
             "query": run["query"],

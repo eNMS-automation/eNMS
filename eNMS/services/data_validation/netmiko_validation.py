@@ -45,9 +45,9 @@ class NetmikoValidationService(Service):
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
-        command = self.sub(run["command"], locals())
+        command = run.sub(run["command"], locals())
         run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")
-        expect_string = self.sub(run["expect_string"], locals())
+        expect_string = run.sub(run["expect_string"], locals())
         result = run.convert_result(
             netmiko_connection.send_command(
                 command,
@@ -59,9 +59,9 @@ class NetmikoValidationService(Service):
             )
         )
         match = (
-            self.sub(run["content_match"], locals())
+            run.sub(run["content_match"], locals())
             if run["validation_method"] == "text"
-            else self.sub(run["dict_match"], locals())
+            else run.sub(run["dict_match"], locals())
         )
         return {
             "command": command,

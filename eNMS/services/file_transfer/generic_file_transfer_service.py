@@ -37,8 +37,8 @@ class GenericFileTransferService(Service):
             ssh_client.set_missing_host_key_policy(AutoAddPolicy())
         if run["load_known_host_keys"]:
             ssh_client.load_system_host_keys()
-        source = self.sub(run["source_file"], locals())
-        destination = self.sub(run["destination_file"], locals())
+        source = run.sub(run["source_file"], locals())
+        destination = run.sub(run["destination_file"], locals())
         run.log("info", "Transferring file {source} on {device.name}")
         success, result = True, f"File {source} transferred successfully"
         ssh_client.connect(

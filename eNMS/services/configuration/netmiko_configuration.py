@@ -35,7 +35,7 @@ class NetmikoConfigurationService(Service):
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
-        config = self.sub(run["content"], locals())
+        config = run.sub(run["content"], locals())
         run.log("info", f"Pushing configuration on {device.name} (Netmiko)")
         netmiko_connection.send_config_set(
             config.splitlines(),

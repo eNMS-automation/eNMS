@@ -38,9 +38,9 @@ class NapalmGettersService(Service):
             except Exception as e:
                 result[getter] = f"{getter} failed because of {e}"
         match = (
-            self.sub(run["content_match"], locals())
+            run.sub(run["content_match"], locals())
             if run["validation_method"] == "text"
-            else self.sub(run["dict_match"], locals())
+            else run.sub(run["dict_match"], locals())
         )
         return {
             "match": match,

@@ -26,10 +26,10 @@ class SlackNotificationService(Service):
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         slack_client = SlackClient(run["token"] or controller.slack_token)
-        channel = self.sub(run["channel"], locals()) or controller.slack_channel
+        channel = run.sub(run["channel"], locals()) or controller.slack_channel
         run.log("info", f"Sending Slack notification on {channel}")
         result = slack_client.api_call(
-            "chat.postMessage", channel=channel, text=self.sub(run["body"], locals())
+            "chat.postMessage", channel=channel, text=run.sub(run["body"], locals())
         )
         return {"success": True, "result": str(result)}
 

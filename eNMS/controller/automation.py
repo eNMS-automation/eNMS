@@ -116,13 +116,15 @@ class AutomationController(BaseController):
     def get_workflow_device_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         if kw.get(f"job{comp}") in ("global", "all"):
-            return []
-        runtime_key = "parent_runtime" if "job" in kw else "runtime"
-        request = {runtime_key: kw.get(f"runtime{comp}")}
-        request["job_id"] = kw.get(f"job{comp}")
-        runs = fetch("Run", allow_none=True,  all_matches=True, **request)
+            workflow_devices = []
+        else:
+            runtime_key = "parent_runtime" if "job" in kw else "runtime"
+            request = {runtime_key: kw.get(f"runtime{comp}")}
+            request["job_id"] = kw.get(f"job{comp}")
+            runs = fetch("Run", allow_none=True,  all_matches=True, **request)
+            workflow_devices = [(r.workflow_device_id, r.workflow_device.name) for r in runs if r.workflow_device_id]
         return {
-            "workflow_devices": [("", ""), (r.workflow_device_id, r.workflow_device.name) for r in runs if r.workflow_device_id],
+            "workflow_devices": workflow_devices,
             "devices": self.get_device_list(id, **kw)
         }
 
@@ -145,7 +147,7 @@ class AutomationController(BaseController):
                 request["workflow_device_id"] = kw.get(f"workflow_device{comp}")
         runs = fetch("Run", allow_none=True,  **request)
         if not runs:
-            return []
+            return defaults
         return defaults + list(
             set(
                 (result.device_id, result.device_name)
@@ -212,7 +214,6 @@ class AutomationController(BaseController):
     def get_service_results(self, id: int, runtime, device, job, workflow_device) -> Optional[dict]:
         runtime_key = "parent_runtime" if job else "runtime"
         request = {runtime_key: runtime, "job_id": id}
-        print("aaa"*100, workflow_device)
         if workflow_device:
             request["workflow_device_id"] = workflow_device
         if device in ("all passed", "all failed"):

@@ -205,17 +205,33 @@ function updateDeviceLists(type, id, parentId, updateBoth, workflowDevice) {
   const workflow = workflowDevice ? "workflow_" : "";
   const formId = parentId || id;
   fCall(`/get_${workflow}device_list/${id}`, `#results-form-${formId}`, (result) => {
-    if (workflowDevice && result.workflow_devices.length) {
-      $("#workflow_device-row").show();
-      updateDeviceList(comp, formId, updateBoth, "workflow_", result.workflow_devices);
+    if (workflowDevice && result.workflow_devices.length) {      
+      updateDeviceList(formId, updateBoth, "workflow_", result.workflow_devices);
+      $(`#workflow_device-row-${id}`).show();
     } else {
-      updateDeviceList(comp, formId, updateBoth, "", result.devices);
+      if (workflowDevice) {
+        $(`#workflow_device-row-${id}`).hide();
+        emptyDeviceList(formId, updateBoth, "workflow_");
+      }
+      updateDeviceList(formId, updateBoth, "", workflowDevice ? result.devices : result);
     }
     displayResults(type, id, formId);
   });
 }
 
-function updateDeviceList(comp, formId, updateBoth, workflow, devices) {
+function emptyDeviceList(formId, updateBoth, workflow) {
+  let ids;
+  if (updateBoth) {
+    ids = `#${workflow}device-${formId},#${workflow}device_compare-${formId}`;
+  } else {
+    const comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
+    ids = `#${workflow}device${comp}-${formId}`;
+  }
+  $(ids).empty();
+}
+
+function updateDeviceList(formId, updateBoth, workflow, devices) {
+  if (!devices.length) return;
   let ids;
   if (updateBoth) {
     ids = `#${workflow}device-${formId},#${workflow}device_compare-${formId}`;
@@ -258,7 +274,7 @@ function updateJobList(type, id, updateBoth) {
       );
     });
     $(ids).selectpicker("refresh");
-    updateDeviceList(type, id, id, updateBoth);
+    updateDeviceLists(type, id, id, updateBoth, true);
   });
 }
 
@@ -318,23 +334,22 @@ function configureResultsCallbacks(id, type) {
   if (type != "run") {
     $(`#runtime-${id},#runtime_compare-${id}`).on("change", function() {
       $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      if (type != "device") updateDeviceList(type, id, id, false, true);
+      if (type == "workflow") updateDeviceLists(type, id, id, false, true);
+      if (type == "service") updateDeviceLists(type, id);
       if (type != "service") updateJobList(type, id);
     });
-  } else {
-    updateDeviceList(type, id)
   }
 
   if (type != "service") {
     $(`#job-${id},#job_compare-${id}`).on("change", function() {
       $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      updateDeviceList(type, id, id, false, true);
+      updateDeviceLists(type, id, id, false, true);
     });
   }
 
   $(`#workflow_device-${id},#workflow_device_compare-${id}`).on("change", function() {
     $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-    updateDeviceList(type, id);
+    updateDeviceLists(type, id);
   });
 
   $(`#view_type-${id}`).on("change", function() {
@@ -344,6 +359,10 @@ function configureResultsCallbacks(id, type) {
   $(`#compare-btn-${id}`).click(function() {
     displayResults(type, id, id, true);
   });
+
+  if (type == "run" || type == "service") {
+    updateDeviceLists(type, id, id)
+  }
 }
 
 /**
@@ -370,9 +389,7 @@ function refreshLogs(id, job) {
       setTimeout(() => refreshLogs(id, job), 1500);
     } else {
       $(`#logs-${id}`).remove();
-      console.log(job.type);
       const jobType = job.type == "Workflow" ? "workflow" : "service";
-      console.log(jobType);
       showResultsPanel(id, job.name, jobType);
     }
   });

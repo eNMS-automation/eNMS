@@ -248,7 +248,10 @@ class Run(AbstractBase):
                 return self.payload_helper(payload, *args, **kwargs)
 
             try:
-                values = eval(self.job.python_query, {"workflow_device": self.workflow_device, **locals()})
+                values = eval(
+                    self.job.python_query,
+                    {"workflow_device": self.workflow_device, **locals()},
+                )
             except Exception as exc:
                 raise Exception(f"Python Query Failure: {str(exc)}")
             devices, not_found = set(), set()

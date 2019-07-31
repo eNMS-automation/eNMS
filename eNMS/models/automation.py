@@ -127,8 +127,6 @@ class Run(AbstractBase):
             onclick="showResultsPanel('{self.job.id}', '{self.name}',
             '{job_type}', '{self.runtime}')">
             </i>Results</a></button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('run', '{self.id}')">View</button>""",
         ]
 
     @property

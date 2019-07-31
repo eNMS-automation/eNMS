@@ -244,6 +244,13 @@
         {% endif %}
       </div>
       <div id="step-4">
+        {% if form_type == "workflow" %}
+          <label for="start_jobs">Start Jobs</label>
+          <div class="form-group">
+            {{ form.start_jobs(id=form_type + '-start_jobs', class="form-control
+            add-id") }}
+          </div>
+        {% endif %}
         <fieldset>
           <div class="item">
             <input

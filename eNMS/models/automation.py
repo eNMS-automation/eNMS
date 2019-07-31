@@ -285,15 +285,13 @@ class Run(AbstractBase):
                 self.log("info", f"Closing {library} Connection to {device}")
                 conn.disconnect() if library == "netmiko" else conn.close()
 
-    def run(
-        self, payload: Optional[dict] = None, start_jobs: Optional[List["Job"]] = None
-    ) -> Tuple[dict, str]:
+    def run(self, payload: Optional[dict] = None) -> Tuple[dict, str]:
         self.job.status, self.job.state = "Running", {}
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
             results = self.job.build_results(
-                self, payload or self["initial_payload"], start_jobs
+                self, payload or self["initial_payload"]
             )
             self.close_connection_cache()
             self.log("info", f"{self.job.type} {self.job.name}: Finished")
@@ -708,10 +706,11 @@ class Workflow(Job):
     start_jobs = relationship("Job", secondary=start_jobs_workflow_table, backref="start_workflows")
 
     def __init__(self, **kwargs: Any) -> None:
-        end = fetch("Service", name="End")
-        default = [fetch("Service", name="Start"), end]
+        start, end = fetch("Service", name="Start"), fetch("Service", name="End")
+        default = [start, end]
         self.jobs.extend(default)
         super().__init__(**kwargs)
+        self.start_jobs = [start]
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
@@ -774,10 +773,10 @@ class Workflow(Job):
                 yield successor
 
     def build_results(
-        self, run: "Run", payload: dict, start_jobs: Optional[List["Job"]] = None
+        self, run: "Run", payload: dict
     ) -> dict:
         self.state = {"jobs": {}}
-        jobs: list = start_jobs or [self.jobs[0]]
+        jobs: list = self.start_jobs
         payload = deepcopy(payload)
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}

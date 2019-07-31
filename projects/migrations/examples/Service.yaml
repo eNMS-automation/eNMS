@@ -10,7 +10,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-30 22:38:14.579347'
+  last_modified: '2019-07-31 12:21:30.000641'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1853,7 +1853,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-30 22:38:14.878322'
+  last_modified: '2019-07-31 12:21:30.356945'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1895,7 +1895,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-30 22:38:15.227655'
+  last_modified: '2019-07-31 12:21:30.820983'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1917,8 +1917,9 @@
   size: 40
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
-    , \"192.168.105.5\", section=\"pools\")\r\nset_var(\"iteration_device\", [\"Washington\"\
-    , \"Austin\"], section=\"pools\", device=device.name)\r\nsave_result(success=True,\
+    , \"192.168.105.5\", section=\"pools\")\r\ndevices = [\"Boston\", \"Cincinnati\"\
+    ] if device.name == \"Chicago\" else [\"Cleveland\", \"Baltimore\"]\r\nset_var(\"\
+    iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
   time_between_retries: 10
@@ -1948,7 +1949,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-30 22:38:18.872041'
+  last_modified: '2019-07-31 12:21:35.585037'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2003,7 +2004,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-30 22:38:19.321270'
+  last_modified: '2019-07-31 12:21:36.036590'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false

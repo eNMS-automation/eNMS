@@ -126,7 +126,7 @@ function showRestartPanel() {
             .attr("value", job.name)
             .text(job.name)
         );
-        $("#start_points").append(
+        $("#start_jobs").append(
           $("<option></option>")
             .attr("value", job.id)
             .text(job.name)
@@ -140,7 +140,7 @@ function showRestartPanel() {
         );
       });
       $("#payload_version").val(runtimes[runtimes.length - 1]);
-      $("#payload_version,#payloads_to_include,#start_points").selectpicker(
+      $("#payload_version,#payloads_to_include,#start_jobs").selectpicker(
         "refresh"
       );
     });

@@ -48,6 +48,7 @@ from eNMS.database.associations import (
     job_event_table,
     job_pool_table,
     job_workflow_table,
+    start_jobs_workflow_table,
 )
 from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device
@@ -285,14 +286,14 @@ class Run(AbstractBase):
                 conn.disconnect() if library == "netmiko" else conn.close()
 
     def run(
-        self, payload: Optional[dict] = None, start_points: Optional[List["Job"]] = None
+        self, payload: Optional[dict] = None, start_jobs: Optional[List["Job"]] = None
     ) -> Tuple[dict, str]:
         self.job.status, self.job.state = "Running", {}
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
             results = self.job.build_results(
-                self, payload or self["initial_payload"], start_points
+                self, payload or self["initial_payload"], start_jobs
             )
             self.close_connection_cache()
             self.log("info", f"{self.job.type} {self.job.name}: Finished")
@@ -704,6 +705,7 @@ class Workflow(Job):
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
     )
+    start_jobs = relationship("Job", secondary=start_jobs_workflow_table, backref="start_workflows")
 
     def __init__(self, **kwargs: Any) -> None:
         end = fetch("Service", name="End")
@@ -772,10 +774,10 @@ class Workflow(Job):
                 yield successor
 
     def build_results(
-        self, run: "Run", payload: dict, start_points: Optional[List["Job"]] = None
+        self, run: "Run", payload: dict, start_jobs: Optional[List["Job"]] = None
     ) -> dict:
         self.state = {"jobs": {}}
-        jobs: list = start_points or [self.jobs[0]]
+        jobs: list = start_jobs or [self.jobs[0]]
         payload = deepcopy(payload)
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}

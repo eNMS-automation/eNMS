@@ -148,7 +148,7 @@ class RestartWorkflowForm(BaseForm):
     payloads_to_include = NoValidationSelectMultipleField(
         "Payloads to Include", choices=()
     )
-    start_points = NoValidationSelectMultipleField("Start Points", choices=())
+    start_jobs = NoValidationSelectMultipleField("Start Points", choices=())
 
 
 class AddJobsForm(BaseForm):

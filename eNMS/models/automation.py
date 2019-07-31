@@ -475,9 +475,12 @@ class Run(AbstractBase):
     def sub(self, input: Any, variables: dict) -> dict:
         r = compile("{{(.*?)}}")
 
+        def get_var(*args: Any, **kwargs: Any) -> Any:
+            return self.payload_helper(variables["payload"], *args, **kwargs)
+
         def replace(match: Match) -> str:
             try:
-                return str(eval(match.group()[2:-2], variables))
+                return str(eval(match.group()[2:-2], {"get_var": get_var, **variables}))
             except AttributeError:
                 raise Exception(
                     "The variable subtitution mechanism failed."

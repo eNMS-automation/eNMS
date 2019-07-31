@@ -189,7 +189,7 @@ function getRuntimes(type, id) {
       if (type == "workflow" || type == "device") {
         updateJobList(type, id, true);
       } else {
-        updateDeviceList(type, id, id, true);
+        updateDeviceLists(type, id, id, true, true);
       }
     }
   });

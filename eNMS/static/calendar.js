@@ -16,6 +16,9 @@ $(function() {
         id: properties.id,
         description: properties.description,
         start: new Date(...properties.start),
+        runtime: properties.runtime,
+        jobId: properties.job.id,
+        jobType: properties.job.type == "Workflow" ? "workflow" : "service",
       });
     }
     $("#calendar").fullCalendar({
@@ -26,11 +29,11 @@ $(function() {
       },
       selectable: true,
       selectHelper: true,
-      eventClick: function(calEvent) {
+      eventClick: function(e) {
         if (calendarType == "task") {
-          showTypePanel("task", calEvent.id);
+          showTypePanel("task", e.id);
         } else {
-          showResultsPanel(calEvent.id, calEvent.title, 'run');
+          showResultsPanel(e.jobId, e.title, e.jobType, e.runtime);
         }
       },
       editable: true,

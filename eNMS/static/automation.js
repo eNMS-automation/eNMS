@@ -205,6 +205,7 @@ function updateDeviceLists(type, id, parentId, updateBoth, workflowDevice) {
   const workflow = workflowDevice ? "workflow_" : "";
   const formId = parentId || id;
   fCall(`/get_${workflow}device_list/${id}`, `#results-form-${formId}`, (result) => {
+    console.log(result);
     if (workflowDevice && result.workflow_devices.length) {      
       updateDeviceList(formId, updateBoth, "workflow_", result.workflow_devices);
       $(`#workflow_device-row-${id}`).show();

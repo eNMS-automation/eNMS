@@ -472,6 +472,36 @@ class Run(AbstractBase):
                 for source, destination in files:
                     getattr(scp, self["direction"])(source, destination)
 
+    def sub(self, input: Any, variables: dict) -> dict:
+        r = compile("{{(.*?)}}")
+
+        def replace(match: Match) -> str:
+            try:
+                return str(eval(match.group()[2:-2], variables))
+            except AttributeError:
+                raise Exception(
+                    "The variable subtitution mechanism failed."
+                    " If you are using the 'device' variable, "
+                    "check that the service has targets."
+                )
+            except NameError:
+                raise Exception(
+                    "The variable subtitution mechanism failed."
+                    " Check that all variables are defined."
+                )
+
+        def rec(input: Any) -> Any:
+            if isinstance(input, str):
+                return r.sub(replace, input)
+            elif isinstance(input, list):
+                return [rec(x) for x in input]
+            elif isinstance(input, dict):
+                return {rec(k): rec(v) for k, v in input.items()}
+            else:
+                return input
+
+        return rec(input)
+
     @property
     def name(self) -> str:
         return repr(self)
@@ -657,36 +687,6 @@ class Service(Job):
 
     def space_deleter(self, input: str) -> str:
         return "".join(input.split())
-
-    def sub(self, input: Any, variables: dict) -> dict:
-        r = compile("{{(.*?)}}")
-
-        def replace(match: Match) -> str:
-            try:
-                return str(eval(match.group()[2:-2], variables))
-            except AttributeError:
-                raise Exception(
-                    "The variable subtitution mechanism failed."
-                    " If you are using the 'device' variable, "
-                    "check that the service has targets."
-                )
-            except NameError:
-                raise Exception(
-                    "The variable subtitution mechanism failed."
-                    " Check that all variables are defined."
-                )
-
-        def rec(input: Any) -> Any:
-            if isinstance(input, str):
-                return r.sub(replace, input)
-            elif isinstance(input, list):
-                return [rec(x) for x in input]
-            elif isinstance(input, dict):
-                return {rec(k): rec(v) for k, v in input.items()}
-            else:
-                return input
-
-        return rec(input)
 
 
 class Workflow(Job):

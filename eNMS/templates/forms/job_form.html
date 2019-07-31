@@ -7,7 +7,18 @@
 >
   {{ form.csrf_token() }} {{ form.form_type(value=form_type) }} {{
   form.id(id=form_type + '-id', class="add-id") }}
-  <div class="modal-body">
+  <div style="padding:20px">
+    <center>
+      <button
+        id="{{ form_type }}-btn"
+        type="button"
+        style="width: 15%;"
+        class="btn btn-success add-id btn-id"
+        value="processData"
+      >
+        Save
+      </button>
+    </center><br>
     <div
       id="{{ form_type }}-wizard"
       class="form_wizard wizard_horizontal add-id"
@@ -340,17 +351,5 @@
       </div>
       {% endif %}
     </div>
-  </div>
-  <div class="modal-footer">
-    <center>
-      <button
-        id="{{ form_type }}-btn"
-        type="button"
-        class="btn btn-success pull-right add-id btn-id"
-        value="processData"
-      >
-        Save
-      </button>
-    </center>
   </div>
 </form>

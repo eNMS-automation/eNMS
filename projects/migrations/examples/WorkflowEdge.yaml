@@ -258,13 +258,38 @@
   source: Payload editor, with device
   subtype: success
   workflow: 'python Workflow: payload editor and pool helper'
-- destination: End
-  name: 56-success:58->2
-  source: Show vrf with python query
-  subtype: success
-  workflow: 'python Workflow: payload editor and pool helper'
 - destination: Show vrf with python query
   name: 56-failure:57->58
   source: Show vrf with payload helper
   subtype: failure
+  workflow: 'python Workflow: payload editor and pool helper'
+- destination: REST is_alive
+  name: 57-success:42->20
+  source: Show vrf with python query
+  subtype: success
+  workflow: 'python Workflow: payload editor and pool helper'
+- destination: netmiko_check_vrf_napalm
+  name: 57-success:20->34
+  source: REST is_alive
+  subtype: success
+  workflow: 'python Workflow: payload editor and pool helper'
+- destination: End
+  name: 57-success:34->2
+  source: netmiko_check_vrf_napalm
+  subtype: success
+  workflow: 'python Workflow: payload editor and pool helper'
+- destination: netmiko_check_vrf_test
+  name: 57-failure:34->16
+  source: netmiko_check_vrf_napalm
+  subtype: failure
+  workflow: 'python Workflow: payload editor and pool helper'
+- destination: End
+  name: 57-failure:16->2
+  source: netmiko_check_vrf_test
+  subtype: failure
+  workflow: 'python Workflow: payload editor and pool helper'
+- destination: get_facts
+  name: 57-success:16->21
+  source: netmiko_check_vrf_test
+  subtype: success
   workflow: 'python Workflow: payload editor and pool helper'

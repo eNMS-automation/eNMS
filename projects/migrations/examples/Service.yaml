@@ -10,7 +10,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-31 13:15:51.790080'
+  last_modified: '2019-07-31 13:25:27.972245'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -77,7 +77,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-31 13:15:59.659478'
+  last_modified: '2019-07-31 13:25:56.728091'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -112,8 +112,8 @@
     - '500'
     - '0'
     'python Workflow: payload editor and pool helper': !!python/tuple
-    - 462
-    - -203
+    - 530
+    - 155
     python_query_workflow:
     - '651'
     - '20'
@@ -670,7 +670,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 19:57:08.214349'
+  last_modified: '2019-07-31 13:25:56.259671'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -690,6 +690,9 @@
     Workflow with separate failure - success path:
     - '84'
     - '-3'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 422
+    - -177
     python_query_workflow:
     - '414'
     - '-154'
@@ -896,7 +899,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-16 00:47:56.918114'
+  last_modified: '2019-07-31 13:25:41.424603'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -921,6 +924,9 @@
     payload_transfer_workflow:
     - '-50'
     - '0'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 225
+    - -223
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -955,7 +961,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 14:38:03.222820'
+  last_modified: '2019-07-31 13:25:04.527174'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -973,6 +979,9 @@
     payload_transfer_workflow:
     - '-50'
     - '-100'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 674
+    - -172
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1581,7 +1590,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 20:09:45.541990'
+  last_modified: '2019-07-31 13:25:52.803768'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1595,6 +1604,9 @@
     Napalm_VRF_workflow:
     - '10'
     - '-32'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 266
+    - 161
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1853,7 +1865,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-31 13:15:52.042171'
+  last_modified: '2019-07-31 13:25:29.352379'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1895,7 +1907,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-31 13:15:52.388378'
+  last_modified: '2019-07-31 13:25:31.392491'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1906,8 +1918,8 @@
   pools: []
   positions:
     'python Workflow: payload editor and pool helper': !!python/tuple
-    - -93
-    - 163
+    - -159
+    - 148
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1949,7 +1961,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-31 13:15:57.209380'
+  last_modified: '2019-07-31 13:25:38.941367'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1961,8 +1973,8 @@
   pools: []
   positions:
     'python Workflow: payload editor and pool helper': !!python/tuple
-    - 166
-    - -247
+    - 35
+    - -232
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_device", section="pools", device=workflow_device.name)
@@ -2004,7 +2016,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-31 13:15:59.365845'
+  last_modified: '2019-07-31 13:25:41.095217'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2016,8 +2028,8 @@
   pools: []
   positions:
     'python Workflow: payload editor and pool helper': !!python/tuple
-    - 300
-    - 132
+    - 47
+    - 160
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_simple", section="pools")

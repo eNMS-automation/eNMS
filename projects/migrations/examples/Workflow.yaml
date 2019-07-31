@@ -442,7 +442,11 @@
   - Payload editor, with device
   - Show vrf with payload helper
   - Show vrf with python query
-  last_modified: '2019-07-31 13:15:59.950797'
+  - REST is_alive
+  - netmiko_check_vrf_napalm
+  - netmiko_check_vrf_test
+  - get_facts
+  last_modified: '2019-07-31 13:26:15.980700'
   mail_recipient: ''
   name: 'python Workflow: payload editor and pool helper'
   notification_header: ''

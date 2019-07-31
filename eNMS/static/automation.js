@@ -311,10 +311,24 @@ function showLogs(id, job) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function showResultsPanel(id, name, type) {
+function showResultsPanel(id, name, type, runtime) {
   createPanel(`${type}_results`, `Results - ${name}`, id, function() {
     configureResultsCallbacks(id, type);
-    getRuntimes(type, id);
+    if (runtime) {
+      $(`#runtime-${id},#runtime_compare-${id}`).append(
+        $("<option></option>")
+          .attr("value", runtime)
+          .text(runtime)
+      );
+      $(`#runtime-row-${id}`).hide();
+      if (type == "workflow") {
+        updateJobList(type, id, true);
+      } else {
+        updateDeviceLists(type, id, id, true, true);
+      }
+    } else {
+      getRuntimes(type, id);
+    }
   });
 }
 

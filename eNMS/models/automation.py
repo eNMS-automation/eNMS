@@ -118,12 +118,14 @@ class Run(AbstractBase):
             raise AttributeError
 
     def generate_row(self, table: str) -> List[str]:
+        job_type = "workflow" if self.job.type == "Workflow" else "service"
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogs('{self.runtime}', '{self.job_name}')">
             </i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showResultsPanel('{self.id}', '{self.name}', 'run')">
+            onclick="showResultsPanel('{self.job.id}', '{self.name}',
+            '{job_type}', '{self.runtime}')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('run', '{self.id}')">View</button>""",

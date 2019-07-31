@@ -193,7 +193,7 @@ class AutomationController(BaseController):
 
     def get_run_results(self, id: int, device, **kw) -> Optional[dict]:
         run = fetch("Run", allow_none=True, id=id)
-        return self.get_service_results(run.job.id, run.runtime, device, None)
+        return self.get_service_results(run.job.id, run.runtime, device, None, None)
 
     def get_device_results(self, id: int, runtime, **_) -> Optional[dict]:
         run = fetch("Run", allow_none=True, runtime=runtime)

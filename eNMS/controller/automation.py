@@ -244,22 +244,22 @@ class AutomationController(BaseController):
 
     def restart_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
         workflow = fetch("Workflow", id=workflow_id)
-        result = fetch(
-            "Result",
-            allow_none=True,
-            job_id=workflow_id,
-            runtime=kwargs.get("payload_version"),
-        )
-        payload = result.result["results"] if result else {}
+        run = fetch("Run", allow_none=True, job_id=workflow_id, runtime=kwargs.get("payload_version"))
+        if not run:
+            payload = {}
+        else:
+            result = [r for r in run.results if not r.device_id]
+            payload = result[0].result["results"] if result else {}
         payload_jobs = set(payload) & set(kwargs["payloads_to_include"])
         payload = {k: payload[k] for k in payload if k in payload_jobs}
         if workflow.status == "Running":
             return {"error": "Workflow is already running."}
+        runtime = self.get_time()
         self.scheduler.add_job(
-            id=self.get_time(),
+            id=runtime,
             func=run_job,
             run_date=datetime.now(),
-            args=[workflow_id, None, None, payload, kwargs["start_points"]],
+            args=[runtime, workflow_id],
             trigger="date",
         )
         return workflow.name

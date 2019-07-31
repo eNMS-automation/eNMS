@@ -201,40 +201,37 @@ function getRuntimes(type, id) {
  * @param {parentId} parentId - Parent ID.
  * @param {boolean} updateBoth - update both device lists.
  */
-function updateDeviceList(type, id, parentId, updateBoth) {
+function updateDeviceLists(type, id, parentId, updateBoth, workflowDevice) {
+  const workflow = workflowDevice ? "workflow_" : "";
   const formId = parentId || id;
-  fCall(`/get_device_list/${id}`, `#results-form-${formId}`, (result) => {
-    let ids;
-    let workflowIds;
-    if (updateBoth) {
-      ids = `#device-${formId},#device_compare-${formId}`;
-      workflowIds = `#workflow_device-${formId},#workflow_device_compare-${formId}`;
+  fCall(`/get_${workflow}device_list/${id}`, `#results-form-${formId}`, (result) => {
+    if (workflowDevice && result.workflow_devices.length) {
+      $("#workflow_device-row").show();
+      updateDeviceList(comp, formId, updateBoth, "workflow_", result.workflow_devices);
     } else {
-      const comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
-      ids = `#device${comp}-${formId}`;
-      workflowIds = `#workflow_device${comp}-${formId}`;
+      updateDeviceList(comp, formId, updateBoth, "", result.devices);
     }
-    $(ids).empty();
-    $(workflowIds).empty();
-    result.devices.forEach((device) => {
-      $(ids).append(
-        $("<option></option>")
-          .attr("value", device[0])
-          .text(device[1])
-      );
-    });
-    result.workflow_devices.forEach((device) => {
-      console.log(device);
-      $(workflowIds).append(
-        $("<option></option>")
-          .attr("value", device[0])
-          .text(device[1])
-      );
-    });
-    $(ids).selectpicker("refresh");
-    $(workflowIds).selectpicker("refresh");
     displayResults(type, id, formId);
   });
+}
+
+function updateDeviceList(comp, formId, updateBoth, workflow, devices) {
+  let ids;
+  if (updateBoth) {
+    ids = `#${workflow}device-${formId},#${workflow}device_compare-${formId}`;
+  } else {
+    const comp = $(`#compare-${formId}`).is(":checked") ? "_compare" : "";
+    ids = `#${workflow}device${comp}-${formId}`;
+  }
+  $(ids).empty();
+  devices.forEach((device) => {
+    $(ids).append(
+      $("<option></option>")
+        .attr("value", device[0])
+        .text(device[1])
+    );
+  });
+  $(ids).selectpicker("refresh");
 }
 
 /**
@@ -321,7 +318,7 @@ function configureResultsCallbacks(id, type) {
   if (type != "run") {
     $(`#runtime-${id},#runtime_compare-${id}`).on("change", function() {
       $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      if (type != "device") updateDeviceList(type, id);
+      if (type != "device") updateDeviceList(type, id, id, false, true);
       if (type != "service") updateJobList(type, id);
     });
   } else {
@@ -331,9 +328,14 @@ function configureResultsCallbacks(id, type) {
   if (type != "service") {
     $(`#job-${id},#job_compare-${id}`).on("change", function() {
       $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      updateDeviceList(type, id);
+      updateDeviceList(type, id, id, false, true);
     });
   }
+
+  $(`#workflow_device-${id},#workflow_device_compare-${id}`).on("change", function() {
+    $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
+    updateDeviceList(type, id);
+  });
 
   $(`#view_type-${id}`).on("change", function() {
     displayResults(type, id, id);

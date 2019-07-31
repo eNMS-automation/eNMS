@@ -113,6 +113,19 @@ class AutomationController(BaseController):
             runs = fetch("Run", allow_none=True, all_matches=True, job_id=id)
         return sorted(set((run.runtime, run.runtime) for run in runs))
 
+    def get_workflow_device_list(self, id: int, **kw: Any) -> list:
+        comp = "_compare" if kw["compare"] else ""
+        if kw.get(f"job{comp}") in ("global", "all"):
+            return []
+        runtime_key = "parent_runtime" if "job" in kw else "runtime"
+        request = {runtime_key: kw.get(f"runtime{comp}")}
+        request["job_id"] = kw.get(f"job{comp}")
+        runs = fetch("Run", allow_none=True,  all_matches=True, **request)
+        return {
+            "workflow_devices": [("", ""), (r.workflow_device_id, r.workflow_device.name) for r in runs if r.workflow_device_id],
+            "devices": self.get_device_list(id, **kw)
+        }
+
     def get_device_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         defaults = [
@@ -128,30 +141,18 @@ class AutomationController(BaseController):
             request = {runtime_key: kw.get(f"runtime{comp}", id)}
             if kw.get(f"job{comp}") not in ("global", "all"):
                 request["job_id"] = kw.get(f"job{comp}", id)
-        runs = fetch("Run", allow_none=True, all_matches=True, **request)
-        results = chain.from_iterable(r.results for r in runs)
+            if kw.get(f"workflow_device{comp}"):
+                request["workflow_device_id"] = kw.get(f"workflow_device{comp}")
+        runs = fetch("Run", allow_none=True,  **request)
         if not runs:
-            return defaults
-        return {
-            "devices": (
-                defaults + list(
-                    set(
-                        (result.device_id, result.device_name)
-                        for result in results
-                        if result.device_id
-                    )
-                )
-            ),
-            "workflow_devices": (
-                [("", "")] + list(
-                    set(
-                        (run.workflow_device_id, run.workflow_device.name)
-                        for run in runs
-                        if run.workflow_device_id
-                    )
-                )
-            ),
-        }
+            return []
+        return defaults + list(
+            set(
+                (result.device_id, result.device_name)
+                for result in runs.results
+                if result.device_id
+            )
+        )
 
     def get_job_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
@@ -198,9 +199,8 @@ class AutomationController(BaseController):
 
     def get_workflow_results(self, id: int, runtime, device, job, workflow_device) -> Optional[dict]:
         if "all" not in job:
-            return self.get_service_results(job, runtime, device, job)
+            return self.get_service_results(job, runtime, device, job, workflow_device)
         request = {"parent_runtime": runtime, "all_matches": True}
-        print("aa"*100, workflow_device)
         if job in ("all passed", "all failed"):
             request["success"] = job == "all passed"
         return {
@@ -209,9 +209,12 @@ class AutomationController(BaseController):
             if run.job_id != int(id)
         }
 
-    def get_service_results(self, id: int, runtime, device, job) -> Optional[dict]:
+    def get_service_results(self, id: int, runtime, device, job, workflow_device) -> Optional[dict]:
         runtime_key = "parent_runtime" if job else "runtime"
         request = {runtime_key: runtime, "job_id": id}
+        print("aaa"*100, workflow_device)
+        if workflow_device:
+            request["workflow_device_id"] = workflow_device
         if device in ("all passed", "all failed"):
             request["success"] = device == "all passed"
         run = fetch("Run", allow_none=True, **request)

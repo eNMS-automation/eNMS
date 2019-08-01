@@ -43,7 +43,6 @@ service_table_properties: List[str] = [
     "creator",
     "number_of_retries",
     "time_between_retries",
-    "status",
 ]
 
 workflow_table_properties: List[str] = [
@@ -57,7 +56,6 @@ workflow_table_properties: List[str] = [
     "operating_system",
     "number_of_retries",
     "time_between_retries",
-    "status",
 ]
 
 user_table_properties: List[str] = ["name", "email"]
@@ -128,7 +126,6 @@ job_filtering_properties = [
     "credentials",
     "waiting_time",
     "send_notification_method",
-    "status",
     "mail_recipient",
     "number_of_retries",
     "time_between_retries",

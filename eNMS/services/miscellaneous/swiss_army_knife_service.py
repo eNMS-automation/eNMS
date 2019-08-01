@@ -13,7 +13,7 @@ from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import factory, fetch_all
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device
 
 

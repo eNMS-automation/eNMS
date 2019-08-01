@@ -8,7 +8,6 @@
 # SQL Alchemy Column types
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from typing import Optional
 
 # WTForms Fields
 from wtforms import (
@@ -38,7 +37,7 @@ from wtforms.validators import (
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models.automation import Job, Service
+from eNMS.models.automation import Run, Service
 
 
 class ExampleService(Service):

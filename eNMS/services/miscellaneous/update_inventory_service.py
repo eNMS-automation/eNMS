@@ -1,11 +1,10 @@
 from sqlalchemy import Column, ForeignKey, Integer, PickleType
 from sqlalchemy.ext.mutable import MutableDict
-from typing import Optional
 from wtforms import HiddenField
 
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models.automation import Job, Service
+from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device
 
 

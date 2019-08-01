@@ -1,5 +1,4 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
-from typing import Optional
 from wtforms import BooleanField, HiddenField, StringField
 from wtforms.widgets import TextArea
 
@@ -7,7 +6,7 @@ from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm
-from eNMS.models.automation import Job, Service
+from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device
 
 

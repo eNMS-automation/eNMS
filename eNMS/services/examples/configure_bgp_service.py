@@ -1,10 +1,9 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
-from typing import Optional
 from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Job, Service
+from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device
 
 

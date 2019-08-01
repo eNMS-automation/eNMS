@@ -9,7 +9,7 @@ from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.models.automation import Job, Service
+from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device
 
 

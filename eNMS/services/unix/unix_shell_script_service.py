@@ -1,14 +1,13 @@
 from fabric import Connection
 from io import StringIO
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, Text
-from typing import Optional
 from wtforms import HiddenField, StringField, BooleanField
 from wtforms.widgets import TextArea
 
 from eNMS.database import LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import StringValidationForm
-from eNMS.models.automation import Job, Service
+from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device
 
 

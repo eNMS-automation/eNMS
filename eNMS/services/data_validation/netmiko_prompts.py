@@ -1,6 +1,5 @@
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.ext.mutable import MutableDict
-from typing import Optional
 from wtforms import HiddenField
 
 from eNMS.database import (
@@ -11,7 +10,7 @@ from eNMS.database import (
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm, ValidationForm
-from eNMS.models.automation import Job, Service
+from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device
 
 

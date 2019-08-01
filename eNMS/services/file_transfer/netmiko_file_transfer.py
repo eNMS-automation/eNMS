@@ -1,6 +1,5 @@
 from netmiko import file_transfer
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
-from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.validators import InputRequired
 
@@ -8,7 +7,7 @@ from eNMS.database import SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm
-from eNMS.models.automation import Job, Service
+from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device
 
 

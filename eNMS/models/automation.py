@@ -319,7 +319,7 @@ class Run(AbstractBase):
             Session.commit()
         if not self.workflow and self["send_notification"]:
             self.notify(results)
-        return results, self.runtime
+        return results
 
     def create_result(self, results: dict, device: Optional["Device"] = None):
         self.success = results["success"]
@@ -806,7 +806,7 @@ class Workflow(Job):
                             workflow_device=base_target.id,
                             parent_runtime=run.parent_runtime,
                         )
-                        derived_target_result = job_run.run(payload)[0]
+                        derived_target_result = job_run.run(payload)
                         device_results[base_target.name] = derived_target_result
                         if not derived_target_result["success"]:
                             success = False
@@ -830,7 +830,7 @@ class Workflow(Job):
                     parent_runtime=run.parent_runtime,
                 )
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
-                job_results = job_run.run(payload)[0]
+                job_results = job_run.run(payload)
             self.state["jobs"][job.id] = job_results["success"]
             if run["use_workflow_targets"]:
                 successors = self.workflow_targets_processing(

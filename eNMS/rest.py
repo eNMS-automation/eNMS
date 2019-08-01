@@ -128,7 +128,8 @@ class RunJob(Resource):
 
     def post(self) -> Union[str, dict]:
         try:
-            errors, targets, data = [], set(), request.get_json(force=True)
+            errors, data = [], request.get_json(force=True)
+            devices, pools = [], []
             job = fetch("Job", name=data["name"])
             if job.status == "Running":
                 return {"error": "Job is already running."}
@@ -136,19 +137,19 @@ class RunJob(Resource):
             for device_name in data.get("devices", ""):
                 device = fetch("Device", name=device_name)
                 if device:
-                    targets.add(device)
+                    devices.append(device.id)
                 else:
                     errors.append(f"No device with the name '{device_name}'")
             for device_ip in data.get("ip_addresses", ""):
                 device = fetch("Device", ip_address=device_ip)
                 if device:
-                    targets.add(device)
+                    devices.append(device.id)
                 else:
                     errors.append(f"No device with the IP address '{device_ip}'")
             for pool_name in data.get("pools", ""):
                 pool = fetch("Pool", name=pool_name)
                 if pool:
-                    targets |= set(pool.devices)
+                    pools.append(pool.id)
                 else:
                     errors.append(f"No pool with the name '{pool_name}'")
             if errors and not targets:
@@ -156,26 +157,22 @@ class RunJob(Resource):
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)
+        data["devices"] = devices
+        data["pools"] = pools
+        runtime = controller.get_time()
         if handle_asynchronously:
-            runtime = controller.get_time()
             controller.scheduler.add_job(
                 id=runtime,
                 func=run_job,
                 run_date=datetime.now(),
-                args=[
-                    job.id,
-                    None,
-                    [d.id for d in targets],
-                    data.get("payload"),
-                    None,
-                    runtime,
-                ],
+                args=[runtime, job.id],
+                kwargs=data,
                 trigger="date",
             )
-            return {"errors": errors, "runtime": runtime, **job.get_properties()}
+            return {"errors": errors, "runtime": runtime}
         else:
             return {
-                **job.run(targets=targets, payload=data.get("payload"))[0],
+                **run_job(runtime, job.id, data),
                 "errors": errors,
             }
 

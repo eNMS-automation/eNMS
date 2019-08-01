@@ -27,7 +27,6 @@ class IterationService(Service):
     )
     python_query_values = Column(String(SMALL_STRING_LENGTH), default="")
     user_provided_values = Column(MutableDict.as_mutable(PickleType), default={})
-    convert_values_to_devices = Column(Boolean, default=False)
     conversion_property = Column(String(SMALL_STRING_LENGTH), default="name")
     variable_name = Column(String(SMALL_STRING_LENGTH), default="value")
 
@@ -44,35 +43,14 @@ class IterationService(Service):
                 values = run["user_provided_values"]["all"]
         else:
             values = eval(run["python_query_values"], locals())
-        if run["convert_values_to_devices"]:
-            fail_results, devices = {}, set()
-            for value in values:
-                device = fetch(
-                    "Device", allow_none=True, **{run["conversion_property"]: value}
-                )
-                if not device:
-                    fail_results[value] = {
-                        "result": "Error: no corresponding device",
-                        "success": False,
-                    }
-                else:
-                    devices.add(device)
-            results = run["iterated_job"].run(
-                payload=payload, targets=devices, parent=parent or self
-            )[0]
-            if fail_results:
-                results["results"]["devices"].update(fail_results)
-                results["success"] = False
-            success = results["success"]
-        else:
-            results, success = {}, True
-            for value in values:
-                result = run["iterated_job"].job(
-                    {run["variable_name"]: value, **payload}, device
-                )
-                results[value] = result
-                if not result["success"]:
-                    success = False
+        results, success = {}, True
+        for value in values:
+            result = run["iterated_job"].job(
+                {run["variable_name"]: value, **payload}, device
+            )
+            results[value] = result
+            if not result["success"]:
+                success = False
         return {"success": success, "Iteration values": values, **results}
 
 

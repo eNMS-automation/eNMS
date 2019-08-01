@@ -10,7 +10,7 @@ from eNMS.controller import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.database.base import Base
 from eNMS.database.functions import fetch_all
-from eNMS.models.automation import Job, Workflow
+from eNMS.models.automation import Workflow
 from eNMS.properties import private_properties
 from eNMS.properties.database import dont_track_changes
 

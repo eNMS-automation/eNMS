@@ -4,7 +4,6 @@ from git import Repo
 from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
-from logging import getLogger
 from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
@@ -16,7 +15,6 @@ from re import compile, search
 from scp import SCPClient
 from sqlalchemy import (
     Boolean,
-    case,
     Column,
     ForeignKey,
     Integer,
@@ -25,7 +23,6 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
@@ -294,10 +291,12 @@ class Run(AbstractBase):
             results = self.job.build_results(self, payload or self["initial_payload"])
             self.close_connection_cache()
             self.log("info", f"{self.job.type} {self.job.name}: Finished")
-        except Exception as exc:
+        except Exception:
             result = (
-                f"Running {self.job.type} '{self.job.name}' raised the following exception:\n"
-                f"{chr(10).join(format_exc().splitlines())}\n\nRun aborted..."
+                f"Running {self.job.type} '{self.job.name}'"
+                " raised the following exception:\n"
+                f"{chr(10).join(format_exc().splitlines())}\n\n"
+                "Run aborted..."
             )
             self.log("error", result)
             results = {"success": False, "results": result}
@@ -408,8 +407,8 @@ class Run(AbstractBase):
             else (device.username, device.password)
             if self["credentials"] == "device"
             else (
-                run.sub(self.job.custom_username, locals()),
-                run.sub(self.job.custom_password, locals()),
+                self.sub(self.job.custom_username, locals()),
+                self.sub(self.job.custom_password, locals()),
             )
         )
 
@@ -627,8 +626,6 @@ class Service(Job):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             controller.job_db[run.runtime]["completed"] = 0
             controller.job_db[run.runtime]["failed"] = 0
-            if not run.workflow:
-                Session.commit()
             attempt = self.device_run(run, payload, targets)
             Session.commit()
             if targets:

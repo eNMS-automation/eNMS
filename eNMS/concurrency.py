@@ -1,6 +1,3 @@
-from typing import List, Optional
-
-from eNMS.database import Session
 from eNMS.database.functions import factory, fetch
 
 

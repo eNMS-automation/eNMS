@@ -150,7 +150,7 @@ class RunJob(Resource):
                     pools.append(pool.id)
                 else:
                     errors.append(f"No pool with the name '{pool_name}'")
-            if errors and not targets:
+            if errors:
                 return {"errors": errors}
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
@@ -160,7 +160,6 @@ class RunJob(Resource):
         if pools:
             data["pools"] = pools
         runtime = controller.get_time()
-        print(data)
         if handle_asynchronously:
             controller.scheduler.add_job(
                 id=runtime,

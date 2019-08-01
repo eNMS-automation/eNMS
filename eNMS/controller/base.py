@@ -17,10 +17,6 @@ from ldap3 import ALL, Server
 from logging import (
     basicConfig,
     error,
-    FileHandler,
-    Formatter,
-    getLogger,
-    INFO,
     info,
     StreamHandler,
     warning,

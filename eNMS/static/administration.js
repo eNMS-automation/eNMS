@@ -223,16 +223,6 @@ function databaseDeletion() {
 }
 
 /**
- * Reset Status.
- */
-// eslint-disable-next-line
-function resetStatus() {
-  call("/reset_status", function(result) {
-    alertify.notify("Reset successful.", "success", 5);
-  });
-}
-
-/**
  * Git Action.
  */
 // eslint-disable-next-line

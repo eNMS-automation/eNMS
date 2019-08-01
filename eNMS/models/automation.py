@@ -285,9 +285,7 @@ class Run(AbstractBase):
                 conn.disconnect() if library == "netmiko" else conn.close()
 
     def run(self, payload: Optional[dict] = None) -> Tuple[dict, str]:
-        self.job.status = "Running"
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
-        Session.commit()
         try:
             results = self.job.build_results(self, payload or self["initial_payload"])
             self.close_connection_cache()
@@ -300,7 +298,6 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "results": result}
         finally:
-            self.job.status = "Idle"
             self.status = f"Completed ({'success' if self.success else 'failure'})"
             controller.job_db[self.runtime]["completed"] = 0
             controller.job_db[self.runtime]["failed"] = 0

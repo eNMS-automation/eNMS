@@ -131,8 +131,6 @@ class RunJob(Resource):
             errors, data = [], request.get_json(force=True)
             devices, pools = [], []
             job = fetch("Job", name=data["name"])
-            if job.status == "Running":
-                return {"error": "Job is already running."}
             handle_asynchronously = data.get("async", False)
             for device_name in data.get("devices", ""):
                 device = fetch("Device", name=device_name)

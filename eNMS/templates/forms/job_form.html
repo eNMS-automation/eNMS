@@ -75,31 +75,31 @@
       <div id="step-1">
         <div style="width: 100%;">
           {% if form_type != "workflow" %}
-          <label class="no-run">Type</label>
+          <label class="hide-run">Type</label>
           <div class="form-group">
-            {{ form.type(id=form_type + '-class', class="form-control no-run add-id")
+            {{ form.type(id=form_type + '-class', class="form-control hide-run add-id")
             }}
           </div>
           {% endif %}
-          <label class="no-run">Name</label>
+          <label class="hide-run">Name</label>
           <div class="form-group">
-            {{ form.name(id=form_type + '-name', class="form-control no-run add-id
+            {{ form.name(id=form_type + '-name', class="form-control hide-run add-id
             required") }}
           </div>
-          <label class="no-run">Description</label>
+          <label class="hide-run">Description</label>
           <div class="form-group">
             {{ form.description(id=form_type + '-description',
-            class="form-control no-run add-id") }}
+            class="form-control hide-run add-id") }}
           </div>
-          <label class="no-run">Vendor</label>
+          <label class="hide-run">Vendor</label>
           <div class="form-group">
             {{ form.vendor(id=form_type + '-vendor', class="form-control
-            no-run add-id") }}
+            hide-run add-id") }}
           </div>
-          <label class="no-run">Operating System</label>
+          <label class="hide-run">Operating System</label>
           <div class="form-group">
             {{ form.operating_system(id=form_type + '-operating_system',
-            class="form-control no-run add-id") }}
+            class="form-control hide-run add-id") }}
           </div>
           <label>Initial Payload</label>
           <div class="form-group">
@@ -207,17 +207,17 @@
         <div class="form-group">
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
-        <label class="no-run"
+        <label class="hide-run"
             >Python Query (populating will supersede device targets in a parent
             workflow)</label>
         <div class="form-group">
             {{ form.python_query(id=form_type + '-python_query',
-            class="form-control no-run add-id") }}
+            class="form-control hide-run add-id") }}
           </div>
-          <label class="no-run">Query Property Type</label>
+          <label class="hide-run">Query Property Type</label>
           <div class="form-group">
             {{ form.query_property_type(id=form_type + '-query_property_type',
-            class="form-control no-run add-id") }}
+            class="form-control hide-run add-id") }}
         </div>
         {% if form_type != "workflow" %}
         <fieldset>
@@ -242,15 +242,15 @@
           {{ form.credentials(id=form_type + '-credentials', class="form-control
           add-id") }}
         </div>
-        <label class="no-run">Custom Username</label>
+        <label class="hide-run">Custom Username</label>
         <div class="form-group">
           {{ form.custom_username(id=form_type + '-custom_username',
-          class="form-control no-run add-id") }}
+          class="form-control hide-run add-id") }}
         </div>
-        <label class="no-run">Custom Password</label>
+        <label class="hide-run">Custom Password</label>
         <div class="form-group">
           {{ form.custom_password(id=form_type + '-custom_password',
-          class="form-control no-run add-id") }}
+          class="form-control hide-run add-id") }}
         </div>
         {% endif %}
       </div>
@@ -267,29 +267,29 @@
             <input
               id="{{ form_type }}-start_new_connection"
               name="start_new_connection"
-              class="no-run add-id"
+              class="hide-run add-id"
               type="checkbox"
               value="y"
             />
-            <label class="no-run">Start New Connection</label>
+            <label class="hide-run">Start New Connection</label>
           </div>
         </fieldset>
-        <label class="no-run">Waiting time (in seconds)</label>
+        <label class="hide-run">Waiting time (in seconds)</label>
         <div class="form-group">
           {{ form.waiting_time(id=form_type + '-waiting_time',
-          class="form-control no-run add-id") }}
+          class="form-control hide-run add-id") }}
         </div>
-        <label class="no-run">Shape</label>
+        <label class="hide-run">Shape</label>
         <div class="form-group">
-          {{ form.shape(id=form_type + '-shape', class="form-control no-run add-id") }}
+          {{ form.shape(id=form_type + '-shape', class="form-control hide-run add-id") }}
         </div>
-        <label class="no-run">Color</label>
+        <label class="hide-run">Color</label>
         <div class="form-group">
-          {{ form.color(id=form_type + '-color', class="form-control no-run add-id") }}
+          {{ form.color(id=form_type + '-color', class="form-control hide-run add-id") }}
         </div>
-        <label class="no-run">Size</label>
+        <label class="hide-run">Size</label>
         <div class="form-group">
-          {{ form.size(id=form_type + '-size', class="form-control no-run add-id") }}
+          {{ form.size(id=form_type + '-size', class="form-control hide-run add-id") }}
         </div>
       </div>
       {% if form_type != "workflow" %}

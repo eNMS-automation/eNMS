@@ -441,7 +441,7 @@ function showTypePanel(type, id, mode) {
               .addClass("btn-primary")
               .attr("onclick", `runJob('${type}', ${id}, '${instance.name}')`)
               .text('Run');
-            $(".no-run").hide();
+            $(".hide-run").hide();
           }
         });
       } else {

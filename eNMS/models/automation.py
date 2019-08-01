@@ -285,7 +285,7 @@ class Run(AbstractBase):
                 conn.disconnect() if library == "netmiko" else conn.close()
 
     def run(self, payload: Optional[dict] = None) -> Tuple[dict, str]:
-        self.job.status, self.job.state = "Running", {}
+        self.job.status = "Running"
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
@@ -302,7 +302,7 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "results": result}
         finally:
-            self.job.status, self.job.state = "Idle", {}
+            self.job.status = "Idle"
             self.status = f"Completed ({'success' if self.success else 'failure'})"
             controller.job_db[self.runtime]["completed"] = 0
             controller.job_db[self.runtime]["failed"] = 0
@@ -522,7 +522,6 @@ class Job(AbstractBase):
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
     status = Column(String(SMALL_STRING_LENGTH), default="Idle")
-    state = Column(MutableDict.as_mutable(PickleType), default={})
     credentials = Column(String(SMALL_STRING_LENGTH), default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
     vendor = Column(String(SMALL_STRING_LENGTH), default="")
@@ -774,8 +773,8 @@ class Workflow(Job):
     def build_results(
         self, run: "Run", payload: dict
     ) -> dict:
-        self.state = {"jobs": {}}
-        jobs: list = self.start_jobs
+        controller.job_db[run.runtime]["state"] = {"jobs": {}, "edges": {}}
+        jobs: list = run["start_jobs"]
         payload = deepcopy(payload)
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
@@ -792,7 +791,7 @@ class Workflow(Job):
             ):
                 continue
             visited.add(job)
-            self.state["current_job"] = job.get_properties()
+            controller.job_db[run.runtime]["current_job"] = job.get_properties()
             Session.commit()
             if run["use_workflow_targets"] and job.python_query:
                 device_results, success = {}, True
@@ -830,7 +829,7 @@ class Workflow(Job):
                 )
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 job_results = job_run.run(payload)
-            self.state["jobs"][job.id] = job_results["success"]
+            controller.job_db[run.runtime]["jobs"][job.id] = job_results["success"]
             if run["use_workflow_targets"]:
                 successors = self.workflow_targets_processing(
                     allowed_devices, job, job_results

@@ -162,6 +162,7 @@ class RunJob(Resource):
         if pools:
             data["pools"] = pools
         runtime = controller.get_time()
+        print(data)
         if handle_asynchronously:
             controller.scheduler.add_job(
                 id=runtime,

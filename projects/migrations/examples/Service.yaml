@@ -10,7 +10,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-31 13:25:27.972245'
+  last_modified: '2019-08-01 11:52:44.218107'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -44,9 +44,9 @@
     payload_transfer_workflow:
     - '-200'
     - '0'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -326
-    - 45
+    'python Workflow: payload editor and pool helper':
+    - '-326'
+    - '45'
     python_query_workflow:
     - '-164'
     - '15'
@@ -61,6 +61,18 @@
   shape: circle
   size: 40
   start_new_connection: false
+  start_workflows:
+  - Configuration Management Workflow
+  - Netmiko_VRF_workflow
+  - Napalm_VRF_workflow
+  - payload_transfer_workflow
+  - python_test_worflow
+  - payload_extraction_validation_worflow
+  - Workflow_of_workflows
+  - Workflow with separate failure - success path
+  - python_query_workflow
+  - Netmiko prompts
+  - 'python Workflow: payload editor and pool helper'
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -77,7 +89,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-31 13:25:56.728091'
+  last_modified: '2019-08-01 11:40:22.000682'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -111,9 +123,9 @@
     payload_transfer_workflow:
     - '500'
     - '0'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 530
-    - 155
+    'python Workflow: payload editor and pool helper':
+    - '530'
+    - '155'
     python_query_workflow:
     - '651'
     - '20'
@@ -128,6 +140,7 @@
   shape: circle
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -162,6 +175,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -196,6 +210,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -230,6 +245,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -264,6 +280,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -280,7 +297,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 16:03:17.857988'
+  last_modified: '2019-08-01 11:38:04.913830'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -301,6 +318,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -317,7 +335,7 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 16:03:17.583402'
+  last_modified: '2019-08-01 11:38:04.642534'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -338,6 +356,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -387,6 +406,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -429,6 +449,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: ConfigureBgpService
   vendor: ''
@@ -472,6 +493,7 @@
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: GenericFileTransferService
   vendor: ''
@@ -510,6 +532,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: DatabaseBackupService
   vendor: ''
@@ -530,7 +553,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 16:03:16.569578'
+  last_modified: '2019-08-01 11:38:03.183017'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -550,6 +573,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   timeout: 10
   type: NetmikoBackupService
@@ -569,7 +593,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-23 16:03:17.399600'
+  last_modified: '2019-08-01 11:38:04.436716'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: true
@@ -589,6 +613,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: NapalmBackupService
   use_device_driver: true
@@ -615,7 +640,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 19:57:07.245710'
+  last_modified: '2019-08-01 11:40:13.402022'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -637,6 +662,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -670,7 +696,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-31 13:25:56.259671'
+  last_modified: '2019-08-01 11:40:14.512490'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -690,9 +716,9 @@
     Workflow with separate failure - success path:
     - '84'
     - '-3'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 422
-    - -177
+    'python Workflow: payload editor and pool helper':
+    - '422'
+    - '-177'
     python_query_workflow:
     - '414'
     - '-154'
@@ -708,6 +734,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -738,7 +765,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 19:57:11.610843'
+  last_modified: '2019-08-01 11:40:18.423301'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -763,6 +790,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -796,7 +824,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-24 19:57:13.792731'
+  last_modified: '2019-08-01 11:40:21.380540'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -828,6 +856,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 1
@@ -875,6 +904,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: NapalmConfigurationService
   use_device_driver: true
@@ -924,9 +954,9 @@
     payload_transfer_workflow:
     - '-50'
     - '0'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 225
-    - -223
+    'python Workflow: payload editor and pool helper':
+    - '225'
+    - '-223'
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -936,6 +966,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   timeout: 15
   type: RestCallService
@@ -979,9 +1010,9 @@
     payload_transfer_workflow:
     - '-50'
     - '-100'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 674
-    - -172
+    'python Workflow: payload editor and pool helper':
+    - '674'
+    - '-172'
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -990,6 +1021,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1039,6 +1071,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1085,6 +1118,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1131,6 +1165,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1172,6 +1207,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -1211,6 +1247,7 @@
   source_code: "set_var('iteration_devices',\r\n{'Washington': ['Loopback101', 'Loopback15'],\r\
     \n'Austin': ['Loopback9', 'Loopback1000']})\r\nsave_result(True, {})"
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1261,6 +1298,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1315,6 +1353,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1371,6 +1410,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1427,6 +1467,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: PayloadExtractionService
   variable1: simple_variable
@@ -1478,6 +1519,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: dict_included
@@ -1523,6 +1565,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
@@ -1562,6 +1605,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: NapalmRollbackService
   use_device_driver: true
@@ -1604,9 +1648,9 @@
     Napalm_VRF_workflow:
     - '10'
     - '-32'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 266
-    - 161
+    'python Workflow: payload editor and pool helper':
+    - '266'
+    - '161'
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1616,6 +1660,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1674,6 +1719,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1729,6 +1775,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1789,6 +1836,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   timeout: 10
   type: NetmikoPromptsService
@@ -1846,6 +1894,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   timeout: 10
   type: NetmikoPromptsService
@@ -1875,9 +1924,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -158
-    - -272
+    'python Workflow: payload editor and pool helper':
+    - '-158'
+    - '-272'
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1889,6 +1938,7 @@
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1917,9 +1967,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -159
-    - 148
+    'python Workflow: payload editor and pool helper':
+    - '-159'
+    - '148'
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1934,6 +1984,7 @@
     iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1972,9 +2023,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 35
-    - -232
+    'python Workflow: payload editor and pool helper':
+    - '35'
+    - '-232'
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_device", section="pools", device=workflow_device.name)
@@ -1984,6 +2035,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2027,9 +2079,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 47
-    - 160
+    'python Workflow: payload editor and pool helper':
+    - '47'
+    - '160'
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_simple", section="pools")
@@ -2039,6 +2091,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2050,7 +2103,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   conversion_property: name
-  convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
@@ -2089,6 +2141,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: IterationService
   user_provided_values:
@@ -2100,7 +2153,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   conversion_property: name
-  convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
@@ -2137,6 +2189,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -2145,7 +2198,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   conversion_property: name
-  convert_values_to_devices: false
   creator: admin
   credentials: device
   custom_username: ''
@@ -2182,6 +2234,7 @@
   shape: box
   size: 10
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -2190,7 +2243,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   conversion_property: name
-  convert_values_to_devices: true
   creator: admin
   credentials: device
   custom_username: ''
@@ -2227,6 +2279,7 @@
   shape: box
   size: 40
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}

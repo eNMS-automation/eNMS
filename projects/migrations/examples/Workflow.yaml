@@ -15,7 +15,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-07-31 12:17:32.788103'
+  last_modified: '2019-08-01 11:38:05.317494'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -30,7 +30,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: false
@@ -56,7 +59,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-31 12:17:32.922123'
+  last_modified: '2019-08-01 11:52:44.336464'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -72,7 +75,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -98,7 +104,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-31 12:17:33.062581'
+  last_modified: '2019-08-01 11:23:59.627363'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -116,7 +122,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -143,7 +152,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-07-31 12:17:33.274665'
+  last_modified: '2019-08-01 11:23:59.728971'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -161,7 +170,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -192,7 +204,7 @@
   - Iteration_service_simple
   - Iteration_service_python
   - Iteration_python_derived_targets
-  last_modified: '2019-07-31 12:17:33.466611'
+  last_modified: '2019-08-01 11:23:59.818802'
   mail_recipient: ''
   name: python_test_worflow
   notification_header: ''
@@ -207,7 +219,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -233,7 +248,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-07-31 12:17:33.616417'
+  last_modified: '2019-08-01 11:23:59.912638'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -248,7 +263,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -273,7 +291,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-07-31 12:17:33.770254'
+  last_modified: '2019-08-01 11:24:00.001050'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -288,7 +306,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -314,7 +335,7 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-07-31 12:17:34.002456'
+  last_modified: '2019-08-01 11:24:00.117268'
   mail_recipient: ''
   name: Workflow with separate failure - success path
   notification_header: ''
@@ -329,7 +350,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -361,7 +385,7 @@
   - Device_from_python_query
   - netmiko_check_no_vrf_test
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-07-31 12:17:34.160097'
+  last_modified: '2019-08-01 11:24:00.218810'
   mail_recipient: ''
   name: python_query_workflow
   notification_header: ''
@@ -376,7 +400,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -400,7 +427,7 @@
   - End
   - Test Netmiko Prompt Service
   - Test netmiko prompts pass
-  last_modified: '2019-07-31 12:17:34.280187'
+  last_modified: '2019-08-01 11:24:00.302090'
   mail_recipient: ''
   name: Netmiko prompts
   notification_header: ''
@@ -415,7 +442,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
@@ -446,7 +476,7 @@
   - netmiko_check_vrf_napalm
   - netmiko_check_vrf_test
   - get_facts
-  last_modified: '2019-07-31 13:26:15.980700'
+  last_modified: '2019-08-01 11:24:00.428491'
   mail_recipient: ''
   name: 'python Workflow: payload editor and pool helper'
   notification_header: ''
@@ -461,7 +491,10 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  start_jobs:
+  - Start
   start_new_connection: false
+  start_workflows: []
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true

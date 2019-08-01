@@ -32,6 +32,7 @@ and the content of app_logs in now in /logs.
 - you can still select a version of the payload
 - you can now choose exactly what jobs you want to see included in that payload
 - you can select not just one but multiple start points for the workflow
+- the restartability is now in the "Run Window"
 
 - make custom credentials blue / substitution fields
 >>> Done.

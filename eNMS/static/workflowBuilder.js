@@ -329,7 +329,6 @@ Object.assign(action, {
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => showTypePanel(job.type, job.id, 'run'),
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
-  "Restart Workflow": () => showRestartPanel(),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () =>

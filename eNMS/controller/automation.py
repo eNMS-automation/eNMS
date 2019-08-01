@@ -246,10 +246,6 @@ class AutomationController(BaseController):
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 
-    def reset_status(self) -> None:
-        for job in fetch_all("Job"):
-            job.status = "Idle"
-
     def add_restart_payload(self, job, **kwargs):
         run = fetch(
             "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version")
@@ -267,8 +263,6 @@ class AutomationController(BaseController):
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         job = fetch("Job", name=kwargs["name"])
-        if job.status == "Running":
-            return {"error": f"{job.type} is already running."}
         if job.type == "Workflow":
             self.add_restart_payload(job, **kwargs)
         runtime = self.get_time()

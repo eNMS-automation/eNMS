@@ -255,8 +255,8 @@ class AutomationController(BaseController):
             else:
                 result = [r for r in run.results if not r.device_id]
                 payload = result[0].result["results"] if result else {}
-            payload_jobs = set(payload) & set(kwargs.get("payloads_to_include", []))
-            kwargs["payload"] = {k: payload[k] for k in payload if k in payload_jobs}
+            payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))
+            kwargs["payload"] = {k: payload[k] for k in payload if k not in payload_jobs}
         runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(

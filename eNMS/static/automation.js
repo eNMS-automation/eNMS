@@ -57,29 +57,28 @@ function panelCode(type, id, mode) {
 }
 
 /**
- * workflowRunMode.
+ * Workflow Run Mode.
  * @param {instance} instance - Workflow Instance.
  */
 // eslint-disable-next-line
 function workflowRunMode(instance) {
-  call(`/get_runtimes/workflow/${id}`, function(runtimes) {
-    console.log(runtimes)
-    workflow.jobs.forEach((job) => {
-      $(`#payloads_to_include-${id}`).append(
+  call(`/get_runtimes/workflow/${instance.id}`, function(runtimes) {
+    instance.jobs.forEach((job) => {
+      $(`#workflow-payloads_to_exclude-${instance.id}`).append(
         $("<option></option>")
           .attr("value", job.name)
           .text(job.name)
       );
     });
     runtimes.forEach((runtime) => {
-      $(`#payload_version-${id}`).append(
+      $(`#workflow-payload_version-${instance.id}`).append(
         $("<option></option>")
           .attr("value", runtime[0])
           .text(runtime[0])
       );
     });
-    $(`#payload_version-${id}`).val(runtimes[runtimes.length - 1]);
-    $(`#payload_version-${id},#payloads_to_include-${id}`).selectpicker(
+    $(`#workflow-payload_version-${instance.id}`).val(runtimes[runtimes.length - 1]);
+    $(`#workflow-payload_version-${instance.id},#workflow-payloads_to_exclude-${instance.id}`).selectpicker(
       "refresh"
     );
   });

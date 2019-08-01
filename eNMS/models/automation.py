@@ -298,10 +298,10 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "results": result}
         finally:
-            self.status = f"Completed ({'success' if self.success else 'failure'})"
-            controller.job_db[self.runtime]["completed"] = 0
-            controller.job_db[self.runtime]["failed"] = 0
+            status = f"Completed ({'success' if self.success else 'failure'})"
+            self.status = controller.job_db[self.runtime]["status"] = status
             results["endtime"] = self.endtime = controller.get_time()
+            results["state"] = controller.job_db.pop(self.runtime)
             results["logs"] = controller.run_logs.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False

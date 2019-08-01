@@ -250,6 +250,8 @@ class AutomationController(BaseController):
         run = fetch(
             "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version")
         )
+        if not run:
+            return
         result = [r for r in run.results if not r.device_id]
         payload = result[0].result["results"] if result else {}
         if not isinstance(payload, dict):
@@ -291,8 +293,16 @@ class AutomationController(BaseController):
 
     def get_workflow_state(self, workflow_id, runtime: Optional[str] = None):
         workflow = fetch("Workflow", id=workflow_id)
-        runtimes = [r.runtime for r in fetch("Run", allow_none=True, all_matches=True, job_id=workflow_id)]
-        state = self.job_db.get(runtime)
+        runtimes = [
+            r.runtime
+            for r in fetch("Run", allow_none=True, all_matches=True, job_id=workflow_id)
+        ]
+        state = None
+        if runtime:
+            state = self.job_db.get(runtime)
+            if not state:
+                results = fetch("Run", runtime=runtime).results
+                state = [r for r in results if not r.device_id][0].result.get("state")
         return {"workflow": workflow.serialized, "runtimes": runtimes, "state": state}
 
     def convert_date(self, date: str) -> list:

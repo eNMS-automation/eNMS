@@ -93,11 +93,15 @@ function displayWorkflow(workflowData) {
       }
     }
   });
+  $("#current-runtimes").empty();
+  $("#current-runtimes").append("<option value=''></option>");
   workflowData.runtimes.forEach((runtime) => {
     $("#current-runtimes").append(
       `<option value='${runtime}'>${runtime}</option>`
     );
   })
+  $("#current-runtimes").val("");
+  $("#current-runtimes").selectpicker("refresh");
   graph.on("dragEnd", () => savePositions());
   $(`#add_jobs option[value='${wf.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
@@ -114,6 +118,7 @@ function switchToWorkflow(workflowId) {
   call(`/get_workflow_state/${workflowId}`, function(result) {
     workflow = result.workflow;
     graph = displayWorkflow(result);
+    getWorkflowState();
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }
@@ -310,7 +315,7 @@ $("#current-workflow").on("change", function() {
 });
 
 $("#current-runtime").on("change", function() {
-  getWorkflowState(this.value);
+  getWorkflowState();
 });
 
 /**
@@ -397,35 +402,41 @@ function getJobState(id) {
 }
 
 /**
+ * Display Workflow State.
+ * @param {id} id - Job Id.
+ */
+// eslint-disable-next-line
+function displayWorkflowState(id) {
+  $("#status").text(`Status: ${result.state.status}`);
+  if (result.state.current_job) {
+    colorJob(result.state.current_job.id, "#89CFF0");
+    $("#current-job").text(
+      `Current job: ${result.state.current_job.name}.`
+    );
+  } else {
+    $("#current-job").empty();
+  }
+  if (result.state.jobs) {
+    $.each(result.state.jobs, (id, success) => {
+      colorJob(id, success ? "#32cd32" : "#FF6666");
+    });
+  }
+}
+
+/**
  * Get Workflow State.
  */
 function getWorkflowState() {
+  const runtime = $("#current-runtimes").val();
+  const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
-    call(`/get_workflow_state/${workflow.id}`, function(result) {
+    call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
       }
-      if (result.workflow.id == workflow.id && wf.status == "Running") {
-        $("#status").text("Status: Running");
-        if (Object.keys(wf.state).length !== 0) {
-          if (wf.state.current_job) {
-            colorJob(wf.state.current_job.id, "#89CFF0");
-            $("#current-job").text(
-              `Current job: ${wf.state.current_job.name}.`
-            );
-          } else {
-            $("#current-device,#current-job").empty();
-          }
-          if (wf.state.jobs) {
-            $.each(wf.state.jobs, (id, success) => {
-              colorJob(id, success ? "#32cd32" : "#FF6666");
-            });
-          }
-        } else {
-          $("#current-device,#current-job").empty();
-          wf.jobs.forEach((job) => colorJob(job.id, job.color));
-        }
-        setTimeout(getWorkflowState, wf.status == "Running" ? 2000 : 15000);
+      if (result.workflow.id == workflow.id && result.state) {
+        displayWorkflowState(workflow.id);
+        setTimeout(getWorkflowState, result.state ? 2000 : 15000);
       } else {
         $("#status").text("Status: Idle");
         $("#current-job").empty();

@@ -286,6 +286,7 @@ class Run(AbstractBase):
 
     def run(self, payload: Optional[dict] = None) -> Tuple[dict, str]:
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
+        controller.job_db[self.runtime]["is_running"] = True
         try:
             results = self.job.build_results(self, payload or self["initial_payload"])
             self.close_connection_cache()
@@ -300,6 +301,7 @@ class Run(AbstractBase):
         finally:
             status = f"Completed ({'success' if self.success else 'failure'})"
             self.status = controller.job_db[self.runtime]["status"] = status
+            controller.job_db[self.runtime]["is_running"] = False
             results["endtime"] = self.endtime = controller.get_time()
             results["state"] = controller.job_db.pop(self.runtime)
             results["logs"] = controller.run_logs.pop(self.runtime)
@@ -516,7 +518,6 @@ class Job(AbstractBase):
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
-    status = Column(String(SMALL_STRING_LENGTH), default="Idle")
     credentials = Column(String(SMALL_STRING_LENGTH), default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
     vendor = Column(String(SMALL_STRING_LENGTH), default="")

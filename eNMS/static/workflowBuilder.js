@@ -314,7 +314,8 @@ $("#current-workflow").on("change", function() {
   switchToWorkflow(this.value);
 });
 
-$("#current-runtime").on("change", function() {
+$("#current-runtimes").on("change", function() {
+  console.log("test");
   getWorkflowState();
 });
 
@@ -406,7 +407,7 @@ function getJobState(id) {
  * @param {id} id - Job Id.
  */
 // eslint-disable-next-line
-function displayWorkflowState(id) {
+function displayWorkflowState(result) {
   $("#status").text(`Status: ${result.state.status}`);
   if (result.state.current_job) {
     colorJob(result.state.current_job.id, "#89CFF0");
@@ -431,15 +432,18 @@ function getWorkflowState() {
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
+      console.log(result.state);
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
       }
       if (result.workflow.id == workflow.id && result.state) {
-        displayWorkflowState(workflow.id);
-        setTimeout(getWorkflowState, result.state ? 2000 : 15000);
-      } else {
-        $("#status").text("Status: Idle");
-        $("#current-job").empty();
+        displayWorkflowState(result);
+        if (result.state.is_running) {
+          setTimeout(getWorkflowState, result.state ? 2000 : 15000);
+        } else {
+          $("#status").text("Status: Idle");
+          $("#current-job").empty();
+        }
       }
     });
   }

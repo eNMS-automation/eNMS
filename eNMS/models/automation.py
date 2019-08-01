@@ -289,9 +289,7 @@ class Run(AbstractBase):
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         Session.commit()
         try:
-            results = self.job.build_results(
-                self, payload or self["initial_payload"]
-            )
+            results = self.job.build_results(self, payload or self["initial_payload"])
             self.close_connection_cache()
             self.log("info", f"{self.job.type} {self.job.name}: Finished")
         except Exception as exc:
@@ -701,7 +699,9 @@ class Workflow(Job):
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
     )
-    start_jobs = relationship("Job", secondary=start_jobs_workflow_table, backref="start_workflows")
+    start_jobs = relationship(
+        "Job", secondary=start_jobs_workflow_table, backref="start_workflows"
+    )
 
     def __init__(self, **kwargs: Any) -> None:
         start, end = fetch("Service", name="Start"), fetch("Service", name="End")
@@ -770,10 +770,8 @@ class Workflow(Job):
                 allowed_devices[successor.name] |= devices
                 yield successor
 
-    def build_results(
-        self, run: "Run", payload: dict
-    ) -> dict:
-        controller.job_db[run.runtime]["state"] = {"jobs": {}, "edges": {}}
+    def build_results(self, run: "Run", payload: dict) -> dict:
+        controller.job_db[run.runtime] = {"jobs": {}, "edges": {}}
         jobs: list = run["start_jobs"]
         payload = deepcopy(payload)
         visited: Set = set()

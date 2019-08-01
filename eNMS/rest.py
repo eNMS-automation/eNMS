@@ -174,10 +174,7 @@ class RunJob(Resource):
             )
             return {"errors": errors, "runtime": runtime}
         else:
-            return {
-                **run_job(runtime, job.id, **data),
-                "errors": errors,
-            }
+            return {**run_job(runtime, job.id, **data), "errors": errors}
 
 
 class Topology(Resource):

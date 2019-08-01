@@ -121,11 +121,15 @@ class AutomationController(BaseController):
             runtime_key = "parent_runtime" if "job" in kw else "runtime"
             request = {runtime_key: kw.get(f"runtime{comp}")}
             request["job_id"] = kw.get(f"job{comp}")
-            runs = fetch("Run", allow_none=True,  all_matches=True, **request)
-            workflow_devices = [(r.workflow_device_id, r.workflow_device.name) for r in runs if r.workflow_device_id]
+            runs = fetch("Run", allow_none=True, all_matches=True, **request)
+            workflow_devices = [
+                (r.workflow_device_id, r.workflow_device.name)
+                for r in runs
+                if r.workflow_device_id
+            ]
         return {
             "workflow_devices": workflow_devices,
-            "devices": self.get_device_list(id, **kw)
+            "devices": self.get_device_list(id, **kw),
         }
 
     def get_device_list(self, id: int, **kw: Any) -> list:
@@ -145,7 +149,7 @@ class AutomationController(BaseController):
                 request["job_id"] = kw.get(f"job{comp}", id)
             if kw.get(f"workflow_device{comp}"):
                 request["workflow_device_id"] = kw.get(f"workflow_device{comp}")
-        runs = fetch("Run", allow_none=True,  **request)
+        runs = fetch("Run", allow_none=True, **request)
         if not runs:
             return defaults
         return defaults + list(
@@ -199,7 +203,9 @@ class AutomationController(BaseController):
         run = fetch("Run", allow_none=True, runtime=runtime)
         return next(r.result for r in run.results if r.device_id == int(id))
 
-    def get_workflow_results(self, id: int, runtime, device, job, workflow_device) -> Optional[dict]:
+    def get_workflow_results(
+        self, id: int, runtime, device, job, workflow_device
+    ) -> Optional[dict]:
         if "all" not in job:
             return self.get_service_results(job, runtime, device, job, workflow_device)
         request = {"parent_runtime": runtime, "all_matches": True}
@@ -211,7 +217,9 @@ class AutomationController(BaseController):
             if run.job_id != int(id)
         }
 
-    def get_service_results(self, id: int, runtime, device, job, workflow_device) -> Optional[dict]:
+    def get_service_results(
+        self, id: int, runtime, device, job, workflow_device
+    ) -> Optional[dict]:
         runtime_key = "parent_runtime" if job else "runtime"
         request = {runtime_key: runtime, "job_id": id}
         if workflow_device:
@@ -242,6 +250,19 @@ class AutomationController(BaseController):
         for job in fetch_all("Job"):
             job.status = "Idle"
 
+    def add_restart_payload(self, job, **kwargs):
+        run = fetch(
+            "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version")
+        )
+        result = [r for r in run.results if not r.device_id]
+        payload = result[0].result["results"] if result else {}
+        if not isinstance(payload, dict):
+            return
+        payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))
+        kwargs["payload"] = {
+            k: payload.get(k) for k in payload if k not in payload_jobs
+        }
+
     def run_job(self, **kwargs) -> dict:
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
@@ -249,14 +270,7 @@ class AutomationController(BaseController):
         if job.status == "Running":
             return {"error": f"{job.type} is already running."}
         if job.type == "Workflow":
-            run = fetch("Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version"))
-            if not run:
-                payload = {}
-            else:
-                result = [r for r in run.results if not r.device_id]
-                payload = result[0].result["results"] if result else {}
-            payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))
-            kwargs["payload"] = {k: payload[k] for k in payload if k not in payload_jobs}
+            self.add_restart_payload(job, **kwargs)
         runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(

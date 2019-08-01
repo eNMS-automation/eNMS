@@ -157,8 +157,10 @@ class RunJob(Resource):
         except Exception as e:
             info(f"REST API run_job endpoint failed ({str(e)})")
             return str(e)
-        data["devices"] = devices
-        data["pools"] = pools
+        if devices:
+            data["devices"] = devices
+        if pools:
+            data["pools"] = pools
         runtime = controller.get_time()
         if handle_asynchronously:
             controller.scheduler.add_job(
@@ -172,7 +174,7 @@ class RunJob(Resource):
             return {"errors": errors, "runtime": runtime}
         else:
             return {
-                **run_job(runtime, job.id, data),
+                **run_job(runtime, job.id, **data),
                 "errors": errors,
             }
 

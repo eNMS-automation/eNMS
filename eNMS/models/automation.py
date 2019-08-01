@@ -273,7 +273,6 @@ class Run(AbstractBase):
             for pool in self["pools"]:
                 devices |= set(pool.devices)
         controller.job_db[self.runtime]["number_of_targets"] = len(devices)
-        Session.commit()
         return devices
 
     def close_connection_cache(self):

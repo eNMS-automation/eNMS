@@ -2,6 +2,7 @@ from click import argument, echo, option
 from flask import Flask
 from json import loads
 
+from eNMS.concurrency import run_job
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
@@ -35,12 +36,11 @@ def configure_cli(app: Flask) -> None:
     @option("--devices")
     @option("--payload")
     def start(name: str, devices: str, payload: str) -> None:
-        if devices:
-            targets = {fetch("Device", name=name) for name in devices.split(",")}
-        else:
-            targets = set()
-        if payload:
-            payload = loads(payload)
-        results = fetch("Job", name=name).run(targets=targets, payload=payload)[0]
+        devices = devices.split(",") if devices else []
+        devices = [fetch("Device", name=name).id for name in devices]
+        payload = loads(payload) if payload else {}
+        payload["devices"] = devices
+        job = fetch("Job", name=name)
+        results = run_job(controller.get_time(), job.id, **payload)
         Session.commit()
         echo(controller.str_dict(results))

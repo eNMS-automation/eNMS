@@ -289,8 +289,11 @@ class AutomationController(BaseController):
             job.positions[workflow.name] = (position["x"], position["y"])
         return now
 
-    def get_workflow_state(self, runtime):
-        return {"workflow": fetch("Run", runtime=runtime).job, "state": self.job_db.get(runtime)}
+    def get_workflow_state(self, workflow_id, runtime: Optional[str] = None):
+        workflow = fetch("Workflow", id=workflow_id)
+        runtimes = [r.runtime for r in fetch("Run", allow_none=True, all_matches=True, job_id=workflow_id)]
+        state = self.job_db.get(runtime)
+        return {"workflow": workflow.serialized, "runtimes": runtimes, "state": state}
 
     def convert_date(self, date: str) -> list:
         python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore

@@ -55,7 +55,8 @@ let lastModified;
  * @param {wf} wf - A workflow.
  * @return {graph}
  */
-function displayWorkflow(wf) {
+function displayWorkflow(workflowData) {
+  wf = workflowData.workflow;
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
   wf.jobs.filter((s) => s.type == "IterationService").map(drawIterationService);
@@ -92,6 +93,11 @@ function displayWorkflow(wf) {
       }
     }
   });
+  workflowData.runtimes.forEach((runtime) => {
+    $("#current-runtimes").append(
+      `<option value='${runtime}'>${runtime}</option>`
+    );
+  })
   graph.on("dragEnd", () => savePositions());
   $(`#add_jobs option[value='${wf.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
@@ -105,10 +111,9 @@ function displayWorkflow(wf) {
 
  */
 function switchToWorkflow(workflowId) {
-  call(`/get/workflow/${workflowId}`, function(result) {
-    workflow = result;
+  call(`/get_workflow_state/${workflowId}`, function(result) {
+    workflow = result.workflow;
     graph = displayWorkflow(result);
-    getWorkflowState();
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }
@@ -304,6 +309,10 @@ $("#current-workflow").on("change", function() {
   switchToWorkflow(this.value);
 });
 
+$("#current-runtime").on("change", function() {
+  getWorkflowState(this.value);
+});
+
 /**
  * Save positions of the workflow nodes.
  */
@@ -390,13 +399,13 @@ function getJobState(id) {
 /**
  * Get Workflow State.
  */
-function getWorkflowState(first) {
+function getWorkflowState() {
   if (workflow && workflow.id) {
-    call(`/get/workflow/${workflow.id}`, function(wf) {
-      if (wf.last_modified !== lastModified) {
-        displayWorkflow(wf);
+    call(`/get_workflow_state/${workflow.id}`, function(result) {
+      if (result.workflow.last_modified !== lastModified) {
+        displayWorkflow(result);
       }
-      if (wf.id == workflow.id && (first || wf.status == "Running")) {
+      if (result.workflow.id == workflow.id && wf.status == "Running") {
         $("#status").text("Status: Running");
         if (Object.keys(wf.state).length !== 0) {
           if (wf.state.current_job) {
@@ -435,7 +444,7 @@ function getWorkflowState(first) {
     }
     if (workflow) {
       $("#current-workflow").val(workflow.id);
-      displayWorkflow(workflow);
+      switchToWorkflow(workflow.id);
     } else {
       workflow = $("#current-workflow").val();
       if (workflow) {
@@ -449,7 +458,7 @@ function getWorkflowState(first) {
         );
       }
     }
-    $("#current-workflow").selectpicker({
+    $("#current-workflow,#current-runtimes").selectpicker({
       liveSearch: true,
     });
   });

@@ -51,6 +51,28 @@ function panelCode(type, id, mode) {
       .attr("onclick", `runJob('${type}', ${id})`)
       .text('Run');
     $(".hide-run").hide();
+    call(`/get_runtimes/workflow/${workflow.id}`, function(runtimes) {
+      workflow.jobs.forEach((job) => {
+        $("#payloads_to_include").append(
+          $("<option></option>")
+            .attr("value", job.name)
+            .text(job.name)
+        );
+      });
+      runtimes.forEach((runtime) => {
+        $("#payload_version").append(
+          $("<option></option>")
+            .attr("value", runtime[0])
+            .text(runtime[0])
+        );
+      });
+      $("#payload_version").val(runtimes[runtimes.length - 1]);
+      $("#payload_version,#payloads_to_include").selectpicker(
+        "refresh"
+      );
+    });
+  } else {
+    $(".no-edit").remove();
   }
 }
 

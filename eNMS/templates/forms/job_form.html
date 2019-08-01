@@ -261,6 +261,16 @@
             {{ form.start_jobs(id=form_type + '-start_jobs', class="form-control
             add-id") }}
           </div>
+          <label for="payload_version" class="no-edit">Payload Version</label>
+          <div class="form-group">
+            {{ form.payload_version(id=form_type + '-payload_version', class="form-control
+            no-edit add-id") }}
+          </div>
+          <label for="payloads_to_include" class="no-edit">Payloads to include</label>
+          <div class="form-group">
+            {{ form.payloads_to_include(id=form_type + '-payloads_to_include', class="form-control
+            no-edit add-id") }}
+          </div>
         {% endif %}
         <fieldset>
           <div class="item">

@@ -114,53 +114,6 @@ function switchToWorkflow(workflowId) {
 }
 
 /**
- * Display "Restart Workflow" panel.
- */
-// eslint-disable-next-line
-function showRestartPanel() {
-  showPanel("restart_workflow", null, function() {
-    call(`/get_runtimes/workflow/${workflow.id}`, function(runtimes) {
-      workflow.jobs.forEach((job) => {
-        $("#payloads_to_include").append(
-          $("<option></option>")
-            .attr("value", job.name)
-            .text(job.name)
-        );
-        $("#start_jobs").append(
-          $("<option></option>")
-            .attr("value", job.id)
-            .text(job.name)
-        );
-      });
-      runtimes.forEach((runtime) => {
-        $("#payload_version").append(
-          $("<option></option>")
-            .attr("value", runtime[0])
-            .text(runtime[0])
-        );
-      });
-      $("#payload_version").val(runtimes[runtimes.length - 1]);
-      $("#payload_version,#payloads_to_include,#start_jobs").selectpicker(
-        "refresh"
-      );
-    });
-  });
-}
-
-/**
- * Restart Workflow.
- */
-// eslint-disable-next-line
-function restartWorkflow() {
-  fCall(`/restart_workflow/${workflow.id}`, "#restart_workflow-form", function(
-    name
-  ) {
-    alertify.notify(`Workflow '${name}' restarted.`, "success", 5);
-    getWorkflowState(true);
-  });
-}
-
-/**
  * Add an existing job to the workflow.
  */
 // eslint-disable-next-line

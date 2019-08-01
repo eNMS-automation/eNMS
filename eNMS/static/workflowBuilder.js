@@ -441,7 +441,6 @@ function getWorkflowState(first) {
         displayWorkflow(result);
       }
       displayWorkflowState(result);
-      console.log(result.workflow.id, workflow.id);
       const rate = first || result.state && result.state.is_running ? 2000 : 15000;
       setTimeout(getWorkflowState, rate);
     });

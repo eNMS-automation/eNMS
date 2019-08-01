@@ -161,29 +161,6 @@ function formatResults(results, id, formId, compare) {
     const options = {
       mode: $(`#view_type-${id}`).val(),
       modes: ["text", "view"],
-      onEvent: function(node, event) {
-        if (event.type === "click") {
-          const job = $(`#job-${id}`).val();
-          const isWorkflow = id.toString() == job;
-          if (isNaN(job) || isNaN($(`#device-${id}`).val()) || isWorkflow) {
-            $(`#payload_query-${id}`).hide();
-            return
-          } else {
-            const jobName = $(`#job-${id} option:selected`).text()
-            const deviceName = $(`#device-${id} option:selected`).text()
-            let path = `get_var(job="${jobName}", device="${deviceName}")`;
-            for (let i = 0; i < node.path.length; i++) {
-              let element = node.path[i];
-              if (typeof element === "number") {
-                path += `[${element}]`;
-              } else {
-                path += `["${element}"]`;
-              }
-            }
-            $(`#payload_query-${id}`).val(path).show();
-          }
-        }
-      },
     };
     new JSONEditor(
       document.getElementById(`display_results-${formId}`),
@@ -200,7 +177,6 @@ function formatResults(results, id, formId, compare) {
  */
 function displayResults(type, id, formId, compare) {
   const url = compare ? "compare" : "get";
-  $(`#payload_query-${id}`).hide();
   if ($(`#runtime-${id}`).val() || type == "run") {
     fCall(`/${url}_results/${type}/${id}`, `#results-form-${formId}`, (results) => {
       currentResults = results;

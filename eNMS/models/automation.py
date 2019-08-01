@@ -70,6 +70,9 @@ class Result(AbstractBase):
     )
     device_name = association_proxy("device", "name")
 
+    def __getitem__(self, key):
+        return self.result[key]
+
     def __init__(self, **kwargs):
         self.success = kwargs["result"]["success"]
         super().__init__(**kwargs)

@@ -94,12 +94,12 @@ function displayWorkflow(workflowData) {
     }
   });
   $("#current-runtimes").empty();
-  $("#current-runtimes").append("<option value=''></option>");
+  $("#current-runtimes").append("<option value=''>Normal Display</option>");
   workflowData.runtimes.forEach((runtime) => {
     $("#current-runtimes").append(
       `<option value='${runtime}'>${runtime}</option>`
     );
-  })
+  });
   $("#current-runtimes").val("");
   $("#current-runtimes").selectpicker("refresh");
   graph.on("dragEnd", () => savePositions());
@@ -315,7 +315,6 @@ $("#current-workflow").on("change", function() {
 });
 
 $("#current-runtimes").on("change", function() {
-  console.log("test");
   getWorkflowState();
 });
 
@@ -408,43 +407,43 @@ function getJobState(id) {
  */
 // eslint-disable-next-line
 function displayWorkflowState(result) {
-  $("#status").text(`Status: ${result.state.status}`);
-  if (result.state.current_job) {
-    colorJob(result.state.current_job.id, "#89CFF0");
-    $("#current-job").text(
-      `Current job: ${result.state.current_job.name}.`
-    );
-  } else {
-    $("#current-job").empty();
-  }
-  if (result.state.jobs) {
-    $.each(result.state.jobs, (id, success) => {
-      colorJob(id, success ? "#32cd32" : "#FF6666");
+  if (!result.state) {
+    result.workflow.jobs.forEach((job) => {
+      colorJob(job.id, job.color);
     });
+  } else {
+    $("#status").text(`Status: ${result.state.status}`);
+    if (result.state.current_job) {
+      colorJob(result.state.current_job.id, "#89CFF0");
+      $("#current-job").text(
+        `Current job: ${result.state.current_job.name}.`
+      );
+    } else {
+      $("#current-job").empty();
+    }
+    if (result.state.jobs) {
+      $.each(result.state.jobs, (id, success) => {
+        colorJob(id, success ? "#32cd32" : "#FF6666");
+      });
+    }
   }
 }
 
 /**
  * Get Workflow State.
  */
-function getWorkflowState() {
+function getWorkflowState(first) {
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
-      console.log(result.state);
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
       }
-      if (result.workflow.id == workflow.id && result.state) {
-        displayWorkflowState(result);
-        if (result.state.is_running) {
-          setTimeout(getWorkflowState, result.state ? 2000 : 15000);
-        } else {
-          $("#status").text("Status: Idle");
-          $("#current-job").empty();
-        }
-      }
+      displayWorkflowState(result);
+      console.log(result.workflow.id, workflow.id);
+      const rate = first || result.state && result.state.is_running ? 2000 : 15000;
+      setTimeout(getWorkflowState, rate);
     });
   }
 }

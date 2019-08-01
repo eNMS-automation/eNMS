@@ -142,7 +142,6 @@ class WorkflowResultsForm(ResultsForm):
     device_compare = NoValidationSelectField("Device", choices=())
     job = NoValidationSelectField("Job", choices=())
     job_compare = NoValidationSelectField("Job", choices=())
-    payload_query = StringField("Payload Query")
 
 
 class DeviceResultsForm(ResultsForm):

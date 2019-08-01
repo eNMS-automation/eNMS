@@ -417,14 +417,7 @@ class BaseController:
 
     def count_models(self) -> dict:
         return {
-            "counters": {
-                **{cls: count(cls) for cls in diagram_classes},
-                **{
-                    "active-Service": count("Service", status="Running"),
-                    "active-Workflow": count("Workflow", status="Running"),
-                    "active-Task": count("Task", status="Active"),
-                },
-            },
+            "counters": {cls: count(cls) for cls in diagram_classes},
             "properties": {
                 cls: Counter(
                     str(getattr(instance, type_to_diagram_properties[cls][0]))

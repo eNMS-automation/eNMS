@@ -312,10 +312,6 @@ $(function() {
     for (const type of ["Device", "Link", "User"]) {
       $(`#count-${type}`).text(result.counters[type]);
     }
-    for (const type of ["Service", "Workflow", "Task"]) {
-      const activeNumber = result.counters[`active-${type}`];
-      $(`#count-${type}`).text(`${result.counters[type]} (${activeNumber})`);
-    }
     for (const [objects, type] of Object.entries(result.properties)) {
       drawDiagrams(type, objects);
     }

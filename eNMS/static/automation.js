@@ -33,7 +33,7 @@ function openServicePanel() {
  * @param {type} type - Service or Workflow.
  */
 // eslint-disable-next-line
-function panelCode(type, id) {
+function panelCode(type, id, mode) {
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
@@ -44,6 +44,14 @@ function panelCode(type, id) {
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
+  if (mode == "run") {
+    $(`#${type}-btn-${id}`)
+      .removeClass("btn-success")
+      .addClass("btn-primary")
+      .attr("onclick", `runJob('${type}', ${id})`)
+      .text('Run');
+    $(".hide-run").hide();
+  }
 }
 
 /**
@@ -414,7 +422,7 @@ function refreshLogs(id, job) {
  * @param {id} id - Job id.
  */
 // eslint-disable-next-line
-function runJob(type, id, name) {
+function runJob(type, id) {
   fCall(`/run_job`, `#edit-${type}-form-${id}`, function(job) {
     showLogs(id, job);
     alertify.notify(`Job '${job.name}' started.`, "success", 5);

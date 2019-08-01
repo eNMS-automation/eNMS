@@ -102,6 +102,10 @@ class WorkflowForm(JobForm):
     form_type = HiddenField(default="workflow")
     use_workflow_targets = BooleanField("Use Workflow Targets")
     start_jobs = MultipleInstanceField("Start Jobs", instance_type="Job")
+    payload_version = NoValidationSelectField("Payload Version", choices=())
+    payloads_to_include = NoValidationSelectMultipleField(
+        "Payloads to Include", choices=()
+    )
 
 
 class ResultsForm(BaseForm):
@@ -140,15 +144,6 @@ class RunResultsForm(ResultsForm):
     form_type = HiddenField(default="run_results")
     device = NoValidationSelectField("Device", choices=())
     device_compare = NoValidationSelectField("Device", choices=())
-
-
-class RestartWorkflowForm(BaseForm):
-    action = "restartWorkflow"
-    form_type = HiddenField(default="restart_workflow")
-    payload_version = NoValidationSelectField("Payload Version", choices=())
-    payloads_to_include = NoValidationSelectMultipleField(
-        "Payloads to Include", choices=()
-    )
 
 
 class AddJobsForm(BaseForm):

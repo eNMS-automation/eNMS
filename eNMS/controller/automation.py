@@ -242,34 +242,21 @@ class AutomationController(BaseController):
         for job in fetch_all("Job"):
             job.status = "Idle"
 
-    def restart_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
-        workflow = fetch("Workflow", id=workflow_id)
-        run = fetch("Run", allow_none=True, job_id=workflow_id, runtime=kwargs.get("payload_version"))
-        if not run:
-            payload = {}
-        else:
-            result = [r for r in run.results if not r.device_id]
-            payload = result[0].result["results"] if result else {}
-        payload_jobs = set(payload) & set(kwargs["payloads_to_include"])
-        payload = {k: payload[k] for k in payload if k in payload_jobs}
-        if workflow.status == "Running":
-            return {"error": "Workflow is already running."}
-        runtime = self.get_time()
-        self.scheduler.add_job(
-            id=runtime,
-            func=run_job,
-            run_date=datetime.now(),
-            args=[runtime, workflow_id],
-            trigger="date",
-        )
-        return workflow.name
-
     def run_job(self, **kwargs) -> dict:
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         job = fetch("Job", name=kwargs["name"])
         if job.status == "Running":
             return {"error": f"{job.type} is already running."}
+        if job.type == "Workflow":
+            run = fetch("Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version"))
+            if not run:
+                payload = {}
+            else:
+                result = [r for r in run.results if not r.device_id]
+                payload = result[0].result["results"] if result else {}
+            payload_jobs = set(payload) & set(kwargs.get("payloads_to_include", []))
+            kwargs["payload"] = {k: payload[k] for k in payload if k in payload_jobs}
         runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(

@@ -423,7 +423,7 @@ function showTypePanel(type, id, mode) {
     "",
     id,
     function(panel) {
-      if (type == "workflow" || type.includes("Service")) panelCode(type, id);
+      if (type == "workflow" || type.includes("Service")) panelCode(type, id, mode);
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {
           const title = mode == "duplicate" ? "Duplicate" : "Edit";
@@ -434,14 +434,6 @@ function showTypePanel(type, id, mode) {
               "onclick",
               `duplicateWorkflow(${id})`
             );
-          }
-          if (mode == "run") {
-            $(`#${type}-btn-${id}`)
-              .removeClass("btn-success")
-              .addClass("btn-primary")
-              .attr("onclick", `runJob('${type}', ${id}, '${instance.name}')`)
-              .text('Run');
-            $(".hide-run").hide();
           }
         });
       } else {

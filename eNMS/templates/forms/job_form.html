@@ -73,7 +73,7 @@
         {% endif %}
       </ul>
       <div id="step-1">
-        <div style="width: 100%;">
+        <div>
           {% if form_type != "workflow" %}
           <label class="hide-run">Type</label>
           <div class="form-group">
@@ -183,7 +183,7 @@
           </div>
         </fieldset>
       </div>
-      <div id="step-3">
+      <div id="step-3" style="min-height: 300px">
         {% if form_type == "workflow" %}
         <fieldset>
           <div class="item">
@@ -254,7 +254,7 @@
         </div>
         {% endif %}
       </div>
-      <div id="step-4">
+      <div id="step-4" style="min-height: 300px">
         {% if form_type == "workflow" %}
           <label for="start_jobs">Start Jobs</label>
           <div class="form-group">

@@ -100,12 +100,9 @@ class AutomationController(BaseController):
         return new_workflow.serialized
 
     def get_job_logs(self, runtime: str) -> list:
-        if runtime in self.run_logs:
-            return {"logs": "\n".join(self.run_logs[runtime]), "refresh": True}
-        else:
-            run = fetch("Run", runtime=runtime)
-            print(run)
-            return {"logs": run.get_result()["logs"], "refresh": False}
+        result = fetch("Run", runtime=runtime).get_result()
+        logs = result["logs"] if result else self.run_logs.get(runtime, [])
+        return {"logs": "\n".join(logs), "refresh": not bool(result)}
 
     def get_runtimes(self, type: str, id: int) -> list:
         if type == "device":

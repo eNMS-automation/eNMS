@@ -119,7 +119,8 @@ class Run(AbstractBase):
             raise AttributeError
 
     def get_result(self, device: Optional[str] = None):
-        return next(r for r in self.results if r.device_id == device)
+        result = [r for r in self.results if r.device_id == device]
+        return result.pop() if result else None
 
     def generate_row(self, table: str) -> List[str]:
         job_type = "workflow" if self.job.type == "Workflow" else "service"

@@ -390,16 +390,16 @@ function clearResults(id) {
  * @param {id} id - Job ID.
  */
 // eslint-disable-next-line
-function refreshLogs(runtime, jobId, jobType) {
-  const runtimeId = runtime.replace(/[.:-\s]/g, "");
+function refreshLogs(runtime, jobId, jobType, jobName, first) {
+  const runtimeId = runtime.toString().replace(/[.:-\s]/g, "");
   call(`/get_job_logs/${runtime}`, function(result) {
-    if (result.logs) {
-      $(`#log-text-${runtimeId}`).text(result.logs);
-      if (result.refresh) setTimeout(() => refreshLogs(runtime, jobId), 1500);
-    } else {
+    $(`#log-text-${runtimeId}`).text(result.logs);
+    if (result.refresh) {
+      setTimeout(() => refreshLogs(runtime, jobId, jobType), 1500);
+    } else if (!first) {
       $(`#logs-${runtimeId}`).remove();
       jobType = jobType == "Workflow" ? "workflow" : "service";
-      showResultsPanel(jobId, job.name, jobType, runtime);
+      showResultsPanel(jobId, jobName, jobType, runtime);
     }
   });
 }
@@ -410,7 +410,7 @@ function refreshLogs(runtime, jobId, jobType) {
  */
 // eslint-disable-next-line
 function showLogs(runtime, jobId, jobType, jobName) {
-  const runtimeId = runtime.replace(/[.:-\s]/g, "");
+  const runtimeId = runtime.toString().replace(/[.:-\s]/g, "");
   if (!$(`#logs-${runtimeId}`).length) {
     jsPanel.create({
       id: `logs-${runtimeId}`,
@@ -419,7 +419,7 @@ function showLogs(runtime, jobId, jobType, jobName) {
       headerTitle: `Logs - ${jobName}`,
       position: "center-top 0 58",
       callback: function() {
-        refreshLogs(runtime, jobId, jobType);
+        refreshLogs(runtime, jobId, jobType, jobName, true);
       },
       contentSize: "1450 600",
       contentOverflow: "hidden scroll",
@@ -440,7 +440,7 @@ function showLogs(runtime, jobId, jobType, jobName) {
 // eslint-disable-next-line
 function runJob(type, id) {
   fCall(`/run_job`, `#edit-${type}-form-${id}`, function(job) {
-    showLogs(job.id, job.runtime, job.type, job.name);
+    showLogs(job.runtime, job.id, job.type, job.name);
     alertify.notify(`Job '${job.name}' started.`, "success", 5);
     if (page == "workflow_builder") {
       if (job.type == "Workflow") {

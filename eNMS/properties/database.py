@@ -42,6 +42,7 @@ dont_migrate: Dict[str, List[str]] = {
         "status",
         "workflows",
         "tasks",
+        "start_workflows",
     ],
     "Task": [
         "id",

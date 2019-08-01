@@ -61,18 +61,6 @@
   shape: circle
   size: 40
   start_new_connection: false
-  start_workflows:
-  - Configuration Management Workflow
-  - Netmiko_VRF_workflow
-  - Napalm_VRF_workflow
-  - payload_transfer_workflow
-  - python_test_worflow
-  - payload_extraction_validation_worflow
-  - Workflow_of_workflows
-  - Workflow with separate failure - success path
-  - python_query_workflow
-  - Netmiko prompts
-  - 'python Workflow: payload editor and pool helper'
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -140,7 +128,6 @@
   shape: circle
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -175,7 +162,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -210,7 +196,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -245,7 +230,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -280,7 +264,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -318,7 +301,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -356,7 +338,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -406,7 +387,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -449,7 +429,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: ConfigureBgpService
   vendor: ''
@@ -493,7 +472,6 @@
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: GenericFileTransferService
   vendor: ''
@@ -532,7 +510,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: DatabaseBackupService
   vendor: ''
@@ -573,7 +550,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   timeout: 10
   type: NetmikoBackupService
@@ -613,7 +589,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: NapalmBackupService
   use_device_driver: true
@@ -662,7 +637,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -734,7 +708,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -790,7 +763,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -856,7 +828,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 1
@@ -904,7 +875,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: NapalmConfigurationService
   use_device_driver: true
@@ -966,7 +936,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   timeout: 15
   type: RestCallService
@@ -1021,7 +990,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1071,7 +1039,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1118,7 +1085,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1165,7 +1131,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1207,7 +1172,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -1247,7 +1211,6 @@
   source_code: "set_var('iteration_devices',\r\n{'Washington': ['Loopback101', 'Loopback15'],\r\
     \n'Austin': ['Loopback9', 'Loopback1000']})\r\nsave_result(True, {})"
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1298,7 +1261,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1353,7 +1315,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1410,7 +1371,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1467,7 +1427,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: PayloadExtractionService
   variable1: simple_variable
@@ -1519,7 +1478,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: dict_included
@@ -1565,7 +1523,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
@@ -1605,7 +1562,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: NapalmRollbackService
   use_device_driver: true
@@ -1660,7 +1616,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1719,7 +1674,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1775,7 +1729,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1836,7 +1789,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   timeout: 10
   type: NetmikoPromptsService
@@ -1894,7 +1846,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   timeout: 10
   type: NetmikoPromptsService
@@ -1938,7 +1889,6 @@
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1984,7 +1934,6 @@
     iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -2035,7 +1984,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2091,7 +2039,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2141,7 +2088,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: IterationService
   user_provided_values:
@@ -2189,7 +2135,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -2234,7 +2179,6 @@
   shape: box
   size: 10
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -2279,7 +2223,6 @@
   shape: box
   size: 40
   start_new_connection: false
-  start_workflows: []
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}

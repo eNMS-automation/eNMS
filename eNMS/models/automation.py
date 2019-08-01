@@ -792,7 +792,6 @@ class Workflow(Job):
                 continue
             visited.add(job)
             controller.job_db[run.runtime]["current_job"] = job.get_properties()
-            Session.commit()
             if run["use_workflow_targets"] and job.python_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:

@@ -435,6 +435,9 @@ function showTypePanel(type, id, mode) {
               `duplicateWorkflow(${id})`
             );
           }
+          if (type == "workflow" && mode == "run") {
+            workflowRunMode(instance);
+          }
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);

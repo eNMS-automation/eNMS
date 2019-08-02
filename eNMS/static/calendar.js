@@ -1,6 +1,8 @@
 /*
 global
+calendarType: false
 call: false
+showResultsPanel: false
 showTypePanel: false
 */
 

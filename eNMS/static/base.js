@@ -18,6 +18,7 @@ saveService: false
 saveWorkflow: false
 table: false
 type: false
+workflowRunMode: false
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
@@ -421,8 +422,9 @@ function showTypePanel(type, id, mode) {
     "",
     id,
     function(panel) {
-      if (type == "workflow" || type.includes("Service"))
+      if (type == "workflow" || type.includes("Service")) {
         panelCode(type, id, mode);
+      }
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {
           const title = mode == "duplicate" ? "Duplicate" : "Edit";

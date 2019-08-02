@@ -189,9 +189,6 @@ function refreshExportedJobs() {
   });
 }
 
-/**
- * Open Import Jobs Panel.
- */
 // eslint-disable-next-line
 function showImportJobsPanel() {
   showPanel("import_jobs", null, () => {
@@ -199,10 +196,6 @@ function showImportJobsPanel() {
   });
 }
 
-/**
- * Import Jobs
- */
-// eslint-disable-next-line
 function importJobs() {
   fCall("/import_jobs", "#import_jobs-form", function(result) {
     alertify.notify("Import successful.", "success", 5);
@@ -210,10 +203,6 @@ function importJobs() {
   });
 }
 
-/**
- * Database Deletion.
- */
-// eslint-disable-next-line
 function databaseDeletion() {
   alertify.notify("Starting to delete...", "success", 5);
   fCall("/database_deletion", "#database_deletion-form", function(result) {
@@ -222,10 +211,6 @@ function databaseDeletion() {
   });
 }
 
-/**
- * Git Action.
- */
-// eslint-disable-next-line
 function getGitContent() {
   call("/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);

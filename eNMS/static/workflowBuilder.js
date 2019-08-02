@@ -3,8 +3,6 @@ global
 action: false
 alertify: false
 call: false
-fCall: false
-runJob: false
 showLogs: false
 showPanel: false
 showResultsPanel: false
@@ -56,7 +54,7 @@ let lastModified;
  * @return {graph}
  */
 function displayWorkflow(workflowData) {
-  wf = workflowData.workflow;
+  const wf = workflowData.workflow;
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
   wf.jobs.filter((s) => s.type == "IterationService").map(drawIterationService);

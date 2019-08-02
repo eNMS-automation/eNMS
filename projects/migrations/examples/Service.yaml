@@ -23,6 +23,9 @@
     Configuration Management Workflow:
     - '-300'
     - '0'
+    Iteration Services Test Workflow: !!python/tuple
+    - -359
+    - -163
     Napalm_VRF_workflow:
     - '-200'
     - '0'
@@ -50,9 +53,6 @@
     python_query_workflow:
     - '-164'
     - '15'
-    python_test_worflow:
-    - '-359'
-    - '-163'
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -90,6 +90,9 @@
     Configuration Management Workflow:
     - '200'
     - '0'
+    Iteration Services Test Workflow: !!python/tuple
+    - -9
+    - 294
     Napalm_VRF_workflow:
     - '200'
     - '0'
@@ -117,9 +120,6 @@
     python_query_workflow:
     - '651'
     - '20'
-    python_test_worflow:
-    - '-9'
-    - '294'
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -681,6 +681,9 @@
   operating_system: eos
   pools: []
   positions:
+    Iteration Services Test Workflow:
+    - '147'
+    - '-14'
     Napalm_VRF_workflow:
     - '0'
     - '-50'
@@ -696,9 +699,6 @@
     python_query_workflow:
     - '414'
     - '-154'
-    python_test_worflow:
-    - '147'
-    - '-14'
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1188,7 +1188,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-22 20:55:36.576236'
+  last_modified: '2019-08-02 19:56:01.355421'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1198,9 +1198,9 @@
   operating_system: ''
   pools: []
   positions:
-    python_test_worflow:
-    - '3'
-    - '-144'
+    Iteration Services Test Workflow: !!python/tuple
+    - 3
+    - -144
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1208,8 +1208,9 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
-  source_code: "set_var('iteration_devices',\r\n{'Washington': ['Loopback101', 'Loopback15'],\r\
-    \n'Austin': ['Loopback9', 'Loopback1000']})\r\nsave_result(True, {})"
+  source_code: "targets = ['Loopback101', 'Loopback15'] if workflow_device.name ==\
+    \ \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('iteration_devices',\
+    \ targets, device=workflow_device.name)\r\nsave_result(True, {})"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService
@@ -1249,7 +1250,7 @@
   operating_system: eos
   pools: []
   positions:
-    python_test_worflow:
+    Iteration Services Test Workflow:
     - '-336'
     - '11'
   privileged_mode: false
@@ -2076,9 +2077,9 @@
   origin_of_values: user_provided_values
   pools: []
   positions:
-    python_test_worflow:
-    - '-342'
-    - '2'
+    Iteration Services Test Workflow: !!python/tuple
+    - -342
+    - 2
   push_to_git: false
   python_query: ''
   python_query_values: ''
@@ -2123,9 +2124,9 @@
   origin_of_values: python_query
   pools: []
   positions:
-    python_test_worflow:
-    - '-358'
-    - '192'
+    Iteration Services Test Workflow: !!python/tuple
+    - -358
+    - 192
   push_to_git: false
   python_query: ''
   python_query_values: payload['variables']['iteration_devices'][device.name]
@@ -2167,7 +2168,7 @@
   origin_of_values: python_query
   pools: []
   positions:
-    python_test_worflow:
+    Iteration Services Test Workflow:
     - '-337'
     - '233'
   push_to_git: false
@@ -2183,49 +2184,5 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  conversion_property: name
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: ''
-  devices: []
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iterated_job: netmiko_check_vrf_test
-  iterated_job_id: 16
-  last_modified: '2019-07-22 20:55:48.544135'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: Iteration_python_derived_targets
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  origin_of_values: python_query
-  pools: []
-  positions:
-    python_test_worflow:
-    - '84'
-    - '131'
-  push_to_git: false
-  python_query: ''
-  python_query_values: payload['derived_targets'][device.name]
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  start_new_connection: false
-  time_between_retries: 10
-  type: IterationService
-  user_provided_values: {}
-  variable_name: ''
   vendor: ''
   waiting_time: 0

@@ -87,12 +87,12 @@
   name: 'success: python_test_worflow 0 -> 2'
   source: Start
   subtype: success
-  workflow: python_test_worflow
+  workflow: Iteration Services Test Workflow
 - destination: Iteration_service_python
   name: 'success: python_test_worflow 4 -> 5'
   source: Iteration_service_simple
   subtype: success
-  workflow: python_test_worflow
+  workflow: Iteration Services Test Workflow
 - destination: netmiko_show_ip_route
   name: payload_extraction_validation_worflow 0 -> 2
   source: Start
@@ -162,7 +162,7 @@
   name: 44-success:27->37
   source: add_devices_to_payload
   subtype: success
-  workflow: python_test_worflow
+  workflow: Iteration Services Test Workflow
 - destination: get_facts
   name: 43-success:1->22
   source: Start
@@ -198,16 +198,6 @@
   source: netmiko_check_no_vrf_test
   subtype: success
   workflow: Workflow with separate failure - success path
-- destination: End
-  name: 44-success:48->2
-  source: Iteration_python_derived_targets
-  subtype: success
-  workflow: python_test_worflow
-- destination: Iteration_python_derived_targets
-  name: 45-failure:38->40
-  source: Iteration_service_python
-  subtype: failure
-  workflow: python_test_worflow
 - destination: Test Netmiko Prompt Service
   name: 51-success:1->52
   source: Start
@@ -268,3 +258,8 @@
   source: netmiko_check_vrf_test
   subtype: success
   workflow: 'python Workflow: payload editor and pool helper'
+- destination: End
+  name: 51-success:44->2
+  source: Iteration_service_python
+  subtype: success
+  workflow: Iteration Services Test Workflow

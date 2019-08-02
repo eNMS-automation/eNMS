@@ -186,27 +186,22 @@
   description: Test python device selection mechanism
   devices:
   - Washington
+  - Austin
   display_only_failed_nodes: true
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: true
-  initial_payload:
-    derived_targets:
-      Washington:
-      - Washington
-      - Baltimore
-      - Fake device
+  initial_payload: {}
   jobs:
   - Start
   - End
   - add_devices_to_payload
   - Iteration_service_simple
   - Iteration_service_python
-  - Iteration_python_derived_targets
-  last_modified: '2019-08-02 13:20:14.606941'
+  last_modified: '2019-08-02 19:58:18.443963'
   mail_recipient: ''
-  name: python_test_worflow
+  name: Iteration Services Test Workflow
   notification_header: ''
   number_of_retries: 0
   operating_system: ''

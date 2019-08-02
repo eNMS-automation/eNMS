@@ -20,18 +20,11 @@ workflow: true
 
 let currentResults = {};
 
-/**
- * Open service panel
- */
 // eslint-disable-next-line
 function openServicePanel() {
   showTypePanel($("#service-type").val());
 }
 
-/**
- * Custom code upon opening panel.
- * @param {type} type - Service or Workflow.
- */
 // eslint-disable-next-line
 function panelCode(type, id, mode) {
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
@@ -49,17 +42,13 @@ function panelCode(type, id, mode) {
       .removeClass("btn-success")
       .addClass("btn-primary")
       .attr("onclick", `runJob('${type}', ${id})`)
-      .text('Run');
+      .text("Run");
     $(".hide-run").hide();
   } else {
     $(".no-edit").remove();
   }
 }
 
-/**
- * Workflow Run Mode.
- * @param {instance} instance - Workflow Instance.
- */
 // eslint-disable-next-line
 function workflowRunMode(instance) {
   call(`/get_runtimes/workflow/${instance.id}`, function(runtimes) {
@@ -77,17 +66,17 @@ function workflowRunMode(instance) {
           .text(runtime[0])
       );
     });
-    $(`#workflow-payload_version-${instance.id}`).val(runtimes[runtimes.length - 1]);
-    $(`#workflow-payload_version-${instance.id},#workflow-payloads_to_exclude-${instance.id}`).selectpicker(
-      "refresh"
+    $(`#workflow-payload_version-${instance.id}`).val(
+      runtimes[runtimes.length - 1]
     );
+    $(
+      `#workflow-payload_version-${instance.id},#workflow-payloads_to_exclude-${
+        instance.id
+      }`
+    ).selectpicker("refresh");
   });
 }
 
-/**
- * Save a service.
- * @param {service} service - Service instance.
- */
 // eslint-disable-next-line
 function saveService(service, id) {
   if (page == "workflow_builder") {
@@ -99,10 +88,6 @@ function saveService(service, id) {
   }
 }
 
-/**
- * Save a workflow.
- * @param {workflow object} workflow - Workflow instance.
- */
 // eslint-disable-next-line
 function saveWorkflow(newWorkflow) {
   if (page == "workflow_builder") {
@@ -116,11 +101,6 @@ function saveWorkflow(newWorkflow) {
   }
 }
 
-/**
- * Parse object to break strings into list for JSON display.
- * @param {obj} obj - Object.
- * @return {obj}.
- */
 function parseObject(obj) {
   for (let k in obj) {
     if (typeof obj[k] === "object" && obj[k] !== null) {
@@ -133,12 +113,6 @@ function parseObject(obj) {
   return obj;
 }
 
-/**
- * Format results.
- * @param {results} results - Results.
- * @param {id} id - Job id.
- * @param {id} formId - Form ID.
- */
 function formatResults(results, id, formId, compare) {
   if (!results) results = currentResults;
   if (!results) {
@@ -170,28 +144,22 @@ function formatResults(results, id, formId, compare) {
   }
 }
 
-/**
- * Display result.
- * @param {id} id - Job id.
- * @param {formId} formId - Form ID.
- */
 function displayResults(type, id, formId, compare) {
   const url = compare ? "compare" : "get";
   if ($(`#runtime-${id}`).val() || type == "run") {
-    fCall(`/${url}_results/${type}/${id}`, `#results-form-${formId}`, (results) => {
-      currentResults = results;
-      formatResults(results, id, formId, compare);
-    });
+    fCall(
+      `/${url}_results/${type}/${id}`,
+      `#results-form-${formId}`,
+      (results) => {
+        currentResults = results;
+        formatResults(results, id, formId, compare);
+      }
+    );
   } else {
     $(`#display_results-${formId}`).text("No results yet.");
   }
 }
 
-/**
- * Display results.
- * @param {id} id - Job id.
- * @param {type} type - Runtime Type.
- */
 function getRuntimes(type, id) {
   call(`/get_runtimes/${type}/${id}`, (runtimes) => {
     $(`#runtime-${id},#runtime_compare-${id}`).empty();
@@ -215,28 +183,36 @@ function getRuntimes(type, id) {
   });
 }
 
-/**
- * Display results.
- * @param {id} id - Job id.
- * @param {parentId} parentId - Parent ID.
- * @param {boolean} updateBoth - update both device lists.
- */
 function updateDeviceLists(type, id, parentId, updateBoth, workflowDevice) {
   const workflow = workflowDevice ? "workflow_" : "";
   const formId = parentId || id;
-  fCall(`/get_${workflow}device_list/${id}`, `#results-form-${formId}`, (result) => {
-    if (workflowDevice && result.workflow_devices.length) {      
-      updateDeviceList(formId, updateBoth, "workflow_", result.workflow_devices);
-      $(`#workflow_device-row-${id}`).show();
-    } else {
-      if (workflowDevice) {
-        $(`#workflow_device-row-${id}`).hide();
-        emptyDeviceList(formId, updateBoth, "workflow_");
+  fCall(
+    `/get_${workflow}device_list/${id}`,
+    `#results-form-${formId}`,
+    (result) => {
+      if (workflowDevice && result.workflow_devices.length) {
+        updateDeviceList(
+          formId,
+          updateBoth,
+          "workflow_",
+          result.workflow_devices
+        );
+        $(`#workflow_device-row-${id}`).show();
+      } else {
+        if (workflowDevice) {
+          $(`#workflow_device-row-${id}`).hide();
+          emptyDeviceList(formId, updateBoth, "workflow_");
+        }
+        updateDeviceList(
+          formId,
+          updateBoth,
+          "",
+          workflowDevice ? result.devices : result
+        );
       }
-      updateDeviceList(formId, updateBoth, "", workflowDevice ? result.devices : result);
+      displayResults(type, id, formId);
     }
-    displayResults(type, id, formId);
-  });
+  );
 }
 
 function emptyDeviceList(formId, updateBoth, workflow) {
@@ -270,12 +246,6 @@ function updateDeviceList(formId, updateBoth, workflow, devices) {
   $(ids).selectpicker("refresh");
 }
 
-/**
- * Display results.
- * @param {id} id - Job id.
- * @param {type} type - Runtime Type.
- * @param {boolean} updateBoth - update both job lists.
- */
 function updateJobList(type, id, updateBoth) {
   fCall(`/get_job_list/${id}`, `#results-form-${id}`, (jobs) => {
     let ids;
@@ -298,10 +268,6 @@ function updateJobList(type, id, updateBoth) {
   });
 }
 
-/**
- * Show the results modal for a job.
- * @param {id} id - Job id.
- */
 // eslint-disable-next-line
 function showResultsPanel(id, name, type, runtime) {
   createPanel(`${type}_results`, `Results - ${name}`, id, function() {
@@ -324,10 +290,6 @@ function showResultsPanel(id, name, type, runtime) {
   });
 }
 
-/**
- * Configure display & comparison callbacks
- * @param {id} id - Job id.
- */
 // eslint-disable-next-line
 function configureResultsCallbacks(id, type) {
   if (type != "device") {
@@ -353,10 +315,13 @@ function configureResultsCallbacks(id, type) {
     });
   }
 
-  $(`#workflow_device-${id},#workflow_device_compare-${id}`).on("change", function() {
-    $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-    updateDeviceLists(type, id);
-  });
+  $(`#workflow_device-${id},#workflow_device_compare-${id}`).on(
+    "change",
+    function() {
+      $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
+      updateDeviceLists(type, id);
+    }
+  );
 
   $(`#view_type-${id}`).on("change", function() {
     displayResults(type, id, id);
@@ -367,7 +332,7 @@ function configureResultsCallbacks(id, type) {
   });
 
   if (type == "run" || type == "service") {
-    updateDeviceLists(type, id, id)
+    updateDeviceLists(type, id, id);
   }
 }
 
@@ -383,12 +348,6 @@ function clearResults(id) {
   });
 }
 
-
-
-/**
- * Refresh the logs
- * @param {id} id - Job ID.
- */
 // eslint-disable-next-line
 function refreshLogs(runtime, jobId, jobType, jobName, first) {
   const runtimeId = runtime.toString().replace(/[.:-\s]/g, "");
@@ -404,10 +363,6 @@ function refreshLogs(runtime, jobId, jobType, jobName, first) {
   });
 }
 
-/**
- * Show the results modal for a job.
- * @param {id} id - Job id.
- */
 // eslint-disable-next-line
 function showLogs(runtime, jobId, jobType, jobName) {
   const runtimeId = runtime.toString().replace(/[.:-\s]/g, "");
@@ -433,10 +388,6 @@ function showLogs(runtime, jobId, jobType, jobName) {
   }
 }
 
-/**
- * Run job.
- * @param {id} id - Job id.
- */
 // eslint-disable-next-line
 function runJob(type, id) {
   fCall(`/run_job`, `#edit-${type}-form-${id}`, function(job) {
@@ -458,10 +409,6 @@ function runJob(type, id) {
   });
 }
 
-/**
- * Display instance modal for editing.
- * @param {id} id - Instance ID.
- */
 // eslint-disable-next-line
 function duplicateWorkflow(id) {
   fCall(
@@ -475,10 +422,6 @@ function duplicateWorkflow(id) {
   );
 }
 
-/**
- * Export a job.
- * @param {int} id - Job ID.
- */
 // eslint-disable-next-line
 function exportJob(id) {
   call(`/export_job/${id}`, () => {
@@ -486,10 +429,6 @@ function exportJob(id) {
   });
 }
 
-/**
- * Pause a task.
- * @param {id} id - Task id.
- */
 // eslint-disable-next-line
 function pauseTask(id) {
   // eslint-disable-line no-unused-vars
@@ -501,10 +440,6 @@ function pauseTask(id) {
   });
 }
 
-/**
- * Resume a task.
- * @param {id} id - Task id.
- */
 // eslint-disable-next-line
 function resumeTask(id) {
   // eslint-disable-line no-unused-vars

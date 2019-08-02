@@ -54,20 +54,19 @@ stylesheets %} {% block content %} {% if type == "pool" %} {% endif %}
                 </th>
                 {% endfor %}
               </tr>
-              {% for property in properties %}
-                {% if property in filtering_properties %}
-                <th>
-                  <input
-                    id="search-{{ property }}"
-                    type="text"
-                    class="form-control"
-                    style="width: 100%;"
-                  />
-                </th>
-                {% else %}
-                <th>N/A</th>
-                {% endif %}
-              {% endfor %} {% for field in fixed_columns %}
+              {% for property in properties %} {% if property in
+              filtering_properties %}
+              <th>
+                <input
+                  id="search-{{ property }}"
+                  type="text"
+                  class="form-control"
+                  style="width: 100%;"
+                />
+              </th>
+              {% else %}
+              <th>N/A</th>
+              {% endif %} {% endfor %} {% for field in fixed_columns %}
               <th>N/A</th>
               {% endfor %}
             </thead>

@@ -15,7 +15,8 @@
     "object-curly-spacing": "off",
     "no-invalid-this": 0,
     "linebreak-style": 0,
-    "quote-props": [2, "as-needed"]
+    "quote-props": [2, "as-needed"],
+    "valid-jsdoc" : 0
   },
   "extends": ["eslint:recommended", "google"]
 }

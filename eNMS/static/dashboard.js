@@ -309,7 +309,6 @@ function drawDiagrams(objects, type) {
 
 $(function() {
   call(`/count_models`, function(result) {
-    console.log(Object.fromkeys(defaultProperties));
     for (const type of Object.keys(defaultProperties)) {
       $(`#count-${type}`).text(result.counters[type]);
     }

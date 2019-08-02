@@ -398,7 +398,7 @@ function configureForm(form, id) {
         useCurrent: false,
       });
     } else {
-      const elClass = el.attr('class');
+      const elClass = el.attr("class");
       el.selectpicker({
         liveSearch: elClass ? !elClass.includes("no-search") : false,
         actionsBox: true,
@@ -421,7 +421,8 @@ function showTypePanel(type, id, mode) {
     "",
     id,
     function(panel) {
-      if (type == "workflow" || type.includes("Service")) panelCode(type, id, mode);
+      if (type == "workflow" || type.includes("Service"))
+        panelCode(type, id, mode);
       if (id) {
         call(`/get/${type}/${id}`, function(instance) {
           const title = mode == "duplicate" ? "Duplicate" : "Edit";

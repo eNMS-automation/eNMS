@@ -18,7 +18,8 @@
       >
         Save
       </button>
-    </center><br>
+    </center>
+    <br />
     <div
       id="{{ form_type }}-wizard"
       class="form_wizard wizard_horizontal add-id"
@@ -77,14 +78,14 @@
           {% if form_type != "workflow" %}
           <label class="hide-run">Type</label>
           <div class="form-group">
-            {{ form.type(id=form_type + '-class', class="form-control hide-run add-id")
-            }}
+            {{ form.type(id=form_type + '-class', class="form-control hide-run
+            add-id") }}
           </div>
           {% endif %}
           <label class="hide-run">Name</label>
           <div class="form-group">
-            {{ form.name(id=form_type + '-name', class="form-control hide-run add-id
-            required") }}
+            {{ form.name(id=form_type + '-name', class="form-control hide-run
+            add-id required") }}
           </div>
           <label class="hide-run">Description</label>
           <div class="form-group">
@@ -208,16 +209,17 @@
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
         <label class="hide-run"
-            >Python Query (populating will supersede device targets in a parent
-            workflow)</label>
+          >Python Query (populating will supersede device targets in a parent
+          workflow)</label
+        >
         <div class="form-group">
-            {{ form.python_query(id=form_type + '-python_query',
-            class="form-control hide-run add-id") }}
-          </div>
-          <label class="hide-run">Query Property Type</label>
-          <div class="form-group">
-            {{ form.query_property_type(id=form_type + '-query_property_type',
-            class="form-control hide-run add-id") }}
+          {{ form.python_query(id=form_type + '-python_query',
+          class="form-control hide-run add-id") }}
+        </div>
+        <label class="hide-run">Query Property Type</label>
+        <div class="form-group">
+          {{ form.query_property_type(id=form_type + '-query_property_type',
+          class="form-control hide-run add-id") }}
         </div>
         {% if form_type != "workflow" %}
         <fieldset>
@@ -256,21 +258,23 @@
       </div>
       <div id="step-4" style="min-height: 300px">
         {% if form_type == "workflow" %}
-          <label for="start_jobs">Start Jobs</label>
-          <div class="form-group">
-            {{ form.start_jobs(id=form_type + '-start_jobs', class="form-control
-            add-id") }}
-          </div>
-          <label for="payload_version" class="no-edit">Payload Version</label>
-          <div class="form-group">
-            {{ form.payload_version(id=form_type + '-payload_version', class="form-control
-            no-edit add-id") }}
-          </div>
-          <label for="payloads_to_exclude" class="no-edit">Payloads to exclude</label>
-          <div class="form-group">
-            {{ form.payloads_to_exclude(id=form_type + '-payloads_to_exclude', class="form-control
-            no-edit add-id") }}
-          </div>
+        <label for="start_jobs">Start Jobs</label>
+        <div class="form-group">
+          {{ form.start_jobs(id=form_type + '-start_jobs', class="form-control
+          add-id") }}
+        </div>
+        <label for="payload_version" class="no-edit">Payload Version</label>
+        <div class="form-group">
+          {{ form.payload_version(id=form_type + '-payload_version',
+          class="form-control no-edit add-id") }}
+        </div>
+        <label for="payloads_to_exclude" class="no-edit"
+          >Payloads to exclude</label
+        >
+        <div class="form-group">
+          {{ form.payloads_to_exclude(id=form_type + '-payloads_to_exclude',
+          class="form-control no-edit add-id") }}
+        </div>
         {% endif %}
         <fieldset>
           <div class="item">
@@ -291,15 +295,18 @@
         </div>
         <label class="hide-run">Shape</label>
         <div class="form-group">
-          {{ form.shape(id=form_type + '-shape', class="form-control hide-run add-id") }}
+          {{ form.shape(id=form_type + '-shape', class="form-control hide-run
+          add-id") }}
         </div>
         <label class="hide-run">Color</label>
         <div class="form-group">
-          {{ form.color(id=form_type + '-color', class="form-control hide-run add-id") }}
+          {{ form.color(id=form_type + '-color', class="form-control hide-run
+          add-id") }}
         </div>
         <label class="hide-run">Size</label>
         <div class="form-group">
-          {{ form.size(id=form_type + '-size', class="form-control hide-run add-id") }}
+          {{ form.size(id=form_type + '-size', class="form-control hide-run
+          add-id") }}
         </div>
       </div>
       {% if form_type != "workflow" %}

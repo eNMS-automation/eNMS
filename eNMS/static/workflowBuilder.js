@@ -341,7 +341,7 @@ function savePositions() {
 Object.assign(action, {
   "Run Workflow": runWorkflow,
   Edit: (job) => showTypePanel(job.type, job.id),
-  Run: (job) => showTypePanel(job.type, job.id, 'run'),
+  Run: (job) => showTypePanel(job.type, job.id, "run"),
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
@@ -369,7 +369,7 @@ $("#network").contextMenu({
  */
 function runWorkflow() {
   workflow.jobs.forEach((job) => colorJob(job.id, job.color));
-  showTypePanel('Workflow', workflow.id, 'run')
+  showTypePanel("Workflow", workflow.id, "run");
 }
 
 /**
@@ -415,9 +415,7 @@ function displayWorkflowState(result) {
     $("#status").text(`Status: ${result.state.status}`);
     if (result.state.current_job) {
       colorJob(result.state.current_job.id, "#89CFF0");
-      $("#current-job").text(
-        `Current job: ${result.state.current_job.name}.`
-      );
+      $("#current-job").text(`Current job: ${result.state.current_job.name}.`);
     } else {
       $("#current-job").empty();
     }
@@ -441,7 +439,8 @@ function getWorkflowState(first) {
         displayWorkflow(result);
       }
       displayWorkflowState(result);
-      const rate = first || result.state && result.state.is_running ? 2000 : 15000;
+      const rate =
+        first || (result.state && result.state.is_running) ? 2000 : 15000;
       setTimeout(getWorkflowState, rate);
     });
   }

@@ -103,10 +103,6 @@ L.PolylineClusterable = L.Polyline.extend({
   setLatLng: function() {},
 });
 
-/**
- * Switch currentView.
- * @param {newView} newView - 2D, 2DC (clustered) or 3D.
- */
 // eslint-disable-next-line
 function switchView(newView) {
   deleteAll();
@@ -143,10 +139,6 @@ function switchView(newView) {
   }
 }
 
-/**
- * Change the tile layer.
- * @param {layer} layer - tile layer.
- */
 // eslint-disable-next-line
 function switchLayer(layer) {
   if (currentView !== "3D") {
@@ -163,21 +155,12 @@ function switchLayer(layer) {
     .toggle();
 }
 
-/**
- * Change the type of marker.
- * @param {type} type - Type of marker.
- */
 // eslint-disable-next-line
 function changeMarker(type) {
   markerType = type;
   switchView(currentView);
 }
 
-/**
- * Create a node (device or site) in 2D.
- * @param {node} node - Device or Pool.
- * @param {nodeType} nodeType - Device or Pool.
- */
 // eslint-disable-next-line
 function createNode2d(node, nodeType) {
   const marker =
@@ -197,11 +180,6 @@ function createNode2d(node, nodeType) {
   return marker;
 }
 
-/**
- * Create a node (device or site) in 3D.
- * @param {node} node - Device or Pool.
- * @param {nodeType} nodeType - Device or Pool.
- */
 // eslint-disable-next-line
 function createNode3d(node, nodeType) {
   let marker;
@@ -225,11 +203,6 @@ function createNode3d(node, nodeType) {
   return marker;
 }
 
-/**
- * Create a node (device or site).
- * @param {node} node - Device or Pool.
- * @param {nodeType} nodeType - Device or Pool.
- */
 // eslint-disable-next-line
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
@@ -260,10 +233,6 @@ function createNode(node, nodeType) {
   }
 }
 
-/**
- * Create a link in 2D.
- * @param {link} link - Link.
- */
 // eslint-disable-next-line
 function createLink2d(link) {
   let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
@@ -298,10 +267,6 @@ function createLink2d(link) {
   }
 }
 
-/**
- * Create a link in 3D.
- * @param {link} link - Link.
- */
 // eslint-disable-next-line
 function createLink3d(link) {
   const color = link.color.trimRight();
@@ -325,10 +290,6 @@ function createLink3d(link) {
   polylinesArray.push(polygonSD, polygonDS);
 }
 
-/**
- * Create a link.
- * @param {link} link - Link.
- */
 // eslint-disable-next-line
 function createLink(link) {
   if (currentView == "2D" || currentView == "2DC") {
@@ -338,9 +299,6 @@ function createLink(link) {
   }
 }
 
-/**
- * Delete all devices.
- */
 function deleteAllDevices() {
   for (let i = 0; i < markersArray.length; i++) {
     if (currentView == "2D") {
@@ -354,9 +312,6 @@ function deleteAllDevices() {
   markersArray = [];
 }
 
-/**
- * Delete all links.
- */
 function deleteAllLinks() {
   for (let i = 0; i < polylinesArray.length; i++) {
     if (currentView == "2D") {
@@ -374,9 +329,6 @@ function deleteAllLinks() {
   polylinesArray = [];
 }
 
-/**
- * Delete everything.
- */
 function deleteAll() {
   deleteAllDevices();
   deleteAllLinks();
@@ -405,9 +357,6 @@ $("body").contextMenu({
   },
 });
 
-/**
- * Update current view.
- */
 // eslint-disable-next-line
 function updateView() {
   deleteAll();
@@ -429,9 +378,6 @@ function updateView() {
   }
 }
 
-/**
- * Update current view.
- */
 // eslint-disable-next-line
 function filter(type) {
   fCall(`/view_filtering/${type}`, `#${type}-form`, (r) => {
@@ -446,9 +392,6 @@ function filter(type) {
   });
 }
 
-/**
- * Show View Filtering Panel
- */
 // eslint-disable-next-line
 function showViewFilteringPanel(type) {
   (type == "device" ? deviceFilteringPanel : linkFilteringPanel).normalize();

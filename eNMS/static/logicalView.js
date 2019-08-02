@@ -11,11 +11,6 @@ let selected; // eslint-disable-line no-unused-vars
 let logicalDevices = [];
 let logicalLinks = [];
 
-/**
- * Convert device to Vis node.
- * @param {device} device - Device.
- * @return {node}
- */
 function deviceToNode(device) {
   const logicalDevice = {
     id: device.id,
@@ -27,11 +22,6 @@ function deviceToNode(device) {
   return logicalDevice;
 }
 
-/**
- * Convert link to Vis edge.
- * @param {link} link - Link.
- * @return {edge}
- */
 function linkToEdge(link) {
   const logicalLink = {
     id: link.id,
@@ -42,10 +32,6 @@ function linkToEdge(link) {
   return logicalLink;
 }
 
-/**
- * Visualize pool.
- * @param {id} id - Id of the pool.
- */
 // eslint-disable-next-line
 function showPoolView(poolId) {
   jsPanel.create({
@@ -75,11 +61,6 @@ function showPoolView(poolId) {
   });
 }
 
-/**
- * Display a pool.
- * @param {nodes} nodes - Array of nodes to display.
- * @param {edges} edges - Array of edges to display.
- */
 // eslint-disable-next-line
 function displayPool(poolId, nodes, edges) {
   let container = document.getElementById(`network-${poolId}`);

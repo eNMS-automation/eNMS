@@ -48,11 +48,6 @@ let selectedNode;
 let edgeType;
 let lastModified;
 
-/**
- * Display a workflow.
- * @param {wf} wf - A workflow.
- * @return {graph}
- */
 function displayWorkflow(workflowData) {
   const wf = workflowData.workflow;
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
@@ -107,11 +102,6 @@ function displayWorkflow(workflowData) {
   return graph;
 }
 
-/**
- * Display a workflow.
- * @param {workflowId} workflowId - Workflow ID.
-
- */
 function switchToWorkflow(workflowId) {
   call(`/get_workflow_state/${workflowId}`, function(result) {
     workflow = result.workflow;
@@ -121,9 +111,6 @@ function switchToWorkflow(workflowId) {
   });
 }
 
-/**
- * Add an existing job to the workflow.
- */
 // eslint-disable-next-line
 function addJobsToWorkflow(jobs) {
   if (!workflow) {
@@ -162,10 +149,6 @@ function addJobsToWorkflow(jobs) {
   }
 }
 
-/**
- * Delete job from the workflow (back-end).
- * @param {id} id - Id of the job to be deleted.
- */
 function deleteNode(id) {
   call(`/delete_node/${workflow.id}/${id}`, function(result) {
     lastModified = result.update_time;
@@ -177,10 +160,6 @@ function deleteNode(id) {
   });
 }
 
-/**
- * Add edge to the workflow object (back-end).
- * @param {edge} edge - Edge to add to the workflow.
- */
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call(`/add_edge/${param}`, function(result) {
@@ -190,22 +169,12 @@ function saveEdge(edge) {
   });
 }
 
-/**
- * Delete edge from the workflow (back-end).
- * @param {edgeId} edgeId - Id of the edge to be deleted.
- */
 function deleteEdge(edgeId) {
   call(`/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
     lastModified = updateTime;
   });
 }
 
-/**
- * Convert job object to Vis job node.
- * @param {job} job - Job object.
- * @param {int} index - Stairstep display when adding jobs.
- * @return {visJob}.
- */
 function jobToNode(job, index) {
   return {
     id: job.id,
@@ -227,10 +196,6 @@ function jobToNode(job, index) {
   };
 }
 
-/**
- * Draw edge to self for iteration service.
- * @param {service} service - Service object.
- */
 function drawIterationService(service) {
   edges.add({
     id: -service.id,
@@ -242,11 +207,6 @@ function drawIterationService(service) {
   });
 }
 
-/**
- * Convert edge object to Vis job edge.
- * @param {edge} edge - Edge object.
- * @return {visEdge}.
- */
 function edgeToEdge(edge) {
   return {
     id: edge.id,
@@ -271,9 +231,6 @@ function edgeToEdge(edge) {
   };
 }
 
-/**
- * Delete selected nodes and edges.
- */
 function deleteSelection() {
   const node = graph.getSelectedNodes()[0];
   if (node != 1 && node != 2) {
@@ -287,10 +244,6 @@ function deleteSelection() {
   }
 }
 
-/**
- * Change the mode (motion, creation of success or failure edge).
- * @param {mode} mode - Mode to switch to.
- */
 function switchMode(mode) {
   if (["success", "failure", "prerequisite"].includes(mode)) {
     edgeType = mode;
@@ -316,9 +269,6 @@ $("#current-runtimes").on("change", function() {
   getWorkflowState();
 });
 
-/**
- * Save positions of the workflow nodes.
- */
 function savePositions() {
   $.ajax({
     type: "POST",
@@ -362,27 +312,15 @@ $("#network").contextMenu({
   },
 });
 
-/**
- * Start the workflow.
- */
 function runWorkflow() {
   workflow.jobs.forEach((job) => colorJob(job.id, job.color));
   showTypePanel("Workflow", workflow.id, "run");
 }
 
-/**
- * Get Workflow State.
- * @param {id} id - Workflow Id.
- * @param {color} color - Node color.
- */
 function colorJob(id, color) {
   nodes.update({ id: id, color: color });
 }
 
-/**
- * Get Job State.
- * @param {id} id - Job Id.
- */
 // eslint-disable-next-line
 function getJobState(id) {
   call(`/get/service/${id}`, function(service) {
@@ -399,10 +337,6 @@ function getJobState(id) {
   });
 }
 
-/**
- * Display Workflow State.
- * @param {id} id - Job Id.
- */
 // eslint-disable-next-line
 function displayWorkflowState(result) {
   if (!result.state) {
@@ -425,9 +359,6 @@ function displayWorkflowState(result) {
   }
 }
 
-/**
- * Get Workflow State.
- */
 function getWorkflowState(first) {
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";

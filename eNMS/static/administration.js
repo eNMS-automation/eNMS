@@ -154,6 +154,7 @@ function showImportJobsPanel() {
   });
 }
 
+// eslint-disable-next-line
 function importJobs() {
   fCall("/import_jobs", "#import_jobs-form", function(result) {
     alertify.notify("Import successful.", "success", 5);
@@ -161,6 +162,7 @@ function importJobs() {
   });
 }
 
+// eslint-disable-next-line
 function databaseDeletion() {
   alertify.notify("Starting to delete...", "success", 5);
   fCall("/database_deletion", "#database_deletion-form", function(result) {
@@ -169,6 +171,7 @@ function databaseDeletion() {
   });
 }
 
+// eslint-disable-next-line
 function getGitContent() {
   call("/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);

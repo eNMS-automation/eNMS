@@ -208,31 +208,6 @@
   source: Iteration_service_python
   subtype: failure
   workflow: python_test_worflow
-- destination: Device_from_python_query
-  name: 49-success:1->50
-  source: Start
-  subtype: success
-  workflow: python_query_workflow
-- destination: netmiko_check_no_vrf_test
-  name: 49-success:50->19
-  source: Device_from_python_query
-  subtype: success
-  workflow: python_query_workflow
-- destination: End
-  name: 49-success:19->2
-  source: netmiko_check_no_vrf_test
-  subtype: success
-  workflow: python_query_workflow
-- destination: netmiko_check_no_vrf_napalm
-  name: 49-failure:50->36
-  source: Device_from_python_query
-  subtype: failure
-  workflow: python_query_workflow
-- destination: End
-  name: 49-failure:36->2
-  source: netmiko_check_no_vrf_napalm
-  subtype: failure
-  workflow: python_query_workflow
 - destination: Test Netmiko Prompt Service
   name: 51-success:1->52
   source: Start

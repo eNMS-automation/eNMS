@@ -615,13 +615,13 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-01 11:40:13.402022'
+  last_modified: '2019-08-02 15:33:20.751026'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_create_vrf_test
   notification_header: ''
-  number_of_retries: 0
+  number_of_retries: 2
   operating_system: eos
   pools: []
   positions:
@@ -1706,7 +1706,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-07-17 17:06:41.065700'
+  last_modified: '2019-08-02 19:52:14.677268'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: true
@@ -1722,7 +1722,7 @@
     - '-147'
   privileged_mode: false
   push_to_git: false
-  python_query: payload[device.name]
+  python_query: get_var("test", device=workflow_device.name)
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification

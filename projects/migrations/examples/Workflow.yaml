@@ -15,7 +15,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-08-01 11:58:04.975585'
+  last_modified: '2019-08-02 13:20:14.252031'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -59,7 +59,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-08-01 11:58:05.090250'
+  last_modified: '2019-08-02 13:20:14.344442'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -104,7 +104,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-08-01 11:58:05.212671'
+  last_modified: '2019-08-02 13:20:14.432633'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -152,7 +152,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-08-01 11:58:05.340775'
+  last_modified: '2019-08-02 13:20:14.521030'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -204,7 +204,7 @@
   - Iteration_service_simple
   - Iteration_service_python
   - Iteration_python_derived_targets
-  last_modified: '2019-08-01 11:58:05.449291'
+  last_modified: '2019-08-02 13:20:14.606941'
   mail_recipient: ''
   name: python_test_worflow
   notification_header: ''
@@ -248,7 +248,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-08-01 11:58:05.556632'
+  last_modified: '2019-08-02 13:20:14.709890'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -291,7 +291,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-08-01 11:58:05.658792'
+  last_modified: '2019-08-02 13:20:14.780540'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -335,59 +335,9 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-08-01 11:58:05.763107'
+  last_modified: '2019-08-02 13:20:14.857531'
   mail_recipient: ''
   name: Workflow with separate failure - success path
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  start_jobs:
-  - Start
-  start_new_connection: false
-  start_workflows: []
-  time_between_retries: 10
-  type: Workflow
-  use_workflow_targets: true
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: ''
-  devices:
-  - Washington
-  - Chicago
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: false
-  initial_payload:
-    Chicago:
-    - Baltimore
-    - Non existing
-    - Non existing2
-    Washington:
-    - Washington
-  jobs:
-  - Start
-  - End
-  - Device_from_python_query
-  - netmiko_check_no_vrf_test
-  - netmiko_check_no_vrf_napalm
-  last_modified: '2019-08-01 11:58:05.873423'
-  mail_recipient: ''
-  name: python_query_workflow
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -427,7 +377,7 @@
   - End
   - Test Netmiko Prompt Service
   - Test netmiko prompts pass
-  last_modified: '2019-08-01 11:58:05.965740'
+  last_modified: '2019-08-02 13:20:15.027970'
   mail_recipient: ''
   name: Netmiko prompts
   notification_header: ''
@@ -476,7 +426,7 @@
   - netmiko_check_vrf_napalm
   - netmiko_check_vrf_test
   - get_facts
-  last_modified: '2019-08-01 11:58:06.116723'
+  last_modified: '2019-08-02 13:20:15.138589'
   mail_recipient: ''
   name: 'python Workflow: payload editor and pool helper'
   notification_header: ''

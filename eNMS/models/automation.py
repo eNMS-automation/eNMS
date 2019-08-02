@@ -103,6 +103,7 @@ class Run(AbstractBase):
         return f"{self.runtime} ({self.job_name})"
 
     def __getitem__(self, key: Any) -> Any:
+        print(self.properties)
         if key in self.properties:
             return convert_value(self.job.type, key, self.properties[key], "id")
         elif hasattr(self.job, key):
@@ -795,6 +796,8 @@ class Workflow(Job):
                             workflow_device=base_target.id,
                             parent_runtime=run.parent_runtime,
                         )
+                        job_run.properties = {}
+                        print("tttt"*100, payload)
                         derived_target_result = job_run.run(payload)
                         device_results[base_target.name] = derived_target_result
                         if not derived_target_result["success"]:

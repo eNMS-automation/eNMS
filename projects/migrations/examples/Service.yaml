@@ -38,9 +38,9 @@
     Workflow with separate failure - success path:
     - '-118'
     - '-3'
-    Workflow_of_workflows:
-    - '-300'
-    - '0'
+    Workflow_of_workflows: !!python/tuple
+    - -300
+    - 0
     payload_extraction_validation_worflow:
     - '-200'
     - '0'
@@ -105,9 +105,9 @@
     Workflow with separate failure - success path:
     - '500'
     - '0'
-    Workflow_of_workflows:
-    - '300'
-    - '0'
+    Workflow_of_workflows: !!python/tuple
+    - 300
+    - 0
     payload_extraction_validation_worflow:
     - '200'
     - '0'
@@ -1025,9 +1025,9 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow_of_workflows:
-    - '0'
-    - '0'
+    Workflow_of_workflows: !!python/tuple
+    - 0
+    - 0
     payload_transfer_workflow:
     - '150'
     - '100'

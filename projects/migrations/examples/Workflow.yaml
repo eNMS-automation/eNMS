@@ -104,7 +104,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-08-02 13:20:14.432633'
+  last_modified: '2019-08-02 20:58:49.450820'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -112,9 +112,9 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows:
-    - '0'
-    - '200'
+    Workflow_of_workflows: !!python/tuple
+    - 0
+    - 200
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -122,8 +122,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
-  start_jobs:
-  - Start
+  start_jobs: []
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -152,7 +151,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-08-02 13:20:14.521030'
+  last_modified: '2019-08-02 20:58:45.945189'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -160,9 +159,9 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows:
-    - '0'
-    - '-200'
+    Workflow_of_workflows: !!python/tuple
+    - 0
+    - -200
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -170,8 +169,7 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
-  start_jobs:
-  - Start
+  start_jobs: []
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -199,7 +197,7 @@
   - add_devices_to_payload
   - Iteration_service_simple
   - Iteration_service_python
-  last_modified: '2019-08-02 20:07:32.095340'
+  last_modified: '2019-08-02 20:52:13.158407'
   mail_recipient: ''
   name: Iteration Services Test Workflow
   notification_header: ''
@@ -286,7 +284,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-08-02 13:20:14.780540'
+  last_modified: '2019-08-02 21:07:27.012848'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''

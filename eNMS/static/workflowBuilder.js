@@ -47,6 +47,7 @@ let graph;
 let selectedNode;
 let edgeType;
 let lastModified;
+let stateUpdate = false;
 
 function displayWorkflow(workflowData) {
   const wf = workflowData.workflow;
@@ -76,11 +77,14 @@ function displayWorkflow(workflowData) {
   });
   graph.on("doubleClick", function(properties) {
     properties.event.preventDefault();
-    const node = this.getNodeAt(properties.pointer.DOM);
+    let node = this.getNodeAt(properties.pointer.DOM);
     if (node) {
+      node = parseInt(node);
       const job = workflow.jobs.find((w) => w.id === node);
       if (job.type == "Workflow") {
         switchToWorkflow(node);
+        $("#current-workflow").val(node);
+        $("#current-workflow").selectpicker("refresh");
       } else {
         showTypePanel(job.type, job.id);
       }
@@ -106,7 +110,7 @@ function switchToWorkflow(workflowId) {
   call(`/get_workflow_state/${workflowId}`, function(result) {
     workflow = result.workflow;
     graph = displayWorkflow(result);
-    getWorkflowState();
+    if (!stateUpdate) getWorkflowState(true);
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }
@@ -266,7 +270,8 @@ $("#current-workflow").on("change", function() {
 });
 
 $("#current-runtimes").on("change", function() {
-  getWorkflowState();
+  resetDisplay();
+  if (!stateUpdate) getWorkflowState(true);
 });
 
 function savePositions() {
@@ -359,12 +364,15 @@ function displayWorkflowState(result) {
   }
 }
 
+function resetDisplay() {
+  workflow.jobs.forEach((job) => {
+    colorJob(job.id, job.color);
+  });
+}
+
 function getWorkflowState(first) {
-  if (first) {
-    workflow.jobs.forEach((job) => {
-      colorJob(job.id, job.color);
-    });
-  }
+  stateUpdate = true;
+  if (first) resetDisplay();
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
@@ -373,9 +381,11 @@ function getWorkflowState(first) {
         displayWorkflow(result);
       }
       displayWorkflowState(result);
-      const rate =
-        first || (result.state && result.state.is_running) ? 2000 : 15000;
-      setTimeout(getWorkflowState, rate);
+      if (first || (result.state && result.state.is_running)) {
+        setTimeout(getWorkflowState, 3000);
+      } else {
+        stateUpdate = false;
+      }
     });
   }
 }
@@ -408,5 +418,4 @@ function getWorkflowState(first) {
       liveSearch: true,
     });
   });
-  getWorkflowState();
 })();

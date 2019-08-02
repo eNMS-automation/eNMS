@@ -769,7 +769,7 @@ class Workflow(Job):
                 yield successor
 
     def build_results(self, run: "Run", payload: dict) -> dict:
-        controller.job_db[run.runtime] = {"jobs": {}, "edges": {}}
+        controller.job_db[run.runtime].update({"jobs": {}, "edges": {}})
         jobs: list = run["start_jobs"]
         payload = deepcopy(payload)
         visited: Set = set()

@@ -2113,7 +2113,7 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 28
-  last_modified: '2019-07-22 20:55:43.220815'
+  last_modified: '2019-08-02 20:27:00.941168'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2129,7 +2129,7 @@
     - 192
   push_to_git: false
   python_query: ''
-  python_query_values: payload['variables']['iteration_devices'][device.name]
+  python_query_values: get_var('iteration_devices', device=device.name)
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification

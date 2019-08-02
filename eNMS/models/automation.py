@@ -1,5 +1,6 @@
 from collections import defaultdict
 from copy import deepcopy
+from functools import partial
 from git import Repo
 from git.exc import GitCommandError
 from json import loads
@@ -212,6 +213,9 @@ class Run(AbstractBase):
                 device.name
             ] = napalm_connection
         return napalm_connection
+
+    def get_var(self, payload):
+        return partial(self.payload_helper, payload)
 
     def payload_helper(
         self,

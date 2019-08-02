@@ -11,9 +11,6 @@ table: false
 updateProperty: false
 */
 
-/**
- * Show Parameters
- */
 // eslint-disable-next-line
 function showParametersPanel(type) {
   createPanel(type, `${type} Parameters`, 0, () => {
@@ -25,9 +22,6 @@ function showParametersPanel(type) {
   });
 }
 
-/**
- * Show Admin Panel
- */
 // eslint-disable-next-line
 function showImportTopologyPanel(type) {
   createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
@@ -37,9 +31,6 @@ function showImportTopologyPanel(type) {
   });
 }
 
-/**
- * Query openNMS server.
- */
 // eslint-disable-next-line
 function queryOpenNMS() {
   fCall("/query_opennms", "#opennms-form", function() {
@@ -47,9 +38,6 @@ function queryOpenNMS() {
   });
 }
 
-/**
- * Query Netbox server.
- */
 // eslint-disable-next-line
 function queryNetbox() {
   fCall("/query_netbox", "#netbox-form", function() {
@@ -57,9 +45,6 @@ function queryNetbox() {
   });
 }
 
-/**
- * Query libreNMS server.
- */
 // eslint-disable-next-line
 function queryLibreNMS() {
   fCall("/query_librenms", "#librenms-form", function() {
@@ -67,9 +52,6 @@ function queryLibreNMS() {
   });
 }
 
-/**
- * Export project to Google Earth (creation of a .kmz file).
- */
 // eslint-disable-next-line
 function exportToGoogleEarth() {
   fCall("/export_to_google_earth", "#google_earth_export-form", function() {
@@ -77,9 +59,6 @@ function exportToGoogleEarth() {
   });
 }
 
-/**
- * Export topology.
- */
 // eslint-disable-next-line
 function exportTopology() {
   alertify.notify("Topology export starting...", "success", 5);
@@ -88,9 +67,6 @@ function exportTopology() {
   });
 }
 
-/**
- * Import topology.
- */
 // eslint-disable-next-line
 function importTopology() {
   alertify.notify("Topology import: starting...", "success", 5);
@@ -116,9 +92,6 @@ function importTopology() {
   }
 }
 
-/**
- * Save Parameters.
- */
 // eslint-disable-next-line
 function saveParameters(type) {
   fCall(`/save_parameters/${type}`, `#${type}-form`, function() {
@@ -127,9 +100,6 @@ function saveParameters(type) {
   $(`#${type}`).remove();
 }
 
-/**
- * Get Cluster Status.
- */
 function getClusterStatus() {
   call("/get_cluster_status", function(cluster) {
     table.ajax.reload(null, false);
@@ -137,9 +107,6 @@ function getClusterStatus() {
   });
 }
 
-/**
- * Export all for migration.
- */
 // eslint-disable-next-line
 function migrationsExport() {
   alertify.notify("Export initiated.", "success", 5);
@@ -148,9 +115,6 @@ function migrationsExport() {
   });
 }
 
-/**
- * Open Database Migration Panel.
- */
 // eslint-disable-next-line
 function showMigrationPanel() {
   showPanel("database_migration", null, () => {
@@ -163,9 +127,6 @@ function showMigrationPanel() {
   });
 }
 
-/**
- * Import all for migration.
- */
 // eslint-disable-next-line
 function migrationsImport() {
   alertify.notify("Import initiated.", "success", 5);
@@ -174,9 +135,6 @@ function migrationsImport() {
   });
 }
 
-/**
- * Refresh Exported Job
- */
 function refreshExportedJobs() {
   call("/get_exported_jobs", function(jobs) {
     let list = document.getElementById("jobs_to_import");
@@ -217,10 +175,6 @@ function getGitContent() {
   });
 }
 
-/**
- * Start or shutdown the scheduler.
- * @param {action} action - Pause or resume.
- */
 // eslint-disable-next-line
 function scheduler(action) {
   call(`/scheduler_action/${action}`, function() {
@@ -228,9 +182,6 @@ function scheduler(action) {
   });
 }
 
-/**
- * Scan Cluster subnet for new Servers.
- */
 // eslint-disable-next-line
 function scanCluster() {
   alertify.notify("Scan started.", "success", 5);

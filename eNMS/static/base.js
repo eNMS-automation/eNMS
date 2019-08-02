@@ -93,10 +93,6 @@ const panelName = {
 
 let topZ = 1000;
 
-/**
- * Update link to the docs.
- * @param {url} url - URL pointing to the right page of the docs.
- */
 // eslint-disable-next-line
 function doc(page) {
   let endpoint = {
@@ -145,11 +141,6 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
     script.async = async;
     script.defer = defer;
 
-    /**
-     * Open new tab at the provided URL.
-     * @param {_} _ - _.
-     * @param {boolean} isAbort - Abort.
-     */
     function onloadHander(_, isAbort) {
       if (
         isAbort ||
@@ -176,21 +167,12 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
   });
 };
 
-/**
- * Open new tab at the provided URL.
- * @param {url} url - URL.
- */
 // eslint-disable-next-line
 function openUrl(url) {
   let win = window.open(url, "_blank");
   win.focus();
 }
 
-/**
- * Process results.
- * @param {callback} callback - Callback function.
- * @param {results} results - Results.
- */
 function processResults(callback, results) {
   if (results === false) {
     alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
@@ -205,11 +187,6 @@ function processResults(callback, results) {
   }
 }
 
-/**
- * jQuery Ajax Call.
- * @param {url} url - Url.
- * @param {callback} callback - Function to process results.
- */
 function call(url, callback) {
   $.ajax({
     type: "POST",
@@ -220,12 +197,6 @@ function call(url, callback) {
   });
 }
 
-/**
- * jQuery Ajax Form Call.
- * @param {string} url - Url.
- * @param {string} form - Form ID.
- * @param {function} callback - Function to process results.
- */
 function fCall(url, form, callback) {
   if (
     $(form)
@@ -243,11 +214,6 @@ function fCall(url, form, callback) {
   }
 }
 
-/**
- * Serialize form for table filtering.
- * @param {string} form - Form ID.
- * @return {object} Serialized form.
- */
 function serializeForm(form) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};
@@ -262,11 +228,6 @@ function serializeForm(form) {
   return result;
 }
 
-/**
- * Delete object.
- * @param {type} type - Node or link.
- * @param {id} id - Id of the object to delete.
- */
 // eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
@@ -283,13 +244,6 @@ function deleteInstance(type, id) {
   });
 }
 
-/**
- * Configure panel.
- * @param {id} id - Instance ID.
- * @param {contentSize} contentSize - Content size.
- * @param {url} url - URL to fetch the content from.
- * @param {processing} processing - Function once panel is loaded.
- */
 // eslint-disable-next-line
 function createPanel(name, title, id, processing, type, duplicate) {
   const panelId = id ? `${name}-${id}` : name;
@@ -331,37 +285,21 @@ function createPanel(name, title, id, processing, type, duplicate) {
   });
 }
 
-/**
- * Generic Show Panel
- */
 // eslint-disable-next-line
 function showPanel(type, id, processing) {
   return createPanel(type, panelName[type] || type, id, processing);
 }
 
-/**
- * Show Filtering Panel
- */
 // eslint-disable-next-line
 function showFilteringPanel() {
   filteringPanel.normalize();
 }
 
-/**
- * Show Deletion Panel
- */
 // eslint-disable-next-line
 function showDeletionPanel(type, id, name) {
   createPanel("instance_deletion", `Delete ${name}`, id, () => {}, type);
 }
 
-/**
- * Preprocess form.
- * @param {JsPanel} panel - JsPanel element.
- * @param {int} id - Panel ID.
- * @param {string} type - Instance type.
- * @param {bool} duplicate - Duplicate instance.
- */
 function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate && ["name", "id"].includes(el.name)) return;
@@ -379,11 +317,6 @@ function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-/**
- * Configure form.
- * @param {string} form - Form name.
- * @param {int} id - Form ID.
- */
 function configureForm(form, id) {
   if (!formProperties[form]) return;
   for (const [property, type] of Object.entries(formProperties[form])) {
@@ -408,12 +341,6 @@ function configureForm(form, id) {
   }
 }
 
-/**
- * Display instance modal for editing.
- * @param {type} type - Type.
- * @param {id} id - Instance ID.
- * @param {mode} mode - Edit, duplicate or run.
- */
 // eslint-disable-next-line
 function showTypePanel(type, id, mode) {
   if (type == "Workflow") type = "workflow";
@@ -458,13 +385,6 @@ function showTypePanel(type, id, mode) {
   );
 }
 
-/**
- * Update property.
- * @param {jQuery} el - Property in the DOM.
- * @param {string} property - Property name.
- * @param {string} value - Property value.
- * @param {string} type - Property type.
- */
 function updateProperty(el, property, value, type) {
   const propertyType = formProperties[type][property] || "str";
   if (propertyType.includes("bool") || property.includes("regex")) {
@@ -493,11 +413,6 @@ function updateProperty(el, property, value, type) {
   }
 }
 
-/**
- * Display instance modal for editing.
- * @param {type} type - Type.
- * @param {instance} instance - Object instance.
- */
 function processInstance(type, instance) {
   for (const [property, value] of Object.entries(instance)) {
     const el = $(
@@ -507,10 +422,6 @@ function processInstance(type, instance) {
   }
 }
 
-/**
- * Create or edit instance.
- * @param {type} type - Type.
- */
 // eslint-disable-next-line
 function processData(type, id) {
   fCall(
@@ -532,9 +443,6 @@ function processData(type, id) {
   );
 }
 
-/**
- * Create Table Search Headers.
- */
 // eslint-disable-next-line
 function createSearchHeaders() {
   properties.forEach((property) => {
@@ -546,12 +454,6 @@ function createSearchHeaders() {
   });
 }
 
-/**
- * Datatable per-column search.
- * @param {cls} cls - Object class.
- * @param {type} type - Table type.
- * @return {table}
- */
 // eslint-disable-next-line
 function initTable(type) {
   const filteringPanel = showPanel(`${type}_filtering`);
@@ -581,18 +483,12 @@ function initTable(type) {
   return [table, filteringPanel];
 }
 
-/**
- * Server-side table filtering.
- */
 // eslint-disable-next-line
 function filter(formType) {
   table.ajax.reload(null, false);
   alertify.notify("Filter applied.", "success", 5);
 }
 
-/**
- * Undo filter.
- */
 // eslint-disable-next-line
 function undoFilter(formType) {
   $(`#${formType}-form`)[0].reset();
@@ -601,19 +497,12 @@ function undoFilter(formType) {
   alertify.notify("Filter removed.", "success", 5);
 }
 
-/**
- * Datatable periodic refresh.
- * @param {interval} interval - Refresh interval.
- */
 // eslint-disable-next-line
 function refreshTable(interval) {
   table.ajax.reload(null, false);
   setTimeout(() => refreshTable(interval), interval);
 }
 
-/**
- * Sidebar initialization.
- */
 function initSidebar() {
   let setContentHeight = function() {
     $(".right_col").css("min-height", $(window).height());
@@ -754,13 +643,6 @@ function initSidebar() {
       });
     });
 
-    /**
-     * Get menu position.
-     * @param {mouse} mouse
-     * @param {direction} direction
-     * @param {scrollDir} scrollDir
-     * @return {position}
-     */
     function getMenuPosition(mouse, direction, scrollDir) {
       const win = $(window)[direction]();
       const scroll = $(window)[scrollDir]();

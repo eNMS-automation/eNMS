@@ -223,11 +223,6 @@ const theme = {
   },
 };
 
-/**
- * Draw diagrams.
- * @param {objects} objects - Objects properties.
- * @param {type} type - Object type.
- */
 function drawDiagrams(objects, type) {
   let legend = [];
   let data = [];

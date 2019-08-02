@@ -336,10 +336,6 @@ function configureResultsCallbacks(id, type) {
   }
 }
 
-/**
- * Clear the results
- * @param {id} id - Job id.
- */
 // eslint-disable-next-line
 function clearResults(id) {
   call(`/clear_results/${id}`, () => {

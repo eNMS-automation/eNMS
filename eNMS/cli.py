@@ -36,11 +36,11 @@ def configure_cli(app: Flask) -> None:
     @option("--devices")
     @option("--payload")
     def start(name: str, devices: str, payload: str) -> None:
-        devices = devices.split(",") if devices else []
-        devices = [fetch("Device", name=name).id for name in devices]
-        payload = loads(payload) if payload else {}
-        payload["devices"] = devices
+        device_list = devices.split(",") if devices else []
+        devices_list = [fetch("Device", name=name).id for name in devices]
+        payload_dict = loads(payload) if payload else {}
+        payload_dict["devices"] = devices_list
         job = fetch("Job", name=name)
-        results = run_job(controller.get_time(), job.id, **payload)
+        results = run_job(controller.get_time(), job.id, **payload_dict)
         Session.commit()
         echo(controller.str_dict(results))

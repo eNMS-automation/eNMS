@@ -99,7 +99,7 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, runtime: str) -> list:
+    def get_job_logs(self, runtime: str) -> dict:
         result = fetch("Run", runtime=runtime).get_result()
         logs = result["logs"] if result else self.run_logs.get(runtime, [])
         return {"logs": "\n".join(logs), "refresh": not bool(result)}
@@ -112,10 +112,10 @@ class AutomationController(BaseController):
             runs = fetch("Run", allow_none=True, all_matches=True, job_id=id)
         return sorted(set((run.runtime, run.runtime) for run in runs))
 
-    def get_workflow_device_list(self, id: int, **kw: Any) -> list:
+    def get_workflow_device_list(self, id: int, **kw: Any) -> dict:
         comp = "_compare" if kw["compare"] else ""
         if kw.get(f"job{comp}") in ("global", "all"):
-            workflow_devices = []
+            workflow_devices: list = []
         else:
             runtime_key = "parent_runtime" if "job" in kw else "runtime"
             request = {runtime_key: kw.get(f"runtime{comp}")}
@@ -140,7 +140,7 @@ class AutomationController(BaseController):
             ("all passed", "All devices that passed"),
         ]
         if "runtime" not in kw:
-            request = {"id": id}
+            request: Any = {"id": id}
         else:
             runtime_key = "parent_runtime" if "job" in kw else "runtime"
             request = {runtime_key: kw.get(f"runtime{comp}", id)}
@@ -182,7 +182,7 @@ class AutomationController(BaseController):
             )
         )
 
-    def get_results(self, type: str, id: int, **kw) -> Optional[dict]:
+    def get_results(self, type: str, id: int, **kw: Any) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
         return getattr(self, f"get_{type}_results")(
             id,
@@ -194,16 +194,16 @@ class AutomationController(BaseController):
             },
         )
 
-    def get_run_results(self, id: int, device, **kw) -> Optional[dict]:
+    def get_run_results(self, id: int, device: Any, **kw: Any) -> Optional[dict]:
         run = fetch("Run", allow_none=True, id=id)
         return self.get_service_results(run.job.id, run.runtime, device, None, None)
 
-    def get_device_results(self, id: int, runtime, **_) -> Optional[dict]:
+    def get_device_results(self, id: int, runtime: str, **_: Any) -> Optional[dict]:
         run = fetch("Run", allow_none=True, runtime=runtime)
         return next(r.result for r in run.results if r.device_id == int(id))
 
     def get_workflow_results(
-        self, id: int, runtime, device, job, workflow_device
+        self, id: int, runtime: str, device: Any, job: Any, workflow_device: Any
     ) -> Optional[dict]:
         if "all" not in job:
             return self.get_service_results(job, runtime, device, job, workflow_device)
@@ -217,7 +217,7 @@ class AutomationController(BaseController):
         }
 
     def get_service_results(
-        self, id: int, runtime, device, job, workflow_device
+        self, id: int, runtime: str, device: Any, job: Any, workflow_device: Any
     ) -> Optional[dict]:
         runtime_key = "parent_runtime" if job else "runtime"
         request = {runtime_key: runtime, "job_id": id}
@@ -227,7 +227,7 @@ class AutomationController(BaseController):
             request["success"] = device == "all passed"
         run = fetch("Run", allow_none=True, **request)
         if not run:
-            return
+            return None
         if "all" not in device:
             device_id = None if device == "global" else int(device)
             return next(r for r in run.results if device_id == r.device_id).result
@@ -245,22 +245,22 @@ class AutomationController(BaseController):
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 
-    def add_restart_payload(self, job, **kwargs):
+    def add_restart_payload(self, job: Any, **kwargs: Any) -> None:
         run = fetch(
             "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version")
         )
         if not run:
-            return
+            return None
         result = [r for r in run.results if not r.device_id]
         payload = result[0].result["results"] if result else {}
         if not isinstance(payload, dict):
-            return
+            return None
         payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))
         kwargs["payload"] = {
             k: payload.get(k) for k in payload if k not in payload_jobs
         }
 
-    def run_job(self, **kwargs) -> dict:
+    def run_job(self, **kwargs: Any) -> dict:
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         job = fetch("Job", name=kwargs["name"])
@@ -290,7 +290,7 @@ class AutomationController(BaseController):
             job.positions[workflow.name] = (position["x"], position["y"])
         return now
 
-    def get_workflow_state(self, workflow_id, runtime: Optional[str] = None):
+    def get_workflow_state(self, workflow_id: int, runtime: Optional[str] = None) -> dict:
         workflow = fetch("Workflow", id=workflow_id)
         runtimes = [
             r.runtime
@@ -314,7 +314,7 @@ class AutomationController(BaseController):
             ).split(",")
         ]
 
-    def calendar_init(self, type) -> dict:
+    def calendar_init(self, type: str) -> dict:
         results = {}
         for instance in fetch_all(type):
             if getattr(instance, "workflow", None):

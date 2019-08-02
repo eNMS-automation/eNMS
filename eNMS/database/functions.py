@@ -11,9 +11,9 @@ from eNMS.models import models, relationships
 
 def fetch(
     model: str,
-    allow_none: bool = False,
+    allow_none: Any = False,
     session: Any = None,
-    all_matches: bool = False,
+    all_matches: Any = False,
     **kwargs: Any,
 ) -> Any:
     sess = session or Session
@@ -40,7 +40,7 @@ def objectify(model: str, object_list: List[int]) -> List[Any]:
     return [fetch(model, id=object_id) for object_id in object_list]
 
 
-def convert_value(model: str, attr: str, value: str, value_type: str) -> dict:
+def convert_value(model: str, attr: str, value: str, value_type: str) -> Any:
     relation = relationships[model].get(attr)
     if not relation:
         return value

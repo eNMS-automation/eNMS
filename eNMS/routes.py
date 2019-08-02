@@ -168,7 +168,7 @@ def workflow_builder() -> str:
 
 @blueprint.route("/calendar/<calendar_type>")
 @monitor_requests
-def calendar(calendar_type) -> str:
+def calendar(calendar_type: str) -> str:
     return render_template(
         f"pages/calendar.html",
         **{"calendar_type": calendar_type, "endpoint": "calendar"},

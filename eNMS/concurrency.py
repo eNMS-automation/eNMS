@@ -1,7 +1,9 @@
+from typing import Any
+
 from eNMS.database.functions import factory, fetch
 
 
-def run_job(runtime, job_id, **properties) -> None:
+def run_job(runtime: str, job_id: int, **properties: Any) -> dict:
     run = factory("Run", runtime=runtime, job=job_id)
     run.properties = properties
     return run.run(properties.get("payload"))

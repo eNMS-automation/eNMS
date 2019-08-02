@@ -360,6 +360,11 @@ function displayWorkflowState(result) {
 }
 
 function getWorkflowState(first) {
+  if (first) {
+    workflow.jobs.forEach((job) => {
+      colorJob(job.id, job.color);
+    });
+  }
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {

@@ -14,13 +14,7 @@ from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
 from json import load as json_load
 from ldap3 import ALL, Server
-from logging import (
-    basicConfig,
-    error,
-    info,
-    StreamHandler,
-    warning,
-)
+from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
 from os import environ, remove, scandir
 from pathlib import Path

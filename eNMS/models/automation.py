@@ -13,15 +13,7 @@ from pathlib import Path
 from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
-from sqlalchemy import (
-    Boolean,
-    Column,
-    ForeignKey,
-    Integer,
-    PickleType,
-    String,
-    Text,
-)
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
@@ -67,14 +59,14 @@ class Result(AbstractBase):
     )
     device_name = association_proxy("device", "name")
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: Any) -> Any:
         return self.result[key]
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         self.success = kwargs["result"]["success"]
         super().__init__(**kwargs)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.run} {self.device_name}"
 
 
@@ -101,7 +93,7 @@ class Run(AbstractBase):
     task = relationship("Task", foreign_keys="Run.task_id")
     results = relationship("Result", back_populates="run")
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         self.runtime = kwargs.get("runtime") or controller.get_time()
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
@@ -110,7 +102,7 @@ class Run(AbstractBase):
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name})"
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: Any) -> Any:
         if key in self.properties:
             return convert_value(self.job.type, key, self.properties[key], "id")
         elif hasattr(self.job, key):
@@ -118,7 +110,7 @@ class Run(AbstractBase):
         else:
             raise AttributeError
 
-    def get_result(self, device: Optional[str] = None):
+    def get_result(self, device: Optional[str] = None) -> Optional["Result"]:
         result = [r for r in self.results if r.device_id == device]
         return result.pop() if result else None
 
@@ -246,7 +238,7 @@ class Run(AbstractBase):
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
 
-    def compute_devices(self, payload: Optional[dict] = None) -> Set["Device"]:
+    def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
 
             def get_var(*args: Any, **kwargs: Any) -> Any:
@@ -279,7 +271,7 @@ class Run(AbstractBase):
         controller.job_db[self.runtime]["number_of_targets"] = len(devices)
         return devices
 
-    def close_connection_cache(self):
+    def close_connection_cache(self) -> None:
         for library in ("netmiko", "napalm"):
             connections = controller.connections_cache[library].pop(self.runtime, None)
             if not connections:
@@ -323,7 +315,7 @@ class Run(AbstractBase):
             self.notify(results)
         return results
 
-    def create_result(self, results: dict, device: Optional["Device"] = None):
+    def create_result(self, results: dict, device: Optional["Device"] = None) -> None:
         self.success = results["success"]
         result_kw = {"run": self, "result": results}
         if device:
@@ -619,7 +611,7 @@ class Service(Job):
 
     def build_results(self, run: "Run", payload: dict, *other: Any) -> dict:
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
-        targets = {}
+        targets: Set = set()
         if run["has_targets"]:
             try:
                 targets = run.compute_devices(payload)

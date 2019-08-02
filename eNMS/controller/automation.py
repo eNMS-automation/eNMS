@@ -290,7 +290,9 @@ class AutomationController(BaseController):
             job.positions[workflow.name] = (position["x"], position["y"])
         return now
 
-    def get_workflow_state(self, workflow_id: int, runtime: Optional[str] = None) -> dict:
+    def get_workflow_state(
+        self, workflow_id: int, runtime: Optional[str] = None
+    ) -> dict:
         workflow = fetch("Workflow", id=workflow_id)
         runtimes = [
             r.runtime

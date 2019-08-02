@@ -273,7 +273,7 @@ class AutomationController(BaseController):
                 id=self.get_time(),
                 func=run_job,
                 run_date=datetime.now(),
-                args=[runtime, kwargs.pop("id")],
+                args=[kwargs.pop("id"), runtime],
                 kwargs=kwargs,
                 trigger="date",
             )

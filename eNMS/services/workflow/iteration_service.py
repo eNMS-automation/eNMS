@@ -44,10 +44,11 @@ class IterationService(Service):
             values = eval(run["python_query_values"], locals())
         results, success = {}, True
         for value in values:
-            result = run["iterated_job"].job(
-                {run["variable_name"]: value, **payload}, device
-            )
-            results[value] = result
+            run_data = {
+                "payload": {run["variable_name"]: value, **payload},
+                "devices": [device.id],
+            }
+            results[value] = run_job(run["iterated_job"].id, **run_data)
             if not result["success"]:
                 success = False
         return {"success": success, "Iteration values": values, **results}
@@ -69,11 +70,6 @@ class IterationForm(ServiceForm):
     )
     python_query_values = StringField(
         "Iteration Values for Iteration: Python query on the payload"
-    )
-    convert_values_to_devices = BooleanField("Convert values to devices")
-    conversion_property = SelectField(
-        "Property used for the conversion to devices",
-        choices=(("name", "Name"), ("ip_address", "IP address")),
     )
     variable_name = StringField("Iteration Variable Name")
     iterated_job = InstanceField("Job to run for each Value", instance_type="Job")

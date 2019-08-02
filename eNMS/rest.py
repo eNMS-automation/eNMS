@@ -165,13 +165,13 @@ class RunJob(Resource):
                 id=runtime,
                 func=run_job,
                 run_date=datetime.now(),
-                args=[runtime, job.id],
+                args=[job.id, runtime],
                 kwargs=data,
                 trigger="date",
             )
             return {"errors": errors, "runtime": runtime}
         else:
-            return {**run_job(runtime, job.id, **data), "errors": errors}
+            return {**run_job(job.id, runtime, **data), "errors": errors}
 
 
 class Topology(Resource):

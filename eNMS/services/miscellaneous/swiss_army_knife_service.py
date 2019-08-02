@@ -83,7 +83,7 @@ class SwissArmyKnifeService(Service):
     def poller_service(self, run: "Run", payload: dict) -> dict:
         for service in fetch_all("Service"):
             if getattr(service, "configuration_backup_service", False):
-                run_job(service.id)
+                run_job(service.id, controller.get_time())
         Session.commit()
         for pool in fetch_all("Pool"):
             if pool.device_current_configuration:

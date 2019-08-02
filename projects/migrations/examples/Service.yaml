@@ -1184,11 +1184,11 @@
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: false
+  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-02 19:56:01.355421'
+  last_modified: '2019-08-02 20:20:08.134254'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1208,9 +1208,9 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
-  source_code: "targets = ['Loopback101', 'Loopback15'] if workflow_device.name ==\
-    \ \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('iteration_devices',\
-    \ targets, device=workflow_device.name)\r\nsave_result(True, {})"
+  source_code: "targets = ['Loopback101', 'Loopback15'] if device.name == \"Washington\"\
+    \ else ['Loopback9', 'Loopback1000']\r\nset_var('iteration_devices', targets,\
+    \ device=device.name)\r\nsave_result(True, {})"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService

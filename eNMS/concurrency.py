@@ -1,11 +1,9 @@
-from typing import Any, Optional
+from typing import Any
 
-from eNMS.controller import controller
 from eNMS.database.functions import factory, fetch
 
 
-def run_job(job_id: int, runtime: Optional[str] = None, **properties: Any) -> dict:
-    runtime = runtime or controller.get_runtime()
+def run_job(job_id: int, runtime: str, **properties: Any) -> dict:
     run = factory("Run", job=job_id, runtime=runtime)
     run.properties = properties
     return run.run(properties.get("payload"))

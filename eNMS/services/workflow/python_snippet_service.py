@@ -20,6 +20,7 @@ class PythonSnippetService(Service):
     __mapper_args__ = {"polymorphic_identity": "PythonSnippetService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
+
         try:
             code_object = compile(run["source_code"], "user_python_code", "exec")
         except Exception as exc:
@@ -34,6 +35,7 @@ class PythonSnippetService(Service):
             _code_result_.update({"success": success, "result": result, **kwargs})
             if kwargs.get("exit"):
                 raise TerminateException()
+
 
         def get_set_var(*args, **kwargs):
             return run.payload_helper(payload, *args, **kwargs)

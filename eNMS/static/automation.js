@@ -69,11 +69,8 @@ function workflowRunMode(instance) {
     $(`#workflow-payload_version-${instance.id}`).val(
       runtimes[runtimes.length - 1]
     );
-    $(
-      `#workflow-payload_version-${instance.id},#workflow-payloads_to_exclude-${
-        instance.id
-      }`
-    ).selectpicker("refresh");
+    $(`#workflow-payload_version-${instance.id}`).selectpicker("refresh");
+    $(`#workflow-payloads_to_exclude-${instance.id}`).selectpicker("refresh");
   });
 }
 

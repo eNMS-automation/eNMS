@@ -13,6 +13,7 @@ $(function() {
   call(`/calendar_init/${calendarType}`, function(tasks) {
     let events = [];
     for (const [name, properties] of Object.entries(tasks)) {
+      if (properties.job === undefined) continue;
       events.push({
         title: name,
         id: properties.id,

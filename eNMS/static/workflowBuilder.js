@@ -26,6 +26,10 @@ const dsoptions = {
       },
     },
   },
+  interaction: {
+    hover: true,
+    hoverConnectedEdges: false,
+  },
   manipulation: {
     enabled: false,
     addNode: function(data, callback) {},
@@ -48,6 +52,7 @@ let selectedNode;
 let edgeType;
 let lastModified;
 let stateUpdate = false;
+let hoveredNode;
 
 function displayWorkflow(workflowData) {
   const wf = workflowData.workflow;
@@ -89,6 +94,19 @@ function displayWorkflow(workflowData) {
         showTypePanel(job.type, job.id);
       }
     }
+  });
+  graph.on("hoverNode", function(properties) {
+    properties.event.preventDefault();
+    let node = this.getNodeAt(properties.pointer.DOM);
+    if (node) {
+      hoveredNode = node;
+      const job = workflow.jobs.find((w) => w.id === node);
+      nodes.update({ id: node, label: `${job.name}\n${job.type}` });
+    }
+  });
+  graph.on("blurNode", function(properties) {
+    const job = workflow.jobs.find((w) => w.id === hoveredNode);
+    nodes.update({ id: hoveredNode, label: job.name });
   });
   $("#current-runtimes").empty();
   $("#current-runtimes").append("<option value=''>Normal Display</option>");

@@ -23,9 +23,9 @@
     Configuration Management Workflow:
     - '-300'
     - '0'
-    Iteration Services Test Workflow: !!python/tuple
-    - -359
-    - -163
+    Iteration Services Test Workflow:
+    - '-359'
+    - '-163'
     Napalm_VRF_workflow:
     - '-200'
     - '0'
@@ -38,18 +38,18 @@
     Workflow with separate failure - success path:
     - '-118'
     - '-3'
-    Workflow_of_workflows: !!python/tuple
-    - -300
-    - 0
+    Workflow_of_workflows:
+    - '-300'
+    - '0'
     payload_extraction_validation_worflow:
     - '-200'
     - '0'
     payload_transfer_workflow:
     - '-200'
     - '0'
-    'python Workflow: payload editor and pool helper':
-    - '-326'
-    - '45'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - -326
+    - 45
     python_query_workflow:
     - '-164'
     - '15'
@@ -90,9 +90,9 @@
     Configuration Management Workflow:
     - '200'
     - '0'
-    Iteration Services Test Workflow: !!python/tuple
-    - -9
-    - 294
+    Iteration Services Test Workflow:
+    - '-9'
+    - '294'
     Napalm_VRF_workflow:
     - '200'
     - '0'
@@ -105,18 +105,18 @@
     Workflow with separate failure - success path:
     - '500'
     - '0'
-    Workflow_of_workflows: !!python/tuple
-    - 300
-    - 0
+    Workflow_of_workflows:
+    - '300'
+    - '0'
     payload_extraction_validation_worflow:
     - '200'
     - '0'
     payload_transfer_workflow:
     - '500'
     - '0'
-    'python Workflow: payload editor and pool helper':
-    - '530'
-    - '155'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 530
+    - 155
     python_query_workflow:
     - '651'
     - '20'
@@ -670,7 +670,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-01 11:40:14.512490'
+  last_modified: '2019-08-03 20:32:00.822843'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -693,9 +693,9 @@
     Workflow with separate failure - success path:
     - '84'
     - '-3'
-    'python Workflow: payload editor and pool helper':
-    - '422'
-    - '-177'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 355
+    - -25
     python_query_workflow:
     - '414'
     - '-154'
@@ -924,9 +924,9 @@
     payload_transfer_workflow:
     - '-50'
     - '0'
-    'python Workflow: payload editor and pool helper':
-    - '225'
-    - '-223'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 225
+    - -223
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -961,7 +961,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-31 13:25:04.527174'
+  last_modified: '2019-08-03 20:32:23.251724'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -979,9 +979,9 @@
     payload_transfer_workflow:
     - '-50'
     - '-100'
-    'python Workflow: payload editor and pool helper':
-    - '674'
-    - '-172'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 39
+    - -32
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1025,9 +1025,9 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow_of_workflows: !!python/tuple
-    - 0
-    - 0
+    Workflow_of_workflows:
+    - '0'
+    - '0'
     payload_transfer_workflow:
     - '150'
     - '100'
@@ -1198,9 +1198,9 @@
   operating_system: ''
   pools: []
   positions:
-    Iteration Services Test Workflow: !!python/tuple
-    - 3
-    - -144
+    Iteration Services Test Workflow:
+    - '3'
+    - '-144'
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1591,7 +1591,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-31 13:25:52.803768'
+  last_modified: '2019-08-03 20:31:33.242467'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -1876,9 +1876,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '-158'
-    - '-272'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - -158
+    - -272
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1918,9 +1918,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '-159'
-    - '148'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - -159
+    - 148
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1973,9 +1973,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '35'
-    - '-232'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 35
+    - -232
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_device", section="pools", device=workflow_device.name)
@@ -2028,9 +2028,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '47'
-    - '160'
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 47
+    - 160
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_simple", section="pools")
@@ -2077,9 +2077,9 @@
   origin_of_values: user_provided_values
   pools: []
   positions:
-    Iteration Services Test Workflow: !!python/tuple
-    - -342
-    - 2
+    Iteration Services Test Workflow:
+    - '-342'
+    - '2'
   push_to_git: false
   python_query: ''
   python_query_values: ''
@@ -2124,9 +2124,9 @@
   origin_of_values: python_query
   pools: []
   positions:
-    Iteration Services Test Workflow: !!python/tuple
-    - -358
-    - 192
+    Iteration Services Test Workflow:
+    - '-358'
+    - '192'
   push_to_git: false
   python_query: ''
   python_query_values: get_var('iteration_devices', device=device.name)
@@ -2184,5 +2184,60 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show vrf {{get_result(job="Payload editor, with device")["endtime"]}}
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-03 20:33:15.924993'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: show runtime with get_result helper
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'python Workflow: payload editor and pool helper': !!python/tuple
+    - 328
+    - 91
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
   vendor: ''
   waiting_time: 0

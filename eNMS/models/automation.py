@@ -221,6 +221,7 @@ class Run(AbstractBase):
                     {
                         "workflow_device": self.workflow_device,
                         "get_var": controller.get_var(payload),
+                        "get_result": controller.get_result(self.parent_runtime),
                         **locals(),
                     },
                 )
@@ -450,6 +451,8 @@ class Run(AbstractBase):
                         match.group()[2:-2],
                         {
                             "get_var": controller.get_var(variables["payload"]),
+                            "get_result": controller.get_result(self.parent_runtime),
+                            "workflow_device": self.workflow_device,
                             **variables,
                         },
                     )

@@ -54,7 +54,7 @@ class AutomationController(BaseController):
         self, runtime: str, job: str, device: Optional[str] = None
     ) -> dict:
         job_id = fetch("Job", name=job).id
-        run = fetch("Run", runtime=runtime, job_id=job_id)
+        run = fetch("Run", parent_runtime=runtime, job_id=job_id)
         return run.get_result(device)
 
     def get_var(self, payload) -> Callable:

@@ -3,6 +3,7 @@ from typing import Optional
 from wtforms import BooleanField, HiddenField, StringField
 from wtforms.widgets import TextArea
 
+from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Run, Service
@@ -41,11 +42,13 @@ class PythonSnippetService(Service):
             "device": device,
             "payload": payload,
             "_code_result_": _code_result_,
+            "get_result": controller.get_result(run.parent_runtime),
             "get_var": controller.get_var(payload),
             "log": run.log,
             "parent": run.workflow,
             "save_result": save_result,
             "set_var": controller.get_var(payload),
+            "workflow_device": run.workflow_device,
         }
 
         try:

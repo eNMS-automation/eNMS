@@ -61,7 +61,8 @@ def configure_events() -> None:
     def log_instance_deletion(
         mapper: Mapper, connection: Connection, target: Base
     ) -> None:
-        controller.log("info", f"DELETION: {target.type} '{target.name}'")
+        name = getattr(target, "name", target.id)
+        controller.log("info", f"DELETION: {target.type} '{name}'")
 
     @event.listens_for(Base, "before_update", propagate=True)
     def log_instance_update(

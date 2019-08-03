@@ -92,7 +92,7 @@ class Run(AbstractBase):
     workflow_name = association_proxy("workflow", "name")
     task_id = Column(Integer, ForeignKey("Task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
-    results = relationship("Result", back_populates="run")
+    results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs: Any) -> None:
         self.runtime = kwargs.get("runtime") or controller.get_time()

@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
+from functools import partial
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import attrgetter
@@ -27,6 +28,38 @@ class AutomationController(BaseController):
     }
     job_db: dict = defaultdict(dict)
     run_logs: dict = defaultdict(list)
+
+    def payload_helper(
+        self,
+        payload: dict,
+        name: str,
+        value: Optional[Any] = None,
+        section: Optional[str] = None,
+        device: Optional[str] = None,
+    ) -> Any:
+        payload = payload.setdefault("variables", {})
+        if device:
+            payload = payload.setdefault("devices", {})
+            payload = payload.setdefault(device, {})
+        if section:
+            payload = payload.setdefault(section, {})
+        if value:
+            payload[name] = value
+        else:
+            if name not in payload:
+                raise Exception(f"Payload Editor: {name} not found in {payload}.")
+            return payload[name]
+
+    def get_job_result(self, runtime: str, job: str, device: Optional[str] = None) -> dict:
+        job_id = fetch("Job", name=job).id
+        run = fetch("Run", runtime=runtime, job_id=job_id)
+        return run.get_result(device)
+
+    def get_var(self, payload):
+        return partial(self.payload_helper, payload)
+
+    def get_result(self, payload):
+        return partial(self.payload_helper, payload)
 
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int

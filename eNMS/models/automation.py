@@ -1,6 +1,5 @@
 from collections import defaultdict
 from copy import deepcopy
-from functools import partial
 from git import Repo
 from git.exc import GitCommandError
 from json import loads
@@ -213,34 +212,6 @@ class Run(AbstractBase):
                 device.name
             ] = napalm_connection
         return napalm_connection
-
-    def get_var(self, payload):
-        return partial(self.payload_helper, payload)
-
-    def payload_helper(
-        self,
-        payload: dict,
-        name: str,
-        value: Optional[Any] = None,
-        service: Optional[str] = None,
-        section: Optional[str] = None,
-        device: Optional[str] = None,
-    ) -> Any:
-        if not service:
-            payload = payload.setdefault("variables", {})
-        else:
-            payload = payload[service]
-        if device:
-            payload = payload.setdefault("devices", {})
-            payload = payload.setdefault(device, {})
-        if section:
-            payload = payload.setdefault(section, {})
-        if value:
-            payload[name] = value
-        else:
-            if name not in payload:
-                raise Exception(f"Payload Editor: {name} not found in {payload}.")
-            return payload[name]
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
@@ -627,7 +598,6 @@ class Service(Job):
             controller.job_db[run.runtime]["completed"] = 0
             controller.job_db[run.runtime]["failed"] = 0
             attempt = self.device_run(run, payload, targets)
-            Session.commit()
             if targets:
                 assert targets is not None
                 for device in set(targets):

@@ -169,3 +169,5 @@ to adjust/correct their Service to produce the desired results.
 - Job Parametrization.
 
 - New Run mechanism: run table + run calendar
+
+- Service type now displayed in the workflow builder.

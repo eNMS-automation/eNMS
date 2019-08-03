@@ -9,7 +9,7 @@ from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import attrgetter
 from pathlib import Path
 from re import search, sub
-from typing import Any, Dict, Optional
+from typing import Any, Callable, Dict, Optional
 
 from eNMS.concurrency import run_job
 from eNMS.controller.base import BaseController
@@ -50,16 +50,18 @@ class AutomationController(BaseController):
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
 
-    def get_job_result(self, runtime: str, job: str, device: Optional[str] = None) -> dict:
+    def get_job_result(
+        self, runtime: str, job: str, device: Optional[str] = None
+    ) -> dict:
         job_id = fetch("Job", name=job).id
         run = fetch("Run", runtime=runtime, job_id=job_id)
         return run.get_result(device)
 
-    def get_var(self, payload):
+    def get_var(self, payload) -> Callable:
         return partial(self.payload_helper, payload)
 
-    def get_result(self, payload):
-        return partial(self.payload_helper, payload)
+    def get_result(self, runtime: str) -> Callable:
+        return partial(self.get_job_result, runtime)
 
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int

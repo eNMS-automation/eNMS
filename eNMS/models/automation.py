@@ -215,14 +215,14 @@ class Run(AbstractBase):
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
-
-            def get_var(*args: Any, **kwargs: Any) -> Any:
-                return self.payload_helper(payload, *args, **kwargs)
-
             try:
                 values = eval(
                     self.job.python_query,
-                    {"workflow_device": self.workflow_device, **locals()},
+                    {
+                        "workflow_device": self.workflow_device,
+                        "get_var": controller.get_var(payload),
+                        **locals(),
+                    },
                 )
             except Exception as exc:
                 raise Exception(f"Python Query Failure: {str(exc)}")
@@ -443,12 +443,17 @@ class Run(AbstractBase):
     def sub(self, input: Any, variables: dict) -> dict:
         r = compile("{{(.*?)}}")
 
-        def get_var(*args: Any, **kwargs: Any) -> Any:
-            return self.payload_helper(variables["payload"], *args, **kwargs)
-
         def replace(match: Match) -> str:
             try:
-                return str(eval(match.group()[2:-2], {"get_var": get_var, **variables}))
+                return str(
+                    eval(
+                        match.group()[2:-2],
+                        {
+                            "get_var": controller.get_var(variables["payload"]),
+                            **variables,
+                        },
+                    )
+                )
             except AttributeError:
                 raise Exception(
                     "The variable subtitution mechanism failed."

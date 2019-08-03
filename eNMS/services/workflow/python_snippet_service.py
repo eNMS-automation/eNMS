@@ -41,11 +41,11 @@ class PythonSnippetService(Service):
             "device": device,
             "payload": payload,
             "_code_result_": _code_result_,
-            "get_var": run.get_var(payload),
+            "get_var": controller.get_var(payload),
             "log": run.log,
             "parent": run.workflow,
             "save_result": save_result,
-            "set_var": run.get_var(payload),
+            "set_var": controller.get_var(payload),
         }
 
         try:

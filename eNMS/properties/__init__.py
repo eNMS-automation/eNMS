@@ -2,6 +2,7 @@ from ast import literal_eval
 from json import loads
 from typing import Callable, Dict, List
 
+
 def dict_conversion(input):
     try:
         return literal_eval(input)

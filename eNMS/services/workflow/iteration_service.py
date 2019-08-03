@@ -43,7 +43,7 @@ class IterationService(Service):
             else:
                 values = run["user_provided_values"]["all"]
         else:
-            variables = {"get_var": run.get_var(payload), **locals()}
+            variables = {"get_var": controller.get_var(payload), **locals()}
             values = eval(run["python_query_values"], variables)
         results, success = {}, True
         for value in values:

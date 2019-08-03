@@ -106,7 +106,7 @@ function displayWorkflow(workflowData) {
   });
   graph.on("blurNode", function(properties) {
     const job = workflow.jobs.find((w) => w.id === hoveredNode);
-    nodes.update({ id: hoveredNode, label: job.name });
+    if (job) nodes.update({ id: hoveredNode, label: job.name });
   });
   $("#current-runtimes").empty();
   $("#current-runtimes").append("<option value=''>Normal Display</option>");
@@ -172,7 +172,10 @@ function addJobsToWorkflow(jobs) {
 }
 
 function deleteNode(id) {
+  workflow.jobs = workflow.jobs.filter((n) => n.id != id);
   call(`/delete_node/${workflow.id}/${id}`, function(result) {
+    hoveredNode = null;
+    
     lastModified = result.update_time;
     alertify.notify(
       `'${result.job.name}' deleted from the workflow.`,

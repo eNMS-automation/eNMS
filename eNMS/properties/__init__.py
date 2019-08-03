@@ -2,8 +2,15 @@ from ast import literal_eval
 from json import loads
 from typing import Callable, Dict, List
 
+def dict_conversion(input):
+    try:
+        return literal_eval(input)
+    except Exception:
+        return loads(input)
+
+
 field_conversion: Dict[str, Callable] = {
-    "dict": literal_eval,
+    "dict": dict_conversion,
     "float": float,
     "integer": int,
     "json": loads,

@@ -45,10 +45,17 @@ class DictField(StringField):
         super().__init__(*args, **kwargs)
 
     def pre_validate(self, form: FlaskForm) -> bool:
+        invalid_dict, invalid_json = False, False
         try:
             result = literal_eval(self.data)
         except Exception:
-            raise ValidationError("Invalid dictionary.")
+            invalid_dict = True
+        try:
+            result = loads(self.data)
+        except Exception:
+            invalid_json = True
+        if invalid_dict and invalid_json:
+            raise ValidationError("Invalid dictionary syntax.")
         if not isinstance(result, dict):
             raise ValidationError("This field only accepts dictionaries.")
         return True

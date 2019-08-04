@@ -249,6 +249,7 @@ class Run(AbstractBase):
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         controller.job_db[self.runtime]["is_running"] = True
         try:
+            Session.commit()
             results = self.job.build_results(self, payload or self["initial_payload"])
             self.close_connection_cache()
             self.log("info", f"{self.job.type} {self.job.name}: Finished")

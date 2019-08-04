@@ -184,3 +184,5 @@ If that property is ticked, the job is ticked when run in a workflow.
 Same as skip, except that it takes a python query.
 You can use a variable from the payload to decided whether or not to skip a job (via the get_result function, or the get_var function)
 or a variable from the "custom configuration" available as a dictionary called "config".
+
+- Added number of successful / failed devices on workflow edges.

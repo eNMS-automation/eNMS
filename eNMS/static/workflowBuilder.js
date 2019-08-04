@@ -176,7 +176,7 @@ function deleteNode(id) {
   workflow.jobs = workflow.jobs.filter((n) => n.id != id);
   call(`/delete_node/${workflow.id}/${id}`, function(result) {
     hoveredNode = null;
-    
+
     lastModified = result.update_time;
     alertify.notify(
       `'${result.job.name}' deleted from the workflow.`,
@@ -383,15 +383,19 @@ function displayWorkflowState(result) {
         const color = {
           true: "#32cd32",
           false: "#FF6666",
-          "skipped": "#D3D3D3",
+          skipped: "#D3D3D3",
         };
         colorJob(id, color[success]);
       });
     }
     if (result.state.edges) {
       $.each(result.state.edges, (id, devices) => {
-        const label = devices == 1 ? "DEVICE" : "DEVICES"
-        edges.update({ id: id, label: `<b>${devices} ${label}</b>`, font: {size: 15, multi: 'html'} });
+        const label = devices == 1 ? "DEVICE" : "DEVICES";
+        edges.update({
+          id: id,
+          label: `<b>${devices} ${label}</b>`,
+          font: { size: 15, multi: "html" },
+        });
       });
     }
   }
@@ -402,7 +406,7 @@ function resetDisplay() {
     colorJob(job.id, job.color);
   });
   workflow.edges.forEach((edge) => {
-    edges.update({ id: edge.id, label: edge.subtype })
+    edges.update({ id: edge.id, label: edge.subtype });
   });
 }
 

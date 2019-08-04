@@ -21,7 +21,6 @@ class Controller(AdministrationController, AutomationController, InventoryContro
                     if hasattr(self, property)
                 }
             )
-            print(parameters.custom_config)
             Session.add(parameters)
             Session.commit()
         else:

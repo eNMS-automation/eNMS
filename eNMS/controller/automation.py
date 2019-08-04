@@ -266,7 +266,8 @@ class AutomationController(BaseController):
             return None
         if "all" not in device:
             device_id = None if device == "global" else int(device)
-            return next(r for r in run.results if device_id == r.device_id).result
+            results = [r for r in run.results if device_id == r.device_id]
+            return results[0].result if results else None
         else:
             return {r.device_name: r.result for r in run.results if r.device_id}
 

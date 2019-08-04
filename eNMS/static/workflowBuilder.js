@@ -380,7 +380,6 @@ function displayWorkflowState(result) {
     }
     if (result.state.jobs) {
       $.each(result.state.jobs, (id, success) => {
-        console.log(result.state);
         const color = {
           true: "#32cd32",
           false: "#FF6666",

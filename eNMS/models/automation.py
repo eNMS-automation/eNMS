@@ -530,6 +530,7 @@ class Job(AbstractBase):
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
     start_new_connection = Column(Boolean, default=False)
     skip = Column(Boolean, default=False)
+    skip_python_query = Column(String(SMALL_STRING_LENGTH), default="")
     runs = relationship("Run", back_populates="job")
 
     @property
@@ -766,7 +767,21 @@ class Workflow(Job):
                 continue
             visited.add(job)
             controller.job_db[run.runtime]["current_job"] = job.get_properties()
-            if job.skip:
+            skip_job = False
+            if job.skip_python_query:
+                try:
+                    skip_job = eval(
+                        self.job.skip_python_query,
+                        {
+                            "get_var": controller.get_var(payload),
+                            "get_result": controller.get_result(run.runtime),
+                            "custom_config": controller.custom_config,
+                            **locals(),
+                        },
+                    )
+                except Exception as exc:
+                    raise Exception(f"Python Query Failure: {str(exc)}")
+            if skip_job or job.skip:
                 job_results = {"success": "skipped"}
             elif run["use_workflow_targets"] and job.python_query:
                 device_results, success = {}, True

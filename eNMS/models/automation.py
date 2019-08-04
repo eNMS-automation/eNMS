@@ -529,7 +529,7 @@ class Job(AbstractBase):
     custom_username = Column(String(SMALL_STRING_LENGTH), default="")
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
     start_new_connection = Column(Boolean, default=False)
-    skip_job = Column(Boolean, default=False)
+    skip = Column(Boolean, default=False)
     runs = relationship("Run", back_populates="job")
 
     @property
@@ -767,10 +767,7 @@ class Workflow(Job):
             visited.add(job)
             controller.job_db[run.runtime]["current_job"] = job.get_properties()
             if job.skip:
-                job_results = {
-                    "results": "skipped",
-                    "success": True,
-                }
+                job_results = {"success": "skipped"}
             elif run["use_workflow_targets"] and job.python_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:

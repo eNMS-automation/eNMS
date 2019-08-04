@@ -43,6 +43,7 @@ class JobForm(BaseForm):
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     start_new_connection = BooleanField("Start New Connection")
+    skip = BooleanField("Skip")
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     shape = SelectField(

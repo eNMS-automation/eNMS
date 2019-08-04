@@ -99,6 +99,7 @@ function displayWorkflow(workflowData) {
     properties.event.preventDefault();
     let node = this.getNodeAt(properties.pointer.DOM);
     if (node) {
+      node = parseInt(node);
       hoveredNode = node;
       const job = workflow.jobs.find((w) => w.id === node);
       nodes.update({ id: node, label: `${job.name}\n${job.type}` });
@@ -379,7 +380,13 @@ function displayWorkflowState(result) {
     }
     if (result.state.jobs) {
       $.each(result.state.jobs, (id, success) => {
-        colorJob(id, success ? "#32cd32" : "#FF6666");
+        console.log(result.state);
+        const color = {
+          true: "#32cd32",
+          false: "#FF6666",
+          "skipped": "#D3D3D3",
+        };
+        colorJob(id, color[success]);
       });
     }
   }

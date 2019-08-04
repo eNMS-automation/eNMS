@@ -215,18 +215,7 @@ class Run(AbstractBase):
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
-            try:
-                values = eval(
-                    self.job.python_query,
-                    {
-                        "workflow_device": self.workflow_device,
-                        "get_var": controller.get_var(payload),
-                        "get_result": controller.get_result(self.parent_runtime),
-                        **locals(),
-                    },
-                )
-            except Exception as exc:
-                raise Exception(f"Python Query Failure: {str(exc)}")
+            values = controller.eval(self.job.python_query, self, **locals())
             devices, not_found = set(), set()
             if isinstance(values, str):
                 values = [values]
@@ -445,29 +434,7 @@ class Run(AbstractBase):
         r = compile("{{(.*?)}}")
 
         def replace(match: Match) -> str:
-            try:
-                return str(
-                    eval(
-                        match.group()[2:-2],
-                        {
-                            "get_var": controller.get_var(variables["payload"]),
-                            "get_result": controller.get_result(self.parent_runtime),
-                            "workflow_device": self.workflow_device,
-                            **variables,
-                        },
-                    )
-                )
-            except AttributeError:
-                raise Exception(
-                    "The variable subtitution mechanism failed."
-                    " If you are using the 'device' variable, "
-                    "check that the service has targets."
-                )
-            except NameError:
-                raise Exception(
-                    "The variable subtitution mechanism failed."
-                    " Check that all variables are defined."
-                )
+            return str(controller.eval(match.group()[2:-2], run, **variables))
 
         def rec(input: Any) -> Any:
             if isinstance(input, str):

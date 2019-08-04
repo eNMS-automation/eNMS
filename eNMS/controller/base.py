@@ -233,18 +233,23 @@ class BaseController:
 
     def eval(query: str, run: Any, **locals: dict) -> dict:
         try:
-            payload = locals.get("payload")
             return eval(
-                job.skip_python_query,
+                query,
                 {
-                    "get_var": self.get_var(payload),
+                    "get_var": self.get_var(locals.get("payload")),
                     "get_result": self.get_result(run.runtime),
                     "config": self.custom_config,
+                    "workflow_device": run.workflow_device,
                     **locals,
                 },
             )
         except Exception as exc:
-            raise Exception(f"Python Query Failure: {str(exc)}")
+            raise Exception(
+                "Python Query / Variable Substitution Failure."
+                " Check that all variables are defined."
+                " If you are using the 'device' variable, "
+                f"check that the service has targets. ({str(exc)})"
+            )
 
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}

@@ -43,13 +43,7 @@ class IterationService(Service):
             else:
                 values = run["user_provided_values"]["all"]
         else:
-            variables = {
-                "get_var": controller.get_var(payload),
-                "get_result": controller.get_result(run.parent_runtime),
-                "workflow_device": run.workflow_device,
-                **locals(),
-            }
-            values = eval(run["python_query_values"], variables)
+            values = controller.eval(run["python_query_values"], run, **locals())
         results, success = {}, True
         for value in values:
             run_data = {

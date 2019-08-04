@@ -140,7 +140,12 @@ devices = ["Boston", "Cincinnati"] if device.name == "Chicago" else ["Cleveland"
 set_var("iteration_device", devices, section="pools", device=device.name)
 ```
 
+With the workflow running on two devices called "Chicago" and "Washington",
+the following variables will be added to the payload:
 
+.. image:: /_static/workflows/variable_management.png
+   :alt: Variable Management
+   :align: center
 
 Use of a SwissArmyKnifeService instance to process the payload
 --------------------------------------------------------------

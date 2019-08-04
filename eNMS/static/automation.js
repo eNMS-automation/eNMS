@@ -260,6 +260,7 @@ function updateJobList(type, id, updateBoth) {
           .text(job[1])
       );
     });
+    $(ids).val(id);
     $(ids).selectpicker("refresh");
     updateDeviceLists(type, id, id, updateBoth, true);
   });

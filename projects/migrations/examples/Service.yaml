@@ -47,9 +47,9 @@
     payload_transfer_workflow:
     - '-200'
     - '0'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -326
-    - 45
+    'python Workflow: payload editor and pool helper':
+    - '-326'
+    - '45'
     python_query_workflow:
     - '-164'
     - '15'
@@ -114,9 +114,9 @@
     payload_transfer_workflow:
     - '500'
     - '0'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 530
-    - 155
+    'python Workflow: payload editor and pool helper':
+    - '530'
+    - '155'
     python_query_workflow:
     - '651'
     - '20'
@@ -615,13 +615,13 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-02 15:33:20.751026'
+  last_modified: '2019-08-04 11:01:33.553474'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
   name: netmiko_create_vrf_test
   notification_header: ''
-  number_of_retries: 2
+  number_of_retries: 0
   operating_system: eos
   pools: []
   positions:
@@ -693,9 +693,9 @@
     Workflow with separate failure - success path:
     - '84'
     - '-3'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 355
-    - -25
+    'python Workflow: payload editor and pool helper':
+    - '355'
+    - '-25'
     python_query_workflow:
     - '414'
     - '-154'
@@ -924,9 +924,9 @@
     payload_transfer_workflow:
     - '-50'
     - '0'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 225
-    - -223
+    'python Workflow: payload editor and pool helper':
+    - '225'
+    - '-223'
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -979,9 +979,9 @@
     payload_transfer_workflow:
     - '-50'
     - '-100'
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 39
-    - -32
+    'python Workflow: payload editor and pool helper':
+    - '39'
+    - '-32'
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1876,9 +1876,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -158
-    - -272
+    'python Workflow: payload editor and pool helper':
+    - '-158'
+    - '-272'
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1918,9 +1918,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - -159
-    - 148
+    'python Workflow: payload editor and pool helper':
+    - '-159'
+    - '148'
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1973,9 +1973,9 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 35
-    - -232
+    'python Workflow: payload editor and pool helper':
+    - '35'
+    - '-232'
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_device", section="pools", device=workflow_device.name)
@@ -2028,13 +2028,68 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 47
-    - 160
+    'python Workflow: payload editor and pool helper':
+    - '47'
+    - '160'
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_simple", section="pools")
   query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show vrf {{get_result(job="Payload editor, with device")["endtime"]}}
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-03 20:33:15.924993'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: show runtime with get_result helper
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'python Workflow: payload editor and pool helper':
+    - '328'
+    - '91'
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
   shape: box
@@ -2184,60 +2239,5 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
-  vendor: ''
-  waiting_time: 0
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  command: show vrf {{get_result(job="Payload editor, with device")["endtime"]}}
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-08-03 20:33:15.924993'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: show runtime with get_result helper
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'python Workflow: payload editor and pool helper': !!python/tuple
-    - 328
-    - 91
-  privileged_mode: false
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: NetmikoValidationService
-  use_device_driver: true
-  validation_method: text
   vendor: ''
   waiting_time: 0

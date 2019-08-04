@@ -147,6 +147,22 @@ the following variables will be added to the payload:
    :alt: Variable Management
    :align: center
 
+Use data from a previous job in the workflow
+--------------------------------------------
+
+If a job "B" needs to use the results from a previous job "A", it can access the results of job "A"
+with the ``get_result`` function.
+The ``get_result`` function takes two arguments:
+- the name of the job (name of the service or workflow whose results you want to retrieve)
+- (Optional) the name of a device, if you want to retrieve the job results for a specific device.
+
+Example: ``get_result(job="Payload editor")``
+
+The results of a job is always a dictionary: this is what the ``get_result`` function returns.
+You can therefore treat it as a dictionary to access the content of the results:
+
+``get_result(job="Payload editor")["runtime"]``
+
 Use of a SwissArmyKnifeService instance to process the payload
 --------------------------------------------------------------
 

@@ -207,10 +207,12 @@ class BaseController:
     @property
     def config(self) -> dict:
         parameters = Session.query(models["Parameters"]).one_or_none()
-        return parameters.get_properties() if parameters else {}
+        config = parameters.get_properties() if parameters else {}
+        return {**config, **self.custom_config}
 
     def __init__(self) -> None:
         self.custom_properties = self.load_custom_properties()
+        self.custom_config = self.load_custom_config()
         self.init_scheduler()
         if self.use_tacacs:
             self.init_tacacs_client()
@@ -269,6 +271,14 @@ class BaseController:
                         self.update_database_configurations_from_git()
                 except Exception as e:
                     info(f"Cannot clone {repository_type} git repository ({str(e)})")
+
+    def load_custom_config(self) -> dict:
+        filepath = environ.get("PATH_CUSTOM_CONFIG")
+        if not filepath:
+            self.custom_config = {}
+        else:
+            with open(filepath, "r") as config:
+                self.custom_config = load(config)
 
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")

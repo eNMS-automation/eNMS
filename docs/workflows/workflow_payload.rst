@@ -116,6 +116,32 @@ Consequently, the ``payload`` variable received by ``process_payload1`` will loo
     etc...
   }
 
+Set and get data in a workflow
+------------------------------
+
+You can define variables in the payload with the ``set_var`` function,
+and retrieve data from the payload with the ``get_var`` function.
+The ``set_var`` takes the following arguments:
+
+- first argument: the name of the variable1
+- the value of the variable
+- an optional "section": the variable will be defined in a subdictionary of the variable dictionary.
+- device: used to store device-specific variable in a dedicated section.
+
+For example, let's consider the following python snippet:
+
+```
+set_var("global_variable", value=1050)
+set_var("variable", "variable_in_variables", section="variables")
+set_var("variable1", 999, device=device.name)
+set_var("variable2", "1000", device=device.name, section="variables")
+set_var("iteration_simple", "192.168.105.5", section="pools")
+devices = ["Boston", "Cincinnati"] if device.name == "Chicago" else ["Cleveland", "Washington"]
+set_var("iteration_device", devices, section="pools", device=device.name)
+```
+
+
+
 Use of a SwissArmyKnifeService instance to process the payload
 --------------------------------------------------------------
 

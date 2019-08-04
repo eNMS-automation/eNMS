@@ -508,9 +508,9 @@ class Job(AbstractBase):
     def adjacent_jobs(
         self, workflow: "Workflow", direction: str, subtype: str
     ) -> Generator["Job", None, None]:
-        for x in getattr(self, f"{direction}s"):
-            if x.subtype == subtype and x.workflow == workflow:
-                yield getattr(x, direction)
+        for edge in getattr(self, f"{direction}s"):
+            if edge.subtype == subtype and edge.workflow == workflow:
+                yield getattr(edge, direction), edge
 
     def git_push(self, results: dict) -> None:
         path_git_folder = Path.cwd() / "git" / "automation"
@@ -712,8 +712,9 @@ class Workflow(Job):
         for devices, edge in ((passed_devices, "success"), (failed_devices, "failure")):
             if not devices:
                 continue
-            for successor in job.adjacent_jobs(self, "destination", edge):
+            for successor, edge in job.adjacent_jobs(self, "destination", edge):
                 allowed_devices[successor.name] |= devices
+                controller.job_db[run.runtime][edge.id] = len(devices)
                 yield successor
 
     def build_results(self, run: "Run", payload: dict) -> dict:
@@ -731,7 +732,7 @@ class Workflow(Job):
             job = jobs.pop()
             if any(
                 node not in visited
-                for node in job.adjacent_jobs(self, "source", "prerequisite")
+                for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
             ):
                 continue
             visited.add(job)
@@ -784,11 +785,14 @@ class Workflow(Job):
                     allowed_devices, job, job_results
                 )
             else:
-                successors = job.adjacent_jobs(
-                    self,
-                    "destination",
-                    "success" if job_results["success"] else "failure",
-                )
+                successors = [
+                    successor
+                    for successor, _ in job.adjacent_jobs(
+                        self,
+                        "destination",
+                        "success" if job_results["success"] else "failure",
+                    )
+                ]
             payload[job.name] = job_results
             results["results"].update(payload)
             for successor in successors:

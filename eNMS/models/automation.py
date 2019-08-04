@@ -725,7 +725,8 @@ class Workflow(Job):
         self, allowed_devices: dict, job: Job, results: dict
     ) -> Generator[Job, None, None]:
         failed_devices, passed_devices = set(), set()
-        if (job.type == "Workflow" or job.has_targets) and not job.skip:
+        skip_job = results["success"] == "skipped"
+        if (job.type == "Workflow" or job.has_targets) and not skip_job:
             if job.type == "Workflow":
                 devices = results.get("devices", {})
             else:
@@ -771,11 +772,11 @@ class Workflow(Job):
             if job.skip_python_query:
                 try:
                     skip_job = eval(
-                        self.job.skip_python_query,
+                        job.skip_python_query,
                         {
                             "get_var": controller.get_var(payload),
                             "get_result": controller.get_result(run.runtime),
-                            "custom_config": controller.custom_config,
+                            "config": controller.custom_config,
                             **locals(),
                         },
                     )

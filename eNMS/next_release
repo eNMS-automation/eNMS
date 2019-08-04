@@ -171,3 +171,11 @@ to adjust/correct their Service to produce the desired results.
 - New Run mechanism: run table + run calendar
 
 - Service type now displayed in the workflow builder.
+
+- NEW "Custom configuration". You have a new env variable "PATH_CUSTOM_CONFIG" where you can set
+the path to a valid JSON valid.
+You can find an example of such a file in the tests/customization folder.
+In this file, you can set any property you want (for example if you're running in LAB or PRODUCTION).
+
+- New parameter: Skip (boolean)
+If that property is ticked, the job is ticked when run in a workflow.

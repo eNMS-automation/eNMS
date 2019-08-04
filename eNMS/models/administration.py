@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Column, Float, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableList
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
 from typing import Any, List
 
@@ -42,6 +42,7 @@ class Parameters(AbstractBase):
     cluster_scan_subnet = Column(String(SMALL_STRING_LENGTH), default="")
     cluster_scan_protocol = Column(String(SMALL_STRING_LENGTH), default="")
     cluster_scan_timeout = Column(Float, default=0.0)
+    custom_config = Column(MutableDict.as_mutable(PickleType), default={})
     default_longitude = Column(Float, default=0.0)
     default_latitude = Column(Float, default=0.0)
     default_zoom_level = Column(Integer, default=0)

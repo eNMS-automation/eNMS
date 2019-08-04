@@ -10,12 +10,17 @@ from wtforms import (
 )
 
 from eNMS.forms import BaseForm, configure_relationships
-from eNMS.forms.fields import NoValidationSelectMultipleField
+from eNMS.forms.fields import JsonField, NoValidationSelectMultipleField
 from eNMS.properties.database import import_classes
 
 
 class ParametersForm:
     action = "saveParameters"
+
+
+class GeneralForm(BaseForm, ParametersForm):
+    form_type = HiddenField(default="general")
+    custom_config = JsonField("Custom Configuration")
 
 
 class ViewParametersForm(BaseForm, ParametersForm):

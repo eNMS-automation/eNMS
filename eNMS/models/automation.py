@@ -434,7 +434,7 @@ class Run(AbstractBase):
         r = compile("{{(.*?)}}")
 
         def replace(match: Match) -> str:
-            return str(controller.eval(match.group()[2:-2], run, **variables))
+            return str(controller.eval(match.group()[2:-2], self, **variables))
 
         def rec(input: Any) -> Any:
             if isinstance(input, str):

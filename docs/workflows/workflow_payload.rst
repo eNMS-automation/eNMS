@@ -123,22 +123,23 @@ You can define variables in the payload with the ``set_var`` function,
 and retrieve data from the payload with the ``get_var`` function.
 The ``set_var`` takes the following arguments:
 
-- first argument: the name of the variable1
-- the value of the variable
-- an optional "section": the variable will be defined in a subdictionary of the variable dictionary.
-- device: used to store device-specific variable in a dedicated section.
+- the name of the variable (first argument)
+- the value of the variable (second argument)
+- Keyword argument ``section``: the variable will be defined in a subdictionary of the variable dictionary.
+- Keyword argument ``device``: used to store device-specific data in a dedicated section.
 
 For example, let's consider the following python snippet:
 
-```
-set_var("global_variable", value=1050)
-set_var("variable", "variable_in_variables", section="variables")
-set_var("variable1", 999, device=device.name)
-set_var("variable2", "1000", device=device.name, section="variables")
-set_var("iteration_simple", "192.168.105.5", section="pools")
-devices = ["Boston", "Cincinnati"] if device.name == "Chicago" else ["Cleveland", "Washington"]
-set_var("iteration_device", devices, section="pools", device=device.name)
-```
+::
+
+  set_var("global_variable", value=1050)
+  set_var("variable", "variable_in_variables", section="variables")
+  set_var("variable1", 999, device=device.name)
+  set_var("variable2", "1000", device=device.name, section="variables")
+  set_var("iteration_simple", "192.168.105.5", section="pools")
+  devices = ["Boston", "Cincinnati"] if device.name == "Chicago" else ["Cleveland", "Washington"]
+  set_var("iteration_device", devices, section="pools", device=device.name)
+
 
 With the workflow running on two devices called "Chicago" and "Washington",
 the following variables will be added to the payload:
@@ -153,10 +154,11 @@ Use data from a previous job in the workflow
 If a job "B" needs to use the results from a previous job "A", it can access the results of job "A"
 with the ``get_result`` function.
 The ``get_result`` function takes two arguments:
+
 - the name of the job (name of the service or workflow whose results you want to retrieve)
 - (Optional) the name of a device, if you want to retrieve the job results for a specific device.
 
-Example: ``get_result(job="Payload editor")``
+Example: ``get_result(job="Payload editor", device="Test_device")``
 
 The results of a job is always a dictionary: this is what the ``get_result`` function returns.
 You can therefore treat it as a dictionary to access the content of the results:

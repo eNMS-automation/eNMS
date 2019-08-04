@@ -529,6 +529,7 @@ class Job(AbstractBase):
     custom_username = Column(String(SMALL_STRING_LENGTH), default="")
     custom_password = Column(String(SMALL_STRING_LENGTH), default="")
     start_new_connection = Column(Boolean, default=False)
+    skip_job = Column(Boolean, default=False)
     runs = relationship("Run", back_populates="job")
 
     @property
@@ -722,9 +723,8 @@ class Workflow(Job):
     def workflow_targets_processing(
         self, allowed_devices: dict, job: Job, results: dict
     ) -> Generator[Job, None, None]:
-
         failed_devices, passed_devices = set(), set()
-        if job.type == "Workflow" or job.has_targets:
+        if (job.type == "Workflow" or job.has_targets) and not job.skip:
             if job.type == "Workflow":
                 devices = results.get("devices", {})
             else:
@@ -766,7 +766,12 @@ class Workflow(Job):
                 continue
             visited.add(job)
             controller.job_db[run.runtime]["current_job"] = job.get_properties()
-            if run["use_workflow_targets"] and job.python_query:
+            if job.skip:
+                job_results = {
+                    "results": "skipped",
+                    "success": True,
+                }
+            elif run["use_workflow_targets"] and job.python_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:

@@ -231,15 +231,15 @@ class BaseController:
         self.fetch_version()
         self.init_logs()
 
-    def eval(ct, query: str, run: Any, **locals: dict) -> dict:
+    def eval(_self, query: str, _run: Any, **locals: dict) -> dict:
         try:
             return eval(
                 query,
                 {
-                    "get_var": ct.get_var(locals.get("payload")),
-                    "get_result": ct.get_result(run.runtime),
-                    "config": ct.custom_config,
-                    "workflow_device": run.workflow_device,
+                    "get_var": _self.get_var(locals.get("payload")),
+                    "get_result": _self.get_result(_run.parent_runtime),
+                    "config": _self.custom_config,
+                    "workflow_device": _run.workflow_device,
                     **locals,
                 },
             )

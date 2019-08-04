@@ -42,6 +42,7 @@ class PythonSnippetService(Service):
             "device": device,
             "payload": payload,
             "_code_result_": _code_result_,
+            "config": controller.custom_config,
             "get_result": controller.get_result(run.parent_runtime),
             "get_var": controller.get_var(payload),
             "log": run.log,

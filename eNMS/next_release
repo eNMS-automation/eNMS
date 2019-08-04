@@ -179,3 +179,8 @@ In this file, you can set any property you want (for example if you're running i
 
 - New parameter: Skip (boolean)
 If that property is ticked, the job is ticked when run in a workflow.
+
+- New parameter: Skip query (string)
+Same as skip, except that it takes a python query.
+You can use a variable from the payload to decided whether or not to skip a job (via the get_result function, or the get_var function)
+or a variable from the "custom configuration" available as a dictionary called "config".

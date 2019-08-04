@@ -60,6 +60,8 @@
   send_notification_method: mail_feedback_notification
   shape: circle
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -127,6 +129,8 @@
   send_notification_method: mail_feedback_notification
   shape: circle
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -161,6 +165,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -195,6 +201,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -229,6 +237,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -263,6 +273,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -300,6 +312,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -337,6 +351,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -386,6 +402,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   string1: cisco
   string2: s2
@@ -428,6 +446,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: ConfigureBgpService
@@ -469,6 +489,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
   start_new_connection: false
@@ -509,6 +531,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: DatabaseBackupService
@@ -549,6 +573,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   timeout: 10
@@ -588,6 +614,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: NapalmBackupService
@@ -636,6 +664,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: false
   strip_prompt: false
@@ -707,6 +737,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -762,6 +794,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: false
   strip_prompt: false
@@ -827,6 +861,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -874,6 +910,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: NapalmConfigurationService
@@ -935,6 +973,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   timeout: 15
@@ -989,6 +1029,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
@@ -1038,6 +1080,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
@@ -1084,6 +1128,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
@@ -1130,6 +1176,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: NapalmGettersService
@@ -1171,6 +1219,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: SwissArmyKnifeService
@@ -1208,6 +1258,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   source_code: "targets = ['Loopback101', 'Loopback15'] if device.name == \"Washington\"\
     \ else ['Loopback9', 'Loopback1000']\r\nset_var('iteration_devices', targets,\
     \ device=device.name)\r\nsave_result(True, {})"
@@ -1261,6 +1313,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1315,6 +1369,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1371,6 +1427,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1427,6 +1485,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: PayloadExtractionService
@@ -1478,6 +1538,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: PayloadValidationService
@@ -1523,6 +1585,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: PayloadValidationService
@@ -1562,6 +1626,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: NapalmRollbackService
@@ -1616,6 +1682,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1674,6 +1742,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1729,6 +1799,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1789,6 +1861,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   timeout: 10
@@ -1846,6 +1920,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   timeout: 10
@@ -1886,6 +1962,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
@@ -1928,6 +2006,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
     , \"192.168.105.5\", section=\"pools\")\r\ndevices = [\"Boston\", \"Cincinnati\"\
@@ -1984,6 +2064,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2039,6 +2121,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2094,6 +2178,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2143,6 +2229,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: IterationService
@@ -2190,6 +2278,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: IterationService
@@ -2234,6 +2324,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 10
+  skip: false
+  skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: IterationService

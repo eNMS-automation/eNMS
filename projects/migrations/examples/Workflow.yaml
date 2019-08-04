@@ -15,7 +15,7 @@
   - End
   - poller_service
   - git_push_configurations
-  last_modified: '2019-08-03 21:27:13.036275'
+  last_modified: '2019-08-04 22:41:43.627490'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -30,6 +30,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -59,7 +61,7 @@
   - netmiko_check_vrf_test
   - netmiko_delete_vrf_test
   - netmiko_check_no_vrf_test
-  last_modified: '2019-08-03 21:27:13.142343'
+  last_modified: '2019-08-04 22:41:43.706689'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
@@ -75,6 +77,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -104,7 +108,7 @@
   - napalm_rollback
   - netmiko_check_vrf_napalm
   - netmiko_check_no_vrf_napalm
-  last_modified: '2019-08-03 21:27:13.231161'
+  last_modified: '2019-08-04 22:41:43.789425'
   mail_recipient: ''
   name: Napalm_VRF_workflow
   notification_header: ''
@@ -122,6 +126,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -152,7 +158,7 @@
   - get_interfaces_ip
   - get_config
   - process_payload1
-  last_modified: '2019-08-03 21:27:13.334593'
+  last_modified: '2019-08-04 22:41:43.879252'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -170,6 +176,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -199,7 +207,7 @@
   - add_devices_to_payload
   - Iteration_service_simple
   - Iteration_service_python
-  last_modified: '2019-08-03 21:27:13.442952'
+  last_modified: '2019-08-04 22:41:43.952383'
   mail_recipient: ''
   name: Iteration Services Test Workflow
   notification_header: ''
@@ -214,6 +222,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -243,7 +253,7 @@
   - payload_extraction
   - payload_validate_dict
   - payload_validate_text
-  last_modified: '2019-08-03 21:27:13.560053'
+  last_modified: '2019-08-04 22:41:44.056567'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''
@@ -258,6 +268,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -286,7 +298,7 @@
   - payload_transfer_workflow
   - get_interfaces
   - Napalm_VRF_workflow
-  last_modified: '2019-08-03 21:27:13.674376'
+  last_modified: '2019-08-04 22:41:44.154755'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -301,6 +313,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -330,7 +344,7 @@
   - get_facts
   - REST is_alive
   - netmiko_check_no_vrf_test
-  last_modified: '2019-08-03 21:27:13.776097'
+  last_modified: '2019-08-04 22:41:44.238666'
   mail_recipient: ''
   name: Workflow with separate failure - success path
   notification_header: ''
@@ -345,6 +359,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -372,7 +388,7 @@
   - End
   - Test Netmiko Prompt Service
   - Test netmiko prompts pass
-  last_modified: '2019-08-03 21:27:13.872839'
+  last_modified: '2019-08-04 22:41:44.311869'
   mail_recipient: ''
   name: Netmiko prompts
   notification_header: ''
@@ -387,6 +403,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false
@@ -419,7 +437,7 @@
   - Show vrf with python query
   - REST is_alive
   - show runtime with get_result helper
-  last_modified: '2019-08-03 21:27:13.981695'
+  last_modified: '2019-08-04 22:41:44.403390'
   mail_recipient: ''
   name: 'python Workflow: payload editor and pool helper'
   notification_header: ''
@@ -434,6 +452,8 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
+  skip: false
+  skip_python_query: ''
   start_jobs:
   - Start
   start_new_connection: false

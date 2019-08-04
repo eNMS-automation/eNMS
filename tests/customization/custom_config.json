@@ -1,0 +1,7 @@
+{
+	"mode": "LAB",
+	"parameter1": {
+		"parameter1_str": "example",
+		"parameter1_int": 3
+	}
+}

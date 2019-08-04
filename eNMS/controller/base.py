@@ -207,8 +207,7 @@ class BaseController:
     @property
     def config(self) -> dict:
         parameters = Session.query(models["Parameters"]).one_or_none()
-        config = parameters.get_properties() if parameters else {}
-        return {**config, **self.custom_config}
+        return parameters.get_properties() if parameters else {}
 
     def __init__(self) -> None:
         self.custom_properties = self.load_custom_properties()
@@ -278,7 +277,7 @@ class BaseController:
             self.custom_config = {}
         else:
             with open(filepath, "r") as config:
-                self.custom_config = load(config)
+                return json_load(config)
 
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")

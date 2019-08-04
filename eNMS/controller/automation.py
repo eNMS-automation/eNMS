@@ -57,7 +57,7 @@ class AutomationController(BaseController):
         run = fetch("Run", parent_runtime=runtime, job_id=job_id)
         return run.get_result(device)
 
-    def get_var(self, payload) -> Callable:
+    def get_var(self, payload: dict) -> Callable:
         return partial(self.payload_helper, payload)
 
     def get_result(self, runtime: str) -> Callable:

@@ -245,7 +245,7 @@ class Run(AbstractBase):
                 self.log("info", f"Closing {library} Connection to {device}")
                 conn.disconnect() if library == "netmiko" else conn.close()
 
-    def run(self, payload: Optional[dict] = None) -> Tuple[dict, str]:
+    def run(self, payload: Optional[dict] = None) -> dict:
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
         controller.job_db[self.runtime]["is_running"] = True
         try:
@@ -507,7 +507,7 @@ class Job(AbstractBase):
 
     def adjacent_jobs(
         self, workflow: "Workflow", direction: str, subtype: str
-    ) -> Generator["Job", None, None]:
+    ) -> Generator[Tuple["Job", "WorkflowEdge"], None, None]:
         for edge in getattr(self, f"{direction}s"):
             if edge.subtype == subtype and edge.workflow == workflow:
                 yield getattr(edge, direction), edge
@@ -709,10 +709,13 @@ class Workflow(Job):
                 passed_devices = allowed_devices[job.name]
             else:
                 failed_devices = allowed_devices[job.name]
-        for devices, edge in ((passed_devices, "success"), (failed_devices, "failure")):
+        for devices, edge_type in (
+            (passed_devices, "success"),
+            (failed_devices, "failure"),
+        ):
             if not devices:
                 continue
-            for successor, edge in job.adjacent_jobs(self, "destination", edge):
+            for successor, edge in job.adjacent_jobs(self, "destination", edge_type):
                 allowed_devices[successor.name] |= devices
                 controller.job_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
@@ -763,7 +766,7 @@ class Workflow(Job):
                             "success": False,
                             "error": str(exc),
                         }
-                job_results = {
+                job_results = {  # type: ignore
                     "results": {"devices": device_results},
                     "success": success,
                 }
@@ -785,14 +788,14 @@ class Workflow(Job):
                     run.runtime, allowed_devices, job, job_results
                 )
             else:
-                successors = [
+                successors = (
                     successor
                     for successor, _ in job.adjacent_jobs(
                         self,
                         "destination",
                         "success" if job_results["success"] else "failure",
                     )
-                ]
+                )
             payload[job.name] = job_results
             results["results"].update(payload)
             for successor in successors:

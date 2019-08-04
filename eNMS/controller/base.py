@@ -231,26 +231,6 @@ class BaseController:
         self.fetch_version()
         self.init_logs()
 
-    def eval(_self, query: str, _run: Any, **locals: dict) -> dict:
-        try:
-            return eval(
-                query,
-                {
-                    "get_var": _self.get_var(locals.get("payload")),
-                    "get_result": _self.get_result(_run.parent_runtime),
-                    "config": _self.custom_config,
-                    "workflow_device": _run.workflow_device,
-                    **locals,
-                },
-            )
-        except Exception as exc:
-            raise Exception(
-                "Python Query / Variable Substitution Failure."
-                " Check that all variables are defined."
-                " If you are using the 'device' variable, "
-                f"check that the service has targets. ({str(exc)})"
-            )
-
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}
         for icon in device_icons:
@@ -294,7 +274,7 @@ class BaseController:
     def load_custom_config(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_CONFIG")
         if not filepath:
-            self.custom_config = {}
+            return {}
         else:
             with open(filepath, "r") as config:
                 return json_load(config)

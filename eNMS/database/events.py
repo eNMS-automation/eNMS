@@ -68,7 +68,7 @@ def configure_events() -> None:
     def log_instance_update(
         mapper: Mapper, connection: Connection, target: Base
     ) -> None:
-        state, changes = inspect(target), []
+        state, changelog = inspect(target), []
         for attr in state.attrs:
             if attr.key in private_properties or attr.key in dont_track_changes:
                 continue
@@ -86,9 +86,9 @@ def configure_events() -> None:
                     f"'{hist.deleted[0] if hist.deleted else None}' => "
                     f"'{hist.added[0] if hist.added else None}'"
                 )
-            changes.append(change)
-        if changes:
-            name, changes = getattr(target, "name", target.id), {" | ".join(changes)}
+            changelog.append(change)
+        if changelog:
+            name, changes = getattr(target, "name", target.id), " | ".join(changelog)
             target.last_modified = controller.get_time()
             controller.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 

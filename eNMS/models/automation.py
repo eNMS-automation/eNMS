@@ -770,18 +770,7 @@ class Workflow(Job):
             controller.job_db[run.runtime]["current_job"] = job.get_properties()
             skip_job = False
             if job.skip_python_query:
-                try:
-                    skip_job = eval(
-                        job.skip_python_query,
-                        {
-                            "get_var": controller.get_var(payload),
-                            "get_result": controller.get_result(run.runtime),
-                            "config": controller.custom_config,
-                            **locals(),
-                        },
-                    )
-                except Exception as exc:
-                    raise Exception(f"Python Query Failure: {str(exc)}")
+                skip_job = controller.eval(job.skip_python_query, run, **locals())
             if skip_job or job.skip:
                 job_results = {"success": "skipped"}
             elif run["use_workflow_targets"] and job.python_query:

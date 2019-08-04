@@ -231,6 +231,21 @@ class BaseController:
         self.fetch_version()
         self.init_logs()
 
+    def eval(query: str, run: Any, **locals: dict) -> dict:
+        try:
+            payload = locals.get("payload")
+            return eval(
+                job.skip_python_query,
+                {
+                    "get_var": self.get_var(payload),
+                    "get_result": self.get_result(run.runtime),
+                    "config": self.custom_config,
+                    **locals,
+                },
+            )
+        except Exception as exc:
+            raise Exception(f"Python Query Failure: {str(exc)}")
+
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}
         for icon in device_icons:

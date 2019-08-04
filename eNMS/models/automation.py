@@ -690,7 +690,7 @@ class Workflow(Job):
             return run.compute_devices(payload)
 
     def workflow_targets_processing(
-        self, allowed_devices: dict, job: Job, results: dict
+        self, runtime: str, allowed_devices: dict, job: Job, results: dict
     ) -> Generator[Job, None, None]:
         failed_devices, passed_devices = set(), set()
         skip_job = results["success"] == "skipped"
@@ -714,7 +714,7 @@ class Workflow(Job):
                 continue
             for successor, edge in job.adjacent_jobs(self, "destination", edge):
                 allowed_devices[successor.name] |= devices
-                controller.job_db[run.runtime][edge.id] = len(devices)
+                controller.job_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
 
     def build_results(self, run: "Run", payload: dict) -> dict:
@@ -782,7 +782,7 @@ class Workflow(Job):
             controller.job_db[run.runtime]["jobs"][job.id] = job_results["success"]
             if run["use_workflow_targets"]:
                 successors = self.workflow_targets_processing(
-                    allowed_devices, job, job_results
+                    run.runtime, allowed_devices, job, job_results
                 )
             else:
                 successors = [

@@ -388,12 +388,21 @@ function displayWorkflowState(result) {
         colorJob(id, color[success]);
       });
     }
+    if (result.state.edges) {
+      $.each(result.state.edges, (id, devices) => {
+        const label = devices == 1 ? "DEVICE" : "DEVICES"
+        edges.update({ id: id, label: `<b>${devices} ${label}</b>`, font: {size: 15, multi: 'html'} });
+      });
+    }
   }
 }
 
 function resetDisplay() {
   workflow.jobs.forEach((job) => {
     colorJob(job.id, job.color);
+  });
+  workflow.edges.forEach((edge) => {
+    edges.update({ id: edge.id, label: edge.subtype })
   });
 }
 

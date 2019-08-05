@@ -408,7 +408,7 @@ class Run(AbstractBase):
 
     def match_dictionary(self, result: dict, match: dict) -> bool:
         if self["validation_method"] == "dict_equal":
-            return result == self.dict_match
+            return result == self["dict_match"]
         else:
             match_copy = deepcopy(match)
             for k, v in result.items():

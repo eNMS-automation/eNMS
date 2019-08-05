@@ -1451,16 +1451,16 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:15.075018'
+  last_modified: '2019-08-05 13:35:57.170497'
   mail_recipient: ''
   match1: ''
   match2: (\d.*)/32
-  match3: "Value Filldown PROTOCOL (\\S+\\s\\S+?|\\w?)\nValue Filldown NETWORK (\\\
-    d+.\\d+.\\d+.\\d+)\nValue Filldown MASK (\\d+)\nValue DISTANCE (\\d+)\nValue METRIC\
-    \ (\\d+)\nValue DIRECT (directly)\nValue Required NEXT_HOP (connected|\\d+\\.\\\
-    d+\\.\\d+\\.\\d+)\nValue INTERFACE (\\S+)\n\nStart\n  ^\\s+${PROTOCOL}\\s+${NETWORK}/${MASK}\\\
-    s+(?:\\[${DISTANCE}/${METRIC}\\]|is\\s+${DIRECT})(?:.+?)${NEXT_HOP},\\s+${INTERFACE}$$\
-    \ -> Next.Record"
+  match3: "Value Filldown PROTOCOL (\\S+\\s\\S+?|\\w?)\r\nValue Filldown NETWORK (\\\
+    d+.\\d+.\\d+.\\d+)\r\nValue Filldown MASK (\\d+)\r\nValue DISTANCE (\\d+)\r\n\
+    Value METRIC (\\d+)\r\nValue DIRECT (directly)\r\nValue Required NEXT_HOP (connected|\\\
+    d+\\.\\d+\\.\\d+\\.\\d+)\r\nValue INTERFACE (\\S+)\r\n\r\nStart\r\n  ^\\s+${PROTOCOL}\\\
+    s+${NETWORK}/${MASK}\\s+(?:\\[${DISTANCE}/${METRIC}\\]|is\\s+${DIRECT})(?:.+?)${NEXT_HOP},\\\
+    s+${INTERFACE}$$ -> Next.Record"
   match_type1: none
   match_type2: regex
   match_type3: textfsm
@@ -1477,9 +1477,9 @@
     - '-50'
   push_to_git: false
   python_query: ''
-  query1: payload["netmiko_show_ip_route"]["results.devices"][device.name]["success"]
-  query2: payload["netmiko_show_ip_route"]["results.devices"][device.name]["result"]
-  query3: payload["netmiko_show_ip_route"]["results.devices"][device.name]["result"]
+  query1: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["success"]
+  query2: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["result"]
+  query3: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["result"]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1516,7 +1516,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:15.128741'
+  last_modified: '2019-08-05 13:37:55.475594'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1532,7 +1532,7 @@
     - '50'
   push_to_git: false
   python_query: ''
-  query: $.payload_extraction.results.devices.{{device.name}}.result.regex_variable
+  query: payload["payload_extraction"]["results"]["devices"][device.name]["result"]["regex_variable"]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1543,7 +1543,7 @@
   start_new_connection: false
   time_between_retries: 10
   type: PayloadValidationService
-  validation_method: dict_included
+  validation_method: text
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -1563,7 +1563,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:15.164780'
+  last_modified: '2019-08-05 13:38:39.145359'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1579,7 +1579,7 @@
     - '150'
   push_to_git: false
   python_query: ''
-  query: $.payload_extraction.results.devices.{{device.name}}.result.textfsm_variable.value[0][1]
+  query: payload["payload_extraction"]["results"]["devices"][device.name]["result"]["textfsm_variable"]["value"][0][1]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification

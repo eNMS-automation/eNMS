@@ -89,7 +89,6 @@ def configure_events() -> None:
             changelog.append(change)
         if changelog:
             name, changes = getattr(target, "name", target.id), " | ".join(changelog)
-            target.last_modified = controller.get_time()
             controller.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
     @event.listens_for(Workflow.name, "set")

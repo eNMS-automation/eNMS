@@ -32,7 +32,7 @@ dont_migrate: Dict[str, List[str]] = {
         "pools",
     ],
     "Link": ["id", "pools"],
-    "Pool": ["id", "jobs", "last_modified", "object_number"],
+    "Pool": ["id", "jobs", "object_number"],
     "Service": [
         "id",
         "sources",

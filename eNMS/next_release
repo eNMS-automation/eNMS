@@ -186,3 +186,7 @@ You can use a variable from the payload to decided whether or not to skip a job 
 or a variable from the "custom configuration" available as a dictionary called "config".
 
 - Added number of successful / failed devices on workflow edges.
+
+- Run status automatically switched from "Running" to "Aborted" upon reloading the app.
+
+- Removed "eNMS" from database migration form.

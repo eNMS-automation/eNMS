@@ -358,10 +358,9 @@ class AutomationController(BaseController):
         for instance in fetch_all(type):
             if getattr(instance, "workflow", None):
                 continue
-            results[instance.name] = instance.serialized
             date = getattr(instance, "next_run_time" if type == "task" else "runtime")
             if date:
-                results[instance.name]["start"] = self.convert_date(date)
+                results[instance.name] = {"start": self.convert_date(date), **instance.serialized}
         return results
 
     def scheduler_action(self, action: str) -> None:

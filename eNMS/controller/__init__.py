@@ -68,7 +68,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
 
     def clean_database(self) -> None:
         for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
-            run.status = "Idle"
+            run.status = "Aborted (app reload)" 
         Session.commit()
 
     def init_database(self) -> None:

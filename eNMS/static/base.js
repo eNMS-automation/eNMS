@@ -479,7 +479,7 @@ function initTable(type) {
       },
     },
   });
-  if (type == "changelog" || type == "syslog" || type == "run") {
+  if (["changelog", "syslog", "run"].includes(type)) {
     table.order([0, "desc"]).draw();
   }
   return [table, filteringPanel];

@@ -5,7 +5,7 @@ from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
 from eNMS.database import Session
-from eNMS.database.functions import factory
+from eNMS.database.functions import factory, fetch
 from eNMS.models import models, model_properties
 from eNMS.properties.database import import_classes
 
@@ -65,6 +65,11 @@ class Controller(AdministrationController, AutomationController, InventoryContro
     def update_credentials(self) -> None:
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)
+
+    def clean_database(self) -> None:
+        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
+            run.status = "Idle"
+        Session.commit()
 
     def init_database(self) -> None:
         self.init_parameters()

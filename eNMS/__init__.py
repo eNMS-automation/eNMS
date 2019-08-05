@@ -46,6 +46,7 @@ def configure_database(app: Flask) -> None:
 
     @app.before_first_request
     def initialize_database() -> None:
+        controller.clean_database()
         if not fetch("User", allow_none=True, name="admin"):
             controller.init_database()
 

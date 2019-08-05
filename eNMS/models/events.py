@@ -133,8 +133,8 @@ class Task(AbstractBase):
 
     def run_properties(self) -> Set[int]:
         return {
-            "devices": [device.id for device in self.devices]
-            "pools": [pool.id for pool in self.pools]
+            "devices": [device.id for device in self.devices],
+            "pools": [pool.id for pool in self.pools],
             "initial_payload": self.initial_payload,
             "task": self.aps_job_id,
         }

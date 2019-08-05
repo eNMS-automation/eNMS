@@ -360,7 +360,10 @@ class AutomationController(BaseController):
                 continue
             date = getattr(instance, "next_run_time" if type == "task" else "runtime")
             if date:
-                results[instance.name] = {"start": self.convert_date(date), **instance.serialized}
+                results[instance.name] = {
+                    "start": self.convert_date(date),
+                    **instance.serialized,
+                }
         return results
 
     def scheduler_action(self, action: str) -> None:

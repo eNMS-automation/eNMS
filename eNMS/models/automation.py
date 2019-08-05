@@ -449,6 +449,9 @@ class Run(AbstractBase):
 
         return rec(input)
 
+    def space_deleter(self, input: str) -> str:
+        return "".join(input.split())
+
     @property
     def name(self) -> str:
         return repr(self)
@@ -628,9 +631,6 @@ class Service(Job):
             onclick="showDeletionPanel('service', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]
-
-    def space_deleter(self, input: str) -> str:
-        return "".join(input.split())
 
 
 class Workflow(Job):

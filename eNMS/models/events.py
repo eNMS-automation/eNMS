@@ -131,23 +131,21 @@ class Task(AbstractBase):
             controller.scheduler.remove_job(self.aps_job_id)
         Session.commit()
 
-    def compute_targets(self) -> Set[int]:
-        targets = {device.id for device in self.devices}
-        for pool in self.pools:
-            targets |= {device.id for device in pool.devices}
-        return targets
+    def run_properties(self) -> Set[int]:
+        return {
+            "devices": [device.id for device in self.devices]
+            "pools": [pool.id for pool in self.pools]
+            "initial_payload": self.initial_payload,
+            "task": self.aps_job_id,
+        }
 
     def kwargs(self) -> Tuple[dict, dict]:
         default = {
             "id": self.aps_job_id,
             "func": run_job,
             "replace_existing": True,
-            "args": [
-                self.job.id,
-                self.aps_job_id,
-                self.compute_targets(),
-                self.initial_payload,
-            ],
+            "args": [self.job.id],
+            "kwargs": self.run_properties(),
         }
         if self.scheduling_mode == "cron":
             self.periodic = True
@@ -185,6 +183,7 @@ class Task(AbstractBase):
 
     def schedule(self) -> None:
         default, trigger = self.kwargs()
+        print(default, trigger)
         if not controller.scheduler.get_job(self.aps_job_id):
             controller.scheduler.add_job(**{**default, **trigger})
         else:

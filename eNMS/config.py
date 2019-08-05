@@ -1,8 +1,8 @@
 from os import environ
 
 
-class DefaultConfig:
-    MODE = "default"
+class DebugConfig:
+    MODE = "debug"
     DEBUG = True
     JSON_SORT_KEYS = False
     SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
@@ -17,13 +17,13 @@ class ProductionConfig:
     WTF_CSRF_TIME_LIMIT = None
 
 
-class TestConfig(DefaultConfig):
+class TestConfig(DebugConfig):
     MODE = "test"
     WTF_CSRF_ENABLED = False
 
 
 config_mapper: dict = {
-    "Default": DefaultConfig,
+    "Debug": DebugConfig,
     "Production": ProductionConfig,
     "Test": TestConfig,
 }

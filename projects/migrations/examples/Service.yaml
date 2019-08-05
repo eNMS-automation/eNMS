@@ -1477,9 +1477,9 @@
     - '-50'
   push_to_git: false
   python_query: ''
-  query1: $.netmiko_show_ip_route.results.devices.{{device.name}}.success
-  query2: $.netmiko_show_ip_route.results.devices.{{device.name}}.result
-  query3: $.netmiko_show_ip_route.results.devices.{{device.name}}.result
+  query1: payload["netmiko_show_ip_route"]["results.devices"][device.name]["success"]
+  query2: payload["netmiko_show_ip_route"]["results.devices"][device.name]["result"]
+  query3: payload["netmiko_show_ip_route"]["results.devices"][device.name]["result"]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification

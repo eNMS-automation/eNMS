@@ -722,7 +722,7 @@ class Workflow(Job):
 
     def build_results(self, run: "Run", payload: dict) -> dict:
         controller.job_db[run.runtime].update({"jobs": {}, "edges": {}})
-        jobs: list = run["start_jobs"]
+        jobs: list = list(run["start_jobs"])
         payload = deepcopy(payload)
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}

@@ -183,7 +183,6 @@ class Task(AbstractBase):
 
     def schedule(self) -> None:
         default, trigger = self.kwargs()
-        print(default, trigger)
         if not controller.scheduler.get_job(self.aps_job_id):
             controller.scheduler.add_job(**{**default, **trigger})
         else:

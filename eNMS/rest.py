@@ -159,19 +159,19 @@ class RunJob(Resource):
             data["devices"] = devices
         if pools:
             data["pools"] = pools
-        runtime = controller.get_time()
+        data["runtime"] = runtime = controller.get_time()
         if handle_asynchronously:
             controller.scheduler.add_job(
                 id=runtime,
                 func=run_job,
                 run_date=datetime.now(),
-                args=[job.id, runtime],
+                args=[job.id],
                 kwargs=data,
                 trigger="date",
             )
             return {"errors": errors, "runtime": runtime}
         else:
-            return {**run_job(job.id, controller.get_time(), **data), "errors": errors}
+            return {**run_job(job.id, **data), "errors": errors}
 
 
 class Topology(Resource):

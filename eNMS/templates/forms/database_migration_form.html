@@ -11,7 +11,7 @@
       <label>Empty Database before Import</label>
       {{ form.empty_database_before_import() }}<br /><br />
       <label>
-        Directory pathname to use in eNMS_HOME/projects/migrations :<br />
+        Directory pathname to use in HOME/projects/migrations :<br />
         Example: "10312018_backup"
       </label>
       <div class="form-group">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div>
-      <label>eNMS object types to include in Import / Export :</label>
+      <label>Object types to include in Import / Export :</label>
       <div class="form-group">
         {{ form.import_export_types(class="form-control required", size="10") }}
       </div>

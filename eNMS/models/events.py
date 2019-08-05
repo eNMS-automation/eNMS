@@ -135,8 +135,8 @@ class Task(AbstractBase):
         return {
             "devices": [device.id for device in self.devices],
             "pools": [pool.id for pool in self.pools],
-            "initial_payload": self.initial_payload,
-            "task": self.aps_job_id,
+            "payload": self.initial_payload,
+            "task": self.id,
         }
 
     def kwargs(self) -> Tuple[dict, dict]:

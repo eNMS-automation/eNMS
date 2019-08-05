@@ -303,13 +303,13 @@ class AutomationController(BaseController):
         job = fetch("Job", name=kwargs["name"])
         if job.type == "Workflow":
             self.add_restart_payload(job, **kwargs)
-        runtime = self.get_time()
+        kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(
                 id=self.get_time(),
                 func=run_job,
                 run_date=datetime.now(),
-                args=[kwargs.pop("id"), runtime],
+                args=[kwargs.pop("id")],
                 kwargs=kwargs,
                 trigger="date",
             )

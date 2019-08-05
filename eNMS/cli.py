@@ -41,6 +41,6 @@ def configure_cli(app: Flask) -> None:
         payload_dict = loads(payload) if payload else {}
         payload_dict["devices"] = devices_list
         job = fetch("Job", name=name)
-        results = run_job(job.id, controller.get_time(), **payload_dict)
+        results = run_job(job.id, **payload_dict)
         Session.commit()
         echo(controller.str_dict(results))

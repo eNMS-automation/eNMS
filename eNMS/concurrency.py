@@ -3,15 +3,13 @@ from typing import Any, Optional
 from eNMS.database.functions import factory, fetch
 
 
-def run_job(
-    job_id: int,
-    runtime: Optional[str] = None,
-    task: Optional[int] = None,
-    **properties: Any
-) -> dict:
-    run = factory("Run", job=job_id, runtime=runtime, task=task)
-    run.properties = properties
-    return run.run(properties.get("payload"))
+def run_job(job: int, **kwargs: Any) -> dict:
+    run_kwargs = {
+        key: kwargs.pop(key) for key in ("runtime", "task") if kwargs.get(key)
+    }
+    run = factory("Run", job=job, **run_kwargs)
+    run.properties = kwargs
+    return run.run(kwargs.get("payload"))
 
 
 def get_device_result(args: tuple) -> None:

@@ -50,7 +50,7 @@ class IterationService(Service):
                 "payload": {run["variable_name"]: value, **payload},
                 "devices": [device.id],
             }
-            result = run_job(run["iterated_job"].id, controller.get_time(), **run_data)
+            result = run_job(run["iterated_job"].id, **run_data)
             results[value] = result["results"]["devices"][device.name]
             if not result["success"]:
                 success = False

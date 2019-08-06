@@ -60,6 +60,7 @@
   - Oakland
   - Denver
   - Aserver
+  last_modified: ''
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
@@ -176,6 +177,7 @@
   - Oakland
   - Denver
   - Aserver
+  last_modified: ''
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
@@ -236,6 +238,7 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
+  last_modified: ''
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion
@@ -338,6 +341,7 @@
   - Orange
   - Denver
   - Aserver
+  last_modified: ''
   latitude: '37.77'
   link_color: ''
   link_color_match: inclusion
@@ -444,6 +448,7 @@
   - SanFrancisco
   - Orange
   - Oakland
+  last_modified: ''
   latitude: '40.71'
   link_color: ''
   link_color_match: inclusion
@@ -544,6 +549,7 @@
   - Cambridge
   - Minneapolis
   - SanFrancisco
+  last_modified: ''
   latitude: '41.87'
   link_color: ''
   link_color_match: inclusion
@@ -633,6 +639,7 @@
   device_vendor_match: inclusion
   devices:
   - Washington
+  last_modified: ''
   latitude: '0.0'
   link_color: ''
   link_color_match: inclusion

@@ -1512,11 +1512,11 @@
     - 3.3.3.3
   display_only_failed_nodes: true
   events: []
-  has_targets: false
+  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-05 13:37:55.475594'
+  last_modified: '2019-08-06 14:21:03.063670'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1559,11 +1559,11 @@
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  has_targets: false
+  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-05 13:38:39.145359'
+  last_modified: '2019-08-06 14:21:06.925879'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false

@@ -411,7 +411,7 @@ function runLogic(job) {
       getJobState(job.id);
     }
   }
-  $(`#${job.type}-${id}`).remove();
+  $(`#${job.type}-${job.id}`).remove();
 }
 
 // eslint-disable-next-line

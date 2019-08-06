@@ -246,9 +246,10 @@ class Run(AbstractBase):
                 conn.disconnect() if library == "netmiko" else conn.close()
 
     def run(self, payload: Optional[dict] = None) -> dict:
-        self.log("info", f"{self.job.type} {self.job.name}: Starting")
-        controller.run_db[self.runtime]["is_running"] = True
         try:
+            self.log("info", f"{self.job.type} {self.job.name}: Starting")
+            controller.run_db[self.runtime]["is_running"] = True
+            controller.job_db[self.job.id]["runs"] += 1
             Session.commit()
             results = self.job.build_results(self, payload or self["initial_payload"])
             self.close_connection_cache()
@@ -266,6 +267,7 @@ class Run(AbstractBase):
             status = f"Completed ({'success' if self.success else 'failure'})"
             self.status = controller.run_db[self.runtime]["status"] = status
             controller.run_db[self.runtime]["is_running"] = False
+            controller.job_db[self.job.id]["runs"] -= 1
             results["endtime"] = self.endtime = controller.get_time()
             results["state"] = controller.run_db.pop(self.runtime)
             results["logs"] = controller.run_logs.pop(self.runtime)
@@ -406,14 +408,14 @@ class Run(AbstractBase):
             success = self.match_dictionary(result, match)
         return success if not self["negative_logic"] else not success
 
-    def match_dictionary(self, result: dict, match: dict) -> bool:
+    def match_dictionary(self, result: dict, match: dict, first: bool = True) -> bool:
         if self["validation_method"] == "dict_equal":
             return result == self["dict_match"]
         else:
-            match_copy = deepcopy(match)
+            match_copy = deepcopy(match) if first else match
             for k, v in result.items():
                 if isinstance(v, dict):
-                    return self.match_dictionary(v, match_copy)
+                    return self.match_dictionary(v, match_copy, False)
                 elif k in match_copy and match_copy[k] == v:
                     match_copy.pop(k)
             return not match_copy
@@ -614,7 +616,7 @@ class Service(Job):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            "a",
+            "Running" if controller.job_db[self.id]["runs"] else "Idle",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
@@ -663,7 +665,7 @@ class Workflow(Job):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            "a",
+            "Running" if controller.job_db[self.id]["runs"] else "Idle",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
             </i>Results</a></button>""",

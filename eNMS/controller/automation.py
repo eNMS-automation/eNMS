@@ -26,6 +26,7 @@ class AutomationController(BaseController):
         "napalm": defaultdict(dict),
         "netmiko": defaultdict(dict),
     }
+    job_db: dict = defaultdict(lambda: {"runs": 0})
     run_db: dict = defaultdict(dict)
     run_logs: dict = defaultdict(list)
 

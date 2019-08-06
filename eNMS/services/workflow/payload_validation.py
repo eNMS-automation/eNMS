@@ -1,8 +1,9 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
 from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
-from wtforms import HiddenField, StringField
+from wtforms import BooleanField, HiddenField, StringField
 
+from eNMS.controller import controller
 from eNMS.database import (
     CustomMediumBlobPickle,
     LARGE_STRING_LENGTH,
@@ -32,7 +33,8 @@ class PayloadValidationService(Service):
     __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        result = run.convert_result(eval(run["query"], locals()))
+        eval_result = controller.eval(run["query"], run, **locals())
+        result = run.convert_result(eval_result)
         match = (
             run.sub(run["content_match"], locals())
             if run["validation_method"] == "text"
@@ -49,4 +51,5 @@ class PayloadValidationService(Service):
 
 class PayloadValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="PayloadValidationService")
+    has_targets = BooleanField("Has Target Devices")
     query = StringField("Python Query")

@@ -6,6 +6,7 @@ from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
+from eNMS.controller import controller
 from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Run, Service
@@ -41,7 +42,9 @@ class PayloadExtractionService(Service):
                 continue
             query = run[f"query{i}"]
             try:
-                value = eval(query, locals())
+                variables = locals()
+                variables.pop("query")
+                value = controller.eval(query, run, **variables)
             except Exception as exc:
                 success = False
                 result[variable] = f"Wrong Python query for {variable} ({exc})"

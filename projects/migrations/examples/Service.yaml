@@ -95,6 +95,9 @@
     Iteration Services Test Workflow:
     - '-9'
     - '294'
+    Napalm getters and match mechanism workflow: !!python/tuple
+    - 500
+    - 0
     Napalm_VRF_workflow:
     - '200'
     - '0'

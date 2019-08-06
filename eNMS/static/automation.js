@@ -93,8 +93,7 @@ function saveWorkflow(newWorkflow) {
     );
     $("#current-workflow").val(newWorkflow.id);
     $("#current-workflow").selectpicker("refresh");
-    workflow = newWorkflow;
-    displayWorkflow(workflow);
+    displayWorkflow({"workflow": newWorkflow, "runtimes": []});
   }
 }
 

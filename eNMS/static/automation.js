@@ -383,15 +383,15 @@ function showLogs(runtime, jobId, jobType, jobName) {
 }
 
 // eslint-disable-next-line
-function normalRun(type, id) {
-  call(`/normal_run/${id}`, function(job) {
+function normalRun(id) {
+  call(`/run_job/${id}`, function(job) {
     runLogic(job);
   });
 }
 
 // eslint-disable-next-line
 function parametrizedRun(type, id) {
-  fCall("/parametrized_run", `#edit-${type}-form-${id}`, function(job) {
+  fCall("/run_job", `#edit-${type}-form-${id}`, function(job) {
     runLogic(job);
   });
 }

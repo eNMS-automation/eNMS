@@ -297,10 +297,10 @@ class AutomationController(BaseController):
             k: payload.get(k) for k in payload if k not in payload_jobs
         }
 
-    def run_job(self, **kwargs: Any) -> dict:
+    def run_job(self, id: Optional[int] = None, **kwargs: Any) -> dict:
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
-        job = fetch("Job", name=kwargs["name"])
+        job = fetch("Job", id=id)
         if job.type == "Workflow":
             self.add_restart_payload(job, **kwargs)
         kwargs["runtime"] = runtime = self.get_time()
@@ -309,7 +309,7 @@ class AutomationController(BaseController):
                 id=self.get_time(),
                 func=run_job,
                 run_date=datetime.now(),
-                args=[kwargs.pop("id")],
+                args=[id],
                 kwargs=kwargs,
                 trigger="date",
             )

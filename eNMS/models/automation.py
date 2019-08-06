@@ -618,9 +618,9 @@ class Service(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="normalRun('{self.type}', '{self.id}')">Run</button>""",
+            onclick="normalRun('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}')">Parametrize</button>""",
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Parametrize</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -666,7 +666,9 @@ class Workflow(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run</button>""",
+            onclick="showTypePanel('{self.id}')">Run</button>""",
+            f"""<button type="button" class="btn btn-success btn-xs"
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Parametrize</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('workflow', '{self.id}')">
             Edit</button>""",

@@ -27,8 +27,8 @@
     - '-359'
     - '-163'
     Napalm getters and match mechanism workflow: !!python/tuple
-    - -185
-    - -14
+    - -424
+    - -10
     Napalm_VRF_workflow:
     - '-200'
     - '0'
@@ -2369,8 +2369,8 @@
   pools: []
   positions:
     Napalm getters and match mechanism workflow: !!python/tuple
-    - -6
-    - -173
+    - -183
+    - -254
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2417,8 +2417,56 @@
   pools: []
   positions:
     Napalm getters and match mechanism workflow: !!python/tuple
-    - 23
-    - 51
+    - -136
+    - 87
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: NapalmGettersService
+  use_device_driver: true
+  validation_method: dict_included
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  dict_match:
+    '{{device.ip_address}}':
+      prefix_length: 24
+  display_only_failed_nodes: false
+  driver: eos
+  events: []
+  getters:
+  - get_interfaces_ip
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-06 23:40:05.951732'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Getters Workflow: Interface IP'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  optional_args: {}
+  pools: []
+  positions:
+    Napalm getters and match mechanism workflow: !!python/tuple
+    - 617
+    - -237
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2446,16 +2494,16 @@
   driver: eos
   events: []
   getters:
-  - get_interfaces_ip
+  - get_mac_address_table
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-08-06 22:04:59.701093'
+  last_modified: '2019-08-06 23:40:55.348647'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
-  name: 'Getters Workflow: Interface IP'
-  negative_logic: false
+  name: 'Getters Workflow: MAC address'
+  negative_logic: true
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -2463,8 +2511,8 @@
   pools: []
   positions:
     Napalm getters and match mechanism workflow: !!python/tuple
-    - 340
-    - -144
+    - 519
+    - 135
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2487,20 +2535,23 @@
   custom_username: ''
   description: ''
   devices: []
-  dict_match: {}
+  dict_match:
+    fqdn: localhost
+    uptime: 666
+    vendor: Arista
   display_only_failed_nodes: false
   driver: eos
   events: []
   getters:
-  - get_mac_address_table
+  - get_facts
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-08-06 22:05:52.123617'
+  last_modified: '2019-08-06 22:23:19.569044'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
-  name: 'Getters Workflow: MAC address'
+  name: 'Getters Workflow: get facts failed match'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2509,8 +2560,8 @@
   pools: []
   positions:
     Napalm getters and match mechanism workflow: !!python/tuple
-    - 428
-    - 51
+    - 125
+    - -236
   push_to_git: false
   python_query: ''
   query_property_type: name

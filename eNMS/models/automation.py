@@ -618,7 +618,7 @@ class Service(Job):
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run</button>""",
+            onclick="normalRun('{self.type}', '{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Parametrize</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"

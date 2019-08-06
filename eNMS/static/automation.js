@@ -41,7 +41,7 @@ function panelCode(type, id, mode) {
     $(`#${type}-btn-${id}`)
       .removeClass("btn-success")
       .addClass("btn-primary")
-      .attr("onclick", `parametrizedRunJob('${type}', ${id})`)
+      .attr("onclick", `parametrizedRun('${type}', ${id})`)
       .text("Run");
     $(".hide-run").hide();
   } else {
@@ -383,8 +383,15 @@ function showLogs(runtime, jobId, jobType, jobName) {
 }
 
 // eslint-disable-next-line
-function parametrizedRunJob(type, id) {
-  fCall(`/run_job`, `#edit-${type}-form-${id}`, function(job) {
+function normalRun(type, id) {
+  call(`/normal_run/${id}`, function(job) {
+    runLogic(job);
+  });
+}
+
+// eslint-disable-next-line
+function parametrizedRun(type, id) {
+  fCall("/parametrized_run", `#edit-${type}-form-${id}`, function(job) {
     runLogic(job);
   });
 }

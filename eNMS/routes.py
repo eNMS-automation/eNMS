@@ -189,11 +189,11 @@ def form(form_type: str) -> str:
     )
 
 
-@blueprint.route("/view_job_results/<int:job_id>/<runtime>")
+@blueprint.route("/view_job_results/<int:id>")
 @login_required
-def view_job_results(job_id: int, runtime: str) -> str:
+def view_job_results(id: int) -> str:
     runtime = runtime.replace("$", " ")
-    result = fetch("Result", job_id=job_id, runtime=runtime).result
+    result = fetch("Run", id=id).get_result()
     return f"<pre>{controller.str_dict(result)}</pre>"
 
 

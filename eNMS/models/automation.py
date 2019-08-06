@@ -349,11 +349,11 @@ class Run(AbstractBase):
         notification.extend(self.run_notification(results))
         if self["include_link_in_summary"]:
             notification.append(
-                f"Results: {controller.enms_server_addr}/view_job_results"
-                f"/{self.id}/{self.runtime.replace(' ', '$')}"
+                f"Results: {controller.enms_server_addr}/view_job_results/{self.id}"
             )
         notification_payload = {
             "job": self.job.get_properties(),
+            "run": self.properties,
             "results": results,
             "content": "\n\n".join(notification),
         }

@@ -15,7 +15,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
-from typing import Any, List, Optional, Set, Tuple
+from typing import Any, List, Optional, Tuple
 
 from eNMS.concurrency import run_job
 from eNMS.controller import controller

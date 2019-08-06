@@ -619,6 +619,8 @@ class Service(Job):
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run</button>""",
+            f"""<button type="button" class="btn btn-success btn-xs"
+            onclick="showTypePanel('{self.type}', '{self.id}')">Parametrize</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"

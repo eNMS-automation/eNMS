@@ -41,7 +41,7 @@ function panelCode(type, id, mode) {
     $(`#${type}-btn-${id}`)
       .removeClass("btn-success")
       .addClass("btn-primary")
-      .attr("onclick", `runJob('${type}', ${id})`)
+      .attr("onclick", `parametrizedRunJob('${type}', ${id})`)
       .text("Run");
     $(".hide-run").hide();
   } else {
@@ -383,24 +383,28 @@ function showLogs(runtime, jobId, jobType, jobName) {
 }
 
 // eslint-disable-next-line
-function runJob(type, id) {
+function parametrizedRunJob(type, id) {
   fCall(`/run_job`, `#edit-${type}-form-${id}`, function(job) {
-    showLogs(job.runtime, job.id, job.type, job.name);
-    alertify.notify(`Job '${job.name}' started.`, "success", 5);
-    if (page == "workflow_builder") {
-      if (job.type == "Workflow") {
-        $("#current-runtimes").append(
-          `<option value='${job.runtime}'>${job.runtime}</option>`
-        );
-        $("#current-runtimes").val(job.runtime);
-        $("#current-runtimes").selectpicker("refresh");
-        getWorkflowState(true);
-      } else {
-        getJobState(id);
-      }
-    }
-    $(`#${type}-${id}`).remove();
+    runLogic(job);
   });
+}
+
+function runLogic(job) {
+  showLogs(job.runtime, job.id, job.type, job.name);
+  alertify.notify(`Job '${job.name}' started.`, "success", 5);
+  if (page == "workflow_builder") {
+    if (job.type == "Workflow") {
+      $("#current-runtimes").append(
+        `<option value='${job.runtime}'>${job.runtime}</option>`
+      );
+      $("#current-runtimes").val(job.runtime);
+      $("#current-runtimes").selectpicker("refresh");
+      getWorkflowState(true);
+    } else {
+      getJobState(job.id);
+    }
+  }
+  $(`#${job.type}-${id}`).remove();
 }
 
 // eslint-disable-next-line

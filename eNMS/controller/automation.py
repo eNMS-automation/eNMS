@@ -26,7 +26,7 @@ class AutomationController(BaseController):
         "napalm": defaultdict(dict),
         "netmiko": defaultdict(dict),
     }
-    job_db: dict = defaultdict(dict)
+    run_db: dict = defaultdict(dict)
     run_logs: dict = defaultdict(list)
 
     def payload_helper(
@@ -337,7 +337,7 @@ class AutomationController(BaseController):
         ]
         state = None
         if runtime:
-            state = self.job_db.get(runtime)
+            state = self.run_db.get(runtime)
             if not state:
                 results = fetch("Run", runtime=runtime).results
                 state = [r for r in results if not r.device_id][0].result.get("state")

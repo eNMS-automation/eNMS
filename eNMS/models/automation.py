@@ -129,7 +129,7 @@ class Run(AbstractBase):
     @property
     def progress(self) -> str:
         if self.status == "Running":
-            progress = controller.job_db[self.runtime]
+            progress = controller.run_db[self.runtime]
             try:
                 return (
                     f"{progress['completed']}/{progress['number_of_targets']}"
@@ -233,7 +233,7 @@ class Run(AbstractBase):
             devices = set(self["devices"])
             for pool in self["pools"]:
                 devices |= set(pool.devices)
-        controller.job_db[self.runtime]["number_of_targets"] = len(devices)
+        controller.run_db[self.runtime]["number_of_targets"] = len(devices)
         return devices
 
     def close_connection_cache(self) -> None:
@@ -247,7 +247,7 @@ class Run(AbstractBase):
 
     def run(self, payload: Optional[dict] = None) -> dict:
         self.log("info", f"{self.job.type} {self.job.name}: Starting")
-        controller.job_db[self.runtime]["is_running"] = True
+        controller.run_db[self.runtime]["is_running"] = True
         try:
             Session.commit()
             results = self.job.build_results(self, payload or self["initial_payload"])
@@ -264,10 +264,10 @@ class Run(AbstractBase):
             results = {"success": False, "results": result}
         finally:
             status = f"Completed ({'success' if self.success else 'failure'})"
-            self.status = controller.job_db[self.runtime]["status"] = status
-            controller.job_db[self.runtime]["is_running"] = False
+            self.status = controller.run_db[self.runtime]["status"] = status
+            controller.run_db[self.runtime]["is_running"] = False
             results["endtime"] = self.endtime = controller.get_time()
-            results["state"] = controller.job_db.pop(self.runtime)
+            results["state"] = controller.run_db.pop(self.runtime)
             results["logs"] = controller.run_logs.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
@@ -308,8 +308,8 @@ class Run(AbstractBase):
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
             f"{f' on {device.name}' if device else ''}",
         )
-        controller.job_db[self.runtime]["completed"] += 1
-        controller.job_db[self.runtime]["failed"] += 1 - results["success"]
+        controller.run_db[self.runtime]["completed"] += 1
+        controller.run_db[self.runtime]["failed"] += 1 - results["success"]
         if device:
             self.create_result(results, device)
         return results
@@ -576,8 +576,8 @@ class Service(Job):
                 return {"success": False, "error": str(exc)}
         for i in range(run["number_of_retries"] + 1):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            controller.job_db[run.runtime]["completed"] = 0
-            controller.job_db[run.runtime]["failed"] = 0
+            controller.run_db[run.runtime]["completed"] = 0
+            controller.run_db[run.runtime]["failed"] = 0
             attempt = self.device_run(run, payload, targets)
             if targets:
                 assert targets is not None
@@ -614,6 +614,7 @@ class Service(Job):
 
     def generate_row(self, table: str) -> List[str]:
         return [
+            "a",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
@@ -662,11 +663,12 @@ class Workflow(Job):
 
     def generate_row(self, table: str) -> List[str]:
         return [
+            "a",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.id}')">Run</button>""",
+            onclick="normalRun('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Parametrize</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -721,11 +723,11 @@ class Workflow(Job):
                 continue
             for successor, edge in job.adjacent_jobs(self, "destination", edge_type):
                 allowed_devices[successor.name] |= devices
-                controller.job_db[runtime]["edges"][edge.id] = len(devices)
+                controller.run_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
 
     def build_results(self, run: "Run", payload: dict) -> dict:
-        controller.job_db[run.runtime].update({"jobs": {}, "edges": {}})
+        controller.run_db[run.runtime].update({"jobs": {}, "edges": {}})
         jobs: list = list(run["start_jobs"])
         payload = deepcopy(payload)
         visited: Set = set()
@@ -743,7 +745,7 @@ class Workflow(Job):
             ):
                 continue
             visited.add(job)
-            controller.job_db[run.runtime]["current_job"] = job.get_properties()
+            controller.run_db[run.runtime]["current_job"] = job.get_properties()
             skip_job = False
             if job.skip_python_query:
                 skip_job = controller.eval(job.skip_python_query, run, **locals())
@@ -786,7 +788,7 @@ class Workflow(Job):
                 )
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 job_results = job_run.run(payload)
-            controller.job_db[run.runtime]["jobs"][job.id] = job_results["success"]
+            controller.run_db[run.runtime]["jobs"][job.id] = job_results["success"]
             if run["use_workflow_targets"]:
                 successors = self.workflow_targets_processing(
                     run.runtime, allowed_devices, job, job_results

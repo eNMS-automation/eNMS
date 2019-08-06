@@ -479,7 +479,11 @@
   jobs:
   - Start
   - End
-  last_modified: '2019-08-06 21:51:40.914868'
+  - 'Getters Workflow: is alive'
+  - 'Getters Workflow: get facts'
+  - 'Getters Workflow: Interface IP'
+  - 'Getters Workflow: MAC address'
+  last_modified: '2019-08-06 22:06:42.039966'
   mail_recipient: ''
   name: Napalm getters and match mechanism workflow
   notification_header: ''

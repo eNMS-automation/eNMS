@@ -248,3 +248,28 @@
   source: show runtime with get_result helper
   subtype: success
   workflow: 'python Workflow: payload editor and pool helper'
+- destination: 'Getters Workflow: is alive'
+  name: 57-success:1->58
+  source: Start
+  subtype: success
+  workflow: Napalm getters and match mechanism workflow
+- destination: 'Getters Workflow: get facts'
+  name: 57-success:58->59
+  source: 'Getters Workflow: is alive'
+  subtype: success
+  workflow: Napalm getters and match mechanism workflow
+- destination: 'Getters Workflow: Interface IP'
+  name: 57-success:59->60
+  source: 'Getters Workflow: get facts'
+  subtype: success
+  workflow: Napalm getters and match mechanism workflow
+- destination: 'Getters Workflow: MAC address'
+  name: 57-success:60->61
+  source: 'Getters Workflow: Interface IP'
+  subtype: success
+  workflow: Napalm getters and match mechanism workflow
+- destination: End
+  name: 57-success:61->2
+  source: 'Getters Workflow: MAC address'
+  subtype: success
+  workflow: Napalm getters and match mechanism workflow

@@ -78,7 +78,7 @@ function workflowRunMode(instance) {
 function saveService(service, id) {
   if (page == "workflow_builder") {
     if (id) {
-      nodes.update({ id: id, label: service.name });
+      jobToNode(service);
     } else {
       addJobsToWorkflow([service.id]);
     }

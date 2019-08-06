@@ -26,6 +26,9 @@
     Iteration Services Test Workflow:
     - '-359'
     - '-163'
+    Napalm getters and match mechanism workflow: !!python/tuple
+    - -185
+    - -14
     Napalm_VRF_workflow:
     - '-200'
     - '0'
@@ -96,8 +99,8 @@
     - '-9'
     - '294'
     Napalm getters and match mechanism workflow: !!python/tuple
-    - 500
-    - 0
+    - 677
+    - -21
     Napalm_VRF_workflow:
     - '200'
     - '0'
@@ -2334,5 +2337,193 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  dict_match:
+    is_alive:
+      is_alive: true
+  display_only_failed_nodes: false
+  driver: eos
+  events: []
+  getters:
+  - is_alive
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-06 22:07:34.659555'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Getters Workflow: is alive'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  optional_args: {}
+  pools: []
+  positions:
+    Napalm getters and match mechanism workflow: !!python/tuple
+    - -6
+    - -173
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: NapalmGettersService
+  use_device_driver: true
+  validation_method: dict_equal
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  dict_match:
+    fqdn: localhost
+    vendor: Arista
+  display_only_failed_nodes: false
+  driver: eos
+  events: []
+  getters:
+  - get_facts
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-06 22:20:19.161043'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Getters Workflow: get facts'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  optional_args: {}
+  pools: []
+  positions:
+    Napalm getters and match mechanism workflow: !!python/tuple
+    - 23
+    - 51
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: NapalmGettersService
+  use_device_driver: true
+  validation_method: dict_included
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: eos
+  events: []
+  getters:
+  - get_interfaces_ip
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-06 22:04:59.701093'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Getters Workflow: Interface IP'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  optional_args: {}
+  pools: []
+  positions:
+    Napalm getters and match mechanism workflow: !!python/tuple
+    - 340
+    - -144
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: NapalmGettersService
+  use_device_driver: true
+  validation_method: dict_equal
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: eos
+  events: []
+  getters:
+  - get_mac_address_table
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-06 22:05:52.123617'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Getters Workflow: MAC address'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  optional_args: {}
+  pools: []
+  positions:
+    Napalm getters and match mechanism workflow: !!python/tuple
+    - 428
+    - 51
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: NapalmGettersService
+  use_device_driver: true
+  validation_method: dict_equal
   vendor: ''
   waiting_time: 0

@@ -624,7 +624,7 @@ class Service(Job):
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="normalRun('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Parametrize</button>""",
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run with Updates</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -673,7 +673,7 @@ class Workflow(Job):
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="normalRun('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Parametrize</button>""",
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run with Updates</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('workflow', '{self.id}')">
             Edit</button>""",

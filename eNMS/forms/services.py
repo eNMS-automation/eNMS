@@ -29,8 +29,8 @@ class DictValidationForm(BaseForm):
     validation_method = SelectField(
         "Validation Method",
         choices=(
-            ("dict_equal", "Validation by dictionary equality"),
             ("dict_included", "Validation by dictionary inclusion"),
+            ("dict_equal", "Validation by dictionary equality"),
         ),
     )
     dict_match = DictSubstitutionField("Dictionary to Match Against")
@@ -52,8 +52,8 @@ class ValidationForm(BaseForm):
         "Validation Method",
         choices=(
             ("text", "Validation by text match"),
-            ("dict_equal", "Validation by dictionary equality"),
             ("dict_included", "Validation by dictionary inclusion"),
+            ("dict_equal", "Validation by dictionary equality"),
         ),
     )
     content_match = SubstitutionField(

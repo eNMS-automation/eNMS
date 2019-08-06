@@ -28,7 +28,6 @@ class UnixShellScriptService(Service):
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         username, password = run.get_credentials(device)
-
         fabric_connection = Connection(
             host=device.ip_address,
             port=device.port,

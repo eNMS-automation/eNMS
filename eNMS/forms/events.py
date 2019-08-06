@@ -28,6 +28,10 @@ class TaskForm(BaseForm):
     form_type = HiddenField(default="task")
     id = HiddenField()
     is_active = BooleanField("Is Active")
+    scheduling_mode = SelectField(
+        "Scheduling Mode",
+        choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),
+    )
     name = StringField("Name")
     description = StringField("Description")
     start_date = DateField("Start Date")
@@ -47,7 +51,28 @@ class TaskForm(BaseForm):
         "Scheduling Mode",
         choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling")),
     )
+    job = InstanceField("Job", instance_type="Job")
+    devices = MultipleInstanceField("Devices", instance_type="Device")
+    pools = MultipleInstanceField("Pools", instance_type="Pool")
     payload = DictField("Payload")
+
+    def validate(self) -> bool:
+        valid_form = super().validate()
+        no_start_date = (
+            self.is_active.data
+            and self.scheduling_mode.data == "standard"
+            and not self.start_date.data
+        )
+        if no_start_date:
+            self.start_date.errors.append("A start date must be set.")
+        no_cron_expression = (
+            self.is_active.data
+            and self.scheduling_mode.data == "cron"
+            and not self.crontab_expression.data
+        )
+        if no_cron_expression:
+            self.crontab_expression.errors.append("A crontab expression must be set.")
+        return valid_form and not no_start_date and not no_cron_expression
 
 
 class ChangelogForm(BaseForm):

@@ -131,7 +131,7 @@ class Task(AbstractBase):
             controller.scheduler.remove_job(self.aps_job_id)
         Session.commit()
 
-    def run_properties(self) -> Set[int]:
+    def run_properties(self) -> dict:
         return {
             "devices": [device.id for device in self.devices],
             "pools": [pool.id for pool in self.pools],

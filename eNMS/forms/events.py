@@ -47,13 +47,6 @@ class TaskForm(BaseForm):
         ),
     )
     crontab_expression = StringField("Crontab Expression")
-    scheduling_mode = SelectField(
-        "Scheduling Mode",
-        choices=(("standard", "Standard Scheduling"), ("cron", "Crontab Scheduling")),
-    )
-    job = InstanceField("Job", instance_type="Job")
-    devices = MultipleInstanceField("Devices", instance_type="Device")
-    pools = MultipleInstanceField("Pools", instance_type="Pool")
     payload = DictField("Payload")
 
     def validate(self) -> bool:

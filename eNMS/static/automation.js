@@ -346,37 +346,37 @@ function clearResults(id) {
 }
 
 // eslint-disable-next-line
-function refreshLogs(jobId, runtime, jobType, jobName, first) {
+function refreshLogs(job, runtime, first) {
   if (!runtime) runtime = $(`#runtime-${id}`).val();
   const runtimeId = runtime.toString().replace(/[.:-\s]/g, "");
   call(`/get_job_logs/${runtime}`, function(result) {
-    $(`#log-${runtimeId}`).text(result.logs);
+    console.log(result, $(`#log-${job.id}`).length)
+    $(`#log-${job.id}`).text(result.logs);
     if (result.refresh) {
-      setTimeout(() => refreshLogs(runtime, jobId, jobType), 1500);
+      setTimeout(() => refreshLogs(job, runtime), 1500);
     } else if (!first) {
       $(`#logs-${runtimeId}`).remove();
       jobType = jobType == "Workflow" ? "workflow" : "service";
-      showResultsPanel(jobId, jobName, jobType, runtime);
+      showResultsPanel(job.id, job.name, job.type, runtime);
     }
   });
 }
 
 // eslint-disable-next-line
 function showLogsPanel(job, runtime) {
-  console.log(job);
-  createPanel(`logs`, `Logs - ${jobName}`, jobId, function() {
-    configureLogsCallbacks(jobId, jobName, jobType, runtime);
+  createPanel(`logs`, `Logs - ${job.name}`, job.id, function() {
+    configureLogsCallbacks(job, runtime);
   });
 }
 
 // eslint-disable-next-line
-function configureLogsCallbacks(jobId, jobType, runtime) {
+function configureLogsCallbacks(job, runtime) {
   if (!runtime) {
-    $(`#runtime-${jobId}`).on("change", function() {
-      getRuntimes("logs", jobId);
+    $(`#runtime-${job.id}`).on("change", function() {
+      getRuntimes("logs", job.id);
     });
   } else {
-    refreshLogs(jobId, runtime, true);
+    refreshLogs(job, runtime, true);
   }
 }
 
@@ -395,7 +395,7 @@ function parametrizedRun(type, id) {
 }
 
 function runLogic(job) {
-  showLogsPanel(job.id, job.name, job.runtime);
+  showLogsPanel(job, job.runtime);
   alertify.notify(`Job '${job.name}' started.`, "success", 5);
   if (page == "workflow_builder") {
     if (job.type == "Workflow") {

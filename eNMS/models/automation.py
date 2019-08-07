@@ -619,7 +619,7 @@ class Service(Job):
         return [
             "Running" if controller.job_db[self.id]["runs"] else "Idle",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogsPanel({self.get_properties()})">
+            onclick="showLogsPanel({self.row_properties})">
             </i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">

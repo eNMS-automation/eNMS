@@ -109,17 +109,10 @@ class Run(AbstractBase):
         if key in self.__dict__:
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
-            return self.__dict__["properties"][key]
+            job, value = self.__dict__["job"], self.__dict__["properties"][key]
+            return convert_value(job.type, key, value, "id")
         elif hasattr(self.__dict__.get("job"), key):
             return getattr(self.__dict__["job"], key)
-        else:
-            raise AttributeError
-
-    def __getitem__(self, key: Any) -> Any:
-        if key in self.properties:
-            return convert_value(self.job.type, key, self.properties[key], "id")
-        elif hasattr(self.job, key):
-            return getattr(self.job, key)
         else:
             raise AttributeError
 
@@ -243,8 +236,8 @@ class Run(AbstractBase):
             if not_found:
                 raise Exception(f"Python query invalid targets: {', '.join(not_found)}")
         else:
-            devices = set(self["devices"])
-            for pool in self["pools"]:
+            devices = set(self.devices)
+            for pool in self.pools:
                 devices |= set(pool.devices)
         controller.run_db[self.runtime]["number_of_targets"] = len(devices)
         return devices

@@ -164,7 +164,7 @@ class Run(AbstractBase):
                     except (OSError, ValueError):
                         parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
-        driver = device.netmiko_driver if self["use_device_driver"] else self["driver"]
+        driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
             device_type=driver,
             ip=device.ip_address,
@@ -172,11 +172,11 @@ class Run(AbstractBase):
             username=username,
             password=password,
             secret=device.enable_password,
-            fast_cli=self["fast_cli"],
-            timeout=self["timeout"],
-            global_delay_factor=self["global_delay_factor"],
+            fast_cli=self.fast_cli,
+            timeout=self.timeout,
+            global_delay_factor=self.global_delay_factor,
         )
-        if self["privileged_mode"]:
+        if self.privileged_mode:
             netmiko_connection.enable()
         if self.workflow:
             controller.connections_cache["netmiko"][self.parent_runtime][
@@ -204,7 +204,7 @@ class Run(AbstractBase):
         if "secret" not in optional_args:
             optional_args["secret"] = device.enable_password
         driver = get_network_driver(
-            device.napalm_driver if self["use_device_driver"] else self["driver"]
+            device.napalm_driver if self.use_device_driver else self.driver
         )
         napalm_connection = driver(
             hostname=device.ip_address,
@@ -257,7 +257,7 @@ class Run(AbstractBase):
             controller.run_db[self.runtime]["is_running"] = True
             controller.job_db[self.job.id]["runs"] += 1
             Session.commit()
-            results = self.job.build_results(self, payload or self["initial_payload"])
+            results = self.job.build_results(self, payload or self.initial_payload)
             self.close_connection_cache()
             self.log("info", f"{self.job.type} {self.job.name}: Finished")
         except Exception:
@@ -285,7 +285,7 @@ class Run(AbstractBase):
             }
             self.create_result(results)
             Session.commit()
-        if not self.workflow and self["send_notification"]:
+        if not self.workflow and self.send_notification:
             self.notify(results)
         return results
 
@@ -329,7 +329,7 @@ class Run(AbstractBase):
             controller.run_logs[self.parent_runtime].append(log)
 
     def run_notification(self, results: dict) -> List[str]:
-        notification = self["notification_header"].splitlines()
+        notification = self.notification_header.splitlines()
         if self.job.type == "Workflow":
             return notification
         elif "devices" in results["results"] and not results["success"]:
@@ -339,7 +339,7 @@ class Run(AbstractBase):
                 if not device_results["success"]
             )
             notification.append(f"FAILED :\n{failed}")
-            if not self["display_only_failed_nodes"]:
+            if not self.display_only_failed_nodes:
                 passed = "\n".join(
                     device
                     for device, device_results in results["results"]["devices"].items()
@@ -355,7 +355,7 @@ class Run(AbstractBase):
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]
         notification.extend(self.run_notification(results))
-        if self["include_link_in_summary"]:
+        if self.include_link_in_summary:
             notification.append(
                 f"Results: {controller.enms_server_addr}/view_job_results/{self.id}"
             )
@@ -366,16 +366,16 @@ class Run(AbstractBase):
             "content": "\n\n".join(notification),
         }
         notification_run = factory(
-            "Run", **{"job": fetch("Job", name=self["send_notification_method"]).id}
+            "Run", **{"job": fetch("Job", name=self.send_notification_method).id}
         )
         notification_run.run(notification_payload)
 
     def get_credentials(self, device: "Device") -> Tuple[str, str]:
         return (
             controller.get_user_credentials()
-            if self["credentials"] == "user"
+            if self.credentials == "user"
             else (device.username, device.password)
-            if self["credentials"] == "device"
+            if self.credentials == "device"
             else (
                 self.sub(self.job.custom_username, locals()),
                 self.sub(self.job.custom_password, locals()),
@@ -384,9 +384,9 @@ class Run(AbstractBase):
 
     def convert_result(self, result: Any) -> Union[str, dict]:
         try:
-            if self["conversion_method"] == "json":
+            if self.conversion_method == "json":
                 result = loads(result)
-            elif self["conversion_method"] == "xml":
+            elif self.conversion_method == "xml":
                 result = parse(result)
         except (ExpatError, JSONDecodeError) as e:
             result = {
@@ -398,25 +398,25 @@ class Run(AbstractBase):
         return result
 
     def match_content(self, result: Any, match: Union[str, dict]) -> bool:
-        if self["validation_method"] == "text":
+        if self.validation_method == "text":
             result = str(result)
             assert isinstance(match, str)
-            if self["delete_spaces_before_matching"]:
-                match, result = map(self["space_deleter"], (match, result))
+            if self.delete_spaces_before_matching"]:
+                match, result = map(self.space_deleter, (match, result))
             success = (
-                self["content_match_regex"]
+                self.content_match_regex
                 and bool(search(match, result))
                 or match in result
-                and not self["content_match_regex"]
+                and not self.content_match_regex
             )
         else:
             assert isinstance(match, dict)
             success = self.match_dictionary(result, match)
-        return success if not self["negative_logic"] else not success
+        return success if not self.negative_logic else not success
 
     def match_dictionary(self, result: dict, match: dict, first: bool = True) -> bool:
-        if self["validation_method"] == "dict_equal":
-            return result == self["dict_match"]
+        if self.validation_method == "dict_equal":
+            return result == self.dict_match
         else:
             match_copy = deepcopy(match) if first else match
             for k, v in result.items():
@@ -430,15 +430,15 @@ class Run(AbstractBase):
     def transfer_file(
         self, ssh_client: SSHClient, files: List[Tuple[str, str]]
     ) -> None:
-        if self["protocol"] == "sftp":
+        if self.protocol == "sftp":
             sftp = ssh_client.open_sftp()
             for source, destination in files:
-                getattr(sftp, self["direction"])(source, destination)
+                getattr(sftp, self.direction)(source, destination)
             sftp.close()
         else:
             with SCPClient(ssh_client.get_transport()) as scp:
                 for source, destination in files:
-                    getattr(scp, self["direction"])(source, destination)
+                    getattr(scp, self.direction)(source, destination)
 
     def sub(self, input: Any, variables: dict) -> dict:
         r = compile("{{(.*?)}}")

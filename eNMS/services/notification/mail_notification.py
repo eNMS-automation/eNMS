@@ -26,10 +26,10 @@ class MailNotificationService(Service):
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         controller.send_email(
-            run.sub(run["title"], locals()),
-            run.sub(run["body"], locals()),
-            sender=run["sender"],
-            recipients=run["recipients"],
+            run.sub(run.title, locals()),
+            run.sub(run.body, locals()),
+            sender=run.sender,
+            recipients=run.recipients,
         )
         return {"success": True, "result": {}}
 

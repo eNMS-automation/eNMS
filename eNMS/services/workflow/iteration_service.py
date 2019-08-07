@@ -37,20 +37,20 @@ class IterationService(Service):
         return {"iterated_job": self.iterated_job.name, **super().get_properties(*args)}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        if run["origin_of_values"] == "user_provided_values":
-            if device.name in run["user_provided_values"]:
-                values = run["user_provided_values"][device.name]
+        if run.origin_of_values == "user_provided_values":
+            if device.name in run.user_provided_values:
+                values = run.user_provided_values[device.name]
             else:
-                values = run["user_provided_values"]["all"]
+                values = run.user_provided_values["all"]
         else:
-            values = controller.eval(run["python_query_values"], run, **locals())
+            values = controller.eval(run.python_query_values, run, **locals())
         results, success = {}, True
         for value in values:
             run_data = {
-                "payload": {run["variable_name"]: value, **payload},
+                "payload": {run.variable_name: value, **payload},
                 "devices": [device.id],
             }
-            result = run_job(run["iterated_job"].id, **run_data)
+            result = run_job(run.iterated_job.id, **run_data)
             results[value] = result["results"]["devices"][device.name]
             if not result["success"]:
                 success = False

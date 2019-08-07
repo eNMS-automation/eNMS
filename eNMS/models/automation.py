@@ -105,6 +105,16 @@ class Run(AbstractBase):
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name} by {self.creator})"
 
+    def __getattr__(self, key):
+        if key in self.__dict__:
+            return self.__dict__[key]
+        elif key in self.__dict__.get("properties", {}):
+            return self.__dict__["properties"][key]
+        elif hasattr(self.__dict__.get("job"), key):
+            return getattr(self.__dict__["job"], key)
+        else:
+            raise AttributeError
+
     def __getitem__(self, key: Any) -> Any:
         if key in self.properties:
             return convert_value(self.job.type, key, self.properties[key], "id")
@@ -549,7 +559,7 @@ class Service(Job):
         if not targets:
             return run.get_results(payload)
         else:
-            if run["multiprocessing"]:
+            if run.multiprocessing:
                 device_results: dict = {}
                 thread_lock = Lock()
                 processes = min(len(targets), run["max_processes"])

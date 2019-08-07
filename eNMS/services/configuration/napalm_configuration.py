@@ -28,8 +28,8 @@ class NapalmConfigurationService(Service):
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection = run.napalm_connection(device)
         run.log("info", f"Pushing configuration on {device.name} (Napalm)")
-        config = "\n".join(run.sub(run["content"], locals()).splitlines())
-        getattr(napalm_connection, run["action"])(config=config)
+        config = "\n".join(run.sub(run.content, locals()).splitlines())
+        getattr(napalm_connection, run.action)(config=config)
         napalm_connection.commit_config()
         return {"success": True, "result": f"Config push ({config})"}
 

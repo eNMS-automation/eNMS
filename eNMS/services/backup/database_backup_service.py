@@ -50,9 +50,9 @@ class DatabaseBackupService(Service):
         destination = f"{run.sub(run['destination_path'], locals())}/backup_{now}.tgz"
         run.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
-        if run["delete_folder"]:
+        if run.delete_folder:
             rmtree(Path.cwd() / "projects" / "migrations" / f"backup_{now}")
-        if run["delete_archive"]:
+        if run.delete_archive:
             remove(source)
         return {
             "success": True,

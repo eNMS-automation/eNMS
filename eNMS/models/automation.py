@@ -392,7 +392,7 @@ class Run(AbstractBase):
             result = {
                 "success": False,
                 "text_response": result,
-                "error": f"Conversion to {self['conversion_method']} failed",
+                "error": f"Conversion to {self.conversion_method} failed",
                 "exception": str(e),
             }
         return result
@@ -401,7 +401,7 @@ class Run(AbstractBase):
         if self.validation_method == "text":
             result = str(result)
             assert isinstance(match, str)
-            if self.delete_spaces_before_matching"]:
+            if self.delete_spaces_before_matching:
                 match, result = map(self.space_deleter, (match, result))
             success = (
                 self.content_match_regex

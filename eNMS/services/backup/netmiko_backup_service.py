@@ -51,7 +51,7 @@ class NetmikoBackupService(Service):
             except Exception:
                 pass
             run.log("info", f"Fetching configuration on {device.name} (Netmiko)")
-            config = netmiko_connection.send_command(run["configuration_command"])
+            config = netmiko_connection.send_command(run.configuration_command)
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
             if device.configurations:

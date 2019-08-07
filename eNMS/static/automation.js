@@ -359,26 +359,9 @@ function refreshLogs(runtime, jobId, jobType, jobName, first) {
 // eslint-disable-next-line
 function showLogs(runtime, jobId, jobType, jobName) {
   const runtimeId = runtime.toString().replace(/[.:-\s]/g, "");
-  if (!$(`#logs-${runtimeId}`).length) {
-    jsPanel.create({
-      id: `logs-${runtimeId}`,
-      theme: "dark filled",
-      border: "medium",
-      headerTitle: `Logs - ${jobName}`,
-      position: "center-top 0 58",
-      callback: function() {
-        refreshLogs(runtime, jobId, jobType, jobName, true);
-      },
-      contentSize: "1450 600",
-      contentOverflow: "hidden scroll",
-      content: `<pre id="log-text-${runtimeId}" style="border: 0;\
-        background-color: transparent; color: white;"></pre>`,
-      dragit: {
-        opacity: 0.7,
-        containment: [5, 5, 5, 5],
-      },
-    });
-  }
+  createPanel(`logs_results`, `Logs - ${jobName}`, runtimeId, function() {
+    //configureResultsCallbacks(id, type);
+  });
 }
 
 // eslint-disable-next-line

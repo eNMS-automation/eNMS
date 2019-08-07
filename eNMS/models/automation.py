@@ -109,8 +109,8 @@ class Run(AbstractBase):
         if key in self.__dict__:
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
-            job, value = self.__dict__["job"], self.__dict__["properties"][key]
-            return convert_value(job.type, key, value, "id")
+            job, value = self.__dict__.get("job"), self.__dict__["properties"][key]
+            return convert_value(job.type, key, value, "id") if job else value
         elif hasattr(self.__dict__.get("job"), key):
             return getattr(self.__dict__["job"], key)
         else:

@@ -158,7 +158,6 @@ function displayResults(type, id, formId, compare) {
 
 function getRuntimes(type, id) {
   call(`/get_runtimes/${type}/${id}`, (runtimes) => {
-    console.log(runtimes)
     $(`#runtime-${id},#runtime_compare-${id}`).empty();
     runtimes.forEach((runtime) => {
       $(`#runtime-${id},#runtime_compare-${id}`).append(
@@ -176,8 +175,7 @@ function getRuntimes(type, id) {
       } else if (type != "logs") {
         updateDeviceLists(type, id, id, true, true);
       } else {
-
-        refreshLogs(id);
+        refreshLogs({"id": id}, $(`#runtime-${id}`).val());
       }
     }
   });
@@ -346,36 +344,43 @@ function clearResults(id) {
 }
 
 // eslint-disable-next-line
-function refreshLogs(job, runtime, first) {
-  if (!runtime) runtime = $(`#runtime-${id}`).val();
-  const runtimeId = runtime.toString().replace(/[.:-\s]/g, "");
-  call(`/get_job_logs/${runtime}`, function(result) {
+function refreshLogs(job, runtime, displayResults) {
+  fCall("/get_job_logs", `#logs-form-${job.id}`, function(result) {
     console.log(result, $(`#log-${job.id}`).length)
     $(`#log-${job.id}`).text(result.logs);
     if (result.refresh) {
-      setTimeout(() => refreshLogs(job, runtime), 1500);
-    } else if (!first) {
-      $(`#logs-${runtimeId}`).remove();
-      jobType = jobType == "Workflow" ? "workflow" : "service";
-      showResultsPanel(job.id, job.name, job.type, runtime);
+      setTimeout(() => refreshLogs(job, runtime, displayResults), 1500);
+    } else if (displayResults) {
+      jobType = job.type == "Workflow" ? "workflow" : "service";
+      showResultsPanel(job.id, job.name, jobType, runtime);
     }
   });
 }
 
 // eslint-disable-next-line
 function showLogsPanel(job, runtime) {
-  createPanel(`logs`, `Logs - ${job.name}`, job.id, function() {
+  createPanel("logs", `Logs - ${job.name}`, job.id, function() {
     configureLogsCallbacks(job, runtime);
   });
 }
 
 // eslint-disable-next-line
 function configureLogsCallbacks(job, runtime) {
+  $(`#filter-${job.id}`).on('input', function() {
+    refreshLogs(job, runtime, false);
+  });
   if (!runtime) {
+    getRuntimes("logs", job.id);
     $(`#runtime-${job.id}`).on("change", function() {
-      getRuntimes("logs", job.id);
+      refreshLogs(job, this.value, false);
     });
   } else {
+    $(`#runtime-${job.id}`)
+      .append(
+      `<option value='${runtime}'>${runtime}</option>`
+    )
+      .val(runtime)
+      .selectpicker("refresh");
     refreshLogs(job, runtime, true);
   }
 }

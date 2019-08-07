@@ -135,11 +135,13 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, runtime: str) -> dict:
-        run = fetch("Run", allow_none=True, runtime=runtime)
+    def get_job_logs(self, **kwargs) -> dict:
+        print(kwargs)
+        run = fetch("Run", allow_none=True, runtime=kwargs["runtime"])
         result = run.get_result() if run else None
-        logs = result["logs"] if result else self.run_logs.get(runtime, [])
-        return {"logs": "\n".join(logs), "refresh": not bool(result)}
+        logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])
+        filtered_logs = (log for log in logs if kwargs["filter"] in log)
+        return {"logs": "\n".join(filtered_logs), "refresh": not bool(result)}
 
     def get_runtimes(self, type: str, id: int) -> list:
         if type == "device":

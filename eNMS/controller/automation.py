@@ -148,7 +148,7 @@ class AutomationController(BaseController):
             runs = [result.run for result in results]
         else:
             runs = fetch("Run", allow_none=True, all_matches=True, job_id=id)
-        return sorted(set((run.runtime, run.runtime) for run in runs))
+        return sorted(set((run.runtime, run.name) for run in runs))
 
     def get_workflow_device_list(self, id: int, **kw: Any) -> dict:
         comp = "_compare" if kw["compare"] else ""

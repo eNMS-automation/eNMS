@@ -1,5 +1,6 @@
 from collections import defaultdict
 from copy import deepcopy
+from flask_login import current_user
 from git import Repo
 from git.exc import GitCommandError
 from json import loads
@@ -75,6 +76,7 @@ class Run(AbstractBase):
     __tablename__ = type = "Run"
     private = True
     id = Column(Integer, primary_key=True)
+    creator = Column(String(SMALL_STRING_LENGTH), default="admin")
     properties = Column(MutableDict.as_mutable(PickleType), default={})
     success = Column(Boolean, default=False)
     status = Column(String(SMALL_STRING_LENGTH), default="Running")
@@ -95,12 +97,13 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs: Any) -> None:
         self.runtime = kwargs.get("runtime") or controller.get_time()
+        self.creator = getattr(current_user, "name", "admin")
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
 
     def __repr__(self) -> str:
-        return f"{self.runtime} ({self.job_name})"
+        return f"{self.runtime} ({self.job_name} by {self.creator})"
 
     def __getitem__(self, key: Any) -> Any:
         if key in self.properties:

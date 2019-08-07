@@ -346,7 +346,6 @@ function clearResults(id) {
 // eslint-disable-next-line
 function refreshLogs(job, runtime, displayResults) {
   fCall("/get_job_logs", `#logs-form-${job.id}`, function(result) {
-    console.log(result, $(`#log-${job.id}`).length)
     $(`#log-${job.id}`).text(result.logs);
     if (result.refresh) {
       setTimeout(() => refreshLogs(job, runtime, displayResults), 1500);
@@ -358,9 +357,19 @@ function refreshLogs(job, runtime, displayResults) {
 }
 
 // eslint-disable-next-line
-function showLogsPanel(job, runtime) {
+function showLogsPanel(job, runtime, displayResults) {
   createPanel("logs", `Logs - ${job.name}`, job.id, function() {
     configureLogsCallbacks(job, runtime);
+    if (!runtime) {
+      getRuntimes("logs", job.id);
+    } else {
+      $(`#runtime-${job.id}`)
+        .append(`<option value='${runtime}'>${runtime}</option>`)
+        .val(runtime)
+        .selectpicker("refresh");
+      $(`#runtime-div-${job.id}`).hide();
+      refreshLogs(job, runtime, displayResults);
+    }
   });
 }
 
@@ -370,18 +379,9 @@ function configureLogsCallbacks(job, runtime) {
     refreshLogs(job, runtime, false);
   });
   if (!runtime) {
-    getRuntimes("logs", job.id);
     $(`#runtime-${job.id}`).on("change", function() {
       refreshLogs(job, this.value, false);
     });
-  } else {
-    $(`#runtime-${job.id}`)
-      .append(
-      `<option value='${runtime}'>${runtime}</option>`
-    )
-      .val(runtime)
-      .selectpicker("refresh");
-    refreshLogs(job, runtime, true);
   }
 }
 
@@ -400,7 +400,7 @@ function parametrizedRun(type, id) {
 }
 
 function runLogic(job) {
-  showLogsPanel(job, job.runtime);
+  showLogsPanel(job, job.runtime, true);
   alertify.notify(`Job '${job.name}' started.`, "success", 5);
   if (page == "workflow_builder") {
     if (job.type == "Workflow") {

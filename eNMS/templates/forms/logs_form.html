@@ -1,0 +1,17 @@
+<form
+  id="logs-form"
+  data-parsley-validate
+  class="form-horizontal form-label-left add-id"
+  method="post"
+>
+  {{ form.csrf_token() }} {{ form.form_type() }}
+  <div class="modal-body">
+    {{ form.runtime(class="form-control add-id") }}
+    <hr>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div id="display_logs" class="add-id" style="height: 600px;"></div>
+      </div>
+    </div>
+  </div>
+</form>

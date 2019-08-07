@@ -47,7 +47,7 @@ class DatabaseBackupService(Service):
             password=device.password,
             look_for_keys=False,
         )
-        destination = f"{run.sub(run['destination_path'], locals())}/backup_{now}.tgz"
+        destination = f"{run.sub(run.destination_path, locals())}/backup_{now}.tgz"
         run.transfer_file(ssh_client, [(source, destination)])
         ssh_client.close()
         if run.delete_folder:

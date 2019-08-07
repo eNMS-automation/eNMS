@@ -71,7 +71,7 @@ class NetmikoBackupService(Service):
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
         Session.commit()
-        return {"success": True, "result": f"Command: {run['configuration_command']}"}
+        return {"success": True, "result": f"Command: {run.configuration_command}"}
 
 
 class NetmikoBackupForm(ServiceForm, NetmikoForm):

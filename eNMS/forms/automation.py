@@ -109,15 +109,6 @@ class WorkflowForm(JobForm):
         "Payloads to Include", choices=()
     )
 
-    def validate(self) -> bool:
-        valid_form = super().validate()
-        no_start_jobs_error = not self.start_jobs.data
-        if no_start_jobs_error:
-            self.start_jobs.errors.append(
-                "Please select at least one job as start of the workflow."
-            )
-        return valid_form and not no_start_jobs_error
-
 
 class ResultsForm(BaseForm):
     template = "results"

@@ -657,10 +657,10 @@ class Workflow(Job):
 
     def __init__(self, **kwargs: Any) -> None:
         start, end = fetch("Service", name="Start"), fetch("Service", name="End")
-        default = [start, end]
-        self.jobs.extend(default)
+        self.jobs.extend([start, end])
         super().__init__(**kwargs)
-        self.start_jobs = [start]
+        if not kwargs.get("start_jobs"):
+            self.start_jobs = [start]
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 

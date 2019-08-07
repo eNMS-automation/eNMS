@@ -190,3 +190,8 @@ or a variable from the "custom configuration" available as a dictionary called "
 - Run status automatically switched from "Running" to "Aborted" upon reloading the app.
 
 - Removed "eNMS" from database migration form.
+
+- napalm getter service: default dict match mode becomes inclusion.
+
+- Renaming 'History' => 'Job Run Status'?
+

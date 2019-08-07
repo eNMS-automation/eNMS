@@ -42,11 +42,11 @@ class NetmikoFileTransferService(Service):
             netmiko_connection,
             source_file=source,
             dest_file=destination,
-            file_system=run["file_system"],
-            direction=run["direction"],
-            overwrite_file=run["overwrite_file"],
-            disable_md5=run["disable_md5"],
-            inline_transfer=run["inline_transfer"],
+            file_system=run.file_system,
+            direction=run.direction,
+            overwrite_file=run.overwrite_file,
+            disable_md5=run.disable_md5,
+            inline_transfer=run.inline_transfer,
         )
         return {"success": True, "result": transfer_dict}
 

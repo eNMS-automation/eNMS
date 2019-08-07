@@ -70,25 +70,25 @@ class RestCallService(Service):
     __mapper_args__ = {"polymorphic_identity": "RestCallService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        rest_url = run.sub(run["rest_url"], locals())
+        rest_url = run.sub(run.rest_url, locals())
         run.log("info", f"Sending REST call to {rest_url}")
         kwargs = {
             p: run.sub(getattr(self, p), locals())
             for p in ("headers", "params", "timeout")
         }
-        if run["call_type"] in ("GET", "DELETE"):
-            response = self.request_dict[run["call_type"]](
+        if run.call_type in ("GET", "DELETE"):
+            response = self.request_dict[run.call_type](
                 rest_url,
                 auth=HTTPBasicAuth(self.username, self.password),
-                verify=run["verify_ssl_certificate"],
+                verify=run.verify_ssl_certificate,
                 **kwargs,
             )
         else:
-            response = self.request_dict[run["call_type"]](
+            response = self.request_dict[run.call_type](
                 rest_url,
-                data=dumps(run.sub(run["payload"], locals())),
+                data=dumps(run.sub(run.payload, locals())),
                 auth=HTTPBasicAuth(self.username, self.password),
-                verify=run["verify_ssl_certificate"],
+                verify=run.verify_ssl_certificate,
                 **kwargs,
             )
         if response.status_code not in range(200, 300):
@@ -102,16 +102,16 @@ class RestCallService(Service):
             return result
         result = run.convert_result(response.text)
         match = (
-            run.sub(run["content_match"], locals())
-            if run["validation_method"] == "text"
-            else run.sub(run["dict_match"], locals())
+            run.sub(run.content_match, locals())
+            if run.validation_method == "text"
+            else run.sub(run.dict_match, locals())
         )
         return {
             "url": rest_url,
             "match": match,
             "status_code": response.status_code,
             "headers": dict(response.headers),
-            "negative_logic": run["negative_logic"],
+            "negative_logic": run.negative_logic,
             "result": result,
             "success": run.match_content(result, match),
         }

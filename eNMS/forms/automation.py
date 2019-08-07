@@ -110,6 +110,12 @@ class WorkflowForm(JobForm):
     )
 
 
+class LogsForm(BaseForm):
+    template = "logs"
+    form_type = HiddenField(default="logs")
+    runtime = NoValidationSelectField("Version", choices=())
+
+
 class ResultsForm(BaseForm):
     template = "results"
     form_type = HiddenField(default="results")

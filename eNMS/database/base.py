@@ -45,6 +45,10 @@ class AbstractBase(Base):
         else:
             super().__setattr__(property, value)
 
+    @property
+    def row_properties(self) -> dict:
+        return {p: getattr(self, p) for p in ("id", "name", "type")}
+
     def update(self, **kwargs: Any) -> None:
         relation = relationships[self.__tablename__]
         for property, value in kwargs.items():

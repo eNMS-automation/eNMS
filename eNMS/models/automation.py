@@ -619,6 +619,9 @@ class Service(Job):
         return [
             "Running" if controller.job_db[self.id]["runs"] else "Idle",
             f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogsPanel({self.get_properties()})">
+            </i>Logs</a></button>""",
+            f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
@@ -667,6 +670,9 @@ class Workflow(Job):
     def generate_row(self, table: str) -> List[str]:
         return [
             "Running" if controller.job_db[self.id]["runs"] else "Idle",
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showLogsPanel('{self.id}', '{self.name}', '{self.type}')">
+            </i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
             </i>Results</a></button>""",

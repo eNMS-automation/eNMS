@@ -562,7 +562,7 @@ class Service(Job):
             if run.multiprocessing:
                 device_results: dict = {}
                 thread_lock = Lock()
-                processes = min(len(targets), run["max_processes"])
+                processes = min(len(targets), run.max_processes)
                 args = (
                     run.runtime,
                     payload,
@@ -584,13 +584,13 @@ class Service(Job):
     def build_results(self, run: "Run", payload: dict, *other: Any) -> dict:
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         targets: Set = set()
-        if run["has_targets"]:
+        if run.has_targets:
             try:
                 targets = run.compute_devices(payload)
                 results["results"]["devices"] = {}
             except Exception as exc:
                 return {"success": False, "error": str(exc)}
-        for i in range(run["number_of_retries"] + 1):
+        for i in range(run.number_of_retries + 1):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             controller.run_db[run.runtime]["completed"] = 0
             controller.run_db[run.runtime]["failed"] = 0
@@ -608,24 +608,24 @@ class Service(Job):
                     results["success"] = True
                     break
                 else:
-                    if run["number_of_retries"]:
+                    if run.number_of_retries:
                         results[f"Attempt {i + 1}"] = attempt
-                    if i != run["number_of_retries"]:
-                        sleep(run["time_between_retries"])
+                    if i != run.number_of_retries:
+                        sleep(run.time_between_retries)
                     else:
                         for device in targets:
                             results["results"]["devices"][device.name] = attempt[
                                 "devices"
                             ][device.name]
             else:
-                if run["number_of_retries"]:
+                if run.number_of_retries:
                     results[f"Attempts {i + 1}"] = attempt
-                if attempt["success"] or i == run["number_of_retries"]:
+                if attempt["success"] or i == run.number_of_retries:
                     results["results"] = attempt
                     results["success"] = attempt["success"]
                     break
                 else:
-                    sleep(run["time_between_retries"])
+                    sleep(run.time_between_retries)
         return results
 
     def generate_row(self, table: str) -> List[str]:
@@ -712,7 +712,7 @@ class Workflow(Job):
     ) -> Set[Device]:
         if job.type != "Workflow" and not job.has_targets:
             return set()
-        elif run["use_workflow_targets"]:
+        elif run.use_workflow_targets:
             return allowed_devices[job.name]
         else:
             return run.compute_devices(payload)
@@ -750,12 +750,12 @@ class Workflow(Job):
 
     def build_results(self, run: "Run", payload: dict) -> dict:
         controller.run_db[run.runtime].update({"jobs": {}, "edges": {}})
-        jobs: list = list(run["start_jobs"])
+        jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
-        if run["use_workflow_targets"]:
+        if run.use_workflow_targets:
             initial_targets = run.compute_devices(results["results"])
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
@@ -773,7 +773,7 @@ class Workflow(Job):
                 skip_job = controller.eval(job.skip_python_query, run, **locals())
             if skip_job or job.skip:
                 job_results = {"success": "skipped"}
-            elif run["use_workflow_targets"] and job.python_query:
+            elif run.use_workflow_targets and job.python_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:
@@ -811,7 +811,7 @@ class Workflow(Job):
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 job_results = job_run.run(payload)
             controller.run_db[run.runtime]["jobs"][job.id] = job_results["success"]
-            if run["use_workflow_targets"]:
+            if run.use_workflow_targets:
                 successors = self.workflow_targets_processing(
                     run.runtime, allowed_devices, job, job_results
                 )
@@ -829,10 +829,10 @@ class Workflow(Job):
             for successor in successors:
                 if successor not in visited:
                     jobs.append(successor)
-                if not run["use_workflow_targets"] and successor == self.jobs[1]:
+                if not run.use_workflow_targets and successor == self.jobs[1]:
                     results["success"] = True
             sleep(job.waiting_time)
-        if run["use_workflow_targets"]:
+        if run.use_workflow_targets:
             end_devices = allowed_devices["End"]
             results["devices"] = {
                 device.name: {"success": device in end_devices}

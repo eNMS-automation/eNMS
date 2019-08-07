@@ -46,27 +46,27 @@ class NetmikoPromptsService(Service):
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
-        command = run.sub(run["command"], locals())
+        command = run.sub(run.command, locals())
         run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")
         commands = [command]
         results = {"commands": commands}
         result = netmiko_connection.send_command_timing(
-            command, delay_factor=run["delay_factor"]
+            command, delay_factor=run.delay_factor
         )
-        response1 = run.sub(run["response1"], locals())
-        confirmation1 = run.sub(run["confirmation1"], locals())
+        response1 = run.sub(run.response1, locals())
+        confirmation1 = run.sub(run.confirmation1, locals())
         results[command] = {"result": result, "match": confirmation1}
         if confirmation1 not in result:
             results.update({"success": False, "result": result, "match": confirmation1})
             return results
         elif response1:
             result = netmiko_connection.send_command_timing(
-                response1, delay_factor=run["delay_factor"]
+                response1, delay_factor=run.delay_factor
             )
-            confirmation2 = run.sub(run["confirmation2"], locals())
+            confirmation2 = run.sub(run.confirmation2, locals())
             commands.append(confirmation2)
             results[response1] = {"result": result, "match": confirmation2}
-            response2 = run.sub(run["response2"], locals())
+            response2 = run.sub(run.response2, locals())
             if confirmation2 not in result:
                 results.update(
                     {"success": False, "result": result, "match": confirmation2}
@@ -74,12 +74,12 @@ class NetmikoPromptsService(Service):
                 return results
             elif response2:
                 result = netmiko_connection.send_command_timing(
-                    response2, delay_factor=run["delay_factor"]
+                    response2, delay_factor=run.delay_factor
                 )
-                confirmation3 = run.sub(run["confirmation3"], locals())
+                confirmation3 = run.sub(run.confirmation3, locals())
                 commands.append(confirmation3)
                 results[response2] = {"result": result, "match": confirmation3}
-                response3 = run.sub(run["response3"], locals())
+                response3 = run.sub(run.response3, locals())
                 if confirmation3 not in result:
                     results.update(
                         {"success": False, "result": result, "match": confirmation3}
@@ -87,15 +87,15 @@ class NetmikoPromptsService(Service):
                     return results
                 elif response3:
                     result = netmiko_connection.send_command_timing(
-                        response3, delay_factor=run["delay_factor"]
+                        response3, delay_factor=run.delay_factor
                     )
-        match = run.sub(run["content_match"], locals())
+        match = run.sub(run.content_match, locals())
         return {
             "commands": commands,
             "expected": match
-            if run["validation_method"] == "text"
-            else run["dict_match"],
-            "negative_logic": run["negative_logic"],
+            if run.validation_method == "text"
+            else run.dict_match,
+            "negative_logic": run.negative_logic,
             "result": result,
             "success": run.match_content(result, match),
         }

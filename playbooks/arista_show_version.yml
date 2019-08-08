@@ -1,0 +1,25 @@
+    ---
+    - name: EOS Show Commands
+      hosts: all
+      gather_facts: false
+      connection: local
+
+      vars:
+        cli:
+          host: "{{ inventory_hostname }}"
+          username: "admin"
+          password: "admin"
+          authorize: true
+          transport: cli
+
+      tasks:
+        - name: eos show commands
+          eos_command:
+            commands:
+              - show version
+            provider: "{{ cli }}"
+          register: output
+
+        - name: show output
+          debug:
+            var: output

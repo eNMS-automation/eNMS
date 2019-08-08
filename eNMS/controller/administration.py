@@ -12,7 +12,6 @@ from requests import get as http_get
 from ruamel import yaml
 from tarfile import open as open_tar
 from typing import Any, Tuple, Union
-from yaml import dump, load, BaseLoader
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Base, Session
@@ -79,7 +78,7 @@ class AdministrationController(BaseController):
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
-                dump(export(cls_name), migration_file, default_flow_style=False)
+                yaml.dump(export(cls_name), migration_file)
 
     def objectify(self, model: str, obj: dict) -> dict:
         for property, relation in relationships[model].items():
@@ -148,7 +147,7 @@ class AdministrationController(BaseController):
             if file.name == ".gitkeep" or file.name not in jobs:
                 continue
             with open(file.path, "r") as instance_file:
-                instance = load(instance_file, Loader=BaseLoader)
+                instance = yaml.safe_load(instance_file)
                 model = instance.pop("type")
                 factory(model, **self.objectify(model, instance))
         Session.commit()
@@ -162,7 +161,7 @@ class AdministrationController(BaseController):
                 path_job = path / "workflows" / workflow_name / instance_type
                 for file in scandir(path_job):
                     with open(path_job / file.name, "r") as instance_file:
-                        instance = load(instance_file, Loader=BaseLoader)
+                        instance = yaml.safe_load(instance_file)
                         model = instance.pop("type")
                         factory(model, **self.objectify(model, instance))
                 Session.commit()
@@ -182,17 +181,17 @@ class AdministrationController(BaseController):
                         sub_job_as_dict.pop(relation)
                     if sub_job.type == "Workflow":
                         sub_job_as_dict["type"] = "Workflow"
-                    dump(sub_job_as_dict, file)
+                    yaml.dump(sub_job_as_dict, file)
             for edge in job.edges:
                 name = self.strip_all(f"{edge.workflow}{edge.source}{edge.destination}")
                 with open(path / "edges" / f"{name}.yaml", "w") as file:
                     edge = {**edge.to_dict(export=True), "type": "WorkflowEdge"}
-                    dump(edge, file)
+                    yaml.dump(edge, file)
             with open(path / "workflow" / f"{job.filename}.yaml", "w") as file:
                 job_as_dict = job.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)
-                dump({**job_as_dict, "type": "Workflow"}, file)
+                yaml.dump({**job_as_dict, "type": "Workflow"}, file)
             with open_tar(f"{path}.tgz", "w:gz") as tar:
                 tar.add(path, arcname=job.filename)
             rmtree(path)
@@ -202,7 +201,7 @@ class AdministrationController(BaseController):
                 job_as_dict = job.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)
-                dump(job_as_dict, file)
+                yaml.dump(job_as_dict, file)
 
     def get_exported_jobs(self) -> list:
         jobs_path = self.path / "projects" / "exported_jobs"

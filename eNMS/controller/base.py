@@ -12,12 +12,13 @@ from hvac import Client as VaultClient
 from importlib import import_module
 from importlib.abc import Loader
 from importlib.util import spec_from_file_location, module_from_spec
-from json import load as json_load
+from json import load
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
 from os import environ, remove, scandir
 from pathlib import Path
+from ruamel import yaml
 from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
@@ -27,7 +28,6 @@ from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, List, Optional, Set, Union
 from werkzeug.datastructures import ImmutableMultiDict
-from yaml import load
 
 from eNMS.database import DIALECT, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
@@ -242,7 +242,7 @@ class BaseController:
 
     def fetch_version(self) -> None:
         with open(self.path / "package.json") as package_file:
-            self.version = json_load(package_file)["version"]
+            self.version = load(package_file)["version"]
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):
@@ -277,7 +277,7 @@ class BaseController:
             return {}
         else:
             with open(filepath, "r") as config:
-                return json_load(config)
+                return load(config)
 
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")
@@ -285,7 +285,7 @@ class BaseController:
             custom_properties: dict = {}
         else:
             with open(filepath, "r") as properties:
-                custom_properties = load(properties)
+                custom_properties = yaml.safe_load(properties)
         property_names.update(
             {k: v["pretty_name"] for k, v in custom_properties.items()}
         )

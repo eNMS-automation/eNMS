@@ -20,42 +20,18 @@
   operating_system: ''
   pools: []
   positions:
-    Configuration Management Workflow:
-    - '-300'
-    - '0'
-    Iteration Services Test Workflow:
-    - '-359'
-    - '-163'
-    Napalm getters and match mechanism workflow:
-    - '-424'
-    - '-10'
-    Napalm_VRF_workflow:
-    - '-200'
-    - '0'
-    Netmiko prompts:
-    - '-279'
-    - '-158'
-    Netmiko_VRF_workflow:
-    - '-200'
-    - '0'
-    Workflow with separate failure - success path:
-    - '-118'
-    - '-3'
-    Workflow_of_workflows:
-    - '-300'
-    - '0'
-    payload_extraction_validation_worflow:
-    - '-200'
-    - '0'
-    payload_transfer_workflow:
-    - '-200'
-    - '0'
-    'python Workflow: payload editor and pool helper':
-    - '-326'
-    - '45'
-    python_query_workflow:
-    - '-164'
-    - '15'
+    Configuration Management Workflow: ['-300', '0']
+    Iteration Services Test Workflow: ['-359', '-163']
+    Napalm getters and match mechanism workflow: ['-424', '-10']
+    Napalm_VRF_workflow: ['-200', '0']
+    Netmiko prompts: ['-279', '-158']
+    Netmiko_VRF_workflow: ['-200', '0']
+    Workflow with separate failure - success path: ['-118', '-3']
+    Workflow_of_workflows: ['-300', '0']
+    payload_extraction_validation_worflow: ['-200', '0']
+    payload_transfer_workflow: ['-200', '0']
+    'python Workflow: payload editor and pool helper': ['-326', '45']
+    python_query_workflow: ['-164', '15']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -92,42 +68,18 @@
   operating_system: ''
   pools: []
   positions:
-    Configuration Management Workflow:
-    - '200'
-    - '0'
-    Iteration Services Test Workflow:
-    - '-9'
-    - '294'
-    Napalm getters and match mechanism workflow:
-    - '677'
-    - '-21'
-    Napalm_VRF_workflow:
-    - '200'
-    - '0'
-    Netmiko prompts:
-    - '634'
-    - '187'
-    Netmiko_VRF_workflow:
-    - '200'
-    - '0'
-    Workflow with separate failure - success path:
-    - '500'
-    - '0'
-    Workflow_of_workflows:
-    - '300'
-    - '0'
-    payload_extraction_validation_worflow:
-    - '200'
-    - '0'
-    payload_transfer_workflow:
-    - '500'
-    - '0'
-    'python Workflow: payload editor and pool helper':
-    - '530'
-    - '155'
-    python_query_workflow:
-    - '651'
-    - '20'
+    Configuration Management Workflow: ['200', '0']
+    Iteration Services Test Workflow: ['-9', '294']
+    Napalm getters and match mechanism workflow: ['677', '-21']
+    Napalm_VRF_workflow: ['200', '0']
+    Netmiko prompts: ['634', '187']
+    Netmiko_VRF_workflow: ['200', '0']
+    Workflow with separate failure - success path: ['500', '0']
+    Workflow_of_workflows: ['300', '0']
+    payload_extraction_validation_worflow: ['200', '0']
+    payload_transfer_workflow: ['500', '0']
+    'python Workflow: payload editor and pool helper': ['530', '155']
+    python_query_workflow: ['651', '20']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -308,9 +260,7 @@
   operating_system: ''
   pools: []
   positions:
-    Configuration Management Workflow:
-    - '0'
-    - '300'
+    Configuration Management Workflow: ['0', '300']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -347,9 +297,7 @@
   operating_system: ''
   pools: []
   positions:
-    Configuration Management Workflow:
-    - '0'
-    - '-200'
+    Configuration Management Workflow: ['0', '-200']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -366,9 +314,7 @@
   waiting_time: 0
 - a_dict: {}
   a_float: 5.0
-  a_list:
-  - a
-  - b
+  a_list: [a, b]
   an_integer: 10
   boolean1: true
   boolean2: false
@@ -378,8 +324,7 @@
   custom_integer: 0
   custom_username: ''
   description: Example
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: true
   events: []
   exclusion_field: d
@@ -423,8 +368,7 @@
   credentials: device
   custom_username: ''
   description: Configure BGP Peering with Napalm
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -466,8 +410,7 @@
   custom_username: ''
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
-  devices:
-  - Aserver
+  devices: [Aserver]
   direction: get
   display_only_failed_nodes: true
   events: []
@@ -512,8 +455,7 @@
   delete_folder: true
   description: Test the log backup service
   destination_path: /media/sf_VM/eNMS/tests/file_transfer
-  devices:
-  - Aserver
+  devices: [Aserver]
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -550,8 +492,7 @@
   credentials: device
   custom_username: ''
   description: Test Configuration Management
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: true
   driver: ''
   events: []
@@ -593,8 +534,7 @@
   credentials: device
   custom_username: ''
   description: Test Configuration Management
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: true
   driver: ''
   events: []
@@ -637,9 +577,7 @@
   custom_username: ''
   delay_factor: 1.0
   description: Create a VRF "test" with Netmiko
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   display_only_failed_nodes: true
   driver: arista_eos
   events: []
@@ -659,9 +597,7 @@
   operating_system: eos
   pools: []
   positions:
-    Netmiko_VRF_workflow:
-    - '0'
-    - '-150'
+    Netmiko_VRF_workflow: ['0', '-150']
   privileged_mode: true
   push_to_git: false
   python_query: ''
@@ -693,9 +629,7 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is configured
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -717,24 +651,12 @@
   operating_system: eos
   pools: []
   positions:
-    Iteration Services Test Workflow:
-    - '147'
-    - '-14'
-    Napalm_VRF_workflow:
-    - '0'
-    - '-50'
-    Netmiko_VRF_workflow:
-    - '0'
-    - '-50'
-    Workflow with separate failure - success path:
-    - '84'
-    - '-3'
-    'python Workflow: payload editor and pool helper':
-    - '355'
-    - '-25'
-    python_query_workflow:
-    - '414'
-    - '-154'
+    Iteration Services Test Workflow: ['147', '-14']
+    Napalm_VRF_workflow: ['0', '-50']
+    Netmiko_VRF_workflow: ['0', '-50']
+    Workflow with separate failure - success path: ['84', '-3']
+    'python Workflow: payload editor and pool helper': ['355', '-25']
+    python_query_workflow: ['414', '-154']
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -764,9 +686,7 @@
   custom_username: ''
   delay_factor: 1.0
   description: Delete VRF "test"
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   display_only_failed_nodes: true
   driver: arista_eos
   events: []
@@ -786,12 +706,8 @@
   operating_system: eos
   pools: []
   positions:
-    Napalm_VRF_workflow:
-    - '0'
-    - '50'
-    Netmiko_VRF_workflow:
-    - '0'
-    - '50'
+    Napalm_VRF_workflow: ['0', '50']
+    Netmiko_VRF_workflow: ['0', '50']
   privileged_mode: true
   push_to_git: false
   python_query: ''
@@ -823,9 +739,7 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is NOT configured
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -847,18 +761,10 @@
   operating_system: eos
   pools: []
   positions:
-    Napalm_VRF_workflow:
-    - '0'
-    - '150'
-    Netmiko_VRF_workflow:
-    - '0'
-    - '150'
-    Workflow with separate failure - success path:
-    - '52'
-    - '-2'
-    python_query_workflow:
-    - '337'
-    - '-145'
+    Napalm_VRF_workflow: ['0', '150']
+    Netmiko_VRF_workflow: ['0', '150']
+    Workflow with separate failure - success path: ['52', '-2']
+    python_query_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -886,9 +792,7 @@
   credentials: device
   custom_username: ''
   description: Create a VRF "test" with Napalm
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   display_only_failed_nodes: true
   driver: eos
   events: []
@@ -906,9 +810,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm_VRF_workflow:
-    - '0'
-    - '-150'
+    Napalm_VRF_workflow: ['0', '-150']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -952,25 +854,15 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  params:
-    verify: 'false'
+  params: {verify: 'false'}
   payload:
     a: b
-    c:
-    - '1'
-    - '2'
-    - '3'
+    c: ['1', '2', '3']
   pools: []
   positions:
-    Workflow with separate failure - success path:
-    - '232'
-    - '134'
-    payload_transfer_workflow:
-    - '-50'
-    - '0'
-    'python Workflow: payload editor and pool helper':
-    - '225'
-    - '-223'
+    Workflow with separate failure - success path: ['232', '134']
+    payload_transfer_workflow: ['-50', '0']
+    'python Workflow: payload editor and pool helper': ['225', '-223']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -995,15 +887,12 @@
   credentials: device
   custom_username: ''
   description: 'Getter: get_facts'
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
   events: []
-  getters:
-  - get_facts
+  getters: [get_facts]
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1019,15 +908,9 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow with separate failure - success path:
-    - '214'
-    - '-132'
-    payload_transfer_workflow:
-    - '-50'
-    - '-100'
-    'python Workflow: payload editor and pool helper':
-    - '39'
-    - '-32'
+    Workflow with separate failure - success path: ['214', '-132']
+    payload_transfer_workflow: ['-50', '-100']
+    'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1049,15 +932,12 @@
   credentials: device
   custom_username: ''
   description: 'Getter: get_interfaces'
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
   events: []
-  getters:
-  - get_interfaces
+  getters: [get_interfaces]
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1073,12 +953,8 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow_of_workflows:
-    - '0'
-    - '0'
-    payload_transfer_workflow:
-    - '150'
-    - '100'
+    Workflow_of_workflows: ['0', '0']
+    payload_transfer_workflow: ['150', '100']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1100,15 +976,12 @@
   credentials: device
   custom_username: ''
   description: 'Getter: get_interfaces_ip'
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
   events: []
-  getters:
-  - get_interfaces_ip
+  getters: [get_interfaces_ip]
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1124,9 +997,7 @@
   optional_args: {}
   pools: []
   positions:
-    payload_transfer_workflow:
-    - '150'
-    - '-100'
+    payload_transfer_workflow: ['150', '-100']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1148,15 +1019,12 @@
   credentials: device
   custom_username: ''
   description: 'Getter: get_config'
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: eos
   events: []
-  getters:
-  - get_config
+  getters: [get_config]
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
@@ -1172,9 +1040,7 @@
   optional_args: {}
   pools: []
   positions:
-    payload_transfer_workflow:
-    - '300'
-    - '-100'
+    payload_transfer_workflow: ['300', '-100']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1196,9 +1062,7 @@
   credentials: device
   custom_username: ''
   description: Process Payload in example workflow
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
   has_targets: true
@@ -1215,9 +1079,7 @@
   operating_system: ''
   pools: []
   positions:
-    payload_transfer_workflow:
-    - '300'
-    - '0'
+    payload_transfer_workflow: ['300', '0']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1254,9 +1116,7 @@
   operating_system: ''
   pools: []
   positions:
-    Iteration Services Test Workflow:
-    - '3'
-    - '-144'
+    Iteration Services Test Workflow: ['3', '-144']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1308,9 +1168,7 @@
   operating_system: eos
   pools: []
   positions:
-    Iteration Services Test Workflow:
-    - '-336'
-    - '11'
+    Iteration Services Test Workflow: ['-336', '11']
   privileged_mode: false
   push_to_git: false
   python_query: payload['variables']['devices']
@@ -1343,9 +1201,7 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -1399,8 +1255,7 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Show IP route
-  devices:
-  - Washington
+  devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -1422,9 +1277,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow:
-    - '0'
-    - '-150'
+    payload_extraction_validation_worflow: ['0', '-150']
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1478,9 +1331,7 @@
   operating_system: ''
   pools: []
   positions:
-    payload_extraction_validation_worflow:
-    - '0'
-    - '-50'
+    payload_extraction_validation_worflow: ['0', '-50']
   push_to_git: false
   python_query: ''
   query1: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["success"]
@@ -1512,10 +1363,7 @@
   description: Payload Validate Dict
   devices: []
   dict_match:
-    value:
-    - 1.1.1.1
-    - 2.2.2.2
-    - 3.3.3.3
+    value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: true
   events: []
   has_targets: true
@@ -1533,9 +1381,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow:
-    - '0'
-    - '50'
+    payload_extraction_validation_worflow: ['0', '50']
   push_to_git: false
   python_query: ''
   query: payload["payload_extraction"]["results"]["devices"][device.name]["result"]["regex_variable"]
@@ -1580,9 +1426,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow:
-    - '0'
-    - '150'
+    payload_extraction_validation_worflow: ['0', '150']
   push_to_git: false
   python_query: ''
   query: payload["payload_extraction"]["results"]["devices"][device.name]["result"]["textfsm_variable"]["value"][0][1]
@@ -1622,9 +1466,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm_VRF_workflow:
-    - '3'
-    - '47'
+    Napalm_VRF_workflow: ['3', '47']
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1674,12 +1516,8 @@
   operating_system: ''
   pools: []
   positions:
-    Napalm_VRF_workflow:
-    - '10'
-    - '-32'
-    'python Workflow: payload editor and pool helper':
-    - '266'
-    - '161'
+    Napalm_VRF_workflow: ['10', '-32']
+    'python Workflow: payload editor and pool helper': ['266', '161']
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1734,12 +1572,8 @@
   operating_system: ''
   pools: []
   positions:
-    Napalm_VRF_workflow:
-    - '9'
-    - '139'
-    python_query_workflow:
-    - '245'
-    - '32'
+    Napalm_VRF_workflow: ['9', '139']
+    python_query_workflow: ['245', '32']
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1794,9 +1628,7 @@
   operating_system: ''
   pools: []
   positions:
-    python_query_workflow:
-    - '-5'
-    - '-147'
+    python_query_workflow: ['-5', '-147']
   privileged_mode: false
   push_to_git: false
   python_query: get_var("test", device=workflow_device.name)
@@ -1831,8 +1663,7 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
-  devices:
-  - Washington
+  devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -1853,9 +1684,7 @@
   operating_system: ''
   pools: []
   positions:
-    Netmiko prompts:
-    - '22'
-    - '-74'
+    Netmiko prompts: ['22', '-74']
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1912,9 +1741,7 @@
   operating_system: ''
   pools: []
   positions:
-    Netmiko prompts:
-    - '307'
-    - '43'
+    Netmiko prompts: ['307', '43']
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1958,9 +1785,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '-158'
-    - '-272'
+    'python Workflow: payload editor and pool helper': ['-158', '-272']
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -1983,9 +1808,7 @@
   credentials: device
   custom_username: ''
   description: ''
-  devices:
-  - Washington
-  - Chicago
+  devices: [Washington, Chicago]
   display_only_failed_nodes: false
   events: []
   has_targets: true
@@ -2002,9 +1825,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '-159'
-    - '148'
+    'python Workflow: payload editor and pool helper': ['-159', '148']
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2059,9 +1880,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '35'
-    - '-232'
+    'python Workflow: payload editor and pool helper': ['35', '-232']
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_device", section="pools", device=workflow_device.name)
@@ -2116,9 +1935,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '47'
-    - '160'
+    'python Workflow: payload editor and pool helper': ['47', '160']
   privileged_mode: false
   push_to_git: false
   python_query: get_var("iteration_simple", section="pools")
@@ -2173,9 +1990,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper':
-    - '328'
-    - '91'
+    'python Workflow: payload editor and pool helper': ['328', '91']
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -2203,13 +2018,11 @@
   description: ''
   devices: []
   dict_match:
-    is_alive:
-      is_alive: true
+    is_alive: {is_alive: true}
   display_only_failed_nodes: false
   driver: eos
   events: []
-  getters:
-  - is_alive
+  getters: [is_alive]
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
@@ -2225,9 +2038,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow:
-    - '-183'
-    - '-254'
+    Napalm getters and match mechanism workflow: ['-183', '-254']
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2250,14 +2061,11 @@
   custom_username: ''
   description: ''
   devices: []
-  dict_match:
-    fqdn: localhost
-    vendor: Arista
+  dict_match: {fqdn: localhost, vendor: Arista}
   display_only_failed_nodes: false
   driver: eos
   events: []
-  getters:
-  - get_facts
+  getters: [get_facts]
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
@@ -2273,9 +2081,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow:
-    - '-136'
-    - '87'
+    Napalm getters and match mechanism workflow: ['-136', '87']
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2299,13 +2105,11 @@
   description: ''
   devices: []
   dict_match:
-    '{{device.ip_address}}':
-      prefix_length: 24
+    '{{device.ip_address}}': {prefix_length: 24}
   display_only_failed_nodes: false
   driver: eos
   events: []
-  getters:
-  - get_interfaces_ip
+  getters: [get_interfaces_ip]
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
@@ -2321,9 +2125,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow:
-    - '617'
-    - '-237'
+    Napalm getters and match mechanism workflow: ['617', '-237']
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2350,8 +2152,7 @@
   display_only_failed_nodes: false
   driver: eos
   events: []
-  getters:
-  - get_mac_address_table
+  getters: [get_mac_address_table]
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
@@ -2367,9 +2168,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow:
-    - '519'
-    - '135'
+    Napalm getters and match mechanism workflow: ['519', '135']
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2392,15 +2191,11 @@
   custom_username: ''
   description: ''
   devices: []
-  dict_match:
-    fqdn: localhost
-    uptime: '666'
-    vendor: Arista
+  dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
   display_only_failed_nodes: false
   driver: eos
   events: []
-  getters:
-  - get_facts
+  getters: [get_facts]
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
@@ -2416,9 +2211,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow:
-    - '125'
-    - '-236'
+    Napalm getters and match mechanism workflow: ['125', '-236']
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2441,9 +2234,7 @@
   credentials: device
   custom_username: ''
   description: Test the iteration mechanism (Iteration values)
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
   has_targets: true
@@ -2463,9 +2254,7 @@
   origin_of_values: user_provided_values
   pools: []
   positions:
-    Iteration Services Test Workflow:
-    - '-342'
-    - '2'
+    Iteration Services Test Workflow: ['-342', '2']
   push_to_git: false
   python_query: ''
   python_query_values: ''
@@ -2480,9 +2269,7 @@
   time_between_retries: 10
   type: IterationService
   user_provided_values:
-    all:
-    - Loopback11
-    - Loopback15
+    all: [Loopback11, Loopback15]
   variable_name: value
   vendor: ''
   waiting_time: 0
@@ -2512,9 +2299,7 @@
   origin_of_values: python_query
   pools: []
   positions:
-    Iteration Services Test Workflow:
-    - '-358'
-    - '192'
+    Iteration Services Test Workflow: ['-358', '192']
   push_to_git: false
   python_query: ''
   python_query_values: get_var('iteration_devices', device=device.name)
@@ -2558,9 +2343,7 @@
   origin_of_values: python_query
   pools: []
   positions:
-    Iteration Services Test Workflow:
-    - '-337'
-    - '233'
+    Iteration Services Test Workflow: ['-337', '233']
   push_to_git: false
   python_query: ''
   python_query_values: payload['netmiko_check_vrf_test']['results']['devices'][device.name]['match']

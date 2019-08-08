@@ -1,364 +1,84 @@
-- color: '#000000 '
-  description: optical fiber 10G
-  destination: Dallas
-  destination_id: 8
-  hidden: false
-  location: ''
-  model: 10G
-  name: link0
-  source: Houston
-  source_id: 15
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 10G
-  destination: Atlanta
-  destination_id: 13
-  hidden: false
-  location: ''
-  model: 10G
-  name: link1
-  source: Jackson
-  source_id: 1
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 10G
-  destination: Washington
-  destination_id: 4
-  hidden: false
-  location: ''
-  model: 10G
-  name: link2
-  source: Baltimore
-  source_id: 16
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 10G
-  destination: Chicago
-  destination_id: 5
-  hidden: false
-  location: ''
-  model: 10G
-  name: link3
-  source: Cleveland
-  source_id: 17
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 10G
-  destination: Columbus
-  destination_id: 18
-  hidden: false
-  location: ''
-  model: 10G
-  name: link4
-  source: Cleveland
-  source_id: 17
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 10G
-  destination: Detroit
-  destination_id: 11
-  hidden: false
-  location: ''
-  model: 10G
-  name: link5
-  source: Cleveland
-  source_id: 17
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 40G
-  destination: Cincinnati
-  destination_id: 19
-  hidden: false
-  location: ''
-  model: 40G
-  name: link6
-  source: Cleveland
-  source_id: 17
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 40G
-  destination: NewYork
-  destination_id: 22
-  hidden: false
-  location: ''
-  model: 40G
-  name: link7
-  source: Cleveland
-  source_id: 17
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 40G
-  destination: SanJose
-  destination_id: 6
-  hidden: false
-  location: ''
-  model: 40G
-  name: link8
-  source: PaloAlto
-  source_id: 2
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 40G
-  destination: NewYork
-  destination_id: 22
-  hidden: false
-  location: ''
-  model: 40G
-  name: link9
-  source: Cambridge
-  source_id: 20
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 40G
-  destination: Chicago
-  destination_id: 5
-  hidden: false
-  location: ''
-  model: 40G
-  name: link10
-  source: Minneapolis
-  source_id: 21
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 40G
-  destination: Philadelphia
-  destination_id: 9
-  hidden: false
-  location: ''
-  model: 40G
-  name: link11
-  source: NewYork
-  source_id: 22
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 40G
-  destination: Washington
-  destination_id: 4
-  hidden: false
-  location: ''
-  model: 40G
-  name: link12
-  source: NewYork
-  source_id: 22
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 40G
-  destination: Dallas
-  destination_id: 8
-  hidden: false
-  location: ''
-  model: 40G
-  name: link13
-  source: Austin
-  source_id: 3
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 100G
-  destination: SanJose
-  destination_id: 6
-  hidden: false
-  location: ''
-  model: 100G
-  name: link14
-  source: Washington
-  source_id: 4
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 100G
-  destination: Richmond
-  destination_id: 12
-  hidden: false
-  location: ''
-  model: 100G
-  name: link15
-  source: Washington
-  source_id: 4
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 100G
-  destination: Atlanta
-  destination_id: 13
-  hidden: false
-  location: ''
-  model: 100G
-  name: link16
-  source: Washington
-  source_id: 4
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 100G
-  destination: Oakland
-  destination_id: 26
-  hidden: false
-  location: ''
-  model: 100G
-  name: link17
-  source: Sacramento
-  source_id: 23
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 100G
-  destination: Boston
-  destination_id: 14
-  hidden: false
-  location: ''
-  model: 100G
-  name: link18
-  source: Chicago
-  source_id: 5
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#ff0000 '
-  description: optical fiber 100G
-  destination: Denver
-  destination_id: 27
-  hidden: false
-  location: ''
-  model: 100G
-  name: link19
-  source: Chicago
-  source_id: 5
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 100G
-  destination: LosAngeles
-  destination_id: 10
-  hidden: false
-  location: ''
-  model: 100G
-  name: link20
-  source: SanJose
-  source_id: 6
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 400G
-  destination: Oakland
-  destination_id: 26
-  hidden: false
-  location: ''
-  model: 400G
-  name: link21
-  source: SanJose
-  source_id: 6
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 400G
-  destination: LosAngeles
-  destination_id: 10
-  hidden: false
-  location: ''
-  model: 400G
-  name: link22
-  source: SanDiego
-  source_id: 7
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 400G
-  destination: Oakland
-  destination_id: 26
-  hidden: false
-  location: ''
-  model: 400G
-  name: link23
-  source: SanFrancisco
-  source_id: 24
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 400G
-  destination: LosAngeles
-  destination_id: 10
-  hidden: false
-  location: ''
-  model: 400G
-  name: link24
-  source: Dallas
-  source_id: 8
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 400G
-  destination: Atlanta
-  destination_id: 13
-  hidden: false
-  location: ''
-  model: 400G
-  name: link25
-  source: Dallas
-  source_id: 8
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 400G
-  destination: LosAngeles
-  destination_id: 10
-  hidden: false
-  location: ''
-  model: 400G
-  name: link26
-  source: Orange
-  source_id: 25
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
-- color: '#000000 '
-  description: optical fiber 400G
-  destination: Denver
-  destination_id: 27
-  hidden: false
-  location: ''
-  model: 400G
-  name: link27
-  source: Oakland
-  source_id: 26
-  subtype: ODU2
-  type: Link
-  vendor: Ciena
+- {color: '#000000 ', description: optical fiber 10G, destination: Dallas, destination_id: 8,
+  hidden: false, location: '', model: 10G, name: link0, source: Houston, source_id: 15,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 10G, destination: Atlanta, destination_id: 13,
+  hidden: false, location: '', model: 10G, name: link1, source: Jackson, source_id: 1,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 10G, destination: Washington, destination_id: 4,
+  hidden: false, location: '', model: 10G, name: link2, source: Baltimore, source_id: 16,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 10G, destination: Chicago, destination_id: 5,
+  hidden: false, location: '', model: 10G, name: link3, source: Cleveland, source_id: 17,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 10G, destination: Columbus, destination_id: 18,
+  hidden: false, location: '', model: 10G, name: link4, source: Cleveland, source_id: 17,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 10G, destination: Detroit, destination_id: 11,
+  hidden: false, location: '', model: 10G, name: link5, source: Cleveland, source_id: 17,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 40G, destination: Cincinnati, destination_id: 19,
+  hidden: false, location: '', model: 40G, name: link6, source: Cleveland, source_id: 17,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 40G, destination: NewYork, destination_id: 22,
+  hidden: false, location: '', model: 40G, name: link7, source: Cleveland, source_id: 17,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 40G, destination: SanJose, destination_id: 6,
+  hidden: false, location: '', model: 40G, name: link8, source: PaloAlto, source_id: 2,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 40G, destination: NewYork, destination_id: 22,
+  hidden: false, location: '', model: 40G, name: link9, source: Cambridge, source_id: 20,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 40G, destination: Chicago, destination_id: 5,
+  hidden: false, location: '', model: 40G, name: link10, source: Minneapolis, source_id: 21,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 40G, destination: Philadelphia, destination_id: 9,
+  hidden: false, location: '', model: 40G, name: link11, source: NewYork, source_id: 22,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 40G, destination: Washington, destination_id: 4,
+  hidden: false, location: '', model: 40G, name: link12, source: NewYork, source_id: 22,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 40G, destination: Dallas, destination_id: 8,
+  hidden: false, location: '', model: 40G, name: link13, source: Austin, source_id: 3,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 100G, destination: SanJose, destination_id: 6,
+  hidden: false, location: '', model: 100G, name: link14, source: Washington, source_id: 4,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 100G, destination: Richmond, destination_id: 12,
+  hidden: false, location: '', model: 100G, name: link15, source: Washington, source_id: 4,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 100G, destination: Atlanta, destination_id: 13,
+  hidden: false, location: '', model: 100G, name: link16, source: Washington, source_id: 4,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 100G, destination: Oakland, destination_id: 26,
+  hidden: false, location: '', model: 100G, name: link17, source: Sacramento, source_id: 23,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 100G, destination: Boston, destination_id: 14,
+  hidden: false, location: '', model: 100G, name: link18, source: Chicago, source_id: 5,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#ff0000 ', description: optical fiber 100G, destination: Denver, destination_id: 27,
+  hidden: false, location: '', model: 100G, name: link19, source: Chicago, source_id: 5,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 100G, destination: LosAngeles, destination_id: 10,
+  hidden: false, location: '', model: 100G, name: link20, source: SanJose, source_id: 6,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 400G, destination: Oakland, destination_id: 26,
+  hidden: false, location: '', model: 400G, name: link21, source: SanJose, source_id: 6,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 400G, destination: LosAngeles, destination_id: 10,
+  hidden: false, location: '', model: 400G, name: link22, source: SanDiego, source_id: 7,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 400G, destination: Oakland, destination_id: 26,
+  hidden: false, location: '', model: 400G, name: link23, source: SanFrancisco, source_id: 24,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 400G, destination: LosAngeles, destination_id: 10,
+  hidden: false, location: '', model: 400G, name: link24, source: Dallas, source_id: 8,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 400G, destination: Atlanta, destination_id: 13,
+  hidden: false, location: '', model: 400G, name: link25, source: Dallas, source_id: 8,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 400G, destination: LosAngeles, destination_id: 10,
+  hidden: false, location: '', model: 400G, name: link26, source: Orange, source_id: 25,
+  subtype: ODU2, type: Link, vendor: Ciena}
+- {color: '#000000 ', description: optical fiber 400G, destination: Denver, destination_id: 27,
+  hidden: false, location: '', model: 400G, name: link27, source: Oakland, source_id: 26,
+  subtype: ODU2, type: Link, vendor: Ciena}

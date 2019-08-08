@@ -10,11 +10,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - poller_service
-  - git_push_configurations
+  jobs: [Start, End, poller_service, git_push_configurations]
   last_modified: '2019-08-05 13:30:56.726895'
   mail_recipient: ''
   name: Configuration Management Workflow
@@ -32,8 +28,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -46,29 +41,22 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Netmiko
-  devices:
-  - Austin
+  devices: [Austin]
   display_only_failed_nodes: true
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - netmiko_create_vrf_test
-  - netmiko_check_vrf_test
-  - netmiko_delete_vrf_test
-  - netmiko_check_no_vrf_test
+  jobs: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
+    netmiko_check_no_vrf_test]
   last_modified: '2019-08-05 13:30:56.803035'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools:
-  - Washington
+  pools: [Washington]
   positions: {}
   push_to_git: false
   python_query: ''
@@ -79,8 +67,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -93,21 +80,15 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Napalm
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: true
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - napalm_create_vrf_test
-  - napalm_rollback
-  - netmiko_check_vrf_napalm
-  - netmiko_check_no_vrf_napalm
+  jobs: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
+    netmiko_check_no_vrf_napalm]
   last_modified: '2019-08-05 13:30:56.889198'
   mail_recipient: ''
   name: Napalm_VRF_workflow
@@ -116,9 +97,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows:
-    - '0'
-    - '200'
+    Workflow_of_workflows: ['0', '200']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -128,8 +107,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -142,22 +120,14 @@
   credentials: device
   custom_username: ''
   description: ReST call, Napalm getters, etc
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: true
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - get_facts
-  - get_interfaces
-  - get_interfaces_ip
-  - get_config
-  - process_payload1
+  jobs: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
   last_modified: '2019-08-05 13:30:56.982753'
   mail_recipient: ''
   name: payload_transfer_workflow
@@ -166,9 +136,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows:
-    - '0'
-    - '-200'
+    Workflow_of_workflows: ['0', '-200']
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -178,8 +146,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -192,21 +159,14 @@
   credentials: device
   custom_username: ''
   description: Test python device selection mechanism
-  devices:
-  - Washington
-  - Austin
+  devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - add_devices_to_payload
-  - Iteration_service_simple
-  - Iteration_service_python
+  jobs: [Start, End, add_devices_to_payload, Iteration_service_simple, Iteration_service_python]
   last_modified: '2019-08-05 13:30:57.049335'
   mail_recipient: ''
   name: Iteration Services Test Workflow
@@ -224,8 +184,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -238,21 +197,15 @@
   credentials: device
   custom_username: ''
   description: Test the payload extraction and validation mechanisms
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: true
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - netmiko_show_ip_route
-  - payload_extraction
-  - payload_validate_dict
-  - payload_validate_text
+  jobs: [Start, End, netmiko_show_ip_route, payload_extraction, payload_validate_dict,
+    payload_validate_text]
   last_modified: '2019-08-05 13:30:57.124601'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
@@ -270,8 +223,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -284,20 +236,14 @@
   credentials: device
   custom_username: ''
   description: Test the inner workflow system
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: true
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - payload_transfer_workflow
-  - get_interfaces
-  - Napalm_VRF_workflow
+  jobs: [Start, End, payload_transfer_workflow, get_interfaces, Napalm_VRF_workflow]
   last_modified: '2019-08-05 13:30:57.198567'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
@@ -315,8 +261,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -329,21 +274,14 @@
   credentials: device
   custom_username: ''
   description: Workflow with separate failure - success path
-  devices:
-  - Austin
-  - Washington
+  devices: [Austin, Washington]
   display_only_failed_nodes: false
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - get_facts
-  - REST is_alive
-  - netmiko_check_no_vrf_test
+  jobs: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test]
   last_modified: '2019-08-05 13:30:57.271404'
   mail_recipient: ''
   name: Workflow with separate failure - success path
@@ -361,8 +299,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -375,19 +312,14 @@
   credentials: device
   custom_username: ''
   description: ''
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: false
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - Test Netmiko Prompt Service
-  - Test netmiko prompts pass
+  jobs: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass]
   last_modified: '2019-08-05 13:30:57.333759'
   mail_recipient: ''
   name: Netmiko prompts
@@ -405,8 +337,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -419,24 +350,16 @@
   credentials: device
   custom_username: ''
   description: ''
-  devices:
-  - Washington
-  - Chicago
+  devices: [Washington, Chicago]
   display_only_failed_nodes: false
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - Payload editor, no devices
-  - Payload editor, with device
-  - Show vrf with payload helper
-  - Show vrf with python query
-  - REST is_alive
-  - show runtime with get_result helper
+  jobs: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
+    Show vrf with payload helper, Show vrf with python query, REST is_alive, show
+      runtime with get_result helper]
   last_modified: '2019-08-05 13:30:57.426946'
   mail_recipient: ''
   name: 'python Workflow: payload editor and pool helper'
@@ -454,8 +377,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -468,22 +390,16 @@
   credentials: device
   custom_username: ''
   description: ''
-  devices:
-  - Washington
+  devices: [Washington]
   display_only_failed_nodes: false
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  jobs:
-  - Start
-  - End
-  - 'Getters Workflow: is alive'
-  - 'Getters Workflow: get facts'
-  - 'Getters Workflow: Interface IP'
-  - 'Getters Workflow: MAC address'
-  - 'Getters Workflow: get facts failed match'
+  jobs: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
+    'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
+      get facts failed match']
   last_modified: '2019-08-06 22:24:59.221849'
   mail_recipient: ''
   name: Napalm getters and match mechanism workflow
@@ -501,8 +417,7 @@
   size: 40
   skip: false
   skip_python_query: ''
-  start_jobs:
-  - Start
+  start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10

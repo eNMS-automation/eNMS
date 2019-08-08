@@ -1,8 +1,8 @@
 from datetime import datetime
 from pathlib import Path
+from ruamel import yaml
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from wtforms import HiddenField, IntegerField, StringField
-from yaml import dump
 
 from eNMS.database import Session, SMALL_STRING_LENGTH
 from eNMS.forms.automation import ServiceForm
@@ -37,7 +37,7 @@ class NetmikoBackupService(Service):
             "last_status": device.last_status,
         }
         with open(path / "data.yml", "w") as file:
-            dump(data, file, default_flow_style=False)
+            yaml.dump(data, file, default_flow_style=False)
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         try:

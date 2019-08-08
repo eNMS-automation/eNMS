@@ -1,9 +1,9 @@
 from datetime import datetime
 from pathlib import Path
+from ruamel import yaml
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from wtforms import HiddenField, IntegerField
-from yaml import dump
 
 from eNMS.controller import controller
 from eNMS.database import SMALL_STRING_LENGTH
@@ -35,7 +35,7 @@ class NapalmBackupService(Service):
             "last_status": device.last_status,
         }
         with open(path / "data.yml", "w") as file:
-            dump(data, file, default_flow_style=False)
+            yaml.dump(data, file, default_flow_style=False)
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         try:

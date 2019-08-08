@@ -122,3 +122,5 @@
 - {destination: 'Getters Workflow: Interface IP', name: 57-failure:62->60, source: 'Getters
     Workflow: get facts failed match', subtype: failure, workflow: Napalm getters
     and match mechanism workflow}
+- {destination: 'Ansible Workflow: Arista show version', name: 64-success:1->63, source: Start,
+  subtype: success, workflow: Ansible Workflow}

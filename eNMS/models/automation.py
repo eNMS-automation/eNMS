@@ -114,7 +114,6 @@ class Run(AbstractBase):
         elif self.__dict__.get("job_id"):
             return getattr(self.job, key)
         else:
-            print(key, self.__dict__)
             raise AttributeError
 
     def get_result(self, device: Optional[str] = None) -> Optional["Result"]:

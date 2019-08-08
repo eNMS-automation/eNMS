@@ -115,8 +115,6 @@ class AdministrationController(BaseController):
                     objects.sort(key=lambda s: s["type"] == "IterationService")
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "Service" else cls
-                    if obj["name"] == 'Getters Workflow: is alive':
-                        print(obj)
                     obj = self.objectify(obj_cls, obj)
                     try:
                         factory(obj_cls, **obj)

@@ -6,7 +6,7 @@
 
   vars:
     cli:
-      host: "192.168.105.5"
+      host: "{{ ip_address }}"
       username: "admin"
       password: "admin"
       authorize: true

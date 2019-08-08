@@ -400,9 +400,47 @@
   jobs: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
     'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
       get facts failed match']
-  last_modified: '2019-08-06 22:24:59.221849'
+  last_modified: '2019-08-09 01:11:35.197608'
   mail_recipient: ''
   name: Napalm getters and match mechanism workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_jobs: [Start]
+  start_new_connection: false
+  start_workflows: []
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: true
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: [Washington]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  jobs: [Start, End, 'Ansible Workflow: Arista show version']
+  last_modified: '2019-08-09 01:11:27.939985'
+  mail_recipient: ''
+  name: Ansible Workflow
   notification_header: ''
   number_of_retries: 0
   operating_system: ''

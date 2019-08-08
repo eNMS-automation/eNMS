@@ -314,9 +314,10 @@ function savePositions() {
 }
 
 Object.assign(action, {
-  "Run Workflow": runWorkflow,
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => showTypePanel(job.type, job.id, "run"),
+  "Standard Run": runWorkflow,
+  "Run with Updates": () => runWorkflow(true),
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
@@ -339,9 +340,13 @@ $("#network").contextMenu({
   },
 });
 
-function runWorkflow() {
+function runWorkflow(withUpdates) {
   workflow.jobs.forEach((job) => colorJob(job.id, job.color));
-  showTypePanel("Workflow", workflow.id, "run");
+  if (withUpdates) {
+    showTypePanel("Workflow", workflow.id, "run");
+  } else {
+    normalRun(workflow.id);
+  }
 }
 
 function colorJob(id, color) {

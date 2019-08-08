@@ -111,8 +111,8 @@ class Run(AbstractBase):
         elif key in self.__dict__.get("properties", {}):
             job, value = self.__dict__.get("job"), self.__dict__["properties"][key]
             return convert_value(job.type, key, value, "id") if job else value
-        elif hasattr(self.__dict__.get("job"), key):
-            return getattr(self.__dict__["job"], key)
+        elif self.__dict__.get("job_id"):
+            return getattr(self.job, key)
         else:
             raise AttributeError
 
@@ -802,6 +802,7 @@ class Workflow(Job):
                     parent_runtime=run.parent_runtime,
                 )
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
+                Session.commit()
                 job_results = job_run.run(payload)
             controller.run_db[run.runtime]["jobs"][job.id] = job_results["success"]
             if run.use_workflow_targets:

@@ -9,6 +9,7 @@ from os.path import exists
 from pathlib import Path
 from shutil import rmtree
 from requests import get as http_get
+from ruamel import yaml
 from tarfile import open as open_tar
 from typing import Any, Tuple, Union
 from yaml import dump, load, BaseLoader
@@ -104,7 +105,7 @@ class AdministrationController(BaseController):
                 self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"
             )
             with open(path, "r") as migration_file:
-                objects = load(migration_file, Loader=BaseLoader)
+                objects = yaml.safe_load(migration_file)
                 if cls == "Workflow":
                     workflow_jobs = {
                         workflow["name"]: workflow.pop("jobs") for workflow in objects
@@ -115,6 +116,8 @@ class AdministrationController(BaseController):
                     objects.sort(key=lambda s: s["type"] == "IterationService")
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "Service" else cls
+                    if obj["name"] == 'Getters Workflow: is alive':
+                        print(obj)
                     obj = self.objectify(obj_cls, obj)
                     try:
                         factory(obj_cls, **obj)

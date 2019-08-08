@@ -388,6 +388,7 @@ class BaseController:
         return delete(cls, id=instance_id)
 
     def get(self, cls: str, id: str) -> dict:
+        print(fetch(cls, id=id).serialized)
         return fetch(cls, id=id).serialized
 
     def get_all(self, cls: str) -> List[dict]:

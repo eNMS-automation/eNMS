@@ -46,7 +46,6 @@ class IterationService(Service):
             values = controller.eval(run.python_query_values, run, **locals())
         results, success = {}, True
         for value in values:
-            print("tttt"*100, value)
             run_data = {
                 "payload": {self.variable_name: value, **payload},
                 "devices": [device.id],

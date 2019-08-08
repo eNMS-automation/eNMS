@@ -19,7 +19,7 @@ pathlib
 psutil
 psycopg2
 pynetbox
-ruamel
+ruamel.yaml
 slackclient>=1.3,<2
 simplekml
 sqlalchemy

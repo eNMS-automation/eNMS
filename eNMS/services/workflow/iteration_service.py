@@ -46,11 +46,12 @@ class IterationService(Service):
             values = controller.eval(run.python_query_values, run, **locals())
         results, success = {}, True
         for value in values:
+            print("tttt"*100, value)
             run_data = {
-                "payload": {run.variable_name: value, **payload},
+                "payload": {self.variable_name: value, **payload},
                 "devices": [device.id],
             }
-            result = run_job(run.iterated_job.id, **run_data)
+            result = run_job(self.iterated_job.id, **run_data)
             results[value] = result["results"]["devices"][device.name]
             if not result["success"]:
                 success = False

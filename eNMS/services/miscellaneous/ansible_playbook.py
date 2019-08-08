@@ -5,6 +5,7 @@ from subprocess import check_output
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
+from eNMS.controller import controller
 from eNMS.database import (
     CustomMediumBlobPickle,
     LARGE_STRING_LENGTH,
@@ -55,7 +56,7 @@ class AnsiblePlaybookService(Service):
             command.extend(["-i", device.ip_address + ","])
         command.append(run.sub(run.playbook_path, locals()))
         run.log("info", f"Sending Ansible playbook: {' '.join(command + arguments)}")
-        result = check_output(command + arguments)
+        result = check_output(command + arguments, cwd=controller.path / "playbooks")
         try:
             result = result.decode("utf-8")
         except AttributeError:

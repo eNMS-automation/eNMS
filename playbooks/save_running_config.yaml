@@ -1,7 +1,6 @@
 ---
 - name: save running-config
   hosts: all
-  gather_facts: no
   connection: local
 
   vars:

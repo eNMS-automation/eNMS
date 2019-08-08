@@ -350,6 +350,7 @@ function refreshLogs(job, runtime, displayResults) {
     if (result.refresh) {
       setTimeout(() => refreshLogs(job, runtime, displayResults), 1500);
     } else if (displayResults) {
+      $(`#logs-${job.id}`).remove();
       jobType = job.type == "Workflow" ? "workflow" : "service";
       showResultsPanel(job.id, job.name, jobType, runtime);
     }
@@ -395,6 +396,7 @@ function normalRun(id) {
 // eslint-disable-next-line
 function parametrizedRun(type, id) {
   fCall("/run_job", `#edit-${type}-form-${id}`, function(job) {
+    $(`#${type}-${id}`).remove();
     runLogic(job);
   });
 }

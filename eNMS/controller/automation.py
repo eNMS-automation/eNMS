@@ -262,8 +262,6 @@ class AutomationController(BaseController):
         request = {runtime_key: runtime, "job_id": id}
         if workflow_device:
             request["workflow_device_id"] = workflow_device
-        if device in ("all passed", "all failed"):
-            request["success"] = device == "all passed"
         run = fetch("Run", allow_none=True, **request)
         if not run:
             return None
@@ -272,7 +270,10 @@ class AutomationController(BaseController):
             results = [r for r in run.results if device_id == r.device_id]
             return results[0].result if results else None
         else:
-            return {r.device_name: r.result for r in run.results if r.device_id}
+            return {
+                r.device_name: r.result for r in run.results if r.device_id
+                and (device == "all" or r.success == (device == "all passed"))
+            }
 
     def compare_results(self, *args: Any, **kwargs: Any) -> dict:
         kwargs.pop("compare")

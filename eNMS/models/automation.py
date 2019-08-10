@@ -101,7 +101,7 @@ class Run(AbstractBase):
         super().__init__(**kwargs)
 
     def __repr__(self) -> str:
-        return f"{self.runtime} ({self.job_name} by {self.creator})"
+        return f"{self.runtime} ('{self.job_name}' run by '{self.creator}')"
 
     def __getattr__(self, key: str) -> Any:
         if key in self.__dict__:

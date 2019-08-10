@@ -325,7 +325,7 @@ class AutomationController(BaseController):
         session["workflow"] = workflow.id
         for job_id, position in request.json.items():
             job = fetch("Job", id=job_id)
-            current_position = job.positions[workflow.name]
+            current_position = job.positions.get(workflow.name)
             new_position = [position["x"], position["y"]]
             if new_position != current_position:
                 job.positions[workflow.name] = [position["x"], position["y"]]

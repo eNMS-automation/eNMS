@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
+from flask_login import current_user
 from functools import partial
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
@@ -302,6 +303,7 @@ class AutomationController(BaseController):
     def run_job(self, id: Optional[int] = None, **kwargs: Any) -> dict:
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
+        kwargs["creator"] = getattr(current_user, "name", "admin")
         job = fetch("Job", id=id)
         if job.type == "Workflow":
             self.add_restart_payload(job, **kwargs)

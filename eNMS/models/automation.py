@@ -1,6 +1,5 @@
 from collections import defaultdict
 from copy import deepcopy
-from flask_login import current_user
 from git import Repo
 from git.exc import GitCommandError
 from json import loads
@@ -97,7 +96,6 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs: Any) -> None:
         self.runtime = kwargs.get("runtime") or controller.get_time()
-        self.creator = getattr(current_user, "name", "admin")
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)

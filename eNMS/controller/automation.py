@@ -135,7 +135,7 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, **kwargs) -> dict:
+    def get_job_logs(self, **kwargs: Any) -> dict:
         run = fetch("Run", allow_none=True, runtime=kwargs["runtime"])
         result = run.get_result() if run else None
         logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])

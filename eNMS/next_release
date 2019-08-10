@@ -206,3 +206,6 @@ In order to work around that, I am now using the optional "cwd" argument of subp
 service to tell eNMS to run the ansible-playbook command from the /playbooks folder.
 
 - Set stdout_callback = json in ansible config to get a json output by default.
+
+- Change in the LDAP authentication: LDAP users that are not admin should now longer be allowed to log in (403 error).
+To be tested.

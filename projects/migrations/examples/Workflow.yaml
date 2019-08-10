@@ -430,7 +430,7 @@
   credentials: device
   custom_username: ''
   description: ''
-  devices: [Washington]
+  devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
   has_targets: true
@@ -438,7 +438,7 @@
   include_link_in_summary: false
   initial_payload: {}
   jobs: [Start, End, 'Ansible Workflow: Arista show version']
-  last_modified: '2019-08-10 13:36:47.359240'
+  last_modified: '2019-08-10 13:52:23.120558'
   mail_recipient: ''
   name: Ansible Workflow
   notification_header: ''

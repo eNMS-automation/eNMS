@@ -20,7 +20,7 @@
   operating_system: ''
   pools: []
   positions:
-    Ansible Workflow: !!python/tuple [-227, 26]
+    Ansible Workflow: [-362, 112]
     Configuration Management Workflow: ['-300', '0']
     Iteration Services Test Workflow: ['-359', '-163']
     Napalm getters and match mechanism workflow: [-605, 76]
@@ -69,7 +69,7 @@
   operating_system: ''
   pools: []
   positions:
-    Ansible Workflow: !!python/tuple [500, 0]
+    Ansible Workflow: [500, 0]
     Configuration Management Workflow: ['200', '0']
     Iteration Services Test Workflow: ['-9', '294']
     Napalm getters and match mechanism workflow: [547, 107]
@@ -318,7 +318,7 @@
   waiting_time: 0
 - a_dict: {}
   a_float: 5.0
-  a_list: [a, b]
+  a_list: []
   an_integer: 10
   boolean1: true
   boolean2: false
@@ -336,7 +336,7 @@
   include_link_in_summary: true
   initial_payload: {}
   ip_address: 10.1.1.1
-  last_modified: '2019-07-11 13:51:13.573557'
+  last_modified: '2019-08-10 13:47:31.375477'
   mac_address: FF:FF:FF:FF:FF:FF
   mail_address: aaa@gmail.com
   mail_recipient: ''
@@ -352,7 +352,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
-  regex: abbbbcc
+  regex: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   shape: box
@@ -2236,21 +2236,21 @@
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
-  conversion_method: text
+  conversion_method: json
   creator: admin
   credentials: device
   custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   devices: [Washington]
-  dict_match: {}
+  dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
   display_only_failed_nodes: false
   events: []
   has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-08-09 01:08:03.218468'
+  last_modified: '2019-08-10 17:48:21.020579'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -2264,7 +2264,7 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_version.yml
   pools: []
   positions:
-    Ansible Workflow: !!python/tuple [-25, -197]
+    Ansible Workflow: [-151, -136]
     Napalm getters and match mechanism workflow: [-30, 126]
   push_to_git: false
   python_query: ''
@@ -2278,7 +2278,7 @@
   start_new_connection: false
   time_between_retries: 10
   type: AnsiblePlaybookService
-  validation_method: text
+  validation_method: dict_included
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'

@@ -105,7 +105,7 @@ class Run(AbstractBase):
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name} by {self.creator})"
 
-    def __getattr__(self, key):
+    def __getattr__(self, key: str) -> Any:
         if key in self.__dict__:
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
@@ -636,7 +636,8 @@ class Service(Job):
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="normalRun('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run with Updates</button>""",
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">
+            Run with Updates</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
@@ -688,7 +689,8 @@ class Workflow(Job):
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="normalRun('{self.id}')">Run</button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run with Updates</button>""",
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">
+            Run with Updates</button>""",
             f"""<button type="button" class="btn btn-primary btn-xs"
             onclick="showTypePanel('workflow', '{self.id}')">
             Edit</button>""",

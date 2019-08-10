@@ -1,5 +1,4 @@
 from contextlib import contextmanager
-from flask_login import current_user
 from logging import info
 from re import search
 from sqlalchemy import func

@@ -176,10 +176,9 @@ class Run(AbstractBase):
         )
         if self.privileged_mode:
             netmiko_connection.enable()
-        if self.workflow:
-            controller.connections_cache["netmiko"][self.parent_runtime][
-                device.name
-            ] = netmiko_connection
+        controller.connections_cache["netmiko"][self.parent_runtime][
+            device.name
+        ] = netmiko_connection
         return netmiko_connection
 
     def napalm_connection(self, device: "Device") -> NetworkDriver:
@@ -211,10 +210,9 @@ class Run(AbstractBase):
             optional_args=optional_args,
         )
         napalm_connection.open()
-        if self.workflow:
-            controller.connections_cache["napalm"][self.parent_runtime][
-                device.name
-            ] = napalm_connection
+        controller.connections_cache["napalm"][self.parent_runtime][
+            device.name
+        ] = napalm_connection
         return napalm_connection
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
@@ -242,6 +240,7 @@ class Run(AbstractBase):
 
     def close_connection_cache(self) -> None:
         for library in ("netmiko", "napalm"):
+            print(self.runtime, controller.connections_cache[library])
             connections = controller.connections_cache[library].pop(self.runtime, None)
             if not connections:
                 continue

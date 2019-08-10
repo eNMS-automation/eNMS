@@ -258,7 +258,7 @@
       </div>
       <div id="step-4" style="min-height: 300px">
         {% if form_type == "workflow" %}
-        <label for="start_jobs">Start Jobs</label>
+        <label for="start_jobs">Workflow Entry Point(s)</label>
         <div class="form-group">
           {{ form.start_jobs(id=form_type + '-start_jobs', class="form-control
           add-id") }}
@@ -285,10 +285,10 @@
               type="checkbox"
               value="y"
             />
-            <label class="hide-run">Skip</label>
+            <label class="hide-run">Skip this Job Regardless</label>
           </div>
         </fieldset>
-        <label class="hide-run">Skip (Python Query)</label>
+        <label class="hide-run">Skip Job If Python Query evaluates to True</label>
         <div class="form-group">
           {{ form.skip_python_query(id=form_type + '-skip_python_query',
           class="form-control hide-run add-id") }}

@@ -103,7 +103,7 @@ class ServiceForm(JobForm):
 class WorkflowForm(JobForm):
     form_type = HiddenField(default="workflow")
     use_workflow_targets = BooleanField("Use Workflow Targets")
-    start_jobs = MultipleInstanceField("Start Jobs", instance_type="Job")
+    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
     payload_version = NoValidationSelectField("Payload Version", choices=())
     payloads_to_exclude = NoValidationSelectMultipleField(
         "Payloads to Include", choices=()

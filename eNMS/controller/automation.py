@@ -271,7 +271,9 @@ class AutomationController(BaseController):
             return results[0].result if results else None
         else:
             return {
-                r.device_name: r.result for r in run.results if r.device_id
+                r.device_name: r.result
+                for r in run.results
+                if r.device_id
                 and (device == "all" or r.success == (device == "all passed"))
             }
 

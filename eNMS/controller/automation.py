@@ -322,11 +322,14 @@ class AutomationController(BaseController):
     def save_positions(self, workflow_id: int) -> str:
         now = self.get_time()
         workflow = fetch("Workflow", allow_none=True, id=workflow_id)
-        workflow.last_modified = now
         session["workflow"] = workflow.id
         for job_id, position in request.json.items():
             job = fetch("Job", id=job_id)
-            job.positions[workflow.name] = [position["x"], position["y"]]
+            current_position = job.positions[workflow.name]
+            new_position = [position["x"], position["y"]]
+            if new_position != current_position:
+                job.positions[workflow.name] = [position["x"], position["y"]]
+                workflow.last_modified = now
         return now
 
     def get_workflow_state(

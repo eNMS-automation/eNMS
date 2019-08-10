@@ -20,10 +20,10 @@
   operating_system: ''
   pools: []
   positions:
-    Ansible Workflow: !!python/tuple [-227, 26]
+    Ansible Workflow: ['-227', '26']
     Configuration Management Workflow: ['-300', '0']
     Iteration Services Test Workflow: ['-359', '-163']
-    Napalm getters and match mechanism workflow: !!python/tuple [-605, 76]
+    Napalm getters and match mechanism workflow: [-605, 76]
     Napalm_VRF_workflow: ['-200', '0']
     Netmiko prompts: ['-279', '-158']
     Netmiko_VRF_workflow: ['-200', '0']
@@ -69,10 +69,10 @@
   operating_system: ''
   pools: []
   positions:
-    Ansible Workflow: !!python/tuple [500, 0]
+    Ansible Workflow: [500, 0]
     Configuration Management Workflow: ['200', '0']
     Iteration Services Test Workflow: ['-9', '294']
-    Napalm getters and match mechanism workflow: !!python/tuple [547, 107]
+    Napalm getters and match mechanism workflow: [547, 107]
     Napalm_VRF_workflow: ['200', '0']
     Netmiko prompts: ['634', '187']
     Netmiko_VRF_workflow: ['200', '0']
@@ -2040,7 +2040,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: !!python/tuple [-377, -267]
+    Napalm getters and match mechanism workflow: [-377, -267]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2083,7 +2083,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: !!python/tuple [-235, 125]
+    Napalm getters and match mechanism workflow: [-235, 125]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2127,7 +2127,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: !!python/tuple [157, 139]
+    Napalm getters and match mechanism workflow: [157, 139]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2170,7 +2170,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: !!python/tuple [286, -253]
+    Napalm getters and match mechanism workflow: [286, -253]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2213,7 +2213,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: !!python/tuple [-27, -269]
+    Napalm getters and match mechanism workflow: [-27, -269]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2395,8 +2395,8 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_version.yml
   pools: []
   positions:
-    Ansible Workflow: !!python/tuple [90, -165]
-    Napalm getters and match mechanism workflow: !!python/tuple [-30, 126]
+    Ansible Workflow: [90, -165]
+    Napalm getters and match mechanism workflow: [-30, 126]
   push_to_git: false
   python_query: ''
   query_property_type: name

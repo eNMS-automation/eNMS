@@ -136,6 +136,7 @@ function switchToWorkflow(workflowId) {
 
 // eslint-disable-next-line
 function addJobsToWorkflow(jobs) {
+  console.log(workflow)
   if (!workflow) {
     alertify.notify(
       `You must create a workflow in the

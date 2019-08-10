@@ -155,7 +155,6 @@ class RunResultsForm(ResultsForm):
 
 
 class AddJobsForm(BaseForm):
-    template = "base"
     action = "addJobsToWorkflow"
     form_type = HiddenField(default="add_jobs")
     jobs = MultipleInstanceField("Add jobs", instance_type="Job")

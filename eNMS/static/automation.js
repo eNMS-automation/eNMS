@@ -9,13 +9,11 @@ displayWorkflow: false
 fCall: false
 getJobState: false
 getWorkflowState: false
+jobToNode: false
 JSONEditor: false
-jsPanel: false
-nodes: true
 page: false
 showTypePanel: false
 table: false
-workflow: true
 */
 
 let currentResults = {};
@@ -93,7 +91,7 @@ function saveWorkflow(newWorkflow) {
     );
     $("#current-workflow").val(newWorkflow.id);
     $("#current-workflow").selectpicker("refresh");
-    displayWorkflow({"workflow": newWorkflow, "runtimes": []});
+    displayWorkflow({ workflow: newWorkflow, runtimes: [] });
   }
 }
 
@@ -175,7 +173,7 @@ function getRuntimes(type, id) {
       } else if (type != "logs") {
         updateDeviceLists(type, id, id, true, true);
       } else {
-        refreshLogs({"id": id}, $(`#runtime-${id}`).val());
+        refreshLogs({ id: id }, $(`#runtime-${id}`).val());
       }
     }
   });
@@ -351,7 +349,7 @@ function refreshLogs(job, runtime, displayResults) {
       setTimeout(() => refreshLogs(job, runtime, displayResults), 1500);
     } else if (displayResults) {
       $(`#logs-${job.id}`).remove();
-      jobType = job.type == "Workflow" ? "workflow" : "service";
+      const jobType = job.type == "Workflow" ? "workflow" : "service";
       showResultsPanel(job.id, job.name, jobType, runtime);
     }
   });
@@ -376,7 +374,7 @@ function showLogsPanel(job, runtime, displayResults) {
 
 // eslint-disable-next-line
 function configureLogsCallbacks(job, runtime) {
-  $(`#filter-${job.id}`).on('input', function() {
+  $(`#filter-${job.id}`).on("input", function() {
     refreshLogs(job, runtime, false);
   });
   if (!runtime) {

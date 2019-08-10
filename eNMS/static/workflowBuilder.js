@@ -3,6 +3,7 @@ global
 action: false
 alertify: false
 call: false
+normalRun: false
 showLogs: false
 showPanel: false
 showResultsPanel: false
@@ -55,7 +56,7 @@ let stateUpdate = false;
 let hoveredNode;
 
 function displayWorkflow(workflowData) {
-  const wf = workflow = workflowData.workflow;
+  const wf = (workflow = workflowData.workflow);
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
   wf.jobs.filter((s) => s.type == "IterationService").map(drawIterationService);

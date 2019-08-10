@@ -103,6 +103,7 @@ def test_base_services(user_client: FlaskClient) -> None:
     number_of_napalm_services = len(fetch_all("NapalmGettersService"))
     user_client.post("/update/NapalmGettersService", data=getters_dict)
     assert len(fetch_all("NapalmGettersService")) == number_of_napalm_services + 1
+    number_of_ansible_services = len(fetch_all("AnsiblePlaybookService"))
     user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
-    assert len(fetch_all("AnsiblePlaybookService")) == 1
+    assert len(fetch_all("AnsiblePlaybookService")) == number_of_ansible_services + 1
     assert len(fetch_all("Service")) == number_of_services + 4

@@ -2432,11 +2432,11 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  last_modified: '2019-08-10 18:13:20.291263'
+  last_modified: '2019-08-10 18:26:51.501557'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
-  name: 'Ansible Workflow: Arista show configuration'
+  name: 'Ansible Workflow: Arista show configuration (regex match)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2445,7 +2445,8 @@
   pass_device_properties: true
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
   pools: []
-  positions: {}
+  positions:
+    Ansible Workflow: [27, 98]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2459,5 +2460,53 @@
   time_between_retries: 10
   type: AnsiblePlaybookService
   validation_method: text
+  vendor: ''
+  waiting_time: 0
+- arguments: ''
+  color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {action: debug, changed: false, failed: false}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-10 18:26:36.791826'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Ansible Workflow: Arista show configuration (dict match)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  options: {}
+  pass_device_properties: true
+  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
+  pools: []
+  positions:
+    Ansible Workflow: [248, -170]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: AnsiblePlaybookService
+  validation_method: dict_included
   vendor: ''
   waiting_time: 0

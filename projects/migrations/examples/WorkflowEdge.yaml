@@ -124,8 +124,11 @@
     and match mechanism workflow}
 - {destination: 'Ansible Workflow: Arista show version', name: 64-success:1->63, source: Start,
   subtype: success, workflow: Ansible Workflow}
-- {destination: 'Ansible Workflow: Arista show configuration', name: 64-success:49->65,
+- {destination: 'Ansible Workflow: Arista show configuration (regex match)', name: 64-success:49->65,
   source: 'Ansible Workflow: Arista show version', subtype: success, workflow: Ansible
     Workflow}
-- {destination: End, name: 64-success:65->2, source: 'Ansible Workflow: Arista show
-    configuration', subtype: success, workflow: Ansible Workflow}
+- {destination: 'Ansible Workflow: Arista show configuration (dict match)', name: 64-success:65->66,
+  source: 'Ansible Workflow: Arista show configuration (regex match)', subtype: success,
+  workflow: Ansible Workflow}
+- {destination: End, name: 64-success:66->2, source: 'Ansible Workflow: Arista show
+    configuration (dict match)', subtype: success, workflow: Ansible Workflow}

@@ -215,6 +215,8 @@ def download_configuration(name: str) -> Response:
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page: str) -> Response:
+    if "Admin" not in current_user.permissions:
+        abort(403)
     f, *args = page.split("/")
     if f not in controller.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})

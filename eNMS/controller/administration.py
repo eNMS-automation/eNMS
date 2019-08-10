@@ -41,19 +41,16 @@ class AdministrationController(BaseController):
                     attributes=["cn", "memberOf", "mail"],
                 )
                 json_response = loads(connection.response_to_json())["entries"][0]
-                if json_response:
-                    user = {
+                if json_response and any(
+                    group in s
+                    for group in self.ldap_admin_group.split(",")
+                    for s in json_response["attributes"]["memberOf"]
+                ):
+                    user = factory("User", **{
                         "name": name,
                         "password": password,
                         "email": json_response["attributes"].get("mail", ""),
-                    }
-                    if any(
-                        group in s
-                        for group in self.ldap_admin_group.split(",")
-                        for s in json_response["attributes"]["memberOf"]
-                    ):
-                        user["permissions"] = ["Admin"]
-                    user = factory("User", **user)
+                    })
         elif kwargs["authentication_method"] == "TACACS":
             if self.tacacs_client.authenticate(name, password).valid:
                 user = factory("User", **{"name": name, "password": password})

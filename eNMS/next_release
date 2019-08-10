@@ -214,6 +214,8 @@ To be tested (account wiht LDAP admin rights and without)
 
 - New "Logs" window to see the different logs of a service/workflow for each runtime.
 
+- show the user that initiated the job, along with the runtime when selecting a run
+
 to be tested:
 - LDAP authentication with and without admin rights
 - Ansible playbooks

@@ -2,7 +2,7 @@ FROM python:3.6
 
 ENV FLASK_APP app.py
 
-COPY app.py boot.sh gunicorn.py requirements.txt ./
+COPY app.py boot.sh gunicorn.py requirements.txt package.json ./
 COPY applications applications
 COPY eNMS eNMS
 COPY git git

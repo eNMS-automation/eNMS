@@ -209,3 +209,13 @@ service to tell eNMS to run the ansible-playbook command from the /playbooks fol
 
 - Change in the LDAP authentication: LDAP users that are not admin should now longer be allowed to log in (403 error).
 To be tested (account wiht LDAP admin rights and without)
+
+
+
+
+
+
+
+to be tested:
+- LDAP authentication with and without admin rights
+- Ansible playbooks

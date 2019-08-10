@@ -1,0 +1,25 @@
+---
+- name: EOS Show Commands
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ ip_address }}"
+      username: "admin"
+      password: "admin"
+      authorize: true
+      transport: cli
+
+  tasks:
+    - name: eos show commands
+      eos_command:
+        commands:
+          - show running-config
+        provider: "{{ cli }}"
+      register: output
+
+    - name: show output
+      debug:
+        var: output

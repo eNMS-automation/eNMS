@@ -419,12 +419,15 @@ class Run(AbstractBase):
             return result == self.dict_match
         else:
             match_copy = deepcopy(match) if first else match
-            for k, v in result.items():
-                if k in match_copy and match_copy[k] == v:
-                    match_copy.pop(k)
-                elif isinstance(v, dict):
-                    return self.match_dictionary(v, match_copy, False)
-
+            if isinstance(result, dict):
+                for k, v in result.items():
+                    if k in match_copy and match_copy[k] == v:
+                        match_copy.pop(k)
+                    else:
+                        self.match_dictionary(v, match_copy, False)
+            elif isinstance(result, list):
+                for item in result:
+                    self.match_dictionary(item, match_copy, False)
             return not match_copy
 
     def transfer_file(

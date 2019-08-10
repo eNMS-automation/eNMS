@@ -204,3 +204,5 @@ This has to be changed every time the service is SAVED to prevent failure
 - Running an ansible playbook in the /playbooks folder doesn't work because of https://github.com/ansible/ansible/issues/12862.
 In order to work around that, I am now using the optional "cwd" argument of subprocess.check_output in the ansible
 service to tell eNMS to run the ansible-playbook command from the /playbooks folder.
+
+- Set stdout_callback = json in ansible config to get a json output by default.

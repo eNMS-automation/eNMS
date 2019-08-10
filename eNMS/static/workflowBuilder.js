@@ -128,7 +128,6 @@ function displayWorkflow(workflowData) {
 function switchToWorkflow(workflowId) {
   call(`/get_workflow_state/${workflowId}`, function(result) {
     workflow = result.workflow;
-    console.log(workflow.name)
     graph = displayWorkflow(result);
     if (!stateUpdate) getWorkflowState(true);
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
@@ -137,7 +136,6 @@ function switchToWorkflow(workflowId) {
 
 // eslint-disable-next-line
 function addJobsToWorkflow(jobs) {
-  console.log(workflow.name)
   if (!workflow) {
     alertify.notify(
       `You must create a workflow in the

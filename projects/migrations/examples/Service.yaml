@@ -20,7 +20,7 @@
   operating_system: ''
   pools: []
   positions:
-    Ansible Workflow: ['-227', '26']
+    Ansible Workflow: !!python/tuple [-227, 26]
     Configuration Management Workflow: ['-300', '0']
     Iteration Services Test Workflow: ['-359', '-163']
     Napalm getters and match mechanism workflow: [-605, 76]
@@ -69,13 +69,15 @@
   operating_system: ''
   pools: []
   positions:
-    Ansible Workflow: [500, 0]
+    Ansible Workflow: !!python/tuple [500, 0]
     Configuration Management Workflow: ['200', '0']
     Iteration Services Test Workflow: ['-9', '294']
     Napalm getters and match mechanism workflow: [547, 107]
     Napalm_VRF_workflow: ['200', '0']
     Netmiko prompts: ['634', '187']
     Netmiko_VRF_workflow: ['200', '0']
+    TEST: !!python/tuple [500, 0]
+    TEST2: !!python/tuple [500, 0]
     Workflow with separate failure - success path: ['500', '0']
     Workflow_of_workflows: ['300', '0']
     payload_extraction_validation_worflow: ['200', '0']
@@ -2262,7 +2264,7 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_version.yml
   pools: []
   positions:
-    Ansible Workflow: [90, -165]
+    Ansible Workflow: !!python/tuple [-25, -197]
     Napalm getters and match mechanism workflow: [-30, 126]
   push_to_git: false
   python_query: ''

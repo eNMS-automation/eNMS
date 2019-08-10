@@ -285,7 +285,7 @@ class BaseController:
             custom_properties: dict = {}
         else:
             with open(filepath, "r") as properties:
-                custom_properties = yaml.safe_load(properties)
+                custom_properties = yaml.load(properties)
         property_names.update(
             {k: v["pretty_name"] for k, v in custom_properties.items()}
         )

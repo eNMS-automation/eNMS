@@ -104,7 +104,7 @@ class AdministrationController(BaseController):
                 self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"
             )
             with open(path, "r") as migration_file:
-                objects = yaml.safe_load(migration_file)
+                objects = yaml.load(migration_file)
                 if cls == "Workflow":
                     workflow_jobs = {
                         workflow["name"]: workflow.pop("jobs") for workflow in objects
@@ -145,7 +145,7 @@ class AdministrationController(BaseController):
             if file.name == ".gitkeep" or file.name not in jobs:
                 continue
             with open(file.path, "r") as instance_file:
-                instance = yaml.safe_load(instance_file)
+                instance = yaml.load(instance_file)
                 model = instance.pop("type")
                 factory(model, **self.objectify(model, instance))
         Session.commit()
@@ -159,7 +159,7 @@ class AdministrationController(BaseController):
                 path_job = path / "workflows" / workflow_name / instance_type
                 for file in scandir(path_job):
                     with open(path_job / file.name, "r") as instance_file:
-                        instance = yaml.safe_load(instance_file)
+                        instance = yaml.load(instance_file)
                         model = instance.pop("type")
                         factory(model, **self.objectify(model, instance))
                 Session.commit()

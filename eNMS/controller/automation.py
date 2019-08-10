@@ -326,7 +326,7 @@ class AutomationController(BaseController):
         session["workflow"] = workflow.id
         for job_id, position in request.json.items():
             job = fetch("Job", id=job_id)
-            job.positions[workflow.name] = (position["x"], position["y"])
+            job.positions[workflow.name] = [position["x"], position["y"]]
         return now
 
     def get_workflow_state(

@@ -99,7 +99,7 @@ function displayWorkflow(workflowData) {
   graph.on("hoverNode", function(properties) {
     properties.event.preventDefault();
     let node = this.getNodeAt(properties.pointer.DOM);
-    if (node) {
+    if (node && node != 1 && node != 2) {
       node = parseInt(node);
       hoveredNode = node;
       const job = workflow.jobs.find((w) => w.id === node);

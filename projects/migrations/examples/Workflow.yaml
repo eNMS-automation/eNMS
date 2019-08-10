@@ -437,8 +437,9 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  jobs: [Start, End, 'Ansible Workflow: Arista show version']
-  last_modified: '2019-08-10 13:52:23.120558'
+  jobs: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow: Arista
+      show configuration']
+  last_modified: '2019-08-10 18:12:02.917697'
   mail_recipient: ''
   name: Ansible Workflow
   notification_header: ''

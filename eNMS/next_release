@@ -5,41 +5,24 @@ you can use in your custom services.
 
 - eNMS version is now displayed in the UI. The version number is read from the package.json file.
 
-- Refactoring of the results:
-Ideally, the results window for a service/workflow should let you browse the results not only per runtime,
-but also devices
->>> Done.
-
-- Also at times, a workflow user wants to see the services run for a device,
->>> Done.
-
-and at other times wants to see all devices run for a service.
->>> Done.
-
-1. View by device: In order list of services run on a specific device
->>> Done.
-
-a. Collapsable sections: Moving around in the data is overwhelming. 
->>> Done.
+- Refactoring of the results window:
+* the order of the Services within the Workflow are now sequential with the order in which they were run.
+* collapsable sections for devices / jobs
+* new "workflow" section
+* "advanced" section removed
 
 - Refactoring of the logs: real-time logs is now working
 even with multiprocessing enabled.
 LOG FOLDER CHANGE: there is no more logs/app_logs and logs/job_logs. job_logs no longer exist,
 and the content of app_logs in now in /logs.
 
-- Workflow restartability
->>> I improved the workflow restartability system:
-- you can still select a version of the payload
-- you can now choose exactly what jobs you want to see included in that payload
-- you can select not just one but multiple start points for the workflow
-- the restartability is now in the "Run Window"
+- Workflow restartability improvement:
+* default to the latest payload
+* you can now choose exactly what jobs you want to see included in that payload
+* you can select not just one but multiple start points for the workflow
+* the restartability is now in the "Run Window"
 
-- make custom credentials blue / substitution fields
->>> Done.
-
-- One minor change would be helpful: The dropdown with previous payloads defaults to the oldest payload.
-Can you make it default to the latest payload instead, that's almost always what a user would choose.
->>> Done.
+- custom credentials made blue: substitution fields
 
 - Bug in tables: jump to bottom after page 1 when table is refreshed: fixed.
 
@@ -47,128 +30,50 @@ Can you make it default to the latest payload instead, that's almost always what
 
 - Relationship are now displayed in the edit window: you can edit which service/workflow a device/task is a target of, etc...
 
-- I added a pool using a regex that had 2 negative lookahead.
-I pressed the SAVE button and it basically acted unresponsive (but was in fact running to calculate
-the pool).  After about 10 seconds, I pressed the SAVE button again, and then I saw 2 green alert
-boxes saying that my Pool was created.   It looks like only 1 pool got created, but this needs a
-more immediate response. Perhaps this is the time to put in that spinning GIF that Marc likes to
-indicate that its 'working...'
+- that spinning GIF to indicate that its 'working...'
 >>> Done.
 
-- spread service in a stairsteps in the workflow builder.
->>> Done.
+- Add new services in a workflow: services are spread in a stairsteps in the workflow builder.
 
-- In the workflow builder, double clicking on a service puts it into Move mode.
-It seems more natural to edit the service when it's double clicked.  What do you think?
->>> Done.
-
-- Improvement import/export workflow system
-
-- Reorganization of the results window => + workflow section / - advanced section
+- Workflow Builder: edit the service when it's double clicked
 
 - Copy to clipboard for device configuration
 
-- Navigating Payload in order get a path to extract data to use in another service
-can be difficult and varies based on YaQL/Python. While viewing the Result of a Workflow
-they would like to be able to select the data they want to use and get either a YaQL or
-Python path to be able to paste into another service which will extract the data from payload
-for use.
-
 - Fix bug subworkflow edit panel
-
-- results dict are now ordered
 
 - Export Jobs needs to automatically delete devices and pools
 
-- Marc’s suggestion to create workflow-based-pools (derived pools) from yaql queries
-that can be used with the existing pool mechanism for subsequent services
+- Service should fail if a python query produces a device target that does not match inventory/database
 
-- Copy to the clipboard was not creating valid jSON (was this fixed?)
+- timeout and other parameters getting updated for all services using cached Netmiko connections.
 
-- Service should fail if a YaQL query produces a device target that
-does not matchinventory/database
+- Ability to close a cached connection and re-originate the connection in a service.
 
-- Issue with timeout and other parameters not getting updated for subsequent services
-using cached Netmiko connections.
-Ability to close a cached connection and re-originate the connection in a service.
+- Logs work with Multiprocessing enabled
 
-- When the Result of a Workflow are viewed as JSON the order of the Services
-within the Workflow are not sequential with the order in which they were run.
+- Start time of each Service within a Workflow displayed,
 
-- Need some way to be able to see logs for Multiprocessing several devices when using
-workflow/service.
+- User can now track the progress of a workflow even if the workflow was started with a REST call
 
-- It would also be nice if the start time of each Service within a Workflow was displayed,
-which would aid in trouble shooting & perhaps in ordering the Result.
+- New GET Result Endpoint for the REST API to get the result of a job run asynchronously:
+if async run_job was invoked, you can use the runtime returned in the REST response
+to collect the results after completion
+via a GET request to /result/name/runtime
 
-- If one user or ReST call was made to start a workflow,
-then other users can't not see the progress of that workflow without refreshing their browser.
-For the user who did not start the Workflow the Workflow appears idle, would be nice for all
-users to be able to track progress of workflow.
+- New Run Management window:
+* you can filter per run status ("Running", ...)
+* The progress of a run (number of devices completed, failed) now works with multiprocessing.
 
-- New GET Result Endpoint for the REST API to get the result of a job run asynchronously
+- Slashes are now forbidden from services and worklfow names (conflict with Unix path)
 
-- The async flag on run_job is broken (it uses the string value as a boolean)
-- Issue remaining with external rest api and async flag in run_job.
-Need to fix ambiguity about how to pass this parameter
->>> Couldn't reproduce
+- Services and workflows cannot be stuck anymore: the exceptions are caught are a higher level
+and they should always terminate and return the stacktrace.
 
-- Sync run_jobs for a service return the service results, but workflows don't.
-Obviously, you don't want a very long waited synchronous request,
-but that could happen for a service or a workflow.
->>> Couldn't reproduce
-
-- If async run_job was invoked, is there a way to check the job status
-or collect the results after completion
->>> Done
-
-12.  API Options to be able call a workflow and be returned the status of “Workflow Started”
-with “Workflow Instance ID”. The “Workflow Instance ID” would be use to send API query to check on status.
->>> Done, it returns the name and the runtime, then you can make a GET request to /result/name/runtime
-
-- Also an option to say if Status of “Workflow Instance ID” is Complete
-then send the results of the Workflow.
->>> That is a notification ?
-You cannot push a notification to the end user via REST.
-
-- When the Result of a Workflow are viewed as JSON it would be nice if the Service(s) that failed could be in red.
->>> I believe that's no longer an issue now that you can filter per success/failed results.
-
-- Users were spending a fair amount of time watching the var/logs/messages (syslogs) to troubleshoot issues, this feedback should be in UI.
->>> Added netmiko logs in the logs window. Won't be working well with multithreading because 
-of netmiko library.
-
-- While in either of the Workflow Management or Service Management pages if you type Running into the Status search box it does not filter as expected. 
->>> Fixed.
-
-- Netmiko session logs are now displayed in the logs window.
-
-- The progress of a job (number of devices completed, failed) now works with multiprocessing.
-
-- service names need extra validation to ensure that they are valid directory/filenames
-in linux (no ‘/‘ characters)
->>> Done. To do during migration: remove all slashes from your names
-
-- When a Workflow fails and threw an exception, but does not finish in the UI,
-the only way to know is by watching var/logs/messages (syslogs).
-In this case, the Workflow appears to be hung or still running to the typical user.
-When the workflow fails and becomes stale eNMS needs to set is_running status to false,
-so Workflow can be re-run and return some error message or put into results.
->>> This shouldn't happen anymore... I'm now catching all exception at a higher level in the code.
-If it happens again and you need to use the "Reset status" button please tell me.
-
-- For compiled commands where payload extraction is being used it is helpful to see
-what was sent to the device. Also, many times the results received from device
-do not match the expected results and an error of expect string never returned may be
-in the Workflow Result. In both cases if the user was able to see what is being sent
-to the device and what was being received from the device it would allow the user to be able
-to adjust/correct their Service to produce the desired results. 
+- The command sent to a device is not displayed in the results
 
 - Credentials are now hidden when using gotty.
 
 - Job Parametrization.
-
-- New Run mechanism: run table + run calendar
 
 - Service type now displayed in the workflow builder.
 
@@ -193,13 +98,11 @@ or a variable from the "custom configuration" available as a dictionary called "
 
 - napalm getter service: default dict match mode becomes inclusion.
 
-- Renaming 'History' => 'Job Run Status'?
+- Renaming 'History' => 'Job Run Status'
 
 - Replaced pyyaml with ruamel
 
-- {‘success’: True} in the content match field is getting saved as {‘success’: true}.
-This has to be changed every time the service is SAVED to prevent failure
->>> Should work now, both true and True are accepted.
+- Both true and True are now accepted when saving a dictionary field.
 
 - Running an ansible playbook in the /playbooks folder doesn't work because of https://github.com/ansible/ansible/issues/12862.
 In order to work around that, I am now using the optional "cwd" argument of subprocess.check_output in the ansible
@@ -218,4 +121,7 @@ To be tested (account wiht LDAP admin rights and without)
 
 to be tested:
 - LDAP authentication with and without admin rights
-- Ansible playbooks
+- Test the Ansible playbook Service (refactored)
+- All custom services + the Ansible playbook service
+- Skip service mechanism
+- everything else...

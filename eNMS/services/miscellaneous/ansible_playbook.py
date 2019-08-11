@@ -47,6 +47,8 @@ class AnsiblePlaybookService(Service):
         command, extra_args = ["ansible-playbook"], {}
         if run.pass_device_properties:
             extra_args = device.get_properties()
+            extra_args.pop("configurations", None)
+            extra_args.pop("current_configuration", None)
             extra_args["password"] = device.password
         if run.options:
             extra_args.update(run.sub(run.options, locals()))

@@ -50,7 +50,7 @@ class Result(AbstractBase):
     private = True
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
-    result = Column(MutableDict.as_mutable(PickleType), default={})
+    result = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
     run_id = Column(Integer, ForeignKey("Run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     device_id = Column(Integer, ForeignKey("Device.id"))

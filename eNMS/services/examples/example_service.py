@@ -74,7 +74,7 @@ class ExampleService(Service):
     # Some services will take action or interrogate a device. The job method
     # can also take device as a parameter for these types of services.
     # def job(self, device, payload):
-    def job(self, run: "Run") -> dict:
+    def job(self, run: "Run", payload: dict) -> dict:
         run.log("info", f"Real-time logs displayed when the service is running.")
         # The "job" function is called when the service is executed.
         # The parameters of the service can be accessed with self (self.string1,

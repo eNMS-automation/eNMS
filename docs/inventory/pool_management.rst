@@ -3,7 +3,8 @@ Pools
 =====
 
 Pools allow the user to create groups of objects. They can be used to filter the inventory tables and the view, but also to target an automation task to a specific subset of devices.
-A pool is defined as a combination of values (or regular expressions) for the properties of an object (in the inventory).
+A pool is defined as a combination of values for the properties of an object (in the inventory).
+For each value, you can decide whether the match is based on inclusion, equality, or regular expression.
 
 If the properties of an inventory object matches the pool properties (``any of them``, or ``all of them`` depending on your needs), the object will belong to the pool.
 

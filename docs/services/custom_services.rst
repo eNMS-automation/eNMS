@@ -2,6 +2,13 @@
 Custom Services
 ===============
 
+In addition to the services provided by default, you are free to create your own "custom" services.
+Creating a custom services means adding a new python file in the ``eNMS/eNMS/services`` folder.
+This python file must contain:
+
+- A model class, where you define what the service parameters are, and what the service is doing (``job`` function).
+- A form class, where you define what the service looks like in the GUI: the different fields in the service form and their corresponding validation.
+
 Create a new service model
 --------------------------
 
@@ -246,3 +253,24 @@ The ``job`` function of ``SwissArmyKnifeService`` will run the class method of `
 In other words, with the above code, you can create two instances of SwissArmyKnifeService from the web UI: one named "job1" and the other named "job2". The SwissArmyKnifeService class will take care of calling the right "job" function based on the name of the instance.
 
 The SwissArmyKnifeService also has a parameter ``has_targets`` that defines whether or not the service will use the devices selected upon creating a new instance. If ``has_targets`` is selected, the SwissArmyKnifeService ``job`` function will take an additional device argument, and it will run the instance-name-specified job function on each selected device.  You can use the device properties (IP address, operating system, etc) however you need within the job function(s).
+
+Helper function
+---------------
+
+In your custom python code, there is a number of function that are made available by eNMS and that you can reuse:
+
+- Netmiko connection (``netmiko_connection = run.netmiko_connection(device)``)
+give you a working netmiko connection, and takes care of caching the connection when running inside a workflow.
+- Napalm connection (``napalm_connection = run.napalm_connection(device)``)
+give you a working napalm connection, and takes care of caching the connection when running inside a workflow.
+- Send email
+
+::
+
+        controller.send_email(
+            title,
+            content,
+            recipients=recipients,
+            filename=filename,
+            file_content=controller.str_dict(payload["results"]),
+        )

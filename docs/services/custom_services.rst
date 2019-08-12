@@ -263,14 +263,15 @@ In your custom python code, there is a number of function that are made availabl
 give you a working netmiko connection, and takes care of caching the connection when running inside a workflow.
 - Napalm connection (``napalm_connection = run.napalm_connection(device)``)
 give you a working napalm connection, and takes care of caching the connection when running inside a workflow.
-- Send email
+- Send email (``controller.send_email``) lets you send an email with optional attached file.
 
 ::
 
-        controller.send_email(
-            title,
-            content,
-            recipients=recipients,
-            filename=filename,
-            file_content=controller.str_dict(payload["results"]),
-        )
+  controller.send_email(
+      title,
+      content,
+      sender=sender,
+      recipients=recipients,
+      filename=filename,
+      file_content=file_content
+  )

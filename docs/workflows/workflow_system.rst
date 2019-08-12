@@ -94,6 +94,15 @@ The "Use service targets" mode can be used for workflows where services have dif
 
 If ``Use Workflow Targets`` is ticked, the workflow will run on its own targets (all devices configured at service level are ignored). Devices are independent from each other: one device may run on all jobs in the workflow if it is successful while another one could stop at the first step: they run the workflow independently and will likely follow different path in the workflow depending on whether they fail or pass services thoughout the workflow.
 
+Connection Cache
+----------------
+
+When using several netmiko and napalm connections in a workflow, the connection object is cached and reused automatically.
+If for some reason you want a service to create a fresh connection, you can tick the ``Start New Connection`` box
+in the "Workflow" section of the creation panel.
+Upon running this service, eNMS will automatically discard the current cached connection, start a new one and
+make it the new cached connection.
+
 Success of a Workflow
 ---------------------
 

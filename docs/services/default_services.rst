@@ -242,6 +242,7 @@ Configuration parameters for creating this service instance:
 - ``Payload`` The data to be sent in POST Or PUT operation
 - ``Parameters`` Additional parameters to pass in the request. From the requests library, params can be a dictionary, list of tuples or bytes that are sent in the body of the request.
 - ``Headers`` Dictionary of HTTP Header information to send with the request, such as the type of data to be passed. For example, {"accept":"application/json","content-type":"application/json"}
+- ``Verify SSL Certificate`` If checked (default), the SSL certificate is verified.
 - ``Timeout`` Requests library timeout, which is the Float value in seconds to wait for the server to send data before giving up
 - ``Username`` Username to use for authenticating with the ReST server
 - ``Password`` Password to use for authenticating with the ReST server

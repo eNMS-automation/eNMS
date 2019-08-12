@@ -294,10 +294,10 @@ Configuration parameters for creating this service instance:
 UNIX Command Service
 --------------------
 
-Implements a UNIX command to the target device.
+Runs a UNIX command **on the server where eNMS is installed**.
 
 Configuration parameters for creating this service instance:
-- ``Command``: UNIX command to run on the device
+- ``Command``: UNIX command to run on the server
 - Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.

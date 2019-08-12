@@ -6,3 +6,4 @@ Advanced
    :maxdepth: 1
 
    filtering
+   cli

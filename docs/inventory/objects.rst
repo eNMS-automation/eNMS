@@ -112,18 +112,3 @@ For eNMS to know where the file with custom properties is located on the server,
 
  # set the PATH_CUSTOM_PROPERTIES environment variable
  export PATH_CUSTOM_PROPERTIES=/path/to/yaml/file
-
-Table Filtering
----------------
-
-All objects are displayed in a table where they can be edited and deleted, and filtered.
-There are two filtering systems.
-
-.. image:: /_static/inventory/objects/filtering.png
-   :alt: Filtering System.
-   :align: center
-
-Quick search
-************
-
-For a quick search, you can use 

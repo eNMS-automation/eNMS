@@ -305,13 +305,26 @@ Configuration parameters for creating this service instance:
 Python Snippet Service
 ----------------------
 
-Runs a UNIX command **on the server where eNMS is installed**.
+Runs any python code. This Service can be used for specific post-processing of the payload in a workflow.
+
+It has access to the following variables / functions :
+
+- ``device``: current device, if the ``Has Device Targets`` is ticked ("Device" object).
+- ``payload``: current state of the workflow payload (dictionary).
+- ``config``: eNMS global configuration (available in the administration panel, section "Parameters", button "General").
+- ``get_result``: function to retrieve a result for a given job / optional device.
+- ``set_var``: function to define a variable and add it the payload.
+- ``get_var``: function to retrieve a variable from the payload.
+- ``log``: function to add a string to the job logs.
+- ``parent``: the workflow that the python snippet service is called from.
+- ``save_result``: the results of the service.
+- ``workflow_device``: parent device, if the device targets are defined based on the workflow device.
 
 Configuration parameters for creating this service instance:
-- ``Command``: UNIX command to run on the server
-- Validation Parameters
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
+- ``Source code``: source code of the python script to run.
 
-.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
+.. note:: 
 
 Iteration Service
 -----------------

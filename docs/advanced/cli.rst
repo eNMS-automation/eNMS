@@ -48,7 +48,7 @@ Examples:
 
 ::
 
- `flask start get_facts`
- `flask start get_facts --devices Washington,Denver`
- `flask start a_service --payload '{"a": "b"}'`
- `flask start get_facts --devices Washington,Denver --payload '{"a": "b"}'`
+ `flask run_job get_facts`
+ `flask run_job get_facts --devices Washington,Denver`
+ `flask run_job a_service --payload '{"a": "b"}'`
+ `flask run_job get_facts --devices Washington,Denver --payload '{"a": "b"}'`

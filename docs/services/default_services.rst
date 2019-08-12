@@ -302,6 +302,17 @@ Configuration parameters for creating this service instance:
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
+Python Snippet Service
+----------------------
+
+Runs a UNIX command **on the server where eNMS is installed**.
+
+Configuration parameters for creating this service instance:
+- ``Command``: UNIX command to run on the server
+- Validation Parameters
+
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
+
 Iteration Service
 -----------------
 

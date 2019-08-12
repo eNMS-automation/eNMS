@@ -19,14 +19,14 @@ All at once
 
 From the :guilabel:`Admin / Administration` page by importing an Excel file (.xls, .xlsx), objects can be created all at once by importing an Excel file.
 
-.. image:: /_static/inventory/objects/import_export.png
+.. image:: /_static/inventory/import_export/import_export.png
    :alt: Example of excel spreadsheet for import
    :align: center
 
 Devices must be defined in a spreadsheet in a Tab called "Device", and links must be defined in a Tab called "Link".
 The first line of a spreadsheet contains the properties, the following lines define the objects, as demonstrated in the example below.
 
-.. image:: /_static/inventory/objects/inventory_spreadsheet.png
+.. image:: /_static/inventory/import_export/inventory_spreadsheet.png
    :alt: Example of excel spreadsheet for import
    :align: center
 

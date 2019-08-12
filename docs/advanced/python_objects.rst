@@ -1,6 +1,6 @@
-==============
-Python objects
-==============
+===========
+Python code
+===========
 
 There are a number of places in the GUI where the user is allowed to use pure python code:
 

@@ -9,23 +9,24 @@ Upon running a job, a log window will pop-up and show you the logs in real-time.
 You can go to the "Run Management" page to see what's happening in real-time: logs, current status, and progress
 (if the service has device targets, eNMS tells you in real-time how many devices have been done and how many are left).
 
+.. image:: /_static/runs/run_management.png
+   :alt: Run management
+   :align: center
 
+Results of a run
+----------------
 
-Service results
----------------
-
-Results are stored for each run of the Service Instance (and for Workflows at large).
+Results are stored for each run of the service / workflow.
 The results are displayed as a JSON object. If the job ran on several device, you can display the results for a
 specific device, or display the list of all "failed" / "success" device.
 In the event that retries are configured, the Logs dictionary will contain an overall results section,
 as well as a section for each attempt, where failed and retried devices are shown in subsequent sections
 starting with attempt2.
 
-You can compare two versions of the logs from the ``Logs`` window (a line-by-line diff is generated).
-Here's a comparison of a ``Napalm get_facts`` service:
+You can compare two versions of the results by clicking on the ``Compare`` button (a line-by-line diff is generated).
 
-.. image:: /_static/services/service_system/service_compare_logs.png
-   :alt: Compare logs
+.. image:: /_static/runs/run_results.png
+   :alt: Results of a run
    :align: center
 
 Gitlab Export

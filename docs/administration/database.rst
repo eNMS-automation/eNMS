@@ -33,3 +33,12 @@ Miscellaneous
 - ``Fetch Git Configurations and Update Devices``: this feature will retrieve configurations from the git 'configurations' repository and load those into the database for each matching inventory device. This is performed automatically when eNMS starts up: the git configurations repository is quietly cloned and loaded into the database. This feature allows for manual pulling of updated configurations data.
 - ``Pause and Resume Scheduler``: this feature will pause and resume all scheduler tasks currently waiting to run.
 - ``Reset Job Statuses``: when a service or workflow fails, it is sometimes stuck in a "Running" mode and cannot be executed. This button will reset the status of all services and workflows.
+
+Individual export
+*****************
+
+Services and workflows can be exported and imported individually, as a .tgz archive.
+This is useful when you have multiple VMs deployed with eNMS, and you need to send a service / workflow from one VM to another.
+
+To import a job, you need to move the archive to the ``projects/exported_jobs`` folder,
+then go to the "Administration" page and click on the ``Import jobs`` button.

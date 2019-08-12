@@ -1,9 +1,15 @@
-==============
-Service result
-==============
+================
+Results of a run
+================
 
 Real-time status update
 -----------------------
+
+Upon running a job, a log window will pop-up and show you the logs in real-time.
+You can go to the "Run Management" page to see what's happening in real-time: logs, current status, and progress
+(if the service has device targets, eNMS tells you in real-time how many devices have been done and how many are left).
+
+
 
 Service results
 ---------------

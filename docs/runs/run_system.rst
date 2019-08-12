@@ -10,6 +10,12 @@ You can run a job from:
 - the "Service Management" or "Workflow Management" pages, by clicking on the "Run" or "Run with Updates" buttons
 - the "Workflow builder" page, from the right-click menu.
 
+There are two types of runs:
+
+- Standard run (``Run`` button): uses the service properties during the run.
+- Parametrized run (``Run with Updates`` button): a window is displayed with all properties initialized to the service
+properties. You can change any property for the current run, but these changes won't be saved back to the service properties.
+
 Run Notification
 ----------------
 

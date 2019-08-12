@@ -2,13 +2,11 @@
 Service result
 ==============
 
+Real-time status update
+-----------------------
+
 Service results
 ---------------
-
-Real-time status update
-***********************
-
-
 
 Results are stored for each run of the Service Instance (and for Workflows at large).
 The results are displayed as a JSON object. If the job ran on several device, you can display the results for a

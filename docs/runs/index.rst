@@ -1,9 +1,9 @@
-=============
-Running a job
-=============
+===============================
+Running a service or a workflow
+===============================
 
 .. toctree::
    :maxdepth: 1
 
-   run_management
+   run_system
    results

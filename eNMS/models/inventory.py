@@ -275,7 +275,7 @@ class Pool(AbstractPool):
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
     name = Column(String(SMALL_STRING_LENGTH), unique=True)
     last_modified = Column(String(SMALL_STRING_LENGTH), default="")
-    description = Column(String(SMALL_STRING_LENGTH), default="")
+    description = Column(String(SMALL_STRING_LENGTH))
     operator = Column(String(SMALL_STRING_LENGTH), default="all")
     devices = relationship(
         "Device", secondary=pool_device_table, back_populates="pools"

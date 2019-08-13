@@ -66,7 +66,7 @@ class Parameters(AbstractBase):
     mattermost_url = Column(String(SMALL_STRING_LENGTH), default="")
     mattermost_channel = Column(String(SMALL_STRING_LENGTH), default="")
     mattermost_verify_certificate = Column(Boolean, default=False)
-    slack_token = Column(String(SMALL_STRING_LENGTH), default="")
+    slack_token = Column(String(SMALL_STRING_LENGTH))
     slack_channel = Column(String(SMALL_STRING_LENGTH), default="")
 
     def update(self, **kwargs: Any) -> None:

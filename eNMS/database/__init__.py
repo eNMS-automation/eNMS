@@ -1,5 +1,5 @@
 from os import environ
-from sqlalchemy import create_engine, PickleType
+from sqlalchemy import create_engine, PickleType, String
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -10,8 +10,6 @@ DATABASE_URL = environ.get(
     "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
 )
 DIALECT = DATABASE_URL.split(":")[0]
-SMALL_STRING_LENGTH = int(environ.get("SMALL_STRING_LENGTH", 255))
-LARGE_STRING_LENGTH = int(environ.get("LARGE_STRING_LENGTH", 2 ** 15))
 
 
 def session_factory() -> Any:
@@ -41,3 +39,7 @@ Base = declarative_base()
 class CustomMediumBlobPickle(PickleType):
     if DIALECT == "mysql":
         impl = MSMediumBlob
+
+
+SmallString = String(int(environ.get("SMALL_STRING_LENGTH", 255)))
+LargeString = String(int(environ.get("LARGE_STRING_LENGTH", 2 ** 15)))

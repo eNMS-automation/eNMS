@@ -16,7 +16,9 @@ In the example below, the job ``process_payload1`` uses the results from ``get_f
 Payload transfer
 ----------------
 
-The most important characteristic of workflows is the transfer of data between jobs. When a job starts, it is provided with the results of ALL jobs in the workflow that have already been executed (and not only the results of its "predecessors").
+The most important characteristic of workflows is the transfer of data between jobs.
+When a job starts, it is provided with the results of ALL jobs in the workflow
+that have already been executed (and not only the results of its "predecessors").
 
 The base code for a job function is the following:
 
@@ -37,84 +39,47 @@ The base code for a job function is the following:
         return {"success": True, "result": "example"}
 
 
-The dictionary that is returned by ``job`` is the payload of the job, i.e the information that will be transferred to the next jobs to run in the workflow. It MUST contain a key ``success``, to tell eNMS whether the job was considered a success or not (therefore influencing how to move forward in the workflow: either via a ``Success`` edge or a ``Failure`` edge).
-  
-The last argument of the ``job`` function is ``payload``: it is a dictionary that contains the results of all jobs that have already been executed.
+The dictionary that is returned by ``job`` is the result of the job,
+i.e the information that will be transferred to the next jobs to run in the workflow.
+It MUST contain a key ``success``, to tell eNMS whether the job was considered a
+success or not (therefore influencing how to move forward in the workflow:
+either via a ``Success`` edge or a ``Failure`` edge).
 
-If we consider the aforementioned workflow, the job ``process_payload1`` receives the variable ``payload`` that contains the results of all other jobs in the workflow (because it is the last one to be executed).
-
-The results of the job ``get_facts`` is the following:
-
-::
-
-    "get_facts": {
-      "results": {
-        "devices": {
-          "Washington": {
-            "match": "",
-            "negative_logic": false,
-            "result": {
-              "get_facts": {
-                "fqdn": "localhost",
-                "hostname": "localhost",
-                "interface_list": [
-                  "Loopback11",
-                  "Loopback15",
-                  "Loopback16",
-                  "Management1"
-                ],
-                "model": "vEOS",
-                "os_version": "4.21.1.1F-10146868.42111F",
-                "serial_number": "",
-                "uptime": 13159,
-                "vendor": "Arista"
-              }
-            },
-            "success": true
-          }
-        }
-      },
-      "success": false
-    }
-
-Consequently, the ``payload`` variable received by ``process_payload1`` will look like this:
+In case the job has "device targets", it will receive an additional argument ``device``
 
 ::
 
-  {
-    "get_facts": {
-      "results": {
-        "devices": {
-          "Washington": {
-            "match": "",
-            "negative_logic": false,
-            "result": {
-              "get_facts": {
-                "fqdn": "localhost",
-                "hostname": "localhost",
-                "interface_list": [
-                  "Loopback11",
-                  "Loopback15",
-                  "Loopback16",
-                  "Management1"
-                ],
-                "model": "vEOS",
-                "os_version": "4.21.1.1F-10146868.42111F",
-                "serial_number": "",
-                "uptime": 13159,
-                "vendor": "Arista"
-              }
-            },
-            "success": true
-          }
-        }
-      },
-      "success": false
-    }
-    "get_interfaces": {...},
-    "get_config": {...},
-    etc...
-  }
+    def job(self, payload: dict, device: Device) -> dict:
+        return {"success": True, "result": "example"}
+
+The last argument of the ``job`` function is ``payload``: it is a dictionary that
+contains the results of all jobs that have already been executed.
+
+If we consider the aforementioned workflow, the job ``process_payload1`` receives
+the variable ``payload`` that contains the results of all other jobs in the workflow
+(because it is the last one to be executed).
+
+It can access the results with the ``get_result`` function, that takes two arguments:
+
+- job (mandatory): the name of the job whose result you want to retrieve
+- device (optional): if the job has device targets, you can specify
+a device in case you want to get the result of the job for a specific device.
+
+::
+
+    def get_result(self, job: str, device: Optional[str] = None) -> dict:
+        ...
+        return result
+
+You can then access the result of previous jobs with the ``get_result`` function.
+Examples:
+
+- ``get_result("get_facts")``
+- ``get_result("get_interfaces", device="Austin")``
+- ``get_result("get_interfaces", device=device.name)``
+
+You can use the ``get_result`` function everywhere python code is accepted.
+See the "Advanced / python code" section of the docs for more information.
 
 Set and get data in a workflow
 ------------------------------
@@ -168,7 +133,14 @@ You can therefore treat it as a dictionary to access the content of the results:
 Use of a SwissArmyKnifeService instance to process the payload
 --------------------------------------------------------------
 
-When the only purpose of a function is to process the payload to build a "result" set or simply to determine whether the workflow is a "success" or not, the service itself does not have have any variable "parameters". It is not necessary to create a new Service (and therefore a new class, in a new file) for each of them. Instead, you can group them all in the SwissArmyKnifeService class, and add a method called after the name of the instance. The SwissArmyKnifeService class acts as a "job multiplexer" (see the ``SwissArmyKnifeService`` section of the doc).
+When the only purpose of a function is to process the payload to build a "result" set
+or simply to determine whether the workflow is a "success" or not,
+the service itself does not have have any variable "parameters".
+It is not necessary to create a new Service (and therefore a new class, in a new file)
+for each of them. Instead, you can group them all in the SwissArmyKnifeService class,
+and add a method called after the name of the instance.
+The SwissArmyKnifeService class acts as a "job multiplexer"
+(see the ``SwissArmyKnifeService`` section of the doc).
 If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the function of ``process_payload1`` could look like:
 
 ::

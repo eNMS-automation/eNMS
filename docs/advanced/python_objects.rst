@@ -15,9 +15,10 @@ You have access to the following variables:
 - ``device``: current device, if the ``Has Device Targets`` is ticked ("Device" object).
 - ``payload``: current state of the workflow payload (dictionary).
 - ``config``: eNMS global configuration (available in the administration panel, section "Parameters", button "General").
+- ``workflow``: parent workflow, if the service is running within a workflow.
 - ``workflow_device``: parent device, if the device targets are defined programmatically based on the workflow device.
 
-And the following function:
+And the following functions:
 
 - ``get_var`` and ``set_var``: function to save data to and retrieve data from the payload.
 The use of these two functions is explained in the section ""Set and get data in a workflow" of the workflow payload docs.

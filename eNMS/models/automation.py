@@ -1,5 +1,6 @@
 from collections import defaultdict
 from copy import deepcopy
+from functools import partial
 from git import Repo
 from git.exc import GitCommandError
 from json import loads
@@ -217,7 +218,7 @@ class Run(AbstractBase):
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
-            values = controller.eval(self.job.python_query, self, **locals())
+            values = self.eval(self.job.python_query, **locals())
             devices, not_found = set(), set()
             if isinstance(values, str):
                 values = [values]

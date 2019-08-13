@@ -4,13 +4,12 @@ from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
 from flask_login import current_user
-from functools import partial
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import attrgetter
 from pathlib import Path
 from re import search, sub
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Dict, Optional
 
 from eNMS.concurrency import run_job
 from eNMS.controller.base import BaseController

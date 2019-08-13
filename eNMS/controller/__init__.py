@@ -1,4 +1,3 @@
-from typing import Any
 from uuid import getnode
 
 from eNMS.controller.administration import AdministrationController

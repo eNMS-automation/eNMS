@@ -33,7 +33,7 @@ class PayloadValidationService(Service):
     __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        eval_result = controller.eval(run.query, run, **locals())
+        eval_result = run.eval(run.query, **locals())
         result = run.convert_result(eval_result)
         match = (
             run.sub(run.content_match, locals())

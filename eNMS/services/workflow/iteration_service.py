@@ -43,7 +43,7 @@ class IterationService(Service):
             else:
                 values = run.user_provided_values["all"]
         else:
-            values = controller.eval(run.python_query_values, run, **locals())
+            values = run.eval(run.python_query_values, **locals())
         results, success = {}, True
         for value in values:
             run_data = {

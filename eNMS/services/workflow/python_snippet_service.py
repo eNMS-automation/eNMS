@@ -39,17 +39,10 @@ class PythonSnippetService(Service):
 
         globals = {
             "__builtins__": __builtins__,
-            "device": device,
-            "payload": payload,
             "_code_result_": _code_result_,
-            "config": controller.custom_config,
-            "get_result": controller.get_result(run.parent_runtime),
-            "get_var": controller.get_var(payload),
             "log": run.log,
-            "parent": run.workflow,
             "save_result": save_result,
-            "set_var": controller.get_var(payload),
-            "workflow_device": run.workflow_device,
+            **run.python_code_kwargs(**locals())
         }
 
         try:

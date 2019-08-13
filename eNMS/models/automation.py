@@ -466,18 +466,21 @@ class Run(AbstractBase):
         run = fetch("Run", parent_runtime=self.parent_runtime, job_id=job_id)
         return run.get_result(device)
 
-    def eval(self, query: str, **locals: Any) -> Any:  # noqa: N805
+    def python_code_kwargs(self, **locals: Any) -> dict:
+        var_editor = partial(self.payload_helper, locals["payload"])
+        return {
+            "config": controller.custom_config,
+            "get_var": var_editor,
+            "get_result": self.get_job_result,
+            "parent": self.workflow,
+            "set_var": var_editor,
+            "workflow_device": self.workflow_device,
+            **locals,
+        }
+
+    def eval(self, query: str, **locals: Any) -> Any:
         try:
-            return eval(
-                query,
-                {
-                    "get_var": partial(self.payload_helper, locals["payload"]),
-                    "get_result": self.get_job_result,
-                    "config": controller.custom_config,
-                    "workflow_device": self.workflow_device,
-                    **locals,
-                },
-            )
+            return eval(query, self.code_kwargs(**locals))
         except Exception as exc:
             raise Exception(
                 "Python Query / Variable Substitution Failure."
@@ -490,7 +493,7 @@ class Run(AbstractBase):
         r = compile("{{(.*?)}}")
 
         def replace(match: Match) -> str:
-            return str(controller.eval(match.group()[2:-2], self, **variables))
+            return str(self.eval(match.group()[2:-2], **variables))
 
         def rec(input: Any) -> Any:
             if isinstance(input, str):
@@ -811,7 +814,7 @@ class Workflow(Job):
             controller.run_db[run.runtime]["current_job"] = job.get_properties()
             skip_job = False
             if job.skip_python_query:
-                skip_job = controller.eval(job.skip_python_query, run, **locals())
+                skip_job = run.eval(job.skip_python_query, **locals())
             if skip_job or job.skip:
                 job_results = {"success": "skipped"}
             elif run.use_workflow_targets and job.python_query:

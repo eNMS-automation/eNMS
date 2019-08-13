@@ -3,7 +3,6 @@ from sqlalchemy.ext.mutable import MutableDict
 from typing import Optional
 from wtforms import BooleanField, HiddenField, StringField
 
-from eNMS.controller import controller
 from eNMS.database import (
     CustomMediumBlobPickle,
     LARGE_STRING_LENGTH,

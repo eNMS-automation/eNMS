@@ -466,21 +466,21 @@ class Run(AbstractBase):
         run = fetch("Run", parent_runtime=self.parent_runtime, job_id=job_id)
         return run.get_result(device)
 
-    def python_code_kwargs(self, **locals: Any) -> dict:
-        var_editor = partial(self.payload_helper, locals["payload"])
+    def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
+        var_editor = partial(_self.payload_helper, locals["payload"])
         return {
             "config": controller.custom_config,
             "get_var": var_editor,
-            "get_result": self.get_job_result,
-            "parent": self.workflow,
+            "get_result": _self.get_job_result,
+            "parent": _self.workflow,
             "set_var": var_editor,
-            "workflow_device": self.workflow_device,
+            "workflow_device": _self.workflow_device,
             **locals,
         }
 
-    def eval(self, query: str, **locals: Any) -> Any:
+    def eval(_self, query: str, **locals: Any) -> Any:  # noqa: N805
         try:
-            return eval(query, self.code_kwargs(**locals))
+            return eval(query, _self.python_code_kwargs(**locals))
         except Exception as exc:
             raise Exception(
                 "Python Query / Variable Substitution Failure."

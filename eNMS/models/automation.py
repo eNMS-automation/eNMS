@@ -872,7 +872,8 @@ class Workflow(Job):
                     jobs.append(successor)
                 if not run.use_workflow_targets and successor == self.jobs[1]:
                     results["success"] = True
-            sleep(job.waiting_time)
+            if not skip_job and not job.skip:
+                sleep(job.waiting_time)
         if run.use_workflow_targets:
             end_devices = allowed_devices["End"]
             results["devices"] = {

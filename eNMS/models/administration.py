@@ -1,11 +1,10 @@
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Column, Float, Integer
-from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.orm import relationship
 from typing import Any, List
 
 
-from eNMS.database.dialect import SmallString
+from eNMS.database.dialect import MutableDict, MutableList, SmallString
 from eNMS.database.associations import pool_user_table
 from eNMS.database.base import AbstractBase
 

@@ -7,8 +7,7 @@ from requests import (
     patch as rest_patch,
 )
 from requests.auth import HTTPBasicAuth
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from sqlalchemy.types import JSON
 from typing import Optional
 from wtforms import (
@@ -20,7 +19,7 @@ from wtforms import (
     StringField,
 )
 
-from eNMS.database.dialect import LargeString, MutableDict, MutableList, SmallString
+from eNMS.database.dialect import LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictSubstitutionField,

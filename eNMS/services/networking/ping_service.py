@@ -1,6 +1,6 @@
 from socket import error, gaierror, socket, timeout
 from subprocess import check_output
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer
 from subprocess import CalledProcessError
 from wtforms import HiddenField, IntegerField, SelectField, StringField
 

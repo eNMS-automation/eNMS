@@ -2,7 +2,7 @@ from glob import glob
 from logging import info
 from os.path import split
 from paramiko import SSHClient, AutoAddPolicy
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField, SelectField
 from wtforms.validators import InputRequired
 

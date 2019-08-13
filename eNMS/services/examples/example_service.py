@@ -6,8 +6,7 @@
 # - A service form, which defines what is displayd in the GUI.
 
 # SQL Alchemy Column types
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableDict, MutableList
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer
 
 # WTForms Fields
 from wtforms import (
@@ -34,7 +33,7 @@ from wtforms.validators import (
     ValidationError,
 )
 
-from eNMS.database.dialect import SmallString
+from eNMS.database.dialect import MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models.automation import Run, Service

@@ -1,5 +1,5 @@
 from subprocess import check_output
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from wtforms import HiddenField
 
 from eNMS.database.dialect import LargeString, SmallString

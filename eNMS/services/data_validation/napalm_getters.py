@@ -1,5 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableDict, MutableList
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from wtforms import HiddenField, SelectMultipleField
 
 from eNMS.database.dialect import MutableDict, MutableList, SmallString

@@ -1,10 +1,9 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 from wtforms import BooleanField, HiddenField, StringField
 
 from eNMS.controller import controller
-from eNMS.database.dialect import LargeString, MutableDict, MutableList, SmallString
+from eNMS.database.dialect import LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Run, Service

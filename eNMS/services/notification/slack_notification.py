@@ -1,5 +1,5 @@
 from slackclient import SlackClient
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea

@@ -1,12 +1,11 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.concurrency import run_job
 from eNMS.controller import controller
-from eNMS.database.dialect import SmallString
+from eNMS.database.dialect import MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField
 from eNMS.models.automation import Run, Service

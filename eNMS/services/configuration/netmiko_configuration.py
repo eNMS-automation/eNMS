@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField, StringField
 from wtforms.widgets import TextArea
 

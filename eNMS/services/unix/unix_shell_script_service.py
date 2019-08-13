@@ -1,6 +1,6 @@
 from fabric import Connection
 from io import StringIO
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, Text
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from wtforms import HiddenField, StringField, BooleanField
 from wtforms.widgets import TextArea
 

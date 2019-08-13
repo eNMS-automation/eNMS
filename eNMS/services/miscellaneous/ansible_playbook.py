@@ -1,12 +1,11 @@
 from json import dumps
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from subprocess import check_output
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
 from eNMS.controller import controller
-from eNMS.database.dialect import LargeString, MutableDict, MutableList, SmallString
+from eNMS.database.dialect import LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictSubstitutionField,

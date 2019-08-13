@@ -125,3 +125,11 @@ A workflow displayed in the Workflow Builder page is automatically updated:
 - Every 15 seconds otherwise
 
 This allows multiple users to work concurrently on a single Workflow in the Workflow Builder.
+
+Restart a workflow
+------------------
+
+A workflow can be restarted:
+
+- from any jobs as "Entry points". 
+- with the payload of a previous runs.

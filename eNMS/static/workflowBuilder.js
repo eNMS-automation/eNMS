@@ -324,7 +324,7 @@ Object.assign(action, {
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () =>
     showResultsPanel(workflow.id, workflow.name, "workflow"),
-  "Workflow Logs": () => showLogs(workflow.id),
+  "Workflow Logs": () => showLogsPanel(workflow),
   "Add to Workflow": () => showPanel("add_jobs"),
   "Remove from Workflow": deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),

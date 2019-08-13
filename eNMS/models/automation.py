@@ -116,7 +116,7 @@ class Run(AbstractBase):
             raise AttributeError
 
     def result(self, device: Optional[str] = None) -> Optional["Result"]:
-        result = [r for r in self.results if r.device_id == device]
+        result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
 
     def generate_row(self, table: str) -> List[str]:

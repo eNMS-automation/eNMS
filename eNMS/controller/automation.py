@@ -103,7 +103,7 @@ class AutomationController(BaseController):
 
     def get_job_logs(self, **kwargs: Any) -> dict:
         run = fetch("Run", allow_none=True, runtime=kwargs["runtime"])
-        result = run.get_result() if run else None
+        result = run.result() if run else None
         logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])
         filtered_logs = (log for log in logs if kwargs["filter"] in log)
         return {"logs": "\n".join(filtered_logs), "refresh": not bool(result)}

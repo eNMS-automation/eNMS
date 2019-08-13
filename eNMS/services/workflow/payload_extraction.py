@@ -43,7 +43,6 @@ class PayloadExtractionService(Service):
             try:
                 variables = locals()
                 variables.pop("query")
-                print(device, variables["device"])
                 value = run.eval(query, **variables)
             except Exception as exc:
                 success = False

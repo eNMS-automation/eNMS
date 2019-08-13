@@ -61,7 +61,6 @@ class Result(AbstractBase):
     device_name = association_proxy("device", "name")
 
     def __getitem__(self, key: Any) -> Any:
-        print("iii"*100, key, self.result[key])
         return self.result[key]
 
     def __init__(self, **kwargs: Any) -> None:
@@ -295,7 +294,6 @@ class Run(AbstractBase):
         factory("Result", **result_kw)
 
     def get_results(self, payload: dict, device: Optional["Device"] = None) -> dict:
-        print("aaa"*100, self, device)
         self.log(
             "info", f"Running {self.job.type}{f' on {device.name}' if device else ''}"
         )
@@ -317,8 +315,6 @@ class Run(AbstractBase):
         )
         controller.run_db[self.runtime]["completed"] += 1
         controller.run_db[self.runtime]["failed"] += 1 - results["success"]
-        if device:
-            self.create_result(results, device)
         return results
 
     def log(self, severity: str, log: str) -> None:
@@ -464,13 +460,8 @@ class Run(AbstractBase):
             return payload[name]
 
     def get_result(self, job: str, device: Optional[str] = None) -> dict:
-        print("ooo"*100)
         job_id = fetch("Job", name=job).id
-        print(job_id)
         run = fetch("Run", parent_runtime=self.parent_runtime, job_id=job_id)
-        print(run, device)
-        print(run.result())
-        print(run.result(device))
         return run.result(device)
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
@@ -627,6 +618,9 @@ class Service(Job):
                 device_results = {
                     device.name: run.get_results(payload, device) for device in targets
                 }
+            for device_name, r in deepcopy(device_results).items():
+                device = fetch("Device", name=device_name)
+                run.create_result(r, device)
             results = {"devices": device_results}
             return results
 

@@ -326,13 +326,26 @@ Execute a service multiple times with different values.
 
 Configuration parameters for creating this service instance:
 - ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
-- ``Where Values come from`` The values over which the service iterates can either come from a user-provided dictionary, or be retrieved from the payload with a YaQL query.
+- ``Where Values come from`` The values over which the service iterates can either come from a user-provided dictionary, or be retrieved from the payload with a Python query.
 - ``Iteration Values for Iteration: User provided`` A dictionary that contains the iteration values. If the iteration values are common to all devices, the dictionary must have a unique key `all` associated to the value,
 for example `{"all": [1, 2, 3]}`. However, if the values are different for each device, the keys must be device names, for example `{"device1": [1, 2], "device2": [3, 4]}`.
-- ``Iteration Values for Iteration: YaQL query on the payload``: a YaQL query on the payload to fetch the iteration values. This field supports variable substitution, such that you can retrieve different values in the payload for each device
+- ``Iteration Values for Iteration: Python query on the payload``: a Python query on the payload to fetch the iteration values. This field supports variable substitution, such that you can retrieve different values in the payload for each device
 by using `{{device.name}}` in the query.
 - ``Iteration Variable Name``: the value is sent to the "iterated job" via the payload, where it is associated to a variable. You can choose the name of the variable with this field.
 If you set this variable to `value`, the payload passed to the iterated service will contain a key `value` associated to the iteration value.
 - ``Job to run for each Value``: the job to execute.
 
-.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `YaQL query` input field.
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `Python query` input field.
+
+Payload Extraction Services
+---------------------------
+
+Extract some data from the payload with a python query, and optionally post-process the result with a regular expression or a TextFSM template.
+
+Configuration parameters for creating this service instance:
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
+- ``Variable1``: name of the resulting variable in the results.
+- ``Python Query1``: a python query to retrieve data from the payload.
+- ``Match Type1``: choose the type of post-processing: no post-processing, regular expression, or TextFSM template.
+- ``Match``: regular expression or TextFSM template, depending on the value of the "Match Type1".
+- Same fields replicated twice (2,3 instead of 1): the service can extract / post-process up to 3 variables.

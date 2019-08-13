@@ -126,10 +126,16 @@ A workflow displayed in the Workflow Builder page is automatically updated:
 
 This allows multiple users to work concurrently on a single Workflow in the Workflow Builder.
 
-Restart a workflow
-------------------
+Workflow Restartability
+-----------------------
 
-A workflow can be restarted:
+A workflow can be restarted with any jobs set as "Entry points"
+and with the payload from a previous runs.
+This is useful if you are testing a workflow with a lot of jobs, and you don't want it to
+restart from scratch all the time.
 
-- from any jobs as "Entry points". 
-- with the payload of a previous runs.
+You must click on "Run with Updates" and go to the "Workflow" section to access these parameters.
+
+.. image:: /_static/workflows/workflow_restartability.png
+   :alt: Workflow Restartability
+   :align: center

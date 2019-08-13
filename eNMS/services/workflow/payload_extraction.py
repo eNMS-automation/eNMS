@@ -66,9 +66,9 @@ class PayloadExtractionService(Service):
 
 
 match_choices = (
-    ("none", "No post-processing"),
-    ("regex", "Regular Expression (findall)"),
-    ("textfsm", "TextFSM Template"),
+    ("none", "Use Value as Extracted"),
+    ("regex", "Apply Regular Expression (findall)"),
+    ("textfsm", "Apply TextFSM Template"),
 )
 
 

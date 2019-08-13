@@ -327,3 +327,9 @@ Advanced: Migrating Services and Workflows to a new instance with a different in
   - Files needed to migrate: Service.yaml, Workflow.yaml, WorkflowEdge.yaml
 
 If I only want to Import new devices or links to eNMS, perform import of the topology spreadsheet using :guilabel:`Admin / Administration / Topology Import and Export`.
+
+Change the documentation base URL
+---------------------------------
+
+If you prefer to host your own version of the documentation, you can configure the ``DOCUMENTATION_URL`` environment variable.
+By default, this variable is set to https://enms.readthedocs.io/en/latest/: it points to the online documentation.

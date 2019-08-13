@@ -467,7 +467,7 @@ class Run(AbstractBase):
         return run.result(device)
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
-        var_editor = partial(_self.payload_helper, locals["payload"])
+        var_editor = partial(_self.payload_helper, locals.get("payload", {}))
         return {
             "config": controller.custom_config,
             "get_var": var_editor,

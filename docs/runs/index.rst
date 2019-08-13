@@ -1,6 +1,6 @@
-===============================
-Running a service or a workflow
-===============================
+====
+Runs
+====
 
 .. toctree::
    :maxdepth: 1

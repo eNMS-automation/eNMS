@@ -158,12 +158,12 @@ The ``get_result`` function takes two arguments:
 - the name of the job (name of the service or workflow whose results you want to retrieve)
 - (Optional) the name of a device, if you want to retrieve the job results for a specific device.
 
-Example: ``get_result(job="Payload editor", device="Test_device")``
+Example: ``get_result("Payload editor", device="Test_device")``
 
 The results of a job is always a dictionary: this is what the ``get_result`` function returns.
 You can therefore treat it as a dictionary to access the content of the results:
 
-``get_result(job="Payload editor")["runtime"]``
+``get_result("Payload editor")["runtime"]``
 
 Use of a SwissArmyKnifeService instance to process the payload
 --------------------------------------------------------------
@@ -173,11 +173,10 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 
 ::
 
-    def process_payload1(self, payload: dict, device: Device) -> dict:
-        # we use the name of the device to get the result for that particular
-        # device.
-        get_facts = payload["get_facts"]["results"]["devices"][device.name]
-        get_interfaces = payload["get_interfaces"]["results"]["devices"][device.name]
+    def process_payload1(self, run: "Run", payload: dict, device: Device) -> dict:
+        # we use the name of the device to get the result for that particular device.
+        get_facts = run.get_result("get_facts", device.name)
+        get_interfaces = run.get_result("get_interfaces", device.name)
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000
         mgmg1_is_up = get_interfaces["result"]["get_interfaces"]["Management1"]["is_up"]
         return {

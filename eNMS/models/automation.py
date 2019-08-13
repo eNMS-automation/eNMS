@@ -472,7 +472,7 @@ class Run(AbstractBase):
             "config": controller.custom_config,
             "get_var": var_editor,
             "get_result": _self.get_result,
-            "parent": _self.workflow,
+            "workflow": _self.workflow,
             "set_var": var_editor,
             "workflow_device": _self.workflow_device,
             **locals,

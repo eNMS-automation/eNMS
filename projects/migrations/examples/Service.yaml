@@ -28,6 +28,8 @@
     Netmiko prompts: ['-279', '-158']
     Netmiko_VRF_workflow: ['-200', '0']
     Workflow with separate failure - success path: [-239, -32]
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      -283, 31]
     Workflow_of_workflows: ['-300', '0']
     payload_extraction_validation_worflow: ['-200', '0']
     payload_transfer_workflow: ['-200', '0']
@@ -79,6 +81,8 @@
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
     Workflow with separate failure - success path: [765, 251]
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      594, -3]
     Workflow_of_workflows: ['300', '0']
     payload_extraction_validation_worflow: ['200', '0']
     payload_transfer_workflow: ['500', '0']
@@ -350,6 +354,8 @@
   pools: []
   positions:
     Workflow with separate failure - success path: [773, 11]
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      -223, -170]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -379,7 +385,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:13.634944'
+  last_modified: '2019-08-13 20:54:58.539660'
   local_as: 100
   loopback: Lo100
   loopback_ip: 100.1.1.1
@@ -392,7 +398,9 @@
   number_of_retries: 0
   operating_system: ''
   pools: []
-  positions: {}
+  positions:
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      110, -170]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -401,14 +409,14 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
-  skip: false
+  skip: true
   skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: ConfigureBgpService
   vendor: ''
   vrf_name: configure_BGP_test
-  waiting_time: 0
+  waiting_time: 100
 - color: '#D2E5FF'
   creator: admin
   credentials: device
@@ -866,6 +874,8 @@
   pools: []
   positions:
     Workflow with separate failure - success path: [199, 203]
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      357, -52]
     payload_transfer_workflow: ['-50', '0']
     'python Workflow: payload editor and pool helper': ['225', '-223']
   push_to_git: false
@@ -1523,6 +1533,8 @@
   pools: []
   positions:
     Napalm_VRF_workflow: ['10', '-32']
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      123, -187]
     'python Workflow: payload editor and pool helper': ['266', '161']
   privileged_mode: false
   push_to_git: false
@@ -2510,5 +2522,61 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show version
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-13 20:58:22.190268'
+  mail_recipient: ''
+  max_processes: 10
+  multiprocessing: true
+  name: Show version with multiprocessing
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      154, 108]
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
   vendor: ''
   waiting_time: 0

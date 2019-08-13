@@ -142,3 +142,24 @@
   workflow: Workflow with separate failure - success path}
 - {destination: get_interfaces, name: 62-prerequisite:20->22, source: REST is_alive,
   subtype: prerequisite, workflow: Workflow with separate failure - success path}
+- {destination: Show version with multiprocessing, name: 67-success:1->68, source: Start,
+  subtype: success, workflow: 'Workflow: multiple entry points, skip job, multiprocessing,
+    separate paths'}
+- {destination: napalm_configure_bgp_1, name: 67-success:9->10, source: Example1,
+  subtype: success, workflow: 'Workflow: multiple entry points, skip job, multiprocessing,
+    separate paths'}
+- {destination: REST is_alive, name: 67-success:10->20, source: napalm_configure_bgp_1,
+  subtype: success, workflow: 'Workflow: multiple entry points, skip job, multiprocessing,
+    separate paths'}
+- {destination: REST is_alive, name: 67-failure:68->20, source: Show version with
+    multiprocessing, subtype: failure, workflow: 'Workflow: multiple entry points,
+    skip job, multiprocessing, separate paths'}
+- {destination: End, name: 67-success:20->2, source: REST is_alive, subtype: success,
+  workflow: 'Workflow: multiple entry points, skip job, multiprocessing, separate
+    paths'}
+- {destination: REST is_alive, name: 67-prerequisite:68->20, source: Show version
+    with multiprocessing, subtype: prerequisite, workflow: 'Workflow: multiple entry
+    points, skip job, multiprocessing, separate paths'}
+- {destination: REST is_alive, name: 67-prerequisite:10->20, source: napalm_configure_bgp_1,
+  subtype: prerequisite, workflow: 'Workflow: multiple entry points, skip job, multiprocessing,
+    separate paths'}

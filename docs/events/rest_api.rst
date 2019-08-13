@@ -14,6 +14,7 @@ eNMS has a ReST API allowing to:
 - retrieve a list of devices matching a specific set of parameters
 - initiate a database backup or restore (also used for version upgrade migration)
 - initiate a device inventory bulk import or export
+- start a subset of the functionalities that are otherwise available in the admin panel.
 
 This ReST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
 
@@ -226,6 +227,15 @@ For the export, you must set the name of the exported file in the JSON payload:
  {
      "name": "rest"
  }
+
+Administration panel functionality
+**********************************
+
+Some of the functionalities available in the administration panel can be accessed from the REST API as well:
+
+- ``update_database_configurations_from_git``: download and update device configuration from a git repository.
+- ``update_all_pools``: update all pools.
+- ``get_git_content``: fetch git configuration and automation content.
 
 Swagger / OpenAPI Interface
 ***************************

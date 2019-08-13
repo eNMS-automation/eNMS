@@ -439,6 +439,52 @@ class Run(AbstractBase):
                 for source, destination in files:
                     getattr(scp, self.direction)(source, destination)
 
+    def payload_helper(
+        self,
+        payload: dict,
+        name: str,
+        value: Optional[Any] = None,
+        section: Optional[str] = None,
+        device: Optional[str] = None,
+    ) -> Any:
+        payload = payload.setdefault("variables", {})
+        if device:
+            payload = payload.setdefault("devices", {})
+            payload = payload.setdefault(device, {})
+        if section:
+            payload = payload.setdefault(section, {})
+        if value:
+            payload[name] = value
+        else:
+            if name not in payload:
+                raise Exception(f"Payload Editor: {name} not found in {payload}.")
+            return payload[name]
+
+    def get_job_result(self, job: str, device: Optional[str] = None) -> dict:
+        job_id = fetch("Job", name=job).id
+        run = fetch("Run", parent_runtime=self.parent_runtime, job_id=job_id)
+        return run.get_result(device)
+
+    def eval(self, query: str, **locals: Any) -> Any:  # noqa: N805
+        try:
+            return eval(
+                query,
+                {
+                    "get_var": partial(self.payload_helper, locals["payload"]),
+                    "get_result": self.get_job_result,
+                    "config": controller.custom_config,
+                    "workflow_device": self.workflow_device,
+                    **locals,
+                },
+            )
+        except Exception as exc:
+            raise Exception(
+                "Python Query / Variable Substitution Failure."
+                " Check that all variables are defined."
+                " If you are using the 'device' variable, "
+                f"check that the service has targets. ({str(exc)})"
+            )
+
     def sub(self, input: Any, variables: dict) -> dict:
         r = compile("{{(.*?)}}")
 

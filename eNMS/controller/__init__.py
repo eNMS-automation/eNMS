@@ -28,26 +28,6 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             for parameter in parameters.get_properties():
                 setattr(self, parameter, getattr(parameters, parameter))
 
-    def eval(_self, query: str, _run: Any, **locals: Any) -> Any:  # noqa: N805
-        try:
-            return eval(
-                query,
-                {
-                    "get_var": _self.get_var(locals["payload"]),
-                    "get_result": _self.get_result(_run.parent_runtime),
-                    "config": _self.custom_config,
-                    "workflow_device": _run.workflow_device,
-                    **locals,
-                },
-            )
-        except Exception as exc:
-            raise Exception(
-                "Python Query / Variable Substitution Failure."
-                " Check that all variables are defined."
-                " If you are using the 'device' variable, "
-                f"check that the service has targets. ({str(exc)})"
-            )
-
     def configure_server_id(self) -> None:
         factory(
             "Server",

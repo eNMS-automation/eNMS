@@ -139,3 +139,10 @@ You must click on "Run with Updates" and go to the "Workflow" section to access 
 .. image:: /_static/workflows/workflow_restartability.png
    :alt: Workflow Restartability
    :align: center
+
+Job Display Customization
+-------------------------
+
+In the Workflow Builder, you can change how jobs are displayed by configuring their shape, size and color.
+These parameters can be changed from the "Workflow" section of the edit panel.
+By default, a job is a "Box", size 40, color #D2E5FF.

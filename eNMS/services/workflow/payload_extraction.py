@@ -75,15 +75,32 @@ match_choices = (
 class PayloadExtractionForm(ServiceForm):
     form_type = HiddenField(default="PayloadExtractionService")
     has_targets = BooleanField("Has Target Devices")
-    variable1 = StringField()
-    query1 = StringField("Python query 1")
-    match_type1 = SelectField(choices=match_choices)
-    match1 = StringField(widget=TextArea(), render_kw={"rows": 5})
-    variable2 = StringField()
-    query2 = StringField("Python query 2")
-    match_type2 = SelectField(choices=match_choices)
-    match2 = StringField(widget=TextArea(), render_kw={"rows": 5})
-    variable3 = StringField()
-    query3 = StringField("Python query 3")
-    match_type3 = SelectField(choices=match_choices)
-    match3 = StringField(widget=TextArea(), render_kw={"rows": 5})
+    variable1 = StringField("Variable Name")
+    query1 = StringField("Python Extraction Query")
+    match_type1 = SelectField("Post Processing", choices=match_choices)
+    match1 = StringField(
+        "Regular Expression / TextFSM Template Text",
+        widget=TextArea(),
+        render_kw={"rows": 5},
+    )
+    variable2 = StringField("Variable Name")
+    query2 = StringField("Python Extraction Query")
+    match_type2 = SelectField("Post Processing", choices=match_choices)
+    match2 = StringField(
+        "Regular Expression / TextFSM Template Text",
+        widget=TextArea(),
+        render_kw={"rows": 5},
+    )
+    variable3 = StringField("Variable Name")
+    query3 = StringField("Python Extraction Query")
+    match_type3 = SelectField("Post Processing", choices=match_choices)
+    match3 = StringField(
+        "Regular Expression / TextFSM Template Text",
+        widget=TextArea(),
+        render_kw={"rows": 5},
+    )
+    groups = {
+        "Extraction 1": ["variable1", "query1", "match_type1", "match1"],
+        "Extraction 2": ["variable2", "query2", "match_type2", "match2"],
+        "Extraction 3": ["variable3", "query3", "match_type3", "match3"],
+    }

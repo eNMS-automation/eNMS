@@ -43,6 +43,7 @@ class PayloadExtractionService(Service):
             try:
                 variables = locals()
                 variables.pop("query")
+                print(device, variables["device"])
                 value = run.eval(query, **variables)
             except Exception as exc:
                 success = False
@@ -100,6 +101,7 @@ class PayloadExtractionForm(ServiceForm):
         render_kw={"rows": 5},
     )
     groups = {
+        "General": ["has_targets"],
         "Extraction 1": ["variable1", "query1", "match_type1", "match1"],
         "Extraction 2": ["variable2", "query2", "match_type2", "match2"],
         "Extraction 3": ["variable3", "query3", "match_type3", "match3"],

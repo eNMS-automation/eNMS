@@ -31,7 +31,7 @@
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       -283, 31]
     Workflow_of_workflows: ['-300', '0']
-    payload_extraction_validation_worflow: ['-200', '0']
+    payload_extraction_validation_worflow: [-200, 0]
     payload_transfer_workflow: ['-200', '0']
     'python Workflow: payload editor and pool helper': ['-326', '45']
     python_query_workflow: ['-164', '15']
@@ -84,7 +84,7 @@
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       594, -3]
     Workflow_of_workflows: ['300', '0']
-    payload_extraction_validation_worflow: ['200', '0']
+    payload_extraction_validation_worflow: [200, 0]
     payload_transfer_workflow: ['500', '0']
     'python Workflow: payload editor and pool helper': ['530', '155']
     python_query_workflow: ['651', '20']
@@ -1293,7 +1293,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: ['0', '-150']
+    payload_extraction_validation_worflow: [0, -150]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1326,7 +1326,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-05 13:35:57.170497'
+  last_modified: '2019-08-14 00:30:53.413109'
   mail_recipient: ''
   match1: ''
   match2: (\d.*)/32
@@ -1347,12 +1347,12 @@
   operating_system: ''
   pools: []
   positions:
-    payload_extraction_validation_worflow: ['0', '-50']
+    payload_extraction_validation_worflow: [0, -50]
   push_to_git: false
   python_query: ''
-  query1: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["success"]
-  query2: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["result"]
-  query3: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["result"]
+  query1: get_result("netmiko_show_ip_route", device.name)["success"]
+  query2: get_result("netmiko_show_ip_route", device.name)["result"]
+  query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1386,7 +1386,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-06 14:21:03.063670'
+  last_modified: '2019-08-14 00:31:38.508644'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1397,10 +1397,10 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: ['0', '50']
+    payload_extraction_validation_worflow: [0, 50]
   push_to_git: false
   python_query: ''
-  query: payload["payload_extraction"]["results"]["devices"][device.name]["result"]["regex_variable"]
+  query: get_result("payload_extraction", device.name)["result"]["regex_variable"]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1431,7 +1431,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-06 14:21:06.925879'
+  last_modified: '2019-08-14 00:32:02.797893'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1442,10 +1442,10 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: ['0', '150']
+    payload_extraction_validation_worflow: [0, 150]
   push_to_git: false
   python_query: ''
-  query: payload["payload_extraction"]["results"]["devices"][device.name]["result"]["textfsm_variable"]["value"][0][1]
+  query: get_result("payload_extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2391,6 +2391,62 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show version
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-13 20:58:22.190268'
+  mail_recipient: ''
+  max_processes: 10
+  multiprocessing: true
+  name: Show version with multiprocessing
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      154, 108]
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
 - color: '#D2E5FF'
   conversion_property: name
   creator: admin
@@ -2522,61 +2578,5 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
-  vendor: ''
-  waiting_time: 0
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  command: show version
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-08-13 20:58:22.190268'
-  mail_recipient: ''
-  max_processes: 10
-  multiprocessing: true
-  name: Show version with multiprocessing
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
-      154, 108]
-  privileged_mode: false
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: NetmikoValidationService
-  use_device_driver: true
-  validation_method: text
   vendor: ''
   waiting_time: 0

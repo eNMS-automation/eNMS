@@ -27,7 +27,7 @@
     Napalm_VRF_workflow: ['-200', '0']
     Netmiko prompts: ['-279', '-158']
     Netmiko_VRF_workflow: ['-200', '0']
-    Workflow with separate failure - success path: ['-118', '-3']
+    Workflow with separate failure - success path: [-239, -55]
     Workflow_of_workflows: ['-300', '0']
     payload_extraction_validation_worflow: ['-200', '0']
     payload_transfer_workflow: ['-200', '0']
@@ -78,7 +78,7 @@
     Netmiko_VRF_workflow: ['200', '0']
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
-    Workflow with separate failure - success path: ['500', '0']
+    Workflow with separate failure - success path: [750, 6]
     Workflow_of_workflows: ['300', '0']
     payload_extraction_validation_worflow: ['200', '0']
     payload_transfer_workflow: ['500', '0']
@@ -348,7 +348,8 @@
   number_of_retries: 0
   operating_system: ''
   pools: []
-  positions: {}
+  positions:
+    Workflow with separate failure - success path: [456, 1]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -767,7 +768,7 @@
   positions:
     Napalm_VRF_workflow: ['0', '150']
     Netmiko_VRF_workflow: ['0', '150']
-    Workflow with separate failure - success path: ['52', '-2']
+    Workflow with separate failure - success path: [-123, 85]
     python_query_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
@@ -864,7 +865,7 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    Workflow with separate failure - success path: ['232', '134']
+    Workflow with separate failure - success path: [199, 203]
     payload_transfer_workflow: ['-50', '0']
     'python Workflow: payload editor and pool helper': ['225', '-223']
   push_to_git: false
@@ -912,7 +913,7 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow with separate failure - success path: ['214', '-132']
+    Workflow with separate failure - success path: [214, -132]
     payload_transfer_workflow: ['-50', '-100']
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
@@ -2281,6 +2282,102 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
+- arguments: ''
+  color: '#D2E5FF'
+  content_match: ip address\s.*/32
+  content_match_regex: true
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-10 18:26:51.501557'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Ansible Workflow: Arista show configuration (regex match)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  options: {}
+  pass_device_properties: true
+  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
+  pools: []
+  positions:
+    Ansible Workflow: [27, 98]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: AnsiblePlaybookService
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- arguments: ''
+  color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {action: debug, changed: false, failed: false}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-10 18:26:36.791826'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Ansible Workflow: Arista show configuration (dict match)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  options: {}
+  pass_device_properties: true
+  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
+  pools: []
+  positions:
+    Ansible Workflow: [248, -170]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: AnsiblePlaybookService
+  validation_method: dict_included
+  vendor: ''
+  waiting_time: 0
 - color: '#D2E5FF'
   conversion_property: name
   creator: admin
@@ -2412,101 +2509,5 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
-  vendor: ''
-  waiting_time: 0
-- arguments: ''
-  color: '#D2E5FF'
-  content_match: ip address\s.*/32
-  content_match_regex: true
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-08-10 18:26:51.501557'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: 'Ansible Workflow: Arista show configuration (regex match)'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  options: {}
-  pass_device_properties: true
-  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
-  pools: []
-  positions:
-    Ansible Workflow: [27, 98]
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: AnsiblePlaybookService
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
-- arguments: ''
-  color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: json
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {action: debug, changed: false, failed: false}
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-08-10 18:26:36.791826'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: 'Ansible Workflow: Arista show configuration (dict match)'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  options: {}
-  pass_device_properties: true
-  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
-  pools: []
-  positions:
-    Ansible Workflow: [248, -170]
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: AnsiblePlaybookService
-  validation_method: dict_included
   vendor: ''
   waiting_time: 0

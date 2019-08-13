@@ -281,8 +281,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  jobs: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test]
-  last_modified: '2019-08-05 13:30:57.271404'
+  jobs: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1]
+  last_modified: '2019-08-13 20:32:36.649199'
   mail_recipient: ''
   name: Workflow with separate failure - success path
   notification_header: ''

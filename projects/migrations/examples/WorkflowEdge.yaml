@@ -71,10 +71,6 @@
   workflow: payload_transfer_workflow}
 - {destination: get_interfaces, name: 43-success:1->23, source: Start, subtype: success,
   workflow: payload_transfer_workflow}
-- {destination: End, name: 47-success:22->2, source: get_facts, subtype: success,
-  workflow: Workflow with separate failure - success path}
-- {destination: End, name: 47-success:21->2, source: REST is_alive, subtype: success,
-  workflow: Workflow with separate failure - success path}
 - {destination: REST is_alive, name: 47-failure:19->21, source: netmiko_check_no_vrf_test,
   subtype: failure, workflow: Workflow with separate failure - success path}
 - {destination: netmiko_check_no_vrf_test, name: 47-success:1->19, source: Start,
@@ -132,3 +128,9 @@
   workflow: Ansible Workflow}
 - {destination: End, name: 64-success:66->2, source: 'Ansible Workflow: Arista show
     configuration (dict match)', subtype: success, workflow: Ansible Workflow}
+- {destination: Example1, name: 62-success:21->9, source: get_facts, subtype: success,
+  workflow: Workflow with separate failure - success path}
+- {destination: Example1, name: 62-success:20->9, source: REST is_alive, subtype: success,
+  workflow: Workflow with separate failure - success path}
+- {destination: End, name: 62-success:9->2, source: Example1, subtype: success, workflow: Workflow
+    with separate failure - success path}

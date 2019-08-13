@@ -3,7 +3,7 @@ from sqlalchemy.ext.mutable import MutableDict
 from wtforms import HiddenField, SelectField
 from wtforms.widgets import TextArea
 
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database.dialect import LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NapalmForm
@@ -21,7 +21,7 @@ class NapalmConfigurationService(Service):
     content = Column(LargeString, default="")
     driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
-    optional_args = Column(MutableDict.as_mutable(PickleType), default={})
+    optional_args = Column(MutableDict, default={})
 
     __mapper_args__ = {"polymorphic_identity": "NapalmConfigurationService"}
 

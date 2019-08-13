@@ -18,7 +18,7 @@ class NapalmTracerouteService(Service):
     has_targets = True
     driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
-    optional_args = Column(MutableDict.as_mutable(PickleType), default={})
+    optional_args = Column(MutableDict, default={})
     destination_ip = Column(SmallString, default="")
     source_ip = Column(SmallString, default="")
     timeout = Column(Integer, default=0)

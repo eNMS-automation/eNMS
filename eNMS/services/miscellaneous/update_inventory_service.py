@@ -14,7 +14,7 @@ class UpdateInventoryService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    update_dictionary = Column(MutableDict.as_mutable(PickleType), default={})
+    update_dictionary = Column(MutableDict, default={})
 
     __mapper_args__ = {"polymorphic_identity": "UpdateInventoryService"}
 

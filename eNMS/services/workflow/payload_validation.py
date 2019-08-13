@@ -26,7 +26,7 @@ class PayloadValidationService(Service):
     validation_method = Column(SmallString, default="text")
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
+    dict_match = Column(MutableDict, default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
 

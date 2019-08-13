@@ -62,9 +62,9 @@ class ExampleService(Service):
     # - Float
     a_float = Column(Float, default=0.0)
     # - List
-    a_list = Column(MutableList.as_mutable(PickleType))
+    a_list = Column(MutableList)
     # - Dictionary
-    a_dict = Column(MutableDict.as_mutable(PickleType))
+    a_dict = Column(MutableDict)
     # - Boolean
     boolean1 = Column(Boolean, default=False)
     boolean2 = Column(Boolean, default=False)

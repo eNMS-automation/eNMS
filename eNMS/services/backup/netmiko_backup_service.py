@@ -4,7 +4,8 @@ from ruamel import yaml
 from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from wtforms import HiddenField, IntegerField, StringField
 
-from eNMS.database import Session, SMALL_STRING_LENGTH
+from eNMS.database import Session
+from eNMS.database.dialect import SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Run, Service

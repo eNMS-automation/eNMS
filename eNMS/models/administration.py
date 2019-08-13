@@ -42,7 +42,7 @@ class Parameters(AbstractBase):
     cluster_scan_subnet = Column(SmallString, default="")
     cluster_scan_protocol = Column(SmallString, default="")
     cluster_scan_timeout = Column(Float, default=0.0)
-    custom_config = Column(MutableDict.as_mutable(PickleType), default={})
+    custom_config = Column(MutableDict, default={})
     default_longitude = Column(Float, default=0.0)
     default_latitude = Column(Float, default=0.0)
     default_zoom_level = Column(Integer, default=0)
@@ -80,7 +80,7 @@ class User(AbstractBase, UserMixin):
     id = Column(Integer, primary_key=True)
     email = Column(SmallString, default="")
     name = Column(SmallString, default="")
-    permissions = Column(MutableList.as_mutable(PickleType), default=[])
+    permissions = Column(MutableList, default=[])
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(SmallString, default="")
 

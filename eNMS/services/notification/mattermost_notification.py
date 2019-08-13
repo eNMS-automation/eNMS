@@ -6,7 +6,7 @@ from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database.dialect import LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Run, Service

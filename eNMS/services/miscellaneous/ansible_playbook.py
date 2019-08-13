@@ -34,10 +34,10 @@ class AnsiblePlaybookService(Service):
     validation_method = Column(SmallString, default="")
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
+    dict_match = Column(MutableDict, default={})
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
-    options = Column(MutableDict.as_mutable(PickleType), default={})
+    options = Column(MutableDict, default={})
     pass_device_properties = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}

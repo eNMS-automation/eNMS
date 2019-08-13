@@ -19,7 +19,8 @@ from typing import Any, List, Optional, Tuple
 
 from eNMS.concurrency import run_job
 from eNMS.controller import controller
-from eNMS.database import Session, SMALL_STRING_LENGTH, LARGE_STRING_LENGTH
+from eNMS.database import Session
+from eNMS.database.dialect import LargeString, SmallString
 from eNMS.database.associations import (
     job_event_table,
     task_device_table,
@@ -44,7 +45,7 @@ class Task(AbstractBase):
     end_date = Column(SmallString, default="")
     crontab_expression = Column(SmallString, default="")
     is_active = Column(Boolean, default=False)
-    initial_payload = Column(MutableDict.as_mutable(PickleType), default={})
+    initial_payload = Column(MutableDict, default={})
     devices = relationship(
         "Device", secondary=task_device_table, back_populates="tasks"
     )

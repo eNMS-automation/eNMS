@@ -27,7 +27,7 @@ class IterationService(Service):
         SmallString, default="user_provided_values"
     )
     python_query_values = Column(SmallString, default="")
-    user_provided_values = Column(MutableDict.as_mutable(PickleType), default={})
+    user_provided_values = Column(MutableDict, default={})
     conversion_property = Column(SmallString, default="name")
     variable_name = Column(SmallString, default="value")
 

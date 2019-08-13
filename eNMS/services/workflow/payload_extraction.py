@@ -7,7 +7,7 @@ from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
-from eNMS.database import LARGE_STRING_LENGTH, SMALL_STRING_LENGTH
+from eNMS.database.dialect import LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device

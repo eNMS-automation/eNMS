@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from wtforms import HiddenField, SelectMultipleField
 
-from eNMS.database import CustomMediumBlobPickle, SMALL_STRING_LENGTH
+from eNMS.database.dialect import MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import DictValidationForm, NapalmForm
 from eNMS.models.automation import Run, Service
@@ -16,12 +16,12 @@ class NapalmGettersService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     validation_method = Column(SmallString, default="dict_included")
-    dict_match = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
+    dict_match = Column(MutableDict, default={})
     driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
-    getters = Column(MutableList.as_mutable(PickleType), default=[])
+    getters = Column(MutableList, default=[])
     negative_logic = Column(Boolean, default=False)
-    optional_args = Column(MutableDict.as_mutable(PickleType), default={})
+    optional_args = Column(MutableDict, default={})
 
     __mapper_args__ = {"polymorphic_identity": "NapalmGettersService"}
 

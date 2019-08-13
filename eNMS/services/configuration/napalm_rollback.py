@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String
 from sqlalchemy.ext.mutable import MutableDict
 from wtforms import HiddenField
 
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database.dialect import SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Run, Service
@@ -17,7 +17,7 @@ class NapalmRollbackService(Service):
     has_targets = True
     driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
-    optional_args = Column(MutableDict.as_mutable(PickleType), default={})
+    optional_args = Column(MutableDict, default={})
 
     __mapper_args__ = {"polymorphic_identity": "NapalmRollbackService"}
 

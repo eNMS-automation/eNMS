@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from wtforms import HiddenField, IntegerField, StringField
 
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database.dialect import SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device

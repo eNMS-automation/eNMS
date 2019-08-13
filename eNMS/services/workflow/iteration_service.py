@@ -6,7 +6,7 @@ from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.concurrency import run_job
 from eNMS.controller import controller
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database.dialect import SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField
 from eNMS.models.automation import Run, Service

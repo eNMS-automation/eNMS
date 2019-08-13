@@ -3,8 +3,7 @@ from sqlalchemy import PickleType, String, Text
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-
-DIALECT = DATABASE_URL.split(":")[0]
+from eNMS.database import DIALECT
 
 
 class CustomPickleType(PickleType):

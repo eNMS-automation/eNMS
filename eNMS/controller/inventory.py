@@ -13,8 +13,7 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.controller.base import BaseController
-from eNMS.database import Session
-from eNMS.database.dialect import DIALECT
+from eNMS.database import DIALECT, Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, property_types
 from eNMS.properties import field_conversion

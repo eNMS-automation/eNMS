@@ -4,12 +4,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 from typing import Any
 
-from eNMS.database.dialect import DIALECT
-
 
 DATABASE_URL = environ.get(
     "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
 )
+DIALECT = DATABASE_URL.split(":")[0]
 
 
 def session_factory() -> Any:

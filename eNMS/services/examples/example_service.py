@@ -34,7 +34,7 @@ from wtforms.validators import (
     ValidationError,
 )
 
-from eNMS.database import SMALL_STRING_LENGTH
+from eNMS.database.dialect import SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models.automation import Run, Service

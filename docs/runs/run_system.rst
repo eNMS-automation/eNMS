@@ -19,6 +19,9 @@ properties. You can change any property for the current run, but these changes w
 Run Notification
 ----------------
 
+Type of notification
+********************
+
 When a service (or a workflow) finishes, you can choose to receive a notification that contains the logs of the service (whether it was successful or not for each device, etc).
 
 There are three types of notification:
@@ -49,3 +52,13 @@ also an option in the Service Instance configuration to display only failed obje
 list of all passed and failed objects.
 
 In Mattermost, if the ``Mattermost Channel`` is not set, the default ``Town Square`` will be used.
+
+Parameters
+**********
+
+- "Send notification" (boolean)
+- "Notification Method": choose among mail, slack or mattermost.
+- "Notification header": will be displayed at the beginning of the notification.
+- "Include Result Link in summary": whether the notification contains a link to the results.
+- "Mail recipients": if left empty, the recipients defined in the administration panel will be used.
+- "Display only failed nodes": the notification will not include devices for which the job ran successfully.

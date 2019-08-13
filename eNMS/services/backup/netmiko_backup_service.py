@@ -1,7 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 from ruamel import yaml
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer
 from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database import Session

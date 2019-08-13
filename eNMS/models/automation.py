@@ -13,9 +13,8 @@ from pathlib import Path
 from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, PickleType, String, Text
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import backref, relationship
 from time import sleep
 from traceback import format_exc
@@ -25,12 +24,8 @@ from xml.parsers.expat import ExpatError
 
 from eNMS.concurrency import get_device_result
 from eNMS.controller import controller
-from eNMS.database import (
-    CustomMediumBlobPickle,
-    LARGE_STRING_LENGTH,
-    Session,
-    SMALL_STRING_LENGTH,
-)
+from eNMS.database import Session
+from eNMS.database.dialect import LargeString, MutableDict, SmallString
 from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.associations import (
     job_device_table,

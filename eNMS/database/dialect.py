@@ -15,5 +15,3 @@ MutableDict = MutableDict.as_mutable(CustomPickleType)
 MutableList = MutableList.as_mutable(CustomPickleType)
 LargeString = Text(int(environ.get("LARGE_STRING_LENGTH", 2 ** 15)))
 SmallString = String(int(environ.get("SMALL_STRING_LENGTH", 255)))
-
-

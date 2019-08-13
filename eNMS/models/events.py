@@ -7,20 +7,16 @@ from sqlalchemy import (
     Column,
     ForeignKey,
     Integer,
-    PickleType,
-    String,
-    Text,
 )
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship
 from typing import Any, List, Optional, Tuple
 
 from eNMS.concurrency import run_job
 from eNMS.controller import controller
 from eNMS.database import Session
-from eNMS.database.dialect import LargeString, SmallString
+from eNMS.database.dialect import LargeString, MutableDict, SmallString
 from eNMS.database.associations import (
     job_event_table,
     task_device_table,

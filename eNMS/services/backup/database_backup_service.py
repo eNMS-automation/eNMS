@@ -2,7 +2,7 @@ from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
 from os import remove
 from shutil import rmtree
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from tarfile import open as open_tar
 from wtforms import BooleanField, HiddenField, SelectField
 

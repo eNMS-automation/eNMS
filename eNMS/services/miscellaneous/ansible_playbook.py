@@ -6,11 +6,7 @@ from typing import Optional
 from wtforms import BooleanField, HiddenField
 
 from eNMS.controller import controller
-from eNMS.database import (
-    CustomMediumBlobPickle,
-    LARGE_STRING_LENGTH,
-    SMALL_STRING_LENGTH,
-)
+from eNMS.database.dialect import LargeString, MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
     DictSubstitutionField,

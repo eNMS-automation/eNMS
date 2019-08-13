@@ -6,13 +6,11 @@ In this section, instance refers to any device, link, service, workflow, or task
 
 eNMS has a ReST API allowing to:
 
-- run an already created Service instance or a Workflow
 - make sure eNMS is alive
-- retrieve a device
-- delete a device
+- create, update or delete an instance or a list of instances
+- run a Service or a Workflow
+- schedule a task
 - retrieve the current configuration of an device
-- create a device
-- update a device
 - retrieve a list of devices matching a specific set of parameters
 - initiate a database backup or restore (also used for version upgrade migration)
 - initiate a device inventory bulk import or export
@@ -24,6 +22,17 @@ Expected ReST API Headers:
 - Accept:"application/json"
 - Content-Type:"application/json"
 - Authorization:"Basic <xxx>"
+
+
+Heartbeat
+*********
+
+::
+
+ # Test that eNMS is still alive (used for high availability mechanisms)
+ https://<IP_address>/rest/is_alive
+
+eNMS returns either "True" or the ``name`` and ``cpu_load`` if the application is alive.
 
 
 Run a service, or a workflow
@@ -68,17 +77,6 @@ Note:
 - If you do not provide a value for ``devices`` you will get the defualut devices built into the web UI, even if you provide a value in ``pools`` or ``ip_address``.
 - For Postman use the type "raw" for entering key/value pairs into the body. Body must also be formatted as application/JSON.
 - Extra form data parameters passed in the body of the POST are available to that service or workflow in payload["rest_data"][your_key_name1] and payload["rest_data"][your_key_name2], and they can be accessed within a Service Instance UI form as {{payload["rest_data"][your_key_name].
-
-
-Heartbeat
-*********
-
-::
-
- # Test that eNMS is still alive (used for high availability mechanisms)
- https://<IP_address>/rest/is_alive
-
-eNMS returns either "True" or the ``name`` and ``cpu_load`` if the application is alive.
 
 
 Retrieve or delete an instance
@@ -139,7 +137,7 @@ Example of payload to schedule a task from the REST API: this payload will creat
     "job": "netmiko_check_vrf_test",
 	"is_active": true,
 	"devices": ["Baltimore"],
-	"start_date": "20/06/2019 23:15:15"
+	"start_date": "13/08/2019 10:16:50"
  }
 
 This task schedules the service ``netmiko_check_vrf_test`` to run at ``20/06/2019 23:15:15`` on the device whose name is ``Baltimore``.

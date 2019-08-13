@@ -10,9 +10,10 @@ Services and Workflows can be scheduled by creating a ``Task``, from the :guilab
 You need to:
 
 - Choose a name.
+- Choose a scheduling mode: standard (start date / end date / frequency) or CRON.
 - Select a job (the service or workflow that you want to execute).
-- Choose a start date.
-- (Optional) Choose a frequency and an end date. If a ``Frequency`` is defined, the job will run periodically, in which case you can also choose an ``End date`` if you want the task to automatically stop running. If you define a frequency but no ``End date``, the task will run indefinitely until you manually stop it.
+    - If "Standard scheduling" was selected, choose a start date and optionally, choose a frequency and an end date. If a ``Frequency`` is defined, the job will run periodically, in which case you can also choose an ``End date`` if you want the task to automatically stop running. If you define a frequency but no ``End date``.
+    - If "Cron scheduling" was selected, enter a cron expression.
 
 .. image:: /_static/events/create_task.png
    :alt: Schedule from view

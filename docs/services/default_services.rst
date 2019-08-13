@@ -49,6 +49,9 @@ Parameters common to the services that use netmiko
 - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
 - ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
 - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
+- ``Strip command`` Remove the echo of the command from the output (default: True).
+- ``Strip prompt`` Remove the trailing router prompt from the output (default: True).
+- ``Auto Find Prompt``: Tries to detect the prompt automatically.
 
 Parameters common to the services that use Napalm
 -------------------------------------------------
@@ -66,6 +69,8 @@ Configuration parameters for creating this service instance:
 
 - All Netmiko parameters (see above)
 - ``Content`` Paste a configuration block of text here for applying to the target device(s).
+- ``Exit config mode`` Determines whether or not to exit config mode after complete.
+- ``Commit Configuration`` Calls netmiko ``commit`` function of the driver to commit the configuration.
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 

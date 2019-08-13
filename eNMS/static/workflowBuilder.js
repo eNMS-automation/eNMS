@@ -317,7 +317,7 @@ function savePositions() {
 Object.assign(action, {
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => showTypePanel(job.type, job.id, "run"),
-  "Run Workflow": runWorkflow,
+  "Run Workflow": () => runWorkflow(),
   "Run Workflow with Updates": () => runWorkflow(true),
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
   "Create Workflow": () => showTypePanel("workflow"),

@@ -20,9 +20,9 @@ class NapalmBackupService(Service):
     configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
-    driver = Column(SmallString, default="")
+    driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
-    optional_args = Column(MutableDict, default={})
+    optional_args = Column(MutableDict)
 
     __mapper_args__ = {"polymorphic_identity": "NapalmBackupService"}
 

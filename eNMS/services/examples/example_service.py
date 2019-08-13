@@ -46,20 +46,20 @@ class ExampleService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     # The following fields will be stored in the database as:
     # - String
-    string1 = Column(SmallString, default="")
-    string2 = Column(SmallString, default="")
-    mail_address = Column(SmallString, default="")
-    ip_address = Column(SmallString, default="")
-    mac_address = Column(SmallString, default="")
-    regex = Column(SmallString, default="")
-    url = Column(SmallString, default="")
-    exclusion_field = Column(SmallString, default="")
+    string1 = Column(SmallString)
+    string2 = Column(SmallString)
+    mail_address = Column(SmallString)
+    ip_address = Column(SmallString)
+    mac_address = Column(SmallString)
+    regex = Column(SmallString)
+    url = Column(SmallString)
+    exclusion_field = Column(SmallString)
     # - Integer
     an_integer = Column(Integer, default=0)
     number_in_range = Column(Integer, default=5)
     custom_integer = Column(Integer, default=0)
     # - Float
-    a_float = Column(Float, default=0.0)
+    a_float = Column(Float)
     # - List
     a_list = Column(MutableList)
     # - Dictionary

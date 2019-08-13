@@ -23,16 +23,16 @@ from eNMS.properties.objects import pool_link_properties, pool_device_properties
 class Object(AbstractBase):
 
     __tablename__ = "Object"
-    type = Column(SmallString, default="")
+    type = Column(SmallString)
     __mapper_args__ = {"polymorphic_identity": "Object", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(SmallString, unique=True)
-    subtype = Column(SmallString, default="")
-    description = Column(SmallString, default="")
-    model = Column(SmallString, default="")
-    location = Column(SmallString, default="")
-    vendor = Column(SmallString, default="")
+    subtype = Column(SmallString)
+    description = Column(SmallString)
+    model = Column(SmallString)
+    location = Column(SmallString)
+    vendor = Column(SmallString)
 
 
 CustomDevice: Any = type(
@@ -67,23 +67,23 @@ class Device(CustomDevice):
     parent_cls = "CustomDevice"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
     icon = Column(SmallString, default="router")
-    operating_system = Column(SmallString, default="")
-    os_version = Column(SmallString, default="")
-    ip_address = Column(SmallString, default="")
+    operating_system = Column(SmallString)
+    os_version = Column(SmallString)
+    ip_address = Column(SmallString)
     longitude = Column(SmallString, default="0.0")
     latitude = Column(SmallString, default="0.0")
     port = Column(Integer, default=22)
-    username = Column(SmallString, default="")
-    password = Column(SmallString, default="")
-    enable_password = Column(SmallString, default="")
+    username = Column(SmallString)
+    password = Column(SmallString)
+    enable_password = Column(SmallString)
     netmiko_driver = Column(SmallString, default="cisco_ios")
     napalm_driver = Column(SmallString, default="ios")
-    configurations = Column(MutableDict, default={})
+    configurations = Column(MutableDict)
     current_configuration = Column(LargeString)
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")
     last_update = Column(SmallString, default="Never")
-    last_runtime = Column(Float, default=0.0)
+    last_runtime = Column(Float)
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
     results = relationship("Result", back_populates="device")
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
@@ -269,7 +269,7 @@ class Pool(AbstractPool):
     parent_cls = "AbstractPool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
     name = Column(SmallString, unique=True)
-    last_modified = Column(SmallString, default="")
+    last_modified = Column(SmallString)
     description = Column(SmallString)
     operator = Column(SmallString, default="all")
     devices = relationship(

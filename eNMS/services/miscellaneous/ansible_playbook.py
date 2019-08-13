@@ -23,16 +23,16 @@ class AnsiblePlaybookService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    playbook_path = Column(SmallString, default="")
-    arguments = Column(SmallString, default="")
+    playbook_path = Column(SmallString)
+    arguments = Column(SmallString)
     conversion_method = Column(SmallString, default="text")
-    validation_method = Column(SmallString, default="")
+    validation_method = Column(SmallString)
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict, default={})
+    dict_match = Column(MutableDict)
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
-    options = Column(MutableDict, default={})
+    options = Column(MutableDict)
     pass_device_properties = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}

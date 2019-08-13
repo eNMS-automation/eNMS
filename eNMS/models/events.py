@@ -29,19 +29,19 @@ class Task(AbstractBase):
 
     __tablename__ = type = "Task"
     id = Column(Integer, primary_key=True)
-    aps_job_id = Column(SmallString, default="")
+    aps_job_id = Column(SmallString)
     name = Column(SmallString, unique=True)
-    description = Column(SmallString, default="")
-    creation_time = Column(SmallString, default="")
+    description = Column(SmallString)
+    creation_time = Column(SmallString)
     scheduling_mode = Column(SmallString, default="standard")
     periodic = Column(Boolean)
     frequency = Column(Integer)
     frequency_unit = Column(SmallString, default="seconds")
-    start_date = Column(SmallString, default="")
-    end_date = Column(SmallString, default="")
-    crontab_expression = Column(SmallString, default="")
+    start_date = Column(SmallString)
+    end_date = Column(SmallString)
+    crontab_expression = Column(SmallString)
     is_active = Column(Boolean, default=False)
-    initial_payload = Column(MutableDict, default={})
+    initial_payload = Column(MutableDict)
     devices = relationship(
         "Device", secondary=task_device_table, back_populates="tasks"
     )
@@ -189,10 +189,10 @@ class Task(AbstractBase):
 class Baselog(AbstractBase):
 
     __tablename__ = "Baselog"
-    type = Column(SmallString, default="")
+    type = Column(SmallString)
     __mapper_args__ = {"polymorphic_identity": "Baselog", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
-    time = Column(SmallString, default="")
+    time = Column(SmallString)
     content = Column(LargeString, default="")
 
     def update(self, **kwargs: str) -> None:
@@ -227,9 +227,9 @@ class Event(AbstractBase):
     __tablename__ = type = "Event"
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, unique=True)
-    log_source = Column(SmallString, default="")
+    log_source = Column(SmallString)
     log_source_regex = Column(Boolean, default=False)
-    log_content = Column(SmallString, default="")
+    log_content = Column(SmallString)
     log_content_regex = Column(Boolean, default=False)
     jobs = relationship("Job", secondary=job_event_table, back_populates="events")
 

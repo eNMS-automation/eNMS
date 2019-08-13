@@ -45,7 +45,7 @@ class Result(AbstractBase):
     private = True
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
-    result = Column(MutableDict, default={})
+    result = Column(MutableDict)
     run_id = Column(Integer, ForeignKey("Run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     device_id = Column(Integer, ForeignKey("Device.id"))
@@ -71,14 +71,14 @@ class Run(AbstractBase):
     private = True
     id = Column(Integer, primary_key=True)
     creator = Column(SmallString, default="admin")
-    properties = Column(MutableDict, default={})
+    properties = Column(MutableDict)
     success = Column(Boolean, default=False)
     status = Column(SmallString, default="Running")
-    runtime = Column(SmallString, default="")
-    endtime = Column(SmallString, default="")
+    runtime = Column(SmallString)
+    endtime = Column(SmallString)
     workflow_device_id = Column(Integer, ForeignKey("Device.id"))
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
-    parent_runtime = Column(SmallString, default="")
+    parent_runtime = Column(SmallString)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
     job_name = association_proxy("job", "name")
@@ -463,27 +463,27 @@ class Run(AbstractBase):
 class Job(AbstractBase):
 
     __tablename__ = "Job"
-    type = Column(SmallString, default="")
+    type = Column(SmallString)
     __mapper_args__ = {"polymorphic_identity": "Job", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(SmallString, unique=True)
-    last_modified = Column(SmallString, default="")
-    description = Column(SmallString, default="")
+    last_modified = Column(SmallString)
+    description = Column(SmallString)
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
-    positions = Column(MutableDict, default={})
+    positions = Column(MutableDict)
     credentials = Column(SmallString, default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
-    vendor = Column(SmallString, default="")
-    operating_system = Column(SmallString, default="")
+    vendor = Column(SmallString)
+    operating_system = Column(SmallString)
     waiting_time = Column(Integer, default=0)
     creator = Column(SmallString, default="admin")
     push_to_git = Column(Boolean, default=False)
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
     )
-    python_query = Column(SmallString, default="")
+    python_query = Column(SmallString)
     query_property_type = Column(SmallString, default="ip_address")
     devices = relationship("Device", secondary=job_device_table, back_populates="jobs")
     pools = relationship("Pool", secondary=job_pool_table, back_populates="jobs")
@@ -495,16 +495,16 @@ class Job(AbstractBase):
     notification_header = Column(LargeString, default="")
     display_only_failed_nodes = Column(Boolean, default=True)
     include_link_in_summary = Column(Boolean, default=True)
-    mail_recipient = Column(SmallString, default="")
+    mail_recipient = Column(SmallString)
     shape = Column(SmallString, default="box")
     size = Column(Integer, default=40)
     color = Column(SmallString, default="#D2E5FF")
-    initial_payload = Column(MutableDict, default={})
-    custom_username = Column(SmallString, default="")
-    custom_password = Column(SmallString, default="")
+    initial_payload = Column(MutableDict)
+    custom_username = Column(SmallString)
+    custom_password = Column(SmallString)
     start_new_connection = Column(Boolean, default=False)
     skip = Column(Boolean, default=False)
-    skip_python_query = Column(SmallString, default="")
+    skip_python_query = Column(SmallString)
     runs = relationship("Run", back_populates="job")
 
     @property
@@ -836,8 +836,8 @@ class WorkflowEdge(AbstractBase):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
-    name = Column(SmallString, default="")
-    subtype = Column(SmallString, default="")
+    name = Column(SmallString)
+    subtype = Column(SmallString)
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
         "Job",

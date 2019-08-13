@@ -16,8 +16,8 @@ class PingService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    protocol = Column(SmallString, default="")
-    ports = Column(SmallString, default="")
+    protocol = Column(SmallString)
+    ports = Column(SmallString)
     count = Column(Integer, default=5)
     timeout = Column(Integer, default=2)
     ttl = Column(Integer, default=60)

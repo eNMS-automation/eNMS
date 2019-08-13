@@ -15,12 +15,12 @@ class NapalmGettersService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     validation_method = Column(SmallString, default="dict_included")
-    dict_match = Column(MutableDict, default={})
-    driver = Column(SmallString, default="")
+    dict_match = Column(MutableDict)
+    driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
-    getters = Column(MutableList, default=[])
+    getters = Column(MutableList)
     negative_logic = Column(Boolean, default=False)
-    optional_args = Column(MutableDict, default={})
+    optional_args = Column(MutableDict)
 
     __mapper_args__ = {"polymorphic_identity": "NapalmGettersService"}
 

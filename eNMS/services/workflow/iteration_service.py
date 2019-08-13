@@ -25,8 +25,8 @@ class IterationService(Service):
     origin_of_values = Column(
         SmallString, default="user_provided_values"
     )
-    python_query_values = Column(SmallString, default="")
-    user_provided_values = Column(MutableDict, default={})
+    python_query_values = Column(SmallString)
+    user_provided_values = Column(MutableDict)
     conversion_property = Column(SmallString, default="name")
     variable_name = Column(SmallString, default="value")
 

@@ -22,10 +22,10 @@ class DatabaseBackupService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
     direction = "put"
-    protocol = Column(SmallString, default="")
+    protocol = Column(SmallString)
     delete_folder = Column(Boolean, default=False)
     delete_archive = Column(Boolean, default=False)
-    destination_path = Column(SmallString, default="")
+    destination_path = Column(SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}
 

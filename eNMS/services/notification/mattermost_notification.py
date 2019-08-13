@@ -19,7 +19,7 @@ class MattermostNotificationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    channel = Column(SmallString, default="")
+    channel = Column(SmallString)
     body = Column(LargeString, default="")
 
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}

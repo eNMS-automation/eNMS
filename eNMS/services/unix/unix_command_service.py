@@ -16,7 +16,7 @@ class UnixCommandService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    command = Column(SmallString, default="")
+    command = Column(SmallString)
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)
     negative_logic = Column(Boolean, default=False)

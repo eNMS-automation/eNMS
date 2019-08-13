@@ -16,12 +16,12 @@ class PayloadValidationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    query = Column(SmallString, default="")
+    query = Column(SmallString)
     conversion_method = Column(SmallString, default="text")
     validation_method = Column(SmallString, default="text")
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict, default={})
+    dict_match = Column(MutableDict)
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
 

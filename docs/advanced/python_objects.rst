@@ -21,6 +21,6 @@ You have access to the following variables:
 And the following functions:
 
 - ``get_var`` and ``set_var``: function to save data to and retrieve data from the payload.
-The use of these two functions is explained in the section ""Set and get data in a workflow" of the workflow payload docs.
+    The use of these two functions is explained in the section ""Set and get data in a workflow" of the workflow payload docs.
 - ``get_result``: function to retrieve a result for a given job (and for an optional device).
-The use of this function is described in the section "Use data from a previous job in the workflow" of the workflow payload docs.
+    The use of this function is described in the section "Use data from a previous job in the workflow" of the workflow payload docs.

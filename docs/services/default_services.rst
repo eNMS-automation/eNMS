@@ -81,12 +81,7 @@ Configuration parameters for creating this service instance:
 - ``Variable1`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
 - ``Command1`` CLI command to send to the device via SSH
 - ``Regular Expression1`` Regular expression match to use in filtering the response data from the command
-- ``Variable2`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
-- ``Command2`` CLI command to send to the device via SSH
-- ``Regular Expression2`` Regular expression match to use in filtering the response data from the command
-- ``Variable3`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
-- ``Command3`` CLI command to send to the device via SSH
-- ``Regular Expression3`` Regular expression match to use in filtering the response data from the command
+- Same fields replicated twice (2, 3 instead of 1)
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the ``command`` input field of its configuration form.
 
@@ -337,8 +332,8 @@ If you set this variable to `value`, the payload passed to the iterated service 
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `Python query` input field.
 
-Payload Extraction Services
----------------------------
+Payload Extraction Service
+--------------------------
 
 Extract some data from the payload with a python query, and optionally post-process the result with a regular expression or a TextFSM template.
 
@@ -349,3 +344,14 @@ Configuration parameters for creating this service instance:
 - ``Match Type1``: choose the type of post-processing: no post-processing, regular expression, or TextFSM template.
 - ``Match``: regular expression or TextFSM template, depending on the value of the "Match Type1".
 - Same fields replicated twice (2,3 instead of 1): the service can extract / post-process up to 3 variables.
+
+Payload Validation Service
+--------------------------
+
+Extract some data from the payload, and validate it against a string or a dictionary.
+
+Configuration parameters for creating this service instance:
+- All Validation parameters (see above)
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
+- ``Python Query``: a python query to retrieve data from the payload.
+- ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).

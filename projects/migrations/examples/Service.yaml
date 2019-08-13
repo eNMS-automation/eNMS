@@ -27,7 +27,7 @@
     Napalm_VRF_workflow: ['-200', '0']
     Netmiko prompts: ['-279', '-158']
     Netmiko_VRF_workflow: ['-200', '0']
-    Workflow with separate failure - success path: [-239, -55]
+    Workflow with separate failure - success path: [-239, -32]
     Workflow_of_workflows: ['-300', '0']
     payload_extraction_validation_worflow: ['-200', '0']
     payload_transfer_workflow: ['-200', '0']
@@ -78,7 +78,7 @@
     Netmiko_VRF_workflow: ['200', '0']
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
-    Workflow with separate failure - success path: [750, 6]
+    Workflow with separate failure - success path: [765, 251]
     Workflow_of_workflows: ['300', '0']
     payload_extraction_validation_worflow: ['200', '0']
     payload_transfer_workflow: ['500', '0']
@@ -349,7 +349,7 @@
   operating_system: ''
   pools: []
   positions:
-    Workflow with separate failure - success path: [456, 1]
+    Workflow with separate failure - success path: [773, 11]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -768,7 +768,7 @@
   positions:
     Napalm_VRF_workflow: ['0', '150']
     Netmiko_VRF_workflow: ['0', '150']
-    Workflow with separate failure - success path: [-123, 85]
+    Workflow with separate failure - success path: [-57, 41]
     python_query_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
@@ -958,6 +958,7 @@
   optional_args: {}
   pools: []
   positions:
+    Workflow with separate failure - success path: [455, 10]
     Workflow_of_workflows: ['0', '0']
     payload_transfer_workflow: ['150', '100']
   push_to_git: false

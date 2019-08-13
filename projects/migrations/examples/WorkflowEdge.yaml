@@ -128,9 +128,17 @@
   workflow: Ansible Workflow}
 - {destination: End, name: 64-success:66->2, source: 'Ansible Workflow: Arista show
     configuration (dict match)', subtype: success, workflow: Ansible Workflow}
-- {destination: Example1, name: 62-success:21->9, source: get_facts, subtype: success,
-  workflow: Workflow with separate failure - success path}
-- {destination: Example1, name: 62-success:20->9, source: REST is_alive, subtype: success,
-  workflow: Workflow with separate failure - success path}
 - {destination: End, name: 62-success:9->2, source: Example1, subtype: success, workflow: Workflow
     with separate failure - success path}
+- {destination: get_interfaces, name: 62-success:20->22, source: REST is_alive, subtype: success,
+  workflow: Workflow with separate failure - success path}
+- {destination: Example1, name: 62-success:22->9, source: get_interfaces, subtype: success,
+  workflow: Workflow with separate failure - success path}
+- {destination: get_interfaces, name: 62-success:21->22, source: get_facts, subtype: success,
+  workflow: Workflow with separate failure - success path}
+- {destination: Example1, name: 62-failure:22->9, source: get_interfaces, subtype: failure,
+  workflow: Workflow with separate failure - success path}
+- {destination: get_interfaces, name: 62-prerequisite:21->22, source: get_facts, subtype: prerequisite,
+  workflow: Workflow with separate failure - success path}
+- {destination: get_interfaces, name: 62-prerequisite:20->22, source: REST is_alive,
+  subtype: prerequisite, workflow: Workflow with separate failure - success path}

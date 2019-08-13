@@ -115,7 +115,7 @@ class Run(AbstractBase):
         else:
             raise AttributeError
 
-    def get_result(self, device: Optional[str] = None) -> Optional["Result"]:
+    def result(self, device: Optional[str] = None) -> Optional["Result"]:
         result = [r for r in self.results if r.device_id == device]
         return result.pop() if result else None
 
@@ -461,17 +461,17 @@ class Run(AbstractBase):
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
 
-    def get_job_result(self, job: str, device: Optional[str] = None) -> dict:
+    def get_result(self, job: str, device: Optional[str] = None) -> dict:
         job_id = fetch("Job", name=job).id
         run = fetch("Run", parent_runtime=self.parent_runtime, job_id=job_id)
-        return run.get_result(device)
+        return run.result(device)
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
         var_editor = partial(_self.payload_helper, locals["payload"])
         return {
             "config": controller.custom_config,
             "get_var": var_editor,
-            "get_result": _self.get_job_result,
+            "get_result": _self.get_result,
             "parent": _self.workflow,
             "set_var": var_editor,
             "workflow_device": _self.workflow_device,

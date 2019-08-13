@@ -17,10 +17,10 @@ class MailNotificationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    title = Column(String(SMALL_STRING_LENGTH), default="")
-    sender = Column(String(SMALL_STRING_LENGTH), default="")
-    recipients = Column(String(SMALL_STRING_LENGTH), default="")
-    body = Column(Text(LARGE_STRING_LENGTH), default="")
+    title = Column(SmallString, default="")
+    sender = Column(SmallString, default="")
+    recipients = Column(SmallString, default="")
+    body = Column(LargeString, default="")
 
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
 

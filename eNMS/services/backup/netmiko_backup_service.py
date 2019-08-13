@@ -20,8 +20,8 @@ class NetmikoBackupService(Service):
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
     number_of_configuration = Column(Integer, default=10)
-    configuration_command = Column(String(SMALL_STRING_LENGTH), default="")
-    driver = Column(String(SMALL_STRING_LENGTH), default="")
+    configuration_command = Column(SmallString, default="")
+    driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)

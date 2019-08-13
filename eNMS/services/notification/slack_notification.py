@@ -18,9 +18,9 @@ class SlackNotificationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    channel = Column(String(SMALL_STRING_LENGTH), default="")
-    token = Column(String(SMALL_STRING_LENGTH), default="")
-    body = Column(Text(LARGE_STRING_LENGTH), default="")
+    channel = Column(SmallString, default="")
+    token = Column(SmallString, default="")
+    body = Column(LargeString, default="")
 
     __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}
 

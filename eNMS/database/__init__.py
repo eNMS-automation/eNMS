@@ -1,5 +1,5 @@
 from os import environ
-from sqlalchemy import create_engine, PickleType, String
+from sqlalchemy import create_engine, PickleType, String, Text
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -42,4 +42,4 @@ class CustomMediumBlobPickle(PickleType):
 
 
 SmallString = String(int(environ.get("SMALL_STRING_LENGTH", 255)))
-LargeString = String(int(environ.get("LARGE_STRING_LENGTH", 2 ** 15)))
+LargeString = Text(int(environ.get("LARGE_STRING_LENGTH", 2 ** 15)))

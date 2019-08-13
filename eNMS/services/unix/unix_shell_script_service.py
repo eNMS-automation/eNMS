@@ -17,8 +17,8 @@ class UnixShellScriptService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    source_code = Column(Text(LARGE_STRING_LENGTH), default="")
-    content_match = Column(Text(LARGE_STRING_LENGTH), default="")
+    source_code = Column(LargeString, default="")
+    content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)

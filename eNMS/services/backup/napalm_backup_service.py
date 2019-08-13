@@ -21,7 +21,7 @@ class NapalmBackupService(Service):
     configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)
-    driver = Column(String(SMALL_STRING_LENGTH), default="")
+    driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

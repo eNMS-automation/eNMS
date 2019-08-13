@@ -15,7 +15,7 @@ class NapalmRollbackService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    driver = Column(String(SMALL_STRING_LENGTH), default="")
+    driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

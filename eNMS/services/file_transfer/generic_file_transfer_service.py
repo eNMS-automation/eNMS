@@ -19,10 +19,10 @@ class GenericFileTransferService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    direction = Column(String(SMALL_STRING_LENGTH), default="")
-    protocol = Column(String(SMALL_STRING_LENGTH), default="")
-    source_file = Column(String(SMALL_STRING_LENGTH), default="")
-    destination_file = Column(String(SMALL_STRING_LENGTH), default="")
+    direction = Column(SmallString, default="")
+    protocol = Column(SmallString, default="")
+    source_file = Column(SmallString, default="")
+    destination_file = Column(SmallString, default="")
     missing_host_key_policy = Column(Boolean, default=False)
     load_known_host_keys = Column(Boolean, default=False)
     look_for_keys = Column(Boolean, default=False)

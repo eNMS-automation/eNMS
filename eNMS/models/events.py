@@ -32,17 +32,17 @@ class Task(AbstractBase):
 
     __tablename__ = type = "Task"
     id = Column(Integer, primary_key=True)
-    aps_job_id = Column(String(SMALL_STRING_LENGTH), default="")
-    name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    description = Column(String(SMALL_STRING_LENGTH), default="")
-    creation_time = Column(String(SMALL_STRING_LENGTH), default="")
-    scheduling_mode = Column(String(SMALL_STRING_LENGTH), default="standard")
+    aps_job_id = Column(SmallString, default="")
+    name = Column(SmallString, unique=True)
+    description = Column(SmallString, default="")
+    creation_time = Column(SmallString, default="")
+    scheduling_mode = Column(SmallString, default="standard")
     periodic = Column(Boolean)
     frequency = Column(Integer)
-    frequency_unit = Column(String(SMALL_STRING_LENGTH), default="seconds")
-    start_date = Column(String(SMALL_STRING_LENGTH), default="")
-    end_date = Column(String(SMALL_STRING_LENGTH), default="")
-    crontab_expression = Column(String(SMALL_STRING_LENGTH), default="")
+    frequency_unit = Column(SmallString, default="seconds")
+    start_date = Column(SmallString, default="")
+    end_date = Column(SmallString, default="")
+    crontab_expression = Column(SmallString, default="")
     is_active = Column(Boolean, default=False)
     initial_payload = Column(MutableDict.as_mutable(PickleType), default={})
     devices = relationship(
@@ -192,11 +192,11 @@ class Task(AbstractBase):
 class Baselog(AbstractBase):
 
     __tablename__ = "Baselog"
-    type = Column(String(SMALL_STRING_LENGTH), default="")
+    type = Column(SmallString, default="")
     __mapper_args__ = {"polymorphic_identity": "Baselog", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
-    time = Column(String(SMALL_STRING_LENGTH), default="")
-    content = Column(Text(LARGE_STRING_LENGTH), default="")
+    time = Column(SmallString, default="")
+    content = Column(LargeString, default="")
 
     def update(self, **kwargs: str) -> None:
         kwargs["time"] = str(datetime.now())
@@ -212,7 +212,7 @@ class Syslog(Baselog):
     __mapper_args__ = {"polymorphic_identity": "Syslog"}
     parent_cls = "Baselog"
     id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
-    source = Column(Text(LARGE_STRING_LENGTH), default="")
+    source = Column(LargeString, default="")
 
 
 class Changelog(Baselog):
@@ -221,18 +221,18 @@ class Changelog(Baselog):
     __mapper_args__ = {"polymorphic_identity": "Changelog"}
     parent_cls = "Baselog"
     id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
-    severity = Column(String(SMALL_STRING_LENGTH), default="N/A")
-    user = Column(Text(LARGE_STRING_LENGTH), default="")
+    severity = Column(SmallString, default="N/A")
+    user = Column(LargeString, default="")
 
 
 class Event(AbstractBase):
 
     __tablename__ = type = "Event"
     id = Column(Integer, primary_key=True)
-    name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    log_source = Column(String(SMALL_STRING_LENGTH), default="")
+    name = Column(SmallString, unique=True)
+    log_source = Column(SmallString, default="")
     log_source_regex = Column(Boolean, default=False)
-    log_content = Column(String(SMALL_STRING_LENGTH), default="")
+    log_content = Column(SmallString, default="")
     log_content_regex = Column(Boolean, default=False)
     jobs = relationship("Job", secondary=job_event_table, back_populates="events")
 

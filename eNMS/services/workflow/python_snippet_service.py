@@ -16,7 +16,7 @@ class PythonSnippetService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    source_code = Column(Text(LARGE_STRING_LENGTH))
+    source_code = Column(LargeString)
 
     __mapper_args__ = {"polymorphic_identity": "PythonSnippetService"}
 

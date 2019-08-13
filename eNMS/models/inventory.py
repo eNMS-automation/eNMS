@@ -28,16 +28,16 @@ from eNMS.properties.objects import pool_link_properties, pool_device_properties
 class Object(AbstractBase):
 
     __tablename__ = "Object"
-    type = Column(String(SMALL_STRING_LENGTH), default="")
+    type = Column(SmallString, default="")
     __mapper_args__ = {"polymorphic_identity": "Object", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
-    name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    subtype = Column(String(SMALL_STRING_LENGTH), default="")
-    description = Column(String(SMALL_STRING_LENGTH), default="")
-    model = Column(String(SMALL_STRING_LENGTH), default="")
-    location = Column(String(SMALL_STRING_LENGTH), default="")
-    vendor = Column(String(SMALL_STRING_LENGTH), default="")
+    name = Column(SmallString, unique=True)
+    subtype = Column(SmallString, default="")
+    description = Column(SmallString, default="")
+    model = Column(SmallString, default="")
+    location = Column(SmallString, default="")
+    vendor = Column(SmallString, default="")
 
 
 CustomDevice: Any = type(
@@ -54,7 +54,7 @@ CustomDevice: Any = type(
                     "boolean": Boolean,
                     "float": Float,
                     "integer": Integer,
-                    "string": Text(LARGE_STRING_LENGTH),
+                    "string": LargeString,
                 }[values["type"]],
                 default=values["default"],
             )
@@ -71,23 +71,23 @@ class Device(CustomDevice):
     class_type = "device"
     parent_cls = "CustomDevice"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
-    icon = Column(String(SMALL_STRING_LENGTH), default="router")
-    operating_system = Column(String(SMALL_STRING_LENGTH), default="")
-    os_version = Column(String(SMALL_STRING_LENGTH), default="")
-    ip_address = Column(String(SMALL_STRING_LENGTH), default="")
-    longitude = Column(String(SMALL_STRING_LENGTH), default="0.0")
-    latitude = Column(String(SMALL_STRING_LENGTH), default="0.0")
+    icon = Column(SmallString, default="router")
+    operating_system = Column(SmallString, default="")
+    os_version = Column(SmallString, default="")
+    ip_address = Column(SmallString, default="")
+    longitude = Column(SmallString, default="0.0")
+    latitude = Column(SmallString, default="0.0")
     port = Column(Integer, default=22)
-    username = Column(String(SMALL_STRING_LENGTH), default="")
-    password = Column(String(SMALL_STRING_LENGTH), default="")
-    enable_password = Column(String(SMALL_STRING_LENGTH), default="")
-    netmiko_driver = Column(String(SMALL_STRING_LENGTH), default="cisco_ios")
-    napalm_driver = Column(String(SMALL_STRING_LENGTH), default="ios")
+    username = Column(SmallString, default="")
+    password = Column(SmallString, default="")
+    enable_password = Column(SmallString, default="")
+    netmiko_driver = Column(SmallString, default="cisco_ios")
+    napalm_driver = Column(SmallString, default="ios")
     configurations = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
-    current_configuration = Column(Text(LARGE_STRING_LENGTH))
-    last_failure = Column(String(SMALL_STRING_LENGTH), default="Never")
-    last_status = Column(String(SMALL_STRING_LENGTH), default="Never")
-    last_update = Column(String(SMALL_STRING_LENGTH), default="Never")
+    current_configuration = Column(LargeString)
+    last_failure = Column(SmallString, default="Never")
+    last_status = Column(SmallString, default="Never")
+    last_update = Column(SmallString, default="Never")
     last_runtime = Column(Float, default=0.0)
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
     results = relationship("Result", back_populates="device")
@@ -163,7 +163,7 @@ class Link(Object):
     class_type = "link"
     parent_cls = "Object"
     id = Column(Integer, ForeignKey("Object.id"), primary_key=True)
-    color = Column(String(SMALL_STRING_LENGTH), default="#000000")
+    color = Column(SmallString, default="#000000")
     source_id = Column(Integer, ForeignKey("Device.id"))
     destination_id = Column(Integer, ForeignKey("Device.id"))
     source = relationship(
@@ -244,22 +244,22 @@ AbstractPool: Any = type(
         "id": Column(Integer, primary_key=True),
         **{
             **{
-                f"device_{property}": Column(Text(LARGE_STRING_LENGTH), default="")
+                f"device_{property}": Column(LargeString, default="")
                 for property in pool_device_properties
             },
             **{
                 f"device_{property}_match": Column(
-                    String(SMALL_STRING_LENGTH), default="inclusion"
+                    SmallString, default="inclusion"
                 )
                 for property in pool_device_properties
             },
             **{
-                f"link_{property}": Column(Text(LARGE_STRING_LENGTH), default="")
+                f"link_{property}": Column(LargeString, default="")
                 for property in pool_link_properties
             },
             **{
                 f"link_{property}_match": Column(
-                    String(SMALL_STRING_LENGTH), default="inclusion"
+                    SmallString, default="inclusion"
                 )
                 for property in pool_link_properties
             },
@@ -273,16 +273,16 @@ class Pool(AbstractPool):
     __tablename__ = type = "Pool"
     parent_cls = "AbstractPool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
-    name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    last_modified = Column(String(SMALL_STRING_LENGTH), default="")
-    description = Column(String(SMALL_STRING_LENGTH))
-    operator = Column(String(SMALL_STRING_LENGTH), default="all")
+    name = Column(SmallString, unique=True)
+    last_modified = Column(SmallString, default="")
+    description = Column(SmallString)
+    operator = Column(SmallString, default="all")
     devices = relationship(
         "Device", secondary=pool_device_table, back_populates="pools"
     )
     links = relationship("Link", secondary=pool_link_table, back_populates="pools")
-    latitude = Column(String(SMALL_STRING_LENGTH), default="0.0")
-    longitude = Column(String(SMALL_STRING_LENGTH), default="0.0")
+    latitude = Column(SmallString, default="0.0")
+    longitude = Column(SmallString, default="0.0")
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")

@@ -75,15 +75,15 @@ class Run(AbstractBase):
     __tablename__ = type = "Run"
     private = True
     id = Column(Integer, primary_key=True)
-    creator = Column(String(SMALL_STRING_LENGTH), default="admin")
+    creator = Column(SmallString, default="admin")
     properties = Column(MutableDict.as_mutable(PickleType), default={})
     success = Column(Boolean, default=False)
-    status = Column(String(SMALL_STRING_LENGTH), default="Running")
-    runtime = Column(String(SMALL_STRING_LENGTH), default="")
-    endtime = Column(String(SMALL_STRING_LENGTH), default="")
+    status = Column(SmallString, default="Running")
+    runtime = Column(SmallString, default="")
+    endtime = Column(SmallString, default="")
     workflow_device_id = Column(Integer, ForeignKey("Device.id"))
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
-    parent_runtime = Column(String(SMALL_STRING_LENGTH), default="")
+    parent_runtime = Column(SmallString, default="")
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
     job_name = association_proxy("job", "name")
@@ -468,48 +468,48 @@ class Run(AbstractBase):
 class Job(AbstractBase):
 
     __tablename__ = "Job"
-    type = Column(String(SMALL_STRING_LENGTH), default="")
+    type = Column(SmallString, default="")
     __mapper_args__ = {"polymorphic_identity": "Job", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
-    name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    last_modified = Column(String(SMALL_STRING_LENGTH), default="")
-    description = Column(String(SMALL_STRING_LENGTH), default="")
+    name = Column(SmallString, unique=True)
+    last_modified = Column(SmallString, default="")
+    description = Column(SmallString, default="")
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict.as_mutable(PickleType), default={})
-    credentials = Column(String(SMALL_STRING_LENGTH), default="device")
+    credentials = Column(SmallString, default="device")
     tasks = relationship("Task", back_populates="job", cascade="all,delete")
-    vendor = Column(String(SMALL_STRING_LENGTH), default="")
-    operating_system = Column(String(SMALL_STRING_LENGTH), default="")
+    vendor = Column(SmallString, default="")
+    operating_system = Column(SmallString, default="")
     waiting_time = Column(Integer, default=0)
-    creator = Column(String(SMALL_STRING_LENGTH), default="admin")
+    creator = Column(SmallString, default="admin")
     push_to_git = Column(Boolean, default=False)
     workflows = relationship(
         "Workflow", secondary=job_workflow_table, back_populates="jobs"
     )
-    python_query = Column(String(SMALL_STRING_LENGTH), default="")
-    query_property_type = Column(String(SMALL_STRING_LENGTH), default="ip_address")
+    python_query = Column(SmallString, default="")
+    query_property_type = Column(SmallString, default="ip_address")
     devices = relationship("Device", secondary=job_device_table, back_populates="jobs")
     pools = relationship("Pool", secondary=job_pool_table, back_populates="jobs")
     events = relationship("Event", secondary=job_event_table, back_populates="jobs")
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(
-        String(SMALL_STRING_LENGTH), default="mail_feedback_notification"
+        SmallString, default="mail_feedback_notification"
     )
-    notification_header = Column(Text(LARGE_STRING_LENGTH), default="")
+    notification_header = Column(LargeString, default="")
     display_only_failed_nodes = Column(Boolean, default=True)
     include_link_in_summary = Column(Boolean, default=True)
-    mail_recipient = Column(String(SMALL_STRING_LENGTH), default="")
-    shape = Column(String(SMALL_STRING_LENGTH), default="box")
+    mail_recipient = Column(SmallString, default="")
+    shape = Column(SmallString, default="box")
     size = Column(Integer, default=40)
-    color = Column(String(SMALL_STRING_LENGTH), default="#D2E5FF")
+    color = Column(SmallString, default="#D2E5FF")
     initial_payload = Column(MutableDict.as_mutable(CustomMediumBlobPickle), default={})
-    custom_username = Column(String(SMALL_STRING_LENGTH), default="")
-    custom_password = Column(String(SMALL_STRING_LENGTH), default="")
+    custom_username = Column(SmallString, default="")
+    custom_password = Column(SmallString, default="")
     start_new_connection = Column(Boolean, default=False)
     skip = Column(Boolean, default=False)
-    skip_python_query = Column(String(SMALL_STRING_LENGTH), default="")
+    skip_python_query = Column(SmallString, default="")
     runs = relationship("Run", back_populates="job")
 
     @property
@@ -841,8 +841,8 @@ class WorkflowEdge(AbstractBase):
 
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
-    name = Column(String(SMALL_STRING_LENGTH), default="")
-    subtype = Column(String(SMALL_STRING_LENGTH), default="")
+    name = Column(SmallString, default="")
+    subtype = Column(SmallString, default="")
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
         "Job",

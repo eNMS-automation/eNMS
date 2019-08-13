@@ -24,12 +24,12 @@ class IterationService(Service):
         "Job", primaryjoin="Job.id == IterationService.iterated_job_id"
     )
     origin_of_values = Column(
-        String(SMALL_STRING_LENGTH), default="user_provided_values"
+        SmallString, default="user_provided_values"
     )
-    python_query_values = Column(String(SMALL_STRING_LENGTH), default="")
+    python_query_values = Column(SmallString, default="")
     user_provided_values = Column(MutableDict.as_mutable(PickleType), default={})
-    conversion_property = Column(String(SMALL_STRING_LENGTH), default="name")
-    variable_name = Column(String(SMALL_STRING_LENGTH), default="value")
+    conversion_property = Column(SmallString, default="name")
+    variable_name = Column(SmallString, default="value")
 
     __mapper_args__ = {"polymorphic_identity": "IterationService"}
 

@@ -17,9 +17,9 @@ class NapalmConfigurationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    action = Column(String(SMALL_STRING_LENGTH), default="")
-    content = Column(Text(LARGE_STRING_LENGTH), default="")
-    driver = Column(String(SMALL_STRING_LENGTH), default="")
+    action = Column(SmallString, default="")
+    content = Column(LargeString, default="")
+    driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict.as_mutable(PickleType), default={})
 

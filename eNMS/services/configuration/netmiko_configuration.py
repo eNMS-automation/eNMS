@@ -16,9 +16,9 @@ class NetmikoConfigurationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
-    content = Column(Text(LARGE_STRING_LENGTH), default="")
+    content = Column(LargeString, default="")
     privileged_mode = Column(Boolean, default=False)
-    driver = Column(String(SMALL_STRING_LENGTH), default="")
+    driver = Column(SmallString, default="")
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=1.0)
@@ -28,7 +28,7 @@ class NetmikoConfigurationService(Service):
     exit_config_mode = Column(Boolean, default=True)
     strip_prompt = Column(Boolean, default=False)
     strip_command = Column(Boolean, default=False)
-    config_mode_command = Column(String(SMALL_STRING_LENGTH), default="")
+    config_mode_command = Column(SmallString, default="")
 
     __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
 

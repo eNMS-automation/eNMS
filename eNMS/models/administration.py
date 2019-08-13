@@ -14,11 +14,11 @@ class Server(AbstractBase):
 
     __tablename__ = type = "Server"
     id = Column(Integer, primary_key=True)
-    name = Column(String(SMALL_STRING_LENGTH), unique=True)
-    description = Column(String(SMALL_STRING_LENGTH), default="")
-    ip_address = Column(String(SMALL_STRING_LENGTH), default="")
+    name = Column(SmallString, unique=True)
+    description = Column(SmallString, default="")
+    ip_address = Column(SmallString, default="")
     weight = Column(Integer, default=1)
-    status = Column(String(SMALL_STRING_LENGTH), default="down")
+    status = Column(SmallString, default="down")
     cpu_load = Column(Float, default=0.0)
 
     def generate_row(self, table: str) -> List[str]:
@@ -38,36 +38,36 @@ class Parameters(AbstractBase):
 
     __tablename__ = type = "Parameters"
     id = Column(Integer, primary_key=True)
-    name = Column(String(SMALL_STRING_LENGTH), default="default", unique=True)
-    cluster_scan_subnet = Column(String(SMALL_STRING_LENGTH), default="")
-    cluster_scan_protocol = Column(String(SMALL_STRING_LENGTH), default="")
+    name = Column(SmallString, default="default", unique=True)
+    cluster_scan_subnet = Column(SmallString, default="")
+    cluster_scan_protocol = Column(SmallString, default="")
     cluster_scan_timeout = Column(Float, default=0.0)
     custom_config = Column(MutableDict.as_mutable(PickleType), default={})
     default_longitude = Column(Float, default=0.0)
     default_latitude = Column(Float, default=0.0)
     default_zoom_level = Column(Integer, default=0)
-    default_view = Column(String(SMALL_STRING_LENGTH), default="")
-    default_marker = Column(String(SMALL_STRING_LENGTH), default="")
-    git_configurations = Column(String(SMALL_STRING_LENGTH), default="")
-    git_automation = Column(String(SMALL_STRING_LENGTH), default="")
+    default_view = Column(SmallString, default="")
+    default_marker = Column(SmallString, default="")
+    git_configurations = Column(SmallString, default="")
+    git_automation = Column(SmallString, default="")
     gotty_start_port = Column(Integer, default=0)
     gotty_end_port = Column(Integer, default=0)
     gotty_port_index = Column(Integer, default=-1)
     opennms_rest_api = Column(
-        String(SMALL_STRING_LENGTH), default="https://demo.opennms.org/opennms/rest"
+        SmallString, default="https://demo.opennms.org/opennms/rest"
     )
     opennms_devices = Column(
-        String(SMALL_STRING_LENGTH),
+        SmallString,
         default="https://demo.opennms.org/opennms/rest/nodes",
     )
-    opennms_login = Column(String(SMALL_STRING_LENGTH), default="demo")
-    mail_sender = Column(String(SMALL_STRING_LENGTH), default="")
-    mail_recipients = Column(String(SMALL_STRING_LENGTH), default="")
-    mattermost_url = Column(String(SMALL_STRING_LENGTH), default="")
-    mattermost_channel = Column(String(SMALL_STRING_LENGTH), default="")
+    opennms_login = Column(SmallString, default="demo")
+    mail_sender = Column(SmallString, default="")
+    mail_recipients = Column(SmallString, default="")
+    mattermost_url = Column(SmallString, default="")
+    mattermost_channel = Column(SmallString, default="")
     mattermost_verify_certificate = Column(Boolean, default=False)
-    slack_token = Column(String(SMALL_STRING_LENGTH))
-    slack_channel = Column(String(SMALL_STRING_LENGTH), default="")
+    slack_token = Column(SmallString)
+    slack_channel = Column(SmallString, default="")
 
     def update(self, **kwargs: Any) -> None:
         self.gotty_port_index = -1
@@ -78,11 +78,11 @@ class User(AbstractBase, UserMixin):
 
     __tablename__ = type = "User"
     id = Column(Integer, primary_key=True)
-    email = Column(String(SMALL_STRING_LENGTH), default="")
-    name = Column(String(SMALL_STRING_LENGTH), default="")
+    email = Column(SmallString, default="")
+    name = Column(SmallString, default="")
     permissions = Column(MutableList.as_mutable(PickleType), default=[])
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
-    password = Column(String(SMALL_STRING_LENGTH), default="")
+    password = Column(SmallString, default="")
 
     def generate_row(self, table: str) -> List[str]:
         return [

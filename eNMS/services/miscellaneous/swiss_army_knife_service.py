@@ -103,8 +103,7 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def process_payload1(self, run: "Run", payload: dict, device: Device) -> dict:
-        # we use the name of the device to get the result for that particular
-        # device.
+        # we use the name of the device to get the result for that particular device.
         get_facts = run.get_result("get_facts", device.name)
         get_interfaces = run.get_result("get_interfaces", device.name)
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000

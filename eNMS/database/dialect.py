@@ -2,6 +2,7 @@ from os import environ
 from sqlalchemy import Column as SQLA_Column, PickleType, String, Text
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.mutable import MutableDict, MutableList
+from typing import Any
 
 from eNMS.database import DIALECT
 
@@ -27,7 +28,7 @@ default_ctypes = {
 
 
 class Column(SQLA_Column):
-    def __init__(self, ctype, *args, **kwargs):
+    def __init__(self, ctype: Any, *args: Any, **kwargs: Any) -> None:
         if "default" not in kwargs and ctype in default_ctypes:
             kwargs["default"] = default_ctypes[ctype]
         super().__init__(ctype, *args, **kwargs)

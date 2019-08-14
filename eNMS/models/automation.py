@@ -91,7 +91,7 @@ class Run(AbstractBase):
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs: Any) -> None:
-        self.runtime = kwargs.get("runtime") or controller.get_time()
+        self.runtime = kwargs.get("runtime") or controller.get_time()  # type: ignore
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
@@ -263,12 +263,13 @@ class Run(AbstractBase):
             results = {"success": False, "results": result}
         finally:
             status = f"Completed ({'success' if self.success else 'failure'})"
-            self.status = controller.run_db[self.runtime]["status"] = status
+            self.status = status  # type: ignore
+            controller.run_db[self.runtime]["status"] = status
             controller.run_db[self.runtime]["is_running"] = False
             controller.job_db[self.job.id]["runs"] -= 1
-            results["endtime"] = self.endtime = controller.get_time()
+            results["endtime"] = self.endtime = controller.get_time()  # type: ignore
             results["state"] = controller.run_db.pop(self.runtime)
-            results["logs"] = controller.run_logs.pop(self.runtime)
+            results["logs"] = controller.run_logs.pop(self.runtime)  # type: ignore
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {
@@ -374,7 +375,7 @@ class Run(AbstractBase):
         )
         notification_run.run(notification_payload)
 
-    def get_credentials(self, device: "Device") -> Tuple[str, str]:
+    def get_credentials(self, device: "Device") -> Tuple:
         return (
             controller.get_user_credentials()
             if self.credentials == "user"

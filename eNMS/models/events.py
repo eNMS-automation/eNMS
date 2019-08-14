@@ -46,7 +46,7 @@ class Task(AbstractBase):
 
     def __init__(self, **kwargs: Any) -> None:
         super().update(**kwargs)
-        self.creation_time = controller.get_time()
+        self.creation_time = controller.get_time()  # type: ignore
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
         if self.is_active:
             self.schedule()
@@ -108,13 +108,13 @@ class Task(AbstractBase):
 
     def pause(self) -> None:
         controller.scheduler.pause_job(self.aps_job_id)
-        self.is_active = False
+        self.is_active = False  # type: ignore
         Session.commit()
 
     def resume(self) -> None:
         self.schedule()
         controller.scheduler.resume_job(self.aps_job_id)
-        self.is_active = True
+        self.is_active = True  # type: ignore
         Session.commit()
 
     def delete_task(self) -> None:
@@ -139,7 +139,7 @@ class Task(AbstractBase):
             "kwargs": self.run_properties(),
         }
         if self.scheduling_mode == "cron":
-            self.periodic = True
+            self.periodic = True  # type: ignore
             expression = self.crontab_expression.split()
             mapping = {
                 "0": "sun",
@@ -154,7 +154,7 @@ class Task(AbstractBase):
             expression[-1] = ",".join(mapping[day] for day in expression[-1].split(","))
             trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
         elif self.frequency:
-            self.periodic = True
+            self.periodic = True  # type: ignore
             frequency_in_seconds = (
                 int(self.frequency)
                 * {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}[
@@ -168,7 +168,7 @@ class Task(AbstractBase):
                 "seconds": frequency_in_seconds,
             }
         else:
-            self.periodic = False
+            self.periodic = False  # type: ignore
             trigger = {"trigger": "date", "run_date": self.aps_date("start_date")}
         return default, trigger
 

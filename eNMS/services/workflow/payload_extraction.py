@@ -50,17 +50,19 @@ class PayloadExtractionService(Service):
                 continue
             match_type = getattr(run, f"match_type{i}")
             match = getattr(run, f"match{i}")
+            value = (
+                value
+                if match_type == "none"
+                else findall(match, value)
+                if match_type == "regex"
+                else TextFSM(StringIO(match)).ParseText(value)
+            )
+            run.payload_helper(payload, variable, value, device=device.name)
             result[variable] = {
                 "query": query,
                 "match_type": match_type,
                 "match": match,
-                "value": (
-                    value
-                    if match_type == "none"
-                    else findall(match, value)
-                    if match_type == "regex"
-                    else TextFSM(StringIO(match)).ParseText(value)
-                ),
+                "value": value,
             }
         return {"result": result, "success": success}
 

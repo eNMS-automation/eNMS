@@ -41,14 +41,15 @@
     Test Workflow}
 - {destination: netmiko_show_ip_route, name: payload_extraction_validation_worflow
     0 -> 2, source: Start, subtype: success, workflow: payload_extraction_validation_worflow}
-- {destination: payload_extraction, name: payload_extraction_validation_worflow 2
+- {destination: Payload Extraction, name: payload_extraction_validation_worflow 2
     -> 3, source: netmiko_show_ip_route, subtype: success, workflow: payload_extraction_validation_worflow}
-- {destination: payload_validate_dict, name: payload_extraction_validation_worflow
-    3 -> 4, source: payload_extraction, subtype: success, workflow: payload_extraction_validation_worflow}
-- {destination: payload_validate_text, name: payload_extraction_validation_worflow
-    4 -> 5, source: payload_validate_dict, subtype: success, workflow: payload_extraction_validation_worflow}
-- {destination: End, name: payload_extraction_validation_worflow 5 -> 1, source: payload_validate_text,
-  subtype: success, workflow: payload_extraction_validation_worflow}
+- {destination: 'Payload Workflow: Validate dict via results', name: payload_extraction_validation_worflow
+    3 -> 4, source: Payload Extraction, subtype: success, workflow: payload_extraction_validation_worflow}
+- {destination: 'Payload Workflow: Validate text via results', name: payload_extraction_validation_worflow
+    4 -> 5, source: 'Payload Workflow: Validate dict via results', subtype: success,
+  workflow: payload_extraction_validation_worflow}
+- {destination: End, name: payload_extraction_validation_worflow 5 -> 1, source: 'Payload
+    Workflow: Validate text via results', subtype: success, workflow: payload_extraction_validation_worflow}
 - {destination: payload_transfer_workflow, name: Workflow_of_workflows 0 -> 2, source: Start,
   subtype: success, workflow: Workflow_of_workflows}
 - {destination: get_interfaces, name: Workflow_of_workflows 2 -> 3, source: payload_transfer_workflow,

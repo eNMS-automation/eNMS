@@ -210,9 +210,9 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  jobs: [Start, End, netmiko_show_ip_route, payload_extraction, payload_validate_dict,
-    payload_validate_text]
-  last_modified: '2019-08-14 00:31:07.341279'
+  jobs: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
+      Validate dict via results', 'Payload Workflow: Validate text via results']
+  last_modified: '2019-08-14 19:12:02.954226'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''

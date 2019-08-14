@@ -33,7 +33,7 @@
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       -283, 31]
     Workflow_of_workflows: ['-300', '0']
-    payload_extraction_validation_worflow: [-200, 0]
+    payload_extraction_validation_worflow: [-436, -56]
     payload_transfer_workflow: ['-200', '0']
     'python Workflow: payload editor and pool helper': ['-326', '45']
     python_query_workflow: ['-164', '15']
@@ -89,7 +89,7 @@
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       594, -3]
     Workflow_of_workflows: ['300', '0']
-    payload_extraction_validation_worflow: [200, 0]
+    payload_extraction_validation_worflow: [520, 211]
     payload_transfer_workflow: ['500', '0']
     'python Workflow: payload editor and pool helper': ['530', '155']
     python_query_workflow: ['651', '20']
@@ -1332,7 +1332,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [0, -150]
+    payload_extraction_validation_worflow: [-15, -249]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1366,7 +1366,7 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-08-14 00:30:53.413109'
+  last_modified: '2019-08-14 19:12:55.870709'
   mail_recipient: ''
   match1: ''
   match2: (\d.*)/32
@@ -1381,13 +1381,13 @@
   match_type3: textfsm
   max_processes: 5
   multiprocessing: true
-  name: payload_extraction
+  name: Payload Extraction
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    payload_extraction_validation_worflow: [0, -50]
+    payload_extraction_validation_worflow: [13, -72]
   push_to_git: false
   python_query: ''
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
@@ -1427,21 +1427,21 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-08-14 00:31:38.508644'
+  last_modified: '2019-08-14 19:16:46.322118'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
-  name: payload_validate_dict
+  name: 'Payload Workflow: Validate dict via results'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [0, 50]
+    payload_extraction_validation_worflow: [0, 101]
   push_to_git: false
   python_query: ''
-  query: get_result("payload_extraction", device.name)["result"]["regex_variable"]
+  query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1473,21 +1473,21 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-08-14 00:32:02.797893'
+  last_modified: '2019-08-14 19:16:38.118436'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
-  name: payload_validate_text
+  name: 'Payload Workflow: Validate text via results'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [0, 150]
+    payload_extraction_validation_worflow: [1, 252]
   push_to_git: false
   python_query: ''
-  query: get_result("payload_extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
+  query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2866,6 +2866,97 @@
   timeout: 3
   type: NetmikoValidationService
   use_device_driver: true
+  validation_method: text
+  vendor: Arista
+  waiting_time: 0
+- color: '#D2E5FF'
+  content_match: (\d\.){3}\d
+  content_match_regex: true
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: Payload Validate Text
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-14 19:17:05.766877'
+  mail_recipient: ''
+  max_processes: 5
+  multiprocessing: false
+  name: 'Payload Workflow: Validate text via payload'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: PayloadValidationService
+  validation_method: text
+  vendor: Arista
+  waiting_time: 0
+- color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: Payload Validate Dict
+  devices: []
+  dict_match:
+    value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-14 19:17:16.862903'
+  mail_recipient: ''
+  max_processes: 5
+  multiprocessing: false
+  name: 'Payload Workflow: Validate dict via payload'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: PayloadValidationService
   validation_method: text
   vendor: Arista
   waiting_time: 0

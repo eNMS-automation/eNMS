@@ -93,7 +93,6 @@
       let action = {};
       let csrf_token = "{{ csrf_token() }}";
     </script>
-    {% assets "js" %}
     <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/moment/moment.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/bootstrap/bootstrap.min.js') }}"></script>
@@ -109,8 +108,9 @@
     <script src="{{ url_for('static', filename='lib/base/vis/vis.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/jspanel/jspanel.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/jsoneditor/jsoneditor.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='base.js') }}"></script>
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>
     <script src="{{ url_for('static', filename='automation.js') }}"></script>
-    {% endassets %} {% endblock %} {% endblock body %}
+    {% endblock %} {% endblock body %}
   </body>
 </html>

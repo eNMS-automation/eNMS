@@ -2,11 +2,11 @@ from glob import glob
 from logging import info
 from os.path import split
 from paramiko import SSHClient, AutoAddPolicy
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField, SelectField
 from wtforms.validators import InputRequired
 
-from eNMS.database.dialect import SmallString
+from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Run, Service

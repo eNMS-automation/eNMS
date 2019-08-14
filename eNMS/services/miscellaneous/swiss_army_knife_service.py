@@ -5,12 +5,13 @@ from logging import info
 from pathlib import Path
 from requests import post, get
 from slackclient import SlackClient
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField
 
 from eNMS.concurrency import run_job
 from eNMS.controller import controller
 from eNMS.database import Session
+from eNMS.database.dialect import Column
 from eNMS.database.functions import factory, fetch_all
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Run, Service

@@ -1,12 +1,12 @@
 from io import StringIO
 from re import findall
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from textfsm import TextFSM
 from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.database.dialect import LargeString, SmallString
+from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Run, Service
 from eNMS.models.inventory import Device

@@ -1,10 +1,10 @@
 from fabric import Connection
 from io import StringIO
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, StringField, BooleanField
 from wtforms.widgets import TextArea
 
-from eNMS.database.dialect import LargeString
+from eNMS.database.dialect import Column, LargeString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import StringValidationForm
 from eNMS.models.automation import Run, Service

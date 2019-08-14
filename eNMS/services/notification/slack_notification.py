@@ -1,11 +1,11 @@
 from slackclient import SlackClient
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.controller import controller
-from eNMS.database.dialect import LargeString, SmallString
+from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Run, Service

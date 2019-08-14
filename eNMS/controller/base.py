@@ -402,6 +402,7 @@ class BaseController:
             Session.flush()
             return instance.serialized
         except Exception as exc:
+            raise exc
             Session.rollback()
             if isinstance(exc, IntegrityError):
                 return {"error": (f"There already is a {cls} with the same name")}

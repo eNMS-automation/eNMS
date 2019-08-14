@@ -14,7 +14,7 @@ from pathlib import Path
 from paramiko import SSHClient
 from re import compile, search
 from scp import SCPClient
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 from time import sleep
@@ -26,7 +26,7 @@ from xml.parsers.expat import ExpatError
 from eNMS.concurrency import get_device_result
 from eNMS.controller import controller
 from eNMS.database import Session
-from eNMS.database.dialect import LargeString, MutableDict, SmallString
+from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.associations import (
     job_device_table,

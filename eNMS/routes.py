@@ -232,6 +232,7 @@ def route(page: str) -> Response:
         Session.commit()
         return jsonify(result)
     except Exception as exc:
+        raise exc
         Session.rollback()
         if controller.enms_config_mode == "Debug":
             raise

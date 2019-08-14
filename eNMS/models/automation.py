@@ -410,6 +410,7 @@ class Run(AbstractBase):
             assert isinstance(match, str)
             if self.delete_spaces_before_matching:
                 match, result = map(self.space_deleter, (match, result))
+            print("kkk"*100, match, result, search(match, result))
             success = (
                 self.content_match_regex
                 and bool(search(match, result))
@@ -459,14 +460,13 @@ class Run(AbstractBase):
         device: Optional[str] = None,
         operation: Optional[str] = "set",
     ) -> Any:
-        print(name, value, section)
         payload = payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})
         if section:
             payload = payload.setdefault(section, {})
-        if value:
+        if value is not None:
             if operation == "set":
                 payload[name] = value
             else:

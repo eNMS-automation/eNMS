@@ -190,5 +190,14 @@
 - {destination: 'Payload Workflow: Extraction 1', name: 76-success:77->78, source: 'Payload
     Workflow: Add initial variables', subtype: success, workflow: 'Payload Workflow:
     Payload Extraction with operations'}
-- {destination: End, name: 76-success:78->2, source: 'Payload Workflow: Extraction
-    1', subtype: success, workflow: 'Payload Workflow: Payload Extraction with operations'}
+- {destination: 'Payload Workflow: Extraction 2', name: 76-success:78->79, source: 'Payload
+    Workflow: Extraction 1', subtype: success, workflow: 'Payload Workflow: Payload
+    Extraction with operations'}
+- {destination: 'Payload Workflow: Validation 1', name: 76-success:79->80, source: 'Payload
+    Workflow: Extraction 2', subtype: success, workflow: 'Payload Workflow: Payload
+    Extraction with operations'}
+- {destination: 'Payload Workflow: Validation 2', name: 76-success:80->81, source: 'Payload
+    Workflow: Validation 1', subtype: success, workflow: 'Payload Workflow: Payload
+    Extraction with operations'}
+- {destination: End, name: 76-success:81->2, source: 'Payload Workflow: Validation
+    2', subtype: success, workflow: 'Payload Workflow: Payload Extraction with operations'}

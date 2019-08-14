@@ -29,6 +29,7 @@
     Napalm_VRF_workflow: ['-200', '0']
     Netmiko prompts: ['-279', '-158']
     Netmiko_VRF_workflow: ['-200', '0']
+    'Payload Workflow: Payload Extraction with operations': [-516, -120]
     Workflow with separate failure - success path: [-239, -32]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       -283, 31]
@@ -82,6 +83,7 @@
     Napalm_VRF_workflow: ['200', '0']
     Netmiko prompts: ['634', '187']
     Netmiko_VRF_workflow: ['200', '0']
+    'Payload Workflow: Payload Extraction with operations': [527, -97]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
@@ -2203,7 +2205,7 @@
   pools: []
   positions:
     Napalm getters and match mechanism workflow: [157, 139]
-    'Payload Workflow: Payload Extraction with operations': [-72, -307]
+    'Payload Workflow: Payload Extraction with operations': [-418, -325]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2979,17 +2981,17 @@
   include_link_in_summary: false
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-08-14 23:28:40.824870'
+  last_modified: '2019-08-14 23:42:49.512906'
   mail_recipient: ''
   max_processes: 50
-  multiprocessing: false
+  multiprocessing: true
   name: 'Payload Workflow: Add initial variables'
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Payload Workflow: Payload Extraction with operations': [-13, 48]
+    'Payload Workflow: Payload Extraction with operations': [-367, 29]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -3020,7 +3022,7 @@
   include_link_in_summary: false
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-08-14 23:32:03.314979'
+  last_modified: '2019-08-14 23:42:55.692116'
   mail_recipient: ''
   match1: ''
   match2: ''
@@ -3029,7 +3031,7 @@
   match_type2: none
   match_type3: none
   max_processes: 50
-  multiprocessing: false
+  multiprocessing: true
   name: 'Payload Workflow: Extraction 1'
   notification_header: ''
   number_of_retries: 0
@@ -3039,7 +3041,7 @@
   operation3: update
   pools: []
   positions:
-    'Payload Workflow: Payload Extraction with operations': [277, -242]
+    'Payload Workflow: Payload Extraction with operations': [-197, -332]
   push_to_git: false
   python_query: ''
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
@@ -3058,5 +3060,150 @@
   variable1: boolean
   variable2: list
   variable3: dict
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-14 23:57:00.505853'
+  mail_recipient: ''
+  match1: ''
+  match2: ''
+  match3: ''
+  match_type1: none
+  match_type2: none
+  match_type3: none
+  max_processes: 50
+  multiprocessing: true
+  name: 'Payload Workflow: Extraction 2'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  operation1: append
+  operation2: extend
+  operation3: update
+  pools: []
+  positions:
+    'Payload Workflow: Payload Extraction with operations': [-93, 28]
+  push_to_git: false
+  python_query: ''
+  query1: get_result("Start")["state"]["completed"]
+  query2: get_result("Start")["logs"]
+  query3: get_result("Start")["state"]
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: PayloadExtractionService
+  variable1: list
+  variable2: list
+  variable3: dict
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  content_match: \[1,2,False,1.*\]
+  content_match_regex: true
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: true
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-15 00:09:07.776014'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: true
+  name: 'Payload Workflow: Validation 1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Payload Workflow: Payload Extraction with operations': [82, -332]
+  push_to_git: false
+  python_query: ''
+  query: get_var("list", device=device.name)
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: PayloadValidationService
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-15 00:11:21.018179'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Payload Workflow: Validation 2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Payload Workflow: Payload Extraction with operations': [204, 18]
+  push_to_git: false
+  python_query: ''
+  query: get_var("dict", device=device.name)
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: PayloadValidationService
+  validation_method: dict_included
   vendor: ''
   waiting_time: 0

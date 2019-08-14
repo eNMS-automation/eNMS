@@ -575,8 +575,9 @@
   initial_payload: {}
   iteration_targets: ''
   jobs: [Start, End, 'Getters Workflow: Interface IP', 'Payload Workflow: Add initial
-      variables', 'Payload Workflow: Extraction 1']
-  last_modified: '2019-08-14 23:32:08.930492'
+      variables', 'Payload Workflow: Extraction 1', 'Payload Workflow: Extraction
+      2', 'Payload Workflow: Validation 1', 'Payload Workflow: Validation 2']
+  last_modified: '2019-08-15 00:11:29.936942'
   mail_recipient: ''
   name: 'Payload Workflow: Payload Extraction with operations'
   notification_header: ''

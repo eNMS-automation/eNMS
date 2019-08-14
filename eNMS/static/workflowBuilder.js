@@ -4,7 +4,7 @@ action: false
 alertify: false
 call: false
 normalRun: false
-showLogs: false
+showLogsPanel: false
 showPanel: false
 showResultsPanel: false
 showTypePanel: false

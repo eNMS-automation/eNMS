@@ -524,7 +524,7 @@
   credentials: device
   custom_username: ''
   description: ''
-  devices: []
+  devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
   has_targets: true
@@ -532,8 +532,9 @@
   include_link_in_summary: false
   initial_payload: {}
   iteration_targets: ''
-  jobs: [Start, End, Iterated_netmiko_service bis, Iterated_netmiko_service, add_devices_to_payload]
-  last_modified: '2019-08-14 13:54:44.898061'
+  jobs: [Start, End, add_devices_to_payload, 'Iteration Target Workflow: netmiko iteration
+      2', 'Iteration Target Workflow: netmiko iteration 1']
+  last_modified: '2019-08-14 14:06:15.712860'
   mail_recipient: ''
   name: Iteration Targets Workflow
   notification_header: ''
@@ -555,6 +556,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: false
+  use_workflow_targets: true
   vendor: ''
   waiting_time: 0

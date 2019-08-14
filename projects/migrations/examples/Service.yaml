@@ -1260,7 +1260,7 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-07-11 13:51:14.953674'
+  last_modified: '2019-08-14 14:05:25.693261'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2664,7 +2664,7 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-08-14 13:53:48.929278'
+  last_modified: '2019-08-14 14:05:31.377620'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2676,6 +2676,118 @@
   pools: []
   positions:
     Iteration Targets Workflow: [396, -182]
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 3
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: Arista
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show interface {{payload['value']}}
+  content_match: 255.255.255.255
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: Check the iteration mechanism (interfaces)
+  devices: [Austin, Washington]
+  dict_match: {}
+  display_only_failed_nodes: true
+  driver: arista_eos
+  events: []
+  expect_string: ''
+  fast_cli: true
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_targets: '["Loopback11","Loopback15"]'
+  last_modified: '2019-08-14 14:05:00.322370'
+  mail_recipient: ''
+  max_processes: 5
+  multiprocessing: false
+  name: 'Iteration Target Workflow: netmiko iteration 1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions:
+    Iteration Targets Workflow: [144, 97]
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 3
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: Arista
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show interface {{payload['value']}}
+  content_match: 255.255.255.255
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: Check the iteration mechanism (interfaces)
+  devices: [Austin, Washington]
+  dict_match: {}
+  display_only_failed_nodes: true
+  driver: arista_eos
+  events: []
+  expect_string: ''
+  fast_cli: true
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_targets: get_var('iteration_devices', device=device.name)
+  last_modified: '2019-08-14 14:05:09.182701'
+  mail_recipient: ''
+  max_processes: 5
+  multiprocessing: false
+  name: 'Iteration Target Workflow: netmiko iteration 2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions:
+    Iteration Targets Workflow: [379, -195]
   privileged_mode: false
   push_to_git: false
   python_query: ''

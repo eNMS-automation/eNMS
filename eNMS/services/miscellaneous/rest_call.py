@@ -44,7 +44,7 @@ class RestCallService(Service):
     headers = Column(MutableDict)
     verify_ssl_certificate = Column(Boolean, default=True)
     timeout = Column(Integer, default=15)
-    conversion_method = Column(SmallString, default="text")
+    conversion_method = Column(SmallString, default="none")
     validation_method = Column(SmallString)
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)

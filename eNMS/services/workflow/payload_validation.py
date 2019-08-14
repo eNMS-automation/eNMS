@@ -16,7 +16,7 @@ class PayloadValidationService(Service):
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     query = Column(SmallString)
-    conversion_method = Column(SmallString, default="text")
+    conversion_method = Column(SmallString, default="none")
     validation_method = Column(SmallString, default="text")
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)

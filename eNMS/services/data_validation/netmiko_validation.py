@@ -17,7 +17,7 @@ class NetmikoValidationService(Service):
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
     command = Column(LargeString, default="")
-    conversion_method = Column(SmallString, default="text")
+    conversion_method = Column(SmallString, default="none")
     validation_method = Column(SmallString, default="text")
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)

@@ -25,7 +25,7 @@ class AnsiblePlaybookService(Service):
     has_targets = Column(Boolean, default=False)
     playbook_path = Column(SmallString)
     arguments = Column(SmallString)
-    conversion_method = Column(SmallString, default="text")
+    conversion_method = Column(SmallString, default="none")
     validation_method = Column(SmallString)
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)

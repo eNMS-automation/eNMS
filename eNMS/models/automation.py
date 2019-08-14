@@ -389,7 +389,9 @@ class Run(AbstractBase):
 
     def convert_result(self, result: Any) -> Union[str, dict]:
         try:
-            if self.conversion_method == "json":
+            if self.conversion_method == "text":
+                result = str(result)
+            elif self.conversion_method == "json":
                 result = loads(result)
             elif self.conversion_method == "xml":
                 result = parse(result)

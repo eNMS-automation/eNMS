@@ -22,14 +22,17 @@ class PayloadExtractionService(Service):
     query1 = Column(SmallString)
     match_type1 = Column(SmallString, default="none")
     match1 = Column(LargeString, default="")
+    operation1 = Column(SmallString, default="set")
     variable2 = Column(SmallString)
     query2 = Column(SmallString)
     match_type2 = Column(SmallString, default="none")
     match2 = Column(LargeString, default="")
+    operation2 = Column(SmallString, default="set")
     variable3 = Column(SmallString)
     query3 = Column(SmallString)
     match_type3 = Column(SmallString, default="none")
     match3 = Column(LargeString, default="")
+    operation3 = Column(SmallString, default="set")
 
     __mapper_args__ = {"polymorphic_identity": "PayloadExtractionService"}
 
@@ -50,6 +53,7 @@ class PayloadExtractionService(Service):
                 continue
             match_type = getattr(run, f"match_type{i}")
             match = getattr(run, f"match{i}")
+            operation = getattr(run, f"operation{i}")
             value = (
                 value
                 if match_type == "none"
@@ -57,7 +61,9 @@ class PayloadExtractionService(Service):
                 if match_type == "regex"
                 else TextFSM(StringIO(match)).ParseText(value)
             )
-            run.payload_helper(payload, variable, value, device=device.name)
+            run.payload_helper(
+                payload, variable, value, device=device.name, operation=operation
+            )
             result[variable] = {
                 "query": query,
                 "match_type": match_type,
@@ -73,6 +79,13 @@ match_choices = (
     ("textfsm", "Apply TextFSM Template"),
 )
 
+operation_choices = (
+    ("set", "Set / Replace"),
+    ("append", "Append to a list"),
+    ("extend", "Extend list"),
+    ("update", "Update dictionary"),
+)
+
 
 class PayloadExtractionForm(ServiceForm):
     form_type = HiddenField(default="PayloadExtractionService")
@@ -85,6 +98,7 @@ class PayloadExtractionForm(ServiceForm):
         widget=TextArea(),
         render_kw={"rows": 5},
     )
+    operation1 = SelectField("Operation", choices=operation_choices)
     variable2 = StringField("Variable Name")
     query2 = StringField("Python Extraction Query")
     match_type2 = SelectField("Post Processing", choices=match_choices)
@@ -93,6 +107,7 @@ class PayloadExtractionForm(ServiceForm):
         widget=TextArea(),
         render_kw={"rows": 5},
     )
+    operation1 = SelectField("Operation", choices=operation_choices)
     variable3 = StringField("Variable Name")
     query3 = StringField("Python Extraction Query")
     match_type3 = SelectField("Post Processing", choices=match_choices)
@@ -101,9 +116,10 @@ class PayloadExtractionForm(ServiceForm):
         widget=TextArea(),
         render_kw={"rows": 5},
     )
+    operation1 = SelectField("Operation", choices=operation_choices)
     groups = {
         "General": ["has_targets"],
-        "Extraction 1": ["variable1", "query1", "match_type1", "match1"],
-        "Extraction 2": ["variable2", "query2", "match_type2", "match2"],
-        "Extraction 3": ["variable3", "query3", "match_type3", "match3"],
+        "Extraction 1": ["variable1", "query1", "match_type1", "match1", "operation1"],
+        "Extraction 2": ["variable2", "query2", "match_type2", "match2", "operation2"],
+        "Extraction 3": ["variable3", "query3", "match_type3", "match3", "operation3"],
     }

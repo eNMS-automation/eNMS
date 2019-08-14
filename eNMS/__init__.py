@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, make_response, render_template
-from flask_assets import Bundle
 from flask.wrappers import Request, Response
 from itertools import chain
 from pathlib import Path
@@ -13,7 +12,7 @@ from eNMS.database import Base, engine
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties
-from eNMS.extensions import assets, auth, csrf, login_manager
+from eNMS.extensions import auth, csrf, login_manager
 from eNMS.models import relationships
 from eNMS.models.administration import User
 from eNMS.properties import property_names
@@ -23,7 +22,6 @@ from eNMS.routes import blueprint
 
 def register_extensions(app: Flask) -> None:
     app.register_blueprint(blueprint)
-    assets.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
     controller.init_app(app)
@@ -78,20 +76,6 @@ def configure_errors(app: Flask) -> None:
         return render_template("page_404.html"), 404
 
 
-def configure_assets(app: Flask) -> None:
-    assets.register(
-        "js", Bundle("lib/base/**/*.js", "base.js", output="bundles/base.js")
-    )
-    assets.register(
-        "css",
-        Bundle(
-            "lib/base/3_bootstrap/css/bootstrap.min.css",
-            "lib/base/**/*.css",
-            output="bundles/base.css",
-        ),
-    )
-
-
 def configure_authentication() -> None:
     @auth.get_password
     def get_password(username: str) -> str:
@@ -116,7 +100,5 @@ def create_app(path: Path, config: str) -> Flask:
     configure_context_processor(app)
     configure_rest_api(app)
     configure_errors(app)
-    if app.mode != "test":
-        configure_assets(app)
     configure_authentication()
     return app

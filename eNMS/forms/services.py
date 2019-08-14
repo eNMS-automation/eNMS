@@ -43,6 +43,7 @@ class ValidationForm(BaseForm):
     abstract_service = True
     conversion_method = SelectField(
         choices=(
+            ("none", "No conversion"),
             ("text", "Text"),
             ("json", "Json dictionary"),
             ("xml", "XML dictionary"),
@@ -51,7 +52,6 @@ class ValidationForm(BaseForm):
     validation_method = SelectField(
         "Validation Method",
         choices=(
-            ("none", "No conversion"),
             ("text", "Validation by text match"),
             ("dict_included", "Validation by dictionary inclusion"),
             ("dict_equal", "Validation by dictionary equality"),
@@ -79,7 +79,7 @@ class ValidationForm(BaseForm):
         conversion_validation_mismatch = (
             self.conversion_method.data == "text"
             and "dict" in self.validation_method.data
-            or self.conversion_method.data == "dict"
+            or self.conversion_method.data in ("xml", "json")
             and self.validation_method.data != "dict"
         )
         if conversion_validation_mismatch:

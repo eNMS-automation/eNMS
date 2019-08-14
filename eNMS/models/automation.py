@@ -296,9 +296,13 @@ class Run(AbstractBase):
         try:
             if device:
                 if self.job.iteration_targets:
-                    results.update({
+                    targets_results = {
                         target: self.job.job(self, {**payload, "value": target}, device)
                         for target in self.eval(self.job.iteration_targets, **locals())
+                    }
+                    results.update({
+                        "results": targets_results,
+                        "success": all(r["success"] for r in targets_results.values()),
                     })
                 else:
                     results.update(self.job.job(self, payload, device))

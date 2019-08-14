@@ -10,6 +10,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, poller_service, git_push_configurations]
   last_modified: '2019-08-05 13:30:56.726895'
   mail_recipient: ''
@@ -48,6 +49,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
     netmiko_check_no_vrf_test]
   last_modified: '2019-08-05 13:30:56.803035'
@@ -87,6 +89,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
     netmiko_check_no_vrf_napalm]
   last_modified: '2019-08-05 13:30:56.889198'
@@ -127,6 +130,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
   last_modified: '2019-08-05 13:30:56.982753'
   mail_recipient: ''
@@ -166,6 +170,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, add_devices_to_payload, Iteration_service_simple, Iteration_service_python]
   last_modified: '2019-08-05 13:30:57.049335'
   mail_recipient: ''
@@ -204,6 +209,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, netmiko_show_ip_route, payload_extraction, payload_validate_dict,
     payload_validate_text]
   last_modified: '2019-08-14 00:31:07.341279'
@@ -243,6 +249,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, payload_transfer_workflow, get_interfaces, Napalm_VRF_workflow]
   last_modified: '2019-08-05 13:30:57.198567'
   mail_recipient: antoine.fourmy@gmail.com
@@ -281,6 +288,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
     get_interfaces]
   last_modified: '2019-08-13 20:37:47.934244'
@@ -320,6 +328,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass]
   last_modified: '2019-08-05 13:30:57.333759'
   mail_recipient: ''
@@ -358,6 +367,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
     Show vrf with payload helper, Show vrf with python query, REST is_alive, show
       runtime with get_result helper]
@@ -398,6 +408,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
     'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
       get facts failed match']
@@ -438,6 +449,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_targets: ''
   jobs: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow: Arista
       show configuration (regex match)', 'Ansible Workflow: Arista show configuration
       (dict match)']
@@ -480,6 +492,7 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {mode: LAB}
+  iteration_targets: ''
   jobs: [Start, End, Example1, Show version with multiprocessing, REST is_alive, napalm_configure_bgp_1]
   last_modified: '2019-08-13 20:58:00.317930'
   mail_recipient: ''

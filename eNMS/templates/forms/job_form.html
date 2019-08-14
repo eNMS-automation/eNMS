@@ -107,6 +107,11 @@
             {{ form.initial_payload(id=form_type + '-initial_payload',
             class="form-control add-id") }}
           </div>
+          <label class="hide-run">Iteration Targets (Python Query)</label>
+          <div class="form-group">
+            {{ form.iteration_targets(id=form_type + '-iteration_targets',
+            class="form-control hide-run add-id") }}
+          </div>
           <label>Number of retries</label>
           <div class="form-group">
             {{ form.number_of_retries(id=form_type + '-number_of_retries',

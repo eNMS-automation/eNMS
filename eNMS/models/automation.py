@@ -294,7 +294,11 @@ class Run(AbstractBase):
         results: Dict[Any, Any] = {"runtime": controller.get_time()}
         try:
             if device:
-                results.update(self.job.job(self, payload, device))
+                if self.job.iteration_targets:
+                    #self.eval(self.job.iteration_targets
+                    results.update(self.job.job(self, payload, device))
+                else:
+                    results.update(self.job.job(self, payload, device))
             else:
                 results.update(self.job.job(self, payload))
         except Exception:
@@ -505,6 +509,7 @@ class Job(AbstractBase):
     start_new_connection = Column(Boolean, default=False)
     skip = Column(Boolean, default=False)
     skip_python_query = Column(SmallString)
+    iteration_targets = Column(LargeString)
     runs = relationship("Run", back_populates="job")
 
     @property

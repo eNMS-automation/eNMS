@@ -62,6 +62,7 @@ class JobForm(BaseForm):
     size = IntegerField("Size", default=40)
     color = StringField("Color", default="#D2E5FF")
     initial_payload = DictField()
+    iteration_targets = StringField("Iteration Targets (Python Query)")
 
     def validate(self) -> bool:
         valid_form = super().validate()

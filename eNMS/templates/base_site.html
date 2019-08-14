@@ -13,9 +13,36 @@
     <meta name="google" content="notranslate" />
     {% endblock meta %}
     <title>eNMS | {% block title %}{% endblock %}</title>
-    {% block stylesheets %} {% assets "css" %}
-    <link href="{{ ASSET_URL }}" rel="stylesheet" />
-    {% endassets %} {% endblock stylesheets %} {% endblock head %}
+    {% block stylesheets %}
+    <link
+    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/bootstrap-select/bootstrap-select.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    rel="stylesheet"
+    />
+    {% endblock stylesheets %} {% endblock head %}
   </head>
   <body class="{% block body_class %}nav-md {% endblock body_class %}">
     {% block body %}
@@ -51,7 +78,17 @@
       let csrf_token = "{{ csrf_token() }}";
     </script>
     {% assets "js" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/moment/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>
     <script src="{{ url_for('static', filename='automation.js') }}"></script>
     {% endassets %} {% endblock %} {% endblock body %}

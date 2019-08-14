@@ -519,3 +519,42 @@
   use_workflow_targets: true
   vendor: ''
   waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  jobs: [Start, End, Iterated_netmiko_service bis, Iterated_netmiko_service, add_devices_to_payload]
+  last_modified: '2019-08-14 13:54:44.898061'
+  mail_recipient: ''
+  name: Iteration Targets Workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_jobs: [Start]
+  start_new_connection: false
+  start_workflows: []
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: false
+  vendor: ''
+  waiting_time: 0

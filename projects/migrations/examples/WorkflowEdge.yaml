@@ -163,3 +163,11 @@
 - {destination: REST is_alive, name: 67-prerequisite:10->20, source: napalm_configure_bgp_1,
   subtype: prerequisite, workflow: 'Workflow: multiple entry points, skip job, multiprocessing,
     separate paths'}
+- {destination: add_devices_to_payload, name: 70-success:1->26, source: Start, subtype: success,
+  workflow: Iteration Targets Workflow}
+- {destination: Iterated_netmiko_service, name: 70-success:26->28, source: add_devices_to_payload,
+  subtype: success, workflow: Iteration Targets Workflow}
+- {destination: Iterated_netmiko_service bis, name: 70-success:28->69, source: Iterated_netmiko_service,
+  subtype: success, workflow: Iteration Targets Workflow}
+- {destination: End, name: 70-success:69->2, source: Iterated_netmiko_service bis,
+  subtype: success, workflow: Iteration Targets Workflow}

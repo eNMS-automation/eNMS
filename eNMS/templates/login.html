@@ -1,17 +1,17 @@
 {% extends "base_site.html" %} {% block title %} Login {% endblock title %} {%
 block stylesheets %}
 <link
-  href="{{ url_for('static', filename='lib/base/3_bootstrap/css/bootstrap.min.css') }}"
+  href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
   rel="stylesheet"
 />
 <link
-  href="{{ url_for('static', filename='lib/base/G_gentelella/base.min.css') }}"
+  href="{{ url_for('static', filename='lib/base/gentelella/gentelella.min.css') }}"
   rel="stylesheet"
 />
 {% endblock stylesheets %} {% block body_class %} login {% endblock body_class
 %} {% block body %}
-<script src="{{ url_for('static', filename='lib/base/1_jquery/jquery.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/base/9_parsleyjs/parsley.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/base/parsley/parsley.min.js') }}"></script>
 <div class="login_wrapper">
   <section class="login_content">
     <form data-parsley-validate method="post" autocomplete="off">

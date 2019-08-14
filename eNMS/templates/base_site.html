@@ -27,19 +27,35 @@
     rel="stylesheet"
     />
     <link
-    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    href="{{ url_for('static', filename='lib/base/nprogress/nprogress.min.css') }}"
     rel="stylesheet"
     />
     <link
-    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    href="{{ url_for('static', filename='lib/base/alertify/alertify.min.css') }}"
     rel="stylesheet"
     />
     <link
-    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    href="{{ url_for('static', filename='lib/base/diffview/diffview.min.css') }}"
     rel="stylesheet"
     />
     <link
-    href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+    href="{{ url_for('static', filename='lib/base/vis/vis.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/jspanel/jspanel.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/font-awesome/font-awesome.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/jsoneditor/jsoneditor.min.css') }}"
+    rel="stylesheet"
+    />
+    <link
+    href="{{ url_for('static', filename='lib/base/gentelella/gentelella.min.css') }}"
     rel="stylesheet"
     />
     {% endblock stylesheets %} {% endblock head %}
@@ -85,10 +101,14 @@
     <script src="{{ url_for('static', filename='lib/base/bootstrap-select/bootstrap-select.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/nprogress/nprogress.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/alertify/alertify.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/parsley/parsley.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/smart-wizard/smart-wizard.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/diffview/diffview.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/vis/vis.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/jspanel/jspanel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/jsoneditor/jsoneditor.min.js') }}"></script>
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>
     <script src="{{ url_for('static', filename='automation.js') }}"></script>
     {% endassets %} {% endblock %} {% endblock body %}

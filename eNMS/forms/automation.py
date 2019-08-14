@@ -1,3 +1,4 @@
+from ast import parse
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 from wtforms.widgets import TextArea
 
@@ -65,11 +66,6 @@ class JobForm(BaseForm):
     iteration_targets = StringField("Iteration Targets (Python Query)")
     query_fields = ["python_query", "skip_python_query", "iteration_targets"]
 
-    def brackets_check(self, value):
-        print(value, "{{" in value and "}}" in value)
-        if "{{" in value and "}}" in value:
-            return True
-
     def validate(self) -> bool:
         valid_form = super().validate()
         no_recipient_error = (
@@ -81,11 +77,16 @@ class JobForm(BaseForm):
         bracket_error = False 
         for query_field in self.query_fields:
             field = getattr(self, query_field)
-            if self.brackets_check(field.data):
+            try:
+                parse(field.data)
+            except Exception as exc:
+                bracket_error = True
+                field.errors.append(f"Wrong python expression ({exc}).")
+            if "{{" in field.data and "}}" in field.data:
                 bracket_error = True
                 field.errors.append(
                     "You cannot use variable substitution "
-                    "in a field expecting a python expression"
+                    "in a field expecting a python expression."
                 )
         if no_recipient_error:
             self.mail_recipient.errors.append(

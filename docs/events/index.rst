@@ -8,4 +8,3 @@ Event-driven automation
    tasks
    rest_api
    logs
-   cli

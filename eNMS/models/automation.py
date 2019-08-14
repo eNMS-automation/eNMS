@@ -1,5 +1,6 @@
 from collections import defaultdict
 from copy import deepcopy
+from functools import partial
 from git import Repo
 from git.exc import GitCommandError
 from json import loads
@@ -109,8 +110,8 @@ class Run(AbstractBase):
         else:
             raise AttributeError
 
-    def get_result(self, device: Optional[str] = None) -> Optional["Result"]:
-        result = [r for r in self.results if r.device_id == device]
+    def result(self, device: Optional[str] = None) -> Optional["Result"]:
+        result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
 
     def generate_row(self, table: str) -> List[str]:
@@ -212,7 +213,7 @@ class Run(AbstractBase):
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
-            values = controller.eval(self.job.python_query, self, **locals())
+            values = self.eval(self.job.python_query, **locals())
             devices, not_found = set(), set()
             if isinstance(values, str):
                 values = [values]
@@ -313,8 +314,6 @@ class Run(AbstractBase):
         )
         controller.run_db[self.runtime]["completed"] += 1
         controller.run_db[self.runtime]["failed"] += 1 - results["success"]
-        if device:
-            self.create_result(results, device)
         return results
 
     def log(self, severity: str, log: str) -> None:
@@ -438,11 +437,60 @@ class Run(AbstractBase):
                 for source, destination in files:
                     getattr(scp, self.direction)(source, destination)
 
+    def payload_helper(
+        self,
+        payload: dict,
+        name: str,
+        value: Optional[Any] = None,
+        section: Optional[str] = None,
+        device: Optional[str] = None,
+    ) -> Any:
+        payload = payload.setdefault("variables", {})
+        if device:
+            payload = payload.setdefault("devices", {})
+            payload = payload.setdefault(device, {})
+        if section:
+            payload = payload.setdefault(section, {})
+        if value:
+            payload[name] = value
+        else:
+            if name not in payload:
+                raise Exception(f"Payload Editor: {name} not found in {payload}.")
+            return payload[name]
+
+    def get_result(self, job: str, device: Optional[str] = None) -> dict:
+        job_id = fetch("Job", name=job).id
+        run = fetch("Run", parent_runtime=self.parent_runtime, job_id=job_id)
+        return run.result(device)
+
+    def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
+        var_editor = partial(_self.payload_helper, locals.get("payload", {}))
+        return {
+            "config": controller.custom_config,
+            "get_var": var_editor,
+            "get_result": _self.get_result,
+            "workflow": _self.workflow,
+            "set_var": var_editor,
+            "workflow_device": _self.workflow_device,
+            **locals,
+        }
+
+    def eval(_self, query: str, **locals: Any) -> Any:  # noqa: N805
+        try:
+            return eval(query, _self.python_code_kwargs(**locals))
+        except Exception as exc:
+            raise Exception(
+                "Python Query / Variable Substitution Failure."
+                " Check that all variables are defined."
+                " If you are using the 'device' variable, "
+                f"check that the service has targets. ({str(exc)})"
+            )
+
     def sub(self, input: Any, variables: dict) -> dict:
         r = compile("{{(.*?)}}")
 
         def replace(match: Match) -> str:
-            return str(controller.eval(match.group()[2:-2], self, **variables))
+            return str(self.eval(match.group()[2:-2], **variables))
 
         def rec(input: Any) -> Any:
             if isinstance(input, str):
@@ -570,6 +618,9 @@ class Service(Job):
                 device_results = {
                     device.name: run.get_results(payload, device) for device in targets
                 }
+            for device_name, r in deepcopy(device_results).items():
+                device = fetch("Device", name=device_name)
+                run.create_result(r, device)
             results = {"devices": device_results}
             return results
 
@@ -764,7 +815,7 @@ class Workflow(Job):
             controller.run_db[run.runtime]["current_job"] = job.get_properties()
             skip_job = False
             if job.skip_python_query:
-                skip_job = controller.eval(job.skip_python_query, run, **locals())
+                skip_job = run.eval(job.skip_python_query, **locals())
             if skip_job or job.skip:
                 job_results = {"success": "skipped"}
             elif run.use_workflow_targets and job.python_query:
@@ -826,7 +877,8 @@ class Workflow(Job):
                     jobs.append(successor)
                 if not run.use_workflow_targets and successor == self.jobs[1]:
                     results["success"] = True
-            sleep(job.waiting_time)
+            if not skip_job and not job.skip:
+                sleep(job.waiting_time)
         if run.use_workflow_targets:
             end_devices = allowed_devices["End"]
             results["devices"] = {

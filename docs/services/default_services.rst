@@ -49,6 +49,9 @@ Parameters common to the services that use netmiko
 - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
 - ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
 - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
+- ``Strip command`` Remove the echo of the command from the output (default: True).
+- ``Strip prompt`` Remove the trailing router prompt from the output (default: True).
+- ``Auto Find Prompt``: Tries to detect the prompt automatically.
 
 Parameters common to the services that use Napalm
 -------------------------------------------------
@@ -66,6 +69,8 @@ Configuration parameters for creating this service instance:
 
 - All Netmiko parameters (see above)
 - ``Content`` Paste a configuration block of text here for applying to the target device(s).
+- ``Exit config mode`` Determines whether or not to exit config mode after complete.
+- ``Commit Configuration`` Calls netmiko ``commit`` function of the driver to commit the configuration.
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
@@ -81,12 +86,7 @@ Configuration parameters for creating this service instance:
 - ``Variable1`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
 - ``Command1`` CLI command to send to the device via SSH
 - ``Regular Expression1`` Regular expression match to use in filtering the response data from the command
-- ``Variable2`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
-- ``Command2`` CLI command to send to the device via SSH
-- ``Regular Expression2`` Regular expression match to use in filtering the response data from the command
-- ``Variable3`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
-- ``Command3`` CLI command to send to the device via SSH
-- ``Regular Expression3`` Regular expression match to use in filtering the response data from the command
+- Same fields replicated twice (2, 3 instead of 1)
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the ``command`` input field of its configuration form.
 
@@ -242,6 +242,7 @@ Configuration parameters for creating this service instance:
 - ``Payload`` The data to be sent in POST Or PUT operation
 - ``Parameters`` Additional parameters to pass in the request. From the requests library, params can be a dictionary, list of tuples or bytes that are sent in the body of the request.
 - ``Headers`` Dictionary of HTTP Header information to send with the request, such as the type of data to be passed. For example, {"accept":"application/json","content-type":"application/json"}
+- ``Verify SSL Certificate`` If checked (default), the SSL certificate is verified.
 - ``Timeout`` Requests library timeout, which is the Float value in seconds to wait for the server to send data before giving up
 - ``Username`` Username to use for authenticating with the ReST server
 - ``Password`` Password to use for authenticating with the ReST server
@@ -294,13 +295,29 @@ Configuration parameters for creating this service instance:
 UNIX Command Service
 --------------------
 
-Implements a UNIX command to the target device.
+Runs a UNIX command **on the server where eNMS is installed**.
 
 Configuration parameters for creating this service instance:
-- ``Command``: UNIX command to run on the device
+- ``Command``: UNIX command to run on the server
 - Validation Parameters
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
+
+Python Snippet Service
+----------------------
+
+Runs any python code.
+
+In the code, you can use the following variables / functions :
+- ``log``: function to add a string to the job logs.
+- ``parent``: the workflow that the python snippet service is called from.
+- ``save_result``: the results of the service.
+
+Additionally, you can use all the variables and functions described in the "Advanced / Python code" section of the docs.
+
+Configuration parameters for creating this service instance:
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
+- ``Source code``: source code of the python script to run.
 
 Iteration Service
 -----------------
@@ -309,13 +326,37 @@ Execute a service multiple times with different values.
 
 Configuration parameters for creating this service instance:
 - ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
-- ``Where Values come from`` The values over which the service iterates can either come from a user-provided dictionary, or be retrieved from the payload with a YaQL query.
+- ``Where Values come from`` The values over which the service iterates can either come from a user-provided dictionary, or be retrieved from the payload with a Python query.
 - ``Iteration Values for Iteration: User provided`` A dictionary that contains the iteration values. If the iteration values are common to all devices, the dictionary must have a unique key `all` associated to the value,
 for example `{"all": [1, 2, 3]}`. However, if the values are different for each device, the keys must be device names, for example `{"device1": [1, 2], "device2": [3, 4]}`.
-- ``Iteration Values for Iteration: YaQL query on the payload``: a YaQL query on the payload to fetch the iteration values. This field supports variable substitution, such that you can retrieve different values in the payload for each device
+- ``Iteration Values for Iteration: Python query on the payload``: a Python query on the payload to fetch the iteration values. This field supports variable substitution, such that you can retrieve different values in the payload for each device
 by using `{{device.name}}` in the query.
 - ``Iteration Variable Name``: the value is sent to the "iterated job" via the payload, where it is associated to a variable. You can choose the name of the variable with this field.
 If you set this variable to `value`, the payload passed to the iterated service will contain a key `value` associated to the iteration value.
 - ``Job to run for each Value``: the job to execute.
 
-.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `YaQL query` input field.
+.. note:: This Service supports variable substitution (as mentioned in the previous section) in the `Python query` input field.
+
+Payload Extraction Service
+--------------------------
+
+Extract some data from the payload with a python query, and optionally post-process the result with a regular expression or a TextFSM template.
+
+Configuration parameters for creating this service instance:
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
+- ``Variable1``: name of the resulting variable in the results.
+- ``Python Query1``: a python query to retrieve data from the payload.
+- ``Match Type1``: choose the type of post-processing: no post-processing, regular expression, or TextFSM template.
+- ``Match``: regular expression or TextFSM template, depending on the value of the "Match Type1".
+- Same fields replicated twice (2,3 instead of 1): the service can extract / post-process up to 3 variables.
+
+Payload Validation Service
+--------------------------
+
+Extract some data from the payload, and validate it against a string or a dictionary.
+
+Configuration parameters for creating this service instance:
+- All Validation parameters (see above)
+- ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
+- ``Python Query``: a python query to retrieve data from the payload.
+- ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).

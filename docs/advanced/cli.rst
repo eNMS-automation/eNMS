@@ -34,10 +34,10 @@ Example:
 
  `flask delete device Washington`
 
-Run a service
--------------
+Run a job
+---------
 
-General syntax: ``flask start service_name --devices list_of_devices --payload 'payload'`` where:
+General syntax: ``flask start job_name --devices list_of_devices --payload 'payload'`` where:
 
 - list_of_devices is a list of device name separated by commas.
 - payload is a JSON dictionary.
@@ -48,7 +48,7 @@ Examples:
 
 ::
 
- `flask start get_facts`
- `flask start get_facts --devices Washington,Denver`
- `flask start a_service --payload '{"a": "b"}'`
- `flask start get_facts --devices Washington,Denver --payload '{"a": "b"}'`
+ `flask run_job get_facts`
+ `flask run_job get_facts --devices Washington,Denver`
+ `flask run_job get_facts --payload '{"a": "b"}'`
+ `flask run_job get_facts --devices Washington,Denver --payload '{"a": "b"}'`

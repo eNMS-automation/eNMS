@@ -39,6 +39,7 @@ node_modules/
 *.sqlite
 
 # VS Code
+.vscode
 eNMS/.vscode
 
 # exclude everything in git subfolders, except gitkeep

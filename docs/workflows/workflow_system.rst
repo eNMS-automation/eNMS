@@ -94,6 +94,15 @@ The "Use service targets" mode can be used for workflows where services have dif
 
 If ``Use Workflow Targets`` is ticked, the workflow will run on its own targets (all devices configured at service level are ignored). Devices are independent from each other: one device may run on all jobs in the workflow if it is successful while another one could stop at the first step: they run the workflow independently and will likely follow different path in the workflow depending on whether they fail or pass services thoughout the workflow.
 
+Connection Cache
+----------------
+
+When using several netmiko and napalm connections in a workflow, the connection object is cached and reused automatically.
+If for some reason you want a service to create a fresh connection, you can tick the ``Start New Connection`` box
+in the "Workflow" section of the creation panel.
+Upon running this service, eNMS will automatically discard the current cached connection, start a new one and
+make it the new cached connection.
+
 Success of a Workflow
 ---------------------
 
@@ -116,3 +125,24 @@ A workflow displayed in the Workflow Builder page is automatically updated:
 - Every 15 seconds otherwise
 
 This allows multiple users to work concurrently on a single Workflow in the Workflow Builder.
+
+Workflow Restartability
+-----------------------
+
+A workflow can be restarted with any jobs set as "Entry points"
+and with the payload from a previous runs.
+This is useful if you are testing a workflow with a lot of jobs, and you don't want it to
+restart from scratch all the time.
+
+You must click on "Run with Updates" and go to the "Workflow" section to access these parameters.
+
+.. image:: /_static/workflows/workflow_restartability.png
+   :alt: Workflow Restartability
+   :align: center
+
+Job Display Customization
+-------------------------
+
+In the Workflow Builder, you can change how jobs are displayed by configuring their shape, size and color.
+These parameters can be changed from the "Workflow" section of the edit panel.
+By default, a job is a "Box", size 40, color #D2E5FF.

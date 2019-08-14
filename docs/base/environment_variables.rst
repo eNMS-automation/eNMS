@@ -73,3 +73,4 @@ Complete List of Environment Variables
   - export ENMS_LOG_LEVEL=DEBUG
   - export GUNICORN_ACCESS_LOG=logs/app_logs/access.log
   - export GUNICORN_LOG_LEVEL=debug
+  - export DOCUMENTATION_URL=https://enms.readthedocs.io/en/latest/

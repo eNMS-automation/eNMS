@@ -38,6 +38,14 @@ Workflows
 
    workflows/index
 
+Runs
+====
+
+.. toctree::
+   :maxdepth: 2
+
+   runs/index
+
 Events
 ======
 
@@ -53,6 +61,14 @@ Administration
    :maxdepth: 2
 
    administration/index
+
+Advanced
+========
+
+.. toctree::
+   :maxdepth: 2
+
+   advanced/index
 
 License
 =======

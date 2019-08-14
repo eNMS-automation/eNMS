@@ -232,10 +232,10 @@ The following environment variables (with example values) control how eNMS integ
     export LDAP_USERDN=domain.ad.company.com
   The base distinguished name (DN) subtree that is used when searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF) syntax for the entries.
     export LDAP_BASEDN=DC=domain,DC=ad,DC=company,DC=com
-  The string to match against 'memberOf' attributes of the matched user to determine if the user is granted Admin Privileges inside eNMS.
+  The string to match against 'memberOf' attributes of the matched user to determine if the user is allowed to log in.
     export LDAP_ADMIN_GROUP=company.AdminUsers[,group2,group3]
 
-.. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in eNMS user account creation with minimum privileges. An admin user can afterwards alter that user's privileges from :guilabel:`Admin/User Management`
+.. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in an 403 authentication error. An LDAP user MUST be a member of one of the "LDAP_ADMIN_GROUP" groups to authenticate.
 .. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage. In the event that jobs are already scheduled with User Credentials, these might fail if the credentials are not updated in eNMS.
 
 
@@ -327,3 +327,9 @@ Advanced: Migrating Services and Workflows to a new instance with a different in
   - Files needed to migrate: Service.yaml, Workflow.yaml, WorkflowEdge.yaml
 
 If I only want to Import new devices or links to eNMS, perform import of the topology spreadsheet using :guilabel:`Admin / Administration / Topology Import and Export`.
+
+Change the documentation base URL
+---------------------------------
+
+If you prefer to host your own version of the documentation, you can configure the ``DOCUMENTATION_URL`` environment variable.
+By default, this variable is set to https://enms.readthedocs.io/en/latest/: it points to the online documentation.

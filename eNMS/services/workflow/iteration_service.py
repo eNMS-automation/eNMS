@@ -4,7 +4,6 @@ from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 
 from eNMS.concurrency import run_job
-from eNMS.controller import controller
 from eNMS.database.dialect import MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField
@@ -42,7 +41,7 @@ class IterationService(Service):
             else:
                 values = run.user_provided_values["all"]
         else:
-            values = controller.eval(run.python_query_values, run, **locals())
+            values = run.eval(run.python_query_values, **locals())
         results, success = {}, True
         for value in values:
             run_data = {

@@ -52,7 +52,8 @@ class NetmikoBackupService(Service):
             except Exception:
                 pass
             run.log("info", f"Fetching configuration on {device.name} (Netmiko)")
-            config = netmiko_connection.send_command(run.configuration_command)
+            command = run.configuration_command
+            config = netmiko_connection.send_command(command)
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
             if device.configurations:
@@ -72,7 +73,7 @@ class NetmikoBackupService(Service):
         if len(device.configurations) > self.number_of_configuration:
             device.configurations.pop(min(device.configurations))
         Session.commit()
-        return {"success": True, "result": f"Command: {run.configuration_command}"}
+        return {"success": True, "result": f"Command: {command}"}
 
 
 class NetmikoBackupForm(ServiceForm, NetmikoForm):

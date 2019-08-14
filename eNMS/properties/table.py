@@ -117,6 +117,7 @@ table_properties: Dict[str, List[str]] = {
 
 job_filtering_properties = [
     "name",
+    "last_modified",
     "type",
     "description",
     "vendor",

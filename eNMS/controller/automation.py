@@ -4,13 +4,12 @@ from datetime import datetime
 from difflib import SequenceMatcher
 from flask import request, session
 from flask_login import current_user
-from functools import partial
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from operator import attrgetter
 from pathlib import Path
 from re import search, sub
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Dict, Optional
 
 from eNMS.concurrency import run_job
 from eNMS.controller.base import BaseController
@@ -30,40 +29,6 @@ class AutomationController(BaseController):
     job_db: dict = defaultdict(lambda: {"runs": 0})
     run_db: dict = defaultdict(dict)
     run_logs: dict = defaultdict(list)
-
-    def payload_helper(
-        self,
-        payload: dict,
-        name: str,
-        value: Optional[Any] = None,
-        section: Optional[str] = None,
-        device: Optional[str] = None,
-    ) -> Any:
-        payload = payload.setdefault("variables", {})
-        if device:
-            payload = payload.setdefault("devices", {})
-            payload = payload.setdefault(device, {})
-        if section:
-            payload = payload.setdefault(section, {})
-        if value:
-            payload[name] = value
-        else:
-            if name not in payload:
-                raise Exception(f"Payload Editor: {name} not found in {payload}.")
-            return payload[name]
-
-    def get_job_result(
-        self, runtime: str, job: str, device: Optional[str] = None
-    ) -> dict:
-        job_id = fetch("Job", name=job).id
-        run = fetch("Run", parent_runtime=runtime, job_id=job_id)
-        return run.get_result(device)
-
-    def get_var(self, payload: dict) -> Callable:
-        return partial(self.payload_helper, payload)
-
-    def get_result(self, runtime: str) -> Callable:
-        return partial(self.get_job_result, runtime)
 
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int
@@ -138,7 +103,7 @@ class AutomationController(BaseController):
 
     def get_job_logs(self, **kwargs: Any) -> dict:
         run = fetch("Run", allow_none=True, runtime=kwargs["runtime"])
-        result = run.get_result() if run else None
+        result = run.result() if run else None
         logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])
         filtered_logs = (log for log in logs if kwargs["filter"] in log)
         return {"logs": "\n".join(filtered_logs), "refresh": not bool(result)}

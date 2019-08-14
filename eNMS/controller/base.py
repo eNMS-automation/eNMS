@@ -550,7 +550,7 @@ class BaseController:
             device = fetch("Device", allow_none=True, name=dir.name)
             if device:
                 with open(Path(dir.path) / "data.yml") as data:
-                    parameters = load(data)
+                    parameters = yaml.load(data)
                     device.update(**parameters)
                     config_file = Path(dir.path) / dir.name
                     if not config_file.exists():

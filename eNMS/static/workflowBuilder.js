@@ -317,14 +317,14 @@ function savePositions() {
 Object.assign(action, {
   Edit: (job) => showTypePanel(job.type, job.id),
   Run: (job) => showTypePanel(job.type, job.id, "run"),
-  "Run Workflow": runWorkflow,
+  "Run Workflow": () => runWorkflow(),
   "Run Workflow with Updates": () => runWorkflow(true),
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Workflow Results": () =>
     showResultsPanel(workflow.id, workflow.name, "workflow"),
-  "Workflow Logs": () => showLogs(workflow.id),
+  "Workflow Logs": () => showLogsPanel(workflow),
   "Add to Workflow": () => showPanel("add_jobs"),
   "Remove from Workflow": deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),

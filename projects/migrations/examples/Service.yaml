@@ -27,9 +27,11 @@
     Napalm_VRF_workflow: ['-200', '0']
     Netmiko prompts: ['-279', '-158']
     Netmiko_VRF_workflow: ['-200', '0']
-    Workflow with separate failure - success path: ['-118', '-3']
+    Workflow with separate failure - success path: [-239, -32]
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      -283, 31]
     Workflow_of_workflows: ['-300', '0']
-    payload_extraction_validation_worflow: ['-200', '0']
+    payload_extraction_validation_worflow: [-200, 0]
     payload_transfer_workflow: ['-200', '0']
     'python Workflow: payload editor and pool helper': ['-326', '45']
     python_query_workflow: ['-164', '15']
@@ -78,9 +80,11 @@
     Netmiko_VRF_workflow: ['200', '0']
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
-    Workflow with separate failure - success path: ['500', '0']
+    Workflow with separate failure - success path: [765, 251]
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      594, -3]
     Workflow_of_workflows: ['300', '0']
-    payload_extraction_validation_worflow: ['200', '0']
+    payload_extraction_validation_worflow: [200, 0]
     payload_transfer_workflow: ['500', '0']
     'python Workflow: payload editor and pool helper': ['530', '155']
     python_query_workflow: ['651', '20']
@@ -348,7 +352,10 @@
   number_of_retries: 0
   operating_system: ''
   pools: []
-  positions: {}
+  positions:
+    Workflow with separate failure - success path: [773, 11]
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      -223, -170]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -378,7 +385,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-07-11 13:51:13.634944'
+  last_modified: '2019-08-13 20:54:58.539660'
   local_as: 100
   loopback: Lo100
   loopback_ip: 100.1.1.1
@@ -391,7 +398,9 @@
   number_of_retries: 0
   operating_system: ''
   pools: []
-  positions: {}
+  positions:
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      110, -170]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -400,14 +409,14 @@
   send_notification_method: mail_feedback_notification
   shape: box
   size: 40
-  skip: false
+  skip: true
   skip_python_query: ''
   start_new_connection: false
   time_between_retries: 10
   type: ConfigureBgpService
   vendor: ''
   vrf_name: configure_BGP_test
-  waiting_time: 0
+  waiting_time: 100
 - color: '#D2E5FF'
   creator: admin
   credentials: device
@@ -767,7 +776,7 @@
   positions:
     Napalm_VRF_workflow: ['0', '150']
     Netmiko_VRF_workflow: ['0', '150']
-    Workflow with separate failure - success path: ['52', '-2']
+    Workflow with separate failure - success path: [-57, 41]
     python_query_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
@@ -864,7 +873,9 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    Workflow with separate failure - success path: ['232', '134']
+    Workflow with separate failure - success path: [199, 203]
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      357, -52]
     payload_transfer_workflow: ['-50', '0']
     'python Workflow: payload editor and pool helper': ['225', '-223']
   push_to_git: false
@@ -912,7 +923,7 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow with separate failure - success path: ['214', '-132']
+    Workflow with separate failure - success path: [214, -132]
     payload_transfer_workflow: ['-50', '-100']
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
@@ -957,6 +968,7 @@
   optional_args: {}
   pools: []
   positions:
+    Workflow with separate failure - success path: [455, 10]
     Workflow_of_workflows: ['0', '0']
     payload_transfer_workflow: ['150', '100']
   push_to_git: false
@@ -1281,7 +1293,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: ['0', '-150']
+    payload_extraction_validation_worflow: [0, -150]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1314,7 +1326,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-05 13:35:57.170497'
+  last_modified: '2019-08-14 00:30:53.413109'
   mail_recipient: ''
   match1: ''
   match2: (\d.*)/32
@@ -1335,12 +1347,12 @@
   operating_system: ''
   pools: []
   positions:
-    payload_extraction_validation_worflow: ['0', '-50']
+    payload_extraction_validation_worflow: [0, -50]
   push_to_git: false
   python_query: ''
-  query1: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["success"]
-  query2: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["result"]
-  query3: payload["netmiko_show_ip_route"]["results"]["devices"][device.name]["result"]
+  query1: get_result("netmiko_show_ip_route", device.name)["success"]
+  query2: get_result("netmiko_show_ip_route", device.name)["result"]
+  query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1374,7 +1386,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-06 14:21:03.063670'
+  last_modified: '2019-08-14 00:31:38.508644'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1385,10 +1397,10 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: ['0', '50']
+    payload_extraction_validation_worflow: [0, 50]
   push_to_git: false
   python_query: ''
-  query: payload["payload_extraction"]["results"]["devices"][device.name]["result"]["regex_variable"]
+  query: get_result("payload_extraction", device.name)["result"]["regex_variable"]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1419,7 +1431,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  last_modified: '2019-08-06 14:21:06.925879'
+  last_modified: '2019-08-14 00:32:02.797893'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1430,10 +1442,10 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: ['0', '150']
+    payload_extraction_validation_worflow: [0, 150]
   push_to_git: false
   python_query: ''
-  query: payload["payload_extraction"]["results"]["devices"][device.name]["result"]["textfsm_variable"]["value"][0][1]
+  query: get_result("payload_extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1521,6 +1533,8 @@
   pools: []
   positions:
     Napalm_VRF_workflow: ['10', '-32']
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      123, -187]
     'python Workflow: payload editor and pool helper': ['266', '161']
   privileged_mode: false
   push_to_git: false
@@ -2281,6 +2295,158 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
+- arguments: ''
+  color: '#D2E5FF'
+  content_match: ip address\s.*/32
+  content_match_regex: true
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-10 18:26:51.501557'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Ansible Workflow: Arista show configuration (regex match)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  options: {}
+  pass_device_properties: true
+  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
+  pools: []
+  positions:
+    Ansible Workflow: [27, 98]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: AnsiblePlaybookService
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- arguments: ''
+  color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: json
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {action: debug, changed: false, failed: false}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-10 18:26:36.791826'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Ansible Workflow: Arista show configuration (dict match)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  options: {}
+  pass_device_properties: true
+  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
+  pools: []
+  positions:
+    Ansible Workflow: [248, -170]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: AnsiblePlaybookService
+  validation_method: dict_included
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show version
+  content_match: ''
+  content_match_regex: false
+  conversion_method: text
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  last_modified: '2019-08-13 20:58:22.190268'
+  mail_recipient: ''
+  max_processes: 10
+  multiprocessing: true
+  name: Show version with multiprocessing
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+      154, 108]
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
 - color: '#D2E5FF'
   conversion_property: name
   creator: admin
@@ -2412,101 +2578,5 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
-  vendor: ''
-  waiting_time: 0
-- arguments: ''
-  color: '#D2E5FF'
-  content_match: ip address\s.*/32
-  content_match_regex: true
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-08-10 18:26:51.501557'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: 'Ansible Workflow: Arista show configuration (regex match)'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  options: {}
-  pass_device_properties: true
-  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
-  pools: []
-  positions:
-    Ansible Workflow: [27, 98]
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: AnsiblePlaybookService
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
-- arguments: ''
-  color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: json
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {action: debug, changed: false, failed: false}
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  last_modified: '2019-08-10 18:26:36.791826'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: 'Ansible Workflow: Arista show configuration (dict match)'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  options: {}
-  pass_device_properties: true
-  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
-  pools: []
-  positions:
-    Ansible Workflow: [248, -170]
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: AnsiblePlaybookService
-  validation_method: dict_included
   vendor: ''
   waiting_time: 0

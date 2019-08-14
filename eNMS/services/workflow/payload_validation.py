@@ -48,3 +48,4 @@ class PayloadValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="PayloadValidationService")
     has_targets = BooleanField("Has Target Devices")
     query = StringField("Python Query")
+    query_fields = ServiceForm.query_fields + ["query"]

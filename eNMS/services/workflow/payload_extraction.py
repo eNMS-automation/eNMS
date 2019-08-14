@@ -123,3 +123,4 @@ class PayloadExtractionForm(ServiceForm):
         "Extraction 2": ["variable2", "query2", "match_type2", "match2", "operation2"],
         "Extraction 3": ["variable3", "query3", "match_type3", "match3", "operation3"],
     }
+    query_fields = ServiceForm.query_fields + [f"query{i}" for i in range(1, 4)]

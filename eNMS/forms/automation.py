@@ -63,6 +63,12 @@ class JobForm(BaseForm):
     color = StringField("Color", default="#D2E5FF")
     initial_payload = DictField()
     iteration_targets = StringField("Iteration Targets (Python Query)")
+    query_fields = ["python_query", "skip_python_query", "iteration_targets"]
+
+    def brackets_check(self, value):
+        print(value, "{{" in value and "}}" in value)
+        if "{{" in value and "}}" in value:
+            return True
 
     def validate(self) -> bool:
         valid_form = super().validate()
@@ -72,11 +78,20 @@ class JobForm(BaseForm):
             and not self.mail_recipient.data
             and not controller.mail_recipients
         )
+        bracket_error = False 
+        for query_field in self.query_fields:
+            field = getattr(self, query_field)
+            if self.brackets_check(field.data):
+                bracket_error = True
+                field.errors.append(
+                    "You cannot use variable substitution "
+                    "in a field expecting a python expression"
+                )
         if no_recipient_error:
             self.mail_recipient.errors.append(
                 "Please add at least one recipient for the mail notification."
             )
-        return valid_form and not no_recipient_error
+        return valid_form and not no_recipient_error and not bracket_error
 
 
 class RunForm(BaseForm):

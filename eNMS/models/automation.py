@@ -410,7 +410,6 @@ class Run(AbstractBase):
             assert isinstance(match, str)
             if self.delete_spaces_before_matching:
                 match, result = map(self.space_deleter, (match, result))
-            print("kkk"*100, match, result, search(match, result))
             success = (
                 self.content_match_regex
                 and bool(search(match, result))

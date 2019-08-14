@@ -87,3 +87,4 @@ class PythonSnippetForm(ServiceForm):
 result = {}
 save_result(success=True, result=result)""",
     )
+    query_fields = ServiceForm.query_fields + ["source_code"]

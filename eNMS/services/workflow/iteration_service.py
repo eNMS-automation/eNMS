@@ -72,3 +72,4 @@ class IterationForm(ServiceForm):
     )
     variable_name = StringField("Iteration Variable Name")
     iterated_job = InstanceField("Job to run for each Value", instance_type="Job")
+    query_fields = ServiceForm.query_fields + ["python_query_values"]

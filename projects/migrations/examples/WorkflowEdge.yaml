@@ -170,5 +170,8 @@
 - {destination: 'Iteration Target Workflow: netmiko iteration 2', name: 70-success:71->72,
   source: 'Iteration Target Workflow: netmiko iteration 1', subtype: success, workflow: Iteration
     Targets Workflow}
-- {destination: End, name: 70-success:72->2, source: 'Iteration Target Workflow: netmiko
-    iteration 2', subtype: success, workflow: Iteration Targets Workflow}
+- {destination: End, name: 72-success:73->2, source: 'Iteration Target Workflow: netmiko
+    iteration 3', subtype: success, workflow: Iteration Targets Workflow}
+- {destination: 'Iteration Target Workflow: netmiko iteration 3', name: 72-failure:55->73,
+  source: 'Iteration Target Workflow: netmiko iteration 2', subtype: failure, workflow: Iteration
+    Targets Workflow}

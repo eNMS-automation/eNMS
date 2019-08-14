@@ -2,7 +2,6 @@ apscheduler
 dicttoxml
 fabric
 flask
-flask_assets
 flask_httpauth
 flask_login
 flask-restful

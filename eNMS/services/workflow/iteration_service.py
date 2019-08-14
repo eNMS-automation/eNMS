@@ -21,9 +21,7 @@ class IterationService(Service):
     iterated_job = relationship(
         "Job", primaryjoin="Job.id == IterationService.iterated_job_id"
     )
-    origin_of_values = Column(
-        SmallString, default="user_provided_values"
-    )
+    origin_of_values = Column(SmallString, default="user_provided_values")
     python_query_values = Column(SmallString)
     user_provided_values = Column(MutableDict)
     conversion_property = Column(SmallString, default="name")

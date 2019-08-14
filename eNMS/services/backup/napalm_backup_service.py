@@ -1,11 +1,11 @@
 from datetime import datetime
 from pathlib import Path
 from ruamel import yaml
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, IntegerField
 
 from eNMS.controller import controller
-from eNMS.database.dialect import MutableDict, SmallString
+from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Run, Service

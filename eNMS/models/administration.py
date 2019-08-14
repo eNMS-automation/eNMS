@@ -1,10 +1,10 @@
 from flask_login import UserMixin
-from sqlalchemy import Boolean, Column, Float, Integer
+from sqlalchemy import Boolean, Float, Integer
 from sqlalchemy.orm import relationship
 from typing import Any, List
 
 
-from eNMS.database.dialect import MutableDict, MutableList, SmallString
+from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.database.associations import pool_user_table
 from eNMS.database.base import AbstractBase
 
@@ -56,8 +56,7 @@ class Parameters(AbstractBase):
         SmallString, default="https://demo.opennms.org/opennms/rest"
     )
     opennms_devices = Column(
-        SmallString,
-        default="https://demo.opennms.org/opennms/rest/nodes",
+        SmallString, default="https://demo.opennms.org/opennms/rest/nodes"
     )
     opennms_login = Column(SmallString, default="demo")
     mail_sender = Column(SmallString)

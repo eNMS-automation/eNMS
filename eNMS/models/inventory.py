@@ -1,11 +1,11 @@
 from re import search
-from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer
+from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 from typing import Any, Dict, List, Union
 
 from eNMS.controller import controller
-from eNMS.database.dialect import LargeString, MutableDict, SmallString
+from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (
     pool_device_table,
@@ -243,9 +243,7 @@ AbstractPool: Any = type(
                 for property in pool_device_properties
             },
             **{
-                f"device_{property}_match": Column(
-                    SmallString, default="inclusion"
-                )
+                f"device_{property}_match": Column(SmallString, default="inclusion")
                 for property in pool_device_properties
             },
             **{
@@ -253,9 +251,7 @@ AbstractPool: Any = type(
                 for property in pool_link_properties
             },
             **{
-                f"link_{property}_match": Column(
-                    SmallString, default="inclusion"
-                )
+                f"link_{property}_match": Column(SmallString, default="inclusion")
                 for property in pool_link_properties
             },
         },

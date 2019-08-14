@@ -2,12 +2,12 @@ from paramiko import SSHClient, AutoAddPolicy
 from pathlib import Path
 from os import remove
 from shutil import rmtree
-from sqlalchemy import Boolean, Column, ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from tarfile import open as open_tar
 from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.controller import controller
-from eNMS.database.dialect import SmallString
+from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Run, Service

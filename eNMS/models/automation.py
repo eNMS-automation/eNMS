@@ -300,10 +300,14 @@ class Run(AbstractBase):
                         target: self.job.job(self, {**payload, "value": target}, device)
                         for target in self.eval(self.job.iteration_targets, **locals())
                     }
-                    results.update({
-                        "results": targets_results,
-                        "success": all(r["success"] for r in targets_results.values()),
-                    })
+                    results.update(
+                        {
+                            "results": targets_results,
+                            "success": all(
+                                r["success"] for r in targets_results.values()
+                            ),
+                        }
+                    )
                 else:
                     results.update(self.job.job(self, payload, device))
             else:
@@ -547,9 +551,7 @@ class Job(AbstractBase):
     pools = relationship("Pool", secondary=job_pool_table, back_populates="jobs")
     events = relationship("Event", secondary=job_event_table, back_populates="jobs")
     send_notification = Column(Boolean, default=False)
-    send_notification_method = Column(
-        SmallString, default="mail_feedback_notification"
-    )
+    send_notification_method = Column(SmallString, default="mail_feedback_notification")
     notification_header = Column(LargeString, default="")
     display_only_failed_nodes = Column(Boolean, default=True)
     include_link_in_summary = Column(Boolean, default=True)

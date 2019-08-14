@@ -211,8 +211,9 @@
   initial_payload: {}
   iteration_targets: ''
   jobs: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
-      Validate dict via results', 'Payload Workflow: Validate text via results']
-  last_modified: '2019-08-14 19:12:02.954226'
+      Validate dict via results', 'Payload Workflow: Validate text via results', 'Payload
+      Workflow: Validate text via payload', 'Payload Workflow: Validate dict via payload']
+  last_modified: '2019-08-14 19:57:56.988442'
   mail_recipient: ''
   name: payload_extraction_validation_worflow
   notification_header: ''

@@ -176,3 +176,9 @@
 - {destination: 'Iteration Target Workflow: netmiko iteration 3', name: 72-failure:55->73,
   source: 'Iteration Target Workflow: netmiko iteration 2', subtype: failure, workflow: Iteration
     Targets Workflow}
+- {destination: 'Payload Workflow: Validate dict via payload', name: 64-success:30->75,
+  source: Payload Extraction, subtype: success, workflow: payload_extraction_validation_worflow}
+- {destination: 'Payload Workflow: Validate text via payload', name: 64-success:75->74,
+  source: 'Payload Workflow: Validate dict via payload', subtype: success, workflow: payload_extraction_validation_worflow}
+- {destination: End, name: 64-success:74->2, source: 'Payload Workflow: Validate text
+    via payload', subtype: success, workflow: payload_extraction_validation_worflow}

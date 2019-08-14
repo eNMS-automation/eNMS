@@ -107,7 +107,7 @@ class PayloadExtractionForm(ServiceForm):
         widget=TextArea(),
         render_kw={"rows": 5},
     )
-    operation1 = SelectField("Operation", choices=operation_choices)
+    operation2 = SelectField("Operation", choices=operation_choices)
     variable3 = StringField("Variable Name")
     query3 = StringField("Python Extraction Query")
     match_type3 = SelectField("Post Processing", choices=match_choices)
@@ -116,7 +116,7 @@ class PayloadExtractionForm(ServiceForm):
         widget=TextArea(),
         render_kw={"rows": 5},
     )
-    operation1 = SelectField("Operation", choices=operation_choices)
+    operation3 = SelectField("Operation", choices=operation_choices)
     groups = {
         "General": ["has_targets"],
         "Extraction 1": ["variable1", "query1", "match_type1", "match1", "operation1"],

@@ -182,3 +182,13 @@
   source: 'Payload Workflow: Validate dict via payload', subtype: success, workflow: payload_extraction_validation_worflow}
 - {destination: End, name: 64-success:74->2, source: 'Payload Workflow: Validate text
     via payload', subtype: success, workflow: payload_extraction_validation_worflow}
+- {destination: 'Getters Workflow: Interface IP', name: 76-success:1->46, source: Start,
+  subtype: success, workflow: 'Payload Workflow: Payload Extraction with operations'}
+- {destination: 'Payload Workflow: Add initial variables', name: 76-success:46->77,
+  source: 'Getters Workflow: Interface IP', subtype: success, workflow: 'Payload Workflow:
+    Payload Extraction with operations'}
+- {destination: 'Payload Workflow: Extraction 1', name: 76-success:77->78, source: 'Payload
+    Workflow: Add initial variables', subtype: success, workflow: 'Payload Workflow:
+    Payload Extraction with operations'}
+- {destination: End, name: 76-success:78->2, source: 'Payload Workflow: Extraction
+    1', subtype: success, workflow: 'Payload Workflow: Payload Extraction with operations'}

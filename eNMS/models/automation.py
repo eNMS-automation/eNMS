@@ -457,7 +457,9 @@ class Run(AbstractBase):
         value: Optional[Any] = None,
         section: Optional[str] = None,
         device: Optional[str] = None,
+        operation: Optional[str] = "set",
     ) -> Any:
+        print(name, value, section)
         payload = payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
@@ -465,7 +467,10 @@ class Run(AbstractBase):
         if section:
             payload = payload.setdefault(section, {})
         if value:
-            payload[name] = value
+            if operation == "set":
+                payload[name] = value
+            else:
+                getattr(payload[name], operation)(value)
         else:
             if name not in payload:
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")

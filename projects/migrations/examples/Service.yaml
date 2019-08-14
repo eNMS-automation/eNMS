@@ -1385,6 +1385,9 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
+  operation1: set
+  operation2: set
+  operation3: set
   pools: []
   positions:
     payload_extraction_validation_worflow: [144, -263]
@@ -2200,6 +2203,7 @@
   pools: []
   positions:
     Napalm getters and match mechanism workflow: [157, 139]
+    'Payload Workflow: Payload Extraction with operations': [-72, -307]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -2677,142 +2681,6 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
-  conversion_property: name
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: Test the iteration mechanism (Iteration values)
-  devices: [Washington, Austin]
-  display_only_failed_nodes: true
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: true
-  initial_payload: {}
-  iterated_job: Iterated_netmiko_service
-  iterated_job_id: 28
-  iteration_targets: ''
-  last_modified: '2019-07-22 20:55:39.326778'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: Iteration_service_simple
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  origin_of_values: user_provided_values
-  pools: []
-  positions:
-    Iteration Services Test Workflow: ['-342', '2']
-  push_to_git: false
-  python_query: ''
-  python_query_values: ''
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: IterationService
-  user_provided_values:
-    all: [Loopback11, Loopback15]
-  variable_name: value
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  conversion_property: name
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: Test the iteration mechanism (python values)
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: true
-  initial_payload: {}
-  iterated_job: Iterated_netmiko_service
-  iterated_job_id: 28
-  iteration_targets: ''
-  last_modified: '2019-08-02 20:27:00.941168'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: Iteration_service_python
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  origin_of_values: python_query
-  pools: []
-  positions:
-    Iteration Services Test Workflow: ['-358', '192']
-  push_to_git: false
-  python_query: ''
-  python_query_values: get_var('iteration_devices', device=device.name)
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: IterationService
-  user_provided_values: {}
-  variable_name: value
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  conversion_property: name
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: ''
-  devices: []
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: true
-  initial_payload: {}
-  iterated_job: Iterated_netmiko_service
-  iterated_job_id: 28
-  iteration_targets: ''
-  last_modified: '2019-07-11 13:51:15.506459'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: iteration_python_payload
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  origin_of_values: python_query
-  pools: []
-  positions:
-    Iteration Services Test Workflow: ['-337', '233']
-  push_to_git: false
-  python_query: ''
-  python_query_values: payload['netmiko_check_vrf_test']['results']['devices'][device.name]['match']
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 10
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: IterationService
-  user_provided_values: {}
-  variable_name: value
-  vendor: ''
-  waiting_time: 0
 - auto_find_prompt: true
   color: '#D2E5FF'
   command: show interface {{payload['value']}}
@@ -2961,4 +2829,234 @@
   type: PayloadValidationService
   validation_method: text
   vendor: Arista
+  waiting_time: 0
+- color: '#D2E5FF'
+  conversion_property: name
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: Test the iteration mechanism (Iteration values)
+  devices: [Washington, Austin]
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iterated_job: Iterated_netmiko_service
+  iterated_job_id: 28
+  iteration_targets: ''
+  last_modified: '2019-07-22 20:55:39.326778'
+  mail_recipient: ''
+  max_processes: 5
+  multiprocessing: false
+  name: Iteration_service_simple
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  origin_of_values: user_provided_values
+  pools: []
+  positions:
+    Iteration Services Test Workflow: ['-342', '2']
+  push_to_git: false
+  python_query: ''
+  python_query_values: ''
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: IterationService
+  user_provided_values:
+    all: [Loopback11, Loopback15]
+  variable_name: value
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  conversion_property: name
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: Test the iteration mechanism (python values)
+  devices: []
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iterated_job: Iterated_netmiko_service
+  iterated_job_id: 28
+  iteration_targets: ''
+  last_modified: '2019-08-02 20:27:00.941168'
+  mail_recipient: ''
+  max_processes: 5
+  multiprocessing: false
+  name: Iteration_service_python
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  origin_of_values: python_query
+  pools: []
+  positions:
+    Iteration Services Test Workflow: ['-358', '192']
+  push_to_git: false
+  python_query: ''
+  python_query_values: get_var('iteration_devices', device=device.name)
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: IterationService
+  user_provided_values: {}
+  variable_name: value
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  conversion_property: name
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iterated_job: Iterated_netmiko_service
+  iterated_job_id: 28
+  iteration_targets: ''
+  last_modified: '2019-07-11 13:51:15.506459'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: iteration_python_payload
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  origin_of_values: python_query
+  pools: []
+  positions:
+    Iteration Services Test Workflow: ['-337', '233']
+  push_to_git: false
+  python_query: ''
+  python_query_values: payload['netmiko_check_vrf_test']['results']['devices'][device.name]['match']
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 10
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: IterationService
+  user_provided_values: {}
+  variable_name: value
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-14 23:28:40.824870'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Payload Workflow: Add initial variables'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Payload Workflow: Payload Extraction with operations': [-13, 48]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
+    , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
+    \ result={})"
+  start_new_connection: false
+  time_between_retries: 10
+  type: PythonSnippetService
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-14 23:32:03.314979'
+  mail_recipient: ''
+  match1: ''
+  match2: ''
+  match3: ''
+  match_type1: none
+  match_type2: none
+  match_type3: none
+  max_processes: 50
+  multiprocessing: false
+  name: 'Payload Workflow: Extraction 1'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  operation1: set
+  operation2: append
+  operation3: update
+  pools: []
+  positions:
+    'Payload Workflow: Payload Extraction with operations': [277, -242]
+  push_to_git: false
+  python_query: ''
+  query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
+  query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
+  query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: PayloadExtractionService
+  variable1: boolean
+  variable2: list
+  variable3: dict
+  vendor: ''
   waiting_time: 0

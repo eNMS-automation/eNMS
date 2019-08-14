@@ -50,7 +50,7 @@ dont_migrate: Dict[str, List[str]] = {
         "time_before_next_run",
         "status",
     ],
-    "User": ["pools"],
+    "User": ["id", "pools"],
     "Workflow": ["edges", "id", "sources", "destinations", "workflows", "tasks"],
     "WorkflowEdge": ["id", "source_id", "destination_id", "workflow_id"],
 }

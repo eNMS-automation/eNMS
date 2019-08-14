@@ -1,0 +1,3 @@
+- email: admin@admin.com
+  name: admin
+  permissions: [Admin]

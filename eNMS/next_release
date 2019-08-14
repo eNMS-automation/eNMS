@@ -1,3 +1,13 @@
 - Waiting time is now skipped when the job is skipped.
 
-- Add regression test for the skip job feature.
+- change result to mediumblob pickletype
+
+- remove configurations from ansible command
+
+- remove table filtering N/A
+
+- Update docs
+
+- Add more regression tests (including sip job feature)
+
+- Bug fixes

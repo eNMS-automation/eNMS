@@ -246,7 +246,7 @@ class Run(AbstractBase):
     def run(self, payload: Optional[dict] = None) -> dict:
         try:
             self.log("info", f"{self.job.type} {self.job.name}: Starting")
-            controller.run_db[self.runtime]["is_running"] = True
+            controller.run_db[self.runtime]["status"] = "Running"
             controller.job_db[self.job.id]["runs"] += 1
             Session.commit()
             results = self.job.build_results(self, payload or self.initial_payload)
@@ -262,10 +262,9 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "results": result}
         finally:
-            status = f"Completed ({'success' if self.success else 'failure'})"
+            status = f"Completed ({'success' if results['success'] else 'failure'})"
             self.status = status  # type: ignore
             controller.run_db[self.runtime]["status"] = status
-            controller.run_db[self.runtime]["is_running"] = False
             controller.job_db[self.job.id]["runs"] -= 1
             results["endtime"] = self.endtime = controller.get_time()  # type: ignore
             results["state"] = controller.run_db.pop(self.runtime)

@@ -428,7 +428,7 @@ function getWorkflowState(first) {
         displayWorkflow(result);
       }
       displayWorkflowState(result);
-      if (first || (result.state && result.state.is_running)) {
+      if (first || (result.state && result.state.status == "Running")) {
         setTimeout(getWorkflowState, 3000);
       } else {
         stateUpdate = false;

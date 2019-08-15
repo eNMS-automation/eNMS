@@ -1,6 +1,7 @@
 from json import dumps
 from sqlalchemy import Boolean, ForeignKey, Integer
 from subprocess import check_output
+from traceback import format_exc
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
@@ -42,8 +43,6 @@ class AnsiblePlaybookService(Service):
         command, extra_args = ["ansible-playbook"], {}
         if run.pass_device_properties:
             extra_args = device.get_properties()
-            extra_args.pop("configurations", None)
-            extra_args.pop("current_configuration", None)
             extra_args["password"] = device.password
         if run.options:
             extra_args.update(run.sub(run.options, locals()))
@@ -52,8 +51,19 @@ class AnsiblePlaybookService(Service):
         if run.has_targets:
             command.extend(["-i", device.ip_address + ","])
         command.append(run.sub(run.playbook_path, locals()))
-        run.log("info", f"Sending Ansible playbook: {' '.join(command + arguments)}")
-        result = check_output(command + arguments, cwd=controller.path / "playbooks")
+        password = extra_args.get("password")
+        if password:
+            safe_command = " ".join(command + arguments).replace(password, "*" * 10)
+        run.log("info", f"Sending Ansible playbook: {safe_command}")
+        try:
+            result = check_output(
+                command + arguments, cwd=controller.path / "playbooks"
+            )
+        except Exception:
+            result = "\n".join(format_exc().splitlines())
+            if password:
+                result = result.replace(password, "*" * 10)
+            results = {"success": False, "results": result}
         try:
             result = result.decode("utf-8")
         except AttributeError:
@@ -65,7 +75,7 @@ class AnsiblePlaybookService(Service):
             else run.sub(run.dict_match, locals())
         )
         return {
-            "command": " ".join(command + arguments),
+            "command": safe_command,
             "match": match,
             "negative_logic": run.negative_logic,
             "result": result,

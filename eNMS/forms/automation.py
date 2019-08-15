@@ -74,7 +74,7 @@ class JobForm(BaseForm):
             and not self.mail_recipient.data
             and not controller.mail_recipients
         )
-        bracket_error = False 
+        bracket_error = False
         for query_field in self.query_fields:
             field = getattr(self, query_field)
             try:

@@ -15,3 +15,7 @@
 - No longer retrieve device configuration when querying REST API.
 
 - Performance improvements
+
+- Remove web assets
+
+- Refactor SQL Alchemy column declaration for MySQL compatibility

@@ -80,7 +80,7 @@ class GetInstance(Resource):
             return abort(404, message=f"{cls} {name} not found.")
 
     def delete(self, cls: str, name: str) -> dict:
-        result = delete(fetch(cls, name=name))
+        result = delete(cls, name=name)
         Session.commit()
         return result
 

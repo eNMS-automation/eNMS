@@ -1,13 +1,13 @@
-- Waiting time is now skipped when the job is skipped.
+- New "Iteration Targets" feature to replace the iteration service
 
-- change result to mediumblob pickletype
+- Front-end validation of all fields accepting a python query
+* check for substitution brackets ({{ }})
+* check that the expression is valid with ast.parse
 
-- remove configurations from ansible command
+- Add new regression test for the payload extraction and validation services
 
-- remove table filtering N/A
+- Payload extration refactoring:
+* Store variables in the payload global variable namespace
+* Add optional operation parameter for each variable: set / append / extend / update
 
-- Update docs
-
-- Add more regression tests (including sip job feature)
-
-- Bug fixes
+- New conversion option: "none" in case no conversion is necessary

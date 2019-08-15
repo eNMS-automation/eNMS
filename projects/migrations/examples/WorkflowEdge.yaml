@@ -171,8 +171,6 @@
 - {destination: 'Iteration Target Workflow: netmiko iteration 2', name: 70-success:71->72,
   source: 'Iteration Target Workflow: netmiko iteration 1', subtype: success, workflow: Iteration
     Targets Workflow}
-- {destination: End, name: 72-success:73->2, source: 'Iteration Target Workflow: netmiko
-    iteration 3', subtype: success, workflow: Iteration Targets Workflow}
 - {destination: 'Iteration Target Workflow: netmiko iteration 3', name: 72-failure:55->73,
   source: 'Iteration Target Workflow: netmiko iteration 2', subtype: failure, workflow: Iteration
     Targets Workflow}
@@ -201,3 +199,8 @@
     Extraction with operations'}
 - {destination: End, name: 76-success:81->2, source: 'Payload Workflow: Validation
     2', subtype: success, workflow: 'Payload Workflow: Payload Extraction with operations'}
+- {destination: 'Iteration Targets Workflow: No device targets', name: 80-success:56->82,
+  source: 'Iteration Target Workflow: netmiko iteration 3', subtype: success, workflow: Iteration
+    Targets Workflow}
+- {destination: End, name: 80-success:82->2, source: 'Iteration Targets Workflow:
+    No device targets', subtype: success, workflow: Iteration Targets Workflow}

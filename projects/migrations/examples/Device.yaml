@@ -1,4 +1,7 @@
-- description: Jackson
+- console1: None
+  console2: None
+  description: Jackson
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 192.168.1.85
@@ -13,15 +16,25 @@
   name: Jackson
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: PaloAlto
+- console1: None
+  console2: None
+  description: PaloAlto
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 192.168.1.86
@@ -36,15 +49,25 @@
   name: PaloAlto
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Austin
+- console1: None
+  console2: None
+  description: Austin
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 192.168.105.9
@@ -59,20 +82,30 @@
   name: Austin
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: admin
   vendor: Arista
-- description: Washington
+- console1: None
+  console2: None
+  description: Washington
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 192.168.105.5
   last_failure: Never
-  last_runtime: 6.007669
+  last_runtime: 6.00767
   last_status: Success
   last_update: '2019-08-14 17:48:49.697117'
   latitude: '38.89511'
@@ -82,15 +115,25 @@
   name: Washington
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: eos
   os_version: 15.5(3)M
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: admin
   vendor: Arista
-- description: Chicago
+- console1: None
+  console2: None
+  description: Chicago
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 192.168.1.188
@@ -105,15 +148,25 @@
   name: Chicago
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: SanJose
+- console1: None
+  console2: None
+  description: SanJose
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 192.168.1.187
@@ -128,15 +181,25 @@
   name: SanJose
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: SanDiego
+- console1: None
+  console2: None
+  description: SanDiego
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.12
@@ -151,15 +214,25 @@
   name: SanDiego
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS
   os_version: 15.5(3)M
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Dallas
+- console1: None
+  console2: None
+  description: Dallas
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.100
@@ -174,15 +247,25 @@
   name: Dallas
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Philadelphia
+- console1: None
+  console2: None
+  description: Philadelphia
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.101
@@ -197,15 +280,25 @@
   name: Philadelphia
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: LosAngeles
+- console1: None
+  console2: None
+  description: LosAngeles
+  fqdn: None
   hidden: false
   icon: optical_switch
   ip_address: 10.0.0.13
@@ -220,15 +313,25 @@
   name: LosAngeles
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Detroit
+- console1: None
+  console2: None
+  description: Detroit
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.14
@@ -243,15 +346,25 @@
   name: Detroit
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Richmond
+- console1: None
+  console2: None
+  description: Richmond
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.15
@@ -266,15 +379,25 @@
   name: Richmond
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Atlanta
+- console1: None
+  console2: None
+  description: Atlanta
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.102
@@ -289,15 +412,25 @@
   name: Atlanta
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Boston
+- console1: None
+  console2: None
+  description: Boston
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.103
@@ -312,15 +445,25 @@
   name: Boston
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Houston
+- console1: None
+  console2: None
+  description: Houston
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.104
@@ -335,15 +478,25 @@
   name: Houston
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XR
   os_version: 5.1.X
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Baltimore
+- console1: None
+  console2: None
+  description: Baltimore
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.105
@@ -358,15 +511,25 @@
   name: Baltimore
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: Cleveland
+- console1: None
+  console2: None
+  description: Cleveland
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.106
@@ -381,15 +544,25 @@
   name: Cleveland
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: Columbus
+- console1: None
+  console2: None
+  description: Columbus
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.107
@@ -404,15 +577,25 @@
   name: Columbus
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: Cincinnati
+- console1: None
+  console2: None
+  description: Cincinnati
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.108
@@ -427,15 +610,25 @@
   name: Cincinnati
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: Cambridge
+- console1: None
+  console2: None
+  description: Cambridge
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.109
@@ -450,15 +643,25 @@
   name: Cambridge
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: Minneapolis
+- console1: None
+  console2: None
+  description: Minneapolis
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.110
@@ -473,15 +676,25 @@
   name: Minneapolis
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: NewYork
+- console1: None
+  console2: None
+  description: NewYork
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 192.168.1.88
@@ -496,15 +709,25 @@
   name: NewYork
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: Sacramento
+- console1: None
+  console2: None
+  description: Sacramento
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.111
@@ -519,15 +742,25 @@
   name: Sacramento
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: SanFrancisco
+- console1: None
+  console2: None
+  description: SanFrancisco
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 192.168.1.89
@@ -542,15 +775,25 @@
   name: SanFrancisco
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: Orange
+- console1: None
+  console2: None
+  description: Orange
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.114
@@ -565,15 +808,25 @@
   name: Orange
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: Junos
   os_version: 17.2R1.13
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Juniper
-- description: Oakland
+- console1: None
+  console2: None
+  description: Oakland
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.112
@@ -588,15 +841,25 @@
   name: Oakland
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Denver
+- console1: None
+  console2: None
+  description: Denver
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 10.0.0.113
@@ -611,15 +874,25 @@
   name: Denver
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: cisco
   vendor: Cisco
-- description: Denver
+- console1: None
+  console2: None
+  description: Denver
+  fqdn: None
   hidden: false
   icon: router
   ip_address: 127.0.0.1
@@ -634,11 +907,18 @@
   name: Aserver
   napalm_driver: eos
   netmiko_driver: arista_eos
+  network: None
   operating_system: IOS-XE
   os_version: '3.6.5E '
   port: 22
+  property1: 4
+  property2: 10.145.14.1
   subtype: ''
   tasks: []
   type: Device
+  us_address: None
+  us_city: None
+  us_state: None
+  us_zip: None
   username: minto
   vendor: Cisco

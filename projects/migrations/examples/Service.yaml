@@ -24,7 +24,7 @@
     Ansible Workflow: [-362, 112]
     Configuration Management Workflow: ['-300', '0']
     Iteration Services Test Workflow: ['-359', '-163']
-    Iteration Targets Workflow: [-143, 9]
+    Iteration Targets Workflow: [-341, 9]
     Napalm getters and match mechanism workflow: [-605, 76]
     Napalm_VRF_workflow: ['-200', '0']
     Netmiko prompts: ['-279', '-158']
@@ -78,7 +78,7 @@
     Ansible Workflow: [500, 0]
     Configuration Management Workflow: ['200', '0']
     Iteration Services Test Workflow: ['-9', '294']
-    Iteration Targets Workflow: [764, -138]
+    Iteration Targets Workflow: [911, -145]
     Napalm getters and match mechanism workflow: [547, 107]
     Napalm_VRF_workflow: ['200', '0']
     Netmiko prompts: ['634', '187']
@@ -1164,7 +1164,7 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['3', '-144']
-    Iteration Targets Workflow: [19, -185]
+    Iteration Targets Workflow: [-179, -187]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -2606,7 +2606,7 @@
   operating_system: eos
   pools: []
   positions:
-    Iteration Targets Workflow: [144, 97]
+    Iteration Targets Workflow: [-112, 109]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -2662,7 +2662,7 @@
   operating_system: eos
   pools: []
   positions:
-    Iteration Targets Workflow: [379, -195]
+    Iteration Targets Workflow: [126, -200]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -2718,7 +2718,7 @@
   operating_system: eos
   pools: []
   positions:
-    Iteration Targets Workflow: [547, 81]
+    Iteration Targets Workflow: [299, 115]
   privileged_mode: false
   push_to_git: false
   python_query: get_var("loop_over", device=workflow_device.name)
@@ -2831,142 +2831,6 @@
   type: PayloadValidationService
   validation_method: text
   vendor: Arista
-  waiting_time: 0
-- color: '#D2E5FF'
-  conversion_property: name
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: Test the iteration mechanism (Iteration values)
-  devices: [Washington, Austin]
-  display_only_failed_nodes: true
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: true
-  initial_payload: {}
-  iterated_job: Iterated_netmiko_service
-  iterated_job_id: 28
-  iteration_targets: ''
-  last_modified: '2019-07-22 20:55:39.326778'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: Iteration_service_simple
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  origin_of_values: user_provided_values
-  pools: []
-  positions:
-    Iteration Services Test Workflow: ['-342', '2']
-  push_to_git: false
-  python_query: ''
-  python_query_values: ''
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: IterationService
-  user_provided_values:
-    all: [Loopback11, Loopback15]
-  variable_name: value
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  conversion_property: name
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: Test the iteration mechanism (python values)
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: true
-  initial_payload: {}
-  iterated_job: Iterated_netmiko_service
-  iterated_job_id: 28
-  iteration_targets: ''
-  last_modified: '2019-08-02 20:27:00.941168'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: Iteration_service_python
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  origin_of_values: python_query
-  pools: []
-  positions:
-    Iteration Services Test Workflow: ['-358', '192']
-  push_to_git: false
-  python_query: ''
-  python_query_values: get_var('iteration_devices', device=device.name)
-  query_property_type: ip_address
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: IterationService
-  user_provided_values: {}
-  variable_name: value
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  conversion_property: name
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: ''
-  devices: []
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: true
-  initial_payload: {}
-  iterated_job: Iterated_netmiko_service
-  iterated_job_id: 28
-  iteration_targets: ''
-  last_modified: '2019-07-11 13:51:15.506459'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: iteration_python_payload
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  origin_of_values: python_query
-  pools: []
-  positions:
-    Iteration Services Test Workflow: ['-337', '233']
-  push_to_git: false
-  python_query: ''
-  python_query_values: payload['netmiko_check_vrf_test']['results']['devices'][device.name]['match']
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 10
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  type: IterationService
-  user_provided_values: {}
-  variable_name: value
-  vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
@@ -3206,4 +3070,193 @@
   type: PayloadValidationService
   validation_method: dict_included
   vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  conversion_property: name
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: Test the iteration mechanism (Iteration values)
+  devices: [Washington, Austin]
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iterated_job: Iterated_netmiko_service
+  iterated_job_id: 28
+  iteration_targets: ''
+  last_modified: '2019-07-22 20:55:39.326778'
+  mail_recipient: ''
+  max_processes: 5
+  multiprocessing: false
+  name: Iteration_service_simple
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  origin_of_values: user_provided_values
+  pools: []
+  positions:
+    Iteration Services Test Workflow: ['-342', '2']
+  push_to_git: false
+  python_query: ''
+  python_query_values: ''
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: IterationService
+  user_provided_values:
+    all: [Loopback11, Loopback15]
+  variable_name: value
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  conversion_property: name
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: Test the iteration mechanism (python values)
+  devices: []
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iterated_job: Iterated_netmiko_service
+  iterated_job_id: 28
+  iteration_targets: ''
+  last_modified: '2019-08-02 20:27:00.941168'
+  mail_recipient: ''
+  max_processes: 5
+  multiprocessing: false
+  name: Iteration_service_python
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  origin_of_values: python_query
+  pools: []
+  positions:
+    Iteration Services Test Workflow: ['-358', '192']
+  push_to_git: false
+  python_query: ''
+  python_query_values: get_var('iteration_devices', device=device.name)
+  query_property_type: ip_address
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: IterationService
+  user_provided_values: {}
+  variable_name: value
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  conversion_property: name
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iterated_job: Iterated_netmiko_service
+  iterated_job_id: 28
+  iteration_targets: ''
+  last_modified: '2019-07-11 13:51:15.506459'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: iteration_python_payload
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  origin_of_values: python_query
+  pools: []
+  positions:
+    Iteration Services Test Workflow: ['-337', '233']
+  push_to_git: false
+  python_query: ''
+  python_query_values: payload['netmiko_check_vrf_test']['results']['devices'][device.name]['match']
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 10
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  type: IterationService
+  user_provided_values: {}
+  variable_name: value
+  vendor: ''
+  waiting_time: 0
+- call_type: GET
+  color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: false
+  headers: {}
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: '["Washington", "Atlanta"]'
+  last_modified: '2019-08-15 22:44:40.177070'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Iteration Targets Workflow: No device targets'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {}
+  payload: {}
+  pools: []
+  positions:
+    Iteration Targets Workflow: [541, -194]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  rest_url: http://127.0.0.1:5000/rest/instance/Device/{{payload["value"]}}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  timeout: 15
+  type: RestCallService
+  username: ''
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: false
   waiting_time: 0

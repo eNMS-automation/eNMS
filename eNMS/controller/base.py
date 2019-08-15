@@ -289,16 +289,13 @@ class BaseController:
         property_names.update(
             {k: v["pretty_name"] for k, v in custom_properties.items()}
         )
-        for object_properties in (device_properties, pool_device_properties):
-            object_properties.extend(list(custom_properties))
+        public_custom_properties = {
+            k: v for k, v in custom_properties.items() if not v.get("private", False)
+        }
+        device_properties.extend(list(custom_properties))
+        pool_device_properties.extend(list(public_custom_properties))
         for properties_table in table_properties, filtering_properties:
-            properties_table["device"].extend(
-                list(
-                    p
-                    for p, v in custom_properties.items()
-                    if not v.get("private", False)
-                )
-            )
+            properties_table["device"].extend(list(public_custom_properties))
         device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
         )

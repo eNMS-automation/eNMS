@@ -861,7 +861,7 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     run, job, allowed_devices, payload
                 )
-                print("ooo"*100, job, valid_devices)
+                print("ooo" * 100, job, valid_devices)
                 job_run = factory(
                     "Run",
                     job=job.id,

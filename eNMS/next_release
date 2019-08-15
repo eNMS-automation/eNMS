@@ -21,3 +21,5 @@
 - Refactor SQL Alchemy column declaration for MySQL compatibility
 
 - Hide password in Ansible service results.
+
+- Private properties are no longer considered for pools.

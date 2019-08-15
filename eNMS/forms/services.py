@@ -80,7 +80,7 @@ class ValidationForm(BaseForm):
             self.conversion_method.data == "text"
             and "dict" in self.validation_method.data
             or self.conversion_method.data in ("xml", "json")
-            and self.validation_method.data != "dict"
+            and "dict" not in self.validation_method.data
         )
         if conversion_validation_mismatch:
             self.conversion_method.errors.append(

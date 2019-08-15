@@ -19,3 +19,5 @@
 - Remove web assets
 
 - Refactor SQL Alchemy column declaration for MySQL compatibility
+
+- Hide password in Ansible service results.

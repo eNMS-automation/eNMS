@@ -253,20 +253,19 @@ class AutomationController(BaseController):
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 
-    def add_restart_payload(self, job: Any, **kwargs: Any) -> None:
+    def add_restart_payload(self, job: Any, **kwargs: Any) -> dict:
         run = fetch(
             "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version")
         )
         if not run:
-            return None
+            return {}
         result = [r for r in run.results if not r.device_id]
         payload = result[0].result["results"] if result else {}
+        print(payload)
         if not isinstance(payload, dict):
-            return None
+            return {}
         payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))
-        kwargs["payload"] = {
-            k: payload.get(k) for k in payload if k not in payload_jobs
-        }
+        return {k: payload.get(k) for k in payload if k not in payload_jobs}
 
     def run_job(self, id: Optional[int] = None, **kwargs: Any) -> dict:
         for property in ("user", "csrf_token", "form_type"):
@@ -274,7 +273,9 @@ class AutomationController(BaseController):
         kwargs["creator"] = getattr(current_user, "name", "admin")
         job = fetch("Job", id=id)
         if job.type == "Workflow":
-            self.add_restart_payload(job, **kwargs)
+            if not kwargs.get("payload"):
+                kwargs["payload"] = {}
+            kwargs["payload"].update(self.add_restart_payload(job, **kwargs))
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(

@@ -56,7 +56,7 @@ alternate_username:
     type: string
     default: ""
     add_to_dashboard: false
-    private: false
+    private: true
 alternate_password:
     pretty_name: Alternate Password
     type: string

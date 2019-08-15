@@ -11,3 +11,7 @@
 * Add optional operation parameter for each variable: set / append / extend / update
 
 - New conversion option: "none" in case no conversion is necessary
+
+- No longer retrieve device configuration when querying REST API.
+
+- Performance improvements

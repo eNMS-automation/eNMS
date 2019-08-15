@@ -294,24 +294,22 @@ class Run(AbstractBase):
         )
         results: Dict[Any, Any] = {"runtime": controller.get_time()}
         try:
-            if device:
-                if self.job.iteration_targets:
-                    targets_results = {
-                        target: self.job.job(self, {**payload, "value": target}, device)
-                        for target in self.eval(self.job.iteration_targets, **locals())
+            args = (device,) if device else ()
+            if self.job.iteration_targets:
+                targets_results = {
+                    target: self.job.job(self, {**payload, "value": target}, *args)
+                    for target in self.eval(self.job.iteration_targets, **locals())
+                }
+                results.update(
+                    {
+                        "results": targets_results,
+                        "success": all(
+                            r["success"] for r in targets_results.values()
+                        ),
                     }
-                    results.update(
-                        {
-                            "results": targets_results,
-                            "success": all(
-                                r["success"] for r in targets_results.values()
-                            ),
-                        }
-                    )
-                else:
-                    results.update(self.job.job(self, payload, device))
+                )
             else:
-                results.update(self.job.job(self, payload))
+                results.update(self.job.job(self, payload, *args))
         except Exception:
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
@@ -861,7 +859,6 @@ class Workflow(Job):
                 valid_devices = self.compute_valid_devices(
                     run, job, allowed_devices, payload
                 )
-                print("ooo" * 100, job, valid_devices)
                 job_run = factory(
                     "Run",
                     job=job.id,

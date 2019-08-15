@@ -261,7 +261,6 @@ class AutomationController(BaseController):
             return {}
         result = [r for r in run.results if not r.device_id]
         payload = result[0].result["results"] if result else {}
-        print(payload)
         if not isinstance(payload, dict):
             return {}
         payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))

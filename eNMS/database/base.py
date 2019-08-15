@@ -6,7 +6,7 @@ from eNMS.controller import controller
 from eNMS.database import Base, Session
 from eNMS.database.functions import fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
-from eNMS.properties import private_properties
+from eNMS.properties import dont_serialize, private_properties
 from eNMS.properties.database import dont_migrate
 
 
@@ -67,7 +67,7 @@ class AbstractBase(Base):
     def get_properties(self, export: bool = False) -> dict:
         result = {}
         for property in model_properties[self.type]:
-            if property in private_properties:
+            if property in private_properties or property in dont_serialize:
                 continue
             value = getattr(self, property)
             if export:

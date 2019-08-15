@@ -56,6 +56,7 @@ let stateUpdate = false;
 let hoveredNode;
 
 function displayWorkflow(workflowData) {
+  console.log(workflowData.workflow.devices)
   const wf = (workflow = workflowData.workflow);
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));

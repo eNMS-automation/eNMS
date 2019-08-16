@@ -54,6 +54,7 @@ let edgeType;
 let lastModified;
 let stateUpdate = false;
 let hoveredNode;
+let hoveredLabel;
 
 function displayWorkflow(workflowData) {
   const wf = (workflow = workflowData.workflow);
@@ -103,13 +104,14 @@ function displayWorkflow(workflowData) {
     if (node && node != 1 && node != 2) {
       node = parseInt(node);
       hoveredNode = node;
+      hoveredLabel = nodes.get(node).label;
       const job = workflow.jobs.find((w) => w.id === node);
-      nodes.update({ id: node, label: `${job.name}\n${job.type}` });
+      nodes.update({ id: node, label: `${job.type}\n${hoveredLabel}` });
     }
   });
   graph.on("blurNode", function(properties) {
     const job = workflow.jobs.find((w) => w.id === hoveredNode);
-    if (job) nodes.update({ id: hoveredNode, label: job.name });
+    if (job) nodes.update({ id: hoveredNode, label: hoveredLabel });
   });
   $("#current-runtimes").empty();
   $("#current-runtimes").append("<option value=''>Normal Display</option>");

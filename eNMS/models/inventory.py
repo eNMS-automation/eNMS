@@ -277,7 +277,7 @@ class Pool(AbstractPool):
     jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
-    never_update = Column(Boolean, default=False)
+    never_update = Column(Boolean, default=True)
 
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)

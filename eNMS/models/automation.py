@@ -303,9 +303,7 @@ class Run(AbstractBase):
                 results.update(
                     {
                         "results": targets_results,
-                        "success": all(
-                            r["success"] for r in targets_results.values()
-                        ),
+                        "success": all(r["success"] for r in targets_results.values()),
                     }
                 )
             else:
@@ -454,7 +452,7 @@ class Run(AbstractBase):
         value: Optional[Any] = None,
         section: Optional[str] = None,
         device: Optional[str] = None,
-        operation: Optional[str] = "set",
+        operation: str = "set",
     ) -> Any:
         payload = payload.setdefault("variables", {})
         if device:

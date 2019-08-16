@@ -36,7 +36,8 @@
       </div>
       <fieldset>
         <div class="item">
-          {{ form['never_update'](id="pool-never_update", class="add-id") }}
+          {{ form.never_update(id="pool-never_update", class="add-id",
+          checked=True) }}
           <label>Never update (for manually selected pools)</label>
         </div>
       </fieldset>

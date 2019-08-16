@@ -6,6 +6,6 @@ Advanced
    :maxdepth: 1
 
    changelog
-   python_objects
+   python_code
    filtering
    cli

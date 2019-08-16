@@ -211,6 +211,14 @@ class Run(AbstractBase):
         ] = napalm_connection
         return napalm_connection
 
+    def get_state(self, property: str) -> Any:
+        return controller.run_db[self.runtime][property]
+
+    def set_state(self, **kwargs: Any) -> None:
+        controller.run_db[self.runtime].update(**kwargs)
+        if self.workflow:
+            controller.run_db[self.parent_runtime]["jobs"][self.job.id].update(**kwargs)
+
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
             values = self.eval(self.job.python_query, **locals())
@@ -231,7 +239,7 @@ class Run(AbstractBase):
             devices = set(self.devices)
             for pool in self.pools:
                 devices |= set(pool.devices)
-        controller.run_db[self.runtime]["number_of_targets"] = len(devices)
+        self.set_state(number_of_targets=len(devices))
         return devices
 
     def close_connection_cache(self) -> None:
@@ -246,7 +254,7 @@ class Run(AbstractBase):
     def run(self, payload: Optional[dict] = None) -> dict:
         try:
             self.log("info", f"{self.job.type} {self.job.name}: Starting")
-            controller.run_db[self.runtime]["status"] = "Running"
+            self.set_state(status="Running")
             controller.job_db[self.job.id]["runs"] += 1
             Session.commit()
             results = self.job.build_results(self, payload or self.initial_payload)
@@ -264,10 +272,10 @@ class Run(AbstractBase):
         finally:
             status = f"Completed ({'success' if results['success'] else 'failure'})"
             self.status = status  # type: ignore
-            controller.run_db[self.runtime]["status"] = status
+            self.set_state(status=status)
             controller.job_db[self.job.id]["runs"] -= 1
             results["endtime"] = self.endtime = controller.get_time()  # type: ignore
-            results["state"] = controller.run_db.pop(self.runtime)
+            results["state"] = state = controller.run_db.pop(self.runtime)
             results["logs"] = controller.run_logs.pop(self.runtime)  # type: ignore
             if self.task and not self.task.frequency:
                 self.task.is_active = False
@@ -318,8 +326,8 @@ class Run(AbstractBase):
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
             f"{f' on {device.name}' if device else ''}",
         )
-        controller.run_db[self.runtime]["completed"] += 1
-        controller.run_db[self.runtime]["failed"] += 1 - results["success"]
+        completed, failed = self.get_state("completed"), self.get_state("failed")
+        self.set_state(failed=failed + 1 - results["success"], completed=completed + 1)
         return results
 
     def log(self, severity: str, log: str) -> None:
@@ -645,8 +653,7 @@ class Service(Job):
                 return {"success": False, "error": str(exc)}
         for i in range(run.number_of_retries + 1):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            controller.run_db[run.runtime]["completed"] = 0
-            controller.run_db[run.runtime]["failed"] = 0
+            run.set_state(completed=0, failed=0)
             attempt = self.device_run(run, payload, targets)
             if targets:
                 assert targets is not None
@@ -804,7 +811,7 @@ class Workflow(Job):
                 yield successor
 
     def build_results(self, run: "Run", payload: dict) -> dict:
-        controller.run_db[run.runtime].update({"jobs": {}, "edges": {}})
+        controller.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()
@@ -866,7 +873,7 @@ class Workflow(Job):
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 Session.commit()
                 job_results = job_run.run(payload)
-            controller.run_db[run.runtime]["jobs"][job.id] = job_results["success"]
+            controller.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
             if run.use_workflow_targets:
                 successors = self.workflow_targets_processing(
                     run.runtime, allowed_devices, job, job_results

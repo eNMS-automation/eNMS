@@ -210,6 +210,7 @@ function jobToNode(job, index) {
     color: job.color,
     size: job.size,
     label: job.name,
+    name: job.name,
     type: job.type,
     x: job.positions[workflow.name]
       ? job.positions[workflow.name][0]
@@ -398,13 +399,19 @@ function displayWorkflowState(result) {
       $("#current-job").empty();
     }
     if (result.state.jobs) {
-      $.each(result.state.jobs, (id, success) => {
+      $.each(result.state.jobs, (id, state) => {
         const color = {
           true: "#32cd32",
           false: "#FF6666",
           skipped: "#D3D3D3",
         };
-        colorJob(id, color[success]);
+        let updateNode = {id: id, color: color[state.success]};
+        if (state.number_of_targets) {
+          let progress = `${state.completed}/${state.number_of_targets}`;
+          if (state.failed > 0) progress += `(${state.failed} failed)`;
+          updateNode.label = `${nodes.get(id).name}\n${progress}`;
+        }
+        nodes.update(updateNode);
       });
     }
     if (result.state.edges) {

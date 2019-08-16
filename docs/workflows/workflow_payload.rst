@@ -52,7 +52,7 @@ In case the job has "device targets", it will receive an additional argument ``d
     def job(self, payload: dict, device: Device) -> dict:
         return {"success": True, "result": "example"}
 
-The last argument of the ``job`` function is ``payload``: it is a dictionary that
+The first argument of the ``job`` function is ``payload``: it is a dictionary that
 contains the results of all jobs that have already been executed.
 
 If we consider the aforementioned workflow, the job ``process_payload1`` receives
@@ -62,8 +62,8 @@ the variable ``payload`` that contains the results of all other jobs in the work
 It can access the results with the ``get_result`` function, that takes two arguments:
 
 - job (mandatory): the name of the job whose result you want to retrieve
-- device (optional): if the job has device targets, you can specify
-a device in case you want to get the result of the job for a specific device.
+- device (optional): if the job has device targets, you can specify 
+    a device in case you want to get the result of the job for a specific device.
 
 ::
 
@@ -71,7 +71,7 @@ a device in case you want to get the result of the job for a specific device.
         ...
         return result
 
-You can then access the result of previous jobs with the ``get_result`` function.
+You should access the result of previous jobs with the ``get_result`` function.
 Examples:
 
 - ``get_result("get_facts")``
@@ -81,17 +81,23 @@ Examples:
 You can use the ``get_result`` function everywhere python code is accepted.
 See the "Advanced / python code" section of the docs for more information.
 
-Set and get data in a workflow
-------------------------------
+Saving and retrieving values in a workflow
+------------------------------------------
 
-You can define variables in the payload with the ``set_var`` function,
-and retrieve data from the payload with the ``get_var`` function.
-The ``set_var`` takes the following arguments:
+You can define variables in the payload with the ``set_var`` function, and retrieve data from the payload with the ``get_var`` function. 
+``set_var`` takes the following arguments:
 
-- the name of the variable (first argument)
-- the value of the variable (second argument)
-- Keyword argument ``section``: the variable will be defined in a subdictionary of the variable dictionary.
-- Keyword argument ``device``: used to store device-specific data in a dedicated section.
+- the variable name (first argument)
+- the value to be stored (second argument)
+- Keyword argument device: A unique value will be stored for each device.
+- Keyword argument section: A unique value will be stored for each section.
+
+Variables can be scoped in different ways: global, per-device, user-defined,
+and a combination of per-device and user-defined.
+When no device or section is specified, the variable stores a single global value.
+Specifying a device or section saves a unique value for the device or section.
+Specifying both a device and section stores a unique value for each combination
+of device and section.
 
 For example, let's consider the following python snippet:
 
@@ -105,13 +111,6 @@ For example, let's consider the following python snippet:
   devices = ["Boston", "Cincinnati"] if device.name == "Chicago" else ["Cleveland", "Washington"]
   set_var("iteration_device", devices, section="pools", device=device.name)
 
-
-With the workflow running on two devices called "Chicago" and "Washington",
-the following variables will be added to the payload:
-
-.. image:: /_static/workflows/variable_management.png
-   :alt: Variable Management
-   :align: center
 
 Use data from a previous job in the workflow
 --------------------------------------------

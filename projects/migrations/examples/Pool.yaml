@@ -1,14 +1,8 @@
 - description: All objects
-  device_console1: ''
-  device_console1_match: inclusion
-  device_console2: ''
-  device_console2_match: inclusion
   device_current_configuration: ''
   device_current_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
-  device_fqdn: ''
-  device_fqdn_match: inclusion
   device_icon: ''
   device_icon_match: inclusion
   device_ip_address: ''
@@ -27,28 +21,14 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_network: ''
-  device_network_match: inclusion
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
-  device_property1: ''
-  device_property1_match: inclusion
-  device_property2: ''
-  device_property2_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
-  device_us_address: ''
-  device_us_address_match: inclusion
-  device_us_city: ''
-  device_us_city_match: inclusion
-  device_us_state: ''
-  device_us_state_match: inclusion
-  device_us_zip: ''
-  device_us_zip_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
@@ -85,16 +65,10 @@
   tasks: []
   users: []
 - description: Devices only
-  device_console1: ''
-  device_console1_match: inclusion
-  device_console2: ''
-  device_console2_match: inclusion
   device_current_configuration: ''
   device_current_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
-  device_fqdn: ''
-  device_fqdn_match: inclusion
   device_icon: ''
   device_icon_match: inclusion
   device_ip_address: ''
@@ -113,28 +87,14 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_network: ''
-  device_network_match: inclusion
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
-  device_property1: ''
-  device_property1_match: inclusion
-  device_property2: ''
-  device_property2_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
-  device_us_address: ''
-  device_us_address_match: inclusion
-  device_us_city: ''
-  device_us_city_match: inclusion
-  device_us_state: ''
-  device_us_state_match: inclusion
-  device_us_zip: ''
-  device_us_zip_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
@@ -169,16 +129,10 @@
   tasks: []
   users: []
 - description: Links only
-  device_console1: ''
-  device_console1_match: inclusion
-  device_console2: ''
-  device_console2_match: inclusion
   device_current_configuration: ''
   device_current_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
-  device_fqdn: ''
-  device_fqdn_match: inclusion
   device_icon: ''
   device_icon_match: inclusion
   device_ip_address: ''
@@ -197,28 +151,14 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_network: ''
-  device_network_match: inclusion
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
-  device_property1: ''
-  device_property1_match: inclusion
-  device_property2: ''
-  device_property2_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
-  device_us_address: ''
-  device_us_address_match: inclusion
-  device_us_city: ''
-  device_us_city_match: inclusion
-  device_us_state: ''
-  device_us_state_match: inclusion
-  device_us_zip: ''
-  device_us_zip_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
@@ -252,16 +192,10 @@
   tasks: []
   users: []
 - description: Datacenter San Francisco
-  device_console1: ''
-  device_console1_match: inclusion
-  device_console2: ''
-  device_console2_match: inclusion
   device_current_configuration: ''
   device_current_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
-  device_fqdn: ''
-  device_fqdn_match: inclusion
   device_icon: ''
   device_icon_match: inclusion
   device_ip_address: ''
@@ -280,28 +214,14 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_network: ''
-  device_network_match: inclusion
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
-  device_property1: ''
-  device_property1_match: inclusion
-  device_property2: ''
-  device_property2_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
-  device_us_address: ''
-  device_us_address_match: inclusion
-  device_us_city: ''
-  device_us_city_match: inclusion
-  device_us_state: ''
-  device_us_state_match: inclusion
-  device_us_zip: ''
-  device_us_zip_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [SanJose, SanDiego, Philadelphia, LosAngeles, Detroit, Baltimore, Cleveland,
@@ -336,16 +256,10 @@
   tasks: []
   users: []
 - description: Datacenter New York
-  device_console1: ''
-  device_console1_match: inclusion
-  device_console2: ''
-  device_console2_match: inclusion
   device_current_configuration: ''
   device_current_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
-  device_fqdn: ''
-  device_fqdn_match: inclusion
   device_icon: ''
   device_icon_match: inclusion
   device_ip_address: ''
@@ -364,28 +278,14 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_network: ''
-  device_network_match: inclusion
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
-  device_property1: ''
-  device_property1_match: inclusion
-  device_property2: ''
-  device_property2_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
-  device_us_address: ''
-  device_us_address_match: inclusion
-  device_us_city: ''
-  device_us_city_match: inclusion
-  device_us_state: ''
-  device_us_state_match: inclusion
-  device_us_zip: ''
-  device_us_zip_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [Jackson, PaloAlto, Washington, Chicago, SanJose, SanDiego, Dallas, Philadelphia,
@@ -421,16 +321,10 @@
   tasks: []
   users: []
 - description: Datacenter Chicago
-  device_console1: ''
-  device_console1_match: inclusion
-  device_console2: ''
-  device_console2_match: inclusion
   device_current_configuration: ''
   device_current_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
-  device_fqdn: ''
-  device_fqdn_match: inclusion
   device_icon: ''
   device_icon_match: inclusion
   device_ip_address: ''
@@ -449,28 +343,14 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_network: ''
-  device_network_match: inclusion
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
-  device_property1: ''
-  device_property1_match: inclusion
-  device_property2: ''
-  device_property2_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
-  device_us_address: ''
-  device_us_address_match: inclusion
-  device_us_city: ''
-  device_us_city_match: inclusion
-  device_us_state: ''
-  device_us_state_match: inclusion
-  device_us_zip: ''
-  device_us_zip_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [Austin, Washington, Chicago, SanDiego, Philadelphia, Detroit, Richmond,
@@ -505,16 +385,10 @@
   tasks: []
   users: []
 - description: ''
-  device_console1: ''
-  device_console1_match: inclusion
-  device_console2: ''
-  device_console2_match: inclusion
   device_current_configuration: ''
   device_current_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
-  device_fqdn: ''
-  device_fqdn_match: inclusion
   device_icon: ''
   device_icon_match: inclusion
   device_ip_address: ''
@@ -533,28 +407,14 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_network: ''
-  device_network_match: inclusion
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
   device_port_match: inclusion
-  device_property1: ''
-  device_property1_match: inclusion
-  device_property2: ''
-  device_property2_match: inclusion
   device_subtype: ''
   device_subtype_match: inclusion
-  device_us_address: ''
-  device_us_address_match: inclusion
-  device_us_city: ''
-  device_us_city_match: inclusion
-  device_us_state: ''
-  device_us_state_match: inclusion
-  device_us_zip: ''
-  device_us_zip_match: inclusion
   device_vendor: ''
   device_vendor_match: inclusion
   devices: [Washington]
@@ -582,6 +442,133 @@
   longitude: '0.0'
   name: Washington
   never_update: true
+  operator: all
+  tasks: []
+  users: []
+- description: ''
+  device_current_configuration: ''
+  device_current_configuration_match: inclusion
+  device_description: ''
+  device_description_match: inclusion
+  device_icon: ''
+  device_icon_match: inclusion
+  device_ip_address: ''
+  device_ip_address_match: inclusion
+  device_latitude: ''
+  device_latitude_match: inclusion
+  device_location: ''
+  device_location_match: inclusion
+  device_longitude: ''
+  device_longitude_match: inclusion
+  device_model: ''
+  device_model_match: inclusion
+  device_name: ''
+  device_name_match: inclusion
+  device_napalm_driver: ''
+  device_napalm_driver_match: inclusion
+  device_netmiko_driver: ''
+  device_netmiko_driver_match: inclusion
+  device_operating_system: ''
+  device_operating_system_match: inclusion
+  device_os_version: ''
+  device_os_version_match: inclusion
+  device_port: ''
+  device_port_match: inclusion
+  device_subtype: ''
+  device_subtype_match: inclusion
+  device_vendor: ''
+  device_vendor_match: inclusion
+  devices: []
+  last_modified: '2019-08-15 23:28:34.454094'
+  latitude: '0.0'
+  link_color: ''
+  link_color_match: inclusion
+  link_description: ''
+  link_description_match: inclusion
+  link_destination_name: ''
+  link_destination_name_match: inclusion
+  link_location: ''
+  link_location_match: inclusion
+  link_model: ''
+  link_model_match: inclusion
+  link_name: ''
+  link_name_match: inclusion
+  link_source_name: ''
+  link_source_name_match: inclusion
+  link_subtype: ''
+  link_subtype_match: inclusion
+  link_vendor: ''
+  link_vendor_match: inclusion
+  links: []
+  longitude: '0.0'
+  name: zefgrthj
+  never_update: true
+  operator: all
+  tasks: []
+  users: []
+- description: ''
+  device_current_configuration: ''
+  device_current_configuration_match: inclusion
+  device_description: ''
+  device_description_match: inclusion
+  device_icon: ''
+  device_icon_match: inclusion
+  device_ip_address: ''
+  device_ip_address_match: inclusion
+  device_latitude: ''
+  device_latitude_match: inclusion
+  device_location: ''
+  device_location_match: inclusion
+  device_longitude: ''
+  device_longitude_match: inclusion
+  device_model: ''
+  device_model_match: inclusion
+  device_name: ''
+  device_name_match: inclusion
+  device_napalm_driver: ''
+  device_napalm_driver_match: inclusion
+  device_netmiko_driver: ''
+  device_netmiko_driver_match: inclusion
+  device_operating_system: ''
+  device_operating_system_match: inclusion
+  device_os_version: ''
+  device_os_version_match: inclusion
+  device_port: ''
+  device_port_match: inclusion
+  device_subtype: ''
+  device_subtype_match: inclusion
+  device_vendor: ''
+  device_vendor_match: inclusion
+  devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
+    Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
+    Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
+    SanFrancisco, Orange, Oakland, Denver, Aserver]
+  last_modified: '2019-08-15 23:28:40.589636'
+  latitude: '0.0'
+  link_color: ''
+  link_color_match: inclusion
+  link_description: ''
+  link_description_match: inclusion
+  link_destination_name: ''
+  link_destination_name_match: inclusion
+  link_location: ''
+  link_location_match: inclusion
+  link_model: ''
+  link_model_match: inclusion
+  link_name: ''
+  link_name_match: inclusion
+  link_source_name: ''
+  link_source_name_match: inclusion
+  link_subtype: ''
+  link_subtype_match: inclusion
+  link_vendor: ''
+  link_vendor_match: inclusion
+  links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
+    link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
+    link21, link22, link23, link24, link25, link26, link27]
+  longitude: '0.0'
+  name: defrgthyjk
+  never_update: false
   operator: all
   tasks: []
   users: []

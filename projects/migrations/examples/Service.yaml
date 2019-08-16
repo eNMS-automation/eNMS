@@ -3071,6 +3071,59 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
+- call_type: GET
+  color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  has_targets: false
+  headers: {}
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: '["Washington", "Atlanta"]'
+  last_modified: '2019-08-15 22:44:40.177070'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Iteration Targets Workflow: No device targets'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  params: {}
+  payload: {}
+  pools: []
+  positions:
+    Iteration Targets Workflow: [541, -194]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  rest_url: http://127.0.0.1:5000/rest/instance/Device/{{payload["value"]}}
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  time_between_retries: 10
+  timeout: 15
+  type: RestCallService
+  username: ''
+  validation_method: text
+  vendor: ''
+  verify_ssl_certificate: false
+  waiting_time: 0
 - color: '#D2E5FF'
   conversion_property: name
   creator: admin
@@ -3206,57 +3259,4 @@
   user_provided_values: {}
   variable_name: value
   vendor: ''
-  waiting_time: 0
-- call_type: GET
-  color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  events: []
-  has_targets: false
-  headers: {}
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_targets: '["Washington", "Atlanta"]'
-  last_modified: '2019-08-15 22:44:40.177070'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: 'Iteration Targets Workflow: No device targets'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  params: {}
-  payload: {}
-  pools: []
-  positions:
-    Iteration Targets Workflow: [541, -194]
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  rest_url: http://127.0.0.1:5000/rest/instance/Device/{{payload["value"]}}
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  time_between_retries: 10
-  timeout: 15
-  type: RestCallService
-  username: ''
-  validation_method: text
-  vendor: ''
-  verify_ssl_certificate: false
   waiting_time: 0

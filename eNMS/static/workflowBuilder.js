@@ -60,6 +60,7 @@ function displayWorkflow(workflowData) {
   nodes = new vis.DataSet(wf.jobs.map(jobToNode));
   edges = new vis.DataSet(wf.edges.map(edgeToEdge));
   wf.jobs.filter((s) => s.type == "IterationService").map(drawIterationService);
+  wf.jobs.filter((s) => s.iteration_targets != "").map(drawIterationEdge);
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function(properties) {
@@ -221,6 +222,17 @@ function jobToNode(job, index) {
       ? index * 50 - 200
       : 0,
   };
+}
+
+function drawIterationEdge(service) {
+  edges.add({
+    id: -service.id,
+    label: "Iteration",
+    from: service.id,
+    to: service.id,
+    color: "black",
+    arrows: { to: { enabled: true } },
+  });
 }
 
 function drawIterationService(service) {

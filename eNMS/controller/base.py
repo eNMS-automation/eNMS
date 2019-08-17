@@ -159,17 +159,18 @@ class BaseController:
         "get_cluster_status",
         "get_configurations",
         "get_configuration_diff",
+        "get_device_list",
         "get_device_logs",
         "get_exported_jobs",
         "get_git_content",
-        "get_job_logs",
-        "get_results",
-        "get_runtimes",
-        "get_device_list",
-        "get_workflow_device_list",
-        "get_results_diff",
-        "get_view_topology",
         "get_job_list",
+        "get_job_logs",
+        "get_properties",
+        "get_results",
+        "get_results_diff",
+        "get_runtimes",
+        "get_view_topology",
+        "get_workflow_device_list",
         "get_workflow_state",
         "import_jobs",
         "import_topology",
@@ -386,6 +387,9 @@ class BaseController:
 
     def get(self, cls: str, id: str) -> dict:
         return fetch(cls, id=id).serialized
+
+    def get_properties(self, cls: str, id: str) -> dict:
+        return fetch(cls, id=id).get_properties()
 
     def get_all(self, cls: str) -> List[dict]:
         return [instance.get_properties() for instance in fetch_all(cls)]

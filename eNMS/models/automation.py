@@ -275,7 +275,7 @@ class Run(AbstractBase):
             self.set_state(status=status)
             controller.job_db[self.job.id]["runs"] -= 1
             results["endtime"] = self.endtime = controller.get_time()  # type: ignore
-            results["state"] = state = controller.run_db.pop(self.runtime)
+            results["state"] = controller.run_db.pop(self.runtime)
             results["logs"] = controller.run_logs.pop(self.runtime)  # type: ignore
             if self.task and not self.task.frequency:
                 self.task.is_active = False
@@ -873,7 +873,9 @@ class Workflow(Job):
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 Session.commit()
                 job_results = job_run.run(payload)
-            controller.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
+            controller.run_db[run.runtime]["jobs"][job.id]["success"] = job_results[
+                "success"
+            ]
             if run.use_workflow_targets:
                 successors = self.workflow_targets_processing(
                     run.runtime, allowed_devices, job, job_results

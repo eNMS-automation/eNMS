@@ -398,11 +398,19 @@ function displayWorkflowState(result) {
     if (currJob) {
       colorJob(currJob.id, "#89CFF0");
       $("#current-job").text(`Current job: ${result.state.current_job.name}.`);
-      currState = result.state.jobs[currJob.id];
-      if (currState && currState.number_of_targets > 1 && currState.completed > 0) {
+      const currState = result.state.jobs[currJob.id];
+      if (
+        currState &&
+        currState.number_of_targets > 1 &&
+        currState.completed > 0
+      ) {
         const successNumber = currState.completed - currState.failed;
-        $("#progress-success").width(`${successNumber*100/currState.number_of_targets}%`);
-        $("#progress-failure").width(`${currState.failed*100/currState.number_of_targets}%`);
+        $("#progress-success").width(
+          `${(successNumber * 100) / currState.number_of_targets}%`
+        );
+        $("#progress-failure").width(
+          `${(currState.failed * 100) / currState.number_of_targets}%`
+        );
         $("#progress-success-span").text(successNumber);
         $("#progress-failure-span").text(currState.failed);
         $("#progressbar").show();
@@ -419,7 +427,7 @@ function displayWorkflowState(result) {
           false: "#FF6666",
           skipped: "#D3D3D3",
         };
-        let updateNode = {id: id, color: color[state.success]};
+        let updateNode = { id: id, color: color[state.success] };
         if (state.number_of_targets) {
           let progress = `${state.completed}/${state.number_of_targets}`;
           if (state.failed > 0) progress += ` (${state.failed} failed)`;

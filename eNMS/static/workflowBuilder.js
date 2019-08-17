@@ -399,7 +399,7 @@ function displayWorkflowState(result) {
       colorJob(currJob.id, "#89CFF0");
       $("#current-job").text(`Current job: ${result.state.current_job.name}.`);
       currState = result.state.jobs[currJob.id];
-      if (currState && currState.number_of_targets > 1) {
+      if (currState && currState.number_of_targets > 1 && currState.completed > 0) {
         const successNumber = currState.completed - currState.failed;
         $("#progress-success").width(`${successNumber*100/currState.number_of_targets}%`);
         $("#progress-failure").width(`${currState.failed*100/currState.number_of_targets}%`);

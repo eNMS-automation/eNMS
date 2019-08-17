@@ -394,9 +394,21 @@ function displayWorkflowState(result) {
     });
   } else {
     $("#status").text(`Status: ${result.state.status}`);
-    if (result.state.current_job) {
-      colorJob(result.state.current_job.id, "#89CFF0");
+    const currJob = result.state.current_job;
+    if (currJob) {
+      colorJob(currJob.id, "#89CFF0");
       $("#current-job").text(`Current job: ${result.state.current_job.name}.`);
+      currState = result.state.jobs[currJob.id];
+      if (currState && currState.number_of_targets > 1) {
+        const successNumber = currState.completed - currState.failed;
+        $("#progress-success").width(`${successNumber*100/currState.number_of_targets}%`);
+        $("#progress-failure").width(`${currState.failed*100/currState.number_of_targets}%`);
+        $("#progress-success-span").text(successNumber);
+        $("#progress-failure-span").text(currState.failed);
+        $("#progressbar").show();
+      } else {
+        $("#progressbar").hide();
+      }
     } else {
       $("#current-job").empty();
     }
@@ -410,7 +422,7 @@ function displayWorkflowState(result) {
         let updateNode = {id: id, color: color[state.success]};
         if (state.number_of_targets) {
           let progress = `${state.completed}/${state.number_of_targets}`;
-          if (state.failed > 0) progress += `(${state.failed} failed)`;
+          if (state.failed > 0) progress += ` (${state.failed} failed)`;
           updateNode.label = `${nodes.get(id).name}\n${progress}`;
         }
         nodes.update(updateNode);

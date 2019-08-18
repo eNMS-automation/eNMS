@@ -422,7 +422,6 @@ function displayWorkflowState(result) {
       $("#current-job").empty();
     }
     if (result.state.jobs) {
-      console.log(result.state.jobs)
       $.each(result.state.jobs, (id, state) => {
         const color = {
           true: "#32cd32",

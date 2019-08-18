@@ -481,7 +481,7 @@ class Run(AbstractBase):
     def get_result(self, job: str, device: Optional[str] = None) -> dict:
         job_id = fetch("Job", name=job).id
         run = fetch("Run", parent_runtime=self.parent_runtime, job_id=job_id)
-        return run.result(device)
+        return run.result(device).result
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
         var_editor = partial(_self.payload_helper, locals.get("payload", {}))

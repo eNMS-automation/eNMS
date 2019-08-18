@@ -369,18 +369,21 @@ function runWorkflow(withUpdates) {
 
 function showRestartWorkflowPanel(workflow, job) {
   createPanel(
-    `restart_workflow`,
+    "restart_workflow",
     `Restart Workflow '${workflow.name}' from '${job.name}'`,
     workflow.id,
     function() {
-      $("#start_job").val(job.id);
-      workflowRunMode(workflow);
+      $("#start_jobs").val(job.id);
+      $("#start_jobs").selectpicker("refresh");
+      console.log(workflow.name)
+      workflowRunMode(workflow, true);
   });
 }
 
 function restartWorkflow() {
-  fCall(`/run_job/${workflow.id}`, "#restart_workflow-form", function(result) {
-    $("#restart-workflow").remove();
+  fCall(`/run_job/${workflow.id}`, `#restart_workflow-form`, function(result) {
+    console.log(result, workflow.name)
+    $(`#restart_workflow-${workflow.id}`).remove();
     runLogic(result);
   });
 }

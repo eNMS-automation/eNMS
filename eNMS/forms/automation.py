@@ -124,17 +124,17 @@ class WorkflowForm(JobForm):
     start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
     payload_version = NoValidationSelectField("Payload Version", choices=())
     payloads_to_exclude = NoValidationSelectMultipleField(
-        "Payloads to Include", choices=()
+        "Payloads to Exclude", choices=()
     )
 
 
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    start_job = InstanceField("Workflow Entry Point(s)", instance_type="Job")
+    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
     payload_version = NoValidationSelectField("Payload Version", choices=())
     payloads_to_exclude = NoValidationSelectMultipleField(
-        "Payloads to Include", choices=()
+        "Payloads to Exclude", choices=()
     )
 
 

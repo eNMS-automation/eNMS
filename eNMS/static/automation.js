@@ -48,27 +48,34 @@ function panelCode(type, id, mode) {
 }
 
 // eslint-disable-next-line
-function workflowRunMode(instance) {
+function workflowRunMode(instance, restartForm) {
+  if (restartForm) {
+    excludeId = "#payloads_to_exclude";
+    versionId = "#payload_version";
+  } else {
+    excludeId = `#${form}-payloads_to_exclude-${instance.id}`;
+    versionId = `#${form}-payload_version-${instance.id}`;
+  }
   call(`/get_runtimes/workflow/${instance.id}`, function(runtimes) {
     instance.jobs.forEach((job) => {
-      $(`#workflow-payloads_to_exclude-${instance.id}`).append(
+      $(excludeId).append(
         $("<option></option>")
           .attr("value", job.name)
           .text(job.name)
       );
     });
     runtimes.forEach((runtime) => {
-      $(`#workflow-payload_version-${instance.id}`).append(
+      $(versionId).append(
         $("<option></option>")
           .attr("value", runtime[0])
           .text(runtime[0])
       );
     });
-    $(`#workflow-payload_version-${instance.id}`).val(
+    $(versionId).val(
       runtimes[runtimes.length - 1]
     );
-    $(`#workflow-payload_version-${instance.id}`).selectpicker("refresh");
-    $(`#workflow-payloads_to_exclude-${instance.id}`).selectpicker("refresh");
+    $(versionId).selectpicker("refresh");
+    $(excludeId).selectpicker("refresh");
   });
 }
 

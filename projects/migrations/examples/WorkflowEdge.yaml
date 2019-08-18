@@ -196,11 +196,8 @@
     Targets Workflow}
 - {destination: End, name: 80-success:82->2, source: 'Iteration Targets Workflow:
     No device targets', subtype: success, workflow: Iteration Targets Workflow}
-- {destination: 'Subworkflow: Access variable from snippet', name: 83-success:1->84,
+- {destination: 'Variable Access Subworkflow: Access variable from snippet', name: 83-success:1->84,
   source: Start, subtype: success, workflow: 'Subworkflow: Access Variable - Result
-    from parent workflow'}
-- {destination: End, name: 83-success:84->2, source: 'Subworkflow: Access variable
-    from snippet', subtype: success, workflow: 'Subworkflow: Access Variable - Result
     from parent workflow'}
 - {destination: add_devices_to_payload, name: 74-success:1->26, source: Start, subtype: success,
   workflow: Workflow_of_workflows}
@@ -212,5 +209,11 @@
   subtype: success, workflow: Workflow_of_workflows}
 - {destination: Show version with multiprocessing, name: 74-success:71->52, source: payload_transfer_workflow,
   subtype: success, workflow: Workflow_of_workflows}
-- {destination: 'Subworkflow: Access Variable - Result from parent workflow', name: 74-success:52->83,
-  source: Show version with multiprocessing, subtype: success, workflow: Workflow_of_workflows}
+- {destination: Napalm_VRF_workflow, name: 74-success:52->70, source: Show version
+    with multiprocessing, subtype: success, workflow: Workflow_of_workflows}
+- {destination: 'Variable Access Subworkflow: Access variables for iteration', name: 83-success:84->85,
+  source: 'Variable Access Subworkflow: Access variable from snippet', subtype: success,
+  workflow: 'Subworkflow: Access Variable - Result from parent workflow'}
+- {destination: End, name: 83-failure:85->2, source: 'Variable Access Subworkflow:
+    Access variables for iteration', subtype: failure, workflow: 'Subworkflow: Access
+    Variable - Result from parent workflow'}

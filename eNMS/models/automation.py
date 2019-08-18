@@ -576,7 +576,7 @@ class Job(AbstractBase):
     skip = Column(Boolean, default=False)
     skip_python_query = Column(SmallString)
     iteration_targets = Column(LargeString)
-    runs = relationship("Run", back_populates="job")
+    runs = relationship("Run", back_populates="job", cascade="all, delete-orphan")
 
     @property
     def filename(self) -> str:

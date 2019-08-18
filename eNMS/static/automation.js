@@ -53,8 +53,8 @@ function workflowRunMode(instance, restartForm) {
     excludeId = "#payloads_to_exclude";
     versionId = "#payload_version";
   } else {
-    excludeId = `#${form}-payloads_to_exclude-${instance.id}`;
-    versionId = `#${form}-payload_version-${instance.id}`;
+    excludeId = `#workflow-payloads_to_exclude-${instance.id}`;
+    versionId = `#workflow-payload_version-${instance.id}`;
   }
   call(`/get_runtimes/workflow/${instance.id}`, function(runtimes) {
     instance.jobs.forEach((job) => {

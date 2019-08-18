@@ -6,6 +6,7 @@ from eNMS.controller import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     DictField,
+    InstanceField,
     MultipleInstanceField,
     NoValidationSelectField,
     NoValidationSelectMultipleField,
@@ -128,8 +129,9 @@ class WorkflowForm(JobForm):
 
 
 class RestartWorkflowForm(BaseForm):
+    action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
+    start_job = InstanceField("Workflow Entry Point(s)", instance_type="Job")
     payload_version = NoValidationSelectField("Payload Version", choices=())
     payloads_to_exclude = NoValidationSelectMultipleField(
         "Payloads to Include", choices=()

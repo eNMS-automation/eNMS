@@ -338,7 +338,7 @@ Object.assign(action, {
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
-  "Restart Workflow" (job) => restartWorkflow(workflow, job),
+  "Restart Workflow from Here": (job) => showRestartWorkflowPanel(workflow, job),
   "Workflow Results": () =>
     showResultsPanel(workflow.id, workflow.name, "workflow"),
   "Workflow Logs": () => showLogsPanel(workflow),
@@ -371,9 +371,17 @@ function showRestartWorkflowPanel(workflow, job) {
   createPanel(
     `restart_workflow`,
     `Restart Workflow '${workflow.name}' from '${job.name}'`,
-    id,
+    workflow.id,
     function() {
-      workflowRunMode(workflow)
+      $("#start_job").val(job.id);
+      workflowRunMode(workflow);
+  });
+}
+
+function restartWorkflow() {
+  fCall(`/run_job/${workflow.id}`, "#restart_workflow-form", function(result) {
+    $("#restart-workflow").remove();
+    runLogic(result);
   });
 }
 

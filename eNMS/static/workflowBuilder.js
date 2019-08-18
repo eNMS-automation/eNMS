@@ -3,13 +3,17 @@ global
 action: false
 alertify: false
 call: false
+createPanel: false
+fCall: false
 normalRun: false
+runLogic: false
 showLogsPanel: false
 showPanel: false
 showResultsPanel: false
 showTypePanel: false
 vis: false
 workflow: true
+workflowRunMode: false
 */
 
 const container = document.getElementById("network");
@@ -57,10 +61,12 @@ let hoveredNode;
 let hoveredLabel;
 
 function displayWorkflow(workflowData) {
-  workflow = workflowData.workflow
+  workflow = workflowData.workflow;
   nodes = new vis.DataSet(workflow.jobs.map(jobToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
-  workflow.jobs.filter((s) => s.type == "IterationService").map(drawIterationService);
+  workflow.jobs
+    .filter((s) => s.type == "IterationService")
+    .map(drawIterationService);
   workflow.jobs.filter((s) => s.iteration_targets != "").map(drawIterationEdge);
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
@@ -338,7 +344,8 @@ Object.assign(action, {
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
-  "Restart Workflow from Here": (job) => showRestartWorkflowPanel(workflow, job),
+  "Restart Workflow from Here": (job) =>
+    showRestartWorkflowPanel(workflow, job),
   "Workflow Results": () =>
     showResultsPanel(workflow.id, workflow.name, "workflow"),
   "Workflow Logs": () => showLogsPanel(workflow),
@@ -375,14 +382,14 @@ function showRestartWorkflowPanel(workflow, job) {
     function() {
       $("#start_jobs").val(job.id);
       $("#start_jobs").selectpicker("refresh");
-      console.log(workflow.name)
       workflowRunMode(workflow, true);
-  });
+    }
+  );
 }
 
+// eslint-disable-next-line
 function restartWorkflow() {
   fCall(`/run_job/${workflow.id}`, `#restart_workflow-form`, function(result) {
-    console.log(result, workflow.name)
     $(`#restart_workflow-${workflow.id}`).remove();
     runLogic(result);
   });
@@ -451,7 +458,7 @@ function displayWorkflowState(result) {
           skipped: "#D3D3D3",
         };
         if (id in nodes._data) {
-          let updateNode = { id: id, color: color[state.success] }; 
+          let updateNode = { id: id, color: color[state.success] };
           if (state.type != "Workflow" && state.number_of_targets) {
             let progress = `${state.completed}/${state.number_of_targets}`;
             if (state.failed > 0) progress += ` (${state.failed} failed)`;

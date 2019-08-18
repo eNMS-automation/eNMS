@@ -6,7 +6,6 @@ from eNMS.controller import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     DictField,
-    InstanceField,
     MultipleInstanceField,
     NoValidationSelectField,
     NoValidationSelectMultipleField,

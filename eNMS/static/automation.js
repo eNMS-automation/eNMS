@@ -49,14 +49,13 @@ function panelCode(type, id, mode) {
 
 // eslint-disable-next-line
 function workflowRunMode(instance, restartForm) {
-  if (restartForm) {
-    excludeId = "#payloads_to_exclude";
-    versionId = "#payload_version";
-  } else {
-    excludeId = `#workflow-payloads_to_exclude-${instance.id}`;
-    versionId = `#workflow-payload_version-${instance.id}`;
-  }
   call(`/get_runtimes/workflow/${instance.id}`, function(runtimes) {
+    const excludeId = restartForm
+      ? "#payloads_to_exclude"
+      : `#workflow-payloads_to_exclude-${instance.id}`;
+    const versionId = restartForm
+      ? "#payload_version"
+      : `#workflow-payload_version-${instance.id}`;
     instance.jobs.forEach((job) => {
       $(excludeId).append(
         $("<option></option>")
@@ -71,9 +70,7 @@ function workflowRunMode(instance, restartForm) {
           .text(runtime[0])
       );
     });
-    $(versionId).val(
-      runtimes[runtimes.length - 1]
-    );
+    $(versionId).val(runtimes[runtimes.length - 1]);
     $(versionId).selectpicker("refresh");
     $(excludeId).selectpicker("refresh");
   });

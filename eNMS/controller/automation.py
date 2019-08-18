@@ -257,13 +257,10 @@ class AutomationController(BaseController):
         run = fetch(
             "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version")
         )
-        print(run)
         if not run:
             return {}
         result = [r for r in run.results if not r.device_id]
-        print(result)
         payload = result[0].result["results"] if result else {}
-        print(payload)
         if not isinstance(payload, dict):
             return {}
         payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))

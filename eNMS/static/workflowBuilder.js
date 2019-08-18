@@ -57,11 +57,11 @@ let hoveredNode;
 let hoveredLabel;
 
 function displayWorkflow(workflowData) {
-  const wf = (workflow = workflowData.workflow);
-  nodes = new vis.DataSet(wf.jobs.map(jobToNode));
-  edges = new vis.DataSet(wf.edges.map(edgeToEdge));
-  wf.jobs.filter((s) => s.type == "IterationService").map(drawIterationService);
-  wf.jobs.filter((s) => s.iteration_targets != "").map(drawIterationEdge);
+  workflow = workflowData.workflow
+  nodes = new vis.DataSet(workflow.jobs.map(jobToNode));
+  edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
+  workflow.jobs.filter((s) => s.type == "IterationService").map(drawIterationService);
+  workflow.jobs.filter((s) => s.iteration_targets != "").map(drawIterationEdge);
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function(properties) {
@@ -123,9 +123,9 @@ function displayWorkflow(workflowData) {
   $("#current-runtimes").val("");
   $("#current-runtimes").selectpicker("refresh");
   graph.on("dragEnd", () => savePositions());
-  $(`#add_jobs option[value='${wf.id}']`).remove();
+  $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
-  lastModified = wf.last_modified;
+  lastModified = workflow.last_modified;
   return graph;
 }
 

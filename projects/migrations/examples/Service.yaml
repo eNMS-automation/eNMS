@@ -30,10 +30,11 @@
     Netmiko prompts: ['-279', '-158']
     Netmiko_VRF_workflow: ['-200', '0']
     'Payload Workflow: Payload Extraction with operations': [-516, -120]
+    'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with separate failure - success path: [-239, -32]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       -283, 31]
-    Workflow_of_workflows: ['-300', '0']
+    Workflow_of_workflows: [-523, 0]
     payload_extraction_validation_worflow: [-481, -95]
     payload_transfer_workflow: ['-200', '0']
     'python Workflow: payload editor and pool helper': ['-326', '45']
@@ -84,13 +85,14 @@
     Netmiko prompts: ['634', '187']
     Netmiko_VRF_workflow: ['200', '0']
     'Payload Workflow: Payload Extraction with operations': [527, -97]
+    'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
     Workflow with separate failure - success path: [765, 251]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       594, -3]
-    Workflow_of_workflows: ['300', '0']
+    Workflow_of_workflows: [419, -1]
     payload_extraction_validation_worflow: [175, 266]
     payload_transfer_workflow: ['500', '0']
     'python Workflow: payload editor and pool helper': ['530', '155']
@@ -996,7 +998,7 @@
   pools: []
   positions:
     Workflow with separate failure - success path: [455, 10]
-    Workflow_of_workflows: ['0', '0']
+    Workflow_of_workflows: [-36, -175]
     payload_transfer_workflow: ['150', '100']
   push_to_git: false
   python_query: ''
@@ -1165,6 +1167,7 @@
   positions:
     Iteration Services Test Workflow: ['3', '-144']
     Iteration Targets Workflow: [-179, -187]
+    Workflow_of_workflows: [-310, -189]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -3258,5 +3261,45 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: false
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-18 10:21:22.291500'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Subworkflow: Access variable from snippet'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Subworkflow: Access Variable - Result from parent workflow': [179, -139]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  source_code: "result = {\r\n \"get_var\": get_var('iteration_devices', device=device.name),\r\
+    \n}\r\nsave_result(success=True, result=result)"
+  start_new_connection: false
+  time_between_retries: 10
+  type: PythonSnippetService
   vendor: ''
   waiting_time: 0

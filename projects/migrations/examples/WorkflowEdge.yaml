@@ -50,13 +50,9 @@
   workflow: payload_extraction_validation_worflow}
 - {destination: End, name: payload_extraction_validation_worflow 5 -> 1, source: 'Payload
     Workflow: Validate text via results', subtype: success, workflow: payload_extraction_validation_worflow}
-- {destination: payload_transfer_workflow, name: Workflow_of_workflows 0 -> 2, source: Start,
-  subtype: success, workflow: Workflow_of_workflows}
 - {destination: get_interfaces, name: Workflow_of_workflows 2 -> 3, source: payload_transfer_workflow,
   subtype: success, workflow: Workflow_of_workflows}
 - {destination: Napalm_VRF_workflow, name: Workflow_of_workflows 3 -> 4, source: get_interfaces,
-  subtype: success, workflow: Workflow_of_workflows}
-- {destination: End, name: Workflow_of_workflows 4 -> 1, source: Napalm_VRF_workflow,
   subtype: success, workflow: Workflow_of_workflows}
 - {destination: netmiko_check_vrf_napalm, name: 40-success:20->45, source: napalm_create_vrf_test,
   subtype: success, workflow: Napalm_VRF_workflow}
@@ -204,3 +200,17 @@
     Targets Workflow}
 - {destination: End, name: 80-success:82->2, source: 'Iteration Targets Workflow:
     No device targets', subtype: success, workflow: Iteration Targets Workflow}
+- {destination: 'Subworkflow: Access variable from snippet', name: 83-success:1->84,
+  source: Start, subtype: success, workflow: 'Subworkflow: Access Variable - Result
+    from parent workflow'}
+- {destination: End, name: 83-success:84->2, source: 'Subworkflow: Access variable
+    from snippet', subtype: success, workflow: 'Subworkflow: Access Variable - Result
+    from parent workflow'}
+- {destination: add_devices_to_payload, name: 74-success:1->26, source: Start, subtype: success,
+  workflow: Workflow_of_workflows}
+- {destination: payload_transfer_workflow, name: 74-success:26->71, source: add_devices_to_payload,
+  subtype: success, workflow: Workflow_of_workflows}
+- {destination: 'Subworkflow: Access Variable - Result from parent workflow', name: 74-success:70->83,
+  source: Napalm_VRF_workflow, subtype: success, workflow: Workflow_of_workflows}
+- {destination: End, name: 74-success:83->2, source: 'Subworkflow: Access Variable
+    - Result from parent workflow', subtype: success, workflow: Workflow_of_workflows}

@@ -100,7 +100,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: ['0', '200']
+    Workflow_of_workflows: [70, 162]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -140,7 +140,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: ['0', '-200']
+    Workflow_of_workflows: [-324, 165]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -243,7 +243,7 @@
   credentials: device
   custom_username: ''
   description: Test the inner workflow system
-  devices: [Washington]
+  devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
   has_targets: true
@@ -251,8 +251,9 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  jobs: [Start, End, payload_transfer_workflow, get_interfaces, Napalm_VRF_workflow]
-  last_modified: '2019-08-05 13:30:57.198567'
+  jobs: [Start, End, payload_transfer_workflow, get_interfaces, Napalm_VRF_workflow,
+    add_devices_to_payload, 'Subworkflow: Access Variable - Result from parent workflow']
+  last_modified: '2019-08-18 10:19:53.630835'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -600,5 +601,45 @@
   time_between_retries: 10
   type: Workflow
   use_workflow_targets: true
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  jobs: [Start, End, 'Subworkflow: Access variable from snippet']
+  last_modified: '2019-08-18 10:16:56.246527'
+  mail_recipient: ''
+  name: 'Subworkflow: Access Variable - Result from parent workflow'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Workflow_of_workflows: [273, -183]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_jobs: [Start]
+  start_new_connection: false
+  start_workflows: []
+  time_between_retries: 10
+  type: Workflow
+  use_workflow_targets: false
   vendor: ''
   waiting_time: 0

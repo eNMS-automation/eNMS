@@ -127,6 +127,15 @@ class WorkflowForm(JobForm):
     )
 
 
+class RestartWorkflowForm(BaseForm):
+    form_type = HiddenField(default="restart_workflow")
+    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
+    payload_version = NoValidationSelectField("Payload Version", choices=())
+    payloads_to_exclude = NoValidationSelectMultipleField(
+        "Payloads to Include", choices=()
+    )
+
+
 class LogsForm(BaseForm):
     template = "logs"
     form_type = HiddenField(default="logs")

@@ -373,7 +373,7 @@ function showRestartWorkflowPanel(workflow, job) {
     `Restart Workflow '${workflow.name}' from '${job.name}'`,
     id,
     function() {
-      
+      workflowRunMode(workflow)
   });
 }
 

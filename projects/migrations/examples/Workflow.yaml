@@ -251,9 +251,10 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  jobs: [Start, End, payload_transfer_workflow, get_interfaces, Napalm_VRF_workflow,
-    add_devices_to_payload, 'Subworkflow: Access Variable - Result from parent workflow']
-  last_modified: '2019-08-18 10:19:53.630835'
+  jobs: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
+    'Subworkflow: Access Variable - Result from parent workflow', Show version with
+      multiprocessing]
+  last_modified: '2019-08-18 11:37:45.090256'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -617,7 +618,7 @@
   initial_payload: {}
   iteration_targets: ''
   jobs: [Start, End, 'Subworkflow: Access variable from snippet']
-  last_modified: '2019-08-18 10:16:56.246527'
+  last_modified: '2019-08-18 10:23:04.623010'
   mail_recipient: ''
   name: 'Subworkflow: Access Variable - Result from parent workflow'
   notification_header: ''
@@ -640,6 +641,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: false
+  use_workflow_targets: true
   vendor: ''
   waiting_time: 0

@@ -50,10 +50,6 @@
   workflow: payload_extraction_validation_worflow}
 - {destination: End, name: payload_extraction_validation_worflow 5 -> 1, source: 'Payload
     Workflow: Validate text via results', subtype: success, workflow: payload_extraction_validation_worflow}
-- {destination: get_interfaces, name: Workflow_of_workflows 2 -> 3, source: payload_transfer_workflow,
-  subtype: success, workflow: Workflow_of_workflows}
-- {destination: Napalm_VRF_workflow, name: Workflow_of_workflows 3 -> 4, source: get_interfaces,
-  subtype: success, workflow: Workflow_of_workflows}
 - {destination: netmiko_check_vrf_napalm, name: 40-success:20->45, source: napalm_create_vrf_test,
   subtype: success, workflow: Napalm_VRF_workflow}
 - {destination: napalm_rollback, name: 40-success:45->34, source: netmiko_check_vrf_napalm,
@@ -208,9 +204,13 @@
     from parent workflow'}
 - {destination: add_devices_to_payload, name: 74-success:1->26, source: Start, subtype: success,
   workflow: Workflow_of_workflows}
-- {destination: payload_transfer_workflow, name: 74-success:26->71, source: add_devices_to_payload,
-  subtype: success, workflow: Workflow_of_workflows}
 - {destination: 'Subworkflow: Access Variable - Result from parent workflow', name: 74-success:70->83,
   source: Napalm_VRF_workflow, subtype: success, workflow: Workflow_of_workflows}
 - {destination: End, name: 74-success:83->2, source: 'Subworkflow: Access Variable
     - Result from parent workflow', subtype: success, workflow: Workflow_of_workflows}
+- {destination: payload_transfer_workflow, name: 74-success:26->71, source: add_devices_to_payload,
+  subtype: success, workflow: Workflow_of_workflows}
+- {destination: Show version with multiprocessing, name: 74-success:71->52, source: payload_transfer_workflow,
+  subtype: success, workflow: Workflow_of_workflows}
+- {destination: 'Subworkflow: Access Variable - Result from parent workflow', name: 74-success:52->83,
+  source: Show version with multiprocessing, subtype: success, workflow: Workflow_of_workflows}

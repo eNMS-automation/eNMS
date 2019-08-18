@@ -254,7 +254,7 @@ class Run(AbstractBase):
     def run(self, payload: Optional[dict] = None) -> dict:
         try:
             self.log("info", f"{self.job.type} {self.job.name}: Starting")
-            self.set_state(status="Running")
+            self.set_state(status="Running", type=self.job.type)
             controller.job_db[self.job.id]["runs"] += 1
             Session.commit()
             results = self.job.build_results(self, payload or self.initial_payload)

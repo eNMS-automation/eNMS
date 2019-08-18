@@ -952,6 +952,7 @@
   pools: []
   positions:
     Workflow with separate failure - success path: [214, -132]
+    Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: ['-50', '-100']
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
@@ -998,7 +999,7 @@
   pools: []
   positions:
     Workflow with separate failure - success path: [455, 10]
-    Workflow_of_workflows: [-36, -175]
+    Workflow_of_workflows: [-122, -174]
     payload_transfer_workflow: ['150', '100']
   push_to_git: false
   python_query: ''
@@ -1043,6 +1044,7 @@
   optional_args: {}
   pools: []
   positions:
+    Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: ['150', '-100']
   push_to_git: false
   python_query: ''
@@ -1087,6 +1089,7 @@
   optional_args: {}
   pools: []
   positions:
+    Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: ['300', '-100']
   push_to_git: false
   python_query: ''
@@ -1127,6 +1130,7 @@
   operating_system: ''
   pools: []
   positions:
+    Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: ['300', '0']
   push_to_git: false
   python_query: ''
@@ -1167,7 +1171,7 @@
   positions:
     Iteration Services Test Workflow: ['3', '-144']
     Iteration Targets Workflow: [-179, -187]
-    Workflow_of_workflows: [-310, -189]
+    Workflow_of_workflows: [-349, -187]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -2498,6 +2502,7 @@
   positions:
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       154, 108]
+    Workflow_of_workflows: [-97, -181]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -3271,12 +3276,12 @@
   devices: []
   display_only_failed_nodes: false
   events: []
-  has_targets: false
+  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-08-18 10:21:22.291500'
+  last_modified: '2019-08-18 10:58:04.216106'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -3287,6 +3292,7 @@
   pools: []
   positions:
     'Subworkflow: Access Variable - Result from parent workflow': [179, -139]
+    Workflow_of_workflows: [3, -51]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -3297,7 +3303,8 @@
   skip: false
   skip_python_query: ''
   source_code: "result = {\r\n \"get_var\": get_var('iteration_devices', device=device.name),\r\
-    \n}\r\nsave_result(success=True, result=result)"
+    \n \"get_result\": get_result(\"add_devices_to_payload\", device=device.name)[\"\
+    success\"]\r\n}\r\nsave_result(success=True, result=result)"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService

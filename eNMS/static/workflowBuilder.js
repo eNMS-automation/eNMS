@@ -400,6 +400,7 @@ function displayWorkflowState(result) {
       $("#current-job").text(`Current job: ${result.state.current_job.name}.`);
       const currState = result.state.jobs[currJob.id];
       if (
+        currJob.type != "Workflow" &&
         currState &&
         currState.number_of_targets > 1 &&
         currState.completed > 0
@@ -421,19 +422,22 @@ function displayWorkflowState(result) {
       $("#current-job").empty();
     }
     if (result.state.jobs) {
+      console.log(result.state.jobs)
       $.each(result.state.jobs, (id, state) => {
         const color = {
           true: "#32cd32",
           false: "#FF6666",
           skipped: "#D3D3D3",
         };
-        let updateNode = { id: id, color: color[state.success] };
-        if (state.number_of_targets) {
-          let progress = `${state.completed}/${state.number_of_targets}`;
-          if (state.failed > 0) progress += ` (${state.failed} failed)`;
-          updateNode.label = `${nodes.get(id).name}\n${progress}`;
+        if (id in nodes._data) {
+          let updateNode = { id: id, color: color[state.success] }; 
+          if (state.type != "Workflow" && state.number_of_targets) {
+            let progress = `${state.completed}/${state.number_of_targets}`;
+            if (state.failed > 0) progress += ` (${state.failed} failed)`;
+            updateNode.label = `${nodes.get(id).name}\n${progress}`;
+          }
+          nodes.update(updateNode);
         }
-        nodes.update(updateNode);
       });
     }
     if (result.state.edges) {

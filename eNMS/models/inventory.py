@@ -85,7 +85,7 @@ class Device(CustomDevice):
     last_update = Column(SmallString, default="Never")
     last_runtime = Column(Float)
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
-    results = relationship("Result", back_populates="device")
+    results = relationship("Result", back_populates="device", cascade="all, delete-orphan")
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 

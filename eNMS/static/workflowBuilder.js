@@ -338,7 +338,7 @@ Object.assign(action, {
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
-  "Restart Workflow" (job) => restartWorkflow(job.id),
+  "Restart Workflow" (job) => restartWorkflow(workflow, job),
   "Workflow Results": () =>
     showResultsPanel(workflow.id, workflow.name, "workflow"),
   "Workflow Logs": () => showLogsPanel(workflow),
@@ -367,9 +367,13 @@ function runWorkflow(withUpdates) {
   }
 }
 
-function restartWorkflowjobId) {
-  call(`/restart_workflow/${jobId}`, function(job) {
-    runLogic(job);
+function showRestartWorkflowPanel(workflow, job) {
+  createPanel(
+    `restart_workflow`,
+    `Restart Workflow '${workflow.name}' from '${job.name}'`,
+    id,
+    function() {
+      
   });
 }
 

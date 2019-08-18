@@ -39,9 +39,7 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function showConfigurationPanel(id, name) {
-  createPanel(`configuration`, `Configuration - Device ${name}`, id, function(
-    panel
-  ) {
+  createPanel(`configuration`, `Configuration - Device ${name}`, id, function() {
     configureCallbacks(id);
     displayConfigurations(id);
   });

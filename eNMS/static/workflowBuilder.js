@@ -338,6 +338,7 @@ Object.assign(action, {
   Results: (job) => showResultsPanel(job.id, job.label, "service"),
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
+  "Restart Workflow" (job) => restartWorkflow(job.id),
   "Workflow Results": () =>
     showResultsPanel(workflow.id, workflow.name, "workflow"),
   "Workflow Logs": () => showLogsPanel(workflow),
@@ -364,6 +365,12 @@ function runWorkflow(withUpdates) {
   } else {
     normalRun(workflow.id);
   }
+}
+
+function restartWorkflowjobId) {
+  call(`/restart_workflow/${jobId}`, function(job) {
+    runLogic(job);
+  });
 }
 
 function colorJob(id, color) {

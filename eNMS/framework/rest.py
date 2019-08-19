@@ -10,7 +10,7 @@ from eNMS.concurrency import run_job
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
-from eNMS.extensions import auth, csrf
+from eNMS.framework.extensions import auth, csrf
 
 
 def create_controller_resources() -> Dict[str, Resource]:

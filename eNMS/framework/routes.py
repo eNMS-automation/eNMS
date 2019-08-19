@@ -32,7 +32,7 @@ from eNMS.properties.table import (
 )
 
 
-blueprint = Blueprint("blueprint", __name__, template_folder="templates")
+blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
 
 def monitor_requests(function: Callable) -> Callable:

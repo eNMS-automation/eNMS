@@ -5,26 +5,26 @@ from pathlib import Path
 from sqlalchemy.orm import configure_mappers
 from typing import Any, Tuple
 
-from eNMS.cli import configure_cli
-from eNMS.config import config_mapper
+
 from eNMS.controller import controller
 from eNMS.database import Base, engine
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties
-from eNMS.extensions import auth, csrf, login_manager
+from eNMS.framework.cli import configure_cli
+from eNMS.framework.config import config_mapper
+from eNMS.framework.extensions import auth, csrf, login_manager
+from eNMS.framework.rest import configure_rest_api
+from eNMS.framework.routes import blueprint
 from eNMS.models import relationships
 from eNMS.models.administration import User
 from eNMS.properties import property_names
-from eNMS.rest import configure_rest_api
-from eNMS.routes import blueprint
 
 
 def register_extensions(app: Flask) -> None:
     app.register_blueprint(blueprint)
     csrf.init_app(app)
     login_manager.init_app(app)
-    controller.init_app(app)
 
 
 def configure_login_manager(app: Flask) -> None:
@@ -86,9 +86,10 @@ def configure_authentication() -> None:
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app(path: Path, config: str) -> Flask:
-    app = Flask(__name__, static_folder="static")
-    app.config.from_object(config_mapper[config.capitalize()])  # type: ignore
+def create_app(path: Path) -> Flask:
+    app = Flask(__name__, static_folder=path / "eNMS" / "static")
+    config = config_mapper[controller.config_mode.capitalize()]
+    app.config.from_object(config)  # type: ignore
     app.mode = app.config["MODE"]
     app.path = path
     register_extensions(app)

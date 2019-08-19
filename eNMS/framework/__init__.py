@@ -94,9 +94,7 @@ def create_app(path: Path) -> Flask:
     app.path = path
     register_extensions(app)
     configure_login_manager(app)
-    controller.init_services()
     configure_database(app)
-    controller.init_forms()
     configure_cli(app)
     configure_context_processor(app)
     configure_rest_api(app)

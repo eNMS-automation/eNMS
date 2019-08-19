@@ -31,8 +31,9 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database import DIALECT, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
-from eNMS.models import models, relationships
+from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
+from eNMS.properties.database import import_classes
 from eNMS.properties.diagram import (
     device_diagram_properties,
     diagram_classes,
@@ -216,6 +217,7 @@ class BaseController:
         self.custom_properties = self.load_custom_properties()
         self.custom_config = self.load_custom_config()
         self.init_scheduler()
+        
         if self.use_tacacs:
             self.init_tacacs_client()
         if self.use_ldap:
@@ -229,11 +231,68 @@ class BaseController:
 
     def init_app(self, path: Path) -> None:
         self.path = path
+        self.init_services()
+        self.init_forms()
+        from eNMS.framework import create_app
+        app = create_app(path)
         self.create_google_earth_styles()
         self.fetch_version()
         self.init_logs()
-        from eNMS.framework import create_app
-        return create_app(path)
+        
+        return app
+
+    def init_parameters(self) -> None:
+        parameters = Session.query(models["Parameters"]).one_or_none()
+        if not parameters:
+            parameters = models["Parameters"]()
+            parameters.update(
+                **{
+                    property: getattr(self, property)
+                    for property in model_properties["Parameters"]
+                    if hasattr(self, property)
+                }
+            )
+            Session.add(parameters)
+            Session.commit()
+        else:
+            for parameter in parameters.get_properties():
+                setattr(self, parameter, getattr(parameters, parameter))
+
+    def configure_server_id(self) -> None:
+        factory(
+            "Server",
+            **{
+                "name": str(getnode()),
+                "description": "Localhost",
+                "ip_address": "0.0.0.0",
+                "status": "Up",
+            },
+        )
+
+    def create_admin_user(self) -> None:
+        factory("User", **{"name": "admin", "password": "admin"})
+
+    def update_credentials(self) -> None:
+        with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
+            self.topology_import(file)
+
+    def clean_database(self) -> None:
+        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
+            run.status = "Aborted (app reload)"
+        Session.commit()
+
+    def init_database(self) -> None:
+        self.init_parameters()
+        self.configure_server_id()
+        self.create_admin_user()
+        Session.commit()
+        if self.create_examples:
+            self.migration_import(name="examples", import_export_types=import_classes)
+            self.update_credentials()
+        else:
+            self.migration_import(name="default", import_export_types=import_classes)
+        self.get_git_content()
+        Session.commit()
 
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}

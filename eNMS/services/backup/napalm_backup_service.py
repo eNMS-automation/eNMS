@@ -4,7 +4,7 @@ from ruamel import yaml
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, IntegerField
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NapalmForm

@@ -5,7 +5,7 @@ from traceback import format_exc
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (

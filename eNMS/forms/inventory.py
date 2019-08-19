@@ -8,7 +8,7 @@ from wtforms import (
 )
 from wtforms.widgets import TextArea
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import private_properties

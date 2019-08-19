@@ -2,7 +2,7 @@ from ast import parse
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     DictField,

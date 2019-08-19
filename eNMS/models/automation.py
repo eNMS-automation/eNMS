@@ -24,7 +24,7 @@ from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
 from eNMS.controller.concurrency import get_device_result
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import convert_value, factory, fetch

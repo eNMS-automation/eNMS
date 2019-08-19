@@ -6,7 +6,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from tarfile import open as open_tar
 from wtforms import BooleanField, HiddenField, SelectField
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField

@@ -17,7 +17,7 @@ from os import listdir
 from typing import Any, Callable
 from werkzeug.wrappers import Response
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database import Session
 from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates

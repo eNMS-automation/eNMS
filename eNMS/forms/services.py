@@ -1,7 +1,7 @@
 from wtforms import BooleanField, FloatField, HiddenField, IntegerField, SelectField
 from wtforms.widgets import TextArea
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import DictField, DictSubstitutionField, SubstitutionField
 

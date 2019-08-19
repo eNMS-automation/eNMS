@@ -6,7 +6,7 @@ from sqlalchemy.orm import configure_mappers
 from typing import Any, Tuple
 
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database import Base, engine
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch

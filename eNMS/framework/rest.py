@@ -7,7 +7,7 @@ from uuid import getnode
 from typing import Any, Dict, Optional, Union
 
 from eNMS.controller.concurrency import run_job
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf

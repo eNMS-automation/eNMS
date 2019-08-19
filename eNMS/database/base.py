@@ -2,7 +2,7 @@ from flask_login import current_user as user
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from typing import Any, List
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database import Base, Session
 from eNMS.database.functions import fetch, objectify
 from eNMS.models import model_properties, property_types, relationships

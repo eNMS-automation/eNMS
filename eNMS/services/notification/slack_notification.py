@@ -4,7 +4,7 @@ from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField

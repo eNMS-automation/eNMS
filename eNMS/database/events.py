@@ -6,7 +6,7 @@ from sqlalchemy.orm.mapper import Mapper
 from sqlalchemy.types import JSON
 from typing import Any
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.database.base import Base
 from eNMS.database.functions import fetch_all

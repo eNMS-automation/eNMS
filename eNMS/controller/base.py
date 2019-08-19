@@ -232,6 +232,8 @@ class BaseController:
         self.create_google_earth_styles()
         self.fetch_version()
         self.init_logs()
+        from eNMS.framework import create_app
+        return create_app(path)
 
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}

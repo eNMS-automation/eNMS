@@ -4,7 +4,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 from typing import Any, Dict, List, Union
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (

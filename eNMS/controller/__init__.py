@@ -62,6 +62,3 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             self.migration_import(name="default", import_export_types=import_classes)
         self.get_git_content()
         Session.commit()
-
-
-controller = Controller()

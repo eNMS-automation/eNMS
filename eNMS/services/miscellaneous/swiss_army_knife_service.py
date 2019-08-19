@@ -9,7 +9,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField
 
 from eNMS.controller.concurrency import run_job
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database import Session
 from eNMS.database.dialect import Column
 from eNMS.database.functions import factory, fetch_all

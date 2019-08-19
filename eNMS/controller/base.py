@@ -32,6 +32,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
+from eNMS.framework import create_app
 from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
@@ -232,8 +233,10 @@ class BaseController:
     def init_app(self, path: Path) -> None:
         self.path = path
         self.init_services()
-        from eNMS.framework import create_app
-        app = create_app(path)
+        
+        
+        
+        app = create_app(self)
         self.configure_database(app)
         self.init_forms()
         self.create_google_earth_styles()
@@ -261,8 +264,9 @@ class BaseController:
 
     def configure_database(self, app: Flask) -> None:
         Base.metadata.create_all(bind=engine)
+        from eNMS.database.events import configure_events
+        configure_events(self)
         configure_mappers()
-        #configure_events()
 
         @app.before_first_request
         def initialize_database() -> None:

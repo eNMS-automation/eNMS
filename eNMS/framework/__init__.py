@@ -5,21 +5,19 @@ from pathlib import Path
 from typing import Any, Tuple
 
 from eNMS import controller
-from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties
 from eNMS.framework.cli import configure_cli
 from eNMS.framework.config import config_mapper
 from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
-from eNMS.framework.routes import blueprint
+from eNMS.framework.routes import configure_routes
 from eNMS.models import relationships
 from eNMS.models.administration import User
 from eNMS.properties import property_names
 
 
 def register_extensions(app: Flask) -> None:
-    app.register_blueprint(blueprint)
     csrf.init_app(app)
     login_manager.init_app(app)
 
@@ -34,7 +32,7 @@ def configure_login_manager(app: Flask) -> None:
         return fetch("User", allow_none=True, name=request.form.get("name"))
 
 
-def configure_context_processor(app: Flask) -> None:
+def configure_context_processor(app: Flask, controller) -> None:
     @app.context_processor
     def inject_properties() -> dict:
         return {
@@ -71,18 +69,18 @@ def configure_authentication() -> None:
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app(path: Path) -> Flask:
-    app = Flask(__name__, static_folder=path / "eNMS" / "static")
+def create_app(controller) -> Flask:
+    app = Flask(__name__, static_folder=controller.path / "eNMS" / "static")
     config = config_mapper[controller.config_mode.capitalize()]
     app.config.from_object(config)  # type: ignore
     app.mode = app.config["MODE"]
-    app.path = path
+    app.path = controller.path
     register_extensions(app)
-    configure_events()
     configure_login_manager(app)
     configure_cli(app)
-    configure_context_processor(app)
-    configure_rest_api(app)
+    configure_context_processor(app, controller)
+    configure_rest_api(app, controller)
+    configure_routes(app, controller)
     configure_errors(app)
     configure_authentication()
     return app

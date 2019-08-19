@@ -6,7 +6,6 @@ from sqlalchemy.orm.mapper import Mapper
 from sqlalchemy.types import JSON
 from typing import Any
 
-from eNMS import controller
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.database.base import Base
 from eNMS.database.functions import fetch_all
@@ -48,7 +47,7 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
         }
 
 
-def configure_events() -> None:
+def configure_events(controller) -> None:
     @event.listens_for(Base, "init", propagate=True)
     def log_instance_creation(target: Base, args: tuple, kwargs: dict) -> None:
         if "type" not in target.__dict__ or "log" in target.type:

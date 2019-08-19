@@ -7,13 +7,12 @@ from uuid import getnode
 from typing import Any, Dict, Optional, Union
 
 from eNMS.controller.concurrency import run_job
-from eNMS import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf
 
 
-def create_controller_resources() -> Dict[str, Resource]:
+def create_controller_resources(controller) -> Dict[str, Resource]:
     endpoints = {}
     for endpoint in controller.valid_rest_endpoints:
 
@@ -188,9 +187,9 @@ class Topology(Resource):
             return "Topology Export successfully executed."
 
 
-def configure_rest_api(app: Flask) -> None:
+def configure_rest_api(app: Flask, controller) -> None:
     api = Api(app, decorators=[csrf.exempt])
-    for endpoint, resource in create_controller_resources().items():
+    for endpoint, resource in create_controller_resources(controller).items():
         api.add_resource(resource, f"/rest/{endpoint}")
     api.add_resource(CreatePool, "/rest/create_pool")
     api.add_resource(Heartbeat, "/rest/is_alive")

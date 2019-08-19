@@ -24,12 +24,13 @@ from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
+from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from typing import Any, Dict, List, Optional, Set, Union
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.database import DIALECT, Session
+from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
 from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
@@ -217,7 +218,6 @@ class BaseController:
         self.custom_properties = self.load_custom_properties()
         self.custom_config = self.load_custom_config()
         self.init_scheduler()
-        
         if self.use_tacacs:
             self.init_tacacs_client()
         if self.use_ldap:
@@ -232,9 +232,10 @@ class BaseController:
     def init_app(self, path: Path) -> None:
         self.path = path
         self.init_services()
-        self.init_forms()
         from eNMS.framework import create_app
         app = create_app(path)
+        self.configure_database(app)
+        self.init_forms()
         self.create_google_earth_styles()
         self.fetch_version()
         self.init_logs()
@@ -257,6 +258,17 @@ class BaseController:
         else:
             for parameter in parameters.get_properties():
                 setattr(self, parameter, getattr(parameters, parameter))
+
+    def configure_database(self, app: Flask) -> None:
+        Base.metadata.create_all(bind=engine)
+        configure_mappers()
+        #configure_events()
+
+        @app.before_first_request
+        def initialize_database() -> None:
+            self.clean_database()
+            if not fetch("User", allow_none=True, name="admin"):
+                self.init_database()
 
     def configure_server_id(self) -> None:
         factory(

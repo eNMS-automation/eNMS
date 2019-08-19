@@ -2,12 +2,9 @@ from flask import Flask, jsonify, make_response, render_template
 from flask.wrappers import Request, Response
 from itertools import chain
 from pathlib import Path
-from sqlalchemy.orm import configure_mappers
 from typing import Any, Tuple
 
-
 from eNMS import controller
-from eNMS.database import Base, engine
 from eNMS.database.events import configure_events
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties
@@ -35,18 +32,6 @@ def configure_login_manager(app: Flask) -> None:
     @login_manager.request_loader
     def request_loader(request: Request) -> User:
         return fetch("User", allow_none=True, name=request.form.get("name"))
-
-
-def configure_database(app: Flask) -> None:
-    Base.metadata.create_all(bind=engine)
-    configure_mappers()
-    configure_events()
-
-    @app.before_first_request
-    def initialize_database() -> None:
-        controller.clean_database()
-        if not fetch("User", allow_none=True, name="admin"):
-            controller.init_database()
 
 
 def configure_context_processor(app: Flask) -> None:
@@ -93,8 +78,8 @@ def create_app(path: Path) -> Flask:
     app.mode = app.config["MODE"]
     app.path = path
     register_extensions(app)
+    configure_events()
     configure_login_manager(app)
-    configure_database(app)
     configure_cli(app)
     configure_context_processor(app)
     configure_rest_api(app)

@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 
-from eNMS.concurrency import run_job
+from eNMS.controller.concurrency import run_job
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField

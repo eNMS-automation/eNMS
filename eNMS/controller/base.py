@@ -44,7 +44,7 @@ from eNMS.properties.objects import (
     device_icons,
     pool_device_properties,
 )
-from eNMS.syslog import SyslogServer
+from eNMS.controller.syslog import SyslogServer
 
 
 class BaseController:

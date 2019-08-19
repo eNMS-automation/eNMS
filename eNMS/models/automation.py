@@ -23,7 +23,7 @@ from typing import Any, Dict, Generator, List, Match, Optional, Set, Tuple, Unio
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
-from eNMS.concurrency import get_device_result
+from eNMS.controller.concurrency import get_device_result
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString

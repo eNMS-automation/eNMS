@@ -2,7 +2,7 @@ from click import argument, echo, option
 from flask import Flask
 from json import loads
 
-from eNMS.concurrency import run_job
+from eNMS.controller.concurrency import run_job
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch

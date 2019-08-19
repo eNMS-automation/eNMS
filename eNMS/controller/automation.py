@@ -11,7 +11,7 @@ from pathlib import Path
 from re import search, sub
 from typing import Any, Dict, Optional
 
-from eNMS.concurrency import run_job
+from eNMS.controller.concurrency import run_job
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify

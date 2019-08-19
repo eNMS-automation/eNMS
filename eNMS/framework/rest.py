@@ -6,7 +6,7 @@ from psutil import cpu_percent
 from uuid import getnode
 from typing import Any, Dict, Optional, Union
 
-from eNMS.concurrency import run_job
+from eNMS.controller.concurrency import run_job
 from eNMS.controller import controller
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch

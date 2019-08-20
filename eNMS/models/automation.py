@@ -818,7 +818,7 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if run.use_workflow_targets:
-            initial_targets = run.compute_devices(results["results"])
+            initial_targets = run.compute_devices(payload)
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
         while jobs:

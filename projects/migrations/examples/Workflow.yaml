@@ -61,7 +61,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [-366, 168]
+    Workflow_of_workflows: [-467, 157]
   push_to_git: false
   python_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
@@ -102,7 +102,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [148, -186]
+    Workflow_of_workflows: [103, 162]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -142,7 +142,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [-128, -187]
+    Workflow_of_workflows: [-196, 166]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -222,7 +222,8 @@
   number_of_retries: 0
   operating_system: ''
   pools: []
-  positions: {}
+  positions:
+    Subworkflow of Workflow: [231, -224]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -255,8 +256,8 @@
   iteration_targets: ''
   jobs: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
     'Subworkflow: Access Variable - Result from parent workflow', Show version with
-      multiprocessing, Netmiko_VRF_workflow]
-  last_modified: '2019-08-20 18:46:28.383532'
+      multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow]
+  last_modified: '2019-08-20 21:28:58.465214'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -631,7 +632,7 @@
   operating_system: ''
   pools: []
   positions:
-    Workflow_of_workflows: [272, 160]
+    Workflow_of_workflows: [525, -209]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -654,7 +655,7 @@
   credentials: device
   custom_username: ''
   description: ''
-  devices: []
+  devices: [Washington]
   display_only_failed_nodes: false
   events: []
   has_targets: true
@@ -662,16 +663,17 @@
   include_link_in_summary: false
   initial_payload: {}
   iteration_targets: ''
-  jobs: [Start, End, 'Payload Workflow: Payload Extraction with operations', Configuration
-      Management Workflow, Napalm getters and match mechanism workflow]
-  last_modified: '2019-08-20 21:21:00.321453'
+  jobs: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
+      getters and match mechanism workflow, payload_extraction_validation_worflow]
+  last_modified: '2019-08-20 21:24:26.583640'
   mail_recipient: ''
   name: Subworkflow of Workflow
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
-  positions: {}
+  positions:
+    Workflow_of_workflows: [-230, -199]
   push_to_git: false
   python_query: ''
   query_property_type: name

@@ -42,7 +42,7 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Netmiko
-  devices: [Austin]
+  devices: []
   display_only_failed_nodes: true
   events: []
   has_targets: true
@@ -52,17 +52,18 @@
   iteration_targets: ''
   jobs: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
     netmiko_check_no_vrf_test]
-  last_modified: '2019-08-05 13:30:56.803035'
+  last_modified: '2019-08-20 17:51:25.339733'
   mail_recipient: ''
   name: Netmiko_VRF_workflow
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [Washington]
-  positions: {}
+  pools: []
+  positions:
+    Workflow_of_workflows: [-366, 168]
   push_to_git: false
-  python_query: ''
-  query_property_type: ip_address
+  python_query: get_var("loop_over", device=workflow_device.name)
+  query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
   shape: box
@@ -100,7 +101,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [70, 162]
+    Workflow_of_workflows: [148, -186]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -140,7 +141,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [-324, 165]
+    Workflow_of_workflows: [-128, -187]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -253,8 +254,8 @@
   iteration_targets: ''
   jobs: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
     'Subworkflow: Access Variable - Result from parent workflow', Show version with
-      multiprocessing]
-  last_modified: '2019-08-18 12:17:11.463006'
+      multiprocessing, Netmiko_VRF_workflow]
+  last_modified: '2019-08-20 18:17:11.899925'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -627,7 +628,7 @@
   operating_system: ''
   pools: []
   positions:
-    Workflow_of_workflows: [273, -183]
+    Workflow_of_workflows: [272, 160]
   push_to_git: false
   python_query: ''
   query_property_type: name

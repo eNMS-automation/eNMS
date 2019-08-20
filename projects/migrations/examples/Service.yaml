@@ -34,7 +34,7 @@
     Workflow with separate failure - success path: [-239, -32]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       -283, 31]
-    Workflow_of_workflows: [-523, 0]
+    Workflow_of_workflows: [-566, -16]
     payload_extraction_validation_worflow: [-481, -95]
     payload_transfer_workflow: ['-200', '0']
     'python Workflow: payload editor and pool helper': ['-326', '45']
@@ -92,7 +92,7 @@
     Workflow with separate failure - success path: [765, 251]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       594, -3]
-    Workflow_of_workflows: [419, -1]
+    Workflow_of_workflows: [482, -46]
     payload_extraction_validation_worflow: [175, 266]
     payload_transfer_workflow: ['500', '0']
     'python Workflow: payload editor and pool helper': ['530', '155']
@@ -1159,7 +1159,7 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_targets: ''
-  last_modified: '2019-08-14 18:16:11.865563'
+  last_modified: '2019-08-20 18:18:23.620683'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -1184,11 +1184,10 @@
   source_code: "# Service Iteration 1: targets\r\ntargets = ['Loopback101', 'Loopback15']\
     \ if device.name == \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('iteration_devices',\
     \ targets, device=device.name)\r\n\r\n# Service iteration 3: derived devices with\
-    \ base target Washington\r\nset_var(\"loop_over\", [\"Atlanta\", \"Washington\"\
-    ], device=device.name)\r\n\r\n# Service iteration 3: targets\r\ntargets2 = ['Loopback333',\
-    \ 'Loopback334'] if device.name == \"Washington\" else ['Loopback55', 'Loopback666']\r\
-    \nset_var('iteration_devices2', targets2, device=device.name)\r\nsave_result(True,\
-    \ {})"
+    \ base target Washington\r\nset_var(\"loop_over\", [\"Washington\"], device=device.name)\r\
+    \n\r\n# Service iteration 3: targets\r\ntargets2 = ['Loopback333', 'Loopback334']\
+    \ if device.name == \"Washington\" else ['Loopback55', 'Loopback666']\r\nset_var('iteration_devices2',\
+    \ targets2, device=device.name)\r\nsave_result(True, {})"
   start_new_connection: false
   time_between_retries: 10
   type: PythonSnippetService
@@ -2502,7 +2501,7 @@
   positions:
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       154, 108]
-    Workflow_of_workflows: [-97, -181]
+    Workflow_of_workflows: [-107, 174]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -3133,6 +3132,105 @@
   verify_ssl_certificate: false
   waiting_time: 0
 - color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: ''
+  last_modified: '2019-08-18 16:27:11.734978'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Variable Access Subworkflow: Access variable from snippet'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Subworkflow: Access Variable - Result from parent workflow': [178, -241]
+    Workflow_of_workflows: [3, -51]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  source_code: "result = {\r\n \"get_var\": get_var('iteration_devices', device=device.name),\r\
+    \n\"version\": get_result(\"Show version with multiprocessing\", device=device.name),\r\
+    \n\"napalm\": get_result(\"netmiko_check_no_vrf_napalm\", device=device.name)\r\
+    \n}\r\nsave_result(success=True, result=result)"
+  start_new_connection: false
+  time_between_retries: 10
+  type: PythonSnippetService
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show interface {{payload["value"]}}
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_targets: get_result("get_interfaces", device=device.name)["result"]["get_interfaces"]
+  last_modified: '2019-08-18 16:33:56.491650'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Variable Access Subworkflow: Access variables for iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Subworkflow: Access Variable - Result from parent workflow': [173, 128]
+  privileged_mode: false
+  push_to_git: false
+  python_query: get_var("loop_over", device=workflow_device.name)
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  shape: box
+  size: 40
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: NetmikoValidationService
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
   conversion_property: name
   creator: admin
   credentials: device
@@ -3266,104 +3364,5 @@
   type: IterationService
   user_provided_values: {}
   variable_name: value
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: ''
-  devices: []
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_targets: ''
-  last_modified: '2019-08-18 16:27:11.734978'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: 'Variable Access Subworkflow: Access variable from snippet'
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'Subworkflow: Access Variable - Result from parent workflow': [178, -241]
-    Workflow_of_workflows: [3, -51]
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  source_code: "result = {\r\n \"get_var\": get_var('iteration_devices', device=device.name),\r\
-    \n\"version\": get_result(\"Show version with multiprocessing\", device=device.name),\r\
-    \n\"napalm\": get_result(\"netmiko_check_no_vrf_napalm\", device=device.name)\r\
-    \n}\r\nsave_result(success=True, result=result)"
-  start_new_connection: false
-  time_between_retries: 10
-  type: PythonSnippetService
-  vendor: ''
-  waiting_time: 0
-- auto_find_prompt: true
-  color: '#D2E5FF'
-  command: show interface {{payload["value"]}}
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_targets: get_result("get_interfaces", device=device.name)["result"]["get_interfaces"]
-  last_modified: '2019-08-18 16:33:56.491650'
-  mail_recipient: ''
-  max_processes: 50
-  multiprocessing: false
-  name: 'Variable Access Subworkflow: Access variables for iteration'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'Subworkflow: Access Variable - Result from parent workflow': [173, 128]
-  privileged_mode: false
-  push_to_git: false
-  python_query: get_var("loop_over", device=workflow_device.name)
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: NetmikoValidationService
-  use_device_driver: true
-  validation_method: text
   vendor: ''
   waiting_time: 0

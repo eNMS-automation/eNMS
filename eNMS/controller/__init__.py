@@ -3,5 +3,5 @@ from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
 
 
-class Controller(AdministrationController, AutomationController, InventoryController):
+class App(AdministrationController, AutomationController, InventoryController):
     pass

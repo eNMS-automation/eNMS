@@ -1,3 +1,3 @@
-from eNMS.controller import Controller
+from eNMS.controller import App
 
-app = Controller()
+app = App()

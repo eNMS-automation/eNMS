@@ -8,7 +8,7 @@ from wtforms import (
 )
 from wtforms.widgets import TextArea
 
-from eNMS import controller
+from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import private_properties
@@ -20,7 +20,7 @@ from eNMS.properties.objects import (
 
 
 def configure_device_form(cls: BaseForm) -> BaseForm:
-    for property in controller.custom_properties:
+    for property in app.custom_properties:
         field = PasswordField if property in private_properties else StringField
         setattr(cls, property, field())
     return cls
@@ -55,7 +55,7 @@ class ConnectionForm(BaseForm):
     form_type = HiddenField(default="connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])
-        for property, values in controller.custom_properties.items()
+        for property, values in app.custom_properties.items()
         if values.get("is_address", False)
     ]
     address = SelectField(choices=address_choices)
@@ -88,10 +88,10 @@ class DeviceForm(ObjectForm):
     password = PasswordField("Password")
     enable_password = PasswordField("'Enable' Password")
     napalm_driver = SelectField(
-        "NAPALM Driver", choices=controller.NAPALM_DRIVERS, default="ios"
+        "NAPALM Driver", choices=app.NAPALM_DRIVERS, default="ios"
     )
     netmiko_driver = SelectField(
-        "Netmiko Driver", choices=controller.NETMIKO_DRIVERS, default="cisco_ios"
+        "Netmiko Driver", choices=app.NETMIKO_DRIVERS, default="cisco_ios"
     )
 
 

@@ -4,7 +4,7 @@ from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS import controller
+from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
@@ -25,8 +25,8 @@ class SlackNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        slack_client = SlackClient(run.token or controller.slack_token)
-        channel = run.sub(run.channel, locals()) or controller.slack_channel
+        slack_client = SlackClient(run.token or app.slack_token)
+        channel = run.sub(run.channel, locals()) or app.slack_channel
         run.log("info", f"Sending Slack notification on {channel}")
         result = slack_client.api_call(
             "chat.postMessage", channel=channel, text=run.sub(run.body, locals())

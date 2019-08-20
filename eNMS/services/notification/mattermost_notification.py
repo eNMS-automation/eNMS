@@ -5,7 +5,7 @@ from typing import Optional
 from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
-from eNMS import controller
+from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
@@ -25,11 +25,11 @@ class MattermostNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        channel = run.sub(run.channel, locals()) or controller.mattermost_channel
+        channel = run.sub(run.channel, locals()) or app.mattermost_channel
         run.log("info", f"Sending Mattermost notification on {channel}")
         result = post(
-            controller.mattermost_url,
-            verify=controller.mattermost_verify_certificate,
+            app.mattermost_url,
+            verify=app.mattermost_verify_certificate,
             data=dumps({"channel": channel, "text": run.sub(run.body, locals())}),
         )
         return {"success": True, "result": str(result)}

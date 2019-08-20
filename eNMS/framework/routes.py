@@ -22,7 +22,7 @@ from eNMS.database import Session
 from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
-from eNMS.forms.automation import ServiceTableForm
+
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
 from eNMS.properties.table import (
@@ -32,14 +32,15 @@ from eNMS.properties.table import (
 )
 
 
-def configure_routes(app: Flask, controller: Any) -> None:
+def configure_routes(flask_app: Flask, app: Any) -> None:
+    from eNMS.forms.automation import ServiceTableForm
     blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
     def monitor_requests(function: Callable) -> Callable:
         @wraps(function)
         def decorated_function(*args: Any, **kwargs: Any) -> Any:
             if not current_user.is_authenticated:
-                controller.log(
+                app.log(
                     "warning",
                     (
                         f"Unauthorized {request.method} request from "
@@ -65,7 +66,7 @@ def configure_routes(app: Flask, controller: Any) -> None:
     def login() -> Any:
         if request.method == "POST":
             try:
-                user = controller.authenticate_user(**request.form.to_dict())
+                user = app.authenticate_user(**request.form.to_dict())
                 if user:
                     login_user(user)
                     return redirect(url_for("blueprint.route", page="dashboard"))
@@ -77,9 +78,9 @@ def configure_routes(app: Flask, controller: Any) -> None:
         if not current_user.is_authenticated:
             login_form = LoginForm(request.form)
             authentication_methods = [("Local User",) * 2]
-            if controller.use_ldap:
+            if app.use_ldap:
                 authentication_methods.append(("LDAP Domain",) * 2)
-            if controller.use_tacacs:
+            if app.use_tacacs:
                 authentication_methods.append(("TACACS",) * 2)
             login_form.authentication_method.choices = authentication_methods
             return render_template("login.html", login_form=login_form)
@@ -181,7 +182,7 @@ def configure_routes(app: Flask, controller: Any) -> None:
     @login_required
     def view_job_results(id: int) -> str:
         result = fetch("Run", id=id).result().result
-        return f"<pre>{controller.str_dict(result)}</pre>"
+        return f"<pre>{app.str_dict(result)}</pre>"
 
     @blueprint.route("/download_configuration/<name>")
     @login_required
@@ -202,26 +203,26 @@ def configure_routes(app: Flask, controller: Any) -> None:
     @monitor_requests
     def route(page: str) -> Response:
         f, *args = page.split("/")
-        if f not in controller.valid_post_endpoints:
+        if f not in app.valid_post_endpoints:
             return jsonify({"error": "Invalid POST request."})
         form_type = request.form.get("form_type")
         if form_type:
             form = form_classes[form_type](request.form)
             if not form.validate_on_submit():
                 return jsonify({"invalid_form": True, **{"errors": form.errors}})
-            result = getattr(controller, f)(*args, **form_postprocessing(request.form))
+            result = getattr(app, f)(*args, **form_postprocessing(request.form))
         elif f == "filtering":
-            result = getattr(controller, f)(*args, request.form)
+            result = getattr(app, f)(*args, request.form)
         else:
-            result = getattr(controller, f)(*args)
+            result = getattr(app, f)(*args)
         try:
             Session.commit()
             return jsonify(result)
         except Exception as exc:
             raise exc
             Session.rollback()
-            if controller.config_mode == "Debug":
+            if app.config_mode == "Debug":
                 raise
             return jsonify({"error": handle_exception(str(exc))})
 
-    app.register_blueprint(blueprint)
+    flask_app.register_blueprint(blueprint)

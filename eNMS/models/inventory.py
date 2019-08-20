@@ -4,7 +4,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 from typing import Any, Dict, List, Union
 
-from eNMS import controller
+from eNMS import app
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (
@@ -53,7 +53,7 @@ CustomDevice: Any = type(
                 }[values["type"]],
                 default=values["default"],
             )
-            for property, values in controller.custom_properties.items()
+            for property, values in app.custom_properties.items()
         },
     },
 )

@@ -47,12 +47,12 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
         }
 
 
-def configure_events(controller: Any) -> None:
+def configure_events(app: Any) -> None:
     @event.listens_for(Base, "init", propagate=True)
     def log_instance_creation(target: Base, args: tuple, kwargs: dict) -> None:
         if "type" not in target.__dict__ or "log" in target.type:
             return
-        controller.log(
+        app.log(
             "info", f"CREATION: {target.__dict__['type']} '{kwargs['name']}'"
         )
 
@@ -61,7 +61,7 @@ def configure_events(controller: Any) -> None:
         mapper: Mapper, connection: Connection, target: Base
     ) -> None:
         name = getattr(target, "name", target.id)
-        controller.log("info", f"DELETION: {target.type} '{name}'")
+        app.log("info", f"DELETION: {target.type} '{name}'")
 
     @event.listens_for(Base, "before_update", propagate=True)
     def log_instance_update(
@@ -88,7 +88,7 @@ def configure_events(controller: Any) -> None:
             changelog.append(change)
         if changelog:
             name, changes = getattr(target, "name", target.id), " | ".join(changelog)
-            controller.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
+            app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
     @event.listens_for(Workflow.name, "set")
     def workflow_name_update(

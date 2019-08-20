@@ -6,7 +6,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from tarfile import open as open_tar
 from wtforms import BooleanField, HiddenField, SelectField
 
-from eNMS import controller
+from eNMS import app
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
@@ -30,9 +30,9 @@ class DatabaseBackupService(Service):
     __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
-        now = controller.strip_all(controller.get_time())
+        now = app.strip_all(app.get_time())
         source = Path.cwd() / "projects" / "migrations" / f"backup_{now}.tgz"
-        controller.migrate_export(
+        app.migrate_export(
             Path.cwd(), {"import_export_types": import_classes, "name": f"backup_{now}"}
         )
         with open_tar(source, "w:gz") as tar:

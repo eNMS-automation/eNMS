@@ -9,7 +9,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField
 
 from eNMS.controller.concurrency import run_job
-from eNMS import controller
+from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column
 from eNMS.database.functions import factory, fetch_all
@@ -41,42 +41,42 @@ class SwissArmyKnifeService(Service):
         recipients = payload["run"]["mail_recipient"]
         runtime = run.runtime.replace(".", "").replace(":", "")
         filename = f"results-{runtime}.txt"
-        controller.send_email(
+        app.send_email(
             f"{name} ({'PASS' if payload['results']['success'] else 'FAILED'})",
             payload["content"],
             recipients=recipients,
             filename=filename,
-            file_content=controller.str_dict(payload["results"]),
+            file_content=app.str_dict(payload["results"]),
         )
         return {"success": True}
 
     def slack_feedback_notification(self, run: "Run", payload: dict) -> dict:
-        slack_client = SlackClient(controller.slack_token)
+        slack_client = SlackClient(app.slack_token)
         result = slack_client.api_call(
             "chat.postMessage",
-            channel=controller.slack_channel,
-            text=controller.str_dict(payload["content"]),
+            channel=app.slack_channel,
+            text=app.str_dict(payload["content"]),
         )
         return {"success": True, "result": str(result)}
 
     def mattermost_feedback_notification(self, run: "Run", payload: dict) -> dict:
         post(
-            controller.mattermost_url,
-            verify=controller.mattermost_verify_certificate,
+            app.mattermost_url,
+            verify=app.mattermost_verify_certificate,
             data=dumps(
-                {"channel": controller.mattermost_channel, "text": payload["content"]}
+                {"channel": app.mattermost_channel, "text": payload["content"]}
             ),
         )
         return {"success": True}
 
     def cluster_monitoring(self, run: "Run", payload: dict) -> dict:
-        protocol = controller.cluster_scan_protocol
+        protocol = app.cluster_scan_protocol
         for instance in fetch_all("Instance"):
             factory(
                 "Instance",
                 **get(
                     f"{protocol}://{instance.ip_address}/rest/is_alive",
-                    timeout=controller.cluster_scan_timeout,
+                    timeout=app.cluster_scan_timeout,
                 ).json(),
             )
         return {"success": True}
@@ -92,7 +92,7 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def git_push_configurations(self, run: "Run", payload: dict) -> dict:
-        if controller.git_configurations:
+        if app.git_configurations:
             repo = Repo(Path.cwd() / "git" / "configurations")
             try:
                 repo.remotes.origin.pull()

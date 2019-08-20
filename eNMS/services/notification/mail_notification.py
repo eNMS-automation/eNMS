@@ -3,7 +3,7 @@ from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS import controller
+from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
@@ -25,7 +25,7 @@ class MailNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
-        controller.send_email(
+        app.send_email(
             run.sub(run.title, locals()),
             run.sub(run.body, locals()),
             sender=run.sender,

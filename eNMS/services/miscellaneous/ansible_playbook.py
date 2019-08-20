@@ -5,7 +5,7 @@ from traceback import format_exc
 from typing import Optional
 from wtforms import BooleanField, HiddenField
 
-from eNMS import controller
+from eNMS import app
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
@@ -57,7 +57,7 @@ class AnsiblePlaybookService(Service):
         run.log("info", f"Sending Ansible playbook: {safe_command}")
         try:
             result = check_output(
-                command + arguments, cwd=controller.path / "playbooks"
+                command + arguments, cwd=app.path / "playbooks"
             )
         except Exception:
             result = "\n".join(format_exc().splitlines())

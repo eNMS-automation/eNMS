@@ -12,12 +12,12 @@ from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf
 
 
-def create_controller_resources(controller: Any) -> Dict[str, Resource]:
+def create_app_resources(app: Any) -> Dict[str, Resource]:
     endpoints = {}
-    for endpoint in controller.valid_rest_endpoints:
+    for endpoint in app.valid_rest_endpoints:
 
         def post(_: Any, ep: str = endpoint) -> str:
-            getattr(controller, ep)()
+            getattr(app, ep)()
             Session.commit()
             return f"Endpoint {ep} successfully executed."
 
@@ -27,7 +27,7 @@ def create_controller_resources(controller: Any) -> Dict[str, Resource]:
     return endpoints
 
 
-def create_rest_endpoints(api: Api, controller: Any) -> None:
+def create_rest_endpoints(api: Api, app: Any) -> None:
     class CreatePool(Resource):
         decorators = [auth.login_required]
 
@@ -54,7 +54,7 @@ def create_rest_endpoints(api: Api, controller: Any) -> None:
         def get(self) -> dict:
             return {
                 "name": getnode(),
-                "cluster_id": controller.cluster_id,
+                "cluster_id": app.cluster_id,
                 "cpu_load": cpu_percent(),
             }
 
@@ -102,7 +102,7 @@ def create_rest_endpoints(api: Api, controller: Any) -> None:
         def post(self, cls: str) -> dict:
             try:
                 data = request.get_json(force=True)
-                object_data = controller.objectify(cls.capitalize(), data)
+                object_data = app.objectify(cls.capitalize(), data)
                 result = factory(cls, **object_data).serialized
                 Session.commit()
                 return result
@@ -114,7 +114,7 @@ def create_rest_endpoints(api: Api, controller: Any) -> None:
 
         def post(self, direction: str) -> Optional[str]:
             kwargs = request.get_json(force=True)
-            return getattr(controller, f"migration_{direction}")(**kwargs)
+            return getattr(app, f"migration_{direction}")(**kwargs)
 
     class RunJob(Resource):
         decorators = [auth.login_required]
@@ -150,9 +150,9 @@ def create_rest_endpoints(api: Api, controller: Any) -> None:
                 return str(e)
             if devices or pools:
                 data.update({"devices": devices, "pools": pools})
-            data["runtime"] = runtime = controller.get_time()
+            data["runtime"] = runtime = app.get_time()
             if handle_asynchronously:
-                controller.scheduler.add_job(
+                app.scheduler.add_job(
                     id=runtime,
                     func=run_job,
                     run_date=datetime.now(),
@@ -169,14 +169,14 @@ def create_rest_endpoints(api: Api, controller: Any) -> None:
 
         def post(self, direction: str) -> str:
             if direction == "import":
-                return controller.import_topology(
+                return app.import_topology(
                     **{
                         "replace": request.form["replace"] == "True",
                         "file": request.files["file"],
                     }
                 )
             else:
-                controller.export_topology(**request.get_json(force=True))
+                app.export_topology(**request.get_json(force=True))
                 return "Topology Export successfully executed."
 
     api.add_resource(CreatePool, "/rest/create_pool")
@@ -191,8 +191,8 @@ def create_rest_endpoints(api: Api, controller: Any) -> None:
     api.add_resource(Topology, "/rest/topology/<string:direction>")
 
 
-def configure_rest_api(app: Flask, controller: object) -> None:
-    api = Api(app, decorators=[csrf.exempt])
-    for endpoint, resource in create_controller_resources(controller).items():
+def configure_rest_api(flask_app: Flask, app: object) -> None:
+    api = Api(flask_app, decorators=[csrf.exempt])
+    for endpoint, resource in create_app_resources(app).items():
         api.add_resource(resource, f"/rest/{endpoint}")
-    create_rest_endpoints(api, controller)
+    create_rest_endpoints(api, app)

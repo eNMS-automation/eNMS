@@ -1,5 +1,5 @@
 from pathlib import Path
 
-from eNMS import controller
+from eNMS import app as controller
 
 app = controller.init_app(Path.cwd())

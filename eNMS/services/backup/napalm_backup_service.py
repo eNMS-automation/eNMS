@@ -4,7 +4,7 @@ from ruamel import yaml
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, IntegerField
 
-from eNMS import controller
+from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NapalmForm
@@ -44,7 +44,7 @@ class NapalmBackupService(Service):
             path_device_config.mkdir(parents=True, exist_ok=True)
             napalm_connection = run.napalm_connection(device)
             run.log("info", f"Fetching configuration on {device.name} (Napalm)")
-            config = controller.str_dict(napalm_connection.get_config())
+            config = app.str_dict(napalm_connection.get_config())
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
             if device.configurations:

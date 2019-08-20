@@ -1,7 +1,7 @@
 from wtforms import BooleanField, FloatField, HiddenField, IntegerField, SelectField
 from wtforms.widgets import TextArea
 
-from eNMS import controller
+from eNMS import app
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import DictField, DictSubstitutionField, SubstitutionField
 
@@ -94,7 +94,7 @@ class ValidationForm(BaseForm):
 class NetmikoForm(BaseForm):
     form_type = HiddenField(default="netmiko")
     abstract_service = True
-    driver = SelectField(choices=controller.NETMIKO_DRIVERS)
+    driver = SelectField(choices=app.NETMIKO_DRIVERS)
     use_device_driver = BooleanField(default=True)
     privileged_mode = BooleanField("Privileged mode (run in enable mode or as root)")
     fast_cli = BooleanField()
@@ -115,7 +115,7 @@ class NetmikoForm(BaseForm):
 class NapalmForm(BaseForm):
     form_type = HiddenField(default="napalm")
     abstract_service = True
-    driver = SelectField(choices=controller.NAPALM_DRIVERS)
+    driver = SelectField(choices=app.NAPALM_DRIVERS)
     use_device_driver = BooleanField(default=True)
     optional_args = DictField()
     group = ["driver", "use_device_driver", "optional_args"]

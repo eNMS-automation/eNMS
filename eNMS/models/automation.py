@@ -24,7 +24,7 @@ from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
 from eNMS.controller.concurrency import get_device_result
-from eNMS import controller
+from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import convert_value, factory, fetch
@@ -91,7 +91,7 @@ class Run(AbstractBase):
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs: Any) -> None:
-        self.runtime = kwargs.get("runtime") or controller.get_time()  # type: ignore
+        self.runtime = kwargs.get("runtime") or app.get_time()  # type: ignore
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
@@ -129,7 +129,7 @@ class Run(AbstractBase):
     @property
     def progress(self) -> str:
         if self.status == "Running":
-            progress = controller.run_db[self.runtime]
+            progress = app.run_db[self.runtime]
             try:
                 return (
                     f"{progress['completed']}/{progress['number_of_targets']}"
@@ -141,8 +141,8 @@ class Run(AbstractBase):
             return "N/A"
 
     def netmiko_connection(self, device: "Device") -> ConnectHandler:
-        if self.parent_runtime in controller.connections_cache["netmiko"]:
-            parent_connection = controller.connections_cache["netmiko"].get(
+        if self.parent_runtime in app.connections_cache["netmiko"]:
+            parent_connection = app.connections_cache["netmiko"].get(
                 self.parent_runtime
             )
             if parent_connection and device.name in parent_connection:
@@ -172,14 +172,14 @@ class Run(AbstractBase):
         )
         if self.privileged_mode:
             netmiko_connection.enable()
-        controller.connections_cache["netmiko"][self.parent_runtime][
+        app.connections_cache["netmiko"][self.parent_runtime][
             device.name
         ] = netmiko_connection
         return netmiko_connection
 
     def napalm_connection(self, device: "Device") -> NetworkDriver:
-        if self.parent_runtime in controller.connections_cache["napalm"]:
-            parent_connection = controller.connections_cache["napalm"].get(
+        if self.parent_runtime in app.connections_cache["napalm"]:
+            parent_connection = app.connections_cache["napalm"].get(
                 self.parent_runtime
             )
             if parent_connection and device.name in parent_connection:
@@ -206,18 +206,18 @@ class Run(AbstractBase):
             optional_args=optional_args,
         )
         napalm_connection.open()
-        controller.connections_cache["napalm"][self.parent_runtime][
+        app.connections_cache["napalm"][self.parent_runtime][
             device.name
         ] = napalm_connection
         return napalm_connection
 
     def get_state(self, property: str) -> Any:
-        return controller.run_db[self.runtime][property]
+        return app.run_db[self.runtime][property]
 
     def set_state(self, **kwargs: Any) -> None:
-        controller.run_db[self.runtime].update(**kwargs)
+        app.run_db[self.runtime].update(**kwargs)
         if self.workflow:
-            controller.run_db[self.parent_runtime]["jobs"][self.job.id].update(**kwargs)
+            app.run_db[self.parent_runtime]["jobs"][self.job.id].update(**kwargs)
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
@@ -244,7 +244,7 @@ class Run(AbstractBase):
 
     def close_connection_cache(self) -> None:
         for library in ("netmiko", "napalm"):
-            connections = controller.connections_cache[library].pop(self.runtime, None)
+            connections = app.connections_cache[library].pop(self.runtime, None)
             if not connections:
                 continue
             for device, conn in connections.items():
@@ -255,7 +255,7 @@ class Run(AbstractBase):
         try:
             self.log("info", f"{self.job.type} {self.job.name}: Starting")
             self.set_state(status="Running", type=self.job.type)
-            controller.job_db[self.job.id]["runs"] += 1
+            app.job_db[self.job.id]["runs"] += 1
             Session.commit()
             results = self.job.build_results(self, payload or self.initial_payload)
             self.close_connection_cache()
@@ -273,10 +273,10 @@ class Run(AbstractBase):
             status = f"Completed ({'success' if results['success'] else 'failure'})"
             self.status = status  # type: ignore
             self.set_state(status=status)
-            controller.job_db[self.job.id]["runs"] -= 1
-            results["endtime"] = self.endtime = controller.get_time()  # type: ignore
-            results["state"] = controller.run_db.pop(self.runtime)
-            results["logs"] = controller.run_logs.pop(self.runtime)  # type: ignore
+            app.job_db[self.job.id]["runs"] -= 1
+            results["endtime"] = self.endtime = app.get_time()  # type: ignore
+            results["state"] = app.run_db.pop(self.runtime)
+            results["logs"] = app.run_logs.pop(self.runtime)  # type: ignore
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {
@@ -300,7 +300,7 @@ class Run(AbstractBase):
         self.log(
             "info", f"Running {self.job.type}{f' on {device.name}' if device else ''}"
         )
-        results: Dict[Any, Any] = {"runtime": controller.get_time()}
+        results: Dict[Any, Any] = {"runtime": app.get_time()}
         try:
             args = (device,) if device else ()
             if self.job.iteration_targets:
@@ -331,10 +331,10 @@ class Run(AbstractBase):
         return results
 
     def log(self, severity: str, log: str) -> None:
-        log = f"{controller.get_time()} - {severity} - {log}"
-        controller.run_logs[self.runtime].append(log)
+        log = f"{app.get_time()} - {severity} - {log}"
+        app.run_logs[self.runtime].append(log)
         if self.workflow:
-            controller.run_logs[self.parent_runtime].append(log)
+            app.run_logs[self.parent_runtime].append(log)
 
     def run_notification(self, results: dict) -> List[str]:
         notification = self.notification_header.splitlines()
@@ -365,7 +365,7 @@ class Run(AbstractBase):
         notification.extend(self.run_notification(results))
         if self.include_link_in_summary:
             notification.append(
-                f"Results: {controller.server_addr}/view_job_results/{self.id}"
+                f"Results: {app.server_addr}/view_job_results/{self.id}"
             )
         notification_payload = {
             "job": self.job.get_properties(),
@@ -380,7 +380,7 @@ class Run(AbstractBase):
 
     def get_credentials(self, device: "Device") -> Tuple:
         return (
-            controller.get_user_credentials()
+            app.get_user_credentials()
             if self.credentials == "user"
             else (device.username, device.password)
             if self.credentials == "device"
@@ -486,7 +486,7 @@ class Run(AbstractBase):
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
         var_editor = partial(_self.payload_helper, locals.get("payload", {}))
         return {
-            "config": controller.custom_config,
+            "config": app.custom_config,
             "get_var": var_editor,
             "get_result": _self.get_result,
             "workflow": _self.workflow,
@@ -580,7 +580,7 @@ class Job(AbstractBase):
 
     @property
     def filename(self) -> str:
-        return controller.strip_all(self.name)
+        return app.strip_all(self.name)
 
     def adjacent_jobs(
         self, workflow: "Workflow", direction: str, subtype: str
@@ -592,7 +592,7 @@ class Job(AbstractBase):
     def git_push(self, results: dict) -> None:
         path_git_folder = Path.cwd() / "git" / "automation"
         with open(path_git_folder / self.name, "w") as file:
-            file.write(controller.str_dict(results))
+            file.write(app.str_dict(results))
         repo = Repo(str(path_git_folder))
         try:
             repo.git.add(A=True)
@@ -690,7 +690,7 @@ class Service(Job):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            "Running" if controller.job_db[self.id]["runs"] else "Idle",
+            "Running" if app.job_db[self.id]["runs"] else "Idle",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogsPanel({self.row_properties})">
             </i>Logs</a></button>""",
@@ -743,7 +743,7 @@ class Workflow(Job):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            "Running" if controller.job_db[self.id]["runs"] else "Idle",
+            "Running" if app.job_db[self.id]["runs"] else "Idle",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogsPanel('{self.id}', '{self.name}', '{self.type}')">
             </i>Logs</a></button>""",
@@ -807,11 +807,11 @@ class Workflow(Job):
                 continue
             for successor, edge in job.adjacent_jobs(self, "destination", edge_type):
                 allowed_devices[successor.name] |= devices
-                controller.run_db[runtime]["edges"][edge.id] = len(devices)
+                app.run_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
 
     def build_results(self, run: "Run", payload: dict) -> dict:
-        controller.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
+        app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()
@@ -829,7 +829,7 @@ class Workflow(Job):
             ):
                 continue
             visited.add(job)
-            controller.run_db[run.runtime]["current_job"] = job.get_properties()
+            app.run_db[run.runtime]["current_job"] = job.get_properties()
             skip_job = False
             if job.skip_python_query:
                 skip_job = run.eval(job.skip_python_query, **locals())
@@ -873,7 +873,7 @@ class Workflow(Job):
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 Session.commit()
                 job_results = job_run.run(payload)
-            controller.run_db[run.runtime]["jobs"][job.id]["success"] = job_results[
+            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results[
                 "success"
             ]
             if run.use_workflow_targets:

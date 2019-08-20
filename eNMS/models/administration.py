@@ -3,7 +3,6 @@ from sqlalchemy import Boolean, Float, Integer
 from sqlalchemy.orm import relationship
 from typing import Any, List
 
-
 from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.database.associations import pool_user_table
 from eNMS.database.base import AbstractBase

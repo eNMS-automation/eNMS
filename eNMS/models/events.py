@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship
 from typing import Any, List, Optional, Tuple
 
 from eNMS.controller.concurrency import run_job
-from eNMS import controller
+from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.associations import (
@@ -46,7 +46,7 @@ class Task(AbstractBase):
 
     def __init__(self, **kwargs: Any) -> None:
         super().update(**kwargs)
-        self.creation_time = controller.get_time()  # type: ignore
+        self.creation_time = app.get_time()  # type: ignore
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
         if self.is_active:
             self.schedule()
@@ -82,14 +82,14 @@ class Task(AbstractBase):
 
     @property
     def next_run_time(self) -> Optional[str]:
-        job = controller.scheduler.get_job(self.aps_job_id)
+        job = app.scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
         return None
 
     @property
     def time_before_next_run(self) -> Optional[str]:
-        job = controller.scheduler.get_job(self.aps_job_id)
+        job = app.scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
             hours, remainder = divmod(delta.seconds, 3600)
@@ -107,19 +107,19 @@ class Task(AbstractBase):
         return self.aps_conversion(date) if date else None
 
     def pause(self) -> None:
-        controller.scheduler.pause_job(self.aps_job_id)
+        app.scheduler.pause_job(self.aps_job_id)
         self.is_active = False  # type: ignore
         Session.commit()
 
     def resume(self) -> None:
         self.schedule()
-        controller.scheduler.resume_job(self.aps_job_id)
+        app.scheduler.resume_job(self.aps_job_id)
         self.is_active = True  # type: ignore
         Session.commit()
 
     def delete_task(self) -> None:
-        if controller.scheduler.get_job(self.aps_job_id):
-            controller.scheduler.remove_job(self.aps_job_id)
+        if app.scheduler.get_job(self.aps_job_id):
+            app.scheduler.remove_job(self.aps_job_id)
         Session.commit()
 
     def run_properties(self) -> dict:
@@ -174,10 +174,10 @@ class Task(AbstractBase):
 
     def schedule(self) -> None:
         default, trigger = self.kwargs()
-        if not controller.scheduler.get_job(self.aps_job_id):
-            controller.scheduler.add_job(**{**default, **trigger})
+        if not app.scheduler.get_job(self.aps_job_id):
+            app.scheduler.add_job(**{**default, **trigger})
         else:
-            controller.scheduler.reschedule_job(default.pop("id"), **trigger)
+            app.scheduler.reschedule_job(default.pop("id"), **trigger)
 
 
 class Baselog(AbstractBase):

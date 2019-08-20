@@ -238,14 +238,15 @@ class BaseController:
         with open(self.path / "package.json") as package_file:
             self.version = load(package_file)["version"]
 
-    def configure_database(self, app: Flask) -> None:
+    def configure_database(self, flask_app: Flask) -> None:
+        from eNMS.models.administration import User
         Base.metadata.create_all(bind=engine)
         from eNMS.database.events import configure_events
 
         configure_events(self)
         configure_mappers()
 
-        @app.before_first_request
+        @flask_app.before_first_request
         def initialize_database() -> None:
             self.clean_database()
             if not fetch("User", allow_none=True, name="admin"):

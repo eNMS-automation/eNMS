@@ -2,7 +2,7 @@ from ast import parse
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS import controller
+from eNMS import app
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     DictField,
@@ -72,7 +72,7 @@ class JobForm(BaseForm):
             self.send_notification.data
             and self.send_notification_method.data == "mail_feedback_notification"
             and not self.mail_recipient.data
-            and not controller.mail_recipients
+            and not app.mail_recipients
         )
         bracket_error = False
         for query_field in self.query_fields:

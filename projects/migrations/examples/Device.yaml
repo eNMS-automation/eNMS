@@ -72,9 +72,9 @@
   icon: router
   ip_address: 192.168.105.5
   last_failure: Never
-  last_runtime: 6.00767
+  last_runtime: 5.781748
   last_status: Success
-  last_update: '2019-08-14 17:48:49.697117'
+  last_update: '2019-08-20 19:13:44.739071'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'

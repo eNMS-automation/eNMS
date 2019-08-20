@@ -30,6 +30,7 @@
     Netmiko prompts: ['-279', '-158']
     Netmiko_VRF_workflow: ['-200', '0']
     'Payload Workflow: Payload Extraction with operations': [-516, -120]
+    Subworkflow of Workflow: [-161, -11]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with separate failure - success path: [-239, -32]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
@@ -85,6 +86,7 @@
     Netmiko prompts: ['634', '187']
     Netmiko_VRF_workflow: ['200', '0']
     'Payload Workflow: Payload Extraction with operations': [527, -97]
+    Subworkflow of Workflow: [500, 0]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]

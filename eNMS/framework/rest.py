@@ -12,7 +12,7 @@ from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf
 
 
-def create_controller_resources(controller) -> Dict[str, Resource]:
+def create_controller_resources(controller: Any) -> Dict[str, Resource]:
     endpoints = {}
     for endpoint in controller.valid_rest_endpoints:
 
@@ -27,7 +27,7 @@ def create_controller_resources(controller) -> Dict[str, Resource]:
     return endpoints
 
 
-def create_rest_endpoints(api, controller):
+def create_rest_endpoints(api: Api, controller: Any) -> None:
     class CreatePool(Resource):
         decorators = [auth.login_required]
 
@@ -191,7 +191,7 @@ def create_rest_endpoints(api, controller):
     api.add_resource(Topology, "/rest/topology/<string:direction>")
 
 
-def configure_rest_api(app: Flask, controller) -> None:
+def configure_rest_api(app: Flask, controller: object) -> None:
     api = Api(app, decorators=[csrf.exempt])
     for endpoint, resource in create_controller_resources(controller).items():
         api.add_resource(resource, f"/rest/{endpoint}")

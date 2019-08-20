@@ -54,7 +54,7 @@ class BaseController:
     cluster_scan_subnet = environ.get("CLUSER_SCAN_SUBNET", "192.168.105.0/24")
     cluster_scan_protocol = environ.get("CLUSTER_SCAN_PROTOCOL", "http")
     cluster_scan_timeout = environ.get("CLUSTER_SCAN_TIMEOUT", 0.05)
-    config_mode = environ.get("ENMS_CONFIG_MODE", "Debug")
+    config_mode = environ.get("CONFIG_MODE", "Debug")
     custom_code_path = environ.get("CUSTOM_CODE_PATH")
     default_longitude = environ.get("DEFAULT_LONGITUDE", -96.0)
     default_latitude = environ.get("DEFAULT_LATITUDE", 33.0)
@@ -66,7 +66,6 @@ class BaseController:
     )
     create_examples = int(environ.get("CREATE_EXAMPLES", True))
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
-    enms_config_mode = environ.get("ENMS_CONFIG_MODE", "Debug")
     enms_log_level = environ.get("ENMS_LOG_LEVEL", "DEBUG")
     enms_server_addr = environ.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
     git_automation = environ.get("GIT_AUTOMATION")
@@ -281,7 +280,7 @@ class BaseController:
 
     def update_credentials(self) -> None:
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
-            self.topology_import(file)
+            self.topology_import(file)  # type: ignore
 
     def clean_database(self) -> None:
         for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
@@ -294,15 +293,17 @@ class BaseController:
         self.create_admin_user()
         Session.commit()
         if self.create_examples:
-            self.migration_import(name="examples", import_export_types=import_classes)
+            self.migration_import(name="examples", import_export_types=import_classes)  # type: ignore
             self.update_credentials()
         else:
-            self.migration_import(name="default", import_export_types=import_classes)
+            self.migration_import(name="default", import_export_types=import_classes)  # type: ignore
         self.get_git_content()
         Session.commit()
 
-    def init_app(self, path: Path) -> None:
+    def init_app(self, path: Path, config_mode: Optional[str] = None) -> Flask:
         self.path = path
+        if config_mode:
+            self.config_mode = mode
         self.init_services()
         app = create_app(self)
         self.configure_database(app)

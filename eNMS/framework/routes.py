@@ -2,6 +2,7 @@ from flask import (
     abort,
     Blueprint,
     current_app,
+    Flask,
     jsonify,
     redirect,
     render_template,
@@ -31,7 +32,7 @@ from eNMS.properties.table import (
 )
 
 
-def configure_routes(app, controller):
+def configure_routes(app: Flask, controller: Any) -> None:
     blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
     def monitor_requests(function: Callable) -> Callable:
@@ -219,7 +220,7 @@ def configure_routes(app, controller):
         except Exception as exc:
             raise exc
             Session.rollback()
-            if controller.enms_config_mode == "Debug":
+            if controller.config_mode == "Debug":
                 raise
             return jsonify({"error": handle_exception(str(exc))})
 

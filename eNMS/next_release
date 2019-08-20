@@ -1,3 +1,5 @@
 - Re-add "Workflow Restartability" window when clicking on a job.
 
 - Cascade deletion of runs and results when jobs / devices are deleted.
+
+- change ENMS_CONFIG_MODE to CONFIG_MODE

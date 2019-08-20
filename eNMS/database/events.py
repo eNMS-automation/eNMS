@@ -47,7 +47,7 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
         }
 
 
-def configure_events(controller) -> None:
+def configure_events(controller: Any) -> None:
     @event.listens_for(Base, "init", propagate=True)
     def log_instance_creation(target: Base, args: tuple, kwargs: dict) -> None:
         if "type" not in target.__dict__ or "log" in target.type:

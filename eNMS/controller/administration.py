@@ -72,7 +72,7 @@ class AdministrationController(BaseController):
             for attr in ("status", "cpu_load")
         }
 
-    def migration_export(self, **kwargs: Union[list, str]) -> None:
+    def migration_export(self, **kwargs: Any) -> None:
         for cls_name in kwargs["import_export_types"]:
             path = self.path / "projects" / "migrations" / kwargs["name"]
             if not exists(path):

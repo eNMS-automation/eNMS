@@ -30,7 +30,7 @@ def configure_login_manager(app: Flask) -> None:
         return fetch("User", allow_none=True, name=request.form.get("name"))
 
 
-def configure_context_processor(app: Flask, controller) -> None:
+def configure_context_processor(app: Flask, controller: Any) -> None:
     @app.context_processor
     def inject_properties() -> dict:
         return {
@@ -67,7 +67,7 @@ def configure_authentication() -> None:
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app(controller) -> Flask:
+def create_app(controller: Any) -> Flask:
     app = Flask(__name__, static_folder=controller.path / "eNMS" / "static")
     config = config_mapper[controller.config_mode.capitalize()]
     app.config.from_object(config)  # type: ignore

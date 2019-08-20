@@ -1,10 +1,8 @@
 from flask import Flask, jsonify, make_response, render_template
 from flask.wrappers import Request, Response
 from itertools import chain
-from pathlib import Path
 from typing import Any, Tuple
 
-from eNMS import controller
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties
 from eNMS.framework.cli import configure_cli

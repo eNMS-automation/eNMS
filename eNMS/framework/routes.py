@@ -51,17 +51,14 @@ def configure_routes(app, controller):
 
         return decorated_function
 
-
     @blueprint.route("/")
     def site_root() -> Response:
         return redirect(url_for("blueprint.route", page="login"))
-
 
     @blueprint.route("/<path:_>")
     @monitor_requests
     def get_requests_sink(_: str) -> Response:
         abort(404)
-
 
     @blueprint.route("/login", methods=["GET", "POST"])
     def login() -> Any:
@@ -87,13 +84,11 @@ def configure_routes(app, controller):
             return render_template("login.html", login_form=login_form)
         return redirect(url_for("blueprint.route", page="dashboard"))
 
-
     @blueprint.route("/logout")
     @monitor_requests
     def logout() -> Response:
         logout_user()
         return redirect(url_for("blueprint.route", page="login"))
-
 
     @blueprint.route("/administration")
     @monitor_requests
@@ -106,7 +101,6 @@ def configure_routes(app, controller):
             },
         )
 
-
     @blueprint.route("/dashboard")
     @monitor_requests
     def dashboard() -> str:
@@ -114,7 +108,6 @@ def configure_routes(app, controller):
             f"pages/dashboard.html",
             **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
         )
-
 
     @blueprint.route("/table/<table_type>")
     @monitor_requests
@@ -136,14 +129,12 @@ def configure_routes(app, controller):
             kwargs["service_table_form"] = service_table_form
         return render_template(f"pages/table.html", **kwargs)
 
-
     @blueprint.route("/view/<view_type>")
     @monitor_requests
     def view(view_type: str) -> str:
         return render_template(
             f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
         )
-
 
     @blueprint.route("/workflow_builder")
     @monitor_requests
@@ -164,7 +155,6 @@ def configure_routes(app, controller):
             },
         )
 
-
     @blueprint.route("/calendar/<calendar_type>")
     @monitor_requests
     def calendar(calendar_type: str) -> str:
@@ -172,7 +162,6 @@ def configure_routes(app, controller):
             f"pages/calendar.html",
             **{"calendar_type": calendar_type, "endpoint": "calendar"},
         )
-
 
     @blueprint.route("/form/<form_type>")
     @monitor_requests
@@ -187,13 +176,11 @@ def configure_routes(app, controller):
             },
         )
 
-
     @blueprint.route("/view_job_results/<int:id>")
     @login_required
     def view_job_results(id: int) -> str:
         result = fetch("Run", id=id).result().result
         return f"<pre>{controller.str_dict(result)}</pre>"
-
 
     @blueprint.route("/download_configuration/<name>")
     @login_required
@@ -208,7 +195,6 @@ def configure_routes(app, controller):
             )
         except FileNotFoundError:
             return jsonify("No configuration stored")
-
 
     @blueprint.route("/", methods=["POST"])
     @blueprint.route("/<path:page>", methods=["POST"])

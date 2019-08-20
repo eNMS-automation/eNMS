@@ -36,10 +36,7 @@ from eNMS.properties.diagram import (
     type_to_diagram_properties,
 )
 from eNMS.properties.table import filtering_properties, table_properties
-from eNMS.properties.objects import (
-    device_properties,
-    pool_device_properties,
-)
+from eNMS.properties.objects import device_properties, pool_device_properties
 from eNMS.controller.syslog import SyslogServer
 
 

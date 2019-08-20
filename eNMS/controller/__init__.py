@@ -146,6 +146,7 @@ class Controller(AdministrationController, AutomationController, InventoryContro
     def configure_database(self, app: Flask) -> None:
         Base.metadata.create_all(bind=engine)
         from eNMS.database.events import configure_events
+
         configure_events(self)
         configure_mappers()
 

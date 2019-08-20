@@ -212,10 +212,10 @@
 - {destination: 'Variable Access Subworkflow: Access variables for iteration', name: 83-success:84->85,
   source: 'Variable Access Subworkflow: Access variable from snippet', subtype: success,
   workflow: 'Subworkflow: Access Variable - Result from parent workflow'}
-- {destination: End, name: 83-failure:85->2, source: 'Variable Access Subworkflow:
-    Access variables for iteration', subtype: failure, workflow: 'Subworkflow: Access
+- {destination: payload_transfer_workflow, name: 76-success:71->73, source: Netmiko_VRF_workflow,
+  subtype: success, workflow: Workflow_of_workflows}
+- {destination: End, name: 85-success:66->2, source: 'Variable Access Subworkflow:
+    Access variables for iteration', subtype: success, workflow: 'Subworkflow: Access
     Variable - Result from parent workflow'}
 - {destination: Netmiko_VRF_workflow, name: 76-success:26->71, source: add_devices_to_payload,
-  subtype: success, workflow: Workflow_of_workflows}
-- {destination: payload_transfer_workflow, name: 76-success:71->73, source: Netmiko_VRF_workflow,
   subtype: success, workflow: Workflow_of_workflows}

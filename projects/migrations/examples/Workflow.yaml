@@ -255,7 +255,7 @@
   jobs: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
     'Subworkflow: Access Variable - Result from parent workflow', Show version with
       multiprocessing, Netmiko_VRF_workflow]
-  last_modified: '2019-08-20 18:17:11.899925'
+  last_modified: '2019-08-20 18:46:28.383532'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -620,7 +620,7 @@
   iteration_targets: ''
   jobs: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
     'Variable Access Subworkflow: Access variables for iteration']
-  last_modified: '2019-08-18 16:35:21.537695'
+  last_modified: '2019-08-20 18:46:19.926704'
   mail_recipient: ''
   name: 'Subworkflow: Access Variable - Result from parent workflow'
   notification_header: ''

@@ -785,10 +785,10 @@ class Workflow(Job):
         failed_devices, passed_devices = set(), set()
         skip_job = results["success"] == "skipped"
         if (job.type == "Workflow" or job.has_targets) and not skip_job:
-            if job.type == "Workflow":
-                devices = results.get("devices", {})
+            if "devices" in results["results"]:
+                devices = results["results"]["devices"]
             else:
-                devices = results["results"].get("devices", {})
+                devices = results.get("devices", {})
             for name, device_results in devices.items():
                 if device_results["success"]:
                     passed_devices.add(fetch("Device", name=name))

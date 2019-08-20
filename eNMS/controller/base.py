@@ -43,7 +43,11 @@ from eNMS.properties.diagram import (
     type_to_diagram_properties,
 )
 from eNMS.properties.table import filtering_properties, table_properties
-from eNMS.properties.objects import device_properties, device_icons, pool_device_properties
+from eNMS.properties.objects import (
+    device_properties,
+    device_icons,
+    pool_device_properties,
+)
 from eNMS.controller.syslog import SyslogServer
 
 
@@ -66,8 +70,8 @@ class BaseController:
     )
     create_examples = int(environ.get("CREATE_EXAMPLES", True))
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
-    enms_log_level = environ.get("ENMS_LOG_LEVEL", "DEBUG")
-    enms_server_addr = environ.get("ENMS_SERVER_ADDR", "http://SERVER_IP")
+    log_level = environ.get("LOG_LEVEL", "DEBUG")
+    server_addr = environ.get("SERVER_ADDR", "http://SERVER_IP")
     git_automation = environ.get("GIT_AUTOMATION")
     git_configurations = environ.get("GIT_CONFIGURATIONS")
     gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
@@ -293,17 +297,21 @@ class BaseController:
         self.create_admin_user()
         Session.commit()
         if self.create_examples:
-            self.migration_import(name="examples", import_export_types=import_classes)  # type: ignore
+            self.migration_import(
+                name="examples", import_export_types=import_classes
+            )  # type: ignore
             self.update_credentials()
         else:
-            self.migration_import(name="default", import_export_types=import_classes)  # type: ignore
+            self.migration_import(
+                name="default", import_export_types=import_classes
+            )  # type: ignore
         self.get_git_content()
         Session.commit()
 
     def init_app(self, path: Path, config_mode: Optional[str] = None) -> Flask:
         self.path = path
         if config_mode:
-            self.config_mode = mode
+            self.config_mode = config_mode
         self.init_services()
         app = create_app(self)
         self.configure_database(app)
@@ -380,7 +388,7 @@ class BaseController:
 
     def init_logs(self) -> None:
         basicConfig(
-            level=getattr(import_module("logging"), self.enms_log_level),
+            level=getattr(import_module("logging"), self.log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[

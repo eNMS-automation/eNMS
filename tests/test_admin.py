@@ -1,6 +1,6 @@
 from flask.testing import FlaskClient
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database.functions import fetch, fetch_all
 
 from tests.conftest import check_pages

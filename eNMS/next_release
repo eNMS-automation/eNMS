@@ -2,4 +2,7 @@
 
 - Cascade deletion of runs and results when jobs / devices are deleted.
 
-- change ENMS_CONFIG_MODE to CONFIG_MODE
+- change env variables name:
+* ENMS_CONFIG_MODE -> CONFIG_MODE
+* ENMS_LOG_LEVEL -> LOG_LEVEL
+* ENMS_SERVER_ADDR -> SERVER_ADDR

@@ -1,7 +1,7 @@
 from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.controller import controller
+from eNMS import controller
 from eNMS.database import Session
 from eNMS.database.functions import fetch_all
 

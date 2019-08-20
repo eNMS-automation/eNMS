@@ -57,7 +57,7 @@ class InventoryController(BaseController):
             "device": device.name,
             "port": port,
             "redirection": self.gotty_port_redirection,
-            "server_addr": self.enms_server_addr,
+            "server_addr": self.server_addr,
         }
 
     def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:

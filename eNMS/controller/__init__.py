@@ -1,10 +1,21 @@
+from flask import Flask
+from json import load
 from pathlib import Path
+from simplekml import Color, Style
+from sqlalchemy.orm import configure_mappers
+from sys import path as sys_path
+from typing import Dict
 from uuid import getnode
 
 from eNMS.controller.administration import AdministrationController
 from eNMS.controller.automation import AutomationController
 from eNMS.controller.inventory import InventoryController
+from eNMS.database import Base, engine, Session
+from eNMS.database.functions import factory, fetch
 from eNMS.framework import create_app
+from eNMS.models import models, model_properties
+from eNMS.properties.database import import_classes
+from eNMS.properties.objects import device_icons
 
 
 class Controller(AdministrationController, AutomationController, InventoryController):
@@ -118,6 +129,71 @@ class Controller(AdministrationController, AutomationController, InventoryContro
             self.init_syslog_server()
         if self.custom_code_path:
             sys_path.append(self.custom_code_path)
+
+    def create_google_earth_styles(self) -> None:
+        self.google_earth_styles: Dict[str, Style] = {}
+        for icon in device_icons:
+            point_style = Style()
+            point_style.labelstyle.color = Color.blue
+            path_icon = f"{self.path}/eNMS/static/images/2D/{icon}.gif"
+            point_style.iconstyle.icon.href = path_icon
+            self.google_earth_styles[icon] = point_style
+
+    def fetch_version(self) -> None:
+        with open(self.path / "package.json") as package_file:
+            self.version = load(package_file)["version"]
+
+    def configure_database(self, app: Flask) -> None:
+        Base.metadata.create_all(bind=engine)
+        from eNMS.database.events import configure_events
+        configure_events(self)
+        configure_mappers()
+
+        @app.before_first_request
+        def initialize_database() -> None:
+            self.clean_database()
+            if not fetch("User", allow_none=True, name="admin"):
+                self.init_database()
+
+    def init_parameters(self) -> None:
+        parameters = Session.query(models["Parameters"]).one_or_none()
+        if not parameters:
+            parameters = models["Parameters"]()
+            parameters.update(
+                **{
+                    property: getattr(self, property)
+                    for property in model_properties["Parameters"]
+                    if hasattr(self, property)
+                }
+            )
+            Session.add(parameters)
+            Session.commit()
+        else:
+            for parameter in parameters.get_properties():
+                setattr(self, parameter, getattr(parameters, parameter))
+
+    def configure_server_id(self) -> None:
+        factory(
+            "Server",
+            **{
+                "name": str(getnode()),
+                "description": "Localhost",
+                "ip_address": "0.0.0.0",
+                "status": "Up",
+            },
+        )
+
+    def create_admin_user(self) -> None:
+        factory("User", **{"name": "admin", "password": "admin"})
+
+    def update_credentials(self) -> None:
+        with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
+            self.topology_import(file)
+
+    def clean_database(self) -> None:
+        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
+            run.status = "Aborted (app reload)"
+        Session.commit()
 
     def init_database(self) -> None:
         self.init_parameters()

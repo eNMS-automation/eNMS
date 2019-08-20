@@ -5,7 +5,6 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
-from flask import Flask
 from flask_login import current_user
 from git import Repo
 from hvac import Client as VaultClient
@@ -19,22 +18,18 @@ from logging.handlers import RotatingFileHandler
 from os import environ, remove, scandir
 from pathlib import Path
 from ruamel import yaml
-from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_, or_
 from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
-from sqlalchemy.orm import configure_mappers
-from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
-from typing import Any, Dict, List, Optional, Set, Union
+from typing import Any, List, Optional, Set, Union
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS.database import Base, DIALECT, engine, Session
+from eNMS.database import DIALECT, Session
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
-from eNMS.models import models, model_properties, relationships
+from eNMS.models import models, relationships
 from eNMS.properties import private_properties, property_names
-from eNMS.properties.database import import_classes
 from eNMS.properties.diagram import (
     device_diagram_properties,
     diagram_classes,
@@ -43,7 +38,6 @@ from eNMS.properties.diagram import (
 from eNMS.properties.table import filtering_properties, table_properties
 from eNMS.properties.objects import (
     device_properties,
-    device_icons,
     pool_device_properties,
 )
 from eNMS.controller.syslog import SyslogServer
@@ -118,73 +112,6 @@ class BaseController:
     def config(self) -> dict:
         parameters = Session.query(models["Parameters"]).one_or_none()
         return parameters.get_properties() if parameters else {}
-
-    def init_parameters(self) -> None:
-        parameters = Session.query(models["Parameters"]).one_or_none()
-        if not parameters:
-            parameters = models["Parameters"]()
-            parameters.update(
-                **{
-                    property: getattr(self, property)
-                    for property in model_properties["Parameters"]
-                    if hasattr(self, property)
-                }
-            )
-            Session.add(parameters)
-            Session.commit()
-        else:
-            for parameter in parameters.get_properties():
-                setattr(self, parameter, getattr(parameters, parameter))
-
-    def configure_database(self, app: Flask) -> None:
-        Base.metadata.create_all(bind=engine)
-        from eNMS.database.events import configure_events
-        configure_events(self)
-        configure_mappers()
-
-        @app.before_first_request
-        def initialize_database() -> None:
-            self.clean_database()
-            if not fetch("User", allow_none=True, name="admin"):
-                self.init_database()
-
-    def configure_server_id(self) -> None:
-        factory(
-            "Server",
-            **{
-                "name": str(getnode()),
-                "description": "Localhost",
-                "ip_address": "0.0.0.0",
-                "status": "Up",
-            },
-        )
-
-    def create_admin_user(self) -> None:
-        factory("User", **{"name": "admin", "password": "admin"})
-
-    def update_credentials(self) -> None:
-        with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
-            self.topology_import(file)
-
-    def clean_database(self) -> None:
-        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
-            run.status = "Aborted (app reload)"
-        Session.commit()
-
-
-
-    def create_google_earth_styles(self) -> None:
-        self.google_earth_styles: Dict[str, Style] = {}
-        for icon in device_icons:
-            point_style = Style()
-            point_style.labelstyle.color = Color.blue
-            path_icon = f"{self.path}/eNMS/static/images/2D/{icon}.gif"
-            point_style.iconstyle.icon.href = path_icon
-            self.google_earth_styles[icon] = point_style
-
-    def fetch_version(self) -> None:
-        with open(self.path / "package.json") as package_file:
-            self.version = load(package_file)["version"]
 
     def get_git_content(self) -> None:
         for repository_type in ("configurations", "automation"):

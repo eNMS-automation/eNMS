@@ -3,12 +3,13 @@ from flask import Flask
 from json import loads
 from typing import Any
 
+from eNMS import app
 from eNMS.controller.concurrency import run_job
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 
 
-def configure_cli(flask_app: Flask, app: Any) -> None:
+def configure_cli(flask_app: Flask) -> None:
     @flask_app.cli.command(name="fetch")
     @argument("table")
     @argument("name")

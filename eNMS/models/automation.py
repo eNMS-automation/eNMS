@@ -38,6 +38,7 @@ from eNMS.database.associations import (
 from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device
 from eNMS.models.events import Task  # noqa: F401
+from eNMS.models.administration import User  # noqa: F401
 
 
 class Result(AbstractBase):

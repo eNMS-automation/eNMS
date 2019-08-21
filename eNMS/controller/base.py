@@ -11,7 +11,7 @@ from git import Repo
 from hvac import Client as VaultClient
 from importlib import import_module
 from importlib.abc import Loader
-from importlib.util import spec_from_file_location, module_from_spec
+from importlib.util import find_spec, module_from_spec, spec_from_file_location
 from json import load
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
@@ -240,7 +240,7 @@ class BaseController:
             self.version = load(package_file)["version"]
 
     def configure_database(self, flask_app: Flask) -> None:
-        from eNMS.models.administration import User
+        
         Base.metadata.create_all(bind=engine)
         configure_mappers()
         configure_events(self)
@@ -312,10 +312,10 @@ class BaseController:
         self.path = path
         if config_mode:
             self.config_mode = config_mode
+        self.init_forms()
         self.init_services()
         app = create_app(self)
         self.configure_database(app)
-        self.init_forms()
         self.create_google_earth_styles()
         self.fetch_version()
         self.init_logs()
@@ -434,10 +434,8 @@ class BaseController:
                 if not self.create_examples and "examples" in str(file):
                     continue
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
-                assert isinstance(spec.loader, Loader)
-                module = module_from_spec(spec)
                 try:
-                    spec.loader.exec_module(module)
+                    spec.loader.exec_module(module_from_spec(spec))
                 except InvalidRequestError as e:
                     error(f"Error loading custom service '{file}' ({str(e)})")
 

@@ -232,11 +232,11 @@ class BaseController:
         self.init_logs()
 
     def configure_database(self):
-        self.init_forms()
         self.init_services()
         Base.metadata.create_all(bind=engine)
         configure_mappers()
         configure_events(self)
+        self.init_forms()
         self.init_database()
 
     def create_app(self) -> Flask:
@@ -250,7 +250,6 @@ class BaseController:
     def init_database(self) -> None:
         self.clean_database()
         if not fetch("User", allow_none=True, name="admin"):
-            #app.init_database()
             self.init_parameters()
             self.configure_server_id()
             self.create_admin_user()

@@ -98,7 +98,7 @@ def configure_routes(flask_app: Flask, app: Any) -> None:
             f"pages/administration.html",
             **{
                 "endpoint": "administration",
-                "folders": listdir(current_app.path / "projects" / "migrations"),
+                "folders": listdir(app.path / "projects" / "migrations"),
             },
         )
 
@@ -189,7 +189,7 @@ def configure_routes(flask_app: Flask, app: Any) -> None:
         try:
             return send_file(
                 filename_or_fp=str(
-                    current_app.path / "git" / "configurations" / name / name
+                    app.path / "git" / "configurations" / name / name
                 ),
                 as_attachment=True,
                 attachment_filename=f"configuration_{name}.txt",

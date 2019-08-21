@@ -3,6 +3,7 @@ from flask.wrappers import Request, Response
 from itertools import chain
 from typing import Any, Tuple
 
+from eNMS import app
 from eNMS.database.functions import fetch
 from eNMS.forms import form_properties
 from eNMS.framework.cli import configure_cli
@@ -29,7 +30,7 @@ def configure_login_manager() -> None:
         return fetch("User", allow_none=True, name=request.form.get("name"))
 
 
-def configure_context_processor(flask_app: Flask, app: Any) -> None:
+def configure_context_processor(flask_app: Flask) -> None:
     @flask_app.context_processor
     def inject_properties() -> dict:
         return {
@@ -66,17 +67,16 @@ def configure_authentication() -> None:
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app(app: Any) -> Flask:
+def create_app() -> Flask:
     flask_app = Flask(__name__, static_folder=app.path / "eNMS" / "static")
     config = config_mapper[app.config_mode.capitalize()]
     flask_app.config.from_object(config)  # type: ignore
-    flask_app.path = app.path
     register_extensions(flask_app)
     configure_login_manager()
-    configure_cli(flask_app, app)
-    configure_context_processor(flask_app, app)
-    configure_rest_api(flask_app, app)
-    configure_routes(flask_app, app)
+    configure_cli(flask_app)
+    configure_context_processor(flask_app)
+    configure_rest_api(flask_app)
+    configure_routes(flask_app)
     configure_errors(flask_app)
     configure_authentication()
     return flask_app

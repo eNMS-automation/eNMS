@@ -1,3 +1,3 @@
-from eNMS import app as controller
+from eNMS.framework import create_app
 
-app = controller.create_app()
+app = create_app()

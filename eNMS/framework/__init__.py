@@ -12,6 +12,7 @@ from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
 from eNMS.models import relationships
+from eNMS.models.administration import User
 from eNMS.properties import property_names
 
 
@@ -22,11 +23,11 @@ def register_extensions(flask_app: Flask) -> None:
 
 def configure_login_manager() -> None:
     @login_manager.user_loader
-    def user_loader(id: int) -> Any:
+    def user_loader(id: int) -> User:
         return fetch("User", allow_none=True, id=id)
 
     @login_manager.request_loader
-    def request_loader(request: Request) -> Any:
+    def request_loader(request: Request) -> User:
         return fetch("User", allow_none=True, name=request.form.get("name"))
 
 

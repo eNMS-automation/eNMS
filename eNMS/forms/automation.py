@@ -121,7 +121,7 @@ class WorkflowForm(JobForm):
     form_type = HiddenField(default="workflow")
     use_workflow_targets = BooleanField("Use Workflow Targets")
     start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
-    payload_version = NoValidationSelectField("Payload Version", choices=())
+    restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
     payloads_to_exclude = NoValidationSelectMultipleField(
         "Payloads to Exclude", choices=()
     )
@@ -131,7 +131,7 @@ class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
-    payload_version = NoValidationSelectField("Payload Version", choices=())
+    restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
     payloads_to_exclude = NoValidationSelectMultipleField(
         "Payloads to Exclude", choices=()
     )

@@ -81,6 +81,7 @@ class Run(AbstractBase):
     workflow_device_id = Column(Integer, ForeignKey("Device.id"))
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(SmallString)
+    restart_runtime = Column(SmallString)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
     job_name = association_proxy("job", "name")

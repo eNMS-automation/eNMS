@@ -482,7 +482,9 @@ class Run(AbstractBase):
 
     def get_result(self, job: str, device: Optional[str] = None) -> dict:
         job_id = fetch("Job", name=job).id
-        run = fetch("Run", parent_runtime=self.parent_runtime, job_id=job_id)
+        run = fetch("Run", allow_none=bool(self.restart_runtime), parent_runtime=self.parent_runtime, job_id=job_id)
+        if not run and self.restart_runtime:
+            run = fetch("Run", parent_runtime=self.restart_runtime, job_id=job_id)
         return run.result(device).result
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
@@ -847,6 +849,7 @@ class Workflow(Job):
                             workflow=self.id,
                             workflow_device=base_target.id,
                             parent_runtime=run.parent_runtime,
+                            restart_runtime=run.restart_runtime,
                         )
                         job_run.properties = {}
                         derived_target_result = job_run.run(payload)
@@ -871,6 +874,7 @@ class Workflow(Job):
                     job=job.id,
                     workflow=self.id,
                     parent_runtime=run.parent_runtime,
+                    restart_runtime=run.restart_runtime,
                 )
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 Session.commit()

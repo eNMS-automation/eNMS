@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from eNMS import app as controller
 
-app = controller.init_app(Path.cwd())
+app = controller.create_app()

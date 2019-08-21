@@ -211,7 +211,9 @@ class BaseController:
         "update_database_configurations_from_git",
     ]
 
-    def __init__(self) -> None:
+    def __init__(self, path, config_mode: Optional[str] = None) -> None:
+        self.path = path
+        self.config_mode = config_mode or "Debug"
         self.custom_properties = self.load_custom_properties()
         self.custom_config = self.load_custom_config()
         self.init_scheduler()
@@ -225,6 +227,45 @@ class BaseController:
             self.init_syslog_server()
         if self.custom_code_path:
             sys_path.append(self.custom_code_path)
+        self.create_google_earth_styles()
+        self.fetch_version()
+        self.init_logs()
+
+    def configure_database(self):
+        self.init_forms()
+        self.init_services()
+        Base.metadata.create_all(bind=engine)
+        configure_mappers()
+        configure_events(self)
+        self.init_database()
+
+    def create_app(self) -> Flask:
+        return create_app(self)
+
+    def clean_database(self) -> None:
+        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
+            run.status = "Aborted (app reload)"
+        Session.commit()
+
+    def init_database(self) -> None:
+        self.clean_database()
+        if not fetch("User", allow_none=True, name="admin"):
+            #app.init_database()
+            self.init_parameters()
+            self.configure_server_id()
+            self.create_admin_user()
+            Session.commit()
+            if self.create_examples:
+                self.migration_import(
+                    name="examples", import_export_types=import_classes
+                )  # type: ignore
+                self.update_credentials()
+            else:
+                self.migration_import(
+                    name="default", import_export_types=import_classes
+                )  # type: ignore
+            self.get_git_content()
+            Session.commit()
 
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}
@@ -238,18 +279,6 @@ class BaseController:
     def fetch_version(self) -> None:
         with open(self.path / "package.json") as package_file:
             self.version = load(package_file)["version"]
-
-    def configure_database(self, flask_app: Flask) -> None:
-        
-        Base.metadata.create_all(bind=engine)
-        configure_mappers()
-        configure_events(self)
-
-        @flask_app.before_first_request
-        def initialize_database() -> None:
-            self.clean_database()
-            if not fetch("User", allow_none=True, name="admin"):
-                self.init_database()
 
     def init_parameters(self) -> None:
         parameters = Session.query(models["Parameters"]).one_or_none()
@@ -285,41 +314,6 @@ class BaseController:
     def update_credentials(self) -> None:
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)  # type: ignore
-
-    def clean_database(self) -> None:
-        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
-            run.status = "Aborted (app reload)"
-        Session.commit()
-
-    def init_database(self) -> None:
-        self.init_parameters()
-        self.configure_server_id()
-        self.create_admin_user()
-        Session.commit()
-        if self.create_examples:
-            self.migration_import(
-                name="examples", import_export_types=import_classes
-            )  # type: ignore
-            self.update_credentials()
-        else:
-            self.migration_import(
-                name="default", import_export_types=import_classes
-            )  # type: ignore
-        self.get_git_content()
-        Session.commit()
-
-    def init_app(self, path: Path, config_mode: Optional[str] = None) -> Flask:
-        self.path = path
-        if config_mode:
-            self.config_mode = config_mode
-        self.init_forms()
-        self.init_services()
-        app = create_app(self)
-        self.configure_database(app)
-        self.create_google_earth_styles()
-        self.fetch_version()
-        self.init_logs()
-        return app
 
     @property
     def config(self) -> dict:

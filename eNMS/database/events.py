@@ -6,10 +6,9 @@ from sqlalchemy.orm.mapper import Mapper
 from sqlalchemy.types import JSON
 from typing import Any
 
-from eNMS.models import model_properties, models, property_types, relationships
-from eNMS.database.base import Base
+from eNMS.database import Base
 from eNMS.database.functions import fetch_all
-from eNMS.models.automation import Workflow
+from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.properties import private_properties
 from eNMS.properties.database import dont_track_changes
 
@@ -90,7 +89,7 @@ def configure_events(app: Any) -> None:
             name, changes = getattr(target, "name", target.id), " | ".join(changelog)
             app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-    @event.listens_for(Workflow.name, "set")
+    @event.listens_for(models["Workflow"].name, "set")
     def workflow_name_update(
         workflow: Base, new_name: str, old_name: str, *args: Any
     ) -> None:

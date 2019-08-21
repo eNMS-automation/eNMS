@@ -32,6 +32,7 @@ from uuid import getnode
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database import Base, DIALECT, engine, Session
+from eNMS.database.events import configure_events
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
 from eNMS.framework import create_app
 from eNMS.models import models, model_properties, relationships
@@ -241,10 +242,8 @@ class BaseController:
     def configure_database(self, flask_app: Flask) -> None:
         from eNMS.models.administration import User
         Base.metadata.create_all(bind=engine)
-        from eNMS.database.events import configure_events
-
-        configure_events(self)
         configure_mappers()
+        configure_events(self)
 
         @flask_app.before_first_request
         def initialize_database() -> None:

@@ -6,3 +6,5 @@
 * ENMS_CONFIG_MODE -> CONFIG_MODE
 * ENMS_LOG_LEVEL -> LOG_LEVEL
 * ENMS_SERVER_ADDR -> SERVER_ADDR
+
+- Rename controller -> app

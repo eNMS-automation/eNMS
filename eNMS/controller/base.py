@@ -34,7 +34,6 @@ from werkzeug.datastructures import ImmutableMultiDict
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import count, delete, factory, fetch, fetch_all
-from eNMS.framework import create_app
 from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
@@ -238,9 +237,6 @@ class BaseController:
         configure_events(self)
         self.init_forms()
         self.init_database()
-
-    def create_app(self) -> Flask:
-        return create_app(self)
 
     def clean_database(self) -> None:
         for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):

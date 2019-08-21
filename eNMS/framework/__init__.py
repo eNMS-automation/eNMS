@@ -10,7 +10,7 @@ from eNMS.framework.cli import configure_cli
 from eNMS.framework.config import config_mapper
 from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
-from eNMS.framework.routes import configure_routes
+from eNMS.framework.routes import blueprint
 from eNMS.models import relationships
 from eNMS.properties import property_names
 
@@ -76,7 +76,7 @@ def create_app() -> Flask:
     configure_cli(flask_app)
     configure_context_processor(flask_app)
     configure_rest_api(flask_app)
-    configure_routes(flask_app)
     configure_errors(flask_app)
     configure_authentication()
+    flask_app.register_blueprint(blueprint)
     return flask_app

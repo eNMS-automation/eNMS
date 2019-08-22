@@ -54,8 +54,8 @@ function workflowRunMode(instance, restartForm) {
       ? "#payloads_to_exclude"
       : `#workflow-payloads_to_exclude-${instance.id}`;
     const versionId = restartForm
-      ? "#payload_version"
-      : `#workflow-payload_version-${instance.id}`;
+      ? "#restart_runtime"
+      : `#workflow-restart_runtime-${instance.id}`;
     instance.jobs.forEach((job) => {
       $(excludeId).append(
         $("<option></option>")

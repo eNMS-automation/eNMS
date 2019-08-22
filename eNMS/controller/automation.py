@@ -255,7 +255,7 @@ class AutomationController(BaseController):
 
     def add_restart_payload(self, job: Any, **kwargs: Any) -> dict:
         run = fetch(
-            "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("payload_version")
+            "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("restart_runtime")
         )
         if not run:
             return {}

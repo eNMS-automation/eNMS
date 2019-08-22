@@ -77,16 +77,9 @@ function workflowRunMode(instance, restartForm) {
 }
 
 // eslint-disable-next-line
-function saveService(service, id) {
+function saveService(job, id) {
   if (page == "workflow_builder") {
-    if (id) {
-      nodes.update(jobToNode(service));
-      var jobIndex = workflow.jobs.findIndex(job => job.id == service.id);
-      workflow.jobs[jobIndex] = service;
-      if (service.iteration_targets != "") drawIterationEdge(service);
-    } else {
-      addJobsToWorkflow([service.id]);
-    }
+    saveWorkflowJob(job, id);
   }
 }
 

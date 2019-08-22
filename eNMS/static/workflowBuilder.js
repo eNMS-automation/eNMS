@@ -144,6 +144,23 @@ function switchToWorkflow(workflowId) {
 }
 
 // eslint-disable-next-line
+function saveWorkflowJob(job, update, index) {
+  if (page == "workflow_builder") {
+    if (update) {
+      nodes.update(jobToNode(job));
+      var jobIndex = workflow.jobs.findIndex(job => job.id == job.id);
+      workflow.jobs[jobIndex] = job;
+    } else {
+      addJobsToWorkflow([job.id])
+    }
+    if (job.iteration_targets != "") {
+      drawIterationEdge(job);
+    } else {
+    }
+  }
+}
+
+// eslint-disable-next-line
 function addJobsToWorkflow(jobs) {
   if (!workflow) {
     alertify.notify(
@@ -163,7 +180,8 @@ function addJobsToWorkflow(jobs) {
       result.jobs.forEach((job, index) => {
         $("#add_jobs").remove();
         if (graph.findNode(job.id).length == 0) {
-          nodes.add(jobToNode(job, index + 1));
+          nodes.add(jobToNode(job, index));
+          workflow.jobs.push(job);
           alertify.notify(
             `Job '${job.name}' added to the workflow.`,
             "success",

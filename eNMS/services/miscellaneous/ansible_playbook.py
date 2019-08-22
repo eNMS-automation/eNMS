@@ -1,4 +1,5 @@
 from json import dumps
+from re import search
 from sqlalchemy import Boolean, ForeignKey, Integer
 from subprocess import check_output
 from traceback import format_exc
@@ -36,6 +37,17 @@ class AnsiblePlaybookService(Service):
     options = Column(MutableDict)
     pass_device_properties = Column(Boolean, default=False)
 
+    exit_codes = {
+        "0": "OK or no hosts matched",
+        "1": "Error",
+        "2": "One or more hosts failed",
+        "3": "One or more hosts were unreachable",
+        "4": "Parser error",
+        "5": "Bad or incomplete options",
+        "99": "User interrupted execution",
+        "250": "Unexpected error",
+    }
+
     __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
@@ -57,11 +69,16 @@ class AnsiblePlaybookService(Service):
         run.log("info", f"Sending Ansible playbook: {safe_command}")
         try:
             result = check_output(command + arguments, cwd=app.path / "playbooks")
-        except Exception:
+            
+        except Exception as exc:
             result = "\n".join(format_exc().splitlines())
             if password:
                 result = result.replace(password, "*" * 10)
             results = {"success": False, "results": result}
+            exit_code = search(r"exit status (\d+)", result)
+            if exit_code:
+                results["exit_code"] = exit_codes[exit_code.group(1)]
+            return results
         try:
             result = result.decode("utf-8")
         except AttributeError:

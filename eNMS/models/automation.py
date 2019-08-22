@@ -223,7 +223,7 @@ class Run(AbstractBase):
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
             values = self.eval(self.job.python_query, **locals())
-            devices, not_found = set(), set()
+            devices, not_found = [], []
             if isinstance(values, str):
                 values = [values]
             for value in values:
@@ -231,17 +231,17 @@ class Run(AbstractBase):
                     "Device", allow_none=True, **{self.job.query_property_type: value}
                 )
                 if device:
-                    devices.add(device)
+                    devices.append(device)
                 else:
-                    not_found.add(value)
+                    not_found.append(value)
             if not_found:
                 raise Exception(f"Python query invalid targets: {', '.join(not_found)}")
         else:
-            devices = set(self.devices)
+            devices = set(self.devices)  # type: ignore
             for pool in self.pools:
-                devices |= set(pool.devices)
+                devices |= set(pool.devices)  # type: ignore
         self.set_state(number_of_targets=len(devices))
-        return devices
+        return devices  # type: ignore
 
     def close_connection_cache(self) -> None:
         for library in ("netmiko", "napalm"):
@@ -488,11 +488,17 @@ class Run(AbstractBase):
             parent_runtime=self.parent_runtime,
             job_id=job_id,
         )
-        results = list(filter(None, [run.result(device) for run in runs]))
+        results: list = list(filter(None, [run.result(device) for run in runs]))
         if not results and self.restart_runtime:
-            runs = fetch("Run", all_matches=True, parent_runtime=self.restart_runtime, job_id=job_id)
+            runs = fetch(
+                "Run",
+                all_matches=True,
+                parent_runtime=self.restart_runtime,
+                job_id=job_id,
+            )
             results = list(filter(None, [run.result(device) for run in runs]))
-        return results.pop().result
+        result = results.pop().result
+        return result
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
         var_editor = partial(_self.payload_helper, locals.get("payload", {}))
@@ -826,7 +832,6 @@ class Workflow(Job):
     ) -> dict:
         controller.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
         jobs: list = list(run.start_jobs)
-        print("tttt"*100, jobs)
         payload = deepcopy(payload)
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
@@ -845,7 +850,6 @@ class Workflow(Job):
             if skip_job or job.skip:
                 job_results = {"success": "skipped"}
             elif job.python_query:
-                device_results, success = {}, True
                 try:
                     job_run = factory(
                         "Run",
@@ -885,7 +889,6 @@ class Workflow(Job):
             payload[job.name] = job_results
             results["results"].update(payload)
             for successor in successors:
-                print("tttt"*100, successor)
                 if successor not in visited:
                     jobs.append(successor)
                 if successor == self.jobs[1]:
@@ -917,7 +920,7 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
         if run.device_targets_mode == "service":
-            initial_targets = run.compute_devices(payload)
+            initial_targets = set(run.compute_devices(payload))
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
         while jobs:

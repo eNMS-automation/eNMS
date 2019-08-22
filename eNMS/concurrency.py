@@ -6,7 +6,7 @@ from eNMS.database.functions import factory, fetch
 def run_job(job: int, **kwargs: Any) -> dict:
     run_kwargs = {
         key: kwargs.pop(key)
-        for key in ("creator", "runtime", "task")
+        for key in ("creator", "runtime", "task", "restart_runtime")
         if kwargs.get(key)
     }
     run = factory("Run", job=job, **run_kwargs)

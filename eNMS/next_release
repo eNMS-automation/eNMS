@@ -8,3 +8,7 @@
 * ENMS_SERVER_ADDR -> SERVER_ADDR
 
 - Rename controller -> app
+
+- Rename "Payload version" -> Restart runtime
+
+- Make restart system work with get_result

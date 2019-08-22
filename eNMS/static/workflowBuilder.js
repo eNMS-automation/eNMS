@@ -156,6 +156,7 @@ function saveWorkflowJob(job, update, index) {
     if (job.iteration_targets != "") {
       drawIterationEdge(job);
     } else {
+      edges.remove(-job.id);
     }
   }
 }
@@ -203,7 +204,6 @@ function deleteNode(id) {
   workflow.jobs = workflow.jobs.filter((n) => n.id != id);
   call(`/delete_node/${workflow.id}/${id}`, function(result) {
     hoveredNode = null;
-
     lastModified = result.update_time;
     alertify.notify(
       `'${result.job.name}' deleted from the workflow.`,

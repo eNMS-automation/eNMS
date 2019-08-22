@@ -29,3 +29,5 @@ use_workflow_targets: false -> device_targets_mode: ignore
 - Fix change of name in workflow builder upon editing the service.
 
 - RENAME iteration_targets -> iteration_values
+
+- Make iteration variable name configurable

@@ -51,9 +51,7 @@ def configure_events(app: Any) -> None:
     def log_instance_creation(target: Base, args: tuple, kwargs: dict) -> None:
         if "type" not in target.__dict__ or "log" in target.type:
             return
-        app.log(
-            "info", f"CREATION: {target.__dict__['type']} '{kwargs['name']}'"
-        )
+        app.log("info", f"CREATION: {target.__dict__['type']} '{kwargs['name']}'")
 
     @event.listens_for(Base, "before_delete", propagate=True)
     def log_instance_deletion(

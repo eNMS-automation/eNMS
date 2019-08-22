@@ -35,6 +35,7 @@ from eNMS.properties.table import (
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
+
 def monitor_requests(function: Callable) -> Callable:
     @wraps(function)
     def decorated_function(*args: Any, **kwargs: Any) -> Any:
@@ -52,14 +53,17 @@ def monitor_requests(function: Callable) -> Callable:
 
     return decorated_function
 
+
 @blueprint.route("/")
 def site_root() -> Response:
     return redirect(url_for("blueprint.route", page="login"))
+
 
 @blueprint.route("/<path:_>")
 @monitor_requests
 def get_requests_sink(_: str) -> Response:
     abort(404)
+
 
 @blueprint.route("/login", methods=["GET", "POST"])
 def login() -> Any:
@@ -85,11 +89,13 @@ def login() -> Any:
         return render_template("login.html", login_form=login_form)
     return redirect(url_for("blueprint.route", page="dashboard"))
 
+
 @blueprint.route("/logout")
 @monitor_requests
 def logout() -> Response:
     logout_user()
     return redirect(url_for("blueprint.route", page="login"))
+
 
 @blueprint.route("/administration")
 @monitor_requests
@@ -102,6 +108,7 @@ def administration() -> str:
         },
     )
 
+
 @blueprint.route("/dashboard")
 @monitor_requests
 def dashboard() -> str:
@@ -109,6 +116,7 @@ def dashboard() -> str:
         f"pages/dashboard.html",
         **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
     )
+
 
 @blueprint.route("/table/<table_type>")
 @monitor_requests
@@ -130,12 +138,14 @@ def table(table_type: str) -> str:
         kwargs["service_table_form"] = service_table_form
     return render_template(f"pages/table.html", **kwargs)
 
+
 @blueprint.route("/view/<view_type>")
 @monitor_requests
 def view(view_type: str) -> str:
     return render_template(
         f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
     )
+
 
 @blueprint.route("/workflow_builder")
 @monitor_requests
@@ -156,6 +166,7 @@ def workflow_builder() -> str:
         },
     )
 
+
 @blueprint.route("/calendar/<calendar_type>")
 @monitor_requests
 def calendar(calendar_type: str) -> str:
@@ -163,6 +174,7 @@ def calendar(calendar_type: str) -> str:
         f"pages/calendar.html",
         **{"calendar_type": calendar_type, "endpoint": "calendar"},
     )
+
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
@@ -177,25 +189,26 @@ def form(form_type: str) -> str:
         },
     )
 
+
 @blueprint.route("/view_job_results/<int:id>")
 @login_required
 def view_job_results(id: int) -> str:
     result = fetch("Run", id=id).result().result
     return f"<pre>{app.str_dict(result)}</pre>"
 
+
 @blueprint.route("/download_configuration/<name>")
 @login_required
 def download_configuration(name: str) -> Response:
     try:
         return send_file(
-            filename_or_fp=str(
-                app.path / "git" / "configurations" / name / name
-            ),
+            filename_or_fp=str(app.path / "git" / "configurations" / name / name),
             as_attachment=True,
             attachment_filename=f"configuration_{name}.txt",
         )
     except FileNotFoundError:
         return jsonify("No configuration stored")
+
 
 @blueprint.route("/", methods=["POST"])
 @blueprint.route("/<path:page>", methods=["POST"])

@@ -63,9 +63,7 @@ class SwissArmyKnifeService(Service):
         post(
             app.mattermost_url,
             verify=app.mattermost_verify_certificate,
-            data=dumps(
-                {"channel": app.mattermost_channel, "text": payload["content"]}
-            ),
+            data=dumps({"channel": app.mattermost_channel, "text": payload["content"]}),
         )
         return {"success": True}
 

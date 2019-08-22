@@ -181,9 +181,7 @@ class Run(AbstractBase):
 
     def napalm_connection(self, device: "Device") -> NetworkDriver:
         if self.parent_runtime in app.connections_cache["napalm"]:
-            parent_connection = app.connections_cache["napalm"].get(
-                self.parent_runtime
-            )
+            parent_connection = app.connections_cache["napalm"].get(self.parent_runtime)
             if parent_connection and device.name in parent_connection:
                 if (
                     self.job.start_new_connection
@@ -310,7 +308,11 @@ class Run(AbstractBase):
             args = (device,) if device else ()
             if self.job.iteration_values:
                 targets_results = {
-                    target: self.job.job(self, {**payload, self.job.iteration_variable_name: target}, *args)
+                    target: self.job.job(
+                        self,
+                        {**payload, self.job.iteration_variable_name: target},
+                        *args,
+                    )
                     for target in self.eval(self.job.iteration_values, **locals())
                 }
                 results.update(
@@ -903,7 +905,7 @@ class Workflow(Job):
         return results
 
     def build_results(self, run: "Run", payload: dict) -> dict:
-        
+
         if run.device_targets_mode in ("service", "ignore"):
             return self.per_service_workflow_run(run, payload)
         else:
@@ -919,7 +921,9 @@ class Workflow(Job):
             }
 
     def per_service_workflow_run(self, run: "Run", payload: dict) -> dict:
-        app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)})
+        app.run_db[run.runtime].update(
+            {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
+        )
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()
@@ -983,9 +987,7 @@ class Workflow(Job):
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 Session.commit()
                 job_results = job_run.run(payload)
-            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results[
-                "success"
-            ]
+            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
             if run.device_targets_mode == "service":
                 successors = self.workflow_targets_processing(
                     run.runtime, allowed_devices, job, job_results

@@ -38,8 +38,7 @@ class CreatePool(Resource):
             **{
                 "name": data["name"],
                 "devices": [
-                    fetch("Device", name=name).id
-                    for name in data.get("devices", "")
+                    fetch("Device", name=name).id for name in data.get("devices", "")
                 ],
                 "links": [
                     fetch("Link", name=name).id for name in data.get("links", "")
@@ -50,6 +49,7 @@ class CreatePool(Resource):
         Session.commit()
         return data
 
+
 class Heartbeat(Resource):
     def get(self) -> dict:
         return {
@@ -57,6 +57,7 @@ class Heartbeat(Resource):
             "cluster_id": app.cluster_id,
             "cpu_load": cpu_percent(),
         }
+
 
 class Query(Resource):
     decorators = [auth.login_required]
@@ -67,6 +68,7 @@ class Query(Resource):
             return [result.get_properties() for result in results]
         except Exception:
             return abort(404, message=f"There are no such {cls}s.")
+
 
 class GetInstance(Resource):
     decorators = [auth.login_required]
@@ -82,6 +84,7 @@ class GetInstance(Resource):
         Session.commit()
         return result
 
+
 class GetConfiguration(Resource):
     decorators = [auth.login_required]
 
@@ -89,12 +92,14 @@ class GetConfiguration(Resource):
         device = fetch("Device", name=name)
         return device.configurations[max(device.configurations)]
 
+
 class GetResult(Resource):
     decorators = [auth.login_required]
 
     def get(self, name: str, runtime: str) -> str:
         job = fetch("Job", name=name)
         return fetch("Result", job_id=job.id, runtime=runtime).result
+
 
 class UpdateInstance(Resource):
     decorators = [auth.login_required]
@@ -109,12 +114,14 @@ class UpdateInstance(Resource):
         except Exception as exc:
             return abort(500, message=f"Update failed ({exc})")
 
+
 class Migrate(Resource):
     decorators = [auth.login_required]
 
     def post(self, direction: str) -> Optional[str]:
         kwargs = request.get_json(force=True)
         return getattr(app, f"migration_{direction}")(**kwargs)
+
 
 class RunJob(Resource):
     decorators = [auth.login_required]
@@ -163,6 +170,7 @@ class RunJob(Resource):
             return {"errors": errors, "runtime": runtime}
         else:
             return {**run_job(job.id, **data), "errors": errors}
+
 
 class Topology(Resource):
     decorators = [auth.login_required]

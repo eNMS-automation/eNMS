@@ -112,6 +112,11 @@
             {{ form.iteration_values(id=form_type + '-iteration_values',
             class="form-control hide-run add-id") }}
           </div>
+          <label class="hide-run">Iteration Variable Name (in Payload)</label>
+          <div class="form-group">
+            {{ form.iteration_variable_name(id=form_type + '-iteration_variable_name',
+            class="form-control hide-run add-id") }}
+          </div>
           <label>Number of retries</label>
           <div class="form-group">
             {{ form.number_of_retries(id=form_type + '-number_of_retries',

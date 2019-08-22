@@ -64,7 +64,9 @@ class JobForm(BaseForm):
     color = StringField("Color", default="#D2E5FF")
     initial_payload = DictField()
     iteration_values = StringField("Iteration Targets (Python Query)")
-    iteration_variable_name = StringField("Iteration Variable Name", default="iteration_value")
+    iteration_variable_name = StringField(
+        "Iteration Variable Name", default="iteration_value"
+    )
     query_fields = ["python_query", "skip_python_query", "iteration_values"]
 
     def validate(self) -> bool:

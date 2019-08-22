@@ -308,10 +308,10 @@ class Run(AbstractBase):
         results: Dict[Any, Any] = {"runtime": app.get_time()}
         try:
             args = (device,) if device else ()
-            if self.job.iteration_targets:
+            if self.job.iteration_values:
                 targets_results = {
-                    target: self.job.job(self, {**payload, "value": target}, *args)
-                    for target in self.eval(self.job.iteration_targets, **locals())
+                    target: self.job.job(self, {**payload, self.job.iteration_variable_name: target}, *args)
+                    for target in self.eval(self.job.iteration_values, **locals())
                 }
                 results.update(
                     {
@@ -596,7 +596,8 @@ class Job(AbstractBase):
     start_new_connection = Column(Boolean, default=False)
     skip = Column(Boolean, default=False)
     skip_python_query = Column(SmallString)
-    iteration_targets = Column(LargeString)
+    iteration_values = Column(LargeString)
+    iteration_variable_name = Column(SmallString)
     runs = relationship("Run", back_populates="job", cascade="all, delete-orphan")
 
     @property

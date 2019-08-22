@@ -67,7 +67,7 @@ function displayWorkflow(workflowData) {
   workflow.jobs
     .filter((s) => s.type == "IterationService")
     .map(drawIterationService);
-  workflow.jobs.filter((s) => s.iteration_targets != "").map(drawIterationEdge);
+  workflow.jobs.filter((s) => s.iteration_values != "").map(drawIterationEdge);
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function(properties) {
@@ -153,7 +153,7 @@ function saveWorkflowJob(job, update, index) {
     } else {
       addJobsToWorkflow([job.id])
     }
-    if (job.iteration_targets != "") {
+    if (job.iteration_values != "") {
       drawIterationEdge(job);
     } else {
       edges.remove(-job.id);

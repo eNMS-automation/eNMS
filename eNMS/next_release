@@ -21,3 +21,11 @@ use_workflow_targets: true -> device_targets_mode: service
 use_workflow_targets: false -> device_targets_mode: ignore
 
 - Forbid empty names and names with slash front-end
+
+- Fix event issue after adding jobs to the workflow builder.
+
+- Create and delete iteration loopback edge upon editing the service.
+
+- Fix change of name in workflow builder upon editing the service.
+
+- RENAME iteration_targets -> iteration_values

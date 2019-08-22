@@ -23,7 +23,6 @@ from typing import Any, Dict, Generator, List, Match, Optional, Set, Tuple, Unio
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
-from eNMS.controller.concurrency import get_device_result
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
@@ -635,6 +634,14 @@ class Service(Job):
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
 
+    @staticmethod
+    def get_device_result(args: tuple) -> None:
+        device = fetch("Device", id=args[0])
+        run = fetch("Run", runtime=args[1])
+        device_result = run.get_results(args[2], device)
+        with args[3]:
+            args[4][device.name] = device_result
+
     def device_run(
         self, run: "Run", payload: dict, targets: Optional[Set["Device"]] = None
     ) -> dict:
@@ -645,15 +652,12 @@ class Service(Job):
                 device_results: dict = {}
                 thread_lock = Lock()
                 processes = min(len(targets), run.max_processes)
-                args = (
-                    run.runtime,
-                    payload,
-                    thread_lock,
-                    device_results,
-                )  # type: ignore
-                process_args = [(device.id, *args) for device in targets]
+                process_args = [
+                    (device.id, run.runtime, payload, thread_lock, device_results)
+                    for device in targets
+                ]
                 pool = ThreadPool(processes=processes)
-                pool.map(get_device_result, process_args)
+                pool.map(self.get_device_result, process_args)
                 pool.close()
                 pool.join()
             else:

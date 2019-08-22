@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 
-from eNMS.controller.concurrency import run_job
+from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField
@@ -46,7 +46,7 @@ class IterationService(Service):
                 "payload": {self.variable_name: value, **payload},
                 "devices": [device.id],
             }
-            result = run_job(self.iterated_job.id, **run_data)
+            result = app.run(self.iterated_job.id, **run_data)
             results[value] = result["results"]["devices"][device.name]
             if not result["success"]:
                 success = False

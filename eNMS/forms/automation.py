@@ -119,7 +119,14 @@ class ServiceForm(JobForm):
 
 class WorkflowForm(JobForm):
     form_type = HiddenField(default="workflow")
-    use_workflow_targets = BooleanField("Use Workflow Targets")
+    device_targets_mode = SelectField(
+        "Device Targets Mode",
+        choices=(
+            ("service", "Run with Workflow Targets, service by service"),
+            ("device", "Run with Workflow Targets, device by device"),
+            ("ignore", "Run with Service Targets"),
+        ),
+    )
     start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
     payloads_to_exclude = NoValidationSelectMultipleField(

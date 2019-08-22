@@ -69,7 +69,6 @@ class AnsiblePlaybookService(Service):
         run.log("info", f"Sending Ansible playbook: {safe_command}")
         try:
             result = check_output(command + arguments, cwd=app.path / "playbooks")
-            
         except Exception as exc:
             result = "\n".join(format_exc().splitlines())
             if password:
@@ -77,7 +76,7 @@ class AnsiblePlaybookService(Service):
             results = {"success": False, "results": result}
             exit_code = search(r"exit status (\d+)", result)
             if exit_code:
-                results["exit_code"] = exit_codes[exit_code.group(1)]
+                results["exit_code"] = self.exit_codes[exit_code.group(1)]
             return results
         try:
             result = result.decode("utf-8")

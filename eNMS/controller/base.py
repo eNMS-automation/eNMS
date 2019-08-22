@@ -236,14 +236,6 @@ class BaseController:
         configure_mappers()
         configure_events(self)
         self.init_forms()
-        self.init_database()
-
-    def clean_database(self) -> None:
-        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
-            run.status = "Aborted (app reload)"
-        Session.commit()
-
-    def init_database(self) -> None:
         self.clean_database()
         if not fetch("User", allow_none=True, name="admin"):
             self.init_parameters()
@@ -261,6 +253,11 @@ class BaseController:
                 )  # type: ignore
             self.get_git_content()
             Session.commit()
+
+    def clean_database(self) -> None:
+        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
+            run.status = "Aborted (app reload)"
+        Session.commit()
 
     def create_google_earth_styles(self) -> None:
         self.google_earth_styles: Dict[str, Style] = {}

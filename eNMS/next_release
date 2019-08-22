@@ -34,3 +34,14 @@ use_workflow_targets: false -> device_targets_mode: ignore
 
 - The iteration variable is now "iteration_value" !
 => CHANGE: migration files, replace payload["value"] with payload["iteration_value"]
+
+- Ansible add exit status:
+EXIT STATUS -----------
+0 -- OK or no hosts matched
+1 -- Error
+2 -- One or more hosts failed
+3 -- One or more hosts were unreachable
+4 -- Parser error
+5 -- Bad or incomplete options
+99 -- User interrupted execution
+250 -- Unexpected error

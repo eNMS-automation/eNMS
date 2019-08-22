@@ -266,6 +266,17 @@ class AutomationController(BaseController):
         payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))
         return {k: payload.get(k) for k in payload if k not in payload_jobs}
 
+    @staticmethod
+    def threaded_job(job: int, **kwargs: Any) -> dict:
+        run_kwargs = {
+            key: kwargs.pop(key)
+            for key in ("creator", "runtime", "task", "restart_runtime")
+            if kwargs.get(key)
+        }
+        run = factory("Run", job=job, **run_kwargs)
+        run.properties = kwargs
+        return run.run(kwargs.get("payload"))
+
     def run_job(self, id: Optional[int] = None, **kwargs: Any) -> dict:
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
@@ -279,7 +290,7 @@ class AutomationController(BaseController):
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(
                 id=self.get_time(),
-                func=run_job,
+                func=self.threaded_job,
                 run_date=datetime.now(),
                 args=[id],
                 kwargs=kwargs,

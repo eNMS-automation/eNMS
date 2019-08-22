@@ -417,36 +417,27 @@ function getJobState(id) {
 
 // eslint-disable-next-line
 function displayWorkflowState(result) {
+  console.log(result)
   if (!result.state) {
+    $("#progressbar").hide();
     result.workflow.jobs.forEach((job) => {
       colorJob(job.id, job.color);
     });
   } else {
+    $("#progressbar").show();
+    $("#progress-success").width(
+      `${(result.state.progress.passed * 100) / result.workflow.jobs.length}%`
+    );
+    $("#progress-failure").width(
+      `${(result.state.progress.failed * 100) / result.workflow.jobs.length}%`
+    );
+    $("#progress-success-span").text(result.state.progress.passed);
+    $("#progress-failure-span").text(result.state.progress.failed);
     $("#status").text(`Status: ${result.state.status}`);
     const currJob = result.state.current_job;
     if (currJob) {
       colorJob(currJob.id, "#89CFF0");
       $("#current-job").text(`Current job: ${result.state.current_job.name}.`);
-      const currState = result.state.jobs[currJob.id];
-      if (
-        currJob.type != "Workflow" &&
-        currState &&
-        currState.number_of_targets > 1 &&
-        currState.completed > 0
-      ) {
-        const successNumber = currState.completed - currState.failed;
-        $("#progress-success").width(
-          `${(successNumber * 100) / currState.number_of_targets}%`
-        );
-        $("#progress-failure").width(
-          `${(currState.failed * 100) / currState.number_of_targets}%`
-        );
-        $("#progress-success-span").text(successNumber);
-        $("#progress-failure-span").text(currState.failed);
-        $("#progressbar").show();
-      } else {
-        $("#progressbar").hide();
-      }
     } else {
       $("#current-job").empty();
     }

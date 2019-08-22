@@ -220,6 +220,9 @@ class Run(AbstractBase):
         app.run_db[self.runtime].update(**kwargs)
         if self.workflow:
             app.run_db[self.parent_runtime]["jobs"][self.job.id].update(**kwargs)
+            if "success" in kwargs:
+                key = "passed" if kwargs["success"] else "failed"
+                app.run_db[self.parent_runtime]["progress"][key] += 1
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
@@ -274,7 +277,7 @@ class Run(AbstractBase):
         finally:
             status = f"Completed ({'success' if results['success'] else 'failure'})"
             self.status = status  # type: ignore
-            self.set_state(status=status)
+            self.set_state(status=status, success=results["success"])
             app.job_db[self.job.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()  # type: ignore
             results["state"] = app.run_db.pop(self.runtime)
@@ -915,7 +918,7 @@ class Workflow(Job):
             }
 
     def per_service_workflow_run(self, run: "Run", payload: dict) -> dict:
-        app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
+        app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)})
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()

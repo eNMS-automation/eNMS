@@ -315,7 +315,8 @@ class AutomationController(BaseController):
             state = self.run_db.get(runtime)
             if not state:
                 results = fetch("Run", runtime=runtime).results
-                state = [r for r in results if not r.device_id][0].result.get("state")
+                global_result = [r for r in results if not r.device_id]
+                state = global_result[0].result.get("state") if global_result else None
         return {"workflow": workflow.serialized, "runtimes": runtimes, "state": state}
 
     def convert_date(self, date: str) -> list:

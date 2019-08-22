@@ -35,7 +35,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: false
+  device_targets_mode: ignore
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -76,7 +76,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -117,7 +117,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -157,7 +157,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -196,7 +196,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -238,7 +238,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -279,7 +279,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -319,7 +319,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -358,7 +358,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -399,7 +399,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -441,7 +441,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -482,7 +482,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -523,7 +523,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -564,7 +564,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -606,7 +606,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -647,7 +647,7 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -688,6 +688,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  use_workflow_targets: true
+  device_targets_mode: service
   vendor: ''
   waiting_time: 0

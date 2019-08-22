@@ -80,7 +80,10 @@ function workflowRunMode(instance, restartForm) {
 function saveService(service, id) {
   if (page == "workflow_builder") {
     if (id) {
-      jobToNode(service);
+      nodes.update(jobToNode(service));
+      var jobIndex = workflow.jobs.findIndex(job => job.id == service.id);
+      workflow.jobs[jobIndex] = service;
+      if (service.iteration_targets != "") drawIterationEdge(service);
     } else {
       addJobsToWorkflow([service.id]);
     }

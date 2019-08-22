@@ -110,14 +110,13 @@ function displayWorkflow(workflowData) {
     if (node && node != 1 && node != 2) {
       node = parseInt(node);
       hoveredNode = node;
-      hoveredLabel = nodes.get(node).label;
       const job = workflow.jobs.find((w) => w.id === node);
-      nodes.update({ id: node, label: `${job.type}\n${hoveredLabel}` });
+      nodes.update({ id: node, label: `${job.type}\n${job.name}` });
     }
   });
   graph.on("blurNode", function(properties) {
     const job = workflow.jobs.find((w) => w.id === hoveredNode);
-    if (job) nodes.update({ id: hoveredNode, label: hoveredLabel });
+    if (job) nodes.update({ id: hoveredNode, label: job.name });
   });
   $("#current-runtimes").empty();
   $("#current-runtimes").append("<option value=''>Normal Display</option>");
@@ -234,14 +233,16 @@ function jobToNode(job, index) {
 }
 
 function drawIterationEdge(service) {
-  edges.add({
-    id: -service.id,
-    label: "Iteration",
-    from: service.id,
-    to: service.id,
-    color: "black",
-    arrows: { to: { enabled: true } },
-  });
+  if (!edges.get(-service.id)) {
+    edges.add({
+      id: -service.id,
+      label: "Iteration",
+      from: service.id,
+      to: service.id,
+      color: "black",
+      arrows: { to: { enabled: true } },
+    });
+  }
 }
 
 function drawIterationService(service) {
@@ -417,7 +418,6 @@ function getJobState(id) {
 
 // eslint-disable-next-line
 function displayWorkflowState(result) {
-  console.log(result)
   if (!result.state) {
     $("#progressbar").hide();
     result.workflow.jobs.forEach((job) => {

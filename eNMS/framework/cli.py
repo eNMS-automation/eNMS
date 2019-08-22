@@ -4,7 +4,6 @@ from json import loads
 from typing import Any
 
 from eNMS import app
-from eNMS.controller.concurrency import run_job
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 
@@ -42,6 +41,6 @@ def configure_cli(flask_app: Flask) -> None:
         payload_dict = loads(payload) if payload else {}
         payload_dict["devices"] = devices_list
         job = fetch("Job", name=name)
-        results = run_job(job.id, **payload_dict)
+        results = app.run(job.id, **payload_dict)
         Session.commit()
         echo(app.str_dict(results))

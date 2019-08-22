@@ -7,7 +7,6 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 from typing import Any, List, Optional, Tuple
 
-from eNMS.controller.concurrency import run_job
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
@@ -133,7 +132,7 @@ class Task(AbstractBase):
     def kwargs(self) -> Tuple[dict, dict]:
         default = {
             "id": self.aps_job_id,
-            "func": run_job,
+            "func": app.run,
             "replace_existing": True,
             "args": [self.job.id],
             "kwargs": self.run_properties(),

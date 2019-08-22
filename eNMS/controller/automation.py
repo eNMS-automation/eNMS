@@ -11,7 +11,6 @@ from pathlib import Path
 from re import search, sub
 from typing import Any, Dict, Optional
 
-from eNMS.controller.concurrency import run_job
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
@@ -267,7 +266,7 @@ class AutomationController(BaseController):
         return {k: payload.get(k) for k in payload if k not in payload_jobs}
 
     @staticmethod
-    def threaded_job(job: int, **kwargs: Any) -> dict:
+    def run(job: int, **kwargs: Any) -> dict:
         run_kwargs = {
             key: kwargs.pop(key)
             for key in ("creator", "runtime", "task", "restart_runtime")
@@ -290,7 +289,7 @@ class AutomationController(BaseController):
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(
                 id=self.get_time(),
-                func=self.threaded_job,
+                func=self.run,
                 run_date=datetime.now(),
                 args=[id],
                 kwargs=kwargs,

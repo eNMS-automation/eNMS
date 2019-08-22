@@ -7,7 +7,6 @@ from uuid import getnode
 from typing import Any, Dict, Optional, Union
 
 from eNMS import app
-from eNMS.controller.concurrency import run_job
 from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf
@@ -161,7 +160,7 @@ class RunJob(Resource):
         if handle_asynchronously:
             app.scheduler.add_job(
                 id=runtime,
-                func=run_job,
+                func=app.run,
                 run_date=datetime.now(),
                 args=[job.id],
                 kwargs=data,
@@ -169,7 +168,7 @@ class RunJob(Resource):
             )
             return {"errors": errors, "runtime": runtime}
         else:
-            return {**run_job(job.id, **data), "errors": errors}
+            return {**app.run(job.id, **data), "errors": errors}
 
 
 class Topology(Resource):

@@ -599,7 +599,7 @@ class Job(AbstractBase):
     skip = Column(Boolean, default=False)
     skip_python_query = Column(SmallString)
     iteration_values = Column(LargeString)
-    iteration_variable_name = Column(SmallString)
+    iteration_variable_name = Column(SmallString, default="iteration_value")
     runs = relationship("Run", back_populates="job", cascade="all, delete-orphan")
 
     @property

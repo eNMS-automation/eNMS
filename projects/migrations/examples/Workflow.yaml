@@ -3,6 +3,7 @@
   credentials: device
   custom_username: ''
   description: Poll configuration and push to gitlab
+  device_targets_mode: ignore
   devices: []
   display_only_failed_nodes: true
   events: []
@@ -10,7 +11,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, poller_service, git_push_configurations]
   last_modified: '2019-08-05 13:30:56.726895'
   mail_recipient: ''
@@ -35,7 +37,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: ignore
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -43,6 +44,7 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Netmiko
+  device_targets_mode: service
   devices: []
   display_only_failed_nodes: true
   events: []
@@ -50,7 +52,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
     netmiko_check_no_vrf_test]
   last_modified: '2019-08-20 17:51:25.339733'
@@ -76,7 +79,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -84,6 +86,7 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Napalm
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -91,7 +94,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
     netmiko_check_no_vrf_napalm]
   last_modified: '2019-08-05 13:30:56.889198'
@@ -117,7 +121,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -125,6 +128,7 @@
   credentials: device
   custom_username: ''
   description: ReST call, Napalm getters, etc
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -132,7 +136,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
   last_modified: '2019-08-05 13:30:56.982753'
   mail_recipient: ''
@@ -157,7 +162,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -165,6 +169,7 @@
   credentials: device
   custom_username: ''
   description: Test python device selection mechanism
+  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
@@ -172,7 +177,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, add_devices_to_payload, Iteration_service_simple, Iteration_service_python]
   last_modified: '2019-08-05 13:30:57.049335'
   mail_recipient: ''
@@ -196,7 +202,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -204,6 +209,7 @@
   credentials: device
   custom_username: ''
   description: Test the payload extraction and validation mechanisms
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -211,7 +217,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
       Validate dict via results', 'Payload Workflow: Validate text via results', 'Payload
       Workflow: Validate text via payload', 'Payload Workflow: Validate dict via payload']
@@ -238,7 +245,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -246,6 +252,7 @@
   credentials: device
   custom_username: ''
   description: Test the inner workflow system
+  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
@@ -253,7 +260,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
     'Subworkflow: Access Variable - Result from parent workflow', Show version with
       multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow]
@@ -279,7 +287,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -287,6 +294,7 @@
   credentials: device
   custom_username: ''
   description: Workflow with separate failure - success path
+  device_targets_mode: service
   devices: [Austin, Washington]
   display_only_failed_nodes: false
   events: []
@@ -294,7 +302,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
     get_interfaces]
   last_modified: '2019-08-13 20:37:47.934244'
@@ -319,7 +328,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -327,6 +335,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -334,7 +343,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass]
   last_modified: '2019-08-05 13:30:57.333759'
   mail_recipient: ''
@@ -358,7 +368,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -366,6 +375,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington, Chicago]
   display_only_failed_nodes: false
   events: []
@@ -373,7 +383,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
     Show vrf with payload helper, Show vrf with python query, REST is_alive, show
       runtime with get_result helper]
@@ -399,7 +410,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -407,6 +417,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -414,7 +425,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
     'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
       get facts failed match']
@@ -441,7 +453,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -449,6 +460,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
@@ -456,7 +468,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow: Arista
       show configuration (regex match)', 'Ansible Workflow: Arista show configuration
       (dict match)']
@@ -482,7 +495,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -490,6 +502,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
     Oakland, Denver]
@@ -499,7 +512,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {mode: LAB}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, Example1, Show version with multiprocessing, REST is_alive, napalm_configure_bgp_1]
   last_modified: '2019-08-13 20:58:00.317930'
   mail_recipient: ''
@@ -523,7 +537,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -531,6 +544,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
@@ -538,7 +552,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, add_devices_to_payload, 'Iteration Target Workflow: netmiko iteration
       2', 'Iteration Target Workflow: netmiko iteration 1', 'Iteration Target Workflow:
       netmiko iteration 3', 'Iteration Targets Workflow: No device targets']
@@ -564,7 +579,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -572,6 +586,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -579,7 +594,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, 'Getters Workflow: Interface IP', 'Payload Workflow: Add initial
       variables', 'Payload Workflow: Extraction 1', 'Payload Workflow: Extraction
       2', 'Payload Workflow: Validation 1', 'Payload Workflow: Validation 2']
@@ -606,7 +622,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -614,6 +629,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: []
   display_only_failed_nodes: false
   events: []
@@ -621,7 +637,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
     'Variable Access Subworkflow: Access variables for iteration']
   last_modified: '2019-08-20 18:46:19.926704'
@@ -647,7 +664,6 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -655,6 +671,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -662,7 +679,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   jobs: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
       getters and match mechanism workflow, payload_extraction_validation_worflow]
   last_modified: '2019-08-20 21:24:26.583640'
@@ -688,6 +706,5 @@
   start_workflows: []
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: service
   vendor: ''
   waiting_time: 0

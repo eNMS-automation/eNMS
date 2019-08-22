@@ -10,7 +10,8 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:52:44.218107'
   mail_recipient: ''
   max_processes: 5
@@ -66,7 +67,8 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:40:22.000682'
   mail_recipient: ''
   max_processes: 5
@@ -125,7 +127,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:17.558725'
   mail_recipient: ''
   max_processes: 5
@@ -162,7 +165,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:13.388262'
   mail_recipient: ''
   max_processes: 5
@@ -199,7 +203,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:13.428231'
   mail_recipient: ''
   max_processes: 5
@@ -236,7 +241,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:13.461232'
   mail_recipient: ''
   max_processes: 5
@@ -273,7 +279,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:38:04.913830'
   mail_recipient: ''
   max_processes: 5
@@ -311,7 +318,8 @@
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:38:04.642534'
   mail_recipient: ''
   max_processes: 5
@@ -357,7 +365,8 @@
   include_link_in_summary: true
   initial_payload: {}
   ip_address: 10.1.1.1
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-10 13:47:31.375477'
   mac_address: FF:FF:FF:FF:FF:FF
   mail_address: aaa@gmail.com
@@ -403,7 +412,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-13 20:54:58.539660'
   local_as: 100
   loopback: Lo100
@@ -449,7 +459,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:13.697251'
   load_known_host_keys: false
   look_for_keys: false
@@ -494,7 +505,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:14.001348'
   mail_recipient: ''
   max_processes: 5
@@ -535,7 +547,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:38:03.183017'
   mail_recipient: ''
   max_processes: 5
@@ -576,7 +589,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:38:04.436716'
   mail_recipient: ''
   max_processes: 5
@@ -623,7 +637,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-04 11:01:33.553474'
   mail_recipient: ''
   max_processes: 5
@@ -677,7 +692,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-03 20:32:00.822843'
   mail_recipient: ''
   max_processes: 5
@@ -734,7 +750,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:40:18.423301'
   mail_recipient: ''
   max_processes: 5
@@ -789,7 +806,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:40:21.380540'
   mail_recipient: ''
   max_processes: 5
@@ -839,7 +857,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 20:09:43.688021'
   mail_recipient: ''
   max_processes: 5
@@ -886,7 +905,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:41.424603'
   mail_recipient: ''
   max_processes: 5
@@ -940,7 +960,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-03 20:32:23.251724'
   mail_recipient: ''
   max_processes: 5
@@ -987,7 +1008,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:05.538847'
   mail_recipient: ''
   max_processes: 5
@@ -1033,7 +1055,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:03.817341'
   mail_recipient: ''
   max_processes: 5
@@ -1078,7 +1101,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:04.482568'
   mail_recipient: ''
   max_processes: 5
@@ -1121,7 +1145,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:04.818329'
   mail_recipient: ''
   max_processes: 5
@@ -1160,7 +1185,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-20 18:18:23.620683'
   mail_recipient: ''
   max_processes: 5
@@ -1218,7 +1244,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:14.896878'
   mail_recipient: ''
   max_processes: 5
@@ -1274,7 +1301,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 14:05:25.693261'
   mail_recipient: ''
   max_processes: 5
@@ -1330,7 +1358,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:36:46.701951'
   mail_recipient: antoine.fourmy@gmail.com
   max_processes: 5
@@ -1375,7 +1404,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:12:55.870709'
   mail_recipient: ''
   match1: ''
@@ -1439,7 +1469,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:35:35.605726'
   mail_recipient: ''
   max_processes: 5
@@ -1485,7 +1516,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:40:24.996346'
   mail_recipient: ''
   max_processes: 5
@@ -1526,7 +1558,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 20:09:49.603685'
   mail_recipient: ''
   max_processes: 50
@@ -1577,7 +1610,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-03 20:31:33.242467'
   mail_recipient: ''
   max_processes: 50
@@ -1636,7 +1670,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-24 20:09:50.574617'
   mail_recipient: ''
   max_processes: 50
@@ -1693,7 +1728,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-02 19:52:14.677268'
   mail_recipient: ''
   max_processes: 50
@@ -1750,7 +1786,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-19 15:41:54.851596'
   mail_recipient: ''
   max_processes: 50
@@ -1808,7 +1845,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-19 15:41:59.683776'
   mail_recipient: ''
   max_processes: 50
@@ -1854,7 +1892,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:29.352379'
   mail_recipient: ''
   max_processes: 50
@@ -1895,7 +1934,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:31.392491'
   mail_recipient: ''
   max_processes: 50
@@ -1950,7 +1990,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:38.941367'
   mail_recipient: ''
   max_processes: 50
@@ -2006,7 +2047,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:41.095217'
   mail_recipient: ''
   max_processes: 50
@@ -2062,7 +2104,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-03 20:33:15.924993'
   mail_recipient: ''
   max_processes: 50
@@ -2110,7 +2153,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-08 21:45:33.809528'
   mail_recipient: ''
   max_processes: 50
@@ -2154,7 +2198,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-06 22:20:19.161043'
   mail_recipient: ''
   max_processes: 50
@@ -2199,7 +2244,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-08 21:45:40.369909'
   mail_recipient: ''
   max_processes: 50
@@ -2244,7 +2290,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-06 23:40:55.348647'
   mail_recipient: ''
   max_processes: 50
@@ -2288,7 +2335,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-06 22:23:19.569044'
   mail_recipient: ''
   max_processes: 50
@@ -2336,7 +2384,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-10 17:48:21.020579'
   mail_recipient: ''
   max_processes: 50
@@ -2386,7 +2435,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-10 18:26:51.501557'
   mail_recipient: ''
   max_processes: 50
@@ -2435,7 +2485,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-10 18:26:36.791826'
   mail_recipient: ''
   max_processes: 50
@@ -2489,7 +2540,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-13 20:58:22.190268'
   mail_recipient: ''
   max_processes: 10
@@ -2547,7 +2599,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 14:05:31.377620'
   mail_recipient: ''
   max_processes: 5
@@ -2603,7 +2656,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: '["Loopback11","Loopback15"]'
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 14:05:00.322370'
   mail_recipient: ''
   max_processes: 5
@@ -2659,7 +2713,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: get_var('iteration_devices', device=device.name)
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 14:05:09.182701'
   mail_recipient: ''
   max_processes: 5
@@ -2715,7 +2770,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: get_var('iteration_devices2', device=device.name)
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 18:16:26.676556'
   mail_recipient: ''
   max_processes: 5
@@ -2765,7 +2821,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:22:23.906505'
   mail_recipient: ''
   max_processes: 5
@@ -2812,7 +2869,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:40:32.197054'
   mail_recipient: ''
   max_processes: 5
@@ -2853,7 +2911,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 23:42:49.512906'
   mail_recipient: ''
   max_processes: 50
@@ -2894,7 +2953,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 23:42:55.692116'
   mail_recipient: ''
   match1: ''
@@ -2947,7 +3007,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-14 23:57:00.505853'
   mail_recipient: ''
   match1: ''
@@ -3005,7 +3066,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-15 00:09:07.776014'
   mail_recipient: ''
   max_processes: 50
@@ -3051,7 +3113,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-15 00:11:21.018179'
   mail_recipient: ''
   max_processes: 50
@@ -3099,7 +3162,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: '["Washington", "Atlanta"]'
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-15 22:44:40.177070'
   mail_recipient: ''
   max_processes: 50
@@ -3145,7 +3209,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-18 16:27:11.734978'
   mail_recipient: ''
   max_processes: 50
@@ -3199,7 +3264,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_targets: get_result("get_interfaces", device=device.name)["result"]["get_interfaces"]
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-18 16:33:56.491650'
   mail_recipient: ''
   max_processes: 50
@@ -3247,7 +3313,8 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 28
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-22 20:55:39.326778'
   mail_recipient: ''
   max_processes: 5
@@ -3293,7 +3360,8 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 28
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-08-02 20:27:00.941168'
   mail_recipient: ''
   max_processes: 5
@@ -3338,7 +3406,8 @@
   initial_payload: {}
   iterated_job: Iterated_netmiko_service
   iterated_job_id: 28
-  iteration_targets: ''
+  iteration_values: ''
+  iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:15.506459'
   mail_recipient: ''
   max_processes: 50

@@ -31,3 +31,6 @@ use_workflow_targets: false -> device_targets_mode: ignore
 - RENAME iteration_targets -> iteration_values
 
 - Make iteration variable name configurable
+
+- The iteration variable is now "iteration_value" !
+=> CHANGE: migration files, replace payload["value"] with payload["iteration_value"]

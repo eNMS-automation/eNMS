@@ -191,18 +191,11 @@
       </div>
       <div id="step-3" style="min-height: 300px">
         {% if form_type == "workflow" %}
-        <fieldset>
-          <div class="item">
-            <input
-              id="workflow-use_workflow_targets"
-              name="use_workflow_targets"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Use Workflow Targets</label>
-          </div>
-        </fieldset>
+        <label for="device_targets_mode">Device Targets Mode</label>
+        <div class="form-group">
+          {{ form.device_targets_mode(id=form_type + '-device_targets_mode',
+          class="form-control add-id") }}
+        </div>
         {% endif %}
         <label for="devices">Devices</label>
         <div class="form-group">

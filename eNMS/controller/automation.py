@@ -10,6 +10,7 @@ from operator import attrgetter
 from pathlib import Path
 from re import search, sub
 from typing import Any, Dict, Optional
+from uuid import uuid4
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
@@ -61,9 +62,10 @@ class AutomationController(BaseController):
             Session.delete(result)
 
     def create_label(self, workflow_id, x, y, **kwargs):
-        workflow = fetch("Workflow", id=workflow_id)
-        workflow.labels[kwargs["content"]] = [x, y]
-        return {"positions": [x, y], "content": kwargs["content"]}
+        workflow, label_id = fetch("Workflow", id=workflow_id), str(uuid4())
+        label = {"positions": [x, y], "content": kwargs["content"]}
+        workflow.labels[label_id] = label
+        return {"id": label_id, **label}
 
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
         delete("WorkflowEdge", id=edge_id)
@@ -317,10 +319,9 @@ class AutomationController(BaseController):
         session["workflow"] = workflow.id
         for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
-            if id[0] == "L":
-                content = id[2:]
-                old_position = workflow.labels[content]
-                workflow.labels[content] = new_position
+            if "-" in id:
+                old_position = workflow.labels[id]["positions"]
+                workflow.labels[id] = {"positions": new_position, "content": workflow.labels[id]["content"]}
             else:
                 job = fetch("Job", id=id)
                 current_position = job.positions.get(workflow.name)

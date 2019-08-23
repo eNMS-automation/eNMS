@@ -69,8 +69,8 @@ function displayWorkflow(workflowData) {
     .filter((s) => s.type == "IterationService")
     .map(drawIterationService);
   workflow.jobs.filter((s) => s.iteration_values != "").map(drawIterationEdge);
-  for (const [content, position] of Object.entries(workflow.labels)) {
-    drawLabel(content, position);
+  for (const [id, label] of Object.entries(workflow.labels)) {
+    drawLabel(id, label);
   }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
@@ -82,8 +82,8 @@ function displayWorkflow(workflowData) {
     if (typeof node !== "undefined" && node != 1 && node != 2) {
       graph.selectNodes([node]);
       $(".global,.edge-selection").hide();
-      $(`.${node[0] === "L" ? "label" : "node"}-selection`).show();
-      $(`.${node[0] === "L" ? "node" : "label"}-selection`).hide();
+      $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
+      $(`.${node.length == 36 ? "node" : "label"}-selection`).hide();
       selectedNode = nodes.get(node);
     } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
       graph.selectEdges([edge]);
@@ -208,7 +208,7 @@ function deleteNode(id) {
 
 function deleteLabel(label) {
   nodes.remove(label.id);
-  call(`/delete_label/${workflow.id}/${label.label}`, function(updateTime) {
+  call(`/delete_label/${workflow.id}/${label.id}`, function(updateTime) {
     delete workflow.labels[label.id];
     lastModified = updateTime;
     alertify.notify("Label removed.", "success", 5);
@@ -260,16 +260,16 @@ function jobToNode(job, index) {
   };
 }
 
-function drawLabel(content, positions) {
+function drawLabel(id, label) {
   nodes.add({
-    id: `L-${content}`,
+    id: id,
     shape: "box",
     type: "label",
-    label: content,
+    label: label.content,
     borderWidth: 0,
     color: "#FFFFFF",
-    x: positions[0],
-    y: positions[1],
+    x: label.positions[0],
+    y: label.positions[1],
   });
 }
 
@@ -410,7 +410,7 @@ function createLabel() {
       currLabel = null;
     }
     $("#workflow_label").remove();
-    drawLabel(result.content, result.positions);
+    drawLabel(result.id, result);
     alertify.notify("Label created.", "success", 5);
   });
 }

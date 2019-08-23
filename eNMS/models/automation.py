@@ -751,7 +751,7 @@ class Workflow(Job):
     parent_cls = "Job"
     has_targets = Column(Boolean, default=True)
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
-    labels = Column(MutableList)
+    labels = Column(MutableDict)
     device_targets_mode = Column(SmallString, default="service")
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship(

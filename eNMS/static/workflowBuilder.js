@@ -69,8 +69,9 @@ function displayWorkflow(workflowData) {
     .filter((s) => s.type == "IterationService")
     .map(drawIterationService);
   workflow.jobs.filter((s) => s.iteration_values != "").map(drawIterationEdge);
-  console.log(workflow.labels);
-  workflow.labels.map(drawLabel);
+  for (const [content, position] of Object.entries(workflow.labels)) {
+    drawLabel(content, position);
+  }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function(properties) {
@@ -219,6 +220,13 @@ function deleteEdge(edgeId) {
   });
 }
 
+function formatJobTitle(job) {
+  return `
+    <b>Type</b>: ${job.type}<br>
+    <b>Name</b>: ${job.name}
+  `
+}
+
 function jobToNode(job, index) {
   return {
     id: job.id,
@@ -228,7 +236,7 @@ function jobToNode(job, index) {
     label: job.name,
     name: job.name,
     type: job.type,
-    title: `${job.type}\n${job.name}`,
+    title: formatJobTitle(job),
     x: job.positions[workflow.name]
       ? job.positions[workflow.name][0]
       : index
@@ -242,15 +250,17 @@ function jobToNode(job, index) {
   };
 }
 
-function drawLabel(label) {
+function drawLabel(content, position) {
+  console.log(content, position);
   nodes.add({
+    id: `L-${content}`,
     shape: "box",
     type: "label",
-    label: label.content,
+    label: content,
     borderWidth: 0,
     color: "#FFFFFF",
-    x: label.x,
-    y: label.y,
+    x: position[0],
+    y: position[1],
   });
 }
 

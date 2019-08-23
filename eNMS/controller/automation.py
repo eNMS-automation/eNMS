@@ -303,12 +303,17 @@ class AutomationController(BaseController):
         now = self.get_time()
         workflow = fetch("Workflow", allow_none=True, id=workflow_id)
         session["workflow"] = workflow.id
-        for job_id, position in request.json.items():
-            job = fetch("Job", id=job_id)
-            current_position = job.positions.get(workflow.name)
+        for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
+            if id[0] == "L":
+                content = id[2:]
+                old_position = workflow.labels[content]
+                workflow.labels[content] = new_position
+            else:
+                job = fetch("Job", id=id)
+                current_position = job.positions.get(workflow.name)
+                job.positions[workflow.name] = new_position
             if new_position != current_position:
-                job.positions[workflow.name] = [position["x"], position["y"]]
                 workflow.last_modified = now
         return now
 
@@ -367,6 +372,5 @@ class AutomationController(BaseController):
         return sorted(sum(playbooks, []))
 
     def create_label(self, workflow_id, x, y, **kwargs):
-        print(workflow_id, x, y)
         workflow = fetch("Workflow", id=workflow_id)
-        workflow.labels.append({"x": x, "y": y, "content": kwargs["content"]})
+        workflow.labels[kwargs["content"]] = {"x": x, "y": y}

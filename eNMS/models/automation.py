@@ -326,6 +326,10 @@ class Run(AbstractBase):
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
+        print("ttt"*100, self.success_query)
+        if self.success_query:
+            print(self.eval(self.success_query, **locals()))
+            results["success"] = self.eval(self.success_query, **locals())
         self.log(
             "info",
             f"Finished running {self.job.type} '{self.job.name}'"

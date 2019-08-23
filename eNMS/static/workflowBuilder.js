@@ -108,20 +108,6 @@ function displayWorkflow(workflowData) {
       }
     }
   });
-  graph.on("hoverNode", function(properties) {
-    properties.event.preventDefault();
-    let node = this.getNodeAt(properties.pointer.DOM);
-    if (node && node != 1 && node != 2) {
-      node = parseInt(node);
-      hoveredNode = node;
-      const job = workflow.jobs.find((w) => w.id === node);
-      nodes.update({ id: node, label: `${job.type}\n${job.name}` });
-    }
-  });
-  graph.on("blurNode", function(properties) {
-    const job = workflow.jobs.find((w) => w.id === hoveredNode);
-    if (job) nodes.update({ id: hoveredNode, label: job.name });
-  });
   $("#current-runtimes").empty();
   $("#current-runtimes").append("<option value=''>Normal Display</option>");
   workflowData.runtimes.forEach((runtime) => {
@@ -242,6 +228,7 @@ function jobToNode(job, index) {
     label: job.name,
     name: job.name,
     type: job.type,
+    title: `${job.type}\n${job.name}`,
     x: job.positions[workflow.name]
       ? job.positions[workflow.name][0]
       : index
@@ -258,6 +245,7 @@ function jobToNode(job, index) {
 function drawLabel(label) {
   nodes.add({
     shape: "box",
+    type: "label",
     label: label.content,
     borderWidth: 0,
     color: "#FFFFFF",

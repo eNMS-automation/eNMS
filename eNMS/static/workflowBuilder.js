@@ -57,7 +57,6 @@ let selectedNode;
 let edgeType;
 let lastModified;
 let stateUpdate = false;
-let hoveredNode;
 let hoveredLabel;
 let mousePosition;
 
@@ -82,7 +81,8 @@ function displayWorkflow(workflowData) {
     if (typeof node !== "undefined" && node != 1 && node != 2) {
       graph.selectNodes([node]);
       $(".global,.edge-selection").hide();
-      $(".node-selection").show();
+      $(`.${node[0] === "L" ? "label" : "node"}-selection`).show();
+      $(`.${node[0] === "L" ? "node" : "label"}-selection`).hide();
       selectedNode = nodes.get(node);
     } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
       graph.selectEdges([edge]);
@@ -195,13 +195,20 @@ function addJobsToWorkflow(jobs) {
 function deleteNode(id) {
   workflow.jobs = workflow.jobs.filter((n) => n.id != id);
   call(`/delete_node/${workflow.id}/${id}`, function(result) {
-    hoveredNode = null;
     lastModified = result.update_time;
     alertify.notify(
       `'${result.job.name}' deleted from the workflow.`,
       "success",
       5
     );
+  });
+}
+
+function deleteLabel(id) {
+  workflow.jobs = workflow.jobs.filter((n) => n.id != id);
+  call(`/delete_label/${workflow.id}/${id}`, function(result) {
+    lastModified = result.update_time;
+    alertify.notify("Label removed.", "success", 5);
   });
 }
 
@@ -251,7 +258,6 @@ function jobToNode(job, index) {
 }
 
 function drawLabel(content, position) {
-  console.log(content, position);
   nodes.add({
     id: `L-${content}`,
     shape: "box",
@@ -389,6 +395,8 @@ Object.assign(action, {
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
   "Move Nodes": () => switchMode("node"),
   "Create Label": () => showPanel("workflow_label"),
+  "Edit Label": () => showPanel("workflow_label"),
+  "Delete Label": deleteLabel,
 });
 
 // eslint-disable-next-line

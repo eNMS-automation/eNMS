@@ -944,9 +944,7 @@ class Workflow(Job):
                 allowed_devices[job.name] = initial_targets
         while jobs:
             job = jobs.pop()
-            if job in visited:
-                continue
-            if any(
+            if job in visited or any(
                 node not in visited
                 for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
             ):

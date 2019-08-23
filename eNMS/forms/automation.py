@@ -200,3 +200,8 @@ class AddJobsForm(BaseForm):
 class ServiceTableForm(BaseForm):
     form_type = HiddenField(default="service_table")
     services = SelectField(choices=())
+
+
+class WorkflowLabelForm(BaseForm):
+    form_type = HiddenField(default="workflow_label")
+    content = StringField(widget=TextArea(), render_kw={"rows": 15})

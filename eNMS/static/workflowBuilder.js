@@ -131,6 +131,15 @@ function displayWorkflow(workflowData) {
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   lastModified = workflow.last_modified;
+  nodes.add({
+    id: -1,
+    shape: "box",
+    label: "fgrthyjuki",
+    borderWidth: 0,
+    color: "#FFFFFF",
+    x: 50,
+    y: 50,
+  });
   return graph;
 }
 
@@ -374,6 +383,7 @@ Object.assign(action, {
   "Create 'Failure' edge": () => switchMode("failure"),
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
   "Move Nodes": () => switchMode("node"),
+  "Create Label": () => showPanel("workflow_label"),
 });
 
 $("#network").contextMenu({

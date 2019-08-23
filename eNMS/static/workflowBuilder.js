@@ -69,6 +69,8 @@ function displayWorkflow(workflowData) {
     .filter((s) => s.type == "IterationService")
     .map(drawIterationService);
   workflow.jobs.filter((s) => s.iteration_values != "").map(drawIterationEdge);
+  console.log(workflow.labels);
+  workflow.labels.map(drawLabel);
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function(properties) {
@@ -133,15 +135,7 @@ function displayWorkflow(workflowData) {
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   lastModified = workflow.last_modified;
-  nodes.add({
-    id: -1,
-    shape: "box",
-    label: "fgrthyjuki",
-    borderWidth: 0,
-    color: "#FFFFFF",
-    x: 50,
-    y: 50,
-  });
+
   return graph;
 }
 
@@ -259,6 +253,17 @@ function jobToNode(job, index) {
       ? index * 50 - 200
       : 0,
   };
+}
+
+function drawLabel(label) {
+  nodes.add({
+    shape: "box",
+    label: label.content,
+    borderWidth: 0,
+    color: "#FFFFFF",
+    x: label.x,
+    y: label.y,
+  });
 }
 
 function drawIterationEdge(service) {
@@ -393,7 +398,7 @@ function createLabel() {
   const params = `${workflow.id}/${mousePosition.x}/${mousePosition.y}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
     $("#workflow_label").remove();
-    console.log(result)
+
   });
 }
 

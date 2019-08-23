@@ -367,5 +367,6 @@ class AutomationController(BaseController):
         return sorted(sum(playbooks, []))
 
     def create_label(self, workflow_id, x, y, **kwargs):
+        print(workflow_id, x, y)
         workflow = fetch("Workflow", id=workflow_id)
-        workflow.labels.append({"x": x, "y": y, **kwargs})
+        workflow.labels.append({"x": x, "y": y, "content": kwargs["content"]})

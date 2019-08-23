@@ -751,6 +751,7 @@ class Workflow(Job):
     parent_cls = "Job"
     has_targets = Column(Boolean, default=True)
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
+    labels = Column(MutableList)
     device_targets_mode = Column(SmallString, default="service")
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship(
@@ -1037,7 +1038,6 @@ class WorkflowEdge(AbstractBase):
     id = Column(Integer, primary_key=True)
     name = Column(SmallString)
     subtype = Column(SmallString)
-    labels = Column(MutableList)
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
         "Job",

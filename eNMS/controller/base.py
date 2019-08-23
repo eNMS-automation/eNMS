@@ -151,6 +151,7 @@ class BaseController:
         "connection",
         "counters",
         "count_models",
+        "create_label",
         "database_deletion",
         "delete_edge",
         "delete_instance",

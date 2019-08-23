@@ -67,6 +67,7 @@ class JobForm(BaseForm):
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
+    success_query = StringField("Success Value (Python Query)")
     query_fields = ["python_query", "skip_python_query", "iteration_values"]
 
     def validate(self) -> bool:

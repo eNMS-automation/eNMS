@@ -35,7 +35,7 @@
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with separate failure - success path: [-239, -32]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
-      -283, 31]
+      -301, 93]
     Workflow_of_workflows: [-566, -16]
     payload_extraction_validation_worflow: [-481, -95]
     payload_transfer_workflow: ['-200', '0']
@@ -382,7 +382,7 @@
   positions:
     Workflow with separate failure - success path: [773, 11]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
-      -223, -170]
+      -300, -168]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address

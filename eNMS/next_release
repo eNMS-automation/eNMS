@@ -49,3 +49,9 @@ EXIT STATUS -----------
 - Bug: if two people are watching the same workflow run in WF builder and one person moves a
 job position on the display, when the other users page refreshes they lose the current payload.
 >>> Fixed.
+
+Workflow notes Desc: Support textboxes added to a workflow that are displayed in the workflow builder.
+Note: This might be documentation of the overall workflow (or caveats), or might be notes specific to a step.
+Note positions should be maintained like service/workflow positions. Priority: 3
+>>> Done.
+

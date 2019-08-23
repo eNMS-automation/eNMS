@@ -204,4 +204,5 @@ class ServiceTableForm(BaseForm):
 
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
+    action = "createLabel"
     content = StringField(widget=TextArea(), render_kw={"rows": 15})

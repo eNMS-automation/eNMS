@@ -365,3 +365,7 @@ class AutomationController(BaseController):
         path = Path(self.playbook_path or self.path / "playbooks")
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
+
+    def create_label(self, workflow_id, x, y, **kwargs):
+        workflow = fetch("Workflow", id=workflow_id)
+        workflow.labels.append({"x": x, "y": y, **kwargs})

@@ -25,7 +25,7 @@ from xml.parsers.expat import ExpatError
 
 from eNMS import app
 from eNMS.database import Session
-from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
+from eNMS.database.dialect import Column, LargeString, MutableDict, MutableList, SmallString
 from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.associations import (
     job_device_table,
@@ -1037,6 +1037,7 @@ class WorkflowEdge(AbstractBase):
     id = Column(Integer, primary_key=True)
     name = Column(SmallString)
     subtype = Column(SmallString)
+    labels = Column(MutableList)
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
         "Job",

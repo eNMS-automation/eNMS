@@ -59,6 +59,7 @@ let lastModified;
 let stateUpdate = false;
 let hoveredNode;
 let hoveredLabel;
+let mousePosition;
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
@@ -71,6 +72,7 @@ function displayWorkflow(workflowData) {
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function(properties) {
+    mousePosition = {"x": properties.event.offsetX, "y": properties.event.offsetY};
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
     const edge = this.getEdgeAt(properties.pointer.DOM);
@@ -385,6 +387,15 @@ Object.assign(action, {
   "Move Nodes": () => switchMode("node"),
   "Create Label": () => showPanel("workflow_label"),
 });
+
+// eslint-disable-next-line
+function createLabel() {
+  const params = `${workflow.id}/${mousePosition.x}/${mousePosition.y}`;
+  fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
+    $("#workflow_label").remove();
+    console.log(result)
+  });
+}
 
 $("#network").contextMenu({
   menuSelector: "#contextMenu",

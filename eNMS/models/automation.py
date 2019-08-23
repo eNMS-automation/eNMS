@@ -848,6 +848,8 @@ class Workflow(Job):
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         while jobs:
             job = jobs.pop()
+            if job in visited:
+                continue
             if any(
                 node not in visited
                 for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
@@ -900,8 +902,7 @@ class Workflow(Job):
             payload[job.name] = job_results
             results["results"].update(payload)
             for successor in successors:
-                if successor not in visited:
-                    jobs.append(successor)
+                jobs.append(successor)
                 if successor == self.jobs[1]:
                     results["success"] = True
             if not skip_job and not job.skip:
@@ -909,7 +910,6 @@ class Workflow(Job):
         return results
 
     def build_results(self, run: "Run", payload: dict) -> dict:
-
         if run.device_targets_mode in ("service", "ignore"):
             return self.per_service_workflow_run(run, payload)
         else:
@@ -924,10 +924,15 @@ class Workflow(Job):
                 "runtime": run.runtime,
             }
 
+    @property
+    def job_number(self):
+        return sum((1 + job.job_number) if job.type == "Workflow" else 1 for job in self.jobs)
+
     def per_service_workflow_run(self, run: "Run", payload: dict) -> dict:
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )
+        run.set_state(progress_max=self.job_number)
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()
@@ -939,6 +944,8 @@ class Workflow(Job):
                 allowed_devices[job.name] = initial_targets
         while jobs:
             job = jobs.pop()
+            if job in visited:
+                continue
             if any(
                 node not in visited
                 for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
@@ -1008,8 +1015,7 @@ class Workflow(Job):
             payload[job.name] = job_results
             results["results"].update(payload)
             for successor in successors:
-                if successor not in visited:
-                    jobs.append(successor)
+                jobs.append(successor)
                 if (
                     not run.device_targets_mode == "service"
                     and successor == self.jobs[1]

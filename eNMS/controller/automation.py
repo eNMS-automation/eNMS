@@ -60,6 +60,11 @@ class AutomationController(BaseController):
         for result in fetch("Run", all_matches=True, allow_none=True, job_id=job_id):
             Session.delete(result)
 
+    def create_label(self, workflow_id, x, y, **kwargs):
+        workflow = fetch("Workflow", id=workflow_id)
+        workflow.labels[kwargs["content"]] = [x, y]
+        return {"positions": [x, y], "content": kwargs["content"]}
+
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
         delete("WorkflowEdge", id=edge_id)
         now = self.get_time()
@@ -72,6 +77,13 @@ class AutomationController(BaseController):
         now = self.get_time()
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
+
+    def delete_label(self, workflow_id: int, label: int) -> dict:
+        workflow = fetch("Workflow", id=workflow_id)
+        workflow.labels.pop(label)
+        now = self.get_time()
+        workflow.last_modified = now
+        return now
 
     def duplicate_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
         parent_workflow = fetch("Workflow", id=workflow_id)
@@ -370,7 +382,3 @@ class AutomationController(BaseController):
         path = Path(self.playbook_path or self.path / "playbooks")
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))
-
-    def create_label(self, workflow_id, x, y, **kwargs):
-        workflow = fetch("Workflow", id=workflow_id)
-        workflow.labels[kwargs["content"]] = {"x": x, "y": y}

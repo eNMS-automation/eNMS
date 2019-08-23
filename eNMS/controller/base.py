@@ -155,6 +155,7 @@ class BaseController:
         "database_deletion",
         "delete_edge",
         "delete_instance",
+        "delete_label",
         "delete_node",
         "duplicate_workflow",
         "export_job",

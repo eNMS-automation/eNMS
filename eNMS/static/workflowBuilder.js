@@ -74,7 +74,7 @@ function displayWorkflow(workflowData) {
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
   graph.on("oncontext", function(properties) {
-    mousePosition = {"x": properties.event.offsetX, "y": properties.event.offsetY};
+    mousePosition = graph.DOMtoCanvas({"x": properties.event.offsetX, "y": properties.event.offsetY});
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
     const edge = this.getEdgeAt(properties.pointer.DOM);
@@ -86,11 +86,11 @@ function displayWorkflow(workflowData) {
       selectedNode = nodes.get(node);
     } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
       graph.selectEdges([edge]);
-      $(".global,.node-selection").hide();
+      $(".global,.node-selection,.label-selection").hide();
       $(".edge-selection").show();
       selectedNode = nodes.get(node);
     } else {
-      $(".node-selection").hide();
+      $(".node-selection,.label-selection").hide();
       $(".global").show();
     }
   });
@@ -204,10 +204,11 @@ function deleteNode(id) {
   });
 }
 
-function deleteLabel(id) {
-  workflow.jobs = workflow.jobs.filter((n) => n.id != id);
-  call(`/delete_label/${workflow.id}/${id}`, function(result) {
-    lastModified = result.update_time;
+function deleteLabel(label) {
+  nodes.remove(label.id);
+  call(`/delete_label/${workflow.id}/${label.label}`, function(updateTime) {
+    delete workflow.labels[label.id];
+    lastModified = updateTime;
     alertify.notify("Label removed.", "success", 5);
   });
 }
@@ -257,7 +258,8 @@ function jobToNode(job, index) {
   };
 }
 
-function drawLabel(content, position) {
+function drawLabel(content, positions) {
+  console.log(content, positions);
   nodes.add({
     id: `L-${content}`,
     shape: "box",
@@ -265,8 +267,8 @@ function drawLabel(content, position) {
     label: content,
     borderWidth: 0,
     color: "#FFFFFF",
-    x: position[0],
-    y: position[1],
+    x: positions[0],
+    y: positions[1],
   });
 }
 
@@ -404,7 +406,8 @@ function createLabel() {
   const params = `${workflow.id}/${mousePosition.x}/${mousePosition.y}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
     $("#workflow_label").remove();
-
+    drawLabel(result.content, result.positions);
+    alertify.notify("Label created.", "success", 5);
   });
 }
 

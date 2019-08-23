@@ -45,3 +45,7 @@ EXIT STATUS -----------
 5 -- Bad or incomplete options
 99 -- User interrupted execution
 250 -- Unexpected error
+
+- Bug: if two people are watching the same workflow run in WF builder and one person moves a
+job position on the display, when the other users page refreshes they lose the current payload.
+>>> Fixed.

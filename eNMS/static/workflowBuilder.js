@@ -59,6 +59,7 @@ let lastModified;
 let stateUpdate = false;
 let hoveredLabel;
 let mousePosition;
+let currLabel;
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
@@ -260,7 +261,6 @@ function jobToNode(job, index) {
 }
 
 function drawLabel(content, positions) {
-  console.log(content, positions);
   nodes.add({
     id: `L-${content}`,
     shape: "box",
@@ -398,17 +398,27 @@ Object.assign(action, {
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
   "Move Nodes": () => switchMode("node"),
   "Create Label": () => showPanel("workflow_label"),
-  "Edit Label": () => showPanel("workflow_label"),
+  "Edit Label": editLabel,
   "Delete Label": deleteLabel,
 });
 
-// eslint-disable-next-line
 function createLabel() {
   const params = `${workflow.id}/${mousePosition.x}/${mousePosition.y}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
+    if (currLabel) {
+      deleteLabel(currLabel);
+      currLabel = null;
+    }
     $("#workflow_label").remove();
     drawLabel(result.content, result.positions);
     alertify.notify("Label created.", "success", 5);
+  });
+}
+
+function editLabel(label) {
+  showPanel("workflow_label", null, () => {
+    $("#content").val(label.label);
+    currLabel = label;
   });
 }
 

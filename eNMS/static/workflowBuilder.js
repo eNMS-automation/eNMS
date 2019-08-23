@@ -109,6 +109,7 @@ function displayWorkflow(workflowData) {
       }
     }
   });
+  const currentValue = $("#current-runtimes").val();
   $("#current-runtimes").empty();
   $("#current-runtimes").append("<option value=''>Normal Display</option>");
   workflowData.runtimes.forEach((runtime) => {
@@ -116,7 +117,7 @@ function displayWorkflow(workflowData) {
       `<option value='${runtime}'>${runtime}</option>`
     );
   });
-  $("#current-runtimes").val("");
+  $("#current-runtimes").val(currentValue);
   $("#current-runtimes").selectpicker("refresh");
   graph.on("dragEnd", () => savePositions());
   $(`#add_jobs option[value='${workflow.id}']`).remove();
@@ -548,6 +549,7 @@ function getWorkflowState(first) {
       if (first || (result.state && result.state.status == "Running")) {
         setTimeout(getWorkflowState, 3000);
       } else {
+        setTimeout(getWorkflowState, 15000);
         stateUpdate = false;
       }
     });

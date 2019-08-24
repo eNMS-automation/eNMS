@@ -55,7 +55,7 @@ class IterationService(Service):
 
 class IterationForm(ServiceForm):
     form_type = HiddenField(default="IterationService")
-    has_targets = BooleanField("Has Target Devices")
+    has_targets = BooleanField("Has Target Devices", default=True)
     origin_of_values = SelectField(
         "Where Values come from",
         choices=(

@@ -55,5 +55,9 @@ Note: This might be documentation of the overall workflow (or caveats), or might
 Note positions should be maintained like service/workflow positions. Priority: 3
 >>> Done.
 
-- Add success query mechanism
+- RestCallService 404 as success Desc: Provide an option to accept 404 as success
+Note: Unmount requests to the BNC return 404 if the device is not already mounted.
+From the service perspective, this is still success. Priority: 2 
+New mechanism: success as a python query kind of thingAdd success query mechanism
 
+- The "has device targets" property now defaults to True.

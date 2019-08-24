@@ -114,7 +114,7 @@ class RestCallService(Service):
 
 class RestCallForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="RestCallService")
-    has_targets = BooleanField("Has Target Devices")
+    has_targets = BooleanField("Has Target Devices", default=True)
     call_type = SelectField(
         choices=(
             ("GET", "GET"),

@@ -89,7 +89,7 @@ operation_choices = (
 
 class PayloadExtractionForm(ServiceForm):
     form_type = HiddenField(default="PayloadExtractionService")
-    has_targets = BooleanField("Has Target Devices")
+    has_targets = BooleanField("Has Target Devices", default=True)
     variable1 = StringField("Variable Name")
     query1 = StringField("Python Extraction Query")
     match_type1 = SelectField("Post Processing", choices=match_choices)

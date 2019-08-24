@@ -36,6 +36,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -79,6 +80,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: Arista
@@ -122,6 +124,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: Arista
@@ -142,8 +145,14 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   jobs: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
-  labels: {}
-  last_modified: '2019-08-05 13:30:56.982753'
+  labels:
+    bf81728f-aaa4-44dd-8277-d419d5885bd7:
+      content: "The success value of get_facts is determined by the \"success_query\"\
+        \ mechanism:\r\nthe vendor retrieved by Napalm get_facts must be equal to\
+        \ the device \"Vendor\" in the inventory.\r\nQuery : results[\"result\"][\"\
+        get_facts\"][\"vendor\"] == device.vendor"
+      positions: [-221, -144]
+  last_modified: '2019-08-24 01:04:06.745365'
   mail_recipient: ''
   name: payload_transfer_workflow
   notification_header: ''
@@ -164,6 +173,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: 'False'
   time_between_retries: 10
   type: Workflow
   vendor: Arista
@@ -205,6 +215,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -249,6 +260,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -292,6 +304,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: Arista
@@ -334,6 +347,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -375,6 +389,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -418,6 +433,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -462,6 +478,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -505,6 +522,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -534,7 +552,7 @@
     d36009d8-ce3a-4ce6-8766-5dc3241d777b:
       content: The service "Napalm configure BGP" is configured to be skipped.
       positions: [146, -232]
-  last_modified: '2019-08-24 00:33:07.191861'
+  last_modified: '2019-08-24 01:01:52.549675'
   mail_recipient: ''
   name: 'Workflow: multiple entry points, skip job, multiprocessing, separate paths'
   notification_header: ''
@@ -554,6 +572,7 @@
   start_jobs: [Start, Example1]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -597,6 +616,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -641,6 +661,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -684,6 +705,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''
@@ -727,6 +749,7 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
+  success_query: ''
   time_between_retries: 10
   type: Workflow
   vendor: ''

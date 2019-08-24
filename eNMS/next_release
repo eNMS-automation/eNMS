@@ -55,3 +55,5 @@ Note: This might be documentation of the overall workflow (or caveats), or might
 Note positions should be maintained like service/workflow positions. Priority: 3
 >>> Done.
 
+- Add success query mechanism
+

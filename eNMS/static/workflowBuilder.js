@@ -83,7 +83,7 @@ function displayWorkflow(workflowData) {
       graph.selectNodes([node]);
       $(".global,.edge-selection").hide();
       $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
-      $(`.${node.length == 36 ? "node" : "label"}-selection`).hide();
+      $(`.${node.length == 36 ? "node" : "label"}-selection,.global,.edge-selection`).hide();
       selectedNode = nodes.get(node);
     } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
       graph.selectEdges([edge]);

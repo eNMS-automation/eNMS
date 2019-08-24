@@ -38,7 +38,7 @@
       -301, 93]
     Workflow_of_workflows: [-566, -16]
     payload_extraction_validation_worflow: [-481, -95]
-    payload_transfer_workflow: ['-200', '0']
+    payload_transfer_workflow: [-459, 10]
     'python Workflow: payload editor and pool helper': ['-326', '45']
     python_query_workflow: ['-164', '15']
   push_to_git: false
@@ -51,6 +51,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -98,7 +99,7 @@
       594, -3]
     Workflow_of_workflows: [482, -46]
     payload_extraction_validation_worflow: [175, 266]
-    payload_transfer_workflow: ['500', '0']
+    payload_transfer_workflow: [676, 95]
     'python Workflow: payload editor and pool helper': ['530', '155']
     python_query_workflow: ['651', '20']
   push_to_git: false
@@ -111,6 +112,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -149,6 +151,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -187,6 +190,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -225,6 +229,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -263,6 +268,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -302,6 +308,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -341,6 +348,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -382,7 +390,7 @@
   positions:
     Workflow with separate failure - success path: [773, 11]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
-      -300, -168]
+      -281, -178]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -396,6 +404,7 @@
   start_new_connection: false
   string1: cisco
   string2: s2
+  success_query: ''
   time_between_retries: 10
   type: ExampleService
   url: https://www.google.fr/
@@ -441,6 +450,7 @@
   skip: true
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: ConfigureBgpService
   vendor: ''
@@ -487,6 +497,7 @@
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: GenericFileTransferService
   vendor: ''
@@ -528,6 +539,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: DatabaseBackupService
   vendor: ''
@@ -571,6 +583,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoBackupService
@@ -613,6 +626,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmBackupService
   use_device_driver: true
@@ -663,6 +677,7 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoConfigurationService
@@ -724,6 +739,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -777,6 +793,7 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoConfigurationService
@@ -836,6 +853,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 1
   timeout: 3
   type: NetmikoValidationService
@@ -881,6 +899,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmConfigurationService
   use_device_driver: true
@@ -938,6 +957,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   timeout: 15
   type: RestCallService
@@ -962,7 +982,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-03 20:32:23.251724'
+  last_modified: '2019-08-24 00:58:16.900129'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -976,7 +996,7 @@
   positions:
     Workflow with separate failure - success path: [214, -132]
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: ['-50', '-100']
+    payload_transfer_workflow: [-223, -72]
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
   python_query: ''
@@ -988,6 +1008,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: results["result"]["get_facts"]["vendor"] == device.vendor
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1024,7 +1045,7 @@
   positions:
     Workflow with separate failure - success path: [455, 10]
     Workflow_of_workflows: [-122, -174]
-    payload_transfer_workflow: ['150', '100']
+    payload_transfer_workflow: [-180, 211]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1035,6 +1056,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1070,7 +1092,7 @@
   pools: []
   positions:
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: ['150', '-100']
+    payload_transfer_workflow: [277, -62]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1081,6 +1103,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1116,7 +1139,7 @@
   pools: []
   positions:
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: ['300', '-100']
+    payload_transfer_workflow: [686, -58]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1127,6 +1150,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -1158,7 +1182,7 @@
   pools: []
   positions:
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: ['300', '0']
+    payload_transfer_workflow: [287, 97]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1169,6 +1193,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: SwissArmyKnifeService
   vendor: ''
@@ -1217,6 +1242,7 @@
     \ if device.name == \"Washington\" else ['Loopback55', 'Loopback666']\r\nset_var('iteration_devices2',\
     \ targets2, device=device.name)\r\nsave_result(True, {})"
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1271,6 +1297,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -1328,6 +1355,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -1385,6 +1413,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -1444,6 +1473,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadExtractionService
   variable1: simple_variable
@@ -1494,6 +1524,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: dict_included
@@ -1541,6 +1572,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
@@ -1582,6 +1614,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmRollbackService
   use_device_driver: true
@@ -1640,6 +1673,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoValidationService
@@ -1698,6 +1732,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoValidationService
@@ -1755,6 +1790,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoValidationService
@@ -1814,6 +1850,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoPromptsService
@@ -1873,6 +1910,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoPromptsService
@@ -1918,6 +1956,7 @@
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -1963,6 +2002,7 @@
     iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -2017,6 +2057,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 1
   type: NetmikoValidationService
@@ -2074,6 +2115,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoValidationService
@@ -2131,6 +2173,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoValidationService
@@ -2178,6 +2221,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -2223,6 +2267,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -2270,6 +2315,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -2315,6 +2361,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -2360,6 +2407,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: NapalmGettersService
   use_device_driver: true
@@ -2412,6 +2460,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: AnsiblePlaybookService
   validation_method: dict_included
@@ -2462,6 +2511,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: AnsiblePlaybookService
   validation_method: text
@@ -2512,6 +2562,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: AnsiblePlaybookService
   validation_method: dict_included
@@ -2569,6 +2620,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoValidationService
@@ -2626,6 +2678,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -2683,6 +2736,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -2740,6 +2794,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -2797,6 +2852,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: NetmikoValidationService
@@ -2846,6 +2902,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
@@ -2894,6 +2951,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
@@ -2937,6 +2995,7 @@
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -2988,6 +3047,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadExtractionService
   variable1: boolean
@@ -3042,6 +3102,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadExtractionService
   variable1: list
@@ -3091,6 +3152,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: text
@@ -3138,6 +3200,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PayloadValidationService
   validation_method: dict_included
@@ -3189,6 +3252,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   timeout: 15
   type: RestCallService
@@ -3237,6 +3301,7 @@
     \n\"napalm\": get_result(\"netmiko_check_no_vrf_napalm\", device=device.name)\r\
     \n}\r\nsave_result(success=True, result=result)"
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: PythonSnippetService
   vendor: ''
@@ -3291,6 +3356,7 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
+  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: NetmikoValidationService
@@ -3338,6 +3404,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: IterationService
   user_provided_values:
@@ -3385,6 +3452,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}
@@ -3431,6 +3499,7 @@
   skip: false
   skip_python_query: ''
   start_new_connection: false
+  success_query: ''
   time_between_retries: 10
   type: IterationService
   user_provided_values: {}

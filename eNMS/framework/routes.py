@@ -1,8 +1,6 @@
 from flask import (
     abort,
     Blueprint,
-    current_app,
-    Flask,
     jsonify,
     redirect,
     render_template,

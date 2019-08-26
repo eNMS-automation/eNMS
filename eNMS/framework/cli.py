@@ -1,7 +1,6 @@
 from click import argument, echo, option
 from flask import Flask
 from json import loads
-from typing import Any
 
 from eNMS import app
 from eNMS.database import Session

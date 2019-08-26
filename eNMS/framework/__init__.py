@@ -69,7 +69,7 @@ def configure_authentication() -> None:
 
 
 def create_app() -> Flask:
-    flask_app = Flask(__name__, static_folder=app.path / "eNMS" / "static")
+    flask_app = Flask(__name__, static_folder=app.path / "eNMS" / "static")  # type: ignore
     config = config_mapper[app.config_mode.capitalize()]
     flask_app.config.from_object(config)  # type: ignore
     register_extensions(flask_app)

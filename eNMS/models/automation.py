@@ -25,7 +25,12 @@ from xml.parsers.expat import ExpatError
 
 from eNMS import app
 from eNMS.database import Session
-from eNMS.database.dialect import Column, LargeString, MutableDict, MutableList, SmallString
+from eNMS.database.dialect import (
+    Column,
+    LargeString,
+    MutableDict,
+    SmallString,
+)
 from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.associations import (
     job_device_table,
@@ -328,7 +333,9 @@ class Run(AbstractBase):
             )
         if self.success_query:
             query_result = self.eval(self.success_query, **locals())
-            results.update({"success": query_result, "success_query": self.success_query})
+            results.update(
+                {"success": query_result, "success_query": self.success_query}
+            )
         self.log(
             "info",
             f"Finished running {self.job.type} '{self.job.name}'"
@@ -846,7 +853,7 @@ class Workflow(Job):
     def per_device_workflow_run(
         self, run: "Run", payload: dict, device: Device
     ) -> dict:
-        controller.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
+        app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()
@@ -861,7 +868,7 @@ class Workflow(Job):
             ):
                 continue
             visited.add(job)
-            controller.run_db[run.runtime]["current_job"] = job.get_properties()
+            app.run_db[run.runtime]["current_job"] = job.get_properties()
             skip_job = False
             if job.skip_python_query:
                 skip_job = run.eval(job.skip_python_query, **locals())
@@ -893,7 +900,7 @@ class Workflow(Job):
                 job_run.properties = {"devices": [device.id]}
                 Session.commit()
                 job_results = job_run.run(payload)
-            controller.run_db[run.runtime]["jobs"][job.id]["success"] = job_results[
+            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results[
                 "success"
             ]
             successors = (
@@ -930,8 +937,10 @@ class Workflow(Job):
             }
 
     @property
-    def job_number(self):
-        return sum((1 + job.job_number) if job.type == "Workflow" else 1 for job in self.jobs)
+    def job_number(self) -> int:
+        return sum(
+            (1 + job.job_number) if job.type == "Workflow" else 1 for job in self.jobs
+        )
 
     def per_service_workflow_run(self, run: "Run", payload: dict) -> dict:
         app.run_db[run.runtime].update(

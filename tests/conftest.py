@@ -3,7 +3,7 @@ from pathlib import Path
 from pytest import fixture
 from typing import Callable, Iterator
 
-from eNMS.controller import Controller
+from eNMS import 
 from eNMS.database import Session
 
 import warnings
@@ -13,8 +13,7 @@ import warnings
 def base_client() -> Iterator[FlaskClient]:
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        controller = Controller()
-        app = controller.init_app(Path.cwd(), "Test")
+        app = App().create_app()
         app_context = app.app_context()
         app_context.push()
         Session.close()
@@ -25,8 +24,7 @@ def base_client() -> Iterator[FlaskClient]:
 def user_client() -> Iterator[FlaskClient]:
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        controller = Controller()
-        app = controller.init_app(Path.cwd(), "Test")
+        app = App().create_app()
         app_context = app.app_context()
         app_context.push()
         Session.close()

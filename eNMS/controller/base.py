@@ -5,13 +5,11 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
-from flask import Flask
 from flask_login import current_user
 from git import Repo
 from hvac import Client as VaultClient
 from importlib import import_module
-from importlib.abc import Loader
-from importlib.util import find_spec, module_from_spec, spec_from_file_location
+from importlib.util import module_from_spec, spec_from_file_location
 from json import load
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
@@ -212,7 +210,7 @@ class BaseController:
         "update_database_configurations_from_git",
     ]
 
-    def __init__(self, path, config_mode: Optional[str] = None) -> None:
+    def __init__(self, path: Path, config_mode: Optional[str] = None) -> None:
         self.path = path
         self.config_mode = config_mode or "Debug"
         self.custom_properties = self.load_custom_properties()
@@ -232,7 +230,7 @@ class BaseController:
         self.fetch_version()
         self.init_logs()
 
-    def configure_database(self):
+    def configure_database(self) -> None:
         self.init_services()
         Base.metadata.create_all(bind=engine)
         configure_mappers()
@@ -245,14 +243,14 @@ class BaseController:
             self.create_admin_user()
             Session.commit()
             if self.create_examples:
-                self.migration_import(
+                self.migration_import(  # type: ignore
                     name="examples", import_export_types=import_classes
-                )  # type: ignore
+                )
                 self.update_credentials()
             else:
-                self.migration_import(
+                self.migration_import(  # type: ignore
                     name="default", import_export_types=import_classes
-                )  # type: ignore
+                )
             self.get_git_content()
             Session.commit()
 
@@ -423,7 +421,7 @@ class BaseController:
                     continue
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
                 try:
-                    spec.loader.exec_module(module_from_spec(spec))
+                    spec.loader.exec_module(module_from_spec(spec))  # type: ignore
                 except InvalidRequestError as e:
                     error(f"Error loading custom service '{file}' ({str(e)})")
 

@@ -69,7 +69,7 @@ class AnsiblePlaybookService(Service):
         run.log("info", f"Sending Ansible playbook: {safe_command}")
         try:
             result = check_output(command + arguments, cwd=app.path / "playbooks")
-        except Exception as exc:
+        except Exception:
             result = "\n".join(format_exc().splitlines())
             if password:
                 result = result.replace(password, "*" * 10)

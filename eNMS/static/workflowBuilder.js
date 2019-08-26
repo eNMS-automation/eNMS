@@ -60,6 +60,7 @@ let stateUpdate = false;
 let hoveredLabel;
 let mousePosition;
 let currLabel;
+let arrowHistory = [];
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
@@ -133,6 +134,8 @@ function switchToWorkflow(workflowId) {
     workflow = result.workflow;
     graph = displayWorkflow(result);
     if (!stateUpdate) getWorkflowState(true);
+    arrowHistory.push(workflowId);
+    if (arrowHistory.length > 1) $("#arrows").show();
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }

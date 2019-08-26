@@ -61,7 +61,7 @@ class AutomationController(BaseController):
         for result in fetch("Run", all_matches=True, allow_none=True, job_id=job_id):
             Session.delete(result)
 
-    def create_label(self, workflow_id, x, y, **kwargs):
+    def create_label(self, workflow_id: int, x: int, y: int, **kwargs: Any) -> dict:
         workflow, label_id = fetch("Workflow", id=workflow_id), str(uuid4())
         label = {"positions": [x, y], "content": kwargs["content"]}
         workflow.labels[label_id] = label
@@ -80,7 +80,7 @@ class AutomationController(BaseController):
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
 
-    def delete_label(self, workflow_id: int, label: int) -> dict:
+    def delete_label(self, workflow_id: int, label: int) -> str:
         workflow = fetch("Workflow", id=workflow_id)
         workflow.labels.pop(label)
         now = self.get_time()
@@ -321,12 +321,15 @@ class AutomationController(BaseController):
             new_position = [position["x"], position["y"]]
             if "-" in id:
                 old_position = workflow.labels[id]["positions"]
-                workflow.labels[id] = {"positions": new_position, "content": workflow.labels[id]["content"]}
+                workflow.labels[id] = {
+                    "positions": new_position,
+                    "content": workflow.labels[id]["content"],
+                }
             else:
                 job = fetch("Job", id=id)
-                current_position = job.positions.get(workflow.name)
+                old_position = job.positions.get(workflow.name)
                 job.positions[workflow.name] = new_position
-            if new_position != current_position:
+            if new_position != old_position:
                 workflow.last_modified = now
         return now
 

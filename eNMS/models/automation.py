@@ -265,8 +265,6 @@ class Run(AbstractBase):
             app.job_db[self.job.id]["runs"] += 1
             Session.commit()
             results = self.job.build_results(self, payload or self.initial_payload)
-            self.close_connection_cache()
-            self.log("info", f"{self.job.type} {self.job.name}: Finished")
         except Exception:
             result = (
                 f"Running {self.job.type} '{self.job.name}'"
@@ -277,6 +275,7 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "results": result}
         finally:
+            self.close_connection_cache()
             status = f"Completed ({'success' if results['success'] else 'failure'})"
             self.status = status  # type: ignore
             self.set_state(status=status, success=results["success"])
@@ -291,6 +290,7 @@ class Run(AbstractBase):
                 "service": self.job.to_dict(True),
             }
             self.create_result(results)
+            self.log("info", f"{self.job.type} {self.job.name}: Finished")
             Session.commit()
         if not self.workflow and self.send_notification:
             self.notify(results)

@@ -427,6 +427,7 @@ Object.assign(action, {
   "Move Nodes": () => switchMode("node"),
   "Create Label": () => showPanel("workflow_label"),
   "Edit Label": editLabel,
+  "Edit Edge": (edge) => showTypePanel("workflow_edge", edge.id),
   "Delete Label": deleteLabel,
 });
 

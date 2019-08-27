@@ -61,3 +61,6 @@ From the service perspective, this is still success. Priority: 2
 New mechanism: success as a python query kind of thingAdd success query mechanism
 
 - The "has device targets" property now defaults to True.
+
+- Implement a mechanism to switch back and forth in the workflow builder.
+

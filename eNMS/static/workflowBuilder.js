@@ -166,7 +166,7 @@ function switchToWorkflow(workflowId, arrow) {
 }
 
 // eslint-disable-next-line
-function saveWorkflowJob(job, update, index) {
+function saveWorkflowJob(job, update) {
   if (page == "workflow_builder") {
     if (update) {
       nodes.update(jobToNode(job));
@@ -181,6 +181,11 @@ function saveWorkflowJob(job, update, index) {
       edges.remove(-job.id);
     }
   }
+}
+
+// eslint-disable-next-line
+function saveWorkflowEdge(edge) {
+  edges.update(edgeToEdge(edge));
 }
 
 // eslint-disable-next-line
@@ -428,7 +433,6 @@ Object.assign(action, {
   "Create Label": () => showPanel("workflow_label"),
   "Edit Label": editLabel,
   "Edit Edge": (edge) => {
-    console.log(edge)
     showTypePanel("WorkflowEdge", edge.id)
   },
   "Delete Label": deleteLabel,

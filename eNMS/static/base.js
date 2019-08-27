@@ -351,7 +351,6 @@ function configureForm(form, id) {
 
 // eslint-disable-next-line
 function showTypePanel(type, id, mode) {
-  console.log(type, id)
   if (type == "Workflow") type = "workflow";
   createPanel(
     type,
@@ -366,7 +365,6 @@ function showTypePanel(type, id, mode) {
         call(`/get${properties}/${type}/${id}`, function(instance) {
           const title = mode == "duplicate" ? "Duplicate" : "Edit";
           panel.setHeaderTitle(`${title} ${type} - ${instance.name}`);
-          console.log(instance)
           processInstance(type, instance);
           if (type == "workflow" && mode == "duplicate") {
             $(`#workflow-btn-${id}`).attr(
@@ -442,6 +440,7 @@ function processData(type, id) {
       if (typeof table != "undefined") table.ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("Service")) saveService(instance, id);
+      if (type == "WorkflowEdge" && page == "workflow_builder") saveWorkflowEdge(instance);
       if (type === "workflow" && !id) saveWorkflow(instance);
       alertify.notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${

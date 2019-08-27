@@ -73,3 +73,5 @@ When displaying a workflow, automatically jump to the latest runtime.
 - Display number of runs in parallel in the Service Management / Workflow Management page, next to the Status (Running / Idle)
 
 - Display a job in grey if skip job is activated.
+
+- Make edge label editable

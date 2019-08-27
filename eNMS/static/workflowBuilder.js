@@ -52,7 +52,7 @@ const dsoptions = {
 let nodes;
 let edges;
 let graph;
-let selectedNode;
+let selectedObject;
 let edgeType;
 let lastModified;
 let stateUpdate = false;
@@ -96,12 +96,12 @@ function displayWorkflow(workflowData) {
       $(".global,.edge-selection").hide();
       $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
       $(`.${node.length == 36 ? "node" : "label"}-selection,.global,.edge-selection`).hide();
-      selectedNode = nodes.get(node);
+      selectedObject = nodes.get(node);
     } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
       graph.selectEdges([edge]);
       $(".global,.node-selection,.label-selection").hide();
       $(".edge-selection").show();
-      selectedNode = nodes.get(node);
+      selectedObject = edges.get(edge);
     } else {
       $(".node-selection,.label-selection").hide();
       $(".global").show();
@@ -328,7 +328,7 @@ function drawIterationService(service) {
 function edgeToEdge(edge) {
   return {
     id: edge.id,
-    label: edge.subtype,
+    label: edge.label,
     type: edge.subtype,
     from: edge.source_id,
     to: edge.destination_id,
@@ -427,7 +427,10 @@ Object.assign(action, {
   "Move Nodes": () => switchMode("node"),
   "Create Label": () => showPanel("workflow_label"),
   "Edit Label": editLabel,
-  "Edit Edge": (edge) => showTypePanel("workflow_edge", edge.id),
+  "Edit Edge": (edge) => {
+    console.log(edge)
+    showTypePanel("WorkflowEdge", edge.id)
+  },
   "Delete Label": deleteLabel,
 });
 
@@ -455,7 +458,7 @@ $("#network").contextMenu({
   menuSelector: "#contextMenu",
   menuSelected: function(invokedOn, selectedMenu) {
     const row = selectedMenu.text();
-    action[row](selectedNode);
+    action[row](selectedObject);
   },
 });
 
@@ -570,7 +573,7 @@ function resetDisplay() {
     colorJob(job.id, job.skip ? "#D3D3D3" : job.color);
   });
   workflow.edges.forEach((edge) => {
-    edges.update({ id: edge.id, label: edge.subtype });
+    edges.update({ id: edge.id, label: edge.label });
   });
 }
 

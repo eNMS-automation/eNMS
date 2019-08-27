@@ -351,6 +351,7 @@ function configureForm(form, id) {
 
 // eslint-disable-next-line
 function showTypePanel(type, id, mode) {
+  console.log(type, id)
   if (type == "Workflow") type = "workflow";
   createPanel(
     type,
@@ -365,6 +366,7 @@ function showTypePanel(type, id, mode) {
         call(`/get${properties}/${type}/${id}`, function(instance) {
           const title = mode == "duplicate" ? "Duplicate" : "Edit";
           panel.setHeaderTitle(`${title} ${type} - ${instance.name}`);
+          console.log(instance)
           processInstance(type, instance);
           if (type == "workflow" && mode == "duplicate") {
             $(`#workflow-btn-${id}`).attr(

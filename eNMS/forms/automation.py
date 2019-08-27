@@ -209,8 +209,8 @@ class WorkflowLabelForm(BaseForm):
     content = StringField(widget=TextArea(), render_kw={"rows": 15})
 
 
-class RunForm(BaseForm):
+class WorkflowEdgeForm(BaseForm):
     template = "object"
-    form_type = HiddenField(default="workflow_edge")
+    form_type = HiddenField(default="WorkflowEdge")
     id = HiddenField()
     label = StringField()

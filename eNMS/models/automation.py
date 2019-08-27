@@ -265,6 +265,7 @@ class Run(AbstractBase):
             app.job_db[self.job.id]["runs"] += 1
             Session.commit()
             results = self.job.build_results(self, payload or self.initial_payload)
+            self.close_connection_cache()
         except Exception:
             result = (
                 f"Running {self.job.type} '{self.job.name}'"
@@ -275,7 +276,6 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "results": result}
         finally:
-            self.close_connection_cache()
             status = f"Completed ({'success' if results['success'] else 'failure'})"
             self.status = status  # type: ignore
             self.set_state(status=status, success=results["success"])
@@ -1056,6 +1056,7 @@ class WorkflowEdge(AbstractBase):
     __tablename__ = type = "WorkflowEdge"
     id = Column(Integer, primary_key=True)
     name = Column(SmallString)
+    label = Column(SmallString)
     subtype = Column(SmallString)
     source_id = Column(Integer, ForeignKey("Job.id"))
     source = relationship(
@@ -1075,3 +1076,7 @@ class WorkflowEdge(AbstractBase):
     workflow = relationship(
         "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
     )
+
+    def __init__(self, *args, **kwargs):
+        self.label = kwargs["subtype"]
+        super().__init__(*args, **kwargs)

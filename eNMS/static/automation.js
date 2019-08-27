@@ -400,7 +400,6 @@ function parametrizedRun(type, id) {
 }
 
 function runLogic(job) {
-  console.log(job.runtime)
   showLogsPanel(job, job.runtime, true);
   alertify.notify(`Job '${job.name}' started.`, "success", 5);
   if (page == "workflow_builder") {

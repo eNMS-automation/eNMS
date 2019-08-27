@@ -70,3 +70,5 @@ When displaying a workflow, automatically jump to the latest runtime.
 - In Workflow builder, add the name of the user who ran the runtime in the runtime list.
 
 - Display number of runs in parallel in the Service Management / Workflow Management page, next to the Status (Running / Idle)
+
+- Display a job in grey if skip job is activated.

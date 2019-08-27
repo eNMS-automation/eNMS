@@ -37,8 +37,7 @@ const dsoptions = {
   },
   manipulation: {
     enabled: false,
-    addNode: function(data, callback) {},
-    addEdge: function(data, callback) {
+    addEdge: function(data) {
       if (data.from == 2) {
         alertify.notify("You cannot draw an edge from the End.", "error", 5);
       }
@@ -76,6 +75,17 @@ function displayWorkflow(workflowData) {
   }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
+  /*
+  graph.on("afterDrawing", function (ctx) {
+    let pos = graph.getPositions(1);
+    positions = graph.canvasToDOM({x: pos[1].x, y: pos[1].y});
+    $("#test").css({
+      top: positions.y,
+      left: positions.x - 150,
+      position:'relative'
+    });
+  });
+  */
   graph.on("oncontext", function(properties) {
     mousePosition = graph.DOMtoCanvas({"x": properties.event.offsetX, "y": properties.event.offsetY});
     properties.event.preventDefault();
@@ -503,7 +513,7 @@ function displayWorkflowState(result) {
   if (!result.state) {
     $("#progressbar").hide();
     result.workflow.jobs.forEach((job) => {
-      colorJob(job.id, job.color);
+      colorJob(job.id, job.skip ? "#D3D3D3" : job.color);
     });
   } else {
     $("#progressbar").show();
@@ -556,7 +566,7 @@ function displayWorkflowState(result) {
 
 function resetDisplay() {
   workflow.jobs.forEach((job) => {
-    colorJob(job.id, job.color);
+    colorJob(job.id, job.skip ? "#D3D3D3" : job.color);
   });
   workflow.edges.forEach((edge) => {
     edges.update({ id: edge.id, label: edge.subtype });

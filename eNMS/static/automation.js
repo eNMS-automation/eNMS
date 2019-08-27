@@ -400,15 +400,11 @@ function parametrizedRun(type, id) {
 }
 
 function runLogic(job) {
+  console.log(job.runtime)
   showLogsPanel(job, job.runtime, true);
   alertify.notify(`Job '${job.name}' started.`, "success", 5);
   if (page == "workflow_builder") {
     if (job.type == "Workflow") {
-      $("#current-runtimes").append(
-        `<option value='${job.runtime}'>${job.runtime}</option>`
-      );
-      $("#current-runtimes").val(job.runtime);
-      $("#current-runtimes").selectpicker("refresh");
       getWorkflowState(true);
     } else {
       getJobState(job.id);

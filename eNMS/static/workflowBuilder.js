@@ -112,13 +112,12 @@ function displayWorkflow(workflowData) {
       }
     }
   });
-  const currentValue = $("#current-runtimes").val();
   $("#current-runtimes").empty();
   $("#current-runtimes").append("<option value='normal'>Normal Display</option>");
   $("#current-runtimes").append("<option value='latest'>Latest Runtime</option>");
   workflowData.runtimes.forEach((runtime) => {
     $("#current-runtimes").append(
-      `<option value='${runtime}'>${runtime}</option>`
+      `<option value='${runtime[0]}'>${runtime[0]} (run by ${runtime[1]})</option>`
     );
   });
   $("#current-runtimes").val("latest");

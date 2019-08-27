@@ -479,8 +479,10 @@ class Run(AbstractBase):
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
 
-    def get_var(self, *args, device: Optional[Any] = None, **kwargs):
-        return self.payload_helper(*args, device=device, **kwargs)
+    def get_var(
+        self, payload: dict, name: str, device: Optional[Any] = None, **kwargs: Any
+    ) -> Any:
+        return self.payload_helper(payload, name, device=device, **kwargs)
 
     def get_result(self, job: str, device: Optional[str] = None) -> dict:
         job_id = fetch("Job", name=job).id

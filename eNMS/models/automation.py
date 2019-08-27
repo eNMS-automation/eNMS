@@ -459,8 +459,8 @@ class Run(AbstractBase):
         payload: dict,
         name: str,
         value: Optional[Any] = None,
-        section: Optional[str] = None,
         device: Optional[str] = None,
+        section: Optional[str] = None,
         operation: str = "set",
     ) -> Any:
         payload = payload.setdefault("variables", {})

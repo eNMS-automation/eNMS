@@ -341,8 +341,11 @@ class AutomationController(BaseController):
             r.runtime
             for r in fetch("Run", allow_none=True, all_matches=True, job_id=workflow_id)
         ]
+        print(runtime, runtimes)
         state = None
-        if runtime:
+        if runtimes and runtime not in ("normal", None):
+            if runtime == "latest":
+                runtime = runtimes[-1]
             state = self.run_db.get(runtime)
             if not state:
                 results = fetch("Run", runtime=runtime).results

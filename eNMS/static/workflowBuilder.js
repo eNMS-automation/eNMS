@@ -114,13 +114,14 @@ function displayWorkflow(workflowData) {
   });
   const currentValue = $("#current-runtimes").val();
   $("#current-runtimes").empty();
-  $("#current-runtimes").append("<option value=''>Normal Display</option>");
+  $("#current-runtimes").append("<option value='normal'>Normal Display</option>");
+  $("#current-runtimes").append("<option value='latest'>Latest Runtime</option>");
   workflowData.runtimes.forEach((runtime) => {
     $("#current-runtimes").append(
       `<option value='${runtime}'>${runtime}</option>`
     );
   });
-  $("#current-runtimes").val(currentValue);
+  $("#current-runtimes").val("latest");
   $("#current-runtimes").selectpicker("refresh");
   graph.on("dragEnd", () => savePositions());
   $(`#add_jobs option[value='${workflow.id}']`).remove();

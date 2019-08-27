@@ -474,8 +474,8 @@ class Run(AbstractBase):
         payload: dict,
         name: str,
         value: Optional[Any] = None,
-        section: Optional[str] = None,
         device: Optional[str] = None,
+        section: Optional[str] = None,
         operation: str = "set",
     ) -> Any:
         payload = payload.setdefault("variables", {})
@@ -493,6 +493,11 @@ class Run(AbstractBase):
             if name not in payload:
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
+
+    def get_var(
+        self, payload: dict, name: str, device: Optional[Any] = None, **kwargs: Any
+    ) -> Any:
+        return self.payload_helper(payload, name, device=device, **kwargs)
 
     def get_result(self, job: str, device: Optional[str] = None) -> dict:
         job_id = fetch("Job", name=job).id
@@ -516,13 +521,12 @@ class Run(AbstractBase):
         return result
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
-        var_editor = partial(_self.payload_helper, locals.get("payload", {}))
         return {
             "config": app.custom_config,
-            "get_var": var_editor,
+            "get_var": partial(_self.get_var, locals.get("payload", {})),
             "get_result": _self.get_result,
             "workflow": _self.workflow,
-            "set_var": var_editor,
+            "set_var": partial(_self.payload_helper, locals.get("payload", {})),
             "workflow_device": _self.workflow_device,
             **locals,
         }

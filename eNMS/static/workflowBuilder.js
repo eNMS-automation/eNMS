@@ -61,6 +61,7 @@ let hoveredLabel;
 let mousePosition;
 let currLabel;
 let arrowHistory = [];
+let arrowPointer = -1;
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
@@ -129,13 +130,27 @@ function displayWorkflow(workflowData) {
   return graph;
 }
 
-function switchToWorkflow(workflowId) {
+function switchToWorkflow(workflowId, arrow) {
   call(`/get_workflow_state/${workflowId}`, function(result) {
     workflow = result.workflow;
     graph = displayWorkflow(result);
     if (!stateUpdate) getWorkflowState(true);
-    arrowHistory.push(workflowId);
-    if (arrowHistory.length > 1) $("#arrows").show();
+    if (!arrow) {
+      arrowPointer++;
+      arrowHistory.splice(arrowPointer, 9e9, workflowId)
+    } else {
+      arrowPointer += arrow == "right" ? 1 : -1;
+    }
+    if (arrowHistory.length >= 1 && arrowPointer !== 0) {
+      $("#left-arrow").show();
+    } else {
+      $("#left-arrow").hide();
+    }
+    if (arrowPointer < arrowHistory.length - 1) {
+      $("#right-arrow").show();
+    } else {
+      $("#right-arrow").hide();
+    }
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }
@@ -570,6 +585,12 @@ function getWorkflowState(first) {
 }
 
 (function() {
+  $("#left-arrow").bind("click", function() {
+    switchToWorkflow(arrowHistory[arrowPointer - 1], "left");
+  });
+  $("#right-arrow").bind("click", function() {
+    switchToWorkflow(arrowHistory[arrowPointer + 1], "right");
+  });
   call("/get_all/workflow", function(workflows) {
     workflows.sort((a, b) => a.name.localeCompare(b.name));
     for (let i = 0; i < workflows.length; i++) {
@@ -597,4 +618,5 @@ function getWorkflowState(first) {
       liveSearch: true,
     });
   });
+
 })();

@@ -6,9 +6,9 @@ block content %}
     <div class="col-md-12 col-xs-12">
       <div class="x_panel">
         <div class="x_content">
-          <div id="arrows" style="z-index:2; position: absolute; left: 35vw; display: none">
-            <img src="{{ url_for('static', filename='images/workflow/leftArrow.png') }}">
-            <img src="{{ url_for('static', filename='images/workflow/rightArrow.png') }}">
+          <div style="z-index:2; position: absolute; left: 35vw;">
+            <img id="left-arrow" src="{{ url_for('static', filename='images/workflow/leftArrow.png') }}" style="display: none">
+            <img id="right-arrow" src="{{ url_for('static', filename='images/workflow/rightArrow.png') }}" style="display: none">
           </div>
           <div
             class="btn-group"

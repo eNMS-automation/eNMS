@@ -732,8 +732,9 @@ class Service(Job):
         return results
 
     def generate_row(self, table: str) -> List[str]:
+        number_of_runs = app.job_db[self.id]["runs"]
         return [
-            "Running" if app.job_db[self.id]["runs"] else "Idle",
+            f"Running ({number_of_runs})" if number_of_runs else "Idle",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogsPanel({self.row_properties})">
             </i>Logs</a></button>""",
@@ -786,8 +787,9 @@ class Workflow(Job):
             end.positions[self.name] = (500, 0)
 
     def generate_row(self, table: str) -> List[str]:
+        number_of_runs = app.job_db[self.id]["runs"]
         return [
-            "Running" if app.job_db[self.id]["runs"] else "Idle",
+            f"Running ({number_of_runs})" if number_of_runs else "Idle",
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogsPanel('{self.id}', '{self.name}', '{self.type}')">
             </i>Logs</a></button>""",

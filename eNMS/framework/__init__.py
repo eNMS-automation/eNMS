@@ -68,11 +68,11 @@ def configure_authentication() -> None:
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app() -> Flask:
+def create_app(config_mode=None) -> Flask:
     flask_app = Flask(
         __name__, static_folder=app.path / "eNMS" / "static"
     )  # type: ignore
-    config = config_mapper[app.config_mode.capitalize()]
+    config = config_mapper[config_mode or app.config_mode]
     flask_app.config.from_object(config)  # type: ignore
     register_extensions(flask_app)
     configure_login_manager()

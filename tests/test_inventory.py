@@ -2,6 +2,7 @@ from flask.testing import FlaskClient
 from typing import List
 from werkzeug.datastructures import ImmutableMultiDict
 
+from eNMS import app
 from eNMS.database.functions import delete_all, fetch, fetch_all
 from eNMS.properties.objects import (
     device_icons,

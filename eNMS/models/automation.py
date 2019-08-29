@@ -52,7 +52,8 @@ class Result(AbstractBase):
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
     result = Column(MutableDict)
-    runs = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
+    run_id = Column(Integer, ForeignKey("Run.id"))
+    run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     device_id = Column(Integer, ForeignKey("Device.id"))
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
@@ -94,15 +95,13 @@ class Run(AbstractBase):
     workflow_name = association_proxy("workflow", "name")
     task_id = Column(Integer, ForeignKey("Task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
-    results = relationship("Result", back_populates="runs", cascade="all, delete-orphan")
+    results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs: Any) -> None:
         self.runtime = kwargs.get("runtime") or app.get_time()  # type: ignore
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
-        if self.restart_run:
-            self.results.extend(self.restart_run.results)
 
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name} run by {self.creator})"
@@ -266,11 +265,13 @@ class Run(AbstractBase):
             self.set_state(status="Running", type=self.job.type)
             app.job_db[self.job.id]["runs"] += 1
             Session.commit()
-            if self.restart_run:
-                print(self.restart_run, self.restart_run.results)
-                payload["variables"] = self.restart_run.result()["results"].get("variables", {})
-            print(payload)
-            results = self.job.build_results(self, payload or self.initial_payload)
+            payload = payload or self.job.initial_payload
+            if self.restart_run and self.job.type == "Workflow":
+                global_result = self.restart_run.result()
+                if global_result:
+                    print(global_result.result["results"])
+                    payload["variables"] = global_result.result["results"].get("variables", {})
+            results = self.job.build_results(self, payload)
             self.close_connection_cache()
         except Exception:
             result = (
@@ -507,15 +508,24 @@ class Run(AbstractBase):
 
     def get_result(self, job: str, device: Optional[str] = None) -> dict:
         job_id = fetch("Job", name=job).id
-        runs = fetch(
-            "Run",
-            allow_none=bool(self.restart_run),
-            all_matches=True,
-            parent_runtime=self.parent_runtime,
-            job_id=job_id,
-        )
-        results: list = list(filter(None, [run.result(device) for run in runs]))
-        return results.pop().result
+
+        def recursive_search(run):
+            if not run:
+                return
+            runs = fetch(
+                "Run",
+                allow_none=True,
+                all_matches=True,
+                parent_runtime=run.parent_runtime,
+                job_id=job_id,
+            )
+            results: list = list(filter(None, [run.result(device) for run in runs]))
+            if not results:
+                return recursive_search(run.restart_run)
+            else:
+                return results.pop().result
+
+        return recursive_search(self)
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
         return {

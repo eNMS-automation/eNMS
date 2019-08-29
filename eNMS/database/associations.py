@@ -71,10 +71,3 @@ pool_user_table: Table = Table(
     Column("pool_id", Integer, ForeignKey("Pool.id")),
     Column("user_id", Integer, ForeignKey("User.id")),
 )
-
-run_result_table: Table = Table(
-    "run_result_association",
-    Base.metadata,
-    Column("run_id", Integer, ForeignKey("Run.id")),
-    Column("result_id", Integer, ForeignKey("Result.id")),
-)

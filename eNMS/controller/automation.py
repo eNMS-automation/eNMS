@@ -266,22 +266,18 @@ class AutomationController(BaseController):
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 
-    def get_variables(self, job: Any, **kwargs: Any) -> dict:
-        run = fetch(
-            "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("restart_runtime")
-        )
-        if not run:
-            return {}
-        result = [r for r in run.results if not r.device_id]
-        return result[0].result["results"].get("variables") if result else {}
-
     @staticmethod
     def run(job: int, **kwargs: Any) -> dict:
         run_kwargs = {
             key: kwargs.pop(key)
-            for key in ("creator", "runtime", "task", "restart_runtime")
+            for key in ("creator", "runtime", "task")
             if kwargs.get(key)
         }
+        restart_run = fetch(
+            "Run", allow_none=True, job_id=job, runtime=kwargs.get("restart_runtime")
+        )
+        if restart_run:
+            run_kwargs["restart_run"] = restart_run
         run = factory("Run", job=job, **run_kwargs)
         run.properties = kwargs
         return run.run(kwargs.get("payload"))
@@ -291,10 +287,6 @@ class AutomationController(BaseController):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "admin")
         job = fetch("Job", id=id)
-        if job.type == "Workflow":
-            if not kwargs.get("payload"):
-                kwargs["payload"] = {}
-            kwargs["payload"]["variables"] = self.get_variables(job, **kwargs)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(

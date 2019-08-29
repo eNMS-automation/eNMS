@@ -52,8 +52,7 @@ class Result(AbstractBase):
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
     result = Column(MutableDict)
-    run_id = Column(Integer, ForeignKey("Run.id"))
-    run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
+    runs = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     device_id = Column(Integer, ForeignKey("Device.id"))
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
@@ -76,6 +75,8 @@ class Run(AbstractBase):
     __tablename__ = type = "Run"
     private = True
     id = Column(Integer, primary_key=True)
+    restart_run_id = Column(Integer, ForeignKey('Run.id'))
+    restart_run = relationship("Run", remote_side=[id])
     creator = Column(SmallString, default="admin")
     properties = Column(MutableDict)
     success = Column(Boolean, default=False)
@@ -85,7 +86,6 @@ class Run(AbstractBase):
     workflow_device_id = Column(Integer, ForeignKey("Device.id"))
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(SmallString)
-    restart_runtime = Column(SmallString)
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
     job_name = association_proxy("job", "name")
@@ -94,13 +94,15 @@ class Run(AbstractBase):
     workflow_name = association_proxy("workflow", "name")
     task_id = Column(Integer, ForeignKey("Task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
-    results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
+    results = relationship("Result", back_populates="runs", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs: Any) -> None:
         self.runtime = kwargs.get("runtime") or app.get_time()  # type: ignore
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
+        if self.restart_run:
+            self.results.extend(self.restart_run.results)
 
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name} run by {self.creator})"
@@ -264,6 +266,10 @@ class Run(AbstractBase):
             self.set_state(status="Running", type=self.job.type)
             app.job_db[self.job.id]["runs"] += 1
             Session.commit()
+            if self.restart_run:
+                print(self.restart_run, self.restart_run.results)
+                payload["variables"] = self.restart_run.result()["results"].get("variables", {})
+            print(payload)
             results = self.job.build_results(self, payload or self.initial_payload)
             self.close_connection_cache()
         except Exception:
@@ -503,22 +509,13 @@ class Run(AbstractBase):
         job_id = fetch("Job", name=job).id
         runs = fetch(
             "Run",
-            allow_none=bool(self.restart_runtime),
+            allow_none=bool(self.restart_run),
             all_matches=True,
             parent_runtime=self.parent_runtime,
             job_id=job_id,
         )
         results: list = list(filter(None, [run.result(device) for run in runs]))
-        if not results and self.restart_runtime:
-            runs = fetch(
-                "Run",
-                all_matches=True,
-                parent_runtime=self.restart_runtime,
-                job_id=job_id,
-            )
-            results = list(filter(None, [run.result(device) for run in runs]))
-        result = results.pop().result
-        return result
+        return results.pop().result
 
     def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
         return {
@@ -888,7 +885,7 @@ class Workflow(Job):
                         workflow=self.id,
                         workflow_device=device.id,
                         parent_runtime=run.parent_runtime,
-                        restart_runtime=run.restart_runtime,
+                        restart_run=run.restart_run,
                     )
                     job_run.properties = {}
                     result = job_run.run(payload)
@@ -901,7 +898,7 @@ class Workflow(Job):
                     job=job.id,
                     workflow=self.id,
                     parent_runtime=run.parent_runtime,
-                    restart_runtime=run.restart_runtime,
+                    restart_run=run.restart_run,
                 )
                 job_run.properties = {"devices": [device.id]}
                 Session.commit()
@@ -971,6 +968,12 @@ class Workflow(Job):
                 continue
             visited.add(job)
             app.run_db[run.runtime]["current_job"] = job.get_properties()
+            if run.restart_run:
+                job_restart_run = fetch(
+                    "Run", allow_none=True, job_id=job.id, parent_runtime=run.restart_run.parent_runtime
+                )
+            else:
+                job_restart_run = None
             skip_job = False
             if job.skip_python_query:
                 skip_job = run.eval(job.skip_python_query, **locals())
@@ -986,7 +989,7 @@ class Workflow(Job):
                             workflow=self.id,
                             workflow_device=base_target.id,
                             parent_runtime=run.parent_runtime,
-                            restart_runtime=run.restart_runtime,
+                            restart_run=job_restart_run,
                         )
                         job_run.properties = {}
                         derived_target_result = job_run.run(payload)
@@ -1011,7 +1014,7 @@ class Workflow(Job):
                     job=job.id,
                     workflow=self.id,
                     parent_runtime=run.parent_runtime,
-                    restart_runtime=run.restart_runtime,
+                    restart_run=job_restart_run,
                 )
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 Session.commit()

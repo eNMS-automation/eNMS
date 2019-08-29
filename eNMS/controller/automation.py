@@ -266,18 +266,14 @@ class AutomationController(BaseController):
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 
-    def add_restart_payload(self, job: Any, **kwargs: Any) -> dict:
+    def get_variables(self, job: Any, **kwargs: Any) -> dict:
         run = fetch(
             "Run", allow_none=True, job_id=job.id, runtime=kwargs.get("restart_runtime")
         )
         if not run:
             return {}
         result = [r for r in run.results if not r.device_id]
-        payload = result[0].result["results"] if result else {}
-        if not isinstance(payload, dict):
-            return {}
-        payload_jobs = set(payload) & set(kwargs.get("payloads_to_exclude", []))
-        return {k: payload.get(k) for k in payload if k not in payload_jobs}
+        return result[0].result["results"].get("variables") if result else {}
 
     @staticmethod
     def run(job: int, **kwargs: Any) -> dict:
@@ -298,7 +294,7 @@ class AutomationController(BaseController):
         if job.type == "Workflow":
             if not kwargs.get("payload"):
                 kwargs["payload"] = {}
-            kwargs["payload"].update(self.add_restart_payload(job, **kwargs))
+            kwargs["payload"]["variables"] = self.get_variables(job, **kwargs)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(

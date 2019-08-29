@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, make_response, render_template
 from flask.wrappers import Request, Response
 from itertools import chain
-from typing import Any, Tuple
+from typing import Any, Optional, Tuple
 
 from eNMS import app
 from eNMS.database.functions import fetch
@@ -68,10 +68,10 @@ def configure_authentication() -> None:
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app(config_mode=None) -> Flask:
-    flask_app = Flask(
+def create_app(config_mode: Optional[str] = None) -> Flask:
+    flask_app = Flask(  # type: ignore
         __name__, static_folder=app.path / "eNMS" / "static"
-    )  # type: ignore
+    )
     config = config_mapper[config_mode or app.config_mode]
     flask_app.config.from_object(config)  # type: ignore
     register_extensions(flask_app)

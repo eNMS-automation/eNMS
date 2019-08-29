@@ -170,9 +170,12 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
 };
 
 function uuidv4() {
-  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-  )
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
 }
 
 // eslint-disable-next-line
@@ -443,7 +446,8 @@ function processData(type, id) {
       if (typeof table != "undefined") table.ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("Service")) saveService(instance, id);
-      if (type == "WorkflowEdge" && page == "workflow_builder") saveWorkflowEdge(instance);
+      if (type == "WorkflowEdge" && page == "workflow_builder")
+        saveWorkflowEdge(instance);
       if (type === "workflow" && !id) saveWorkflow(instance);
       alertify.notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${

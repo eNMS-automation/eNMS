@@ -87,14 +87,21 @@ function displayWorkflow(workflowData) {
   });
   */
   graph.on("oncontext", function(properties) {
-    mousePosition = graph.DOMtoCanvas({"x": properties.event.offsetX, "y": properties.event.offsetY});
+    mousePosition = graph.DOMtoCanvas({
+      x: properties.event.offsetX,
+      y: properties.event.offsetY,
+    });
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
     const edge = this.getEdgeAt(properties.pointer.DOM);
     if (typeof node !== "undefined" && node != 1 && node != 2) {
       graph.selectNodes([node]);
       $(".global,.edge-selection").hide();
-      $(`.${node.length == 36 ? "node" : "label"}-selection,.global,.edge-selection`).hide();
+      $(
+        `.${
+          node.length == 36 ? "node" : "label"
+        }-selection,.global,.edge-selection`
+      ).hide();
       $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
       selectedObject = nodes.get(node);
     } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
@@ -123,11 +130,17 @@ function displayWorkflow(workflowData) {
     }
   });
   $("#current-runtimes").empty();
-  $("#current-runtimes").append("<option value='normal'>Normal Display</option>");
-  $("#current-runtimes").append("<option value='latest'>Latest Runtime</option>");
+  $("#current-runtimes").append(
+    "<option value='normal'>Normal Display</option>"
+  );
+  $("#current-runtimes").append(
+    "<option value='latest'>Latest Runtime</option>"
+  );
   workflowData.runtimes.forEach((runtime) => {
     $("#current-runtimes").append(
-      `<option value='${runtime[0]}'>${runtime[0]} (run by ${runtime[1]})</option>`
+      `<option value='${runtime[0]}'>${runtime[0]} (run by ${
+        runtime[1]
+      })</option>`
     );
   });
   $("#current-runtimes").val("latest");
@@ -147,7 +160,7 @@ function switchToWorkflow(workflowId, arrow) {
     if (!stateUpdate) getWorkflowState(true);
     if (!arrow) {
       arrowPointer++;
-      arrowHistory.splice(arrowPointer, 9e9, workflowId)
+      arrowHistory.splice(arrowPointer, 9e9, workflowId);
     } else {
       arrowPointer += arrow == "right" ? 1 : -1;
     }
@@ -170,10 +183,10 @@ function saveWorkflowJob(job, update) {
   if (page == "workflow_builder") {
     if (update) {
       nodes.update(jobToNode(job));
-      var jobIndex = workflow.jobs.findIndex(job => job.id == job.id);
+      var jobIndex = workflow.jobs.findIndex((job) => job.id == job.id);
       workflow.jobs[jobIndex] = job;
     } else {
-      addJobsToWorkflow([job.id])
+      addJobsToWorkflow([job.id]);
     }
     if (job.iteration_values != "") {
       drawIterationEdge(job);
@@ -267,7 +280,7 @@ function formatJobTitle(job) {
   return `
     <b>Type</b>: ${job.type}<br>
     <b>Name</b>: ${job.name}
-  `
+  `;
 }
 
 function jobToNode(job, index) {
@@ -431,7 +444,7 @@ Object.assign(action, {
   "Create Label": () => showPanel("workflow_label"),
   "Edit Label": editLabel,
   "Edit Edge": (edge) => {
-    showTypePanel("WorkflowEdge", edge.id)
+    showTypePanel("WorkflowEdge", edge.id);
   },
   "Delete Label": deleteLabel,
 });
@@ -634,5 +647,4 @@ function getWorkflowState(first) {
       liveSearch: true,
     });
   });
-
 })();

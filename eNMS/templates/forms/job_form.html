@@ -112,15 +112,17 @@
             {{ form.initial_payload(id=form_type + '-initial_payload',
             class="form-control add-id") }}
           </div>
-          <label class="hide-run">Run service/device for each value (python query)</label>
+          <label class="hide-run"
+            >Run service/device for each value (python query)</label
+          >
           <div class="form-group">
             {{ form.iteration_values(id=form_type + '-iteration_values',
             class="form-control hide-run add-id") }}
           </div>
           <label class="hide-run">Iteration Variable Name (in Payload)</label>
           <div class="form-group">
-            {{ form.iteration_variable_name(id=form_type + '-iteration_variable_name',
-            class="form-control hide-run add-id") }}
+            {{ form.iteration_variable_name(id=form_type +
+            '-iteration_variable_name', class="form-control hide-run add-id") }}
           </div>
           <label class="hide-run">Success Value (Python Query)</label>
           <div class="form-group">

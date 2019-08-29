@@ -1,5 +1,4 @@
 from flask.testing import FlaskClient
-from pathlib import Path
 from pytest import fixture
 from typing import Callable, Iterator
 

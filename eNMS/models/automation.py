@@ -257,7 +257,7 @@ class Run(AbstractBase):
             pool.close()
             pool.join()
 
-    def disconnect(self, connection, library):
+    def disconnect(self, connection: ConnectHandler, library: str) -> None:
         connection.disconnect() if library == "netmiko" else connection.close()
 
     def run(self, payload: Optional[dict] = None) -> dict:
@@ -511,12 +511,12 @@ class Run(AbstractBase):
     ) -> Any:
         return self.payload_helper(payload, name, device=device, **kwargs)
 
-    def get_result(self, job: str, device: Optional[str] = None) -> dict:
+    def get_result(self, job: str, device: Optional[str] = None) -> Optional[dict]:
         job_id = fetch("Job", name=job).id
 
-        def recursive_search(run):
+        def recursive_search(run: "Run") -> Optional[dict]:
             if not run:
-                return
+                return None
             runs = fetch(
                 "Run",
                 allow_none=True,
@@ -1087,6 +1087,6 @@ class WorkflowEdge(AbstractBase):
         "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
     )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         self.label = kwargs["subtype"]
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)

@@ -9,7 +9,7 @@ from eNMS.properties.table import filtering_properties
 def filtering_form_generator() -> None:
     for table, properties in filtering_properties.items():
         table_model = table.capitalize() if table != "configuration" else "Device"
-        kwargs = {
+        relations = {
             model: MultipleInstanceField(
                 model.capitalize(), instance_type=relation["model"]
             )
@@ -21,7 +21,7 @@ def filtering_form_generator() -> None:
             (BaseForm,),
             {
                 "template": "filtering",
-                "properties": list(kwargs) + properties,
+                "properties": list(relations) + properties,
                 "form_type": HiddenField(default=f"{table}_filtering"),
                 "operator": SelectField(
                     "Match Condition",
@@ -42,7 +42,17 @@ def filtering_form_generator() -> None:
                         )
                         for property in properties
                     },
-                    **kwargs,
+                    **relations,
+                    **{
+                        f"{relation}_filter":  SelectField(
+                            choices=(
+                                ("any", "Any"),
+                                ("all", "All"),
+                                ("not_any", "Not related to Any"),
+                            )
+                        )
+                        for relation in relations
+                    },
                 },
             },
         )

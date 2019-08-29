@@ -11,7 +11,7 @@ from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
 from pathlib import Path
-from paramiko import SSHClient
+from paramiko import SFTPClient, SSHClient
 from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Integer
@@ -474,10 +474,10 @@ class Run(AbstractBase):
         self, ssh_client: SSHClient, files: List[Tuple[str, str]]
     ) -> None:
         if self.protocol == "sftp":
-            sftp = ssh_client.open_sftp()
-            for source, destination in files:
-                getattr(sftp, self.direction)(source, destination)
-            sftp.close()
+            MAX_TRANSFER_SIZE = 2 ** 30
+            with SFTPClient.from_transport(ssh_client.get_transport(), window_size=MAX_TRANSFER_SIZE, max_packet_size=MAX_TRANSFER_SIZE) as sftp:
+                for source, destination in files:
+                    getattr(sftp, self.direction)(source, destination)
         else:
             with SCPClient(ssh_client.get_transport()) as scp:
                 for source, destination in files:

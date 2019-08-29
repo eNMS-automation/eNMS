@@ -528,9 +528,11 @@ class BaseController:
             if not relation_ids:
                 continue
             if relation_properties["list"]:
-                constraint = getattr(model, related_model).any(
-                    models[relation_properties["model"]].id.in_(relation_ids)
-                )
+                filter = kwargs.get(f"form[{related_model}_filter]")
+                if filter in ("any", "all"):
+                    constraint = getattr(model, related_model).any(
+                        models[relation_properties["model"]].id.in_(relation_ids)
+                    )
             else:
                 constraint = or_(
                     getattr(model, related_model).has(id=relation_id)

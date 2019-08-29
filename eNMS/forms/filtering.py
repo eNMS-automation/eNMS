@@ -47,7 +47,7 @@ def filtering_form_generator() -> None:
                         f"{relation}_filter":  SelectField(
                             choices=(
                                 ("any", "Any"),
-                                ("all", "All"),
+                                ("all_", "All"),
                                 ("not_any", "Not related to Any"),
                             )
                         )

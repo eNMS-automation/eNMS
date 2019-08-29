@@ -8,7 +8,6 @@ from eNMS.forms.fields import (
     DictField,
     MultipleInstanceField,
     NoValidationSelectField,
-    NoValidationSelectMultipleField,
     PasswordSubstitutionField,
     SubstitutionField,
 )

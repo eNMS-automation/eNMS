@@ -97,7 +97,6 @@ class Run(AbstractBase):
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
-        print("ttt" * 200, self.restart_run)
 
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name} run by {self.creator})"
@@ -271,7 +270,6 @@ class Run(AbstractBase):
             if self.restart_run and self.job.type == "Workflow":
                 global_result = self.restart_run.result()
                 if global_result:
-                    print(global_result.result["results"])
                     payload["variables"] = global_result.result["results"].get(
                         "variables", {}
                     )

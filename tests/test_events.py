@@ -1,7 +1,7 @@
 from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
-from eNMS import controller
+from eNMS import app
 from eNMS.database import Session
 from eNMS.database.functions import fetch_all
 
@@ -47,6 +47,6 @@ def test_netmiko_napalm_config(user_client: FlaskClient) -> None:
 def test_create_logs(user_client: FlaskClient) -> None:
     number_of_logs = len(fetch_all("Changelog"))
     for i in range(10):
-        controller.log("warning", str(i))
+        app.log("warning", str(i))
         Session.commit()
     assert len(fetch_all("Changelog")) == number_of_logs + 10

@@ -461,7 +461,6 @@ class BaseController:
 
     def update(self, cls: str, **kwargs: Any) -> dict:
         try:
-            print(kwargs)
             must_be_new = kwargs.get("id") == ""
             kwargs["last_modified"] = self.get_time()
             kwargs["creator"] = getattr(current_user, "name", "admin")

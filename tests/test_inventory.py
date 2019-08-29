@@ -62,7 +62,7 @@ def test_manual_object_creation(user_client: FlaskClient) -> None:
 
 
 def create_from_file(client: FlaskClient, file: str) -> None:
-    with open(client.application.path / "projects" / "spreadsheets" / file, "rb") as f:
+    with open(app.path / "projects" / "spreadsheets" / file, "rb") as f:
         data = {"form_type": "excel_import", "file": f, "replace": False}
         client.post("/import_topology", data=data)
 

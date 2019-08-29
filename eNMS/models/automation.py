@@ -245,7 +245,7 @@ class Run(AbstractBase):
 
     def close_connection_cache(self) -> None:
         for library in ("netmiko", "napalm"):
-            connections = app.connections_cache[library].pop(self.runtime, None)
+            connections = controller.connections_cache[library].pop(self.runtime, None)
             if not connections:
                 continue
             pool = ThreadPool(30)

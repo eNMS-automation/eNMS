@@ -433,6 +433,9 @@ function processInstance(type, instance) {
 
 // eslint-disable-next-line
 function processData(type, id) {
+  if (type.includes("Service") || type === "workflow") {
+    $(`#${type}-workflows-${id} option`).prop("disabled", false);
+  }
   fCall(
     `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,

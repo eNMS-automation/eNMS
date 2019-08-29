@@ -33,7 +33,7 @@ function panelCode(type, id, mode) {
     keyNavigation: false,
     transitionEffect: "none",
   });
-  $(`#${type}-workflows-${id} option`).prop("disabled", "disabled");
+  $(`#${type}-workflows-${id} option`).prop("disabled", true);
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
   if (mode == "run") {

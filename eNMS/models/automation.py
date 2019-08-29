@@ -256,9 +256,15 @@ class Run(AbstractBase):
             connections = app.connections_cache[library].pop(self.runtime, None)
             if not connections:
                 continue
+            pool = ThreadPool(30)
             for device, conn in connections.items():
                 self.log("info", f"Closing {library} Connection to {device}")
-                conn.disconnect() if library == "netmiko" else conn.close()
+                pool.apply_async(self.disconnect, (conn, library))
+            pool.close()
+            pool.join()
+
+    def disconnect(self, connection, library):
+        connection.disconnect() if library == "netmiko" else connection.close()
 
     def run(self, payload: Optional[dict] = None) -> dict:
         try:

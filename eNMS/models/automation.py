@@ -25,12 +25,7 @@ from xml.parsers.expat import ExpatError
 
 from eNMS import app
 from eNMS.database import Session
-from eNMS.database.dialect import (
-    Column,
-    LargeString,
-    MutableDict,
-    SmallString,
-)
+from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.associations import (
     job_device_table,
@@ -76,7 +71,7 @@ class Run(AbstractBase):
     __tablename__ = type = "Run"
     private = True
     id = Column(Integer, primary_key=True)
-    restart_run_id = Column(Integer, ForeignKey('Run.id'))
+    restart_run_id = Column(Integer, ForeignKey("Run.id"))
     restart_run = relationship("Run", remote_side=[id])
     creator = Column(SmallString, default="admin")
     properties = Column(MutableDict)
@@ -102,7 +97,7 @@ class Run(AbstractBase):
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
-        print("ttt"*200, self.restart_run)
+        print("ttt" * 200, self.restart_run)
 
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name} run by {self.creator})"
@@ -277,7 +272,9 @@ class Run(AbstractBase):
                 global_result = self.restart_run.result()
                 if global_result:
                     print(global_result.result["results"])
-                    payload["variables"] = global_result.result["results"].get("variables", {})
+                    payload["variables"] = global_result.result["results"].get(
+                        "variables", {}
+                    )
             results = self.job.build_results(self, payload)
             self.close_connection_cache()
         except Exception:
@@ -474,8 +471,11 @@ class Run(AbstractBase):
         self, ssh_client: SSHClient, files: List[Tuple[str, str]]
     ) -> None:
         if self.protocol == "sftp":
-            MAX_TRANSFER_SIZE = 2 ** 30
-            with SFTPClient.from_transport(ssh_client.get_transport(), window_size=MAX_TRANSFER_SIZE, max_packet_size=MAX_TRANSFER_SIZE) as sftp:
+            with SFTPClient.from_transport(
+                ssh_client.get_transport(),
+                window_size=self.window_size,
+                max_packet_size=self.max_transfer_size,
+            ) as sftp:
                 for source, destination in files:
                     getattr(sftp, self.direction)(source, destination)
         else:
@@ -920,9 +920,7 @@ class Workflow(Job):
                 job_run.properties = {"devices": [device.id]}
                 Session.commit()
                 job_results = job_run.run(payload)
-            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results[
-                "success"
-            ]
+            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
             successors = (
                 successor
                 for successor, _ in job.adjacent_jobs(

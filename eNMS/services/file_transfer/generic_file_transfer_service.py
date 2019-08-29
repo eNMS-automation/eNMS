@@ -3,7 +3,7 @@ from logging import info
 from os.path import split
 from paramiko import SSHClient, AutoAddPolicy
 from sqlalchemy import Boolean, ForeignKey, Integer
-from wtforms import BooleanField, HiddenField, SelectField
+from wtforms import BooleanField, HiddenField, IntegerField, SelectField
 from wtforms.validators import InputRequired
 
 from eNMS.database.dialect import Column, SmallString
@@ -27,6 +27,8 @@ class GenericFileTransferService(Service):
     load_known_host_keys = Column(Boolean, default=False)
     look_for_keys = Column(Boolean, default=False)
     source_file_includes_globbing = Column(Boolean, default=False)
+    max_transfer_size = Column(Integer, default=2 ** 30)
+    window_size = Column(Integer, default=2 ** 30)
 
     __mapper_args__ = {"polymorphic_identity": "GenericFileTransferService"}
 
@@ -80,3 +82,5 @@ class GenericFileTransferForm(ServiceForm):
     source_file_includes_globbing = BooleanField(
         "Source file includes glob pattern (Put Direction only)"
     )
+    max_transfer_size = IntegerField(default=2 ** 30)
+    window_size = IntegerField(default=2 ** 30)

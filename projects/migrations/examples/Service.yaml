@@ -2767,7 +2767,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_values: 'get_var('iteration_devices', device=device.name)'
+  iteration_values: 'get_var("iteration_devices", device=device.name)'
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 14:05:09.182701'
   mail_recipient: ''
@@ -2825,7 +2825,7 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_values: 'get_var('iteration_devices2', device=device.name)'
+  iteration_values: 'get_var("iteration_devices2", device=device.name)'
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 18:16:26.676556'
   mail_recipient: ''

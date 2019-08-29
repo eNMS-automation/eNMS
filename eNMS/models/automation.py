@@ -102,6 +102,7 @@ class Run(AbstractBase):
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
+        print("ttt"*200, self.restart_run)
 
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name} run by {self.creator})"
@@ -978,12 +979,6 @@ class Workflow(Job):
                 continue
             visited.add(job)
             app.run_db[run.runtime]["current_job"] = job.get_properties()
-            if run.restart_run:
-                job_restart_run = fetch(
-                    "Run", allow_none=True, job_id=job.id, parent_runtime=run.restart_run.parent_runtime
-                )
-            else:
-                job_restart_run = None
             skip_job = False
             if job.skip_python_query:
                 skip_job = run.eval(job.skip_python_query, **locals())
@@ -999,7 +994,7 @@ class Workflow(Job):
                             workflow=self.id,
                             workflow_device=base_target.id,
                             parent_runtime=run.parent_runtime,
-                            restart_run=job_restart_run,
+                            restart_run=run.restart_run,
                         )
                         job_run.properties = {}
                         derived_target_result = job_run.run(payload)
@@ -1024,7 +1019,7 @@ class Workflow(Job):
                     job=job.id,
                     workflow=self.id,
                     parent_runtime=run.parent_runtime,
-                    restart_run=job_restart_run,
+                    restart_run=run.restart_run,
                 )
                 job_run.properties = {"devices": [d.id for d in valid_devices]}
                 Session.commit()

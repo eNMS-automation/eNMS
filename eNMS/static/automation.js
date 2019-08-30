@@ -125,14 +125,19 @@ function formatResults(results, id, formId, compare) {
     );
   } else {
     $(`#display_results-${formId}`).empty();
+    textResults = JSON.parse(JSON.stringify(results));
+    jsonResults = parseObject(JSON.parse(JSON.stringify(results)));
     const options = {
       mode: $(`#view_type-${id}`).val(),
       modes: ["text", "view"],
+      onModeChange: function(newMode) {
+        editor.set(newMode == "text" ? textResults : jsonResults);
+      },
     };
-    new JSONEditor(
+    editor = new JSONEditor(
       document.getElementById(`display_results-${formId}`),
       options,
-      parseObject(JSON.parse(JSON.stringify(results)))
+      jsonResults
     );
   }
 }

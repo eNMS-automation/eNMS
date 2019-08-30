@@ -85,4 +85,5 @@ device_targets_mode: service -> use_workflow_devices: true / workflow_traversal_
 device_targets_mode: device -> use_workflow_devices: true / workflow_traversal_mode: device
 device_targets_mode: ignore -> use_workflow_devices: false / workflow_traversal_mode: service
 
-
+- List of string transformation for JSON display: don't do it when the type of display is TEXT
+>>> Not possible, it's either one or the other.

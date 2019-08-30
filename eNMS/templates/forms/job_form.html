@@ -236,8 +236,7 @@
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
         <label class="hide-run"
-          >Python Query (populating will supersede device targets in a parent
-          workflow)</label
+          >Python Query (Derives alternate device targets based on Workflow Device Target)</label
         >
         <div class="form-group">
           {{ form.python_query(id=form_type + '-python_query',

@@ -3,7 +3,6 @@
   credentials: device
   custom_username: ''
   description: Poll configuration and push to gitlab
-  device_targets_mode: ignore
   devices: []
   display_only_failed_nodes: true
   events: []
@@ -38,7 +37,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -46,7 +47,6 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Netmiko
-  device_targets_mode: service
   devices: []
   display_only_failed_nodes: true
   events: []
@@ -82,7 +82,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -90,7 +92,6 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Napalm
-  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -126,7 +127,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -134,7 +137,6 @@
   credentials: device
   custom_username: ''
   description: ReST call, Napalm getters, etc
-  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -175,7 +177,9 @@
   start_workflows: []
   success_query: 'False'
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -183,7 +187,6 @@
   credentials: device
   custom_username: ''
   description: Test python device selection mechanism
-  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
@@ -217,7 +220,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -225,7 +230,6 @@
   credentials: device
   custom_username: ''
   description: Test the payload extraction and validation mechanisms
-  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -262,7 +266,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -270,7 +276,6 @@
   credentials: device
   custom_username: ''
   description: Test the inner workflow system
-  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
@@ -306,7 +311,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -314,7 +321,6 @@
   credentials: device
   custom_username: ''
   description: Workflow with separate failure - success path
-  device_targets_mode: service
   devices: [Austin, Washington]
   display_only_failed_nodes: false
   events: []
@@ -349,7 +355,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -357,7 +365,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -391,7 +398,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -399,7 +408,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: [Washington, Chicago]
   display_only_failed_nodes: false
   events: []
@@ -435,7 +443,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -443,7 +453,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -480,7 +489,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -488,7 +499,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
@@ -524,7 +534,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -532,7 +544,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
     Oakland, Denver]
@@ -574,7 +585,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -582,7 +595,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
@@ -618,7 +630,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -626,7 +640,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -663,7 +676,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -671,7 +686,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: []
   display_only_failed_nodes: false
   events: []
@@ -707,7 +721,9 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -715,7 +731,6 @@
   credentials: device
   custom_username: ''
   description: ''
-  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -751,6 +766,8 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
+  traversal_mode: service
   type: Workflow
+  use_workflow_devices: true
   vendor: ''
   waiting_time: 0

@@ -287,7 +287,8 @@ function jobToNode(job, index) {
   return {
     id: job.id,
     shape: job.shape,
-    color: job.color,
+    color: job.type == "Workflow" ? {border: "#42a1f5", background: job.color} : job.color,
+    borderWidth: job.type == "Workflow" ? 3 : 1,
     size: job.size,
     label: job.name,
     name: job.name,
@@ -508,7 +509,7 @@ function restartWorkflow() {
 }
 
 function colorJob(id, color) {
-  nodes.update({ id: id, color: color });
+  nodes.get(id).color.background = color
 }
 
 // eslint-disable-next-line

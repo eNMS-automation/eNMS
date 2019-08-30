@@ -331,21 +331,6 @@
           {{ form.waiting_time(id=form_type + '-waiting_time',
           class="form-control hide-run add-id") }}
         </div>
-        <label class="hide-run">Shape</label>
-        <div class="form-group">
-          {{ form.shape(id=form_type + '-shape', class="form-control hide-run
-          add-id") }}
-        </div>
-        <label class="hide-run">Color</label>
-        <div class="form-group">
-          {{ form.color(id=form_type + '-color', class="form-control hide-run
-          add-id") }}
-        </div>
-        <label class="hide-run">Size</label>
-        <div class="form-group">
-          {{ form.size(id=form_type + '-size', class="form-control hide-run
-          add-id") }}
-        </div>
       </div>
       {% if form_type != "workflow" %}
       <div id="step-5">

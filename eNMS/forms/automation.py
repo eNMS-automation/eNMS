@@ -48,20 +48,6 @@ class JobForm(BaseForm):
     skip_python_query = StringField("Skip (Python Query)")
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
-    shape = SelectField(
-        "Shape",
-        choices=(
-            ("box", "Box"),
-            ("circle", "Circle"),
-            ("square", "Square"),
-            ("diamond", "Diamond"),
-            ("triangle", "Triangle"),
-            ("ellipse", "Ellipse"),
-            ("database", "Database"),
-        ),
-    )
-    size = IntegerField("Size", default=40)
-    color = StringField("Color", default="#D2E5FF")
     initial_payload = DictField()
     iteration_values = StringField("Iteration Targets (Python Query)")
     iteration_variable_name = StringField(

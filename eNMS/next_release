@@ -89,4 +89,6 @@ device_targets_mode: ignore -> use_workflow_devices: false / workflow_traversal_
 >>> In text mode, multiline strings are now displayed  without any transformation.
 In text mode multilines strings are now displayed without any transformation.
 
+- Workflow shape: ellipse by default.
+
 

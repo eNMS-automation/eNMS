@@ -24,7 +24,6 @@ const dsoptions = {
     },
   },
   nodes: {
-    shape: "box",
     font: {
       bold: {
         color: "#0077aa",
@@ -286,11 +285,9 @@ function formatJobTitle(job) {
 function jobToNode(job, index) {
   return {
     id: job.id,
-    shape: job.shape,
-    color: job.type == "Workflow" ? {border: "#42a1f5", background: job.color} : job.color,
-    borderWidth: job.type == "Workflow" ? 3 : 1,
-    size: job.size,
-    label: job.name,
+    shape: job.type == "Workflow" ? "ellipse" : "box",
+    color: "#D2E5FF",
+    label: job.type == "Workflow" ? `     ${job.name}     ` : job.name,
     name: job.name,
     type: job.type,
     title: formatJobTitle(job),
@@ -479,7 +476,7 @@ $("#network").contextMenu({
 });
 
 function runWorkflow(withUpdates) {
-  workflow.jobs.forEach((job) => colorJob(job.id, job.color));
+  workflow.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
   if (withUpdates) {
     showTypePanel("Workflow", workflow.id, "run");
   } else {
@@ -509,7 +506,7 @@ function restartWorkflow() {
 }
 
 function colorJob(id, color) {
-  nodes.get(id).color.background = color
+  nodes.update({ id: id, color: color });
 }
 
 // eslint-disable-next-line
@@ -533,7 +530,7 @@ function displayWorkflowState(result) {
   if (!result.state) {
     $("#progressbar").hide();
     result.workflow.jobs.forEach((job) => {
-      colorJob(job.id, job.skip ? "#D3D3D3" : job.color);
+      colorJob(job.id, job.skip ? "#D3D3D3" : "#D2E5FF");
     });
   } else {
     $("#progressbar").show();
@@ -586,7 +583,7 @@ function displayWorkflowState(result) {
 
 function resetDisplay() {
   workflow.jobs.forEach((job) => {
-    colorJob(job.id, job.skip ? "#D3D3D3" : job.color);
+    colorJob(job.id, job.skip ? "#D3D3D3" : "#D2E5FF");
   });
   workflow.edges.forEach((edge) => {
     edges.update({ id: edge.id, label: edge.label });
@@ -600,6 +597,7 @@ function getWorkflowState(first) {
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
+      console.log(result.workflow.id, workflow.id);
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
       }

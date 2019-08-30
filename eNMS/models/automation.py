@@ -618,8 +618,6 @@ class Job(AbstractBase):
     display_only_failed_nodes = Column(Boolean, default=True)
     include_link_in_summary = Column(Boolean, default=True)
     mail_recipient = Column(SmallString)
-    shape = Column(SmallString, default="box")
-    size = Column(Integer, default=40)
     color = Column(SmallString, default="#D2E5FF")
     initial_payload = Column(MutableDict)
     custom_username = Column(SmallString)

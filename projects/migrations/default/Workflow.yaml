@@ -27,7 +27,7 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
+  shape: ellipse
   size: 40
   skip: false
   skip_python_query: ''

@@ -14,7 +14,7 @@
   iteration_variable_name: iteration_value
   jobs: [Start, End, poller_service, git_push_configurations]
   labels: {}
-  last_modified: '2019-08-05 13:30:56.726895'
+  last_modified: '2019-08-30 17:34:38.146394'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -39,7 +39,7 @@
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
+  use_workflow_devices: false
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'

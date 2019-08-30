@@ -1050,13 +1050,13 @@ class Workflow(Job):
             for successor in successors:
                 jobs.append(successor)
                 if (
-                    not run.use_workflow_devices == "service"
+                    not run.use_workflow_devices
                     and successor == self.jobs[1]
                 ):
                     results["success"] = True
             if not skip_job and not job.skip:
                 sleep(job.waiting_time)
-        if run.use_workflow_devices == "service":
+        if run.use_workflow_devices:
             end_devices = allowed_devices["End"]
             results["devices"] = {
                 device.name: {"success": device in end_devices}

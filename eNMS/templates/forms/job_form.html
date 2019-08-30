@@ -208,9 +208,21 @@
       </div>
       <div id="step-3" style="min-height: 300px">
         {% if form_type == "workflow" %}
-        <label for="device_targets_mode">Device Targets Mode</label>
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-use_workflow_devices"
+              name="use_workflow_devices"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Use Workflow Devices</label>
+          </div>
+        </fieldset>
+        <label for="traversal_mode">Traversal Mode</label>
         <div class="form-group">
-          {{ form.device_targets_mode(id=form_type + '-device_targets_mode',
+          {{ form.traversal_mode(id=form_type + '-traversal_mode',
           class="form-control add-id") }}
         </div>
         {% endif %}

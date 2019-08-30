@@ -244,15 +244,15 @@ class Run(AbstractBase):
         return devices  # type: ignore
 
     def close_connection_cache(self) -> None:
+        pool = ThreadPool(30)
         for library in ("netmiko", "napalm"):
             connections = controller.connections_cache[library].pop(self.runtime, None)
             if not connections:
                 continue
-            pool = ThreadPool(30)
             for connection in connections.items():
                 pool.apply_async(self.disconnect, (library, *connection))
-            pool.close()
-            pool.join()
+        pool.close()
+        pool.join()
 
     def disconnect(self, library, device, connection):
         try:

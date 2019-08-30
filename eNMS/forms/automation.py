@@ -123,12 +123,12 @@ class ServiceForm(JobForm):
 
 class WorkflowForm(JobForm):
     form_type = HiddenField(default="workflow")
-    device_targets_mode = SelectField(
-        "Device Targets Mode",
+    use_workflow_devices = BooleanField("Use Workflow Devices", default=True)
+    traversal_mode = SelectField(
+        "Traversal Mode",
         choices=(
-            ("service", "Run with Workflow Targets, service by service"),
-            ("device", "Run with Workflow Targets, device by device"),
-            ("ignore", "Run with Service Targets"),
+            ("service", "Workflow runs one service at a time"),
+            ("device", "All devices run independently through the workflow"),
         ),
     )
     start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")

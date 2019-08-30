@@ -784,7 +784,8 @@ class Workflow(Job):
     has_targets = Column(Boolean, default=True)
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     labels = Column(MutableDict)
-    device_targets_mode = Column(SmallString, default="service")
+    use_workflow_devices = Column(Boolean, default=True)
+    traversal_mode = Column(SmallString, default="service")
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"

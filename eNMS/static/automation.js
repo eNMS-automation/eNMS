@@ -8,7 +8,6 @@ diffview: false
 displayWorkflow: false
 fCall: false
 getJobState: false
-getWorkflowState: false
 jobToNode: false
 JSONEditor: false
 page: false
@@ -125,14 +124,19 @@ function formatResults(results, id, formId, compare) {
     );
   } else {
     $(`#display_results-${formId}`).empty();
+    textResults = JSON.parse(JSON.stringify(results));
+    jsonResults = parseObject(JSON.parse(JSON.stringify(results)));
     const options = {
       mode: $(`#view_type-${id}`).val(),
       modes: ["text", "view"],
+      onModeChange: function(newMode) {
+        editor.set(newMode == "text" ? textResults : jsonResults);
+      },
     };
-    new JSONEditor(
+    editor = new JSONEditor(
       document.getElementById(`display_results-${formId}`),
       options,
-      parseObject(JSON.parse(JSON.stringify(results)))
+      jsonResults
     );
   }
 }
@@ -402,9 +406,7 @@ function runLogic(job) {
   showLogsPanel(job, job.runtime, true);
   alertify.notify(`Job '${job.name}' started.`, "success", 5);
   if (page == "workflow_builder") {
-    if (job.type == "Workflow") {
-      getWorkflowState(true);
-    } else {
+    if (job.type != "Workflow") {
       getJobState(job.id);
     }
   }

@@ -349,6 +349,7 @@ class Run(AbstractBase):
             results.update(
                 {"success": query_result, "success_query": self.success_query}
             )
+        results["endtime"] = app.get_time()
         self.log(
             "info",
             f"Finished running {self.job.type} '{self.job.name}'"
@@ -398,7 +399,6 @@ class Run(AbstractBase):
             )
         notification_payload = {
             "job": self.job.get_properties(),
-            "run": self.properties,
             "results": results,
             "content": "\n\n".join(notification),
         }
@@ -618,8 +618,6 @@ class Job(AbstractBase):
     display_only_failed_nodes = Column(Boolean, default=True)
     include_link_in_summary = Column(Boolean, default=True)
     mail_recipient = Column(SmallString)
-    shape = Column(SmallString, default="box")
-    size = Column(Integer, default=40)
     color = Column(SmallString, default="#D2E5FF")
     initial_payload = Column(MutableDict)
     custom_username = Column(SmallString)

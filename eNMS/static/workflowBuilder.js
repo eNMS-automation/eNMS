@@ -24,7 +24,6 @@ const dsoptions = {
     },
   },
   nodes: {
-    shape: "box",
     font: {
       bold: {
         color: "#0077aa",
@@ -55,7 +54,6 @@ let graph;
 let selectedObject;
 let edgeType;
 let lastModified;
-let stateUpdate = false;
 let hoveredLabel;
 let mousePosition;
 let currLabel;
@@ -144,20 +142,20 @@ function displayWorkflow(workflowData) {
     );
   });
   $("#current-runtimes").val("latest");
-  $("#current-runtimes").selectpicker("refresh");
+  $("#current-workflow").val(workflow.id);
+  $("#current-runtimes,#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", () => savePositions());
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   lastModified = workflow.last_modified;
-
+  displayWorkflowState(workflowData);
   return graph;
 }
 
 function switchToWorkflow(workflowId, arrow) {
-  call(`/get_workflow_state/${workflowId}`, function(result) {
+  call(`/get_workflow_state/${workflowId}/latest`, function(result) {
     workflow = result.workflow;
     graph = displayWorkflow(result);
-    if (!stateUpdate) getWorkflowState(true);
     if (!arrow) {
       arrowPointer++;
       arrowHistory.splice(arrowPointer, 9e9, workflowId);
@@ -286,10 +284,9 @@ function formatJobTitle(job) {
 function jobToNode(job, index) {
   return {
     id: job.id,
-    shape: job.shape,
-    color: job.color,
-    size: job.size,
-    label: job.name,
+    shape: job.type == "Workflow" ? "ellipse" : "box",
+    color: "#D2E5FF",
+    label: job.type == "Workflow" ? `     ${job.name}     ` : job.name,
     name: job.name,
     type: job.type,
     title: formatJobTitle(job),
@@ -401,7 +398,6 @@ $("#current-workflow").on("change", function() {
 
 $("#current-runtimes").on("change", function() {
   resetDisplay();
-  if (!stateUpdate) getWorkflowState(true);
 });
 
 function savePositions() {
@@ -478,7 +474,7 @@ $("#network").contextMenu({
 });
 
 function runWorkflow(withUpdates) {
-  workflow.jobs.forEach((job) => colorJob(job.id, job.color));
+  workflow.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
   if (withUpdates) {
     showTypePanel("Workflow", workflow.id, "run");
   } else {
@@ -532,7 +528,7 @@ function displayWorkflowState(result) {
   if (!result.state) {
     $("#progressbar").hide();
     result.workflow.jobs.forEach((job) => {
-      colorJob(job.id, job.skip ? "#D3D3D3" : job.color);
+      colorJob(job.id, job.skip ? "#D3D3D3" : "#D2E5FF");
     });
   } else {
     $("#progressbar").show();
@@ -585,30 +581,25 @@ function displayWorkflowState(result) {
 
 function resetDisplay() {
   workflow.jobs.forEach((job) => {
-    colorJob(job.id, job.skip ? "#D3D3D3" : job.color);
+    colorJob(job.id, job.skip ? "#D3D3D3" : "#D2E5FF");
   });
   workflow.edges.forEach((edge) => {
     edges.update({ id: edge.id, label: edge.label });
   });
 }
 
-function getWorkflowState(first) {
-  stateUpdate = true;
-  if (first) resetDisplay();
+function getWorkflowState() {
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
+      if (result.workflow.id != workflow.id) return;
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
-      }
-      displayWorkflowState(result);
-      if (first || (result.state && result.state.status == "Running")) {
-        setTimeout(getWorkflowState, 3000);
       } else {
-        setTimeout(getWorkflowState, 15000);
-        stateUpdate = false;
+        displayWorkflowState(result);
       }
+      setTimeout(getWorkflowState, 3000);
     });
   }
 }
@@ -646,5 +637,6 @@ function getWorkflowState(first) {
     $("#current-workflow,#current-runtimes").selectpicker({
       liveSearch: true,
     });
+    getWorkflowState(true);
   });
 })();

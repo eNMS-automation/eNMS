@@ -78,10 +78,11 @@ When displaying a workflow, automatically jump to the latest runtime.
 
 - Add workflow property in general section
 
-- Change of property !!!!
+- Change of property: Use workflow devices and "workflow traversal mode" (service by service or device by device)
 device_targets_mode -> use_workflow_devices / workflow_traversal_mode
 MIGRATION:
 device_targets_mode: service -> use_workflow_devices: true / workflow_traversal_mode: service
 device_targets_mode: device -> use_workflow_devices: true / workflow_traversal_mode: device
 device_targets_mode: ignore -> use_workflow_devices: false / workflow_traversal_mode: service
+
 

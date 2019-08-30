@@ -837,7 +837,7 @@ class Workflow(Job):
     ) -> Set[Device]:
         if job.type != "Workflow" and not job.has_targets:
             return set()
-        elif run.device_targets_mode == "service":
+        elif run.use_workflow_devices:
             return allowed_devices[job.name]
         else:
             return run.compute_devices(payload)
@@ -943,7 +943,7 @@ class Workflow(Job):
         return results
 
     def build_results(self, run: "Run", payload: dict) -> dict:
-        if run.device_targets_mode in ("service", "ignore"):
+        if run.traversal_mode == "service":
             return self.per_service_workflow_run(run, payload)
         else:
             target_results = {
@@ -973,7 +973,7 @@ class Workflow(Job):
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
-        if run.device_targets_mode == "service":
+        if run.use_workflow_devices:
             initial_targets = set(run.compute_devices(payload))
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
@@ -991,7 +991,7 @@ class Workflow(Job):
                 skip_job = run.eval(job.skip_python_query, **locals())
             if skip_job or job.skip:
                 job_results = {"success": "skipped"}
-            elif run.device_targets_mode == "service" and job.python_query:
+            elif run.use_workflow_devices and job.python_query:
                 device_results, success = {}, True
                 for base_target in allowed_devices[job.name]:
                     try:
@@ -1032,7 +1032,7 @@ class Workflow(Job):
                 Session.commit()
                 job_results = job_run.run(payload)
             app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
-            if run.device_targets_mode == "service":
+            if run.use_workflow_devices:
                 successors = self.workflow_targets_processing(
                     run.runtime, allowed_devices, job, job_results
                 )
@@ -1050,13 +1050,13 @@ class Workflow(Job):
             for successor in successors:
                 jobs.append(successor)
                 if (
-                    not run.device_targets_mode == "service"
+                    not run.use_workflow_devices == "service"
                     and successor == self.jobs[1]
                 ):
                     results["success"] = True
             if not skip_job and not job.skip:
                 sleep(job.waiting_time)
-        if run.device_targets_mode == "service":
+        if run.use_workflow_devices == "service":
             end_devices = allowed_devices["End"]
             results["devices"] = {
                 device.name: {"success": device in end_devices}

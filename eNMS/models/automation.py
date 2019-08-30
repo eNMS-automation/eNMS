@@ -249,14 +249,17 @@ class Run(AbstractBase):
             if not connections:
                 continue
             pool = ThreadPool(30)
-            for device, conn in connections.items():
-                self.log("info", f"Closing {library} Connection to {device}")
-                pool.apply_async(self.disconnect, (conn, library))
+            for connection in connections.items():
+                pool.apply_async(self.disconnect, (library, *connection))
             pool.close()
             pool.join()
 
-    def disconnect(self, connection, library):
-        connection.disconnect() if library == "netmiko" else connection.close()
+    def disconnect(self, library, device, connection):
+        try:
+            connection.disconnect() if library == "netmiko" else connection.close()
+            self.log("info", f"Closed {library} Connection to {device}")
+        except Exception as exc:
+            self.log("error", f"{library} Connection to {device} couldn't be closed ({exc})")
 
     def run(self, payload: Optional[dict] = None) -> dict:
         try:
@@ -265,8 +268,6 @@ class Run(AbstractBase):
             controller.job_db[self.job.id]["runs"] += 1
             Session.commit()
             results = self.job.build_results(self, payload or self.initial_payload)
-            self.close_connection_cache()
-            self.log("info", f"{self.job.type} {self.job.name}: Finished")
         except Exception:
             result = (
                 f"Running {self.job.type} '{self.job.name}'"
@@ -277,7 +278,9 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "results": result}
         finally:
+            self.close_connection_cache()
             status = f"Completed ({'success' if results['success'] else 'failure'})"
+            self.log("info", f"{self.job.type} {self.job.name}: Finished")
             self.status = status  # type: ignore
             self.set_state(status=status)
             controller.job_db[self.job.id]["runs"] -= 1

@@ -37,7 +37,7 @@ class SwissArmyKnifeService(Service):
 
     def mail_feedback_notification(self, run: "Run", payload: dict) -> dict:
         name = payload["job"]["name"]
-        recipients = payload["run"]["mail_recipient"]
+        recipients = payload["job"]["mail_recipient"]
         runtime = run.runtime.replace(".", "").replace(":", "")
         filename = f"results-{runtime}.txt"
         app.send_email(

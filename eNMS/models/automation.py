@@ -398,7 +398,6 @@ class Run(AbstractBase):
             )
         notification_payload = {
             "job": self.job.get_properties(),
-            "run": self.properties,
             "results": results,
             "content": "\n\n".join(notification),
         }

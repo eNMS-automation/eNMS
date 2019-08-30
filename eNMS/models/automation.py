@@ -349,6 +349,7 @@ class Run(AbstractBase):
             results.update(
                 {"success": query_result, "success_query": self.success_query}
             )
+        results["endtime"] = app.get_time()
         self.log(
             "info",
             f"Finished running {self.job.type} '{self.job.name}'"

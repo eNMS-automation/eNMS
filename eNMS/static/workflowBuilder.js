@@ -148,12 +148,12 @@ function displayWorkflow(workflowData) {
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   lastModified = workflow.last_modified;
-
+  displayWorkflowState(workflowData);
   return graph;
 }
 
 function switchToWorkflow(workflowId, arrow) {
-  call(`/get_workflow_state/${workflowId}`, function(result) {
+  call(`/get_workflow_state/${workflowId}/latest`, function(result) {
     workflow = result.workflow;
     graph = displayWorkflow(result);
     if (!arrow) {
@@ -588,22 +588,19 @@ function resetDisplay() {
   });
 }
 
-function getWorkflowState(first) {
-  if (first) resetDisplay();
+function getWorkflowState() {
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
+      console.log(result.workflow.id, workflow.id);
       if (result.workflow.id != workflow.id) return;
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
-      }
-      displayWorkflowState(result);
-      if (first || (result.state && result.state.status == "Running")) {
-        setTimeout(getWorkflowState, 3000);
       } else {
-        setTimeout(getWorkflowState, 5000);
+        displayWorkflowState(result);
       }
+      setTimeout(getWorkflowState, 3000);
     });
   }
 }
@@ -641,5 +638,6 @@ function getWorkflowState(first) {
     $("#current-workflow,#current-runtimes").selectpicker({
       liveSearch: true,
     });
+    getWorkflowState(true);
   });
 })();

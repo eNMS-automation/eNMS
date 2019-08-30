@@ -54,7 +54,6 @@ let graph;
 let selectedObject;
 let edgeType;
 let lastModified;
-let stateUpdate = false;
 let hoveredLabel;
 let mousePosition;
 let currLabel;
@@ -157,7 +156,6 @@ function switchToWorkflow(workflowId, arrow) {
   call(`/get_workflow_state/${workflowId}`, function(result) {
     workflow = result.workflow;
     graph = displayWorkflow(result);
-    if (!stateUpdate) getWorkflowState(true);
     if (!arrow) {
       arrowPointer++;
       arrowHistory.splice(arrowPointer, 9e9, workflowId);
@@ -400,7 +398,6 @@ $("#current-workflow").on("change", function() {
 
 $("#current-runtimes").on("change", function() {
   resetDisplay();
-  if (!stateUpdate) getWorkflowState(true);
 });
 
 function savePositions() {
@@ -592,7 +589,6 @@ function resetDisplay() {
 }
 
 function getWorkflowState(first) {
-  stateUpdate = true;
   if (first) resetDisplay();
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";
@@ -606,8 +602,7 @@ function getWorkflowState(first) {
       if (first || (result.state && result.state.status == "Running")) {
         setTimeout(getWorkflowState, 3000);
       } else {
-        setTimeout(getWorkflowState, 15000);
-        stateUpdate = false;
+        setTimeout(getWorkflowState, 5000);
       }
     });
   }

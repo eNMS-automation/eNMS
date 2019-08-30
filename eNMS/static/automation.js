@@ -8,7 +8,6 @@ diffview: false
 displayWorkflow: false
 fCall: false
 getJobState: false
-getWorkflowState: false
 jobToNode: false
 JSONEditor: false
 page: false
@@ -407,9 +406,7 @@ function runLogic(job) {
   showLogsPanel(job, job.runtime, true);
   alertify.notify(`Job '${job.name}' started.`, "success", 5);
   if (page == "workflow_builder") {
-    if (job.type == "Workflow") {
-      getWorkflowState(true);
-    } else {
+    if (job.type != "Workflow") {
       getJobState(job.id);
     }
   }

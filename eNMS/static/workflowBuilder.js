@@ -143,7 +143,8 @@ function displayWorkflow(workflowData) {
     );
   });
   $("#current-runtimes").val("latest");
-  $("#current-runtimes").selectpicker("refresh");
+  $("#current-workflow").val(workflow.id);
+  $("#current-runtimes,#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", () => savePositions());
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
@@ -597,7 +598,7 @@ function getWorkflowState(first) {
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
-      console.log(result.workflow.id, workflow.id);
+      if (result.workflow.id != workflow.id) return;
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
       }

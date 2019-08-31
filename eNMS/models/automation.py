@@ -1,32 +1,19 @@
 from collections import defaultdict
 from copy import deepcopy
-from functools import partial
 from git import Repo
 from git.exc import GitCommandError
-from json import loads
-from json.decoder import JSONDecodeError
 from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
-from napalm import get_network_driver
-from napalm.base.base import NetworkDriver
-from netmiko import ConnectHandler
 from pathlib import Path
-from paramiko import SFTPClient, SSHClient
-from re import compile, search
-from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Integer
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from traceback import format_exc
-from typing import Any, Dict, Generator, List, Match, Optional, Set, Tuple, Union
-from xmltodict import parse
-from xml.parsers.expat import ExpatError
+from typing import Any, Generator, List, Optional, Set, Tuple
 
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
-from eNMS.database.functions import convert_value, factory, fetch
+from eNMS.database.functions import factory, fetch
 from eNMS.database.associations import (
     job_device_table,
     job_event_table,
@@ -35,6 +22,7 @@ from eNMS.database.associations import (
     start_jobs_workflow_table,
 )
 from eNMS.database.base import AbstractBase
+from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 from eNMS.models.events import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
@@ -128,7 +116,7 @@ class Service(Job):
             args[4][device.name] = device_result
 
     def device_run(
-        self, run: "Run", payload: dict, targets: Optional[Set["Device"]] = None
+        self, run: Run, payload: dict, targets: Optional[Set["Device"]] = None
     ) -> dict:
         if not targets:
             return run.get_results(payload)
@@ -155,7 +143,7 @@ class Service(Job):
             results = {"devices": device_results}
             return results
 
-    def build_results(self, run: "Run", payload: dict, *other: Any) -> dict:
+    def build_results(self, run: Run, payload: dict, *other: Any) -> dict:
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         targets: Set = set()
         if run.has_targets:
@@ -328,7 +316,7 @@ class Workflow(Job):
                 yield successor
 
     def per_device_workflow_run(
-        self, run: "Run", payload: dict, device: Device
+        self, run: Run, payload: dict, device: Device
     ) -> dict:
         app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
         jobs: list = list(run.start_jobs)
@@ -396,7 +384,7 @@ class Workflow(Job):
                 sleep(job.waiting_time)
         return results
 
-    def build_results(self, run: "Run", payload: dict) -> dict:
+    def build_results(self, run: Run, payload: dict) -> dict:
         if run.traversal_mode == "service":
             return self.per_service_workflow_run(run, payload)
         else:
@@ -417,7 +405,7 @@ class Workflow(Job):
             (1 + job.job_number) if job.type == "Workflow" else 1 for job in self.jobs
         )
 
-    def per_service_workflow_run(self, run: "Run", payload: dict) -> dict:
+    def per_service_workflow_run(self, run: Run, payload: dict) -> dict:
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )

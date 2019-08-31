@@ -96,3 +96,10 @@ from eNMS.models.automation import Run, Service
  |
 from eNMS.models.automation import Service
 from eNMS.models.execution import Run
+
+- To reduce load between the browser and the server, monitor for user inactivity, and if determined,
+cease all Ajax activity until activity resumes.
+>>> Done.
+
+- add end runtime for a device results (right now, onlin runtime in the results)
+>>> Done.

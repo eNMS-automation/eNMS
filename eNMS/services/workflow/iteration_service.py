@@ -7,7 +7,8 @@ from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, InstanceField
-from eNMS.models.automation import Run, Service
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 
 

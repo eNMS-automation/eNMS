@@ -27,7 +27,8 @@ from eNMS.forms.fields import (
     SubstitutionField,
 )
 from eNMS.forms.services import ValidationForm
-from eNMS.models.automation import Run, Service
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 
 

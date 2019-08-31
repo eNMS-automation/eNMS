@@ -36,7 +36,8 @@ from wtforms.validators import (
 from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models.automation import Run, Service
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run
 
 
 class ExampleService(Service):

@@ -4,7 +4,8 @@ from wtforms import HiddenField
 from eNMS.database.dialect import Column, MutableDict
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
-from eNMS.models.automation import Run, Service
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 
 

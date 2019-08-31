@@ -7,7 +7,8 @@ from wtforms.widgets import TextArea
 from eNMS.database.dialect import Column, LargeString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import StringValidationForm
-from eNMS.models.automation import Run, Service
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 
 

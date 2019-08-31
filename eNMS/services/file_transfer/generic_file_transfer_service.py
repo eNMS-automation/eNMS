@@ -9,7 +9,8 @@ from wtforms.validators import InputRequired
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.models.automation import Run, Service
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 
 

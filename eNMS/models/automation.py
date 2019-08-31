@@ -22,8 +22,8 @@ from eNMS.database.associations import (
     start_jobs_workflow_table,
 )
 from eNMS.database.base import AbstractBase
-from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
+from eNMS.models.execution import Run
 from eNMS.models.events import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
 

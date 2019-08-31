@@ -91,4 +91,8 @@ In text mode multilines strings are now displayed without any transformation.
 
 - Workflow shape: ellipse by default.
 
-
+- Separate automation and execution:
+from eNMS.models.automation import Run, Service
+ |
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run

@@ -6,7 +6,8 @@ from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NapalmForm
-from eNMS.models.automation import Run, Service
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 
 

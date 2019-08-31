@@ -8,7 +8,8 @@ from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Run, Service
+from eNMS.models.automation import Service
+from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 
 

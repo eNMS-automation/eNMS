@@ -24,6 +24,7 @@ const dsoptions = {
     },
   },
   nodes: {
+    shape: "box",
     font: {
       bold: {
         color: "#0077aa",
@@ -36,11 +37,15 @@ const dsoptions = {
   },
   manipulation: {
     enabled: false,
-    addEdge: function(data) {
+    addEdge: function(data, callback) {
+      if (data.to == 1) {
+        alertify.notify("You cannot draw an edge to 'Start'.", "error", 5);
+      }
       if (data.from == 2) {
-        alertify.notify("You cannot draw an edge from the End.", "error", 5);
+        alertify.notify("You cannot draw an edge from 'End'.", "error", 5);
       }
       if (data.from != data.to) {
+        
         data.subtype = edgeType;
         saveEdge(data);
       }
@@ -94,7 +99,6 @@ function displayWorkflow(workflowData) {
     const edge = this.getEdgeAt(properties.pointer.DOM);
     if (typeof node !== "undefined" && node != 1 && node != 2) {
       graph.selectNodes([node]);
-      $(".global,.edge-selection").hide();
       $(
         `.${
           node.length == 36 ? "node" : "label"
@@ -108,7 +112,7 @@ function displayWorkflow(workflowData) {
       $(".edge-selection").show();
       selectedObject = edges.get(edge);
     } else {
-      $(".node-selection,.label-selection").hide();
+      $(".node-selection,.edge-selection,.label-selection").hide();
       $(".global").show();
     }
   });
@@ -282,10 +286,11 @@ function formatJobTitle(job) {
 }
 
 function jobToNode(job, index) {
+  const defaultJob = ["Start", "End"].includes(job.name);
   return {
     id: job.id,
-    shape: job.type == "Workflow" ? "ellipse" : "box",
-    color: "#D2E5FF",
+    shape: job.type == "Workflow" ? "ellipse" : defaultJob ? "circle" : "box",
+    color: defaultJob ? "pink" : "#D2E5FF",
     label: job.type == "Workflow" ? `     ${job.name}     ` : job.name,
     name: job.name,
     type: job.type,
@@ -504,7 +509,7 @@ function restartWorkflow() {
 }
 
 function colorJob(id, color) {
-  nodes.update({ id: id, color: color });
+  if (id != 1 && id != 2) nodes.update({ id: id, color: color });
 }
 
 // eslint-disable-next-line

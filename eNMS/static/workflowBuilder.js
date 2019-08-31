@@ -557,13 +557,12 @@ function displayWorkflowState(result) {
           skipped: "#D3D3D3",
         };
         if (id in nodes._data) {
-          let updateNode = { id: id, color: color[state.success] };
+          colorJob(id, color[state.success]);
           if (state.type != "Workflow" && state.number_of_targets) {
             let progress = `${state.completed}/${state.number_of_targets}`;
             if (state.failed > 0) progress += ` (${state.failed} failed)`;
-            updateNode.label = `${nodes.get(id).name}\n${progress}`;
+            nodes.update({id: id, label:`${nodes.get(id).name}\n${progress}`});
           }
-          nodes.update(updateNode);
         }
       });
     }

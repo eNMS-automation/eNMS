@@ -599,7 +599,7 @@ function getWorkflowState(periodic) {
       } else {
         displayWorkflowState(result);
       }
-      if (periodic) setTimeout(getWorkflowState, 3000);
+      if (periodic) setTimeout(() => getWorkflowState(true), 3000);
     });
   }
 }

@@ -346,6 +346,7 @@ function clearResults(id) {
 
 // eslint-disable-next-line
 function refreshLogs(job, runtime, displayResults) {
+  if (!$(`#logs-form-${job.id}`).length) return;
   fCall("/get_job_logs", `#logs-form-${job.id}`, function(result) {
     $(`#log-${job.id}`).text(result.logs);
     if (result.refresh) {

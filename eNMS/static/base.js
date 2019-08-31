@@ -91,6 +91,7 @@ const panelName = {
   workflow_filtering: "Workflow Filtering",
 };
 
+let userIsActive = true;
 let topZ = 1000;
 
 // eslint-disable-next-line
@@ -168,6 +169,27 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
     prior.parentNode.insertBefore(script, prior);
   });
 };
+
+function detectUserInactivity() {
+  let timer;
+  window.onload = resetTimer;
+  window.onmousemove = resetTimer;
+  window.onmousedown = resetTimer;  
+  window.ontouchstart = resetTimer;
+  window.onclick = resetTimer;
+  window.onkeypress = resetTimer;
+  window.addEventListener('scroll', resetTimer, true);
+
+  function setUserInactive() {
+    userIsActive = false;
+  }
+
+  function resetTimer() {
+    clearTimeout(timer);
+    userIsActive = true;
+    timer = setTimeout(setUserInactive, 10000);
+  }
+}
 
 function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -517,7 +539,7 @@ function undoFilter(formType) {
 
 // eslint-disable-next-line
 function refreshTable(interval) {
-  table.ajax.reload(null, false);
+  if (userIsActive) table.ajax.reload(null, false);
   setTimeout(() => refreshTable(interval), interval);
 }
 
@@ -695,4 +717,5 @@ $(document).ready(function() {
   initSidebar();
   configureForm(page);
   doc(page);
+  detectUserInactivity();
 });

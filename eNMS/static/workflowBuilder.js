@@ -591,7 +591,7 @@ function resetDisplay() {
 function getWorkflowState(periodic) {
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";
-  if (workflow && workflow.id) {
+  if (userIsActive && workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
       if (result.workflow.id != workflow.id) return;
       if (result.workflow.last_modified !== lastModified) {
@@ -599,9 +599,9 @@ function getWorkflowState(periodic) {
       } else {
         displayWorkflowState(result);
       }
-      if (periodic) setTimeout(() => getWorkflowState(true), 3000);
     });
   }
+  if (periodic) setTimeout(() => getWorkflowState(true), 4000);
 }
 
 (function() {

@@ -338,7 +338,11 @@ class AutomationController(BaseController):
                 results = fetch("Run", runtime=runtime).results
                 global_result = [r for r in results if not r.device_id]
                 state = global_result[0].result.get("state") if global_result else None
-        return {"workflow": workflow.serialized, "runtimes": runtimes, "state": state}
+        return {
+            "workflow": workflow.to_dict(include=["jobs", "edges", "positions"]),
+            "runtimes": runtimes,
+            "state": state,
+        }
 
     def convert_date(self, date: str) -> list:
         python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore

@@ -1,6 +1,6 @@
 from flask_login import current_user as user
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from typing import Any, List
+from typing import Any, List, Optional
 
 from eNMS import app
 from eNMS.database import Base, Session
@@ -64,10 +64,16 @@ class AbstractBase(Base):
                 value = value not in (False, "false")
             setattr(self, property, value)
 
-    def get_properties(self, export: bool = False) -> dict:
+    def get_properties(
+        self, export: bool = False, include: Optional[list] = None
+    ) -> dict:
+        if include is None:
+            include = []
         result = {}
         for property in model_properties[self.type]:
-            if property in private_properties or property in dont_serialize:
+            if property in private_properties:
+                continue
+            if property not in include and property in dont_serialize:
                 continue
             value = getattr(self, property)
             if export:
@@ -80,21 +86,28 @@ class AbstractBase(Base):
             result[property] = value
         return result
 
-    def to_dict(self, export: bool = False) -> dict:
+    def to_dict(self, export: bool = False, include: Optional[list] = None) -> dict:
+        if include is None:
+            include = []
         properties = self.get_properties(export)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property, relation in relationships[self.type].items():
             value = getattr(self, property)
+            if property not in include:
+                continue
             if export and property in no_migrate:
                 continue
             if relation["list"]:
                 properties[property] = [
-                    obj.name if export else obj.get_properties() for obj in value
+                    obj.name if export else obj.get_properties(include=include)
+                    for obj in value
                 ]
             else:
                 if not value:
                     continue
-                properties[property] = value.name if export else value.get_properties()
+                properties[property] = (
+                    value.name if export else value.get_properties(include=include)
+                )
         if export:
             for property in no_migrate:
                 properties.pop(property, None)

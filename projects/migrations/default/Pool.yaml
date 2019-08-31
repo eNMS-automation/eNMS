@@ -32,8 +32,8 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  last_modified: ''
-  latitude: '0.0'
+  jobs: []
+  latitude: 0.0
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -53,7 +53,7 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
+  longitude: 0.0
   name: All objects
   never_update: false
   operator: all
@@ -93,8 +93,8 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  last_modified: ''
-  latitude: '0.0'
+  jobs: []
+  latitude: 0.0
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -114,7 +114,7 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
+  longitude: 0.0
   name: Devices only
   never_update: false
   operator: all
@@ -154,8 +154,8 @@
   device_vendor: ''
   device_vendor_match: inclusion
   devices: []
-  last_modified: ''
-  latitude: '0.0'
+  jobs: []
+  latitude: 0.0
   link_color: ''
   link_color_match: inclusion
   link_description: ''
@@ -175,7 +175,7 @@
   link_vendor: ''
   link_vendor_match: inclusion
   links: []
-  longitude: '0.0'
+  longitude: 0.0
   name: Links only
   never_update: false
   operator: all

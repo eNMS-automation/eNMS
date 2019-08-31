@@ -3,6 +3,7 @@
   credentials: device
   custom_username: ''
   description: Poll configuration and push to gitlab
+  device_targets_mode: ignore
   devices: []
   display_only_failed_nodes: true
   events: []
@@ -14,7 +15,7 @@
   iteration_variable_name: iteration_value
   jobs: [Start, End, poller_service, git_push_configurations]
   labels: {}
-  last_modified: '2019-06-24 07:19:52.826793'
+  last_modified: '2019-08-05 13:30:56.726895'
   mail_recipient: ''
   name: Configuration Management Workflow
   notification_header: ''
@@ -28,7 +29,7 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -37,9 +38,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -47,6 +46,7 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Netmiko
+  device_targets_mode: service
   devices: []
   display_only_failed_nodes: true
   events: []
@@ -73,7 +73,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -82,9 +82,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -92,6 +90,7 @@
   credentials: device
   custom_username: ''
   description: Create and delete a VRF with Napalm
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -118,7 +117,7 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -127,9 +126,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -137,6 +134,7 @@
   credentials: device
   custom_username: ''
   description: ReST call, Napalm getters, etc
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -168,7 +166,7 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -177,9 +175,7 @@
   start_workflows: []
   success_query: 'False'
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -187,6 +183,7 @@
   credentials: device
   custom_username: ''
   description: Test python device selection mechanism
+  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
@@ -211,7 +208,7 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -220,9 +217,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -230,6 +225,7 @@
   credentials: device
   custom_username: ''
   description: Test the payload extraction and validation mechanisms
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -257,7 +253,7 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -266,9 +262,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -276,6 +270,7 @@
   credentials: device
   custom_username: ''
   description: Test the inner workflow system
+  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
@@ -302,7 +297,7 @@
   query_property_type: ip_address
   send_notification: true
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -311,9 +306,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -321,6 +314,7 @@
   credentials: device
   custom_username: ''
   description: Workflow with separate failure - success path
+  device_targets_mode: service
   devices: [Austin, Washington]
   display_only_failed_nodes: false
   events: []
@@ -346,7 +340,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -355,9 +349,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -365,6 +357,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -389,7 +382,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -398,9 +391,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -408,6 +399,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington, Chicago]
   display_only_failed_nodes: false
   events: []
@@ -434,7 +426,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -443,9 +435,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -453,6 +443,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -480,7 +471,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -489,9 +480,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -499,6 +488,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
@@ -525,7 +515,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -534,9 +524,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -544,6 +532,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
     Oakland, Denver]
@@ -576,7 +565,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -585,9 +574,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -595,6 +582,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
@@ -621,7 +609,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -630,9 +618,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -640,6 +626,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -667,7 +654,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -676,9 +663,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -686,6 +671,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: []
   display_only_failed_nodes: false
   events: []
@@ -712,7 +698,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -721,9 +707,7 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -731,6 +715,7 @@
   credentials: device
   custom_username: ''
   description: ''
+  device_targets_mode: service
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
@@ -757,7 +742,7 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
+  shape: box
   size: 40
   skip: false
   skip_python_query: ''
@@ -766,8 +751,6 @@
   start_workflows: []
   success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0

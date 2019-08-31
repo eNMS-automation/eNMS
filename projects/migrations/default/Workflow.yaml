@@ -1,43 +1,34 @@
-- color: '#D2E5FF'
+- completed: 0
   creator: admin
   credentials: device
-  custom_username: ''
+  notification_header: ''
+  define_devices_from_payload: false
   description: Poll configuration and push to gitlab
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: true
+  failed: 0
   hidden: false
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  jobs: [Start, End, poller_service, git_push_configurations]
-  labels: {}
-  last_modified: '2019-08-30 18:24:50.312199'
+  jobs:
+  - Start
+  - End
+  - poller_service
+  - git_push_configurations
+  last_modified: '2019-06-24 07:19:52.826793'
   mail_recipient: ''
   name: Configuration Management Workflow
-  notification_header: ''
   number_of_retries: 0
+  number_of_targets: 0
   operating_system: ''
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: ellipse
-  size: 40
-  skip: false
-  skip_python_query: ''
-  start_jobs: [Start]
-  start_new_connection: false
-  start_workflows: []
-  success_query: ''
   time_between_retries: 10
-  traversal_mode: service
   type: Workflow
-  use_workflow_devices: false
+  device_targets_mode: ignore
   vendor: ''
   waiting_time: 0
+  python_query: ''

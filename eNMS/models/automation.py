@@ -315,9 +315,7 @@ class Workflow(Job):
                 app.run_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
 
-    def per_device_workflow_run(
-        self, run: Run, payload: dict, device: Device
-    ) -> dict:
+    def per_device_workflow_run(self, run: Run, payload: dict, device: Device) -> dict:
         app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
@@ -491,10 +489,7 @@ class Workflow(Job):
             results["results"].update(payload)
             for successor in successors:
                 jobs.append(successor)
-                if (
-                    not run.use_workflow_devices
-                    and successor == self.jobs[1]
-                ):
+                if not run.use_workflow_devices and successor == self.jobs[1]:
                     results["success"] = True
             if not skip_job and not job.skip:
                 sleep(job.waiting_time)

@@ -1,39 +1,26 @@
-from collections import defaultdict
 from copy import deepcopy
 from functools import partial
-from git import Repo
-from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
-from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
-from pathlib import Path
 from paramiko import SFTPClient, SSHClient
 from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import backref, relationship
-from time import sleep
+from sqlalchemy.orm import relationship
 from traceback import format_exc
-from typing import Any, Dict, Generator, List, Match, Optional, Set, Tuple, Union
+from typing import Any, Dict, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
 from eNMS import app
 from eNMS.database import Session
-from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
+from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import convert_value, factory, fetch
-from eNMS.database.associations import (
-    job_device_table,
-    job_event_table,
-    job_pool_table,
-    job_workflow_table,
-    start_jobs_workflow_table,
-)
 from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device
 from eNMS.models.events import Task  # noqa: F401
@@ -261,7 +248,9 @@ class Run(AbstractBase):
             connection.disconnect() if library == "netmiko" else connection.close()
             self.log("info", f"Closed {library} Connection to {device}")
         except Exception as exc:
-            self.log("error", f"{library} Connection to {device} couldn't be closed ({exc})")
+            self.log(
+                "error", f"{library} Connection to {device} couldn't be closed ({exc})"
+            )
 
     def run(self, payload: Optional[dict] = None) -> dict:
         try:

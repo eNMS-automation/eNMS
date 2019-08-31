@@ -397,7 +397,7 @@ $("#current-workflow").on("change", function() {
 });
 
 $("#current-runtimes").on("change", function() {
-  resetDisplay();
+  getWorkflowState();
 });
 
 function savePositions() {
@@ -588,7 +588,7 @@ function resetDisplay() {
   });
 }
 
-function getWorkflowState() {
+function getWorkflowState(periodic) {
   const runtime = $("#current-runtimes").val();
   const url = runtime ? `/${runtime}` : "";
   if (workflow && workflow.id) {
@@ -599,7 +599,7 @@ function getWorkflowState() {
       } else {
         displayWorkflowState(result);
       }
-      setTimeout(getWorkflowState, 3000);
+      if (periodic) setTimeout(getWorkflowState, 3000);
     });
   }
 }

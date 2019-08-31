@@ -99,20 +99,16 @@ function displayWorkflow(workflowData) {
     const edge = this.getEdgeAt(properties.pointer.DOM);
     if (typeof node !== "undefined" && node != 1 && node != 2) {
       graph.selectNodes([node]);
-      $(
-        `.${
-          node.length == 36 ? "node" : "label"
-        }-selection,.global,.edge-selection`
-      ).hide();
+      $(".menu-entry ").hide();
       $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
       selectedObject = nodes.get(node);
     } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
       graph.selectEdges([edge]);
-      $(".global,.node-selection,.label-selection").hide();
+      $(".menu-entry ").hide();
       $(".edge-selection").show();
       selectedObject = edges.get(edge);
     } else {
-      $(".node-selection,.edge-selection,.label-selection").hide();
+      $(".menu-entry ").hide();
       $(".global").show();
     }
   });

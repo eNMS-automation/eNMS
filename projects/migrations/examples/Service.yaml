@@ -46,8 +46,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: circle
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -107,8 +105,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: circle
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -146,8 +142,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -185,8 +179,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -224,8 +216,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -263,8 +253,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -303,8 +291,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -343,8 +329,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -397,8 +381,6 @@
   regex: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -445,8 +427,6 @@
   remote_as: 200
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: true
   skip_python_query: ''
   start_new_connection: false
@@ -476,6 +456,7 @@
   look_for_keys: false
   mail_recipient: ''
   max_processes: 5
+  max_transfer_size: 1073741824
   missing_host_key_policy: true
   multiprocessing: false
   name: test_file_transfer_service
@@ -490,8 +471,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
@@ -502,6 +481,7 @@
   type: GenericFileTransferService
   vendor: ''
   waiting_time: 0
+  window_size: 1073741824
 - color: '#D2E5FF'
   creator: admin
   credentials: device
@@ -534,8 +514,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -578,8 +556,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -621,8 +597,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -670,8 +644,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -732,8 +704,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -786,8 +756,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -846,8 +814,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -894,8 +860,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -952,8 +916,6 @@
   rest_url: http://127.0.0.1:5000/rest/is_alive
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1003,8 +965,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1051,8 +1011,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1098,8 +1056,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1145,8 +1101,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1188,8 +1142,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1230,8 +1182,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   source_code: "# Service Iteration 1: targets\r\ntargets = ['Loopback101', 'Loopback15']\
@@ -1290,8 +1240,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1348,8 +1296,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1406,8 +1352,6 @@
   query_property_type: ip_address
   send_notification: true
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1468,8 +1412,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1519,8 +1461,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1567,8 +1507,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1609,8 +1547,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1666,8 +1602,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1725,8 +1659,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1783,8 +1715,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1845,8 +1775,6 @@
   response3: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1905,8 +1833,6 @@
   response3: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -1948,8 +1874,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
@@ -1991,8 +1915,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
@@ -2050,8 +1972,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2108,8 +2028,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2166,8 +2084,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2216,8 +2132,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2262,8 +2176,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2310,8 +2222,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2356,8 +2266,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2402,8 +2310,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2455,8 +2361,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2506,8 +2410,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2557,8 +2459,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2613,8 +2513,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2671,8 +2569,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2709,9 +2605,9 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_values: ''
+  iteration_values: '["Loopback11","Loopback15"]'
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-14 14:05:00.322370'
+  last_modified: '2019-09-01 21:18:08.457334'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2729,8 +2625,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2767,9 +2661,9 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_values: ''
+  iteration_values: get_var('iteration_devices', device=device.name)
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-14 14:05:09.182701'
+  last_modified: '2019-09-01 21:18:28.739857'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2787,8 +2681,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2825,9 +2717,9 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_values: ''
+  iteration_values: get_var('iteration_devices2', device=device.name)
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-14 18:16:26.676556'
+  last_modified: '2019-09-01 21:18:49.508693'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2845,8 +2737,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2897,8 +2787,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2946,8 +2834,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -2987,8 +2873,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
@@ -3042,8 +2926,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -3097,8 +2979,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -3147,8 +3027,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -3195,8 +3073,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -3225,9 +3101,9 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_values: ''
+  iteration_values: '["Washington", "Atlanta"]'
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-15 22:44:40.177070'
+  last_modified: '2019-09-01 21:19:11.032626'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -3247,8 +3123,6 @@
   rest_url: http://127.0.0.1:5000/rest/instance/Device/{{payload["value"]}}
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -3292,8 +3166,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   source_code: "result = {\r\n \"get_var\": get_var('iteration_devices', device=device.name),\r\
@@ -3329,9 +3201,9 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_values: ''
+  iteration_values: get_result("get_interfaces", device=device.name)["result"]["get_interfaces"]
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-18 16:33:56.491650'
+  last_modified: '2019-09-01 21:20:01.103759'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -3349,8 +3221,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -3399,8 +3269,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -3447,8 +3315,6 @@
   query_property_type: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 40
   skip: false
   skip_python_query: ''
   start_new_connection: false
@@ -3494,8 +3360,6 @@
   query_property_type: name
   send_notification: false
   send_notification_method: mail_feedback_notification
-  shape: box
-  size: 10
   skip: false
   skip_python_query: ''
   start_new_connection: false

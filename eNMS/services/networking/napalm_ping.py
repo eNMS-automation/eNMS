@@ -60,14 +60,17 @@ class NapalmPingForm(ServiceForm, NapalmForm):
     ttl = IntegerField()
     vrf = StringField()
     groups = {
-"Ping Parameters": {"commands": ["count",
-            "packet_size",
-            "destination_ip",
-            "source_ip",
-            "timeout",
-            "ttl",
-            "vrf",
-        ], "default": "expanded"},
+        "Ping Parameters": {
+            "commands": [
+                "count",
+                "packet_size",
+                "destination_ip",
+                "source_ip",
+                "timeout",
+                "ttl",
+                "vrf",
+            ],
+            "default": "expanded",
+        },
         "Napalm Parameters": NapalmForm.group,
-        
     }

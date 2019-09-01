@@ -120,8 +120,17 @@ class PayloadExtractionForm(ServiceForm):
     operation3 = SelectField("Operation", choices=operation_choices)
     groups = {
         "General": {"commands": ["has_targets"], "default": "expanded"},
-        "Extraction 1": {"commands": ["variable1", "query1", "match_type1", "match1", "operation1"], "default": "expanded"},
-        "Extraction 2": {"commands": ["variable2", "query2", "match_type2", "match2", "operation2"], "default": "expanded"},
-        "Extraction 3": {"commands": ["variable3", "query3", "match_type3", "match3", "operation3"], "default": "expanded"},
+        "Extraction 1": {
+            "commands": ["variable1", "query1", "match_type1", "match1", "operation1"],
+            "default": "expanded",
+        },
+        "Extraction 2": {
+            "commands": ["variable2", "query2", "match_type2", "match2", "operation2"],
+            "default": "expanded",
+        },
+        "Extraction 3": {
+            "commands": ["variable3", "query3", "match_type3", "match3", "operation3"],
+            "default": "expanded",
+        },
     }
     query_fields = ServiceForm.query_fields + [f"query{i}" for i in range(1, 4)]

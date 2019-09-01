@@ -134,16 +134,20 @@ class RestCallForm(ServiceForm, ValidationForm):
     username = StringField()
     password = PasswordField()
     groups = {
-        "Main Parameters": {"commands": ["has_targets",
-            "call_type",
-            "rest_url",
-            "payload",
-            "params",
-            "headers",
-            "verify_ssl_certificate",
-            "timeout",
-            "username",
-            "password",
-        ], "default": "expanded"},
+        "Main Parameters": {
+            "commands": [
+                "has_targets",
+                "call_type",
+                "rest_url",
+                "payload",
+                "params",
+                "headers",
+                "verify_ssl_certificate",
+                "timeout",
+                "username",
+                "password",
+            ],
+            "default": "expanded",
+        },
         "Validation Parameters": ValidationForm.group,
     }

@@ -107,14 +107,14 @@ class NetmikoPromptsForm(ServiceForm, NetmikoForm, ValidationForm):
     groups = {
         "Main Parameters": {
             "commands": [
-            "command",
-            "confirmation1",
-            "response1",
-            "confirmation2",
-            "response2",
-            "confirmation3",
-            "response3",
-        ],
+                "command",
+                "confirmation1",
+                "response1",
+                "confirmation2",
+                "response2",
+                "confirmation3",
+                "response3",
+            ],
             "default": "expanded",
         },
         "Netmiko Parameters": NetmikoForm.group,

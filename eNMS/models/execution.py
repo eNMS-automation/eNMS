@@ -319,14 +319,10 @@ class Run(AbstractBase):
         try:
             args = (device,) if device else ()
             if self.job.iteration_values:
-                targets_results = {
-                    target: self.job.job(
-                        self,
-                        {**payload, self.job.iteration_variable_name: target},
-                        *args,
-                    )
-                    for target in self.eval(self.job.iteration_values, **locals())
-                }
+                targets_results = {}
+                for target in self.eval(self.job.iteration_values, **locals()):
+                    self.payload_helper(payload, self.iteration_variable_name, target)
+                    targets_results[target] = self.job.job(self, payload, *args)
                 results.update(
                     {
                         "results": targets_results,

@@ -526,12 +526,8 @@ function getJobState(id) {
 
 // eslint-disable-next-line
 function displayWorkflowState(result) {
-  if (!result.state) {
-    $("#progressbar").hide();
-    result.workflow.jobs.forEach((job) => {
-      colorJob(job.id, job.skip ? "#D3D3D3" : "#D2E5FF");
-    });
-  } else {
+  resetDisplay();
+  if (result.state) {
     $("#progressbar").show();
     if (Object.entries(result.state.progress).length === 0) {
       $("#progressbar").hide();
@@ -584,6 +580,7 @@ function displayWorkflowState(result) {
 }
 
 function resetDisplay() {
+  $("#progressbar").hide();
   workflow.jobs.forEach((job) => {
     colorJob(job.id, job.skip ? "#D3D3D3" : "#D2E5FF");
   });

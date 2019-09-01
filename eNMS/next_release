@@ -121,3 +121,11 @@ Jul  5 17:33:59 ien-ap0627b-centos-server gunicorn-3.6: [2019-07-05 17:33:59 -05
 independent of actions by the previous service.
 >>> Done.
 
+Variables are accessed with get_var. The value shouldn't just be shoved into the top-level
+of the payload, it should be: get_var("iter_var", device=device.name)
+>>> Done, now the iteration variable is retrieved with get_var, WITHOUT DEVICE:
+get_var("iteration_value")
+
+- Two people watching the same runtime of the same workflow.
+If one of them moves a job, the runtime is lost in the second window.
+>>> Fixed.

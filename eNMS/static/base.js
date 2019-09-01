@@ -187,7 +187,7 @@ function detectUserInactivity() {
   function resetTimer() {
     clearTimeout(timer);
     userIsActive = true;
-    timer = setTimeout(setUserInactive, 10000);
+    timer = setTimeout(setUserInactive, 30000);
   }
 }
 

@@ -14,9 +14,9 @@ services:
   enms:
     restart: always
     environment:
-     - ENMS_DATABASE_URL=postgresql://enms:enms@db:5432/enms
-     - ENMS_SECRET_KEY=docker
-     - ENMS_CONFIG_MODE=Production
+     - DATABASE_URL=postgresql://enms:enms@db:5432/enms
+     - SECRET_KEY=docker
+     - CONFIG_MODE=Production
      - USE_VAULT=0
     build:
       context: ../

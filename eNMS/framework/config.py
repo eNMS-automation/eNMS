@@ -5,7 +5,7 @@ class DebugConfig:
     MODE = "debug"
     DEBUG = True
     JSON_SORT_KEYS = False
-    SECRET_KEY = environ.get("ENMS_SECRET_KEY", "get-a-real-key")
+    SECRET_KEY = environ.get("SECRET_KEY", "get-a-real-key")
     WTF_CSRF_TIME_LIMIT = None
     ERROR_404_HELP = False
 
@@ -13,7 +13,7 @@ class DebugConfig:
 class ProductionConfig:
     MODE = "production"
     DEBUG = False
-    SECRET_KEY = environ.get("ENMS_SECRET_KEY")
+    SECRET_KEY = environ.get("SECRET_KEY")
     WTF_CSRF_TIME_LIMIT = None
 
 

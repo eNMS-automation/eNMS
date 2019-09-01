@@ -63,20 +63,20 @@ Once eNMS is running, you can go to http://127.0.0.1:5000, and log in with the a
 Run eNMS in Production (Unix only)
 ----------------------------------
 
-To start eNMS in production mode, you must change the value of the environment variable "ENMS_CONFIG_MODE" to "Production".
+To start eNMS in production mode, you must change the value of the environment variable "CONFIG_MODE" to "Production".
 
 ::
 
- # set the ENMS_CONFIG_MODE environment variable
- export ENMS_CONFIG_MODE=Production
+ # set the CONFIG_MODE environment variable
+ export CONFIG_MODE=Production
 
 The Flask secret key is used for securely signing the session cookie and other security related needs.
 In production mode, the secret key is not automatically set to a default value in case it is missing. Therefore, you must configure it yourself:
 
 ::
 
- # set the ENMS_SECRET_KEY environment variable
- export ENMS_SECRET_KEY=value-of-your-secret-key
+ # set the SECRET_KEY environment variable
+ export SECRET_KEY=value-of-your-secret-key
 
 
 All credentials should be stored in a Hashicorp Vault: the environement variable ``USE_VAULT`` tells eNMS that a Vault has been setup and can be used. This variable is set to ``0`` by default in debug mode, and ``1`` in production mode.
@@ -112,12 +112,12 @@ This mechanism is disabled by default. To activate it, you need to:
  export UNSEAL_VAULT_KEY2=key2
  etc
 
-You also have to tell eNMS the address of your database by setting the "ENMS_DATABASE_URL" environment variable.
+You also have to tell eNMS the address of your database by setting the "DATABASE_URL" environment variable.
 
 ::
 
- # set the ENMS_DATABASE_URL environment variable
- export ENMS_DATABASE_URL=database-address
+ # set the DATABASE_URL environment variable
+ export DATABASE_URL=database-address
 
 In case this environment variable is not set, eNMS will default to using a SQLite database.
 
@@ -185,11 +185,11 @@ If successful, you will enter a enms prompt. Type \q to exit.
 Export PostgreSQL variable
 **************************
 
-The database used is controlled by the ``ENMS_DATABASE_URL`` environment variable. It must be set to the PostgreSQL database URL.
+The database used is controlled by the ``DATABASE_URL`` environment variable. It must be set to the PostgreSQL database URL.
 
 ::
 
- export ENMS_DATABASE_URL=postgresql://enms:strong-password-here@localhost:5432/enms
+ export DATABASE_URL=postgresql://enms:strong-password-here@localhost:5432/enms
 
 Run eNMS with a MySQL database
 ------------------------------
@@ -215,7 +215,7 @@ Export MySQL variable
 *********************
 
 ::
- export ENMS_DATABASE_URL=mysql://enms:enms@localhost/mysql
+ export DATABASE_URL=mysql://enms:enms@localhost/mysql
 
 LDAP/Active Directory Integration
 ---------------------------------
@@ -295,7 +295,7 @@ You can configure eNMS as well as Gunicorn log level with the following environm
 
 ::
 
-  export ENMS_LOG_LEVEL='CRITICAL'
+  export LOG_LEVEL='CRITICAL'
   export GUNICORN_LOG_LEVEL='critical'
   export GUNICORN_ACCESS_LOG='None'
 

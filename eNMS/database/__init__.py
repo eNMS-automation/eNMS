@@ -6,7 +6,7 @@ from typing import Any
 
 
 DATABASE_URL = environ.get(
-    "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
+    "DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
 )
 DIALECT = DATABASE_URL.split(":")[0]
 
@@ -22,7 +22,7 @@ def session_factory() -> Any:
         )
     engine = create_engine(
         environ.get(
-            "ENMS_DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
+            "DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
         ),
         convert_unicode=True,
         pool_pre_ping=True,

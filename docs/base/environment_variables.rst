@@ -9,8 +9,8 @@ Complete List of Environment Variables
 
 ::
 
-  - export ENMS_CONFIG_MODE=Production
-  - export ENMS_SECRET_KEY=your_secret_key123
+  - export CONFIG_MODE=Production
+  - export SECRET_KEY=your_secret_key123
   - export USE_VAULT=1
   - export VAULT_ADDR=http://127.0.0.1:8200
   - export VAULT_TOKEN=e1c70d27-7c7f-6f6a-fb18-b0c0382667b7
@@ -18,22 +18,22 @@ Complete List of Environment Variables
   - export UNSEAL_VAULT_KEY1=nvn7aJgA1wA/z2en/rqeNxU8zxSNcl8bH6L4Voch7LQQ
   - export UNSEAL_VAULT_KEY2=Xndum7gpEykrsRAf6UkaDOSdGFqNMuswggD7zdIYakwI
   - export UNSEAL_VAULT_KEY3=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
-  - export ENMS_SERVER_ADDR=https://10.10.10.5
+  - export SERVER_ADDR=https://10.10.10.5
   - export GOTTY_PORT_REDIRECTION=1
   - export GOTTY_BYPASS_KEY_PROMPT=1
   - export GOTTY_START_PORT=9000
   - export GOTTY_END_PORT=9100
   # Uncomment for Postgres Mode:
-  # - export ENMS_DATABASE_URL=postgresql://enms:password@localhost:5432/enms
+  # - export DATABASE_URL=postgresql://enms:password@localhost:5432/enms
   # - export POSTGRES_PASSWORD=password
   # - export POSTGRES_USER=enms
   # - export POSTGRES_HOST=localhost
   # - export POSTGRES_PORT=5432
   # - export POSTGRES_DB=enms
   # Uncomment for MySQL Mode:
-  # - export ENMS_DATABASE_URL=mysql://root:password@localhost/enms
+  # - export DATABASE_URL=mysql://root:password@localhost/enms
   # Uncomment for SQLite Mode:
-  - export ENMS_DATABASE_URL=sqlite:///database.db?check_same_thread=False
+  - export DATABASE_URL=sqlite:///database.db?check_same_thread=False
   - export PATH_CUSTOM_PROPERTIES=/home/user/eNMS/eNMS_properties.yml
   - export CREATE_EXAMPLES=0
   - export MAIL_SERVER=smtp.company.com
@@ -70,7 +70,7 @@ Complete List of Environment Variables
   - export GIT_AUTOMATION=git@gitlab.company.com:eNMS-group/eNMS-automation-data.git
   - export GIT_CONFIGURATIONS=git@gitlab.company.com:eNMS-group/eNMS-configurations-data.git
   - export POOL_FILTER=All objects
-  - export ENMS_LOG_LEVEL=DEBUG
+  - export LOG_LEVEL=DEBUG
   - export GUNICORN_ACCESS_LOG=logs/app_logs/access.log
   - export GUNICORN_LOG_LEVEL=debug
   - export DOCUMENTATION_URL=https://enms.readthedocs.io/en/latest/

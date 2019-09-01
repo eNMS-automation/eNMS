@@ -48,7 +48,7 @@ def monitor_requests(function: Callable) -> Callable:
                     f"'{client_address}' calling the endpoint '{request.url}'"
                 ),
             )
-            abort(403)
+            return redirect(url_for("blueprint.route", page="login"))
         else:
             return function(*args, **kwargs)
 
@@ -192,14 +192,14 @@ def form(form_type: str) -> str:
 
 
 @blueprint.route("/view_job_results/<int:id>")
-@login_required
+@monitor_requests
 def view_job_results(id: int) -> str:
     result = fetch("Run", id=id).result().result
     return f"<pre>{app.str_dict(result)}</pre>"
 
 
 @blueprint.route("/download_configuration/<name>")
-@login_required
+@monitor_requests
 def download_configuration(name: str) -> Response:
     try:
         return send_file(

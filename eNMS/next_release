@@ -129,3 +129,9 @@ get_var("iteration_value")
 - Two people watching the same runtime of the same workflow.
 If one of them moves a job, the runtime is lost in the second window.
 >>> Fixed.
+
+- Add the ability to define a group that is minimized by default in the GUI.
+>>> Done.
+
+- Redirect to login page on a 403
+>>> Done.

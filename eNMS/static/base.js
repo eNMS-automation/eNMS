@@ -233,8 +233,6 @@ function call(url, callback) {
 function fCall(url, form, callback) {
   if (
     $(form)
-      .parsley()
-      .validate()
   ) {
     $.ajax({
       type: "POST",

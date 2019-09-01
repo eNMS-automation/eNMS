@@ -103,3 +103,6 @@ cease all Ajax activity until activity resumes.
 
 - add end runtime for a device results (right now, onlin runtime in the results)
 >>> Done.
+
+- remove positions from jobs results + REST API
+>>> Done.

@@ -105,7 +105,8 @@ class NetmikoPromptsForm(ServiceForm, NetmikoForm, ValidationForm):
     confirmation3 = SubstitutionField()
     response3 = SubstitutionField()
     groups = {
-        "Main Parameters": [
+        "Main Parameters": {
+            "commands": [
             "command",
             "confirmation1",
             "response1",
@@ -114,6 +115,8 @@ class NetmikoPromptsForm(ServiceForm, NetmikoForm, ValidationForm):
             "confirmation3",
             "response3",
         ],
+            "default": "expanded",
+        },
         "Netmiko Parameters": NetmikoForm.group,
         "String Validation Parameters": ValidationForm.group,
     }

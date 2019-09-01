@@ -75,16 +75,16 @@ class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)
     groups = {
-        "Main Parameters": {
+        "Main Parameters": {"commands": ["command"], "default": "expanded"},
+        "Netmiko Parameters": NetmikoForm.group,
+        "Advanced Netmiko Parameters": {
             "commands": [
-                "command",
                 "expect_string",
                 "auto_find_prompt",
                 "strip_prompt",
                 "strip_command",
             ],
-            "default": "expanded",
+            "default": "hidden",
         },
-        "Netmiko Parameters": NetmikoForm.group,
         "Validation Parameters": ValidationForm.group,
     }

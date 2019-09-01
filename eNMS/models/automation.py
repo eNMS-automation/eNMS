@@ -315,7 +315,7 @@ class Workflow(Job):
                 app.run_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
 
-    def per_service_workflow_run(self, run: Run, payload: dict, device: Optinal[Device] = None) -> dict:
+    def workflow_run(self, run: Run, payload: dict, device: Optional[Device] = None) -> dict:
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )

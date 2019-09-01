@@ -533,14 +533,18 @@ function displayWorkflowState(result) {
     });
   } else {
     $("#progressbar").show();
-    $("#progress-success").width(
-      `${(result.state.progress.passed * 100) / result.state.progress_max}%`
-    );
-    $("#progress-failure").width(
-      `${(result.state.progress.failed * 100) / result.state.progress_max}%`
-    );
-    $("#progress-success-span").text(result.state.progress.passed);
-    $("#progress-failure-span").text(result.state.progress.failed);
+    if (Object.entries(result.state.progress).length === 0) {
+      $("#progressbar").hide();
+    } else {
+      $("#progress-success").width(
+        `${(result.state.progress.passed * 100) / result.state.progress_max}%`
+      );
+      $("#progress-failure").width(
+        `${(result.state.progress.failed * 100) / result.state.progress_max}%`
+      );
+      $("#progress-success-span").text(result.state.progress.passed);
+      $("#progress-failure-span").text(result.state.progress.failed);
+    }
     $("#status").text(`Status: ${result.state.status}`);
     const currJob = result.state.current_job;
     if (currJob) {

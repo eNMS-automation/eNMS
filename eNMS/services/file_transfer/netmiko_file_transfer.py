@@ -62,14 +62,13 @@ class NetmikoFileTransferForm(ServiceForm, NetmikoForm):
     inline_transfer = BooleanField()
     overwrite_file = BooleanField()
     groups = {
-        "Main Parameters": [
-            "source_file",
+        "Main Parameters": {"commands": ["source_file",
             "destination_file",
             "file_system",
             "direction",
             "disable_md5",
             "inline_transfer",
             "overwrite_file",
-        ],
+        ], "default": "expanded"},
         "Netmiko Parameters": NetmikoForm.group,
     }

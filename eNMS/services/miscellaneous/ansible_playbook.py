@@ -109,13 +109,12 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     )
     options = DictSubstitutionField("Options (passed to ansible as -e extra args)")
     groups = {
-        "Main Parameters": [
-            "has_targets",
+        "Main Parameters": {"commands": ["has_targets",
             "playbook_path",
             "arguments",
             "pass_device_properties",
             "options",
-        ],
+        ], "default": "expanded"},
         "Validation Parameters": ValidationForm.group,
     }
 

@@ -54,6 +54,6 @@ class NapalmTracerouteForm(ServiceForm, NapalmForm):
     ttl = IntegerField()
     vrf = StringField()
     groups = {
+        "Ping Parameters": {"commands": ["destination_ip", "source_ip", "timeout", "ttl", "vrf"], "default": "expanded"},
         "Napalm Parameters": NapalmForm.group,
-        "Ping Parameters": ["destination_ip", "source_ip", "timeout", "ttl", "vrf"],
     }

@@ -289,7 +289,9 @@ class Run(AbstractBase):
                 self.task.is_active = False
             results["properties"] = {
                 "run": self.properties,
-                "service": self.job.to_dict(True),
+                "service": self.job.to_dict(
+                    relation_names_only=True, exclude=["positions"]
+                ),
             }
             self.create_result(results)
             self.log("info", f"{self.job.type} {self.job.name}: Finished")

@@ -74,7 +74,9 @@ class GetInstance(Resource):
 
     def get(self, cls: str, name: str) -> dict:
         try:
-            return fetch(cls, name=name).to_dict(relation_names_only=True, exclude=["positions"])
+            return fetch(cls, name=name).to_dict(
+                relation_names_only=True, exclude=["positions"]
+            )
         except Exception:
             return abort(404, message=f"{cls} {name} not found.")
 

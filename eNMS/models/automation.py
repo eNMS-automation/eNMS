@@ -315,7 +315,7 @@ class Workflow(Job):
                 app.run_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
 
-    def per_service_workflow_run(self, run: Run, payload: dict) -> dict:
+    def per_service_workflow_run(self, run: Run, payload: dict, device: Optinal[Device] = None) -> dict:
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )
@@ -325,7 +325,7 @@ class Workflow(Job):
         visited: Set = set()
         results: dict = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices: dict = defaultdict(set)
-        if run.use_workflow_devices:
+        if run.use_workflow_devices and run.traversal_mode == "service":
             initial_targets = set(run.compute_devices(payload))
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
@@ -344,35 +344,54 @@ class Workflow(Job):
             if skip_job or job.skip:
                 job_results = {"success": "skipped"}
             elif run.use_workflow_devices and job.python_query:
-                device_results, success = {}, True
-                for base_target in allowed_devices[job.name]:
+                if run.traversal_mode == "service":
+                    device_results, success = {}, True
+                    for base_target in allowed_devices[job.name]:
+                        try:
+                            job_run = factory(
+                                "Run",
+                                job=job.id,
+                                workflow=self.id,
+                                workflow_device=base_target.id,
+                                parent_runtime=run.parent_runtime,
+                                restart_run=run.restart_run,
+                            )
+                            job_run.properties = {}
+                            derived_target_result = job_run.run(payload)
+                            device_results[base_target.name] = derived_target_result
+                            if not derived_target_result["success"]:
+                                success = False
+                        except Exception as exc:
+                            device_results[base_target.name] = {
+                                "success": False,
+                                "error": str(exc),
+                            }
+                    job_results = {  # type: ignore
+                        "results": {"devices": device_results},
+                        "success": success,
+                    }
+                else:
                     try:
                         job_run = factory(
                             "Run",
                             job=job.id,
                             workflow=self.id,
-                            workflow_device=base_target.id,
+                            workflow_device=device.id,
                             parent_runtime=run.parent_runtime,
                             restart_run=run.restart_run,
                         )
                         job_run.properties = {}
-                        derived_target_result = job_run.run(payload)
-                        device_results[base_target.name] = derived_target_result
-                        if not derived_target_result["success"]:
-                            success = False
+                        result = job_run.run(payload)
                     except Exception as exc:
-                        device_results[base_target.name] = {
-                            "success": False,
-                            "error": str(exc),
-                        }
-                job_results = {  # type: ignore
-                    "results": {"devices": device_results},
-                    "success": success,
-                }
+                        result = {"success": False, "error": str(exc)}
+                    job_results = result
             else:
-                valid_devices = self.compute_valid_devices(
-                    run, job, allowed_devices, payload
-                )
+                if run.traversal_mode == "service":
+                    valid_devices = self.compute_valid_devices(
+                        run, job, allowed_devices, payload
+                    )
+                else:
+                    valid_devices = [device.id]
                 job_run = factory(
                     "Run",
                     job=job.id,
@@ -384,7 +403,7 @@ class Workflow(Job):
                 Session.commit()
                 job_results = job_run.run(payload)
             app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
-            if run.use_workflow_devices:
+            if run.use_workflow_devices and run.traversal_mode == "service":
                 successors = self.workflow_targets_processing(
                     run.runtime, allowed_devices, job, job_results
                 )
@@ -405,7 +424,7 @@ class Workflow(Job):
                     results["success"] = True
             if not skip_job and not job.skip:
                 sleep(job.waiting_time)
-        if run.use_workflow_devices:
+        if run.use_workflow_devices and run.traversal_mode == "service":
             end_devices = allowed_devices["End"]
             results["devices"] = {
                 device.name: {"success": device in end_devices}
@@ -414,79 +433,12 @@ class Workflow(Job):
             results["success"] = initial_targets == end_devices
         return results
 
-    def per_device_workflow_run(self, run: Run, payload: dict, device: Device) -> dict:
-        app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
-        jobs: list = list(run.start_jobs)
-        payload = deepcopy(payload)
-        visited: Set = set()
-        results: dict = {"results": {}, "success": False, "runtime": run.runtime}
-        while jobs:
-            job = jobs.pop()
-            if job in visited:
-                continue
-            if any(
-                node not in visited
-                for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
-            ):
-                continue
-            visited.add(job)
-            app.run_db[run.runtime]["current_job"] = job.get_properties()
-            skip_job = False
-            if job.skip_python_query:
-                skip_job = run.eval(job.skip_python_query, **locals())
-            if skip_job or job.skip:
-                job_results = {"success": "skipped"}
-            elif job.python_query:
-                try:
-                    job_run = factory(
-                        "Run",
-                        job=job.id,
-                        workflow=self.id,
-                        workflow_device=device.id,
-                        parent_runtime=run.parent_runtime,
-                        restart_run=run.restart_run,
-                    )
-                    job_run.properties = {}
-                    result = job_run.run(payload)
-                except Exception as exc:
-                    result = {"success": False, "error": str(exc)}
-                job_results = result
-            else:
-                job_run = factory(
-                    "Run",
-                    job=job.id,
-                    workflow=self.id,
-                    parent_runtime=run.parent_runtime,
-                    restart_run=run.restart_run,
-                )
-                job_run.properties = {"devices": [device.id]}
-                Session.commit()
-                job_results = job_run.run(payload)
-            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
-            successors = (
-                successor
-                for successor, _ in job.adjacent_jobs(
-                    self,
-                    "destination",
-                    "success" if job_results["success"] else "failure",
-                )
-            )
-            payload[job.name] = job_results
-            results["results"].update(payload)
-            for successor in successors:
-                jobs.append(successor)
-                if successor == self.jobs[1]:
-                    results["success"] = True
-            if not skip_job and not job.skip:
-                sleep(job.waiting_time)
-        return results
-
     def build_results(self, run: Run, payload: dict) -> dict:
         if run.traversal_mode == "service":
-            return self.per_service_workflow_run(run, payload)
+            return self.workflow_run(run, payload)
         else:
             device_results = {
-                device.name: self.per_device_workflow_run(run, payload, device)
+                device.name: self.workflow_run(run, payload, device)
                 for device in run.compute_devices(payload)
             }
             success = all(r["success"] for r in device_results.values())

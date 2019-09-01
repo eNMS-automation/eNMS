@@ -15,12 +15,15 @@ class StringValidationForm(BaseForm):
     content_match_regex = BooleanField("Match content with Regular Expression")
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
-    group = [
-        "content_match",
-        "content_match_regex",
-        "negative_logic",
-        "delete_spaces_before_matching",
-    ]
+    group = {
+        "commands": [
+            "content_match",
+            "content_match_regex",
+            "negative_logic",
+            "delete_spaces_before_matching",
+        ],
+        "default": "expanded",
+    }
 
 
 class DictValidationForm(BaseForm):
@@ -35,7 +38,10 @@ class DictValidationForm(BaseForm):
     )
     dict_match = DictSubstitutionField("Dictionary to Match Against")
     negative_logic = BooleanField("Negative logic")
-    group = ["validation_method", "dict_match", "negative_logic"]
+    group = {
+        "commands": ["validation_method", "dict_match", "negative_logic"],
+        "default": "expanded",
+    }
 
 
 class ValidationForm(BaseForm):
@@ -64,15 +70,18 @@ class ValidationForm(BaseForm):
     dict_match = DictSubstitutionField("Dictionary to Match Against")
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
-    group = [
-        "conversion_method",
-        "validation_method",
-        "content_match",
-        "content_match_regex",
-        "dict_match",
-        "negative_logic",
-        "delete_spaces_before_matching",
-    ]
+    group = {
+        "commands": [
+            "conversion_method",
+            "validation_method",
+            "content_match",
+            "content_match_regex",
+            "dict_match",
+            "negative_logic",
+            "delete_spaces_before_matching",
+        ],
+        "default": "expanded",
+    }
 
     def validate(self) -> bool:
         valid_form = super().validate()
@@ -101,15 +110,18 @@ class NetmikoForm(BaseForm):
     timeout = IntegerField(default=10)
     delay_factor = FloatField(default=1.0)
     global_delay_factor = FloatField(default=1.0)
-    group = [
-        "driver",
-        "use_device_driver",
-        "privileged_mode",
-        "fast_cli",
-        "timeout",
-        "delay_factor",
-        "global_delay_factor",
-    ]
+    group = {
+        "commands": [
+            "driver",
+            "use_device_driver",
+            "privileged_mode",
+            "fast_cli",
+            "timeout",
+            "delay_factor",
+            "global_delay_factor",
+        ],
+        "default": "expanded",
+    }
 
 
 class NapalmForm(BaseForm):
@@ -118,4 +130,7 @@ class NapalmForm(BaseForm):
     driver = SelectField(choices=app.NAPALM_DRIVERS)
     use_device_driver = BooleanField(default=True)
     optional_args = DictField()
-    group = ["driver", "use_device_driver", "optional_args"]
+    group = {
+        "commands": ["driver", "use_device_driver", "optional_args"],
+        "default": "expanded",
+    }

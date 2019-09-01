@@ -340,7 +340,7 @@
           role="tablist"
           aria-multiselectable="true"
         >
-          {% for group_name, fields in groups.items() %} {% set group_id =
+          {% for group_name, group in groups.items() %} {% set group_id =
           range(10000) | random %}
           <div class="panel" style="border-color: #000">
             <a
@@ -358,12 +358,12 @@
             </a>
             <div
               id="collapse-{{ group_id }}"
-              class="panel-collapse collapse in"
+              class="panel-collapse collapse"
               role="tabpanel"
               aria-labelledby="heading-{{ group_id }}"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {% for field_name in fields %} {% if form[field_name].type ==
+                {% for field_name in group.command %} {% if form[field_name].type ==
                 "BooleanField" %}
                 <fieldset>
                   <div class="item">

@@ -65,13 +65,16 @@ class AbstractBase(Base):
             setattr(self, property, value)
 
     def get_properties(
-        self, export: bool = False, exclude: Optional[list] = None
+        self,
+        export: bool = False,
+        exclude: Optional[list] = None,
+        include: Optional[list] = None,
     ) -> dict:
         result = {}
         for property in model_properties[self.type]:
             if property in private_properties:
                 continue
-            if exclude and property in exclude:
+            if include and property not in include or exclude and property in exclude:
                 continue
             if property in dont_serialize:
                 continue
@@ -86,12 +89,17 @@ class AbstractBase(Base):
             result[property] = value
         return result
 
-    def to_dict(self, export: bool = False, exclude: Optional[list] = None, include: Optional[list] = None) -> dict:
+    def to_dict(
+        self,
+        export: bool = False,
+        exclude: Optional[list] = None,
+        include: Optional[list] = None,
+    ) -> dict:
         properties = self.get_properties(export)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property, relation in relationships[self.type].items():
             value = getattr(self, property)
-            if include and property not in include or property in exclude:
+            if include and property not in include or exclude and property in exclude:
                 continue
             if export and property in no_migrate:
                 continue

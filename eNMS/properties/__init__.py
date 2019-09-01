@@ -23,4 +23,4 @@ property_names: Dict[str, str] = {}
 
 private_properties: List[str] = ["password", "enable_password", "custom_password"]
 
-dont_serialize: List[str] = ["configurations", "current_configuration", "positions"]
+dont_serialize: List[str] = ["configurations", "current_configuration"]

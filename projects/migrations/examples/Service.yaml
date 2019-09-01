@@ -2584,7 +2584,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   color: '#D2E5FF'
-  command: show interface {{payload['value']}}
+  command: show interface {{get_var('non_default_iteration_value_name')}}
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2606,8 +2606,8 @@
   include_link_in_summary: true
   initial_payload: {}
   iteration_values: '["Loopback11","Loopback15"]'
-  iteration_variable_name: iteration_value
-  last_modified: '2019-09-01 21:18:08.457334'
+  iteration_variable_name: non_default_iteration_value_name
+  last_modified: '2019-09-01 21:43:34.449057'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2640,7 +2640,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   color: '#D2E5FF'
-  command: show interface {{payload['value']}}
+  command: show interface {{get_var('iteration_value')}}
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2663,7 +2663,7 @@
   initial_payload: {}
   iteration_values: get_var('iteration_devices', device=device.name)
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-01 21:18:28.739857'
+  last_modified: '2019-09-01 21:44:33.592661'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -2696,7 +2696,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   color: '#D2E5FF'
-  command: show interface {{payload['value']}}
+  command: show interface {{get_var('iteration_value')}}
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2719,7 +2719,7 @@
   initial_payload: {}
   iteration_values: get_var('iteration_devices2', device=device.name)
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-01 21:18:49.508693'
+  last_modified: '2019-09-01 21:44:48.403814'
   mail_recipient: ''
   max_processes: 5
   multiprocessing: false
@@ -3103,7 +3103,7 @@
   initial_payload: {}
   iteration_values: '["Washington", "Atlanta"]'
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-01 21:19:11.032626'
+  last_modified: '2019-09-01 21:45:02.490680'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false
@@ -3120,7 +3120,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
-  rest_url: http://127.0.0.1:5000/rest/instance/Device/{{payload["value"]}}
+  rest_url: http://127.0.0.1:5000/rest/instance/Device/{{get_var('iteration_value')}}
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -3180,7 +3180,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   color: '#D2E5FF'
-  command: show interface {{payload["value"]}}
+  command: show interface {{get_var('iteration_value')}}
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3203,7 +3203,7 @@
   initial_payload: {}
   iteration_values: get_result("get_interfaces", device=device.name)["result"]["get_interfaces"]
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-01 21:20:01.103759'
+  last_modified: '2019-09-01 21:47:54.980908'
   mail_recipient: ''
   max_processes: 50
   multiprocessing: false

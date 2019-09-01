@@ -120,3 +120,4 @@ Jul  5 17:33:59 ien-ap0627b-centos-server gunicorn-3.6: [2019-07-05 17:33:59 -05
 - actual priv mode should match the service requested mode for each service,
 independent of actions by the previous service.
 >>> Done.
+

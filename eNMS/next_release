@@ -112,3 +112,7 @@ Workflows are now displayed with an ellipse.
 
 - When SAVING without a NAME it's not obvious that the name is missing
 >>> Fixed.
+
+- For logs like this, is it possible to print the source IP of the browser that this traffic is going to?
+Jul  5 17:33:59 ien-ap0627b-centos-server gunicorn-3.6: [2019-07-05 17:33:59 -0500] [21204] [DEBUG] POST /filtering/service
+>>> Done.

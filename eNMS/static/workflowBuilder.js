@@ -593,7 +593,6 @@ function getWorkflowState(periodic) {
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
-      console.log(result.workflow)
       if (result.workflow.id != workflow.id) return;
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);

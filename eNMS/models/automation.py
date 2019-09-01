@@ -315,94 +315,6 @@ class Workflow(Job):
                 app.run_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
 
-    def per_device_workflow_run(self, run: Run, payload: dict, device: Device) -> dict:
-        app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
-        jobs: list = list(run.start_jobs)
-        payload = deepcopy(payload)
-        visited: Set = set()
-        results: dict = {"results": {}, "success": False, "runtime": run.runtime}
-        while jobs:
-            job = jobs.pop()
-            if job in visited:
-                continue
-            if any(
-                node not in visited
-                for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
-            ):
-                continue
-            visited.add(job)
-            app.run_db[run.runtime]["current_job"] = job.get_properties()
-            skip_job = False
-            if job.skip_python_query:
-                skip_job = run.eval(job.skip_python_query, **locals())
-            if skip_job or job.skip:
-                job_results = {"success": "skipped"}
-            elif job.python_query:
-                try:
-                    job_run = factory(
-                        "Run",
-                        job=job.id,
-                        workflow=self.id,
-                        workflow_device=device.id,
-                        parent_runtime=run.parent_runtime,
-                        restart_run=run.restart_run,
-                    )
-                    job_run.properties = {}
-                    result = job_run.run(payload)
-                except Exception as exc:
-                    result = {"success": False, "error": str(exc)}
-                job_results = result
-            else:
-                job_run = factory(
-                    "Run",
-                    job=job.id,
-                    workflow=self.id,
-                    parent_runtime=run.parent_runtime,
-                    restart_run=run.restart_run,
-                )
-                job_run.properties = {"devices": [device.id]}
-                Session.commit()
-                job_results = job_run.run(payload)
-            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
-            successors = (
-                successor
-                for successor, _ in job.adjacent_jobs(
-                    self,
-                    "destination",
-                    "success" if job_results["success"] else "failure",
-                )
-            )
-            payload[job.name] = job_results
-            results["results"].update(payload)
-            for successor in successors:
-                jobs.append(successor)
-                if successor == self.jobs[1]:
-                    results["success"] = True
-            if not skip_job and not job.skip:
-                sleep(job.waiting_time)
-        return results
-
-    def build_results(self, run: Run, payload: dict) -> dict:
-        if run.traversal_mode == "service":
-            return self.per_service_workflow_run(run, payload)
-        else:
-            target_results = {
-                target.name: self.per_device_workflow_run(run, payload, target)
-                for target in run.compute_devices(payload)
-            }
-            success = all(r["success"] for r in target_results.values())
-            return {
-                "results": target_results,
-                "success": success,
-                "runtime": run.runtime,
-            }
-
-    @property
-    def job_number(self) -> int:
-        return sum(
-            (1 + job.job_number) if job.type == "Workflow" else 1 for job in self.jobs
-        )
-
     def per_service_workflow_run(self, run: Run, payload: dict) -> dict:
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
@@ -501,6 +413,94 @@ class Workflow(Job):
             }
             results["success"] = initial_targets == end_devices
         return results
+
+    def per_device_workflow_run(self, run: Run, payload: dict, device: Device) -> dict:
+        app.run_db[run.runtime].update({"jobs": defaultdict(dict), "edges": {}})
+        jobs: list = list(run.start_jobs)
+        payload = deepcopy(payload)
+        visited: Set = set()
+        results: dict = {"results": {}, "success": False, "runtime": run.runtime}
+        while jobs:
+            job = jobs.pop()
+            if job in visited:
+                continue
+            if any(
+                node not in visited
+                for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
+            ):
+                continue
+            visited.add(job)
+            app.run_db[run.runtime]["current_job"] = job.get_properties()
+            skip_job = False
+            if job.skip_python_query:
+                skip_job = run.eval(job.skip_python_query, **locals())
+            if skip_job or job.skip:
+                job_results = {"success": "skipped"}
+            elif job.python_query:
+                try:
+                    job_run = factory(
+                        "Run",
+                        job=job.id,
+                        workflow=self.id,
+                        workflow_device=device.id,
+                        parent_runtime=run.parent_runtime,
+                        restart_run=run.restart_run,
+                    )
+                    job_run.properties = {}
+                    result = job_run.run(payload)
+                except Exception as exc:
+                    result = {"success": False, "error": str(exc)}
+                job_results = result
+            else:
+                job_run = factory(
+                    "Run",
+                    job=job.id,
+                    workflow=self.id,
+                    parent_runtime=run.parent_runtime,
+                    restart_run=run.restart_run,
+                )
+                job_run.properties = {"devices": [device.id]}
+                Session.commit()
+                job_results = job_run.run(payload)
+            app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
+            successors = (
+                successor
+                for successor, _ in job.adjacent_jobs(
+                    self,
+                    "destination",
+                    "success" if job_results["success"] else "failure",
+                )
+            )
+            payload[job.name] = job_results
+            results["results"].update(payload)
+            for successor in successors:
+                jobs.append(successor)
+                if successor == self.jobs[1]:
+                    results["success"] = True
+            if not skip_job and not job.skip:
+                sleep(job.waiting_time)
+        return results
+
+    def build_results(self, run: Run, payload: dict) -> dict:
+        if run.traversal_mode == "service":
+            return self.per_service_workflow_run(run, payload)
+        else:
+            device_results = {
+                device.name: self.per_device_workflow_run(run, payload, device)
+                for device in run.compute_devices(payload)
+            }
+            success = all(r["success"] for r in device_results.values())
+            return {
+                "results": device_results,
+                "success": success,
+                "runtime": run.runtime,
+            }
+
+    @property
+    def job_number(self) -> int:
+        return sum(
+            (1 + job.job_number) if job.type == "Workflow" else 1 for job in self.jobs
+        )
 
 
 class WorkflowEdge(AbstractBase):

@@ -53,7 +53,6 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
-
     def validate(self) -> bool:
         valid_form = super().validate()
         empty_name = False

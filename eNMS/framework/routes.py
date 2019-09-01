@@ -38,11 +38,14 @@ def monitor_requests(function: Callable) -> Callable:
     @wraps(function)
     def decorated_function(*args: Any, **kwargs: Any) -> Any:
         if not current_user.is_authenticated:
+            client_address = request.environ.get(
+                "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
+            )
             app.log(
                 "warning",
                 (
                     f"Unauthorized {request.method} request from "
-                    f"'{request.remote_addr}' calling the endpoint '{request.url}'"
+                    f"'{client_address}' calling the endpoint '{request.url}'"
                 ),
             )
             abort(403)

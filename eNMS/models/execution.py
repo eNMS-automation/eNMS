@@ -278,7 +278,6 @@ class Run(AbstractBase):
         finally:
             self.close_connection_cache()
             status = f"Completed ({'success' if results['success'] else 'failure'})"
-            self.log("info", f"{self.job.type} {self.job.name}: Finished")
             self.status = status  # type: ignore
             self.set_state(status=status, success=results["success"])
             app.job_db[self.job.id]["runs"] -= 1

@@ -391,7 +391,7 @@ class Workflow(Job):
                         run, job, allowed_devices, payload
                     )
                 else:
-                    valid_devices = [device.id]
+                    valid_devices = [device]
                 job_run = factory(
                     "Run",
                     job=job.id,

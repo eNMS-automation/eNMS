@@ -65,15 +65,15 @@ class AbstractBase(Base):
             setattr(self, property, value)
 
     def get_properties(
-        self, export: bool = False, include: Optional[list] = None
+        self, export: bool = False, exclude: Optional[list] = None
     ) -> dict:
-        if include is None:
-            include = []
         result = {}
         for property in model_properties[self.type]:
             if property in private_properties:
                 continue
-            if property not in include and property in dont_serialize:
+            if exclude and property in exclude:
+                continue
+            if property in dont_serialize:
                 continue
             value = getattr(self, property)
             if export:
@@ -86,27 +86,25 @@ class AbstractBase(Base):
             result[property] = value
         return result
 
-    def to_dict(self, export: bool = False, include: Optional[list] = None) -> dict:
-        if include is None:
-            include = []
+    def to_dict(self, export: bool = False, exclude: Optional[list] = None, include: Optional[list] = None) -> dict:
         properties = self.get_properties(export)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property, relation in relationships[self.type].items():
             value = getattr(self, property)
-            if property not in include:
+            if include and property not in include or property in exclude:
                 continue
             if export and property in no_migrate:
                 continue
             if relation["list"]:
                 properties[property] = [
-                    obj.name if export else obj.get_properties(include=include)
+                    obj.name if export else obj.get_properties(exclude=exclude)
                     for obj in value
                 ]
             else:
                 if not value:
                     continue
                 properties[property] = (
-                    value.name if export else value.get_properties(include=include)
+                    value.name if export else value.get_properties(exclude=exclude)
                 )
         if export:
             for property in no_migrate:

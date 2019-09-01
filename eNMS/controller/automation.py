@@ -339,7 +339,7 @@ class AutomationController(BaseController):
                 global_result = [r for r in results if not r.device_id]
                 state = global_result[0].result.get("state") if global_result else None
         return {
-            "workflow": workflow.to_dict(include=["jobs", "edges", "positions"]),
+            "workflow": workflow.to_dict(include=["jobs", "edges"]),
             "runtimes": runtimes,
             "state": state,
         }

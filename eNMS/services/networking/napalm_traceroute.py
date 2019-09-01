@@ -50,8 +50,8 @@ class NapalmTracerouteForm(ServiceForm, NapalmForm):
     form_type = HiddenField(default="NapalmTracerouteService")
     destination_ip = SubstitutionField()
     source_ip = SubstitutionField()
-    timeout = IntegerField()
-    ttl = IntegerField()
+    timeout = IntegerField(default=2)
+    ttl = IntegerField(default=255)
     vrf = StringField()
     groups = {
         "Ping Parameters": {

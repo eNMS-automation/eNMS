@@ -71,12 +71,13 @@ class AbstractBase(Base):
         include: Optional[list] = None,
     ) -> dict:
         result = {}
+        no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property in model_properties[self.type]:
-            if property in private_properties:
+            if property in private_properties or property in dont_serialize:
                 continue
             if include and property not in include or exclude and property in exclude:
                 continue
-            if property in dont_serialize:
+            if export and property in no_migrate:
                 continue
             value = getattr(self, property)
             if export:
@@ -92,31 +93,33 @@ class AbstractBase(Base):
     def to_dict(
         self,
         export: bool = False,
+        relation_names_only: bool = False,
         exclude: Optional[list] = None,
         include: Optional[list] = None,
     ) -> dict:
-        properties = self.get_properties(export)
+        properties = self.get_properties(export, include=include, exclude=exclude)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property, relation in relationships[self.type].items():
-            value = getattr(self, property)
             if include and property not in include or exclude and property in exclude:
                 continue
             if export and property in no_migrate:
                 continue
+            value = getattr(self, property)
             if relation["list"]:
                 properties[property] = [
-                    obj.name if export else obj.get_properties(exclude=exclude)
+                    obj.name
+                    if export or relation_names_only
+                    else obj.get_properties(exclude=exclude)
                     for obj in value
                 ]
             else:
                 if not value:
                     continue
                 properties[property] = (
-                    value.name if export else value.get_properties(exclude=exclude)
+                    value.name
+                    if export or relation_names_only
+                    else value.get_properties(exclude=exclude)
                 )
-        if export:
-            for property in no_migrate:
-                properties.pop(property, None)
         return properties
 
     @classmethod

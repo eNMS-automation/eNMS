@@ -64,7 +64,7 @@ class Query(Resource):
     def get(self, cls: str) -> Union[dict, list]:
         try:
             results = fetch(cls, all_matches=True, **request.args.to_dict())
-            return [result.get_properties() for result in results]
+            return [result.get_properties(exclude=["positions"]) for result in results]
         except Exception:
             return abort(404, message=f"There are no such {cls}s.")
 
@@ -74,7 +74,7 @@ class GetInstance(Resource):
 
     def get(self, cls: str, name: str) -> dict:
         try:
-            return fetch(cls, name=name).serialized
+            return fetch(cls, name=name).to_dict(relation_names_only=True, exclude=["positions"])
         except Exception:
             return abort(404, message=f"{cls} {name} not found.")
 

@@ -12,13 +12,13 @@ def configure_cli(flask_app: Flask) -> None:
     @argument("table")
     @argument("name")
     def cli_fetch(table: str, name: str) -> None:
-        echo(app.str_dict(fetch(table, name=name).get_properties()))
+        echo(app.str_dict(fetch(table, name=name).get_properties(exclude=["positions"])))
 
     @flask_app.cli.command()
     @argument("table")
     @argument("properties")
     def update(table: str, properties: str) -> None:
-        result = factory(table, **loads(properties)).get_properties()
+        result = factory(table, **loads(properties)).get_properties(exclude=["positions"])
         Session.commit()
         echo(app.str_dict(result))
 

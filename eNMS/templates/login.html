@@ -11,10 +11,9 @@ block stylesheets %}
 {% endblock stylesheets %} {% block body_class %} login {% endblock body_class
 %} {% block body %}
 <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/base/parsley/parsley.min.js') }}"></script>
 <div class="login_wrapper">
   <section class="login_content">
-    <form data-parsley-validate method="post" autocomplete="off">
+    <form method="post" autocomplete="off">
       {{ login_form.csrf_token }}
       <h1>Sign in</h1>
       <label>Authentication method</label>

@@ -79,7 +79,6 @@ class AbstractBase(Base):
                 continue
             if export and property in no_migrate:
                 continue
-            print(property, exclude)
             value = getattr(self, property)
             if export:
                 if isinstance(value, MutableList):

@@ -231,18 +231,14 @@ function call(url, callback) {
 }
 
 function fCall(url, form, callback) {
-  if (
-    $(form)
-  ) {
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: $(form).serialize(),
-      success: function(results) {
-        processResults(callback, results);
-      },
-    });
-  }
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: $(form).serialize(),
+    success: function(results) {
+      processResults(callback, results);
+    },
+  });
 }
 
 function serializeForm(form) {

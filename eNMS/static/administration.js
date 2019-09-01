@@ -70,26 +70,20 @@ function exportTopology() {
 // eslint-disable-next-line
 function importTopology() {
   alertify.notify("Topology import: starting...", "success", 5);
-  if (
-    $("#import-form")
-      .parsley()
-      .validate()
-  ) {
-    const formData = new FormData($("#import-form")[0]);
-    $.ajax({
-      type: "POST",
-      url: "/import_topology",
-      dataType: "json",
-      data: formData,
-      contentType: false,
-      processData: false,
-      async: true,
-      success: function(result) {
-        alertify.notify(result, "success", 5);
-      },
-    });
-    $("#file")[0].value = "";
-  }
+  const formData = new FormData($("#import-form")[0]);
+  $.ajax({
+    type: "POST",
+    url: "/import_topology",
+    dataType: "json",
+    data: formData,
+    contentType: false,
+    processData: false,
+    async: true,
+    success: function(result) {
+      alertify.notify(result, "success", 5);
+    },
+  });
+  $("#file")[0].value = "";
 }
 
 // eslint-disable-next-line

@@ -106,3 +106,9 @@ cease all Ajax activity until activity resumes.
 
 - remove positions from jobs results + REST API
 >>> Done.
+
+- different display and color for workflows
+Workflows are now displayed with an ellipse.
+
+- When SAVING without a NAME it's not obvious that the name is missing
+>>> Fixed.

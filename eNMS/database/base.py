@@ -97,7 +97,7 @@ class AbstractBase(Base):
         exclude: Optional[list] = None,
         include: Optional[list] = None,
     ) -> dict:
-        properties = self.get_properties(export, include=include, exclude=exclude)
+        properties = self.get_properties(export, exclude=exclude)
         no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
         for property, relation in relationships[self.type].items():
             if include and property not in include or exclude and property in exclude:

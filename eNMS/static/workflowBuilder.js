@@ -154,25 +154,25 @@ function displayWorkflow(workflowData) {
 }
 
 function switchToWorkflow(workflowId, arrow) {
+  if (!arrow) {
+    arrowPointer++;
+    arrowHistory.splice(arrowPointer, 9e9, workflowId);
+  } else {
+    arrowPointer += arrow == "right" ? 1 : -1;
+  }
+  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
+    $("#left-arrow").show();
+  } else {
+    $("#left-arrow").hide();
+  }
+  if (arrowPointer < arrowHistory.length - 1) {
+    $("#right-arrow").show();
+  } else {
+    $("#right-arrow").hide();
+  }
   call(`/get_workflow_state/${workflowId}/latest`, function(result) {
     workflow = result.workflow;
     graph = displayWorkflow(result);
-    if (!arrow) {
-      arrowPointer++;
-      arrowHistory.splice(arrowPointer, 9e9, workflowId);
-    } else {
-      arrowPointer += arrow == "right" ? 1 : -1;
-    }
-    if (arrowHistory.length >= 1 && arrowPointer !== 0) {
-      $("#left-arrow").show();
-    } else {
-      $("#left-arrow").hide();
-    }
-    if (arrowPointer < arrowHistory.length - 1) {
-      $("#right-arrow").show();
-    } else {
-      $("#right-arrow").hide();
-    }
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }

@@ -301,7 +301,7 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        password = {} if app.config_mode == "Production" else {"password": "admin"}
+        password = {} if self.config_mode == "Production" else {"password": "admin"}
         factory("User", **{"name": "admin", **password})
 
     def update_credentials(self) -> None:

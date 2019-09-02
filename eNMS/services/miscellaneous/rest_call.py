@@ -1,4 +1,5 @@
-from json import dumps
+from json import dumps, loads
+from json.decoder import JSONDecodeError
 from requests import (
     get as rest_get,
     post as rest_post,
@@ -18,6 +19,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
+from xml.parsers.expat import ExpatError
 
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
@@ -151,23 +153,3 @@ class RestCallForm(ServiceForm, ValidationForm):
         },
         "Validation Parameters": ValidationForm.group,
     }
-
-    def validate(self) -> bool:
-        valid_form = super().validate()
-        content_type = self.headers.data["Content-Type"]
-        conversion_error = False
-        if "json" in content_type:
-            try:
-                loads(self.payload.data)
-            except JSONDecodeError:
-                conversion_error = True
-        elif "xml" in content_type:
-            try:
-                parse(self.payload.data)
-            except ExpatError:
-                conversion_error = True
-        if conversion_error:
-            self.headers.errors.append(
-                f"The payload does not match the content type ({content_type})."
-            )
-        return valid_form and not conversion_error

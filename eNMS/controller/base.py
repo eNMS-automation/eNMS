@@ -212,7 +212,7 @@ class BaseController:
 
     def __init__(self, path: Path, config_mode: Optional[str] = None) -> None:
         self.path = path
-        self.config_mode = config_mode.capitalize() or "Debug"
+        self.config_mode = config_mode.capitalize() if config_mode else "Debug"
         self.custom_properties = self.load_custom_properties()
         self.custom_config = self.load_custom_config()
         self.init_scheduler()
@@ -301,8 +301,8 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        if not app.config_mode == "Production":
-            factory("User", **{"name": "admin", "password": "admin"})
+        password = {} if app.config_mode == "Production" else {"password": "admin"}
+        factory("User", **{"name": "admin", **password})
 
     def update_credentials(self) -> None:
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:

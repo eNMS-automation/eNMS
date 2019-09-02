@@ -17,7 +17,7 @@ import_classes = [
 def update_property(project, property, value=None, types=None):
     if not types:
         types = import_classes
-    path = Path.cwd().parent.parent / "projects" / "migrations" / project
+    path = Path.cwd() / "Desktop" / "VM" / "eNMS" / "projects" / "migrations" / project
     for instance_type in types:
         with open(path / f"{instance_type}.yaml", "r") as migration_file:
             objects = yaml.load(migration_file)
@@ -32,4 +32,4 @@ def update_property(project, property, value=None, types=None):
             yaml.dump(objects, migration_file)
 
 
-update_property("Backup0816_wdevs", "devices")
+update_property("Backup0902_devs", "devices")

@@ -21,9 +21,7 @@ def session_factory() -> Any:
             }
         )
     engine = create_engine(
-        environ.get(
-            "DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
-        ),
+        environ.get("DATABASE_URL", "sqlite:///database.db?check_same_thread=False"),
         convert_unicode=True,
         pool_pre_ping=True,
         **kwargs

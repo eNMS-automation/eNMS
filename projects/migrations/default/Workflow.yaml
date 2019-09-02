@@ -28,7 +28,8 @@
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
   type: Workflow
-  device_targets_mode: ignore
+  use_workflow_devices: false
+  workflow_traversal_mode: service
   vendor: ''
   waiting_time: 0
   python_query: ''

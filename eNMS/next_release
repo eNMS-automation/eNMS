@@ -15,13 +15,7 @@
 
 - Make restart system work with get_result
 
-- Bug fixes
-
 - Re-add "Workflow Restartability" window when clicking on a job.
-
-- "Use Workflow Targets" is now "Device Targets Run Mode"
-use_workflow_targets: true -> device_targets_mode: service
-use_workflow_targets: false -> device_targets_mode: ignore
 
 - Forbid empty names and names with slash front-end
 
@@ -139,5 +133,3 @@ If one of them moves a job, the runtime is lost in the second window.
 >>> Done.
 
 - Params / Headers are now JSON field, just like the payload field.
-
-- 

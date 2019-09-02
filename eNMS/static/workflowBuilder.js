@@ -179,19 +179,17 @@ function switchToWorkflow(workflowId, arrow) {
 
 // eslint-disable-next-line
 function saveWorkflowJob(job, update) {
-  if (page == "workflow_builder") {
-    if (update) {
-      nodes.update(jobToNode(job));
-      let jobIndex = workflow.jobs.findIndex((job) => job.id == job.id);
-      workflow.jobs[jobIndex] = job;
-    } else {
-      addJobsToWorkflow([job.id]);
-    }
-    if (job.iteration_values != "") {
-      drawIterationEdge(job);
-    } else {
-      edges.remove(-job.id);
-    }
+  if (update) {
+    nodes.update(jobToNode(job));
+    let jobIndex = workflow.jobs.findIndex((job) => job.id == job.id);
+    workflow.jobs[jobIndex] = job;
+  } else {
+    addJobsToWorkflow([job.id]);
+  }
+  if (job.iteration_values != "") {
+    drawIterationEdge(job);
+  } else {
+    edges.remove(-job.id);
   }
 }
 
@@ -477,6 +475,7 @@ $("#network").contextMenu({
 });
 
 function runWorkflow(withUpdates) {
+  emptyProgressBar();
   workflow.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
   if (withUpdates) {
     showTypePanel("Workflow", workflow.id, "run");
@@ -526,14 +525,19 @@ function getJobState(id) {
   });
 }
 
+function emptyProgressBar() {
+  $("#progress-success,#progress-failure").width("0%");
+  $("#progress-success-span,#progress-failure-span").empty();
+}
+
 // eslint-disable-next-line
 function displayWorkflowState(result) {
   resetDisplay();
   if (result.state) {
-    $("#progressbar").show();
     if (Object.entries(result.state.progress).length === 0) {
-      $("#progressbar").hide();
+      emptyProgressBar();
     } else {
+      $("#progressbar").show();
       $("#progress-success").width(
         `${(result.state.progress.passed * 100) / result.state.progress_max}%`
       );

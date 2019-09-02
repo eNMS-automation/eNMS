@@ -6,11 +6,13 @@ call: false
 createPanel: false
 fCall: false
 normalRun: false
+page: false
 runLogic: false
 showLogsPanel: false
 showPanel: false
 showResultsPanel: false
 showTypePanel: false
+userIsActive: true
 vis: false
 workflow: true
 workflowRunMode: false
@@ -45,7 +47,6 @@ const dsoptions = {
         alertify.notify("You cannot draw an edge from 'End'.", "error", 5);
       }
       if (data.from != data.to) {
-        
         data.subtype = edgeType;
         saveEdge(data);
       }
@@ -59,7 +60,6 @@ let graph;
 let selectedObject;
 let edgeType;
 let lastModified;
-let hoveredLabel;
 let mousePosition;
 let currLabel;
 let arrowHistory = [];
@@ -90,6 +90,7 @@ function displayWorkflow(workflowData) {
   });
   */
   graph.on("oncontext", function(properties) {
+    // eslint-disable-next-line new-cap
     mousePosition = graph.DOMtoCanvas({
       x: properties.event.offsetX,
       y: properties.event.offsetY,
@@ -181,7 +182,7 @@ function saveWorkflowJob(job, update) {
   if (page == "workflow_builder") {
     if (update) {
       nodes.update(jobToNode(job));
-      var jobIndex = workflow.jobs.findIndex((job) => job.id == job.id);
+      let jobIndex = workflow.jobs.findIndex((job) => job.id == job.id);
       workflow.jobs[jobIndex] = job;
     } else {
       addJobsToWorkflow([job.id]);
@@ -446,6 +447,7 @@ Object.assign(action, {
   "Delete Label": deleteLabel,
 });
 
+// eslint-disable-next-line
 function createLabel() {
   const params = `${workflow.id}/${mousePosition.x}/${mousePosition.y}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
@@ -561,7 +563,10 @@ function displayWorkflowState(result) {
           if (state.type != "Workflow" && state.number_of_targets) {
             let progress = `${state.completed}/${state.number_of_targets}`;
             if (state.failed > 0) progress += ` (${state.failed} failed)`;
-            nodes.update({id: id, label:`${nodes.get(id).name}\n${progress}`});
+            nodes.update({
+              id: id,
+              label: `${nodes.get(id).name}\n${progress}`,
+            });
           }
         }
       });

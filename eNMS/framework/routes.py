@@ -9,7 +9,7 @@ from flask import (
     session,
     url_for,
 )
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from logging import info
 from os import listdir

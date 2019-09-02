@@ -378,7 +378,7 @@ class Workflow(Job):
                             "Run",
                             job=job.id,
                             workflow=self.id,
-                            workflow_device=device.id,
+                            workflow_device=device.id,  # type: ignore
                             parent_runtime=run.parent_runtime,
                             restart_run=run.restart_run,
                         )
@@ -393,7 +393,7 @@ class Workflow(Job):
                         run, job, allowed_devices, payload
                     )
                 else:
-                    valid_devices = [device]
+                    valid_devices = {device}  # type: ignore
                 job_run = factory(
                     "Run",
                     job=job.id,

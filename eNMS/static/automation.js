@@ -1,6 +1,5 @@
 /*
 global
-addJobsToWorkflow: false
 alertify: false
 call: false
 createPanel: false
@@ -8,9 +7,9 @@ diffview: false
 displayWorkflow: false
 fCall: false
 getJobState: false
-jobToNode: false
 JSONEditor: false
 page: false
+saveWorkflowJob: false
 showTypePanel: false
 table: false
 */
@@ -35,7 +34,7 @@ function panelCode(type, id, mode) {
   $(`#${type}-workflows-${id} option`).prop("disabled", true);
   if (type === "workflow") {
     $(`#workflow-use_workflow_devices-${id}`).change(function() {
-      let ischecked = $(this).is(':checked');
+      let ischecked = $(this).is(":checked");
       if (!ischecked) $(`#workflow-traversal_mode-${id}`).val("service");
       $(`#workflow-traversal_mode-${id}`).prop("disabled", !ischecked);
       $(`#workflow-traversal_mode-${id}`).selectpicker("refresh");
@@ -124,8 +123,8 @@ function formatResults(results, id, formId, compare) {
     );
   } else {
     $(`#display_results-${formId}`).empty();
-    textResults = JSON.parse(JSON.stringify(results));
-    jsonResults = parseObject(JSON.parse(JSON.stringify(results)));
+    const textResults = JSON.parse(JSON.stringify(results));
+    const jsonResults = parseObject(JSON.parse(JSON.stringify(results)));
     const options = {
       mode: $(`#view_type-${id}`).val(),
       modes: ["text", "view"],
@@ -133,7 +132,7 @@ function formatResults(results, id, formId, compare) {
         editor.set(newMode == "text" ? textResults : jsonResults);
       },
     };
-    editor = new JSONEditor(
+    let editor = new JSONEditor(
       document.getElementById(`display_results-${formId}`),
       options,
       jsonResults

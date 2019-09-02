@@ -235,7 +235,8 @@
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
         <label class="hide-run"
-          >Python Query (Derives alternate device targets based on Workflow Device Target)</label
+          >Python Query (Derives alternate device targets based on Workflow
+          Device Target)</label
         >
         <div class="form-group">
           {{ form.python_query(id=form_type + '-python_query',
@@ -333,7 +334,8 @@
       </div>
       {% if form_type != "workflow" %}
       <div id="step-5">
-        {% set groups = form.groups or {"Parameters": {"commands": form.service_fields, "default": "expanded"}} %}
+        {% set groups = form.groups or {"Parameters": {"commands":
+        form.service_fields, "default": "expanded"}} %}
         <div
           class="accordion"
           id="accordion"
@@ -341,8 +343,8 @@
           aria-multiselectable="true"
         >
           {% for group_name, group in groups.items() %} {% set group_id =
-          range(10000) | random %}
-          {% set position = "in" if group.default == "expanded" else "" %}
+          range(10000) | random %} {% set position = "in" if group.default ==
+          "expanded" else "" %}
           <div class="panel" style="border-color: #000">
             <a
               class="panel-heading collapsed"
@@ -363,8 +365,8 @@
               aria-labelledby="heading-{{ group_id }}"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {% for field_name in group.commands %} {% if form[field_name].type ==
-                "BooleanField" %}
+                {% for field_name in group.commands %} {% if
+                form[field_name].type == "BooleanField" %}
                 <fieldset>
                   <div class="item">
                     {% if form[field_name].default %} {{

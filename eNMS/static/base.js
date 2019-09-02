@@ -16,6 +16,7 @@ properties: false
 relations: false
 saveService: false
 saveWorkflow: false
+saveWorkflowEdge: false
 table: false
 type: false
 workflowRunMode: false
@@ -174,11 +175,11 @@ function detectUserInactivity() {
   let timer;
   window.onload = resetTimer;
   window.onmousemove = resetTimer;
-  window.onmousedown = resetTimer;  
+  window.onmousedown = resetTimer;
   window.ontouchstart = resetTimer;
   window.onclick = resetTimer;
   window.onkeypress = resetTimer;
-  window.addEventListener('scroll', resetTimer, true);
+  window.addEventListener("scroll", resetTimer, true);
 
   function setUserInactive() {
     userIsActive = false;
@@ -189,15 +190,6 @@ function detectUserInactivity() {
     userIsActive = true;
     timer = setTimeout(setUserInactive, 30000);
   }
-}
-
-function uuidv4() {
-  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
-    (
-      c ^
-      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
-    ).toString(16)
-  );
 }
 
 // eslint-disable-next-line
@@ -463,8 +455,9 @@ function processData(type, id) {
       if (typeof table != "undefined") table.ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("Service")) saveService(instance, id);
-      if (type == "WorkflowEdge" && page == "workflow_builder")
+      if (type == "WorkflowEdge" && page == "workflow_builder") {
         saveWorkflowEdge(instance);
+      }
       if (type === "workflow" && !id) saveWorkflow(instance);
       alertify.notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${

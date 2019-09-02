@@ -248,7 +248,9 @@ class Run(AbstractBase):
         pool.close()
         pool.join()
 
-    def disconnect(self, library, device, connection):
+    def disconnect(
+        self, library: str, device: Device, connection: ConnectHandler
+    ) -> None:
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
             self.log("info", f"Closed {library} Connection to {device}")

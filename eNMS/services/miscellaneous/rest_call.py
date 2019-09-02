@@ -1,5 +1,4 @@
-from json import dumps, loads
-from json.decoder import JSONDecodeError
+from json import dumps
 from requests import (
     get as rest_get,
     post as rest_post,
@@ -19,7 +18,6 @@ from wtforms import (
     SelectField,
     StringField,
 )
-from xml.parsers.expat import ExpatError
 
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm

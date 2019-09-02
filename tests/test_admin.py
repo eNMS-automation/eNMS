@@ -8,9 +8,11 @@ from tests.conftest import check_pages
 
 def test_authentication(base_client: FlaskClient) -> None:
     for page in app.valid_pages:
-        expected_code = 200 if page in app.free_access_pages else 403
         r = base_client.get(page)
-        assert r.status_code == expected_code
+        if page in app.free_access_pages:
+            assert r.status_code == 200
+        else:
+            assert r.status_code == 302 and "login" in r.location
 
 
 def test_urls(user_client: FlaskClient) -> None:

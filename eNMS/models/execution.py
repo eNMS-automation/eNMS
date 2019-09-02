@@ -204,7 +204,7 @@ class Run(AbstractBase):
         return napalm_connection
 
     def get_state(self, property: str) -> Any:
-        return app.run_db[self.runtime][property]
+        return app.run_db[self.runtime].get(property)
 
     def set_state(self, **kwargs: Any) -> None:
         app.run_db[self.runtime].update(**kwargs)
@@ -213,6 +213,10 @@ class Run(AbstractBase):
             if "success" in kwargs:
                 key = "passed" if kwargs["success"] else "failed"
                 app.run_db[self.parent_runtime]["progress"][key] += 1
+
+    @property
+    def abort(self):
+        return self.get_state("abort") or app.run_db[self.parent_runtime].get("abort")
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
@@ -284,7 +288,10 @@ class Run(AbstractBase):
             results = {"success": False, "results": result}
         finally:
             self.close_connection_cache()
-            status = f"Completed ({'success' if results['success'] else 'failure'})"
+            if self.abort:
+                status = "Aborted"
+            else:
+                status = f"Completed ({'success' if results['success'] else 'failure'})"
             self.status = status  # type: ignore
             self.set_state(status=status, success=results["success"])
             app.job_db[self.job.id]["runs"] -= 1

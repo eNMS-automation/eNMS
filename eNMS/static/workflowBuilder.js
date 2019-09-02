@@ -64,6 +64,7 @@ let mousePosition;
 let currLabel;
 let arrowHistory = [];
 let arrowPointer = -1;
+let currentRuntime;
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
@@ -273,6 +274,16 @@ function deleteEdge(edgeId) {
   });
 }
 
+function abortWorkflow() {
+  call(`/abort_workflow/${currentRuntime}`, (result) => {
+    if (!result) {
+      alertify.notify("The workflow is not currently running", "error", 5);
+    } else {
+      alertify.notify("Workflow aborting...", "success", 5);
+    }
+  });
+}
+
 function formatJobTitle(job) {
   return `
     <b>Type</b>: ${job.type}<br>
@@ -432,6 +443,7 @@ Object.assign(action, {
     showResultsPanel(workflow.id, workflow.name, "workflow"),
   "Workflow Logs": () => showLogsPanel(workflow),
   "Add to Workflow": () => showPanel("add_jobs"),
+  "Abort Workflow": () => abortWorkflow(),
   "Remove from Workflow": deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),
   "Create 'Failure' edge": () => switchMode("failure"),
@@ -604,6 +616,7 @@ function getWorkflowState(periodic) {
   if (userIsActive && workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
       if (result.workflow.id != workflow.id) return;
+      currentRuntime = result.runtime;
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
       } else {

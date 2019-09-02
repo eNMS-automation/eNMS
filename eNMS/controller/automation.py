@@ -30,6 +30,11 @@ class AutomationController(BaseController):
     run_db: dict = defaultdict(dict)
     run_logs: dict = defaultdict(list)
 
+    def abort_workflow(self, runtime):
+        if runtime in self.run_db:
+            self.run_db[runtime]["abort"] = True
+            return True
+
     def add_edge(
         self, workflow_id: int, subtype: str, source: int, destination: int
     ) -> dict:
@@ -342,6 +347,7 @@ class AutomationController(BaseController):
             "workflow": workflow.to_dict(include=["jobs", "edges"]),
             "runtimes": runtimes,
             "state": state,
+            "runtime": runtime,
         }
 
     def convert_date(self, date: str) -> list:

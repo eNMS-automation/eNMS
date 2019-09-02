@@ -140,6 +140,7 @@ class BaseController:
     ]
 
     valid_post_endpoints = [
+        "abort_workflow",
         "add_edge",
         "add_jobs_to_workflow",
         "calendar_init",

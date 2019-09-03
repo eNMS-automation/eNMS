@@ -126,7 +126,7 @@ function formatResults(results, id, formId, compare) {
     let editor = new JSONEditor(
       document.getElementById(`display_results-${formId}`),
       options,
-      jsonResults
+      $(`#view_type-${formId}`).val() == "text" ? textResults : jsonResults
     );
   }
 }

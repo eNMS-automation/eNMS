@@ -133,3 +133,5 @@ If one of them moves a job, the runtime is lost in the second window.
 >>> Done.
 
 - Params / Headers are now JSON field, just like the payload field.
+
+- Abort feature.

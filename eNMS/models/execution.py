@@ -138,8 +138,8 @@ class Run(AbstractBase):
                 if self.job.start_new_connection:
                     parent_connection.pop(device.name).disconnect()
                 else:
+                    connection = parent_connection[device.name]
                     try:
-                        connection = parent_connection[device.name]
                         connection.find_prompt()
                         for property in ("fast_cli", "timeout", "global_delay_factor"):
                             setattr(connection, property, getattr(self.job, property))
@@ -150,6 +150,7 @@ class Run(AbstractBase):
                             connection.enable()
                         return connection
                     except (OSError, ValueError):
+                        self.disconnect("netmiko", device, connection)
                         parent_connection.pop(device.name)
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
@@ -302,9 +303,7 @@ class Run(AbstractBase):
                 self.task.is_active = False
             results["properties"] = {
                 "run": self.properties,
-                "service": self.job.to_dict(
-                    relation_names_only=True, exclude=["positions"]
-                ),
+                "service": self.job.get_properties(exclude=["positions"]),
             }
             self.create_result(results)
             self.log("info", f"{self.job.type} {self.job.name}: Finished")

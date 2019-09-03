@@ -6,7 +6,6 @@ call: false
 createPanel: false
 fCall: false
 normalRun: false
-page: false
 runLogic: false
 showLogsPanel: false
 showPanel: false

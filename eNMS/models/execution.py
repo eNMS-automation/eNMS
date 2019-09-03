@@ -216,7 +216,7 @@ class Run(AbstractBase):
                 app.run_db[self.parent_runtime]["progress"][key] += 1
 
     @property
-    def abort(self):
+    def abort(self) -> Optional[bool]:
         return self.get_state("abort") or app.run_db[self.parent_runtime].get("abort")
 
     def compute_devices(self, payload: dict) -> Set["Device"]:

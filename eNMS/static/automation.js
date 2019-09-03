@@ -32,15 +32,6 @@ function panelCode(type, id, mode) {
     transitionEffect: "none",
   });
   $(`#${type}-workflows-${id} option`).prop("disabled", true);
-  if (type === "workflow") {
-    $(`#workflow-use_workflow_devices-${id}`).change(function() {
-      let ischecked = $(this).is(":checked");
-      if (!ischecked) $(`#workflow-traversal_mode-${id}`).val("service");
-      $(`#workflow-traversal_mode-${id}`).prop("disabled", !ischecked);
-      $(`#workflow-traversal_mode-${id}`).selectpicker("refresh");
-    });
-  }
-  $(`#workflow-use_workflow_devices-${id}`).trigger("change");
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
   if (mode == "run") {

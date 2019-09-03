@@ -355,6 +355,7 @@ function configureForm(form, id) {
       el.selectpicker({
         liveSearch: elClass ? !elClass.includes("no-search") : false,
         actionsBox: true,
+        selectedTextFormat: "count > 3",
       });
     }
   }
@@ -382,6 +383,16 @@ function showTypePanel(type, id, mode) {
               "onclick",
               `duplicateWorkflow(${id})`
             );
+          }
+          console.log(type);
+          if (type === "workflow") {
+            $(`#workflow-use_workflow_devices-${id}`).change(function() {
+              let isChecked = $(this).is(":checked");
+              if (!isChecked) $(`#workflow-traversal_mode-${id}`).val("service");
+              $(`#workflow-traversal_mode-${id}`).prop("disabled", !isChecked);
+              $(`#workflow-traversal_mode-${id}`).selectpicker("refresh");
+            });
+            $(`#workflow-use_workflow_devices-${id}`).trigger("change");
           }
           if (type == "workflow" && mode == "run") {
             workflowRunMode(instance);

@@ -29,9 +29,6 @@
 
 - Make iteration variable name configurable
 
-- The iteration variable is now "iteration_value" !
-=> CHANGE: migration files, replace payload["value"] with payload["iteration_value"]
-
 - Ansible add exit status:
 EXIT STATUS -----------
 0 -- OK or no hosts matched

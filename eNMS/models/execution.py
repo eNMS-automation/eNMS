@@ -216,8 +216,8 @@ class Run(AbstractBase):
                 app.run_db[self.parent_runtime]["progress"][key] += 1
 
     @property
-    def abort(self) -> Optional[bool]:
-        return self.get_state("abort") or app.run_db[self.parent_runtime].get("abort")
+    def stop(self) -> Optional[bool]:
+        return self.get_state("stop") or app.run_db[self.parent_runtime].get("stop")
 
     def compute_devices(self, payload: dict) -> Set["Device"]:
         if self.job.python_query:
@@ -289,7 +289,7 @@ class Run(AbstractBase):
             results = {"success": False, "results": result}
         finally:
             self.close_connection_cache()
-            if self.abort:
+            if self.stop:
                 status = "Aborted"
             else:
                 status = f"Completed ({'success' if results['success'] else 'failure'})"

@@ -332,7 +332,7 @@ class Workflow(Job):
             for job in jobs:
                 allowed_devices[job.name] = initial_targets
         while jobs:
-            if run.abort:
+            if run.stop:
                 return results
             job = jobs.pop()
             if job in visited or any(

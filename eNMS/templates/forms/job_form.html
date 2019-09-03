@@ -112,18 +112,18 @@
             class="form-control add-id") }}
           </div>
           <label class="hide-run"
-            >Run service/device for each value (python query)</label
+            >Iteration values: run service for each value (python query)</label
           >
           <div class="form-group">
             {{ form.iteration_values(id=form_type + '-iteration_values',
             class="form-control hide-run add-id") }}
           </div>
-          <label class="hide-run">Iteration Variable Name (in Payload)</label>
+          <label class="hide-run">Iteration Variable Name</label>
           <div class="form-group">
             {{ form.iteration_variable_name(id=form_type +
             '-iteration_variable_name', class="form-control hide-run add-id") }}
           </div>
-          <label class="hide-run">Success Value (Python Query)</label>
+          <label class="hide-run">Define Custom Success Value (Python Query)</label>
           <div class="form-group">
             {{ form.success_query(id=form_type + '-success_query',
             class="form-control hide-run add-id") }}
@@ -219,7 +219,7 @@
             <label>Use Workflow Devices</label>
           </div>
         </fieldset>
-        <label for="traversal_mode">Traversal Mode</label>
+        <label for="traversal_mode">Workflow Traversal Mode</label>
         <div class="form-group">
           {{ form.traversal_mode(id=form_type + '-traversal_mode',
           class="form-control add-id") }}

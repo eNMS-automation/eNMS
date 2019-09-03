@@ -87,6 +87,9 @@ run_table_properties: List[str] = [
 result_table_properties: List[str] = [
     "runtime",
     "endtime",
+    "job_name",
+    "device_name",
+    "workflow_name",
     "success",
 ]
 

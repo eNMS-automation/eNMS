@@ -42,6 +42,13 @@ class Result(AbstractBase):
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
     )
+    device_name = association_proxy("device", "name")
+    job_id = Column(Integer, ForeignKey("Job.id"))
+    job = relationship("Job", foreign_keys="Result.job_id")
+    job_name = association_proxy("job", "name")
+    workflow_id = Column(Integer, ForeignKey("Workflow.id"))
+    workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
+    workflow_name = association_proxy("workflow", "name")
 
     def __getitem__(self, key: Any) -> Any:
         return self.result[key]
@@ -320,7 +327,7 @@ class Run(AbstractBase):
 
     def create_result(self, results: dict, device: Optional["Device"] = None) -> None:
         self.success = results["success"]
-        result_kw = {"run": self, "result": results}
+        result_kw = {"run": self, "result": results, "workflow": self.workflow_id, "job": self.job_id}
         if device:
             result_kw["device"] = device.id
         factory("Result", **result_kw)

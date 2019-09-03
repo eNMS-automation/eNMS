@@ -173,6 +173,7 @@ class BaseController:
         "get_job_list",
         "get_job_logs",
         "get_properties",
+        "get_result",
         "get_results",
         "get_results_diff",
         "get_runtimes",

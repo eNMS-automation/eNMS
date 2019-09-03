@@ -146,6 +146,14 @@ class ResultsForm(BaseForm):
     runtime_compare = NoValidationSelectField("Version", choices=())
 
 
+class ResultForm(BaseForm):
+    template = "result"
+    form_type = HiddenField(default="result")
+    view_type = SelectField(
+        "View", choices=(("view", "Display as JSON"), ("text", "Display as text"))
+    )
+
+
 class ServiceResultsForm(ResultsForm):
     form_type = HiddenField(default="service_results")
     device = NoValidationSelectField("Device", choices=())

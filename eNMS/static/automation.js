@@ -281,6 +281,30 @@ function showResultsPanel(id, name, type, runtime) {
 }
 
 // eslint-disable-next-line
+function showResult(id) {
+  createPanel(`result`, "Result", id, function() {
+    call(`/get_result/${id}`,
+      (result) => {
+        const textResults = JSON.parse(JSON.stringify(result));
+        const options = {
+          mode: "view",
+          modes: ["text", "view"],
+          onModeChange: function(newMode) {
+            editor.set(textResults);
+          },
+        };
+        let editor = new JSONEditor(
+          document.getElementById(`display_results-${id}`),
+          options,
+          textResults
+        );
+      }
+    );
+  });
+}
+
+
+// eslint-disable-next-line
 function configureResultsCallbacks(id, type) {
   if (type != "device") {
     $(`#device-${id},#device_compare-${id}`).on("change", function() {

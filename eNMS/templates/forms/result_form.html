@@ -1,0 +1,21 @@
+<form
+  id="result-form"
+  class="form-horizontal form-label-left add-id"
+  method="post"
+>
+  {{ form.csrf_token() }} {{ form.form_type() }}
+  <div class="modal-body">
+    <button
+      style="background:transparent; border:none; color:transparent; width: 20vw;"
+    >
+      {{ form.view_type(class="form-control no-search add-id") }}
+    </button>
+    <hr />
+    <br />
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div id="display_results" class="add-id" style="height: 600px;"></div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -204,6 +204,9 @@ class AutomationController(BaseController):
             )
         )
 
+    def get_result(self, id: int) -> Optional[dict]:
+        return fetch("Result", id=id).result
+
     def get_results(self, type: str, id: int, **kw: Any) -> Optional[dict]:
         comp = "_compare" if kw["compare"] else ""
         return getattr(self, f"get_{type}_results")(

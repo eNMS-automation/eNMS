@@ -33,6 +33,8 @@ class Result(AbstractBase):
     private = True
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
+    runtime = Column(SmallString)
+    endtime = Column(SmallString)
     result = Column(MutableDict)
     run_id = Column(Integer, ForeignKey("Run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
@@ -40,17 +42,21 @@ class Result(AbstractBase):
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
     )
-    device_name = association_proxy("device", "name")
 
     def __getitem__(self, key: Any) -> Any:
         return self.result[key]
 
     def __init__(self, **kwargs: Any) -> None:
         self.success = kwargs["result"]["success"]
+        self.runtime = kwargs["result"]["runtime"]
+        self.endtime = kwargs["result"]["endtime"]
         super().__init__(**kwargs)
 
-    def __repr__(self) -> str:
-        return f"{self.run} {self.device_name}"
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-info btn-xs"
+            onclick="showResult('{self.id}')"></i>Results</a></button>""",
+        ]
 
 
 class Run(AbstractBase):

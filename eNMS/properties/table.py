@@ -84,6 +84,12 @@ run_table_properties: List[str] = [
     "progress",
 ]
 
+result_table_properties: List[str] = [
+    "runtime",
+    "endtime",
+    "success",
+]
+
 task_table_properties: List[str] = [
     "name",
     "description",
@@ -106,6 +112,7 @@ table_properties: Dict[str, List[str]] = {
     "event": event_table_properties,
     "link": link_table_properties,
     "pool": pool_table_properties,
+    "result": result_table_properties,
     "run": run_table_properties,
     "server": server_table_properties,
     "service": service_table_properties,
@@ -141,6 +148,7 @@ filtering_properties: Dict[str, List[str]] = {
     "event": event_table_properties,
     "link": link_table_properties,
     "pool": pool_table_properties,
+    "result": result_table_properties,
     "run": run_table_properties[:-1],
     "server": server_table_properties,
     "service": job_filtering_properties,
@@ -157,6 +165,7 @@ table_fixed_columns: Dict[str, List[str]] = {
     "event": ["Edit", "Delete"],
     "link": ["Edit", "Duplicate", "Delete"],
     "run": ["Logs", "Results"],
+    "result": ["Result"],
     "server": ["Edit", "Duplicate", "Delete"],
     "service": [
         "Status",

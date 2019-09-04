@@ -260,8 +260,8 @@ function updateJobList(type, id, updateBoth) {
 }
 
 // eslint-disable-next-line
-function showResultsPanel(id, name, type, runtime) {
-  createPanel(`${type}_results`, `Results - ${name}`, id, function() {
+function showResultsPanel(id, name) {
+  createPanel("result", `Results - ${name}`, id, function() {
     properties = [
       "runtime",
       "endtime",

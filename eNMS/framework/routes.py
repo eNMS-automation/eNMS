@@ -180,6 +180,13 @@ def calendar(calendar_type: str) -> str:
 @blueprint.route("/form/<form_type>")
 @monitor_requests
 def form(form_type: str) -> str:
+    kwargs = {
+        "endpoint": f"table/{form_type}",
+        "properties": table_properties[form_type],
+        "filtering_properties": filtering_properties[form_type],
+        "fixed_columns": table_fixed_columns[form_type],
+        "type": form_type,
+    } if form_type == "result" else {}
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",
         **{
@@ -187,6 +194,7 @@ def form(form_type: str) -> str:
             "action": form_actions.get(form_type),
             "form": form_classes[form_type](request.form),
             "form_type": form_type,
+            **kwargs
         },
     )
 

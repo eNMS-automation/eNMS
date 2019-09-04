@@ -145,7 +145,9 @@ function displayWorkflow(workflowData) {
   $("#current-runtimes").val("latest");
   $("#current-workflow").val(workflow.id);
   $("#current-runtimes,#current-workflow").selectpicker("refresh");
-  graph.on("dragEnd", () => savePositions());
+  graph.on("dragEnd", (event) => {
+    if (graph.getNodeAt(event.pointer.DOM)) savePositions();
+  });
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   lastModified = workflow.last_modified;

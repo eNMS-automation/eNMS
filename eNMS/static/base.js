@@ -23,6 +23,10 @@ workflowRunMode: false
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
+let userIsActive = true;
+let topZ = 1000;
+let table;
+let type;
 
 const panelSize = {
   add_jobs: "800 500",
@@ -91,9 +95,6 @@ const panelName = {
   user_filtering: "User Filtering",
   workflow_filtering: "Workflow Filtering",
 };
-
-let userIsActive = true;
-let topZ = 1000;
 
 // eslint-disable-next-line
 function doc(page) {
@@ -484,8 +485,8 @@ function processData(type, id) {
 
 // eslint-disable-next-line
 function createSearchHeaders() {
-  properties.forEach((property) => {
-    if (!filteringProperties.includes(property)) return;
+  tableProperties[type || "result"].forEach((property) => {
+    if (!filteringProperties[type || "result"].includes(property)) return;
     $(`#search-${property}`).on("keyup change", function() {
       $(`#${type}_filtering-${property}`).val($(this).val());
       table.ajax.reload(null, false);
@@ -519,7 +520,7 @@ function initTable(type) {
   if (["changelog", "syslog", "run"].includes(type)) {
     table.order([0, "desc"]).draw();
   }
-  if (["run", "service", "task", "workflow"].includes(type)) refreshTable(3000);
+  if (["run", "service", "task", "workflow"].includes(type)) refreshTable(table, 3000);
   return [table, filteringPanel];
 }
 
@@ -538,9 +539,9 @@ function undoFilter(formType) {
 }
 
 // eslint-disable-next-line
-function refreshTable(interval) {
+function refreshTable(table, interval) {
   if (userIsActive) table.ajax.reload(null, false);
-  setTimeout(() => refreshTable(interval), interval);
+  setTimeout(() => refreshTable(table, interval), interval);
 }
 
 function initSidebar() {
@@ -715,8 +716,10 @@ if (typeof NProgress != "undefined") {
 
 $(document).ready(function() {
   initSidebar();
-  console.log(page);
-  if (page.includes("table")) [table, filteringPanel] = initTable(type);
+  if (page.includes("table")) {
+    type = page.split("/")[1];
+    [table, filteringPanel] = initTable(type);
+  }
   configureForm(page);
   doc(page);
   detectUserInactivity();

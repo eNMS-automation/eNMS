@@ -14,6 +14,7 @@ from eNMS.framework.routes import blueprint
 from eNMS.models import relationships
 from eNMS.models.administration import User
 from eNMS.properties import property_names
+from eNMS.properties.table import filtering_properties, table_properties
 
 
 def register_extensions(flask_app: Flask) -> None:
@@ -37,6 +38,8 @@ def configure_context_processor(flask_app: Flask) -> None:
         return {
             "documentation_url": app.documentation_url,
             "form_properties": form_properties,
+            "table_properties": table_properties,
+            "filtering_properties": filtering_properties,
             "names": property_names,
             "parameters": app.config,
             "relations": list(set(chain.from_iterable(relationships.values()))),

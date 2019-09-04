@@ -15,7 +15,6 @@ table: false
 */
 
 let currentResults = {};
-let type;
 
 // eslint-disable-next-line
 function openServicePanel() {
@@ -161,26 +160,13 @@ function getRuntimes(type, id) {
     const mostRecent = runtimes[runtimes.length - 1];
     $(`#runtime-${id},#runtime_compare-${id}`).val(mostRecent);
     $(`#runtime-${id},#runtime_compare-${id}`).selectpicker("refresh");
-    if (runtimes) {
-      refreshLogs({ id: id }, $(`#runtime-${id}`).val());
-    }
+    if (runtimes) refreshLogs({ id: id }, $(`#runtime-${id}`).val());
   });
 }
 
 // eslint-disable-next-line
 function showResultsPanel(id, name) {
   createPanel("result", `Results - ${name}`, id, function() {
-    properties = [
-      "runtime",
-      "endtime",
-      "job_name",
-      "device_name",
-      "workflow_name",
-      "success",
-      "Results",
-    ];
-    filteringProperties = properties;
-    type = "result";
     [table, filteringPanel] = initTable("result");
   });
 }

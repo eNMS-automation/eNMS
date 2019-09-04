@@ -124,8 +124,6 @@ def dashboard() -> str:
 def table(table_type: str) -> str:
     kwargs = {
         "endpoint": f"table/{table_type}",
-        "properties": table_properties[table_type],
-        "filtering_properties": filtering_properties[table_type],
         "fixed_columns": table_fixed_columns[table_type],
         "type": table_type,
     }
@@ -181,9 +179,6 @@ def calendar(calendar_type: str) -> str:
 @monitor_requests
 def form(form_type: str) -> str:
     kwargs = {
-        "endpoint": f"table/{form_type}",
-        "properties": table_properties[form_type],
-        "filtering_properties": filtering_properties[form_type],
         "fixed_columns": table_fixed_columns[form_type],
         "type": form_type,
     } if form_type == "result" else {}

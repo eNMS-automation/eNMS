@@ -88,6 +88,8 @@
       const documentationUrl = "{{ documentation_url }}";
       const parameters = {{ parameters|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};
+      const tableProperties = {{ table_properties|tojson|safe }};
+      const filteringProperties = {{ filtering_properties|tojson|safe }};
       const names = {{ names|tojson|safe }};
       const relations = {{ relations|tojson|safe }};
       let action = {};

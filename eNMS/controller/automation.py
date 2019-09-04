@@ -134,71 +134,8 @@ class AutomationController(BaseController):
             runs = fetch("Run", allow_none=True, all_matches=True, job_id=id)
         return sorted(set((run.runtime, run.name) for run in runs))
 
-    def get_device_list(self, id: int, **kw: Any) -> list:
-        comp = "_compare" if kw["compare"] else ""
-        defaults = [
-            ("global", "Entire job payload"),
-            ("all", "All devices"),
-            ("all failed", "All devices that failed"),
-            ("all passed", "All devices that passed"),
-        ]
-        if "runtime" not in kw:
-            request: Any = {"id": id}
-        else:
-            runtime_key = "parent_runtime" if "job" in kw else "runtime"
-            request = {runtime_key: kw.get(f"runtime{comp}", id)}
-            if kw.get(f"job{comp}") not in ("global", "all"):
-                request["job_id"] = kw.get(f"job{comp}", id)
-            if kw.get(f"workflow_device{comp}"):
-                request["workflow_device_id"] = kw.get(f"workflow_device{comp}")
-        runs = fetch("Run", allow_none=True, **request)
-        if not runs:
-            return defaults
-        return defaults + list(
-            set(
-                (result.device_id, result.device_name)
-                for result in runs.results
-                if result.device_id
-            )
-        )
-
-    def get_job_list(self, id: int, **kw: Any) -> list:
-        comp = "_compare" if kw["compare"] else ""
-        defaults = [
-            ("all", "All jobs"),
-            ("all failed", "All jobs that failed"),
-            ("all passed", "All jobs that passed"),
-        ]
-        return defaults + list(
-            dict.fromkeys(
-                (run.job_id, run.job.name)
-                for run in sorted(
-                    fetch(
-                        "Run",
-                        parent_runtime=kw.get(f"runtime{comp}"),
-                        allow_none=True,
-                        all_matches=True,
-                    ),
-                    key=attrgetter("runtime"),
-                )
-                if run.job_id
-            )
-        )
-
     def get_result(self, id: int) -> Optional[dict]:
         return fetch("Result", id=id).result
-
-    def get_results(self, type: str, id: int, **kw: Any) -> Optional[dict]:
-        comp = "_compare" if kw["compare"] else ""
-        return getattr(self, f"get_{type}_results")(
-            id,
-            **{
-                "runtime": kw.get(f"runtime{comp}"),
-                "device": kw.get(f"device{comp}"),
-                "job": kw.get(f"job{comp}"),
-                "workflow_device": kw.get(f"workflow_device{comp}"),
-            },
-        )
 
     def get_run_results(self, id: int, device: Any, **kw: Any) -> Optional[dict]:
         run = fetch("Run", allow_none=True, id=id)

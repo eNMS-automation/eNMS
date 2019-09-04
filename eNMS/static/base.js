@@ -484,11 +484,10 @@ function processData(type, id) {
 }
 
 // eslint-disable-next-line
-function createSearchHeaders(table) {
+function createSearchHeaders(type, table) {
   tableProperties[type || "result"].forEach((property) => {
     if (!filteringProperties[type || "result"].includes(property)) return;
     $(`#${type}-search-${property}`).on("keyup change", function() {
-      console.log("test");
       $(`#${type}_filtering-${property}`).val($(this).val());
       table.ajax.reload(null, false);
     });

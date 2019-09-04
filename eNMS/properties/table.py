@@ -41,8 +41,6 @@ service_table_properties: List[str] = [
     "vendor",
     "operating_system",
     "creator",
-    "number_of_retries",
-    "time_between_retries",
 ]
 
 workflow_table_properties: List[str] = [
@@ -54,8 +52,6 @@ workflow_table_properties: List[str] = [
     "creator",
     "vendor",
     "operating_system",
-    "number_of_retries",
-    "time_between_retries",
 ]
 
 user_table_properties: List[str] = ["name", "email"]

@@ -48,7 +48,18 @@
       {% endfor %}
     </tr>
     {% for property in table_properties[type] %} {% if property in
-    filtering_properties[type] %}
+    filtering_properties[type] %} {% if property_types[property] == "bool" %}
+      <th>
+        <select
+        id="{{ type }}-search-{{ property }}"
+        class="form-control"
+        style="min-width: 100px;">
+          <option value="">Any</option>
+          <option value="true">Success</option>
+          <option value="false">Failure</option>
+        </select>
+      </th>
+    {% else %}
     <th>
       <input
         id="{{ type }}-search-{{ property }}"
@@ -57,6 +68,7 @@
         style="width: 100%;"
       />
     </th>
+    {% endif %}
     {% else %}
     <th></th>
     {% endif %} {% endfor %} {% for field in fixed_columns %}

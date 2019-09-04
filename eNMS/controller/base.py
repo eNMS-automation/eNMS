@@ -510,7 +510,9 @@ class BaseController:
             if not value:
                 continue
             filter = kwargs.get(f"form[{property}_filter]")
-            if filter == "equality":
+            if value in ("true", "false"):
+                constraint = getattr(model, property) == (value == "true")
+            elif filter == "equality":
                 constraint = getattr(model, property) == value
             elif filter == "inclusion" or DIALECT == "sqlite":
                 constraint = getattr(model, property).contains(value)

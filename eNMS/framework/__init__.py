@@ -11,7 +11,7 @@ from eNMS.framework.config import config_mapper
 from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
-from eNMS.models import relationships
+from eNMS.models import property_types, relationships
 from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.properties.table import filtering_properties, table_properties
@@ -37,6 +37,7 @@ def configure_context_processor(flask_app: Flask) -> None:
     def inject_properties() -> dict:
         return {
             "documentation_url": app.documentation_url,
+            "property_types": property_types,
             "form_properties": form_properties,
             "table_properties": table_properties,
             "filtering_properties": filtering_properties,

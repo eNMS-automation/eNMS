@@ -69,7 +69,4 @@
   const properties = {{ properties|tojson|safe }};
   const filteringProperties = {{ filtering_properties|tojson|safe }};
   const type = "{{ type }}";
-  let [table, filteringPanel] = initTable(type);
-  if (["run", "service", "task", "workflow"].includes(type))
-  refreshTable(3000);
 </script>

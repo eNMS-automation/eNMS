@@ -519,6 +519,7 @@ function initTable(type) {
   if (["changelog", "syslog", "run"].includes(type)) {
     table.order([0, "desc"]).draw();
   }
+  if (["run", "service", "task", "workflow"].includes(type)) refreshTable(3000);
   return [table, filteringPanel];
 }
 
@@ -714,6 +715,8 @@ if (typeof NProgress != "undefined") {
 
 $(document).ready(function() {
   initSidebar();
+  console.log(page);
+  if (page.includes("table")) [table, filteringPanel] = initTable(type);
   configureForm(page);
   doc(page);
   detectUserInactivity();

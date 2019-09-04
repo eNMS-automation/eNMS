@@ -166,18 +166,18 @@ function getRuntimes(type, id) {
 
 // eslint-disable-next-line
 function showResultsPanel(id, name, runtime) {
+  $("#result,#result_filtering").remove();
   createPanel("result", `Results - ${name}`, id, function() {
     initResultTable(id);
   });
 }
 
 function initResultTable(id) {
-  table = initTable("result", true);
-  filteringPanel = showPanel(`result_filtering`, null, function() {
-    console.log($("#result_filtering-workflow").length);
+  resultTable = initTable("result", true);
+  filteringPanel = showPanel("result_filtering", null, function() {
     $("#result_filtering-workflow").val(id);
     $("#result_filtering-workflow").selectpicker("refresh");
-    table.ajax.reload(null, false);
+    resultTable.ajax.reload(null, false);
   });
 }
 

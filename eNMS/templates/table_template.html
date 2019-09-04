@@ -6,7 +6,7 @@
     {{ service_table_form.services(id="service-type",
     class="form-control") }}
   </button>
-  {% endif %} {% if type not in ("configuration", "run", "syslog") %}
+  {% endif %} {% if type not in ("configuration", "run", "result", "syslog") %}
   {% set func = "openServicePanel" if type == "service" else
   "showTypePanel" %}
   <button
@@ -34,7 +34,7 @@
   </button>
 </div>
 <table
-  id="table"
+  id="{{ type }}-table"
   class="table table-striped table-bordered dt-responsive nowrap"
   cellspacing="0"
   width="100%"
@@ -51,7 +51,7 @@
     filtering_properties[type] %}
     <th>
       <input
-        id="search-{{ property }}"
+        id="{{ type }}-search-{{ property }}"
         type="text"
         class="form-control"
         style="width: 100%;"

@@ -484,10 +484,11 @@ function processData(type, id) {
 }
 
 // eslint-disable-next-line
-function createSearchHeaders() {
+function createSearchHeaders(table) {
   tableProperties[type || "result"].forEach((property) => {
     if (!filteringProperties[type || "result"].includes(property)) return;
-    $(`#search-${property}`).on("keyup change", function() {
+    $(`#${type}-search-${property}`).on("keyup change", function() {
+      console.log("test");
       $(`#${type}_filtering-${property}`).val($(this).val());
       table.ajax.reload(null, false);
     });
@@ -496,10 +497,8 @@ function createSearchHeaders() {
 
 // eslint-disable-next-line
 function initTable(type, result) {
-  //if (result) filteringPanel = ;
-  createSearchHeaders();
   // eslint-disable-next-line new-cap
-  const table = $("#table").DataTable({
+  const table = $(`#${type}-table`).DataTable({
     serverSide: true,
     orderCellsTop: true,
     scrollX: true,
@@ -517,6 +516,7 @@ function initTable(type, result) {
       },
     },
   });
+  createSearchHeaders(type, table);
   if (["changelog", "syslog", "run"].includes(type)) {
     table.order([0, "desc"]).draw();
   }

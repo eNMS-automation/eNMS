@@ -1,53 +1,58 @@
-<form
-  id="results-form"
-  class="form-horizontal form-label-left add-id"
-  method="post"
->
-  {{ form.csrf_token() }} {{ form.form_type() }} {{
-  form.compare(class="form-control add-id", style="display:none;") }}
-  <div class="modal-body">
-    <button
-      style="background:transparent; border:none; color:transparent; width: 20vw;"
-    >
-      {{ form.view_type(class="form-control no-search add-id") }}
-    </button>
-    <hr />
-    <br />
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <table
-          id="table"
-          class="table table-striped table-bordered dt-responsive nowrap"
-          cellspacing="0"
-          width="100%"
-        >
-          <thead>
-            <tr>
-              {% for field in properties + fixed_columns %}
-              <th>
-                {{ names.get(field, field.replace("_", " ").capitalize() ) }}
-              </th>
-              {% endfor %}
-            </tr>
-            {% for property in properties %} {% if property in
-            filtering_properties %}
+<div class="modal-body">
+  <button
+    style="background:transparent; border:none; color:transparent; width: 20vw;"
+  >
+    {{ form.view_type(class="form-control no-search add-id") }}
+  </button>
+  <hr />
+  <br />
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <table
+        id="table"
+        class="table table-striped table-bordered dt-responsive nowrap"
+        cellspacing="0"
+        width="100%"
+      >
+        <thead>
+          <tr>
+            {% for field in [
+              "runtime",
+              "endtime",
+              "job_name",
+              "device_name",
+              "workflow_name",
+              "success",
+              "Results",
+          ] %}
             <th>
-              <input
-                id="search-{{ property }}"
-                type="text"
-                class="form-control"
-                style="width: 100%;"
-              />
+              {{ names.get(field, field.replace("_", " ").capitalize() ) }}
             </th>
-            {% else %}
-            <th></th>
-            {% endif %} {% endfor %} {% for field in fixed_columns %}
-            <th></th>
             {% endfor %}
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+          </tr>
+          {% for property in [
+            "runtime",
+            "endtime",
+            "job_name",
+            "device_name",
+            "workflow_name",
+            "success",
+        ] %}
+          <th>
+            <input
+              id="search-{{ property }}"
+              type="text"
+              class="form-control"
+              style="width: 100%;"
+            />
+          </th>
+          {% else %}
+          <th></th>
+          {% endfor %}
+          <th></th>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
   </div>
-</form>
+</div>

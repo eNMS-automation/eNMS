@@ -15,6 +15,7 @@ table: false
 */
 
 let currentResults = {};
+let type;
 
 // eslint-disable-next-line
 function openServicePanel() {
@@ -261,7 +262,18 @@ function updateJobList(type, id, updateBoth) {
 // eslint-disable-next-line
 function showResultsPanel(id, name, type, runtime) {
   createPanel(`${type}_results`, `Results - ${name}`, id, function() {
-
+    properties = [
+      "runtime",
+      "endtime",
+      "job_name",
+      "device_name",
+      "workflow_name",
+      "success",
+      "Results",
+    ];
+    filteringProperties = properties;
+    type = "result";
+    [table, filteringPanel] = initTable("result");
   });
 }
 

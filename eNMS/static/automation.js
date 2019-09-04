@@ -261,22 +261,7 @@ function updateJobList(type, id, updateBoth) {
 // eslint-disable-next-line
 function showResultsPanel(id, name, type, runtime) {
   createPanel(`${type}_results`, `Results - ${name}`, id, function() {
-    configureResultsCallbacks(id, type);
-    if (runtime) {
-      $(`#runtime-${id},#runtime_compare-${id}`).append(
-        $("<option></option>")
-          .attr("value", runtime)
-          .text(runtime)
-      );
-      $(`#runtime-row-${id}`).hide();
-      if (type == "workflow") {
-        updateJobList(type, id, true);
-      } else {
-        updateDeviceLists(type, id, id, true, true);
-      }
-    } else {
-      getRuntimes(type, id);
-    }
+
   });
 }
 
@@ -301,53 +286,6 @@ function showResult(id) {
       }
     );
   });
-}
-
-
-// eslint-disable-next-line
-function configureResultsCallbacks(id, type) {
-  if (type != "device") {
-    $(`#device-${id},#device_compare-${id}`).on("change", function() {
-      $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      displayResults(type, id, id);
-    });
-  }
-
-  if (type != "run") {
-    $(`#runtime-${id},#runtime_compare-${id}`).on("change", function() {
-      $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      if (type == "workflow") updateDeviceLists(type, id, id, false, true);
-      if (type == "service") updateDeviceLists(type, id);
-      if (type != "service") updateJobList(type, id);
-    });
-  }
-
-  if (type != "service") {
-    $(`#job-${id},#job_compare-${id}`).on("change", function() {
-      $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      updateDeviceLists(type, id, id, false, true);
-    });
-  }
-
-  $(`#workflow_device-${id},#workflow_device_compare-${id}`).on(
-    "change",
-    function() {
-      $(`#compare-${id}`).prop("checked", this.id.includes("compare"));
-      updateDeviceLists(type, id);
-    }
-  );
-
-  $(`#view_type-${id}`).on("change", function() {
-    displayResults(type, id, id);
-  });
-
-  $(`#compare-btn-${id}`).click(function() {
-    displayResults(type, id, id, true);
-  });
-
-  if (type == "run" || type == "service") {
-    updateDeviceLists(type, id, id);
-  }
 }
 
 // eslint-disable-next-line

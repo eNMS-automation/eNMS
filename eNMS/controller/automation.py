@@ -134,25 +134,6 @@ class AutomationController(BaseController):
             runs = fetch("Run", allow_none=True, all_matches=True, job_id=id)
         return sorted(set((run.runtime, run.name) for run in runs))
 
-    def get_workflow_device_list(self, id: int, **kw: Any) -> dict:
-        comp = "_compare" if kw["compare"] else ""
-        if kw.get(f"job{comp}") in ("global", "all"):
-            workflow_devices: list = []
-        else:
-            runtime_key = "parent_runtime" if "job" in kw else "runtime"
-            request = {runtime_key: kw.get(f"runtime{comp}")}
-            request["job_id"] = kw.get(f"job{comp}")
-            runs = fetch("Run", allow_none=True, all_matches=True, **request)
-            workflow_devices = [
-                (r.workflow_device_id, r.workflow_device.name)
-                for r in runs
-                if r.workflow_device_id
-            ]
-        return {
-            "workflow_devices": workflow_devices,
-            "devices": self.get_device_list(id, **kw),
-        }
-
     def get_device_list(self, id: int, **kw: Any) -> list:
         comp = "_compare" if kw["compare"] else ""
         defaults = [

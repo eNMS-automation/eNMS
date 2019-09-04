@@ -36,7 +36,7 @@ $(function() {
         if (calendarType == "task") {
           showTypePanel("task", e.id);
         } else {
-          showResultsPanel(e.jobId, e.title, e.jobType, e.runtime);
+          showResultsPanel(e.jobId, e.title, e.runtime);
         }
       },
       editable: true,

@@ -495,8 +495,8 @@ function createSearchHeaders() {
 }
 
 // eslint-disable-next-line
-function initTable(type) {
-  const filteringPanel = showPanel(`${type}_filtering`);
+function initTable(type, result) {
+  //if (result) filteringPanel = ;
   createSearchHeaders();
   // eslint-disable-next-line new-cap
   const table = $("#table").DataTable({
@@ -521,7 +521,7 @@ function initTable(type) {
     table.order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type)) refreshTable(table, 3000);
-  return [table, filteringPanel];
+  return result ? table : [table, showPanel(`${type}_filtering`)];
 }
 
 // eslint-disable-next-line

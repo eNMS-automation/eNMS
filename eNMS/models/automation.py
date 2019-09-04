@@ -197,7 +197,7 @@ class Service(Job):
             onclick="showLogsPanel({self.row_properties})">
             </i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showResultsPanel('{self.id}', '{self.name}', 'service')">
+            onclick="showResultsPanel('{self.id}', '{self.name}')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="normalRun('{self.id}')">Run</button>""",
@@ -253,7 +253,7 @@ class Workflow(Job):
             onclick="showLogsPanel('{self.id}', '{self.name}', '{self.type}')">
             </i>Logs</a></button>""",
             f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showResultsPanel('{self.id}', '{self.name}', 'workflow')">
+            onclick="showResultsPanel('{self.id}', '{self.name}')">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="normalRun('{self.id}')">Run</button>""",

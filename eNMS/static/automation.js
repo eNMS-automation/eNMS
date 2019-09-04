@@ -165,15 +165,25 @@ function getRuntimes(type, id) {
 }
 
 // eslint-disable-next-line
-function showResultsPanel(id, name) {
+function showResultsPanel(id, name, runtime) {
   createPanel("result", `Results - ${name}`, id, function() {
-    [table, filteringPanel] = initTable("result");
+    initResultTable(id);
+  });
+}
+
+function initResultTable(id) {
+  table = initTable("result", true);
+  filteringPanel = showPanel(`result_filtering`, null, function() {
+    console.log($("#result_filtering-workflow").length);
+    $("#result_filtering-workflow").val(id);
+    $("#result_filtering-workflow").selectpicker("refresh");
+    table.ajax.reload(null, false);
   });
 }
 
 // eslint-disable-next-line
 function showResult(id) {
-  createPanel(`result`, "Result", id, function() {
+  createPanel(`display_result`, "Result", id, function() {
     call(`/get_result/${id}`,
       (result) => {
         const textResults = JSON.parse(JSON.stringify(result));
@@ -211,8 +221,7 @@ function refreshLogs(job, runtime, displayResults) {
       setTimeout(() => refreshLogs(job, runtime, displayResults), 1500);
     } else if (displayResults) {
       $(`#logs-${job.id}`).remove();
-      const jobType = job.type == "Workflow" ? "workflow" : "service";
-      showResultsPanel(job.id, job.name, jobType, runtime);
+      showResultsPanel(job.id, job.name, runtime);
     }
   });
 }

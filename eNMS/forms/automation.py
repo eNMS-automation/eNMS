@@ -149,6 +149,11 @@ class ResultsForm(BaseForm):
 class ResultForm(BaseForm):
     template = "result"
     form_type = HiddenField(default="result")
+
+
+class DisplayResultForm(BaseForm):
+    template = "display_result"
+    form_type = HiddenField(default="display_result")
     view_type = SelectField(
         "View", choices=(("view", "Display as JSON"), ("text", "Display as text"))
     )

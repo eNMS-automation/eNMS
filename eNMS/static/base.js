@@ -25,8 +25,6 @@ workflowRunMode: false
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 let userIsActive = true;
 let topZ = 1000;
-let table;
-let type;
 
 const panelSize = {
   add_jobs: "800 500",
@@ -271,6 +269,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     $(`#${panelId}`).css("zIndex", ++topZ);
     return;
   }
+  console.log(name, type);
   const isFilteringPanel = panelId.includes("filtering");
   return jsPanel.create({
     id: panelId,
@@ -298,6 +297,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
       containment: 0,
     },
     onbeforeclose: function(panel, status) {
+      if (panel.id == "result") $("#result_filtering").remove();
       if (isFilteringPanel) panel.minimize();
       return !isFilteringPanel;
     },

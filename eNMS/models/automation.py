@@ -204,15 +204,19 @@ class Service(Job):
             f"""<button type="button" class="btn btn-success btn-xs"
             onclick="showTypePanel('{self.type}', '{self.id}', 'run')">
             Run with Updates</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="exportJob('{self.id}')">
-            Export</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
+            f"""<div class="btn-group">
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>,
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')">Duplicate</a></li>
+              <li><a href="#" onclick="exportJob('{self.id}')">Export</a></li>
+            </ul>
+            </div>""",
+            f"""<button type="button" class="btn btn-danger"
             onclick="showDeletionPanel('service', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]

@@ -173,8 +173,6 @@ table_fixed_columns: Dict[str, List[str]] = {
         "Run",
         "Run with Updates",
         "Edit",
-        "Duplicate",
-        "Export",
         "Delete",
     ],
     "syslog": [],

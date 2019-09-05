@@ -496,8 +496,6 @@ class BaseController:
         }
 
     def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
-        print(kwargs)
-        first = datetime.now()
         model = models.get(table, models["Device"])
         properties = table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
@@ -509,7 +507,6 @@ class BaseController:
         constraints = []
         for property in filtering_properties[table]:
             value = kwargs.get(f"form[{property}]")
-            print(property, value)
             if not value:
                 continue
             filter = kwargs.get(f"form[{property}_filter]")

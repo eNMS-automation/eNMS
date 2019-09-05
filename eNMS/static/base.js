@@ -23,6 +23,7 @@ workflowRunMode: false
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
+let tables = {};
 let userIsActive = true;
 let topZ = 1000;
 
@@ -243,7 +244,6 @@ function serializeForm(form) {
       if (property.value) result[property.name] = property.value;
     }
   });
-  console.log(result);
   return result;
 }
 
@@ -487,7 +487,7 @@ function createSearchHeaders(type, table) {
 }
 
 // eslint-disable-next-line
-function initTable(type, result) {
+function initTable(type) {
   // eslint-disable-next-line new-cap
   const table = $(`#${type}-table`).DataTable({
     serverSide: true,
@@ -516,19 +516,19 @@ function initTable(type, result) {
   }
   if (["run", "service", "task", "workflow"].includes(type))
     refreshTable(table, 3000);
-  return table;
+  tables[type] = table;
 }
 
 // eslint-disable-next-line
 function filter(formType) {
-  table.ajax.reload(null, false);
+  tables[formType].ajax.reload(null, false);
   alertify.notify("Filter applied.", "success", 5);
 }
 
 // eslint-disable-next-line
 function undoFilter(formType) {
   $(`#${formType}`).remove();
-  table.ajax.reload(null, false);
+  tables[formType].ajax.reload(null, false);
   alertify.notify("Filter removed.", "success", 5);
 }
 
@@ -710,10 +710,7 @@ if (typeof NProgress != "undefined") {
 
 $(document).ready(function() {
   initSidebar();
-  if (page.includes("table")) {
-    type = page.split("/")[1];
-    table = initTable(type);
-  }
+  if (page.includes("table")) table = initTable(page.split("/")[1]);
   configureForm(page);
   doc(page);
   detectUserInactivity();

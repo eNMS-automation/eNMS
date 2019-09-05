@@ -2,3 +2,6 @@
 
 - Refactoring of the result window
 
+- Refactoring of the search system
+
+- Forbid single and double-quotes in names.

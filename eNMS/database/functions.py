@@ -73,8 +73,8 @@ def export(model: str) -> List[dict]:
 
 
 def factory(cls_name: str, **kwargs: Any) -> Any:
-    if "/" in kwargs.get("name", ""):
-        raise Exception("Names cannot contain a slash ('/').")
+    if {"/", '"', "'"} & set(kwargs.get("name", "")):
+        raise Exception("Names cannot contain a slash or a quote.")
     instance, instance_id = None, kwargs.pop("id", 0)
     if instance_id:
         instance = fetch(cls_name, id=instance_id)

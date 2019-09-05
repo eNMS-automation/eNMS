@@ -20,7 +20,7 @@ from ruamel import yaml
 from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
-from sqlalchemy import and_, or_
+from sqlalchemy import and_, func, or_
 from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
@@ -496,6 +496,7 @@ class BaseController:
         }
 
     def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
+        first = datetime.now()
         model = models.get(table, models["Device"])
         properties = table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
@@ -542,18 +543,19 @@ class BaseController:
             constraints.append(constraint)
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         try:
-            return {
+
+            a = {
                 "draw": int(kwargs["draw"]),
-                "recordsTotal": len(Session.query(model).all()),
-                "recordsFiltered": len(result.all()),
+                "recordsTotal": Session.query(func.count(model.id)).scalar() ,
+                "recordsFiltered": result.count(),
                 "data": [
                     [getattr(obj, property) for property in properties]
                     + obj.generate_row(table)
-                    for obj in result.limit(int(kwargs["length"]))
-                    .offset(int(kwargs["start"]))
-                    .all()
+                    for obj in result.limit(int(kwargs["length"])).offset(int(kwargs["start"])).all()
                 ],
             }
+            print(datetime.now() - first)
+            return a
         except InterfaceError:
             return {"error": "Filtering error: wrong input"}
 

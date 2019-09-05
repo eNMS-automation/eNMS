@@ -193,23 +193,32 @@ class Service(Job):
         number_of_runs = app.job_db[self.id]["runs"]
         return [
             f"Running ({number_of_runs})" if number_of_runs else "Idle",
-            f"""<button type="button" class="btn btn-info btn-xs"
-            onclick="showLogsPanel({self.row_properties})">
-            </i>Logs</a></button>""",
-            f"""<button type="button" class="btn btn-info btn-xs"
+            f"""<div class="btn-group">
+            <button type="button" class="btn btn-info"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'job')">
-            </i>Results</a></button>""",
-            f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="normalRun('{self.id}')">Run</button>""",
-            f"""<button type="button" class="btn btn-success btn-xs"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'run')">
-            Run with Updates</button>""",
+            </i>Results</a></button>,
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#" onclick="showLogsPanel({self.row_properties})">Logs</a></li>
+            </ul>
+            </div>""",
+            f"""<div class="btn-group">
+            <button type="button" class="btn btn-success"
+            onclick="normalRun('{self.id}')">Run</button>,
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run with Updates</a></li>
+            </ul>
+            </div>""",
             f"""<div class="btn-group">
             <button type="button" class="btn btn-primary"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>,
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
               <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')">Duplicate</a></li>

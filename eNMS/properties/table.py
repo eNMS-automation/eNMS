@@ -168,10 +168,8 @@ table_fixed_columns: Dict[str, List[str]] = {
     "server": ["Edit", "Duplicate", "Delete"],
     "service": [
         "Status",
-        "Logs",
         "Results",
         "Run",
-        "Run with Updates",
         "Edit",
         "Delete",
     ],

@@ -233,6 +233,7 @@ function fCall(url, form, callback) {
 }
 
 function serializeForm(form) {
+  console.log($(form).serializeArray())
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};
   data.forEach((property) => {
@@ -481,7 +482,7 @@ function processData(type, id) {
 function createSearchHeaders(type, table) {
   tableProperties[type || "result"].forEach((property) => {
     if (!filteringProperties[type || "result"].includes(property)) return;
-    $(`#${type}-search-${property}`).on("keyup change", function() {
+    $(`#${type}_filtering-${property}`).on("keyup change", function() {
       table.ajax.reload(null, false);
     });
   });
@@ -504,8 +505,8 @@ function initTable(type, result) {
       url: `/filtering/${type}`,
       type: "POST",
       data: (d) => {
-        console.log($(`#${type}_filtering`).length);
         form = $(`#${type}_filtering`).length ? `#${type}_filtering-form` : `#search-${type}-form`;
+        console.log(serializeForm(form));
         d.form = serializeForm(form);
       },
     },
@@ -526,7 +527,7 @@ function filter(formType) {
 
 // eslint-disable-next-line
 function undoFilter(formType) {
-  $(`#${formType}-form`)[0].reset();
+  $(`#${formType}`).remove();
   table.ajax.reload(null, false);
   alertify.notify("Filter removed.", "success", 5);
 }

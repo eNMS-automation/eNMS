@@ -233,7 +233,6 @@ function fCall(url, form, callback) {
 }
 
 function serializeForm(form) {
-  console.log($(form).serializeArray())
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};
   data.forEach((property) => {
@@ -241,9 +240,10 @@ function serializeForm(form) {
       if (!(property.name in result)) result[property.name] = [];
       result[property.name].push(property.value);
     } else {
-      result[property.name] = property.value;
+      if (property.value) result[property.name] = property.value;
     }
   });
+  console.log(result);
   return result;
 }
 
@@ -270,8 +270,6 @@ function createPanel(name, title, id, processing, type, duplicate) {
     $(`#${panelId}`).css("zIndex", ++topZ);
     return;
   }
-  console.log(name, type);
-  const isFilteringPanel = panelId.includes("filtering");
   return jsPanel.create({
     id: panelId,
     border: "2px solid #2A3F52",
@@ -307,7 +305,7 @@ function showPanel(type, id, processing) {
 
 // eslint-disable-next-line
 function showFilteringPanel(panelType) {
-  showPanel(panelType)
+  showPanel(panelType);
 }
 
 // eslint-disable-next-line
@@ -505,8 +503,9 @@ function initTable(type, result) {
       url: `/filtering/${type}`,
       type: "POST",
       data: (d) => {
-        form = $(`#${type}_filtering`).length ? `#${type}_filtering-form` : `#search-${type}-form`;
-        console.log(serializeForm(form));
+        form = $(`#${type}_filtering`).length
+          ? `#${type}_filtering-form`
+          : `#search-${type}-form`;
         d.form = serializeForm(form);
       },
     },
@@ -515,7 +514,8 @@ function initTable(type, result) {
   if (["changelog", "syslog", "run"].includes(type)) {
     table.order([0, "desc"]).draw();
   }
-  if (["run", "service", "task", "workflow"].includes(type)) refreshTable(table, 3000);
+  if (["run", "service", "task", "workflow"].includes(type))
+    refreshTable(table, 3000);
   return table;
 }
 

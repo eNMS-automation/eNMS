@@ -3,16 +3,11 @@
   <button
     style="background:transparent; border:none; color:transparent; width: 20vw;"
   >
-    {{ service_table_form.services(id="service-type",
-    class="form-control") }}
+    {{ service_table_form.services(id="service-type", class="form-control") }}
   </button>
   {% endif %} {% if type not in ("configuration", "run", "result", "syslog") %}
-  {% set func = "openServicePanel" if type == "service" else
-  "showTypePanel" %}
-  <button
-    class="btn btn-primary btn-file"
-    onclick="{{ func }}('{{ type }}')"
-  >
+  {% set func = "openServicePanel" if type == "service" else "showTypePanel" %}
+  <button class="btn btn-primary btn-file" onclick="{{ func }}('{{ type }}')">
     Create
   </button>
   {% endif %} {% if type == "pool" %}
@@ -52,36 +47,38 @@
         </th>
         {% endfor %}
       </tr>
-      {% for property in table_properties[type] %} {% if property in
-      filtering_properties[type] %} {% if property_types[property] == "bool" %}
+      <tr>
+        {% for property in table_properties[type] %} {% if property in
+        filtering_properties[type] %} {% if property_types[property] == "bool"
+        %}
         <th>
           <select
-          id="{{ type }}_filtering-{{ property }}"
-          name="{{ property }}"
-          class="form-control"
-          style="min-width: 100px;">
+            id="{{ type }}_filtering-{{ property }}"
+            name="{{ property }}"
+            class="form-control"
+            style="min-width: 100px;"
+          >
             <option value="">Any</option>
             <option value="bool-true">Success</option>
             <option value="bool-false">Failure</option>
           </select>
         </th>
-      {% else %}
-      <th>
-        <input
-          id="{{ type }}_filtering-{{ property }}"
-          name="{{ property }}"
-          type="text"
-          class="form-control"
-          style="width: 100%;"
-        />
-      </th>
-      {% endif %}
-      {% else %}
-      <th></th>
-      {% endif %} {% endfor %}
-      {% for field in fixed_columns %}
-      <th></th>
-      {% endfor %}
+        {% else %}
+        <th>
+          <input
+            id="{{ type }}_filtering-{{ property }}"
+            name="{{ property }}"
+            type="text"
+            class="form-control"
+            style="width: 100%;"
+          />
+        </th>
+        {% endif %} {% else %}
+        <th></th>
+        {% endif %} {% endfor %} {% for field in fixed_columns %}
+        <th></th>
+        {% endfor %}
+      </tr>
     </thead>
     <tbody></tbody>
   </table>

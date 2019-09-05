@@ -168,17 +168,7 @@ function getRuntimes(type, id) {
 function showResultsPanel(id, name, type, runtime) {
   $("#result").remove();
   createPanel("result", `Results - ${name}`, null, function() {
-    initResultTable(id, type, runtime);
-  });
-}
-
-function initResultTable(id, type, runtime) {
-  resultTable = initTable("result", true);
-  filteringPanel = showPanel("result_filtering", null, function() {
-    console.log(`#result_filtering-${type}`);
-    $(`#result_filtering-${type}`).val(id);
-    $(`#result_filtering-${type}`).selectpicker("refresh");
-    resultTable.ajax.reload(null, false);
+    resultTable = initTable("result", true);
   });
 }
 

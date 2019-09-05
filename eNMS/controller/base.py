@@ -496,6 +496,7 @@ class BaseController:
         }
 
     def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
+        print(kwargs)
         first = datetime.now()
         model = models.get(table, models["Device"])
         properties = table_properties[table]

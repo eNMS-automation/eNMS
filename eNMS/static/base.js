@@ -296,12 +296,6 @@ function createPanel(name, title, id, processing, type, duplicate) {
     resizeit: {
       containment: 0,
     },
-    onbeforeclose: function(panel, status) {
-      if (panel.id == "result") $("#result_filtering").remove();
-      if (isFilteringPanel) panel.minimize();
-      return !isFilteringPanel;
-    },
-    setStatus: isFilteringPanel ? "minimized" : "normalized",
   });
 }
 
@@ -311,8 +305,8 @@ function showPanel(type, id, processing) {
 }
 
 // eslint-disable-next-line
-function showFilteringPanel() {
-  filteringPanel.normalize();
+function showFilteringPanel(panelType) {
+  showPanel(panelType)
 }
 
 // eslint-disable-next-line
@@ -488,7 +482,6 @@ function createSearchHeaders(type, table) {
   tableProperties[type || "result"].forEach((property) => {
     if (!filteringProperties[type || "result"].includes(property)) return;
     $(`#${type}-search-${property}`).on("keyup change", function() {
-      $(`#${type}_filtering-${property}`).val($(this).val());
       table.ajax.reload(null, false);
     });
   });
@@ -511,7 +504,9 @@ function initTable(type, result) {
       url: `/filtering/${type}`,
       type: "POST",
       data: (d) => {
-        d.form = serializeForm(`#${type}_filtering-form`);
+        console.log($(`#${type}_filtering`).length);
+        form = $(`#${type}_filtering`).length ? `#${type}_filtering-form` : `#search-${type}-form`;
+        d.form = serializeForm(form);
       },
     },
   });
@@ -520,7 +515,7 @@ function initTable(type, result) {
     table.order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type)) refreshTable(table, 3000);
-  return result ? table : [table, showPanel(`${type}_filtering`)];
+  return table;
 }
 
 // eslint-disable-next-line
@@ -532,7 +527,6 @@ function filter(formType) {
 // eslint-disable-next-line
 function undoFilter(formType) {
   $(`#${formType}-form`)[0].reset();
-  filteringPanel.minimize();
   table.ajax.reload(null, false);
   alertify.notify("Filter removed.", "success", 5);
 }
@@ -717,7 +711,7 @@ $(document).ready(function() {
   initSidebar();
   if (page.includes("table")) {
     type = page.split("/")[1];
-    [table, filteringPanel] = initTable(type);
+    table = initTable(type);
   }
   configureForm(page);
   doc(page);

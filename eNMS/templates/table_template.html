@@ -47,6 +47,11 @@
       </th>
       {% endfor %}
     </tr>
+      <form
+    id="search-{{ type }}-form"
+    class="form-horizontal form-label-left"
+    method="post"
+  >
     {% for property in table_properties[type] %} {% if property in
     filtering_properties[type] %} {% if property_types[property] == "bool" %}
       <th>
@@ -69,6 +74,7 @@
       />
     </th>
     {% endif %}
+    </form>
     {% else %}
     <th></th>
     {% endif %} {% endfor %} {% for field in fixed_columns %}

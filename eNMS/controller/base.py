@@ -543,8 +543,7 @@ class BaseController:
             constraints.append(constraint)
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         try:
-
-            a = {
+            return {
                 "draw": int(kwargs["draw"]),
                 "recordsTotal": Session.query(func.count(model.id)).scalar() ,
                 "recordsFiltered": result.count(),
@@ -554,8 +553,6 @@ class BaseController:
                     for obj in result.limit(int(kwargs["length"])).offset(int(kwargs["start"])).all()
                 ],
             }
-            print(datetime.now() - first)
-            return a
         except InterfaceError:
             return {"error": "Filtering error: wrong input"}
 

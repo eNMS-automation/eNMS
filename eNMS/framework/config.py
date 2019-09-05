@@ -8,6 +8,7 @@ class DebugConfig:
     SECRET_KEY = environ.get("SECRET_KEY", "get-a-real-key")
     WTF_CSRF_TIME_LIMIT = None
     ERROR_404_HELP = False
+    MAX_CONTENT_LENGTH = 20 * 1024 * 1024
 
 
 class ProductionConfig:

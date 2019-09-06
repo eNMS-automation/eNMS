@@ -30,7 +30,6 @@ pool_table_properties: List[str] = [
     "never_update",
     "longitude",
     "latitude",
-    "object_number",
 ]
 
 service_table_properties: List[str] = [

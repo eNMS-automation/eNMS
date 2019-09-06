@@ -13,7 +13,7 @@ class UpdateInventoryService(Service):
 
     __tablename__ = "UpdateInventoryService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     update_dictionary = Column(MutableDict)
 

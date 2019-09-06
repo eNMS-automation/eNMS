@@ -14,7 +14,7 @@ class PythonSnippetService(Service):
 
     __tablename__ = "PythonSnippetService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     source_code = Column(LargeString)
 

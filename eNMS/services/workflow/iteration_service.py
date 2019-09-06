@@ -16,7 +16,7 @@ class IterationService(Service):
 
     __tablename__ = "IterationService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     iterated_job_id = Column(Integer, ForeignKey("job.id"))
     iterated_job = relationship(

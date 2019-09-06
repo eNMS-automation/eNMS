@@ -61,7 +61,7 @@ This file contains the following code :
 
       __tablename__ = "ExampleService"
 
-      id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+      id = Column(Integer, ForeignKey("service.id"), primary_key=True)
       # The following fields will be stored in the database as:
       # - String
       string1 = Column(String(SMALL_STRING_LENGTH), default="")
@@ -234,7 +234,7 @@ Let's take a look at how the ``Swiss Army Knife Service`` is implemented:
 
      __tablename__ = "SwissArmyKnifeService"
 
-     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
      has_targets = Column(Boolean, default=False)
 
      __mapper_args__ = {"polymorphic_identity": "SwissArmyKnifeService"}

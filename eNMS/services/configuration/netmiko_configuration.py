@@ -15,7 +15,7 @@ class NetmikoConfigurationService(Service):
 
     __tablename__ = "NetmikoConfigurationService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     content = Column(LargeString, default="")
     privileged_mode = Column(Boolean, default=False)

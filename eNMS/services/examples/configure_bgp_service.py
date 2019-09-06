@@ -12,7 +12,7 @@ class ConfigureBgpService(Service):
 
     __tablename__ = "ConfigureBgpService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     local_as = Column(Integer, default=0)
     loopback = Column(SmallString)

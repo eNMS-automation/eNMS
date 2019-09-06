@@ -18,7 +18,7 @@ class GenericFileTransferService(Service):
 
     __tablename__ = "GenericFileTransferService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     direction = Column(SmallString)
     protocol = Column(SmallString)

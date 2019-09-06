@@ -15,7 +15,7 @@ class UnixCommandService(Service):
 
     __tablename__ = "UnixCommandService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     command = Column(SmallString)
     content_match = Column(LargeString, default="")

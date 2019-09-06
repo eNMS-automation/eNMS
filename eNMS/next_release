@@ -5,3 +5,8 @@
 - Refactoring of the search system
 
 - Forbid single and double-quotes in names.
+
+- Rename migration files lowercase
+- Change custom service lowercase PEP8
+- Update migration files:
+type: Device -> type: Device etc...

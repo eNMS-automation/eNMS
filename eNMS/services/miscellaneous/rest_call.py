@@ -36,7 +36,7 @@ class RestCallService(Service):
 
     __tablename__ = "RestCallService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     call_type = Column(SmallString)
     rest_url = Column(LargeString, default="")

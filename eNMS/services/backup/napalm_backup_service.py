@@ -17,7 +17,7 @@ class NapalmBackupService(Service):
 
     __tablename__ = "NapalmBackupService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     configuration_backup_service = True
     has_targets = True
     number_of_configuration = Column(Integer, default=10)

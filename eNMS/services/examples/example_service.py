@@ -44,7 +44,7 @@ class ExampleService(Service):
 
     __tablename__ = "ExampleService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = False
     # The following fields will be stored in the database as:
     # - String

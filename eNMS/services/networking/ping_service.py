@@ -15,7 +15,7 @@ class PingService(Service):
 
     __tablename__ = "PingService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     protocol = Column(SmallString)
     ports = Column(SmallString)

@@ -88,7 +88,7 @@ class Run(AbstractBase):
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship("Workflow", foreign_keys="run.workflow_id")
     workflow_name = association_proxy("workflow", "name")
-    task_id = Column(Integer, ForeignKey("Task.id"))
+    task_id = Column(Integer, ForeignKey("task.id"))
     task = relationship("Task", foreign_keys="run.task_id")
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 

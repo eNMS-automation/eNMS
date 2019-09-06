@@ -13,7 +13,7 @@ class NapalmGettersService(Service):
 
     __tablename__ = "NapalmGettersService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     validation_method = Column(SmallString, default="dict_included")
     dict_match = Column(MutableDict)

@@ -14,7 +14,7 @@ class NapalmPingService(Service):
 
     __tablename__ = "NapalmPingService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     count = Column(Integer, default=0)
     driver = Column(SmallString)

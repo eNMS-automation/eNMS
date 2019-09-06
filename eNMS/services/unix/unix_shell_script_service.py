@@ -16,7 +16,7 @@ class UnixShellScriptService(Service):
 
     __tablename__ = "UnixShellScriptService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     source_code = Column(LargeString, default="")
     content_match = Column(LargeString, default="")

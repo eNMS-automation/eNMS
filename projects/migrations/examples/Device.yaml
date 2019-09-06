@@ -18,7 +18,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: PaloAlto
@@ -41,7 +41,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Austin
@@ -64,7 +64,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: admin
   vendor: Arista
 - description: Washington
@@ -87,7 +87,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: admin
   vendor: Arista
 - description: Chicago
@@ -110,7 +110,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: SanJose
@@ -133,7 +133,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: SanDiego
@@ -156,7 +156,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Dallas
@@ -179,7 +179,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Philadelphia
@@ -202,7 +202,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: LosAngeles
@@ -225,7 +225,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Detroit
@@ -248,7 +248,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Richmond
@@ -271,7 +271,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Atlanta
@@ -294,7 +294,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Boston
@@ -317,7 +317,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Houston
@@ -340,7 +340,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Baltimore
@@ -363,7 +363,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: Cleveland
@@ -386,7 +386,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: Columbus
@@ -409,7 +409,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: Cincinnati
@@ -432,7 +432,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: Cambridge
@@ -455,7 +455,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: Minneapolis
@@ -478,7 +478,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: NewYork
@@ -501,7 +501,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: Sacramento
@@ -524,7 +524,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: SanFrancisco
@@ -547,7 +547,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: Orange
@@ -570,7 +570,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Juniper
 - description: Oakland
@@ -593,7 +593,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Denver
@@ -616,7 +616,7 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: cisco
   vendor: Cisco
 - description: Denver
@@ -639,6 +639,6 @@
   port: 22
   subtype: ''
   tasks: []
-  type: Device
+  type: device
   username: minto
   vendor: Cisco

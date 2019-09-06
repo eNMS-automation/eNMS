@@ -17,7 +17,7 @@ class NetmikoBackupService(Service):
 
     __tablename__ = "NetmikoBackupService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     configuration_backup_service = True
     has_targets = True
     privileged_mode = Column(Boolean, default=False)

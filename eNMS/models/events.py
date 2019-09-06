@@ -201,7 +201,7 @@ class Syslog(Baselog):
     __tablename__ = "syslog"
     __mapper_args__ = {"polymorphic_identity": "syslog"}
     parent_type = "baselog"
-    id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("baselog.id"), primary_key=True)
     source = Column(LargeString, default="")
 
 
@@ -210,7 +210,7 @@ class Changelog(Baselog):
     __tablename__ = "changelog"
     __mapper_args__ = {"polymorphic_identity": "changelog"}
     parent_type = "baselog"
-    id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("baselog.id"), primary_key=True)
     severity = Column(SmallString, default="N/A")
     user = Column(LargeString, default="")
 

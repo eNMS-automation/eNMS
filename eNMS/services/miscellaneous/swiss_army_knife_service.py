@@ -22,7 +22,7 @@ class SwissArmyKnifeService(Service):
 
     __tablename__ = "SwissArmyKnifeService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "SwissArmyKnifeService"}

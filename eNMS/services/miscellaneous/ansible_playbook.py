@@ -24,7 +24,7 @@ class AnsiblePlaybookService(Service):
 
     __tablename__ = "AnsiblePlaybookService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     playbook_path = Column(SmallString)
     arguments = Column(SmallString)

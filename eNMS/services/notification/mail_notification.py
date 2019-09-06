@@ -16,7 +16,7 @@ class MailNotificationService(Service):
 
     __tablename__ = "MailNotificationService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     title = Column(SmallString)
     sender = Column(SmallString)

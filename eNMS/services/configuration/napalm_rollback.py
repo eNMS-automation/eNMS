@@ -13,7 +13,7 @@ class NapalmRollbackService(Service):
 
     __tablename__ = "NapalmRollbackService"
 
-    id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)

@@ -42,7 +42,7 @@ from eNMS.models.execution import Run
 
 class ExampleService(Service):
 
-    __tablename__ = "ExampleService"
+    __tablename__ = "example_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = False
@@ -70,7 +70,7 @@ class ExampleService(Service):
     boolean1 = Column(Boolean, default=False)
     boolean2 = Column(Boolean, default=False)
 
-    __mapper_args__ = {"polymorphic_identity": "ExampleService"}
+    __mapper_args__ = {"polymorphic_identity": "example_service"}
 
     # Some services will take action or interrogate a device. The job method
     # can also take device as a parameter for these types of services.
@@ -99,7 +99,7 @@ class ExampleForm(ServiceForm):
 
     # The following line is mandatory: the default value must point
     # to the service.
-    form_type = HiddenField(default="ExampleService")
+    form_type = HiddenField(default="example_service")
 
     # string1 is defined as a "SelectField": it will be displayed as a
     # drop-down list in the UI.

@@ -59,7 +59,7 @@ This file contains the following code :
 
   class ExampleService(Service):
 
-      __tablename__ = "ExampleService"
+      __tablename__ = "example_service"
 
       id = Column(Integer, ForeignKey("service.id"), primary_key=True)
       # The following fields will be stored in the database as:
@@ -86,7 +86,7 @@ This file contains the following code :
       boolean1 = Column(Boolean, default=False)
       boolean2 = Column(Boolean, default=False)
 
-      __mapper_args__ = {"polymorphic_identity": "ExampleService"}
+      __mapper_args__ = {"polymorphic_identity": "example_service"}
 
       # Some services will take action or interrogate a device. The job method
       # can also take device as a parameter for these types of services.
@@ -115,7 +115,7 @@ This file contains the following code :
 
       # The following line is mandatory: the default value must point
       # to the service.
-      form_type = HiddenField(default="ExampleService")
+      form_type = HiddenField(default="example_service")
 
       # string1 is defined as a "SelectField": it will be displayed as a
       # drop-down list in the UI.

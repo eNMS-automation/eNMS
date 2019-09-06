@@ -388,7 +388,7 @@
   string2: s2
   success_query: ''
   time_between_retries: 10
-  type: ExampleService
+  type: example_service
   url: https://www.google.fr/
   vendor: ''
   waiting_time: 0
@@ -519,7 +519,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: DatabaseBackupService
+  type: database_backup_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -562,7 +562,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoBackupService
+  type: netmiko_backup_service
   use_device_driver: true
   vendor: ''
   waiting_time: 0
@@ -602,7 +602,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmBackupService
+  type: napalm_backup_service
   use_device_driver: true
   vendor: ''
   waiting_time: 0
@@ -652,7 +652,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoConfigurationService
+  type: netmiko_configuration_service
   use_device_driver: true
   vendor: Arista
   waiting_time: 0
@@ -764,7 +764,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoConfigurationService
+  type: netmiko_configuration_service
   use_device_driver: true
   vendor: Arista
   waiting_time: 1
@@ -865,7 +865,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmConfigurationService
+  type: napalm_configuration_service
   use_device_driver: true
   vendor: Arista
   waiting_time: 0
@@ -1552,7 +1552,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmRollbackService
+  type: napalm_rollback_service
   use_device_driver: true
   vendor: ''
   waiting_time: 0

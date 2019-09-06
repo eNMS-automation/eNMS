@@ -18,7 +18,7 @@ from eNMS.properties.database import import_classes
 
 class DatabaseBackupService(Service):
 
-    __tablename__ = "DatabaseBackupService"
+    __tablename__ = "database_backup_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -28,7 +28,7 @@ class DatabaseBackupService(Service):
     delete_archive = Column(Boolean, default=False)
     destination_path = Column(SmallString)
 
-    __mapper_args__ = {"polymorphic_identity": "DatabaseBackupService"}
+    __mapper_args__ = {"polymorphic_identity": "database_backup_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         now = app.strip_all(app.get_time())
@@ -62,7 +62,7 @@ class DatabaseBackupService(Service):
 
 
 class DatabaseBackupForm(ServiceForm):
-    form_type = HiddenField(default="DatabaseBackupService")
+    form_type = HiddenField(default="database_backup_service")
     protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
     delete_folder = BooleanField()
     delete_archive = BooleanField()

@@ -11,7 +11,7 @@ from eNMS.models.inventory import Device
 
 class NapalmRollbackService(Service):
 
-    __tablename__ = "NapalmRollbackService"
+    __tablename__ = "napalm_rollback_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -19,7 +19,7 @@ class NapalmRollbackService(Service):
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict)
 
-    __mapper_args__ = {"polymorphic_identity": "NapalmRollbackService"}
+    __mapper_args__ = {"polymorphic_identity": "napalm_rollback_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection = run.napalm_connection(device)
@@ -29,4 +29,4 @@ class NapalmRollbackService(Service):
 
 
 class NapalmRollbackForm(ServiceForm, NapalmForm):
-    form_type = HiddenField(default="NapalmRollbackService")
+    form_type = HiddenField(default="napalm_rollback_service")

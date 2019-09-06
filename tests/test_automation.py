@@ -8,7 +8,7 @@ from tests.conftest import check_pages
 
 netmiko_ping = ImmutableMultiDict(
     [
-        ("form_type", "NetmikoConfigurationService"),
+        ("form_type", "netmiko_configuration_service"),
         ("name", "netmiko_ping"),
         ("credentials", "user"),
         ("send_notification_method", "mail_feedback_notification"),
@@ -31,7 +31,7 @@ netmiko_ping = ImmutableMultiDict(
 
 file_transfer_service = ImmutableMultiDict(
     [
-        ("form_type", "NetmikoConfigurationService"),
+        ("form_type", "netmiko_configuration_service"),
         ("name", "test"),
         ("credentials", "user"),
         ("send_notification_method", "mail_feedback_notification"),
@@ -96,8 +96,8 @@ ansible_service = ImmutableMultiDict(
 @check_pages("table/service")
 def test_base_services(user_client: FlaskClient) -> None:
     number_of_services = len(fetch_all("Service"))
-    user_client.post("/update/NetmikoConfigurationService", data=netmiko_ping)
-    assert len(fetch_all("NetmikoConfigurationService")) == 3
+    user_client.post("/update/netmiko_configuration_service", data=netmiko_ping)
+    assert len(fetch_all("netmiko_configuration_service")) == 3
     user_client.post("/update/NetmikoFileTransferService", data=file_transfer_service)
     assert len(fetch_all("NetmikoFileTransferService")) == 1
     number_of_napalm_services = len(fetch_all("NapalmGettersService"))

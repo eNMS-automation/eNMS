@@ -10,3 +10,10 @@
 - Change custom service lowercase PEP8
 - Update migration files:
 type: Device -> type: Device etc...
+ExampleService -> example_service
+DatabaseBackupService -> database_backup_service
+NapalmBackupService -> napalm_backup_service
+NetmikoBackupService -> netmiko_backup_service
+NapalmConfigurationService -> napalm_configuration_service
+NapalmRollbackService -> napalm_rollback_service
+NetmikoConfigurationService -> netmiko_configuration_service

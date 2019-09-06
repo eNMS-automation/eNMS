@@ -15,7 +15,7 @@ from eNMS.models.inventory import Device
 
 class NetmikoBackupService(Service):
 
-    __tablename__ = "NetmikoBackupService"
+    __tablename__ = "netmiko_backup_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     configuration_backup_service = True
@@ -29,7 +29,7 @@ class NetmikoBackupService(Service):
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {"polymorphic_identity": "NetmikoBackupService"}
+    __mapper_args__ = {"polymorphic_identity": "netmiko_backup_service"}
 
     def generate_yaml_file(self, path, device):
         data = {
@@ -78,7 +78,7 @@ class NetmikoBackupService(Service):
 
 
 class NetmikoBackupForm(ServiceForm, NetmikoForm):
-    form_type = HiddenField(default="NetmikoBackupService")
+    form_type = HiddenField(default="netmiko_backup_service")
     number_of_configuration = IntegerField(default=10)
     configuration_command = StringField()
     groups = {

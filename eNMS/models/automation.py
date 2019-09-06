@@ -30,7 +30,7 @@ from eNMS.models.administration import User  # noqa: F401
 
 class Job(AbstractBase):
 
-    __tablename__ = "Job"
+    __tablename__ = "job"
     type = Column(SmallString)
     __mapper_args__ = {"polymorphic_identity": "job", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
@@ -147,7 +147,7 @@ class Job(AbstractBase):
 
 class Service(Job):
 
-    __tablename__ = "Service"
+    __tablename__ = "service"
     __mapper_args__ = {"polymorphic_identity": "service"}
     parent_type = "job"
     id = Column(Integer, ForeignKey("job.id"), primary_key=True)

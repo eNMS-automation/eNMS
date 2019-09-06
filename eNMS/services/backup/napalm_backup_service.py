@@ -15,7 +15,7 @@ from eNMS.models.inventory import Device
 
 class NapalmBackupService(Service):
 
-    __tablename__ = "NapalmBackupService"
+    __tablename__ = "napalm_backup_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     configuration_backup_service = True
@@ -25,7 +25,7 @@ class NapalmBackupService(Service):
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict)
 
-    __mapper_args__ = {"polymorphic_identity": "NapalmBackupService"}
+    __mapper_args__ = {"polymorphic_identity": "napalm_backup_service"}
 
     def generate_yaml_file(self, path, device):
         data = {
@@ -68,5 +68,5 @@ class NapalmBackupService(Service):
 
 
 class NapalmBackupForm(ServiceForm, NapalmForm):
-    form_type = HiddenField(default="NapalmBackupService")
+    form_type = HiddenField(default="napalm_backup_service")
     number_of_configuration = IntegerField(default=10)

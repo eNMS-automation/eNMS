@@ -13,7 +13,7 @@ from eNMS.models.inventory import Device
 
 class NetmikoConfigurationService(Service):
 
-    __tablename__ = "NetmikoConfigurationService"
+    __tablename__ = "netmiko_configuration_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -31,7 +31,7 @@ class NetmikoConfigurationService(Service):
     strip_command = Column(Boolean, default=False)
     config_mode_command = Column(SmallString)
 
-    __mapper_args__ = {"polymorphic_identity": "NetmikoConfigurationService"}
+    __mapper_args__ = {"polymorphic_identity": "netmiko_configuration_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
@@ -51,7 +51,7 @@ class NetmikoConfigurationService(Service):
 
 
 class NetmikoConfigurationForm(ServiceForm, NetmikoForm):
-    form_type = HiddenField(default="NetmikoConfigurationService")
+    form_type = HiddenField(default="netmiko_configuration_service")
     content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     commit_configuration = BooleanField()
     exit_config_mode = BooleanField(default=True)

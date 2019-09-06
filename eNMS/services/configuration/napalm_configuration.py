@@ -13,7 +13,7 @@ from eNMS.models.inventory import Device
 
 class NapalmConfigurationService(Service):
 
-    __tablename__ = "NapalmConfigurationService"
+    __tablename__ = "napalm_configuration_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -23,7 +23,7 @@ class NapalmConfigurationService(Service):
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict)
 
-    __mapper_args__ = {"polymorphic_identity": "NapalmConfigurationService"}
+    __mapper_args__ = {"polymorphic_identity": "napalm_configuration_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection = run.napalm_connection(device)
@@ -35,7 +35,7 @@ class NapalmConfigurationService(Service):
 
 
 class NapalmConfigurationForm(ServiceForm, NapalmForm):
-    form_type = HiddenField(default="NapalmConfigurationService")
+    form_type = HiddenField(default="napalm_configuration_service")
     action = SelectField(
         choices=(
             ("load_merge_candidate", "Load merge"),

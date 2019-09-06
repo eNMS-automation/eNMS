@@ -21,7 +21,7 @@ $(function() {
         start: new Date(...properties.start),
         runtime: properties.runtime,
         jobId: properties.job.id,
-        jobType: properties.job.type == "Workflow" ? "workflow" : "service",
+        jobType: properties.job.type == "workflow" ? "workflow" : "service",
       });
     }
     $("#calendar").fullCalendar({

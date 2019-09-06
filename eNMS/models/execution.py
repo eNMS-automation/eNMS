@@ -117,7 +117,7 @@ class Run(AbstractBase):
         return result.pop() if result else None
 
     def generate_row(self, table: str) -> List[str]:
-        job_type = "workflow" if self.job.type == "Workflow" else "service"
+        job_type = "workflow" if self.job.type == "workflow" else "service"
         return [
             f"""<button type="button" class="btn btn-info btn-xs"
             onclick="showLogsPanel({self.job.row_properties}, '{self.runtime}')">
@@ -284,7 +284,7 @@ class Run(AbstractBase):
             app.job_db[self.job.id]["runs"] += 1
             Session.commit()
             payload = payload or self.job.initial_payload
-            if self.restart_run and self.job.type == "Workflow":
+            if self.restart_run and self.job.type == "workflow":
                 global_result = self.restart_run.result()
                 if global_result:
                     payload["variables"] = global_result.result["results"].get(
@@ -380,7 +380,7 @@ class Run(AbstractBase):
 
     def run_notification(self, results: dict) -> List[str]:
         notification = self.notification_header.splitlines()
-        if self.job.type == "Workflow":
+        if self.job.type == "workflow":
             return notification
         elif "devices" in results["results"] and not results["success"]:
             failed = "\n".join(

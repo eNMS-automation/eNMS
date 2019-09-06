@@ -250,8 +250,8 @@ function serializeForm(form) {
 // eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
+    console.log(result)
     const tableType = type.includes("Service") ? "service" : type;
-    console.log(type, id)
     $(`#instance_deletion-${id}`).remove();
     tables[tableType]
       .row($(`#${id}`))
@@ -373,13 +373,13 @@ function showTypePanel(instance, mode) {
           const title = mode == "duplicate" ? "Duplicate" : "Edit";
           panel.setHeaderTitle(`${title} ${instance.type} - ${instance.name}`);
           processInstance(instance.type, instance);
-          if (instance.type == "Workflow" && mode == "duplicate") {
+          if (instance.type == "workflow" && mode == "duplicate") {
             $(`#workflow-btn-${instance.id}`).attr(
               "onclick",
               `duplicateWorkflow(${instance.id})`
             );
           }
-          if (instance.type === "Workflow") {
+          if (instance.type === "workflow") {
             $(`#workflow-use_workflow_devices-${instance.id}`).change(function() {
               let isChecked = $(this).is(":checked");
               if (!isChecked) {
@@ -390,7 +390,7 @@ function showTypePanel(instance, mode) {
             });
             $(`#workflow-use_workflow_devices-${instance.id}`).trigger("change");
           }
-          if (instance.type == "Workflow" && mode == "run") {
+          if (instance.type == "workflow" && mode == "run") {
             workflowRunMode(instance);
           }
         });

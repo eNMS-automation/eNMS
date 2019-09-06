@@ -40,8 +40,8 @@ CustomDevice: Any = type(
     (Object,),
     {
         "__tablename__": "CustomDevice",
-        "__mapper_args__": {"polymorphic_identity": "CustomDevice"},
-        "parent_cls": "Object",
+        "__mapper_args__": {"polymorphic_identity": "custom_device"},
+        "parent_type": "object",
         "id": Column(Integer, ForeignKey("Object.id"), primary_key=True),
         **{
             property: Column(
@@ -64,7 +64,7 @@ class Device(CustomDevice):
     __tablename__ = "Device"
     __mapper_args__ = {"polymorphic_identity": "Device"}
     class_type = "device"
-    parent_cls = "CustomDevice"
+    parent_type = "custom_device"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
     icon = Column(SmallString, default="router")
     operating_system = Column(SmallString)
@@ -158,7 +158,7 @@ class Link(Object):
     __tablename__ = "Link"
     __mapper_args__ = {"polymorphic_identity": "Link"}
     class_type = "link"
-    parent_cls = "Object"
+    parent_type = "object"
     id = Column(Integer, ForeignKey("Object.id"), primary_key=True)
     color = Column(SmallString, default="#000000")
     source_id = Column(Integer, ForeignKey("Device.id"))
@@ -264,7 +264,7 @@ AbstractPool: Any = type(
 class Pool(AbstractPool):
 
     __tablename__ = type = "Pool"
-    parent_cls = "AbstractPool"
+    parent_type = "abstract_pool"
     id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
     name = Column(SmallString, unique=True)
     last_modified = Column(SmallString)

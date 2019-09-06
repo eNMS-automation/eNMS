@@ -119,7 +119,7 @@ function displayWorkflow(workflowData) {
     if (node) {
       node = parseInt(node);
       const job = workflow.jobs.find((w) => w.id === node);
-      if (job.type == "Workflow") {
+      if (job.type == "workflow") {
         switchToWorkflow(node);
         $("#current-workflow").val(node);
         $("#current-workflow").selectpicker("refresh");
@@ -294,9 +294,9 @@ function jobToNode(job, index) {
   const defaultJob = ["Start", "End"].includes(job.name);
   return {
     id: job.id,
-    shape: job.type == "Workflow" ? "ellipse" : defaultJob ? "circle" : "box",
+    shape: job.type == "workflow" ? "ellipse" : defaultJob ? "circle" : "box",
     color: defaultJob ? "pink" : "#D2E5FF",
-    label: job.type == "Workflow" ? `     ${job.name}     ` : job.name,
+    label: job.type == "workflow" ? `     ${job.name}     ` : job.name,
     name: job.name,
     type: job.type,
     title: formatJobTitle(job),

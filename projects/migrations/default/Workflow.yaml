@@ -27,7 +27,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
-  type: Workflow
+  type: workflow
   use_workflow_devices: false
   workflow_traversal_mode: service
   vendor: ''

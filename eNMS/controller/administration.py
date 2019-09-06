@@ -167,7 +167,7 @@ class AdministrationController(BaseController):
 
     def export_job(self, job_id: str) -> None:
         job = fetch("Job", id=job_id)
-        if job.type == "Workflow":
+        if job.type == "workflow":
             path = self.path / "projects" / "exported_jobs" / "workflows" / job.filename
             path.mkdir(parents=True, exist_ok=True)
             for instance_type in ("jobs", "workflow", "edges"):
@@ -177,7 +177,7 @@ class AdministrationController(BaseController):
                     sub_job_as_dict = sub_job.to_dict(export=True)
                     for relation in ("devices", "pools", "events"):
                         sub_job_as_dict.pop(relation)
-                    if sub_job.type == "Workflow":
+                    if sub_job.type == "workflow":
                         sub_job_as_dict["type"] = "Workflow"
                     yaml.dump(sub_job_as_dict, file)
             for edge in job.edges:

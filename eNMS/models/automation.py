@@ -32,7 +32,7 @@ class Job(AbstractBase):
 
     __tablename__ = "Job"
     type = Column(SmallString)
-    __mapper_args__ = {"polymorphic_identity": "Job", "polymorphic_on": type}
+    __mapper_args__ = {"polymorphic_identity": "job", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(SmallString, unique=True)
@@ -148,8 +148,8 @@ class Job(AbstractBase):
 class Service(Job):
 
     __tablename__ = "Service"
-    __mapper_args__ = {"polymorphic_identity": "Service"}
-    parent_cls = "Job"
+    __mapper_args__ = {"polymorphic_identity": "service"}
+    parent_type = "job"
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
@@ -240,8 +240,8 @@ class Service(Job):
 class Workflow(Job):
 
     __tablename__ = "Workflow"
-    __mapper_args__ = {"polymorphic_identity": "Workflow"}
-    parent_cls = "Job"
+    __mapper_args__ = {"polymorphic_identity": "workflow"}
+    parent_type = "job"
     has_targets = Column(Boolean, default=True)
     id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
     labels = Column(MutableDict)
@@ -279,7 +279,7 @@ class Workflow(Job):
     ) -> Generator[Job, None, None]:
         failed_devices, passed_devices = set(), set()
         skip_job = results["success"] == "skipped"
-        if (job.type == "Workflow" or job.has_targets) and not skip_job:
+        if (job.type == "workflow" or job.has_targets) and not skip_job:
             if "devices" in results["results"]:
                 devices = results["results"]["devices"]
             else:
@@ -445,7 +445,7 @@ class Workflow(Job):
     @property
     def job_number(self) -> int:
         return sum(
-            (1 + job.job_number) if job.type == "Workflow" else 1 for job in self.jobs
+            (1 + job.job_number) if job.type == "workflow" else 1 for job in self.jobs
         )
 
 

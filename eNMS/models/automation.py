@@ -459,20 +459,20 @@ class WorkflowEdge(AbstractBase):
     source_id = Column(Integer, ForeignKey("job.id"))
     source = relationship(
         "Job",
-        primaryjoin="Job.id == workflow_edge.source_id",
+        primaryjoin="Job.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
-        foreign_keys="workflow_edge.source_id",
+        foreign_keys="WorkflowEdge.source_id",
     )
     destination_id = Column(Integer, ForeignKey("job.id"))
     destination = relationship(
         "Job",
-        primaryjoin="job.id == workflow_edge.destination_id",
+        primaryjoin="Job.id == WorkflowEdge.destination_id",
         backref=backref("sources", cascade="all, delete-orphan"),
-        foreign_keys="workflow_edge.destination_id",
+        foreign_keys="WorkflowEdge.destination_id",
     )
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship(
-        "Workflow", back_populates="edges", foreign_keys="workflow_edge.workflow_id"
+        "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
     )
 
     def __init__(self, **kwargs: Any) -> None:

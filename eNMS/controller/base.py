@@ -271,9 +271,9 @@ class BaseController:
             self.version = load(package_file)["version"]
 
     def init_parameters(self) -> None:
-        parameters = Session.query(models["Parameters"]).one_or_none()
+        parameters = Session.query(models["parameters"]).one_or_none()
         if not parameters:
-            parameters = models["Parameters"]()
+            parameters = models["parameters"]()
             parameters.update(
                 **{
                     property: getattr(self, property)
@@ -308,7 +308,7 @@ class BaseController:
 
     @property
     def config(self) -> dict:
-        parameters = Session.query(models["Parameters"]).one_or_none()
+        parameters = Session.query(models["parameters"]).one_or_none()
         return parameters.get_properties() if parameters else {}
 
     def get_git_content(self) -> None:
@@ -443,7 +443,7 @@ class BaseController:
         self.syslog_server.start()
 
     def update_parameters(self, **kwargs: Any) -> None:
-        Session.query(models["Parameters"]).one().update(**kwargs)
+        Session.query(models["parameters"]).one().update(**kwargs)
         self.__dict__.update(**kwargs)
 
     def delete_instance(self, cls: str, instance_id: int) -> dict:

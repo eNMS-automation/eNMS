@@ -32,9 +32,8 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
                 property_types[col.key] = column_type
     if hasattr(cls, "parent_type"):
         model_properties[name].extend(model_properties[cls.parent_type])
-    if "Service" in name and name != "Service":
-        model_properties[name].extend(model_properties["Service"])
-    print(model_properties)
+    if "service" in name and name != "service":
+        model_properties[name].extend(model_properties["service"])
     model = {name: cls, name.lower(): cls}
     models.update(model)
     for relation in mapper.relationships:

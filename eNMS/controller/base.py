@@ -20,7 +20,7 @@ from ruamel import yaml
 from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
-from sqlalchemy import and_, or_
+from sqlalchemy import and_, func, or_
 from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
@@ -545,8 +545,8 @@ class BaseController:
         try:
             return {
                 "draw": int(kwargs["draw"]),
-                "recordsTotal": len(Session.query(model).all()),
-                "recordsFiltered": len(result.all()),
+                "recordsTotal": Session.query(func.count(model.id)).scalar(),
+                "recordsFiltered": result.count(),
                 "data": [
                     [getattr(obj, property) for property in properties]
                     + obj.generate_row(table)

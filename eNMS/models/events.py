@@ -122,10 +122,7 @@ class Task(AbstractBase):
         Session.commit()
 
     def run_properties(self) -> dict:
-        properties = {
-            "payload": self.initial_payload,
-            "task": self.id,
-        }
+        properties = {"payload": self.initial_payload, "task": self.id}
         if self.devices:
             properties["devices"] = [device.id for device in self.devices]
         if self.pools:

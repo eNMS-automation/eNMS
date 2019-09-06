@@ -122,12 +122,15 @@ class Task(AbstractBase):
         Session.commit()
 
     def run_properties(self) -> dict:
-        return {
-            "devices": [device.id for device in self.devices],
-            "pools": [pool.id for pool in self.pools],
+        properties = {
             "payload": self.initial_payload,
             "task": self.id,
         }
+        if self.devices:
+            properties["devices"] = [device.id for device in self.devices]
+        if self.pools:
+            properties["pools"] = [pool.id for pool in self.pools]
+        return properties
 
     def kwargs(self) -> Tuple[dict, dict]:
         default = {

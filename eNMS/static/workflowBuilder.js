@@ -451,7 +451,7 @@ Object.assign(action, {
   "Create Label": () => showPanel("workflow_label"),
   "Edit Label": editLabel,
   "Edit Edge": (edge) => {
-    showTypePanel("WorkflowEdge", edge.id);
+    showTypePanel("workflow_edge", edge.id);
   },
   "Delete Label": deleteLabel,
 });

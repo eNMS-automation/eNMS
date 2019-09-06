@@ -22,9 +22,9 @@ from eNMS.properties.objects import pool_link_properties, pool_device_properties
 
 class Object(AbstractBase):
 
-    __tablename__ = "Object"
+    __tablename__ = "object"
     type = Column(SmallString)
-    __mapper_args__ = {"polymorphic_identity": "Object", "polymorphic_on": type}
+    __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(SmallString, unique=True)

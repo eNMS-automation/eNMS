@@ -1,14 +1,14 @@
 from typing import Dict, List
 
 import_classes = [
-    "User",
-    "Device",
-    "Link",
-    "Pool",
-    "Service",
+    "user",
+    "device",
+    "link",
+    "pool",
+    "service",
     "workflow",
-    "WorkflowEdge",
-    "Task",
+    "workflow_edge",
+    "task",
 ]
 
 dont_track_changes = [
@@ -22,7 +22,7 @@ dont_track_changes = [
 ]
 
 dont_migrate: Dict[str, List[str]] = {
-    "Device": [
+    "device": [
         "id",
         "configurations",
         "current_configuration",
@@ -31,9 +31,9 @@ dont_migrate: Dict[str, List[str]] = {
         "destination",
         "pools",
     ],
-    "Link": ["id", "pools"],
-    "Pool": ["id", "jobs", "object_number"],
-    "Service": [
+    "link": ["id", "pools"],
+    "pool": ["id", "jobs", "object_number"],
+    "service": [
         "id",
         "sources",
         "destinations",
@@ -42,7 +42,7 @@ dont_migrate: Dict[str, List[str]] = {
         "tasks",
         "start_workflows",
     ],
-    "Task": [
+    "task": [
         "id",
         "job_name",
         "next_run_time",
@@ -50,7 +50,7 @@ dont_migrate: Dict[str, List[str]] = {
         "time_before_next_run",
         "status",
     ],
-    "User": ["id", "pools"],
+    "user": ["id", "pools"],
     "workflow": ["edges", "id", "sources", "destinations", "workflows", "tasks"],
-    "WorkflowEdge": ["id", "source_id", "destination_id", "workflow_id"],
+    "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
 }

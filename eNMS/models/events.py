@@ -124,9 +124,11 @@ class Task(AbstractBase):
     def run_properties(self) -> dict:
         properties = {"payload": self.initial_payload, "task": self.id}
         if self.devices:
-            properties["devices"] = [device.id for device in self.devices]
+            properties["devices"] = [  # type: ignore
+                device.id for device in self.devices
+            ]
         if self.pools:
-            properties["pools"] = [pool.id for pool in self.pools]
+            properties["pools"] = [pool.id for pool in self.pools]  # type: ignore
         return properties
 
     def kwargs(self) -> Tuple[dict, dict]:

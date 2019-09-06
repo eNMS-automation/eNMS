@@ -280,7 +280,11 @@ function stopWorkflow() {
     if (!result) {
       alertify.notify("The workflow is not currently running", "error", 5);
     } else {
-      alertify.notify("Workflow will stop after current service...", "success", 5);
+      alertify.notify(
+        "Workflow will stop after current service...",
+        "success",
+        5
+      );
     }
   });
 }

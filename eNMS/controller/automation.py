@@ -30,7 +30,7 @@ class AutomationController(BaseController):
     run_db: dict = defaultdict(dict)
     run_logs: dict = defaultdict(list)
 
-    def stop_workflow(self, runtime: str) -> bool:
+    def stop_workflow(self, runtime: str) -> Optional[bool]:
         if runtime in self.run_db:
             self.run_db[runtime]["stop"] = True
             return True

@@ -73,7 +73,7 @@ class AutomationController(BaseController):
         return {"id": label_id, **label}
 
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
-        delete("WorkflowEdge", id=edge_id)
+        delete("workflow_edge", id=edge_id)
         now = self.get_time()
         fetch("workflow", id=workflow_id).last_modified = now
         return now

@@ -109,7 +109,7 @@ class AdministrationController(BaseController):
                     workflow_jobs = {
                         workflow["name"]: workflow.pop("jobs") for workflow in objects
                     }
-                if cls == "WorkflowEdge":
+                if cls == "workflow_edge":
                     workflow_edges = deepcopy(objects)
                 if cls == "Service":
                     objects.sort(key=lambda s: s["type"] == "IterationService")
@@ -183,7 +183,7 @@ class AdministrationController(BaseController):
             for edge in job.edges:
                 name = self.strip_all(f"{edge.workflow}{edge.source}{edge.destination}")
                 with open(path / "edges" / f"{name}.yaml", "w") as file:
-                    edge = {**edge.to_dict(export=True), "type": "WorkflowEdge"}
+                    edge = {**edge.to_dict(export=True), "type": "workflow_edge"}
                     yaml.dump(edge, file)
             with open(path / "workflow" / f"{job.filename}.yaml", "w") as file:
                 job_as_dict = job.to_dict(export=True)

@@ -204,6 +204,6 @@ class WorkflowLabelForm(BaseForm):
 
 class WorkflowEdgeForm(BaseForm):
     template = "object"
-    form_type = HiddenField(default="WorkflowEdge")
+    form_type = HiddenField(default="workflow_edge")
     id = HiddenField()
     label = StringField()

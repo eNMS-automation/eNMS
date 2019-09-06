@@ -250,8 +250,10 @@ function serializeForm(form) {
 // eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
+    const tableType = type.includes("Service") ? "service" : type;
+    console.log(type, id)
     $(`#instance_deletion-${id}`).remove();
-    table
+    tables[tableType]
       .row($(`#${id}`))
       .remove()
       .draw(false);
@@ -309,8 +311,8 @@ function showFilteringPanel(panelType) {
 }
 
 // eslint-disable-next-line
-function showDeletionPanel(type, id, name) {
-  createPanel("instance_deletion", `Delete ${name}`, id, () => {}, type);
+function showDeletionPanel(job) {
+  createPanel("instance_deletion", `Delete ${job.name}`, job.id, () => {}, job.type);
 }
 
 function preprocessForm(panel, id, type, duplicate) {

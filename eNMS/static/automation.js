@@ -165,9 +165,9 @@ function getRuntimes(type, id) {
 }
 
 // eslint-disable-next-line
-function showResultsPanel(id, name, type, runtime) {
+function showResultsPanel(job) {
   $("#result").remove();
-  createPanel("result", `Results - ${name}`, null, function() {
+  createPanel("result", `Results - ${job.name}`, null, function() {
     resultTable = initTable("result", true);
   });
 }

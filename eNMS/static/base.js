@@ -358,57 +358,56 @@ function configureForm(form, id) {
 }
 
 // eslint-disable-next-line
-function showTypePanel(type, id, mode) {
-  if (type == "Workflow") type = "workflow";
+function showTypePanel(instance, mode) {
   createPanel(
-    type,
+    instance.type,
     "",
-    id,
+    instance.id,
     function(panel) {
-      if (type == "workflow" || type.includes("Service")) {
-        panelCode(type, id, mode);
+      if (instance.type == "workflow" || instance.type.includes("Service")) {
+        panelCode(instance.type, instance.id, mode);
       }
-      if (id) {
-        const properties = type === "pool" ? "_properties" : "";
-        call(`/get${properties}/${type}/${id}`, function(instance) {
+      if (instance.id) {
+        const properties = instance.type === "Pool" ? "_properties" : "";
+        call(`/get${properties}/${instance.type}/${instance.id}`, function(instance) {
           const title = mode == "duplicate" ? "Duplicate" : "Edit";
-          panel.setHeaderTitle(`${title} ${type} - ${instance.name}`);
-          processInstance(type, instance);
-          if (type == "workflow" && mode == "duplicate") {
-            $(`#workflow-btn-${id}`).attr(
+          panel.setHeaderTitle(`${title} ${instance.type} - ${instance.name}`);
+          processInstance(instance.type, instance);
+          if (instance.type == "Workflow" && mode == "duplicate") {
+            $(`#workflow-btn-${instance.id}`).attr(
               "onclick",
-              `duplicateWorkflow(${id})`
+              `duplicateWorkflow(${instance.id})`
             );
           }
-          if (type === "workflow") {
-            $(`#workflow-use_workflow_devices-${id}`).change(function() {
+          if (instance.type === "Workflow") {
+            $(`#workflow-use_workflow_devices-${instance.id}`).change(function() {
               let isChecked = $(this).is(":checked");
               if (!isChecked) {
-                $(`#workflow-traversal_mode-${id}`).val("service");
+                $(`#workflow-traversal_mode-${instance.id}`).val("service");
               }
-              $(`#workflow-traversal_mode-${id}`).prop("disabled", !isChecked);
-              $(`#workflow-traversal_mode-${id}`).selectpicker("refresh");
+              $(`#workflow-traversal_mode-${instance.id}`).prop("disabled", !isChecked);
+              $(`#workflow-traversal_mode-${instance.id}`).selectpicker("refresh");
             });
-            $(`#workflow-use_workflow_devices-${id}`).trigger("change");
+            $(`#workflow-use_workflow_devices-${instance.id}`).trigger("change");
           }
-          if (type == "workflow" && mode == "run") {
+          if (instance.type == "Workflow" && mode == "run") {
             workflowRunMode(instance);
           }
         });
       } else {
-        panel.setHeaderTitle(`Create a New ${type}`);
+        panel.setHeaderTitle(`Create a New ${instance.type}`);
       }
-      if (type.includes("Service")) {
-        loadScript(`../static/services/${type}.js`).then(() => {
+      if (instance.type.includes("Service")) {
+        loadScript(`../static/services/${instance.type}.js`).then(() => {
           try {
-            job(id);
+            job(instance.id);
           } catch (e) {
             alertify.notify("Failed to load script", "error", 5);
           }
         });
       }
     },
-    type,
+    instance.type,
     mode == "duplicate"
   );
 }

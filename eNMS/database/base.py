@@ -71,7 +71,7 @@ class AbstractBase(Base):
         include: Optional[list] = None,
     ) -> dict:
         result = {}
-        no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
+        no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
         for property in model_properties[self.type]:
             if property in private_properties or property in dont_serialize:
                 continue
@@ -98,7 +98,7 @@ class AbstractBase(Base):
         include: Optional[list] = None,
     ) -> dict:
         properties = self.get_properties(export, exclude=exclude)
-        no_migrate = dont_migrate.get(self.type, dont_migrate["Service"])
+        no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
         for property, relation in relationships[self.type].items():
             if include and property not in include or exclude and property in exclude:
                 continue

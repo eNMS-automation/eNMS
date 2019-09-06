@@ -6,7 +6,7 @@ import_classes = [
     "Link",
     "Pool",
     "Service",
-    "Workflow",
+    "workflow",
     "WorkflowEdge",
     "Task",
 ]
@@ -51,6 +51,6 @@ dont_migrate: Dict[str, List[str]] = {
         "status",
     ],
     "User": ["id", "pools"],
-    "Workflow": ["edges", "id", "sources", "destinations", "workflows", "tasks"],
+    "workflow": ["edges", "id", "sources", "destinations", "workflows", "tasks"],
     "WorkflowEdge": ["id", "source_id", "destination_id", "workflow_id"],
 }

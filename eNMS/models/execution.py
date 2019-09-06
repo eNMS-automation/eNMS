@@ -46,7 +46,7 @@ class Result(AbstractBase):
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", foreign_keys="Result.job_id")
     job_name = association_proxy("job", "name")
-    workflow_id = Column(Integer, ForeignKey("Workflow.id"))
+    workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
     workflow_name = association_proxy("workflow", "name")
 
@@ -85,7 +85,7 @@ class Run(AbstractBase):
     job_id = Column(Integer, ForeignKey("Job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
     job_name = association_proxy("job", "name")
-    workflow_id = Column(Integer, ForeignKey("Workflow.id"))
+    workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
     workflow_name = association_proxy("workflow", "name")
     task_id = Column(Integer, ForeignKey("Task.id"))

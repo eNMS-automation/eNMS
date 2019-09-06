@@ -105,7 +105,7 @@ class AdministrationController(BaseController):
             )
             with open(path, "r") as migration_file:
                 objects = yaml.load(migration_file)
-                if cls == "Workflow":
+                if cls == "workflow":
                     workflow_jobs = {
                         workflow["name"]: workflow.pop("jobs") for workflow in objects
                     }
@@ -121,13 +121,13 @@ class AdministrationController(BaseController):
                         Session.commit()
                     except Exception as e:
                         info(f"{str(obj)} could not be imported ({str(e)})")
-                        if cls in ("Service", "Workflow"):
+                        if cls in ("Service", "workflow"):
                             Session.commit()
                         status = "Partial import (see logs)."
-                    if cls not in ("Service", "Workflow"):
+                    if cls not in ("Service", "workflow"):
                         Session.commit()
         for name, jobs in workflow_jobs.items():
-            fetch("Workflow", name=name).jobs = [
+            fetch("workflow", name=name).jobs = [
                 fetch("Job", name=name) for name in jobs
             ]
             Session.commit()

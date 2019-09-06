@@ -50,11 +50,11 @@ class AutomationController(BaseController):
         )
         Session.commit()
         now = self.get_time()
-        fetch("Workflow", id=workflow_id).last_modified = now
+        fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
     def add_jobs_to_workflow(self, workflow_id: int, job_ids: str) -> Dict[str, Any]:
-        workflow = fetch("Workflow", id=workflow_id)
+        workflow = fetch("workflow", id=workflow_id)
         jobs = objectify("Job", [int(job_id) for job_id in job_ids.split("-")])
         for job in jobs:
             job.workflows.append(workflow)
@@ -67,7 +67,7 @@ class AutomationController(BaseController):
             Session.delete(result)
 
     def create_label(self, workflow_id: int, x: int, y: int, **kwargs: Any) -> dict:
-        workflow, label_id = fetch("Workflow", id=workflow_id), str(uuid4())
+        workflow, label_id = fetch("workflow", id=workflow_id), str(uuid4())
         label = {"positions": [x, y], "content": kwargs["content"]}
         workflow.labels[label_id] = label
         return {"id": label_id, **label}
@@ -75,26 +75,26 @@ class AutomationController(BaseController):
     def delete_edge(self, workflow_id: int, edge_id: int) -> str:
         delete("WorkflowEdge", id=edge_id)
         now = self.get_time()
-        fetch("Workflow", id=workflow_id).last_modified = now
+        fetch("workflow", id=workflow_id).last_modified = now
         return now
 
     def delete_node(self, workflow_id: int, job_id: int) -> dict:
-        workflow, job = fetch("Workflow", id=workflow_id), fetch("Job", id=job_id)
+        workflow, job = fetch("workflow", id=workflow_id), fetch("Job", id=job_id)
         workflow.jobs.remove(job)
         now = self.get_time()
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
 
     def delete_label(self, workflow_id: int, label: int) -> str:
-        workflow = fetch("Workflow", id=workflow_id)
+        workflow = fetch("workflow", id=workflow_id)
         workflow.labels.pop(label)
         now = self.get_time()
         workflow.last_modified = now
         return now
 
     def duplicate_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
-        parent_workflow = fetch("Workflow", id=workflow_id)
-        new_workflow = factory("Workflow", **kwargs)
+        parent_workflow = fetch("workflow", id=workflow_id)
+        new_workflow = factory("workflow", **kwargs)
         Session.commit()
         for job in parent_workflow.jobs:
             new_workflow.jobs.append(job)
@@ -229,7 +229,7 @@ class AutomationController(BaseController):
 
     def save_positions(self, workflow_id: int) -> str:
         now = self.get_time()
-        workflow = fetch("Workflow", allow_none=True, id=workflow_id)
+        workflow = fetch("workflow", allow_none=True, id=workflow_id)
         session["workflow"] = workflow.id
         for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
@@ -250,7 +250,7 @@ class AutomationController(BaseController):
     def get_workflow_state(
         self, workflow_id: int, runtime: Optional[str] = None
     ) -> dict:
-        workflow = fetch("Workflow", id=workflow_id)
+        workflow = fetch("workflow", id=workflow_id)
         runtimes = [
             (r.runtime, r.creator)
             for r in fetch("Run", allow_none=True, all_matches=True, job_id=workflow_id)

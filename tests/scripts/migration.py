@@ -8,7 +8,7 @@ import_classes = [
     "Link",
     "Pool",
     "Service",
-    "Workflow",
+    "workflow",
     "WorkflowEdge",
     "Task",
 ]

@@ -239,7 +239,7 @@ class Service(Job):
 
 class Workflow(Job):
 
-    __tablename__ = "Workflow"
+    __tablename__ = "workflow"
     __mapper_args__ = {"polymorphic_identity": "workflow"}
     parent_type = "job"
     has_targets = Column(Boolean, default=True)
@@ -267,7 +267,7 @@ class Workflow(Job):
     def compute_valid_devices(
         self, run: Run, job: Job, allowed_devices: dict, payload: dict
     ) -> Set[Device]:
-        if job.type != "Workflow" and not job.has_targets:
+        if job.type != "workflow" and not job.has_targets:
             return set()
         elif run.use_workflow_devices:
             return allowed_devices[job.name]
@@ -470,7 +470,7 @@ class WorkflowEdge(AbstractBase):
         backref=backref("sources", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.destination_id",
     )
-    workflow_id = Column(Integer, ForeignKey("Workflow.id"))
+    workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship(
         "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
     )

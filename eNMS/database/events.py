@@ -16,9 +16,8 @@ from eNMS.properties.database import dont_track_changes
 @event.listens_for(Base, "mapper_configured", propagate=True)
 def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
     name = cls.__tablename__
-    print(cls.type.__dict__, str(cls.type))
     for col in cls.__table__.columns:
-        model_properties[cls.type].append(col.key)
+        model_properties[name].append(col.key)
         if col.type == PickleType and isinstance(col.default.arg, list):
             property_types[col.key] = "list"
         else:
@@ -32,9 +31,9 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta) -> None:
             if col.key not in property_types:
                 property_types[col.key] = column_type
     if hasattr(cls, "parent_type"):
-        model_properties[cls.type].extend(model_properties[cls.parent_type])
+        model_properties[name].extend(model_properties[cls.parent_type])
     if "Service" in name and name != "Service":
-        model_properties[cls.type].extend(model_properties["service"])
+        model_properties[name].extend(model_properties["Service"])
     print(model_properties)
     model = {name: cls, name.lower(): cls}
     models.update(model)
@@ -89,7 +88,7 @@ def configure_events(app: Any) -> None:
             name, changes = getattr(target, "name", target.id), " | ".join(changelog)
             app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-    @event.listens_for(models["Workflow"].name, "set")
+    @event.listens_for(models["workflow"].name, "set")
     def workflow_name_update(
         workflow: Base, new_name: str, old_name: str, *args: Any
     ) -> None:

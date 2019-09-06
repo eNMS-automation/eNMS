@@ -263,7 +263,7 @@ function runLogic(job) {
   showLogsPanel(job, job.runtime, true);
   alertify.notify(`Job '${job.name}' started.`, "success", 5);
   if (page == "workflow_builder") {
-    if (job.type != "Workflow") {
+    if (job.type != "workflow") {
       getJobState(job.id);
     }
   }

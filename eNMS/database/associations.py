@@ -41,14 +41,14 @@ job_workflow_table: Table = Table(
     "job_workflow_association",
     Base.metadata,
     Column("job_id", Integer, ForeignKey("Job.id")),
-    Column("workflow_id", Integer, ForeignKey("Workflow.id")),
+    Column("workflow_id", Integer, ForeignKey("workflow.id")),
 )
 
 start_jobs_workflow_table: Table = Table(
     "start_jobs_workflow_association",
     Base.metadata,
     Column("job_id", Integer, ForeignKey("Job.id")),
-    Column("workflow_id", Integer, ForeignKey("Workflow.id")),
+    Column("workflow_id", Integer, ForeignKey("workflow.id")),
 )
 
 pool_device_table: Table = Table(

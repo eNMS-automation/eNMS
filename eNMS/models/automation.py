@@ -256,7 +256,7 @@ class Workflow(Job):
     )
 
     def __init__(self, **kwargs: Any) -> None:
-        start, end = fetch("Service", name="Start"), fetch("Service", name="End")
+        start, end = fetch("service", name="Start"), fetch("service", name="End")
         self.jobs.extend([start, end])
         super().__init__(**kwargs)
         if not kwargs.get("start_jobs"):
@@ -343,7 +343,7 @@ class Workflow(Job):
                     for base_target in allowed_devices[job.name]:
                         try:
                             job_run = factory(
-                                "Run",
+                                "run",
                                 job=job.id,
                                 workflow=self.id,
                                 workflow_device=base_target.id,
@@ -367,7 +367,7 @@ class Workflow(Job):
                 else:
                     try:
                         job_run = factory(
-                            "Run",
+                            "run",
                             job=job.id,
                             workflow=self.id,
                             workflow_device=device.id,  # type: ignore
@@ -387,7 +387,7 @@ class Workflow(Job):
                 else:
                     valid_devices = {device}  # type: ignore
                 job_run = factory(
-                    "Run",
+                    "run",
                     job=job.id,
                     workflow=self.id,
                     parent_runtime=run.parent_runtime,

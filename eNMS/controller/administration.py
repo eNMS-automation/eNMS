@@ -47,7 +47,7 @@ class AdministrationController(BaseController):
                     for s in json_response["attributes"]["memberOf"]
                 ):
                     user = factory(
-                        "User",
+                        "user",
                         **{
                             "name": name,
                             "password": password,
@@ -56,7 +56,7 @@ class AdministrationController(BaseController):
                     )
         elif kwargs["authentication_method"] == "TACACS":
             if self.tacacs_client.authenticate(name, password).valid:
-                user = factory("User", **{"name": name, "password": password})
+                user = factory("user", **{"name": name, "password": password})
         Session.commit()
         return user
 
@@ -68,7 +68,7 @@ class AdministrationController(BaseController):
 
     def get_cluster_status(self) -> dict:
         return {
-            attr: [getattr(server, attr) for server in fetch_all("Server")]
+            attr: [getattr(server, attr) for server in fetch_all("server")]
             for attr in ("status", "cpu_load")
         }
 
@@ -134,7 +134,7 @@ class AdministrationController(BaseController):
         for edge in workflow_edges:
             for property in ("source", "destination", "workflow"):
                 edge[property] = fetch("Job", name=edge[property]).id
-            factory("WorkflowEdge", **edge)
+            factory("workflow_edge", **edge)
             Session.commit()
         return status
 
@@ -219,6 +219,6 @@ class AdministrationController(BaseController):
                 ).json()
                 if self.cluster_id != server.pop("cluster_id"):
                     continue
-                factory("Server", **{**server, **{"ip_address": str(ip_address)}})
+                factory("server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
                 continue

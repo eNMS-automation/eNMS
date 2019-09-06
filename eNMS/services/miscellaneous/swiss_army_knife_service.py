@@ -66,9 +66,9 @@ class SwissArmyKnifeService(Service):
 
     def cluster_monitoring(self, run: "Run", payload: dict) -> dict:
         protocol = app.cluster_scan_protocol
-        for instance in fetch_all("Instance"):
+        for instance in fetch_all("instance"):
             factory(
-                "Instance",
+                "instance",
                 **get(
                     f"{protocol}://{instance.ip_address}/rest/is_alive",
                     timeout=app.cluster_scan_timeout,
@@ -77,11 +77,11 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def poller_service(self, run: "Run", payload: dict) -> dict:
-        for service in fetch_all("Service"):
+        for service in fetch_all("service"):
             if getattr(service, "configuration_backup_service", False):
                 app.run(service.id)
         Session.commit()
-        for pool in fetch_all("Pool"):
+        for pool in fetch_all("pool"):
             if pool.device_current_configuration:
                 pool.compute_pool()
         return {"success": True}

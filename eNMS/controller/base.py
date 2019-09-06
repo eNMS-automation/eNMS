@@ -289,7 +289,7 @@ class BaseController:
 
     def configure_server_id(self) -> None:
         factory(
-            "Server",
+            "server",
             **{
                 "name": str(getnode()),
                 "description": "Localhost",
@@ -300,7 +300,7 @@ class BaseController:
 
     def create_admin_user(self) -> None:
         password = {} if self.config_mode == "Production" else {"password": "admin"}
-        factory("User", **{"name": "admin", **password})
+        factory("user", **{"name": "admin", **password})
 
     def update_credentials(self) -> None:
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
@@ -474,7 +474,7 @@ class BaseController:
 
     def log(self, severity: str, content: str) -> None:
         factory(
-            "Changelog",
+            "changelog",
             **{
                 "severity": severity,
                 "content": content,
@@ -628,6 +628,6 @@ class BaseController:
                             str(parameters["last_update"])
                         ] = f.read()
         Session.commit()
-        for pool in fetch_all("Pool"):
+        for pool in fetch_all("pool"):
             if pool.device_current_configuration:
                 pool.compute_pool()

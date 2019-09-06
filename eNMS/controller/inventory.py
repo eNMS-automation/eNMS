@@ -70,7 +70,7 @@ class InventoryController(BaseController):
     def get_device_logs(self, device_id: int) -> Union[str, bool]:
         device_logs = [
             log.name
-            for log in fetch_all("Log")
+            for log in fetch_all("log")
             if log.source == fetch("device", id=device_id).ip_address
         ]
         return "\n".join(device_logs)
@@ -83,12 +83,12 @@ class InventoryController(BaseController):
 
     def export_to_google_earth(self, **kwargs: Any) -> None:
         kml_file = Kml()
-        for device in fetch_all("Device"):
+        for device in fetch_all("device"):
             point = kml_file.newpoint(name=device.name)
             point.coords = [(device.longitude, device.latitude)]
             point.style = self.google_earth_styles[device.icon]
             point.style.labelstyle.scale = kwargs["label_size"]
-        for link in fetch_all("Link"):
+        for link in fetch_all("link"):
             line = kml_file.newlinestring(name=link.name)
             line.coords = [
                 (link.source.longitude, link.source.latitude),
@@ -122,7 +122,7 @@ class InventoryController(BaseController):
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
             factory(
-                "Device",
+                "device",
                 **{
                     "name": device.name,
                     "ip_address": str(device_ip).split("/")[0],
@@ -143,7 +143,7 @@ class InventoryController(BaseController):
         ).json()["devices"]
         for device in devices:
             factory(
-                "Device",
+                "device",
                 **{
                     "name": device["hostname"],
                     "ip_address": device["ip"] or device["hostname"],
@@ -187,7 +187,7 @@ class InventoryController(BaseController):
             for interface in link["ipInterface"]:
                 if interface["snmpPrimary"] == "P":
                     devices[device]["ip_address"] = interface["ipAddress"]
-                    factory("Device", **devices[device])
+                    factory("device", **devices[device])
 
     def topology_import(self, file: BinaryIO) -> str:
         book = open_workbook(file_contents=file.read())
@@ -209,7 +209,7 @@ class InventoryController(BaseController):
                     info(f"{str(values)} could not be imported ({str(e)})")
                     result = "Partial import (see logs)."
             Session.commit()
-        for pool in fetch_all("Pool"):
+        for pool in fetch_all("pool"):
             pool.compute_pool()
         return result
 
@@ -224,7 +224,7 @@ class InventoryController(BaseController):
         return result
 
     def save_pool_objects(self, pool_id: int, **kwargs: Any) -> dict:
-        pool = fetch("Pool", id=pool_id)
+        pool = fetch("pool", id=pool_id)
         for obj_type in ("device", "link"):
             string_value = kwargs[f"string_{obj_type}s"]
             setattr(
@@ -242,16 +242,16 @@ class InventoryController(BaseController):
         return pool.serialized
 
     def update_pool(self, pool_id: str) -> None:
-        fetch("Pool", id=int(pool_id)).compute_pool()
+        fetch("pool", id=int(pool_id)).compute_pool()
 
     def update_all_pools(self) -> None:
-        for pool in fetch_all("Pool"):
+        for pool in fetch_all("pool"):
             pool.compute_pool()
 
     def get_view_topology(self) -> dict:
         return {
-            "devices": [d.view_properties for d in fetch_all("Device")],
-            "links": [d.view_properties for d in fetch_all("Link")],
+            "devices": [d.view_properties for d in fetch_all("device")],
+            "links": [d.view_properties for d in fetch_all("link")],
         }
 
     def view_filtering(self, filter_type: str, **kwargs: Any) -> List[dict]:

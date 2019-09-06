@@ -33,14 +33,14 @@ class CreatePool(Resource):
     def post(self) -> dict:
         data = request.get_json(force=True)
         factory(
-            "Pool",
+            "pool",
             **{
                 "name": data["name"],
                 "devices": [
                     fetch("device", name=name).id for name in data.get("devices", "")
                 ],
                 "links": [
-                    fetch("Link", name=name).id for name in data.get("links", "")
+                    fetch("link", name=name).id for name in data.get("links", "")
                 ],
                 "never_update": True,
             },
@@ -146,7 +146,7 @@ class RunJob(Resource):
                 else:
                     errors.append(f"No device with the IP address '{device_ip}'")
             for pool_name in data.get("pools", ""):
-                pool = fetch("Pool", name=pool_name)
+                pool = fetch("pool", name=pool_name)
                 if pool:
                     pools.append(pool.id)
                 else:

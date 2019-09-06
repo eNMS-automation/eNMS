@@ -39,7 +39,7 @@ class AutomationController(BaseController):
         self, workflow_id: int, subtype: str, source: int, destination: int
     ) -> dict:
         workflow_edge = factory(
-            "WorkflowEdge",
+            "workflow_edge",
             **{
                 "name": f"{workflow_id}-{subtype}:{source}->{destination}",
                 "workflow": workflow_id,
@@ -104,7 +104,7 @@ class AutomationController(BaseController):
             subtype, src, destination = edge.subtype, edge.source, edge.destination
             new_workflow.edges.append(
                 factory(
-                    "WorkflowEdge",
+                    "workflow_edge",
                     **{
                         "name": (
                             f"{new_workflow.id}-{subtype}:"
@@ -204,7 +204,7 @@ class AutomationController(BaseController):
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
-        run = factory("Run", job=job, **run_kwargs)
+        run = factory("run", job=job, **run_kwargs)
         run.properties = kwargs
         return run.run(kwargs.get("payload"))
 
@@ -299,7 +299,7 @@ class AutomationController(BaseController):
 
     def task_action(self, action: str, task_id: int) -> Optional[dict]:
         try:
-            return getattr(fetch("Task", id=task_id), action)()
+            return getattr(fetch("task", id=task_id), action)()
         except JobLookupError:
             return {"error": "This task no longer exists."}
 

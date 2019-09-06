@@ -27,8 +27,8 @@ class SyslogUDPHandler(BaseRequestHandler):
             "source": device.name if device else address,
             "content": str(bytes.decode(self.request[0].strip())),
         }
-        for event in fetch_all("Event"):
+        for event in fetch_all("event"):
             event.match_log(**properties)
-        log = factory("Syslog", **properties)
+        log = factory("syslog", **properties)
         Session.add(log)
         Session.commit()

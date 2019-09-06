@@ -330,7 +330,7 @@ class Run(AbstractBase):
         result_kw = {"run": self, "result": results, "workflow": self.workflow_id, "job": self.job_id}
         if device:
             result_kw["device"] = device.id
-        factory("Result", **result_kw)
+        factory("result", **result_kw)
 
     def get_results(self, payload: dict, device: Optional["Device"] = None) -> dict:
         self.log(
@@ -415,7 +415,7 @@ class Run(AbstractBase):
             "content": "\n\n".join(notification),
         }
         notification_run = factory(
-            "Run", **{"job": fetch("Job", name=self.send_notification_method).id}
+            "run", **{"job": fetch("job", name=self.send_notification_method).id}
         )
         notification_run.run(notification_payload)
 

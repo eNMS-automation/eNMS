@@ -92,6 +92,6 @@ def configure_events(app: Any) -> None:
     def workflow_name_update(
         workflow: Base, new_name: str, old_name: str, *args: Any
     ) -> None:
-        for job in fetch_all("Job"):
+        for job in fetch_all("job"):
             if old_name in job.positions:
                 job.positions[new_name] = job.positions.pop(old_name)

@@ -102,7 +102,7 @@ class Device(CustomDevice):
         super().update(**kwargs)
         if kwargs.get("dont_update_pools", False):
             return
-        for pool in fetch_all("Pool"):
+        for pool in fetch_all("pool"):
             if pool.never_update:
                 continue
             if pool.object_match(self):
@@ -210,7 +210,7 @@ class Link(Object):
         super().update(**kwargs)
         if kwargs.get("dont_update_pools", False):
             return
-        for pool in fetch_all("Pool"):
+        for pool in fetch_all("pool"):
             if pool.never_update:
                 continue
             if pool.object_match(self):
@@ -334,5 +334,5 @@ class Pool(AbstractPool):
     def compute_pool(self) -> None:
         if self.never_update:
             return
-        self.devices = list(filter(self.object_match, fetch_all("Device")))
-        self.links = list(filter(self.object_match, fetch_all("Link")))
+        self.devices = list(filter(self.object_match, fetch_all("device")))
+        self.links = list(filter(self.object_match, fetch_all("link")))

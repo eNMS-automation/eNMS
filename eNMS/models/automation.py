@@ -156,7 +156,7 @@ class Service(Job):
 
     @staticmethod
     def get_device_result(args: tuple) -> None:
-        device = fetch("Device", id=args[0])
+        device = fetch("device", id=args[0])
         run = fetch("Run", runtime=args[1])
         device_result = run.get_results(args[2], device)
         with args[3]:
@@ -185,7 +185,7 @@ class Service(Job):
                     device.name: run.get_results(payload, device) for device in targets
                 }
             for device_name, r in deepcopy(device_results).items():
-                device = fetch("Device", name=device_name)
+                device = fetch("device", name=device_name)
                 run.create_result(r, device)
             results = {"devices": device_results}
             return results
@@ -286,9 +286,9 @@ class Workflow(Job):
                 devices = results.get("devices", {})
             for name, device_results in devices.items():
                 if device_results["success"]:
-                    passed_devices.add(fetch("Device", name=name))
+                    passed_devices.add(fetch("device", name=name))
                 else:
-                    failed_devices.add(fetch("Device", name=name))
+                    failed_devices.add(fetch("device", name=name))
         else:
             if results["success"]:
                 passed_devices = allowed_devices[job.name]
@@ -451,7 +451,7 @@ class Workflow(Job):
 
 class WorkflowEdge(AbstractBase):
 
-    __tablename__ = type = "WorkflowEdge"
+    __tablename__ = type = "workflow_edge"
     id = Column(Integer, primary_key=True)
     name = Column(SmallString)
     label = Column(SmallString)
@@ -459,20 +459,20 @@ class WorkflowEdge(AbstractBase):
     source_id = Column(Integer, ForeignKey("job.id"))
     source = relationship(
         "Job",
-        primaryjoin="Job.id == WorkflowEdge.source_id",
+        primaryjoin="Job.id == workflow_edge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
-        foreign_keys="WorkflowEdge.source_id",
+        foreign_keys="workflow_edge.source_id",
     )
     destination_id = Column(Integer, ForeignKey("job.id"))
     destination = relationship(
         "Job",
-        primaryjoin="Job.id == WorkflowEdge.destination_id",
+        primaryjoin="job.id == workflow_edge.destination_id",
         backref=backref("sources", cascade="all, delete-orphan"),
-        foreign_keys="WorkflowEdge.destination_id",
+        foreign_keys="workflow_edge.destination_id",
     )
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship(
-        "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
+        "Workflow", back_populates="edges", foreign_keys="workflow_edge.workflow_id"
     )
 
     def __init__(self, **kwargs: Any) -> None:

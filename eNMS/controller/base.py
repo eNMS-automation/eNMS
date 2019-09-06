@@ -235,7 +235,7 @@ class BaseController:
         configure_events(self)
         self.init_forms()
         self.clean_database()
-        if not fetch("User", allow_none=True, name="admin"):
+        if not fetch("user", allow_none=True, name="admin"):
             self.init_parameters()
             self.configure_server_id()
             self.create_admin_user()
@@ -615,7 +615,7 @@ class BaseController:
         for dir in scandir(self.path / "git" / "configurations"):
             if dir.name == ".git":
                 continue
-            device = fetch("Device", allow_none=True, name=dir.name)
+            device = fetch("device", allow_none=True, name=dir.name)
             if device:
                 with open(Path(dir.path) / "data.yml") as data:
                     parameters = yaml.load(data)

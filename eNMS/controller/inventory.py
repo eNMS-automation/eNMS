@@ -27,7 +27,7 @@ class InventoryController(BaseController):
         return self.gotty_start_port + self.gotty_port % range
 
     def connection(self, device_id: int, **kwargs: Any) -> dict:
-        device = fetch("Device", id=device_id)
+        device = fetch("device", id=device_id)
         cmd = [str(self.path / "applications" / "gotty"), "-w"]
         port, protocol = self.get_gotty_port(), kwargs["protocol"]
         address = getattr(device, kwargs["address"])
@@ -61,7 +61,7 @@ class InventoryController(BaseController):
         }
 
     def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
-        device = fetch("Device", id=device_id)
+        device = fetch("device", id=device_id)
         first = device.configurations[v1].splitlines()
         second = device.configurations[v2].splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
@@ -71,12 +71,12 @@ class InventoryController(BaseController):
         device_logs = [
             log.name
             for log in fetch_all("Log")
-            if log.source == fetch("Device", id=device_id).ip_address
+            if log.source == fetch("device", id=device_id).ip_address
         ]
         return "\n".join(device_logs)
 
     def clear_configurations(self, device_id: int) -> None:
-        fetch("Device", id=device_id).configurations = {}
+        fetch("device", id=device_id).configurations = {}
 
     def counters(self, property: str, type: str) -> Counter:
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
@@ -115,7 +115,7 @@ class InventoryController(BaseController):
         workbook.save(self.path / "projects" / "spreadsheets" / filename)
 
     def get_configurations(self, device_id: int) -> dict:
-        return fetch("Device", id=device_id).get_configurations()
+        return fetch("device", id=device_id).get_configurations()
 
     def query_netbox(self, **kwargs: str) -> None:
         nb = netbox_api(kwargs["netbox_address"], token=kwargs["netbox_token"])

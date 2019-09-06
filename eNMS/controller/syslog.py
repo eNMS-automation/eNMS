@@ -22,7 +22,7 @@ class SyslogServer:
 class SyslogUDPHandler(BaseRequestHandler):
     def handle(self) -> None:
         address = self.client_address[0]
-        device = fetch("Device", allow_none=True, ip_address=address)
+        device = fetch("device", allow_none=True, ip_address=address)
         properties = {
             "source": device.name if device else address,
             "content": str(bytes.decode(self.request[0].strip())),

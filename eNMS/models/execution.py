@@ -47,7 +47,7 @@ class Result(AbstractBase):
     job = relationship("Job", foreign_keys="Result.job_id")
     job_name = association_proxy("job", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
-    workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
+    workflow = relationship("Workflow", foreign_keys="result.workflow_id")
     workflow_name = association_proxy("workflow", "name")
 
     def __getitem__(self, key: Any) -> Any:
@@ -80,16 +80,16 @@ class Run(AbstractBase):
     runtime = Column(SmallString)
     endtime = Column(SmallString)
     workflow_device_id = Column(Integer, ForeignKey("device.id"))
-    workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
+    workflow_device = relationship("Device", foreign_keys="run.workflow_device_id")
     parent_runtime = Column(SmallString)
     job_id = Column(Integer, ForeignKey("job.id"))
-    job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
+    job = relationship("Job", back_populates="runs", foreign_keys="run.job_id")
     job_name = association_proxy("job", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
-    workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
+    workflow = relationship("Workflow", foreign_keys="run.workflow_id")
     workflow_name = association_proxy("workflow", "name")
     task_id = Column(Integer, ForeignKey("Task.id"))
-    task = relationship("Task", foreign_keys="Run.task_id")
+    task = relationship("Task", foreign_keys="run.task_id")
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs: Any) -> None:

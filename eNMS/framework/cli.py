@@ -40,7 +40,7 @@ def configure_cli(flask_app: Flask) -> None:
     @option("--payload")
     def start(name: str, devices: str, payload: str) -> None:
         devices_list = devices.split(",") if devices else []
-        devices_list = [fetch("Device", name=name).id for name in devices_list]
+        devices_list = [fetch("device", name=name).id for name in devices_list]
         payload_dict = loads(payload) if payload else {}
         payload_dict["devices"] = devices_list
         job = fetch("Job", name=name)

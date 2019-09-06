@@ -37,7 +37,7 @@ class CreatePool(Resource):
             **{
                 "name": data["name"],
                 "devices": [
-                    fetch("Device", name=name).id for name in data.get("devices", "")
+                    fetch("device", name=name).id for name in data.get("devices", "")
                 ],
                 "links": [
                     fetch("Link", name=name).id for name in data.get("links", "")
@@ -90,7 +90,7 @@ class GetConfiguration(Resource):
     decorators = [auth.login_required]
 
     def get(self, name: str) -> str:
-        device = fetch("Device", name=name)
+        device = fetch("device", name=name)
         return device.configurations[max(device.configurations)]
 
 
@@ -134,13 +134,13 @@ class RunJob(Resource):
             job = fetch("Job", name=data["name"])
             handle_asynchronously = data.get("async", False)
             for device_name in data.get("devices", ""):
-                device = fetch("Device", name=device_name)
+                device = fetch("device", name=device_name)
                 if device:
                     devices.append(device.id)
                 else:
                     errors.append(f"No device with the name '{device_name}'")
             for device_ip in data.get("ip_addresses", ""):
-                device = fetch("Device", ip_address=device_ip)
+                device = fetch("device", ip_address=device_ip)
                 if device:
                     devices.append(device.id)
                 else:

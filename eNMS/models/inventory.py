@@ -39,10 +39,10 @@ CustomDevice: Any = type(
     "CustomDevice",
     (Object,),
     {
-        "__tablename__": "CustomDevice",
+        "__tablename__": "custom_device",
         "__mapper_args__": {"polymorphic_identity": "custom_device"},
         "parent_type": "object",
-        "id": Column(Integer, ForeignKey("Object.id"), primary_key=True),
+        "id": Column(Integer, ForeignKey("object.id"), primary_key=True),
         **{
             property: Column(
                 {
@@ -61,8 +61,8 @@ CustomDevice: Any = type(
 
 class Device(CustomDevice):
 
-    __tablename__ = "Device"
-    __mapper_args__ = {"polymorphic_identity": "Device"}
+    __tablename__ = "device"
+    __mapper_args__ = {"polymorphic_identity": "device"}
     class_type = "device"
     parent_type = "custom_device"
     id = Column(Integer, ForeignKey(CustomDevice.id), primary_key=True)
@@ -155,11 +155,11 @@ class Device(CustomDevice):
 
 class Link(Object):
 
-    __tablename__ = "Link"
-    __mapper_args__ = {"polymorphic_identity": "Link"}
+    __tablename__ = "link"
+    __mapper_args__ = {"polymorphic_identity": "link"}
     class_type = "link"
     parent_type = "object"
-    id = Column(Integer, ForeignKey("Object.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("object.id"), primary_key=True)
     color = Column(SmallString, default="#000000")
     source_id = Column(Integer, ForeignKey("device.id"))
     destination_id = Column(Integer, ForeignKey("device.id"))
@@ -200,7 +200,7 @@ class Link(Object):
 
     def update(self, **kwargs: Any) -> None:
         if "source_name" in kwargs:
-            kwargs["source"] = fetch("Device", name=kwargs.pop("source_name")).id
+            kwargs["source"] = fetch("device", name=kwargs.pop("source_name")).id
             kwargs["destination"] = fetch(
                 "Device", name=kwargs.pop("destination_name")
             ).id
@@ -235,9 +235,9 @@ AbstractPool: Any = type(
     "AbstractPool",
     (AbstractBase,),
     {
-        "__tablename__": "AbstractPool",
-        "type": "AbstractPool",
-        "__mapper_args__": {"polymorphic_identity": "AbstractPool"},
+        "__tablename__": "abstract_pool",
+        "type": "abstract_pool",
+        "__mapper_args__": {"polymorphic_identity": "abstract_pool"},
         "id": Column(Integer, primary_key=True),
         **{
             **{
@@ -263,9 +263,9 @@ AbstractPool: Any = type(
 
 class Pool(AbstractPool):
 
-    __tablename__ = type = "Pool"
+    __tablename__ = type = "pool"
     parent_type = "abstract_pool"
-    id = Column(Integer, ForeignKey("AbstractPool.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("abstract_pool.id"), primary_key=True)
     name = Column(SmallString, unique=True)
     last_modified = Column(SmallString)
     description = Column(SmallString)

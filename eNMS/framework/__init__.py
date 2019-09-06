@@ -25,11 +25,11 @@ def register_extensions(flask_app: Flask) -> None:
 def configure_login_manager() -> None:
     @login_manager.user_loader
     def user_loader(id: int) -> User:
-        return fetch("User", allow_none=True, id=id)
+        return fetch("user", allow_none=True, id=id)
 
     @login_manager.request_loader
     def request_loader(request: Request) -> User:
-        return fetch("User", allow_none=True, name=request.form.get("name"))
+        return fetch("user", allow_none=True, name=request.form.get("name"))
 
 
 def configure_context_processor(flask_app: Flask) -> None:
@@ -65,7 +65,7 @@ def configure_errors(flask_app: Flask) -> None:
 def configure_authentication() -> None:
     @auth.get_password
     def get_password(username: str) -> str:
-        return getattr(fetch("User", name=username), "password", False)
+        return getattr(fetch("user", name=username), "password", False)
 
     @auth.error_handler
     def unauthorized() -> Response:

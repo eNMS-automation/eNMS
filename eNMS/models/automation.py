@@ -193,31 +193,31 @@ class Service(Job):
         number_of_runs = app.job_db[self.id]["runs"]
         return [
             f"Running ({number_of_runs})" if number_of_runs else "Idle",
-            f"""<div class="btn-group">
-            <button type="button" class="btn btn-info"
+            f"""<div class="btn-group" style="width: 100px;">
+            <button type="button" class="btn btn-info btn-sm"
             onclick="showResultsPanel('{self.id}', '{self.name}', 'job')">
             </i>Results</a></button>,
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
               <li><a href="#" onclick="showLogsPanel({self.row_properties})">Logs</a></li>
             </ul>
             </div>""",
-            f"""<div class="btn-group">
-            <button type="button" class="btn btn-success"
+            f"""<div class="btn-group" style="width: 80px;">
+            <button type="button" class="btn btn-success btn-sm"
             onclick="normalRun('{self.id}')">Run</button>,
-            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
               <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}', 'run')">Run with Updates</a></li>
             </ul>
             </div>""",
-            f"""<div class="btn-group">
-            <button type="button" class="btn btn-primary"
+            f"""<div class="btn-group" style="width: 80px;">
+            <button type="button" class="btn btn-primary btn-sm"
             onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>,
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
@@ -225,7 +225,7 @@ class Service(Job):
               <li><a href="#" onclick="exportJob('{self.id}')">Export</a></li>
             </ul>
             </div>""",
-            f"""<button type="button" class="btn btn-danger"
+            f"""<button type="button" class="btn btn-danger btn-sm"
             onclick="showDeletionPanel('service', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]

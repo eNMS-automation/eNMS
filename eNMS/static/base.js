@@ -492,6 +492,7 @@ function initTable(type) {
   const table = $(`#${type}-table`).DataTable({
     serverSide: true,
     orderCellsTop: true,
+    autoWidth: false,
     scrollX: true,
     fnDrawCallback: () => {
       $(".paginate_button > a").on("focus", function() {

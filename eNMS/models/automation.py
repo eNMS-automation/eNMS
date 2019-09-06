@@ -157,7 +157,7 @@ class Service(Job):
     @staticmethod
     def get_device_result(args: tuple) -> None:
         device = fetch("device", id=args[0])
-        run = fetch("Run", runtime=args[1])
+        run = fetch("run", runtime=args[1])
         device_result = run.get_results(args[2], device)
         with args[3]:
             args[4][device.name] = device_result

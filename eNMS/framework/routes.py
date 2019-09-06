@@ -197,7 +197,7 @@ def form(form_type: str) -> str:
 @blueprint.route("/view_job_results/<int:id>")
 @monitor_requests
 def view_job_results(id: int) -> str:
-    result = fetch("Run", id=id).result().result
+    result = fetch("run", id=id).result().result
     return f"<pre>{app.str_dict(result)}</pre>"
 
 

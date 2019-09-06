@@ -253,7 +253,7 @@ class BaseController:
             Session.commit()
 
     def clean_database(self) -> None:
-        for run in fetch("Run", all_matches=True, allow_none=True, status="Running"):
+        for run in fetch("run", all_matches=True, allow_none=True, status="Running"):
             run.status = "Aborted (app reload)"
         Session.commit()
 

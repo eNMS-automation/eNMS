@@ -98,8 +98,8 @@ class GetResult(Resource):
     decorators = [auth.login_required]
 
     def get(self, name: str, runtime: str) -> str:
-        job = fetch("Job", name=name)
-        return fetch("Result", job_id=job.id, runtime=runtime).result
+        job = fetch("job", name=name)
+        return fetch("result", job_id=job.id, runtime=runtime).result
 
 
 class UpdateInstance(Resource):
@@ -131,7 +131,7 @@ class RunJob(Resource):
         try:
             errors, data = [], request.get_json(force=True)
             devices, pools = [], []
-            job = fetch("Job", name=data["name"])
+            job = fetch("job", name=data["name"])
             handle_asynchronously = data.get("async", False)
             for device_name in data.get("devices", ""):
                 device = fetch("device", name=device_name)

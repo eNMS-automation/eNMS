@@ -528,7 +528,7 @@ class Run(AbstractBase):
         return self.payload_helper(payload, name, device=device, **kwargs)
 
     def get_result(self, job: str, device: Optional[str] = None) -> Optional[dict]:
-        job_id = fetch("Job", name=job).id
+        job_id = fetch("job", name=job).id
 
         def recursive_search(run: "Run") -> Optional[dict]:
             if not run:

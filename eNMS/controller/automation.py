@@ -63,7 +63,7 @@ class AutomationController(BaseController):
         return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
     def clear_results(self, job_id: int) -> None:
-        for result in fetch("Run", all_matches=True, allow_none=True, job_id=job_id):
+        for result in fetch("run", all_matches=True, allow_none=True, job_id=job_id):
             Session.delete(result)
 
     def create_label(self, workflow_id: int, x: int, y: int, **kwargs: Any) -> dict:
@@ -79,7 +79,7 @@ class AutomationController(BaseController):
         return now
 
     def delete_node(self, workflow_id: int, job_id: int) -> dict:
-        workflow, job = fetch("workflow", id=workflow_id), fetch("Job", id=job_id)
+        workflow, job = fetch("workflow", id=workflow_id), fetch("job", id=job_id)
         workflow.jobs.remove(job)
         now = self.get_time()
         workflow.last_modified = now
@@ -120,7 +120,7 @@ class AutomationController(BaseController):
         return new_workflow.serialized
 
     def get_job_logs(self, **kwargs: Any) -> dict:
-        run = fetch("Run", allow_none=True, runtime=kwargs["runtime"])
+        run = fetch("run", allow_none=True, runtime=kwargs["runtime"])
         result = run.result() if run else None
         logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])
         filtered_logs = (log for log in logs if kwargs["filter"] in log)
@@ -128,21 +128,21 @@ class AutomationController(BaseController):
 
     def get_runtimes(self, type: str, id: int) -> list:
         if type == "device":
-            results = fetch("Result", allow_none=True, all_matches=True, device_id=id)
+            results = fetch("result", allow_none=True, all_matches=True, device_id=id)
             runs = [result.run for result in results]
         else:
-            runs = fetch("Run", allow_none=True, all_matches=True, job_id=id)
+            runs = fetch("run", allow_none=True, all_matches=True, job_id=id)
         return sorted(set((run.runtime, run.name) for run in runs))
 
     def get_result(self, id: int) -> Optional[dict]:
-        return fetch("Result", id=id).result
+        return fetch("result", id=id).result
 
     def get_run_results(self, id: int, device: Any, **kw: Any) -> Optional[dict]:
-        run = fetch("Run", allow_none=True, id=id)
+        run = fetch("run", allow_none=True, id=id)
         return self.get_service_results(run.job.id, run.runtime, device, None, None)
 
     def get_device_results(self, id: int, runtime: str, **_: Any) -> Optional[dict]:
-        run = fetch("Run", allow_none=True, runtime=runtime)
+        run = fetch("run", allow_none=True, runtime=runtime)
         return next(r.result for r in run.results if r.device_id == int(id))
 
     def get_workflow_results(
@@ -155,7 +155,7 @@ class AutomationController(BaseController):
             request["success"] = job == "all passed"
         return {
             run.job_name: next((r.result for r in run.results if not r.device_id), None)
-            for run in fetch("Run", allow_none=True, **request)
+            for run in fetch("run", allow_none=True, **request)
             if run.job_id != int(id)
         }
 
@@ -166,7 +166,7 @@ class AutomationController(BaseController):
         request = {runtime_key: runtime, "job_id": id}
         if workflow_device:
             request["workflow_device_id"] = workflow_device
-        run = fetch("Run", allow_none=True, **request)
+        run = fetch("run", allow_none=True, **request)
         if not run:
             return None
         if "all" not in device:
@@ -200,7 +200,7 @@ class AutomationController(BaseController):
             if kwargs.get(key)
         }
         restart_run = fetch(
-            "Run", allow_none=True, job_id=job, runtime=kwargs.get("restart_runtime")
+            "run", allow_none=True, job_id=job, runtime=kwargs.get("restart_runtime")
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
@@ -212,7 +212,7 @@ class AutomationController(BaseController):
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "admin")
-        job = fetch("Job", id=id)
+        job = fetch("job", id=id)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(
@@ -240,7 +240,7 @@ class AutomationController(BaseController):
                     "content": workflow.labels[id]["content"],
                 }
             else:
-                job = fetch("Job", id=id)
+                job = fetch("job", id=id)
                 old_position = job.positions.get(workflow.name)
                 job.positions[workflow.name] = new_position
             if new_position != old_position:
@@ -253,7 +253,7 @@ class AutomationController(BaseController):
         workflow = fetch("workflow", id=workflow_id)
         runtimes = [
             (r.runtime, r.creator)
-            for r in fetch("Run", allow_none=True, all_matches=True, job_id=workflow_id)
+            for r in fetch("run", allow_none=True, all_matches=True, job_id=workflow_id)
         ]
         state = None
         if runtimes and runtime not in ("normal", None):
@@ -261,7 +261,7 @@ class AutomationController(BaseController):
                 runtime = runtimes[-1][0]
             state = self.run_db.get(runtime)
             if not state:
-                results = fetch("Run", runtime=runtime).results
+                results = fetch("run", runtime=runtime).results
                 global_result = [r for r in results if not r.device_id]
                 state = global_result[0].result.get("state") if global_result else None
         return {

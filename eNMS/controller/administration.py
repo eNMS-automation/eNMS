@@ -128,12 +128,12 @@ class AdministrationController(BaseController):
                         Session.commit()
         for name, jobs in workflow_jobs.items():
             fetch("workflow", name=name).jobs = [
-                fetch("Job", name=name) for name in jobs
+                fetch("job", name=name) for name in jobs
             ]
             Session.commit()
         for edge in workflow_edges:
             for property in ("source", "destination", "workflow"):
-                edge[property] = fetch("Job", name=edge[property]).id
+                edge[property] = fetch("job", name=edge[property]).id
             factory("workflow_edge", **edge)
             Session.commit()
         return status
@@ -166,7 +166,7 @@ class AdministrationController(BaseController):
             rmtree(path / "workflows" / workflow_name)
 
     def export_job(self, job_id: str) -> None:
-        job = fetch("Job", id=job_id)
+        job = fetch("job", id=job_id)
         if job.type == "workflow":
             path = self.path / "projects" / "exported_jobs" / "workflows" / job.filename
             path.mkdir(parents=True, exist_ok=True)

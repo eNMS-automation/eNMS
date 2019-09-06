@@ -43,7 +43,7 @@ def configure_cli(flask_app: Flask) -> None:
         devices_list = [fetch("device", name=name).id for name in devices_list]
         payload_dict = loads(payload) if payload else {}
         payload_dict["devices"] = devices_list
-        job = fetch("Job", name=name)
+        job = fetch("job", name=name)
         results = app.run(job.id, **payload_dict)
         Session.commit()
         echo(app.str_dict(results))

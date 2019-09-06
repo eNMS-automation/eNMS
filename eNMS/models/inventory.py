@@ -161,8 +161,8 @@ class Link(Object):
     parent_type = "object"
     id = Column(Integer, ForeignKey("Object.id"), primary_key=True)
     color = Column(SmallString, default="#000000")
-    source_id = Column(Integer, ForeignKey("Device.id"))
-    destination_id = Column(Integer, ForeignKey("Device.id"))
+    source_id = Column(Integer, ForeignKey("device.id"))
+    destination_id = Column(Integer, ForeignKey("device.id"))
     source = relationship(
         Device,
         primaryjoin=source_id == Device.id,

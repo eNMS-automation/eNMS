@@ -10,7 +10,7 @@ from eNMS.database.base import AbstractBase
 
 class Server(AbstractBase):
 
-    __tablename__ = type = "Server"
+    __tablename__ = type = "server"
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, unique=True)
     description = Column(SmallString)
@@ -34,7 +34,7 @@ class Server(AbstractBase):
 
 class Parameters(AbstractBase):
 
-    __tablename__ = type = "Parameters"
+    __tablename__ = type = "parameters"
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, default="default", unique=True)
     cluster_scan_subnet = Column(SmallString)
@@ -73,7 +73,7 @@ class Parameters(AbstractBase):
 
 class User(AbstractBase, UserMixin):
 
-    __tablename__ = type = "User"
+    __tablename__ = type = "user"
     id = Column(Integer, primary_key=True)
     email = Column(SmallString)
     name = Column(SmallString)

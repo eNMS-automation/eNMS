@@ -20,7 +20,7 @@ from eNMS.database.base import AbstractBase
 
 class Task(AbstractBase):
 
-    __tablename__ = type = "Task"
+    __tablename__ = type = "task"
     id = Column(Integer, primary_key=True)
     aps_job_id = Column(SmallString)
     name = Column(SmallString, unique=True)
@@ -39,7 +39,7 @@ class Task(AbstractBase):
         "Device", secondary=task_device_table, back_populates="tasks"
     )
     pools = relationship("Pool", secondary=task_pool_table, back_populates="tasks")
-    job_id = Column(Integer, ForeignKey("Job.id"))
+    job_id = Column(Integer, ForeignKey("job.id"))
     job = relationship("Job", back_populates="tasks")
     job_name = association_proxy("job", "name")
 
@@ -181,9 +181,9 @@ class Task(AbstractBase):
 
 class Baselog(AbstractBase):
 
-    __tablename__ = "Baselog"
+    __tablename__ = "baselog"
     type = Column(SmallString)
-    __mapper_args__ = {"polymorphic_identity": "Baselog", "polymorphic_on": type}
+    __mapper_args__ = {"polymorphic_identity": "baselog", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     time = Column(SmallString)
     content = Column(LargeString, default="")
@@ -198,8 +198,8 @@ class Baselog(AbstractBase):
 
 class Syslog(Baselog):
 
-    __tablename__ = "Syslog"
-    __mapper_args__ = {"polymorphic_identity": "Syslog"}
+    __tablename__ = "syslog"
+    __mapper_args__ = {"polymorphic_identity": "syslog"}
     parent_type = "baselog"
     id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
     source = Column(LargeString, default="")
@@ -207,8 +207,8 @@ class Syslog(Baselog):
 
 class Changelog(Baselog):
 
-    __tablename__ = "Changelog"
-    __mapper_args__ = {"polymorphic_identity": "Changelog"}
+    __tablename__ = "changelog"
+    __mapper_args__ = {"polymorphic_identity": "changelog"}
     parent_type = "baselog"
     id = Column(Integer, ForeignKey("Baselog.id"), primary_key=True)
     severity = Column(SmallString, default="N/A")
@@ -217,7 +217,7 @@ class Changelog(Baselog):
 
 class Event(AbstractBase):
 
-    __tablename__ = type = "Event"
+    __tablename__ = type = "event"
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, unique=True)
     log_source = Column(SmallString)

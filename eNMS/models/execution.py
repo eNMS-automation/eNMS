@@ -29,21 +29,21 @@ from eNMS.models.administration import User  # noqa: F401
 
 class Result(AbstractBase):
 
-    __tablename__ = type = "Result"
+    __tablename__ = type = "result"
     private = True
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
     runtime = Column(SmallString)
     endtime = Column(SmallString)
     result = Column(MutableDict)
-    run_id = Column(Integer, ForeignKey("Run.id"))
-    run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
-    device_id = Column(Integer, ForeignKey("Device.id"))
+    run_id = Column(Integer, ForeignKey("run.id"))
+    run = relationship("Run", back_populates="results", foreign_keys="result.run_id")
+    device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
-        "Device", back_populates="results", foreign_keys="Result.device_id"
+        "Device", back_populates="results", foreign_keys="result.device_id"
     )
     device_name = association_proxy("device", "name")
-    job_id = Column(Integer, ForeignKey("Job.id"))
+    job_id = Column(Integer, ForeignKey("job.id"))
     job = relationship("Job", foreign_keys="Result.job_id")
     job_name = association_proxy("job", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
@@ -68,10 +68,10 @@ class Result(AbstractBase):
 
 class Run(AbstractBase):
 
-    __tablename__ = type = "Run"
+    __tablename__ = type = "run"
     private = True
     id = Column(Integer, primary_key=True)
-    restart_run_id = Column(Integer, ForeignKey("Run.id"))
+    restart_run_id = Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", remote_side=[id])
     creator = Column(SmallString, default="admin")
     properties = Column(MutableDict)
@@ -79,10 +79,10 @@ class Run(AbstractBase):
     status = Column(SmallString, default="Running")
     runtime = Column(SmallString)
     endtime = Column(SmallString)
-    workflow_device_id = Column(Integer, ForeignKey("Device.id"))
+    workflow_device_id = Column(Integer, ForeignKey("device.id"))
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(SmallString)
-    job_id = Column(Integer, ForeignKey("Job.id"))
+    job_id = Column(Integer, ForeignKey("job.id"))
     job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
     job_name = association_proxy("job", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))

@@ -150,7 +150,7 @@ class Service(Job):
     __tablename__ = "Service"
     __mapper_args__ = {"polymorphic_identity": "service"}
     parent_type = "job"
-    id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("job.id"), primary_key=True)
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
 
@@ -243,7 +243,7 @@ class Workflow(Job):
     __mapper_args__ = {"polymorphic_identity": "workflow"}
     parent_type = "job"
     has_targets = Column(Boolean, default=True)
-    id = Column(Integer, ForeignKey("Job.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("job.id"), primary_key=True)
     labels = Column(MutableDict)
     use_workflow_devices = Column(Boolean, default=True)
     traversal_mode = Column(SmallString, default="service")
@@ -456,14 +456,14 @@ class WorkflowEdge(AbstractBase):
     name = Column(SmallString)
     label = Column(SmallString)
     subtype = Column(SmallString)
-    source_id = Column(Integer, ForeignKey("Job.id"))
+    source_id = Column(Integer, ForeignKey("job.id"))
     source = relationship(
         "Job",
         primaryjoin="Job.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.source_id",
     )
-    destination_id = Column(Integer, ForeignKey("Job.id"))
+    destination_id = Column(Integer, ForeignKey("job.id"))
     destination = relationship(
         "Job",
         primaryjoin="Job.id == WorkflowEdge.destination_id",

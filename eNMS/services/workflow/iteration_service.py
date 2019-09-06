@@ -18,7 +18,7 @@ class IterationService(Service):
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
-    iterated_job_id = Column(Integer, ForeignKey("Job.id"))
+    iterated_job_id = Column(Integer, ForeignKey("job.id"))
     iterated_job = relationship(
         "Job", primaryjoin="Job.id == IterationService.iterated_job_id"
     )

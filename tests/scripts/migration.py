@@ -3,14 +3,14 @@ from ruamel import yaml
 
 
 import_classes = [
-    "User",
-    "Device",
-    "Link",
-    "Pool",
-    "Service",
+    "user",
+    "device",
+    "link",
+    "pool",
+    "service",
     "workflow",
-    "WorkflowEdge",
-    "Task",
+    "workflow_edge",
+    "task",
 ]
 
 

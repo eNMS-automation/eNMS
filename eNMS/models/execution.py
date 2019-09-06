@@ -240,7 +240,7 @@ class Run(AbstractBase):
                 values = [values]
             for value in values:
                 device = fetch(
-                    "Device", allow_none=True, **{self.job.query_property_type: value}
+                    "device", allow_none=True, **{self.job.query_property_type: value}
                 )
                 if device:
                     devices.append(device)

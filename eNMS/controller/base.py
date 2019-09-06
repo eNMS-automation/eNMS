@@ -496,7 +496,7 @@ class BaseController:
         }
 
     def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
-        model = models.get(table, models["Device"])
+        model = models.get(table, models["device"])
         properties = table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
         try:
@@ -520,7 +520,7 @@ class BaseController:
                 regex_operator = "regexp" if DIALECT == "mysql" else "~"
                 constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
-        relation = table.capitalize() if table != "configuration" else "Device"
+        relation = table.capitalize() if table != "configuration" else "device"
         for related_model, relation_properties in relationships[relation].items():
             relation_ids = [
                 int(id) for id in kwargs.getlist(f"form[{related_model}][]")

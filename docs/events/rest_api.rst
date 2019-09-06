@@ -164,7 +164,7 @@ Example of body:
 
  {
   "name": "test_project",
-  "import_export_types": ["User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
+  "import_export_types": ["User", "device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
   "empty_database_before_import": true
  }
 
@@ -181,7 +181,7 @@ You can also trigger the import/export programmatically. Here's an example with 
      data=dumps({
          "name": "Backup",
          "empty_database_before_import": False,
-         "import_export_types": ["User", "Device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
+         "import_export_types": ["User", "device", "Link", "Pool", "Service", "WorkflowEdge", "Workflow", "Task"],
      }),
      headers={'content-type': 'application/json'},
      auth=HTTPBasicAuth('admin', 'admin')

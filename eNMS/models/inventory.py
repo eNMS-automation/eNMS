@@ -202,7 +202,7 @@ class Link(Object):
         if "source_name" in kwargs:
             kwargs["source"] = fetch("device", name=kwargs.pop("source_name")).id
             kwargs["destination"] = fetch(
-                "Device", name=kwargs.pop("destination_name")
+                "device", name=kwargs.pop("destination_name")
             ).id
         kwargs.update(
             {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}

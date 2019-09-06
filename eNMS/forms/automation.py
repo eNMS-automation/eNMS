@@ -24,7 +24,7 @@ class JobForm(BaseForm):
     query_property_type = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
-    devices = MultipleInstanceField("Devices", instance_type="Device")
+    devices = MultipleInstanceField("Devices", instance_type="device")
     pools = MultipleInstanceField("Pools", instance_type="Pool")
     workflows = MultipleInstanceField("Workflows", instance_type="workflow")
     waiting_time = IntegerField("Waiting time (in seconds)", default=0)
@@ -161,16 +161,16 @@ class DisplayResultForm(BaseForm):
 
 class ServiceResultsForm(ResultsForm):
     form_type = HiddenField(default="service_results")
-    device = NoValidationSelectField("Device", choices=())
-    device_compare = NoValidationSelectField("Device", choices=())
+    device = NoValidationSelectField("device", choices=())
+    device_compare = NoValidationSelectField("device", choices=())
 
 
 class WorkflowResultsForm(ResultsForm):
     form_type = HiddenField(default="workflow_results")
-    workflow_device = NoValidationSelectField("Device", choices=())
-    workflow_device_compare = NoValidationSelectField("Device", choices=())
-    device = NoValidationSelectField("Device", choices=())
-    device_compare = NoValidationSelectField("Device", choices=())
+    workflow_device = NoValidationSelectField("device", choices=())
+    workflow_device_compare = NoValidationSelectField("device", choices=())
+    device = NoValidationSelectField("device", choices=())
+    device_compare = NoValidationSelectField("device", choices=())
     job = NoValidationSelectField("Job", choices=())
     job_compare = NoValidationSelectField("Job", choices=())
 
@@ -181,8 +181,8 @@ class DeviceResultsForm(ResultsForm):
 
 class RunResultsForm(ResultsForm):
     form_type = HiddenField(default="run_results")
-    device = NoValidationSelectField("Device", choices=())
-    device_compare = NoValidationSelectField("Device", choices=())
+    device = NoValidationSelectField("device", choices=())
+    device_compare = NoValidationSelectField("device", choices=())
 
 
 class AddJobsForm(BaseForm):

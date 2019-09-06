@@ -125,7 +125,7 @@ class PoolForm(BaseForm):
 class PoolObjectsForm(BaseForm):
     template = "pool_objects"
     form_type = HiddenField(default="pool_objects")
-    devices = MultipleInstanceField("Devices", instance_type="Device")
+    devices = MultipleInstanceField("Devices", instance_type="device")
     links = MultipleInstanceField("Links", instance_type="Link")
     string_devices = StringField(widget=TextArea(), render_kw={"rows": 5})
     string_links = StringField(widget=TextArea(), render_kw={"rows": 5})

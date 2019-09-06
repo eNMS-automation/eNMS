@@ -124,9 +124,9 @@ class AbstractBase(Base):
 
     @classmethod
     def visible(cls) -> List:
-        if cls.__tablename__ == "Pool" and user.pools:
+        if cls.__tablename__ == "pool" and user.pools:
             return user.pools
-        elif cls.__tablename__ in ("Device", "Link") and user.pools:
+        elif cls.__tablename__ in ("device", "link") and user.pools:
             objects: set = set()
             for pool in user.pools:
                 objects |= set(getattr(pool, f"{cls.class_type}s"))

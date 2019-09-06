@@ -48,17 +48,17 @@ def define_link(source: int, destination: int) -> ImmutableMultiDict:
 
 @check_pages("table/device", "table/link", "view/network")
 def test_manual_object_creation(user_client: FlaskClient) -> None:
-    delete_all("Device", "Link")
+    delete_all("device", "Link")
     for icon in device_icons:
         for description in ("desc1", "desc2"):
             obj_dict = define_device(icon, description)
             user_client.post("/update/device", data=obj_dict)
-    devices = fetch_all("Device")
+    devices = fetch_all("device")
     for source in devices[:3]:
         for destination in devices[:3]:
             obj_dict = define_link(source.id, destination.id)
             user_client.post("/update/link", data=obj_dict)
-    assert len(fetch_all("Device")) == 16
+    assert len(fetch_all("device")) == 16
     assert len(fetch_all("Link")) == 9
 
 
@@ -71,14 +71,14 @@ def create_from_file(client: FlaskClient, file: str) -> None:
 @check_pages("table/device", "table/link", "view/network")
 def test_object_creation_europe(user_client: FlaskClient) -> None:
     create_from_file(user_client, "europe.xls")
-    assert len(fetch_all("Device")) == 33
+    assert len(fetch_all("device")) == 33
     assert len(fetch_all("Link")) == 49
 
 
 @check_pages("table/device", "table/link", "view/network")
 def test_object_creation_type(user_client: FlaskClient) -> None:
     create_from_file(user_client, "device_counters.xls")
-    assert len(fetch_all("Device")) == 27
+    assert len(fetch_all("device")) == 27
     assert len(fetch_all("Link")) == 0
 
 
@@ -90,9 +90,9 @@ links: List[str] = ["link" + str(i) for i in range(4, 15)]
 def test_device_deletion(user_client: FlaskClient) -> None:
     create_from_file(user_client, "europe.xls")
     for device_name in routers:
-        device = fetch("Device", name=device_name)
+        device = fetch("device", name=device_name)
         user_client.post(f"/delete_instance/device/{device.id}")
-    assert len(fetch_all("Device")) == 18
+    assert len(fetch_all("device")) == 18
     assert len(fetch_all("Link")) == 18
 
 
@@ -102,7 +102,7 @@ def test_link_deletion(user_client: FlaskClient) -> None:
     for link_name in links:
         link = fetch("Link", name=link_name)
         user_client.post(f"/delete_instance/link/{link.id}")
-    assert len(fetch_all("Device")) == 33
+    assert len(fetch_all("device")) == 33
     assert len(fetch_all("Link")) == 38
 
 

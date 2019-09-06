@@ -311,7 +311,7 @@ mechanisms can work together to manage your data:
 When creating a new instance of eNMS (backup instance, new version of eNMS):
   - Install eNMS; note that eNMS has an empty database when installed the first time
   - Run the :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API. Select 'Empty_database_before_import' = True, specify
-    the location of the file to import, and select all object types to be imported: "User", "Device", "Link", "Pool", "Service", "Workflow", "WorkflowEdge", "Task"
+    the location of the file to import, and select all object types to be imported: "User", "device", "Link", "Pool", "Service", "Workflow", "WorkflowEdge", "Task"
   - Next, run the :guilabel:`Inventory/Import & Export/Import and Export Topology` and specify the Excel Spreadsheet to overlay
     new Device and topology data. Make sure not to select 'replace on import' to prevent overwriting the device data from the migration import.
 

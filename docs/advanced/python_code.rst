@@ -12,7 +12,7 @@ There are a number of places in the GUI where the user is allowed to use pure py
 
 You have access to the following variables:
 
-- ``device``: current device, if the ``Has Device Targets`` is ticked ("Device" object).
+- ``device``: current device, if the ``Has Device Targets`` is ticked ("device" object).
 - ``payload``: current state of the workflow payload (dictionary).
 - ``config``: eNMS global configuration (available in the administration panel, section "Parameters", button "General").
 - ``workflow``: parent workflow, if the service is running within a workflow.

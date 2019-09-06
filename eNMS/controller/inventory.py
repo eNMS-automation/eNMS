@@ -192,7 +192,7 @@ class InventoryController(BaseController):
     def topology_import(self, file: BinaryIO) -> str:
         book = open_workbook(file_contents=file.read())
         result = "Topology successfully imported."
-        for obj_type in ("Device", "Link"):
+        for obj_type in ("device", "link"):
             try:
                 sheet = book.sheet_by_name(obj_type)
             except XLRDError:
@@ -216,7 +216,7 @@ class InventoryController(BaseController):
     def import_topology(self, **kwargs: Any) -> str:
         file = kwargs["file"]
         if kwargs["replace"]:
-            delete_all("Device")
+            delete_all("device")
             Session.commit()
         if self.allowed_file(secure_filename(file.filename), {"xls", "xlsx"}):
             result = self.topology_import(file)

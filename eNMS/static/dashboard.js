@@ -5,12 +5,12 @@ echarts: false
 */
 
 const defaultProperties = {
-  Device: "model",
-  Link: "model",
-  User: "name",
-  Service: "vendor",
-  Workflow: "vendor",
-  Task: "status",
+  device: "model",
+  link: "model",
+  user: "name",
+  service: "vendor",
+  workflow: "vendor",
+  task: "status",
 };
 
 const theme = {
@@ -304,6 +304,7 @@ function drawDiagrams(objects, type) {
 
 $(function() {
   call(`/count_models`, function(result) {
+    console.log(result)
     for (const type of Object.keys(defaultProperties)) {
       $(`#count-${type}`).text(result.counters[type]);
     }

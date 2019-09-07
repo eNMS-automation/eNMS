@@ -34,7 +34,7 @@ from eNMS.models.inventory import Device
 
 class RestCallService(Service):
 
-    __tablename__ = "RestCallService"
+    __tablename__ = "rest_call_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
@@ -63,7 +63,7 @@ class RestCallService(Service):
         "PATCH": rest_patch,
     }
 
-    __mapper_args__ = {"polymorphic_identity": "RestCallService"}
+    __mapper_args__ = {"polymorphic_identity": "rest_call_service"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         rest_url = run.sub(run.rest_url, locals())
@@ -114,7 +114,7 @@ class RestCallService(Service):
 
 
 class RestCallForm(ServiceForm, ValidationForm):
-    form_type = HiddenField(default="RestCallService")
+    form_type = HiddenField(default="rest_call_service")
     has_targets = BooleanField("Has Target Devices", default=True)
     call_type = SelectField(
         choices=(

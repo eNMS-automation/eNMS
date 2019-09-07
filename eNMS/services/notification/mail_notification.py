@@ -14,7 +14,7 @@ from eNMS.models.inventory import Device
 
 class MailNotificationService(Service):
 
-    __tablename__ = "MailNotificationService"
+    __tablename__ = "mail_notification_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
@@ -23,7 +23,7 @@ class MailNotificationService(Service):
     recipients = Column(SmallString)
     body = Column(LargeString, default="")
 
-    __mapper_args__ = {"polymorphic_identity": "MailNotificationService"}
+    __mapper_args__ = {"polymorphic_identity": "mail_notification_service"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         app.send_email(
@@ -36,7 +36,7 @@ class MailNotificationService(Service):
 
 
 class MailNotificationForm(ServiceForm):
-    form_type = HiddenField(default="MailNotificationService")
+    form_type = HiddenField(default="mail_notification_service")
     title = SubstitutionField()
     sender = StringField()
     recipients = StringField()

@@ -20,12 +20,12 @@ from eNMS.models.inventory import Device
 
 class SwissArmyKnifeService(Service):
 
-    __tablename__ = "SwissArmyKnifeService"
+    __tablename__ = "swiss_army_knife_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
 
-    __mapper_args__ = {"polymorphic_identity": "SwissArmyKnifeService"}
+    __mapper_args__ = {"polymorphic_identity": "swiss_army_knife_service"}
 
     def job(self, *args, **kwargs):
         return getattr(self, self.name)(*args, **kwargs)
@@ -112,5 +112,5 @@ class SwissArmyKnifeService(Service):
 
 
 class SwissArmyKnifeForm(ServiceForm):
-    form_type = HiddenField(default="SwissArmyKnifeService")
+    form_type = HiddenField(default="swiss_army_knife_service")
     has_targets = BooleanField("Has Target Devices", default=True)

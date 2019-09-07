@@ -51,7 +51,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: pink
@@ -110,7 +110,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -147,7 +147,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -184,7 +184,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -221,7 +221,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -258,7 +258,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -296,7 +296,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -334,7 +334,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - a_dict: {}
@@ -922,7 +922,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 15
-  type: RestCallService
+  type: rest_call_service
   username: admin
   validation_method: text
   vendor: ''
@@ -1147,7 +1147,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: SwissArmyKnifeService
+  type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -3129,7 +3129,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 15
-  type: RestCallService
+  type: rest_call_service
   username: ''
   validation_method: text
   vendor: ''

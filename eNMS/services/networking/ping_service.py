@@ -13,7 +13,7 @@ from eNMS.models.inventory import Device
 
 class PingService(Service):
 
-    __tablename__ = "PingService"
+    __tablename__ = "ping_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -24,7 +24,7 @@ class PingService(Service):
     ttl = Column(Integer, default=60)
     packet_size = Column(Integer, default=56)
 
-    __mapper_args__ = {"polymorphic_identity": "PingService"}
+    __mapper_args__ = {"polymorphic_identity": "ping_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         if run.protocol == "ICMP":
@@ -74,8 +74,8 @@ class PingService(Service):
             return {"success": all(result.values()), "result": result}
 
 
-class PingServiceForm(ServiceForm):
-    form_type = HiddenField(default="PingService")
+class PingForm(ServiceForm):
+    form_type = HiddenField(default="ping_service")
     protocol = SelectField(choices=(("ICMP", "ICMP Ping"), ("TCP", "TCP Ping")))
     ports = StringField()
     count = IntegerField(default=5)

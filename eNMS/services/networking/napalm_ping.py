@@ -12,7 +12,7 @@ from eNMS.models.inventory import Device
 
 class NapalmPingService(Service):
 
-    __tablename__ = "NapalmPingService"
+    __tablename__ = "napalm_ping_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -27,7 +27,7 @@ class NapalmPingService(Service):
     ttl = Column(Integer, default=0)
     vrf = Column(SmallString)
 
-    __mapper_args__ = {"polymorphic_identity": "NapalmPingService"}
+    __mapper_args__ = {"polymorphic_identity": "napalm_ping_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection = run.napalm_connection(device)
@@ -51,7 +51,7 @@ class NapalmPingService(Service):
 
 
 class NapalmPingForm(ServiceForm, NapalmForm):
-    form_type = HiddenField(default="NapalmPingService")
+    form_type = HiddenField(default="napalm_ping_service")
     count = IntegerField(default=5)
     packet_size = IntegerField(default=100)
     destination_ip = SubstitutionField()

@@ -232,12 +232,12 @@ Let's take a look at how the ``Swiss Army Knife Service`` is implemented:
 
  class SwissArmyKnifeService(Service):
 
-     __tablename__ = "SwissArmyKnifeService"
+     __tablename__ = "swiss_army_knife_service"
 
      id = Column(Integer, ForeignKey("service.id"), primary_key=True)
      has_targets = Column(Boolean, default=False)
 
-     __mapper_args__ = {"polymorphic_identity": "SwissArmyKnifeService"}
+     __mapper_args__ = {"polymorphic_identity": "swiss_army_knife_service"}
 
      def job(self, *args):
          return getattr(self, self.name)(*args)

@@ -12,7 +12,7 @@ from eNMS.models.inventory import Device
 
 class NapalmTracerouteService(Service):
 
-    __tablename__ = "NapalmTracerouteService"
+    __tablename__ = "napalm_traceroute_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -25,7 +25,7 @@ class NapalmTracerouteService(Service):
     ttl = Column(Integer, default=0)
     vrf = Column(SmallString)
 
-    __mapper_args__ = {"polymorphic_identity": "NapalmTracerouteService"}
+    __mapper_args__ = {"polymorphic_identity": "napalm_traceroute_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection = run.napalm_connection(device)
@@ -47,7 +47,7 @@ class NapalmTracerouteService(Service):
 
 
 class NapalmTracerouteForm(ServiceForm, NapalmForm):
-    form_type = HiddenField(default="NapalmTracerouteService")
+    form_type = HiddenField(default="napalm_traceroute_service")
     destination_ip = SubstitutionField()
     source_ip = SubstitutionField()
     timeout = IntegerField(default=2)

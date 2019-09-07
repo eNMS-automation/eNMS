@@ -550,7 +550,7 @@ class BaseController:
             constraints.append(constraint)
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         try:
-            a = {
+            return {
                 "draw": int(kwargs["draw"]),
                 "recordsTotal": Session.query(func.count(model.id)).scalar(),
                 "recordsFiltered": get_query_count(result),
@@ -562,7 +562,6 @@ class BaseController:
                     .all()
                 ],
             }
-            return a
         except InterfaceError:
             return {"error": "Filtering error: wrong input"}
 

@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Union
 
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
-from eNMS.database.functions import fetch, fetch_all
+from eNMS.database.functions import fetch, fetch_all, get_relationship_count
 from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
@@ -307,7 +307,10 @@ class Pool(AbstractPool):
 
     @property
     def object_number(self) -> str:
-        return f"{len(self.devices)} devices - {len(self.links)} links"
+        return (
+            f"{get_relationship_count(self, 'devices')} devices"
+            f" - {get_relationship_count(self, 'links')} links"
+        )
 
     def property_match(self, obj: Union[Device, Link], property: str) -> bool:
         pool_value = getattr(self, f"{obj.class_type}_{property}")

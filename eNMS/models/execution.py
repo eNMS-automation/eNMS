@@ -334,9 +334,10 @@ class Run(AbstractBase):
         result_kw = {
             "run": self,
             "result": results,
-            "workflow": self.workflow_id,
             "job": self.job_id,
         }
+        if self.workflow_id:
+            result_kw["workflow"] = self.workflow_id
         if device:
             result_kw["device"] = device.id
         factory("result", **result_kw)

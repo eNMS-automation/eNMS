@@ -11,7 +11,7 @@ from eNMS.models.inventory import Device
 
 class NapalmGettersService(Service):
 
-    __tablename__ = "NapalmGettersService"
+    __tablename__ = "napalm_getters_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -23,7 +23,7 @@ class NapalmGettersService(Service):
     negative_logic = Column(Boolean, default=False)
     optional_args = Column(MutableDict)
 
-    __mapper_args__ = {"polymorphic_identity": "NapalmGettersService"}
+    __mapper_args__ = {"polymorphic_identity": "napalm_getters_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection, result = run.napalm_connection(device), {}
@@ -50,7 +50,7 @@ class NapalmGettersService(Service):
 
 
 class NapalmGettersForm(ServiceForm, NapalmForm, DictValidationForm):
-    form_type = HiddenField(default="NapalmGettersService")
+    form_type = HiddenField(default="napalm_getters_service")
     getters = SelectMultipleField(
         choices=(
             ("get_arp_table", "ARP table"),

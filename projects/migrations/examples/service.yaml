@@ -712,7 +712,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -822,7 +822,7 @@
   success_query: ''
   time_between_retries: 1
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -970,7 +970,7 @@
   start_new_connection: false
   success_query: results["result"]["get_facts"]["vendor"] == device.vendor
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
   vendor: ''
@@ -1016,7 +1016,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
   vendor: ''
@@ -1061,7 +1061,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
   vendor: ''
@@ -1106,7 +1106,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
   vendor: ''
@@ -1248,7 +1248,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -1304,7 +1304,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -1360,7 +1360,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -1610,7 +1610,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -1667,7 +1667,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -1723,7 +1723,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -1781,7 +1781,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoPromptsService
+  type: netmiko_prompts_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -1839,7 +1839,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoPromptsService
+  type: netmiko_prompts_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -1980,7 +1980,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 1
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -2036,7 +2036,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -2092,7 +2092,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -2137,7 +2137,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_equal
   vendor: ''
@@ -2181,7 +2181,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
   vendor: ''
@@ -2227,7 +2227,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
   vendor: ''
@@ -2271,7 +2271,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_equal
   vendor: ''
@@ -2315,7 +2315,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: NapalmGettersService
+  type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_equal
   vendor: ''
@@ -2521,7 +2521,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: ''
@@ -2577,7 +2577,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -2633,7 +2633,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -2689,7 +2689,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -2745,7 +2745,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 3
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: Arista
@@ -3229,7 +3229,7 @@
   success_query: ''
   time_between_retries: 10
   timeout: 10
-  type: NetmikoValidationService
+  type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
   vendor: ''

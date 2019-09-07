@@ -12,7 +12,7 @@ from eNMS.models.inventory import Device
 
 class NetmikoPromptsService(Service):
 
-    __tablename__ = "NetmikoPromptsService"
+    __tablename__ = "netmiko_prompts_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -38,7 +38,7 @@ class NetmikoPromptsService(Service):
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {"polymorphic_identity": "NetmikoPromptsService"}
+    __mapper_args__ = {"polymorphic_identity": "netmiko_prompts_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
@@ -96,7 +96,7 @@ class NetmikoPromptsService(Service):
 
 
 class NetmikoPromptsForm(ServiceForm, NetmikoForm, ValidationForm):
-    form_type = HiddenField(default="NetmikoPromptsService")
+    form_type = HiddenField(default="netmiko_prompts_service")
     command = SubstitutionField()
     confirmation1 = SubstitutionField()
     response1 = SubstitutionField()

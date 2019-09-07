@@ -55,7 +55,7 @@ file_transfer_service = ImmutableMultiDict(
 
 getters_dict = ImmutableMultiDict(
     [
-        ("form_type", "NapalmGettersService"),
+        ("form_type", "napalm_getters_service"),
         ("name", "napalm_getters_service"),
         ("query_property_type", "ip_address"),
         ("credentials", "user"),
@@ -100,9 +100,9 @@ def test_base_services(user_client: FlaskClient) -> None:
     assert len(fetch_all("netmiko_configuration_service")) == 3
     user_client.post("/update/NetmikoFileTransferService", data=file_transfer_service)
     assert len(fetch_all("NetmikoFileTransferService")) == 1
-    number_of_napalm_services = len(fetch_all("NapalmGettersService"))
-    user_client.post("/update/NapalmGettersService", data=getters_dict)
-    assert len(fetch_all("NapalmGettersService")) == number_of_napalm_services + 1
+    number_of_napalm_services = len(fetch_all("napalm_getters_service"))
+    user_client.post("/update/napalm_getters_service", data=getters_dict)
+    assert len(fetch_all("napalm_getters_service")) == number_of_napalm_services + 1
     number_of_ansible_services = len(fetch_all("AnsiblePlaybookService"))
     user_client.post("/update/AnsiblePlaybookService", data=ansible_service)
     assert len(fetch_all("AnsiblePlaybookService")) == number_of_ansible_services + 1

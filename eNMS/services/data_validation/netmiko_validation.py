@@ -12,7 +12,7 @@ from eNMS.models.inventory import Device
 
 class NetmikoValidationService(Service):
 
-    __tablename__ = "NetmikoValidationService"
+    __tablename__ = "netmiko_validation_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -36,7 +36,7 @@ class NetmikoValidationService(Service):
     strip_prompt = Column(Boolean, default=True)
     strip_command = Column(Boolean, default=True)
 
-    __mapper_args__ = {"polymorphic_identity": "NetmikoValidationService"}
+    __mapper_args__ = {"polymorphic_identity": "netmiko_validation_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
@@ -68,7 +68,7 @@ class NetmikoValidationService(Service):
 
 
 class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
-    form_type = HiddenField(default="NetmikoValidationService")
+    form_type = HiddenField(default="netmiko_validation_service")
     command = SubstitutionField()
     expect_string = SubstitutionField()
     auto_find_prompt = BooleanField(default=True)

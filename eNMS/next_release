@@ -17,3 +17,9 @@ NetmikoBackupService -> netmiko_backup_service
 NapalmConfigurationService -> napalm_configuration_service
 NapalmRollbackService -> napalm_rollback_service
 NetmikoConfigurationService -> netmiko_configuration_service
+NapalmGettersService -> napalm_getters_service
+NetmikoPromptsService -> netmiko_prompts_service
+NetmikoValidationService -> netmiko_validation_service
+ConfigureBgpService -> configure_bgp_service
+GenericFileTransferService -> generic_file_transfer_service
+NetmikoFileTransferService -> netmiko_file_transfer_service

@@ -451,7 +451,7 @@ function processInstance(type, instance) {
 
 // eslint-disable-next-line
 function processData(type, id) {
-  if (type.includes("Service") || type === "workflow") {
+  if (type.includes("service") || type === "workflow") {
     $(`#${type}-workflows-${id} option`).prop("disabled", false);
     $(`#workflow-traversal_mode-${id}`).prop("disabled", false);
   }
@@ -461,7 +461,7 @@ function processData(type, id) {
     (instance) => {
       if (typeof table != "undefined") table.ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
-      if (type.includes("Service")) saveService(instance, id);
+      if (type.includes("service")) saveService(instance, id);
       if (type == "workflow_edge" && page == "workflow_builder") {
         saveWorkflowEdge(instance);
       }

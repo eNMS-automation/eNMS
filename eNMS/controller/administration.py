@@ -103,7 +103,6 @@ class AdministrationController(BaseController):
             path = (
                 self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"
             )
-            print(cls, path)
             with open(path, "r") as migration_file:
                 objects = yaml.load(migration_file)
                 if cls == "workflow":
@@ -115,7 +114,6 @@ class AdministrationController(BaseController):
                 if cls == "Service":
                     objects.sort(key=lambda s: s["type"] == "IterationService")
                 for obj in objects:
-                    print(obj, cls)
                     obj_cls = obj.pop("type") if cls == "service" else cls
                     obj = self.objectify(obj_cls, obj)
                     try:

@@ -40,7 +40,7 @@ def get_query_count(query: Any) -> int:
     return query.session.execute(count_query).scalar()
 
 
-def get_relationship_count(obj, relation):
+def get_relationship_count(obj: Any, relation: str) -> int:
     related_model = models[relationships[obj.type][relation]["model"]]
     return Session.query(func.count(related_model.id)).with_parent(obj).scalar()
 

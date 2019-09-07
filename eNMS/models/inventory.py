@@ -119,33 +119,38 @@ class Device(CustomDevice):
     def generate_row(self, table: str) -> List[str]:
         if table == "device":
             return [
-                f"""<button type="button" class="btn btn-info btn-xs"
+                f"""<button type="button" class="btn btn-info btn-sm"
                 onclick="showResultsPanel('{self.id}', '{self.name}', 'device')">
                 </i>Results</a></button>""",
-                f"""<button type="button" class="btn btn-success btn-xs"
+                f"""<button type="button" class="btn btn-success btn-sm"
                 onclick="showPanel('connection', '{self.id}')">Connect</button>""",
-                f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
-                f"""<button type="button" class="btn btn-primary btn-xs"
-                onclick="showTypePanel('device', '{self.id}', 'duplicate')">
-                Duplicate</button>""",
-                f"""<button type="button" class="btn btn-danger btn-xs"
-                onclick="showDeletionPanel('device', '{self.id}', '{self.name}')">
+                f"""<div class="btn-group" style="width: 80px;">
+                <button type="button" class="btn btn-primary btn-sm"
+                onclick="showTypePanel('device', '{self.id}')">Edit</button>,
+                <button type="button" class="btn btn-primary btn-sm
+                dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+                showTypePanel('device', '{self.id}', 'duplicate')">Duplicate</a></li>
+                </ul></div>""",
+                f"""<button type="button" class="btn btn-danger btn-sm"
+                onclick="showDeletionPanel({self.row_properties})">
                 Delete</button>""",
             ]
         else:
             return [
-                f"""<button type="button" class="btn btn-primary btn-xs"
+                f"""<button type="button" class="btn btn-primary btn-sm"
                 onclick="showConfigurationPanel('{self.id}', '{self.name}')">
                 Configuration</button>"""
                 if self.configurations
                 else "",
-                f"""<label class="btn btn-default btn-xs btn-file"
+                f"""<label class="btn btn-default btn-sm btn-file"
                 style="width:100%;"><a href="/download_configuration/{self.name}">
                 Download</a></label>"""
                 if self.configurations
                 else "",
-                f"""<button type="button" class="btn btn-primary btn-xs"
+                f"""<button type="button" class="btn btn-primary btn-sm"
                 onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
             ]
 
@@ -220,13 +225,18 @@ class Link(Object):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('link', '{self.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('link', '{self.id}', 'duplicate')">Duplicate
-            </button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('link', '{self.id}'), '{self.name}'">
+                f"""<div class="btn-group" style="width: 80px;">
+                <button type="button" class="btn btn-primary btn-sm"
+                onclick="showTypePanel('link', '{self.id}')">Edit</button>,
+                <button type="button" class="btn btn-primary btn-sm
+                dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+                showTypePanel('link', '{self.id}', 'duplicate')">Duplicate</a></li>
+                </ul></div>""",
+            f"""<button type="button" class="btn btn-danger btn-sm"
+            onclick="showDeletionPanel({self.row_properties})">
             Delete</button>""",
         ]
 
@@ -287,21 +297,25 @@ class Pool(AbstractPool):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            f"""<button type="button" class="btn btn-info btn-xs"
+            f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showPoolView('{self.id}')">
             Visualize</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('pool', '{self.id}')">
-            Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="updatePools('{self.id}')">Update</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('pool', '{self.id}', 'duplicate')">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showPoolObjectsPanel('{self.id}')">Edit objects</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('pool', '{self.id}', '{self.name}')"
+            f"""<div class="btn-group" style="width: 80px;">
+            <button type="button" class="btn btn-primary btn-sm"
+            onclick="showTypePanel('pool', '{self.id}')">Edit</button>,
+            <button type="button" class="btn btn-primary btn-sm
+            dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#" onclick="showTypePanel('pool',
+                '{self.id}', 'duplicate')">Duplicate</a></li>
+                <li><a href="#" onclick="updatePools('{self.id}')">Update</a></li>
+                <li><a href="#" onclick="showPoolObjectsPanel('{self.id}')">
+                Edit objects</a></li>
+            </ul></div>""",
+            f"""<button type="button" class="btn btn-danger btn-sm"
+            onclick="showDeletionPanel({self.row_properties})"
             >Delete</button>""",
         ]
 

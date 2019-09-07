@@ -160,9 +160,9 @@ filtering_properties: Dict[str, List[str]] = {
 table_fixed_columns: Dict[str, List[str]] = {
     "changelog": [],
     "configuration": ["Configuration", "Download", "Edit"],
-    "device": ["Automation", "Connect", "Edit", "Duplicate", "Delete"],
+    "device": ["Automation", "Connect", "Edit", "Delete"],
     "event": ["Edit", "Delete"],
-    "link": ["Edit", "Duplicate", "Delete"],
+    "link": ["Edit", "Delete"],
     "run": ["Logs", "Results"],
     "result": ["Result"],
     "server": ["Edit", "Delete"],
@@ -176,7 +176,7 @@ table_fixed_columns: Dict[str, List[str]] = {
     "syslog": [],
     "task": ["Action", "Edit", "Delete"],
     "user": ["Edit", "Delete"],
-    "pool": ["Visualize", "Edit", "Update", "Duplicate", "Edit objects", "Delete"],
+    "pool": ["Visualize", "Edit", "Delete"],
     "workflow": [
         "Status",
         "Results",

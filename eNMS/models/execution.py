@@ -61,7 +61,7 @@ class Result(AbstractBase):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            f"""<button type="button" class="btn btn-info btn-xs"
+            f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showResult('{self.id}')"></i>Results</a></button>""",
         ]
 
@@ -119,10 +119,10 @@ class Run(AbstractBase):
     def generate_row(self, table: str) -> List[str]:
         job_type = "workflow" if self.job.type == "workflow" else "service"
         return [
-            f"""<button type="button" class="btn btn-info btn-xs"
+            f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showLogsPanel({self.job.row_properties}, '{self.runtime}')">
             </i>Logs</a></button>""",
-            f"""<button type="button" class="btn btn-info btn-xs"
+            f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showResultsPanel('{self.job.id}', '{self.name}',
             '{job_type}', '{self.runtime}')">
             </i>Results</a></button>""",

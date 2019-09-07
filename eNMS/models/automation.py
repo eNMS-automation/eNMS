@@ -103,19 +103,19 @@ class Job(AbstractBase):
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#" onclick="showTypePanel({self.row_properties},
+              <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}',
               'run')">Run with Updates</a></li>
             </ul>
             </div>""",
             f"""<div class="btn-group" style="width: 80px;">
             <button type="button" class="btn btn-primary btn-sm"
-            onclick="showTypePanel({self.row_properties})">Edit</button>,
+            onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>,
             <button type="button" class="btn btn-primary btn-sm
             dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#" onclick="showTypePanel({self.row_properties},
+              <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}',
               'duplicate')">Duplicate</a></li>
               <li><a href="#" onclick="exportJob('{self.id}')">Export</a></li>
             </ul>

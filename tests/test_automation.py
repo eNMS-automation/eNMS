@@ -98,7 +98,9 @@ def test_base_services(user_client: FlaskClient) -> None:
     number_of_services = len(fetch_all("Service"))
     user_client.post("/update/netmiko_configuration_service", data=netmiko_ping)
     assert len(fetch_all("netmiko_configuration_service")) == 3
-    user_client.post("/update/netmiko_file_transfer_service", data=file_transfer_service)
+    user_client.post(
+        "/update/netmiko_file_transfer_service", data=file_transfer_service
+    )
     assert len(fetch_all("netmiko_file_transfer_service")) == 1
     number_of_napalm_services = len(fetch_all("napalm_getters_service"))
     user_client.post("/update/napalm_getters_service", data=getters_dict)

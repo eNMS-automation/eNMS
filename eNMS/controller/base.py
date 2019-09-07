@@ -544,12 +544,14 @@ class BaseController:
         try:
             return {
                 "draw": int(kwargs["draw"]),
-                "recordsTotal": Session.query(func.count(model.id)).scalar() ,
+                "recordsTotal": Session.query(func.count(model.id)).scalar(),
                 "recordsFiltered": result.count(),
                 "data": [
                     [getattr(obj, property) for property in properties]
                     + obj.generate_row(table)
-                    for obj in result.limit(int(kwargs["length"])).offset(int(kwargs["start"])).all()
+                    for obj in result.limit(int(kwargs["length"]))
+                    .offset(int(kwargs["start"]))
+                    .all()
                 ],
             }
         except InterfaceError:

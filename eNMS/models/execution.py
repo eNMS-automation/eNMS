@@ -62,7 +62,7 @@ class Result(AbstractBase):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showResult('{self.id}')"></i>Results</a></button>""",
+            onclick="showResult('{self.id}')"></i>Results</a></button>"""
         ]
 
 
@@ -119,13 +119,17 @@ class Run(AbstractBase):
     def generate_row(self, table: str) -> List[str]:
         job_type = "workflow" if self.job.type == "workflow" else "service"
         return [
-            f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showLogsPanel({self.job.row_properties}, '{self.runtime}')">
-            </i>Logs</a></button>""",
-            f"""<button type="button" class="btn btn-info btn-sm"
+            f"""<div class="btn-group" style="width: 100px;">
+            <button type="button" class="btn btn-info btn-sm"
             onclick="showResultsPanel('{self.job.id}', '{self.name}',
-            '{job_type}', '{self.runtime}')">
-            </i>Results</a></button>""",
+            '{job_type}', '{self.runtime}')">Results</button>,
+            <button type="button" class="btn btn-info btn-sm
+            dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+              showLogsPanel({self.job.row_properties}, '{self.runtime}')">Logs</a></li>
+            </ul></div>"""
         ]
 
     @property
@@ -327,7 +331,12 @@ class Run(AbstractBase):
 
     def create_result(self, results: dict, device: Optional["Device"] = None) -> None:
         self.success = results["success"]
-        result_kw = {"run": self, "result": results, "workflow": self.workflow_id, "job": self.job_id}
+        result_kw = {
+            "run": self,
+            "result": results,
+            "workflow": self.workflow_id,
+            "job": self.job_id,
+        }
         if device:
             result_kw["device"] = device.id
         factory("result", **result_kw)

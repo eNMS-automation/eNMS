@@ -225,7 +225,7 @@ class Link(Object):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-                f"""<div class="btn-group" style="width: 80px;">
+            f"""<div class="btn-group" style="width: 80px;">
                 <button type="button" class="btn btn-primary btn-sm"
                 onclick="showTypePanel('link', '{self.id}')">Edit</button>,
                 <button type="button" class="btn btn-primary btn-sm

@@ -111,7 +111,7 @@ class AdministrationController(BaseController):
                     }
                 if cls == "workflow_edge":
                     workflow_edges = deepcopy(objects)
-                if cls == "Service":
+                if cls == "service":
                     objects.sort(key=lambda s: s["type"] == "IterationService")
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "service" else cls
@@ -121,10 +121,10 @@ class AdministrationController(BaseController):
                         Session.commit()
                     except Exception as e:
                         info(f"{str(obj)} could not be imported ({str(e)})")
-                        if cls in ("Service", "workflow"):
+                        if cls in ("service", "workflow"):
                             Session.commit()
                         status = "Partial import (see logs)."
-                    if cls not in ("Service", "workflow"):
+                    if cls not in ("service", "workflow"):
                         Session.commit()
         for name, jobs in workflow_jobs.items():
             fetch("workflow", name=name).jobs = [
@@ -178,7 +178,7 @@ class AdministrationController(BaseController):
                     for relation in ("devices", "pools", "events"):
                         sub_job_as_dict.pop(relation)
                     if sub_job.type == "workflow":
-                        sub_job_as_dict["type"] = "Workflow"
+                        sub_job_as_dict["type"] = "workflow"
                     yaml.dump(sub_job_as_dict, file)
             for edge in job.edges:
                 name = self.strip_all(f"{edge.workflow}{edge.source}{edge.destination}")
@@ -189,7 +189,7 @@ class AdministrationController(BaseController):
                 job_as_dict = job.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
                     job_as_dict.pop(relation)
-                yaml.dump({**job_as_dict, "type": "Workflow"}, file)
+                yaml.dump({**job_as_dict, "type": "workflow"}, file)
             with open_tar(f"{path}.tgz", "w:gz") as tar:
                 tar.add(path, arcname=job.filename)
             rmtree(path)

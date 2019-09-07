@@ -25,7 +25,7 @@ class JobForm(BaseForm):
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
     devices = MultipleInstanceField("Devices", instance_type="device")
-    pools = MultipleInstanceField("Pools", instance_type="Pool")
+    pools = MultipleInstanceField("Pools", instance_type="pool")
     workflows = MultipleInstanceField("Workflows", instance_type="workflow")
     waiting_time = IntegerField("Waiting time (in seconds)", default=0)
     send_notification = BooleanField("Send a notification")

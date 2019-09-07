@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-diagram_classes = ["device", "Link", "User", "Service", "Workflow", "Task"]
+diagram_classes = ["device", "link", "user", "service", "workflow", "task"]
 
 object_diagram_properties: List[str] = [
     "model",
@@ -43,9 +43,9 @@ task_diagram_properties: List[str] = [
 
 type_to_diagram_properties: Dict[str, List[str]] = {
     "device": device_diagram_properties,
-    "Link": object_diagram_properties,
-    "User": user_diagram_properties,
-    "Service": service_diagram_properties,
-    "Workflow": workflow_diagram_properties,
-    "Task": task_diagram_properties,
+    "link": object_diagram_properties,
+    "user": user_diagram_properties,
+    "service": service_diagram_properties,
+    "workflow": workflow_diagram_properties,
+    "task": task_diagram_properties,
 }

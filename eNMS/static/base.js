@@ -251,7 +251,7 @@ function serializeForm(form) {
 function deleteInstance(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
     console.log(result)
-    const tableType = type.includes("Service") ? "service" : type;
+    const tableType = type.includes("service") ? "service" : type;
     $(`#instance_deletion-${id}`).remove();
     tables[tableType]
       .row($(`#${id}`))
@@ -364,11 +364,11 @@ function showTypePanel(instance, mode) {
     "",
     instance.id,
     function(panel) {
-      if (instance.type == "workflow" || instance.type.includes("Service")) {
+      if (instance.type == "workflow" || instance.type.includes("service")) {
         panelCode(instance.type, instance.id, mode);
       }
       if (instance.id) {
-        const properties = instance.type === "Pool" ? "_properties" : "";
+        const properties = instance.type === "pool" ? "_properties" : "";
         call(`/get${properties}/${instance.type}/${instance.id}`, function(instance) {
           const title = mode == "duplicate" ? "Duplicate" : "Edit";
           panel.setHeaderTitle(`${title} ${instance.type} - ${instance.name}`);
@@ -397,7 +397,7 @@ function showTypePanel(instance, mode) {
       } else {
         panel.setHeaderTitle(`Create a New ${instance.type}`);
       }
-      if (instance.type.includes("Service")) {
+      if (instance.type.includes("service")) {
         loadScript(`../static/services/${instance.type}.js`).then(() => {
           try {
             job(instance.id);

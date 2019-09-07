@@ -51,7 +51,7 @@ def convert_value(model: str, attr: str, value: str, value_type: str) -> Any:
 
 def delete(model: str, **kwargs: Any) -> dict:
     instance = Session.query(models[model]).filter_by(**kwargs).first()
-    if hasattr(instance, "type") and instance.type == "Task":
+    if hasattr(instance, "type") and instance.type == "task":
         instance.delete_task()
     serialized_instance = instance.serialized
     Session.delete(instance)

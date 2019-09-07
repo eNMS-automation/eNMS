@@ -26,7 +26,7 @@ function showParametersPanel(type) {
 function showImportTopologyPanel(type) {
   createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
     document.getElementById("file").onchange = function() {
-      importTopology("Device");
+      importTopology();
     };
   });
 }

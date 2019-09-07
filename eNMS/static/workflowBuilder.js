@@ -489,7 +489,7 @@ function runWorkflow(withUpdates) {
   emptyProgressBar();
   workflow.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
   if (withUpdates) {
-    showTypePanel("Workflow", workflow.id, "run");
+    showTypePanel("workflow", workflow.id, "run");
   } else {
     normalRun(workflow.id);
   }
@@ -575,7 +575,7 @@ function displayWorkflowState(result) {
         };
         if (id in nodes._data) {
           colorJob(id, color[state.success]);
-          if (state.type != "Workflow" && state.number_of_targets) {
+          if (state.type != "workflow" && state.number_of_targets) {
             let progress = `${state.completed}/${state.number_of_targets}`;
             if (state.failed > 0) progress += ` (${state.failed} failed)`;
             nodes.update({

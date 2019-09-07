@@ -132,7 +132,7 @@ def table(table_type: str) -> str:
         service_table_form.services.choices = sorted(
             (service, service)
             for service in models
-            if service != "Service" and service.endswith("Service")
+            if service != "service" and service.endswith("service")
         )
         kwargs["service_table_form"] = service_table_form
     return render_template(f"pages/table.html", **kwargs)
@@ -154,7 +154,7 @@ def workflow_builder() -> str:
     service_table_form.services.choices = sorted(
         (service, service)
         for service in models
-        if service != "Service" and service.endswith("Service")
+        if service != "service" and service.endswith("service")
     )
     return render_template(
         f"pages/workflow_builder.html",

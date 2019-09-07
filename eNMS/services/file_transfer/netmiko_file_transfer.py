@@ -14,7 +14,7 @@ from eNMS.models.inventory import Device
 
 class NetmikoFileTransferService(Service):
 
-    __tablename__ = "NetmikoFileTransferService"
+    __tablename__ = "netmiko_file_transfer_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -32,7 +32,7 @@ class NetmikoFileTransferService(Service):
     timeout = Column(Integer, default=1)
     global_delay_factor = Column(Float, default=1.0)
 
-    __mapper_args__ = {"polymorphic_identity": "NetmikoFileTransferService"}
+    __mapper_args__ = {"polymorphic_identity": "netmiko_file_transfer_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
@@ -53,7 +53,7 @@ class NetmikoFileTransferService(Service):
 
 
 class NetmikoFileTransferForm(ServiceForm, NetmikoForm):
-    form_type = HiddenField(default="NetmikoFileTransferService")
+    form_type = HiddenField(default="netmiko_file_transfer_service")
     source_file = SubstitutionField(validators=[InputRequired()])
     destination_file = SubstitutionField(validators=[InputRequired()])
     file_system = StringField()

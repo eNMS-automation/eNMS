@@ -10,7 +10,7 @@ from eNMS.models.inventory import Device
 
 class ConfigureBgpService(Service):
 
-    __tablename__ = "ConfigureBgpService"
+    __tablename__ = "configure_bgp_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -22,7 +22,7 @@ class ConfigureBgpService(Service):
     vrf_name = Column(SmallString)
     driver = "ios"
 
-    __mapper_args__ = {"polymorphic_identity": "ConfigureBgpService"}
+    __mapper_args__ = {"polymorphic_identity": "configure_bgp_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         napalm_connection = run.napalm_connection(device)
@@ -52,7 +52,7 @@ class ConfigureBgpService(Service):
 
 
 class ConfigureBgpForm(ServiceForm):
-    form_type = HiddenField(default="ConfigureBgpService")
+    form_type = HiddenField(default="configure_bgp_service")
     local_as = IntegerField("Local AS", default=0)
     loopback = StringField("Loopback", default="Lo42")
     loopback_ip = StringField("Loopback IP")

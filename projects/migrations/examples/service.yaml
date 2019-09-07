@@ -432,7 +432,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: ConfigureBgpService
+  type: configure_bgp_service
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 100
@@ -478,7 +478,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: GenericFileTransferService
+  type: generic_file_transfer_service
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
@@ -2366,7 +2366,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: AnsiblePlaybookService
+  type: ansible_playbook_service
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -2415,7 +2415,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: AnsiblePlaybookService
+  type: ansible_playbook_service
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -2464,7 +2464,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: AnsiblePlaybookService
+  type: ansible_playbook_service
   validation_method: dict_included
   vendor: ''
   waiting_time: 0

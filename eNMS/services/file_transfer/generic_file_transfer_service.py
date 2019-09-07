@@ -16,7 +16,7 @@ from eNMS.models.inventory import Device
 
 class GenericFileTransferService(Service):
 
-    __tablename__ = "GenericFileTransferService"
+    __tablename__ = "generic_file_transfer_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -31,7 +31,7 @@ class GenericFileTransferService(Service):
     max_transfer_size = Column(Integer, default=2 ** 30)
     window_size = Column(Integer, default=2 ** 30)
 
-    __mapper_args__ = {"polymorphic_identity": "GenericFileTransferService"}
+    __mapper_args__ = {"polymorphic_identity": "generic_file_transfer_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         ssh_client = SSHClient()
@@ -72,7 +72,7 @@ class GenericFileTransferService(Service):
 
 
 class GenericFileTransferForm(ServiceForm):
-    form_type = HiddenField(default="GenericFileTransferService")
+    form_type = HiddenField(default="generic_file_transfer_service")
     direction = SelectField(choices=(("get", "Get"), ("put", "Put")))
     protocol = SelectField(choices=(("scp", "SCP"), ("sftp", "SFTP")))
     source_file = SubstitutionField(validators=[InputRequired()])

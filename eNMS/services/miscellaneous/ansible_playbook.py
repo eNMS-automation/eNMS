@@ -22,7 +22,7 @@ from eNMS.models.inventory import Device
 
 class AnsiblePlaybookService(Service):
 
-    __tablename__ = "AnsiblePlaybookService"
+    __tablename__ = "ansible_playbook_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
@@ -49,7 +49,7 @@ class AnsiblePlaybookService(Service):
         "250": "Unexpected error",
     }
 
-    __mapper_args__ = {"polymorphic_identity": "AnsiblePlaybookService"}
+    __mapper_args__ = {"polymorphic_identity": "ansible_playbook_service"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         arguments = run.sub(run.arguments, locals()).split()
@@ -99,7 +99,7 @@ class AnsiblePlaybookService(Service):
 
 
 class AnsiblePlaybookForm(ServiceForm, ValidationForm):
-    form_type = HiddenField(default="AnsiblePlaybookService")
+    form_type = HiddenField(default="ansible_playbook_service")
     has_targets = BooleanField("Has Target Devices", default=True)
     playbook_path = NoValidationSelectField("Playbook Path", choices=())
     arguments = SubstitutionField("Arguments (Ansible command line options)")

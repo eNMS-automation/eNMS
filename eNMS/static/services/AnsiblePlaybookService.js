@@ -12,7 +12,7 @@ processInstance: false
 function job(id) {
   call(`/scan_playbook_folder`, function(playbooks) {
     const fieldId = id ? `playbook_path-${id}` : "playbook_path";
-    const field = $(`#AnsiblePlaybookService-${fieldId}`);
+    const field = $(`#ansible_playbook_service-${fieldId}`);
     playbooks.forEach((playbook) => {
       let option = document.createElement("option");
       option.textContent = option.value = playbook;
@@ -20,8 +20,8 @@ function job(id) {
     });
     field.selectpicker("refresh");
     if (id) {
-      call(`/get/AnsiblePlaybookService/${id}`, function(instance) {
-        processInstance("AnsiblePlaybookService", instance);
+      call(`/get/ansible_playbook_service/${id}`, function(instance) {
+        processInstance("ansible_playbook_service", instance);
       });
     }
   });

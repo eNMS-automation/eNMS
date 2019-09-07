@@ -27,7 +27,6 @@ class TaskForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="task")
     id = HiddenField()
-    is_active = BooleanField("Is Active")
     scheduling_mode = SelectField(
         "Scheduling Mode",
         choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),

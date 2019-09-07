@@ -69,9 +69,6 @@ function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
   nodes = new vis.DataSet(workflow.jobs.map(jobToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
-  workflow.jobs
-    .filter((s) => s.type == "IterationService")
-    .map(drawIterationService);
   workflow.jobs.filter((s) => s.iteration_values != "").map(drawIterationEdge);
   for (const [id, label] of Object.entries(workflow.labels)) {
     drawLabel(id, label);
@@ -337,17 +334,6 @@ function drawIterationEdge(service) {
       arrows: { to: { enabled: true } },
     });
   }
-}
-
-function drawIterationService(service) {
-  edges.add({
-    id: -service.id,
-    label: service.iterated_job,
-    from: service.id,
-    to: service.id,
-    color: "black",
-    arrows: { to: { enabled: true } },
-  });
 }
 
 function edgeToEdge(edge) {

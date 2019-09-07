@@ -111,8 +111,6 @@ class AdministrationController(BaseController):
                     }
                 if cls == "workflow_edge":
                     workflow_edges = deepcopy(objects)
-                if cls == "service":
-                    objects.sort(key=lambda s: s["type"] == "IterationService")
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "service" else cls
                     obj = self.objectify(obj_cls, obj)

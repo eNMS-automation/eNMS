@@ -36,11 +36,6 @@
     4 -> 7, source: get_interfaces, subtype: prerequisite, workflow: payload_transfer_workflow}
 - {destination: process_payload1, label: prerequisite, name: payload_transfer_workflow:prerequisite
     3 -> 7, source: get_facts, subtype: prerequisite, workflow: payload_transfer_workflow}
-- {destination: add_devices_to_payload, label: success, name: 'success: python_test_worflow
-    0 -> 2', source: Start, subtype: success, workflow: Iteration Services Test Workflow}
-- {destination: Iteration_service_python, label: success, name: 'success: python_test_worflow
-    4 -> 5', source: Iteration_service_simple, subtype: success, workflow: Iteration
-    Services Test Workflow}
 - {destination: netmiko_show_ip_route, label: success, name: payload_extraction_validation_worflow
     0 -> 2, source: Start, subtype: success, workflow: payload_extraction_validation_worflow}
 - {destination: Payload Extraction, label: success, name: payload_extraction_validation_worflow
@@ -61,9 +56,6 @@
   source: napalm_rollback, subtype: success, workflow: Napalm_VRF_workflow}
 - {destination: End, label: success, name: 40-success:46->2, source: netmiko_check_no_vrf_napalm,
   subtype: success, workflow: Napalm_VRF_workflow}
-- {destination: Iteration_service_simple, label: success, name: 44-success:27->37,
-  source: add_devices_to_payload, subtype: success, workflow: Iteration Services Test
-    Workflow}
 - {destination: get_facts, label: success, name: 43-success:1->22, source: Start,
   subtype: success, workflow: payload_transfer_workflow}
 - {destination: get_interfaces, label: success, name: 43-success:1->23, source: Start,
@@ -94,8 +86,6 @@
 - {destination: REST is_alive, label: success, name: 57-success:42->20, source: Show
     vrf with python query, subtype: success, workflow: 'python Workflow: payload editor
     and pool helper'}
-- {destination: End, label: success, name: 51-success:44->2, source: Iteration_service_python,
-  subtype: success, workflow: Iteration Services Test Workflow}
 - {destination: show runtime with get_result helper, label: success, name: 55-success:20->56,
   source: REST is_alive, subtype: success, workflow: 'python Workflow: payload editor
     and pool helper'}

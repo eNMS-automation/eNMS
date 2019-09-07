@@ -117,14 +117,14 @@ class WorkflowForm(JobForm):
             ("device", "All devices run independently through the workflow"),
         ),
     )
-    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
+    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="job")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 
 
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="Job")
+    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="job")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 
 
@@ -171,8 +171,8 @@ class WorkflowResultsForm(ResultsForm):
     workflow_device_compare = NoValidationSelectField("device", choices=())
     device = NoValidationSelectField("device", choices=())
     device_compare = NoValidationSelectField("device", choices=())
-    job = NoValidationSelectField("Job", choices=())
-    job_compare = NoValidationSelectField("Job", choices=())
+    job = NoValidationSelectField("job", choices=())
+    job_compare = NoValidationSelectField("job", choices=())
 
 
 class DeviceResultsForm(ResultsForm):
@@ -188,7 +188,7 @@ class RunResultsForm(ResultsForm):
 class AddJobsForm(BaseForm):
     action = "addJobsToWorkflow"
     form_type = HiddenField(default="add_jobs")
-    jobs = MultipleInstanceField("Add jobs", instance_type="Job")
+    jobs = MultipleInstanceField("Add jobs", instance_type="job")
 
 
 class ServiceTableForm(BaseForm):

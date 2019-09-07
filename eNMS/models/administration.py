@@ -21,13 +21,18 @@ class Server(AbstractBase):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('server', '{self.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('server', '{self.id}', 'duplicate')">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('server', '{self.id}', '{self.name}')">
+            f"""<div class="btn-group" style="width: 80px;">
+            <button type="button" class="btn btn-primary btn-sm"
+            onclick="showTypePanel('server', '{self.id}')">Edit</button>,
+            <button type="button" class="btn btn-primary btn-sm
+            dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+              showTypePanel('server', '{self.id}', 'duplicate')">Duplicate</a></li>
+            </ul></div>""",
+            f"""<button type="button" class="btn btn-danger btn-sm"
+            onclick="showDeletionPanel({self.row_properties})">
             Delete</button>""",
         ]
 
@@ -83,13 +88,18 @@ class User(AbstractBase, UserMixin):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('user', '{self.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('user', '{self.id}', 'duplicate')">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('user', '{self.id}', '{self.name}')">
+            f"""<div class="btn-group">
+            <button type="button" class="btn btn-primary btn-sm"
+            onclick="showTypePanel('user', '{self.id}')">Edit</button>,
+            <button type="button" class="btn btn-primary btn-sm
+            dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+            showTypePanel('user', '{self.id}', 'duplicate')">Duplicate</a></li>
+            </ul></div>""",
+            f"""<button type="button" class="btn btn-danger btn-sm"
+            onclick="showDeletionPanel({self.row_properties})">
             Delete</button>""",
         ]
 

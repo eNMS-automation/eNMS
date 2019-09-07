@@ -250,7 +250,6 @@ function serializeForm(form) {
 // eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
-    console.log(result)
     const tableType = type.includes("service") ? "service" : type;
     $(`#instance_deletion-${id}`).remove();
     tables[tableType]
@@ -364,7 +363,6 @@ function showTypePanel(type, id, mode) {
     "",
     id,
     function(panel) {
-      console.log(type);
       if (type == "workflow" || type.includes("service")) {
         panelCode(type, id, mode);
       }

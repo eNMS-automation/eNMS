@@ -59,15 +59,20 @@ class Task(AbstractBase):
         status = "Pause" if self.is_active else "Resume"
         return [
             f"""<button id="pause-resume-{self.id}" type="button"
-            class="btn btn-success btn-xs" onclick=
+            class="btn btn-success btn-sm" onclick=
             "{status.lower()}Task('{self.id}')">{status}</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('task', '{self.id}')">Edit</button>""",
-            f"""<button type="button" class="btn btn-primary btn-xs"
-            onclick="showTypePanel('task', '{self.id}', 'duplicate')">
-            Duplicate</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
-            onclick="showDeletionPanel('task', '{self.id}', '{self.name}')">
+            f"""<div class="btn-group" style="width: 80px;">
+            <button type="button" class="btn btn-primary btn-sm"
+            onclick="showTypePanel('task', '{self.id}')">Edit</button>,
+            <button type="button" class="btn btn-primary btn-sm
+            dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+            showTypePanel('task', '{self.id}', 'duplicate')">Duplicate</a></li>
+            </ul></div>""",
+            f"""<button type="button" class="btn btn-danger btn-sm"
+            onclick="showDeletionPanel({self.row_properties})">
             Delete</button>""",
         ]
 
@@ -228,10 +233,10 @@ class Event(AbstractBase):
 
     def generate_row(self, table: str) -> List[str]:
         return [
-            f"""<button type="button" class="btn btn-info btn-xs"
+            f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showTypePanel('event', '{self.id}')">
             Edit</button>""",
-            f"""<button type="button" class="btn btn-danger btn-xs"
+            f"""<button type="button" class="btn btn-danger btn-sm"
             onclick="deleteInstance('event', '{self.id}', '{self.name}')">
             Delete</button>""",
         ]

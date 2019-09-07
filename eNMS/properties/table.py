@@ -165,7 +165,7 @@ table_fixed_columns: Dict[str, List[str]] = {
     "link": ["Edit", "Duplicate", "Delete"],
     "run": ["Logs", "Results"],
     "result": ["Result"],
-    "server": ["Edit", "Duplicate", "Delete"],
+    "server": ["Edit", "Delete"],
     "service": [
         "Status",
         "Results",
@@ -174,8 +174,8 @@ table_fixed_columns: Dict[str, List[str]] = {
         "Delete",
     ],
     "syslog": [],
-    "task": ["Action", "Edit", "Duplicate", "Delete"],
-    "user": ["Edit", "Duplicate", "Delete"],
+    "task": ["Action", "Edit", "Delete"],
+    "user": ["Edit", "Delete"],
     "pool": ["Visualize", "Edit", "Update", "Duplicate", "Edit objects", "Delete"],
     "workflow": [
         "Status",

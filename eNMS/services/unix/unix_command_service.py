@@ -13,7 +13,7 @@ from eNMS.models.inventory import Device
 
 class UnixCommandService(Service):
 
-    __tablename__ = "UnixCommandService"
+    __tablename__ = "unix_command_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -23,7 +23,7 @@ class UnixCommandService(Service):
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
 
-    __mapper_args__ = {"polymorphic_identity": "UnixCommandService"}
+    __mapper_args__ = {"polymorphic_identity": "unix_command_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         command = run.sub(run.command, locals())
@@ -39,5 +39,5 @@ class UnixCommandService(Service):
 
 
 class UnixCommandForm(ServiceForm, ValidationForm):
-    form_type = HiddenField(default="UnixCommandService")
+    form_type = HiddenField(default="unix_command_service")
     command = SubstitutionField()

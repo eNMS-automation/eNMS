@@ -12,7 +12,7 @@ from eNMS.models.inventory import Device
 
 class PayloadValidationService(Service):
 
-    __tablename__ = "PayloadValidationService"
+    __tablename__ = "payload_validation_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
@@ -25,7 +25,7 @@ class PayloadValidationService(Service):
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
 
-    __mapper_args__ = {"polymorphic_identity": "PayloadValidationService"}
+    __mapper_args__ = {"polymorphic_identity": "payload_validation_service"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         result = run.eval(run.query, **locals())
@@ -46,7 +46,7 @@ class PayloadValidationService(Service):
 
 
 class PayloadValidationForm(ServiceForm, ValidationForm):
-    form_type = HiddenField(default="PayloadValidationService")
+    form_type = HiddenField(default="payload_validation_service")
     has_targets = BooleanField("Has Target Devices", default=True)
     query = StringField("Python Query")
     query_fields = ServiceForm.query_fields + ["query"]

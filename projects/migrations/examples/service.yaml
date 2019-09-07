@@ -1194,7 +1194,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PythonSnippetService
+  type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -1417,7 +1417,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadExtractionService
+  type: payload_extraction_service
   variable1: simple_variable
   variable2: regex_variable
   variable3: textfsm_variable
@@ -1466,7 +1466,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadValidationService
+  type: payload_validation_service
   validation_method: dict_included
   vendor: Arista
   waiting_time: 0
@@ -1512,7 +1512,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadValidationService
+  type: payload_validation_service
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -1882,7 +1882,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PythonSnippetService
+  type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -1926,7 +1926,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PythonSnippetService
+  type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -2792,7 +2792,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadValidationService
+  type: payload_validation_service
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2839,7 +2839,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadValidationService
+  type: payload_validation_service
   validation_method: text
   vendor: Arista
   waiting_time: 0
@@ -2881,7 +2881,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PythonSnippetService
+  type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
@@ -2931,7 +2931,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadExtractionService
+  type: payload_extraction_service
   variable1: boolean
   variable2: list
   variable3: dict
@@ -2984,7 +2984,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadExtractionService
+  type: payload_extraction_service
   variable1: list
   variable2: list
   variable3: dict
@@ -3032,7 +3032,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadValidationService
+  type: payload_validation_service
   validation_method: text
   vendor: ''
   waiting_time: 0
@@ -3078,7 +3078,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PayloadValidationService
+  type: payload_validation_service
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
@@ -3175,7 +3175,7 @@
   start_new_connection: false
   success_query: ''
   time_between_retries: 10
-  type: PythonSnippetService
+  type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true

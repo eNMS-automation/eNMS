@@ -14,7 +14,7 @@ from eNMS.models.inventory import Device
 
 class UnixShellScriptService(Service):
 
-    __tablename__ = "UnixShellScriptService"
+    __tablename__ = "unix_shell_script_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = True
@@ -25,7 +25,7 @@ class UnixShellScriptService(Service):
     delete_spaces_before_matching = Column(Boolean, default=False)
     privileged_mode = Column(Boolean, default=False)
 
-    __mapper_args__ = {"polymorphic_identity": "UnixShellScriptService"}
+    __mapper_args__ = {"polymorphic_identity": "unix_shell_script_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         username, password = run.get_credentials(device)
@@ -63,7 +63,7 @@ class UnixShellScriptService(Service):
 
 
 class UnixShellScriptForm(ServiceForm, StringValidationForm):
-    form_type = HiddenField(default="UnixShellScriptService")
+    form_type = HiddenField(default="unix_shell_script_service")
     privileged_mode = BooleanField("Privileged mode (run as root using sudo)")
     source_code = StringField(
         widget=TextArea(),

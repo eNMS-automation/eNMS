@@ -16,14 +16,14 @@ from eNMS.models.inventory import Device
 
 class MattermostNotificationService(Service):
 
-    __tablename__ = "MattermostNotificationService"
+    __tablename__ = "mattermost_notification_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
     channel = Column(SmallString)
     body = Column(LargeString, default="")
 
-    __mapper_args__ = {"polymorphic_identity": "MattermostNotificationService"}
+    __mapper_args__ = {"polymorphic_identity": "mattermost_notification_service"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         channel = run.sub(run.channel, locals()) or app.mattermost_channel
@@ -37,6 +37,6 @@ class MattermostNotificationService(Service):
 
 
 class MattermostNotificationForm(ServiceForm):
-    form_type = HiddenField(default="MattermostNotificationService")
+    form_type = HiddenField(default="mattermost_notification_service")
     channel = SubstitutionField()
     body = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})

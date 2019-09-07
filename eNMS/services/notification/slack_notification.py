@@ -15,7 +15,7 @@ from eNMS.models.inventory import Device
 
 class SlackNotificationService(Service):
 
-    __tablename__ = "SlackNotificationService"
+    __tablename__ = "slack_notification_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
@@ -23,7 +23,7 @@ class SlackNotificationService(Service):
     token = Column(SmallString)
     body = Column(LargeString, default="")
 
-    __mapper_args__ = {"polymorphic_identity": "SlackNotificationService"}
+    __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         slack_client = SlackClient(run.token or app.slack_token)
@@ -36,7 +36,7 @@ class SlackNotificationService(Service):
 
 
 class SlackNotificationForm(ServiceForm):
-    form_type = HiddenField(default="SlackNotificationService")
+    form_type = HiddenField(default="slack_notification_service")
     channel = SubstitutionField()
     token = StringField()
     body = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})

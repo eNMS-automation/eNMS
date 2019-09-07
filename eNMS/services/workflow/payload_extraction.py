@@ -15,7 +15,7 @@ from eNMS.models.inventory import Device
 
 class PayloadExtractionService(Service):
 
-    __tablename__ = "PayloadExtractionService"
+    __tablename__ = "payload_extraction_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     has_targets = Column(Boolean, default=False)
@@ -35,7 +35,7 @@ class PayloadExtractionService(Service):
     match3 = Column(LargeString, default="")
     operation3 = Column(SmallString, default="set")
 
-    __mapper_args__ = {"polymorphic_identity": "PayloadExtractionService"}
+    __mapper_args__ = {"polymorphic_identity": "payload_extraction_service"}
 
     def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
         result, success = {}, True
@@ -89,7 +89,7 @@ operation_choices = (
 
 
 class PayloadExtractionForm(ServiceForm):
-    form_type = HiddenField(default="PayloadExtractionService")
+    form_type = HiddenField(default="payload_extraction_service")
     has_targets = BooleanField("Has Target Devices", default=True)
     variable1 = StringField("Variable Name")
     query1 = StringField("Python Extraction Query")

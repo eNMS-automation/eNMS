@@ -50,8 +50,6 @@ workflow_table_properties: List[str] = [
     "vendor",
     "operating_system",
     "creator",
-    "vendor",
-    "operating_system",
 ]
 
 user_table_properties: List[str] = ["name", "email"]

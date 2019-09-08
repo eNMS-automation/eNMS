@@ -42,10 +42,19 @@ task_diagram_properties: List[str] = [
 ]
 
 type_to_diagram_properties: Dict[str, List[str]] = {
+<<<<<<< HEAD
     "device": device_diagram_properties,
     "link": object_diagram_properties,
     "user": user_diagram_properties,
     "service": service_diagram_properties,
     "workflow": workflow_diagram_properties,
     "task": task_diagram_properties,
+=======
+    "Device": device_diagram_properties,
+    "Workflow": workflow_diagram_properties,
+    "Link": object_diagram_properties,
+    "Service": service_diagram_properties,
+    "User": user_diagram_properties,
+    "Task": task_diagram_properties,
+>>>>>>> master
 }

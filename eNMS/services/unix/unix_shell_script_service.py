@@ -53,7 +53,6 @@ class UnixShellScriptService(Service):
             else:
                 result = fabric_connection.run(f"bash {script_file_name}")
             fabric_connection.run(f"rm {script_file_name}")
-
         return {
             "match": match,
             "negative_logic": run.negative_logic,

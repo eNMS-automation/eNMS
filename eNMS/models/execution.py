@@ -436,7 +436,7 @@ class Run(AbstractBase):
         return result
 
     def match_content(self, result: Any, match: Union[str, dict]) -> bool:
-        if self.validation_method == "text":
+        if getattr(self, "validation_method", "text") == "text":
             result = str(result)
             assert isinstance(match, str)
             if self.delete_spaces_before_matching:

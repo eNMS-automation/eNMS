@@ -254,24 +254,7 @@ class InventoryController(BaseController):
             "links": [d.view_properties for d in fetch_all("link")],
         }
 
-    def view_filtering(self, obj_type: str, **kwargs: Any) -> List[dict]:
-        model = models[obj_type]
-        constraints = []
-        for property in filtering_properties[obj_type]:
-            value = kwargs[property]
-            if not value:
-                continue
-            filter = kwargs.get(f"form[{property}_filter]")
-            if filter == "equality":
-                constraint = getattr(model, property) == value
-            elif filter == "inclusion" or DIALECT == "sqlite":
-                constraint = getattr(model, property).contains(value)
-            else:
-                operator = "regexp" if DIALECT == "mysql" else "~"
-                constraint = getattr(model, property).op(operator)(value)
-            constraints.append(constraint)
-        result = Session.query(model).filter(and_(*constraints))
-        pools = [int(id) for id in kwargs["pools"]]
-        if pools:
-            result = result.filter(model.pools.any(models["pool"].id.in_(pools)))
+    def view_filtering(self, obj_type: str, kwargs: Any) -> List[dict]:
+        constraints = self.build_filtering_constraints(obj_type, kwargs)
+        result = Session.query(models[obj_type]).filter(and_(*constraints))
         return [d.view_properties for d in result.all()]

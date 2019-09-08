@@ -495,20 +495,9 @@ class BaseController:
             },
         }
 
-    def build_filtering_constraints(self, model, kwargs):
-        pass 
-
-    def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
-        model = models.get(table, models["device"])
-        properties = table_properties[table]
-        operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
-        try:
-            order_property = properties[int(kwargs["order[0][column]"])]
-        except IndexError:
-            order_property = "name"
-        order = getattr(getattr(model, order_property), kwargs["order[0][dir]"])()
-        constraints = []
-        for property in filtering_properties[table]:
+    def build_filtering_constraints(self, obj_type, kwargs):
+        model, constraints = models[obj_type], []
+        for property in filtering_properties[obj_type]:
             value = kwargs.get(f"form[{property}]")
             if not value:
                 continue
@@ -523,8 +512,7 @@ class BaseController:
                 regex_operator = "regexp" if DIALECT == "mysql" else "~"
                 constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
-        relation = table if table != "configuration" else "device"
-        for related_model, relation_properties in relationships[relation].items():
+        for related_model, relation_properties in relationships[obj_type].items():
             relation_ids = [
                 int(id) for id in kwargs.getlist(f"form[{related_model}][]")
             ]
@@ -543,22 +531,31 @@ class BaseController:
                     for relation_id in relation_ids
                 )
             constraints.append(constraint)
-        result = Session.query(model).filter(operator(*constraints)).order_by(order)
+        return constraints
+
+    def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
+        obj_type = table if table != "configuration" else "device"
+        model, properties = models[obj_type], table_properties[table]
+        operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
         try:
-            return {
-                "draw": int(kwargs["draw"]),
-                "recordsTotal": Session.query(func.count(model.id)).scalar(),
-                "recordsFiltered": result.count(),
-                "data": [
-                    [getattr(obj, property) for property in properties]
-                    + obj.generate_row(table)
-                    for obj in result.limit(int(kwargs["length"]))
-                    .offset(int(kwargs["start"]))
-                    .all()
-                ],
-            }
-        except InterfaceError:
-            return {"error": "Filtering error: wrong input"}
+            order_property = properties[int(kwargs["order[0][column]"])]
+        except IndexError:
+            order_property = "name"
+        order = getattr(getattr(model, order_property), kwargs["order[0][dir]"])()
+        constraints = self.build_filtering_constraints(obj_type, kwargs)
+        result = Session.query(model).filter(operator(*constraints)).order_by(order)
+        return {
+            "draw": int(kwargs["draw"]),
+            "recordsTotal": Session.query(func.count(model.id)).scalar(),
+            "recordsFiltered": result.count(),
+            "data": [
+                [getattr(obj, property) for property in properties]
+                + obj.generate_row(table)
+                for obj in result.limit(int(kwargs["length"]))
+                .offset(int(kwargs["start"]))
+                .all()
+            ],
+        }
 
     def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name

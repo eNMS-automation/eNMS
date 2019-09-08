@@ -12,10 +12,10 @@ from tests.test_inventory import create_from_file
 instant_task = ImmutableMultiDict(
     [
         ("form_type", "task"),
+        ("start_date", "30/03/2018 19:10:13"),
         ("name", "instant_task"),
         ("frequency_unit", "seconds"),
         ("scheduling_mode", "standard"),
-        ("start-task", "run-now"),
         ("job", "2"),
     ]
 )

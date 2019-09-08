@@ -38,3 +38,4 @@ UnixShellScriptService -> unix_shell_script_service
 PayloadExtractionService -> payload_extraction_service
 PayloadValidationService -> payload_validation_service
 PythonSnippetService -> python_snippet_service
+- Abort feature.

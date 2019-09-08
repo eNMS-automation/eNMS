@@ -142,7 +142,9 @@ function displayWorkflow(workflowData) {
   $("#current-runtimes").val("latest");
   $("#current-workflow").val(workflow.id);
   $("#current-runtimes,#current-workflow").selectpicker("refresh");
-  graph.on("dragEnd", () => savePositions());
+  graph.on("dragEnd", (event) => {
+    if (graph.getNodeAt(event.pointer.DOM)) savePositions();
+  });
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   lastModified = workflow.last_modified;
@@ -270,12 +272,16 @@ function deleteEdge(edgeId) {
   });
 }
 
-function abortWorkflow() {
-  call(`/abort_workflow/${currentRuntime}`, (result) => {
+function stopWorkflow() {
+  call(`/stop_workflow/${currentRuntime}`, (result) => {
     if (!result) {
       alertify.notify("The workflow is not currently running", "error", 5);
     } else {
-      alertify.notify("Workflow aborting...", "success", 5);
+      alertify.notify(
+        "Workflow will stop after current service...",
+        "success",
+        5
+      );
     }
   });
 }
@@ -428,7 +434,7 @@ Object.assign(action, {
     showResultsPanel(workflow.id, workflow.name, "workflow"),
   "Workflow Logs": () => showLogsPanel(workflow),
   "Add to Workflow": () => showPanel("add_jobs"),
-  "Abort Workflow": () => abortWorkflow(),
+  "Stop Workflow": () => stopWorkflow(),
   "Remove from Workflow": deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),
   "Create 'Failure' edge": () => switchMode("failure"),

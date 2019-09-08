@@ -31,7 +31,14 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
-from eNMS.database.functions import count, delete, factory, fetch, fetch_all
+from eNMS.database.functions import (
+    count,
+    delete,
+    factory,
+    fetch,
+    fetch_all,
+    get_query_count,
+)
 from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
@@ -140,7 +147,7 @@ class BaseController:
     ]
 
     valid_post_endpoints = [
-        "abort_workflow",
+        "stop_workflow",
         "add_edge",
         "add_jobs_to_workflow",
         "calendar_init",
@@ -548,7 +555,7 @@ class BaseController:
         return {
             "draw": int(kwargs["draw"]),
             "recordsTotal": Session.query(func.count(model.id)).scalar(),
-            "recordsFiltered": result.count(),
+            "recordsFiltered": get_query_count(result),
             "data": [
                 [getattr(obj, property) for property in properties]
                 + obj.generate_row(table)

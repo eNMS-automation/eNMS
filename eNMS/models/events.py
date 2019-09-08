@@ -47,8 +47,6 @@ class Task(AbstractBase):
         super().update(**kwargs)
         self.creation_time = app.get_time()  # type: ignore
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
-        if self.is_active:
-            self.schedule()
 
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
@@ -111,9 +109,9 @@ class Task(AbstractBase):
         return self.aps_conversion(date) if date else None
 
     def pause(self) -> None:
-        app.scheduler.pause_job(self.aps_job_id)
         self.is_active = False  # type: ignore
         Session.commit()
+        app.scheduler.pause_job(self.aps_job_id)
 
     def resume(self) -> None:
         self.schedule()
@@ -127,12 +125,14 @@ class Task(AbstractBase):
         Session.commit()
 
     def run_properties(self) -> dict:
-        return {
-            "devices": [device.id for device in self.devices],
-            "pools": [pool.id for pool in self.pools],
-            "payload": self.initial_payload,
-            "task": self.id,
-        }
+        properties = {"payload": self.initial_payload, "task": self.id}
+        if self.devices:
+            properties["devices"] = [  # type: ignore
+                device.id for device in self.devices
+            ]
+        if self.pools:
+            properties["pools"] = [pool.id for pool in self.pools]  # type: ignore
+        return properties
 
     def kwargs(self) -> Tuple[dict, dict]:
         default = {

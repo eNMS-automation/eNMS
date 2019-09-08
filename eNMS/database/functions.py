@@ -35,6 +35,16 @@ def count(model: str, **kwargs: Any) -> Tuple[Any]:
     return Session.query(func.count(models[model].id)).filter_by(**kwargs).scalar()
 
 
+def get_query_count(query: Any) -> int:
+    count_query = query.statement.with_only_columns([func.count()]).order_by(None)
+    return query.session.execute(count_query).scalar()
+
+
+def get_relationship_count(obj: Any, relation: str) -> int:
+    related_model = models[relationships[obj.type][relation]["model"]]
+    return Session.query(func.count(related_model.id)).with_parent(obj).scalar()
+
+
 def objectify(model: str, object_list: List[int]) -> List[Any]:
     return [fetch(model, id=object_id) for object_id in object_list]
 

@@ -380,16 +380,21 @@ function updateView() {
 
 // eslint-disable-next-line
 function filter(type) {
-  fCall(`/view_filtering/${type}`, `#${type}_filtering-form`, (r) => {
-    if (type == "device") {
-      deleteAllDevices();
-      r.map((d) => createNode(d, "device"));
-    } else {
-      deleteAllLinks();
-      r.map(createLink);
+  $.ajax({
+    type: "POST",
+    url: `/view_filtering/${type}`,
+    data: {"form": serializeForm(`#${type}_filtering-form`)},
+    success: function(results) {
+      if (type == "device") {
+        deleteAllDevices();
+        results.map((d) => createNode(d, "device"));
+      } else {
+        deleteAllLinks();
+        results.map(createLink);
+      }
+      alertify.notify("Filter applied.", "success", 5);
     }
-    alertify.notify("Filter applied.", "success", 5);
-  });
+  })
 }
 
 // eslint-disable-next-line

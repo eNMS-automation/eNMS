@@ -501,7 +501,7 @@ function initTable(type) {
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
-      url: `/filtering/${type}`,
+      url: `/table_filtering/${type}`,
       type: "POST",
       data: (d) => {
         form = $(`#${type}_filtering`).length

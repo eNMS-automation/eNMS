@@ -160,7 +160,6 @@ class BaseController:
         "export_job",
         "export_to_google_earth",
         "export_topology",
-        "filtering",
         "get",
         "get_all",
         "get_cluster_status",
@@ -192,6 +191,7 @@ class BaseController:
         "scan_cluster",
         "scan_playbook_folder",
         "scheduler",
+        "table_filtering",
         "task_action",
         "topology_import",
         "update",
@@ -533,7 +533,8 @@ class BaseController:
             constraints.append(constraint)
         return constraints
 
-    def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
+    def table_filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
+        print(kwargs)
         obj_type = table if table != "configuration" else "device"
         model, properties = models[obj_type], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_

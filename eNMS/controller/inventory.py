@@ -107,7 +107,7 @@ class InventoryController(BaseController):
         if "." not in filename:
             filename += ".xls"
         for obj_type in ("device", "link"):
-            sheet = workbook.add_sheet(obj_type.capitalize())
+            sheet = workbook.add_sheet(obj_type)
             for index, property in enumerate(table_properties[obj_type]):
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):

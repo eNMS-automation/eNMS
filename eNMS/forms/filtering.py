@@ -8,10 +8,10 @@ from eNMS.properties.table import filtering_properties
 
 def filtering_form_generator() -> None:
     for table, properties in filtering_properties.items():
-        table_model = table.capitalize() if table != "configuration" else "device"
+        table_model = table if table != "configuration" else "device"
         relations = {
             model: MultipleInstanceField(
-                model.capitalize(), instance_type=relation["model"]
+                model, instance_type=relation["model"]
             )
             for model, relation in relationships[table_model].items()
             if model not in ("edges", "results")

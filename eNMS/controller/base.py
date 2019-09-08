@@ -495,6 +495,9 @@ class BaseController:
             },
         }
 
+    def build_filtering_constraints(self, model, kwargs):
+        pass 
+
     def filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
         model = models.get(table, models["device"])
         properties = table_properties[table]
@@ -520,7 +523,7 @@ class BaseController:
                 regex_operator = "regexp" if DIALECT == "mysql" else "~"
                 constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
-        relation = table.capitalize() if table != "configuration" else "device"
+        relation = table if table != "configuration" else "device"
         for related_model, relation_properties in relationships[relation].items():
             relation_ids = [
                 int(id) for id in kwargs.getlist(f"form[{related_model}][]")

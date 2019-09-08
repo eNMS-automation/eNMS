@@ -380,8 +380,8 @@ function updateView() {
 
 // eslint-disable-next-line
 function filter(type) {
-  fCall(`/view_filtering/${type}`, `#${type}-form`, (r) => {
-    if (type == "device_filtering") {
+  fCall(`/view_filtering/${type}`, `#${type}_filtering-form`, (r) => {
+    if (type == "device") {
       deleteAllDevices();
       r.map((d) => createNode(d, "device"));
     } else {

@@ -254,8 +254,7 @@ class InventoryController(BaseController):
             "links": [d.view_properties for d in fetch_all("link")],
         }
 
-    def view_filtering(self, filter_type: str, **kwargs: Any) -> List[dict]:
-        obj_type = filter_type.split("_")[0]
+    def view_filtering(self, obj_type: str, **kwargs: Any) -> List[dict]:
         model = models[obj_type]
         constraints = []
         for property in filtering_properties[obj_type]:

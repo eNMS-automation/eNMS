@@ -51,14 +51,12 @@ class TaskForm(BaseForm):
     def validate(self) -> bool:
         valid_form = super().validate()
         no_start_date = (
-            self.scheduling_mode.data == "standard"
-            and not self.start_date.data
+            self.scheduling_mode.data == "standard" and not self.start_date.data
         )
         if no_start_date:
             self.start_date.errors.append("A start date must be set.")
         no_cron_expression = (
-            self.scheduling_mode.data == "cron"
-            and not self.crontab_expression.data
+            self.scheduling_mode.data == "cron" and not self.crontab_expression.data
         )
         if no_cron_expression:
             self.crontab_expression.errors.append("A crontab expression must be set.")

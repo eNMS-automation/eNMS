@@ -50,6 +50,8 @@ class Task(AbstractBase):
 
     def update(self, **kwargs: Any) -> None:
         super().update(**kwargs)
+        if self.is_active:
+            self.schedule()
 
     def generate_row(self, table: str) -> List[str]:
         status = "Pause" if self.is_active else "Resume"
@@ -102,9 +104,9 @@ class Task(AbstractBase):
         return self.aps_conversion(date) if date else None
 
     def pause(self) -> None:
-        app.scheduler.pause_job(self.aps_job_id)
         self.is_active = False  # type: ignore
         Session.commit()
+        app.scheduler.pause_job(self.aps_job_id)
 
     def resume(self) -> None:
         self.schedule()

@@ -3,7 +3,6 @@ global
 action: false
 alertify: false
 call: false
-deviceFilteringPanel: false
 fCall: false
 L: false
 linkFilteringPanel: false
@@ -47,6 +46,7 @@ call("/get/parameters/1", function(parameters) {
   currentView = parameters.default_view;
   dimension = currentView.substring(0, 2);
   markerType = parameters.default_marker;
+  console.log(parameters);
   map = L.map("map", { preferCanvas: true }).setView(
     [parameters.default_latitude, parameters.default_longitude],
     parameters.default_zoom_level
@@ -394,5 +394,5 @@ function filter(type) {
 
 // eslint-disable-next-line
 function showViewFilteringPanel(type) {
-  (type == "device" ? deviceFilteringPanel : linkFilteringPanel).normalize();
+  showFilteringPanel(`${type}_filtering`);
 }

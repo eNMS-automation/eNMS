@@ -125,8 +125,6 @@ title %} {% block stylesheets %} {{ super() }}
 <script>
   let view = "{{ view }}";
   let viewType = "{{ view_type }}";
-  const deviceFilteringPanel = showPanel(`device_filtering`);
-  const linkFilteringPanel = showPanel(`link_filtering`);
 </script>
 <script src="{{ url_for('static', filename='lib/webgl-earth/api.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>

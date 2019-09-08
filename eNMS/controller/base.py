@@ -277,7 +277,7 @@ class BaseController:
             parameters.update(
                 **{
                     property: getattr(self, property)
-                    for property in model_properties["Parameters"]
+                    for property in model_properties["parameters"]
                     if hasattr(self, property)
                 }
             )

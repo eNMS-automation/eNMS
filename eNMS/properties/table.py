@@ -52,8 +52,6 @@ workflow_table_properties: List[str] = [
     "vendor",
     "operating_system",
     "creator",
-    "vendor",
-    "operating_system",
     "number_of_retries",
     "time_between_retries",
 ]

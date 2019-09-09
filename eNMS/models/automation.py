@@ -424,8 +424,9 @@ class Workflow(Job):
             results["results"].update(payload)
             for successor in successors:
                 jobs.append(successor)
-                print("ttttt"*200, device, successor, self.jobs[1])
-                if (device or not run.use_workflow_devices) and successor == self.jobs[1]:
+                if (device or not run.use_workflow_devices) and successor == self.jobs[
+                    1
+                ]:
                     results["success"] = True
             if not skip_job and not job.skip:
                 sleep(job.waiting_time)
@@ -448,13 +449,17 @@ class Workflow(Job):
                     targets_results = {}
                     for target in run.eval(run.iteration_values, **locals()):
                         run.payload_helper(payload, run.iteration_variable_name, target)
-                        targets_results[target] = self.workflow_run(run, payload, device)
+                        targets_results[target] = self.workflow_run(
+                            run, payload, device
+                        )
                     device_results[device.name] = {
                         "results": targets_results,
                         "success": all(r["success"] for r in targets_results.values()),
                     }
                 else:
-                    device_results[device.name] = self.workflow_run(run, payload, device)
+                    device_results[device.name] = self.workflow_run(
+                        run, payload, device
+                    )
             success = all(r["success"] for r in device_results.values())
             return {
                 "results": {"devices": device_results},

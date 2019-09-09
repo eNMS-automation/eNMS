@@ -541,7 +541,6 @@ class BaseController:
         return constraints
 
     def table_filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
-        print(kwargs)
         obj_type = table if table != "configuration" else "device"
         model, properties = models[obj_type], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_

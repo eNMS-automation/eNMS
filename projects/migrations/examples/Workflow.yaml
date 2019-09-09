@@ -582,7 +582,7 @@
       2', 'Iteration Target Workflow: netmiko iteration 1', 'Iteration Target Workflow:
       netmiko iteration 3', 'Iteration Targets Workflow: No device targets']
   labels: {}
-  last_modified: '2019-08-20 19:15:27.843227'
+  last_modified: '2019-09-09 18:35:19.412403'
   mail_recipient: ''
   name: Iteration Targets Workflow
   notification_header: ''
@@ -711,7 +711,7 @@
   jobs: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
       getters and match mechanism workflow, payload_extraction_validation_worflow]
   labels: {}
-  last_modified: '2019-08-20 21:24:26.583640'
+  last_modified: '2019-09-09 16:10:16.710080'
   mail_recipient: ''
   name: Subworkflow of Workflow
   notification_header: ''
@@ -720,6 +720,90 @@
   pools: []
   positions:
     Workflow_of_workflows: [-230, -199]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  skip: false
+  skip_python_query: ''
+  start_jobs: [Start]
+  start_new_connection: false
+  start_workflows: []
+  success_query: ''
+  time_between_retries: 10
+  traversal_mode: service
+  type: Workflow
+  use_workflow_devices: true
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: get_var('iteration_devices', device=device.name)
+  iteration_variable_name: iteration_value
+  jobs: [Start, End, 'Workflow with iteration targets: use target for show interface']
+  labels: {}
+  last_modified: '2019-09-09 17:03:46.868220'
+  mail_recipient: ''
+  name: Workflow with iteration targets
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Iteration Targets Workflow: [-107, -112]
+    Workflow with iteration target subworkflows: [253, 118]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  skip: false
+  skip_python_query: ''
+  start_jobs: [Start]
+  start_new_connection: false
+  start_workflows: []
+  success_query: ''
+  time_between_retries: 10
+  traversal_mode: device
+  type: Workflow
+  use_workflow_devices: true
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  credentials: device
+  custom_username: ''
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  jobs: [Start, End, add_devices_to_payload, Workflow with iteration targets]
+  labels: {}
+  last_modified: '2019-09-09 19:13:32.851837'
+  mail_recipient: ''
+  name: Workflow with iteration target subworkflows
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: [Washington]
+  positions: {}
   push_to_git: false
   python_query: ''
   query_property_type: name

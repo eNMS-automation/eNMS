@@ -284,8 +284,8 @@ function createPanel(name, title, id, processing, type, duplicate) {
       url: `../form/${name}`,
       done: function(panel) {
         panel.content.innerHTML = this.responseText;
-        configureForm(name);
         preprocessForm(panel, id, type, duplicate);
+        configureForm(name, id);
         if (processing) processing(panel);
       },
     },

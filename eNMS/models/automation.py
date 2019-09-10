@@ -335,7 +335,7 @@ class Workflow(Job):
             if run.stop:
                 return results
             job = jobs.pop()
-            if job in visited or any(
+            if any(
                 node not in visited
                 for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
             ):

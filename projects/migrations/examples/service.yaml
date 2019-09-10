@@ -3,7 +3,7 @@
   credentials: device
   custom_username: ''
   description: Start point of a workflow
-  devices: []
+  devices: [Columbus]
   display_only_failed_nodes: true
   events: []
   has_targets: false
@@ -122,7 +122,7 @@
   credentials: device
   custom_username: ''
   description: Mail notification (service logs)
-  devices: []
+  devices: [Columbus]
   display_only_failed_nodes: true
   events: []
   has_targets: false
@@ -159,7 +159,7 @@
   credentials: device
   custom_username: ''
   description: Slack notification (service logs)
-  devices: []
+  devices: [Columbus]
   display_only_failed_nodes: true
   events: []
   has_targets: false
@@ -784,7 +784,7 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is NOT configured
-  devices: [Washington, Austin]
+  devices: [Washington, Austin, Columbus]
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -883,7 +883,7 @@
   custom_username: ''
   delete_spaces_before_matching: false
   description: Use REST call is_alive
-  devices: []
+  devices: [Columbus]
   dict_match: {}
   display_only_failed_nodes: true
   events: []

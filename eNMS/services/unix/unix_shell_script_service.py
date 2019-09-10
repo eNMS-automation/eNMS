@@ -12,6 +12,7 @@ from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
 
 
+
 class UnixShellScriptService(Service):
 
     __tablename__ = "unix_shell_script_service"

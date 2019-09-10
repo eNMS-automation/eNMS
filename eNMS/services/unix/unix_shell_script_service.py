@@ -1,8 +1,8 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import HiddenField, StringField, BooleanField, IntegerField, SelectField, FloatField
 from wtforms.widgets import TextArea
-from eNMS import app
 
+from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import StringValidationForm, NetmikoForm
@@ -14,7 +14,7 @@ from eNMS.models.inventory import Device
 
 class UnixShellScriptService(Service):
 
-    __tablename__ = "UnixShellScriptService"
+    __tablename__ = "unix_shell_script_service"
 
     id = Column(Integer, ForeignKey("Service.id"), primary_key=True)
     has_targets = True
@@ -35,7 +35,7 @@ class UnixShellScriptService(Service):
     strip_prompt = Column(Boolean, default=True)
     strip_command = Column(Boolean, default=True)
 
-    __mapper_args__ = {"polymorphic_identity": "UnixShellScriptService"}
+    __mapper_args__ = {"polymorphic_identity": "unix_shell_script_service"}
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
@@ -79,7 +79,7 @@ class UnixShellScriptService(Service):
         }
 
 class UnixShellScriptForm(ServiceForm, StringValidationForm, NetmikoForm):
-    form_type = HiddenField(default="UnixShellScriptService")
+    form_type = HiddenField(default="unix_shell_script_service")
     privileged_mode = BooleanField("Privileged mode (run as root using sudo)")
     source_code = StringField(
         widget=TextArea(),

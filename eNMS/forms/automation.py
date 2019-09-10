@@ -26,7 +26,6 @@ class JobForm(BaseForm):
     )
     devices = MultipleInstanceField("Devices", instance_type="device")
     pools = MultipleInstanceField("Pools", instance_type="pool")
-    workflows = MultipleInstanceField("Workflows", instance_type="workflow")
     waiting_time = IntegerField("Waiting time (in seconds)", default=0)
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(

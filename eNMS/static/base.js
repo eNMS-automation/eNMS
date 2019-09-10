@@ -465,7 +465,6 @@ function processInstance(type, instance) {
 // eslint-disable-next-line
 function processData(type, id) {
   if (type.includes("service") || type === "workflow") {
-    $(`#${type}-workflows-${id} option`).prop("disabled", false);
     $(`#workflow-traversal_mode-${id}`).prop("disabled", false);
   }
   fCall(

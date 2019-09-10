@@ -223,7 +223,7 @@ def route(page: str) -> Response:
     if f not in app.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})
     form_type = request.form.get("form_type")
-    if f in ("table_filtering", "view_filtering"):
+    if f in ("table_filtering", "view_filtering", "multiselect_filtering"):
         result = getattr(app, f)(*args, request.form)
     elif form_type:
         form = form_classes[form_type](request.form)

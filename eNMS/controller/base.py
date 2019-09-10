@@ -186,6 +186,7 @@ class BaseController:
         "import_topology",
         "migration_export",
         "migration_import",
+        "multiselect_filtering",
         "query_netbox",
         "query_librenms",
         "query_opennms",
@@ -539,6 +540,10 @@ class BaseController:
                 )
             constraints.append(constraint)
         return constraints
+
+    def multiselect_filtering(self, *args, **kwargs):
+        print("ttt"*500, *args, **kwargs)
+        return "a"
 
     def table_filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
         obj_type = table if table != "configuration" else "device"

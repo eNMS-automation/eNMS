@@ -363,7 +363,17 @@ function configureForm(form, id, panelId) {
         selectedTextFormat: "count > 3",
       });
     } else if (["object", "object-list"].includes(type)) {
-      el.select2({closeOnSelect: false, dropdownParent: $(`#${panelId}`)})
+      el.select2({
+        closeOnSelect: false,
+        dropdownParent: $(`#${panelId}`),
+        ajax: {
+          url: `/multiselect_filtering/${property}`,
+          type: "POST",
+          data: function(p) {
+            return p.term;
+          }
+        },
+      });
       el.on('select2:close select2:select select2:unselect', function () {
         selectUpdate($(this));
       });

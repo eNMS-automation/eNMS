@@ -3239,3 +3239,60 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show interface {{get_var("iteration_value")}}
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2019-09-09 19:11:20.980102'
+  mail_recipient: ''
+  max_processes: 50
+  multiprocessing: false
+  name: 'Workflow with iteration targets: use target for show interface'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Workflow with iteration target subworkflows: [227, 205]
+    Workflow with iteration targets: [239, -121]
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  success_query: ''
+  time_between_retries: 10
+  timeout: 10
+  type: netmiko_validation_service
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0

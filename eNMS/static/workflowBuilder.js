@@ -608,7 +608,6 @@ function getWorkflowState(periodic) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
       if (result.workflow.id != workflow.id) return;
       currentRuntime = result.runtime;
-      console.log(result.workflow.last_modified, lastModified);
       if (result.workflow.last_modified !== lastModified) {
         displayWorkflow(result);
       } else {

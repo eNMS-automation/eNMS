@@ -198,6 +198,16 @@ function openUrl(url) {
   win.focus();
 }
 
+function selectUpdate(el) {
+  const length = el.select2('data').length;
+  if (length > 4) {
+    const label = `<li>${length} items selected</li>`;
+    el.siblings('span.select2').find('ul').html(label);
+  } else {
+    el.trigger("change");
+  }
+}
+
 function processResults(callback, results) {
   if (results === false) {
     alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
@@ -355,15 +365,7 @@ function configureForm(form, id) {
     } else if (["object", "object-list"].includes(type)) {
       el.select2({closeOnSelect: false})
       el.on('select2:close', function (evt) {
-        console.log("test");
-        var uldiv = $(this).siblings('span.select2').find('ul')
-        var count = $(this).select2('data').length
-        if(count==0){
-          uldiv.html("")
-        }
-        else{
-          uldiv.html("<li>"+count+" items selected</li>")
-        };
+        selectUpdate($(this));
       });
     }
   }
@@ -442,12 +444,7 @@ function updateProperty(el, property, value, type) {
     el.selectpicker("render");
   } else if (["object", "object-list"].includes(propertyType)) {
     el.val(value.map((p) => p.id));
-    if (value.length > 4) {
-      const label = `<li>${value.length} ${property} selected</li>`;
-      el.siblings('span.select2').find('ul').html(label);
-    } else {
-      el.trigger("change");
-    }
+    selectUpdate(el, value)
   } else {
     el.val(value);
   }

@@ -369,8 +369,22 @@ function configureForm(form, id, panelId) {
         ajax: {
           url: `/multiselect_filtering/${property}`,
           type: "POST",
-          data: function(p) {
-            return p.term;
+          delay: 250,
+          data: function(params) {
+            return {
+                term: params.term || "",
+                page: params.page || 1
+            }
+          },
+          processResults: function (data, params) {
+            params.page = params.page || 1;
+      
+            return {
+              results: data.items,
+              pagination: {
+                more: (params.page * 30) < data.total_count
+              }
+            };
           }
         },
       });

@@ -541,9 +541,20 @@ class BaseController:
             constraints.append(constraint)
         return constraints
 
-    def multiselect_filtering(self, *args, **kwargs):
-        print("ttt"*500, *args, **kwargs)
-        return "a"
+    def multiselect_filtering(self, type, params):
+        model = models[type[:-1]]
+        results = Session.query(model.id, model.name).filter(
+            model.name.contains(params.get("term"))
+        )
+
+        print(params)
+        return {
+            "items": [
+                {"text": r.name, "id": r.id}
+                for r in results.limit(10).offset(params["page"] * 10)
+            ],
+            "total_count": results.count(),
+        }
 
     def table_filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
         obj_type = table if table != "configuration" else "device"

@@ -10,9 +10,7 @@ def filtering_form_generator() -> None:
     for table, properties in filtering_properties.items():
         table_model = table if table != "configuration" else "device"
         relations = {
-            model: MultipleInstanceField(
-                model, instance_type=relation["model"]
-            )
+            model: MultipleInstanceField(model, instance_type=relation["model"])
             for model, relation in relationships[table_model].items()
             if model not in ("edges", "results")
         }

@@ -331,11 +331,7 @@ class Run(AbstractBase):
 
     def create_result(self, results: dict, device: Optional["Device"] = None) -> None:
         self.success = results["success"]
-        result_kw = {
-            "run": self,
-            "result": results,
-            "job": self.job_id,
-        }
+        result_kw = {"run": self, "result": results, "job": self.job_id}
         if self.workflow_id:
             result_kw["workflow"] = self.workflow_id
         if device:

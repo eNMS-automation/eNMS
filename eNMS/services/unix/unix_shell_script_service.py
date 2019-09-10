@@ -1,5 +1,12 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
-from wtforms import HiddenField, StringField, BooleanField, IntegerField, SelectField, FloatField
+from wtforms import (
+    HiddenField,
+    StringField,
+    BooleanField,
+    IntegerField,
+    SelectField,
+    FloatField,
+)
 from wtforms.widgets import TextArea
 
 from eNMS import app
@@ -10,7 +17,6 @@ from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service
 from eNMS.models.execution import Run
 from eNMS.models.inventory import Device
-
 
 
 class UnixShellScriptService(Service):
@@ -42,7 +48,10 @@ class UnixShellScriptService(Service):
         netmiko_connection = run.netmiko_connection(device)
         source_code = run.sub(run.source_code, locals())
         script_file_name = f"{self.name}.sh"
-        run.log("info", f"Sending shell script '{script_file_name}' to run on {device.name} (Netmiko)")
+        run.log(
+            "info",
+            f"Sending shell script '{script_file_name}' to run on {device.name} (Netmiko)",
+        )
         expect_string = run.sub(run.expect_string, locals())
         command_list = [
             f"echo '{source_code}' > '{script_file_name}'",
@@ -79,6 +88,7 @@ class UnixShellScriptService(Service):
             "success": (return_code == "0") and run.match_content(result, match),
         }
 
+
 class UnixShellScriptForm(ServiceForm, StringValidationForm, NetmikoForm):
     form_type = HiddenField(default="unix_shell_script_service")
     privileged_mode = BooleanField("Privileged mode (run as root using sudo)")
@@ -93,7 +103,7 @@ class UnixShellScriptForm(ServiceForm, StringValidationForm, NetmikoForm):
             "if [ $return_code -ne 0 ]; then\n"
             "    exit $return_code  # Indicating Failure\n"
             "else\n"
-            "    echo -e \"$directory_contents\"\n"
+            '    echo -e "$directory_contents"\n'
             "    exit 0  # Indicating Success\n"
             "fi\n"
         ),

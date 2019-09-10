@@ -129,7 +129,9 @@ class AdministrationController(BaseController):
                 fetch("job", name=name) for name in jobs
             ]
             Session.commit()
+        print("test")
         for edge in workflow_edges:
+            print(edges)
             for property in ("source", "destination", "workflow"):
                 edge[property] = fetch("job", name=edge[property]).id
             factory("workflow_edge", **edge)

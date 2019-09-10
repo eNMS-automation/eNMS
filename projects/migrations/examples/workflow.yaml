@@ -735,7 +735,7 @@
   success_query: ''
   time_between_retries: 10
   traversal_mode: device
-  type: Workflow
+  type: workflow
   use_workflow_devices: true
   vendor: ''
   waiting_time: 0
@@ -776,7 +776,7 @@
   success_query: ''
   time_between_retries: 10
   traversal_mode: service
-  type: Workflow
+  type: workflow
   use_workflow_devices: true
   vendor: ''
   waiting_time: 0

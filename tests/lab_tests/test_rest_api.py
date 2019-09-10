@@ -36,7 +36,7 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
         auth=HTTPBasicAuth("admin", "admin"),
     ).json()
     assert result["description"] == "Getter: get_facts"
-    number_of_workflows = len(fetch_all("Workflow"))
+    number_of_workflows = len(fetch_all("workflow"))
     result = post(
         "http://192.168.105.2:5000/rest/instance/workflow",
         json={"name": "new_workflow", "description": "New"},
@@ -44,5 +44,5 @@ def test_rest_api_basic(user_client: FlaskClient) -> None:
     ).json()
     assert (
         result["description"] == "New"
-        and len(fetch_all("Workflow")) == number_of_workflows + 1
+        and len(fetch_all("workflow")) == number_of_workflows + 1
     )

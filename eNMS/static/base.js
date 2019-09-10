@@ -345,7 +345,14 @@ function configureForm(form, id) {
         },
         useCurrent: false,
       });
-    } else if (["list", "multiselect", "object", "object-list"].includes(type)) {
+    } else if (["list", "multiselect"].includes(type)) {
+      const elClass = el.attr("class");
+      el.selectpicker({
+        liveSearch: elClass ? !elClass.includes("no-search") : false,
+        actionsBox: true,
+        selectedTextFormat: "count > 3",
+      });
+    } else if (["object", "object-list"].includes(type)) {
       el.select2({closeOnSelect: false})
       el.on('select2:close', function (evt) {
         console.log("test");
@@ -423,7 +430,17 @@ function updateProperty(el, property, value, type) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict") || propertyType == "json") {
     el.val(value ? JSON.stringify(value) : "{}");
-  } else if (["list", "multiselect", "object", "object-list"].includes(propertyType)) {
+  } else if (
+    ["list", "multiselect"].includes(propertyType)
+  ) {
+    try {
+      el.selectpicker("deselectAll");
+    } catch (e) {
+      // ignore
+    }
+    el.selectpicker("val", value);
+    el.selectpicker("render");
+  } else if (["object", "object-list"].includes(propertyType)) {
     el.val(value.map((p) => p.id));
     if (value.length > 4) {
       const label = `<li>${value.length} ${property} selected</li>`;

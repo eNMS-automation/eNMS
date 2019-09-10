@@ -295,7 +295,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
       done: function(panel) {
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
-        configureForm(name, id);
+        configureForm(name, id, panelId);
         if (processing) processing(panel);
       },
     },
@@ -341,7 +341,7 @@ function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-function configureForm(form, id) {
+function configureForm(form, id, panelId) {
   if (!formProperties[form]) return;
   for (const [property, type] of Object.entries(formProperties[form])) {
     let el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
@@ -363,7 +363,7 @@ function configureForm(form, id) {
         selectedTextFormat: "count > 3",
       });
     } else if (["object", "object-list"].includes(type)) {
-      el.select2({closeOnSelect: false})
+      el.select2({closeOnSelect: false, dropdownParent: $(`#${panelId}`)})
       el.on('select2:close select2:select select2:unselect', function () {
         selectUpdate($(this));
       });

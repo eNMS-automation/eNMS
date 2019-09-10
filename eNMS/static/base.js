@@ -364,7 +364,7 @@ function configureForm(form, id) {
       });
     } else if (["object", "object-list"].includes(type)) {
       el.select2({closeOnSelect: false})
-      el.on('select2:close', function (evt) {
+      el.on('select2:close select2:select select2:unselect', function () {
         selectUpdate($(this));
       });
     }

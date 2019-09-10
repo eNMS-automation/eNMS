@@ -303,7 +303,7 @@ class Run(AbstractBase):
                 "Run aborted..."
             )
             self.log("error", result)
-            results = {"success": False, "results": result}
+            results = {"success": False, "runtime": self.runtime, "results": result}
         finally:
             self.close_connection_cache()
             if self.stop:

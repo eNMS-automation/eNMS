@@ -65,7 +65,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [-467, 157]
+    Workflow_of_workflows: [-481, -23]
   push_to_git: false
   python_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
@@ -156,7 +156,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [-196, 166]
+    Workflow_of_workflows: [-178, 170]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -200,7 +200,7 @@
   operating_system: ''
   pools: []
   positions:
-    Subworkflow of Workflow: [231, -224]
+    Subworkflow of Workflow: [217, -229]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -234,9 +234,10 @@
   iteration_variable_name: iteration_value
   jobs: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
     'Subworkflow: Access Variable - Result from parent workflow', Show version with
-      multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow]
+      multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow, Workflow with
+      iteration targets]
   labels: {}
-  last_modified: '2019-08-20 21:28:58.465214'
+  last_modified: '2019-09-10 18:16:22.719254'
   mail_recipient: antoine.fourmy@gmail.com
   name: Workflow_of_workflows
   notification_header: ''
@@ -413,7 +414,7 @@
   operating_system: ''
   pools: []
   positions:
-    Subworkflow of Workflow: [215, -25]
+    Subworkflow of Workflow: [231, -29]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -592,7 +593,7 @@
   operating_system: ''
   pools: []
   positions:
-    Subworkflow of Workflow: [213, 169]
+    Subworkflow of Workflow: [227, 171]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -670,7 +671,7 @@
   jobs: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
       getters and match mechanism workflow, payload_extraction_validation_worflow]
   labels: {}
-  last_modified: '2019-09-09 16:10:16.710080'
+  last_modified: '2019-09-10 18:09:22.639520'
   mail_recipient: ''
   name: Subworkflow of Workflow
   notification_header: ''
@@ -678,7 +679,7 @@
   operating_system: ''
   pools: []
   positions:
-    Workflow_of_workflows: [-230, -199]
+    Workflow_of_workflows: [-155, -195]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -722,6 +723,7 @@
   positions:
     Iteration Targets Workflow: [-107, -112]
     Workflow with iteration target subworkflows: [253, 118]
+    Workflow_of_workflows: [-451, 164]
   push_to_git: false
   python_query: ''
   query_property_type: name
@@ -735,47 +737,6 @@
   success_query: ''
   time_between_retries: 10
   traversal_mode: device
-  type: workflow
-  use_workflow_devices: true
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  creator: admin
-  credentials: device
-  custom_username: ''
-  description: ''
-  devices: []
-  display_only_failed_nodes: false
-  events: []
-  has_targets: true
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  jobs: [Start, End, add_devices_to_payload, Workflow with iteration targets]
-  labels: {}
-  last_modified: '2019-09-09 19:13:32.851837'
-  mail_recipient: ''
-  name: Workflow with iteration target subworkflows
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: [Washington]
-  positions: {}
-  push_to_git: false
-  python_query: ''
-  query_property_type: name
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  skip: false
-  skip_python_query: ''
-  start_jobs: [Start]
-  start_new_connection: false
-  start_workflows: []
-  success_query: ''
-  time_between_retries: 10
-  traversal_mode: service
   type: workflow
   use_workflow_devices: true
   vendor: ''

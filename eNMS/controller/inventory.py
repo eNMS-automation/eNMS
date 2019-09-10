@@ -198,11 +198,13 @@ class InventoryController(BaseController):
             except XLRDError:
                 continue
             properties = sheet.row_values(0)
+            print(properties)
             for row_index in range(1, sheet.nrows):
                 values = {"dont_update_pools": True}
                 for index, property in enumerate(properties):
                     func = field_conversion[property_types[property]]
                     values[property] = func(sheet.row_values(row_index)[index])
+                print(values)
                 try:
                     factory(obj_type.lower(), **values).serialized
                 except Exception as e:

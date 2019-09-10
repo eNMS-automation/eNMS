@@ -224,8 +224,6 @@
 - {destination: End, label: success, name: 86-success:84->2, source: 'Payload Workflow:
     Payload Extraction with operations', subtype: success, workflow: Subworkflow of
     Workflow}
-- {destination: Subworkflow of Workflow, label: success, name: 76-success:71->86,
-  source: Netmiko_VRF_workflow, subtype: success, workflow: Workflow_of_workflows}
 - {destination: payload_transfer_workflow, label: success, name: 76-success:86->73,
   source: Subworkflow of Workflow, subtype: success, workflow: Workflow_of_workflows}
 - {destination: payload_extraction_validation_worflow, label: success, name: 86-success:1->75,
@@ -260,11 +258,9 @@
 - {destination: 'Iteration Target Workflow: netmiko iteration 1', label: success,
   name: 83-success:26->54, source: add_devices_to_payload, subtype: success, workflow: Iteration
     Targets Workflow}
-- {destination: add_devices_to_payload, label: success, name: 89-success:1->26, source: Start,
-  subtype: success, workflow: Workflow with iteration target subworkflows}
-- {destination: Workflow with iteration targets, label: success, name: 89-success:26->87,
-  source: add_devices_to_payload, subtype: success, workflow: Workflow with iteration
-    target subworkflows}
-- {destination: End, label: success, name: 89-success:87->2, source: Workflow with
-    iteration targets, subtype: success, workflow: Workflow with iteration target
-    subworkflows}
+- {destination: Workflow with iteration targets, label: success, name: 73-success:69->84,
+  source: Netmiko_VRF_workflow, subtype: success, workflow: Workflow_of_workflows}
+- {destination: Subworkflow of Workflow, label: success, name: 73-success:84->83,
+  source: Workflow with iteration targets, subtype: success, workflow: Workflow_of_workflows}
+- {destination: Subworkflow of Workflow, label: failure, name: 73-failure:84->83,
+  source: Workflow with iteration targets, subtype: failure, workflow: Workflow_of_workflows}

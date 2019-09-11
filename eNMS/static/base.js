@@ -466,6 +466,7 @@ function updateProperty(el, property, value, type) {
     el.selectpicker("val", value);
     el.selectpicker("render");
   } else if (["object", "object-list"].includes(propertyType)) {
+    value.forEach(o => el.append(new Option(o.name, o.id)));
     el.val(value.map((p) => p.id));
     selectUpdate(el, value)
   } else {

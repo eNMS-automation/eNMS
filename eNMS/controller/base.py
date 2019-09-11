@@ -546,12 +546,10 @@ class BaseController:
         results = Session.query(model.id, model.name).filter(
             model.name.contains(params.get("term"))
         )
-
-        print(params)
         return {
             "items": [
                 {"text": r.name, "id": r.id}
-                for r in results.limit(10).offset(params["page"] * 10)
+                for r in results.limit(10).offset((int(params["page"]) - 1) * 10).all()
             ],
             "total_count": results.count(),
         }

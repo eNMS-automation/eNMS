@@ -378,7 +378,6 @@ function configureForm(form, id, panelId) {
           },
           processResults: function (data, params) {
             params.page = params.page || 1;
-      
             return {
               results: data.items,
               pagination: {

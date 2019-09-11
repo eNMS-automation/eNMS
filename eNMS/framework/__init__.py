@@ -44,6 +44,7 @@ def configure_context_processor(flask_app: Flask) -> None:
             "names": property_names,
             "parameters": app.config,
             "relations": list(set(chain.from_iterable(relationships.values()))),
+            "relationships": relationships,
             "version": app.version,
         }
 

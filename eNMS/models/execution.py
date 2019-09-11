@@ -159,12 +159,17 @@ class Run(AbstractBase):
                     try:
                         connection.find_prompt()
                         for property in ("fast_cli", "timeout", "global_delay_factor"):
-                            setattr(connection, property, getattr(self.job, property))
-                        mode = connection.check_enable_mode()
-                        if mode and not self.privileged_mode:
-                            connection.exit_enable_mode()
-                        elif self.privileged_mode and not mode:
-                            connection.enable()
+                            job_value = getattr(self.job, property)
+                            if job_value:
+                                setattr(connection, property, job_value)
+                        try:
+                            mode = connection.check_enable_mode()
+                            if mode and not self.privileged_mode:
+                                connection.exit_enable_mode()
+                            elif self.privileged_mode and not mode:
+                                connection.enable()
+                        except Exception as exc:
+                            self.log("error", f"Failed to honor the enable mode {exc}")
                         return connection
                     except (OSError, ValueError):
                         self.disconnect("netmiko", device, connection)

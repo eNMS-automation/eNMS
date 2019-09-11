@@ -542,7 +542,7 @@ class BaseController:
         return constraints
 
     def multiselect_filtering(self, type, params):
-        model = models[type[:-1]]
+        model = models[type]
         results = Session.query(model.id, model.name).filter(
             model.name.contains(params.get("term"))
         )

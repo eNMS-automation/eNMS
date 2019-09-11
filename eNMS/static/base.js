@@ -367,7 +367,7 @@ function configureForm(form, id, panelId) {
         closeOnSelect: false,
         dropdownParent: $(`#${panelId}`),
         ajax: {
-          url: `/multiselect_filtering/${property}`,
+          url: `/multiselect_filtering/${relationships[form][property].model}`,
           type: "POST",
           delay: 250,
           data: function(params) {
@@ -381,7 +381,7 @@ function configureForm(form, id, panelId) {
             return {
               results: data.items,
               pagination: {
-                more: (params.page * 30) < data.total_count
+                more: (params.page * 10) < data.total_count
               }
             };
           }
@@ -465,10 +465,12 @@ function updateProperty(el, property, value, type) {
     }
     el.selectpicker("val", value);
     el.selectpicker("render");
-  } else if (["object", "object-list"].includes(propertyType)) {
+  } else if (propertyType == "object-list") {
     value.forEach(o => el.append(new Option(o.name, o.id)));
     el.val(value.map((p) => p.id));
-    selectUpdate(el, value)
+    selectUpdate(el, value);
+  } else if (propertyType == "object") {
+    el.append(new Option(value.name, value.id)).val(value.id);
   } else {
     el.val(value);
   }

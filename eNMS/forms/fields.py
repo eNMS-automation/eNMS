@@ -14,8 +14,6 @@ from wtforms import (
 )
 from wtforms.validators import ValidationError
 
-from eNMS.database.functions import choices
-
 
 class DateField(StringField):
     pass
@@ -72,14 +70,14 @@ class InstanceField(SelectField):
         instance_type = kwargs.pop("instance_type")
         kwargs["coerce"] = int
         super().__init__(*args, **kwargs)
-        self.choices = choices(instance_type)
+        self.choices = ()
 
 
 class MultipleInstanceField(SelectMultipleField):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         instance_type = kwargs.pop("instance_type")
         super().__init__(*args, **kwargs)
-        self.choices = choices(instance_type)
+        self.choices = ()
 
     def pre_validate(self, form: FlaskForm) -> None:
         pass

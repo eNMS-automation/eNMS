@@ -344,6 +344,7 @@ function preprocessForm(panel, id, type, duplicate) {
 
 function initSelect(el, parentId, model) {
   el.select2({
+    multiple: true,
     closeOnSelect: false,
     dropdownParent: $(`#${parentId}`),
     ajax: {
@@ -367,7 +368,8 @@ function initSelect(el, parentId, model) {
       }
     },
   });
-  el.on('select2:close', function (evt) {
+  el.on('select2:close select2:unselect', function (evt) {
+    console.log(evt);
     var uldiv = $(this).siblings('span.select2').find('ul')
     var count = uldiv.find('li').length - 1;
      uldiv.html("<li>"+count+" items selected</li>")
@@ -480,11 +482,11 @@ function updateProperty(el, property, value, type) {
     el.selectpicker("val", value);
     el.selectpicker("render");
   } else if (propertyType == "object-list") {
-    value.forEach(o => el.append(new Option(o.name, o.id)));
-    el.val(value.map((p) => p.id)).trigger("change");
+    //value.forEach(o => el.append(new Option(o.name, o.id)));
+    //el.val(value.map((p) => p.id)).trigger("change");
     //selectUpdate(el);
   } else if (propertyType == "object") {
-    el.append(new Option(value.name, value.id)).val(value.id);
+    el.append(new Option(value.name, value.id)).val(value.id).trigger("change");
   } else {
     el.val(value);
   }

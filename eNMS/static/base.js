@@ -202,7 +202,6 @@ function selectUpdate(el) {
   const length = el.select2('data').length;
   if (length > 4) {
     const label = `<li>${length} items selected</li>`;
-    console.log(label);
     el.siblings('span.select2').find('ul').html(label);
   } else {
     el.trigger("change");
@@ -369,7 +368,6 @@ function initSelect(el, parentId, model) {
     },
   });
   el.on('select2:close select2:unselect', function (evt) {
-    console.log(evt);
     var uldiv = $(this).siblings('span.select2').find('ul')
     var count = uldiv.find('li').length - 1;
      uldiv.html("<li>"+count+" items selected</li>")
@@ -397,8 +395,8 @@ function configureForm(form, id, panelId) {
         liveSearch: elClass ? !elClass.includes("no-search") : false,
         actionsBox: true,
         selectedTextFormat: "count > 3",
-      });
-      console.log(property);
+      })
+      ;
     } else if (["object", "object-list"].includes(type)) {
       if (relationships[form]) {
         model = model = relationships[form][property].model 
@@ -510,7 +508,7 @@ function processData(type, id) {
     `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
-      if (typeof table != "undefined") table.ajax.reload(null, false);
+      if (page.includes("table")) tables[type].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("service")) saveService(instance, id);
       if (type == "workflow_edge" && page == "workflow_builder") {

@@ -118,8 +118,9 @@ function savePoolObjects(id) {
 function showPoolObjectsPanel(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
-      $(`#devices-${id}`).selectpicker("val", pool.devices.map((n) => n.id));
-      $(`#links-${id}`).selectpicker("val", pool.links.map((l) => l.id));
+      initSelect($(`#devices-${id}`), `pool_objects-${id}`, "device");
+      pool.devices.forEach(o => $(`#devices-${id}`).append(new Option(o.name, o.id)));
+      $(`#devices-${id}`).val(pool.devices.map((n) => n.id)).trigger("change");
     });
   });
 }

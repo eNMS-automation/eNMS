@@ -202,6 +202,7 @@ function selectUpdate(el) {
   const length = el.select2('data').length;
   if (length > 4) {
     const label = `<li>${length} items selected</li>`;
+    console.log(label);
     el.siblings('span.select2').find('ul').html(label);
   } else {
     el.trigger("change");
@@ -341,6 +342,39 @@ function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
+function initSelect(el, parentId, model) {
+  el.select2({
+    closeOnSelect: false,
+    dropdownParent: $(`#${parentId}`),
+    ajax: {
+      url: `/multiselect_filtering/${model}`,
+      type: "POST",
+      delay: 250,
+      data: function(params) {
+        return {
+            term: params.term || "",
+            page: params.page || 1
+        }
+      },
+      processResults: function (data, params) {
+        params.page = params.page || 1;
+        return {
+          results: data.items,
+          pagination: {
+            more: (params.page * 10) < data.total_count
+          }
+        };
+      }
+    },
+  });
+  el.on('select2:close', function (evt) {
+    var uldiv = $(this).siblings('span.select2').find('ul')
+    var count = uldiv.find('li').length - 1;
+     uldiv.html("<li>"+count+" items selected</li>")
+    //selectUpdate($(this));
+  });
+}
+
 function configureForm(form, id, panelId) {
   if (!formProperties[form]) return;
   for (const [property, type] of Object.entries(formProperties[form])) {
@@ -362,34 +396,14 @@ function configureForm(form, id, panelId) {
         actionsBox: true,
         selectedTextFormat: "count > 3",
       });
+      console.log(property);
     } else if (["object", "object-list"].includes(type)) {
-      el.select2({
-        closeOnSelect: false,
-        dropdownParent: $(`#${panelId}`),
-        ajax: {
-          url: `/multiselect_filtering/${relationships[form][property].model}`,
-          type: "POST",
-          delay: 250,
-          data: function(params) {
-            return {
-                term: params.term || "",
-                page: params.page || 1
-            }
-          },
-          processResults: function (data, params) {
-            params.page = params.page || 1;
-            return {
-              results: data.items,
-              pagination: {
-                more: (params.page * 10) < data.total_count
-              }
-            };
-          }
-        },
-      });
-      el.on('select2:close select2:select select2:unselect', function () {
-        selectUpdate($(this));
-      });
+      if (relationships[form]) {
+        model = model = relationships[form][property].model 
+      } else {
+        model = property.substring(0, property.length - 1);
+      }
+      initSelect(el, panelId, model)
     }
   }
 }
@@ -467,8 +481,8 @@ function updateProperty(el, property, value, type) {
     el.selectpicker("render");
   } else if (propertyType == "object-list") {
     value.forEach(o => el.append(new Option(o.name, o.id)));
-    el.val(value.map((p) => p.id));
-    selectUpdate(el, value);
+    el.val(value.map((p) => p.id)).trigger("change");
+    //selectUpdate(el);
   } else if (propertyType == "object") {
     el.append(new Option(value.name, value.id)).val(value.id);
   } else {

@@ -38,6 +38,7 @@ const dsoptions = {
   },
   manipulation: {
     enabled: false,
+    addNode: function(data, callback) {},
     addEdge: function(data, callback) {
       if (data.to == 1) {
         alertify.notify("You cannot draw an edge to 'Start'.", "error", 5);
@@ -58,7 +59,6 @@ let edges;
 let graph;
 let selectedObject;
 let edgeType;
-let lastModified;
 let mousePosition;
 let currLabel;
 let arrowHistory = [];
@@ -150,7 +150,6 @@ function displayWorkflow(workflowData) {
   });
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
-  lastModified = workflow.last_modified;
   displayWorkflowState(workflowData);
   return graph;
 }
@@ -216,7 +215,7 @@ function addJobsToWorkflow(jobs) {
           .join("-")
       : jobs;
     call(`/add_jobs_to_workflow/${workflow.id}/${jobs}`, function(result) {
-      lastModified = result.update_time;
+      workflow.last_modified = result.update_time;
       result.jobs.forEach((job, index) => {
         $("#add_jobs").remove();
         if (graph.findNode(job.id).length == 0) {
@@ -242,7 +241,7 @@ function addJobsToWorkflow(jobs) {
 function deleteNode(id) {
   workflow.jobs = workflow.jobs.filter((n) => n.id != id);
   call(`/delete_node/${workflow.id}/${id}`, function(result) {
-    lastModified = result.update_time;
+    workflow.last_modified = result.update_time;
     alertify.notify(
       `'${result.job.name}' deleted from the workflow.`,
       "success",
@@ -255,7 +254,7 @@ function deleteLabel(label) {
   nodes.remove(label.id);
   call(`/delete_label/${workflow.id}/${label.id}`, function(updateTime) {
     delete workflow.labels[label.id];
-    lastModified = updateTime;
+    workflow.last_modified = updateTime;
     alertify.notify("Label removed.", "success", 5);
   });
 }
@@ -263,16 +262,16 @@ function deleteLabel(label) {
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
   call(`/add_edge/${param}`, function(result) {
-    lastModified = result.update_time;
+    workflow.last_modified = result.update_time;
     edges.add(edgeToEdge(result.edge));
     graph.addEdgeMode();
   });
 }
 
 function deleteEdge(edgeId) {
+  workflow.edges = workflow.edges.filter((e) => e.id != edgeId);
   call(`/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
-    lastModified = updateTime;
-    console.log(updateTime)
+    workflow.last_modified = updateTime;
   });
 }
 
@@ -431,7 +430,7 @@ function savePositions() {
     data: JSON.stringify(graph.getPositions(), null, "\t"),
     success: function(updateTime) {
       if (updateTime) {
-        lastModified = updateTime;
+        workflow.last_modified = updateTime;
       } else {
         alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
       }
@@ -470,7 +469,6 @@ Object.assign(action, {
 
 // eslint-disable-next-line
 function createLabel() {
-  console.log(mousePosition)
   const params = `${workflow.id}/${mousePosition.x}/${mousePosition.y}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
     if (currLabel) {
@@ -629,7 +627,6 @@ function getWorkflowState(periodic) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
       if (result.workflow.id != workflow.id) return;
       currentRuntime = result.runtime;
-      console.log(lastModified !== workflow.last_modified);
       if (result.workflow.last_modified !== workflow.last_modified) {
         displayWorkflow(result);
       } else {

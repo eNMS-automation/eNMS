@@ -272,6 +272,7 @@ function saveEdge(edge) {
 function deleteEdge(edgeId) {
   call(`/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
     lastModified = updateTime;
+    console.log(updateTime)
   });
 }
 
@@ -382,8 +383,13 @@ function edgeToEdge(edge) {
 
 function deleteSelection() {
   const node = graph.getSelectedNodes()[0];
-  if (node != 1 && node != 2) {
-    if (node) deleteNode(node);
+  const edge = graph.getSelectedEdges()[0];
+  if (edge) {
+    deleteEdge(edge);
+    graph.deleteSelected();
+    alertify.notify("Edge successfully deleted.", "success", 5);
+  } else if (node != 1 && node != 2) {
+    deleteNode(node);
     graph.getSelectedEdges().map((edge) => deleteEdge(edge));
     graph.deleteSelected();
   } else {
@@ -464,6 +470,7 @@ Object.assign(action, {
 
 // eslint-disable-next-line
 function createLabel() {
+  console.log(mousePosition)
   const params = `${workflow.id}/${mousePosition.x}/${mousePosition.y}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
     if (currLabel) {
@@ -622,7 +629,8 @@ function getWorkflowState(periodic) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
       if (result.workflow.id != workflow.id) return;
       currentRuntime = result.runtime;
-      if (result.workflow.last_modified !== lastModified) {
+      console.log(lastModified !== workflow.last_modified);
+      if (result.workflow.last_modified !== workflow.last_modified) {
         displayWorkflow(result);
       } else {
         displayWorkflowState(result);

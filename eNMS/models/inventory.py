@@ -105,9 +105,10 @@ class Device(CustomDevice):
         for pool in fetch_all("Pool"):
             if pool.never_update:
                 continue
-            if pool.object_match(self):
+            match = pool.object_match(self)
+            if match and self not in pool.devices:
                 pool.devices.append(self)
-            elif self in pool.devices:
+            if self in pool.devices and not match:
                 pool.devices.remove(self)
 
     def get_configurations(self) -> dict:

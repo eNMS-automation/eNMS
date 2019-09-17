@@ -83,6 +83,7 @@ def export(model: str) -> List[dict]:
 
 
 def factory(cls_name: str, **kwargs: Any) -> Any:
+    print(kwargs)
     if "/" in kwargs.get("name", ""):
         raise Exception("Names cannot contain a slash ('/').")
     instance, instance_id = None, kwargs.pop("id", 0)

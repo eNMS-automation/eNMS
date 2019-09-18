@@ -35,7 +35,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -80,7 +79,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -125,7 +123,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -148,17 +145,11 @@
   iteration_variable_name: iteration_value
   jobs: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
   labels:
-    bf81728f-aaa4-44dd-8277-d419d5885bd7:
-      content: "The success value of get_facts is determined by the \"success_query\"\
-        \ mechanism:\r\nthe vendor retrieved by Napalm get_facts must be equal to\
-        \ the device \"Vendor\" in the inventory.\r\nQuery : results[\"result\"][\"\
-        get_facts\"][\"vendor\"] == device.vendor"
-      positions: [-221, -144]
     c9ee8980-a972-4ace-a596-03eb2842c4d7:
       content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
         \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
       positions: [284, -128]
-  last_modified: '2019-09-18 20:02:11.151732'
+  last_modified: '2019-09-19 00:54:27.688306'
   mail_recipient: ''
   maximum_runs: 1
   name: payload_transfer_workflow
@@ -179,7 +170,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: 'False'
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -222,7 +212,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -268,7 +257,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -313,7 +301,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -357,7 +344,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -406,7 +392,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -451,7 +436,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -497,7 +481,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -542,7 +525,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -593,7 +575,6 @@
   start_jobs: [Start, Example1]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -638,7 +619,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -684,7 +664,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -729,7 +708,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -774,7 +752,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow
@@ -819,7 +796,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: device
   type: Workflow
@@ -862,7 +838,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: Workflow

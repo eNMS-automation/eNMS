@@ -43,38 +43,32 @@ class UnixShellScriptService(Service):
         script_file_name = f"{self.name}.sh"
         run.log("info", f"Sending shell script '{script_file_name}' to run on {device.name} (Netmiko)")
         expect_string = run.sub(run.expect_string, locals())
-        netmiko_connection.send_command(
+        command_list = [
             f"echo '{source_code}' > '{script_file_name}'",
-            delay_factor=run.delay_factor,
-            expect_string=run.expect_string or None,
-            auto_find_prompt=run.auto_find_prompt,
-            strip_prompt=run.strip_prompt,
-            strip_command=run.strip_command,
-        )
-        result = netmiko_connection.send_command(
             f"bash ./{script_file_name}",
-            delay_factor=run.delay_factor,
-            expect_string=run.expect_string or None,
-            auto_find_prompt=run.auto_find_prompt,
-            strip_prompt=run.strip_prompt,
-            strip_command=run.strip_command,
-        )
-        return_code = netmiko_connection.send_command(
-            f"echo $?",
-            delay_factor=run.delay_factor,
-            expect_string=run.expect_string or None,
-            auto_find_prompt=run.auto_find_prompt,
-            strip_prompt=run.strip_prompt,
-            strip_command=run.strip_command,
-        )
-        netmiko_connection.send_command(
             f"rm -f '{script_file_name}'",
-            delay_factor=run.delay_factor,
-            expect_string=run.expect_string or None,
-            auto_find_prompt=run.auto_find_prompt,
-            strip_prompt=run.strip_prompt,
-            strip_command=run.strip_command,
-        )
+        ]
+        for command in command_list:
+            output = netmiko_connection.send_command(
+                command,
+                delay_factor=run.delay_factor,
+                expect_string=run.expect_string or None,
+                auto_find_prompt=run.auto_find_prompt,
+                strip_prompt=run.strip_prompt,
+                strip_command=run.strip_command,
+            )
+            if "bash" in command:
+                result = output
+            return_code = netmiko_connection.send_command(
+                f"echo $?",
+                delay_factor=run.delay_factor,
+                expect_string=run.expect_string or None,
+                auto_find_prompt=run.auto_find_prompt,
+                strip_prompt=run.strip_prompt,
+                strip_command=run.strip_command,
+            )
+            if return_code != "0":
+                break
         match = run.sub(run.content_match, locals())
         return {
             "match": match,

@@ -125,13 +125,6 @@
             {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
             class="form-control hide-run add-id") }}
           </div>
-          <label class="hide-run"
-            >Define Custom Success Value (Python Query)</label
-          >
-          <div class="form-group">
-            {{ form.success_query(id=form_type + '-success_query',
-            class="form-control hide-run add-id") }}
-          </div>
           <label>Number of retries</label>
           <div class="form-group">
             {{ form.number_of_retries(id=form_type + '-number_of_retries',

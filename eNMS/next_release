@@ -1,2 +1,6 @@
 - Always delete a workflow when it is imported via import job
-- 
+- New "Maximum number of runs" property for a job in a workflow: defines how many times the same
+job is allowed to run in the workflow.
+- New "Result postprocessing" feature: allows for postprocessing the results of a service
+(per device if there are devices), including changing the success value.
+- unix shell..

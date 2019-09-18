@@ -346,8 +346,6 @@ class Run(AbstractBase):
             )
         if self.result_postprocessing:
             self.eval(self.result_postprocessing, function="exec", **locals())
-        if self.success_query:
-            results["success"] = self.eval(self.success_query, **locals())
         results["endtime"] = app.get_time()
         self.log(
             "info",

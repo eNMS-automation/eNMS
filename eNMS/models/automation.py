@@ -323,7 +323,7 @@ class Workflow(Job):
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )
         run.set_state(progress_max=self.job_number)
-        number_of_runs = defaultdict(int)
+        number_of_runs: dict = defaultdict(int)
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()

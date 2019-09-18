@@ -3,4 +3,5 @@
 job is allowed to run in the workflow.
 - New "Result postprocessing" feature: allows for postprocessing the results of a service
 (per device if there are devices), including changing the success value.
-- unix shell..
+However, the validation part still takes place BEFORE the postprocessing of the results.
+- Add new version of Unix Shell Script service

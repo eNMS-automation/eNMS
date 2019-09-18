@@ -59,10 +59,10 @@ def convert_value(model: str, attr: str, value: str, value_type: str) -> Any:
         return fetch(relation["model"], **{value_type: value})
 
 
-def delete(model: str, allow_none: Any = False, **kwargs: Any) -> dict:
+def delete(model: str, allow_none: Any = False, **kwargs: Any) -> Any:
     instance = Session.query(models[model]).filter_by(**kwargs).first()
     if allow_none and not instance:
-        return
+        return None
     if hasattr(instance, "type") and instance.type == "Task":
         instance.delete_task()
     serialized_instance = instance.serialized

@@ -1,4 +1,4 @@
-from builtins import __dict__ as builtins
+from builtins import __dict__ as builtins  # type: ignore
 from copy import deepcopy
 from functools import partial
 from json import loads
@@ -544,7 +544,9 @@ class Run(AbstractBase):
             **locals,
         }
 
-    def eval(_self, query: str, function="eval", **locals: Any) -> Any:  # noqa: N805
+    def eval(
+        _self, query: str, function: str = "eval", **locals: Any  # noqa: N805
+    ) -> Any:
         try:
             return builtins[function](query, _self.python_code_kwargs(**locals))
         except Exception as exc:

@@ -53,6 +53,7 @@ class JobForm(BaseForm):
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
+    result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
     success_query = StringField("Success Value (Python Query)")
     query_fields = ["python_query", "skip_python_query", "iteration_values"]
 

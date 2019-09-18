@@ -119,6 +119,13 @@
             '-iteration_variable_name', class="form-control hide-run add-id") }}
           </div>
           <label class="hide-run"
+            >Python Post-processing of the results (variable "results")</label
+          >
+          <div class="form-group">
+            {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
+            class="form-control hide-run add-id") }}
+          </div>
+          <label class="hide-run"
             >Define Custom Success Value (Python Query)</label
           >
           <div class="form-group">

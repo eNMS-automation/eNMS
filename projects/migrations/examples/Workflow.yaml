@@ -27,6 +27,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -71,6 +72,7 @@
   push_to_git: false
   python_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -115,6 +117,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -151,7 +154,11 @@
         \ the device \"Vendor\" in the inventory.\r\nQuery : results[\"result\"][\"\
         get_facts\"][\"vendor\"] == device.vendor"
       positions: [-221, -144]
-  last_modified: '2019-08-24 01:04:06.745365'
+    c9ee8980-a972-4ace-a596-03eb2842c4d7:
+      content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
+        \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
+      positions: [284, -128]
+  last_modified: '2019-09-18 20:02:11.151732'
   mail_recipient: ''
   maximum_runs: 1
   name: payload_transfer_workflow
@@ -164,6 +171,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -206,6 +214,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -251,6 +260,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -295,6 +305,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
   skip: false
@@ -338,6 +349,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -386,6 +398,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -430,6 +443,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -475,6 +489,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -519,6 +534,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -569,6 +585,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -613,6 +630,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -658,6 +676,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -702,6 +721,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -746,6 +766,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -790,6 +811,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -832,6 +854,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false

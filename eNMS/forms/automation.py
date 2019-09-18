@@ -42,6 +42,7 @@ class JobForm(BaseForm):
     mail_recipient = StringField("Mail Recipients (separated by comma)")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
+    maximum_runs = IntegerField("Maximum number of runs", default=1)
     start_new_connection = BooleanField("Start New Connection")
     skip = BooleanField("Skip")
     skip_python_query = StringField("Skip (Python Query)")

@@ -382,13 +382,8 @@ function edgeToEdge(edge) {
 
 function deleteSelection() {
   const node = graph.getSelectedNodes()[0];
-  const edge = graph.getSelectedEdges()[0];
-  if (edge) {
-    deleteEdge(edge);
-    graph.deleteSelected();
-    alertify.notify("Edge successfully deleted.", "success", 5);
-  } else if (node != 1 && node != 2) {
-    deleteNode(node);
+  if (node != 1 && node != 2) {
+    if (node) deleteNode(node);
     graph.getSelectedEdges().map((edge) => deleteEdge(edge));
     graph.deleteSelected();
   } else {

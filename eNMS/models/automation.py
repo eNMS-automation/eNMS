@@ -71,6 +71,7 @@ class Job(AbstractBase):
     skip_python_query = Column(SmallString)
     iteration_values = Column(LargeString)
     iteration_variable_name = Column(SmallString, default="iteration_value")
+    result_postprocessing = Column(LargeString)
     success_query = Column(SmallString)
     runs = relationship("Run", back_populates="job", cascade="all, delete-orphan")
     maximum_runs = Column(Integer, default=1)

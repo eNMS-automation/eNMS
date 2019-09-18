@@ -1,1 +1,2 @@
-- Abort feature.
+- Always delete a workflow when it is imported via import job
+- 

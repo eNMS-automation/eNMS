@@ -337,7 +337,7 @@ class Workflow(Job):
             if run.stop:
                 return results
             job = jobs.pop()
-            if number_of_runs[job.name] > job.maximum_runs or job.any(
+            if number_of_runs[job.name] >= job.maximum_runs or any(
                 node not in visited
                 for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
             ):

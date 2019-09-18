@@ -15,7 +15,7 @@ from typing import Any, Tuple, Union
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Base, Session
-from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
+from eNMS.database.functions import delete, delete_all, export, factory, fetch, fetch_all
 from eNMS.models import relationships
 
 
@@ -160,6 +160,9 @@ class AdministrationController(BaseController):
                 for file in scandir(path_job):
                     with open(path_job / file.name, "r") as instance_file:
                         instance = yaml.load(instance_file)
+                        if instance_type == "workflow":
+                            delete("Workflow", allow_none=True, name=instance["name"])
+                            Session.commit()
                         model = instance.pop("type")
                         factory(model, **self.objectify(model, instance))
                 Session.commit()

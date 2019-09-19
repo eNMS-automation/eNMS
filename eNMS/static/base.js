@@ -198,16 +198,6 @@ function openUrl(url) {
   win.focus();
 }
 
-function selectUpdate(el) {
-  const length = el.select2('data').length;
-  if (length > 4) {
-    const label = `<li>${length} items selected</li>`;
-    el.siblings('span.select2').find('ul').html(label);
-  } else {
-    el.trigger("change");
-  }
-}
-
 function processResults(callback, results) {
   if (results === false) {
     alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
@@ -341,7 +331,7 @@ function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-function initSelect(el, parentId, model) {
+function initSelect(el, parentId, model, id) {
   el.select2({
     multiple: true,
     closeOnSelect: false,
@@ -367,13 +357,9 @@ function initSelect(el, parentId, model) {
       }
     },
   });
-  el.on('select2:close select2:unselect', function (evt) {
-    var uldiv = $(this).siblings('span.select2').find('ul')
-    var count = uldiv.find('li').length - 1;
-     uldiv.html("<li>"+count+" items selected</li>")
-    //selectUpdate($(this));
-  });
 }
+
+
 
 function configureForm(form, id, panelId) {
   if (!formProperties[form]) return;
@@ -399,11 +385,11 @@ function configureForm(form, id, panelId) {
       ;
     } else if (["object", "object-list"].includes(type)) {
       if (relationships[form]) {
-        model = model = relationships[form][property].model 
+        model = relationships[form][property].model;
       } else {
         model = property.substring(0, property.length - 1);
       }
-      initSelect(el, panelId, model)
+      initSelect(el, panelId, model, id)
     }
   }
 }
@@ -480,9 +466,8 @@ function updateProperty(el, property, value, type) {
     el.selectpicker("val", value);
     el.selectpicker("render");
   } else if (propertyType == "object-list") {
-    //value.forEach(o => el.append(new Option(o.name, o.id)));
-    //el.val(value.map((p) => p.id)).trigger("change");
-    //selectUpdate(el);
+    value.forEach(o => el.append(new Option(o.name, o.id)));
+    el.val(value.map((p) => p.id)).trigger("change");
   } else if (propertyType == "object") {
     el.append(new Option(value.name, value.id)).val(value.id).trigger("change");
   } else {

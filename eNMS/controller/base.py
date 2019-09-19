@@ -548,7 +548,7 @@ class BaseController:
         )
         return {
             "items": [
-                {"text": r.name, "id": r.id, "selected": True}
+                {"text": r.name, "id": str(r.id)}
                 for r in results.limit(10).offset((int(params["page"]) - 1) * 10).all()
             ],
             "total_count": results.count(),

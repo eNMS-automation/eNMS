@@ -425,13 +425,12 @@ Object.assign(action, {
   "Run with Updates": (job) => showTypePanel(job.type, job.id, "run"),
   "Run Workflow": () => runWorkflow(),
   "Run Workflow with Updates": () => runWorkflow(true),
-  Results: (job) => showResultsPanel(job.id, job.label, "service"),
+  Results: showResultsPanel,
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Restart Workflow from Here": (job) =>
     showRestartWorkflowPanel(workflow, job),
-  "Workflow Results": () =>
-    showResultsPanel(workflow.id, workflow.name, "workflow"),
+  "Workflow Results": () => showResultsPanel(workflow),
   "Workflow Logs": () => showLogsPanel(workflow),
   "Add to Workflow": () => showPanel("add_jobs"),
   "Stop Workflow": () => stopWorkflow(),

@@ -121,8 +121,6 @@ class AdministrationController(BaseController):
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "service" else cls
                     obj = self.objectify(obj_cls, obj)
-                    print(obj)
-                    info(f"Importing {cls} {obj['name']}")
                     try:
                         factory(obj_cls, **obj)
                         Session.commit()

@@ -209,7 +209,7 @@ function refreshLogs(job, runtime, displayResults) {
       setTimeout(() => refreshLogs(job, runtime, displayResults), 1500);
     } else if (displayResults) {
       $(`#logs-${job.id}`).remove();
-      showResultsPanel(job.id, job.name, runtime);
+      showResultsPanel(job);
     }
   });
 }

@@ -555,6 +555,7 @@ class BaseController:
         }
 
     def table_filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
+        print(table, kwargs)
         obj_type = table if table != "configuration" else "device"
         model, properties = models[obj_type], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
@@ -564,6 +565,13 @@ class BaseController:
             order_property = "name"
         order = getattr(getattr(model, order_property), kwargs["order[0][dir]"])()
         constraints = self.build_filtering_constraints(obj_type, kwargs)
+        if table == "result":
+            constraints.append(
+                getattr(
+                    models["result"],
+                    "workflow" if kwargs["job[type]"] == "workflow" else "job",
+                ).has(id=kwargs["job[id]"])
+            )
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         return {
             "draw": int(kwargs["draw"]),

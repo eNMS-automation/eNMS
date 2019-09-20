@@ -167,7 +167,7 @@ function getRuntimes(type, id) {
 function showResultsPanel(job) {
   $("#result").remove();
   createPanel("result", `Results - ${job.name}`, null, function() {
-    resultTable = initTable("result", true);
+    resultTable = initTable("result", job);
   });
 }
 

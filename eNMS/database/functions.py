@@ -9,10 +9,7 @@ from eNMS.models import models, relationships
 
 
 def fetch(
-    model: str,
-    allow_none: Any = False,
-    all_matches: Any = False,
-    **kwargs: Any,
+    model: str, allow_none: Any = False, all_matches: Any = False, **kwargs: Any
 ) -> Any:
     query = Session.query(models[model]).filter_by(**kwargs)
     result = query.all() if all_matches else query.first()

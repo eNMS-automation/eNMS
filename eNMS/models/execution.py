@@ -34,7 +34,7 @@ class Result(AbstractBase):
     private = True
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
-    
+
     runtime = Column(SmallString)
     endtime = Column(SmallString)
     result = Column(MutableDict)

@@ -95,55 +95,13 @@ function parseObject(obj) {
 }
 
 function formatResults(results, id, formId, compare) {
-  if (!results) results = currentResults;
-  if (!results) {
-    $(`#display_results-${formId}`).text("No results yet.");
-  } else if (compare) {
     $(`#display_results-${formId}`).empty();
-    $(`#display_results-${formId}`).append(
-      diffview.buildView({
-        baseTextLines: results.first,
-        newTextLines: results.second,
-        opcodes: results.opcodes,
-        baseTextName: $(`#runtime-${id}`).val(),
-        newTextName: $(`#runtime_compare-${id}`).val(),
-        contextSize: null,
-        viewType: 0,
-      })
-    );
-  } else {
-    $(`#display_results-${formId}`).empty();
-    const textResults = JSON.parse(JSON.stringify(results));
-    const jsonResults = parseObject(JSON.parse(JSON.stringify(results)));
-    const options = {
-      mode: $(`#view_type-${id}`).val(),
-      modes: ["text", "view"],
-      onModeChange: function(newMode) {
-        editor.set(newMode == "text" ? textResults : jsonResults);
-      },
-    };
     let editor = new JSONEditor(
       document.getElementById(`display_results-${formId}`),
       options,
       $(`#view_type-${formId}`).val() == "text" ? textResults : jsonResults
     );
-  }
-}
-
-function displayResults(type, id, formId, compare) {
-  const url = compare ? "compare" : "get";
-  if ($(`#runtime-${id}`).val() || type == "run") {
-    fCall(
-      `/${url}_results/${type}/${id}`,
-      `#results-form-${formId}`,
-      (results) => {
-        currentResults = results;
-        formatResults(results, id, formId, compare);
-      }
-    );
-  } else {
-    $(`#display_results-${formId}`).text("No results yet.");
-  }
+  
 }
 
 function getRuntimes(type, id) {
@@ -175,18 +133,19 @@ function showResultsPanel(job, runtime) {
 function showResult(id) {
   createPanel(`display_result`, "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
-      const textResults = JSON.parse(JSON.stringify(result));
+      const textResult = JSON.parse(JSON.stringify(result));
+      const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
       const options = {
         mode: "view",
         modes: ["text", "view"],
         onModeChange: function(newMode) {
-          editor.set(textResults);
+          editor.set(newMode == "text" ? textResult : jsonResult);
         },
       };
       let editor = new JSONEditor(
         document.getElementById(`display_results-${id}`),
         options,
-        textResults
+        jsonResult
       );
     });
   });

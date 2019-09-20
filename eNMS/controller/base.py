@@ -572,6 +572,9 @@ class BaseController:
                     "workflow" if kwargs["job[type]"] == "workflow" else "job",
                 ).has(id=kwargs["job[id]"])
             )
+            if kwargs.get("job[runtime]"):
+                print("ttt"*100, kwargs.get("job[runtime]"))
+                constraints.append(models["result"].parent_runtime == kwargs.get("job[runtime]"))
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         return {
             "draw": int(kwargs["draw"]),

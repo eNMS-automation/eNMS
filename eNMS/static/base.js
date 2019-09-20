@@ -522,7 +522,7 @@ function createSearchHeaders(type, table) {
 }
 
 // eslint-disable-next-line
-function initTable(type, job) {
+function initTable(type, job, runtime) {
   // eslint-disable-next-line new-cap
   const table = $(`#${type}-table`).DataTable({
     serverSide: true,
@@ -544,6 +544,7 @@ function initTable(type, job) {
           : `#search-${type}-form`;
         d.form = serializeForm(form);
         d.job = job;
+        d.runtime = runtime;
       },
     },
   });

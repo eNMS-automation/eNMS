@@ -34,11 +34,13 @@ class Result(AbstractBase):
     private = True
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
+    
     runtime = Column(SmallString)
     endtime = Column(SmallString)
     result = Column(MutableDict)
     run_id = Column(Integer, ForeignKey("run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
+    parent_runtime = association_proxy("run", "parent_runtime")
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"

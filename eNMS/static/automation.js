@@ -164,10 +164,10 @@ function getRuntimes(type, id) {
 }
 
 // eslint-disable-next-line
-function showResultsPanel(job) {
+function showResultsPanel(job, runtime) {
   $("#result").remove();
   createPanel("result", `Results - ${job.name}`, null, function() {
-    resultTable = initTable("result", job);
+    resultTable = initTable("result", job, runtime);
   });
 }
 
@@ -209,7 +209,7 @@ function refreshLogs(job, runtime, displayResults) {
       setTimeout(() => refreshLogs(job, runtime, displayResults), 1500);
     } else if (displayResults) {
       $(`#logs-${job.id}`).remove();
-      showResultsPanel(job);
+      showResultsPanel(job, runtime);
     }
   });
 }

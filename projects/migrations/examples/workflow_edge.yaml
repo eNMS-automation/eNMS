@@ -264,3 +264,9 @@
   source: Workflow with iteration targets, subtype: success, workflow: Workflow_of_workflows}
 - {destination: Subworkflow of Workflow, label: failure, name: 73-failure:84->83,
   source: Workflow with iteration targets, subtype: failure, workflow: Workflow_of_workflows}
+- {destination: End, label: success, name: 75-success:38->2, source: Test netmiko
+    prompts pass, subtype: success, workflow: Netmiko prompts}
+- {destination: REST is_alive, label: success, name: 75-success:38->20, source: Test
+    netmiko prompts pass, subtype: success, workflow: Netmiko prompts}
+- {destination: Test Netmiko Prompt Service, label: success, name: 75-success:20->37,
+  source: REST is_alive, subtype: success, workflow: Netmiko prompts}

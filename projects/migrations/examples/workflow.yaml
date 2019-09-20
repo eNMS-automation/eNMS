@@ -330,8 +330,8 @@
       content: "Test of the maximum number of run of a service in a workflow.\r\n\
         For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
         \ after the REST service.\r\n"
-      positions: [194, -146]
-  last_modified: '2019-09-18 18:33:51.717194'
+      positions: [163, -163]
+  last_modified: '2019-09-20 03:57:45.978247'
   mail_recipient: ''
   maximum_runs: 1
   name: Netmiko prompts

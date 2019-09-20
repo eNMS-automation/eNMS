@@ -94,16 +94,6 @@ function parseObject(obj) {
   return obj;
 }
 
-function formatResults(results, id, formId, compare) {
-    $(`#display_results-${formId}`).empty();
-    let editor = new JSONEditor(
-      document.getElementById(`display_results-${formId}`),
-      options,
-      $(`#view_type-${formId}`).val() == "text" ? textResults : jsonResults
-    );
-  
-}
-
 function getRuntimes(type, id) {
   call(`/get_runtimes/${type}/${id}`, (runtimes) => {
     $(`#runtime-${id},#runtime_compare-${id}`).empty();
@@ -133,13 +123,12 @@ function showResultsPanel(job, runtime) {
 function showResult(id) {
   createPanel(`display_result`, "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
-      const textResult = JSON.parse(JSON.stringify(result));
       const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
       const options = {
         mode: "view",
         modes: ["text", "view"],
         onModeChange: function(newMode) {
-          editor.set(newMode == "text" ? textResult : jsonResult);
+          editor.set(newMode == "text" ? result : jsonResult);
         },
       };
       let editor = new JSONEditor(

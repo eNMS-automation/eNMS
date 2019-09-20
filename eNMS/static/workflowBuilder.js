@@ -152,109 +152,86 @@ function displayWorkflow(workflowData) {
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   displayWorkflowState(workflowData);
-  makeMeMultiSelect($("#network"), graph, nodes);
+  rectangleSelection($("#network"), graph, nodes);
   return graph;
 }
 
-// Everything is in there
-const makeMeMultiSelect = (container, network, nodes) => {
-  const NO_CLICK = 0;
-  const RIGHT_CLICK = 3;
+const rectangleSelection = (container, network, nodes) => {
 
-  offsetLeft = container.position().left - container.offset().left
-  offsetTop = container.position().top - container.offset().top
-  
-  // Disable default right-click dropdown menu
-  container[0].oncontextmenu = () => false;
-  
-  // State
-  
-  let drag = false, DOMRect = {};
+  const offsetLeft = container.position().left - container.offset().left
+  const offsetTop = container.position().top - container.offset().top
+  let drag = false
+  let DOMRect = {};
 
-  // Selector
-  
   const canvasify = (DOMx, DOMy) => {
       const { x, y } = network.DOMtoCanvas({ x: DOMx, y: DOMy });
       return [x, y];
   };
-  
+
   const correctRange = (start, end) =>
       start < end ? [start, end] : [end, start];
 
   const selectFromDOMRect = () => {
-      const [sX, sY] = canvasify(DOMRect.startX, DOMRect.startY);
-      const [eX, eY] = canvasify(DOMRect.endX, DOMRect.endY);
-      const [startX, endX] = correctRange(sX, eX);
-      const [startY, endY] = correctRange(sY, eY);
+    const [sX, sY] = canvasify(DOMRect.startX, DOMRect.startY);
+    const [eX, eY] = canvasify(DOMRect.endX, DOMRect.endY);
+    const [startX, endX] = correctRange(sX, eX);
+    const [startY, endY] = correctRange(sY, eY);
 
-      network.selectNodes(nodes.get().reduce(
-          (selected, { id }) => {
-              const { x, y } = network.getPositions(id)[id];
-              return (startX <= x && x <= endX && startY <= y && y <= endY) ?
-                  selected.concat(id) : selected;
-          }, []
-      ));
+    network.selectNodes(nodes.get().reduce(
+      (selected, { id }) => {
+        const { x, y } = network.getPositions(id)[id];
+        return (startX <= x && x <= endX && startY <= y && y <= endY) ?
+          selected.concat(id) : selected;
+      }, []
+    ));
   }
 
-  console.log(network.canvasToDOM({x: 0, y: 0}));
-
-  // Listeners
-
   container.on("mousedown", function({ which, pageX, pageY }) {
-      // When mousedown, save the initial rectangle state
-      if(which === RIGHT_CLICK) {
-        console.log(this.offsetLeft, this.offsetTop)
-          Object.assign(DOMRect, {
-              startX: pageX - this.offsetLeft + offsetLeft,
-              startY: pageY - this.offsetTop + offsetTop,
-              endX: pageX - this.offsetLeft + offsetLeft,
-              endY: pageY - this.offsetTop + offsetTop
-          });
-          drag = true;
-      }
+    if (which === 3) {
+      console.log(this.offsetLeft, this.offsetTop)
+        Object.assign(DOMRect, {
+          startX: pageX - this.offsetLeft + offsetLeft,
+          startY: pageY - this.offsetTop + offsetTop,
+          endX: pageX - this.offsetLeft + offsetLeft,
+          endY: pageY - this.offsetTop + offsetTop
+        });
+        drag = true;
+    }
   });
 
   container.on("mousemove", function({ which, pageX, pageY }) {
-      // Make selection rectangle disappear when accidently mouseupped outside 'container'
-      if(which === NO_CLICK && drag) {
+      if (which === 0 && drag) {
           drag = false;
           network.redraw();
-      }
-      // When mousemove, update the rectangle state
-      else if(drag) {
-          Object.assign(DOMRect, {
-              endX: pageX - this.offsetLeft + offsetLeft,
-              endY: pageY - this.offsetTop + offsetTop
-          });
-          network.redraw();
+      } else if (drag) {
+        Object.assign(DOMRect, {
+          endX: pageX - this.offsetLeft + offsetLeft,
+          endY: pageY - this.offsetTop + offsetTop
+        });
+        network.redraw();
       }
   });
 
   container.on("mouseup", function({ which }) {
-      // When mouseup, select the nodes in the rectangle
-      if(which === RIGHT_CLICK) {
-          drag = false;
-          network.redraw();
-          selectFromDOMRect();
-      }
-  });
-
-  // Drawer
+    if(which === 3) {
+      drag = false;
+      network.redraw();
+      selectFromDOMRect();
+    }
 
   network.on('afterDrawing', ctx => {
-      if(drag) {
-          const [startX, startY] = canvasify(DOMRect.startX, DOMRect.startY);
-          const [endX, endY] = canvasify(DOMRect.endX, DOMRect.endY);
-
-          ctx.setLineDash([5]);
-          ctx.strokeStyle = 'rgba(78, 146, 237, 0.75)';
-          ctx.strokeRect(startX, startY, endX - startX, endY - startY);
-          ctx.setLineDash([]);
-          ctx.fillStyle = 'rgba(151, 194, 252, 0.45)';
-          ctx.fillRect(startX, startY, endX - startX, endY - startY);
-      }
+    if(drag) {
+      const [startX, startY] = canvasify(DOMRect.startX, DOMRect.startY);
+      const [endX, endY] = canvasify(DOMRect.endX, DOMRect.endY);
+      ctx.setLineDash([5]);
+      ctx.strokeStyle = 'rgba(78, 146, 237, 0.75)';
+      ctx.strokeRect(startX, startY, endX - startX, endY - startY);
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(151, 194, 252, 0.45)';
+      ctx.fillRect(startX, startY, endX - startX, endY - startY);
+    }
   });
-}; // end makeMeMultiSelect
+}
 
 function switchToWorkflow(workflowId, arrow) {
   if (!arrow) {

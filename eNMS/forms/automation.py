@@ -135,17 +135,6 @@ class LogsForm(BaseForm):
     runtime = NoValidationSelectField("Version", choices=())
 
 
-class ResultsForm(BaseForm):
-    template = "results"
-    form_type = HiddenField(default="results")
-    compare = BooleanField(default=False)
-    view_type = SelectField(
-        "View", choices=(("view", "Display as JSON"), ("text", "Display as text"))
-    )
-    runtime = NoValidationSelectField("Version", choices=())
-    runtime_compare = NoValidationSelectField("Version", choices=())
-
-
 class ResultForm(BaseForm):
     template = "result"
     form_type = HiddenField(default="result")
@@ -157,32 +146,6 @@ class DisplayResultForm(BaseForm):
     view_type = SelectField(
         "View", choices=(("view", "Display as JSON"), ("text", "Display as text"))
     )
-
-
-class ServiceResultsForm(ResultsForm):
-    form_type = HiddenField(default="service_results")
-    device = NoValidationSelectField("device", choices=())
-    device_compare = NoValidationSelectField("device", choices=())
-
-
-class WorkflowResultsForm(ResultsForm):
-    form_type = HiddenField(default="workflow_results")
-    workflow_device = NoValidationSelectField("device", choices=())
-    workflow_device_compare = NoValidationSelectField("device", choices=())
-    device = NoValidationSelectField("device", choices=())
-    device_compare = NoValidationSelectField("device", choices=())
-    job = NoValidationSelectField("job", choices=())
-    job_compare = NoValidationSelectField("job", choices=())
-
-
-class DeviceResultsForm(ResultsForm):
-    form_type = HiddenField(default="device_results")
-
-
-class RunResultsForm(ResultsForm):
-    form_type = HiddenField(default="run_results")
-    device = NoValidationSelectField("device", choices=())
-    device_compare = NoValidationSelectField("device", choices=())
 
 
 class AddJobsForm(BaseForm):

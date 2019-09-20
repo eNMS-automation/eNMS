@@ -555,7 +555,6 @@ class BaseController:
         }
 
     def table_filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
-        print(table, kwargs)
         obj_type = table if table != "configuration" else "device"
         model, properties = models[obj_type], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
@@ -573,7 +572,6 @@ class BaseController:
                 ).has(id=kwargs["job[id]"])
             )
             if kwargs.get("job[runtime]"):
-                print("ttt" * 100, kwargs.get("job[runtime]"))
                 constraints.append(
                     models["result"].parent_runtime == kwargs.get("job[runtime]")
                 )

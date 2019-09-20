@@ -46,7 +46,6 @@ call("/get/parameters/1", function(parameters) {
   currentView = parameters.default_view;
   dimension = currentView.substring(0, 2);
   markerType = parameters.default_marker;
-  console.log(parameters);
   map = L.map("map", { preferCanvas: true }).setView(
     [parameters.default_latitude, parameters.default_longitude],
     parameters.default_zoom_level

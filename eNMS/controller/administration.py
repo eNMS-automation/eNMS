@@ -128,9 +128,7 @@ class AdministrationController(BaseController):
                         info(f"{str(obj)} could not be imported ({str(e)})")
 
                         status = "Partial import (see logs)."
-        print("test")
         for name, jobs in workflow_jobs.items():
-            print(name, jobs)
             fetch("workflow", name=name).jobs = [
                 fetch("job", name=name) for name in jobs
             ]

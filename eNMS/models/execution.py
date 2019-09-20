@@ -1,3 +1,4 @@
+from builtins import __dict__ as builtins  # type: ignore
 from copy import deepcopy
 from functools import partial
 from json import loads
@@ -367,11 +368,8 @@ class Run(AbstractBase):
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
-        if self.success_query:
-            query_result = self.eval(self.success_query, **locals())
-            results.update(
-                {"success": query_result, "success_query": self.success_query}
-            )
+        if self.result_postprocessing:
+            self.eval(self.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
         self.log(
             "info",
@@ -570,9 +568,11 @@ class Run(AbstractBase):
             **locals,
         }
 
-    def eval(_self, query: str, **locals: Any) -> Any:  # noqa: N805
+    def eval(
+        _self, query: str, function: str = "eval", **locals: Any  # noqa: N805
+    ) -> Any:
         try:
-            return eval(query, _self.python_code_kwargs(**locals))
+            return builtins[function](query, _self.python_code_kwargs(**locals))
         except Exception as exc:
             raise Exception(
                 "Python Query / Variable Substitution Failure."

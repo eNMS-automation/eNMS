@@ -15,6 +15,7 @@
   last_modified: '2019-08-01 11:52:44.218107'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: Start
   notification_header: ''
@@ -28,7 +29,7 @@
     Iteration Targets Workflow: [-395, 13]
     Napalm getters and match mechanism workflow: [-605, 76]
     Napalm_VRF_workflow: ['-200', '0']
-    Netmiko prompts: ['-279', '-158']
+    Netmiko prompts: [-279, -158]
     Netmiko_VRF_workflow: ['-200', '0']
     'Payload Workflow: Payload Extraction with operations': [-516, -120]
     Subworkflow of Workflow: [-160, -37]
@@ -46,12 +47,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -73,6 +74,7 @@
   last_modified: '2019-08-01 11:40:22.000682'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: End
   notification_header: ''
@@ -86,7 +88,7 @@
     Iteration Targets Workflow: [748, -268]
     Napalm getters and match mechanism workflow: [547, 107]
     Napalm_VRF_workflow: ['200', '0']
-    Netmiko prompts: ['634', '187']
+    Netmiko prompts: [634, 187]
     Netmiko_VRF_workflow: ['200', '0']
     'Payload Workflow: Payload Extraction with operations': [527, -97]
     Subworkflow of Workflow: [553, -5]
@@ -107,12 +109,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -134,6 +136,7 @@
   last_modified: '2019-07-24 14:38:17.558725'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: mail_feedback_notification
   notification_header: ''
@@ -144,12 +147,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -171,6 +174,7 @@
   last_modified: '2019-07-11 13:51:13.388262'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: slack_feedback_notification
   notification_header: ''
@@ -181,12 +185,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -208,6 +212,7 @@
   last_modified: '2019-07-11 13:51:13.428231'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: mattermost_feedback_notification
   notification_header: ''
@@ -218,12 +223,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -245,6 +250,7 @@
   last_modified: '2019-07-11 13:51:13.461232'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: cluster_monitoring
   notification_header: ''
@@ -255,12 +261,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -282,6 +288,7 @@
   last_modified: '2019-08-01 11:38:04.913830'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: git_push_configurations
   notification_header: ''
@@ -293,12 +300,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -320,6 +327,7 @@
   last_modified: '2019-08-01 11:38:04.642534'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: poller_service
   notification_header: ''
@@ -331,12 +339,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -368,6 +376,7 @@
   mail_address: aaa@gmail.com
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: Example1
   notification_header: ''
@@ -383,6 +392,7 @@
   python_query: ''
   query_property_type: ip_address
   regex: ''
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -390,7 +400,6 @@
   start_new_connection: false
   string1: cisco
   string2: s2
-  success_query: ''
   time_between_retries: 10
   type: example_service
   url: https://www.google.fr/
@@ -415,6 +424,7 @@
   loopback_ip: 100.1.1.1
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: napalm_configure_bgp_1
   neighbor_ip: 100.1.2.1
@@ -429,12 +439,12 @@
   python_query: ''
   query_property_type: ip_address
   remote_as: 200
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: true
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: configure_bgp_service
   vendor: ''
@@ -461,6 +471,7 @@
   mail_recipient: ''
   max_processes: 5
   max_transfer_size: 1073741824
+  maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
   name: test_file_transfer_service
@@ -473,6 +484,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -480,7 +492,6 @@
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: generic_file_transfer_service
   vendor: ''
@@ -505,6 +516,7 @@
   last_modified: '2019-07-11 13:51:14.001348'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: test_database_backup_service
   notification_header: ''
@@ -516,12 +528,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: database_backup_service
   vendor: ''
@@ -546,6 +558,7 @@
   last_modified: '2019-08-01 11:38:03.183017'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: true
   name: netmiko_configuration_backup
   notification_header: ''
@@ -558,12 +571,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_backup_service
@@ -587,6 +600,7 @@
   last_modified: '2019-08-01 11:38:04.436716'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: true
   name: napalm_configuration_backup
   notification_header: ''
@@ -599,12 +613,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_backup_service
   use_device_driver: true
@@ -634,6 +648,7 @@
   last_modified: '2019-08-04 11:01:33.553474'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: netmiko_create_vrf_test
   notification_header: ''
@@ -646,6 +661,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -653,7 +669,6 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
@@ -688,6 +703,7 @@
   last_modified: '2019-08-03 20:32:00.822843'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: netmiko_check_vrf_test
   negative_logic: false
@@ -706,6 +722,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -713,7 +730,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_validation_service
@@ -745,6 +761,7 @@
   last_modified: '2019-08-01 11:40:18.423301'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: netmiko_delete_vrf_test
   notification_header: ''
@@ -758,6 +775,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -765,7 +783,6 @@
   start_new_connection: false
   strip_command: false
   strip_prompt: false
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_configuration_service
@@ -800,6 +817,7 @@
   last_modified: '2019-08-01 11:40:21.380540'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: netmiko_check_no_vrf_test
   negative_logic: true
@@ -816,6 +834,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -823,7 +842,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 1
   timeout: 3
   type: netmiko_validation_service
@@ -850,6 +868,7 @@
   last_modified: '2019-07-24 20:09:43.688021'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: napalm_create_vrf_test
   notification_header: ''
@@ -862,12 +881,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_configuration_service
   use_device_driver: true
@@ -897,6 +916,7 @@
   last_modified: '2019-07-31 13:25:41.424603'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: true
   name: REST is_alive
   negative_logic: false
@@ -909,6 +929,7 @@
     c: ['1', '2', '3']
   pools: []
   positions:
+    Netmiko prompts: [405, -103]
     Workflow with separate failure - success path: [199, 203]
     'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
       357, -52]
@@ -918,12 +939,12 @@
   python_query: ''
   query_property_type: ip_address
   rest_url: http://127.0.0.1:5000/rest/is_alive
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -951,6 +972,7 @@
   last_modified: '2019-08-24 00:58:16.900129'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: get_facts
   negative_logic: false
@@ -967,12 +989,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: results["result"]["get_facts"]["vendor"] == device.vendor
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -998,6 +1020,7 @@
   last_modified: '2019-07-24 14:38:05.538847'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: get_interfaces
   negative_logic: false
@@ -1013,12 +1036,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1041,9 +1064,10 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-24 14:38:03.817341'
+  last_modified: '2019-09-18 19:04:51.055911'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: get_interfaces_ip
   negative_logic: false
@@ -1058,12 +1082,13 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\
+    \nresults[\"result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1089,6 +1114,7 @@
   last_modified: '2019-07-24 14:38:04.482568'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: get_config
   negative_logic: false
@@ -1103,12 +1129,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1132,6 +1158,7 @@
   last_modified: '2019-07-24 14:38:04.818329'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: process_payload1
   notification_header: ''
@@ -1140,16 +1167,16 @@
   pools: []
   positions:
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: [287, 97]
+    payload_transfer_workflow: [291, 208]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -1171,6 +1198,7 @@
   last_modified: '2019-08-20 18:18:23.620683'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: add_devices_to_payload
   notification_header: ''
@@ -1185,6 +1213,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1197,7 +1226,6 @@
     \ if device.name == \"Washington\" else ['Loopback55', 'Loopback666']\r\nset_var('iteration_devices2',\
     \ targets2, device=device.name)\r\nsave_result(True, {})"
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
@@ -1230,6 +1258,7 @@
   last_modified: '2019-07-11 13:51:14.896878'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: netmiko_python_defined_devices
   negative_logic: false
@@ -1243,6 +1272,7 @@
   push_to_git: false
   python_query: payload['variables']['devices']
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1250,7 +1280,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_validation_service
@@ -1286,6 +1315,7 @@
   last_modified: '2019-08-14 14:05:25.693261'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: Iterated_netmiko_service
   negative_logic: false
@@ -1299,6 +1329,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1306,7 +1337,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_validation_service
@@ -1342,6 +1372,7 @@
   last_modified: '2019-07-24 14:36:46.701951'
   mail_recipient: antoine.fourmy@gmail.com
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: netmiko_show_ip_route
   negative_logic: false
@@ -1355,6 +1386,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1362,7 +1394,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_validation_service
@@ -1398,6 +1429,7 @@
   match_type2: regex
   match_type3: textfsm
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: true
   name: Payload Extraction
   notification_header: ''
@@ -1415,12 +1447,12 @@
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_extraction_service
   variable1: simple_variable
@@ -1451,6 +1483,7 @@
   last_modified: '2019-08-14 19:35:35.605726'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: 'Payload Workflow: Validate dict via results'
   negative_logic: false
@@ -1464,12 +1497,12 @@
   python_query: ''
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: dict_included
@@ -1497,6 +1530,7 @@
   last_modified: '2019-08-14 19:40:24.996346'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: 'Payload Workflow: Validate text via results'
   negative_logic: false
@@ -1510,12 +1544,12 @@
   python_query: ''
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -1538,6 +1572,7 @@
   last_modified: '2019-07-24 20:09:49.603685'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: napalm_rollback
   notification_header: ''
@@ -1550,12 +1585,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_rollback_service
   use_device_driver: true
@@ -1589,6 +1624,7 @@
   last_modified: '2019-08-03 20:31:33.242467'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: netmiko_check_vrf_napalm
   negative_logic: false
@@ -1605,6 +1641,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1612,7 +1649,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_validation_service
@@ -1648,6 +1684,7 @@
   last_modified: '2019-07-24 20:09:50.574617'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: netmiko_check_no_vrf_napalm
   negative_logic: true
@@ -1662,6 +1699,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1669,7 +1707,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_validation_service
@@ -1705,6 +1742,7 @@
   last_modified: '2019-08-02 19:52:14.677268'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: true
   name: Device_from_python_query
   negative_logic: false
@@ -1718,6 +1756,7 @@
   push_to_git: false
   python_query: get_var("test", device=workflow_device.name)
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1725,7 +1764,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_validation_service
@@ -1759,9 +1797,10 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-19 15:41:54.851596'
+  last_modified: '2019-09-18 18:31:59.605812'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 2
   multiprocessing: false
   name: Test Netmiko Prompt Service
   negative_logic: false
@@ -1770,7 +1809,7 @@
   operating_system: ''
   pools: []
   positions:
-    Netmiko prompts: ['22', '-74']
+    Netmiko prompts: [22, -74]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1778,12 +1817,12 @@
   response1: show vrf b
   response2: show vrf c
   response3: ''
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1820,6 +1859,7 @@
   last_modified: '2019-07-19 15:41:59.683776'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: Test netmiko prompts pass
   negative_logic: false
@@ -1828,7 +1868,7 @@
   operating_system: ''
   pools: []
   positions:
-    Netmiko prompts: ['307', '43']
+    Netmiko prompts: [350, 108]
   privileged_mode: false
   push_to_git: false
   python_query: ''
@@ -1836,12 +1876,12 @@
   response1: show vrf
   response2: ''
   response3: ''
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1866,6 +1906,7 @@
   last_modified: '2019-07-31 13:25:29.352379'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: Payload editor, no devices
   notification_header: ''
@@ -1877,6 +1918,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1885,7 +1927,6 @@
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
@@ -1907,6 +1948,7 @@
   last_modified: '2019-07-31 13:25:31.392491'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: Payload editor, with device
   notification_header: ''
@@ -1918,6 +1960,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1929,7 +1972,6 @@
     iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
@@ -1962,6 +2004,7 @@
   last_modified: '2019-07-31 13:25:38.941367'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: Show vrf with payload helper
   negative_logic: false
@@ -1975,6 +2018,7 @@
   push_to_git: false
   python_query: get_var("iteration_device", section="pools", device=workflow_device.name)
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -1982,7 +2026,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 1
   type: netmiko_validation_service
@@ -2018,6 +2061,7 @@
   last_modified: '2019-07-31 13:25:41.095217'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: Show vrf with python query
   negative_logic: false
@@ -2031,6 +2075,7 @@
   push_to_git: false
   python_query: get_var("iteration_simple", section="pools")
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -2038,7 +2083,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_validation_service
@@ -2074,6 +2118,7 @@
   last_modified: '2019-08-03 20:33:15.924993'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: show runtime with get_result helper
   negative_logic: false
@@ -2087,6 +2132,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -2094,7 +2140,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_validation_service
@@ -2122,6 +2167,7 @@
   last_modified: '2019-08-08 21:45:33.809528'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Getters Workflow: is alive'
   negative_logic: false
@@ -2135,12 +2181,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2166,6 +2212,7 @@
   last_modified: '2019-08-06 22:20:19.161043'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Getters Workflow: get facts'
   negative_logic: false
@@ -2179,12 +2226,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2211,6 +2258,7 @@
   last_modified: '2019-08-08 21:45:40.369909'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Getters Workflow: Interface IP'
   negative_logic: false
@@ -2225,12 +2273,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2256,6 +2304,7 @@
   last_modified: '2019-08-06 23:40:55.348647'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Getters Workflow: MAC address'
   negative_logic: true
@@ -2269,12 +2318,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2300,6 +2349,7 @@
   last_modified: '2019-08-06 22:23:19.569044'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Getters Workflow: get facts failed match'
   negative_logic: false
@@ -2313,12 +2363,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2345,9 +2395,10 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-10 17:48:21.020579'
+  last_modified: '2019-09-18 18:26:58.293827'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 2
   multiprocessing: false
   name: 'Ansible Workflow: Arista show version'
   negative_logic: false
@@ -2364,12 +2415,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2398,6 +2449,7 @@
   last_modified: '2019-08-10 18:26:51.501557'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Ansible Workflow: Arista show configuration (regex match)'
   negative_logic: false
@@ -2413,12 +2465,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: text
@@ -2447,6 +2499,7 @@
   last_modified: '2019-08-10 18:26:36.791826'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Ansible Workflow: Arista show configuration (dict match)'
   negative_logic: false
@@ -2462,12 +2515,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2501,6 +2554,7 @@
   last_modified: '2019-08-13 20:58:22.190268'
   mail_recipient: ''
   max_processes: 10
+  maximum_runs: 1
   multiprocessing: true
   name: Show version with multiprocessing
   negative_logic: false
@@ -2516,6 +2570,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -2523,7 +2578,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_validation_service
@@ -2559,6 +2613,7 @@
   last_modified: '2019-08-14 14:05:31.377620'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: Iterated_netmiko_service bis
   negative_logic: false
@@ -2572,6 +2627,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -2579,7 +2635,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_validation_service
@@ -2615,6 +2670,7 @@
   last_modified: '2019-09-01 21:43:34.449057'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: 'Iteration Target Workflow: netmiko iteration 1'
   negative_logic: false
@@ -2628,6 +2684,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -2635,7 +2692,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_validation_service
@@ -2671,6 +2727,7 @@
   last_modified: '2019-09-01 21:44:33.592661'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: 'Iteration Target Workflow: netmiko iteration 2'
   negative_logic: false
@@ -2684,6 +2741,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -2691,7 +2749,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_validation_service
@@ -2727,6 +2784,7 @@
   last_modified: '2019-09-01 21:44:48.403814'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: 'Iteration Target Workflow: netmiko iteration 3'
   negative_logic: false
@@ -2740,6 +2798,7 @@
   push_to_git: false
   python_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -2747,7 +2806,6 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
   time_between_retries: 10
   timeout: 3
   type: netmiko_validation_service
@@ -2777,6 +2835,7 @@
   last_modified: '2019-08-14 19:22:23.906505'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: 'Payload Workflow: Validate text via payload'
   negative_logic: false
@@ -2790,12 +2849,12 @@
   python_query: ''
   query: get_var("textfsm_variable", device=device.name)[0][1]
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -2824,6 +2883,7 @@
   last_modified: '2019-08-14 19:40:32.197054'
   mail_recipient: ''
   max_processes: 5
+  maximum_runs: 1
   multiprocessing: false
   name: 'Payload Workflow: Validate dict via payload'
   negative_logic: false
@@ -2837,12 +2897,12 @@
   python_query: ''
   query: get_var("regex_variable", device=device.name)
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -2865,6 +2925,7 @@
   last_modified: '2019-08-14 23:42:49.512906'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: true
   name: 'Payload Workflow: Add initial variables'
   notification_header: ''
@@ -2876,6 +2937,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -2884,7 +2946,6 @@
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
@@ -2912,6 +2973,7 @@
   match_type2: none
   match_type3: none
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: true
   name: 'Payload Workflow: Extraction 1'
   notification_header: ''
@@ -2929,12 +2991,12 @@
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_extraction_service
   variable1: boolean
@@ -2965,6 +3027,7 @@
   match_type2: none
   match_type3: none
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: true
   name: 'Payload Workflow: Extraction 2'
   notification_header: ''
@@ -2982,12 +3045,12 @@
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_extraction_service
   variable1: list
@@ -3017,6 +3080,7 @@
   last_modified: '2019-08-15 00:09:07.776014'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: true
   name: 'Payload Workflow: Validation 1'
   negative_logic: false
@@ -3030,12 +3094,12 @@
   python_query: ''
   query: get_var("list", device=device.name)
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -3063,6 +3127,7 @@
   last_modified: '2019-08-15 00:11:21.018179'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Payload Workflow: Validation 2'
   negative_logic: false
@@ -3076,12 +3141,12 @@
   python_query: ''
   query: get_var("dict", device=device.name)
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: dict_included
@@ -3111,6 +3176,7 @@
   last_modified: '2019-09-09 17:47:24.959325'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Iteration Targets Workflow: No device targets'
   negative_logic: false
@@ -3126,12 +3192,12 @@
   python_query: ''
   query_property_type: name
   rest_url: http://127.0.0.1:5000/rest/instance/Device/{{get_var('iteration_value')}}
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -3157,6 +3223,7 @@
   last_modified: '2019-08-18 16:27:11.734978'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Variable Access Subworkflow: Access variable from snippet'
   notification_header: ''
@@ -3169,6 +3236,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -3178,7 +3246,6 @@
     \n\"napalm\": get_result(\"netmiko_check_no_vrf_napalm\", device=device.name)\r\
     \n}\r\nsave_result(success=True, result=result)"
   start_new_connection: false
-  success_query: ''
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
@@ -3211,6 +3278,7 @@
   last_modified: '2019-09-01 21:47:54.980908'
   mail_recipient: ''
   max_processes: 50
+  maximum_runs: 1
   multiprocessing: false
   name: 'Variable Access Subworkflow: Access variables for iteration'
   negative_logic: false
@@ -3224,6 +3292,7 @@
   push_to_git: false
   python_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -3231,7 +3300,64 @@
   start_new_connection: false
   strip_command: true
   strip_prompt: true
-  success_query: ''
+  time_between_retries: 10
+  timeout: 10
+  type: netmiko_validation_service
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  color: '#D2E5FF'
+  command: show interface {{get_var("iteration_value")}}
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: arista_eos
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2019-09-09 19:11:20.980102'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Workflow with iteration targets: use target for show interface'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Workflow with iteration target subworkflows: [227, 205]
+    Workflow with iteration targets: [239, -121]
+  privileged_mode: false
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  skip: false
+  skip_python_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
   time_between_retries: 10
   timeout: 10
   type: netmiko_validation_service

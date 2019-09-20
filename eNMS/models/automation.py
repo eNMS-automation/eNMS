@@ -71,8 +71,9 @@ class Job(AbstractBase):
     skip_python_query = Column(SmallString)
     iteration_values = Column(LargeString)
     iteration_variable_name = Column(SmallString, default="iteration_value")
-    success_query = Column(SmallString)
+    result_postprocessing = Column(LargeString)
     runs = relationship("Run", back_populates="job", cascade="all, delete-orphan")
+    maximum_runs = Column(Integer, default=1)
 
     @property
     def filename(self) -> str:
@@ -312,6 +313,7 @@ class Workflow(Job):
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )
         run.set_state(progress_max=self.job_number)
+        number_of_runs: dict = defaultdict(int)
         jobs: list = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()
@@ -325,11 +327,12 @@ class Workflow(Job):
             if run.stop:
                 return results
             job = jobs.pop()
-            if job in visited or any(
+            if number_of_runs[job.name] >= job.maximum_runs or any(
                 node not in visited
                 for node, _ in job.adjacent_jobs(self, "source", "prerequisite")
             ):
                 continue
+            number_of_runs[job.name] += 1
             visited.add(job)
             app.run_db[run.runtime]["current_job"] = job.get_properties()
             skip_job = False

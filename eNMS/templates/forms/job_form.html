@@ -119,11 +119,11 @@
             '-iteration_variable_name', class="form-control hide-run add-id") }}
           </div>
           <label class="hide-run"
-            >Define Custom Success Value (Python Query)</label
+            >Python Post-processing of the results (variable "results")</label
           >
           <div class="form-group">
-            {{ form.success_query(id=form_type + '-success_query',
-            class="form-control hide-run add-id") }}
+            {{ form.result_postprocessing(id=form_type +
+            '-result_postprocessing', class="form-control hide-run add-id") }}
           </div>
           <label>Number of retries</label>
           <div class="form-group">
@@ -323,6 +323,11 @@
             <label class="hide-run">Start New Connection</label>
           </div>
         </fieldset>
+        <label class="hide-run">Maximum number of runs</label>
+        <div class="form-group">
+          {{ form.maximum_runs(id=form_type + '-maximum_runs',
+          class="form-control hide-run add-id") }}
+        </div>
         <label class="hide-run">Waiting time (in seconds)</label>
         <div class="form-group">
           {{ form.waiting_time(id=form_type + '-waiting_time',

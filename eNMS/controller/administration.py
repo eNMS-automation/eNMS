@@ -15,7 +15,14 @@ from typing import Any, Tuple, Union
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Base, Session
-from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
+from eNMS.database.functions import (
+    delete,
+    delete_all,
+    export,
+    factory,
+    fetch,
+    fetch_all,
+)
 from eNMS.models import relationships
 
 
@@ -114,17 +121,18 @@ class AdministrationController(BaseController):
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "service" else cls
                     obj = self.objectify(obj_cls, obj)
+                    print(obj)
+                    info(f"Importing {cls} {obj['name']}")
                     try:
                         factory(obj_cls, **obj)
                         Session.commit()
                     except Exception as e:
                         info(f"{str(obj)} could not be imported ({str(e)})")
-                        if cls in ("service", "workflow"):
-                            Session.commit()
+
                         status = "Partial import (see logs)."
-                    if cls not in ("service", "workflow"):
-                        Session.commit()
+        print("test")
         for name, jobs in workflow_jobs.items():
+            print(name, jobs)
             fetch("workflow", name=name).jobs = [
                 fetch("job", name=name) for name in jobs
             ]
@@ -158,6 +166,9 @@ class AdministrationController(BaseController):
                 for file in scandir(path_job):
                     with open(path_job / file.name, "r") as instance_file:
                         instance = yaml.load(instance_file)
+                        if instance_type == "workflow":
+                            delete("Workflow", allow_none=True, name=instance["name"])
+                            Session.commit()
                         model = instance.pop("type")
                         factory(model, **self.objectify(model, instance))
                 Session.commit()

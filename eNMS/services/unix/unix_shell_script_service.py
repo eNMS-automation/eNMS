@@ -50,7 +50,8 @@ class UnixShellScriptService(Service):
         script_file_name = f"{self.name}.sh"
         run.log(
             "info",
-            f"Sending shell script '{script_file_name}' to run on {device.name} (Netmiko)",
+            f"Sending shell script '{script_file_name}'"
+            f" to run on {device.name} (Netmiko)",
         )
         expect_string = run.sub(run.expect_string, locals())
         command_list = [
@@ -97,7 +98,8 @@ class UnixShellScriptForm(ServiceForm, StringValidationForm, NetmikoForm):
         render_kw={"rows": 15},
         default=(
             "#!/bin/bash\n"
-            "# The following example shell script returns 0 for success; non-zero for failure\n"
+            "# The following example shell script returns"
+            " 0 for success; non-zero for failure\n"
             "directory_contents=`ls -al /root`  # Needs privileged mode\n"
             "return_code=$?\n"
             "if [ $return_code -ne 0 ]; then\n"

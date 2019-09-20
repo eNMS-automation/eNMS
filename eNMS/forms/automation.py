@@ -42,6 +42,7 @@ class JobForm(BaseForm):
     mail_recipient = StringField("Mail Recipients (separated by comma)")
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
+    maximum_runs = IntegerField("Maximum number of runs", default=1)
     start_new_connection = BooleanField("Start New Connection")
     skip = BooleanField("Skip")
     skip_python_query = StringField("Skip (Python Query)")
@@ -52,7 +53,7 @@ class JobForm(BaseForm):
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
-    success_query = StringField("Success Value (Python Query)")
+    result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
     query_fields = ["python_query", "skip_python_query", "iteration_values"]
 
     def validate(self) -> bool:

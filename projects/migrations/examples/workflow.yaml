@@ -16,6 +16,7 @@
   labels: {}
   last_modified: '2019-08-05 13:30:56.726895'
   mail_recipient: ''
+  maximum_runs: 1
   name: Configuration Management Workflow
   notification_header: ''
   number_of_retries: 0
@@ -26,6 +27,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -33,7 +35,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -59,6 +60,7 @@
   labels: {}
   last_modified: '2019-08-20 17:51:25.339733'
   mail_recipient: ''
+  maximum_runs: 1
   name: Netmiko_VRF_workflow
   notification_header: ''
   number_of_retries: 0
@@ -69,6 +71,7 @@
   push_to_git: false
   python_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -76,7 +79,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -102,6 +104,7 @@
   labels: {}
   last_modified: '2019-08-05 13:30:56.889198'
   mail_recipient: ''
+  maximum_runs: 1
   name: Napalm_VRF_workflow
   notification_header: ''
   number_of_retries: 0
@@ -112,6 +115,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -119,7 +123,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -142,14 +145,13 @@
   iteration_variable_name: iteration_value
   jobs: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
   labels:
-    bf81728f-aaa4-44dd-8277-d419d5885bd7:
-      content: "The success value of get_facts is determined by the \"success_query\"\
-        \ mechanism:\r\nthe vendor retrieved by Napalm get_facts must be equal to\
-        \ the device \"Vendor\" in the inventory.\r\nQuery : results[\"result\"][\"\
-        get_facts\"][\"vendor\"] == device.vendor"
-      positions: [-221, -144]
-  last_modified: '2019-08-24 01:04:06.745365'
+    c9ee8980-a972-4ace-a596-03eb2842c4d7:
+      content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
+        \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
+      positions: [284, -128]
+  last_modified: '2019-09-19 00:54:27.688306'
   mail_recipient: ''
+  maximum_runs: 1
   name: payload_transfer_workflow
   notification_header: ''
   number_of_retries: 0
@@ -160,6 +162,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -167,7 +170,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: 'False'
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -194,6 +196,7 @@
   labels: {}
   last_modified: '2019-08-14 19:57:56.988442'
   mail_recipient: ''
+  maximum_runs: 1
   name: payload_extraction_validation_worflow
   notification_header: ''
   number_of_retries: 0
@@ -204,6 +207,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -211,7 +215,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -239,6 +242,7 @@
   labels: {}
   last_modified: '2019-09-10 18:16:22.719254'
   mail_recipient: antoine.fourmy@gmail.com
+  maximum_runs: 1
   name: Workflow_of_workflows
   notification_header: ''
   number_of_retries: 0
@@ -248,6 +252,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
+  result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
   skip: false
@@ -255,7 +260,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -281,6 +285,7 @@
   labels: {}
   last_modified: '2019-08-13 20:37:47.934244'
   mail_recipient: ''
+  maximum_runs: 1
   name: Workflow with separate failure - success path
   notification_header: ''
   number_of_retries: 0
@@ -290,6 +295,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -297,7 +303,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -318,10 +323,17 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass]
-  labels: {}
-  last_modified: '2019-08-05 13:30:57.333759'
+  jobs: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, REST
+      is_alive]
+  labels:
+    ce7e6857-714e-4102-a65b-ec2d67414866:
+      content: "Test of the maximum number of run of a service in a workflow.\r\n\
+        For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
+        \ after the REST service.\r\n"
+      positions: [194, -146]
+  last_modified: '2019-09-18 18:33:51.717194'
   mail_recipient: ''
+  maximum_runs: 1
   name: Netmiko prompts
   notification_header: ''
   number_of_retries: 0
@@ -331,6 +343,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -338,7 +351,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -365,6 +377,7 @@
   labels: {}
   last_modified: '2019-08-05 13:30:57.426946'
   mail_recipient: ''
+  maximum_runs: 1
   name: 'python Workflow: payload editor and pool helper'
   notification_header: ''
   number_of_retries: 0
@@ -374,6 +387,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -381,7 +395,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -408,6 +421,7 @@
   labels: {}
   last_modified: '2019-08-09 01:11:35.197608'
   mail_recipient: ''
+  maximum_runs: 1
   name: Napalm getters and match mechanism workflow
   notification_header: ''
   number_of_retries: 0
@@ -418,6 +432,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -425,7 +440,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -452,6 +466,7 @@
   labels: {}
   last_modified: '2019-08-10 18:18:02.670633'
   mail_recipient: ''
+  maximum_runs: 1
   name: Ansible Workflow
   notification_header: ''
   number_of_retries: 0
@@ -461,6 +476,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -468,7 +484,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -501,6 +516,7 @@
       positions: [146, -232]
   last_modified: '2019-08-24 01:01:52.549675'
   mail_recipient: ''
+  maximum_runs: 1
   name: 'Workflow: multiple entry points, skip job, multiprocessing, separate paths'
   notification_header: ''
   number_of_retries: 0
@@ -510,6 +526,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -517,7 +534,6 @@
   start_jobs: [Start, Example1]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -544,6 +560,7 @@
   labels: {}
   last_modified: '2019-09-09 18:35:19.412403'
   mail_recipient: ''
+  maximum_runs: 1
   name: Iteration Targets Workflow
   notification_header: ''
   number_of_retries: 0
@@ -553,6 +570,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -560,7 +578,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -587,6 +604,7 @@
   labels: {}
   last_modified: '2019-08-15 00:11:29.936942'
   mail_recipient: ''
+  maximum_runs: 1
   name: 'Payload Workflow: Payload Extraction with operations'
   notification_header: ''
   number_of_retries: 0
@@ -597,6 +615,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -604,7 +623,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -630,6 +648,7 @@
   labels: {}
   last_modified: '2019-08-20 18:46:19.926704'
   mail_recipient: ''
+  maximum_runs: 1
   name: 'Subworkflow: Access Variable - Result from parent workflow'
   notification_header: ''
   number_of_retries: 0
@@ -640,6 +659,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -647,7 +667,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -673,6 +692,7 @@
   labels: {}
   last_modified: '2019-09-10 18:09:22.639520'
   mail_recipient: ''
+  maximum_runs: 1
   name: Subworkflow of Workflow
   notification_header: ''
   number_of_retries: 0
@@ -683,6 +703,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -690,7 +711,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: service
   type: workflow
@@ -715,6 +735,7 @@
   labels: {}
   last_modified: '2019-09-09 17:03:46.868220'
   mail_recipient: ''
+  maximum_runs: 1
   name: Workflow with iteration targets
   notification_header: ''
   number_of_retries: 0
@@ -727,6 +748,7 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
+  result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
@@ -734,7 +756,6 @@
   start_jobs: [Start]
   start_new_connection: false
   start_workflows: []
-  success_query: ''
   time_between_retries: 10
   traversal_mode: device
   type: workflow

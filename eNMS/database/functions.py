@@ -2,7 +2,7 @@ from contextlib import contextmanager
 from logging import info
 from re import search
 from sqlalchemy import func
-from typing import Any, Generator, List, Tuple
+from typing import Any, List, Tuple
 
 from eNMS.database import Session, session_factory
 from eNMS.models import models, relationships
@@ -11,12 +11,10 @@ from eNMS.models import models, relationships
 def fetch(
     model: str,
     allow_none: Any = False,
-    session: Any = None,
     all_matches: Any = False,
     **kwargs: Any,
 ) -> Any:
-    sess = session or Session
-    query = sess.query(models[model]).filter_by(**kwargs)
+    query = Session.query(models[model]).filter_by(**kwargs)
     result = query.all() if all_matches else query.first()
     if result or allow_none:
         return result
@@ -105,17 +103,3 @@ def handle_exception(exc: str) -> str:
         return f"There already is a {match.group(1)} with the same {match.group(2)}."
     else:
         return exc
-
-
-@contextmanager
-def session_scope() -> Generator:
-    session = session_factory()[1]()  # type: ignore
-    try:
-        yield session
-        session.commit()
-    except Exception as e:
-        info(str(e))
-        session.rollback()
-        raise e
-    finally:
-        session.close()

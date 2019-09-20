@@ -493,7 +493,8 @@ function processData(type, id) {
     `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
-      if (page.includes("table")) tables[type].ajax.reload(null, false);
+      tableType = type.includes("service") ? "service" : type;
+      if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (type.includes("service")) saveService(instance, id);
       if (type == "workflow_edge" && page == "workflow_builder") {

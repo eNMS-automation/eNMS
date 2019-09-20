@@ -35,6 +35,7 @@ const dsoptions = {
   interaction: {
     hover: true,
     hoverConnectedEdges: false,
+    multiselect: true,
   },
   manipulation: {
     enabled: false,
@@ -286,6 +287,12 @@ function stopWorkflow() {
         5
       );
     }
+  });
+}
+
+function changeSkipValue(skip) {
+  call(`/skip_jobs/${skip}/${graph.getSelectedNodes().join("-")}`, () => {
+    alertify.notify(`Jobs ${skip}ped`, "success", 5);
   });
 }
 

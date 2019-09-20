@@ -202,6 +202,7 @@ class BaseController:
         "scan_cluster",
         "scan_playbook_folder",
         "scheduler",
+        "skip_jobs",
         "task_action",
         "topology_import",
         "update",

@@ -81,6 +81,18 @@ block content %}
             >
               Create
             </button>
+            <button
+              class="btn btn-light btn-file"
+              onclick="changeSkipValue('skip')"
+            >
+              Skip
+            </button>
+            <button
+              class="btn btn-primary btn-file"
+              onclick="changeSkipValue('unskip')"
+            >
+              Unskip
+            </button>
           </div>
           <div id="test"></div>
           <div id="network" style="height:80vh; width:100%;"></div>
@@ -102,6 +114,9 @@ block content %}
   </li>
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Results</a>
+  </li>
+  <li class="menu-entry node-selection">
+    <a tabindex="-1" href="#">Skip</a>
   </li>
   <li class="menu-entry node-selection edge-selection">
     <a tabindex="-1" href="#">Remove from Workflow</a>

@@ -162,7 +162,7 @@ table_fixed_columns: Dict[str, List[str]] = {
     "event": ["Edit", "Delete"],
     "link": ["Edit", "Delete"],
     "run": ["Results"],
-    "result": ["Result"],
+    "result": ["Result", "V1", "V2"],
     "server": ["Edit", "Delete"],
     "service": ["Status", "Results", "Run", "Edit", "Delete"],
     "syslog": [],

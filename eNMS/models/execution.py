@@ -65,7 +65,9 @@ class Result(AbstractBase):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showResult('{self.id}')"></i>Results</a></button>"""
+            onclick="showResult('{self.id}')"></i>Results</a></button>""",
+            f"""<input type="radio" class="compare" name="v1" value="{self.id}"/>""",
+            f"""<input type="radio" class="compare" name="v2" value="{self.id}"/>""",
         ]
 
 

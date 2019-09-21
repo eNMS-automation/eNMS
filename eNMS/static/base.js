@@ -57,6 +57,7 @@ const panelSize = {
   pool: "800 600",
   pool_filtering: "700 500",
   pool_objects: "700 550",
+  result: "1200 700",
   service_results: "1200 700",
   server: "600 250",
   server_filtering: "700 450",
@@ -534,6 +535,7 @@ function initTable(type, job, runtime) {
       $(".paginate_button > a").on("focus", function() {
         $(this).blur();
       });
+      if (type == "result") initResultCallback();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
@@ -556,6 +558,7 @@ function initTable(type, job, runtime) {
   if (["run", "service", "task", "workflow"].includes(type))
     refreshTable(table, 3000);
   tables[type] = table;
+  return table;
 }
 
 // eslint-disable-next-line

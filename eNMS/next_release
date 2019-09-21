@@ -2,6 +2,7 @@
 
 - New "Maximum number of runs" property for a job in a workflow: defines how many times the same
 job is allowed to run in the workflow.
+Set to 1 by default (=> backward-compatible).
 
 - New "Result postprocessing" feature: allows for postprocessing the results of a service
 (per device if there are devices), including changing the success value.
@@ -9,10 +10,12 @@ However, the validation part still takes place BEFORE the postprocessing of the 
 
 - Add new version of Unix Shell Script service
 
-- Enable multiple selection in the workflow builder + mass skip / unskip
+- Enable multiple selection in the workflow builder + mass skip / unskip buttons
 Two ways for multiple selection:
-- Ctrl + Click on jobs
-- Press Right-click + move the mouse to draw a rectangle
+* Ctrl + Click on jobs
+* Press Right-click and move the mouse to draw a rectangle: all jobs inside the rectangle will be selected.
 
 - Set the configuration management workflow to "Use workflow devices": false by default.
-CHECK EXAMPLE / DEFAULT
+
+MIGRATION:
+Custom success value changed from eval syntax to exec syntax.

@@ -122,23 +122,27 @@ function showResultsPanel(job, runtime) {
 function compareResults() {
   const v1 = $('input[name=v1]:checked').val();
   const v2 = $('input[name=v2]:checked').val();
-  console.log("test");
-  createPanel("display_result", "Compare Results", v1 + v2, function() {
-    $("#display_results").append("efesfsef")
-    call(`/compare_results/${v1}/${v2}`, (result) => {
-      $("#display_results").append(
-        diffview.buildView({
-          baseTextLines: result.first,
-          newTextLines: result.second,
-          opcodes: result.opcodes,
-          baseTextName: v1,
-          newTextName: v2,
-          contextSize: null,
-          viewType: 0,
-        })
-      );
+  if (v1 && v2) {
+    createPanel("display_result", "Compare Results", v1 + v2, () => {
+      $("#display_results").append("efesfsef")
+      call(`/compare_results/${v1}/${v2}`, (result) => {
+        console.log($(`#display_results-${v1 + v2}`).length);
+        $(`#display_results-${v1 + v2}`).append(
+          diffview.buildView({
+            baseTextLines: result.first,
+            newTextLines: result.second,
+            opcodes: result.opcodes,
+            baseTextName: v1,
+            newTextName: v2,
+            contextSize: null,
+            viewType: 0,
+          })
+        );
+      });
     });
-  });
+  } else {
+    alertify.notify("Select two versions to compare first.", "error", 5);
+  }
 }
 
 // eslint-disable-next-line

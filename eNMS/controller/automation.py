@@ -140,8 +140,8 @@ class AutomationController(BaseController):
         return fetch("result", id=id).result
 
     def compare_results(self, result1: int, result2: int) -> dict:
-        first = self.str_dict(fetch("Result", id=result1)).splitlines()
-        second = self.str_dict(fetch("Result", id=result2)).splitlines()
+        first = self.str_dict(fetch("result", id=result1).result).splitlines()
+        second = self.str_dict(fetch("result", id=result2).result).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 

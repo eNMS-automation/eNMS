@@ -249,6 +249,10 @@ class AutomationController(BaseController):
                 workflow.last_modified = now
         return now
 
+    def skip_jobs(self, skip: str, job_ids: str) -> None:
+        for job_id in job_ids.split("-"):
+            fetch("Job", id=job_id).skip = skip == "skip"
+
     def get_workflow_state(
         self, workflow_id: int, runtime: Optional[str] = None
     ) -> dict:

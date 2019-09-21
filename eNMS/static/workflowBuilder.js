@@ -35,6 +35,7 @@ const dsoptions = {
   interaction: {
     hover: true,
     hoverConnectedEdges: false,
+    multiselect: true,
   },
   manipulation: {
     enabled: false,
@@ -64,6 +65,7 @@ let currLabel;
 let arrowHistory = [];
 let arrowPointer = -1;
 let currentRuntime;
+let triggerMenu;
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
@@ -87,27 +89,32 @@ function displayWorkflow(workflowData) {
   });
   */
   graph.on("oncontext", function(properties) {
-    // eslint-disable-next-line new-cap
-    mousePosition = graph.DOMtoCanvas({
-      x: properties.event.offsetX,
-      y: properties.event.offsetY,
-    });
-    properties.event.preventDefault();
-    const node = this.getNodeAt(properties.pointer.DOM);
-    const edge = this.getEdgeAt(properties.pointer.DOM);
-    if (typeof node !== "undefined" && node != 1 && node != 2) {
-      graph.selectNodes([node]);
-      $(".menu-entry ").hide();
-      $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
-      selectedObject = nodes.get(node);
-    } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
-      graph.selectEdges([edge]);
-      $(".menu-entry ").hide();
-      $(".edge-selection").show();
-      selectedObject = edges.get(edge);
+    if (triggerMenu) {
+      // eslint-disable-next-line new-cap
+      mousePosition = graph.DOMtoCanvas({
+        x: properties.event.offsetX,
+        y: properties.event.offsetY,
+      });
+      properties.event.preventDefault();
+      const node = this.getNodeAt(properties.pointer.DOM);
+      const edge = this.getEdgeAt(properties.pointer.DOM);
+      if (typeof node !== "undefined" && node != 1 && node != 2) {
+        graph.selectNodes([node]);
+        $(".menu-entry ").hide();
+        $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
+        selectedObject = nodes.get(node);
+      } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
+        graph.selectEdges([edge]);
+        $(".menu-entry ").hide();
+        $(".edge-selection").show();
+        selectedObject = edges.get(edge);
+      } else {
+        $(".menu-entry ").hide();
+        $(".global").show();
+      }
     } else {
-      $(".menu-entry ").hide();
-      $(".global").show();
+      properties.event.stopPropagation();
+      properties.event.preventDefault();
     }
   });
   graph.on("doubleClick", function(properties) {
@@ -148,8 +155,88 @@ function displayWorkflow(workflowData) {
   $(`#add_jobs option[value='${workflow.id}']`).remove();
   $("#add_jobs").selectpicker("refresh");
   displayWorkflowState(workflowData);
+  rectangleSelection($("#network"), graph, nodes);
   return graph;
 }
+
+const rectangleSelection = (container, network, nodes) => {
+  const offsetLeft = container.position().left - container.offset().left;
+  const offsetTop = container.position().top - container.offset().top;
+  let drag = false;
+  let DOMRect = {};
+
+  const canvasify = (DOMx, DOMy) => {
+    // eslint-disable-next-line new-cap
+    const { x, y } = network.DOMtoCanvas({ x: DOMx, y: DOMy });
+    return [x, y];
+  };
+
+  const correctRange = (start, end) =>
+    start < end ? [start, end] : [end, start];
+
+  const selectFromDOMRect = () => {
+    const [sX, sY] = canvasify(DOMRect.startX, DOMRect.startY);
+    const [eX, eY] = canvasify(DOMRect.endX, DOMRect.endY);
+    const [startX, endX] = correctRange(sX, eX);
+    const [startY, endY] = correctRange(sY, eY);
+    triggerMenu = startX == endX && startY == endY;
+
+    network.selectNodes(
+      nodes.get().reduce((selected, { id }) => {
+        const { x, y } = network.getPositions(id)[id];
+        return startX <= x && x <= endX && startY <= y && y <= endY
+          ? selected.concat(id)
+          : selected;
+      }, [])
+    );
+  };
+
+  container.on("mousedown", function({ which, pageX, pageY }) {
+    if (which === 3) {
+      Object.assign(DOMRect, {
+        startX: pageX - this.offsetLeft + offsetLeft,
+        startY: pageY - this.offsetTop + offsetTop,
+        endX: pageX - this.offsetLeft + offsetLeft,
+        endY: pageY - this.offsetTop + offsetTop,
+      });
+      drag = true;
+    }
+  });
+
+  container.on("mousemove", function({ which, pageX, pageY }) {
+    if (which === 0 && drag) {
+      drag = false;
+      network.redraw();
+    } else if (drag) {
+      Object.assign(DOMRect, {
+        endX: pageX - this.offsetLeft + offsetLeft,
+        endY: pageY - this.offsetTop + offsetTop,
+      });
+      network.redraw();
+    }
+  });
+
+  container.on("mouseup", function({ which }) {
+    if (which === 3) {
+      drag = false;
+      network.redraw();
+      selectFromDOMRect();
+    }
+  });
+
+  network.on("afterDrawing", (ctx) => {
+    if (drag) {
+      const [startX, startY] = canvasify(DOMRect.startX, DOMRect.startY);
+      const [endX, endY] = canvasify(DOMRect.endX, DOMRect.endY);
+      ctx.setLineDash([5]);
+      ctx.strokeStyle = "rgba(78, 146, 237, 0.75)";
+      ctx.strokeRect(startX, startY, endX - startX, endY - startY);
+      ctx.setLineDash([]);
+      ctx.fillStyle = "rgba(151, 194, 252, 0.45)";
+      ctx.fillRect(startX, startY, endX - startX, endY - startY);
+    }
+  });
+};
 
 function switchToWorkflow(workflowId, arrow) {
   if (!arrow) {
@@ -283,6 +370,20 @@ function stopWorkflow() {
         5
       );
     }
+  });
+}
+
+// eslint-disable-next-line
+function changeSkipValue(skip) {
+  const selectedNodes = graph.getSelectedNodes();
+  call(`/skip_jobs/${skip}/${selectedNodes.join("-")}`, () => {
+    workflow.jobs
+      .filter((j) => selectedNodes.includes(j.id))
+      .map((j) => {
+        j.skip = skip == "skip";
+      });
+    resetDisplay();
+    alertify.notify(`Jobs ${skip}ped`, "success", 5);
   });
 }
 

@@ -199,6 +199,7 @@ class BaseController:
         "scan_cluster",
         "scan_playbook_folder",
         "scheduler",
+        "skip_jobs",
         "table_filtering",
         "task_action",
         "topology_import",
@@ -216,9 +217,8 @@ class BaseController:
         "update_database_configurations_from_git",
     ]
 
-    def __init__(self, path: Path, config_mode: Optional[str] = None) -> None:
+    def __init__(self, path: Path) -> None:
         self.path = path
-        self.config_mode = config_mode.capitalize() if config_mode else "Debug"
         self.custom_properties = self.load_custom_properties()
         self.custom_config = self.load_custom_config()
         self.init_scheduler()
@@ -653,7 +653,7 @@ class BaseController:
             if device:
                 with open(Path(dir.path) / "data.yml") as data:
                     parameters = yaml.load(data)
-                    device.update(**parameters)
+                    device.update(**{"dont_update_pools": True, **parameters})
                     config_file = Path(dir.path) / dir.name
                     if not config_file.exists():
                         continue

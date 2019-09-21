@@ -90,8 +90,7 @@ class GetConfiguration(Resource):
     decorators = [auth.login_required]
 
     def get(self, name: str) -> str:
-        device = fetch("device", name=name)
-        return device.configurations[max(device.configurations)]
+        return fetch("device", name=name).current_configuration
 
 
 class GetResult(Resource):

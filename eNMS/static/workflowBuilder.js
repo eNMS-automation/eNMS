@@ -378,7 +378,12 @@ function stopWorkflow() {
 }
 
 function changeSkipValue(skip) {
-  call(`/skip_jobs/${skip}/${graph.getSelectedNodes().join("-")}`, () => {
+  selectedNodes = graph.getSelectedNodes();
+  call(`/skip_jobs/${skip}/${selectedNodes.join("-")}`, () => {
+    workflow.jobs.filter((j) => selectedNodes.includes(j.id)).map((j) => {
+      j.skip = skip == "skip";
+    });
+    resetDisplay();
     alertify.notify(`Jobs ${skip}ped`, "success", 5);
   });
 }

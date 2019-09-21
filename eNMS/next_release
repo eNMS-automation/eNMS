@@ -1,9 +1,18 @@
 - Always delete a workflow when it is imported via import job
+
 - New "Maximum number of runs" property for a job in a workflow: defines how many times the same
 job is allowed to run in the workflow.
+
 - New "Result postprocessing" feature: allows for postprocessing the results of a service
 (per device if there are devices), including changing the success value.
 However, the validation part still takes place BEFORE the postprocessing of the results.
+
 - Add new version of Unix Shell Script service
+
 - Enable multiple selection in the workflow builder + mass skip / unskip
+Two ways for multiple selection:
+- Ctrl + Click on jobs
+- Press Right-click + move the mouse to draw a rectangle
+
 - Set the configuration management workflow to "Use workflow devices": false by default.
+CHECK EXAMPLE / DEFAULT

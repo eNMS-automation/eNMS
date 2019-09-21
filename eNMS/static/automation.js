@@ -125,18 +125,19 @@ function compareResults() {
   console.log("test");
   createPanel("display_result", "Compare Results", v1 + v2, function() {
     $("#display_results").append("efesfsef")
-    call(`/compare_result/${v1}/${v2}`, (result) => {
-    $("#display_results").append(
-      diffview.buildView({
-        baseTextLines: result.first,
-        newTextLines: result.second,
-        opcodes: result.opcodes,
-        baseTextName: v1,
-        newTextName: v2,
-        contextSize: null,
-        viewType: 0,
-      });
-    );
+    call(`/compare_results/${v1}/${v2}`, (result) => {
+      $("#display_results").append(
+        diffview.buildView({
+          baseTextLines: result.first,
+          newTextLines: result.second,
+          opcodes: result.opcodes,
+          baseTextName: v1,
+          newTextName: v2,
+          contextSize: null,
+          viewType: 0,
+        })
+      );
+    });
   });
 }
 

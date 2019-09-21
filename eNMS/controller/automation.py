@@ -139,58 +139,9 @@ class AutomationController(BaseController):
     def get_result(self, id: int) -> Optional[dict]:
         return fetch("result", id=id).result
 
-    def get_run_results(self, id: int, device: Any, **kw: Any) -> Optional[dict]:
-        run = fetch("run", allow_none=True, id=id)
-        return self.get_service_results(run.job.id, run.runtime, device, None, None)
-
-    def get_device_results(self, id: int, runtime: str, **_: Any) -> Optional[dict]:
-        run = fetch("run", allow_none=True, runtime=runtime)
-        return next(r.result for r in run.results if r.device_id == int(id))
-
-    def get_workflow_results(
-        self, id: int, runtime: str, device: Any, job: Any, workflow_device: Any
-    ) -> Optional[dict]:
-        if "all" not in job:
-            return self.get_service_results(job, runtime, device, job, workflow_device)
-        request = {"parent_runtime": runtime, "all_matches": True}
-        if job in ("all passed", "all failed"):
-            request["success"] = job == "all passed"
-        return {
-            run.job_name: next((r.result for r in run.results if not r.device_id), None)
-            for run in fetch("run", allow_none=True, **request)
-            if run.job_id != int(id)
-        }
-
-    def get_service_results(
-        self, id: int, runtime: str, device: Any, job: Any, workflow_device: Any
-    ) -> Optional[dict]:
-        runtime_key = "parent_runtime" if job else "runtime"
-        request = {runtime_key: runtime, "job_id": id}
-        if workflow_device:
-            request["workflow_device_id"] = workflow_device
-        run = fetch("run", allow_none=True, **request)
-        if not run:
-            return None
-        if "all" not in device:
-            device_id = None if device == "global" else int(device)
-            results = [r for r in run.results if device_id == r.device_id]
-            return results[0].result if results else None
-        else:
-            return {
-                r.device_name: r.result
-                for r in run.results
-                if r.device_id
-                and (device == "all" or r.success == (device == "all passed"))
-            }
-
-    def compare_results(self, *args: Any, **kwargs: Any) -> dict:
-        kwargs.pop("compare")
-        first = self.str_dict(
-            self.str_dict(self.get_results(*args, compare=False, **kwargs))
-        ).splitlines()
-        second = self.str_dict(
-            self.get_results(*args, compare=True, **kwargs)
-        ).splitlines()
+    def compare_results(self, result1: int, result2: int) -> dict:
+        first = self.str_dict(fetch("Result", id=result1)).splitlines()
+        second = self.str_dict(fetch("Result", id=result2)).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 

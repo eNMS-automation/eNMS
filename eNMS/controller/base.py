@@ -219,9 +219,8 @@ class BaseController:
         "update_database_configurations_from_git",
     ]
 
-    def __init__(self, path: Path, config_mode: Optional[str] = None) -> None:
+    def __init__(self, path: Path) -> None:
         self.path = path
-        self.config_mode = config_mode.capitalize() if config_mode else "Debug"
         self.custom_properties = self.load_custom_properties()
         self.custom_config = self.load_custom_config()
         self.init_scheduler()

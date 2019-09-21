@@ -21,7 +21,6 @@ class NetmikoBackupService(Service):
     configuration_backup_service = True
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
-    number_of_configuration = Column(Integer, default=10)
     configuration_command = Column(SmallString)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
@@ -71,19 +70,16 @@ class NetmikoBackupService(Service):
             device.last_failure = str(now)
             self.generate_yaml_file(path_device_config, device)
             return {"success": False, "result": str(e)}
-        if len(device.configurations) > self.number_of_configuration:
-            device.configurations.pop(min(device.configurations))
         Session.commit()
         return {"success": True, "result": f"Command: {command}"}
 
 
 class NetmikoBackupForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="netmiko_backup_service")
-    number_of_configuration = IntegerField(default=10)
     configuration_command = StringField()
     groups = {
         "Main Parameters": {
-            "commands": ["number_of_configuration", "configuration_command"],
+            "commands": ["configuration_command"],
             "default": "expanded",
         },
         "Netmiko Parameters": NetmikoForm.group,

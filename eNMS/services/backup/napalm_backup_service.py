@@ -20,7 +20,6 @@ class NapalmBackupService(Service):
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     configuration_backup_service = True
     has_targets = True
-    number_of_configuration = Column(Integer, default=10)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict)
@@ -62,11 +61,8 @@ class NapalmBackupService(Service):
             device.last_failure = str(now)
             self.generate_yaml_file(path_device_config, device)
             return {"success": False, "result": str(e)}
-        if len(device.configurations) > self.number_of_configuration:
-            device.configurations.pop(min(device.configurations))
         return {"success": True, "result": "Get Config via Napalm"}
 
 
 class NapalmBackupForm(ServiceForm, NapalmForm):
     form_type = HiddenField(default="napalm_backup_service")
-    number_of_configuration = IntegerField(default=10)

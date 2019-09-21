@@ -78,7 +78,6 @@ class Device(CustomDevice):
     enable_password = Column(SmallString)
     netmiko_driver = Column(SmallString, default="cisco_ios")
     napalm_driver = Column(SmallString, default="ios")
-    configurations = Column(MutableDict)
     current_configuration = Column(LargeString)
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")

@@ -27,6 +27,11 @@
   >
     Clear Search
   </button>
+  {% if type == "result" %}
+  <button class="btn btn-info btn-file" onclick="compareResults()">
+    Compare
+  </button>
+  {% endif %}
 </div>
 <form
   id="search-{{ type }}-form"

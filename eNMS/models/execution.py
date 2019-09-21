@@ -66,8 +66,8 @@ class Result(AbstractBase):
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showResult('{self.id}')"></i>Results</a></button>""",
-            f"""<input type="radio" class="compare" name="v1" value="{self.id}"/>""",
-            f"""<input type="radio" class="compare" name="v2" value="{self.id}"/>""",
+            f"""<input type="radio" name="v1" value="{self.id}"/>""",
+            f"""<input type="radio" name="v2" value="{self.id}"/>""",
         ]
 
 

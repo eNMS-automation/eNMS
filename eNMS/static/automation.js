@@ -119,31 +119,30 @@ function showResultsPanel(job, runtime) {
   });
 }
 
-function initResultCallback() {
-  console.log($(".compare").length);
-  $(".compare").change(function() {
-    const v1 = $('input[name=v1]:checked').val();
-    const v2 = $('input[name=v2]:checked').val();
-    createPanel("compare_result", "Compare Results", null, function() {
-      resultTable = initTable("result", job, runtime);
-    });
-    $(`#display_results-${formId}`).append(
+function compareResults() {
+  const v1 = $('input[name=v1]:checked').val();
+  const v2 = $('input[name=v2]:checked').val();
+  console.log("test");
+  createPanel("display_result", "Compare Results", v1 + v2, function() {
+    $("#display_results").append("efesfsef")
+    call(`/compare_result/${v1}/${v2}`, (result) => {
+    $("#display_results").append(
       diffview.buildView({
-        baseTextLines: results.first,
-        newTextLines: results.second,
-        opcodes: results.opcodes,
-        baseTextName: $(`#runtime-${id}`).val(),
-        newTextName: $(`#runtime_compare-${id}`).val(),
+        baseTextLines: result.first,
+        newTextLines: result.second,
+        opcodes: result.opcodes,
+        baseTextName: v1,
+        newTextName: v2,
         contextSize: null,
         viewType: 0,
-      })
+      });
     );
   });
 }
 
 // eslint-disable-next-line
 function showResult(id) {
-  createPanel(`display_result`, "Result", id, function() {
+  createPanel("display_result", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
       const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
       const options = {

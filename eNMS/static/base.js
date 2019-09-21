@@ -535,7 +535,6 @@ function initTable(type, job, runtime) {
       $(".paginate_button > a").on("focus", function() {
         $(this).blur();
       });
-      if (type == "result") initResultCallback();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {

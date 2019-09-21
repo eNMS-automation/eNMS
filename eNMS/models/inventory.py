@@ -354,3 +354,25 @@ class Pool(AbstractPool):
             return
         self.devices = list(filter(self.object_match, fetch_all("device")))
         self.links = list(filter(self.object_match, fetch_all("link")))
+
+
+class Configuration(AbstractBase):
+
+    __tablename__ = type = "result"
+    id = Column(Integer, primary_key=True)
+    configuration = Column(LargeString)
+    runtime = Column(SmallString)
+    endtime = Column(SmallString)
+    device_id = Column(Integer, ForeignKey("device.id"))
+    device = relationship(
+        "Device", back_populates="results", foreign_keys="Result.device_id"
+    )
+    device_name = association_proxy("device", "name")
+
+    def generate_row(self, table: str) -> List[str]:
+        return [
+            f"""<button type="button" class="btn btn-info btn-sm"
+            onclick="showConfiguration('{self.id}')"></i>Results</a></button>""",
+            f"""<input type="radio" name="v1" value="{self.id}"/>""",
+            f"""<input type="radio" name="v2" value="{self.id}"/>""",
+        ]

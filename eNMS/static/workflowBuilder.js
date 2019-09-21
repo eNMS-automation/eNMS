@@ -92,7 +92,6 @@ function displayWorkflow(workflowData) {
   });
   */
   graph.on("oncontext", function(properties) {
-    console.log(triggerMenu)
     if (triggerMenu) {
       // eslint-disable-next-line new-cap
       mousePosition = graph.DOMtoCanvas({
@@ -170,6 +169,7 @@ const rectangleSelection = (container, network, nodes) => {
   let DOMRect = {};
 
   const canvasify = (DOMx, DOMy) => {
+    // eslint-disable-next-line new-cap
     const { x, y } = network.DOMtoCanvas({ x: DOMx, y: DOMy });
     return [x, y];
   };
@@ -211,7 +211,6 @@ const rectangleSelection = (container, network, nodes) => {
       drag = false;
       network.redraw();
     } else if (drag) {
-      multipleSelect = true;
       Object.assign(DOMRect, {
         endX: pageX - this.offsetLeft + offsetLeft,
         endY: pageY - this.offsetTop + offsetTop,
@@ -377,12 +376,15 @@ function stopWorkflow() {
   });
 }
 
+// eslint-disable-next-line
 function changeSkipValue(skip) {
-  selectedNodes = graph.getSelectedNodes();
+  const selectedNodes = graph.getSelectedNodes();
   call(`/skip_jobs/${skip}/${selectedNodes.join("-")}`, () => {
-    workflow.jobs.filter((j) => selectedNodes.includes(j.id)).map((j) => {
-      j.skip = skip == "skip";
-    });
+    workflow.jobs
+      .filter((j) => selectedNodes.includes(j.id))
+      .map((j) => {
+        j.skip = skip == "skip";
+      });
     resetDisplay();
     alertify.notify(`Jobs ${skip}ped`, "success", 5);
   });

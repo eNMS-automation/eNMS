@@ -123,17 +123,18 @@ function compareResults() {
   const v1 = $('input[name=v1]:checked').val();
   const v2 = $('input[name=v2]:checked').val();
   if (v1 && v2) {
-    createPanel("display_result", "Compare Results", v1 + v2, () => {
-      $("#display_results").append("efesfsef")
+    const cantorId = cantorPairing(v1, v2);
+    console.log(cantorId);
+    createPanel("display_result", "Compare Results", cantorId, () => {
       call(`/compare_results/${v1}/${v2}`, (result) => {
-        console.log($(`#display_results-${v1 + v2}`).length);
-        $(`#display_results-${v1 + v2}`).append(
+        console.log($(`#display_results-${cantorId}`).length);
+        $(`#display_results-${cantorId}`).append(
           diffview.buildView({
             baseTextLines: result.first,
             newTextLines: result.second,
             opcodes: result.opcodes,
-            baseTextName: v1,
-            newTextName: v2,
+            baseTextName: "V1",
+            newTextName: "V2",
             contextSize: null,
             viewType: 0,
           })

@@ -199,6 +199,10 @@ function openUrl(url) {
   win.focus();
 }
 
+function cantorPairing(x, y) {
+  return ((x + y) * (x + y + 1)) / 2 + y;
+}
+
 function processResults(callback, results) {
   if (results === false) {
     alertify.notify("HTTP Error 403 – Forbidden", "error", 5);

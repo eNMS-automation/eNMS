@@ -116,6 +116,19 @@ class Device(CustomDevice):
 
     def generate_row(self, table: str) -> List[str]:
         return [
+            f"""<div class="btn-group" style="width: 130px;">
+            <button type="button" class="btn btn-primary btn-sm"
+            onclick="showDeviceConfiguration('{self.id}')">Configuration</button>,
+            <button type="button" class="btn btn-primary btn-sm
+            dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+            showConfigurationsPanel({self.row_properties})">History</a></li>
+            </ul>
+            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+            showConfigurationsPanel({self.row_properties})">History</a></li>
+            </ul></div>""",
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showDeviceResultsPanel({self.row_properties})">
             </i>Results</a></button>""",

@@ -573,8 +573,8 @@ class BaseController:
             constraints.append(
                 getattr(
                     models["result"],
-                    "workflow" if kwargs["job[type]"] == "workflow" else "job",
-                ).has(id=kwargs["job[id]"])
+                    "job" if "service" in kwargs["instance[type]"] else kwargs["instance[type]"],
+                ).has(id=kwargs["instance[id]"])
             )
             if kwargs.get("job[runtime]"):
                 constraints.append(

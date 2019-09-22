@@ -151,7 +151,7 @@ filtering_properties: Dict[str, List[str]] = {
 table_fixed_columns: Dict[str, List[str]] = {
     "changelog": [],
     "configuration": ["Configuration", "Download", "V1", "V2"],
-    "device": ["Automation", "Connect", "Edit", "Delete"],
+    "device": ["Configuration", "Automation", "Connect", "Edit", "Delete"],
     "event": ["Edit", "Delete"],
     "link": ["Edit", "Delete"],
     "run": ["Results"],

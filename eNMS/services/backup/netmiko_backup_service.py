@@ -6,6 +6,7 @@ from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database import Session
 from eNMS.database.dialect import Column, SmallString
+from eNMS.database.functions import factory
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Service
@@ -55,10 +56,10 @@ class NetmikoBackupService(Service):
             command = run.configuration_command
             configuration = netmiko_connection.send_command(command)
             device.last_status = "Success"
-            device.last_duration = f"{(datetime.now() - now).total_seconds()}s"
+            device.last_duration = f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             if configuration == device.current_configuration:
                 return {"success": True, "result": "no change"}
-            device.last_update = str(now)
+            device.last_update = str(device.last_runtime)
             config_object = factory(
                 "configuration",
                 device=device.id,
@@ -72,7 +73,7 @@ class NetmikoBackupService(Service):
             self.generate_yaml_file(path_device_config, device)
         except Exception as e:
             device.last_status = "Failure"
-            device.last_failure = str(now)
+            device.last_failure = str(device.last_runtime)
             self.generate_yaml_file(path_device_config, device)
             return {"success": False, "result": str(e)}
         Session.commit()

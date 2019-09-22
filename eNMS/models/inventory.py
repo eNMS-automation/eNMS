@@ -88,6 +88,9 @@ class Device(CustomDevice):
     results = relationship(
         "Result", back_populates="device", cascade="all, delete-orphan"
     )
+    configurations = relationship(
+        "Configuration", back_populates="device", cascade="all, delete-orphan"
+    )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
@@ -358,21 +361,21 @@ class Pool(AbstractPool):
 
 class Configuration(AbstractBase):
 
-    __tablename__ = type = "result"
+    __tablename__ = type = "configuration"
     id = Column(Integer, primary_key=True)
     configuration = Column(LargeString)
     runtime = Column(SmallString)
     duration = Column(SmallString)
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
-        "Device", back_populates="results", foreign_keys="Result.device_id"
+        "Device", back_populates="configurations", foreign_keys="Configuration.device_id"
     )
     device_name = association_proxy("device", "name")
 
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showConfiguration('{self.id}')"></i>Results</a></button>""",
+            onclick="showConfiguration('{self.id}')"></i>Configuration</a></button>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",
         ]

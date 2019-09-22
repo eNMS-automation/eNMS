@@ -555,15 +555,14 @@ class BaseController:
         }
 
     def table_filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
-        obj_type = table if table != "configuration" else "device"
-        model, properties = models[obj_type], table_properties[table]
+        model, properties = models[table], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
         try:
             order_property = properties[int(kwargs["order[0][column]"])]
         except IndexError:
             order_property = "name"
         order = getattr(getattr(model, order_property), kwargs["order[0][dir]"])()
-        constraints = self.build_filtering_constraints(obj_type, kwargs)
+        constraints = self.build_filtering_constraints(table, kwargs)
         if table == "result":
             constraints.append(
                 getattr(

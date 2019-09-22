@@ -10,12 +10,9 @@ device_table_properties: List[str] = object_common_properties + [
 ]
 
 configuration_table_properties: List[str] = [
-    "name",
-    "model",
-    "last_failure",
-    "last_runtime",
-    "last_update",
-    "last_status",
+    "runtime",
+    "duration",
+    "device_name",
 ]
 
 link_table_properties: List[str] = object_common_properties + [
@@ -157,7 +154,7 @@ filtering_properties: Dict[str, List[str]] = {
 
 table_fixed_columns: Dict[str, List[str]] = {
     "changelog": [],
-    "configuration": ["Configuration", "Download", "Edit"],
+    "configuration": ["Configuration", "Download", "V1", "V2"],
     "device": ["Automation", "Connect", "Edit", "Delete"],
     "event": ["Edit", "Delete"],
     "link": ["Edit", "Delete"],

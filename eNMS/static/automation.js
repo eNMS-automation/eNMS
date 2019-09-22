@@ -126,10 +126,9 @@ function compare(type) {
     console.log(typeof v1)
     const cantorId = cantorPairing(parseInt(v1), parseInt(v2));
     console.log(cantorId);
-    createPanel("display_result", `Compare ${type}s`, cantorId, () => {
+    createPanel("display", `Compare ${type}s`, cantorId, () => {
       call(`/compare/${type}/${v1}/${v2}`, (result) => {
-        console.log($(`#display_results-${cantorId}`).length);
-        $(`#display_results-${cantorId}`).append(
+        $(`#content-${cantorId}`).append(
           diffview.buildView({
             baseTextLines: result.first,
             newTextLines: result.second,
@@ -149,7 +148,7 @@ function compare(type) {
 
 // eslint-disable-next-line
 function showResult(id) {
-  createPanel("display_result", "Result", id, function() {
+  createPanel("display", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
       const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
       const options = {
@@ -160,7 +159,7 @@ function showResult(id) {
         },
       };
       let editor = new JSONEditor(
-        document.getElementById(`display_results-${id}`),
+        document.getElementById(`content-${id}`),
         options,
         jsonResult
       );

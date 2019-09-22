@@ -206,11 +206,12 @@ def view_job_results(id: int) -> str:
 @monitor_requests
 def download_configuration(id: str) -> Response:
     configuration = fetch("configuration", id=id)
+    filename = f"{configuration.device_name}-{app.strip_all(configuration.runtime)}"
     return Response(
-        (f"{line}\n" for line in config_object.configuration.splitlines()),
+        (f"{line}\n" for line in configuration.configuration.splitlines()),
         mimetype="text/plain",
         headers={
-            "Content-Disposition": f"attachment;filename={configuration.device_name}-{app.strip_all(configuration.runtime)}.txt"
+            "Content-Disposition": f"attachment;filename={filename}.txt"
         },
     )
 

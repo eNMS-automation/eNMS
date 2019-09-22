@@ -119,14 +119,14 @@ function showResultsPanel(job, runtime) {
   });
 }
 
-function compareResults() {
+function compare(type) {
   const v1 = $('input[name=v1]:checked').val();
   const v2 = $('input[name=v2]:checked').val();
   if (v1 && v2) {
     const cantorId = cantorPairing(v1, v2);
     console.log(cantorId);
-    createPanel("display_result", "Compare Results", cantorId, () => {
-      call(`/compare_results/${v1}/${v2}`, (result) => {
+    createPanel("display_result", `Compare ${type}s`, cantorId, () => {
+      call(`/compare/${type}/${v1}/${v2}`, (result) => {
         console.log($(`#display_results-${cantorId}`).length);
         $(`#display_results-${cantorId}`).append(
           diffview.buildView({

@@ -121,42 +121,26 @@ class Device(CustomDevice):
         }
 
     def generate_row(self, table: str) -> List[str]:
-        if table == "device":
-            return [
-                f"""<button type="button" class="btn btn-info btn-sm"
-                onclick="showResultsPanel('{self.id}', '{self.name}', 'device')">
-                </i>Results</a></button>""",
-                f"""<button type="button" class="btn btn-success btn-sm"
-                onclick="showPanel('connection', '{self.id}')">Connect</button>""",
-                f"""<div class="btn-group" style="width: 80px;">
-                <button type="button" class="btn btn-primary btn-sm"
-                onclick="showTypePanel('device', '{self.id}')">Edit</button>,
-                <button type="button" class="btn btn-primary btn-sm
-                dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
-                showTypePanel('device', '{self.id}', 'duplicate')">Duplicate</a></li>
-                </ul></div>""",
-                f"""<button type="button" class="btn btn-danger btn-sm"
-                onclick="showDeletionPanel({self.row_properties})">
-                Delete</button>""",
-            ]
-        else:
-            return [
-                f"""<button type="button" class="btn btn-primary btn-sm"
-                onclick="showConfigurationPanel('{self.id}', '{self.name}')">
-                Configuration</button>"""
-                if self.configurations
-                else "",
-                f"""<label class="btn btn-default btn-sm btn-file"
-                style="width:100%;"><a href="/download_configuration/{self.name}">
-                Download</a></label>"""
-                if self.configurations
-                else "",
-                f"""<button type="button" class="btn btn-primary btn-sm"
-                onclick="showTypePanel('device', '{self.id}')">Edit</button>""",
-            ]
+        return [
+            f"""<button type="button" class="btn btn-info btn-sm"
+            onclick="showResultsPanel('{self.id}', '{self.name}', 'device')">
+            </i>Results</a></button>""",
+            f"""<button type="button" class="btn btn-success btn-sm"
+            onclick="showPanel('connection', '{self.id}')">Connect</button>""",
+            f"""<div class="btn-group" style="width: 80px;">
+            <button type="button" class="btn btn-primary btn-sm"
+            onclick="showTypePanel('device', '{self.id}')">Edit</button>,
+            <button type="button" class="btn btn-primary btn-sm
+            dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
+            showTypePanel('device', '{self.id}', 'duplicate')">Duplicate</a></li>
+            </ul></div>""",
+            f"""<button type="button" class="btn btn-danger btn-sm"
+            onclick="showDeletionPanel({self.row_properties})">
+            Delete</button>""",
+        ]
 
     def __repr__(self) -> str:
         return f"{self.name} ({self.model})" if self.model else self.name
@@ -376,6 +360,9 @@ class Configuration(AbstractBase):
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showConfiguration('{self.id}')"></i>Configuration</a></button>""",
+            f"""<label class="btn btn-default btn-sm btn-file"
+            style="width:100%;"><a href="/download_configuration/{self.name}">
+            Download</a></label>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",
         ]

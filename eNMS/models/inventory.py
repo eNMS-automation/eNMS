@@ -114,12 +114,6 @@ class Device(CustomDevice):
             if self in pool.devices and not match:
                 pool.devices.remove(self)
 
-    def get_configurations(self) -> dict:
-        return {
-            str(date): configuration
-            for date, configuration in self.configurations.items()
-        }
-
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"

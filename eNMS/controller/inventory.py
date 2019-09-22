@@ -1,5 +1,4 @@
 from collections import Counter
-from difflib import SequenceMatcher
 from logging import info
 from pynetbox import api as netbox_api
 from requests import get as http_get
@@ -13,11 +12,11 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.controller.base import BaseController
-from eNMS.database import DIALECT, Session
+from eNMS.database import Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
 from eNMS.models import models, property_types
 from eNMS.properties import field_conversion
-from eNMS.properties.table import filtering_properties, table_properties
+from eNMS.properties.table import table_properties
 
 
 class InventoryController(BaseController):
@@ -106,9 +105,6 @@ class InventoryController(BaseController):
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))
         workbook.save(self.path / "projects" / "spreadsheets" / filename)
-
-    def get_configurations(self, device_id: int) -> dict:
-        return fetch("device", id=device_id).get_configurations()
 
     def query_netbox(self, **kwargs: str) -> None:
         nb = netbox_api(kwargs["netbox_address"], token=kwargs["netbox_token"])

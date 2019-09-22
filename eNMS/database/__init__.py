@@ -10,24 +10,22 @@ DATABASE_URL = environ.get(
 )
 DIALECT = DATABASE_URL.split(":")[0]
 
+engine_parameters = {
+    "convert_unicode": True,
+    "pool_pre_ping": True,
+}
 
-def session_factory() -> Any:
-    kwargs = {}
-    if DIALECT == "mysql":
-        kwargs.update(
-            {
-                "max_overflow": int(environ.get("MAX_OVERFLOW", 10)),
-                "pool_size": int(environ.get("POOL_SIZE", 1000)),
-            }
-        )
-    engine = create_engine(
-        environ.get("DATABASE_URL", "sqlite:///database.db?check_same_thread=False"),
-        convert_unicode=True,
-        pool_pre_ping=True,
-        **kwargs
+if DIALECT == "mysql":
+    engine_parameters.update(
+        {
+            "max_overflow": int(environ.get("MAX_OVERFLOW", 10)),
+            "pool_size": int(environ.get("POOL_SIZE", 1000)),
+        }
     )
-    return engine, scoped_session(sessionmaker(autoflush=False, bind=engine))
 
-
-engine, Session = session_factory()
+engine = create_engine(
+    environ.get("DATABASE_URL", "sqlite:///database.db?check_same_thread=False"),
+    **engine_parameters
+)
+Session = scoped_session(sessionmaker(autoflush=False, bind=engine))
 Base = declarative_base()

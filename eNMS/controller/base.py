@@ -1,6 +1,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from collections import Counter
 from datetime import datetime
+from difflib import SequenceMatcher
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -21,7 +22,7 @@ from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_, func, or_
-from sqlalchemy.exc import IntegrityError, InterfaceError, InvalidRequestError
+from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
@@ -170,7 +171,6 @@ class BaseController:
         "get",
         "get_all",
         "get_cluster_status",
-        "get_configurations",
         "get_configuration_diff",
         "get_device_list",
         "get_device_logs",

@@ -1,10 +1,8 @@
-from contextlib import contextmanager
-from logging import info
 from re import search
 from sqlalchemy import func
 from typing import Any, List, Tuple
 
-from eNMS.database import Session, session_factory
+from eNMS.database import Session
 from eNMS.models import models, relationships
 
 

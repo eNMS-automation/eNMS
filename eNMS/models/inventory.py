@@ -117,7 +117,7 @@ class Device(CustomDevice):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showResultsPanel('{self.id}', '{self.name}', 'device')">
+            onclick="showDeviceResultsPanel({self.row_properties})">
             </i>Results</a></button>""",
             f"""<button type="button" class="btn btn-success btn-sm"
             onclick="showPanel('connection', '{self.id}')">Connect</button>""",

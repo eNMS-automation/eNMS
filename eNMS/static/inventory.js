@@ -76,10 +76,9 @@ function updatePools(pool) {
 }
 
 // eslint-disable-next-line
-function showDeviceResultsPanel(id, name, type) {
-  createPanel("device_results", `Results - ${name}`, id, function() {
-    configureCallbacks(id, type);
-    getRuntimes(id, type);
+function showDeviceResultsPanel(device) {
+  createPanel("result", `Results - ${device.name}`, null, function() {
+    resultTable = initTable("result", device);
   });
 }
 

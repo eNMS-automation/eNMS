@@ -361,7 +361,7 @@ class Configuration(AbstractBase):
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showConfiguration('{self.id}')"></i>Configuration</a></button>""",
             f"""<label class="btn btn-default btn-sm btn-file"
-            style="width:100%;"><a href="/download_configuration/{self.name}">
+            style="width:100%;"><a href="/download_configuration/{self.device_name}">
             Download</a></label>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",

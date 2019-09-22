@@ -82,7 +82,8 @@ class Device(CustomDevice):
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")
     last_update = Column(SmallString, default="Never")
-    last_runtime = Column(Float)
+    last_runtime = Column(SmallString)
+    last_duration = Column(SmallString)
     jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
     results = relationship(
         "Result", back_populates="device", cascade="all, delete-orphan"
@@ -361,7 +362,7 @@ class Configuration(AbstractBase):
     id = Column(Integer, primary_key=True)
     configuration = Column(LargeString)
     runtime = Column(SmallString)
-    endtime = Column(SmallString)
+    duration = Column(SmallString)
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"

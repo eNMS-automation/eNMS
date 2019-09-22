@@ -42,7 +42,7 @@ class NetmikoBackupService(Service):
 
     def job(self, run: "Run", payload: dict, device: Device) -> dict:
         try:
-            now = datetime.now()
+            device.last_runtime = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
@@ -53,17 +53,22 @@ class NetmikoBackupService(Service):
                 pass
             run.log("info", f"Fetching configuration on {device.name} (Netmiko)")
             command = run.configuration_command
-            config = netmiko_connection.send_command(command)
+            configuration = netmiko_connection.send_command(command)
             device.last_status = "Success"
-            device.last_runtime = (datetime.now() - now).total_seconds()
-            if device.configurations:
-                last_config = device.configurations[max(device.configurations)]
-                if config == last_config:
-                    return {"success": True, "result": "no change"}
-            device.configurations[str(now)] = device.current_configuration = config
-            with open(path_device_config / device.name, "w") as file:
-                file.write(config)
+            device.last_duration = f"{(datetime.now() - now).total_seconds()}s"
+            if configuration == device.current_configuration:
+                return {"success": True, "result": "no change"}
             device.last_update = str(now)
+            config_object = factory(
+                "configuration",
+                device=device.id,
+                runtime=device.last_runtime,
+                duration=device.last_duration,
+                configuration=configuration,
+            )
+            device.current_configuration = configuration
+            with open(path_device_config / device.name, "w") as file:
+                file.write(configuration)
             self.generate_yaml_file(path_device_config, device)
         except Exception as e:
             device.last_status = "Failure"

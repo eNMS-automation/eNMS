@@ -76,6 +76,15 @@ function updatePools(pool) {
 }
 
 // eslint-disable-next-line
+function showDeviceConfiguration(id) {
+  createPanel("display", "Result", id, function() {
+    call(`/get_device_configuration/${id}`, (config) => {
+      $(`#content-${id}`).html(`<pre>${config}</pre>`);
+    });
+  });
+}
+
+// eslint-disable-next-line
 function showDeviceResultsPanel(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
     resultTable = initTable("result", device);

@@ -38,32 +38,12 @@ function sshConnection(id) {
 }
 
 // eslint-disable-next-line
-function showConfigurationPanel(id, name) {
-  createPanel(
-    `configuration`,
-    `Configuration - Device ${name}`,
-    id,
-    function() {
-      configureCallbacks(id);
-      displayConfigurations(id);
-    }
-  );
-}
-
-function displayConfigurations(id) {
-  call(`/get_configurations/${id}`, (configurations) => {
-    $(`#display-${id},#compare_with-${id}`).empty();
-    const times = Object.keys(configurations);
-    times.forEach((option) => {
-      $(`#display-${id},#compare_with-${id}`).append(
-        $("<option></option>")
-          .attr("value", option)
-          .text(option)
-      );
+function showConfiguration(id, name) {
+  createPanel("display_result", `Configuration - Device ${name}`, id, () => {
+    call(`/get/configuration/${id}`, (config) => {
+      console.log(config)
     });
-    $(`#display-${id},#compare_with-${id}`).val(times[times.length - 1]);
-    $(`#display-${id},#compare_with-${id}`).selectpicker("refresh");
-    $(`#configurations-${id}`).text(configurations[$(`#display-${id}`).val()]);
+    //$(`display_results-${id}`).text(config);
   });
 }
 
@@ -73,36 +53,6 @@ function clearConfigurations(id) {
     $(`#configurations-${id},#compare_with-${id},#display-${id}`).empty();
     alertify.notify("Configurations cleared.", "success", 5);
     $(`#configuration-${id}`).remove();
-  });
-}
-
-// eslint-disable-next-line
-function configureCallbacks(id) {
-  $(`#display-${id}`).on("change", function() {
-    call(`/get_configurations/${id}`, (configurations) => {
-      $(`#configurations-${id}`).text(
-        configurations[$(`#display-${id}`).val()]
-      );
-    });
-  });
-
-  $(`#compare_with-${id}`).on("change", function() {
-    $(`#configurations-${id}`).empty();
-    const v1 = $(`#display-${id}`).val();
-    const v2 = $(`#compare_with-${id}`).val();
-    call(`/get_configuration_diff/${id}/${v1}/${v2}`, function(data) {
-      $(`#configurations-${id}`).append(
-        diffview.buildView({
-          baseTextLines: data.first,
-          newTextLines: data.second,
-          opcodes: data.opcodes,
-          baseTextName: `${v1}`,
-          newTextName: `${v2}`,
-          contextSize: null,
-          viewType: 0,
-        })
-      );
-    });
   });
 }
 

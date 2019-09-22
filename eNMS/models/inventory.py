@@ -359,7 +359,8 @@ class Configuration(AbstractBase):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showConfiguration('{self.id}')"></i>Configuration</a></button>""",
+            onclick="showConfiguration('{self.id}', '{self.device_name}')">
+            </i>Configuration</a></button>""",
             f"""<label class="btn btn-default btn-sm btn-file"
             style="width:100%;"><a href="/download_configuration/{self.device_name}">
             Download</a></label>""",

@@ -67,9 +67,6 @@ class InventoryController(BaseController):
         ]
         return "\n".join(device_logs)
 
-    def clear_configurations(self, device_id: int) -> None:
-        fetch("device", id=device_id).configurations = {}
-
     def counters(self, property: str, type: str) -> Counter:
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 

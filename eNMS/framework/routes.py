@@ -208,7 +208,7 @@ def download_configuration(id: str) -> Response:
     configuration = fetch("configuration", id=id)
     filename = f"{configuration.device_name}-{app.strip_all(configuration.runtime)}"
     return Response(
-        (f"{line}\n" for line in configuration.configuration.splitlines()),
+        (f"{line}\n" for line in configuration.result.splitlines()),
         mimetype="text/plain",
         headers={
             "Content-Disposition": f"attachment;filename={filename}.txt"

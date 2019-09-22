@@ -352,7 +352,9 @@ class Configuration(AbstractBase):
     duration = Column(SmallString)
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
-        "Device", back_populates="configurations", foreign_keys="Configuration.device_id"
+        "Device",
+        back_populates="configurations",
+        foreign_keys="Configuration.device_id",
     )
     device_name = association_proxy("device", "name")
 
@@ -362,7 +364,7 @@ class Configuration(AbstractBase):
             onclick="showConfiguration('{self.id}', '{self.device_name}')">
             </i>Configuration</a></button>""",
             f"""<label class="btn btn-default btn-sm btn-file"
-            style="width:100%;"><a href="/download_configuration/{self.device_name}">
+            style="width:100%;"><a href="/download_configuration/{self.id}">
             Download</a></label>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",

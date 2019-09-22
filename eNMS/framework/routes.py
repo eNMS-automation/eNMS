@@ -202,17 +202,17 @@ def view_job_results(id: int) -> str:
     return f"<pre>{app.str_dict(result)}</pre>"
 
 
-@blueprint.route("/download_configuration/<name>")
+@blueprint.route("/download_configuration/<id>")
 @monitor_requests
-def download_configuration(name: str) -> Response:
-    try:
-        return send_file(
-            filename_or_fp=str(app.path / "git" / "configurations" / name / name),
-            as_attachment=True,
-            attachment_filename=f"configuration_{name}.txt",
-        )
-    except FileNotFoundError:
-        return jsonify("No configuration stored")
+def download_configuration(id: str) -> Response:
+    configuration = fetch("configuration", id=id)
+    return Response(
+        (f"{line}\n" for line in config_object.configuration.splitlines()),
+        mimetype="text/plain",
+        headers={
+            "Content-Disposition": f"attachment;filename={configuration.device_name}-{app.strip_all(configuration.runtime)}.txt"
+        },
+    )
 
 
 @blueprint.route("/", methods=["POST"])

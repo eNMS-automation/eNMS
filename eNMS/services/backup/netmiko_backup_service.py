@@ -56,7 +56,9 @@ class NetmikoBackupService(Service):
             command = run.configuration_command
             configuration = netmiko_connection.send_command(command)
             device.last_status = "Success"
-            device.last_duration = f"{(datetime.now() - device.last_runtime).total_seconds()}s"
+            device.last_duration = (
+                f"{(datetime.now() - device.last_runtime).total_seconds()}s"
+            )
             if configuration == device.current_configuration:
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)

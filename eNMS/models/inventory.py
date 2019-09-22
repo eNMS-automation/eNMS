@@ -341,7 +341,7 @@ class Configuration(AbstractBase):
 
     __tablename__ = type = "configuration"
     id = Column(Integer, primary_key=True)
-    result = Column(LargeString)
+    configuration = Column(LargeString)
     runtime = Column(SmallString)
     duration = Column(SmallString)
     device_id = Column(Integer, ForeignKey("device.id"))

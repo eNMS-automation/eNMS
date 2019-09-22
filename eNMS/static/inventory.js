@@ -41,7 +41,7 @@ function sshConnection(id) {
 function showConfiguration(id, name) {
   createPanel("display", `Configuration - Device ${name}`, id, () => {
     call(`/get/configuration/${id}`, (config) => {
-      $(`#display-${id}`).html(`<pre>${config.result}</pre>`);
+      $(`#content-${id}`).html(`<pre>${config.configuration}</pre>`);
     });
   });
 }

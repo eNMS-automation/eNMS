@@ -504,8 +504,8 @@ class BaseController:
         }
 
     def compare(self, type: str, result1: int, result2: int) -> dict:
-        first = self.str_dict(fetch(type, id=result1).result).splitlines()
-        second = self.str_dict(fetch(type, id=result2).result).splitlines()
+        first = self.str_dict(getattr(fetch(type, id=result1), type)).splitlines()
+        second = self.str_dict(getattr(fetch(type, id=result2), type)).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 

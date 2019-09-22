@@ -60,13 +60,6 @@ class InventoryController(BaseController):
             "server_addr": self.server_addr,
         }
 
-    def get_configuration_diff(self, device_id: int, v1: str, v2: str) -> dict:
-        device = fetch("device", id=device_id)
-        first = device.configurations[v1].splitlines()
-        second = device.configurations[v2].splitlines()
-        opcodes = SequenceMatcher(None, first, second).get_opcodes()
-        return {"first": first, "second": second, "opcodes": opcodes}
-
     def get_device_logs(self, device_id: int) -> Union[str, bool]:
         device_logs = [
             log.name

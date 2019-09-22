@@ -153,7 +153,7 @@ class BaseController:
         "calendar_init",
         "clear_results",
         "clear_configurations",
-        "compare_results",
+        "compare",
         "connection",
         "counters",
         "count_models",
@@ -502,6 +502,12 @@ class BaseController:
                 for cls in diagram_classes
             },
         }
+
+    def compare(self, type: str, result1: int, result2: int) -> dict:
+        first = self.str_dict(fetch(type, id=result1).result).splitlines()
+        second = self.str_dict(fetch(type, id=result2).result).splitlines()
+        opcodes = SequenceMatcher(None, first, second).get_opcodes()
+        return {"first": first, "second": second, "opcodes": opcodes}
 
     def build_filtering_constraints(self, obj_type, kwargs):
         model, constraints = models[obj_type], []

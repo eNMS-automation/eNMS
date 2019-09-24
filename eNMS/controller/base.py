@@ -528,10 +528,12 @@ class BaseController:
             relation_ids = [
                 int(id) for id in kwargs.getlist(f"form[{related_model}][]")
             ]
-            if not relation_ids:
+            filter = kwargs.get(f"form[{related_model}_filter]")
+            if filter == "none":
+                constraint = ~getattr(model, related_model).any()
+            elif not relation_ids:
                 continue
-            if relation_properties["list"]:
-                filter = kwargs.get(f"form[{related_model}_filter]")
+            elif relation_properties["list"]:
                 constraint = getattr(model, related_model).any(
                     models[relation_properties["model"]].id.in_(relation_ids)
                 )

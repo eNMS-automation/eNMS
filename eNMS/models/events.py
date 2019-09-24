@@ -43,17 +43,17 @@ class Task(AbstractBase):
     job = relationship("Job", back_populates="tasks")
     job_name = association_proxy("job", "name")
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs):
         super().update(**kwargs)
         self.creation_time = app.get_time()  # type: ignore
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
 
-    def update(self, **kwargs: Any) -> None:
+    def update(self, **kwargs):
         super().update(**kwargs)
         if self.is_active:
             self.schedule()
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         status = "Pause" if self.is_active else "Resume"
         return [
             f"""<button id="pause-resume-{self.id}" type="button"
@@ -100,26 +100,26 @@ class Task(AbstractBase):
             return f"{days}{hours}h:{minutes}m:{seconds}s"
         return None
 
-    def aps_conversion(self, date: str) -> str:
+    def aps_conversion(self, date) -> str:
         dt: datetime = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
         return datetime.strftime(dt, "%Y-%m-%d %H:%M:%S")
 
-    def aps_date(self, datetype: str) -> Optional[str]:
+    def aps_date(self, datetype) -> Optional[str]:
         date = getattr(self, datetype)
         return self.aps_conversion(date) if date else None
 
-    def pause(self) -> None:
+    def pause(self):
         self.is_active = False  # type: ignore
         Session.commit()
         app.scheduler.pause_job(self.aps_job_id)
 
-    def resume(self) -> None:
+    def resume(self):
         self.schedule()
         app.scheduler.resume_job(self.aps_job_id)
         self.is_active = True  # type: ignore
         Session.commit()
 
-    def delete_task(self) -> None:
+    def delete_task(self):
         if app.scheduler.get_job(self.aps_job_id):
             app.scheduler.remove_job(self.aps_job_id)
         Session.commit()
@@ -176,7 +176,7 @@ class Task(AbstractBase):
             trigger = {"trigger": "date", "run_date": self.aps_date("start_date")}
         return default, trigger
 
-    def schedule(self) -> None:
+    def schedule(self):
         default, trigger = self.kwargs()
         if not app.scheduler.get_job(self.aps_job_id):
             app.scheduler.add_job(**{**default, **trigger})
@@ -193,11 +193,11 @@ class Baselog(AbstractBase):
     time = Column(SmallString)
     content = Column(LargeString, default="")
 
-    def update(self, **kwargs: str) -> None:
+    def update(self, **kwargs):
         kwargs["time"] = str(datetime.now())
         super().update(**kwargs)
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return []
 
 
@@ -231,7 +231,7 @@ class Event(AbstractBase):
     log_content_regex = Column(Boolean, default=False)
     jobs = relationship("Job", secondary=job_event_table, back_populates="events")
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showTypePanel('event', '{self.id}')">
@@ -241,7 +241,7 @@ class Event(AbstractBase):
             Delete</button>""",
         ]
 
-    def match_log(self, source: str, content: str) -> None:
+    def match_log(self, source, content):
         source_match = (
             search(self.log_source, source)
             if self.log_source_regex

@@ -14,7 +14,7 @@ class AbstractBase(Base):
 
     __abstract__ = True
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs):
         self.update(**kwargs)
 
     def __lt__(self, other: Base) -> bool:
@@ -23,7 +23,7 @@ class AbstractBase(Base):
     def __repr__(self) -> str:
         return self.name
 
-    def __getattribute__(self, property: str) -> Any:
+    def __getattribute__(self, property) -> Any:
         if property in private_properties and app.use_vault:
             path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
             data = app.vault_client.read(path)
@@ -31,7 +31,7 @@ class AbstractBase(Base):
         else:
             return super().__getattribute__(property)
 
-    def __setattr__(self, property: str, value: Any) -> None:
+    def __setattr__(self, property, value):
         if property in private_properties:
             if not value:
                 return
@@ -49,7 +49,7 @@ class AbstractBase(Base):
     def row_properties(self) -> dict:
         return {p: getattr(self, p) for p in ("id", "name", "type")}
 
-    def update(self, **kwargs: Any) -> None:
+    def update(self, **kwargs):
         relation = relationships[self.__tablename__]
         for property, value in kwargs.items():
             if not hasattr(self, property):

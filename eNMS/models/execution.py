@@ -52,16 +52,16 @@ class Result(AbstractBase):
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
     workflow_name = association_proxy("workflow", "name")
 
-    def __getitem__(self, key: Any) -> Any:
+    def __getitem__(self, key) -> Any:
         return self.result[key]
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs):
         self.success = kwargs["result"]["success"]
         self.runtime = kwargs["result"]["runtime"]
         self.endtime = kwargs["result"]["endtime"]
         super().__init__(**kwargs)
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showResult('{self.id}')"></i>Results</a></button>""",
@@ -96,7 +96,7 @@ class Run(AbstractBase):
     task = relationship("Task", foreign_keys="Run.task_id")
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or app.get_time()  # type: ignore
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
@@ -105,7 +105,7 @@ class Run(AbstractBase):
     def __repr__(self) -> str:
         return f"{self.runtime} ({self.job_name} run by {self.creator})"
 
-    def __getattr__(self, key: str) -> Any:
+    def __getattr__(self, key) -> Any:
         if key in self.__dict__:
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
@@ -120,7 +120,7 @@ class Run(AbstractBase):
         result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         job_type = "workflow" if self.job.type == "workflow" else "service"
         return [
             f"""<div class="btn-group" style="width: 100px;">
@@ -230,10 +230,10 @@ class Run(AbstractBase):
         ] = napalm_connection
         return napalm_connection
 
-    def get_state(self, property: str) -> Any:
+    def get_state(self, property) -> Any:
         return app.run_db[self.runtime].get(property)
 
-    def set_state(self, **kwargs: Any) -> None:
+    def set_state(self, **kwargs):
         app.run_db[self.runtime].update(**kwargs)
         if self.workflow:
             app.run_db[self.parent_runtime]["jobs"][self.job.id].update(**kwargs)
@@ -245,7 +245,7 @@ class Run(AbstractBase):
     def stop(self) -> Optional[bool]:
         return self.get_state("stop") or app.run_db[self.parent_runtime].get("stop")
 
-    def compute_devices(self, payload: dict) -> Set["Device"]:
+    def compute_devices(self, payload) -> Set["Device"]:
         if self.job.python_query:
             values = self.eval(self.job.python_query, **locals())
             devices, not_found = [], []
@@ -268,7 +268,7 @@ class Run(AbstractBase):
         self.set_state(number_of_targets=len(devices))
         return devices  # type: ignore
 
-    def close_connection_cache(self) -> None:
+    def close_connection_cache(self):
         pool = ThreadPool(30)
         for library in ("netmiko", "napalm"):
             connections = app.connections_cache[library].pop(self.runtime, None)
@@ -280,8 +280,8 @@ class Run(AbstractBase):
         pool.join()
 
     def disconnect(
-        self, library: str, device: Device, connection: ConnectHandler
-    ) -> None:
+        self, library, device: Device, connection: ConnectHandler
+    ):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
             self.log("info", f"Closed {library} Connection to {device}")
@@ -338,7 +338,7 @@ class Run(AbstractBase):
             self.notify(results)
         return results
 
-    def create_result(self, results: dict, device: Optional["Device"] = None) -> None:
+    def create_result(self, results, device: Optional["Device"] = None):
         self.success = results["success"]
         result_kw = {"run": self, "result": results, "job": self.job_id}
         if self.workflow_id:
@@ -347,11 +347,11 @@ class Run(AbstractBase):
             result_kw["device"] = device.id
         factory("result", **result_kw)
 
-    def get_results(self, payload: dict, device: Optional["Device"] = None) -> dict:
+    def get_results(self, payload, device: Optional["Device"] = None) -> dict:
         self.log(
             "info", f"Running {self.job.type}{f' on {device.name}' if device else ''}"
         )
-        results: Dict[Any, Any] = {"runtime": app.get_time()}
+        results[Any, Any] = {"runtime": app.get_time()}
         try:
             args = (device,) if device else ()
             if self.job.iteration_values:
@@ -384,13 +384,13 @@ class Run(AbstractBase):
         self.set_state(failed=failed + 1 - results["success"], completed=completed + 1)
         return results
 
-    def log(self, severity: str, log: str) -> None:
+    def log(self, severity, log):
         log = f"{app.get_time()} - {severity} - {log}"
         app.run_logs[self.runtime].append(log)
         if self.workflow:
             app.run_logs[self.parent_runtime].append(log)
 
-    def run_notification(self, results: dict) -> List[str]:
+    def run_notification(self, results) -> List[str]:
         notification = self.notification_header.splitlines()
         if self.job.type == "workflow":
             return notification
@@ -410,7 +410,7 @@ class Run(AbstractBase):
                 notification.append(f"\n\nPASS :\n{passed}")
         return notification
 
-    def notify(self, results: dict) -> None:
+    def notify(self, results):
         notification = [
             f"Job: {self.job.name} ({self.job.type})",
             f"Runtime: {self.runtime}",
@@ -443,7 +443,7 @@ class Run(AbstractBase):
             )
         )
 
-    def convert_result(self, result: Any) -> Union[str, dict]:
+    def convert_result(self, result) -> Union[str, dict]:
         try:
             if self.conversion_method == "text":
                 result = str(result)
@@ -456,11 +456,11 @@ class Run(AbstractBase):
                 "success": False,
                 "text_response": result,
                 "error": f"Conversion to {self.conversion_method} failed",
-                "exception": str(e),
+                "exception"(e),
             }
         return result
 
-    def match_content(self, result: Any, match: Union[str, dict]) -> bool:
+    def match_content(self, result, match: Union[str, dict]) -> bool:
         if getattr(self, "validation_method", "text") == "text":
             result = str(result)
             assert isinstance(match, str)
@@ -477,7 +477,7 @@ class Run(AbstractBase):
             success = self.match_dictionary(result, match)
         return success if not self.negative_logic else not success
 
-    def match_dictionary(self, result: dict, match: dict, first: bool = True) -> bool:
+    def match_dictionary(self, result, match, first: bool = True) -> bool:
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:
@@ -494,8 +494,8 @@ class Run(AbstractBase):
             return not match_copy
 
     def transfer_file(
-        self, ssh_client: SSHClient, files: List[Tuple[str, str]]
-    ) -> None:
+        self, ssh_client: SSHClient, files[Tuple[str, str]]
+    ):
         if self.protocol == "sftp":
             with SFTPClient.from_transport(
                 ssh_client.get_transport(),
@@ -511,12 +511,12 @@ class Run(AbstractBase):
 
     def payload_helper(
         self,
-        payload: dict,
-        name: str,
+        payload,
+        name,
         value: Optional[Any] = None,
         device: Optional[str] = None,
         section: Optional[str] = None,
-        operation: str = "set",
+        operation = "set",
     ) -> Any:
         payload = payload.setdefault("variables", {})
         if device:
@@ -535,11 +535,11 @@ class Run(AbstractBase):
             return payload[name]
 
     def get_var(
-        self, payload: dict, name: str, device: Optional[Any] = None, **kwargs: Any
+        self, payload, name, device: Optional[Any] = None, **kwargs
     ) -> Any:
         return self.payload_helper(payload, name, device=device, **kwargs)
 
-    def get_result(self, job: str, device: Optional[str] = None) -> Optional[dict]:
+    def get_result(self, job, device: Optional[str] = None) -> Optional[dict]:
         job_id = fetch("job", name=job).id
 
         def recursive_search(run: "Run") -> Optional[dict]:
@@ -552,7 +552,7 @@ class Run(AbstractBase):
                 parent_runtime=run.parent_runtime,
                 job_id=job_id,
             )
-            results: list = list(filter(None, [run.result(device) for run in runs]))
+            results = list(filter(None, [run.result(device) for run in runs]))
             if not results:
                 return recursive_search(run.restart_run)
             else:
@@ -560,7 +560,7 @@ class Run(AbstractBase):
 
         return recursive_search(self)
 
-    def python_code_kwargs(_self, **locals: Any) -> dict:  # noqa: N805
+    def python_code_kwargs(_self, **locals) -> dict:  # noqa: N805
         return {
             "config": app.custom_config,
             "get_var": partial(_self.get_var, locals.get("payload", {})),
@@ -572,7 +572,7 @@ class Run(AbstractBase):
         }
 
     def eval(
-        _self, query: str, function: str = "eval", **locals: Any  # noqa: N805
+        _self, query, function = "eval", **locals  # noqa: N805
     ) -> Any:
         try:
             return builtins[function](query, _self.python_code_kwargs(**locals))
@@ -584,13 +584,13 @@ class Run(AbstractBase):
                 f"check that the service has targets. ({str(exc)})"
             )
 
-    def sub(self, input: Any, variables: dict) -> dict:
+    def sub(self, input, variables) -> dict:
         r = compile("{{(.*?)}}")
 
         def replace(match: Match) -> str:
             return str(self.eval(match.group()[2:-2], **variables))
 
-        def rec(input: Any) -> Any:
+        def rec(input) -> Any:
             if isinstance(input, str):
                 return r.sub(replace, input)
             elif isinstance(input, list):
@@ -602,7 +602,7 @@ class Run(AbstractBase):
 
         return rec(input)
 
-    def space_deleter(self, input: str) -> str:
+    def space_deleter(self, input) -> str:
         return "".join(input.split())
 
     @property

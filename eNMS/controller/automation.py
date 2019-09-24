@@ -20,15 +20,15 @@ class AutomationController(BaseController):
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
-    connections_cache: dict = {
+    connections_cache = {
         "napalm": defaultdict(dict),
         "netmiko": defaultdict(dict),
     }
-    job_db: dict = defaultdict(lambda: {"runs": 0})
-    run_db: dict = defaultdict(dict)
-    run_logs: dict = defaultdict(list)
+    job_db = defaultdict(lambda: {"runs": 0})
+    run_db = defaultdict(dict)
+    run_logs = defaultdict(list)
 
-    def stop_workflow(self, runtime: str) -> Optional[bool]:
+    def stop_workflow(self, runtime) -> Optional[bool]:
         if runtime in self.run_db:
             self.run_db[runtime]["stop"] = True
             return True
@@ -36,7 +36,7 @@ class AutomationController(BaseController):
             return None
 
     def add_edge(
-        self, workflow_id: int, subtype: str, source: int, destination: int
+        self, workflow_id, subtype, source, destination
     ) -> dict:
         workflow_edge = factory(
             "workflow_edge",
@@ -53,7 +53,7 @@ class AutomationController(BaseController):
         fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(self, workflow_id: int, job_ids: str) -> Dict[str, Any]:
+    def add_jobs_to_workflow(self, workflow_id, job_ids) -> Dict[str, Any]:
         workflow = fetch("workflow", id=workflow_id)
         jobs = objectify("job", [int(job_id) for job_id in job_ids.split("-")])
         for job in jobs:
@@ -62,37 +62,37 @@ class AutomationController(BaseController):
         workflow.last_modified = now
         return {"jobs": [job.serialized for job in jobs], "update_time": now}
 
-    def clear_results(self, job_id: int) -> None:
+    def clear_results(self, job_id):
         for result in fetch("run", all_matches=True, allow_none=True, job_id=job_id):
             Session.delete(result)
 
-    def create_label(self, workflow_id: int, x: int, y: int, **kwargs: Any) -> dict:
+    def create_label(self, workflow_id, x, y, **kwargs) -> dict:
         workflow, label_id = fetch("workflow", id=workflow_id), str(uuid4())
         label = {"positions": [x, y], "content": kwargs["content"]}
         workflow.labels[label_id] = label
         return {"id": label_id, **label}
 
-    def delete_edge(self, workflow_id: int, edge_id: int) -> str:
+    def delete_edge(self, workflow_id, edge_id) -> str:
         delete("workflow_edge", id=edge_id)
         now = self.get_time()
         fetch("workflow", id=workflow_id).last_modified = now
         return now
 
-    def delete_node(self, workflow_id: int, job_id: int) -> dict:
+    def delete_node(self, workflow_id, job_id) -> dict:
         workflow, job = fetch("workflow", id=workflow_id), fetch("job", id=job_id)
         workflow.jobs.remove(job)
         now = self.get_time()
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
 
-    def delete_label(self, workflow_id: int, label: int) -> str:
+    def delete_label(self, workflow_id, label) -> str:
         workflow = fetch("workflow", id=workflow_id)
         workflow.labels.pop(label)
         now = self.get_time()
         workflow.last_modified = now
         return now
 
-    def duplicate_workflow(self, workflow_id: int, **kwargs: Any) -> dict:
+    def duplicate_workflow(self, workflow_id, **kwargs) -> dict:
         parent_workflow = fetch("workflow", id=workflow_id)
         new_workflow = factory("workflow", **kwargs)
         Session.commit()
@@ -119,14 +119,14 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, **kwargs: Any) -> dict:
+    def get_job_logs(self, **kwargs) -> dict:
         run = fetch("run", allow_none=True, runtime=kwargs["runtime"])
         result = run.result() if run else None
         logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])
         filtered_logs = (log for log in logs if kwargs["filter"] in log)
         return {"logs": "\n".join(filtered_logs), "refresh": not bool(result)}
 
-    def get_runtimes(self, type: str, id: int) -> list:
+    def get_runtimes(self, type, id) -> list:
         if type == "device":
             results = fetch("result", allow_none=True, all_matches=True, device_id=id)
             runs = [result.run for result in results]
@@ -134,11 +134,11 @@ class AutomationController(BaseController):
             runs = fetch("run", allow_none=True, all_matches=True, job_id=id)
         return sorted(set((run.runtime, run.name) for run in runs))
 
-    def get_result(self, id: int) -> Optional[dict]:
+    def get_result(self, id) -> Optional[dict]:
         return fetch("result", id=id).result
 
     @staticmethod
-    def run(job: int, **kwargs: Any) -> dict:
+    def run(job, **kwargs) -> dict:
         run_kwargs = {
             key: kwargs.pop(key)
             for key in ("creator", "runtime", "task")
@@ -153,7 +153,7 @@ class AutomationController(BaseController):
         run.properties = kwargs
         return run.run(kwargs.get("payload"))
 
-    def run_job(self, id: Optional[int] = None, **kwargs: Any) -> dict:
+    def run_job(self, id: Optional[int] = None, **kwargs) -> dict:
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "admin")
@@ -172,7 +172,7 @@ class AutomationController(BaseController):
             job.run(runtime=runtime)
         return {**job.serialized, "runtime": runtime}
 
-    def save_positions(self, workflow_id: int) -> str:
+    def save_positions(self, workflow_id) -> str:
         now = self.get_time()
         workflow = fetch("workflow", allow_none=True, id=workflow_id)
         session["workflow"] = workflow.id
@@ -192,12 +192,12 @@ class AutomationController(BaseController):
                 workflow.last_modified = now
         return now
 
-    def skip_jobs(self, skip: str, job_ids: str) -> None:
+    def skip_jobs(self, skip, job_ids):
         for job_id in job_ids.split("-"):
             fetch("Job", id=job_id).skip = skip == "skip"
 
     def get_workflow_state(
-        self, workflow_id: int, runtime: Optional[str] = None
+        self, workflow_id, runtime: Optional[str] = None
     ) -> dict:
         workflow = fetch("workflow", id=workflow_id)
         runtimes = [
@@ -220,7 +220,7 @@ class AutomationController(BaseController):
             "runtime": runtime,
         }
 
-    def convert_date(self, date: str) -> list:
+    def convert_date(self, date) -> list:
         python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
         month = "{:02}".format((int(python_month) - 1) % 12)
         return [
@@ -230,7 +230,7 @@ class AutomationController(BaseController):
             ).split(",")
         ]
 
-    def calendar_init(self, type: str) -> dict:
+    def calendar_init(self, type) -> dict:
         results = {}
         for instance in fetch_all(type):
             if getattr(instance, "workflow", None):
@@ -243,10 +243,10 @@ class AutomationController(BaseController):
                 }
         return results
 
-    def scheduler_action(self, action: str) -> None:
+    def scheduler_action(self, action):
         getattr(self.scheduler, action)()
 
-    def task_action(self, action: str, task_id: int) -> Optional[dict]:
+    def task_action(self, action, task_id) -> Optional[dict]:
         try:
             return getattr(fetch("task", id=task_id), action)()
         except JobLookupError:

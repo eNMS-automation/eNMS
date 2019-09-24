@@ -20,7 +20,7 @@ class DateField(StringField):
 
 
 class JsonField(StringField):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def pre_validate(self, form: FlaskForm) -> bool:
@@ -32,13 +32,13 @@ class JsonField(StringField):
 
 
 class JsonSubstitutionField(JsonField):
-    def __call__(self, *args: Any, **kwargs: Any) -> str:
+    def __call__(self, *args, **kwargs) -> str:
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
 
 class DictField(StringField):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args, **kwargs):
         kwargs["default"] = kwargs.get("default", "{}")
         super().__init__(*args, **kwargs)
 
@@ -60,13 +60,13 @@ class DictField(StringField):
 
 
 class DictSubstitutionField(DictField):
-    def __call__(self, *args: Any, **kwargs: Any) -> str:
+    def __call__(self, *args, **kwargs) -> str:
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
 
 class InstanceField(SelectField):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args, **kwargs):
         instance_type = kwargs.pop("instance_type")
         kwargs["coerce"] = int
         super().__init__(*args, **kwargs)
@@ -74,34 +74,34 @@ class InstanceField(SelectField):
 
 
 class MultipleInstanceField(SelectMultipleField):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args, **kwargs):
         instance_type = kwargs.pop("instance_type")
         super().__init__(*args, **kwargs)
         self.choices = ()
 
-    def pre_validate(self, form: FlaskForm) -> None:
+    def pre_validate(self, form: FlaskForm):
         pass
 
 
 class SubstitutionField(StringField):
-    def __call__(self, *args: Any, **kwargs: Any) -> str:
+    def __call__(self, *args, **kwargs) -> str:
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
 
 class PasswordSubstitutionField(PasswordField):
-    def __call__(self, *args: Any, **kwargs: Any) -> str:
+    def __call__(self, *args, **kwargs) -> str:
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
 
 class NoValidationSelectField(SelectField):
-    def pre_validate(self, form: FlaskForm) -> None:
+    def pre_validate(self, form: FlaskForm):
         pass
 
 
 class NoValidationSelectMultipleField(SelectMultipleField):
-    def pre_validate(self, form: FlaskForm) -> None:
+    def pre_validate(self, form: FlaskForm):
         pass
 
 

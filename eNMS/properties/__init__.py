@@ -3,24 +3,24 @@ from json import loads
 from typing import Callable, Dict, List
 
 
-def dict_conversion(input: str) -> dict:
+def dict_conversion(input) -> dict:
     try:
         return literal_eval(input)
     except Exception:
         return loads(input)
 
 
-field_conversion: Dict[str, Callable] = {
-    "dict": dict_conversion,
+field_conversion[str, Callable] = {
+    "dict"_conversion,
     "float": float,
-    "integer": int,
+    "integer",
     "json": loads,
-    "list": str,
-    "str": str,
+    "list",
+    "str",
 }
 
-property_names: Dict[str, str] = {}
+property_names[str, str] = {}
 
-private_properties: List[str] = ["password", "enable_password", "custom_password"]
+private_properties[str] = ["password", "enable_password", "custom_password"]
 
-dont_serialize: List[str] = ["configurations", "current_configuration"]
+dont_serialize[str] = ["configurations", "current_configuration"]

@@ -25,7 +25,7 @@ class NapalmGettersService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_getters_service"}
 
-    def job(self, run: "Run", payload: dict, device: Device) -> dict:
+    def job(self, run: "Run", payload, device: Device) -> dict:
         napalm_connection, result = run.napalm_connection(device), {}
         run.log(
             "info",

@@ -13,12 +13,12 @@ from eNMS.properties import field_conversion, property_names
 
 form_actions = {}
 form_classes = {}
-form_properties: dict = defaultdict(dict)
+form_properties = defaultdict(dict)
 form_templates = {}
 
 
 class MetaForm(FormMeta):
-    def __new__(cls: type, name: str, bases: tuple, attrs: dict) -> FlaskForm:
+    def __new__(cls: type, name, bases, attrs) -> FlaskForm:
         form: FlaskForm = type.__new__(cls, name, bases, attrs)
         if name == "BaseForm":
             return form

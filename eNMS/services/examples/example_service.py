@@ -75,7 +75,7 @@ class ExampleService(Service):
     # Some services will take action or interrogate a device. The job method
     # can also take device as a parameter for these types of services.
     # def job(self, device, payload):
-    def job(self, run: "Run", payload: dict) -> dict:
+    def job(self, run: "Run", payload) -> dict:
         run.log("info", f"Real-time logs displayed when the service is running.")
         # The "job" function is called when the service is executed.
         # The parameters of the service can be accessed with self (self.string1,
@@ -184,7 +184,7 @@ class ExampleForm(ServiceForm):
     boolean1 = BooleanField()
     boolean2 = BooleanField("Boolean N°1")
 
-    def validate_custom_integer(self, field: IntegerField) -> None:
+    def validate_custom_integer(self, fieldegerField):
         product = self.an_integer.data * self.a_float.data
         if field.data > product:
             raise ValidationError(

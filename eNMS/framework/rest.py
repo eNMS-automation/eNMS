@@ -16,7 +16,7 @@ def create_app_resources() -> Dict[str, Resource]:
     endpoints = {}
     for endpoint in app.valid_rest_endpoints:
 
-        def post(_: Any, ep: str = endpoint) -> str:
+        def post(_, ep = endpoint) -> str:
             getattr(app, ep)()
             Session.commit()
             return f"Endpoint {ep} successfully executed."
@@ -61,7 +61,7 @@ class Heartbeat(Resource):
 class Query(Resource):
     decorators = [auth.login_required]
 
-    def get(self, cls: str) -> Union[dict, list]:
+    def get(self, cls) -> Union[dict, list]:
         try:
             results = fetch(cls, all_matches=True, **request.args.to_dict())
             return [result.get_properties(exclude=["positions"]) for result in results]
@@ -72,7 +72,7 @@ class Query(Resource):
 class GetInstance(Resource):
     decorators = [auth.login_required]
 
-    def get(self, cls: str, name: str) -> dict:
+    def get(self, cls, name) -> dict:
         try:
             return fetch(cls, name=name).to_dict(
                 relation_names_only=True, exclude=["positions"]
@@ -80,7 +80,7 @@ class GetInstance(Resource):
         except Exception:
             return abort(404, message=f"{cls} {name} not found.")
 
-    def delete(self, cls: str, name: str) -> dict:
+    def delete(self, cls, name) -> dict:
         result = delete(cls, name=name)
         Session.commit()
         return result
@@ -89,14 +89,14 @@ class GetInstance(Resource):
 class GetConfiguration(Resource):
     decorators = [auth.login_required]
 
-    def get(self, name: str) -> str:
+    def get(self, name) -> str:
         return fetch("device", name=name).current_configuration
 
 
 class GetResult(Resource):
     decorators = [auth.login_required]
 
-    def get(self, name: str, runtime: str) -> str:
+    def get(self, name, runtime) -> str:
         job = fetch("job", name=name)
         return fetch("result", job_id=job.id, runtime=runtime).result
 
@@ -104,7 +104,7 @@ class GetResult(Resource):
 class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
-    def post(self, cls: str) -> dict:
+    def post(self, cls) -> dict:
         try:
             data = request.get_json(force=True)
             object_data = app.objectify(cls, data)
@@ -118,7 +118,7 @@ class UpdateInstance(Resource):
 class Migrate(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction: str) -> Optional[str]:
+    def post(self, direction) -> Optional[str]:
         kwargs = request.get_json(force=True)
         return getattr(app, f"migration_{direction}")(**kwargs)
 
@@ -175,7 +175,7 @@ class RunJob(Resource):
 class Topology(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction: str) -> str:
+    def post(self, direction) -> str:
         if direction == "import":
             return app.import_topology(
                 **{
@@ -188,7 +188,7 @@ class Topology(Resource):
             return "Topology Export successfully executed."
 
 
-def configure_rest_api(flask_app: Flask) -> None:
+def configure_rest_api(flask_app: Flask):
     api = Api(flask_app, decorators=[csrf.exempt])
     for endpoint, resource in create_app_resources().items():
         api.add_resource(resource, f"/rest/{endpoint}")

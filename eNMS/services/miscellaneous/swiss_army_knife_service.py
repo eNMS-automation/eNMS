@@ -36,7 +36,7 @@ class SwissArmyKnifeService(Service):
     def End(self, *args, **kwargs) -> dict:  # noqa: N802
         return {"success": True}
 
-    def mail_feedback_notification(self, run: "Run", payload: dict) -> dict:
+    def mail_feedback_notification(self, run: "Run", payload) -> dict:
         name = payload["job"]["name"]
         app.send_email(
             f"{name} ({'PASS' if payload['results']['success'] else 'FAILED'})",
@@ -47,16 +47,16 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True}
 
-    def slack_feedback_notification(self, run: "Run", payload: dict) -> dict:
+    def slack_feedback_notification(self, run: "Run", payload) -> dict:
         slack_client = SlackClient(app.slack_token)
         result = slack_client.api_call(
             "chat.postMessage",
             channel=app.slack_channel,
             text=app.str_dict(payload["content"]),
         )
-        return {"success": True, "result": str(result)}
+        return {"success": True, "result"(result)}
 
-    def mattermost_feedback_notification(self, run: "Run", payload: dict) -> dict:
+    def mattermost_feedback_notification(self, run: "Run", payload) -> dict:
         post(
             app.mattermost_url,
             verify=app.mattermost_verify_certificate,
@@ -64,7 +64,7 @@ class SwissArmyKnifeService(Service):
         )
         return {"success": True}
 
-    def cluster_monitoring(self, run: "Run", payload: dict) -> dict:
+    def cluster_monitoring(self, run: "Run", payload) -> dict:
         protocol = app.cluster_scan_protocol
         for instance in fetch_all("instance"):
             factory(
@@ -76,7 +76,7 @@ class SwissArmyKnifeService(Service):
             )
         return {"success": True}
 
-    def poller_service(self, run: "Run", payload: dict) -> dict:
+    def poller_service(self, run: "Run", payload) -> dict:
         for service in fetch_all("service"):
             if getattr(service, "configuration_backup_service", False):
                 app.run(service.id)
@@ -86,7 +86,7 @@ class SwissArmyKnifeService(Service):
                 pool.compute_pool()
         return {"success": True}
 
-    def git_push_configurations(self, run: "Run", payload: dict) -> dict:
+    def git_push_configurations(self, run: "Run", payload) -> dict:
         if app.git_configurations:
             repo = Repo(Path.cwd() / "git" / "configurations")
             try:
@@ -98,7 +98,7 @@ class SwissArmyKnifeService(Service):
             repo.remotes.origin.push()
         return {"success": True}
 
-    def process_payload1(self, run: "Run", payload: dict, device: Device) -> dict:
+    def process_payload1(self, run: "Run", payload, device: Device) -> dict:
         # we use the name of the device to get the result for that particular device.
         get_facts = run.get_result("get_facts", device.name)
         get_interfaces = run.get_result("get_interfaces", device.name)

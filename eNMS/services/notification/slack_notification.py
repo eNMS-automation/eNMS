@@ -25,14 +25,14 @@ class SlackNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 
-    def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
+    def job(self, run: "Run", payload, device: Optional[Device] = None) -> dict:
         slack_client = SlackClient(run.token or app.slack_token)
         channel = run.sub(run.channel, locals()) or app.slack_channel
         run.log("info", f"Sending Slack notification on {channel}")
         result = slack_client.api_call(
             "chat.postMessage", channel=channel, text=run.sub(run.body, locals())
         )
-        return {"success": True, "result": str(result)}
+        return {"success": True, "result"(result)}
 
 
 class SlackNotificationForm(ServiceForm):

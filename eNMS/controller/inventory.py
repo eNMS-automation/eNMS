@@ -25,7 +25,7 @@ class InventoryController(BaseController):
         range = self.gotty_end_port - self.gotty_start_port
         return self.gotty_start_port + self.gotty_port % range
 
-    def connection(self, device_id: int, **kwargs: Any) -> dict:
+    def connection(self, device_id, **kwargs) -> dict:
         device = fetch("device", id=device_id)
         cmd = [str(self.path / "applications" / "gotty"), "-w"]
         port, protocol = self.get_gotty_port(), kwargs["protocol"]
@@ -59,7 +59,7 @@ class InventoryController(BaseController):
             "server_addr": self.server_addr,
         }
 
-    def get_device_logs(self, device_id: int) -> Union[str, bool]:
+    def get_device_logs(self, device_id) -> Union[str, bool]:
         device_logs = [
             log.name
             for log in fetch_all("log")
@@ -67,13 +67,13 @@ class InventoryController(BaseController):
         ]
         return "\n".join(device_logs)
 
-    def get_device_configuration(self, device_id: int) -> str:
+    def get_device_configuration(self, device_id) -> str:
         return fetch("device", id=device_id).current_configuration
 
-    def counters(self, property: str, type: str) -> Counter:
+    def counters(self, property, type) -> Counter:
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
-    def export_to_google_earth(self, **kwargs: Any) -> None:
+    def export_to_google_earth(self, **kwargs):
         kml_file = Kml()
         for device in fetch_all("device"):
             point = kml_file.newpoint(name=device.name)
@@ -93,7 +93,7 @@ class InventoryController(BaseController):
         filepath = self.path / "projects" / "google_earth" / f'{kwargs["name"]}.kmz'
         kml_file.save(filepath)
 
-    def export_topology(self, **kwargs: str) -> None:
+    def export_topology(self, **kwargs):
         workbook = Workbook()
         filename = kwargs["export_filename"]
         if "." not in filename:
@@ -106,7 +106,7 @@ class InventoryController(BaseController):
                     sheet.write(obj_index, index, getattr(obj, property))
         workbook.save(self.path / "projects" / "spreadsheets" / filename)
 
-    def query_netbox(self, **kwargs: str) -> None:
+    def query_netbox(self, **kwargs):
         nb = netbox_api(kwargs["netbox_address"], token=kwargs["netbox_token"])
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
@@ -114,18 +114,18 @@ class InventoryController(BaseController):
                 "device",
                 **{
                     "name": device.name,
-                    "ip_address": str(device_ip).split("/")[0],
-                    "subtype": str(device.device_role),
-                    "model": str(device.device_type),
-                    "location": str(device.site),
-                    "vendor": str(device.device_type.manufacturer),
-                    "operating_system": str(device.platform),
-                    "longitude": str(nb.dcim.sites.get(name=device.site).longitude),
-                    "latitude": str(nb.dcim.sites.get(name=device.site).latitude),
+                    "ip_address"(device_ip).split("/")[0],
+                    "subtype"(device.device_role),
+                    "model"(device.device_type),
+                    "location"(device.site),
+                    "vendor"(device.device_type.manufacturer),
+                    "operating_system"(device.platform),
+                    "longitude"(nb.dcim.sites.get(name=device.site).longitude),
+                    "latitude"(nb.dcim.sites.get(name=device.site).latitude),
                 },
             )
 
-    def query_librenms(self, **kwargs: str) -> None:
+    def query_librenms(self, **kwargs):
         devices = http_get(
             f'{kwargs["librenms_address"]}/api/v0/devices',
             headers={"X-Auth-Token": kwargs["librenms_token"]},
@@ -145,7 +145,7 @@ class InventoryController(BaseController):
                 },
             )
 
-    def query_opennms(self, **kwargs: str) -> None:
+    def query_opennms(self, **kwargs):
         login, password = self.opennms_login, kwargs["password"]
         Session.commit()
         json_devices = http_get(
@@ -202,7 +202,7 @@ class InventoryController(BaseController):
             pool.compute_pool()
         return result
 
-    def import_topology(self, **kwargs: Any) -> str:
+    def import_topology(self, **kwargs) -> str:
         file = kwargs["file"]
         if kwargs["replace"]:
             delete_all("device")
@@ -212,7 +212,7 @@ class InventoryController(BaseController):
         info("Inventory import: Done.")
         return result
 
-    def save_pool_objects(self, pool_id: int, **kwargs: Any) -> dict:
+    def save_pool_objects(self, pool_id, **kwargs) -> dict:
         pool = fetch("pool", id=pool_id)
         for obj_type in ("device", "link"):
             string_value = kwargs[f"string_{obj_type}s"]
@@ -230,10 +230,10 @@ class InventoryController(BaseController):
             )
         return pool.serialized
 
-    def update_pool(self, pool_id: str) -> None:
+    def update_pool(self, pool_id):
         fetch("pool", id=int(pool_id)).compute_pool()
 
-    def update_all_pools(self) -> None:
+    def update_all_pools(self):
         for pool in fetch_all("pool"):
             pool.compute_pool()
 
@@ -243,7 +243,7 @@ class InventoryController(BaseController):
             "links": [d.view_properties for d in fetch_all("link")],
         }
 
-    def view_filtering(self, obj_type: str, kwargs: Any) -> List[dict]:
+    def view_filtering(self, obj_type, kwargs) -> List[dict]:
         constraints = self.build_filtering_constraints(obj_type, kwargs)
         result = Session.query(models[obj_type]).filter(and_(*constraints))
         return [d.view_properties for d in result.all()]

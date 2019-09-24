@@ -23,7 +23,7 @@ class TestConfig(DebugConfig):
     WTF_CSRF_ENABLED = False
 
 
-config_mapper: dict = {
+config_mapper = {
     "Debug": DebugConfig,
     "Production": ProductionConfig,
     "Test": TestConfig,

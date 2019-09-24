@@ -19,7 +19,7 @@ class Server(AbstractBase):
     status = Column(SmallString, default="down")
     cpu_load = Column(Float)
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return [
             f"""<div class="btn-group" style="width: 80px;">
             <button type="button" class="btn btn-primary btn-sm"
@@ -71,7 +71,7 @@ class Parameters(AbstractBase):
     slack_token = Column(SmallString)
     slack_channel = Column(SmallString)
 
-    def update(self, **kwargs: Any) -> None:
+    def update(self, **kwargs):
         self.gotty_port_index = -1  # type: ignore
         super().update(**kwargs)
 
@@ -86,7 +86,7 @@ class User(AbstractBase, UserMixin):
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(SmallString)
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return [
             f"""<div class="btn-group">
             <button type="button" class="btn btn-primary btn-sm"
@@ -107,5 +107,5 @@ class User(AbstractBase, UserMixin):
     def is_admin(self) -> bool:
         return "Admin" in self.permissions
 
-    def allowed(self, permission: str) -> bool:
+    def allowed(self, permission) -> bool:
         return self.is_admin or permission in self.permissions

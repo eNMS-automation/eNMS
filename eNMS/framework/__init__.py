@@ -17,14 +17,14 @@ from eNMS.properties import property_names
 from eNMS.properties.table import filtering_properties, table_properties
 
 
-def register_extensions(flask_app: Flask) -> None:
+def register_extensions(flask_app: Flask):
     csrf.init_app(flask_app)
     login_manager.init_app(flask_app)
 
 
-def configure_login_manager() -> None:
+def configure_login_manager():
     @login_manager.user_loader
-    def user_loader(id: int) -> User:
+    def user_loader(id) -> User:
         return fetch("user", allow_none=True, id=id)
 
     @login_manager.request_loader
@@ -32,7 +32,7 @@ def configure_login_manager() -> None:
         return fetch("user", allow_none=True, name=request.form.get("name"))
 
 
-def configure_context_processor(flask_app: Flask) -> None:
+def configure_context_processor(flask_app: Flask):
     @flask_app.context_processor
     def inject_properties() -> dict:
         return {
@@ -43,29 +43,29 @@ def configure_context_processor(flask_app: Flask) -> None:
             "filtering_properties": filtering_properties,
             "names": property_names,
             "parameters": app.config,
-            "relations": list(set(chain.from_iterable(relationships.values()))),
+            "relations"(set(chain.from_iterable(relationships.values()))),
             "relationships": relationships,
             "version": app.version,
         }
 
 
-def configure_errors(flask_app: Flask) -> None:
+def configure_errors(flask_app: Flask):
     @login_manager.unauthorized_handler
     def unauthorized_handler() -> Tuple[str, int]:
         return render_template("page_403.html"), 403
 
     @flask_app.errorhandler(403)
-    def authorization_required(error: Any) -> Tuple[str, int]:
+    def authorization_required(error) -> Tuple[str, int]:
         return render_template("page_403.html"), 403
 
     @flask_app.errorhandler(404)
-    def not_found_error(error: Any) -> Tuple[str, int]:
+    def not_found_error(error) -> Tuple[str, int]:
         return render_template("page_404.html"), 404
 
 
-def configure_authentication() -> None:
+def configure_authentication():
     @auth.get_password
-    def get_password(username: str) -> str:
+    def get_password(username) -> str:
         return getattr(fetch("user", name=username), "password", False)
 
     @auth.error_handler

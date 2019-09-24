@@ -36,7 +36,7 @@ blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
 def monitor_requests(function: Callable) -> Callable:
     @wraps(function)
-    def decorated_function(*args: Any, **kwargs: Any) -> Any:
+    def decorated_function(*args, **kwargs) -> Any:
         if not current_user.is_authenticated:
             client_address = request.environ.get(
                 "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
@@ -62,7 +62,7 @@ def site_root() -> Response:
 
 @blueprint.route("/<path:_>")
 @monitor_requests
-def get_requests_sink(_: str) -> Response:
+def get_requests_sink(_) -> Response:
     abort(404)
 
 
@@ -105,7 +105,7 @@ def administration() -> str:
         f"pages/administration.html",
         **{
             "endpoint": "administration",
-            "folders": listdir(app.path / "projects" / "migrations"),
+            "folders"dir(app.path / "projects" / "migrations"),
         },
     )
 
@@ -121,7 +121,7 @@ def dashboard() -> str:
 
 @blueprint.route("/table/<table_type>")
 @monitor_requests
-def table(table_type: str) -> str:
+def table(table_type) -> str:
     kwargs = {
         "endpoint": f"table/{table_type}",
         "fixed_columns": table_fixed_columns[table_type],
@@ -140,7 +140,7 @@ def table(table_type: str) -> str:
 
 @blueprint.route("/view/<view_type>")
 @monitor_requests
-def view(view_type: str) -> str:
+def view(view_type) -> str:
     return render_template(
         f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
     )
@@ -168,7 +168,7 @@ def workflow_builder() -> str:
 
 @blueprint.route("/calendar/<calendar_type>")
 @monitor_requests
-def calendar(calendar_type: str) -> str:
+def calendar(calendar_type) -> str:
     return render_template(
         f"pages/calendar.html",
         **{"calendar_type": calendar_type, "endpoint": "calendar"},
@@ -177,7 +177,7 @@ def calendar(calendar_type: str) -> str:
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
-def form(form_type: str) -> str:
+def form(form_type) -> str:
     kwargs = (
         {"fixed_columns": table_fixed_columns[form_type], "type": form_type}
         if form_type == "result"
@@ -197,14 +197,14 @@ def form(form_type: str) -> str:
 
 @blueprint.route("/view_job_results/<int:id>")
 @monitor_requests
-def view_job_results(id: int) -> str:
+def view_job_results(id) -> str:
     result = fetch("run", id=id).result().result
     return f"<pre>{app.str_dict(result)}</pre>"
 
 
 @blueprint.route("/download_configuration/<id>")
 @monitor_requests
-def download_configuration(id: str) -> Response:
+def download_configuration(id) -> Response:
     configuration = fetch("configuration", id=id)
     filename = f"{configuration.device_name}-{app.strip_all(configuration.runtime)}"
     return Response(
@@ -219,7 +219,7 @@ def download_configuration(id: str) -> Response:
 @blueprint.route("/", methods=["POST"])
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
-def route(page: str) -> Response:
+def route(page) -> Response:
     f, *args = page.split("/")
     if f not in app.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})

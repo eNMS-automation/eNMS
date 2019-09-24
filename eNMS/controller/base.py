@@ -217,7 +217,7 @@ class BaseController:
         "update_database_configurations_from_git",
     ]
 
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path):
         self.path = path
         self.custom_properties = self.load_custom_properties()
         self.custom_config = self.load_custom_config()
@@ -236,7 +236,7 @@ class BaseController:
         self.fetch_version()
         self.init_logs()
 
-    def configure_database(self) -> None:
+    def configure_database(self):
         self.init_services()
         Base.metadata.create_all(bind=engine)
         configure_mappers()
@@ -260,13 +260,13 @@ class BaseController:
             self.get_git_content()
             Session.commit()
 
-    def clean_database(self) -> None:
+    def clean_database(self):
         for run in fetch("run", all_matches=True, allow_none=True, status="Running"):
             run.status = "Aborted (app reload)"
         Session.commit()
 
-    def create_google_earth_styles(self) -> None:
-        self.google_earth_styles: Dict[str, Style] = {}
+    def create_google_earth_styles(self):
+        self.google_earth_styles[str, Style] = {}
         for icon in device_icons:
             point_style = Style()
             point_style.labelstyle.color = Color.blue
@@ -274,11 +274,11 @@ class BaseController:
             point_style.iconstyle.icon.href = path_icon
             self.google_earth_styles[icon] = point_style
 
-    def fetch_version(self) -> None:
+    def fetch_version(self):
         with open(self.path / "package.json") as package_file:
             self.version = load(package_file)["version"]
 
-    def init_parameters(self) -> None:
+    def init_parameters(self):
         parameters = Session.query(models["parameters"]).one_or_none()
         if not parameters:
             parameters = models["parameters"]()
@@ -295,22 +295,22 @@ class BaseController:
             for parameter in parameters.get_properties():
                 setattr(self, parameter, getattr(parameters, parameter))
 
-    def configure_server_id(self) -> None:
+    def configure_server_id(self):
         factory(
             "server",
             **{
-                "name": str(getnode()),
+                "name"(getnode()),
                 "description": "Localhost",
                 "ip_address": "0.0.0.0",
                 "status": "Up",
             },
         )
 
-    def create_admin_user(self) -> None:
+    def create_admin_user(self):
         password = {} if self.config_mode == "Production" else {"password": "admin"}
         factory("user", **{"name": "admin", **password})
 
-    def update_credentials(self) -> None:
+    def update_credentials(self):
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)  # type: ignore
 
@@ -319,7 +319,7 @@ class BaseController:
         parameters = Session.query(models["parameters"]).one_or_none()
         return parameters.get_properties() if parameters else {}
 
-    def get_git_content(self) -> None:
+    def get_git_content(self):
         for repository_type in ("configurations", "automation"):
             repo = getattr(self, f"git_{repository_type}")
             if not repo:
@@ -357,7 +357,7 @@ class BaseController:
     def load_custom_properties(self) -> dict:
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")
         if not filepath:
-            custom_properties: dict = {}
+            custom_properties = {}
         else:
             with open(filepath, "r") as properties:
                 custom_properties = yaml.load(properties)
@@ -379,7 +379,7 @@ class BaseController:
         )
         return custom_properties
 
-    def init_logs(self) -> None:
+    def init_logs(self):
         basicConfig(
             level=getattr(import_module("logging"), self.log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",
@@ -392,7 +392,7 @@ class BaseController:
             ],
         )
 
-    def init_scheduler(self) -> None:
+    def init_scheduler(self):
         self.scheduler = BackgroundScheduler(
             {
                 "apscheduler.jobstores.default": {
@@ -411,12 +411,12 @@ class BaseController:
 
         self.scheduler.start()
 
-    def init_forms(self) -> None:
+    def init_forms(self):
         for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
             spec.loader.exec_module(module_from_spec(spec))  # type: ignore
 
-    def init_services(self) -> None:
+    def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
         if self.custom_services_path:
             path_services.append(Path(self.custom_services_path))
@@ -432,13 +432,13 @@ class BaseController:
                 except InvalidRequestError as e:
                     error(f"Error loading custom service '{file}' ({str(e)})")
 
-    def init_ldap_client(self) -> None:
+    def init_ldap_client(self):
         self.ldap_client = Server(self.ldap_server, get_info=ALL)
 
-    def init_tacacs_client(self) -> None:
+    def init_tacacs_client(self):
         self.tacacs_client = TACACSClient(self.tacacs_addr, 49, self.tacacs_password)
 
-    def init_vault_client(self) -> None:
+    def init_vault_client(self):
         self.vault_client = VaultClient()
         self.vault_client.url = self.vault_addr
         self.vault_client.token = environ.get("VAULT_TOKEN")
@@ -446,27 +446,27 @@ class BaseController:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
-    def init_syslog_server(self) -> None:
+    def init_syslog_server(self):
         self.syslog_server = SyslogServer(self.syslog_addr, self.syslog_port)
         self.syslog_server.start()
 
-    def update_parameters(self, **kwargs: Any) -> None:
+    def update_parameters(self, **kwargs):
         Session.query(models["parameters"]).one().update(**kwargs)
         self.__dict__.update(**kwargs)
 
-    def delete_instance(self, cls: str, instance_id: int) -> dict:
+    def delete_instance(self, cls, instance_id) -> dict:
         return delete(cls, id=instance_id)
 
-    def get(self, cls: str, id: str) -> dict:
+    def get(self, cls, id) -> dict:
         return fetch(cls, id=id).serialized
 
-    def get_properties(self, cls: str, id: str) -> dict:
+    def get_properties(self, cls, id) -> dict:
         return fetch(cls, id=id).get_properties()
 
-    def get_all(self, cls: str) -> List[dict]:
+    def get_all(self, cls) -> List[dict]:
         return [instance.get_properties() for instance in fetch_all(cls)]
 
-    def update(self, cls: str, **kwargs: Any) -> dict:
+    def update(self, cls, **kwargs) -> dict:
         try:
             must_be_new = kwargs.get("id") == ""
             kwargs["last_modified"] = self.get_time()
@@ -478,9 +478,9 @@ class BaseController:
             Session.rollback()
             if isinstance(exc, IntegrityError):
                 return {"error": (f"There already is a {cls} with the same name")}
-            return {"error": str(exc)}
+            return {"error"(exc)}
 
-    def log(self, severity: str, content: str) -> None:
+    def log(self, severity, content):
         factory(
             "changelog",
             **{
@@ -503,7 +503,7 @@ class BaseController:
             },
         }
 
-    def compare(self, type: str, result1: int, result2: int) -> dict:
+    def compare(self, type, result1, result2) -> dict:
         first = self.str_dict(getattr(fetch(type, id=result1), type)).splitlines()
         second = self.str_dict(getattr(fetch(type, id=result2), type)).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
@@ -554,13 +554,13 @@ class BaseController:
         )
         return {
             "items": [
-                {"text": r.name, "id": str(r.id)}
+                {"text": r.name, "id"(r.id)}
                 for r in results.limit(10).offset((int(params["page"]) - 1) * 10).all()
             ],
             "total_count": results.count(),
         }
 
-    def table_filtering(self, table: str, kwargs: ImmutableMultiDict) -> dict:
+    def table_filtering(self, table, kwargs: ImmutableMultiDict) -> dict:
         model, properties = models[table], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
         try:
@@ -582,7 +582,7 @@ class BaseController:
                 )
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         return {
-            "draw": int(kwargs["draw"]),
+            "draw"(kwargs["draw"]),
             "recordsTotal": Session.query(func.count(model.id)).scalar(),
             "recordsFiltered": get_query_count(result),
             "data": [
@@ -594,7 +594,7 @@ class BaseController:
             ],
         }
 
-    def allowed_file(self, name: str, allowed_modules: Set[str]) -> bool:
+    def allowed_file(self, name, allowed_modules: Set[str]) -> bool:
         allowed_syntax = "." in name
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
@@ -604,13 +604,13 @@ class BaseController:
 
     def send_email(
         self,
-        subject: str,
-        content: str,
+        subject,
+        content,
         sender: Optional[str] = None,
         recipients: Optional[str] = None,
         filename: Optional[str] = None,
         file_content: Optional[Union[str, bytes]] = None,
-    ) -> None:
+    ):
         sender = sender or self.mail_sender
         recipients = recipients or self.mail_recipients
         message = MIMEMultipart()
@@ -632,7 +632,7 @@ class BaseController:
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 
-    def str_dict(self, input: Any, depth: int = 0) -> str:
+    def str_dict(self, input, depth = 0) -> str:
         tab = "\t" * depth
         if isinstance(input, list):
             result = "\n"
@@ -647,10 +647,10 @@ class BaseController:
         else:
             return str(input)
 
-    def strip_all(self, input: str) -> str:
+    def strip_all(self, input) -> str:
         return input.translate(str.maketrans("", "", f"{punctuation} "))
 
-    def update_database_configurations_from_git(self) -> None:
+    def update_database_configurations_from_git(self):
         for dir in scandir(self.path / "git" / "configurations"):
             if dir.name == ".git":
                 continue

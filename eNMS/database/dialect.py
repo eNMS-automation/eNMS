@@ -28,7 +28,7 @@ default_ctypes = {
 
 
 class Column(SQLA_Column):
-    def __init__(self, ctype: Any, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, ctype, *args, **kwargs):
         if "default" not in kwargs and ctype in default_ctypes:
             kwargs["default"] = default_ctypes[ctype]
         super().__init__(ctype, *args, **kwargs)

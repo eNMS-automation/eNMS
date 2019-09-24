@@ -44,7 +44,7 @@ class UnixShellScriptService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "unix_shell_script_service"}
 
-    def job(self, run: "Run", payload: dict, device: Device) -> dict:
+    def job(self, run: "Run", payload, device: Device) -> dict:
         netmiko_connection = run.netmiko_connection(device)
         source_code = run.sub(run.source_code, locals())
         script_file_name = f"{self.name}.sh"
@@ -132,5 +132,5 @@ class UnixShellScriptForm(ServiceForm, StringValidationForm, NetmikoForm):
             ],
             "default": "hidden",
         },
-        "Validation Parameters": StringValidationForm.group,
+        "Validation Parameters"ingValidationForm.group,
     }

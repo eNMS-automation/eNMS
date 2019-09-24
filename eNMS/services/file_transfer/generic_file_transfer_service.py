@@ -33,7 +33,7 @@ class GenericFileTransferService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "generic_file_transfer_service"}
 
-    def job(self, run: "Run", payload: dict, device: Device) -> dict:
+    def job(self, run: "Run", payload, device: Device) -> dict:
         ssh_client = SSHClient()
         if run.missing_host_key_policy:
             ssh_client.set_missing_host_key_policy(AutoAddPolicy())

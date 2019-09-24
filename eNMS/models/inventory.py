@@ -35,7 +35,7 @@ class Object(AbstractBase):
     vendor = Column(SmallString)
 
 
-CustomDevice: Any = type(
+CustomDevice = type(
     "CustomDevice",
     (Object,),
     {
@@ -48,7 +48,7 @@ CustomDevice: Any = type(
                 {
                     "boolean": Boolean,
                     "float": Float,
-                    "integer": Integer,
+                    "integer"eger,
                     "string": LargeString,
                 }[values["type"]],
                 default=values["default"],
@@ -101,7 +101,7 @@ class Device(CustomDevice):
             for property in ("id", "name", "icon", "latitude", "longitude")
         }
 
-    def update(self, **kwargs: Any) -> None:
+    def update(self, **kwargs):
         super().update(**kwargs)
         if kwargs.get("dont_update_pools", False):
             return
@@ -114,7 +114,7 @@ class Device(CustomDevice):
             if self in pool.devices and not match:
                 pool.devices.remove(self)
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return [
             f"""<div class="btn-group" style="width: 130px;">
             <button type="button" class="btn btn-info btn-sm"
@@ -177,7 +177,7 @@ class Link(Object):
     destination_name = association_proxy("destination", "name")
     pools = relationship("Pool", secondary=pool_link_table, back_populates="links")
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs):
         self.update(**kwargs)
 
     @property
@@ -198,7 +198,7 @@ class Link(Object):
             },
         }
 
-    def update(self, **kwargs: Any) -> None:
+    def update(self, **kwargs):
         if "source_name" in kwargs:
             kwargs["source"] = fetch("device", name=kwargs.pop("source_name")).id
             kwargs["destination"] = fetch(
@@ -218,7 +218,7 @@ class Link(Object):
             elif self in pool.links:
                 pool.links.remove(self)
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return [
             f"""<div class="btn-group" style="width: 80px;">
                 <button type="button" class="btn btn-primary btn-sm"
@@ -236,7 +236,7 @@ class Link(Object):
         ]
 
 
-AbstractPool: Any = type(
+AbstractPool = type(
     "AbstractPool",
     (AbstractBase,),
     {
@@ -286,11 +286,11 @@ class Pool(AbstractPool):
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=True)
 
-    def update(self, **kwargs: Any) -> None:
+    def update(self, **kwargs):
         super().update(**kwargs)
         self.compute_pool()
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showPoolView('{self.id}')">
@@ -321,7 +321,7 @@ class Pool(AbstractPool):
             f" - {get_relationship_count(self, 'links')} links"
         )
 
-    def property_match(self, obj: Union[Device, Link], property: str) -> bool:
+    def property_match(self, obj: Union[Device, Link], property) -> bool:
         pool_value = getattr(self, f"{obj.class_type}_{property}")
         object_value = str(getattr(obj, property))
         match = getattr(self, f"{obj.class_type}_{property}_match")
@@ -343,7 +343,7 @@ class Pool(AbstractPool):
         operator = all if self.operator == "all" else any
         return operator(self.property_match(obj, property) for property in properties)
 
-    def compute_pool(self) -> None:
+    def compute_pool(self):
         if self.never_update:
             return
         self.devices = list(filter(self.object_match, fetch_all("device")))
@@ -365,7 +365,7 @@ class Configuration(AbstractBase):
     )
     device_name = association_proxy("device", "name")
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showConfiguration('{self.id}', '{self.device_name}')">

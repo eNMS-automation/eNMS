@@ -7,7 +7,7 @@ from eNMS.models import models, relationships
 
 
 def fetch(
-    model: str, allow_none: Any = False, all_matches: Any = False, **kwargs: Any
+    model, allow_none = False, all_matches = False, **kwargs
 ) -> Any:
     query = Session.query(models[model]).filter_by(**kwargs)
     result = query.all() if all_matches else query.first()
@@ -20,29 +20,29 @@ def fetch(
         )
 
 
-def fetch_all(model: str) -> Tuple[Any]:
+def fetch_all(model) -> Tuple[Any]:
     return Session.query(models[model]).all()
 
 
-def count(model: str, **kwargs: Any) -> Tuple[Any]:
+def count(model, **kwargs) -> Tuple[Any]:
     return Session.query(func.count(models[model].id)).filter_by(**kwargs).scalar()
 
 
-def get_query_count(query: Any) -> int:
+def get_query_count(query) -> int:
     count_query = query.statement.with_only_columns([func.count()]).order_by(None)
     return query.session.execute(count_query).scalar()
 
 
-def get_relationship_count(obj: Any, relation: str) -> int:
+def get_relationship_count(obj, relation) -> int:
     related_model = models[relationships[obj.type][relation]["model"]]
     return Session.query(func.count(related_model.id)).with_parent(obj).scalar()
 
 
-def objectify(model: str, object_list: List[int]) -> List[Any]:
+def objectify(model, object_list[int]) -> List[Any]:
     return [fetch(model, id=object_id) for object_id in object_list]
 
 
-def convert_value(model: str, attr: str, value: str, value_type: str) -> Any:
+def convert_value(model, attr, value, value_type) -> Any:
     relation = relationships[model].get(attr)
     if not relation:
         return value
@@ -52,7 +52,7 @@ def convert_value(model: str, attr: str, value: str, value_type: str) -> Any:
         return fetch(relation["model"], **{value_type: value})
 
 
-def delete(model: str, allow_none: Any = False, **kwargs: Any) -> Any:
+def delete(model, allow_none = False, **kwargs) -> Any:
     instance = Session.query(models[model]).filter_by(**kwargs).first()
     if allow_none and not instance:
         return None
@@ -63,17 +63,17 @@ def delete(model: str, allow_none: Any = False, **kwargs: Any) -> Any:
     return serialized_instance
 
 
-def delete_all(*models: str) -> None:
+def delete_all(*models):
     for model in models:
         for instance in fetch_all(model):
             delete(model, id=instance.id)
 
 
-def export(model: str) -> List[dict]:
+def export(model) -> List[dict]:
     return [instance.to_dict(export=True) for instance in models[model].visible()]
 
 
-def factory(cls_name: str, **kwargs: Any) -> Any:
+def factory(cls_name, **kwargs) -> Any:
     if {"/", '"', "'"} & set(kwargs.get("name", "")):
         raise Exception("Names cannot contain a slash or a quote.")
     instance, instance_id = None, kwargs.pop("id", 0)
@@ -92,7 +92,7 @@ def factory(cls_name: str, **kwargs: Any) -> Any:
     return instance
 
 
-def handle_exception(exc: str) -> str:
+def handle_exception(exc) -> str:
     match = search("UNIQUE constraint failed: (\w+).(\w+)", exc)
     if match:
         return f"There already is a {match.group(1)} with the same {match.group(2)}."

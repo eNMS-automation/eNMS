@@ -25,7 +25,7 @@ class MailNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "mail_notification_service"}
 
-    def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
+    def job(self, run: "Run", payload, device: Optional[Device] = None) -> dict:
         app.send_email(
             run.sub(run.title, locals()),
             run.sub(run.body, locals()),

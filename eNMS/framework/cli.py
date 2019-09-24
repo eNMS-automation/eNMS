@@ -7,11 +7,11 @@ from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 
 
-def configure_cli(flask_app: Flask) -> None:
+def configure_cli(flask_app: Flask):
     @flask_app.cli.command(name="fetch")
     @argument("table")
     @argument("name")
-    def cli_fetch(table: str, name: str) -> None:
+    def cli_fetch(table, name):
         echo(
             app.str_dict(fetch(table, name=name).get_properties(exclude=["positions"]))
         )
@@ -19,7 +19,7 @@ def configure_cli(flask_app: Flask) -> None:
     @flask_app.cli.command()
     @argument("table")
     @argument("properties")
-    def update(table: str, properties: str) -> None:
+    def update(table, properties):
         result = factory(table, **loads(properties)).get_properties(
             exclude=["positions"]
         )
@@ -29,7 +29,7 @@ def configure_cli(flask_app: Flask) -> None:
     @flask_app.cli.command(name="delete")
     @argument("table")
     @argument("name")
-    def cli_delete(table: str, name: str) -> None:
+    def cli_delete(table, name):
         device = delete(table, name=name)
         Session.commit()
         echo(app.str_dict(device))
@@ -38,7 +38,7 @@ def configure_cli(flask_app: Flask) -> None:
     @argument("name")
     @option("--devices")
     @option("--payload")
-    def start(name: str, devices: str, payload: str) -> None:
+    def start(name, devices, payload):
         devices_list = devices.split(",") if devices else []
         devices_list = [fetch("device", name=name).id for name in devices_list]
         payload_dict = loads(payload) if payload else {}

@@ -2,7 +2,7 @@ from typing import Dict, List
 
 diagram_classes = ["device", "link", "user", "service", "workflow", "task"]
 
-object_diagram_properties: List[str] = [
+object_diagram_properties[str] = [
     "model",
     "vendor",
     "subtype",
@@ -10,15 +10,15 @@ object_diagram_properties: List[str] = [
     "location",
 ]
 
-device_diagram_properties: List[str] = object_diagram_properties + [
+device_diagram_properties[str] = object_diagram_properties + [
     "operating_system",
     "os_version",
     "port",
 ]
 
-user_diagram_properties: List[str] = ["name"]
+user_diagram_properties[str] = ["name"]
 
-service_diagram_properties: List[str] = [
+service_diagram_properties[str] = [
     "vendor",
     "operating_system",
     "creator",
@@ -30,9 +30,9 @@ service_diagram_properties: List[str] = [
     "time_between_retries",
 ]
 
-workflow_diagram_properties: List[str] = service_diagram_properties
+workflow_diagram_properties[str] = service_diagram_properties
 
-task_diagram_properties: List[str] = [
+task_diagram_properties[str] = [
     "status",
     "periodic",
     "frequency",
@@ -41,7 +41,7 @@ task_diagram_properties: List[str] = [
     "job_name",
 ]
 
-type_to_diagram_properties: Dict[str, List[str]] = {
+type_to_diagram_properties[str, List[str]] = {
     "device": device_diagram_properties,
     "workflow": workflow_diagram_properties,
     "link": object_diagram_properties,

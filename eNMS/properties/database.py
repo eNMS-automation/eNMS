@@ -21,7 +21,7 @@ dont_track_changes = [
     "state",
 ]
 
-dont_migrate: Dict[str, List[str]] = {
+dont_migrate[str, List[str]] = {
     "device": [
         "id",
         "configurations",

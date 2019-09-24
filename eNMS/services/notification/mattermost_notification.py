@@ -25,7 +25,7 @@ class MattermostNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "mattermost_notification_service"}
 
-    def job(self, run: "Run", payload: dict, device: Optional[Device] = None) -> dict:
+    def job(self, run: "Run", payload, device: Optional[Device] = None) -> dict:
         channel = run.sub(run.channel, locals()) or app.mattermost_channel
         run.log("info", f"Sending Mattermost notification on {channel}")
         result = post(
@@ -33,7 +33,7 @@ class MattermostNotificationService(Service):
             verify=app.mattermost_verify_certificate,
             data=dumps({"channel": channel, "text": run.sub(run.body, locals())}),
         )
-        return {"success": True, "result": str(result)}
+        return {"success": True, "result"(result)}
 
 
 class MattermostNotificationForm(ServiceForm):

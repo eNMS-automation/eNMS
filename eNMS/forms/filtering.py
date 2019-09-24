@@ -6,7 +6,7 @@ from eNMS.models import relationships
 from eNMS.properties.table import filtering_properties
 
 
-def filtering_form_generator() -> None:
+def filtering_form_generator():
     for table, properties in filtering_properties.items():
         table_model = table if table != "configuration" else "device"
         relations = {
@@ -19,7 +19,7 @@ def filtering_form_generator() -> None:
             (BaseForm,),
             {
                 "template": "filtering",
-                "properties": list(relations) + properties,
+                "properties"(relations) + properties,
                 "form_type": HiddenField(default=f"{table}_filtering"),
                 "operator": SelectField(
                     "Match Condition",
@@ -29,7 +29,7 @@ def filtering_form_generator() -> None:
                     ),
                 ),
                 **{
-                    **{property: StringField() for property in properties},
+                    **{propertyingField() for property in properties},
                     **{
                         f"{property}_filter": SelectField(
                             choices=(

@@ -27,7 +27,7 @@ from eNMS.models import relationships
 
 
 class AdministrationController(BaseController):
-    def authenticate_user(self, **kwargs: str) -> Base:
+    def authenticate_user(self, **kwargs) -> Base:
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":
             user = fetch("user", allow_none=True, name=name)
@@ -70,7 +70,7 @@ class AdministrationController(BaseController):
     def get_user_credentials(self) -> Tuple[str, str]:
         return (current_user.name, current_user.password)
 
-    def database_deletion(self, **kwargs: Any) -> None:
+    def database_deletion(self, **kwargs):
         delete_all(*kwargs["deletion_types"])
 
     def get_cluster_status(self) -> dict:
@@ -79,7 +79,7 @@ class AdministrationController(BaseController):
             for attr in ("status", "cpu_load")
         }
 
-    def migration_export(self, **kwargs: Any) -> None:
+    def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:
             path = self.path / "projects" / "migrations" / kwargs["name"]
             if not exists(path):
@@ -87,7 +87,7 @@ class AdministrationController(BaseController):
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 yaml.dump(export(cls_name), migration_file)
 
-    def objectify(self, model: str, obj: dict) -> dict:
+    def objectify(self, model, obj) -> dict:
         for property, relation in relationships[model].items():
             if property not in obj:
                 continue
@@ -99,13 +99,13 @@ class AdministrationController(BaseController):
                 obj[property] = fetch(relation["model"], name=obj[property]).id
         return obj
 
-    def migration_import(self, **kwargs: Any) -> str:
+    def migration_import(self, **kwargs) -> str:
         status, types = "Import successful.", kwargs["import_export_types"]
         if kwargs.get("empty_database_before_import", False):
             for type in types:
                 delete_all(type)
                 Session.commit()
-        workflow_edges: list = []
+        workflow_edges = []
         for cls in types:
             path = (
                 self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"
@@ -140,7 +140,7 @@ class AdministrationController(BaseController):
             Session.commit()
         return status
 
-    def import_jobs(self, **kwargs: Any) -> None:
+    def import_jobs(self, **kwargs):
         jobs = kwargs["jobs_to_import"]
         path = self.path / "projects" / "exported_jobs"
         for file in scandir(path / "services"):
@@ -170,7 +170,7 @@ class AdministrationController(BaseController):
                 Session.commit()
             rmtree(path / "workflows" / workflow_name)
 
-    def export_job(self, job_id: str) -> None:
+    def export_job(self, job_id):
         job = fetch("job", id=job_id)
         if job.type == "workflow":
             path = self.path / "projects" / "exported_jobs" / "workflows" / job.filename
@@ -210,12 +210,12 @@ class AdministrationController(BaseController):
         jobs_path = self.path / "projects" / "exported_jobs"
         return listdir(jobs_path / "services") + listdir(jobs_path / "workflows")
 
-    def save_parameters(self, parameter_type: str, **kwargs: Any) -> None:
+    def save_parameters(self, parameter_type, **kwargs):
         self.update_parameters(**kwargs)
         if parameter_type == "git":
             self.get_git_content()
 
-    def scan_cluster(self, **kwargs: Union[float, str]) -> None:
+    def scan_cluster(self, **kwargs: Union[float, str]):
         for ip_address in IPv4Network(self.cluster_scan_subnet):
             try:
                 server = http_get(
@@ -224,6 +224,6 @@ class AdministrationController(BaseController):
                 ).json()
                 if self.cluster_id != server.pop("cluster_id"):
                     continue
-                factory("server", **{**server, **{"ip_address": str(ip_address)}})
+                factory("server", **{**server, **{"ip_address"(ip_address)}})
             except ConnectionError:
                 continue

@@ -79,7 +79,7 @@ class Job(AbstractBase):
     def filename(self) -> str:
         return app.strip_all(self.name)
 
-    def generate_row(self, table: str) -> List[str]:
+    def generate_row(self, table) -> List[str]:
         number_of_runs = app.job_db[self.id]["runs"]
         return [
             f"Running ({number_of_runs})" if number_of_runs else "Idle",
@@ -127,13 +127,13 @@ class Job(AbstractBase):
         ]
 
     def adjacent_jobs(
-        self, workflow: "Workflow", direction: str, subtype: str
+        self, workflow: "Workflow", direction, subtype
     ) -> Generator[Tuple["Job", "WorkflowEdge"], None, None]:
         for edge in getattr(self, f"{direction}s"):
             if edge.subtype == subtype and edge.workflow == workflow:
                 yield getattr(edge, direction), edge
 
-    def git_push(self, results: dict) -> None:
+    def git_push(self, results):
         path_git_folder = Path.cwd() / "git" / "automation"
         with open(path_git_folder / self.name, "w") as file:
             file.write(app.str_dict(results))
@@ -156,7 +156,7 @@ class Service(Job):
     max_processes = Column(Integer, default=5)
 
     @staticmethod
-    def get_device_result(args: tuple) -> None:
+    def get_device_result(args):
         device = fetch("device", id=args[0])
         run = fetch("run", runtime=args[1])
         device_result = run.get_results(args[2], device)
@@ -164,13 +164,13 @@ class Service(Job):
             args[4][device.name] = device_result
 
     def device_run(
-        self, run: Run, payload: dict, targets: Optional[Set["Device"]] = None
+        self, run: Run, payload, targets: Optional[Set["Device"]] = None
     ) -> dict:
         if not targets:
             return run.get_results(payload)
         else:
             if run.multiprocessing:
-                device_results: dict = {}
+                device_results = {}
                 thread_lock = Lock()
                 processes = min(len(targets), run.max_processes)
                 process_args = [
@@ -191,15 +191,15 @@ class Service(Job):
             results = {"devices": device_results}
             return results
 
-    def build_results(self, run: Run, payload: dict, *other: Any) -> dict:
-        results: dict = {"results": {}, "success": False, "runtime": run.runtime}
+    def build_results(self, run: Run, payload, *other) -> dict:
+        results = {"results": {}, "success": False, "runtime": run.runtime}
         targets: Set = set()
         if run.has_targets:
             try:
                 targets = run.compute_devices(payload)
                 results["results"]["devices"] = {}
             except Exception as exc:
-                return {"success": False, "error": str(exc)}
+                return {"success": False, "error"(exc)}
         for i in range(run.number_of_retries + 1):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             run.set_state(completed=0, failed=0)
@@ -256,7 +256,7 @@ class Workflow(Job):
         "Job", secondary=start_jobs_workflow_table, backref="start_workflows"
     )
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs):
         start, end = fetch("service", name="Start"), fetch("service", name="End")
         self.jobs.extend([start, end])
         super().__init__(**kwargs)
@@ -266,7 +266,7 @@ class Workflow(Job):
             end.positions[self.name] = (500, 0)
 
     def compute_valid_devices(
-        self, run: Run, job: Job, allowed_devices: dict, payload: dict
+        self, run: Run, job: Job, allowed_devices, payload
     ) -> Set[Device]:
         if job.type != "workflow" and not job.has_targets:
             return set()
@@ -276,7 +276,7 @@ class Workflow(Job):
             return run.compute_devices(payload)
 
     def workflow_targets_processing(
-        self, runtime: str, allowed_devices: dict, job: Job, results: dict
+        self, runtime, allowed_devices, job: Job, results
     ) -> Generator[Job, None, None]:
         failed_devices, passed_devices = set(), set()
         skip_job = results["success"] == "skipped"
@@ -307,18 +307,18 @@ class Workflow(Job):
                 yield successor
 
     def workflow_run(
-        self, run: Run, payload: dict, device: Optional[Device] = None
+        self, run: Run, payload, device: Optional[Device] = None
     ) -> dict:
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )
         run.set_state(progress_max=self.job_number)
-        number_of_runs: dict = defaultdict(int)
-        jobs: list = list(run.start_jobs)
+        number_of_runs = defaultdict(int)
+        jobs = list(run.start_jobs)
         payload = deepcopy(payload)
         visited: Set = set()
-        results: dict = {"results": {}, "success": False, "runtime": run.runtime}
-        allowed_devices: dict = defaultdict(set)
+        results = {"results": {}, "success": False, "runtime": run.runtime}
+        allowed_devices = defaultdict(set)
         if run.use_workflow_devices and run.traversal_mode == "service":
             initial_targets = set(run.compute_devices(payload))
             for job in jobs:
@@ -361,7 +361,7 @@ class Workflow(Job):
                         except Exception as exc:
                             device_results[base_target.name] = {
                                 "success": False,
-                                "error": str(exc),
+                                "error"(exc),
                             }
                     job_results = {  # type: ignore
                         "results": {"devices": device_results},
@@ -380,7 +380,7 @@ class Workflow(Job):
                         job_run.properties = {}
                         result = job_run.run(payload)
                     except Exception as exc:
-                        result = {"success": False, "error": str(exc)}
+                        result = {"success": False, "error"(exc)}
                     job_results = result
             else:
                 if run.traversal_mode == "service":
@@ -432,7 +432,7 @@ class Workflow(Job):
             results["success"] = initial_targets == end_devices
         return results
 
-    def build_results(self, run: Run, payload: dict) -> dict:
+    def build_results(self, run: Run, payload) -> dict:
         if run.traversal_mode == "service":
             return self.workflow_run(run, payload)
         else:
@@ -493,6 +493,6 @@ class WorkflowEdge(AbstractBase):
         "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
     )
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs):
         self.label = kwargs["subtype"]
         super().__init__(**kwargs)

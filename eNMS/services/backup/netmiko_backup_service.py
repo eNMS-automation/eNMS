@@ -41,7 +41,7 @@ class NetmikoBackupService(Service):
         with open(path / "data.yml", "w") as file:
             yaml.dump(data, file, default_flow_style=False)
 
-    def job(self, run: "Run", payload: dict, device: Device) -> dict:
+    def job(self, run: "Run", payload, device: Device) -> dict:
         try:
             device.last_runtime = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"
@@ -77,7 +77,7 @@ class NetmikoBackupService(Service):
             device.last_status = "Failure"
             device.last_failure = str(device.last_runtime)
             self.generate_yaml_file(path_device_config, device)
-            return {"success": False, "result": str(e)}
+            return {"success": False, "result"(e)}
         Session.commit()
         return {"success": True, "result": f"Command: {command}"}
 

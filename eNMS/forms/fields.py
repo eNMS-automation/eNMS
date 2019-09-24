@@ -23,7 +23,7 @@ class JsonField(StringField):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def pre_validate(self, form: FlaskForm) -> bool:
+    def pre_validate(self, form):
         try:
             loads(self.data)
         except JSONDecodeError:
@@ -42,7 +42,7 @@ class DictField(StringField):
         kwargs["default"] = kwargs.get("default", "{}")
         super().__init__(*args, **kwargs)
 
-    def pre_validate(self, form: FlaskForm) -> bool:
+    def pre_validate(self, form):
         invalid_dict, invalid_json = False, False
         try:
             result = literal_eval(self.data)
@@ -79,7 +79,7 @@ class MultipleInstanceField(SelectMultipleField):
         super().__init__(*args, **kwargs)
         self.choices = ()
 
-    def pre_validate(self, form: FlaskForm):
+    def pre_validate(self, form):
         pass
 
 
@@ -96,12 +96,12 @@ class PasswordSubstitutionField(PasswordField):
 
 
 class NoValidationSelectField(SelectField):
-    def pre_validate(self, form: FlaskForm):
+    def pre_validate(self, form):
         pass
 
 
 class NoValidationSelectMultipleField(SelectMultipleField):
-    def pre_validate(self, form: FlaskForm):
+    def pre_validate(self, form):
         pass
 
 

@@ -5,7 +5,7 @@ from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import DateField, DictField, MultipleInstanceField
 
 
-def configure_form(cls: BaseForm)Form:
+def configure_form(cls):
     cls.properties = ("log_source", "log_content")
     for property in ("log_source", "log_content"):
         setattr(cls, property, StringField(property))
@@ -48,7 +48,7 @@ class TaskForm(BaseForm):
     crontab_expression = StringField("Crontab Expression")
     payload = DictField("Payload")
 
-    def validate(self) -> bool:
+    def validate(self):
         valid_form = super().validate()
         no_start_date = (
             self.scheduling_mode.data == "standard" and not self.start_date.data

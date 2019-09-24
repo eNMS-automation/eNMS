@@ -122,7 +122,7 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
         "Validation Parameters": ValidationForm.group,
     }
 
-    def validate(self) -> bool:
+    def validate(self):
         valid_form = super().validate()
         pass_properties_error = (
             self.pass_device_properties.data and not self.has_targets.data

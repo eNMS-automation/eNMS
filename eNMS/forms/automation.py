@@ -56,7 +56,7 @@ class JobForm(BaseForm):
     result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
     query_fields = ["python_query", "skip_python_query", "iteration_values"]
 
-    def validate(self) -> bool:
+    def validate(self):
         valid_form = super().validate()
         no_recipient_error = (
             self.send_notification.data

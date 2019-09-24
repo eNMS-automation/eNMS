@@ -18,7 +18,7 @@ form_templates = {}
 
 
 class MetaForm(FormMeta):
-    def __new__(cls: type, name, bases, attrs) -> FlaskForm:
+    def __new__(cls, name, bases, attrs):
         form: FlaskForm = type.__new__(cls, name, bases, attrs)
         if name == "BaseForm":
             return form
@@ -55,7 +55,7 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
-    def validate(self) -> bool:
+    def validate(self):
         valid_form = super().validate()
         empty_name = False
         if hasattr(self, "name") and not self.name.data:
@@ -64,7 +64,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
         return valid_form and not empty_name
 
 
-def form_postprocessing(form: ImmutableMultiDict):
+def form_postprocessing(form):
     data = {**form.to_dict(), **{"user": current_user}}
     if request.files:
         data["file"] = request.files["file"]
@@ -78,7 +78,7 @@ def form_postprocessing(form: ImmutableMultiDict):
     return data
 
 
-def configure_relationships(cls: BaseForm)Form:
+def configure_relationships(cls):
     form_type = cls.form_type.kwargs["default"]
     for related_model, relation in relationships[form_type].items():
         field = MultipleInstanceField if relation["list"] else InstanceField

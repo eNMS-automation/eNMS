@@ -83,7 +83,7 @@ class ValidationForm(BaseForm):
         "default": "expanded",
     }
 
-    def validate(self) -> bool:
+    def validate(self):
         valid_form = super().validate()
         conversion_validation_mismatch = (
             self.conversion_method.data == "text"

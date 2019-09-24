@@ -321,7 +321,7 @@ class Pool(AbstractPool):
             f" - {get_relationship_count(self, 'links')} links"
         )
 
-    def property_match(self, obj: Union[Device, Link], property) -> bool:
+    def property_match(self, obj: Union[Device, Link], property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")
         object_value = str(getattr(obj, property))
         match = getattr(self, f"{obj.class_type}_{property}_match")
@@ -334,7 +334,7 @@ class Pool(AbstractPool):
         else:
             return bool(search(pool_value, object_value))
 
-    def object_match(self, obj: Union[Device, Link]) -> bool:
+    def object_match(self, obj: Union[Device, Link]):
         properties = (
             pool_device_properties
             if obj.class_type == "device"

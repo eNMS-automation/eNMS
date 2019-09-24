@@ -460,7 +460,7 @@ class Run(AbstractBase):
             }
         return result
 
-    def match_content(self, result, match: Union[str, dict]) -> bool:
+    def match_content(self, result, match: Union[str, dict]):
         if getattr(self, "validation_method", "text") == "text":
             result = str(result)
             assert isinstance(match, str)
@@ -477,7 +477,7 @@ class Run(AbstractBase):
             success = self.match_dictionary(result, match)
         return success if not self.negative_logic else not success
 
-    def match_dictionary(self, result, match, first: bool = True) -> bool:
+    def match_dictionary(self, result, match, first: bool = True):
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:

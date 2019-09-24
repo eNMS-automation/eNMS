@@ -104,8 +104,8 @@ class User(AbstractBase, UserMixin):
         ]
 
     @property
-    def is_admin(self) -> bool:
+    def is_admin(self):
         return "Admin" in self.permissions
 
-    def allowed(self, permission) -> bool:
+    def allowed(self, permission):
         return self.is_admin or permission in self.permissions

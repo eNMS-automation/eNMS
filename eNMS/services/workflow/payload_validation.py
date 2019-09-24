@@ -6,8 +6,6 @@ from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class PayloadValidationService(Service):
@@ -27,7 +25,7 @@ class PayloadValidationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "payload_validation_service"}
 
-    def job(self, run: "Run", payload, device: Optional[Device] = None):
+    def job(self, run, payload, device=None):
         result = run.eval(run.query, **locals())
         if self.conversion_method != "none":
             result = run.convert_result(result)

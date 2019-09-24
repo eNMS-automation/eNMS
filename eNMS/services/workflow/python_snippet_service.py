@@ -6,8 +6,6 @@ from wtforms.widgets import TextArea
 from eNMS.database.dialect import Column, LargeString
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class PythonSnippetService(Service):
@@ -20,7 +18,7 @@ class PythonSnippetService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "python_snippet_service"}
 
-    def job(self, run: "Run", payload, device: Optional[Device] = None):
+    def job(self, run, payload, device=None):
 
         try:
             code_object = compile(run.source_code, "user_python_code", "exec")

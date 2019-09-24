@@ -7,8 +7,6 @@ from wtforms import HiddenField, IntegerField, SelectField, StringField
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class PingService(Service):
@@ -26,7 +24,7 @@ class PingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ping_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         if run.protocol == "ICMP":
             command = ["ping"]
             for x, property in (

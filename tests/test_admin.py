@@ -1,12 +1,10 @@
-from flask.testing import FlaskClient
-
 from eNMS import app
 from eNMS.database.functions import fetch, fetch_all
 
 from tests.conftest import check_pages
 
 
-def test_authentication(base_client: FlaskClient) -> None:
+def test_authentication(base_client):
     for page in app.valid_pages:
         r = base_client.get(page)
         if page in app.free_access_pages:
@@ -15,7 +13,7 @@ def test_authentication(base_client: FlaskClient) -> None:
             assert r.status_code == 302 and "login" in r.location
 
 
-def test_urls(user_client: FlaskClient) -> None:
+def test_urls(user_client):
     for page in app.valid_pages:
         r = user_client.get(page, follow_redirects=True)
         assert r.status_code == 200
@@ -24,7 +22,7 @@ def test_urls(user_client: FlaskClient) -> None:
 
 
 @check_pages("table/user")
-def test_user_management(user_client: FlaskClient) -> None:
+def test_user_management(user_client):
     for user in ("user1", "user2", "user3"):
         dict_user = {
             "form_type": "user",

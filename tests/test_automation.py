@@ -1,4 +1,3 @@
-from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database.functions import fetch_all
@@ -94,7 +93,7 @@ ansible_service = ImmutableMultiDict(
 
 
 @check_pages("table/service")
-def test_base_services(user_client: FlaskClient) -> None:
+def test_base_services(user_client):
     number_of_services = len(fetch_all("Service"))
     user_client.post("/update/netmiko_configuration_service", data=netmiko_ping)
     assert len(fetch_all("netmiko_configuration_service")) == 3

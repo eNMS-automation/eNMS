@@ -8,8 +8,6 @@ from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class MailNotificationService(Service):
@@ -25,7 +23,7 @@ class MailNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "mail_notification_service"}
 
-    def job(self, run: "Run", payload, device: Optional[Device] = None):
+    def job(self, run, payload, device=None):
         app.send_email(
             run.sub(run.title, locals()),
             run.sub(run.body, locals()),

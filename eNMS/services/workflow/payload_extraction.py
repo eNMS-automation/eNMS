@@ -9,8 +9,6 @@ from wtforms.widgets import TextArea
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class PayloadExtractionService(Service):
@@ -37,7 +35,7 @@ class PayloadExtractionService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "payload_extraction_service"}
 
-    def job(self, run: "Run", payload, device: Optional[Device] = None):
+    def job(self, run, payload, device=None):
         result, success = {}, True
         for i in range(1, 4):
             variable = getattr(run, f"variable{i}")

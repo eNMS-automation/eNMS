@@ -1,5 +1,3 @@
-from flask.testing import FlaskClient
-from typing import List
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
@@ -47,7 +45,7 @@ def define_link(source: int, destination: int) -> ImmutableMultiDict:
 
 
 @check_pages("table/device", "table/link", "view/network")
-def test_manual_object_creation(user_client: FlaskClient) -> None:
+def test_manual_object_creation(user_client):
     delete_all("device", "Link")
     for icon in device_icons:
         for description in ("desc1", "desc2"):
@@ -62,32 +60,32 @@ def test_manual_object_creation(user_client: FlaskClient) -> None:
     assert len(fetch_all("Link")) == 9
 
 
-def create_from_file(client: FlaskClient, file: str) -> None:
+def create_from_file(client, file: str):
     with open(app.path / "projects" / "spreadsheets" / file, "rb") as f:
         data = {"form_type": "excel_import", "file": f, "replace": False}
         client.post("/import_topology", data=data)
 
 
 @check_pages("table/device", "table/link", "view/network")
-def test_object_creation_europe(user_client: FlaskClient) -> None:
+def test_object_creation_europe(user_client):
     create_from_file(user_client, "europe.xls")
     assert len(fetch_all("device")) == 33
     assert len(fetch_all("Link")) == 49
 
 
 @check_pages("table/device", "table/link", "view/network")
-def test_object_creation_type(user_client: FlaskClient) -> None:
+def test_object_creation_type(user_client):
     create_from_file(user_client, "device_counters.xls")
     assert len(fetch_all("device")) == 27
     assert len(fetch_all("Link")) == 0
 
 
-routers: List[str] = ["router" + str(i) for i in range(5, 20)]
-links: List[str] = ["link" + str(i) for i in range(4, 15)]
+routers = ["router" + str(i) for i in range(5, 20)]
+links = ["link" + str(i) for i in range(4, 15)]
 
 
 @check_pages("table/device", "table/link", "view/network")
-def test_device_deletion(user_client: FlaskClient) -> None:
+def test_device_deletion(user_client):
     create_from_file(user_client, "europe.xls")
     for device_name in routers:
         device = fetch("device", name=device_name)
@@ -97,7 +95,7 @@ def test_device_deletion(user_client: FlaskClient) -> None:
 
 
 @check_pages("table/device", "table/link", "view/network")
-def test_link_deletion(user_client: FlaskClient) -> None:
+def test_link_deletion(user_client):
     create_from_file(user_client, "europe.xls")
     for link_name in links:
         link = fetch("Link", name=link_name)
@@ -137,7 +135,7 @@ def create_pool(pool: dict) -> dict:
 
 
 @check_pages("table/device", "table/link", "view/network")
-def test_pool_management(user_client: FlaskClient) -> None:
+def test_pool_management(user_client):
     create_from_file(user_client, "europe.xls")
     user_client.post("/update/pool", data=create_pool(pool1))
     user_client.post("/update/pool", data=create_pool(pool2))

@@ -6,8 +6,6 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class NapalmTracerouteService(Service):
@@ -27,7 +25,7 @@ class NapalmTracerouteService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_traceroute_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         napalm_connection = run.napalm_connection(device)
         destination = run.sub(run.destination_ip, locals())
         source = run.sub(run.source_ip, locals())

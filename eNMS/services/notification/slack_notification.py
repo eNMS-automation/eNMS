@@ -9,8 +9,6 @@ from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class SlackNotificationService(Service):
@@ -25,7 +23,7 @@ class SlackNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 
-    def job(self, run: "Run", payload, device: Optional[Device] = None):
+    def job(self, run, payload, device=None):
         slack_client = SlackClient(run.token or app.slack_token)
         channel = run.sub(run.channel, locals()) or app.slack_channel
         run.log("info", f"Sending Slack notification on {channel}")

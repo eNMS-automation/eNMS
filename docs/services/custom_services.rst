@@ -200,7 +200,7 @@ This file contains the following code :
       boolean1 = BooleanField()
       boolean2 = BooleanField("Boolean N°1")
 
-      def validate_custom_integer(self, field: IntegerField) -> None:
+      def validate_custom_integer(self, field: IntegerField):
           product = self.an_integer.data * self.a_float.data
           if field.data > product:
               raise ValidationError(

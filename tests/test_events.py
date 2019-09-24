@@ -1,4 +1,3 @@
-from flask.testing import FlaskClient
 from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS import app
@@ -35,7 +34,7 @@ scheduled_task = ImmutableMultiDict(
 
 
 @check_pages("table/task", "calendar/task")
-def test_netmiko_napalm_config(user_client: FlaskClient) -> None:
+def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, "europe.xls")
     user_client.post("/update/task", data=instant_task)
     assert len(fetch_all("Task")) == 3
@@ -44,7 +43,7 @@ def test_netmiko_napalm_config(user_client: FlaskClient) -> None:
 
 
 @check_pages("table/changelog")
-def test_create_logs(user_client: FlaskClient) -> None:
+def test_create_logs(user_client):
     number_of_logs = len(fetch_all("Changelog"))
     for i in range(10):
         app.log("warning", str(i))

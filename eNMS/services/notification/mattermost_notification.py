@@ -10,8 +10,6 @@ from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class MattermostNotificationService(Service):
@@ -25,7 +23,7 @@ class MattermostNotificationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "mattermost_notification_service"}
 
-    def job(self, run: "Run", payload, device: Optional[Device] = None):
+    def job(self, run, payload, device=None):
         channel = run.sub(run.channel, locals()) or app.mattermost_channel
         run.log("info", f"Sending Mattermost notification on {channel}")
         result = post(

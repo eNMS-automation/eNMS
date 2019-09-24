@@ -8,7 +8,7 @@ from tests.conftest import check_pages
 
 
 @check_pages("table/device")
-def test_rest_api_basic(user_client: FlaskClient) -> None:
+def test_rest_api_basic(user_client: FlaskClient):
     number_of_devices = len(fetch_all("device"))
     post(
         "http://192.168.105.2:5000/rest/instance/device",

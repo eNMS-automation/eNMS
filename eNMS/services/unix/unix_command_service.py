@@ -7,8 +7,6 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class UnixCommandService(Service):
@@ -25,7 +23,7 @@ class UnixCommandService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "unix_command_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         command = run.sub(run.command, locals())
         match = run.sub(run.content_match, locals())
         run.log("info", f"Running Unix command ({command}) on {device.name}")

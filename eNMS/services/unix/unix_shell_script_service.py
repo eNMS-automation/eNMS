@@ -15,8 +15,6 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import StringValidationForm, NetmikoForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class UnixShellScriptService(Service):
@@ -44,7 +42,7 @@ class UnixShellScriptService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "unix_shell_script_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         source_code = run.sub(run.source_code, locals())
         script_file_name = f"{self.name}.sh"

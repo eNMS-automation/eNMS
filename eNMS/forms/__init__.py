@@ -83,5 +83,5 @@ def configure_relationships(cls):
         field = MultipleInstanceField if relation["list"] else InstanceField
         field_type = "object-list" if relation["list"] else "object"
         form_properties[form_type][related_model] = field_type
-        setattr(cls, related_model, field(instance_type=relation["model"]))
+        setattr(cls, related_model, field())
     return cls

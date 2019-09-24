@@ -19,7 +19,7 @@ class EventForm(BaseForm):
     form_type = HiddenField(default="event")
     id = HiddenField()
     name = StringField("Name")
-    jobs = MultipleInstanceField("Jobs", instance_type="job")
+    jobs = MultipleInstanceField("Jobs")
 
 
 @configure_relationships

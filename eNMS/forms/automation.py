@@ -117,14 +117,14 @@ class WorkflowForm(JobForm):
             ("device", "All devices run independently through the workflow"),
         ),
     )
-    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="job")
+    start_jobs = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 
 
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    start_jobs = MultipleInstanceField("Workflow Entry Point(s)", instance_type="job")
+    start_jobs = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 
 
@@ -148,7 +148,7 @@ class DisplayForm(BaseForm):
 class AddJobsForm(BaseForm):
     action = "addJobsToWorkflow"
     form_type = HiddenField(default="add_jobs")
-    jobs = MultipleInstanceField("Add jobs", instance_type="job")
+    jobs = MultipleInstanceField("Add jobs")
 
 
 class ServiceTableForm(BaseForm):

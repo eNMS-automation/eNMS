@@ -2,7 +2,6 @@ from os import environ
 from sqlalchemy import Column as SQLA_Column, PickleType, String, Text
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from typing import Any
 
 from eNMS.database import DIALECT
 

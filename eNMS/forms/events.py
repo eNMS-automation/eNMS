@@ -5,7 +5,7 @@ from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import DateField, DictField, MultipleInstanceField
 
 
-def configure_form(cls: BaseForm) -> BaseForm:
+def configure_form(cls: BaseForm)Form:
     cls.properties = ("log_source", "log_content")
     for property in ("log_source", "log_content"):
         setattr(cls, property, StringField(property))

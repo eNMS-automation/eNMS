@@ -19,14 +19,14 @@ from eNMS.properties.objects import (
 )
 
 
-def configure_device_form(cls: BaseForm) -> BaseForm:
+def configure_device_form(cls: BaseForm)Form:
     for property in app.custom_properties:
         field = PasswordField if property in private_properties else StringField
         setattr(cls, property, field())
     return cls
 
 
-def configure_pool_form(cls: BaseForm) -> BaseForm:
+def configure_pool_form(cls: BaseForm)Form:
     cls.device_properties = pool_device_properties
     cls.link_properties = pool_link_properties
     for cls_name, properties in (

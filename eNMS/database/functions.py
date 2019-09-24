@@ -1,14 +1,13 @@
 from re import search
 from sqlalchemy import func
-from typing import Any, List, Tuple
 
 from eNMS.database import Session
 from eNMS.models import models, relationships
 
 
 def fetch(
-    model, allow_none = False, all_matches = False, **kwargs
-) -> Any:
+    model, allow_none=False, all_matches=False, **kwargs
+):
     query = Session.query(models[model]).filter_by(**kwargs)
     result = query.all() if all_matches else query.first()
     if result or allow_none:
@@ -20,11 +19,11 @@ def fetch(
         )
 
 
-def fetch_all(model) -> Tuple[Any]:
+def fetch_all(model):
     return Session.query(models[model]).all()
 
 
-def count(model, **kwargs) -> Tuple[Any]:
+def count(model, **kwargs):
     return Session.query(func.count(models[model].id)).filter_by(**kwargs).scalar()
 
 
@@ -38,11 +37,11 @@ def get_relationship_count(obj, relation):
     return Session.query(func.count(related_model.id)).with_parent(obj).scalar()
 
 
-def objectify(model, object_list[int])[Any]:
+def objectify(model, object_list):
     return [fetch(model, id=object_id) for object_id in object_list]
 
 
-def convert_value(model, attr, value, value_type) -> Any:
+def convert_value(model, attr, value, value_type):
     relation = relationships[model].get(attr)
     if not relation:
         return value
@@ -52,7 +51,7 @@ def convert_value(model, attr, value, value_type) -> Any:
         return fetch(relation["model"], **{value_type: value})
 
 
-def delete(model, allow_none = False, **kwargs) -> Any:
+def delete(model, allow_none=False, **kwargs):
     instance = Session.query(models[model]).filter_by(**kwargs).first()
     if allow_none and not instance:
         return None
@@ -69,11 +68,11 @@ def delete_all(*models):
             delete(model, id=instance.id)
 
 
-def export(model)[dict]:
+def export(model):
     return [instance.to_dict(export=True) for instance in models[model].visible()]
 
 
-def factory(cls_name, **kwargs) -> Any:
+def factory(cls_name, **kwargs):
     if {"/", '"', "'"} & set(kwargs.get("name", "")):
         raise Exception("Names cannot contain a slash or a quote.")
     instance, instance_id = None, kwargs.pop("id", 0)

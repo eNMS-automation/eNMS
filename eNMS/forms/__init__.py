@@ -78,7 +78,7 @@ def form_postprocessing(form: ImmutableMultiDict):
     return data
 
 
-def configure_relationships(cls: BaseForm) -> BaseForm:
+def configure_relationships(cls: BaseForm)Form:
     form_type = cls.form_type.kwargs["default"]
     for related_model, relation in relationships[form_type].items():
         field = MultipleInstanceField if relation["list"] else InstanceField

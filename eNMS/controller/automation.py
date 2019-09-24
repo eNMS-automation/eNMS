@@ -7,7 +7,6 @@ from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
 from pathlib import Path
 from re import search, sub
-from typing import Any, Dict, Optional
 from uuid import uuid4
 
 from eNMS.controller.base import BaseController
@@ -28,7 +27,7 @@ class AutomationController(BaseController):
     run_db = defaultdict(dict)
     run_logs = defaultdict(list)
 
-    def stop_workflow(self, runtime) -> Optional[bool]:
+    def stop_workflow(self, runtime):
         if runtime in self.run_db:
             self.run_db[runtime]["stop"] = True
             return True
@@ -53,7 +52,7 @@ class AutomationController(BaseController):
         fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(self, workflow_id, job_ids)[str, Any]:
+    def add_jobs_to_workflow(self, workflow_id, job_ids):
         workflow = fetch("workflow", id=workflow_id)
         jobs = objectify("job", [int(job_id) for job_id in job_ids.split("-")])
         for job in jobs:
@@ -134,7 +133,7 @@ class AutomationController(BaseController):
             runs = fetch("run", allow_none=True, all_matches=True, job_id=id)
         return sorted(set((run.runtime, run.name) for run in runs))
 
-    def get_result(self, id) -> Optional[dict]:
+    def get_result(self, id):
         return fetch("result", id=id).result
 
     @staticmethod
@@ -153,7 +152,7 @@ class AutomationController(BaseController):
         run.properties = kwargs
         return run.run(kwargs.get("payload"))
 
-    def run_job(self, id: Optional[int] = None, **kwargs):
+    def run_job(self, id=None, **kwargs):
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "admin")
@@ -197,7 +196,7 @@ class AutomationController(BaseController):
             fetch("Job", id=job_id).skip = skip == "skip"
 
     def get_workflow_state(
-        self, workflow_id, runtime: Optional[str] = None
+        self, workflow_id, runtime=None
     ):
         workflow = fetch("workflow", id=workflow_id)
         runtimes = [
@@ -246,7 +245,7 @@ class AutomationController(BaseController):
     def scheduler_action(self, action):
         getattr(self.scheduler, action)()
 
-    def task_action(self, action, task_id) -> Optional[dict]:
+    def task_action(self, action, task_id):
         try:
             return getattr(fetch("task", id=task_id), action)()
         except JobLookupError:

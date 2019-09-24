@@ -5,7 +5,6 @@ from requests import get as http_get
 from sqlalchemy import and_
 from subprocess import Popen
 from simplekml import Kml, Style
-from typing import Any, BinaryIO, List, Union
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -59,7 +58,7 @@ class InventoryController(BaseController):
             "server_addr": self.server_addr,
         }
 
-    def get_device_logs(self, device_id) -> Union[str, bool]:
+    def get_device_logs(self, device_id):
         device_logs = [
             log.name
             for log in fetch_all("log")
@@ -70,7 +69,7 @@ class InventoryController(BaseController):
     def get_device_configuration(self, device_id):
         return fetch("device", id=device_id).current_configuration
 
-    def counters(self, property, type) -> Counter:
+    def counters(self, property, type):
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 
     def export_to_google_earth(self, **kwargs):
@@ -178,7 +177,7 @@ class InventoryController(BaseController):
                     devices[device]["ip_address"] = interface["ipAddress"]
                     factory("device", **devices[device])
 
-    def topology_import(self, file: BinaryIO):
+    def topology_import(self, file):
         book = open_workbook(file_contents=file.read())
         result = "Topology successfully imported."
         for obj_type in ("Device", "Link"):
@@ -243,7 +242,7 @@ class InventoryController(BaseController):
             "links": [d.view_properties for d in fetch_all("link")],
         }
 
-    def view_filtering(self, obj_type, kwargs)[dict]:
+    def view_filtering(self, obj_type, kwargs):
         constraints = self.build_filtering_constraints(obj_type, kwargs)
         result = Session.query(models[obj_type]).filter(and_(*constraints))
         return [d.view_properties for d in result.all()]

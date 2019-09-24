@@ -11,7 +11,6 @@ from shutil import rmtree
 from requests import get as http_get
 from ruamel import yaml
 from tarfile import open as open_tar
-from typing import Any, Tuple, Union
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Base, Session
@@ -27,7 +26,7 @@ from eNMS.models import relationships
 
 
 class AdministrationController(BaseController):
-    def authenticate_user(self, **kwargs) -> Base:
+    def authenticate_user(self, **kwargs):
         name, password = kwargs["name"], kwargs["password"]
         if kwargs["authentication_method"] == "Local User":
             user = fetch("user", allow_none=True, name=name)
@@ -67,7 +66,7 @@ class AdministrationController(BaseController):
         Session.commit()
         return user
 
-    def get_user_credentials(self) -> Tuple[str, str]:
+    def get_user_credentials(self):
         return (current_user.name, current_user.password)
 
     def database_deletion(self, **kwargs):
@@ -215,7 +214,7 @@ class AdministrationController(BaseController):
         if parameter_type == "git":
             self.get_git_content()
 
-    def scan_cluster(self, **kwargs: Union[float, str]):
+    def scan_cluster(self, **kwargs):
         for ip_address in IPv4Network(self.cluster_scan_subnet):
             try:
                 server = http_get(

@@ -4,7 +4,6 @@ from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.orm.mapper import Mapper
 from sqlalchemy.types import JSON
-from typing import Any
 
 from eNMS.database import Base
 from eNMS.database.functions import fetch_all
@@ -14,7 +13,7 @@ from eNMS.properties.database import dont_track_changes
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
-def model_inspection(mapper: Mapper, cls: DeclarativeMeta):
+def model_inspection(mapper, cls):
     name = cls.__tablename__
     for col in cls.__table__.columns:
         model_properties[name].append(col.key)
@@ -48,21 +47,21 @@ def model_inspection(mapper: Mapper, cls: DeclarativeMeta):
 
 def configure_events(app):
     @event.listens_for(Base, "init", propagate=True)
-    def log_instance_creation(target: Base, args, kwargs):
+    def log_instance_creation(target, args, kwargs):
         if "type" not in target.__dict__ or "log" in target.type:
             return
         app.log("info", f"CREATION: {target.__dict__['type']} '{kwargs['name']}'")
 
     @event.listens_for(Base, "before_delete", propagate=True)
     def log_instance_deletion(
-        mapper: Mapper, connection: Connection, target: Base
+        mapper, connection, target
     ):
         name = getattr(target, "name", target.id)
         app.log("info", f"DELETION: {target.type} '{name}'")
 
     @event.listens_for(Base, "before_update", propagate=True)
     def log_instance_update(
-        mapper: Mapper, connection: Connection, target: Base
+        mapper, connection, target
     ):
         state, changelog = inspect(target), []
         for attr in state.attrs:
@@ -89,7 +88,7 @@ def configure_events(app):
 
     @event.listens_for(models["workflow"].name, "set")
     def workflow_name_update(
-        workflow: Base, new_name, old_name, *args
+        workflow, new_name, old_name, *args
     ):
         for job in fetch_all("job"):
             if old_name in job.positions:

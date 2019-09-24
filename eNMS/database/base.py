@@ -1,6 +1,5 @@
 from flask_login import current_user as user
 from sqlalchemy.ext.mutable import MutableDict, MutableList
-from typing import Any, List, Optional
 
 from eNMS import app
 from eNMS.database import Base, Session
@@ -17,13 +16,13 @@ class AbstractBase(Base):
     def __init__(self, **kwargs):
         self.update(**kwargs)
 
-    def __lt__(self, other: Base) -> bool:
+    def __lt__(self, other):
         return True
 
     def __repr__(self):
         return self.name
 
-    def __getattribute__(self, property) -> Any:
+    def __getattribute__(self, property):
         if property in private_properties and app.use_vault:
             path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
             data = app.vault_client.read(path)
@@ -66,9 +65,9 @@ class AbstractBase(Base):
 
     def get_properties(
         self,
-        export: bool = False,
-        exclude: Optional[list] = None,
-        include: Optional[list] = None,
+        export=False,
+        exclude=None,
+        include=None,
     ):
         result = {}
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
@@ -92,10 +91,10 @@ class AbstractBase(Base):
 
     def to_dict(
         self,
-        export: bool = False,
-        relation_names_only: bool = False,
-        exclude: Optional[list] = None,
-        include: Optional[list] = None,
+        export=False,
+        relation_names_only=False,
+        exclude=None,
+        include=None,
     ):
         properties = self.get_properties(export, exclude=exclude)
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])

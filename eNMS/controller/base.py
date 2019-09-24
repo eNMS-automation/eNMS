@@ -26,7 +26,6 @@ from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
-from typing import Any, Dict, List, Optional, Set, Union
 from uuid import getnode
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -217,7 +216,7 @@ class BaseController:
         "update_database_configurations_from_git",
     ]
 
-    def __init__(self, path: Path):
+    def __init__(self, path):
         self.path = path
         self.custom_properties = self.load_custom_properties()
         self.custom_config = self.load_custom_config()
@@ -560,7 +559,7 @@ class BaseController:
             "total_count": results.count(),
         }
 
-    def table_filtering(self, table, kwargs: ImmutableMultiDict):
+    def table_filtering(self, table, kwargs):
         model, properties = models[table], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
         try:
@@ -594,7 +593,7 @@ class BaseController:
             ],
         }
 
-    def allowed_file(self, name, allowed_modules: Set[str]) -> bool:
+    def allowed_file(self, name, allowed_modules):
         allowed_syntax = "." in name
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
@@ -606,10 +605,10 @@ class BaseController:
         self,
         subject,
         content,
-        sender: Optional[str] = None,
-        recipients: Optional[str] = None,
-        filename: Optional[str] = None,
-        file_content: Optional[Union[str, bytes]] = None,
+        sender=None,
+        recipients=None,
+        filename=None,
+        file_content=None,
     ):
         sender = sender or self.mail_sender
         recipients = recipients or self.mail_recipients
@@ -632,7 +631,7 @@ class BaseController:
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 
-    def str_dict(self, input, depth = 0):
+    def str_dict(self, input, depth=0):
         tab = "\t" * depth
         if isinstance(input, list):
             result = "\n"

@@ -4,7 +4,6 @@ from flask_restful import abort, Api, Resource
 from logging import info
 from psutil import cpu_percent
 from uuid import getnode
-from typing import Any, Dict, Optional, Union
 
 from eNMS import app
 from eNMS.database import Session
@@ -12,7 +11,7 @@ from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf
 
 
-def create_app_resources()[str, Resource]:
+def create_app_resources():
     endpoints = {}
     for endpoint in app.valid_rest_endpoints:
 
@@ -61,7 +60,7 @@ class Heartbeat(Resource):
 class Query(Resource):
     decorators = [auth.login_required]
 
-    def get(self, cls) -> Union[dict, list]:
+    def get(self, cls):
         try:
             results = fetch(cls, all_matches=True, **request.args.to_dict())
             return [result.get_properties(exclude=["positions"]) for result in results]
@@ -118,7 +117,7 @@ class UpdateInstance(Resource):
 class Migrate(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction) -> Optional[str]:
+    def post(self, direction):
         kwargs = request.get_json(force=True)
         return getattr(app, f"migration_{direction}")(**kwargs)
 
@@ -126,7 +125,7 @@ class Migrate(Resource):
 class RunJob(Resource):
     decorators = [auth.login_required]
 
-    def post(self) -> Union[str, dict]:
+    def post(self):
         try:
             errors, data = [], request.get_json(force=True)
             devices, pools = [], []
@@ -188,7 +187,7 @@ class Topology(Resource):
             return "Topology Export successfully executed."
 
 
-def configure_rest_api(flask_app: Flask):
+def configure_rest_api(flask_app):
     api = Api(flask_app, decorators=[csrf.exempt])
     for endpoint, resource in create_app_resources().items():
         api.add_resource(resource, f"/rest/{endpoint}")

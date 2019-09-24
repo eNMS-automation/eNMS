@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, make_response, render_template
 from flask.wrappers import Request, Response
 from itertools import chain
-from typing import Any, Optional, Tuple
 
 from eNMS import app
 from eNMS.database.functions import fetch
@@ -17,22 +16,22 @@ from eNMS.properties import property_names
 from eNMS.properties.table import filtering_properties, table_properties
 
 
-def register_extensions(flask_app: Flask):
+def register_extensions(flask_app):
     csrf.init_app(flask_app)
     login_manager.init_app(flask_app)
 
 
 def configure_login_manager():
     @login_manager.user_loader
-    def user_loader(id) -> User:
+    def user_loader(id):
         return fetch("user", allow_none=True, id=id)
 
     @login_manager.request_loader
-    def request_loader(request: Request) -> User:
+    def request_loader(request):
         return fetch("user", allow_none=True, name=request.form.get("name"))
 
 
-def configure_context_processor(flask_app: Flask):
+def configure_context_processor(flask_app):
     @flask_app.context_processor
     def inject_properties():
         return {
@@ -49,17 +48,17 @@ def configure_context_processor(flask_app: Flask):
         }
 
 
-def configure_errors(flask_app: Flask):
+def configure_errors(flask_app):
     @login_manager.unauthorized_handler
-    def unauthorized_handler() -> Tuple[str, int]:
+    def unauthorized_handler():
         return render_template("page_403.html"), 403
 
     @flask_app.errorhandler(403)
-    def authorization_required(error) -> Tuple[str, int]:
+    def authorization_required(error):
         return render_template("page_403.html"), 403
 
     @flask_app.errorhandler(404)
-    def not_found_error(error) -> Tuple[str, int]:
+    def not_found_error(error):
         return render_template("page_404.html"), 404
 
 
@@ -69,11 +68,11 @@ def configure_authentication():
         return getattr(fetch("user", name=username), "password", False)
 
     @auth.error_handler
-    def unauthorized() -> Response:
+    def unauthorized():
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app(config_mode: Optional[str] = None) -> Flask:
+def create_app(config_mode):
     flask_app = Flask(  # type: ignore
         __name__, static_folder=app.path / "eNMS" / "static"
     )

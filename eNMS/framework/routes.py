@@ -34,9 +34,9 @@ from eNMS.properties.table import (
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
 
-def monitor_requests(function: Callable) -> Callable:
+def monitor_requests(function):
     @wraps(function)
-    def decorated_function(*args, **kwargs) -> Any:
+    def decorated_function(*args, **kwargs):
         if not current_user.is_authenticated:
             client_address = request.environ.get(
                 "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
@@ -56,18 +56,18 @@ def monitor_requests(function: Callable) -> Callable:
 
 
 @blueprint.route("/")
-def site_root() -> Response:
+def site_root():
     return redirect(url_for("blueprint.route", page="login"))
 
 
 @blueprint.route("/<path:_>")
 @monitor_requests
-def get_requests_sink(_) -> Response:
+def get_requests_sink(_):
     abort(404)
 
 
 @blueprint.route("/login", methods=["GET", "POST"])
-def login() -> Any:
+def login():
     if request.method == "POST":
         try:
             user = app.authenticate_user(**request.form.to_dict())
@@ -93,7 +93,7 @@ def login() -> Any:
 
 @blueprint.route("/logout")
 @monitor_requests
-def logout() -> Response:
+def logout():
     logout_user()
     return redirect(url_for("blueprint.route", page="login"))
 
@@ -204,7 +204,7 @@ def view_job_results(id):
 
 @blueprint.route("/download_configuration/<id>")
 @monitor_requests
-def download_configuration(id) -> Response:
+def download_configuration(id):
     configuration = fetch("configuration", id=id)
     filename = f"{configuration.device_name}-{app.strip_all(configuration.runtime)}"
     return Response(
@@ -219,7 +219,7 @@ def download_configuration(id) -> Response:
 @blueprint.route("/", methods=["POST"])
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
-def route(page) -> Response:
+def route(page):
     f, *args = page.split("/")
     if f not in app.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})

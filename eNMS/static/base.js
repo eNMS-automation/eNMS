@@ -40,7 +40,7 @@ const panelSize = {
   device: "700 500",
   device_filtering: "700 600",
   device_results: "1200 700",
-  display: "1200 700",
+  display: "1700 700",
   event_filtering: "700 400",
   excel_import: "400 150",
   excel_export: "400 150",
@@ -556,7 +556,7 @@ function initTable(type, instance, runtime) {
     },
   });
   createSearchHeaders(type, table);
-  if (["changelog", "syslog", "run"].includes(type)) {
+  if (["changelog", "syslog", "run", "configuration"].includes(type)) {
     table.order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type))

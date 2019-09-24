@@ -126,9 +126,7 @@ job_filtering_properties = [
 
 filtering_properties = {
     "changelog": changelog_table_properties,
-    "configuration": device_table_properties
-    + configuration_table_properties[2:]
-    + ["current_configuration"],
+    "configuration": configuration_table_properties,
     "device": device_table_properties + ["current_configuration"],
     "event": event_table_properties,
     "link": link_table_properties,

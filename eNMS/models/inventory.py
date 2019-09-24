@@ -124,10 +124,7 @@ class Device(CustomDevice):
             </button>
             <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
             showConfigurationsPanel({self.row_properties})">History</a></li>
-            </ul>
-            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
-            showConfigurationsPanel({self.row_properties})">History</a></li>
-            </ul></div>""",
+            </ul>""",
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showDeviceResultsPanel({self.row_properties})">
             </i>Results</a></button>""",

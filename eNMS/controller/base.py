@@ -569,10 +569,11 @@ class BaseController:
             order_property = "name"
         order = getattr(getattr(model, order_property), kwargs["order[0][dir]"])()
         constraints = self.build_filtering_constraints(table, kwargs)
+        print(kwargs.get("instance[id]"))
         if table == "result":
             constraints.append(
                 getattr(
-                    models["result"],
+                    models[table],
                     "job"
                     if "service" in kwargs["instance[type]"]
                     else kwargs["instance[type]"],
@@ -582,6 +583,14 @@ class BaseController:
                 constraints.append(
                     models["result"].parent_runtime == kwargs.get("job[runtime]")
                 )
+        elif table == "configuration" and kwargs.get("instance[id]"):
+            print(kwargs.get("instance[id]"))
+            constraints.append(
+                getattr(
+                    models[table],
+                    "device"
+                ).has(id=kwargs["instance[id]"])
+            )
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         return {
             "draw": int(kwargs["draw"]),

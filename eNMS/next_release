@@ -46,3 +46,13 @@ They are in "requirements_db.txt" instead.
 The reason is that they can make the pip installation fail depending on the environment, and 
 this can be hard to troubleshoot for new users.
 
+- In the "Advanced search", new "None" entry for filtering relationship.
+When you want to display all services that do not belong to any workflow, you would previously
+select all workflow and "Not related to Any".
+For scalability purpose, "Select all" has now been removed so doing that is no longer 
+an option. Instead, I added "None": it will do the same thing without you having to select
+anything.
+
+- Removed mypy from both the codebase and CI/CD test (travis).
+
+- Refactoring of the configuration management system.

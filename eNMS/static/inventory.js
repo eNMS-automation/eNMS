@@ -87,7 +87,14 @@ function showDeviceConfiguration(id) {
 // eslint-disable-next-line
 function showDeviceResultsPanel(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
-    resultTable = initTable("result", device);
+    initTable("result", device);
+  });
+}
+
+// eslint-disable-next-line
+function showConfigurationsPanel(device) {
+  createPanel("configuration", `Configuration - ${device.name}`, null, function() {
+    initTable("configuration", device);
   });
 }
 

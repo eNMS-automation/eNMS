@@ -1,6 +1,5 @@
 from ast import literal_eval
 from json import loads
-from typing import Callable, Dict, List
 
 
 def dict_conversion(input):
@@ -10,7 +9,7 @@ def dict_conversion(input):
         return loads(input)
 
 
-field_conversion[str, Callable] = {
+field_conversion = {
     "dict"_conversion,
     "float": float,
     "integer",
@@ -19,8 +18,8 @@ field_conversion[str, Callable] = {
     "str",
 }
 
-property_names[str, str] = {}
+property_names = {}
 
-private_properties[str] = ["password", "enable_password", "custom_password"]
+private_properties = ["password", "enable_password", "custom_password"]
 
-dont_serialize[str] = ["configurations", "current_configuration"]
+dont_serialize = ["configurations", "current_configuration"]

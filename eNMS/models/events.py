@@ -5,7 +5,6 @@ from sqlalchemy import Boolean, case, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
-from typing import Any, List, Optional, Tuple
 
 from eNMS import app
 from eNMS.database import Session
@@ -53,7 +52,7 @@ class Task(AbstractBase):
         if self.is_active:
             self.schedule()
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         status = "Pause" if self.is_active else "Resume"
         return [
             f"""<button id="pause-resume-{self.id}" type="button"
@@ -83,14 +82,14 @@ class Task(AbstractBase):
         return case([(cls.is_active, "Active")], else_="Inactive")
 
     @property
-    def next_run_time(self) -> Optional[str]:
+    def next_run_time(self):
         job = app.scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             return job.next_run_time.strftime("%Y-%m-%d %H:%M:%S")
         return None
 
     @property
-    def time_before_next_run(self) -> Optional[str]:
+    def time_before_next_run(self):
         job = app.scheduler.get_job(self.aps_job_id)
         if job and job.next_run_time:
             delta = job.next_run_time.replace(tzinfo=None) - datetime.now()
@@ -104,7 +103,7 @@ class Task(AbstractBase):
         dt: datetime = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
         return datetime.strftime(dt, "%Y-%m-%d %H:%M:%S")
 
-    def aps_date(self, datetype) -> Optional[str]:
+    def aps_date(self, datetype):
         date = getattr(self, datetype)
         return self.aps_conversion(date) if date else None
 
@@ -134,7 +133,7 @@ class Task(AbstractBase):
             properties["pools"] = [pool.id for pool in self.pools]  # type: ignore
         return properties
 
-    def kwargs(self) -> Tuple[dict, dict]:
+    def kwargs(self):
         default = {
             "id": self.aps_job_id,
             "func": app.run,
@@ -197,7 +196,7 @@ class Baselog(AbstractBase):
         kwargs["time"] = str(datetime.now())
         super().update(**kwargs)
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         return []
 
 
@@ -231,7 +230,7 @@ class Event(AbstractBase):
     log_content_regex = Column(Boolean, default=False)
     jobs = relationship("Job", secondary=job_event_table, back_populates="events")
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showTypePanel('event', '{self.id}')">

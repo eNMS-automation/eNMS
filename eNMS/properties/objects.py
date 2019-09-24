@@ -1,6 +1,4 @@
-from typing import Dict, List
-
-device_icons[str, str] = {
+device_icons = {
     "antenna": "Antenna",
     "firewall": "Firewall",
     "host": "Host",
@@ -11,7 +9,7 @@ device_icons[str, str] = {
     "switch": "Switch",
 }
 
-object_common_properties[str] = [
+object_common_properties = [
     "name",
     "description",
     "subtype",
@@ -33,11 +31,11 @@ device_properties = [
     "username",
 ]
 
-pool_device_properties[str] = (
+pool_device_properties = (
     object_common_properties + device_properties[:-1] + ["current_configuration"]
 )
 
-link_properties[str] = object_common_properties + [
+link_properties = object_common_properties + [
     "color",
     "source_name",
     "destination_name",
@@ -45,4 +43,4 @@ link_properties[str] = object_common_properties + [
     "destination",
 ]
 
-pool_link_properties[str] = link_properties[:-2]
+pool_link_properties = link_properties[:-2]

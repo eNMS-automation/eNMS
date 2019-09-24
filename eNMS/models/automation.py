@@ -8,7 +8,6 @@ from pathlib import Path
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from typing import Any, Generator, List, Optional, Set, Tuple
 
 from eNMS import app
 from eNMS.database import Session
@@ -79,7 +78,7 @@ class Job(AbstractBase):
     def filename(self):
         return app.strip_all(self.name)
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         number_of_runs = app.job_db[self.id]["runs"]
         return [
             f"Running ({number_of_runs})" if number_of_runs else "Idle",
@@ -127,8 +126,8 @@ class Job(AbstractBase):
         ]
 
     def adjacent_jobs(
-        self, workflow: "Workflow", direction, subtype
-    ) -> Generator[Tuple["Job", "WorkflowEdge"], None, None]:
+        self, workflow, direction, subtype
+    ):
         for edge in getattr(self, f"{direction}s"):
             if edge.subtype == subtype and edge.workflow == workflow:
                 yield getattr(edge, direction), edge
@@ -164,7 +163,7 @@ class Service(Job):
             args[4][device.name] = device_result
 
     def device_run(
-        self, run: Run, payload, targets: Optional[Set["Device"]] = None
+        self, run, payload, targets=None
     ):
         if not targets:
             return run.get_results(payload)
@@ -191,9 +190,9 @@ class Service(Job):
             results = {"devices": device_results}
             return results
 
-    def build_results(self, run: Run, payload, *other):
+    def build_results(self, run, payload, *other):
         results = {"results": {}, "success": False, "runtime": run.runtime}
-        targets: Set = set()
+        targets = set()
         if run.has_targets:
             try:
                 targets = run.compute_devices(payload)
@@ -266,8 +265,8 @@ class Workflow(Job):
             end.positions[self.name] = (500, 0)
 
     def compute_valid_devices(
-        self, run: Run, job: Job, allowed_devices, payload
-    ) -> Set[Device]:
+        self, run, job, allowed_devices, payload
+    ):
         if job.type != "workflow" and not job.has_targets:
             return set()
         elif run.use_workflow_devices:
@@ -276,8 +275,8 @@ class Workflow(Job):
             return run.compute_devices(payload)
 
     def workflow_targets_processing(
-        self, runtime, allowed_devices, job: Job, results
-    ) -> Generator[Job, None, None]:
+        self, runtime, allowed_devices, job, results
+    ):
         failed_devices, passed_devices = set(), set()
         skip_job = results["success"] == "skipped"
         if (job.type == "workflow" or job.has_targets) and not skip_job:
@@ -307,7 +306,7 @@ class Workflow(Job):
                 yield successor
 
     def workflow_run(
-        self, run: Run, payload, device: Optional[Device] = None
+        self, run, payload, device=None
     ):
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
@@ -316,7 +315,7 @@ class Workflow(Job):
         number_of_runs = defaultdict(int)
         jobs = list(run.start_jobs)
         payload = deepcopy(payload)
-        visited: Set = set()
+        visited = set()
         results = {"results": {}, "success": False, "runtime": run.runtime}
         allowed_devices = defaultdict(set)
         if run.use_workflow_devices and run.traversal_mode == "service":
@@ -432,7 +431,7 @@ class Workflow(Job):
             results["success"] = initial_targets == end_devices
         return results
 
-    def build_results(self, run: Run, payload):
+    def build_results(self, run, payload):
         if run.traversal_mode == "service":
             return self.workflow_run(run, payload)
         else:

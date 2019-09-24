@@ -1,5 +1,3 @@
-from typing import Dict, List
-
 import_classes = [
     "user",
     "device",
@@ -12,7 +10,6 @@ import_classes = [
 ]
 
 dont_track_changes = [
-    "configurations",
     "current_configuration",
     "current_device",
     "current_job",
@@ -21,10 +18,9 @@ dont_track_changes = [
     "state",
 ]
 
-dont_migrate[str, List[str]] = {
+dont_migrate = {
     "device": [
         "id",
-        "configurations",
         "current_configuration",
         "jobs",
         "source",

@@ -52,7 +52,7 @@ class Result(AbstractBase):
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
     workflow_name = association_proxy("workflow", "name")
 
-    def __getitem__(self, key) -> Any:
+    def __getitem__(self, key):
         return self.result[key]
 
     def __init__(self, **kwargs):
@@ -61,7 +61,7 @@ class Result(AbstractBase):
         self.endtime = kwargs["result"]["endtime"]
         super().__init__(**kwargs)
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showResult('{self.id}')"></i>Results</a></button>""",
@@ -105,7 +105,7 @@ class Run(AbstractBase):
     def __repr__(self):
         return f"{self.runtime} ({self.job_name} run by {self.creator})"
 
-    def __getattr__(self, key) -> Any:
+    def __getattr__(self, key):
         if key in self.__dict__:
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
@@ -116,11 +116,11 @@ class Run(AbstractBase):
         else:
             raise AttributeError
 
-    def result(self, device: Optional[str] = None) -> Optional["Result"]:
+    def result(self, device=None):
         result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         job_type = "workflow" if self.job.type == "workflow" else "service"
         return [
             f"""<div class="btn-group" style="width: 100px;">
@@ -150,7 +150,7 @@ class Run(AbstractBase):
         else:
             return "N/A"
 
-    def netmiko_connection(self, device: "Device") -> ConnectHandler:
+    def netmiko_connection(self, device):
         if self.parent_runtime in app.connections_cache["netmiko"]:
             parent_connection = app.connections_cache["netmiko"].get(
                 self.parent_runtime
@@ -198,7 +198,7 @@ class Run(AbstractBase):
         ] = netmiko_connection
         return netmiko_connection
 
-    def napalm_connection(self, device: "Device") -> NetworkDriver:
+    def napalm_connection(self, device):
         if self.parent_runtime in app.connections_cache["napalm"]:
             parent_connection = app.connections_cache["napalm"].get(self.parent_runtime)
             if parent_connection and device.name in parent_connection:
@@ -230,7 +230,7 @@ class Run(AbstractBase):
         ] = napalm_connection
         return napalm_connection
 
-    def get_state(self, property) -> Any:
+    def get_state(self, property):
         return app.run_db[self.runtime].get(property)
 
     def set_state(self, **kwargs):
@@ -242,10 +242,10 @@ class Run(AbstractBase):
                 app.run_db[self.parent_runtime]["progress"][key] += 1
 
     @property
-    def stop(self) -> Optional[bool]:
+    def stop(self):
         return self.get_state("stop") or app.run_db[self.parent_runtime].get("stop")
 
-    def compute_devices(self, payload) -> Set["Device"]:
+    def compute_devices(self, payload):
         if self.job.python_query:
             values = self.eval(self.job.python_query, **locals())
             devices, not_found = [], []
@@ -280,7 +280,7 @@ class Run(AbstractBase):
         pool.join()
 
     def disconnect(
-        self, library, device: Device, connection: ConnectHandler
+        self, library, device, connection
     ):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
@@ -290,7 +290,7 @@ class Run(AbstractBase):
                 "error", f"{library} Connection to {device} couldn't be closed ({exc})"
             )
 
-    def run(self, payload: Optional[dict] = None):
+    def run(self, payload=None):
         try:
             self.log("info", f"{self.job.type} {self.job.name}: Starting")
             self.set_state(status="Running", type=self.job.type)
@@ -338,7 +338,7 @@ class Run(AbstractBase):
             self.notify(results)
         return results
 
-    def create_result(self, results, device: Optional["Device"] = None):
+    def create_result(self, results, device=None):
         self.success = results["success"]
         result_kw = {"run": self, "result": results, "job": self.job_id}
         if self.workflow_id:
@@ -347,7 +347,7 @@ class Run(AbstractBase):
             result_kw["device"] = device.id
         factory("result", **result_kw)
 
-    def get_results(self, payload, device: Optional["Device"] = None):
+    def get_results(self, payload, device=None):
         self.log(
             "info", f"Running {self.job.type}{f' on {device.name}' if device else ''}"
         )
@@ -390,7 +390,7 @@ class Run(AbstractBase):
         if self.workflow:
             app.run_logs[self.parent_runtime].append(log)
 
-    def run_notification(self, results)[str]:
+    def run_notification(self, results):
         notification = self.notification_header.splitlines()
         if self.job.type == "workflow":
             return notification
@@ -431,7 +431,7 @@ class Run(AbstractBase):
         )
         notification_run.run(notification_payload)
 
-    def get_credentials(self, device: "Device") -> Tuple:
+    def get_credentials(self, device):
         return (
             app.get_user_credentials()
             if self.credentials == "user"
@@ -443,7 +443,7 @@ class Run(AbstractBase):
             )
         )
 
-    def convert_result(self, result) -> Union[str, dict]:
+    def convert_result(self, result):
         try:
             if self.conversion_method == "text":
                 result = str(result)
@@ -460,7 +460,7 @@ class Run(AbstractBase):
             }
         return result
 
-    def match_content(self, result, match: Union[str, dict]):
+    def match_content(self, result, match):
         if getattr(self, "validation_method", "text") == "text":
             result = str(result)
             assert isinstance(match, str)
@@ -477,7 +477,7 @@ class Run(AbstractBase):
             success = self.match_dictionary(result, match)
         return success if not self.negative_logic else not success
 
-    def match_dictionary(self, result, match, first: bool = True):
+    def match_dictionary(self, result, match, first=True):
         if self.validation_method == "dict_equal":
             return result == self.dict_match
         else:
@@ -494,7 +494,7 @@ class Run(AbstractBase):
             return not match_copy
 
     def transfer_file(
-        self, ssh_client: SSHClient, files[Tuple[str, str]]
+        self, ssh_client, files
     ):
         if self.protocol == "sftp":
             with SFTPClient.from_transport(
@@ -513,11 +513,11 @@ class Run(AbstractBase):
         self,
         payload,
         name,
-        value: Optional[Any] = None,
-        device: Optional[str] = None,
-        section: Optional[str] = None,
-        operation = "set",
-    ) -> Any:
+        value=None,
+        device=None,
+        section=None,
+        operation="set",
+    ):
         payload = payload.setdefault("variables", {})
         if device:
             payload = payload.setdefault("devices", {})
@@ -535,14 +535,14 @@ class Run(AbstractBase):
             return payload[name]
 
     def get_var(
-        self, payload, name, device: Optional[Any] = None, **kwargs
-    ) -> Any:
+        self, payload, name, device=None, **kwargs
+    ):
         return self.payload_helper(payload, name, device=device, **kwargs)
 
-    def get_result(self, job, device: Optional[str] = None) -> Optional[dict]:
+    def get_result(self, job, device=None):
         job_id = fetch("job", name=job).id
 
-        def recursive_search(run: "Run") -> Optional[dict]:
+        def recursive_search(run: "Run"):
             if not run:
                 return None
             runs = fetch(
@@ -572,8 +572,8 @@ class Run(AbstractBase):
         }
 
     def eval(
-        _self, query, function = "eval", **locals  # noqa: N805
-    ) -> Any:
+        _self, query, function="eval", **locals  # noqa: N805
+    ):
         try:
             return builtins[function](query, _self.python_code_kwargs(**locals))
         except Exception as exc:

@@ -2,7 +2,6 @@ from re import search
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
-from typing import Any, Dict, List, Union
 
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
@@ -95,7 +94,7 @@ class Device(CustomDevice):
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
     @property
-    def view_properties(self)[str, Any]:
+    def view_properties(self):
         return {
             property: getattr(self, property)
             for property in ("id", "name", "icon", "latitude", "longitude")
@@ -114,7 +113,7 @@ class Device(CustomDevice):
             if self in pool.devices and not match:
                 pool.devices.remove(self)
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         return [
             f"""<div class="btn-group" style="width: 130px;">
             <button type="button" class="btn btn-info btn-sm"
@@ -181,7 +180,7 @@ class Link(Object):
         self.update(**kwargs)
 
     @property
-    def view_properties(self)[str, Any]:
+    def view_properties(self):
         node_properties = ("id", "longitude", "latitude")
         return {
             **{
@@ -218,7 +217,7 @@ class Link(Object):
             elif self in pool.links:
                 pool.links.remove(self)
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         return [
             f"""<div class="btn-group" style="width: 80px;">
                 <button type="button" class="btn btn-primary btn-sm"
@@ -290,7 +289,7 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showPoolView('{self.id}')">
@@ -321,7 +320,7 @@ class Pool(AbstractPool):
             f" - {get_relationship_count(self, 'links')} links"
         )
 
-    def property_match(self, obj: Union[Device, Link], property):
+    def property_match(self, obj, property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")
         object_value = str(getattr(obj, property))
         match = getattr(self, f"{obj.class_type}_{property}_match")
@@ -334,7 +333,7 @@ class Pool(AbstractPool):
         else:
             return bool(search(pool_value, object_value))
 
-    def object_match(self, obj: Union[Device, Link]):
+    def object_match(self, obj):
         properties = (
             pool_device_properties
             if obj.class_type == "device"
@@ -365,7 +364,7 @@ class Configuration(AbstractBase):
     )
     device_name = association_proxy("device", "name")
 
-    def generate_row(self, table)[str]:
+    def generate_row(self, table):
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showConfiguration('{self.id}', '{self.device_name}')">

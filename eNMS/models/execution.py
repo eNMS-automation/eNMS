@@ -364,8 +364,7 @@ class Run(AbstractBase):
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
-        if self.result_postprocessing:
-            self.eval(self.result_postprocessing, function="exec", **locals())
+        self.eval(self.job.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
         self.log(
             "info",

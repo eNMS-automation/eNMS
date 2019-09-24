@@ -78,7 +78,6 @@ class Device(CustomDevice):
     enable_password = Column(SmallString)
     netmiko_driver = Column(SmallString, default="cisco_ios")
     napalm_driver = Column(SmallString, default="ios")
-    run_id = Column(Integer, ForeignKey("run.id"))
     current_configuration = Column(LargeString)
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")
@@ -118,9 +117,9 @@ class Device(CustomDevice):
     def generate_row(self, table: str) -> List[str]:
         return [
             f"""<div class="btn-group" style="width: 130px;">
-            <button type="button" class="btn btn-primary btn-sm"
+            <button type="button" class="btn btn-info btn-sm"
             onclick="showDeviceConfiguration('{self.id}')">Configuration</button>,
-            <button type="button" class="btn btn-primary btn-sm
+            <button type="button" class="btn btn-info btn-sm
             dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
             </button>

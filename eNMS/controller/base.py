@@ -172,7 +172,7 @@ class BaseController:
         "get_all",
         "get_cluster_status",
         "get_configuration_diff",
-        "get_device_list",
+        "get_device_configuration",
         "get_device_logs",
         "get_exported_jobs",
         "get_git_content",

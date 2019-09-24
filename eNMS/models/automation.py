@@ -125,9 +125,7 @@ class Job(AbstractBase):
             Delete</button>""",
         ]
 
-    def adjacent_jobs(
-        self, workflow, direction, subtype
-    ):
+    def adjacent_jobs(self, workflow, direction, subtype):
         for edge in getattr(self, f"{direction}s"):
             if edge.subtype == subtype and edge.workflow == workflow:
                 yield getattr(edge, direction), edge
@@ -162,9 +160,7 @@ class Service(Job):
         with args[3]:
             args[4][device.name] = device_result
 
-    def device_run(
-        self, run, payload, targets=None
-    ):
+    def device_run(self, run, payload, targets=None):
         if not targets:
             return run.get_results(payload)
         else:
@@ -264,9 +260,7 @@ class Workflow(Job):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    def compute_valid_devices(
-        self, run, job, allowed_devices, payload
-    ):
+    def compute_valid_devices(self, run, job, allowed_devices, payload):
         if job.type != "workflow" and not job.has_targets:
             return set()
         elif run.use_workflow_devices:
@@ -274,9 +268,7 @@ class Workflow(Job):
         else:
             return run.compute_devices(payload)
 
-    def workflow_targets_processing(
-        self, runtime, allowed_devices, job, results
-    ):
+    def workflow_targets_processing(self, runtime, allowed_devices, job, results):
         failed_devices, passed_devices = set(), set()
         skip_job = results["success"] == "skipped"
         if (job.type == "workflow" or job.has_targets) and not skip_job:
@@ -305,9 +297,7 @@ class Workflow(Job):
                 app.run_db[runtime]["edges"][edge.id] = len(devices)
                 yield successor
 
-    def workflow_run(
-        self, run, payload, device=None
-    ):
+    def workflow_run(self, run, payload, device=None):
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )

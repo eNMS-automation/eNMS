@@ -183,7 +183,7 @@ class ExampleForm(ServiceForm):
     boolean1 = BooleanField()
     boolean2 = BooleanField("Boolean N°1")
 
-    def validate_custom_integer(self, fieldegerField):
+    def validate_custom_integer(self, field):
         product = self.an_integer.data * self.a_float.data
         if field.data > product:
             raise ValidationError(

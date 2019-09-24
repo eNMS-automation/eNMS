@@ -204,9 +204,7 @@ def download_configuration(id):
     return Response(
         (f"{line}\n" for line in configuration.configuration.splitlines()),
         mimetype="text/plain",
-        headers={
-            "Content-Disposition": f"attachment;filename={filename}.txt"
-        },
+        headers={"Content-Disposition": f"attachment;filename={filename}.txt"},
     )
 
 

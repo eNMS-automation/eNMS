@@ -19,14 +19,7 @@ dont_track_changes = [
 ]
 
 dont_migrate = {
-    "device": [
-        "id",
-        "current_configuration",
-        "jobs",
-        "source",
-        "destination",
-        "pools",
-    ],
+    "device": ["id", "current_configuration", "jobs", "source", "destination", "pools"],
     "link": ["id", "pools"],
     "pool": ["id", "jobs", "object_number"],
     "service": [

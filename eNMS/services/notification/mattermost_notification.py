@@ -1,7 +1,6 @@
 from json import dumps
 from requests import post
 from sqlalchemy import Boolean, ForeignKey, Integer
-from typing import Optional
 from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
@@ -31,7 +30,7 @@ class MattermostNotificationService(Service):
             verify=app.mattermost_verify_certificate,
             data=dumps({"channel": channel, "text": run.sub(run.body, locals())}),
         )
-        return {"success": True, "result"(result)}
+        return {"success": True, "result": str(result)}
 
 
 class MattermostNotificationForm(ServiceForm):

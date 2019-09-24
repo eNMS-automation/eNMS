@@ -2,7 +2,6 @@ from io import StringIO
 from re import findall
 from sqlalchemy import Boolean, ForeignKey, Integer
 from textfsm import TextFSM
-from typing import Optional
 from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 

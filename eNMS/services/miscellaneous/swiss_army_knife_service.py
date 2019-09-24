@@ -52,7 +52,7 @@ class SwissArmyKnifeService(Service):
             channel=app.slack_channel,
             text=app.str_dict(payload["content"]),
         )
-        return {"success": True, "result"(result)}
+        return {"success": True, "result": str(result)}
 
     def mattermost_feedback_notification(self, run, payload):
         post(

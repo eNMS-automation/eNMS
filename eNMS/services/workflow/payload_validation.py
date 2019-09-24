@@ -1,5 +1,4 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
-from typing import Optional
 from wtforms import BooleanField, HiddenField, StringField
 
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString

@@ -5,9 +5,7 @@ from eNMS.database import Session
 from eNMS.models import models, relationships
 
 
-def fetch(
-    model, allow_none=False, all_matches=False, **kwargs
-):
+def fetch(model, allow_none=False, all_matches=False, **kwargs):
     query = Session.query(models[model]).filter_by(**kwargs)
     result = query.all() if all_matches else query.first()
     if result or allow_none:

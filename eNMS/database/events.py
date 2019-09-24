@@ -50,16 +50,12 @@ def configure_events(app):
         app.log("info", f"CREATION: {target.__dict__['type']} '{kwargs['name']}'")
 
     @event.listens_for(Base, "before_delete", propagate=True)
-    def log_instance_deletion(
-        mapper, connection, target
-    ):
+    def log_instance_deletion(mapper, connection, target):
         name = getattr(target, "name", target.id)
         app.log("info", f"DELETION: {target.type} '{name}'")
 
     @event.listens_for(Base, "before_update", propagate=True)
-    def log_instance_update(
-        mapper, connection, target
-    ):
+    def log_instance_update(mapper, connection, target):
         state, changelog = inspect(target), []
         for attr in state.attrs:
             if attr.key in private_properties or attr.key in dont_track_changes:
@@ -84,9 +80,7 @@ def configure_events(app):
             app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
     @event.listens_for(models["workflow"].name, "set")
-    def workflow_name_update(
-        workflow, new_name, old_name, *args
-    ):
+    def workflow_name_update(workflow, new_name, old_name, *args):
         for job in fetch_all("job"):
             if old_name in job.positions:
                 job.positions[new_name] = job.positions.pop(old_name)

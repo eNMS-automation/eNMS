@@ -27,7 +27,6 @@ from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from uuid import getnode
-from werkzeug.datastructures import ImmutableMultiDict
 
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
@@ -572,7 +571,9 @@ class BaseController:
             constraints.append(
                 getattr(
                     models["result"],
-                    "job" if "service" in kwargs["instance[type]"] else kwargs["instance[type]"],
+                    "job"
+                    if "service" in kwargs["instance[type]"]
+                    else kwargs["instance[type]"],
                 ).has(id=kwargs["instance[id]"])
             )
             if kwargs.get("job[runtime]"):

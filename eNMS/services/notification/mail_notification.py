@@ -1,5 +1,4 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
-from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 

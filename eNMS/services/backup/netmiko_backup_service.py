@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from ruamel import yaml
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
-from wtforms import HiddenField, IntegerField, StringField
+from wtforms import HiddenField, StringField
 
 from eNMS.database import Session
 from eNMS.database.dialect import Column, SmallString
@@ -60,7 +60,7 @@ class NetmikoBackupService(Service):
             if configuration == device.current_configuration:
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)
-            config_object = factory(
+            factory(
                 "configuration",
                 device=device.id,
                 runtime=device.last_runtime,
@@ -75,7 +75,7 @@ class NetmikoBackupService(Service):
             device.last_status = "Failure"
             device.last_failure = str(device.last_runtime)
             self.generate_yaml_file(path_device_config, device)
-            return {"success": False, "result"(e)}
+            return {"success": False, "result": str(e)}
         Session.commit()
         return {"success": True, "result": f"Command: {command}"}
 

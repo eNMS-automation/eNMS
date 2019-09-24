@@ -3,7 +3,6 @@ from re import search
 from sqlalchemy import Boolean, ForeignKey, Integer
 from subprocess import check_output
 from traceback import format_exc
-from typing import Optional
 from wtforms import BooleanField, HiddenField
 
 from eNMS import app

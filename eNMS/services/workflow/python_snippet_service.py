@@ -1,5 +1,4 @@
 from sqlalchemy import Boolean, ForeignKey, Integer
-from typing import Optional
 from wtforms import BooleanField, HiddenField, StringField
 from wtforms.widgets import TextArea
 
@@ -24,7 +23,7 @@ class PythonSnippetService(Service):
             code_object = compile(run.source_code, "user_python_code", "exec")
         except Exception as exc:
             run.log("info", f"Compile error: {str(exc)}")
-            return {"success": False, "result": {"step": "compile", "error"(exc)}}
+            return {"success": False, "result": {"step": "compile", "error": str(exc)}}
         _code_result_ = {}
 
         class TerminateException(Exception):
@@ -53,7 +52,7 @@ class PythonSnippetService(Service):
                 "success": False,
                 "result": {
                     "step": "execute",
-                    "error"(exc),
+                    "error": str(exc),
                     "result": _code_result_,
                 },
             }

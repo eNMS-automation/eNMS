@@ -63,12 +63,7 @@ class AbstractBase(Base):
                 value = value not in (False, "false")
             setattr(self, property, value)
 
-    def get_properties(
-        self,
-        export=False,
-        exclude=None,
-        include=None,
-    ):
+    def get_properties(self, export=False, exclude=None, include=None):
         result = {}
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
         for property in model_properties[self.type]:
@@ -90,11 +85,7 @@ class AbstractBase(Base):
         return result
 
     def to_dict(
-        self,
-        export=False,
-        relation_names_only=False,
-        exclude=None,
-        include=None,
+        self, export=False, relation_names_only=False, exclude=None, include=None
     ):
         properties = self.get_properties(export, exclude=exclude)
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])

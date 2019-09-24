@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from ruamel import yaml
 from sqlalchemy import Boolean, ForeignKey, Integer
-from wtforms import HiddenField, IntegerField
+from wtforms import HiddenField
 
 from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
@@ -56,7 +56,7 @@ class NapalmBackupService(Service):
             device.last_status = "Failure"
             device.last_failure = str(now)
             self.generate_yaml_file(path_device_config, device)
-            return {"success": False, "result"(e)}
+            return {"success": False, "result": str(e)}
         return {"success": True, "result": "Get Config via Napalm"}
 
 

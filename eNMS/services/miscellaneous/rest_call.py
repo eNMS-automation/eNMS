@@ -9,7 +9,6 @@ from requests import (
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.types import JSON
-from typing import Optional
 from wtforms import (
     BooleanField,
     HiddenField,
@@ -104,7 +103,7 @@ class RestCallService(Service):
             "url": rest_url,
             "match": match,
             "status_code": response.status_code,
-            "headers"(response.headers),
+            "headers": dict(response.headers),
             "negative_logic": run.negative_logic,
             "result": result,
             "success": run.match_content(result, match),

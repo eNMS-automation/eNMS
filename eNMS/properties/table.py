@@ -9,10 +9,7 @@ device_table_properties = object_common_properties + [
 
 configuration_table_properties = ["runtime", "duration", "device_name"]
 
-link_table_properties = object_common_properties + [
-    "source_name",
-    "destination_name",
-]
+link_table_properties = object_common_properties + ["source_name", "destination_name"]
 
 pool_table_properties = [
     "name",

@@ -12,10 +12,10 @@ def dict_conversion(input):
 field_conversion = {
     "dict": dict_conversion,
     "float": float,
-    "integer",
+    "integer": int,
     "json": loads,
-    "list",
-    "str",
+    "list": str,
+    "str": str,
 }
 
 property_names = {}

@@ -274,9 +274,7 @@ class Run(AbstractBase):
         pool.close()
         pool.join()
 
-    def disconnect(
-        self, library, device, connection
-    ):
+    def disconnect(self, library, device, connection):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
             self.log("info", f"Closed {library} Connection to {device}")
@@ -488,9 +486,7 @@ class Run(AbstractBase):
                     self.match_dictionary(item, match_copy, False)
             return not match_copy
 
-    def transfer_file(
-        self, ssh_client, files
-    ):
+    def transfer_file(self, ssh_client, files):
         if self.protocol == "sftp":
             with SFTPClient.from_transport(
                 ssh_client.get_transport(),
@@ -505,13 +501,7 @@ class Run(AbstractBase):
                     getattr(scp, self.direction)(source, destination)
 
     def payload_helper(
-        self,
-        payload,
-        name,
-        value=None,
-        device=None,
-        section=None,
-        operation="set",
+        self, payload, name, value=None, device=None, section=None, operation="set"
     ):
         payload = payload.setdefault("variables", {})
         if device:
@@ -529,9 +519,7 @@ class Run(AbstractBase):
                 raise Exception(f"Payload Editor: {name} not found in {payload}.")
             return payload[name]
 
-    def get_var(
-        self, payload, name, device=None, **kwargs
-    ):
+    def get_var(self, payload, name, device=None, **kwargs):
         return self.payload_helper(payload, name, device=device, **kwargs)
 
     def get_result(self, job, device=None):
@@ -566,9 +554,7 @@ class Run(AbstractBase):
             **locals,
         }
 
-    def eval(
-        _self, query, function="eval", **locals  # noqa: N805
-    ):
+    def eval(_self, query, function="eval", **locals):  # noqa: N805
         try:
             return builtins[function](query, _self.python_code_kwargs(**locals))
         except Exception as exc:

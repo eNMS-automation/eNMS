@@ -1,6 +1,5 @@
 from slackclient import SlackClient
 from sqlalchemy import Boolean, ForeignKey, Integer
-from typing import Optional
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
@@ -30,7 +29,7 @@ class SlackNotificationService(Service):
         result = slack_client.api_call(
             "chat.postMessage", channel=channel, text=run.sub(run.body, locals())
         )
-        return {"success": True, "result"(result)}
+        return {"success": True, "result": str(result)}
 
 
 class SlackNotificationForm(ServiceForm):

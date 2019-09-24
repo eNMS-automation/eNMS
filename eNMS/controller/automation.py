@@ -19,10 +19,7 @@ class AutomationController(BaseController):
     NETMIKO_DRIVERS = sorted((driver, driver) for driver in CLASS_MAPPER)
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
-    connections_cache = {
-        "napalm": defaultdict(dict),
-        "netmiko": defaultdict(dict),
-    }
+    connections_cache = {"napalm": defaultdict(dict), "netmiko": defaultdict(dict)}
     job_db = defaultdict(lambda: {"runs": 0})
     run_db = defaultdict(dict)
     run_logs = defaultdict(list)
@@ -34,9 +31,7 @@ class AutomationController(BaseController):
         else:
             return None
 
-    def add_edge(
-        self, workflow_id, subtype, source, destination
-    ):
+    def add_edge(self, workflow_id, subtype, source, destination):
         workflow_edge = factory(
             "workflow_edge",
             **{
@@ -195,9 +190,7 @@ class AutomationController(BaseController):
         for job_id in job_ids.split("-"):
             fetch("Job", id=job_id).skip = skip == "skip"
 
-    def get_workflow_state(
-        self, workflow_id, runtime=None
-    ):
+    def get_workflow_state(self, workflow_id, runtime=None):
         workflow = fetch("workflow", id=workflow_id)
         runtimes = [
             (r.runtime, r.creator)

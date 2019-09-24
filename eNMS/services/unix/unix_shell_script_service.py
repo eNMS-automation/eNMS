@@ -130,5 +130,5 @@ class UnixShellScriptForm(ServiceForm, StringValidationForm, NetmikoForm):
             ],
             "default": "hidden",
         },
-        "Validation Parameters"ingValidationForm.group,
+        "Validation Parameters": StringValidationForm.group,
     }

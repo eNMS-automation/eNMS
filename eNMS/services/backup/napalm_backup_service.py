@@ -9,8 +9,6 @@ from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class NapalmBackupService(Service):
@@ -36,7 +34,7 @@ class NapalmBackupService(Service):
         with open(path / "data.yml", "w") as file:
             yaml.dump(data, file, default_flow_style=False)
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         try:
             now = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"

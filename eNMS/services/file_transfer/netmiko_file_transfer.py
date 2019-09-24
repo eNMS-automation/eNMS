@@ -8,8 +8,6 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class NetmikoFileTransferService(Service):
@@ -34,7 +32,7 @@ class NetmikoFileTransferService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_file_transfer_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         source = run.sub(run.source_file, locals())
         destination = run.sub(run.destination_file, locals())

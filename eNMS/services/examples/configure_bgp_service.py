@@ -4,8 +4,6 @@ from wtforms import HiddenField, IntegerField, StringField
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class ConfigureBgpService(Service):
@@ -24,7 +22,7 @@ class ConfigureBgpService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "configure_bgp_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         napalm_connection = run.napalm_connection(device)
         config = f"""
             ip vrf {run.vrf_name}

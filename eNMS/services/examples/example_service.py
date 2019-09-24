@@ -37,7 +37,6 @@ from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
 
 
 class ExampleService(Service):
@@ -75,7 +74,7 @@ class ExampleService(Service):
     # Some services will take action or interrogate a device. The job method
     # can also take device as a parameter for these types of services.
     # def job(self, device, payload):
-    def job(self, run: "Run", payload):
+    def job(self, run, payload):
         run.log("info", f"Real-time logs displayed when the service is running.")
         # The "job" function is called when the service is executed.
         # The parameters of the service can be accessed with self (self.string1,

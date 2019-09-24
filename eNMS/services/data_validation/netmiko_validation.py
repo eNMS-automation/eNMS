@@ -6,8 +6,6 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm, ValidationForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class NetmikoValidationService(Service):
@@ -38,7 +36,7 @@ class NetmikoValidationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_validation_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         command = run.sub(run.command, locals())
         run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")

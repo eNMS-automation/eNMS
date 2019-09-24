@@ -5,8 +5,6 @@ from eNMS.database.dialect import Column, MutableDict
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class UpdateInventoryService(Service):
@@ -19,7 +17,7 @@ class UpdateInventoryService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "update_inventory_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         for property, value in run.update_dictionary.items():
             setattr(device, property, value)
         return {"success": True, "result": "properties updated"}

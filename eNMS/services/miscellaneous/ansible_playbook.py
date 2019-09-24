@@ -16,8 +16,6 @@ from eNMS.forms.fields import (
 )
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class AnsiblePlaybookService(Service):
@@ -51,7 +49,7 @@ class AnsiblePlaybookService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "ansible_playbook_service"}
 
-    def job(self, run: "Run", payload, device: Optional[Device] = None):
+    def job(self, run, payload, device=None):
         arguments = run.sub(run.arguments, locals()).split()
         command, extra_args = ["ansible-playbook"], {}
         if run.pass_device_properties:

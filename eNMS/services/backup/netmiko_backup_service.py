@@ -10,8 +10,6 @@ from eNMS.database.functions import factory
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class NetmikoBackupService(Service):
@@ -41,7 +39,7 @@ class NetmikoBackupService(Service):
         with open(path / "data.yml", "w") as file:
             yaml.dump(data, file, default_flow_style=False)
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         try:
             device.last_runtime = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"

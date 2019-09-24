@@ -7,8 +7,6 @@ from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class NetmikoConfigurationService(Service):
@@ -33,7 +31,7 @@ class NetmikoConfigurationService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_configuration_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         config = run.sub(run.content, locals())
         run.log("info", f"Pushing configuration on {device.name} (Netmiko)")

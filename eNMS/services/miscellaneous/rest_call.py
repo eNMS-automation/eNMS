@@ -28,8 +28,6 @@ from eNMS.forms.fields import (
 )
 from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 
 
 class RestCallService(Service):
@@ -65,7 +63,7 @@ class RestCallService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "rest_call_service"}
 
-    def job(self, run: "Run", payload, device: Optional[Device] = None):
+    def job(self, run, payload, device=None):
         rest_url = run.sub(run.rest_url, locals())
         run.log("info", f"Sending REST call to {rest_url}")
         kwargs = {

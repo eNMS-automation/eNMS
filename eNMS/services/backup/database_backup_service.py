@@ -11,8 +11,6 @@ from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service
-from eNMS.models.execution import Run
-from eNMS.models.inventory import Device
 from eNMS.properties.database import import_classes
 
 
@@ -30,7 +28,7 @@ class DatabaseBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "database_backup_service"}
 
-    def job(self, run: "Run", payload, device: Device):
+    def job(self, run, payload, device):
         now = app.strip_all(app.get_time())
         source = Path.cwd() / "projects" / "migrations" / f"backup_{now}.tgz"
         app.migrate_export(

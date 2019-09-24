@@ -3,7 +3,6 @@ coveralls
 coverage
 flake8
 flake8-print
-mypy
 pep8-naming
 pre-commit
 pytest

@@ -531,7 +531,6 @@ function createSearchHeaders(type, table) {
 // eslint-disable-next-line
 function initTable(type, instance, runtime) {
   // eslint-disable-next-line new-cap
-  console.log(type, instance);
   const table = $(`#${type}-table`).DataTable({
     serverSide: true,
     orderCellsTop: true,

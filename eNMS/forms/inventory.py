@@ -172,10 +172,3 @@ class GoogleEarthForm(BaseForm):
     name = StringField("Name")
     label_size = IntegerField("Label Size", default=1)
     line_width = IntegerField("Link Width", default=2)
-
-
-class CompareConfigurationsForm(BaseForm):
-    template = "configuration"
-    form_type = HiddenField(default="configuration")
-    display = SelectField("Version to display", choices=())
-    compare_with = SelectField("Compare Against", choices=())

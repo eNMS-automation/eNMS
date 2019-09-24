@@ -188,7 +188,7 @@ class AutomationController(BaseController):
 
     def skip_jobs(self, skip, job_ids):
         for job_id in job_ids.split("-"):
-            fetch("Job", id=job_id).skip = skip == "skip"
+            fetch("job", id=job_id).skip = skip == "skip"
 
     def get_workflow_state(self, workflow_id, runtime=None):
         workflow = fetch("workflow", id=workflow_id)

@@ -264,7 +264,7 @@ class BaseController:
         Session.commit()
 
     def create_google_earth_styles(self):
-        self.google_earth_styles[str, Style] = {}
+        self.google_earth_styles = {}
         for icon in device_icons:
             point_style = Style()
             point_style.labelstyle.color = Color.blue

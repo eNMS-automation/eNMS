@@ -70,7 +70,7 @@ def configure_authentication():
         return make_response(jsonify({"message": "Wrong credentials."}), 401)
 
 
-def create_app(config_mode):
+def create_app(config_mode=None):
     flask_app = Flask(  # type: ignore
         __name__, static_folder=app.path / "eNMS" / "static"
     )

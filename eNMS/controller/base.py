@@ -298,7 +298,7 @@ class BaseController:
         factory(
             "server",
             **{
-                "name"(getnode()),
+                "name": str(getnode()),
                 "description": "Localhost",
                 "ip_address": "0.0.0.0",
                 "status": "Up",
@@ -462,7 +462,7 @@ class BaseController:
     def get_properties(self, cls, id):
         return fetch(cls, id=id).get_properties()
 
-    def get_all(self, cls)[dict]:
+    def get_all(self, cls):
         return [instance.get_properties() for instance in fetch_all(cls)]
 
     def update(self, cls, **kwargs):
@@ -553,7 +553,7 @@ class BaseController:
         )
         return {
             "items": [
-                {"text": r.name, "id"(r.id)}
+                {"text": r.name, "id": str(r.id)}
                 for r in results.limit(10).offset((int(params["page"]) - 1) * 10).all()
             ],
             "total_count": results.count(),
@@ -581,7 +581,7 @@ class BaseController:
                 )
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         return {
-            "draw"(kwargs["draw"]),
+            "draw": int(kwargs["draw"]),
             "recordsTotal": Session.query(func.count(model.id)).scalar(),
             "recordsFiltered": get_query_count(result),
             "data": [

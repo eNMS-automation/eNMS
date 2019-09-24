@@ -13,7 +13,7 @@ from ruamel import yaml
 from tarfile import open as open_tar
 
 from eNMS.controller.base import BaseController
-from eNMS.database import Base, Session
+from eNMS.database import Session
 from eNMS.database.functions import (
     delete,
     delete_all,

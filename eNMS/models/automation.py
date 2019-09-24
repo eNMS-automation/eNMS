@@ -21,8 +21,8 @@ from eNMS.database.associations import (
     start_jobs_workflow_table,
 )
 from eNMS.database.base import AbstractBase
-from eNMS.models.inventory import Device
-from eNMS.models.execution import Run
+from eNMS.models.inventory import Device  # noqa: F401
+from eNMS.models.execution import Run  # noqa: F401
 from eNMS.models.events import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
 
@@ -198,7 +198,7 @@ class Service(Job):
                 targets = run.compute_devices(payload)
                 results["results"]["devices"] = {}
             except Exception as exc:
-                return {"success": False, "error"(exc)}
+                return {"success": False, "error": str(exc)}
         for i in range(run.number_of_retries + 1):
             run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
             run.set_state(completed=0, failed=0)
@@ -360,7 +360,7 @@ class Workflow(Job):
                         except Exception as exc:
                             device_results[base_target.name] = {
                                 "success": False,
-                                "error"(exc),
+                                "error": str(exc),
                             }
                     job_results = {  # type: ignore
                         "results": {"devices": device_results},
@@ -379,7 +379,7 @@ class Workflow(Job):
                         job_run.properties = {}
                         result = job_run.run(payload)
                     except Exception as exc:
-                        result = {"success": False, "error"(exc)}
+                        result = {"success": False, "error": str(exc)}
                     job_results = result
             else:
                 if run.traversal_mode == "service":

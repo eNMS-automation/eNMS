@@ -5,7 +5,6 @@ from flask import (
     redirect,
     render_template,
     request,
-    send_file,
     session,
     url_for,
 )
@@ -13,7 +12,6 @@ from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from logging import info
 from os import listdir
-from typing import Any, Callable
 from werkzeug.wrappers import Response
 
 from eNMS import app
@@ -24,11 +22,7 @@ from eNMS.forms.administration import LoginForm
 from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
-from eNMS.properties.table import (
-    filtering_properties,
-    table_fixed_columns,
-    table_properties,
-)
+from eNMS.properties.table import table_fixed_columns
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -105,7 +99,7 @@ def administration():
         f"pages/administration.html",
         **{
             "endpoint": "administration",
-            "folders"dir(app.path / "projects" / "migrations"),
+            "folders": listdir(app.path / "projects" / "migrations"),
         },
     )
 

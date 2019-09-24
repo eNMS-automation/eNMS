@@ -1,5 +1,4 @@
 from click import argument, echo, option
-from flask import Flask
 from json import loads
 
 from eNMS import app

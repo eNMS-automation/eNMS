@@ -1,8 +1,5 @@
 from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
-from sqlalchemy.engine.base import Connection
-from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from sqlalchemy.orm.collections import InstrumentedList
-from sqlalchemy.orm.mapper import Mapper
 from sqlalchemy.types import JSON
 
 from eNMS.database import Base

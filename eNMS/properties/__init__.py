@@ -10,7 +10,7 @@ def dict_conversion(input):
 
 
 field_conversion = {
-    "dict"_conversion,
+    "dict": dict_conversion,
     "float": float,
     "integer",
     "json": loads,

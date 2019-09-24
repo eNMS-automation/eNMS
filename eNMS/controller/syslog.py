@@ -25,7 +25,7 @@ class SyslogUDPHandler(BaseRequestHandler):
         device = fetch("device", allow_none=True, ip_address=address)
         properties = {
             "source": device.name if device else address,
-            "content"(bytes.decode(self.request[0].strip())),
+            "content": str(bytes.decode(self.request[0].strip())),
         }
         for event in fetch_all("event"):
             event.match_log(**properties)

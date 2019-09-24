@@ -93,7 +93,7 @@ task_table_properties = [
     "time_before_next_run",
 ]
 
-table_properties[str, List] = {
+table_properties = {
     "changelog": changelog_table_properties,
     "configuration": configuration_table_properties,
     "device": device_table_properties,

@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, make_response, render_template
-from flask.wrappers import Request, Response
 from itertools import chain
 
 from eNMS import app
@@ -11,7 +10,6 @@ from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
 from eNMS.models import property_types, relationships
-from eNMS.models.administration import User
 from eNMS.properties import property_names
 from eNMS.properties.table import filtering_properties, table_properties
 
@@ -42,7 +40,7 @@ def configure_context_processor(flask_app):
             "filtering_properties": filtering_properties,
             "names": property_names,
             "parameters": app.config,
-            "relations"(set(chain.from_iterable(relationships.values()))),
+            "relations": list(set(chain.from_iterable(relationships.values()))),
             "relationships": relationships,
             "version": app.version,
         }

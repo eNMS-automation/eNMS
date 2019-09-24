@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, request
+from flask import request
 from flask_restful import abort, Api, Resource
 from logging import info
 from psutil import cpu_percent
@@ -15,7 +15,7 @@ def create_app_resources():
     endpoints = {}
     for endpoint in app.valid_rest_endpoints:
 
-        def post(_, ep = endpoint):
+        def post(_, ep=endpoint):
             getattr(app, ep)()
             Session.commit()
             return f"Endpoint {ep} successfully executed."

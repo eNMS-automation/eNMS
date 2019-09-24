@@ -19,7 +19,7 @@ def filtering_form_generator():
             (BaseForm,),
             {
                 "template": "filtering",
-                "properties"(relations) + properties,
+                "properties": list(relations) + properties,
                 "form_type": HiddenField(default=f"{table}_filtering"),
                 "operator": SelectField(
                     "Match Condition",
@@ -29,7 +29,7 @@ def filtering_form_generator():
                     ),
                 ),
                 **{
-                    **{propertyingField() for property in properties},
+                    **{property: StringField() for property in properties},
                     **{
                         f"{property}_filter": SelectField(
                             choices=(

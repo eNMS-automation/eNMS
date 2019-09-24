@@ -5,16 +5,14 @@ from json import loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
-from napalm.base.base import NetworkDriver
 from netmiko import ConnectHandler
-from paramiko import SFTPClient, SSHClient
+from paramiko import SFTPClient
 from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
 from traceback import format_exc
-from typing import Any, Dict, List, Match, Optional, Set, Tuple, Union
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
 
@@ -23,9 +21,6 @@ from eNMS.database import Session
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.base import AbstractBase
-from eNMS.models.inventory import Device
-from eNMS.models.events import Task  # noqa: F401
-from eNMS.models.administration import User  # noqa: F401
 
 
 class Result(AbstractBase):
@@ -351,7 +346,7 @@ class Run(AbstractBase):
         self.log(
             "info", f"Running {self.job.type}{f' on {device.name}' if device else ''}"
         )
-        results[Any, Any] = {"runtime": app.get_time()}
+        results = {"runtime": app.get_time()}
         try:
             args = (device,) if device else ()
             if self.job.iteration_values:
@@ -456,7 +451,7 @@ class Run(AbstractBase):
                 "success": False,
                 "text_response": result,
                 "error": f"Conversion to {self.conversion_method} failed",
-                "exception"(e),
+                "exception": str(e),
             }
         return result
 
@@ -587,10 +582,10 @@ class Run(AbstractBase):
     def sub(self, input, variables):
         r = compile("{{(.*?)}}")
 
-        def replace(match: Match):
+        def replace(match):
             return str(self.eval(match.group()[2:-2], **variables))
 
-        def rec(input) -> Any:
+        def rec(input):
             if isinstance(input, str):
                 return r.sub(replace, input)
             elif isinstance(input, list):

@@ -4,7 +4,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 
 from eNMS import app
-from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
+from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.database.functions import fetch, fetch_all, get_relationship_count
 from eNMS.database.associations import (
     pool_device_table,
@@ -47,7 +47,7 @@ CustomDevice = type(
                 {
                     "boolean": Boolean,
                     "float": Float,
-                    "integer"eger,
+                    "integer": Integer,
                     "string": LargeString,
                 }[values["type"]],
                 default=values["default"],

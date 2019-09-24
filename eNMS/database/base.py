@@ -20,7 +20,7 @@ class AbstractBase(Base):
     def __lt__(self, other: Base) -> bool:
         return True
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return self.name
 
     def __getattribute__(self, property) -> Any:
@@ -46,7 +46,7 @@ class AbstractBase(Base):
             super().__setattr__(property, value)
 
     @property
-    def row_properties(self) -> dict:
+    def row_properties(self):
         return {p: getattr(self, p) for p in ("id", "name", "type")}
 
     def update(self, **kwargs):
@@ -69,7 +69,7 @@ class AbstractBase(Base):
         export: bool = False,
         exclude: Optional[list] = None,
         include: Optional[list] = None,
-    ) -> dict:
+    ):
         result = {}
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
         for property in model_properties[self.type]:
@@ -96,7 +96,7 @@ class AbstractBase(Base):
         relation_names_only: bool = False,
         exclude: Optional[list] = None,
         include: Optional[list] = None,
-    ) -> dict:
+    ):
         properties = self.get_properties(export, exclude=exclude)
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
         for property, relation in relationships[self.type].items():
@@ -123,7 +123,7 @@ class AbstractBase(Base):
         return properties
 
     @classmethod
-    def visible(cls) -> List:
+    def visible(cls):
         if cls.__tablename__ == "pool" and user.pools:
             return user.pools
         elif cls.__tablename__ in ("device", "link") and user.pools:
@@ -135,5 +135,5 @@ class AbstractBase(Base):
             return Session.query(cls).all()
 
     @property
-    def serialized(self) -> dict:
+    def serialized(self):
         return self.to_dict()

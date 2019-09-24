@@ -3,7 +3,7 @@ from json import loads
 from typing import Callable, Dict, List
 
 
-def dict_conversion(input) -> dict:
+def dict_conversion(input):
     try:
         return literal_eval(input)
     except Exception:

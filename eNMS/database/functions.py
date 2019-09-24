@@ -28,17 +28,17 @@ def count(model, **kwargs) -> Tuple[Any]:
     return Session.query(func.count(models[model].id)).filter_by(**kwargs).scalar()
 
 
-def get_query_count(query) -> int:
+def get_query_count(query):
     count_query = query.statement.with_only_columns([func.count()]).order_by(None)
     return query.session.execute(count_query).scalar()
 
 
-def get_relationship_count(obj, relation) -> int:
+def get_relationship_count(obj, relation):
     related_model = models[relationships[obj.type][relation]["model"]]
     return Session.query(func.count(related_model.id)).with_parent(obj).scalar()
 
 
-def objectify(model, object_list[int]) -> List[Any]:
+def objectify(model, object_list[int])[Any]:
     return [fetch(model, id=object_id) for object_id in object_list]
 
 
@@ -69,7 +69,7 @@ def delete_all(*models):
             delete(model, id=instance.id)
 
 
-def export(model) -> List[dict]:
+def export(model)[dict]:
     return [instance.to_dict(export=True) for instance in models[model].visible()]
 
 
@@ -92,7 +92,7 @@ def factory(cls_name, **kwargs) -> Any:
     return instance
 
 
-def handle_exception(exc) -> str:
+def handle_exception(exc):
     match = search("UNIQUE constraint failed: (\w+).(\w+)", exc)
     if match:
         return f"There already is a {match.group(1)} with the same {match.group(2)}."

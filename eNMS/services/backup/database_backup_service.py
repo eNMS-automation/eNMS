@@ -30,7 +30,7 @@ class DatabaseBackupService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "database_backup_service"}
 
-    def job(self, run: "Run", payload, device: Device) -> dict:
+    def job(self, run: "Run", payload, device: Device):
         now = app.strip_all(app.get_time())
         source = Path.cwd() / "projects" / "migrations" / f"backup_{now}.tgz"
         app.migrate_export(

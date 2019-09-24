@@ -32,7 +32,7 @@ class JsonField(StringField):
 
 
 class JsonSubstitutionField(JsonField):
-    def __call__(self, *args, **kwargs) -> str:
+    def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
@@ -60,7 +60,7 @@ class DictField(StringField):
 
 
 class DictSubstitutionField(DictField):
-    def __call__(self, *args, **kwargs) -> str:
+    def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
@@ -84,13 +84,13 @@ class MultipleInstanceField(SelectMultipleField):
 
 
 class SubstitutionField(StringField):
-    def __call__(self, *args, **kwargs) -> str:
+    def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 
 
 class PasswordSubstitutionField(PasswordField):
-    def __call__(self, *args, **kwargs) -> str:
+    def __call__(self, *args, **kwargs):
         kwargs["style"] = "background-color: #e8f0f7"
         return super().__call__(*args, **kwargs)
 

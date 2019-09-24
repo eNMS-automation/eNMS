@@ -20,12 +20,12 @@ from eNMS.properties.table import table_properties
 
 
 class InventoryController(BaseController):
-    def get_gotty_port(self) -> int:
+    def get_gotty_port(self):
         self.gotty_port += 1
         range = self.gotty_end_port - self.gotty_start_port
         return self.gotty_start_port + self.gotty_port % range
 
-    def connection(self, device_id, **kwargs) -> dict:
+    def connection(self, device_id, **kwargs):
         device = fetch("device", id=device_id)
         cmd = [str(self.path / "applications" / "gotty"), "-w"]
         port, protocol = self.get_gotty_port(), kwargs["protocol"]
@@ -67,7 +67,7 @@ class InventoryController(BaseController):
         ]
         return "\n".join(device_logs)
 
-    def get_device_configuration(self, device_id) -> str:
+    def get_device_configuration(self, device_id):
         return fetch("device", id=device_id).current_configuration
 
     def counters(self, property, type) -> Counter:
@@ -178,7 +178,7 @@ class InventoryController(BaseController):
                     devices[device]["ip_address"] = interface["ipAddress"]
                     factory("device", **devices[device])
 
-    def topology_import(self, file: BinaryIO) -> str:
+    def topology_import(self, file: BinaryIO):
         book = open_workbook(file_contents=file.read())
         result = "Topology successfully imported."
         for obj_type in ("Device", "Link"):
@@ -202,7 +202,7 @@ class InventoryController(BaseController):
             pool.compute_pool()
         return result
 
-    def import_topology(self, **kwargs) -> str:
+    def import_topology(self, **kwargs):
         file = kwargs["file"]
         if kwargs["replace"]:
             delete_all("device")
@@ -212,7 +212,7 @@ class InventoryController(BaseController):
         info("Inventory import: Done.")
         return result
 
-    def save_pool_objects(self, pool_id, **kwargs) -> dict:
+    def save_pool_objects(self, pool_id, **kwargs):
         pool = fetch("pool", id=pool_id)
         for obj_type in ("device", "link"):
             string_value = kwargs[f"string_{obj_type}s"]
@@ -237,13 +237,13 @@ class InventoryController(BaseController):
         for pool in fetch_all("pool"):
             pool.compute_pool()
 
-    def get_view_topology(self) -> dict:
+    def get_view_topology(self):
         return {
             "devices": [d.view_properties for d in fetch_all("device")],
             "links": [d.view_properties for d in fetch_all("link")],
         }
 
-    def view_filtering(self, obj_type, kwargs) -> List[dict]:
+    def view_filtering(self, obj_type, kwargs)[dict]:
         constraints = self.build_filtering_constraints(obj_type, kwargs)
         result = Session.query(models[obj_type]).filter(and_(*constraints))
         return [d.view_properties for d in result.all()]

@@ -315,7 +315,7 @@ class BaseController:
             self.topology_import(file)  # type: ignore
 
     @property
-    def config(self) -> dict:
+    def config(self):
         parameters = Session.query(models["parameters"]).one_or_none()
         return parameters.get_properties() if parameters else {}
 
@@ -346,7 +346,7 @@ class BaseController:
                 except Exception as e:
                     info(f"Cannot clone {repository_type} git repository ({str(e)})")
 
-    def load_custom_config(self) -> dict:
+    def load_custom_config(self):
         filepath = environ.get("PATH_CUSTOM_CONFIG")
         if not filepath:
             return {}
@@ -354,7 +354,7 @@ class BaseController:
             with open(filepath, "r") as config:
                 return load(config)
 
-    def load_custom_properties(self) -> dict:
+    def load_custom_properties(self):
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")
         if not filepath:
             custom_properties = {}
@@ -454,19 +454,19 @@ class BaseController:
         Session.query(models["parameters"]).one().update(**kwargs)
         self.__dict__.update(**kwargs)
 
-    def delete_instance(self, cls, instance_id) -> dict:
+    def delete_instance(self, cls, instance_id):
         return delete(cls, id=instance_id)
 
-    def get(self, cls, id) -> dict:
+    def get(self, cls, id):
         return fetch(cls, id=id).serialized
 
-    def get_properties(self, cls, id) -> dict:
+    def get_properties(self, cls, id):
         return fetch(cls, id=id).get_properties()
 
-    def get_all(self, cls) -> List[dict]:
+    def get_all(self, cls)[dict]:
         return [instance.get_properties() for instance in fetch_all(cls)]
 
-    def update(self, cls, **kwargs) -> dict:
+    def update(self, cls, **kwargs):
         try:
             must_be_new = kwargs.get("id") == ""
             kwargs["last_modified"] = self.get_time()
@@ -491,7 +491,7 @@ class BaseController:
         )
         self.log_severity[severity](content)
 
-    def count_models(self) -> dict:
+    def count_models(self):
         return {
             "counters": {cls: count(cls) for cls in diagram_classes},
             "properties": {
@@ -503,7 +503,7 @@ class BaseController:
             },
         }
 
-    def compare(self, type, result1, result2) -> dict:
+    def compare(self, type, result1, result2):
         first = self.str_dict(getattr(fetch(type, id=result1), type)).splitlines()
         second = self.str_dict(getattr(fetch(type, id=result2), type)).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
@@ -560,7 +560,7 @@ class BaseController:
             "total_count": results.count(),
         }
 
-    def table_filtering(self, table, kwargs: ImmutableMultiDict) -> dict:
+    def table_filtering(self, table, kwargs: ImmutableMultiDict):
         model, properties = models[table], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
         try:
@@ -599,7 +599,7 @@ class BaseController:
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
 
-    def get_time(self) -> str:
+    def get_time(self):
         return str(datetime.now())
 
     def send_email(
@@ -632,7 +632,7 @@ class BaseController:
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 
-    def str_dict(self, input, depth = 0) -> str:
+    def str_dict(self, input, depth = 0):
         tab = "\t" * depth
         if isinstance(input, list):
             result = "\n"
@@ -647,7 +647,7 @@ class BaseController:
         else:
             return str(input)
 
-    def strip_all(self, input) -> str:
+    def strip_all(self, input):
         return input.translate(str.maketrans("", "", f"{punctuation} "))
 
     def update_database_configurations_from_git(self):

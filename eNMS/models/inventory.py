@@ -95,7 +95,7 @@ class Device(CustomDevice):
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
     @property
-    def view_properties(self) -> Dict[str, Any]:
+    def view_properties(self)[str, Any]:
         return {
             property: getattr(self, property)
             for property in ("id", "name", "icon", "latitude", "longitude")
@@ -114,7 +114,7 @@ class Device(CustomDevice):
             if self in pool.devices and not match:
                 pool.devices.remove(self)
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return [
             f"""<div class="btn-group" style="width: 130px;">
             <button type="button" class="btn btn-info btn-sm"
@@ -149,7 +149,7 @@ class Device(CustomDevice):
             Delete</button>""",
         ]
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return f"{self.name} ({self.model})" if self.model else self.name
 
 
@@ -181,7 +181,7 @@ class Link(Object):
         self.update(**kwargs)
 
     @property
-    def view_properties(self) -> Dict[str, Any]:
+    def view_properties(self)[str, Any]:
         node_properties = ("id", "longitude", "latitude")
         return {
             **{
@@ -218,7 +218,7 @@ class Link(Object):
             elif self in pool.links:
                 pool.links.remove(self)
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return [
             f"""<div class="btn-group" style="width: 80px;">
                 <button type="button" class="btn btn-primary btn-sm"
@@ -290,7 +290,7 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showPoolView('{self.id}')">
@@ -315,7 +315,7 @@ class Pool(AbstractPool):
         ]
 
     @property
-    def object_number(self) -> str:
+    def object_number(self):
         return (
             f"{get_relationship_count(self, 'devices')} devices"
             f" - {get_relationship_count(self, 'links')} links"
@@ -365,7 +365,7 @@ class Configuration(AbstractBase):
     )
     device_name = association_proxy("device", "name")
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showConfiguration('{self.id}', '{self.device_name}')">

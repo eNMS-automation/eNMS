@@ -64,7 +64,7 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
         return valid_form and not empty_name
 
 
-def form_postprocessing(form: ImmutableMultiDict) -> dict:
+def form_postprocessing(form: ImmutableMultiDict):
     data = {**form.to_dict(), **{"user": current_user}}
     if request.files:
         data["file"] = request.files["file"]

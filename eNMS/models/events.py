@@ -53,7 +53,7 @@ class Task(AbstractBase):
         if self.is_active:
             self.schedule()
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         status = "Pause" if self.is_active else "Resume"
         return [
             f"""<button id="pause-resume-{self.id}" type="button"
@@ -75,11 +75,11 @@ class Task(AbstractBase):
         ]
 
     @hybrid_property
-    def status(self) -> str:
+    def status(self):
         return "Active" if self.is_active else "Inactive"
 
     @status.expression  # type: ignore
-    def status(cls) -> str:  # noqa: N805
+    def status(cls):  # noqa: N805
         return case([(cls.is_active, "Active")], else_="Inactive")
 
     @property
@@ -100,7 +100,7 @@ class Task(AbstractBase):
             return f"{days}{hours}h:{minutes}m:{seconds}s"
         return None
 
-    def aps_conversion(self, date) -> str:
+    def aps_conversion(self, date):
         dt: datetime = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
         return datetime.strftime(dt, "%Y-%m-%d %H:%M:%S")
 
@@ -124,7 +124,7 @@ class Task(AbstractBase):
             app.scheduler.remove_job(self.aps_job_id)
         Session.commit()
 
-    def run_properties(self) -> dict:
+    def run_properties(self):
         properties = {"payload": self.initial_payload, "task": self.id}
         if self.devices:
             properties["devices"] = [  # type: ignore
@@ -197,7 +197,7 @@ class Baselog(AbstractBase):
         kwargs["time"] = str(datetime.now())
         super().update(**kwargs)
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return []
 
 
@@ -231,7 +231,7 @@ class Event(AbstractBase):
     log_content_regex = Column(Boolean, default=False)
     jobs = relationship("Job", secondary=job_event_table, back_populates="events")
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showTypePanel('event', '{self.id}')">

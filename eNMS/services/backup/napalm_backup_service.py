@@ -36,7 +36,7 @@ class NapalmBackupService(Service):
         with open(path / "data.yml", "w") as file:
             yaml.dump(data, file, default_flow_style=False)
 
-    def job(self, run: "Run", payload, device: Device) -> dict:
+    def job(self, run: "Run", payload, device: Device):
         try:
             now = datetime.now()
             path_configurations = Path.cwd() / "git" / "configurations"

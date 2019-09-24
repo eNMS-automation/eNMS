@@ -73,7 +73,7 @@ class AdministrationController(BaseController):
     def database_deletion(self, **kwargs):
         delete_all(*kwargs["deletion_types"])
 
-    def get_cluster_status(self) -> dict:
+    def get_cluster_status(self):
         return {
             attr: [getattr(server, attr) for server in fetch_all("server")]
             for attr in ("status", "cpu_load")
@@ -87,7 +87,7 @@ class AdministrationController(BaseController):
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
                 yaml.dump(export(cls_name), migration_file)
 
-    def objectify(self, model, obj) -> dict:
+    def objectify(self, model, obj):
         for property, relation in relationships[model].items():
             if property not in obj:
                 continue
@@ -99,7 +99,7 @@ class AdministrationController(BaseController):
                 obj[property] = fetch(relation["model"], name=obj[property]).id
         return obj
 
-    def migration_import(self, **kwargs) -> str:
+    def migration_import(self, **kwargs):
         status, types = "Import successful.", kwargs["import_export_types"]
         if kwargs.get("empty_database_before_import", False):
             for type in types:
@@ -206,7 +206,7 @@ class AdministrationController(BaseController):
                     job_as_dict.pop(relation)
                 yaml.dump(job_as_dict, file)
 
-    def get_exported_jobs(self) -> list:
+    def get_exported_jobs(self):
         jobs_path = self.path / "projects" / "exported_jobs"
         return listdir(jobs_path / "services") + listdir(jobs_path / "workflows")
 

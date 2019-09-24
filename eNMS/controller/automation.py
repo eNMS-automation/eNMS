@@ -37,7 +37,7 @@ class AutomationController(BaseController):
 
     def add_edge(
         self, workflow_id, subtype, source, destination
-    ) -> dict:
+    ):
         workflow_edge = factory(
             "workflow_edge",
             **{
@@ -53,7 +53,7 @@ class AutomationController(BaseController):
         fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(self, workflow_id, job_ids) -> Dict[str, Any]:
+    def add_jobs_to_workflow(self, workflow_id, job_ids)[str, Any]:
         workflow = fetch("workflow", id=workflow_id)
         jobs = objectify("job", [int(job_id) for job_id in job_ids.split("-")])
         for job in jobs:
@@ -66,33 +66,33 @@ class AutomationController(BaseController):
         for result in fetch("run", all_matches=True, allow_none=True, job_id=job_id):
             Session.delete(result)
 
-    def create_label(self, workflow_id, x, y, **kwargs) -> dict:
+    def create_label(self, workflow_id, x, y, **kwargs):
         workflow, label_id = fetch("workflow", id=workflow_id), str(uuid4())
         label = {"positions": [x, y], "content": kwargs["content"]}
         workflow.labels[label_id] = label
         return {"id": label_id, **label}
 
-    def delete_edge(self, workflow_id, edge_id) -> str:
+    def delete_edge(self, workflow_id, edge_id):
         delete("workflow_edge", id=edge_id)
         now = self.get_time()
         fetch("workflow", id=workflow_id).last_modified = now
         return now
 
-    def delete_node(self, workflow_id, job_id) -> dict:
+    def delete_node(self, workflow_id, job_id):
         workflow, job = fetch("workflow", id=workflow_id), fetch("job", id=job_id)
         workflow.jobs.remove(job)
         now = self.get_time()
         workflow.last_modified = now
         return {"job": job.serialized, "update_time": now}
 
-    def delete_label(self, workflow_id, label) -> str:
+    def delete_label(self, workflow_id, label):
         workflow = fetch("workflow", id=workflow_id)
         workflow.labels.pop(label)
         now = self.get_time()
         workflow.last_modified = now
         return now
 
-    def duplicate_workflow(self, workflow_id, **kwargs) -> dict:
+    def duplicate_workflow(self, workflow_id, **kwargs):
         parent_workflow = fetch("workflow", id=workflow_id)
         new_workflow = factory("workflow", **kwargs)
         Session.commit()
@@ -119,14 +119,14 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, **kwargs) -> dict:
+    def get_job_logs(self, **kwargs):
         run = fetch("run", allow_none=True, runtime=kwargs["runtime"])
         result = run.result() if run else None
         logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])
         filtered_logs = (log for log in logs if kwargs["filter"] in log)
         return {"logs": "\n".join(filtered_logs), "refresh": not bool(result)}
 
-    def get_runtimes(self, type, id) -> list:
+    def get_runtimes(self, type, id):
         if type == "device":
             results = fetch("result", allow_none=True, all_matches=True, device_id=id)
             runs = [result.run for result in results]
@@ -138,7 +138,7 @@ class AutomationController(BaseController):
         return fetch("result", id=id).result
 
     @staticmethod
-    def run(job, **kwargs) -> dict:
+    def run(job, **kwargs):
         run_kwargs = {
             key: kwargs.pop(key)
             for key in ("creator", "runtime", "task")
@@ -153,7 +153,7 @@ class AutomationController(BaseController):
         run.properties = kwargs
         return run.run(kwargs.get("payload"))
 
-    def run_job(self, id: Optional[int] = None, **kwargs) -> dict:
+    def run_job(self, id: Optional[int] = None, **kwargs):
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "admin")
@@ -172,7 +172,7 @@ class AutomationController(BaseController):
             job.run(runtime=runtime)
         return {**job.serialized, "runtime": runtime}
 
-    def save_positions(self, workflow_id) -> str:
+    def save_positions(self, workflow_id):
         now = self.get_time()
         workflow = fetch("workflow", allow_none=True, id=workflow_id)
         session["workflow"] = workflow.id
@@ -198,7 +198,7 @@ class AutomationController(BaseController):
 
     def get_workflow_state(
         self, workflow_id, runtime: Optional[str] = None
-    ) -> dict:
+    ):
         workflow = fetch("workflow", id=workflow_id)
         runtimes = [
             (r.runtime, r.creator)
@@ -220,7 +220,7 @@ class AutomationController(BaseController):
             "runtime": runtime,
         }
 
-    def convert_date(self, date) -> list:
+    def convert_date(self, date):
         python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
         month = "{:02}".format((int(python_month) - 1) % 12)
         return [
@@ -230,7 +230,7 @@ class AutomationController(BaseController):
             ).split(",")
         ]
 
-    def calendar_init(self, type) -> dict:
+    def calendar_init(self, type):
         results = {}
         for instance in fetch_all(type):
             if getattr(instance, "workflow", None):
@@ -252,7 +252,7 @@ class AutomationController(BaseController):
         except JobLookupError:
             return {"error": "This task no longer exists."}
 
-    def scan_playbook_folder(self) -> list:
+    def scan_playbook_folder(self):
         path = Path(self.playbook_path or self.path / "playbooks")
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))

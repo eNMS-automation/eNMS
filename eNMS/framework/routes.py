@@ -100,7 +100,7 @@ def logout() -> Response:
 
 @blueprint.route("/administration")
 @monitor_requests
-def administration() -> str:
+def administration():
     return render_template(
         f"pages/administration.html",
         **{
@@ -112,7 +112,7 @@ def administration() -> str:
 
 @blueprint.route("/dashboard")
 @monitor_requests
-def dashboard() -> str:
+def dashboard():
     return render_template(
         f"pages/dashboard.html",
         **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
@@ -121,7 +121,7 @@ def dashboard() -> str:
 
 @blueprint.route("/table/<table_type>")
 @monitor_requests
-def table(table_type) -> str:
+def table(table_type):
     kwargs = {
         "endpoint": f"table/{table_type}",
         "fixed_columns": table_fixed_columns[table_type],
@@ -140,7 +140,7 @@ def table(table_type) -> str:
 
 @blueprint.route("/view/<view_type>")
 @monitor_requests
-def view(view_type) -> str:
+def view(view_type):
     return render_template(
         f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
     )
@@ -148,7 +148,7 @@ def view(view_type) -> str:
 
 @blueprint.route("/workflow_builder")
 @monitor_requests
-def workflow_builder() -> str:
+def workflow_builder():
     workflow = fetch("workflow", allow_none=True, id=session.get("workflow", None))
     service_table_form = ServiceTableForm(request.form)
     service_table_form.services.choices = sorted(
@@ -168,7 +168,7 @@ def workflow_builder() -> str:
 
 @blueprint.route("/calendar/<calendar_type>")
 @monitor_requests
-def calendar(calendar_type) -> str:
+def calendar(calendar_type):
     return render_template(
         f"pages/calendar.html",
         **{"calendar_type": calendar_type, "endpoint": "calendar"},
@@ -177,7 +177,7 @@ def calendar(calendar_type) -> str:
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
-def form(form_type) -> str:
+def form(form_type):
     kwargs = (
         {"fixed_columns": table_fixed_columns[form_type], "type": form_type}
         if form_type == "result"
@@ -197,7 +197,7 @@ def form(form_type) -> str:
 
 @blueprint.route("/view_job_results/<int:id>")
 @monitor_requests
-def view_job_results(id) -> str:
+def view_job_results(id):
     result = fetch("run", id=id).result().result
     return f"<pre>{app.str_dict(result)}</pre>"
 

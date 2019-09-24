@@ -76,10 +76,10 @@ class Job(AbstractBase):
     maximum_runs = Column(Integer, default=1)
 
     @property
-    def filename(self) -> str:
+    def filename(self):
         return app.strip_all(self.name)
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         number_of_runs = app.job_db[self.id]["runs"]
         return [
             f"Running ({number_of_runs})" if number_of_runs else "Idle",
@@ -165,7 +165,7 @@ class Service(Job):
 
     def device_run(
         self, run: Run, payload, targets: Optional[Set["Device"]] = None
-    ) -> dict:
+    ):
         if not targets:
             return run.get_results(payload)
         else:
@@ -191,7 +191,7 @@ class Service(Job):
             results = {"devices": device_results}
             return results
 
-    def build_results(self, run: Run, payload, *other) -> dict:
+    def build_results(self, run: Run, payload, *other):
         results = {"results": {}, "success": False, "runtime": run.runtime}
         targets: Set = set()
         if run.has_targets:
@@ -308,7 +308,7 @@ class Workflow(Job):
 
     def workflow_run(
         self, run: Run, payload, device: Optional[Device] = None
-    ) -> dict:
+    ):
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )
@@ -432,7 +432,7 @@ class Workflow(Job):
             results["success"] = initial_targets == end_devices
         return results
 
-    def build_results(self, run: Run, payload) -> dict:
+    def build_results(self, run: Run, payload):
         if run.traversal_mode == "service":
             return self.workflow_run(run, payload)
         else:
@@ -461,7 +461,7 @@ class Workflow(Job):
             }
 
     @property
-    def job_number(self) -> int:
+    def job_number(self):
         return sum(
             (1 + job.job_number) if job.type == "workflow" else 1 for job in self.jobs
         )

@@ -29,7 +29,7 @@ class NapalmPingService(Service):
 
     __mapper_args__ = {"polymorphic_identity": "napalm_ping_service"}
 
-    def job(self, run: "Run", payload, device: Device) -> dict:
+    def job(self, run: "Run", payload, device: Device):
         napalm_connection = run.napalm_connection(device)
         destination = run.sub(run.destination_ip, locals())
         source = run.sub(run.source_ip, locals())

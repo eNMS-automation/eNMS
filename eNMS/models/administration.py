@@ -19,7 +19,7 @@ class Server(AbstractBase):
     status = Column(SmallString, default="down")
     cpu_load = Column(Float)
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return [
             f"""<div class="btn-group" style="width: 80px;">
             <button type="button" class="btn btn-primary btn-sm"
@@ -86,7 +86,7 @@ class User(AbstractBase, UserMixin):
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(SmallString)
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return [
             f"""<div class="btn-group">
             <button type="button" class="btn btn-primary btn-sm"

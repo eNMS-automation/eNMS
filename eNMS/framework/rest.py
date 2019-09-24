@@ -12,11 +12,11 @@ from eNMS.database.functions import delete, factory, fetch
 from eNMS.framework.extensions import auth, csrf
 
 
-def create_app_resources() -> Dict[str, Resource]:
+def create_app_resources()[str, Resource]:
     endpoints = {}
     for endpoint in app.valid_rest_endpoints:
 
-        def post(_, ep = endpoint) -> str:
+        def post(_, ep = endpoint):
             getattr(app, ep)()
             Session.commit()
             return f"Endpoint {ep} successfully executed."
@@ -30,7 +30,7 @@ def create_app_resources() -> Dict[str, Resource]:
 class CreatePool(Resource):
     decorators = [auth.login_required]
 
-    def post(self) -> dict:
+    def post(self):
         data = request.get_json(force=True)
         factory(
             "pool",
@@ -50,7 +50,7 @@ class CreatePool(Resource):
 
 
 class Heartbeat(Resource):
-    def get(self) -> dict:
+    def get(self):
         return {
             "name": getnode(),
             "cluster_id": app.cluster_id,
@@ -72,7 +72,7 @@ class Query(Resource):
 class GetInstance(Resource):
     decorators = [auth.login_required]
 
-    def get(self, cls, name) -> dict:
+    def get(self, cls, name):
         try:
             return fetch(cls, name=name).to_dict(
                 relation_names_only=True, exclude=["positions"]
@@ -80,7 +80,7 @@ class GetInstance(Resource):
         except Exception:
             return abort(404, message=f"{cls} {name} not found.")
 
-    def delete(self, cls, name) -> dict:
+    def delete(self, cls, name):
         result = delete(cls, name=name)
         Session.commit()
         return result
@@ -89,14 +89,14 @@ class GetInstance(Resource):
 class GetConfiguration(Resource):
     decorators = [auth.login_required]
 
-    def get(self, name) -> str:
+    def get(self, name):
         return fetch("device", name=name).current_configuration
 
 
 class GetResult(Resource):
     decorators = [auth.login_required]
 
-    def get(self, name, runtime) -> str:
+    def get(self, name, runtime):
         job = fetch("job", name=name)
         return fetch("result", job_id=job.id, runtime=runtime).result
 
@@ -104,7 +104,7 @@ class GetResult(Resource):
 class UpdateInstance(Resource):
     decorators = [auth.login_required]
 
-    def post(self, cls) -> dict:
+    def post(self, cls):
         try:
             data = request.get_json(force=True)
             object_data = app.objectify(cls, data)
@@ -175,7 +175,7 @@ class RunJob(Resource):
 class Topology(Resource):
     decorators = [auth.login_required]
 
-    def post(self, direction) -> str:
+    def post(self, direction):
         if direction == "import":
             return app.import_topology(
                 **{

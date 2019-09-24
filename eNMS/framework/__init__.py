@@ -34,7 +34,7 @@ def configure_login_manager():
 
 def configure_context_processor(flask_app: Flask):
     @flask_app.context_processor
-    def inject_properties() -> dict:
+    def inject_properties():
         return {
             "documentation_url": app.documentation_url,
             "property_types": property_types,
@@ -65,7 +65,7 @@ def configure_errors(flask_app: Flask):
 
 def configure_authentication():
     @auth.get_password
-    def get_password(username) -> str:
+    def get_password(username):
         return getattr(fetch("user", name=username), "password", False)
 
     @auth.error_handler

@@ -61,7 +61,7 @@ class Result(AbstractBase):
         self.endtime = kwargs["result"]["endtime"]
         super().__init__(**kwargs)
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showResult('{self.id}')"></i>Results</a></button>""",
@@ -102,7 +102,7 @@ class Run(AbstractBase):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return f"{self.runtime} ({self.job_name} run by {self.creator})"
 
     def __getattr__(self, key) -> Any:
@@ -120,7 +120,7 @@ class Run(AbstractBase):
         result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
 
-    def generate_row(self, table) -> List[str]:
+    def generate_row(self, table)[str]:
         job_type = "workflow" if self.job.type == "workflow" else "service"
         return [
             f"""<div class="btn-group" style="width: 100px;">
@@ -137,7 +137,7 @@ class Run(AbstractBase):
         ]
 
     @property
-    def progress(self) -> str:
+    def progress(self):
         if self.status == "Running":
             progress = app.run_db[self.runtime]
             try:
@@ -290,7 +290,7 @@ class Run(AbstractBase):
                 "error", f"{library} Connection to {device} couldn't be closed ({exc})"
             )
 
-    def run(self, payload: Optional[dict] = None) -> dict:
+    def run(self, payload: Optional[dict] = None):
         try:
             self.log("info", f"{self.job.type} {self.job.name}: Starting")
             self.set_state(status="Running", type=self.job.type)
@@ -347,7 +347,7 @@ class Run(AbstractBase):
             result_kw["device"] = device.id
         factory("result", **result_kw)
 
-    def get_results(self, payload, device: Optional["Device"] = None) -> dict:
+    def get_results(self, payload, device: Optional["Device"] = None):
         self.log(
             "info", f"Running {self.job.type}{f' on {device.name}' if device else ''}"
         )
@@ -390,7 +390,7 @@ class Run(AbstractBase):
         if self.workflow:
             app.run_logs[self.parent_runtime].append(log)
 
-    def run_notification(self, results) -> List[str]:
+    def run_notification(self, results)[str]:
         notification = self.notification_header.splitlines()
         if self.job.type == "workflow":
             return notification
@@ -560,7 +560,7 @@ class Run(AbstractBase):
 
         return recursive_search(self)
 
-    def python_code_kwargs(_self, **locals) -> dict:  # noqa: N805
+    def python_code_kwargs(_self, **locals):  # noqa: N805
         return {
             "config": app.custom_config,
             "get_var": partial(_self.get_var, locals.get("payload", {})),
@@ -584,10 +584,10 @@ class Run(AbstractBase):
                 f"check that the service has targets. ({str(exc)})"
             )
 
-    def sub(self, input, variables) -> dict:
+    def sub(self, input, variables):
         r = compile("{{(.*?)}}")
 
-        def replace(match: Match) -> str:
+        def replace(match: Match):
             return str(self.eval(match.group()[2:-2], **variables))
 
         def rec(input) -> Any:
@@ -602,9 +602,9 @@ class Run(AbstractBase):
 
         return rec(input)
 
-    def space_deleter(self, input) -> str:
+    def space_deleter(self, input):
         return "".join(input.split())
 
     @property
-    def name(self) -> str:
+    def name(self):
         return repr(self)

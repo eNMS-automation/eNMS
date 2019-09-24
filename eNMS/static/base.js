@@ -456,6 +456,7 @@ function showTypePanel(type, id, mode) {
 }
 
 function updateProperty(el, property, value, type) {
+  console.log(el, property, value, type)
   const propertyType = formProperties[type][property] || "str";
   if (propertyType.includes("bool") || property.includes("regex")) {
     el.prop("checked", value);

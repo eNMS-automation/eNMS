@@ -24,8 +24,8 @@ class JobForm(BaseForm):
     query_property_type = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
-    devices = MultipleInstanceField("Devices", instance_type="device")
-    pools = MultipleInstanceField("Pools", instance_type="pool")
+    devices = MultipleInstanceField("Devices")
+    pools = MultipleInstanceField("Pools")
     waiting_time = IntegerField("Waiting time (in seconds)", default=0)
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(

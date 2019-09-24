@@ -21,7 +21,8 @@ function job(id) {
     field.selectpicker("refresh");
     if (id) {
       call(`/get/ansible_playbook_service/${id}`, function(instance) {
-        processInstance("ansible_playbook_service", instance);
+        field.val(instance.playbook_path);
+        field.selectpicker("refresh");
       });
     }
   });

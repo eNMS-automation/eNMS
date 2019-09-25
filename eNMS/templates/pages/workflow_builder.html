@@ -22,10 +22,8 @@ block content %}
           class="pagination pagination-lg"
           style="margin: 0px; padding-left: 29px; padding-top: 9px"
         >
-          <li class="disabled">
-            <a href="#" aria-label="Previous"
-              ><span class="glyphicon glyphicon-star"></span
-            ></a>
+          <li>
+            <a onclick="menu('Edit Workflow')"><span class="glyphicon glyphicon-cog"></span></a>
           </li>
           <li>
             <a href="#"><span class="glyphicon glyphicon-play"></span></a>
@@ -37,13 +35,10 @@ block content %}
             <a href="#"><span class="glyphicon glyphicon-play"></span></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-play"></span></a>
+            <a onclick="menu('Zoom In')"><span class="glyphicon glyphicon-zoom-in"></span></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-zoom-in"></span></a>
-          </li>
-          <li>
-            <a onclick="zoomIn()"><span class="glyphicon glyphicon-zoom-out"></span></a>
+            <a onclick="menu('Zoom Out')"><span class="glyphicon glyphicon-zoom-out"></span></a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

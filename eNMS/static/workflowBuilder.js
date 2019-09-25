@@ -270,8 +270,8 @@ function switchToWorkflow(workflowId, arrow) {
   });
 }
 
-function zoomIn() {
-  graph.zoom(-0.5)
+function menu(entry) {
+  action[entry]();
 }
 
 // eslint-disable-next-line
@@ -558,6 +558,8 @@ Object.assign(action, {
   "Delete Label": deleteLabel,
   Skip: () => changeSkipValue("skip"),
   Unskip: () => changeSkipValue("unskip"),
+  "Zoom In": () => graph.zoom(0.2),
+  "Zoom Out": () => graph.zoom(-0.2),
 });
 
 // eslint-disable-next-line

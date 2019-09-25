@@ -9,7 +9,7 @@ from eNMS.framework.config import config_mapper
 from eNMS.framework.extensions import auth, csrf, login_manager
 from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
-from eNMS.models import property_types, relationships
+from eNMS.models import models, property_types, relationships
 from eNMS.properties import property_names
 from eNMS.properties.table import filtering_properties, table_properties
 
@@ -42,6 +42,11 @@ def configure_context_processor(flask_app):
             "parameters": app.config,
             "relations": list(set(chain.from_iterable(relationships.values()))),
             "relationships": relationships,
+            "service_types": sorted(
+                service
+                for service in models
+                if service != "service" and service.endswith("service")
+            ),
             "version": app.version,
         }
 

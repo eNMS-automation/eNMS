@@ -120,14 +120,6 @@ def table(table_type):
         "fixed_columns": table_fixed_columns[table_type],
         "type": table_type,
     }
-    if table_type == "service":
-        service_table_form = ServiceTableForm(request.form)
-        service_table_form.services.choices = sorted(
-            (service, service)
-            for service in models
-            if service != "service" and service.endswith("service")
-        )
-        kwargs["service_table_form"] = service_table_form
     return render_template(f"pages/table.html", **kwargs)
 
 
@@ -146,11 +138,6 @@ def workflow_builder():
     return render_template(
         f"pages/workflow_builder.html",
         **{
-            "service_types": [
-                service
-                for service in models
-                if service != "service" and service.endswith("service")
-            ],
             "endpoint": "workflow_builder",
             "workflow": workflow.serialized if workflow else None,
         },

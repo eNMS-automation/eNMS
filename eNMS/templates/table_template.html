@@ -3,7 +3,7 @@
   <button
     style="background:transparent; border:none; color:transparent; width: 20vw;"
   >
-    {{ service_table_form.services(id="service-type", class="form-control") }}
+    <select id="service-type" class="form-control"></select>
   </button>
   {% endif %} {% if type not in ("configuration", "run", "result", "syslog") %}
   {% set func = "openServicePanel" if type == "service" else "showTypePanel" %}

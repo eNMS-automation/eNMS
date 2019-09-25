@@ -6,30 +6,38 @@ block content %}
     <div class="col-md-12 col-xs-12">
       <nav class="navbar navbar-default" role="navigation">
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active" style="width: 300px;">
-              <a href="#"
-                ><select id="current-workflow" class="form-control"></select
-              ></a>
-            </li>
-            <li class="active" style="width: 300px;">
-                <a href="#"
-                  ><select id="current-runtime" class="form-control"></select
-                ></a>
-              </li>
-          </ul>
-          <form class="navbar-form navbar-left" role="search"></form>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active" style="width: 300px;">
-              <a href="#"
-                ><select id="service-type" class="form-control"></select
-              ></a>
-            </li>
 
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+        <ul class="nav navbar-nav">
+          <li class="active" style="width: 300px;">
+            <a href="#"
+              ><select id="current-workflow" class="form-control"></select
+            ></a>
+          </li>
+          <li class="active" style="width: 300px;">
+            <a href="#"
+              ><select id="current-runtime" class="form-control"></select
+            ></a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              onclick="openServicePanel()"
+              style="margin: 0"
+            >
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              Add
+            </button>
+          </li>
+          <li class="active" style="width: 300px;">
+            <a href="#"
+              ><select id="service-type" class="form-control"></select
+            ></a>
+          </li>
+        </ul>
       </nav>
       <div class="x_panel">
         <div class="x_content">
@@ -78,14 +86,6 @@ block content %}
                 <span id="progress-failure-span" style="color:black;"></span>
               </div>
             </div>
-          </div>
-          <div>
-            <button
-              class="btn btn-primary btn-file"
-              onclick="openServicePanel()"
-            >
-              Create
-            </button>
           </div>
           <div id="test"></div>
           <div id="network" style="height:80vh; width:100%;"></div>

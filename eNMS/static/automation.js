@@ -76,7 +76,9 @@ function saveWorkflow(newWorkflow) {
     $("#current-workflow").append(
       `<option value="${newWorkflow.id}">${newWorkflow.name}</option>`
     );
-    $("#current-workflow").val(newWorkflow.id).trigger("change");
+    $("#current-workflow")
+      .val(newWorkflow.id)
+      .trigger("change");
     displayWorkflow({ workflow: newWorkflow, runtimes: [] });
   }
 }
@@ -243,15 +245,11 @@ function runLogic(job) {
 
 // eslint-disable-next-line
 function duplicateWorkflow(id) {
-  fCall(
-    `/duplicate_workflow/${id}`,
-    `#edit-workflow-form-${id}`,
-    () => {
-      table.ajax.reload(null, false);
-      $(`#workflow-${id}`).remove();
-      alertify.notify("Workflow successfully duplicated.", "success", 5);
-    }
-  );
+  fCall(`/duplicate_workflow/${id}`, `#edit-workflow-form-${id}`, () => {
+    table.ajax.reload(null, false);
+    $(`#workflow-${id}`).remove();
+    alertify.notify("Workflow successfully duplicated.", "success", 5);
+  });
 }
 
 // eslint-disable-next-line
@@ -287,7 +285,8 @@ function resumeTask(id) {
   if (page == "table/service" || page == "workflow_builder") {
     $("#service-type").select2();
     serviceTypes.forEach((service) => {
-      $("#service-type").append(new Option(service, service))
+      $("#service-type").append(new Option(service, service));
     });
+    $("#service-type").trigger("change");
   }
 })();

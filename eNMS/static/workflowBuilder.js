@@ -422,7 +422,7 @@ function drawLabel(id, label) {
     id: id,
     shape: "box",
     type: "label",
-    font: {align: label.alignment || "center"},
+    font: { align: label.alignment || "center" },
     label: label.content,
     borderWidth: 0,
     color: "#FFFFFF",
@@ -565,7 +565,9 @@ function createLabel() {
 function editLabel(label) {
   showPanel("workflow_label", null, () => {
     $("#content").val(label.label);
-    $("#alignment").val(label.font.align).selectpicker("refresh");
+    $("#alignment")
+      .val(label.font.align)
+      .selectpicker("refresh");
     currLabel = label;
   });
 }

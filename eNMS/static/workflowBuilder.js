@@ -17,6 +17,14 @@ workflow: true
 workflowRunMode: false
 */
 
+vis.Network.prototype.zoom = function (scale) {
+  const animationOptions = {
+      scale: this.getScale() + scale,
+      animation: { duration: 300 }
+  };
+  this.view.moveTo(animationOptions);
+};
+
 const container = document.getElementById("network");
 const dsoptions = {
   edges: {
@@ -260,6 +268,10 @@ function switchToWorkflow(workflowId, arrow) {
     graph = displayWorkflow(result);
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
+}
+
+function zoomIn() {
+  graph.zoom(-0.5)
 }
 
 // eslint-disable-next-line

@@ -5,8 +5,6 @@ block content %}
   <div class="row">
     <div class="col-md-12 col-xs-12">
       <nav class="navbar navbar-default" role="navigation">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-
         <ul class="nav navbar-nav">
           <li class="active" style="width: 300px;">
             <a href="#"
@@ -20,41 +18,56 @@ block content %}
           </li>
         </ul>
 
+        <ul
+          class="pagination pagination-lg"
+          style="margin: 0px; padding-left: 29px; padding-top: 9px"
+        >
+          <li class="disabled">
+            <a href="#" aria-label="Previous"
+              ><span class="glyphicon glyphicon-star"></span
+            ></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-play"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-play"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-play"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-play"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-zoom-in"></span></a>
+          </li>
+          <li>
+            <a onclick="zoomIn()"><span class="glyphicon glyphicon-zoom-out"></span></a>
+          </li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
+          <li class="active" style="width: 300px;">
+            <a href="#"
+              ><select id="service-type" class="form-control"></select
+            ></a>
+          </li>
           <li class="active">
             <button
               type="button"
               class="btn btn-primary btn-lg"
               onclick="openServicePanel()"
-              style="margin: 0"
+              style="margin: 0; padding: 19px"
+              padding="19px 10px"
             >
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              Add
             </button>
-          </li>
-          <li class="active" style="width: 300px;">
-            <a href="#"
-              ><select id="service-type" class="form-control"></select
-            ></a>
           </li>
         </ul>
       </nav>
       <div class="x_panel">
         <div class="x_content">
           <div style="z-index:2; position: absolute; left: 35vw;">
-            <ul
-              class="pagination pagination-lg no-padding"
-              style="margin: 0px;"
-            >
-              <li class="disabled">
-                <a href="#" aria-label="Previous"
-                  ><span class="glyphicon glyphicon-star"></span
-                ></a>
-              </li>
-              <li class="active">
-                <a href="#"><span class="glyphicon glyphicon-play"></span></a>
-              </li>
-            </ul>
             <img
               id="left-arrow"
               src="{{ url_for('static', filename='images/workflow/leftArrow.png') }}"

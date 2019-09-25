@@ -125,29 +125,34 @@ function displayWorkflow(workflowData) {
       const job = workflow.jobs.find((w) => w.id === node);
       if (job.type == "workflow") {
         switchToWorkflow(node);
-        $("#current-workflow").val(node).trigger("change");
+        $("#current-workflow")
+          .val(node)
+          .trigger("change");
       } else {
         showTypePanel(job.type, job.id);
       }
     }
   });
-  $("#current-runtimes").empty();
-  $("#current-runtimes").append(
+  $("#current-runtime").select2();
+  $("#current-runtime").empty();
+  $("#current-runtime").append(
     "<option value='normal'>Normal Display</option>"
   );
-  $("#current-runtimes").append(
+  $("#current-runtime").append(
     "<option value='latest'>Latest Runtime</option>"
   );
   workflowData.runtimes.forEach((runtime) => {
-    $("#current-runtimes").append(
+    $("#current-runtime").append(
       `<option value='${runtime[0]}'>${runtime[0]} (run by ${
         runtime[1]
       })</option>`
     );
   });
-  $("#current-runtimes").val("latest");
-  $("#current-workflow").val(workflow.id).trigger("change");
-  $("#current-runtimes").selectpicker("refresh");
+  $("#current-runtime").val("latest");
+  $("#current-workflow")
+    .val(workflow.id)
+    .trigger("change");
+  $("#current-runtime").trigger("change");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
   });
@@ -495,7 +500,7 @@ $("#current-workflow").on("change", function() {
   if (this.value != workflow.id) switchToWorkflow(this.value);
 });
 
-$("#current-runtimes").on("change", function() {
+$("#current-runtime").on("change", function() {
   getWorkflowState();
 });
 
@@ -700,7 +705,7 @@ function resetDisplay() {
 }
 
 function getWorkflowState(periodic) {
-  const runtime = $("#current-runtimes").val();
+  const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
@@ -723,15 +728,12 @@ function getWorkflowState(periodic) {
   $("#right-arrow").bind("click", function() {
     switchToWorkflow(arrowHistory[arrowPointer + 1], "right");
   });
-  
+
   initSelect($("#current-workflow"), "workflow", null, true);
   if (workflow) {
     $("#current-workflow").append(new Option(workflow.name, workflow.id));
     $("#current-workflow").val(workflow.id);
     switchToWorkflow(workflow.id);
   }
-  $("#current-runtimes").selectpicker({
-    liveSearch: true,
-  });
   getWorkflowState(true);
 })();

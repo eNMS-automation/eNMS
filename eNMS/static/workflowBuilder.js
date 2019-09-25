@@ -85,17 +85,6 @@ function displayWorkflow(workflowData) {
   }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
   graph.setOptions({ physics: false });
-  /*
-  graph.on("afterDrawing", function (ctx) {
-    let pos = graph.getPositions(1);
-    positions = graph.canvasToDOM({x: pos[1].x, y: pos[1].y});
-    $("#test").css({
-      top: positions.y,
-      left: positions.x - 150,
-      position:'relative'
-    });
-  });
-  */
   graph.on("oncontext", function(properties) {
     if (triggerMenu) {
       // eslint-disable-next-line new-cap

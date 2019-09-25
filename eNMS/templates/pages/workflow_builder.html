@@ -4,65 +4,22 @@ block content %}
 <div class="right_col" role="main">
   <div class="row">
     <div class="col-md-12 col-xs-12">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div
-            class="collapse navbar-collapse"
-            id="bs-example-navbar-collapse-1"
-          >
-            <ul class="nav navbar-nav">
-              <form class="navbar-form navbar-left">
-                <button
-                  style="background:transparent; border:none; color:transparent; width: 15vw;"
-                >
-                  {{ service_table_form.services(id="service-type",
-                  class="form-control") }}
-                </button>
-                <button
-                  class="btn btn-primary btn-file"
-                  onclick="openServicePanel()"
-                >
-                  Create
-                </button>
-              </form>
-
-              <li><a href="#">Link</a></li>
-              <li class="dropdown">
-                <a
-                  href="#"
-                  class="dropdown-toggle"
-                  data-toggle="dropdown"
-                  role="button"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  >Dropdown <span class="caret"></span
-                ></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-              <form class="navbar-form navbar-left">
-                <div class="form-group">
-                  <select id="current-workflow" class="form-control"></select>
-                  <select id="current-runtimes" class="form-control"></select>
-                </div>
-              </form>
-            </ul>
-          </div>
-        </div>
-      </nav>
       <div class="x_panel">
         <div class="x_content">
           <div style="z-index:2; position: absolute; left: 35vw;">
+            <ul
+              class="pagination pagination-lg no-padding"
+              style="margin: 0px;"
+            >
+              <li class="disabled">
+                <a href="#" aria-label="Previous"
+                  ><span class="glyphicon glyphicon-star"></span
+                ></a>
+              </li>
+              <li class="active">
+                <a href="#"><span class="glyphicon glyphicon-play"></span></a>
+              </li>
+            </ul>
             <img
               id="left-arrow"
               src="{{ url_for('static', filename='images/workflow/leftArrow.png') }}"
@@ -98,8 +55,46 @@ block content %}
           <div
             class="btn-group"
             style="z-index:2; position: absolute; right: 0vw"
-          ></div>
-          <div></div>
+          >
+            <table
+              class="table table-bordered dt-responsive nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td>
+                    Workflow
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="current-workflow" class="form-control"></select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Runtime
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="current-runtimes" class="form-control"></select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <button
+              style="background:transparent; border:none; color:transparent; width: 20vw;"
+            >
+              {{ service_table_form.services(id="service-type",
+              class="form-control") }}
+            </button>
+            <button
+              class="btn btn-primary btn-file"
+              onclick="openServicePanel()"
+            >
+              Create
+            </button>
+          </div>
           <div id="test"></div>
           <div id="network" style="height:80vh; width:100%;"></div>
           <div class="ln_solid"></div>

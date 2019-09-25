@@ -165,6 +165,14 @@ class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
     action = "createLabel"
     content = StringField(widget=TextArea(), render_kw={"rows": 15})
+    alignment = SelectField(
+        "Text Alignment",
+        choices=(
+            ("center", "Center"),
+            ("left", "Left"),
+            ("right", "Right"),
+        ),
+    )
 
 
 class WorkflowEdgeForm(BaseForm):

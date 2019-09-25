@@ -17,10 +17,10 @@ workflow: true
 workflowRunMode: false
 */
 
-vis.Network.prototype.zoom = function (scale) {
+vis.Network.prototype.zoom = function(scale) {
   const animationOptions = {
-      scale: this.getScale() + scale,
-      animation: { duration: 300 }
+    scale: this.getScale() + scale,
+    animation: { duration: 300 },
   };
   this.view.moveTo(animationOptions);
 };

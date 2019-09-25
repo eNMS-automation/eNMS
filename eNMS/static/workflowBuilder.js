@@ -247,6 +247,7 @@ const rectangleSelection = (container, network, nodes) => {
 };
 
 function switchToWorkflow(workflowId, arrow) {
+  if (!workflowId) return;
   if (!arrow) {
     arrowPointer++;
     arrowHistory.splice(arrowPointer, 9e9, workflowId);
@@ -254,14 +255,14 @@ function switchToWorkflow(workflowId, arrow) {
     arrowPointer += arrow == "right" ? 1 : -1;
   }
   if (arrowHistory.length >= 1 && arrowPointer !== 0) {
-    $("#left-arrow").show();
+    $("#left-arrow").removeClass('disabled');
   } else {
-    $("#left-arrow").hide();
+    $("#left-arrow").addClass('disabled');
   }
   if (arrowPointer < arrowHistory.length - 1) {
-    $("#right-arrow").show();
+    $("#right-arrow").removeClass('disabled');
   } else {
-    $("#right-arrow").hide();
+    $("#right-arrow").addClass('disabled');
   }
   call(`/get_workflow_state/${workflowId}/latest`, function(result) {
     workflow = result.workflow;
@@ -738,6 +739,7 @@ function getWorkflowState(periodic) {
 }
 
 (function() {
+  $("#left-arrow,#right-arrow").addClass('disabled');
   initSelect($("#current-workflow"), "workflow", null, true);
   if (workflow) {
     $("#current-workflow").append(new Option(workflow.name, workflow.id));

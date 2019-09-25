@@ -492,12 +492,11 @@ function switchMode(mode) {
 }
 
 $("#current-workflow").on("change", function() {
-
-  //switchToWorkflow(this.value);
+  if (this.value != workflow.id) switchToWorkflow(this.value);
 });
 
 $("#current-runtimes").on("change", function() {
-  //getWorkflowState();
+  getWorkflowState();
 });
 
 function savePositions() {
@@ -730,23 +729,9 @@ function getWorkflowState(periodic) {
     $("#current-workflow").append(new Option(workflow.name, workflow.id));
     $("#current-workflow").val(workflow.id);
     switchToWorkflow(workflow.id);
-  } else {
-    call("/get_all/workflow", function(workflows) {
-      //workflow = $("#current-workflow").val();
-      if (workflow) {
-        switchToWorkflow(workflow);
-      } else {
-        alertify.notify(
-          `You must create a workflow in the
-        'Workflow management' page first.`,
-          "error",
-          5
-        );
-      }
-    });
   }
-  $("#current-workflow,#current-runtimes").selectpicker({
+  $("#current-runtimes").selectpicker({
     liveSearch: true,
   });
-  //getWorkflowState(true);
+  getWorkflowState(true);
 })();

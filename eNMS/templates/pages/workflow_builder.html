@@ -81,18 +81,6 @@ block content %}
             >
               Create
             </button>
-            <button
-              class="btn btn-light btn-file"
-              onclick="changeSkipValue('skip')"
-            >
-              Skip
-            </button>
-            <button
-              class="btn btn-primary btn-file"
-              onclick="changeSkipValue('unskip')"
-            >
-              Unskip
-            </button>
           </div>
           <div id="test"></div>
           <div id="network" style="height:80vh; width:100%;"></div>
@@ -157,6 +145,15 @@ block content %}
   </li>
   <li class="menu-entry global"><a tabindex="-1" href="#">Workflow Logs</a></li>
   <li class="menu-entry global"><a tabindex="-1" href="#">Create Label</a></li>
+  <li class="dropdown-submenu menu-entry global">
+    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+      >Selection<span class="caret-right"></span
+    ></a>
+    <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Skip</a></li>
+      <li><a tabindex="-1" href="#">Unskip</a></li>
+    </ul>
+  </li>
 </ul>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script>

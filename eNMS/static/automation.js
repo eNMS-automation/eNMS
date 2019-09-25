@@ -76,8 +76,7 @@ function saveWorkflow(newWorkflow) {
     $("#current-workflow").append(
       `<option value="${newWorkflow.id}">${newWorkflow.name}</option>`
     );
-    $("#current-workflow").val(newWorkflow.id);
-    $("#current-workflow").selectpicker("refresh");
+    $("#current-workflow").val(newWorkflow.id).trigger("change");
     displayWorkflow({ workflow: newWorkflow, runtimes: [] });
   }
 }
@@ -247,7 +246,7 @@ function duplicateWorkflow(id) {
   fCall(
     `/duplicate_workflow/${id}`,
     `#edit-workflow-form-${id}`,
-    (workflow) => {
+    () => {
       table.ajax.reload(null, false);
       $(`#workflow-${id}`).remove();
       alertify.notify("Workflow successfully duplicated.", "success", 5);
@@ -286,8 +285,9 @@ function resumeTask(id) {
 
 (function() {
   if (page == "table/service" || page == "workflow_builder") {
-    $("#service-type").selectpicker({
-      liveSearch: true,
+    $("#service-type").select2();
+    serviceTypes.forEach((service) => {
+      $("#service-type").append(new Option(service, service))
     });
   }
 })();

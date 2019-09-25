@@ -156,22 +156,13 @@ class AddJobsForm(BaseForm):
     jobs = MultipleInstanceField("Add jobs")
 
 
-class ServiceTableForm(BaseForm):
-    form_type = HiddenField(default="service_table")
-    services = SelectField(choices=())
-
-
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
     action = "createLabel"
     content = StringField(widget=TextArea(), render_kw={"rows": 15})
     alignment = SelectField(
         "Text Alignment",
-        choices=(
-            ("center", "Center"),
-            ("left", "Left"),
-            ("right", "Right"),
-        ),
+        choices=(("center", "Center"), ("left", "Left"), ("right", "Right")),
     )
 
 

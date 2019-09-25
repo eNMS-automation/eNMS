@@ -584,10 +584,7 @@ class BaseController:
                 )
         elif table == "configuration" and kwargs.get("instance[id]"):
             constraints.append(
-                getattr(
-                    models[table],
-                    "device"
-                ).has(id=kwargs["instance[id]"])
+                getattr(models[table], "device").has(id=kwargs["instance[id]"])
             )
         result = Session.query(model).filter(operator(*constraints)).order_by(order)
         return {

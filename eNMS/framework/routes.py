@@ -19,7 +19,6 @@ from eNMS.database import Session
 from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
-from eNMS.forms.automation import ServiceTableForm
 from eNMS.models import models
 from eNMS.properties.diagram import type_to_diagram_properties
 from eNMS.properties.table import table_fixed_columns
@@ -144,16 +143,14 @@ def view(view_type):
 @monitor_requests
 def workflow_builder():
     workflow = fetch("workflow", allow_none=True, id=session.get("workflow", None))
-    service_table_form = ServiceTableForm(request.form)
-    service_table_form.services.choices = sorted(
-        (service, service)
-        for service in models
-        if service != "service" and service.endswith("service")
-    )
     return render_template(
         f"pages/workflow_builder.html",
-        service_table_form=service_table_form,
         **{
+            "service_types": [
+                service
+                for service in models
+                if service != "service" and service.endswith("service")
+            ],
             "endpoint": "workflow_builder",
             "workflow": workflow.serialized if workflow else None,
         },

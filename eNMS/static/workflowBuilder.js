@@ -561,8 +561,8 @@ Object.assign(action, {
     showTypePanel("WorkflowEdge", edge.id);
   },
   "Delete Label": deleteLabel,
-  "Skip": () => changeSkipValue("skip"),
-  "Unskip": () => changeSkipValue("unskip"),
+  Skip: () => changeSkipValue("skip"),
+  Unskip: () => changeSkipValue("unskip"),
 });
 
 // eslint-disable-next-line

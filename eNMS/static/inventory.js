@@ -59,8 +59,12 @@ function showPoolObjectsPanel(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       initSelect($(`#devices-${id}`), `pool_objects-${id}`, "device");
-      pool.devices.forEach(o => $(`#devices-${id}`).append(new Option(o.name, o.id)));
-      $(`#devices-${id}`).val(pool.devices.map((n) => n.id)).trigger("change");
+      pool.devices.forEach((o) =>
+        $(`#devices-${id}`).append(new Option(o.name, o.id))
+      );
+      $(`#devices-${id}`)
+        .val(pool.devices.map((n) => n.id))
+        .trigger("change");
     });
   });
 }
@@ -93,9 +97,14 @@ function showDeviceResultsPanel(device) {
 
 // eslint-disable-next-line
 function showConfigurationsPanel(device) {
-  createPanel("configuration", `Configuration - ${device.name}`, null, function() {
-    initTable("configuration", device);
-  });
+  createPanel(
+    "configuration",
+    `Configuration - ${device.name}`,
+    null,
+    function() {
+      initTable("configuration", device);
+    }
+  );
 }
 
 // eslint-disable-next-line

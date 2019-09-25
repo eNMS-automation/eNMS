@@ -382,7 +382,7 @@ function filter(type) {
   $.ajax({
     type: "POST",
     url: `/view_filtering/${type}`,
-    data: {"form": serializeForm(`#${type}_filtering-form`)},
+    data: { form: serializeForm(`#${type}_filtering-form`) },
     success: function(results) {
       if (type == "device") {
         deleteAllDevices();
@@ -392,8 +392,8 @@ function filter(type) {
         results.map(createLink);
       }
       alertify.notify("Filter applied.", "success", 5);
-    }
-  })
+    },
+  });
 }
 
 // eslint-disable-next-line

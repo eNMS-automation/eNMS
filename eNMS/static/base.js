@@ -317,7 +317,13 @@ function showFilteringPanel(panelType) {
 
 // eslint-disable-next-line
 function showDeletionPanel(job) {
-  createPanel("instance_deletion", `Delete ${job.name}`, job.id, () => {}, job.type);
+  createPanel(
+    "instance_deletion",
+    `Delete ${job.name}`,
+    job.id,
+    () => {},
+    job.type
+  );
 }
 
 function preprocessForm(panel, id, type, duplicate) {
@@ -348,24 +354,22 @@ function initSelect(el, parentId, model, id) {
       delay: 250,
       data: function(params) {
         return {
-            term: params.term || "",
-            page: params.page || 1
-        }
+          term: params.term || "",
+          page: params.page || 1,
+        };
       },
-      processResults: function (data, params) {
+      processResults: function(data, params) {
         params.page = params.page || 1;
         return {
           results: data.items,
           pagination: {
-            more: (params.page * 10) < data.total_count
-          }
+            more: params.page * 10 < data.total_count,
+          },
         };
-      }
+      },
     },
   });
 }
-
-
 
 function configureForm(form, id, panelId) {
   if (!formProperties[form]) return;
@@ -387,15 +391,14 @@ function configureForm(form, id, panelId) {
         liveSearch: elClass ? !elClass.includes("no-search") : false,
         actionsBox: true,
         selectedTextFormat: "count > 3",
-      })
-      ;
+      });
     } else if (["object", "object-list"].includes(type)) {
       if (relationships[form]) {
         model = relationships[form][property].model;
       } else {
         model = property.substring(0, property.length - 1);
       }
-      initSelect(el, panelId, model, id)
+      initSelect(el, panelId, model, id);
     }
   }
 }
@@ -461,9 +464,7 @@ function updateProperty(el, property, value, type) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict") || propertyType == "json") {
     el.val(value ? JSON.stringify(value) : "{}");
-  } else if (
-    ["list", "multiselect"].includes(propertyType)
-  ) {
+  } else if (["list", "multiselect"].includes(propertyType)) {
     try {
       el.selectpicker("deselectAll");
     } catch (e) {
@@ -472,10 +473,12 @@ function updateProperty(el, property, value, type) {
     el.selectpicker("val", value);
     el.selectpicker("render");
   } else if (propertyType == "object-list") {
-    value.forEach(o => el.append(new Option(o.name, o.id)));
+    value.forEach((o) => el.append(new Option(o.name, o.id)));
     el.val(value.map((p) => p.id)).trigger("change");
   } else if (propertyType == "object") {
-    el.append(new Option(value.name, value.id)).val(value.id).trigger("change");
+    el.append(new Option(value.name, value.id))
+      .val(value.id)
+      .trigger("change");
   } else {
     el.val(value);
   }

@@ -622,7 +622,6 @@ function initSidebar() {
     });
   });
 
-  // check active menu
   const url = "a[href='" + currentUrl + "']";
   $("#sidebar-menu")
     .find(url)

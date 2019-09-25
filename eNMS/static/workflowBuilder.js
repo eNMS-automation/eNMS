@@ -183,7 +183,7 @@ const rectangleSelection = (container, network, nodes) => {
     const [startX, endX] = correctRange(sX, eX);
     const [startY, endY] = correctRange(sY, eY);
     triggerMenu = startX == endX && startY == endY;
-
+    if (triggerMenu) return;
     network.selectNodes(
       nodes.get().reduce((selected, { id }) => {
         const { x, y } = network.getPositions(id)[id];
@@ -561,6 +561,8 @@ Object.assign(action, {
     showTypePanel("WorkflowEdge", edge.id);
   },
   "Delete Label": deleteLabel,
+  "Skip": () => changeSkipValue("skip"),
+  "Unskip": () => changeSkipValue("unskip"),
 });
 
 // eslint-disable-next-line

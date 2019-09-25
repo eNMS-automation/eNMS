@@ -58,7 +58,7 @@ function savePoolObjects(id) {
 function showPoolObjectsPanel(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
-      initSelect($(`#devices-${id}`), `pool_objects-${id}`, "device");
+      initSelect($(`#devices-${id}`), "device", `pool_objects-${id}`);
       pool.devices.forEach((o) =>
         $(`#devices-${id}`).append(new Option(o.name, o.id))
       );

@@ -125,8 +125,7 @@ function displayWorkflow(workflowData) {
       const job = workflow.jobs.find((w) => w.id === node);
       if (job.type == "workflow") {
         switchToWorkflow(node);
-        $("#current-workflow").val(node);
-        $("#current-workflow").selectpicker("refresh");
+        $("#current-workflow").val(node).trigger("change");
       } else {
         showTypePanel(job.type, job.id);
       }
@@ -147,8 +146,8 @@ function displayWorkflow(workflowData) {
     );
   });
   $("#current-runtimes").val("latest");
-  $("#current-workflow").val(workflow.id);
-  $("#current-runtimes,#current-workflow").selectpicker("refresh");
+  $("#current-workflow").val(workflow.id).trigger("change");
+  $("#current-runtimes").selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
   });
@@ -493,14 +492,12 @@ function switchMode(mode) {
 }
 
 $("#current-workflow").on("change", function() {
-  $("#add_jobs").append(
-    `<option value='${workflow.id}'>${workflow.name}</option>`
-  );
-  switchToWorkflow(this.value);
+
+  //switchToWorkflow(this.value);
 });
 
 $("#current-runtimes").on("change", function() {
-  getWorkflowState();
+  //getWorkflowState();
 });
 
 function savePositions() {
@@ -727,18 +724,15 @@ function getWorkflowState(periodic) {
   $("#right-arrow").bind("click", function() {
     switchToWorkflow(arrowHistory[arrowPointer + 1], "right");
   });
-  call("/get_all/workflow", function(workflows) {
-    workflows.sort((a, b) => a.name.localeCompare(b.name));
-    for (let i = 0; i < workflows.length; i++) {
-      $("#current-workflow").append(
-        `<option value="${workflows[i].id}">${workflows[i].name}</option>`
-      );
-    }
-    if (workflow) {
-      $("#current-workflow").val(workflow.id);
-      switchToWorkflow(workflow.id);
-    } else {
-      workflow = $("#current-workflow").val();
+  
+  initSelect($("#current-workflow"), "workflow", null, true);
+  if (workflow) {
+    $("#current-workflow").append(new Option(workflow.name, workflow.id));
+    $("#current-workflow").val(workflow.id);
+    switchToWorkflow(workflow.id);
+  } else {
+    call("/get_all/workflow", function(workflows) {
+      //workflow = $("#current-workflow").val();
       if (workflow) {
         switchToWorkflow(workflow);
       } else {
@@ -749,10 +743,10 @@ function getWorkflowState(periodic) {
           5
         );
       }
-    }
-    $("#current-workflow,#current-runtimes").selectpicker({
-      liveSearch: true,
     });
-    getWorkflowState(true);
+  }
+  $("#current-workflow,#current-runtimes").selectpicker({
+    liveSearch: true,
   });
+  //getWorkflowState(true);
 })();

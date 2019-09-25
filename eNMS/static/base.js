@@ -343,11 +343,11 @@ function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-function initSelect(el, parentId, model, id) {
+function initSelect(el, model, parentId, single) {
   el.select2({
-    multiple: true,
-    closeOnSelect: false,
-    dropdownParent: $(`#${parentId}`),
+    multiple: !single,
+    closeOnSelect: single,
+    dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
     ajax: {
       url: `/multiselect_filtering/${model}`,
       type: "POST",
@@ -398,7 +398,7 @@ function configureForm(form, id, panelId) {
       } else {
         model = property.substring(0, property.length - 1);
       }
-      initSelect(el, panelId, model, id);
+      initSelect(el, model, panelId);
     }
   }
 }

@@ -1,4 +1,4 @@
-from builtins import __dict__ as builtins  # type: ignore
+from builtins import __dict__ as builtins
 from copy import deepcopy
 from functools import partial
 from json import loads
@@ -92,7 +92,7 @@ class Run(AbstractBase):
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs):
-        self.runtime = kwargs.get("runtime") or app.get_time()  # type: ignore
+        self.runtime = kwargs.get("runtime") or app.get_time()
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
@@ -257,11 +257,11 @@ class Run(AbstractBase):
             if not_found:
                 raise Exception(f"Python query invalid targets: {', '.join(not_found)}")
         else:
-            devices = set(self.devices)  # type: ignore
+            devices = set(self.devices)
             for pool in self.pools:
-                devices |= set(pool.devices)  # type: ignore
+                devices |= set(pool.devices)
         self.set_state(number_of_targets=len(devices))
-        return devices  # type: ignore
+        return devices
 
     def close_connection_cache(self):
         pool = ThreadPool(30)
@@ -312,12 +312,12 @@ class Run(AbstractBase):
                 status = "Aborted"
             else:
                 status = f"Completed ({'success' if results['success'] else 'failure'})"
-            self.status = status  # type: ignore
+            self.status = status
             self.set_state(status=status, success=results["success"])
             app.job_db[self.job.id]["runs"] -= 1
-            results["endtime"] = self.endtime = app.get_time()  # type: ignore
+            results["endtime"] = self.endtime = app.get_time()
             results["state"] = app.run_db.pop(self.runtime)
-            results["logs"] = app.run_logs.pop(self.runtime)  # type: ignore
+            results["logs"] = app.run_logs.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {

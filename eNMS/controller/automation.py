@@ -217,7 +217,7 @@ class AutomationController(BaseController):
         }
 
     def convert_date(self, date):
-        python_month = search(r".*-(\d{2})-.*", date).group(1)  # type: ignore
+        python_month = search(r".*-(\d{2})-.*", date).group(1)
         month = "{:02}".format((int(python_month) - 1) % 12)
         return [
             int(i)

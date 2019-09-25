@@ -352,7 +352,7 @@ class Workflow(Job):
                                 "success": False,
                                 "error": str(exc),
                             }
-                    job_results = {  # type: ignore
+                    job_results = {
                         "results": {"devices": device_results},
                         "success": success,
                     }
@@ -362,7 +362,7 @@ class Workflow(Job):
                             "run",
                             job=job.id,
                             workflow=self.id,
-                            workflow_device=device.id,  # type: ignore
+                            workflow_device=device.id,
                             parent_runtime=run.parent_runtime,
                             restart_run=run.restart_run,
                         )
@@ -377,7 +377,7 @@ class Workflow(Job):
                         run, job, allowed_devices, payload
                     )
                 else:
-                    valid_devices = {device}  # type: ignore
+                    valid_devices = {device}
                 job_run = factory(
                     "run",
                     job=job.id,

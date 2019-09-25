@@ -247,12 +247,12 @@ class BaseController:
             self.create_admin_user()
             Session.commit()
             if self.create_examples:
-                self.migration_import(  # type: ignore
+                self.migration_import(
                     name="examples", import_export_types=import_classes
                 )
                 self.update_credentials()
             else:
-                self.migration_import(  # type: ignore
+                self.migration_import(
                     name="default", import_export_types=import_classes
                 )
             self.get_git_content()
@@ -310,7 +310,7 @@ class BaseController:
 
     def update_credentials(self):
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
-            self.topology_import(file)  # type: ignore
+            self.topology_import(file)
 
     @property
     def config(self):
@@ -412,7 +412,7 @@ class BaseController:
     def init_forms(self):
         for file in (self.path / "eNMS" / "forms").glob("**/*.py"):
             spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
-            spec.loader.exec_module(module_from_spec(spec))  # type: ignore
+            spec.loader.exec_module(module_from_spec(spec))
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
@@ -426,7 +426,7 @@ class BaseController:
                     continue
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
                 try:
-                    spec.loader.exec_module(module_from_spec(spec))  # type: ignore
+                    spec.loader.exec_module(module_from_spec(spec))
                 except InvalidRequestError as e:
                     error(f"Error loading custom service '{file}' ({str(e)})")
 

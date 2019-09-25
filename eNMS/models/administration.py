@@ -71,7 +71,7 @@ class Parameters(AbstractBase):
     slack_channel = Column(SmallString)
 
     def update(self, **kwargs):
-        self.gotty_port_index = -1  # type: ignore
+        self.gotty_port_index = -1
         super().update(**kwargs)
 
 

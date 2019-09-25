@@ -44,7 +44,7 @@ class Task(AbstractBase):
 
     def __init__(self, **kwargs):
         super().update(**kwargs)
-        self.creation_time = app.get_time()  # type: ignore
+        self.creation_time = app.get_time()
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
 
     def update(self, **kwargs):
@@ -77,7 +77,7 @@ class Task(AbstractBase):
     def status(self):
         return "Active" if self.is_active else "Inactive"
 
-    @status.expression  # type: ignore
+    @status.expression
     def status(cls):  # noqa: N805
         return case([(cls.is_active, "Active")], else_="Inactive")
 
@@ -108,14 +108,14 @@ class Task(AbstractBase):
         return self.aps_conversion(date) if date else None
 
     def pause(self):
-        self.is_active = False  # type: ignore
+        self.is_active = False
         Session.commit()
         app.scheduler.pause_job(self.aps_job_id)
 
     def resume(self):
         self.schedule()
         app.scheduler.resume_job(self.aps_job_id)
-        self.is_active = True  # type: ignore
+        self.is_active = True
         Session.commit()
 
     def delete_task(self):
@@ -126,11 +126,11 @@ class Task(AbstractBase):
     def run_properties(self):
         properties = {"payload": self.initial_payload, "task": self.id}
         if self.devices:
-            properties["devices"] = [  # type: ignore
+            properties["devices"] = [
                 device.id for device in self.devices
             ]
         if self.pools:
-            properties["pools"] = [pool.id for pool in self.pools]  # type: ignore
+            properties["pools"] = [pool.id for pool in self.pools]
         return properties
 
     def kwargs(self):
@@ -142,7 +142,7 @@ class Task(AbstractBase):
             "kwargs": self.run_properties(),
         }
         if self.scheduling_mode == "cron":
-            self.periodic = True  # type: ignore
+            self.periodic = True
             expression = self.crontab_expression.split()
             mapping = {
                 "0": "sun",
@@ -157,7 +157,7 @@ class Task(AbstractBase):
             expression[-1] = ",".join(mapping[day] for day in expression[-1].split(","))
             trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}
         elif self.frequency:
-            self.periodic = True  # type: ignore
+            self.periodic = True
             frequency_in_seconds = (
                 int(self.frequency)
                 * {"seconds": 1, "minutes": 60, "hours": 3600, "days": 86400}[
@@ -171,7 +171,7 @@ class Task(AbstractBase):
                 "seconds": frequency_in_seconds,
             }
         else:
-            self.periodic = False  # type: ignore
+            self.periodic = False
             trigger = {"trigger": "date", "run_date": self.aps_date("start_date")}
         return default, trigger
 

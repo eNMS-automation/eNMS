@@ -742,7 +742,7 @@ function getWorkflowState(periodic) {
   $("#right-arrow").bind("click", function() {
     switchToWorkflow(arrowHistory[arrowPointer + 1], "right");
   });
-
+  $("#edge-type").select2();
   initSelect($("#current-workflow"), "workflow", null, true);
   if (workflow) {
     $("#current-workflow").append(new Option(workflow.name, workflow.id));

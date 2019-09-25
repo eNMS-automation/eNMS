@@ -16,6 +16,12 @@ block content %}
             <a href="#"><span class="glyphicon glyphicon-font"></span></a>
           </li>
           <li>
+            <a href="#"><span class="glyphicon glyphicon-move"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-random"></span></a>
+          </li>
+          <li>
             <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
           </li>
           <li>
@@ -31,12 +37,6 @@ block content %}
             <a href="#"
               ><span class="glyphicon glyphicon-remove-sign"></span
             ></a>
-          </li>
-          <li>
-            <a href="#"><span class="glyphicon glyphicon-move"></span></a>
-          </li>
-          <li>
-            <a href="#"><span class="glyphicon glyphicon-random"></span></a>
           </li>
         </ul>
 
@@ -58,6 +58,12 @@ block content %}
           <li>
             <a href="#"><span class="glyphicon glyphicon-stop"></span></a>
           </li>
+        </ul>
+
+        <ul
+          class="pagination pagination-lg"
+          style="margin: 0px; padding-left: 29px; padding-top: 9px"
+        >
           <li>
             <a onclick="menu('Edit Workflow')"
               ><span class="glyphicon glyphicon-cog"></span
@@ -80,6 +86,15 @@ block content %}
             <a href="#"
               ><select id="service-type" class="form-control"></select
             ></a>
+          </li>
+          <li>
+            <a href="#"
+              ><select id="edge-type" class="form-control">
+                <option value="success">Success</option>
+                <option value="failure">Failure</option>
+                <option value="prerequisite">Prerequisite</option>
+              </select></a
+            >
           </li>
         </ul>
 

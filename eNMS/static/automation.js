@@ -287,6 +287,5 @@ function resumeTask(id) {
     serviceTypes.forEach((service) => {
       $("#service-type").append(new Option(service, service));
     });
-    $("#service-type").trigger("change");
   }
 })();

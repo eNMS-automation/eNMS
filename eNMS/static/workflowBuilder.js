@@ -560,6 +560,8 @@ Object.assign(action, {
   Unskip: () => changeSkipValue("unskip"),
   "Zoom In": () => graph.zoom(0.2),
   "Zoom Out": () => graph.zoom(-0.2),
+  "Backward": () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
+  "Forward": () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
 });
 
 // eslint-disable-next-line
@@ -736,13 +738,6 @@ function getWorkflowState(periodic) {
 }
 
 (function() {
-  $("#left-arrow").bind("click", function() {
-    switchToWorkflow(arrowHistory[arrowPointer - 1], "left");
-  });
-  $("#right-arrow").bind("click", function() {
-    switchToWorkflow(arrowHistory[arrowPointer + 1], "right");
-  });
-  $("#edge-type").select2();
   initSelect($("#current-workflow"), "workflow", null, true);
   if (workflow) {
     $("#current-workflow").append(new Option(workflow.name, workflow.id));

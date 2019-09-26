@@ -40,5 +40,5 @@ Individual export
 Services and workflows can be exported and imported individually, as a .tgz archive.
 This is useful when you have multiple VMs deployed with eNMS, and you need to send a service / workflow from one VM to another.
 
-To import a job, you need to move the archive to the ``projects/exported_jobs`` folder,
-then go to the "Administration" page and click on the ``Import jobs`` button.
+To import a service, you need to move the archive to the ``projects/exported_services`` folder,
+then go to the "Administration" page and click on the ``Import services`` button.

@@ -36,11 +36,11 @@ Besides, the advanced search also lets you filter based on **relationships**.
 
 For example, a device has 3 types of relationships:
 
-- jobs: indicates whether or not the device is a target of a given job (service or workflow)
+- services: indicates whether or not the device is a target of a given service (service or workflow)
 - pools: indicates whether or not the device is a target of a given pool.
 - links: indicates whether the device is the source or the destination of a link.
 
-You can select jobs, pools and links in the "Advanced Search" panel for a device, and only the device that are a match
+You can select services, pools and links in the "Advanced Search" panel for a device, and only the device that are a match
 for the relationship will be displayed in the results.
 
 You can use the "Clear Search" button above the table to return to the initial state (no filter).

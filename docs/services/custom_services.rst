@@ -93,7 +93,7 @@ This file contains the following code :
       # def job(self, device, payload):
       def job(self, run: "Run", payload: dict) -> dict:
           run.log("info", f"Real-time logs displayed when the service is running.")
-          # The "job" function is called when the service is executed.
+          # The "service" function is called when the service is executed.
           # The parameters of the service can be accessed with self (self.string1,
           # self.boolean1, etc)
           # You can look at how default services (netmiko, napalm, etc.) are
@@ -224,7 +224,7 @@ Another use-case is to implement a service that will only exist as a single inst
 This can be done with the ``Swiss Army Knife Service``.
 
 A "Swiss Army Knife Service" has only one parameter: a name. The function that will run when this service is scheduled is the one that carries the same name as the service itself.
-The "Swiss Army Knife Service" ``job`` function can be seen as a "job multiplexer".
+The "Swiss Army Knife Service" ``job`` function can be seen as a "service multiplexer".
 
 Let's take a look at how the ``Swiss Army Knife Service`` is implemented:
 

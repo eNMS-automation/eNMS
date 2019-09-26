@@ -20,7 +20,7 @@ Parameters common to all services
     - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
     - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
     - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
-    - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next job.
+    - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next service.
     - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
 - ``Targets``
     - ``Devices`` Multi-selection list of devices from the inventory
@@ -45,7 +45,7 @@ Parameters common to the services that use netmiko
 - ``Privileged mode`` If checked, Netmiko should enter enable mode on the device before applying the above configuration block 
 - ``Driver`` Which Netmiko driver to use when connecting to the device
 - ``Use driver from device`` If set to True, the driver defined at device level (``netmiko_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used. By default, this property is set to ```True`` and eNMS uses the driver defined in the ``netmiko_driver`` property of the device. A **driver** can be selected among all available netmiko drivers. The list of drivers is built upon netmiko ``CLASS_MAPPER_BASE`` in ``ssh_dispatcher.py`` (https://github.com/ktbyers/netmiko/blob/develop/netmiko/ssh_dispatcher.py#L69.
-- ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the job as fast as possible.
+- ``Fast CLI`` If checked, Netmiko will disable internal wait states and delays in order to execute the service as fast as possible.
 - ``Timeout`` Netmiko internal timeout in seconds to wait for a connection or response before declaring failure.
 - ``Delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Delay factor is used in the send_command Netmiko method. See here for more explanation: (https://pynet.twb-tech.com/blog/automation/netmiko-what-is-done.html)
 - ``Global delay factor`` Netmiko multiplier used to increase internal delays (defaults to 1). Global delay factor affects more delays beyond Netmiko send_command. Increase this for devices that have trouble buffering and responding quickly.
@@ -309,7 +309,7 @@ Python Snippet Service
 Runs any python code.
 
 In the code, you can use the following variables / functions :
-- ``log``: function to add a string to the job logs.
+- ``log``: function to add a string to the service logs.
 - ``parent``: the workflow that the python snippet service is called from.
 - ``save_result``: the results of the service.
 

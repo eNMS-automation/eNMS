@@ -9,7 +9,7 @@
   events: []
   failed: 0
   hidden: false
-  jobs:
+  services:
   - Start
   - End
   - poller_service

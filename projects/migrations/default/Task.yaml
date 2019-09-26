@@ -4,8 +4,8 @@
   devices: []
   frequency: 3600
   frequency_unit: seconds
-  job: Configuration Management Workflow
-  job_id: 9
+  service: Configuration Management Workflow
+  service_id: 9
   name: Poller
   payload: {}
   pools: []
@@ -16,8 +16,8 @@
   devices: []
   frequency: 15
   frequency_unit: seconds
-  job: cluster_monitoring
-  job_id: 6
+  service: cluster_monitoring
+  service_id: 6
   name: Cluster Monitoring
   payload: {}
   pools: []

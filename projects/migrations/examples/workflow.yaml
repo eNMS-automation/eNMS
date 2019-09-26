@@ -12,7 +12,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, poller_service, git_push_configurations]
+  services: [Start, End, poller_service, git_push_configurations]
   labels: {}
   last_modified: '2019-09-20 21:28:44.198287'
   mail_recipient: ''
@@ -32,7 +32,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -55,7 +55,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
+  services: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
     netmiko_check_no_vrf_test]
   labels: {}
   last_modified: '2019-08-20 17:51:25.339733'
@@ -76,7 +76,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -99,7 +99,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
+  services: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
     netmiko_check_no_vrf_napalm]
   labels: {}
   last_modified: '2019-08-05 13:30:56.889198'
@@ -120,7 +120,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -143,7 +143,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
+  services: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
   labels:
     c9ee8980-a972-4ace-a596-03eb2842c4d7:
       content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
@@ -167,7 +167,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -190,7 +190,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
+  services: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
       Validate dict via results', 'Payload Workflow: Validate text via results', 'Payload
       Workflow: Validate text via payload', 'Payload Workflow: Validate dict via payload']
   labels: {}
@@ -212,7 +212,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -235,7 +235,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
+  services: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
     'Subworkflow: Access Variable - Result from parent workflow', Show version with
       multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow, Workflow with
       iteration targets]
@@ -257,7 +257,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -280,7 +280,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
+  services: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
     get_interfaces]
   labels: {}
   last_modified: '2019-08-13 20:37:47.934244'
@@ -300,7 +300,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -323,7 +323,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, REST
+  services: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, REST
       is_alive]
   labels:
     ce7e6857-714e-4102-a65b-ec2d67414866:
@@ -348,7 +348,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -371,7 +371,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
+  services: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
     Show vrf with payload helper, Show vrf with python query, REST is_alive, show
       runtime with get_result helper]
   labels: {}
@@ -392,7 +392,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -415,7 +415,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
+  services: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
     'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
       get facts failed match']
   labels: {}
@@ -437,7 +437,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -460,7 +460,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow: Arista
+  services: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow: Arista
       show configuration (regex match)', 'Ansible Workflow: Arista show configuration
       (dict match)']
   labels: {}
@@ -481,7 +481,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -506,7 +506,7 @@
   initial_payload: {mode: LAB}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, Example1, Show version with multiprocessing, REST is_alive, napalm_configure_bgp_1]
+  services: [Start, End, Example1, Show version with multiprocessing, REST is_alive, napalm_configure_bgp_1]
   labels:
     0844f0e4-7e29-4886-a3ed-178d48ac7317:
       content: "Multiple Entry Points:\r\nStart and Example1"
@@ -517,7 +517,7 @@
   last_modified: '2019-08-24 01:01:52.549675'
   mail_recipient: ''
   maximum_runs: 1
-  name: 'Workflow: multiple entry points, skip job, multiprocessing, separate paths'
+  name: 'Workflow: multiple entry points, skip service, multiprocessing, separate paths'
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -531,7 +531,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start, Example1]
+  start_services: [Start, Example1]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -554,7 +554,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, add_devices_to_payload, 'Iteration Target Workflow: netmiko iteration
+  services: [Start, End, add_devices_to_payload, 'Iteration Target Workflow: netmiko iteration
       2', 'Iteration Target Workflow: netmiko iteration 1', 'Iteration Target Workflow:
       netmiko iteration 3', 'Iteration Targets Workflow: No device targets']
   labels: {}
@@ -575,7 +575,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -598,7 +598,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, 'Getters Workflow: Interface IP', 'Payload Workflow: Add initial
+  services: [Start, End, 'Getters Workflow: Interface IP', 'Payload Workflow: Add initial
       variables', 'Payload Workflow: Extraction 1', 'Payload Workflow: Extraction
       2', 'Payload Workflow: Validation 1', 'Payload Workflow: Validation 2']
   labels: {}
@@ -620,7 +620,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -643,7 +643,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
+  services: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
     'Variable Access Subworkflow: Access variables for iteration']
   labels: {}
   last_modified: '2019-08-20 18:46:19.926704'
@@ -664,7 +664,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -687,7 +687,7 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  jobs: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
+  services: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
       getters and match mechanism workflow, payload_extraction_validation_worflow]
   labels: {}
   last_modified: '2019-09-10 18:09:22.639520'
@@ -708,7 +708,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10
@@ -731,7 +731,7 @@
   initial_payload: {}
   iteration_values: get_var('iteration_devices', device=device.name)
   iteration_variable_name: iteration_value
-  jobs: [Start, End, 'Workflow with iteration targets: use target for show interface']
+  services: [Start, End, 'Workflow with iteration targets: use target for show interface']
   labels: {}
   last_modified: '2019-09-09 17:03:46.868220'
   mail_recipient: ''
@@ -753,7 +753,7 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_jobs: [Start]
+  start_services: [Start]
   start_new_connection: false
   start_workflows: []
   time_between_retries: 10

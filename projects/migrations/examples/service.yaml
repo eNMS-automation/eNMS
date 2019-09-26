@@ -37,7 +37,7 @@
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
     Workflow with separate failure - success path: [-239, -32]
-    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -301, 93]
     Workflow_of_workflows: [-652, -15]
     payload_extraction_validation_worflow: [-481, -95]
@@ -99,7 +99,7 @@
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
     Workflow with separate failure - success path: [765, 251]
-    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       594, -3]
     Workflow_of_workflows: [482, -46]
     payload_extraction_validation_worflow: [175, 266]
@@ -386,7 +386,7 @@
   pools: []
   positions:
     Workflow with separate failure - success path: [773, 11]
-    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -281, -178]
   push_to_git: false
   python_query: ''
@@ -433,7 +433,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       110, -170]
   push_to_git: false
   python_query: ''
@@ -931,7 +931,7 @@
   positions:
     Netmiko prompts: [405, -103]
     Workflow with separate failure - success path: [199, 203]
-    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       357, -52]
     payload_transfer_workflow: ['-50', '0']
     'python Workflow: payload editor and pool helper': ['225', '-223']
@@ -1634,7 +1634,7 @@
   pools: []
   positions:
     Napalm_VRF_workflow: ['10', '-32']
-    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       123, -187]
     'python Workflow: payload editor and pool helper': ['266', '161']
   privileged_mode: false
@@ -2092,7 +2092,7 @@
   waiting_time: 0
 - auto_find_prompt: true
   color: '#D2E5FF'
-  command: show vrf {{get_result(job="Payload editor, with device")["endtime"]}}
+  command: show vrf {{get_result("Payload editor, with device")["endtime"]}}
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2563,7 +2563,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Workflow: multiple entry points, skip job, multiprocessing, separate paths': [
+    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       154, 108]
     Workflow_of_workflows: [178, -196]
   privileged_mode: false

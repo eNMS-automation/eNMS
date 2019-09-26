@@ -137,25 +137,25 @@
     - success path}
 - {destination: Show version with multiprocessing, label: success, name: 67-success:1->68,
   source: Start, subtype: success, workflow: 'Workflow: multiple entry points, skip
-    job, multiprocessing, separate paths'}
+    service, multiprocessing, separate paths'}
 - {destination: napalm_configure_bgp_1, label: success, name: 67-success:9->10, source: Example1,
-  subtype: success, workflow: 'Workflow: multiple entry points, skip job, multiprocessing,
+  subtype: success, workflow: 'Workflow: multiple entry points, skip service, multiprocessing,
     separate paths'}
 - {destination: REST is_alive, label: success, name: 67-success:10->20, source: napalm_configure_bgp_1,
-  subtype: success, workflow: 'Workflow: multiple entry points, skip job, multiprocessing,
+  subtype: success, workflow: 'Workflow: multiple entry points, skip service, multiprocessing,
     separate paths'}
 - {destination: REST is_alive, label: failure, name: 67-failure:68->20, source: Show
     version with multiprocessing, subtype: failure, workflow: 'Workflow: multiple
-    entry points, skip job, multiprocessing, separate paths'}
+    entry points, skip service, multiprocessing, separate paths'}
 - {destination: End, label: success, name: 67-success:20->2, source: REST is_alive,
-  subtype: success, workflow: 'Workflow: multiple entry points, skip job, multiprocessing,
+  subtype: success, workflow: 'Workflow: multiple entry points, skip service, multiprocessing,
     separate paths'}
 - {destination: REST is_alive, label: prerequisite, name: 67-prerequisite:68->20,
   source: Show version with multiprocessing, subtype: prerequisite, workflow: 'Workflow:
-    multiple entry points, skip job, multiprocessing, separate paths'}
+    multiple entry points, skip service, multiprocessing, separate paths'}
 - {destination: REST is_alive, label: prerequisite, name: 67-prerequisite:10->20,
   source: napalm_configure_bgp_1, subtype: prerequisite, workflow: 'Workflow: multiple
-    entry points, skip job, multiprocessing, separate paths'}
+    entry points, skip service, multiprocessing, separate paths'}
 - {destination: add_devices_to_payload, label: success, name: 70-success:1->26, source: Start,
   subtype: success, workflow: Iteration Targets Workflow}
 - {destination: 'Iteration Target Workflow: netmiko iteration 2', label: success,

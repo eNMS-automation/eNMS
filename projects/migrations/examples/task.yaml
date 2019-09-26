@@ -7,8 +7,8 @@
   frequency: 3600
   frequency_unit: seconds
   initial_payload: {}
-  job: Configuration Management Workflow
-  job_id: 68
+  service: Configuration Management Workflow
+  service_id: 68
   name: Poller
   pools: []
   scheduling_mode: standard
@@ -22,8 +22,8 @@
   frequency: 15
   frequency_unit: seconds
   initial_payload: {}
-  job: cluster_monitoring
-  job_id: 6
+  service: cluster_monitoring
+  service_id: 6
   name: Cluster Monitoring
   pools: []
   scheduling_mode: standard

@@ -30,7 +30,7 @@ task_diagram_properties = [
     "frequency",
     "frequency_unit",
     "crontab_expression",
-    "job_name",
+    "service_name",
 ]
 
 type_to_diagram_properties = {

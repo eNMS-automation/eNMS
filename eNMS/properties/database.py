@@ -12,16 +12,16 @@ import_classes = [
 dont_track_changes = [
     "current_configuration",
     "current_device",
-    "current_job",
+    "current_service",
     "last_modified",
     "positions",
     "state",
 ]
 
 dont_migrate = {
-    "device": ["id", "current_configuration", "jobs", "source", "destination", "pools"],
+    "device": ["id", "current_configuration", "services", "source", "destination", "pools"],
     "link": ["id", "pools"],
-    "pool": ["id", "jobs", "object_number"],
+    "pool": ["id", "services", "object_number"],
     "service": [
         "id",
         "sources",
@@ -33,7 +33,7 @@ dont_migrate = {
     ],
     "task": [
         "id",
-        "job_name",
+        "service_name",
         "next_run_time",
         "is_active",
         "time_before_next_run",

@@ -60,7 +60,7 @@ event_table_properties = ["name", "log_source", "log_content"]
 run_table_properties = [
     "runtime",
     "endtime",
-    "job_name",
+    "service_name",
     "workflow_name",
     "status",
     "progress",
@@ -69,7 +69,7 @@ run_table_properties = [
 result_table_properties = [
     "runtime",
     "endtime",
-    "job_name",
+    "service_name",
     "device_name",
     "workflow_name",
     "success",
@@ -78,7 +78,7 @@ result_table_properties = [
 task_table_properties = [
     "name",
     "description",
-    "job_name",
+    "service_name",
     "status",
     "scheduling_mode",
     "start_date",
@@ -107,7 +107,7 @@ table_properties = {
     "workflow": workflow_table_properties,
 }
 
-job_filtering_properties = [
+service_filtering_properties = [
     "name",
     "last_modified",
     "type",
@@ -134,11 +134,11 @@ filtering_properties = {
     "result": result_table_properties,
     "run": run_table_properties[:-1],
     "server": server_table_properties,
-    "service": job_filtering_properties,
+    "service": service_filtering_properties,
     "syslog": syslog_table_properties,
     "task": task_table_properties[:-2],
     "user": user_table_properties,
-    "workflow": job_filtering_properties,
+    "workflow": service_filtering_properties,
 }
 
 table_fixed_columns = {

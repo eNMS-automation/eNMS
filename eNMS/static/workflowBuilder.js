@@ -754,6 +754,7 @@ function getWorkflowState(periodic) {
     $("#current-workflow,#current-runtimes").selectpicker({
       liveSearch: true,
     });
+    $("#edge-type").selectpicker();
     getWorkflowState(true);
   });
   getWorkflowState(true);

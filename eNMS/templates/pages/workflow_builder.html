@@ -13,6 +13,9 @@ block content %}
             <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
           </li>
           <li>
+            <a href="#"><span class="glyphicon glyphicon-book"></span></a>
+          </li>
+          <li>
             <a href="#"><span class="glyphicon glyphicon-font"></span></a>
           </li>
           <li>
@@ -25,10 +28,10 @@ block content %}
             <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-check"></span></a>
+            <a href="#"><span class="glyphicon glyphicon-ok-circle"></span></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-unchecked"></span></a>
+            <a href="#"><span class="glyphicon glyphicon-ban-circle"></span></a>
           </li>
           <li>
             <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
@@ -80,24 +83,6 @@ block content %}
             ></a>
           </li>
         </ul>
-
-        <ul class="nav navbar-nav">
-          <li style="width: 250px;">
-            <a href="#"
-              ><select id="service-type" class="form-control"></select
-            ></a>
-          </li>
-          <li>
-            <a href="#"
-              ><select id="edge-type" class="form-control">
-                <option value="success">Success</option>
-                <option value="failure">Failure</option>
-                <option value="prerequisite">Prerequisite</option>
-              </select></a
-            >
-          </li>
-        </ul>
-
         <ul
           class="pagination pagination-lg"
           style="margin: 0px; padding-left: 29px; padding-top: 9px"
@@ -128,44 +113,69 @@ block content %}
         </ul>
       </nav>
       <div class="x_panel">
-        <div class="x_content" id="content">
+        <div class="x_content">
           <div
             class="btn-group"
-            style="width: 20vw; z-index:2; position: absolute; top: 10vh"
+            style="z-index:2; position: absolute; right: 0vw"
           >
-            <ul class="nav navbar-nav">
-              <li class="active" style="width: 300px;">
-                <a href="#"
-                  ><select id="current-workflow" class="form-control"></select
-                ></a>
-              </li>
-              <li class="active" style="width: 300px;">
-                <a href="#"
-                  ><select id="current-runtime" class="form-control"></select
-                ></a>
-              </li>
-            </ul>
-            <strong><p id="status"></p></strong>
-            <strong><p id="current-job"></p></strong>
-            <div id="progressbar" class="progress" style="display: none">
-              <div
-                id="progress-success"
-                class="progress-bar progress-bar-success"
-              >
-                <span id="progress-success-span" style="color:black;"></span>
-              </div>
-              <div
-                id="progress-failure"
-                class="progress-bar progress-bar-danger"
-              >
-                <span id="progress-failure-span" style="color:black;"></span>
-              </div>
+            <table
+              class="table table-bordered dt-responsive nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td>
+                    Workflow
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="current-workflow" class="form-control"></select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Runtime
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="current-runtimes" class="form-control"></select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="btn-group"
+            style="width: 20vw; z-index:2; position: absolute;"
+          >
+            <select id="service-type" class="form-control"></select>
+            <select id="edge-type" class="form-control">
+              <option value="success">Success</option>
+              <option value="failure">Failure</option>
+              <option value="prerequisite">Prerequisite</option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="btn-group"
+          style="width: 20vw; z-index:2; position: absolute; left: 35vw"
+        >
+          <strong><p id="status"></p></strong>
+          <strong><p id="current-job"></p></strong>
+          <div id="progressbar" class="progress" style="display: none">
+            <div
+              id="progress-success"
+              class="progress-bar progress-bar-success"
+            >
+              <span id="progress-success-span" style="color:black;"></span>
+            </div>
+            <div id="progress-failure" class="progress-bar progress-bar-danger">
+              <span id="progress-failure-span" style="color:black;"></span>
             </div>
           </div>
-          <div id="network" style="height:80vh; width:100%;"></div>
-          <div class="ln_solid"></div>
-          <div class="form-group"></div>
         </div>
+        <div id="network" style="height:80vh; width:100%;"></div>
+        <div class="ln_solid"></div>
+        <div class="form-group"></div>
       </div>
     </div>
   </div>
@@ -224,15 +234,6 @@ block content %}
   </li>
   <li class="menu-entry global"><a tabindex="-1" href="#">Workflow Logs</a></li>
   <li class="menu-entry global"><a tabindex="-1" href="#">Create Label</a></li>
-  <li class="dropdown-submenu menu-entry global">
-    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
-      >Selection<span class="caret-right"></span
-    ></a>
-    <ul class="dropdown-menu">
-      <li><a tabindex="-1" href="#">Skip</a></li>
-      <li><a tabindex="-1" href="#">Unskip</a></li>
-    </ul>
-  </li>
 </ul>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script>

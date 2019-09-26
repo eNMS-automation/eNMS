@@ -31,15 +31,6 @@ service_table_properties = [
     "creator",
 ]
 
-workflow_table_properties = [
-    "name",
-    "last_modified",
-    "description",
-    "vendor",
-    "operating_system",
-    "creator",
-]
-
 user_table_properties = ["name", "email"]
 
 server_table_properties = [
@@ -104,7 +95,6 @@ table_properties = {
     "syslog": syslog_table_properties,
     "task": task_table_properties,
     "user": user_table_properties,
-    "workflow": workflow_table_properties,
 }
 
 service_filtering_properties = [
@@ -138,7 +128,6 @@ filtering_properties = {
     "syslog": syslog_table_properties,
     "task": task_table_properties[:-2],
     "user": user_table_properties,
-    "workflow": service_filtering_properties,
 }
 
 table_fixed_columns = {
@@ -155,5 +144,4 @@ table_fixed_columns = {
     "task": ["Action", "Edit", "Delete"],
     "user": ["Edit", "Delete"],
     "pool": ["Visualize", "Edit", "Delete"],
-    "workflow": ["Status", "Results", "Run", "Edit", "Delete"],
 }

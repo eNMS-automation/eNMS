@@ -115,7 +115,6 @@ function doc(page) {
     "table/service": "services/index.html",
     "table/task": "events/tasks.html",
     "table/user": "administration/index.html",
-    "table/workflow": "workflows/index.html",
     view: "views/geographical_view.html",
     workflow_builder: "workflows/index.html",
   }[page];

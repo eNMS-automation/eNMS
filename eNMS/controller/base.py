@@ -139,7 +139,6 @@ class BaseController:
         "/table/syslog",
         "/table/task",
         "/table/user",
-        "/table/workflow",
         "/view/network",
         "/view/site",
         "/workflow_builder",

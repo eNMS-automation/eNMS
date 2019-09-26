@@ -40,9 +40,9 @@ class Result(AbstractBase):
         "Device", back_populates="results", foreign_keys="Result.device_id"
     )
     device_name = association_proxy("device", "name")
-    job_id = Column(Integer, ForeignKey("job.id"))
-    job = relationship("Job", foreign_keys="Result.job_id")
-    job_name = association_proxy("job", "name")
+    service_id = Column(Integer, ForeignKey("service.id"))
+    service = relationship("Job", foreign_keys="Result.service_id")
+    service_name = association_proxy("service", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
     workflow_name = association_proxy("workflow", "name")
@@ -81,9 +81,9 @@ class Run(AbstractBase):
     workflow_device_id = Column(Integer, ForeignKey("device.id"))
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(SmallString)
-    job_id = Column(Integer, ForeignKey("job.id"))
-    job = relationship("Job", back_populates="runs", foreign_keys="Run.job_id")
-    job_name = association_proxy("job", "name")
+    service_id = Column(Integer, ForeignKey("service.id"))
+    service = relationship("Job", back_populates="runs", foreign_keys="Run.service_id")
+    service_name = association_proxy("service", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
     workflow_name = association_proxy("workflow", "name")
@@ -98,16 +98,16 @@ class Run(AbstractBase):
         super().__init__(**kwargs)
 
     def __repr__(self):
-        return f"{self.runtime} ({self.job_name} run by {self.creator})"
+        return f"{self.runtime} ({self.service_name} run by {self.creator})"
 
     def __getattr__(self, key):
         if key in self.__dict__:
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
-            job, value = self.__dict__.get("job"), self.__dict__["properties"][key]
-            return convert_value(job.type, key, value, "id") if job else value
-        elif self.__dict__.get("job_id"):
-            return getattr(self.job, key)
+            service, value = self.__dict__.get("service"), self.__dict__["properties"][key]
+            return convert_value(service.type, key, value, "id") if service else value
+        elif self.__dict__.get("service_id"):
+            return getattr(self.service, key)
         else:
             raise AttributeError
 
@@ -116,18 +116,18 @@ class Run(AbstractBase):
         return result.pop() if result else None
 
     def generate_row(self, table):
-        job_type = "workflow" if self.job.type == "workflow" else "service"
+        service_type = "workflow" if self.service.type == "workflow" else "service"
         return [
             f"""<div class="btn-group" style="width: 100px;">
             <button type="button" class="btn btn-info btn-sm"
-            onclick="showResultsPanel('{self.job.id}', '{self.name}',
-            '{job_type}', '{self.runtime}')">Results</button>,
+            onclick="showResultsPanel('{self.service.id}', '{self.name}',
+            '{service_type}', '{self.runtime}')">Results</button>,
             <button type="button" class="btn btn-info btn-sm
             dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
-              showLogsPanel({self.job.row_properties}, '{self.runtime}')">Logs</a></li>
+              showLogsPanel({self.service.row_properties}, '{self.runtime}')">Logs</a></li>
             </ul></div>"""
         ]
 
@@ -151,16 +151,16 @@ class Run(AbstractBase):
                 self.parent_runtime
             )
             if parent_connection and device.name in parent_connection:
-                if self.job.start_new_connection:
+                if self.service.start_new_connection:
                     parent_connection.pop(device.name).disconnect()
                 else:
                     connection = parent_connection[device.name]
                     try:
                         connection.find_prompt()
                         for property in ("fast_cli", "timeout", "global_delay_factor"):
-                            job_value = getattr(self.job, property)
-                            if job_value:
-                                setattr(connection, property, job_value)
+                            service_value = getattr(self.service, property)
+                            if service_value:
+                                setattr(connection, property, service_value)
                         try:
                             mode = connection.check_enable_mode()
                             if mode and not self.privileged_mode:
@@ -198,14 +198,14 @@ class Run(AbstractBase):
             parent_connection = app.connections_cache["napalm"].get(self.parent_runtime)
             if parent_connection and device.name in parent_connection:
                 if (
-                    self.job.start_new_connection
+                    self.service.start_new_connection
                     or not parent_connection[device.name].is_alive()
                 ):
                     parent_connection.pop(device.name).close()
                 else:
                     return parent_connection[device.name]
         username, password = self.get_credentials(device)
-        optional_args = self.job.optional_args
+        optional_args = self.service.optional_args
         if not optional_args:
             optional_args = {}
         if "secret" not in optional_args:
@@ -231,7 +231,7 @@ class Run(AbstractBase):
     def set_state(self, **kwargs):
         app.run_db[self.runtime].update(**kwargs)
         if self.workflow:
-            app.run_db[self.parent_runtime]["jobs"][self.job.id].update(**kwargs)
+            app.run_db[self.parent_runtime]["services"][self.service.id].update(**kwargs)
             if "success" in kwargs:
                 key = "passed" if kwargs["success"] else "failed"
                 app.run_db[self.parent_runtime]["progress"][key] += 1
@@ -241,14 +241,14 @@ class Run(AbstractBase):
         return self.get_state("stop") or app.run_db[self.parent_runtime].get("stop")
 
     def compute_devices(self, payload):
-        if self.job.python_query:
-            values = self.eval(self.job.python_query, **locals())
+        if self.service.python_query:
+            values = self.eval(self.service.python_query, **locals())
             devices, not_found = [], []
             if isinstance(values, str):
                 values = [values]
             for value in values:
                 device = fetch(
-                    "device", allow_none=True, **{self.job.query_property_type: value}
+                    "device", allow_none=True, **{self.service.query_property_type: value}
                 )
                 if device:
                     devices.append(device)
@@ -285,21 +285,21 @@ class Run(AbstractBase):
 
     def run(self, payload=None):
         try:
-            self.log("info", f"{self.job.type} {self.job.name}: Starting")
-            self.set_state(status="Running", type=self.job.type)
-            app.job_db[self.job.id]["runs"] += 1
+            self.log("info", f"{self.service.type} {self.service.name}: Starting")
+            self.set_state(status="Running", type=self.service.type)
+            app.service_db[self.service.id]["runs"] += 1
             Session.commit()
-            payload = payload or self.job.initial_payload
-            if self.restart_run and self.job.type == "workflow":
+            payload = payload or self.service.initial_payload
+            if self.restart_run and self.service.type == "workflow":
                 global_result = self.restart_run.result()
                 if global_result:
                     payload["variables"] = global_result.result["results"].get(
                         "variables", {}
                     )
-            results = self.job.build_results(self, payload)
+            results = self.service.build_results(self, payload)
         except Exception:
             result = (
-                f"Running {self.job.type} '{self.job.name}'"
+                f"Running {self.service.type} '{self.service.name}'"
                 " raised the following exception:\n"
                 f"{chr(10).join(format_exc().splitlines())}\n\n"
                 "Run aborted..."
@@ -314,7 +314,7 @@ class Run(AbstractBase):
                 status = f"Completed ({'success' if results['success'] else 'failure'})"
             self.status = status
             self.set_state(status=status, success=results["success"])
-            app.job_db[self.job.id]["runs"] -= 1
+            app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["state"] = app.run_db.pop(self.runtime)
             results["logs"] = app.run_logs.pop(self.runtime)
@@ -322,10 +322,10 @@ class Run(AbstractBase):
                 self.task.is_active = False
             results["properties"] = {
                 "run": self.properties,
-                "service": self.job.get_properties(exclude=["positions"]),
+                "service": self.service.get_properties(exclude=["positions"]),
             }
             self.create_result(results)
-            self.log("info", f"{self.job.type} {self.job.name}: Finished")
+            self.log("info", f"{self.service.type} {self.service.name}: Finished")
             Session.commit()
         if not self.workflow and self.send_notification:
             self.notify(results)
@@ -333,7 +333,7 @@ class Run(AbstractBase):
 
     def create_result(self, results, device=None):
         self.success = results["success"]
-        result_kw = {"run": self, "result": results, "job": self.job_id}
+        result_kw = {"run": self, "result": results, "service": self.service_id}
         if self.workflow_id:
             result_kw["workflow"] = self.workflow_id
         if device:
@@ -342,16 +342,16 @@ class Run(AbstractBase):
 
     def get_results(self, payload, device=None):
         self.log(
-            "info", f"Running {self.job.type}{f' on {device.name}' if device else ''}"
+            "info", f"Running {self.service.type}{f' on {device.name}' if device else ''}"
         )
         results = {"runtime": app.get_time()}
         try:
             args = (device,) if device else ()
-            if self.job.iteration_values:
+            if self.service.iteration_values:
                 targets_results = {}
-                for target in self.eval(self.job.iteration_values, **locals()):
+                for target in self.eval(self.service.iteration_values, **locals()):
                     self.payload_helper(payload, self.iteration_variable_name, target)
-                    targets_results[target] = self.job.job(self, payload, *args)
+                    targets_results[target] = self.service.job(self, payload, *args)
                 results.update(
                     {
                         "results": targets_results,
@@ -359,16 +359,16 @@ class Run(AbstractBase):
                     }
                 )
             else:
-                results.update(self.job.job(self, payload, *args))
+                results.update(self.service.job(self, payload, *args))
         except Exception:
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
-        self.eval(self.job.result_postprocessing, function="exec", **locals())
+        self.eval(self.service.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
         self.log(
             "info",
-            f"Finished running {self.job.type} '{self.job.name}'"
+            f"Finished running {self.service.type} '{self.service.name}'"
             f"({'SUCCESS' if results['success'] else 'FAILURE'})"
             f"{f' on {device.name}' if device else ''}",
         )
@@ -384,7 +384,7 @@ class Run(AbstractBase):
 
     def run_notification(self, results):
         notification = self.notification_header.splitlines()
-        if self.job.type == "workflow":
+        if self.service.type == "workflow":
             return notification
         elif "devices" in results["results"] and not results["success"]:
             failed = "\n".join(
@@ -404,22 +404,22 @@ class Run(AbstractBase):
 
     def notify(self, results):
         notification = [
-            f"Job: {self.job.name} ({self.job.type})",
+            f"Job: {self.service.name} ({self.service.type})",
             f"Runtime: {self.runtime}",
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]
         notification.extend(self.run_notification(results))
         if self.include_link_in_summary:
             notification.append(
-                f"Results: {app.server_addr}/view_job_results/{self.id}"
+                f"Results: {app.server_addr}/view_service_results/{self.id}"
             )
         notification_payload = {
-            "job": self.job.get_properties(),
+            "service": self.service.get_properties(),
             "results": results,
             "content": "\n\n".join(notification),
         }
         notification_run = factory(
-            "run", **{"job": fetch("job", name=self.send_notification_method).id}
+            "run", **{"service": fetch("service", name=self.send_notification_method).id}
         )
         notification_run.run(notification_payload)
 
@@ -430,8 +430,8 @@ class Run(AbstractBase):
             else (device.username, device.password)
             if self.credentials == "device"
             else (
-                self.sub(self.job.custom_username, locals()),
-                self.sub(self.job.custom_password, locals()),
+                self.sub(self.service.custom_username, locals()),
+                self.sub(self.service.custom_password, locals()),
             )
         )
 
@@ -521,8 +521,8 @@ class Run(AbstractBase):
     def get_var(self, payload, name, device=None, **kwargs):
         return self.payload_helper(payload, name, device=device, **kwargs)
 
-    def get_result(self, job, device=None):
-        job_id = fetch("job", name=job).id
+    def get_result(self, service, device=None):
+        service_id = fetch("service", name=service).id
 
         def recursive_search(run: "Run"):
             if not run:
@@ -532,7 +532,7 @@ class Run(AbstractBase):
                 allow_none=True,
                 all_matches=True,
                 parent_runtime=run.parent_runtime,
-                job_id=job_id,
+                service_id=service_id,
             )
             results = list(filter(None, [run.result(device) for run in runs]))
             if not results:

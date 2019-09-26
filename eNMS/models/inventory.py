@@ -10,8 +10,8 @@ from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
     pool_user_table,
-    job_device_table,
-    job_pool_table,
+    service_device_table,
+    service_pool_table,
     task_device_table,
     task_pool_table,
 )
@@ -83,7 +83,7 @@ class Device(CustomDevice):
     last_update = Column(SmallString, default="Never")
     last_runtime = Column(SmallString)
     last_duration = Column(SmallString)
-    jobs = relationship("Job", secondary=job_device_table, back_populates="devices")
+    services = relationship("Job", secondary=service_device_table, back_populates="devices")
     results = relationship(
         "Result", back_populates="device", cascade="all, delete-orphan"
     )
@@ -277,7 +277,7 @@ class Pool(AbstractPool):
     links = relationship("Link", secondary=pool_link_table, back_populates="pools")
     latitude = Column(SmallString, default="0.0")
     longitude = Column(SmallString, default="0.0")
-    jobs = relationship("Job", secondary=job_pool_table, back_populates="pools")
+    services = relationship("Job", secondary=service_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=True)

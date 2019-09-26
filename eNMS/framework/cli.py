@@ -33,7 +33,7 @@ def configure_cli(flask_app):
         Session.commit()
         echo(app.str_dict(device))
 
-    @flask_app.cli.command(name="run_job")
+    @flask_app.cli.command(name="run_service")
     @argument("name")
     @option("--devices")
     @option("--payload")
@@ -42,7 +42,7 @@ def configure_cli(flask_app):
         devices_list = [fetch("device", name=name).id for name in devices_list]
         payload_dict = loads(payload) if payload else {}
         payload_dict["devices"] = devices_list
-        job = fetch("job", name=name)
-        results = app.run(job.id, **payload_dict)
+        service = fetch("service", name=name)
+        results = app.run(service.id, **payload_dict)
         Session.commit()
         echo(app.str_dict(results))

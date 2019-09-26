@@ -96,8 +96,8 @@ class GetResult(Resource):
     decorators = [auth.login_required]
 
     def get(self, name, runtime):
-        job = fetch("job", name=name)
-        return fetch("result", job_id=job.id, runtime=runtime).result
+        service = fetch("service", name=name)
+        return fetch("result", service_id=service.id, runtime=runtime).result
 
 
 class UpdateInstance(Resource):
@@ -129,7 +129,7 @@ class RunJob(Resource):
         try:
             errors, data = [], request.get_json(force=True)
             devices, pools = [], []
-            job = fetch("job", name=data["name"])
+            service = fetch("service", name=data["name"])
             handle_asynchronously = data.get("async", False)
             for device_name in data.get("devices", ""):
                 device = fetch("device", name=device_name)
@@ -152,7 +152,7 @@ class RunJob(Resource):
             if errors:
                 return {"errors": errors}
         except Exception as e:
-            info(f"REST API run_job endpoint failed ({str(e)})")
+            info(f"REST API run_service endpoint failed ({str(e)})")
             return str(e)
         if devices or pools:
             data.update({"devices": devices, "pools": pools})
@@ -162,13 +162,13 @@ class RunJob(Resource):
                 id=runtime,
                 func=app.run,
                 run_date=datetime.now(),
-                args=[job.id],
+                args=[service.id],
                 kwargs=data,
                 trigger="date",
             )
             return {"errors": errors, "runtime": runtime}
         else:
-            return {**app.run(job.id, **data), "errors": errors}
+            return {**app.run(service.id, **data), "errors": errors}
 
 
 class Topology(Resource):
@@ -193,7 +193,7 @@ def configure_rest_api(flask_app):
         api.add_resource(resource, f"/rest/{endpoint}")
     api.add_resource(CreatePool, "/rest/create_pool")
     api.add_resource(Heartbeat, "/rest/is_alive")
-    api.add_resource(RunJob, "/rest/run_job")
+    api.add_resource(RunJob, "/rest/run_service")
     api.add_resource(Query, "/rest/query/<string:cls>")
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")

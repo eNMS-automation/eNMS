@@ -10,7 +10,7 @@ from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.associations import (
-    job_event_table,
+    service_event_table,
     task_device_table,
     task_pool_table,
 )
@@ -38,9 +38,9 @@ class Task(AbstractBase):
         "Device", secondary=task_device_table, back_populates="tasks"
     )
     pools = relationship("Pool", secondary=task_pool_table, back_populates="tasks")
-    job_id = Column(Integer, ForeignKey("job.id"))
-    job = relationship("Job", back_populates="tasks")
-    job_name = association_proxy("job", "name")
+    service_id = Column(Integer, ForeignKey("service.id"))
+    service = relationship("Job", back_populates="tasks")
+    service_name = association_proxy("service", "name")
 
     def __init__(self, **kwargs):
         super().update(**kwargs)
@@ -136,7 +136,7 @@ class Task(AbstractBase):
             "id": self.aps_job_id,
             "func": app.run,
             "replace_existing": True,
-            "args": [self.job.id],
+            "args": [self.service.id],
             "kwargs": self.run_properties(),
         }
         if self.scheduling_mode == "cron":
@@ -226,7 +226,7 @@ class Event(AbstractBase):
     log_source_regex = Column(Boolean, default=False)
     log_content = Column(SmallString)
     log_content_regex = Column(Boolean, default=False)
-    jobs = relationship("Job", secondary=job_event_table, back_populates="events")
+    services = relationship("Job", secondary=service_event_table, back_populates="events")
 
     def generate_row(self, table):
         return [
@@ -250,5 +250,5 @@ class Event(AbstractBase):
             else self.log_content in content
         )
         if source_match and content_match:
-            for job in self.jobs:
-                job.run()
+            for service in self.services:
+                service.run()

@@ -241,8 +241,6 @@ class Workflow(Job):
     has_targets = Column(Boolean, default=True)
     id = Column(Integer, ForeignKey("job.id"), primary_key=True)
     labels = Column(MutableDict)
-    use_workflow_devices = Column(Boolean, default=True)
-    traversal_mode = Column(SmallString, default="service")
     jobs = relationship("Job", secondary=job_workflow_table, back_populates="workflows")
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
@@ -287,7 +285,7 @@ class Workflow(Job):
                 skip_job = run.eval(job.skip_python_query, **locals())
             if skip_job or job.skip:
                 job_results = {"success": "skipped"}
-            elif run.use_workflow_devices and job.python_query:
+            elif device and job.python_query:
                 try:
                     job_run = factory(
                         "run",
@@ -326,41 +324,36 @@ class Workflow(Job):
             results["results"].update(payload)
             for successor in successors:
                 jobs.append(successor)
-                if (device or not run.use_workflow_devices) and successor == self.jobs[
-                    1
-                ]:
+                if successor == self.jobs[1]:
                     results["success"] = True
             if not skip_job and not job.skip:
                 sleep(job.waiting_time)
         return results
 
     def build_results(self, run, payload):
-        if run.traversal_mode == "service":
-            return self.workflow_run(run, payload)
-        else:
-            device_results = {}
-            for device in run.compute_devices(payload):
-                if run.iteration_values:
-                    targets_results = {}
-                    for target in run.eval(run.iteration_values, **locals()):
-                        run.payload_helper(payload, run.iteration_variable_name, target)
-                        targets_results[target] = self.workflow_run(
-                            run, payload, device
-                        )
-                    device_results[device.name] = {
-                        "results": targets_results,
-                        "success": all(r["success"] for r in targets_results.values()),
-                    }
-                else:
-                    device_results[device.name] = self.workflow_run(
+        device_results = {}
+        for device in run.compute_devices(payload):
+            if run.iteration_values:
+                targets_results = {}
+                for target in run.eval(run.iteration_values, **locals()):
+                    run.payload_helper(payload, run.iteration_variable_name, target)
+                    targets_results[target] = self.workflow_run(
                         run, payload, device
                     )
-            success = all(r["success"] for r in device_results.values())
-            return {
-                "results": {"devices": device_results},
-                "success": success,
-                "runtime": run.runtime,
-            }
+                device_results[device.name] = {
+                    "results": targets_results,
+                    "success": all(r["success"] for r in targets_results.values()),
+                }
+            else:
+                device_results[device.name] = self.workflow_run(
+                    run, payload, device
+                )
+        success = all(r["success"] for r in device_results.values())
+        return {
+            "results": {"devices": device_results},
+            "success": success,
+            "runtime": run.runtime,
+        }
 
     @property
     def job_number(self):

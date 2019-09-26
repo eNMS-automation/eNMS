@@ -425,17 +425,6 @@ function showTypePanel(type, id, mode) {
               `duplicateWorkflow(${id})`
             );
           }
-          if (type === "workflow") {
-            $(`#workflow-use_workflow_devices-${id}`).change(function() {
-              let isChecked = $(this).is(":checked");
-              if (!isChecked) {
-                $(`#workflow-traversal_mode-${id}`).val("service");
-              }
-              $(`#workflow-traversal_mode-${id}`).prop("disabled", !isChecked);
-              $(`#workflow-traversal_mode-${id}`).selectpicker("refresh");
-            });
-            $(`#workflow-use_workflow_devices-${id}`).trigger("change");
-          }
           if (type == "workflow" && mode == "run") {
             workflowRunMode(instance);
           }
@@ -495,9 +484,6 @@ function processInstance(type, instance) {
 
 // eslint-disable-next-line
 function processData(type, id) {
-  if (type.includes("service") || type === "workflow") {
-    $(`#workflow-traversal_mode-${id}`).prop("disabled", false);
-  }
   fCall(
     `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,

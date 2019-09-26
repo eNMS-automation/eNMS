@@ -109,14 +109,6 @@ class ServiceForm(JobForm):
 
 class WorkflowForm(JobForm):
     form_type = HiddenField(default="workflow")
-    use_workflow_devices = BooleanField("Use Workflow Devices", default=True)
-    traversal_mode = SelectField(
-        "Traversal Mode",
-        choices=(
-            ("service", "Workflow runs one service at a time"),
-            ("device", "All devices run independently through the workflow"),
-        ),
-    )
     start_jobs = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 

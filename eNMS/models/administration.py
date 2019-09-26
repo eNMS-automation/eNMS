@@ -23,17 +23,20 @@ class Server(AbstractBase):
             f"""<center>
             <ul class="pagination pagination-lg" style="margin: 0px;">
           <li>
-            <button type="button" class="btn btn-primary" onclick="showTypePanel('server', '{self.id}')"
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('server', '{self.id}')"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" onclick="showTypePanel('server', '{self.id}', 'duplicate')"
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('server', '{self.id}', 'duplicate')"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-danger" onclick="showDeletionPanel({self.row_properties})"
+            <button type="button" class="btn btn-danger"
+            onclick="showDeletionPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-remove"></span
             ></button>
           </li>
@@ -95,17 +98,20 @@ class User(AbstractBase, UserMixin):
             f"""<center>
             <ul class="pagination pagination-lg" style="margin: 0px;">
           <li>
-            <button type="button" class="btn btn-primary" onclick="showTypePanel('user', '{self.id}')"
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('user', '{self.id}')"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" onclick="showTypePanel('user', '{self.id}', 'duplicate')"
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('user', '{self.id}', 'duplicate')"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-danger" onclick="showDeletionPanel({self.row_properties})"
+            <button type="button" class="btn btn-danger"
+            onclick="showDeletionPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-remove"></span
             ></button>
           </li>

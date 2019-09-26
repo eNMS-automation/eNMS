@@ -87,13 +87,10 @@ class User(AbstractBase, UserMixin):
 
     def generate_row(self, table):
         return [
-            f"""<ul
-          class="pagination pagination-lg"
-          style="margin: 0px; padding-left: 29px; padding-top: 9px"
-        >
+            f"""<ul class="pagination pagination-lg" style="margin: 0px;">
           <li>
             <a onclick="showTypePanel('user', '{self.id}')"
-              ><span class="glyphicon glyphicon-cog"></span
+              ><span class="glyphicon glyphicon-edit"></span
             ></a>
           </li>
           <li>

@@ -122,7 +122,7 @@ class Migrate(Resource):
         return getattr(app, f"migration_{direction}")(**kwargs)
 
 
-class RunJob(Resource):
+class RunService(Resource):
     decorators = [auth.login_required]
 
     def post(self):
@@ -193,7 +193,7 @@ def configure_rest_api(flask_app):
         api.add_resource(resource, f"/rest/{endpoint}")
     api.add_resource(CreatePool, "/rest/create_pool")
     api.add_resource(Heartbeat, "/rest/is_alive")
-    api.add_resource(RunJob, "/rest/run_service")
+    api.add_resource(RunService, "/rest/run_service")
     api.add_resource(Query, "/rest/query/<string:cls>")
     api.add_resource(UpdateInstance, "/rest/instance/<string:cls>")
     api.add_resource(GetInstance, "/rest/instance/<string:cls>/<string:name>")

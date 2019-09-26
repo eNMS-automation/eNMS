@@ -27,7 +27,7 @@ class Workflow(Service):
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
     )
     start_services = relationship(
-        "Job", secondary=start_services_workflow_table, backref="start_workflows"
+        "Service", secondary=start_services_workflow_table, backref="start_workflows"
     )
 
     def __init__(self, **kwargs):

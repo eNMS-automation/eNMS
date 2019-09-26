@@ -116,7 +116,7 @@ class Service(AbstractBase):
             <ul class="dropdown-menu" role="menu">
               <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}',
               'duplicate')">Duplicate</a></li>
-              <li><a href="#" onclick="exportJob('{self.id}')">Export</a></li>
+              <li><a href="#" onclick="exportService('{self.id}')">Export</a></li>
             </ul>
             </div>""",
             f"""<button type="button" class="btn btn-danger btn-sm"
@@ -231,15 +231,15 @@ class WorkflowEdge(AbstractBase):
     subtype = Column(SmallString)
     source_id = Column(Integer, ForeignKey("service.id"))
     source = relationship(
-        "Job",
-        primaryjoin="Job.id == WorkflowEdge.source_id",
+        "Service",
+        primaryjoin="Service.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.source_id",
     )
     destination_id = Column(Integer, ForeignKey("service.id"))
     destination = relationship(
-        "Job",
-        primaryjoin="Job.id == WorkflowEdge.destination_id",
+        "Service",
+        primaryjoin="Service.id == WorkflowEdge.destination_id",
         backref=backref("sources", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.destination_id",
     )

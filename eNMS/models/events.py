@@ -39,7 +39,7 @@ class Task(AbstractBase):
     )
     pools = relationship("Pool", secondary=task_pool_table, back_populates="tasks")
     service_id = Column(Integer, ForeignKey("service.id"))
-    service = relationship("Job", back_populates="tasks")
+    service = relationship("Service", back_populates="tasks")
     service_name = association_proxy("service", "name")
 
     def __init__(self, **kwargs):
@@ -226,7 +226,7 @@ class Event(AbstractBase):
     log_source_regex = Column(Boolean, default=False)
     log_content = Column(SmallString)
     log_content_regex = Column(Boolean, default=False)
-    services = relationship("Job", secondary=service_event_table, back_populates="events")
+    services = relationship("Service", secondary=service_event_table, back_populates="events")
 
     def generate_row(self, table):
         return [

@@ -83,7 +83,7 @@ class Device(CustomDevice):
     last_update = Column(SmallString, default="Never")
     last_runtime = Column(SmallString)
     last_duration = Column(SmallString)
-    services = relationship("Job", secondary=service_device_table, back_populates="devices")
+    services = relationship("Service", secondary=service_device_table, back_populates="devices")
     results = relationship(
         "Result", back_populates="device", cascade="all, delete-orphan"
     )
@@ -277,7 +277,7 @@ class Pool(AbstractPool):
     links = relationship("Link", secondary=pool_link_table, back_populates="pools")
     latitude = Column(SmallString, default="0.0")
     longitude = Column(SmallString, default="0.0")
-    services = relationship("Job", secondary=service_pool_table, back_populates="pools")
+    services = relationship("Service", secondary=service_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=True)

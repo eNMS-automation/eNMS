@@ -41,7 +41,7 @@ class Result(AbstractBase):
     )
     device_name = association_proxy("device", "name")
     service_id = Column(Integer, ForeignKey("service.id"))
-    service = relationship("Job", foreign_keys="Result.service_id")
+    service = relationship("Service", foreign_keys="Result.service_id")
     service_name = association_proxy("service", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
@@ -82,7 +82,7 @@ class Run(AbstractBase):
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(SmallString)
     service_id = Column(Integer, ForeignKey("service.id"))
-    service = relationship("Job", back_populates="runs", foreign_keys="Run.service_id")
+    service = relationship("Service", back_populates="runs", foreign_keys="Run.service_id")
     service_name = association_proxy("service", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
@@ -404,7 +404,7 @@ class Run(AbstractBase):
 
     def notify(self, results):
         notification = [
-            f"Job: {self.service.name} ({self.service.type})",
+            f"Service: {self.service.name} ({self.service.type})",
             f"Runtime: {self.runtime}",
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]

@@ -13,7 +13,7 @@ from eNMS.forms.fields import (
 )
 
 
-class JobForm(BaseForm):
+class ServiceForm(BaseForm):
     template = "service"
     form_type = HiddenField(default="service")
     id = HiddenField()
@@ -54,6 +54,18 @@ class JobForm(BaseForm):
         "Iteration Variable Name", default="iteration_value"
     )
     result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
+    credentials = SelectField(
+        "Credentials",
+        choices=(
+            ("device", "Device Credentials"),
+            ("user", "User Credentials"),
+            ("custom", "Custom Credentials"),
+        ),
+    )
+    custom_username = SubstitutionField("Custom Username")
+    custom_password = PasswordSubstitutionField("Custom Password")
+    multiprocessing = BooleanField("Multiprocessing")
+    max_processes = IntegerField("Maximum number of processes", default=50)
     query_fields = ["python_query", "skip_python_query", "iteration_values"]
 
     def validate(self):
@@ -91,22 +103,6 @@ class RunForm(BaseForm):
     id = HiddenField()
 
 
-class ServiceForm(JobForm):
-    form_type = HiddenField(default="service")
-    credentials = SelectField(
-        "Credentials",
-        choices=(
-            ("device", "Device Credentials"),
-            ("user", "User Credentials"),
-            ("custom", "Custom Credentials"),
-        ),
-    )
-    custom_username = SubstitutionField("Custom Username")
-    custom_password = PasswordSubstitutionField("Custom Password")
-    multiprocessing = BooleanField("Multiprocessing")
-    max_processes = IntegerField("Maximum number of processes", default=50)
-
-
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
@@ -136,8 +132,8 @@ class DisplayForm(BaseForm):
     form_type = HiddenField(default="display")
 
 
-class AddJobsForm(BaseForm):
-    action = "addJobsToWorkflow"
+class AddServicesForm(BaseForm):
+    action = "addServicesToWorkflow"
     form_type = HiddenField(default="add_services")
     services = MultipleInstanceField("Add services")
 

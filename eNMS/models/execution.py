@@ -301,7 +301,7 @@ class Run(AbstractBase):
                     payload["variables"] = global_result.result["results"].get(
                         "variables", {}
                     )
-            results = self.service.build_results(self, payload)
+            results = self.service.device_run(self, payload)
         except Exception:
             result = (
                 f"Running {self.service.type} '{self.service.name}'"

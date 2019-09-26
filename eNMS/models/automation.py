@@ -151,6 +151,7 @@ class Service(AbstractBase):
             args[4][device.name] = device_result
 
     def device_run(self, run, payload):
+        run.set_state(completed=0, failed=0)
         devices = run.compute_devices(payload)
         if not devices:
             result = run.get_results(payload)
@@ -173,17 +174,9 @@ class Service(AbstractBase):
                     device.name: run.get_results(payload, device) for device in devices
                 }
             for device_name, r in deepcopy(device_results).items():
-                device = fetch("device", name=device_name)
-                run.create_result(r, device)
-            results = {"devices": device_results}
-            return results
-
-    def build_results(self, run, payload, *other):
-        run.set_state(completed=0, failed=0)
-        self.device_run(run, payload)
-        Session.commit()
-        results = fetch("result", service_id=self.id, parent_runtime=run.runtime, allow_none=True, all_matches=True)
-        return {"success": all(result.success for result in results), "runtime": run.runtime}
+                run.create_result(r, fetch("device", name=device_name))
+            results = fetch("result", service_id=self.id, parent_runtime=run.runtime, allow_none=True, all_matches=True)
+            return {"success": all(result.success for result in results), "runtime": run.runtime}
 
 
 class WorkflowEdge(AbstractBase):

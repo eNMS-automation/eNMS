@@ -60,3 +60,7 @@ anything.
 - Refactoring of the workflow system
 
 - You can now specify the alignment for workflow labels
+
+- Workflow backend refactoring:
+* remove "Use Workflow Devices" property.
+* remove mode traversal property.

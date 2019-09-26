@@ -262,7 +262,7 @@ class Workflow(Job):
         app.run_db[run.runtime].update(
             {"jobs": defaultdict(dict), "edges": {}, "progress": defaultdict(int)}
         )
-        run.set_state(progress_max=self.job_number)
+        run.set_state(progress_max=len(self.jobs))
         number_of_runs = defaultdict(int)
         jobs = list(run.start_jobs)
         payload = deepcopy(payload)
@@ -354,12 +354,6 @@ class Workflow(Job):
             "success": success,
             "runtime": run.runtime,
         }
-
-    @property
-    def job_number(self):
-        return sum(
-            (1 + job.job_number) if job.type == "workflow" else 1 for job in self.jobs
-        )
 
 
 class WorkflowEdge(AbstractBase):

@@ -626,11 +626,9 @@ function getJobState(id) {
     if (service.status == "Running") {
       colorJob(id, "#89CFF0");
       $("#status").text("Status: Running.");
-      $("#current-job").text(`Current job: ${service.name}.`);
       setTimeout(() => getJobState(id), 1500);
     } else {
       $("#status").text("Status: Idle.");
-      $("#current-job").empty();
       colorJob(id, service.color);
     }
   });
@@ -662,9 +660,6 @@ function displayWorkflowState(result) {
     const currJob = result.state.current_job;
     if (currJob) {
       colorJob(currJob.id, "#89CFF0");
-      $("#current-job").text(`Current job: ${result.state.current_job.name}.`);
-    } else {
-      $("#current-job").empty();
     }
     if (result.state.jobs) {
       $.each(result.state.jobs, (id, state) => {

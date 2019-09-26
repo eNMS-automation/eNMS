@@ -153,86 +153,6 @@ class Run(AbstractBase):
         else:
             return "N/A"
 
-    def netmiko_connection(self, device):
-        if self.parent_runtime in app.connections_cache["netmiko"]:
-            parent_connection = app.connections_cache["netmiko"].get(
-                self.parent_runtime
-            )
-            if parent_connection and device.name in parent_connection:
-                if self.service.start_new_connection:
-                    parent_connection.pop(device.name).disconnect()
-                else:
-                    connection = parent_connection[device.name]
-                    try:
-                        connection.find_prompt()
-                        for property in ("fast_cli", "timeout", "global_delay_factor"):
-                            service_value = getattr(self.service, property)
-                            if service_value:
-                                setattr(connection, property, service_value)
-                        try:
-                            mode = connection.check_enable_mode()
-                            if mode and not self.privileged_mode:
-                                connection.exit_enable_mode()
-                            elif self.privileged_mode and not mode:
-                                connection.enable()
-                        except Exception as exc:
-                            self.log("error", f"Failed to honor the enable mode {exc}")
-                        return connection
-                    except (OSError, ValueError):
-                        self.disconnect("netmiko", device, connection)
-                        parent_connection.pop(device.name)
-        username, password = self.get_credentials(device)
-        driver = device.netmiko_driver if self.use_device_driver else self.driver
-        netmiko_connection = ConnectHandler(
-            device_type=driver,
-            ip=device.ip_address,
-            port=getattr(device, "port"),
-            username=username,
-            password=password,
-            secret=device.enable_password,
-            fast_cli=self.fast_cli,
-            timeout=self.timeout,
-            global_delay_factor=self.global_delay_factor,
-        )
-        if self.privileged_mode:
-            netmiko_connection.enable()
-        app.connections_cache["netmiko"][self.parent_runtime][
-            device.name
-        ] = netmiko_connection
-        return netmiko_connection
-
-    def napalm_connection(self, device):
-        if self.parent_runtime in app.connections_cache["napalm"]:
-            parent_connection = app.connections_cache["napalm"].get(self.parent_runtime)
-            if parent_connection and device.name in parent_connection:
-                if (
-                    self.service.start_new_connection
-                    or not parent_connection[device.name].is_alive()
-                ):
-                    parent_connection.pop(device.name).close()
-                else:
-                    return parent_connection[device.name]
-        username, password = self.get_credentials(device)
-        optional_args = self.service.optional_args
-        if not optional_args:
-            optional_args = {}
-        if "secret" not in optional_args:
-            optional_args["secret"] = device.enable_password
-        driver = get_network_driver(
-            device.napalm_driver if self.use_device_driver else self.driver
-        )
-        napalm_connection = driver(
-            hostname=device.ip_address,
-            username=username,
-            password=password,
-            optional_args=optional_args,
-        )
-        napalm_connection.open()
-        app.connections_cache["napalm"][self.parent_runtime][
-            device.name
-        ] = napalm_connection
-        return napalm_connection
-
     def get_state(self, property):
         return app.run_db[self.runtime].get(property)
 
@@ -275,26 +195,6 @@ class Run(AbstractBase):
         self.set_state(number_of_targets=len(devices))
         return devices
 
-    def close_connection_cache(self):
-        pool = ThreadPool(30)
-        for library in ("netmiko", "napalm"):
-            connections = app.connections_cache[library].pop(self.runtime, None)
-            if not connections:
-                continue
-            for connection in connections.items():
-                pool.apply_async(self.disconnect, (library, *connection))
-        pool.close()
-        pool.join()
-
-    def disconnect(self, library, device, connection):
-        try:
-            connection.disconnect() if library == "netmiko" else connection.close()
-            self.log("info", f"Closed {library} Connection to {device}")
-        except Exception as exc:
-            self.log(
-                "error", f"{library} Connection to {device} couldn't be closed ({exc})"
-            )
-
     def run(self, payload=None):
         try:
             if self.service.type == "workflow":
@@ -310,7 +210,7 @@ class Run(AbstractBase):
                     payload["variables"] = global_result.result["results"].get(
                         "variables", {}
                     )
-            results = self.service.device_run(self, payload)
+            results = self.device_run(payload)
         except Exception:
             result = (
                 f"Running {self.service.type} '{self.service.name}'"
@@ -339,6 +239,51 @@ class Run(AbstractBase):
         if not self.workflow and self.send_notification:
             self.notify(results)
         return results
+
+    @staticmethod
+    def get_device_result(args):
+        device = fetch("device", id=args[0])
+        run = fetch("run", runtime=args[1])
+        device_result = run.get_results(args[2], device)
+        with args[3]:
+            args[4][device.name] = device_result
+
+    def device_run(self, payload):
+        self.set_state(completed=0, failed=0)
+        devices = self.compute_devices(payload)
+        if not devices:
+            result = self.get_results(payload)
+            return self.create_result(result)
+        else:
+            if self.multiprocessing:
+                device_results = {}
+                thread_lock = Lock()
+                processes = min(len(devices), self.max_processes)
+                process_args = [
+                    (device.id, self.runtime, payload, thread_lock, device_results)
+                    for device in devices
+                ]
+                pool = ThreadPool(processes=processes)
+                pool.map(self.get_device_result, process_args)
+                pool.close()
+                pool.join()
+            else:
+                device_results = {
+                    device.name: self.get_results(payload, device) for device in devices
+                }
+            for device_name, r in deepcopy(device_results).items():
+                self.create_result(r, fetch("device", name=device_name))
+            results = fetch(
+                "result",
+                service_id=self.id,
+                parent_runtime=self.runtime,
+                allow_none=True,
+                all_matches=True,
+            )
+            return {
+                "success": all(result.success for result in results),
+                "runtime": self.runtime,
+            }
 
     def create_result(self, results, device=None):
         self.success = results["success"]
@@ -423,6 +368,86 @@ class Run(AbstractBase):
             **{"service": fetch("service", name=self.send_notification_method).id},
         )
         notification_run.run(notification_payload)
+
+    def netmiko_connection(self, device):
+        if self.parent_runtime in app.connections_cache["netmiko"]:
+            parent_connection = app.connections_cache["netmiko"].get(
+                self.parent_runtime
+            )
+            if parent_connection and device.name in parent_connection:
+                if self.service.start_new_connection:
+                    parent_connection.pop(device.name).disconnect()
+                else:
+                    connection = parent_connection[device.name]
+                    try:
+                        connection.find_prompt()
+                        for property in ("fast_cli", "timeout", "global_delay_factor"):
+                            service_value = getattr(self.service, property)
+                            if service_value:
+                                setattr(connection, property, service_value)
+                        try:
+                            mode = connection.check_enable_mode()
+                            if mode and not self.privileged_mode:
+                                connection.exit_enable_mode()
+                            elif self.privileged_mode and not mode:
+                                connection.enable()
+                        except Exception as exc:
+                            self.log("error", f"Failed to honor the enable mode {exc}")
+                        return connection
+                    except (OSError, ValueError):
+                        self.disconnect("netmiko", device, connection)
+                        parent_connection.pop(device.name)
+        username, password = self.get_credentials(device)
+        driver = device.netmiko_driver if self.use_device_driver else self.driver
+        netmiko_connection = ConnectHandler(
+            device_type=driver,
+            ip=device.ip_address,
+            port=getattr(device, "port"),
+            username=username,
+            password=password,
+            secret=device.enable_password,
+            fast_cli=self.fast_cli,
+            timeout=self.timeout,
+            global_delay_factor=self.global_delay_factor,
+        )
+        if self.privileged_mode:
+            netmiko_connection.enable()
+        app.connections_cache["netmiko"][self.parent_runtime][
+            device.name
+        ] = netmiko_connection
+        return netmiko_connection
+
+    def napalm_connection(self, device):
+        if self.parent_runtime in app.connections_cache["napalm"]:
+            parent_connection = app.connections_cache["napalm"].get(self.parent_runtime)
+            if parent_connection and device.name in parent_connection:
+                if (
+                    self.service.start_new_connection
+                    or not parent_connection[device.name].is_alive()
+                ):
+                    parent_connection.pop(device.name).close()
+                else:
+                    return parent_connection[device.name]
+        username, password = self.get_credentials(device)
+        optional_args = self.service.optional_args
+        if not optional_args:
+            optional_args = {}
+        if "secret" not in optional_args:
+            optional_args["secret"] = device.enable_password
+        driver = get_network_driver(
+            device.napalm_driver if self.use_device_driver else self.driver
+        )
+        napalm_connection = driver(
+            hostname=device.ip_address,
+            username=username,
+            password=password,
+            optional_args=optional_args,
+        )
+        napalm_connection.open()
+        app.connections_cache["napalm"][self.parent_runtime][
+            device.name
+        ] = napalm_connection
+        return napalm_connection
 
     def get_credentials(self, device):
         return (
@@ -589,3 +614,23 @@ class Run(AbstractBase):
     @property
     def name(self):
         return repr(self)
+
+    def close_connection_cache(self):
+        pool = ThreadPool(30)
+        for library in ("netmiko", "napalm"):
+            connections = app.connections_cache[library].pop(self.runtime, None)
+            if not connections:
+                continue
+            for connection in connections.items():
+                pool.apply_async(self.disconnect, (library, *connection))
+        pool.close()
+        pool.join()
+
+    def disconnect(self, library, device, connection):
+        try:
+            connection.disconnect() if library == "netmiko" else connection.close()
+            self.log("info", f"Closed {library} Connection to {device}")
+        except Exception as exc:
+            self.log(
+                "error", f"{library} Connection to {device} couldn't be closed ({exc})"
+            )

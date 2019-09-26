@@ -87,7 +87,8 @@ class User(AbstractBase, UserMixin):
 
     def generate_row(self, table):
         return [
-            f"""<ul class="pagination pagination-lg" style="margin: 0px;">
+            f"""<center>
+            <ul class="pagination pagination-lg" style="margin: 0px">
           <li>
             <a onclick="showTypePanel('user', '{self.id}')"
               ><span class="glyphicon glyphicon-edit"></span
@@ -95,15 +96,15 @@ class User(AbstractBase, UserMixin):
           </li>
           <li>
             <a onclick="showTypePanel('user', '{self.id}', 'duplicate')"
-              ><span class="glyphicon glyphicon-list"></span
+              ><span class="glyphicon glyphicon-duplicate"></span
             ></a>
           </li>
           <li>
             <a onclick="showDeletionPanel({self.row_properties})"
-              ><span class="glyphicon glyphicon-list-alt"></span
+              ><span class="glyphicon glyphicon-remove"></span
             ></a>
           </li>
-        </ul>""",
+        </ul></center>""",
         ]
 
     @property

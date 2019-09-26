@@ -86,47 +86,49 @@ class Service(AbstractBase):
         number_of_runs = app.service_db[self.id]["runs"]
         return [
             f"Running ({number_of_runs})" if number_of_runs else "Idle",
-            f"""<div class="btn-group" style="width: 100px;">
-            <button type="button" class="btn btn-info btn-sm"
-            onclick="showResultsPanel({self.row_properties})">
-            </i>Results</a></button>,
-            <button type="button" class="btn btn-info btn-sm
-            dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#" onclick="showLogsPanel({self.row_properties})">
-              Logs</a></li>
-            </ul>
-            </div>""",
-            f"""<div class="btn-group" style="width: 80px;">
-            <button type="button" class="btn btn-success btn-sm"
-            onclick="normalRun('{self.id}')">Run</button>,
-            <button type="button" class="btn btn-success btn-sm
-            dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}',
-              'run')">Run with Updates</a></li>
-            </ul>
-            </div>""",
-            f"""<div class="btn-group" style="width: 80px;">
-            <button type="button" class="btn btn-primary btn-sm"
-            onclick="showTypePanel('{self.type}', '{self.id}')">Edit</button>,
-            <button type="button" class="btn btn-primary btn-sm
-            dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#" onclick="showTypePanel('{self.type}', '{self.id}',
-              'duplicate')">Duplicate</a></li>
-              <li><a href="#" onclick="exportService('{self.id}')">Export</a></li>
-            </ul>
-            </div>""",
-            f"""<button type="button" class="btn btn-danger btn-sm"
-            onclick="showDeletionPanel({self.row_properties})">
-            Delete</button>""",
+            f"""<center>
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 430px">
+          <li>
+            <button class="btn btn-info" onclick="showResultsPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-list-alt"></span
+            ></button>
+          </li>
+          <li>
+            <button class="btn btn-info" onclick="showLogsPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-list"></span
+            ></button>
+          </li>
+          <li>
+            <a onclick="normalRun('{self.id}')"
+              ><span class="glyphicon glyphicon-play"></span
+            ></a>
+          </li>
+          <li>
+            <a onclick="showTypePanel('{self.type}', '{self.id}', 'run')"
+              ><span class="glyphicon glyphicon-play-circle"></span
+            ></a>
+          </li>
+          <li>
+            <a onclick="showTypePanel('{self.type}', '{self.id}')"
+              ><span class="glyphicon glyphicon-edit"></span
+            ></a>
+          </li>
+          <li>
+            <a onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')"
+              ><span class="glyphicon glyphicon-duplicate"></span
+            ></a>
+          </li>
+          <li>
+            <a onclick="exportService('{self.id}')"
+              ><span class="glyphicon glyphicon-download"></span
+            ></a>
+          </li>
+          <li>
+            <a onclick="showDeletionPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-remove"></span
+            ></a>
+          </li>
+        </ul></center>""",
         ]
 
     def adjacent_services(self, workflow, direction, subtype):

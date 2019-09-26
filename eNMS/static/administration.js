@@ -130,29 +130,29 @@ function migrationsImport() {
 }
 
 function refreshExportedJobs() {
-  call("/get_exported_jobs", function(jobs) {
-    let list = document.getElementById("jobs_to_import");
-    jobs.forEach((item) => {
+  call("/get_exported_services", function(services) {
+    let list = document.getElementById("services_to_import");
+    services.forEach((item) => {
       let option = document.createElement("option");
       option.textContent = option.value = item;
       list.appendChild(option);
     });
-    $("#jobs_to_import").selectpicker("refresh");
+    $("#services_to_import").selectpicker("refresh");
   });
 }
 
 // eslint-disable-next-line
 function showImportJobsPanel() {
-  showPanel("import_jobs", null, () => {
+  showPanel("import_services", null, () => {
     refreshExportedJobs();
   });
 }
 
 // eslint-disable-next-line
 function importJobs() {
-  fCall("/import_jobs", "#import_jobs-form", function(result) {
+  fCall("/import_services", "#import_services-form", function(result) {
     alertify.notify("Import successful.", "success", 5);
-    $("#import_jobs").remove();
+    $("#import_services").remove();
   });
 }
 

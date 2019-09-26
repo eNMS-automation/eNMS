@@ -64,9 +64,9 @@ function workflowRunMode(instance, restartForm) {
 }
 
 // eslint-disable-next-line
-function saveService(job, id) {
+function saveService(service, id) {
   if (page == "workflow_builder") {
-    saveWorkflowJob(job, id);
+    saveWorkflowJob(service, id);
   }
 }
 
@@ -113,10 +113,10 @@ function getRuntimes(type, id) {
 }
 
 // eslint-disable-next-line
-function showResultsPanel(job, runtime) {
+function showResultsPanel(service, runtime) {
   $("#result").remove();
-  createPanel("result", `Results - ${job.name}`, null, function() {
-    resultTable = initTable("result", job, runtime);
+  createPanel("result", `Results - ${service.name}`, null, function() {
+    resultTable = initTable("result", service, runtime);
   });
 }
 
@@ -175,72 +175,72 @@ function clearResults(id) {
 }
 
 // eslint-disable-next-line
-function refreshLogs(job, runtime, displayResults) {
-  if (!$(`#logs-form-${job.id}`).length) return;
-  fCall("/get_job_logs", `#logs-form-${job.id}`, function(result) {
-    $(`#log-${job.id}`).text(result.logs);
+function refreshLogs(service, runtime, displayResults) {
+  if (!$(`#logs-form-${service.id}`).length) return;
+  fCall("/get_service_logs", `#logs-form-${service.id}`, function(result) {
+    $(`#log-${service.id}`).text(result.logs);
     if (result.refresh) {
-      setTimeout(() => refreshLogs(job, runtime, displayResults), 1500);
+      setTimeout(() => refreshLogs(service, runtime, displayResults), 1500);
     } else if (displayResults) {
-      $(`#logs-${job.id}`).remove();
-      showResultsPanel(job, runtime);
+      $(`#logs-${service.id}`).remove();
+      showResultsPanel(service, runtime);
     }
   });
 }
 
 // eslint-disable-next-line
-function showLogsPanel(job, runtime, displayResults) {
-  createPanel("logs", `Logs - ${job.name}`, job.id, function() {
-    configureLogsCallbacks(job, runtime);
+function showLogsPanel(service, runtime, displayResults) {
+  createPanel("logs", `Logs - ${service.name}`, service.id, function() {
+    configureLogsCallbacks(service, runtime);
     if (!runtime) {
-      getRuntimes("logs", job.id);
+      getRuntimes("logs", service.id);
     } else {
-      $(`#runtime-${job.id}`)
+      $(`#runtime-${service.id}`)
         .append(`<option value='${runtime}'>${runtime}</option>`)
         .val(runtime)
         .selectpicker("refresh");
-      $(`#runtime-div-${job.id}`).hide();
-      refreshLogs(job, runtime, displayResults);
+      $(`#runtime-div-${service.id}`).hide();
+      refreshLogs(service, runtime, displayResults);
     }
   });
 }
 
 // eslint-disable-next-line
-function configureLogsCallbacks(job, runtime) {
-  $(`#filter-${job.id}`).on("input", function() {
-    refreshLogs(job, runtime, false);
+function configureLogsCallbacks(service, runtime) {
+  $(`#filter-${service.id}`).on("input", function() {
+    refreshLogs(service, runtime, false);
   });
   if (!runtime) {
-    $(`#runtime-${job.id}`).on("change", function() {
-      refreshLogs(job, this.value, false);
+    $(`#runtime-${service.id}`).on("change", function() {
+      refreshLogs(service, this.value, false);
     });
   }
 }
 
 // eslint-disable-next-line
 function normalRun(id) {
-  call(`/run_job/${id}`, function(job) {
-    runLogic(job);
+  call(`/run_service/${id}`, function(service) {
+    runLogic(service);
   });
 }
 
 // eslint-disable-next-line
 function parametrizedRun(type, id) {
-  fCall("/run_job", `#edit-${type}-form-${id}`, function(job) {
+  fCall("/run_service", `#edit-${type}-form-${id}`, function(service) {
     $(`#${type}-${id}`).remove();
-    runLogic(job);
+    runLogic(service);
   });
 }
 
-function runLogic(job) {
-  showLogsPanel(job, job.runtime, true);
-  alertify.notify(`Job '${job.name}' started.`, "success", 5);
+function runLogic(service) {
+  showLogsPanel(service, service.runtime, true);
+  alertify.notify(`Job '${service.name}' started.`, "success", 5);
   if (page == "workflow_builder") {
-    if (job.type != "workflow") {
-      getJobState(job.id);
+    if (service.type != "workflow") {
+      getJobState(service.id);
     }
   }
-  $(`#${job.type}-${job.id}`).remove();
+  $(`#${service.type}-${service.id}`).remove();
 }
 
 // eslint-disable-next-line
@@ -254,7 +254,7 @@ function duplicateWorkflow(id) {
 
 // eslint-disable-next-line
 function exportJob(id) {
-  call(`/export_job/${id}`, () => {
+  call(`/export_service/${id}`, () => {
     alertify.notify("Export successful.", "success", 5);
   });
 }

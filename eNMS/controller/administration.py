@@ -112,8 +112,8 @@ class AdministrationController(BaseController):
             with open(path, "r") as migration_file:
                 objects = yaml.load(migration_file)
                 if cls == "workflow":
-                    workflow_jobs = {
-                        workflow["name"]: workflow.pop("jobs") for workflow in objects
+                    workflow_services = {
+                        workflow["name"]: workflow.pop("services") for workflow in objects
                     }
                 if cls == "workflow_edge":
                     workflow_edges = deepcopy(objects)
@@ -127,23 +127,23 @@ class AdministrationController(BaseController):
                         info(f"{str(obj)} could not be imported ({str(e)})")
 
                         status = "Partial import (see logs)."
-        for name, jobs in workflow_jobs.items():
-            fetch("workflow", name=name).jobs = [
-                fetch("job", name=name) for name in jobs
+        for name, services in workflow_services.items():
+            fetch("workflow", name=name).services = [
+                fetch("service", name=name) for name in services
             ]
             Session.commit()
         for edge in workflow_edges:
             for property in ("source", "destination", "workflow"):
-                edge[property] = fetch("job", name=edge[property]).id
+                edge[property] = fetch("service", name=edge[property]).id
             factory("workflow_edge", **edge)
             Session.commit()
         return status
 
-    def import_jobs(self, **kwargs):
-        jobs = kwargs["jobs_to_import"]
-        path = self.path / "projects" / "exported_jobs"
+    def import_services(self, **kwargs):
+        services = kwargs["services_to_import"]
+        path = self.path / "projects" / "exported_services"
         for file in scandir(path / "services"):
-            if file.name == ".gitkeep" or file.name not in jobs:
+            if file.name == ".gitkeep" or file.name not in services:
                 continue
             with open(file.path, "r") as instance_file:
                 instance = yaml.load(instance_file)
@@ -151,15 +151,15 @@ class AdministrationController(BaseController):
                 factory(model, **self.objectify(model, instance))
         Session.commit()
         for workflow in listdir(path / "workflows"):
-            if workflow == ".gitkeep" or workflow not in jobs:
+            if workflow == ".gitkeep" or workflow not in services:
                 continue
             workflow_name = workflow.split(".")[0]
             with open_tar(path / "workflows" / workflow) as tar_file:
                 tar_file.extractall(path=path / "workflows")
-            for instance_type in ("jobs", "workflow", "edges"):
-                path_job = path / "workflows" / workflow_name / instance_type
-                for file in scandir(path_job):
-                    with open(path_job / file.name, "r") as instance_file:
+            for instance_type in ("services", "workflow", "edges"):
+                path_service = path / "workflows" / workflow_name / instance_type
+                for file in scandir(path_service):
+                    with open(path_service / file.name, "r") as instance_file:
                         instance = yaml.load(instance_file)
                         if instance_type == "workflow":
                             delete("Workflow", allow_none=True, name=instance["name"])
@@ -169,45 +169,45 @@ class AdministrationController(BaseController):
                 Session.commit()
             rmtree(path / "workflows" / workflow_name)
 
-    def export_job(self, job_id):
-        job = fetch("job", id=job_id)
-        if job.type == "workflow":
-            path = self.path / "projects" / "exported_jobs" / "workflows" / job.filename
+    def export_service(self, service_id):
+        service = fetch("service", id=service_id)
+        if service.type == "workflow":
+            path = self.path / "projects" / "exported_services" / "workflows" / service.filename
             path.mkdir(parents=True, exist_ok=True)
-            for instance_type in ("jobs", "workflow", "edges"):
+            for instance_type in ("services", "workflow", "edges"):
                 Path(path / instance_type).mkdir(parents=True, exist_ok=True)
-            for sub_job in job.jobs:
-                with open(path / "jobs" / f"{sub_job.filename}.yaml", "w") as file:
-                    sub_job_as_dict = sub_job.to_dict(export=True)
+            for sub_service in service.services:
+                with open(path / "services" / f"{sub_service.filename}.yaml", "w") as file:
+                    sub_service_as_dict = sub_service.to_dict(export=True)
                     for relation in ("devices", "pools", "events"):
-                        sub_job_as_dict.pop(relation)
-                    if sub_job.type == "workflow":
-                        sub_job_as_dict["type"] = "workflow"
-                    yaml.dump(sub_job_as_dict, file)
-            for edge in job.edges:
+                        sub_service_as_dict.pop(relation)
+                    if sub_service.type == "workflow":
+                        sub_service_as_dict["type"] = "workflow"
+                    yaml.dump(sub_service_as_dict, file)
+            for edge in service.edges:
                 name = self.strip_all(f"{edge.workflow}{edge.source}{edge.destination}")
                 with open(path / "edges" / f"{name}.yaml", "w") as file:
                     edge = {**edge.to_dict(export=True), "type": "workflow_edge"}
                     yaml.dump(edge, file)
-            with open(path / "workflow" / f"{job.filename}.yaml", "w") as file:
-                job_as_dict = job.to_dict(export=True)
+            with open(path / "workflow" / f"{service.filename}.yaml", "w") as file:
+                service_as_dict = service.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
-                    job_as_dict.pop(relation)
-                yaml.dump({**job_as_dict, "type": "workflow"}, file)
+                    service_as_dict.pop(relation)
+                yaml.dump({**service_as_dict, "type": "workflow"}, file)
             with open_tar(f"{path}.tgz", "w:gz") as tar:
-                tar.add(path, arcname=job.filename)
+                tar.add(path, arcname=service.filename)
             rmtree(path)
         else:
-            path = self.path / "projects" / "exported_jobs" / "services"
-            with open(path / f"{job.filename}.yaml", "w") as file:
-                job_as_dict = job.to_dict(export=True)
+            path = self.path / "projects" / "exported_services" / "services"
+            with open(path / f"{service.filename}.yaml", "w") as file:
+                service_as_dict = service.to_dict(export=True)
                 for relation in ("devices", "pools", "events"):
-                    job_as_dict.pop(relation)
-                yaml.dump(job_as_dict, file)
+                    service_as_dict.pop(relation)
+                yaml.dump(service_as_dict, file)
 
-    def get_exported_jobs(self):
-        jobs_path = self.path / "projects" / "exported_jobs"
-        return listdir(jobs_path / "services") + listdir(jobs_path / "workflows")
+    def get_exported_services(self):
+        services_path = self.path / "projects" / "exported_services"
+        return listdir(services_path / "services") + listdir(services_path / "workflows")
 
     def save_parameters(self, parameter_type, **kwargs):
         self.update_parameters(**kwargs)

@@ -113,8 +113,8 @@ class DatabaseMigrationsForm(BaseForm):
 
 class ImportJobs(BaseForm):
     action = "importJobs"
-    form_type = HiddenField(default="import_jobs")
-    jobs_to_import = NoValidationSelectMultipleField("Jobs to import", choices=())
+    form_type = HiddenField(default="import_services")
+    services_to_import = NoValidationSelectMultipleField("Jobs to import", choices=())
 
 
 @configure_relationships

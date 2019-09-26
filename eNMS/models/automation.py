@@ -12,10 +12,10 @@ from eNMS import app
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import fetch
 from eNMS.database.associations import (
-    job_device_table,
-    job_event_table,
-    job_pool_table,
-    job_workflow_table,
+    service_device_table,
+    service_event_table,
+    service_pool_table,
+    service_workflow_table,
 )
 from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device  # noqa: F401
@@ -24,11 +24,11 @@ from eNMS.models.events import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
 
 
-class Job(AbstractBase):
+class Service(AbstractBase):
 
-    __tablename__ = "job"
+    __tablename__ = "service"
     type = Column(SmallString)
-    __mapper_args__ = {"polymorphic_identity": "job", "polymorphic_on": type}
+    __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(SmallString, unique=True)
@@ -38,20 +38,20 @@ class Job(AbstractBase):
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict)
     credentials = Column(SmallString, default="device")
-    tasks = relationship("Task", back_populates="job", cascade="all,delete")
+    tasks = relationship("Task", back_populates="service", cascade="all,delete")
     vendor = Column(SmallString)
     operating_system = Column(SmallString)
     waiting_time = Column(Integer, default=0)
     creator = Column(SmallString, default="admin")
     push_to_git = Column(Boolean, default=False)
     workflows = relationship(
-        "Workflow", secondary=job_workflow_table, back_populates="jobs"
+        "Workflow", secondary=service_workflow_table, back_populates="services"
     )
     python_query = Column(SmallString)
     query_property_type = Column(SmallString, default="ip_address")
-    devices = relationship("Device", secondary=job_device_table, back_populates="jobs")
-    pools = relationship("Pool", secondary=job_pool_table, back_populates="jobs")
-    events = relationship("Event", secondary=job_event_table, back_populates="jobs")
+    devices = relationship("Device", secondary=service_device_table, back_populates="services")
+    pools = relationship("Pool", secondary=service_pool_table, back_populates="services")
+    events = relationship("Event", secondary=service_event_table, back_populates="services")
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(SmallString, default="mail_feedback_notification")
     notification_header = Column(LargeString, default="")
@@ -68,15 +68,17 @@ class Job(AbstractBase):
     iteration_values = Column(LargeString)
     iteration_variable_name = Column(SmallString, default="iteration_value")
     result_postprocessing = Column(LargeString)
-    runs = relationship("Run", back_populates="job", cascade="all, delete-orphan")
+    runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
     maximum_runs = Column(Integer, default=1)
+    multiprocessing = Column(Boolean, default=False)
+    max_processes = Column(Integer, default=5)
 
     @property
     def filename(self):
         return app.strip_all(self.name)
 
     def generate_row(self, table):
-        number_of_runs = app.job_db[self.id]["runs"]
+        number_of_runs = app.service_db[self.id]["runs"]
         return [
             f"Running ({number_of_runs})" if number_of_runs else "Idle",
             f"""<div class="btn-group" style="width: 100px;">
@@ -122,7 +124,7 @@ class Job(AbstractBase):
             Delete</button>""",
         ]
 
-    def adjacent_jobs(self, workflow, direction, subtype):
+    def adjacent_services(self, workflow, direction, subtype):
         for edge in getattr(self, f"{direction}s"):
             if edge.subtype == subtype and edge.workflow == workflow:
                 yield getattr(edge, direction), edge
@@ -138,16 +140,6 @@ class Job(AbstractBase):
         except GitCommandError:
             pass
         repo.remotes.origin.push()
-
-
-class Service(Job):
-
-    __tablename__ = "service"
-    __mapper_args__ = {"polymorphic_identity": "service"}
-    parent_type = "job"
-    id = Column(Integer, ForeignKey("job.id"), primary_key=True)
-    multiprocessing = Column(Boolean, default=False)
-    max_processes = Column(Integer, default=5)
 
     @staticmethod
     def get_device_result(args):
@@ -237,14 +229,14 @@ class WorkflowEdge(AbstractBase):
     name = Column(SmallString)
     label = Column(SmallString)
     subtype = Column(SmallString)
-    source_id = Column(Integer, ForeignKey("job.id"))
+    source_id = Column(Integer, ForeignKey("service.id"))
     source = relationship(
         "Job",
         primaryjoin="Job.id == WorkflowEdge.source_id",
         backref=backref("destinations", cascade="all, delete-orphan"),
         foreign_keys="WorkflowEdge.source_id",
     )
-    destination_id = Column(Integer, ForeignKey("job.id"))
+    destination_id = Column(Integer, ForeignKey("service.id"))
     destination = relationship(
         "Job",
         primaryjoin="Job.id == WorkflowEdge.destination_id",

@@ -14,8 +14,8 @@ from eNMS.forms.fields import (
 
 
 class JobForm(BaseForm):
-    template = "job"
-    form_type = HiddenField(default="job")
+    template = "service"
+    form_type = HiddenField(default="service")
     id = HiddenField()
     type = StringField("Service Type")
     name = StringField("Name")
@@ -110,7 +110,7 @@ class ServiceForm(JobForm):
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    start_jobs = MultipleInstanceField("Workflow Entry Point(s)")
+    start_services = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 
 
@@ -138,8 +138,8 @@ class DisplayForm(BaseForm):
 
 class AddJobsForm(BaseForm):
     action = "addJobsToWorkflow"
-    form_type = HiddenField(default="add_jobs")
-    jobs = MultipleInstanceField("Add jobs")
+    form_type = HiddenField(default="add_services")
+    services = MultipleInstanceField("Add services")
 
 
 class WorkflowLabelForm(BaseForm):

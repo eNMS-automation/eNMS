@@ -2,8 +2,8 @@
 Workflow Payload
 ================
 
-Job dependency
---------------
+Service dependency
+------------------
 
 If a service ``A`` must be executed before a service ``B`` in the workflow, eNMS must be made aware of that dependency by creating a  ``Prerequisite`` edge.
 

@@ -149,17 +149,18 @@ class Service(AbstractBase):
         with args[3]:
             args[4][device.name] = device_result
 
-    def device_run(self, run, payload, targets=None):
-        if not targets:
+    def device_run(self, run, payload):
+        devices = run.compute_devices(payload)
+        if not devices:
             return run.get_results(payload)
         else:
             if run.multiprocessing:
                 device_results = {}
                 thread_lock = Lock()
-                processes = min(len(targets), run.max_processes)
+                processes = min(len(devices), run.max_processes)
                 process_args = [
                     (device.id, run.runtime, payload, thread_lock, device_results)
-                    for device in targets
+                    for device in devices
                 ]
                 pool = ThreadPool(processes=processes)
                 pool.map(self.get_device_result, process_args)
@@ -167,7 +168,7 @@ class Service(AbstractBase):
                 pool.join()
             else:
                 device_results = {
-                    device.name: run.get_results(payload, device) for device in targets
+                    device.name: run.get_results(payload, device) for device in devices
                 }
             for device_name, r in deepcopy(device_results).items():
                 device = fetch("device", name=device_name)
@@ -176,50 +177,7 @@ class Service(AbstractBase):
             return results
 
     def build_results(self, run, payload, *other):
-        results = {"results": {}, "success": False, "runtime": run.runtime}
-        targets = set()
-        if run.has_targets:
-            try:
-                targets = run.compute_devices(payload)
-                results["results"]["devices"] = {}
-            except Exception as exc:
-                return {"success": False, "error": str(exc)}
-        for i in range(run.number_of_retries + 1):
-            run.log("info", f"Running {self.type} {self.name} (attempt n°{i + 1})")
-            run.set_state(completed=0, failed=0)
-            attempt = self.device_run(run, payload, targets)
-            if targets:
-                assert targets is not None
-                for device in set(targets):
-                    if not attempt["devices"][device.name]["success"]:
-                        continue
-                    results["results"]["devices"][device.name] = attempt["devices"][
-                        device.name
-                    ]
-                    targets.remove(device)
-                if not targets:
-                    results["success"] = True
-                    break
-                else:
-                    if run.number_of_retries:
-                        results[f"Attempt {i + 1}"] = attempt
-                    if i != run.number_of_retries:
-                        sleep(run.time_between_retries)
-                    else:
-                        for device in targets:
-                            results["results"]["devices"][device.name] = attempt[
-                                "devices"
-                            ][device.name]
-            else:
-                if run.number_of_retries:
-                    results[f"Attempts {i + 1}"] = attempt
-                if attempt["success"] or i == run.number_of_retries:
-                    results["results"] = attempt
-                    results["success"] = attempt["success"]
-                    break
-                else:
-                    sleep(run.time_between_retries)
-        return results
+        return self.device_run(run, payload, targets)
 
 
 class WorkflowEdge(AbstractBase):

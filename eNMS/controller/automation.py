@@ -150,7 +150,6 @@ class AutomationController(BaseController):
             run_kwargs["restart_run"] = restart_run
         run = factory("run", service=service, **run_kwargs)
         run.properties = kwargs
-        print(run.service_id)
         return run.run(kwargs.get("payload"))
 
     def run_service(self, id=None, **kwargs):

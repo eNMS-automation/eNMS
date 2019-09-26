@@ -285,9 +285,7 @@ class Run(AbstractBase):
 
     def run(self, payload=None):
         try:
-            print("oo"*100, self.service.type);
             if self.service.type == "workflow":
-                
                 self.service.init_state(self)
             self.log("info", f"{self.service.type} {self.service.name}: Starting")
             self.set_state(status="Running", type=self.service.type)
@@ -344,13 +342,12 @@ class Run(AbstractBase):
             result_kw["device"] = device.id
         factory("result", **result_kw)
 
-    def get_results(self, payload, device=None):
+    def get_results(self, payload, *args):
         self.log(
             "info", f"Running {self.service.type}{f' on {device.name}' if device else ''}"
         )
         results = {"runtime": app.get_time()}
         try:
-            args = (device,) if device else ()
             if self.service.iteration_values:
                 targets_results = {}
                 for target in self.eval(self.service.iteration_values, **locals()):

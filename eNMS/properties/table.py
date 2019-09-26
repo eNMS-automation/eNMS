@@ -142,6 +142,6 @@ table_fixed_columns = {
     "service": ["Status", "Results", "Run", "Edit", "Delete"],
     "syslog": [],
     "task": ["Action", "Edit", "Delete"],
-    "user": ["Edit", "Delete"],
+    "user": [""],
     "pool": ["Visualize", "Edit", "Delete"],
 }

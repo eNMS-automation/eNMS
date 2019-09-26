@@ -87,19 +87,26 @@ class User(AbstractBase, UserMixin):
 
     def generate_row(self, table):
         return [
-            f"""<div class="btn-group">
-            <button type="button" class="btn btn-primary btn-sm"
-            onclick="showTypePanel('user', '{self.id}')">Edit</button>,
-            <button type="button" class="btn btn-primary btn-sm
-            dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
-            showTypePanel('user', '{self.id}', 'duplicate')">Duplicate</a></li>
-            </ul></div>""",
-            f"""<button type="button" class="btn btn-danger btn-sm"
-            onclick="showDeletionPanel({self.row_properties})">
-            Delete</button>""",
+            f"""<ul
+          class="pagination pagination-lg"
+          style="margin: 0px; padding-left: 29px; padding-top: 9px"
+        >
+          <li>
+            <a onclick="showTypePanel('user', '{self.id}')"
+              ><span class="glyphicon glyphicon-cog"></span
+            ></a>
+          </li>
+          <li>
+            <a onclick="showTypePanel('user', '{self.id}', 'duplicate')"
+              ><span class="glyphicon glyphicon-list"></span
+            ></a>
+          </li>
+          <li>
+            <a onclick="showDeletionPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-list-alt"></span
+            ></a>
+          </li>
+        </ul>""",
         ]
 
     @property

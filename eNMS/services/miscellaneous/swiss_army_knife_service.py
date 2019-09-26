@@ -35,11 +35,11 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def mail_feedback_notification(self, run, payload):
-        name = payload["job"]["name"]
+        name = payload["service"]["name"]
         app.send_email(
             f"{name} ({'PASS' if payload['results']['success'] else 'FAILED'})",
             payload["content"],
-            recipients=payload["job"]["mail_recipient"],
+            recipients=payload["service"]["mail_recipient"],
             filename=f"results-{run.runtime.replace('.', '').replace(':', '')}.txt",
             file_content=app.str_dict(payload["results"]),
         )

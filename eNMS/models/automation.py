@@ -86,49 +86,49 @@ class Service(AbstractBase):
         number_of_runs = app.service_db[self.id]["runs"]
         return [
             f"Running ({number_of_runs})" if number_of_runs else "Idle",
-            f"""<center>
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 430px">
+            f"""
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 400px">
           <li>
-            <button class="btn btn-info" onclick="showResultsPanel({self.row_properties})"
+            <button type="button" class="btn btn-info" onclick="showResultsPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-list-alt"></span
             ></button>
           </li>
           <li>
-            <button class="btn btn-info" onclick="showLogsPanel({self.row_properties})"
+            <button type="button" class="btn btn-info" onclick="showLogsPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-list"></span
             ></button>
           </li>
           <li>
-            <a onclick="normalRun('{self.id}')"
+            <button type="button" class="btn btn-success" onclick="normalRun('{self.id}')"
               ><span class="glyphicon glyphicon-play"></span
-            ></a>
+            ></button>
           </li>
           <li>
-            <a onclick="showTypePanel('{self.type}', '{self.id}', 'run')"
+            <button type="button" class="btn btn-success" onclick="showTypePanel('{self.type}', '{self.id}', 'run')"
               ><span class="glyphicon glyphicon-play-circle"></span
-            ></a>
+            ></button>
           </li>
           <li>
-            <a onclick="showTypePanel('{self.type}', '{self.id}')"
+            <button type="button" class="btn btn-primary" onclick="showTypePanel('{self.type}', '{self.id}')"
               ><span class="glyphicon glyphicon-edit"></span
-            ></a>
+            ></button>
           </li>
           <li>
-            <a onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')"
+            <button type="button" class="btn btn-primary" onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')"
               ><span class="glyphicon glyphicon-duplicate"></span
-            ></a>
+            ></button>
           </li>
           <li>
-            <a onclick="exportService('{self.id}')"
+            <button type="button" class="btn btn-primary" onclick="exportService('{self.id}')"
               ><span class="glyphicon glyphicon-download"></span
-            ></a>
+            ></button>
           </li>
           <li>
-            <a onclick="showDeletionPanel({self.row_properties})"
+            <button type="button" class="btn btn-danger" onclick="showDeletionPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-remove"></span
-            ></a>
+            ></button>
           </li>
-        </ul></center>""",
+        </ul>""",
         ]
 
     def adjacent_services(self, workflow, direction, subtype):

@@ -11,8 +11,8 @@ You need to:
 
 - Choose a name.
 - Choose a scheduling mode: standard (start date / end date / frequency) or CRON.
-- Select a job (the service or workflow that you want to execute).
-    - If "Standard scheduling" was selected, choose a start date and optionally, choose a frequency and an end date. If a ``Frequency`` is defined, the job will run periodically, in which case you can also choose an ``End date`` if you want the task to automatically stop running. If you define a frequency but no ``End date``.
+- Select a service (the service or workflow that you want to execute).
+    - If "Standard scheduling" was selected, choose a start date and optionally, choose a frequency and an end date. If a ``Frequency`` is defined, the service will run periodically, in which case you can also choose an ``End date`` if you want the task to automatically stop running. If you define a frequency but no ``End date``.
     - If "Cron scheduling" was selected, enter a cron expression.
 
 .. image:: /_static/events/create_task.png
@@ -68,6 +68,6 @@ Also, newly created tasks are set to Paused by default unless the 'Schedule task
 Targets and payload
 *******************
 
-When creating a task, you can select a list of devices and pools. If these fields are left empty, the job will run on its own targets.
-Otherwise, the task targets (all selected devices, plus all devices of all selected pools) will override the job targets when the job runs.
-A task can also have a payload (dictionary) that will be passed to the job when it runs.
+When creating a task, you can select a list of devices and pools. If these fields are left empty, the service will run on its own targets.
+Otherwise, the task targets (all selected devices, plus all devices of all selected pools) will override the service targets when the service runs.
+A task can also have a payload (dictionary) that will be passed to the service when it runs.

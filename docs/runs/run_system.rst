@@ -2,10 +2,10 @@
 Run Management
 ==============
 
-Run a job (service or workflow)
+Run a service (service or workflow)
 -------------------------------
 
-You can run a job from:
+You can run a service from:
 
 - the "Service Management" or "Workflow Management" pages, by clicking on the "Run" or "Run with Updates" buttons
 - the "Workflow builder" page, from the right-click menu.
@@ -61,4 +61,4 @@ Parameters
 - "Notification header": will be displayed at the beginning of the notification.
 - "Include Result Link in summary": whether the notification contains a link to the results.
 - "Mail recipients": if left empty, the recipients defined in the administration panel will be used.
-- "Display only failed nodes": the notification will not include devices for which the job ran successfully.
+- "Display only failed nodes": the notification will not include devices for which the service ran successfully.

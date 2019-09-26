@@ -13,7 +13,7 @@ A log rule is defined by the following properties:
     - Name of the rule.
     - Source IP: the IP address of the source, used to match a log received by eNMS against the log rule. This can also be a regular expression.
     - Content: the content of the log, used to match a log received by eNMS against the log rule. This can also be a regular expression.
-    - Jobs: which services and workflows are triggered by eNMS when the rule is matched by an incoming log. A single log rule can have multiple jobs: they will be triggered sequentially by eNMS.
+    - Services: which services and workflows are triggered by eNMS when the rule is matched by an incoming log. A single log rule can have multiple services: they will be triggered sequentially by eNMS.
 
 For an incoming Syslog message to match the rule, both the "Source IP" and "Content" fields must match.
 

@@ -71,8 +71,8 @@ Never Update pools
 Pools with manually selected objects (by selecting them using the Edit Objects button) need to have the 'Never Update' checkbox
 selected. This prevents manually selected pools from being re-calculated based on pool criteria.  If the user wants to run against
 a pool that has some criteria specified as well as some manually specified devices, it is advised to have 2 pools-one with the criteria
-specified and another with the manually selected devices.  When running a job, multiple pools and multiple devices can be specified, and
-the job will run against all specified objects.
+specified and another with the manually selected devices.  When running a service, multiple pools and multiple devices can be specified, and
+the service will run against all specified objects.
 
 Manual definition
 -----------------

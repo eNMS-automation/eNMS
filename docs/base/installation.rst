@@ -236,13 +236,13 @@ The following environment variables (with example values) control how eNMS integ
     export LDAP_ADMIN_GROUP=company.AdminUsers[,group2,group3]
 
 .. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in an 403 authentication error. An LDAP user MUST be a member of one of the "LDAP_ADMIN_GROUP" groups to authenticate.
-.. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage. In the event that jobs are already scheduled with User Credentials, these might fail if the credentials are not updated in eNMS.
+.. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage. In the event that services are already scheduled with User Credentials, these might fail if the credentials are not updated in eNMS.
 
 
 GIT Integration
 ---------------
 
-To enable sending device configs captured by configuration management, as well as service and workflow job logs, to GIT for revision control you will need to configure the following:
+To enable sending device configs captured by configuration management, as well as service and workflow service logs, to GIT for revision control you will need to configure the following:
 
 First, create two separate git projects in your repository. Assign a single GIT userid to have write access to both.
 
@@ -322,7 +322,7 @@ When backing up eNMS, it is only necessary to perform :guilabel:`Admin / Adminis
 
 Advanced: Migrating Services and Workflows to a new instance with a different inventory:
   - The migration files contain JSON representations of database relationships. Loading a mismatched set of migration files could result in database corruption, so be careful.
-  - The Service and Workflow .yaml migration files also contain the list of devices that are selected for each job. If those devices do not exactly exist on the new instance,
+  - The Service and Workflow .yaml migration files also contain the list of devices that are selected for each service. If those devices do not exactly exist on the new instance,
     selected devices and pools need to be cleared on all services and workflows before exporting to files. This will allow those services and workflows to be migrated to the new instance.
   - Files needed to migrate: Service.yaml, Workflow.yaml, WorkflowEdge.yaml
 

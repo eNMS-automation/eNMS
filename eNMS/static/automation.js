@@ -283,9 +283,10 @@ function resumeTask(id) {
 
 (function() {
   if (page == "table/service" || page == "workflow_builder") {
-    $("#service-type").select2();
+    $("#service-type").selectpicker({ liveSearch: true });
     serviceTypes.forEach((service) => {
       $("#service-type").append(new Option(service, service));
     });
+    $("#service-type").selectpicker("refresh");
   }
 })();

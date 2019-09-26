@@ -124,13 +124,12 @@ function displayWorkflow(workflowData) {
         switchToWorkflow(node);
         $("#current-workflow")
           .val(node)
-          .trigger("change");
+          .selectpicker("refresh");
       } else {
         showTypePanel(job.type, job.id);
       }
     }
   });
-  $("#current-runtime").select2();
   $("#current-runtime").empty();
   $("#current-runtime").append(
     "<option value='normal'>Normal Display</option>"
@@ -147,7 +146,7 @@ function displayWorkflow(workflowData) {
   });
   $("#current-runtime").val("latest");
   $("#current-workflow").val(workflow.id);
-  $("#current-runtime,#current-workflow").trigger("change");
+  $("#current-runtime,#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
   });
@@ -244,14 +243,14 @@ function switchToWorkflow(workflowId, arrow) {
     arrowPointer += arrow == "right" ? 1 : -1;
   }
   if (arrowHistory.length >= 1 && arrowPointer !== 0) {
-    $("#left-arrow").removeClass('disabled');
+    $("#left-arrow").removeClass("disabled");
   } else {
-    $("#left-arrow").addClass('disabled');
+    $("#left-arrow").addClass("disabled");
   }
   if (arrowPointer < arrowHistory.length - 1) {
-    $("#right-arrow").removeClass('disabled');
+    $("#right-arrow").removeClass("disabled");
   } else {
-    $("#right-arrow").addClass('disabled');
+    $("#right-arrow").addClass("disabled");
   }
   call(`/get_workflow_state/${workflowId}/latest`, function(result) {
     workflow = result.workflow;
@@ -550,8 +549,8 @@ Object.assign(action, {
   Unskip: () => changeSkipValue("unskip"),
   "Zoom In": () => graph.zoom(0.2),
   "Zoom Out": () => graph.zoom(-0.2),
-  "Backward": () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
-  "Forward": () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
+  Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
+  Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
 });
 
 // eslint-disable-next-line
@@ -728,12 +727,34 @@ function getWorkflowState(periodic) {
 }
 
 (function() {
-  $("#left-arrow,#right-arrow").addClass('disabled');
-  initSelect($("#current-workflow"), "workflow", null, true);
-  if (workflow) {
-    $("#current-workflow").append(new Option(workflow.name, workflow.id));
-    $("#current-workflow").val(workflow.id);
-    switchToWorkflow(workflow.id);
-  }
+  $("#left-arrow,#right-arrow").addClass("disabled");
+  call("/get_all/workflow", function(workflows) {
+    workflows.sort((a, b) => a.name.localeCompare(b.name));
+    for (let i = 0; i < workflows.length; i++) {
+      $("#current-workflow").append(
+        `<option value="${workflows[i].id}">${workflows[i].name}</option>`
+      );
+    }
+    if (workflow) {
+      $("#current-workflow").val(workflow.id);
+      switchToWorkflow(workflow.id);
+    } else {
+      workflow = $("#current-workflow").val();
+      if (workflow) {
+        switchToWorkflow(workflow);
+      } else {
+        alertify.notify(
+          `You must create a workflow in the
+        'Workflow management' page first.`,
+          "error",
+          5
+        );
+      }
+    }
+    $("#current-workflow,#current-runtimes").selectpicker({
+      liveSearch: true,
+    });
+    getWorkflowState(true);
+  });
   getWorkflowState(true);
 })();

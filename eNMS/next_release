@@ -11,7 +11,10 @@
 - Change custom service lowercase PEP8
 
 - Update migration files:
-type: Device -> type: Device etc...
+
+type: Device -> type: device etc...
+job -> service
+Job -> Service
 ExampleService -> example_service
 DatabaseBackupService -> database_backup_service
 NapalmBackupService -> napalm_backup_service
@@ -66,3 +69,4 @@ anything.
 * remove mode traversal property.
 * rename "job" -> "service"
 * change "run_job" to "run_service"
+

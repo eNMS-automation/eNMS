@@ -20,6 +20,7 @@ class Workflow(Service):
     __tablename__ = "workflow"
     __mapper_args__ = {"polymorphic_identity": "workflow"}
     has_targets = Column(Boolean, default=True)
+    parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     labels = Column(MutableDict)
     services = relationship("Service", secondary=service_workflow_table, back_populates="workflows")

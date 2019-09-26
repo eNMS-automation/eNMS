@@ -77,9 +77,9 @@ let triggerMenu;
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
-  nodes = new vis.DataSet(workflow.jobs.map(jobToNode));
+  nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
-  workflow.jobs.filter((s) => s.iteration_values != "").map(drawIterationEdge);
+  workflow.services.filter((s) => s.iteration_values != "").map(drawIterationEdge);
   for (const [id, label] of Object.entries(workflow.labels)) {
     drawLabel(id, label);
   }
@@ -119,14 +119,14 @@ function displayWorkflow(workflowData) {
     let node = this.getNodeAt(properties.pointer.DOM);
     if (node) {
       node = parseInt(node);
-      const job = workflow.jobs.find((w) => w.id === node);
-      if (job.type == "workflow") {
+      const service = workflow.services.find((w) => w.id === node);
+      if (service.type == "workflow") {
         switchToWorkflow(node);
         $("#current-workflow")
           .val(node)
           .selectpicker("refresh");
       } else {
-        showTypePanel(job.type, job.id);
+        showTypePanel(service.type, service.id);
       }
     }
   });
@@ -264,18 +264,18 @@ function menu(entry) {
 }
 
 // eslint-disable-next-line
-function saveWorkflowJob(job, update) {
+function saveWorkflowJob(service, update) {
   if (update) {
-    nodes.update(jobToNode(job));
-    let jobIndex = workflow.jobs.findIndex((job) => job.id == job.id);
-    workflow.jobs[jobIndex] = job;
+    nodes.update(serviceToNode(service));
+    let serviceIndex = workflow.services.findIndex((service) => service.id == service.id);
+    workflow.services[serviceIndex] = service;
   } else {
-    addJobsToWorkflow([job.id]);
+    addJobsToWorkflow([service.id]);
   }
-  if (job.iteration_values != "") {
-    drawIterationEdge(job);
+  if (service.iteration_values != "") {
+    drawIterationEdge(service);
   } else {
-    edges.remove(-job.id);
+    edges.remove(-service.id);
   }
 }
 
@@ -285,7 +285,7 @@ function saveWorkflowEdge(edge) {
 }
 
 // eslint-disable-next-line
-function addJobsToWorkflow(jobs) {
+function addJobsToWorkflow(services) {
   if (!workflow) {
     alertify.notify(
       `You must create a workflow in the
@@ -294,26 +294,26 @@ function addJobsToWorkflow(jobs) {
       5
     );
   } else {
-    jobs = $("#jobs").length
-      ? $("#jobs")
+    services = $("#services").length
+      ? $("#services")
           .val()
           .join("-")
-      : jobs;
-    call(`/add_jobs_to_workflow/${workflow.id}/${jobs}`, function(result) {
+      : services;
+    call(`/add_services_to_workflow/${workflow.id}/${services}`, function(result) {
       workflow.last_modified = result.update_time;
-      result.jobs.forEach((job, index) => {
-        $("#add_jobs").remove();
-        if (graph.findNode(job.id).length == 0) {
-          nodes.add(jobToNode(job, index));
-          workflow.jobs.push(job);
+      result.services.forEach((service, index) => {
+        $("#add_services").remove();
+        if (graph.findNode(service.id).length == 0) {
+          nodes.add(serviceToNode(service, index));
+          workflow.services.push(service);
           alertify.notify(
-            `Job '${job.name}' added to the workflow.`,
+            `Job '${service.name}' added to the workflow.`,
             "success",
             5
           );
         } else {
           alertify.notify(
-            `${job.type} '${job.name}' already in workflow.`,
+            `${service.type} '${service.name}' already in workflow.`,
             "error",
             5
           );
@@ -324,11 +324,11 @@ function addJobsToWorkflow(jobs) {
 }
 
 function deleteNode(id) {
-  workflow.jobs = workflow.jobs.filter((n) => n.id != id);
+  workflow.services = workflow.services.filter((n) => n.id != id);
   call(`/delete_node/${workflow.id}/${id}`, function(result) {
     workflow.last_modified = result.update_time;
     alertify.notify(
-      `'${result.job.name}' deleted from the workflow.`,
+      `'${result.service.name}' deleted from the workflow.`,
       "success",
       5
     );
@@ -377,8 +377,8 @@ function stopWorkflow() {
 // eslint-disable-next-line
 function changeSkipValue(skip) {
   const selectedNodes = graph.getSelectedNodes();
-  call(`/skip_jobs/${skip}/${selectedNodes.join("-")}`, () => {
-    workflow.jobs
+  call(`/skip_services/${skip}/${selectedNodes.join("-")}`, () => {
+    workflow.services
       .filter((j) => selectedNodes.includes(j.id))
       .map((j) => {
         j.skip = skip == "skip";
@@ -388,30 +388,30 @@ function changeSkipValue(skip) {
   });
 }
 
-function formatJobTitle(job) {
+function formatJobTitle(service) {
   return `
-    <b>Type</b>: ${job.type}<br>
-    <b>Name</b>: ${job.name}
+    <b>Type</b>: ${service.type}<br>
+    <b>Name</b>: ${service.name}
   `;
 }
 
-function jobToNode(job, index) {
-  const defaultJob = ["Start", "End"].includes(job.name);
+function serviceToNode(service, index) {
+  const defaultJob = ["Start", "End"].includes(service.name);
   return {
-    id: job.id,
-    shape: job.type == "workflow" ? "ellipse" : defaultJob ? "circle" : "box",
+    id: service.id,
+    shape: service.type == "workflow" ? "ellipse" : defaultJob ? "circle" : "box",
     color: defaultJob ? "pink" : "#D2E5FF",
-    label: job.type == "workflow" ? `     ${job.name}     ` : job.name,
-    name: job.name,
-    type: job.type,
-    title: formatJobTitle(job),
-    x: job.positions[workflow.name]
-      ? job.positions[workflow.name][0]
+    label: service.type == "workflow" ? `     ${service.name}     ` : service.name,
+    name: service.name,
+    type: service.type,
+    title: formatJobTitle(service),
+    x: service.positions[workflow.name]
+      ? service.positions[workflow.name][0]
       : index
       ? index * 50 - 50
       : 0,
-    y: job.positions[workflow.name]
-      ? job.positions[workflow.name][1]
+    y: service.positions[workflow.name]
+      ? service.positions[workflow.name][1]
       : index
       ? index * 50 - 200
       : 0,
@@ -520,19 +520,19 @@ function savePositions() {
 }
 
 Object.assign(action, {
-  Edit: (job) => showTypePanel(job.type, job.id),
-  Run: (job) => normalRun(job.id),
-  "Run with Updates": (job) => showTypePanel(job.type, job.id, "run"),
+  Edit: (service) => showTypePanel(service.type, service.id),
+  Run: (service) => normalRun(service.id),
+  "Run with Updates": (service) => showTypePanel(service.type, service.id, "run"),
   "Run Workflow": () => runWorkflow(),
   "Run Workflow with Updates": () => runWorkflow(true),
   Results: showResultsPanel,
   "Create Workflow": () => showTypePanel("workflow"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
-  "Restart Workflow from Here": (job) =>
-    showRestartWorkflowPanel(workflow, job),
+  "Restart Workflow from Here": (service) =>
+    showRestartWorkflowPanel(workflow, service),
   "Workflow Results": () => showResultsPanel(workflow),
   "Workflow Logs": () => showLogsPanel(workflow),
-  "Add to Workflow": () => showPanel("add_jobs"),
+  "Add to Workflow": () => showPanel("add_services"),
   "Stop Workflow": () => stopWorkflow(),
   "Remove from Workflow": deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),
@@ -587,7 +587,7 @@ $("#network").contextMenu({
 
 function runWorkflow(withUpdates) {
   emptyProgressBar();
-  workflow.jobs.forEach((job) => colorJob(job.id, "#D2E5FF"));
+  workflow.services.forEach((service) => colorJob(service.id, "#D2E5FF"));
   if (withUpdates) {
     showTypePanel("workflow", workflow.id, "run");
   } else {
@@ -595,14 +595,14 @@ function runWorkflow(withUpdates) {
   }
 }
 
-function showRestartWorkflowPanel(workflow, job) {
+function showRestartWorkflowPanel(workflow, service) {
   createPanel(
     "restart_workflow",
-    `Restart Workflow '${workflow.name}' from '${job.name}'`,
+    `Restart Workflow '${workflow.name}' from '${service.name}'`,
     workflow.id,
     function() {
-      $("#start_jobs").val(job.id);
-      $("#start_jobs").selectpicker("refresh");
+      $("#start_services").val(service.id);
+      $("#start_services").selectpicker("refresh");
       workflowRunMode(workflow, true);
     }
   );
@@ -610,7 +610,7 @@ function showRestartWorkflowPanel(workflow, job) {
 
 // eslint-disable-next-line
 function restartWorkflow() {
-  fCall(`/run_job/${workflow.id}`, `#restart_workflow-form`, function(result) {
+  fCall(`/run_service/${workflow.id}`, `#restart_workflow-form`, function(result) {
     $(`#restart_workflow-${workflow.id}`).remove();
     runLogic(result);
   });
@@ -657,12 +657,12 @@ function displayWorkflowState(result) {
       $("#progress-failure-span").text(result.state.progress.failed);
     }
     $("#status").text(`Status: ${result.state.status}`);
-    const currJob = result.state.current_job;
+    const currJob = result.state.current_service;
     if (currJob) {
       colorJob(currJob.id, "#89CFF0");
     }
-    if (result.state.jobs) {
-      $.each(result.state.jobs, (id, state) => {
+    if (result.state.services) {
+      $.each(result.state.services, (id, state) => {
         const color = {
           true: "#32cd32",
           false: "#FF6666",
@@ -696,8 +696,8 @@ function displayWorkflowState(result) {
 
 function resetDisplay() {
   $("#progressbar").hide();
-  workflow.jobs.forEach((job) => {
-    colorJob(job.id, job.skip ? "#D3D3D3" : "#D2E5FF");
+  workflow.services.forEach((service) => {
+    colorJob(service.id, service.skip ? "#D3D3D3" : "#D2E5FF");
   });
   workflow.edges.forEach((edge) => {
     edges.update({ id: edge.id, label: edge.label });

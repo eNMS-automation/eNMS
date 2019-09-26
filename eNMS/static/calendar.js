@@ -13,15 +13,15 @@ $(function() {
   call(`/calendar_init/${calendarType}`, function(tasks) {
     let events = [];
     for (const [name, properties] of Object.entries(tasks)) {
-      if (properties.job === undefined) continue;
+      if (properties.service === undefined) continue;
       events.push({
         title: name,
         id: properties.id,
         description: properties.description,
         start: new Date(...properties.start),
         runtime: properties.runtime,
-        jobId: properties.job.id,
-        jobType: properties.job.type == "workflow" ? "workflow" : "service",
+        serviceId: properties.service.id,
+        serviceType: properties.service.type == "workflow" ? "workflow" : "service",
       });
     }
     $("#calendar").fullCalendar({
@@ -36,7 +36,7 @@ $(function() {
         if (calendarType == "task") {
           showTypePanel("task", e.id);
         } else {
-          showResultsPanel(e.jobId, e.title, e.runtime);
+          showResultsPanel(e.serviceId, e.title, e.runtime);
         }
       },
       editable: true,

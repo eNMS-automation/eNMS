@@ -28,7 +28,7 @@ let userIsActive = true;
 let topZ = 1000;
 
 const panelSize = {
-  add_jobs: "800 500",
+  add_services: "800 500",
   changelog: "700 300",
   changelog_filtering: "700 300",
   cluster: "700 200",
@@ -46,7 +46,7 @@ const panelSize = {
   excel_export: "400 150",
   git: "900 200",
   google_earth_export: "700 200",
-  import_jobs: "500 400",
+  import_services: "500 400",
   instance_deletion: "400 130",
   librenms: "700 250",
   link: "700 400",
@@ -76,7 +76,7 @@ const panelSize = {
 };
 
 const panelName = {
-  add_jobs: "Add jobs",
+  add_services: "Add services",
   configuration: "Configuration",
   configuration_filtering: "Configuration Filtering",
   connection: "Connect to device",
@@ -85,7 +85,7 @@ const panelName = {
   device_filtering: "Device Filtering",
   event_filtering: "Event Filtering",
   excel_export: "Export Topology as an Excel file",
-  import_jobs: "Import Jobs",
+  import_services: "Import Jobs",
   server_filtering: "Server Filtering",
   link_filtering: "Link Filtering",
   changelog_filtering: "Changelog Filtering",
@@ -316,13 +316,13 @@ function showFilteringPanel(panelType) {
 }
 
 // eslint-disable-next-line
-function showDeletionPanel(job) {
+function showDeletionPanel(instance) {
   createPanel(
     "instance_deletion",
-    `Delete ${job.name}`,
-    job.id,
+    `Delete ${instance.name}`,
+    instance.id,
     () => {},
-    job.type
+    instance.type
   );
 }
 

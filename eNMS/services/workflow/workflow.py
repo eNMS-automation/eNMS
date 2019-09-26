@@ -1,15 +1,19 @@
 from collections import defaultdict
 from copy import deepcopy
 from sqlalchemy import Boolean, ForeignKey, Integer
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import backref, relationship
 from time import sleep
 from wtforms import BooleanField, HiddenField
 
 from eNMS import app
 from eNMS.database import Session
-from eNMS.database.dialect import Column, MutableDict
+from eNMS.database.base import AbstractBase
+from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import factory, fetch
-from eNMS.database.associations import service_workflow_table, start_services_workflow_table
+from eNMS.database.associations import (
+    service_workflow_table,
+    start_services_workflow_table,
+)
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import MultipleInstanceField, NoValidationSelectField
 from eNMS.models.automation import Service
@@ -23,7 +27,9 @@ class Workflow(Service):
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     labels = Column(MutableDict)
-    services = relationship("Service", secondary=service_workflow_table, back_populates="workflows")
+    services = relationship(
+        "Service", secondary=service_workflow_table, back_populates="workflows"
+    )
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
     )
@@ -42,7 +48,11 @@ class Workflow(Service):
 
     def init_state(self, run):
         app.run_db[run.runtime].update(
-            {"services": defaultdict(dict), "edges": defaultdict(int), "progress": defaultdict(int)}
+            {
+                "services": defaultdict(dict),
+                "edges": defaultdict(int),
+                "progress": defaultdict(int),
+            }
         )
 
     def job(self, run, payload, device=None):
@@ -95,10 +105,14 @@ class Workflow(Service):
                 service_run.properties = {"devices": [device.id]}
                 Session.commit()
                 service_results = service_run.run(payload)
-            app.run_db[run.runtime]["services"][service.id]["success"] = service_results["success"]
+            app.run_db[run.runtime]["services"][service.id][
+                "success"
+            ] = service_results["success"]
             successors = []
             for successor, edge in service.adjacent_services(
-                self, "destination", "success" if service_results["success"] else "failure"
+                self,
+                "destination",
+                "success" if service_results["success"] else "failure",
             ):
                 successors.append(successor)
                 app.run_db[run.runtime]["edges"][edge.id] += 1
@@ -118,3 +132,34 @@ class WorkflowForm(ServiceForm):
     has_targets = BooleanField("Has Target Devices", default=True)
     start_services = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
+
+
+class WorkflowEdge(AbstractBase):
+
+    __tablename__ = type = "workflow_edge"
+    id = Column(Integer, primary_key=True)
+    name = Column(SmallString)
+    label = Column(SmallString)
+    subtype = Column(SmallString)
+    source_id = Column(Integer, ForeignKey("service.id"))
+    source = relationship(
+        "Service",
+        primaryjoin="Service.id == WorkflowEdge.source_id",
+        backref=backref("destinations", cascade="all, delete-orphan"),
+        foreign_keys="WorkflowEdge.source_id",
+    )
+    destination_id = Column(Integer, ForeignKey("service.id"))
+    destination = relationship(
+        "Service",
+        primaryjoin="Service.id == WorkflowEdge.destination_id",
+        backref=backref("sources", cascade="all, delete-orphan"),
+        foreign_keys="WorkflowEdge.destination_id",
+    )
+    workflow_id = Column(Integer, ForeignKey("workflow.id"))
+    workflow = relationship(
+        "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
+    )
+
+    def __init__(self, **kwargs):
+        self.label = kwargs["subtype"]
+        super().__init__(**kwargs)

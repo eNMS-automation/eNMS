@@ -226,7 +226,9 @@ class Event(AbstractBase):
     log_source_regex = Column(Boolean, default=False)
     log_content = Column(SmallString)
     log_content_regex = Column(Boolean, default=False)
-    services = relationship("Service", secondary=service_event_table, back_populates="events")
+    services = relationship(
+        "Service", secondary=service_event_table, back_populates="events"
+    )
 
     def generate_row(self, table):
         return [

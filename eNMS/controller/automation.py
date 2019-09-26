@@ -49,15 +49,22 @@ class AutomationController(BaseController):
 
     def add_services_to_workflow(self, workflow_id, service_ids):
         workflow = fetch("workflow", id=workflow_id)
-        services = objectify("service", [int(service_id) for service_id in service_ids.split("-")])
+        services = objectify(
+            "service", [int(service_id) for service_id in service_ids.split("-")]
+        )
         for service in services:
             service.workflows.append(workflow)
         now = self.get_time()
         workflow.last_modified = now
-        return {"services": [service.serialized for service in services], "update_time": now}
+        return {
+            "services": [service.serialized for service in services],
+            "update_time": now,
+        }
 
     def clear_results(self, service_id):
-        for result in fetch("run", all_matches=True, allow_none=True, service_id=service_id):
+        for result in fetch(
+            "run", all_matches=True, allow_none=True, service_id=service_id
+        ):
             Session.delete(result)
 
     def create_label(self, workflow_id, x, y, **kwargs):
@@ -77,7 +84,10 @@ class AutomationController(BaseController):
         return now
 
     def delete_node(self, workflow_id, service_id):
-        workflow, service = fetch("workflow", id=workflow_id), fetch("service", id=service_id)
+        workflow, service = (
+            fetch("workflow", id=workflow_id),
+            fetch("service", id=service_id),
+        )
         workflow.services.remove(service)
         now = self.get_time()
         workflow.last_modified = now
@@ -96,7 +106,9 @@ class AutomationController(BaseController):
         Session.commit()
         for service in parent_workflow.services:
             new_workflow.services.append(service)
-            service.positions[new_workflow.name] = service.positions[parent_workflow.name]
+            service.positions[new_workflow.name] = service.positions[
+                parent_workflow.name
+            ]
         Session.commit()
         for edge in parent_workflow.edges:
             subtype, src, destination = edge.subtype, edge.source, edge.destination
@@ -143,7 +155,10 @@ class AutomationController(BaseController):
             if kwargs.get(key)
         }
         restart_run = fetch(
-            "run", allow_none=True, service_id=service, runtime=kwargs.get("restart_runtime")
+            "run",
+            allow_none=True,
+            service_id=service,
+            runtime=kwargs.get("restart_runtime"),
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
@@ -198,7 +213,9 @@ class AutomationController(BaseController):
         workflow = fetch("workflow", id=workflow_id)
         runtimes = [
             (r.runtime, r.creator)
-            for r in fetch("run", allow_none=True, all_matches=True, service_id=workflow_id)
+            for r in fetch(
+                "run", allow_none=True, all_matches=True, service_id=workflow_id
+            )
         ]
         state = None
         if runtimes and runtime not in ("normal", None):

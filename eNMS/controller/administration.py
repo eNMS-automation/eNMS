@@ -113,7 +113,8 @@ class AdministrationController(BaseController):
                 objects = yaml.load(migration_file)
                 if cls == "workflow":
                     workflow_services = {
-                        workflow["name"]: workflow.pop("services") for workflow in objects
+                        workflow["name"]: workflow.pop("services")
+                        for workflow in objects
                     }
                 if cls == "workflow_edge":
                     workflow_edges = deepcopy(objects)
@@ -172,12 +173,20 @@ class AdministrationController(BaseController):
     def export_service(self, service_id):
         service = fetch("service", id=service_id)
         if service.type == "workflow":
-            path = self.path / "projects" / "exported_services" / "workflows" / service.filename
+            path = (
+                self.path
+                / "projects"
+                / "exported_services"
+                / "workflows"
+                / service.filename
+            )
             path.mkdir(parents=True, exist_ok=True)
             for instance_type in ("services", "workflow", "edges"):
                 Path(path / instance_type).mkdir(parents=True, exist_ok=True)
             for sub_service in service.services:
-                with open(path / "services" / f"{sub_service.filename}.yaml", "w") as file:
+                with open(
+                    path / "services" / f"{sub_service.filename}.yaml", "w"
+                ) as file:
                     sub_service_as_dict = sub_service.to_dict(export=True)
                     for relation in ("devices", "pools", "events"):
                         sub_service_as_dict.pop(relation)
@@ -207,7 +216,9 @@ class AdministrationController(BaseController):
 
     def get_exported_services(self):
         services_path = self.path / "projects" / "exported_services"
-        return listdir(services_path / "services") + listdir(services_path / "workflows")
+        return listdir(services_path / "services") + listdir(
+            services_path / "workflows"
+        )
 
     def save_parameters(self, parameter_type, **kwargs):
         self.update_parameters(**kwargs)

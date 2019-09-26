@@ -85,7 +85,9 @@ class Run(AbstractBase):
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(SmallString)
     service_id = Column(Integer, ForeignKey("service.id"))
-    service = relationship("Service", back_populates="runs", foreign_keys="Run.service_id")
+    service = relationship(
+        "Service", back_populates="runs", foreign_keys="Run.service_id"
+    )
     service_name = association_proxy("service", "name")
     workflow_id = Column(Integer, ForeignKey("workflow.id"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
@@ -107,7 +109,10 @@ class Run(AbstractBase):
         if key in self.__dict__:
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
-            service, value = self.__dict__.get("service"), self.__dict__["properties"][key]
+            service, value = (
+                self.__dict__.get("service"),
+                self.__dict__["properties"][key],
+            )
             return convert_value(service.type, key, value, "id") if service else value
         elif self.__dict__.get("service_id"):
             return getattr(self.service, key)
@@ -234,7 +239,9 @@ class Run(AbstractBase):
     def set_state(self, **kwargs):
         app.run_db[self.runtime].update(**kwargs)
         if self.workflow:
-            app.run_db[self.parent_runtime]["services"][self.service.id].update(**kwargs)
+            app.run_db[self.parent_runtime]["services"][self.service.id].update(
+                **kwargs
+            )
             if "success" in kwargs:
                 key = "passed" if kwargs["success"] else "failed"
                 app.run_db[self.parent_runtime]["progress"][key] += 1
@@ -251,7 +258,9 @@ class Run(AbstractBase):
                 values = [values]
             for value in values:
                 device = fetch(
-                    "device", allow_none=True, **{self.service.query_property_type: value}
+                    "device",
+                    allow_none=True,
+                    **{self.service.query_property_type: value},
                 )
                 if device:
                     devices.append(device)
@@ -410,7 +419,8 @@ class Run(AbstractBase):
             "content": "\n\n".join(notification),
         }
         notification_run = factory(
-            "run", **{"service": fetch("service", name=self.send_notification_method).id}
+            "run",
+            **{"service": fetch("service", name=self.send_notification_method).id},
         )
         notification_run.run(notification_payload)
 

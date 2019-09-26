@@ -4,12 +4,10 @@ from git.exc import GitCommandError
 from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
 from pathlib import Path
-from sqlalchemy import Boolean, ForeignKey, Integer
-from sqlalchemy.orm import backref, relationship
-from time import sleep
+from sqlalchemy import Boolean, Integer
+from sqlalchemy.orm import relationship
 
 from eNMS import app
-from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import fetch
 from eNMS.database.associations import (
@@ -50,9 +48,15 @@ class Service(AbstractBase):
     )
     python_query = Column(SmallString)
     query_property_type = Column(SmallString, default="ip_address")
-    devices = relationship("Device", secondary=service_device_table, back_populates="services")
-    pools = relationship("Pool", secondary=service_pool_table, back_populates="services")
-    events = relationship("Event", secondary=service_event_table, back_populates="services")
+    devices = relationship(
+        "Device", secondary=service_device_table, back_populates="services"
+    )
+    pools = relationship(
+        "Pool", secondary=service_pool_table, back_populates="services"
+    )
+    events = relationship(
+        "Event", secondary=service_event_table, back_populates="services"
+    )
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(SmallString, default="mail_feedback_notification")
     notification_header = Column(LargeString, default="")
@@ -175,36 +179,14 @@ class Service(AbstractBase):
                 }
             for device_name, r in deepcopy(device_results).items():
                 run.create_result(r, fetch("device", name=device_name))
-            results = fetch("result", service_id=self.id, parent_runtime=run.runtime, allow_none=True, all_matches=True)
-            return {"success": all(result.success for result in results), "runtime": run.runtime}
-
-
-class WorkflowEdge(AbstractBase):
-
-    __tablename__ = type = "workflow_edge"
-    id = Column(Integer, primary_key=True)
-    name = Column(SmallString)
-    label = Column(SmallString)
-    subtype = Column(SmallString)
-    source_id = Column(Integer, ForeignKey("service.id"))
-    source = relationship(
-        "Service",
-        primaryjoin="Service.id == WorkflowEdge.source_id",
-        backref=backref("destinations", cascade="all, delete-orphan"),
-        foreign_keys="WorkflowEdge.source_id",
-    )
-    destination_id = Column(Integer, ForeignKey("service.id"))
-    destination = relationship(
-        "Service",
-        primaryjoin="Service.id == WorkflowEdge.destination_id",
-        backref=backref("sources", cascade="all, delete-orphan"),
-        foreign_keys="WorkflowEdge.destination_id",
-    )
-    workflow_id = Column(Integer, ForeignKey("workflow.id"))
-    workflow = relationship(
-        "Workflow", back_populates="edges", foreign_keys="WorkflowEdge.workflow_id"
-    )
-
-    def __init__(self, **kwargs):
-        self.label = kwargs["subtype"]
-        super().__init__(**kwargs)
+            results = fetch(
+                "result",
+                service_id=self.id,
+                parent_runtime=run.runtime,
+                allow_none=True,
+                all_matches=True,
+            )
+            return {
+                "success": all(result.success for result in results),
+                "runtime": run.runtime,
+            }

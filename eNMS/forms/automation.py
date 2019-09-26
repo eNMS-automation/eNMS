@@ -107,12 +107,6 @@ class ServiceForm(JobForm):
     max_processes = IntegerField("Maximum number of processes", default=50)
 
 
-class WorkflowForm(JobForm):
-    form_type = HiddenField(default="workflow")
-    start_jobs = MultipleInstanceField("Workflow Entry Point(s)")
-    restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
-
-
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")

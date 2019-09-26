@@ -1,9 +1,17 @@
+from collections import defaultdict
+from copy import deepcopy
 from sqlalchemy import Boolean, ForeignKey, Integer
-from wtforms import BooleanField, HiddenField, SelectField, StringField
-from wtforms.widgets import TextArea
+from sqlalchemy.orm import relationship
+from time import sleep
+from wtforms import BooleanField, HiddenField
 
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS import app
+from eNMS.database import Session
+from eNMS.database.dialect import Column, MutableDict
+from eNMS.database.functions import factory, fetch
+from eNMS.database.associations import job_workflow_table, start_jobs_workflow_table
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import MultipleInstanceField, NoValidationSelectField
 from eNMS.models.automation import Service
 
 
@@ -85,10 +93,8 @@ class Workflow(Service):
             app.run_db[run.runtime]["jobs"][job.id]["success"] = job_results["success"]
             successors = []
             for successor, edge in job.adjacent_jobs(
-                    self,
-                    "destination",
-                    "success" if job_results["success"] else "failure",
-                ):
+                self, "destination", "success" if job_results["success"] else "failure"
+            ):
                 successors.append(successor)
                 app.run_db[run.runtime]["edges"][edge.id] += 1
             payload[job.name] = job_results
@@ -105,3 +111,5 @@ class Workflow(Service):
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="payload_extraction_service")
     has_targets = BooleanField("Has Target Devices", default=True)
+    start_jobs = MultipleInstanceField("Workflow Entry Point(s)")
+    restart_runtime = NoValidationSelectField("Restart Runtime", choices=())

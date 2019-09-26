@@ -126,9 +126,7 @@ class Task(AbstractBase):
     def run_properties(self):
         properties = {"payload": self.initial_payload, "task": self.id}
         if self.devices:
-            properties["devices"] = [
-                device.id for device in self.devices
-            ]
+            properties["devices"] = [device.id for device in self.devices]
         if self.pools:
             properties["pools"] = [pool.id for pool in self.pools]
         return properties

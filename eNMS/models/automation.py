@@ -1,4 +1,3 @@
-from collections import defaultdict
 from copy import deepcopy
 from git import Repo
 from git.exc import GitCommandError
@@ -10,15 +9,13 @@ from sqlalchemy.orm import backref, relationship
 from time import sleep
 
 from eNMS import app
-from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
-from eNMS.database.functions import factory, fetch
+from eNMS.database.functions import fetch
 from eNMS.database.associations import (
     job_device_table,
     job_event_table,
     job_pool_table,
     job_workflow_table,
-    start_jobs_workflow_table,
 )
 from eNMS.database.base import AbstractBase
 from eNMS.models.inventory import Device  # noqa: F401

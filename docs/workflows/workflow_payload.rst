@@ -5,9 +5,9 @@ Workflow Payload
 Job dependency
 --------------
 
-If a job ``A`` must be executed before a job ``B`` in the workflow, eNMS must be made aware of that dependency by creating a  ``Prerequisite`` edge.
+If a service ``A`` must be executed before a service ``B`` in the workflow, eNMS must be made aware of that dependency by creating a  ``Prerequisite`` edge.
 
-In the example below, the job ``process_payload1`` uses the results from ``get_facts`` and ``get_interfaces``. By creating two prerequisite edges (from ``get_facts`` to ``process_payload1`` and from ``get_interfaces`` to ``process_payload1``), we ensure that eNMS will not run ``process_payload1`` until both ``get_interfaces`` and ``get_config`` have been executed.
+In the example below, the service ``process_payload1`` uses the results from ``get_facts`` and ``get_interfaces``. By creating two prerequisite edges (from ``get_facts`` to ``process_payload1`` and from ``get_interfaces`` to ``process_payload1``), we ensure that eNMS will not run ``process_payload1`` until both ``get_interfaces`` and ``get_config`` have been executed.
 
 .. image:: /_static/workflows/payload_transfer_workflow.png
    :alt: Payload Transfer Workflow
@@ -16,8 +16,8 @@ In the example below, the job ``process_payload1`` uses the results from ``get_f
 Payload transfer
 ----------------
 
-The most important characteristic of workflows is the transfer of data between jobs.
-When a job starts, it is provided with the results of ALL jobs in the workflow
+The most important characteristic of workflows is the transfer of data between services.
+When a service starts, it is provided with the results of ALL services in the workflow
 that have already been executed (and not only the results of its "predecessors").
 
 The base code for a job function is the following:
@@ -53,25 +53,25 @@ In case the job has "device targets", it will receive an additional argument ``d
         return {"success": True, "result": "example"}
 
 The first argument of the ``job`` function is ``payload``: it is a dictionary that
-contains the results of all jobs that have already been executed.
+contains the results of all services that have already been executed.
 
 If we consider the aforementioned workflow, the job ``process_payload1`` receives
-the variable ``payload`` that contains the results of all other jobs in the workflow
+the variable ``payload`` that contains the results of all other services in the workflow
 (because it is the last one to be executed).
 
 It can access the results with the ``get_result`` function, that takes two arguments:
 
-- job (mandatory): the name of the job whose result you want to retrieve
-- device (optional): if the job has device targets, you can specify 
-    a device in case you want to get the result of the job for a specific device.
+- service (mandatory): the name of the service whose result you want to retrieve
+- device (optional): if the service has device targets, you can specify 
+    a device in case you want to get the result of the service for a specific device.
 
 ::
 
-    def get_result(self, job: str, device: Optional[str] = None) -> dict:
+    def get_result(self, service: str, device: Optional[str] = None) -> dict:
         ...
         return result
 
-You should access the result of previous jobs with the ``get_result`` function.
+You should access the result of previous services with the ``get_result`` function.
 Examples:
 
 - ``get_result("get_facts")``
@@ -112,19 +112,19 @@ For example, let's consider the following python snippet:
   set_var("iteration_device", devices, section="pools", device=device.name)
 
 
-Use data from a previous job in the workflow
+Use data from a previous service in the workflow
 --------------------------------------------
 
-If a job "B" needs to use the results from a previous job "A", it can access the results of job "A"
+If a service "B" needs to use the results from a previous service "A", it can access the results of service "A"
 with the ``get_result`` function.
 The ``get_result`` function takes two arguments:
 
-- the name of the job (name of the service or workflow whose results you want to retrieve)
-- (Optional) the name of a device, if you want to retrieve the job results for a specific device.
+- the name of the service (name of the service or workflow whose results you want to retrieve)
+- (Optional) the name of a device, if you want to retrieve the service results for a specific device.
 
 Example: ``get_result("Payload editor", device="Test_device")``
 
-The results of a job is always a dictionary: this is what the ``get_result`` function returns.
+The results of a service is always a dictionary: this is what the ``get_result`` function returns.
 You can therefore treat it as a dictionary to access the content of the results:
 
 ``get_result("Payload editor")["runtime"]``
@@ -138,9 +138,9 @@ the service itself does not have have any variable "parameters".
 It is not necessary to create a new Service (and therefore a new class, in a new file)
 for each of them. Instead, you can group them all in the SwissArmyKnifeService class,
 and add a method called after the name of the instance.
-The SwissArmyKnifeService class acts as a "job multiplexer"
+The SwissArmyKnifeService class acts as a "service multiplexer"
 (see the ``SwissArmyKnifeService`` section of the doc).
-If we want to use the results of the Napalm getters in the final job ``process_payload1``, here's what the function of ``process_payload1`` could look like:
+If we want to use the results of the Napalm getters in the final service ``process_payload1``, here's what the function of ``process_payload1`` could look like:
 
 ::
 
@@ -160,4 +160,4 @@ If we want to use the results of the Napalm getters in the final job ``process_p
 This ``job`` function reuses the results of the Napalm getter ``get_facts`` (which is not a direct predecessor of ``process_payload1``) to create new variables and inject them in the results.
 From the web UI, you can then create an Service Instance of ``SwissArmyKnifeService`` called ``process_payload1``, and add that instance in the workflow. When the service instance is called, eNMS will automatically use the ``process_payload1`` method, and process the payload accordingly.
 
-.. tip:: You can run a job directly from the Workflow Builder to see if it passes (and rerun if it fails), and also which payload the job returns.
+.. tip:: You can run a service directly from the Workflow Builder to see if it passes (and rerun if it fails), and also which payload the service returns.

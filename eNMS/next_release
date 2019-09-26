@@ -64,3 +64,5 @@ anything.
 - Workflow backend refactoring:
 * remove "Use Workflow Devices" property.
 * remove mode traversal property.
+* rename "job" -> "service"
+* change "run_job" to "run_service"

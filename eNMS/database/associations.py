@@ -2,18 +2,18 @@ from sqlalchemy import Column, ForeignKey, Integer, Table
 
 from eNMS.database import Base
 
-job_device_table = Table(
-    "job_device_association",
+service_device_table = Table(
+    "service_device_association",
     Base.metadata,
     Column("device_id", Integer, ForeignKey("device.id")),
-    Column("job_id", Integer, ForeignKey("job.id")),
+    Column("service_id", Integer, ForeignKey("service.id")),
 )
 
-job_pool_table = Table(
-    "job_pool_association",
+service_pool_table = Table(
+    "service_pool_association",
     Base.metadata,
     Column("pool_id", Integer, ForeignKey("pool.id")),
-    Column("job_id", Integer, ForeignKey("job.id")),
+    Column("service_id", Integer, ForeignKey("service.id")),
 )
 
 task_device_table = Table(
@@ -30,24 +30,24 @@ task_pool_table = Table(
     Column("task_id", Integer, ForeignKey("task.id")),
 )
 
-job_event_table = Table(
-    "job_event_association",
+service_event_table = Table(
+    "service_event_association",
     Base.metadata,
-    Column("job_id", Integer, ForeignKey("job.id")),
+    Column("service_id", Integer, ForeignKey("service.id")),
     Column("event_id", Integer, ForeignKey("event.id")),
 )
 
-job_workflow_table = Table(
-    "job_workflow_association",
+service_workflow_table = Table(
+    "service_workflow_association",
     Base.metadata,
-    Column("job_id", Integer, ForeignKey("job.id")),
+    Column("service_id", Integer, ForeignKey("service.id")),
     Column("workflow_id", Integer, ForeignKey("workflow.id")),
 )
 
-start_jobs_workflow_table = Table(
-    "start_jobs_workflow_association",
+start_services_workflow_table = Table(
+    "start_services_workflow_association",
     Base.metadata,
-    Column("job_id", Integer, ForeignKey("job.id")),
+    Column("service_id", Integer, ForeignKey("service.id")),
     Column("workflow_id", Integer, ForeignKey("workflow.id")),
 )
 

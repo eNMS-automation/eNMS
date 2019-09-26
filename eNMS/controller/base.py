@@ -148,7 +148,7 @@ class BaseController:
     valid_post_endpoints = [
         "stop_workflow",
         "add_edge",
-        "add_jobs_to_workflow",
+        "add_services_to_workflow",
         "calendar_init",
         "clear_results",
         "clear_configurations",
@@ -163,7 +163,7 @@ class BaseController:
         "delete_label",
         "delete_node",
         "duplicate_workflow",
-        "export_job",
+        "export_service",
         "export_to_google_earth",
         "export_topology",
         "get",
@@ -172,15 +172,15 @@ class BaseController:
         "get_configuration_diff",
         "get_device_configuration",
         "get_device_logs",
-        "get_exported_jobs",
+        "get_exported_services",
         "get_git_content",
-        "get_job_logs",
+        "get_service_logs",
         "get_properties",
         "get_result",
         "get_runtimes",
         "get_view_topology",
         "get_workflow_state",
-        "import_jobs",
+        "import_services",
         "import_topology",
         "migration_export",
         "migration_import",
@@ -190,14 +190,14 @@ class BaseController:
         "query_opennms",
         "reset_status",
         "restart_workflow",
-        "run_job",
+        "run_service",
         "save_parameters",
         "save_pool_objects",
         "save_positions",
         "scan_cluster",
         "scan_playbook_folder",
         "scheduler",
-        "skip_jobs",
+        "skip_services",
         "table_filtering",
         "task_action",
         "topology_import",
@@ -573,14 +573,14 @@ class BaseController:
             constraints.append(
                 getattr(
                     models[table],
-                    "job"
+                    "service"
                     if "service" in kwargs["instance[type]"]
                     else kwargs["instance[type]"],
                 ).has(id=kwargs["instance[id]"])
             )
-            if kwargs.get("job[runtime]"):
+            if kwargs.get("service[runtime]"):
                 constraints.append(
-                    models["result"].parent_runtime == kwargs.get("job[runtime]")
+                    models["result"].parent_runtime == kwargs.get("service[runtime]")
                 )
         elif table == "configuration" and kwargs.get("instance[id]"):
             constraints.append(

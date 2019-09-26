@@ -81,6 +81,6 @@ def configure_events(app):
 
     @event.listens_for(models["workflow"].name, "set")
     def workflow_name_update(workflow, new_name, old_name, *args):
-        for job in fetch_all("job"):
-            if old_name in job.positions:
-                job.positions[new_name] = job.positions.pop(old_name)
+        for service in fetch_all("service"):
+            if old_name in service.positions:
+                service.positions[new_name] = service.positions.pop(old_name)

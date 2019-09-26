@@ -20,7 +20,7 @@ class AutomationController(BaseController):
     NETMIKO_SCP_DRIVERS = sorted((driver, driver) for driver in FILE_TRANSFER_MAP)
     NAPALM_DRIVERS = sorted((driver, driver) for driver in SUPPORTED_DRIVERS[1:])
     connections_cache = {"napalm": defaultdict(dict), "netmiko": defaultdict(dict)}
-    job_db = defaultdict(lambda: {"runs": 0})
+    service_db = defaultdict(lambda: {"runs": 0})
     run_db = defaultdict(dict)
     run_logs = defaultdict(list)
 
@@ -47,17 +47,17 @@ class AutomationController(BaseController):
         fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_jobs_to_workflow(self, workflow_id, job_ids):
+    def add_services_to_workflow(self, workflow_id, service_ids):
         workflow = fetch("workflow", id=workflow_id)
-        jobs = objectify("job", [int(job_id) for job_id in job_ids.split("-")])
-        for job in jobs:
-            job.workflows.append(workflow)
+        services = objectify("service", [int(service_id) for service_id in service_ids.split("-")])
+        for service in services:
+            service.workflows.append(workflow)
         now = self.get_time()
         workflow.last_modified = now
-        return {"jobs": [job.serialized for job in jobs], "update_time": now}
+        return {"services": [service.serialized for service in services], "update_time": now}
 
-    def clear_results(self, job_id):
-        for result in fetch("run", all_matches=True, allow_none=True, job_id=job_id):
+    def clear_results(self, service_id):
+        for result in fetch("run", all_matches=True, allow_none=True, service_id=service_id):
             Session.delete(result)
 
     def create_label(self, workflow_id, x, y, **kwargs):
@@ -76,12 +76,12 @@ class AutomationController(BaseController):
         fetch("workflow", id=workflow_id).last_modified = now
         return now
 
-    def delete_node(self, workflow_id, job_id):
-        workflow, job = fetch("workflow", id=workflow_id), fetch("job", id=job_id)
-        workflow.jobs.remove(job)
+    def delete_node(self, workflow_id, service_id):
+        workflow, service = fetch("workflow", id=workflow_id), fetch("service", id=service_id)
+        workflow.services.remove(service)
         now = self.get_time()
         workflow.last_modified = now
-        return {"job": job.serialized, "update_time": now}
+        return {"service": service.serialized, "update_time": now}
 
     def delete_label(self, workflow_id, label):
         workflow = fetch("workflow", id=workflow_id)
@@ -94,9 +94,9 @@ class AutomationController(BaseController):
         parent_workflow = fetch("workflow", id=workflow_id)
         new_workflow = factory("workflow", **kwargs)
         Session.commit()
-        for job in parent_workflow.jobs:
-            new_workflow.jobs.append(job)
-            job.positions[new_workflow.name] = job.positions[parent_workflow.name]
+        for service in parent_workflow.services:
+            new_workflow.services.append(service)
+            service.positions[new_workflow.name] = service.positions[parent_workflow.name]
         Session.commit()
         for edge in parent_workflow.edges:
             subtype, src, destination = edge.subtype, edge.source, edge.destination
@@ -117,7 +117,7 @@ class AutomationController(BaseController):
             )
         return new_workflow.serialized
 
-    def get_job_logs(self, **kwargs):
+    def get_service_logs(self, **kwargs):
         run = fetch("run", allow_none=True, runtime=kwargs["runtime"])
         result = run.result() if run else None
         logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])
@@ -129,33 +129,33 @@ class AutomationController(BaseController):
             results = fetch("result", allow_none=True, all_matches=True, device_id=id)
             runs = [result.run for result in results]
         else:
-            runs = fetch("run", allow_none=True, all_matches=True, job_id=id)
+            runs = fetch("run", allow_none=True, all_matches=True, service_id=id)
         return sorted(set((run.runtime, run.name) for run in runs))
 
     def get_result(self, id):
         return fetch("result", id=id).result
 
     @staticmethod
-    def run(job, **kwargs):
+    def run(service, **kwargs):
         run_kwargs = {
             key: kwargs.pop(key)
             for key in ("creator", "runtime", "task")
             if kwargs.get(key)
         }
         restart_run = fetch(
-            "run", allow_none=True, job_id=job, runtime=kwargs.get("restart_runtime")
+            "run", allow_none=True, service_id=service, runtime=kwargs.get("restart_runtime")
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
-        run = factory("run", job=job, **run_kwargs)
+        run = factory("run", service=service, **run_kwargs)
         run.properties = kwargs
         return run.run(kwargs.get("payload"))
 
-    def run_job(self, id=None, **kwargs):
+    def run_service(self, id=None, **kwargs):
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "admin")
-        job = fetch("job", id=id)
+        service = fetch("service", id=id)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(
@@ -167,8 +167,8 @@ class AutomationController(BaseController):
                 trigger="date",
             )
         else:
-            job.run(runtime=runtime)
-        return {**job.serialized, "runtime": runtime}
+            service.run(runtime=runtime)
+        return {**service.serialized, "runtime": runtime}
 
     def save_positions(self, workflow_id):
         now = self.get_time()
@@ -183,22 +183,22 @@ class AutomationController(BaseController):
                     "content": workflow.labels[id]["content"],
                 }
             else:
-                job = fetch("job", id=id)
-                old_position = job.positions.get(workflow.name)
-                job.positions[workflow.name] = new_position
+                service = fetch("service", id=id)
+                old_position = service.positions.get(workflow.name)
+                service.positions[workflow.name] = new_position
             if new_position != old_position:
                 workflow.last_modified = now
         return now
 
-    def skip_jobs(self, skip, job_ids):
-        for job_id in job_ids.split("-"):
-            fetch("job", id=job_id).skip = skip == "skip"
+    def skip_services(self, skip, service_ids):
+        for service_id in service_ids.split("-"):
+            fetch("service", id=service_id).skip = skip == "skip"
 
     def get_workflow_state(self, workflow_id, runtime=None):
         workflow = fetch("workflow", id=workflow_id)
         runtimes = [
             (r.runtime, r.creator)
-            for r in fetch("run", allow_none=True, all_matches=True, job_id=workflow_id)
+            for r in fetch("run", allow_none=True, all_matches=True, service_id=workflow_id)
         ]
         state = None
         if runtimes and runtime not in ("normal", None):
@@ -210,7 +210,7 @@ class AutomationController(BaseController):
                 global_result = [r for r in results if not r.device_id]
                 state = global_result[0].result.get("state") if global_result else None
         return {
-            "workflow": workflow.to_dict(include=["jobs", "edges"]),
+            "workflow": workflow.to_dict(include=["services", "edges"]),
             "runtimes": runtimes,
             "state": state,
             "runtime": runtime,

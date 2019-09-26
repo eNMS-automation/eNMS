@@ -53,7 +53,7 @@ paths:
               examples:
                 0:
                   value: |
-                    {"id": 4142, "name": "TEST-DEVICE", "description": "DEVICE-NAME", "subtype": "router", "model": "MODELNAME", "location": "LAB", "vendor": "CISCO", "ems_ip": "1.1.1.1", "console1": "1.1.1.1", "console2": "1.1.1.1", "in_sync": "NO", "network": "NetworkA", "operating_system": "iosxr", "os_version": "6.1.31", "netmiko_driver": "cisco_xr", "napalm_driver": "iosxr", "ip_address": "192.168.0.4", "port": 22, "longitude": -95.992775, "latitude": 36.15398, "username": "CISCO15", "last_failure": "Never", "last_runtime": 0, "last_status": "Never", "last_update": "Never", "jobs": []}
+                    {"id": 4142, "name": "TEST-DEVICE", "description": "DEVICE-NAME", "subtype": "router", "model": "MODELNAME", "location": "LAB", "vendor": "CISCO", "ems_ip": "1.1.1.1", "console1": "1.1.1.1", "console2": "1.1.1.1", "in_sync": "NO", "network": "NetworkA", "operating_system": "iosxr", "os_version": "6.1.31", "netmiko_driver": "cisco_xr", "napalm_driver": "iosxr", "ip_address": "192.168.0.4", "port": 22, "longitude": -95.992775, "latitude": 36.15398, "username": "CISCO15", "last_failure": "Never", "last_runtime": 0, "last_status": "Never", "last_update": "Never", "services": []}
       servers:
       - url: https://192.168.0.2
     servers:
@@ -219,7 +219,7 @@ paths:
               examples:
                 0:
                   value: |
-                    {"id": 1, "name": "TASKNAME", "description": "Task Description", "job_name": "Configuration Management Workflow", "status": "Inactive", "start_date": "", "end_date": "", "frequency": 3600, "next_run_time": null, "time_before_next_run": null, "is_active": false, "job": "Configuration Management Workflow"}
+                    {"id": 1, "name": "TASKNAME", "description": "Task Description", "service_name": "Configuration Management Workflow", "status": "Inactive", "start_date": "", "end_date": "", "frequency": 3600, "next_run_time": null, "time_before_next_run": null, "is_active": false, "service": "Configuration Management Workflow"}
       servers:
       - url: https://192.168.0.2
     servers:
@@ -290,7 +290,7 @@ paths:
       - url: https://192.168.0.2
     servers:
     - url: https://192.168.0.2
-  /rest/run_job:
+  /rest/run_service:
     post:
       description: Auto generated using Swagger Inspector
       requestBody:
@@ -690,7 +690,7 @@ components:
           type: number
         os_version:
           type: string
-        jobs:
+        services:
           type: array
           items:
             type: string
@@ -807,7 +807,7 @@ components:
           type: string
         is_active:
           type: boolean
-        job_name:
+        service_name:
           type: string
         next_run_time: {}
         name:
@@ -817,7 +817,7 @@ components:
         time_before_next_run: {}
         id:
           type: integer
-        job:
+        service:
           type: string
         status:
           type: string

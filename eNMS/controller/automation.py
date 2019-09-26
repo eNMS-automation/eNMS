@@ -145,7 +145,6 @@ class AutomationController(BaseController):
         restart_run = fetch(
             "run", allow_none=True, service_id=service, runtime=kwargs.get("restart_runtime")
         )
-        print(restart_run)
         if restart_run:
             run_kwargs["restart_run"] = restart_run
         run = factory("run", service=service, **run_kwargs)

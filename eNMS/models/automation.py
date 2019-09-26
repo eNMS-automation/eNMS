@@ -9,6 +9,7 @@ from sqlalchemy.orm import backref, relationship
 from time import sleep
 
 from eNMS import app
+from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import fetch
 from eNMS.database.associations import (
@@ -152,7 +153,8 @@ class Service(AbstractBase):
     def device_run(self, run, payload):
         devices = run.compute_devices(payload)
         if not devices:
-            return run.get_results(payload)
+            result = run.get_results(payload)
+            return run.create_result(result)
         else:
             if run.multiprocessing:
                 device_results = {}
@@ -177,7 +179,11 @@ class Service(AbstractBase):
             return results
 
     def build_results(self, run, payload, *other):
-        return self.device_run(run, payload, targets)
+        run.set_state(completed=0, failed=0)
+        self.device_run(run, payload)
+        Session.commit()
+        results = fetch("result", service_id=self.id, parent_runtime=run.runtime, allow_none=True, all_matches=True)
+        return {"success": all(result.success for result in results), "runtime": run.runtime}
 
 
 class WorkflowEdge(AbstractBase):

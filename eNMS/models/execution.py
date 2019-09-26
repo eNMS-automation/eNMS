@@ -47,6 +47,9 @@ class Result(AbstractBase):
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
     workflow_name = association_proxy("workflow", "name")
 
+    def __repr__(self):
+        return f"{self.service_name} on {self.device_name}"
+
     def __getitem__(self, key):
         return self.result[key]
 
@@ -310,12 +313,8 @@ class Run(AbstractBase):
             results = {"success": False, "runtime": self.runtime, "results": result}
         finally:
             self.close_connection_cache()
-            if self.stop:
-                status = "Aborted"
-            else:
-                status = f"Completed ({'success' if results['success'] else 'failure'})"
-            self.status = status
-            self.set_state(status=status, success=results["success"])
+            self.status = "Aborted" if self.stop else "Completed"
+            self.set_state(status=self.status, success=results["success"])
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["state"] = app.run_db.pop(self.runtime)
@@ -328,7 +327,6 @@ class Run(AbstractBase):
             }
             self.create_result(results)
             self.log("info", f"{self.service.type} {self.service.name}: Finished")
-            Session.commit()
         if not self.workflow and self.send_notification:
             self.notify(results)
         return results
@@ -341,12 +339,10 @@ class Run(AbstractBase):
         if device:
             result_kw["device"] = device.id
         factory("result", **result_kw)
+        return results
 
     def get_results(self, payload, *args):
-        self.log(
-            "info", f"Running {self.service.type}{f' on {device.name}' if device else ''}"
-        )
-        results = {"runtime": app.get_time()}
+        results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.service.iteration_values:
                 targets_results = {}
@@ -367,12 +363,6 @@ class Run(AbstractBase):
             )
         self.eval(self.service.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
-        self.log(
-            "info",
-            f"Finished running {self.service.type} '{self.service.name}'"
-            f"({'SUCCESS' if results['success'] else 'FAILURE'})"
-            f"{f' on {device.name}' if device else ''}",
-        )
         completed, failed = self.get_state("completed"), self.get_state("failed")
         self.set_state(failed=failed + 1 - results["success"], completed=completed + 1)
         return results

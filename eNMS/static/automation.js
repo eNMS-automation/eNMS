@@ -6,10 +6,10 @@ createPanel: false
 diffview: false
 displayWorkflow: false
 fCall: false
-getJobState: false
+getServiceState: false
 JSONEditor: false
 page: false
-saveWorkflowJob: false
+saveWorkflowService: false
 showTypePanel: false
 table: false
 */
@@ -66,7 +66,7 @@ function workflowRunMode(instance, restartForm) {
 // eslint-disable-next-line
 function saveService(service, id) {
   if (page == "workflow_builder") {
-    saveWorkflowJob(service, id);
+    saveWorkflowService(service, id);
   }
 }
 
@@ -234,10 +234,10 @@ function parametrizedRun(type, id) {
 
 function runLogic(service) {
   showLogsPanel(service, service.runtime, true);
-  alertify.notify(`Job '${service.name}' started.`, "success", 5);
+  alertify.notify(`Service '${service.name}' started.`, "success", 5);
   if (page == "workflow_builder") {
     if (service.type != "workflow") {
-      getJobState(service.id);
+      getServiceState(service.id);
     }
   }
   $(`#${service.type}-${service.id}`).remove();
@@ -253,7 +253,7 @@ function duplicateWorkflow(id) {
 }
 
 // eslint-disable-next-line
-function exportJob(id) {
+function exportService(id) {
   call(`/export_service/${id}`, () => {
     alertify.notify("Export successful.", "success", 5);
   });

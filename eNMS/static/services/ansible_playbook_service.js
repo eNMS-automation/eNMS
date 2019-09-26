@@ -6,7 +6,7 @@ processInstance: false
 
 /**
  * Job Function for the Ansible Service Creation.
- * @param {id} id - Job id.
+ * @param {id} id - Service id.
  */
 // eslint-disable-next-line
 function job(id) {

@@ -129,7 +129,7 @@ function migrationsImport() {
   });
 }
 
-function refreshExportedJobs() {
+function refreshExportedServices() {
   call("/get_exported_services", function(services) {
     let list = document.getElementById("services_to_import");
     services.forEach((item) => {
@@ -142,14 +142,14 @@ function refreshExportedJobs() {
 }
 
 // eslint-disable-next-line
-function showImportJobsPanel() {
+function showImportServicesPanel() {
   showPanel("import_services", null, () => {
-    refreshExportedJobs();
+    refreshExportedServices();
   });
 }
 
 // eslint-disable-next-line
-function importJobs() {
+function importServices() {
   fCall("/import_services", "#import_services-form", function(result) {
     alertify.notify("Import successful.", "success", 5);
     $("#import_services").remove();

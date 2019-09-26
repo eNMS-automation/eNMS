@@ -264,13 +264,13 @@ function menu(entry) {
 }
 
 // eslint-disable-next-line
-function saveWorkflowJob(service, update) {
+function saveWorkflowService(service, update) {
   if (update) {
     nodes.update(serviceToNode(service));
     let serviceIndex = workflow.services.findIndex((service) => service.id == service.id);
     workflow.services[serviceIndex] = service;
   } else {
-    addJobsToWorkflow([service.id]);
+    addServicesToWorkflow([service.id]);
   }
   if (service.iteration_values != "") {
     drawIterationEdge(service);
@@ -285,7 +285,7 @@ function saveWorkflowEdge(edge) {
 }
 
 // eslint-disable-next-line
-function addJobsToWorkflow(services) {
+function addServicesToWorkflow(services) {
   if (!workflow) {
     alertify.notify(
       `You must create a workflow in the
@@ -307,7 +307,7 @@ function addJobsToWorkflow(services) {
           nodes.add(serviceToNode(service, index));
           workflow.services.push(service);
           alertify.notify(
-            `Job '${service.name}' added to the workflow.`,
+            `Service '${service.name}' added to the workflow.`,
             "success",
             5
           );
@@ -384,11 +384,11 @@ function changeSkipValue(skip) {
         j.skip = skip == "skip";
       });
     resetDisplay();
-    alertify.notify(`Jobs ${skip}ped`, "success", 5);
+    alertify.notify(`Services ${skip}ped`, "success", 5);
   });
 }
 
-function formatJobTitle(service) {
+function formatServiceTitle(service) {
   return `
     <b>Type</b>: ${service.type}<br>
     <b>Name</b>: ${service.name}
@@ -396,15 +396,15 @@ function formatJobTitle(service) {
 }
 
 function serviceToNode(service, index) {
-  const defaultJob = ["Start", "End"].includes(service.name);
+  const defaultService = ["Start", "End"].includes(service.name);
   return {
     id: service.id,
-    shape: service.type == "workflow" ? "ellipse" : defaultJob ? "circle" : "box",
-    color: defaultJob ? "pink" : "#D2E5FF",
+    shape: service.type == "workflow" ? "ellipse" : defaultService ? "circle" : "box",
+    color: defaultService ? "pink" : "#D2E5FF",
     label: service.type == "workflow" ? `     ${service.name}     ` : service.name,
     name: service.name,
     type: service.type,
-    title: formatJobTitle(service),
+    title: formatServiceTitle(service),
     x: service.positions[workflow.name]
       ? service.positions[workflow.name][0]
       : index
@@ -587,7 +587,7 @@ $("#network").contextMenu({
 
 function runWorkflow(withUpdates) {
   emptyProgressBar();
-  workflow.services.forEach((service) => colorJob(service.id, "#D2E5FF"));
+  workflow.services.forEach((service) => colorService(service.id, "#D2E5FF"));
   if (withUpdates) {
     showTypePanel("workflow", workflow.id, "run");
   } else {
@@ -616,20 +616,20 @@ function restartWorkflow() {
   });
 }
 
-function colorJob(id, color) {
+function colorService(id, color) {
   if (id != 1 && id != 2) nodes.update({ id: id, color: color });
 }
 
 // eslint-disable-next-line
-function getJobState(id) {
+function getServiceState(id) {
   call(`/get/service/${id}`, function(service) {
     if (service.status == "Running") {
-      colorJob(id, "#89CFF0");
+      colorService(id, "#89CFF0");
       $("#status").text("Status: Running.");
-      setTimeout(() => getJobState(id), 1500);
+      setTimeout(() => getServiceState(id), 1500);
     } else {
       $("#status").text("Status: Idle.");
-      colorJob(id, service.color);
+      colorService(id, service.color);
     }
   });
 }
@@ -657,9 +657,9 @@ function displayWorkflowState(result) {
       $("#progress-failure-span").text(result.state.progress.failed);
     }
     $("#status").text(`Status: ${result.state.status}`);
-    const currJob = result.state.current_service;
-    if (currJob) {
-      colorJob(currJob.id, "#89CFF0");
+    const currService = result.state.current_service;
+    if (currService) {
+      colorService(currService.id, "#89CFF0");
     }
     if (result.state.services) {
       $.each(result.state.services, (id, state) => {
@@ -669,7 +669,7 @@ function displayWorkflowState(result) {
           skipped: "#D3D3D3",
         };
         if (id in nodes._data) {
-          colorJob(id, color[state.success]);
+          colorService(id, color[state.success]);
           if (state.type != "workflow" && state.number_of_targets) {
             let progress = `${state.completed}/${state.number_of_targets}`;
             if (state.failed > 0) progress += ` (${state.failed} failed)`;
@@ -697,7 +697,7 @@ function displayWorkflowState(result) {
 function resetDisplay() {
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
-    colorJob(service.id, service.skip ? "#D3D3D3" : "#D2E5FF");
+    colorService(service.id, service.skip ? "#D3D3D3" : "#D2E5FF");
   });
   workflow.edges.forEach((edge) => {
     edges.update({ id: edge.id, label: edge.label });

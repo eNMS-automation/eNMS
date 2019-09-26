@@ -56,3 +56,7 @@ anything.
 - Removed mypy from both the codebase and CI/CD test (travis).
 
 - Refactoring of the configuration management system.
+
+- Refactoring of the workflow system
+
+- You can now specify the alignment for workflow labels

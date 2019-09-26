@@ -285,6 +285,10 @@ class Run(AbstractBase):
 
     def run(self, payload=None):
         try:
+            print("oo"*100, self.service.type);
+            if self.service.type == "workflow":
+                
+                self.service.init_state(self)
             self.log("info", f"{self.service.type} {self.service.name}: Starting")
             self.set_state(status="Running", type=self.service.type)
             app.service_db[self.service.id]["runs"] += 1

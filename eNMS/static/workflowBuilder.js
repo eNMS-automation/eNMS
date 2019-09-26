@@ -724,7 +724,7 @@ function getWorkflowState(periodic) {
 (function() {
   $("#left-arrow,#right-arrow").addClass("disabled");
   call("/get_all/workflow", function(workflows) {
-    console.log(workflows);
+    console.log(workflow);
     workflows.sort((a, b) => a.name.localeCompare(b.name));
     for (let i = 0; i < workflows.length; i++) {
       $("#current-workflow").append(

@@ -40,6 +40,11 @@ class Workflow(Service):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
+    def init_state(self, run):
+        app.run_db[run.runtime].update(
+            {"services": defaultdict(dict), "edges": defaultdict(int), "progress": defaultdict(int)}
+        )
+
     def job(self, run, payload, device=None):
         run.set_state(progress_max=len(self.services))
         number_of_runs = defaultdict(int)
@@ -109,7 +114,7 @@ class Workflow(Service):
 
 
 class WorkflowForm(ServiceForm):
-    form_type = HiddenField(default="payload_extraction_service")
+    form_type = HiddenField(default="workflow")
     has_targets = BooleanField("Has Target Devices", default=True)
     start_services = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())

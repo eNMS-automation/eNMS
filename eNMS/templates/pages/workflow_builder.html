@@ -125,19 +125,23 @@ block content %}
             >
               <tbody>
                 <tr>
-                  <td>
-                    Workflow
+                  <td style="text-align: center; vertical-align: middle;">
+                    Service Creation
                   </td>
                   <td style="min-width: 20vw">
-                    <select id="current-workflow" class="form-control"></select>
+                    <select id="service-type" class="form-control"></select>
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    Runtime
+                  <td style="text-align: center; vertical-align: middle;">
+                    Edge Creation
                   </td>
                   <td style="min-width: 20vw">
-                    <select id="current-runtimes" class="form-control"></select>
+                    <select id="edge-type" class="form-control">
+                      <option value="success">Success</option>
+                      <option value="failure">Failure</option>
+                      <option value="prerequisite">Prerequisite</option>
+                    </select>
                   </td>
                 </tr>
               </tbody>
@@ -147,17 +151,35 @@ block content %}
             class="btn-group"
             style="width: 20vw; z-index:2; position: absolute;"
           >
-            <select id="service-type" class="form-control"></select>
-            <select id="edge-type" class="form-control">
-              <option value="success">Success</option>
-              <option value="failure">Failure</option>
-              <option value="prerequisite">Prerequisite</option>
-            </select>
+            <table
+              class="table table-bordered dt-responsive nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    Workflow
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="current-workflow" class="form-control"></select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    Runtime
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="current-runtime" class="form-control"></select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div
           class="btn-group"
-          style="width: 20vw; z-index:2; position: absolute; left: 35vw"
+          style="width: 20vw; z-index:2; position: absolute; left: 30vw"
         >
           <strong><p id="status"></p></strong>
           <strong><p id="current-job"></p></strong>

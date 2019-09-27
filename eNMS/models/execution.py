@@ -131,17 +131,21 @@ class Run(AbstractBase):
     def generate_row(self, table):
         service_type = "workflow" if self.service.type == "workflow" else "service"
         return [
-            f"""<div class="btn-group" style="width: 100px;">
-            <button type="button" class="btn btn-info btn-sm"
-            onclick="showResultsPanel('{self.service.id}', '{self.name}',
-            '{service_type}', '{self.runtime}')">Results</button>,
-            <button type="button" class="btn btn-info btn-sm
-            dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
-              showLogsPanel({self.service.row_properties}, '{self.runtime}')">Logs</a></li>
-            </ul></div>"""
+            f"""
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
+          <li>
+            <button type="button" class="btn btn-info"
+            onclick="showResultsPanel({self.service.row_properties}, '{self.runtime}')"
+              ><span class="glyphicon glyphicon-list-alt"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-info"
+            onclick="showLogsPanel({self.service.row_properties}, '{self.runtime}')"
+              ><span class="glyphicon glyphicon-list"></span
+            ></button>
+          </li>
+        </ul>""",
         ]
 
     @property

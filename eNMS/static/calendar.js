@@ -20,8 +20,7 @@ $(function() {
         description: properties.description,
         start: new Date(...properties.start),
         runtime: properties.runtime,
-        serviceId: properties.service.id,
-        serviceType: properties.service.type == "workflow" ? "workflow" : "service",
+        service: properties.service,
       });
     }
     $("#calendar").fullCalendar({
@@ -36,7 +35,7 @@ $(function() {
         if (calendarType == "task") {
           showTypePanel("task", e.id);
         } else {
-          showResultsPanel(e.serviceId, e.title, e.runtime);
+          showResultsPanel(e.service, e.title, e.runtime);
         }
       },
       editable: true,

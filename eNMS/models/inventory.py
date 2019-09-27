@@ -317,10 +317,8 @@ class Pool(AbstractPool):
 
     def generate_row(self, table):
         return [
-            f"""<input type="radio" name="v1" value="{self.id}"/>""",
-            f"""<input type="radio" name="v2" value="{self.id}"/>""",
             f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
           <li>
             <button type="button" class="btn btn-info"
             onclick="showPoolView('{self.id}')"

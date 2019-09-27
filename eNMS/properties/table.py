@@ -143,5 +143,5 @@ table_fixed_columns = {
     "syslog": [],
     "task": ["Action", "Edit", "Delete"],
     "user": [""],
-    "pool": ["Visualize", "Edit", "Delete"],
+    "pool": [""],
 }

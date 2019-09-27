@@ -235,19 +235,27 @@ class Link(Object):
 
     def generate_row(self, table):
         return [
-            f"""<div class="btn-group" style="width: 80px;">
-                <button type="button" class="btn btn-primary btn-sm"
-                onclick="showTypePanel('link', '{self.id}')">Edit</button>,
-                <button type="button" class="btn btn-primary btn-sm
-                dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
-                showTypePanel('link', '{self.id}', 'duplicate')">Duplicate</a></li>
-                </ul></div>""",
-            f"""<button type="button" class="btn btn-danger btn-sm"
-            onclick="showDeletionPanel({self.row_properties})">
-            Delete</button>""",
+            f"""
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('link', '{self.id}')"
+              ><span class="glyphicon glyphicon-edit"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('link', '{self.id}', 'duplicate')"
+              ><span class="glyphicon glyphicon-duplicate"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger"
+            onclick="showDeletionPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-trash"></span
+            ></button>
+          </li>
+        </ul>"""
         ]
 
 
@@ -387,7 +395,7 @@ class Configuration(AbstractBase):
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",
             f"""
-            <ul class="pagination pagination-lg" style="margin: 0px;">
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
             onclick="showConfiguration('{self.id}', '{self.device_name}')"
@@ -395,11 +403,10 @@ class Configuration(AbstractBase):
             ></button>
           </li>
           <li>
-          <form action="/download_configuration/{self.id}">
-            <button type="submit" class="btn btn-info"
-            
-              ><span class="glyphicon glyphicon-book"></span
-            ></button></form>
+            <form action="/download_configuration/{self.id}" style="display: inline;">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-download"></span></button>
+            </form>
 
           </li></ul>""",
         ]

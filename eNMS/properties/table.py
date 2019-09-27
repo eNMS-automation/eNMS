@@ -135,7 +135,7 @@ table_fixed_columns = {
     "configuration": ["V1", "V2", ""],
     "device": [""],
     "event": ["Edit", "Delete"],
-    "link": ["Edit", "Delete"],
+    "link": [""],
     "run": ["Results"],
     "result": ["Result", "V1", "V2"],
     "server": [""],

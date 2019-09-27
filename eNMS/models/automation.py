@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Integer
+from sqlalchemy import Boolean, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 
 from eNMS import app
@@ -137,12 +137,11 @@ class Service(AbstractBase):
 class ConnectionService(Service):
 
     __tablename__ = "connection_service"
-    __mapper_args__ = {
-        "polymorphic_identity": "connection_service",
-        "polymorphic_on": type,
-    }
+    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    parent_type = "service"
     credentials = Column(SmallString, default="device")
     custom_username = Column(SmallString)
     custom_password = Column(SmallString)
     start_new_connection = Column(Boolean, default=False)
     close_connection = Column(Boolean, default=False)
+    __mapper_args__ = {"polymorphic_identity": "connection_service"}

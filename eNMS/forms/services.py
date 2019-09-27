@@ -3,7 +3,12 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DictField, DictSubstitutionField, SubstitutionField
+from eNMS.forms.fields import (
+    DictField,
+    DictSubstitutionField,
+    PasswordSubstitutionField,
+    SubstitutionField,
+)
 
 
 class StringValidationForm(BaseForm):
@@ -137,6 +142,8 @@ class NapalmForm(BaseForm):
 
 
 class ConnectionForm(BaseForm):
+    form_type = HiddenField(default="connection")
+    abstract_service = True
     credentials = SelectField(
         "Credentials",
         choices=(

@@ -12,7 +12,7 @@ class NetmikoValidationService(ConnectionService):
 
     __tablename__ = "netmiko_validation_service"
 
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
     command = Column(LargeString, default="")

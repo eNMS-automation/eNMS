@@ -309,7 +309,9 @@ class BaseController:
         )
 
     def create_admin_user(self) -> None:
-        factory("User", **{"name": "admin", "password": "admin"})
+        admin = factory("User", **{"name": "admin"})
+        if not admin.password:
+            admin.password = "admin"
 
     def update_credentials(self) -> None:
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:

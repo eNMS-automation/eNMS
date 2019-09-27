@@ -43,7 +43,6 @@ class ServiceForm(BaseForm):
     number_of_retries = IntegerField("Number of retries", default=0)
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     maximum_runs = IntegerField("Maximum number of runs", default=1)
-    start_new_connection = BooleanField("Start New Connection")
     skip = BooleanField("Skip")
     skip_python_query = StringField("Skip (Python Query)")
     vendor = StringField("Vendor")
@@ -54,16 +53,6 @@ class ServiceForm(BaseForm):
         "Iteration Variable Name", default="iteration_value"
     )
     result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
-    credentials = SelectField(
-        "Credentials",
-        choices=(
-            ("device", "Device Credentials"),
-            ("user", "User Credentials"),
-            ("custom", "Custom Credentials"),
-        ),
-    )
-    custom_username = SubstitutionField("Custom Username")
-    custom_password = PasswordSubstitutionField("Custom Password")
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
     query_fields = ["python_query", "skip_python_query", "iteration_values"]

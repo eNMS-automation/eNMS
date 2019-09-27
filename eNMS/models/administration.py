@@ -40,7 +40,7 @@ class Server(AbstractBase):
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>
-        </ul></center>""",
+        </ul></center>"""
         ]
 
 
@@ -115,7 +115,7 @@ class User(AbstractBase, UserMixin):
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>
-        </ul></center>""",
+        </ul></center>"""
         ]
 
     @property

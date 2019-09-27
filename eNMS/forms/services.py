@@ -134,3 +134,28 @@ class NapalmForm(BaseForm):
         "commands": ["driver", "use_device_driver", "optional_args"],
         "default": "expanded",
     }
+
+
+class ConnectionForm(BaseForm):
+    credentials = SelectField(
+        "Credentials",
+        choices=(
+            ("device", "Device Credentials"),
+            ("user", "User Credentials"),
+            ("custom", "Custom Credentials"),
+        ),
+    )
+    custom_username = SubstitutionField("Custom Username")
+    custom_password = PasswordSubstitutionField("Custom Password")
+    start_new_connection = BooleanField("Start New Connection")
+    close_connection = BooleanField("Close Connection")
+    group = {
+        "commands": [
+            "credentials",
+            "custom_username",
+            "custom_password",
+            "start_new_connection",
+            "close_connection",
+        ],
+        "default": "expanded",
+    }

@@ -161,7 +161,7 @@ class Device(CustomDevice):
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>
-        </ul>""",
+        </ul>"""
         ]
 
     def __repr__(self):

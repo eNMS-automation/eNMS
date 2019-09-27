@@ -137,7 +137,10 @@ class Service(AbstractBase):
 class ConnectionService(Service):
 
     __tablename__ = "connection_service"
-    __mapper_args__ = {"polymorphic_identity": "connection_service", "polymorphic_on": type}
+    __mapper_args__ = {
+        "polymorphic_identity": "connection_service",
+        "polymorphic_on": type,
+    }
     credentials = Column(SmallString, default="device")
     custom_username = Column(SmallString)
     custom_password = Column(SmallString)

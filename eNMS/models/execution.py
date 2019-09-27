@@ -281,10 +281,7 @@ class Run(AbstractBase):
                 self.create_result(r, fetch("device", name=device_name))
                 if not r["success"]:
                     success = False
-            return {
-                "success": success,
-                "runtime": self.runtime,
-            }
+            return {"success": success, "runtime": self.runtime}
 
     def create_result(self, results, device=None):
         self.success = results["success"]

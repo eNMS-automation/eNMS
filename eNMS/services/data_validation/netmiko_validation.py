@@ -4,11 +4,11 @@ from wtforms import BooleanField, HiddenField
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import NetmikoForm, ValidationForm
-from eNMS.models.automation import Service
+from eNMS.forms.services import ConnectionForm, NetmikoForm, ValidationForm
+from eNMS.models.automation import ConnectionService
 
 
-class NetmikoValidationService(Service):
+class NetmikoValidationService(ConnectionService):
 
     __tablename__ = "netmiko_validation_service"
 
@@ -65,7 +65,7 @@ class NetmikoValidationService(Service):
         }
 
 
-class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
+class NetmikoValidationForm(ServiceForm, ConnectionForm, NetmikoForm, ValidationForm):
     form_type = HiddenField(default="netmiko_validation_service")
     command = SubstitutionField()
     expect_string = SubstitutionField()
@@ -75,6 +75,7 @@ class NetmikoValidationForm(ServiceForm, NetmikoForm, ValidationForm):
     groups = {
         "Main Parameters": {"commands": ["command"], "default": "expanded"},
         "Netmiko Parameters": NetmikoForm.group,
+        "Connection Parameters": ConnectionForm.group,
         "Advanced Netmiko Parameters": {
             "commands": [
                 "expect_string",

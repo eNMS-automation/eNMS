@@ -1,6 +1,4 @@
 from copy import deepcopy
-from git import Repo
-from git.exc import GitCommandError
 from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
 from pathlib import Path
@@ -135,15 +133,3 @@ class Service(AbstractBase):
         for edge in getattr(self, f"{direction}s"):
             if edge.subtype == subtype and edge.workflow == workflow:
                 yield getattr(edge, direction), edge
-
-    def git_push(self, results):
-        path_git_folder = Path.cwd() / "git" / "automation"
-        with open(path_git_folder / self.name, "w") as file:
-            file.write(app.str_dict(results))
-        repo = Repo(str(path_git_folder))
-        try:
-            repo.git.add(A=True)
-            repo.git.commit(m=f"Automatic commit ({self.name})")
-        except GitCommandError:
-            pass
-        repo.remotes.origin.push()

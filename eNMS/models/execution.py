@@ -1,6 +1,8 @@
 from builtins import __dict__ as builtins
 from copy import deepcopy
 from functools import partial
+from git import Repo
+from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
@@ -344,6 +346,18 @@ class Run(AbstractBase):
                 notification.append(f"\n\nPASS :\n{passed}")
         return notification
 
+    def git_push(self, results):
+        path_git_folder = Path.cwd() / "git" / "automation"
+        with open(path_git_folder / self.name, "w") as file:
+            file.write(app.str_dict(results))
+        repo = Repo(str(path_git_folder))
+        try:
+            repo.git.add(A=True)
+            repo.git.commit(m=f"Automatic commit ({self.name})")
+        except GitCommandError:
+            pass
+        repo.remotes.origin.push()
+
     def notify(self, results):
         notification = [
             f"Service: {self.service.name} ({self.service.type})",
@@ -355,6 +369,8 @@ class Run(AbstractBase):
             notification.append(
                 f"Results: {app.server_addr}/view_service_results/{self.id}"
             )
+        if self.push_to_git:
+            self.git_push(results)
         notification_payload = {
             "service": self.service.get_properties(),
             "results": results,

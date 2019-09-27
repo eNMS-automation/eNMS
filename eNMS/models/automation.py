@@ -29,7 +29,6 @@ class Service(AbstractBase):
     number_of_retries = Column(Integer, default=0)
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict)
-    credentials = Column(SmallString, default="device")
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
     vendor = Column(SmallString)
     operating_system = Column(SmallString)
@@ -58,9 +57,6 @@ class Service(AbstractBase):
     mail_recipient = Column(SmallString)
     color = Column(SmallString, default="#D2E5FF")
     initial_payload = Column(MutableDict)
-    custom_username = Column(SmallString)
-    custom_password = Column(SmallString)
-    start_new_connection = Column(Boolean, default=False)
     skip = Column(Boolean, default=False)
     skip_python_query = Column(SmallString)
     iteration_values = Column(LargeString)
@@ -136,3 +132,14 @@ class Service(AbstractBase):
         for edge in getattr(self, f"{direction}s"):
             if edge.subtype == subtype and edge.workflow == workflow:
                 yield getattr(edge, direction), edge
+
+
+class ConnectionService(Service):
+
+    __tablename__ = "connection_service"
+    __mapper_args__ = {"polymorphic_identity": "connection_service", "polymorphic_on": type}
+    credentials = Column(SmallString, default="device")
+    custom_username = Column(SmallString)
+    custom_password = Column(SmallString)
+    start_new_connection = Column(Boolean, default=False)
+    close_connection = Column(Boolean, default=False)

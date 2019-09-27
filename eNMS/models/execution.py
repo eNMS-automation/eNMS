@@ -22,6 +22,7 @@ from xml.parsers.expat import ExpatError
 
 from eNMS import app
 from eNMS.database import Session
+from eNMS.database.associations import run_pool_table, run_device_table
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.base import AbstractBase
@@ -124,11 +125,7 @@ class Run(AbstractBase):
         if key in self.__dict__:
             return self.__dict__[key]
         elif key in self.__dict__.get("properties", {}):
-            service, value = (
-                self.__dict__.get("service"),
-                self.__dict__["properties"][key],
-            )
-            return convert_value(service.type, key, value, "id") if service else value
+            return self.__dict__["properties"][key]
         elif self.__dict__.get("service_id"):
             return getattr(self.service, key)
         else:
@@ -211,6 +208,10 @@ class Run(AbstractBase):
             devices = set(self.devices)
             for pool in self.pools:
                 devices |= set(pool.devices)
+        if not devices:
+            devices = set(self.service.devices)
+            for pool in self.service.pools:
+                devices |= set(pool.devices)
         self.set_state(number_of_targets=len(devices))
         return devices
 
@@ -222,7 +223,6 @@ class Run(AbstractBase):
             self.set_state(status="Running", type=self.service.type)
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()
-            print("iii" * 100, self.service, payload)
             if payload is None:
                 payload = self.service.initial_payload
             if self.restart_run and self.service.type == "workflow":

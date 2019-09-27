@@ -10,6 +10,8 @@ from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
     pool_user_table,
+    run_pool_table,
+    run_device_table,
     service_device_table,
     service_pool_table,
     task_device_table,

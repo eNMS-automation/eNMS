@@ -86,9 +86,8 @@ class Workflow(Service):
                 }
                 if device:
                     kwargs["workflow_device"] = device.id
+                    kwargs["devices"] = [device.id]
                 service_run = factory("run", **kwargs)
-                if device:
-                    service_run.properties = {"devices": [device.id]}
                 Session.commit()
                 service_results = service_run.run(payload)
             app.run_db[run.runtime]["services"][service.id][

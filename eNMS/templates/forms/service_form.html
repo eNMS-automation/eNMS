@@ -242,21 +242,6 @@
           {{ form.max_processes(id=form_type + '-max_processes',
           class="form-control add-id") }}
         </div>
-        <label>Credentials</label>
-        <div class="form-group">
-          {{ form.credentials(id=form_type + '-credentials', class="form-control
-          add-id") }}
-        </div>
-        <label class="hide-run">Custom Username</label>
-        <div class="form-group">
-          {{ form.custom_username(id=form_type + '-custom_username',
-          class="form-control hide-run add-id") }}
-        </div>
-        <label class="hide-run">Custom Password</label>
-        <div class="form-group">
-          {{ form.custom_password(id=form_type + '-custom_password',
-          class="form-control hide-run add-id") }}
-        </div>
       </div>
       <div id="step-4" style="min-height: 300px">
         {% if form_type == "workflow" %}

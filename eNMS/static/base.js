@@ -415,6 +415,7 @@ function showTypePanel(type, id, mode) {
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
         call(`/get${properties}/${type}/${id}`, function(instance) {
+          console.log(instance);
           const title = mode == "duplicate" ? "Duplicate" : "Edit";
           panel.setHeaderTitle(`${title} ${type} - ${instance.name}`);
           processInstance(type, instance);

@@ -125,7 +125,7 @@ class Service(AbstractBase):
           </li>
           <li>
             <button type="button" class="btn btn-danger" onclick="showDeletionPanel({self.row_properties})"
-              ><span class="glyphicon glyphicon-remove"></span
+              ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>
         </ul>""",

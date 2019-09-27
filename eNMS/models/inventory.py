@@ -118,65 +118,50 @@ class Device(CustomDevice):
     def generate_row(self, table):
         return [
             f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 400px">
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 350px">
           <li>
-            <button type="button" class="btn btn-info" onclick="showDeviceConfiguration('{self.id}')"
-              ><span class="glyphicon glyphicon-list-alt"></span
+            <button type="button" class="btn btn-info"
+            onclick="showDeviceConfiguration('{self.id}')"
+              ><span class="glyphicon glyphicon-book"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-info" onclick="showConfigurationsPanel({self.row_properties})"
-              ><span class="glyphicon glyphicon-list-alt"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-info" onclick="showDeviceResultsPanel({self.row_properties})"
+            <button type="button" class="btn btn-info"
+            onclick="showConfigurationsPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-list"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-success" onclick="showPanel('connection', '{self.id}')"
-              ><span class="glyphicon glyphicon-play"></span
+            <button type="button" class="btn btn-info"
+            onclick="showDeviceResultsPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-list-alt"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" onclick="showTypePanel('device', '{self.id}')"
+            <button type="button" class="btn btn-success"
+            onclick="showPanel('connection', '{self.id}')"
+              ><span class="glyphicon glyphicon-console"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('device', '{self.id}')"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" onclick="showTypePanel('device', '{self.id}', 'duplicate')"
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('device', '{self.id}', 'duplicate')"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" onclick="exportService('{self.id}')"
-              ><span class="glyphicon glyphicon-download"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-danger" onclick="showDeletionPanel({self.row_properties})"
-              ><span class="glyphicon glyphicon-remove"></span
+            <button type="button" class="btn btn-danger"
+            onclick="showDeletionPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>
         </ul>""",
-        ]
-        return [
-
-
-            f"""<div class="btn-group" style="width: 80px;">
-            <button type="button" class="btn btn-primary btn-sm"
-            onclick="">Edit</button>,
-            <button type="button" class="btn btn-primary btn-sm
-            dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
-            ">Duplicate</a></li>
-            </ul></div>""",
-            f"""<button type="button" class="btn btn-danger btn-sm"
-            onclick="">
-            Delete</button>""",
         ]
 
     def __repr__(self):

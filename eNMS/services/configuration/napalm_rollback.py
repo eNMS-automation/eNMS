@@ -4,10 +4,10 @@ from wtforms import HiddenField
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NapalmForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class NapalmRollbackService(Service):
+class NapalmRollbackService(ConnectionService):
 
     __tablename__ = "napalm_rollback_service"
 

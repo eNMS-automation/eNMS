@@ -9,10 +9,10 @@ from eNMS.database.dialect import Column, SmallString
 from eNMS.database.functions import factory
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NetmikoForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class NetmikoBackupService(Service):
+class NetmikoBackupService(ConnectionService):
 
     __tablename__ = "netmiko_backup_service"
 

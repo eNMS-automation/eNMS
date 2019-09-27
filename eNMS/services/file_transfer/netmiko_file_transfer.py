@@ -7,10 +7,10 @@ from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class NetmikoFileTransferService(Service):
+class NetmikoFileTransferService(ConnectionService):
 
     __tablename__ = "netmiko_file_transfer_service"
 

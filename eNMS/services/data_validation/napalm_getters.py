@@ -4,10 +4,10 @@ from wtforms import HiddenField, SelectMultipleField
 from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import DictValidationForm, NapalmForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class NapalmGettersService(Service):
+class NapalmGettersService(ConnectionService):
 
     __tablename__ = "napalm_getters_service"
 

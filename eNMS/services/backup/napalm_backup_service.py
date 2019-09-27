@@ -8,10 +8,10 @@ from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.services import NapalmForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class NapalmBackupService(Service):
+class NapalmBackupService(ConnectionService):
 
     __tablename__ = "napalm_backup_service"
 

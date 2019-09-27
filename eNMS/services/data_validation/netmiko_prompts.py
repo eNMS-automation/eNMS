@@ -5,10 +5,10 @@ from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NetmikoForm, ValidationForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class NetmikoPromptsService(Service):
+class NetmikoPromptsService(ConnectionService):
 
     __tablename__ = "netmiko_prompts_service"
 

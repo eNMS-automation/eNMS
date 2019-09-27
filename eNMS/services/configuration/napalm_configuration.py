@@ -6,10 +6,10 @@ from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NapalmForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class NapalmConfigurationService(Service):
+class NapalmConfigurationService(ConnectionService):
 
     __tablename__ = "napalm_configuration_service"
 

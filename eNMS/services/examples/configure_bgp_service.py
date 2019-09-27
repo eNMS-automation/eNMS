@@ -3,10 +3,10 @@ from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.models.automation import Service
+from eNMS.models.automation import ConnectionService
 
 
-class ConfigureBgpService(Service):
+class ConfigureBgpService(ConnectionService):
 
     __tablename__ = "configure_bgp_service"
 

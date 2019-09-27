@@ -59,7 +59,7 @@ class Workflow(Service):
         number_of_runs = defaultdict(int)
         services = list(run.start_services)
         visited = set()
-        results = {"results": {}, "success": False, "runtime": run.runtime}
+        success = False
         while services:
             if run.stop:
                 return results
@@ -105,10 +105,10 @@ class Workflow(Service):
             for successor in successors:
                 services.append(successor)
                 if successor == self.services[1]:
-                    results["success"] = True
+                    success = True
             if not skip_service and not service.skip:
                 sleep(service.waiting_time)
-        return results
+        return {"payload": payload, "success": success}
 
 
 class WorkflowForm(ServiceForm):

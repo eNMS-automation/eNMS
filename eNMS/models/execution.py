@@ -217,7 +217,8 @@ class Run(AbstractBase):
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()
             print("iii" * 100, self.service, payload)
-            payload = payload or self.service.initial_payload
+            if payload is None:
+                payload = self.service.initial_payload
             if self.restart_run and self.service.type == "workflow":
                 global_result = self.restart_run.result()
                 if global_result:

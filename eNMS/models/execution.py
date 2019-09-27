@@ -19,7 +19,7 @@ from xml.parsers.expat import ExpatError
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.database.functions import convert_value, factory, fetch
+from eNMS.database.functions import convert_value, factory, fetch, fetch_all
 from eNMS.database.base import AbstractBase
 
 
@@ -253,7 +253,7 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.set_state(completed=0, failed=0)
-        devices = self.compute_devices(payload)
+        devices, success = self.compute_devices(payload), True
         if not devices:
             result = self.get_results(payload)
             return self.create_result(result)
@@ -276,15 +276,10 @@ class Run(AbstractBase):
                 }
             for device_name, r in deepcopy(device_results).items():
                 self.create_result(r, fetch("device", name=device_name))
-            results = fetch(
-                "result",
-                service_id=self.id,
-                parent_runtime=self.runtime,
-                allow_none=True,
-                all_matches=True,
-            )
+                if not r["success"]:
+                    success = False
             return {
-                "success": all(result.success for result in results),
+                "success": success,
                 "runtime": self.runtime,
             }
 

@@ -225,7 +225,6 @@
           {{ form.query_property_type(id=form_type + '-query_property_type',
           class="form-control hide-run add-id") }}
         </div>
-        {% if form_type != "workflow" %}
         <fieldset>
           <div class="item">
             <input
@@ -258,7 +257,6 @@
           {{ form.custom_password(id=form_type + '-custom_password',
           class="form-control hide-run add-id") }}
         </div>
-        {% endif %}
       </div>
       <div id="step-4" style="min-height: 300px">
         {% if form_type == "workflow" %}

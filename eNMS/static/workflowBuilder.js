@@ -617,7 +617,7 @@ function restartWorkflow() {
 }
 
 function colorService(id, color) {
-  if (id != 1 && id != 2) nodes.update({ id: id, color: color });
+  if (id != 1 && id != 2 && nodes) nodes.update({ id: id, color: color });
 }
 
 // eslint-disable-next-line
@@ -642,7 +642,7 @@ function emptyProgressBar() {
 // eslint-disable-next-line
 function displayWorkflowState(result) {
   resetDisplay();
-  if (result.state) {
+  if (Object.entries(result.state).length) {
     if (Object.entries(result.state.progress).length === 0) {
       emptyProgressBar();
     } else {
@@ -699,6 +699,7 @@ function resetDisplay() {
   workflow.services.forEach((service) => {
     colorService(service.id, service.skip ? "#D3D3D3" : "#D2E5FF");
   });
+  if (!edges) return;
   workflow.edges.forEach((edge) => {
     edges.update({ id: edge.id, label: edge.label });
   });
@@ -709,7 +710,6 @@ function getWorkflowState(periodic) {
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
     call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
-      console.log(result)
       if (result.workflow.id != workflow.id) return;
       currentRuntime = result.runtime;
       if (result.workflow.last_modified !== workflow.last_modified) {
@@ -725,7 +725,6 @@ function getWorkflowState(periodic) {
 (function() {
   $("#left-arrow,#right-arrow").addClass("disabled");
   call("/get_all/workflow", function(workflows) {
-    console.log(workflow);
     workflows.sort((a, b) => a.name.localeCompare(b.name));
     for (let i = 0; i < workflows.length; i++) {
       $("#current-workflow").append(

@@ -1,7 +1,5 @@
 - color: pink
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Start point of a workflow
   devices: [Columbus]
   display_only_failed_nodes: true
@@ -52,15 +50,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: pink
   creator: admin
-  credentials: device
-  custom_username: ''
   description: End point of a workflow
   devices: []
   display_only_failed_nodes: true
@@ -114,15 +109,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Mail notification (service logs)
   devices: [Columbus]
   display_only_failed_nodes: true
@@ -152,15 +144,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Slack notification (service logs)
   devices: [Columbus]
   display_only_failed_nodes: true
@@ -190,15 +179,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Mattermost notification (service logs)
   devices: []
   display_only_failed_nodes: true
@@ -228,15 +214,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Monitor eNMS cluster
   devices: []
   display_only_failed_nodes: true
@@ -266,15 +249,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Push configurations to Gitlab
   devices: []
   display_only_failed_nodes: true
@@ -305,15 +285,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Configuration Management Poller
   devices: []
   display_only_failed_nodes: true
@@ -344,7 +321,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -357,9 +333,7 @@
   boolean2: false
   color: '#D2E5FF'
   creator: admin
-  credentials: device
   custom_integer: 0
-  custom_username: ''
   description: Example
   devices: [Washington]
   display_only_failed_nodes: true
@@ -397,7 +371,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -407,8 +380,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Configure BGP Peering with Napalm
   devices: [Washington]
   display_only_failed_nodes: true
@@ -444,7 +415,6 @@
   send_notification_method: mail_feedback_notification
   skip: true
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: configure_bgp_service
   vendor: ''
@@ -452,8 +422,6 @@
   waiting_time: 100
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
   devices: [Aserver]
@@ -491,7 +459,6 @@
   skip_python_query: ''
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
-  start_new_connection: false
   time_between_retries: 10
   type: generic_file_transfer_service
   vendor: ''
@@ -499,8 +466,6 @@
   window_size: 1073741824
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_archive: true
   delete_folder: true
   description: Test the log backup service
@@ -533,7 +498,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: database_backup_service
   vendor: ''
@@ -541,8 +505,6 @@
 - color: '#D2E5FF'
   configuration_command: show running-config
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Test Configuration Management
   devices: [Washington]
   display_only_failed_nodes: true
@@ -562,7 +524,6 @@
   multiprocessing: true
   name: netmiko_configuration_backup
   notification_header: ''
-  number_of_configuration: 10
   number_of_retries: 0
   operating_system: ''
   pools: []
@@ -576,7 +537,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: netmiko_backup_service
@@ -585,8 +545,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Test Configuration Management
   devices: [Washington]
   display_only_failed_nodes: true
@@ -604,7 +562,6 @@
   multiprocessing: true
   name: napalm_configuration_backup
   notification_header: ''
-  number_of_configuration: 10
   number_of_retries: 0
   operating_system: ''
   optional_args: {}
@@ -618,7 +575,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_backup_service
   use_device_driver: true
@@ -629,8 +585,6 @@
   config_mode_command: ''
   content: vrf definition test
   creator: admin
-  credentials: device
-  custom_username: ''
   delay_factor: 1.0
   description: Create a VRF "test" with Netmiko
   devices: [Washington, Austin]
@@ -666,7 +620,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -676,6 +629,7 @@
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf
   content_match: test
@@ -742,8 +696,6 @@
   config_mode_command: ''
   content: no vrf definition test
   creator: admin
-  credentials: device
-  custom_username: ''
   delay_factor: 1.0
   description: Delete VRF "test"
   devices: [Washington, Austin]
@@ -780,7 +732,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -790,6 +741,7 @@
   vendor: Arista
   waiting_time: 1
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf
   content_match: test
@@ -853,8 +805,6 @@
   color: '#D2E5FF'
   content: "vrf definition napalm\r\n"
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Create a VRF "test" with Napalm
   devices: [Washington, Austin]
   display_only_failed_nodes: true
@@ -886,7 +836,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_configuration_service
   use_device_driver: true
@@ -898,8 +847,6 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: Use REST call is_alive
   devices: [Columbus]
@@ -944,7 +891,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -955,8 +901,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: 'Getter: get_facts'
   devices: [Washington, Austin]
   dict_match: {}
@@ -994,7 +938,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1003,8 +946,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: 'Getter: get_interfaces'
   devices: [Washington, Austin]
   dict_match: {}
@@ -1041,7 +982,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1050,8 +990,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: 'Getter: get_interfaces_ip'
   devices: [Washington, Austin]
   dict_match: {}
@@ -1078,7 +1016,7 @@
   pools: []
   positions:
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: [277, -62]
+    payload_transfer_workflow: [272, -82]
   push_to_git: false
   python_query: ''
   query_property_type: ip_address
@@ -1088,7 +1026,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1097,8 +1034,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: 'Getter: get_config'
   devices: [Washington, Austin]
   dict_match: {}
@@ -1134,7 +1069,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1143,8 +1077,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Process Payload in example workflow
   devices: [Washington, Austin]
   display_only_failed_nodes: true
@@ -1176,15 +1108,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Add devices to the payload
   devices: []
   display_only_failed_nodes: true
@@ -1225,12 +1154,12 @@
     \n\r\n# Service iteration 3: targets\r\ntargets2 = ['Loopback333', 'Loopback334']\
     \ if device.name == \"Washington\" else ['Loopback55', 'Loopback666']\r\nset_var('iteration_devices2',\
     \ targets2, device=device.name)\r\nsave_result(True, {})"
-  start_new_connection: false
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf
   content_match: ''
@@ -1288,6 +1217,7 @@
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show interface {{payload['value']}}
   content_match: 255.255.255.255
@@ -1345,6 +1275,7 @@
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show ip route
   content_match: ''
@@ -1403,8 +1334,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Payload Variables Extraction with Regex/TextFSM
   devices: []
   display_only_failed_nodes: true
@@ -1452,7 +1381,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_extraction_service
   variable1: simple_variable
@@ -1465,8 +1393,6 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: Payload Validate Dict
   devices: []
@@ -1502,7 +1428,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_validation_service
   validation_method: dict_included
@@ -1513,8 +1438,6 @@
   content_match_regex: true
   conversion_method: none
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: Payload Validate Text
   devices: []
@@ -1549,7 +1472,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -1557,8 +1479,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -1590,13 +1510,13 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_rollback_service
   use_device_driver: true
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf
   content_match: napalm
@@ -1657,6 +1577,7 @@
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf
   content_match: napalm
@@ -1715,6 +1636,7 @@
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf
   content_match: ''
@@ -1780,8 +1702,6 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  credentials: device
-  custom_username: ''
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1822,7 +1742,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1839,8 +1758,6 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
-  credentials: device
-  custom_username: ''
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1881,7 +1798,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1891,8 +1807,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -1926,15 +1840,12 @@
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
-  start_new_connection: false
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Washington, Chicago]
   display_only_failed_nodes: false
@@ -1971,12 +1882,12 @@
     ] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"\
     iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
-  start_new_connection: false
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf {{get_var("iteration_simple", section="pools")}}
   content_match: ''
@@ -2034,6 +1945,7 @@
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf test
   content_match: ''
@@ -2091,6 +2003,7 @@
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show vrf {{get_result("Payload editor, with device")["endtime"]}}
   content_match: ''
@@ -2149,8 +2062,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   dict_match:
@@ -2186,7 +2097,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2195,8 +2105,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   dict_match: {fqdn: localhost, vendor: Arista}
@@ -2231,7 +2139,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2240,8 +2147,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   dict_match:
@@ -2278,7 +2183,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2287,8 +2191,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   dict_match: {}
@@ -2323,7 +2225,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2332,8 +2233,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
@@ -2368,7 +2267,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2381,8 +2279,6 @@
   content_match_regex: false
   conversion_method: json
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   devices: [Washington]
@@ -2420,7 +2316,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2432,8 +2327,6 @@
   content_match_regex: true
   conversion_method: text
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   devices: []
@@ -2470,7 +2363,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: text
@@ -2482,8 +2374,6 @@
   content_match_regex: false
   conversion_method: json
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   devices: []
@@ -2520,13 +2410,13 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show version
   content_match: ''
@@ -2586,6 +2476,7 @@
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show interface {{payload['value']}}
   content_match: 255.255.255.255
@@ -2643,6 +2534,7 @@
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show interface {{get_var('non_default_iteration_value_name')}}
   content_match: 255.255.255.255
@@ -2700,6 +2592,7 @@
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show interface {{get_var('iteration_value')}}
   content_match: 255.255.255.255
@@ -2757,6 +2650,7 @@
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show interface {{get_var('iteration_value')}}
   content_match: 255.255.255.255
@@ -2818,8 +2712,6 @@
   content_match_regex: true
   conversion_method: text
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: Payload Validate Text
   devices: []
@@ -2854,7 +2746,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -2865,8 +2756,6 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: Payload Validate Dict
   devices: []
@@ -2902,7 +2791,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -2910,8 +2798,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -2945,15 +2831,12 @@
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
-  start_new_connection: false
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -2996,7 +2879,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_extraction_service
   variable1: boolean
@@ -3006,8 +2888,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -3050,7 +2930,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_extraction_service
   variable1: list
@@ -3063,8 +2942,6 @@
   content_match_regex: true
   conversion_method: text
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: true
   description: ''
   devices: []
@@ -3099,7 +2976,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -3110,8 +2986,6 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   devices: []
@@ -3146,7 +3020,6 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   type: payload_validation_service
   validation_method: dict_included
@@ -3158,8 +3031,6 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
-  credentials: device
-  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   devices: []
@@ -3173,7 +3044,7 @@
   initial_payload: {}
   iteration_values: '["Washington", "Atlanta"]'
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-09 17:47:24.959325'
+  last_modified: '2019-09-27 22:19:47.888963'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -3191,13 +3062,12 @@
   push_to_git: false
   python_query: ''
   query_property_type: name
-  rest_url: http://127.0.0.1:5000/rest/instance/Device/{{get_var('iteration_value')}}
+  rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
   skip_python_query: ''
-  start_new_connection: false
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -3208,8 +3078,6 @@
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -3245,12 +3113,12 @@
     \n\"version\": get_result(\"Show version with multiprocessing\", device=device.name),\r\
     \n\"napalm\": get_result(\"netmiko_check_no_vrf_napalm\", device=device.name)\r\
     \n}\r\nsave_result(success=True, result=result)"
-  start_new_connection: false
   time_between_retries: 10
   type: python_snippet_service
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show interface {{get_var('iteration_value')}}
   content_match: ''
@@ -3308,6 +3176,7 @@
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
+  close_connection: false
   color: '#D2E5FF'
   command: show interface {{get_var("iteration_value")}}
   content_match: ''
@@ -3363,5 +3232,721 @@
   type: netmiko_validation_service
   use_device_driver: true
   validation_method: text
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: Poll configuration and push to gitlab
+  devices: []
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-09-20 21:28:44.198287'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Configuration Management Workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Subworkflow of Workflow: [200, -205]
+  push_to_git: false
+  python_query: ''
+  query_property_type: ip_address
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, poller_service, git_push_configurations]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: Create and delete a VRF with Netmiko
+  devices: []
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-20 17:51:25.339733'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Netmiko_VRF_workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions:
+    Workflow_of_workflows: [-481, -23]
+  push_to_git: false
+  python_query: get_var("loop_over", device=workflow_device.name)
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
+    netmiko_check_no_vrf_test]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: Arista
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: Create and delete a VRF with Napalm
+  devices: [Washington]
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-05 13:30:56.889198'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Napalm_VRF_workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions:
+    Workflow_of_workflows: [103, 162]
+  push_to_git: false
+  python_query: ''
+  query_property_type: ip_address
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
+    netmiko_check_no_vrf_napalm]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: Arista
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ReST call, Napalm getters, etc
+  devices: [Washington]
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    c9ee8980-a972-4ace-a596-03eb2842c4d7:
+      content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
+        \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
+      positions: [257, -148]
+  last_modified: '2019-09-27 21:45:22.594863'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: payload_transfer_workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions:
+    Workflow_of_workflows: [-178, 170]
+  push_to_git: false
+  python_query: ''
+  query_property_type: ip_address
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config,
+    process_payload1]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: Arista
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: Test the payload extraction and validation mechanisms
+  devices: [Washington]
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-14 19:57:56.988442'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: payload_extraction_validation_worflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Subworkflow of Workflow: [217, -229]
+  push_to_git: false
+  python_query: ''
+  query_property_type: ip_address
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
+      Validate dict via results', 'Payload Workflow: Validate text via results', 'Payload
+      Workflow: Validate text via payload', 'Payload Workflow: Validate dict via payload']
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: Test the inner workflow system
+  devices: [Washington, Austin]
+  display_only_failed_nodes: true
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: true
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-09-10 18:16:22.719254'
+  mail_recipient: antoine.fourmy@gmail.com
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Workflow_of_workflows
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: eos
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: ip_address
+  result_postprocessing: ''
+  send_notification: true
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
+    'Subworkflow: Access Variable - Result from parent workflow', Show version with
+      multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow, Workflow with
+      iteration targets]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: Arista
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: Workflow with separate failure - success path
+  devices: [Austin, Washington]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-13 20:37:47.934244'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Workflow with separate failure - success path
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
+    get_interfaces]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: [Washington]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    ce7e6857-714e-4102-a65b-ec2d67414866:
+      content: "Test of the maximum number of run of a service in a workflow.\r\n\
+        For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
+        \ after the REST service.\r\n"
+      positions: [163, -163]
+  last_modified: '2019-09-20 03:57:45.978247'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Netmiko prompts
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, REST
+      is_alive]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: [Washington, Chicago]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-05 13:30:57.426946'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'python Workflow: payload editor and pool helper'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
+    Show vrf with payload helper, Show vrf with python query, REST is_alive, show
+      runtime with get_result helper]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: [Washington]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-09 01:11:35.197608'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Napalm getters and match mechanism workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Subworkflow of Workflow: [231, -29]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
+    'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
+      get facts failed match']
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: [Washington, Austin]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-10 18:18:02.670633'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Ansible Workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow:
+      Arista show configuration (regex match)', 'Ansible Workflow: Arista show configuration
+      (dict match)']
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
+    Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
+    Oakland, Denver]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {mode: LAB}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    0844f0e4-7e29-4886-a3ed-178d48ac7317:
+      content: "Multiple Entry Points:\r\nStart and Example1"
+      positions: [-485, -36]
+    d36009d8-ce3a-4ce6-8766-5dc3241d777b:
+      content: The service "Napalm configure BGP" is configured to be skipped.
+      positions: [146, -232]
+  last_modified: '2019-08-24 01:01:52.549675'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Workflow: multiple entry points, skip service, multiprocessing, separate
+    paths'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, Example1, Show version with multiprocessing, REST is_alive,
+    napalm_configure_bgp_1]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start, Example1]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: [Washington, Austin]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-09-09 18:35:19.412403'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Iteration Targets Workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, add_devices_to_payload, 'Iteration Target Workflow: netmiko
+      iteration 2', 'Iteration Target Workflow: netmiko iteration 1', 'Iteration Target
+      Workflow: netmiko iteration 3', 'Iteration Targets Workflow: No device targets']
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: [Washington]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-15 00:11:29.936942'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Payload Workflow: Payload Extraction with operations'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Subworkflow of Workflow: [227, 171]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Getters Workflow: Interface IP', 'Payload Workflow: Add
+      initial variables', 'Payload Workflow: Extraction 1', 'Payload Workflow: Extraction
+      2', 'Payload Workflow: Validation 1', 'Payload Workflow: Validation 2']
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-08-20 18:46:19.926704'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Subworkflow: Access Variable - Result from parent workflow'
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Workflow_of_workflows: [525, -209]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
+    'Variable Access Subworkflow: Access variables for iteration']
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: [Washington]
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-09-10 18:09:22.639520'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Subworkflow of Workflow
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Workflow_of_workflows: [-155, -195]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
+      getters and match mechanism workflow, payload_extraction_validation_worflow]
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  devices: []
+  display_only_failed_nodes: false
+  events: []
+  has_targets: true
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_values: get_var('iteration_devices', device=device.name)
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-09-09 17:03:46.868220'
+  mail_recipient: ''
+  max_processes: 5
+  maximum_runs: 1
+  multiprocessing: false
+  name: Workflow with iteration targets
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Iteration Targets Workflow: [-107, -112]
+    Workflow with iteration target subworkflows: [253, 118]
+    Workflow_of_workflows: [-451, 164]
+  push_to_git: false
+  python_query: ''
+  query_property_type: name
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Workflow with iteration targets: use target for show interface']
+  skip: false
+  skip_python_query: ''
+  start_services: [Start]
+  start_workflows: []
+  time_between_retries: 10
+  type: workflow
   vendor: ''
   waiting_time: 0

@@ -107,6 +107,10 @@ class Run(AbstractBase):
             self.parent_runtime = self.runtime
         super().__init__(**kwargs)
 
+    @property
+    def name(self):
+        return repr(self)
+
     def __repr__(self):
         return f"{self.runtime} ({self.service_name} run by {self.creator})"
 
@@ -388,86 +392,6 @@ class Run(AbstractBase):
         )
         notification_run.run(notification_payload)
 
-    def netmiko_connection(self, device):
-        if self.parent_runtime in app.connections_cache["netmiko"]:
-            parent_connection = app.connections_cache["netmiko"].get(
-                self.parent_runtime
-            )
-            if parent_connection and device.name in parent_connection:
-                if self.service.start_new_connection:
-                    parent_connection.pop(device.name).disconnect()
-                else:
-                    connection = parent_connection[device.name]
-                    try:
-                        connection.find_prompt()
-                        for property in ("fast_cli", "timeout", "global_delay_factor"):
-                            service_value = getattr(self.service, property)
-                            if service_value:
-                                setattr(connection, property, service_value)
-                        try:
-                            mode = connection.check_enable_mode()
-                            if mode and not self.privileged_mode:
-                                connection.exit_enable_mode()
-                            elif self.privileged_mode and not mode:
-                                connection.enable()
-                        except Exception as exc:
-                            self.log("error", f"Failed to honor the enable mode {exc}")
-                        return connection
-                    except (OSError, ValueError):
-                        self.disconnect("netmiko", device, connection)
-                        parent_connection.pop(device.name)
-        username, password = self.get_credentials(device)
-        driver = device.netmiko_driver if self.use_device_driver else self.driver
-        netmiko_connection = ConnectHandler(
-            device_type=driver,
-            ip=device.ip_address,
-            port=getattr(device, "port"),
-            username=username,
-            password=password,
-            secret=device.enable_password,
-            fast_cli=self.fast_cli,
-            timeout=self.timeout,
-            global_delay_factor=self.global_delay_factor,
-        )
-        if self.privileged_mode:
-            netmiko_connection.enable()
-        app.connections_cache["netmiko"][self.parent_runtime][
-            device.name
-        ] = netmiko_connection
-        return netmiko_connection
-
-    def napalm_connection(self, device):
-        if self.parent_runtime in app.connections_cache["napalm"]:
-            parent_connection = app.connections_cache["napalm"].get(self.parent_runtime)
-            if parent_connection and device.name in parent_connection:
-                if (
-                    self.service.start_new_connection
-                    or not parent_connection[device.name].is_alive()
-                ):
-                    parent_connection.pop(device.name).close()
-                else:
-                    return parent_connection[device.name]
-        username, password = self.get_credentials(device)
-        optional_args = self.service.optional_args
-        if not optional_args:
-            optional_args = {}
-        if "secret" not in optional_args:
-            optional_args["secret"] = device.enable_password
-        driver = get_network_driver(
-            device.napalm_driver if self.use_device_driver else self.driver
-        )
-        napalm_connection = driver(
-            hostname=device.ip_address,
-            username=username,
-            password=password,
-            optional_args=optional_args,
-        )
-        napalm_connection.open()
-        app.connections_cache["napalm"][self.parent_runtime][
-            device.name
-        ] = napalm_connection
-        return napalm_connection
-
     def get_credentials(self, device):
         return (
             app.get_user_credentials()
@@ -630,9 +554,95 @@ class Run(AbstractBase):
     def space_deleter(self, input):
         return "".join(input.split())
 
-    @property
-    def name(self):
-        return repr(self)
+    def get_netmiko_connection(self, device):
+        if self.parent_runtime in app.connections_cache["netmiko"]:
+            parent_connection = app.connections_cache["netmiko"].get(
+                self.parent_runtime
+            )
+            if parent_connection and device.name in parent_connection:
+                if self.service.start_new_connection:
+                    parent_connection.pop(device.name).disconnect()
+                else:
+                    connection = parent_connection[device.name]
+                    try:
+                        connection.find_prompt()
+                        for property in ("fast_cli", "timeout", "global_delay_factor"):
+                            service_value = getattr(self.service, property)
+                            if service_value:
+                                setattr(connection, property, service_value)
+                        try:
+                            mode = connection.check_enable_mode()
+                            if mode and not self.privileged_mode:
+                                connection.exit_enable_mode()
+                            elif self.privileged_mode and not mode:
+                                connection.enable()
+                        except Exception as exc:
+                            self.log("error", f"Failed to honor the enable mode {exc}")
+                        return connection
+                    except (OSError, ValueError):
+                        self.disconnect("netmiko", device, connection)
+                        parent_connection.pop(device.name)
+
+    def netmiko_connection(self, device):
+        connection = self.get_netmiko_connection(device)
+        if connection:
+            return connection
+        username, password = self.get_credentials(device)
+        driver = device.netmiko_driver if self.use_device_driver else self.driver
+        netmiko_connection = ConnectHandler(
+            device_type=driver,
+            ip=device.ip_address,
+            port=getattr(device, "port"),
+            username=username,
+            password=password,
+            secret=device.enable_password,
+            fast_cli=self.fast_cli,
+            timeout=self.timeout,
+            global_delay_factor=self.global_delay_factor,
+        )
+        if self.privileged_mode:
+            netmiko_connection.enable()
+        app.connections_cache["netmiko"][self.parent_runtime][
+            device.name
+        ] = netmiko_connection
+        return netmiko_connection
+
+    def get_napalm_connection(self, device):
+        if self.parent_runtime in app.connections_cache["napalm"]:
+            parent_connection = app.connections_cache["napalm"].get(self.parent_runtime)
+            if parent_connection and device.name in parent_connection:
+                if (
+                    self.service.start_new_connection
+                    or not parent_connection[device.name].is_alive()
+                ):
+                    parent_connection.pop(device.name).close()
+                else:
+                    return parent_connection[device.name]
+
+    def napalm_connection(self, device):
+        connection = self.get_napalm_connection(device)
+        if connection:
+            return connection
+        username, password = self.get_credentials(device)
+        optional_args = self.service.optional_args
+        if not optional_args:
+            optional_args = {}
+        if "secret" not in optional_args:
+            optional_args["secret"] = device.enable_password
+        driver = get_network_driver(
+            device.napalm_driver if self.use_device_driver else self.driver
+        )
+        napalm_connection = driver(
+            hostname=device.ip_address,
+            username=username,
+            password=password,
+            optional_args=optional_args,
+        )
+        napalm_connection.open()
+        app.connections_cache["napalm"][self.parent_runtime][
+            device.name
+        ] = napalm_connection
+        return napalm_connection
 
     def close_connection_cache(self):
         pool = ThreadPool(30)

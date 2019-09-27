@@ -1,7 +1,5 @@
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Poll configuration and push to gitlab
   devices: []
   display_only_failed_nodes: true
@@ -12,11 +10,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, poller_service, git_push_configurations]
   labels: {}
   last_modified: '2019-09-20 21:28:44.198287'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Configuration Management Workflow
   notification_header: ''
   number_of_retries: 0
@@ -30,21 +29,17 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, poller_service, git_push_configurations]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: false
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Create and delete a VRF with Netmiko
   devices: []
   display_only_failed_nodes: true
@@ -55,12 +50,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
-    netmiko_check_no_vrf_test]
   labels: {}
   last_modified: '2019-08-20 17:51:25.339733'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Netmiko_VRF_workflow
   notification_header: ''
   number_of_retries: 0
@@ -74,21 +69,18 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
+    netmiko_check_no_vrf_test]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Create and delete a VRF with Napalm
   devices: [Washington]
   display_only_failed_nodes: true
@@ -99,12 +91,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
-    netmiko_check_no_vrf_napalm]
   labels: {}
   last_modified: '2019-08-05 13:30:56.889198'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Napalm_VRF_workflow
   notification_header: ''
   number_of_retries: 0
@@ -118,21 +110,18 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
+    netmiko_check_no_vrf_napalm]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ReST call, Napalm getters, etc
   devices: [Washington]
   display_only_failed_nodes: true
@@ -143,15 +132,16 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config, process_payload1]
   labels:
     c9ee8980-a972-4ace-a596-03eb2842c4d7:
       content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
         \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
-      positions: [284, -128]
-  last_modified: '2019-09-19 00:54:27.688306'
+      positions: [257, -148]
+  last_modified: '2019-09-27 21:45:22.594863'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: payload_transfer_workflow
   notification_header: ''
   number_of_retries: 0
@@ -165,21 +155,18 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config,
+    process_payload1]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Test the payload extraction and validation mechanisms
   devices: [Washington]
   display_only_failed_nodes: true
@@ -190,13 +177,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
-      Validate dict via results', 'Payload Workflow: Validate text via results', 'Payload
-      Workflow: Validate text via payload', 'Payload Workflow: Validate dict via payload']
   labels: {}
   last_modified: '2019-08-14 19:57:56.988442'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: payload_extraction_validation_worflow
   notification_header: ''
   number_of_retries: 0
@@ -210,21 +196,19 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
+      Validate dict via results', 'Payload Workflow: Validate text via results', 'Payload
+      Workflow: Validate text via payload', 'Payload Workflow: Validate dict via payload']
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Test the inner workflow system
   devices: [Washington, Austin]
   display_only_failed_nodes: true
@@ -235,14 +219,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
-    'Subworkflow: Access Variable - Result from parent workflow', Show version with
-      multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow, Workflow with
-      iteration targets]
   labels: {}
   last_modified: '2019-09-10 18:16:22.719254'
   mail_recipient: antoine.fourmy@gmail.com
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Workflow_of_workflows
   notification_header: ''
   number_of_retries: 0
@@ -255,21 +237,20 @@
   result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
+  services: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
+    'Subworkflow: Access Variable - Result from parent workflow', Show version with
+      multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow, Workflow with
+      iteration targets]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: Workflow with separate failure - success path
   devices: [Austin, Washington]
   display_only_failed_nodes: false
@@ -280,12 +261,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
-    get_interfaces]
   labels: {}
   last_modified: '2019-08-13 20:37:47.934244'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Workflow with separate failure - success path
   notification_header: ''
   number_of_retries: 0
@@ -298,21 +279,18 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
+    get_interfaces]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Washington]
   display_only_failed_nodes: false
@@ -323,8 +301,6 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, REST
-      is_alive]
   labels:
     ce7e6857-714e-4102-a65b-ec2d67414866:
       content: "Test of the maximum number of run of a service in a workflow.\r\n\
@@ -333,7 +309,9 @@
       positions: [163, -163]
   last_modified: '2019-09-20 03:57:45.978247'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Netmiko prompts
   notification_header: ''
   number_of_retries: 0
@@ -346,21 +324,18 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, REST
+      is_alive]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Washington, Chicago]
   display_only_failed_nodes: false
@@ -371,13 +346,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
-    Show vrf with payload helper, Show vrf with python query, REST is_alive, show
-      runtime with get_result helper]
   labels: {}
   last_modified: '2019-08-05 13:30:57.426946'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: 'python Workflow: payload editor and pool helper'
   notification_header: ''
   number_of_retries: 0
@@ -390,21 +364,19 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
+    Show vrf with payload helper, Show vrf with python query, REST is_alive, show
+      runtime with get_result helper]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Washington]
   display_only_failed_nodes: false
@@ -415,13 +387,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
-    'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
-      get facts failed match']
   labels: {}
   last_modified: '2019-08-09 01:11:35.197608'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Napalm getters and match mechanism workflow
   notification_header: ''
   number_of_retries: 0
@@ -435,21 +406,19 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
+    'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
+      get facts failed match']
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Washington, Austin]
   display_only_failed_nodes: false
@@ -460,13 +429,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow: Arista
-      show configuration (regex match)', 'Ansible Workflow: Arista show configuration
-      (dict match)']
   labels: {}
   last_modified: '2019-08-10 18:18:02.670633'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Ansible Workflow
   notification_header: ''
   number_of_retries: 0
@@ -479,21 +447,19 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow:
+      Arista show configuration (regex match)', 'Ansible Workflow: Arista show configuration
+      (dict match)']
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
@@ -506,7 +472,6 @@
   initial_payload: {mode: LAB}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, Example1, Show version with multiprocessing, REST is_alive, napalm_configure_bgp_1]
   labels:
     0844f0e4-7e29-4886-a3ed-178d48ac7317:
       content: "Multiple Entry Points:\r\nStart and Example1"
@@ -516,8 +481,11 @@
       positions: [146, -232]
   last_modified: '2019-08-24 01:01:52.549675'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
-  name: 'Workflow: multiple entry points, skip service, multiprocessing, separate paths'
+  multiprocessing: false
+  name: 'Workflow: multiple entry points, skip service, multiprocessing, separate
+    paths'
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -529,21 +497,18 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, Example1, Show version with multiprocessing, REST is_alive,
+    napalm_configure_bgp_1]
   skip: false
   skip_python_query: ''
   start_services: [Start, Example1]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Washington, Austin]
   display_only_failed_nodes: false
@@ -554,13 +519,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, add_devices_to_payload, 'Iteration Target Workflow: netmiko iteration
-      2', 'Iteration Target Workflow: netmiko iteration 1', 'Iteration Target Workflow:
-      netmiko iteration 3', 'Iteration Targets Workflow: No device targets']
   labels: {}
   last_modified: '2019-09-09 18:35:19.412403'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Iteration Targets Workflow
   notification_header: ''
   number_of_retries: 0
@@ -573,21 +537,19 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, add_devices_to_payload, 'Iteration Target Workflow: netmiko
+      iteration 2', 'Iteration Target Workflow: netmiko iteration 1', 'Iteration Target
+      Workflow: netmiko iteration 3', 'Iteration Targets Workflow: No device targets']
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Washington]
   display_only_failed_nodes: false
@@ -598,13 +560,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, 'Getters Workflow: Interface IP', 'Payload Workflow: Add initial
-      variables', 'Payload Workflow: Extraction 1', 'Payload Workflow: Extraction
-      2', 'Payload Workflow: Validation 1', 'Payload Workflow: Validation 2']
   labels: {}
   last_modified: '2019-08-15 00:11:29.936942'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: 'Payload Workflow: Payload Extraction with operations'
   notification_header: ''
   number_of_retries: 0
@@ -618,21 +579,19 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Getters Workflow: Interface IP', 'Payload Workflow: Add
+      initial variables', 'Payload Workflow: Extraction 1', 'Payload Workflow: Extraction
+      2', 'Payload Workflow: Validation 1', 'Payload Workflow: Validation 2']
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -643,12 +602,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
-    'Variable Access Subworkflow: Access variables for iteration']
   labels: {}
   last_modified: '2019-08-20 18:46:19.926704'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: 'Subworkflow: Access Variable - Result from parent workflow'
   notification_header: ''
   number_of_retries: 0
@@ -662,21 +621,18 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
+    'Variable Access Subworkflow: Access variables for iteration']
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: [Washington]
   display_only_failed_nodes: false
@@ -687,12 +643,12 @@
   initial_payload: {}
   iteration_values: ''
   iteration_variable_name: iteration_value
-  services: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
-      getters and match mechanism workflow, payload_extraction_validation_worflow]
   labels: {}
   last_modified: '2019-09-10 18:09:22.639520'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Subworkflow of Workflow
   notification_header: ''
   number_of_retries: 0
@@ -706,21 +662,18 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
+      getters and match mechanism workflow, payload_extraction_validation_worflow]
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: service
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   creator: admin
-  credentials: device
-  custom_username: ''
   description: ''
   devices: []
   display_only_failed_nodes: false
@@ -731,11 +684,12 @@
   initial_payload: {}
   iteration_values: get_var('iteration_devices', device=device.name)
   iteration_variable_name: iteration_value
-  services: [Start, End, 'Workflow with iteration targets: use target for show interface']
   labels: {}
   last_modified: '2019-09-09 17:03:46.868220'
   mail_recipient: ''
+  max_processes: 5
   maximum_runs: 1
+  multiprocessing: false
   name: Workflow with iteration targets
   notification_header: ''
   number_of_retries: 0
@@ -751,14 +705,12 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Workflow with iteration targets: use target for show interface']
   skip: false
   skip_python_query: ''
   start_services: [Start]
-  start_new_connection: false
   start_workflows: []
   time_between_retries: 10
-  traversal_mode: device
   type: workflow
-  use_workflow_devices: true
   vendor: ''
   waiting_time: 0

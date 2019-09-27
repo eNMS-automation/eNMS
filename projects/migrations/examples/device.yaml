@@ -1,9 +1,11 @@
-- description: Jackson
+- configurations: []
+  description: Jackson
   hidden: false
   icon: router
   ip_address: 192.168.1.85
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '32.29876'
@@ -21,12 +23,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: PaloAlto
+- configurations: []
+  description: PaloAlto
   hidden: false
   icon: router
   ip_address: 192.168.1.86
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '37.44188'
@@ -44,12 +48,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Austin
+- configurations: []
+  description: Austin
   hidden: false
   icon: router
   ip_address: 192.168.105.9
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '30.26715'
@@ -67,12 +73,14 @@
   type: device
   username: admin
   vendor: Arista
-- description: Washington
+- configurations: []
+  description: Washington
   hidden: false
   icon: router
   ip_address: 192.168.105.5
+  last_duration: ''
   last_failure: Never
-  last_runtime: 5.781748
+  last_runtime: '5.781748'
   last_status: Success
   last_update: '2019-08-20 19:13:44.739071'
   latitude: '38.89511'
@@ -90,12 +98,14 @@
   type: device
   username: admin
   vendor: Arista
-- description: Chicago
+- configurations: []
+  description: Chicago
   hidden: false
   icon: router
   ip_address: 192.168.1.188
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '41.85003'
@@ -113,12 +123,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: SanJose
+- configurations: []
+  description: SanJose
   hidden: false
   icon: router
   ip_address: 192.168.1.187
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '37.33939'
@@ -136,12 +148,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: SanDiego
+- configurations: []
+  description: SanDiego
   hidden: false
   icon: router
   ip_address: 10.0.0.12
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '32.71533'
@@ -159,12 +173,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Dallas
+- configurations: []
+  description: Dallas
   hidden: false
   icon: router
   ip_address: 10.0.0.100
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '32.78306'
@@ -182,12 +198,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Philadelphia
+- configurations: []
+  description: Philadelphia
   hidden: false
   icon: router
   ip_address: 10.0.0.101
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '39.95234'
@@ -205,12 +223,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: LosAngeles
+- configurations: []
+  description: LosAngeles
   hidden: false
   icon: optical_switch
   ip_address: 10.0.0.13
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '34.05223'
@@ -228,12 +248,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Detroit
+- configurations: []
+  description: Detroit
   hidden: false
   icon: router
   ip_address: 10.0.0.14
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '42.33143'
@@ -251,12 +273,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Richmond
+- configurations: []
+  description: Richmond
   hidden: false
   icon: router
   ip_address: 10.0.0.15
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '37.55376'
@@ -274,12 +298,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Atlanta
+- configurations: []
+  description: Atlanta
   hidden: false
   icon: router
   ip_address: 10.0.0.102
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '33.749'
@@ -297,12 +323,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Boston
+- configurations: []
+  description: Boston
   hidden: false
   icon: router
   ip_address: 10.0.0.103
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '42.35843'
@@ -320,12 +348,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Houston
+- configurations: []
+  description: Houston
   hidden: false
   icon: router
   ip_address: 10.0.0.104
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '29.76328'
@@ -343,12 +373,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Baltimore
+- configurations: []
+  description: Baltimore
   hidden: false
   icon: router
   ip_address: 10.0.0.105
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '39.29038'
@@ -366,12 +398,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Cleveland
+- configurations: []
+  description: Cleveland
   hidden: false
   icon: router
   ip_address: 10.0.0.106
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '41.4995'
@@ -389,12 +423,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Columbus
+- configurations: []
+  description: Columbus
   hidden: false
   icon: router
   ip_address: 10.0.0.107
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '39.96118'
@@ -412,12 +448,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Cincinnati
+- configurations: []
+  description: Cincinnati
   hidden: false
   icon: router
   ip_address: 10.0.0.108
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '39.162'
@@ -435,12 +473,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Cambridge
+- configurations: []
+  description: Cambridge
   hidden: false
   icon: router
   ip_address: 10.0.0.109
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '42.3751'
@@ -458,12 +498,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Minneapolis
+- configurations: []
+  description: Minneapolis
   hidden: false
   icon: router
   ip_address: 10.0.0.110
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '44.97997'
@@ -481,12 +523,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: NewYork
+- configurations: []
+  description: NewYork
   hidden: false
   icon: router
   ip_address: 192.168.1.88
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '40.71427'
@@ -504,12 +548,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Sacramento
+- configurations: []
+  description: Sacramento
   hidden: false
   icon: router
   ip_address: 10.0.0.111
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '38.58157'
@@ -527,12 +573,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: SanFrancisco
+- configurations: []
+  description: SanFrancisco
   hidden: false
   icon: router
   ip_address: 192.168.1.89
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '37.77493'
@@ -550,12 +598,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Orange
+- configurations: []
+  description: Orange
   hidden: false
   icon: router
   ip_address: 10.0.0.114
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '33.78779'
@@ -573,12 +623,14 @@
   type: device
   username: cisco
   vendor: Juniper
-- description: Oakland
+- configurations: []
+  description: Oakland
   hidden: false
   icon: router
   ip_address: 10.0.0.112
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '37.80437'
@@ -596,12 +648,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Denver
+- configurations: []
+  description: Denver
   hidden: false
   icon: router
   ip_address: 10.0.0.113
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '39.73915'
@@ -619,12 +673,14 @@
   type: device
   username: cisco
   vendor: Cisco
-- description: Denver
+- configurations: []
+  description: Denver
   hidden: false
   icon: router
   ip_address: 127.0.0.1
+  last_duration: ''
   last_failure: Never
-  last_runtime: 0.0
+  last_runtime: '0.0'
   last_status: Never
   last_update: Never
   latitude: '48.0'

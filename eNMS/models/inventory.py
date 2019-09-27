@@ -317,26 +317,46 @@ class Pool(AbstractPool):
 
     def generate_row(self, table):
         return [
-            f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showPoolView('{self.id}')">
-            Visualize</button>""",
-            f"""<div class="btn-group" style="width: 80px;">
-            <button type="button" class="btn btn-primary btn-sm"
-            onclick="showTypePanel('pool', '{self.id}')">Edit</button>,
-            <button type="button" class="btn btn-primary btn-sm
-            dropdown-toggle" data-toggle="dropdown">
-            <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#" onclick="showTypePanel('pool',
-                '{self.id}', 'duplicate')">Duplicate</a></li>
-                <li><a href="#" onclick="updatePools('{self.id}')">Update</a></li>
-                <li><a href="#" onclick="showPoolObjectsPanel('{self.id}')">
-                Edit objects</a></li>
-            </ul></div>""",
-            f"""<button type="button" class="btn btn-danger btn-sm"
+            f"""<input type="radio" name="v1" value="{self.id}"/>""",
+            f"""<input type="radio" name="v2" value="{self.id}"/>""",
+            f"""
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
+          <li>
+            <button type="button" class="btn btn-info"
+            onclick="showPoolView('{self.id}')"
+              ><span class="glyphicon glyphicon-eye-open"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('pool', '{self.id}')"
+              ><span class="glyphicon glyphicon-edit"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showPoolObjectsPanel('{self.id}')"
+              ><span class="glyphicon glyphicon-wrench"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('pool', '{self.id}', 'duplicate')"
+              ><span class="glyphicon glyphicon-duplicate"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="updatePools('{self.id}')"
+              ><span class="glyphicon glyphicon-refresh"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger"
             onclick="showDeletionPanel({self.row_properties})"
-            >Delete</button>""",
+              ><span class="glyphicon glyphicon-trash"></span
+            ></button>
+          </li></ul>""",
         ]
 
     @property

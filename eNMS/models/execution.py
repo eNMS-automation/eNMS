@@ -5,10 +5,12 @@ from git import Repo
 from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
+from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
 from paramiko import SFTPClient
+from pathlib import Path
 from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Integer
@@ -21,7 +23,7 @@ from xml.parsers.expat import ExpatError
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.database.functions import convert_value, factory, fetch, fetch_all
+from eNMS.database.functions import convert_value, factory, fetch
 from eNMS.database.base import AbstractBase
 
 

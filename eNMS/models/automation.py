@@ -1,13 +1,8 @@
-from copy import deepcopy
-from multiprocessing import Lock
-from multiprocessing.pool import ThreadPool
-from pathlib import Path
 from sqlalchemy import Boolean, Integer
 from sqlalchemy.orm import relationship
 
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
-from eNMS.database.functions import fetch
 from eNMS.database.associations import (
     service_device_table,
     service_event_table,
@@ -87,42 +82,50 @@ class Service(AbstractBase):
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 400px">
           <li>
-            <button type="button" class="btn btn-info" onclick="showResultsPanel({self.row_properties})"
+            <button type="button" class="btn btn-info"
+            onclick="showResultsPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-list-alt"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-info" onclick="showLogsPanel({self.row_properties})"
+            <button type="button" class="btn btn-info"
+            onclick="showLogsPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-list"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-success" onclick="normalRun('{self.id}')"
+            <button type="button" class="btn btn-success"
+            onclick="normalRun('{self.id}')"
               ><span class="glyphicon glyphicon-play"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-success" onclick="showTypePanel('{self.type}', '{self.id}', 'run')"
+            <button type="button" class="btn btn-success"
+            onclick="showTypePanel('{self.type}', '{self.id}', 'run')"
               ><span class="glyphicon glyphicon-play-circle"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" onclick="showTypePanel('{self.type}', '{self.id}')"
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('{self.type}', '{self.id}')"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')"
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-primary" onclick="exportService('{self.id}')"
+            <button type="button" class="btn btn-primary"
+            onclick="exportService('{self.id}')"
               ><span class="glyphicon glyphicon-download"></span
             ></button>
           </li>
           <li>
-            <button type="button" class="btn btn-danger" onclick="showDeletionPanel({self.row_properties})"
+            <button type="button" class="btn btn-danger"
+            onclick="showDeletionPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>

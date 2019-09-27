@@ -1,12 +1,4 @@
-import_classes = [
-    "user",
-    "device",
-    "link",
-    "pool",
-    "service",
-    "workflow_edge",
-    "task",
-]
+import_classes = ["user", "device", "link", "pool", "service", "workflow_edge", "task"]
 
 dont_track_changes = [
     "current_configuration",

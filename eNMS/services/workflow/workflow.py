@@ -1,5 +1,4 @@
 from collections import defaultdict
-from copy import deepcopy
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from time import sleep
@@ -59,7 +58,6 @@ class Workflow(Service):
         run.set_state(progress_max=len(self.services))
         number_of_runs = defaultdict(int)
         services = list(run.start_services)
-        payload = deepcopy(payload)
         visited = set()
         results = {"results": {}, "success": False, "runtime": run.runtime}
         while services:
@@ -104,8 +102,6 @@ class Workflow(Service):
             ):
                 successors.append(successor)
                 app.run_db[run.runtime]["edges"][edge.id] += 1
-            payload[service.name] = service_results
-            results["results"].update(payload)
             for successor in successors:
                 services.append(successor)
                 if successor == self.services[1]:

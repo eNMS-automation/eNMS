@@ -568,9 +568,10 @@ class BaseController:
         order = getattr(getattr(model, order_property), kwargs["order[0][dir]"])()
         constraints = self.build_filtering_constraints(table, kwargs)
         if table == "result":
+            instance_type = kwargs["instance[type]"]
             constraints.append(
                 getattr(
-                    models[table],
+                    models["result"],
                     "service"
                     if "service" in kwargs["instance[type]"]
                     else kwargs["instance[type]"],

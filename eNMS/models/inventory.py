@@ -354,7 +354,7 @@ class Pool(AbstractPool):
             onclick="showDeletionPanel({self.row_properties})"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
-          </li></ul>""",
+          </li></ul>"""
         ]
 
     @property

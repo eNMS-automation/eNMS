@@ -149,7 +149,7 @@ class Run(AbstractBase):
               ><span class="glyphicon glyphicon-list"></span
             ></button>
           </li>
-        </ul>""",
+        </ul>"""
         ]
 
     @property
@@ -216,6 +216,7 @@ class Run(AbstractBase):
             self.set_state(status="Running", type=self.service.type)
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()
+            print("iii" * 100, self.service, payload)
             payload = payload or self.service.initial_payload
             if self.restart_run and self.service.type == "workflow":
                 global_result = self.restart_run.result()
@@ -234,8 +235,8 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "results": result}
         finally:
-            Session.commit()
             self.close_connection_cache()
+            Session.commit()
             self.status = "Aborted" if self.stop else "Completed"
             self.set_state(status=self.status, success=results["success"])
             app.service_db[self.service.id]["runs"] -= 1
@@ -295,9 +296,12 @@ class Run(AbstractBase):
 
     def create_result(self, results, device=None):
         self.success = results["success"]
-        result_kw = {"run": self, "result": results, "service": self.service_id}
-        if self.workflow_id:
-            result_kw["workflow"] = self.workflow_id
+        result_kw = {
+            "run": self,
+            "result": results,
+            "service": self.service_id,
+            "workflow": self.workflow_id or self.service_id,
+        }
         if device:
             result_kw["device"] = device.id
         factory("result", **result_kw)

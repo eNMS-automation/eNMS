@@ -4,7 +4,6 @@ import_classes = [
     "link",
     "pool",
     "service",
-    "workflow",
     "workflow_edge",
     "task",
 ]
@@ -36,6 +35,7 @@ dont_migrate = {
         "tasks",
         "workflows",
         "tasks",
+        "edges",
         "start_workflows",
     ],
     "task": [
@@ -47,6 +47,5 @@ dont_migrate = {
         "status",
     ],
     "user": ["id", "pools"],
-    "workflow": ["edges", "id", "sources", "destinations", "workflows", "tasks"],
     "workflow_edge": ["id", "source_id", "destination_id", "workflow_id"],
 }

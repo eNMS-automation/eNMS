@@ -44,6 +44,8 @@ PayloadExtractionService -> payload_extraction_service
 PayloadValidationService -> payload_validation_service
 PythonSnippetService -> python_snippet_service
 
+All workflows must now be in the service.yaml file.
+
 - the database package for MySQL and PostgreSQL are no longer part of "requirements.txt".
 They are in "requirements_db.txt" instead.
 The reason is that they can make the pip installation fail depending on the environment, and 

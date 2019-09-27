@@ -104,22 +104,19 @@ class AdministrationController(BaseController):
             for type in types:
                 delete_all(type)
                 Session.commit()
-        workflow_edges = []
+        workflow_edges, workflow_services = [], {}
         for cls in types:
             path = (
                 self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"
             )
             with open(path, "r") as migration_file:
                 objects = yaml.load(migration_file)
-                if cls == "workflow":
-                    workflow_services = {
-                        workflow["name"]: workflow.pop("services")
-                        for workflow in objects
-                    }
                 if cls == "workflow_edge":
                     workflow_edges = deepcopy(objects)
                 for obj in objects:
                     obj_cls = obj.pop("type") if cls == "service" else cls
+                    if obj_cls == "workflow":
+                        workflow_services[obj["name"]] = obj.pop("services")
                     obj = self.objectify(obj_cls, obj)
                     try:
                         factory(obj_cls, **obj)
@@ -130,7 +127,7 @@ class AdministrationController(BaseController):
                         status = "Partial import (see logs)."
         for name, services in workflow_services.items():
             fetch("workflow", name=name).services = [
-                fetch("service", name=name) for name in services
+                fetch("service", name=service_name) for service_name in services
             ]
             Session.commit()
         for edge in workflow_edges:

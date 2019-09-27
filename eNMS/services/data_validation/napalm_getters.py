@@ -11,7 +11,7 @@ class NapalmGettersService(ConnectionService):
 
     __tablename__ = "napalm_getters_service"
 
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     has_targets = True
     validation_method = Column(SmallString, default="dict_included")
     dict_match = Column(MutableDict)

@@ -12,7 +12,7 @@ class NetmikoPromptsService(ConnectionService):
 
     __tablename__ = "netmiko_prompts_service"
 
-    id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     has_targets = True
     privileged_mode = Column(Boolean, default=False)
     command = Column(SmallString)

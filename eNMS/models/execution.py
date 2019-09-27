@@ -240,7 +240,6 @@ class Run(AbstractBase):
             Session.commit()
         if not self.workflow and self.send_notification:
             self.notify(results)
-        print("ooo"*100)
         return results
 
     @staticmethod

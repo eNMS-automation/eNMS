@@ -79,26 +79,12 @@ class Workflow(Service):
                 skip_service = run.eval(service.skip_python_query, **locals())
             if skip_service or service.skip:
                 service_results = {"success": "skipped"}
-            elif device and service.python_query:
-                try:
-                    service_run = factory(
-                        "run",
-                        service=service.id,
-                        workflow=self.id,
-                        workflow_device=device.id,
-                        parent_runtime=run.parent_runtime,
-                        restart_run=run.restart_run,
-                    )
-                    service_run.properties = {}
-                    result = service_run.run(payload)
-                except Exception as exc:
-                    result = {"success": False, "error": str(exc)}
-                service_results = result
             else:
                 service_run = factory(
                     "run",
                     service=service.id,
                     workflow=self.id,
+                    workflow_device=device.id,
                     parent_runtime=run.parent_runtime,
                     restart_run=run.restart_run,
                 )

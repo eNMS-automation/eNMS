@@ -53,24 +53,44 @@ class Task(AbstractBase):
             self.schedule()
 
     def generate_row(self, table):
-        status = "Pause" if self.is_active else "Resume"
         return [
-            f"""<button id="pause-resume-{self.id}" type="button"
-            class="btn btn-success btn-sm" onclick=
-            "{status.lower()}Task('{self.id}')">{status}</button>""",
-            f"""<div class="btn-group" style="width: 80px;">
-            <button type="button" class="btn btn-primary btn-sm"
-            onclick="showTypePanel('task', '{self.id}')">Edit</button>,
-            <button type="button" class="btn btn-primary btn-sm
-            dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu"><li><a href="#" onclick="
-            showTypePanel('task', '{self.id}', 'duplicate')">Duplicate</a></li>
-            </ul></div>""",
-            f"""<button type="button" class="btn btn-danger btn-sm"
-            onclick="showDeletionPanel({self.row_properties})">
-            Delete</button>""",
+            f"""
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 250px">
+          <li>
+            <button type="button" class="btn btn-success 
+            {'disabled' if self.is_active else 'active'}"
+            {'disabled' if self.is_active else 'active'}
+            onclick="resumeTask('{self.id}')"
+              ><span class="glyphicon glyphicon-play"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-default
+            {'active' if self.is_active else 'disabled'}"
+            {'active' if self.is_active else 'disabled'}
+            onclick="pauseTask('{self.id}')"
+              ><span class="glyphicon glyphicon-pause"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('task', '{self.id}')"
+              ><span class="glyphicon glyphicon-edit"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('task', '{self.id}', 'duplicate')"
+              ><span class="glyphicon glyphicon-duplicate"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger"
+            onclick="showDeletionPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-trash"></span
+            ></button>
+          </li>
+        </ul>"""
         ]
 
     @hybrid_property

@@ -94,6 +94,7 @@ class Run(AbstractBase):
     workflow_name = association_proxy("workflow", "name")
     task_id = Column(Integer, ForeignKey("task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
+    state = Column(MutableDict)
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
 
     def __init__(self, **kwargs):
@@ -226,8 +227,8 @@ class Run(AbstractBase):
             self.set_state(status=self.status, success=results["success"])
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
-            results["state"] = app.run_db.pop(self.runtime)
             results["logs"] = app.run_logs.pop(self.runtime)
+            self.state = app.run_db.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {

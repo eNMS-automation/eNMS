@@ -221,11 +221,7 @@ class AutomationController(BaseController):
         if runtimes and runtime not in ("normal", None):
             if runtime == "latest":
                 runtime = runtimes[-1][0]
-            state = self.run_db.get(runtime)
-            if not state:
-                results = fetch("run", runtime=runtime).results
-                global_result = [r for r in results if not r.device_id]
-                state = global_result[0].result.get("state") if global_result else None
+            state = self.run_db.get(runtime) or fetch("run", runtime=runtime).state
         return {
             "workflow": workflow.to_dict(include=["services", "edges"]),
             "runtimes": runtimes,

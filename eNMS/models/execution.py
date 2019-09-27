@@ -24,7 +24,7 @@ from eNMS import app
 from eNMS.database import Session
 from eNMS.database.associations import run_pool_table, run_device_table
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.database.functions import convert_value, factory, fetch
+from eNMS.database.functions import factory, fetch
 from eNMS.database.base import AbstractBase
 
 

@@ -39,16 +39,6 @@ def objectify(model, object_list):
     return [fetch(model, id=object_id) for object_id in object_list]
 
 
-def convert_value(model, attr, value, value_type):
-    relation = relationships[model].get(attr)
-    if not relation:
-        return value
-    if relation["list"]:
-        return [fetch(relation["model"], **{value_type: v}) for v in value]
-    else:
-        return fetch(relation["model"], **{value_type: value})
-
-
 def delete(model, allow_none=False, **kwargs):
     instance = Session.query(models[model]).filter_by(**kwargs).first()
     if allow_none and not instance:

@@ -47,7 +47,7 @@ function panelCode(type, id, mode) {
 
 // eslint-disable-next-line
 function workflowRunMode(instance, restartForm) {
-  call(`/get_runtimes/workflow/${instance.id}`, function(runtimes) {
+  call(`/get_runtimes/service/${instance.id}`, function(runtimes) {
     const versionId = restartForm
       ? "#restart_runtime"
       : `#workflow-restart_runtime-${instance.id}`;

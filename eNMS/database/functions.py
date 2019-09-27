@@ -17,8 +17,8 @@ def fetch(model, allow_none=False, all_matches=False, **kwargs):
         )
 
 
-def fetch_all(model):
-    return Session.query(models[model]).all()
+def fetch_all(model, **kwargs):
+    return fetch(model, allow_none=False, all_matches=True, **kwargs)
 
 
 def count(model, **kwargs):

@@ -237,8 +237,10 @@ class Run(AbstractBase):
             }
             self.create_result(results)
             self.log("info", f"{self.service.type} {self.service.name}: Finished")
+            Session.commit()
         if not self.workflow and self.send_notification:
             self.notify(results)
+        print("ooo"*100)
         return results
 
     @staticmethod

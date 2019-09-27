@@ -86,6 +86,9 @@ class Device(CustomDevice):
     services = relationship(
         "Service", secondary=service_device_table, back_populates="devices"
     )
+    runs = relationship(
+        "Run", secondary=run_device_table, back_populates="devices"
+    )
     results = relationship(
         "Result", back_populates="device", cascade="all, delete-orphan"
     )
@@ -306,6 +309,9 @@ class Pool(AbstractPool):
     longitude = Column(SmallString, default="0.0")
     services = relationship(
         "Service", secondary=service_pool_table, back_populates="pools"
+    )
+    runs = relationship(
+        "Run", secondary=run_pool_table, back_populates="pools"
     )
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")

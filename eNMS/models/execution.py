@@ -88,6 +88,12 @@ class Run(AbstractBase):
     workflow_device_id = Column(Integer, ForeignKey("device.id"))
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(SmallString)
+    devices = relationship(
+        "Device", secondary=run_device_table, back_populates="runs"
+    )
+    pools = relationship(
+        "Pool", secondary=run_pool_table, back_populates="runs"
+    )
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"

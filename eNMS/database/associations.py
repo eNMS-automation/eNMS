@@ -16,6 +16,20 @@ service_pool_table = Table(
     Column("service_id", Integer, ForeignKey("service.id")),
 )
 
+run_device_table = Table(
+    "run_device_association",
+    Base.metadata,
+    Column("device_id", Integer, ForeignKey("device.id")),
+    Column("run_id", Integer, ForeignKey("run.id")),
+)
+
+run_pool_table = Table(
+    "run_pool_association",
+    Base.metadata,
+    Column("pool_id", Integer, ForeignKey("pool.id")),
+    Column("run_id", Integer, ForeignKey("run.id")),
+)
+
 task_device_table = Table(
     "task_device_association",
     Base.metadata,

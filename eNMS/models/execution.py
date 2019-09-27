@@ -226,6 +226,7 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "results": result}
         finally:
+            Session.commit()
             self.close_connection_cache()
             self.status = "Aborted" if self.stop else "Completed"
             self.set_state(status=self.status, success=results["success"])
@@ -259,7 +260,8 @@ class Run(AbstractBase):
         devices, success = self.compute_devices(payload), True
         if not devices:
             result = self.get_results(payload)
-            return self.create_result(result)
+            result = self.create_result(result)
+            return result
         else:
             if self.multiprocessing:
                 device_results = {}
@@ -313,6 +315,7 @@ class Run(AbstractBase):
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
+            self.log("error", chr(10).join(format_exc().splitlines()))
         self.eval(self.service.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
         completed, failed = self.get_state("completed"), self.get_state("failed")

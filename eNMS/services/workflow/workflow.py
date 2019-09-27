@@ -80,15 +80,17 @@ class Workflow(Service):
             if skip_service or service.skip:
                 service_results = {"success": "skipped"}
             else:
-                service_run = factory(
-                    "run",
-                    service=service.id,
-                    workflow=self.id,
-                    workflow_device=device.id,
-                    parent_runtime=run.parent_runtime,
-                    restart_run=run.restart_run,
-                )
-                service_run.properties = {"devices": [device.id]}
+                kwargs = {
+                    "service": service.id,
+                    "workflow": self.id,
+                    "parent_runtime": run.parent_runtime,
+                    "restart_run": run.restart_run,
+                }
+                if device:
+                    kwargs["workflow_device"] = device.id
+                service_run = factory("run", **kwargs)
+                if device:
+                    service_run.properties = {"devices": [device.id]}
                 Session.commit()
                 service_results = service_run.run(payload)
             app.run_db[run.runtime]["services"][service.id][

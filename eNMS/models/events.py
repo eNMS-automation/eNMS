@@ -232,12 +232,27 @@ class Event(AbstractBase):
 
     def generate_row(self, table):
         return [
-            f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showTypePanel('event', '{self.id}')">
-            Edit</button>""",
-            f"""<button type="button" class="btn btn-danger btn-sm"
-            onclick="deleteInstance('event', '{self.id}', '{self.name}')">
-            Delete</button>""",
+            f"""
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('event', '{self.id}')"
+              ><span class="glyphicon glyphicon-edit"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('event', '{self.id}', 'duplicate')"
+              ><span class="glyphicon glyphicon-duplicate"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger"
+            onclick="showDeletionPanel({self.row_properties})"
+              ><span class="glyphicon glyphicon-trash"></span
+            ></button>
+          </li>
+        </ul>"""
         ]
 
     def match_log(self, source, content):

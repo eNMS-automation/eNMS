@@ -384,12 +384,22 @@ class Configuration(AbstractBase):
 
     def generate_row(self, table):
         return [
-            f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showConfiguration('{self.id}', '{self.device_name}')">
-            </i>Configuration</a></button>""",
-            f"""<label class="btn btn-default btn-sm btn-file"
-            style="width:100%;"><a href="/download_configuration/{self.id}">
-            Download</a></label>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",
+            f"""
+            <ul class="pagination pagination-lg" style="margin: 0px;">
+          <li>
+            <button type="button" class="btn btn-info"
+            onclick="showConfiguration('{self.id}', '{self.device_name}')"
+              ><span class="glyphicon glyphicon-book"></span
+            ></button>
+          </li>
+          <li>
+          <form action="/download_configuration/{self.id}">
+            <button type="submit" class="btn btn-info"
+            
+              ><span class="glyphicon glyphicon-book"></span
+            ></button></form>
+
+          </li></ul>""",
         ]

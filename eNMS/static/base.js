@@ -449,7 +449,7 @@ function showTypePanel(type, id, mode) {
 
 function updateProperty(el, property, value, type) {
   const propertyType = formProperties[type][property] || "str";
-  if (propertyType.includes("bool") || property.includes("regex")) {
+  if (propertyType.includes("bool")) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict") || propertyType == "json") {
     el.val(value ? JSON.stringify(value) : "{}");

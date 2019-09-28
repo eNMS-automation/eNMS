@@ -213,7 +213,7 @@ const theme = {
   },
 };
 
-function drawDiagrams(diagram, name, data, legend) {
+function drawDiagrams(diagram, name, data) {
   diagram.setOption({
     tooltip: {
       trigger: "item",
@@ -223,7 +223,7 @@ function drawDiagrams(diagram, name, data, legend) {
     legend: {
       x: "center",
       y: "bottom",
-      data: legend,
+      data: data,
     },
     toolbox: {
       show: true,

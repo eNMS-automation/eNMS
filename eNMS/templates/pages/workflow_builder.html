@@ -15,7 +15,9 @@ block content %}
             ></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
+            <a onclick="menu('Create Workflow')"
+              ><span class="glyphicon glyphicon-plus"></span
+            ></a>
           </li>
           <li>
             <a onclick="menu('Add to Workflow')"
@@ -26,13 +28,19 @@ block content %}
             <a href="#"><span class="glyphicon glyphicon-font"></span></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-ok-circle"></span></a>
+            <a onclick="menu('Skip')"
+              ><span class="glyphicon glyphicon-ok-circle"></span
+            ></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-ban-circle"></span></a>
+            <a onclick="menu('Unskip')"
+              ><span class="glyphicon glyphicon-ban-circle"></span
+            ></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+            <a onclick="menu('Remove from Workflow')"
+              ><span class="glyphicon glyphicon-remove"></span
+            ></a>
           </li>
           <li>
             <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
@@ -107,10 +115,13 @@ block content %}
               <tbody>
                 <tr>
                   <td style="text-align: center; vertical-align: middle;">
-                    <button type="button" class="btn btn-primary"
-                    onclick="showTypePanel()"
-                      ><span class="glyphicon glyphicon-plus"></span
-                    ></button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="showTypePanel()"
+                    >
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                   </td>
                   <td style="min-width: 10vw">
                     <select id="service-type" class="form-control"></select>
@@ -118,10 +129,13 @@ block content %}
                 </tr>
                 <tr>
                   <td style="text-align: center; vertical-align: middle;">
-                    <button type="button" class="btn btn-primary"
-                    onclick="switchMode()"
-                      ><span class="glyphicon glyphicon-cog"></span
-                    ></button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="switchMode()"
+                    >
+                      <span class="glyphicon glyphicon-cog"></span>
+                    </button>
                   </td>
                   <td style="min-width: 10vw">
                     <select id="edge-type" class="form-control">

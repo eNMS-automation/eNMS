@@ -494,7 +494,8 @@ function deleteSelection() {
 }
 
 function switchMode(mode) {
-  currentMode = mode || currentMode == "motion" ? $("#edge-type").val() : "motion";
+  currentMode =
+    mode || currentMode == "motion" ? $("#edge-type").val() : "motion";
   if (currentMode == "motion") {
     graph.addNodeMode();
     alertify.notify("Mode: node motion.", "success", 5);

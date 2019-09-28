@@ -18,7 +18,9 @@ block content %}
             <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
           </li>
           <li>
-            <a onclick="menu('Add to Workflow')"><span class="glyphicon glyphicon-book"></span></a>
+            <a onclick="menu('Add to Workflow')"
+              ><span class="glyphicon glyphicon-book"></span
+            ></a>
           </li>
           <li>
             <a href="#"><span class="glyphicon glyphicon-font"></span></a>
@@ -33,10 +35,8 @@ block content %}
             <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
           </li>
           <li>
-              <a href="#"
-                ><span class="glyphicon glyphicon-trash"></span
-              ></a>
-            </li>
+            <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+          </li>
         </ul>
         <ul
           class="pagination pagination-lg"
@@ -97,6 +97,45 @@ block content %}
         <div class="x_content">
           <div
             class="btn-group"
+            style="width: 10vw; z-index:2; position: absolute;"
+          >
+            <table
+              class="table table-bordered dt-responsive nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    <button type="button" class="btn btn-primary"
+                    onclick="showTypePanel()"
+                      ><span class="glyphicon glyphicon-plus"></span
+                    ></button>
+                  </td>
+                  <td style="min-width: 10vw">
+                    <select id="service-type" class="form-control"></select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    <button type="button" class="btn btn-primary"
+                    onclick="switchMode()"
+                      ><span class="glyphicon glyphicon-cog"></span
+                    ></button>
+                  </td>
+                  <td style="min-width: 10vw">
+                    <select id="edge-type" class="form-control">
+                      <option value="success">Success</option>
+                      <option value="failure">Failure</option>
+                      <option value="prerequisite">Prerequisite</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="btn-group"
             style="z-index:2; position: absolute; right: 0vw"
           >
             <table
@@ -119,39 +158,6 @@ block content %}
                   </td>
                   <td style="min-width: 20vw">
                     <select id="current-runtime" class="form-control"></select>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div
-            class="btn-group"
-            style="width: 20vw; z-index:2; position: absolute;"
-          >
-            <table
-              class="table table-bordered dt-responsive nowrap"
-              cellspacing="0"
-              width="100%"
-            >
-              <tbody>
-                <tr>
-                  <td style="text-align: center; vertical-align: middle;">
-                    Service Creation
-                  </td>
-                  <td style="min-width: 20vw">
-                    <select id="service-type" class="form-control"></select>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="text-align: center; vertical-align: middle;">
-                    Edge Creation
-                  </td>
-                  <td style="min-width: 20vw">
-                    <select id="edge-type" class="form-control">
-                      <option value="success">Success</option>
-                      <option value="failure">Failure</option>
-                      <option value="prerequisite">Prerequisite</option>
-                    </select>
                   </td>
                 </tr>
               </tbody>
@@ -211,10 +217,10 @@ block content %}
       >Change Mode<span class="caret-right"></span
     ></a>
     <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Move Nodes</a></li>
       <li><a tabindex="-1" href="#">Create 'Success' edge</a></li>
       <li><a tabindex="-1" href="#">Create 'Failure' edge</a></li>
       <li><a tabindex="-1" href="#">Create 'Prerequisite' edge</a></li>
-      <li><a tabindex="-1" href="#">Move Nodes</a></li>
     </ul>
   </li>
   <li class="dropdown-submenu menu-entry global">
@@ -228,19 +234,10 @@ block content %}
       <li><a tabindex="-1" href="#">Run Workflow</a></li>
       <li><a tabindex="-1" href="#">Run Workflow with Updates</a></li>
       <li><a tabindex="-1" href="#">Stop Workflow</a></li>
-      <li><a tabindex="-1" href="#">Run Workflow with Updates</a></li>
-      <li><a tabindex="-1" href="#">Run Workflow with Updates</a></li>
+      <li><a tabindex="-1" href="#">Workflow Results</a></li>
+      <li><a tabindex="-1" href="#">Workflow Logs</a></li>
     </ul>
   </li>
-
-  <li class="menu-entry global">
-    <a tabindex="-1" href="#"></a>
-  </li>
-  <li class="menu-entry global"><a tabindex="-1" href="#">Edit Workflow</a></li>
-  <li class="menu-entry global">
-    <a tabindex="-1" href="#">Workflow Results</a>
-  </li>
-  <li class="menu-entry global"><a tabindex="-1" href="#">Workflow Logs</a></li>
   <li class="menu-entry global"><a tabindex="-1" href="#">Create Label</a></li>
 </ul>
 {% endblock content %} {% block javascripts %} {{ super()}}

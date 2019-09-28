@@ -56,7 +56,7 @@ const dsoptions = {
         alertify.notify("You cannot draw an edge from 'End'.", "error", 5);
       }
       if (data.from != data.to) {
-        data.subtype = edgeType;
+        data.subtype = currentMode;
         saveEdge(data);
       }
     },
@@ -67,7 +67,7 @@ let nodes;
 let edges;
 let graph;
 let selectedObject;
-let edgeType;
+let currentMode;
 let mousePosition;
 let currLabel;
 let arrowHistory = [];
@@ -493,13 +493,19 @@ function deleteSelection() {
 }
 
 function switchMode(mode) {
-  if (["success", "failure", "prerequisite"].includes(mode)) {
-    edgeType = mode;
-    graph.addEdgeMode();
-    alertify.notify(`Mode: creation of ${mode} edge.`, "success", 5);
-  } else {
+  if (!mode) {
+    currentMode = currentMode == "motion" ? $("#edge-type").val() : "motion";
+  } else if (mode == "motion") {
+    currentMode = "motion";
     graph.addNodeMode();
+  } else {
+    currentMode = mode;
+    graph.addEdgeMode();
+  }
+  if (currentMode == "motion") {
     alertify.notify("Mode: node motion.", "success", 5);
+  } else {
+    alertify.notify(`Mode: creation of ${mode} edge.`, "success", 5);
   }
   $(".dropdown-submenu a.menu-layer")
     .next("ul")
@@ -551,7 +557,7 @@ Object.assign(action, {
   "Create 'Success' edge": () => switchMode("success"),
   "Create 'Failure' edge": () => switchMode("failure"),
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
-  "Move Nodes": () => switchMode("node"),
+  "Move Nodes": () => switchMode("motion"),
   "Create Label": () => showPanel("workflow_label"),
   "Edit Label": editLabel,
   "Edit Edge": (edge) => {

@@ -483,14 +483,9 @@ function edgeToEdge(edge) {
 }
 
 function deleteSelection() {
-  const node = graph.getSelectedNodes()[0];
-  if (node != 1 && node != 2) {
-    if (node) deleteNode(node);
-    graph.getSelectedEdges().map((edge) => deleteEdge(edge));
-    graph.deleteSelected();
-  } else {
-    alertify.notify("Start and End cannot be deleted", "error", 5);
-  }
+  graph.getSelectedNodes().map((node) => deleteNode(node));
+  graph.getSelectedEdges().map((edge) => deleteEdge(edge));
+  graph.deleteSelected();
 }
 
 function switchMode(mode) {

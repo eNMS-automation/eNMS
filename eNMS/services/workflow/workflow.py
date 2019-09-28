@@ -65,7 +65,7 @@ class Workflow(Service):
                 skip_service = run.eval(service.skip_python_query, **locals())
             if skip_service or service.skip:
                 service_results = {"success": "skipped"}
-                run.run_state["progress"]["services"]["skipped"] += 1
+                run.run_state["progress"]["service"]["skipped"] += 1
             else:
                 kwargs = {
                     "service": service.id,
@@ -80,7 +80,7 @@ class Workflow(Service):
                 Session.commit()
                 service_results = service_run.run(payload)
                 status = "passed" if service_results["success"] else "failed"
-                run.run_state["progress"]["services"][status] += 1
+                run.run_state["progress"]["service"][status] += 1
             successors = []
             for successor, edge in service.adjacent_services(
                 self,
@@ -93,7 +93,6 @@ class Workflow(Service):
                 services.append(successor)
                 if successor == self.services[1]:
                     success = True
-            run.run_state["progress"]["devices"]["passed" if success else "failed"] += 1
             if not skip_service and not service.skip:
                 sleep(service.waiting_time)
         return {"payload": payload, "success": success}

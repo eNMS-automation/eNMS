@@ -206,7 +206,7 @@ class Run(AbstractBase):
             devices = set(self.service.devices)
             for pool in self.service.pools:
                 devices |= set(pool.devices)
-        self.run_state["progress"]["devices"]["total"] = len(devices)
+        self.run_state["progress"]["device"]["total"] = len(devices)
         return devices
 
     def init_state(self):
@@ -214,7 +214,7 @@ class Run(AbstractBase):
             "status": "Idle",
             "success": False,
             "progress": {
-                "devices" : {
+                "device" : {
                     "total": "unknown",
                     "passed": 0,
                     "failed": 0,
@@ -231,7 +231,7 @@ class Run(AbstractBase):
                 "edges": defaultdict(int),
                 "services": defaultdict(dict),
             })
-            state["progress"]["services"] = {
+            state["progress"]["service"] = {
                 "total": len(self.service.services),
                 "passed": 0,
                 "failed": 0,
@@ -373,7 +373,7 @@ class Run(AbstractBase):
         results["endtime"] = app.get_time()
         if args:
             status = "passed" if results["success"] else "failed"
-            self.run_state["progress"]["devices"][status] += 1
+            self.run_state["progress"]["device"][status] += 1
         return results
 
     def log(self, severity, log):

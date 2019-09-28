@@ -665,15 +665,14 @@ function displayWorkflowState(result) {
     if (Object.entries(result.state.progress).length === 0) {
       emptyProgressBar();
     } else {
-      $("#progressbar").show();
-      $("#progress-success").width(
-        `${(result.state.progress.passed * 100) / result.state.progress_max}%`
-      );
-      $("#progress-failure").width(
-        `${(result.state.progress.failed * 100) / result.state.progress_max}%`
-      );
-      $("#progress-success-span").text(result.state.progress.passed);
-      $("#progress-failure-span").text(result.state.progress.failed);
+      for (const [type, progress] of Object.entries(result.state.progress)) {
+        console.log(`#progress-${type}`);
+        $(`#progress-${type}`).show();
+        $(`#progress-${type}-success`).width(`${(progress.passed * 100) / progress.total}%`);
+        $(`#progress-${type}-failure`).width(`${(progress.failed * 100) / progress.total}%`);
+        if (progress.passed) $(`#progress-${type}-success-span`).text(progress.passed);
+        if (progress.failed) $(`#progress-${type}-failure-span`).text(progress.failed);
+      }
     }
     $("#status").text(`Status: ${result.state.status}`);
     const currService = result.state.current_service;

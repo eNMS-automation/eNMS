@@ -40,7 +40,7 @@ const panelSize = {
   device: "700 500",
   device_filtering: "700 600",
   device_results: "1200 700",
-  display: "1700 700",
+  display: "700 700",
   event_filtering: "700 400",
   excel_import: "400 150",
   excel_export: "400 150",

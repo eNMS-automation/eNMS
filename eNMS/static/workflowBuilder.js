@@ -413,6 +413,7 @@ function serviceToNode(service, index) {
         ? "circle"
         : "box",
     color: defaultService ? "pink" : "#D2E5FF",
+    font: { size: 15, multi: "html", align: "left", bold: { color: '#000000'} },
     label:
       service.type == "workflow" ? `     ${service.name}     ` : service.name,
     name: service.name,
@@ -687,7 +688,7 @@ function displayWorkflowState(result) {
             if (state.failed > 0) progress += ` (${state.failed} failed)`;
             nodes.update({
               id: id,
-              label: `${nodes.get(id).name}\nProgress: ${progress}`,
+              label: `<b>${nodes.get(id).name}</b>\nProgress: ${progress}`,
             });
           }
         }
@@ -695,10 +696,9 @@ function displayWorkflowState(result) {
     }
     if (edges && result.state.edges) {
       $.each(result.state.edges, (id, devices) => {
-        const label = devices == 1 ? "DEVICE" : "DEVICES";
         edges.update({
           id: id,
-          label: `<b>${devices} ${label}</b>`,
+          label: `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
           font: { size: 15, multi: "html" },
         });
       });

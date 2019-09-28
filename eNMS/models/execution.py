@@ -216,15 +216,15 @@ class Run(AbstractBase):
         return devices
 
     def run(self, payload=None):
+        self.log("info", f"{self.service.type} {self.service.name}: Starting")
+        self.set_state(status="Running", type=self.service.type)
+        if payload is None:
+            payload = self.service.initial_payload
+        if self.service.type == "workflow":
+            self.service.init_state(self)
         try:
-            if self.service.type == "workflow":
-                self.service.init_state(self)
-            self.log("info", f"{self.service.type} {self.service.name}: Starting")
-            self.set_state(status="Running", type=self.service.type)
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()
-            if payload is None:
-                payload = self.service.initial_payload
             if self.restart_run and self.service.type == "workflow":
                 global_result = self.restart_run.result()
                 if global_result:
@@ -295,6 +295,7 @@ class Run(AbstractBase):
                 device_results = {
                     device.name: self.get_results(payload, device) for device in devices
                 }
+            print('ooo'*200, device_results)
             for device_name, r in deepcopy(device_results).items():
                 self.create_result(r, fetch("device", name=device_name))
                 if not r["success"]:
@@ -307,8 +308,11 @@ class Run(AbstractBase):
             "run": self,
             "result": results,
             "service": self.service_id,
-            "workflow": self.workflow_id or self.service_id,
         }
+        if self.service.type == "workflow":
+            result_kw["workflow"] = self.service_id
+        elif self.workflow_id:
+            result_kw["workflow"] = self.workflow_id
         if device:
             result_kw["device"] = device.id
         factory("result", **result_kw)

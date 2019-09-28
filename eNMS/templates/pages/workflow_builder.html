@@ -183,121 +183,82 @@ block content %}
               </tbody>
             </table>
           </div>
-        </div>
-        <div
-          class="btn-group"
-          style="width: 20vw; z-index:2; position: absolute; left: 30vw"
-        >
-          <strong><p id="status"></p></strong>
-          <div style="display: inline-block;">progress-device-success</div>
-          <div id="progress-service" class="progress" style="display: none">
-            <div
-              id="progress-service-success"
-              class="progress-bar progress-bar-success"
-            >
-              <span
-                id="progress-service-success-span"
-                style="color:black;"
-              ></span>
-            </div>
-            <div
-              id="progress-service-failure"
-              class="progress-bar progress-bar-danger"
-            >
-              <span
-                id="progress-service-failure-span"
-                style="color:black;"
-              ></span>
-            </div>
+
+          <div
+            class="btn-group"
+            style="width: 20vw; z-index:2; position: absolute; left: 30vw"
+          >
+            <strong><p id="status"></p></strong>
+            <div id="progress-service" style="height:100px;"></div>
+            <div id="progress-device"></div>
           </div>
-          <div id="progress-device" class="progress" style="display: none">
-            <div
-              id="progress-device-success"
-              class="progress-bar progress-bar-success"
-            >
-              <span
-                id="progress-device-success-span"
-                style="color:black;"
-              ></span>
-            </div>
-            <div
-              id="progress-device-failure"
-              class="progress-bar progress-bar-danger"
-            >
-              <span
-                id="progress-device-failure-span"
-                style="color:black;"
-              ></span>
-            </div>
-          </div>
+          <div id="network" style="height:80vh; width:100%;"></div>
         </div>
-        <div id="network" style="height:80vh; width:100%;"></div>
-        <div class="ln_solid"></div>
-        <div class="form-group"></div>
       </div>
     </div>
   </div>
-  <ul id="contextMenu" class="dropdown-menu" role="menu">
-    <li class="menu-entry node-selection">
-      <a tabindex="-1" href="#">Edit</a>
-    </li>
-    <li class="menu-entry node-selection"><a tabindex="-1" href="#">Run</a></li>
-    <li class="menu-entry node-selection">
-      <a tabindex="-1" href="#">Run with Updates</a>
-    </li>
-    <li class="menu-entry node-selection">
-      <a tabindex="-1" href="#">Restart Workflow from Here</a>
-    </li>
-    <li class="menu-entry node-selection">
-      <a tabindex="-1" href="#">Results</a>
-    </li>
-    <li class="menu-entry node-selection edge-selection">
-      <a tabindex="-1" href="#">Remove from Workflow</a>
-    </li>
-    <li class="menu-entry edge-selection">
-      <a tabindex="-1" href="#">Edit Edge</a>
-    </li>
-    <li class="menu-entry label-selection">
-      <a tabindex="-1" href="#">Edit Label</a>
-    </li>
-    <li class="menu-entry label-selection">
-      <a tabindex="-1" href="#">Delete Label</a>
-    </li>
-    <li class="dropdown-submenu menu-entry global">
-      <a class="menu-submenu menu-layer" tabindex="-1" href="#"
-        >Change Mode<span class="caret-right"></span
-      ></a>
-      <ul class="dropdown-menu">
-        <li><a tabindex="-1" href="#">Move Nodes</a></li>
-        <li><a tabindex="-1" href="#">Create 'Success' edge</a></li>
-        <li><a tabindex="-1" href="#">Create 'Failure' edge</a></li>
-        <li><a tabindex="-1" href="#">Create 'Prerequisite' edge</a></li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu menu-entry global">
-      <a class="menu-submenu menu-layer" tabindex="-1" href="#"
-        >Workflow<span class="caret-right"></span
-      ></a>
-      <ul class="dropdown-menu">
-        <li><a tabindex="-1" href="#">Edit Workflow</a></li>
-        <li><a tabindex="-1" href="#">Create Workflow</a></li>
-        <li><a tabindex="-1" href="#">Add to Workflow</a></li>
-        <li><a tabindex="-1" href="#">Run Workflow</a></li>
-        <li><a tabindex="-1" href="#">Run Workflow with Updates</a></li>
-        <li><a tabindex="-1" href="#">Stop Workflow</a></li>
-        <li><a tabindex="-1" href="#">Workflow Results</a></li>
-        <li><a tabindex="-1" href="#">Workflow Logs</a></li>
-      </ul>
-    </li>
-    <li class="menu-entry global">
-      <a tabindex="-1" href="#">Create Label</a>
-    </li>
-  </ul>
-  {% endblock content %} {% block javascripts %} {{ super()}}
-  <script>
-    let workflow = {{ workflow|tojson|safe }};
-  </script>
-  <script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='workflowBuilder.js') }}"></script>
-  {% endblock javascripts %}
 </div>
+<ul id="contextMenu" class="dropdown-menu" role="menu">
+  <li class="menu-entry node-selection">
+    <a tabindex="-1" href="#">Edit</a>
+  </li>
+  <li class="menu-entry node-selection"><a tabindex="-1" href="#">Run</a></li>
+  <li class="menu-entry node-selection">
+    <a tabindex="-1" href="#">Run with Updates</a>
+  </li>
+  <li class="menu-entry node-selection">
+    <a tabindex="-1" href="#">Restart Workflow from Here</a>
+  </li>
+  <li class="menu-entry node-selection">
+    <a tabindex="-1" href="#">Results</a>
+  </li>
+  <li class="menu-entry node-selection edge-selection">
+    <a tabindex="-1" href="#">Remove from Workflow</a>
+  </li>
+  <li class="menu-entry edge-selection">
+    <a tabindex="-1" href="#">Edit Edge</a>
+  </li>
+  <li class="menu-entry label-selection">
+    <a tabindex="-1" href="#">Edit Label</a>
+  </li>
+  <li class="menu-entry label-selection">
+    <a tabindex="-1" href="#">Delete Label</a>
+  </li>
+  <li class="dropdown-submenu menu-entry global">
+    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+      >Change Mode<span class="caret-right"></span
+    ></a>
+    <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Move Nodes</a></li>
+      <li><a tabindex="-1" href="#">Create 'Success' edge</a></li>
+      <li><a tabindex="-1" href="#">Create 'Failure' edge</a></li>
+      <li><a tabindex="-1" href="#">Create 'Prerequisite' edge</a></li>
+    </ul>
+  </li>
+  <li class="dropdown-submenu menu-entry global">
+    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+      >Workflow<span class="caret-right"></span
+    ></a>
+    <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Edit Workflow</a></li>
+      <li><a tabindex="-1" href="#">Create Workflow</a></li>
+      <li><a tabindex="-1" href="#">Add to Workflow</a></li>
+      <li><a tabindex="-1" href="#">Run Workflow</a></li>
+      <li><a tabindex="-1" href="#">Run Workflow with Updates</a></li>
+      <li><a tabindex="-1" href="#">Stop Workflow</a></li>
+      <li><a tabindex="-1" href="#">Workflow Results</a></li>
+      <li><a tabindex="-1" href="#">Workflow Logs</a></li>
+    </ul>
+  </li>
+  <li class="menu-entry global">
+    <a tabindex="-1" href="#">Create Label</a>
+  </li>
+</ul>
+{% endblock content %} {% block javascripts %} {{ super()}}
+<script>
+  let workflow = {{ workflow|tojson|safe }};
+</script>
+<script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='diagrams.js') }}"></script>
+<script src="{{ url_for('static', filename='workflowBuilder.js') }}"></script>
+{% endblock javascripts %}

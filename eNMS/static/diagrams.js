@@ -213,19 +213,8 @@ const theme = {
   },
 };
 
-function drawDiagrams(objects, type) {
-  let legend = [];
-  let data = [];
-  for (const [key, value] of Object.entries(objects)) {
-    legend.push(key);
-    data.push({
-      value: value,
-      name: key,
-    });
-  }
-
-  const link = echarts.init(document.getElementById(type), theme);
-  link.setOption({
+function drawDiagrams(diagram, name, data, legend) {
+  diagram.setOption({
     tooltip: {
       trigger: "item",
       formatter: "{a} <br/>{b} : {c} ({d}%)",
@@ -263,7 +252,7 @@ function drawDiagrams(objects, type) {
     },
     series: [
       {
-        name: type,
+        name: name,
         type: "pie",
         radius: ["35%", "55%"],
         itemStyle: {
@@ -290,4 +279,5 @@ function drawDiagrams(objects, type) {
       },
     ],
   });
+  return diagram;
 }

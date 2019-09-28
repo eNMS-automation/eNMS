@@ -173,9 +173,6 @@ class Run(AbstractBase):
     def state(self):
         return app.run_db[self.parent_runtime]
 
-    def set_state(self, **kwargs):
-        app.run_db[self.runtime].update(**kwargs)
-
     @property
     def stop(self):
         return self.state["status"] == "stop"
@@ -206,12 +203,12 @@ class Run(AbstractBase):
             devices = set(self.service.devices)
             for pool in self.service.pools:
                 devices |= set(pool.devices)
-        self.set_state(number_of_targets=len(devices))
+        self.state["progress"]["devices_total"] = len(devices)
         return devices
 
     def run(self, payload=None):
         self.log("info", f"{self.service.type} {self.service.name}: Starting")
-        self.set_state(status="Running", type=self.service.type)
+        self.state["status"] = "Running"
         if payload is None:
             payload = self.service.initial_payload
         if self.service.type == "workflow":
@@ -239,7 +236,7 @@ class Run(AbstractBase):
             self.close_connection_cache()
             Session.commit()
             self.status = "Aborted" if self.stop else "Completed"
-            self.set_state(status=self.status, success=results["success"])
+            self.state["status"], self.state["success"] = self.status, results["success"]
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["logs"] = app.run_logs.pop(self.runtime)
@@ -266,7 +263,6 @@ class Run(AbstractBase):
             args[4][device.name] = device_result
 
     def device_run(self, payload):
-        self.set_state(completed=0, failed=0)
         devices, success = self.compute_devices(payload), True
         if not devices:
             result = self.get_results(payload)
@@ -334,8 +330,9 @@ class Run(AbstractBase):
             self.log("error", chr(10).join(format_exc().splitlines()))
         self.eval(self.service.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
-        self.state["progress"]["devices_completed"] += 1
-        self.state["progress"]["devices_failed"] += 1 - results["success"]
+        if args:
+            self.state["progress"]["devices_completed"] += 1
+            self.state["progress"]["devices_failed"] += 1 - results["success"]
         return results
 
     def log(self, severity, log):

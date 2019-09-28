@@ -1,4 +1,5 @@
 from builtins import __dict__ as builtins
+from collections import defaultdict
 from copy import deepcopy
 from functools import partial
 from git import Repo
@@ -136,7 +137,6 @@ class Run(AbstractBase):
         return result.pop() if result else None
 
     def generate_row(self, table):
-        service_type = "workflow" if self.service.type == "workflow" else "service"
         return [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
@@ -171,7 +171,10 @@ class Run(AbstractBase):
 
     @property
     def run_state(self):
-        return app.run_db[self.parent_runtime]
+        if self.parent_runtime == self.runtime:
+            return app.run_db[self.parent_runtime]
+        else:
+            return app.run_db[self.parent_runtime]["services"][self.service.id]
 
     @property
     def stop(self):
@@ -203,12 +206,11 @@ class Run(AbstractBase):
             devices = set(self.service.devices)
             for pool in self.service.pools:
                 devices |= set(pool.devices)
+        print(self.service, self.run_state)
         self.run_state["progress"]["devices_total"] = len(devices)
         return devices
 
     def init_state(self):
-        if run.parent_runtime in app.run_db:
-            return
         state = {
             "status": "Idle",
             "success": False,
@@ -219,18 +221,28 @@ class Run(AbstractBase):
             },
             "attempt": 0,
             "waiting_time": {
-                "total": service.waiting_time,
-                "left": service.waiting_time,
+                "total": self.service.waiting_time,
+                "left": self.service.waiting_time,
             },
         }
         if self.service.type == "workflow":
-            state["edges"] = defaultdict(int)
+            state.update({
+                "edges": defaultdict(int),
+                "services": defaultdict(dict),
+            })
             state["progress"].update({
                 "services_completed": 0,
-                "services_total": len(self.services),
+                "services_total": len(self.service.services),
                 "services_failed": 0,
             })
-        app.run_db[run.parent_runtime] = state
+        if self.parent_runtime == self.runtime:
+            if self.parent_runtime in app.run_db:
+                return
+            app.run_db[self.parent_runtime] = state
+        else:
+            service_states = app.run_db[self.parent_runtime]["services"]
+            if self.service.id not in service_states:
+                service_states[self.service.id] = state
 
     def run(self, payload=None):
         self.init_state()
@@ -261,11 +273,13 @@ class Run(AbstractBase):
             self.close_connection_cache()
             Session.commit()
             self.status = "Aborted" if self.stop else "Completed"
-            self.run_state["status"], self.run_state["success"] = self.status, results["success"]
+            self.run_state["status"] = self.status
+            self.run_state["success"] = results["success"]
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["logs"] = app.run_logs.pop(self.runtime)
-            self.state = app.run_db.pop(self.parent_runtime)
+            if self.parent_runtime == self.runtime:
+                self.state = app.run_db.pop(self.parent_runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {

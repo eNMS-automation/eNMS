@@ -51,7 +51,7 @@ class Workflow(Service):
         visited, success = set(), False
         while services:
             if run.stop:
-                return results
+                return {"payload": payload, "success": False}
             service = services.pop()
             if number_of_runs[service.name] >= service.maximum_runs or any(
                 node not in visited
@@ -85,6 +85,7 @@ class Workflow(Service):
                 "success" if service_results["success"] else "failure",
             ):
                 successors.append(successor)
+                print("kkk"*200, run.run_state)
                 run.run_state["edges"][edge.id] += 1
             for successor in successors:
                 services.append(successor)

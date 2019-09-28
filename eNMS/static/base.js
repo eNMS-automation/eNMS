@@ -343,9 +343,10 @@ function preprocessForm(panel, id, type, duplicate) {
 }
 
 function initSelect(el, model, parentId, single) {
+  console.log(model, single)
   el.select2({
     multiple: !single,
-    closeOnSelect: single,
+    closeOnSelect: single ? true : false,
     dropdownParent: parentId ? $(`#${parentId}`) : $(document.body),
     ajax: {
       url: `/multiselect_filtering/${model}`,

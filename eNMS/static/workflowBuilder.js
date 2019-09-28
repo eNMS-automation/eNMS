@@ -668,10 +668,16 @@ function displayWorkflowState(result) {
       for (const [type, progress] of Object.entries(result.state.progress)) {
         console.log(`#progress-${type}`);
         $(`#progress-${type}`).show();
-        $(`#progress-${type}-success`).width(`${(progress.passed * 100) / progress.total}%`);
-        $(`#progress-${type}-failure`).width(`${(progress.failed * 100) / progress.total}%`);
-        if (progress.passed) $(`#progress-${type}-success-span`).text(progress.passed);
-        if (progress.failed) $(`#progress-${type}-failure-span`).text(progress.failed);
+        $(`#progress-${type}-success`).width(
+          `${(progress.passed * 100) / progress.total}%`
+        );
+        $(`#progress-${type}-failure`).width(
+          `${(progress.failed * 100) / progress.total}%`
+        );
+        if (progress.passed)
+          $(`#progress-${type}-success-span`).text(progress.passed);
+        if (progress.failed)
+          $(`#progress-${type}-failure-span`).text(progress.failed);
       }
     }
     $("#status").text(`Status: ${result.state.status}`);

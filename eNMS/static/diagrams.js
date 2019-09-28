@@ -240,14 +240,6 @@ function drawDiagrams(diagram, name, data) {
             },
           },
         },
-        restore: {
-          show: true,
-          title: "Restore",
-        },
-        saveAsImage: {
-          show: true,
-          title: "Save Image",
-        },
       },
     },
     series: [

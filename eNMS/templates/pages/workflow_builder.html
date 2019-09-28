@@ -5,10 +5,9 @@ block content %}
   <div class="row">
     <div class="col-md-12 col-xs-12">
       <nav class="navbar navbar-default" role="navigation">
-
-          <ul
+        <ul
           class="pagination pagination-lg"
-          style="margin: 0px; padding-left: 29px; padding-top: 9px"
+          style="margin: 0px; padding-left: 29px; padding-top: 9px;"
         >
           <li>
             <a onclick="menu('Edit Workflow')"
@@ -16,39 +15,32 @@ block content %}
             ></a>
           </li>
           <li>
-              <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
-            </li>
-            <li>
-              <a href="#"><span class="glyphicon glyphicon-book"></span></a>
-            </li>
-            <li>
-              <a href="#"><span class="glyphicon glyphicon-font"></span></a>
-            </li>
-            <li>
-              <a href="#"><span class="glyphicon glyphicon-ok-circle"></span></a>
-            </li>
-            <li>
-              <a href="#"><span class="glyphicon glyphicon-ban-circle"></span></a>
-            </li>
-            <li>
-              <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
-            </li>
-        </ul>
-        <ul
-          class="pagination pagination-lg"
-          style="margin: 0px; padding-top: 9px; padding-left: 29px;"
-        >
-
-          <li>
-            <a href="#"
-              ><span class="glyphicon glyphicon-remove-sign"></span
-            ></a>
+            <a href="#"><span class="glyphicon glyphicon-plus"></span></a>
           </li>
+          <li>
+            <a onclick="menu('Add to Workflow')"><span class="glyphicon glyphicon-book"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-font"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-ok-circle"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-ban-circle"></span></a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+          </li>
+          <li>
+              <a href="#"
+                ><span class="glyphicon glyphicon-trash"></span
+              ></a>
+            </li>
         </ul>
-
         <ul
           class="pagination pagination-lg"
-          style="margin: 0px; padding-left: 29px; padding-top: 9px"
+          style="margin: 0px; padding-left: 200px; padding-top: 9px"
         >
           <li>
             <a href="#"><span class="glyphicon glyphicon-play"></span></a>
@@ -62,19 +54,19 @@ block content %}
             <a href="#"><span class="glyphicon glyphicon-pause"></span></a>
           </li>
           <li>
-              <a onclick="menu('Workflow Logs')"
-                ><span class="glyphicon glyphicon-list"></span
-              ></a>
-            </li>
-            <li>
-              <a onclick="menu('Workflow Results')"
-                ><span class="glyphicon glyphicon-list-alt"></span
-              ></a>
-            </li>
+            <a onclick="menu('Workflow Logs')"
+              ><span class="glyphicon glyphicon-list"></span
+            ></a>
+          </li>
+          <li>
+            <a onclick="menu('Workflow Results')"
+              ><span class="glyphicon glyphicon-list-alt"></span
+            ></a>
+          </li>
         </ul>
         <ul
           class="pagination pagination-lg"
-          style="margin: 0px; padding-left: 29px; padding-top: 9px"
+          style="margin: 0px; padding-left: 300px; padding-top: 9px"
         >
           <li>
             <a href="#"><span class="glyphicon glyphicon-refresh"></span></a>
@@ -107,64 +99,63 @@ block content %}
             class="btn-group"
             style="z-index:2; position: absolute; right: 0vw"
           >
-          <table
-          class="table table-bordered dt-responsive nowrap"
-          cellspacing="0"
-          width="100%"
-        >
-          <tbody>
-            <tr>
-              <td style="text-align: center; vertical-align: middle;">
-                Workflow
-              </td>
-              <td style="min-width: 20vw">
-                <select id="current-workflow" class="form-control"></select>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: center; vertical-align: middle;">
-                Runtime
-              </td>
-              <td style="min-width: 20vw">
-                <select id="current-runtime" class="form-control"></select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <table
+              class="table table-bordered dt-responsive nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    Workflow
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="current-workflow" class="form-control"></select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    Runtime
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="current-runtime" class="form-control"></select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div
             class="btn-group"
             style="width: 20vw; z-index:2; position: absolute;"
           >
-          <table
-          class="table table-bordered dt-responsive nowrap"
-          cellspacing="0"
-          width="100%"
-        >
-          <tbody>
-            <tr>
-              <td style="text-align: center; vertical-align: middle;">
-                Service Creation
-              </td>
-              <td style="min-width: 20vw">
-                <select id="service-type" class="form-control"></select>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: center; vertical-align: middle;">
-                Edge Creation
-              </td>
-              <td style="min-width: 20vw">
-                <select id="edge-type" class="form-control">
-                  <option value="success">Success</option>
-                  <option value="failure">Failure</option>
-                  <option value="prerequisite">Prerequisite</option>
-                </select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
+            <table
+              class="table table-bordered dt-responsive nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    Service Creation
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="service-type" class="form-control"></select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    Edge Creation
+                  </td>
+                  <td style="min-width: 20vw">
+                    <select id="edge-type" class="form-control">
+                      <option value="success">Success</option>
+                      <option value="failure">Failure</option>
+                      <option value="prerequisite">Prerequisite</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div
@@ -226,18 +217,24 @@ block content %}
       <li><a tabindex="-1" href="#">Move Nodes</a></li>
     </ul>
   </li>
-  <li class="menu-entry global">
-    <a tabindex="-1" href="#">Create Workflow</a>
+  <li class="dropdown-submenu menu-entry global">
+    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+      >Workflow<span class="caret-right"></span
+    ></a>
+    <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Edit Workflow</a></li>
+      <li><a tabindex="-1" href="#">Create Workflow</a></li>
+      <li><a tabindex="-1" href="#">Add to Workflow</a></li>
+      <li><a tabindex="-1" href="#">Run Workflow</a></li>
+      <li><a tabindex="-1" href="#">Run Workflow with Updates</a></li>
+      <li><a tabindex="-1" href="#">Stop Workflow</a></li>
+      <li><a tabindex="-1" href="#">Run Workflow with Updates</a></li>
+      <li><a tabindex="-1" href="#">Run Workflow with Updates</a></li>
+    </ul>
   </li>
+
   <li class="menu-entry global">
-    <a tabindex="-1" href="#">Add to Workflow</a>
-  </li>
-  <li class="menu-entry global"><a tabindex="-1" href="#">Run Workflow</a></li>
-  <li class="menu-entry global">
-    <a tabindex="-1" href="#">Run Workflow with Updates</a>
-  </li>
-  <li class="menu-entry global">
-    <a tabindex="-1" href="#">Stop Workflow</a>
+    <a tabindex="-1" href="#"></a>
   </li>
   <li class="menu-entry global"><a tabindex="-1" href="#">Edit Workflow</a></li>
   <li class="menu-entry global">

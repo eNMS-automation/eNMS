@@ -79,7 +79,9 @@ function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
-  workflow.services.filter((s) => s.iteration_values != "").map(drawIterationEdge);
+  workflow.services
+    .filter((s) => s.iteration_values != "")
+    .map(drawIterationEdge);
   for (const [id, label] of Object.entries(workflow.labels)) {
     drawLabel(id, label);
   }
@@ -267,7 +269,9 @@ function menu(entry) {
 function saveWorkflowService(service, update) {
   if (update) {
     nodes.update(serviceToNode(service));
-    let serviceIndex = workflow.services.findIndex((service) => service.id == service.id);
+    let serviceIndex = workflow.services.findIndex(
+      (service) => service.id == service.id
+    );
     workflow.services[serviceIndex] = service;
   } else {
     addServicesToWorkflow([service.id]);
@@ -299,7 +303,9 @@ function addServicesToWorkflow(services) {
           .val()
           .join("-")
       : services;
-    call(`/add_services_to_workflow/${workflow.id}/${services}`, function(result) {
+    call(`/add_services_to_workflow/${workflow.id}/${services}`, function(
+      result
+    ) {
       workflow.last_modified = result.update_time;
       result.services.forEach((service, index) => {
         $("#add_services").remove();
@@ -399,9 +405,15 @@ function serviceToNode(service, index) {
   const defaultService = ["Start", "End"].includes(service.name);
   return {
     id: service.id,
-    shape: service.type == "workflow" ? "ellipse" : defaultService ? "circle" : "box",
+    shape:
+      service.type == "workflow"
+        ? "ellipse"
+        : defaultService
+        ? "circle"
+        : "box",
     color: defaultService ? "pink" : "#D2E5FF",
-    label: service.type == "workflow" ? `     ${service.name}     ` : service.name,
+    label:
+      service.type == "workflow" ? `     ${service.name}     ` : service.name,
     name: service.name,
     type: service.type,
     title: formatServiceTitle(service),
@@ -522,7 +534,8 @@ function savePositions() {
 Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
   Run: (service) => normalRun(service.id),
-  "Run with Updates": (service) => showTypePanel(service.type, service.id, "run"),
+  "Run with Updates": (service) =>
+    showTypePanel(service.type, service.id, "run"),
   "Run Workflow": () => runWorkflow(),
   "Run Workflow with Updates": () => runWorkflow(true),
   Results: showResultsPanel,
@@ -610,7 +623,9 @@ function showRestartWorkflowPanel(workflow, service) {
 
 // eslint-disable-next-line
 function restartWorkflow() {
-  fCall(`/run_service/${workflow.id}`, `#restart_workflow-form`, function(result) {
+  fCall(`/run_service/${workflow.id}`, `#restart_workflow-form`, function(
+    result
+  ) {
     $(`#restart_workflow-${workflow.id}`).remove();
     runLogic(result);
   });

@@ -16,21 +16,18 @@ const theme = {
   ],
 };
 
-function drawDiagrams(diagram, name, data) {
+function drawDiagrams(diagram, data) {
   diagram.setOption({
     tooltip: {
-      formatter: "{a} <br/>{b} : {c} ({d}%)",
+      formatter: "{b} : {c} ({d}%)",
     },
     series: [
       {
-        name: name,
         type: "pie",
-        radius: ["35%", "55%"],
         data: data,
       },
     ],
   });
-  return diagram;
 }
 
 function computeData(objects) {

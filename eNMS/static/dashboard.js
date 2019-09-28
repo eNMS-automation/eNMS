@@ -21,7 +21,7 @@ $(function() {
     }
     for (const [type, objects] of Object.entries(result.properties)) {
       const diagram = echarts.init(document.getElementById(type), theme);
-      drawDiagrams(diagram, type, computeData(objects));
+      drawDiagrams(diagram, computeData(objects));
       diagrams[type] = diagram;
     }
   });
@@ -29,7 +29,7 @@ $(function() {
   $.each(defaultProperties, function(type, property) {
     $(`#${type}-properties`).on("change", function() {
       call(`/counters/${this.value}/${type}`, function(objects) {
-        drawDiagrams(diagrams[type], type, computeData(objects));
+        drawDiagrams(diagrams[type], computeData(objects));
       });
     });
   });

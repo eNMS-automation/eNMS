@@ -680,20 +680,20 @@ function displayWorkflowState(result) {
           false: "#FF6666",
           skipped: "#D3D3D3",
         };
-        if (id in nodes._data) {
+        if (nodes && id in nodes._data && !(["1", "2"].includes(id))) {
           colorService(id, color[state.success]);
           if (state.type != "workflow" && state.number_of_targets) {
             let progress = `${state.completed}/${state.number_of_targets}`;
             if (state.failed > 0) progress += ` (${state.failed} failed)`;
             nodes.update({
               id: id,
-              label: `${nodes.get(id).name}\n${progress}`,
+              label: `${nodes.get(id).name}\nProgress: ${progress}`,
             });
           }
         }
       });
     }
-    if (result.state.edges) {
+    if (edges && result.state.edges) {
       $.each(result.state.edges, (id, devices) => {
         const label = devices == 1 ? "DEVICE" : "DEVICES";
         edges.update({

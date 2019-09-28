@@ -13,7 +13,7 @@ const defaultProperties = {
 };
 
 $(function() {
-  const diagrams = {}
+  const diagrams = {};
 
   call("/count_models", function(result) {
     for (const type of Object.keys(defaultProperties)) {

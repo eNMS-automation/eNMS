@@ -667,7 +667,7 @@ function displayWorkflowState(result) {
     } else {
       for (const [type, progress] of Object.entries(result.state.progress)) {
         data = computeData(progress);
-        drawDiagrams(diagrams[type], type, data)
+        drawDiagrams(diagrams[type], type, data);
       }
     }
     $("#status").text(`Status: ${result.state.status}`);
@@ -738,9 +738,9 @@ function getWorkflowState(periodic) {
 (function() {
   $("#left-arrow,#right-arrow").addClass("disabled");
   diagrams = {
-    "service": echarts.init(document.getElementById("progress-service"), theme),
-    "device": echarts.init(document.getElementById("progress-device"), theme),
-  }
+    service: echarts.init(document.getElementById("progress-service"), theme),
+    device: echarts.init(document.getElementById("progress-device"), theme),
+  };
   $("#edge-type").on("change", function() {
     switchMode(this.value);
   });

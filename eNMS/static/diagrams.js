@@ -19,57 +19,13 @@ const theme = {
 function drawDiagrams(diagram, name, data) {
   diagram.setOption({
     tooltip: {
-      trigger: "item",
       formatter: "{a} <br/>{b} : {c} ({d}%)",
-    },
-    calculable: true,
-    legend: {
-      x: "center",
-      y: "bottom",
-      data: data,
-    },
-    toolbox: {
-      show: true,
-      feature: {
-        magicType: {
-          show: true,
-          type: ["pie", "funnel"],
-          option: {
-            funnel: {
-              x: "25%",
-              width: "50%",
-              funnelAlign: "center",
-              max: 1548,
-            },
-          },
-        },
-      },
     },
     series: [
       {
         name: name,
         type: "pie",
         radius: ["35%", "55%"],
-        itemStyle: {
-          normal: {
-            label: {
-              show: true,
-            },
-            labelLine: {
-              show: true,
-            },
-          },
-          emphasis: {
-            label: {
-              show: true,
-              position: "center",
-              textStyle: {
-                fontSize: "14",
-                fontWeight: "normal",
-              },
-            },
-          },
-        },
         data: data,
       },
     ],

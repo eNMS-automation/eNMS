@@ -343,7 +343,6 @@ function preprocessForm(panel, id, type, duplicate) {
 }
 
 function initSelect(el, model, parentId, single) {
-  console.log(model, single)
   el.select2({
     multiple: !single,
     closeOnSelect: single ? true : false,
@@ -545,7 +544,7 @@ function initTable(type, instance, runtime) {
     },
   });
   createSearchHeaders(type, table);
-  if (["changelog", "syslog", "run", "configuration"].includes(type)) {
+  if (["changelog", "syslog", "run", "configuration", "result"].includes(type)) {
     table.order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type))

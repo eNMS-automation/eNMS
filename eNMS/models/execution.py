@@ -295,7 +295,6 @@ class Run(AbstractBase):
                 device_results = {
                     device.name: self.get_results(payload, device) for device in devices
                 }
-            print('ooo'*200, device_results)
             for device_name, r in deepcopy(device_results).items():
                 self.create_result(r, fetch("device", name=device_name))
                 if not r["success"]:

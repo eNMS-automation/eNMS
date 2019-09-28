@@ -12,17 +12,6 @@ const defaultProperties = {
   task: "status",
 };
 
-function computeData(objects) {
-  let data = [];
-  for (const [key, value] of Object.entries(objects)) {
-    data.push({
-      value: value,
-      name: key,
-    });
-  }
-  return data;
-}
-
 $(function() {
   const diagrams = {}
 

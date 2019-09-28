@@ -74,6 +74,7 @@ let arrowHistory = [];
 let arrowPointer = -1;
 let currentRuntime;
 let triggerMenu;
+let diagrams;
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
@@ -660,15 +661,13 @@ function emptyProgressBar() {
 // eslint-disable-next-line
 function displayWorkflowState(result) {
   resetDisplay();
-  console.log(result.state);
   if (result.state && Object.entries(result.state).length) {
     if (Object.entries(result.state.progress).length === 0) {
       emptyProgressBar();
     } else {
       for (const [type, progress] of Object.entries(result.state.progress)) {
-        console.log(`progress-${type}`)
-        drawDiagrams(progress, `progress-${type}`)
-
+        data = computeData(progress);
+        drawDiagrams(diagrams[type], type, data)
       }
     }
     $("#status").text(`Status: ${result.state.status}`);
@@ -738,6 +737,10 @@ function getWorkflowState(periodic) {
 
 (function() {
   $("#left-arrow,#right-arrow").addClass("disabled");
+  diagrams = {
+    "service": echarts.init(document.getElementById("progress-service"), theme),
+    "device": echarts.init(document.getElementById("progress-device"), theme),
+  }
   $("#edge-type").on("change", function() {
     switchMode(this.value);
   });

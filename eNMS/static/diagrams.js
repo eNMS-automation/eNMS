@@ -281,3 +281,14 @@ function drawDiagrams(diagram, name, data) {
   });
   return diagram;
 }
+
+function computeData(objects) {
+  let data = [];
+  for (const [key, value] of Object.entries(objects)) {
+    data.push({
+      value: value,
+      name: key,
+    });
+  }
+  return data;
+}

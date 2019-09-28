@@ -67,7 +67,7 @@ let nodes;
 let edges;
 let graph;
 let selectedObject;
-let currentMode;
+let currentMode = "motion";
 let mousePosition;
 let currLabel;
 let arrowHistory = [];
@@ -154,6 +154,7 @@ function displayWorkflow(workflowData) {
   });
   displayWorkflowState(workflowData);
   rectangleSelection($("#network"), graph, nodes);
+  currentMode = "motion";
   return graph;
 }
 
@@ -493,19 +494,13 @@ function deleteSelection() {
 }
 
 function switchMode(mode) {
-  if (!mode) {
-    currentMode = currentMode == "motion" ? $("#edge-type").val() : "motion";
-  } else if (mode == "motion") {
-    currentMode = "motion";
-    graph.addNodeMode();
-  } else {
-    currentMode = mode;
-    graph.addEdgeMode();
-  }
+  currentMode = mode || currentMode == "motion" ? $("#edge-type").val() : "motion";
   if (currentMode == "motion") {
+    graph.addNodeMode();
     alertify.notify("Mode: node motion.", "success", 5);
   } else {
-    alertify.notify(`Mode: creation of ${mode} edge.`, "success", 5);
+    graph.addEdgeMode();
+    alertify.notify(`Mode: creation of ${currentMode} edge.`, "success", 5);
   }
   $(".dropdown-submenu a.menu-layer")
     .next("ul")
@@ -745,6 +740,9 @@ function getWorkflowState(periodic) {
 
 (function() {
   $("#left-arrow,#right-arrow").addClass("disabled");
+  $("#edge-type").on("change", function() {
+    switchMode(this.value);
+  });
   call("/get_all/workflow", function(workflows) {
     workflows.sort((a, b) => a.name.localeCompare(b.name));
     for (let i = 0; i < workflows.length; i++) {

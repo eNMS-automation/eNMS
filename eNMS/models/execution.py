@@ -169,22 +169,16 @@ class Run(AbstractBase):
         else:
             return "N/A"
 
-    def get_state(self, property):
-        return app.run_db[self.runtime].get(property)
+    @property
+    def state(self):
+        return app.run_db[self.parent_runtime]
 
     def set_state(self, **kwargs):
         app.run_db[self.runtime].update(**kwargs)
-        if self.workflow:
-            app.run_db[self.parent_runtime]["services"][self.service.id].update(
-                **kwargs
-            )
-            if "success" in kwargs:
-                key = "passed" if kwargs["success"] else "failed"
-                app.run_db[self.parent_runtime]["progress"][key] += 1
 
     @property
     def stop(self):
-        return self.get_state("stop") or app.run_db[self.parent_runtime].get("stop")
+        return self.state["status"] == "stop"
 
     def compute_devices(self, payload):
         if self.service.python_query:
@@ -340,8 +334,8 @@ class Run(AbstractBase):
             self.log("error", chr(10).join(format_exc().splitlines()))
         self.eval(self.service.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
-        completed, failed = self.get_state("completed"), self.get_state("failed")
-        self.set_state(failed=failed + 1 - results["success"], completed=completed + 1)
+        self.state["progress"]["devices_completed"] += 1
+        self.state["progress"]["devices_failed"] += 1 - results["success"]
         return results
 
     def log(self, severity, log):

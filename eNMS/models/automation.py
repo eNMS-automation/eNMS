@@ -71,6 +71,23 @@ class Service(AbstractBase):
     def filename(self):
         return app.strip_all(self.name)
 
+    def init_state(self, run):
+        if run.parent_runtime not in app.run_db:
+            app.run_db[run.parent_runtime] = {
+                "status": "idle",
+                "success": False,
+                "progress": {
+                    "devices_total": "unknown",
+                    "devices_completed": 0,
+                    "devices_failed": 0,
+                },
+                "attempt": 0,
+                "waiting_time": {
+                    "total": service.waiting_time,
+                    "left": service.waiting_time,
+                },
+            }
+
     def generate_row(self, table):
         return [
             f"Running" if app.service_db[self.id]["runs"] else "Idle",

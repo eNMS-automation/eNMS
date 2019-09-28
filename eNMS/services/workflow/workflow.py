@@ -46,8 +46,8 @@ class Workflow(Service):
             end.positions[self.name] = (500, 0)
 
     def init_state(self, run):
-        app.run_db[run.runtime].update(
-            {
+        if run.parent_runtime not in app.run_db:
+            app.run_db[run.parent_runtime] = {
                 "edges": defaultdict(int),
                 "progress": {
                     "devices_total": "unknown",
@@ -57,21 +57,9 @@ class Workflow(Service):
                     "services_total": len(self.services)
                     "services_failed": 0,
                 },
-                "services": {
-                    service.id: {
-                        "state": "idle",
-                        "success": False,
-                        "progress": {
-                            "devices_total": "unknown",
-                            "devices_completed": 0,
-                            "devices_failed": 0,
-                        },
-                    } for service in self.services
-                },
-                "state": "idle",
+                "status": "idle",
                 "success": False,
             }
-        )
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)

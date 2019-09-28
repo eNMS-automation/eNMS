@@ -206,8 +206,7 @@ class Run(AbstractBase):
             devices = set(self.service.devices)
             for pool in self.service.pools:
                 devices |= set(pool.devices)
-        print(self.service, self.run_state)
-        self.run_state["progress"]["devices_total"] = len(devices)
+        self.run_state["progress"]["devices"]["total"] = len(devices)
         return devices
 
     def init_state(self):
@@ -215,9 +214,10 @@ class Run(AbstractBase):
             "status": "Idle",
             "success": False,
             "progress": {
-                "devices_total": "unknown",
-                "devices_completed": 0,
-                "devices_failed": 0,
+                "devices" : {
+                    "total": "unknown",
+                    "passed": 0,
+                    "failed": 0,
             },
             "attempt": 0,
             "waiting_time": {
@@ -230,11 +230,12 @@ class Run(AbstractBase):
                 "edges": defaultdict(int),
                 "services": defaultdict(dict),
             })
-            state["progress"].update({
-                "services_completed": 0,
-                "services_total": len(self.service.services),
-                "services_failed": 0,
-            })
+            state["progress"]["services"] = {
+                "total": len(self.service.services),
+                "passed": 0,
+                "failed": 0,
+                "skipped": 0,
+            }
         if self.parent_runtime == self.runtime:
             if self.parent_runtime in app.run_db:
                 return
@@ -370,8 +371,8 @@ class Run(AbstractBase):
         self.eval(self.service.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
         if args:
-            self.run_state["progress"]["devices_completed"] += 1
-            self.run_state["progress"]["devices_failed"] += 1 - results["success"]
+            status = "passed" if results["success"] else "failed"
+            self.run_state["progress"]["devices"][status] += 1
         return results
 
     def log(self, severity, log):

@@ -413,7 +413,12 @@ function serviceToNode(service, index) {
         ? "circle"
         : "box",
     color: defaultService ? "pink" : "#D2E5FF",
-    font: { size: 15, multi: "html", align: "left", bold: { color: '#000000'} },
+    font: {
+      size: 15,
+      multi: "html",
+      align: "left",
+      bold: { color: "#000000" },
+    },
     label:
       service.type == "workflow" ? `     ${service.name}     ` : service.name,
     name: service.name,
@@ -682,7 +687,7 @@ function displayWorkflowState(result) {
           false: "#FF6666",
           skipped: "#D3D3D3",
         };
-        if (nodes && id in nodes._data && !(["1", "2"].includes(id))) {
+        if (nodes && id in nodes._data && !["1", "2"].includes(id)) {
           colorService(id, color[state.success]);
           if (state.type != "workflow" && state.number_of_targets) {
             let progress = `${state.completed}/${state.number_of_targets}`;

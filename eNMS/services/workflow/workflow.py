@@ -88,12 +88,12 @@ class Workflow(Service):
                 "success" if service_results["success"] else "failure",
             ):
                 successors.append(successor)
-                print("kkk"*200, run.run_state)
                 run.run_state["edges"][edge.id] += 1
             for successor in successors:
                 services.append(successor)
                 if successor == self.services[1]:
                     success = True
+            run.run_state["progress"]["devices"]["passed" if success else "failed"] += 1
             if not skip_service and not service.skip:
                 sleep(service.waiting_time)
         return {"payload": payload, "success": success}

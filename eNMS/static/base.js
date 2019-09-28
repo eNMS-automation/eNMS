@@ -544,7 +544,9 @@ function initTable(type, instance, runtime) {
     },
   });
   createSearchHeaders(type, table);
-  if (["changelog", "syslog", "run", "configuration", "result"].includes(type)) {
+  if (
+    ["changelog", "syslog", "run", "configuration", "result"].includes(type)
+  ) {
     table.order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type))

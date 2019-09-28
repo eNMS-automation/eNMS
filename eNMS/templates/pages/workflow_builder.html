@@ -189,15 +189,26 @@ block content %}
           style="width: 20vw; z-index:2; position: absolute; left: 30vw"
         >
           <strong><p id="status"></p></strong>
-          <div id="progressbar" class="progress" style="display: none">
+          <div id="progress-service" class="progress" style="display: none">
             <div
-              id="progress-success"
+              id="progress-service-success"
               class="progress-bar progress-bar-success"
             >
-              <span id="progress-success-span" style="color:black;"></span>
+              <span id="progress-service-success-span" style="color:black;"></span>
             </div>
-            <div id="progress-failure" class="progress-bar progress-bar-danger">
-              <span id="progress-failure-span" style="color:black;"></span>
+            <div id="progress-service-failure" class="progress-bar progress-bar-danger">
+              <span id="progress-service-failure-span" style="color:black;"></span>
+            </div>
+          </div>
+          <div id="progress-device" class="progress" style="display: none">
+            <div
+              id="progress-device-success"
+              class="progress-bar progress-bar-success"
+            >
+              <span id="progress-device-success-span" style="color:black;"></span>
+            </div>
+            <div id="progress-device-failure" class="progress-bar progress-bar-danger">
+              <span id="progress-device-failure-span" style="color:black;"></span>
             </div>
           </div>
         </div>

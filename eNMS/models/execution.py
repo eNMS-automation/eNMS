@@ -218,6 +218,7 @@ class Run(AbstractBase):
                     "total": "unknown",
                     "passed": 0,
                     "failed": 0,
+                },
             },
             "attempt": 0,
             "waiting_time": {

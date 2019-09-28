@@ -45,22 +45,6 @@ class Workflow(Service):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    def init_state(self, run):
-        if run.parent_runtime not in app.run_db:
-            app.run_db[run.parent_runtime] = {
-                "edges": defaultdict(int),
-                "progress": {
-                    "devices_total": "unknown",
-                    "devices_completed": 0,
-                    "devices_failed": 0,
-                    "services_completed": 0,
-                    "services_total": len(self.services)
-                    "services_failed": 0,
-                },
-                "status": "idle",
-                "success": False,
-            }
-
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
         services = list(run.start_services)
@@ -94,9 +78,6 @@ class Workflow(Service):
                 service_run = factory("run", **kwargs)
                 Session.commit()
                 service_results = service_run.run(payload)
-            app.run_db[run.runtime]["services"][service.id][
-                "success"
-            ] = service_results["success"]
             successors = []
             for successor, edge in service.adjacent_services(
                 self,
@@ -104,7 +85,7 @@ class Workflow(Service):
                 "success" if service_results["success"] else "failure",
             ):
                 successors.append(successor)
-                app.run_db[run.runtime]["edges"][edge.id] += 1
+                run.run_state["edges"][edge.id] += 1
             for successor in successors:
                 services.append(successor)
                 if successor == self.services[1]:

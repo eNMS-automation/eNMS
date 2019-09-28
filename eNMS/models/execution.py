@@ -170,12 +170,12 @@ class Run(AbstractBase):
             return "N/A"
 
     @property
-    def state(self):
+    def run_state(self):
         return app.run_db[self.parent_runtime]
 
     @property
     def stop(self):
-        return self.state["status"] == "stop"
+        return self.run_state["status"] == "stop"
 
     def compute_devices(self, payload):
         if self.service.python_query:
@@ -203,16 +203,41 @@ class Run(AbstractBase):
             devices = set(self.service.devices)
             for pool in self.service.pools:
                 devices |= set(pool.devices)
-        self.state["progress"]["devices_total"] = len(devices)
+        self.run_state["progress"]["devices_total"] = len(devices)
         return devices
 
+    def init_state(self):
+        if run.parent_runtime in app.run_db:
+            return
+        state = {
+            "status": "Idle",
+            "success": False,
+            "progress": {
+                "devices_total": "unknown",
+                "devices_completed": 0,
+                "devices_failed": 0,
+            },
+            "attempt": 0,
+            "waiting_time": {
+                "total": service.waiting_time,
+                "left": service.waiting_time,
+            },
+        }
+        if self.service.type == "workflow":
+            state["edges"] = defaultdict(int)
+            state["progress"].update({
+                "services_completed": 0,
+                "services_total": len(self.services),
+                "services_failed": 0,
+            })
+        app.run_db[run.parent_runtime] = state
+
     def run(self, payload=None):
+        self.init_state()
         self.log("info", f"{self.service.type} {self.service.name}: Starting")
-        self.state["status"] = "Running"
+        self.run_state["status"] = "Running"
         if payload is None:
             payload = self.service.initial_payload
-        if self.service.type == "workflow":
-            self.service.init_state(self)
         try:
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()
@@ -236,11 +261,11 @@ class Run(AbstractBase):
             self.close_connection_cache()
             Session.commit()
             self.status = "Aborted" if self.stop else "Completed"
-            self.state["status"], self.state["success"] = self.status, results["success"]
+            self.run_state["status"], self.run_state["success"] = self.status, results["success"]
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["logs"] = app.run_logs.pop(self.runtime)
-            self.state = app.run_db.pop(self.runtime)
+            self.state = app.run_db.pop(self.parent_runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {
@@ -331,8 +356,8 @@ class Run(AbstractBase):
         self.eval(self.service.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
         if args:
-            self.state["progress"]["devices_completed"] += 1
-            self.state["progress"]["devices_failed"] += 1 - results["success"]
+            self.run_state["progress"]["devices_completed"] += 1
+            self.run_state["progress"]["devices_failed"] += 1 - results["success"]
         return results
 
     def log(self, severity, log):

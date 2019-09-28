@@ -48,18 +48,35 @@ class Workflow(Service):
     def init_state(self, run):
         app.run_db[run.runtime].update(
             {
-                "services": defaultdict(dict),
                 "edges": defaultdict(int),
-                "progress": defaultdict(int),
+                "progress": {
+                    "devices_total": "unknown",
+                    "devices_completed": 0,
+                    "devices_failed": 0,
+                    "services_completed": 0,
+                    "services_total": len(self.services)
+                    "services_failed": 0,
+                },
+                "services": {
+                    service.id: {
+                        "state": "idle",
+                        "success": False,
+                        "progress": {
+                            "devices_total": "unknown",
+                            "devices_completed": 0,
+                            "devices_failed": 0,
+                        },
+                    } for service in self.services
+                },
+                "state": "idle",
+                "success": False,
             }
         )
 
     def job(self, run, payload, device=None):
-        run.set_state(progress_max=len(self.services))
         number_of_runs = defaultdict(int)
         services = list(run.start_services)
-        visited = set()
-        success = False
+        visited, success = set(), False
         while services:
             if run.stop:
                 return results
@@ -71,7 +88,6 @@ class Workflow(Service):
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
-            app.run_db[run.runtime]["current_service"] = service.get_properties()
             skip_service = False
             if service.skip_python_query:
                 skip_service = run.eval(service.skip_python_query, **locals())

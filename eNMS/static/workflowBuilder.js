@@ -655,6 +655,7 @@ function emptyProgressBar() {
 // eslint-disable-next-line
 function displayWorkflowState(result) {
   resetDisplay();
+  console.log(result.state);
   if (result.state && Object.entries(result.state).length) {
     if (Object.entries(result.state.progress).length === 0) {
       emptyProgressBar();

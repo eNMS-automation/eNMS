@@ -72,9 +72,8 @@ class Service(AbstractBase):
         return app.strip_all(self.name)
 
     def generate_row(self, table):
-        number_of_runs = app.service_db[self.id]["runs"]
         return [
-            f"Running ({number_of_runs})" if number_of_runs else "Idle",
+            f"Running" if app.service_db[self.id]["runs"] else "Idle",
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 400px">
           <li>

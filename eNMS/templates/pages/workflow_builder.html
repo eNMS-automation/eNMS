@@ -43,7 +43,9 @@ block content %}
             ></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+            <a onclick="menu('Delete')"
+              ><span class="glyphicon glyphicon-trash"></span
+            ></a>
           </li>
         </ul>
         <ul
@@ -51,15 +53,19 @@ block content %}
           style="margin: 0px; padding-left: 200px; padding-top: 9px"
         >
           <li>
-            <a href="#"><span class="glyphicon glyphicon-play"></span></a>
+            <a onclick="menu('Run Workflow')"
+              ><span class="glyphicon glyphicon-play"></span
+            ></a>
           </li>
           <li>
-            <a href="#"
+            <a onclick="menu('Run Workflow with Updates')"
               ><span class="glyphicon glyphicon-play-circle"></span
             ></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-pause"></span></a>
+            <a onclick="menu('Stop Workflow')"
+              ><span class="glyphicon glyphicon-pause"></span
+            ></a>
           </li>
           <li>
             <a onclick="menu('Workflow Logs')"

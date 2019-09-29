@@ -273,7 +273,7 @@ function pauseTask(id) {
 // eslint-disable-next-line
 function resumeTask(id) {
   // eslint-disable-line no-unused-vars
-  call(`/task_action/resume/${id}`, function(result) {
+  call(`/task_action/resume/${id}`, function() {
     $(`#pause-resume-${id}`)
       .attr("onclick", `pauseTask('${id}')`)
       .text("Pause");
@@ -282,8 +282,10 @@ function resumeTask(id) {
 }
 
 function parseData(progress) {
-  progress = [
-    {
+  data = []
+  console.log(progress)
+  if (progress.failed) {
+    data.push({
       value: progress.failed,
       name: "Failed",
       itemStyle: {
@@ -291,8 +293,10 @@ function parseData(progress) {
           color: "#FF6666",
         },
       },
-    },
-    {
+    });
+  }
+  if (progress.passed) {
+    data.push({
       value: progress.passed,
       name: "Passed",
       itemStyle: {
@@ -300,11 +304,11 @@ function parseData(progress) {
           color: "#32CD32",
         },
       },
-    },
-  ];
+    });
+  }
   total = progress.failed + progress.passed;
   if (progress.skipped) {
-    progress.pushed({
+    data.pushed({
       value: progress.skipped,
       name: "Skipped",
       itemStyle: {
@@ -314,7 +318,19 @@ function parseData(progress) {
       },
     });
     total += progress.skipped;
-  return progress
+  }
+  if (progress.total - total) {
+    data.push({
+      value: progress.total - total,
+      name: "",
+      itemStyle: {
+        normal: {
+          color: "#FFFFFF",
+        },
+      },
+    });
+  }
+  return data
 }
 
 (function() {

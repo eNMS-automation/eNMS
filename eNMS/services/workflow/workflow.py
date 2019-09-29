@@ -80,7 +80,8 @@ class Workflow(Service):
                 Session.commit()
                 service_results = service_run.run(payload)
                 status = "passed" if service_results["success"] else "failed"
-                run.run_state["progress"]["service"][status] += 1
+                if not device:
+                    run.run_state["progress"]["service"][status] += 1
             successors = []
             for successor, edge in service.adjacent_services(
                 self,

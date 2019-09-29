@@ -603,7 +603,6 @@ $("#network").contextMenu({
 });
 
 function runWorkflow(withUpdates) {
-  emptyProgressBar();
   workflow.services.forEach((service) => colorService(service.id, "#D2E5FF"));
   if (withUpdates) {
     showTypePanel("workflow", workflow.id, "run");
@@ -676,14 +675,16 @@ function displayWorkflowState(result) {
           false: "#FF6666",
           skipped: "#D3D3D3",
         };
+        console.log(result.state.services);
         if (nodes && id in nodes._data && !["1", "2"].includes(id)) {
           colorService(id, color[state.success]);
-          if (state.type != "workflow" && state.number_of_targets) {
-            let progress = `${state.completed}/${state.number_of_targets}`;
-            if (state.failed > 0) progress += ` (${state.failed} failed)`;
+          const progress = state.progress.device;
+          if (progress.total) {
+            let label = `${progress.passed}/${progress.total}`;
+            if (progress.failed > 0) label += ` (${progress.failed} failed)`;
             nodes.update({
               id: id,
-              label: `<b>${nodes.get(id).name}</b>\nProgress: ${progress}`,
+              label: `<b>${nodes.get(id).name}</b>\nProgress: ${label}`,
             });
           }
         }

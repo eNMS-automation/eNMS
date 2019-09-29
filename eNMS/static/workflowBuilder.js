@@ -74,7 +74,6 @@ let arrowHistory = [];
 let arrowPointer = -1;
 let currentRuntime;
 let triggerMenu;
-let diagrams;
 
 function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
@@ -652,18 +651,24 @@ function getServiceState(id) {
   });
 }
 
+function emptyProgressBar() {
+  $("#progress-success,#progress-failure").width("0%");
+  $("#progress-success-span,#progress-failure-span").empty();
+}
+
 // eslint-disable-next-line
 function displayWorkflowState(result) {
   resetDisplay();
-  if (result.state && Object.entries(result.state).length) {
-    if (Object.entries(result.state.progress).length === 0) {
-      
-    } else {
-      for (const [type, progress] of Object.entries(result.state.progress)) {
-        drawDiagrams(diagrams[type], parseData(progress), type);
-      }
-    }
-    $("#status").text(result.state.status);
+  if (Object.entries(result.state.progress).length === 0) {
+    emptyProgressBar();
+  } else {
+    progress = result.state.progress["device"]
+    $("#progress").show();
+    $("#progress-success").width(`${(progress.passed * 100) / progress.total}%`);
+    $("#progress-failure").width(`${(progress.failed * 100) / progress.total}%`);
+    $("#progress-success-span").text(progress.passed);
+    $("#progress-failure-span").text(progress.failed);
+    $("#status").text(`Status: ${result.state.status}`);
     const currService = result.state.current_service;
     if (currService) {
       colorService(currService.id, "#89CFF0");
@@ -675,7 +680,6 @@ function displayWorkflowState(result) {
           false: "#FF6666",
           skipped: "#D3D3D3",
         };
-        console.log(result.state.services);
         if (nodes && id in nodes._data && !["1", "2"].includes(id)) {
           colorService(id, color[state.success]);
           const progress = state.progress.device;
@@ -732,10 +736,7 @@ function getWorkflowState(periodic) {
 
 (function() {
   $("#left-arrow,#right-arrow").addClass("disabled");
-  diagrams = {
-    service: echarts.init(document.getElementById("progress-service")),
-    device: echarts.init(document.getElementById("progress-device")),
-  };
+  progressDiagram = echarts.init(document.getElementById("progress"));
   $("#edge-type").on("change", function() {
     switchMode(this.value);
   });

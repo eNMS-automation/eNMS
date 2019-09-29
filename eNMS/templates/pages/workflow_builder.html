@@ -180,23 +180,29 @@ block content %}
                     <select id="current-runtime" class="form-control"></select>
                   </td>
                 </tr>
-                <tr>
-                    <td style="text-align: center; vertical-align: middle;">
-                      Status
-                    </td>
-                    <td style="text-align: center; vertical-align: middle;">
-                      <p id="status"></p>
-                    </td>
-                  </tr>
               </tbody>
             </table>
           </div>
           <div
             class="btn-group"
-            style="width: 10vw; z-index:2; position: absolute; top: 20vh"
+            style="width: 20vw; z-index:2; position: absolute; left: 25vw"
           >
-            <div id="progress-service" style="height:200px;"></div><br><br>
-            <div id="progress-device" style="height:200px;"></div>
+            <strong><p id="status"></p></strong>
+            <strong><p id="current-job"></p></strong>
+            <div id="progress" class="progress" style="display: none">
+              <div
+                id="progress-success"
+                class="progress-bar progress-bar-success"
+              >
+                <span id="progress-success-span" style="color:black;"></span>
+              </div>
+              <div
+                id="progress-failure"
+                class="progress-bar progress-bar-danger"
+              >
+                <span id="progress-failure-span" style="color:black;"></span>
+              </div>
+            </div>
           </div>
           <div id="network" style="height:80vh; width:100%;"></div>
         </div>

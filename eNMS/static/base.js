@@ -575,12 +575,8 @@ function refreshTable(table, interval) {
 }
 
 // eslint-disable-next-line
-function drawDiagrams(diagram, data, title) {
+function drawDiagrams(diagram, data) {
   diagram.setOption({
-    title : {
-      text: title,
-      x:'center'
-  },
     tooltip: {
       formatter: "{b} : {c} ({d}%)",
     },

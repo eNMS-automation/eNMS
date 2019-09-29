@@ -38,7 +38,7 @@ function showPoolView(poolId) {
     id: `pool-view-${poolId}`,
     theme: "none",
     border: "medium",
-    headerTitle: "Pool view",
+    headerTitle: "Site view",
     position: "center-top 0 58",
     contentSize: "1000 600",
     content: `

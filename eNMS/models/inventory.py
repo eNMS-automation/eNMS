@@ -142,7 +142,7 @@ class Device(CustomDevice):
           </li>
           <li>
             <button type="button" class="btn btn-success"
-            onclick="showPanel('connection', '{self.id}')"
+            onclick="showPanel('device_connection', '{self.id}')"
               ><span class="glyphicon glyphicon-console"></span
             ></button>
           </li>

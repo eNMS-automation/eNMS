@@ -50,9 +50,9 @@ def configure_pool_form(cls):
     return cls
 
 
-class ConnectionForm(BaseForm):
-    template = "connection"
-    form_type = HiddenField(default="connection")
+class DeviceConnectionForm(BaseForm):
+    template = "device_connection"
+    form_type = HiddenField(default="device_connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])
         for property, values in app.custom_properties.items()

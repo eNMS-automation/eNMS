@@ -130,6 +130,6 @@ Object.assign(action, {
   "Device properties": (d) => showTypePanel("device", d.id),
   "Link properties": (l) => showTypePanel("link", l.id),
   "Pool properties": (p) => showTypePanel("pool", p.id),
-  Connect: (d) => showPanel("connection", d.id),
+  Connect: (d) => showPanel("device_connection", d.id),
   Configuration: (d) => showDeviceConfiguration(d.id),
 });

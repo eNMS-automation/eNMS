@@ -562,10 +562,10 @@ function filter(formType) {
 }
 
 // eslint-disable-next-line
-function undoFilter(formType) {
+function refreshTable(formType) {
   $(`#${formType}`).remove();
   tables[formType].ajax.reload(null, false);
-  alertify.notify("Filter removed.", "success", 5);
+  alertify.notify("Table refreshed.", "success", 5);
 }
 
 // eslint-disable-next-line

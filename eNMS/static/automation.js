@@ -281,58 +281,6 @@ function resumeTask(id) {
   });
 }
 
-function parseData(progress) {
-  data = []
-  console.log(progress)
-  if (progress.failed) {
-    data.push({
-      value: progress.failed,
-      name: "Failed",
-      itemStyle: {
-        normal: {
-          color: "#FF6666",
-        },
-      },
-    });
-  }
-  if (progress.passed) {
-    data.push({
-      value: progress.passed,
-      name: "Passed",
-      itemStyle: {
-        normal: {
-          color: "#32CD32",
-        },
-      },
-    });
-  }
-  total = progress.failed + progress.passed;
-  if (progress.skipped) {
-    data.pushed({
-      value: progress.skipped,
-      name: "Skipped",
-      itemStyle: {
-        normal: {
-          color: "#D3D3D3",
-        },
-      },
-    });
-    total += progress.skipped;
-  }
-  if (progress.total - total) {
-    data.push({
-      value: progress.total - total,
-      name: "",
-      itemStyle: {
-        normal: {
-          color: "#FFFFFF",
-        },
-      },
-    });
-  }
-  return data
-}
-
 (function() {
   if (page == "table/service" || page == "workflow_builder") {
     $("#service-type").selectpicker({ liveSearch: true });

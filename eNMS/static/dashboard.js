@@ -3,6 +3,7 @@ global
 call: false
 */
 
+const diagrams = {};
 const defaultProperties = {
   device: "model",
   link: "model",
@@ -11,6 +12,20 @@ const defaultProperties = {
   workflow: "vendor",
   task: "status",
 };
+
+function drawDiagrams(diagram, data) {
+  diagram.setOption({
+    tooltip: {
+      formatter: "{b} : {c} ({d}%)",
+    },
+    series: [
+      {
+        type: "pie",
+        data: data,
+      },
+    ],
+  });
+}
 
 function parseData(data) {
   let result = [];
@@ -24,8 +39,6 @@ function parseData(data) {
 }
 
 $(function() {
-  const diagrams = {};
-
   call("/count_models", function(result) {
     for (const type of Object.keys(defaultProperties)) {
       $(`#count-${type}`).text(result.counters[type]);

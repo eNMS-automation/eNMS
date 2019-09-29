@@ -574,21 +574,6 @@ function refreshTable(table, interval) {
   setTimeout(() => refreshTable(table, interval), interval);
 }
 
-// eslint-disable-next-line
-function drawDiagrams(diagram, data) {
-  diagram.setOption({
-    tooltip: {
-      formatter: "{b} : {c} ({d}%)",
-    },
-    series: [
-      {
-        type: "pie",
-        data: data,
-      },
-    ],
-  });
-}
-
 function initSidebar() {
   let setContentHeight = function() {
     $(".right_col").css("min-height", $(window).height());

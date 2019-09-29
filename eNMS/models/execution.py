@@ -186,7 +186,7 @@ class Run(AbstractBase):
                 device = fetch(
                     "device",
                     allow_none=True,
-                    **{self.service.query_property_type: value},
+                    **{self.service.device_query_property: value},
                 )
                 if device:
                     devices.append(device)

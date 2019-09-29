@@ -15,7 +15,7 @@ class ServiceForm(BaseForm):
     name = StringField("Name")
     description = StringField("Description")
     device_query = StringField("Device Query")
-    query_property_type = SelectField(
+    device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
     devices = MultipleInstanceField("Devices")

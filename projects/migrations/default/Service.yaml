@@ -26,7 +26,7 @@
     - -300
     - 0
   push_to_git: false
-  query_property_type: ip_address
+  device_query_property: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
@@ -62,7 +62,7 @@
     - 200
     - 0
   push_to_git: false
-  query_property_type: ip_address
+  device_query_property: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
@@ -93,7 +93,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  query_property_type: ip_address
+  device_query_property: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
@@ -124,7 +124,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  query_property_type: ip_address
+  device_query_property: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
@@ -155,7 +155,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  query_property_type: ip_address
+  device_query_property: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
@@ -186,7 +186,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  query_property_type: ip_address
+  device_query_property: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
@@ -220,7 +220,7 @@
     - 0
     - 300
   push_to_git: false
-  query_property_type: ip_address
+  device_query_property: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10
@@ -254,7 +254,7 @@
     - 0
     - -200
   push_to_git: false
-  query_property_type: ip_address
+  device_query_property: ip_address
   send_notification: false
   send_notification_method: mail_feedback_notification
   time_between_retries: 10

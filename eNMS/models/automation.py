@@ -39,7 +39,7 @@ class Service(AbstractBase):
         "Workflow", secondary=service_workflow_table, back_populates="services"
     )
     device_query = Column(SmallString)
-    query_property_type = Column(SmallString, default="ip_address")
+    device_query_property = Column(SmallString, default="ip_address")
     devices = relationship(
         "Device", secondary=service_device_table, back_populates="services"
     )

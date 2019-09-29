@@ -653,23 +653,18 @@ function getServiceState(id) {
   });
 }
 
-function emptyProgressBar() {
-  $("#progress-success,#progress-failure").width("0%");
-  $("#progress-success-span,#progress-failure-span").empty();
-}
-
 // eslint-disable-next-line
 function displayWorkflowState(result) {
   resetDisplay();
   if (result.state && Object.entries(result.state).length) {
     if (Object.entries(result.state.progress).length === 0) {
-      emptyProgressBar();
+      
     } else {
       for (const [type, progress] of Object.entries(result.state.progress)) {
         drawDiagrams(diagrams[type], parseData(progress), type);
       }
     }
-    $("#status").text(`Status: ${result.state.status}`);
+    $("#status").text(result.state.status);
     const currService = result.state.current_service;
     if (currService) {
       colorService(currService.id, "#89CFF0");

@@ -4,9 +4,9 @@ action: false
 alertify: false
 call: false
 createPanel: false
-diffview: false
 fCall: false
-getRuntimes: false
+initSelect: false
+initTable: false
 openUrl: false
 showPanel: false
 showTypePanel: false
@@ -131,5 +131,5 @@ Object.assign(action, {
   "Link properties": (l) => showTypePanel("link", l.id),
   "Pool properties": (p) => showTypePanel("pool", p.id),
   Connect: (d) => showPanel("connection", d.id),
-  Configuration: (d) => showConfigurationPanel(d.id, d.name),
+  Configuration: (d) => showDeviceConfiguration(d.id),
 });

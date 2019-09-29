@@ -2,19 +2,19 @@
 global
 alertify: false
 call: false
+cantorPairing: false
 createPanel: false
 diffview: false
 displayWorkflow: false
 fCall: false
 getServiceState: false
+initTable: false
 JSONEditor: false
 page: false
-saveWorkflowService: false
+serviceTypes: false
 showTypePanel: false
 table: false
 */
-
-let currentResults = {};
 
 // eslint-disable-next-line
 function openServicePanel() {
@@ -109,10 +109,11 @@ function getRuntimes(type, id) {
 function showResultsPanel(service, runtime) {
   $("#result").remove();
   createPanel("result", `Results - ${service.name}`, null, function() {
-    resultTable = initTable("result", service, runtime);
+    initTable("result", service, runtime);
   });
 }
 
+// eslint-disable-next-line
 function compare(type) {
   const v1 = $("input[name=v1]:checked").val();
   const v2 = $("input[name=v2]:checked").val();

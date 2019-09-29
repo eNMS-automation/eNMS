@@ -3,9 +3,9 @@ global
 action: false
 alertify: false
 call: false
-fCall: false
 L: false
-linkFilteringPanel: false
+serializeForm: false
+showFilteringPanel: false
 showPoolView: false
 showTypePanel: false
 viewType: false

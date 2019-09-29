@@ -3,7 +3,6 @@ global
 alertify: false
 csrf_token: false
 documentationUrl: false
-filteringPanel: false
 filteringProperties: false
 formProperties: false
 job: false
@@ -12,13 +11,12 @@ NProgress: false
 page: false
 panelCode: false
 Promise: false
-properties: false
 relations: false
-saveService: false
+relationships: false
 saveWorkflow: false
 saveWorkflowEdge: false
-table: false
-type: false
+saveWorkflowService: false
+tableProperties: false
 workflowRunMode: false
 */
 
@@ -199,6 +197,7 @@ function openUrl(url) {
   win.focus();
 }
 
+// eslint-disable-next-line
 function cantorPairing(x, y) {
   return ((x + y) * (x + y + 1)) / 2 + y;
 }
@@ -392,6 +391,7 @@ function configureForm(form, id, panelId) {
         selectedTextFormat: "count > 3",
       });
     } else if (["object", "object-list"].includes(type)) {
+      let model;
       if (relationships[form]) {
         model = relationships[form][property].model;
       } else {
@@ -487,7 +487,7 @@ function processData(type, id) {
     `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
-      tableType = type.includes("service") ? "service" : type;
+      const tableType = type.includes("service") ? "service" : type;
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (page == "workflow_builder") {
@@ -534,7 +534,7 @@ function initTable(type, instance, runtime) {
       url: `/table_filtering/${type}`,
       type: "POST",
       data: (d) => {
-        form = $(`#${type}_filtering`).length
+        const form = $(`#${type}_filtering`).length
           ? `#${type}_filtering-form`
           : `#search-${type}-form`;
         d.form = serializeForm(form);
@@ -549,10 +549,10 @@ function initTable(type, instance, runtime) {
   ) {
     table.order([0, "desc"]).draw();
   }
-  if (["run", "service", "task", "workflow"].includes(type))
+  if (["run", "service", "task", "workflow"].includes(type)) {
     refreshTable(table, 3000);
+  }
   tables[type] = table;
-  return table;
 }
 
 // eslint-disable-next-line
@@ -626,8 +626,8 @@ function initSidebar() {
 
   $("#menu_toggle").on("click", function() {
     if ($("body").hasClass("nav-md")) {
-      $("#eNMS").css({"font-size": "20px"});
-      $("#eNMS-version").css({"font-size": "15px"});
+      $("#eNMS").css({ "font-size": "20px" });
+      $("#eNMS-version").css({ "font-size": "15px" });
       $("#sidebar-menu")
         .find("li.active ul")
         .hide();
@@ -638,8 +638,8 @@ function initSidebar() {
         .find("li.active")
         .removeClass("active");
     } else {
-      $("#eNMS").css({"font-size": "30px"});
-      $("#eNMS-version").css({"font-size": "20px"});
+      $("#eNMS").css({ "font-size": "30px" });
+      $("#eNMS-version").css({ "font-size": "20px" });
       $("#sidebar-menu")
         .find("li.active-sm ul")
         .show();
@@ -749,7 +749,7 @@ if (typeof NProgress != "undefined") {
 
 $(document).ready(function() {
   initSidebar();
-  if (page.includes("table")) table = initTable(page.split("/")[1]);
+  if (page.includes("table")) initTable(page.split("/")[1]);
   configureForm(page);
   doc(page);
   detectUserInactivity();

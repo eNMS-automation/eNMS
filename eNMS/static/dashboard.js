@@ -1,6 +1,7 @@
 /*
 global
 call: false
+echarts: false
 */
 
 const diagrams = {};

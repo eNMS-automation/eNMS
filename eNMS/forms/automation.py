@@ -38,7 +38,7 @@ class ServiceForm(BaseForm):
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip = BooleanField("Skip")
-    skip_python_query = StringField("Skip (Python Query)")
+    skip_query = StringField("Skip Query (Python)")
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     initial_payload = DictField()
@@ -49,7 +49,7 @@ class ServiceForm(BaseForm):
     result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
-    query_fields = ["device_query", "skip_python_query", "iteration_values"]
+    query_fields = ["device_query", "skip_query", "iteration_values"]
 
     def validate(self):
         valid_form = super().validate()

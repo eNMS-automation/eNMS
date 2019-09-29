@@ -49,7 +49,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -108,7 +108,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -143,7 +143,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -178,7 +178,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -213,7 +213,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -248,7 +248,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -284,7 +284,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -320,7 +320,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -370,7 +370,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -414,7 +414,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: true
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: configure_bgp_service
   vendor: ''
@@ -456,7 +456,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
   source_file_includes_globbing: false
   time_between_retries: 10
@@ -497,7 +497,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: database_backup_service
   vendor: ''
@@ -536,7 +536,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_backup_service
@@ -574,7 +574,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_backup_service
   use_device_driver: true
@@ -619,7 +619,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -680,7 +680,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -731,7 +731,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -790,7 +790,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -835,7 +835,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_configuration_service
   use_device_driver: true
@@ -890,7 +890,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -937,7 +937,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -981,7 +981,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1025,7 +1025,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1068,7 +1068,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -1107,7 +1107,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
   vendor: ''
@@ -1146,7 +1146,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   source_code: "# Service Iteration 1: targets\r\ntargets = ['Loopback101', 'Loopback15']\
     \ if device.name == \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('iteration_devices',\
     \ targets, device=device.name)\r\n\r\n# Service iteration 3: derived devices with\
@@ -1205,7 +1205,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1263,7 +1263,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1321,7 +1321,7 @@
   send_notification: true
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1380,7 +1380,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_extraction_service
   variable1: simple_variable
@@ -1427,7 +1427,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: dict_included
@@ -1471,7 +1471,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -1509,7 +1509,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_rollback_service
   use_device_driver: true
@@ -1565,7 +1565,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1624,7 +1624,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1682,7 +1682,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1741,7 +1741,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1797,7 +1797,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1836,7 +1836,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
@@ -1875,7 +1875,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
     , \"192.168.105.5\", section=\"pools\")\r\ndevices = [\"Boston\", \"Cincinnati\"\
@@ -1933,7 +1933,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -1991,7 +1991,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2049,7 +2049,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2096,7 +2096,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2138,7 +2138,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2182,7 +2182,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2224,7 +2224,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2266,7 +2266,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: napalm_getters_service
   use_device_driver: true
@@ -2315,7 +2315,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2362,7 +2362,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: text
@@ -2409,7 +2409,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2464,7 +2464,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2522,7 +2522,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2580,7 +2580,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2638,7 +2638,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2696,7 +2696,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -2745,7 +2745,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -2790,7 +2790,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -2827,7 +2827,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
@@ -2878,7 +2878,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_extraction_service
   variable1: boolean
@@ -2929,7 +2929,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_extraction_service
   variable1: list
@@ -2975,7 +2975,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -3019,7 +3019,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   type: payload_validation_service
   validation_method: dict_included
@@ -3067,7 +3067,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -3108,7 +3108,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   source_code: "result = {\r\n \"get_var\": get_var('iteration_devices', device=device.name),\r\
     \n\"version\": get_result(\"Show version with multiprocessing\", device=device.name),\r\
     \n\"napalm\": get_result(\"netmiko_check_no_vrf_napalm\", device=device.name)\r\
@@ -3164,7 +3164,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -3223,7 +3223,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_new_connection: false
   strip_command: true
   strip_prompt: true
@@ -3267,7 +3267,7 @@
   send_notification_method: mail_feedback_notification
   services: [Start, End, poller_service, git_push_configurations]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3308,7 +3308,7 @@
   services: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
     netmiko_check_no_vrf_test]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3349,7 +3349,7 @@
   services: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
     netmiko_check_no_vrf_napalm]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3394,7 +3394,7 @@
   services: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config,
     process_payload1]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3436,7 +3436,7 @@
       Validate dict via results', 'Payload Workflow: Validate text via results', 'Payload
       Workflow: Validate text via payload', 'Payload Workflow: Validate dict via payload']
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3478,7 +3478,7 @@
       multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow, Workflow with
       iteration targets]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3518,7 +3518,7 @@
   services: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
     get_interfaces]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3563,7 +3563,7 @@
   services: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, REST
       is_alive]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3604,7 +3604,7 @@
     Show vrf with payload helper, Show vrf with python query, REST is_alive, show
       runtime with get_result helper]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3646,7 +3646,7 @@
     'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
       get facts failed match']
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3687,7 +3687,7 @@
       Arista show configuration (regex match)', 'Ansible Workflow: Arista show configuration
       (dict match)']
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3736,7 +3736,7 @@
   services: [Start, End, Example1, Show version with multiprocessing, REST is_alive,
     napalm_configure_bgp_1]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start, Example1]
   start_workflows: []
   time_between_retries: 10
@@ -3777,7 +3777,7 @@
       iteration 2', 'Iteration Target Workflow: netmiko iteration 1', 'Iteration Target
       Workflow: netmiko iteration 3', 'Iteration Targets Workflow: No device targets']
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3819,7 +3819,7 @@
       initial variables', 'Payload Workflow: Extraction 1', 'Payload Workflow: Extraction
       2', 'Payload Workflow: Validation 1', 'Payload Workflow: Validation 2']
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3860,7 +3860,7 @@
   services: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
     'Variable Access Subworkflow: Access variables for iteration']
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3901,7 +3901,7 @@
   services: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
       getters and match mechanism workflow, payload_extraction_validation_worflow]
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10
@@ -3943,7 +3943,7 @@
   send_notification_method: mail_feedback_notification
   services: [Start, End, 'Workflow with iteration targets: use target for show interface']
   skip: false
-  skip_python_query: ''
+  skip_query: ''
   start_services: [Start]
   start_workflows: []
   time_between_retries: 10

@@ -58,7 +58,7 @@ class Service(AbstractBase):
     color = Column(SmallString, default="#D2E5FF")
     initial_payload = Column(MutableDict)
     skip = Column(Boolean, default=False)
-    skip_python_query = Column(SmallString)
+    skip_query = Column(SmallString)
     iteration_values = Column(LargeString)
     iteration_variable_name = Column(SmallString, default="iteration_value")
     result_postprocessing = Column(LargeString)

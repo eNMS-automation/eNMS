@@ -5,7 +5,7 @@ Python code
 There are a number of places in the GUI where the user is allowed to use pure python code:
 
 - Inside double curved brackets in the service parameters (``{{python expression}}``). This is called "Variable substitution" (fields that support variable substitution are marked with a light blue background).
-- In the ``Python Query`` field of the "Devices" section of a service. This field lets the user define the targets of a service programmatically.
+- In the ``Device Query`` field of the "Devices" section of a service. This field lets the user define the targets of a service programmatically.
 - In the ``Skip Service If Python Query evaluates to True`` field of the "Workflow" section of a service. This field lets the user define whether or not a service should be skipped programmatically.
 - In the ``Query`` field of the Variable Extraction Service.
 - In the code of a Python Snippet Service.

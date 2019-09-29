@@ -51,9 +51,7 @@ When you create a new Service Instance, the form will also contain multiple sele
 There are two ways to select devices:
 
 - Directly from the "Devices" and "Pools" drop-down. The service will run on all selected devices, as well as on the devices of all selected pools.
-- From the payload when the service runs inside a workflow.
-You can tick the ``Define devices from payload`` box and write a Python query to extract devices
-(either IP address or names) from the payload.
+- With a python query to extract devices (either IP address or names) from the payload.
 The python query can use the variables and functions described in the "Advanced" section of the documentation.
 
 A service can run on its devices either sequentially, or in parallel if the ``Multiprocessing`` checkbox is ticked.

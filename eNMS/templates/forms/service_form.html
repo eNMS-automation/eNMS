@@ -213,8 +213,7 @@
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
         <label class="hide-run"
-          >Python Query (Derives alternate device targets based on Workflow
-          Device Target)</label
+          >Device Query (define targets from a python query)</label
         >
         <div class="form-group">
           {{ form.device_query(id=form_type + '-device_query',
@@ -272,7 +271,7 @@
           >Skip Service If Python Query evaluates to True</label
         >
         <div class="form-group">
-          {{ form.skip_python_query(id=form_type + '-skip_python_query',
+          {{ form.skip_query(id=form_type + '-skip_query',
           class="form-control hide-run add-id") }}
         </div>
         <label class="hide-run">Maximum number of runs</label>

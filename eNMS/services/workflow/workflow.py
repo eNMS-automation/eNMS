@@ -60,8 +60,8 @@ class Workflow(Service):
             number_of_runs[service.name] += 1
             visited.add(service)
             skip_service = False
-            if service.skip_python_query:
-                skip_service = run.eval(service.skip_python_query, **locals())
+            if service.skip_query:
+                skip_service = run.eval(service.skip_query, **locals())
             if skip_service or service.skip:
                 service_results = {"success": "skipped"}
                 run.run_state["progress"]["service"]["skipped"] += 1

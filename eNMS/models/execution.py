@@ -193,7 +193,7 @@ class Run(AbstractBase):
                 else:
                     not_found.append(value)
             if not_found:
-                raise Exception(f"Python query invalid targets: {', '.join(not_found)}")
+                raise Exception(f"Device query invalid targets: {', '.join(not_found)}")
         else:
             devices = set(self.devices)
             for pool in self.pools:
@@ -556,7 +556,7 @@ class Run(AbstractBase):
             return builtins[function](query, _self.python_code_kwargs(**locals))
         except Exception as exc:
             raise Exception(
-                "Python Query / Variable Substitution Failure."
+                "Variable Substitution Failure."
                 " Check that all variables are defined."
                 " If you are using the 'device' variable, "
                 f"check that the service has targets. ({str(exc)})"

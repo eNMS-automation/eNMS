@@ -80,7 +80,7 @@ class SwissArmyKnifeService(Service):
                 app.run(service.id)
         Session.commit()
         for pool in fetch_all("pool"):
-            if pool.device_current_configuration:
+            if pool.device_configuration:
                 pool.compute_pool()
         return {"success": True}
 

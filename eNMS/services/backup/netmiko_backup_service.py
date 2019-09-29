@@ -57,7 +57,7 @@ class NetmikoBackupService(ConnectionService):
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             )
-            if configuration == device.current_configuration:
+            if configuration == device.configuration:
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)
             factory(
@@ -67,7 +67,7 @@ class NetmikoBackupService(ConnectionService):
                 duration=device.last_duration,
                 configuration=configuration,
             )
-            device.current_configuration = configuration
+            device.configuration = configuration
             with open(path_device_config / device.name, "w") as file:
                 file.write(configuration)
             self.generate_yaml_file(path_device_config, device)

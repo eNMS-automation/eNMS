@@ -32,7 +32,7 @@ device_properties = [
 ]
 
 pool_device_properties = (
-    object_common_properties + device_properties[:-1] + ["current_configuration"]
+    object_common_properties + device_properties[:-1] + ["configuration"]
 )
 
 link_properties = object_common_properties + [

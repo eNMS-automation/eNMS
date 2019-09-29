@@ -117,7 +117,7 @@ service_filtering_properties = [
 filtering_properties = {
     "changelog": changelog_table_properties,
     "configuration": configuration_table_properties,
-    "device": device_table_properties + ["current_configuration"],
+    "device": device_table_properties + ["configuration"],
     "event": event_table_properties,
     "link": link_table_properties,
     "pool": pool_table_properties,

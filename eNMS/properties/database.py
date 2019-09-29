@@ -1,7 +1,7 @@
 import_classes = ["user", "device", "link", "pool", "service", "workflow_edge", "task"]
 
 dont_track_changes = [
-    "current_configuration",
+    "configuration",
     "current_device",
     "current_service",
     "last_modified",
@@ -12,7 +12,7 @@ dont_track_changes = [
 dont_migrate = {
     "device": [
         "id",
-        "current_configuration",
+        "configuration",
         "services",
         "source",
         "destination",

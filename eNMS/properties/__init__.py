@@ -22,4 +22,4 @@ property_names = {}
 
 private_properties = ["password", "enable_password", "custom_password"]
 
-dont_serialize = ["configurations", "current_configuration"]
+dont_serialize = ["configuration"]

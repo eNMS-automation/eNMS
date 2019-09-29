@@ -89,7 +89,7 @@ class GetConfiguration(Resource):
     decorators = [auth.login_required]
 
     def get(self, name):
-        return fetch("device", name=name).current_configuration
+        return fetch("device", name=name).configuration
 
 
 class GetResult(Resource):

@@ -45,9 +45,9 @@ class NapalmBackupService(ConnectionService):
             config = app.str_dict(napalm_connection.get_config())
             device.last_status = "Success"
             device.last_runtime = (datetime.now() - now).total_seconds()
-            if config == device.current_configuration:
+            if config == device.configuration:
                 return {"success": True, "result": "no change"}
-            device.current_configuration = config
+            device.configuration = config
             with open(path_device_config / device.name, "w") as file:
                 file.write(config)
             device.last_update = str(now)

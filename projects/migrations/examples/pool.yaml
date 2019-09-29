@@ -1,6 +1,6 @@
 - description: All objects
-  device_current_configuration: ''
-  device_current_configuration_match: inclusion
+  device_configuration: ''
+  device_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -65,8 +65,8 @@
   tasks: []
   users: []
 - description: Devices only
-  device_current_configuration: ''
-  device_current_configuration_match: inclusion
+  device_configuration: ''
+  device_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -129,8 +129,8 @@
   tasks: []
   users: []
 - description: Links only
-  device_current_configuration: ''
-  device_current_configuration_match: inclusion
+  device_configuration: ''
+  device_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -192,8 +192,8 @@
   tasks: []
   users: []
 - description: Datacenter San Francisco
-  device_current_configuration: ''
-  device_current_configuration_match: inclusion
+  device_configuration: ''
+  device_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -256,8 +256,8 @@
   tasks: []
   users: []
 - description: Datacenter New York
-  device_current_configuration: ''
-  device_current_configuration_match: inclusion
+  device_configuration: ''
+  device_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -321,8 +321,8 @@
   tasks: []
   users: []
 - description: Datacenter Chicago
-  device_current_configuration: ''
-  device_current_configuration_match: inclusion
+  device_configuration: ''
+  device_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''
@@ -385,8 +385,8 @@
   tasks: []
   users: []
 - description: ''
-  device_current_configuration: ''
-  device_current_configuration_match: inclusion
+  device_configuration: ''
+  device_configuration_match: inclusion
   device_description: ''
   device_description_match: inclusion
   device_icon: ''

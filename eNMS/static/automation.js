@@ -281,20 +281,18 @@ function resumeTask(id) {
   });
 }
 
-function computeData(objects) {
-  let data = [];
-  for (const [key, value] of Object.entries(objects)) {
-    data.push({
-      value: value,
-      name: key,
+function parseData(progress) {
+  return [
+    {
+      value: 10,
+      name: "test",
       itemStyle: {
         normal: {
           color: "#c23531",
         },
       },
-    });
-  }
-  return data;
+    },
+  ];
 }
 
 (function() {

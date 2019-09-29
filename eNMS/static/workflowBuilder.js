@@ -666,8 +666,7 @@ function displayWorkflowState(result) {
       emptyProgressBar();
     } else {
       for (const [type, progress] of Object.entries(result.state.progress)) {
-        data = computeData(progress);
-        drawDiagrams(diagrams[type], data);
+        drawDiagrams(diagrams[type], parseData(progress), type);
       }
     }
     $("#status").text(`Status: ${result.state.status}`);

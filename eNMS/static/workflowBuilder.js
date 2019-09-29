@@ -271,7 +271,7 @@ function saveWorkflowService(service, update) {
   if (update) {
     nodes.update(serviceToNode(service));
     let serviceIndex = workflow.services.findIndex(
-      (service) => service.id == service.id
+      (s) => s.id == service.id
     );
     workflow.services[serviceIndex] = service;
   } else {

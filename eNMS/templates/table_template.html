@@ -7,7 +7,7 @@
   </button>
   {% endif %} {% if type not in ("configuration", "run", "result", "syslog") %}
   {% set func = "openServicePanel" if type == "service" else "showTypePanel" %}
-  <button class="btn btn-primary" onclick="{{ func }}('{{ type }}')">
+  <button class="btn btn-primary" onclick="{{ func }}('{{ type }}')" title="Create">
     <span class="glyphicon glyphicon-plus"></span>
   </button>
   {% endif %} {% if type == "pool" %}
@@ -24,7 +24,7 @@
   </button>
   <button
     class="btn btn-info btn-file"
-    onclick="refreshTable('{{ type }}')"
+    onclick="refreshTable('{{ type }}', true)"
     title="Refresh"
   >
   <span class="glyphicon glyphicon-refresh"></span>

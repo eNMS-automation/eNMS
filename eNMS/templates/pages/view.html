@@ -100,19 +100,21 @@ title %} {% block stylesheets %} {{ super() }}
           {% if view_type == 'network' %}
           <div
             class="btn-group-horizontal"
-            style="width: 20vw; z-index:1; position: absolute; top: 10px; right:5vw;"
+            style="z-index:1; position: absolute; top: 10px; left: 5vw"
           >
             <button
-              class="btn btn-success btn-file"
+              class="btn btn-primary"
+              style="width: 5vw;"
               onclick="showViewFilteringPanel('device')"
             >
-              Filter Devices
+              <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
             </button>
             <button
-              class="btn btn-success btn-file"
+              class="btn btn-primary"
+              style="width: 5vw;"
               onclick="showViewFilteringPanel('link')"
             >
-              Filter Links
+              <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
             </button>
           </div>
           {% endif %}

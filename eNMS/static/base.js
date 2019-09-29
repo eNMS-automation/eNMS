@@ -507,11 +507,11 @@ function processData(type, id) {
 }
 
 // eslint-disable-next-line
-function createSearchHeaders(type, table) {
+function createSearchHeaders(type) {
   tableProperties[type || "result"].forEach((property) => {
     if (!filteringProperties[type || "result"].includes(property)) return;
     $(`#${type}_filtering-${property}`).on("keyup change", function() {
-      table.ajax.reload(null, false);
+      tables[type].ajax.reload(null, false);
     });
   });
 }
@@ -519,7 +519,7 @@ function createSearchHeaders(type, table) {
 // eslint-disable-next-line
 function initTable(type, instance, runtime) {
   // eslint-disable-next-line new-cap
-  const table = $(`#${type}-table`).DataTable({
+  tables[type] = $(`#${type}-table`).DataTable({
     serverSide: true,
     orderCellsTop: true,
     autoWidth: false,
@@ -543,16 +543,15 @@ function initTable(type, instance, runtime) {
       },
     },
   });
-  createSearchHeaders(type, table);
+  createSearchHeaders(type);
   if (
     ["changelog", "syslog", "run", "configuration", "result"].includes(type)
   ) {
-    table.order([0, "desc"]).draw();
+    tables[type].order([0, "desc"]).draw();
   }
-  if (["run", "service", "task", "workflow"].includes(type)) {
-    refreshTable(table, 3000);
+  if (["run", "service", "task", "workflow"].includes(type)) {   
+    refreshTablePeriodically(type, 3000);
   }
-  tables[type] = table;
 }
 
 // eslint-disable-next-line
@@ -562,16 +561,15 @@ function filter(formType) {
 }
 
 // eslint-disable-next-line
-function refreshTable(formType) {
-  $(`#${formType}`).remove();
-  tables[formType].ajax.reload(null, false);
-  alertify.notify("Table refreshed.", "success", 5);
+function refreshTable(tableType, displayNotification) {
+  tables[tableType].ajax.reload(null, false);
+  if (displayNotification) alertify.notify("Table refreshed.", "success", 5);
 }
 
 // eslint-disable-next-line
-function refreshTable(table, interval) {
-  if (userIsActive) table.ajax.reload(null, false);
-  setTimeout(() => refreshTable(table, interval), interval);
+function refreshTablePeriodically(tableType, interval) {
+  if (userIsActive) refreshTable(tableType, false);
+  setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
 }
 
 function initSidebar() {

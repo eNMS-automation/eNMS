@@ -736,7 +736,6 @@ function getWorkflowState(periodic) {
 
 (function() {
   $("#left-arrow,#right-arrow").addClass("disabled");
-  progressDiagram = echarts.init(document.getElementById("progress"));
   $("#edge-type").on("change", function() {
     switchMode(this.value);
   });

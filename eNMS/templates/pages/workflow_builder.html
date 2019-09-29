@@ -25,15 +25,17 @@ block content %}
             ></a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-font"></span></a>
-          </li>
+              <a onclick="menu('Create Label')"
+                ><span class="glyphicon glyphicon-font"></span
+              ></a>
+            </li>
           <li>
-            <a onclick="menu('Skip')"
+            <a onclick="menu('Unskip')"
               ><span class="glyphicon glyphicon-ok-circle"></span
             ></a>
           </li>
           <li>
-            <a onclick="menu('Unskip')"
+            <a onclick="menu('Skip')"
               ><span class="glyphicon glyphicon-ban-circle"></span
             ></a>
           </li>
@@ -124,7 +126,7 @@ block content %}
                     <button
                       type="button"
                       class="btn btn-primary"
-                      onclick="showTypePanel()"
+                      onclick="openServicePanel()"
                     >
                       <span class="glyphicon glyphicon-plus"></span>
                     </button>

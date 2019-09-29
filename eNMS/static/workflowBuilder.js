@@ -571,7 +571,10 @@ Object.assign(action, {
 
 // eslint-disable-next-line
 function createLabel() {
-  const params = `${workflow.id}/${mousePosition.x}/${mousePosition.y}`;
+  
+  pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0]
+  console.log(pos, pos[1])
+  const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
     if (currLabel) {
       deleteLabel(currLabel);
@@ -709,7 +712,11 @@ function displayWorkflowState(result) {
 function resetDisplay() {
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
-    colorService(service.id, service.skip ? "#D3D3D3" : "#D2E5FF");
+    nodes.update({
+      id: id,
+      label: service.name,
+      color: service.skip ? "#D3D3D3" : "#D2E5FF",
+    });
   });
   if (!edges) return;
   workflow.edges.forEach((edge) => {

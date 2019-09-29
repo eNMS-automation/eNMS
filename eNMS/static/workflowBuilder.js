@@ -654,16 +654,12 @@ function getServiceState(id) {
   });
 }
 
-function emptyProgressBar() {
-  $("#progress-success,#progress-failure").width("0%");
-  $("#progress-success-span,#progress-failure-span").empty();
-}
-
 // eslint-disable-next-line
 function displayWorkflowState(result) {
+  if (!nodes || !edges) return;
   resetDisplay();
-  if (Object.entries(result.state.progress).length === 0) {
-    emptyProgressBar();
+  if (!result.state) {
+    $("#progress").hide();
   } else {
     progress = result.state.progress["device"]
     $("#progress").show();
@@ -683,7 +679,7 @@ function displayWorkflowState(result) {
           false: "#FF6666",
           skipped: "#D3D3D3",
         };
-        if (nodes && id in nodes._data && !["1", "2"].includes(id)) {
+        if (id in nodes._data && !["1", "2"].includes(id)) {
           colorService(id, color[state.success]);
           const progress = state.progress.device;
           if (progress.total) {
@@ -697,7 +693,7 @@ function displayWorkflowState(result) {
         }
       });
     }
-    if (edges && result.state.edges) {
+    if (result.state.edges) {
       $.each(result.state.edges, (id, devices) => {
         edges.update({
           id: id,
@@ -713,7 +709,7 @@ function resetDisplay() {
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
     nodes.update({
-      id: id,
+      id: service.id,
       label: service.name,
       color: service.skip ? "#D3D3D3" : "#D2E5FF",
     });

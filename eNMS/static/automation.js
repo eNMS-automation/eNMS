@@ -64,13 +64,6 @@ function workflowRunMode(instance, restartForm) {
 }
 
 // eslint-disable-next-line
-function saveService(service, id) {
-  if (page == "workflow_builder") {
-    saveWorkflowService(service, id);
-  }
-}
-
-// eslint-disable-next-line
 function saveWorkflow(newWorkflow) {
   if (page == "workflow_builder") {
     $("#current-workflow").append(

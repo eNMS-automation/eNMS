@@ -490,9 +490,9 @@ function processData(type, id) {
       tableType = type.includes("service") ? "service" : type;
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
-      if (type.includes("service")) saveService(instance, id);
-      if (type == "workflow_edge" && page == "workflow_builder") {
-        saveWorkflowEdge(instance);
+      if (page == "workflow_builder") {
+        if (type == "workflow_edge") saveWorkflowEdge(instance);
+        if (type.includes("service")) saveWorkflowService(instance, id);
       }
       if (type === "workflow" && !id) saveWorkflow(instance);
       alertify.notify(

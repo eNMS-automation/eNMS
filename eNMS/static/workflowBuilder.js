@@ -383,7 +383,7 @@ function stopWorkflow() {
 
 // eslint-disable-next-line
 function changeSkipValue(skip) {
-  const selectedNodes = graph.getSelectedNodes();
+  const selectedNodes = graph.getSelectedNodes().filter((x) => !isNaN(x));
   call(`/skip_services/${skip}/${selectedNodes.join("-")}`, () => {
     workflow.services
       .filter((j) => selectedNodes.includes(j.id))
@@ -571,7 +571,6 @@ Object.assign(action, {
 
 // eslint-disable-next-line
 function createLabel() {
-  
   pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0]
   console.log(pos, pos[1])
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
@@ -707,6 +706,7 @@ function displayWorkflowState(result) {
 
 function resetDisplay() {
   $("#progressbar").hide();
+  console.log( workflow.services)
   workflow.services.forEach((service) => {
     nodes.update({
       id: service.id,
@@ -771,5 +771,4 @@ function getWorkflowState(periodic) {
     $("#edge-type").selectpicker();
     getWorkflowState(true);
   });
-  getWorkflowState(true);
 })();

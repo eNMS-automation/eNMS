@@ -90,12 +90,8 @@ class Run(AbstractBase):
     workflow_device_id = Column(Integer, ForeignKey("device.id"))
     workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
     parent_runtime = Column(SmallString)
-    devices = relationship(
-        "Device", secondary=run_device_table, back_populates="runs"
-    )
-    pools = relationship(
-        "Pool", secondary=run_pool_table, back_populates="runs"
-    )
+    devices = relationship("Device", secondary=run_device_table, back_populates="runs")
+    pools = relationship("Pool", secondary=run_pool_table, back_populates="runs")
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"
@@ -213,13 +209,7 @@ class Run(AbstractBase):
         state = {
             "status": "Idle",
             "success": False,
-            "progress": {
-                "device" : {
-                    "total": "unknown",
-                    "passed": 0,
-                    "failed": 0,
-                },
-            },
+            "progress": {"device": {"total": "unknown", "passed": 0, "failed": 0}},
             "attempt": 0,
             "waiting_time": {
                 "total": self.service.waiting_time,
@@ -227,10 +217,7 @@ class Run(AbstractBase):
             },
         }
         if self.service.type == "workflow":
-            state.update({
-                "edges": defaultdict(int),
-                "services": defaultdict(dict),
-            })
+            state.update({"edges": defaultdict(int), "services": defaultdict(dict)})
             state["progress"]["service"] = {
                 "total": len(self.service.services),
                 "passed": 0,
@@ -334,11 +321,7 @@ class Run(AbstractBase):
 
     def create_result(self, results, device=None):
         self.success = results["success"]
-        result_kw = {
-            "run": self,
-            "result": results,
-            "service": self.service_id,
-        }
+        result_kw = {"run": self, "result": results, "service": self.service_id}
         if self.service.type == "workflow":
             result_kw["workflow"] = self.service_id
         elif self.workflow_id:

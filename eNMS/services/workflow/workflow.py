@@ -4,7 +4,6 @@ from sqlalchemy.orm import backref, relationship
 from time import sleep
 from wtforms import BooleanField, HiddenField
 
-from eNMS import app
 from eNMS.database import Session
 from eNMS.database.base import AbstractBase
 from eNMS.database.dialect import Column, MutableDict, SmallString

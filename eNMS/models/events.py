@@ -57,7 +57,7 @@ class Task(AbstractBase):
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 250px">
           <li>
-            <button type="button" class="btn btn-success 
+            <button type="button" class="btn btn-success
             {'disabled' if self.is_active else 'active'}"
             {'disabled' if self.is_active else 'active'}
             onclick="resumeTask('{self.id}')"

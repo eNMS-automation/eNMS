@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Integer, Float, ForeignKey
+from sqlalchemy import Boolean, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 
 from eNMS import app

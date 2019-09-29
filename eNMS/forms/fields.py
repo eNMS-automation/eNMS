@@ -69,6 +69,9 @@ class InstanceField(SelectField):
         super().__init__(*args, **kwargs)
         self.choices = ()
 
+    def pre_validate(self, form):
+        pass
+
 
 class MultipleInstanceField(SelectMultipleField):
     def __init__(self, *args, **kwargs):

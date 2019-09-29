@@ -8,7 +8,7 @@ style0 = easyxf(
 )
 style1 = easyxf(num_format_str="#,##0.00")
 
-ws = wb.add_sheet("Device")
+ws = wb.add_sheet("device")
 
 for index, header in enumerate(
     ("name", "longitude", "latitude", "subtype", "ip_address")

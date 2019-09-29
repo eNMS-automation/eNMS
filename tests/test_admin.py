@@ -32,7 +32,7 @@ def test_user_management(user_client):
             "password": user,
         }
         user_client.post("/update/user", data=dict_user)
-    assert len(fetch_all("User")) == 4
-    user1 = fetch("User", name="user1")
+    assert len(fetch_all("user")) == 4
+    user1 = fetch("user", name="user1")
     user_client.post("/delete_instance/user/{}".format(user1.id))
-    assert len(fetch_all("User")) == 3
+    assert len(fetch_all("user")) == 3

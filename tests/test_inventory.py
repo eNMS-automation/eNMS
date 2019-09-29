@@ -46,7 +46,7 @@ def define_link(source: int, destination: int) -> ImmutableMultiDict:
 
 @check_pages("table/device", "table/link", "view/network")
 def test_manual_object_creation(user_client):
-    delete_all("device", "Link")
+    delete_all("device", "link")
     for icon in device_icons:
         for description in ("desc1", "desc2"):
             obj_dict = define_device(icon, description)
@@ -57,7 +57,7 @@ def test_manual_object_creation(user_client):
             obj_dict = define_link(source.id, destination.id)
             user_client.post("/update/link", data=obj_dict)
     assert len(fetch_all("device")) == 16
-    assert len(fetch_all("Link")) == 9
+    assert len(fetch_all("link")) == 9
 
 
 def create_from_file(client, file: str):
@@ -70,14 +70,14 @@ def create_from_file(client, file: str):
 def test_object_creation_europe(user_client):
     create_from_file(user_client, "europe.xls")
     assert len(fetch_all("device")) == 33
-    assert len(fetch_all("Link")) == 49
+    assert len(fetch_all("link")) == 49
 
 
 @check_pages("table/device", "table/link", "view/network")
 def test_object_creation_type(user_client):
     create_from_file(user_client, "device_counters.xls")
     assert len(fetch_all("device")) == 27
-    assert len(fetch_all("Link")) == 0
+    assert len(fetch_all("link")) == 0
 
 
 routers = ["router" + str(i) for i in range(5, 20)]
@@ -91,17 +91,17 @@ def test_device_deletion(user_client):
         device = fetch("device", name=device_name)
         user_client.post(f"/delete_instance/device/{device.id}")
     assert len(fetch_all("device")) == 18
-    assert len(fetch_all("Link")) == 18
+    assert len(fetch_all("link")) == 18
 
 
 @check_pages("table/device", "table/link", "view/network")
 def test_link_deletion(user_client):
     create_from_file(user_client, "europe.xls")
     for link_name in links:
-        link = fetch("Link", name=link_name)
+        link = fetch("link", name=link_name)
         user_client.post(f"/delete_instance/link/{link.id}")
     assert len(fetch_all("device")) == 33
-    assert len(fetch_all("Link")) == 38
+    assert len(fetch_all("link")) == 38
 
 
 pool1 = {
@@ -139,12 +139,12 @@ def test_pool_management(user_client):
     create_from_file(user_client, "europe.xls")
     user_client.post("/update/pool", data=create_pool(pool1))
     user_client.post("/update/pool", data=create_pool(pool2))
-    p1, p2 = fetch("Pool", name="pool1"), fetch("Pool", name="pool2")
+    p1, p2 = fetch("pool", name="pool1"), fetch("pool", name="pool2")
     assert len(p1.devices) == 21
     assert len(p1.links) == 20
     assert len(p2.devices) == 12
     assert len(p2.links) == 4
-    assert len(fetch_all("Pool")) == 9
+    assert len(fetch_all("pool")) == 9
     user_client.post(f"/delete_instance/pool/{p1.id}")
     user_client.post(f"/delete_instance/pool/{p2.id}")
-    assert len(fetch_all("Pool")) == 7
+    assert len(fetch_all("pool")) == 7

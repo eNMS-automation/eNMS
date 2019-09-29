@@ -397,7 +397,7 @@ function configureForm(form, id, panelId) {
       } else {
         model = property.substring(0, property.length - 1);
       }
-      initSelect(el, model, panelId);
+      initSelect(el, model, panelId, type == "object");
     }
   }
 }

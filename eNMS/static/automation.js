@@ -282,17 +282,39 @@ function resumeTask(id) {
 }
 
 function parseData(progress) {
-  return [
+  progress = [
     {
-      value: 10,
-      name: "test",
+      value: progress.failed,
+      name: "Failed",
       itemStyle: {
         normal: {
-          color: "#c23531",
+          color: "#FF6666",
+        },
+      },
+    },
+    {
+      value: progress.passed,
+      name: "Passed",
+      itemStyle: {
+        normal: {
+          color: "#32CD32",
         },
       },
     },
   ];
+  total = progress.failed + progress.passed;
+  if (progress.skipped) {
+    progress.pushed({
+      value: progress.skipped,
+      name: "Skipped",
+      itemStyle: {
+        normal: {
+          color: "#D3D3D3",
+        },
+      },
+    });
+    total += progress.skipped;
+  return progress
 }
 
 (function() {

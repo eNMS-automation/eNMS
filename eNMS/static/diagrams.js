@@ -3,19 +3,6 @@ global
 echarts: false
 */
 
-const theme = {
-  color: [
-    "#26B99A",
-    "#34495E",
-    "#BDC3C7",
-    "#3498DB",
-    "#9B59B6",
-    "#8abb6f",
-    "#759c6a",
-    "#bfd3b7",
-  ],
-};
-
 function drawDiagrams(diagram, data) {
   diagram.setOption({
     tooltip: {
@@ -36,7 +23,13 @@ function computeData(objects) {
     data.push({
       value: value,
       name: key,
+      itemStyle: {
+        normal: {
+          color: "#c23531",
+        },
+      },
     });
   }
+  console.log(data);
   return data;
 }

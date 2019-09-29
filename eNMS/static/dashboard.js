@@ -20,7 +20,7 @@ $(function() {
       $(`#count-${type}`).text(result.counters[type]);
     }
     for (const [type, objects] of Object.entries(result.properties)) {
-      const diagram = echarts.init(document.getElementById(type), theme);
+      const diagram = echarts.init(document.getElementById(type));
       drawDiagrams(diagram, computeData(objects));
       diagrams[type] = diagram;
     }

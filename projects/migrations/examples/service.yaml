@@ -41,9 +41,9 @@
     payload_extraction_validation_worflow: [-481, -95]
     payload_transfer_workflow: [-459, 10]
     'python Workflow: payload editor and pool helper': ['-326', '45']
-    python_query_workflow: ['-164', '15']
+    device_query_workflow: ['-164', '15']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -100,9 +100,9 @@
     payload_extraction_validation_worflow: [175, 266]
     payload_transfer_workflow: [676, 95]
     'python Workflow: payload editor and pool helper': ['530', '155']
-    python_query_workflow: ['651', '20']
+    device_query_workflow: ['651', '20']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -137,7 +137,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -172,7 +172,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -207,7 +207,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -242,7 +242,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -278,7 +278,7 @@
   positions:
     Configuration Management Workflow: ['0', '300']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -314,7 +314,7 @@
   positions:
     Configuration Management Workflow: ['0', '-200']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -363,7 +363,7 @@
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -281, -178]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   regex: ''
   result_postprocessing: ''
@@ -407,7 +407,7 @@
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       110, -170]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   remote_as: 200
   result_postprocessing: ''
@@ -450,7 +450,7 @@
   positions: {}
   protocol: scp
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -491,7 +491,7 @@
   positions: {}
   protocol: scp
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -530,7 +530,7 @@
   positions: {}
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -568,7 +568,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -613,7 +613,7 @@
     Netmiko_VRF_workflow: ['0', '-150']
   privileged_mode: true
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -671,10 +671,10 @@
     Netmiko_VRF_workflow: ['0', '-50']
     Workflow with separate failure - success path: ['84', '-3']
     'python Workflow: payload editor and pool helper': ['355', '-25']
-    python_query_workflow: ['414', '-154']
+    device_query_workflow: ['414', '-154']
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -725,7 +725,7 @@
     Netmiko_VRF_workflow: ['0', '50']
   privileged_mode: true
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -781,10 +781,10 @@
     Napalm_VRF_workflow: ['0', '150']
     Netmiko_VRF_workflow: ['0', '150']
     Workflow with separate failure - success path: [-57, 41]
-    python_query_workflow: ['337', '-145']
+    device_query_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -829,7 +829,7 @@
   positions:
     Napalm_VRF_workflow: ['0', '-150']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -883,7 +883,7 @@
     payload_transfer_workflow: ['-50', '0']
     'python Workflow: payload editor and pool helper': ['225', '-223']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
@@ -931,7 +931,7 @@
     payload_transfer_workflow: [-223, -72]
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -975,7 +975,7 @@
     Workflow_of_workflows: [-122, -174]
     payload_transfer_workflow: [-180, 211]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -1018,7 +1018,7 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [272, -82]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\
     \nresults[\"result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
@@ -1062,7 +1062,7 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [686, -58]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -1101,7 +1101,7 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [291, 208]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -1140,7 +1140,7 @@
     Workflow with iteration target subworkflows: [283, -152]
     Workflow_of_workflows: [-463, -198]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -1199,7 +1199,7 @@
     Iteration Services Test Workflow: ['-336', '11']
   privileged_mode: false
   push_to_git: false
-  python_query: payload['variables']['devices']
+  device_query: payload['variables']['devices']
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -1257,7 +1257,7 @@
     Iteration Targets Workflow: [216, 129]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -1315,7 +1315,7 @@
     payload_extraction_validation_worflow: [-129, -278]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: true
@@ -1371,7 +1371,7 @@
   positions:
     payload_extraction_validation_worflow: [144, -263]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
@@ -1420,7 +1420,7 @@
   positions:
     payload_extraction_validation_worflow: [-57, -145]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
   query_property_type: ip_address
   result_postprocessing: ''
@@ -1464,7 +1464,7 @@
   positions:
     payload_extraction_validation_worflow: [-73, 96]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   query_property_type: ip_address
   result_postprocessing: ''
@@ -1503,7 +1503,7 @@
   positions:
     Napalm_VRF_workflow: ['3', '47']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -1559,7 +1559,7 @@
     'python Workflow: payload editor and pool helper': ['266', '161']
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -1615,10 +1615,10 @@
   pools: []
   positions:
     Napalm_VRF_workflow: ['9', '139']
-    python_query_workflow: ['245', '32']
+    device_query_workflow: ['245', '32']
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -1673,10 +1673,10 @@
   operating_system: ''
   pools: []
   positions:
-    python_query_workflow: ['-5', '-147']
+    device_query_workflow: ['-5', '-147']
   privileged_mode: false
   push_to_git: false
-  python_query: get_var("test", device=workflow_device.name)
+  device_query: get_var("test", device=workflow_device.name)
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -1732,7 +1732,7 @@
     Netmiko prompts: [22, -74]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   response1: show vrf b
   response2: show vrf c
@@ -1788,7 +1788,7 @@
     Netmiko prompts: [350, 108]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   response1: show vrf
   response2: ''
@@ -1830,7 +1830,7 @@
   positions:
     'python Workflow: payload editor and pool helper': ['-158', '-272']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -1869,7 +1869,7 @@
   positions:
     'python Workflow: payload editor and pool helper': ['-159', '148']
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -1927,7 +1927,7 @@
     'python Workflow: payload editor and pool helper': ['35', '-232']
   privileged_mode: false
   push_to_git: false
-  python_query: get_var("iteration_device", section="pools", device=workflow_device.name)
+  device_query: get_var("iteration_device", section="pools", device=workflow_device.name)
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -1985,7 +1985,7 @@
     'python Workflow: payload editor and pool helper': ['47', '160']
   privileged_mode: false
   push_to_git: false
-  python_query: get_var("iteration_simple", section="pools")
+  device_query: get_var("iteration_simple", section="pools")
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -2043,7 +2043,7 @@
     'python Workflow: payload editor and pool helper': ['328', '91']
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2090,7 +2090,7 @@
   positions:
     Napalm getters and match mechanism workflow: [-377, -267]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2132,7 +2132,7 @@
   positions:
     Napalm getters and match mechanism workflow: [-235, 125]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2176,7 +2176,7 @@
     Napalm getters and match mechanism workflow: [157, 139]
     'Payload Workflow: Payload Extraction with operations': [-418, -325]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2218,7 +2218,7 @@
   positions:
     Napalm getters and match mechanism workflow: [286, -253]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2260,7 +2260,7 @@
   positions:
     Napalm getters and match mechanism workflow: [-27, -269]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2309,7 +2309,7 @@
     Ansible Workflow: [-151, -136]
     Napalm getters and match mechanism workflow: [-30, 126]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2356,7 +2356,7 @@
   positions:
     Ansible Workflow: [27, 98]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2403,7 +2403,7 @@
   positions:
     Ansible Workflow: [248, -170]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2458,7 +2458,7 @@
     Workflow_of_workflows: [178, -196]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2516,7 +2516,7 @@
     Iteration Targets Workflow: [396, -182]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -2574,7 +2574,7 @@
     Iteration Targets Workflow: [-112, 109]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -2632,7 +2632,7 @@
     Iteration Targets Workflow: [173, -219]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -2690,7 +2690,7 @@
     Iteration Targets Workflow: [299, 115]
   privileged_mode: false
   push_to_git: false
-  python_query: get_var("loop_over", device=workflow_device.name)
+  device_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2738,7 +2738,7 @@
   positions:
     payload_extraction_validation_worflow: [459, 97]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query: get_var("textfsm_variable", device=device.name)[0][1]
   query_property_type: ip_address
   result_postprocessing: ''
@@ -2783,7 +2783,7 @@
   positions:
     payload_extraction_validation_worflow: [434, -140]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query: get_var("regex_variable", device=device.name)
   query_property_type: ip_address
   result_postprocessing: ''
@@ -2821,7 +2821,7 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-367, 29]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -2869,7 +2869,7 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-197, -332]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
@@ -2920,7 +2920,7 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-93, 28]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
@@ -2968,7 +2968,7 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [82, -332]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query: get_var("list", device=device.name)
   query_property_type: name
   result_postprocessing: ''
@@ -3012,7 +3012,7 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [204, 18]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query: get_var("dict", device=device.name)
   query_property_type: name
   result_postprocessing: ''
@@ -3060,7 +3060,7 @@
   positions:
     Iteration Targets Workflow: [570, -131]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   result_postprocessing: ''
@@ -3102,7 +3102,7 @@
     'Subworkflow: Access Variable - Result from parent workflow': [178, -241]
     Workflow_of_workflows: [3, -51]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3158,7 +3158,7 @@
     'Subworkflow: Access Variable - Result from parent workflow': [173, 128]
   privileged_mode: false
   push_to_git: false
-  python_query: get_var("loop_over", device=workflow_device.name)
+  device_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3217,7 +3217,7 @@
     Workflow with iteration targets: [239, -121]
   privileged_mode: false
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3260,7 +3260,7 @@
   positions:
     Subworkflow of Workflow: [200, -205]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -3300,7 +3300,7 @@
   positions:
     Workflow_of_workflows: [-481, -23]
   push_to_git: false
-  python_query: get_var("loop_over", device=workflow_device.name)
+  device_query: get_var("loop_over", device=workflow_device.name)
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3341,7 +3341,7 @@
   positions:
     Workflow_of_workflows: [103, 162]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -3386,7 +3386,7 @@
   positions:
     Workflow_of_workflows: [-178, 170]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -3427,7 +3427,7 @@
   positions:
     Subworkflow of Workflow: [217, -229]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: false
@@ -3468,7 +3468,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: ip_address
   result_postprocessing: ''
   send_notification: true
@@ -3510,7 +3510,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3555,7 +3555,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3595,7 +3595,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3637,7 +3637,7 @@
   positions:
     Subworkflow of Workflow: [231, -29]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3678,7 +3678,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3728,7 +3728,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3768,7 +3768,7 @@
   pools: []
   positions: {}
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3810,7 +3810,7 @@
   positions:
     Subworkflow of Workflow: [227, 171]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3852,7 +3852,7 @@
   positions:
     Workflow_of_workflows: [525, -209]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3893,7 +3893,7 @@
   positions:
     Workflow_of_workflows: [-155, -195]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false
@@ -3936,7 +3936,7 @@
     Workflow with iteration target subworkflows: [253, 118]
     Workflow_of_workflows: [-451, 164]
   push_to_git: false
-  python_query: ''
+  device_query: ''
   query_property_type: name
   result_postprocessing: ''
   send_notification: false

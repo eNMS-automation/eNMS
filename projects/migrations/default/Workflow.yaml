@@ -32,4 +32,4 @@
   workflow_traversal_mode: service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''

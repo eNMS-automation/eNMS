@@ -14,7 +14,7 @@ class ServiceForm(BaseForm):
     type = StringField("Service Type")
     name = StringField("Name")
     description = StringField("Description")
-    python_query = StringField("Python Query")
+    device_query = StringField("Device Query")
     query_property_type = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
@@ -49,7 +49,7 @@ class ServiceForm(BaseForm):
     result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
-    query_fields = ["python_query", "skip_python_query", "iteration_values"]
+    query_fields = ["device_query", "skip_python_query", "iteration_values"]
 
     def validate(self):
         valid_form = super().validate()

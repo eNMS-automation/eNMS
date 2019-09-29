@@ -177,8 +177,8 @@ class Run(AbstractBase):
         return self.run_state["status"] == "stop"
 
     def compute_devices(self, payload):
-        if self.service.python_query:
-            values = self.eval(self.service.python_query, **locals())
+        if self.service.device_query:
+            values = self.eval(self.service.device_query, **locals())
             devices, not_found = [], []
             if isinstance(values, str):
                 values = [values]

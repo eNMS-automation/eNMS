@@ -33,7 +33,7 @@
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''
 - completed: 0
   creator: admin
   credentials: device
@@ -69,7 +69,7 @@
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''
 - completed: 0
   creator: admin
   credentials: device
@@ -100,7 +100,7 @@
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''
 - completed: 0
   creator: admin
   credentials: device
@@ -131,7 +131,7 @@
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''
 - completed: 0
   creator: admin
   credentials: device
@@ -162,7 +162,7 @@
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''
 - completed: 0
   creator: admin
   credentials: device
@@ -193,7 +193,7 @@
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''
 - completed: 0
   creator: admin
   credentials: device
@@ -227,7 +227,7 @@
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''
 - completed: 0
   creator: admin
   credentials: device
@@ -261,4 +261,4 @@
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
-  python_query: ''
+  device_query: ''

@@ -12,6 +12,17 @@ const defaultProperties = {
   task: "status",
 };
 
+function parseData(data) {
+  let result = [];
+  for (const [key, value] of Object.entries(data)) {
+    result.push({
+      value: value,
+      name: key,
+    });
+  }
+  return result;
+}
+
 $(function() {
   const diagrams = {};
 
@@ -21,7 +32,7 @@ $(function() {
     }
     for (const [type, objects] of Object.entries(result.properties)) {
       const diagram = echarts.init(document.getElementById(type));
-      drawDiagrams(diagram, computeData(objects));
+      drawDiagrams(diagram, parseData(objects));
       diagrams[type] = diagram;
     }
   });
@@ -29,7 +40,7 @@ $(function() {
   $.each(defaultProperties, function(type, property) {
     $(`#${type}-properties`).on("change", function() {
       call(`/counters/${this.value}/${type}`, function(objects) {
-        drawDiagrams(diagrams[type], computeData(objects));
+        drawDiagrams(diagrams[type], parseData(objects));
       });
     });
   });

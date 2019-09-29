@@ -281,6 +281,22 @@ function resumeTask(id) {
   });
 }
 
+function computeData(objects) {
+  let data = [];
+  for (const [key, value] of Object.entries(objects)) {
+    data.push({
+      value: value,
+      name: key,
+      itemStyle: {
+        normal: {
+          color: "#c23531",
+        },
+      },
+    });
+  }
+  return data;
+}
+
 (function() {
   if (page == "table/service" || page == "workflow_builder") {
     $("#service-type").selectpicker({ liveSearch: true });

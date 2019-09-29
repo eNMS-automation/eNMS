@@ -626,6 +626,8 @@ function initSidebar() {
 
   $("#menu_toggle").on("click", function() {
     if ($("body").hasClass("nav-md")) {
+      $("#eNMS").css({"font-size": "20px"});
+      $("#eNMS-version").css({"font-size": "15px"});
       $("#sidebar-menu")
         .find("li.active ul")
         .hide();
@@ -636,6 +638,8 @@ function initSidebar() {
         .find("li.active")
         .removeClass("active");
     } else {
+      $("#eNMS").css({"font-size": "30px"});
+      $("#eNMS-version").css({"font-size": "20px"});
       $("#sidebar-menu")
         .find("li.active-sm ul")
         .show();

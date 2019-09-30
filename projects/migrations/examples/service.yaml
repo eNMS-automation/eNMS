@@ -41,10 +41,10 @@
     payload_extraction_validation_worflow: [-481, -95]
     payload_transfer_workflow: [-459, 10]
     'python Workflow: payload editor and pool helper': ['-326', '45']
-    device_query_workflow: ['-164', '15']
+    iteration_devices_workflow: ['-164', '15']
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -100,10 +100,10 @@
     payload_extraction_validation_worflow: [175, 266]
     payload_transfer_workflow: [676, 95]
     'python Workflow: payload editor and pool helper': ['530', '155']
-    device_query_workflow: ['651', '20']
+    iteration_devices_workflow: ['651', '20']
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -137,8 +137,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -172,8 +172,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -207,8 +207,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -242,8 +242,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -278,8 +278,8 @@
   positions:
     Configuration Management Workflow: ['0', '300']
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -314,8 +314,8 @@
   positions:
     Configuration Management Workflow: ['0', '-200']
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -363,8 +363,8 @@
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -281, -178]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   regex: ''
   result_postprocessing: ''
   send_notification: false
@@ -407,8 +407,8 @@
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       110, -170]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   remote_as: 200
   result_postprocessing: ''
   send_notification: false
@@ -450,8 +450,8 @@
   positions: {}
   protocol: scp
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -491,8 +491,8 @@
   positions: {}
   protocol: scp
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -530,8 +530,8 @@
   positions: {}
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -568,8 +568,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -613,8 +613,8 @@
     Netmiko_VRF_workflow: ['0', '-150']
   privileged_mode: true
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -671,11 +671,11 @@
     Netmiko_VRF_workflow: ['0', '-50']
     Workflow with separate failure - success path: ['84', '-3']
     'python Workflow: payload editor and pool helper': ['355', '-25']
-    device_query_workflow: ['414', '-154']
+    iteration_devices_workflow: ['414', '-154']
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -725,8 +725,8 @@
     Netmiko_VRF_workflow: ['0', '50']
   privileged_mode: true
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -781,11 +781,11 @@
     Napalm_VRF_workflow: ['0', '150']
     Netmiko_VRF_workflow: ['0', '150']
     Workflow with separate failure - success path: [-57, 41]
-    device_query_workflow: ['337', '-145']
+    iteration_devices_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -829,8 +829,8 @@
   positions:
     Napalm_VRF_workflow: ['0', '-150']
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -883,8 +883,8 @@
     payload_transfer_workflow: ['-50', '0']
     'python Workflow: payload editor and pool helper': ['225', '-223']
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
   send_notification: false
@@ -931,8 +931,8 @@
     payload_transfer_workflow: [-223, -72]
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -975,8 +975,8 @@
     Workflow_of_workflows: [-122, -174]
     payload_transfer_workflow: [-180, 211]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1018,8 +1018,8 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [272, -82]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\
     \nresults[\"result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
   send_notification: false
@@ -1062,8 +1062,8 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [686, -58]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1101,8 +1101,8 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [291, 208]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1140,8 +1140,8 @@
     Workflow with iteration target subworkflows: [283, -152]
     Workflow_of_workflows: [-463, -198]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1199,8 +1199,8 @@
     Iteration Services Test Workflow: ['-336', '11']
   privileged_mode: false
   push_to_git: false
-  device_query: payload['variables']['devices']
-  device_query_property: name
+  iteration_devices: payload['variables']['devices']
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1257,8 +1257,8 @@
     Iteration Targets Workflow: [216, 129]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1315,8 +1315,8 @@
     payload_extraction_validation_worflow: [-129, -278]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
@@ -1371,11 +1371,11 @@
   positions:
     payload_extraction_validation_worflow: [144, -263]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
-  device_query_property: ip_address
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1420,9 +1420,9 @@
   positions:
     payload_extraction_validation_worflow: [-57, -145]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
-  device_query_property: ip_address
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1464,9 +1464,9 @@
   positions:
     payload_extraction_validation_worflow: [-73, 96]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
-  device_query_property: ip_address
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1503,8 +1503,8 @@
   positions:
     Napalm_VRF_workflow: ['3', '47']
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1559,8 +1559,8 @@
     'python Workflow: payload editor and pool helper': ['266', '161']
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1615,11 +1615,11 @@
   pools: []
   positions:
     Napalm_VRF_workflow: ['9', '139']
-    device_query_workflow: ['245', '32']
+    iteration_devices_workflow: ['245', '32']
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1673,11 +1673,11 @@
   operating_system: ''
   pools: []
   positions:
-    device_query_workflow: ['-5', '-147']
+    iteration_devices_workflow: ['-5', '-147']
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("test", device=parent_device.name)
-  device_query_property: name
+  iteration_devices: get_var("test", device=parent_device.name)
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1732,8 +1732,8 @@
     Netmiko prompts: [22, -74]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   response1: show vrf b
   response2: show vrf c
   response3: ''
@@ -1788,8 +1788,8 @@
     Netmiko prompts: [350, 108]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   response1: show vrf
   response2: ''
   response3: ''
@@ -1830,8 +1830,8 @@
   positions:
     'python Workflow: payload editor and pool helper': ['-158', '-272']
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1869,8 +1869,8 @@
   positions:
     'python Workflow: payload editor and pool helper': ['-159', '148']
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1927,8 +1927,8 @@
     'python Workflow: payload editor and pool helper': ['35', '-232']
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("iteration_device", section="pools", device=parent_device.name)
-  device_query_property: name
+  iteration_devices: get_var("iteration_device", section="pools", device=parent_device.name)
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1985,8 +1985,8 @@
     'python Workflow: payload editor and pool helper': ['47', '160']
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("iteration_simple", section="pools")
-  device_query_property: ip_address
+  iteration_devices: get_var("iteration_simple", section="pools")
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2043,8 +2043,8 @@
     'python Workflow: payload editor and pool helper': ['328', '91']
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2090,8 +2090,8 @@
   positions:
     Napalm getters and match mechanism workflow: [-377, -267]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2132,8 +2132,8 @@
   positions:
     Napalm getters and match mechanism workflow: [-235, 125]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2176,8 +2176,8 @@
     Napalm getters and match mechanism workflow: [157, 139]
     'Payload Workflow: Payload Extraction with operations': [-418, -325]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2218,8 +2218,8 @@
   positions:
     Napalm getters and match mechanism workflow: [286, -253]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2260,8 +2260,8 @@
   positions:
     Napalm getters and match mechanism workflow: [-27, -269]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2309,8 +2309,8 @@
     Ansible Workflow: [-151, -136]
     Napalm getters and match mechanism workflow: [-30, 126]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2356,8 +2356,8 @@
   positions:
     Ansible Workflow: [27, 98]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2403,8 +2403,8 @@
   positions:
     Ansible Workflow: [248, -170]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2458,8 +2458,8 @@
     Workflow_of_workflows: [178, -196]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2516,8 +2516,8 @@
     Iteration Targets Workflow: [396, -182]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2574,8 +2574,8 @@
     Iteration Targets Workflow: [-112, 109]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2632,8 +2632,8 @@
     Iteration Targets Workflow: [173, -219]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2690,8 +2690,8 @@
     Iteration Targets Workflow: [299, 115]
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("loop_over", device=parent_device.name)
-  device_query_property: name
+  iteration_devices: get_var("loop_over", device=parent_device.name)
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2738,9 +2738,9 @@
   positions:
     payload_extraction_validation_worflow: [459, 97]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query: get_var("textfsm_variable", device=device.name)[0][1]
-  device_query_property: ip_address
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2783,9 +2783,9 @@
   positions:
     payload_extraction_validation_worflow: [434, -140]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query: get_var("regex_variable", device=device.name)
-  device_query_property: ip_address
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2821,8 +2821,8 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-367, 29]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2869,11 +2869,11 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-197, -332]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
-  device_query_property: name
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2920,11 +2920,11 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-93, 28]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
-  device_query_property: name
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2968,9 +2968,9 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [82, -332]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query: get_var("list", device=device.name)
-  device_query_property: name
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3012,9 +3012,9 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [204, 18]
   push_to_git: false
-  device_query: ''
+  iteration_devices: ''
   query: get_var("dict", device=device.name)
-  device_query_property: name
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3060,8 +3060,8 @@
   positions:
     Iteration Targets Workflow: [570, -131]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   result_postprocessing: ''
   send_notification: false
@@ -3102,8 +3102,8 @@
     'Subworkflow: Access Variable - Result from parent workflow': [178, -241]
     Workflow_of_workflows: [3, -51]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3158,8 +3158,8 @@
     'Subworkflow: Access Variable - Result from parent workflow': [173, 128]
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("loop_over", device=parent_device.name)
-  device_query_property: name
+  iteration_devices: get_var("loop_over", device=parent_device.name)
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3217,8 +3217,8 @@
     Workflow with iteration targets: [239, -121]
   privileged_mode: false
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3260,8 +3260,8 @@
   positions:
     Subworkflow of Workflow: [200, -205]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3300,8 +3300,8 @@
   positions:
     Workflow_of_workflows: [-481, -23]
   push_to_git: false
-  device_query: get_var("loop_over", device=parent_device.name)
-  device_query_property: name
+  iteration_devices: get_var("loop_over", device=parent_device.name)
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3341,8 +3341,8 @@
   positions:
     Workflow_of_workflows: [103, 162]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3386,8 +3386,8 @@
   positions:
     Workflow_of_workflows: [-178, 170]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3427,8 +3427,8 @@
   positions:
     Subworkflow of Workflow: [217, -229]
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3468,8 +3468,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: ip_address
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
@@ -3510,8 +3510,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3555,8 +3555,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3595,8 +3595,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3637,8 +3637,8 @@
   positions:
     Subworkflow of Workflow: [231, -29]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3678,8 +3678,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3728,8 +3728,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3768,8 +3768,8 @@
   pools: []
   positions: {}
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3810,8 +3810,8 @@
   positions:
     Subworkflow of Workflow: [227, 171]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3852,8 +3852,8 @@
   positions:
     Workflow_of_workflows: [525, -209]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3893,8 +3893,8 @@
   positions:
     Workflow_of_workflows: [-155, -195]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3936,8 +3936,8 @@
     Workflow with iteration target subworkflows: [253, 118]
     Workflow_of_workflows: [-451, 164]
   push_to_git: false
-  device_query: ''
-  device_query_property: name
+  iteration_devices: ''
+  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification

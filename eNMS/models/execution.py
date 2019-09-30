@@ -176,8 +176,8 @@ class Run(AbstractBase):
     def stop(self):
         return self.run_state["status"] == "stop"
 
-    def compute_devices_from_query(self, query, property, **locals):
-        values = self.eval(query, **locals)
+    def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805
+        values = _self.eval(query, **locals)
         devices, not_found = set(), []
         if isinstance(values, str):
             values = [values]
@@ -293,13 +293,15 @@ class Run(AbstractBase):
         with args[3]:
             args[4][device.name] = device_result
 
-    def device_iteration(payload, device):
-        derived_devices = self.compute_devices_from_query(self.iteration_devices, self.iteration_devices_property, **locals())
+    def device_iteration(self, payload, device):
+        derived_devices = self.compute_devices_from_query(
+            self.iteration_devices, self.iteration_devices_property, **locals()
+        )
         kwargs = {
             "service": self.service.id,
-            "devices": [device.id for device in derived_devices]
+            "devices": [device.id for device in derived_devices],
             "workflow": self.workflow.id,
-            "parent_device": device.id
+            "parent_device": device.id,
             "parent_runtime": self.parent_runtime,
             "restart_run": self.restart_run,
         }
@@ -314,11 +316,12 @@ class Run(AbstractBase):
             result = self.create_result(result)
             return result
         else:
-            if self.iteration_devices:
+            if self.iteration_devices and not self.parent_device:
                 device_results = {
                     device.name: self.device_iteration(payload, device)
                     for device in devices
                 }
+                return {"success": True, "runtime": self.runtime}
             if self.multiprocessing:
                 device_results = {}
                 thread_lock = Lock()

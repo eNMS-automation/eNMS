@@ -49,6 +49,11 @@ All workflows must now be in the service.yaml file.
 Renaming: python_query -> device_query
 query_property_type -> device_query_property
 skip_python_query -> skip_query
+workflow_device -> parent_device (because iteration targets work for a service too)
+
+In the migration file:
+device_query -> iteration_devices
+query_property_type -> iteration_devices_property
 
 - the database package for MySQL and PostgreSQL are no longer part of "requirements.txt".
 They are in "requirements_db.txt" instead.

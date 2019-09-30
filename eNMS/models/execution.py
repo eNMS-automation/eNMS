@@ -361,7 +361,8 @@ class Run(AbstractBase):
         results = self.service.job(self, payload, *args)
         self.convert_result(results)
         self.eval(self.service.result_postprocessing, function="exec", **locals())
-        self.validate_result(results, payload, device)
+        if result.get("success", True):
+            self.validate_result(results, payload, device)
         return results
 
     def get_results(self, payload, device=None):

@@ -75,14 +75,7 @@ class NetmikoPromptsService(ConnectionService):
                     result = netmiko_connection.send_command_timing(
                         response3, delay_factor=run.delay_factor
                     )
-        match = run.sub(run.content_match, locals())
-        return {
-            "commands": commands,
-            "expected": match if run.validation_method == "text" else run.dict_match,
-            "negative_logic": run.negative_logic,
-            "result": result,
-            "success": run.match_content(result, match),
-        }
+        return {"commands": commands, "result": result}
 
 
 class NetmikoPromptsForm(ServiceForm, NetmikoForm):

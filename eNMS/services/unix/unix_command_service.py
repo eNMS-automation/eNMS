@@ -19,15 +19,8 @@ class UnixCommandService(Service):
 
     def job(self, run, payload, device):
         command = run.sub(run.command, locals())
-        match = run.sub(run.content_match, locals())
         run.log("info", f"Running Unix command ({command}) on {device.name}")
-        result = check_output(command.split()).decode()
-        return {
-            "success": run.match_content(result, match),
-            "match": match,
-            "negative_logic": run.negative_logic,
-            "result": result,
-        }
+        return {"command": command, "result": check_output(command.split()).decode()}
 
 
 class UnixCommandForm(ServiceForm):

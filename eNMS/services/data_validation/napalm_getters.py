@@ -30,17 +30,7 @@ class NapalmGettersService(ConnectionService):
                 result[getter] = getattr(napalm_connection, getter)()
             except Exception as e:
                 result[getter] = f"{getter} failed because of {e}"
-        match = (
-            run.sub(run.content_match, locals())
-            if run.validation_method == "text"
-            else run.sub(run.dict_match, locals())
-        )
-        return {
-            "match": match,
-            "negative_logic": run.negative_logic,
-            "result": result,
-            "success": run.match_content(result, match),
-        }
+        return {"result": result}
 
 
 class NapalmGettersForm(ServiceForm, NapalmForm):

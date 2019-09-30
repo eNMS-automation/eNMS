@@ -2,11 +2,7 @@ from wtforms import BooleanField, FloatField, HiddenField, IntegerField, SelectF
 
 from eNMS import app
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import (
-    DictField,
-    PasswordSubstitutionField,
-    SubstitutionField,
-)
+from eNMS.forms.fields import DictField, PasswordSubstitutionField, SubstitutionField
 
 
 class NetmikoForm(BaseForm):

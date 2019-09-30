@@ -73,13 +73,10 @@ class UnixShellScriptService(Service):
             )
             if return_code != "0":
                 break
-        match = run.sub(run.content_match, locals())
         return {
-            "match": match,
-            "negative_logic": run.negative_logic,
             "return_code": return_code,
             "result": result,
-            "success": (return_code == "0") and run.match_content(result, match),
+            "success": return_code == "0",
         }
 
 

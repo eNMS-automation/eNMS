@@ -12,7 +12,6 @@ class PayloadValidationService(Service):
     __tablename__ = "payload_validation_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = Column(Boolean, default=False)
     query = Column(SmallString)
     conversion_method = Column(SmallString, default="none")
     validation_method = Column(SmallString, default="text")
@@ -44,6 +43,5 @@ class PayloadValidationService(Service):
 
 class PayloadValidationForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="payload_validation_service")
-    has_targets = BooleanField("Has Target Devices", default=True)
     query = StringField("Python Query")
     query_fields = ServiceForm.query_fields + ["query"]

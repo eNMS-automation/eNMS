@@ -34,7 +34,6 @@ class RestCallService(Service):
     __tablename__ = "rest_call_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = Column(Boolean, default=False)
     call_type = Column(SmallString)
     rest_url = Column(LargeString, default="")
     payload = Column(JSON, default={})
@@ -112,7 +111,6 @@ class RestCallService(Service):
 
 class RestCallForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="rest_call_service")
-    has_targets = BooleanField("Has Target Devices", default=True)
     call_type = SelectField(
         choices=(
             ("GET", "GET"),
@@ -133,7 +131,6 @@ class RestCallForm(ServiceForm, ValidationForm):
     groups = {
         "Main Parameters": {
             "commands": [
-                "has_targets",
                 "call_type",
                 "rest_url",
                 "payload",

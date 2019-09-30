@@ -21,7 +21,6 @@ class Workflow(Service):
 
     __tablename__ = "workflow"
     __mapper_args__ = {"polymorphic_identity": "workflow"}
-    has_targets = Column(Boolean, default=True)
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     labels = Column(MutableDict)
@@ -100,7 +99,6 @@ class Workflow(Service):
 
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
-    has_targets = BooleanField("Has Target Devices", default=True)
     start_services = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 

@@ -22,7 +22,6 @@ class AnsiblePlaybookService(Service):
     __tablename__ = "ansible_playbook_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = Column(Boolean, default=False)
     playbook_path = Column(SmallString)
     arguments = Column(SmallString)
     conversion_method = Column(SmallString, default="none")
@@ -58,7 +57,7 @@ class AnsiblePlaybookService(Service):
             extra_args.update(run.sub(run.options, locals()))
         if extra_args:
             command.extend(["-e", dumps(extra_args)])
-        if run.has_targets:
+        if device:
             command.extend(["-i", device.ip_address + ","])
         command.append(run.sub(run.playbook_path, locals()))
         password = extra_args.get("password")
@@ -97,7 +96,6 @@ class AnsiblePlaybookService(Service):
 
 class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     form_type = HiddenField(default="ansible_playbook_service")
-    has_targets = BooleanField("Has Target Devices", default=True)
     playbook_path = NoValidationSelectField("Playbook Path", choices=())
     arguments = SubstitutionField("Arguments (Ansible command line options)")
     pass_device_properties = BooleanField(
@@ -108,7 +106,6 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
     groups = {
         "Main Parameters": {
             "commands": [
-                "has_targets",
                 "playbook_path",
                 "arguments",
                 "pass_device_properties",
@@ -118,14 +115,3 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
         },
         "Validation Parameters": ValidationForm.group,
     }
-
-    def validate(self):
-        valid_form = super().validate()
-        pass_properties_error = (
-            self.pass_device_properties.data and not self.has_targets.data
-        )
-        if pass_properties_error:
-            self.pass_device_properties.errors.append(
-                "'pass device properties' requires 'has device targets' to be selected."
-            )
-        return valid_form and not pass_properties_error

@@ -15,7 +15,6 @@ class SlackNotificationService(Service):
     __tablename__ = "slack_notification_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = Column(Boolean, default=False)
     channel = Column(SmallString)
     token = Column(SmallString)
     body = Column(LargeString, default="")

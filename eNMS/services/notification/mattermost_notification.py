@@ -16,7 +16,6 @@ class MattermostNotificationService(Service):
     __tablename__ = "mattermost_notification_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = Column(Boolean, default=False)
     channel = Column(SmallString)
     body = Column(LargeString, default="")
 

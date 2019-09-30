@@ -12,7 +12,6 @@ class PythonSnippetService(Service):
     __tablename__ = "python_snippet_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = Column(Boolean, default=False)
     source_code = Column(LargeString)
 
     __mapper_args__ = {"polymorphic_identity": "python_snippet_service"}
@@ -69,7 +68,6 @@ class PythonSnippetService(Service):
 
 class PythonSnippetForm(ServiceForm):
     form_type = HiddenField(default="python_snippet_service")
-    has_targets = BooleanField("Has Target Devices", default=True)
     source_code = StringField(
         widget=TextArea(),
         render_kw={"rows": 15},

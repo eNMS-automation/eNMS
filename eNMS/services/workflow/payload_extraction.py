@@ -15,7 +15,6 @@ class PayloadExtractionService(Service):
     __tablename__ = "payload_extraction_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = Column(Boolean, default=False)
     variable1 = Column(SmallString)
     query1 = Column(SmallString)
     match_type1 = Column(SmallString, default="none")
@@ -87,7 +86,6 @@ operation_choices = (
 
 class PayloadExtractionForm(ServiceForm):
     form_type = HiddenField(default="payload_extraction_service")
-    has_targets = BooleanField("Has Target Devices", default=True)
     variable1 = StringField("Variable Name")
     query1 = StringField("Python Extraction Query")
     match_type1 = SelectField("Post Processing", choices=match_choices)
@@ -116,7 +114,6 @@ class PayloadExtractionForm(ServiceForm):
     )
     operation3 = SelectField("Operation", choices=operation_choices)
     groups = {
-        "General": {"commands": ["has_targets"], "default": "expanded"},
         "Extraction 1": {
             "commands": ["variable1", "query1", "match_type1", "match1", "operation1"],
             "default": "expanded",

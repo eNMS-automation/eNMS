@@ -657,7 +657,7 @@ function displayWorkflowState(result) {
   resetDisplay();
   if (!result.state) {
     $("#progress").hide();
-  } else {
+  } else if (result.state.progress) {
     const progress = result.state.progress["device"];
     $("#progress").show();
     $("#progress-success").width(

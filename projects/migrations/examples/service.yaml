@@ -1,9 +1,14 @@
 - color: pink
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Start point of a workflow
   device_query: ''
   device_query_property: ip_address
-  devices: [Columbus]
+  devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: true
@@ -13,12 +18,13 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-01 11:52:44.218107'
+  last_modified: '2019-10-01 01:36:02.097383'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
   name: Start
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -33,6 +39,7 @@
     Netmiko prompts: [-279, -158]
     Netmiko_VRF_workflow: ['-200', '0']
     'Payload Workflow: Payload Extraction with operations': [-516, -120]
+    'Regression Workflow 1: basics (validation, retries)': [0, 0]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
@@ -54,14 +61,20 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: pink
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: End point of a workflow
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: true
@@ -77,6 +90,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: End
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -91,6 +105,7 @@
     Netmiko prompts: [634, 187]
     Netmiko_VRF_workflow: ['200', '0']
     'Payload Workflow: Payload Extraction with operations': [527, -97]
+    'Regression Workflow 1: basics (validation, retries)': [500, 0]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -115,14 +130,20 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Mail notification (service logs)
   device_query: ''
   device_query_property: ip_address
   devices: [Columbus]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -138,6 +159,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: mail_feedback_notification
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -151,14 +173,20 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Slack notification (service logs)
   device_query: ''
   device_query_property: ip_address
   devices: [Columbus]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -174,6 +202,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: slack_feedback_notification
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -187,14 +216,20 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Mattermost notification (service logs)
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -210,6 +245,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: mattermost_feedback_notification
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -223,14 +259,20 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Monitor eNMS cluster
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -246,6 +288,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: cluster_monitoring
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -259,14 +302,20 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Push configurations to Gitlab
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -282,6 +331,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: git_push_configurations
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -296,14 +346,20 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Configuration Management Poller
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: true
@@ -319,6 +375,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: poller_service
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -333,6 +390,7 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - a_dict: {}
@@ -342,12 +400,17 @@
   boolean1: true
   boolean2: false
   color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
   custom_integer: 0
+  delete_spaces_before_matching: false
   description: Example
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   exclusion_field: d
@@ -367,6 +430,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Example1
+  negative_logic: false
   notification_header: ''
   number_in_range: 7
   number_of_retries: 0
@@ -388,14 +452,20 @@
   time_between_retries: 10
   type: example_service
   url: https://www.google.fr/
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Configure BGP Peering with Napalm
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -414,6 +484,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: napalm_configure_bgp_1
+  negative_logic: false
   neighbor_ip: 100.1.2.1
   notification_header: ''
   number_of_retries: 0
@@ -431,16 +502,22 @@
   skip_query: ''
   time_between_retries: 10
   type: configure_bgp_service
+  validation_method: none
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 100
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
   device_query: ''
   device_query_property: ip_address
   devices: [Aserver]
+  dict_match: {}
   direction: get
   display_only_failed_nodes: true
   events: []
@@ -461,6 +538,7 @@
   missing_host_key_policy: true
   multiprocessing: false
   name: test_file_transfer_service
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -477,18 +555,24 @@
   source_file_includes_globbing: false
   time_between_retries: 10
   type: generic_file_transfer_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
   window_size: 1073741824
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
   delete_archive: true
   delete_folder: true
+  delete_spaces_before_matching: false
   description: Test the log backup service
   destination_path: /media/sf_VM/eNMS/tests/file_transfer
   device_query: ''
   device_query_property: ip_address
   devices: [Aserver]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -504,6 +588,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: test_database_backup_service
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -518,15 +603,21 @@
   skip_query: ''
   time_between_retries: 10
   type: database_backup_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   configuration_command: show running-config
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Test Configuration Management
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: true
   driver: ''
   events: []
@@ -545,6 +636,7 @@
   maximum_runs: 1
   multiprocessing: true
   name: netmiko_configuration_backup
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -561,14 +653,20 @@
   timeout: 10
   type: netmiko_backup_service
   use_device_driver: true
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Test Configuration Management
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: true
   driver: ''
   events: []
@@ -585,6 +683,7 @@
   maximum_runs: 1
   multiprocessing: true
   name: napalm_configuration_backup
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -600,18 +699,24 @@
   time_between_retries: 10
   type: napalm_backup_service
   use_device_driver: true
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
   commit_configuration: false
   config_mode_command: ''
   content: vrf definition test
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
   delay_factor: 1.0
+  delete_spaces_before_matching: false
   description: Create a VRF "test" with Netmiko
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Austin]
+  dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
   events: []
@@ -631,6 +736,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: netmiko_create_vrf_test
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
@@ -650,6 +756,7 @@
   timeout: 3
   type: netmiko_configuration_service
   use_device_driver: true
+  validation_method: none
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
@@ -721,12 +828,17 @@
   commit_configuration: false
   config_mode_command: ''
   content: no vrf definition test
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
   delay_factor: 1.0
+  delete_spaces_before_matching: false
   description: Delete VRF "test"
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Austin]
+  dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
   events: []
@@ -746,6 +858,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: netmiko_delete_vrf_test
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
@@ -766,6 +879,7 @@
   timeout: 3
   type: netmiko_configuration_service
   use_device_driver: true
+  validation_method: none
   vendor: Arista
   waiting_time: 1
 - auto_find_prompt: true
@@ -834,11 +948,16 @@
 - action: load_merge_candidate
   color: '#D2E5FF'
   content: "vrf definition napalm\r\n"
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Create a VRF "test" with Napalm
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Austin]
+  dict_match: {}
   display_only_failed_nodes: true
   driver: eos
   events: []
@@ -855,6 +974,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: napalm_create_vrf_test
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
@@ -871,6 +991,7 @@
   time_between_retries: 10
   type: napalm_configuration_service
   use_device_driver: true
+  validation_method: none
   vendor: Arista
   waiting_time: 0
 - call_type: GET
@@ -933,7 +1054,11 @@
   verify_ssl_certificate: true
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: 'Getter: get_facts'
   device_query: ''
   device_query_property: ip_address
@@ -980,7 +1105,11 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: 'Getter: get_interfaces'
   device_query: ''
   device_query_property: ip_address
@@ -1026,7 +1155,11 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: 'Getter: get_interfaces_ip'
   device_query: ''
   device_query_property: ip_address
@@ -1072,7 +1205,11 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: 'Getter: get_config'
   device_query: ''
   device_query_property: ip_address
@@ -1117,11 +1254,16 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Process Payload in example workflow
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Austin]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -1137,6 +1279,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: process_payload1
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -1152,14 +1295,20 @@
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Add devices to the payload
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -1175,6 +1324,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: add_devices_to_payload
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -1199,6 +1349,7 @@
     \ targets2, device=device.name)\r\nsave_result(True, {})"
   time_between_retries: 10
   type: python_snippet_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -1382,11 +1533,16 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Payload Variables Extraction with Regex/TextFSM
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -1413,6 +1569,7 @@
   maximum_runs: 1
   multiprocessing: true
   name: Payload Extraction
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -1433,6 +1590,7 @@
   skip_query: ''
   time_between_retries: 10
   type: payload_extraction_service
+  validation_method: none
   variable1: simple_variable
   variable2: regex_variable
   variable3: textfsm_variable
@@ -1530,11 +1688,16 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: false
   driver: eos
   events: []
@@ -1551,6 +1714,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: napalm_rollback
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -1567,6 +1731,7 @@
   time_between_retries: 10
   type: napalm_rollback_service
   use_device_driver: true
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -1870,11 +2035,16 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -1890,6 +2060,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Payload editor, no devices
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -1907,14 +2078,20 @@
     \ result={})"
   time_between_retries: 10
   type: python_snippet_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Chicago]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -1930,6 +2107,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Payload editor, with device
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -1950,6 +2128,7 @@
     \ result={})"
   time_between_retries: 10
   type: python_snippet_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -2133,7 +2312,11 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
@@ -2178,7 +2361,11 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
@@ -2222,7 +2409,11 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
@@ -2268,7 +2459,11 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
@@ -2312,7 +2507,11 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
@@ -2894,11 +3093,16 @@
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -2914,6 +3118,7 @@
   maximum_runs: 1
   multiprocessing: true
   name: 'Payload Workflow: Add initial variables'
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -2931,14 +3136,20 @@
     \ result={})"
   time_between_retries: 10
   type: python_snippet_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -2960,6 +3171,7 @@
   maximum_runs: 1
   multiprocessing: true
   name: 'Payload Workflow: Extraction 1'
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -2980,17 +3192,23 @@
   skip_query: ''
   time_between_retries: 10
   type: payload_extraction_service
+  validation_method: none
   variable1: boolean
   variable2: list
   variable3: dict
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3012,6 +3230,7 @@
   maximum_runs: 1
   multiprocessing: true
   name: 'Payload Workflow: Extraction 2'
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3032,6 +3251,7 @@
   skip_query: ''
   time_between_retries: 10
   type: payload_extraction_service
+  validation_method: none
   variable1: list
   variable2: list
   variable3: dict
@@ -3180,11 +3400,16 @@
   verify_ssl_certificate: false
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3200,6 +3425,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: 'Variable Access Subworkflow: Access variable from snippet'
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3219,6 +3445,7 @@
     \n}\r\nsave_result(success=True, result=result)"
   time_between_retries: 10
   type: python_snippet_service
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -3343,11 +3570,16 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Poll configuration and push to gitlab
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -3364,6 +3596,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Configuration Management Workflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3380,14 +3613,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Create and delete a VRF with Netmiko
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -3404,6 +3643,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Netmiko_VRF_workflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
@@ -3421,14 +3661,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Create and delete a VRF with Napalm
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -3445,6 +3691,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Napalm_VRF_workflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
@@ -3462,14 +3709,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ReST call, Napalm getters, etc
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -3490,6 +3743,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: payload_transfer_workflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
@@ -3507,14 +3761,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Test the payload extraction and validation mechanisms
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -3531,6 +3791,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: payload_extraction_validation_worflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3549,14 +3810,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Test the inner workflow system
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Austin]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -3573,6 +3840,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Workflow_of_workflows
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
@@ -3591,14 +3859,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: Workflow with separate failure - success path
   device_query: ''
   device_query_property: ip_address
   devices: [Austin, Washington]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3615,6 +3889,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Workflow with separate failure - success path
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3631,14 +3906,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3660,6 +3941,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Netmiko prompts
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3676,14 +3958,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Chicago]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3700,6 +3988,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: 'python Workflow: payload editor and pool helper'
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3717,14 +4006,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3741,6 +4036,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Napalm getters and match mechanism workflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3759,14 +4055,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Austin]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3783,6 +4085,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Ansible Workflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3800,16 +4103,22 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
     Oakland, Denver]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3833,6 +4142,7 @@
   multiprocessing: false
   name: 'Workflow: multiple entry points, skip service, multiprocessing, separate
     paths'
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3849,14 +4159,20 @@
   start_services: [Start, Example1]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Austin]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3873,6 +4189,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Iteration Targets Workflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3890,14 +4207,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3914,6 +4237,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: 'Payload Workflow: Payload Extraction with operations'
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3932,14 +4256,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3956,6 +4286,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: 'Subworkflow: Access Variable - Result from parent workflow'
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -3973,14 +4304,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -3997,6 +4334,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Subworkflow of Workflow
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -4014,14 +4352,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: ip_address
   devices: []
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -4038,6 +4382,7 @@
   maximum_runs: 1
   multiprocessing: false
   name: Workflow with iteration targets
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -4056,14 +4401,20 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
   creator: admin
+  delete_spaces_before_matching: false
   description: ''
   device_query: ''
   device_query_property: name
   devices: [Washington]
+  dict_match: {}
   display_only_failed_nodes: false
   events: []
   hidden: false
@@ -4074,12 +4425,13 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-09-30 20:08:02.972467'
+  last_modified: '2019-10-01 01:28:09.654893'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
   name: Workflow with device and value iteration
+  negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
@@ -4095,6 +4447,7 @@
   start_services: [Start]
   time_between_retries: 10
   type: workflow
+  validation_method: none
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
@@ -4151,6 +4504,118 @@
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
+  timeout: 10
+  type: netmiko_validation_service
+  use_device_driver: true
+  validation_method: text
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    ad4cddf7-3ac1-40c3-b5dc-3f5b1342d029:
+      alignment: center
+      content: "Use Netmiko to run a \"show vrf\".\r\nUse the validation mechanism\
+        \ to check for the string \"NOVRF\".\r\nRetry twice with 2 seconds between\
+        \ retries."
+      positions: ['266.7530517578125', '-226.0806884765625']
+  last_modified: '2019-10-01 01:50:49.182629'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow 1: basics (validation, retries)'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Regression Workflow 1: look for a VRF with netmiko']
+  skip: false
+  skip_query: ''
+  start_services: [Start]
+  time_between_retries: 10
+  type: workflow
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  color: '#D2E5FF'
+  command: show vrf
+  content_match: NOVRF
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2019-10-01 01:50:52.976314'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow 1: look for a VRF with netmiko'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 2
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow 1: basics (validation, retries)': [259, -175]
+  privileged_mode: false
+  push_to_git: false
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  skip: false
+  skip_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 2
   timeout: 10
   type: netmiko_validation_service
   use_device_driver: true

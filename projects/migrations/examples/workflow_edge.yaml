@@ -246,12 +246,12 @@
 - {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: prerequisite,
   name: 76-prerequisite:72->85, source: Napalm_VRF_workflow, subtype: prerequisite,
   workflow: Workflow_of_workflows}
-- {destination: 'Workflow with iteration targets: use target for show interface',
-  label: success, name: 87-success:1->88, source: Start, subtype: success, workflow: Workflow
-    with iteration targets}
-- {destination: End, label: success, name: 87-success:88->2, source: 'Workflow with
-    iteration targets: use target for show interface', subtype: success, workflow: Workflow
-    with iteration targets}
+- {destination: 'Regression Workflow 1: look for a VRF with netmiko', label: success,
+  name: 87-success:1->88, source: Start, subtype: success, workflow: 'Regression Workflow
+    1: basics (validation, retries)'}
+- {destination: End, label: success, name: 87-success:88->2, source: 'Regression Workflow
+    1: look for a VRF with netmiko', subtype: success, workflow: 'Regression Workflow
+    1: basics (validation, retries)'}
 - {destination: 'Iteration Target Workflow: netmiko iteration 2', label: prerequisite,
   name: 83-prerequisite:54->55, source: 'Iteration Target Workflow: netmiko iteration
     1', subtype: prerequisite, workflow: Iteration Targets Workflow}

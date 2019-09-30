@@ -38,7 +38,7 @@
             <span class="step_no">2</span>
             <span class="step_descr"
               >Step 2<br />
-              <small>Notification</small>
+              <small>Service</small>
             </span>
           </a>
         </li>
@@ -47,7 +47,7 @@
             <span class="step_no">3</span>
             <span class="step_descr"
               >Step 3<br />
-              <small>Devices</small>
+              <small>Workflow</small>
             </span>
           </a>
         </li>
@@ -56,7 +56,7 @@
             <span class="step_no">4</span>
             <span class="step_descr"
               >Step 4<br />
-              <small>Iteration</small>
+              <small>Devices</small>
             </span>
           </a>
         </li>
@@ -65,7 +65,7 @@
             <span class="step_no">5</span>
             <span class="step_descr"
               >Step 5<br />
-              <small>Workflow</small>
+              <small>Iteration</small>
             </span>
           </a>
         </li>
@@ -74,20 +74,27 @@
             <span class="step_no">6</span>
             <span class="step_descr"
               >Step 6<br />
-              <small>Specific</small>
+              <small>Validation</small>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#step-7">
+            <span class="step_no">7</span>
+            <span class="step_descr"
+              >Step 7<br />
+              <small>Notification</small>
             </span>
           </a>
         </li>
       </ul>
       <div id="step-1">
         <div>
-          {% if form_type != "workflow" %}
           <label class="hide-run">Type</label>
           <div class="form-group">
             {{ form.type(id=form_type + '-class', class="form-control hide-run
             add-id") }}
           </div>
-          {% endif %}
           <label class="hide-run">Name</label>
           <div class="form-group">
             {{ form.name(id=form_type + '-name', class="form-control hide-run
@@ -145,155 +152,6 @@
         </div>
       </div>
       <div id="step-2">
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-send_notification"
-              name="send_notification"
-              type="checkbox"
-              class="add-id"
-              value="y"
-            />
-            <label>Send notification</label>
-          </div>
-        </fieldset>
-        <label>Send Notification Method</label>
-        <div class="form-group">
-          {{ form.send_notification_method(id=form_type +
-          '-send_notification_method', class="form-control add-id") }}
-        </div>
-        <label>Notification Header</label>
-        <div class="form-group">
-          {{ form.notification_header(id=form_type + '-notification_header',
-          class="form-control add-id") }}
-        </div>
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-include_link_in_summary"
-              name="include_link_in_summary"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Include Result Link in Summary</label>
-          </div>
-        </fieldset>
-        <label>Mail Recipients (separated by comma)</label>
-        <div class="form-group">
-          {{ form.mail_recipient(id=form_type + '-mail_recipient',
-          class="form-control add-id") }}
-        </div>
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-display_only_failed_nodes"
-              name="display_only_failed_nodes"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Display only failed nodes</label>
-          </div>
-        </fieldset>
-      </div>
-      <div id="step-3" style="min-height: 300px">
-        <label for="devices">Devices</label>
-        <div class="form-group">
-          {{ form.devices(id=form_type + '-devices', class="form-control
-          add-id") }}
-        </div>
-        <label for="pools">Pools</label>
-        <div class="form-group">
-          {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
-        </div>
-        <label class="hide-run"
-          >Device Query (define targets from a python query)</label
-        >
-        <div class="form-group">
-          {{ form.device_query(id=form_type + '-device_query',
-          class="form-control hide-run add-id") }}
-        </div>
-        <label class="hide-run">Query Property Type</label>
-        <div class="form-group">
-          {{ form.device_query_property(id=form_type + '-device_query_property',
-          class="form-control hide-run add-id") }}
-        </div>
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-multiprocessing"
-              name="multiprocessing"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Multiprocessing</label>
-          </div>
-        </fieldset>
-        <label>Maximum number of processes</label>
-        <div class="form-group">
-          {{ form.max_processes(id=form_type + '-max_processes',
-          class="form-control add-id") }}
-        </div>
-      </div>
-      <div id="step-4" style="min-height: 300px">
-        <label class="hide-run">Iteration devices</label>
-        <div class="form-group">
-          {{ form.iteration_devices(id=form_type + '-iteration_devices',
-          class="form-control hide-run add-id") }}
-        </div>
-        <label class="hide-run">Iteration Devices Property</label>
-        <div class="form-group">
-          {{ form.iteration_devices_property(id=form_type +
-          '-iteration_devices_property', class="form-control hide-run add-id")
-          }}
-        </div>
-        <label class="hide-run"
-          >Iteration values: run service for each value (python query)</label
-        >
-        <div class="form-group">
-          {{ form.iteration_values(id=form_type + '-iteration_values',
-          class="form-control hide-run add-id") }}
-        </div>
-        <label class="hide-run">Iteration Variable Name</label>
-        <div class="form-group">
-          {{ form.iteration_variable_name(id=form_type +
-          '-iteration_variable_name', class="form-control hide-run add-id") }}
-        </div>
-      </div>
-      <div id="step-5" style="min-height: 300px">
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-skip"
-              name="skip"
-              class="hide-run add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label class="hide-run">Skip this Service Regardless</label>
-          </div>
-        </fieldset>
-        <label class="hide-run"
-          >Skip Service If Python Query evaluates to True</label
-        >
-        <div class="form-group">
-          {{ form.skip_query(id=form_type + '-skip_query', class="form-control
-          hide-run add-id") }}
-        </div>
-        <label class="hide-run">Maximum number of runs</label>
-        <div class="form-group">
-          {{ form.maximum_runs(id=form_type + '-maximum_runs',
-          class="form-control hide-run add-id") }}
-        </div>
-        <label class="hide-run">Waiting time (in seconds)</label>
-        <div class="form-group">
-          {{ form.waiting_time(id=form_type + '-waiting_time',
-          class="form-control hide-run add-id") }}
-        </div>
-      </div>
-      <div id="step-6">
         {% set groups = form.groups or {"Parameters": {"commands":
         form.service_fields, "default": "expanded"}} %}
         <div
@@ -349,6 +207,158 @@
           </div>
           {% endfor %}
         </div>
+      </div>
+      <div id="step-3" style="min-height: 300px">
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-skip"
+              name="skip"
+              class="hide-run add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label class="hide-run">Skip this Service Regardless</label>
+          </div>
+        </fieldset>
+        <label class="hide-run"
+          >Skip Service If Python Query evaluates to True</label
+        >
+        <div class="form-group">
+          {{ form.skip_query(id=form_type + '-skip_query', class="form-control
+          hide-run add-id") }}
+        </div>
+        <label class="hide-run">Maximum number of runs</label>
+        <div class="form-group">
+          {{ form.maximum_runs(id=form_type + '-maximum_runs',
+          class="form-control hide-run add-id") }}
+        </div>
+        <label class="hide-run">Waiting time (in seconds)</label>
+        <div class="form-group">
+          {{ form.waiting_time(id=form_type + '-waiting_time',
+          class="form-control hide-run add-id") }}
+        </div>
+      </div>
+      <div id="step-4" style="min-height: 300px">
+        <label for="devices">Devices</label>
+        <div class="form-group">
+          {{ form.devices(id=form_type + '-devices', class="form-control
+          add-id") }}
+        </div>
+        <label for="pools">Pools</label>
+        <div class="form-group">
+          {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
+        </div>
+        <label class="hide-run"
+          >Device Query (define targets from a python query)</label
+        >
+        <div class="form-group">
+          {{ form.device_query(id=form_type + '-device_query',
+          class="form-control hide-run add-id") }}
+        </div>
+        <label class="hide-run">Query Property Type</label>
+        <div class="form-group">
+          {{ form.device_query_property(id=form_type + '-device_query_property',
+          class="form-control hide-run add-id") }}
+        </div>
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-multiprocessing"
+              name="multiprocessing"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Multiprocessing</label>
+          </div>
+        </fieldset>
+        <label>Maximum number of processes</label>
+        <div class="form-group">
+          {{ form.max_processes(id=form_type + '-max_processes',
+          class="form-control add-id") }}
+        </div>
+      </div>
+      <div id="step-5" style="min-height: 300px">
+        <label class="hide-run">Iteration devices</label>
+        <div class="form-group">
+          {{ form.iteration_devices(id=form_type + '-iteration_devices',
+          class="form-control hide-run add-id") }}
+        </div>
+        <label class="hide-run">Iteration Devices Property</label>
+        <div class="form-group">
+          {{ form.iteration_devices_property(id=form_type +
+          '-iteration_devices_property', class="form-control hide-run add-id")
+          }}
+        </div>
+        <label class="hide-run"
+          >Iteration values: run service for each value (python query)</label
+        >
+        <div class="form-group">
+          {{ form.iteration_values(id=form_type + '-iteration_values',
+          class="form-control hide-run add-id") }}
+        </div>
+        <label class="hide-run">Iteration Variable Name</label>
+        <div class="form-group">
+          {{ form.iteration_variable_name(id=form_type +
+          '-iteration_variable_name', class="form-control hide-run add-id") }}
+        </div>
+      </div>
+      <div id="step-6">
+
+      </div>
+      <div id="step-7">
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-send_notification"
+              name="send_notification"
+              type="checkbox"
+              class="add-id"
+              value="y"
+            />
+            <label>Send notification</label>
+          </div>
+        </fieldset>
+        <label>Send Notification Method</label>
+        <div class="form-group">
+          {{ form.send_notification_method(id=form_type +
+          '-send_notification_method', class="form-control add-id") }}
+        </div>
+        <label>Notification Header</label>
+        <div class="form-group">
+          {{ form.notification_header(id=form_type + '-notification_header',
+          class="form-control add-id") }}
+        </div>
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-include_link_in_summary"
+              name="include_link_in_summary"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Include Result Link in Summary</label>
+          </div>
+        </fieldset>
+        <label>Mail Recipients (separated by comma)</label>
+        <div class="form-group">
+          {{ form.mail_recipient(id=form_type + '-mail_recipient',
+          class="form-control add-id") }}
+        </div>
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-display_only_failed_nodes"
+              name="display_only_failed_nodes"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Display only failed nodes</label>
+          </div>
+        </fieldset>
       </div>
     </div>
   </div>

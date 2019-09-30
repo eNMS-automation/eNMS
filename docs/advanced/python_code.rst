@@ -16,7 +16,7 @@ You have access to the following variables:
 - ``payload``: current state of the workflow payload (dictionary).
 - ``config``: eNMS global configuration (available in the administration panel, section "Parameters", button "General").
 - ``workflow``: parent workflow, if the service is running within a workflow.
-- ``workflow_device``: parent device, parent device, available only when device targets are defined using a Python Query.
+- ``parent_device``: available only when derived devices are defined using a Python Query.
 
 And the following functions:
 

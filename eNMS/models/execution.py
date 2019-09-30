@@ -87,8 +87,8 @@ class Run(AbstractBase):
     status = Column(SmallString, default="Running")
     runtime = Column(SmallString)
     endtime = Column(SmallString)
-    workflow_device_id = Column(Integer, ForeignKey("device.id"))
-    workflow_device = relationship("Device", foreign_keys="Run.workflow_device_id")
+    parent_device_id = Column(Integer, ForeignKey("device.id"))
+    parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     parent_runtime = Column(SmallString)
     devices = relationship("Device", secondary=run_device_table, back_populates="runs")
     pools = relationship("Pool", secondary=run_pool_table, back_populates="runs")
@@ -298,8 +298,8 @@ class Run(AbstractBase):
         kwargs = {
             "service": self.service.id,
             "devices": [device.id for device in derived_devices]
-            "workflow": self.id,
-            "workflow_device": device.id
+            "workflow": self.workflow.id,
+            "parent_device": device.id
             "parent_runtime": self.parent_runtime,
             "restart_run": self.restart_run,
         }
@@ -569,7 +569,7 @@ class Run(AbstractBase):
             "get_result": _self.get_result,
             "workflow": _self.workflow,
             "set_var": partial(_self.payload_helper, locals.get("payload", {})),
-            "workflow_device": _self.workflow_device,
+            "parent_device": _self.parent_device,
             **locals,
         }
 

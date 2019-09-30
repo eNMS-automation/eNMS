@@ -1676,7 +1676,7 @@
     device_query_workflow: ['-5', '-147']
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("test", device=workflow_device.name)
+  device_query: get_var("test", device=parent_device.name)
   device_query_property: name
   result_postprocessing: ''
   send_notification: false
@@ -1927,7 +1927,7 @@
     'python Workflow: payload editor and pool helper': ['35', '-232']
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("iteration_device", section="pools", device=workflow_device.name)
+  device_query: get_var("iteration_device", section="pools", device=parent_device.name)
   device_query_property: name
   result_postprocessing: ''
   send_notification: false
@@ -2690,7 +2690,7 @@
     Iteration Targets Workflow: [299, 115]
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("loop_over", device=workflow_device.name)
+  device_query: get_var("loop_over", device=parent_device.name)
   device_query_property: name
   result_postprocessing: ''
   send_notification: false
@@ -3158,7 +3158,7 @@
     'Subworkflow: Access Variable - Result from parent workflow': [173, 128]
   privileged_mode: false
   push_to_git: false
-  device_query: get_var("loop_over", device=workflow_device.name)
+  device_query: get_var("loop_over", device=parent_device.name)
   device_query_property: name
   result_postprocessing: ''
   send_notification: false
@@ -3300,7 +3300,7 @@
   positions:
     Workflow_of_workflows: [-481, -23]
   push_to_git: false
-  device_query: get_var("loop_over", device=workflow_device.name)
+  device_query: get_var("loop_over", device=parent_device.name)
   device_query_property: name
   result_postprocessing: ''
   send_notification: false

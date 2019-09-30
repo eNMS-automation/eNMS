@@ -176,8 +176,8 @@ class Run(AbstractBase):
     def stop(self):
         return self.run_state["status"] == "stop"
 
-    def compute_devices_from_query(self, query, property):
-        values = self.eval(query, **locals())
+    def compute_devices_from_query(self, query, property, **locals):
+        values = self.eval(query, **locals)
         devices, not_found = set(), []
         if isinstance(values, str):
             values = [values]
@@ -198,7 +198,9 @@ class Run(AbstractBase):
         if not devices:
             if self.service.device_query:
                 devices |= self.compute_devices_from_query(
-                    self.service.device_query, self.service.device_query_property
+                    self.service.device_query,
+                    self.service.device_query_property,
+                    payload=payload,
                 )
             devices |= set(self.service.devices)
             for pool in self.service.pools:
@@ -292,7 +294,18 @@ class Run(AbstractBase):
             args[4][device.name] = device_result
 
     def device_iteration(payload, device):
-        pass
+        derived_devices = self.compute_devices_from_query(self.iteration_devices, self.iteration_devices_property, **locals())
+        kwargs = {
+            "service": self.service.id,
+            "devices": [device.id for device in derived_devices]
+            "workflow": self.id,
+            "workflow_device": device.id
+            "parent_runtime": self.parent_runtime,
+            "restart_run": self.restart_run,
+        }
+        derived_run = factory("run", **kwargs)
+        derived_run.properties = self.properties
+        return derived_run.run(payload)
 
     def device_run(self, payload):
         devices, success = self.compute_devices(payload), True

@@ -84,20 +84,11 @@ class RestCallService(Service):
             if response.status_code == 401:
                 result["error"] = "Wrong credentials supplied."
             return result
-        result = run.convert_result(response.text)
-        match = (
-            run.sub(run.content_match, locals())
-            if run.validation_method == "text"
-            else run.sub(run.dict_match, locals())
-        )
         return {
             "url": rest_url,
-            "match": match,
             "status_code": response.status_code,
             "headers": dict(response.headers),
-            "negative_logic": run.negative_logic,
-            "result": result,
-            "success": run.match_content(result, match),
+            "result": response.text,
         }
 
 

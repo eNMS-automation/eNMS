@@ -71,19 +71,7 @@ class AnsiblePlaybookService(Service):
             result = result.decode("utf-8")
         except AttributeError:
             pass
-        result = run.convert_result(result)
-        match = (
-            run.sub(run.content_match, locals())
-            if run.validation_method == "text"
-            else run.sub(run.dict_match, locals())
-        )
-        return {
-            "command": safe_command,
-            "match": match,
-            "negative_logic": run.negative_logic,
-            "result": result,
-            "success": run.match_content(result, match),
-        }
+        return {"command": safe_command, "result": result}
 
 
 class AnsiblePlaybookForm(ServiceForm):

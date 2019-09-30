@@ -474,7 +474,7 @@ class BaseController:
             Session.rollback()
             if isinstance(exc, IntegrityError):
                 return {"error": (f"There already is a {cls} with the same name")}
-            return {"error"(exc)}
+            return {"error": str(exc)}
 
     def log(self, severity, content):
         factory(

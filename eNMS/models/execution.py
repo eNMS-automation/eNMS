@@ -359,7 +359,7 @@ class Run(AbstractBase):
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
-        for i in range(number_of_retries + 1):
+        for i in range(self.number_of_retries + 1):
             results = self.service.job(self, payload, *args)
             self.convert_result(results)
             self.eval(self.service.result_postprocessing, function="exec", **locals())

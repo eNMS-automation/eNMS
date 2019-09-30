@@ -26,36 +26,9 @@ from eNMS.properties.table import table_fixed_columns
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
 
 
-def monitor_requests(function):
-    @wraps(function)
-    def decorated_function(*args, **kwargs):
-        if not current_user.is_authenticated:
-            client_address = request.environ.get(
-                "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
-            )
-            app.log(
-                "warning",
-                (
-                    f"Unauthorized {request.method} request from "
-                    f"'{client_address}' calling the endpoint '{request.url}'"
-                ),
-            )
-            return redirect(url_for("blueprint.route", page="login"))
-        else:
-            return function(*args, **kwargs)
-
-    return decorated_function
-
-
 @blueprint.route("/")
 def site_root():
     return redirect(url_for("blueprint.route", page="login"))
-
-
-@blueprint.route("/<path:_>")
-@monitor_requests
-def get_requests_sink(_):
-    abort(404)
 
 
 @blueprint.route("/login", methods=["GET", "POST"])
@@ -81,6 +54,27 @@ def login():
         login_form.authentication_method.choices = authentication_methods
         return render_template("login.html", login_form=login_form)
     return redirect(url_for("blueprint.route", page="dashboard"))
+
+
+def monitor_requests(function):
+    @wraps(function)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated:
+            client_address = request.environ.get(
+                "HTTP_X_FORWARDED_FOR", request.environ["REMOTE_ADDR"]
+            )
+            app.log(
+                "warning",
+                (
+                    f"Unauthorized {request.method} request from "
+                    f"'{client_address}' calling the endpoint '{request.url}'"
+                ),
+            )
+            return redirect(url_for("blueprint.route", page="login"))
+        else:
+            return function(*args, **kwargs)
+
+    return decorated_function
 
 
 @blueprint.route("/logout")
@@ -189,6 +183,12 @@ def download_configuration(id):
         mimetype="text/plain",
         headers={"Content-Disposition": f"attachment;filename={filename}.txt"},
     )
+
+
+@blueprint.route("/<path:_>")
+@monitor_requests
+def get_requests_sink(_):
+    abort(404)
 
 
 @blueprint.route("/", methods=["POST"])

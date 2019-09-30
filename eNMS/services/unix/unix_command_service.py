@@ -5,7 +5,6 @@ from wtforms import HiddenField
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Service
 
 
@@ -15,10 +14,6 @@ class UnixCommandService(Service):
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     command = Column(SmallString)
-    content_match = Column(LargeString, default="")
-    content_match_regex = Column(Boolean, default=False)
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "unix_command_service"}
 
@@ -35,6 +30,6 @@ class UnixCommandService(Service):
         }
 
 
-class UnixCommandForm(ServiceForm, ValidationForm):
+class UnixCommandForm(ServiceForm):
     form_type = HiddenField(default="unix_command_service")
     command = SubstitutionField()

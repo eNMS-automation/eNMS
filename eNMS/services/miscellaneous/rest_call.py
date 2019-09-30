@@ -25,7 +25,6 @@ from eNMS.forms.fields import (
     JsonSubstitutionField,
     SubstitutionField,
 )
-from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Service
 
 
@@ -41,13 +40,6 @@ class RestCallService(Service):
     headers = Column(JSON, default={})
     verify_ssl_certificate = Column(Boolean, default=True)
     timeout = Column(Integer, default=15)
-    conversion_method = Column(SmallString, default="none")
-    validation_method = Column(SmallString)
-    content_match = Column(LargeString, default="")
-    content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict)
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
     username = Column(SmallString)
     password = Column(SmallString)
 
@@ -109,7 +101,7 @@ class RestCallService(Service):
         }
 
 
-class RestCallForm(ServiceForm, ValidationForm):
+class RestCallForm(ServiceForm):
     form_type = HiddenField(default="rest_call_service")
     call_type = SelectField(
         choices=(
@@ -128,20 +120,3 @@ class RestCallForm(ServiceForm, ValidationForm):
     timeout = IntegerField(default=15)
     username = StringField()
     password = PasswordField()
-    groups = {
-        "Main Parameters": {
-            "commands": [
-                "call_type",
-                "rest_url",
-                "payload",
-                "params",
-                "headers",
-                "verify_ssl_certificate",
-                "timeout",
-                "username",
-                "password",
-            ],
-            "default": "expanded",
-        },
-        "Validation Parameters": ValidationForm.group,
-    }

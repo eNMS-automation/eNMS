@@ -12,7 +12,7 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import StringValidationForm, NetmikoForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service
 
@@ -23,10 +23,6 @@ class UnixShellScriptService(Service):
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     source_code = Column(LargeString, default="")
-    content_match = Column(LargeString, default="")
-    content_match_regex = Column(Boolean, default=False)
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
     privileged_mode = Column(Boolean, default=False)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
@@ -87,7 +83,7 @@ class UnixShellScriptService(Service):
         }
 
 
-class UnixShellScriptForm(ServiceForm, StringValidationForm, NetmikoForm):
+class UnixShellScriptForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="unix_shell_script_service")
     privileged_mode = BooleanField("Privileged mode (run as root using sudo)")
     source_code = StringField(
@@ -129,5 +125,4 @@ class UnixShellScriptForm(ServiceForm, StringValidationForm, NetmikoForm):
             ],
             "default": "hidden",
         },
-        "Validation Parameters": StringValidationForm.group,
     }

@@ -55,6 +55,9 @@ In the migration file:
 device_query -> iteration_devices
 query_property_type -> iteration_devices_property
 
+- Moved the validation mechanism to the base "Service" class. Validation is now 
+available for all services.
+
 - the database package for MySQL and PostgreSQL are no longer part of "requirements.txt".
 They are in "requirements_db.txt" instead.
 The reason is that they can make the pip installation fail depending on the environment, and 

@@ -3,7 +3,6 @@ from wtforms import BooleanField, HiddenField, StringField
 
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Service
 
 
@@ -13,13 +12,6 @@ class PayloadValidationService(Service):
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     query = Column(SmallString)
-    conversion_method = Column(SmallString, default="none")
-    validation_method = Column(SmallString, default="text")
-    content_match = Column(LargeString, default="")
-    content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict)
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "payload_validation_service"}
 
@@ -41,7 +33,7 @@ class PayloadValidationService(Service):
         }
 
 
-class PayloadValidationForm(ServiceForm, ValidationForm):
+class PayloadValidationForm(ServiceForm):
     form_type = HiddenField(default="payload_validation_service")
     query = StringField("Python Query")
     query_fields = ServiceForm.query_fields + ["query"]

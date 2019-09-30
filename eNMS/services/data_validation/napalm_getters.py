@@ -3,7 +3,7 @@ from wtforms import HiddenField, SelectMultipleField
 
 from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import DictValidationForm, NapalmForm
+from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -12,12 +12,9 @@ class NapalmGettersService(ConnectionService):
     __tablename__ = "napalm_getters_service"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    validation_method = Column(SmallString, default="dict_included")
-    dict_match = Column(MutableDict)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     getters = Column(MutableList)
-    negative_logic = Column(Boolean, default=False)
     optional_args = Column(MutableDict)
 
     __mapper_args__ = {"polymorphic_identity": "napalm_getters_service"}
@@ -46,7 +43,7 @@ class NapalmGettersService(ConnectionService):
         }
 
 
-class NapalmGettersForm(ServiceForm, NapalmForm, DictValidationForm):
+class NapalmGettersForm(ServiceForm, NapalmForm):
     form_type = HiddenField(default="napalm_getters_service")
     getters = SelectMultipleField(
         choices=(

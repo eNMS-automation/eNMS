@@ -270,3 +270,8 @@
     netmiko prompts pass, subtype: success, workflow: Netmiko prompts}
 - {destination: Test Netmiko Prompt Service, label: success, name: 75-success:20->37,
   source: REST is_alive, subtype: success, workflow: Netmiko prompts}
+- {destination: 'Netmiko show vrf: device + value iteration', label: success, name: 85-success:1->86,
+  source: Start, subtype: success, workflow: Workflow with device and value iteration}
+- {destination: End, label: success, name: 85-success:86->2, source: 'Netmiko show
+    vrf: device + value iteration', subtype: success, workflow: Workflow with device
+    and value iteration}

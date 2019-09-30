@@ -1,13 +1,16 @@
 - color: pink
   creator: admin
   description: Start point of a workflow
+  device_query: ''
+  device_query_property: ip_address
   devices: [Columbus]
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:52:44.218107'
@@ -32,19 +35,18 @@
     'Payload Workflow: Payload Extraction with operations': [-516, -120]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
+    Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
     Workflow with separate failure - success path: [-239, -32]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -301, 93]
     Workflow_of_workflows: [-652, -15]
+    iteration_devices_workflow: ['-164', '15']
     payload_extraction_validation_worflow: [-481, -95]
     payload_transfer_workflow: [-459, 10]
     'python Workflow: payload editor and pool helper': ['-326', '45']
-    iteration_devices_workflow: ['-164', '15']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -57,13 +59,16 @@
 - color: pink
   creator: admin
   description: End point of a workflow
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:40:22.000682'
@@ -91,19 +96,18 @@
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
+    Workflow with device and value iteration: [500, 0]
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
     Workflow with separate failure - success path: [765, 251]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       594, -3]
     Workflow_of_workflows: [482, -46]
+    iteration_devices_workflow: ['651', '20']
     payload_extraction_validation_worflow: [175, 266]
     payload_transfer_workflow: [676, 95]
     'python Workflow: payload editor and pool helper': ['530', '155']
-    iteration_devices_workflow: ['651', '20']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -116,13 +120,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Mail notification (service logs)
+  device_query: ''
+  device_query_property: ip_address
   devices: [Columbus]
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:17.558725'
@@ -137,8 +144,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -151,13 +156,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Slack notification (service logs)
+  device_query: ''
+  device_query_property: ip_address
   devices: [Columbus]
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:13.388262'
@@ -172,8 +180,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -186,13 +192,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Mattermost notification (service logs)
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:13.428231'
@@ -207,8 +216,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -221,13 +228,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Monitor eNMS cluster
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:13.461232'
@@ -242,8 +252,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -256,13 +264,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Push configurations to Gitlab
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:38:04.913830'
@@ -278,8 +289,6 @@
   positions:
     Configuration Management Workflow: ['0', '300']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -292,13 +301,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Configuration Management Poller
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   hidden: true
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:38:04.642534'
@@ -314,8 +326,6 @@
   positions:
     Configuration Management Workflow: ['0', '-200']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -335,6 +345,8 @@
   creator: admin
   custom_integer: 0
   description: Example
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
@@ -343,6 +355,8 @@
   include_link_in_summary: true
   initial_payload: {}
   ip_address: 10.1.1.1
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-10 13:47:31.375477'
@@ -363,8 +377,6 @@
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -281, -178]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   regex: ''
   result_postprocessing: ''
   send_notification: false
@@ -381,12 +393,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Configure BGP Peering with Napalm
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-13 20:54:58.539660'
@@ -407,8 +423,6 @@
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       110, -170]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   remote_as: 200
   result_postprocessing: ''
   send_notification: false
@@ -424,6 +438,8 @@
   creator: admin
   description: Test the file transfer service
   destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
+  device_query: ''
+  device_query_property: ip_address
   devices: [Aserver]
   direction: get
   display_only_failed_nodes: true
@@ -431,6 +447,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:13.697251'
@@ -450,8 +468,6 @@
   positions: {}
   protocol: scp
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -470,12 +486,16 @@
   delete_folder: true
   description: Test the log backup service
   destination_path: /media/sf_VM/eNMS/tests/file_transfer
+  device_query: ''
+  device_query_property: ip_address
   devices: [Aserver]
   display_only_failed_nodes: true
   events: []
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:14.001348'
@@ -491,8 +511,6 @@
   positions: {}
   protocol: scp
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -506,6 +524,8 @@
   configuration_command: show running-config
   creator: admin
   description: Test Configuration Management
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: true
   driver: ''
@@ -515,6 +535,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:38:03.183017'
@@ -530,8 +552,6 @@
   positions: {}
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -546,6 +566,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: Test Configuration Management
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: true
   driver: ''
@@ -553,6 +575,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:38:04.436716'
@@ -568,8 +592,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -587,6 +609,8 @@
   creator: admin
   delay_factor: 1.0
   description: Create a VRF "test" with Netmiko
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   driver: arista_eos
@@ -597,6 +621,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-04 11:01:33.553474'
@@ -613,8 +639,6 @@
     Netmiko_VRF_workflow: ['0', '-150']
   privileged_mode: true
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -641,6 +665,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is configured
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
@@ -652,6 +678,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-03 20:32:00.822843'
@@ -670,12 +698,10 @@
     Napalm_VRF_workflow: ['0', '-50']
     Netmiko_VRF_workflow: ['0', '-50']
     Workflow with separate failure - success path: ['84', '-3']
-    'python Workflow: payload editor and pool helper': ['355', '-25']
     iteration_devices_workflow: ['414', '-154']
+    'python Workflow: payload editor and pool helper': ['355', '-25']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -698,6 +724,8 @@
   creator: admin
   delay_factor: 1.0
   description: Delete VRF "test"
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   driver: arista_eos
@@ -708,6 +736,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:40:18.423301'
@@ -725,8 +755,6 @@
     Netmiko_VRF_workflow: ['0', '50']
   privileged_mode: true
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -753,6 +781,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check that the vrf "test" is NOT configured
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin, Columbus]
   dict_match: {}
   display_only_failed_nodes: true
@@ -764,6 +794,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-01 11:40:21.380540'
@@ -784,8 +816,6 @@
     iteration_devices_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -806,6 +836,8 @@
   content: "vrf definition napalm\r\n"
   creator: admin
   description: Create a VRF "test" with Napalm
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   driver: eos
@@ -813,6 +845,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-24 20:09:43.688021'
@@ -829,8 +863,6 @@
   positions:
     Napalm_VRF_workflow: ['0', '-150']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -849,15 +881,18 @@
   creator: admin
   delete_spaces_before_matching: false
   description: Use REST call is_alive
+  device_query: ''
+  device_query_property: ip_address
   devices: [Columbus]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  has_targets: false
   headers: {}
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:41.424603'
@@ -883,8 +918,6 @@
     payload_transfer_workflow: ['-50', '0']
     'python Workflow: payload editor and pool helper': ['225', '-223']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
   send_notification: false
@@ -902,6 +935,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: 'Getter: get_facts'
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
@@ -911,6 +946,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-24 00:58:16.900129'
@@ -931,8 +968,6 @@
     payload_transfer_workflow: [-223, -72]
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -947,6 +982,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: 'Getter: get_interfaces'
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
@@ -956,6 +993,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:05.538847'
@@ -975,8 +1014,6 @@
     Workflow_of_workflows: [-122, -174]
     payload_transfer_workflow: [-180, 211]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -991,6 +1028,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: 'Getter: get_interfaces_ip'
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
@@ -1000,6 +1039,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-09-18 19:04:51.055911'
@@ -1018,8 +1059,6 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [272, -82]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\
     \nresults[\"result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
   send_notification: false
@@ -1035,6 +1074,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: 'Getter: get_config'
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
@@ -1044,6 +1085,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:04.482568'
@@ -1062,8 +1105,6 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [686, -58]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1078,13 +1119,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Process Payload in example workflow
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:38:04.818329'
@@ -1101,8 +1145,6 @@
     Workflow_of_workflows: [3, -51]
     payload_transfer_workflow: [291, 208]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1115,13 +1157,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Add devices to the payload
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-20 18:18:23.620683'
@@ -1140,8 +1185,6 @@
     Workflow with iteration target subworkflows: [283, -152]
     Workflow_of_workflows: [-463, -198]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1171,6 +1214,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: true
@@ -1182,6 +1227,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: payload['variables']['devices']
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-11 13:51:14.896878'
@@ -1199,8 +1246,6 @@
     Iteration Services Test Workflow: ['-336', '11']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: payload['variables']['devices']
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1229,6 +1274,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: true
@@ -1240,6 +1287,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 14:05:25.693261'
@@ -1257,8 +1306,6 @@
     Iteration Targets Workflow: [216, 129]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1287,6 +1334,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Show IP route
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: true
@@ -1298,6 +1347,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-24 14:36:46.701951'
@@ -1315,8 +1366,6 @@
     payload_extraction_validation_worflow: [-129, -278]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
@@ -1335,13 +1384,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Payload Variables Extraction with Regex/TextFSM
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:12:55.870709'
@@ -1371,11 +1423,9 @@
   positions:
     payload_extraction_validation_worflow: [144, -263]
   push_to_git: false
-  iteration_devices: ''
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1395,15 +1445,18 @@
   creator: admin
   delete_spaces_before_matching: false
   description: Payload Validate Dict
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:35:35.605726'
@@ -1420,9 +1473,7 @@
   positions:
     payload_extraction_validation_worflow: [-57, -145]
   push_to_git: false
-  iteration_devices: ''
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1440,14 +1491,17 @@
   creator: admin
   delete_spaces_before_matching: false
   description: Payload Validate Text
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:40:24.996346'
@@ -1464,9 +1518,7 @@
   positions:
     payload_extraction_validation_worflow: [-73, 96]
   push_to_git: false
-  iteration_devices: ''
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1480,6 +1532,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: false
   driver: eos
@@ -1487,6 +1541,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-24 20:09:49.603685'
@@ -1503,8 +1559,6 @@
   positions:
     Napalm_VRF_workflow: ['3', '47']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1528,6 +1582,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -1539,6 +1595,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-03 20:31:33.242467'
@@ -1559,8 +1617,6 @@
     'python Workflow: payload editor and pool helper': ['266', '161']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1589,6 +1645,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -1600,6 +1658,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-24 20:09:50.574617'
@@ -1618,8 +1678,6 @@
     iteration_devices_workflow: ['245', '32']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1648,6 +1706,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -1659,6 +1719,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: get_var("test", device=parent_device.name)
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-02 19:52:14.677268'
@@ -1676,8 +1738,6 @@
     iteration_devices_workflow: ['-5', '-147']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: get_var("test", device=parent_device.name)
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1705,6 +1765,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
@@ -1715,6 +1777,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-09-18 18:31:59.605812'
@@ -1732,8 +1796,6 @@
     Netmiko prompts: [22, -74]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   response1: show vrf b
   response2: show vrf c
   response3: ''
@@ -1761,6 +1823,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -1771,6 +1835,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-19 15:41:59.683776'
@@ -1788,8 +1854,6 @@
     Netmiko prompts: [350, 108]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   response1: show vrf
   response2: ''
   response3: ''
@@ -1808,13 +1872,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: false
   events: []
-  has_targets: false
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:29.352379'
@@ -1830,8 +1897,6 @@
   positions:
     'python Workflow: payload editor and pool helper': ['-158', '-272']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1847,13 +1912,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Chicago]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:31.392491'
@@ -1869,8 +1937,6 @@
   positions:
     'python Workflow: payload editor and pool helper': ['-159', '148']
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1899,6 +1965,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -1910,6 +1978,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: get_var("iteration_device", section="pools", device=parent_device.name)
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:38.941367'
@@ -1927,8 +1997,6 @@
     'python Workflow: payload editor and pool helper': ['35', '-232']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: get_var("iteration_device", section="pools", device=parent_device.name)
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -1957,6 +2025,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -1968,6 +2038,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: get_var("iteration_simple", section="pools")
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-07-31 13:25:41.095217'
@@ -1985,8 +2057,6 @@
     'python Workflow: payload editor and pool helper': ['47', '160']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: get_var("iteration_simple", section="pools")
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2015,6 +2085,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -2026,6 +2098,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-03 20:33:15.924993'
@@ -2043,8 +2117,6 @@
     'python Workflow: payload editor and pool helper': ['328', '91']
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2063,6 +2135,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match:
     is_alive: {is_alive: true}
@@ -2073,6 +2147,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-08 21:45:33.809528'
@@ -2090,8 +2166,6 @@
   positions:
     Napalm getters and match mechanism workflow: [-377, -267]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2106,6 +2180,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {fqdn: localhost, vendor: Arista}
   display_only_failed_nodes: false
@@ -2115,6 +2191,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-06 22:20:19.161043'
@@ -2132,8 +2210,6 @@
   positions:
     Napalm getters and match mechanism workflow: [-235, 125]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2148,6 +2224,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match:
     '{{device.ip_address}}': {prefix_length: 24}
@@ -2158,6 +2236,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-08 21:45:40.369909'
@@ -2176,8 +2256,6 @@
     Napalm getters and match mechanism workflow: [157, 139]
     'Payload Workflow: Payload Extraction with operations': [-418, -325]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2192,6 +2270,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -2201,6 +2281,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-06 23:40:55.348647'
@@ -2218,8 +2300,6 @@
   positions:
     Napalm getters and match mechanism workflow: [286, -253]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2234,6 +2314,8 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {fqdn: localhost, uptime: '666', vendor: Arista}
   display_only_failed_nodes: false
@@ -2243,6 +2325,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-06 22:23:19.569044'
@@ -2260,8 +2344,6 @@
   positions:
     Napalm getters and match mechanism workflow: [-27, -269]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2281,14 +2363,17 @@
   creator: admin
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   dict_match: {host: '{{device.ip_address}}', unreachable: 0, use_ssl: true}
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-09-18 18:26:58.293827'
@@ -2309,8 +2394,6 @@
     Ansible Workflow: [-151, -136]
     Napalm getters and match mechanism workflow: [-30, 126]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2329,14 +2412,17 @@
   creator: admin
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-10 18:26:51.501557'
@@ -2356,8 +2442,6 @@
   positions:
     Ansible Workflow: [27, 98]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2376,14 +2460,17 @@
   creator: admin
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {action: debug, changed: false, failed: false}
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-10 18:26:36.791826'
@@ -2403,8 +2490,6 @@
   positions:
     Ansible Workflow: [248, -170]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2428,6 +2513,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -2439,6 +2526,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-13 20:58:22.190268'
@@ -2458,8 +2547,6 @@
     Workflow_of_workflows: [178, -196]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2488,6 +2575,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
+  device_query: ''
+  device_query_property: ip_address
   devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
@@ -2499,6 +2588,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 14:05:31.377620'
@@ -2516,8 +2607,6 @@
     Iteration Targets Workflow: [396, -182]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2546,6 +2635,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
+  device_query: ''
+  device_query_property: ip_address
   devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
@@ -2557,6 +2648,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: '["Loopback11","Loopback15"]'
   iteration_variable_name: non_default_iteration_value_name
   last_modified: '2019-09-01 21:43:34.449057'
@@ -2574,8 +2667,6 @@
     Iteration Targets Workflow: [-112, 109]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2604,6 +2695,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
+  device_query: ''
+  device_query_property: ip_address
   devices: [Austin, Washington]
   dict_match: {}
   display_only_failed_nodes: true
@@ -2615,6 +2708,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: get_var('iteration_devices', device=device.name)
   iteration_variable_name: iteration_value
   last_modified: '2019-09-01 21:44:33.592661'
@@ -2632,8 +2727,6 @@
     Iteration Targets Workflow: [173, -219]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2662,6 +2755,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Check the iteration mechanism (interfaces)
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: true
@@ -2673,6 +2768,8 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: get_var("loop_over", device=parent_device.name)
+  iteration_devices_property: name
   iteration_values: get_var('iteration_devices2', device=device.name)
   iteration_variable_name: iteration_value
   last_modified: '2019-09-01 21:44:48.403814'
@@ -2690,8 +2787,6 @@
     Iteration Targets Workflow: [299, 115]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: get_var("loop_over", device=parent_device.name)
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2714,14 +2809,17 @@
   creator: admin
   delete_spaces_before_matching: false
   description: Payload Validate Text
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:22:23.906505'
@@ -2738,9 +2836,7 @@
   positions:
     payload_extraction_validation_worflow: [459, 97]
   push_to_git: false
-  iteration_devices: ''
   query: get_var("textfsm_variable", device=device.name)[0][1]
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2758,15 +2854,18 @@
   creator: admin
   delete_spaces_before_matching: false
   description: Payload Validate Dict
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match:
     value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 19:40:32.197054'
@@ -2783,9 +2882,7 @@
   positions:
     payload_extraction_validation_worflow: [434, -140]
   push_to_git: false
-  iteration_devices: ''
   query: get_var("regex_variable", device=device.name)
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2799,13 +2896,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 23:42:49.512906'
@@ -2821,8 +2921,6 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-367, 29]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2838,13 +2936,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 23:42:55.692116'
@@ -2869,11 +2970,9 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-197, -332]
   push_to_git: false
-  iteration_devices: ''
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2889,13 +2988,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-14 23:57:00.505853'
@@ -2920,11 +3022,9 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [-93, 28]
   push_to_git: false
-  iteration_devices: ''
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2944,14 +3044,17 @@
   creator: admin
   delete_spaces_before_matching: true
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-15 00:09:07.776014'
@@ -2968,9 +3071,7 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [82, -332]
   push_to_git: false
-  iteration_devices: ''
   query: get_var("list", device=device.name)
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -2988,14 +3089,17 @@
   creator: admin
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-15 00:11:21.018179'
@@ -3012,9 +3116,7 @@
   positions:
     'Payload Workflow: Payload Extraction with operations': [204, 18]
   push_to_git: false
-  iteration_devices: ''
   query: get_var("dict", device=device.name)
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3033,15 +3135,18 @@
   creator: admin
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   headers: {}
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: '["Washington", "Atlanta"]'
   iteration_variable_name: iteration_value
   last_modified: '2019-09-27 22:19:47.888963'
@@ -3060,8 +3165,6 @@
   positions:
     Iteration Targets Workflow: [570, -131]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   result_postprocessing: ''
   send_notification: false
@@ -3079,13 +3182,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-08-18 16:27:11.734978'
@@ -3102,8 +3208,6 @@
     'Subworkflow: Access Variable - Result from parent workflow': [178, -241]
     Workflow_of_workflows: [3, -51]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3130,6 +3234,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -3141,6 +3247,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: get_var("loop_over", device=parent_device.name)
+  iteration_devices_property: name
   iteration_values: get_result("get_interfaces", device=device.name)["result"]["get_interfaces"]
   iteration_variable_name: iteration_value
   last_modified: '2019-09-01 21:47:54.980908'
@@ -3158,8 +3266,6 @@
     'Subworkflow: Access Variable - Result from parent workflow': [173, 128]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: get_var("loop_over", device=parent_device.name)
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3188,6 +3294,8 @@
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   dict_match: {}
   display_only_failed_nodes: false
@@ -3199,6 +3307,8 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   last_modified: '2019-09-09 19:11:20.980102'
@@ -3217,8 +3327,6 @@
     Workflow with iteration targets: [239, -121]
   privileged_mode: false
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3237,13 +3345,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Poll configuration and push to gitlab
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3260,8 +3371,6 @@
   positions:
     Subworkflow of Workflow: [200, -205]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3269,7 +3378,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3277,13 +3385,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Create and delete a VRF with Netmiko
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: get_var("loop_over", device=parent_device.name)
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3300,8 +3411,6 @@
   positions:
     Workflow_of_workflows: [-481, -23]
   push_to_git: false
-  iteration_devices: get_var("loop_over", device=parent_device.name)
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3310,7 +3419,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: Arista
@@ -3318,13 +3426,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Create and delete a VRF with Napalm
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3341,8 +3452,6 @@
   positions:
     Workflow_of_workflows: [103, 162]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3351,7 +3460,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: Arista
@@ -3359,13 +3467,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ReST call, Napalm getters, etc
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
@@ -3386,8 +3497,6 @@
   positions:
     Workflow_of_workflows: [-178, 170]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3396,7 +3505,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: Arista
@@ -3404,13 +3512,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Test the payload extraction and validation mechanisms
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3427,8 +3538,6 @@
   positions:
     Subworkflow of Workflow: [217, -229]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3438,7 +3547,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3446,13 +3554,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Test the inner workflow system
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   display_only_failed_nodes: true
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3468,8 +3579,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: ip_address
   result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
@@ -3480,7 +3589,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: Arista
@@ -3488,13 +3596,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: Workflow with separate failure - success path
+  device_query: ''
+  device_query_property: ip_address
   devices: [Austin, Washington]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3510,8 +3621,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3520,7 +3629,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3528,13 +3636,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
@@ -3555,8 +3666,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3565,7 +3674,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3573,13 +3681,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Chicago]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3595,8 +3706,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3606,7 +3715,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3614,13 +3722,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3637,8 +3748,6 @@
   positions:
     Subworkflow of Workflow: [231, -29]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3648,7 +3757,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3656,13 +3764,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3678,8 +3789,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3689,7 +3798,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3697,15 +3805,18 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Houston, Baltimore, Cleveland, Cincinnati, Minneapolis, Sacramento, SanFrancisco,
     Oakland, Denver]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {mode: LAB}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
@@ -3728,8 +3839,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3738,7 +3847,6 @@
   skip: false
   skip_query: ''
   start_services: [Start, Example1]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3746,13 +3854,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington, Austin]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3768,8 +3879,6 @@
   pools: []
   positions: {}
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3779,7 +3888,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3787,13 +3895,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3810,8 +3921,6 @@
   positions:
     Subworkflow of Workflow: [227, 171]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3821,7 +3930,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3829,13 +3937,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3852,8 +3963,6 @@
   positions:
     Workflow_of_workflows: [525, -209]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3862,7 +3971,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3870,13 +3978,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: [Washington]
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
@@ -3893,8 +4004,6 @@
   positions:
     Workflow_of_workflows: [-155, -195]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3903,7 +4012,6 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
   vendor: ''
@@ -3911,13 +4019,16 @@
 - color: '#D2E5FF'
   creator: admin
   description: ''
+  device_query: ''
+  device_query_property: ip_address
   devices: []
   display_only_failed_nodes: false
   events: []
-  has_targets: true
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
   iteration_values: get_var('iteration_devices', device=device.name)
   iteration_variable_name: iteration_value
   labels: {}
@@ -3936,8 +4047,6 @@
     Workflow with iteration target subworkflows: [253, 118]
     Workflow_of_workflows: [-451, 164]
   push_to_git: false
-  iteration_devices: ''
-  iteration_devices_property: name
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -3945,8 +4054,106 @@
   skip: false
   skip_query: ''
   start_services: [Start]
-  start_workflows: []
   time_between_retries: 10
   type: workflow
+  vendor: ''
+  waiting_time: 0
+- color: '#D2E5FF'
+  creator: admin
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [Washington]
+  display_only_failed_nodes: false
+  events: []
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-09-30 20:08:02.972467'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: Workflow with device and value iteration
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  push_to_git: false
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  services: [Start, End, 'Netmiko show vrf: device + value iteration']
+  skip: false
+  skip_query: ''
+  start_services: [Start]
+  time_between_retries: 10
+  type: workflow
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  color: '#D2E5FF'
+  command: show vrf {{get_var("vrf")}}
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  hidden: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: '["Washington", "Austin"]'
+  iteration_devices_property: name
+  iteration_values: '["vrf1", "vrf2"]'
+  iteration_variable_name: vrf
+  last_modified: '2019-09-30 20:18:18.269250'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Netmiko show vrf: device + value iteration'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    Workflow with device and value iteration: [231, -106]
+  privileged_mode: false
+  push_to_git: false
+  result_postprocessing: ''
+  send_notification: false
+  send_notification_method: mail_feedback_notification
+  skip: false
+  skip_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10
+  type: netmiko_validation_service
+  use_device_driver: true
+  validation_method: text
   vendor: ''
   waiting_time: 0

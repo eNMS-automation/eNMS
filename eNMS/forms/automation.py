@@ -48,7 +48,8 @@ class ServiceForm(BaseForm):
     )
     iteration_devices = StringField("Iteration Devices (Python Query)")
     iteration_devices_property = SelectField(
-        "Iteration Devices Property", choices=(("name", "Name"), ("ip_address", "IP address"))
+        "Iteration Devices Property",
+        choices=(("name", "Name"), ("ip_address", "IP address")),
     )
     result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
     multiprocessing = BooleanField("Multiprocessing")

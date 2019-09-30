@@ -176,30 +176,31 @@ class Run(AbstractBase):
     def stop(self):
         return self.run_state["status"] == "stop"
 
+    def compute_devices_from_query(self, query, property):
+        values = self.eval(query, **locals())
+        devices, not_found = set(), []
+        if isinstance(values, str):
+            values = [values]
+        for value in values:
+            device = fetch("device", allow_none=True, **{property: value})
+            if device:
+                devices.add(device)
+            else:
+                not_found.append(value)
+        if not_found:
+            raise Exception(f"Device query invalid targets: {', '.join(not_found)}")
+        return devices
+
     def compute_devices(self, payload):
-        if self.service.device_query:
-            values = self.eval(self.service.device_query, **locals())
-            devices, not_found = [], []
-            if isinstance(values, str):
-                values = [values]
-            for value in values:
-                device = fetch(
-                    "device",
-                    allow_none=True,
-                    **{self.service.device_query_property: value},
-                )
-                if device:
-                    devices.append(device)
-                else:
-                    not_found.append(value)
-            if not_found:
-                raise Exception(f"Device query invalid targets: {', '.join(not_found)}")
-        else:
-            devices = set(self.devices)
-            for pool in self.pools:
-                devices |= set(pool.devices)
+        devices = set(self.devices)
+        for pool in self.pools:
+            devices |= set(pool.devices)
         if not devices:
-            devices = set(self.service.devices)
+            if self.service.device_query:
+                devices |= self.compute_devices_from_query(
+                    self.service.device_query, self.service.device_query_property
+                )
+            devices |= set(self.service.devices)
             for pool in self.service.pools:
                 devices |= set(pool.devices)
         self.run_state["progress"]["device"]["total"] = len(devices)
@@ -290,6 +291,9 @@ class Run(AbstractBase):
         with args[3]:
             args[4][device.name] = device_result
 
+    def device_iteration(payload, device):
+        pass
+
     def device_run(self, payload):
         devices, success = self.compute_devices(payload), True
         if not devices:
@@ -297,6 +301,11 @@ class Run(AbstractBase):
             result = self.create_result(result)
             return result
         else:
+            if self.iteration_devices:
+                device_results = {
+                    device.name: self.device_iteration(payload, device)
+                    for device in devices
+                }
             if self.multiprocessing:
                 device_results = {}
                 thread_lock = Lock()

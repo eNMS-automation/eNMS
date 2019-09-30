@@ -238,6 +238,17 @@
         </div>
       </div>
       <div id="step-4" style="min-height: 300px">
+        <label class="hide-run">Iteration devices</label>
+        <div class="form-group">
+          {{ form.iteration_devices(id=form_type + '-iteration_devices',
+          class="form-control hide-run add-id") }}
+        </div>
+        <label class="hide-run">Iteration Devices Property</label>
+        <div class="form-group">
+          {{ form.iteration_devices_property(id=form_type +
+          '-iteration_devices_property', class="form-control hide-run add-id")
+          }}
+        </div>
         <label class="hide-run"
           >Iteration values: run service for each value (python query)</label
         >
@@ -249,17 +260,6 @@
         <div class="form-group">
           {{ form.iteration_variable_name(id=form_type +
           '-iteration_variable_name', class="form-control hide-run add-id") }}
-        </div>
-        <label class="hide-run">Iteration devices</label>
-        <div class="form-group">
-          {{ form.iteration_devices(id=form_type + '-iteration_devices',
-          class="form-control hide-run add-id") }}
-        </div>
-        <label class="hide-run">Iteration Devices Property</label>
-        <div class="form-group">
-          {{ form.iteration_devices_property(id=form_type +
-          '-iteration_devices_property', class="form-control hide-run add-id")
-          }}
         </div>
       </div>
       <div id="step-5" style="min-height: 300px">

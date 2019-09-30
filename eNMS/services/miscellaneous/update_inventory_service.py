@@ -12,7 +12,6 @@ class UpdateInventoryService(Service):
     __tablename__ = "update_inventory_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = True
     update_dictionary = Column(MutableDict)
 
     __mapper_args__ = {"polymorphic_identity": "update_inventory_service"}

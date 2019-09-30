@@ -22,7 +22,6 @@ class UnixShellScriptService(Service):
     __tablename__ = "unix_shell_script_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = True
     source_code = Column(LargeString, default="")
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)

@@ -18,7 +18,6 @@ class NetmikoBackupService(ConnectionService):
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     configuration_backup_service = True
-    has_targets = True
     privileged_mode = Column(Boolean, default=False)
     configuration_command = Column(SmallString)
     driver = Column(SmallString)

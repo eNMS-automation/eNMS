@@ -14,7 +14,6 @@ class NetmikoValidationService(ConnectionService):
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     parent_type = "connection_service"
-    has_targets = True
     privileged_mode = Column(Boolean, default=False)
     command = Column(LargeString, default="")
     conversion_method = Column(SmallString, default="none")

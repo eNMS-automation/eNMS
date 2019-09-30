@@ -13,7 +13,6 @@ class NapalmPingService(ConnectionService):
     __tablename__ = "napalm_ping_service"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    has_targets = True
     count = Column(Integer, default=0)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)

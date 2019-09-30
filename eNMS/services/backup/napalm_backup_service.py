@@ -17,7 +17,6 @@ class NapalmBackupService(ConnectionService):
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     configuration_backup_service = True
-    has_targets = True
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     optional_args = Column(MutableDict)

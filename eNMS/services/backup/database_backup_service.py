@@ -19,7 +19,6 @@ class DatabaseBackupService(Service):
     __tablename__ = "database_backup_service"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    has_targets = True
     direction = "put"
     protocol = Column(SmallString)
     delete_folder = Column(Boolean, default=False)

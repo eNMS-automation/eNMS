@@ -297,17 +297,19 @@ class Run(AbstractBase):
         derived_devices = self.compute_devices_from_query(
             self.iteration_devices, self.iteration_devices_property, **locals()
         )
-        kwargs = {
-            "service": self.service.id,
-            "devices": [device.id for device in derived_devices],
-            "workflow": self.workflow.id,
-            "parent_device": device.id,
-            "parent_runtime": self.parent_runtime,
-            "restart_run": self.restart_run,
-        }
-        derived_run = factory("run", **kwargs)
-        derived_run.properties = self.properties
-        return derived_run.run(payload)
+        print("tttt"*200, derived_devices)
+        for device in derived_devices:
+            kwargs = {
+                "service": self.service.id,
+                "devices": [device.id for device in derived_devices],
+                "workflow": self.workflow.id,
+                "parent_device": device.id,
+                "parent_runtime": self.parent_runtime,
+                "restart_run": self.restart_run,
+            }
+            derived_run = factory("run", **kwargs)
+            derived_run.properties = self.properties
+            yield derived_run.run(payload)["success"]
 
     def device_run(self, payload):
         devices, success = self.compute_devices(payload), True
@@ -316,12 +318,13 @@ class Run(AbstractBase):
             result = self.create_result(result)
             return result
         else:
+            print("ooo"*200, self.iteration_devices, self.parent_device)
             if self.iteration_devices and not self.parent_device:
-                device_results = {
-                    device.name: self.device_iteration(payload, device)
+                success = all(
+                    all(self.device_iteration(payload, device))
                     for device in devices
-                }
-                return {"success": True, "runtime": self.runtime}
+                )
+                return {"success": success, "runtime": self.runtime}
             if self.multiprocessing:
                 device_results = {}
                 thread_lock = Lock()

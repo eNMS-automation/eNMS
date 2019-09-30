@@ -72,7 +72,6 @@ class Workflow(Service):
                     "restart_run": run.restart_run,
                 }
                 if device:
-                    kwargs["parent_device"] = device.id
                     kwargs["devices"] = [device.id]
                 service_run = factory("run", **kwargs)
                 Session.commit()

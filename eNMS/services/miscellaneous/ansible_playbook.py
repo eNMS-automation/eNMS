@@ -13,7 +13,6 @@ from eNMS.forms.fields import (
     NoValidationSelectField,
     SubstitutionField,
 )
-from eNMS.forms.services import ValidationForm
 from eNMS.models.automation import Service
 
 
@@ -24,13 +23,6 @@ class AnsiblePlaybookService(Service):
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     playbook_path = Column(SmallString)
     arguments = Column(SmallString)
-    conversion_method = Column(SmallString, default="none")
-    validation_method = Column(SmallString)
-    content_match = Column(LargeString, default="")
-    content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict)
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
     options = Column(MutableDict)
     pass_device_properties = Column(Boolean, default=False)
 
@@ -94,7 +86,7 @@ class AnsiblePlaybookService(Service):
         }
 
 
-class AnsiblePlaybookForm(ServiceForm, ValidationForm):
+class AnsiblePlaybookForm(ServiceForm):
     form_type = HiddenField(default="ansible_playbook_service")
     playbook_path = NoValidationSelectField("Playbook Path", choices=())
     arguments = SubstitutionField("Arguments (Ansible command line options)")
@@ -103,15 +95,3 @@ class AnsiblePlaybookForm(ServiceForm, ValidationForm):
         "in the playbook as {{name}} or {{ip_address}})"
     )
     options = DictSubstitutionField("Options (passed to ansible as -e extra args)")
-    groups = {
-        "Main Parameters": {
-            "commands": [
-                "playbook_path",
-                "arguments",
-                "pass_device_properties",
-                "options",
-            ],
-            "default": "expanded",
-        },
-        "Validation Parameters": ValidationForm.group,
-    }

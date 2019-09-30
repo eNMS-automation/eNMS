@@ -4,7 +4,7 @@ from wtforms import HiddenField
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import NetmikoForm, ValidationForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -21,13 +21,6 @@ class NetmikoPromptsService(ConnectionService):
     response2 = Column(SmallString)
     confirmation3 = Column(LargeString, default="")
     response3 = Column(SmallString)
-    conversion_method = Column(SmallString, default="none")
-    validation_method = Column(SmallString, default="text")
-    content_match = Column(LargeString, default="")
-    content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict)
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
@@ -92,7 +85,7 @@ class NetmikoPromptsService(ConnectionService):
         }
 
 
-class NetmikoPromptsForm(ServiceForm, NetmikoForm, ValidationForm):
+class NetmikoPromptsForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="netmiko_prompts_service")
     command = SubstitutionField()
     confirmation1 = SubstitutionField()
@@ -115,5 +108,4 @@ class NetmikoPromptsForm(ServiceForm, NetmikoForm, ValidationForm):
             "default": "expanded",
         },
         "Netmiko Parameters": NetmikoForm.group,
-        "String Validation Parameters": ValidationForm.group,
     }

@@ -4,7 +4,7 @@ from wtforms import BooleanField, HiddenField
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import ConnectionForm, NetmikoForm, ValidationForm
+from eNMS.forms.services import ConnectionForm, NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -16,13 +16,6 @@ class NetmikoValidationService(ConnectionService):
     parent_type = "connection_service"
     privileged_mode = Column(Boolean, default=False)
     command = Column(LargeString, default="")
-    conversion_method = Column(SmallString, default="none")
-    validation_method = Column(SmallString, default="text")
-    content_match = Column(LargeString, default="")
-    content_match_regex = Column(Boolean, default=False)
-    dict_match = Column(MutableDict)
-    negative_logic = Column(Boolean, default=False)
-    delete_spaces_before_matching = Column(Boolean, default=False)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
@@ -65,7 +58,7 @@ class NetmikoValidationService(ConnectionService):
         }
 
 
-class NetmikoValidationForm(ServiceForm, ConnectionForm, NetmikoForm, ValidationForm):
+class NetmikoValidationForm(ServiceForm, ConnectionForm, NetmikoForm):
     form_type = HiddenField(default="netmiko_validation_service")
     command = SubstitutionField()
     expect_string = SubstitutionField()
@@ -85,5 +78,4 @@ class NetmikoValidationForm(ServiceForm, ConnectionForm, NetmikoForm, Validation
             ],
             "default": "hidden",
         },
-        "Validation Parameters": ValidationForm.group,
     }

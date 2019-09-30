@@ -68,6 +68,13 @@ class Service(AbstractBase):
     maximum_runs = Column(Integer, default=1)
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
+    conversion_method = Column(SmallString, default="none")
+    validation_method = Column(SmallString, default="text")
+    content_match = Column(LargeString, default="")
+    content_match_regex = Column(Boolean, default=False)
+    dict_match = Column(MutableDict)
+    negative_logic = Column(Boolean, default=False)
+    delete_spaces_before_matching = Column(Boolean, default=False)
 
     @property
     def filename(self):

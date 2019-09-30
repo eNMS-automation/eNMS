@@ -360,15 +360,26 @@ class Run(AbstractBase):
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
         for i in range(self.number_of_retries + 1):
-            results = self.service.job(self, payload, *args)
-            self.convert_result(results)
-            self.eval(self.service.result_postprocessing, function="exec", **locals())
-            if result.get("success", True):
-                self.validate_result(results, payload, device)
-            if results["success"]:
-                return results
-            else:
-                sleep(self.time_between_retries)
+            try:
+                results = self.service.job(self, payload, *args)
+                self.convert_result(results)
+                self.eval(self.service.result_postprocessing, function="exec", **locals())
+                if results.get("success", True):
+                    self.validate_result(results, payload, device)
+                if results["success"]:
+                    return results
+                elif i < self.number_of_retries:
+                    sleep(self.time_between_retries)
+            except Exception as exc:
+                result = (
+                    f"Running {self.service.type} '{self.service.name}'"
+                    " raised the following exception:\n"
+                    f"{chr(10).join(format_exc().splitlines())}\n\n"
+                    "Run aborted..."
+                )
+                self.log("error", result)
+                return {"success": False, "result": result}
+        return results
 
     def get_results(self, payload, device=None):
         results = {"runtime": app.get_time(), "logs": []}
@@ -494,6 +505,7 @@ class Run(AbstractBase):
         if self.validation_method == "none":
             if "success" not in result:
                 result["success"] = True
+            return result
         elif self.validation_method == "text":
             match = self.sub(self.content_match, locals())
             str_result = str(result)

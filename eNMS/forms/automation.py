@@ -54,6 +54,29 @@ class ServiceForm(BaseForm):
     result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
+    conversion_method = SelectField(
+        choices=(
+            ("none", "No conversion"),
+            ("text", "Text"),
+            ("json", "Json dictionary"),
+            ("xml", "XML dictionary"),
+        )
+    )
+    validation_method = SelectField(
+        "Validation Method",
+        choices=(
+            ("text", "Validation by text match"),
+            ("dict_included", "Validation by dictionary inclusion"),
+            ("dict_equal", "Validation by dictionary equality"),
+        ),
+    )
+    content_match = SubstitutionField(
+        "Content Match", widget=TextArea(), render_kw={"rows": 8}
+    )
+    content_match_regex = BooleanField("Match content with Regular Expression")
+    dict_match = DictSubstitutionField("Dictionary to Match Against")
+    negative_logic = BooleanField("Negative logic")
+    delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
     query_fields = ["device_query", "skip_query", "iteration_values"]
 
     def validate(self):
@@ -64,6 +87,10 @@ class ServiceForm(BaseForm):
             and not self.mail_recipient.data
             and not app.mail_recipients
         )
+        if no_recipient_error:
+            self.mail_recipient.errors.append(
+                "Please add at least one recipient for the mail notification."
+            )
         bracket_error = False
         for query_field in self.query_fields:
             field = getattr(self, query_field)
@@ -78,11 +105,19 @@ class ServiceForm(BaseForm):
                     "You cannot use variable substitution "
                     "in a field expecting a python expression."
                 )
-        if no_recipient_error:
-            self.mail_recipient.errors.append(
-                "Please add at least one recipient for the mail notification."
+        conversion_validation_mismatch = (
+            self.conversion_method.data == "text"
+            and "dict" in self.validation_method.data
+            or self.conversion_method.data in ("xml", "json")
+            and "dict" not in self.validation_method.data
+        )
+        if conversion_validation_mismatch:
+            self.conversion_method.errors.append(
+                f"The conversion method is set to '{self.conversion_method.data}'"
+                f" and the validation method to '{self.validation_method.data}' :"
+                " these do not match."
             )
-        return valid_form and not no_recipient_error and not bracket_error
+        return valid_form and not no_recipient_error and not bracket_error and not conversion_validation_mismatch
 
 
 class RunForm(BaseForm):

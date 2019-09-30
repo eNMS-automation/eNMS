@@ -17,6 +17,7 @@ from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
+from time import sleep
 from traceback import format_exc
 from xmltodict import parse
 from xml.parsers.expat import ExpatError
@@ -358,12 +359,16 @@ class Run(AbstractBase):
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
-        results = self.service.job(self, payload, *args)
-        self.convert_result(results)
-        self.eval(self.service.result_postprocessing, function="exec", **locals())
-        if result.get("success", True):
-            self.validate_result(results, payload, device)
-        return results
+        for i in range(number_of_retries + 1):
+            results = self.service.job(self, payload, *args)
+            self.convert_result(results)
+            self.eval(self.service.result_postprocessing, function="exec", **locals())
+            if result.get("success", True):
+                self.validate_result(results, payload, device)
+            if results["success"]:
+                return results
+            else:
+                sleep(self.time_between_retries)
 
     def get_results(self, payload, device=None):
         results = {"runtime": app.get_time(), "logs": []}

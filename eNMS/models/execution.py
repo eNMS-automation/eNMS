@@ -359,11 +359,11 @@ class Run(AbstractBase):
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
-        result = self.service.job(self, payload, *args)
-        if "success" not in result:
-            result["success"] = True
-        self.convert_result(result)
-        return self.validate_result(result, payload, device)
+        results = self.service.job(self, payload, *args)
+        self.convert_result(results)
+        self.eval(self.service.result_postprocessing, function="exec", **locals())
+        self.validate_result(results, payload, device)
+        return results
 
     def get_results(self, payload, device=None):
         results = {"runtime": app.get_time(), "logs": []}
@@ -386,7 +386,6 @@ class Run(AbstractBase):
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
             self.log("error", chr(10).join(format_exc().splitlines()))
-        self.eval(self.service.result_postprocessing, function="exec", **locals())
         results["endtime"] = app.get_time()
         if device:
             status = "passed" if results["success"] else "failed"
@@ -488,21 +487,24 @@ class Run(AbstractBase):
 
     def validate_result(self, result, payload, device):
         if self.validation_method == "none":
-            return result
+            if "success" not in result:
+                result["success"] = True
         elif self.validation_method == "text":
-            result["match"] = match = self.sub(self.content_match, **locals())
+            match = self.sub(self.content_match, locals())
             str_result = str(result)
             if self.delete_spaces_before_matching:
                 match, str_result = map(self.space_deleter, (match, str_result))
-            result["success"] = (
+            success = (
                 self.content_match_regex
                 and bool(search(match, str_result))
                 or match in str_result
                 and not self.content_match_regex
             )
         else:
-            result["match"] = match = self.sub(self.dict_match, **locals())
-            result["success"] = self.match_dictionary(result, match)
+            match = self.sub(self.dict_match, locals())
+            success = self.match_dictionary(result, match)
+        result["success"] = not success if self.negative_logic else success
+        result.update({"match": match, "negative_logic": self.negative_logic})
 
     def match_dictionary(self, result, match, first=True):
         if self.validation_method == "dict_equal":

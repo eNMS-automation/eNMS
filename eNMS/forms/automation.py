@@ -42,9 +42,13 @@ class ServiceForm(BaseForm):
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     initial_payload = DictField()
-    iteration_values = StringField("Iteration Targets (Python Query)")
+    iteration_values = StringField("Iteration Values (Python Query)")
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
+    )
+    iteration_devices = StringField("Iteration Devices (Python Query)")
+    iteration_devices_property = SelectField(
+        "Iteration Devices Property", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
     result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
     multiprocessing = BooleanField("Multiprocessing")

@@ -61,6 +61,8 @@ class Service(AbstractBase):
     skip_query = Column(SmallString)
     iteration_values = Column(LargeString)
     iteration_variable_name = Column(SmallString, default="iteration_value")
+    iteration_devices = Column(LargeString)
+    iteration_devices_property = Column(SmallString, default="ip_address")
     result_postprocessing = Column(LargeString)
     runs = relationship("Run", back_populates="service", cascade="all, delete-orphan")
     maximum_runs = Column(Integer, default=1)

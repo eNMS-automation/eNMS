@@ -119,6 +119,18 @@
             '-iteration_variable_name', class="form-control hide-run add-id") }}
           </div>
           <label class="hide-run"
+            >Iteration devices</label
+          >
+          <div class="form-group">
+            {{ form.iteration_devices(id=form_type + '-iteration_devices',
+            class="form-control hide-run add-id") }}
+          </div>
+          <label class="hide-run">Iteration Devices Property</label>
+          <div class="form-group">
+            {{ form.iteration_devices_property(id=form_type +
+            '-iteration_devices_property', class="form-control hide-run add-id") }}
+          </div>
+          <label class="hide-run"
             >Python Post-processing of the results (variable "results")</label
           >
           <div class="form-group">

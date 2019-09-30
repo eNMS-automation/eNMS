@@ -4,7 +4,7 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DictField, MultipleInstanceField, NoValidationSelectField
+from eNMS.forms.fields import DictField, DictSubstitutionField, MultipleInstanceField, NoValidationSelectField, SubstitutionField
 
 
 class ServiceForm(BaseForm):

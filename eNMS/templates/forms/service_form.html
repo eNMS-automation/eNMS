@@ -83,7 +83,7 @@
             <span class="step_no">7</span>
             <span class="step_descr"
               >Step 7<br />
-              <small>Notification</small>
+              <small>Report</small>
             </span>
           </a>
         </li>
@@ -137,18 +137,6 @@
             {{ form.time_between_retries(id=form_type + '-time_between_retries',
             class="form-control add-id") }}
           </div>
-          <fieldset>
-            <div class="item">
-              <input
-                id="{{ form_type }}-push_to_git"
-                name="push_to_git"
-                class="add-id"
-                type="checkbox"
-                value="y"
-              />
-              <label>Push to git</label>
-            </div>
-          </fieldset>
         </div>
       </div>
       <div id="step-2">
@@ -308,6 +296,18 @@
 
       </div>
       <div id="step-7">
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-push_to_git"
+              name="push_to_git"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Push to git</label>
+          </div>
+        </fieldset>
         <fieldset>
           <div class="item">
             <input

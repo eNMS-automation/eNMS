@@ -1,11 +1,9 @@
 from wtforms import BooleanField, FloatField, HiddenField, IntegerField, SelectField
-from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     DictField,
-    DictSubstitutionField,
     PasswordSubstitutionField,
     SubstitutionField,
 )

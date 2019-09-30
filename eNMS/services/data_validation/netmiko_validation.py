@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField
 
-from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
+from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import ConnectionForm, NetmikoForm

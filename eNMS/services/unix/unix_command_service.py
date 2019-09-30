@@ -1,8 +1,8 @@
 from subprocess import check_output
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer
 from wtforms import HiddenField
 
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service

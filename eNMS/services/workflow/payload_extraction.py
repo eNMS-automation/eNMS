@@ -1,8 +1,8 @@
 from io import StringIO
 from re import findall
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer
 from textfsm import TextFSM
-from wtforms import BooleanField, HiddenField, SelectField, StringField
+from wtforms import HiddenField, SelectField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, SmallString

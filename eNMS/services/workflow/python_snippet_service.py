@@ -1,5 +1,5 @@
-from sqlalchemy import Boolean, ForeignKey, Integer
-from wtforms import BooleanField, HiddenField, StringField
+from sqlalchemy import ForeignKey, Integer
+from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString

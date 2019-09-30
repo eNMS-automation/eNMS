@@ -1,6 +1,6 @@
 from json import dumps
 from requests import post
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer
 from wtforms import HiddenField
 from wtforms.widgets import TextArea
 

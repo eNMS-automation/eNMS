@@ -1,8 +1,8 @@
 from collections import defaultdict
-from sqlalchemy import Boolean, ForeignKey, Integer
+from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from wtforms import BooleanField, HiddenField
+from wtforms import HiddenField
 
 from eNMS.database import Session
 from eNMS.database.base import AbstractBase

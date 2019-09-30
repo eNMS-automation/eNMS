@@ -317,7 +317,6 @@ class Run(AbstractBase):
             result = self.create_result(result)
             return result
         else:
-            print("ooo" * 200, self.iteration_devices, self.parent_device)
             if self.iteration_devices and not self.parent_device:
                 success = all(
                     all(self.device_iteration(payload, device)) for device in devices

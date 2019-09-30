@@ -5,8 +5,8 @@ from logging import info
 from pathlib import Path
 from requests import post, get
 from slackclient import SlackClient
-from sqlalchemy import Boolean, ForeignKey, Integer
-from wtforms import BooleanField, HiddenField
+from sqlalchemy import ForeignKey, Integer
+from wtforms import HiddenField
 
 from eNMS import app
 from eNMS.database import Session

@@ -1,7 +1,7 @@
-from sqlalchemy import Boolean, ForeignKey, Integer
-from wtforms import BooleanField, HiddenField, StringField
+from sqlalchemy import ForeignKey, Integer
+from wtforms import HiddenField, StringField
 
-from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
+from eNMS.database.dialect import Column, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
 

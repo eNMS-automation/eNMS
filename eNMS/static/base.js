@@ -549,7 +549,7 @@ function initTable(type, instance, runtime) {
   ) {
     tables[type].order([0, "desc"]).draw();
   }
-  if (["run", "service", "task", "workflow"].includes(type)) {   
+  if (["run", "service", "task", "workflow"].includes(type)) {
     refreshTablePeriodically(type, 3000);
   }
 }

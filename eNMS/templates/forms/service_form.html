@@ -56,16 +56,25 @@
             <span class="step_no">4</span>
             <span class="step_descr"
               >Step 4<br />
+              <small>Iteration</small>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#step-5">
+            <span class="step_no">5</span>
+            <span class="step_descr"
+              >Step 5<br />
               <small>Workflow</small>
             </span>
           </a>
         </li>
         {% if form_type != "workflow" %}
         <li>
-          <a href="#step-5">
-            <span class="step_no">5</span>
+          <a href="#step-6">
+            <span class="step_no">6</span>
             <span class="step_descr"
-              >Step 5<br />
+              >Step 6<br />
               <small>Specific</small>
             </span>
           </a>
@@ -105,30 +114,6 @@
           <div class="form-group">
             {{ form.initial_payload(id=form_type + '-initial_payload',
             class="form-control add-id") }}
-          </div>
-          <label class="hide-run"
-            >Iteration values: run service for each value (python query)</label
-          >
-          <div class="form-group">
-            {{ form.iteration_values(id=form_type + '-iteration_values',
-            class="form-control hide-run add-id") }}
-          </div>
-          <label class="hide-run">Iteration Variable Name</label>
-          <div class="form-group">
-            {{ form.iteration_variable_name(id=form_type +
-            '-iteration_variable_name', class="form-control hide-run add-id") }}
-          </div>
-          <label class="hide-run"
-            >Iteration devices</label
-          >
-          <div class="form-group">
-            {{ form.iteration_devices(id=form_type + '-iteration_devices',
-            class="form-control hide-run add-id") }}
-          </div>
-          <label class="hide-run">Iteration Devices Property</label>
-          <div class="form-group">
-            {{ form.iteration_devices_property(id=form_type +
-            '-iteration_devices_property', class="form-control hide-run add-id") }}
           </div>
           <label class="hide-run"
             >Python Post-processing of the results (variable "results")</label
@@ -255,18 +240,31 @@
         </div>
       </div>
       <div id="step-4" style="min-height: 300px">
-        {% if form_type == "workflow" %}
-        <label for="start_services">Workflow Entry Point(s)</label>
+        <label class="hide-run"
+          >Iteration values: run service for each value (python query)</label
+        >
         <div class="form-group">
-          {{ form.start_services(id=form_type + '-start_services',
-          class="form-control add-id") }}
+          {{ form.iteration_values(id=form_type + '-iteration_values',
+          class="form-control hide-run add-id") }}
         </div>
-        <label for="restart_runtime" class="no-edit">Restart Runtime</label>
+        <label class="hide-run">Iteration Variable Name</label>
         <div class="form-group">
-          {{ form.restart_runtime(id=form_type + '-restart_runtime',
-          class="form-control no-edit add-id") }}
+          {{ form.iteration_variable_name(id=form_type +
+          '-iteration_variable_name', class="form-control hide-run add-id") }}
         </div>
-        {% endif %}
+        <label class="hide-run">Iteration devices</label>
+        <div class="form-group">
+          {{ form.iteration_devices(id=form_type + '-iteration_devices',
+          class="form-control hide-run add-id") }}
+        </div>
+        <label class="hide-run">Iteration Devices Property</label>
+        <div class="form-group">
+          {{ form.iteration_devices_property(id=form_type +
+          '-iteration_devices_property', class="form-control hide-run add-id")
+          }}
+        </div>
+      </div>
+      <div id="step-5" style="min-height: 300px">
         <fieldset>
           <div class="item">
             <input
@@ -283,8 +281,8 @@
           >Skip Service If Python Query evaluates to True</label
         >
         <div class="form-group">
-          {{ form.skip_query(id=form_type + '-skip_query',
-          class="form-control hide-run add-id") }}
+          {{ form.skip_query(id=form_type + '-skip_query', class="form-control
+          hide-run add-id") }}
         </div>
         <label class="hide-run">Maximum number of runs</label>
         <div class="form-group">
@@ -297,8 +295,7 @@
           class="form-control hide-run add-id") }}
         </div>
       </div>
-      {% if form_type != "workflow" %}
-      <div id="step-5">
+      <div id="step-6">
         {% set groups = form.groups or {"Parameters": {"commands":
         form.service_fields, "default": "expanded"}} %}
         <div
@@ -355,7 +352,6 @@
           {% endfor %}
         </div>
       </div>
-      {% endif %}
     </div>
   </div>
 </form>

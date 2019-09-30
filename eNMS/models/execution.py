@@ -359,14 +359,30 @@ class Run(AbstractBase):
         factory("result", **result_kw)
         return results
 
-    def get_results(self, payload, *args):
+    def run_service_job(self, payload, device=None):
+        args = (device,) if device else ()
+        result = self.service.job(self, payload, *args)
+        result["result"] = self.convert_result(job_result["result"])
+        if self.validation_method:
+            match = (
+                self.sub(self.content_match, locals())
+                if self.validation_method == "text"
+                else self.sub(run.dict_match, locals())
+            )
+            result.update({
+                "match": match,
+                "success": self.match_content(result["result"], match),
+            })
+        return result
+
+    def get_results(self, payload, device=None):
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.service.iteration_values:
                 targets_results = {}
                 for target in self.eval(self.service.iteration_values, **locals()):
                     self.payload_helper(payload, self.iteration_variable_name, target)
-                    targets_results[target] = self.service.job(self, payload, *args)
+                    targets_results[target] = self.run_service_job(payload, device)
                 results.update(
                     {
                         "results": targets_results,
@@ -374,7 +390,7 @@ class Run(AbstractBase):
                     }
                 )
             else:
-                results.update(self.service.job(self, payload, *args))
+                results.update(self.run_service_job(payload, device))
         except Exception:
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}

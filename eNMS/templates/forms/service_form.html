@@ -286,74 +286,69 @@
         </div>
       </div>
       <div id="step-6">
-        <label class="hide-run"
-          >Conversion Method</label
-        >
+        <label class="hide-run">Conversion Method</label>
         <div class="form-group">
-          {{ form.conversion_method(id=form_type +
-          '-conversion_method', class="form-control hide-run add-id") }}
+          {{ form.conversion_method(id=form_type + '-conversion_method',
+          class="form-control hide-run add-id") }}
         </div>
         <label class="hide-run"
           >Python Post-processing after conversion (variable "results")</label
         >
         <div class="form-group">
-          {{ form.result_postprocessing(id=form_type +
-          '-result_postprocessing', class="form-control hide-run add-id") }}
+          {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
+          class="form-control hide-run add-id") }}
         </div>
-        <label class="hide-run"
-          >Validation Method</label
-        >
+        <label class="hide-run">Validation Method</label>
         <div class="form-group">
-          {{ form.validation_method(id=form_type +
-          '-validation_method', class="form-control hide-run add-id") }}
+          {{ form.validation_method(id=form_type + '-validation_method',
+          class="form-control hide-run add-id") }}
         </div>
         <label>Content Match</label>
         <div class="form-group">
-          {{ form.content_match(id=form_type +
-          '-content_match', class="form-control add-id") }}
+          {{ form.content_match(id=form_type + '-content_match',
+          class="form-control add-id") }}
         </div>
         <fieldset>
-            <div class="item">
-              <input
-                id="{{ form_type }}-content_match_regex"
-                name="content_match_regex"
-                class="add-id"
-                type="checkbox"
-                value="y"
-              />
-              <label>"Content Match" is a regular expression</label>
-            </div>
-          </fieldset>
-          <label>Dictionary Match</label>
-          <div class="form-group">
-            {{ form.dict_match(id=form_type +
-            '-dict_match', class="form-control add-id") }}
+          <div class="item">
+            <input
+              id="{{ form_type }}-content_match_regex"
+              name="content_match_regex"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>"Content Match" is a regular expression</label>
           </div>
-          <fieldset>
-              <div class="item">
-                <input
-                  id="{{ form_type }}-delete_spaces_before_matching"
-                  name="delete_spaces_before_matching"
-                  class="add-id"
-                  type="checkbox"
-                  value="y"
-                />
-                <label>Delete spaces before matching</label>
-              </div>
-            </fieldset>
-          <fieldset>
-              <div class="item">
-                <input
-                  id="{{ form_type }}-negative_logic"
-                  name="negative_logic"
-                  class="add-id"
-                  type="checkbox"
-                  value="y"
-                />
-                <label>Negative Logic</label>
-              </div>
-            </fieldset>
-
+        </fieldset>
+        <label>Dictionary Match</label>
+        <div class="form-group">
+          {{ form.dict_match(id=form_type + '-dict_match', class="form-control
+          add-id") }}
+        </div>
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-delete_spaces_before_matching"
+              name="delete_spaces_before_matching"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Delete spaces before matching</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="item">
+            <input
+              id="{{ form_type }}-negative_logic"
+              name="negative_logic"
+              class="add-id"
+              type="checkbox"
+              value="y"
+            />
+            <label>Negative Logic</label>
+          </div>
+        </fieldset>
       </div>
       <div id="step-7">
         <fieldset>

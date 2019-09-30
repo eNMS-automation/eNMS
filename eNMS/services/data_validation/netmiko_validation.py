@@ -34,27 +34,17 @@ class NetmikoValidationService(ConnectionService):
         command = run.sub(run.command, locals())
         run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")
         expect_string = run.sub(run.expect_string, locals())
-        result = run.convert_result(
-            netmiko_connection.send_command(
-                command,
-                delay_factor=run.delay_factor,
-                expect_string=run.expect_string or None,
-                auto_find_prompt=run.auto_find_prompt,
-                strip_prompt=run.strip_prompt,
-                strip_command=run.strip_command,
-            )
-        )
-        match = (
-            run.sub(run.content_match, locals())
-            if run.validation_method == "text"
-            else run.sub(run.dict_match, locals())
+        result = netmiko_connection.send_command(
+            command,
+            delay_factor=run.delay_factor,
+            expect_string=run.expect_string or None,
+            auto_find_prompt=run.auto_find_prompt,
+            strip_prompt=run.strip_prompt,
+            strip_command=run.strip_command,
         )
         return {
             "command": command,
-            "match": match,
-            "negative_logic": run.negative_logic,
             "result": result,
-            "success": run.match_content(result, match),
         }
 
 

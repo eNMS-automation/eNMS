@@ -4,7 +4,13 @@ from wtforms.widgets import TextArea
 
 from eNMS import app
 from eNMS.forms import BaseForm
-from eNMS.forms.fields import DictField, DictSubstitutionField, MultipleInstanceField, NoValidationSelectField, SubstitutionField
+from eNMS.forms.fields import (
+    DictField,
+    DictSubstitutionField,
+    MultipleInstanceField,
+    NoValidationSelectField,
+    SubstitutionField,
+)
 
 
 class ServiceForm(BaseForm):
@@ -65,6 +71,7 @@ class ServiceForm(BaseForm):
     validation_method = SelectField(
         "Validation Method",
         choices=(
+            ("none", "No validation"),
             ("text", "Validation by text match"),
             ("dict_included", "Validation by dictionary inclusion"),
             ("dict_equal", "Validation by dictionary equality"),
@@ -117,7 +124,12 @@ class ServiceForm(BaseForm):
                 f" and the validation method to '{self.validation_method.data}' :"
                 " these do not match."
             )
-        return valid_form and not no_recipient_error and not bracket_error and not conversion_validation_mismatch
+        return (
+            valid_form
+            and not no_recipient_error
+            and not bracket_error
+            and not conversion_validation_mismatch
+        )
 
 
 class RunForm(BaseForm):

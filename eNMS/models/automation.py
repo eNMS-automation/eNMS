@@ -69,7 +69,7 @@ class Service(AbstractBase):
     multiprocessing = Column(Boolean, default=False)
     max_processes = Column(Integer, default=5)
     conversion_method = Column(SmallString, default="none")
-    validation_method = Column(SmallString, default="text")
+    validation_method = Column(SmallString, default="none")
     content_match = Column(LargeString, default="")
     content_match_regex = Column(Boolean, default=False)
     dict_match = Column(MutableDict)

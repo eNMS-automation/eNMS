@@ -297,7 +297,6 @@ class Run(AbstractBase):
         derived_devices = self.compute_devices_from_query(
             self.iteration_devices, self.iteration_devices_property, **locals()
         )
-        print("tttt"*200, derived_devices)
         for device in derived_devices:
             kwargs = {
                 "service": self.service.id,
@@ -318,11 +317,10 @@ class Run(AbstractBase):
             result = self.create_result(result)
             return result
         else:
-            print("ooo"*200, self.iteration_devices, self.parent_device)
+            print("ooo" * 200, self.iteration_devices, self.parent_device)
             if self.iteration_devices and not self.parent_device:
                 success = all(
-                    all(self.device_iteration(payload, device))
-                    for device in devices
+                    all(self.device_iteration(payload, device)) for device in devices
                 )
                 return {"success": success, "runtime": self.runtime}
             if self.multiprocessing:
@@ -362,18 +360,9 @@ class Run(AbstractBase):
     def run_service_job(self, payload, device=None):
         args = (device,) if device else ()
         result = self.service.job(self, payload, *args)
-        result["result"] = self.convert_result(job_result["result"])
-        if self.validation_method:
-            match = (
-                self.sub(self.content_match, locals())
-                if self.validation_method == "text"
-                else self.sub(run.dict_match, locals())
-            )
-            result.update({
-                "match": match,
-                "success": self.match_content(result["result"], match),
-            })
-        return result
+        if "success" not in result:
+            result["success"] = True
+        return self.validate_result(result)
 
     def get_results(self, payload, device=None):
         results = {"runtime": app.get_time(), "logs": []}
@@ -494,10 +483,13 @@ class Run(AbstractBase):
             }
         return result
 
-    def match_content(self, result, match):
-        if getattr(self, "validation_method", "text") == "text":
+    def validate_result(_self, result, match, **locals):
+        result["result"] = self.convert_result(result["result"])
+        if self.validation_method == "none":
+            return result
+        elif self.validation_method == "text":
+            match = self.sub(self.content_match, **locals)
             result = str(result)
-            assert isinstance(match, str)
             if self.delete_spaces_before_matching:
                 match, result = map(self.space_deleter, (match, result))
             success = (
@@ -507,9 +499,12 @@ class Run(AbstractBase):
                 and not self.content_match_regex
             )
         else:
+            match = self.sub(run.dict_match, **locals)
             assert isinstance(match, dict)
             success = self.match_dictionary(result, match)
-        return success if not self.negative_logic else not success
+        success = success if not self.negative_logic else not success
+        result.update({"success": success, "match": match})
+        return result
 
     def match_dictionary(self, result, match, first=True):
         if self.validation_method == "dict_equal":

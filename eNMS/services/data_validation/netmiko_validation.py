@@ -42,10 +42,7 @@ class NetmikoValidationService(ConnectionService):
             strip_prompt=run.strip_prompt,
             strip_command=run.strip_command,
         )
-        return {
-            "command": command,
-            "result": result,
-        }
+        return {"command": command, "result": result}
 
 
 class NetmikoValidationForm(ServiceForm, ConnectionForm, NetmikoForm):

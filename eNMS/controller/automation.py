@@ -195,7 +195,7 @@ class AutomationController(BaseController):
                 old_position = workflow.labels[id]["positions"]
                 workflow.labels[id] = {
                     "positions": new_position,
-                    "content": workflow.labels[id]["content"],
+                    **workflow.labels[id]
                 }
             else:
                 service = fetch("service", id=id)

@@ -3613,12 +3613,13 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    fa5c0a00-e4f1-490a-b882-cb2a57c24b78:
+    f753b933-4fe2-4398-8b3e-5316eaed9abc:
+      alignment: left
       content: "This workflow runs on two devices :\r\n- The pool \"Washington\" that\
         \ contains Washington.\r\n- The device \"Austin\".\r\nWashington should reach\
         \ the end and Austin fail at the first step."
-      positions: [36, 20]
-  last_modified: '2019-10-01 22:31:36.089090'
+      positions: ['36.14208984375', '13.3306884765625']
+  last_modified: '2019-10-01 22:36:03.235640'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3716,16 +3717,17 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    0c7d547b-41e0-4802-bb41-f6706a80f746:
-      content: "Process payload is a Swiss Army Knife service that uses the results\
-        \ of both get_facts\r\nand get_interfaces to compute its success value.\r\n\
-        Prerequisite edges are used to ensure the order in which services are run."
-      positions: [338, 270]
     c9ee8980-a972-4ace-a596-03eb2842c4d7:
       content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
         \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
       positions: [165, -143]
-  last_modified: '2019-10-01 18:25:36.434497'
+    fa4bd6ec-c736-4b7e-afb0-f4a79b477033:
+      alignment: left
+      content: "Process payload is a Swiss Army Knife service that uses the results\
+        \ of both get_facts\r\nand get_interfaces to compute its success value.\r\n\
+        Prerequisite edges are used to ensure the order in which services are run."
+      positions: ['356.2877419758313', '267.37324713846346']
+  last_modified: '2019-10-01 22:36:20.371507'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4539,13 +4541,13 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    ad4cddf7-3ac1-40c3-b5dc-3f5b1342d029:
-      alignment: center
+    1b2cc064-cc7d-42af-8eda-61d44720fe79:
+      alignment: left
       content: "Use Netmiko to run a \"show vrf\".\r\nUse the validation mechanism\
         \ to check for the string \"NOVRF\".\r\nRetry twice with 2 seconds between\
         \ retries."
-      positions: ['266.7530517578125', '-226.0806884765625']
-  last_modified: '2019-10-01 18:26:42.980445'
+      positions: ['292.7530517578125', '-229.5806884765625']
+  last_modified: '2019-10-01 22:36:32.350833'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1

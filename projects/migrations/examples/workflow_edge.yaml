@@ -23,19 +23,26 @@
 - {destination: napalm_create_vrf_test, label: success, name: Napalm_VRF_workflow
     0 -> 2, source: Start, subtype: success, workflow: Napalm_VRF_workflow}
 - {destination: get_interfaces_ip, label: success, name: payload_transfer_workflow:success
-    3 -> 5, source: get_facts, subtype: success, workflow: payload_transfer_workflow}
+    3 -> 5, source: get_facts, subtype: success, workflow: 'Regression Workflow 3:
+    Napalm getters and postprocessing'}
 - {destination: get_config, label: success, name: payload_transfer_workflow:success
-    5 -> 6, source: get_interfaces_ip, subtype: success, workflow: payload_transfer_workflow}
+    5 -> 6, source: get_interfaces_ip, subtype: success, workflow: 'Regression Workflow
+    3: Napalm getters and postprocessing'}
 - {destination: process_payload1, label: success, name: payload_transfer_workflow:success
-    6 -> 7, source: get_config, subtype: success, workflow: payload_transfer_workflow}
+    6 -> 7, source: get_config, subtype: success, workflow: 'Regression Workflow 3:
+    Napalm getters and postprocessing'}
 - {destination: process_payload1, label: success, name: payload_transfer_workflow:success
-    4 -> 7, source: get_interfaces, subtype: success, workflow: payload_transfer_workflow}
+    4 -> 7, source: get_interfaces, subtype: success, workflow: 'Regression Workflow
+    3: Napalm getters and postprocessing'}
 - {destination: End, label: success, name: payload_transfer_workflow:success 7 ->
-    1, source: process_payload1, subtype: success, workflow: payload_transfer_workflow}
+    1, source: process_payload1, subtype: success, workflow: 'Regression Workflow
+    3: Napalm getters and postprocessing'}
 - {destination: process_payload1, label: prerequisite, name: payload_transfer_workflow:prerequisite
-    4 -> 7, source: get_interfaces, subtype: prerequisite, workflow: payload_transfer_workflow}
+    4 -> 7, source: get_interfaces, subtype: prerequisite, workflow: 'Regression Workflow
+    3: Napalm getters and postprocessing'}
 - {destination: process_payload1, label: prerequisite, name: payload_transfer_workflow:prerequisite
-    3 -> 7, source: get_facts, subtype: prerequisite, workflow: payload_transfer_workflow}
+    3 -> 7, source: get_facts, subtype: prerequisite, workflow: 'Regression Workflow
+    3: Napalm getters and postprocessing'}
 - {destination: netmiko_show_ip_route, label: success, name: payload_extraction_validation_worflow
     0 -> 2, source: Start, subtype: success, workflow: payload_extraction_validation_worflow}
 - {destination: Payload Extraction, label: success, name: payload_extraction_validation_worflow
@@ -57,16 +64,16 @@
 - {destination: End, label: success, name: 40-success:46->2, source: netmiko_check_no_vrf_napalm,
   subtype: success, workflow: Napalm_VRF_workflow}
 - {destination: get_facts, label: success, name: 43-success:1->22, source: Start,
-  subtype: success, workflow: payload_transfer_workflow}
+  subtype: success, workflow: 'Regression Workflow 3: Napalm getters and postprocessing'}
 - {destination: get_interfaces, label: success, name: 43-success:1->23, source: Start,
-  subtype: success, workflow: payload_transfer_workflow}
+  subtype: success, workflow: 'Regression Workflow 3: Napalm getters and postprocessing'}
 - {destination: REST is_alive, label: failure, name: 47-failure:19->21, source: netmiko_check_no_vrf_test,
-  subtype: failure, workflow: Workflow with separate failure - success path}
+  subtype: failure, workflow: 'Regression Workflow 2: separate failure - success path'}
 - {destination: netmiko_check_no_vrf_test, label: success, name: 47-success:1->19,
-  source: Start, subtype: success, workflow: Workflow with separate failure - success
-    path}
+  source: Start, subtype: success, workflow: 'Regression Workflow 2: separate failure
+    - success path'}
 - {destination: get_facts, label: success, name: 47-success:19->22, source: netmiko_check_no_vrf_test,
-  subtype: success, workflow: Workflow with separate failure - success path}
+  subtype: success, workflow: 'Regression Workflow 2: separate failure - success path'}
 - {destination: Test Netmiko Prompt Service, label: success, name: 51-success:1->52,
   source: Start, subtype: success, workflow: Netmiko prompts}
 - {destination: Test netmiko prompts pass, label: failure, name: 54-failure:38->55,
@@ -119,14 +126,14 @@
 - {destination: End, label: success, name: 64-success:66->2, source: 'Ansible Workflow:
     Arista show configuration (dict match)', subtype: success, workflow: Ansible Workflow}
 - {destination: get_interfaces, label: success, name: 62-success:20->22, source: REST
-    is_alive, subtype: success, workflow: Workflow with separate failure - success
-    path}
+    is_alive, subtype: success, workflow: 'Regression Workflow 2: separate failure
+    - success path'}
 - {destination: Example1, label: success, name: 62-success:22->9, source: get_interfaces,
-  subtype: success, workflow: Workflow with separate failure - success path}
+  subtype: success, workflow: 'Regression Workflow 2: separate failure - success path'}
 - {destination: get_interfaces, label: success, name: 62-success:21->22, source: get_facts,
-  subtype: success, workflow: Workflow with separate failure - success path}
+  subtype: success, workflow: 'Regression Workflow 2: separate failure - success path'}
 - {destination: Example1, label: failure, name: 62-failure:22->9, source: get_interfaces,
-  subtype: failure, workflow: Workflow with separate failure - success path}
+  subtype: failure, workflow: 'Regression Workflow 2: separate failure - success path'}
 - {destination: Show version with multiprocessing, label: success, name: 67-success:1->68,
   source: Start, subtype: success, workflow: 'Workflow: multiple entry points, skip
     service, multiprocessing, separate paths'}
@@ -195,7 +202,8 @@
 - {destination: End, label: success, name: 74-success:83->2, source: 'Subworkflow:
     Access Variable - Result from parent workflow', subtype: success, workflow: Workflow_of_workflows}
 - {destination: Show version with multiprocessing, label: success, name: 74-success:71->52,
-  source: payload_transfer_workflow, subtype: success, workflow: Workflow_of_workflows}
+  source: 'Regression Workflow 3: Napalm getters and postprocessing', subtype: success,
+  workflow: Workflow_of_workflows}
 - {destination: Napalm_VRF_workflow, label: success, name: 74-success:52->70, source: Show
     version with multiprocessing, subtype: success, workflow: Workflow_of_workflows}
 - {destination: 'Variable Access Subworkflow: Access variables for iteration', label: success,
@@ -216,8 +224,8 @@
 - {destination: End, label: success, name: 86-success:84->2, source: 'Payload Workflow:
     Payload Extraction with operations', subtype: success, workflow: Subworkflow of
     Workflow}
-- {destination: payload_transfer_workflow, label: success, name: 76-success:86->73,
-  source: Subworkflow of Workflow, subtype: success, workflow: Workflow_of_workflows}
+- {destination: 'Regression Workflow 3: Napalm getters and postprocessing', label: success,
+  name: 76-success:86->73, source: Subworkflow of Workflow, subtype: success, workflow: Workflow_of_workflows}
 - {destination: payload_extraction_validation_worflow, label: success, name: 86-success:1->75,
   source: Start, subtype: success, workflow: Subworkflow of Workflow}
 - {destination: Napalm getters and match mechanism workflow, label: success, name: 86-success:75->80,
@@ -231,7 +239,8 @@
 - {destination: Show version with multiprocessing, label: prerequisite, name: 76-prerequisite:86->52,
   source: Subworkflow of Workflow, subtype: prerequisite, workflow: Workflow_of_workflows}
 - {destination: Show version with multiprocessing, label: prerequisite, name: 76-prerequisite:73->52,
-  source: payload_transfer_workflow, subtype: prerequisite, workflow: Workflow_of_workflows}
+  source: 'Regression Workflow 3: Napalm getters and postprocessing', subtype: prerequisite,
+  workflow: Workflow_of_workflows}
 - {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: prerequisite,
   name: 76-prerequisite:52->85, source: Show version with multiprocessing, subtype: prerequisite,
   workflow: Workflow_of_workflows}
@@ -268,4 +277,4 @@
     vrf: device + value iteration', subtype: success, workflow: Workflow with device
     and value iteration}
 - {destination: End, label: success, name: 74-success:9->2, source: Example1, subtype: success,
-  workflow: Workflow with separate failure - success path}
+  workflow: 'Regression Workflow 2: separate failure - success path'}

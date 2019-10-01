@@ -88,3 +88,8 @@ anything.
 * rename "job" -> "service"
 * change "run_job" to "run_service"
 * credentials are no longer available for all services, only when it's useful in specific section
+
+- "skip query" now lets you specify a device.
+
+- Upon creating the admin user, check if there is a password in the Vault.
+If there isn't, create it ("admin").

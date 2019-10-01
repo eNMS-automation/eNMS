@@ -40,18 +40,18 @@
     Netmiko_VRF_workflow: ['-200', '0']
     'Payload Workflow: Payload Extraction with operations': [-516, -120]
     'Regression Workflow 1: basics (validation, retries)': [0, 0]
+    'Regression Workflow 2: separate failure - success path': [-366, 36]
+    'Regression Workflow 3: Napalm getters and postprocessing': [-459, 10]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
-    Workflow with separate failure - success path: [-366, 36]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -301, 93]
     Workflow_of_workflows: [-652, -15]
     iteration_devices_workflow: ['-164', '15']
     payload_extraction_validation_worflow: [-481, -95]
-    payload_transfer_workflow: [-459, 10]
     'python Workflow: payload editor and pool helper': ['-326', '45']
   push_to_git: false
   result_postprocessing: ''
@@ -106,6 +106,8 @@
     Netmiko_VRF_workflow: ['200', '0']
     'Payload Workflow: Payload Extraction with operations': [527, -97]
     'Regression Workflow 1: basics (validation, retries)': [500, 0]
+    'Regression Workflow 2: separate failure - success path': [818, 284]
+    'Regression Workflow 3: Napalm getters and postprocessing': [709, 228]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -114,13 +116,11 @@
     Workflow with device and value iteration: [500, 0]
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
-    Workflow with separate failure - success path: [818, 284]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       594, -3]
     Workflow_of_workflows: [482, -46]
     iteration_devices_workflow: ['651', '20']
     payload_extraction_validation_worflow: [175, 266]
-    payload_transfer_workflow: [676, 95]
     'python Workflow: payload editor and pool helper': ['530', '155']
   push_to_git: false
   result_postprocessing: ''
@@ -437,7 +437,7 @@
   operating_system: ''
   pools: []
   positions:
-    Workflow with separate failure - success path: [741, 106]
+    'Regression Workflow 2: separate failure - success path': [741, 106]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -281, -178]
   push_to_git: false
@@ -804,7 +804,7 @@
     Iteration Services Test Workflow: ['147', '-14']
     Napalm_VRF_workflow: ['0', '-50']
     Netmiko_VRF_workflow: ['0', '-50']
-    Workflow with separate failure - success path: ['84', '-3']
+    'Regression Workflow 2: separate failure - success path': ['84', '-3']
     iteration_devices_workflow: ['414', '-154']
     'python Workflow: payload editor and pool helper': ['355', '-25']
   privileged_mode: false
@@ -926,7 +926,7 @@
   positions:
     Napalm_VRF_workflow: ['0', '150']
     Netmiko_VRF_workflow: ['0', '150']
-    Workflow with separate failure - success path: [-157, 280]
+    'Regression Workflow 2: separate failure - success path': [-157, 280]
     iteration_devices_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
@@ -1033,10 +1033,10 @@
   pools: []
   positions:
     Netmiko prompts: [405, -103]
-    Workflow with separate failure - success path: [374, 278]
+    'Regression Workflow 2: separate failure - success path': [374, 278]
+    'Regression Workflow 3: Napalm getters and postprocessing': ['-50', '0']
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       357, -52]
-    payload_transfer_workflow: ['-50', '0']
     'python Workflow: payload editor and pool helper': ['225', '-223']
   push_to_git: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
@@ -1088,9 +1088,9 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow with separate failure - success path: [-102, -130]
+    'Regression Workflow 2: separate failure - success path': [-102, -130]
+    'Regression Workflow 3: Napalm getters and postprocessing': [-223, -72]
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: [-223, -72]
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
   result_postprocessing: ''
@@ -1139,9 +1139,9 @@
   optional_args: {}
   pools: []
   positions:
-    Workflow with separate failure - success path: [653, -88]
+    'Regression Workflow 2: separate failure - success path': [653, -88]
+    'Regression Workflow 3: Napalm getters and postprocessing': [-180, 211]
     Workflow_of_workflows: [-122, -174]
-    payload_transfer_workflow: [-180, 211]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1189,8 +1189,8 @@
   optional_args: {}
   pools: []
   positions:
+    'Regression Workflow 3: Napalm getters and postprocessing': [152, -80]
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: [272, -82]
   push_to_git: false
   result_postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\
     \nresults[\"result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
@@ -1239,8 +1239,8 @@
   optional_args: {}
   pools: []
   positions:
+    'Regression Workflow 3: Napalm getters and postprocessing': [462, -11]
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: [686, -58]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1285,8 +1285,8 @@
   operating_system: ''
   pools: []
   positions:
+    'Regression Workflow 3: Napalm getters and postprocessing': [291, 208]
     Workflow_of_workflows: [3, -51]
-    payload_transfer_workflow: [291, 208]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3569,7 +3569,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3616,7 +3617,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3664,7 +3666,8 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3712,7 +3715,8 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3721,7 +3725,7 @@
   description: ReST call, Napalm getters, etc
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  devices: [Washington, Atlanta]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
@@ -3733,16 +3737,21 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    0c7d547b-41e0-4802-bb41-f6706a80f746:
+      content: "Process payload is a Swiss Army Knife service that uses the results\
+        \ of both get_facts\r\nand get_interfaces to compute its success value.\r\n\
+        Prerequisite edges are used to ensure the order in which services are run."
+      positions: [269, 268]
     c9ee8980-a972-4ace-a596-03eb2842c4d7:
       content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
         \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
-      positions: [257, -148]
-  last_modified: '2019-09-27 21:45:22.594863'
+      positions: [165, -143]
+  last_modified: '2019-10-01 18:21:31.740282'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: payload_transfer_workflow
+  name: 'Regression Workflow 3: Napalm getters and postprocessing'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3764,7 +3773,8 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3813,7 +3823,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3850,10 +3861,10 @@
   result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
-  services: [Start, End, payload_transfer_workflow, Napalm_VRF_workflow, add_devices_to_payload,
-    'Subworkflow: Access Variable - Result from parent workflow', Show version with
-      multiprocessing, Netmiko_VRF_workflow, Subworkflow of Workflow, Workflow with
-      iteration targets]
+  services: [Start, End, 'Regression Workflow 3: Napalm getters and postprocessing',
+    Napalm_VRF_workflow, add_devices_to_payload, 'Subworkflow: Access Variable - Result
+      from parent workflow', Show version with multiprocessing, Netmiko_VRF_workflow,
+    Subworkflow of Workflow, Workflow with iteration targets]
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -3862,7 +3873,8 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3888,12 +3900,12 @@
         \nThe router will take the upward path, the dummy devices the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
       positions: [207, 40]
-  last_modified: '2019-10-01 09:47:27.316378'
+  last_modified: '2019-10-01 18:05:39.893275'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: Workflow with separate failure - success path
+  name: 'Regression Workflow 2: separate failure - success path'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3914,7 +3926,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3966,7 +3979,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4014,7 +4028,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4063,7 +4078,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4111,7 +4127,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4167,7 +4184,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4215,7 +4233,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4264,7 +4283,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4312,7 +4332,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4360,7 +4381,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4409,7 +4431,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4515,7 +4538,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_cached_connection: true
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none

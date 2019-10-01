@@ -75,7 +75,9 @@ class NetmikoBackupService(ConnectionService):
             device.last_failure = str(device.last_runtime)
             self.generate_yaml_file(path_device_config, device)
             return {"success": False, "result": str(e)}
+        print("ttt"*100, run.properties)
         Session.commit()
+        print(run.properties)
         return {"success": True, "result": f"Command: {command}"}
 
 

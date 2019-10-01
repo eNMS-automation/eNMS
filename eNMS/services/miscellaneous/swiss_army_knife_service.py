@@ -73,16 +73,6 @@ class SwissArmyKnifeService(Service):
             )
         return {"success": True}
 
-    def poller_service(self, run, payload):
-        for service in fetch_all("service"):
-            if getattr(service, "configuration_backup_service", False):
-                app.run(service.id)
-        Session.commit()
-        for pool in fetch_all("pool"):
-            if pool.device_configuration:
-                pool.compute_pool()
-        return {"success": True}
-
     def git_push_configurations(self, run, payload):
         if app.git_configurations:
             repo = Repo(Path.cwd() / "git" / "configurations")

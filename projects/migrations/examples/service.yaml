@@ -3871,7 +3871,7 @@
   description: Workflow with separate failure - success path
   device_query: ''
   device_query_property: ip_address
-  devices: [Austin, Washington]
+  devices: [Austin, Washington, Baltimore]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -3883,12 +3883,13 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    8df5bdb2-ffc6-4658-b287-52ebedfc22c6:
-      content: "This workflow runs on two devices: one router and one dummy device.\r\
-        \nThe router will take the upward path, the dummy device the downward path.\r\
+    e82bc250-121b-4199-98cf-26a359ccce8a:
+      alignment: center
+      content: "This workflow runs on 3 devices: one router and 2 dummy devices.\r\
+        \nThe router will take the upward path, the dummy devices the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
-      positions: [185, 43]
-  last_modified: '2019-10-01 09:17:38.400847'
+      positions: ['152.2530517578125', '31.92236328125']
+  last_modified: '2019-10-01 09:22:03.886240'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

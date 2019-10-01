@@ -45,7 +45,7 @@
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
-    Workflow with separate failure - success path: [-372, 61]
+    Workflow with separate failure - success path: [-366, 36]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -301, 93]
     Workflow_of_workflows: [-652, -15]
@@ -437,7 +437,7 @@
   operating_system: ''
   pools: []
   positions:
-    Workflow with separate failure - success path: [755, 105]
+    Workflow with separate failure - success path: [741, 106]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -281, -178]
   push_to_git: false
@@ -3883,13 +3883,12 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    e82bc250-121b-4199-98cf-26a359ccce8a:
-      alignment: center
+    245ebaa6-e452-4c0d-b89e-81acb48bfa6c:
       content: "This workflow runs on 3 devices: one router and 2 dummy devices.\r\
         \nThe router will take the upward path, the dummy devices the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
-      positions: ['152.2530517578125', '31.92236328125']
-  last_modified: '2019-10-01 09:22:03.886240'
+      positions: [207, 40]
+  last_modified: '2019-10-01 09:47:27.316378'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

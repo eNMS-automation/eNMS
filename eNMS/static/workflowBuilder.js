@@ -573,12 +573,13 @@ function createLabel() {
   const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
+    console.log(currLabel);
     if (currLabel) {
       deleteLabel(currLabel);
       currLabel = null;
     }
-    $("#workflow_label").remove();
     drawLabel(result.id, result);
+    $("#workflow_label").remove();
     alertify.notify("Label created.", "success", 5);
   });
 }

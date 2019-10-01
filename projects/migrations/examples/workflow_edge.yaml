@@ -267,5 +267,5 @@
 - {destination: End, label: success, name: 85-success:86->2, source: 'Netmiko show
     vrf: device + value iteration', subtype: success, workflow: Workflow with device
     and value iteration}
-- {destination: End, label: failure, name: 74-failure:9->2, source: Example1, subtype: failure,
+- {destination: End, label: success, name: 74-success:9->2, source: Example1, subtype: success,
   workflow: Workflow with separate failure - success path}

@@ -192,7 +192,7 @@ class AutomationController(BaseController):
         for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
             if "-" in id:
-                old_position = workflow.labels[id]["positions"]
+                old_position = workflow.labels[id].pop("positions")
                 workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
             else:
                 service = fetch("service", id=id)

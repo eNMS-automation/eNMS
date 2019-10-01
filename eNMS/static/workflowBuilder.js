@@ -517,6 +517,7 @@ $("#current-runtime").on("change", function() {
 });
 
 function savePositions() {
+  console.log(graph.getPositions());
   $.ajax({
     type: "POST",
     url: `/save_positions/${workflow.id}`,

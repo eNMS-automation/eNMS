@@ -83,6 +83,7 @@ function displayWorkflow(workflowData) {
     .filter((s) => s.iteration_values != "")
     .map(drawIterationEdge);
   for (const [id, label] of Object.entries(workflow.labels)) {
+    console.log(label)
     drawLabel(id, label);
   }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
@@ -572,7 +573,6 @@ function createLabel() {
   const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
   fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
-    console.log(currLabel);
     if (currLabel) {
       deleteLabel(currLabel);
       currLabel = null;
@@ -666,7 +666,6 @@ function displayWorkflowState(result) {
     $("#progress-failure").width(
       `${(progress.failed * 100) / progress.total}%`
     );
-    console.log(progress.passed, progress.failed);
     $("#progress-success-span").text(progress.passed);
     $("#progress-failure-span").text(progress.failed);
     $("#status").text(`Status: ${result.state.status}`);

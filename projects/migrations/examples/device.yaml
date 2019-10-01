@@ -74,11 +74,11 @@
   hidden: false
   icon: router
   ip_address: 192.168.105.5
-  last_duration: 5.587449s
+  last_duration: 5.697455s
   last_failure: Never
-  last_runtime: '2019-10-01 21:15:33.589206'
+  last_runtime: '2019-10-01 21:29:57.361922'
   last_status: Success
-  last_update: '2019-10-01 21:15:33.589206'
+  last_update: '2019-10-01 21:29:57.361922'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'

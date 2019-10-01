@@ -216,8 +216,6 @@
 - {destination: End, label: success, name: 85-success:66->2, source: 'Variable Access
     Subworkflow: Access variables for iteration', subtype: success, workflow: 'Subworkflow:
     Access Variable - Result from parent workflow'}
-- {destination: 'Regression Workflow 4: VRF creation and deletion with Netmiko', label: success,
-  name: 76-success:26->71, source: add_devices_to_payload, subtype: success, workflow: Workflow_of_workflows}
 - {destination: 'Iteration Targets Workflow: No device targets', label: failure, name: 83-failure:56->64,
   source: 'Iteration Target Workflow: netmiko iteration 3', subtype: failure, workflow: Iteration
     Targets Workflow}
@@ -262,9 +260,6 @@
 - {destination: 'Iteration Target Workflow: netmiko iteration 1', label: success,
   name: 83-success:26->54, source: add_devices_to_payload, subtype: success, workflow: Iteration
     Targets Workflow}
-- {destination: Workflow with iteration targets, label: success, name: 73-success:69->84,
-  source: 'Regression Workflow 4: VRF creation and deletion with Netmiko', subtype: success,
-  workflow: Workflow_of_workflows}
 - {destination: Subworkflow of Workflow, label: success, name: 73-success:84->83,
   source: Workflow with iteration targets, subtype: success, workflow: Workflow_of_workflows}
 - {destination: Subworkflow of Workflow, label: failure, name: 73-failure:84->83,
@@ -290,3 +285,5 @@
   subtype: success, workflow: Configuration Management Workflow}
 - {destination: git_push_configurations, label: success, name: 68-success:13->7, source: netmiko_configuration_backup,
   subtype: success, workflow: Configuration Management Workflow}
+- {destination: Workflow with iteration targets, label: success, name: 72-success:25->83,
+  source: add_devices_to_payload, subtype: success, workflow: Workflow_of_workflows}

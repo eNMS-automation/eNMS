@@ -41,7 +41,7 @@
     'Regression Workflow 2: Separate Failure - Success paths': [-366, 36]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
     'Regression Workflow 4: VRF creation and deletion with Napalm': ['-200', '0']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['-200', '0']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-431, -124]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
@@ -49,7 +49,7 @@
     Workflow with iteration targets: [0, 0]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -301, 93]
-    Workflow_of_workflows: [-652, -15]
+    Workflow_of_workflows: [-651, -168]
     iteration_devices_workflow: ['-164', '15']
     payload_extraction_validation_worflow: [-481, -95]
     'python Workflow: payload editor and pool helper': [-556, -211]
@@ -107,7 +107,7 @@
     'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
     'Regression Workflow 3: Napalm getters (postprocessing)': [778, 230]
     'Regression Workflow 4: VRF creation and deletion with Napalm': ['200', '0']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['200', '0']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-450, 132]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -118,7 +118,7 @@
     Workflow with iteration targets: [500, 0]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       594, -3]
-    Workflow_of_workflows: [482, -46]
+    Workflow_of_workflows: [-440, -115]
     iteration_devices_workflow: ['651', '20']
     payload_extraction_validation_worflow: [175, 266]
     'python Workflow: payload editor and pool helper': [593, -93]
@@ -701,7 +701,7 @@
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['0', '-150']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [0, -113]
   privileged_mode: true
   push_to_git: false
   result_postprocessing: ''
@@ -763,7 +763,7 @@
     Iteration Services Test Workflow: ['147', '-14']
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
     'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '-50']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['0', '-50']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [441, -112]
     iteration_devices_workflow: ['414', '-154']
     'python Workflow: payload editor and pool helper': ['355', '-25']
   privileged_mode: false
@@ -824,7 +824,7 @@
   pools: []
   positions:
     'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '50']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['0', '50']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 148]
   privileged_mode: true
   push_to_git: false
   result_postprocessing: ''
@@ -885,7 +885,7 @@
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [-157, 280]
     'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '150']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['0', '150']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-35, 151]
     iteration_devices_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
@@ -1297,7 +1297,7 @@
     Iteration Services Test Workflow: ['3', '-144']
     Iteration Targets Workflow: [-256, -245]
     Workflow with iteration target subworkflows: [283, -152]
-    Workflow_of_workflows: [-463, -198]
+    Workflow_of_workflows: [-647, 208]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2713,7 +2713,7 @@
   positions:
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       154, 108]
-    Workflow_of_workflows: [178, -196]
+    Workflow_of_workflows: [678, -67]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -3601,31 +3601,36 @@
   description: Create and delete a VRF with Netmiko
   device_query: ''
   device_query_property: ip_address
-  devices: []
+  devices: [Austin]
   dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_devices: get_var("loop_over", device=parent_device.name)
+  iteration_devices: ''
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-10-01 18:35:53.401472'
+  labels:
+    fa5c0a00-e4f1-490a-b882-cb2a57c24b78:
+      content: "This workflow runs on two devices :\r\n- The pool \"Washington\" that\
+        \ contains Washington.\r\n- The device \"Austin\".\r\nWashington should reach\
+        \ the end and Austin fail at the first step."
+      positions: [36, 20]
+  last_modified: '2019-10-01 22:31:36.089090'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
-  multiprocessing: false
+  multiprocessing: true
   name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: []
+  pools: [Washington]
   positions:
-    Workflow_of_workflows: [-481, -23]
+    Workflow_of_workflows: [-423, -31]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3674,7 +3679,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [103, 162]
+    Workflow_of_workflows: [-140, -19]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3732,7 +3737,7 @@
   operating_system: eos
   pools: []
   positions:
-    Workflow_of_workflows: [-178, 170]
+    Workflow_of_workflows: [464, 224]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3819,7 +3824,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-09-10 18:16:22.719254'
+  last_modified: '2019-10-01 22:24:55.305317'
   mail_recipient: antoine.fourmy@gmail.com
   max_processes: 5
   maximum_runs: 1
@@ -3838,8 +3843,7 @@
   services: [Start, End, 'Regression Workflow 3: Napalm getters (postprocessing)',
     'Regression Workflow 4: VRF creation and deletion with Napalm', add_devices_to_payload,
     'Subworkflow: Access Variable - Result from parent workflow', Show version with
-      multiprocessing, 'Regression Workflow 4: VRF creation and deletion with Netmiko',
-    Subworkflow of Workflow, Workflow with iteration targets]
+      multiprocessing, Subworkflow of Workflow, Workflow with iteration targets]
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -4292,7 +4296,7 @@
   operating_system: ''
   pools: []
   positions:
-    Workflow_of_workflows: [525, -209]
+    Workflow_of_workflows: [-131, -285]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -4341,7 +4345,7 @@
   operating_system: ''
   pools: []
   positions:
-    Workflow_of_workflows: [-155, -195]
+    Workflow_of_workflows: [-13, 217]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -4392,7 +4396,7 @@
   positions:
     Iteration Targets Workflow: [-107, -112]
     Workflow with iteration target subworkflows: [253, 118]
-    Workflow_of_workflows: [-451, 164]
+    Workflow_of_workflows: [-359, 206]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false

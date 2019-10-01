@@ -131,7 +131,7 @@ class Device(CustomDevice):
           <li>
             <button type="button" class="btn btn-info"
             onclick="showConfigurationsPanel({self.row_properties})"
-              ><span class="glyphicon glyphicon-list"></span
+              ><span class="glyphicon glyphicon-adjust"></span
             ></button>
           </li>
           <li>

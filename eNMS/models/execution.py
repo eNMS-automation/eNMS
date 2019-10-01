@@ -266,7 +266,8 @@ class Run(AbstractBase):
             Session.commit()
             self.status = "Aborted" if self.stop else "Completed"
             self.run_state["status"] = self.status
-            self.run_state["success"] = results["success"]
+            if self.run_state["success"] is not False:
+                self.run_state["success"] = results["success"]
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["logs"] = app.run_logs.pop(self.runtime)

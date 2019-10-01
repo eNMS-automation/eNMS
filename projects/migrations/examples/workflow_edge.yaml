@@ -17,7 +17,7 @@
   subtype: success, workflow: 'Regression Workflow 4: VRF creation and deletion with
     Netmiko'}
 - {destination: napalm_create_vrf_test, label: success, name: Napalm_VRF_workflow
-    0 -> 2, source: Start, subtype: success, workflow: 'Regression Workflow 4: VRF
+    0 -> 2, source: Start, subtype: success, workflow: 'Regression Workflow 5: VRF
     creation and deletion with Napalm'}
 - {destination: get_interfaces_ip, label: success, name: payload_transfer_workflow:success
     3 -> 5, source: get_facts, subtype: success, workflow: 'Regression Workflow 3:
@@ -54,15 +54,15 @@
   workflow: payload_extraction_validation_worflow}
 - {destination: netmiko_check_vrf_napalm, label: success, name: 40-success:20->45,
   source: napalm_create_vrf_test, subtype: success, workflow: 'Regression Workflow
-    4: VRF creation and deletion with Napalm'}
+    5: VRF creation and deletion with Napalm'}
 - {destination: napalm_rollback, label: success, name: 40-success:45->34, source: netmiko_check_vrf_napalm,
-  subtype: success, workflow: 'Regression Workflow 4: VRF creation and deletion with
+  subtype: success, workflow: 'Regression Workflow 5: VRF creation and deletion with
     Napalm'}
 - {destination: netmiko_check_no_vrf_napalm, label: success, name: 40-success:34->46,
-  source: napalm_rollback, subtype: success, workflow: 'Regression Workflow 4: VRF
+  source: napalm_rollback, subtype: success, workflow: 'Regression Workflow 5: VRF
     creation and deletion with Napalm'}
 - {destination: End, label: success, name: 40-success:46->2, source: netmiko_check_no_vrf_napalm,
-  subtype: success, workflow: 'Regression Workflow 4: VRF creation and deletion with
+  subtype: success, workflow: 'Regression Workflow 5: VRF creation and deletion with
     Napalm'}
 - {destination: get_facts, label: success, name: 43-success:1->22, source: Start,
   subtype: success, workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
@@ -117,15 +117,17 @@
   source: 'Getters Workflow: get facts failed match', subtype: failure, workflow: Napalm
     getters and match mechanism workflow}
 - {destination: 'Ansible Workflow: Arista show version', label: success, name: 64-success:1->63,
-  source: Start, subtype: success, workflow: Ansible Workflow}
+  source: Start, subtype: success, workflow: 'Regression Workflow 6: Ansible with
+    Validation'}
 - {destination: 'Ansible Workflow: Arista show configuration (regex match)', label: success,
   name: 64-success:49->65, source: 'Ansible Workflow: Arista show version', subtype: success,
-  workflow: Ansible Workflow}
+  workflow: 'Regression Workflow 6: Ansible with Validation'}
 - {destination: 'Ansible Workflow: Arista show configuration (dict match)', label: success,
   name: 64-success:65->66, source: 'Ansible Workflow: Arista show configuration (regex
-    match)', subtype: success, workflow: Ansible Workflow}
+    match)', subtype: success, workflow: 'Regression Workflow 6: Ansible with Validation'}
 - {destination: End, label: success, name: 64-success:66->2, source: 'Ansible Workflow:
-    Arista show configuration (dict match)', subtype: success, workflow: Ansible Workflow}
+    Arista show configuration (dict match)', subtype: success, workflow: 'Regression
+    Workflow 6: Ansible with Validation'}
 - {destination: get_interfaces, label: success, name: 62-success:20->22, source: REST
     is_alive, subtype: success, workflow: 'Regression Workflow 2: Separate Failure
     - Success paths'}
@@ -199,14 +201,14 @@
 - {destination: add_devices_to_payload, label: success, name: 74-success:1->26, source: Start,
   subtype: success, workflow: Workflow_of_workflows}
 - {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: success,
-  name: 74-success:70->83, source: 'Regression Workflow 4: VRF creation and deletion
+  name: 74-success:70->83, source: 'Regression Workflow 5: VRF creation and deletion
     with Napalm', subtype: success, workflow: Workflow_of_workflows}
 - {destination: End, label: success, name: 74-success:83->2, source: 'Subworkflow:
     Access Variable - Result from parent workflow', subtype: success, workflow: Workflow_of_workflows}
 - {destination: Show version with multiprocessing, label: success, name: 74-success:71->52,
   source: 'Regression Workflow 3: Napalm getters (postprocessing)', subtype: success,
   workflow: Workflow_of_workflows}
-- {destination: 'Regression Workflow 4: VRF creation and deletion with Napalm', label: success,
+- {destination: 'Regression Workflow 5: VRF creation and deletion with Napalm', label: success,
   name: 74-success:52->70, source: Show version with multiprocessing, subtype: success,
   workflow: Workflow_of_workflows}
 - {destination: 'Variable Access Subworkflow: Access variables for iteration', label: success,
@@ -246,7 +248,7 @@
   name: 76-prerequisite:52->85, source: Show version with multiprocessing, subtype: prerequisite,
   workflow: Workflow_of_workflows}
 - {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: prerequisite,
-  name: 76-prerequisite:72->85, source: 'Regression Workflow 4: VRF creation and deletion
+  name: 76-prerequisite:72->85, source: 'Regression Workflow 5: VRF creation and deletion
     with Napalm', subtype: prerequisite, workflow: Workflow_of_workflows}
 - {destination: 'Regression Workflow 1: look for a VRF with netmiko', label: success,
   name: 87-success:1->88, source: Start, subtype: success, workflow: 'Regression Workflow

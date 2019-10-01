@@ -30,7 +30,6 @@
   operating_system: ''
   pools: []
   positions:
-    Ansible Workflow: [-362, 112]
     Configuration Management Workflow: [-621, 123]
     Iteration Services Test Workflow: ['-359', '-163']
     Iteration Targets Workflow: [-395, 13]
@@ -40,8 +39,9 @@
     'Regression Workflow 1: Netmiko with validation and retries': [0, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [-366, 36]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['-200', '0']
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-431, -124]
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['-200', '0']
+    'Regression Workflow 6: Ansible with Validation': [-683, -48]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
@@ -96,7 +96,6 @@
   operating_system: ''
   pools: []
   positions:
-    Ansible Workflow: [500, 0]
     Configuration Management Workflow: [475, 102]
     Iteration Services Test Workflow: ['-9', '294']
     Iteration Targets Workflow: [748, -268]
@@ -106,8 +105,9 @@
     'Regression Workflow 1: Netmiko with validation and retries': [500, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
     'Regression Workflow 3: Napalm getters (postprocessing)': [778, 230]
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['200', '0']
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-450, 132]
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['200', '0']
+    'Regression Workflow 6: Ansible with Validation': [771, -81]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -701,7 +701,7 @@
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [0, -113]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-4, -120]
   privileged_mode: true
   push_to_git: false
   result_postprocessing: ''
@@ -762,8 +762,8 @@
   positions:
     Iteration Services Test Workflow: ['147', '-14']
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '-50']
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [441, -112]
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
     iteration_devices_workflow: ['414', '-154']
     'python Workflow: payload editor and pool helper': ['355', '-25']
   privileged_mode: false
@@ -823,8 +823,8 @@
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '50']
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 148]
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
   privileged_mode: true
   push_to_git: false
   result_postprocessing: ''
@@ -884,8 +884,8 @@
   pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [-157, 280]
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '150']
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-35, 151]
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
@@ -940,7 +940,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '-150']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-150']
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1685,7 +1685,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['3', '47']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['3', '47']
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1741,7 +1741,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['10', '-32']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['10', '-32']
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       123, -187]
     'python Workflow: payload editor and pool helper': ['266', '161']
@@ -1804,7 +1804,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Napalm': ['9', '139']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': ['9', '139']
     iteration_devices_workflow: ['245', '32']
   privileged_mode: false
   push_to_git: false
@@ -2560,8 +2560,8 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_version.yml
   pools: []
   positions:
-    Ansible Workflow: [-151, -136]
     Napalm getters and match mechanism workflow: [-30, 126]
+    'Regression Workflow 6: Ansible with Validation': [-381, 132]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2609,7 +2609,7 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
   pools: []
   positions:
-    Ansible Workflow: [27, 98]
+    'Regression Workflow 6: Ansible with Validation': [40, -24]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2657,7 +2657,7 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
   pools: []
   positions:
-    Ansible Workflow: [248, -170]
+    'Regression Workflow 6: Ansible with Validation': [340, 124]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3613,13 +3613,17 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    cdc7d022-53fd-46ec-9601-349d19836f78:
+      alignment: center
+      content: "Test:\r\n- with and without multiprocessing"
+      positions: [-26, -193]
     f753b933-4fe2-4398-8b3e-5316eaed9abc:
       alignment: left
       content: "This workflow runs on two devices :\r\n- The pool \"Washington\" that\
         \ contains Washington.\r\n- The device \"Austin\".\r\nWashington should reach\
         \ the end and Austin fail at the first step."
-      positions: ['36.14208984375', '13.3306884765625']
-  last_modified: '2019-10-01 22:36:03.235640'
+      positions: [36, 13]
+  last_modified: '2019-10-01 23:28:33.497328'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3668,12 +3672,12 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-10-01 18:37:07.548167'
+  last_modified: '2019-10-01 23:22:21.841596'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow 4: VRF creation and deletion with Napalm'
+  name: 'Regression Workflow 5: VRF creation and deletion with Napalm'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3843,7 +3847,7 @@
   send_notification: true
   send_notification_method: mail_feedback_notification
   services: [Start, End, 'Regression Workflow 3: Napalm getters (postprocessing)',
-    'Regression Workflow 4: VRF creation and deletion with Napalm', add_devices_to_payload,
+    'Regression Workflow 5: VRF creation and deletion with Napalm', add_devices_to_payload,
     'Subworkflow: Access Variable - Result from parent workflow', Show version with
       multiprocessing, Subworkflow of Workflow, Workflow with iteration targets]
   skip: false
@@ -4080,13 +4084,39 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-08-10 18:18:02.670633'
+  labels:
+    1dff7d24-0b6b-4524-a07a-26ac67e1ae2c:
+      alignment: center
+      content: "Uses Ansible to do a \"show configuration\".\r\nConvert the result\
+        \ to text and check that the result matches\r\nthe following regular expression:\
+        \ \"ip address\\s.*/32\""
+      positions: [64, -101]
+    36072c59-543f-4600-b2be-f88c366ccb79:
+      alignment: center
+      content: "Uses Ansible to do a \"show configuration\".\r\nConvert the result\
+        \ to a dictionary and check that it\r\ncontains the following dictionary:\r\
+        \n{\"action\":\"debug\",\"changed\":false,\"failed\":false}"
+      positions: [390, 237]
+    813cd109-d252-4731-99b8-7a0828883b6d:
+      alignment: left
+      content: "Uses Ansible to do a \"show version\".\r\nConvert the result to a\
+        \ dictionary (JSON conversion).\r\nCheck that the results contains the following\
+        \ dictionary (dict inclusion):\r\n{\"host\":\"{{device.ip_address}}\",\"unreachable\"\
+        :0,\"use_ssl\":true}\r\n"
+      positions: [-336, 230]
+    cb3b0740-411a-4138-a54d-31a133413526:
+      alignment: left
+      content: "This workflow :\r\n- uses the Ansible Playbook Service to run playbooks\r\
+        \n- uses the conversion mechanism to turn the output into a dictionary (JSON\
+        \ conversion)\r\n- uses the \"Text with regular expression\" and \"dictionary\
+        \ inclusion\" mechanisms to validate the result."
+      positions: [-452, -165]
+  last_modified: '2019-10-02 01:22:36.224500'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: Ansible Workflow
+  name: 'Regression Workflow 6: Ansible with Validation'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0

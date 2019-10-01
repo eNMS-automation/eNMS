@@ -35,13 +35,13 @@
     Iteration Services Test Workflow: ['-359', '-163']
     Iteration Targets Workflow: [-395, 13]
     Napalm getters and match mechanism workflow: [-605, 76]
-    Napalm_VRF_workflow: ['-200', '0']
     Netmiko prompts: [-279, -158]
-    Netmiko_VRF_workflow: ['-200', '0']
     'Payload Workflow: Payload Extraction with operations': [-516, -120]
-    'Regression Workflow 1: basics (validation, retries)': [0, 0]
-    'Regression Workflow 2: separate failure - success path': [-366, 36]
-    'Regression Workflow 3: Napalm getters and postprocessing': [-459, 10]
+    'Regression Workflow 1: Netmiko with validation and retries': [0, 0]
+    'Regression Workflow 2: Separate Failure - Success paths': [-366, 36]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['-200', '0']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['-200', '0']
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
@@ -52,7 +52,7 @@
     Workflow_of_workflows: [-652, -15]
     iteration_devices_workflow: ['-164', '15']
     payload_extraction_validation_worflow: [-481, -95]
-    'python Workflow: payload editor and pool helper': ['-326', '45']
+    'python Workflow: payload editor and pool helper': [-556, -211]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -101,13 +101,13 @@
     Iteration Services Test Workflow: ['-9', '294']
     Iteration Targets Workflow: [748, -268]
     Napalm getters and match mechanism workflow: [547, 107]
-    Napalm_VRF_workflow: ['200', '0']
     Netmiko prompts: [634, 187]
-    Netmiko_VRF_workflow: ['200', '0']
     'Payload Workflow: Payload Extraction with operations': [527, -97]
-    'Regression Workflow 1: basics (validation, retries)': [500, 0]
-    'Regression Workflow 2: separate failure - success path': [818, 284]
-    'Regression Workflow 3: Napalm getters and postprocessing': [709, 228]
+    'Regression Workflow 1: Netmiko with validation and retries': [500, 0]
+    'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [778, 230]
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['200', '0']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['200', '0']
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -121,7 +121,7 @@
     Workflow_of_workflows: [482, -46]
     iteration_devices_workflow: ['651', '20']
     payload_extraction_validation_worflow: [175, 266]
-    'python Workflow: payload editor and pool helper': ['530', '155']
+    'python Workflow: payload editor and pool helper': [593, -93]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -437,7 +437,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 2: separate failure - success path': [741, 106]
+    'Regression Workflow 2: Separate Failure - Success paths': [741, 106]
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       -281, -178]
   push_to_git: false
@@ -742,7 +742,7 @@
   operating_system: eos
   pools: []
   positions:
-    Netmiko_VRF_workflow: ['0', '-150']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['0', '-150']
   privileged_mode: true
   push_to_git: false
   result_postprocessing: ''
@@ -802,9 +802,9 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['147', '-14']
-    Napalm_VRF_workflow: ['0', '-50']
-    Netmiko_VRF_workflow: ['0', '-50']
-    'Regression Workflow 2: separate failure - success path': ['84', '-3']
+    'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '-50']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['0', '-50']
     iteration_devices_workflow: ['414', '-154']
     'python Workflow: payload editor and pool helper': ['355', '-25']
   privileged_mode: false
@@ -864,8 +864,8 @@
   operating_system: eos
   pools: []
   positions:
-    Napalm_VRF_workflow: ['0', '50']
-    Netmiko_VRF_workflow: ['0', '50']
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '50']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['0', '50']
   privileged_mode: true
   push_to_git: false
   result_postprocessing: ''
@@ -924,9 +924,9 @@
   operating_system: eos
   pools: []
   positions:
-    Napalm_VRF_workflow: ['0', '150']
-    Netmiko_VRF_workflow: ['0', '150']
-    'Regression Workflow 2: separate failure - success path': [-157, 280]
+    'Regression Workflow 2: Separate Failure - Success paths': [-157, 280]
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '150']
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
   privileged_mode: false
   push_to_git: false
@@ -981,7 +981,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm_VRF_workflow: ['0', '-150']
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['0', '-150']
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1033,11 +1033,11 @@
   pools: []
   positions:
     Netmiko prompts: [405, -103]
-    'Regression Workflow 2: separate failure - success path': [374, 278]
-    'Regression Workflow 3: Napalm getters and postprocessing': ['-50', '0']
+    'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
+    'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       357, -52]
-    'python Workflow: payload editor and pool helper': ['225', '-223']
+    'python Workflow: payload editor and pool helper': [298, -73]
   push_to_git: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
@@ -1088,8 +1088,8 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 2: separate failure - success path': [-102, -130]
-    'Regression Workflow 3: Napalm getters and postprocessing': [-223, -72]
+    'Regression Workflow 2: Separate Failure - Success paths': [-102, -130]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [-154, -70]
     Workflow_of_workflows: [3, -51]
     'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
@@ -1139,8 +1139,8 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 2: separate failure - success path': [653, -88]
-    'Regression Workflow 3: Napalm getters and postprocessing': [-180, 211]
+    'Regression Workflow 2: Separate Failure - Success paths': [653, -88]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [-111, 213]
     Workflow_of_workflows: [-122, -174]
   push_to_git: false
   result_postprocessing: ''
@@ -1189,7 +1189,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 3: Napalm getters and postprocessing': [152, -80]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [221, -78]
     Workflow_of_workflows: [3, -51]
   push_to_git: false
   result_postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\
@@ -1239,7 +1239,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 3: Napalm getters and postprocessing': [462, -11]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [531, -9]
     Workflow_of_workflows: [3, -51]
   push_to_git: false
   result_postprocessing: ''
@@ -1285,7 +1285,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 3: Napalm getters and postprocessing': [291, 208]
+    'Regression Workflow 3: Napalm getters (postprocessing)': [360, 210]
     Workflow_of_workflows: [3, -51]
   push_to_git: false
   result_postprocessing: ''
@@ -1721,7 +1721,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm_VRF_workflow: ['3', '47']
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['3', '47']
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1776,7 +1776,7 @@
   operating_system: ''
   pools: []
   positions:
-    Napalm_VRF_workflow: ['10', '-32']
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['10', '-32']
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       123, -187]
     'python Workflow: payload editor and pool helper': ['266', '161']
@@ -1839,7 +1839,7 @@
   operating_system: ''
   pools: []
   positions:
-    Napalm_VRF_workflow: ['9', '139']
+    'Regression Workflow 4: VRF creation and deletion with Napalm': ['9', '139']
     iteration_devices_workflow: ['245', '32']
   privileged_mode: false
   push_to_git: false
@@ -2066,7 +2066,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': ['-158', '-272']
+    'python Workflow: payload editor and pool helper': [-403, -3]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2113,7 +2113,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': ['-159', '148']
+    'python Workflow: payload editor and pool helper': [-268, 183]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2173,7 +2173,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': ['35', '-232']
+    'python Workflow: payload editor and pool helper': [-104, -18]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2233,7 +2233,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': ['47', '160']
+    'python Workflow: payload editor and pool helper': [80, -231]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2293,7 +2293,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': ['328', '91']
+    'python Workflow: payload editor and pool helper': [463, 174]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -3639,12 +3639,12 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-08-20 17:51:25.339733'
+  last_modified: '2019-10-01 18:35:53.401472'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: Netmiko_VRF_workflow
+  name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3688,12 +3688,12 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-08-05 13:30:56.889198'
+  last_modified: '2019-10-01 18:37:07.548167'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: Napalm_VRF_workflow
+  name: 'Regression Workflow 4: VRF creation and deletion with Napalm'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3741,17 +3741,17 @@
       content: "Process payload is a Swiss Army Knife service that uses the results\
         \ of both get_facts\r\nand get_interfaces to compute its success value.\r\n\
         Prerequisite edges are used to ensure the order in which services are run."
-      positions: [269, 268]
+      positions: [338, 270]
     c9ee8980-a972-4ace-a596-03eb2842c4d7:
       content: "In get_interfaces_ip, we test the python post-processing of\r\nthe\
         \ results by setting the IPv6 address of the Mgmt1 interface\r\nto \"::1\""
       positions: [165, -143]
-  last_modified: '2019-10-01 18:21:31.740282'
+  last_modified: '2019-10-01 18:25:36.434497'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow 3: Napalm getters and postprocessing'
+  name: 'Regression Workflow 3: Napalm getters (postprocessing)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3861,9 +3861,10 @@
   result_postprocessing: ''
   send_notification: true
   send_notification_method: mail_feedback_notification
-  services: [Start, End, 'Regression Workflow 3: Napalm getters and postprocessing',
-    Napalm_VRF_workflow, add_devices_to_payload, 'Subworkflow: Access Variable - Result
-      from parent workflow', Show version with multiprocessing, Netmiko_VRF_workflow,
+  services: [Start, End, 'Regression Workflow 3: Napalm getters (postprocessing)',
+    'Regression Workflow 4: VRF creation and deletion with Napalm', add_devices_to_payload,
+    'Subworkflow: Access Variable - Result from parent workflow', Show version with
+      multiprocessing, 'Regression Workflow 4: VRF creation and deletion with Netmiko',
     Subworkflow of Workflow, Workflow with iteration targets]
   skip: false
   skip_query: ''
@@ -3900,12 +3901,12 @@
         \nThe router will take the upward path, the dummy devices the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
       positions: [207, 40]
-  last_modified: '2019-10-01 18:05:39.893275'
+  last_modified: '2019-10-01 18:26:10.670603'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: 'Regression Workflow 2: separate failure - success path'
+  name: 'Regression Workflow 2: Separate Failure - Success paths'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4001,7 +4002,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-08-05 13:30:57.426946'
+  last_modified: '2019-10-01 18:37:43.751009'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4566,12 +4567,12 @@
         \ to check for the string \"NOVRF\".\r\nRetry twice with 2 seconds between\
         \ retries."
       positions: ['266.7530517578125', '-226.0806884765625']
-  last_modified: '2019-10-01 01:50:49.182629'
+  last_modified: '2019-10-01 18:26:42.980445'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow 1: basics (validation, retries)'
+  name: 'Regression Workflow 1: Netmiko with validation and retries'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4633,7 +4634,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 1: basics (validation, retries)': [259, -175]
+    'Regression Workflow 1: Netmiko with validation and retries': [259, -175]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''

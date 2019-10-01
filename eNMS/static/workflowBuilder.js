@@ -666,6 +666,7 @@ function displayWorkflowState(result) {
     $("#progress-failure").width(
       `${(progress.failed * 100) / progress.total}%`
     );
+    console.log(progress.passed, progress.failed);
     $("#progress-success-span").text(progress.passed);
     $("#progress-failure-span").text(progress.failed);
     $("#status").text(`Status: ${result.state.status}`);

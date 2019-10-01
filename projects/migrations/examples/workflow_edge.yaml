@@ -118,8 +118,6 @@
     match)', subtype: success, workflow: Ansible Workflow}
 - {destination: End, label: success, name: 64-success:66->2, source: 'Ansible Workflow:
     Arista show configuration (dict match)', subtype: success, workflow: Ansible Workflow}
-- {destination: End, label: success, name: 62-success:9->2, source: Example1, subtype: success,
-  workflow: Workflow with separate failure - success path}
 - {destination: get_interfaces, label: success, name: 62-success:20->22, source: REST
     is_alive, subtype: success, workflow: Workflow with separate failure - success
     path}
@@ -129,12 +127,6 @@
   subtype: success, workflow: Workflow with separate failure - success path}
 - {destination: Example1, label: failure, name: 62-failure:22->9, source: get_interfaces,
   subtype: failure, workflow: Workflow with separate failure - success path}
-- {destination: get_interfaces, label: prerequisite, name: 62-prerequisite:21->22,
-  source: get_facts, subtype: prerequisite, workflow: Workflow with separate failure
-    - success path}
-- {destination: get_interfaces, label: prerequisite, name: 62-prerequisite:20->22,
-  source: REST is_alive, subtype: prerequisite, workflow: Workflow with separate failure
-    - success path}
 - {destination: Show version with multiprocessing, label: success, name: 67-success:1->68,
   source: Start, subtype: success, workflow: 'Workflow: multiple entry points, skip
     service, multiprocessing, separate paths'}
@@ -275,3 +267,5 @@
 - {destination: End, label: success, name: 85-success:86->2, source: 'Netmiko show
     vrf: device + value iteration', subtype: success, workflow: Workflow with device
     and value iteration}
+- {destination: End, label: failure, name: 74-failure:9->2, source: Example1, subtype: failure,
+  workflow: Workflow with separate failure - success path}

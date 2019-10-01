@@ -18,6 +18,7 @@ class NapalmConfigurationService(ConnectionService):
     content = Column(LargeString, default="")
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
+    timeout = Column(Integer, default=60)
     optional_args = Column(MutableDict)
 
     __mapper_args__ = {"polymorphic_identity": "napalm_configuration_service"}

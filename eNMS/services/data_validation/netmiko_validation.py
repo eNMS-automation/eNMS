@@ -19,7 +19,7 @@ class NetmikoValidationService(ConnectionService):
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
-    timeout = Column(Integer, default=10.0)
+    timeout = Column(Integer, default=10)
     delay_factor = Column(Float, default=1.0)
     global_delay_factor = Column(Float, default=1.0)
     expect_string = Column(SmallString)

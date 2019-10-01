@@ -34,9 +34,10 @@ class NapalmForm(BaseForm):
     abstract_service = True
     driver = SelectField(choices=app.NAPALM_DRIVERS)
     use_device_driver = BooleanField(default=True)
+    timeout = IntegerField(default=10)
     optional_args = DictField()
     group = {
-        "commands": ["driver", "use_device_driver", "optional_args"],
+        "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
         "default": "expanded",
     }
 

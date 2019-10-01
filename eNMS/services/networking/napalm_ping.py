@@ -16,6 +16,7 @@ class NapalmPingService(ConnectionService):
     count = Column(Integer, default=0)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
+    timeout = Column(Integer, default=60)
     optional_args = Column(MutableDict)
     packet_size = Column(Integer, default=0)
     destination_ip = Column(SmallString)

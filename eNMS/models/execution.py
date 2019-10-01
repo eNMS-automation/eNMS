@@ -691,6 +691,7 @@ class Run(AbstractBase):
             hostname=device.ip_address,
             username=username,
             password=password,
+            timeout=self.timeout,
             optional_args=optional_args,
         )
         napalm_connection.open()

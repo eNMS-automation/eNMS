@@ -15,6 +15,7 @@ class NapalmTracerouteService(ConnectionService):
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
+    timeout = Column(Integer, default=60)
     optional_args = Column(MutableDict)
     destination_ip = Column(SmallString)
     source_ip = Column(SmallString)

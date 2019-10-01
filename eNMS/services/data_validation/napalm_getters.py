@@ -14,6 +14,7 @@ class NapalmGettersService(ConnectionService):
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
+    timeout = Column(Integer, default=60)
     getters = Column(MutableList)
     optional_args = Column(MutableDict)
 

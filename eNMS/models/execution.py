@@ -700,10 +700,12 @@ class Run(AbstractBase):
         return napalm_connection
 
     def get_connection(self, library, device):
-        connections = app.connections_cache[library].get(self.runtime, {})
-        if device not in connections:
+        connections = app.connections_cache[library].get(self.runtime)
+        if not connections:
+            connections = app.connections_cache[library].get(self.parent_runtime, {})
+        if device.name not in connections:
             return
-        device_connection = connections[device]
+        device_connection = connections[device.name]
         if library == "napalm":
             if device_connection.is_alive():
                 return device_connection

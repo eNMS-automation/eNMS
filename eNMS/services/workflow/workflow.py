@@ -96,7 +96,7 @@ class Workflow(Service):
                 sleep(service.waiting_time)
         if device and self.close_cached_connection:
             for library in ("netmiko", "napalm"):
-                device_connection = run.get_connection(library)
+                device_connection = run.get_connection(library, device)
                 if device_connection:
                     run.disconnect(library, device, device_connection)
         return {"payload": payload, "success": success}

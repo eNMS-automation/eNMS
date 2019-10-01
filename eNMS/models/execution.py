@@ -638,38 +638,21 @@ class Run(AbstractBase):
     def space_deleter(self, input):
         return "".join(input.split())
 
-    def get_netmiko_connection(self, device):
-        if self.parent_runtime in app.connections_cache["netmiko"]:
-            parent_connection = app.connections_cache["netmiko"].get(
-                self.parent_runtime
-            )
-            if parent_connection and device.name in parent_connection:
-                if self.service.start_new_connection:
-                    parent_connection.pop(device.name).disconnect()
-                else:
-                    connection = parent_connection[device.name]
-                    try:
-                        connection.find_prompt()
-                        for property in ("fast_cli", "timeout", "global_delay_factor"):
-                            service_value = getattr(self.service, property)
-                            if service_value:
-                                setattr(connection, property, service_value)
-                        try:
-                            mode = connection.check_enable_mode()
-                            if mode and not self.privileged_mode:
-                                connection.exit_enable_mode()
-                            elif self.privileged_mode and not mode:
-                                connection.enable()
-                        except Exception as exc:
-                            self.log("error", f"Failed to honor the enable mode {exc}")
-                        return connection
-                    except (OSError, ValueError):
-                        self.disconnect("netmiko", device, connection)
-                        parent_connection.pop(device.name)
-
     def netmiko_connection(self, device):
-        connection = self.get_netmiko_connection(device)
+        connection = self.get_connection("netmiko", device)
         if connection:
+            for property in ("fast_cli", "timeout", "global_delay_factor"):
+                service_value = getattr(self.service, property)
+                if service_value:
+                    setattr(connection, property, service_value)
+            try:
+                mode = connection.check_enable_mode()
+                if mode and not self.privileged_mode:
+                    connection.exit_enable_mode()
+                elif self.privileged_mode and not mode:
+                    connection.enable()
+            except Exception as exc:
+                self.log("error", f"Failed to honor the enable mode {exc}")
             return connection
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
@@ -691,20 +674,8 @@ class Run(AbstractBase):
         ] = netmiko_connection
         return netmiko_connection
 
-    def get_napalm_connection(self, device):
-        if self.parent_runtime in app.connections_cache["napalm"]:
-            parent_connection = app.connections_cache["napalm"].get(self.parent_runtime)
-            if parent_connection and device.name in parent_connection:
-                if (
-                    self.service.start_new_connection
-                    or not parent_connection[device.name].is_alive()
-                ):
-                    parent_connection.pop(device.name).close()
-                else:
-                    return parent_connection[device.name]
-
     def napalm_connection(self, device):
-        connection = self.get_napalm_connection(device)
+        connection = self.get_connection("napalm", device)
         if connection:
             return connection
         username, password = self.get_credentials(device)
@@ -729,8 +700,21 @@ class Run(AbstractBase):
         return napalm_connection
 
     def get_connection(self, library, device):
-        connections = app.connections_cache[library].get(self.runtime, [])
-        return connections.get(device, None) if connections else None
+        connections = app.connections_cache[library].get(self.runtime, {})
+        if device not in connections:
+            return
+        device_connection = connections[device]
+        if library == "napalm":
+            if device_connection.is_alive():
+                return device_connection
+            else:
+                self.disconnect(library, device, device_connection)
+        else:
+            try:
+                device_connection.find_prompt()
+                return device_connection
+            except Exception:
+                self.disconnect(library, device, device_connection)
 
     def disconnect(self, library, device, connection):
         try:

@@ -23,7 +23,7 @@ class Workflow(Service):
     __mapper_args__ = {"polymorphic_identity": "workflow"}
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    close_connection = Column(Boolean, default=True)
+    close_cached_connection = Column(Boolean, default=True)
     labels = Column(MutableDict)
     services = relationship(
         "Service", secondary=service_workflow_table, back_populates="workflows"
@@ -94,7 +94,7 @@ class Workflow(Service):
                     success = True
             if not skip_service and not service.skip:
                 sleep(service.waiting_time)
-        if device and self.close_connection:
+        if device and self.close_cached_connection:
             for library in ("netmiko", "napalm"):
                 device_connection = run.get_connection(library)
                 if device_connection:
@@ -104,7 +104,7 @@ class Workflow(Service):
 
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
-    close_connection = BooleanField()
+    close_cached_connection = BooleanField()
     start_services = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 

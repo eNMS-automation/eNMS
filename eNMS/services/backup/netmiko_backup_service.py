@@ -15,6 +15,7 @@ from eNMS.models.automation import ConnectionService
 class NetmikoBackupService(ConnectionService):
 
     __tablename__ = "netmiko_backup_service"
+    pretty_name = "Netmiko Backup"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     privileged_mode = Column(Boolean, default=False)
@@ -74,7 +75,7 @@ class NetmikoBackupService(ConnectionService):
             device.last_failure = str(device.last_runtime)
             self.generate_yaml_file(path_device_config, device)
             return {"success": False, "result": str(e)}
-        print("ttt"*100, run.properties)
+        print("ttt" * 100, run.properties)
         Session.commit()
         print(run.properties)
         return {"success": True, "result": f"Command: {command}"}

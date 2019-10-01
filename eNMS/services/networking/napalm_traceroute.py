@@ -11,6 +11,7 @@ from eNMS.models.automation import ConnectionService
 class NapalmTracerouteService(ConnectionService):
 
     __tablename__ = "napalm_traceroute_service"
+    pretty_name = "NAPALM Traceroute"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = Column(SmallString)

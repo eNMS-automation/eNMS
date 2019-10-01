@@ -12,6 +12,7 @@ from eNMS.models.automation import ConnectionService
 class NapalmConfigurationService(ConnectionService):
 
     __tablename__ = "napalm_configuration_service"
+    pretty_name = "NAPALM Configuration"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     action = Column(SmallString)

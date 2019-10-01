@@ -12,6 +12,7 @@ from eNMS.models.automation import ConnectionService
 class NetmikoConfigurationService(ConnectionService):
 
     __tablename__ = "netmiko_configuration_service"
+    pretty_name = "Netmiko Configuration"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     content = Column(LargeString, default="")

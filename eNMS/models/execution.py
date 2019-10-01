@@ -363,7 +363,9 @@ class Run(AbstractBase):
             try:
                 results = self.service.job(self, payload, *args)
                 self.convert_result(results)
-                self.eval(self.service.result_postprocessing, function="exec", **locals())
+                self.eval(
+                    self.service.result_postprocessing, function="exec", **locals()
+                )
                 if results.get("success", True):
                     self.validate_result(results, payload, device)
                 if results["success"]:

@@ -10,6 +10,7 @@ from eNMS.models.automation import ConnectionService
 class NapalmRollbackService(ConnectionService):
 
     __tablename__ = "napalm_rollback_service"
+    pretty_name = "NAPALM Rollback"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = Column(SmallString)

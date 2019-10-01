@@ -9,6 +9,7 @@ from eNMS.models.automation import ConnectionService
 class ConfigureBgpService(ConnectionService):
 
     __tablename__ = "configure_bgp_service"
+    pretty_name = "Configure BGP"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     local_as = Column(Integer, default=0)

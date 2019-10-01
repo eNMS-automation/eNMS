@@ -11,6 +11,7 @@ from eNMS.models.automation import ConnectionService
 class NetmikoValidationService(ConnectionService):
 
     __tablename__ = "netmiko_validation_service"
+    pretty_name = "Netmiko Validation"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     parent_type = "connection_service"

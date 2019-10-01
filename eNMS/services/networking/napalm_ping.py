@@ -11,6 +11,7 @@ from eNMS.models.automation import ConnectionService
 class NapalmPingService(ConnectionService):
 
     __tablename__ = "napalm_ping_service"
+    pretty_name = "NAPALM Ping"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     count = Column(Integer, default=0)

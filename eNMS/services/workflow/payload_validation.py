@@ -9,6 +9,7 @@ from eNMS.models.automation import Service
 class PayloadValidationService(Service):
 
     __tablename__ = "payload_validation_service"
+    pretty_name = "Payload Validation"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     query = Column(SmallString)

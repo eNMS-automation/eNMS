@@ -42,6 +42,7 @@ from eNMS.models.automation import Service
 class ExampleService(Service):
 
     __tablename__ = "example_service"
+    pretty_name = "Example"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     # The following fields will be stored in the database as:
@@ -77,7 +78,7 @@ class ExampleService(Service):
         run.log("info", f"Real-time logs displayed when the service is running.")
         # The "job" function is called when the service is executed.
         # If the service is running on devices, you must add a "device" argument.
-        # If it isn't, this "device" argument should be omitted. 
+        # If it isn't, this "device" argument should be omitted.
         # If the service can run both with and without a device, this key must
         # be made an keyword argument set to None, like here.
         # The parameters of the service can be accessed with self (self.string1,

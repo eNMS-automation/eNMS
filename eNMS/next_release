@@ -96,3 +96,6 @@ If there isn't, create it ("admin").
 
 - Remove poller service. Changed configuration management workflow to include the services
 used to retrieve the configuration.
+
+- Add pretty name for all services to improve UI display.
+/!\ Pretty names are mandatory for the service to be displayed in the UI (MIGRATION).

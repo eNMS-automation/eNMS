@@ -20,7 +20,8 @@ from eNMS.models.automation import Service
 class Workflow(Service):
 
     __tablename__ = "workflow"
-    __mapper_args__ = {"polymorphic_identity": "workflow"}
+    pretty_name = "Workflow"
+
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     close_cached_connection = Column(Boolean, default=True)
@@ -34,6 +35,8 @@ class Workflow(Service):
     start_services = relationship(
         "Service", secondary=start_services_workflow_table, backref="start_workflows"
     )
+
+    __mapper_args__ = {"polymorphic_identity": "workflow"}
 
     def __init__(self, **kwargs):
         start, end = fetch("service", name="Start"), fetch("service", name="End")

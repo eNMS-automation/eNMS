@@ -19,6 +19,7 @@ from eNMS.models.automation import Service
 class SwissArmyKnifeService(Service):
 
     __tablename__ = "swiss_army_knife_service"
+    pretty_name = "Swiss Army Knife"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
 

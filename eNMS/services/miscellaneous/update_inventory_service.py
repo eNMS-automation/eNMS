@@ -10,6 +10,7 @@ from eNMS.models.automation import Service
 class UpdateInventoryService(Service):
 
     __tablename__ = "update_inventory_service"
+    pretty_name = "Update Inventory"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     update_dictionary = Column(MutableDict)

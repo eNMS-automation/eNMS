@@ -193,10 +193,7 @@ class AutomationController(BaseController):
             new_position = [position["x"], position["y"]]
             if "-" in id:
                 old_position = workflow.labels[id]["positions"]
-                workflow.labels[id] = {
-                    "positions": new_position,
-                    **workflow.labels[id]
-                }
+                workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
             else:
                 service = fetch("service", id=id)
                 old_position = service.positions.get(workflow.name)

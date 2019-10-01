@@ -13,6 +13,7 @@ from eNMS.models.automation import ConnectionService
 class NetmikoFileTransferService(ConnectionService):
 
     __tablename__ = "netmiko_file_transfer_service"
+    pretty_name = "Netmiko File Transfer"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     privileged_mode = Column(Boolean, default=False)

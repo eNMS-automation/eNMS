@@ -11,6 +11,7 @@ from eNMS.models.automation import ConnectionService
 class NetmikoPromptsService(ConnectionService):
 
     __tablename__ = "netmiko_prompts_service"
+    pretty_name = "Netmiko Prompts"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     privileged_mode = Column(Boolean, default=False)

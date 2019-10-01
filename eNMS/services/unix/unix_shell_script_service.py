@@ -20,6 +20,7 @@ from eNMS.models.automation import Service
 class UnixShellScriptService(Service):
 
     __tablename__ = "unix_shell_script_service"
+    pretty_name = "Unix Shell"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     source_code = Column(LargeString, default="")

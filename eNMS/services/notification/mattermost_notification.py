@@ -14,6 +14,7 @@ from eNMS.models.automation import Service
 class MattermostNotificationService(Service):
 
     __tablename__ = "mattermost_notification_service"
+    pretty_name = "Mattermost Notification"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     channel = Column(SmallString)

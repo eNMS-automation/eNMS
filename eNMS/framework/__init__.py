@@ -43,9 +43,9 @@ def configure_context_processor(flask_app):
             "relations": list(set(chain.from_iterable(relationships.values()))),
             "relationships": relationships,
             "service_types": sorted(
-                (getattr(service_class, "pretty_name", service), service)
+                (service_class.pretty_name, service)
                 for service, service_class in models.items()
-                if service != "service" and service.endswith("service")
+                if service.endswith("service") and hasattr(service_class, "pretty_name")
             ),
             "version": app.version,
         }

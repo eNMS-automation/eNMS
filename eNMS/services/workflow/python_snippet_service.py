@@ -10,6 +10,7 @@ from eNMS.models.automation import Service
 class PythonSnippetService(Service):
 
     __tablename__ = "python_snippet_service"
+    pretty_name = "Python Snippet"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     source_code = Column(LargeString)

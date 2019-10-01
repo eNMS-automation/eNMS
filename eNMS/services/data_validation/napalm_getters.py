@@ -10,6 +10,7 @@ from eNMS.models.automation import ConnectionService
 class NapalmGettersService(ConnectionService):
 
     __tablename__ = "napalm_getters_service"
+    pretty_name = "NAPALM getters"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = Column(SmallString)

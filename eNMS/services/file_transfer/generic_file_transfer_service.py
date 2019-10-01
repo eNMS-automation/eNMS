@@ -15,6 +15,7 @@ from eNMS.models.automation import Service
 class GenericFileTransferService(Service):
 
     __tablename__ = "generic_file_transfer_service"
+    pretty_name = "Generic File Transfer"
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     direction = Column(SmallString)

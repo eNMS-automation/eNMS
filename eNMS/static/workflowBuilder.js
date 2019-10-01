@@ -602,7 +602,7 @@ $("#network").contextMenu({
 });
 
 function runWorkflow(withUpdates) {
-  workflow.services.forEach((service) => colorService(service.id, "#D2E5FF"));
+  resetDisplay();
   if (withUpdates) {
     showTypePanel("workflow", workflow.id, "run");
   } else {
@@ -669,23 +669,20 @@ function displayWorkflowState(result) {
     $("#progress-success-span").text(progress.passed);
     $("#progress-failure-span").text(progress.failed);
     $("#status").text(`Status: ${result.state.status}`);
-    const currService = result.state.current_service;
-    if (currService) {
-      colorService(currService.id, "#89CFF0");
-    }
     if (result.state.services) {
       $.each(result.state.services, (id, state) => {
         const color = {
           true: "#32cd32",
           false: "#FF6666",
           skipped: "#D3D3D3",
+          null: "#00CCFF",
         };
         if (id in nodes._data && !["1", "2"].includes(id)) {
           colorService(id, color[state.success]);
           const progress = state.progress.device;
           if (progress.total) {
-            let label = `${progress.passed}/${progress.total}`;
-            if (progress.failed > 0) label += ` (${progress.failed} failed)`;
+            let label = `${progress.passed + progress.failed}/${progress.total}`
+            label += ` (${progress.passed} passed, ${progress.failed} failed)`;
             nodes.update({
               id: id,
               label: `<b>${nodes.get(id).name}</b>\nProgress: ${label}`,
@@ -709,6 +706,7 @@ function displayWorkflowState(result) {
 function resetDisplay() {
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
+    if ([1, 2].includes(service.id)) return;
     nodes.update({
       id: service.id,
       label: service.name,

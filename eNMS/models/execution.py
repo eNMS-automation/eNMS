@@ -206,14 +206,14 @@ class Run(AbstractBase):
             devices |= set(self.service.devices)
             for pool in self.service.pools:
                 devices |= set(pool.devices)
-        self.run_state["progress"]["device"]["total"] = len(devices)
+        self.run_state["progress"]["device"]["total"] += len(devices)
         return devices
 
     def init_state(self):
         state = {
             "status": "Idle",
-            "success": False,
-            "progress": {"device": {"total": "unknown", "passed": 0, "failed": 0}},
+            "success": None,
+            "progress": {"device": {"total": 0, "passed": 0, "failed": 0}},
             "attempt": 0,
             "waiting_time": {
                 "total": self.service.waiting_time,

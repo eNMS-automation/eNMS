@@ -58,6 +58,10 @@ query_property_type -> iteration_devices_property
 - Moved the validation mechanism to the base "Service" class. Validation is now 
 available for all services.
 
+- New "Close cached connection" in a workflow. True by default.
+Will close all cached connections when the workflow is done.
+Can be deactivated
+
 - the database package for MySQL and PostgreSQL are no longer part of "requirements.txt".
 They are in "requirements_db.txt" instead.
 The reason is that they can make the pip installation fail depending on the environment, and 

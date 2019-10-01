@@ -84,7 +84,7 @@ class ServiceForm(BaseForm):
     dict_match = DictSubstitutionField("Dictionary to Match Against")
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
-    query_fields = ["device_query", "skip_query", "iteration_values"]
+    query_fields = ["device_query", "skip_query", "iteration_values", "result_postprocessing"]
 
     def validate(self):
         valid_form = super().validate()

@@ -1,5 +1,4 @@
-- configurations: []
-  description: Jackson
+- description: Jackson
   hidden: false
   icon: router
   ip_address: 192.168.1.85
@@ -23,8 +22,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: PaloAlto
+- description: PaloAlto
   hidden: false
   icon: router
   ip_address: 192.168.1.86
@@ -48,8 +46,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Austin
+- description: Austin
   hidden: false
   icon: router
   ip_address: 192.168.105.9
@@ -73,16 +70,15 @@
   type: device
   username: admin
   vendor: Arista
-- configurations: []
-  description: Washington
+- description: Washington
   hidden: false
   icon: router
   ip_address: 192.168.105.5
-  last_duration: ''
+  last_duration: 5.693686s
   last_failure: Never
-  last_runtime: '5.781748'
+  last_runtime: '2019-10-01 20:59:35.129038'
   last_status: Success
-  last_update: '2019-08-20 19:13:44.739071'
+  last_update: '2019-10-01 20:59:35.129038'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'
@@ -98,8 +94,7 @@
   type: device
   username: admin
   vendor: Arista
-- configurations: []
-  description: Chicago
+- description: Chicago
   hidden: false
   icon: router
   ip_address: 192.168.1.188
@@ -123,8 +118,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: SanJose
+- description: SanJose
   hidden: false
   icon: router
   ip_address: 192.168.1.187
@@ -148,8 +142,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: SanDiego
+- description: SanDiego
   hidden: false
   icon: router
   ip_address: 10.0.0.12
@@ -173,8 +166,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Dallas
+- description: Dallas
   hidden: false
   icon: router
   ip_address: 10.0.0.100
@@ -198,8 +190,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Philadelphia
+- description: Philadelphia
   hidden: false
   icon: router
   ip_address: 10.0.0.101
@@ -223,8 +214,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: LosAngeles
+- description: LosAngeles
   hidden: false
   icon: optical_switch
   ip_address: 10.0.0.13
@@ -248,8 +238,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Detroit
+- description: Detroit
   hidden: false
   icon: router
   ip_address: 10.0.0.14
@@ -273,8 +262,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Richmond
+- description: Richmond
   hidden: false
   icon: router
   ip_address: 10.0.0.15
@@ -298,8 +286,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Atlanta
+- description: Atlanta
   hidden: false
   icon: router
   ip_address: 10.0.0.102
@@ -323,8 +310,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Boston
+- description: Boston
   hidden: false
   icon: router
   ip_address: 10.0.0.103
@@ -348,8 +334,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Houston
+- description: Houston
   hidden: false
   icon: router
   ip_address: 10.0.0.104
@@ -373,8 +358,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Baltimore
+- description: Baltimore
   hidden: false
   icon: router
   ip_address: 10.0.0.105
@@ -398,8 +382,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: Cleveland
+- description: Cleveland
   hidden: false
   icon: router
   ip_address: 10.0.0.106
@@ -423,8 +406,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: Columbus
+- description: Columbus
   hidden: false
   icon: router
   ip_address: 10.0.0.107
@@ -448,8 +430,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: Cincinnati
+- description: Cincinnati
   hidden: false
   icon: router
   ip_address: 10.0.0.108
@@ -473,8 +454,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: Cambridge
+- description: Cambridge
   hidden: false
   icon: router
   ip_address: 10.0.0.109
@@ -498,8 +478,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: Minneapolis
+- description: Minneapolis
   hidden: false
   icon: router
   ip_address: 10.0.0.110
@@ -523,8 +502,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: NewYork
+- description: NewYork
   hidden: false
   icon: router
   ip_address: 192.168.1.88
@@ -548,8 +526,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: Sacramento
+- description: Sacramento
   hidden: false
   icon: router
   ip_address: 10.0.0.111
@@ -573,8 +550,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: SanFrancisco
+- description: SanFrancisco
   hidden: false
   icon: router
   ip_address: 192.168.1.89
@@ -598,8 +574,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: Orange
+- description: Orange
   hidden: false
   icon: router
   ip_address: 10.0.0.114
@@ -623,8 +598,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- configurations: []
-  description: Oakland
+- description: Oakland
   hidden: false
   icon: router
   ip_address: 10.0.0.112
@@ -648,8 +622,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Denver
+- description: Denver
   hidden: false
   icon: router
   ip_address: 10.0.0.113
@@ -673,8 +646,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- configurations: []
-  description: Denver
+- description: Denver
   hidden: false
   icon: router
   ip_address: 127.0.0.1

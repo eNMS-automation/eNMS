@@ -697,6 +697,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_backup_service
   use_device_driver: true
   validation_method: none
@@ -968,7 +969,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-24 20:09:43.688021'
+  last_modified: '2019-10-01 21:00:56.052240'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -989,6 +990,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 1
   type: napalm_configuration_service
   use_device_driver: true
   validation_method: none
@@ -1075,7 +1077,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-24 00:58:16.900129'
+  last_modified: '2019-10-01 21:01:04.521407'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -1099,6 +1101,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 1
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
@@ -1126,7 +1129,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-24 14:38:05.538847'
+  last_modified: '2019-10-01 21:01:08.312411'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -1149,6 +1152,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 1
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
@@ -1199,6 +1203,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
@@ -1248,6 +1253,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
@@ -1729,6 +1735,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_rollback_service
   use_device_driver: true
   validation_method: none
@@ -2355,6 +2362,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_equal
@@ -2403,6 +2411,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
@@ -2453,6 +2462,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_included
@@ -2501,6 +2511,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_equal
@@ -2549,6 +2560,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
+  timeout: 60
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_equal

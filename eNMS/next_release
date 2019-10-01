@@ -93,3 +93,6 @@ anything.
 
 - Upon creating the admin user, check if there is a password in the Vault.
 If there isn't, create it ("admin").
+
+- Remove poller service. Changed configuration management workflow to include the services
+used to retrieve the configuration.

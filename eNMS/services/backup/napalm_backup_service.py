@@ -16,7 +16,6 @@ class NapalmBackupService(ConnectionService):
     __tablename__ = "napalm_backup_service"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    configuration_backup_service = True
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     timeout = Column(Integer, default=60)

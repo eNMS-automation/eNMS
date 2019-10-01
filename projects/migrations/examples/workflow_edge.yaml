@@ -1,12 +1,3 @@
-- {destination: poller_service, label: success, name: Configuration Management Workflow
-    0 -> 2 (True), source: Start, subtype: success, workflow: Configuration Management
-    Workflow}
-- {destination: git_push_configurations, label: success, name: Configuration Management
-    Workflow 2 -> 3 (True), source: poller_service, subtype: success, workflow: Configuration
-    Management Workflow}
-- {destination: git_push_configurations, label: failure, name: Configuration Management
-    Workflow 2 -> 3 (False), source: poller_service, subtype: failure, workflow: Configuration
-    Management Workflow}
 - {destination: End, label: success, name: Configuration Management Workflow 3 ->
     1 (True), source: git_push_configurations, subtype: success, workflow: Configuration
     Management Workflow}
@@ -291,3 +282,11 @@
     and value iteration}
 - {destination: End, label: success, name: 74-success:9->2, source: Example1, subtype: success,
   workflow: 'Regression Workflow 2: Separate Failure - Success paths'}
+- {destination: netmiko_configuration_backup, label: success, name: 68-success:1->13,
+  source: Start, subtype: success, workflow: Configuration Management Workflow}
+- {destination: napalm_configuration_backup, label: success, name: 68-success:1->14,
+  source: Start, subtype: success, workflow: Configuration Management Workflow}
+- {destination: git_push_configurations, label: success, name: 68-success:14->7, source: napalm_configuration_backup,
+  subtype: success, workflow: Configuration Management Workflow}
+- {destination: git_push_configurations, label: success, name: 68-success:13->7, source: netmiko_configuration_backup,
+  subtype: success, workflow: Configuration Management Workflow}

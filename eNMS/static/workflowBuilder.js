@@ -118,19 +118,8 @@ function displayWorkflow(workflowData) {
   });
   graph.on("doubleClick", function(properties) {
     properties.event.preventDefault();
-    let node = this.getNodeAt(properties.pointer.DOM);
-    if (node) {
-      node = parseInt(node);
-      const service = workflow.services.find((w) => w.id === node);
-      if (service.type == "workflow") {
-        switchToWorkflow(node);
-        $("#current-workflow")
-          .val(node)
-          .selectpicker("refresh");
-      } else {
-        showTypePanel(service.type, service.id);
-      }
-    }
+    const service = nodes.get(this.getNodeAt(properties.pointer.DOM));
+    if (service.id) showTypePanel(service.type, service.id);
   });
   $("#current-runtime").empty();
   $("#current-runtime").append(
@@ -261,6 +250,16 @@ function switchToWorkflow(workflowId, arrow) {
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
 }
+
+function switchToSubworkflow() {
+  service = nodes.get(graph.getSelectedNodes()[0]);
+  if (service.type != "workflow") {
+    alertify.notify("You must select a workflow.", "error", 5);
+  } else {
+    switchToWorkflow(service.id);
+  }
+}
+    
 
 // eslint-disable-next-line
 function menu(entry) {

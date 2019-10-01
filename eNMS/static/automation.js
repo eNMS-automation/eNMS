@@ -279,7 +279,7 @@ function resumeTask(id) {
   if (page == "table/service" || page == "workflow_builder") {
     $("#service-type").selectpicker({ liveSearch: true });
     serviceTypes.forEach((service) => {
-      $("#service-type").append(new Option(service, service));
+      $("#service-type").append(new Option(service[0], service[1]));
     });
     $("#service-type").selectpicker("refresh");
   }

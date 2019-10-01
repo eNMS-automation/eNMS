@@ -17,7 +17,7 @@ from eNMS.properties.database import import_classes
 class DatabaseBackupService(Service):
 
     __tablename__ = "database_backup_service"
-
+    pretty_name = "Database Backup Service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     direction = "put"
     protocol = Column(SmallString)

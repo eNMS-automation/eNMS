@@ -73,18 +73,22 @@ class ExampleService(Service):
     # Some services will take action or interrogate a device. The job method
     # can also take device as a parameter for these types of services.
     # def job(self, device, payload):
-    def job(self, run, payload):
+    def job(self, run, payload, device=None):
         run.log("info", f"Real-time logs displayed when the service is running.")
         # The "job" function is called when the service is executed.
+        # If the service is running on devices, you must add a "device" argument.
+        # If it isn't, this "device" argument should be omitted. 
+        # If the service can run both with and without a device, this key must
+        # be made an keyword argument set to None, like here.
         # The parameters of the service can be accessed with self (self.string1,
         # self.boolean1, etc)
         # You can look at how default services (netmiko, napalm, etc.) are
         # implemented in other folders.
         # The resulting dictionary will be displayed in the logs.
-        # It must contain at least a key "success" that indicates whether
+        # It can contain a key "success" that indicates whether
         # the execution of the service was a success or a failure.
-        # In a workflow, the "success" value will determine whether to move
-        # forward with a "Success" edge or a "Failure" edge.
+        # That "success" value will determine whether to move forward with
+        # a "Success" edge or a "Failure" edge.
         return {"success": True, "result": "example"}
 
 

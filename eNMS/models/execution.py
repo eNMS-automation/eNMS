@@ -263,7 +263,6 @@ class Run(AbstractBase):
             self.log("error", result)
             results = {"success": False, "runtime": self.runtime, "results": result}
         finally:
-            self.close_connection_cache()
             Session.commit()
             self.status = "Aborted" if self.stop else "Completed"
             self.run_state["status"] = self.status
@@ -729,16 +728,9 @@ class Run(AbstractBase):
         ] = napalm_connection
         return napalm_connection
 
-    def close_connection_cache(self):
-        pool = ThreadPool(30)
-        for library in ("netmiko", "napalm"):
-            connections = app.connections_cache[library].pop(self.runtime, None)
-            if not connections:
-                continue
-            for connection in connections.items():
-                pool.apply_async(self.disconnect, (library, *connection))
-        pool.close()
-        pool.join()
+    def get_connection(self, library, device):
+        connections = app.connections_cache[library].get(self.runtime, [])
+        return connections.get(device, None) if connections else None
 
     def disconnect(self, library, device, connection):
         try:

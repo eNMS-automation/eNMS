@@ -1,8 +1,8 @@
 from collections import defaultdict
-from sqlalchemy import ForeignKey, Integer
+from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from wtforms import HiddenField
+from wtforms import BooleanField, HiddenField
 
 from eNMS.database import Session
 from eNMS.database.base import AbstractBase
@@ -23,6 +23,7 @@ class Workflow(Service):
     __mapper_args__ = {"polymorphic_identity": "workflow"}
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    close_connection = Column(Boolean, default=True)
     labels = Column(MutableDict)
     services = relationship(
         "Service", secondary=service_workflow_table, back_populates="workflows"
@@ -93,11 +94,17 @@ class Workflow(Service):
                     success = True
             if not skip_service and not service.skip:
                 sleep(service.waiting_time)
+        if device and self.close_connection:
+            for library in ("netmiko", "napalm"):
+                device_connection = run.get_connection(library)
+                if device_connection:
+                    run.disconnect(library, device, device_connection)
         return {"payload": payload, "success": success}
 
 
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
+    close_connection = BooleanField()
     start_services = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 

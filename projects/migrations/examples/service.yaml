@@ -35,13 +35,14 @@
     Iteration Targets Workflow: [-395, 13]
     Napalm getters and match mechanism workflow: [-605, 76]
     Netmiko prompts: [-279, -158]
-    'Payload Workflow: Payload Extraction with operations': [-516, -120]
     'Regression Workflow 1: Netmiko with validation and retries': [0, 0]
-    'Regression Workflow 2: Separate Failure - Success paths': [-366, 36]
+    'Regression Workflow 2: Separate Failure - Success paths': [-404, 13]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-431, -124]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['-200', '0']
     'Regression Workflow 6: Ansible with Validation': [-683, -48]
+    'Regression Workflow 7: Payload Extraction & Validation': [-115, -305]
+    'Regression Workflow 8: Payload Extraction with Operations': [-661, -226]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
@@ -51,7 +52,6 @@
       -301, 93]
     Workflow_of_workflows: [-651, -168]
     iteration_devices_workflow: ['-164', '15']
-    payload_extraction_validation_worflow: [-192, -321]
     'python Workflow: payload editor and pool helper': [-556, -211]
   push_to_git: false
   result_postprocessing: ''
@@ -101,13 +101,14 @@
     Iteration Targets Workflow: [748, -268]
     Napalm getters and match mechanism workflow: [547, 107]
     Netmiko prompts: [634, 187]
-    'Payload Workflow: Payload Extraction with operations': [527, -97]
     'Regression Workflow 1: Netmiko with validation and retries': [500, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
     'Regression Workflow 3: Napalm getters (postprocessing)': [778, 230]
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-450, 132]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['200', '0']
     'Regression Workflow 6: Ansible with Validation': [771, -81]
+    'Regression Workflow 7: Payload Extraction & Validation': [454, 245]
+    'Regression Workflow 8: Payload Extraction with Operations': [-688, -153]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -120,7 +121,6 @@
       594, -3]
     Workflow_of_workflows: [-440, -115]
     iteration_devices_workflow: ['651', '20']
-    payload_extraction_validation_worflow: [454, 245]
     'python Workflow: payload editor and pool helper': [593, -93]
   push_to_git: false
   result_postprocessing: ''
@@ -378,14 +378,14 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-10 13:47:31.375477'
+  last_modified: '2019-10-02 10:16:48.005751'
   mac_address: FF:FF:FF:FF:FF:FF
   mail_address: aaa@gmail.com
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: Example1
+  name: Example Service (does nothing)
   negative_logic: false
   notification_header: ''
   number_in_range: 7
@@ -871,19 +871,19 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-01 11:40:21.380540'
+  last_modified: '2019-10-02 10:16:27.845335'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: netmiko_check_no_vrf_test
+  name: 'Netmiko: Check VRF (test) does not exist'
   negative_logic: true
   notification_header: ''
   number_of_retries: 2
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 2: Separate Failure - Success paths': [-157, 280]
+    'Regression Workflow 2: Separate Failure - Success paths': [-194, 225]
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-35, 151]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
@@ -976,12 +976,12 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-31 13:25:41.424603'
+  last_modified: '2019-10-02 10:15:31.918007'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: REST is_alive
+  name: 'REST API: call *is_alive* endpoint'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1035,12 +1035,12 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-01 21:01:04.521407'
+  last_modified: '2019-10-02 10:14:48.331142'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: get_facts
+  name: 'NAPALM: Get Facts'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1087,12 +1087,12 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-01 21:01:08.312411'
+  last_modified: '2019-10-02 10:14:58.959163'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: get_interfaces
+  name: 'NAPALM: Get interfaces'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1100,7 +1100,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 2: Separate Failure - Success paths': [653, -88]
+    'Regression Workflow 2: Separate Failure - Success paths': [611, -72]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-111, 213]
     Workflow_of_workflows: [-122, -174]
   push_to_git: false
@@ -1478,7 +1478,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [-334, -183]
+    'Regression Workflow 7: Payload Extraction & Validation': [-334, -183]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -1542,7 +1542,7 @@
   operation3: set
   pools: []
   positions:
-    payload_extraction_validation_worflow: [182, -197]
+    'Regression Workflow 7: Payload Extraction & Validation': [182, -197]
   push_to_git: false
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
@@ -1593,7 +1593,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [-267, 12]
+    'Regression Workflow 7: Payload Extraction & Validation': [-267, 12]
   push_to_git: false
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
   result_postprocessing: ''
@@ -1638,7 +1638,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [-87, 207]
+    'Regression Workflow 7: Payload Extraction & Validation': [-87, 207]
   push_to_git: false
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   result_postprocessing: ''
@@ -2412,7 +2412,7 @@
   pools: []
   positions:
     Napalm getters and match mechanism workflow: [157, 139]
-    'Payload Workflow: Payload Extraction with operations': [-418, -325]
+    'Regression Workflow 8: Payload Extraction with Operations': [-348, -240]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3003,7 +3003,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [776, 146]
+    'Regression Workflow 7: Payload Extraction & Validation': [776, 146]
   push_to_git: false
   query: get_var("textfsm_variable", device=device.name)[0][1]
   result_postprocessing: ''
@@ -3049,7 +3049,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [708, -114]
+    'Regression Workflow 7: Payload Extraction & Validation': [708, -114]
   push_to_git: false
   query: get_var("regex_variable", device=device.name)
   result_postprocessing: ''
@@ -3094,7 +3094,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Payload Workflow: Payload Extraction with operations': [-367, 29]
+    'Regression Workflow 8: Payload Extraction with Operations': [118, -243]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3150,7 +3150,7 @@
   operation3: update
   pools: []
   positions:
-    'Payload Workflow: Payload Extraction with operations': [-197, -332]
+    'Regression Workflow 8: Payload Extraction with Operations': [619, -236]
   push_to_git: false
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
@@ -3209,7 +3209,7 @@
   operation3: update
   pools: []
   positions:
-    'Payload Workflow: Payload Extraction with operations': [-93, 28]
+    'Regression Workflow 8: Payload Extraction with Operations': [600, 70]
   push_to_git: false
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
@@ -3259,7 +3259,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Payload Workflow: Payload Extraction with operations': [82, -332]
+    'Regression Workflow 8: Payload Extraction with Operations': [62, 62]
   push_to_git: false
   query: get_var("list", device=device.name)
   result_postprocessing: ''
@@ -3304,7 +3304,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Payload Workflow: Payload Extraction with operations': [204, 18]
+    'Regression Workflow 8: Payload Extraction with Operations': [-565, 68]
   push_to_git: false
   query: get_var("dict", device=device.name)
   result_postprocessing: ''
@@ -3564,8 +3564,8 @@
     3b9c0900-5718-4298-afcc-67bb0a7fb3af:
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
-      positions: [-264, 92]
-  last_modified: '2019-10-01 21:22:49.141692'
+      positions: [-274, 79]
+  last_modified: '2019-10-02 10:12:01.801290'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3641,7 +3641,7 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   services: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
-    netmiko_check_no_vrf_test]
+    'Netmiko: Check VRF (test) does not exist']
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -3748,8 +3748,8 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, get_facts, get_interfaces, get_interfaces_ip, get_config,
-    process_payload1]
+  services: [Start, End, 'NAPALM: Get Facts', 'NAPALM: Get interfaces', get_interfaces_ip,
+    get_config, process_payload1]
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -3808,13 +3808,13 @@
         \ uses the \"get_result\" method to retrieve the results and validate them.\r\
         \n- the right side uses \"get_var\" to extract data from the payload and validate\
         \ it."
-      positions: [312, 10]
-  last_modified: '2019-10-02 10:10:12.342348'
+      positions: [312, 43]
+  last_modified: '2019-10-02 10:18:35.823378'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: payload_extraction_validation_worflow
+  name: 'Regression Workflow 7: Payload Extraction & Validation'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3913,8 +3913,8 @@
       content: "This workflow runs on 3 devices: one router and 2 dummy devices.\r\
         \nThe router will take the upward path, the dummy devices the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
-      positions: [207, 40]
-  last_modified: '2019-10-01 18:26:10.670603'
+      positions: [180, 77]
+  last_modified: '2019-10-02 10:16:50.403408'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3930,8 +3930,9 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, get_facts, REST is_alive, netmiko_check_no_vrf_test, Example1,
-    get_interfaces]
+  services: [Start, End, 'NAPALM: Get Facts', 'REST API: call *is_alive* endpoint',
+    'Netmiko: Check VRF (test) does not exist', Example Service (does nothing), 'NAPALM:
+      Get interfaces']
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -3983,8 +3984,8 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, REST
-      is_alive]
+  services: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, 'REST
+      API: call *is_alive* endpoint']
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -4032,8 +4033,8 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   services: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
-    Show vrf with payload helper, Show vrf with python query, REST is_alive, show
-      runtime with get_result helper]
+    Show vrf with payload helper, Show vrf with python query, 'REST API: call *is_alive*
+      endpoint', show runtime with get_result helper]
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -4214,11 +4215,11 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, Example1, Show version with multiprocessing, REST is_alive,
-    napalm_configure_bgp_1]
+  services: [Start, End, Example Service (does nothing), Show version with multiprocessing,
+    'REST API: call *is_alive* endpoint', napalm_configure_bgp_1]
   skip: false
   skip_query: ''
-  start_services: [Start, Example1]
+  start_services: [Start, Example Service (does nothing)]
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4295,12 +4296,12 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-08-15 00:11:29.936942'
+  last_modified: '2019-10-02 10:20:38.196859'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'Payload Workflow: Payload Extraction with operations'
+  name: 'Regression Workflow 8: Payload Extraction with Operations'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4411,8 +4412,9 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, 'Payload Workflow: Payload Extraction with operations', Napalm
-      getters and match mechanism workflow, payload_extraction_validation_worflow]
+  services: [Start, End, 'Regression Workflow 8: Payload Extraction with Operations',
+    Napalm getters and match mechanism workflow, 'Regression Workflow 7: Payload Extraction
+      & Validation']
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -4600,13 +4602,13 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    1b2cc064-cc7d-42af-8eda-61d44720fe79:
+    f865beb3-e097-45f9-917c-184a423d8249:
       alignment: left
       content: "Use Netmiko to run a \"show vrf\".\r\nUse the validation mechanism\
-        \ to check for the string \"NOVRF\".\r\nRetry twice with 2 seconds between\
-        \ retries."
-      positions: ['292.7530517578125', '-229.5806884765625']
-  last_modified: '2019-10-01 22:36:32.350833'
+        \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
+        \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
+      positions: [294, -242]
+  last_modified: '2019-10-02 10:18:22.321399'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4622,7 +4624,7 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, 'Regression Workflow 1: look for a VRF with netmiko']
+  services: [Start, End, Check VRF (NOVRF) exists]
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -4661,19 +4663,19 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-01 01:50:52.976314'
+  last_modified: '2019-10-02 10:17:57.272976'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow 1: look for a VRF with netmiko'
+  name: Check VRF (NOVRF) exists
   negative_logic: false
   notification_header: ''
   number_of_retries: 2
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 1: Netmiko with validation and retries': [259, -175]
+    'Regression Workflow 1: Netmiko with validation and retries': [250, -172]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''

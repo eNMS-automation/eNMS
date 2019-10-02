@@ -51,7 +51,7 @@
       -301, 93]
     Workflow_of_workflows: [-651, -168]
     iteration_devices_workflow: ['-164', '15']
-    payload_extraction_validation_worflow: [-481, -95]
+    payload_extraction_validation_worflow: [-192, -321]
     'python Workflow: payload editor and pool helper': [-556, -211]
   push_to_git: false
   result_postprocessing: ''
@@ -120,7 +120,7 @@
       594, -3]
     Workflow_of_workflows: [-440, -115]
     iteration_devices_workflow: ['651', '20']
-    payload_extraction_validation_worflow: [175, 266]
+    payload_extraction_validation_worflow: [454, 245]
     'python Workflow: payload editor and pool helper': [593, -93]
   push_to_git: false
   result_postprocessing: ''
@@ -1478,7 +1478,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [-129, -278]
+    payload_extraction_validation_worflow: [-334, -183]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -1542,7 +1542,7 @@
   operation3: set
   pools: []
   positions:
-    payload_extraction_validation_worflow: [144, -263]
+    payload_extraction_validation_worflow: [182, -197]
   push_to_git: false
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
@@ -1593,7 +1593,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [-57, -145]
+    payload_extraction_validation_worflow: [-267, 12]
   push_to_git: false
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
   result_postprocessing: ''
@@ -1638,7 +1638,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [-73, 96]
+    payload_extraction_validation_worflow: [-87, 207]
   push_to_git: false
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   result_postprocessing: ''
@@ -3003,7 +3003,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [459, 97]
+    payload_extraction_validation_worflow: [776, 146]
   push_to_git: false
   query: get_var("textfsm_variable", device=device.name)[0][1]
   result_postprocessing: ''
@@ -3049,7 +3049,7 @@
   operating_system: eos
   pools: []
   positions:
-    payload_extraction_validation_worflow: [434, -140]
+    payload_extraction_validation_worflow: [708, -114]
   push_to_git: false
   query: get_var("regex_variable", device=device.name)
   result_postprocessing: ''
@@ -3779,8 +3779,37 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-08-14 19:57:56.988442'
+  labels:
+    20a6a733-4b79-4390-bf2b-ad05dbd6855f:
+      alignment: center
+      content: "Validate the result with the regex :\r\n(\\d\\.){3}\\d"
+      positions: [-117, 269]
+    3844a73f-340f-4b7a-9893-50c5b79998d9:
+      alignment: center
+      content: "Check that the \"textfsm_variable\" in the payload\r\ncan be matched\
+        \ with the \"(\\d\\.){3}\\d\" regular expression."
+      positions: [794, 255]
+    52d15bff-498b-462d-843c-a23199073858:
+      alignment: center
+      content: "Check that the results contains the dictionary\r\n{\"value\":[\"1.1.1.1\"\
+        ,\"2.2.2.2\",\"3.3.3.3\"]}\r\n"
+      positions: [-351, -65]
+    55b1e05d-4d84-4227-8774-65cf7ffd992f:
+      alignment: center
+      content: "Check that the \"regex_variable\" variable\r\nin the payload contains\
+        \ the dictionary\r\n{\"value\":[\"1.1.1.1\",\"2.2.2.2\",\"3.3.3.3\"]}\r\n"
+      positions: [743, -198]
+    646ee969-1472-45cb-bd00-0f8aecf18f21:
+      alignment: left
+      content: "This workflow uses netmiko to run a \"show ip route\", and a \"Payload\
+        \ Extraction\" service to\r\nextract data with regular expression and TextFSM.\r\
+        \nThat extracted information is stored both in the workflow payload and the\
+        \ results of the extraction\r\nservice :\r\n- the left side of the workflow\
+        \ uses the \"get_result\" method to retrieve the results and validate them.\r\
+        \n- the right side uses \"get_var\" to extract data from the payload and validate\
+        \ it."
+      positions: [312, 10]
+  last_modified: '2019-10-02 10:10:12.342348'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

@@ -634,7 +634,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-01 21:22:13.015583'
+  last_modified: '2019-10-02 10:23:30.359945'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -652,7 +652,7 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  skip: false
+  skip: true
   skip_query: ''
   time_between_retries: 10
   timeout: 60

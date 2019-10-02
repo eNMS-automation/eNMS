@@ -38,15 +38,6 @@ function sshConnection(id) {
 }
 
 // eslint-disable-next-line
-function showConfiguration(id, name) {
-  createPanel("display", `Configuration - Device ${name}`, id, () => {
-    call(`/get/configuration/${id}`, (config) => {
-      $(`#content-${id}`).html(`<pre>${config.configuration}</pre>`);
-    });
-  });
-}
-
-// eslint-disable-next-line
 function savePoolObjects(id) {
   fCall(`/save_pool_objects/${id}`, `#pool-objects-form-${id}`, function() {
     alertify.notify("Changes saved.", "success", 5);

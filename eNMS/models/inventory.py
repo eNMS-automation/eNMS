@@ -420,7 +420,7 @@ class Configuration(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showConfiguration('{self.id}', '{self.device_name}')"
+            onclick="showDeviceConfiguration('{self.device_id}')"
               ><span class="glyphicon glyphicon-book"></span
             ></button>
           </li>

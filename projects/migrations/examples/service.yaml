@@ -2122,11 +2122,11 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: get_var("iteration_device", section="pools", device=parent_device.name)
+  iteration_devices: get_var("iteration_device", section="pools", device=device.name)
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-31 13:25:38.941367'
+  last_modified: '2019-10-04 01:28:59.769392'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1

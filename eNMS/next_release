@@ -49,7 +49,9 @@ All workflows must now be in the service.yaml file.
 Renaming: python_query -> device_query
 query_property_type -> device_query_property
 skip_python_query -> skip_query
-workflow_device -> parent_device (because iteration targets work for a service too)
+workflow_device -> IT DEPENDS
+in the iteration_devices query: device (because iteration targets work for a service too)
+otherwise: parent_device
 
 In the migration file:
 device_query -> iteration_devices

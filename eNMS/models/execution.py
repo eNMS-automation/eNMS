@@ -288,11 +288,10 @@ class Run(AbstractBase):
 
     @staticmethod
     def get_device_result(args):
-        device = fetch("device", id=args[0])
-        run = fetch("run", runtime=args[1])
-        device_result = run.get_results(args[2], device)
-        with args[3]:
-            args[4][device.name] = device_result
+        device_id, runtime, payload, results = args
+        device = fetch("device", id=device_id)
+        run = fetch("run", runtime=runtime)
+        results.append(run.get_results(payload, device))
 
     def device_iteration(self, payload, device):
         derived_devices = self.compute_devices_from_query(
@@ -324,11 +323,10 @@ class Run(AbstractBase):
                 )
                 return {"success": success, "runtime": self.runtime}
             if self.multiprocessing:
-                device_results = {}
-                thread_lock = Lock()
+                results = []
                 processes = min(len(devices), self.max_processes)
                 process_args = [
-                    (device.id, self.runtime, payload, thread_lock, device_results)
+                    (device.id, self.runtime, payload, results)
                     for device in devices
                 ]
                 pool = ThreadPool(processes=processes)
@@ -336,13 +334,7 @@ class Run(AbstractBase):
                 pool.close()
                 pool.join()
             else:
-                device_results = {
-                    device.name: self.get_results(payload, device) for device in devices
-                }
-            for device_name, r in deepcopy(device_results).items():
-                self.create_result(r, fetch("device", name=device_name))
-                if not r["success"]:
-                    success = False
+                results = [self.get_results(payload, device) for device in devices]
             return {"success": success, "runtime": self.runtime}
 
     def create_result(self, results, device=None):
@@ -362,9 +354,6 @@ class Run(AbstractBase):
         for i in range(self.number_of_retries + 1):
             try:
                 results = self.service.job(self, payload, *args)
-                print("commit" + device.name)
-                Session.commit()
-                Session.refresh(self)
                 self.convert_result(results)
                 self.eval(
                     self.service.result_postprocessing, function="exec", **locals()
@@ -411,7 +400,9 @@ class Run(AbstractBase):
         if device:
             status = "passed" if results["success"] else "failed"
             self.run_state["progress"]["device"][status] += 1
-        return results
+        self.create_result(results, device)
+        Session.commit()
+        return results["success"]
 
     def log(self, severity, log):
         log = f"{app.get_time()} - {severity} - {log}"

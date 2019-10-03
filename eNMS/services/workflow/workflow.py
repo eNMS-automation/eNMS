@@ -78,7 +78,6 @@ class Workflow(Service):
                 if device:
                     kwargs["devices"] = [device.id]
                 service_run = factory("run", **kwargs)
-                Session.commit()
                 service_results = service_run.run(payload)
                 status = "passed" if service_results["success"] else "failed"
                 if not device:
@@ -102,6 +101,7 @@ class Workflow(Service):
                 device_connection = run.get_connection(library, device)
                 if device_connection:
                     run.disconnect(library, device, device_connection)
+        Session.refresh(run)
         return {"payload": payload, "success": success}
 
 

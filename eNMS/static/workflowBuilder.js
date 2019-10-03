@@ -658,7 +658,8 @@ function displayWorkflowState(result) {
   if (!result.state) {
     $("#progress").hide();
   } else if (result.state.progress) {
-    const progress = result.state.progress["device"];
+    progressType = result.state.progress.device.total ? "device" : "service";
+    const progress = result.state.progress[progressType];
     $("#progress").show();
     $("#progress-success").width(
       `${(progress.passed * 100) / progress.total}%`
@@ -666,8 +667,8 @@ function displayWorkflowState(result) {
     $("#progress-failure").width(
       `${(progress.failed * 100) / progress.total}%`
     );
-    $("#progress-success-span").text(progress.passed);
-    $("#progress-failure-span").text(progress.failed);
+    if (progress.passed) $("#progress-success-span").text(progress.passed);
+    if (progress.failed) $("#progress-failure-span").text(progress.failed);
     $("#status").text(`Status: ${result.state.status}`);
     if (result.state.services) {
       $.each(result.state.services, (id, state) => {

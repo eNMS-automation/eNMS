@@ -400,6 +400,7 @@ class Pool(AbstractPool):
 class Configuration(AbstractBase):
 
     __tablename__ = type = "configuration"
+    private = True
     id = Column(Integer, primary_key=True)
     configuration = Column(LargeString)
     runtime = Column(SmallString)

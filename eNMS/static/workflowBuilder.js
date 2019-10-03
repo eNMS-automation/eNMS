@@ -79,9 +79,7 @@ function displayWorkflow(workflowData) {
   workflow = workflowData.workflow;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
-  workflow.services
-    .filter((s) => s.iteration_values != "")
-    .map(drawIterationEdge);
+  workflow.services.map(drawIterationEdge);
   for (const [id, label] of Object.entries(workflow.labels)) {
     console.log(label);
     drawLabel(id, label);
@@ -275,11 +273,7 @@ function saveWorkflowService(service, update) {
   } else {
     addServicesToWorkflow([service.id]);
   }
-  if (service.iteration_values != "") {
-    drawIterationEdge(service);
-  } else {
-    edges.remove(-service.id);
-  }
+  drawIterationEdge(service);
 }
 
 // eslint-disable-next-line
@@ -450,15 +444,27 @@ function drawLabel(id, label) {
 }
 
 function drawIterationEdge(service) {
-  if (!edges.get(-service.id)) {
-    edges.add({
-      id: -service.id,
-      label: "Iteration",
-      from: service.id,
-      to: service.id,
-      color: "black",
-      arrows: { to: { enabled: true } },
-    });
+  if (!service.iteration_values && !service.iteration_devices ) {
+    edges.remove(-service.id);
+  } else if (!edges.get(-service.id)) {
+    let title = ""
+    if (service.iteration_values) {
+      title += `<b>Iteration Values</b>: ${service.iteration_values}<br>`
+    }
+    if (service.iteration_devices) {
+      title += `<b>Iteration Devices</b>: ${service.iteration_devices}<br>`
+    }
+    {
+      edges.add({
+        id: -service.id,
+        label: "Iteration",
+        from: service.id,
+        to: service.id,
+        color: "black",
+        arrows: { to: { enabled: true } },
+        title: title,
+      });
+    }
   }
 }
 

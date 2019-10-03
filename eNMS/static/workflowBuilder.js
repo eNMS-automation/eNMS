@@ -388,10 +388,14 @@ function changeSkipValue(skip) {
 }
 
 function formatServiceTitle(service) {
-  return `
+  let title = `
     <b>Type</b>: ${service.type}<br>
-    <b>Name</b>: ${service.name}
+    <b>Name</b>: ${service.name}<br>
   `;
+  if (service.description) {
+    title += `<b>Description</b>: ${service.description}`;
+  }
+  return title;
 }
 
 function serviceToNode(service, index) {
@@ -448,11 +452,11 @@ function drawIterationEdge(service) {
     edges.remove(-service.id);
   } else if (!edges.get(-service.id)) {
     let title = ""
-    if (service.iteration_values) {
-      title += `<b>Iteration Values</b>: ${service.iteration_values}<br>`
-    }
     if (service.iteration_devices) {
       title += `<b>Iteration Devices</b>: ${service.iteration_devices}<br>`
+    }
+    if (service.iteration_values) {
+      title += `<b>Iteration Values</b>: ${service.iteration_values}`
     }
     {
       edges.add({

@@ -72,9 +72,9 @@ function updatePools(pool) {
 
 // eslint-disable-next-line
 function showDeviceConfiguration(id) {
-  createPanel("display", "Result", id, function() {
+  createPanel("display_configuration", "Configuration", id, function() {
     call(`/get_device_configuration/${id}`, (config) => {
-      $(`#content-${id}`).html(`<pre>${config}</pre>`);
+      $(`#content-${id}`).html(`<pre style="height:100%">${config}</pre>`);
     });
   });
 }

@@ -313,9 +313,7 @@ class Run(AbstractBase):
     def device_run(self, payload):
         devices, success = self.compute_devices(payload), True
         if not devices:
-            result = self.get_results(payload)
-            result = self.create_result(result)
-            return result
+            results = [self.get_results(payload)]
         else:
             if self.iteration_devices and not self.parent_device:
                 success = all(
@@ -335,7 +333,7 @@ class Run(AbstractBase):
                 pool.join()
             else:
                 results = [self.get_results(payload, device) for device in devices]
-            return {"success": success, "runtime": self.runtime}
+        return {"success": all(results), "runtime": self.runtime}
 
     def create_result(self, results, device=None):
         self.success = results["success"]

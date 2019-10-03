@@ -172,6 +172,10 @@ class DisplayForm(BaseForm):
     form_type = HiddenField(default="display")
 
 
+class DisplayConfigurationForm(DisplayForm):
+    form_type = HiddenField(default="display_configuration")
+
+
 class AddServicesForm(BaseForm):
     action = "addServicesToWorkflow"
     form_type = HiddenField(default="add_services")

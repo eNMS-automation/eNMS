@@ -55,7 +55,7 @@ const panelSize = {
   netbox: "700 250",
   opennms: "700 300",
   pool: "800 600",
-  pool_filtering: "700 500",
+  pool_filtering: "1000 700",
   pool_objects: "700 550",
   result: "1200 700",
   service_results: "1200 700",

@@ -124,7 +124,7 @@ class Device(CustomDevice):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 350px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showDeviceConfiguration('{self.id}')"
+            onclick="showDeviceConfiguration({self.row_properties})"
               ><span class="glyphicon glyphicon-book"></span
             ></button>
           </li>
@@ -421,7 +421,7 @@ class Configuration(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showDeviceConfiguration('{self.device_id}')"
+            onclick="showDeviceConfiguration({self.device.row_properties})"
               ><span class="glyphicon glyphicon-book"></span
             ></button>
           </li>

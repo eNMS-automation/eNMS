@@ -71,12 +71,19 @@ function updatePools(pool) {
 }
 
 // eslint-disable-next-line
-function showDeviceConfiguration(id) {
-  createPanel("display_configuration", "Configuration", id, function() {
-    call(`/get_device_configuration/${id}`, (config) => {
-      $(`#content-${id}`).html(`<pre style="height:100%">${config}</pre>`);
-    });
-  });
+function showDeviceConfiguration(device) {
+  createPanel(
+    "display_configuration",
+    `Configuration - ${device.name}`,
+    device.id,
+    function() {
+      call(`/get_device_configuration/${device.id}`, (config) => {
+        $(`#content-${device.id}`).html(
+          `<pre style="height:100%">${config}</pre>`
+        );
+      });
+    }
+  );
 }
 
 // eslint-disable-next-line
@@ -122,5 +129,5 @@ Object.assign(action, {
   "Link properties": (l) => showTypePanel("link", l.id),
   "Pool properties": (p) => showTypePanel("pool", p.id),
   Connect: (d) => showPanel("device_connection", d.id),
-  Configuration: (d) => showDeviceConfiguration(d.id),
+  Configuration: (d) => showDeviceConfiguration(d),
 });

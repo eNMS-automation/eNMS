@@ -29,7 +29,10 @@
           <td>
             {{ names.get(property, property.replace("_", " ")).capitalize() }}
           </td>
-          <td>{{ form[property](id=id, class="form-control", style="width:100%") }}</td>
+          <td>
+            {{ form[property](id=id, class="form-control", style="width:100%")
+            }}
+          </td>
           <td>
             {{ form[property + "_filter"](id=id + "_filter",
             class="form-control") }}

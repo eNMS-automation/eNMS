@@ -83,7 +83,7 @@ function displayWorkflow(workflowData) {
     .filter((s) => s.iteration_values != "")
     .map(drawIterationEdge);
   for (const [id, label] of Object.entries(workflow.labels)) {
-    console.log(label)
+    console.log(label);
     drawLabel(id, label);
   }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
@@ -260,7 +260,6 @@ function switchToSubworkflow() {
     switchToWorkflow(service.id);
   }
 }
-    
 
 // eslint-disable-next-line
 function menu(entry) {
@@ -682,7 +681,9 @@ function displayWorkflowState(result) {
           colorService(id, color[state.success]);
           const progress = state.progress.device;
           if (progress.total) {
-            let label = `${progress.passed + progress.failed}/${progress.total}`
+            let label = `${progress.passed + progress.failed}/${
+              progress.total
+            }`;
             label += ` (${progress.passed} passed, ${progress.failed} failed)`;
             nodes.update({
               id: id,
@@ -693,10 +694,13 @@ function displayWorkflowState(result) {
       });
     }
     if (result.state.edges) {
+      console.log(result.state.progress.device.total);
       $.each(result.state.edges, (id, devices) => {
         edges.update({
           id: id,
-          label: `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
+          label: result.state.progress.device.total
+            ? `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`
+            : "<b>DONE</b>",
           font: { size: 15, multi: "html" },
         });
       });

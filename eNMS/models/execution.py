@@ -362,6 +362,9 @@ class Run(AbstractBase):
         for i in range(self.number_of_retries + 1):
             try:
                 results = self.service.job(self, payload, *args)
+                print("commit" + device.name)
+                Session.commit()
+                Session.refresh(self)
                 self.convert_result(results)
                 self.eval(
                     self.service.result_postprocessing, function="exec", **locals()

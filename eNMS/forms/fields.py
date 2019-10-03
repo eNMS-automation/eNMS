@@ -117,6 +117,7 @@ field_types = {
     MultipleInstanceField: "object-list",
     NoValidationSelectMultipleField: "multiselect",
     NoValidationSelectField: "list",
+    PasswordField: "str",
     PasswordSubstitutionField: "str",
     SelectField: "list",
     SelectMultipleField: "multiselect",

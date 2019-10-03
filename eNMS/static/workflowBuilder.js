@@ -694,7 +694,6 @@ function displayWorkflowState(result) {
       });
     }
     if (result.state.edges) {
-      console.log(result.state.progress.device.total);
       $.each(result.state.edges, (id, devices) => {
         edges.update({
           id: id,

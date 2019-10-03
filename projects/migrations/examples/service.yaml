@@ -34,6 +34,7 @@
     Iteration Targets Workflow: [-395, 13]
     Napalm getters and match mechanism workflow: [-605, 76]
     Netmiko prompts: [-279, -158]
+    'Regression Workflow 10: get_var, set_var, get_result': [-644, -159]
     'Regression Workflow 1: Netmiko with validation and retries': [0, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [-404, 13]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
@@ -52,7 +53,6 @@
       -301, 93]
     Workflow_of_workflows: [-651, -168]
     iteration_devices_workflow: ['-164', '15']
-    'python Workflow: payload editor and pool helper': [-556, -211]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -100,6 +100,7 @@
     Iteration Targets Workflow: [748, -268]
     Napalm getters and match mechanism workflow: [547, 107]
     Netmiko prompts: [634, 187]
+    'Regression Workflow 10: get_var, set_var, get_result': [-706, -83]
     'Regression Workflow 1: Netmiko with validation and retries': [500, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
     'Regression Workflow 3: Napalm getters (postprocessing)': [778, 230]
@@ -121,7 +122,6 @@
       594, -3]
     Workflow_of_workflows: [-440, -115]
     iteration_devices_workflow: ['651', '20']
-    'python Workflow: payload editor and pool helper': [593, -93]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -761,11 +761,11 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['147', '-14']
+    'Regression Workflow 10: get_var, set_var, get_result': ['355', '-25']
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [441, -112]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
     iteration_devices_workflow: ['414', '-154']
-    'python Workflow: payload editor and pool helper': ['355', '-25']
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -993,11 +993,11 @@
   pools: []
   positions:
     Netmiko prompts: [405, -103]
+    'Regression Workflow 10: get_var, set_var, get_result': [125, 114]
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       357, -52]
-    'python Workflow: payload editor and pool helper': [298, -73]
   push_to_git: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
@@ -1048,10 +1048,10 @@
   optional_args: {}
   pools: []
   positions:
+    'Regression Workflow 10: get_var, set_var, get_result': ['39', '-32']
     'Regression Workflow 2: Separate Failure - Success paths': [-102, -130]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-154, -70]
     Workflow_of_workflows: [3, -51]
-    'python Workflow: payload editor and pool helper': ['39', '-32']
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1741,10 +1741,10 @@
   operating_system: ''
   pools: []
   positions:
+    'Regression Workflow 10: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['10', '-32']
     'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
       123, -187]
-    'python Workflow: payload editor and pool helper': ['266', '161']
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2019,19 +2019,19 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-31 13:25:29.352379'
+  last_modified: '2019-10-04 00:20:05.475732'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  name: Payload editor, no devices
+  name: Modify payload (no device)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': [-403, -3]
+    'Regression Workflow 10: get_var, set_var, get_result': [-376, -138]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2066,19 +2066,19 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-31 13:25:31.392491'
+  last_modified: '2019-10-04 00:20:10.984436'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  name: Payload editor, with device
+  name: Modify payload (per device)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': [-268, 183]
+    'Regression Workflow 10: get_var, set_var, get_result': [0, -144]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2138,7 +2138,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': [-104, -18]
+    'Regression Workflow 10: get_var, set_var, get_result': [580, -81]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2198,7 +2198,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': [80, -231]
+    'Regression Workflow 10: get_var, set_var, get_result': [609, 92]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2258,7 +2258,7 @@
   operating_system: ''
   pools: []
   positions:
-    'python Workflow: payload editor and pool helper': [463, 174]
+    'Regression Workflow 10: get_var, set_var, get_result': [-445, 128]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -4016,13 +4016,26 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-10-01 18:37:43.751009'
+  labels:
+    30b1954f-08d6-4799-a2be-36c5b0a07c4b:
+      alignment: left
+      content: "This workflow uses \"set_var\" to modify the payload, and get_var\
+        \ to\r\nretrieve a variable.\r\nIt also uses \"get_result\" to retrieve the\
+        \ result of a previously run job."
+      positions: [-92, -34]
+    d98b7c19-9d7b-4ddf-bada-2c47e492dbef:
+      alignment: left
+      content: "Set a variable called \"iteration_device\" that we will use in the\
+        \ following service\r\nto define iteration devices.\r\ndevices = [\"Boston\"\
+        , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
+        ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)"
+      positions: [103, -224]
+  last_modified: '2019-10-04 00:22:33.595822'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'python Workflow: payload editor and pool helper'
+  name: 'Regression Workflow 10: get_var, set_var, get_result'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4033,7 +4046,7 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, 'Payload editor, no devices', 'Payload editor, with device',
+  services: [Start, End, Modify payload (no device), Modify payload (per device),
     Show vrf with payload helper, Show vrf with python query, 'REST API: call *is_alive*
       endpoint', show runtime with get_result helper]
   skip: false

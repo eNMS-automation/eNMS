@@ -85,27 +85,27 @@
   source: Start, subtype: success, workflow: Netmiko prompts}
 - {destination: Test netmiko prompts pass, label: failure, name: 54-failure:38->55,
   source: Test Netmiko Prompt Service, subtype: failure, workflow: Netmiko prompts}
-- {destination: 'Payload editor, no devices', label: success, name: 54-success:1->55,
-  source: Start, subtype: success, workflow: 'python Workflow: payload editor and
-    pool helper'}
-- {destination: 'Payload editor, with device', label: success, name: 54-success:55->56,
-  source: 'Payload editor, no devices', subtype: success, workflow: 'python Workflow:
-    payload editor and pool helper'}
+- {destination: Modify payload (no device), label: success, name: 54-success:1->55,
+  source: Start, subtype: success, workflow: 'Regression Workflow 10: get_var, set_var,
+    get_result'}
+- {destination: Modify payload (per device), label: success, name: 54-success:55->56,
+  source: Modify payload (no device), subtype: success, workflow: 'Regression Workflow
+    10: get_var, set_var, get_result'}
 - {destination: Show vrf with payload helper, label: success, name: 56-success:41->57,
-  source: 'Payload editor, with device', subtype: success, workflow: 'python Workflow:
-    payload editor and pool helper'}
+  source: Modify payload (per device), subtype: success, workflow: 'Regression Workflow
+    10: get_var, set_var, get_result'}
 - {destination: Show vrf with python query, label: failure, name: 56-failure:57->58,
-  source: Show vrf with payload helper, subtype: failure, workflow: 'python Workflow:
-    payload editor and pool helper'}
+  source: Show vrf with payload helper, subtype: failure, workflow: 'Regression Workflow
+    10: get_var, set_var, get_result'}
 - {destination: 'REST API: call *is_alive* endpoint', label: success, name: 57-success:42->20,
-  source: Show vrf with python query, subtype: success, workflow: 'python Workflow:
-    payload editor and pool helper'}
+  source: Show vrf with python query, subtype: success, workflow: 'Regression Workflow
+    10: get_var, set_var, get_result'}
 - {destination: show runtime with get_result helper, label: success, name: 55-success:20->56,
-  source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: 'python
-    Workflow: payload editor and pool helper'}
+  source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression
+    Workflow 10: get_var, set_var, get_result'}
 - {destination: End, label: success, name: 55-success:56->2, source: show runtime
-    with get_result helper, subtype: success, workflow: 'python Workflow: payload
-    editor and pool helper'}
+    with get_result helper, subtype: success, workflow: 'Regression Workflow 10: get_var,
+    set_var, get_result'}
 - {destination: 'Getters Workflow: is alive', label: success, name: 57-success:1->58,
   source: Start, subtype: success, workflow: Napalm getters and match mechanism workflow}
 - {destination: 'Getters Workflow: get facts', label: success, name: 57-success:58->59,

@@ -30,7 +30,6 @@
   operating_system: ''
   pools: []
   positions:
-    Configuration Management Workflow: [-621, 123]
     Iteration Services Test Workflow: ['-359', '-163']
     Iteration Targets Workflow: [-395, 13]
     Napalm getters and match mechanism workflow: [-605, 76]
@@ -43,6 +42,7 @@
     'Regression Workflow 6: Ansible with Validation': [-683, -48]
     'Regression Workflow 7: Payload Extraction & Validation': [-115, -305]
     'Regression Workflow 8: Payload Extraction with Operations': [-661, -226]
+    'Regression Workflow 9: Configurations Backup': [-621, 123]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
@@ -96,7 +96,6 @@
   operating_system: ''
   pools: []
   positions:
-    Configuration Management Workflow: [475, 102]
     Iteration Services Test Workflow: ['-9', '294']
     Iteration Targets Workflow: [748, -268]
     Napalm getters and match mechanism workflow: [547, 107]
@@ -109,6 +108,7 @@
     'Regression Workflow 6: Ansible with Validation': [771, -81]
     'Regression Workflow 7: Payload Extraction & Validation': [454, 245]
     'Regression Workflow 8: Payload Extraction with Operations': [-688, -153]
+    'Regression Workflow 9: Configurations Backup': [475, 102]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -311,7 +311,7 @@
   conversion_method: none
   creator: admin
   delete_spaces_before_matching: false
-  description: Push configurations to Gitlab
+  description: Push configurations to Git
   device_query: ''
   device_query_property: ip_address
   devices: []
@@ -325,24 +325,24 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-01 11:38:04.913830'
+  last_modified: '2019-10-03 16:07:34.697578'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: git_push_configurations
+  name: Push Configurations to Git
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    Configuration Management Workflow: [120, 83]
+    'Regression Workflow 9: Configurations Backup': [120, 83]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  skip: false
+  skip: true
   skip_query: ''
   time_between_retries: 10
   type: swiss_army_knife_service
@@ -569,7 +569,7 @@
   conversion_method: none
   creator: admin
   delete_spaces_before_matching: false
-  description: Test Configuration Management
+  description: Configuration Backup using Netmiko
   device_query: ''
   device_query_property: ip_address
   devices: []
@@ -586,19 +586,19 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-01 21:22:00.964540'
+  last_modified: '2019-10-03 16:03:13.301158'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: netmiko_configuration_backup
+  name: Configuration Backup (Netmiko)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: [Washington]
   positions:
-    Configuration Management Workflow: [-286, -122]
+    'Regression Workflow 9: Configurations Backup': [-286, -122]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -619,7 +619,7 @@
   conversion_method: none
   creator: admin
   delete_spaces_before_matching: false
-  description: Test Configuration Management
+  description: Configuration Backup using NAPALM
   device_query: ''
   device_query_property: ip_address
   devices: []
@@ -634,12 +634,12 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-02 10:23:30.359945'
+  last_modified: '2019-10-03 16:03:29.843088'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: napalm_configuration_backup
+  name: Configuration Backup (NAPALM)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -647,7 +647,7 @@
   optional_args: {}
   pools: []
   positions:
-    Configuration Management Workflow: [-251, 295]
+    'Regression Workflow 9: Configurations Backup': [-251, 295]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3565,12 +3565,12 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-274, 79]
-  last_modified: '2019-10-02 10:12:01.801290'
+  last_modified: '2019-10-03 16:08:07.232808'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: Configuration Management Workflow
+  name: 'Regression Workflow 9: Configurations Backup'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3582,7 +3582,8 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, git_push_configurations, napalm_configuration_backup, netmiko_configuration_backup]
+  services: [Start, End, Push Configurations to Git, Configuration Backup (NAPALM),
+    Configuration Backup (Netmiko)]
   skip: false
   skip_query: ''
   start_services: [Start]

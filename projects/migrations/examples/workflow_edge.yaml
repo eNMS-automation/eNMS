@@ -1,6 +1,6 @@
 - {destination: End, label: success, name: Configuration Management Workflow 3 ->
-    1 (True), source: git_push_configurations, subtype: success, workflow: Configuration
-    Management Workflow}
+    1 (True), source: Push Configurations to Git, subtype: success, workflow: 'Regression
+    Workflow 9: Configurations Backup'}
 - {destination: netmiko_create_vrf_test, label: success, name: Netmiko_VRF_workflow
     0 -> 2, source: Start, subtype: success, workflow: 'Regression Workflow 4: VRF
     creation and deletion with Netmiko'}
@@ -294,13 +294,23 @@
 - {destination: End, label: success, name: 74-success:9->2, source: Example Service
     (does nothing), subtype: success, workflow: 'Regression Workflow 2: Separate Failure
     - Success paths'}
-- {destination: netmiko_configuration_backup, label: success, name: 68-success:1->13,
-  source: Start, subtype: success, workflow: Configuration Management Workflow}
-- {destination: napalm_configuration_backup, label: success, name: 68-success:1->14,
-  source: Start, subtype: success, workflow: Configuration Management Workflow}
-- {destination: git_push_configurations, label: success, name: 68-success:14->7, source: napalm_configuration_backup,
-  subtype: success, workflow: Configuration Management Workflow}
-- {destination: git_push_configurations, label: success, name: 68-success:13->7, source: netmiko_configuration_backup,
-  subtype: success, workflow: Configuration Management Workflow}
+- {destination: Configuration Backup (Netmiko), label: success, name: 68-success:1->13,
+  source: Start, subtype: success, workflow: 'Regression Workflow 9: Configurations
+    Backup'}
+- {destination: Configuration Backup (NAPALM), label: success, name: 68-success:1->14,
+  source: Start, subtype: success, workflow: 'Regression Workflow 9: Configurations
+    Backup'}
+- {destination: Push Configurations to Git, label: success, name: 68-success:14->7,
+  source: Configuration Backup (NAPALM), subtype: success, workflow: 'Regression Workflow
+    9: Configurations Backup'}
+- {destination: Push Configurations to Git, label: success, name: 68-success:13->7,
+  source: Configuration Backup (Netmiko), subtype: success, workflow: 'Regression
+    Workflow 9: Configurations Backup'}
 - {destination: Workflow with iteration targets, label: success, name: 72-success:25->83,
   source: add_devices_to_payload, subtype: success, workflow: Workflow_of_workflows}
+- {destination: Push Configurations to Git, label: prerequisite, name: 67-prerequisite:12->7,
+  source: Configuration Backup (Netmiko), subtype: prerequisite, workflow: 'Regression
+    Workflow 9: Configurations Backup'}
+- {destination: Push Configurations to Git, label: prerequisite, name: 67-prerequisite:13->7,
+  source: Configuration Backup (NAPALM), subtype: prerequisite, workflow: 'Regression
+    Workflow 9: Configurations Backup'}

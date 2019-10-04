@@ -149,26 +149,25 @@
   source: 'NAPALM: Get interfaces', subtype: failure, workflow: 'Regression Workflow
     2: Separate Failure - Success paths'}
 - {destination: Show version with multiprocessing, label: success, name: 67-success:1->68,
-  source: Start, subtype: success, workflow: 'Workflow: multiple entry points, skip
-    service, multiprocessing, separate paths'}
+  source: Start, subtype: success, workflow: 'Regression Workflow C: Advanced multiprocessing'}
 - {destination: napalm_configure_bgp_1, label: success, name: 67-success:9->10, source: Example
-    Service (does nothing), subtype: success, workflow: 'Workflow: multiple entry
-    points, skip service, multiprocessing, separate paths'}
+    Service (does nothing), subtype: success, workflow: 'Regression Workflow C: Advanced
+    multiprocessing'}
 - {destination: 'REST API: call *is_alive* endpoint', label: success, name: 67-success:10->20,
-  source: napalm_configure_bgp_1, subtype: success, workflow: 'Workflow: multiple
-    entry points, skip service, multiprocessing, separate paths'}
+  source: napalm_configure_bgp_1, subtype: success, workflow: 'Regression Workflow
+    C: Advanced multiprocessing'}
 - {destination: 'REST API: call *is_alive* endpoint', label: failure, name: 67-failure:68->20,
-  source: Show version with multiprocessing, subtype: failure, workflow: 'Workflow:
-    multiple entry points, skip service, multiprocessing, separate paths'}
+  source: Show version with multiprocessing, subtype: failure, workflow: 'Regression
+    Workflow C: Advanced multiprocessing'}
 - {destination: End, label: success, name: 67-success:20->2, source: 'REST API: call
-    *is_alive* endpoint', subtype: success, workflow: 'Workflow: multiple entry points,
-    skip service, multiprocessing, separate paths'}
+    *is_alive* endpoint', subtype: success, workflow: 'Regression Workflow C: Advanced
+    multiprocessing'}
 - {destination: 'REST API: call *is_alive* endpoint', label: prerequisite, name: 67-prerequisite:68->20,
-  source: Show version with multiprocessing, subtype: prerequisite, workflow: 'Workflow:
-    multiple entry points, skip service, multiprocessing, separate paths'}
+  source: Show version with multiprocessing, subtype: prerequisite, workflow: 'Regression
+    Workflow C: Advanced multiprocessing'}
 - {destination: 'REST API: call *is_alive* endpoint', label: prerequisite, name: 67-prerequisite:10->20,
-  source: napalm_configure_bgp_1, subtype: prerequisite, workflow: 'Workflow: multiple
-    entry points, skip service, multiprocessing, separate paths'}
+  source: napalm_configure_bgp_1, subtype: prerequisite, workflow: 'Regression Workflow
+    C: Advanced multiprocessing'}
 - {destination: add_devices_to_payload, label: success, name: 70-success:1->26, source: Start,
   subtype: success, workflow: Iteration Targets Workflow}
 - {destination: 'Iteration Target Workflow: netmiko iteration 2', label: success,

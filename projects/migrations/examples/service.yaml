@@ -44,13 +44,12 @@
     'Regression Workflow 8: Payload Extraction with Operations': [-661, -226]
     'Regression Workflow 9: Configurations Backup': [-621, 123]
     'Regression Workflow B: Napalm getters validation': [-604, 9]
+    'Regression Workflow C: Advanced multiprocessing': [-407, 115]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
-    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
-      -301, 93]
     Workflow_of_workflows: [-651, -168]
     iteration_devices_workflow: ['-164', '15']
   push_to_git: false
@@ -110,6 +109,7 @@
     'Regression Workflow 8: Payload Extraction with Operations': [-688, -153]
     'Regression Workflow 9: Configurations Backup': [475, 102]
     'Regression Workflow B: Napalm getters validation': [-600, 63]
+    'Regression Workflow C: Advanced multiprocessing': [716, -36]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -118,8 +118,6 @@
     Workflow with device and value iteration: [500, 0]
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
-    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
-      594, -3]
     Workflow_of_workflows: [-440, -115]
     iteration_devices_workflow: ['651', '20']
   push_to_git: false
@@ -394,8 +392,7 @@
   pools: []
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [741, 106]
-    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
-      -281, -178]
+    'Regression Workflow C: Advanced multiprocessing': [-403, -174]
   push_to_git: false
   regex: ''
   result_postprocessing: ''
@@ -447,8 +444,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
-      110, -170]
+    'Regression Workflow C: Advanced multiprocessing': [147, -169]
   push_to_git: false
   remote_as: 200
   result_postprocessing: ''
@@ -996,8 +992,7 @@
     'Regression Workflow 10: get_var, set_var, get_result': [125, 114]
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
-    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
-      357, -52]
+    'Regression Workflow C: Advanced multiprocessing': [391, -27]
   push_to_git: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
@@ -1743,8 +1738,7 @@
   positions:
     'Regression Workflow 10: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['10', '-32']
-    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
-      123, -187]
+    'Regression Workflow C: Advanced multiprocessing': [123, -187]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2711,8 +2705,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Workflow: multiple entry points, skip service, multiprocessing, separate paths': [
-      154, 108]
+    'Regression Workflow C: Advanced multiprocessing': [120, 129]
     Workflow_of_workflows: [678, -67]
   privileged_mode: false
   push_to_git: false
@@ -4106,7 +4099,7 @@
       content: "Dictionary Inclusion Validation:\r\n{\"fqdn\":\"localhost\",\"uptime\"\
         :\"666\",\"vendor\":\"Arista\"}\r\nThis service is expected to fail, because\
         \ this uptime is different from 666."
-      positions: [553, -211]
+      positions: [584, -212]
     f33d8c65-c691-4aef-ae87-6bcd20a69a11:
       alignment: center
       content: "Test the \"Negative logic\" parameter.\r\nThe validation is set to\
@@ -4114,7 +4107,7 @@
         \ match, but the negative logic\r\nis set to True, so the resulting value\
         \ is a success."
       positions: [-51, 226]
-  last_modified: '2019-10-04 10:45:16.904925'
+  last_modified: '2019-10-04 10:46:04.750921'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4243,17 +4236,24 @@
   labels:
     0844f0e4-7e29-4886-a3ed-178d48ac7317:
       content: "Multiple Entry Points:\r\nStart and Example1"
-      positions: [-485, -36]
+      positions: [-632, -29]
+    72e44a33-e2db-4374-b5f6-6bd72705be1b:
+      alignment: left
+      content: "This workflow runs on 17 devices with multiprocessing activated (20\
+        \ processes).\r\nIt has two entry points: \"Example Service\" and \"Start\"\
+        .\r\nWashington is expected to pass the \"show version\" service, but will\r\
+        \nstill reach the end through the upward path, so all 17 devices must\r\n\
+        reach the \"End\" service."
+      positions: ['-130.20166015625', '-31.25']
     d36009d8-ce3a-4ce6-8766-5dc3241d777b:
       content: The service "Napalm configure BGP" is configured to be skipped.
       positions: [146, -232]
-  last_modified: '2019-08-24 01:01:52.549675'
+  last_modified: '2019-10-04 10:57:27.526699'
   mail_recipient: ''
-  max_processes: 5
+  max_processes: 20
   maximum_runs: 1
-  multiprocessing: false
-  name: 'Workflow: multiple entry points, skip service, multiprocessing, separate
-    paths'
+  multiprocessing: true
+  name: 'Regression Workflow C: Advanced multiprocessing'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0

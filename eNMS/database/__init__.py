@@ -14,8 +14,8 @@ engine_parameters = {"convert_unicode": True, "pool_pre_ping": True}
 if DIALECT == "mysql":
     engine_parameters.update(
         {
-            "max_overflow"(environ.get("MAX_OVERFLOW", 10)),
-            "pool_size"(environ.get("POOL_SIZE", 1000)),
+            "max_overflow": int(environ.get("MAX_OVERFLOW", 10)),
+            "pool_size": int(environ.get("POOL_SIZE", 1000)),
         }
     )
 

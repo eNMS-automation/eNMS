@@ -400,12 +400,15 @@ function formatServiceTitle(service) {
 
 function getServiceLabel(service) {
   if (["Start", "End"].includes(service.name)) return service.name;
-  label = service.type == "workflow" ? `\n     ${service.name}     \n` : `${service.name}\n`;
-  label += "———\n"
-  label += service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
+  label =
+    service.type == "workflow"
+      ? `\n     ${service.name}     \n`
+      : `${service.name}\n`;
+  label += "—————\n";
+  label +=
+    service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
   return label;
 }
-    
 
 function serviceToNode(service, index) {
   const defaultService = ["Start", "End"].includes(service.name);
@@ -456,15 +459,15 @@ function drawLabel(id, label) {
 }
 
 function drawIterationEdge(service) {
-  if (!service.iteration_values && !service.iteration_devices ) {
+  if (!service.iteration_values && !service.iteration_devices) {
     edges.remove(-service.id);
   } else if (!edges.get(-service.id)) {
-    let title = ""
+    let title = "";
     if (service.iteration_devices) {
-      title += `<b>Iteration Devices</b>: ${service.iteration_devices}<br>`
+      title += `<b>Iteration Devices</b>: ${service.iteration_devices}<br>`;
     }
     if (service.iteration_values) {
-      title += `<b>Iteration Values</b>: ${service.iteration_values}`
+      title += `<b>Iteration Values</b>: ${service.iteration_values}`;
     }
     {
       edges.add({
@@ -700,13 +703,17 @@ function displayWorkflowState(result) {
           colorService(id, color[state.success]);
           const progress = state.progress.device;
           if (progress.total) {
-            let label = `${progress.passed + progress.failed}/${
-              progress.total
-            }`;
-            label += ` (${progress.passed} passed, ${progress.failed} failed)`;
+            let label = `<b>${nodes.get(id).name}</b>\n`;
+            label += "—————\n";
+            let progressLabel = `Progress - ${progress.passed +
+              progress.failed}/${progress.total}`;
+            progressLabel += ` (${progress.passed} passed, ${
+              progress.failed
+            } failed)`;
+            label += progressLabel;
             nodes.update({
               id: id,
-              label: `<b>${nodes.get(id).name}</b>\nProgress: ${label}`,
+              label: label,
             });
           }
         }

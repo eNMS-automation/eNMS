@@ -280,7 +280,7 @@ function resumeTask(id) {
     $("#service-type").selectpicker({ liveSearch: true });
     for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
       $("#service-type").append(new Option(serviceName, serviceType));
-    };
+    }
     $("#service-type").selectpicker("refresh");
   }
 })();

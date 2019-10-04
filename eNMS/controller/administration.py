@@ -231,6 +231,6 @@ class AdministrationController(BaseController):
                 ).json()
                 if self.cluster_id != server.pop("cluster_id"):
                     continue
-                factory("server", **{**server, **{"ip_address"(ip_address)}})
+                factory("server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
                 continue

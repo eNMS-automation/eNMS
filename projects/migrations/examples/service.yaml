@@ -36,7 +36,7 @@
     'Regression Workflow 2: Separate Failure - Success paths': [-404, 13]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-431, -124]
-    'Regression Workflow 5: VRF creation and deletion with Napalm': ['-200', '0']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': [-611, 2]
     'Regression Workflow 6: Ansible with Validation': [-683, -48]
     'Regression Workflow 7: Payload Extraction & Validation': [-115, -305]
     'Regression Workflow 8: Payload Extraction with Operations': [-661, -226]
@@ -101,7 +101,7 @@
     'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
     'Regression Workflow 3: Napalm getters (postprocessing)': [778, 230]
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-450, 132]
-    'Regression Workflow 5: VRF creation and deletion with Napalm': ['200', '0']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': [-623, 83]
     'Regression Workflow 6: Ansible with Validation': [771, -81]
     'Regression Workflow 7: Payload Extraction & Validation': [454, 245]
     'Regression Workflow 8: Payload Extraction with Operations': [-688, -153]
@@ -936,7 +936,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-150']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': [-301, -128]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1679,7 +1679,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 5: VRF creation and deletion with Napalm': ['3', '47']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': [360, 172]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1736,7 +1736,7 @@
   pools: []
   positions:
     'Regression Workflow 10: get_var, set_var, get_result': ['266', '161']
-    'Regression Workflow 5: VRF creation and deletion with Napalm': ['10', '-32']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': [340, -110]
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
   privileged_mode: false
   push_to_git: false
@@ -1797,7 +1797,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 5: VRF creation and deletion with Napalm': ['9', '139']
+    'Regression Workflow 5: VRF creation and deletion with Napalm': [-275, 196]
     iteration_devices_workflow: ['245', '32']
   privileged_mode: false
   push_to_git: false
@@ -2553,7 +2553,7 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_version.yml
   pools: []
   positions:
-    'Regression Workflow 6: Ansible with Validation': [-381, 132]
+    'Regression Workflow 6: Ansible with Validation': [-466, 154]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
   push_to_git: false
   result_postprocessing: ''
@@ -2602,7 +2602,7 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
   pools: []
   positions:
-    'Regression Workflow 6: Ansible with Validation': [40, -24]
+    'Regression Workflow 6: Ansible with Validation': [179, -62]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2650,7 +2650,7 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
   pools: []
   positions:
-    'Regression Workflow 6: Ansible with Validation': [340, 124]
+    'Regression Workflow 6: Ansible with Validation': [486, 173]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3470,67 +3470,6 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- auto_find_prompt: true
-  close_connection: false
-  color: '#D2E5FF'
-  command: show interface {{get_var("iteration_value")}}
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: ip_address
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: arista_eos
-  events: []
-  expect_string: ''
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-09-09 19:11:20.980102'
-  mail_recipient: ''
-  max_processes: 50
-  maximum_runs: 1
-  multiprocessing: false
-  name: 'Workflow with iteration targets: use target for show interface'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    Workflow with iteration target subworkflows: [227, 205]
-    Workflow with iteration targets: [239, -121]
-  privileged_mode: false
-  push_to_git: false
-  result_postprocessing: ''
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  skip: false
-  skip_query: ''
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: netmiko_validation_service
-  use_device_driver: true
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
 - close_cached_connection: true
   color: '#D2E5FF'
   content_match: ''
@@ -3665,7 +3604,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-10-01 23:22:21.841596'
+  last_modified: '2019-10-04 15:10:16.589761'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3871,8 +3810,7 @@
   services: [Start, End, 'Regression Workflow 3: Napalm getters (postprocessing)',
     'Regression Workflow 5: VRF creation and deletion with Napalm', Modify Payload
       for Iteration, 'Subworkflow: Access Variable - Result from parent workflow',
-    Show version with multiprocessing, Subworkflow of Workflow, Workflow with iteration
-      targets]
+    Show version with multiprocessing, Subworkflow of Workflow]
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -4162,20 +4100,20 @@
       content: "Uses Ansible to do a \"show configuration\".\r\nConvert the result\
         \ to text and check that the result matches\r\nthe following regular expression:\
         \ \"ip address\\s.*/32\""
-      positions: [64, -101]
+      positions: [207, -160]
     36072c59-543f-4600-b2be-f88c366ccb79:
       alignment: center
       content: "Uses Ansible to do a \"show configuration\".\r\nConvert the result\
         \ to a dictionary and check that it\r\ncontains the following dictionary:\r\
         \n{\"action\":\"debug\",\"changed\":false,\"failed\":false}"
-      positions: [390, 237]
+      positions: [512, 269]
     813cd109-d252-4731-99b8-7a0828883b6d:
       alignment: left
       content: "Uses Ansible to do a \"show version\".\r\nConvert the result to a\
         \ dictionary (JSON conversion).\r\nCheck that the results contains the following\
         \ dictionary (dict inclusion):\r\n{\"host\":\"{{device.ip_address}}\",\"unreachable\"\
         :0,\"use_ssl\":true}\r\n"
-      positions: [-336, 230]
+      positions: [-393, 247]
     cb3b0740-411a-4138-a54d-31a133413526:
       alignment: left
       content: "This workflow :\r\n- uses the Ansible Playbook Service to run playbooks\r\
@@ -4183,7 +4121,7 @@
         \ conversion)\r\n- uses the \"Text with regular expression\" and \"dictionary\
         \ inclusion\" mechanisms to validate the result."
       positions: [-452, -165]
-  last_modified: '2019-10-02 01:22:36.224500'
+  last_modified: '2019-10-04 15:10:31.893829'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4504,163 +4442,6 @@
   time_between_retries: 10
   type: workflow
   validation_method: none
-  vendor: ''
-  waiting_time: 0
-- close_cached_connection: true
-  color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: ip_address
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  events: []
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: name
-  iteration_values: get_var('iteration_devices', device=device.name)
-  iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-09-09 17:03:46.868220'
-  mail_recipient: ''
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: Workflow with iteration targets
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    'Regression Workflow E: Iteration Targets': [-107, -112]
-    Workflow with iteration target subworkflows: [253, 118]
-    Workflow_of_workflows: [-359, 206]
-  push_to_git: false
-  result_postprocessing: ''
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  services: [Start, End, 'Workflow with iteration targets: use target for show interface']
-  skip: false
-  skip_query: ''
-  start_services: [Start]
-  time_between_retries: 10
-  type: workflow
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-- close_cached_connection: true
-  color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: name
-  devices: [Washington]
-  dict_match: {}
-  display_only_failed_nodes: false
-  events: []
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-10-01 01:28:09.654893'
-  mail_recipient: ''
-  max_processes: 50
-  maximum_runs: 1
-  multiprocessing: false
-  name: Workflow with device and value iteration
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  result_postprocessing: ''
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  services: [Start, End, 'Netmiko show vrf: device + value iteration']
-  skip: false
-  skip_query: ''
-  start_services: [Start]
-  time_between_retries: 10
-  type: workflow
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-- auto_find_prompt: true
-  close_connection: false
-  color: '#D2E5FF'
-  command: show vrf {{get_var("vrf")}}
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: name
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  events: []
-  expect_string: ''
-  fast_cli: false
-  global_delay_factor: 1.0
-  hidden: false
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: '["Washington", "Austin"]'
-  iteration_devices_property: name
-  iteration_values: '["vrf1", "vrf2"]'
-  iteration_variable_name: vrf
-  last_modified: '2019-09-30 20:18:18.269250'
-  mail_recipient: ''
-  max_processes: 50
-  maximum_runs: 1
-  multiprocessing: false
-  name: 'Netmiko show vrf: device + value iteration'
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    Workflow with device and value iteration: [231, -106]
-  privileged_mode: false
-  push_to_git: false
-  result_postprocessing: ''
-  send_notification: false
-  send_notification_method: mail_feedback_notification
-  skip: false
-  skip_query: ''
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: netmiko_validation_service
-  use_device_driver: true
-  validation_method: text
   vendor: ''
   waiting_time: 0
 - close_cached_connection: true

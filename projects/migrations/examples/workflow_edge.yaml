@@ -278,10 +278,6 @@
 - {destination: Iteration Targets Workflow - Test 1, label: success, name: 83-success:26->54,
   source: Modify Payload for Iteration, subtype: success, workflow: 'Regression Workflow
     E: Iteration Targets'}
-- {destination: Subworkflow of Workflow, label: success, name: 73-success:84->83,
-  source: Workflow with iteration targets, subtype: success, workflow: Workflow_of_workflows}
-- {destination: Subworkflow of Workflow, label: failure, name: 73-failure:84->83,
-  source: Workflow with iteration targets, subtype: failure, workflow: Workflow_of_workflows}
 - {destination: End, label: success, name: 75-success:38->2, source: Test netmiko
     prompts pass, subtype: success, workflow: 'Regression Workflow D: Prompts'}
 - {destination: 'REST API: call *is_alive* endpoint', label: success, name: 75-success:38->20,
@@ -290,11 +286,6 @@
 - {destination: Test Netmiko Prompt Service, label: success, name: 75-success:20->37,
   source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression
     Workflow D: Prompts'}
-- {destination: 'Netmiko show vrf: device + value iteration', label: success, name: 85-success:1->86,
-  source: Start, subtype: success, workflow: Workflow with device and value iteration}
-- {destination: End, label: success, name: 85-success:86->2, source: 'Netmiko show
-    vrf: device + value iteration', subtype: success, workflow: Workflow with device
-    and value iteration}
 - {destination: End, label: success, name: 74-success:9->2, source: Example Service
     (does nothing), subtype: success, workflow: 'Regression Workflow 2: Separate Failure
     - Success paths'}
@@ -310,8 +301,6 @@
 - {destination: Push Configurations to Git, label: success, name: 68-success:13->7,
   source: Configuration Backup (Netmiko), subtype: success, workflow: 'Regression
     Workflow 9: Configurations Backup'}
-- {destination: Workflow with iteration targets, label: success, name: 72-success:25->83,
-  source: Modify Payload for Iteration, subtype: success, workflow: Workflow_of_workflows}
 - {destination: Push Configurations to Git, label: prerequisite, name: 67-prerequisite:12->7,
   source: Configuration Backup (Netmiko), subtype: prerequisite, workflow: 'Regression
     Workflow 9: Configurations Backup'}

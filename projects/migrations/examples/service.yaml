@@ -31,8 +31,6 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
-    Iteration Targets Workflow: [-395, 13]
-    Netmiko prompts: [-279, -158]
     'Regression Workflow 10: get_var, set_var, get_result': [-644, -159]
     'Regression Workflow 1: Netmiko with validation and retries': [0, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [-404, 13]
@@ -45,6 +43,8 @@
     'Regression Workflow 9: Configurations Backup': [-621, 123]
     'Regression Workflow B: Napalm getters validation': [-604, 9]
     'Regression Workflow C: Advanced multiprocessing': [-407, 115]
+    'Regression Workflow D: Prompts': [-279, -158]
+    'Regression Workflow E: Iteration Targets': [-491, -78]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
@@ -96,8 +96,6 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-9', '294']
-    Iteration Targets Workflow: [748, -268]
-    Netmiko prompts: [634, 187]
     'Regression Workflow 10: get_var, set_var, get_result': [-706, -83]
     'Regression Workflow 1: Netmiko with validation and retries': [500, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
@@ -110,6 +108,8 @@
     'Regression Workflow 9: Configurations Backup': [475, 102]
     'Regression Workflow B: Napalm getters validation': [-600, 63]
     'Regression Workflow C: Advanced multiprocessing': [716, -36]
+    'Regression Workflow D: Prompts': [634, 187]
+    'Regression Workflow E: Iteration Targets': [-481, -12]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -988,11 +988,11 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    Netmiko prompts: [405, -103]
     'Regression Workflow 10: get_var, set_var, get_result': [125, 114]
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
     'Regression Workflow C: Advanced multiprocessing': [391, -27]
+    'Regression Workflow D: Prompts': [405, -103]
   push_to_git: false
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
@@ -1277,12 +1277,12 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-20 18:18:23.620683'
+  last_modified: '2019-10-04 14:52:49.926082'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: add_devices_to_payload
+  name: Modify Payload for Iteration
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1290,7 +1290,7 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['3', '-144']
-    Iteration Targets Workflow: [-256, -245]
+    'Regression Workflow E: Iteration Targets': [-197, -182]
     Workflow with iteration target subworkflows: [283, -152]
     Workflow_of_workflows: [-647, 208]
   push_to_git: false
@@ -1299,13 +1299,12 @@
   send_notification_method: mail_feedback_notification
   skip: false
   skip_query: ''
-  source_code: "# Service Iteration 1: targets\r\ntargets = ['Loopback101', 'Loopback15']\
-    \ if device.name == \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('iteration_devices',\
-    \ targets, device=device.name)\r\n\r\n# Service iteration 3: derived devices with\
-    \ base target Washington\r\nset_var(\"loop_over\", [\"Washington\"], device=device.name)\r\
-    \n\r\n# Service iteration 3: targets\r\ntargets2 = ['Loopback333', 'Loopback334']\
-    \ if device.name == \"Washington\" else ['Loopback55', 'Loopback666']\r\nset_var('iteration_devices2',\
-    \ targets2, device=device.name)\r\nsave_result(True, {})"
+  source_code: "# Interfaces 1\r\ntargets = ['Loopback101', 'Loopback15'] if device.name\
+    \ == \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('Loopbacks',\
+    \ targets, device=device.name)\r\n\r\n# Derived Devices\r\nset_var(\"Derived Devices\"\
+    , [\"Washington\", \"Austin\"], device=device.name)\r\n\r\n# Interfaces 2\r\n\
+    set_var('Loopbacks 2', ['Loopback333', 'Loopback334'], device=device.name)\r\n\
+    save_result(True, {})"
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1413,7 +1412,7 @@
   operating_system: eos
   pools: []
   positions:
-    Iteration Targets Workflow: [216, 129]
+    'Regression Workflow E: Iteration Targets': [216, 129]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -1917,7 +1916,7 @@
   operating_system: ''
   pools: []
   positions:
-    Netmiko prompts: [22, -74]
+    'Regression Workflow D: Prompts': [22, -74]
   privileged_mode: false
   push_to_git: false
   response1: show vrf b
@@ -1975,7 +1974,7 @@
   operating_system: ''
   pools: []
   positions:
-    Netmiko prompts: [350, 108]
+    'Regression Workflow D: Prompts': [350, 108]
   privileged_mode: false
   push_to_git: false
   response1: show vrf
@@ -2766,7 +2765,7 @@
   operating_system: eos
   pools: []
   positions:
-    Iteration Targets Workflow: [396, -182]
+    'Regression Workflow E: Iteration Targets': [396, -182]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2814,19 +2813,19 @@
   iteration_devices_property: ip_address
   iteration_values: '["Loopback11","Loopback15"]'
   iteration_variable_name: non_default_iteration_value_name
-  last_modified: '2019-09-01 21:43:34.449057'
+  last_modified: '2019-10-04 14:54:34.006032'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'Iteration Target Workflow: netmiko iteration 1'
+  name: Iteration Targets Workflow - Test 1
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
   pools: []
   positions:
-    Iteration Targets Workflow: [-112, 109]
+    'Regression Workflow E: Iteration Targets': [240, -144]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2872,21 +2871,21 @@
   initial_payload: {}
   iteration_devices: ''
   iteration_devices_property: ip_address
-  iteration_values: get_var('iteration_devices', device=device.name)
+  iteration_values: get_var('Interfaces 1', device=device.name)
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-01 21:44:33.592661'
+  last_modified: '2019-10-04 14:55:17.403338'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'Iteration Target Workflow: netmiko iteration 2'
+  name: Iteration Target Workflow - Test 2
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
   pools: []
   positions:
-    Iteration Targets Workflow: [173, -219]
+    'Regression Workflow E: Iteration Targets': [572, -4]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -2930,23 +2929,23 @@
   hidden: false
   include_link_in_summary: true
   initial_payload: {}
-  iteration_devices: get_var("loop_over", device=parent_device.name)
+  iteration_devices: get_var("Derived Devices", device=device.name)
   iteration_devices_property: name
-  iteration_values: get_var('iteration_devices2', device=device.name)
+  iteration_values: get_var('Interfaces 2', device=device.name)
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-01 21:44:48.403814'
+  last_modified: '2019-10-04 14:56:50.036572'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'Iteration Target Workflow: netmiko iteration 3'
+  name: Iteration Target Workflow - Test 3
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
   pools: []
   positions:
-    Iteration Targets Workflow: [299, 115]
+    'Regression Workflow E: Iteration Targets': [556, 123]
   privileged_mode: false
   push_to_git: false
   result_postprocessing: ''
@@ -3332,12 +3331,12 @@
   iteration_devices_property: name
   iteration_values: '["Washington", "Atlanta"]'
   iteration_variable_name: iteration_value
-  last_modified: '2019-09-27 22:19:47.888963'
+  last_modified: '2019-10-04 14:56:56.469168'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  name: 'Iteration Targets Workflow: No device targets'
+  name: Iteration Targets Workflow - Test 4
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3346,7 +3345,7 @@
   payload: {}
   pools: []
   positions:
-    Iteration Targets Workflow: [570, -131]
+    'Regression Workflow E: Iteration Targets': [-135, 91]
   push_to_git: false
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   result_postprocessing: ''
@@ -3870,9 +3869,10 @@
   send_notification: true
   send_notification_method: mail_feedback_notification
   services: [Start, End, 'Regression Workflow 3: Napalm getters (postprocessing)',
-    'Regression Workflow 5: VRF creation and deletion with Napalm', add_devices_to_payload,
-    'Subworkflow: Access Variable - Result from parent workflow', Show version with
-      multiprocessing, Subworkflow of Workflow, Workflow with iteration targets]
+    'Regression Workflow 5: VRF creation and deletion with Napalm', Modify Payload
+      for Iteration, 'Subworkflow: Access Variable - Result from parent workflow',
+    Show version with multiprocessing, Subworkflow of Workflow, Workflow with iteration
+      targets]
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -3961,13 +3961,13 @@
       content: "Test of the maximum number of run of a service in a workflow.\r\n\
         For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
         \ after the REST service.\r\n"
-      positions: [163, -163]
-  last_modified: '2019-09-20 03:57:45.978247'
+      positions: [145, -168]
+  last_modified: '2019-10-04 12:19:35.784496'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: Netmiko prompts
+  name: 'Regression Workflow D: Prompts'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4295,13 +4295,47 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-09-09 18:35:19.412403'
+  labels:
+    0b61f663-ff60-4851-a717-8e141dea4f23:
+      alignment: center
+      content: "The iteration values are set to [\"Loopback11\",\"Loopback15\"] (static),\
+        \ and the name\r\nof the iteration variable is set to a non-default value.\r\
+        \nThe service does a \"show interface\" over the loopback interfaces."
+      positions: [213, -226]
+    76ece5f4-54f7-4f6b-8ea0-7d2918524e92:
+      alignment: left
+      content: "This service iterates over a set of values defined\r\nat the first\
+        \ step (\"Modify Payload\").\r\nIt uses per-device iteration values.\r\nFor\
+        \ Washington, the \"get_var\" function will evaluate to\r\n['Loopback101',\
+        \ 'Loopback15'] and Loopback101 does not exist,\r\nso the service will fail.\r\
+        \n"
+      positions: [720, -125]
+    93d396cb-cc7e-47ac-ac12-8f75207dcb14:
+      alignment: left
+      content: "This service will compute derived targets for Washington: [\"Washington\"\
+        , \"Austin\"].\r\nFor each derived device, it will iterate over the \"Interface\
+        \ 2\" variable which will\r\nevaluate to ['Loopback333', 'Loopback334'] (set\
+        \ in the Modify Payload service).\r\nIn the results, check that it ran for\
+        \ both devices and for both interface for each device.\r\n"
+      positions: [590, 193]
+    a0c0e5fa-24f9-42b2-961d-a7be236ca57a:
+      alignment: left
+      content: "This service doesn't have targets: it makes a REST call to\r\nhttp://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}\r\
+        \nwith the iteration set to [\"Washington\", \"Atlanta\"]."
+      positions: [-130, 163]
+    b61a926f-87e4-48a6-86bd-74500e9568ab:
+      alignment: left
+      content: "Set the following variables in the payload :\r\n- Interfaces 1: ['Loopback101',\
+        \ 'Loopback15'] for \"Washington\"\r\notherwise ['Loopback9', 'Loopback1000']\r\
+        \n- Derived Devices: [\"Washington\", \"Austin\"] for any device\r\n- Interfaces\
+        \ 2: ['Loopback333', 'Loopback334'] for any device"
+      positions: [-159, -57]
+  last_modified: '2019-10-04 15:08:58.950380'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: Iteration Targets Workflow
+  name: 'Regression Workflow E: Iteration Targets'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4312,9 +4346,9 @@
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
-  services: [Start, End, add_devices_to_payload, 'Iteration Target Workflow: netmiko
-      iteration 2', 'Iteration Target Workflow: netmiko iteration 1', 'Iteration Target
-      Workflow: netmiko iteration 3', 'Iteration Targets Workflow: No device targets']
+  services: [Start, End, Modify Payload for Iteration, Iteration Target Workflow -
+      Test 2, Iteration Targets Workflow - Test 1, Iteration Target Workflow - Test
+      3, Iteration Targets Workflow - Test 4]
   skip: false
   skip_query: ''
   start_services: [Start]
@@ -4506,7 +4540,7 @@
   operating_system: ''
   pools: []
   positions:
-    Iteration Targets Workflow: [-107, -112]
+    'Regression Workflow E: Iteration Targets': [-107, -112]
     Workflow with iteration target subworkflows: [253, 118]
     Workflow_of_workflows: [-359, 206]
   push_to_git: false

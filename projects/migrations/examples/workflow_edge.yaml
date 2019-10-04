@@ -82,9 +82,10 @@
     Check VRF (test) does not exist', subtype: success, workflow: 'Regression Workflow
     2: Separate Failure - Success paths'}
 - {destination: Test Netmiko Prompt Service, label: success, name: 51-success:1->52,
-  source: Start, subtype: success, workflow: Netmiko prompts}
+  source: Start, subtype: success, workflow: 'Regression Workflow D: Prompts'}
 - {destination: Test netmiko prompts pass, label: failure, name: 54-failure:38->55,
-  source: Test Netmiko Prompt Service, subtype: failure, workflow: Netmiko prompts}
+  source: Test Netmiko Prompt Service, subtype: failure, workflow: 'Regression Workflow
+    D: Prompts'}
 - {destination: Modify payload (no device), label: success, name: 54-success:1->55,
   source: Start, subtype: success, workflow: 'Regression Workflow 10: get_var, set_var,
     get_result'}
@@ -168,14 +169,14 @@
 - {destination: 'REST API: call *is_alive* endpoint', label: prerequisite, name: 67-prerequisite:10->20,
   source: napalm_configure_bgp_1, subtype: prerequisite, workflow: 'Regression Workflow
     C: Advanced multiprocessing'}
-- {destination: add_devices_to_payload, label: success, name: 70-success:1->26, source: Start,
-  subtype: success, workflow: Iteration Targets Workflow}
-- {destination: 'Iteration Target Workflow: netmiko iteration 2', label: success,
-  name: 70-success:71->72, source: 'Iteration Target Workflow: netmiko iteration 1',
-  subtype: success, workflow: Iteration Targets Workflow}
-- {destination: 'Iteration Target Workflow: netmiko iteration 3', label: failure,
-  name: 72-failure:55->73, source: 'Iteration Target Workflow: netmiko iteration 2',
-  subtype: failure, workflow: Iteration Targets Workflow}
+- {destination: Modify Payload for Iteration, label: success, name: 70-success:1->26,
+  source: Start, subtype: success, workflow: 'Regression Workflow E: Iteration Targets'}
+- {destination: Iteration Target Workflow - Test 2, label: success, name: 70-success:71->72,
+  source: Iteration Targets Workflow - Test 1, subtype: success, workflow: 'Regression
+    Workflow E: Iteration Targets'}
+- {destination: Iteration Target Workflow - Test 3, label: failure, name: 72-failure:55->73,
+  source: Iteration Target Workflow - Test 2, subtype: failure, workflow: 'Regression
+    Workflow E: Iteration Targets'}
 - {destination: 'Payload Workflow: Validate dict via payload', label: success, name: 64-success:30->75,
   source: Payload Extraction, subtype: success, workflow: 'Regression Workflow 7:
     Payload Extraction & Validation'}
@@ -206,13 +207,14 @@
 - {destination: End, label: success, name: 76-success:81->2, source: 'Payload Workflow:
     Validation 2', subtype: success, workflow: 'Regression Workflow 8: Payload Extraction
     with Operations'}
-- {destination: End, label: success, name: 80-success:82->2, source: 'Iteration Targets
-    Workflow: No device targets', subtype: success, workflow: Iteration Targets Workflow}
+- {destination: End, label: success, name: 80-success:82->2, source: Iteration Targets
+    Workflow - Test 4, subtype: success, workflow: 'Regression Workflow E: Iteration
+    Targets'}
 - {destination: 'Variable Access Subworkflow: Access variable from snippet', label: success,
   name: 83-success:1->84, source: Start, subtype: success, workflow: 'Subworkflow:
     Access Variable - Result from parent workflow'}
-- {destination: add_devices_to_payload, label: success, name: 74-success:1->26, source: Start,
-  subtype: success, workflow: Workflow_of_workflows}
+- {destination: Modify Payload for Iteration, label: success, name: 74-success:1->26,
+  source: Start, subtype: success, workflow: Workflow_of_workflows}
 - {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: success,
   name: 74-success:70->83, source: 'Regression Workflow 5: VRF creation and deletion
     with Napalm', subtype: success, workflow: Workflow_of_workflows}
@@ -231,9 +233,9 @@
 - {destination: End, label: success, name: 85-success:66->2, source: 'Variable Access
     Subworkflow: Access variables for iteration', subtype: success, workflow: 'Subworkflow:
     Access Variable - Result from parent workflow'}
-- {destination: 'Iteration Targets Workflow: No device targets', label: failure, name: 83-failure:56->64,
-  source: 'Iteration Target Workflow: netmiko iteration 3', subtype: failure, workflow: Iteration
-    Targets Workflow}
+- {destination: Iteration Targets Workflow - Test 4, label: failure, name: 83-failure:56->64,
+  source: Iteration Target Workflow - Test 3, subtype: failure, workflow: 'Regression
+    Workflow E: Iteration Targets'}
 - {destination: 'Regression Workflow 8: Payload Extraction with Operations', label: success,
   name: 86-success:80->84, source: 'Regression Workflow B: Napalm getters validation',
   subtype: success, workflow: Subworkflow of Workflow}
@@ -270,23 +272,24 @@
 - {destination: End, label: success, name: 87-success:88->2, source: Check VRF (NOVRF)
     exists, subtype: success, workflow: 'Regression Workflow 1: Netmiko with validation
     and retries'}
-- {destination: 'Iteration Target Workflow: netmiko iteration 2', label: prerequisite,
-  name: 83-prerequisite:54->55, source: 'Iteration Target Workflow: netmiko iteration
-    1', subtype: prerequisite, workflow: Iteration Targets Workflow}
-- {destination: 'Iteration Target Workflow: netmiko iteration 1', label: success,
-  name: 83-success:26->54, source: add_devices_to_payload, subtype: success, workflow: Iteration
-    Targets Workflow}
+- {destination: Iteration Target Workflow - Test 2, label: prerequisite, name: 83-prerequisite:54->55,
+  source: Iteration Targets Workflow - Test 1, subtype: prerequisite, workflow: 'Regression
+    Workflow E: Iteration Targets'}
+- {destination: Iteration Targets Workflow - Test 1, label: success, name: 83-success:26->54,
+  source: Modify Payload for Iteration, subtype: success, workflow: 'Regression Workflow
+    E: Iteration Targets'}
 - {destination: Subworkflow of Workflow, label: success, name: 73-success:84->83,
   source: Workflow with iteration targets, subtype: success, workflow: Workflow_of_workflows}
 - {destination: Subworkflow of Workflow, label: failure, name: 73-failure:84->83,
   source: Workflow with iteration targets, subtype: failure, workflow: Workflow_of_workflows}
 - {destination: End, label: success, name: 75-success:38->2, source: Test netmiko
-    prompts pass, subtype: success, workflow: Netmiko prompts}
+    prompts pass, subtype: success, workflow: 'Regression Workflow D: Prompts'}
 - {destination: 'REST API: call *is_alive* endpoint', label: success, name: 75-success:38->20,
-  source: Test netmiko prompts pass, subtype: success, workflow: Netmiko prompts}
+  source: Test netmiko prompts pass, subtype: success, workflow: 'Regression Workflow
+    D: Prompts'}
 - {destination: Test Netmiko Prompt Service, label: success, name: 75-success:20->37,
-  source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: Netmiko
-    prompts}
+  source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression
+    Workflow D: Prompts'}
 - {destination: 'Netmiko show vrf: device + value iteration', label: success, name: 85-success:1->86,
   source: Start, subtype: success, workflow: Workflow with device and value iteration}
 - {destination: End, label: success, name: 85-success:86->2, source: 'Netmiko show
@@ -308,7 +311,7 @@
   source: Configuration Backup (Netmiko), subtype: success, workflow: 'Regression
     Workflow 9: Configurations Backup'}
 - {destination: Workflow with iteration targets, label: success, name: 72-success:25->83,
-  source: add_devices_to_payload, subtype: success, workflow: Workflow_of_workflows}
+  source: Modify Payload for Iteration, subtype: success, workflow: Workflow_of_workflows}
 - {destination: Push Configurations to Git, label: prerequisite, name: 67-prerequisite:12->7,
   source: Configuration Backup (Netmiko), subtype: prerequisite, workflow: 'Regression
     Workflow 9: Configurations Backup'}

@@ -49,13 +49,19 @@ function savePoolObjects(id) {
 function showPoolObjectsPanel(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
-      initSelect($(`#devices-${id}`), "device", `pool_objects-${id}`);
-      pool.devices.forEach((o) =>
-        $(`#devices-${id}`).append(new Option(o.name, o.id))
-      );
-      $(`#devices-${id}`)
-        .val(pool.devices.map((n) => n.id))
-        .trigger("change");
+      if (pool.devices.length > 1000 || pool.links.length > 1000) {
+        alertify.notify("Too many objects to display.", "error", 5);
+      } else {
+        for (const type of ["device", "link"]) {
+          initSelect($(`#${type}s-${id}`), type, `pool_objects-${id}`);
+          pool[`${type}s`].forEach((o) => {
+            $(`#${type}s-${id}`).append(new Option(o.name, o.id));
+          });
+          $(`#${type}s-${id}`)
+            .val(pool[`${type}s`].map((n) => n.id))
+            .trigger("change");
+        }
+      }
     });
   });
 }

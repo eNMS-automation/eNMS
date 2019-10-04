@@ -42,11 +42,11 @@ def configure_context_processor(flask_app):
             "parameters": app.config,
             "relations": list(set(chain.from_iterable(relationships.values()))),
             "relationships": relationships,
-            "service_types": sorted(
-                (service_class.pretty_name, service)
-                for service, service_class in models.items()
+            "service_types": {
+                service: service_class.pretty_name
+                for service, service_class in sorted(models.items())
                 if service.endswith("service") and hasattr(service_class, "pretty_name")
-            ),
+            },
             "version": app.version,
         }
 

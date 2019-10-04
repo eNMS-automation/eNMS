@@ -107,21 +107,23 @@
     with get_result helper, subtype: success, workflow: 'Regression Workflow 10: get_var,
     set_var, get_result'}
 - {destination: 'Getters Workflow: is alive', label: success, name: 57-success:1->58,
-  source: Start, subtype: success, workflow: Napalm getters and match mechanism workflow}
+  source: Start, subtype: success, workflow: 'Regression Workflow B: Napalm getters
+    validation'}
 - {destination: 'Getters Workflow: get facts', label: success, name: 57-success:58->59,
-  source: 'Getters Workflow: is alive', subtype: success, workflow: Napalm getters
-    and match mechanism workflow}
+  source: 'Getters Workflow: is alive', subtype: success, workflow: 'Regression Workflow
+    B: Napalm getters validation'}
 - {destination: 'Getters Workflow: MAC address', label: success, name: 57-success:60->61,
-  source: 'Getters Workflow: Interface IP', subtype: success, workflow: Napalm getters
-    and match mechanism workflow}
+  source: 'Getters Workflow: Interface IP', subtype: success, workflow: 'Regression
+    Workflow B: Napalm getters validation'}
 - {destination: End, label: success, name: 57-success:61->2, source: 'Getters Workflow:
-    MAC address', subtype: success, workflow: Napalm getters and match mechanism workflow}
+    MAC address', subtype: success, workflow: 'Regression Workflow B: Napalm getters
+    validation'}
 - {destination: 'Getters Workflow: get facts failed match', label: success, name: 57-success:59->62,
-  source: 'Getters Workflow: get facts', subtype: success, workflow: Napalm getters
-    and match mechanism workflow}
+  source: 'Getters Workflow: get facts', subtype: success, workflow: 'Regression Workflow
+    B: Napalm getters validation'}
 - {destination: 'Getters Workflow: Interface IP', label: failure, name: 57-failure:62->60,
-  source: 'Getters Workflow: get facts failed match', subtype: failure, workflow: Napalm
-    getters and match mechanism workflow}
+  source: 'Getters Workflow: get facts failed match', subtype: failure, workflow: 'Regression
+    Workflow B: Napalm getters validation'}
 - {destination: 'Ansible Workflow: Arista show version', label: success, name: 64-success:1->63,
   source: Start, subtype: success, workflow: 'Regression Workflow 6: Ansible with
     Validation'}
@@ -234,8 +236,8 @@
   source: 'Iteration Target Workflow: netmiko iteration 3', subtype: failure, workflow: Iteration
     Targets Workflow}
 - {destination: 'Regression Workflow 8: Payload Extraction with Operations', label: success,
-  name: 86-success:80->84, source: Napalm getters and match mechanism workflow, subtype: success,
-  workflow: Subworkflow of Workflow}
+  name: 86-success:80->84, source: 'Regression Workflow B: Napalm getters validation',
+  subtype: success, workflow: Subworkflow of Workflow}
 - {destination: End, label: success, name: 86-success:84->2, source: 'Regression Workflow
     8: Payload Extraction with Operations', subtype: success, workflow: Subworkflow
     of Workflow}
@@ -244,9 +246,9 @@
 - {destination: 'Regression Workflow 7: Payload Extraction & Validation', label: success,
   name: 86-success:1->75, source: Start, subtype: success, workflow: Subworkflow of
     Workflow}
-- {destination: Napalm getters and match mechanism workflow, label: success, name: 86-success:75->80,
-  source: 'Regression Workflow 7: Payload Extraction & Validation', subtype: success,
-  workflow: Subworkflow of Workflow}
+- {destination: 'Regression Workflow B: Napalm getters validation', label: success,
+  name: 86-success:75->80, source: 'Regression Workflow 7: Payload Extraction & Validation',
+  subtype: success, workflow: Subworkflow of Workflow}
 - {destination: Show version with multiprocessing, label: failure, name: 76-failure:86->52,
   source: Subworkflow of Workflow, subtype: failure, workflow: Workflow_of_workflows}
 - {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: failure,

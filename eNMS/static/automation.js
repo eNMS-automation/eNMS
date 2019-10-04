@@ -278,9 +278,9 @@ function resumeTask(id) {
 (function() {
   if (page == "table/service" || page == "workflow_builder") {
     $("#service-type").selectpicker({ liveSearch: true });
-    serviceTypes.forEach((service) => {
-      $("#service-type").append(new Option(service[0], service[1]));
-    });
+    for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
+      $("#service-type").append(new Option(serviceName, serviceType));
+    };
     $("#service-type").selectpicker("refresh");
   }
 })();

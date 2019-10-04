@@ -32,7 +32,6 @@
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
     Iteration Targets Workflow: [-395, 13]
-    Napalm getters and match mechanism workflow: [-605, 76]
     Netmiko prompts: [-279, -158]
     'Regression Workflow 10: get_var, set_var, get_result': [-644, -159]
     'Regression Workflow 1: Netmiko with validation and retries': [0, 0]
@@ -44,6 +43,7 @@
     'Regression Workflow 7: Payload Extraction & Validation': [-115, -305]
     'Regression Workflow 8: Payload Extraction with Operations': [-661, -226]
     'Regression Workflow 9: Configurations Backup': [-621, 123]
+    'Regression Workflow B: Napalm getters validation': [-604, 9]
     Subworkflow of Workflow: [-160, -37]
     'Subworkflow: Access Variable - Result from parent workflow': [-205, -1]
     Workflow with device and value iteration: [0, 0]
@@ -98,7 +98,6 @@
   positions:
     Iteration Services Test Workflow: ['-9', '294']
     Iteration Targets Workflow: [748, -268]
-    Napalm getters and match mechanism workflow: [547, 107]
     Netmiko prompts: [634, 187]
     'Regression Workflow 10: get_var, set_var, get_result': [-706, -83]
     'Regression Workflow 1: Netmiko with validation and retries': [500, 0]
@@ -110,6 +109,7 @@
     'Regression Workflow 7: Payload Extraction & Validation': [454, 245]
     'Regression Workflow 8: Payload Extraction with Operations': [-688, -153]
     'Regression Workflow 9: Configurations Backup': [475, 102]
+    'Regression Workflow B: Napalm getters validation': [-600, 63]
     Subworkflow of Workflow: [553, -5]
     'Subworkflow: Access Variable - Result from parent workflow': [617, 0]
     T: !!python/tuple [500, 0]
@@ -2299,7 +2299,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-08 21:45:33.809528'
+  last_modified: '2019-10-04 10:37:14.672735'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -2312,7 +2312,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: [-377, -267]
+    'Regression Workflow B: Napalm getters validation': [-405, -137]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2320,7 +2320,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
-  timeout: 60
+  timeout: 1
   type: napalm_getters_service
   use_device_driver: true
   validation_method: dict_equal
@@ -2361,7 +2361,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: [-235, 125]
+    'Regression Workflow B: Napalm getters validation': [18, -122]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2411,8 +2411,8 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: [157, 139]
     'Regression Workflow 8: Payload Extraction with Operations': [-348, -240]
+    'Regression Workflow B: Napalm getters validation': [581, 136]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2461,7 +2461,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: [286, -253]
+    'Regression Workflow B: Napalm getters validation': [-45, 144]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2497,7 +2497,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-06 22:23:19.569044'
+  last_modified: '2019-10-04 10:40:41.939110'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -2510,7 +2510,7 @@
   optional_args: {}
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: [-27, -269]
+    'Regression Workflow B: Napalm getters validation': [535, -147]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2521,7 +2521,7 @@
   timeout: 60
   type: napalm_getters_service
   use_device_driver: true
-  validation_method: dict_equal
+  validation_method: dict_included
   vendor: ''
   waiting_time: 0
 - arguments: ''
@@ -2560,8 +2560,8 @@
   playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_version.yml
   pools: []
   positions:
-    Napalm getters and match mechanism workflow: [-30, 126]
     'Regression Workflow 6: Ansible with Validation': [-381, 132]
+    'Regression Workflow B: Napalm getters validation': [-30, 126]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -4067,7 +4067,7 @@
   description: ''
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  devices: [Washington, Austin]
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4078,13 +4078,48 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-08-09 01:11:35.197608'
+  labels:
+    006272de-91a4-49e0-9b54-9cab6e6f8768:
+      alignment: center
+      content: "Dictionary Inclusion Validation + Variable substitution :\r\n{\"{{device.ip_address}}\"\
+        :{\"prefix_length\":24}}"
+      positions: [604, 193]
+    187d6918-c286-42d7-a803-e97e05978f3e:
+      alignment: center
+      content: "Dictionary Inclusion Validation:\r\n{\"fqdn\":\"localhost\",\"vendor\"\
+        :\"Arista\"}"
+      positions: [4, -188]
+    213083b1-d7f0-4638-98aa-ca097fa10603:
+      alignment: left
+      content: "Dictionary Equality Validation: {\"is_alive\":{\"is_alive\":true}}\r\
+        \nWashington must pass, but Austin will fail (napalm timeout has\r\nbeen brought\
+        \ down to 1 to not wait too long).\r\n"
+      positions: [-380, -224]
+    4d62e069-5dfd-4e6d-b418-8c273a750b06:
+      alignment: left
+      content: "This workflow is running on two devices: Washington (vEOS) and Austin\
+        \ (dummy).\r\nIt uses NAPALM to retrieve data from a device and the validation\
+        \ mechanism.\r\nTo be tested with and without multiprocessing."
+      positions: [-13, 4]
+    a5c335bc-dced-4512-b5bc-1149ea7eec73:
+      alignment: left
+      content: "Dictionary Inclusion Validation:\r\n{\"fqdn\":\"localhost\",\"uptime\"\
+        :\"666\",\"vendor\":\"Arista\"}\r\nThis service is expected to fail, because\
+        \ this uptime is different from 666."
+      positions: [553, -211]
+    f33d8c65-c691-4aef-ae87-6bcd20a69a11:
+      alignment: center
+      content: "Test the \"Negative logic\" parameter.\r\nThe validation is set to\
+        \ \"Dictionary Equality\" and the match is \r\nan empty dictionary. This shouldn't\
+        \ match, but the negative logic\r\nis set to True, so the resulting value\
+        \ is a success."
+      positions: [-51, 226]
+  last_modified: '2019-10-04 10:45:16.904925'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: Napalm getters and match mechanism workflow
+  name: 'Regression Workflow B: Napalm getters validation'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4427,8 +4462,8 @@
   send_notification: false
   send_notification_method: mail_feedback_notification
   services: [Start, End, 'Regression Workflow 8: Payload Extraction with Operations',
-    Napalm getters and match mechanism workflow, 'Regression Workflow 7: Payload Extraction
-      & Validation']
+    'Regression Workflow B: Napalm getters validation', 'Regression Workflow 7: Payload
+      Extraction & Validation']
   skip: false
   skip_query: ''
   start_services: [Start]

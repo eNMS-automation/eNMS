@@ -398,6 +398,15 @@ function formatServiceTitle(service) {
   return title;
 }
 
+function getServiceLabel(service) {
+  if (["Start", "End"].includes(service.name)) return service.name;
+  label = service.type == "workflow" ? `\n     ${service.name}     \n` : `${service.name}\n`;
+  label += "---\n"
+  label += service.type == "workflow" ? "Subworkflow" : service.type;
+  return label;
+}
+    
+
 function serviceToNode(service, index) {
   const defaultService = ["Start", "End"].includes(service.name);
   return {
@@ -412,11 +421,10 @@ function serviceToNode(service, index) {
     font: {
       size: 15,
       multi: "html",
-      align: "left",
+      align: "center",
       bold: { color: "#000000" },
     },
-    label:
-      service.type == "workflow" ? `     ${service.name}     ` : service.name,
+    label: getServiceLabel(service),
     name: service.name,
     type: service.type,
     title: formatServiceTitle(service),
@@ -724,7 +732,7 @@ function resetDisplay() {
     if ([1, 2].includes(service.id)) return;
     nodes.update({
       id: service.id,
-      label: service.name,
+      label: getServiceLabel(service),
       color: service.skip ? "#D3D3D3" : "#D2E5FF",
     });
   });

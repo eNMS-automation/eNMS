@@ -6,7 +6,7 @@ from wtforms import HiddenField, StringField
 
 from eNMS.database.dialect import Column, SmallString
 from eNMS.database.functions import factory
-from eNMS.forms.services import NetmikoForm
+from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 

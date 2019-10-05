@@ -12,7 +12,7 @@ from wtforms.widgets import TextArea
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import NetmikoForm
+from eNMS.forms.automation import NetmikoForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import Service
 

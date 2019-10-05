@@ -4,7 +4,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import NetmikoForm
+from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 

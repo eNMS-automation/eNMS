@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, SelectMultipleField
 
 from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
-from eNMS.forms.services import NapalmForm
+from eNMS.forms.automation import NapalmForm
 from eNMS.models.automation import ConnectionService
 
 

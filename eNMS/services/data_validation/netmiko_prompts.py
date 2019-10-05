@@ -2,9 +2,8 @@ from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import HiddenField
 
 from eNMS.database.dialect import Column, LargeString, SmallString
-from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import ConnectionForm, NetmikoForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -80,7 +79,7 @@ class NetmikoPromptsService(ConnectionService):
         return {"commands": commands, "result": result}
 
 
-class NetmikoPromptsForm(ServiceForm, NetmikoForm):
+class NetmikoPromptsForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_prompts_service")
     command = SubstitutionField()
     confirmation1 = SubstitutionField()
@@ -102,6 +101,5 @@ class NetmikoPromptsForm(ServiceForm, NetmikoForm):
             ],
             "default": "expanded",
         },
-        "Netmiko Parameters": NetmikoForm.group,
-        "Connection Parameters": ConnectionForm.group,
+        **NetmikoForm.groups
     }

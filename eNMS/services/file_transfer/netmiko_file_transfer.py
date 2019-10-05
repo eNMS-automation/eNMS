@@ -4,9 +4,8 @@ from wtforms import BooleanField, HiddenField, SelectField, StringField
 from wtforms.validators import InputRequired
 
 from eNMS.database.dialect import Column, SmallString
-from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import ConnectionForm, NetmikoForm
+from eNMS.forms.services import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -51,7 +50,7 @@ class NetmikoFileTransferService(ConnectionService):
         return {"success": True, "result": transfer_dict}
 
 
-class NetmikoFileTransferForm(ServiceForm, NetmikoForm):
+class NetmikoFileTransferForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_file_transfer_service")
     source_file = SubstitutionField(validators=[InputRequired()])
     destination_file = SubstitutionField(validators=[InputRequired()])
@@ -73,6 +72,5 @@ class NetmikoFileTransferForm(ServiceForm, NetmikoForm):
             ],
             "default": "expanded",
         },
-        "Netmiko Parameters": NetmikoForm.group,
-        "Connection Parameters": ConnectionForm.group,
+        **NetmikoForm.groups
     }

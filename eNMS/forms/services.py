@@ -2,10 +2,11 @@ from wtforms import BooleanField, FloatField, HiddenField, IntegerField, SelectF
 
 from eNMS import app
 from eNMS.forms import BaseForm
+from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import DictField, PasswordSubstitutionField, SubstitutionField
 
 
-class ConnectionForm(BaseForm):
+class ConnectionForm(ServiceForm):
     form_type = HiddenField(default="connection")
     abstract_service = True
     credentials = SelectField(
@@ -45,7 +46,8 @@ class NetmikoForm(ConnectionForm):
     timeout = IntegerField(default=10)
     delay_factor = FloatField(default=1.0)
     global_delay_factor = FloatField(default=1.0)
-    group = {
+    groups = {
+        "Netmiko Parameters": {
         "commands": [
             "driver",
             "use_device_driver",
@@ -57,6 +59,8 @@ class NetmikoForm(ConnectionForm):
             "global_delay_factor",
         ],
         "default": "expanded",
+        },
+        "Connection Parameters": ConnectionForm.group,
     }
 
 

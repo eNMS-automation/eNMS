@@ -2,8 +2,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField
 
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import ConnectionForm, NapalmForm
+from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -27,9 +26,5 @@ class NapalmRollbackService(ConnectionService):
         return {"success": True, "result": "Rollback successful"}
 
 
-class NapalmRollbackForm(ServiceForm, ConnectionForm, NapalmForm):
+class NapalmRollbackForm(NapalmForm):
     form_type = HiddenField(default="napalm_rollback_service")
-    groups = {
-        "Napalm Parameters": NapalmForm.group,
-        "Connection Parameters": ConnectionForm.group,
-    }

@@ -2,8 +2,7 @@ from sqlalchemy import ForeignKey, Integer
 from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database.dialect import Column, SmallString
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import ConnectionForm, NapalmForm
+from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -50,7 +49,7 @@ class ConfigureBgpService(ConnectionService):
         return {"success": True, "result": f"Config push ({config})"}
 
 
-class ConfigureBgpForm(ServiceForm, ConnectionForm, NapalmForm):
+class ConfigureBgpForm(NapalmForm):
     form_type = HiddenField(default="configure_bgp_service")
     local_as = IntegerField("Local AS", default=0)
     loopback = StringField("Loopback", default="Lo42")
@@ -63,6 +62,5 @@ class ConfigureBgpForm(ServiceForm, ConnectionForm, NapalmForm):
             "commands": ["local_as", "loopback", "loopback_ip", "neighbor_ip", "remote_as", "vrf_name"],
             "default": "expanded",
         },
-        "Napalm Parameters": NapalmForm.group,
-        "Connection Parameters": ConnectionForm.group,
+        **NapalmForm.groups,
     }

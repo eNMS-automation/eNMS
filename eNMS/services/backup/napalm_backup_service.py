@@ -6,8 +6,7 @@ from wtforms import HiddenField
 
 from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import ConnectionForm, NapalmForm
+from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -60,9 +59,5 @@ class NapalmBackupService(ConnectionService):
         return {"success": True, "result": "Get Config via Napalm"}
 
 
-class NapalmBackupForm(ServiceForm, ConnectionForm, NapalmForm):
+class NapalmBackupForm(NapalmForm):
     form_type = HiddenField(default="napalm_backup_service")
-    groups = {
-        "Napalm Parameters": NapalmForm.group,
-        "Connection Parameters": ConnectionForm.group,
-    }

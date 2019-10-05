@@ -81,7 +81,7 @@ class UnixShellScriptService(Service):
         }
 
 
-class UnixShellScriptForm(ServiceForm, NetmikoForm):
+class UnixShellScriptForm(NetmikoForm):
     form_type = HiddenField(default="unix_shell_script_service")
     enable_mode = BooleanField("Run as root using sudo")
     source_code = StringField(
@@ -113,7 +113,6 @@ class UnixShellScriptForm(ServiceForm, NetmikoForm):
     strip_command = BooleanField(default=True)
     groups = {
         "Main Parameters": {"commands": ["source_code"], "default": "expanded"},
-        "Netmiko Parameters": [c for c in NetmikoForm.group if c != "config_mode"],
         "Advanced Netmiko Parameters": {
             "commands": [
                 "expect_string",
@@ -123,4 +122,5 @@ class UnixShellScriptForm(ServiceForm, NetmikoForm):
             ],
             "default": "hidden",
         },
+        **NetmikoForm.groups,
     }

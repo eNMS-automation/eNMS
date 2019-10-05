@@ -2,7 +2,6 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, IntegerField, StringField
 
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import ConnectionService
@@ -49,7 +48,7 @@ class NapalmPingService(ConnectionService):
         return {"success": "success" in ping, "result": ping}
 
 
-class NapalmPingForm(ServiceForm, NapalmForm):
+class NapalmPingForm(NapalmForm):
     form_type = HiddenField(default="napalm_ping_service")
     count = IntegerField(default=5)
     packet_size = IntegerField(default=100)
@@ -71,5 +70,5 @@ class NapalmPingForm(ServiceForm, NapalmForm):
             ],
             "default": "expanded",
         },
-        "Napalm Parameters": NapalmForm.group,
+        **NapalmForm.groups,
     }

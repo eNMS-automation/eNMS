@@ -7,7 +7,7 @@
     "lint": "eslint --config linting/.eslintrc --ignore-path linting/.eslintignore ."
   },
   "engines": {
-    "node": "12.3.1"
+    "node": "12.11.1"
   },
   "devDependencies": {
     "eslint": "5.16.0",

@@ -101,3 +101,10 @@ used to retrieve the configuration.
 
 - Add pretty name for all services to improve UI display.
 /!\ Pretty names are mandatory for the service to be displayed in the UI (MIGRATION).
+
+- 1 Relabel/change ‘Has Target Devices’ to a pull down ‘Run once per device’ and ‘Run once’
+>>> Has targets device has been removed.
+
+- Add number of times a service is allowed to run in a worlfow + regression test.
+
+- Device "current_configuration" is now just "configuration"

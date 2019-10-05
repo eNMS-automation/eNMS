@@ -42,9 +42,6 @@ class NapalmConfigurationForm(NapalmForm):
     )
     content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     groups = {
-        "Main Parameters": {
-            "commands": ["action", "content"],
-            "default": "expanded",
-        },
+        "Main Parameters": {"commands": ["action", "content"], "default": "expanded"},
         **NapalmForm.groups,
     }

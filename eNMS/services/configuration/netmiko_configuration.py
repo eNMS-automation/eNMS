@@ -70,5 +70,5 @@ class NetmikoConfigurationForm(NetmikoForm):
             "commands": ["strip_prompt", "strip_command"],
             "default": "hidden",
         },
-        **NetmikoForm.groups
+        **NetmikoForm.groups,
     }

@@ -85,5 +85,5 @@ class NetmikoBackupForm(NetmikoForm):
             "commands": ["configuration_command"],
             "default": "expanded",
         },
-        **NetmikoForm.groups
+        **NetmikoForm.groups,
     }

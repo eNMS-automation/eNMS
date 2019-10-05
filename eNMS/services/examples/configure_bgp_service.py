@@ -59,7 +59,14 @@ class ConfigureBgpForm(NapalmForm):
     vrf_name = StringField("VRF Name")
     groups = {
         "Main Parameters": {
-            "commands": ["local_as", "loopback", "loopback_ip", "neighbor_ip", "remote_as", "vrf_name"],
+            "commands": [
+                "local_as",
+                "loopback",
+                "loopback_ip",
+                "neighbor_ip",
+                "remote_as",
+                "vrf_name",
+            ],
             "default": "expanded",
         },
         **NapalmForm.groups,

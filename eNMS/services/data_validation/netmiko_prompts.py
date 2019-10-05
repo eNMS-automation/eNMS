@@ -101,5 +101,5 @@ class NetmikoPromptsForm(NetmikoForm):
             ],
             "default": "expanded",
         },
-        **NetmikoForm.groups
+        **NetmikoForm.groups,
     }

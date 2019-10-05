@@ -68,5 +68,5 @@ class NetmikoValidationForm(NetmikoForm):
             ],
             "default": "hidden",
         },
-        **NetmikoForm.groups
+        **NetmikoForm.groups,
     }

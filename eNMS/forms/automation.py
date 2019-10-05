@@ -1,5 +1,12 @@
 from ast import parse
-from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
+from wtforms import (
+    BooleanField,
+    FloatField,
+    HiddenField,
+    IntegerField,
+    SelectField,
+    StringField,
+)
 from wtforms.widgets import TextArea
 
 from eNMS import app
@@ -9,6 +16,7 @@ from eNMS.forms.fields import (
     DictSubstitutionField,
     MultipleInstanceField,
     NoValidationSelectField,
+    PasswordSubstitutionField,
     SubstitutionField,
 )
 
@@ -179,17 +187,17 @@ class NetmikoForm(ConnectionForm):
     global_delay_factor = FloatField(default=1.0)
     groups = {
         "Netmiko Parameters": {
-        "commands": [
-            "driver",
-            "use_device_driver",
-            "enable_mode",
-            "config_mode",
-            "fast_cli",
-            "timeout",
-            "delay_factor",
-            "global_delay_factor",
-        ],
-        "default": "expanded",
+            "commands": [
+                "driver",
+                "use_device_driver",
+                "enable_mode",
+                "config_mode",
+                "fast_cli",
+                "timeout",
+                "delay_factor",
+                "global_delay_factor",
+            ],
+            "default": "expanded",
         },
         "Connection Parameters": ConnectionForm.group,
     }
@@ -204,8 +212,8 @@ class NapalmForm(ConnectionForm):
     optional_args = DictField()
     groups = {
         "Napalm Parameters": {
-        "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
-        "default": "expanded",
+            "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
+            "default": "expanded",
         },
         "Connection Parameters": ConnectionForm.group,
     }

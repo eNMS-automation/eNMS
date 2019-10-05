@@ -62,9 +62,6 @@ class NapalmGettersForm(NapalmForm):
         )
     )
     groups = {
-        "Main Parameters": {
-            "commands": ["getters"],
-            "default": "expanded",
-        },
+        "Main Parameters": {"commands": ["getters"], "default": "expanded"},
         **NapalmForm.groups,
     }

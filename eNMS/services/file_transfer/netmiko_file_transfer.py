@@ -72,5 +72,5 @@ class NetmikoFileTransferForm(NetmikoForm):
             ],
             "default": "expanded",
         },
-        **NetmikoForm.groups
+        **NetmikoForm.groups,
     }

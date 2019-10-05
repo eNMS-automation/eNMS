@@ -24,7 +24,7 @@ class Workflow(Service):
 
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    close_cached_connection = Column(Boolean, default=True)
+    close_connection = Column(Boolean, default=True)
     labels = Column(MutableDict)
     services = relationship(
         "Service", secondary=service_workflow_table, back_populates="workflows"
@@ -96,18 +96,13 @@ class Workflow(Service):
                     success = True
             if not skip_service and not service.skip:
                 sleep(service.waiting_time)
-        if device and self.close_cached_connection:
-            for library in ("netmiko", "napalm"):
-                device_connection = run.get_connection(library, device)
-                if device_connection:
-                    run.disconnect(library, device, device_connection)
         Session.refresh(run)
         return {"payload": payload, "success": success}
 
 
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
-    close_cached_connection = BooleanField()
+    close_connection = BooleanField(default=True)
     start_services = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 

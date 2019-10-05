@@ -350,6 +350,11 @@ class Run(AbstractBase):
         for i in range(self.number_of_retries + 1):
             try:
                 results = self.service.job(self, payload, *args)
+                if device and (
+                    getattr(self, "close_connection", False)
+                    or self.runtime == self.parent_runtime
+                ):
+                    self.close_device_connection(device)
                 self.convert_result(results)
                 self.eval(
                     self.service.result_postprocessing, function="exec", **locals()
@@ -631,22 +636,25 @@ class Run(AbstractBase):
     def space_deleter(self, input):
         return "".join(input.split())
 
+    def update_netmiko_connection(self, connection):
+        for property in ("fast_cli", "timeout", "global_delay_factor"):
+            service_value = getattr(self.service, property)
+            if service_value:
+                setattr(connection, property, service_value)
+        try:
+            mode = connection.check_config_mode()
+            if mode and not self.config_mode:
+                connection.exit_config_mode()
+            elif self.config_mode and not mode:
+                connection.config_mode()
+        except Exception as exc:
+            self.log("error", f"Failed to honor the config mode {exc}")
+        return connection
+
     def netmiko_connection(self, device):
-        connection = self.get_connection("netmiko", device)
+        connection = self.get_or_close_connection("netmiko", device)
         if connection:
-            for property in ("fast_cli", "timeout", "global_delay_factor"):
-                service_value = getattr(self.service, property)
-                if service_value:
-                    setattr(connection, property, service_value)
-            try:
-                mode = connection.check_config_mode()
-                if mode and not self.config_mode:
-                    connection.exit_config_mode()
-                elif self.config_mode and not mode:
-                    connection.config_mode()
-            except Exception as exc:
-                self.log("error", f"Failed to honor the config mode {exc}")
-            return connection
+            return self.update_netmiko_connection(connection)
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
@@ -697,6 +705,8 @@ class Run(AbstractBase):
 
     def get_or_close_connection(self, library, device):
         connection = self.get_connection(library, device)
+        if self.start_new_connection:
+            return self.disconnect(library, device, connection)
         if library == "napalm":
             if connection.is_alive():
                 return connection
@@ -717,9 +727,13 @@ class Run(AbstractBase):
             return
         return connections[device.name]
 
-    def disconnect(self, library, device, connection=None):
-        if not connection:
+    def close_device_connection(self, device):
+        for library in ("netmiko", "napalm"):
             connection = self.get_connection(library, device)
+            if connection:
+                self.disconnect(library, device, connection)
+
+    def disconnect(self, library, device, connection):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
             self.log("info", f"Closed {library} Connection to {device}")

@@ -37,14 +37,17 @@ class NetmikoValidationService(ConnectionService):
         commands = run.sub(run.commands, locals()).splitlines()
         run.log("info", f"Sending '{run.commands}' on {device.name} (Netmiko)")
         expect_string = run.sub(run.expect_string, locals())
-        result = "".join(netmiko_connection.send_command(
-            command,
-            delay_factor=run.delay_factor,
-            expect_string=run.expect_string or None,
-            auto_find_prompt=run.auto_find_prompt,
-            strip_prompt=run.strip_prompt,
-            strip_command=run.strip_command,
-        ) for command in commands)
+        result = "".join(
+            netmiko_connection.send_command(
+                command,
+                delay_factor=run.delay_factor,
+                expect_string=run.expect_string or None,
+                auto_find_prompt=run.auto_find_prompt,
+                strip_prompt=run.strip_prompt,
+                strip_command=run.strip_command,
+            )
+            for command in commands
+        )
         return {"commands": commands, "result": result}
 
 

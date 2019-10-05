@@ -115,3 +115,7 @@ used to retrieve the configuration.
 - Rename privileged_mode -> enable_mode
 
 - Add config mode and honor it when retrieving a cached connection.
+
+- Netmiko Validation Service:
+* command -> commands
+* 

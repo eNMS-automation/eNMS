@@ -1,5 +1,6 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField
+from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
@@ -17,7 +18,7 @@ class NetmikoValidationService(ConnectionService):
     parent_type = "connection_service"
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)
-    command = Column(LargeString, default="")
+    commands = Column(LargeString, default="")
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
@@ -33,23 +34,23 @@ class NetmikoValidationService(ConnectionService):
 
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
-        command = run.sub(run.command, locals())
+        commands = run.sub(run.commands, locals()).splitlines()
         run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")
         expect_string = run.sub(run.expect_string, locals())
-        result = netmiko_connection.send_command(
+        result = "".join(netmiko_connection.send_command(
             command,
             delay_factor=run.delay_factor,
             expect_string=run.expect_string or None,
             auto_find_prompt=run.auto_find_prompt,
             strip_prompt=run.strip_prompt,
             strip_command=run.strip_command,
-        )
-        return {"command": command, "result": result}
+        ) for command in commands)
+        return {"commands": commands, "result": result}
 
 
 class NetmikoValidationForm(ServiceForm, ConnectionForm, NetmikoForm):
     form_type = HiddenField(default="netmiko_validation_service")
-    command = SubstitutionField()
+    commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     expect_string = SubstitutionField()
     auto_find_prompt = BooleanField(default=True)
     strip_prompt = BooleanField(default=True)

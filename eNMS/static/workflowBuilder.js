@@ -593,7 +593,7 @@ Object.assign(action, {
 function createLabel() {
   const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
-  fCall(`/create_label/${params}`, `#workflow_label-form`, function(result) {
+  fCall(`/create_label/${params}`, "#workflow_label-form", function(result) {
     if (currLabel) {
       deleteLabel(currLabel);
       currLabel = null;

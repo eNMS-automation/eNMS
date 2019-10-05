@@ -354,7 +354,6 @@ class Run(AbstractBase):
                     getattr(self, "close_connection", False)
                     or self.runtime == self.parent_runtime
                 ):
-                    print("ttt"*100, getattr(self, "close_connection", False), self.runtime == self.parent_runtime)
                     self.close_device_connection(device)
                 self.convert_result(results)
                 self.eval(
@@ -706,6 +705,8 @@ class Run(AbstractBase):
 
     def get_or_close_connection(self, library, device):
         connection = self.get_connection(library, device)
+        if not connection:
+            return
         if self.start_new_connection:
             return self.disconnect(library, device, connection)
         if library == "napalm":
@@ -715,8 +716,8 @@ class Run(AbstractBase):
                 self.disconnect(library, device, connection)
         else:
             try:
-                device_connection.find_prompt()
-                return device_connection
+                connection.find_prompt()
+                return connection
             except Exception:
                 self.disconnect(library, device, connection)
 
@@ -724,9 +725,7 @@ class Run(AbstractBase):
         connections = app.connections_cache[library].get(self.runtime)
         if not connections:
             connections = app.connections_cache[library].get(self.parent_runtime, {})
-        if device.name not in connections:
-            return
-        return connections[device.name]
+        return connections.get(device.name)
 
     def close_device_connection(self, device):
         for library in ("netmiko", "napalm"):

@@ -24,7 +24,7 @@ class Workflow(Service):
 
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    close_connection = Column(Boolean, default=True)
+    close_connection = Column(Boolean, default=False)
     labels = Column(MutableDict)
     services = relationship(
         "Service", secondary=service_workflow_table, back_populates="workflows"
@@ -102,7 +102,7 @@ class Workflow(Service):
 
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
-    close_connection = BooleanField(default=True)
+    close_connection = BooleanField(default=False)
     start_services = MultipleInstanceField("Workflow Entry Point(s)")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 

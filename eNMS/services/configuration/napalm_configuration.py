@@ -3,9 +3,9 @@ from wtforms import HiddenField, SelectField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
-from eNMS.forms.automation import ConnectionForm, ServiceForm
+from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import NapalmForm
+from eNMS.forms.services import ConnectionForm, NapalmForm
 from eNMS.models.automation import ConnectionService
 
 

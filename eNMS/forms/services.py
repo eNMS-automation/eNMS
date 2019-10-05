@@ -5,7 +5,34 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import DictField, PasswordSubstitutionField, SubstitutionField
 
 
-class NetmikoForm(BaseForm):
+class ConnectionForm(BaseForm):
+    form_type = HiddenField(default="connection")
+    abstract_service = True
+    credentials = SelectField(
+        "Credentials",
+        choices=(
+            ("device", "Device Credentials"),
+            ("user", "User Credentials"),
+            ("custom", "Custom Credentials"),
+        ),
+    )
+    custom_username = SubstitutionField("Custom Username")
+    custom_password = PasswordSubstitutionField("Custom Password")
+    start_new_connection = BooleanField("Start New Connection")
+    close_connection = BooleanField("Close Connection")
+    group = {
+        "commands": [
+            "credentials",
+            "custom_username",
+            "custom_password",
+            "start_new_connection",
+            "close_connection",
+        ],
+        "default": "expanded",
+    }
+
+
+class NetmikoForm(ConnectionForm):
     form_type = HiddenField(default="netmiko")
     abstract_service = True
     driver = SelectField(choices=app.NETMIKO_DRIVERS)
@@ -42,32 +69,5 @@ class NapalmForm(BaseForm):
     optional_args = DictField()
     group = {
         "commands": ["driver", "use_device_driver", "timeout", "optional_args"],
-        "default": "expanded",
-    }
-
-
-class ConnectionForm(BaseForm):
-    form_type = HiddenField(default="connection")
-    abstract_service = True
-    credentials = SelectField(
-        "Credentials",
-        choices=(
-            ("device", "Device Credentials"),
-            ("user", "User Credentials"),
-            ("custom", "Custom Credentials"),
-        ),
-    )
-    custom_username = SubstitutionField("Custom Username")
-    custom_password = PasswordSubstitutionField("Custom Password")
-    start_new_connection = BooleanField("Start New Connection")
-    close_connection = BooleanField("Close Connection")
-    group = {
-        "commands": [
-            "credentials",
-            "custom_username",
-            "custom_password",
-            "start_new_connection",
-            "close_connection",
-        ],
         "default": "expanded",
     }

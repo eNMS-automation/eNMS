@@ -2,8 +2,8 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField
 
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.forms.automation import ConnectionForm, ServiceForm
-from eNMS.forms.services import NapalmForm
+from eNMS.forms.automation import ServiceForm
+from eNMS.forms.services import ConnectionForm, NapalmForm
 from eNMS.models.automation import ConnectionService
 
 

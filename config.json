@@ -1,0 +1,56 @@
+{
+  "cluster": {
+    "active": false,
+    "cluster_id": true,
+    "cluster_scan_subnet": "192.168.105.0/24",
+    "cluster_scan_protocol": "http",
+    "cluster_scan_timeout": 0.05,
+  },
+  "config_mode": "DEBUG",
+  "create_examples": true,
+  "documentation_url": "",
+  "git": {
+    "automation": "",
+    "configurations": "",
+  },
+  "gotty": {
+    "gotty_port_redirection": false,
+    "gotty_bypass_key_prompt": false,
+    "gotty_port": -1,
+    "gotty_start_port": 9000,
+    "gotty_end_port": 9100,
+  },
+  "ldap": {
+    "ldap_server": "",
+    "ldap_userdn": "",
+    "ldap_basedn": "",
+    "ldap_admin_group": "",
+  },
+  "mail": {
+    "mail_server": "smtp.googlemail.com",
+    "mail_port": 587,
+    "mail_use_tls": true,
+    "mail_username": "",
+    "mail_password": "",
+    "mail_sender": "enms@enms.fr",
+    "mail_recipients": "",
+  },
+  "mattermost": {
+    "mattermost_url": "",
+    "mattermost_channel": "",
+    "mattermost_verify_certificate": true,
+  },
+  "log_level": "DEBUG",
+  "paths": {
+    "custom_code_path": "",
+    "custom_services_path": "",
+  },
+  "view": {
+    "default_longitude": -96.0,
+    "default_latitude": 33.0,
+    "default_zoom_level": 5,
+    "default_view": "2D",
+    "default_marker": "Image",
+  },
+
+}

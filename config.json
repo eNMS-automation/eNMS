@@ -1,30 +1,34 @@
 {
+  "app": {
+    "config_mode": "DEBUG",
+    "create_examples": true,
+    "documentation_url": "",
+    "log_level": "DEBUG"
+  },
   "cluster": {
     "active": false,
     "cluster_id": true,
     "cluster_scan_subnet": "192.168.105.0/24",
     "cluster_scan_protocol": "http",
-    "cluster_scan_timeout": 0.05,
+    "cluster_scan_timeout": 0.05
   },
-  "config_mode": "DEBUG",
-  "create_examples": true,
-  "documentation_url": "",
   "git": {
     "automation": "",
-    "configurations": "",
+    "configurations": ""
   },
   "gotty": {
     "gotty_port_redirection": false,
     "gotty_bypass_key_prompt": false,
     "gotty_port": -1,
     "gotty_start_port": 9000,
-    "gotty_end_port": 9100,
+    "gotty_end_port": 9100
   },
   "ldap": {
+    "active": false,
     "ldap_server": "",
     "ldap_userdn": "",
     "ldap_basedn": "",
-    "ldap_admin_group": "",
+    "ldap_admin_group": ""
   },
   "mail": {
     "mail_server": "smtp.googlemail.com",
@@ -33,24 +37,47 @@
     "mail_username": "",
     "mail_password": "",
     "mail_sender": "enms@enms.fr",
-    "mail_recipients": "",
+    "mail_recipients": ""
   },
   "mattermost": {
     "mattermost_url": "",
     "mattermost_channel": "",
-    "mattermost_verify_certificate": true,
+    "mattermost_verify_certificate": true
   },
-  "log_level": "DEBUG",
+  "opennms": {
+    "opennms_login": "",
+    "opennms_devices": "",
+    "opennms_rest_api": ""
+  },
   "paths": {
-    "custom_code_path": "",
-    "custom_services_path": "",
+    "custom_code": "",
+    "custom_services": "",
+    "playbooks": ""
+  },
+  "slack": {
+    "channel": "",
+    "token": ""
+  },
+  "syslog": {
+    "active": false,
+    "address": "0.0.0.0",
+    "port": 514
+  },
+  "tacacs": {
+    "active": false,
+    "address": "",
+    "password": ""
+  },
+  "vault": {
+    "active": false,
+    "address": "",
+    "unseal": false
   },
   "view": {
     "default_longitude": -96.0,
     "default_latitude": 33.0,
     "default_zoom_level": 5,
     "default_view": "2D",
-    "default_marker": "Image",
-  },
-
+    "default_marker": "Image"
+  }
 }

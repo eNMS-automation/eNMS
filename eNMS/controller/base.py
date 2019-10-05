@@ -102,7 +102,6 @@ class BaseController:
     opennms_devices = environ.get("OPENNMS_DEVICES", "")
     opennms_rest_api = environ.get("OPENNMS_REST_API")
     playbook_path = environ.get("PLAYBOOK_PATH")
-    pool_filter = environ.get("POOL_FILTER", "All objects")
     server_addr = environ.get("SERVER_ADDR", "http://SERVER_IP")
     slack_token = environ.get("SLACK_TOKEN")
     slack_channel = environ.get("SLACK_CHANNEL")

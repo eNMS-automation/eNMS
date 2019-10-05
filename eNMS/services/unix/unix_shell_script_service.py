@@ -48,11 +48,11 @@ class UnixShellScriptService(Service):
             f" to run on {device.name} (Netmiko)",
         )
         expect_string = run.sub(run.expect_string, locals())
-        command_list = [
+        command_list = (
             f"echo '{source_code}' > '{script_file_name}'",
             f"bash ./{script_file_name}",
             f"rm -f '{script_file_name}'",
-        ]
+        )
         for command in command_list:
             output = netmiko_connection.send_command(
                 command,
@@ -83,7 +83,7 @@ class UnixShellScriptService(Service):
 
 class UnixShellScriptForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="unix_shell_script_service")
-    enable_mode = BooleanField("Privileged mode (run as root using sudo)")
+    enable_mode = BooleanField("Run as root using sudo")
     source_code = StringField(
         widget=TextArea(),
         render_kw={"rows": 15},

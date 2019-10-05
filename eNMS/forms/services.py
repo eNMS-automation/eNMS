@@ -11,8 +11,9 @@ class NetmikoForm(BaseForm):
     driver = SelectField(choices=app.NETMIKO_DRIVERS)
     use_device_driver = BooleanField(default=True)
     enable_mode = BooleanField(
-        "Privileged mode (run in enable mode or as root)", default=True
+        "Enable mode (run in enable mode or as root)", default=True
     )
+    config_mode = BooleanField("Config mode", default=False)
     fast_cli = BooleanField()
     timeout = IntegerField(default=10)
     delay_factor = FloatField(default=1.0)

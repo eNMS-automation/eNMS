@@ -111,3 +111,7 @@ used to retrieve the configuration.
 
 - - Remove beginning and trailing white space Names (service name ends with space breaks get_results)
 >>> Done.
+
+- Rename privileged_mode -> enable_mode
+
+- Add config mode and honor it when retrieving a cached connection.

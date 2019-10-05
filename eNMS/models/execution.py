@@ -639,13 +639,13 @@ class Run(AbstractBase):
                 if service_value:
                     setattr(connection, property, service_value)
             try:
-                mode = connection.check_enable_mode()
-                if mode and not self.privileged_mode:
-                    connection.exit_enable_mode()
-                elif self.privileged_mode and not mode:
-                    connection.enable()
+                mode = connection.check_config_mode()
+                if mode and not self.config_mode:
+                    connection.exit_config_mode()
+                elif self.config_mode and not mode:
+                    connection.config_mode()
             except Exception as exc:
-                self.log("error", f"Failed to honor the enable mode {exc}")
+                self.log("error", f"Failed to honor the config mode {exc}")
             return connection
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
@@ -660,8 +660,10 @@ class Run(AbstractBase):
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
         )
-        if self.privileged_mode:
+        if self.enable_mode:
             netmiko_connection.enable()
+        if self.config_mode:
+            netmiko_connection.config_mode()
         app.connections_cache["netmiko"][self.parent_runtime][
             device.name
         ] = netmiko_connection

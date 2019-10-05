@@ -16,7 +16,8 @@ class NetmikoConfigurationService(ConnectionService):
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     content = Column(LargeString, default="")
-    privileged_mode = Column(Boolean, default=False)
+    enable_mode = Column(Boolean, default=True)
+    config_mode = Column(Boolean, default=False)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)

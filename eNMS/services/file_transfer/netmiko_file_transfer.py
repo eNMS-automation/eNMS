@@ -16,7 +16,8 @@ class NetmikoFileTransferService(ConnectionService):
     pretty_name = "Netmiko File Transfer"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    privileged_mode = Column(Boolean, default=False)
+    enable_mode = Column(Boolean, default=True)
+    config_mode = Column(Boolean, default=False)
     source_file = Column(SmallString)
     destination_file = Column(SmallString)
     direction = Column(SmallString)

@@ -15,7 +15,8 @@ class NetmikoValidationService(ConnectionService):
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     parent_type = "connection_service"
-    privileged_mode = Column(Boolean, default=False)
+    enable_mode = Column(Boolean, default=True)
+    config_mode = Column(Boolean, default=False)
     command = Column(LargeString, default="")
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)

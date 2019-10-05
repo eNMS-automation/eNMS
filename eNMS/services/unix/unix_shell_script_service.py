@@ -24,7 +24,7 @@ class UnixShellScriptService(Service):
 
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     source_code = Column(LargeString, default="")
-    privileged_mode = Column(Boolean, default=False)
+    enable_mode = Column(Boolean, default=False)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
@@ -83,7 +83,7 @@ class UnixShellScriptService(Service):
 
 class UnixShellScriptForm(ServiceForm, NetmikoForm):
     form_type = HiddenField(default="unix_shell_script_service")
-    privileged_mode = BooleanField("Privileged mode (run as root using sudo)")
+    enable_mode = BooleanField("Privileged mode (run as root using sudo)")
     source_code = StringField(
         widget=TextArea(),
         render_kw={"rows": 15},
@@ -113,7 +113,7 @@ class UnixShellScriptForm(ServiceForm, NetmikoForm):
     strip_command = BooleanField(default=True)
     groups = {
         "Main Parameters": {"commands": ["source_code"], "default": "expanded"},
-        "Netmiko Parameters": NetmikoForm.group,
+        "Netmiko Parameters": [c for c in NetmikoForm.group if c != "config_mode"],
         "Advanced Netmiko Parameters": {
             "commands": [
                 "expect_string",

@@ -14,7 +14,8 @@ class NetmikoPromptsService(ConnectionService):
     pretty_name = "Netmiko Prompts"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
-    privileged_mode = Column(Boolean, default=False)
+    enable_mode = Column(Boolean, default=True)
+    config_mode = Column(Boolean, default=False)
     command = Column(SmallString)
     confirmation1 = Column(LargeString, default="")
     response1 = Column(SmallString)

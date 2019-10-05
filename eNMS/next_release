@@ -108,3 +108,6 @@ used to retrieve the configuration.
 - Add number of times a service is allowed to run in a worlfow + regression test.
 
 - Device "current_configuration" is now just "configuration"
+
+- - Remove beginning and trailing white space Names (service name ends with space breaks get_results)
+>>> Done.

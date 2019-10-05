@@ -7,7 +7,7 @@ from wtforms import HiddenField, StringField
 from eNMS.database.dialect import Column, SmallString
 from eNMS.database.functions import factory
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.services import NetmikoForm
+from eNMS.forms.services import ConnectionForm, NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -87,4 +87,5 @@ class NetmikoBackupForm(ServiceForm, NetmikoForm):
             "default": "expanded",
         },
         "Netmiko Parameters": NetmikoForm.group,
+        "Connection Parameters": ConnectionForm.group,
     }

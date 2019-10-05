@@ -354,6 +354,7 @@ class Run(AbstractBase):
                     getattr(self, "close_connection", False)
                     or self.runtime == self.parent_runtime
                 ):
+                    print("ttt"*100, getattr(self, "close_connection", False), self.runtime == self.parent_runtime)
                     self.close_device_connection(device)
                 self.convert_result(results)
                 self.eval(

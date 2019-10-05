@@ -5,7 +5,7 @@ from wtforms.widgets import TextArea
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import SubstitutionField
-from eNMS.forms.services import NetmikoForm
+from eNMS.forms.services import ConnectionForm, NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
@@ -49,7 +49,7 @@ class NetmikoConfigurationService(ConnectionService):
         return {"success": True, "result": f"configuration OK {config}"}
 
 
-class NetmikoConfigurationForm(ServiceForm, NetmikoForm):
+class NetmikoConfigurationForm(ServiceForm, ConnectionForm, NetmikoForm):
     form_type = HiddenField(default="netmiko_configuration_service")
     content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     commit_configuration = BooleanField()
@@ -68,6 +68,7 @@ class NetmikoConfigurationForm(ServiceForm, NetmikoForm):
             "default": "expanded",
         },
         "Netmiko Parameters": NetmikoForm.group,
+        "Connection Parameters": ConnectionForm.group,
         "Advanced Netmiko Parameters": {
             "commands": ["strip_prompt", "strip_command"],
             "default": "hidden",

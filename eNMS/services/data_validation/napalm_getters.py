@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, SelectMultipleField
 
 from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
-from eNMS.forms.automation import ServiceForm
+from eNMS.forms.automation import ConnectionForm, ServiceForm
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import ConnectionService
 
@@ -35,7 +35,7 @@ class NapalmGettersService(ConnectionService):
         return {"result": result}
 
 
-class NapalmGettersForm(ServiceForm, NapalmForm):
+class NapalmGettersForm(ServiceForm, ConnectionForm, NapalmForm):
     form_type = HiddenField(default="napalm_getters_service")
     getters = SelectMultipleField(
         choices=(
@@ -62,3 +62,11 @@ class NapalmGettersForm(ServiceForm, NapalmForm):
             ("is_alive", "Is alive"),
         )
     )
+    groups = {
+        "Main Parameters": {
+            "commands": ["getters"],
+            "default": "expanded",
+        },
+        "Napalm Parameters": NapalmForm.group,
+        "Connection Parameters": ConnectionForm.group,
+    }

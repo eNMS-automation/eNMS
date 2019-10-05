@@ -78,7 +78,7 @@ class NetmikoBackupService(ConnectionService):
         return {"success": True, "result": f"Command: {command}"}
 
 
-class NetmikoBackupForm(ServiceForm, NetmikoForm):
+class NetmikoBackupForm(ServiceForm, ConnectionForm, NetmikoForm):
     form_type = HiddenField(default="netmiko_backup_service")
     configuration_command = StringField()
     groups = {

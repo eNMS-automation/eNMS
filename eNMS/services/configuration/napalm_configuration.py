@@ -3,7 +3,7 @@ from wtforms import HiddenField, SelectField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
-from eNMS.forms.automation import ServiceForm
+from eNMS.forms.automation import ConnectionForm, ServiceForm
 from eNMS.forms.fields import SubstitutionField
 from eNMS.forms.services import NapalmForm
 from eNMS.models.automation import ConnectionService
@@ -33,7 +33,7 @@ class NapalmConfigurationService(ConnectionService):
         return {"success": True, "result": f"Config push ({config})"}
 
 
-class NapalmConfigurationForm(ServiceForm, NapalmForm):
+class NapalmConfigurationForm(ServiceForm, ConnectionForm, NapalmForm):
     form_type = HiddenField(default="napalm_configuration_service")
     action = SelectField(
         choices=(
@@ -42,3 +42,11 @@ class NapalmConfigurationForm(ServiceForm, NapalmForm):
         )
     )
     content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
+    groups = {
+        "Main Parameters": {
+            "commands": ["action", "content"],
+            "default": "expanded",
+        },
+        "Napalm Parameters": NapalmForm.group,
+        "Connection Parameters": ConnectionForm.group,
+    }

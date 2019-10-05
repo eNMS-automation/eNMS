@@ -116,6 +116,5 @@ used to retrieve the configuration.
 
 - Add config mode and honor it when retrieving a cached connection.
 
-- Netmiko Validation Service:
-* command -> commands
-* 
+- Netmiko Validation Service: allow several commands
+renaming: command -> commands

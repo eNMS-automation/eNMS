@@ -595,7 +595,7 @@
   pools: [Washington]
   positions:
     'Regression Workflow 9: Configurations Backup': [-286, -122]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -698,7 +698,7 @@
   pools: []
   positions:
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-4, -120]
-  privileged_mode: true
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -717,7 +717,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf
+  commands: show vrf
   content_match: test
   content_match_regex: false
   conversion_method: text
@@ -762,7 +762,7 @@
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [441, -112]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
     iteration_devices_workflow: ['414', '-154']
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -821,7 +821,7 @@
   positions:
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 148]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
-  privileged_mode: true
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -840,7 +840,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf
+  commands: show vrf
   content_match: test
   content_match_regex: true
   conversion_method: text
@@ -883,7 +883,7 @@
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-35, 151]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1313,7 +1313,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf
+  commands: show vrf
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1353,7 +1353,7 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-336', '11']
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1373,7 +1373,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show interface {{payload['value']}}
+  commands: show interface {{payload['value']}}
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -1413,7 +1413,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [216, 129]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1433,7 +1433,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show ip route
+  commands: show ip route
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1473,7 +1473,7 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [-334, -183]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: true
@@ -1696,7 +1696,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf
+  commands: show vrf
   content_match: napalm
   content_match_regex: false
   conversion_method: text
@@ -1738,7 +1738,7 @@
     'Regression Workflow 10: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow 5: VRF creation and deletion with Napalm': [340, -110]
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1758,7 +1758,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf
+  commands: show vrf
   content_match: napalm
   content_match_regex: false
   conversion_method: text
@@ -1799,7 +1799,7 @@
   positions:
     'Regression Workflow 5: VRF creation and deletion with Napalm': [-275, 196]
     iteration_devices_workflow: ['245', '32']
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1819,7 +1819,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf
+  commands: show vrf
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1859,7 +1859,7 @@
   pools: []
   positions:
     iteration_devices_workflow: ['-5', '-147']
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1917,7 +1917,7 @@
   pools: []
   positions:
     'Regression Workflow D: Prompts': [22, -74]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   response1: show vrf b
   response2: show vrf c
@@ -1975,7 +1975,7 @@
   pools: []
   positions:
     'Regression Workflow D: Prompts': [350, 108]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   response1: show vrf
   response2: ''
@@ -2092,7 +2092,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf {{get_var("iteration_simple", section="pools")}}
+  commands: show vrf {{get_var("iteration_simple", section="pools")}}
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2132,7 +2132,7 @@
   pools: []
   positions:
     'Regression Workflow 10: get_var, set_var, get_result': [580, -81]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2152,7 +2152,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf test
+  commands: show vrf test
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2192,7 +2192,7 @@
   pools: []
   positions:
     'Regression Workflow 10: get_var, set_var, get_result': [609, 92]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2212,7 +2212,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf {{get_result("Payload editor, with device")["endtime"]}}
+  commands: show vrf {{get_result("Payload editor, with device")["endtime"]}}
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2252,7 +2252,7 @@
   pools: []
   positions:
     'Regression Workflow 10: get_var, set_var, get_result': [-445, 128]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2665,7 +2665,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show version
+  commands: show version
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2706,7 +2706,7 @@
   positions:
     'Regression Workflow C: Advanced multiprocessing': [120, 129]
     'Regression Workflow F: Workflow of Workflows': [678, 52]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2726,7 +2726,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show interface {{payload['value']}}
+  commands: show interface {{payload['value']}}
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2766,7 +2766,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [396, -182]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2786,7 +2786,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show interface {{get_var('non_default_iteration_value_name')}}
+  commands: show interface {{get_var('non_default_iteration_value_name')}}
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2826,7 +2826,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [240, -144]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2846,7 +2846,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show interface {{get_var('iteration_value')}}
+  commands: show interface {{get_var('iteration_value')}}
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2886,7 +2886,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [572, -4]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2906,7 +2906,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show interface {{get_var('iteration_value')}}
+  commands: show interface {{get_var('iteration_value')}}
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2946,7 +2946,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [556, 123]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3413,7 +3413,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show interface {{get_var('iteration_value')}}
+  commands: show interface {{get_var('iteration_value')}}
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3453,7 +3453,7 @@
   pools: []
   positions:
     'Regression Workflow F S2: Access Variables from Parent Workflow': [244, 113]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -4510,7 +4510,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf
+  commands: show vrf
   content_match: NOVRF
   content_match_regex: false
   conversion_method: none
@@ -4550,7 +4550,7 @@
   pools: []
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [250, -172]
-  privileged_mode: false
+  enable_mode: false
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -4570,7 +4570,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show ip int br
+  commands: show ip int br
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4610,7 +4610,7 @@
   pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [-352, 35]
-  privileged_mode: true
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false

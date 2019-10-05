@@ -670,7 +670,7 @@ class Run(AbstractBase):
         return netmiko_connection
 
     def napalm_connection(self, device):
-        connection = self.get_connection("napalm", device)
+        connection = self.get_or_close_connection("napalm", device)
         if connection:
             return connection
         username, password = self.get_credentials(device)
@@ -695,26 +695,31 @@ class Run(AbstractBase):
         ] = napalm_connection
         return napalm_connection
 
+    def get_or_close_connection(self, library, device):
+        connection = self.get_connection(library, device)
+        if library == "napalm":
+            if connection.is_alive():
+                return connection
+            else:
+                self.disconnect(library, device, connection)
+        else:
+            try:
+                device_connection.find_prompt()
+                return device_connection
+            except Exception:
+                self.disconnect(library, device, connection)
+
     def get_connection(self, library, device):
         connections = app.connections_cache[library].get(self.runtime)
         if not connections:
             connections = app.connections_cache[library].get(self.parent_runtime, {})
         if device.name not in connections:
             return
-        device_connection = connections[device.name]
-        if library == "napalm":
-            if device_connection.is_alive():
-                return device_connection
-            else:
-                self.disconnect(library, device, device_connection)
-        else:
-            try:
-                device_connection.find_prompt()
-                return device_connection
-            except Exception:
-                self.disconnect(library, device, device_connection)
+        return connections[device.name]
 
-    def disconnect(self, library, device, connection):
+    def disconnect(self, library, device, connection=None):
+        if not connection:
+            connection = self.get_connection(library, device)
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
             self.log("info", f"Closed {library} Connection to {device}")

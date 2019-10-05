@@ -118,3 +118,6 @@ used to retrieve the configuration.
 
 - Netmiko Validation Service: allow several commands
 renaming: command -> commands
+
+- 2 visual indicator ‘iteration’ - show the iteration variable name in WorkflowBuilder
+>>> Done.

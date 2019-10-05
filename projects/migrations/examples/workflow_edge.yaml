@@ -211,61 +211,36 @@
     Workflow - Test 4, subtype: success, workflow: 'Regression Workflow E: Iteration
     Targets'}
 - {destination: 'Variable Access Subworkflow: Access variable from snippet', label: success,
-  name: 83-success:1->84, source: Start, subtype: success, workflow: 'Subworkflow:
-    Access Variable - Result from parent workflow'}
+  name: 83-success:1->84, source: Start, subtype: success, workflow: 'Regression Workflow
+    F S2: Access Variables from Parent Workflow'}
 - {destination: Modify Payload for Iteration, label: success, name: 74-success:1->26,
-  source: Start, subtype: success, workflow: Workflow_of_workflows}
-- {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: success,
-  name: 74-success:70->83, source: 'Regression Workflow 5: VRF creation and deletion
-    with Napalm', subtype: success, workflow: Workflow_of_workflows}
-- {destination: End, label: success, name: 74-success:83->2, source: 'Subworkflow:
-    Access Variable - Result from parent workflow', subtype: success, workflow: Workflow_of_workflows}
-- {destination: Show version with multiprocessing, label: success, name: 74-success:71->52,
-  source: 'Regression Workflow 3: Napalm getters (postprocessing)', subtype: success,
-  workflow: Workflow_of_workflows}
-- {destination: 'Regression Workflow 5: VRF creation and deletion with Napalm', label: success,
-  name: 74-success:52->70, source: Show version with multiprocessing, subtype: success,
-  workflow: Workflow_of_workflows}
+  source: Start, subtype: success, workflow: 'Regression Workflow F: Workflow of Workflows'}
+- {destination: 'Regression Workflow F S2: Access Variables from Parent Workflow',
+  label: success, name: 74-success:70->83, source: 'Regression Workflow 5: VRF creation
+    and deletion with Napalm', subtype: success, workflow: 'Regression Workflow F:
+    Workflow of Workflows'}
 - {destination: 'Variable Access Subworkflow: Access variables for iteration', label: success,
   name: 83-success:84->85, source: 'Variable Access Subworkflow: Access variable from
-    snippet', subtype: success, workflow: 'Subworkflow: Access Variable - Result from
-    parent workflow'}
+    snippet', subtype: success, workflow: 'Regression Workflow F S2: Access Variables
+    from Parent Workflow'}
 - {destination: End, label: success, name: 85-success:66->2, source: 'Variable Access
-    Subworkflow: Access variables for iteration', subtype: success, workflow: 'Subworkflow:
-    Access Variable - Result from parent workflow'}
+    Subworkflow: Access variables for iteration', subtype: success, workflow: 'Regression
+    Workflow F S2: Access Variables from Parent Workflow'}
 - {destination: Iteration Targets Workflow - Test 4, label: failure, name: 83-failure:56->64,
   source: Iteration Target Workflow - Test 3, subtype: failure, workflow: 'Regression
     Workflow E: Iteration Targets'}
 - {destination: 'Regression Workflow 8: Payload Extraction with Operations', label: success,
   name: 86-success:80->84, source: 'Regression Workflow B: Napalm getters validation',
-  subtype: success, workflow: Subworkflow of Workflow}
+  subtype: success, workflow: 'Regression Workflow F S1: Subworkflow of Workflow'}
 - {destination: End, label: success, name: 86-success:84->2, source: 'Regression Workflow
-    8: Payload Extraction with Operations', subtype: success, workflow: Subworkflow
-    of Workflow}
-- {destination: 'Regression Workflow 3: Napalm getters (postprocessing)', label: success,
-  name: 76-success:86->73, source: Subworkflow of Workflow, subtype: success, workflow: Workflow_of_workflows}
+    8: Payload Extraction with Operations', subtype: success, workflow: 'Regression
+    Workflow F S1: Subworkflow of Workflow'}
 - {destination: 'Regression Workflow 7: Payload Extraction & Validation', label: success,
-  name: 86-success:1->75, source: Start, subtype: success, workflow: Subworkflow of
-    Workflow}
+  name: 86-success:1->75, source: Start, subtype: success, workflow: 'Regression Workflow
+    F S1: Subworkflow of Workflow'}
 - {destination: 'Regression Workflow B: Napalm getters validation', label: success,
   name: 86-success:75->80, source: 'Regression Workflow 7: Payload Extraction & Validation',
-  subtype: success, workflow: Subworkflow of Workflow}
-- {destination: Show version with multiprocessing, label: failure, name: 76-failure:86->52,
-  source: Subworkflow of Workflow, subtype: failure, workflow: Workflow_of_workflows}
-- {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: failure,
-  name: 76-failure:52->85, source: Show version with multiprocessing, subtype: failure,
-  workflow: Workflow_of_workflows}
-- {destination: Show version with multiprocessing, label: prerequisite, name: 76-prerequisite:86->52,
-  source: Subworkflow of Workflow, subtype: prerequisite, workflow: Workflow_of_workflows}
-- {destination: Show version with multiprocessing, label: prerequisite, name: 76-prerequisite:73->52,
-  source: 'Regression Workflow 3: Napalm getters (postprocessing)', subtype: prerequisite,
-  workflow: Workflow_of_workflows}
-- {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: prerequisite,
-  name: 76-prerequisite:52->85, source: Show version with multiprocessing, subtype: prerequisite,
-  workflow: Workflow_of_workflows}
-- {destination: 'Subworkflow: Access Variable - Result from parent workflow', label: prerequisite,
-  name: 76-prerequisite:72->85, source: 'Regression Workflow 5: VRF creation and deletion
-    with Napalm', subtype: prerequisite, workflow: Workflow_of_workflows}
+  subtype: success, workflow: 'Regression Workflow F S1: Subworkflow of Workflow'}
 - {destination: Check VRF (NOVRF) exists, label: success, name: 87-success:1->88,
   source: Start, subtype: success, workflow: 'Regression Workflow 1: Netmiko with
     validation and retries'}
@@ -307,3 +282,16 @@
 - {destination: Push Configurations to Git, label: prerequisite, name: 67-prerequisite:13->7,
   source: Configuration Backup (NAPALM), subtype: prerequisite, workflow: 'Regression
     Workflow 9: Configurations Backup'}
+- {destination: 'Regression Workflow F S1: Subworkflow of Workflow', label: success,
+  name: 71-success:80->81, source: 'Regression Workflow F S2: Access Variables from
+    Parent Workflow', subtype: success, workflow: 'Regression Workflow F: Workflow
+    of Workflows'}
+- {destination: End, label: success, name: 71-success:81->2, source: 'Regression Workflow
+    F S1: Subworkflow of Workflow', subtype: success, workflow: 'Regression Workflow
+    F: Workflow of Workflows'}
+- {destination: Show interfaces with Netmiko, label: success, name: 71-success:25->84,
+  source: Modify Payload for Iteration, subtype: success, workflow: 'Regression Workflow
+    F: Workflow of Workflows'}
+- {destination: 'Regression Workflow 5: VRF creation and deletion with Napalm', label: success,
+  name: 71-success:84->68, source: Show interfaces with Netmiko, subtype: success,
+  workflow: 'Regression Workflow F: Workflow of Workflows'}

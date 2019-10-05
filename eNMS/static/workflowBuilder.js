@@ -7,6 +7,7 @@ createPanel: false
 fCall: false
 normalRun: false
 runLogic: false
+serviceTypes: false
 showLogsPanel: false
 showPanel: false
 showResultsPanel: false
@@ -81,7 +82,6 @@ function displayWorkflow(workflowData) {
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);
   for (const [id, label] of Object.entries(workflow.labels)) {
-    console.log(label);
     drawLabel(id, label);
   }
   graph = new vis.Network(container, { nodes: nodes, edges: edges }, dsoptions);
@@ -250,8 +250,9 @@ function switchToWorkflow(workflowId, arrow) {
   });
 }
 
+// eslint-disable-next-line
 function switchToSubworkflow() {
-  service = nodes.get(graph.getSelectedNodes()[0]);
+  const service = nodes.get(graph.getSelectedNodes()[0]);
   if (service.type != "workflow") {
     alertify.notify("You must select a workflow.", "error", 5);
   } else {
@@ -400,7 +401,7 @@ function formatServiceTitle(service) {
 
 function getServiceLabel(service) {
   if (["Start", "End"].includes(service.name)) return service.name;
-  label =
+  let label =
     service.type == "workflow"
       ? `\n     ${service.name}     \n`
       : `${service.name}\n`;
@@ -537,7 +538,6 @@ $("#current-runtime").on("change", function() {
 });
 
 function savePositions() {
-  console.log(graph.getPositions());
   $.ajax({
     type: "POST",
     url: `/save_positions/${workflow.id}`,
@@ -679,8 +679,8 @@ function displayWorkflowState(result) {
   if (!result.state) {
     $("#progress").hide();
   } else if (result.state.progress) {
-    progressType = result.state.progress.device.total ? "device" : "service";
-    const progress = result.state.progress[progressType];
+    const mode = result.state.progress.device.total ? "device" : "service";
+    const progress = result.state.progress[mode];
     $("#progress").show();
     $("#progress-success").width(
       `${(progress.passed * 100) / progress.total}%`

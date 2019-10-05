@@ -6,7 +6,6 @@ from git import Repo
 from git.exc import GitCommandError
 from json import loads
 from json.decoder import JSONDecodeError
-from multiprocessing import Lock
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
@@ -324,8 +323,7 @@ class Run(AbstractBase):
                 results = []
                 processes = min(len(devices), self.max_processes)
                 process_args = [
-                    (device.id, self.runtime, payload, results)
-                    for device in devices
+                    (device.id, self.runtime, payload, results) for device in devices
                 ]
                 pool = ThreadPool(processes=processes)
                 pool.map(self.get_device_result, process_args)
@@ -362,7 +360,7 @@ class Run(AbstractBase):
                     return results
                 elif i < self.number_of_retries:
                     sleep(self.time_between_retries)
-            except Exception as exc:
+            except Exception:
                 result = (
                     f"Running {self.service.type} '{self.service.name}'"
                     " raised the following exception:\n"

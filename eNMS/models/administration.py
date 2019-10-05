@@ -77,6 +77,8 @@ class Parameters(AbstractBase):
     mattermost_verify_certificate = Column(Boolean, default=False)
     slack_token = Column(SmallString)
     slack_channel = Column(SmallString)
+    use_cluster = Column(Boolean, default=False)
+    use_syslog = Column(Boolean, default=False)
 
     def update(self, **kwargs):
         self.gotty_port_index = -1

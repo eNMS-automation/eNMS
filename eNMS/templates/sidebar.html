@@ -20,7 +20,9 @@
           <ul class="nav child_menu">
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/table/changelog">Changelog</a></li>
+            {% if parameters.use_syslog %}
             <li><a href="/table/syslog">Syslog</a></li>
+            {% endif %}
           </ul>
         </li>
         <li id="Admin">
@@ -31,7 +33,9 @@
           ></a>
           <ul class="nav child_menu">
             <li><a href="/table/user">User Management</a></li>
+            {% if parameters.use_syslog %}
             <li><a href="/table/server">Server Management</a></li>
+            {% endif %}
             <li><a href="/administration">Administration</a></li>
           </ul>
         </li>
@@ -90,7 +94,9 @@
           <ul class="nav child_menu">
             <li><a href="/table/task">Task Management</a></li>
             <li><a href="/calendar/task">Task Calendar</a></li>
+            {% if parameters.use_syslog %}
             <li><a href="/table/event">Event Management</a></li>
+            {% endif %}
           </ul>
         </li>
       </ul>

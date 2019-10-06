@@ -187,7 +187,6 @@ class BaseController:
         "query_librenms",
         "query_opennms",
         "reset_status",
-        "restart_workflow",
         "run_service",
         "save_parameters",
         "save_pool_objects",

@@ -639,8 +639,8 @@ function showRestartWorkflowPanel(workflow, service) {
     `Restart Workflow '${workflow.name}' from '${service.name}'`,
     workflow.id,
     function() {
-      $("#start_services").val(service.id);
-      $("#start_services").selectpicker("refresh");
+      $("#start_services").append(new Option(service.name, service.id));
+      $("#start_services").val(service.id).trigger("change");
       workflowRunMode(workflow, true);
     }
   );

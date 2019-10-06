@@ -49,7 +49,10 @@ class Workflow(Service):
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
-        services = list(run.start_services)
+        if "start_services" in run.properties:
+            services = [fetch("service", id=service) for service in run.start_services]
+        else:
+            services = list(run.start_services)
         visited, success = set(), False
         while services:
             if run.stop:

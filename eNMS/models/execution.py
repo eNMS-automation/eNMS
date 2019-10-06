@@ -255,13 +255,6 @@ class Run(AbstractBase):
         try:
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()
-            if self.restart_run and self.service.type == "workflow":
-                old_result = self.restart_run.result()
-                print(old_result.result)
-                if old_result:
-                    payload["variables"] = old_result["result"].get(
-                        "variables", {}
-                    )
             results = self.device_run(payload)
         except Exception:
             result = (
@@ -392,6 +385,10 @@ class Run(AbstractBase):
     def get_results(self, payload, device=None):
         results = {"runtime": app.get_time(), "logs": []}
         try:
+            if self.restart_run and self.service.type == "workflow":
+                old_result = self.restart_run.result(device=device.name)
+                if old_result and "payload" in old_result.result:
+                    payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
                 for target in self.eval(self.service.iteration_values, **locals()):

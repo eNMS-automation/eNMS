@@ -595,7 +595,7 @@
   pools: [Washington]
   positions:
     'Regression Workflow 9: Configurations Backup': [-286, -122]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -762,7 +762,7 @@
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [441, -112]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
     iteration_devices_workflow: ['414', '-154']
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -883,7 +883,7 @@
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-35, 151]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1353,7 +1353,7 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-336', '11']
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1413,7 +1413,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [216, 129]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1473,7 +1473,7 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [-334, -183]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: true
@@ -1738,7 +1738,7 @@
     'Regression Workflow 10: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow 5: VRF creation and deletion with Napalm': [340, -110]
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1799,7 +1799,7 @@
   positions:
     'Regression Workflow 5: VRF creation and deletion with Napalm': [-275, 196]
     iteration_devices_workflow: ['245', '32']
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1859,7 +1859,7 @@
   pools: []
   positions:
     iteration_devices_workflow: ['-5', '-147']
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1917,7 +1917,7 @@
   pools: []
   positions:
     'Regression Workflow D: Prompts': [22, -74]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   response1: show vrf b
   response2: show vrf c
@@ -1975,7 +1975,7 @@
   pools: []
   positions:
     'Regression Workflow D: Prompts': [350, 108]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   response1: show vrf
   response2: ''
@@ -2132,7 +2132,7 @@
   pools: []
   positions:
     'Regression Workflow 10: get_var, set_var, get_result': [580, -81]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2192,7 +2192,7 @@
   pools: []
   positions:
     'Regression Workflow 10: get_var, set_var, get_result': [609, 92]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2252,7 +2252,7 @@
   pools: []
   positions:
     'Regression Workflow 10: get_var, set_var, get_result': [-445, 128]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2706,7 +2706,7 @@
   positions:
     'Regression Workflow C: Advanced multiprocessing': [120, 129]
     'Regression Workflow F: Workflow of Workflows': [678, 52]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2766,7 +2766,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [396, -182]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2826,7 +2826,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [240, -144]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2886,7 +2886,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [572, -4]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2946,7 +2946,7 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [556, 123]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3453,7 +3453,7 @@
   pools: []
   positions:
     'Regression Workflow F S2: Access Variables from Parent Workflow': [244, 113]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -4550,7 +4550,7 @@
   pools: []
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [250, -172]
-  enable_mode: false
+  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false

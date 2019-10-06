@@ -755,8 +755,9 @@ class Run(AbstractBase):
     def transform(self, configuration):
         for i in range(1, 4):
             configuration = sub(
-                getattr(self, f"regX_pattern_{i}"),
-                getattr(self, f"regX_replace_{i}"),
+                getattr(self, f"regex_pattern_{i}"),
+                getattr(self, f"regex_replace_{i}"),
+                configuration,
                 flags=M,
             )
         return configuration

@@ -65,6 +65,15 @@ class Result(AbstractBase):
         self.endtime = kwargs["result"]["endtime"]
         super().__init__(**kwargs)
 
+    @property
+    def table_success(self):
+        btn = 'success' if self.success else 'danger'
+        label = 'Success' if self.success else 'Failure'
+        return (
+            f'<button type="button" class="btn btn-{btn}"'
+            f'style="width:100%">{label}</button>'
+        )
+
     def generate_row(self, table):
         return [
             f"""<button type="button" class="btn btn-info btn-sm"

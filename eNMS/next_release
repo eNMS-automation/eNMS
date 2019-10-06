@@ -121,3 +121,6 @@ renaming: command -> commands
 
 - 2 visual indicator ‘iteration’ - show the iteration variable name in WorkflowBuilder
 >>> Done.
+
+- 2 color code in results: failures in RED in the results browser, success in green.
+>>> Done.

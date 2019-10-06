@@ -63,7 +63,7 @@ class AnsiblePlaybookService(Service):
             result = "\n".join(format_exc().splitlines())
             if password:
                 result = result.replace(password, "*" * 10)
-            results = {"success": False, "results": result}
+            results = {"success": False, "result": result}
             exit_code = search(r"exit status (\d+)", result)
             if exit_code:
                 results["exit_code"] = self.exit_codes[exit_code.group(1)]

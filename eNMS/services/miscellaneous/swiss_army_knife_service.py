@@ -40,7 +40,7 @@ class SwissArmyKnifeService(Service):
             payload["content"],
             recipients=payload["service"]["mail_recipient"],
             filename=f"results-{run.runtime.replace('.', '').replace(':', '')}.txt",
-            file_content=app.str_dict(payload["results"]),
+            file_content=app.str_dict(payload["result"]),
         )
         return {"success": True}
 

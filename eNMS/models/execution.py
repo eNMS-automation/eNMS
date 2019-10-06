@@ -256,9 +256,10 @@ class Run(AbstractBase):
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()
             if self.restart_run and self.service.type == "workflow":
-                global_result = self.restart_run.result()
-                if global_result:
-                    payload["variables"] = global_result.result["results"].get(
+                old_result = self.restart_run.result()
+                print(old_result.result)
+                if old_result:
+                    payload["variables"] = old_result["result"].get(
                         "variables", {}
                     )
             results = self.device_run(payload)
@@ -270,7 +271,7 @@ class Run(AbstractBase):
                 "Run aborted..."
             )
             self.log("error", result)
-            results = {"success": False, "runtime": self.runtime, "results": result}
+            results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             Session.commit()
             self.status = "Aborted" if self.stop else "Completed"
@@ -398,7 +399,7 @@ class Run(AbstractBase):
                     targets_results[target] = self.run_service_job(payload, device)
                 results.update(
                     {
-                        "results": targets_results,
+                        "result": targets_results,
                         "success": all(r["success"] for r in targets_results.values()),
                     }
                 )
@@ -427,17 +428,17 @@ class Run(AbstractBase):
         notification = self.notification_header.splitlines()
         if self.service.type == "workflow":
             return notification
-        elif "devices" in results["results"] and not results["success"]:
+        elif "devices" in results["result"] and not results["success"]:
             failed = "\n".join(
                 device
-                for device, device_results in results["results"]["devices"].items()
+                for device, device_results in results["result"]["devices"].items()
                 if not device_results["success"]
             )
             notification.append(f"FAILED :\n{failed}")
             if not self.display_only_failed_nodes:
                 passed = "\n".join(
                     device
-                    for device, device_results in results["results"]["devices"].items()
+                    for device, device_results in results["result"]["devices"].items()
                     if device_results["success"]
                 )
                 notification.append(f"\n\nPASS :\n{passed}")
@@ -470,7 +471,7 @@ class Run(AbstractBase):
             self.git_push(results)
         notification_payload = {
             "service": self.service.get_properties(),
-            "results": results,
+            "result": results,
             "content": "\n\n".join(notification),
         }
         notification_run = factory(

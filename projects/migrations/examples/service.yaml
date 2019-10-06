@@ -1556,7 +1556,7 @@
   operation3: set
   pools: []
   positions:
-    'Regression Workflow 7: Payload Extraction & Validation': [182, -197]
+    'Regression Workflow 7: Payload Extraction & Validation': [187, -154]
   push_to_git: false
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
@@ -3767,6 +3767,12 @@
       content: "Check that the \"regex_variable\" variable\r\nin the payload contains\
         \ the dictionary\r\n{\"value\":[\"1.1.1.1\",\"2.2.2.2\",\"3.3.3.3\"]}\r\n"
       positions: [743, -198]
+    5f967fcd-956f-4291-ae31-49341469f194:
+      alignment: left
+      content: "After this service, we no longer use the netmiko connection,\r\nso\
+        \ we set \"Close connection\" to true for that service.\r\nCheck that when\
+        \ running the service, the connection is indeed\r\nclosed after that service."
+      positions: [200, -238]
     646ee969-1472-45cb-bd00-0f8aecf18f21:
       alignment: left
       content: "This workflow uses netmiko to run a \"show ip route\", and a \"Payload\
@@ -3777,7 +3783,7 @@
         \n- the right side uses \"get_var\" to extract data from the payload and validate\
         \ it."
       positions: [312, 43]
-  last_modified: '2019-10-02 10:18:35.823378'
+  last_modified: '2019-10-06 21:49:24.245027'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

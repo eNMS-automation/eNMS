@@ -78,14 +78,6 @@ class AdministrationController(BaseController):
             for attr in ("status", "cpu_load")
         }
 
-    def migration_export(self, **kwargs):
-        for cls_name in kwargs["import_export_types"]:
-            path = self.path / "projects" / "migrations" / kwargs["name"]
-            if not exists(path):
-                makedirs(path)
-            with open(path / f"{cls_name}.yaml", "w") as migration_file:
-                yaml.dump(export(cls_name), migration_file)
-
     def objectify(self, model, obj):
         for property, relation in relationships[model].items():
             if property not in obj:
@@ -115,7 +107,9 @@ class AdministrationController(BaseController):
                     workflow_edges = deepcopy(instances)
                     continue
                 for instance in instances:
-                    instance_type = instance.pop("type") if model == "service" else model
+                    instance_type = (
+                        instance.pop("type") if model == "service" else model
+                    )
                     if instance_type == "workflow":
                         workflow_services[instance["name"]] = instance.pop("services")
                     instance = self.objectify(instance_type, instance)
@@ -167,49 +161,30 @@ class AdministrationController(BaseController):
                 Session.commit()
             rmtree(path / "workflows" / workflow_name)
 
+    def migration_export(self, **kwargs):
+        for cls_name in kwargs["import_export_types"]:
+            path = self.path / "projects" / "migrations" / kwargs["name"]
+            if not exists(path):
+                makedirs(path)
+            with open(path / f"{cls_name}.yaml", "w") as migration_file:
+                yaml.dump(export(cls_name), migration_file)
+
     def export_service(self, service_id):
         service = fetch("service", id=service_id)
+        path = self.path / "projects" / "services" / service.filename
+        path.mkdir(parents=True, exist_ok=True)
+        services = [service.to_dict(export=True)] if service.type != "workflow" else service.get_services()
+        for service in services:
+            for relation in ("devices", "pools", "events"):
+                service_as_dict.pop(relation)
+        with open(path / f"services.yaml", "w") as file:
+            yaml.dump(services, file)
         if service.type == "workflow":
-            path = (
-                self.path
-                / "projects"
-                / "exported_services"
-                / "workflows"
-                / service.filename
-            )
-            path.mkdir(parents=True, exist_ok=True)
-            for instance_type in ("services", "workflow", "edges"):
-                Path(path / instance_type).mkdir(parents=True, exist_ok=True)
-            for sub_service in service.services:
-                with open(
-                    path / "services" / f"{sub_service.filename}.yaml", "w"
-                ) as file:
-                    sub_service_as_dict = sub_service.to_dict(export=True)
-                    for relation in ("devices", "pools", "events"):
-                        sub_service_as_dict.pop(relation)
-                    if sub_service.type == "workflow":
-                        sub_service_as_dict["type"] = "workflow"
-                    yaml.dump(sub_service_as_dict, file)
-            for edge in service.edges:
-                name = self.strip_all(f"{edge.workflow}{edge.source}{edge.destination}")
-                with open(path / "edges" / f"{name}.yaml", "w") as file:
-                    edge = {**edge.to_dict(export=True), "type": "workflow_edge"}
-                    yaml.dump(edge, file)
-            with open(path / "workflow" / f"{service.filename}.yaml", "w") as file:
-                service_as_dict = service.to_dict(export=True)
-                for relation in ("devices", "pools", "events"):
-                    service_as_dict.pop(relation)
-                yaml.dump({**service_as_dict, "type": "workflow"}, file)
-            with open_tar(f"{path}.tgz", "w:gz") as tar:
-                tar.add(path, arcname=service.filename)
-            rmtree(path)
-        else:
-            path = self.path / "projects" / "exported_services" / "services"
-            with open(path / f"{service.filename}.yaml", "w") as file:
-                service_as_dict = service.to_dict(export=True)
-                for relation in ("devices", "pools", "events"):
-                    service_as_dict.pop(relation)
-                yaml.dump(service_as_dict, file)
+            with open(path / "edges.yaml", "w") as file:
+                yaml.dump([edge.to_dict(export=True) for edge in service.edges], file)
+        with open_tar(f"{path}.tgz", "w:gz") as tar:
+            tar.add(path, arcname=service.filename)
+        rmtree(path)  
 
     def get_exported_services(self):
         services_path = self.path / "projects" / "exported_services"

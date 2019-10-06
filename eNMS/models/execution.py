@@ -369,7 +369,9 @@ class Run(AbstractBase):
                 self.eval(
                     self.service.result_postprocessing, function="exec", **locals()
                 )
-                if results.get("success", True):
+                if "success" not in results:
+                    results["success"] = True
+                if results["success"] and self.validation_method != "none":
                     self.validate_result(results, payload, device)
                 if results["success"]:
                     return results
@@ -508,14 +510,10 @@ class Run(AbstractBase):
             }
         return result
 
-    def validate_result(self, result, payload, device):
-        if self.validation_method == "none":
-            if "success" not in result:
-                result["success"] = True
-            return result
-        elif self.validation_method == "text":
+    def validate_result(self, results, payload, device):
+        if self.validation_method == "text":
             match = self.sub(self.content_match, locals())
-            str_result = str(result)
+            str_result = str(results["result"])
             if self.delete_spaces_before_matching:
                 match, str_result = map(self.space_deleter, (match, str_result))
             success = (
@@ -526,9 +524,9 @@ class Run(AbstractBase):
             )
         else:
             match = self.sub(self.dict_match, locals())
-            success = self.match_dictionary(result, match)
-        result["success"] = not success if self.negative_logic else success
-        result.update({"match": match, "negative_logic": self.negative_logic})
+            success = self.match_dictionary(results["result"], match)
+        results["success"] = not success if self.negative_logic else success
+        results.update({"match": match, "negative_logic": self.negative_logic})
 
     def match_dictionary(self, result, match, first=True):
         if self.validation_method == "dict_equal":

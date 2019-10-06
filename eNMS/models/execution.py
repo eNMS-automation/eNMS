@@ -611,15 +611,7 @@ class Run(AbstractBase):
         }
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805
-        try:
-            return builtins[function](query, _self.python_code_kwargs(**locals))
-        except Exception as exc:
-            raise Exception(
-                "Variable Substitution Failure."
-                " Check that all variables are defined."
-                " If you are using the 'device' variable, "
-                f"check that the service has targets. ({str(exc)})"
-            )
+        return builtins[function](query, _self.python_code_kwargs(**locals))
 
     def sub(self, input, variables):
         r = compile("{{(.*?)}}")

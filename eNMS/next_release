@@ -124,3 +124,6 @@ renaming: command -> commands
 
 - 2 color code in results: failures in RED in the results browser, success in green.
 >>> Done.
+
+- get_result() gives meaningful error if “service name” not found
+>>> Done.

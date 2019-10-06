@@ -512,11 +512,13 @@ function deleteSelection() {
   graph.getSelectedNodes().map((node) => deleteNode(node));
   graph.getSelectedEdges().map((edge) => deleteEdge(edge));
   graph.deleteSelected();
+  switchMode(currentMode);
 }
 
 function switchMode(mode) {
   currentMode =
     mode || currentMode == "motion" ? $("#edge-type").val() : "motion";
+  console.log(currentMode);
   if (currentMode == "motion") {
     graph.addNodeMode();
     alertify.notify("Mode: node motion.", "success", 5);
@@ -721,6 +723,7 @@ function displayWorkflowState(result) {
     }
     if (result.state.edges) {
       $.each(result.state.edges, (id, devices) => {
+        if (!edges.get(id)) return;
         edges.update({
           id: id,
           label: result.state.progress.device.total

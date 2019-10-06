@@ -99,31 +99,31 @@ class AdministrationController(BaseController):
         return obj
 
     def migration_import(self, **kwargs):
-        status, types = "Import successful.", kwargs["import_export_types"]
+        status, models = "Import successful.", kwargs["import_export_types"]
         if kwargs.get("empty_database_before_import", False):
-            for type in types:
-                delete_all(type)
+            for model in models:
+                delete_all(model)
                 Session.commit()
         workflow_edges, workflow_services = [], {}
-        for cls in types:
+        for model in models:
             path = (
-                self.path / "projects" / "migrations" / kwargs["name"] / f"{cls}.yaml"
+                self.path / "projects" / "migrations" / kwargs["name"] / f"{model}.yaml"
             )
             with open(path, "r") as migration_file:
-                objects = yaml.load(migration_file)
-                if cls == "workflow_edge":
-                    workflow_edges = deepcopy(objects)
-                for obj in objects:
-                    obj_cls = obj.pop("type") if cls == "service" else cls
-                    if obj_cls == "workflow":
-                        workflow_services[obj["name"]] = obj.pop("services")
-                    obj = self.objectify(obj_cls, obj)
+                instances = yaml.load(migration_file)
+                if model == "workflow_edge":
+                    workflow_edges = deepcopy(instances)
+                    continue
+                for instance in instances:
+                    instance_type = instance.pop("type") if model == "service" else model
+                    if instance_type == "workflow":
+                        workflow_services[instance["name"]] = instance.pop("services")
+                    instance = self.objectify(instance_type, instance)
                     try:
-                        factory(obj_cls, **obj)
+                        factory(instance_type, **instance)
                         Session.commit()
                     except Exception as e:
-                        info(f"{str(obj)} could not be imported ({str(e)})")
-
+                        info(f"{str(instance)} could not be imported ({str(e)})")
                         status = "Partial import (see logs)."
         for name, services in workflow_services.items():
             fetch("workflow", name=name).services = [

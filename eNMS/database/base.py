@@ -112,18 +112,6 @@ class AbstractBase(Base):
                 )
         return properties
 
-    @classmethod
-    def visible(cls):
-        if cls.__tablename__ == "pool" and user.pools:
-            return user.pools
-        elif cls.__tablename__ in ("device", "link") and user.pools:
-            objects: set = set()
-            for pool in user.pools:
-                objects |= set(getattr(pool, f"{cls.class_type}s"))
-            return list(objects)
-        else:
-            return Session.query(cls).all()
-
     @property
     def serialized(self):
         return self.to_dict()

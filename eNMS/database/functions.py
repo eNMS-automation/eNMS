@@ -52,7 +52,7 @@ def delete_all(*models):
 
 
 def export(model):
-    return [instance.to_dict(export=True) for instance in models[model].visible()]
+    return [instance.to_dict(export=True) for instance in fetch_all(model)]
 
 
 def factory(cls_name, **kwargs):

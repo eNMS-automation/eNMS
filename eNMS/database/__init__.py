@@ -9,7 +9,11 @@ DATABASE_URL = environ.get(
 )
 DIALECT = DATABASE_URL.split(":")[0]
 
-engine_parameters = {"convert_unicode": True, "pool_pre_ping": True}
+engine_parameters = {
+    "convert_unicode": True,
+    "pool_pre_ping": True,
+    "pool_recycle": 3600,
+}
 
 if DIALECT == "mysql":
     engine_parameters.update(

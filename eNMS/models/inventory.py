@@ -5,7 +5,7 @@ from sqlalchemy.orm import backref, relationship
 
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
-from eNMS.database.functions import fetch, fetch_all, get_relationship_count
+from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
@@ -115,8 +115,10 @@ class Device(CustomDevice):
             match = pool.object_match(self)
             if match and self not in pool.devices:
                 pool.devices.append(self)
+                pool.device_number += 1
             if self in pool.devices and not match:
                 pool.devices.remove(self)
+                pool.device_number -= 1
 
     def generate_row(self, table):
         return [
@@ -304,7 +306,9 @@ class Pool(AbstractPool):
     devices = relationship(
         "Device", secondary=pool_device_table, back_populates="pools"
     )
+    device_number = Column(Integer, default=0)
     links = relationship("Link", secondary=pool_link_table, back_populates="pools")
+    link_number = Column(Integer, default=0)
     latitude = Column(SmallString, default="0.0")
     longitude = Column(SmallString, default="0.0")
     services = relationship(
@@ -363,10 +367,7 @@ class Pool(AbstractPool):
 
     @property
     def object_number(self):
-        return (
-            f"{get_relationship_count(self, 'devices')} devices"
-            f" - {get_relationship_count(self, 'links')} links"
-        )
+        return f"{self.device_number} devices - {self.link_number} links"
 
     def property_match(self, obj, property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")
@@ -394,8 +395,9 @@ class Pool(AbstractPool):
         if self.never_update:
             return
         self.devices = list(filter(self.object_match, fetch_all("device")))
+        self.device_number = len(self.devices)
         self.links = list(filter(self.object_match, fetch_all("link")))
-
+        self.link_number = len(self.links)
 
 class Configuration(AbstractBase):
 

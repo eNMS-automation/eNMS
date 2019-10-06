@@ -30,11 +30,6 @@ def get_query_count(query):
     return query.session.execute(count_query).scalar()
 
 
-def get_relationship_count(obj, relation):
-    related_model = models[relationships[obj.type][relation]["model"]]
-    return Session.query(func.count(related_model.id)).with_parent(obj).scalar()
-
-
 def objectify(model, object_list):
     return [fetch(model, id=object_id) for object_id in object_list]
 

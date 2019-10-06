@@ -399,6 +399,7 @@ class Pool(AbstractPool):
         self.links = list(filter(self.object_match, fetch_all("link")))
         self.link_number = len(self.links)
 
+
 class Configuration(AbstractBase):
 
     __tablename__ = type = "configuration"

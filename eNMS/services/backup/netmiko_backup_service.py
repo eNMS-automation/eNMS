@@ -24,6 +24,12 @@ class NetmikoBackupService(ConnectionService):
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
+    regex_pattern_1 = Column(SmallString)
+    regex_replace_1 = Column(SmallString)
+    regex_pattern_2 = Column(SmallString)
+    regex_replace_2 = Column(SmallString)
+    regex_pattern_3 = Column(SmallString)
+    regex_replace_3 = Column(SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_backup_service"}
 
@@ -44,10 +50,6 @@ class NetmikoBackupService(ConnectionService):
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
             netmiko_connection = run.netmiko_connection(device)
-            try:
-                netmiko_connection.enable()
-            except Exception:
-                pass
             run.log("info", f"Fetching configuration on {device.name} (Netmiko)")
             command = run.configuration_command
             configuration = netmiko_connection.send_command(command)
@@ -80,9 +82,23 @@ class NetmikoBackupService(ConnectionService):
 class NetmikoBackupForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_backup_service")
     configuration_command = StringField()
+    regex_pattern_1 = StringField("First regex to change config results")
+    regex_replace_1 = StringField("Value to replace first regex")
+    regex_pattern_2 = StringField("Second regex to change config results")
+    regex_replace_2 = StringField("Value to replace second regex")
+    regex_pattern_3 = StringField("Third regex to change config results")
+    regex_replace_3 = StringField("Value to replace third regex")
     groups = {
         "Main Parameters": {
-            "commands": ["configuration_command"],
+            "commands": [
+                "configuration_command",
+                "regex_pattern_1",
+                "regex_replace_1",
+                "regex_pattern_2",
+                "regex_replace_2",
+                "regex_pattern_3",
+                "regex_replace_1",
+            ],
             "default": "expanded",
         },
         **NetmikoForm.groups,

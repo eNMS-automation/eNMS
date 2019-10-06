@@ -67,8 +67,8 @@ class Result(AbstractBase):
 
     @property
     def table_success(self):
-        btn = 'success' if self.success else 'danger'
-        label = 'Success' if self.success else 'Failure'
+        btn = "success" if self.success else "danger"
+        label = "Success" if self.success else "Failure"
         return (
             f'<button type="button" class="btn btn-{btn}"'
             f'style="width:100%">{label}</button>'

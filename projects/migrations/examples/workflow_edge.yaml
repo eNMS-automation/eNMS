@@ -87,25 +87,25 @@
   source: Test Netmiko Prompt Service, subtype: failure, workflow: 'Regression Workflow
     D: Prompts'}
 - {destination: Modify payload (no device), label: success, name: 54-success:1->55,
-  source: Start, subtype: success, workflow: 'Regression Workflow 10: get_var, set_var,
+  source: Start, subtype: success, workflow: 'Regression Workflow A: get_var, set_var,
     get_result'}
 - {destination: Modify payload (per device), label: success, name: 54-success:55->56,
   source: Modify payload (no device), subtype: success, workflow: 'Regression Workflow
-    10: get_var, set_var, get_result'}
+    A: get_var, set_var, get_result'}
 - {destination: Show vrf with payload helper, label: success, name: 56-success:41->57,
   source: Modify payload (per device), subtype: success, workflow: 'Regression Workflow
-    10: get_var, set_var, get_result'}
+    A: get_var, set_var, get_result'}
 - {destination: Show vrf with python query, label: failure, name: 56-failure:57->58,
   source: Show vrf with payload helper, subtype: failure, workflow: 'Regression Workflow
-    10: get_var, set_var, get_result'}
+    A: get_var, set_var, get_result'}
 - {destination: 'REST API: call *is_alive* endpoint', label: success, name: 57-success:42->20,
   source: Show vrf with python query, subtype: success, workflow: 'Regression Workflow
-    10: get_var, set_var, get_result'}
+    A: get_var, set_var, get_result'}
 - {destination: show runtime with get_result helper, label: success, name: 55-success:20->56,
   source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression
-    Workflow 10: get_var, set_var, get_result'}
+    Workflow A: get_var, set_var, get_result'}
 - {destination: End, label: success, name: 55-success:56->2, source: show runtime
-    with get_result helper, subtype: success, workflow: 'Regression Workflow 10: get_var,
+    with get_result helper, subtype: success, workflow: 'Regression Workflow A: get_var,
     set_var, get_result'}
 - {destination: 'Getters Workflow: is alive', label: success, name: 57-success:1->58,
   source: Start, subtype: success, workflow: 'Regression Workflow B: Napalm getters

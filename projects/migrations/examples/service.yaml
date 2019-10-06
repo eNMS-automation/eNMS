@@ -31,7 +31,6 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
-    'Regression Workflow 10: get_var, set_var, get_result': [-644, -159]
     'Regression Workflow 1: Netmiko with validation and retries': [0, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [-404, 13]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
@@ -41,6 +40,7 @@
     'Regression Workflow 7: Payload Extraction & Validation': [-115, -305]
     'Regression Workflow 8: Payload Extraction with Operations': [-661, -226]
     'Regression Workflow 9: Configurations Backup': [-621, 123]
+    'Regression Workflow A: get_var, set_var, get_result': [-644, -159]
     'Regression Workflow B: Napalm getters validation': [-604, 9]
     'Regression Workflow C: Advanced multiprocessing': [-407, 115]
     'Regression Workflow D: Prompts': [-279, -158]
@@ -96,7 +96,6 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-9', '294']
-    'Regression Workflow 10: get_var, set_var, get_result': [-706, -83]
     'Regression Workflow 1: Netmiko with validation and retries': [500, 0]
     'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
     'Regression Workflow 3: Napalm getters (postprocessing)': [778, 230]
@@ -106,6 +105,7 @@
     'Regression Workflow 7: Payload Extraction & Validation': [454, 245]
     'Regression Workflow 8: Payload Extraction with Operations': [-688, -153]
     'Regression Workflow 9: Configurations Backup': [475, 102]
+    'Regression Workflow A: get_var, set_var, get_result': [-706, -83]
     'Regression Workflow B: Napalm getters validation': [-600, 63]
     'Regression Workflow C: Advanced multiprocessing': [716, -36]
     'Regression Workflow D: Prompts': [634, 187]
@@ -559,6 +559,7 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
+  config_mode: false
   configuration_command: show running-config
   content_match: ''
   content_match_regex: false
@@ -572,6 +573,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   fast_cli: false
   global_delay_factor: 1.0
@@ -595,8 +597,13 @@
   pools: [Washington]
   positions:
     'Regression Workflow 9: Configurations Backup': [-286, -122]
-  enable_mode: true
   push_to_git: false
+  regex_pattern_1: ''
+  regex_pattern_2: ''
+  regex_pattern_3: ''
+  regex_replace_1: ''
+  regex_replace_2: ''
+  regex_replace_3: ''
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -645,6 +652,12 @@
   positions:
     'Regression Workflow 9: Configurations Backup': [-251, 295]
   push_to_git: false
+  regex_pattern_1: ''
+  regex_pattern_2: ''
+  regex_pattern_3: ''
+  regex_replace_1: ''
+  regex_replace_2: ''
+  regex_replace_3: ''
   result_postprocessing: ''
   send_notification: false
   send_notification_method: mail_feedback_notification
@@ -659,6 +672,7 @@
   waiting_time: 0
 - color: '#D2E5FF'
   commit_configuration: false
+  config_mode: false
   config_mode_command: ''
   content: vrf definition test
   content_match: ''
@@ -674,6 +688,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   exit_config_mode: true
   fast_cli: true
@@ -698,7 +713,6 @@
   pools: []
   positions:
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-4, -120]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -718,6 +732,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf
+  config_mode: false
   content_match: test
   content_match_regex: false
   conversion_method: text
@@ -733,6 +748,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -757,12 +773,11 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['147', '-14']
-    'Regression Workflow 10: get_var, set_var, get_result': ['355', '-25']
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [441, -112]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
+    'Regression Workflow A: get_var, set_var, get_result': ['355', '-25']
     iteration_devices_workflow: ['414', '-154']
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -781,6 +796,7 @@
   waiting_time: 0
 - color: '#D2E5FF'
   commit_configuration: false
+  config_mode: false
   config_mode_command: ''
   content: no vrf definition test
   content_match: ''
@@ -796,6 +812,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   exit_config_mode: true
   fast_cli: true
@@ -821,7 +838,6 @@
   positions:
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 148]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -841,6 +857,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf
+  config_mode: false
   content_match: test
   content_match_regex: true
   conversion_method: text
@@ -856,6 +873,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -883,7 +901,6 @@
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-35, 151]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -988,9 +1005,9 @@
     c: ['1', '2', '3']
   pools: []
   positions:
-    'Regression Workflow 10: get_var, set_var, get_result': [125, 114]
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
+    'Regression Workflow A: get_var, set_var, get_result': [125, 114]
     'Regression Workflow C: Advanced multiprocessing': [391, -27]
     'Regression Workflow D: Prompts': [405, -103]
   push_to_git: false
@@ -1043,9 +1060,9 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 10: get_var, set_var, get_result': ['39', '-32']
     'Regression Workflow 2: Separate Failure - Success paths': [-102, -130]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-154, -70]
+    'Regression Workflow A: get_var, set_var, get_result': ['39', '-32']
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   push_to_git: false
   result_postprocessing: ''
@@ -1314,6 +1331,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1329,6 +1347,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -1353,7 +1372,6 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-336', '11']
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1374,6 +1392,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show interface {{payload['value']}}
+  config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -1389,6 +1408,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -1413,7 +1433,6 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [216, 129]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1434,6 +1453,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show ip route
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1449,6 +1469,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -1473,7 +1494,6 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [-334, -183]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: true
@@ -1697,6 +1717,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf
+  config_mode: false
   content_match: napalm
   content_match_regex: false
   conversion_method: text
@@ -1712,6 +1733,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -1735,10 +1757,9 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 10: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow 5: VRF creation and deletion with Napalm': [340, -110]
+    'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1759,6 +1780,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf
+  config_mode: false
   content_match: napalm
   content_match_regex: false
   conversion_method: text
@@ -1774,6 +1796,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -1799,7 +1822,6 @@
   positions:
     'Regression Workflow 5: VRF creation and deletion with Napalm': [-275, 196]
     iteration_devices_workflow: ['245', '32']
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1820,6 +1842,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -1835,6 +1858,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: false
@@ -1859,7 +1883,6 @@
   pools: []
   positions:
     iteration_devices_workflow: ['-5', '-147']
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -1878,6 +1901,7 @@
   waiting_time: 0
 - color: '#D2E5FF'
   command: show vrf a
+  config_mode: false
   confirmation1: Protocols
   confirmation2: Interfaces
   confirmation3: bipbipbop
@@ -1894,6 +1918,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   fast_cli: false
   global_delay_factor: 1.0
@@ -1917,7 +1942,6 @@
   pools: []
   positions:
     'Regression Workflow D: Prompts': [22, -74]
-  enable_mode: true
   push_to_git: false
   response1: show vrf b
   response2: show vrf c
@@ -1936,6 +1960,7 @@
   waiting_time: 0
 - color: '#D2E5FF'
   command: show vrf
+  config_mode: false
   confirmation1: Protocols
   confirmation2: Interfaces
   confirmation3: ''
@@ -1952,6 +1977,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   fast_cli: false
   global_delay_factor: 1.0
@@ -1975,7 +2001,6 @@
   pools: []
   positions:
     'Regression Workflow D: Prompts': [350, 108]
-  enable_mode: true
   push_to_git: false
   response1: show vrf
   response2: ''
@@ -2024,7 +2049,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 10: get_var, set_var, get_result': [-376, -138]
+    'Regression Workflow A: get_var, set_var, get_result': [-376, -138]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2071,7 +2096,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 10: get_var, set_var, get_result': [0, -144]
+    'Regression Workflow A: get_var, set_var, get_result': [0, -144]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2093,6 +2118,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf {{get_var("iteration_simple", section="pools")}}
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2108,6 +2134,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -2131,8 +2158,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 10: get_var, set_var, get_result': [580, -81]
-  enable_mode: true
+    'Regression Workflow A: get_var, set_var, get_result': [580, -81]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2153,6 +2179,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf test
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2168,6 +2195,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: false
@@ -2191,8 +2219,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 10: get_var, set_var, get_result': [609, 92]
-  enable_mode: true
+    'Regression Workflow A: get_var, set_var, get_result': [609, 92]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2213,6 +2240,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf {{get_result("Payload editor, with device")["endtime"]}}
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2228,6 +2256,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: false
@@ -2251,8 +2280,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 10: get_var, set_var, get_result': [-445, 128]
-  enable_mode: true
+    'Regression Workflow A: get_var, set_var, get_result': [-445, 128]
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2666,6 +2694,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show version
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -2681,6 +2710,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: false
@@ -2706,7 +2736,6 @@
   positions:
     'Regression Workflow C: Advanced multiprocessing': [120, 129]
     'Regression Workflow F: Workflow of Workflows': [678, 52]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2727,6 +2756,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show interface {{payload['value']}}
+  config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2742,6 +2772,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -2766,7 +2797,6 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [396, -182]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2787,6 +2817,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show interface {{get_var('non_default_iteration_value_name')}}
+  config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2802,6 +2833,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -2826,7 +2858,6 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [240, -144]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2847,6 +2878,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show interface {{get_var('iteration_value')}}
+  config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2862,6 +2894,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -2886,7 +2919,6 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [572, -4]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -2907,6 +2939,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show interface {{get_var('iteration_value')}}
+  config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
   conversion_method: text
@@ -2922,6 +2955,7 @@
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: true
@@ -2946,7 +2980,6 @@
   pools: []
   positions:
     'Regression Workflow E: Iteration Targets': [556, 123]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3414,6 +3447,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show interface {{get_var('iteration_value')}}
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3429,6 +3463,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: false
@@ -3453,7 +3488,6 @@
   pools: []
   positions:
     'Regression Workflow F S2: Access Variables from Parent Workflow': [244, 113]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -3470,7 +3504,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3523,7 +3557,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3545,17 +3579,19 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    cdc7d022-53fd-46ec-9601-349d19836f78:
-      alignment: center
-      content: "Test:\r\n- with and without multiprocessing"
-      positions: [-26, -193]
+    e6b81854-aece-42bf-9375-bee035a29425:
+      alignment: left
+      content: "Test:\r\n- with and without multiprocessing\r\n- devices defned as\
+        \ a combination of devices and pools.\r\nThe workflow is running on \"Austin\"\
+        \ as a device and \"Washington\", as a pool."
+      positions: [51, -208]
     f753b933-4fe2-4398-8b3e-5316eaed9abc:
       alignment: left
       content: "This workflow runs on two devices :\r\n- The pool \"Washington\" that\
         \ contains Washington.\r\n- The device \"Austin\".\r\nWashington should reach\
         \ the end and Austin fail at the first step."
       positions: [36, 13]
-  last_modified: '2019-10-01 23:28:33.497328'
+  last_modified: '2019-10-06 20:43:47.140134'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3582,7 +3618,7 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3631,7 +3667,7 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3690,7 +3726,7 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3769,7 +3805,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3829,7 +3865,7 @@
   validation_method: none
   vendor: Arista
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3883,7 +3919,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3936,7 +3972,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -3971,12 +4007,12 @@
         , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
         ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)"
       positions: [103, -224]
-  last_modified: '2019-10-04 00:22:33.595822'
+  last_modified: '2019-10-06 20:43:59.635926'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow 10: get_var, set_var, get_result'
+  name: 'Regression Workflow A: get_var, set_var, get_result'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3998,7 +4034,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -4083,7 +4119,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -4158,7 +4194,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -4222,7 +4258,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -4305,7 +4341,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -4355,7 +4391,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -4404,7 +4440,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -4454,7 +4490,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- close_cached_connection: true
+- close_connection: false
   color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
@@ -4511,6 +4547,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show vrf
+  config_mode: false
   content_match: NOVRF
   content_match_regex: false
   conversion_method: none
@@ -4526,6 +4563,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: false
@@ -4550,7 +4588,6 @@
   pools: []
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [250, -172]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
@@ -4571,6 +4608,7 @@
   close_connection: false
   color: '#D2E5FF'
   commands: show ip int br
+  config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4586,6 +4624,7 @@
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
+  enable_mode: true
   events: []
   expect_string: ''
   fast_cli: false
@@ -4610,7 +4649,6 @@
   pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [-352, 35]
-  enable_mode: true
   push_to_git: false
   result_postprocessing: ''
   send_notification: false

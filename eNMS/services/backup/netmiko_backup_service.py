@@ -1,5 +1,6 @@
 from datetime import datetime
 from pathlib import Path
+from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import HiddenField, StringField
 
@@ -46,7 +47,14 @@ class NetmikoBackupService(ConnectionService):
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             )
-            if run.transform(device.configuration) == run.transform(configuration):
+            for i in range(1, 4):
+                configuration = sub(
+                    getattr(self, f"regex_pattern_{i}"),
+                    getattr(self, f"regex_replace_{i}"),
+                    configuration,
+                    flags=M,
+                )
+            if device.configuration == configuration:
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)
             factory(

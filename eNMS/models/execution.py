@@ -12,7 +12,7 @@ from netmiko import ConnectHandler
 from paramiko import SFTPClient
 from pathlib import Path
 from ruamel import yaml
-from re import compile, M, search, sub
+from re import compile, search
 from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
@@ -751,16 +751,6 @@ class Run(AbstractBase):
             self.log(
                 "error", f"{library} Connection to {device} couldn't be closed ({exc})"
             )
-
-    def transform(self, configuration):
-        for i in range(1, 4):
-            configuration = sub(
-                getattr(self, f"regex_pattern_{i}"),
-                getattr(self, f"regex_replace_{i}"),
-                configuration,
-                flags=M,
-            )
-        return configuration
 
     def generate_yaml_file(self, path, device):
         data = {

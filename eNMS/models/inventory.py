@@ -127,13 +127,13 @@ class Device(CustomDevice):
           <li>
             <button type="button" class="btn btn-info"
             onclick="showDeviceConfiguration({self.row_properties})"
-              ><span class="glyphicon glyphicon-book"></span
+              ><span class="glyphicon glyphicon-cog"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-info"
             onclick="showConfigurationsPanel({self.row_properties})"
-              ><span class="glyphicon glyphicon-adjust"></span
+              ><span class="glyphicon glyphicon-book"></span
             ></button>
           </li>
           <li>
@@ -424,7 +424,7 @@ class Configuration(AbstractBase):
           <li>
             <button type="button" class="btn btn-info"
             onclick="showDeviceConfiguration({self.device.row_properties})"
-              ><span class="glyphicon glyphicon-book"></span
+              ><span class="glyphicon glyphicon-cog"></span
             ></button>
           </li>
           <li>

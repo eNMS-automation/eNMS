@@ -61,21 +61,12 @@ class RestCallService(Service):
             p: run.sub(getattr(self, p), locals())
             for p in ("headers", "params", "timeout")
         }
-        if run.call_type in ("GET", "DELETE"):
-            response = self.request_dict[run.call_type](
-                rest_url,
-                auth=HTTPBasicAuth(self.username, self.password),
-                verify=run.verify_ssl_certificate,
-                **kwargs,
-            )
-        else:
-            response = self.request_dict[run.call_type](
-                rest_url,
-                data=dumps(run.sub(run.payload, locals())),
-                auth=HTTPBasicAuth(self.username, self.password),
-                verify=run.verify_ssl_certificate,
-                **kwargs,
-            )
+        kwargs["verify"] = run.verify_ssl_certificate
+        if self.username:
+            kwargs["auth"] = HTTPBasicAuth(self.username, self.password)
+        if run.call_type in ("POST", "PUT", "PATCH"):
+            kwargs["data"] = dumps(run.sub(run.payload, locals()))
+        response = self.request_dict[run.call_type](rest_url, **kwargs)
         if response.status_code not in range(200, 300):
             result = {
                 "success": False,

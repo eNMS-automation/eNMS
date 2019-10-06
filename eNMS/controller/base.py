@@ -561,8 +561,12 @@ class BaseController:
     def table_filtering(self, table, kwargs):
         model, properties = models[table], table_properties[table]
         operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
-        order_property = getattr(model, properties[int(kwargs["order[0][column]"])])
-        order_function = getattr(order_property, kwargs["order[0][dir]"], None)
+        column_index = int(kwargs["order[0][column]"])
+        if column_index < len(properties):
+            order_property = getattr(model, properties[column_index])
+            order_function = getattr(order_property, kwargs["order[0][dir]"], None)
+        else:
+            order_function = None
         constraints = self.build_filtering_constraints(table, kwargs)
         if table == "result":
             constraints.append(

@@ -11,7 +11,8 @@ from napalm import get_network_driver
 from netmiko import ConnectHandler
 from paramiko import SFTPClient
 from pathlib import Path
-from re import compile, search
+from ruamel import yaml
+from re import compile, M, search, sub
 from scp import SCPClient
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
@@ -750,3 +751,22 @@ class Run(AbstractBase):
             self.log(
                 "error", f"{library} Connection to {device} couldn't be closed ({exc})"
             )
+
+    def transform(self, configuration):
+        for i in range(1, 4):
+            configuration = sub(
+                getattr(self, f"regX_pattern_{i}"),
+                getattr(self, f"regX_replace_{i}"),
+                flags=M,
+            )
+        return configuration
+
+    def generate_yaml_file(self, path, device):
+        data = {
+            "last_failure": device.last_failure,
+            "last_runtime": device.last_runtime,
+            "last_update": device.last_update,
+            "last_status": device.last_status,
+        }
+        with open(path / "data.yml", "w") as file:
+            yaml.dump(data, file, default_flow_style=False)

@@ -2,7 +2,7 @@ from re import search
 from sqlalchemy import func
 
 from eNMS.database import Session
-from eNMS.models import models, relationships
+from eNMS.models import models
 
 
 def fetch(model, allow_none=False, all_matches=False, **kwargs):

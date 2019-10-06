@@ -39,11 +39,14 @@ class NapalmBackupService(ConnectionService):
         with open(path / "data.yml", "w") as file:
             yaml.dump(data, file, default_flow_style=False)
 
-    def compare_configurations(self, configuration):
-        current, new = device.configuration, configuration
-        config = re.sub(self.regX_pattern_1, self.regX_replace_1, config, flags=re.M)
-        config = re.sub(self.regX_pattern_2, self.regX_replace_2, config, flags=re.M)
-        config = re.sub(self.regX_pattern_3, self.regX_replace_3, config, flags=re.M)
+    def transform(self, configuration):
+        for i in range(1, 4):
+            configuration = re.sub(
+                getattr(self, f"regX_pattern_{i}"),
+                getattr(self, f"regX_replace_{i}"),
+                flags=re.M,
+            )
+        return configuration
 
     def job(self, run, payload, device):
         try:
@@ -54,12 +57,11 @@ class NapalmBackupService(ConnectionService):
             napalm_connection = run.napalm_connection(device)
             run.log("info", f"Fetching configuration on {device.name} (Napalm)")
             configuration = app.str_dict(napalm_connection.get_config())
-
             device.last_status = "Success"
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             )
-            if configuration == device.configuration:
+            if self.transform(device.configuration) == self.transform(configuration):
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)
             factory(

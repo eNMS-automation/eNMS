@@ -43,6 +43,15 @@ class NetmikoBackupService(ConnectionService):
         with open(path / "data.yml", "w") as file:
             yaml.dump(data, file, default_flow_style=False)
 
+    def transform(self, configuration):
+        for i in range(1, 4):
+            configuration = re.sub(
+                getattr(self, f"regX_pattern_{i}"),
+                getattr(self, f"regX_replace_{i}"),
+                flags=re.M,
+            )
+        return configuration
+
     def job(self, run, payload, device):
         try:
             device.last_runtime = datetime.now()
@@ -57,7 +66,7 @@ class NetmikoBackupService(ConnectionService):
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             )
-            if configuration == device.configuration:
+            if self.transform(device.configuration) == self.transform(configuration):
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)
             factory(

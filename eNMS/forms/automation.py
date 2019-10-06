@@ -254,6 +254,10 @@ class DisplayForm(BaseForm):
     form_type = HiddenField(default="display")
 
 
+class CompareForm(DisplayForm):
+    form_type = HiddenField(default="compare")
+
+
 class DisplayConfigurationForm(DisplayForm):
     form_type = HiddenField(default="display_configuration")
 

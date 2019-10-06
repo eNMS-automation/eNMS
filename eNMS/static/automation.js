@@ -117,9 +117,10 @@ function showResultsPanel(service, runtime) {
 function compare(type) {
   const v1 = $("input[name=v1]:checked").val();
   const v2 = $("input[name=v2]:checked").val();
+  console.log(v1, v2)
   if (v1 && v2) {
     const cantorId = cantorPairing(parseInt(v1), parseInt(v2));
-    createPanel("display", `Compare ${type}s`, cantorId, () => {
+    createPanel("compare", `Compare ${type}s`, cantorId, () => {
       call(`/compare/${type}/${v1}/${v2}`, (result) => {
         $(`#content-${cantorId}`).append(
           diffview.buildView({

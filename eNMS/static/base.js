@@ -30,6 +30,7 @@ const panelSize = {
   changelog: "700 300",
   changelog_filtering: "700 300",
   cluster: "700 200",
+  compare: "1800 800",
   configuration: "1200 700",
   configuration_filtering: "700 600",
   database_deletion: "700 400",

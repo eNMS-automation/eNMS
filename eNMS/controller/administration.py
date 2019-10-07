@@ -100,7 +100,6 @@ class AdministrationController(BaseController):
         folder_path = self.path / "projects" / folder / kwargs["name"]
         for model in models:
             path = folder_path / f"{model}.yaml"
-            print(path, path.exists())
             if not path.exists():
                 continue
             with open(path, "r") as migration_file:
@@ -116,7 +115,6 @@ class AdministrationController(BaseController):
                         workflow_services[instance["name"]] = instance.pop("services")
                     instance = self.objectify(instance_type, instance)
                     try:
-                        print(instance)
                         factory(instance_type, **instance)
                         Session.commit()
                     except Exception as e:
@@ -160,7 +158,7 @@ class AdministrationController(BaseController):
         path = Path(self.path / "projects" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
         services = (
-            service.get_inner("services") if service.type == "workflow" else [service]
+            service.deep_services if service.type == "workflow" else [service]
         )
         services = [service.to_dict(export=True) for service in services]
         for service_dict in services:
@@ -171,7 +169,7 @@ class AdministrationController(BaseController):
         if service.type == "workflow":
             with open(path / "workflow_edge.yaml", "w") as file:
                 yaml.dump(
-                    [edge.to_dict(export=True) for edge in service.get_inner("edges")],
+                    [edge.to_dict(export=True) for edge in service.deep_edges],
                     file,
                 )
         with open_tar(f"{path}.tgz", "w:gz") as tar:

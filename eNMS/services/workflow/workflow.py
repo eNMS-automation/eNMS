@@ -47,14 +47,17 @@ class Workflow(Service):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    def get_inner(self, obj_type):
-        result = [
-            obj.get_inner(obj_type) if obj.type == "workflow" else [obj]
-            for obj in getattr(self, obj_type)
+    @property
+    def deep_services(self):
+        services = [
+            service.deep_services if service.type == "workflow" else [service]
+            for service in self.services
         ]
-        if instance_type == "services":
-            result.append([self])
-        return sum(result, [])
+        return [self] + sum(services, [])
+
+    @property
+    def deep_edges(self):
+        return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)

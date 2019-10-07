@@ -1,4 +1,4 @@
-- Table performance improved (x200)
+- Performance improvements
 
 - Refactoring of the result window
 
@@ -109,7 +109,7 @@ used to retrieve the configuration.
 
 - Device "current_configuration" is now just "configuration"
 
-- - Remove beginning and trailing white space Names (service name ends with space breaks get_results)
+- Remove beginning and trailing white space Names (service name ends with space breaks get_results)
 >>> Done.
 
 - Rename privileged_mode -> enable_mode
@@ -127,3 +127,6 @@ renaming: command -> commands
 
 - get_result() gives meaningful error if “service name” not found
 >>> Done.
+
+- Refactored job import / export mechanism.
+Now exporting a workflow will export all subworkflows and edges in subworkflows...

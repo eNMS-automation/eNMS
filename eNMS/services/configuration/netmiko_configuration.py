@@ -50,6 +50,7 @@ class NetmikoConfigurationService(ConnectionService):
 
 class NetmikoConfigurationForm(NetmikoForm):
     form_type = HiddenField(default="netmiko_configuration_service")
+    config_mode = BooleanField("Config mode", default=True)
     content = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     commit_configuration = BooleanField()
     exit_config_mode = BooleanField(default=True)

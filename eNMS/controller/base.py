@@ -178,7 +178,7 @@ class BaseController:
         "get_runtimes",
         "get_view_topology",
         "get_workflow_state",
-        "import_services",
+        "import_service",
         "import_topology",
         "migration_export",
         "migration_import",

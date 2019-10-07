@@ -111,12 +111,10 @@ class DatabaseMigrationsForm(BaseForm):
     )
 
 
-class ImportServices(BaseForm):
-    action = "importServices"
-    form_type = HiddenField(default="import_services")
-    services_to_import = NoValidationSelectMultipleField(
-        "Services to import", choices=()
-    )
+class ImportService(BaseForm):
+    action = "importService"
+    form_type = HiddenField(default="import_service")
+    services_to_import = SelectField("Services to import", choices=())
 
 
 @configure_relationships

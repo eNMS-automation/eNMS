@@ -142,17 +142,17 @@ function refreshExportedServices() {
 }
 
 // eslint-disable-next-line
-function showImportServicesPanel() {
-  showPanel("import_services", null, () => {
+function showImportServicePanel() {
+  showPanel("import_service", null, () => {
     refreshExportedServices();
   });
 }
 
 // eslint-disable-next-line
-function importServices() {
-  fCall("/import_services", "#import_services-form", function(result) {
+function importService() {
+  fCall("/import_service", "#import_service-form", function(result) {
     alertify.notify("Import successful.", "success", 5);
-    $("#import_services").remove();
+    $("#import_service").remove();
   });
 }
 

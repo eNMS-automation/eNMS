@@ -131,35 +131,10 @@ class AdministrationController(BaseController):
             Session.commit()
         return status
 
-    def import_services(self, **kwargs):
-        services = kwargs["services_to_import"]
-        path = self.path / "projects" / "exported_services"
-        for file in scandir(path / "services"):
-            if file.name == ".gitkeep" or file.name not in services:
-                continue
-            with open(file.path, "r") as instance_file:
-                instance = yaml.load(instance_file)
-                model = instance.pop("type")
-                factory(model, **self.objectify(model, instance))
-        Session.commit()
-        for workflow in listdir(path / "workflows"):
-            if workflow == ".gitkeep" or workflow not in services:
-                continue
-            workflow_name = workflow.split(".")[0]
-            with open_tar(path / "workflows" / workflow) as tar_file:
-                tar_file.extractall(path=path / "workflows")
-            for instance_type in ("services", "workflow", "edges"):
-                path_service = path / "workflows" / workflow_name / instance_type
-                for file in scandir(path_service):
-                    with open(path_service / file.name, "r") as instance_file:
-                        instance = yaml.load(instance_file)
-                        if instance_type == "workflow":
-                            delete("Workflow", allow_none=True, name=instance["name"])
-                            Session.commit()
-                        model = instance.pop("type")
-                        factory(model, **self.objectify(model, instance))
-                Session.commit()
-            rmtree(path / "workflows" / workflow_name)
+    def import_service(self, service_id):
+        print(service_id)
+        #tar_file.extractall(path=path / "workflows")
+        #rmtree(path / "workflows" / workflow_name)
 
     def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:

@@ -144,7 +144,7 @@ class AdministrationController(BaseController):
                 name=service_name,
                 import_export_types=["service", "workflow_edge"],
             )
-        #rmtree(path / service_name)
+        rmtree(path / service_name)
         return status
 
     def migration_export(self, **kwargs):
@@ -159,7 +159,9 @@ class AdministrationController(BaseController):
         service = fetch("service", id=service_id)
         path = Path(self.path / "projects" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
-        services = service.get_services() if service.type == "workflow" else [service]
+        services = (
+            service.get_inner("services") if service.type == "workflow" else [service]
+        )
         services = [service.to_dict(export=True) for service in services]
         for service_dict in services:
             for relation in ("devices", "pools", "events"):
@@ -168,7 +170,10 @@ class AdministrationController(BaseController):
             yaml.dump(services, file)
         if service.type == "workflow":
             with open(path / "workflow_edge.yaml", "w") as file:
-                yaml.dump([edge.to_dict(export=True) for edge in service.edges], file)
+                yaml.dump(
+                    [edge.to_dict(export=True) for edge in service.get_inner("edges")],
+                    file,
+                )
         with open_tar(f"{path}.tgz", "w:gz") as tar:
             tar.add(path, arcname=service.filename)
         rmtree(path)

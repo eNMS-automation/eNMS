@@ -100,6 +100,9 @@ class AdministrationController(BaseController):
         folder_path = self.path / "projects" / folder / kwargs["name"]
         for model in models:
             path = folder_path / f"{model}.yaml"
+            print(path, path.exists())
+            if not path.exists():
+                continue
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file)
                 if model == "workflow_edge":
@@ -113,6 +116,7 @@ class AdministrationController(BaseController):
                         workflow_services[instance["name"]] = instance.pop("services")
                     instance = self.objectify(instance_type, instance)
                     try:
+                        print(instance)
                         factory(instance_type, **instance)
                         Session.commit()
                     except Exception as e:
@@ -138,9 +142,9 @@ class AdministrationController(BaseController):
             status = self.migration_import(
                 folder="services",
                 name=service_name,
-                import_export_types=["services", "workflow_edge"],
+                import_export_types=["service", "workflow_edge"],
             )
-        rmtree(path / service_name)
+        #rmtree(path / service_name)
         return status
 
     def migration_export(self, **kwargs):
@@ -160,10 +164,10 @@ class AdministrationController(BaseController):
         for service_dict in services:
             for relation in ("devices", "pools", "events"):
                 service_dict.pop(relation)
-        with open(path / f"services.yaml", "w") as file:
+        with open(path / f"service.yaml", "w") as file:
             yaml.dump(services, file)
         if service.type == "workflow":
-            with open(path / "edges.yaml", "w") as file:
+            with open(path / "workflow_edge.yaml", "w") as file:
                 yaml.dump([edge.to_dict(export=True) for edge in service.edges], file)
         with open_tar(f"{path}.tgz", "w:gz") as tar:
             tar.add(path, arcname=service.filename)

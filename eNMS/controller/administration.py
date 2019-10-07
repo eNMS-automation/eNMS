@@ -131,9 +131,11 @@ class AdministrationController(BaseController):
             Session.commit()
         return status
 
-    def import_service(self, service_id):
-        print(service_id)
-        #tar_file.extractall(path=path / "workflows")
+    def import_service(self, service_name):
+        with open_tar(self.path / "projects" / "services" / service_name) as tar_file:
+            tar_file.extractall()
+        print(service_name)
+        
         #rmtree(path / "workflows" / workflow_name)
 
     def migration_export(self, **kwargs):
@@ -163,10 +165,7 @@ class AdministrationController(BaseController):
         rmtree(path)
 
     def get_exported_services(self):
-        services_path = self.path / "projects" / "exported_services"
-        return listdir(services_path / "services") + listdir(
-            services_path / "workflows"
-        )
+        return listdir(self.path / "projects" / "services")
 
     def save_parameters(self, parameter_type, **kwargs):
         self.update_parameters(**kwargs)

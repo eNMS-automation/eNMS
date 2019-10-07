@@ -131,13 +131,13 @@ function migrationsImport() {
 
 function refreshExportedServices() {
   call("/get_exported_services", function(services) {
-    let list = document.getElementById("services_to_import");
+    let list = document.getElementById("service");
     services.forEach((item) => {
       let option = document.createElement("option");
       option.textContent = option.value = item;
       list.appendChild(option);
     });
-    $("#services_to_import").selectpicker("refresh");
+    $("#service").selectpicker("refresh");
   });
 }
 
@@ -150,7 +150,7 @@ function showImportServicePanel() {
 
 // eslint-disable-next-line
 function importService() {
-  fCall("/import_service", "#import_service-form", function(result) {
+  call(`/import_service/${$("#service").val()}`, function(result) {
     alertify.notify("Import successful.", "success", 5);
     $("#import_service").remove();
   });

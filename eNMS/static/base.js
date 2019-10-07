@@ -85,7 +85,7 @@ const panelName = {
   device_filtering: "Device Filtering",
   event_filtering: "Event Filtering",
   excel_export: "Export Topology as an Excel file",
-  import_service: "Import Services",
+  import_service: "Import Service",
   server_filtering: "Server Filtering",
   link_filtering: "Link Filtering",
   changelog_filtering: "Changelog Filtering",

@@ -47,6 +47,15 @@ class Workflow(Service):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
+    def get_services(self):
+        return [self] + sum(
+            [
+                service.get_services() if service.type == "workflow" else [service]
+                for service in self.services
+            ],
+            [],
+        )
+
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
         if "start_services" in run.properties:

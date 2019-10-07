@@ -171,12 +171,13 @@ class AdministrationController(BaseController):
 
     def export_service(self, service_id):
         service = fetch("service", id=service_id)
-        path = self.path / "projects" / "services" / service.filename
+        path = Path(self.path / "projects" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
-        services = [service.to_dict(export=True)] if service.type != "workflow" else service.get_services()
-        for service in services:
+        services = service.get_services() if service.type == "workflow" else [service]
+        services = [service.to_dict(export=True) for service in services]
+        for service_dict in services:
             for relation in ("devices", "pools", "events"):
-                service_as_dict.pop(relation)
+                service_dict.pop(relation)
         with open(path / f"services.yaml", "w") as file:
             yaml.dump(services, file)
         if service.type == "workflow":
@@ -184,7 +185,7 @@ class AdministrationController(BaseController):
                 yaml.dump([edge.to_dict(export=True) for edge in service.edges], file)
         with open_tar(f"{path}.tgz", "w:gz") as tar:
             tar.add(path, arcname=service.filename)
-        rmtree(path)  
+        rmtree(path)
 
     def get_exported_services(self):
         services_path = self.path / "projects" / "exported_services"

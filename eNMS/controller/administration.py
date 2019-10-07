@@ -90,17 +90,16 @@ class AdministrationController(BaseController):
                 obj[property] = fetch(relation["model"], name=obj[property]).id
         return obj
 
-    def migration_import(self, **kwargs):
+    def migration_import(self, folder="migrations", **kwargs):
         status, models = "Import successful.", kwargs["import_export_types"]
         if kwargs.get("empty_database_before_import", False):
             for model in models:
                 delete_all(model)
                 Session.commit()
         workflow_edges, workflow_services = [], {}
+        folder_path = self.path / "projects" / folder / kwargs["name"]
         for model in models:
-            path = (
-                self.path / "projects" / "migrations" / kwargs["name"] / f"{model}.yaml"
-            )
+            path = folder_path / f"{model}.yaml"
             with open(path, "r") as migration_file:
                 instances = yaml.load(migration_file)
                 if model == "workflow_edge":
@@ -131,12 +130,18 @@ class AdministrationController(BaseController):
             Session.commit()
         return status
 
-    def import_service(self, service_name):
-        with open_tar(self.path / "projects" / "services" / service_name) as tar_file:
-            tar_file.extractall()
-        print(service_name)
-        
-        #rmtree(path / "workflows" / workflow_name)
+    def import_service(self, archive):
+        service_name = archive.split(".")[0]
+        path = self.path / "projects" / "services"
+        with open_tar(path / archive) as tar_file:
+            tar_file.extractall(path=path)
+            status = self.migration_import(
+                folder="services",
+                name=service_name,
+                import_export_types=["services", "workflow_edge"],
+            )
+        rmtree(path / service_name)
+        return status
 
     def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:

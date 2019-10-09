@@ -468,8 +468,9 @@ function drawIterationEdge(service) {
       title += `<b>Iteration Devices</b>: ${service.iteration_devices}<br>`;
     }
     if (service.iteration_values) {
-      title += `<b>Iteration Values</b>: ${service.iteration_values}`;
+      title += `<b>Iteration Values</b>: ${service.iteration_values}<br>`;
     }
+    title += `<b>Iteration Variable Name</b>: ${service.iteration_variable_name}`;
     {
       edges.add({
         id: -service.id,

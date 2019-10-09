@@ -236,7 +236,7 @@ class LogsForm(BaseForm):
     template = "logs"
     form_type = HiddenField(default="logs")
     filter = StringField("Filter")
-    runtime = NoValidationSelectField("Version", choices=())
+    runtime = NoValidationSelectField("Runtime", choices=())
 
 
 class ResultForm(BaseForm):

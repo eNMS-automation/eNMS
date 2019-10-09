@@ -130,3 +130,68 @@ renaming: command -> commands
 
 - Refactored job import / export mechanism.
 Now exporting a workflow will export all subworkflows and edges in subworkflows...
+
+
+
+
+### migration
+
+1) Rename the migration files NAMES: must be LOWERCASE
+
+2) Move all workflows from workflow.yaml in the SERVICE file: service.yaml
+
+2) All types must be lowercase in the code and in the migration files CONTENT
+Service -> service
+Device -> device
+etc
+
+- Service tablenames must be PEP8 compliant (underscore, lowercase) including custom ones:
+ExampleService -> example_service
+DatabaseBackupService -> database_backup_service
+NapalmBackupService -> napalm_backup_service
+NetmikoBackupService -> netmiko_backup_service
+NapalmConfigurationService -> napalm_configuration_service
+NapalmRollbackService -> napalm_rollback_service
+NetmikoConfigurationService -> netmiko_configuration_service
+NapalmGettersService -> napalm_getters_service
+NetmikoPromptsService -> netmiko_prompts_service
+NetmikoValidationService -> netmiko_validation_service
+ConfigureBgpService -> configure_bgp_service
+GenericFileTransferService -> generic_file_transfer_service
+NetmikoFileTransferService -> netmiko_file_transfer_service
+AnsiblePlaybookService -> ansible_playbook_service
+RestCallService -> rest_call_service
+SwissArmyKnifeService -> swiss_army_knife_service
+UpdateInventoryService -> update_inventory_service
+NapalmPingService -> napalm_ping_service
+NapalmTracerouteService -> napalm_traceroute_service
+PingService -> ping_service
+MailNotificationService -> mail_notification_service
+SlackNotificationService -> slack_notification_service
+MattermostNotificationService -> mattermost_notification_service
+UnixCommandService -> unix_command_service
+UnixShellScriptService -> unix_shell_script_service
+PayloadExtractionService -> payload_extraction_service
+PayloadValidationService -> payload_validation_service
+PythonSnippetService -> python_snippet_service
+
+- Renaming Fields:
+python_query -> iteration_devices
+query_property_type -> iteration_devices_property
+skip_python_query -> skip_query
+current_configuration -> configuration
+privileged_mode -> enable_mode
+
+** FOR NETMIKO VALIDATION SERVICE:
+command -> commands
+
+- Renaming of "workflow_device" reference
+workflow_device -> IT DEPENDS
+in the iteration_devices query: device
+in skip_query: device
+otherwise: parent_device (because iteration targets work for a service too)
+
+In the migration file:
+
+- Add pretty names for custom services
+

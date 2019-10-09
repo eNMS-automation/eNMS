@@ -50,7 +50,7 @@ class Service(AbstractBase):
         "Event", secondary=service_event_table, back_populates="services"
     )
     send_notification = Column(Boolean, default=False)
-    send_notification_method = Column(SmallString, default="mail_feedback_notification")
+    send_notification_method = Column(SmallString, default="mail")
     notification_header = Column(LargeString, default="")
     display_only_failed_nodes = Column(Boolean, default=True)
     include_link_in_summary = Column(Boolean, default=True)

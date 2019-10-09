@@ -230,6 +230,7 @@ class Run(AbstractBase):
                 "total": self.service.waiting_time,
                 "left": self.service.waiting_time,
             },
+            "summary": {"passed": [], "failed": []}
         }
         if self.service.type == "workflow":
             state.update({"edges": defaultdict(int), "services": defaultdict(dict)})
@@ -416,6 +417,7 @@ class Run(AbstractBase):
         if device:
             status = "passed" if results["success"] else "failed"
             self.run_state["progress"]["device"][status] += 1
+            self.run_state["summary"][status].append(device.name)
         self.create_result(results, device)
         Session.commit()
         return results["success"]
@@ -426,24 +428,21 @@ class Run(AbstractBase):
         if self.workflow:
             app.run_logs[self.parent_runtime].append(log)
 
-    def run_notification(self, results):
-        notification = self.notification_header.splitlines()
-        if self.service.type == "workflow":
-            return notification
-        elif "devices" in results["result"] and not results["success"]:
-            failed = "\n".join(
-                device
-                for device, device_results in results["result"]["devices"].items()
-                if not device_results["success"]
-            )
-            notification.append(f"FAILED :\n{failed}")
+    def build_notification(self, results):
+        notification = [
+            f"Service: {self.service.name} ({self.service.type})",
+            f"Runtime: {self.runtime}",
+            f'Status: {"PASS" if results["success"] else "FAILED"}',
+        ]
+        notification.append(self.notification_header.splitlines())
+        if self.include_link_in_summary:
+            link = f"Results: {app.server_addr}/view_service_results/{self.id}"
+            notification.append(link)
+        summary = self.state['summary']
+        if not results["success"]:
+            notification.append(f"FAILED :\n{'\n'.join(summary['failed'])}")
             if not self.display_only_failed_nodes:
-                passed = "\n".join(
-                    device
-                    for device, device_results in results["result"]["devices"].items()
-                    if device_results["success"]
-                )
-                notification.append(f"\n\nPASS :\n{passed}")
+                notification.append(f"PASSED :\n{'\n'.join(summary['passed'])}")
         return notification
 
     def git_push(self, results):
@@ -459,16 +458,7 @@ class Run(AbstractBase):
         repo.remotes.origin.push()
 
     def notify(self, results):
-        notification = [
-            f"Service: {self.service.name} ({self.service.type})",
-            f"Runtime: {self.runtime}",
-            f'Status: {"PASS" if results["success"] else "FAILED"}',
-        ]
-        notification.extend(self.run_notification(results))
-        if self.include_link_in_summary:
-            notification.append(
-                f"Results: {app.server_addr}/view_service_results/{self.id}"
-            )
+        notification = self.build_notification(results)
         try:
             if self.send_notification_method == "mail":
                 result = app.send_email(

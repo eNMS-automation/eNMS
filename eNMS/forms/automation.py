@@ -39,9 +39,9 @@ class ServiceForm(BaseForm):
     send_notification_method = SelectField(
         "Notification Method",
         choices=(
-            ("mail_feedback_notification", "Mail"),
-            ("slack_feedback_notification", "Slack"),
-            ("mattermost_feedback_notification", "Mattermost"),
+            ("mail", "Mail"),
+            ("slack", "Slack"),
+            ("mattermost", "Mattermost"),
         ),
     )
     notification_header = StringField(widget=TextArea(), render_kw={"rows": 5})
@@ -103,7 +103,7 @@ class ServiceForm(BaseForm):
         valid_form = super().validate()
         no_recipient_error = (
             self.send_notification.data
-            and self.send_notification_method.data == "mail_feedback_notification"
+            and self.send_notification_method.data == "mail"
             and not self.mail_recipient.data
             and not app.mail_recipients
         )

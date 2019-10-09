@@ -38,11 +38,7 @@ class ServiceForm(BaseForm):
     send_notification = BooleanField("Send a notification")
     send_notification_method = SelectField(
         "Notification Method",
-        choices=(
-            ("mail", "Mail"),
-            ("slack", "Slack"),
-            ("mattermost", "Mattermost"),
-        ),
+        choices=(("mail", "Mail"), ("slack", "Slack"), ("mattermost", "Mattermost")),
     )
     notification_header = StringField(widget=TextArea(), render_kw={"rows": 5})
     include_link_in_summary = BooleanField("Include Result Link in Summary")

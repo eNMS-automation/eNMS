@@ -230,7 +230,7 @@ class Run(AbstractBase):
                 "total": self.service.waiting_time,
                 "left": self.service.waiting_time,
             },
-            "summary": {"passed": [], "failed": []}
+            "summary": {"passed": [], "failed": []},
         }
         if self.service.type == "workflow":
             state.update({"edges": defaultdict(int), "services": defaultdict(dict)})
@@ -434,16 +434,17 @@ class Run(AbstractBase):
             f"Runtime: {self.runtime}",
             f'Status: {"PASS" if results["success"] else "FAILED"}',
         ]
-        notification.append(self.notification_header.splitlines())
+        notification.append(self.notification_header)
         if self.include_link_in_summary:
             link = f"Results: {app.server_addr}/view_service_results/{self.id}"
             notification.append(link)
-        summary = self.state['summary']
+        summary = self.state["summary"]
+        failed, passed = "\n".join(summary["failed"]), "\n".join(summary["passed"])
         if not results["success"]:
-            notification.append(f"FAILED :\n{'\n'.join(summary['failed'])}")
+            notification.append(f"FAILED :\n{failed}")
             if not self.display_only_failed_nodes:
-                notification.append(f"PASSED :\n{'\n'.join(summary['passed'])}")
-        return notification
+                notification.append(f"PASSED :\n{passed}")
+        return "\n\n".join(notification)
 
     def git_push(self, results):
         path_git_folder = Path.cwd() / "git" / "automation"
@@ -459,30 +460,31 @@ class Run(AbstractBase):
 
     def notify(self, results):
         notification = self.build_notification(results)
+        results["notification"] = {"content": notification}
         try:
             if self.send_notification_method == "mail":
                 result = app.send_email(
                     f"{self.name} ({'PASS' if results['success'] else 'FAILED'})",
-                    "\n\n".join(notification),
+                    notification,
                     recipients=self.mail_recipient,
                     filename=f"results-{self.runtime.replace('.', '').replace(':', '')}.txt",
                     file_content=app.str_dict(results),
                 )
             elif self.send_notification_method == "slack":
                 result = SlackClient(app.slack_token).api_call(
-                    "chat.postMessage",
-                    channel=app.slack_channel,
-                    text="\n\n".join(notification),
+                    "chat.postMessage", channel=app.slack_channel, text=notification
                 )
             else:
                 result = post(
                     app.mattermost_url,
                     verify=app.mattermost_verify_certificate,
-                    data=dumps({"channel": app.mattermost_channel, "text": "\n\n".join(notification)}),
+                    data=dumps(
+                        {"channel": app.mattermost_channel, "text": notification}
+                    ),
                 )
-            results["notification"] = {"success": True, "result": result}
+            results["notification"].update({"success": True, "result": result})
         except Exception as exc:
-            results["notification"] = {"success": False, "result": str(exc)}
+            results["notification"].update({"success": False, "result": str(exc)})
         return results
 
     def get_credentials(self, device):

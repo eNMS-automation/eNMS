@@ -270,6 +270,24 @@ function deleteInstance(type, id) {
   });
 }
 
+function createTooltip(id) {
+  console.log($(id).length);
+  jsPanel.tooltip.create({
+    content: "<p style='margin-right: 10px; margin-left: 10px;'>Edit</p>",
+    contentSize: 'auto',
+    connector: true,
+    delay: 600,
+    header: false,
+    position: {
+      my: 'center-bottom',
+      at: 'center-top',
+      of: id
+    },
+    target: id,
+    theme: "info filled",
+  });
+}
+
 // eslint-disable-next-line
 function createPanel(name, title, id, processing, type, duplicate) {
   const panelId = id ? `${name}-${id}` : name;
@@ -753,4 +771,5 @@ $(document).ready(function() {
   configureForm(page);
   doc(page);
   detectUserInactivity();
+  createTooltip("#edit-workflow");
 });

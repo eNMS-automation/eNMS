@@ -278,12 +278,12 @@ class Run(AbstractBase):
             results["endtime"] = self.endtime = app.get_time()
             results["logs"] = app.run_logs.pop(self.runtime)
             if self.parent_runtime == self.runtime:
-                self.state = app.run_db.pop(self.parent_runtime)
+                self.state = results["state"] = app.run_db.pop(self.parent_runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {
                 "run": self.properties,
-                "service": self.service.get_properties(exclude=["positions"]),
+                "service": self.service.get_properties(exclude=["positions"])
             }
             if self.send_notification:
                 results = self.notify(results)

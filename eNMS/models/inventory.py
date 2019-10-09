@@ -339,26 +339,26 @@ class Pool(AbstractPool):
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('pool', '{self.id}')" data-tooltip="Edit"
-              ><span class="glyphicon glyphicon-edit"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
             onclick="showPoolObjectsPanel('{self.id}')" data-tooltip="Pool Objects"
               ><span class="glyphicon glyphicon-wrench"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('pool', '{self.id}', 'duplicate')" data-tooltip="Duplicate"
-              ><span class="glyphicon glyphicon-duplicate"></span
+            onclick="updatePools('{self.id}')" data-tooltip="Update"
+              ><span class="glyphicon glyphicon-refresh"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="updatePools('{self.id}')" data-tooltip="Update"
-              ><span class="glyphicon glyphicon-refresh"></span
+            onclick="showTypePanel('pool', '{self.id}')" data-tooltip="Edit"
+              ><span class="glyphicon glyphicon-edit"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary"
+            onclick="showTypePanel('pool', '{self.id}', 'duplicate')" data-tooltip="Duplicate"
+              ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
@@ -438,6 +438,5 @@ class Configuration(AbstractBase):
             <button type="submit" class="btn btn-primary" data-tooltip="Download">
                 <span class="glyphicon glyphicon-download"></span></button>
             </form>
-
           </li></ul>""",
         ]

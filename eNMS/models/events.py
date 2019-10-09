@@ -46,6 +46,8 @@ class Task(AbstractBase):
         super().update(**kwargs)
         self.creation_time = app.get_time()
         self.aps_job_id = kwargs.get("aps_job_id", self.creation_time)
+        if self.is_active:
+            self.schedule()
 
     def update(self, **kwargs):
         super().update(**kwargs)

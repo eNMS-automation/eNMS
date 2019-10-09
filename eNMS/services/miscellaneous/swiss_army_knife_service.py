@@ -33,34 +33,6 @@ class SwissArmyKnifeService(Service):
     def End(self, *args, **kwargs):  # noqa: N802
         return {"success": True}
 
-    def mail_feedback_notification(self, run, payload):
-        name = payload["service"]["name"]
-        app.send_email(
-            f"{name} ({'PASS' if payload['results']['success'] else 'FAILED'})",
-            payload["content"],
-            recipients=payload["service"]["mail_recipient"],
-            filename=f"results-{run.runtime.replace('.', '').replace(':', '')}.txt",
-            file_content=app.str_dict(payload["result"]),
-        )
-        return {"success": True}
-
-    def slack_feedback_notification(self, run, payload):
-        slack_client = SlackClient(app.slack_token)
-        result = slack_client.api_call(
-            "chat.postMessage",
-            channel=app.slack_channel,
-            text=app.str_dict(payload["content"]),
-        )
-        return {"success": True, "result": str(result)}
-
-    def mattermost_feedback_notification(self, run, payload):
-        post(
-            app.mattermost_url,
-            verify=app.mattermost_verify_certificate,
-            data=dumps({"channel": app.mattermost_channel, "text": payload["content"]}),
-        )
-        return {"success": True}
-
     def cluster_monitoring(self, run, payload):
         protocol = app.cluster_scan_protocol
         for instance in fetch_all("instance"):

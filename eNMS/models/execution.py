@@ -287,8 +287,10 @@ class Run(AbstractBase):
             self.create_result(results)
             self.log("info", f"{self.service.type} {self.service.name}: Finished")
             Session.commit()
-        if not self.workflow and self.send_notification:
+        if self.send_notification:
             self.notify(results)
+        if self.push_to_git:
+            self.git_push(results)
         return results
 
     @staticmethod
@@ -466,21 +468,14 @@ class Run(AbstractBase):
             notification.append(
                 f"Results: {app.server_addr}/view_service_results/{self.id}"
             )
-        if self.push_to_git:
-            self.git_push(results)
-        notification_payload = {
-            "service": self.service.get_properties(),
-            "result": results,
-            "content": "\n\n".join(notification),
-        }
         if self.send_notification_method == "mail":
             name = payload["service"]["name"]
             app.send_email(
-                f"{name} ({'PASS' if payload['results']['success'] else 'FAILED'})",
-                payload["content"],
-                recipients=payload["service"]["mail_recipient"],
-                filename=f"results-{run.runtime.replace('.', '').replace(':', '')}.txt",
-                file_content=app.str_dict(payload["result"]),
+                f"{name} ({'PASS' if results['success'] else 'FAILED'})",
+                "\n\n".join(notification),
+                recipients=self.mail_recipient,
+                filename=f"results-{self.runtime.replace('.', '').replace(':', '')}.txt",
+                file_content=app.str_dict(results),
             )
         )
         elif self.send_notification_method == "slack":
@@ -488,14 +483,14 @@ class Run(AbstractBase):
             result = slack_client.api_call(
                 "chat.postMessage",
                 channel=app.slack_channel,
-                text=app.str_dict(payload["content"]),
+                text="\n\n".join(notification),
             )
             return {"success": True, "result": str(result)}
         else:
             post(
                 app.mattermost_url,
                 verify=app.mattermost_verify_certificate,
-                data=dumps({"channel": app.mattermost_channel, "text": payload["content"]}),
+                data=dumps({"channel": app.mattermost_channel, "text": "\n\n".join(notification)}),
             )
 
     def get_credentials(self, device):

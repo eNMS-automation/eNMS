@@ -78,7 +78,8 @@ class Result(AbstractBase):
     def generate_row(self, table):
         return [
             f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showResult('{self.id}')"></i>Results</a></button>""",
+            onclick="showResult('{self.id}')" data-tooltip="Results">
+            </i>Results</a></button>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",
         ]
@@ -149,12 +150,14 @@ class Run(AbstractBase):
           <li>
             <button type="button" class="btn btn-info"
             onclick="showResultsPanel({self.service.row_properties}, '{self.runtime}')"
+            data-tooltip="Results"
               ><span class="glyphicon glyphicon-list-alt"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-info"
             onclick="showLogsPanel({self.service.row_properties}, '{self.runtime}')"
+            data-tooltip="Logs"
               ><span class="glyphicon glyphicon-list"></span
             ></button>
           </li>

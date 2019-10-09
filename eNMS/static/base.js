@@ -270,14 +270,14 @@ function deleteInstance(type, id) {
   });
 }
 
-function createTooltip(id) {
+function createTooltips() {
   $("[data-tooltip]").each(function() {
     jsPanel.tooltip.create({
       content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
         <b>${$(this).attr("data-tooltip")}</b></p>`,
       contentSize: 'auto',
       connector: true,
-      delay: 600,
+      delay: 800,
       header: false,
       position: {
         my: 'center-bottom',
@@ -550,6 +550,7 @@ function initTable(type, instance, runtime) {
       $(".paginate_button > a").on("focus", function() {
         $(this).blur();
       });
+      createTooltips();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     ajax: {
@@ -773,5 +774,5 @@ $(document).ready(function() {
   configureForm(page);
   doc(page);
   detectUserInactivity();
-  createTooltip("#edit-workflow");
+  createTooltips();
 });

@@ -60,7 +60,7 @@ class Task(AbstractBase):
             <button type="button" class="btn btn-success
             {'disabled' if self.is_active else 'active'}"
             {'disabled' if self.is_active else 'active'}
-            onclick="resumeTask('{self.id}')"
+            onclick="resumeTask('{self.id}')" data-tooltip="Play"
               ><span class="glyphicon glyphicon-play"></span
             ></button>
           </li>
@@ -68,25 +68,25 @@ class Task(AbstractBase):
             <button type="button" class="btn btn-default
             {'active' if self.is_active else 'disabled'}"
             {'active' if self.is_active else 'disabled'}
-            onclick="pauseTask('{self.id}')"
+            onclick="pauseTask('{self.id}')" data-tooltip="Pause"
               ><span class="glyphicon glyphicon-pause"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('task', '{self.id}')"
+            onclick="showTypePanel('task', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
             onclick="showTypePanel('task', '{self.id}', 'duplicate')"
-              ><span class="glyphicon glyphicon-duplicate"></span
-            ></button>
+            data-tooltip="Duplicate">
+            <span class="glyphicon glyphicon-duplicate"></span></button>
           </li>
           <li>
             <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})"
+            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>
@@ -256,19 +256,19 @@ class Event(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('event', '{self.id}')"
+            onclick="showTypePanel('event', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
             onclick="showTypePanel('event', '{self.id}', 'duplicate')"
-              ><span class="glyphicon glyphicon-duplicate"></span
-            ></button>
+            data-tooltip="Duplicate">
+            <span class="glyphicon glyphicon-duplicate"></span></button>
           </li>
           <li>
             <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})"
+            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>

@@ -87,49 +87,51 @@ class Service(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 400px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showResultsPanel({self.row_properties})"
+            onclick="showResultsPanel({self.row_properties})" data-tooltip="Results"
               ><span class="glyphicon glyphicon-list-alt"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showLogsPanel({self.row_properties})"
+            onclick="showLogsPanel({self.row_properties})" data-tooltip="Logs"
               ><span class="glyphicon glyphicon-list"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-success"
-            onclick="normalRun('{self.id}')"
+            onclick="normalRun('{self.id}')" data-tooltip="Run"
               ><span class="glyphicon glyphicon-play"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-success"
             onclick="showTypePanel('{self.type}', '{self.id}', 'run')"
+            data-tooltip="Parametrized Run"
               ><span class="glyphicon glyphicon-play-circle"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('{self.type}', '{self.id}')"
+            onclick="showTypePanel('{self.type}', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
             onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')"
+            data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="exportService('{self.id}')"
+            onclick="exportService('{self.id}')" data-tooltip="Export"
               ><span class="glyphicon glyphicon-download"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})"
+            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>

@@ -271,20 +271,22 @@ function deleteInstance(type, id) {
 }
 
 function createTooltip(id) {
-  console.log($(id).length);
-  jsPanel.tooltip.create({
-    content: "<p style='margin-right: 10px; margin-left: 10px;'>Edit</p>",
-    contentSize: 'auto',
-    connector: true,
-    delay: 600,
-    header: false,
-    position: {
-      my: 'center-bottom',
-      at: 'center-top',
-      of: id
-    },
-    target: id,
-    theme: "info filled",
+  $("[data-tooltip]").each(function() {
+    jsPanel.tooltip.create({
+      content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
+        <b>${$(this).attr("data-tooltip")}</b></p>`,
+      contentSize: 'auto',
+      connector: true,
+      delay: 100,
+      header: false,
+      position: {
+        my: 'center-bottom',
+        at: 'center-top',
+        of: this
+      },
+      target: this,
+      theme: "primary filledlight",
+    });
   });
 }
 

@@ -440,10 +440,10 @@ class Run(AbstractBase):
             notification.append(link)
         summary = self.state["summary"]
         failed, passed = "\n".join(summary["failed"]), "\n".join(summary["passed"])
-        if not results["success"]:
+        if failed:
             notification.append(f"FAILED :\n{failed}")
-            if not self.display_only_failed_nodes:
-                notification.append(f"PASSED :\n{passed}")
+        if not self.display_only_failed_nodes:
+            notification.append(f"PASSED :\n{passed}")
         return "\n\n".join(notification)
 
     def git_push(self, results):

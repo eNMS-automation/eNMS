@@ -284,13 +284,14 @@ class Run(AbstractBase):
                 "run": self.properties,
                 "service": self.service.get_properties(exclude=["positions"]),
             }
+            if self.send_notification:
+                results = self.notify(results)
+            if self.push_to_git:
+                self.git_push(results)
             self.create_result(results)
             self.log("info", f"{self.service.type} {self.service.name}: Finished")
             Session.commit()
-        if self.send_notification:
-            self.notify(results)
-        if self.push_to_git:
-            self.git_push(results)
+
         return results
 
     @staticmethod
@@ -468,30 +469,31 @@ class Run(AbstractBase):
             notification.append(
                 f"Results: {app.server_addr}/view_service_results/{self.id}"
             )
-        if self.send_notification_method == "mail":
-            name = payload["service"]["name"]
-            app.send_email(
-                f"{name} ({'PASS' if results['success'] else 'FAILED'})",
-                "\n\n".join(notification),
-                recipients=self.mail_recipient,
-                filename=f"results-{self.runtime.replace('.', '').replace(':', '')}.txt",
-                file_content=app.str_dict(results),
-            )
-        )
-        elif self.send_notification_method == "slack":
-            slack_client = SlackClient(app.slack_token)
-            result = slack_client.api_call(
-                "chat.postMessage",
-                channel=app.slack_channel,
-                text="\n\n".join(notification),
-            )
-            return {"success": True, "result": str(result)}
-        else:
-            post(
-                app.mattermost_url,
-                verify=app.mattermost_verify_certificate,
-                data=dumps({"channel": app.mattermost_channel, "text": "\n\n".join(notification)}),
-            )
+        try:
+            if self.send_notification_method == "mail":
+                result = app.send_email(
+                    f"{self.name} ({'PASS' if results['success'] else 'FAILED'})",
+                    "\n\n".join(notification),
+                    recipients=self.mail_recipient,
+                    filename=f"results-{self.runtime.replace('.', '').replace(':', '')}.txt",
+                    file_content=app.str_dict(results),
+                )
+            elif self.send_notification_method == "slack":
+                result = SlackClient(app.slack_token).api_call(
+                    "chat.postMessage",
+                    channel=app.slack_channel,
+                    text="\n\n".join(notification),
+                )
+            else:
+                result = post(
+                    app.mattermost_url,
+                    verify=app.mattermost_verify_certificate,
+                    data=dumps({"channel": app.mattermost_channel, "text": "\n\n".join(notification)}),
+                )
+            results["notification"] = {"success": True, "result": result}
+        except Exception as exc:
+            results["notification"] = {"success": False, "result": str(exc)}
+        return results
 
     def get_credentials(self, device):
         return (

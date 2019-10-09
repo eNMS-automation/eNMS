@@ -277,7 +277,7 @@ function createTooltip(id) {
         <b>${$(this).attr("data-tooltip")}</b></p>`,
       contentSize: 'auto',
       connector: true,
-      delay: 100,
+      delay: 600,
       header: false,
       position: {
         my: 'center-bottom',

@@ -509,7 +509,7 @@ function processData(type, id) {
     `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
-      const tableType = type.includes("service") ? "service" : type;
+      const tableType = type.includes("service") || type == "workflow" ? "service" : type;
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (page == "workflow_builder") {

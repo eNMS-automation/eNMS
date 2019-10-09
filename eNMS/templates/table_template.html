@@ -10,7 +10,7 @@
   <button
     class="btn btn-primary"
     onclick="{{ func }}('{{ type }}')"
-    title="Create"
+    data-tooltip="New"
   >
     <span class="glyphicon glyphicon-plus"></span>
   </button>
@@ -18,7 +18,7 @@
   <button
     class="btn btn-primary btn-file"
     onclick="updatePools()"
-    title="Update all pools"
+    data-tooltip="Update all pools"
   >
     <span class="glyphicon glyphicon-flash"></span>
   </button>
@@ -26,14 +26,14 @@
   <button
     class="btn btn-info btn-file"
     onclick="showFilteringPanel('{{ type }}_filtering')"
-    title="Advanced Search"
+    data-tooltip="Advanced Search"
   >
     <span class="glyphicon glyphicon-search"></span>
   </button>
   <button
     class="btn btn-info btn-file"
     onclick="refreshTable('{{ type }}', true)"
-    title="Refresh"
+    data-tooltip="Refresh"
   >
     <span class="glyphicon glyphicon-refresh"></span>
   </button>
@@ -41,7 +41,7 @@
   <button
     class="btn btn-info btn-file"
     onclick="compare('{{ type }}')"
-    title="Compare"
+    data-tooltip="Compare"
   >
     <span class="glyphicon glyphicon-adjust"></span>
   </button>

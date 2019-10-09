@@ -526,6 +526,7 @@ function switchMode(mode) {
     graph.addEdgeMode();
     alertify.notify(`Mode: creation of ${currentMode} edge.`, "success", 5);
   }
+  $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
   $(".dropdown-submenu a.menu-layer")
     .next("ul")
     .toggle();

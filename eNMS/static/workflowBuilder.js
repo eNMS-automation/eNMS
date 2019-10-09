@@ -518,7 +518,6 @@ function deleteSelection() {
 function switchMode(mode) {
   currentMode =
     mode || currentMode == "motion" ? $("#edge-type").val() : "motion";
-  console.log(currentMode);
   if (currentMode == "motion") {
     graph.addNodeMode();
     alertify.notify("Mode: node motion.", "success", 5);
@@ -640,7 +639,9 @@ function showRestartWorkflowPanel(workflow, service) {
     workflow.id,
     function() {
       $("#start_services").append(new Option(service.name, service.id));
-      $("#start_services").val(service.id).trigger("change");
+      $("#start_services")
+        .val(service.id)
+        .trigger("change");
       workflowRunMode(workflow, true);
     }
   );

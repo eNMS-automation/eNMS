@@ -10,7 +10,7 @@ from wtforms import (
 )
 
 from eNMS.forms import BaseForm, configure_relationships
-from eNMS.forms.fields import JsonField, NoValidationSelectMultipleField
+from eNMS.forms.fields import JsonField
 from eNMS.properties.database import import_classes
 
 

@@ -4,7 +4,7 @@ from ipaddress import IPv4Network
 from json import loads
 from logging import info
 from ldap3 import Connection, NTLM, SUBTREE
-from os import listdir, makedirs, scandir
+from os import listdir, makedirs
 from os.path import exists
 from pathlib import Path
 from shutil import rmtree
@@ -14,14 +14,7 @@ from tarfile import open as open_tar
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
-from eNMS.database.functions import (
-    delete,
-    delete_all,
-    export,
-    factory,
-    fetch,
-    fetch_all,
-)
+from eNMS.database.functions import delete_all, export, factory, fetch, fetch_all
 from eNMS.models import relationships
 
 
@@ -157,9 +150,7 @@ class AdministrationController(BaseController):
         service = fetch("service", id=service_id)
         path = Path(self.path / "projects" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
-        services = (
-            service.deep_services if service.type == "workflow" else [service]
-        )
+        services = service.deep_services if service.type == "workflow" else [service]
         services = [service.to_dict(export=True) for service in services]
         for service_dict in services:
             for relation in ("devices", "pools", "events"):
@@ -169,8 +160,7 @@ class AdministrationController(BaseController):
         if service.type == "workflow":
             with open(path / "workflow_edge.yaml", "w") as file:
                 yaml.dump(
-                    [edge.to_dict(export=True) for edge in service.deep_edges],
-                    file,
+                    [edge.to_dict(export=True) for edge in service.deep_edges], file
                 )
         with open_tar(f"{path}.tgz", "w:gz") as tar:
             tar.add(path, arcname=service.filename)

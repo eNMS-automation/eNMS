@@ -127,42 +127,46 @@ class Device(CustomDevice):
           <li>
             <button type="button" class="btn btn-info"
             onclick="showDeviceConfiguration({self.row_properties})"
+            data-tooltip="Configuration"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-info"
             onclick="showConfigurationsPanel({self.row_properties})"
+            data-tooltip="Configuration History"
               ><span class="glyphicon glyphicon-book"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-info"
             onclick="showDeviceResultsPanel({self.row_properties})"
+            data-tooltip="Results"
               ><span class="glyphicon glyphicon-list-alt"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-success"
-            onclick="showPanel('device_connection', '{self.id}')"
+            onclick="showPanel('device_connection', '{self.id}')" data-tooltip="Connection"
               ><span class="glyphicon glyphicon-console"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('device', '{self.id}')"
+            onclick="showTypePanel('device', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
             onclick="showTypePanel('device', '{self.id}', 'duplicate')"
+            data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})"
+            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>
@@ -244,19 +248,19 @@ class Link(Object):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('link', '{self.id}')"
+            onclick="showTypePanel('link', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('link', '{self.id}', 'duplicate')"
+            onclick="showTypePanel('link', '{self.id}', 'duplicate')" data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})"
+            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>
@@ -329,37 +333,37 @@ class Pool(AbstractPool):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showPoolView('{self.id}')"
+            onclick="showPoolView('{self.id}')" data-tooltip="Internal View"
               ><span class="glyphicon glyphicon-eye-open"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('pool', '{self.id}')"
+            onclick="showTypePanel('pool', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showPoolObjectsPanel('{self.id}')"
+            onclick="showPoolObjectsPanel('{self.id}')" data-tooltip="Pool Objects"
               ><span class="glyphicon glyphicon-wrench"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('pool', '{self.id}', 'duplicate')"
+            onclick="showTypePanel('pool', '{self.id}', 'duplicate')" data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="updatePools('{self.id}')"
+            onclick="updatePools('{self.id}')" data-tooltip="Update"
               ><span class="glyphicon glyphicon-refresh"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})"
+            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li></ul>"""
@@ -425,12 +429,13 @@ class Configuration(AbstractBase):
           <li>
             <button type="button" class="btn btn-info"
             onclick="showDeviceConfiguration({self.device.row_properties})"
+            data-tooltip="Configuration"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>
           </li>
           <li>
             <form action="/download_configuration/{self.id}" style="display: inline;">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" data-tooltip="Download">
                 <span class="glyphicon glyphicon-download"></span></button>
             </form>
 

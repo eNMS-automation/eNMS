@@ -251,7 +251,6 @@ class Run(AbstractBase):
 
     def run(self, payload=None):
         self.init_state()
-        self.log("info", f"{self.service.type} {self.service.name}: Starting")
         self.run_state["status"] = "Running"
         if payload is None:
             payload = self.service.initial_payload
@@ -290,7 +289,6 @@ class Run(AbstractBase):
             if self.push_to_git:
                 self.git_push(results)
             self.create_result(results)
-            self.log("info", f"{self.service.type} {self.service.name}: Finished")
             Session.commit()
 
         return results
@@ -359,6 +357,8 @@ class Run(AbstractBase):
         args = (device,) if device else ()
         for i in range(self.number_of_retries + 1):
             try:
+                if i:
+                    self.log("error", f"RETRY n°{i}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
                     getattr(self, "close_connection", False)
@@ -384,11 +384,12 @@ class Run(AbstractBase):
                     f"{chr(10).join(format_exc().splitlines())}\n\n"
                     "Run aborted..."
                 )
-                self.log("error", result)
+                self.log("error", result, device)
                 return {"success": False, "result": result}
         return results
 
     def get_results(self, payload, device=None):
+        self.log("info", "STARTING", device)
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":
@@ -412,7 +413,7 @@ class Run(AbstractBase):
             results.update(
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
-            self.log("error", chr(10).join(format_exc().splitlines()))
+            self.log("error", chr(10).join(format_exc().splitlines()), device)
         results["endtime"] = app.get_time()
         if device:
             status = "passed" if results["success"] else "failed"
@@ -420,13 +421,23 @@ class Run(AbstractBase):
             self.run_state["summary"][status].append(device.name)
         self.create_result(results, device)
         Session.commit()
+        self.log("info", "FINISHED", device)
         return results["success"]
 
-    def log(self, severity, log):
-        log = f"{app.get_time()} - {severity} - {log}"
+    def log(self, severity, content, device=None):
+        log = f"{app.get_time()} - {severity} - {self.service.name}"
+        if device:
+            log += f" - DEVICE {device.name}"
+        log += f" : {content}"
         app.run_logs[self.runtime].append(log)
         if self.workflow:
             app.run_logs[self.parent_runtime].append(log)
+
+    def build_log(self, content, device):
+        log = self.service
+        if device:
+            log += f" - DEVICE {device.name}"
+        return f"{log} : {content}"
 
     def build_notification(self, results):
         notification = [
@@ -744,10 +755,10 @@ class Run(AbstractBase):
     def disconnect(self, library, device, connection):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
-            self.log("info", f"Closed {library} Connection to {device}")
+            self.log("info", f"Closed {library} connection", device)
         except Exception as exc:
             self.log(
-                "error", f"{library} Connection to {device} couldn't be closed ({exc})"
+                "error", f"Error while closing {library} connection ({exc})", device
             )
 
     def generate_yaml_file(self, path, device):

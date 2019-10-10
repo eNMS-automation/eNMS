@@ -286,7 +286,7 @@ class Run(AbstractBase):
                 self.task.is_active = False
             results["properties"] = {
                 "run": self.properties,
-                "service": self.service.get_properties(exclude=["positions"])
+                "service": self.service.get_properties(exclude=["positions"]),
             }
             if self.send_notification:
                 results = self.notify(results)
@@ -478,7 +478,7 @@ class Run(AbstractBase):
         results["notification"] = {"content": notification}
         try:
             if self.send_notification_method == "mail":
-                filename = self.runtime.replace('.', '').replace(':', '')
+                filename = self.runtime.replace(".", "").replace(":", "")
                 result = app.send_email(
                     f"{self.name} ({'PASS' if results['success'] else 'FAILED'})",
                     notification,

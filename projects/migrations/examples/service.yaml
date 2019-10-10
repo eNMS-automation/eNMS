@@ -102,7 +102,7 @@
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-450, 132]
     'Regression Workflow 5: VRF creation and deletion with Napalm': [-623, 83]
     'Regression Workflow 6: Ansible with Validation': [771, -81]
-    'Regression Workflow 7: Payload Extraction & Validation': [454, 245]
+    'Regression Workflow 7: Payload Extraction & Validation': [279, 262]
     'Regression Workflow 8: Payload Extraction with Operations': [-688, -153]
     'Regression Workflow 9: Configurations Backup': [475, 102]
     'Regression Workflow A: get_var, set_var, get_result': [-706, -83]
@@ -1450,7 +1450,7 @@
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
-  close_connection: false
+  close_connection: true
   color: '#D2E5FF'
   commands: show ip route
   config_mode: false
@@ -1465,7 +1465,7 @@
   description: Show IP route
   device_query: ''
   device_query_property: ip_address
-  devices: [Washington]
+  devices: []
   dict_match: {}
   display_only_failed_nodes: true
   driver: arista_eos
@@ -1481,7 +1481,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-24 14:36:46.701951'
+  last_modified: '2019-10-10 13:42:39.673781'
   mail_recipient: antoine.fourmy@gmail.com
   max_processes: 5
   maximum_runs: 1
@@ -1493,7 +1493,7 @@
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 7: Payload Extraction & Validation': [-334, -183]
+    'Regression Workflow 7: Payload Extraction & Validation': [49, -207]
   push_to_git: false
   result_postprocessing: ''
   send_notification: true
@@ -1556,7 +1556,7 @@
   operation3: set
   pools: []
   positions:
-    'Regression Workflow 7: Payload Extraction & Validation': [187, -154]
+    'Regression Workflow 7: Payload Extraction & Validation': [130, -95]
   push_to_git: false
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
@@ -1607,7 +1607,7 @@
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 7: Payload Extraction & Validation': [-267, 12]
+    'Regression Workflow 7: Payload Extraction & Validation': [-345, -11]
   push_to_git: false
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
   result_postprocessing: ''
@@ -1652,7 +1652,7 @@
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 7: Payload Extraction & Validation': [-87, 207]
+    'Regression Workflow 7: Payload Extraction & Validation': [-233, 211]
   push_to_git: false
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   result_postprocessing: ''
@@ -3779,10 +3779,18 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    0593f20c-240e-4846-b37e-c03bd4630516:
+      alignment: left
+      content: "After this service, we no longer use the netmiko connection,\r\nso\
+        \ we set \"Close connection\" to true for that service.\r\nCheck that when\
+        \ running the service, the connection is indeed\r\nclosed after that service.\r\
+        \nThe service is configured with notification enabled, to test service\r\n\
+        notification INSIDE a workflow."
+      positions: [-334, -185]
     20a6a733-4b79-4390-bf2b-ad05dbd6855f:
       alignment: center
       content: "Validate the result with the regex :\r\n(\\d\\.){3}\\d"
-      positions: [-117, 269]
+      positions: [-262, 273]
     3844a73f-340f-4b7a-9893-50c5b79998d9:
       alignment: center
       content: "Check that the \"textfsm_variable\" in the payload\r\ncan be matched\
@@ -3792,19 +3800,13 @@
       alignment: center
       content: "Check that the results contains the dictionary\r\n{\"value\":[\"1.1.1.1\"\
         ,\"2.2.2.2\",\"3.3.3.3\"]}\r\n"
-      positions: [-351, -65]
+      positions: [-352, -84]
     55b1e05d-4d84-4227-8774-65cf7ffd992f:
       alignment: center
       content: "Check that the \"regex_variable\" variable\r\nin the payload contains\
         \ the dictionary\r\n{\"value\":[\"1.1.1.1\",\"2.2.2.2\",\"3.3.3.3\"]}\r\n"
       positions: [743, -198]
-    5f967fcd-956f-4291-ae31-49341469f194:
-      alignment: left
-      content: "After this service, we no longer use the netmiko connection,\r\nso\
-        \ we set \"Close connection\" to true for that service.\r\nCheck that when\
-        \ running the service, the connection is indeed\r\nclosed after that service."
-      positions: [200, -238]
-    646ee969-1472-45cb-bd00-0f8aecf18f21:
+    cf55f702-da90-466f-9ee6-9e207a0b4808:
       alignment: left
       content: "This workflow uses netmiko to run a \"show ip route\", and a \"Payload\
         \ Extraction\" service to\r\nextract data with regular expression and TextFSM.\r\
@@ -3812,9 +3814,12 @@
         \ results of the extraction\r\nservice :\r\n- the left side of the workflow\
         \ uses the \"get_result\" method to retrieve the results and validate them.\r\
         \n- the right side uses \"get_var\" to extract data from the payload and validate\
-        \ it."
-      positions: [312, 43]
-  last_modified: '2019-10-06 21:49:24.245027'
+        \ it.\r\nThis workflow is also used to test the RESTART mechanism. It must\
+        \ be restarted from both\r\nthe left side (validate via result) and the right\
+        \ side (validate via payload) to check that\r\nan older payload / result can\
+        \ be retrieved from the database."
+      positions: [269, 71]
+  last_modified: '2019-10-10 13:53:37.652344'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

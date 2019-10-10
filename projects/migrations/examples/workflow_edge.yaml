@@ -212,10 +212,6 @@
     F S2: Access Variables from Parent Workflow'}
 - {destination: Modify Payload for Iteration, label: success, name: 74-success:1->26,
   source: Start, subtype: success, workflow: 'Regression Workflow F: Workflow of Workflows'}
-- {destination: 'Regression Workflow F S2: Access Variables from Parent Workflow',
-  label: success, name: 74-success:70->83, source: 'Regression Workflow 5: VRF creation
-    and deletion with Napalm', subtype: success, workflow: 'Regression Workflow F:
-    Workflow of Workflows'}
 - {destination: 'Variable Access Subworkflow: Access variables for iteration', label: success,
   name: 83-success:84->85, source: 'Variable Access Subworkflow: Access variable from
     snippet', subtype: success, workflow: 'Regression Workflow F S2: Access Variables
@@ -291,3 +287,9 @@
   workflow: 'Regression Workflow F: Workflow of Workflows'}
 - {destination: Payload Extraction, label: success, name: 70-success:28->29, source: netmiko_show_ip_route,
   subtype: success, workflow: 'Regression Workflow 7: Payload Extraction & Validation'}
+- {destination: 'NAPALM: Get interfaces', label: success, name: 71-success:68->21,
+  source: 'Regression Workflow 5: VRF creation and deletion with Napalm', subtype: success,
+  workflow: 'Regression Workflow F: Workflow of Workflows'}
+- {destination: 'Regression Workflow F S2: Access Variables from Parent Workflow',
+  label: success, name: 71-success:21->80, source: 'NAPALM: Get interfaces', subtype: success,
+  workflow: 'Regression Workflow F: Workflow of Workflows'}

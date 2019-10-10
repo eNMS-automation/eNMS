@@ -57,8 +57,8 @@ class SwissArmyKnifeService(Service):
 
     def process_payload1(self, run, payload, device):
         # we use the name of the device to get the result for that particular device.
-        get_facts = run.get_result("get_facts", device.name)
-        get_interfaces = run.get_result("get_interfaces", device.name)
+        get_facts = run.get_result("NAPALM: Get Facts", device.name)
+        get_interfaces = run.get_result("NAPALM: Get interfaces", device.name)
         uptime_less_than_50000 = get_facts["result"]["get_facts"]["uptime"] < 50000
         mgmg1_is_up = get_interfaces["result"]["get_interfaces"]["Management1"]["is_up"]
         return {

@@ -55,7 +55,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -123,7 +123,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -156,7 +156,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: mail_feedback_notification
+  name: mail
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -166,7 +166,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -209,7 +209,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -252,7 +252,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -295,7 +295,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -339,7 +339,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: true
   skip_query: ''
   time_between_retries: 10
@@ -397,7 +397,7 @@
   regex: ''
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   string1: cisco
@@ -449,7 +449,7 @@
   remote_as: 200
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: true
   skip_query: ''
   time_between_retries: 10
@@ -500,7 +500,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
@@ -550,7 +550,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -606,7 +606,7 @@
   regex_replace_3: ''
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -660,7 +660,7 @@
   regex_replace_3: ''
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: true
   skip_query: ''
   time_between_retries: 10
@@ -716,7 +716,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   strip_command: false
@@ -841,7 +841,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   strip_command: false
@@ -957,7 +957,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1014,7 +1014,7 @@
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1067,7 +1067,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1118,7 +1118,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1169,7 +1169,7 @@
   result_postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\
     \nresults[\"result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1219,7 +1219,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1266,7 +1266,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1313,7 +1313,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   source_code: "# Interfaces 1\r\ntargets = ['Loopback101', 'Loopback15'] if device.name\
@@ -1375,7 +1375,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1436,7 +1436,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1497,7 +1497,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: true
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1563,7 +1563,7 @@
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1612,7 +1612,7 @@
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1657,7 +1657,7 @@
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1703,7 +1703,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1763,7 +1763,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1825,7 +1825,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1886,7 +1886,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1948,7 +1948,7 @@
   response3: ''
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2007,7 +2007,7 @@
   response3: ''
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2053,7 +2053,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
@@ -2100,7 +2100,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
@@ -2162,7 +2162,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2223,7 +2223,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2284,7 +2284,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2337,7 +2337,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2386,7 +2386,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2437,7 +2437,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2486,7 +2486,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2535,7 +2535,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2586,7 +2586,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2634,7 +2634,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2682,7 +2682,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2739,7 +2739,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2800,7 +2800,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2861,7 +2861,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2922,7 +2922,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2983,7 +2983,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -3033,7 +3033,7 @@
   query: get_var("textfsm_variable", device=device.name)[0][1]
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3079,7 +3079,7 @@
   query: get_var("regex_variable", device=device.name)
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3123,7 +3123,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
@@ -3182,7 +3182,7 @@
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3241,7 +3241,7 @@
   query3: get_result("Start")["state"]
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3289,7 +3289,7 @@
   query: get_var("list", device=device.name)
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3334,7 +3334,7 @@
   query: get_var("dict", device=device.name)
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3383,7 +3383,7 @@
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3431,7 +3431,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   source_code: "result = {\r\n \"get_var\": get_var(\"Loopbacks 2\", device=device.name),\r\
@@ -3491,7 +3491,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -3546,7 +3546,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, Push Configurations to Git, Configuration Backup (NAPALM),
     Configuration Backup (Netmiko)]
   skip: false
@@ -3623,7 +3623,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, netmiko_create_vrf_test, netmiko_check_vrf_test, netmiko_delete_vrf_test,
     'Netmiko: Check VRF (test) does not exist']
   skip: false
@@ -3678,7 +3678,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, napalm_create_vrf_test, napalm_rollback, netmiko_check_vrf_napalm,
     netmiko_check_no_vrf_napalm]
   skip: false
@@ -3737,7 +3737,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, 'NAPALM: Get Facts', 'NAPALM: Get interfaces', get_interfaces_ip,
     get_config, process_payload1]
   skip: false
@@ -3821,7 +3821,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, netmiko_show_ip_route, Payload Extraction, 'Payload Workflow:
       Validate dict via results', 'Payload Workflow: Validate text via results', 'Payload
       Workflow: Validate text via payload', 'Payload Workflow: Validate dict via payload']
@@ -3880,7 +3880,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: true
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, 'Regression Workflow 5: VRF creation and deletion with Napalm',
     Modify Payload for Iteration, 'Regression Workflow F S2: Access Variables from
       Parent Workflow', 'Regression Workflow F S1: Subworkflow of Workflow', Show
@@ -3935,7 +3935,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, 'NAPALM: Get Facts', 'REST API: call *is_alive* endpoint',
     'Netmiko: Check VRF (test) does not exist', Example Service (does nothing), 'NAPALM:
       Get interfaces']
@@ -3989,7 +3989,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, Test Netmiko Prompt Service, Test netmiko prompts pass, 'REST
       API: call *is_alive* endpoint']
   skip: false
@@ -4050,7 +4050,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, Modify payload (no device), Modify payload (per device),
     Show vrf with payload helper, Show vrf with python query, 'REST API: call *is_alive*
       endpoint', show runtime with get_result helper]
@@ -4135,7 +4135,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, 'Getters Workflow: is alive', 'Getters Workflow: get facts',
     'Getters Workflow: Interface IP', 'Getters Workflow: MAC address', 'Getters Workflow:
       get facts failed match']
@@ -4210,7 +4210,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, 'Ansible Workflow: Arista show version', 'Ansible Workflow:
       Arista show configuration (regex match)', 'Ansible Workflow: Arista show configuration
       (dict match)']
@@ -4275,7 +4275,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, Example Service (does nothing), Show version with multiprocessing,
     'REST API: call *is_alive* endpoint', napalm_configure_bgp_1]
   skip: false
@@ -4357,7 +4357,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, Modify Payload for Iteration, Iteration Target Workflow -
       Test 2, Iteration Targets Workflow - Test 1, Iteration Target Workflow - Test
       3, Iteration Targets Workflow - Test 4]
@@ -4407,7 +4407,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, 'Getters Workflow: Interface IP', 'Payload Workflow: Add
       initial variables', 'Payload Workflow: Extraction 1', 'Payload Workflow: Extraction
       2', 'Payload Workflow: Validation 1', 'Payload Workflow: Validation 2']
@@ -4457,7 +4457,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, 'Variable Access Subworkflow: Access variable from snippet',
     'Variable Access Subworkflow: Access variables for iteration']
   skip: false
@@ -4506,7 +4506,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, 'Regression Workflow 8: Payload Extraction with Operations',
     'Regression Workflow B: Napalm getters validation', 'Regression Workflow 7: Payload
       Extraction & Validation']
@@ -4561,7 +4561,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   services: [Start, End, Check VRF (NOVRF) exists]
   skip: false
   skip_query: ''
@@ -4619,7 +4619,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -4680,7 +4680,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false

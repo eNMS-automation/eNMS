@@ -191,6 +191,9 @@ in the iteration_devices query: device
 in skip_query: device
 otherwise: parent_device (because iteration targets work for a service too)
 
+- Update the value of the notification method for all services:
+mail_feedback_notification -> mail
+
 In the migration file:
 
 - Add pretty names for custom services

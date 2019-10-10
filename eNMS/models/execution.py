@@ -451,7 +451,7 @@ class Run(AbstractBase):
         if self.include_link_in_summary:
             link = f"Results: {app.server_addr}/view_service_results/{self.id}"
             notification.append(link)
-        summary = self.state["summary"]
+        summary = self.run_state["summary"]
         failed, passed = "\n".join(summary["failed"]), "\n".join(summary["passed"])
         if failed:
             notification.append(f"FAILED :\n{failed}")

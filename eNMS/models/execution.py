@@ -673,7 +673,9 @@ class Run(AbstractBase):
     def netmiko_connection(self, device):
         connection = self.get_or_close_connection("netmiko", device)
         if connection:
+            self.log("info", "Using cached Netmiko connection", device)
             return self.update_netmiko_connection(connection)
+        self.log("info", "Opening new Netmiko connection", device)
         username, password = self.get_credentials(device)
         driver = device.netmiko_driver if self.use_device_driver else self.driver
         netmiko_connection = ConnectHandler(
@@ -699,7 +701,9 @@ class Run(AbstractBase):
     def napalm_connection(self, device):
         connection = self.get_or_close_connection("napalm", device)
         if connection:
+            self.log("info", "Using cached NAPALM connection", device)
             return connection
+        self.log("info", "Opening new NAPALM connection", device)
         username, password = self.get_credentials(device)
         optional_args = self.service.optional_args
         if not optional_args:
@@ -741,11 +745,8 @@ class Run(AbstractBase):
                 self.disconnect(library, device, connection)
 
     def get_connection(self, library, device):
-        self.log("info", f"Opening new {library} connection", device)
-        connections = app.connections_cache[library].get(self.runtime)
-        if not connections:
-            connections = app.connections_cache[library].get(self.parent_runtime, {})
-        return connections.get(device.name)
+        cache = app.connections_cache[library].get(self.parent_runtime)
+        return cache.get(device.name) if cache else None
 
     def close_device_connection(self, device):
         for library in ("netmiko", "napalm"):
@@ -756,6 +757,7 @@ class Run(AbstractBase):
     def disconnect(self, library, device, connection):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
+            app.connections_cache[library][self.parent_runtime].pop(device.name)
             self.log("info", f"Closed {library} connection", device)
         except Exception as exc:
             self.log(

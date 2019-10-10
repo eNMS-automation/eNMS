@@ -774,7 +774,7 @@
   positions:
     Iteration Services Test Workflow: ['147', '-14']
     'Regression Workflow 2: Separate Failure - Success paths': ['84', '-3']
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [441, -112]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [445, -37]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '-50']
     'Regression Workflow A: get_var, set_var, get_result': ['355', '-25']
     iteration_devices_workflow: ['414', '-154']
@@ -836,7 +836,7 @@
   operating_system: eos
   pools: []
   positions:
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 148]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 119]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
   push_to_git: false
   result_postprocessing: ''
@@ -3579,35 +3579,44 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    347284ab-4bd9-4d29-97a9-4f12c248d7ff:
+    6a9299b5-7ec9-40e8-955d-408344e7ea2e:
+      alignment: left
+      content: "This service is configured with \"Close connection\".\r\nIt should\
+        \ use the same connection as in the previous service, then close it.\r\nExpected\
+        \ logs:\r\n- netmiko_check_vrf_test - DEVICE Washington : Using cached Netmiko\
+        \ connection\r\n- netmiko_check_vrf_test - DEVICE Washington : Closed netmiko\
+        \ connection\r\n"
+      positions: [603, -136]
+    735baaec-e1f2-4b17-b402-11d8ae7a0d75:
+      alignment: left
+      content: "This workflow runs on two devices :\r\n- The pool \"Washington\" that\
+        \ contains Washington.\r\n- The device \"Austin\".\r\nWashington should reach\
+        \ the end and Austin fail at the first step.\r\nAt the end of the workflow,\
+        \ the cache connection should be closed.\r\nExpected log:\r\n- Regression\
+        \ Workflow 4: VRF creation and deletion with Netmiko - DEVICE Washington :\
+        \ Closed netmiko connection"
+      positions: [-118, 12]
+    a7458a18-4812-498e-857d-b885237a6525:
+      alignment: left
+      content: "This service is configured with \"Start New Connection\".\r\nIt should\
+        \ close the connection opened at the previous service,\r\nand start a new\
+        \ one.\r\nExpected Log:\r\n- Netmiko: Check VRF (test) does not exist - DEVICE\
+        \ Washington : Closed netmiko connection\r\n- Netmiko: Check VRF (test) does\
+        \ not exist - DEVICE Washington : Opening new Netmiko connection\r\n"
+      positions: [-44, 238]
+    b5dc9b96-d0bf-4092-8e60-b82ca6db2ad6:
       alignment: left
       content: "This service should automatically detect that there is no\r\nlonger\
-        \ a cached connection, and recreate a new one."
-      positions: [487, 227]
-    9de45be3-3804-4576-a961-631eeea669eb:
-      alignment: center
-      content: "This service is configured with \"Close connection\".\r\nIt should\
-        \ use the same connection as in the previous service, then close it."
-      positions: [561, -181]
+        \ a cached connection, and recreate a new one.\r\nExpected log:\r\nnetmiko_delete_vrf_test\
+        \ - DEVICE Washington : Opening new Netmiko connection\r\n"
+      positions: [576, 198]
     e6b81854-aece-42bf-9375-bee035a29425:
       alignment: left
       content: "Test:\r\n- with and without multiprocessing\r\n- devices defned as\
         \ a combination of devices and pools.\r\nThe workflow is running on \"Austin\"\
         \ as a device and \"Washington\", as a pool."
       positions: [51, -208]
-    f753b933-4fe2-4398-8b3e-5316eaed9abc:
-      alignment: left
-      content: "This workflow runs on two devices :\r\n- The pool \"Washington\" that\
-        \ contains Washington.\r\n- The device \"Austin\".\r\nWashington should reach\
-        \ the end and Austin fail at the first step."
-      positions: [19, 3]
-    f82d10bc-eec0-4457-bbc4-d433dde92a98:
-      alignment: left
-      content: "This service is configured with \"Start New Connection\".\r\nIt should\
-        \ close the connection opened at the previous service,\r\nand start a new\
-        \ one."
-      positions: [-36, 232]
-  last_modified: '2019-10-10 09:50:48.189426'
+  last_modified: '2019-10-10 11:22:42.604919'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

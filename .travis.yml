@@ -22,5 +22,5 @@ matrix:
       node_js:
         - "node"
       script:
-        - npm run prettier
+        # - npm run prettier
         - npm run lint

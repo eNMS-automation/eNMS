@@ -21,10 +21,6 @@
   number_of_targets: 0
   operating_system: ''
   pools: []
-  positions:
-    Configuration Management Workflow: !!python/tuple
-    - -300
-    - 0
   push_to_git: false
   device_query_property: ip_address
   send_notification: false
@@ -57,103 +53,6 @@
   number_of_targets: 0
   operating_system: ''
   pools: []
-  positions:
-    Configuration Management Workflow: !!python/tuple
-    - 200
-    - 0
-  push_to_git: false
-  device_query_property: ip_address
-  send_notification: false
-  send_notification_method: mail
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  vendor: ''
-  waiting_time: 0
-  device_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  notification_header: ''
-  define_devices_from_payload: false
-  description: Mail notification (service logs)
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: false
-  last_modified: '2019-06-24 07:19:52.498504'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: mail
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  device_query_property: ip_address
-  send_notification: false
-  send_notification_method: mail
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  vendor: ''
-  waiting_time: 0
-  device_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  notification_header: ''
-  define_devices_from_payload: false
-  description: Slack notification (service logs)
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: false
-  last_modified: '2019-06-24 07:19:52.506127'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: slack_feedback_notification
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  device_query_property: ip_address
-  send_notification: false
-  send_notification_method: mail
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  vendor: ''
-  waiting_time: 0
-  device_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  notification_header: ''
-  define_devices_from_payload: false
-  description: Mattermost notification (service logs)
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: false
-  last_modified: '2019-06-24 07:19:52.514554'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: mattermost_feedback_notification
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions: {}
   push_to_git: false
   device_query_property: ip_address
   send_notification: false
@@ -219,40 +118,6 @@
     Configuration Management Workflow: !!python/tuple
     - 0
     - 300
-  push_to_git: false
-  device_query_property: ip_address
-  send_notification: false
-  send_notification_method: mail
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  vendor: ''
-  waiting_time: 0
-  device_query: ''
-- completed: 0
-  creator: admin
-  credentials: device
-  notification_header: ''
-  define_devices_from_payload: false
-  description: Configuration Management Poller
-  devices: []
-  display_only_failed_nodes: true
-  events: []
-  failed: 0
-  has_targets: false
-  hidden: true
-  last_modified: '2019-06-24 07:19:52.536926'
-  mail_recipient: ''
-  max_processes: 5
-  multiprocessing: false
-  name: poller_service
-  number_of_retries: 0
-  number_of_targets: 0
-  operating_system: ''
-  pools: []
-  positions:
-    Configuration Management Workflow: !!python/tuple
-    - 0
-    - -200
   push_to_git: false
   device_query_property: ip_address
   send_notification: false

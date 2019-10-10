@@ -552,7 +552,7 @@ class Run(AbstractBase):
 
     def match_dictionary(self, result, match, first=True):
         if self.validation_method == "dict_equal":
-            return result["result"] == self.dict_match
+            return result == self.dict_match
         else:
             match_copy = deepcopy(match) if first else match
             if isinstance(result, dict):

@@ -3414,7 +3414,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-05 10:18:47.797476'
+  last_modified: '2019-10-10 23:09:43.669350'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -3434,7 +3434,7 @@
   send_notification_method: mail
   skip: false
   skip_query: ''
-  source_code: "result = {\r\n \"get_var\": get_var(\"Loopbacks 2\", device=device.name),\r\
+  source_code: "result = {\r\n \"get_var\": get_var(\"Interfaces 2\", device=device.name),\r\
     \n\"version\": get_result(\"Show interfaces with Netmiko\", device=device.name),\r\
     \n\"napalm\": get_result(\"Regression Workflow 5: VRF creation and deletion with\
     \ Napalm\", device=device.name),\r\n}\r\nsave_result(success=True, result=result)"
@@ -3471,11 +3471,11 @@
   hidden: false
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: get_var("loop_over", device=device.name)
+  iteration_devices: get_var("Derived Devices", device=device.name)
   iteration_devices_property: name
   iteration_values: get_result("get_interfaces", device=device.name)["result"]["get_interfaces"]
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-05 10:19:07.423525'
+  last_modified: '2019-10-10 23:15:48.658317'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1

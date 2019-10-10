@@ -25,7 +25,7 @@ class NapalmConfigurationService(ConnectionService):
 
     def job(self, run, payload, device):
         napalm_connection = run.napalm_connection(device)
-        run.log("info", f"Pushing configuration on {device.name} (Napalm)")
+        run.log("info", "Pushing Configuration with NAPALM", device)
         config = "\n".join(run.sub(run.content, locals()).splitlines())
         getattr(napalm_connection, run.action)(config=config)
         napalm_connection.commit_config()

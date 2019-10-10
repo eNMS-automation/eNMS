@@ -25,7 +25,7 @@ class SlackNotificationService(Service):
     def job(self, run, payload, device=None):
         slack_client = SlackClient(run.token or app.slack_token)
         channel = run.sub(run.channel, locals()) or app.slack_channel
-        run.log("info", f"Sending Slack notification on {channel}")
+        run.log("info", f"Sending SLACK notification on {channel}", device)
         result = slack_client.api_call(
             "chat.postMessage", channel=channel, text=run.sub(run.body, locals())
         )

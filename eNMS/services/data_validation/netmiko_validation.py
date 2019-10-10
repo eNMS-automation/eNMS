@@ -34,7 +34,7 @@ class NetmikoValidationService(ConnectionService):
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         commands = run.sub(run.commands, locals()).splitlines()
-        run.log("info", f"Sending '{run.commands}' on {device.name} (Netmiko)")
+        run.log("info", f"Sending '{run.commands}' with Netmiko", device)
         expect_string = run.sub(run.expect_string, locals())
         result = "".join(
             netmiko_connection.send_command(

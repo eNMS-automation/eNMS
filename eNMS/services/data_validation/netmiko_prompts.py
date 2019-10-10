@@ -34,7 +34,7 @@ class NetmikoPromptsService(ConnectionService):
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
         command = run.sub(run.command, locals())
-        run.log("info", f"Sending '{command}' on {device.name} (Netmiko)")
+        run.log("info", f"Sending '{command}' with Netmiko", device)
         commands = [command]
         results = {"commands": commands}
         result = netmiko_connection.send_command_timing(

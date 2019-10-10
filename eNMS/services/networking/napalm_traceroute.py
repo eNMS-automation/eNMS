@@ -29,11 +29,7 @@ class NapalmTracerouteService(ConnectionService):
         napalm_connection = run.napalm_connection(device)
         destination = run.sub(run.destination_ip, locals())
         source = run.sub(run.source_ip, locals())
-        run.log(
-            "info",
-            f"Running napalm traceroute from {source}"
-            f"to {destination} on {device.ip_address}",
-        )
+        run.log("info", f"NAPALM TRACEROUTE : {source} -> {destination}", device)
         traceroute = napalm_connection.traceroute(
             destination=destination,
             source=run.source,

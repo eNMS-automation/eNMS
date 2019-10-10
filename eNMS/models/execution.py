@@ -741,6 +741,7 @@ class Run(AbstractBase):
                 self.disconnect(library, device, connection)
 
     def get_connection(self, library, device):
+        self.log("info", f"Opening new {library} connection", device)
         connections = app.connections_cache[library].get(self.runtime)
         if not connections:
             connections = app.connections_cache[library].get(self.parent_runtime, {})

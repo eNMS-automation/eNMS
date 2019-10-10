@@ -41,11 +41,7 @@ class UnixShellScriptService(Service):
         netmiko_connection = run.netmiko_connection(device)
         source_code = run.sub(run.source_code, locals())
         script_file_name = f"{self.name}.sh"
-        run.log(
-            "info",
-            f"Sending shell script '{script_file_name}'"
-            f" to run on {device.name} (Netmiko)",
-        )
+        run.log("info", f"Sending shell script '{script_file_name}'", device)
         expect_string = run.sub(run.expect_string, locals())
         command_list = (
             f"echo '{source_code}' > '{script_file_name}'",

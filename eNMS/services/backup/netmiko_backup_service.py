@@ -40,7 +40,7 @@ class NetmikoBackupService(ConnectionService):
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
             netmiko_connection = run.netmiko_connection(device)
-            run.log("info", f"Fetching configuration on {device.name} (Netmiko)")
+            run.log("info", "Fetching Netmiko configuration", device)
             command = run.configuration_command
             configuration = netmiko_connection.send_command(command)
             device.last_status = "Success"

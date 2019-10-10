@@ -37,7 +37,7 @@ class NapalmBackupService(ConnectionService):
             path_device_config = path_configurations / device.name
             path_device_config.mkdir(parents=True, exist_ok=True)
             napalm_connection = run.napalm_connection(device)
-            run.log("info", f"Fetching NAPALM configuration", device)
+            run.log("info", "Fetching NAPALM configuration", device)
             configuration = app.str_dict(napalm_connection.get_config())
             device.last_status = "Success"
             device.last_duration = (

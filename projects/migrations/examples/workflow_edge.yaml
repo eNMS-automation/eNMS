@@ -244,9 +244,6 @@
 - {destination: End, label: success, name: 87-success:88->2, source: Check VRF (NOVRF)
     exists, subtype: success, workflow: 'Regression Workflow 1: Netmiko with validation
     and retries'}
-- {destination: Iteration Target Workflow - Test 2, label: prerequisite, name: 83-prerequisite:54->55,
-  source: Iteration Targets Workflow - Test 1, subtype: prerequisite, workflow: 'Regression
-    Workflow E: Iteration Targets'}
 - {destination: Iteration Targets Workflow - Test 1, label: success, name: 83-success:26->54,
   source: Modify Payload for Iteration, subtype: success, workflow: 'Regression Workflow
     E: Iteration Targets'}

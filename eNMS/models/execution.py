@@ -277,7 +277,7 @@ class Run(AbstractBase):
                 self.run_state["success"] = results["success"]
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
-            results["logs"] = app.run_logs.pop(self.runtime)
+            results["logs"] = app.run_logs.pop(self.runtime, None)
             if self.parent_runtime == self.runtime:
                 self.state = results["state"] = app.run_db.pop(self.parent_runtime)
             if self.task and not self.task.frequency:
@@ -317,6 +317,7 @@ class Run(AbstractBase):
             }
             derived_run = factory("run", **kwargs)
             derived_run.properties = self.properties
+            print("ttt"*200, payload)
             yield derived_run.run(payload)["success"]
 
     def device_run(self, payload):

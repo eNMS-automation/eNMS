@@ -940,7 +940,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-01 21:00:56.052240'
+  last_modified: '2019-10-10 13:35:44.715460'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -961,7 +961,7 @@
   skip: false
   skip_query: ''
   time_between_retries: 10
-  timeout: 1
+  timeout: 10
   type: napalm_configuration_service
   use_device_driver: true
   validation_method: none

@@ -181,7 +181,9 @@ class Run(AbstractBase):
 
     @property
     def run_state(self):
-        if self.parent_runtime == self.runtime:
+        if self.state:
+            return self.state
+        elif self.parent_runtime == self.runtime:
             return app.run_db[self.parent_runtime]
         else:
             return app.run_db[self.parent_runtime]["services"][self.service.id]
@@ -317,7 +319,6 @@ class Run(AbstractBase):
             }
             derived_run = factory("run", **kwargs)
             derived_run.properties = self.properties
-            print("ttt"*200, payload)
             yield derived_run.run(payload)["success"]
 
     def device_run(self, payload):

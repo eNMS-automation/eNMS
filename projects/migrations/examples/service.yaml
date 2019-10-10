@@ -729,7 +729,7 @@
   vendor: Arista
   waiting_time: 0
 - auto_find_prompt: true
-  close_connection: false
+  close_connection: true
   color: '#D2E5FF'
   commands: show vrf
   config_mode: false
@@ -760,7 +760,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-03 20:32:00.822843'
+  last_modified: '2019-10-10 09:46:36.865576'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -781,7 +781,7 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -885,7 +885,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-02 10:16:27.845335'
+  last_modified: '2019-10-10 09:49:57.713796'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -904,10 +904,10 @@
   push_to_git: false
   result_postprocessing: ''
   send_notification: false
-  send_notification_method: mail_feedback_notification
+  send_notification_method: mail
   skip: false
   skip_query: ''
-  start_new_connection: false
+  start_new_connection: true
   strip_command: true
   strip_prompt: true
   time_between_retries: 1
@@ -3579,6 +3579,16 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    347284ab-4bd9-4d29-97a9-4f12c248d7ff:
+      alignment: left
+      content: "This service should automatically detect that there is no\r\nlonger\
+        \ a cached connection, and recreate a new one."
+      positions: [487, 227]
+    9de45be3-3804-4576-a961-631eeea669eb:
+      alignment: center
+      content: "This service is configured with \"Close connection\".\r\nIt should\
+        \ use the same connection as in the previous service, then close it."
+      positions: [561, -181]
     e6b81854-aece-42bf-9375-bee035a29425:
       alignment: left
       content: "Test:\r\n- with and without multiprocessing\r\n- devices defned as\
@@ -3590,8 +3600,14 @@
       content: "This workflow runs on two devices :\r\n- The pool \"Washington\" that\
         \ contains Washington.\r\n- The device \"Austin\".\r\nWashington should reach\
         \ the end and Austin fail at the first step."
-      positions: [36, 13]
-  last_modified: '2019-10-06 20:43:47.140134'
+      positions: [19, 3]
+    f82d10bc-eec0-4457-bbc4-d433dde92a98:
+      alignment: left
+      content: "This service is configured with \"Start New Connection\".\r\nIt should\
+        \ close the connection opened at the previous service,\r\nand start a new\
+        \ one."
+      positions: [-36, 232]
+  last_modified: '2019-10-10 09:50:48.189426'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3639,8 +3655,14 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  labels: {}
-  last_modified: '2019-10-04 15:10:16.589761'
+  labels:
+    8108225c-9e1a-4f57-af77-e8076c8641c9:
+      alignment: left
+      content: "This workflow tests :\r\n- The configuration and rollback mechanism\
+        \ with Napalm\r\n- The connection cache mechanism. Both netmiko and napalm\
+        \ connections\r\nmust be closed at the end of the workflow"
+      positions: [-217, -229]
+  last_modified: '2019-10-10 09:44:34.931818'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

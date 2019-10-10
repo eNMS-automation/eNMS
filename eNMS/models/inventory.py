@@ -147,7 +147,8 @@ class Device(CustomDevice):
           </li>
           <li>
             <button type="button" class="btn btn-success"
-            onclick="showPanel('device_connection', '{self.id}')" data-tooltip="Connection"
+            onclick="showPanel('device_connection', '{self.id}')"
+            data-tooltip="Connection"
               ><span class="glyphicon glyphicon-console"></span
             ></button>
           </li>
@@ -254,7 +255,8 @@ class Link(Object):
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('link', '{self.id}', 'duplicate')" data-tooltip="Duplicate"
+            onclick="showTypePanel('link', '{self.id}', 'duplicate')"
+            data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
@@ -357,7 +359,8 @@ class Pool(AbstractPool):
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('pool', '{self.id}', 'duplicate')" data-tooltip="Duplicate"
+            onclick="showTypePanel('pool', '{self.id}', 'duplicate')"
+            data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>

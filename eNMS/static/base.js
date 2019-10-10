@@ -275,14 +275,14 @@ function createTooltips() {
     jsPanel.tooltip.create({
       content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
         <b>${$(this).attr("data-tooltip")}</b></p>`,
-      contentSize: 'auto',
+      contentSize: "auto",
       connector: true,
       delay: 800,
       header: false,
       position: {
-        my: 'center-bottom',
-        at: 'center-top',
-        of: this
+        my: "center-bottom",
+        at: "center-top",
+        of: this,
       },
       target: this,
       theme: "primary filledlight",
@@ -509,7 +509,8 @@ function processData(type, id) {
     `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
     (instance) => {
-      const tableType = type.includes("service") || type == "workflow" ? "service" : type;
+      const tableType =
+        type.includes("service") || type == "workflow" ? "service" : type;
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (page == "workflow_builder") {

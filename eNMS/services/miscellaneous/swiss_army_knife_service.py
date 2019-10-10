@@ -1,10 +1,8 @@
 from git import Repo
 from git.exc import GitCommandError
-from json import dumps
 from logging import info
 from pathlib import Path
-from requests import post, get
-from slackclient import SlackClient
+from requests import get
 from sqlalchemy import ForeignKey, Integer
 from wtforms import HiddenField
 

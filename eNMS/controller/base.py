@@ -452,7 +452,6 @@ class BaseController:
         return delete(cls, id=instance_id)
 
     def get(self, cls, id):
-        print(model_properties[cls])
         return fetch(cls, id=id).serialized
 
     def get_properties(self, cls, id):

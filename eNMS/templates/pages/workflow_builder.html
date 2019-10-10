@@ -6,119 +6,133 @@ block content %}
     <div class="col-md-12 col-xs-12">
       <nav class="navbar navbar-default" role="navigation">
         <center>
-        <ul
-          class="pagination pagination-lg"
-          style="margin: 0px; padding-top: 9px;"
-        >
-          <li>
-            <a onclick="menu('Edit Workflow')" data-tooltip="Edit Worfklow"
-              ><span class="glyphicon glyphicon-edit"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Create Workflow')" data-tooltip="Create Worfklow"
-              ><span class="glyphicon glyphicon-plus"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Add to Workflow')" data-tooltip="Add to Worfklow"
-              ><span class="glyphicon glyphicon-book"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="duplicateWorkflowService()" data-tooltip="Duplicate Worfklow"
-              ><span class="glyphicon glyphicon-duplicate"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Create Label')" data-tooltip="Create Label"
-              ><span class="glyphicon glyphicon-font"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Unskip')" data-tooltip="Unskip"
-              ><span class="glyphicon glyphicon-ok-circle"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Skip')" data-tooltip="Skip"
-              ><span class="glyphicon glyphicon-ban-circle"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Remove from Workflow')" data-tooltip="Remove From Worfklow"
-              ><span class="glyphicon glyphicon-remove"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Delete')" data-tooltip="Delete Worfklow"
-              ><span class="glyphicon glyphicon-trash"></span
-            ></a>
-          </li>
-        </ul>
-        <ul
-          class="pagination pagination-lg"
-          style="margin: 0px; padding-left: 30px; padding-top: 9px"
-        >
-          <li>
-            <a onclick="menu('Run Workflow')" data-tooltip="Run Worfklow"
-              ><span class="glyphicon glyphicon-play"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Run Workflow with Updates')" data-tooltip="Parametrized Run"
-              ><span class="glyphicon glyphicon-play-circle"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Stop Workflow')" data-tooltip="Stop Workflow"
-              ><span class="glyphicon glyphicon-pause"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Workflow Logs')" data-tooltip="Workflow Logs"
-              ><span class="glyphicon glyphicon-list"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Workflow Results')" data-tooltip="Workflow Results"
-              ><span class="glyphicon glyphicon-list-alt"></span
-            ></a>
-          </li>
-        </ul>
-        <ul
-          class="pagination pagination-lg"
-          style="margin: 0px; padding-left: 30px; padding-top: 9px"
-        >
-          <li>
-            <a onclick="getWorkflowState()" data-tooltip="Refresh"><span class="glyphicon glyphicon-refresh"></span></a>
-          </li>
-          <li>
-            <a onclick="menu('Zoom In')" data-tooltip="Zoom In"
-              ><span class="glyphicon glyphicon-zoom-in"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="menu('Zoom Out')" data-tooltip="Zoom Out"
-              ><span class="glyphicon glyphicon-zoom-out"></span
-            ></a>
-          </li>
-          <li id="left-arrow">
-            <a onclick="menu('Backward')" data-tooltip="Previous Workflow"
-              ><span class="glyphicon glyphicon-chevron-left"></span
-            ></a>
-          </li>
-          <li id="right-arrow">
-            <a onclick="menu('Forward')" data-tooltip="Next Workflow"
-              ><span class="glyphicon glyphicon-chevron-right"></span
-            ></a>
-          </li>
-          <li>
-            <a onclick="switchToSubworkflow()" data-tooltip="Display Workflow"
-              ><span class="glyphicon glyphicon-chevron-down"></span
-            ></a>
-          </li>
-        </ul>
+          <ul
+            class="pagination pagination-lg"
+            style="margin: 0px; padding-top: 9px;"
+          >
+            <li>
+              <a onclick="menu('Edit Workflow')" data-tooltip="Edit Worfklow"
+                ><span class="glyphicon glyphicon-edit"></span
+              ></a>
+            </li>
+            <li>
+              <a
+                onclick="menu('Create Workflow')"
+                data-tooltip="Create Worfklow"
+                ><span class="glyphicon glyphicon-plus"></span
+              ></a>
+            </li>
+            <li>
+              <a
+                onclick="menu('Add to Workflow')"
+                data-tooltip="Add to Worfklow"
+                ><span class="glyphicon glyphicon-book"></span
+              ></a>
+            </li>
+            <li>
+              <a
+                onclick="duplicateWorkflowService()"
+                data-tooltip="Duplicate Worfklow"
+                ><span class="glyphicon glyphicon-duplicate"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="menu('Create Label')" data-tooltip="Create Label"
+                ><span class="glyphicon glyphicon-font"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="menu('Unskip')" data-tooltip="Unskip"
+                ><span class="glyphicon glyphicon-ok-circle"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="menu('Skip')" data-tooltip="Skip"
+                ><span class="glyphicon glyphicon-ban-circle"></span
+              ></a>
+            </li>
+            <li>
+              <a
+                onclick="menu('Remove from Workflow')"
+                data-tooltip="Remove From Worfklow"
+                ><span class="glyphicon glyphicon-remove"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="menu('Delete')" data-tooltip="Delete Worfklow"
+                ><span class="glyphicon glyphicon-trash"></span
+              ></a>
+            </li>
+          </ul>
+          <ul
+            class="pagination pagination-lg"
+            style="margin: 0px; padding-left: 30px; padding-top: 9px"
+          >
+            <li>
+              <a onclick="menu('Run Workflow')" data-tooltip="Run Worfklow"
+                ><span class="glyphicon glyphicon-play"></span
+              ></a>
+            </li>
+            <li>
+              <a
+                onclick="menu('Run Workflow with Updates')"
+                data-tooltip="Parametrized Run"
+                ><span class="glyphicon glyphicon-play-circle"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="menu('Stop Workflow')" data-tooltip="Stop Workflow"
+                ><span class="glyphicon glyphicon-pause"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="menu('Workflow Logs')" data-tooltip="Workflow Logs"
+                ><span class="glyphicon glyphicon-list"></span
+              ></a>
+            </li>
+            <li>
+              <a
+                onclick="menu('Workflow Results')"
+                data-tooltip="Workflow Results"
+                ><span class="glyphicon glyphicon-list-alt"></span
+              ></a>
+            </li>
+          </ul>
+          <ul
+            class="pagination pagination-lg"
+            style="margin: 0px; padding-left: 30px; padding-top: 9px"
+          >
+            <li>
+              <a onclick="getWorkflowState()" data-tooltip="Refresh"
+                ><span class="glyphicon glyphicon-refresh"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="menu('Zoom In')" data-tooltip="Zoom In"
+                ><span class="glyphicon glyphicon-zoom-in"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="menu('Zoom Out')" data-tooltip="Zoom Out"
+                ><span class="glyphicon glyphicon-zoom-out"></span
+              ></a>
+            </li>
+            <li id="left-arrow">
+              <a onclick="menu('Backward')" data-tooltip="Previous Workflow"
+                ><span class="glyphicon glyphicon-chevron-left"></span
+              ></a>
+            </li>
+            <li id="right-arrow">
+              <a onclick="menu('Forward')" data-tooltip="Next Workflow"
+                ><span class="glyphicon glyphicon-chevron-right"></span
+              ></a>
+            </li>
+            <li>
+              <a onclick="switchToSubworkflow()" data-tooltip="Display Workflow"
+                ><span class="glyphicon glyphicon-chevron-down"></span
+              ></a>
+            </li>
+          </ul>
         </center>
       </nav>
       <div class="x_panel">
@@ -160,7 +174,10 @@ block content %}
                       onclick="switchMode()"
                       data-tooltip="Change Mode"
                     >
-                      <span id="mode-icon" class="glyphicon glyphicon-move"></span>
+                      <span
+                        id="mode-icon"
+                        class="glyphicon glyphicon-move"
+                      ></span>
                     </button>
                   </td>
                   <td style="min-width: 10vw">
@@ -192,7 +209,7 @@ block content %}
                     <select
                       id="current-workflow"
                       class="form-control"
-                      data-width="500px"
+                      data-width="400px"
                       data-dropdown-align-right="true"
                     ></select>
                   </td>
@@ -210,7 +227,7 @@ block content %}
           </div>
           <div
             class="btn-group"
-            style="width: 20vw; z-index:2; position: absolute; left: 30vw"
+            style="width: 20vw; z-index:2; position: absolute; left: 25vw"
           >
             <strong><p id="status"></p></strong>
             <div id="progress" class="progress" style="display: none">

@@ -4,7 +4,7 @@ from copy import deepcopy
 from functools import partial
 from git import Repo
 from git.exc import GitCommandError
-from json import loads
+from json import dumps, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
@@ -13,7 +13,9 @@ from paramiko import SFTPClient
 from pathlib import Path
 from ruamel import yaml
 from re import compile, search
+from requests import post
 from scp import SCPClient
+from slackclient import SlackClient
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
@@ -474,11 +476,12 @@ class Run(AbstractBase):
         results["notification"] = {"content": notification}
         try:
             if self.send_notification_method == "mail":
+                filename = self.runtime.replace('.', '').replace(':', '')
                 result = app.send_email(
                     f"{self.name} ({'PASS' if results['success'] else 'FAILED'})",
                     notification,
                     recipients=self.mail_recipient,
-                    filename=f"results-{self.runtime.replace('.', '').replace(':', '')}.txt",
+                    filename=f"results-{filename}.txt",
                     file_content=app.str_dict(results),
                 )
             elif self.send_notification_method == "slack":
@@ -745,8 +748,8 @@ class Run(AbstractBase):
                 self.disconnect(library, device, connection)
 
     def get_connection(self, library, device):
-        cache = app.connections_cache[library].get(self.parent_runtime)
-        return cache.get(device.name) if cache else None
+        cache = app.connections_cache[library].get(self.parent_runtime, {})
+        return cache.get(device.name)
 
     def close_device_connection(self, device):
         for library in ("netmiko", "napalm"):

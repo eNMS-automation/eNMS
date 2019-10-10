@@ -470,7 +470,9 @@ function drawIterationEdge(service) {
     if (service.iteration_values) {
       title += `<b>Iteration Values</b>: ${service.iteration_values}<br>`;
     }
-    title += `<b>Iteration Variable Name</b>: ${service.iteration_variable_name}`;
+    title += `<b>Iteration Variable Name</b>: ${
+      service.iteration_variable_name
+    }`;
     {
       edges.add({
         id: -service.id,
@@ -526,7 +528,9 @@ function switchMode(mode) {
     graph.addEdgeMode();
     alertify.notify(`Mode: creation of ${currentMode} edge.`, "success", 5);
   }
-  $("#mode-icon").toggleClass("glyphicon-move").toggleClass("glyphicon-random");
+  $("#mode-icon")
+    .toggleClass("glyphicon-move")
+    .toggleClass("glyphicon-random");
   $(".dropdown-submenu a.menu-layer")
     .next("ul")
     .toggle();

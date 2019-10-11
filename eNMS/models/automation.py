@@ -24,6 +24,7 @@ class Service(AbstractBase):
     id = Column(Integer, primary_key=True)
     hidden = Column(Boolean, default=False)
     name = Column(SmallString, unique=True)
+    reference_name = Column(SmallString)
     last_modified = Column(SmallString)
     description = Column(SmallString)
     number_of_retries = Column(Integer, default=0)

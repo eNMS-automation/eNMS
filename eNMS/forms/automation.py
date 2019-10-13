@@ -263,6 +263,13 @@ class AddServicesForm(BaseForm):
     action = "addServicesToWorkflow"
     form_type = HiddenField(default="add_services")
     services = MultipleInstanceField("Add services")
+    mode = SelectField(
+        "Mode",
+        choices=(
+            ("shallow", "Shallow Copy (creates a reference to the service"),
+            ("deep", "Creates a duplicate from the service"),
+        ),
+    )
 
 
 class WorkflowLabelForm(BaseForm):

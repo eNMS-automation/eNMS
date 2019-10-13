@@ -606,8 +606,6 @@ class Run(AbstractBase):
         return self.payload_helper(payload, name, device=device, **kwargs)
 
     def get_result(self, service_name, device=None):
-        service = fetch("service", allow_none=True, name=service_name)
-
         def filter_run(query, property):
             return query.filter(
                 models["run"].service.has(
@@ -621,9 +619,7 @@ class Run(AbstractBase):
             query = Session.query(models["run"]).filter_by(
                 parent_runtime=run.parent_runtime
             )
-            runs = filter_run(query, "reference_name")
-            if not runs:
-                runs = filter_run(query, "name")
+            runs = filter_run(query, "reference_name") or filter_run(query, "name")
             results = list(filter(None, [run.result(device) for run in runs]))
             if not results:
                 return recursive_search(run.restart_run)

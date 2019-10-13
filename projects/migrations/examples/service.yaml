@@ -1604,17 +1604,16 @@
   vendor: ''
   waiting_time: 0
 - color: '#D2E5FF'
-  content_match: ''
+  content_match: "'1.1.1.1'  , '   2.2.2.2','    3.3.3.3'"
   content_match_regex: false
-  conversion_method: none
+  conversion_method: text
   creator: admin
-  delete_spaces_before_matching: false
+  delete_spaces_before_matching: true
   description: Payload Validate Dict
   device_query: ''
   device_query_property: ip_address
   devices: []
-  dict_match:
-    value: [1.1.1.1, 2.2.2.2, 3.3.3.3]
+  dict_match: {}
   display_only_failed_nodes: true
   events: []
   hidden: false
@@ -1624,7 +1623,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-13 18:37:00.024152'
+  last_modified: '2019-10-14 01:44:10.931975'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -1647,7 +1646,7 @@
   skip_query: ''
   time_between_retries: 10
   type: payload_validation_service
-  validation_method: dict_included
+  validation_method: text
   vendor: Arista
   waiting_time: 0
 - color: '#D2E5FF'
@@ -3862,12 +3861,13 @@
         \nThe service is configured with notification enabled, to test service\r\n\
         notification INSIDE a workflow."
       positions: [-334, -185]
-    24efaf22-0817-4a58-a196-4e78608bc2b6:
+    0677ebc9-5b0b-4b86-9a36-4b16467e352c:
       alignment: left
-      content: "Check that the results contains the dictionary\r\n{\"value\":[\"1.1.1.1\"\
-        ,\"2.2.2.2\",\"3.3.3.3\"]}\r\nThis service uses the REFERENCE NAME to retrieve\
-        \ the results,\r\nhere \"Routing Table\".\r\n"
-      positions: [-287, -81]
+      content: "Check that the results contains the string \"'1.1.1.1'  , '   2.2.2.2','\
+        \    3.3.3.3'\",\r\nwith \"Delete spaces before matching\" set to True.\r\n\
+        This service uses the REFERENCE NAME to retrieve the results,\r\nhere \"Routing\
+        \ Table\".\r\n"
+      positions: ['-291.39921220969075', '-97.32301278189817']
     3844a73f-340f-4b7a-9893-50c5b79998d9:
       alignment: center
       content: "Check that the \"textfsm_variable\" in the payload\r\ncan be matched\
@@ -3891,7 +3891,7 @@
         \ side (validate via payload) to check that\r\nan older payload / result can\
         \ be retrieved from the database."
       positions: [269, 71]
-  last_modified: '2019-10-13 18:38:28.114186'
+  last_modified: '2019-10-14 01:44:54.620077'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

@@ -180,7 +180,7 @@ class InventoryController(BaseController):
     def topology_import(self, file):
         book = open_workbook(file_contents=file.read())
         result = "Topology successfully imported."
-        for obj_type in ("Device", "Link"):
+        for obj_type in ("device", "link"):
             try:
                 sheet = book.sheet_by_name(obj_type)
             except XLRDError:

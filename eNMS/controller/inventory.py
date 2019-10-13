@@ -192,7 +192,7 @@ class InventoryController(BaseController):
                     func = field_conversion[property_types[property]]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
-                    factory(obj_type.lower(), **values).serialized
+                    factory(obj_type, **values).serialized
                 except Exception as e:
                     info(f"{str(values)} could not be imported ({str(e)})")
                     result = "Partial import (see logs)."

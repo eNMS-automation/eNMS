@@ -30,6 +30,7 @@ from eNMS.database.associations import run_pool_table, run_device_table
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import factory, fetch
 from eNMS.database.base import AbstractBase
+from eNMS.models import models
 
 
 class Result(AbstractBase):
@@ -604,20 +605,24 @@ class Run(AbstractBase):
     def get_var(self, payload, name, device=None, **kwargs):
         return self.payload_helper(payload, name, device=device, **kwargs)
 
-    def get_result(self, service, device=None):
-        service_id = fetch("service", name=service).id
+    def get_result(self, service_name, device=None):
+        service = fetch("service", allow_none=True, name=service_name)
 
         def recursive_search(run: "Run"):
             if not run:
                 return None
-            runs = fetch(
-                "run",
-                allow_none=True,
-                all_matches=True,
-                parent_runtime=run.parent_runtime,
-                service_id=service_id,
+            query = Session.query(models["run"]).filter_by(
+                parent_runtime=run.parent_runtime
             )
-            results = list(filter(None, [run.result(device) for run in runs]))
+            if service:
+                query = query.filter_by(service_id=service.id)
+            else:
+                query = query.filter(
+                    models["run"].service.has(
+                        models["service"].reference_name == service_name
+                    )
+                )
+            results = list(filter(None, [run.result(device) for run in query.all()]))
             if not results:
                 return recursive_search(run.restart_run)
             else:

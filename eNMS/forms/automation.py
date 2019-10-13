@@ -271,7 +271,7 @@ class WorkflowLabelForm(BaseForm):
     content = StringField(widget=TextArea(), render_kw={"rows": 15})
     alignment = SelectField(
         "Text Alignment",
-        choices=(("center", "Center"), ("left", "Left"), ("right", "Right")),
+        choices=(("left", "Left"), ("center", "Center"), ("right", "Right")),
     )
 
 

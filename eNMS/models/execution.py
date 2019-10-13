@@ -608,21 +608,23 @@ class Run(AbstractBase):
     def get_result(self, service_name, device=None):
         service = fetch("service", allow_none=True, name=service_name)
 
+        def filter_run(query, property):
+            return query.filter(
+                models["run"].service.has(
+                    getattr(models["service"], property) == service_name
+                )
+            ).all()
+
         def recursive_search(run: "Run"):
             if not run:
                 return None
             query = Session.query(models["run"]).filter_by(
                 parent_runtime=run.parent_runtime
             )
-            if service:
-                query = query.filter_by(service_id=service.id)
-            else:
-                query = query.filter(
-                    models["run"].service.has(
-                        models["service"].reference_name == service_name
-                    )
-                )
-            results = list(filter(None, [run.result(device) for run in query.all()]))
+            runs = filter_run(query, "reference_name")
+            if not runs:
+                runs = filter_run(query, "name")
+            results = list(filter(None, [run.result(device) for run in runs]))
             if not results:
                 return recursive_search(run.restart_run)
             else:

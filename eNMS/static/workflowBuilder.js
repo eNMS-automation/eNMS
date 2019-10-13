@@ -400,11 +400,12 @@ function formatServiceTitle(service) {
 }
 
 function getServiceLabel(service) {
-  if (["Start", "End"].includes(service.name)) return service.name;
+  const serviceName = service.reference_name || service.name;
+  if (["Start", "End"].includes(service.name)) return serviceName;
   let label =
     service.type == "workflow"
-      ? `\n     ${service.name}     \n`
-      : `${service.name}\n`;
+      ? `\n     ${serviceName}     \n`
+      : `${serviceName}\n`;
   label += "—————\n";
   label +=
     service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];

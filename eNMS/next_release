@@ -131,9 +131,6 @@ renaming: command -> commands
 - Refactored job import / export mechanism.
 Now exporting a workflow will export all subworkflows and edges in subworkflows...
 
-
-
-
 ### migration
 
 1) Rename the migration files NAMES: must be LOWERCASE

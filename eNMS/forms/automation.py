@@ -14,6 +14,7 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     DictField,
     DictSubstitutionField,
+    InstanceField,
     MultipleInstanceField,
     NoValidationSelectField,
     PasswordSubstitutionField,
@@ -258,10 +259,10 @@ class DisplayConfigurationForm(DisplayForm):
     form_type = HiddenField(default="display_configuration")
 
 
-class AddServicesForm(BaseForm):
-    action = "addServicesToWorkflow"
-    form_type = HiddenField(default="add_services")
-    services = MultipleInstanceField("Add services")
+class AddServiceForm(BaseForm):
+    action = "addServiceToWorkflow"
+    form_type = HiddenField(default="add_service")
+    services = InstanceField("Add service")
     mode = SelectField(
         "Mode",
         choices=(

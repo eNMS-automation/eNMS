@@ -146,7 +146,7 @@ class BaseController:
     valid_post_endpoints = [
         "stop_workflow",
         "add_edge",
-        "add_services_to_workflow",
+        "add_service_to_workflow",
         "calendar_init",
         "clear_results",
         "clear_configurations",

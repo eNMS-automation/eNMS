@@ -272,7 +272,7 @@ function saveWorkflowService(service, update) {
     let serviceIndex = workflow.services.findIndex((s) => s.id == service.id);
     workflow.services[serviceIndex] = service;
   } else {
-    addServicesToWorkflow([service.id]);
+    addServiceToWorkflow(service);
   }
   drawIterationEdge(service);
 }
@@ -283,7 +283,7 @@ function saveWorkflowEdge(edge) {
 }
 
 // eslint-disable-next-line
-function addServicesToWorkflow(services) {
+function addServiceToWorkflow(service) {
   if (!workflow) {
     alertify.notify(
       `You must create a workflow in the
@@ -292,28 +292,26 @@ function addServicesToWorkflow(services) {
       5
     );
   } else {
-    fCall(`/add_services_to_workflow/${workflow.id}`, "#add_services-form", function(
-      result
+    fCall(`/add_service_to_workflow/${workflow.id}`, "#add_service-form", function(
+      updateTime
     ) {
-      workflow.last_modified = result.update_time;
-      result.services.forEach((service, index) => {
-        $("#add_services").remove();
-        if (graph.findNode(service.id).length == 0) {
-          nodes.add(serviceToNode(service, index));
-          workflow.services.push(service);
-          alertify.notify(
-            `Service '${service.scoped_name}' added to the workflow.`,
-            "success",
-            5
-          );
-        } else {
-          alertify.notify(
-            `${service.type} '${service.scoped_name}' already in workflow.`,
-            "error",
-            5
-          );
-        }
-      });
+      workflow.last_modified = updateTime;
+      $("#add_service").remove();
+      if (graph.findNode(service.id).length == 0) {
+        nodes.add(serviceToNode(service, index));
+        workflow.services.push(service);
+        alertify.notify(
+          `Service '${service.scoped_name}' added to the workflow.`,
+          "success",
+          5
+        );
+      } else {
+        alertify.notify(
+          `${service.type} '${service.scoped_name}' already in workflow.`,
+          "error",
+          5
+        );
+      }
     });
   }
 }
@@ -570,7 +568,7 @@ Object.assign(action, {
     showRestartWorkflowPanel(workflow, service),
   "Workflow Results": () => showResultsPanel(workflow),
   "Workflow Logs": () => showLogsPanel(workflow),
-  "Add to Workflow": () => showPanel("add_services"),
+  "Add to Workflow": () => showPanel("add_service"),
   "Stop Workflow": () => stopWorkflow(),
   "Remove from Workflow": deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),

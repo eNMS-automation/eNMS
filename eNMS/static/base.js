@@ -26,7 +26,7 @@ let userIsActive = true;
 let topZ = 1000;
 
 const panelSize = {
-  add_services: "800 500",
+  add_service: "800 500",
   changelog: "700 300",
   changelog_filtering: "700 300",
   cluster: "700 200",
@@ -76,7 +76,7 @@ const panelSize = {
 };
 
 const panelName = {
-  add_services: "Add services",
+  add_service: "Add service",
   configuration: "Configuration",
   configuration_filtering: "Configuration Filtering",
   database_deletion: "Database Deletion",

@@ -395,6 +395,7 @@ function formatServiceTitle(service) {
 }
 
 function getServiceLabel(service) {
+  console.log(service.scoped_name);
   const serviceName = service.scoped_name || service.name;
   if (["Start", "End"].includes(service.name)) return serviceName;
   let label =

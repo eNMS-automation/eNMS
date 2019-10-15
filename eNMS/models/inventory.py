@@ -27,7 +27,6 @@ class Object(AbstractBase):
     type = Column(SmallString)
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
-    hidden = Column(Boolean, default=False)
     name = Column(SmallString, unique=True)
     subtype = Column(SmallString)
     description = Column(SmallString)

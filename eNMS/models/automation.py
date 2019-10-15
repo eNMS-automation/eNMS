@@ -22,7 +22,6 @@ class Service(AbstractBase):
     type = Column(SmallString)
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
-    hidden = Column(Boolean, default=False)
     name = Column(SmallString, unique=True)
     scoped_name = Column(SmallString)
     last_modified = Column(SmallString)
@@ -83,7 +82,7 @@ class Service(AbstractBase):
 
     def build_name(self, name=None):
         if len(self.workflows) == 1:
-            workflow = f"[{self.workflows[0]}] " 
+            workflow = f"[{self.workflows[0].scoped_name}] " 
         else:
             workflow = "[Shared] " if self.workflows else ""
         return f"{workflow}{name or self.scoped_name}" 

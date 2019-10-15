@@ -48,7 +48,6 @@ class AutomationController(BaseController):
         return {"edge": workflow_edge.serialized, "update_time": now}
 
     def add_services_to_workflow(self, workflow_id, **kwargs):
-        print(kwargs)
         workflow = fetch("workflow", id=workflow_id)
         services = objectify("service", kwargs["services"])
         if kwargs["mode"] == "shallow":

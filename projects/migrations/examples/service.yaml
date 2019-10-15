@@ -3648,7 +3648,7 @@
       Backup] Configuration Backup (Netmiko)']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3737,7 +3737,7 @@
     '[Shared] Netmiko: Check VRF (test) does not exist']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3796,7 +3796,7 @@
       Workflow 5: VRF creation and deletion with Napalm] netmiko_check_no_vrf_napalm']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3857,7 +3857,7 @@
       get_config', '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3959,7 +3959,7 @@
       Payload Workflow: Validate dict via payload']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4022,7 +4022,7 @@
       Netmiko', '[Shared] NAPALM: Get interfaces']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4077,7 +4077,7 @@
       interfaces']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4131,7 +4131,7 @@
       pass', '[Shared] REST API: call *is_alive* endpoint']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4197,7 +4197,7 @@
       show runtime with get_result helper']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4288,7 +4288,7 @@
       get facts failed match']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4365,7 +4365,7 @@
       Arista show configuration (dict match)']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4431,7 +4431,7 @@
       multiprocessing] napalm_configure_bgp_1']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4518,7 +4518,7 @@
       - Test 4']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4575,7 +4575,7 @@
       8: Payload Extraction with Operations] Payload Workflow: Validation 2']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4627,7 +4627,7 @@
       Variable Access Subworkflow: Access variables for iteration']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4680,7 +4680,7 @@
       Workflow 7: Payload Extraction & Validation']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4734,7 +4734,7 @@
       validation and retries] Check VRF (NOVRF) exists']
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
+
   time_between_retries: 10
   type: workflow
   validation_method: none

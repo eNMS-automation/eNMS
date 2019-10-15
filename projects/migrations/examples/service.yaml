@@ -50,6 +50,18 @@
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation': [
+      -131, -293]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations': [
+      -332, -106]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation': [
+      -555, 85]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
+      121, -362]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
+      -441, 133]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
+      -274, 39]
     iteration_devices_workflow: ['-164', '15']
   push_to_git: false
   result_postprocessing: ''
@@ -118,6 +130,18 @@
     Workflow with device and value iteration: [500, 0]
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation': [
+      415, 361]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations': [
+      -326, 234]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation': [
+      -534, 178]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
+      648, -171]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
+      714, 151]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
+      678, -24]
     iteration_devices_workflow: ['651', '20']
   push_to_git: false
   result_postprocessing: ''
@@ -953,6 +977,8 @@
   pools: []
   positions:
     'Regression Workflow 5: VRF creation and deletion with Napalm': [-301, -128]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
+      298, -193]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: napalm_create_vrf_test
@@ -1493,6 +1519,8 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [49, -207]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation': [
+      -11, -192]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: netmiko_show_ip_route
@@ -1556,6 +1584,8 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [130, -95]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation': [
+      315, -156]
   push_to_git: false
   query1: get_result("netmiko_show_ip_route", device.name)["success"]
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
@@ -1607,6 +1637,8 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [-345, -11]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation': [
+      -350, -21]
   push_to_git: false
   query: get_result("Routing Table", device.name)["result"]["regex_variable"]
   result_postprocessing: ''
@@ -1653,6 +1685,8 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [-233, 211]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation': [
+      -239, 204]
   push_to_git: false
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   result_postprocessing: ''
@@ -1700,6 +1734,8 @@
   pools: []
   positions:
     'Regression Workflow 5: VRF creation and deletion with Napalm': [360, 172]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
+      85, 126]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: napalm_rollback
@@ -1760,6 +1796,8 @@
     'Regression Workflow 5: VRF creation and deletion with Napalm': [340, -110]
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
+      -317, -60]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: netmiko_check_vrf_napalm
@@ -1821,6 +1859,8 @@
   pools: []
   positions:
     'Regression Workflow 5: VRF creation and deletion with Napalm': [-275, 196]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
+      583, 125]
     iteration_devices_workflow: ['245', '32']
   push_to_git: false
   result_postprocessing: ''
@@ -2339,6 +2379,8 @@
   pools: []
   positions:
     'Regression Workflow B: Napalm getters validation': [-405, -137]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation': [
+      -415, -94]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Getters Workflow: is alive'
@@ -2389,6 +2431,8 @@
   pools: []
   positions:
     'Regression Workflow B: Napalm getters validation': [18, -122]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation': [
+      -2, -115]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Getters Workflow: get facts'
@@ -2440,6 +2484,10 @@
   positions:
     'Regression Workflow 8: Payload Extraction with Operations': [-348, -240]
     'Regression Workflow B: Napalm getters validation': [581, 136]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations': [
+      36, -116]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation': [
+      623, 117]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Getters Workflow: Interface IP'
@@ -2490,6 +2538,8 @@
   pools: []
   positions:
     'Regression Workflow B: Napalm getters validation': [-45, 144]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation': [
+      -63, 147]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Getters Workflow: MAC address'
@@ -2540,6 +2590,8 @@
   pools: []
   positions:
     'Regression Workflow B: Napalm getters validation': [535, -147]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters validation': [
+      521, -133]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Getters Workflow: get facts failed match'
@@ -3044,6 +3096,8 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [776, 146]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation': [
+      828, 172]
   push_to_git: false
   query: get_var("textfsm_variable", device=device.name)[0][1]
   result_postprocessing: ''
@@ -3091,6 +3145,8 @@
   pools: []
   positions:
     'Regression Workflow 7: Payload Extraction & Validation': [708, -114]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation': [
+      764, -87]
   push_to_git: false
   query: get_var("regex_variable", device=device.name)
   result_postprocessing: ''
@@ -3137,6 +3193,8 @@
   pools: []
   positions:
     'Regression Workflow 8: Payload Extraction with Operations': [118, -243]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations': [
+      459, -120]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Payload Workflow: Add initial variables'
@@ -3194,6 +3252,8 @@
   pools: []
   positions:
     'Regression Workflow 8: Payload Extraction with Operations': [619, -236]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations': [
+      870, -116]
   push_to_git: false
   query1: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
@@ -3254,6 +3314,8 @@
   pools: []
   positions:
     'Regression Workflow 8: Payload Extraction with Operations': [600, 70]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations': [
+      876, 224]
   push_to_git: false
   query1: get_result("Start")["state"]["completed"]
   query2: get_result("Start")["logs"]
@@ -3305,6 +3367,8 @@
   pools: []
   positions:
     'Regression Workflow 8: Payload Extraction with Operations': [62, 62]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations': [
+      522, 241]
   push_to_git: false
   query: get_var("list", device=device.name)
   result_postprocessing: ''
@@ -3351,6 +3415,8 @@
   pools: []
   positions:
     'Regression Workflow 8: Payload Extraction with Operations': [-565, 68]
+    '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations': [
+      99, 253]
   push_to_git: false
   query: get_var("dict", device=device.name)
   result_postprocessing: ''
@@ -3451,6 +3517,8 @@
   positions:
     'Regression Workflow F S2: Access Variables from Parent Workflow': [240, -101]
     'Regression Workflow F: Workflow of Workflows': [-179, 146]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
+      206, -272]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Variable Access Subworkflow: Access variable from snippet'
@@ -3512,6 +3580,8 @@
   pools: []
   positions:
     'Regression Workflow F S2: Access Variables from Parent Workflow': [244, 113]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
+      223, 174]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Variable Access Subworkflow: Access variables for iteration'
@@ -3578,7 +3648,7 @@
       Backup] Configuration Backup (Netmiko)']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3667,7 +3737,7 @@
     '[Shared] Netmiko: Check VRF (test) does not exist']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3700,7 +3770,7 @@
         \ with Napalm\r\n- The connection cache mechanism. Both netmiko and napalm\
         \ connections\r\nmust be closed at the end of the workflow"
       positions: [-217, -229]
-  last_modified: '2019-10-10 09:44:34.931818'
+  last_modified: '2019-10-15 22:43:17.458628'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3726,7 +3796,7 @@
       Workflow 5: VRF creation and deletion with Napalm] netmiko_check_no_vrf_napalm']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3787,7 +3857,7 @@
       get_config', '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3834,7 +3904,7 @@
         \    3.3.3.3'\",\r\nwith \"Delete spaces before matching\" set to True.\r\n\
         This service uses the REFERENCE NAME to retrieve the results,\r\nhere \"Routing\
         \ Table\".\r\n"
-      positions: ['-291.39921220969075', '-97.32301278189817']
+      positions: [-291, -97]
     3844a73f-340f-4b7a-9893-50c5b79998d9:
       alignment: center
       content: "Check that the \"textfsm_variable\" in the payload\r\ncan be matched\
@@ -3844,7 +3914,7 @@
       alignment: center
       content: "Check that the \"regex_variable\" variable\r\nin the payload contains\
         \ the dictionary\r\n{\"value\":[\"1.1.1.1\",\"2.2.2.2\",\"3.3.3.3\"]}\r\n"
-      positions: [743, -198]
+      positions: [819, -177]
     cf55f702-da90-466f-9ee6-9e207a0b4808:
       alignment: left
       content: "This workflow uses netmiko to run a \"show ip route\", and a \"Payload\
@@ -3857,8 +3927,8 @@
         \ be restarted from both\r\nthe left side (validate via result) and the right\
         \ side (validate via payload) to check that\r\nan older payload / result can\
         \ be retrieved from the database."
-      positions: [269, 71]
-  last_modified: '2019-10-14 01:44:54.620077'
+      positions: [239, 54]
+  last_modified: '2019-10-15 22:40:48.571360'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3872,6 +3942,8 @@
   pools: []
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [134, -147]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
+      213, 172]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Regression Workflow 7: Payload Extraction & Validation'
@@ -3887,7 +3959,7 @@
       Payload Workflow: Validate dict via payload']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3950,7 +4022,7 @@
       Netmiko', '[Shared] NAPALM: Get interfaces']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4005,7 +4077,7 @@
       interfaces']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4059,7 +4131,7 @@
       pass', '[Shared] REST API: call *is_alive* endpoint']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4125,7 +4197,7 @@
       show runtime with get_result helper']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4167,13 +4239,13 @@
       content: "Dictionary Equality Validation: {\"is_alive\":{\"is_alive\":true}}\r\
         \nWashington must pass, but Austin will fail (napalm timeout has\r\nbeen brought\
         \ down to 1 to not wait too long).\r\n"
-      positions: [-380, -224]
+      positions: [-396, -179]
     4d62e069-5dfd-4e6d-b418-8c273a750b06:
       alignment: left
       content: "This workflow is running on two devices: Washington (vEOS) and Austin\
         \ (dummy).\r\nIt uses NAPALM to retrieve data from a device and the validation\
         \ mechanism.\r\nTo be tested with and without multiprocessing."
-      positions: [-13, 4]
+      positions: [-48, 37]
     a5c335bc-dced-4512-b5bc-1149ea7eec73:
       alignment: left
       content: "Dictionary Inclusion Validation:\r\n{\"fqdn\":\"localhost\",\"uptime\"\
@@ -4187,7 +4259,7 @@
         \ match, but the negative logic\r\nis set to True, so the resulting value\
         \ is a success."
       positions: [-51, 226]
-  last_modified: '2019-10-04 10:46:04.750921'
+  last_modified: '2019-10-15 22:43:03.629751'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4201,6 +4273,8 @@
   pools: []
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [678, 11]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
+      -200, -194]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Regression Workflow B: Napalm getters validation'
@@ -4214,7 +4288,7 @@
       get facts failed match']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4291,7 +4365,7 @@
       Arista show configuration (dict match)']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4357,7 +4431,7 @@
       multiprocessing] napalm_configure_bgp_1']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4444,7 +4518,7 @@
       - Test 4']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4471,7 +4545,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-10-02 10:20:38.196859'
+  last_modified: '2019-10-15 22:41:39.597390'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4485,6 +4559,8 @@
   pools: []
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [135, 187]
+    '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
+      530, -139]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: 'Regression Workflow 8: Payload Extraction with Operations'
@@ -4499,7 +4575,7 @@
       8: Payload Extraction with Operations] Payload Workflow: Validation 2']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4526,7 +4602,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-10-05 10:12:02.348277'
+  last_modified: '2019-10-15 22:43:42.810632'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4551,7 +4627,7 @@
       Variable Access Subworkflow: Access variables for iteration']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4578,7 +4654,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-10-05 10:07:15.160952'
+  last_modified: '2019-10-15 22:43:36.466235'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4604,7 +4680,7 @@
       Workflow 7: Payload Extraction & Validation']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4658,7 +4734,7 @@
       validation and retries] Check VRF (NOVRF) exists']
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none

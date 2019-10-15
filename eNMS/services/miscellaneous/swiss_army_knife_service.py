@@ -23,7 +23,7 @@ class SwissArmyKnifeService(Service):
     __mapper_args__ = {"polymorphic_identity": "swiss_army_knife_service"}
 
     def job(self, *args, **kwargs):
-        return getattr(self, self.name)(*args, **kwargs)
+        return getattr(self, self.scoped_name)(*args, **kwargs)
 
     def Start(self, *args, **kwargs):  # noqa: N802
         return {"success": True}

@@ -302,13 +302,13 @@ function addServicesToWorkflow(services) {
           nodes.add(serviceToNode(service, index));
           workflow.services.push(service);
           alertify.notify(
-            `Service '${service.name}' added to the workflow.`,
+            `Service '${service.scoped_name}' added to the workflow.`,
             "success",
             5
           );
         } else {
           alertify.notify(
-            `${service.type} '${service.name}' already in workflow.`,
+            `${service.type} '${service.scoped_name}' already in workflow.`,
             "error",
             5
           );
@@ -323,7 +323,7 @@ function deleteNode(id) {
   call(`/delete_node/${workflow.id}/${id}`, function(result) {
     workflow.last_modified = result.update_time;
     alertify.notify(
-      `'${result.service.name}' deleted from the workflow.`,
+      `'${result.service.scoped_name}' deleted from the workflow.`,
       "success",
       5
     );
@@ -424,7 +424,7 @@ function serviceToNode(service, index) {
       bold: { color: "#000000" },
     },
     label: getServiceLabel(service),
-    name: service.name,
+    name: service.scoped_name,
     type: service.type,
     title: formatServiceTitle(service),
     x: service.positions[workflow.name]
@@ -636,10 +636,10 @@ function runWorkflow(withUpdates) {
 function showRestartWorkflowPanel(workflow, service) {
   createPanel(
     "restart_workflow",
-    `Restart Workflow '${workflow.name}' from '${service.name}'`,
+    `Restart Workflow '${workflow.name}' from '${service.scoped_name}'`,
     workflow.id,
     function() {
-      $("#start_services").append(new Option(service.name, service.id));
+      $("#start_services").append(new Option(service.scoped_name, service.id));
       $("#start_services")
         .val(service.id)
         .trigger("change");

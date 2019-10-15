@@ -106,7 +106,7 @@ class AdministrationController(BaseController):
                         instance.pop("type") if model == "service" else model
                     )
                     if instance_type == "workflow":
-                        workflow_services[instance["reference_name"]] = instance.pop("services")
+                        workflow_services[instance["scoped_name"]] = instance.pop("services")
                     try:
                         instance = self.objectify(instance_type, instance)
                         factory(instance_type, **instance)
@@ -119,16 +119,16 @@ class AdministrationController(BaseController):
                         status = "Partial import (see logs)."
         for name, services in workflow_services.items():
             print(name)
-            workflow = fetch("workflow", reference_name=name)
+            workflow = fetch("workflow", scoped_name=name)
             print(workflow)
             workflow.services = [
-                fetch("service", reference_name=service_name) for service_name in services
+                fetch("service", scoped_name=service_name) for service_name in services
             ]
             Session.commit()     
         print("ooo"*300)
         for edge in workflow_edges:
             for property in ("source", "destination", "workflow"):
-                edge[property] = fetch("service", reference_name=edge[property]).id
+                edge[property] = fetch("service", scoped_name=edge[property]).id
             factory("workflow_edge", **edge)
             Session.commit()
         return status

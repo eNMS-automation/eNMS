@@ -192,7 +192,7 @@ otherwise: parent_device (because iteration targets work for a service too)
 mail_feedback_notification -> mail
 
 - REFERENCE NAMES
-* replace name with reference_name
+* replace name with scoped_name
 * remove all start_services
 
 In the migration file:

@@ -465,7 +465,7 @@ class BaseController:
     def update(self, cls, **kwargs):
         try:
             must_be_new = kwargs.get("id") == ""
-            for arg in ("name", "reference_name"):
+            for arg in ("name", "scoped_name"):
                 if arg in kwargs:
                     kwargs[arg] = kwargs[arg].strip()
             kwargs["last_modified"] = self.get_time()

@@ -23,7 +23,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Start
+  scoped_name: Start
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -89,7 +89,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: End
+  scoped_name: End
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -158,7 +158,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: mail
+  scoped_name: mail
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -202,7 +202,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: slack_feedback_notification
+  scoped_name: slack_feedback_notification
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -246,7 +246,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: mattermost_feedback_notification
+  scoped_name: mattermost_feedback_notification
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -290,7 +290,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: cluster_monitoring
+  scoped_name: cluster_monitoring
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -334,7 +334,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Push Configurations to Git
+  scoped_name: Push Configurations to Git
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -390,7 +390,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Example Service (does nothing)
+  scoped_name: Example Service (does nothing)
   negative_logic: false
   notification_header: ''
   number_in_range: 7
@@ -444,7 +444,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: napalm_configure_bgp_1
+  scoped_name: napalm_configure_bgp_1
   negative_logic: false
   neighbor_ip: 100.1.2.1
   notification_header: ''
@@ -498,7 +498,7 @@
   maximum_runs: 1
   missing_host_key_policy: true
   multiprocessing: false
-  reference_name: test_file_transfer_service
+  scoped_name: test_file_transfer_service
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -549,7 +549,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: test_database_backup_service
+  scoped_name: test_database_backup_service
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -600,7 +600,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  reference_name: Configuration Backup (Netmiko)
+  scoped_name: Configuration Backup (Netmiko)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -654,7 +654,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  reference_name: Configuration Backup (NAPALM)
+  scoped_name: Configuration Backup (NAPALM)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -718,7 +718,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: netmiko_create_vrf_test
+  scoped_name: netmiko_create_vrf_test
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -779,7 +779,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: netmiko_check_vrf_test
+  scoped_name: netmiko_check_vrf_test
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -844,7 +844,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: netmiko_delete_vrf_test
+  scoped_name: netmiko_delete_vrf_test
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -906,7 +906,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Netmiko: Check VRF (test) does not exist'
+  scoped_name: 'Netmiko: Check VRF (test) does not exist'
   negative_logic: true
   notification_header: ''
   number_of_retries: 2
@@ -962,7 +962,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: napalm_create_vrf_test
+  scoped_name: napalm_create_vrf_test
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1012,7 +1012,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  reference_name: 'REST API: call *is_alive* endpoint'
+  scoped_name: 'REST API: call *is_alive* endpoint'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1071,7 +1071,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'NAPALM: Get Facts'
+  scoped_name: 'NAPALM: Get Facts'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1124,7 +1124,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'NAPALM: Get interfaces'
+  scoped_name: 'NAPALM: Get interfaces'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1176,7 +1176,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: get_interfaces_ip
+  scoped_name: get_interfaces_ip
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1228,7 +1228,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: get_config
+  scoped_name: get_config
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1277,7 +1277,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: process_payload1
+  scoped_name: process_payload1
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1323,7 +1323,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Modify Payload for Iteration
+  scoped_name: Modify Payload for Iteration
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1389,7 +1389,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: netmiko_python_defined_devices
+  scoped_name: netmiko_python_defined_devices
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1451,7 +1451,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Iterated_netmiko_service
+  scoped_name: Iterated_netmiko_service
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1513,7 +1513,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: netmiko_show_ip_route
+  scoped_name: netmiko_show_ip_route
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1574,7 +1574,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  reference_name: Payload Extraction
+  scoped_name: Payload Extraction
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1627,7 +1627,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Payload Workflow: Validate dict via results'
+  scoped_name: 'Payload Workflow: Validate dict via results'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1673,7 +1673,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Payload Workflow: Validate text via results'
+  scoped_name: 'Payload Workflow: Validate text via results'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1720,7 +1720,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: napalm_rollback
+  scoped_name: napalm_rollback
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1780,7 +1780,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: netmiko_check_vrf_napalm
+  scoped_name: netmiko_check_vrf_napalm
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1844,7 +1844,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: netmiko_check_no_vrf_napalm
+  scoped_name: netmiko_check_no_vrf_napalm
   negative_logic: true
   notification_header: ''
   number_of_retries: 0
@@ -1907,7 +1907,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: true
-  reference_name: Device_from_python_query
+  scoped_name: Device_from_python_query
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1967,7 +1967,7 @@
   max_processes: 50
   maximum_runs: 2
   multiprocessing: false
-  reference_name: Test Netmiko Prompt Service
+  scoped_name: Test Netmiko Prompt Service
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2027,7 +2027,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Test netmiko prompts pass
+  scoped_name: Test netmiko prompts pass
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2077,7 +2077,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Modify payload (no device)
+  scoped_name: Modify payload (no device)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2125,7 +2125,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Modify payload (per device)
+  scoped_name: Modify payload (per device)
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2188,7 +2188,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Show vrf with payload helper
+  scoped_name: Show vrf with payload helper
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2250,7 +2250,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Show vrf with python query
+  scoped_name: Show vrf with python query
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2312,7 +2312,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: show runtime with get_result helper
+  scoped_name: show runtime with get_result helper
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2365,7 +2365,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Getters Workflow: is alive'
+  scoped_name: 'Getters Workflow: is alive'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2415,7 +2415,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Getters Workflow: get facts'
+  scoped_name: 'Getters Workflow: get facts'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2466,7 +2466,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Getters Workflow: Interface IP'
+  scoped_name: 'Getters Workflow: Interface IP'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2517,7 +2517,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Getters Workflow: MAC address'
+  scoped_name: 'Getters Workflow: MAC address'
   negative_logic: true
   notification_header: ''
   number_of_retries: 0
@@ -2567,7 +2567,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Getters Workflow: get facts failed match'
+  scoped_name: 'Getters Workflow: get facts failed match'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2616,7 +2616,7 @@
   max_processes: 50
   maximum_runs: 2
   multiprocessing: false
-  reference_name: 'Ansible Workflow: Arista show version'
+  scoped_name: 'Ansible Workflow: Arista show version'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2666,7 +2666,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Ansible Workflow: Arista show configuration (regex match)'
+  scoped_name: 'Ansible Workflow: Arista show configuration (regex match)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2715,7 +2715,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Ansible Workflow: Arista show configuration (dict match)'
+  scoped_name: 'Ansible Workflow: Arista show configuration (dict match)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2775,7 +2775,7 @@
   max_processes: 10
   maximum_runs: 1
   multiprocessing: true
-  reference_name: Show version with multiprocessing
+  scoped_name: Show version with multiprocessing
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2838,7 +2838,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Iterated_netmiko_service bis
+  scoped_name: Iterated_netmiko_service bis
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2900,7 +2900,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Iteration Targets Workflow - Test 1
+  scoped_name: Iteration Targets Workflow - Test 1
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -2962,7 +2962,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Iteration Target Workflow - Test 2
+  scoped_name: Iteration Target Workflow - Test 2
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3024,7 +3024,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Iteration Target Workflow - Test 3
+  scoped_name: Iteration Target Workflow - Test 3
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3074,7 +3074,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Payload Workflow: Validate text via payload'
+  scoped_name: 'Payload Workflow: Validate text via payload'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3121,7 +3121,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Payload Workflow: Validate dict via payload'
+  scoped_name: 'Payload Workflow: Validate dict via payload'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3167,7 +3167,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: true
-  reference_name: 'Payload Workflow: Add initial variables'
+  scoped_name: 'Payload Workflow: Add initial variables'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3221,7 +3221,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: true
-  reference_name: 'Payload Workflow: Extraction 1'
+  scoped_name: 'Payload Workflow: Extraction 1'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3281,7 +3281,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: true
-  reference_name: 'Payload Workflow: Extraction 2'
+  scoped_name: 'Payload Workflow: Extraction 2'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3335,7 +3335,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: true
-  reference_name: 'Payload Workflow: Validation 1'
+  scoped_name: 'Payload Workflow: Validation 1'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3381,7 +3381,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Payload Workflow: Validation 2'
+  scoped_name: 'Payload Workflow: Validation 2'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3429,7 +3429,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Iteration Targets Workflow - Test 4
+  scoped_name: Iteration Targets Workflow - Test 4
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3480,7 +3480,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Variable Access Subworkflow: Access variable from snippet'
+  scoped_name: 'Variable Access Subworkflow: Access variable from snippet'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3542,7 +3542,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Variable Access Subworkflow: Access variables for iteration'
+  scoped_name: 'Variable Access Subworkflow: Access variables for iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3598,7 +3598,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow 9: Configurations Backup'
+  scoped_name: 'Regression Workflow 9: Configurations Backup'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3683,7 +3683,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  reference_name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
+  scoped_name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3739,7 +3739,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow 5: VRF creation and deletion with Napalm'
+  scoped_name: 'Regression Workflow 5: VRF creation and deletion with Napalm'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3799,7 +3799,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow 3: Napalm getters (postprocessing)'
+  scoped_name: 'Regression Workflow 3: Napalm getters (postprocessing)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3893,7 +3893,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow 7: Payload Extraction & Validation'
+  scoped_name: 'Regression Workflow 7: Payload Extraction & Validation'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3954,7 +3954,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow F: Workflow of Workflows'
+  scoped_name: 'Regression Workflow F: Workflow of Workflows'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4010,7 +4010,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  reference_name: 'Regression Workflow 2: Separate Failure - Success paths'
+  scoped_name: 'Regression Workflow 2: Separate Failure - Success paths'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4065,7 +4065,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow D: Prompts'
+  scoped_name: 'Regression Workflow D: Prompts'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4127,7 +4127,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow A: get_var, set_var, get_result'
+  scoped_name: 'Regression Workflow A: get_var, set_var, get_result'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4212,7 +4212,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow B: Napalm getters validation'
+  scoped_name: 'Regression Workflow B: Napalm getters validation'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4289,7 +4289,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow 6: Ansible with Validation'
+  scoped_name: 'Regression Workflow 6: Ansible with Validation'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4355,7 +4355,7 @@
   max_processes: 20
   maximum_runs: 1
   multiprocessing: true
-  reference_name: 'Regression Workflow C: Advanced multiprocessing'
+  scoped_name: 'Regression Workflow C: Advanced multiprocessing'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4439,7 +4439,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow E: Iteration Targets'
+  scoped_name: 'Regression Workflow E: Iteration Targets'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4489,7 +4489,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow 8: Payload Extraction with Operations'
+  scoped_name: 'Regression Workflow 8: Payload Extraction with Operations'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4540,7 +4540,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow F S2: Access Variables from Parent Workflow'
+  scoped_name: 'Regression Workflow F S2: Access Variables from Parent Workflow'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4590,7 +4590,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow F S1: Subworkflow of Workflow'
+  scoped_name: 'Regression Workflow F S1: Subworkflow of Workflow'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4647,7 +4647,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: 'Regression Workflow 1: Netmiko with validation and retries'
+  scoped_name: 'Regression Workflow 1: Netmiko with validation and retries'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -4705,7 +4705,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Check VRF (NOVRF) exists
+  scoped_name: Check VRF (NOVRF) exists
   negative_logic: false
   notification_header: ''
   number_of_retries: 2
@@ -4767,7 +4767,7 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  reference_name: Show interfaces with Netmiko
+  scoped_name: Show interfaces with Netmiko
   negative_logic: false
   notification_header: ''
   number_of_retries: 0

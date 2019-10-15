@@ -395,7 +395,7 @@ function formatServiceTitle(service) {
 }
 
 function getServiceLabel(service) {
-  const serviceName = service.reference_name || service.name;
+  const serviceName = service.scoped_name || service.name;
   if (["Start", "End"].includes(service.name)) return serviceName;
   let label =
     service.type == "workflow"

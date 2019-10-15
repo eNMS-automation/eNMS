@@ -619,7 +619,7 @@ class Run(AbstractBase):
             query = Session.query(models["run"]).filter_by(
                 parent_runtime=run.parent_runtime
             )
-            runs = filter_run(query, "reference_name") or filter_run(query, "name")
+            runs = filter_run(query, "scoped_name") or filter_run(query, "name")
             results = list(filter(None, [run.result(device) for run in runs]))
             if not results:
                 return recursive_search(run.restart_run)

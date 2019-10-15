@@ -26,7 +26,7 @@ class ServiceForm(BaseForm):
     form_type = HiddenField(default="service")
     id = HiddenField()
     type = StringField("Service Type")
-    reference_name = StringField("Reference Name")
+    scoped_name = StringField("Reference Name")
     description = StringField("Description")
     device_query = StringField("Device Query")
     device_query_property = SelectField(

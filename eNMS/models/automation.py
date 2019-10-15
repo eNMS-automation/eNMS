@@ -81,6 +81,13 @@ class Service(AbstractBase):
     def filename(self):
         return app.strip_all(self.name)
 
+    def get_name(self):
+        if len(self.workflows) == 1:
+            workflow = f"[{self.workflows[0]}]" 
+        else:
+            workflow = "[Shared]" if self.workflows else ""
+        return f"{workflow} {self.reference_name}" 
+
     def generate_row(self, table):
         return [
             f"Running" if app.service_db[self.id]["runs"] else "Idle",

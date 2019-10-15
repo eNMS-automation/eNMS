@@ -465,7 +465,9 @@ class BaseController:
     def update(self, cls, **kwargs):
         try:
             must_be_new = kwargs.get("id") == ""
-            kwargs["name"] = kwargs["name"].strip()
+            for arg in ("name", "reference_name"):
+                if arg in kwargs:
+                    kwargs[arg] = kwargs[arg].strip()
             kwargs["last_modified"] = self.get_time()
             kwargs["creator"] = getattr(current_user, "name", "admin")
             instance = factory(cls, must_be_new=must_be_new, **kwargs)

@@ -79,8 +79,13 @@ def configure_events(app):
             name, changes = getattr(target, "name", target.id), " | ".join(changelog)
             app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
+    @event.listens_for(models["service"], "before_update", propagate=True)
+    def log_instance_update(mapper, connection, target):
+        target.name = target.get_name()
+
     @event.listens_for(models["workflow"].name, "set")
     def workflow_name_update(workflow, new_name, old_name, *args):
+        print("test")
         for service in fetch_all("service"):
             if old_name in service.positions:
                 service.positions[new_name] = service.positions.pop(old_name)

@@ -191,6 +191,10 @@ otherwise: parent_device (because iteration targets work for a service too)
 - Update the value of the notification method for all services:
 mail_feedback_notification -> mail
 
+- REFERENCE NAMES
+* replace name with reference_name
+* remove all start_services
+
 In the migration file:
 
 - Add pretty names for custom services

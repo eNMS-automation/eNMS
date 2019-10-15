@@ -39,7 +39,8 @@ class Workflow(Service):
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
     def __init__(self, **kwargs):
-        start, end = fetch("service", name="Start"), fetch("service", name="End")
+        start = fetch("service", reference_name="Start")
+        end = fetch("service", reference_name="End")
         self.services.extend([start, end])
         super().__init__(**kwargs)
         if not kwargs.get("start_services"):

@@ -11,6 +11,7 @@ from shutil import rmtree
 from requests import get as http_get
 from ruamel import yaml
 from tarfile import open as open_tar
+from traceback import format_exc
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
@@ -105,22 +106,29 @@ class AdministrationController(BaseController):
                         instance.pop("type") if model == "service" else model
                     )
                     if instance_type == "workflow":
-                        workflow_services[instance["name"]] = instance.pop("services")
-                    instance = self.objectify(instance_type, instance)
+                        workflow_services[instance["reference_name"]] = instance.pop("services")
                     try:
+                        instance = self.objectify(instance_type, instance)
                         factory(instance_type, **instance)
                         Session.commit()
                     except Exception as e:
-                        info(f"{str(instance)} could not be imported ({str(e)})")
+                        info(
+                            f"{str(instance)} could not be imported :"
+                            f"{chr(10).join(format_exc().splitlines())}"
+                        )
                         status = "Partial import (see logs)."
         for name, services in workflow_services.items():
-            fetch("workflow", name=name).services = [
-                fetch("service", name=service_name) for service_name in services
+            print(name)
+            workflow = fetch("workflow", reference_name=name)
+            print(workflow)
+            workflow.services = [
+                fetch("service", reference_name=service_name) for service_name in services
             ]
-            Session.commit()
+            Session.commit()     
+        print("ooo"*300)
         for edge in workflow_edges:
             for property in ("source", "destination", "workflow"):
-                edge[property] = fetch("service", name=edge[property]).id
+                edge[property] = fetch("service", reference_name=edge[property]).id
             factory("workflow_edge", **edge)
             Session.commit()
         return status

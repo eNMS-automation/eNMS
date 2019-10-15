@@ -47,6 +47,8 @@ def configure_events(app):
     def log_instance_creation(target, args, kwargs):
         if "type" not in target.__dict__ or "log" in target.type:
             return
+        if "name" not in kwargs:
+            kwargs["name"] = target.build_name(kwargs["reference_name"])
         app.log("info", f"CREATION: {target.__dict__['type']} '{kwargs['name']}'")
 
     @event.listens_for(Base, "before_delete", propagate=True)
@@ -81,11 +83,10 @@ def configure_events(app):
 
     @event.listens_for(models["service"], "before_update", propagate=True)
     def log_instance_update(mapper, connection, target):
-        target.name = target.get_name()
+        target.name = target.build_name()
 
     @event.listens_for(models["workflow"].name, "set")
     def workflow_name_update(workflow, new_name, old_name, *args):
-        print("test")
         for service in fetch_all("service"):
             if old_name in service.positions:
                 service.positions[new_name] = service.positions.pop(old_name)

@@ -1,5 +1,4 @@
 - description: Jackson
-  hidden: false
   icon: router
   ip_address: 192.168.1.85
   last_duration: ''
@@ -23,7 +22,6 @@
   username: cisco
   vendor: Cisco
 - description: PaloAlto
-  hidden: false
   icon: router
   ip_address: 192.168.1.86
   last_duration: ''
@@ -47,7 +45,6 @@
   username: cisco
   vendor: Cisco
 - description: Austin
-  hidden: false
   icon: router
   ip_address: 192.168.105.9
   last_duration: ''
@@ -71,7 +68,6 @@
   username: admin
   vendor: Arista
 - description: Washington
-  hidden: false
   icon: router
   ip_address: 192.168.105.5
   last_duration: 5.554711s
@@ -95,7 +91,6 @@
   username: admin
   vendor: Arista
 - description: Chicago
-  hidden: false
   icon: router
   ip_address: 192.168.1.188
   last_duration: ''
@@ -119,7 +114,6 @@
   username: cisco
   vendor: Cisco
 - description: SanJose
-  hidden: false
   icon: router
   ip_address: 192.168.1.187
   last_duration: ''
@@ -143,7 +137,6 @@
   username: cisco
   vendor: Cisco
 - description: SanDiego
-  hidden: false
   icon: router
   ip_address: 10.0.0.12
   last_duration: ''
@@ -167,7 +160,6 @@
   username: cisco
   vendor: Cisco
 - description: Dallas
-  hidden: false
   icon: router
   ip_address: 10.0.0.100
   last_duration: ''
@@ -191,7 +183,6 @@
   username: cisco
   vendor: Cisco
 - description: Philadelphia
-  hidden: false
   icon: router
   ip_address: 10.0.0.101
   last_duration: ''
@@ -215,7 +206,6 @@
   username: cisco
   vendor: Cisco
 - description: LosAngeles
-  hidden: false
   icon: optical_switch
   ip_address: 10.0.0.13
   last_duration: ''
@@ -239,7 +229,6 @@
   username: cisco
   vendor: Cisco
 - description: Detroit
-  hidden: false
   icon: router
   ip_address: 10.0.0.14
   last_duration: ''
@@ -263,7 +252,6 @@
   username: cisco
   vendor: Cisco
 - description: Richmond
-  hidden: false
   icon: router
   ip_address: 10.0.0.15
   last_duration: ''
@@ -287,7 +275,6 @@
   username: cisco
   vendor: Cisco
 - description: Atlanta
-  hidden: false
   icon: router
   ip_address: 10.0.0.102
   last_duration: ''
@@ -311,7 +298,6 @@
   username: cisco
   vendor: Cisco
 - description: Boston
-  hidden: false
   icon: router
   ip_address: 10.0.0.103
   last_duration: ''
@@ -335,7 +321,6 @@
   username: cisco
   vendor: Cisco
 - description: Houston
-  hidden: false
   icon: router
   ip_address: 10.0.0.104
   last_duration: ''
@@ -359,7 +344,6 @@
   username: cisco
   vendor: Cisco
 - description: Baltimore
-  hidden: false
   icon: router
   ip_address: 10.0.0.105
   last_duration: ''
@@ -383,7 +367,6 @@
   username: cisco
   vendor: Juniper
 - description: Cleveland
-  hidden: false
   icon: router
   ip_address: 10.0.0.106
   last_duration: ''
@@ -407,7 +390,6 @@
   username: cisco
   vendor: Juniper
 - description: Columbus
-  hidden: false
   icon: router
   ip_address: 10.0.0.107
   last_duration: ''
@@ -431,7 +413,6 @@
   username: cisco
   vendor: Juniper
 - description: Cincinnati
-  hidden: false
   icon: router
   ip_address: 10.0.0.108
   last_duration: ''
@@ -455,7 +436,6 @@
   username: cisco
   vendor: Juniper
 - description: Cambridge
-  hidden: false
   icon: router
   ip_address: 10.0.0.109
   last_duration: ''
@@ -479,7 +459,6 @@
   username: cisco
   vendor: Juniper
 - description: Minneapolis
-  hidden: false
   icon: router
   ip_address: 10.0.0.110
   last_duration: ''
@@ -503,7 +482,6 @@
   username: cisco
   vendor: Juniper
 - description: NewYork
-  hidden: false
   icon: router
   ip_address: 192.168.1.88
   last_duration: ''
@@ -527,7 +505,6 @@
   username: cisco
   vendor: Juniper
 - description: Sacramento
-  hidden: false
   icon: router
   ip_address: 10.0.0.111
   last_duration: ''
@@ -551,7 +528,6 @@
   username: cisco
   vendor: Juniper
 - description: SanFrancisco
-  hidden: false
   icon: router
   ip_address: 192.168.1.89
   last_duration: ''
@@ -575,7 +551,6 @@
   username: cisco
   vendor: Juniper
 - description: Orange
-  hidden: false
   icon: router
   ip_address: 10.0.0.114
   last_duration: ''
@@ -599,7 +574,6 @@
   username: cisco
   vendor: Juniper
 - description: Oakland
-  hidden: false
   icon: router
   ip_address: 10.0.0.112
   last_duration: ''
@@ -623,7 +597,6 @@
   username: cisco
   vendor: Cisco
 - description: Denver
-  hidden: false
   icon: router
   ip_address: 10.0.0.113
   last_duration: ''
@@ -647,7 +620,6 @@
   username: cisco
   vendor: Cisco
 - description: Denver
-  hidden: false
   icon: router
   ip_address: 127.0.0.1
   last_duration: ''

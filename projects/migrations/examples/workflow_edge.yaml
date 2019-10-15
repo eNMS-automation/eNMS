@@ -1,295 +1,390 @@
-- {destination: End, label: success, name: Configuration Management Workflow 3 ->
-    1 (True), source: Push Configurations to Git, subtype: success, workflow: 'Regression
-    Workflow 9: Configurations Backup'}
-- {destination: netmiko_create_vrf_test, label: success, name: Netmiko_VRF_workflow
-    0 -> 2, source: Start, subtype: success, workflow: 'Regression Workflow 4: VRF
-    creation and deletion with Netmiko'}
-- {destination: netmiko_check_vrf_test, label: success, name: Netmiko_VRF_workflow
-    2 -> 3, source: netmiko_create_vrf_test, subtype: success, workflow: 'Regression
+- {destination: '[Shared] End', label: success, name: Configuration Management Workflow
+    3 -> 1 (True), source: '[Regression Workflow 9: Configurations Backup] Push Configurations
+    to Git', subtype: success, workflow: 'Regression Workflow 9: Configurations Backup'}
+- {destination: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_create_vrf_test',
+  label: success, name: Netmiko_VRF_workflow 0 -> 2, source: '[Shared] Start', subtype: success,
+  workflow: 'Regression Workflow 4: VRF creation and deletion with Netmiko'}
+- {destination: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_check_vrf_test',
+  label: success, name: Netmiko_VRF_workflow 2 -> 3, source: '[Regression Workflow
+    4: VRF creation and deletion with Netmiko] netmiko_create_vrf_test', subtype: success,
+  workflow: 'Regression Workflow 4: VRF creation and deletion with Netmiko'}
+- {destination: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
+  label: success, name: Netmiko_VRF_workflow 3 -> 4, source: '[Regression Workflow
+    4: VRF creation and deletion with Netmiko] netmiko_check_vrf_test', subtype: success,
+  workflow: 'Regression Workflow 4: VRF creation and deletion with Netmiko'}
+- {destination: '[Shared] Netmiko: Check VRF (test) does not exist', label: success,
+  name: Netmiko_VRF_workflow 4 -> 5, source: '[Regression Workflow 4: VRF creation
+    and deletion with Netmiko] netmiko_delete_vrf_test', subtype: success, workflow: 'Regression
     Workflow 4: VRF creation and deletion with Netmiko'}
-- {destination: netmiko_delete_vrf_test, label: success, name: Netmiko_VRF_workflow
-    3 -> 4, source: netmiko_check_vrf_test, subtype: success, workflow: 'Regression
+- {destination: '[Shared] End', label: success, name: Netmiko_VRF_workflow 5 -> 1,
+  source: '[Shared] Netmiko: Check VRF (test) does not exist', subtype: success, workflow: 'Regression
     Workflow 4: VRF creation and deletion with Netmiko'}
-- {destination: 'Netmiko: Check VRF (test) does not exist', label: success, name: Netmiko_VRF_workflow
-    4 -> 5, source: netmiko_delete_vrf_test, subtype: success, workflow: 'Regression
-    Workflow 4: VRF creation and deletion with Netmiko'}
-- {destination: End, label: success, name: Netmiko_VRF_workflow 5 -> 1, source: 'Netmiko:
-    Check VRF (test) does not exist', subtype: success, workflow: 'Regression Workflow
-    4: VRF creation and deletion with Netmiko'}
-- {destination: napalm_create_vrf_test, label: success, name: Napalm_VRF_workflow
-    0 -> 2, source: Start, subtype: success, workflow: 'Regression Workflow 5: VRF
-    creation and deletion with Napalm'}
-- {destination: get_interfaces_ip, label: success, name: payload_transfer_workflow:success
-    3 -> 5, source: 'NAPALM: Get Facts', subtype: success, workflow: 'Regression Workflow
-    3: Napalm getters (postprocessing)'}
-- {destination: get_config, label: success, name: payload_transfer_workflow:success
-    5 -> 6, source: get_interfaces_ip, subtype: success, workflow: 'Regression Workflow
-    3: Napalm getters (postprocessing)'}
-- {destination: process_payload1, label: success, name: payload_transfer_workflow:success
-    6 -> 7, source: get_config, subtype: success, workflow: 'Regression Workflow 3:
-    Napalm getters (postprocessing)'}
-- {destination: process_payload1, label: success, name: payload_transfer_workflow:success
-    4 -> 7, source: 'NAPALM: Get interfaces', subtype: success, workflow: 'Regression
+- {destination: '[Regression Workflow 5: VRF creation and deletion with Napalm] napalm_create_vrf_test',
+  label: success, name: Napalm_VRF_workflow 0 -> 2, source: '[Shared] Start', subtype: success,
+  workflow: '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5:
+    VRF creation and deletion with Napalm'}
+- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] get_interfaces_ip',
+  label: success, name: payload_transfer_workflow:success 3 -> 5, source: '[Shared]
+    NAPALM: Get Facts', subtype: success, workflow: 'Regression Workflow 3: Napalm
+    getters (postprocessing)'}
+- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] get_config',
+  label: success, name: payload_transfer_workflow:success 5 -> 6, source: '[Regression
+    Workflow 3: Napalm getters (postprocessing)] get_interfaces_ip', subtype: success,
+  workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
+- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
+  label: success, name: payload_transfer_workflow:success 6 -> 7, source: '[Regression
+    Workflow 3: Napalm getters (postprocessing)] get_config', subtype: success, workflow: 'Regression
     Workflow 3: Napalm getters (postprocessing)'}
-- {destination: End, label: success, name: payload_transfer_workflow:success 7 ->
-    1, source: process_payload1, subtype: success, workflow: 'Regression Workflow
-    3: Napalm getters (postprocessing)'}
-- {destination: process_payload1, label: prerequisite, name: payload_transfer_workflow:prerequisite
-    4 -> 7, source: 'NAPALM: Get interfaces', subtype: prerequisite, workflow: 'Regression
-    Workflow 3: Napalm getters (postprocessing)'}
-- {destination: process_payload1, label: prerequisite, name: payload_transfer_workflow:prerequisite
-    3 -> 7, source: 'NAPALM: Get Facts', subtype: prerequisite, workflow: 'Regression
-    Workflow 3: Napalm getters (postprocessing)'}
-- {destination: netmiko_show_ip_route, label: success, name: payload_extraction_validation_worflow
-    0 -> 2, source: Start, subtype: success, workflow: 'Regression Workflow 7: Payload
-    Extraction & Validation'}
-- {destination: 'Payload Workflow: Validate dict via results', label: success, name: payload_extraction_validation_worflow
-    3 -> 4, source: Payload Extraction, subtype: success, workflow: 'Regression Workflow
-    7: Payload Extraction & Validation'}
-- {destination: 'Payload Workflow: Validate text via results', label: success, name: payload_extraction_validation_worflow
-    4 -> 5, source: 'Payload Workflow: Validate dict via results', subtype: success,
-  workflow: 'Regression Workflow 7: Payload Extraction & Validation'}
-- {destination: End, label: success, name: payload_extraction_validation_worflow 5
-    -> 1, source: 'Payload Workflow: Validate text via results', subtype: success,
-  workflow: 'Regression Workflow 7: Payload Extraction & Validation'}
-- {destination: netmiko_check_vrf_napalm, label: success, name: 40-success:20->45,
-  source: napalm_create_vrf_test, subtype: success, workflow: 'Regression Workflow
-    5: VRF creation and deletion with Napalm'}
-- {destination: napalm_rollback, label: success, name: 40-success:45->34, source: netmiko_check_vrf_napalm,
-  subtype: success, workflow: 'Regression Workflow 5: VRF creation and deletion with
-    Napalm'}
-- {destination: netmiko_check_no_vrf_napalm, label: success, name: 40-success:34->46,
-  source: napalm_rollback, subtype: success, workflow: 'Regression Workflow 5: VRF
-    creation and deletion with Napalm'}
-- {destination: End, label: success, name: 40-success:46->2, source: netmiko_check_no_vrf_napalm,
-  subtype: success, workflow: 'Regression Workflow 5: VRF creation and deletion with
-    Napalm'}
-- {destination: 'NAPALM: Get Facts', label: success, name: 43-success:1->22, source: Start,
+- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
+  label: success, name: payload_transfer_workflow:success 4 -> 7, source: '[Shared]
+    NAPALM: Get interfaces', subtype: success, workflow: 'Regression Workflow 3: Napalm
+    getters (postprocessing)'}
+- {destination: '[Shared] End', label: success, name: payload_transfer_workflow:success
+    7 -> 1, source: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
   subtype: success, workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
-- {destination: 'NAPALM: Get interfaces', label: success, name: 43-success:1->23,
-  source: Start, subtype: success, workflow: 'Regression Workflow 3: Napalm getters
-    (postprocessing)'}
-- {destination: 'REST API: call *is_alive* endpoint', label: failure, name: 47-failure:19->21,
-  source: 'Netmiko: Check VRF (test) does not exist', subtype: failure, workflow: 'Regression
+- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
+  label: prerequisite, name: payload_transfer_workflow:prerequisite 4 -> 7, source: '[Shared]
+    NAPALM: Get interfaces', subtype: prerequisite, workflow: 'Regression Workflow
+    3: Napalm getters (postprocessing)'}
+- {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1',
+  label: prerequisite, name: payload_transfer_workflow:prerequisite 3 -> 7, source: '[Shared]
+    NAPALM: Get Facts', subtype: prerequisite, workflow: 'Regression Workflow 3: Napalm
+    getters (postprocessing)'}
+- {destination: '[Regression Workflow 7: Payload Extraction & Validation] netmiko_show_ip_route',
+  label: success, name: payload_extraction_validation_worflow 0 -> 2, source: '[Shared]
+    Start', subtype: success, workflow: '[Regression Workflow F S1: Subworkflow of
+    Workflow] Regression Workflow 7: Payload Extraction & Validation'}
+- {destination: '[Regression Workflow 7: Payload Extraction & Validation] Payload
+    Workflow: Validate dict via results', label: success, name: payload_extraction_validation_worflow
+    3 -> 4, source: '[Regression Workflow 7: Payload Extraction & Validation] Payload
+    Extraction', subtype: success, workflow: '[Regression Workflow F S1: Subworkflow
+    of Workflow] Regression Workflow 7: Payload Extraction & Validation'}
+- {destination: '[Regression Workflow 7: Payload Extraction & Validation] Payload
+    Workflow: Validate text via results', label: success, name: payload_extraction_validation_worflow
+    4 -> 5, source: '[Regression Workflow 7: Payload Extraction & Validation] Payload
+    Workflow: Validate dict via results', subtype: success, workflow: '[Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation'}
+- {destination: '[Shared] End', label: success, name: payload_extraction_validation_worflow
+    5 -> 1, source: '[Regression Workflow 7: Payload Extraction & Validation] Payload
+    Workflow: Validate text via results', subtype: success, workflow: '[Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation'}
+- {destination: '[Regression Workflow 5: VRF creation and deletion with Napalm] netmiko_check_vrf_napalm',
+  label: success, name: 40-success:20->45, source: '[Regression Workflow 5: VRF creation
+    and deletion with Napalm] napalm_create_vrf_test', subtype: success, workflow: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
+    with Napalm'}
+- {destination: '[Regression Workflow 5: VRF creation and deletion with Napalm] napalm_rollback',
+  label: success, name: 40-success:45->34, source: '[Regression Workflow 5: VRF creation
+    and deletion with Napalm] netmiko_check_vrf_napalm', subtype: success, workflow: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
+    with Napalm'}
+- {destination: '[Regression Workflow 5: VRF creation and deletion with Napalm] netmiko_check_no_vrf_napalm',
+  label: success, name: 40-success:34->46, source: '[Regression Workflow 5: VRF creation
+    and deletion with Napalm] napalm_rollback', subtype: success, workflow: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
+    with Napalm'}
+- {destination: '[Shared] End', label: success, name: 40-success:46->2, source: '[Regression
+    Workflow 5: VRF creation and deletion with Napalm] netmiko_check_no_vrf_napalm',
+  subtype: success, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm'}
+- {destination: '[Shared] NAPALM: Get Facts', label: success, name: 43-success:1->22,
+  source: '[Shared] Start', subtype: success, workflow: 'Regression Workflow 3: Napalm
+    getters (postprocessing)'}
+- {destination: '[Shared] NAPALM: Get interfaces', label: success, name: 43-success:1->23,
+  source: '[Shared] Start', subtype: success, workflow: 'Regression Workflow 3: Napalm
+    getters (postprocessing)'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: failure, name: 47-failure:19->21,
+  source: '[Shared] Netmiko: Check VRF (test) does not exist', subtype: failure, workflow: 'Regression
     Workflow 2: Separate Failure - Success paths'}
-- {destination: 'Netmiko: Check VRF (test) does not exist', label: success, name: 47-success:1->19,
-  source: Start, subtype: success, workflow: 'Regression Workflow 2: Separate Failure
-    - Success paths'}
-- {destination: 'NAPALM: Get Facts', label: success, name: 47-success:19->22, source: 'Netmiko:
-    Check VRF (test) does not exist', subtype: success, workflow: 'Regression Workflow
-    2: Separate Failure - Success paths'}
-- {destination: Test Netmiko Prompt Service, label: success, name: 51-success:1->52,
-  source: Start, subtype: success, workflow: 'Regression Workflow D: Prompts'}
-- {destination: Test netmiko prompts pass, label: failure, name: 54-failure:38->55,
-  source: Test Netmiko Prompt Service, subtype: failure, workflow: 'Regression Workflow
-    D: Prompts'}
-- {destination: Modify payload (no device), label: success, name: 54-success:1->55,
-  source: Start, subtype: success, workflow: 'Regression Workflow A: get_var, set_var,
-    get_result'}
-- {destination: Modify payload (per device), label: success, name: 54-success:55->56,
-  source: Modify payload (no device), subtype: success, workflow: 'Regression Workflow
-    A: get_var, set_var, get_result'}
-- {destination: Show vrf with payload helper, label: success, name: 56-success:41->57,
-  source: Modify payload (per device), subtype: success, workflow: 'Regression Workflow
-    A: get_var, set_var, get_result'}
-- {destination: Show vrf with python query, label: failure, name: 56-failure:57->58,
-  source: Show vrf with payload helper, subtype: failure, workflow: 'Regression Workflow
-    A: get_var, set_var, get_result'}
-- {destination: 'REST API: call *is_alive* endpoint', label: success, name: 57-success:42->20,
-  source: Show vrf with python query, subtype: success, workflow: 'Regression Workflow
-    A: get_var, set_var, get_result'}
-- {destination: show runtime with get_result helper, label: success, name: 55-success:20->56,
-  source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression
-    Workflow A: get_var, set_var, get_result'}
-- {destination: End, label: success, name: 55-success:56->2, source: show runtime
-    with get_result helper, subtype: success, workflow: 'Regression Workflow A: get_var,
-    set_var, get_result'}
-- {destination: 'Getters Workflow: is alive', label: success, name: 57-success:1->58,
-  source: Start, subtype: success, workflow: 'Regression Workflow B: Napalm getters
-    validation'}
-- {destination: 'Getters Workflow: get facts', label: success, name: 57-success:58->59,
-  source: 'Getters Workflow: is alive', subtype: success, workflow: 'Regression Workflow
-    B: Napalm getters validation'}
-- {destination: 'Getters Workflow: MAC address', label: success, name: 57-success:60->61,
-  source: 'Getters Workflow: Interface IP', subtype: success, workflow: 'Regression
-    Workflow B: Napalm getters validation'}
-- {destination: End, label: success, name: 57-success:61->2, source: 'Getters Workflow:
-    MAC address', subtype: success, workflow: 'Regression Workflow B: Napalm getters
-    validation'}
-- {destination: 'Getters Workflow: get facts failed match', label: success, name: 57-success:59->62,
-  source: 'Getters Workflow: get facts', subtype: success, workflow: 'Regression Workflow
-    B: Napalm getters validation'}
-- {destination: 'Getters Workflow: Interface IP', label: failure, name: 57-failure:62->60,
-  source: 'Getters Workflow: get facts failed match', subtype: failure, workflow: 'Regression
-    Workflow B: Napalm getters validation'}
-- {destination: 'Ansible Workflow: Arista show version', label: success, name: 64-success:1->63,
-  source: Start, subtype: success, workflow: 'Regression Workflow 6: Ansible with
-    Validation'}
-- {destination: 'Ansible Workflow: Arista show configuration (regex match)', label: success,
-  name: 64-success:49->65, source: 'Ansible Workflow: Arista show version', subtype: success,
-  workflow: 'Regression Workflow 6: Ansible with Validation'}
-- {destination: 'Ansible Workflow: Arista show configuration (dict match)', label: success,
-  name: 64-success:65->66, source: 'Ansible Workflow: Arista show configuration (regex
-    match)', subtype: success, workflow: 'Regression Workflow 6: Ansible with Validation'}
-- {destination: End, label: success, name: 64-success:66->2, source: 'Ansible Workflow:
-    Arista show configuration (dict match)', subtype: success, workflow: 'Regression
-    Workflow 6: Ansible with Validation'}
-- {destination: 'NAPALM: Get interfaces', label: success, name: 62-success:20->22,
-  source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression
+- {destination: '[Shared] Netmiko: Check VRF (test) does not exist', label: success,
+  name: 47-success:1->19, source: '[Shared] Start', subtype: success, workflow: 'Regression
     Workflow 2: Separate Failure - Success paths'}
-- {destination: Example Service (does nothing), label: success, name: 62-success:22->9,
-  source: 'NAPALM: Get interfaces', subtype: success, workflow: 'Regression Workflow
-    2: Separate Failure - Success paths'}
-- {destination: 'NAPALM: Get interfaces', label: success, name: 62-success:21->22,
-  source: 'NAPALM: Get Facts', subtype: success, workflow: 'Regression Workflow 2:
-    Separate Failure - Success paths'}
-- {destination: Example Service (does nothing), label: failure, name: 62-failure:22->9,
-  source: 'NAPALM: Get interfaces', subtype: failure, workflow: 'Regression Workflow
-    2: Separate Failure - Success paths'}
-- {destination: Show version with multiprocessing, label: success, name: 67-success:1->68,
-  source: Start, subtype: success, workflow: 'Regression Workflow C: Advanced multiprocessing'}
-- {destination: napalm_configure_bgp_1, label: success, name: 67-success:9->10, source: Example
-    Service (does nothing), subtype: success, workflow: 'Regression Workflow C: Advanced
-    multiprocessing'}
-- {destination: 'REST API: call *is_alive* endpoint', label: success, name: 67-success:10->20,
-  source: napalm_configure_bgp_1, subtype: success, workflow: 'Regression Workflow
-    C: Advanced multiprocessing'}
-- {destination: 'REST API: call *is_alive* endpoint', label: failure, name: 67-failure:68->20,
-  source: Show version with multiprocessing, subtype: failure, workflow: 'Regression
-    Workflow C: Advanced multiprocessing'}
-- {destination: End, label: success, name: 67-success:20->2, source: 'REST API: call
-    *is_alive* endpoint', subtype: success, workflow: 'Regression Workflow C: Advanced
-    multiprocessing'}
-- {destination: 'REST API: call *is_alive* endpoint', label: prerequisite, name: 67-prerequisite:68->20,
-  source: Show version with multiprocessing, subtype: prerequisite, workflow: 'Regression
-    Workflow C: Advanced multiprocessing'}
-- {destination: 'REST API: call *is_alive* endpoint', label: prerequisite, name: 67-prerequisite:10->20,
-  source: napalm_configure_bgp_1, subtype: prerequisite, workflow: 'Regression Workflow
-    C: Advanced multiprocessing'}
-- {destination: Modify Payload for Iteration, label: success, name: 70-success:1->26,
-  source: Start, subtype: success, workflow: 'Regression Workflow E: Iteration Targets'}
-- {destination: Iteration Target Workflow - Test 2, label: success, name: 70-success:71->72,
-  source: Iteration Targets Workflow - Test 1, subtype: success, workflow: 'Regression
-    Workflow E: Iteration Targets'}
-- {destination: Iteration Target Workflow - Test 3, label: failure, name: 72-failure:55->73,
-  source: Iteration Target Workflow - Test 2, subtype: failure, workflow: 'Regression
-    Workflow E: Iteration Targets'}
-- {destination: 'Payload Workflow: Validate dict via payload', label: success, name: 64-success:30->75,
-  source: Payload Extraction, subtype: success, workflow: 'Regression Workflow 7:
-    Payload Extraction & Validation'}
-- {destination: 'Payload Workflow: Validate text via payload', label: success, name: 64-success:75->74,
-  source: 'Payload Workflow: Validate dict via payload', subtype: success, workflow: 'Regression
-    Workflow 7: Payload Extraction & Validation'}
-- {destination: End, label: success, name: 64-success:74->2, source: 'Payload Workflow:
-    Validate text via payload', subtype: success, workflow: 'Regression Workflow 7:
-    Payload Extraction & Validation'}
-- {destination: 'Getters Workflow: Interface IP', label: success, name: 76-success:1->46,
-  source: Start, subtype: success, workflow: 'Regression Workflow 8: Payload Extraction
-    with Operations'}
-- {destination: 'Payload Workflow: Add initial variables', label: success, name: 76-success:46->77,
-  source: 'Getters Workflow: Interface IP', subtype: success, workflow: 'Regression
-    Workflow 8: Payload Extraction with Operations'}
-- {destination: 'Payload Workflow: Extraction 1', label: success, name: 76-success:77->78,
-  source: 'Payload Workflow: Add initial variables', subtype: success, workflow: 'Regression
-    Workflow 8: Payload Extraction with Operations'}
-- {destination: 'Payload Workflow: Extraction 2', label: success, name: 76-success:78->79,
-  source: 'Payload Workflow: Extraction 1', subtype: success, workflow: 'Regression
-    Workflow 8: Payload Extraction with Operations'}
-- {destination: 'Payload Workflow: Validation 1', label: success, name: 76-success:79->80,
-  source: 'Payload Workflow: Extraction 2', subtype: success, workflow: 'Regression
-    Workflow 8: Payload Extraction with Operations'}
-- {destination: 'Payload Workflow: Validation 2', label: success, name: 76-success:80->81,
-  source: 'Payload Workflow: Validation 1', subtype: success, workflow: 'Regression
-    Workflow 8: Payload Extraction with Operations'}
-- {destination: End, label: success, name: 76-success:81->2, source: 'Payload Workflow:
-    Validation 2', subtype: success, workflow: 'Regression Workflow 8: Payload Extraction
-    with Operations'}
-- {destination: End, label: success, name: 80-success:82->2, source: Iteration Targets
-    Workflow - Test 4, subtype: success, workflow: 'Regression Workflow E: Iteration
-    Targets'}
-- {destination: 'Variable Access Subworkflow: Access variable from snippet', label: success,
-  name: 83-success:1->84, source: Start, subtype: success, workflow: 'Regression Workflow
-    F S2: Access Variables from Parent Workflow'}
-- {destination: Modify Payload for Iteration, label: success, name: 74-success:1->26,
-  source: Start, subtype: success, workflow: 'Regression Workflow F: Workflow of Workflows'}
-- {destination: 'Variable Access Subworkflow: Access variables for iteration', label: success,
-  name: 83-success:84->85, source: 'Variable Access Subworkflow: Access variable from
-    snippet', subtype: success, workflow: 'Regression Workflow F S2: Access Variables
-    from Parent Workflow'}
-- {destination: End, label: success, name: 85-success:66->2, source: 'Variable Access
-    Subworkflow: Access variables for iteration', subtype: success, workflow: 'Regression
-    Workflow F S2: Access Variables from Parent Workflow'}
-- {destination: Iteration Targets Workflow - Test 4, label: failure, name: 83-failure:56->64,
-  source: Iteration Target Workflow - Test 3, subtype: failure, workflow: 'Regression
-    Workflow E: Iteration Targets'}
-- {destination: 'Regression Workflow 8: Payload Extraction with Operations', label: success,
-  name: 86-success:80->84, source: 'Regression Workflow B: Napalm getters validation',
-  subtype: success, workflow: 'Regression Workflow F S1: Subworkflow of Workflow'}
-- {destination: End, label: success, name: 86-success:84->2, source: 'Regression Workflow
-    8: Payload Extraction with Operations', subtype: success, workflow: 'Regression
-    Workflow F S1: Subworkflow of Workflow'}
-- {destination: 'Regression Workflow 7: Payload Extraction & Validation', label: success,
-  name: 86-success:1->75, source: Start, subtype: success, workflow: 'Regression Workflow
-    F S1: Subworkflow of Workflow'}
-- {destination: 'Regression Workflow B: Napalm getters validation', label: success,
-  name: 86-success:75->80, source: 'Regression Workflow 7: Payload Extraction & Validation',
-  subtype: success, workflow: 'Regression Workflow F S1: Subworkflow of Workflow'}
-- {destination: Check VRF (NOVRF) exists, label: success, name: 87-success:1->88,
-  source: Start, subtype: success, workflow: 'Regression Workflow 1: Netmiko with
-    validation and retries'}
-- {destination: End, label: success, name: 87-success:88->2, source: Check VRF (NOVRF)
-    exists, subtype: success, workflow: 'Regression Workflow 1: Netmiko with validation
-    and retries'}
-- {destination: Iteration Targets Workflow - Test 1, label: success, name: 83-success:26->54,
-  source: Modify Payload for Iteration, subtype: success, workflow: 'Regression Workflow
-    E: Iteration Targets'}
-- {destination: End, label: success, name: 75-success:38->2, source: Test netmiko
-    prompts pass, subtype: success, workflow: 'Regression Workflow D: Prompts'}
-- {destination: 'REST API: call *is_alive* endpoint', label: success, name: 75-success:38->20,
-  source: Test netmiko prompts pass, subtype: success, workflow: 'Regression Workflow
-    D: Prompts'}
-- {destination: Test Netmiko Prompt Service, label: success, name: 75-success:20->37,
-  source: 'REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression
+- {destination: '[Shared] NAPALM: Get Facts', label: success, name: 47-success:19->22,
+  source: '[Shared] Netmiko: Check VRF (test) does not exist', subtype: success, workflow: 'Regression
+    Workflow 2: Separate Failure - Success paths'}
+- {destination: '[Regression Workflow D: Prompts] Test Netmiko Prompt Service', label: success,
+  name: 51-success:1->52, source: '[Shared] Start', subtype: success, workflow: 'Regression
     Workflow D: Prompts'}
-- {destination: End, label: success, name: 74-success:9->2, source: Example Service
-    (does nothing), subtype: success, workflow: 'Regression Workflow 2: Separate Failure
-    - Success paths'}
-- {destination: Configuration Backup (Netmiko), label: success, name: 68-success:1->13,
-  source: Start, subtype: success, workflow: 'Regression Workflow 9: Configurations
-    Backup'}
-- {destination: Configuration Backup (NAPALM), label: success, name: 68-success:1->14,
-  source: Start, subtype: success, workflow: 'Regression Workflow 9: Configurations
-    Backup'}
-- {destination: Push Configurations to Git, label: success, name: 68-success:14->7,
-  source: Configuration Backup (NAPALM), subtype: success, workflow: 'Regression Workflow
-    9: Configurations Backup'}
-- {destination: Push Configurations to Git, label: success, name: 68-success:13->7,
-  source: Configuration Backup (Netmiko), subtype: success, workflow: 'Regression
-    Workflow 9: Configurations Backup'}
-- {destination: Push Configurations to Git, label: prerequisite, name: 67-prerequisite:12->7,
-  source: Configuration Backup (Netmiko), subtype: prerequisite, workflow: 'Regression
-    Workflow 9: Configurations Backup'}
-- {destination: Push Configurations to Git, label: prerequisite, name: 67-prerequisite:13->7,
-  source: Configuration Backup (NAPALM), subtype: prerequisite, workflow: 'Regression
-    Workflow 9: Configurations Backup'}
-- {destination: 'Regression Workflow F S1: Subworkflow of Workflow', label: success,
-  name: 71-success:80->81, source: 'Regression Workflow F S2: Access Variables from
-    Parent Workflow', subtype: success, workflow: 'Regression Workflow F: Workflow
+- {destination: '[Regression Workflow D: Prompts] Test netmiko prompts pass', label: failure,
+  name: 54-failure:38->55, source: '[Regression Workflow D: Prompts] Test Netmiko
+    Prompt Service', subtype: failure, workflow: 'Regression Workflow D: Prompts'}
+- {destination: '[Regression Workflow A: get_var, set_var, get_result] Modify payload
+    (no device)', label: success, name: 54-success:1->55, source: '[Shared] Start',
+  subtype: success, workflow: 'Regression Workflow A: get_var, set_var, get_result'}
+- {destination: '[Regression Workflow A: get_var, set_var, get_result] Modify payload
+    (per device)', label: success, name: 54-success:55->56, source: '[Regression Workflow
+    A: get_var, set_var, get_result] Modify payload (no device)', subtype: success,
+  workflow: 'Regression Workflow A: get_var, set_var, get_result'}
+- {destination: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with
+    payload helper', label: success, name: 56-success:41->57, source: '[Regression
+    Workflow A: get_var, set_var, get_result] Modify payload (per device)', subtype: success,
+  workflow: 'Regression Workflow A: get_var, set_var, get_result'}
+- {destination: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with
+    python query', label: failure, name: 56-failure:57->58, source: '[Regression Workflow
+    A: get_var, set_var, get_result] Show vrf with payload helper', subtype: failure,
+  workflow: 'Regression Workflow A: get_var, set_var, get_result'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, name: 57-success:42->20,
+  source: '[Regression Workflow A: get_var, set_var, get_result] Show vrf with python
+    query', subtype: success, workflow: 'Regression Workflow A: get_var, set_var,
+    get_result'}
+- {destination: '[Regression Workflow A: get_var, set_var, get_result] show runtime
+    with get_result helper', label: success, name: 55-success:20->56, source: '[Shared]
+    REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression Workflow
+    A: get_var, set_var, get_result'}
+- {destination: '[Shared] End', label: success, name: 55-success:56->2, source: '[Regression
+    Workflow A: get_var, set_var, get_result] show runtime with get_result helper',
+  subtype: success, workflow: 'Regression Workflow A: get_var, set_var, get_result'}
+- {destination: '[Regression Workflow B: Napalm getters validation] Getters Workflow:
+    is alive', label: success, name: 57-success:1->58, source: '[Shared] Start', subtype: success,
+  workflow: '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation'}
+- {destination: '[Regression Workflow B: Napalm getters validation] Getters Workflow:
+    get facts', label: success, name: 57-success:58->59, source: '[Regression Workflow
+    B: Napalm getters validation] Getters Workflow: is alive', subtype: success, workflow: '[Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters
+    validation'}
+- {destination: '[Regression Workflow B: Napalm getters validation] Getters Workflow:
+    MAC address', label: success, name: 57-success:60->61, source: '[Shared] Getters
+    Workflow: Interface IP', subtype: success, workflow: '[Regression Workflow F S1:
+    Subworkflow of Workflow] Regression Workflow B: Napalm getters validation'}
+- {destination: '[Shared] End', label: success, name: 57-success:61->2, source: '[Regression
+    Workflow B: Napalm getters validation] Getters Workflow: MAC address', subtype: success,
+  workflow: '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation'}
+- {destination: '[Regression Workflow B: Napalm getters validation] Getters Workflow:
+    get facts failed match', label: success, name: 57-success:59->62, source: '[Regression
+    Workflow B: Napalm getters validation] Getters Workflow: get facts', subtype: success,
+  workflow: '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation'}
+- {destination: '[Shared] Getters Workflow: Interface IP', label: failure, name: 57-failure:62->60,
+  source: '[Regression Workflow B: Napalm getters validation] Getters Workflow: get
+    facts failed match', subtype: failure, workflow: '[Regression Workflow F S1: Subworkflow
+    of Workflow] Regression Workflow B: Napalm getters validation'}
+- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
+    Arista show version', label: success, name: 64-success:1->63, source: '[Shared]
+    Start', subtype: success, workflow: 'Regression Workflow 6: Ansible with Validation'}
+- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
+    Arista show configuration (regex match)', label: success, name: 64-success:49->65,
+  source: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow: Arista
+    show version', subtype: success, workflow: 'Regression Workflow 6: Ansible with
+    Validation'}
+- {destination: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
+    Arista show configuration (dict match)', label: success, name: 64-success:65->66,
+  source: '[Regression Workflow 6: Ansible with Validation] Ansible Workflow: Arista
+    show configuration (regex match)', subtype: success, workflow: 'Regression Workflow
+    6: Ansible with Validation'}
+- {destination: '[Shared] End', label: success, name: 64-success:66->2, source: '[Regression
+    Workflow 6: Ansible with Validation] Ansible Workflow: Arista show configuration
+    (dict match)', subtype: success, workflow: 'Regression Workflow 6: Ansible with
+    Validation'}
+- {destination: '[Shared] NAPALM: Get interfaces', label: success, name: 62-success:20->22,
+  source: '[Shared] REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression
+    Workflow 2: Separate Failure - Success paths'}
+- {destination: '[Shared] Example Service (does nothing)', label: success, name: 62-success:22->9,
+  source: '[Shared] NAPALM: Get interfaces', subtype: success, workflow: 'Regression
+    Workflow 2: Separate Failure - Success paths'}
+- {destination: '[Shared] NAPALM: Get interfaces', label: success, name: 62-success:21->22,
+  source: '[Shared] NAPALM: Get Facts', subtype: success, workflow: 'Regression Workflow
+    2: Separate Failure - Success paths'}
+- {destination: '[Shared] Example Service (does nothing)', label: failure, name: 62-failure:22->9,
+  source: '[Shared] NAPALM: Get interfaces', subtype: failure, workflow: 'Regression
+    Workflow 2: Separate Failure - Success paths'}
+- {destination: '[Regression Workflow C: Advanced multiprocessing] Show version with
+    multiprocessing', label: success, name: 67-success:1->68, source: '[Shared] Start',
+  subtype: success, workflow: 'Regression Workflow C: Advanced multiprocessing'}
+- {destination: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
+  label: success, name: 67-success:9->10, source: '[Shared] Example Service (does
+    nothing)', subtype: success, workflow: 'Regression Workflow C: Advanced multiprocessing'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, name: 67-success:10->20,
+  source: '[Regression Workflow C: Advanced multiprocessing] napalm_configure_bgp_1',
+  subtype: success, workflow: 'Regression Workflow C: Advanced multiprocessing'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: failure, name: 67-failure:68->20,
+  source: '[Regression Workflow C: Advanced multiprocessing] Show version with multiprocessing',
+  subtype: failure, workflow: 'Regression Workflow C: Advanced multiprocessing'}
+- {destination: '[Shared] End', label: success, name: 67-success:20->2, source: '[Shared]
+    REST API: call *is_alive* endpoint', subtype: success, workflow: 'Regression Workflow
+    C: Advanced multiprocessing'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
+  name: 67-prerequisite:68->20, source: '[Regression Workflow C: Advanced multiprocessing]
+    Show version with multiprocessing', subtype: prerequisite, workflow: 'Regression
+    Workflow C: Advanced multiprocessing'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: prerequisite,
+  name: 67-prerequisite:10->20, source: '[Regression Workflow C: Advanced multiprocessing]
+    napalm_configure_bgp_1', subtype: prerequisite, workflow: 'Regression Workflow
+    C: Advanced multiprocessing'}
+- {destination: '[Shared] Modify Payload for Iteration', label: success, name: 70-success:1->26,
+  source: '[Shared] Start', subtype: success, workflow: 'Regression Workflow E: Iteration
+    Targets'}
+- {destination: '[Regression Workflow E: Iteration Targets] Iteration Target Workflow
+    - Test 2', label: success, name: 70-success:71->72, source: '[Regression Workflow
+    E: Iteration Targets] Iteration Targets Workflow - Test 1', subtype: success,
+  workflow: 'Regression Workflow E: Iteration Targets'}
+- {destination: '[Regression Workflow E: Iteration Targets] Iteration Target Workflow
+    - Test 3', label: failure, name: 72-failure:55->73, source: '[Regression Workflow
+    E: Iteration Targets] Iteration Target Workflow - Test 2', subtype: failure, workflow: 'Regression
+    Workflow E: Iteration Targets'}
+- {destination: '[Regression Workflow 7: Payload Extraction & Validation] Payload
+    Workflow: Validate dict via payload', label: success, name: 64-success:30->75,
+  source: '[Regression Workflow 7: Payload Extraction & Validation] Payload Extraction',
+  subtype: success, workflow: '[Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 7: Payload Extraction & Validation'}
+- {destination: '[Regression Workflow 7: Payload Extraction & Validation] Payload
+    Workflow: Validate text via payload', label: success, name: 64-success:75->74,
+  source: '[Regression Workflow 7: Payload Extraction & Validation] Payload Workflow:
+    Validate dict via payload', subtype: success, workflow: '[Regression Workflow
+    F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction & Validation'}
+- {destination: '[Shared] End', label: success, name: 64-success:74->2, source: '[Regression
+    Workflow 7: Payload Extraction & Validation] Payload Workflow: Validate text via
+    payload', subtype: success, workflow: '[Regression Workflow F S1: Subworkflow
+    of Workflow] Regression Workflow 7: Payload Extraction & Validation'}
+- {destination: '[Shared] Getters Workflow: Interface IP', label: success, name: 76-success:1->46,
+  source: '[Shared] Start', subtype: success, workflow: '[Regression Workflow F S1:
+    Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with Operations'}
+- {destination: '[Regression Workflow 8: Payload Extraction with Operations] Payload
+    Workflow: Add initial variables', label: success, name: 76-success:46->77, source: '[Shared]
+    Getters Workflow: Interface IP', subtype: success, workflow: '[Regression Workflow
+    F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction with
+    Operations'}
+- {destination: '[Regression Workflow 8: Payload Extraction with Operations] Payload
+    Workflow: Extraction 1', label: success, name: 76-success:77->78, source: '[Regression
+    Workflow 8: Payload Extraction with Operations] Payload Workflow: Add initial
+    variables', subtype: success, workflow: '[Regression Workflow F S1: Subworkflow
+    of Workflow] Regression Workflow 8: Payload Extraction with Operations'}
+- {destination: '[Regression Workflow 8: Payload Extraction with Operations] Payload
+    Workflow: Extraction 2', label: success, name: 76-success:78->79, source: '[Regression
+    Workflow 8: Payload Extraction with Operations] Payload Workflow: Extraction 1',
+  subtype: success, workflow: '[Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 8: Payload Extraction with Operations'}
+- {destination: '[Regression Workflow 8: Payload Extraction with Operations] Payload
+    Workflow: Validation 1', label: success, name: 76-success:79->80, source: '[Regression
+    Workflow 8: Payload Extraction with Operations] Payload Workflow: Extraction 2',
+  subtype: success, workflow: '[Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 8: Payload Extraction with Operations'}
+- {destination: '[Regression Workflow 8: Payload Extraction with Operations] Payload
+    Workflow: Validation 2', label: success, name: 76-success:80->81, source: '[Regression
+    Workflow 8: Payload Extraction with Operations] Payload Workflow: Validation 1',
+  subtype: success, workflow: '[Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 8: Payload Extraction with Operations'}
+- {destination: '[Shared] End', label: success, name: 76-success:81->2, source: '[Regression
+    Workflow 8: Payload Extraction with Operations] Payload Workflow: Validation 2',
+  subtype: success, workflow: '[Regression Workflow F S1: Subworkflow of Workflow]
+    Regression Workflow 8: Payload Extraction with Operations'}
+- {destination: '[Shared] End', label: success, name: 80-success:82->2, source: '[Regression
+    Workflow E: Iteration Targets] Iteration Targets Workflow - Test 4', subtype: success,
+  workflow: 'Regression Workflow E: Iteration Targets'}
+- {destination: '[Regression Workflow F S2: Access Variables from Parent Workflow]
+    Variable Access Subworkflow: Access variable from snippet', label: success, name: 83-success:1->84,
+  source: '[Shared] Start', subtype: success, workflow: '[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow'}
+- {destination: '[Shared] Modify Payload for Iteration', label: success, name: 74-success:1->26,
+  source: '[Shared] Start', subtype: success, workflow: 'Regression Workflow F: Workflow
     of Workflows'}
-- {destination: End, label: success, name: 71-success:81->2, source: 'Regression Workflow
-    F S1: Subworkflow of Workflow', subtype: success, workflow: 'Regression Workflow
+- {destination: '[Regression Workflow F S2: Access Variables from Parent Workflow]
+    Variable Access Subworkflow: Access variables for iteration', label: success,
+  name: 83-success:84->85, source: '[Regression Workflow F S2: Access Variables from
+    Parent Workflow] Variable Access Subworkflow: Access variable from snippet', subtype: success,
+  workflow: '[Regression Workflow F: Workflow of Workflows] Regression Workflow F
+    S2: Access Variables from Parent Workflow'}
+- {destination: '[Shared] End', label: success, name: 85-success:66->2, source: '[Regression
+    Workflow F S2: Access Variables from Parent Workflow] Variable Access Subworkflow:
+    Access variables for iteration', subtype: success, workflow: '[Regression Workflow
+    F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
+    Workflow'}
+- {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
+    - Test 4', label: failure, name: 83-failure:56->64, source: '[Regression Workflow
+    E: Iteration Targets] Iteration Target Workflow - Test 3', subtype: failure, workflow: 'Regression
+    Workflow E: Iteration Targets'}
+- {destination: '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    8: Payload Extraction with Operations', label: success, name: 86-success:80->84,
+  source: '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation', subtype: success, workflow: '[Regression Workflow
+    F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow'}
+- {destination: '[Shared] End', label: success, name: 86-success:84->2, source: '[Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 8: Payload Extraction
+    with Operations', subtype: success, workflow: '[Regression Workflow F: Workflow
+    of Workflows] Regression Workflow F S1: Subworkflow of Workflow'}
+- {destination: '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    7: Payload Extraction & Validation', label: success, name: 86-success:1->75, source: '[Shared]
+    Start', subtype: success, workflow: '[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow F S1: Subworkflow of Workflow'}
+- {destination: '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    B: Napalm getters validation', label: success, name: 86-success:75->80, source: '[Regression
+    Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload Extraction
+    & Validation', subtype: success, workflow: '[Regression Workflow F: Workflow of
+    Workflows] Regression Workflow F S1: Subworkflow of Workflow'}
+- {destination: '[Regression Workflow 1: Netmiko with validation and retries] Check
+    VRF (NOVRF) exists', label: success, name: 87-success:1->88, source: '[Shared]
+    Start', subtype: success, workflow: 'Regression Workflow 1: Netmiko with validation
+    and retries'}
+- {destination: '[Shared] End', label: success, name: 87-success:88->2, source: '[Regression
+    Workflow 1: Netmiko with validation and retries] Check VRF (NOVRF) exists', subtype: success,
+  workflow: 'Regression Workflow 1: Netmiko with validation and retries'}
+- {destination: '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
+    - Test 1', label: success, name: 83-success:26->54, source: '[Shared] Modify Payload
+    for Iteration', subtype: success, workflow: 'Regression Workflow E: Iteration
+    Targets'}
+- {destination: '[Shared] End', label: success, name: 75-success:38->2, source: '[Regression
+    Workflow D: Prompts] Test netmiko prompts pass', subtype: success, workflow: 'Regression
+    Workflow D: Prompts'}
+- {destination: '[Shared] REST API: call *is_alive* endpoint', label: success, name: 75-success:38->20,
+  source: '[Regression Workflow D: Prompts] Test netmiko prompts pass', subtype: success,
+  workflow: 'Regression Workflow D: Prompts'}
+- {destination: '[Regression Workflow D: Prompts] Test Netmiko Prompt Service', label: success,
+  name: 75-success:20->37, source: '[Shared] REST API: call *is_alive* endpoint',
+  subtype: success, workflow: 'Regression Workflow D: Prompts'}
+- {destination: '[Shared] End', label: success, name: 74-success:9->2, source: '[Shared]
+    Example Service (does nothing)', subtype: success, workflow: 'Regression Workflow
+    2: Separate Failure - Success paths'}
+- {destination: '[Regression Workflow 9: Configurations Backup] Configuration Backup
+    (Netmiko)', label: success, name: 68-success:1->13, source: '[Shared] Start',
+  subtype: success, workflow: 'Regression Workflow 9: Configurations Backup'}
+- {destination: '[Regression Workflow 9: Configurations Backup] Configuration Backup
+    (NAPALM)', label: success, name: 68-success:1->14, source: '[Shared] Start', subtype: success,
+  workflow: 'Regression Workflow 9: Configurations Backup'}
+- {destination: '[Regression Workflow 9: Configurations Backup] Push Configurations
+    to Git', label: success, name: 68-success:14->7, source: '[Regression Workflow
+    9: Configurations Backup] Configuration Backup (NAPALM)', subtype: success, workflow: 'Regression
+    Workflow 9: Configurations Backup'}
+- {destination: '[Regression Workflow 9: Configurations Backup] Push Configurations
+    to Git', label: success, name: 68-success:13->7, source: '[Regression Workflow
+    9: Configurations Backup] Configuration Backup (Netmiko)', subtype: success, workflow: 'Regression
+    Workflow 9: Configurations Backup'}
+- {destination: '[Regression Workflow 9: Configurations Backup] Push Configurations
+    to Git', label: prerequisite, name: 67-prerequisite:12->7, source: '[Regression
+    Workflow 9: Configurations Backup] Configuration Backup (Netmiko)', subtype: prerequisite,
+  workflow: 'Regression Workflow 9: Configurations Backup'}
+- {destination: '[Regression Workflow 9: Configurations Backup] Push Configurations
+    to Git', label: prerequisite, name: 67-prerequisite:13->7, source: '[Regression
+    Workflow 9: Configurations Backup] Configuration Backup (NAPALM)', subtype: prerequisite,
+  workflow: 'Regression Workflow 9: Configurations Backup'}
+- {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+    F S1: Subworkflow of Workflow', label: success, name: 71-success:80->81, source: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+    from Parent Workflow', subtype: success, workflow: 'Regression Workflow F: Workflow
+    of Workflows'}
+- {destination: '[Shared] End', label: success, name: 71-success:81->2, source: '[Regression
+    Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow',
+  subtype: success, workflow: 'Regression Workflow F: Workflow of Workflows'}
+- {destination: '[Regression Workflow F: Workflow of Workflows] Show interfaces with
+    Netmiko', label: success, name: 71-success:25->84, source: '[Shared] Modify Payload
+    for Iteration', subtype: success, workflow: 'Regression Workflow F: Workflow of
+    Workflows'}
+- {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+    5: VRF creation and deletion with Napalm', label: success, name: 71-success:84->68,
+  source: '[Regression Workflow F: Workflow of Workflows] Show interfaces with Netmiko',
+  subtype: success, workflow: 'Regression Workflow F: Workflow of Workflows'}
+- {destination: '[Regression Workflow 7: Payload Extraction & Validation] Payload
+    Extraction', label: success, name: 70-success:28->29, source: '[Regression Workflow
+    7: Payload Extraction & Validation] netmiko_show_ip_route', subtype: success,
+  workflow: '[Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow
+    7: Payload Extraction & Validation'}
+- {destination: '[Shared] NAPALM: Get interfaces', label: success, name: 71-success:68->21,
+  source: '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF
+    creation and deletion with Napalm', subtype: success, workflow: 'Regression Workflow
     F: Workflow of Workflows'}
-- {destination: Show interfaces with Netmiko, label: success, name: 71-success:25->84,
-  source: Modify Payload for Iteration, subtype: success, workflow: 'Regression Workflow
-    F: Workflow of Workflows'}
-- {destination: 'Regression Workflow 5: VRF creation and deletion with Napalm', label: success,
-  name: 71-success:84->68, source: Show interfaces with Netmiko, subtype: success,
-  workflow: 'Regression Workflow F: Workflow of Workflows'}
-- {destination: Payload Extraction, label: success, name: 70-success:28->29, source: netmiko_show_ip_route,
-  subtype: success, workflow: 'Regression Workflow 7: Payload Extraction & Validation'}
-- {destination: 'NAPALM: Get interfaces', label: success, name: 71-success:68->21,
-  source: 'Regression Workflow 5: VRF creation and deletion with Napalm', subtype: success,
-  workflow: 'Regression Workflow F: Workflow of Workflows'}
-- {destination: 'Regression Workflow F S2: Access Variables from Parent Workflow',
-  label: success, name: 71-success:21->80, source: 'NAPALM: Get interfaces', subtype: success,
-  workflow: 'Regression Workflow F: Workflow of Workflows'}
+- {destination: '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+    F S2: Access Variables from Parent Workflow', label: success, name: 71-success:21->80,
+  source: '[Shared] NAPALM: Get interfaces', subtype: success, workflow: 'Regression
+    Workflow F: Workflow of Workflows'}

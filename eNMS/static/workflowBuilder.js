@@ -292,12 +292,7 @@ function addServicesToWorkflow(services) {
       5
     );
   } else {
-    services = $("#services").length
-      ? $("#services")
-          .val()
-          .join("-")
-      : services;
-    call(`/add_services_to_workflow/${workflow.id}/${services}`, function(
+    fCall(`/add_services_to_workflow/${workflow.id}`, "#add_services-form", function(
       result
     ) {
       workflow.last_modified = result.update_time;

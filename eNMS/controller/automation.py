@@ -47,13 +47,12 @@ class AutomationController(BaseController):
         fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_services_to_workflow(self, workflow_id, service_ids):
+    def add_services_to_workflow(self, workflow_id, **kwargs):
+        print(kwargs)
         workflow = fetch("workflow", id=workflow_id)
-        services = objectify(
-            "service", [int(service_id) for service_id in service_ids.split("-")]
-        )
-        for service in services:
-            service.workflows.append(workflow)
+        services = objectify("service", kwargs["services"])
+        if kwargs["mode"] == "shallow":
+            workflow.services.extend(services)
         now = self.get_time()
         workflow.last_modified = now
         return {

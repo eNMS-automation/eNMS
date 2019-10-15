@@ -267,7 +267,7 @@ class AddServicesForm(BaseForm):
         "Mode",
         choices=(
             ("shallow", "Shallow Copy (creates a reference to the service"),
-            ("deep", "Creates a duplicate from the service"),
+            ("deep", "Deep Copy (creates a duplicate from the service"),
         ),
     )
 

@@ -51,9 +51,12 @@ class AutomationController(BaseController):
         service = fetch("service", id=kwargs["services"])
         workflow = fetch("workflow", id=workflow_id)
         if kwargs["mode"] == "shallow":
-            workflow.services.append()
+            workflow.services.append(service)
         workflow.last_modified = self.get_time()
-        return workflow.last_modified
+        return {
+            "service": service.serialized,
+            "update_time": workflow.last_modified,
+        }
 
     def clear_results(self, service_id):
         for result in fetch(
@@ -95,33 +98,7 @@ class AutomationController(BaseController):
         return now
 
     def duplicate_workflow(self, workflow_id, **kwargs):
-        parent_workflow = fetch("workflow", id=workflow_id)
-        new_workflow = factory("workflow", **kwargs)
-        Session.commit()
-        for service in parent_workflow.services:
-            new_workflow.services.append(service)
-            service.positions[new_workflow.name] = service.positions[
-                parent_workflow.name
-            ]
-        Session.commit()
-        for edge in parent_workflow.edges:
-            subtype, src, destination = edge.subtype, edge.source, edge.destination
-            new_workflow.edges.append(
-                factory(
-                    "workflow_edge",
-                    **{
-                        "name": (
-                            f"{new_workflow.id}-{subtype}:"
-                            f"{src.id}->{destination.id}"
-                        ),
-                        "workflow": new_workflow.id,
-                        "subtype": subtype,
-                        "source": src.id,
-                        "destination": destination.id,
-                    },
-                )
-            )
-        return new_workflow.serialized
+        return fetch("workflow", id=workflow_id).duplicate(**kwargs).serialized
 
     def get_service_logs(self, **kwargs):
         run = fetch("run", allow_none=True, runtime=kwargs["runtime"])

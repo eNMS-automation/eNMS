@@ -293,13 +293,14 @@ function addServiceToWorkflow(service) {
     );
   } else {
     fCall(`/add_service_to_workflow/${workflow.id}`, "#add_service-form", function(
-      updateTime
+      result
     ) {
-      workflow.last_modified = updateTime;
+      console.log(result.service)
+      workflow.last_modified = result.update_time;
       $("#add_service").remove();
       if (graph.findNode(service.id).length == 0) {
-        nodes.add(serviceToNode(service, index));
-        workflow.services.push(service);
+        nodes.add(serviceToNode(result.service));
+        workflow.services.push(result.service);
         alertify.notify(
           `Service '${service.scoped_name}' added to the workflow.`,
           "success",
@@ -404,7 +405,7 @@ function getServiceLabel(service) {
   return label;
 }
 
-function serviceToNode(service, index) {
+function serviceToNode(service) {
   const defaultService = ["Start", "End"].includes(service.name);
   return {
     id: service.id,
@@ -427,13 +428,9 @@ function serviceToNode(service, index) {
     title: formatServiceTitle(service),
     x: service.positions[workflow.name]
       ? service.positions[workflow.name][0]
-      : index
-      ? index * 50 - 50
       : 0,
     y: service.positions[workflow.name]
       ? service.positions[workflow.name][1]
-      : index
-      ? index * 50 - 200
       : 0,
   };
 }

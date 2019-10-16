@@ -2,7 +2,7 @@ from sqlalchemy.ext.mutable import MutableDict, MutableList
 
 from eNMS import app
 from eNMS.database import Base
-from eNMS.database.functions import fetch, objectify
+from eNMS.database.functions import factory, fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
 from eNMS.properties import dont_serialize, private_properties
 from eNMS.properties.database import dont_migrate
@@ -82,6 +82,11 @@ class AbstractBase(Base):
                     continue
             result[property] = value
         return result
+
+    def duplicate(self, **kwargs):
+        if not kwargs:
+            kwargs = self.get_properties()
+        return factory(self.type, **kwargs)
 
     def to_dict(
         self, export=False, relation_names_only=False, exclude=None, include=None

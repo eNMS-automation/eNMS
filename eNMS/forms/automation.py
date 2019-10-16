@@ -7,6 +7,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
+from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
@@ -27,7 +28,7 @@ class ServiceForm(BaseForm):
     form_type = HiddenField(default="service")
     id = HiddenField()
     type = StringField("Service Type")
-    scoped_name = StringField("Reference Name")
+    scoped_name = StringField("Reference Name", [InputRequired()])
     description = StringField("Description")
     device_query = StringField("Device Query")
     device_query_property = SelectField(
@@ -266,8 +267,8 @@ class AddServiceForm(BaseForm):
     mode = SelectField(
         "Mode",
         choices=(
-            ("shallow", "Shallow Copy (creates a reference to the service"),
             ("deep", "Deep Copy (creates a duplicate from the service"),
+            ("shallow", "Shallow Copy (creates a reference to the service"),
         ),
     )
 

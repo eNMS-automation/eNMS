@@ -157,7 +157,7 @@ class WorkflowEdge(AbstractBase):
         clone = super().duplicate(**kwargs)
         Session.commit()
         for service in self.services:
-            service_clone = service.duplicate()
+            service_clone = service.duplicate(workflow_id=clone.id)
             clone.services.append(service_clone)
             service_clone.positions[clone.name] = service.positions[self.name]
         Session.commit()

@@ -82,7 +82,8 @@ def configure_events(app):
             app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
     @event.listens_for(models["service"], "before_update", propagate=True)
-    def log_instance_update(mapper, connection, target):
+    def update_service_name(mapper, connection, target):
+        print("ttt"*100, target, target.build_name())
         target.name = target.build_name()
 
     @event.listens_for(models["workflow"].name, "set")

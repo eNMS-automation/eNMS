@@ -50,9 +50,12 @@ class AutomationController(BaseController):
     def add_service_to_workflow(self, workflow_id, **kwargs):
         service = fetch("service", id=kwargs["services"])
         workflow = fetch("workflow", id=workflow_id)
-        if kwargs["mode"] == "shallow":
-            workflow.services.append(service)
+        if kwargs["mode"] == "deep":
+            service = service.duplicate(name="")
+            print("oooo"*200, service)
+        workflow.services.append(service)
         workflow.last_modified = self.get_time()
+        Session.commit()
         return {
             "service": service.serialized,
             "update_time": workflow.last_modified,

@@ -168,8 +168,7 @@ class WorkflowEdge(AbstractBase):
                     "workflow_edge",
                     **{
                         "name": (
-                            f"{clone.id}-{subtype}:"
-                            f"{src.id}->{destination.id}"
+                            f"{clone.id}-{subtype}:" f"{src.id}->{destination.id}"
                         ),
                         "workflow": clone.id,
                         "subtype": subtype,

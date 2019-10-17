@@ -122,7 +122,7 @@ class AdministrationController(BaseController):
             workflow.services = [
                 fetch("service", name=service_name) for service_name in services
             ]
-        Session.commit()     
+        Session.commit()
         for edge in workflow_edges:
             for property in ("source", "destination", "workflow"):
                 edge[property] = fetch("service", name=edge[property]).id

@@ -84,9 +84,10 @@ class AbstractBase(Base):
         return result
 
     def duplicate(self, **kwargs):
-        properties = {k: v for (k, v) in self.get_properties().items() if k not in ("id", "name")}
+        properties = {
+            k: v for (k, v) in self.get_properties().items() if k not in ("id", "name")
+        }
         instance = factory(self.type, **{**properties, **kwargs})
-        print("ooooo"*300, instance)
         return instance
 
     def to_dict(

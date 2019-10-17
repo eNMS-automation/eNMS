@@ -52,14 +52,11 @@ class AutomationController(BaseController):
         workflow = fetch("workflow", id=workflow_id)
         if kwargs["mode"] == "deep":
             service = service.duplicate(name="")
-            print("oooo"*200, service)
+            print("oooo" * 200, service)
         workflow.services.append(service)
         workflow.last_modified = self.get_time()
         Session.commit()
-        return {
-            "service": service.serialized,
-            "update_time": workflow.last_modified,
-        }
+        return {"service": service.serialized, "update_time": workflow.last_modified}
 
     def clear_results(self, service_id):
         for result in fetch(

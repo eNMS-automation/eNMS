@@ -83,11 +83,4 @@ def configure_events(app):
 
     @event.listens_for(models["service"], "before_update", propagate=True)
     def update_service_name(mapper, connection, target):
-        print("ttt"*100, target, target.build_name())
         target.name = target.build_name()
-
-    @event.listens_for(models["workflow"].name, "set")
-    def workflow_name_update(workflow, new_name, old_name, *args):
-        for service in fetch_all("service"):
-            if old_name in service.positions:
-                service.positions[new_name] = service.positions.pop(old_name)

@@ -406,6 +406,7 @@ function getServiceLabel(service) {
 }
 
 function serviceToNode(service) {
+  console.log(service.positions);
   const defaultService = ["Start", "End"].includes(service.name);
   return {
     id: service.id,

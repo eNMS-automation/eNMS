@@ -45,8 +45,8 @@ def model_inspection(mapper, cls):
 def configure_events(app):
     @event.listens_for(Base, "after_insert", propagate=True)
     def log_instance_creation(mapper, connection, target):
-
-        app.log("info", f"CREATION: {target.type} '{target.name}'")
+        if hasattr(target, "name"):
+            app.log("info", f"CREATION: {target.type} '{target.name}'")
 
     @event.listens_for(Base, "before_delete", propagate=True)
     def log_instance_deletion(mapper, connection, target):
@@ -80,5 +80,4 @@ def configure_events(app):
 
     @event.listens_for(models["service"], "before_update", propagate=True)
     def update_service(mapper, connection, target):
-        target.shared = target.shared or len(target.workflows) > 1
         target.name = target.build_name()

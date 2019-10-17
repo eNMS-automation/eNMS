@@ -27,9 +27,10 @@ class ServiceForm(BaseForm):
     template = "service"
     form_type = HiddenField(default="service")
     id = HiddenField()
+    name = StringField("Name")
     type = StringField("Service Type")
     shared = BooleanField("Shared Service")
-    scoped_name = StringField("Reference Name", [InputRequired()])
+    scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")
     device_query = StringField("Device Query")
     device_query_property = SelectField(

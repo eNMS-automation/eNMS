@@ -78,9 +78,8 @@ class Service(AbstractBase):
     delete_spaces_before_matching = Column(Boolean, default=False)
 
     def __init__(self, **kwargs):
-        if "name" not in kwargs:
-            self.shared = kwargs["shared"]
-            kwargs["name"] = self.build_name(kwargs["scoped_name"])
+        self.shared = kwargs["shared"]
+        kwargs["name"] = self.build_name(kwargs["scoped_name"])
         super().__init__(**kwargs)
 
     @property

@@ -90,6 +90,11 @@
       </ul>
       <div id="step-1">
         <div>
+          <label class="edit-only">Name</label>
+          <div class="form-group">
+            {{ form.name(id=form_type + '-name', class="form-control edit-only
+            add-id required") }}
+          </div>
           <label class="edit-only">Type</label>
           <div class="form-group">
             {{ form.type(id=form_type + '-class', class="form-control edit-only
@@ -107,7 +112,7 @@
               <label>Shared</label>
             </div>
           </fieldset>
-          <label class="edit-only">Name</label>
+          <label class="edit-only">Scoped Name</label>
           <div class="form-group">
             {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control edit-only
             add-id required") }}

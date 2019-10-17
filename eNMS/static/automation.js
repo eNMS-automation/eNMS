@@ -25,6 +25,7 @@ function openServicePanel() {
 function panelCode(type, id, mode) {
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
+  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id) $(`#${type}-shared-${id}`).prop("disabled", true);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     autoAdjustHeight: false,

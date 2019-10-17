@@ -23,6 +23,7 @@ class Service(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "service", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, unique=True)
+    shared = Column(Boolean, default=False)
     scoped_name = Column(SmallString)
     last_modified = Column(SmallString)
     description = Column(SmallString)

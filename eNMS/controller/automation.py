@@ -51,8 +51,14 @@ class AutomationController(BaseController):
         service = fetch("service", id=kwargs["services"])
         workflow = fetch("workflow", id=workflow_id)
         if kwargs["mode"] == "deep":
-            service = service.duplicate(name="")
-            print("oooo" * 200, service)
+            for i in range(10):
+                number = f" ({i})" if i else ""
+                name = f"[{workflow.name}] {service.name}{number}"
+                if not fetch("service", allow_none=True, name=name):
+                    service = service.duplicate(name=name)
+                    break
+        elif not service.shared:
+            return {"error": "This is not a shared service"}
         workflow.services.append(service)
         workflow.last_modified = self.get_time()
         Session.commit()

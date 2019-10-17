@@ -28,6 +28,7 @@ class ServiceForm(BaseForm):
     form_type = HiddenField(default="service")
     id = HiddenField()
     type = StringField("Service Type")
+    shared = BooleanField("Shared Service")
     scoped_name = StringField("Reference Name", [InputRequired()])
     description = StringField("Description")
     device_query = StringField("Device Query")

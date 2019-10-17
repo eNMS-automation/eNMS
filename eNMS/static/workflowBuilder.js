@@ -295,7 +295,6 @@ function addServiceToWorkflow(service) {
     fCall(`/add_service_to_workflow/${workflow.id}`, "#add_service-form", function(
       result
     ) {
-      console.log(result.service)
       workflow.last_modified = result.update_time;
       $("#add_service").remove();
       if (graph.findNode(service.id).length == 0) {
@@ -406,7 +405,6 @@ function getServiceLabel(service) {
 }
 
 function serviceToNode(service) {
-  console.log(service.positions);
   const defaultService = ["Start", "End"].includes(service.name);
   return {
     id: service.id,

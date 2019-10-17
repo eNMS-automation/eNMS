@@ -53,12 +53,15 @@ class AutomationController(BaseController):
         if kwargs["mode"] == "deep":
             for i in range(10):
                 number = f" ({i})" if i else ""
-                name = f"[{workflow.name}] {service.name}{number}"
+                scoped_name = f"{service.scoped_name}{number}"
+                name = f"[{workflow.name}] {scoped_name}"
                 if not fetch("service", allow_none=True, name=name):
-                    service = service.duplicate(name=name)
+                    service = service.duplicate(name=name, scoped_name=scoped_name)
                     break
         elif not service.shared:
-            return {"error": "This is not a shared service"}
+            return {"error": "This is not a shared service."}
+        elif service in workflow.services:
+            return {"error": f"This workflow already contains {service.name}."}
         workflow.services.append(service)
         workflow.last_modified = self.get_time()
         Session.commit()
@@ -91,7 +94,10 @@ class AutomationController(BaseController):
             fetch("workflow", id=workflow_id),
             fetch("service", id=service_id),
         )
+        
         workflow.services.remove(service)
+        if not service.shared:
+            Session.delete(service)
         now = self.get_time()
         workflow.last_modified = now
         return {"service": service.serialized, "update_time": now}

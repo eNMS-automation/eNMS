@@ -6,6 +6,7 @@ from wtforms import (
     SelectField,
     StringField,
 )
+from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS import app
@@ -63,7 +64,7 @@ class DeviceConnectionForm(BaseForm):
 
 class ObjectForm(BaseForm):
     form_type = HiddenField(default="object")
-    name = StringField("Name")
+    name = StringField("Name", [InputRequired()])
     description = StringField("Description")
     subtype = StringField("Subtype")
     location = StringField("Location")
@@ -108,7 +109,7 @@ class PoolForm(BaseForm):
     template = "pool"
     form_type = HiddenField(default="pool")
     id = HiddenField()
-    name = StringField("Name")
+    name = StringField("Name", [InputRequired()])
     description = StringField("Description")
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
@@ -169,6 +170,6 @@ class ExportForm(BaseForm):
 class GoogleEarthForm(BaseForm):
     action = "exportToGoogleEarth"
     form_type = HiddenField(default="google_earth_export")
-    name = StringField("Name")
+    name = StringField("Name", [InputRequired()])
     label_size = IntegerField("Label Size", default=1)
     line_width = IntegerField("Link Width", default=2)

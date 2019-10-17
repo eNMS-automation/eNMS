@@ -8,6 +8,7 @@ from wtforms import (
     StringField,
     SelectMultipleField,
 )
+from wtforms.validators import InputRequired
 
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import JsonField
@@ -88,7 +89,7 @@ class ServerForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="server")
     id = HiddenField()
-    name = StringField("Name")
+    name = StringField("Name", [InputRequired()])
     description = StringField("Description")
     ip_address = StringField("IP address")
     weight = IntegerField("Weigth")
@@ -97,7 +98,7 @@ class ServerForm(BaseForm):
 class LoginForm(BaseForm):
     form_type = HiddenField(default="login")
     authentication_method = SelectField("Authentication Method", choices=())
-    name = StringField("Name")
+    name = StringField("Name", [InputRequired()])
     password = PasswordField("Password")
 
 
@@ -122,7 +123,7 @@ class UserForm(BaseForm):
     template = "object"
     form_type = HiddenField(default="user")
     id = HiddenField()
-    name = StringField("Name")
+    name = StringField("Name", [InputRequired()])
     password = PasswordField("Password")
     email = StringField("Email")
     permission_choices = [

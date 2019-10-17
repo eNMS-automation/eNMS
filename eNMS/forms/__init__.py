@@ -54,13 +54,7 @@ class MetaForm(FormMeta):
 
 
 class BaseForm(FlaskForm, metaclass=MetaForm):
-    def validate(self):
-        valid_form = super().validate()
-        empty_name = False
-        if hasattr(self, "name") and not self.name.data:
-            self.name.errors.append("The name is missing.")
-            empty_name = True
-        return valid_form and not empty_name
+    pass
 
 
 def form_postprocessing(form):

@@ -1,4 +1,5 @@
 from wtforms import BooleanField, HiddenField, IntegerField, SelectField, StringField
+from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS.forms import BaseForm, configure_relationships
@@ -18,7 +19,7 @@ class EventForm(BaseForm):
     template = "event"
     form_type = HiddenField(default="event")
     id = HiddenField()
-    name = StringField("Name")
+    name = StringField("Name", [InputRequired()])
     services = MultipleInstanceField("Services")
 
 
@@ -31,7 +32,7 @@ class TaskForm(BaseForm):
         "Scheduling Mode",
         choices=(("cron", "Crontab Scheduling"), ("standard", "Standard Scheduling")),
     )
-    name = StringField("Name")
+    name = StringField("Name", [InputRequired()])
     description = StringField("Description")
     start_date = DateField("Start Date")
     end_date = DateField("End Date")

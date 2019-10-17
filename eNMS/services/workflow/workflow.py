@@ -49,12 +49,10 @@ class Workflow(Service):
             end.positions[self.name] = (500, 0)
 
     def duplicate(self, **kwargs):
-        print("ttt"*100, service)
         clone = super().duplicate(**kwargs)
         Session.commit()
         for service in self.services:
-            service_clone = service.duplicate(workflow_id=clone.id)
-            clone.services.append(service_clone)
+            service_clone = service.duplicate(workflow=clone)
             service_clone.positions[clone.name] = service.positions[self.name]
         Session.commit()
         for edge in self.edges:

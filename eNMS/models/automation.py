@@ -83,6 +83,16 @@ class Service(AbstractBase):
             kwargs["name"] = self.build_name(kwargs["scoped_name"])
         super().__init__(**kwargs)
 
+    def duplicate(self, workflow=None):
+        for i in range(10):
+            number = f" ({i})" if i else ""
+            scoped_name = f"{self.scoped_name}{number}"
+            name = f"[{workflow.name}] {scoped_name}" if workflow else scoped_name
+            if not fetch("service", allow_none=True, name=name):
+                service = super().duplicate(name=name, scoped_name=scoped_name, shared=False)
+                break
+        workflow.services.append(service)
+
     @property
     def filename(self):
         return app.strip_all(self.name)

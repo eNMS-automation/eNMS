@@ -25,6 +25,7 @@ function openServicePanel() {
 function panelCode(type, id, mode) {
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
+  if (id) $(`#${type}-shared-${id}`).prop("disabled", true);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     autoAdjustHeight: false,
     enableAllSteps: true,
@@ -39,9 +40,7 @@ function panelCode(type, id, mode) {
       .addClass("btn-primary")
       .attr("onclick", `parametrizedRun('${type}', ${id})`)
       .text("Run");
-    $(".hide-run").hide();
-  } else {
-    $(".no-edit").remove();
+    $(".edit-only").prop("disabled", true);
   }
 }
 

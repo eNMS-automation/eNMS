@@ -78,8 +78,9 @@ class Service(AbstractBase):
     delete_spaces_before_matching = Column(Boolean, default=False)
 
     def __init__(self, **kwargs):
-        self.shared = kwargs["shared"]
-        kwargs["name"] = self.build_name(kwargs["scoped_name"])
+        if "name" not in kwargs:
+            self.shared = kwargs["shared"]
+            kwargs["name"] = self.build_name(kwargs["scoped_name"])
         super().__init__(**kwargs)
 
     @property
@@ -87,7 +88,8 @@ class Service(AbstractBase):
         return app.strip_all(self.name)
 
     def build_name(self, name=None):
-        if self.shared:
+        if self.shared or len(self.workflows) > 1:
+            self.shared = True
             workflow = "[Shared] "
         elif not self.workflows:
             workflow = ""

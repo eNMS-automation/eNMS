@@ -56,7 +56,7 @@ class AutomationController(BaseController):
                 scoped_name = f"{service.scoped_name}{number}"
                 name = f"[{workflow.name}] {scoped_name}"
                 if not fetch("service", allow_none=True, name=name):
-                    service = service.duplicate(name=name, scoped_name=scoped_name)
+                    service = service.duplicate(name=name, scoped_name=scoped_name, shared=False)
                     break
         elif not service.shared:
             return {"error": "This is not a shared service."}

@@ -48,6 +48,33 @@ class Workflow(Service):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
+    def duplicate(self, **kwargs):
+        print("ttt"*100, service)
+        clone = super().duplicate(**kwargs)
+        Session.commit()
+        for service in self.services:
+            service_clone = service.duplicate(workflow_id=clone.id)
+            clone.services.append(service_clone)
+            service_clone.positions[clone.name] = service.positions[self.name]
+        Session.commit()
+        for edge in self.edges:
+            subtype, src, destination = edge.subtype, edge.source, edge.destination
+            clone.edges.append(
+                factory(
+                    "workflow_edge",
+                    **{
+                        "name": (
+                            f"{clone.id}-{subtype}:" f"{src.id}->{destination.id}"
+                        ),
+                        "workflow": clone.id,
+                        "subtype": subtype,
+                        "source": src.id,
+                        "destination": destination.id,
+                    },
+                )
+            )
+        return clone
+
     @property
     def deep_services(self):
         services = [
@@ -152,29 +179,3 @@ class WorkflowEdge(AbstractBase):
     def __init__(self, **kwargs):
         self.label = kwargs["subtype"]
         super().__init__(**kwargs)
-
-    def duplicate(self, **kwargs):
-        clone = super().duplicate(**kwargs)
-        Session.commit()
-        for service in self.services:
-            service_clone = service.duplicate(workflow_id=clone.id)
-            clone.services.append(service_clone)
-            service_clone.positions[clone.name] = service.positions[self.name]
-        Session.commit()
-        for edge in self.edges:
-            subtype, src, destination = edge.subtype, edge.source, edge.destination
-            clone.edges.append(
-                factory(
-                    "workflow_edge",
-                    **{
-                        "name": (
-                            f"{clone.id}-{subtype}:" f"{src.id}->{destination.id}"
-                        ),
-                        "workflow": clone.id,
-                        "subtype": subtype,
-                        "source": src.id,
-                        "destination": destination.id,
-                    },
-                )
-            )
-        return clone

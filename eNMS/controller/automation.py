@@ -62,6 +62,8 @@ class AutomationController(BaseController):
             return {"error": "This is not a shared service."}
         elif service in workflow.services:
             return {"error": f"This workflow already contains {service.name}."}
+        if any(s.scoped_name == service.scoped_name for s in workflow.services):
+            return {"error": "Service names in a workflow must be unique."}
         workflow.services.append(service)
         workflow.last_modified = self.get_time()
         Session.commit()
@@ -94,7 +96,6 @@ class AutomationController(BaseController):
             fetch("workflow", id=workflow_id),
             fetch("service", id=service_id),
         )
-        
         workflow.services.remove(service)
         if not service.shared:
             Session.delete(service)

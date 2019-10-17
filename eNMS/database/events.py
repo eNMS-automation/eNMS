@@ -43,13 +43,10 @@ def model_inspection(mapper, cls):
 
 
 def configure_events(app):
-    @event.listens_for(Base, "init", propagate=True)
-    def log_instance_creation(target, args, kwargs):
-        if "type" not in target.__dict__ or "log" in target.type:
-            return
-        if "name" not in kwargs:
-            kwargs["name"] = target.build_name(kwargs["scoped_name"])
-        app.log("info", f"CREATION: {target.__dict__['type']} '{kwargs['name']}'")
+    @event.listens_for(Base, "after_insert", propagate=True)
+    def log_instance_creation(mapper, connection, target):
+
+        app.log("info", f"CREATION: {target.type} '{target.name}'")
 
     @event.listens_for(Base, "before_delete", propagate=True)
     def log_instance_deletion(mapper, connection, target):

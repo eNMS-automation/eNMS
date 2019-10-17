@@ -77,6 +77,12 @@ class Service(AbstractBase):
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
 
+    def __init__(self, **kwargs):
+        if "name" not in kwargs:
+            self.shared = kwargs["shared"]
+            kwargs["name"] = self.build_name(kwargs["scoped_name"])
+        super().__init__(**kwargs)
+
     @property
     def filename(self):
         return app.strip_all(self.name)

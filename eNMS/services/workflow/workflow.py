@@ -48,11 +48,11 @@ class Workflow(Service):
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
 
-    def duplicate(self, **kwargs):
-        clone = super().duplicate(**kwargs)
+    def duplicate(self, workflow=None):
+        clone = super().duplicate(workflow)
         Session.commit()
         for service in self.services:
-            service_clone = service.duplicate(workflow=clone)
+            service_clone = service.duplicate(clone)
             service_clone.positions[clone.name] = service.positions[self.name]
         Session.commit()
         for edge in self.edges:
@@ -61,9 +61,6 @@ class Workflow(Service):
                 factory(
                     "workflow_edge",
                     **{
-                        "name": (
-                            f"{clone.id}-{subtype}:" f"{src.id}->{destination.id}"
-                        ),
                         "workflow": clone.id,
                         "subtype": subtype,
                         "source": src.id,
@@ -152,7 +149,6 @@ class WorkflowEdge(AbstractBase):
 
     __tablename__ = type = "workflow_edge"
     id = Column(Integer, primary_key=True)
-    name = Column(SmallString)
     label = Column(SmallString)
     subtype = Column(SmallString)
     source_id = Column(Integer, ForeignKey("service.id"))

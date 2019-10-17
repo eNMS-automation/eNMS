@@ -10,6 +10,7 @@ from eNMS.database.associations import (
     service_workflow_table,
 )
 from eNMS.database.base import AbstractBase
+from eNMS.database.functions import fetch
 from eNMS.models.inventory import Device  # noqa: F401
 from eNMS.models.execution import Run  # noqa: F401
 from eNMS.models.events import Task  # noqa: F401
@@ -92,6 +93,7 @@ class Service(AbstractBase):
                 service = super().duplicate(name=name, scoped_name=scoped_name, shared=False)
                 break
         workflow.services.append(service)
+        return service
 
     @property
     def filename(self):

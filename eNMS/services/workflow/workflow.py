@@ -50,24 +50,27 @@ class Workflow(Service):
 
     def duplicate(self, workflow=None):
         clone = super().duplicate(workflow)
+        clone_services = {}
         Session.commit()
         for service in self.services:
             service_clone = service.duplicate(clone)
             service_clone.positions[clone.name] = service.positions[self.name]
+            clone_services[service.id] = service_clone
         Session.commit()
+        
         for edge in self.edges:
-            subtype, src, destination = edge.subtype, edge.source, edge.destination
             clone.edges.append(
                 factory(
                     "workflow_edge",
                     **{
                         "workflow": clone.id,
-                        "subtype": subtype,
-                        "source": src.id,
-                        "destination": destination.id,
+                        "subtype": edge.subtype,
+                        "source": clone_services[edge.source.id].id,
+                        "destination": clone_services[edge.destination.id].id,
                     },
                 )
             )
+            Session.commit()
         return clone
 
     @property
@@ -173,3 +176,7 @@ class WorkflowEdge(AbstractBase):
     def __init__(self, **kwargs):
         self.label = kwargs["subtype"]
         super().__init__(**kwargs)
+
+    @property
+    def name(self):
+        return f"Edge from {self.source.name} to {self.destination} in {self.workflow.name}"

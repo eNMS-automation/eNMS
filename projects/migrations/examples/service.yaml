@@ -68,6 +68,7 @@
   scoped_name: Start
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -148,6 +149,7 @@
   scoped_name: End
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -191,6 +193,7 @@
   scoped_name: mail
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -234,6 +237,7 @@
   scoped_name: slack_feedback_notification
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -277,6 +281,7 @@
   scoped_name: mattermost_feedback_notification
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -320,6 +325,7 @@
   scoped_name: cluster_monitoring
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -364,6 +370,7 @@
   scoped_name: Push Configurations to Git
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: true
   skip_query: ''
   time_between_retries: 10
@@ -422,6 +429,7 @@
   scoped_name: Example Service (does nothing)
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   string1: cisco
@@ -474,6 +482,7 @@
   scoped_name: napalm_configure_bgp_1
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: true
   skip_query: ''
   time_between_retries: 10
@@ -525,6 +534,7 @@
   scoped_name: test_file_transfer_service
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
@@ -575,6 +585,7 @@
   scoped_name: test_database_backup_service
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -631,6 +642,7 @@
   scoped_name: Configuration Backup (Netmiko)
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -685,6 +697,7 @@
   scoped_name: Configuration Backup (NAPALM)
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: true
   skip_query: ''
   time_between_retries: 10
@@ -741,6 +754,7 @@
   scoped_name: netmiko_create_vrf_test
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   strip_command: false
@@ -806,6 +820,7 @@
   scoped_name: netmiko_check_vrf_test
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -866,6 +881,7 @@
   scoped_name: netmiko_delete_vrf_test
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   strip_command: false
@@ -929,6 +945,7 @@
   scoped_name: 'Netmiko: Check VRF (test) does not exist'
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   start_new_connection: true
@@ -984,6 +1001,7 @@
   scoped_name: napalm_create_vrf_test
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1041,6 +1059,7 @@
   scoped_name: 'REST API: call *is_alive* endpoint'
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1094,6 +1113,7 @@
   scoped_name: 'NAPALM: Get Facts'
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1145,6 +1165,7 @@
   scoped_name: 'NAPALM: Get interfaces'
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1196,6 +1217,7 @@
   scoped_name: get_interfaces_ip
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1246,6 +1268,7 @@
   scoped_name: get_config
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1293,6 +1316,7 @@
   scoped_name: process_payload1
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1340,6 +1364,7 @@
   scoped_name: Modify Payload for Iteration
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   source_code: "# Interfaces 1\r\ntargets = ['Loopback101', 'Loopback15'] if device.name\
@@ -1402,6 +1427,7 @@
   scoped_name: netmiko_python_defined_devices
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1463,6 +1489,7 @@
   scoped_name: Iterated_netmiko_service
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1526,6 +1553,7 @@
   scoped_name: netmiko_show_ip_route
   send_notification: true
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1594,6 +1622,7 @@
   scoped_name: Payload Extraction
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1645,6 +1674,7 @@
   scoped_name: 'Payload Workflow: Validate dict via results'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1693,6 +1723,7 @@
   scoped_name: 'Payload Workflow: Validate text via results'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1741,6 +1772,7 @@
   scoped_name: napalm_rollback
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -1803,6 +1835,7 @@
   scoped_name: netmiko_check_vrf_napalm
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1867,6 +1900,7 @@
   scoped_name: netmiko_check_no_vrf_napalm
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1928,6 +1962,7 @@
   scoped_name: Device_from_python_query
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -1990,6 +2025,7 @@
   scoped_name: Test Netmiko Prompt Service
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2049,6 +2085,7 @@
   scoped_name: Test netmiko prompts pass
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2096,6 +2133,7 @@
   scoped_name: Modify payload (no device)
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
@@ -2144,6 +2182,7 @@
   scoped_name: Modify payload (per device)
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
@@ -2207,6 +2246,7 @@
   scoped_name: Show vrf with payload helper
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2269,6 +2309,7 @@
   scoped_name: Show vrf with python query
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2331,6 +2372,7 @@
   scoped_name: show runtime with get_result helper
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2386,6 +2428,7 @@
   scoped_name: 'Getters Workflow: is alive'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2438,6 +2481,7 @@
   scoped_name: 'Getters Workflow: get facts'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2493,6 +2537,7 @@
   scoped_name: 'Getters Workflow: Interface IP'
   send_notification: false
   send_notification_method: mail
+  shared: true
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2545,6 +2590,7 @@
   scoped_name: 'Getters Workflow: MAC address'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2597,6 +2643,7 @@
   scoped_name: 'Getters Workflow: get facts failed match'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2649,6 +2696,7 @@
   scoped_name: 'Ansible Workflow: Arista show version'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2698,6 +2746,7 @@
   scoped_name: 'Ansible Workflow: Arista show configuration (regex match)'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2747,6 +2796,7 @@
   scoped_name: 'Ansible Workflow: Arista show configuration (dict match)'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -2804,6 +2854,7 @@
   scoped_name: Show version with multiprocessing
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2865,6 +2916,7 @@
   scoped_name: Iterated_netmiko_service bis
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2927,6 +2979,7 @@
   scoped_name: Iteration Targets Workflow - Test 1
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -2989,6 +3042,7 @@
   scoped_name: Iteration Target Workflow - Test 2
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -3051,6 +3105,7 @@
   scoped_name: Iteration Target Workflow - Test 3
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -3104,6 +3159,7 @@
   scoped_name: 'Payload Workflow: Validate text via payload'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3153,6 +3209,7 @@
   scoped_name: 'Payload Workflow: Validate dict via payload'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3200,6 +3257,7 @@
   scoped_name: 'Payload Workflow: Add initial variables'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
@@ -3262,6 +3320,7 @@
   scoped_name: 'Payload Workflow: Extraction 1'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3324,6 +3383,7 @@
   scoped_name: 'Payload Workflow: Extraction 2'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3375,6 +3435,7 @@
   scoped_name: 'Payload Workflow: Validation 1'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3423,6 +3484,7 @@
   scoped_name: 'Payload Workflow: Validation 2'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3473,6 +3535,7 @@
   scoped_name: Iteration Targets Workflow - Test 4
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   time_between_retries: 10
@@ -3524,6 +3587,7 @@
   scoped_name: 'Variable Access Subworkflow: Access variable from snippet'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   source_code: "result = {\r\n \"get_var\": get_var(\"Interfaces 2\", device=device.name),\r\
@@ -3587,6 +3651,7 @@
   scoped_name: 'Variable Access Subworkflow: Access variables for iteration'
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -3646,9 +3711,10 @@
       Backup] Push Configurations to Git', '[Regression Workflow 9: Configurations
       Backup] Configuration Backup (NAPALM)', '[Regression Workflow 9: Configurations
       Backup] Configuration Backup (Netmiko)']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3735,9 +3801,10 @@
       VRF creation and deletion with Netmiko] netmiko_check_vrf_test', '[Regression
       Workflow 4: VRF creation and deletion with Netmiko] netmiko_delete_vrf_test',
     '[Shared] Netmiko: Check VRF (test) does not exist']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3794,9 +3861,10 @@
       VRF creation and deletion with Napalm] napalm_rollback', '[Regression Workflow
       5: VRF creation and deletion with Napalm] netmiko_check_vrf_napalm', '[Regression
       Workflow 5: VRF creation and deletion with Napalm] netmiko_check_no_vrf_napalm']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3855,9 +3923,10 @@
       NAPALM: Get interfaces', '[Regression Workflow 3: Napalm getters (postprocessing)]
       get_interfaces_ip', '[Regression Workflow 3: Napalm getters (postprocessing)]
       get_config', '[Regression Workflow 3: Napalm getters (postprocessing)] process_payload1']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3957,9 +4026,10 @@
     '[Regression Workflow 7: Payload Extraction & Validation] Payload Workflow: Validate
       text via payload', '[Regression Workflow 7: Payload Extraction & Validation]
       Payload Workflow: Validate dict via payload']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4020,9 +4090,10 @@
       Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of
       Workflow', '[Regression Workflow F: Workflow of Workflows] Show interfaces with
       Netmiko', '[Shared] NAPALM: Get interfaces']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4075,9 +4146,10 @@
       REST API: call *is_alive* endpoint', '[Shared] Netmiko: Check VRF (test) does
       not exist', '[Shared] Example Service (does nothing)', '[Shared] NAPALM: Get
       interfaces']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4129,9 +4201,10 @@
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow D: Prompts] Test
       Netmiko Prompt Service', '[Regression Workflow D: Prompts] Test netmiko prompts
       pass', '[Shared] REST API: call *is_alive* endpoint']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4195,9 +4268,10 @@
       get_var, set_var, get_result] Show vrf with python query', '[Shared] REST API:
       call *is_alive* endpoint', '[Regression Workflow A: get_var, set_var, get_result]
       show runtime with get_result helper']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4286,9 +4360,10 @@
       IP', '[Regression Workflow B: Napalm getters validation] Getters Workflow: MAC
       address', '[Regression Workflow B: Napalm getters validation] Getters Workflow:
       get facts failed match']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4363,9 +4438,10 @@
       Ansible with Validation] Ansible Workflow: Arista show configuration (regex
       match)', '[Regression Workflow 6: Ansible with Validation] Ansible Workflow:
       Arista show configuration (dict match)']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4429,9 +4505,10 @@
     '[Regression Workflow C: Advanced multiprocessing] Show version with multiprocessing',
     '[Shared] REST API: call *is_alive* endpoint', '[Regression Workflow C: Advanced
       multiprocessing] napalm_configure_bgp_1']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4516,9 +4593,10 @@
       1', '[Regression Workflow E: Iteration Targets] Iteration Target Workflow -
       Test 3', '[Regression Workflow E: Iteration Targets] Iteration Targets Workflow
       - Test 4']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4573,9 +4651,10 @@
       with Operations] Payload Workflow: Extraction 2', '[Regression Workflow 8: Payload
       Extraction with Operations] Payload Workflow: Validation 1', '[Regression Workflow
       8: Payload Extraction with Operations] Payload Workflow: Validation 2']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4625,9 +4704,10 @@
       Variables from Parent Workflow] Variable Access Subworkflow: Access variable
       from snippet', '[Regression Workflow F S2: Access Variables from Parent Workflow]
       Variable Access Subworkflow: Access variables for iteration']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4678,9 +4758,10 @@
       Workflow F S1: Subworkflow of Workflow] Regression Workflow B: Napalm getters
       validation', '[Regression Workflow F S1: Subworkflow of Workflow] Regression
       Workflow 7: Payload Extraction & Validation']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4732,9 +4813,10 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow 1: Netmiko with
       validation and retries] Check VRF (NOVRF) exists']
+  shared: false
   skip: false
   skip_query: ''
-
+  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4790,6 +4872,7 @@
   scoped_name: Check VRF (NOVRF) exists
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false
@@ -4851,6 +4934,7 @@
   scoped_name: Show interfaces with Netmiko
   send_notification: false
   send_notification_method: mail
+  shared: false
   skip: false
   skip_query: ''
   start_new_connection: false

@@ -126,7 +126,7 @@ class AdministrationController(BaseController):
         for edge in workflow_edges:
             for property in ("source", "destination", "workflow"):
                 edge[property] = fetch("service", name=edge[property]).id
-            edge.pop("name")
+            edge.pop("name", None)
             factory("workflow_edge", **edge)
             Session.commit()
         return status

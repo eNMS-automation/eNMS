@@ -106,7 +106,7 @@ class Service(AbstractBase):
         elif not self.workflows:
             workflow = ""
         else:
-            workflow = f"[{self.workflows[0].scoped_name}] "
+            workflow = f"[{self.workflows[0].name}] "
         return f"{workflow}{name or self.scoped_name}"
 
     def generate_row(self, table):

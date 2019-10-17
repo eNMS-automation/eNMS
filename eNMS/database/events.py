@@ -83,4 +83,6 @@ def configure_events(app):
 
     @event.listens_for(models["service"], "before_update", propagate=True)
     def update_service_name(mapper, connection, target):
+        if len(target.workflows) > 1:
+            target.shared = True
         target.name = target.build_name()

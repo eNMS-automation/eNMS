@@ -82,10 +82,12 @@ class Service(AbstractBase):
         return app.strip_all(self.name)
 
     def build_name(self, name=None):
-        if len(self.workflows) == 1:
-            workflow = f"[{self.workflows[0].scoped_name}] "
+        if self.shared:
+            workflow = "[Shared] "
+        elif not self.workflows:
+            workflow = ""
         else:
-            workflow = "[Shared] " if self.workflows else ""
+            workflow = f"[{self.workflows[0].scoped_name}] "
         return f"{workflow}{name or self.scoped_name}"
 
     def generate_row(self, table):

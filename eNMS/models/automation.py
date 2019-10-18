@@ -81,7 +81,7 @@ class Service(AbstractBase):
     def __init__(self, **kwargs):
         if "name" not in kwargs:
             self.shared = kwargs["shared"]
-            kwargs["name"] = self.build_name(kwargs["scoped_name"])
+            kwargs["name"] = self.set_name(kwargs["scoped_name"])
         super().__init__(**kwargs)
 
     def duplicate(self, workflow=None):
@@ -99,7 +99,7 @@ class Service(AbstractBase):
     def filename(self):
         return app.strip_all(self.name)
 
-    def build_name(self, name=None):
+    def set_name(self, name=None):
         if self.shared:
             workflow = "[Shared] "
         elif not self.workflows:

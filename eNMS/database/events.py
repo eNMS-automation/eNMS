@@ -77,7 +77,3 @@ def configure_events(app):
         if changelog:
             name, changes = getattr(target, "name", target.id), " | ".join(changelog)
             app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
-
-    @event.listens_for(models["service"], "before_update", propagate=True)
-    def update_service(mapper, connection, target):
-        target.name = target.build_name()

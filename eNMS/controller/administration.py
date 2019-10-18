@@ -128,6 +128,8 @@ class AdministrationController(BaseController):
                 edge[property] = fetch("service", name=edge[property]).id
             factory("workflow_edge", **edge)
             Session.commit()
+        for service in fetch_all("service"):
+            service.set_name()
         return status
 
     def import_service(self, archive):

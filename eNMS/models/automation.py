@@ -100,8 +100,7 @@ class Service(AbstractBase):
         return app.strip_all(self.name)
 
     def build_name(self, name=None):
-        if self.shared or len(self.workflows) > 1:
-            self.shared = True
+        if self.shared:
             workflow = "[Shared] "
         elif not self.workflows:
             workflow = ""

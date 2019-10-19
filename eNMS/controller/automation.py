@@ -11,7 +11,7 @@ from uuid import uuid4
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
-from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
+from eNMS.database.functions import delete, factory, fetch, fetch_all
 
 
 class AutomationController(BaseController):

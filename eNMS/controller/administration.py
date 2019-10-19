@@ -111,7 +111,7 @@ class AdministrationController(BaseController):
                         instance = self.objectify(instance_type, instance)
                         factory(instance_type, **instance)
                         Session.commit()
-                    except Exception as e:
+                    except Exception:
                         info(
                             f"{str(instance)} could not be imported :"
                             f"{chr(10).join(format_exc().splitlines())}"

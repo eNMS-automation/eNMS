@@ -90,7 +90,9 @@ class Service(AbstractBase):
             scoped_name = f"{self.scoped_name}{number}"
             name = f"[{workflow.name}] {scoped_name}" if workflow else scoped_name
             if not fetch("service", allow_none=True, name=name):
-                service = super().duplicate(name=name, scoped_name=scoped_name, shared=False)
+                service = super().duplicate(
+                    name=name, scoped_name=scoped_name, shared=False
+                )
                 break
         workflow.services.append(service)
         return service

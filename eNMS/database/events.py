@@ -3,7 +3,6 @@ from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 
 from eNMS.database import Base
-from eNMS.database.functions import fetch_all
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.properties import private_properties
 from eNMS.properties.database import dont_track_changes

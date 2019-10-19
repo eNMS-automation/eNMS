@@ -292,27 +292,29 @@ function addServiceToWorkflow(service) {
       5
     );
   } else {
-    fCall(`/add_service_to_workflow/${workflow.id}`, "#add_service-form", function(
-      result
-    ) {
-      workflow.last_modified = result.update_time;
-      $("#add_service").remove();
-      if (graph.findNode(service.id).length == 0) {
-        nodes.add(serviceToNode(result.service));
-        workflow.services.push(result.service);
-        alertify.notify(
-          `Service '${service.scoped_name}' added to the workflow.`,
-          "success",
-          5
-        );
-      } else {
-        alertify.notify(
-          `${service.type} '${service.scoped_name}' already in workflow.`,
-          "error",
-          5
-        );
+    fCall(
+      `/add_service_to_workflow/${workflow.id}`,
+      "#add_service-form",
+      function(result) {
+        workflow.last_modified = result.update_time;
+        $("#add_service").remove();
+        if (graph.findNode(service.id).length == 0) {
+          nodes.add(serviceToNode(result.service));
+          workflow.services.push(result.service);
+          alertify.notify(
+            `Service '${service.scoped_name}' added to the workflow.`,
+            "success",
+            5
+          );
+        } else {
+          alertify.notify(
+            `${service.type} '${service.scoped_name}' already in workflow.`,
+            "error",
+            5
+          );
+        }
       }
-    });
+    );
   }
 }
 
@@ -393,7 +395,9 @@ function formatServiceTitle(service) {
 }
 
 function getServiceLabel(service) {
-  if (["Start", "End"].includes(service.name)) return service.scoped_name;
+  if (["Start", "End"].includes(service.scoped_name)) {
+    return service.scoped_name;
+  }
   let label =
     service.type == "workflow"
       ? `\n     ${service.scoped_name}     \n`
@@ -405,7 +409,7 @@ function getServiceLabel(service) {
 }
 
 function serviceToNode(service) {
-  const defaultService = ["Start", "End"].includes(service.name);
+  const defaultService = ["Start", "End"].includes(service.scoped_name);
   return {
     id: service.id,
     shape:

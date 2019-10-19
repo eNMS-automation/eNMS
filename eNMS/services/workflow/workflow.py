@@ -21,7 +21,6 @@ class Workflow(Service):
 
     __tablename__ = "workflow"
     pretty_name = "Workflow"
-
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     close_connection = Column(Boolean, default=False)
@@ -64,7 +63,7 @@ class Workflow(Service):
             service_clone.positions[clone.name] = service.positions[self.name]
             clone_services[service.id] = service_clone
         Session.commit()
-        
+
         for edge in self.edges:
             clone.edges.append(
                 factory(
@@ -186,4 +185,7 @@ class WorkflowEdge(AbstractBase):
 
     @property
     def name(self):
-        return f"Edge from {self.source.name} to {self.destination} in {self.workflow.name}"
+        return (
+            f"Edge from '{self.source.name}' to '{self.destination}'"
+            f" in {self.workflow.name}"
+        )

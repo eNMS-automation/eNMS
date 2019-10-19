@@ -273,7 +273,9 @@ function deleteInstance(type, id) {
 function createTooltips() {
   $("[data-tooltip]").each(function() {
     jsPanel.tooltip.create({
-      id: `tooltip-${$(this).attr("data-tooltip").replace(/\s/g, '')}`,
+      id: `tooltip-${$(this)
+        .attr("data-tooltip")
+        .replace(/\s/g, "")}`,
       content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
         <b>${$(this).attr("data-tooltip")}</b></p>`,
       contentSize: "auto",

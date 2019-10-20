@@ -371,9 +371,12 @@ class Run(AbstractBase):
                 ):
                     self.close_device_connection(device)
                 self.convert_result(results)
-                self.eval(
-                    self.service.result_postprocessing, function="exec", **locals()
-                )
+                try:
+                    self.eval(
+                        self.service.result_postprocessing, function="exec", **locals()
+                    )
+                except SystemExit:
+                    pass
                 if "success" not in results:
                     results["success"] = True
                 if results["success"] and self.validation_method != "none":

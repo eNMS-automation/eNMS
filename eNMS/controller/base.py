@@ -580,9 +580,9 @@ class BaseController:
                     else kwargs["instance[type]"],
                 ).has(id=kwargs["instance[id]"])
             )
-            if kwargs.get("service[runtime]"):
+            if kwargs.get("instance[runtime]"):
                 constraints.append(
-                    models["result"].parent_runtime == kwargs.get("service[runtime]")
+                    models["result"].parent_runtime == kwargs["instance[runtime]"]
                 )
         elif table == "configuration" and kwargs.get("instance[id]"):
             constraints.append(

@@ -133,6 +133,15 @@ Now exporting a workflow will export all subworkflows and edges in subworkflows.
 
 ### migration
 
+0) Upgrade custom services:
+
+- rename class
+DONT FORGET form_type of the form
+- remove validation Fields
+- replace privileged_mode with enable and config mode
+- fix IMPORTS and CLASSES
+- add pretty names
+
 1) Rename the migration files NAMES: must be LOWERCASE
 
 2) Move all workflows from workflow.yaml in the SERVICE file: service.yaml
@@ -143,6 +152,7 @@ Device -> device
 etc
 
 - Service tablenames must be PEP8 compliant (underscore, lowercase) including custom ones:
+Workflow: workflow
 ExampleService -> example_service
 DatabaseBackupService -> database_backup_service
 NapalmBackupService -> napalm_backup_service
@@ -172,6 +182,46 @@ PayloadExtractionService -> payload_extraction_service
 PayloadValidationService -> payload_validation_service
 PythonSnippetService -> python_snippet_service
 
+script = {
+    "Workflow": "workflow",
+    "ExampleService": "example_service",
+    "DatabaseBackupService": "database_backup_service",
+    "NapalmBackupService": "napalm_backup_service",
+    "NetmikoBackupService": "netmiko_backup_service",
+    "NapalmConfigurationService": "napalm_configuration_service",
+    "NapalmRollbackService": "napalm_rollback_service",
+    "NetmikoConfigurationService": "netmiko_configuration_service",
+    "NapalmGettersService": "napalm_getters_service",
+    "NetmikoPromptsService": "netmiko_prompts_service",
+    "NetmikoValidationService": "netmiko_validation_service",
+    "ConfigureBgpService": "configure_bgp_service",
+    "GenericFileTransferService": "generic_file_transfer_service",
+    "NetmikoFileTransferService": "netmiko_file_transfer_service",
+    "AnsiblePlaybookService": "ansible_playbook_service",
+    "RestCallService": "rest_call_service",
+    "SwissArmyKnifeService": "swiss_army_knife_service",
+    "UpdateInventoryService": "update_inventory_service",
+    "NapalmPingService": "napalm_ping_service",
+    "NapalmTracerouteService": "napalm_traceroute_service",
+    "PingService": "ping_service",
+    "MailNotificationService": "mail_notification_service",
+    "SlackNotificationService": "slack_notification_service",
+    "MattermostNotificationService": "mattermost_notification_service",
+    "UnixCommandService": "unix_command_service",
+    "UnixShellScriptService": "unix_shell_script_service",
+    "PayloadExtractionService": "payload_extraction_service",
+    "PayloadValidationService": "payload_validation_service",
+    "PythonSnippetService": "python_snippet_service",
+    "CalixE9GettersService": "calix_e9_getters_service",
+    "CiscoNcs4kGettersService": "cisco_ncs4k_getters_service",
+    "CiscoNcs6kGettersService": "cisco_ncs4k_getters_service",
+    "Cisco4KReIPService": "cisco4k_reip_service",
+    "ConsoleValidationService": "console_validation_service",
+    "DeviceUpgradeService": "device_upgrade_service",
+    "VRepairTicketCreationService": "vrepair_ticket_creation_service",
+}
+
+
 - Renaming Fields:
 python_query -> iteration_devices
 query_property_type -> iteration_devices_property
@@ -190,12 +240,3 @@ otherwise: parent_device (because iteration targets work for a service too)
 
 - Update the value of the notification method for all services:
 mail_feedback_notification -> mail
-
-- REFERENCE NAMES
-* replace name with scoped_name
-* remove all start_services
-
-In the migration file:
-
-- Add pretty names for custom services
-

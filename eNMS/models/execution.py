@@ -605,13 +605,14 @@ class Run(AbstractBase):
     def get_var(self, payload, name, device=None, **kwargs):
         return self.payload_helper(payload, name, device=device, **kwargs)
 
-    def get_result(self, service_name, device=None):
+    def get_result(self, service_name, device=None, workflow=None):
         def filter_run(query, property):
-            return query.filter(
+            query = query.filter(
                 models["run"].service.has(
                     getattr(models["service"], property) == service_name
                 )
-            ).all()
+            )
+            return query.all()
 
         def recursive_search(run: "Run"):
             if not run:
@@ -619,6 +620,11 @@ class Run(AbstractBase):
             query = Session.query(models["run"]).filter_by(
                 parent_runtime=run.parent_runtime
             )
+            if workflow or self.workflow:
+                name = workflow or self.workflow.name
+                query.filter(
+                    models["run"].workflow.has(models["workflow"].name == name)
+                )
             runs = filter_run(query, "scoped_name") or filter_run(query, "name")
             results = list(filter(None, [run.result(device) for run in runs]))
             if not results:

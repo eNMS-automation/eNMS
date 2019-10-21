@@ -1044,7 +1044,7 @@
   positions:
     'Regression Workflow 2: Separate Failure - Success paths': [374, 278]
     'Regression Workflow 3: Napalm getters (postprocessing)': ['-50', '0']
-    'Regression Workflow A: get_var, set_var, get_result': [125, 114]
+    'Regression Workflow A: get_var, set_var, get_result': [-10, 157]
     'Regression Workflow C: Advanced multiprocessing': [391, -27]
     'Regression Workflow D: Prompts': [405, -103]
   push_to_git: false
@@ -2200,7 +2200,8 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show vrf {{get_var("iteration_simple", section="pools")}}
+  commands: "show vrf {{get_var(\"iteration_simple\", section=\"pools\")}}\r\nshow\
+    \ vrf {{parent_device.name}}\r\nshow vrf {{device.name}}"
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2224,11 +2225,11 @@
   global_delay_factor: 1.0
   include_link_in_summary: false
   initial_payload: {}
-  iteration_devices: get_var("iteration_device", section="pools", device=device.name)
+  iteration_devices: get_var("iteration_device", section="pools", device=parent_device.name)
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-04 01:28:59.769392'
+  last_modified: '2019-10-21 21:10:14.657271'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -2241,7 +2242,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow A: get_var, set_var, get_result': [580, -81]
+    'Regression Workflow A: get_var, set_var, get_result': [474, -11]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: Show vrf with payload helper
@@ -2304,7 +2305,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow A: get_var, set_var, get_result': [609, 92]
+    'Regression Workflow A: get_var, set_var, get_result': [425, 190]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: Show vrf with python query
@@ -4255,6 +4256,12 @@
         \ to\r\nretrieve a variable.\r\nIt also uses \"get_result\" to retrieve the\
         \ result of a previously run job."
       positions: [-92, -34]
+    8d64652f-dbc6-4916-ba06-a49ae0ed36fb:
+      alignment: left
+      content: "Will run on 4 \"iterated devices\" in total.\r\nTests that \"parent_device\"\
+        \ and \"device\"\r\ncan both be used from the \"Service\" tab.\r\nTests sending\
+        \ multiple commands with a Netmiko service."
+      positions: [568, -123]
     d98b7c19-9d7b-4ddf-bada-2c47e492dbef:
       alignment: left
       content: "Set a variable called \"iteration_device\" that we will use in the\
@@ -4262,7 +4269,7 @@
         , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
         ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)"
       positions: [103, -224]
-  last_modified: '2019-10-06 20:43:59.635926'
+  last_modified: '2019-10-21 21:12:36.817467'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

@@ -71,7 +71,7 @@ function updatePools(pool) {
   alertify.notify("Update starting...", "success", 5);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call(endpoint, function() {
-    table.ajax.reload(null, false);
+    tables["pool"].ajax.reload(null, false);
     alertify.notify("Update successful.", "success", 5);
   });
 }

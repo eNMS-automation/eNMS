@@ -247,17 +247,17 @@
         <div class="form-group">
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
-        <label class="readonly-when-run"
+        <label
           >Device Query (define targets from a python query)</label
         >
         <div class="form-group">
           {{ form.device_query(id=form_type + '-device_query',
-          class="form-control readonly-when-run add-id") }}
+          class="form-control add-id") }}
         </div>
-        <label class="readonly-when-run">Query Property Type</label>
+        <label>Query Property Type</label>
         <div class="form-group">
           {{ form.device_query_property(id=form_type + '-device_query_property',
-          class="form-control readonly-when-run add-id") }}
+          class="form-control add-id") }}
         </div>
         <fieldset>
           <div class="item">
@@ -278,47 +278,47 @@
         </div>
       </div>
       <div id="step-5" style="min-height: 300px">
-        <label class="readonly-when-run">Iteration devices</label>
+        <label>Iteration devices</label>
         <div class="form-group">
           {{ form.iteration_devices(id=form_type + '-iteration_devices',
-          class="form-control readonly-when-run add-id") }}
+          class="form-control add-id") }}
         </div>
-        <label class="readonly-when-run">Iteration Devices Property</label>
+        <label>Iteration Devices Property</label>
         <div class="form-group">
           {{ form.iteration_devices_property(id=form_type +
-          '-iteration_devices_property', class="form-control readonly-when-run add-id")
+          '-iteration_devices_property', class="form-control add-id")
           }}
         </div>
-        <label class="readonly-when-run"
+        <label
           >Iteration values: run service for each value (python query)</label
         >
         <div class="form-group">
           {{ form.iteration_values(id=form_type + '-iteration_values',
-          class="form-control readonly-when-run add-id") }}
+          class="form-control add-id") }}
         </div>
-        <label class="readonly-when-run">Iteration Variable Name</label>
+        <label>Iteration Variable Name</label>
         <div class="form-group">
           {{ form.iteration_variable_name(id=form_type +
-          '-iteration_variable_name', class="form-control readonly-when-run add-id") }}
+          '-iteration_variable_name', class="form-control add-id") }}
         </div>
       </div>
       <div id="step-6">
-        <label class="readonly-when-run">Conversion Method</label>
+        <label>Conversion Method</label>
         <div class="form-group">
           {{ form.conversion_method(id=form_type + '-conversion_method',
-          class="form-control readonly-when-run add-id") }}
+          class="form-control add-id") }}
         </div>
-        <label class="readonly-when-run"
+        <label
           >Python Post-processing after conversion (variable "results")</label
         >
         <div class="form-group">
           {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
-          class="form-control readonly-when-run add-id") }}
+          class="form-control add-id") }}
         </div>
-        <label class="readonly-when-run">Validation Method</label>
+        <label>Validation Method</label>
         <div class="form-group">
           {{ form.validation_method(id=form_type + '-validation_method',
-          class="form-control readonly-when-run add-id") }}
+          class="form-control add-id") }}
         </div>
         <label>Content Match</label>
         <div class="form-group">

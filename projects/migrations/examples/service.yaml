@@ -30,7 +30,7 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
-    'Regression Workflow 1: Netmiko with validation and retries': [0, 0]
+    'Regression Workflow 1: Netmiko with validation and retries': [-667, 42]
     'Regression Workflow 2: Separate Failure - Success paths': [-404, 13]
     'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-431, -124]
@@ -4815,7 +4815,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  devices: []
   dict_match: {}
   display_only_failed_nodes: false
   events: []
@@ -4826,13 +4826,17 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
+    7596d28d-4b04-4314-b81e-2123ae51172d:
+      alignment: left
+      content: In this workflow, devices are configured at SERVICE level.
+      positions: [-169, -303]
     f865beb3-e097-45f9-917c-184a423d8249:
       alignment: left
       content: "Use Netmiko to run a \"show vrf\".\r\nUse the validation mechanism\
         \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
         \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
-      positions: [294, -242]
-  last_modified: '2019-10-02 10:18:22.321399'
+      positions: [-147, -217]
+  last_modified: '2019-10-21 22:29:55.006575'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4876,7 +4880,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: []
+  devices: [Washington]
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -4891,7 +4895,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-02 10:17:57.272976'
+  last_modified: '2019-10-21 21:59:43.430409'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4904,7 +4908,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 1: Netmiko with validation and retries': [250, -172]
+    'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: Check VRF (NOVRF) exists

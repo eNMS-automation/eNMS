@@ -295,7 +295,6 @@ class Run(AbstractBase):
                 self.git_push(results)
             self.create_result(results)
             Session.commit()
-
         return results
 
     @staticmethod
@@ -309,14 +308,17 @@ class Run(AbstractBase):
         derived_devices = self.compute_devices_from_query(
             self.iteration_devices, self.iteration_devices_property, **locals()
         )
-        derived_run = factory("run", **{
-            "service": self.service.id,
-            "devices": [derived_device.id for derived_device in derived_devices],
-            "workflow": self.workflow.id,
-            "parent_device": device.id,
-            "parent_runtime": self.parent_runtime,
-            "restart_run": self.restart_run,
-        })
+        derived_run = factory(
+            "run",
+            **{
+                "service": self.service.id,
+                "devices": [derived_device.id for derived_device in derived_devices],
+                "workflow": self.workflow.id,
+                "parent_device": device.id,
+                "parent_runtime": self.parent_runtime,
+                "restart_run": self.restart_run,
+            },
+        )
         derived_run.properties = self.properties
         return derived_run.run(payload)["success"]
 
@@ -326,7 +328,9 @@ class Run(AbstractBase):
             results = [self.get_results(payload)]
         else:
             if self.iteration_devices and not self.parent_device:
-                success = all(self.device_iteration(payload, device) for device in devices)
+                success = all(
+                    self.device_iteration(payload, device) for device in devices
+                )
                 return {"success": success, "runtime": self.runtime}
             if self.multiprocessing:
                 results = []
@@ -586,7 +590,7 @@ class Run(AbstractBase):
         self, payload, name, value=None, device=None, section=None, operation="set"
     ):
         payload = payload.setdefault("variables", {})
-        print("ttttt"*100, name, value, device)
+        print("ttttt" * 100, name, value, device)
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})

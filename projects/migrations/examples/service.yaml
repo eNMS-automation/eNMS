@@ -2327,7 +2327,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show vrf {{get_result("Payload editor, with device")["endtime"]}}
+  commands: show vrf {{get_result("Modify payload (per device)")["endtime"]}}
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2355,7 +2355,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-03 20:33:15.924993'
+  last_modified: '2019-10-21 21:55:59.995214'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -2371,7 +2371,7 @@
     'Regression Workflow A: get_var, set_var, get_result': [-445, 128]
   push_to_git: false
   result_postprocessing: ''
-  scoped_name: show runtime with get_result helper
+  scoped_name: Modify payload (per device)
   send_notification: false
   send_notification_method: mail
   shared: false

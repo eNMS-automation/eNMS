@@ -305,14 +305,15 @@ class Run(AbstractBase):
         run = fetch("run", runtime=runtime)
         results.append(run.get_results(payload, device))
 
-    def device_iteration(self, payload, parent_device):
+    def device_iteration(self, payload, device):
+        derived_devices = self.compute_devices_from_query(
+            self.iteration_devices, self.iteration_devices_property, **locals()
+        )
         derived_run = factory("run", **{
             "service": self.service.id,
-            "devices": [device.id for device in self.compute_devices_from_query(
-            self.iteration_devices, self.iteration_devices_property, **locals()
-        )],
+            "devices": [derived_device.id for derived_device in derived_devices],
             "workflow": self.workflow.id,
-            "parent_device": parent_device.id,
+            "parent_device": device.id,
             "parent_runtime": self.parent_runtime,
             "restart_run": self.restart_run,
         })

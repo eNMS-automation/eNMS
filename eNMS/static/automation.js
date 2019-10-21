@@ -41,6 +41,7 @@ function panelCode(type, id, mode) {
       .addClass("btn-primary")
       .attr("onclick", `parametrizedRun('${type}', ${id})`)
       .text("Run");
+    $(".jsPanel-title").text("test");
     $(".readonly-when-run").prop("readonly", true);
   }
 }

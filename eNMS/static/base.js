@@ -440,8 +440,8 @@ function showTypePanel(type, id, mode) {
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
         call(`/get${properties}/${type}/${id}`, function(instance) {
-          const title = mode == "duplicate" ? "Duplicate" : "Edit";
-          panel.setHeaderTitle(`${title} ${type} - ${instance.name}`);
+          const action = mode ? mode.toUpperCase() : "EDIT";
+          panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
           processInstance(type, instance);
           if (type == "workflow" && mode == "duplicate") {
             $(`#workflow-btn-${id}`).attr(

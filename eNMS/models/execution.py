@@ -640,7 +640,7 @@ class Run(AbstractBase):
             "get_result": _self.get_result,
             "workflow": _self.workflow,
             "set_var": partial(_self.payload_helper, locals.get("payload", {})),
-            "parent_device": _self.parent_device,
+            "parent_device": _self.parent_device or locals.get("device"),
             **locals,
         }
 

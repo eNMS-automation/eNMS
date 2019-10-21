@@ -90,17 +90,17 @@
       </ul>
       <div id="step-1">
         <div>
-          <label class="edit-only">Name</label>
+          <label class="readonly-when-run">Name</label>
           <div class="form-group">
-            {{ form.name(id=form_type + '-name', class="form-control edit-only
+            {{ form.name(id=form_type + '-name', class="form-control readonly-when-run
             add-id required") }}
           </div>
-          <label class="edit-only">Type</label>
+          <label class="readonly-when-run">Type</label>
           <div class="form-group">
-            {{ form.type(id=form_type + '-class', class="form-control edit-only
+            {{ form.type(id=form_type + '-class', class="form-control readonly-when-run
             add-id") }}
           </div>
-          <fieldset class="edit-only">
+          <fieldset class="readonly-when-run">
             <div class="item">
               <input
                 id="{{ form_type }}-shared"
@@ -112,25 +112,25 @@
               <label>Shared</label>
             </div>
           </fieldset>
-          <label class="edit-only">Scoped Name</label>
+          <label class="readonly-when-run">Scoped Name</label>
           <div class="form-group">
             {{ form.scoped_name(id=form_type + '-scoped_name',
-            class="form-control edit-only add-id required") }}
+            class="form-control readonly-when-run add-id required") }}
           </div>
-          <label class="edit-only">Description</label>
+          <label class="readonly-when-run">Description</label>
           <div class="form-group">
             {{ form.description(id=form_type + '-description',
-            class="form-control edit-only add-id") }}
+            class="form-control readonly-when-run add-id") }}
           </div>
-          <label class="edit-only">Vendor</label>
+          <label class="readonly-when-run">Vendor</label>
           <div class="form-group">
             {{ form.vendor(id=form_type + '-vendor', class="form-control
-            edit-only add-id") }}
+            readonly-when-run add-id") }}
           </div>
-          <label class="edit-only">Operating System</label>
+          <label class="readonly-when-run">Operating System</label>
           <div class="form-group">
             {{ form.operating_system(id=form_type + '-operating_system',
-            class="form-control edit-only add-id") }}
+            class="form-control readonly-when-run add-id") }}
           </div>
           <label>Initial Payload</label>
           <div class="form-group">
@@ -212,29 +212,29 @@
             <input
               id="{{ form_type }}-skip"
               name="skip"
-              class="edit-only add-id"
+              class="readonly-when-run add-id"
               type="checkbox"
               value="y"
             />
-            <label class="edit-only">Skip this Service Regardless</label>
+            <label class="readonly-when-run">Skip this Service Regardless</label>
           </div>
         </fieldset>
-        <label class="edit-only"
+        <label class="readonly-when-run"
           >Skip Service If Python Query evaluates to True</label
         >
         <div class="form-group">
           {{ form.skip_query(id=form_type + '-skip_query', class="form-control
-          edit-only add-id") }}
+          readonly-when-run add-id") }}
         </div>
-        <label class="edit-only">Maximum number of runs</label>
+        <label class="readonly-when-run">Maximum number of runs</label>
         <div class="form-group">
           {{ form.maximum_runs(id=form_type + '-maximum_runs',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
-        <label class="edit-only">Waiting time (in seconds)</label>
+        <label class="readonly-when-run">Waiting time (in seconds)</label>
         <div class="form-group">
           {{ form.waiting_time(id=form_type + '-waiting_time',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
       </div>
       <div id="step-4" style="min-height: 300px">
@@ -247,17 +247,17 @@
         <div class="form-group">
           {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
         </div>
-        <label class="edit-only"
+        <label class="readonly-when-run"
           >Device Query (define targets from a python query)</label
         >
         <div class="form-group">
           {{ form.device_query(id=form_type + '-device_query',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
-        <label class="edit-only">Query Property Type</label>
+        <label class="readonly-when-run">Query Property Type</label>
         <div class="form-group">
           {{ form.device_query_property(id=form_type + '-device_query_property',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
         <fieldset>
           <div class="item">
@@ -278,47 +278,47 @@
         </div>
       </div>
       <div id="step-5" style="min-height: 300px">
-        <label class="edit-only">Iteration devices</label>
+        <label class="readonly-when-run">Iteration devices</label>
         <div class="form-group">
           {{ form.iteration_devices(id=form_type + '-iteration_devices',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
-        <label class="edit-only">Iteration Devices Property</label>
+        <label class="readonly-when-run">Iteration Devices Property</label>
         <div class="form-group">
           {{ form.iteration_devices_property(id=form_type +
-          '-iteration_devices_property', class="form-control edit-only add-id")
+          '-iteration_devices_property', class="form-control readonly-when-run add-id")
           }}
         </div>
-        <label class="edit-only"
+        <label class="readonly-when-run"
           >Iteration values: run service for each value (python query)</label
         >
         <div class="form-group">
           {{ form.iteration_values(id=form_type + '-iteration_values',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
-        <label class="edit-only">Iteration Variable Name</label>
+        <label class="readonly-when-run">Iteration Variable Name</label>
         <div class="form-group">
           {{ form.iteration_variable_name(id=form_type +
-          '-iteration_variable_name', class="form-control edit-only add-id") }}
+          '-iteration_variable_name', class="form-control readonly-when-run add-id") }}
         </div>
       </div>
       <div id="step-6">
-        <label class="edit-only">Conversion Method</label>
+        <label class="readonly-when-run">Conversion Method</label>
         <div class="form-group">
           {{ form.conversion_method(id=form_type + '-conversion_method',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
-        <label class="edit-only"
+        <label class="readonly-when-run"
           >Python Post-processing after conversion (variable "results")</label
         >
         <div class="form-group">
           {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
-        <label class="edit-only">Validation Method</label>
+        <label class="readonly-when-run">Validation Method</label>
         <div class="form-group">
           {{ form.validation_method(id=form_type + '-validation_method',
-          class="form-control edit-only add-id") }}
+          class="form-control readonly-when-run add-id") }}
         </div>
         <label>Content Match</label>
         <div class="form-group">

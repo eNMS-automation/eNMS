@@ -41,7 +41,7 @@ function panelCode(type, id, mode) {
       .addClass("btn-primary")
       .attr("onclick", `parametrizedRun('${type}', ${id})`)
       .text("Run");
-    $(".edit-only").prop("disabled", true);
+    $(".readonly-when-run").prop("readonly", true);
   }
 }
 

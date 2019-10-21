@@ -1337,7 +1337,7 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-10 22:35:44.181784'
+  last_modified: '2019-10-21 19:20:48.247271'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -1358,15 +1358,15 @@
   scoped_name: Modify Payload for Iteration
   send_notification: false
   send_notification_method: mail
-  shared: true
+  shared: false
   skip: false
   skip_query: ''
   source_code: "# Interfaces 1\r\ntargets = ['Loopback101', 'Loopback15'] if device.name\
     \ == \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('Interfaces\
     \ 1', targets, device=device.name)\r\n\r\n# Derived Devices\r\nset_var(\"Derived\
     \ Devices\", [\"Washington\", \"Austin\"], device=device.name)\r\n\r\n# Interfaces\
-    \ 2\r\nset_var('Interfaces 2', ['Loopback333', 'Loopback334'], device=device.name)\r\
-    \nsave_result(True, {})"
+    \ 2\r\nset_var('Interfaces 2', ['Loopback333', 'Loopback334'])\r\nsave_result(True,\
+    \ {})"
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -3090,9 +3090,9 @@
   initial_payload: {}
   iteration_devices: get_var("Derived Devices", device=device.name)
   iteration_devices_property: name
-  iteration_values: get_var('Interfaces 2', device=device.name)
+  iteration_values: get_var('Interfaces 2')
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-04 14:56:50.036572'
+  last_modified: '2019-10-21 19:20:40.492389'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3526,7 +3526,7 @@
   iteration_devices_property: name
   iteration_values: '["Washington", "Atlanta"]'
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-04 14:56:56.469168'
+  last_modified: '2019-10-21 19:21:56.505065'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4137,12 +4137,13 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    245ebaa6-e452-4c0d-b89e-81acb48bfa6c:
+    63bebf9d-b5d5-47fd-9849-4177f2517be4:
+      alignment: left
       content: "This workflow runs on 3 devices: one router and 2 dummy devices.\r\
         \nThe router will take the upward path, the dummy devices the downward path.\r\
         \nBoth path rejoin at the end.\r\nTo be tested both with and without multiprocessing."
-      positions: [180, 77]
-  last_modified: '2019-10-02 10:16:50.403408'
+      positions: ['217.2325439453125', '54']
+  last_modified: '2019-10-21 19:21:44.441111'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4561,7 +4562,7 @@
       content: "The iteration values are set to [\"Loopback11\",\"Loopback15\"] (static),\
         \ and the name\r\nof the iteration variable is set to a non-default value.\r\
         \nThe service does a \"show interface\" over the loopback interfaces."
-      positions: ['187.87315331683305', '-224.08512290537783']
+      positions: [202, -224]
     76ece5f4-54f7-4f6b-8ea0-7d2918524e92:
       alignment: left
       content: "This service iterates over a set of values defined\r\nat the first\
@@ -4590,8 +4591,8 @@
       content: "This service doesn't have targets: it makes a REST call to\r\nhttp://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}\r\
         \nwith the iteration set to [\"Washington\", \"Atlanta\"].\r\nCredentials\
         \ must be updated after a database drop."
-      positions: ['-108.27941396778195', '160.90930755687722']
-  last_modified: '2019-10-10 22:44:33.251442'
+      positions: [-108, 160]
+  last_modified: '2019-10-21 19:20:23.076181'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

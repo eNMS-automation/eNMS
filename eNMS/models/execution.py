@@ -590,6 +590,7 @@ class Run(AbstractBase):
         self, payload, name, value=None, device=None, section=None, operation="set"
     ):
         payload = payload.setdefault("variables", {})
+        print("ttttt"*100, name, value, device)
         if device:
             payload = payload.setdefault("devices", {})
             payload = payload.setdefault(device, {})

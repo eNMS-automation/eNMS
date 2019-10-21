@@ -305,22 +305,19 @@ class Run(AbstractBase):
         run = fetch("run", runtime=runtime)
         results.append(run.get_results(payload, device))
 
-    def device_iteration(self, payload, device):
-        derived_devices = self.compute_devices_from_query(
+    def device_iteration(self, payload, parent_device):
+        derived_run = factory("run", **{
+            "service": self.service.id,
+            "devices": [device.id for device in self.compute_devices_from_query(
             self.iteration_devices, self.iteration_devices_property, **locals()
-        )
-        for device in derived_devices:
-            kwargs = {
-                "service": self.service.id,
-                "devices": [device.id for device in derived_devices],
-                "workflow": self.workflow.id,
-                "parent_device": device.id,
-                "parent_runtime": self.parent_runtime,
-                "restart_run": self.restart_run,
-            }
-            derived_run = factory("run", **kwargs)
-            derived_run.properties = self.properties
-            yield derived_run.run(payload)["success"]
+        )],
+            "workflow": self.workflow.id,
+            "parent_device": parent_device.id,
+            "parent_runtime": self.parent_runtime,
+            "restart_run": self.restart_run,
+        })
+        derived_run.properties = self.properties
+        return derived_run.run(payload)["success"]
 
     def device_run(self, payload):
         devices, success = self.compute_devices(payload), True
@@ -328,9 +325,7 @@ class Run(AbstractBase):
             results = [self.get_results(payload)]
         else:
             if self.iteration_devices and not self.parent_device:
-                success = all(
-                    all(self.device_iteration(payload, device)) for device in devices
-                )
+                success = all(self.device_iteration(payload, device) for device in devices)
                 return {"success": success, "runtime": self.runtime}
             if self.multiprocessing:
                 results = []

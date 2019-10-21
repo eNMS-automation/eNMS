@@ -3088,11 +3088,11 @@
   global_delay_factor: 1.0
   include_link_in_summary: true
   initial_payload: {}
-  iteration_devices: get_var("Derived Devices", device=device.name)
+  iteration_devices: get_var("Derived Devices", device=parent_device.name)
   iteration_devices_property: name
   iteration_values: get_var('Interfaces 2')
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-21 19:20:40.492389'
+  last_modified: '2019-10-21 19:23:12.184550'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1

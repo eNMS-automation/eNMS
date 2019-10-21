@@ -74,7 +74,7 @@ class RestCallService(Service):
                 "response": response.text,
             }
             if response.status_code == 401:
-                result["error"] = "Wrong credentials supplied."
+                result["result"] = "Wrong credentials supplied."
             return result
         return {
             "url": rest_url,

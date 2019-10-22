@@ -64,19 +64,6 @@ function workflowRunMode(instance, restartForm) {
   });
 }
 
-// eslint-disable-next-line
-function saveWorkflow(newWorkflow) {
-  if (page == "workflow_builder") {
-    $("#current-workflow").append(
-      `<option value="${newWorkflow.id}">${newWorkflow.name}</option>`
-    );
-    $("#current-workflow")
-      .val(newWorkflow.id)
-      .trigger("change");
-    displayWorkflow({ workflow: newWorkflow, runtimes: [] });
-  }
-}
-
 function parseObject(obj) {
   for (let k in obj) {
     if (typeof obj[k] === "object" && obj[k] !== null) {

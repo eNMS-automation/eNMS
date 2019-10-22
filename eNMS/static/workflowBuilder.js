@@ -266,15 +266,27 @@ function menu(entry) {
 }
 
 // eslint-disable-next-line
-function saveWorkflowService(service, update) {
-  if (update) {
-    nodes.update(serviceToNode(service));
-    let serviceIndex = workflow.services.findIndex((s) => s.id == service.id);
-    workflow.services[serviceIndex] = service;
-  } else {
-    addServiceToWorkflow(service);
+function processWorkflowData(instance) {
+  if (type == "workflow_edge") edges.update(edgeToEdge(instance));;
+  if (type.includes("service") || type == "workflow") {
+    if (update) {
+      nodes.update(serviceToNode(service));
+      let serviceIndex = workflow.services.findIndex((s) => s.id == service.id);
+      workflow.services[serviceIndex] = service;
+    } else {
+      addServiceToWorkflow(service);
+    }
+    drawIterationEdge(service);
   }
-  drawIterationEdge(service);
+  if (type === "workflow" && !id) {
+    $("#current-workflow").append(
+      `<option value="${newWorkflow.id}">${newWorkflow.name}</option>`
+    );
+    $("#current-workflow")
+      .val(newWorkflow.id)
+      .trigger("change");
+    displayWorkflow({ workflow: newWorkflow, runtimes: [] });
+  }
 }
 
 // eslint-disable-next-line

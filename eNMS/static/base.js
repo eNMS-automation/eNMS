@@ -13,9 +13,6 @@ panelCode: false
 Promise: false
 relations: false
 relationships: false
-saveWorkflow: false
-saveWorkflowEdge: false
-saveWorkflowService: false
 tableProperties: false
 workflowRunMode: false
 */
@@ -516,13 +513,7 @@ function processData(type, id) {
         type.includes("service") || type == "workflow" ? "service" : type;
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
-      if (page == "workflow_builder") {
-        if (type == "workflow_edge") edges.update(edgeToEdge(instance));;
-        if (type.includes("service") || type == "workflow") {
-          saveWorkflowService(instance, id);
-        }
-      }
-      if (type === "workflow" && !id) saveWorkflow(instance);
+      if (page == "workflow_builder") processWorkflowData(instance);
       alertify.notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${
           id ? "updated" : "created"

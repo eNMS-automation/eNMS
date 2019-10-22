@@ -45,7 +45,7 @@ def configure_context_processor(flask_app):
             "service_types": {
                 service: service_class.pretty_name
                 for service, service_class in sorted(models.items())
-                if service.endswith("service") and hasattr(service_class, "pretty_name")
+                if hasattr(service_class, "pretty_name")
             },
             "version": app.version,
         }

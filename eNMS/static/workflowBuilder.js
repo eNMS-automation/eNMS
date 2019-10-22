@@ -278,44 +278,27 @@ function saveWorkflowService(service, update) {
 }
 
 // eslint-disable-next-line
-function saveWorkflowEdge(edge) {
-  edges.update(edgeToEdge(edge));
+function addServiceToWorkflow(service) {
+  nodes.add(serviceToNode(result.service));
+  workflow.services.push(result.service);
+  alertify.notify(
+    `Service '${service.scoped_name}' added to the workflow.`,
+    "success",
+    5
+  );
 }
 
 // eslint-disable-next-line
-function addServiceToWorkflow(service) {
-  if (!workflow) {
-    alertify.notify(
-      `You must create a workflow in the
-    'Workflow management' page first.`,
-      "error",
-      5
-    );
-  } else {
-    fCall(
-      `/add_service_to_workflow/${workflow.id}`,
-      "#add_service-form",
-      function(result) {
-        workflow.last_modified = result.update_time;
-        $("#add_service").remove();
-        if (graph.findNode(service.id).length == 0) {
-          nodes.add(serviceToNode(result.service));
-          workflow.services.push(result.service);
-          alertify.notify(
-            `Service '${service.scoped_name}' added to the workflow.`,
-            "success",
-            5
-          );
-        } else {
-          alertify.notify(
-            `${service.type} '${service.scoped_name}' already in workflow.`,
-            "error",
-            5
-          );
-        }
-      }
-    );
-  }
+function addToWorkflow() {
+  fCall(
+    `/add_service_to_workflow/${workflow.id}`,
+    "#add_service-form",
+    function(result) {
+      workflow.last_modified = result.update_time;
+      $("#add_service").remove();
+      addServiceToWorkflow(result.service)
+    }
+  );
 }
 
 function deleteNode(id) {

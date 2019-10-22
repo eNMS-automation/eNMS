@@ -517,8 +517,10 @@ function processData(type, id) {
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (page == "workflow_builder") {
-        if (type == "workflow_edge") saveWorkflowEdge(instance);
-        if (type.includes("service")) saveWorkflowService(instance, id);
+        if (type == "workflow_edge") edges.update(edgeToEdge(instance));;
+        if (type.includes("service") || type == "workflow") {
+          saveWorkflowService(instance, id);
+        }
       }
       if (type === "workflow" && !id) saveWorkflow(instance);
       alertify.notify(

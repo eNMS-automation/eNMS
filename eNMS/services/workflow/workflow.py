@@ -151,7 +151,6 @@ class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
     close_connection = BooleanField(default=False)
     start_services = MultipleInstanceField("Workflow Entry Point(s)")
-    restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 
 
 class WorkflowEdge(AbstractBase):

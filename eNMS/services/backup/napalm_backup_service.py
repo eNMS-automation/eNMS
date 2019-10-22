@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from re import M, sub
 from sqlalchemy import Boolean, ForeignKey, Integer
-from wtforms import HiddenField
+from wtforms import HiddenField, StringField
 
 from eNMS import app
 from eNMS.database.dialect import Column, MutableDict, SmallString
@@ -74,6 +74,12 @@ class NapalmBackupService(ConnectionService):
 
 class NapalmBackupForm(NapalmForm):
     form_type = HiddenField(default="napalm_backup_service")
+    regex_pattern_1 = StringField("First regex to change config results")
+    regex_replace_1 = StringField("Value to replace first regex")
+    regex_pattern_2 = StringField("Second regex to change config results")
+    regex_replace_2 = StringField("Value to replace second regex")
+    regex_pattern_3 = StringField("Third regex to change config results")
+    regex_replace_3 = StringField("Value to replace third regex")
     groups = {
         "Main Parameters": {
             "commands": [

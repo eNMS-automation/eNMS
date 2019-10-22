@@ -79,8 +79,8 @@ class Service(AbstractBase):
     delete_spaces_before_matching = Column(Boolean, default=False)
 
     def __init__(self, **kwargs):
-        self.set_name(kwargs.get("scoped_name"))
         super().__init__(**kwargs)
+        self.set_name(kwargs.get("scoped_name"))
 
     def duplicate(self, workflow=None):
         for i in range(10):

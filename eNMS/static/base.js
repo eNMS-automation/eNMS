@@ -442,6 +442,11 @@ function showTypePanel(type, id, mode) {
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
+        
+        if (workflow) {
+          $(`#${type}-workflows`).append(new Option(workflow.name, workflow.id));
+          $(`#${type}-workflows`).val(workflow.id).trigger("change");
+        }
       }
       if (type.includes("service")) {
         loadScript(`../static/services/${type}.js`).then(() => {
@@ -495,6 +500,9 @@ function processInstance(type, instance) {
 
 // eslint-disable-next-line
 function processData(type, id) {
+  if (type.includes("service") || type == "workflow") {
+    $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
+  }
   fCall(
     `/update/${type}`,
     id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,

@@ -117,6 +117,11 @@
             {{ form.scoped_name(id=form_type + '-scoped_name',
             class="form-control readonly-when-run add-id required") }}
           </div>
+          <label for="workflows">Workflows</label>
+          <div class="form-group">
+            {{ form.workflows(id=form_type + '-workflows', class="form-control
+            add-id") }}
+          </div>
           <label class="readonly-when-run">Description</label>
           <div class="form-group">
             {{ form.description(id=form_type + '-description',

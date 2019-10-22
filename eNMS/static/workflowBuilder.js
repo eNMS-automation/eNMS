@@ -318,19 +318,6 @@ function addToWorkflow() {
   );
 }
 
-// eslint-disable-next-line
-function addToWorkflow() {
-  fCall(
-    `/copy_service_in_workflow/${workflow.id}`,
-    "#add_service-form",
-    function(result) {
-      workflow.last_modified = result.update_time;
-      $("#add_service").remove();
-      updateWorfklowService(result.service)
-    }
-  );
-}
-
 function deleteNode(id) {
   workflow.services = workflow.services.filter((n) => n.id != id);
   call(`/delete_node/${workflow.id}/${id}`, function(result) {

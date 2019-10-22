@@ -40,19 +40,15 @@ class Workflow(Service):
     def __init__(self, **kwargs):
         start = fetch("service", scoped_name="Start")
         end = fetch("service", scoped_name="End")
-        name = kwargs["name"] = kwargs["scoped_name"]
-        start.positions[name], end.positions[name] = (0, 0), (500, 0)
         self.services.extend([start, end])
-        
         super().__init__(**kwargs)
 
     def set_name(self, name=None):
         old_name = self.name
         super().set_name(name)
-        print("oooo"*100, self.name)
         for service in self.services:
             service.set_name()
-            service.positions[self.name] = service.positions.pop(old_name)
+            service.positions[self.name] = service.positions.pop(old_name, (0, 0))
 
     def duplicate(self, workflow=None):
         clone = super().duplicate(workflow)

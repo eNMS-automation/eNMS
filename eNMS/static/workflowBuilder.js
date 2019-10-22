@@ -68,6 +68,7 @@ let edges;
 let graph;
 let selectedObject;
 let currentMode = "motion";
+let creationMode;
 let mousePosition;
 let currLabel;
 let arrowHistory = [];
@@ -273,21 +274,23 @@ function processWorkflowData(instance, id) {
       let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
       workflow.services[serviceIndex] = instance;
     } else {
-      call(`/add_service_to_workflow/${workflow.id}/${instance.id}`, function() {
-        updateWorfklowService(instance);
-      });
+      if (creationMode == "workflow") {
+        if (instance.type === "workflow" && !id) {
+          $("#current-workflow").append(
+            `<option value="${instance.id}">${instance.name}</option>`
+          );
+          $("#current-workflow")
+            .val(instance.id)
+            .trigger("change");
+          displayWorkflow({ workflow: instance, runtimes: [] });
+        }
+      } else {
+        call(`/add_service_to_workflow/${workflow.id}/${instance.id}`, function() {
+          updateWorfklowService(instance);
+        });
+      }
     }
     drawIterationEdge(instance);
-  }
-  console.log(instance, id);
-  if (instance.type === "workflow" && !id) {
-    $("#current-workflow").append(
-      `<option value="${instance.id}">${instance.name}</option>`
-    );
-    $("#current-workflow")
-      .val(instance.id)
-      .trigger("change");
-    displayWorkflow({ workflow: instance, runtimes: [] });
   }
 }
 
@@ -564,6 +567,15 @@ function savePositions() {
   });
 }
 
+function createNew(instanceType) {
+  creationMode = instanceType;
+  if (instanceType == "workflow") {
+    showTypePanel("workflow");
+  } else {
+    showTypePanel($("#service-type").val());
+  }
+}
+
 Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
   Run: (service) => normalRun(service.id),
@@ -572,8 +584,8 @@ Object.assign(action, {
   "Run Workflow": () => runWorkflow(),
   "Parametrized Workflow Run": () => runWorkflow(true),
   Results: showResultsPanel,
-  "Create Workflow": () => showTypePanel("workflow"),
-  "Create New Service": () => showTypePanel($("#service-type").val()),
+  "Create Workflow": () => createNew("workflow"),
+  "Create New Service": () => createNew("service"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Restart Workflow from Here": (service) =>
     showRestartWorkflowPanel(workflow, service),

@@ -96,7 +96,7 @@ function saveParameters(type) {
 
 function getClusterStatus() {
   call("/get_cluster_status", function(cluster) {
-    table.ajax.reload(null, false);
+    tables["server"].ajax.reload(null, false);
     setTimeout(getClusterStatus, 15000);
   });
 }

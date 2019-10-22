@@ -239,15 +239,6 @@ function runLogic(service) {
 }
 
 // eslint-disable-next-line
-function duplicateWorkflow(id) {
-  fCall(`/duplicate_workflow/${id}`, `#edit-workflow-form-${id}`, () => {
-    table.ajax.reload(null, false);
-    $(`#workflow-${id}`).remove();
-    alertify.notify("Workflow successfully duplicated.", "success", 5);
-  });
-}
-
-// eslint-disable-next-line
 function exportService(id) {
   call(`/export_service/${id}`, () => {
     alertify.notify("Export successful.", "success", 5);

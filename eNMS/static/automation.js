@@ -17,11 +17,6 @@ table: false
 */
 
 // eslint-disable-next-line
-function openServicePanel() {
-  showTypePanel($("#service-type").val());
-}
-
-// eslint-disable-next-line
 function panelCode(type, id, mode) {
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);

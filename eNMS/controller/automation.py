@@ -47,7 +47,11 @@ class AutomationController(BaseController):
         fetch("workflow", id=workflow_id).last_modified = now
         return {"edge": workflow_edge.serialized, "update_time": now}
 
-    def add_service_to_workflow(self, workflow_id, **kwargs):
+    def add_service_to_workflow(self, workflow, service):
+        workflow = fetch("workflow", id=workflow)
+        workflow.services.append(fetch("service", id=service))
+
+    def copy_service_in_workflow(self, workflow_id, **kwargs):
         service = fetch("service", id=kwargs["services"])
         workflow = fetch("workflow", id=workflow_id)
         if kwargs["mode"] == "deep":

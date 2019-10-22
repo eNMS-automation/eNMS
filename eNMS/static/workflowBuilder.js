@@ -266,33 +266,36 @@ function menu(entry) {
 }
 
 // eslint-disable-next-line
-function processWorkflowData(instance) {
-  if (type == "workflow_edge") edges.update(edgeToEdge(instance));;
-  if (type.includes("service") || type == "workflow") {
-    if (update) {
-      nodes.update(serviceToNode(service));
-      let serviceIndex = workflow.services.findIndex((s) => s.id == service.id);
-      workflow.services[serviceIndex] = service;
+function processWorkflowData(instance, id) {
+  if (instance.type == "workflow_edge") edges.update(edgeToEdge(instance));;
+  if (instance.type.includes("service") || instance.type == "workflow") {
+    if (id) {
+      nodes.update(serviceToNode(instance));
+      let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
+      workflow.services[serviceIndex] = instance;
     } else {
-      addServiceToWorkflow(service);
+      call(`/add_service_to_workflow/${workflow.id}/${instance.id}`, function() {
+        updateWorfklowService(instance);
+      });
     }
-    drawIterationEdge(service);
+    drawIterationEdge(instance);
   }
-  if (type === "workflow" && !id) {
+  console.log(instance, id);
+  if (instance.type === "workflow" && !id) {
     $("#current-workflow").append(
-      `<option value="${newWorkflow.id}">${newWorkflow.name}</option>`
+      `<option value="${instance.id}">${instance.name}</option>`
     );
     $("#current-workflow")
-      .val(newWorkflow.id)
+      .val(instance.id)
       .trigger("change");
-    displayWorkflow({ workflow: newWorkflow, runtimes: [] });
+    displayWorkflow({ workflow: instance, runtimes: [] });
   }
 }
 
 // eslint-disable-next-line
-function addServiceToWorkflow(service) {
-  nodes.add(serviceToNode(result.service));
-  workflow.services.push(result.service);
+function updateWorfklowService(service) {
+  nodes.add(serviceToNode(service));
+  workflow.services.push(service);
   alertify.notify(
     `Service '${service.scoped_name}' added to the workflow.`,
     "success",
@@ -303,12 +306,25 @@ function addServiceToWorkflow(service) {
 // eslint-disable-next-line
 function addToWorkflow() {
   fCall(
-    `/add_service_to_workflow/${workflow.id}`,
+    `/copy_service_in_workflow/${workflow.id}`,
     "#add_service-form",
     function(result) {
       workflow.last_modified = result.update_time;
       $("#add_service").remove();
-      addServiceToWorkflow(result.service)
+      updateWorfklowService(result.service)
+    }
+  );
+}
+
+// eslint-disable-next-line
+function addToWorkflow() {
+  fCall(
+    `/copy_service_in_workflow/${workflow.id}`,
+    "#add_service-form",
+    function(result) {
+      workflow.last_modified = result.update_time;
+      $("#add_service").remove();
+      updateWorfklowService(result.service)
     }
   );
 }
@@ -558,6 +574,7 @@ Object.assign(action, {
   "Parametrized Workflow Run": () => runWorkflow(true),
   Results: showResultsPanel,
   "Create Workflow": () => showTypePanel("workflow"),
+  "Create New Service": () => showTypePanel($("#service-type").val()),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Restart Workflow from Here": (service) =>
     showRestartWorkflowPanel(workflow, service),

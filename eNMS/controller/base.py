@@ -144,9 +144,9 @@ class BaseController:
     ]
 
     valid_post_endpoints = [
-        "stop_workflow",
         "add_edge",
         "add_service_to_workflow",
+        "copy_service_in_workflow",
         "calendar_init",
         "clear_results",
         "clear_configurations",
@@ -195,6 +195,7 @@ class BaseController:
         "scan_playbook_folder",
         "scheduler",
         "skip_services",
+        "stop_workflow",
         "table_filtering",
         "task_action",
         "topology_import",

@@ -513,7 +513,7 @@ function processData(type, id) {
         type.includes("service") || type == "workflow" ? "service" : type;
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
-      if (page == "workflow_builder") processWorkflowData(instance);
+      if (page == "workflow_builder") processWorkflowData(instance, id);
       alertify.notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${
           id ? "updated" : "created"

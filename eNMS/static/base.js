@@ -14,7 +14,6 @@ Promise: false
 relations: false
 relationships: false
 tableProperties: false
-workflowRunMode: false
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
@@ -440,15 +439,6 @@ function showTypePanel(type, id, mode) {
           const action = mode ? mode.toUpperCase() : "EDIT";
           panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
           processInstance(type, instance);
-          if (type == "workflow" && mode == "duplicate") {
-            $(`#workflow-btn-${id}`).attr(
-              "onclick",
-              `duplicateWorkflow(${id})`
-            );
-          }
-          if (type == "workflow" && mode == "run") {
-            workflowRunMode(instance);
-          }
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);

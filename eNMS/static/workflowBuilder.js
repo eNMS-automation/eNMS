@@ -15,7 +15,6 @@ showTypePanel: false
 userIsActive: true
 vis: false
 workflow: true
-workflowRunMode: false
 */
 
 vis.Network.prototype.zoom = function(scale) {
@@ -653,7 +652,17 @@ function showRestartWorkflowPanel(workflow, service) {
       $("#start_services")
         .val(service.id)
         .trigger("change");
-      workflowRunMode(workflow, true);
+      call(`/get_runtimes/service/${instance.id}`, function(runtimes) {
+        runtimes.forEach((runtime) => {
+          $("#restart_runtime").append(
+            $("<option></option>")
+              .attr("value", runtime[0])
+              .text(runtime[0])
+          );
+        });
+        $("#restart_runtime").val(runtimes[runtimes.length - 1]);
+        $("#restart_runtime").selectpicker("refresh");
+      });
     }
   );
 }

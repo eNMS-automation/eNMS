@@ -36,27 +36,8 @@ function panelCode(type, id, mode) {
       .addClass("btn-primary")
       .attr("onclick", `parametrizedRun('${type}', ${id})`)
       .text("Run");
-    $(".jsPanel-title").text("test");
     $(".readonly-when-run").prop("readonly", true);
   }
-}
-
-// eslint-disable-next-line
-function workflowRunMode(instance, restartForm) {
-  call(`/get_runtimes/service/${instance.id}`, function(runtimes) {
-    const versionId = restartForm
-      ? "#restart_runtime"
-      : `#workflow-restart_runtime-${instance.id}`;
-    runtimes.forEach((runtime) => {
-      $(versionId).append(
-        $("<option></option>")
-          .attr("value", runtime[0])
-          .text(runtime[0])
-      );
-    });
-    $(versionId).val(runtimes[runtimes.length - 1]);
-    $(versionId).selectpicker("refresh");
-  });
 }
 
 function parseObject(obj) {

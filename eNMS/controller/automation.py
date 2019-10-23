@@ -132,7 +132,7 @@ class AutomationController(BaseController):
     def run(service, **kwargs):
         run_kwargs = {
             key: kwargs.pop(key)
-            for key in ("creator", "runtime", "task")
+            for key in ("creator", "runtime", "task", "devices", "pools")
             if kwargs.get(key)
         }
         restart_run = fetch(
@@ -164,7 +164,7 @@ class AutomationController(BaseController):
             )
         else:
             service.run(runtime=runtime)
-        return {**service.serialized, "runtime": runtime}
+        return {"service": service.serialized, "runtime": runtime}
 
     def save_positions(self, workflow_id):
         now = self.get_time()

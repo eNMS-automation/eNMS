@@ -144,7 +144,7 @@ function refreshLogs(service, runtime, displayResults) {
   fCall("/get_service_logs", `#logs-form-${service.id}`, function(result) {
     $(`#log-${service.id}`).text(result.logs);
     if (result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, displayResults), 1500);
+      setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);
     } else if (displayResults) {
       $(`#logs-${service.id}`).remove();
       showResultsPanel(service, runtime);
@@ -183,28 +183,24 @@ function configureLogsCallbacks(service, runtime) {
 
 // eslint-disable-next-line
 function normalRun(id) {
-  call(`/run_service/${id}`, function(service) {
-    runLogic(service);
+  call(`/run_service/${id}`, function(result) {
+    runLogic(result);
   });
 }
 
 // eslint-disable-next-line
 function parametrizedRun(type, id) {
-  fCall("/run_service", `#edit-${type}-form-${id}`, function(service) {
+  fCall("/run_service", `#edit-${type}-form-${id}`, function(result) {
     $(`#${type}-${id}`).remove();
-    runLogic(service);
+    runLogic(result);
   });
 }
 
-function runLogic(service) {
-  showLogsPanel(service, service.runtime, true);
-  alertify.notify(`Service '${service.name}' started.`, "success", 5);
-  if (page == "workflow_builder") {
-    if (service.type != "workflow") {
-      getServiceState(service.id);
-    }
-  }
-  $(`#${service.type}-${service.id}`).remove();
+function runLogic(result) {
+  showLogsPanel(result.service, result.runtime, true);
+  alertify.notify(`Service '${result.service.name}' started.`, "success", 5);
+  if (page == "workflow_builder") getServiceState(result.service.id);
+  $(`#${result.service.type}-${result.service.id}`).remove();
 }
 
 // eslint-disable-next-line

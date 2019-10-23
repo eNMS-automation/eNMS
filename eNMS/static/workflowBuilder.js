@@ -267,11 +267,13 @@ function menu(entry) {
 
 // eslint-disable-next-line
 function processWorkflowData(instance, id) {
-  if (instance.type == "workflow_edge") edges.update(edgeToEdge(instance));;
+  if (instance.type == "workflow_edge") edges.update(edgeToEdge(instance));
   if (instance.type.includes("service") || instance.type == "workflow") {
     if (id) {
       nodes.update(serviceToNode(instance));
-      let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
+      let serviceIndex = workflow.services.findIndex(
+        (s) => s.id == instance.id
+      );
       workflow.services[serviceIndex] = instance;
     } else {
       if (creationMode == "workflow") {
@@ -285,9 +287,12 @@ function processWorkflowData(instance, id) {
           displayWorkflow({ workflow: instance, runtimes: [] });
         }
       } else {
-        call(`/add_service_to_workflow/${workflow.id}/${instance.id}`, function() {
-          updateWorfklowService(instance);
-        });
+        call(
+          `/add_service_to_workflow/${workflow.id}/${instance.id}`,
+          function() {
+            updateWorfklowService(instance);
+          }
+        );
       }
     }
     drawIterationEdge(instance);
@@ -313,7 +318,7 @@ function addToWorkflow() {
     function(result) {
       workflow.last_modified = result.update_time;
       $("#add_service").remove();
-      updateWorfklowService(result.service)
+      updateWorfklowService(result.service);
     }
   );
 }

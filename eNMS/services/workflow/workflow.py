@@ -13,7 +13,7 @@ from eNMS.database.associations import (
     start_services_workflow_table,
 )
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import MultipleInstanceField, NoValidationSelectField
+from eNMS.forms.fields import MultipleInstanceField
 from eNMS.models.automation import Service
 
 

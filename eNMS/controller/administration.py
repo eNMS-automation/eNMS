@@ -111,11 +111,12 @@ class AdministrationController(BaseController):
                         instance = self.objectify(instance_type, instance)
                         factory(instance_type, **instance)
                         Session.commit()
-                    except Exception:
-                        info(
+                    except Exception as exc:
+                        info(str(exc))
+                        """ info(
                             f"{str(instance)} could not be imported :"
                             f"{chr(10).join(format_exc().splitlines())}"
-                        )
+                        ) """
                         status = "Partial import (see logs)."
         for name, services in workflow_services.items():
             workflow = fetch("workflow", name=name)

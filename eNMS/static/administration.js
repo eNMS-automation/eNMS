@@ -7,7 +7,7 @@ fCall: false
 folders: false
 page: false
 showPanel: false
-table: false
+tables: false
 updateProperty: false
 */
 

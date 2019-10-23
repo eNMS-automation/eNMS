@@ -2371,7 +2371,7 @@
     'Regression Workflow A: get_var, set_var, get_result': [-445, 128]
   push_to_git: false
   result_postprocessing: ''
-  scoped_name: Modify payload (per device)
+  scoped_name: show runtime with get_result helper
   send_notification: false
   send_notification_method: mail
   shared: false

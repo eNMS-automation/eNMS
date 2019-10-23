@@ -656,7 +656,7 @@ function showRestartWorkflowPanel(workflow, service) {
       $("#start_services")
         .val(service.id)
         .trigger("change");
-      call(`/get_runtimes/service/${instance.id}`, function(runtimes) {
+      call(`/get_runtimes/service/${workflow.id}`, function(runtimes) {
         runtimes.forEach((runtime) => {
           $("#restart_runtime").append(
             $("<option></option>")

@@ -5,7 +5,6 @@ call: false
 cantorPairing: false
 createPanel: false
 diffview: false
-displayWorkflow: false
 fCall: false
 getServiceState: false
 initTable: false
@@ -13,7 +12,6 @@ JSONEditor: false
 page: false
 serviceTypes: false
 showTypePanel: false
-table: false
 */
 
 // eslint-disable-next-line

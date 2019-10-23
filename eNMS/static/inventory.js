@@ -10,7 +10,7 @@ initTable: false
 openUrl: false
 showPanel: false
 showTypePanel: false
-table: false
+tables: false
 */
 
 // eslint-disable-next-line

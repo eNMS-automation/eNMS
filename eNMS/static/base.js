@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+creationMode: true
 csrf_token: false
 documentationUrl: false
 filteringProperties: false
@@ -10,10 +11,12 @@ jsPanel: false
 NProgress: false
 page: false
 panelCode: false
+processWorkflowData: false
 Promise: false
 relations: false
 relationships: false
 tableProperties: false
+workflow: true
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
@@ -442,7 +445,6 @@ function showTypePanel(type, id, mode) {
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
-
         if (workflow && creationMode == "service") {
           $(`#${type}-workflows`).append(
             new Option(workflow.name, workflow.id)

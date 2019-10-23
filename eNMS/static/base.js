@@ -58,7 +58,7 @@ const panelSize = {
   service_results: "1200 700",
   server: "600 250",
   server_filtering: "700 450",
-  service: "1000 600",
+  service: "1300 600",
   service_filtering: "1000 600",
   ssh: "700 200",
   task: "900 500",
@@ -66,7 +66,7 @@ const panelSize = {
   user: "600 300",
   user_filtering: "700 250",
   view: "700 300",
-  workflow: "1000 600",
+  workflow: "1300 600",
   workflow_filtering: "1000 600",
   workflow_results: "1200 700",
 };
@@ -443,7 +443,7 @@ function showTypePanel(type, id, mode) {
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         
-        if (workflow) {
+        if (workflow && creationMode == "service") {
           $(`#${type}-workflows`).append(new Option(workflow.name, workflow.id));
           $(`#${type}-workflows`).val(workflow.id).trigger("change");
         }

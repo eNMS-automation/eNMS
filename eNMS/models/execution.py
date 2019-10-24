@@ -697,7 +697,7 @@ class Run(AbstractBase):
         netmiko_connection = ConnectHandler(
             device_type=driver,
             ip=device.ip_address,
-            port=getattr(device, "port"),
+            port=device.port,
             username=username,
             password=password,
             secret=device.enable_password,

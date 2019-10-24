@@ -200,7 +200,9 @@ function parametrizedRun(type, id) {
 function runLogic(result) {
   showLogsPanel(result.service, result.runtime, true);
   alertify.notify(`Service '${result.service.name}' started.`, "success", 5);
-  if (page == "workflow_builder") getServiceState(result.service.id);
+  if (page == "workflow_builder" && workflow) {
+    if (result.service.id != workflow.id) getServiceState(result.service.id, true);
+  }
   $(`#${result.service.type}-${result.service.id}`).remove();
 }
 

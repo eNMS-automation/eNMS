@@ -75,7 +75,7 @@ let currentRuntime;
 let triggerMenu;
 
 function displayWorkflow(workflowData) {
-  workflow = workflowData.workflow;
+  workflow = workflowData.service;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));
   workflow.services.map(drawIterationEdge);
@@ -241,8 +241,8 @@ function switchToWorkflow(workflowId, arrow) {
   } else {
     $("#right-arrow").addClass("disabled");
   }
-  call(`/get_workflow_state/${workflowId}/latest`, function(result) {
-    workflow = result.workflow;
+  call(`/get_service_state/${workflowId}/latest`, function(result) {
+    workflow = result.service;
     graph = displayWorkflow(result);
     alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
   });
@@ -683,15 +683,15 @@ function colorService(id, color) {
 }
 
 // eslint-disable-next-line
-function getServiceState(id) {
-  call(`/get/service/${id}`, function(service) {
-    if (service.status == "Running") {
+function getServiceState(id, first) {
+  call(`/get_service_state/${id}`, function(result) {
+    if (first || result.state.status == "Running") {
       colorService(id, "#89CFF0");
       $("#status").text("Status: Running.");
-      setTimeout(() => getServiceState(id), 1500);
+      setTimeout(() => getServiceState(id), 300);
     } else {
       $("#status").text("Status: Idle.");
-      colorService(id, service.color);
+      colorService(id, "#D2E5FF");
     }
   });
 }
@@ -778,10 +778,10 @@ function getWorkflowState(periodic) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
-    call(`/get_workflow_state/${workflow.id}${url}`, function(result) {
-      if (result.workflow.id != workflow.id) return;
+    call(`/get_service_state/${workflow.id}${url}`, function(result) {
+      if (result.service.id != workflow.id) return;
       currentRuntime = result.runtime;
-      if (result.workflow.last_modified !== workflow.last_modified) {
+      if (result.service.last_modified !== workflow.last_modified) {
         displayWorkflow(result);
       } else {
         displayWorkflowState(result);

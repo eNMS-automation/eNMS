@@ -187,15 +187,15 @@ class AutomationController(BaseController):
         for service_id in service_ids.split("-"):
             fetch("service", id=service_id).skip = skip == "skip"
 
-    def get_workflow_state(self, workflow_id, runtime="latest"):
-        state, workflow = None, fetch("workflow", id=workflow_id)
-        runs = fetch_all("run", service_id=workflow_id)
+    def get_service_state(self, service_id, runtime="latest"):
+        state, service = None, fetch("service", id=service_id)
+        runs = fetch_all("run", service_id=service_id)
         if runs and runtime != "normal":
             if runtime == "latest":
                 runtime = runs[-1].runtime
             state = self.run_db.get(runtime) or fetch("run", runtime=runtime).state
         return {
-            "workflow": workflow.to_dict(include=["services", "edges"]),
+            "service": service.to_dict(include=["services", "edges"]),
             "runtimes": [(r.runtime, r.creator) for r in runs],
             "state": state,
             "runtime": runtime,

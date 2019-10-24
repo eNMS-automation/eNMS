@@ -10,15 +10,15 @@ from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
-class NetmikoBackupService(ConnectionService):
+class DataBackupService(ConnectionService):
 
-    __tablename__ = "netmiko_backup_service"
-    pretty_name = "Netmiko Backup"
+    __tablename__ = "data_backup_service"
+    pretty_name = "Data Backup"
 
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)
-    configuration_command = Column(SmallString)
+    commands = Column(LargeString)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
@@ -35,42 +35,47 @@ class NetmikoBackupService(ConnectionService):
 
     def job(self, run, payload, device):
         try:
+            commands = run.sub(run.commands, locals()).splitlines()
             device.last_runtime = datetime.now()
-            path_device_config = Path.cwd() / "git" / "configurations" / device.name
-            path_device_config.mkdir(parents=True, exist_ok=True)
+            path_device_data = Path.cwd() / "git" / "data" / device.name
+            path_device_data.mkdir(parents=True, exist_ok=True)
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Netmiko configuration", device)
-            command = run.configuration_command
-            configuration = netmiko_connection.send_command(command)
+            data = {}
+            for command in commands:
+                result = netmiko_connection.send_command(command)
+                for i in range(1, 4):
+                    result = sub(
+                        getattr(self, f"regex_pattern_{i}"),
+                        getattr(self, f"regex_replace_{i}"),
+                        result,
+                        flags=M,
+                    )
+                data[command] = result
             device.last_status = "Success"
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             )
-            for i in range(1, 4):
-                configuration = sub(
-                    getattr(self, f"regex_pattern_{i}"),
-                    getattr(self, f"regex_replace_{i}"),
-                    configuration,
-                    flags=M,
-                )
-            if device.configuration == configuration:
+            if device.data == data:
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)
             factory(
-                "configuration",
+                "data",
                 device=device.id,
                 runtime=device.last_runtime,
                 duration=device.last_duration,
-                configuration=configuration,
+                data=data,
             )
-            device.configuration = configuration
-            with open(path_device_config / device.name, "w") as file:
-                file.write(configuration)
-            run.generate_yaml_file(path_device_config, device)
+            device.data = data
+            with open(path_device_data / "data.yml", "w") as file:
+                yaml.dump(data, file, default_flow_style=False)
+            with open(path_device_data / device.name, "w") as file:
+                file.write(app.str_dict(data))
+            run.generate_yaml_file(path_device_data, device)
         except Exception as e:
             device.last_status = "Failure"
             device.last_failure = str(device.last_runtime)
-            run.generate_yaml_file(path_device_config, device)
+            run.generate_yaml_file(path_device_data, device)
             return {"success": False, "result": str(e)}
         return {"success": True, "result": f"Command: {command}"}
 

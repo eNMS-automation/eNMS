@@ -17,7 +17,7 @@ class NetmikoValidationService(ConnectionService):
     parent_type = "connection_service"
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)
-    commands = Column(LargeString, default="")
+    commands = Column(LargeString)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)

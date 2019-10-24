@@ -69,7 +69,7 @@ class DatasetBackupService(ConnectionService):
                 data=data,
             )
             device.data = data
-            with open(path_device_data / "data.yml", "w") as file:
+            with open(path_device_data / "dataset.yml", "w") as file:
                 yaml.dump(data, file, default_flow_style=False)
             run.generate_yaml_file(path_device_data, device)
         except Exception as e:

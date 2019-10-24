@@ -83,7 +83,7 @@ function showDeviceConfiguration(device) {
     `Configuration - ${device.name}`,
     device.id,
     function() {
-      call(`/get_device_configuration/${device.id}`, (config) => {
+      call(`/get_device/configuration/${device.id}`, (config) => {
         $(`#content-${device.id}`).html(
           `<pre style="height:100%">${config}</pre>`
         );
@@ -99,7 +99,7 @@ function showDeviceDataset(device) {
     `Dataset - ${device.name}`,
     device.id,
     function() {
-      call(`/get_device_dataset/${device.id}`, (dataset) => {
+      call(`/get_device/dataset/${device.id}`, (dataset) => {
         console.log(dataset)
       });
     }

@@ -356,7 +356,6 @@ class Run(AbstractBase):
         if device:
             result_kw["device"] = device.id
         factory("result", **result_kw)
-        return results
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()

@@ -516,11 +516,15 @@ function deleteSelection() {
 
 function switchMode(mode) {
   const oldMode = currentMode;
-  currentMode = mode || (currentMode =="motion" ? $("#edge-type").val() : "motion");
-  if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
+  currentMode =
+    mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
+  if (
+    (oldMode == "motion" || currentMode == "motion") &&
+    oldMode != currentMode
+  ) {
     $("#mode-icon")
-    .toggleClass("glyphicon-move")
-    .toggleClass("glyphicon-random");
+      .toggleClass("glyphicon-move")
+      .toggleClass("glyphicon-random");
   }
   if (currentMode == "motion") {
     graph.addNodeMode();

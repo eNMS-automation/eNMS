@@ -94,6 +94,9 @@ class Device(CustomDevice):
     configurations = relationship(
         "Configuration", back_populates="device", cascade="all, delete-orphan"
     )
+    data = relationship(
+        "OperationalData", back_populates="device", cascade="all, delete-orphan"
+    )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
@@ -437,6 +440,44 @@ class Configuration(AbstractBase):
           </li>
           <li>
             <form action="/download_configuration/{self.id}" style="display: inline;">
+            <button type="submit" class="btn btn-primary" data-tooltip="Download">
+                <span class="glyphicon glyphicon-download"></span></button>
+            </form>
+          </li></ul>""",
+        ]
+
+
+class OperationalData(AbstractBase):
+
+    __tablename__ = type = "operation_data"
+    private = True
+    id = Column(Integer, primary_key=True)
+    data = Column(LargeString)
+    runtime = Column(SmallString)
+    duration = Column(SmallString)
+    device_id = Column(Integer, ForeignKey("device.id"))
+    device = relationship(
+        "Device",
+        back_populates="data",
+        foreign_keys="OperationalData.device_id",
+    )
+    device_name = association_proxy("device", "name")
+
+    def generate_row(self, table):
+        return [
+            f"""<input type="radio" name="v1" value="{self.id}"/>""",
+            f"""<input type="radio" name="v2" value="{self.id}"/>""",
+            f"""
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
+          <li>
+            <button type="button" class="btn btn-info"
+            onclick="showDeviceData({self.device.row_properties})"
+            data-tooltip="Operational Data"
+              ><span class="glyphicon glyphicon-cog"></span
+            ></button>
+          </li>
+          <li>
+            <form action="/download_data/{self.id}" style="display: inline;">
             <button type="submit" class="btn btn-primary" data-tooltip="Download">
                 <span class="glyphicon glyphicon-download"></span></button>
             </form>

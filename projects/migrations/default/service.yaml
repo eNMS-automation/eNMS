@@ -23,9 +23,11 @@
   pools: []
   push_to_git: false
   device_query_property: ip_address
+  scoped_name: Start
   send_notification: false
   send_notification_method: mail
   time_between_retries: 10
+  shared: true
   type: swiss_army_knife_service
   vendor: ''
   waiting_time: 0
@@ -48,6 +50,7 @@
   multiprocessing: false
   name: End
   color: 'pink'
+  shared: true
   shape: 'circle'
   number_of_retries: 0
   number_of_targets: 0
@@ -55,6 +58,7 @@
   pools: []
   push_to_git: false
   device_query_property: ip_address
+  scoped_name: End
   send_notification: false
   send_notification_method: mail
   time_between_retries: 10
@@ -79,6 +83,7 @@
   max_processes: 5
   multiprocessing: false
   name: cluster_monitoring
+  scoped_name: cluster_monitoring
   number_of_retries: 0
   number_of_targets: 0
   operating_system: ''
@@ -120,6 +125,7 @@
     - 300
   push_to_git: false
   device_query_property: ip_address
+  scoped_name: git_push_configurations
   send_notification: false
   send_notification_method: mail
   time_between_retries: 10

@@ -55,11 +55,15 @@ class Workflow(Service):
         clone_services = {}
         Session.commit()
         for service in self.services:
-            service_clone = service.duplicate(clone)
+            if service.shared:
+                service_clone = service
+                if service not in clone.services:
+                    clone.services.append(service)
+            else:
+                service_clone = service.duplicate(clone) 
             service_clone.positions[clone.name] = service.positions[self.name]
             clone_services[service.id] = service_clone
         Session.commit()
-
         for edge in self.edges:
             clone.edges.append(
                 factory(

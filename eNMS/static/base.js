@@ -490,6 +490,8 @@ function updateProperty(el, property, value, type) {
     el.append(new Option(value.name, value.id))
       .val(value.id)
       .trigger("change");
+  } else if (propertyType == "field-list") {
+    console.log(value)
   } else {
     el.val(value);
   }

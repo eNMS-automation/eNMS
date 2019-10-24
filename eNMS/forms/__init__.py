@@ -65,8 +65,11 @@ def form_postprocessing(form, form_data):
         if field_type in ("object-list", "multiselect"):
             data[property] = form_data.getlist(property)
         elif field_type == "field-list":
-            data[property] = [entry.data for entry in getattr(form, property).entries]
-            print(data[property])
+            data[property] = []
+            for entry in getattr(form, property).entries:
+                properties = entry.data
+                properties.pop("csrf_token")
+                data[property].append(properties)
         elif field_type == "bool":
             data[property] = property in form_data
         elif field_type in field_conversion and property in data:

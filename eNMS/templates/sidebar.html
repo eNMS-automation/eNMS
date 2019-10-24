@@ -32,9 +32,9 @@
             ></span
           ></a>
           <ul class="nav child_menu">
-            <li><a href="/table/user">User Management</a></li>
+            <li><a href="/table/user">Users</a></li>
             {% if parameters.use_syslog %}
-            <li><a href="/table/server">Server Management</a></li>
+            <li><a href="/table/server">Servers</a></li>
             {% endif %}
             <li><a href="/administration">Administration</a></li>
           </ul>
@@ -46,10 +46,9 @@
             ></span
           ></a>
           <ul class="nav child_menu">
-            <li><a href="/table/device">Device Management</a></li>
-            <li><a href="/table/configuration">Configuration Management</a></li>
-            <li><a href="/table/link">Link Management</a></li>
-            <li><a href="/table/pool">Pool Management</a></li>
+            <li><a href="/table/device">Devices</a></li>
+            <li><a href="/table/link">Links</a></li>
+            <li><a href="/table/pool">Pools</a></li>
           </ul>
         </li>
         <li>
@@ -70,8 +69,19 @@
             ></span
           ></a>
           <ul class="nav child_menu">
-            <li><a href="/table/service">Service Management</a></li>
+            <li><a href="/table/service">Services</a></li>
             <li><a href="/workflow_builder">Workflow Builder</a></li>
+          </ul>
+        </li>
+        <li>
+          <a
+            ><i class="fa fa-clock-o"></i>Operational Data<span
+              class="fa fa-chevron-down"
+            ></span
+          ></a>
+          <ul class="nav child_menu">
+            <li><a href="/table/configuration">Configurations</a></li>
+            <li><a href="/table/data">Data</a></li>
           </ul>
         </li>
         <li>
@@ -81,8 +91,8 @@
             ></span
           ></a>
           <ul class="nav child_menu">
-            <li><a href="/table/run">Run Management</a></li>
-            <li><a href="/calendar/run">Run Calendar</a></li>
+            <li><a href="/table/run">Runs</a></li>
+            <li><a href="/calendar/run">Calendar</a></li>
           </ul>
         </li>
         <li>
@@ -92,10 +102,10 @@
             ></span
           ></a>
           <ul class="nav child_menu">
-            <li><a href="/table/task">Task Management</a></li>
-            <li><a href="/calendar/task">Task Calendar</a></li>
+            <li><a href="/table/task">Tasks</a></li>
+            <li><a href="/calendar/task">Calendar</a></li>
             {% if parameters.use_syslog %}
-            <li><a href="/table/event">Event Management</a></li>
+            <li><a href="/table/event">Events</a></li>
             {% endif %}
           </ul>
         </li>

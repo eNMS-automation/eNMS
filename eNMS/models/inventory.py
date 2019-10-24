@@ -95,7 +95,7 @@ class Device(CustomDevice):
         "Configuration", back_populates="device", cascade="all, delete-orphan"
     )
     data = relationship(
-        "OperationalData", back_populates="device", cascade="all, delete-orphan"
+        "Data", back_populates="device", cascade="all, delete-orphan"
     )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
@@ -447,9 +447,9 @@ class Configuration(AbstractBase):
         ]
 
 
-class OperationalData(AbstractBase):
+class Data(AbstractBase):
 
-    __tablename__ = type = "operation_data"
+    __tablename__ = type = "data"
     private = True
     id = Column(Integer, primary_key=True)
     data = Column(LargeString)
@@ -459,7 +459,7 @@ class OperationalData(AbstractBase):
     device = relationship(
         "Device",
         back_populates="data",
-        foreign_keys="OperationalData.device_id",
+        foreign_keys="Data.device_id",
     )
     device_name = association_proxy("device", "name")
 
@@ -472,7 +472,7 @@ class OperationalData(AbstractBase):
           <li>
             <button type="button" class="btn btn-info"
             onclick="showDeviceData({self.device.row_properties})"
-            data-tooltip="Operational Data"
+            data-tooltip="Data"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>
           </li>

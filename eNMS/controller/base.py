@@ -423,6 +423,7 @@ class BaseController:
                     continue
                 if not self.create_examples and "examples" in str(file):
                     continue
+                info(f"Loading service: {file}")
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
                 try:
                     spec.loader.exec_module(module_from_spec(spec))

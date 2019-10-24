@@ -98,7 +98,7 @@ class Workflow(Service):
         if "start_services" in run.properties:
             services = [fetch("service", id=service) for service in run.start_services]
         else:
-            services = list(run.start_services)
+            services = run.start_services or [fetch("service", scoped_name="Start")]
         visited, success = set(), False
         while services:
             if run.stop:

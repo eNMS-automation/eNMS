@@ -3,10 +3,12 @@ from pathlib import Path
 from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import HiddenField, StringField
+from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.database.functions import factory
 from eNMS.forms.automation import NetmikoForm
+from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import ConnectionService
 
 
@@ -39,7 +41,7 @@ class DataBackupService(ConnectionService):
             path_device_data = Path.cwd() / "git" / "data" / device.name
             path_device_data.mkdir(parents=True, exist_ok=True)
             netmiko_connection = run.netmiko_connection(device)
-            run.log("info", "Fetching Netmiko configuration", device)
+            run.log("info", "Fetching Operational Data", device)
             data = {}
             for command in commands:
                 result = netmiko_connection.send_command(command)
@@ -81,7 +83,7 @@ class DataBackupService(ConnectionService):
 
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
-    configuration_command = StringField()
+    commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     regex_pattern_1 = StringField("First regex to change config results")
     regex_replace_1 = StringField("Value to replace first regex")
     regex_pattern_2 = StringField("Second regex to change config results")
@@ -91,7 +93,7 @@ class DataBackupForm(NetmikoForm):
     groups = {
         "Main Parameters": {
             "commands": [
-                "configuration_command",
+                "commands",
                 "regex_pattern_1",
                 "regex_replace_1",
                 "regex_pattern_2",

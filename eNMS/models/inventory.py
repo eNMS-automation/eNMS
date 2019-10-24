@@ -4,7 +4,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import backref, relationship
 
 from eNMS import app
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (
     pool_device_table,
@@ -452,7 +452,7 @@ class Data(AbstractBase):
     __tablename__ = type = "data"
     private = True
     id = Column(Integer, primary_key=True)
-    data = Column(LargeString)
+    data = Column(MutableDict)
     runtime = Column(SmallString)
     duration = Column(SmallString)
     device_id = Column(Integer, ForeignKey("device.id"))

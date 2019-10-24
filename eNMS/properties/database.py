@@ -4,6 +4,7 @@ dont_track_changes = [
     "configuration",
     "current_device",
     "current_service",
+    "data",
     "last_modified",
     "positions",
     "state",

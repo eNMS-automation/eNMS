@@ -47,6 +47,8 @@ class Workflow(Service):
         old_name = self.name
         super().set_name(name)
         for service in self.services:
+            if service.shared:
+                continue
             service.set_name()
             service.positions[self.name] = service.positions.pop(old_name, (0, 0))
 

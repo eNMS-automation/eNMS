@@ -677,6 +677,13 @@ class BaseController:
                         continue
                     with open(config_file) as f:
                         device.configuration = f.read()
+                        factory(
+                            "configuration",
+                            device=device.id,
+                            runtime=datetime.now(),
+                            duration="0s",
+                            configuration=device.configuration,
+                        )
         Session.commit()
         for pool in fetch_all("pool"):
             if pool.device_configuration:

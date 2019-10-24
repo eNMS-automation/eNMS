@@ -51,11 +51,9 @@ const dsoptions = {
     addEdge: function(data, callback) {
       if (data.to == 1) {
         alertify.notify("You cannot draw an edge to 'Start'.", "error", 5);
-      }
-      if (data.from == 2) {
+      } else if (data.from == 2) {
         alertify.notify("You cannot draw an edge from 'End'.", "error", 5);
-      }
-      if (data.from != data.to) {
+      } else if (data.from != data.to) {
         data.subtype = currentMode;
         saveEdge(data);
       }
@@ -518,9 +516,7 @@ function deleteSelection() {
 
 function switchMode(mode) {
   const oldMode = currentMode;
-  currentMode =
-    mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
-  console.log(mode, currentMode, oldMode)
+  currentMode = mode || (currentMode =="motion" ? $("#edge-type").val() : "motion");
   if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
     $("#mode-icon")
     .toggleClass("glyphicon-move")
@@ -528,10 +524,10 @@ function switchMode(mode) {
   }
   if (currentMode == "motion") {
     graph.addNodeMode();
-    alertify.notify("Mode: node motion.", "success", 5);
+    alertify.notify("Mode: Motion.", "success", 5);
   } else {
     graph.addEdgeMode();
-    alertify.notify(`Mode: creation of ${currentMode} edge.`, "success", 5);
+    alertify.notify(`Mode: Creation of '${currentMode}' Edge.`, "success", 5);
   }
 }
 

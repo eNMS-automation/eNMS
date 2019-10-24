@@ -84,9 +84,9 @@ class Service(AbstractBase):
             self.set_name()
 
     def update(self, **kwargs):
-        super().update(**kwargs)
         if kwargs["scoped_name"] != self.scoped_name:
-            self.set_name()
+            self.set_name(kwargs["scoped_name"])
+        super().update(**kwargs)
 
     def duplicate(self, workflow=None):
         for i in range(10):

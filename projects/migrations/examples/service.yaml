@@ -30,17 +30,29 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-359', '-163']
-    'Regression Workflow 1: Netmiko with validation and retries': [-667, 42]
-    'Regression Workflow 2: Separate Failure - Success paths': [-404, 13]
-    'Regression Workflow 3: Napalm getters (postprocessing)': [-390, 12]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-431, -124]
-    'Regression Workflow 6: Ansible with Validation': [-683, -48]
-    'Regression Workflow 9: Configurations Backup': [-718, -28]
-    'Regression Workflow A: get_var, set_var, get_result': [-644, -159]
-    'Regression Workflow C: Advanced multiprocessing': [-631, -27]
-    'Regression Workflow D: Prompts': [-279, -158]
-    'Regression Workflow E: Iteration Targets': [-491, -78]
-    'Regression Workflow F: Workflow of Workflows': [-1032, 12]
+    'Regression Workflow 1: Netmiko with validation and retries': !!python/tuple [
+      0, 0]
+    'Regression Workflow 2: Separate Failure - Success paths': !!python/tuple [0,
+      0]
+    'Regression Workflow 3: Napalm getters (postprocessing)': !!python/tuple [0, 0]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': !!python/tuple [
+      0, 0]
+    'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
+      0, 0]
+    'Regression Workflow 6: Ansible with Validation': !!python/tuple [0, 0]
+    'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
+    'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
+      0, 0]
+    'Regression Workflow 9: Operational Data Backup': [-732, 56]
+    'Regression Workflow A: get_var, set_var, get_result': [-630, -54]
+    'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
+    'Regression Workflow C: Advanced multiprocessing': !!python/tuple [0, 0]
+    'Regression Workflow D: Prompts': [-219, 32]
+    'Regression Workflow E: Iteration Targets': !!python/tuple [0, 0]
+    'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
+    'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
+      0, 0]
+    'Regression Workflow F: Workflow of Workflows': !!python/tuple [0, 0]
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
@@ -105,17 +117,29 @@
   pools: []
   positions:
     Iteration Services Test Workflow: ['-9', '294']
-    'Regression Workflow 1: Netmiko with validation and retries': [500, 0]
-    'Regression Workflow 2: Separate Failure - Success paths': [818, 284]
-    'Regression Workflow 3: Napalm getters (postprocessing)': [778, 230]
-    'Regression Workflow 4: VRF creation and deletion with Netmiko': [-450, 132]
-    'Regression Workflow 6: Ansible with Validation': [771, -81]
-    'Regression Workflow 9: Configurations Backup': [475, 102]
-    'Regression Workflow A: get_var, set_var, get_result': [-706, -83]
-    'Regression Workflow C: Advanced multiprocessing': [716, -36]
-    'Regression Workflow D: Prompts': [634, 187]
-    'Regression Workflow E: Iteration Targets': [-481, -12]
-    'Regression Workflow F: Workflow of Workflows': [-1057, 316]
+    'Regression Workflow 1: Netmiko with validation and retries': !!python/tuple [
+      0, 0]
+    'Regression Workflow 2: Separate Failure - Success paths': !!python/tuple [0,
+      0]
+    'Regression Workflow 3: Napalm getters (postprocessing)': !!python/tuple [0, 0]
+    'Regression Workflow 4: VRF creation and deletion with Netmiko': !!python/tuple [
+      0, 0]
+    'Regression Workflow 5: VRF creation and deletion with Napalm': !!python/tuple [
+      0, 0]
+    'Regression Workflow 6: Ansible with Validation': !!python/tuple [0, 0]
+    'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
+    'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
+      0, 0]
+    'Regression Workflow 9: Operational Data Backup': [469, 69]
+    'Regression Workflow A: get_var, set_var, get_result': [-609, 21]
+    'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
+    'Regression Workflow C: Advanced multiprocessing': !!python/tuple [0, 0]
+    'Regression Workflow D: Prompts': [651, 0]
+    'Regression Workflow E: Iteration Targets': !!python/tuple [0, 0]
+    'Regression Workflow F S1: Subworkflow of Workflow': !!python/tuple [0, 0]
+    'Regression Workflow F S2: Access Variables from Parent Workflow': !!python/tuple [
+      0, 0]
+    'Regression Workflow F: Workflow of Workflows': !!python/tuple [0, 0]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
@@ -351,14 +375,14 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow 9: Configurations Backup] Push Configurations to Git'
+  name: '[Regression Workflow 9: Operational Data Backup] Push Configurations to Git'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 9: Configurations Backup': [151, 317]
+    'Regression Workflow 9: Operational Data Backup': [151, 317]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: Push Configurations to Git
@@ -617,14 +641,14 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow 9: Configurations Backup] Configuration Backup (Netmiko)'
+  name: '[Regression Workflow 9: Operational Data Backup] Configuration Backup (Netmiko)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: [Washington]
   positions:
-    'Regression Workflow 9: Configurations Backup': [-249, -162]
+    'Regression Workflow 9: Operational Data Backup': [-249, -162]
   push_to_git: false
   regex_pattern_1: ''
   regex_pattern_2: ''
@@ -671,7 +695,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: true
-  name: '[Regression Workflow 9: Configurations Backup] Configuration Backup (NAPALM)'
+  name: '[Regression Workflow 9: Operational Data Backup] Configuration Backup (NAPALM)'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -679,7 +703,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 9: Configurations Backup': [-545, 302]
+    'Regression Workflow 9: Operational Data Backup': [-545, 302]
   push_to_git: false
   regex_pattern_1: ''
   regex_pattern_2: ''
@@ -1342,7 +1366,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3703,12 +3727,12 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-274, 79]
-  last_modified: '2019-10-24 22:34:28.251536'
+  last_modified: '2019-10-24 22:41:46.438694'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: 'Regression Workflow 9: Configurations Backup'
+  name: 'Regression Workflow 9: Operational Data Backup'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3718,14 +3742,14 @@
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   push_to_git: false
   result_postprocessing: ''
-  scoped_name: 'Regression Workflow 9: Configurations Backup'
+  scoped_name: 'Regression Workflow 9: Operational Data Backup'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow 9: Configurations
-      Backup] Push Configurations to Git', '[Regression Workflow 9: Configurations
-      Backup] Configuration Backup (NAPALM)', '[Regression Workflow 9: Configurations
-      Backup] Configuration Backup (Netmiko)', '[Regression Workflow 9: Configurations
-      Backup] Retrieve Operational Data']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow 9: Operational
+      Data Backup] Push Configurations to Git', '[Regression Workflow 9: Operational
+      Data Backup] Configuration Backup (NAPALM)', '[Regression Workflow 9: Operational
+      Data Backup] Configuration Backup (Netmiko)', '[Regression Workflow 9: Operational
+      Data Backup] Retrieve Operational Data']
   shared: false
   skip: false
   skip_query: ''
@@ -4104,11 +4128,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4201,7 +4225,7 @@
         For Test Netmiko Prompt Service, it is set to 2: it should run\r\nonce more\
         \ after the REST service.\r\n"
       positions: [145, -168]
-  last_modified: '2019-10-04 12:19:35.784496'
+  last_modified: '2019-10-24 22:42:28.694641'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4270,7 +4294,7 @@
         , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
         ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)"
       positions: [103, -224]
-  last_modified: '2019-10-21 21:12:36.817467'
+  last_modified: '2019-10-24 22:42:17.981520'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4613,12 +4637,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -5016,14 +5040,14 @@
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow 9: Configurations Backup] Retrieve Operational Data'
+  name: '[Regression Workflow 9: Operational Data Backup] Retrieve Operational Data'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 9: Configurations Backup': [176, -62]
+    'Regression Workflow 9: Operational Data Backup': [176, -62]
   push_to_git: false
   regex_pattern_1: ''
   regex_pattern_2: ''

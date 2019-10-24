@@ -459,7 +459,7 @@ class Dataset(AbstractBase):
     device = relationship(
         "Device",
         back_populates="datasets",
-        foreign_keys="Data.device_id",
+        foreign_keys="Dataset.device_id",
     )
     device_name = association_proxy("device", "name")
 
@@ -471,8 +471,8 @@ class Dataset(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showDeviceData({self.device.row_properties})"
-            data-tooltip="Data"
+            onclick="showDeviceDataset({self.device.row_properties})"
+            data-tooltip="Dataset"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>
           </li>

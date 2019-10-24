@@ -32,7 +32,7 @@ class DatasetBackupService(ConnectionService):
     regex_pattern_3 = Column(SmallString)
     regex_replace_3 = Column(SmallString)
 
-    __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
+    __mapper_args__ = {"polymorphic_identity": "dataset_backup_service"}
 
     def job(self, run, payload, device):
         try:
@@ -57,7 +57,7 @@ class DatasetBackupService(ConnectionService):
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             )
-            if device.data == data:
+            if device.dataset == data:
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)
             factory(
@@ -81,8 +81,8 @@ class DatasetBackupService(ConnectionService):
         return {"success": True, "result": f"Command: {command}"}
 
 
-class DataBackupForm(NetmikoForm):
-    form_type = HiddenField(default="data_backup_service")
+class DatasetBackupForm(NetmikoForm):
+    form_type = HiddenField(default="dataset_backup_service")
     commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     regex_pattern_1 = StringField("First regex to change config results")
     regex_replace_1 = StringField("Value to replace first regex")

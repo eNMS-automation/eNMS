@@ -70,11 +70,11 @@
 - description: Washington
   icon: router
   ip_address: 192.168.105.5
-  last_duration: 5.554711s
-  last_failure: Never
-  last_runtime: '2019-10-03 16:06:34.176047'
-  last_status: Success
-  last_update: '2019-10-03 16:06:34.176047'
+  last_duration: 2.68092s
+  last_failure: '2019-10-24 22:34:37.994828'
+  last_runtime: '2019-10-24 22:34:37.994828'
+  last_status: Failure
+  last_update: '2019-10-24 22:34:31.622914'
   latitude: '38.89511'
   location: Washington
   longitude: '-77.03637'

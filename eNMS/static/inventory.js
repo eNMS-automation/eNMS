@@ -95,12 +95,24 @@ function showDeviceConfiguration(device) {
 // eslint-disable-next-line
 function showDeviceDataset(device) {
   createPanel(
-    "display_dataset",
+    "display",
     `Dataset - ${device.name}`,
     device.id,
     function() {
-      call(`/get_device/dataset/${device.id}`, (dataset) => {
-        console.log(dataset)
+      call(`/get_device_data/dataset/${device.id}`, (result) => {
+        const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
+        const options = {
+          mode: "view",
+          modes: ["text", "view"],
+          onModeChange: function(newMode) {
+            editor.set(newMode == "text" ? result : jsonResult);
+          },
+        };
+        let editor = new JSONEditor(
+          document.getElementById(`content-${device.id}`),
+          options,
+          jsonResult
+        );
       });
     }
   );

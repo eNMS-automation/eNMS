@@ -167,7 +167,6 @@ class BaseController:
         "get",
         "get_all",
         "get_cluster_status",
-        "get_configuration",
         "get_device_data",
         "get_device_logs",
         "get_exported_services",

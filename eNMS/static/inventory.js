@@ -93,6 +93,20 @@ function showDeviceConfiguration(device) {
 }
 
 // eslint-disable-next-line
+function showDeviceDataset(device) {
+  createPanel(
+    "display_dataset",
+    `Dataset - ${device.name}`,
+    device.id,
+    function() {
+      call(`/get_device_dataset/${device.id}`, (dataset) => {
+        console.log(dataset)
+      });
+    }
+  );
+}
+
+// eslint-disable-next-line
 function showDeviceResultsPanel(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
     initTable("result", device);

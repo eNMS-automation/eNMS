@@ -1,6 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 from re import M, sub
+from ruamel import yaml
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
@@ -70,8 +71,6 @@ class DatasetBackupService(ConnectionService):
             device.data = data
             with open(path_device_data / "data.yml", "w") as file:
                 yaml.dump(data, file, default_flow_style=False)
-            with open(path_device_data / device.name, "w") as file:
-                file.write(app.str_dict(data))
             run.generate_yaml_file(path_device_data, device)
         except Exception as e:
             device.last_status = "Failure"

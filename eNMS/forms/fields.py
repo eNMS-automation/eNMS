@@ -3,6 +3,7 @@ from json import loads
 from json.decoder import JSONDecodeError
 from wtforms import (
     BooleanField,
+    FieldList,
     FloatField,
     IntegerField,
     PasswordField,
@@ -109,6 +110,7 @@ field_types = {
     DateField: "date",
     DictField: "dict",
     DictSubstitutionField: "dict",
+    FieldList: "field-list",
     FloatField: "float",
     InstanceField: "object",
     IntegerField: "integer",

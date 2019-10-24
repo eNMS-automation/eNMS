@@ -1,12 +1,13 @@
 from datetime import datetime
+from flask_wtf import FlaskForm
 from pathlib import Path
 from re import M, sub
 from ruamel import yaml
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
-from wtforms import HiddenField, StringField
+from wtforms import FieldList, FormField, HiddenField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.database.dialect import Column, LargeString, SmallString
+from eNMS.database.dialect import Column, LargeString, MutableList, SmallString
 from eNMS.database.functions import factory
 from eNMS.forms.automation import NetmikoForm
 from eNMS.forms.fields import SubstitutionField
@@ -26,12 +27,7 @@ class DatasetBackupService(ConnectionService):
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
-    regex_pattern_1 = Column(SmallString)
-    regex_replace_1 = Column(SmallString)
-    regex_pattern_2 = Column(SmallString)
-    regex_replace_2 = Column(SmallString)
-    regex_pattern_3 = Column(SmallString)
-    regex_replace_3 = Column(SmallString)
+    replace = Column(MutableList)
 
     __mapper_args__ = {"polymorphic_identity": "dataset_backup_service"}
 
@@ -80,25 +76,20 @@ class DatasetBackupService(ConnectionService):
         return {"success": True, "result": f"Command: {command}"}
 
 
+class RegexReplaceForm(FlaskForm):
+    pattern = StringField("Pattern")
+    replace_with = StringField("Replace With")
+
+
 class DatasetBackupForm(NetmikoForm):
     form_type = HiddenField(default="dataset_backup_service")
     commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
-    regex_pattern_1 = StringField("First regex to change config results")
-    regex_replace_1 = StringField("Value to replace first regex")
-    regex_pattern_2 = StringField("Second regex to change config results")
-    regex_replace_2 = StringField("Value to replace second regex")
-    regex_pattern_3 = StringField("Third regex to change config results")
-    regex_replace_3 = StringField("Value to replace third regex")
+    replace = FieldList(FormField(RegexReplaceForm), min_entries=1)
     groups = {
         "Main Parameters": {
             "commands": [
                 "commands",
-                "regex_pattern_1",
-                "regex_replace_1",
-                "regex_pattern_2",
-                "regex_replace_2",
-                "regex_pattern_3",
-                "regex_replace_1",
+                "replace",
             ],
             "default": "expanded",
         },

@@ -57,17 +57,20 @@ class BaseForm(FlaskForm, metaclass=MetaForm):
     pass
 
 
-def form_postprocessing(form):
-    data = {**form.to_dict(), **{"user": current_user}}
+def form_postprocessing(form, form_data):
+    data = {**form_data.to_dict(), **{"user": current_user}}
     if request.files:
         data["file"] = request.files["file"]
-    for property, field_type in form_properties[form.get("form_type")].items():
+    for property, field_type in form_properties[form_data.get("form_type")].items():
         if field_type in ("object-list", "multiselect"):
-            data[property] = form.getlist(property)
+            data[property] = form_data.getlist(property)
+        elif field_type == "field-list":
+            data[property] = [entry.data for entry in getattr(form, property).entries]
+            print(data[property])
         elif field_type == "bool":
-            data[property] = property in form
+            data[property] = property in form_data
         elif field_type in field_conversion and property in data:
-            data[property] = field_conversion[field_type](form[property])
+            data[property] = field_conversion[field_type](form_data[property])
     return data
 
 

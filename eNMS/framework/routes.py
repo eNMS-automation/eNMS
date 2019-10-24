@@ -205,7 +205,7 @@ def route(page):
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        result = getattr(app, f)(*args, **form_postprocessing(request.form))
+        result = getattr(app, f)(*args, **form_postprocessing(form, request.form))
     else:
         result = getattr(app, f)(*args)
     try:

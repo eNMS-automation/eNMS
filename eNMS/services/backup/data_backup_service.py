@@ -4,7 +4,7 @@ from re import M, sub
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import HiddenField, StringField
 
-from eNMS.database.dialect import Column, SmallString
+from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.database.functions import factory
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
@@ -14,7 +14,6 @@ class DataBackupService(ConnectionService):
 
     __tablename__ = "data_backup_service"
     pretty_name = "Data Backup"
-
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)
@@ -31,7 +30,7 @@ class DataBackupService(ConnectionService):
     regex_pattern_3 = Column(SmallString)
     regex_replace_3 = Column(SmallString)
 
-    __mapper_args__ = {"polymorphic_identity": "netmiko_backup_service"}
+    __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
 
     def job(self, run, payload, device):
         try:
@@ -80,8 +79,8 @@ class DataBackupService(ConnectionService):
         return {"success": True, "result": f"Command: {command}"}
 
 
-class NetmikoBackupForm(NetmikoForm):
-    form_type = HiddenField(default="netmiko_backup_service")
+class DataBackupForm(NetmikoForm):
+    form_type = HiddenField(default="data_backup_service")
     configuration_command = StringField()
     regex_pattern_1 = StringField("First regex to change config results")
     regex_replace_1 = StringField("Value to replace first regex")

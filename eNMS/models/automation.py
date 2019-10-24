@@ -80,8 +80,12 @@ class Service(AbstractBase):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        if "name" not in kwargs:
+        if name not in kwargs:
             self.set_name()
+
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        self.set_name()
 
     def duplicate(self, workflow=None):
         for i in range(10):

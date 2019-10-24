@@ -15,6 +15,8 @@ dont_migrate = {
         "id",
         "configuration",
         "configurations",
+        "dataset",
+        "datasets",
         "services",
         "source",
         "destination",

@@ -60,6 +60,7 @@ class DatasetBackupService(ConnectionService):
             )
             if device.dataset == data:
                 return {"success": True, "result": "no change"}
+            device.dataset = data
             device.last_update = str(device.last_runtime)
             factory(
                 "dataset",
@@ -68,7 +69,6 @@ class DatasetBackupService(ConnectionService):
                 duration=device.last_duration,
                 data=data,
             )
-            device.data = data
             with open(path_device_data / "dataset.yml", "w") as file:
                 yaml.dump(data, file, default_flow_style=False)
             run.generate_yaml_file(path_device_data, device)

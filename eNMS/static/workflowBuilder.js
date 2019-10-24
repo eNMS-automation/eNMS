@@ -116,7 +116,12 @@ function displayWorkflow(workflowData) {
   graph.on("doubleClick", function(properties) {
     properties.event.preventDefault();
     const service = nodes.get(this.getNodeAt(properties.pointer.DOM));
-    if (service.id) showTypePanel(service.type, service.id);
+    if (!service.id) return;
+    if (service.type == "workflow") {
+      switchToWorkflow(service.id);
+    } else {
+      showTypePanel(service.type, service.id);
+    }
   });
   $("#current-runtime").empty();
   $("#current-runtime").append(

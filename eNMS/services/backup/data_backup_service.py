@@ -12,10 +12,10 @@ from eNMS.forms.fields import SubstitutionField
 from eNMS.models.automation import ConnectionService
 
 
-class DataBackupService(ConnectionService):
+class DatasetBackupService(ConnectionService):
 
-    __tablename__ = "data_backup_service"
-    pretty_name = "Data Backup"
+    __tablename__ = "dataset_backup_service"
+    pretty_name = "Dataset Backup"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)
@@ -38,7 +38,7 @@ class DataBackupService(ConnectionService):
         try:
             commands = run.sub(run.commands, locals()).splitlines()
             device.last_runtime = datetime.now()
-            path_device_data = Path.cwd() / "git" / "data" / device.name
+            path_device_data = Path.cwd() / "git" / "datasets" / device.name
             path_device_data.mkdir(parents=True, exist_ok=True)
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Operational Data", device)
@@ -61,7 +61,7 @@ class DataBackupService(ConnectionService):
                 return {"success": True, "result": "no change"}
             device.last_update = str(device.last_runtime)
             factory(
-                "data",
+                "dataset",
                 device=device.id,
                 runtime=device.last_runtime,
                 duration=device.last_duration,

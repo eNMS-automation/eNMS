@@ -94,8 +94,8 @@ class Device(CustomDevice):
     configurations = relationship(
         "Configuration", back_populates="device", cascade="all, delete-orphan"
     )
-    data = relationship(
-        "Data", back_populates="device", cascade="all, delete-orphan"
+    datasets = relationship(
+        "Dataset", back_populates="device", cascade="all, delete-orphan"
     )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
@@ -447,9 +447,9 @@ class Configuration(AbstractBase):
         ]
 
 
-class Data(AbstractBase):
+class Dataset(AbstractBase):
 
-    __tablename__ = type = "data"
+    __tablename__ = type = "dataset"
     private = True
     id = Column(Integer, primary_key=True)
     data = Column(MutableDict)
@@ -458,7 +458,7 @@ class Data(AbstractBase):
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device",
-        back_populates="data",
+        back_populates="datasets",
         foreign_keys="Data.device_id",
     )
     device_name = association_proxy("device", "name")

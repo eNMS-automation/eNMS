@@ -519,7 +519,8 @@ function deleteSelection() {
 function switchMode(mode) {
   const oldMode = currentMode;
   currentMode =
-    mode || currentMode == "motion" ? $("#edge-type").val() : "motion";
+    mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
+  console.log(mode, currentMode, oldMode)
   if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
     $("#mode-icon")
     .toggleClass("glyphicon-move")
@@ -532,9 +533,6 @@ function switchMode(mode) {
     graph.addEdgeMode();
     alertify.notify(`Mode: creation of ${currentMode} edge.`, "success", 5);
   }
-  $(".dropdown-submenu a.menu-layer")
-    .next("ul")
-    .toggle();
 }
 
 $("#current-workflow").on("change", function() {

@@ -25,11 +25,10 @@ class AutomationController(BaseController):
     run_logs = defaultdict(list)
 
     def stop_workflow(self, runtime):
-        if runtime in self.run_db:
-            self.run_db[runtime]["stop"] = True
+        run = fetch("run", runtime=runtime)
+        if run.run_state["status"] == "Running":
+            run.run_state["status"] = "stop"
             return True
-        else:
-            return None
 
     def add_edge(self, workflow_id, subtype, source, destination):
         workflow_edge = factory(

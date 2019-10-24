@@ -676,9 +676,7 @@ class BaseController:
                     if not config_file.exists():
                         continue
                     with open(config_file) as f:
-                        device.configuration = device.configurations[
-                            str(parameters["last_update"])
-                        ] = f.read()
+                        device.configuration = f.read()
         Session.commit()
         for pool in fetch_all("pool"):
             if pool.device_configuration:

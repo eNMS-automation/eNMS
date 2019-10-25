@@ -541,7 +541,7 @@ function switchMode(mode) {
 }
 
 $("#current-workflow").on("change", function() {
-  if (this.value != workflow.id) switchToWorkflow(this.value);
+  if (!workflow || this.value != workflow.id) switchToWorkflow(this.value);
 });
 
 $("#current-runtime").on("change", function() {

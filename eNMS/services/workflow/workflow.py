@@ -91,7 +91,7 @@ class Workflow(Service):
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
-        services = run.start_services or [fetch("service", scoped_name="Start")]
+        services = [fetch("service", scoped_name="Start")]
         visited, success = set(), False
         while services:
             if run.stop:
@@ -107,7 +107,7 @@ class Workflow(Service):
             skip_service = False
             if service.skip_query:
                 skip_service = run.eval(service.skip_query, **locals())
-            if skip_service or service.skip:
+            if skip_service or service.skip or service.scoped_name in ("Start", "End"):
                 service_results = {"success": "skipped"}
                 run.run_state["progress"]["service"]["skipped"] += 1
             else:

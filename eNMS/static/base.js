@@ -50,6 +50,7 @@ const panelSize = {
   librenms: "700 250",
   link: "700 400",
   link_filtering: "700 600",
+  logs: "1500 600",
   log_filtering: "700 350",
   notifications: "1100 400",
   netbox: "700 250",

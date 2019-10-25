@@ -89,11 +89,13 @@ class Workflow(Service):
     def deep_edges(self):
         return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
 
+    @property
+    def start_services(self):
+        return [fetch("service", scoped_name="Start").id]
+
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
         services = [fetch("service", id=id) for id in run.start_services]
-        if not services:
-            services = [fetch("service", scoped_name="Start")]
         visited, success = set(), False
         while services:
             if run.stop:

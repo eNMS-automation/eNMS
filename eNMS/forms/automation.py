@@ -229,7 +229,7 @@ class RunForm(BaseForm):
 class RestartWorkflowForm(BaseForm):
     action = "restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
-    start_services = MultipleInstanceField("Services")
+    start_services = MultipleInstanceField("Services", model="service")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 
 

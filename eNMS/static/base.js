@@ -395,10 +395,10 @@ function initSelect(el, model, parentId, single) {
 
 function configureForm(form, id, panelId) {
   if (!formProperties[form]) return;
-  for (const [property, type] of Object.entries(formProperties[form])) {
+  for (const [property, field] of Object.entries(formProperties[form])) {
     let el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
     if (!el.length) el = $(`#${property}`);
-    if (type == "date") {
+    if (field.type == "date") {
       el.datetimepicker({
         format: "DD/MM/YYYY HH:mm:ss",
         widgetPositioning: {
@@ -407,22 +407,23 @@ function configureForm(form, id, panelId) {
         },
         useCurrent: false,
       });
-    } else if (["list", "multiselect"].includes(type)) {
+    } else if (["list", "multiselect"].includes(field.type)) {
       const elClass = el.attr("class");
       el.selectpicker({
         liveSearch: elClass ? !elClass.includes("no-search") : false,
         actionsBox: true,
         selectedTextFormat: "count > 3",
       });
-    } else if (["object", "object-list"].includes(type)) {
+    } else if (["object", "object-list"].includes(field.type)) {
       let model;
       if (relationships[form]) {
         console.log(form, property)
         model = relationships[form][property].model;
       } else {
-        model = property.substring(0, property.length - 1);
+        console.log(field)
+        model = field.model;
       }
-      initSelect(el, model, panelId, type == "object");
+      initSelect(el, model, panelId, field.type == "object");
     }
   }
 }
@@ -471,7 +472,12 @@ function showTypePanel(type, id, mode) {
 }
 
 function updateProperty(el, property, value, type) {
-  const propertyType = formProperties[type][property] || "str";
+  let propertyType;
+  if (formProperties[type][property]) {
+    propertyType = formProperties[type][property].type
+  } else {
+    propertyType = "str";
+  }
   if (propertyType.includes("bool")) {
     el.prop("checked", value);
   } else if (propertyType.includes("dict") || propertyType == "json") {

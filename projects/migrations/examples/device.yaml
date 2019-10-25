@@ -1,5 +1,4 @@
-- dataset: {}
-  description: Jackson
+- description: Jackson
   icon: router
   ip_address: 192.168.1.85
   last_duration: ''
@@ -22,8 +21,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: PaloAlto
+- description: PaloAlto
   icon: router
   ip_address: 192.168.1.86
   last_duration: ''
@@ -46,8 +44,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Austin
+- description: Austin
   icon: router
   ip_address: 192.168.105.9
   last_duration: ''
@@ -70,8 +67,7 @@
   type: device
   username: admin
   vendor: Arista
-- dataset: {}
-  description: Washington
+- description: Washington
   icon: router
   ip_address: 192.168.105.5
   last_duration: 2.68092s
@@ -94,8 +90,7 @@
   type: device
   username: admin
   vendor: Arista
-- dataset: {}
-  description: Chicago
+- description: Chicago
   icon: router
   ip_address: 192.168.1.188
   last_duration: ''
@@ -118,8 +113,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: SanJose
+- description: SanJose
   icon: router
   ip_address: 192.168.1.187
   last_duration: ''
@@ -142,8 +136,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: SanDiego
+- description: SanDiego
   icon: router
   ip_address: 10.0.0.12
   last_duration: ''
@@ -166,8 +159,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Dallas
+- description: Dallas
   icon: router
   ip_address: 10.0.0.100
   last_duration: ''
@@ -190,8 +182,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Philadelphia
+- description: Philadelphia
   icon: router
   ip_address: 10.0.0.101
   last_duration: ''
@@ -214,8 +205,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: LosAngeles
+- description: LosAngeles
   icon: optical_switch
   ip_address: 10.0.0.13
   last_duration: ''
@@ -238,8 +228,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Detroit
+- description: Detroit
   icon: router
   ip_address: 10.0.0.14
   last_duration: ''
@@ -262,8 +251,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Richmond
+- description: Richmond
   icon: router
   ip_address: 10.0.0.15
   last_duration: ''
@@ -286,8 +274,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Atlanta
+- description: Atlanta
   icon: router
   ip_address: 10.0.0.102
   last_duration: ''
@@ -310,8 +297,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Boston
+- description: Boston
   icon: router
   ip_address: 10.0.0.103
   last_duration: ''
@@ -334,8 +320,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Houston
+- description: Houston
   icon: router
   ip_address: 10.0.0.104
   last_duration: ''
@@ -358,8 +343,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Baltimore
+- description: Baltimore
   icon: router
   ip_address: 10.0.0.105
   last_duration: ''
@@ -382,8 +366,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: Cleveland
+- description: Cleveland
   icon: router
   ip_address: 10.0.0.106
   last_duration: ''
@@ -406,8 +389,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: Columbus
+- description: Columbus
   icon: router
   ip_address: 10.0.0.107
   last_duration: ''
@@ -430,8 +412,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: Cincinnati
+- description: Cincinnati
   icon: router
   ip_address: 10.0.0.108
   last_duration: ''
@@ -454,8 +435,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: Cambridge
+- description: Cambridge
   icon: router
   ip_address: 10.0.0.109
   last_duration: ''
@@ -478,8 +458,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: Minneapolis
+- description: Minneapolis
   icon: router
   ip_address: 10.0.0.110
   last_duration: ''
@@ -502,8 +481,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: NewYork
+- description: NewYork
   icon: router
   ip_address: 192.168.1.88
   last_duration: ''
@@ -526,8 +504,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: Sacramento
+- description: Sacramento
   icon: router
   ip_address: 10.0.0.111
   last_duration: ''
@@ -550,8 +527,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: SanFrancisco
+- description: SanFrancisco
   icon: router
   ip_address: 192.168.1.89
   last_duration: ''
@@ -574,8 +550,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: Orange
+- description: Orange
   icon: router
   ip_address: 10.0.0.114
   last_duration: ''
@@ -598,8 +573,7 @@
   type: device
   username: cisco
   vendor: Juniper
-- dataset: {}
-  description: Oakland
+- description: Oakland
   icon: router
   ip_address: 10.0.0.112
   last_duration: ''
@@ -622,8 +596,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Denver
+- description: Denver
   icon: router
   ip_address: 10.0.0.113
   last_duration: ''
@@ -646,8 +619,7 @@
   type: device
   username: cisco
   vendor: Cisco
-- dataset: {}
-  description: Denver
+- description: Denver
   icon: router
   ip_address: 127.0.0.1
   last_duration: ''

@@ -255,9 +255,8 @@ function serializeForm(form) {
 // eslint-disable-next-line
 function deleteInstance(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
-    const tableType = type.includes("service") ? "service" : type;
     $(`#instance_deletion-${id}`).remove();
-    tables[tableType]
+    tables["service"]
       .row($(`#${id}`))
       .remove()
       .draw(false);

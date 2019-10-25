@@ -78,10 +78,3 @@ pool_user_table = Table(
     Column("pool_id", Integer, ForeignKey("pool.id")),
     Column("user_id", Integer, ForeignKey("user.id")),
 )
-
-start_services_workflow_table = Table(
-    "start_services_workflow_association",
-    Base.metadata,
-    Column("service_id", Integer, ForeignKey("service.id")),
-    Column("workflow_id", Integer, ForeignKey("workflow.id")),
-)

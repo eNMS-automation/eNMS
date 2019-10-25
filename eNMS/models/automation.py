@@ -8,7 +8,6 @@ from eNMS.database.associations import (
     service_event_table,
     service_pool_table,
     service_workflow_table,
-    start_services_workflow_table,
 )
 from eNMS.database.base import AbstractBase
 from eNMS.database.functions import fetch

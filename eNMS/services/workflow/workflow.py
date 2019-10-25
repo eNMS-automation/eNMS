@@ -10,7 +10,6 @@ from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import factory, fetch
 from eNMS.database.associations import (
     service_workflow_table,
-    start_services_workflow_table,
 )
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import MultipleInstanceField
@@ -30,9 +29,6 @@ class Workflow(Service):
     )
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
-    )
-    start_services = relationship(
-        "Service", secondary=start_services_workflow_table, backref="start_workflows"
     )
 
     __mapper_args__ = {"polymorphic_identity": "workflow"}
@@ -95,10 +91,7 @@ class Workflow(Service):
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
-        if "start_services" in run.properties:
-            services = [fetch("service", id=service) for service in run.start_services]
-        else:
-            services = run.start_services or [fetch("service", scoped_name="Start")]
+        services = run.start_services or [fetch("service", scoped_name="Start")]
         visited, success = set(), False
         while services:
             if run.stop:

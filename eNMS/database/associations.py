@@ -58,13 +58,6 @@ service_workflow_table = Table(
     Column("workflow_id", Integer, ForeignKey("workflow.id")),
 )
 
-start_services_workflow_table = Table(
-    "start_services_workflow_association",
-    Base.metadata,
-    Column("service_id", Integer, ForeignKey("service.id")),
-    Column("workflow_id", Integer, ForeignKey("workflow.id")),
-)
-
 pool_device_table = Table(
     "pool_device_association",
     Base.metadata,

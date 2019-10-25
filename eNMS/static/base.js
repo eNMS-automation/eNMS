@@ -491,7 +491,7 @@ function updateProperty(el, property, value, type) {
       .val(value.id)
       .trigger("change");
   } else if (propertyType == "field-list") {
-    console.log(value)
+    // pass
   } else {
     el.val(value);
   }

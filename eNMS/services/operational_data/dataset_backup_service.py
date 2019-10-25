@@ -86,12 +86,6 @@ class DatasetBackupForm(NetmikoForm):
     commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
     replace = FieldList(FormField(RegexReplaceForm), min_entries=1)
     groups = {
-        "Main Parameters": {
-            "commands": [
-                "commands",
-                "replace",
-            ],
-            "default": "expanded",
-        },
+        "Main Parameters": {"commands": ["commands", "replace"], "default": "expanded"},
         **NetmikoForm.groups,
     }

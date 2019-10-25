@@ -198,17 +198,15 @@
                     <label>{{ form[field_name].label }}</label>
                   </div>
                 </fieldset>
-                {% elif form[field_name].type == "FieldList" %}
-                {% for entry in form[field_name] %}
-                  <label>{{ entry.label }}</label>
-                  {% for l in entry %}
-                  <div class="form-group">
-                    {{ l(id="{}-{}".format(form_type, l.name),
-                    class="form-control add-id") }}
-                  </div>
-                {% endfor %}
-                {% endfor %}
-                {% else %}
+                {% elif form[field_name].type == "FieldList" %} {% for entry in
+                form[field_name] %}
+                <label>{{ entry.label }}</label>
+                {% for l in entry %}
+                <div class="form-group">
+                  {{ l(id="{}-{}".format(form_type, l.name), class="form-control
+                  add-id") }}
+                </div>
+                {% endfor %} {% endfor %} {% else %}
                 <label>{{ form[field_name].label }}</label>
                 <div class="form-group">
                   {{ form[field_name](id="{}-{}".format(form_type, field_name),

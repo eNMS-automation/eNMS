@@ -458,9 +458,7 @@ class Dataset(AbstractBase):
     duration = Column(SmallString)
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
-        "Device",
-        back_populates="datasets",
-        foreign_keys="Dataset.device_id",
+        "Device", back_populates="datasets", foreign_keys="Dataset.device_id"
     )
     device_name = association_proxy("device", "name")
 

@@ -464,7 +464,6 @@ class BaseController:
         return [instance.get_properties() for instance in fetch_all(cls)]
 
     def update(self, cls, **kwargs):
-        print(kwargs)
         try:
             must_be_new = kwargs.get("id") == ""
             for arg in ("name", "scoped_name"):

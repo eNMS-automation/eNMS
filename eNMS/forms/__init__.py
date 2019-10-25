@@ -64,19 +64,19 @@ def form_postprocessing(form, form_data):
     data = {**form_data.to_dict(), **{"user": current_user}}
     if request.files:
         data["file"] = request.files["file"]
-    for property, field_type in form_properties[form_data.get("form_type")].items():
-        if field_type in ("object-list", "multiselect"):
+    for property, field in form_properties[form_data.get("form_type")].items():
+        if field["type"] in ("object-list", "multiselect"):
             data[property] = form_data.getlist(property)
-        elif field_type == "field-list":
+        elif field["type"] == "field-list":
             data[property] = []
             for entry in getattr(form, property).entries:
                 properties = entry.data
                 properties.pop("csrf_token")
                 data[property].append(properties)
-        elif field_type == "bool":
+        elif field["type"] == "bool":
             data[property] = property in form_data
-        elif field_type in field_conversion and property in data:
-            data[property] = field_conversion[field_type](form_data[property])
+        elif field["type"] in field_conversion and property in data:
+            data[property] = field_conversion[field["type"]](form_data[property])
     return data
 
 

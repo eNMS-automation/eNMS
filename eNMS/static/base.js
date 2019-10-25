@@ -416,6 +416,7 @@ function configureForm(form, id, panelId) {
     } else if (["object", "object-list"].includes(type)) {
       let model;
       if (relationships[form]) {
+        console.log(form, property)
         model = relationships[form][property].model;
       } else {
         model = property.substring(0, property.length - 1);

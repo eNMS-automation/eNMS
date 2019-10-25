@@ -91,7 +91,9 @@ class Workflow(Service):
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
-        services = run.start_services or [fetch("service", scoped_name="Start")]
+        services = [fetch("service", id=id) for id in run.start_services]
+        if not services:
+            services = [fetch("service", scoped_name="Start")]
         visited, success = set(), False
         while services:
             if run.stop:
@@ -145,7 +147,6 @@ class Workflow(Service):
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
     close_connection = BooleanField(default=False)
-    start_services = MultipleInstanceField("Services")
 
 
 class WorkflowEdge(AbstractBase):

@@ -658,7 +658,7 @@ function showRestartWorkflowPanel(workflow, service) {
     `Restart Workflow '${workflow.name}' from '${service.scoped_name}'`,
     workflow.id,
     function() {
-      $("#start_services").append(new Option(service.scoped_name, service.id));
+      $("#start_services").append(new Option(service.name, service.id));
       $("#start_services")
         .val(service.id)
         .trigger("change");

@@ -149,6 +149,8 @@ class AutomationController(BaseController):
     def run_service(self, id=None, **kwargs):
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
+        if "start_services" not in kwargs:
+            kwargs["start_services"] = []
         kwargs["creator"] = getattr(current_user, "name", "admin")
         service = fetch("service", id=id)
         kwargs["runtime"] = runtime = self.get_time()

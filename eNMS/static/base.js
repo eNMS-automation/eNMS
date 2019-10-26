@@ -350,7 +350,10 @@ function showDeletionPanel(instance) {
 
 function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll(".add-id").forEach((el) => {
-    if (duplicate && ["name", "id"].includes(el.name)) return;
+    if (duplicate) {
+      const property = type.includes("service") || type == "workflow" ? "scoped_name" : "name";
+      if ([property, "id"].includes(el.name)) return;
+    }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
   });
   panel.querySelectorAll(".btn-id").forEach((el) => {
@@ -514,7 +517,7 @@ function processInstance(type, instance) {
 }
 
 // eslint-disable-next-line
-function processData(type, id) {
+function processData(type, id, duplicate) {
   if (type.includes("service") || type == "workflow") {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
       "disabled",

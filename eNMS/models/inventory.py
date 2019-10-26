@@ -410,12 +410,14 @@ class Pool(AbstractPool):
         self.link_number = len(self.links)
 
 
-class Configuration(AbstractBase):
+class OperationalData(AbstractBase):
 
     __tablename__ = type = "configuration"
     private = True
     id = Column(Integer, primary_key=True)
-    configuration = Column(LargeString)
+    category = Column(SmallString)
+    command = Column(SmallString)
+    output = Column(LargeString)
     runtime = Column(SmallString)
     duration = Column(SmallString)
     device_id = Column(Integer, ForeignKey("device.id"))
@@ -441,42 +443,6 @@ class Configuration(AbstractBase):
           </li>
           <li>
             <form action="/download_configuration/{self.id}" style="display: inline;">
-            <button type="submit" class="btn btn-primary" data-tooltip="Download">
-                <span class="glyphicon glyphicon-download"></span></button>
-            </form>
-          </li></ul>""",
-        ]
-
-
-class Dataset(AbstractBase):
-
-    __tablename__ = type = "dataset"
-    private = True
-    id = Column(Integer, primary_key=True)
-    data = Column(MutableDict)
-    runtime = Column(SmallString)
-    duration = Column(SmallString)
-    device_id = Column(Integer, ForeignKey("device.id"))
-    device = relationship(
-        "Device", back_populates="datasets", foreign_keys="Dataset.device_id"
-    )
-    device_name = association_proxy("device", "name")
-
-    def generate_row(self, table):
-        return [
-            f"""<input type="radio" name="v1" value="{self.id}"/>""",
-            f"""<input type="radio" name="v2" value="{self.id}"/>""",
-            f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="showDeviceDataset({self.device.row_properties})"
-            data-tooltip="Dataset"
-              ><span class="glyphicon glyphicon-cog"></span
-            ></button>
-          </li>
-          <li>
-            <form action="/download_data/{self.id}" style="display: inline;">
             <button type="submit" class="btn btn-primary" data-tooltip="Download">
                 <span class="glyphicon glyphicon-download"></span></button>
             </form>

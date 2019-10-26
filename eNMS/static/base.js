@@ -523,6 +523,7 @@ function processData(type, id, duplicate) {
       "disabled",
       false
     );
+    if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
   fCall(
     `/update/${type}`,

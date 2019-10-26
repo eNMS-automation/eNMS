@@ -21,13 +21,12 @@ class DatasetBackupService(ConnectionService):
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)
-    commands = Column(LargeString)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
-    replace = Column(MutableList)
+    category = Column(MutableList)
 
     __mapper_args__ = {"polymorphic_identity": "dataset_backup_service"}
 
@@ -76,16 +75,17 @@ class DatasetBackupService(ConnectionService):
         return {"success": True, "result": f"Command: {command}"}
 
 
-class RegexReplaceForm(FlaskForm):
+class CategoryForm(FlaskForm):
+    category_name = StringField("Category Name")
+    command = StringField("Command")
     pattern = StringField("Pattern")
     replace_with = StringField("Replace With")
 
 
 class DatasetBackupForm(NetmikoForm):
     form_type = HiddenField(default="dataset_backup_service")
-    commands = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
-    replace = FieldList(FormField(RegexReplaceForm), min_entries=1)
+    category = FieldList(FormField(CategoryForm), min_entries=1)
     groups = {
-        "Main Parameters": {"commands": ["commands", "replace"], "default": "expanded"},
+        "Main Parameters": {"commands": ["category"], "default": "expanded"},
         **NetmikoForm.groups,
     }

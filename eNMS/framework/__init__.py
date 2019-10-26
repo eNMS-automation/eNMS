@@ -32,6 +32,7 @@ def configure_login_manager():
 def configure_context_processor(flask_app):
     @flask_app.context_processor
     def inject_properties():
+        print(property_names)
         return {
             "documentation_url": app.documentation_url,
             "property_types": property_types,

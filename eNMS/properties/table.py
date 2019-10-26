@@ -7,9 +7,7 @@ device_table_properties = object_common_properties + [
     "port",
 ]
 
-configuration_table_properties = ["runtime", "duration", "device_name"]
-
-dataset_table_properties = configuration_table_properties
+data_table_properties = ["runtime", "duration", "command", "device_name"]
 
 link_table_properties = object_common_properties + ["source_name", "destination_name"]
 
@@ -85,8 +83,7 @@ task_table_properties = [
 
 table_properties = {
     "changelog": changelog_table_properties,
-    "configuration": configuration_table_properties,
-    "dataset": dataset_table_properties,
+    "data": data_table_properties,
     "device": device_table_properties,
     "event": event_table_properties,
     "link": link_table_properties,
@@ -119,9 +116,8 @@ service_filtering_properties = [
 
 filtering_properties = {
     "changelog": changelog_table_properties,
-    "configuration": configuration_table_properties,
-    "dataset": dataset_table_properties,
-    "device": device_table_properties + ["configuration", "dataset"],
+    "data": data_table_properties,
+    "device": device_table_properties + ["configuration"],
     "event": event_table_properties,
     "link": link_table_properties,
     "pool": pool_table_properties,
@@ -136,8 +132,7 @@ filtering_properties = {
 
 table_fixed_columns = {
     "changelog": [],
-    "configuration": ["V1", "V2", ""],
-    "dataset": ["V1", "V2", ""],
+    "data": ["V1", "V2", ""],
     "device": [""],
     "event": [""],
     "link": [""],

@@ -102,6 +102,7 @@ function showDeviceConfiguration(device) {
     device.id,
     function() {
       call(`/get_device_data/configuration/${device.id}`, (config) => {
+        console.log(config)
         $(`#content-${device.id}`).html(
           `<pre style="height:100%">${config}</pre>`
         );
@@ -113,7 +114,7 @@ function showDeviceConfiguration(device) {
 // eslint-disable-next-line
 function showDeviceDataset(device) {
   createPanel("display", `Dataset - ${device.name}`, device.id, function() {
-    call(`/get_device_data/dataset/${device.id}`, (result) => {
+    call(`/get_device_data/data/${device.id}`, (result) => {
       const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
       const options = {
         mode: "view",
@@ -139,13 +140,13 @@ function showDeviceResultsPanel(device) {
 }
 
 // eslint-disable-next-line
-function showConfigurationsPanel(device) {
+function showDataPanel(device) {
   createPanel(
-    "configuration",
-    `Configuration - ${device.name}`,
+    "data",
+    `Data - ${device.name}`,
     null,
     function() {
-      initTable("configuration", device);
+      initTable("data", device);
     }
   );
 }

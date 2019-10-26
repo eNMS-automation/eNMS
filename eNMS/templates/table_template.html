@@ -5,7 +5,7 @@
   >
     <select id="service-type" class="form-control"></select>
   </button>
-  {% endif %} {% if type not in ("configuration", "run", "result", "syslog") %}
+  {% endif %} {% if type not in ("data", "run", "result", "syslog") %}
   {% set func = "openServicePanel" if type == "service" else "showTypePanel" %}
   <button
     class="btn btn-primary"
@@ -37,7 +37,7 @@
   >
     <span class="glyphicon glyphicon-refresh"></span>
   </button>
-  {% if type in ("configuration", "result") %}
+  {% if type in ("data", "result") %}
   <button
     class="btn btn-info btn-file"
     onclick="compare('{{ type }}')"

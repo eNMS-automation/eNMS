@@ -123,7 +123,7 @@ class Device(CustomDevice):
     def generate_row(self, table):
         return [
             f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 350px">
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 400px">
           <li>
             <button type="button" class="btn btn-info"
             onclick="showDeviceConfiguration({self.row_properties})"
@@ -133,8 +133,15 @@ class Device(CustomDevice):
           </li>
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showConfigurationsPanel({self.row_properties})"
-            data-tooltip="Configuration History"
+            onclick="showDeviceDataset({self.row_properties})"
+            data-tooltip="Operational Data"
+              ><span class="glyphicon glyphicon-list"></span
+            ></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-info"
+            onclick="showDataPanel({self.row_properties})"
+            data-tooltip="Data History"
               ><span class="glyphicon glyphicon-book"></span
             ></button>
           </li>

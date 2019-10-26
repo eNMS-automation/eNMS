@@ -245,9 +245,9 @@ class ResultForm(BaseForm):
     form_type = HiddenField(default="result")
 
 
-class ConfigurationForm(BaseForm):
+class DataForm(BaseForm):
     template = "result"
-    form_type = HiddenField(default="configuration")
+    form_type = HiddenField(default="data")
 
 
 class DisplayForm(BaseForm):

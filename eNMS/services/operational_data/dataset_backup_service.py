@@ -37,8 +37,10 @@ class DataBackupService(ConnectionService):
             run.log("info", "Fetching Operational Data", device)
             data = {}
             for category in self.categories:
-                command = run.sub(category["command"], locals()).splitlines()
+                print(category)
+                command = run.sub(category["command"], locals())
                 output = netmiko_connection.send_command(command)
+                print(category["pattern"], category["replace"])
                 output = sub(category["pattern"], category["replace"], output, flags=M)
                 device.data[category["name"]] = output
                 if category["name"].lower() == "configuration":

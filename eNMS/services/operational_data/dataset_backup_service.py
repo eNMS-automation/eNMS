@@ -26,7 +26,7 @@ class DatasetBackupService(ConnectionService):
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
-    category = Column(MutableList)
+    categories = Column(MutableList)
 
     __mapper_args__ = {"polymorphic_identity": "dataset_backup_service"}
 
@@ -39,31 +39,26 @@ class DatasetBackupService(ConnectionService):
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Operational Data", device)
             data = {}
-            for command in commands:
-                result = netmiko_connection.send_command(command)
-                for i in range(1, 4):
-                    result = sub(
-                        getattr(self, f"regex_pattern_{i}"),
-                        getattr(self, f"regex_replace_{i}"),
-                        result,
-                        flags=M,
-                    )
-                data[command] = result
+            for category in self.categories:
+                output = netmiko_connection.send_command(category["command"])
+                output = sub(category["pattern"], category["replace"], result, flags=M)
+                device.data[category["name"] = result
+                if category["name"].lower() == "configuration":
+                    device.configuration = result
+                factory(
+                    "data",
+                    device=device.id,
+                    runtime=device.last_runtime,
+                    duration=device.last_duration,
+                    category=category["name"],
+                    command=category["command"],
+                    output=output,
+                )
             device.last_status = "Success"
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             )
-            if device.dataset == data:
-                return {"success": True, "result": "no change"}
-            device.dataset = data
             device.last_update = str(device.last_runtime)
-            factory(
-                "dataset",
-                device=device.id,
-                runtime=device.last_runtime,
-                duration=device.last_duration,
-                data=data,
-            )
             with open(path_device_data / "dataset.yml", "w") as file:
                 yaml.dump(data, file, default_flow_style=False)
             run.generate_yaml_file(path_device_data, device)
@@ -76,7 +71,7 @@ class DatasetBackupService(ConnectionService):
 
 
 class CategoryForm(FlaskForm):
-    category_name = StringField("Category Name")
+    name = StringField("Category")
     command = StringField("Command")
     pattern = StringField("Pattern")
     replace_with = StringField("Replace With")
@@ -84,7 +79,7 @@ class CategoryForm(FlaskForm):
 
 class DatasetBackupForm(NetmikoForm):
     form_type = HiddenField(default="dataset_backup_service")
-    category = FieldList(FormField(CategoryForm), min_entries=10)
+    categories = FieldList(FormField(CategoryForm), min_entries=10)
     groups = {
         "Main Parameters": {"commands": ["category"], "default": "expanded"},
         **NetmikoForm.groups,

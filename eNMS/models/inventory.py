@@ -409,7 +409,7 @@ class Pool(AbstractPool):
 
 class Data(AbstractBase):
 
-    __tablename__ = type = "configuration"
+    __tablename__ = type = "data"
     private = True
     id = Column(Integer, primary_key=True)
     category = Column(SmallString)

@@ -4445,17 +4445,17 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- category:
-  - {category_name: Configuration, command: show running-config, pattern: '', replace_with: ''}
-  - {category_name: VRF, command: show vrf, pattern: '', replace_with: ''}
-  - {category_name: Interfaces, command: show ip int br, pattern: '', replace_with: ''}
-  - {category_name: '', command: '', pattern: '', replace_with: ''}
-  - {category_name: '', command: '', pattern: '', replace_with: ''}
-  - {category_name: '', command: '', pattern: '', replace_with: ''}
-  - {category_name: '', command: '', pattern: '', replace_with: ''}
-  - {category_name: '', command: '', pattern: '', replace_with: ''}
-  - {category_name: '', command: '', pattern: '', replace_with: ''}
-  - {category_name: '', command: '', pattern: '', replace_with: ''}
+- categories:
+  - {name: Configuration, command: show running-config, pattern: '', replace_with: ''}
+  - {name: VRF, command: show vrf, pattern: '', replace_with: ''}
+  - {name: Interfaces, command: show ip int br, pattern: '', replace_with: ''}
+  - {name: '', command: '', pattern: '', replace_with: ''}
+  - {name: '', command: '', pattern: '', replace_with: ''}
+  - {name: '', command: '', pattern: '', replace_with: ''}
+  - {name: '', command: '', pattern: '', replace_with: ''}
+  - {name: '', command: '', pattern: '', replace_with: ''}
+  - {name: '', command: '', pattern: '', replace_with: ''}
+  - {name: '', command: '', pattern: '', replace_with: ''}
   color: '#D2E5FF'
   config_mode: false
   content_match: ''

@@ -327,15 +327,20 @@ function addToWorkflow() {
 }
 
 function deleteNode(id) {
-  workflow.services = workflow.services.filter((n) => n.id != id);
-  call(`/delete_node/${workflow.id}/${id}`, function(result) {
-    workflow.last_modified = result.update_time;
-    alertify.notify(
-      `'${result.service.scoped_name}' deleted from the workflow.`,
-      "success",
-      5
-    );
-  });
+  node = nodes.get(id);
+  if (node.type == "label") {
+    deleteLabel(node);
+  } else {
+    workflow.services = workflow.services.filter((n) => n.id != id);
+    call(`/delete_node/${workflow.id}/${id}`, function(result) {
+      workflow.last_modified = result.update_time;
+      alertify.notify(
+        `'${result.service.scoped_name}' deleted from the workflow.`,
+        "success",
+        5
+      );
+    });
+  }
 }
 
 function deleteLabel(label) {

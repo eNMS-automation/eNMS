@@ -26,7 +26,7 @@ class DataBackupService(ConnectionService):
     global_delay_factor = Column(Float, default=1.0)
     categories = Column(MutableList)
 
-    __mapper_args__ = {"polymorphic_identity": "dataset_backup_service"}
+    __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
 
     def job(self, run, payload, device):
         path = Path.cwd() / "git" / "operational_data" / device.name

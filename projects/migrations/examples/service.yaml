@@ -4503,7 +4503,7 @@
   skip_query: ''
   time_between_retries: 10
   timeout: 10
-  type: dataset_backup_service
+  type: data_backup_service
   use_device_driver: true
   validation_method: none
   vendor: ''

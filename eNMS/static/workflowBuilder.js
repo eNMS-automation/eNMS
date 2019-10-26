@@ -591,7 +591,7 @@ Object.assign(action, {
   "Workflow Logs": () => showLogsPanel(workflow),
   "Add to Workflow": () => showPanel("add_service"),
   "Stop Workflow": () => stopWorkflow(),
-  "Remove from Workflow": deleteSelection,
+  "Delete Service": deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),
   "Create 'Failure' edge": () => switchMode("failure"),
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),

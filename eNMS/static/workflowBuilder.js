@@ -113,10 +113,10 @@ function displayWorkflow(workflowData) {
       properties.event.preventDefault();
     }
   });
-  graph.on("doubleClick", function(properties) {
-    properties.event.preventDefault();
-    const service = nodes.get(this.getNodeAt(properties.pointer.DOM));
-    if (!service.id) return;
+  graph.on("doubleClick", function(event) {
+    event.event.preventDefault();
+    const service = nodes.get(this.getNodeAt(event.pointer.DOM));
+    if (!service.id || service.type == "label") return;
     if (service.type == "workflow") {
       switchToWorkflow(service.id);
     } else {

@@ -79,7 +79,7 @@ class Device(CustomDevice):
     netmiko_driver = Column(SmallString, default="cisco_ios")
     napalm_driver = Column(SmallString, default="ios")
     configuration = Column(LargeString)
-    dataset = Column(MutableDict)
+    data = Column(MutableDict)
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")
     last_update = Column(SmallString, default="Never")
@@ -92,11 +92,8 @@ class Device(CustomDevice):
     results = relationship(
         "Result", back_populates="device", cascade="all, delete-orphan"
     )
-    configurations = relationship(
-        "Configuration", back_populates="device", cascade="all, delete-orphan"
-    )
-    datasets = relationship(
-        "Dataset", back_populates="device", cascade="all, delete-orphan"
+    dataset = relationship(
+        "Data", back_populates="device", cascade="all, delete-orphan"
     )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
@@ -410,7 +407,7 @@ class Pool(AbstractPool):
         self.link_number = len(self.links)
 
 
-class OperationalData(AbstractBase):
+class Data(AbstractBase):
 
     __tablename__ = type = "configuration"
     private = True
@@ -423,8 +420,8 @@ class OperationalData(AbstractBase):
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device",
-        back_populates="configurations",
-        foreign_keys="Configuration.device_id",
+        back_populates="dataset",
+        foreign_keys="Data.device_id",
     )
     device_name = association_proxy("device", "name")
 
@@ -436,7 +433,7 @@ class OperationalData(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showDeviceConfiguration({self.device.row_properties})"
+            onclick="showOutput({self.device.row_properties})"
             data-tooltip="Configuration"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>

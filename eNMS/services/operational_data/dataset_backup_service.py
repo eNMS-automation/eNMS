@@ -12,10 +12,10 @@ from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
 
-class DatasetBackupService(ConnectionService):
+class DataBackupService(ConnectionService):
 
-    __tablename__ = "dataset_backup_service"
-    pretty_name = "Dataset Backup"
+    __tablename__ = "data_backup_service"
+    pretty_name = "Operational Data Backup"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)
@@ -29,16 +29,16 @@ class DatasetBackupService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "dataset_backup_service"}
 
     def job(self, run, payload, device):
+        path = Path.cwd() / "git" / "operational_data" / device.name
+        path.mkdir(parents=True, exist_ok=True)
         try:
-            commands = run.sub(run.commands, locals()).splitlines()
             device.last_runtime = datetime.now()
-            path = Path.cwd() / "git" / "operational_data" / device.name
-            path.mkdir(parents=True, exist_ok=True)
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Operational Data", device)
             data = {}
             for category in self.categories:
-                output = netmiko_connection.send_command(category["command"])
+                command = run.sub(category["command"], locals()).splitlines()
+                output = netmiko_connection.send_command(command)
                 output = sub(category["pattern"], category["replace"], output, flags=M)
                 device.data[category["name"]] = output
                 if category["name"].lower() == "configuration":
@@ -78,8 +78,8 @@ class CategoryForm(FlaskForm):
     replace_with = StringField("Replace With")
 
 
-class DatasetBackupForm(NetmikoForm):
-    form_type = HiddenField(default="dataset_backup_service")
+class DataBackupForm(NetmikoForm):
+    form_type = HiddenField(default="data_backup_service")
     categories = FieldList(FormField(CategoryForm), min_entries=10)
     groups = {
         "Main Parameters": {"commands": ["categories"], "default": "expanded"},

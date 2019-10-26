@@ -433,7 +433,7 @@ class Data(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showOutput({self.device.row_properties})"
+            onclick="showOutput({self.id}, {self.device.row_properties})"
             data-tooltip="Output"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>

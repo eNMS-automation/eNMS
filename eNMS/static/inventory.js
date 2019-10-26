@@ -79,6 +79,22 @@ function updatePools(pool) {
 }
 
 // eslint-disable-next-line
+function showOutput(dataId, device) {
+  createPanel(
+    "display_configuration",
+    `Configuration - ${device.name}`,
+    dataId,
+    function() {
+      call(`/get/data/${dataId}`, (data) => {
+        $(`#content-${dataId}`).html(
+          `<pre style="height:100%">${data.output}</pre>`
+        );
+      });
+    }
+  );
+}
+
+// eslint-disable-next-line
 function showDeviceConfiguration(device) {
   createPanel(
     "display_configuration",

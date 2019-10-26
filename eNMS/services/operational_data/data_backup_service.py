@@ -37,6 +37,8 @@ class DataBackupService(ConnectionService):
             run.log("info", "Fetching Operational Data", device)
             data = {}
             for category in self.categories:
+                if not category["name"]:
+                    continue
                 command = run.sub(category["command"], locals())
                 output = netmiko_connection.send_command(command)
                 output = sub(category["pattern"], category["replace_with"], output, flags=M)

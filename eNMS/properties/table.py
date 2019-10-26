@@ -7,7 +7,7 @@ device_table_properties = object_common_properties + [
     "port",
 ]
 
-data_table_properties = ["runtime", "duration", "command", "device_name"]
+data_table_properties = ["category", "runtime", "duration", "command", "device_name"]
 
 link_table_properties = object_common_properties + ["source_name", "destination_name"]
 

@@ -173,13 +173,13 @@ def view_service_results(id):
     return f"<pre>{app.str_dict(result)}</pre>"
 
 
-@blueprint.route("/download_configuration/<id>")
+@blueprint.route("/download_output/<id>")
 @monitor_requests
-def download_configuration(id):
-    configuration = fetch("configuration", id=id)
-    filename = f"{configuration.device_name}-{app.strip_all(configuration.runtime)}"
+def download_output(id):
+    data = fetch("data", id=id)
+    filename = f"{data.device_name}-{data.command}-{app.strip_all(data.runtime)}"
     return Response(
-        (f"{line}\n" for line in configuration.configuration.splitlines()),
+        (f"{line}\n" for line in data.output.splitlines()),
         mimetype="text/plain",
         headers={"Content-Disposition": f"attachment;filename={filename}.txt"},
     )

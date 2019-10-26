@@ -434,12 +434,12 @@ class Data(AbstractBase):
           <li>
             <button type="button" class="btn btn-info"
             onclick="showOutput({self.device.row_properties})"
-            data-tooltip="Configuration"
+            data-tooltip="Output"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>
           </li>
           <li>
-            <form action="/download_configuration/{self.id}" style="display: inline;">
+            <form action="/download_output/{self.id}" style="display: inline;">
             <button type="submit" class="btn btn-primary" data-tooltip="Download">
                 <span class="glyphicon glyphicon-download"></span></button>
             </form>

@@ -8,9 +8,7 @@ from eNMS.database import Session
 from eNMS.database.base import AbstractBase
 from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.functions import factory, fetch
-from eNMS.database.associations import (
-    service_workflow_table,
-)
+from eNMS.database.associations import service_workflow_table
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.models.automation import Service

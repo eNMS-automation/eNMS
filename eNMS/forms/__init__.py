@@ -25,11 +25,11 @@ class MetaForm(FormMeta):
         form_classes[form_type] = form
         form_templates[form_type] = getattr(form, "template", "base")
         form_actions[form_type] = getattr(form, "action", None)
-        for field_name, field in attrs.items():
-            if field_name == "start_services":
-                print(field.kwargs)
         properties = {
-            field_name: {"type": field_types[field.field_class], "model": field.kwargs.pop("model", None)}
+            field_name: {
+                "type": field_types[field.field_class],
+                "model": field.kwargs.pop("model", None),
+            }
             for field_name, field in attrs.items()
             if isinstance(field, UnboundField) and field.field_class in field_types
         }

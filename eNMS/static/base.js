@@ -351,7 +351,8 @@ function showDeletionPanel(instance) {
 function preprocessForm(panel, id, type, duplicate) {
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
-      const property = type.includes("service") || type == "workflow" ? "scoped_name" : "name";
+      const property =
+        type.includes("service") || type == "workflow" ? "scoped_name" : "name";
       if ([property, "id"].includes(el.name)) return;
     }
     if (id) $(el).prop("id", `${$(el).attr("id")}-${id}`);
@@ -420,10 +421,8 @@ function configureForm(form, id, panelId) {
     } else if (["object", "object-list"].includes(field.type)) {
       let model;
       if (relationships[form]) {
-        console.log(form, property)
         model = relationships[form][property].model;
       } else {
-        console.log(field)
         model = field.model;
       }
       initSelect(el, model, panelId, field.type == "object");
@@ -477,7 +476,7 @@ function showTypePanel(type, id, mode) {
 function updateProperty(el, property, value, type) {
   let propertyType;
   if (formProperties[type][property]) {
-    propertyType = formProperties[type][property].type
+    propertyType = formProperties[type][property].type;
   } else {
     propertyType = "str";
   }

@@ -175,138 +175,6 @@
   conversion_method: none
   creator: admin
   delete_spaces_before_matching: false
-  description: Mail notification (service logs)
-  device_query: ''
-  device_query_property: ip_address
-  devices: [Columbus]
-  dict_match: {}
-  display_only_failed_nodes: true
-  events: []
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-07-24 14:38:17.558725'
-  mail_recipient: ''
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: mail
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: mail
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  delete_spaces_before_matching: false
-  description: Slack notification (service logs)
-  device_query: ''
-  device_query_property: ip_address
-  devices: [Columbus]
-  dict_match: {}
-  display_only_failed_nodes: true
-  events: []
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-07-11 13:51:13.388262'
-  mail_recipient: ''
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: slack_feedback_notification
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: slack_feedback_notification
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  delete_spaces_before_matching: false
-  description: Mattermost notification (service logs)
-  device_query: ''
-  device_query_property: ip_address
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: true
-  events: []
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-07-11 13:51:13.428231'
-  mail_recipient: ''
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: mattermost_feedback_notification
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: mattermost_feedback_notification
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  time_between_retries: 10
-  type: swiss_army_knife_service
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  delete_spaces_before_matching: false
   description: Monitor eNMS cluster
   device_query: ''
   device_query_property: ip_address
@@ -503,108 +371,6 @@
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 100
-- color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  delete_spaces_before_matching: false
-  description: Test the file transfer service
-  destination_file: /media/sf_VM/eNMS/tests/file_transfer/b.bin
-  device_query: ''
-  device_query_property: ip_address
-  devices: [Aserver]
-  dict_match: {}
-  direction: get
-  display_only_failed_nodes: true
-  events: []
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-07-11 13:51:13.697251'
-  load_known_host_keys: false
-  look_for_keys: false
-  mail_recipient: ''
-  max_processes: 5
-  max_transfer_size: 1073741824
-  maximum_runs: 1
-  missing_host_key_policy: true
-  multiprocessing: false
-  name: test_file_transfer_service
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  protocol: scp
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: test_file_transfer_service
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  source_file: /media/sf_VM/eNMS/tests/file_transfer/a.bin
-  source_file_includes_globbing: false
-  time_between_retries: 10
-  type: generic_file_transfer_service
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
-  window_size: 1073741824
-- color: '#D2E5FF'
-  content_match: ''
-  content_match_regex: false
-  conversion_method: none
-  creator: admin
-  delete_archive: true
-  delete_folder: true
-  delete_spaces_before_matching: false
-  description: Test the log backup service
-  destination_path: /media/sf_VM/eNMS/tests/file_transfer
-  device_query: ''
-  device_query_property: ip_address
-  devices: [Aserver]
-  dict_match: {}
-  display_only_failed_nodes: true
-  events: []
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-07-11 13:51:14.001348'
-  mail_recipient: ''
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: test_database_backup_service
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions: {}
-  protocol: scp
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: test_database_backup_service
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  time_between_retries: 10
-  type: database_backup_service
-  validation_method: none
-  vendor: ''
-  waiting_time: 0
 - color: '#D2E5FF'
   config_mode: false
   configuration_command: show running-config
@@ -1391,130 +1157,6 @@
   vendor: ''
   waiting_time: 0
 - auto_find_prompt: true
-  close_connection: false
-  color: '#D2E5FF'
-  commands: show vrf
-  config_mode: false
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: ip_address
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: true
-  driver: arista_eos
-  enable_mode: true
-  events: []
-  expect_string: ''
-  fast_cli: true
-  global_delay_factor: 1.0
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: payload['variables']['devices']
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-07-11 13:51:14.896878'
-  mail_recipient: ''
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: netmiko_python_defined_devices
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: eos
-  pools: []
-  positions:
-    Iteration Services Test Workflow: ['-336', '11']
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: netmiko_python_defined_devices
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 3
-  type: netmiko_validation_service
-  use_device_driver: true
-  validation_method: text
-  vendor: Arista
-  waiting_time: 0
-- auto_find_prompt: true
-  close_connection: false
-  color: '#D2E5FF'
-  commands: show interface {{payload['value']}}
-  config_mode: false
-  content_match: 255.255.255.255
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: Check the iteration mechanism (interfaces)
-  device_query: ''
-  device_query_property: ip_address
-  devices: [Washington, Austin]
-  dict_match: {}
-  display_only_failed_nodes: true
-  driver: arista_eos
-  enable_mode: true
-  events: []
-  expect_string: ''
-  fast_cli: true
-  global_delay_factor: 1.0
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-08-14 14:05:25.693261'
-  mail_recipient: ''
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: Iterated_netmiko_service
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: eos
-  pools: []
-  positions:
-    'Regression Workflow E: Iteration Targets': [216, 129]
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: Iterated_netmiko_service
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 3
-  type: netmiko_validation_service
-  use_device_driver: true
-  validation_method: text
-  vendor: Arista
-  waiting_time: 0
-- auto_find_prompt: true
   close_connection: true
   color: '#D2E5FF'
   commands: show ip route
@@ -1917,68 +1559,6 @@
   push_to_git: false
   result_postprocessing: ''
   scoped_name: netmiko_check_no_vrf_napalm
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 10
-  type: netmiko_validation_service
-  use_device_driver: true
-  validation_method: text
-  vendor: ''
-  waiting_time: 0
-- auto_find_prompt: true
-  close_connection: false
-  color: '#D2E5FF'
-  commands: show vrf
-  config_mode: false
-  content_match: ''
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: ''
-  device_query: ''
-  device_query_property: ip_address
-  devices: []
-  dict_match: {}
-  display_only_failed_nodes: false
-  driver: a10
-  enable_mode: true
-  events: []
-  expect_string: ''
-  fast_cli: false
-  global_delay_factor: 1.0
-  include_link_in_summary: false
-  initial_payload: {}
-  iteration_devices: get_var("test", device=parent_device.name)
-  iteration_devices_property: name
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-08-02 19:52:14.677268'
-  mail_recipient: ''
-  max_processes: 50
-  maximum_runs: 1
-  multiprocessing: true
-  name: Device_from_python_query
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: ''
-  pools: []
-  positions:
-    iteration_devices_workflow: ['-5', '-147']
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: Device_from_python_query
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -2895,68 +2475,6 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show interface {{payload['value']}}
-  config_mode: false
-  content_match: 255.255.255.255
-  content_match_regex: false
-  conversion_method: text
-  creator: admin
-  credentials: device
-  custom_username: ''
-  delay_factor: 1.0
-  delete_spaces_before_matching: false
-  description: Check the iteration mechanism (interfaces)
-  device_query: ''
-  device_query_property: ip_address
-  devices: [Austin, Washington]
-  dict_match: {}
-  display_only_failed_nodes: true
-  driver: arista_eos
-  enable_mode: true
-  events: []
-  expect_string: ''
-  fast_cli: true
-  global_delay_factor: 1.0
-  include_link_in_summary: true
-  initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
-  iteration_values: ''
-  iteration_variable_name: iteration_value
-  last_modified: '2019-08-14 14:05:31.377620'
-  mail_recipient: ''
-  max_processes: 5
-  maximum_runs: 1
-  multiprocessing: false
-  name: Iterated_netmiko_service bis
-  negative_logic: false
-  notification_header: ''
-  number_of_retries: 0
-  operating_system: eos
-  pools: []
-  positions:
-    'Regression Workflow E: Iteration Targets': [396, -182]
-  push_to_git: false
-  result_postprocessing: ''
-  scoped_name: Iterated_netmiko_service bis
-  send_notification: false
-  send_notification_method: mail
-  shared: false
-  skip: false
-  skip_query: ''
-  start_new_connection: false
-  strip_command: true
-  strip_prompt: true
-  time_between_retries: 10
-  timeout: 3
-  type: netmiko_validation_service
-  use_device_driver: true
-  validation_method: text
-  vendor: Arista
-  waiting_time: 0
-- auto_find_prompt: true
-  close_connection: false
-  color: '#D2E5FF'
   commands: show interface {{get_var('non_default_iteration_value_name')}}
   config_mode: false
   content_match: 255.255.255.255
@@ -3747,7 +3265,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3837,11 +3354,10 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
-  vendor: Arista
+  vendor: ''
   waiting_time: 0
 - close_connection: false
   color: '#D2E5FF'
@@ -3899,11 +3415,10 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
-  vendor: Arista
+  vendor: ''
   waiting_time: 0
 - close_connection: false
   color: '#D2E5FF'
@@ -3961,11 +3476,10 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
-  vendor: Arista
+  vendor: ''
   waiting_time: 0
 - close_connection: false
   color: '#D2E5FF'
@@ -4066,7 +3580,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4130,11 +3643,10 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
-  vendor: Arista
+  vendor: ''
   waiting_time: 0
 - close_connection: false
   color: '#D2E5FF'
@@ -4187,7 +3699,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4242,7 +3753,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4315,7 +3825,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4411,7 +3920,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4489,7 +3997,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4552,7 +4059,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4640,7 +4146,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4704,7 +4209,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4758,7 +4262,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4814,7 +4317,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4873,7 +4375,6 @@
   shared: false
   skip: false
   skip_query: ''
-  start_services: ['[Shared] Start']
   time_between_retries: 10
   type: workflow
   validation_method: none

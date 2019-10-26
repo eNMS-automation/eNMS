@@ -200,13 +200,19 @@
                 </fieldset>
                 {% elif form[field_name].type == "FieldList" %} {% for entry in
                 form[field_name] %}
-                <label>{{ entry.label }}</label>
-                {% for l in entry %}
-                <div class="form-group">
-                  {{ l(id="{}-{}".format(form_type, l.name), class="form-control
-                  add-id") }}
-                </div>
-                {% endfor %} {% endfor %} {% else %}
+                <fieldset>
+                  <legend style="font-weight:bold;">{{ field_name | capitalize() }} {{ loop.index }}</legend>
+                  {% for l in entry %}
+                  {% if l.widget.input_type != 'hidden' %}
+                  <label>{{ l.label }}</label>
+                  <div class="form-group">
+                    {{ l(id="{}-{}".format(form_type, l.name), class="form-control
+                    add-id") }}
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+               </fieldset>
+                {% endfor %} {% else %}
                 <label>{{ form[field_name].label }}</label>
                 <div class="form-group">
                   {{ form[field_name](id="{}-{}".format(form_type, field_name),

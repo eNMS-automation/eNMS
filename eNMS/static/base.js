@@ -473,7 +473,7 @@ function showTypePanel(type, id, mode) {
   );
 }
 
-function updateProperty(el, property, value, type) {
+function updateProperty(instance, el, property, value, type) {
   let propertyType;
   if (formProperties[type][property]) {
     propertyType = formProperties[type][property].type;
@@ -500,7 +500,11 @@ function updateProperty(el, property, value, type) {
       .val(value.id)
       .trigger("change");
   } else if (propertyType == "field-list") {
-    // pass
+    for (let [index, form] of value.entries()) {
+      for (const [key, value] of Object.entries(form)) {
+        $(`#${type}-${property}-${index}-${key}-${instance.id}`).val(value);
+      }
+    }
   } else {
     el.val(value);
   }
@@ -511,7 +515,7 @@ function processInstance(type, instance) {
     const el = $(
       instance ? `#${type}-${property}-${instance.id}` : `#${type}-${property}`
     );
-    updateProperty(el, property, value, type);
+    updateProperty(instance, el, property, value, type);
   }
 }
 

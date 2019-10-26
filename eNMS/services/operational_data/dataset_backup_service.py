@@ -84,7 +84,7 @@ class CategoryForm(FlaskForm):
 
 class DatasetBackupForm(NetmikoForm):
     form_type = HiddenField(default="dataset_backup_service")
-    category = FieldList(FormField(CategoryForm), min_entries=1)
+    category = FieldList(FormField(CategoryForm), name="test", min_entries=1)
     groups = {
         "Main Parameters": {"commands": ["category"], "default": "expanded"},
         **NetmikoForm.groups,

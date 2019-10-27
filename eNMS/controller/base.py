@@ -586,7 +586,7 @@ class BaseController:
                 constraints.append(
                     models["result"].parent_runtime == kwargs["instance[runtime]"]
                 )
-        elif table == "configuration" and kwargs.get("instance[id]"):
+        elif table == "data" and kwargs.get("instance[id]"):
             constraints.append(
                 getattr(models[table], "device").has(id=kwargs["instance[id]"])
             )

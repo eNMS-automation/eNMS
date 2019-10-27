@@ -60,28 +60,6 @@ function parseObject(obj) {
   return obj;
 }
 
-function getRuntimes(type, id, runtime) {
-  call(`/get_runtimes/${type}/${id}`, (runtimes) => {
-    $(`#${type}_runtime-${id}`).empty();
-    runtimes.forEach((runtime) => {
-      $(`#${type}_runtime-${id}`).append(
-        $("<option></option>")
-          .attr("value", runtime[0])
-          .text(runtime[1])
-      );
-    });
-    $(`#${type}_runtime-${id}`).val(runtime).selectpicker("refresh");
-  });
-}
-
-// eslint-disable-next-line
-function showResultsPanel(service, runtime) {
-  $("#result").remove();
-  createPanel("result", `Results - ${service.name}`, null, function() {
-    initTable("result", service, runtime || currentRuntime);
-  });
-}
-
 // eslint-disable-next-line
 function compare(type) {
   const v1 = $("input[name=v1]:checked").val();
@@ -137,17 +115,29 @@ function clearResults(id) {
   });
 }
 
+function getRuntimes(type, id, runtime) {
+  call(`/get_runtimes/${type}/${id}`, (runtimes) => {
+    $(`#${type}_runtime-${id}`).empty();
+    runtimes.forEach((runtime) => {
+      $(`#${type}_runtime-${id}`).append(
+        $("<option></option>")
+          .attr("value", runtime[0])
+          .text(runtime[1])
+      );
+    });
+    $(`#${type}_runtime-${id}`).val(runtime).selectpicker("refresh");
+  });
+}
+
 // eslint-disable-next-line
-function refreshLogs(service, runtime, displayResults) {
-  if (!$(`#logs-form-${service.id}`).length) return;
-  fCall(`/get_service_logs/${runtime}`, `#logs-form-${service.id}`, function(result) {
-    $(`#log-${service.id}`).text(result.logs);
-    if (result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);
-    } else if (displayResults) {
-      $(`#logs-${service.id}`).remove();
-      showResultsPanel(service, runtime);
-    }
+function showResultsPanel(service, runtime) {
+  $("#result").remove();
+  createPanel("result", `Results - ${service.name}`, service.id, function() {
+    $(`#logs_runtime-${service.id}`).on("change", function() {
+      tables["result"].ajax.reload(null, false);
+    });
+    getRuntimes("results", service.id, runtime || currentRuntime);
+    initTable("result", service, runtime || currentRuntime);
   });
 }
 
@@ -163,6 +153,20 @@ function showLogsPanel(service, runtime, displayResults) {
     });
     getRuntimes("logs", service.id, runtime);
     refreshLogs(service, runtime, displayResults);
+  });
+}
+
+// eslint-disable-next-line
+function refreshLogs(service, runtime, displayResults) {
+  if (!$(`#logs-form-${service.id}`).length) return;
+  fCall(`/get_service_logs/${runtime}`, `#logs-form-${service.id}`, function(result) {
+    $(`#log-${service.id}`).text(result.logs);
+    if (result.refresh) {
+      setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);
+    } else if (displayResults) {
+      $(`#logs-${service.id}`).remove();
+      showResultsPanel(service, runtime);
+    }
   });
 }
 

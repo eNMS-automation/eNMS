@@ -5,9 +5,7 @@
 >
   {{ form.csrf_token() }} {{ form.form_type() }}
   <div class="modal-body">
-    <div id="runtime-div" class="add-id">
-      {{ form.logs_runtime(class="form-control add-id") }}
-    </div>
+    {{ form.logs_runtime(class="form-control add-id") }}
     {{ form.filter(class="form-control add-id", placeholder="Filter") }}
     <hr />
     <div class="row">

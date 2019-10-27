@@ -488,7 +488,7 @@
 - auto_find_prompt: true
   close_connection: true
   color: '#D2E5FF'
-  command: ''
+  command: show vrf
   config_mode: false
   content_match: test
   content_match_regex: false
@@ -615,7 +615,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show vrf
   config_mode: false
   content_match: test
   content_match_regex: true
@@ -1100,7 +1100,7 @@
 - auto_find_prompt: true
   close_connection: true
   color: '#D2E5FF'
-  command: ''
+  command: 'show ip route'
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1387,7 +1387,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show vrf
   config_mode: false
   content_match: napalm
   content_match_regex: false
@@ -1453,7 +1453,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show vrf
   config_mode: false
   content_match: napalm
   content_match_regex: false
@@ -1739,7 +1739,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show vrf {{get_var("iteration_simple", section="pools")}}
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1802,7 +1802,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show vrf test
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1865,7 +1865,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show vrf {{get_result("Payload editor, with device")["endtime"]}}
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2352,7 +2352,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show version
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2415,7 +2415,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show interface {{get_var('non_default_iteration_value_name')}}
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -2478,7 +2478,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show interface {{get_var('iteration_value')}}
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -2541,7 +2541,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show interface {{get_var('iteration_value')}}
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -3092,7 +3092,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show interface {{get_var('iteration_value')}}
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -4322,7 +4322,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show vrf
   config_mode: false
   content_match: NOVRF
   content_match_regex: false
@@ -4385,7 +4385,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: ''
+  command: show interfaces
   config_mode: false
   content_match: ''
   content_match_regex: false

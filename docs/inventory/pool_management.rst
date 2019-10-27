@@ -41,7 +41,7 @@ This pool enforces the following conditions:
 In summary, all ``Cisco`` ``routers or switches`` whose name begins with ``node`` will match these conditions, and they will be a member of the pool.
 
 .. note:: All properties left with empty fields are simply ignored.
-.. note:: Along with all properties of a device, you can use the device **current configuration** as a constraint for the pool.
+.. note:: Along with all properties of a device, you can use the device **configuration** as a constraint for the pool.
 
 A pool of links
 ---------------

@@ -76,7 +76,7 @@ class BaseController:
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
     log_level = environ.get("LOG_LEVEL", "DEBUG")
     git_automation = environ.get("GIT_AUTOMATION")
-    git_configurations = environ.get("GIT_CONFIGURATIONS")
+    git_operational_data = environ.get("GIT_OPERATIONAL_DATA")
     gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
     gotty_bypass_key_prompt = int(environ.get("GOTTY_BYPASS_KEY_PROMPT", False))
     gotty_port = -1
@@ -127,7 +127,7 @@ class BaseController:
         "/dashboard",
         "/login",
         "/table/changelog",
-        "/table/configuration",
+        "/table/data",
         "/table/device",
         "/table/event",
         "/table/pool",
@@ -316,7 +316,7 @@ class BaseController:
         return parameters.get_properties() if parameters else {}
 
     def get_git_content(self):
-        for repository_type in ("configurations", "automation"):
+        for repository_type in ("operational_data", "automation"):
             repo = getattr(self, f"git_{repository_type}")
             if not repo:
                 continue
@@ -330,14 +330,14 @@ class BaseController:
             if repo_contents_exist:
                 try:
                     Repo(local_path).remotes.origin.pull()
-                    if repository_type == "configurations":
+                    if repository_type == "operational_data":
                         self.update_database_configurations_from_git()
                 except Exception as e:
                     info(f"Cannot pull {repository_type} git repository ({str(e)})")
             else:
                 try:
                     Repo.clone_from(repo, local_path)
-                    if repository_type == "configurations":
+                    if repository_type == "operational_data":
                         self.update_database_configurations_from_git()
                 except Exception as e:
                     info(f"Cannot clone {repository_type} git repository ({str(e)})")
@@ -663,7 +663,7 @@ class BaseController:
         return input.translate(str.maketrans("", "", f"{punctuation} "))
 
     def update_database_configurations_from_git(self):
-        for dir in scandir(self.path / "git" / "configurations"):
+        for dir in scandir(self.path / "git" / "operational_data"):
             if dir.name == ".git":
                 continue
             device = fetch("device", allow_none=True, name=dir.name)
@@ -677,11 +677,11 @@ class BaseController:
                     with open(config_file) as f:
                         device.configuration = f.read()
                         factory(
-                            "configuration",
+                            "data",
                             device=device.id,
                             runtime=datetime.now(),
                             duration="0s",
-                            configuration=device.configuration,
+                            category="Configuration",
                         )
         Session.commit()
         for pool in fetch_all("pool"):

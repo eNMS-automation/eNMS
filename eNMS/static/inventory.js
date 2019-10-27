@@ -102,7 +102,6 @@ function showDeviceConfiguration(device) {
     device.id,
     function() {
       call(`/get_device_data/configuration/${device.id}`, (config) => {
-        console.log(config);
         $(`#content-${device.id}`).html(
           `<pre style="height:100%">${config}</pre>`
         );

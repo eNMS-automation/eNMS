@@ -4,7 +4,7 @@ action: false
 alertify: false
 call: false
 createPanel: false
-currentRuntime: false
+currentRuntime: true
 fCall: false
 normalRun: false
 runLogic: false
@@ -327,7 +327,7 @@ function addToWorkflow() {
 }
 
 function deleteNode(id) {
-  node = nodes.get(id);
+  let node = nodes.get(id);
   if (node.type == "label") {
     deleteLabel(node);
   } else {

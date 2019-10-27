@@ -12,6 +12,7 @@ JSONEditor: false
 page: false
 serviceTypes: false
 showTypePanel: false
+tables: false
 workflow: true
 */
 

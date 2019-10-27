@@ -44,9 +44,9 @@ eNMS/.vscode
 
 # exclude everything in git subfolders, except gitkeep
 git/automation/*
-git/configurations/*
+git/operational_data/*
 !git/automation/.gitkeep
-!git/configurations/.gitkeep
+!git/operational_data/.gitkeep
 
 # Exclude Assets Bundle
 eNMS/static/bundles

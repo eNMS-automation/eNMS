@@ -37,7 +37,9 @@ class MetaForm(FormMeta):
             {
                 field_name: field.args[0]
                 for field_name, field in attrs.items()
-                if isinstance(field, UnboundField) and field.args and isinstance(field.args[0], str)
+                if isinstance(field, UnboundField)
+                and field.args
+                and isinstance(field.args[0], str)
             }
         )
         form_properties[form_type].update(properties)

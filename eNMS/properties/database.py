@@ -5,6 +5,7 @@ dont_track_changes = [
     "current_device",
     "current_service",
     "data",
+    "labels",
     "last_modified",
     "positions",
     "state",

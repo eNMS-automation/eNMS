@@ -81,7 +81,7 @@ function getRuntimes(type, id) {
 function showResultsPanel(service, runtime) {
   $("#result").remove();
   createPanel("result", `Results - ${service.name}`, null, function() {
-    initTable("result", service, runtime);
+    initTable("result", service, runtime || currentRuntime);
   });
 }
 

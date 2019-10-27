@@ -109,9 +109,7 @@ class AutomationController(BaseController):
     def duplicate_workflow(self, workflow_id, **kwargs):
         return fetch("workflow", id=workflow_id).duplicate(**kwargs).serialized
 
-    def get_service_logs(self, **kwargs):
-        print(kwargs)
-        runtime = kwargs["logs_runtime"]
+    def get_service_logs(self, runtime, **kwargs):
         run = fetch("run", allow_none=True, runtime=runtime)
         result = run.result() if run else None
         logs = result["logs"] if result else self.run_logs.get(runtime, [])

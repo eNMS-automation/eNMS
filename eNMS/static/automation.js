@@ -140,7 +140,7 @@ function clearResults(id) {
 // eslint-disable-next-line
 function refreshLogs(service, runtime, displayResults) {
   if (!$(`#logs-form-${service.id}`).length) return;
-  fCall("/get_service_logs", `#logs-form-${service.id}`, function(result) {
+  fCall(`/get_service_logs/${runtime}`, `#logs-form-${service.id}`, function(result) {
     $(`#log-${service.id}`).text(result.logs);
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);

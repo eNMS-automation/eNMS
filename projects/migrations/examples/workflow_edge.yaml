@@ -1,6 +1,3 @@
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow 9: Operational
-    Data Backup] Push Configurations to Git', subtype: success, workflow: 'Regression
-    Workflow 9: Operational Data Backup'}
 - {destination: '[Regression Workflow 4: VRF creation and deletion with Netmiko] netmiko_create_vrf_test',
   label: success, source: '[Shared] Start', subtype: success, workflow: 'Regression
     Workflow 4: VRF creation and deletion with Netmiko'}
@@ -414,12 +411,17 @@
     of Workflows'}
 - {destination: '[Shared] Example Service (does nothing)', label: success, source: '[Shared]
     Start', subtype: success, workflow: 'Regression Workflow C: Advanced multiprocessing'}
-- {destination: '[Shared] End', label: success, source: '[Regression Workflow 9: Operational
-    Data Backup] Retrieve Operational Data', subtype: success, workflow: 'Regression
-    Workflow 9: Operational Data Backup'}
-- {destination: '[Shared] End', label: prerequisite, source: '[Regression Workflow
-    9: Operational Data Backup] Retrieve Operational Data', subtype: prerequisite,
-  workflow: 'Regression Workflow 9: Operational Data Backup'}
 - {destination: '[Regression Workflow 9: Operational Data Backup] Retrieve Operational
     Data', label: success, source: '[Shared] Start', subtype: success, workflow: 'Regression
+    Workflow 9: Operational Data Backup'}
+- {destination: '[Regression Workflow 9: Operational Data Backup] Push Configurations
+    to Git', label: success, source: '[Regression Workflow 9: Operational Data Backup]
+    Retrieve Operational Data', subtype: success, workflow: 'Regression Workflow 9:
+    Operational Data Backup'}
+- {destination: '[Regression Workflow 9: Operational Data Backup] Push Configurations
+    to Git', label: prerequisite, source: '[Regression Workflow 9: Operational Data
+    Backup] Retrieve Operational Data', subtype: prerequisite, workflow: 'Regression
+    Workflow 9: Operational Data Backup'}
+- {destination: '[Shared] End', label: success, source: '[Regression Workflow 9: Operational
+    Data Backup] Push Configurations to Git', subtype: success, workflow: 'Regression
     Workflow 9: Operational Data Backup'}

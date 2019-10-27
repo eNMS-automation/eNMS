@@ -15,6 +15,8 @@ showTypePanel: false
 workflow: true
 */
 
+let currentRuntime;
+
 // eslint-disable-next-line
 function openServicePanel() {
   showTypePanel($("#service-type").val());
@@ -125,7 +127,7 @@ function getRuntimes(type, id, runtime) {
           .text(runtime[1])
       );
     });
-    $(`#${type}_runtime-${id}`).val(runtime).selectpicker("refresh");
+    if (runtime) $(`#${type}_runtime-${id}`).val(runtime).selectpicker("refresh");
   });
 }
 
@@ -133,7 +135,7 @@ function getRuntimes(type, id, runtime) {
 function showResultsPanel(service, runtime) {
   $("#result").remove();
   createPanel("result", `Results - ${service.name}`, service.id, function() {
-    $(`#logs_runtime-${service.id}`).on("change", function() {
+    $(`#results_runtime-${service.id}`).on("change", function() {
       tables["result"].ajax.reload(null, false);
     });
     getRuntimes("results", service.id, runtime || currentRuntime);

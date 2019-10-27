@@ -40,7 +40,7 @@
     'Regression Workflow 7: Payload Extraction & Validation': !!python/tuple [0, 0]
     'Regression Workflow 8: Payload Extraction with Operations': !!python/tuple [
       0, 0]
-    'Regression Workflow 9: Operational Data Backup': [-732, 56]
+    'Regression Workflow 9: Operational Data Backup': [-712, 159]
     'Regression Workflow A: get_var, set_var, get_result': [-630, -54]
     'Regression Workflow B: Napalm getters validation': !!python/tuple [0, 0]
     'Regression Workflow C: Advanced multiprocessing': [-638, -8]
@@ -244,7 +244,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 9: Operational Data Backup': [151, 317]
+    'Regression Workflow 9: Operational Data Backup': [207, 117]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: Push Configurations to Git
@@ -404,7 +404,7 @@
   optional_args: {}
   pools: []
   positions:
-    'Regression Workflow 9: Operational Data Backup': [-545, 302]
+    'Regression Workflow 9: Operational Data Backup': [-259, 351]
   push_to_git: false
   regex_pattern_1: ''
   regex_pattern_2: ''
@@ -488,7 +488,7 @@
 - auto_find_prompt: true
   close_connection: true
   color: '#D2E5FF'
-  commands: show vrf
+  command: ''
   config_mode: false
   content_match: test
   content_match_regex: false
@@ -615,7 +615,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show vrf
+  command: ''
   config_mode: false
   content_match: test
   content_match_regex: true
@@ -1100,7 +1100,7 @@
 - auto_find_prompt: true
   close_connection: true
   color: '#D2E5FF'
-  commands: show ip route
+  command: ''
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1387,7 +1387,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show vrf
+  command: ''
   config_mode: false
   content_match: napalm
   content_match_regex: false
@@ -1453,7 +1453,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show vrf
+  command: ''
   config_mode: false
   content_match: napalm
   content_match_regex: false
@@ -1739,8 +1739,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: "show vrf {{get_var(\"iteration_simple\", section=\"pools\")}}\r\nshow\
-    \ vrf {{parent_device.name}}\r\nshow vrf {{device.name}}"
+  command: ''
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1803,7 +1802,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show vrf test
+  command: ''
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -1866,7 +1865,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show vrf {{get_result("Modify payload (per device)")["endtime"]}}
+  command: ''
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2353,7 +2352,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show version
+  command: ''
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -2416,7 +2415,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show interface {{get_var('non_default_iteration_value_name')}}
+  command: ''
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -2479,7 +2478,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show interface {{get_var('iteration_value')}}
+  command: ''
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -2542,7 +2541,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show interface {{get_var('iteration_value')}}
+  command: ''
   config_mode: false
   content_match: 255.255.255.255
   content_match_regex: false
@@ -3093,7 +3092,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show interface {{get_var('iteration_value')}}
+  command: ''
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -3179,8 +3178,8 @@
     3b9c0900-5718-4298-afcc-67bb0a7fb3af:
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
-      positions: [-274, 79]
-  last_modified: '2019-10-26 11:01:47.654898'
+      positions: [-280, 128]
+  last_modified: '2019-10-27 14:19:06.951859'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -4323,7 +4322,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show vrf
+  command: ''
   config_mode: false
   content_match: NOVRF
   content_match_regex: false
@@ -4386,7 +4385,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  commands: show ip int br
+  command: ''
   config_mode: false
   content_match: ''
   content_match_regex: false
@@ -4446,16 +4445,16 @@
   vendor: ''
   waiting_time: 0
 - categories:
-  - {name: Configuration, command: show running-config, pattern: '', replace_with: ''}
-  - {name: VRF, command: show vrf, pattern: '', replace_with: ''}
-  - {name: Interfaces, command: show ip int br, pattern: '', replace_with: ''}
-  - {name: '', command: '', pattern: '', replace_with: ''}
-  - {name: '', command: '', pattern: '', replace_with: ''}
-  - {name: '', command: '', pattern: '', replace_with: ''}
-  - {name: '', command: '', pattern: '', replace_with: ''}
-  - {name: '', command: '', pattern: '', replace_with: ''}
-  - {name: '', command: '', pattern: '', replace_with: ''}
-  - {name: '', command: '', pattern: '', replace_with: ''}
+  - {command: show running-config, name: Configuration, pattern: '', replace_with: ''}
+  - {command: show vrf, name: VRF, pattern: '', replace_with: ''}
+  - {command: show ip int br, name: Interfaces, pattern: '', replace_with: ''}
+  - {command: '', name: '', pattern: '', replace_with: ''}
+  - {command: '', name: '', pattern: '', replace_with: ''}
+  - {command: '', name: '', pattern: '', replace_with: ''}
+  - {command: '', name: '', pattern: '', replace_with: ''}
+  - {command: '', name: '', pattern: '', replace_with: ''}
+  - {command: '', name: '', pattern: '', replace_with: ''}
+  - {command: '', name: '', pattern: '', replace_with: ''}
   color: '#D2E5FF'
   config_mode: false
   content_match: ''
@@ -4492,7 +4491,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow 9: Operational Data Backup': [-196, -95]
+    'Regression Workflow 9: Operational Data Backup': [-284, -43]
   push_to_git: false
   result_postprocessing: ''
   scoped_name: Retrieve Operational Data

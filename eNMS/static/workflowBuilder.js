@@ -4,6 +4,7 @@ action: false
 alertify: false
 call: false
 createPanel: false
+currentRuntime: false
 fCall: false
 normalRun: false
 runLogic: false
@@ -71,7 +72,6 @@ let mousePosition;
 let currLabel;
 let arrowHistory = [];
 let arrowPointer = -1;
-let currentRuntime;
 let triggerMenu;
 
 function displayWorkflow(workflowData) {

@@ -582,7 +582,7 @@ function initTable(type, instance, runtime) {
           : `#search-${type}-form`;
         d.form = serializeForm(form);
         d.instance = instance;
-        d.runtime = runtime;
+        if (runtime) d.runtime = $(`#results_runtime-${instance.id}`).val() || runtime;
       },
     },
   });

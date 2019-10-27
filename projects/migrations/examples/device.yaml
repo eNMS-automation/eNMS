@@ -75,8 +75,8 @@
   icon: router
   ip_address: 192.168.105.5
   last_duration: 2.68092s
-  last_failure: '2019-10-24 22:34:37.994828'
-  last_runtime: '2019-10-24 22:34:37.994828'
+  last_failure: '2019-10-27 14:15:53.071799'
+  last_runtime: '2019-10-27 14:15:53.071799'
   last_status: Failure
   last_update: '2019-10-24 22:34:31.622914'
   latitude: '38.89511'

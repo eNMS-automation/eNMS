@@ -60,20 +60,17 @@ function parseObject(obj) {
   return obj;
 }
 
-function getRuntimes(type, id) {
+function getRuntimes(type, id, runtime) {
   call(`/get_runtimes/${type}/${id}`, (runtimes) => {
-    $(`#runtime-${id},#runtime_compare-${id}`).empty();
+    $(`#runtime-${id}`).empty();
     runtimes.forEach((runtime) => {
-      $(`#runtime-${id},#runtime_compare-${id}`).append(
+      $(`#runtime-${id}`).append(
         $("<option></option>")
           .attr("value", runtime[0])
           .text(runtime[1])
       );
     });
-    const mostRecent = runtimes[runtimes.length - 1];
-    $(`#runtime-${id},#runtime_compare-${id}`).val(mostRecent);
-    $(`#runtime-${id},#runtime_compare-${id}`).selectpicker("refresh");
-    if (runtimes) refreshLogs({ id: id }, $(`#runtime-${id}`).val());
+    $(`#runtime-${id}`).val(runtime).selectpicker("refresh");
   });
 }
 
@@ -157,17 +154,15 @@ function refreshLogs(service, runtime, displayResults) {
 // eslint-disable-next-line
 function showLogsPanel(service, runtime, displayResults) {
   createPanel("logs", `Logs - ${service.name}`, service.id, function() {
+    runtime = runtime || currentRuntime;
     configureLogsCallbacks(service, runtime);
-    if (!runtime) {
-      getRuntimes("logs", service.id);
-    } else {
-      $(`#runtime-${service.id}`)
-        .append(`<option value='${runtime}'>${runtime}</option>`)
-        .val(runtime)
-        .selectpicker("refresh");
-      $(`#runtime-div-${service.id}`).hide();
-      refreshLogs(service, runtime, displayResults);
-    }
+    getRuntimes("logs", service.id, runtime);
+    $(`#runtime-${service.id}`)
+      .append(`<option value='${runtime}'>${runtime}</option>`)
+      .val(runtime)
+      .selectpicker("refresh");
+    $(`#runtime-div-${service.id}`).hide();
+    refreshLogs(service, runtime, displayResults);
   });
 }
 

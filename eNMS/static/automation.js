@@ -62,15 +62,15 @@ function parseObject(obj) {
 
 function getRuntimes(type, id, runtime) {
   call(`/get_runtimes/${type}/${id}`, (runtimes) => {
-    $(`#runtime-${id}`).empty();
+    $(`#${type}_runtime-${id}`).empty();
     runtimes.forEach((runtime) => {
-      $(`#runtime-${id}`).append(
+      $(`#${type}_runtime-${id}`).append(
         $("<option></option>")
           .attr("value", runtime[0])
           .text(runtime[1])
       );
     });
-    $(`#runtime-${id}`).val(runtime).selectpicker("refresh");
+    $(`#${type}_runtime-${id}`).val(runtime).selectpicker("refresh");
   });
 }
 
@@ -155,27 +155,15 @@ function refreshLogs(service, runtime, displayResults) {
 function showLogsPanel(service, runtime, displayResults) {
   createPanel("logs", `Logs - ${service.name}`, service.id, function() {
     runtime = runtime || currentRuntime;
-    configureLogsCallbacks(service, runtime);
-    getRuntimes("logs", service.id, runtime);
-    $(`#runtime-${service.id}`)
-      .append(`<option value='${runtime}'>${runtime}</option>`)
-      .val(runtime)
-      .selectpicker("refresh");
-    $(`#runtime-div-${service.id}`).hide();
-    refreshLogs(service, runtime, displayResults);
-  });
-}
-
-// eslint-disable-next-line
-function configureLogsCallbacks(service, runtime) {
-  $(`#filter-${service.id}`).on("input", function() {
-    refreshLogs(service, runtime, false);
-  });
-  if (!runtime) {
-    $(`#runtime-${service.id}`).on("change", function() {
+    $(`#filter-${service.id}`).on("input", function() {
+      refreshLogs(service, runtime, false);
+    });
+    $(`#logs_runtime-${service.id}`).on("change", function() {
       refreshLogs(service, this.value, false);
     });
-  }
+    getRuntimes("logs", service.id, runtime);
+    refreshLogs(service, runtime, displayResults);
+  });
 }
 
 // eslint-disable-next-line

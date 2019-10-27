@@ -110,9 +110,11 @@ class AutomationController(BaseController):
         return fetch("workflow", id=workflow_id).duplicate(**kwargs).serialized
 
     def get_service_logs(self, **kwargs):
-        run = fetch("run", allow_none=True, runtime=kwargs["runtime"])
+        print(kwargs)
+        runtime = kwargs["logs_runtime"]
+        run = fetch("run", allow_none=True, runtime=runtime)
         result = run.result() if run else None
-        logs = result["logs"] if result else self.run_logs.get(kwargs["runtime"], [])
+        logs = result["logs"] if result else self.run_logs.get(runtime, [])
         filtered_logs = (log for log in logs if kwargs["filter"] in log)
         return {"logs": "\n".join(filtered_logs), "refresh": not bool(result)}
 

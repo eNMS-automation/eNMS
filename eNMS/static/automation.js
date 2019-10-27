@@ -128,6 +128,17 @@ function getRuntimes(type, id, runtime) {
       );
     });
     if (runtime) $(`#${type}_runtime-${id}`).val(runtime).selectpicker("refresh");
+    if (type == "logs") {
+      $(`#filter-${service.id}`).on("input", function() {
+        refreshLogs(service, runtime, false);
+      });
+      $(`#logs_runtime-${service.id}`).on("change", function() {
+        refreshLogs(service, this.value, false);
+      });
+      refreshLogs(service, runtime, displayResults);
+    } else {
+      initTable("result", service, runtime || currentRuntime);
+    }
   });
 }
 
@@ -139,22 +150,13 @@ function showResultsPanel(service, runtime) {
       tables["result"].ajax.reload(null, false);
     });
     getRuntimes("results", service.id, runtime || currentRuntime);
-    initTable("result", service, runtime || currentRuntime);
   });
 }
 
 // eslint-disable-next-line
 function showLogsPanel(service, runtime, displayResults) {
   createPanel("logs", `Logs - ${service.name}`, service.id, function() {
-    runtime = runtime || currentRuntime;
-    $(`#filter-${service.id}`).on("input", function() {
-      refreshLogs(service, runtime, false);
-    });
-    $(`#logs_runtime-${service.id}`).on("change", function() {
-      refreshLogs(service, this.value, false);
-    });
-    getRuntimes("logs", service.id, runtime);
-    refreshLogs(service, runtime, displayResults);
+    getRuntimes("logs", service.id, runtime = runtime || currentRuntime);
   });
 }
 

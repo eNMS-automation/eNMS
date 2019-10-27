@@ -24,6 +24,7 @@
     <span class="glyphicon glyphicon-flash"></span>
   </button>
   {% endif %}
+  {% if type != "result" %}
   <button
     class="btn btn-info btn-file"
     onclick="showFilteringPanel('{{ type }}_filtering')"
@@ -31,6 +32,7 @@
   >
     <span class="glyphicon glyphicon-search"></span>
   </button>
+  {% endif %}
   <button
     class="btn btn-info btn-file"
     onclick="refreshTable('{{ type }}', true)"

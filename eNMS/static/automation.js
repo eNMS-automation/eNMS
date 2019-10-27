@@ -117,17 +117,18 @@ function clearResults(id) {
   });
 }
 
-function getRuntimes(type, id, runtime) {
-  call(`/get_runtimes/${type}/${id}`, (runtimes) => {
-    $(`#${type}_runtime-${id}`).empty();
+function initPanel(type, service, runtime, displayResults) {
+  call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
+    $(`#${type}_runtime-${service.id}`).empty();
     runtimes.forEach((runtime) => {
-      $(`#${type}_runtime-${id}`).append(
+      $(`#${type}_runtime-${service.id}`).append(
         $("<option></option>")
           .attr("value", runtime[0])
           .text(runtime[1])
       );
     });
-    if (runtime) $(`#${type}_runtime-${id}`).val(runtime).selectpicker("refresh");
+    if (!runtime) runtime = runtimes[runtimes.length - 1][0];
+    $(`#${type}_runtime-${service.id}`).val(runtime).selectpicker("refresh");
     if (type == "logs") {
       $(`#filter-${service.id}`).on("input", function() {
         refreshLogs(service, runtime, false);
@@ -149,14 +150,14 @@ function showResultsPanel(service, runtime) {
     $(`#results_runtime-${service.id}`).on("change", function() {
       tables["result"].ajax.reload(null, false);
     });
-    getRuntimes("results", service.id, runtime || currentRuntime);
+    initPanel("results", service, runtime || currentRuntime);
   });
 }
 
 // eslint-disable-next-line
 function showLogsPanel(service, runtime, displayResults) {
   createPanel("logs", `Logs - ${service.name}`, service.id, function() {
-    getRuntimes("logs", service.id, runtime = runtime || currentRuntime);
+    initPanel("logs", service, runtime || currentRuntime, displayResults);
   });
 }
 

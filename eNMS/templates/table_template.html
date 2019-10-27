@@ -5,9 +5,8 @@
   >
     <select id="service-type" class="form-control"></select>
   </button>
-  {% endif %}
-  {% if type not in ("data", "run", "result", "syslog") %}
-  {% set func = "openServicePanel" if type == "service" else "showTypePanel" %}
+  {% endif %} {% if type not in ("data", "run", "result", "syslog") %} {% set
+  func = "openServicePanel" if type == "service" else "showTypePanel" %}
   <button
     class="btn btn-primary"
     onclick="{{ func }}('{{ type }}')"
@@ -23,8 +22,7 @@
   >
     <span class="glyphicon glyphicon-flash"></span>
   </button>
-  {% endif %}
-  {% if type != "result" %}
+  {% endif %} {% if type != "result" %}
   <button
     class="btn btn-info btn-file"
     onclick="showFilteringPanel('{{ type }}_filtering')"
@@ -48,11 +46,8 @@
   >
     <span class="glyphicon glyphicon-adjust"></span>
   </button>
-  {% endif %}
-  {% if type == "result" %}
-  <button
-    style="background:transparent; border:none; color:transparent;"
-  >
+  {% endif %} {% if type == "result" %}
+  <button style="background:transparent; border:none; color:transparent;">
     {{ form.results_runtime(class="form-control add-id") }}
   </button>
   {% endif %}

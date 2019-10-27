@@ -102,7 +102,7 @@ function showDeviceConfiguration(device) {
     device.id,
     function() {
       call(`/get_device_data/configuration/${device.id}`, (config) => {
-        console.log(config)
+        console.log(config);
         $(`#content-${device.id}`).html(
           `<pre style="height:100%">${config}</pre>`
         );
@@ -141,14 +141,9 @@ function showDeviceResultsPanel(device) {
 
 // eslint-disable-next-line
 function showDataPanel(device) {
-  createPanel(
-    "data",
-    `Data - ${device.name}`,
-    null,
-    function() {
-      initTable("data", device);
-    }
-  );
+  createPanel("data", `Data - ${device.name}`, null, function() {
+    initTable("data", device);
+  });
 }
 
 // eslint-disable-next-line

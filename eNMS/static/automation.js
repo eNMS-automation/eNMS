@@ -128,7 +128,9 @@ function initPanel(type, service, runtime, displayResults) {
       );
     });
     if (!runtime) runtime = runtimes[runtimes.length - 1][0];
-    $(`#${type}_runtime-${service.id}`).val(runtime).selectpicker("refresh");
+    $(`#${type}_runtime-${service.id}`)
+      .val(runtime)
+      .selectpicker("refresh");
     if (type == "logs") {
       $(`#filter-${service.id}`).on("input", function() {
         refreshLogs(service, runtime, false);
@@ -164,7 +166,9 @@ function showLogsPanel(service, runtime, displayResults) {
 // eslint-disable-next-line
 function refreshLogs(service, runtime, displayResults) {
   if (!$(`#logs-form-${service.id}`).length) return;
-  fCall(`/get_service_logs/${runtime}`, `#logs-form-${service.id}`, function(result) {
+  fCall(`/get_service_logs/${runtime}`, `#logs-form-${service.id}`, function(
+    result
+  ) {
     $(`#log-${service.id}`).text(result.logs);
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);

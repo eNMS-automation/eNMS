@@ -347,6 +347,8 @@ class Run(AbstractBase):
         return {"success": all(results), "runtime": self.runtime}
 
     def create_result(self, results, device=None):
+        if self.workflow and not device:
+            return
         self.success = results["success"]
         result_kw = {"run": self, "result": results, "service": self.service_id}
         if self.service.type == "workflow":
@@ -436,9 +438,10 @@ class Run(AbstractBase):
         if device:
             log += f" - DEVICE {device.name}"
         log += f" : {content}"
-        app.run_logs[self.runtime].append(log)
         if self.workflow:
             app.run_logs[self.parent_runtime].append(log)
+        else:
+            app.run_logs[self.runtime].append(log)
 
     def build_log(self, content, device):
         log = self.service

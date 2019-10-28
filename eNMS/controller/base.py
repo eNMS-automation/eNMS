@@ -574,17 +574,16 @@ class BaseController:
             order_function = None
         constraints = self.build_filtering_constraints(table, kwargs)
         if table == "result":
-            constraints.extend(
-                [
-                    getattr(
-                        models["result"],
-                        "service"
-                        if "service" in kwargs["instance[type]"]
-                        else kwargs["instance[type]"],
-                    ).has(id=kwargs["instance[id]"]),
-                    models["result"].parent_runtime == kwargs["runtime"],
-                ]
+            constraints.append(
+                getattr(
+                    models["result"],
+                    "service"
+                    if "service" in kwargs["instance[type]"]
+                    else kwargs["instance[type]"],
+                ).has(id=kwargs["instance[id]"])
             )
+            if kwargs.get("runtime"):
+                constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         elif table == "data" and kwargs.get("instance[id]"):
             constraints.append(
                 getattr(models[table], "device").has(id=kwargs["instance[id]"])

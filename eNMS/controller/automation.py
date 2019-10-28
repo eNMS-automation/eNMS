@@ -117,12 +117,14 @@ class AutomationController(BaseController):
         return {"logs": "\n".join(filtered_logs), "refresh": not bool(result)}
 
     def get_runtimes(self, type, id):
-        if type == "device":
-            results = fetch("result", allow_none=True, all_matches=True, device_id=id)
-            runs = [result.run for result in results]
-        else:
-            runs = fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(set((run.runtime, run.name) for run in runs))
+        runs = fetch("run", allow_none=True, all_matches=True, service_id=id)
+        return sorted(
+            set(
+                (run.runtime, run.name)
+                for run in runs
+                if run.parent_runtime == run.runtime
+            )
+        )
 
     def get_result(self, id):
         return fetch("result", id=id).result

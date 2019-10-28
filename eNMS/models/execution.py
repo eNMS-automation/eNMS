@@ -92,6 +92,7 @@ class Run(AbstractBase):
     __tablename__ = type = "run"
     private = True
     id = Column(Integer, primary_key=True)
+    parent = Column(Boolean, default=False)
     restart_run_id = Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", remote_side=[id])
     creator = Column(SmallString, default="admin")
@@ -100,9 +101,8 @@ class Run(AbstractBase):
     status = Column(SmallString, default="Running")
     runtime = Column(SmallString)
     endtime = Column(SmallString)
-    parent_device_id = Column(Integer, ForeignKey("device.id"))
-    parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
-    parent_runtime = Column(SmallString)
+    parent_id = Column(Integer, ForeignKey("run.id"))
+    parent = relationship("Run", remote_side=[id])
     devices = relationship("Device", secondary=run_device_table, back_populates="runs")
     pools = relationship("Pool", secondary=run_pool_table, back_populates="runs")
     service_id = Column(Integer, ForeignKey("service.id"))
@@ -317,6 +317,7 @@ class Run(AbstractBase):
                 "parent_device": device.id,
                 "parent_runtime": self.parent_runtime,
                 "restart_run": self.restart_run,
+                "parent": self,
             },
         )
         derived_run.properties = self.properties

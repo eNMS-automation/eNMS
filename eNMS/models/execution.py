@@ -93,7 +93,6 @@ class Run(AbstractBase):
     __tablename__ = type = "run"
     private = True
     id = Column(Integer, primary_key=True)
-    parent = Column(Boolean, default=False)
     restart_run_id = Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", uselist=False, foreign_keys=restart_run_id)
     creator = Column(SmallString, default="admin")
@@ -298,7 +297,8 @@ class Run(AbstractBase):
                 results = self.notify(results)
             if self.push_to_git:
                 self.git_push(results)
-            self.create_result(results)
+            if not self.parent:
+                self.create_result(results)
             Session.commit()
         return results
 
@@ -352,8 +352,6 @@ class Run(AbstractBase):
         return {"success": all(results), "runtime": self.runtime}
 
     def create_result(self, results, device=None):
-        if self.workflow and not device:
-            return
         self.success = results["success"]
         result_kw = {"run": self, "result": results, "service": self.service_id}
         if self.service.type == "workflow":
@@ -433,7 +431,7 @@ class Run(AbstractBase):
             status = "passed" if results["success"] else "failed"
             self.run_state["progress"]["device"][status] += 1
             self.run_state["summary"][status].append(device.name)
-        self.create_result(results, device)
+            self.create_result(results, device)
         Session.commit()
         self.log("info", "FINISHED", device)
         return results["success"]

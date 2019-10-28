@@ -116,7 +116,7 @@ class Workflow(Service):
                     "service": service.id,
                     "workflow": self.id,
                     "restart_run": run.restart_run,
-                    "parent": [run],
+                    "parent": run,
                 }
                 if device:
                     kwargs["devices"] = [device.id]

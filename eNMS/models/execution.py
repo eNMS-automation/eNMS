@@ -445,12 +445,6 @@ class Run(AbstractBase):
         log += f" : {content}"
         app.run_logs[self.parent_runtime].append(log)
 
-    def build_log(self, content, device):
-        log = self.service
-        if device:
-            log += f" - DEVICE {device.name}"
-        return f"{log} : {content}"
-
     def build_notification(self, results):
         notification = [
             f"Service: {self.service.name} ({self.service.type})",

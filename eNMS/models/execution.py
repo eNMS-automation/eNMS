@@ -370,8 +370,7 @@ class Run(AbstractBase):
                     self.log("error", f"RETRY n°{i}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
-                    getattr(self, "close_connection", False)
-                    or not self.parent
+                    getattr(self, "close_connection", False) or not self.parent
                 ):
                     self.close_device_connection(device)
                 self.convert_result(results)
@@ -616,8 +615,8 @@ class Run(AbstractBase):
         def recursive_search(run: "Run"):
             if not run:
                 return None
-            query = Session.query(models["run"]).filter_by(
-                parent_id=run.id
+            query = Session.query(models["run"]).filter(
+                models["run"].parent_id == run.parent_id
             )
             if workflow or self.workflow:
                 name = workflow or self.workflow.name

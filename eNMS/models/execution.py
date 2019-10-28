@@ -44,7 +44,7 @@ class Result(AbstractBase):
     result = Column(MutableDict)
     run_id = Column(Integer, ForeignKey("run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
-    parent_runtime = association_proxy("run", "parent_runtime")
+    parent_runtime = association_proxy("run", "runtime")
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="results", foreign_keys="Result.device_id"
@@ -94,7 +94,7 @@ class Run(AbstractBase):
     id = Column(Integer, primary_key=True)
     parent = Column(Boolean, default=False)
     restart_run_id = Column(Integer, ForeignKey("run.id"))
-    restart_run = relationship("Run", remote_side=[id])
+    restart_run = relationship("Run", foreign_keys=restart_run_id)
     creator = Column(SmallString, default="admin")
     properties = Column(MutableDict)
     success = Column(Boolean, default=False)
@@ -102,7 +102,9 @@ class Run(AbstractBase):
     runtime = Column(SmallString)
     endtime = Column(SmallString)
     parent_id = Column(Integer, ForeignKey("run.id"))
-    parent = relationship("Run", remote_side=[id])
+    parent = relationship("Run", foreign_keys=parent_id)
+    parent_device_id = Column(Integer, ForeignKey("device.id"))
+    parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     devices = relationship("Device", secondary=run_device_table, back_populates="runs")
     pools = relationship("Pool", secondary=run_pool_table, back_populates="runs")
     service_id = Column(Integer, ForeignKey("service.id"))
@@ -120,8 +122,6 @@ class Run(AbstractBase):
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or app.get_time()
-        if not kwargs.get("parent_runtime"):
-            self.parent_runtime = self.runtime
         super().__init__(**kwargs)
 
     @property
@@ -184,10 +184,10 @@ class Run(AbstractBase):
     def run_state(self):
         if self.state:
             return self.state
-        elif self.parent_runtime == self.runtime:
-            return app.run_db[self.parent_runtime]
+        elif not self.parent:
+            return app.run_db[self.runtime]
         else:
-            return app.run_db[self.parent_runtime]["services"][self.service.id]
+            return app.run_db[self.parent.runtime]["services"][self.service.id]
 
     @property
     def stop(self):
@@ -245,12 +245,12 @@ class Run(AbstractBase):
                 "failed": 0,
                 "skipped": 0,
             }
-        if self.parent_runtime == self.runtime:
-            if self.parent_runtime in app.run_db:
+        if not self.parent:
+            if self.runtime in app.run_db:
                 return
-            app.run_db[self.parent_runtime] = state
+            app.run_db[self.runtime] = state
         else:
-            service_states = app.run_db[self.parent_runtime]["services"]
+            service_states = app.run_db[self.runtime]["services"]
             if self.service.id not in service_states:
                 service_states[self.service.id] = state
 
@@ -281,8 +281,8 @@ class Run(AbstractBase):
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["logs"] = app.run_logs.pop(self.runtime, None)
-            if self.parent_runtime == self.runtime:
-                self.state = results["state"] = app.run_db.pop(self.parent_runtime)
+            if not self.parent:
+                self.state = results["state"] = app.run_db.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {
@@ -315,7 +315,6 @@ class Run(AbstractBase):
                 "devices": [derived_device.id for derived_device in derived_devices],
                 "workflow": self.workflow.id,
                 "parent_device": device.id,
-                "parent_runtime": self.parent_runtime,
                 "restart_run": self.restart_run,
                 "parent": self,
             },
@@ -369,7 +368,7 @@ class Run(AbstractBase):
                 results = self.service.job(self, payload, *args)
                 if device and (
                     getattr(self, "close_connection", False)
-                    or self.runtime == self.parent_runtime
+                    or not self.parent
                 ):
                     self.close_device_connection(device)
                 self.convert_result(results)
@@ -439,8 +438,8 @@ class Run(AbstractBase):
         if device:
             log += f" - DEVICE {device.name}"
         log += f" : {content}"
-        if self.workflow:
-            app.run_logs[self.parent_runtime].append(log)
+        if self.parent:
+            app.run_logs[self.parent.runtime].append(log)
         else:
             app.run_logs[self.runtime].append(log)
 
@@ -624,7 +623,7 @@ class Run(AbstractBase):
             if not run:
                 return None
             query = Session.query(models["run"]).filter_by(
-                parent_runtime=run.parent_runtime
+                parent_id=run.id
             )
             if workflow or self.workflow:
                 name = workflow or self.workflow.name
@@ -713,7 +712,7 @@ class Run(AbstractBase):
             netmiko_connection.enable()
         if self.config_mode:
             netmiko_connection.config_mode()
-        app.connections_cache["netmiko"][self.parent_runtime][
+        app.connections_cache["netmiko"][self.parent.id][
             device.name
         ] = netmiko_connection
         return netmiko_connection
@@ -741,7 +740,7 @@ class Run(AbstractBase):
             optional_args=optional_args,
         )
         napalm_connection.open()
-        app.connections_cache["napalm"][self.parent_runtime][
+        app.connections_cache["napalm"][self.parent.id][
             device.name
         ] = napalm_connection
         return napalm_connection
@@ -765,7 +764,7 @@ class Run(AbstractBase):
                 self.disconnect(library, device, connection)
 
     def get_connection(self, library, device):
-        cache = app.connections_cache[library].get(self.parent_runtime, {})
+        cache = app.connections_cache[library].get(self.parent.id, {})
         return cache.get(device.name)
 
     def close_device_connection(self, device):
@@ -777,7 +776,7 @@ class Run(AbstractBase):
     def disconnect(self, library, device, connection):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
-            app.connections_cache[library][self.parent_runtime].pop(device.name)
+            app.connections_cache[library][self.parent.id].pop(device.name)
             self.log("info", f"Closed {library} connection", device)
         except Exception as exc:
             self.log(

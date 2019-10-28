@@ -118,13 +118,7 @@ class AutomationController(BaseController):
 
     def get_runtimes(self, type, id):
         runs = fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(
-            set(
-                (run.runtime, run.name)
-                for run in runs
-                if run.parent_runtime == run.runtime
-            )
-        )
+        return sorted(set((run.runtime, run.name) for run in runs if not run.parent))
 
     def get_result(self, id):
         return fetch("result", id=id).result

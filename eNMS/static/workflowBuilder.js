@@ -383,16 +383,16 @@ function stopWorkflow() {
 }
 
 // eslint-disable-next-line
-function changeSkipValue(skip) {
+function skipServices() {
   const selectedNodes = graph.getSelectedNodes().filter((x) => !isNaN(x));
-  call(`/skip_services/${skip}/${selectedNodes.join("-")}`, () => {
+  call(`/skip_services/${selectedNodes.join("-")}`, (skip) => {
     workflow.services
       .filter((j) => selectedNodes.includes(j.id))
       .map((j) => {
         j.skip = skip == "skip";
       });
     resetDisplay();
-    alertify.notify(`Services ${skip}ped`, "success", 5);
+    alertify.notify(`Services ${skip}ped.`, "success", 5);
   });
 }
 
@@ -607,8 +607,7 @@ Object.assign(action, {
     showTypePanel("workflow_edge", edge.id);
   },
   "Delete Label": deleteLabel,
-  Skip: () => changeSkipValue("skip"),
-  Unskip: () => changeSkipValue("unskip"),
+  Skip: () => skipServices(),
   "Zoom In": () => graph.zoom(0.2),
   "Zoom Out": () => graph.zoom(-0.2),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),

@@ -178,9 +178,12 @@ class AutomationController(BaseController):
                 workflow.last_modified = now
         return now
 
-    def skip_services(self, skip, service_ids):
-        for service_id in service_ids.split("-"):
-            fetch("service", id=service_id).skip = skip == "skip"
+    def skip_services(self, service_ids):
+        services = [fetch("service", id=id) for id in service_ids.split("-")]
+        skip = not all(service.skip for service in services)
+        for service in services:
+            service.skip = skip
+        return "skip" if skip else "unskip"
 
     def get_service_state(self, service_id, runtime="latest"):
         state, service = None, fetch("service", id=service_id)

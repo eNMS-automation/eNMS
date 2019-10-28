@@ -521,10 +521,10 @@ function deleteSelection() {
   graph.getSelectedNodes().map((node) => deleteNode(node));
   graph.getSelectedEdges().map((edge) => deleteEdge(edge));
   graph.deleteSelected();
-  switchMode(currentMode);
+  switchMode(currentMode, true);
 }
 
-function switchMode(mode) {
+function switchMode(mode, noNotification) {
   const oldMode = currentMode;
   currentMode =
     mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
@@ -536,13 +536,15 @@ function switchMode(mode) {
       .toggleClass("glyphicon-move")
       .toggleClass("glyphicon-random");
   }
+  let notification;
   if (currentMode == "motion") {
     graph.addNodeMode();
-    alertify.notify("Mode: Motion.", "success", 5);
+    notification = "Mode: Motion.";
   } else {
     graph.addEdgeMode();
-    alertify.notify(`Mode: Creation of '${currentMode}' Edge.`, "success", 5);
+    notification = `Mode: Creation of '${currentMode}' Edge.`;
   }
+  if (!noNotification) alertify.notify(notification, "success", 5);
 }
 
 $("#current-workflow").on("change", function() {

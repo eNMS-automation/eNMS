@@ -70,18 +70,6 @@ for (const [key, value] of Object.entries(iconSizes)) {
 
 const routerIcon = window["icon_router"];
 
-L.PolylineClusterable = L.Polyline.extend({
-  _originalInitialize: L.Polyline.prototype.initialize,
-  initialize: function(bounds, options) {
-    this._originalInitialize(bounds, options);
-    this._latlng = this.getBounds().getCenter();
-  },
-  getLatLng: function() {
-    return this._latlng;
-  },
-  setLatLng: function() {},
-});
-
 // eslint-disable-next-line
 function switchLayer(layerType) {
   map.removeLayer(layer);
@@ -143,7 +131,7 @@ function createLink(link) {
     link.destination_longitude
   );
   const pointList = [pointA, pointB];
-  const polyline = new L.PolylineClusterable(pointList, {
+  const polyline = new L.Polyline(pointList, {
     color: link.color,
     weight: 3,
     opacity: 1,

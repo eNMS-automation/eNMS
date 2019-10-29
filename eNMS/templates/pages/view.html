@@ -1,16 +1,11 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock
 title %} {% block stylesheets %} {{ super() }}
-{% if view_type in ("2D", "site") %}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
 />
-{% endif %}
 <style>
   #map {
-    height: 85vh;
-  }
-  #network {
     height: 85vh;
   }
 </style>
@@ -26,7 +21,6 @@ title %} {% block stylesheets %} {{ super() }}
       <li><a tabindex="-1" href="#">NASA</a></li>
     </ul>
   </li>
-  {% if view_type == "2D" %}
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu menu-layer" tabindex="-1" href="#"
       >Type of Marker<span class="caret-right"></span
@@ -37,7 +31,6 @@ title %} {% block stylesheets %} {{ super() }}
       <li><a tabindex="-1" href="#">Circle Marker</a></li>
     </ul>
   </li>
-  {% endif %}
   <li class="menu rc-site-menu"><a tabindex="-1" href="#">Enter site</a></li>
   <li class="menu rc-device-menu">
     <a tabindex="-1" href="#">Device properties</a>
@@ -70,7 +63,7 @@ title %} {% block stylesheets %} {{ super() }}
               ></p
             ></strong>
           </div>
-          {% if view_type in ("2D", "3D") %}
+          {% if view_type == "network" %}
           <div
             class="btn-group-horizontal"
             style="z-index:1; position: absolute; top: 10px; left: 5vw"
@@ -101,11 +94,7 @@ title %} {% block stylesheets %} {{ super() }}
   let view = "{{ view }}";
   let viewType = "{{ view_type }}";
 </script>
-{% if view_type == '3D' %}
-<script src="{{ url_for('static', filename='lib/webgl-earth/api.min.js') }}"></script>
-{% else %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
-{% endif %}
 <script src="{{ url_for('static', filename='view.js') }}"></script>
 <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
 {% endblock javascripts %}

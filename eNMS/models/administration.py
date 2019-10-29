@@ -57,7 +57,6 @@ class Parameters(AbstractBase):
     default_longitude = Column(Float)
     default_latitude = Column(Float)
     default_zoom_level = Column(Integer, default=0)
-    default_view = Column(SmallString)
     default_marker = Column(SmallString)
     git_configurations = Column(SmallString)
     git_automation = Column(SmallString)

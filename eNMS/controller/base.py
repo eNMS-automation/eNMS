@@ -67,7 +67,6 @@ class BaseController:
     default_longitude = environ.get("DEFAULT_LONGITUDE", -96.0)
     default_latitude = environ.get("DEFAULT_LATITUDE", 33.0)
     default_zoom_level = environ.get("DEFAULT_ZOOM_LEVEL", 5)
-    default_view = environ.get("DEFAULT_VIEW", "2D")
     default_marker = environ.get("DEFAULT_MARKER", "Image")
     documentation_url = environ.get(
         "DOCUMENTATION_URL", "https://enms.readthedocs.io/en/latest/"
@@ -265,7 +264,7 @@ class BaseController:
         for icon in device_icons:
             point_style = Style()
             point_style.labelstyle.color = Color.blue
-            path_icon = f"{self.path}/eNMS/static/images/2D/{icon}.gif"
+            path_icon = f"{self.path}/eNMS/static/images/view/{icon}.gif"
             point_style.iconstyle.icon.href = path_icon
             self.google_earth_styles[icon] = point_style
 

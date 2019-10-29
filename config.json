@@ -74,10 +74,10 @@
     "unseal": false
   },
   "view": {
-    "default_longitude": -96.0,
-    "default_latitude": 33.0,
-    "default_zoom_level": 5,
-    "default_view": "2D",
-    "default_marker": "Image"
+    "longitude": -96.0,
+    "latitude": 33.0,
+    "zoom_level": 5,
+    "view": "2D",
+    "marker": "Image"
   }
 }

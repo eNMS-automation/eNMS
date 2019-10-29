@@ -57,11 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    custom_code_path = environ.get("CUSTOM_CODE_PATH")
-    default_longitude = environ.get("DEFAULT_LONGITUDE", -96.0)
-    default_latitude = environ.get("DEFAULT_LATITUDE", 33.0)
-    default_zoom_level = environ.get("DEFAULT_ZOOM_LEVEL", 5)
-    default_marker = environ.get("DEFAULT_MARKER", "Image")
     documentation_url = environ.get(
         "DOCUMENTATION_URL", "https://enms.readthedocs.io/en/latest/"
     )

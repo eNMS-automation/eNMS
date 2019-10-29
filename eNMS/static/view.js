@@ -35,29 +35,7 @@ let layer;
 let markerType;
 let map;
 
-call("/get/parameters/1", function(parameters) {
-  markerType = parameters.default_marker;
-  map = L.map("map", { preferCanvas: true }).setView(
-    [parameters.default_latitude, parameters.default_longitude],
-    parameters.default_zoom_level
-  );
-  layer = L.tileLayer(layers["osm"]);
-  map.addLayer(layer);
 
-  map.on("click", function(e) {
-    selectedObject = null;
-  });
-
-  map.on("contextmenu", function() {
-    if (!selectedObject) {
-      $(".menu").hide();
-      $(".geo-menu").show();
-    }
-  });
-
-  updateView();
-
-});
 
 for (const [key, value] of Object.entries(iconSizes)) {
   window[`icon_${key}`] = L.icon({
@@ -230,3 +208,26 @@ function filter(type) {
 function showViewFilteringPanel(type) {
   showFilteringPanel(`${type}_filtering`);
 }
+
+(function() {
+  call("/get/parameters/1", function(parameters) {
+    markerType = parameters.default_marker;
+    map = L.map("map", { preferCanvas: true }).setView(
+      [parameters.default_latitude, parameters.default_longitude],
+      parameters.default_zoom_level
+    );
+    layer = L.tileLayer(layers["osm"]);
+    map.addLayer(layer);
+    map
+      .on("click", function(e) {
+      selectedObject = null;
+    })
+      .on("contextmenu", function() {
+      if (!selectedObject) {
+        $(".menu").hide();
+        $(".geo-menu").show();
+      }
+    });
+    updateView();
+  });
+})();

@@ -78,7 +78,6 @@ title %} {% block stylesheets %} {{ super() }}
 </div>
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script>
-  let view = "{{ view }}";
   let viewType = "{{ view_type }}";
 </script>
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>

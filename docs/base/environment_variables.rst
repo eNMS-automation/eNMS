@@ -32,7 +32,6 @@ Complete List of Environment Variables
   - export USE_TACACS=1
   - export TACACS_ADDR=122.10.10.10
   - export TACACS_PASSWORD=tacacs_password
-  - export USE_SYSLOG=0
   - export SYSLOG_ADDR=0.0.0.0
   - export SYSLOG_PORT=514
   - export POOL_FILTER=All objects

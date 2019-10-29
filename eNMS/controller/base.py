@@ -57,17 +57,11 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    opennms_login = environ.get("OPENNMS_LOGIN")
-    opennms_devices = environ.get("OPENNMS_DEVICES", "")
-    opennms_rest_api = environ.get("OPENNMS_REST_API")
     playbook_path = environ.get("PLAYBOOK_PATH")
     server_addr = environ.get("SERVER_ADDR", "http://SERVER_IP")
-    syslog_addr = environ.get("SYSLOG_ADDR", "0.0.0.0")
-    syslog_port = int(environ.get("SYSLOG_PORT", 514))
     tacacs_addr = environ.get("TACACS_ADDR")
     tacacs_password = environ.get("TACACS_PASSWORD")
     use_ldap = int(environ.get("USE_LDAP", False))
-    use_syslog = int(environ.get("USE_SYSLOG", False))
     use_tacacs = int(environ.get("USE_TACACS", False))
     vault_addr = environ.get("VAULT_ADDR")
 
@@ -178,7 +172,7 @@ class BaseController:
             self.init_ldap_client()
         if self.config["vault"]["active"]:
             self.init_vault_client()
-        if self.use_syslog:
+        if self.config["syslog"]["active"]:
             self.init_syslog_server()
         if self.config["paths"]["custom_code"]:
             sys_path.append(self.config["paths"]["custom_code"])
@@ -375,7 +369,7 @@ class BaseController:
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def init_syslog_server(self):
-        self.syslog_server = SyslogServer(self.syslog_addr, self.syslog_port)
+        self.syslog_server = SyslogServer(self.config["syslog"]["address"], self.config["syslog"]["port"])
         self.syslog_server.start()
 
     def update_parameters(self, **kwargs):

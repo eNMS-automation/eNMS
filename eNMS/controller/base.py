@@ -57,18 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    mail_server = environ.get("MAIL_SERVER", "smtp.googlemail.com")
-    mail_port = int(environ.get("MAIL_PORT", "587"))
-    mail_use_tls = int(environ.get("MAIL_USE_TLS", True))
-    mail_username = environ.get("MAIL_USERNAME")
-    mail_password = environ.get("MAIL_PASSWORD")
-    mail_sender = environ.get("MAIL_SENDER", "enms@enms.fr")
-    mail_recipients = environ.get("MAIL_RECIPIENTS", "")
-    mattermost_url = environ.get("MATTERMOST_URL")
-    mattermost_channel = environ.get("MATTERMOST_CHANNEL")
-    mattermost_verify_certificate = int(
-        environ.get("MATTERMOST_VERIFY_CERTIFICATE", True)
-    )
     opennms_login = environ.get("OPENNMS_LOGIN")
     opennms_devices = environ.get("OPENNMS_DEVICES", "")
     opennms_rest_api = environ.get("OPENNMS_REST_API")

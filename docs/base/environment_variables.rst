@@ -29,9 +29,6 @@ Complete List of Environment Variables
   - export DATABASE_URL=sqlite:///database.db?check_same_thread=False
   - export PATH_CUSTOM_PROPERTIES=/home/user/eNMS/eNMS_properties.yml
   - export MAIL_PASSWORD=eNMS-user
-  - export MATTERMOST_URL=https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w
-  - export MATTERMOST_CHANNEL=
-  - export MATTERMOST_VERIFY_CERTIFICATE=0
   - export USE_TACACS=1
   - export TACACS_ADDR=122.10.10.10
   - export TACACS_PASSWORD=tacacs_password

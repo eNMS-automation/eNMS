@@ -491,10 +491,10 @@ class Run(AbstractBase):
                 )
             else:
                 result = post(
-                    app.mattermost_url,
-                    verify=app.mattermost_verify_certificate,
+                    app.config["mattermost"]["url"],
+                    verify=app.config["mattermost"]["verify_certificate"],
                     data=dumps(
-                        {"channel": app.mattermost_channel, "text": notification}
+                        {"channel": app.config["mattermost"]["channel"], "text": notification}
                     ),
                 )
             results["notification"].update({"success": True, "result": result})

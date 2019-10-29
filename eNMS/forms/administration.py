@@ -27,11 +27,6 @@ class SshParametersForm(BaseForm, ParametersForm):
 
 class NotificationsParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="notifications")
-    mail_sender = StringField("Mail Sender Address")
-    mail_recipients = StringField("Mail Recipients (separated by comma)")
-    mattermost_url = StringField("Mattermost URL")
-    mattermost_channel = StringField("Mattermost Channel")
-    mattermost_verify_certificate = BooleanField("Mattermost: verify certificate")
     slack_token = StringField("Slack Token")
     slack_channel = StringField("Slack Channel")
 

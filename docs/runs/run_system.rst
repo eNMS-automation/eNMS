@@ -34,12 +34,6 @@ To set up the mail system, you must set the following variables in the configura
 ``server``, ``port``, ``use_tls``, ``username``, ``sender``, ``recipients``.
 Besides, you must set the password via the ``MAIL_PASSWORD`` environment variable.
 
-From the :guilabel:`Admin / Administration` panel, you must configure the sender and recipient addresses of the mail (Mail notification), as well as an Incoming webhook URL and channel for the Mattermost/Slack notifications.
-
-.. image:: /_static/services/service_system/notifications.png
-   :alt: Notification
-   :align: center
-
 The ``Mail Recipients`` parameter must be set for the mail system to work; the `Admin / Administration` panel parameter can
 also be overriden from Step2 of the Service Instance and Workflow configuration panels. For Mail notification, there is
 also an option in the Service Instance configuration to display only failed objects in the email summary versus seeing a

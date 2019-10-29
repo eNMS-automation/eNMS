@@ -202,25 +202,23 @@ function showViewFilteringPanel(type) {
 }
 
 (function() {
-  call("/get/parameters/1", function(parameters) {
-    console.log(parameters)
-    markerType = parameters.view.marker;
-    map = L.map("map", { preferCanvas: true }).setView(
-      [parameters.view.latitude, parameters.view.longitude],
-      parameters.view.zoom_level
-    );
-    layer = L.tileLayer(layers["osm"]);
-    map
-      .addLayer(layer)
-      .on("click", function(e) {
-        selectedObject = null;
-      })
-      .on("contextmenu", function() {
-        if (!selectedObject) {
-          $(".menu").hide();
-          $(".geo-menu").show();
-        }
-      });
-    updateView();
-  });
+  console.log(parameters)
+  markerType = parameters.view.marker;
+  map = L.map("map", { preferCanvas: true }).setView(
+    [parameters.view.latitude, parameters.view.longitude],
+    parameters.view.zoom_level
+  );
+  layer = L.tileLayer(layers["osm"]);
+  map
+    .addLayer(layer)
+    .on("click", function(e) {
+      selectedObject = null;
+    })
+    .on("contextmenu", function() {
+      if (!selectedObject) {
+        $(".menu").hide();
+        $(".geo-menu").show();
+      }
+    });
+  updateView();
 })();

@@ -12,17 +12,6 @@ updateProperty: false
 */
 
 // eslint-disable-next-line
-function showParametersPanel(type) {
-  createPanel(type, `${type} Parameters`, 0, () => {
-    call("/get/parameters/1", function(parameters) {
-      for (const [property, value] of Object.entries(parameters)) {
-        updateProperty($(`#${property}`), property, value, type);
-      }
-    });
-  });
-}
-
-// eslint-disable-next-line
 function showImportTopologyPanel(type) {
   createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
     document.getElementById("file").onchange = function() {

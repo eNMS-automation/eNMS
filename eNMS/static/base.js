@@ -3,7 +3,6 @@ global
 alertify: false
 creationMode: true
 csrf_token: false
-documentationUrl: false
 filteringProperties: false
 formProperties: false
 job: false
@@ -117,7 +116,8 @@ function doc(page) {
     view: "views/geographical_view.html",
     workflow_builder: "workflows/index.html",
   }[page];
-  $("#doc-link").attr("href", `${documentationUrl}${endpoint}`);
+  console.log(parameters)
+  $("#doc-link").attr("href", `${parameters.app.documentation_url}${endpoint}`);
 }
 
 $.ajaxSetup({

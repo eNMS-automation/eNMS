@@ -33,7 +33,6 @@ def configure_context_processor(flask_app):
     @flask_app.context_processor
     def inject_properties():
         return {
-            "documentation_url": app.documentation_url,
             "property_types": property_types,
             "form_properties": form_properties,
             "table_properties": table_properties,

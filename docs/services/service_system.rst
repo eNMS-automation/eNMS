@@ -17,7 +17,7 @@ Custom Services Path
 --------------------
 
 By default, eNMS will scan the ``eNMS/eNMS/services`` folder to instantiate all services you created in that folder.
-If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory, so that you can safely pull the latest code from Github), you can set the ``CUSTOM_SERVICES_PATH`` environment variable to the path of the folder that contains your custom services.
+If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory, so that you can safely pull the latest code from Github), you can set the ``custom_services`` variable in the configuration.
 
 Service Management
 ------------------

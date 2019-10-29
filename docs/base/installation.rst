@@ -207,5 +207,5 @@ If I only want to Import new devices or links to eNMS, perform import of the top
 Change the documentation base URL
 ---------------------------------
 
-If you prefer to host your own version of the documentation, you can configure the ``DOCUMENTATION_URL`` environment variable.
+If you prefer to host your own version of the documentation, you can set the ``documentation_url`` variable in the configuration.
 By default, this variable is set to https://enms.readthedocs.io/en/latest/: it points to the online documentation.

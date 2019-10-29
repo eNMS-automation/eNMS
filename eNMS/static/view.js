@@ -202,7 +202,6 @@ function showViewFilteringPanel(type) {
 }
 
 (function() {
-  console.log(parameters)
   markerType = parameters.view.marker;
   map = L.map("map", { preferCanvas: true }).setView(
     [parameters.view.latitude, parameters.view.longitude],

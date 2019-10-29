@@ -89,7 +89,6 @@
     {% block javascripts %}
     <script>
       const page = "{{ endpoint }}";
-      const documentationUrl = "{{ documentation_url }}";
       const parameters = {{ parameters|tojson|safe }};
       const propertyTypes = {{ property_types|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};

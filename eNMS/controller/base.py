@@ -57,10 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    documentation_url = environ.get(
-        "DOCUMENTATION_URL", "https://enms.readthedocs.io/en/latest/"
-    )
-    custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
     log_level = environ.get("LOG_LEVEL", "debug")
     git_automation = environ.get("GIT_AUTOMATION")
     git_operational_data = environ.get("GIT_OPERATIONAL_DATA")
@@ -374,8 +370,8 @@ class BaseController:
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
-        if self.custom_services_path:
-            path_services.append(Path(self.custom_services_path))
+        if self.config["paths"]["custom_services"]:
+            path_services.append(Path(self.config["paths"]["custom_services"]))
         for path in path_services:
             for file in path.glob("**/*.py"):
                 if "init" in str(file):

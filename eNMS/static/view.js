@@ -39,18 +39,12 @@ let map;
 
 call("/get/parameters/1", function(parameters) {
   markerType = parameters.default_marker;
-  if (viewType == "3D") {
-    map = WE.map("map", { sky: true, atmosphere: true });
-    layer = WE.tileLayer(layers["gm"]);
-    layer.addTo(map);
-  } else {
-    map = L.map("map", { preferCanvas: true }).setView(
-      [parameters.default_latitude, parameters.default_longitude],
-      parameters.default_zoom_level
-    );
-    layer = L.tileLayer(layers["osm"]);
-    map.addLayer(layer);
-  }
+  map = L.map("map", { preferCanvas: true }).setView(
+    [parameters.default_latitude, parameters.default_longitude],
+    parameters.default_zoom_level
+  );
+  layer = L.tileLayer(layers["osm"]);
+  map.addLayer(layer);
 
   map.on("click", function(e) {
     selectedObject = null;
@@ -69,7 +63,7 @@ call("/get/parameters/1", function(parameters) {
 
 for (const [key, value] of Object.entries(iconSizes)) {
   window[`icon_${key}`] = L.icon({
-    iconUrl: `../static/images/2D/${key}.gif`,
+    iconUrl: `../static/images/view/${key}.gif`,
     iconSize: value,
     iconAnchor: [9, 6],
     popupAnchor: [8, -5],
@@ -92,18 +86,9 @@ L.PolylineClusterable = L.Polyline.extend({
 
 // eslint-disable-next-line
 function switchLayer(layer) {
-  if (viewType !== "3D") {
-    map.removeLayer(layer2D);
-    layer2D = L.tileLayer(layers[layer]);
-    map.addLayer(layer2D);
-  } else {
-    layer3D.removeFrom(earth);
-    layer3D = WE.tileLayer(layers[layer]);
-    layer3D.addTo(earth);
-  }
-  $(".dropdown-submenu a.menu-layer")
-    .next("ul")
-    .toggle();
+  map.removeLayer(layer);
+  layer = L.tileLayer(layers[layer]);
+  map.addLayer(layer);
 }
 
 // eslint-disable-next-line
@@ -128,29 +113,6 @@ function createNode2d(node, nodeType) {
     marker.setIcon(marker.icon);
   }
   marker.bindTooltip(node["name"], { permanent: false });
-  return marker;
-}
-
-// eslint-disable-next-line
-function createNode3d(node, nodeType) {
-  let marker;
-  if (markerType == "Image") {
-    marker = WE.marker(
-      [node.latitude, node.longitude],
-      `../static/images/3D/${nodeType == "device" ? "router" : "site"}.gif`,
-      15,
-      10
-    ).addTo(earth);
-  } else {
-    marker = WE.marker([node.latitude, node.longitude]).addTo(earth);
-  }
-  marker.on("mouseover", function(e) {
-    $("#name-box").text(node.name);
-    $("#name-box").show();
-  });
-  marker.on("mouseout", function(e) {
-    $("#name-box").hide();
-  });
   return marker;
 }
 

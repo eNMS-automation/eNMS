@@ -202,10 +202,10 @@ function showViewFilteringPanel(type) {
 }
 
 (function() {
-  markerType = parameters.view.marker;
+  markerType = config.view.marker;
   map = L.map("map", { preferCanvas: true }).setView(
-    [parameters.view.latitude, parameters.view.longitude],
-    parameters.view.zoom_level
+    [config.view.latitude, config.view.longitude],
+    config.view.zoom_level
   );
   layer = L.tileLayer(layers["osm"]);
   map

@@ -1,6 +1,6 @@
 {
   "app": {
-    "address": "http://192.168.105.2",
+    "address": "",
     "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",

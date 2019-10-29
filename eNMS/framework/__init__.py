@@ -38,7 +38,7 @@ def configure_context_processor(flask_app):
             "table_properties": table_properties,
             "filtering_properties": filtering_properties,
             "names": property_names,
-            "parameters": app.config,
+            "config": app.config,
             "relations": list(set(chain.from_iterable(relationships.values()))),
             "relationships": relationships,
             "service_types": {

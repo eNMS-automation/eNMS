@@ -117,7 +117,7 @@ function doc(page) {
     workflow_builder: "workflows/index.html",
   }[page];
   console.log(parameters)
-  $("#doc-link").attr("href", `${parameters.app.documentation_url}${endpoint}`);
+  $("#doc-link").attr("href", `${config.app.documentation_url}${endpoint}`);
 }
 
 $.ajaxSetup({

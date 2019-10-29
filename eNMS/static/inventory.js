@@ -20,7 +20,7 @@ function sshConnection(id) {
   fCall(`/connection/${id}`, `#connection-parameters-form-${id}`, function(
     result
   ) {
-    let url = result.server_addr;
+    let url = parameters.app.address;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
     }

@@ -450,7 +450,8 @@ class Run(AbstractBase):
         ]
         notification.append(self.notification_header)
         if self.include_link_in_summary:
-            link = f"Results: {app.server_addr}/view_service_results/{self.id}"
+            address = app.config["app"]["address"]
+            link = f"Results: {address}/view_service_results/{self.id}"
             notification.append(link)
         summary = self.run_state["summary"]
         failed, passed = "\n".join(summary["failed"]), "\n".join(summary["passed"])
@@ -487,14 +488,19 @@ class Run(AbstractBase):
                 )
             elif self.send_notification_method == "slack":
                 result = SlackClient(environ.get("SLACK_TOKEN")).api_call(
-                    "chat.postMessage", channel=app.config["slack"]["channel"], text=notification
+                    "chat.postMessage",
+                    channel=app.config["slack"]["channel"],
+                    text=notification,
                 )
             else:
                 result = post(
                     app.config["mattermost"]["url"],
                     verify=app.config["mattermost"]["verify_certificate"],
                     data=dumps(
-                        {"channel": app.config["mattermost"]["channel"], "text": notification}
+                        {
+                            "channel": app.config["mattermost"]["channel"],
+                            "text": notification,
+                        }
                     ),
                 )
             results["notification"].update({"success": True, "result": result})

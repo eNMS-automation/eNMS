@@ -58,7 +58,6 @@ from eNMS.controller.syslog import SyslogServer
 class BaseController:
 
     playbook_path = environ.get("PLAYBOOK_PATH")
-    server_addr = environ.get("SERVER_ADDR", "http://SERVER_IP")
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
@@ -353,7 +352,9 @@ class BaseController:
         self.ldap_client = Server(self.config["ldap"]["server"], get_info=ALL)
 
     def init_tacacs_client(self):
-        self.tacacs_client = TACACSClient(self.config["tacacs"]["address"], 49, environ.get("TACACS_PASSWORD"))
+        self.tacacs_client = TACACSClient(
+            self.config["tacacs"]["address"], 49, environ.get("TACACS_PASSWORD")
+        )
 
     def init_vault_client(self):
         self.vault_client = VaultClient()
@@ -364,7 +365,9 @@ class BaseController:
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def init_syslog_server(self):
-        self.syslog_server = SyslogServer(self.config["syslog"]["address"], self.config["syslog"]["port"])
+        self.syslog_server = SyslogServer(
+            self.config["syslog"]["address"], self.config["syslog"]["port"]
+        )
         self.syslog_server.start()
 
     def update_parameters(self, **kwargs):

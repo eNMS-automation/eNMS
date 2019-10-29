@@ -14,7 +14,6 @@ Complete List of Environment Variables
   - export UNSEAL_VAULT_KEY1=nvn7aJgA1wA/z2en/rqeNxU8zxSNcl8bH6L4Voch7LQQ
   - export UNSEAL_VAULT_KEY2=Xndum7gpEykrsRAf6UkaDOSdGFqNMuswggD7zdIYakwI
   - export UNSEAL_VAULT_KEY3=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
-  - export SERVER_ADDR=https://10.10.10.5
   # Uncomment for Postgres Mode:
   # - export DATABASE_URL=postgresql://enms:password@localhost:5432/enms
   # - export POSTGRES_PASSWORD=password

@@ -56,7 +56,7 @@ class InventoryController(BaseController):
             "device": device.name,
             "port": port,
             "redirection": self.config["gotty"]["port_redirection"],
-            "server_addr": self.server_addr,
+            "server_addr": self.config["app"]["adress"],
         }
 
     def get_device_logs(self, device_id):
@@ -170,7 +170,7 @@ class InventoryController(BaseController):
         }
         for device in list(devices):
             link = http_get(
-                f"{self.config["opennms"]["rest_api"]}/nodes/{device}/ipinterfaces",
+                f"{self.config['opennms']['rest_api']}/nodes/{device}/ipinterfaces",
                 headers={"Accept": "application/json"},
                 auth=(login, password),
             ).json()

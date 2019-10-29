@@ -33,31 +33,23 @@ const iconSizes = {
 let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
-let currentView;
-let dimension;
 let layer2D = L.tileLayer(layers["osm"]);
 let layer3D = WE.tileLayer(layers["gm"]);
 let markerType;
-let earth;
 let map;
 let markers = L.markerClusterGroup();
 
 call("/get/parameters/1", function(parameters) {
-  currentView = parameters.default_view;
-  dimension = currentView.substring(0, 2);
   markerType = parameters.default_marker;
-  map = L.map("map", { preferCanvas: true }).setView(
-    [parameters.default_latitude, parameters.default_longitude],
-    parameters.default_zoom_level
-  );
-  earth = WE.map("earth", { sky: true, atmosphere: true });
-  map.addLayer(layer2D);
-  layer3D.addTo(earth);
-
-  if (currentView == "3D") {
-    $("#map").css("visibility", "hidden");
+  if (viewType == "3D") {
+    map = WE.map("map", { sky: true, atmosphere: true });
+    layer3D.addTo(map);
   } else {
-    $("#earth").css("visibility", "hidden");
+    map = L.map("map", { preferCanvas: true }).setView(
+      [parameters.default_latitude, parameters.default_longitude],
+      parameters.default_zoom_level
+    );
+    map.addLayer(layer2D);
   }
 
   map.on("click", function(e) {

@@ -1,25 +1,18 @@
 {% extends "base_site.html" %} {% block title %} Geographical View {% endblock
 title %} {% block stylesheets %} {{ super() }}
-{% if view_type == '2D' %}
+{% if view_type in ("2D", "site") %}
 <link
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
 />
-<link
-  href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}"
-  rel="stylesheet"
-/>
-{% endif}
+{% endif %}
 <style>
-  {% if view_type == '2D' %}
   #map {
     height: 85vh;
   }
-  {% else %}
   #network {
     height: 85vh;
   }
-  {% endif %}
 </style>
 {% endblock stylesheets %} {% block content %}
 <ul id="contextMenu" class="dropdown-menu" role="menu">
@@ -33,7 +26,7 @@ title %} {% block stylesheets %} {{ super() }}
       <li><a tabindex="-1" href="#">NASA</a></li>
     </ul>
   </li>
-  {% if view_type == '2D' %}
+  {% if view_type == "2D" %}
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu menu-layer" tabindex="-1" href="#"
       >Type of Marker<span class="caret-right"></span
@@ -62,19 +55,9 @@ title %} {% block stylesheets %} {{ super() }}
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_content">
-          <div class="flip-container">
-            <div class="flipper">
-              {% set earth_front = parameters.default_view == "3D" %}
-              <div
-                class="{{ 'front' if earth_front else 'back' }}"
-                id="earth"
-              ></div>
-              <div
-                class="{{ 'back' if earth_front else 'front' }}"
-                id="map"
-              ></div>
-            </div>
-          </div>
+          <div
+            id="map"
+          ></div>
           <div
             class="btn-group"
             style="z-index:500; position: absolute; left:35vw; top:10px;"
@@ -87,7 +70,7 @@ title %} {% block stylesheets %} {{ super() }}
               ></p
             ></strong>
           </div>
-          {% if view_type == 'network' %}
+          {% if view_type in ("2D", "3D") %}
           <div
             class="btn-group-horizontal"
             style="z-index:1; position: absolute; top: 10px; left: 5vw"
@@ -118,9 +101,12 @@ title %} {% block stylesheets %} {{ super() }}
   let view = "{{ view }}";
   let viewType = "{{ view_type }}";
 </script>
+{% if view_type == '3D' %}
 <script src="{{ url_for('static', filename='lib/webgl-earth/api.min.js') }}"></script>
+{% else %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
+{% endif %}
 <script src="{{ url_for('static', filename='view.js') }}"></script>
 <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
 {% endblock javascripts %}

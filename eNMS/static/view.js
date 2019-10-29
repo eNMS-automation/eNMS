@@ -36,7 +36,6 @@ let polylinesArray = [];
 let layer;
 let markerType;
 let map;
-let markers = L.markerClusterGroup();
 
 call("/get/parameters/1", function(parameters) {
   markerType = parameters.default_marker;

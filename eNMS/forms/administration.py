@@ -19,18 +19,6 @@ class ParametersForm:
     action = "saveParameters"
 
 
-class SshParametersForm(BaseForm, ParametersForm):
-    form_type = HiddenField(default="ssh")
-    gotty_start_port = FloatField("Start port")
-    gotty_end_port = FloatField("End port")
-
-
-class NotificationsParametersForm(BaseForm, ParametersForm):
-    form_type = HiddenField(default="notifications")
-    slack_token = StringField("Slack Token")
-    slack_channel = StringField("Slack Channel")
-
-
 class DatabaseDeletionForm(BaseForm):
     action = "databaseDeletion"
     form_type = HiddenField(default="database_deletion")

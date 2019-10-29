@@ -55,7 +55,6 @@
   },
   "slack": {
     "channel": "",
-    "token": ""
   },
   "syslog": {
     "active": false,

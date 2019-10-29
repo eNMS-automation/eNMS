@@ -62,8 +62,6 @@ class BaseController:
     opennms_rest_api = environ.get("OPENNMS_REST_API")
     playbook_path = environ.get("PLAYBOOK_PATH")
     server_addr = environ.get("SERVER_ADDR", "http://SERVER_IP")
-    slack_token = environ.get("SLACK_TOKEN")
-    slack_channel = environ.get("SLACK_CHANNEL")
     syslog_addr = environ.get("SYSLOG_ADDR", "0.0.0.0")
     syslog_port = int(environ.get("SYSLOG_PORT", 514))
     tacacs_addr = environ.get("TACACS_ADDR")

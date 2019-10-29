@@ -486,8 +486,8 @@ class Run(AbstractBase):
                     file_content=app.str_dict(results),
                 )
             elif self.send_notification_method == "slack":
-                result = SlackClient(app.slack_token).api_call(
-                    "chat.postMessage", channel=app.slack_channel, text=notification
+                result = SlackClient(environ.get("SLACK_TOKEN")).api_call(
+                    "chat.postMessage", channel=app.config["slack"]["channel"], text=notification
                 )
             else:
                 result = post(

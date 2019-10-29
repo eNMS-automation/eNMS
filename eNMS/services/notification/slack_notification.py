@@ -1,3 +1,4 @@
+from os import environ
 from slackclient import SlackClient
 from sqlalchemy import ForeignKey, Integer
 from wtforms import HiddenField, StringField
@@ -23,8 +24,8 @@ class SlackNotificationService(Service):
     __mapper_args__ = {"polymorphic_identity": "slack_notification_service"}
 
     def job(self, run, payload, device=None):
-        slack_client = SlackClient(run.token or app.slack_token)
-        channel = run.sub(run.channel, locals()) or app.slack_channel
+        slack_client = SlackClient(run.token or environ.get("SLACK_TOKEN"))
+        channel = run.sub(run.channel, locals()) or app.config["slack"]["channel"]
         run.log("info", f"Sending SLACK notification on {channel}", device)
         result = slack_client.api_call(
             "chat.postMessage", channel=channel, text=run.sub(run.body, locals())

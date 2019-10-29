@@ -173,6 +173,7 @@ class Task(AbstractBase):
                 "5": "fri",
                 "6": "sat",
                 "7": "sun",
+                "*": "*",
             }
             expression[-1] = ",".join(mapping[day] for day in expression[-1].split(","))
             trigger = {"trigger": CronTrigger.from_crontab(" ".join(expression))}

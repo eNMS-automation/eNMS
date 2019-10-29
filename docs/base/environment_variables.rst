@@ -10,7 +10,6 @@ Complete List of Environment Variables
 ::
 
   - export SECRET_KEY=your_secret_key123
-  - export USE_VAULT=1
   - export VAULT_ADDR=http://127.0.0.1:8200
   - export VAULT_TOKEN=e1c70d27-7c7f-6f6a-fb18-b0c0382667b7
   - export UNSEAL_VAULT=1

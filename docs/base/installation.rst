@@ -55,35 +55,26 @@ In production mode, the secret key is not automatically set to a default value i
  export SECRET_KEY=value-of-your-secret-key
 
 
-All credentials should be stored in a Hashicorp Vault: the environement variable ``USE_VAULT`` tells eNMS that a Vault has been setup and can be used. This variable is set to ``0`` by default in debug mode, and ``1`` in production mode.
+All credentials should be stored in a Hashicorp Vault: the config variable ``active``
+tells eNMS that a Vault has been setup and can be used.
 Follow the manufacturer's instructions and options for how to setup a Hashicorp Vault.
 
-If you want to use the Vault in debug mode, you can set it to 1:
- 
-::
-
- # set the USE_VAULT environment variable
- export USE_VAULT=1
-
-Once this is done, you must tell eNMS how to connect to the vault:
+You must tell eNMS how to connect to the Vault with
+  - the ``address`` config variable
+  - the ``VAULT_TOKEN`` environment variable
 
 ::
-
- # set the VAULT_ADDR environment variable
- export VAULT_ADDR=vault-address
 
  # set the VAULT_TOKEN environment variable
  export VAULT_TOKEN=vault-token
 
 eNMS can also unseal the Vault automatically at start time.
 This mechanism is disabled by default. To activate it, you need to:
-- set the ``UNSEAL_VAULT`` environement variable to ``1``
+- set the ``unseal`` configuration variable to ``true``
 - set the UNSEAL_VAULT_KEYx (``x`` in [1, 5]) environment variables :
 
 ::
 
- export UNSEAL_VAULT=1
- # set the UNSEAL_VAULT_KEYx environment variable
  export UNSEAL_VAULT_KEY1=key1
  export UNSEAL_VAULT_KEY2=key2
  etc

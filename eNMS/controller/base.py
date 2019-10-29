@@ -84,11 +84,9 @@ class BaseController:
     syslog_port = int(environ.get("SYSLOG_PORT", 514))
     tacacs_addr = environ.get("TACACS_ADDR")
     tacacs_password = environ.get("TACACS_PASSWORD")
-    unseal_vault = environ.get("UNSEAL_VAULT")
     use_ldap = int(environ.get("USE_LDAP", False))
     use_syslog = int(environ.get("USE_SYSLOG", False))
     use_tacacs = int(environ.get("USE_TACACS", False))
-    use_vault = int(environ.get("USE_VAULT", False))
     vault_addr = environ.get("VAULT_ADDR")
 
     log_severity = {"error": error, "info": info, "warning": warning}
@@ -196,7 +194,7 @@ class BaseController:
             self.init_tacacs_client()
         if self.use_ldap:
             self.init_ldap_client()
-        if self.use_vault:
+        if self.config["vault"]["active"]:
             self.init_vault_client()
         if self.use_syslog:
             self.init_syslog_server()
@@ -388,7 +386,7 @@ class BaseController:
         self.vault_client = VaultClient()
         self.vault_client.url = self.vault_addr
         self.vault_client.token = environ.get("VAULT_TOKEN")
-        if self.vault_client.sys.is_sealed() and self.unseal_vault:
+        if self.vault_client.sys.is_sealed() and self.config["vault"]["unseal"]:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 

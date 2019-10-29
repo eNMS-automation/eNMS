@@ -58,6 +58,3 @@ Complete List of Environment Variables
   - export GIT_AUTOMATION=git@gitlab.company.com:eNMS-group/eNMS-automation-data.git
   - export GIT_CONFIGURATIONS=git@gitlab.company.com:eNMS-group/eNMS-configurations-data.git
   - export POOL_FILTER=All objects
-  - export LOG_LEVEL=DEBUG
-  - export GUNICORN_ACCESS_LOG=logs/app_logs/access.log
-  - export GUNICORN_LOG_LEVEL=debug

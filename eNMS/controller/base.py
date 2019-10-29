@@ -57,7 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    log_level = environ.get("LOG_LEVEL", "debug")
     git_automation = environ.get("GIT_AUTOMATION")
     git_operational_data = environ.get("GIT_OPERATIONAL_DATA")
     gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
@@ -332,8 +331,9 @@ class BaseController:
         return custom_properties
 
     def init_logs(self):
+        log_level = self.config["logging"]["log_level"].upper()
         basicConfig(
-            level=getattr(import_module("logging"), self.log_level.upper()),
+            level=getattr(import_module("logging"), log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[

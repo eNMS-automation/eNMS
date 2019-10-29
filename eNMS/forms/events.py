@@ -51,17 +51,18 @@ class TaskForm(BaseForm):
 
     def validate(self):
         valid_form = super().validate()
-        no_start_date = (
-            self.scheduling_mode.data == "standard" and not self.start_date.data
-        )
-        if no_start_date:
+        no_date = self.scheduling_mode.data == "standard" and not self.start_date.data
+        if no_date:
             self.start_date.errors.append("A start date must be set.")
         no_cron_expression = (
             self.scheduling_mode.data == "cron" and not self.crontab_expression.data
         )
         if no_cron_expression:
             self.crontab_expression.errors.append("A crontab expression must be set.")
-        return valid_form and not no_start_date and not no_cron_expression
+        no_service = not self.service.data
+        if no_service:
+            self.service.errors.append("No service set.")
+        return valid_form and not any([no_date, no_cron_expression, no_service])
 
 
 class ChangelogForm(BaseForm):

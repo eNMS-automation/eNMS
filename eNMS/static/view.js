@@ -143,7 +143,7 @@ function createNode(node, nodeType) {
 }
 
 // eslint-disable-next-line
-function createLink2d(link) {
+function createLink(link) {
   let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
   let pointB = new L.LatLng(
     link.destination_latitude,
@@ -173,38 +173,6 @@ function createLink2d(link) {
     polyline.addTo(map);
   } else {
     markers.addLayer(polyline);
-  }
-}
-
-// eslint-disable-next-line
-function createLink3d(link) {
-  const color = link.color.trimRight();
-  const polygonSD = WE.polygon(
-    [
-      [link.source_latitude, link.source_longitude],
-      [link.destination_latitude, link.destination_longitude],
-      [link.source_latitude, link.source_longitude],
-    ],
-    { color: color, opacity: 20 }
-  ).addTo(earth);
-  const polygonDS = WE.polygon(
-    [
-      [link.destination_latitude, link.destination_longitude],
-      [link.source_latitude, link.source_longitude],
-      [link.destination_latitude, link.destination_longitude],
-    ],
-    { color: color, opacity: 20 }
-  ).addTo(earth);
-  polygonSD.link_id = polygonDS.link_id = link.id;
-  polylinesArray.push(polygonSD, polygonDS);
-}
-
-// eslint-disable-next-line
-function createLink(link) {
-  if (viewType == "2D") {
-    createLink2d(link);
-  } else {
-    createLink3d(link);
   }
 }
 

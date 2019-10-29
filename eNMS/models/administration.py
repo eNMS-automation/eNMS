@@ -50,9 +50,6 @@ class Parameters(AbstractBase):
     __tablename__ = type = "parameters"
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, default="default", unique=True)
-    cluster_scan_subnet = Column(SmallString)
-    cluster_scan_protocol = Column(SmallString)
-    cluster_scan_timeout = Column(Float)
     default_longitude = Column(Float)
     default_latitude = Column(Float)
     default_zoom_level = Column(Integer, default=0)
@@ -76,7 +73,6 @@ class Parameters(AbstractBase):
     mattermost_verify_certificate = Column(Boolean, default=False)
     slack_token = Column(SmallString)
     slack_channel = Column(SmallString)
-    use_cluster = Column(Boolean, default=False)
     use_syslog = Column(Boolean, default=False)
 
     def update(self, **kwargs):

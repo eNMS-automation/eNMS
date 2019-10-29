@@ -32,13 +32,13 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def cluster_monitoring(self, run, payload):
-        protocol = app.cluster_scan_protocol
+        protocol = app.config["cluster"]["scan_protocol"]
         for instance in fetch_all("instance"):
             factory(
                 "instance",
                 **get(
                     f"{protocol}://{instance.ip_address}/rest/is_alive",
-                    timeout=app.cluster_scan_timeout,
+                    timeout=app.config["cluster"]["scan_timeout"],
                 ).json(),
             )
         return {"success": True}

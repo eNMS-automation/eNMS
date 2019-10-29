@@ -33,13 +33,6 @@ class ViewParametersForm(BaseForm, ParametersForm):
     )
 
 
-class ClusterParametersForm(BaseForm, ParametersForm):
-    form_type = HiddenField(default="cluster")
-    cluster_scan_protocol = SelectField(choices=(("http", "HTTP"), ("https", "HTTPS")))
-    cluster_scan_subnet = StringField("Cluster Scan Subnet")
-    cluster_scan_timeout = FloatField("Cluster Scan Timeout")
-
-
 class GitParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="git")
     git_configurations = StringField("Git Configurations Repository")

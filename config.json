@@ -7,10 +7,10 @@
   },
   "cluster": {
     "active": false,
-    "cluster_id": true,
-    "cluster_scan_subnet": "192.168.105.0/24",
-    "cluster_scan_protocol": "http",
-    "cluster_scan_timeout": 0.05
+    "id": true,
+    "scan_subnet": "192.168.105.0/24",
+    "scan_protocol": "http",
+    "scan_timeout": 0.05
   },
   "git": {
     "automation": "",

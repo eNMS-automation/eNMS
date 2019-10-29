@@ -57,11 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    cluster = int(environ.get("CLUSTER", False))
-    cluster_id = int(environ.get("CLUSTER_ID", True))
-    cluster_scan_subnet = environ.get("CLUSER_SCAN_SUBNET", "192.168.105.0/24")
-    cluster_scan_protocol = environ.get("CLUSTER_SCAN_PROTOCOL", "http")
-    cluster_scan_timeout = environ.get("CLUSTER_SCAN_TIMEOUT", 0.05)
     config_mode = environ.get("CONFIG_MODE", "Debug")
     custom_code_path = environ.get("CUSTOM_CODE_PATH")
     default_longitude = environ.get("DEFAULT_LONGITUDE", -96.0)

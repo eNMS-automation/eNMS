@@ -226,7 +226,6 @@ class BaseController:
         self.init_forms()
         self.clean_database()
         if not fetch("user", allow_none=True, name="admin"):
-            self.init_parameters()
             self.configure_server_id()
             self.create_admin_user()
             Session.commit()
@@ -259,23 +258,6 @@ class BaseController:
     def fetch_version(self):
         with open(self.path / "package.json") as package_file:
             self.version = load(package_file)["version"]
-
-    def init_parameters(self):
-        parameters = Session.query(models["parameters"]).one_or_none()
-        if not parameters:
-            parameters = models["parameters"]()
-            parameters.update(
-                **{
-                    property: getattr(self, property)
-                    for property in model_properties["parameters"]
-                    if hasattr(self, property)
-                }
-            )
-            Session.add(parameters)
-            Session.commit()
-        else:
-            for parameter in parameters.get_properties():
-                setattr(self, parameter, getattr(parameters, parameter))
 
     def configure_server_id(self):
         factory(

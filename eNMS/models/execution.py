@@ -634,7 +634,7 @@ class Run(AbstractBase):
 
     def python_code_kwargs(_self, **locals):  # noqa: N805
         return {
-            "config": app.custom_config,
+            "config": app.config,
             "get_var": partial(_self.get_var, locals.get("payload", {})),
             "get_result": _self.get_result,
             "workflow": _self.workflow,

@@ -214,7 +214,6 @@ class BaseController:
     def __init__(self, path):
         self.path = path
         self.custom_properties = self.load_custom_properties()
-        self.custom_config = self.load_custom_config()
         self.init_scheduler()
         if self.use_tacacs:
             self.init_tacacs_client()
@@ -341,13 +340,9 @@ class BaseController:
                 except Exception as e:
                     info(f"Cannot clone {repository_type} git repository ({str(e)})")
 
-    def load_custom_config(self):
-        filepath = environ.get("PATH_CUSTOM_CONFIG")
-        if not filepath:
-            return {}
-        else:
-            with open(filepath, "r") as config:
-                return load(config)
+    def load_config(self):
+        with open(self.path / "config.json", "r") as config:
+            self.config = load(config)
 
     def load_custom_properties(self):
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")

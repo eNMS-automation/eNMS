@@ -19,11 +19,6 @@ class ParametersForm:
     action = "saveParameters"
 
 
-class GeneralForm(BaseForm, ParametersForm):
-    form_type = HiddenField(default="general")
-    custom_config = JsonField("Custom Configuration")
-
-
 class ViewParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="view")
     default_longitude = StringField("Default Longitude")

@@ -53,7 +53,6 @@ class Parameters(AbstractBase):
     cluster_scan_subnet = Column(SmallString)
     cluster_scan_protocol = Column(SmallString)
     cluster_scan_timeout = Column(Float)
-    custom_config = Column(MutableDict)
     default_longitude = Column(Float)
     default_latitude = Column(Float)
     default_zoom_level = Column(Integer, default=0)

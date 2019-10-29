@@ -355,7 +355,7 @@ class BaseController:
 
     def init_logs(self):
         basicConfig(
-            level=getattr(import_module("logging"), self.log_level),
+            level=getattr(import_module("logging"), self.log_level.upper()),
             format="%(asctime)s %(levelname)-8s %(message)s",
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[

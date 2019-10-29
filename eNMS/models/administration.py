@@ -50,10 +50,6 @@ class Parameters(AbstractBase):
     __tablename__ = type = "parameters"
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, default="default", unique=True)
-    default_longitude = Column(Float)
-    default_latitude = Column(Float)
-    default_zoom_level = Column(Integer, default=0)
-    default_marker = Column(SmallString)
     git_configurations = Column(SmallString)
     git_automation = Column(SmallString)
     gotty_start_port = Column(Integer, default=0)

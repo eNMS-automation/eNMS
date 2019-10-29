@@ -19,20 +19,6 @@ class ParametersForm:
     action = "saveParameters"
 
 
-class ViewParametersForm(BaseForm, ParametersForm):
-    form_type = HiddenField(default="view")
-    default_longitude = StringField("Default Longitude")
-    default_latitude = StringField("Default Latitude")
-    default_zoom_level = IntegerField("Default Zoom Level")
-    default_marker = SelectField(
-        choices=(
-            ("Image", "Image"),
-            ("Circle", "Circle"),
-            ("Circle Marker", "Circle Marker"),
-        )
-    )
-
-
 class GitParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="git")
     git_configurations = StringField("Git Configurations Repository")

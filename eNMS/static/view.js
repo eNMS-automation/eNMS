@@ -9,13 +9,11 @@ showFilteringPanel: false
 showPoolView: false
 showTypePanel: false
 viewType: false
-WE: false
 */
 
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
-  nasa: "http://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg",
 };
 
 const iconSizes = {
@@ -85,9 +83,9 @@ L.PolylineClusterable = L.Polyline.extend({
 });
 
 // eslint-disable-next-line
-function switchLayer(layer) {
+function switchLayer(layerType) {
   map.removeLayer(layer);
-  layer = L.tileLayer(layers[layer]);
+  layer = L.tileLayer(layers[layerType]);
   map.addLayer(layer);
 }
 

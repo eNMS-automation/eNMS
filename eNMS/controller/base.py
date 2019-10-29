@@ -59,11 +59,6 @@ class BaseController:
 
     playbook_path = environ.get("PLAYBOOK_PATH")
     server_addr = environ.get("SERVER_ADDR", "http://SERVER_IP")
-    tacacs_addr = environ.get("TACACS_ADDR")
-    tacacs_password = environ.get("TACACS_PASSWORD")
-    use_ldap = int(environ.get("USE_LDAP", False))
-    use_tacacs = int(environ.get("USE_TACACS", False))
-    vault_addr = environ.get("VAULT_ADDR")
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
@@ -166,9 +161,9 @@ class BaseController:
         self.config = self.load_config()
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
-        if self.use_tacacs:
+        if self.config["tacacs"]["active"]:
             self.init_tacacs_client()
-        if self.use_ldap:
+        if self.config["ldap"]["active"]:
             self.init_ldap_client()
         if self.config["vault"]["active"]:
             self.init_vault_client()
@@ -358,11 +353,11 @@ class BaseController:
         self.ldap_client = Server(self.config["ldap"]["server"], get_info=ALL)
 
     def init_tacacs_client(self):
-        self.tacacs_client = TACACSClient(self.tacacs_addr, 49, self.tacacs_password)
+        self.tacacs_client = TACACSClient(self.config["tacacs"]["address"], 49, environ.get("TACACS_PASSWORD"))
 
     def init_vault_client(self):
         self.vault_client = VaultClient()
-        self.vault_client.url = self.vault_addr
+        self.vault_client.url = self.config["vault"]["address"]
         self.vault_client.token = environ.get("VAULT_TOKEN")
         if self.vault_client.sys.is_sealed() and self.config["vault"]["unseal"]:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]

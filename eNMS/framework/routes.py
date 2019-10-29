@@ -47,9 +47,9 @@ def login():
     if not current_user.is_authenticated:
         login_form = LoginForm(request.form)
         authentication_methods = [("Local User",) * 2]
-        if app.use_ldap:
+        if app.config["ldap"]["active"]:
             authentication_methods.append(("LDAP Domain",) * 2)
-        if app.use_tacacs:
+        if app.config["tacacs"]["active"]:
             authentication_methods.append(("TACACS",) * 2)
         login_form.authentication_method.choices = authentication_methods
         return render_template("login.html", login_form=login_form)

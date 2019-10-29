@@ -64,11 +64,10 @@
   "tacacs": {
     "active": false,
     "address": "",
-    "password": ""
   },
   "vault": {
     "active": false,
-    "address": "",
+    "address": "http://127.0.0.1:8200",
     "unseal": false
   },
   "view": {

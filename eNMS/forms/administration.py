@@ -29,9 +29,6 @@ class ViewParametersForm(BaseForm, ParametersForm):
     default_longitude = StringField("Default Longitude")
     default_latitude = StringField("Default Latitude")
     default_zoom_level = IntegerField("Default Zoom Level")
-    default_view = SelectField(
-        choices=(("2D", "2D"), ("2DC", "Clusterized 2D"), ("3D", "3D"))
-    )
     default_marker = SelectField(
         choices=(
             ("Image", "Image"),

@@ -1,7 +1,6 @@
 /*
 global
 action: false
-alertify: false
 call: false
 jsPanel: false
 vis: false

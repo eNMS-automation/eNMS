@@ -35,8 +35,6 @@ let layer;
 let markerType;
 let map;
 
-
-
 for (const [key, value] of Object.entries(iconSizes)) {
   window[`icon_${key}`] = L.icon({
     iconUrl: `../static/images/view/${key}.gif`,
@@ -59,12 +57,6 @@ function switchLayer(layerType) {
 function changeMarker(type) {
   markerType = type;
   updateView();
-}
-
-// eslint-disable-next-line
-function createNode2d(node, nodeType) {
-
-  return marker;
 }
 
 // eslint-disable-next-line
@@ -217,17 +209,17 @@ function showViewFilteringPanel(type) {
       parameters.default_zoom_level
     );
     layer = L.tileLayer(layers["osm"]);
-    map.addLayer(layer);
     map
+      .addLayer(layer)
       .on("click", function(e) {
-      selectedObject = null;
-    })
+        selectedObject = null;
+      })
       .on("contextmenu", function() {
-      if (!selectedObject) {
-        $(".menu").hide();
-        $(".geo-menu").show();
-      }
-    });
+        if (!selectedObject) {
+          $(".menu").hide();
+          $(".geo-menu").show();
+        }
+      });
     updateView();
   });
 })();

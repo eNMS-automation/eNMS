@@ -22,7 +22,7 @@ class TestConfig(DebugConfig):
 
 
 config_mapper = {
-    "Debug": DebugConfig,
-    "Production": ProductionConfig,
-    "Test": TestConfig,
+    "debug": DebugConfig,
+    "production": ProductionConfig,
+    "test": TestConfig,
 }

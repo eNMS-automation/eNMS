@@ -182,10 +182,11 @@ class AdministrationController(BaseController):
             self.get_git_content()
 
     def scan_cluster(self, **kwargs):
+        protocol = self.config['cluster']['scan_protocol']
         for ip_address in IPv4Network(self.config["cluster"]["scan_subnet"]):
             try:
                 server = http_get(
-                    f"{self.config["cluster"]["scan_protocol"]}://{ip_address}/rest/is_alive",
+                    f"{protocol}://{ip_address}/rest/is_alive",
                     timeout=self.config["cluster"]["scan_timeout"],
                 ).json()
                 if self.config["cluster"]["id"] != server.pop("cluster_id"):

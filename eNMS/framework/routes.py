@@ -214,6 +214,6 @@ def route(page):
     except Exception as exc:
         raise exc
         Session.rollback()
-        if app.config_mode == "DEBUG":
+        if app.config["app"]["config_mode"] == "debug":
             raise
         return jsonify({"error": handle_exception(str(exc))})

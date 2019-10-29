@@ -77,7 +77,7 @@ def configure_authentication():
 
 def create_app(config_mode=None):
     flask_app = Flask(__name__, static_folder=app.path / "eNMS" / "static")
-    config = config_mapper[config_mode or app.config_mode]
+    config = config_mapper[config_mode or app.config["app"]["config_mode"]]
     flask_app.config.from_object(config)
     register_extensions(flask_app)
     configure_login_manager()

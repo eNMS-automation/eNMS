@@ -1,9 +1,9 @@
 {
   "app": {
-    "config_mode": "DEBUG",
+    "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "",
-    "log_level": "DEBUG"
+    "log_level": "debug"
   },
   "cluster": {
     "active": false,

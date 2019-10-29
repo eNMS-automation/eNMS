@@ -66,7 +66,7 @@ class BaseController:
         "DOCUMENTATION_URL", "https://enms.readthedocs.io/en/latest/"
     )
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
-    log_level = environ.get("LOG_LEVEL", "DEBUG")
+    log_level = environ.get("LOG_LEVEL", "debug")
     git_automation = environ.get("GIT_AUTOMATION")
     git_operational_data = environ.get("GIT_OPERATIONAL_DATA")
     gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
@@ -206,6 +206,7 @@ class BaseController:
 
     def __init__(self, path):
         self.path = path
+        self.config = self.load_config()
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
         if self.use_tacacs:
@@ -216,8 +217,8 @@ class BaseController:
             self.init_vault_client()
         if self.use_syslog:
             self.init_syslog_server()
-        if self.custom_code_path:
-            sys_path.append(self.custom_code_path)
+        if self.config["paths"]["custom_code"]:
+            sys_path.append(self.config["paths"]["custom_code"])
         self.create_google_earth_styles()
         self.fetch_version()
         self.init_logs()
@@ -301,11 +302,6 @@ class BaseController:
         with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)
 
-    @property
-    def config(self):
-        parameters = Session.query(models["parameters"]).one_or_none()
-        return parameters.get_properties() if parameters else {}
-
     def get_git_content(self):
         for repository_type in ("operational_data", "automation"):
             repo = getattr(self, f"git_{repository_type}")
@@ -335,7 +331,7 @@ class BaseController:
 
     def load_config(self):
         with open(self.path / "config.json", "r") as config:
-            self.config = load(config)
+            return load(config)
 
     def load_custom_properties(self):
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")

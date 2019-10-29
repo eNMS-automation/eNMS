@@ -329,7 +329,7 @@ class BaseController:
         return custom_properties
 
     def init_logs(self):
-        log_level = self.config["logging"]["log_level"].upper()
+        log_level = self.config["app"]["log_level"].upper()
         basicConfig(
             level=getattr(import_module("logging"), log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",

@@ -167,8 +167,8 @@ To deactivate, set the ``create_examples`` config parameter to `false`.
 Logging
 -------
 
-You can configure eNMS as well as Gunicorn log level in the configuration with the following
-variables: `log_level`, `gunicorn_log_level`, `gunicorn_access_log`.
+You can configure eNMS as well as Gunicorn log level in the configuration with the `log_level`
+variable.
 
 Migration, Backup, and Restore
 ------------------------------

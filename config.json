@@ -3,6 +3,7 @@
     "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
+    "log_level": "debug"
   },
   "cluster": {
     "active": false,
@@ -28,11 +29,6 @@
     "ldap_userdn": "",
     "ldap_basedn": "",
     "ldap_admin_group": ""
-  },
-  "logging": {
-    "level": "debug",
-    "gunicorn_level": "debug",
-    "gunicorn_access_log": "logs/access.log"
   },
   "mail": {
     "mail_server": "smtp.googlemail.com",

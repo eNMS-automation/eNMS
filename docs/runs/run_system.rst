@@ -30,15 +30,9 @@ There are three types of notification:
 - Slack notification: eNMS sends a message to a channel of your choice.
 - Mattermost notification: same as Slack, with Mattermost.
 
-To set up the mail system, you must export the following environment variables before starting eNMS:
-
-::
-
-  MAIL_SERVER = environ.get('MAIL_SERVER', 'smtp.googlemail.com')
-  MAIL_PORT = int(environ.get('MAIL_PORT', '587'))
-  MAIL_USE_TLS = int(environ.get('MAIL_USE_TLS', True))
-  MAIL_USERNAME = environ.get('MAIL_USERNAME')
-  MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
+To set up the mail system, you must set the following variables in the configuration:
+``server``, ``port``, ``use_tls``, ``username``, ``sender``, ``recipients``.
+Besides, you must set the password via the ``MAIL_PASSWORD`` environment variable.
 
 From the :guilabel:`Admin / Administration` panel, you must configure the sender and recipient addresses of the mail (Mail notification), as well as an Incoming webhook URL and channel for the Mattermost/Slack notifications.
 

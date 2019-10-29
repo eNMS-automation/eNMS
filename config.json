@@ -31,13 +31,12 @@
     "admin_group": "eNMS.Users,network.Admins"
   },
   "mail": {
-    "mail_server": "smtp.googlemail.com",
-    "mail_port": 587,
-    "mail_use_tls": true,
-    "mail_username": "",
-    "mail_password": "",
-    "mail_sender": "enms@enms.fr",
-    "mail_recipients": ""
+    "server": "smtp.googlemail.com",
+    "port": 587,
+    "use_tls": true,
+    "username": "eNMS-user",
+    "sender": "eNMS@company.com",
+    "recipients": "eNMS-user@company.com"
   },
   "mattermost": {
     "mattermost_url": "",

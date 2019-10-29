@@ -569,8 +569,8 @@ class BaseController:
         filename=None,
         file_content=None,
     ):
-        sender = sender or self.mail_sender
-        recipients = recipients or self.mail_recipients
+        sender = sender or self.config["mail"]["sender"]
+        recipients = recipients or self.config["mail"]["recipients"]
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients
@@ -581,10 +581,10 @@ class BaseController:
             attached_file = MIMEApplication(file_content, Name=filename)
             attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
             message.attach(attached_file)
-        server = SMTP(self.mail_server, self.mail_port)
-        if self.mail_use_tls:
+        server = SMTP(self.config["mail"]["server"], self.config["mail"]["port"])
+        if self.config["mail"]["use_tls"]:
             server.starttls()
-            server.login(self.mail_username, self.mail_password)
+            server.login(self.config["mail"]["username"], environ.get("MAIL_PASSWORD"))
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 

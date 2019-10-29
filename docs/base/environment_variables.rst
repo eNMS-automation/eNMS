@@ -2,7 +2,7 @@
 Environment Variables
 =====================
 
-Below is a reference list of environment variables used to configure eNMS. Many of these are described in the Installation section. Some are described within the document in relevant sections. Configurations in the Administration Panel also exist as environment variables for first time startup; if these are desired changed after initial startup and database creation, they must be changed via the Administration Panel UI.
+Below is a reference list of environment variables used to configure eNMS.
 
 Complete List of Environment Variables
 --------------------------------------
@@ -28,13 +28,7 @@ Complete List of Environment Variables
   # Uncomment for SQLite Mode:
   - export DATABASE_URL=sqlite:///database.db?check_same_thread=False
   - export PATH_CUSTOM_PROPERTIES=/home/user/eNMS/eNMS_properties.yml
-  - export MAIL_SERVER=smtp.company.com
-  - export MAIL_PORT=25
-  - export MAIL_USE_TLS=0
-  - export MAIL_USERNAME=eNMS-user
   - export MAIL_PASSWORD=eNMS-user
-  - export MAIL_SENDER=eNMS@company.com
-  - export MAIL_RECIPIENTS=eNMS-user@company.com
   - export MATTERMOST_URL=https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w
   - export MATTERMOST_CHANNEL=
   - export MATTERMOST_VERIFY_CERTIFICATE=0

@@ -105,7 +105,6 @@ title %} {% block stylesheets %} {{ super() }}
 <script src="{{ url_for('static', filename='lib/webgl-earth/api.min.js') }}"></script>
 {% else %}
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
-<script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 {% endif %}
 <script src="{{ url_for('static', filename='view.js') }}"></script>
 <script src="{{ url_for('static', filename='logicalView.js') }}"></script>

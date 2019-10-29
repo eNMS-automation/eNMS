@@ -92,15 +92,6 @@ L.PolylineClusterable = L.Polyline.extend({
 });
 
 // eslint-disable-next-line
-function switchView(newView) {
-  deleteAll();
-  
-  if (viewType == "2DC") {
-    map.addLayer(markers);
-  }
-}
-
-// eslint-disable-next-line
 function switchLayer(layer) {
   if (viewType !== "3D") {
     map.removeLayer(layer2D);
@@ -119,7 +110,7 @@ function switchLayer(layer) {
 // eslint-disable-next-line
 function changeMarker(type) {
   markerType = type;
-  switchView(viewType);
+  updateView();
 }
 
 // eslint-disable-next-line
@@ -249,7 +240,7 @@ function createLink3d(link) {
 
 // eslint-disable-next-line
 function createLink(link) {
-  if (viewType == "2D" || viewType == "2DC") {
+  if (viewType == "2D") {
     createLink2d(link);
   } else {
     createLink3d(link);
@@ -273,8 +264,6 @@ function deleteAllLinks() {
   for (let i = 0; i < polylinesArray.length; i++) {
     if (viewType == "2D") {
       polylinesArray[i].removeFrom(map);
-    } else if (viewType == "2DC") {
-      markers.removeLayer(polylinesArray[i]);
     } else {
       try {
         polylinesArray[i].destroy();
@@ -296,10 +285,6 @@ Object.assign(action, {
   "Open Street Map": () => switchLayer("osm"),
   "Google Maps": () => switchLayer("gm"),
   NASA: () => switchLayer("nasa"),
-  "Display sites": () => switchView(viewType),
-  "2D": () => switchView("2D"),
-  "Clustered 2D": () => switchView("2DC"),
-  "3D": () => switchView("3D"),
   Image: () => changeMarker("Image"),
   Circle: () => changeMarker("Circle"),
   "Circle Marker": () => changeMarker("Circle Marker"),

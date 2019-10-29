@@ -138,15 +138,6 @@ class ExcelImportForm(BaseForm):
     replace = BooleanField("Replace Existing Topology")
 
 
-class OpenNmsForm(BaseForm):
-    action = "queryOpenNMS"
-    form_type = HiddenField(default="opennms")
-    opennms_rest_api = StringField("REST API URL")
-    opennms_devices = StringField("Devices")
-    opennms_login = StringField("Login")
-    password = PasswordField("Password")
-
-
 class NetboxForm(BaseForm):
     action = "queryNetbox"
     form_type = HiddenField(default="netbox")

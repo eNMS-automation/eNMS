@@ -15,7 +15,7 @@ function deviceToNode(device) {
   const logicalDevice = {
     id: device.id,
     label: device.name,
-    image: `/static/images/2D/${device.icon}.gif`,
+    image: `/static/images/view/${device.icon}.gif`,
     shape: "image",
   };
   logicalDevices[device.id] = device;
@@ -88,8 +88,4 @@ function displayPool(poolId, nodes, edges) {
       $(".insite-menu").show();
     }
   });
-  alertify.notify(
-    `Loading the view...<br/>
-    Scroll to zoom in/out. Right-click on a node to display the menu.`
-  );
 }

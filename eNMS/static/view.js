@@ -99,6 +99,13 @@ function changeMarker(type) {
 
 // eslint-disable-next-line
 function createNode2d(node, nodeType) {
+
+  return marker;
+}
+
+// eslint-disable-next-line
+function createNode(node, nodeType) {
+  if (!node.latitude && !node.longitude) return;
   const marker =
     markerType == "Circle Marker"
       ? L.circleMarker([node.latitude, node.longitude])
@@ -113,18 +120,6 @@ function createNode2d(node, nodeType) {
     marker.setIcon(marker.icon);
   }
   marker.bindTooltip(node["name"], { permanent: false });
-  return marker;
-}
-
-// eslint-disable-next-line
-function createNode(node, nodeType) {
-  if (!node.latitude && !node.longitude) return;
-  let marker;
-  if (viewType == "3D") {
-    marker = createNode3d(node, nodeType);
-  } else {
-    marker = createNode2d(node, nodeType);
-  }
   marker.node_id = node.id;
   markersArray.push(marker);
   marker.on("click", function(e) {
@@ -169,38 +164,16 @@ function createLink(link) {
   polyline.bindTooltip(link.name, {
     permanent: false,
   });
-  if (viewType == "2D") {
-    polyline.addTo(map);
-  } else {
-    markers.addLayer(polyline);
-  }
+  polyline.addTo(map);
 }
 
 function deleteAllDevices() {
-  for (let i = 0; i < markersArray.length; i++) {
-    if (viewType == "2D") {
-      markersArray[i].removeFrom(map);
-    } else if (viewType == "3D") {
-      markersArray[i].removeFrom(earth);
-    } else {
-      markers.removeLayer(markersArray[i]);
-    }
-  }
+  markersArray.map((d) => d.removeFrom(map));
   markersArray = [];
 }
 
 function deleteAllLinks() {
-  for (let i = 0; i < polylinesArray.length; i++) {
-    if (viewType == "2D") {
-      polylinesArray[i].removeFrom(map);
-    } else {
-      try {
-        polylinesArray[i].destroy();
-      } catch (err) {
-        // catch
-      }
-    }
-  }
+  polylinesArray.map((l) => l.removeFrom(map));
   polylinesArray = [];
 }
 

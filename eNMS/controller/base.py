@@ -57,8 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    git_automation = environ.get("GIT_AUTOMATION")
-    git_operational_data = environ.get("GIT_OPERATIONAL_DATA")
     gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
     gotty_bypass_key_prompt = int(environ.get("GOTTY_BYPASS_KEY_PROMPT", False))
     gotty_port = -1
@@ -276,7 +274,7 @@ class BaseController:
 
     def get_git_content(self):
         for repository_type in ("operational_data", "automation"):
-            repo = getattr(self, f"git_{repository_type}")
+            repo = self.config["git"][f"{repository_type}_repository"]
             if not repo:
                 continue
             local_path = self.path / "git" / repository_type

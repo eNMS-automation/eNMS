@@ -12,8 +12,8 @@
     "scan_timeout": 0.05
   },
   "git": {
-    "automation": "",
-    "operational_data": ""
+    "automation_repository": "git@gitlab.company.com:eNMS-group/eNMS-automation-data.git",
+    "operational_data_repository": "git@gitlab.company.com:eNMS-group/eNMS-operational-data.git"
   },
   "gotty": {
     "gotty_port_redirection": false,

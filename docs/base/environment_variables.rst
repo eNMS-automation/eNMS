@@ -55,6 +55,4 @@ Complete List of Environment Variables
   - export USE_SYSLOG=0
   - export SYSLOG_ADDR=0.0.0.0
   - export SYSLOG_PORT=514
-  - export GIT_AUTOMATION=git@gitlab.company.com:eNMS-group/eNMS-automation-data.git
-  - export GIT_CONFIGURATIONS=git@gitlab.company.com:eNMS-group/eNMS-configurations-data.git
   - export POOL_FILTER=All objects

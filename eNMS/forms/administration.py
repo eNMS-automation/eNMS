@@ -19,12 +19,6 @@ class ParametersForm:
     action = "saveParameters"
 
 
-class GitParametersForm(BaseForm, ParametersForm):
-    form_type = HiddenField(default="git")
-    git_configurations = StringField("Git Configurations Repository")
-    git_automation = StringField("Git Automation Repository")
-
-
 class SshParametersForm(BaseForm, ParametersForm):
     form_type = HiddenField(default="ssh")
     gotty_start_port = FloatField("Start port")

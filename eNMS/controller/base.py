@@ -57,10 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    ldap_server = environ.get("LDAP_SERVER")
-    ldap_userdn = environ.get("LDAP_USERDN")
-    ldap_basedn = environ.get("LDAP_BASEDN")
-    ldap_admin_group = environ.get("LDAP_ADMIN_GROUP", "")
     mail_server = environ.get("MAIL_SERVER", "smtp.googlemail.com")
     mail_port = int(environ.get("MAIL_PORT", "587"))
     mail_use_tls = int(environ.get("MAIL_USE_TLS", True))
@@ -367,7 +363,9 @@ class BaseController:
             for file in path.glob("**/*.py"):
                 if "init" in str(file):
                     continue
-                if not self.config["app"]["create_examples"] and "examples" in str(file):
+                if not self.config["app"]["create_examples"] and "examples" in str(
+                    file
+                ):
                     continue
                 info(f"Loading service: {file}")
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))
@@ -377,7 +375,7 @@ class BaseController:
                     error(f"Error loading custom service '{file}' ({str(e)})")
 
     def init_ldap_client(self):
-        self.ldap_client = Server(self.ldap_server, get_info=ALL)
+        self.ldap_client = Server(self.config["ldap"]["server"], get_info=ALL)
 
     def init_tacacs_client(self):
         self.tacacs_client = TACACSClient(self.tacacs_addr, 49, self.tacacs_password)

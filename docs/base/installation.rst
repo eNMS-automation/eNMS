@@ -91,20 +91,21 @@ In case this environment variable is not set, eNMS will default to using a SQLit
 LDAP/Active Directory Integration
 ---------------------------------
 
-The following environment variables (with example values) control how eNMS integrates with LDAP/Active Directory for user authentication. eNMS first checks to see if the user exists locally inside eNMS. If not and if LDAP/Active Directory is enabled, eNMS tries to authenticate against LDAP/AD using the pure python ldap3 library, and if successful, that user gets added to eNMS locally.
+The following configuration variables control how eNMS integrates with
+LDAP/Active Directory for user authentication:
 
-::
+  - ``active``: Set to ``true`` to enable LDAP authentication; otherwise ``false``
+  - ``ldap_server``: LDAP Server URL (also called LDAP Provider URL):
+  - ``ldap_userdn``: LDAP Distinguished Name (DN) for the user. This gets combined inside eNMS as "domain.ad.company.com\\username" before being sent to the server.
+  - ``ldap_basedn``: LDAP base distinguished name subtree that is used when
+  searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF)
+  syntax for the entries.
+  - ``ldap_admin_group``: string to match against 'memberOf' attributes of the matched user to determine if the user is allowed to log in.
 
-  Set to 1 to enable LDAP authentication; otherwise 0:
-    export USE_LDAP=1
-  The LDAP Server URL (also called LDAP Provider URL):
-    export LDAP_SERVER=ldap://domain.ad.company.com
-  The LDAP distinguished name (DN) for the user. This gets combined inside eNMS as "domain.ad.company.com\\username" before being sent to the server.
-    export LDAP_USERDN=domain.ad.company.com
-  The base distinguished name (DN) subtree that is used when searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF) syntax for the entries.
-    export LDAP_BASEDN=DC=domain,DC=ad,DC=company,DC=com
-  The string to match against 'memberOf' attributes of the matched user to determine if the user is allowed to log in.
-    export LDAP_ADMIN_GROUP=company.AdminUsers[,group2,group3]
+eNMS first checks to see if the user exists locally inside eNMS.
+If not and if LDAP/Active Directory is enabled, eNMS tries to authenticate
+against LDAP/AD using the pure python ldap3 library, and if successful,
+that user gets added to eNMS locally.
 
 .. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in an 403 authentication error. An LDAP user MUST be a member of one of the "LDAP_ADMIN_GROUP" groups to authenticate.
 .. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage. In the event that services are already scheduled with User Credentials, these might fail if the credentials are not updated in eNMS.

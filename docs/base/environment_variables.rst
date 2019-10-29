@@ -12,7 +12,6 @@ Complete List of Environment Variables
   - export SECRET_KEY=your_secret_key123
   - export VAULT_ADDR=http://127.0.0.1:8200
   - export VAULT_TOKEN=e1c70d27-7c7f-6f6a-fb18-b0c0382667b7
-  - export UNSEAL_VAULT=1
   - export UNSEAL_VAULT_KEY1=nvn7aJgA1wA/z2en/rqeNxU8zxSNcl8bH6L4Voch7LQQ
   - export UNSEAL_VAULT_KEY2=Xndum7gpEykrsRAf6UkaDOSdGFqNMuswggD7zdIYakwI
   - export UNSEAL_VAULT_KEY3=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
@@ -39,11 +38,6 @@ Complete List of Environment Variables
   - export MATTERMOST_URL=https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w
   - export MATTERMOST_CHANNEL=
   - export MATTERMOST_VERIFY_CERTIFICATE=0
-  - export USE_LDAP=1
-  - export LDAP_SERVER=ldap://domain.ad.company.com
-  - export LDAP_USERDN=domain.ad.company.com
-  - export LDAP_BASEDN=DC=domain,DC=ad,DC=company,DC=com
-  - export LDAP_ADMIN_GROUP=eNMS.Users,network.Admins
   - export USE_TACACS=1
   - export TACACS_ADDR=122.10.10.10
   - export TACACS_PASSWORD=tacacs_password

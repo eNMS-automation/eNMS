@@ -25,10 +25,10 @@
   },
   "ldap": {
     "active": false,
-    "ldap_server": "",
-    "ldap_userdn": "",
-    "ldap_basedn": "",
-    "ldap_admin_group": ""
+    "server": "ldap://domain.ad.company.com",
+    "userdn": "domain.ad.company.com",
+    "basedn": "DC=domain,DC=ad,DC=company,DC=com",
+    "admin_group": "eNMS.Users,network.Admins"
   },
   "mail": {
     "mail_server": "smtp.googlemail.com",

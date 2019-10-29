@@ -28,13 +28,13 @@ class AdministrationController(BaseController):
         elif kwargs["authentication_method"] == "LDAP Domain":
             with Connection(
                 self.ldap_client,
-                user=f"{self.ldap_userdn}\\{name}",
+                user=f"{self.config['ldap']['userdn']}\\{name}",
                 password=password,
                 auto_bind=True,
                 authentication=NTLM,
             ) as connection:
                 connection.search(
-                    self.ldap_basedn,
+                    self.config["ldap"]["basedn"],
                     f"(&(objectClass=person)(samaccountname={name}))",
                     search_scope=SUBTREE,
                     get_operational_attributes=True,
@@ -43,7 +43,7 @@ class AdministrationController(BaseController):
                 json_response = loads(connection.response_to_json())["entries"][0]
                 if json_response and any(
                     group in s
-                    for group in self.ldap_admin_group.split(",")
+                    for group in self.config["ldap"]["admin_group"].split(",")
                     for s in json_response["attributes"]["memberOf"]
                 ):
                     user = factory(
@@ -182,7 +182,7 @@ class AdministrationController(BaseController):
             self.get_git_content()
 
     def scan_cluster(self, **kwargs):
-        protocol = self.config['cluster']['scan_protocol']
+        protocol = self.config["cluster"]["scan_protocol"]
         for ip_address in IPv4Network(self.config["cluster"]["scan_subnet"]):
             try:
                 server = http_get(

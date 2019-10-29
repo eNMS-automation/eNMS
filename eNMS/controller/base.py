@@ -57,7 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    config_mode = environ.get("CONFIG_MODE", "Debug")
     custom_code_path = environ.get("CUSTOM_CODE_PATH")
     default_longitude = environ.get("DEFAULT_LONGITUDE", -96.0)
     default_latitude = environ.get("DEFAULT_LATITUDE", 33.0)
@@ -66,7 +65,6 @@ class BaseController:
     documentation_url = environ.get(
         "DOCUMENTATION_URL", "https://enms.readthedocs.io/en/latest/"
     )
-    create_examples = int(environ.get("CREATE_EXAMPLES", True))
     custom_services_path = environ.get("CUSTOM_SERVICES_PATH")
     log_level = environ.get("LOG_LEVEL", "DEBUG")
     git_automation = environ.get("GIT_AUTOMATION")
@@ -236,7 +234,7 @@ class BaseController:
             self.configure_server_id()
             self.create_admin_user()
             Session.commit()
-            if self.create_examples:
+            if self.config["app"]["create_examples"]:
                 self.migration_import(
                     name="examples", import_export_types=import_classes
                 )
@@ -409,7 +407,7 @@ class BaseController:
             for file in path.glob("**/*.py"):
                 if "init" in str(file):
                     continue
-                if not self.create_examples and "examples" in str(file):
+                if not self.config["app"]["create_examples"] and "examples" in str(file):
                     continue
                 info(f"Loading service: {file}")
                 spec = spec_from_file_location(str(file).split("/")[-1][:-3], str(file))

@@ -9,7 +9,6 @@ Complete List of Environment Variables
 
 ::
 
-  - export CONFIG_MODE=Production
   - export SECRET_KEY=your_secret_key123
   - export USE_VAULT=1
   - export VAULT_ADDR=http://127.0.0.1:8200
@@ -35,7 +34,6 @@ Complete List of Environment Variables
   # Uncomment for SQLite Mode:
   - export DATABASE_URL=sqlite:///database.db?check_same_thread=False
   - export PATH_CUSTOM_PROPERTIES=/home/user/eNMS/eNMS_properties.yml
-  - export CREATE_EXAMPLES=0
   - export MAIL_SERVER=smtp.company.com
   - export MAIL_PORT=25
   - export MAIL_USE_TLS=0

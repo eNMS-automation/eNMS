@@ -45,13 +45,7 @@ Start eNMS with gunicorn :
 Run eNMS in Production (Unix only)
 ----------------------------------
 
-To start eNMS in production mode, you must change the value of the environment variable "CONFIG_MODE" to "Production".
-
-::
-
- # set the CONFIG_MODE environment variable
- export CONFIG_MODE=Production
-
+To start eNMS in production mode, you must change the value of the  "config_mode" in the config.json file.
 The Flask secret key is used for securely signing the session cookie and other security related needs.
 In production mode, the secret key is not automatically set to a default value in case it is missing. Therefore, you must configure it yourself:
 
@@ -168,11 +162,7 @@ Default Examples
 By default, eNMS will create a few examples of each type of object (devices, links, services, workflows...).
 If you run eNMS in production, you might want to deactivate this.
 
-To deactivate, set the ``CREATE_EXAMPLES`` environment variable to ``0``.
-
-::
-
- export CREATE_EXAMPLES=0
+To deactivate, set the ``create_examples`` config parameter to `false`.
 
 Logging
 -------

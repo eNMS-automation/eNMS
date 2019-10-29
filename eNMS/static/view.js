@@ -172,7 +172,6 @@ Object.assign(action, {
   // eslint-disable-line no-unused-vars
   "Open Street Map": () => switchLayer("osm"),
   "Google Maps": () => switchLayer("gm"),
-  NASA: () => switchLayer("nasa"),
   Image: () => changeMarker("Image"),
   Circle: () => changeMarker("Circle"),
   "Circle Marker": () => changeMarker("Circle Marker"),

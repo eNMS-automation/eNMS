@@ -18,7 +18,6 @@ title %} {% block stylesheets %} {{ super() }}
     <ul class="dropdown-menu">
       <li><a tabindex="-1" href="#">Open Street Map</a></li>
       <li><a tabindex="-1" href="#">Google Maps</a></li>
-      <li><a tabindex="-1" href="#">NASA</a></li>
     </ul>
   </li>
   <li class="menu dropdown-submenu geo-menu">
@@ -51,18 +50,6 @@ title %} {% block stylesheets %} {{ super() }}
           <div style="z-index:0;"
             id="map"
           ></div>
-          <div
-            class="btn-group"
-            style="z-index:500; position: absolute; left:35vw; top:10px;"
-          >
-            <strong
-              ><p
-                class="btn btn-danger"
-                style="min-width:100px; display: none;"
-                id="name-box"
-              ></p
-            ></strong>
-          </div>
           {% if view_type == "network" %}
           <div
             class="btn-group-horizontal"

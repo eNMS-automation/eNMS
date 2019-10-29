@@ -51,11 +51,8 @@ With Nginx, this can be accomplished with the following `location` :
 
 A full example of nginx configuration can be found in ``eNMS/nginx``.
 
-eNMS does not by default perform any port redirection: you must set the ``GOTTY_PORT_REDIRECTION`` environment to ``1`` to enable it.
-
-::
-
- export GOTTY_PORT_REDIRECTION=1
+eNMS does not by default perform any port redirection: you must set the ``port_redirection``
+variable to ``true`` to enable it.
 
 Ignore fingerprint prompt
 -------------------------

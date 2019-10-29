@@ -17,11 +17,11 @@
     "operational_data_repository": "git@gitlab.company.com:eNMS-group/eNMS-operational-data.git"
   },
   "gotty": {
-    "gotty_port_redirection": false,
-    "gotty_bypass_key_prompt": false,
-    "gotty_port": -1,
-    "gotty_start_port": 9000,
-    "gotty_end_port": 9100
+    "port_redirection": false,
+    "bypass_key_prompt": false,
+    "port": -1,
+    "start_port": 9000,
+    "end_port": 9100
   },
   "ldap": {
     "active": false,

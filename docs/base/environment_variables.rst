@@ -18,10 +18,6 @@ Complete List of Environment Variables
   - export UNSEAL_VAULT_KEY2=Xndum7gpEykrsRAf6UkaDOSdGFqNMuswggD7zdIYakwI
   - export UNSEAL_VAULT_KEY3=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
   - export SERVER_ADDR=https://10.10.10.5
-  - export GOTTY_PORT_REDIRECTION=1
-  - export GOTTY_BYPASS_KEY_PROMPT=1
-  - export GOTTY_START_PORT=9000
-  - export GOTTY_END_PORT=9100
   # Uncomment for Postgres Mode:
   # - export DATABASE_URL=postgresql://enms:password@localhost:5432/enms
   # - export POSTGRES_PASSWORD=password

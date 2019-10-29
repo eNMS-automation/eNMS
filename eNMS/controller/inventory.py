@@ -20,9 +20,10 @@ from eNMS.properties.table import table_properties
 
 class InventoryController(BaseController):
     def get_gotty_port(self):
-        self.gotty_port += 1
-        range = self.gotty_end_port - self.gotty_start_port
-        return self.gotty_start_port + self.gotty_port % range
+        self.config["gotty"]["port"] += 1
+        start = self.config["gotty"]["start_port"]
+        end = self.config["gotty"]["end_port"]
+        return start + self.config["gotty"]["port"] % (end - start)
 
     def connection(self, device_id, **kwargs):
         device = fetch("device", id=device_id)
@@ -34,7 +35,7 @@ class InventoryController(BaseController):
             cmd.append("--once")
         if "multiplexing" in kwargs:
             cmd.extend(f"tmux new -A -s gotty{port}".split())
-        if self.gotty_bypass_key_prompt:
+        if self.config["gotty"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
@@ -54,7 +55,7 @@ class InventoryController(BaseController):
         return {
             "device": device.name,
             "port": port,
-            "redirection": self.gotty_port_redirection,
+            "redirection": self.config["gotty"]["port_redirection"],
             "server_addr": self.server_addr,
         }
 

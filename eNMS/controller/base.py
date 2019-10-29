@@ -57,11 +57,6 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    gotty_port_redirection = int(environ.get("GOTTY_PORT_REDIRECTION", False))
-    gotty_bypass_key_prompt = int(environ.get("GOTTY_BYPASS_KEY_PROMPT", False))
-    gotty_port = -1
-    gotty_start_port = int(environ.get("GOTTY_START_PORT", 9000))
-    gotty_end_port = int(environ.get("GOTTY_END_PORT", 9100))
     ldap_server = environ.get("LDAP_SERVER")
     ldap_userdn = environ.get("LDAP_USERDN")
     ldap_basedn = environ.get("LDAP_BASEDN")

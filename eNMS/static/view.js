@@ -33,8 +33,7 @@ const iconSizes = {
 let selectedObject;
 let markersArray = [];
 let polylinesArray = [];
-let layer2D = L.tileLayer(layers["osm"]);
-let layer3D = WE.tileLayer(layers["gm"]);
+let layer;
 let markerType;
 let map;
 let markers = L.markerClusterGroup();
@@ -43,22 +42,19 @@ call("/get/parameters/1", function(parameters) {
   markerType = parameters.default_marker;
   if (viewType == "3D") {
     map = WE.map("map", { sky: true, atmosphere: true });
-    layer3D.addTo(map);
+    layer = WE.tileLayer(layers["gm"]);
+    layer.addTo(map);
   } else {
     map = L.map("map", { preferCanvas: true }).setView(
       [parameters.default_latitude, parameters.default_longitude],
       parameters.default_zoom_level
     );
-    map.addLayer(layer2D);
+    layer = L.tileLayer(layers["osm"]);
+    map.addLayer(layer);
   }
 
   map.on("click", function(e) {
     selectedObject = null;
-  });
-
-  earth.on("click", function(e) {
-    $(".menu").hide();
-    $(".geo-menu").show();
   });
 
   map.on("contextmenu", function() {
@@ -68,7 +64,8 @@ call("/get/parameters/1", function(parameters) {
     }
   });
 
-  switchView(currentView);
+  updateView();
+
 });
 
 for (const [key, value] of Object.entries(iconSizes)) {
@@ -97,42 +94,15 @@ L.PolylineClusterable = L.Polyline.extend({
 // eslint-disable-next-line
 function switchView(newView) {
   deleteAll();
-  const newDimension = newView.substring(0, 2);
-  if (dimension != newDimension) {
-    $("#map,#earth").css("visibility", "visible");
-    $(".flip-container").toggleClass("hover");
-    setTimeout(function() {
-      if (newDimension == "3D") {
-        $("#map").css("visibility", "hidden");
-      } else {
-        $("#earth").css("visibility", "hidden");
-      }
-    }, 1600);
-  } else {
-    $(`#${newDimension == "2D" ? "map" : "earth"}`).css(
-      "visibility",
-      "visible"
-    );
-  }
-  dimension = newDimension;
-  currentView = newView;
-  $(`#btn-${currentView}`).hide();
-  if (currentView == "2D") {
-    $("#btn-2DC,#btn-3D").show();
-  } else if (currentView == "2DC") {
-    $("#btn-2D,#btn-3D").show();
-  } else {
-    $("#btn-2D,#btn-2DC").show();
-  }
-  updateView();
-  if (currentView == "2DC") {
+  
+  if (viewType == "2DC") {
     map.addLayer(markers);
   }
 }
 
 // eslint-disable-next-line
 function switchLayer(layer) {
-  if (currentView !== "3D") {
+  if (viewType !== "3D") {
     map.removeLayer(layer2D);
     layer2D = L.tileLayer(layers[layer]);
     map.addLayer(layer2D);
@@ -149,7 +119,7 @@ function switchLayer(layer) {
 // eslint-disable-next-line
 function changeMarker(type) {
   markerType = type;
-  switchView(currentView);
+  switchView(viewType);
 }
 
 // eslint-disable-next-line
@@ -198,7 +168,7 @@ function createNode3d(node, nodeType) {
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
   let marker;
-  if (currentView == "3D") {
+  if (viewType == "3D") {
     marker = createNode3d(node, nodeType);
   } else {
     marker = createNode2d(node, nodeType);
@@ -217,11 +187,7 @@ function createNode(node, nodeType) {
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = node; // eslint-disable-line no-undef
   });
-  if (currentView == "2D") {
-    marker.addTo(map);
-  } else if (currentView == "2DC") {
-    markers.addLayer(marker);
-  }
+  marker.addTo(map);
 }
 
 // eslint-disable-next-line
@@ -251,7 +217,7 @@ function createLink2d(link) {
   polyline.bindTooltip(link.name, {
     permanent: false,
   });
-  if (currentView == "2D") {
+  if (viewType == "2D") {
     polyline.addTo(map);
   } else {
     markers.addLayer(polyline);
@@ -283,7 +249,7 @@ function createLink3d(link) {
 
 // eslint-disable-next-line
 function createLink(link) {
-  if (currentView == "2D" || currentView == "2DC") {
+  if (viewType == "2D" || viewType == "2DC") {
     createLink2d(link);
   } else {
     createLink3d(link);
@@ -292,9 +258,9 @@ function createLink(link) {
 
 function deleteAllDevices() {
   for (let i = 0; i < markersArray.length; i++) {
-    if (currentView == "2D") {
+    if (viewType == "2D") {
       markersArray[i].removeFrom(map);
-    } else if (currentView == "3D") {
+    } else if (viewType == "3D") {
       markersArray[i].removeFrom(earth);
     } else {
       markers.removeLayer(markersArray[i]);
@@ -305,9 +271,9 @@ function deleteAllDevices() {
 
 function deleteAllLinks() {
   for (let i = 0; i < polylinesArray.length; i++) {
-    if (currentView == "2D") {
+    if (viewType == "2D") {
       polylinesArray[i].removeFrom(map);
-    } else if (currentView == "2DC") {
+    } else if (viewType == "2DC") {
       markers.removeLayer(polylinesArray[i]);
     } else {
       try {
@@ -330,7 +296,7 @@ Object.assign(action, {
   "Open Street Map": () => switchLayer("osm"),
   "Google Maps": () => switchLayer("gm"),
   NASA: () => switchLayer("nasa"),
-  "Display sites": () => switchView(currentView),
+  "Display sites": () => switchView(viewType),
   "2D": () => switchView("2D"),
   "Clustered 2D": () => switchView("2DC"),
   "3D": () => switchView("3D"),

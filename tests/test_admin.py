@@ -7,7 +7,7 @@ from tests.conftest import check_pages
 def test_authentication(base_client):
     for page in app.valid_pages:
         r = base_client.get(page)
-        if page in app.free_access_pages:
+        if page in ["/", "/login"]:
             assert r.status_code == 200
         else:
             assert r.status_code == 302 and "login" in r.location

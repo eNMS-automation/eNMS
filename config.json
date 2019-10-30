@@ -55,7 +55,7 @@
     "playbooks": ""
   },
   "slack": {
-    "channel": "",
+    "channel": ""
   },
   "syslog": {
     "active": false,
@@ -64,7 +64,7 @@
   },
   "tacacs": {
     "active": false,
-    "address": "",
+    "address": ""
   },
   "vault": {
     "active": false,

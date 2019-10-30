@@ -57,11 +57,7 @@ from eNMS.controller.syslog import SyslogServer
 
 class BaseController:
 
-    playbook_path = environ.get("PLAYBOOK_PATH")
-
     log_severity = {"error": error, "info": info, "warning": warning}
-
-    free_access_pages = ["/", "/login"]
 
     valid_pages = [
         "/administration",

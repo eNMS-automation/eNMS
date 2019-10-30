@@ -574,7 +574,6 @@ function initTable(type, instance, runtime) {
     ajax: {
       url: `/table_filtering/${type}`,
       type: "POST",
-      dataType: "json",
       contentType: "application/json",
       data: (d) => {
         const form = $(`#${type}_filtering`).length

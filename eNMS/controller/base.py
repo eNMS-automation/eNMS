@@ -433,7 +433,7 @@ class BaseController:
     def build_filtering_constraints(self, obj_type, kwargs):
         model, constraints = models[obj_type], []
         for property in filtering_properties[obj_type]:
-            value = kwargs.get(f"form[{property}]")
+            value = kwargs["form"].get(property)
             if not value:
                 continue
             filter = kwargs.get(f"form[{property}_filter]")
@@ -449,9 +449,9 @@ class BaseController:
             constraints.append(constraint)
         for related_model, relation_properties in relationships[obj_type].items():
             relation_ids = [
-                int(id) for id in kwargs.getlist(f"form[{related_model}][]")
+                int(id) for id in kwargs["form"].get(related_model, [])
             ]
-            filter = kwargs.get(f"form[{related_model}_filter]")
+            filter = kwargs["form"].get(f"{related_model}_filter]")
             if filter == "none":
                 constraint = ~getattr(model, related_model).any()
             elif not relation_ids:
@@ -483,13 +483,13 @@ class BaseController:
             "total_count": results.count(),
         }
 
-    def table_filtering(self, table, kwargs):
+    def table_filtering(self, table, **kwargs):
         model, properties = models[table], table_properties[table]
-        operator = and_ if kwargs.get("form[operator]", "all") == "all" else or_
-        column_index = int(kwargs["order[0][column]"])
+        operator = and_ if kwargs["form"].get("operator", "all") == "all" else or_
+        column_index = int(kwargs["order"][0]["column"])
         if column_index < len(properties):
             order_property = getattr(model, properties[column_index])
-            order_function = getattr(order_property, kwargs["order[0][dir]"], None)
+            order_function = getattr(order_property, kwargs["order"][0]["dir"], None)
         else:
             order_function = None
         constraints = self.build_filtering_constraints(table, kwargs)
@@ -498,15 +498,15 @@ class BaseController:
                 getattr(
                     models["result"],
                     "service"
-                    if "service" in kwargs["instance[type]"]
-                    else kwargs["instance[type]"],
-                ).has(id=kwargs["instance[id]"])
+                    if "service" in kwargs["instance"]["type"]
+                    else kwargs["instance"]["type"],
+                ).has(id=kwargs["instance"]["id"])
             )
             if kwargs.get("runtime"):
                 constraints.append(models["result"].parent_runtime == kwargs["runtime"])
-        elif table == "data" and kwargs.get("instance[id]"):
+        elif table == "data" and kwargs.get("instance"):
             constraints.append(
-                getattr(models[table], "device").has(id=kwargs["instance[id]"])
+                getattr(models[table], "device").has(id=kwargs["instance"]["id"])
             )
         result = Session.query(model).filter(operator(*constraints))
         if order_function:

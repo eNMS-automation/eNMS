@@ -155,21 +155,21 @@ class BaseController:
         "update_database_configurations_from_git",
     ]
 
-    def __init__(self, path):
+    def __init__(self, path, config):
         self.path = path
-        self.config = self.load_config()
+        self.config = config
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
-        if self.config["tacacs"]["active"]:
+        if config["tacacs"]["active"]:
             self.init_tacacs_client()
-        if self.config["ldap"]["active"]:
+        if config["ldap"]["active"]:
             self.init_ldap_client()
-        if self.config["vault"]["active"]:
+        if config["vault"]["active"]:
             self.init_vault_client()
-        if self.config["syslog"]["active"]:
+        if config["syslog"]["active"]:
             self.init_syslog_server()
-        if self.config["paths"]["custom_code"]:
-            sys_path.append(self.config["paths"]["custom_code"])
+        if config["paths"]["custom_code"]:
+            sys_path.append(config["paths"]["custom_code"])
         self.create_google_earth_styles()
         self.fetch_version()
         self.init_logs()
@@ -261,10 +261,6 @@ class BaseController:
                         self.update_database_configurations_from_git()
                 except Exception as e:
                     info(f"Cannot clone {repository_type} git repository ({str(e)})")
-
-    def load_config(self):
-        with open(self.path / "config.json", "r") as config:
-            return load(config)
 
     def load_custom_properties(self):
         filepath = environ.get("PATH_CUSTOM_PROPERTIES")

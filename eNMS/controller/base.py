@@ -433,7 +433,7 @@ class BaseController:
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 
-    def build_filtering_constraints(self, obj_type, kwargs):
+    def build_filtering_constraints(self, obj_type, **kwargs):
         model, constraints = models[obj_type], []
         for property in filtering_properties[obj_type]:
             value = kwargs["form"].get(property)
@@ -495,7 +495,7 @@ class BaseController:
             order_function = getattr(order_property, kwargs["order"][0]["dir"], None)
         else:
             order_function = None
-        constraints = self.build_filtering_constraints(table, kwargs)
+        constraints = self.build_filtering_constraints(table, **kwargs)
         if table == "result":
             constraints.append(
                 getattr(

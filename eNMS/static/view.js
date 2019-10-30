@@ -182,7 +182,8 @@ function filter(type) {
   $.ajax({
     type: "POST",
     url: `/view_filtering/${type}`,
-    data: { form: serializeForm(`#${type}_filtering-form`) },
+    contentType: "application/json",
+    data: JSON.stringify({ form: serializeForm(`#${type}_filtering-form`) }),
     success: function(results) {
       if (type == "device") {
         deleteAllDevices();

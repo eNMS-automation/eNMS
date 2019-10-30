@@ -10,7 +10,6 @@ from wtforms import (
 from wtforms.validators import InputRequired
 
 from eNMS.forms import BaseForm, configure_relationships
-from eNMS.forms.fields import JsonField
 from eNMS.properties.database import import_classes
 
 

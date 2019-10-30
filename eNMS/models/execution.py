@@ -9,6 +9,7 @@ from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
 from napalm import get_network_driver
 from netmiko import ConnectHandler
+from os import environ
 from paramiko import SFTPClient
 from pathlib import Path
 from ruamel import yaml
@@ -356,7 +357,8 @@ class Run(AbstractBase):
                     self.log("error", f"RETRY n°{i}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
-                    getattr(self, "close_connection", False) or self.runtime == self.parent_runtime
+                    getattr(self, "close_connection", False)
+                    or self.runtime == self.parent_runtime
                 ):
                     self.close_device_connection(device)
                 self.convert_result(results)

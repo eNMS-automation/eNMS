@@ -2,13 +2,11 @@ from datetime import datetime
 from flask_wtf import FlaskForm
 from pathlib import Path
 from re import M, sub
-from ruamel import yaml
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import FieldList, FormField, HiddenField, StringField
 from wtforms.widgets import TextArea
 
-from eNMS.database.dialect import Column, MutableList, SmallString
-from eNMS.database.functions import factory
+from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
 from eNMS.forms.automation import NetmikoForm
 from eNMS.models.automation import ConnectionService
 
@@ -27,6 +25,7 @@ class DataBackupService(ConnectionService):
     global_delay_factor = Column(Float, default=1.0)
     configuration = Column(LargeString)
     operational_data = Column(LargeString)
+    replacements = Column(MutableList)
 
     __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
 
@@ -39,10 +38,12 @@ class DataBackupService(ConnectionService):
             run.log("info", "Fetching Operational Data", device)
             for data in ("configuration", "operational_data"):
                 commands = run.sub(getattr(self, data), locals())
-                result = f"\n{data} :\n".join(
+                result = "".join(
                     f"{command}:\n{netmiko_connection.send_command(command)}"
                     for command in getattr(self, data)
                 )
+                for r in self.replacements:
+                    result = sub(r["pattern"], r["replace_with"], result, flags=M)
                 setattr(device, data, result)
                 with open(path / device.name / data, "w") as file:
                     file.write(result)
@@ -60,11 +61,20 @@ class DataBackupService(ConnectionService):
         return {"success": True}
 
 
+class ReplacementForm(FlaskForm):
+    pattern = StringField("Pattern")
+    replace_with = StringField("Replace With")
+
+
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
     configuration = StringField(widget=TextArea(), render_kw={"rows": 2})
     operational_data = StringField(widget=TextArea(), render_kw={"rows": 6})
+    replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
-        "Main Parameters": {"commands": ["configuration", "operational_data"], "default": "expanded"},
+        "Main Parameters": {
+            "commands": ["configuration", "operational_data"],
+            "default": "expanded",
+        },
         **NetmikoForm.groups,
     }

@@ -86,7 +86,7 @@ class BaseController:
         "multiselect_filtering",
         "save_configuration",
         "table_filtering",
-        "view_filtering"
+        "view_filtering",
     ]
 
     form_endpoints = [
@@ -447,9 +447,7 @@ class BaseController:
                 constraint = getattr(model, property).op(regex_operator)(value)
             constraints.append(constraint)
         for related_model, relation_properties in relationships[obj_type].items():
-            relation_ids = [
-                int(id) for id in kwargs["form"].get(related_model, [])
-            ]
+            relation_ids = [int(id) for id in kwargs["form"].get(related_model, [])]
             filter = kwargs["form"].get(f"{related_model}_filter]")
             if filter == "none":
                 constraint = ~getattr(model, related_model).any()

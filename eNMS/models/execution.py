@@ -103,6 +103,7 @@ class Run(AbstractBase):
     endtime = Column(SmallString)
     parent_id = Column(Integer, ForeignKey("run.id"))
     parent = relationship("Run", uselist=False, foreign_keys=parent_id)
+    parent_runtime = Column(SmallString)
     parent_device_id = Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     devices = relationship("Device", secondary=run_device_table, back_populates="runs")
@@ -123,14 +124,12 @@ class Run(AbstractBase):
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or app.get_time()
         super().__init__(**kwargs)
+        if not kwargs.get("parent_runtime"):
+            self.parent_runtime = self.runtime
 
     @property
     def name(self):
         return repr(self)
-
-    @property
-    def parent_runtime(self):
-        return self.parent.parent_runtime if self.parent else self.runtime
 
     def __repr__(self):
         return f"{self.runtime} ({self.service_name} run by {self.creator})"
@@ -186,9 +185,10 @@ class Run(AbstractBase):
 
     @property
     def run_state(self):
+        print(self.runtime, self.parent_runtime)
         if self.state:
             return self.state
-        elif not self.parent:
+        elif not self.parent_id:
             return app.run_db[self.runtime]
         else:
             return app.run_db[self.parent_runtime]["services"][self.service.id]
@@ -249,7 +249,7 @@ class Run(AbstractBase):
                 "failed": 0,
                 "skipped": 0,
             }
-        if not self.parent:
+        if not self.parent_id:
             if self.runtime in app.run_db:
                 return
             app.run_db[self.runtime] = state
@@ -285,7 +285,7 @@ class Run(AbstractBase):
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["logs"] = app.run_logs.pop(self.runtime, None)
-            if not self.parent:
+            if not self.parent_id:
                 self.state = results["state"] = app.run_db.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
@@ -297,7 +297,7 @@ class Run(AbstractBase):
                 results = self.notify(results)
             if self.push_to_git:
                 self.git_push(results)
-            if not self.parent:
+            if not self.parent_id:
                 self.create_result(results)
             Session.commit()
         return results
@@ -322,6 +322,7 @@ class Run(AbstractBase):
                 "parent_device": device.id,
                 "restart_run": self.restart_run,
                 "parent": self,
+                "parent_runtime": self.parent_runtime,
             },
         )
         derived_run.properties = self.properties
@@ -370,7 +371,7 @@ class Run(AbstractBase):
                     self.log("error", f"RETRY n°{i}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
-                    getattr(self, "close_connection", False) or not self.parent
+                    getattr(self, "close_connection", False) or not self.parent_id
                 ):
                     self.close_device_connection(device)
                 self.convert_result(results)

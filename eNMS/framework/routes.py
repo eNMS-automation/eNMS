@@ -199,8 +199,8 @@ def route(page):
     if f not in app.valid_post_endpoints:
         return jsonify({"error": "Invalid POST request."})
     form_type = request.form.get("form_type")
-    if f in ("table_filtering", "view_filtering", "multiselect_filtering"):
-        result = getattr(app, f)(*args, request.form)
+    if f in ("table_filtering", "view_filtering", "multiselect_filtering", "save_configuration"):
+        result = getattr(app, f)(*args, **request.json)
     elif form_type:
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():

@@ -11,10 +11,26 @@ tables: false
 updateProperty: false
 */
 
+let editor;
+
 // eslint-disable-next-line
 function showConfiguration() {
   createPanel("configuration", "Configuration", null, function() {
-    new JSONEditor(document.getElementById("content"), {}, config);
+    editor = new JSONEditor(document.getElementById("content"), {}, config);
+  });
+}
+
+// eslint-disable-next-line
+function saveConfiguration() {
+  console.log(editor.get())
+  $.ajax({
+    type: "POST",
+    url: "/save_configuration",
+    contentType: "application/json",
+    data: JSON.stringify(editor.get()),
+    success: function() {
+      alertify.notify("Configuration saved.", "success", 5);
+    },
   });
 }
 

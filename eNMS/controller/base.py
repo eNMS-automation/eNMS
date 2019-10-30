@@ -126,6 +126,7 @@ class BaseController:
         "query_opennms",
         "reset_status",
         "run_service",
+        "save_configuration",
         "save_parameters",
         "save_pool_objects",
         "save_positions",

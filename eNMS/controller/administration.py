@@ -1,4 +1,5 @@
 from copy import deepcopy
+from flask import jsonify
 from flask_login import current_user
 from ipaddress import IPv4Network
 from json import loads
@@ -176,10 +177,8 @@ class AdministrationController(BaseController):
     def get_exported_services(self):
         return listdir(self.path / "projects" / "services")
 
-    def save_parameters(self, parameter_type, **kwargs):
-        self.update_parameters(**kwargs)
-        if parameter_type == "git":
-            self.get_git_content()
+    def save_configuration(self, **config):
+        self.config = config
 
     def scan_cluster(self, **kwargs):
         protocol = self.config["cluster"]["scan_protocol"]

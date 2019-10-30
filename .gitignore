@@ -4,7 +4,6 @@ __pycache__/
 
 # tests and coverage
 *.pytest_cache
-.mypy_cache
 .coverage
 
 # database & logs
@@ -39,6 +38,7 @@ node_modules/
 *.sqlite
 
 # VS Code
+*.code-workspace
 .vscode
 eNMS/.vscode
 
@@ -48,6 +48,6 @@ git/operational_data/*
 !git/automation/.gitkeep
 !git/operational_data/.gitkeep
 
-# Exclude Assets Bundle
+# exclude Assets Bundle
 eNMS/static/bundles
 eNMS/static/.webassets-cache

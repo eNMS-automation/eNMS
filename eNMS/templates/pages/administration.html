@@ -8,63 +8,7 @@ title %} {% block stylesheets %} {{ super() }}
 {% endblock stylesheets %} {% block content %}
 <div class="right_col" role="main">
   <div class="row">
-    <div class="col-md-2 col-sm-2 col-xs-12">
-      <div class="x_panel">
-        <div class="x_content" style="min-height:80vh;">
-          <div class="x_title">
-            <h4 class="text-center">Parameters</h4>
-          </div>
-          <br />
-          <center>
-            <div class="btn-group-vertical" style="width:100%">
-              <button
-                type="button"
-                class="btn btn-primary btn-file"
-                onclick="showParametersPanel('general')"
-              >
-                General
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary btn-file"
-                onclick="showParametersPanel('view')"
-              >
-                Geographical View
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary btn-file"
-                onclick="showParametersPanel('ssh')"
-              >
-                SSH Terminal
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary btn-file"
-                onclick="showParametersPanel('notifications')"
-              >
-                Notifications
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary btn-file"
-                onclick="showParametersPanel('git')"
-              >
-                Gitlab
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary btn-file"
-                onclick="showParametersPanel('cluster')"
-              >
-                Cluster Management
-              </button>
-            </div>
-          </center>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2 col-sm-2 col-xs-12">
+    <div class="col-md-3 col-sm-3 col-xs-12">
       <div class="x_panel">
         <div class="x_content" style="min-height:80vh;">
           <div class="x_title">
@@ -96,33 +40,7 @@ title %} {% block stylesheets %} {{ super() }}
         </div>
       </div>
     </div>
-    <div class="col-md-2 col-sm-2 col-xs-12">
-      <div class="x_panel">
-        <div class="x_content" style="min-height:80vh;">
-          <div class="x_title">
-            <h4 class="text-center">Scheduler</h4>
-          </div>
-          <br />
-          <center>
-            <div class="btn-group-vertical" style="width:100%">
-              <button
-                class="btn btn-primary btn-file"
-                onclick="scheduler('pause')"
-              >
-                Pause Scheduler
-              </button>
-              <button
-                class="btn btn-primary btn-file"
-                onclick="scheduler('resume')"
-              >
-                Resume Scheduler
-              </button>
-            </div>
-          </center>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2 col-sm-2 col-xs-12">
+    <div class="col-md-3 col-sm-3 col-xs-12">
       <div class="x_panel">
         <div class="x_content" style="min-height:80vh;">
           <div class="x_title">
@@ -160,7 +78,7 @@ title %} {% block stylesheets %} {{ super() }}
         </div>
       </div>
     </div>
-    <div class="col-md-2 col-sm-2 col-xs-12">
+    <div class="col-md-3 col-sm-3 col-xs-12">
       <div class="x_panel">
         <div class="x_content" style="min-height:80vh;">
           <div class="x_title">
@@ -186,7 +104,7 @@ title %} {% block stylesheets %} {{ super() }}
         </div>
       </div>
     </div>
-    <div class="col-md-2 col-sm-2 col-xs-12">
+    <div class="col-md-3 col-sm-3 col-xs-12">
       <div class="x_panel">
         <div class="x_content" style="min-height:80vh;">
           <div class="x_title">
@@ -196,6 +114,13 @@ title %} {% block stylesheets %} {{ super() }}
           <center>
             <div class="btn-group-vertical" style="width:100%">
               <button
+                type="button"
+                class="btn btn-primary btn-file"
+                onclick="showParametersPanel('general')"
+              >
+                Configuration
+              </button>
+              <button
                 class="btn btn-primary btn-file"
                 onclick="getGitContent()"
               >
@@ -203,6 +128,18 @@ title %} {% block stylesheets %} {{ super() }}
               </button>
               <button class="btn btn-primary btn-file" onclick="scanCluster()">
                 Scan Cluster Subnet
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="scheduler('pause')"
+              >
+                Pause Scheduler
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="scheduler('resume')"
+              >
+                Resume Scheduler
               </button>
             </div>
           </center>

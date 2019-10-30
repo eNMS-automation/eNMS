@@ -38,7 +38,7 @@
   >
     <span class="glyphicon glyphicon-refresh"></span>
   </button>
-  {% if type in ("data", "result") %}
+  {% if type == "result" %}
   <button
     class="btn btn-info btn-file"
     onclick="compare('{{ type }}')"

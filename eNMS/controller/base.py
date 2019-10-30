@@ -67,7 +67,6 @@ class BaseController:
         "/dashboard",
         "/login",
         "/table/changelog",
-        "/table/data",
         "/table/device",
         "/table/event",
         "/table/pool",

@@ -120,7 +120,7 @@ class Device(CustomDevice):
     def generate_row(self, table):
         return [
             f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 400px">
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
           <li>
             <button type="button" class="btn btn-info"
             onclick="showDeviceConfiguration({self.row_properties})"

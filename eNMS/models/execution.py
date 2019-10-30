@@ -170,20 +170,6 @@ class Run(AbstractBase):
         ]
 
     @property
-    def progress(self):
-        if self.status == "Running":
-            progress = app.run_db[self.runtime]
-            try:
-                return (
-                    f"{progress['completed']}/{progress['number_of_targets']}"
-                    f" ({progress['failed']} failed)"
-                )
-            except KeyError:
-                return "N/A"
-        else:
-            return "N/A"
-
-    @property
     def run_state(self):
         print(self.runtime, self.parent_runtime)
         if self.state:

@@ -15,8 +15,9 @@ from eNMS.forms.fields import JsonField
 from eNMS.properties.database import import_classes
 
 
-class ParametersForm:
-    action = "saveParameters"
+class ConfigurationForm(BaseForm):
+    action = "saveConfiguration"
+    form_type = HiddenField(default="configuration")
 
 
 class DatabaseDeletionForm(BaseForm):

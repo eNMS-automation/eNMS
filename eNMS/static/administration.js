@@ -12,6 +12,13 @@ updateProperty: false
 */
 
 // eslint-disable-next-line
+function showConfiguration() {
+  createPanel("configuration", "Configuration", null, function() {
+    new JSONEditor(document.getElementById("content"), {}, config);
+  });
+}
+
+// eslint-disable-next-line
 function showImportTopologyPanel(type) {
   createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
     document.getElementById("file").onchange = function() {
@@ -73,14 +80,6 @@ function importTopology() {
     },
   });
   $("#file")[0].value = "";
-}
-
-// eslint-disable-next-line
-function saveParameters(type) {
-  fCall(`/save_parameters/${type}`, `#${type}-form`, function() {
-    alertify.notify("Parameters saved.", "success", 5);
-  });
-  $(`#${type}`).remove();
 }
 
 function getClusterStatus() {

@@ -200,6 +200,7 @@ def route(page):
         return jsonify({"error": "Invalid POST request."})
     form_type = request.form.get("form_type")
     if f in ("table_filtering", "view_filtering", "multiselect_filtering", "save_configuration"):
+        print(request.json)
         result = getattr(app, f)(*args, **request.json)
     elif form_type:
         form = form_classes[form_type](request.form)

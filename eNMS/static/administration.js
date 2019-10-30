@@ -22,13 +22,14 @@ function showConfiguration() {
 
 // eslint-disable-next-line
 function saveConfiguration() {
-  console.log(editor.get())
   $.ajax({
     type: "POST",
     url: "/save_configuration",
     contentType: "application/json",
     data: JSON.stringify(editor.get()),
     success: function() {
+      config = editor.get();
+      $("#configuration").remove();
       alertify.notify("Configuration saved.", "success", 5);
     },
   });

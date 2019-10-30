@@ -574,6 +574,8 @@ function initTable(type, instance, runtime) {
     ajax: {
       url: `/table_filtering/${type}`,
       type: "POST",
+      dataType: "json",
+      contentType: "application/json",
       data: (d) => {
         const form = $(`#${type}_filtering`).length
           ? `#${type}_filtering-form`
@@ -583,6 +585,7 @@ function initTable(type, instance, runtime) {
         if (runtime) {
           d.runtime = $(`#results_runtime-${instance.id}`).val() || runtime;
         }
+        return JSON.stringify(d);
       },
     },
   });

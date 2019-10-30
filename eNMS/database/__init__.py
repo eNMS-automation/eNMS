@@ -5,9 +5,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 from eNMS.controller.config import config
 
-DATABASE_URL = environ.get(
-    "DATABASE_URL", "sqlite:///database.db?check_same_thread=False"
-)
+DATABASE_URL = config["database"]["url"]
 DIALECT = DATABASE_URL.split(":")[0]
 
 engine_parameters = {
@@ -19,14 +17,11 @@ engine_parameters = {
 if DIALECT == "mysql":
     engine_parameters.update(
         {
-            "max_overflow": int(environ.get("MAX_OVERFLOW", 10)),
-            "pool_size": int(environ.get("POOL_SIZE", 1000)),
+            "max_overflow": config["database"]["max_overflow"],
+            "pool_size": config["database"]["pool_size"],
         }
     )
 
-engine = create_engine(
-    environ.get("DATABASE_URL", "sqlite:///database.db?check_same_thread=False"),
-    **engine_parameters
-)
+engine = create_engine(DATABASE_URL, **engine_parameters)
 Session = scoped_session(sessionmaker(autoflush=False, bind=engine))
 Base = declarative_base()

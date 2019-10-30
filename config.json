@@ -13,6 +13,13 @@
     "scan_protocol": "http",
     "scan_timeout": 0.05
   },
+  "database": {
+    "url": "sqlite:///database.db?check_same_thread=False",
+    "max_overflow": 10,
+    "pool_size": 1000,
+    "small_string_length": 255,
+    "large_string_length": 32768
+  },
   "git": {
     "automation_repository": "git@gitlab.company.com:eNMS-group/eNMS-automation-data.git",
     "operational_data_repository": "git@gitlab.company.com:eNMS-group/eNMS-operational-data.git"

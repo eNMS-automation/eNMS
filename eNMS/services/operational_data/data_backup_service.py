@@ -5,6 +5,7 @@ from re import M, sub
 from ruamel import yaml
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import FieldList, FormField, HiddenField, StringField
+from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, MutableList, SmallString
 from eNMS.database.functions import factory
@@ -24,7 +25,8 @@ class DataBackupService(ConnectionService):
     fast_cli = Column(Boolean, default=False)
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
-    categories = Column(MutableList)
+    configuration = Column(LargeString)
+    operational_data = Column(LargeString)
 
     __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
 
@@ -35,37 +37,20 @@ class DataBackupService(ConnectionService):
             device.last_runtime = datetime.now()
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Operational Data", device)
-            data = {}
-            for category in self.categories:
-                if not category["name"]:
-                    continue
-                command = run.sub(category["command"], locals())
-                output = netmiko_connection.send_command(command)
-                output = sub(
-                    category["pattern"], category["replace_with"], output, flags=M
+            for data in ("configuration", "operational_data"):
+                commands = run.sub(getattr(self, data), locals())
+                result = f"\n{data} :\n".join(
+                    f"{command}:\n{netmiko_connection.send_command(command)}"
+                    for command in getattr(self, data)
                 )
-                device.data[category["name"]] = output
-                if category["name"].lower() == "configuration":
-                    device.configuration = output
-                factory(
-                    "data",
-                    device=device.id,
-                    runtime=device.last_runtime,
-                    duration=device.last_duration,
-                    category=category["name"],
-                    command=category["command"],
-                    output=output,
-                )
+                setattr(device, data, result)
+                with open(path / device.name / data, "w") as file:
+                    file.write(result)
             device.last_status = "Success"
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"
             )
             device.last_update = str(device.last_runtime)
-            with open(path / "dataset.yml", "w") as file:
-                yaml.dump(data, file, default_flow_style=False)
-            for category, output in data.items():
-                with open(path / device.name / category, "w") as file:
-                    file.write(output)
             run.generate_yaml_file(path, device)
         except Exception as e:
             device.last_status = "Failure"
@@ -75,17 +60,11 @@ class DataBackupService(ConnectionService):
         return {"success": True}
 
 
-class CategoryForm(FlaskForm):
-    name = StringField("Category")
-    command = StringField("Command")
-    pattern = StringField("Pattern")
-    replace_with = StringField("Replace With")
-
-
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
-    categories = FieldList(FormField(CategoryForm), min_entries=10)
+    configuration = StringField(widget=TextArea(), render_kw={"rows": 2})
+    operational_data = StringField(widget=TextArea(), render_kw={"rows": 6})
     groups = {
-        "Main Parameters": {"commands": ["categories"], "default": "expanded"},
+        "Main Parameters": {"commands": ["configuration", "operational_data"], "default": "expanded"},
         **NetmikoForm.groups,
     }

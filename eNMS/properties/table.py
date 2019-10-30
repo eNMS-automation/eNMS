@@ -7,8 +7,6 @@ device_table_properties = object_common_properties + [
     "port",
 ]
 
-data_table_properties = ["category", "runtime", "duration", "command", "device_name"]
-
 link_table_properties = object_common_properties + ["source_name", "destination_name"]
 
 pool_table_properties = [
@@ -83,7 +81,6 @@ task_table_properties = [
 
 table_properties = {
     "changelog": changelog_table_properties,
-    "data": data_table_properties,
     "device": device_table_properties,
     "event": event_table_properties,
     "link": link_table_properties,
@@ -116,7 +113,6 @@ service_filtering_properties = [
 
 filtering_properties = {
     "changelog": changelog_table_properties,
-    "data": data_table_properties,
     "device": device_table_properties + ["configuration"],
     "event": event_table_properties,
     "link": link_table_properties,

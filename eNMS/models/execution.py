@@ -171,7 +171,6 @@ class Run(AbstractBase):
 
     @property
     def run_state(self):
-        print("tttt"*100, self.runtime, self.parent_runtime)
         if self.state:
             return self.state
         elif self.runtime == self.parent_runtime:

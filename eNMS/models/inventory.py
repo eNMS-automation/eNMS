@@ -79,7 +79,7 @@ class Device(CustomDevice):
     netmiko_driver = Column(SmallString, default="cisco_ios")
     napalm_driver = Column(SmallString, default="ios")
     configuration = Column(LargeString)
-    data = Column(MutableDict)
+    operational_data = Column(LargeString)
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")
     last_update = Column(SmallString, default="Never")
@@ -91,9 +91,6 @@ class Device(CustomDevice):
     runs = relationship("Run", secondary=run_device_table, back_populates="devices")
     results = relationship(
         "Result", back_populates="device", cascade="all, delete-orphan"
-    )
-    dataset = relationship(
-        "Data", back_populates="device", cascade="all, delete-orphan"
     )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
@@ -129,20 +126,6 @@ class Device(CustomDevice):
             onclick="showDeviceConfiguration({self.row_properties})"
             data-tooltip="Configuration"
               ><span class="glyphicon glyphicon-cog"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="showDeviceDataset({self.row_properties})"
-            data-tooltip="Operational Data"
-              ><span class="glyphicon glyphicon-list"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="showDataPanel({self.row_properties})"
-            data-tooltip="Data History"
-              ><span class="glyphicon glyphicon-book"></span
             ></button>
           </li>
           <li>

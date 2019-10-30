@@ -171,10 +171,10 @@ class Run(AbstractBase):
 
     @property
     def run_state(self):
-        print(self.runtime, self.parent_runtime)
+        print("tttt"*100, self.runtime, self.parent_runtime)
         if self.state:
             return self.state
-        elif not self.parent_id:
+        elif self.runtime == self.parent_runtime:
             return app.run_db[self.runtime]
         else:
             return app.run_db[self.parent_runtime]["services"][self.service.id]
@@ -235,7 +235,7 @@ class Run(AbstractBase):
                 "failed": 0,
                 "skipped": 0,
             }
-        if not self.parent_id:
+        if self.runtime == self.parent_runtime:
             if self.runtime in app.run_db:
                 return
             app.run_db[self.runtime] = state
@@ -271,7 +271,7 @@ class Run(AbstractBase):
             app.service_db[self.service.id]["runs"] -= 1
             results["endtime"] = self.endtime = app.get_time()
             results["logs"] = app.run_logs.pop(self.runtime, None)
-            if not self.parent_id:
+            if self.runtime == self.parent_runtime:
                 self.state = results["state"] = app.run_db.pop(self.runtime)
             if self.task and not self.task.frequency:
                 self.task.is_active = False
@@ -283,7 +283,7 @@ class Run(AbstractBase):
                 results = self.notify(results)
             if self.push_to_git:
                 self.git_push(results)
-            if not self.parent_id:
+            if self.runtime == self.parent_runtime:
                 self.create_result(results)
             Session.commit()
         return results
@@ -357,7 +357,7 @@ class Run(AbstractBase):
                     self.log("error", f"RETRY n°{i}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
-                    getattr(self, "close_connection", False) or not self.parent_id
+                    getattr(self, "close_connection", False) or self.runtime == self.parent_runtime
                 ):
                     self.close_device_connection(device)
                 self.convert_result(results)

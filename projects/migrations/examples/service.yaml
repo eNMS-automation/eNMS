@@ -4444,17 +4444,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- categories:
-  - {command: show running-config, name: Configuration, pattern: '', replace_with: ''}
-  - {command: show vrf, name: VRF, pattern: '', replace_with: ''}
-  - {command: show ip int br, name: Interfaces, pattern: '', replace_with: ''}
-  - {command: '', name: '', pattern: '', replace_with: ''}
-  - {command: '', name: '', pattern: '', replace_with: ''}
-  - {command: '', name: '', pattern: '', replace_with: ''}
-  - {command: '', name: '', pattern: '', replace_with: ''}
-  - {command: '', name: '', pattern: '', replace_with: ''}
-  - {command: '', name: '', pattern: '', replace_with: ''}
-  - {command: '', name: '', pattern: '', replace_with: ''}
+  configuration: show running-config
+  operational_data: show vrf\nshow ip int br
   color: '#D2E5FF'
   config_mode: false
   content_match: ''

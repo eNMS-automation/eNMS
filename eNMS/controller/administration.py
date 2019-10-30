@@ -1,5 +1,4 @@
 from copy import deepcopy
-from flask import jsonify
 from flask_login import current_user
 from ipaddress import IPv4Network
 from json import loads

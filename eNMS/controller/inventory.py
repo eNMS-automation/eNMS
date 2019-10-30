@@ -1,5 +1,6 @@
 from collections import Counter
 from logging import info
+from os import environ
 from pynetbox import api as netbox_api
 from requests import get as http_get
 from sqlalchemy import and_

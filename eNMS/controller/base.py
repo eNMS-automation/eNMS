@@ -39,7 +39,7 @@ from eNMS.database.functions import (
     fetch_all,
     get_query_count,
 )
-from eNMS.models import models, model_properties, relationships
+from eNMS.models import models, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
 from eNMS.properties.diagram import (

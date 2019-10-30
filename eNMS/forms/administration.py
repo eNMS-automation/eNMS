@@ -1,6 +1,5 @@
 from wtforms import (
     BooleanField,
-    FloatField,
     HiddenField,
     IntegerField,
     PasswordField,

@@ -3,7 +3,7 @@ from sqlalchemy import Column as SQLA_Column, PickleType, String, Text
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.controller.config import config
+from eNMS.controller import config
 from eNMS.database import DIALECT
 
 

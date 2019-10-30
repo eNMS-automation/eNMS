@@ -1,6 +1,4 @@
-from pathlib import Path
-
 from eNMS.controller import App
 
-app = App(Path.cwd())
+app = App()
 app.configure_database()

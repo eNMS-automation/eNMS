@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from eNMS.controller.config import config
+from eNMS.config import config
 
 DATABASE_URL = config["database"]["url"]
 DIALECT = DATABASE_URL.split(":")[0]

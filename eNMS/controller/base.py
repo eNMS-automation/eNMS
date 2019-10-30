@@ -28,7 +28,7 @@ from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from uuid import getnode
 
-from eNMS.controller.config import config
+from eNMS.config import config
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import (
@@ -156,9 +156,9 @@ class BaseController:
         "update_database_configurations_from_git",
     ]
 
-    def __init__(self, path):
-        self.path = path
+    def __init__(self):
         self.config = config
+        self.path = Path.cwd()
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
         if config["tacacs"]["active"]:

@@ -376,11 +376,12 @@ function initSelect(el, model, parentId, single) {
       url: `/multiselect_filtering/${model}`,
       type: "POST",
       delay: 250,
+      contentType: "application/json",
       data: function(params) {
-        return {
+        return JSON.stringify({
           term: params.term || "",
           page: params.page || 1,
-        };
+        });
       },
       processResults: function(data, params) {
         params.page = params.page || 1;

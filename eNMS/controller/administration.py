@@ -118,10 +118,16 @@ class AdministrationController(BaseController):
                         )
                         status = "Partial import (see logs)."
         for name, services in workflow_services.items():
-            workflow = fetch("workflow", name=name)
-            workflow.services = [
-                fetch("service", name=service_name) for service_name in services
-            ]
+            try:
+                workflow = fetch("workflow", name=name)
+                workflow.services = [
+                    fetch("service", name=service_name) for service_name in services
+                ]
+            except Exception as exc:
+                print(exc)
+                info(
+                    f"{chr(10).join(format_exc().splitlines())}"
+                )
         Session.commit()
         for edge in workflow_edges:
             for property in ("source", "destination", "workflow"):

@@ -4445,7 +4445,7 @@
   vendor: ''
   waiting_time: 0
   configuration: show running-config
-  operational_data: show vrf\nshow ip int br
+  operational_data: show vrf
   color: '#D2E5FF'
   config_mode: false
   content_match: ''

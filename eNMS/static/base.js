@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+config: true
 creationMode: true
 csrf_token: false
 filteringProperties: false

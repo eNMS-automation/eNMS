@@ -2,13 +2,14 @@
 global
 alertify: false
 call: false
+config: true
 createPanel: false
 fCall: false
 folders: false
+JSONEditor: false
 page: false
 showPanel: false
 tables: false
-updateProperty: false
 */
 
 let editor;

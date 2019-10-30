@@ -423,9 +423,8 @@ class BaseController:
         }
 
     def compare(self, type, result1, result2):
-        property = "output" if type == "data" else "result"
-        first = self.str_dict(getattr(fetch(type, id=result1), property)).splitlines()
-        second = self.str_dict(getattr(fetch(type, id=result2), property)).splitlines()
+        first = self.str_dict(getattr(fetch(type, id=result1), "result")).splitlines()
+        second = self.str_dict(getattr(fetch(type, id=result2), "result")).splitlines()
         opcodes = SequenceMatcher(None, first, second).get_opcodes()
         return {"first": first, "second": second, "opcodes": opcodes}
 
@@ -501,10 +500,6 @@ class BaseController:
             )
             if kwargs.get("runtime"):
                 constraints.append(models["result"].parent_runtime == kwargs["runtime"])
-        elif table == "data" and kwargs.get("instance"):
-            constraints.append(
-                getattr(models[table], "device").has(id=kwargs["instance"]["id"])
-            )
         result = Session.query(model).filter(operator(*constraints))
         if order_function:
             result = result.order_by(order_function())

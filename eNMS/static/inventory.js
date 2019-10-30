@@ -3,13 +3,12 @@ global
 action: false
 alertify: false
 call: false
+config: true
 createPanel: false
 fCall: false
 initSelect: false
 initTable: false
-JSONEditor: false
 openUrl: false
-parseObject: false
 showPanel: false
 showTypePanel: false
 tables: false

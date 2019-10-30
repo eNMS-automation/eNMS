@@ -246,11 +246,6 @@ class ResultForm(BaseForm):
     results_runtime = NoValidationSelectField("Runtime", choices=())
 
 
-class DataForm(BaseForm):
-    template = "result"
-    form_type = HiddenField(default="data")
-
-
 class DisplayForm(BaseForm):
     template = "display"
     form_type = HiddenField(default="display")

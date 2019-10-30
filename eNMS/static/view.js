@@ -3,6 +3,7 @@ global
 action: false
 alertify: false
 call: false
+config: true
 L: false
 serializeForm: false
 showFilteringPanel: false

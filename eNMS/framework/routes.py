@@ -151,7 +151,7 @@ def calendar(calendar_type):
 def form(form_type):
     kwargs = (
         {"fixed_columns": table_fixed_columns[form_type], "type": form_type}
-        if form_type in ("data", "result")
+        if form_type == "result"
         else {}
     )
     return render_template(

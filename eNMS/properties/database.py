@@ -4,9 +4,9 @@ dont_track_changes = [
     "configuration",
     "current_device",
     "current_service",
-    "data",
     "labels",
     "last_modified",
+    "operational_data",
     "positions",
     "state",
 ]
@@ -15,9 +15,7 @@ dont_migrate = {
     "device": [
         "id",
         "configuration",
-        "configurations",
-        "dataset",
-        "datasets",
+        "operational_data",
         "services",
         "source",
         "destination",

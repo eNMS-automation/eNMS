@@ -128,7 +128,6 @@ filtering_properties = {
 
 table_fixed_columns = {
     "changelog": [],
-    "data": ["V1", "V2", ""],
     "device": [""],
     "event": [""],
     "link": [""],

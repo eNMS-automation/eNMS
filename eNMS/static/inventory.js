@@ -79,22 +79,6 @@ function updatePools(pool) {
 }
 
 // eslint-disable-next-line
-function showOutput(dataId, device) {
-  createPanel(
-    "display_configuration",
-    `Configuration - ${device.name}`,
-    dataId,
-    function() {
-      call(`/get/data/${dataId}`, (data) => {
-        $(`#content-${dataId}`).html(
-          `<pre style="height:100%">${data.output}</pre>`
-        );
-      });
-    }
-  );
-}
-
-// eslint-disable-next-line
 function showDeviceConfiguration(device) {
   createPanel(
     "display_configuration",
@@ -111,37 +95,9 @@ function showDeviceConfiguration(device) {
 }
 
 // eslint-disable-next-line
-function showDeviceDataset(device) {
-  createPanel("display", `Dataset - ${device.name}`, device.id, function() {
-    call(`/get_device_data/data/${device.id}`, (result) => {
-      const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
-      const options = {
-        mode: "view",
-        modes: ["text", "view"],
-        onModeChange: function(newMode) {
-          editor.set(newMode == "text" ? result : jsonResult);
-        },
-      };
-      let editor = new JSONEditor(
-        document.getElementById(`content-${device.id}`),
-        options,
-        jsonResult
-      );
-    });
-  });
-}
-
-// eslint-disable-next-line
 function showDeviceResultsPanel(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
     initTable("result", device);
-  });
-}
-
-// eslint-disable-next-line
-function showDataPanel(device) {
-  createPanel("data", `Data - ${device.name}`, null, function() {
-    initTable("data", device);
   });
 }
 

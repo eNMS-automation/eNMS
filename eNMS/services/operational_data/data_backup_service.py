@@ -73,7 +73,7 @@ class DataBackupForm(NetmikoForm):
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Main Parameters": {
-            "commands": ["configuration", "operational_data"],
+            "commands": ["configuration", "operational_data", "replacements"],
             "default": "expanded",
         },
         **NetmikoForm.groups,

@@ -592,7 +592,7 @@ function initTable(type, instance, runtime) {
   });
   createSearchHeaders(type);
   if (
-    ["changelog", "syslog", "run", "configuration", "result"].includes(type)
+    ["changelog", "syslog", "run", "result"].includes(type)
   ) {
     tables[type].order([0, "desc"]).draw();
   }

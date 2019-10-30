@@ -236,7 +236,7 @@ class BaseController:
             self.topology_import(file)
 
     def get_git_content(self):
-        for repository_type in ("operational_data", "automation"):
+        for repository_type in ("data", "automation"):
             repo = self.config["git"][f"{repository_type}_repository"]
             if not repo:
                 continue
@@ -250,14 +250,14 @@ class BaseController:
             if repo_contents_exist:
                 try:
                     Repo(local_path).remotes.origin.pull()
-                    if repository_type == "operational_data":
+                    if repository_type == "data":
                         self.update_database_configurations_from_git()
                 except Exception as e:
                     info(f"Cannot pull {repository_type} git repository ({str(e)})")
             else:
                 try:
                     Repo.clone_from(repo, local_path)
-                    if repository_type == "operational_data":
+                    if repository_type == "data":
                         self.update_database_configurations_from_git()
                 except Exception as e:
                     info(f"Cannot clone {repository_type} git repository ({str(e)})")
@@ -574,7 +574,7 @@ class BaseController:
         return input.translate(str.maketrans("", "", f"{punctuation} "))
 
     def update_database_configurations_from_git(self):
-        for dir in scandir(self.path / "git" / "operational_data"):
+        for dir in scandir(self.path / "git" / "data"):
             if dir.name == ".git":
                 continue
             device = fetch("device", allow_none=True, name=dir.name)
@@ -582,19 +582,14 @@ class BaseController:
                 with open(Path(dir.path) / "data.yml") as data:
                     parameters = yaml.load(data)
                     device.update(**{"dont_update_pools": True, **parameters})
-                    config_file = Path(dir.path) / dir.name
-                    if not config_file.exists():
+
+                for data in ("configuration", "operational_data"):
+                    filepath = Path(dir.path) / dir.name / data
+                    if not filepath.exists():
                         continue
-                    with open(config_file) as f:
-                        device.configuration = f.read()
-                        factory(
-                            "data",
-                            device=device.id,
-                            runtime=datetime.now(),
-                            duration="0s",
-                            category="Configuration",
-                        )
+                    with open(filepath) as file:
+                        setattr(device, data, file.read())
         Session.commit()
         for pool in fetch_all("pool"):
-            if pool.device_configuration:
+            if pool.device_configuration or pool.device_operational_data:
                 pool.compute_pool()

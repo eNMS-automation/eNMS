@@ -5,7 +5,7 @@ from tests.conftest import check_pages
 
 
 def test_authentication(base_client):
-    for page in app.valid_pages:
+    for page in app.get_endpoints:
         r = base_client.get(page)
         if page in ["/", "/login"]:
             assert r.status_code == 200
@@ -14,7 +14,7 @@ def test_authentication(base_client):
 
 
 def test_urls(user_client):
-    for page in app.valid_pages:
+    for page in app.get_endpoints:
         r = user_client.get(page, follow_redirects=True)
         assert r.status_code == 200
     r = user_client.get("/logout", follow_redirects=True)

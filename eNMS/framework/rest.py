@@ -13,7 +13,7 @@ from eNMS.framework.extensions import auth, csrf
 
 def create_app_resources():
     endpoints = {}
-    for endpoint in app.valid_rest_endpoints:
+    for endpoint in app.rest_endpoints:
 
         def post(_, ep=endpoint):
             getattr(app, ep)()

@@ -196,10 +196,10 @@ def get_requests_sink(_):
 @monitor_requests
 def route(page):
     f, *args = page.split("/")
-    if f not in app.valid_post_endpoints:
+    if f not in app.json_endpoints + app.form_endpoints:
         return jsonify({"error": "Invalid POST request."})
     form_type = request.form.get("form_type")
-    if f in ("table_filtering", "view_filtering", "multiselect_filtering", "save_configuration"):
+    if f in app.json_endpoints:
         result = getattr(app, f)(*args, **request.json)
     elif form_type:
         form = form_classes[form_type](request.form)

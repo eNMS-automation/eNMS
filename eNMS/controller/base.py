@@ -59,7 +59,7 @@ class BaseController:
 
     log_severity = {"error": error, "info": info, "warning": warning}
 
-    valid_pages = [
+    get_endpoints = [
         "/administration",
         "/calendar/run",
         "/calendar/task",
@@ -82,7 +82,14 @@ class BaseController:
         "/workflow_builder",
     ]
 
-    valid_post_endpoints = [
+    json_endpoints = [
+        "multiselect_filtering",
+        "save_configuration",
+        "table_filtering",
+        "view_filtering"
+    ]
+
+    form_endpoints = [
         "add_edge",
         "add_service_to_workflow",
         "copy_service_in_workflow",
@@ -120,13 +127,11 @@ class BaseController:
         "import_topology",
         "migration_export",
         "migration_import",
-        "multiselect_filtering",
         "query_netbox",
         "query_librenms",
         "query_opennms",
         "reset_status",
         "run_service",
-        "save_configuration",
         "save_parameters",
         "save_pool_objects",
         "save_positions",
@@ -135,17 +140,15 @@ class BaseController:
         "scheduler",
         "skip_services",
         "stop_workflow",
-        "table_filtering",
         "task_action",
         "topology_import",
         "update",
         "update_parameters",
         "update_pool",
         "update_all_pools",
-        "view_filtering",
     ]
 
-    valid_rest_endpoints = [
+    rest_endpoints = [
         "get_cluster_status",
         "get_git_content",
         "update_all_pools",

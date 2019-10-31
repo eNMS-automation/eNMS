@@ -273,6 +273,7 @@ function processWorkflowData(instance, id) {
   if (instance.type == "workflow_edge") edges.update(edgeToEdge(instance));
   if (instance.type.includes("service") || instance.type == "workflow") {
     if (id) {
+      if (workflow.id == id) return;
       nodes.update(serviceToNode(instance));
       let serviceIndex = workflow.services.findIndex(
         (s) => s.id == instance.id

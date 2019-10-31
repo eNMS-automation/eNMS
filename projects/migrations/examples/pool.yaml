@@ -21,7 +21,7 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 30
+  device_number: 28
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -91,7 +91,7 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 30
+  device_number: 28
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''

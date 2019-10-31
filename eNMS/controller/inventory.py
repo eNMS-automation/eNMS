@@ -57,7 +57,7 @@ class InventoryController(BaseController):
             "device": device.name,
             "port": port,
             "redirection": self.config["gotty"]["port_redirection"],
-            "server_addr": self.config["app"]["adress"],
+            "server_addr": self.config["app"]["address"],
         }
 
     def get_device_logs(self, device_id):

@@ -11,7 +11,7 @@ class NetmikoPromptsService(ConnectionService):
 
     __tablename__ = "netmiko_prompts_service"
     pretty_name = "Netmiko Prompts"
-
+    parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)

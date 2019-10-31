@@ -32,7 +32,6 @@ class RestCallService(Service):
 
     __tablename__ = "rest_call_service"
     pretty_name = "REST Call"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     call_type = Column(SmallString)
     rest_url = Column(LargeString, default="")

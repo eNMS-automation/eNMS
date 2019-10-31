@@ -20,7 +20,6 @@ class AnsiblePlaybookService(Service):
 
     __tablename__ = "ansible_playbook_service"
     pretty_name = "Ansible Playbook"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     playbook_path = Column(SmallString)
     arguments = Column(SmallString)

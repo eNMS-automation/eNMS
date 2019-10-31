@@ -11,7 +11,7 @@ class NapalmPingService(ConnectionService):
 
     __tablename__ = "napalm_ping_service"
     pretty_name = "NAPALM Ping"
-
+    parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     count = Column(Integer, default=0)
     driver = Column(SmallString)

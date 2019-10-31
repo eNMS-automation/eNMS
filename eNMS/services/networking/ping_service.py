@@ -13,7 +13,6 @@ class PingService(Service):
 
     __tablename__ = "ping_service"
     pretty_name = "ICMP / TCP Ping"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     protocol = Column(SmallString)
     ports = Column(SmallString)

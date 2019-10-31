@@ -12,7 +12,7 @@ class NapalmConfigurationService(ConnectionService):
 
     __tablename__ = "napalm_configuration_service"
     pretty_name = "NAPALM Configuration"
-
+    parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     action = Column(SmallString)
     content = Column(LargeString, default="")

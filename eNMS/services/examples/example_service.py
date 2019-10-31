@@ -43,7 +43,6 @@ class ExampleService(Service):
 
     __tablename__ = "example_service"
     pretty_name = "Example"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     # The following fields will be stored in the database as:
     # - String

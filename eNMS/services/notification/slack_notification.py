@@ -15,7 +15,6 @@ class SlackNotificationService(Service):
 
     __tablename__ = "slack_notification_service"
     pretty_name = "Slack Notification"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     channel = Column(SmallString)
     token = Column(SmallString)

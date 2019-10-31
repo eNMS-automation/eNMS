@@ -13,7 +13,7 @@ class NetmikoFileTransferService(ConnectionService):
 
     __tablename__ = "netmiko_file_transfer_service"
     pretty_name = "Netmiko File Transfer"
-
+    parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)

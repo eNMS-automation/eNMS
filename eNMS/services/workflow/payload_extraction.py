@@ -14,7 +14,6 @@ class PayloadExtractionService(Service):
 
     __tablename__ = "payload_extraction_service"
     pretty_name = "Payload Extraction"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     variable1 = Column(SmallString)
     query1 = Column(SmallString)

@@ -10,7 +10,7 @@ class ConfigureBgpService(ConnectionService):
 
     __tablename__ = "configure_bgp_service"
     pretty_name = "Configure BGP"
-
+    parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     local_as = Column(Integer, default=0)
     loopback = Column(SmallString)

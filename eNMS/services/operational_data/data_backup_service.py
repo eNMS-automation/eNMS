@@ -15,6 +15,7 @@ class DataBackupService(ConnectionService):
 
     __tablename__ = "data_backup_service"
     pretty_name = "Operational Data Backup"
+    parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
     config_mode = Column(Boolean, default=False)

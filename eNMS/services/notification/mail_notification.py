@@ -13,7 +13,6 @@ class MailNotificationService(Service):
 
     __tablename__ = "mail_notification_service"
     pretty_name = "Mail Notification"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     title = Column(SmallString)
     sender = Column(SmallString)

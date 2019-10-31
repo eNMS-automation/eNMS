@@ -10,7 +10,7 @@ class NapalmGettersService(ConnectionService):
 
     __tablename__ = "napalm_getters_service"
     pretty_name = "NAPALM getters"
-
+    parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)

@@ -12,7 +12,6 @@ class UnixCommandService(Service):
 
     __tablename__ = "unix_command_service"
     pretty_name = "Unix Command"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     command = Column(SmallString)
 

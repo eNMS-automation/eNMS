@@ -17,7 +17,6 @@ class SwissArmyKnifeService(Service):
 
     __tablename__ = "swiss_army_knife_service"
     pretty_name = "Swiss Army Knife"
-
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
 
     __mapper_args__ = {"polymorphic_identity": "swiss_army_knife_service"}

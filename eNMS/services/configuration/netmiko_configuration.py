@@ -12,7 +12,7 @@ class NetmikoConfigurationService(ConnectionService):
 
     __tablename__ = "netmiko_configuration_service"
     pretty_name = "Netmiko Configuration"
-
+    parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     content = Column(LargeString, default="")
     enable_mode = Column(Boolean, default=True)

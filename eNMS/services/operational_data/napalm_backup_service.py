@@ -14,9 +14,9 @@ from eNMS.models.automation import ConnectionService
 class NapalmBackupService(ConnectionService):
 
     __tablename__ = "napalm_backup_service"
-
-    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     pretty_name = "NAPALM Backup"
+    parent_type = "connection_service"
+    id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     driver = Column(SmallString)
     use_device_driver = Column(Boolean, default=True)
     timeout = Column(Integer, default=60)

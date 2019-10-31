@@ -263,7 +263,7 @@ class BaseController:
                     info(f"Cannot clone {repository_type} git repository ({str(e)})")
 
     def load_custom_properties(self):
-        filepath = environ.get("PATH_CUSTOM_PROPERTIES")
+        filepath = self.config["paths"]["custom_properties"]
         if not filepath:
             custom_properties = {}
         else:

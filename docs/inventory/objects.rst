@@ -106,9 +106,5 @@ If you want the custom property to appear as a choice in the GoTTY Web SSH windo
 
 .. note:: You can find examples of YAML files with custom propertyes in :guilabel:`eNMS/tests/custom_properties`.
 
-For eNMS to know where the file with custom properties is located on the server, you must set the ``PATH_CUSTOM_PROPERTIES`` environment variable to the path of the YAML file.
-
-::
-
- # set the PATH_CUSTOM_PROPERTIES environment variable
- export PATH_CUSTOM_PROPERTIES=/path/to/yaml/file
+For eNMS to know where the file with custom properties is located on the server, 
+you must set the ``custom_properties`` configuration variable to the path of the YAML file.

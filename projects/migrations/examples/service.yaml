@@ -4444,7 +4444,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-  configuration: show running-config
+- configuration: show running-config
   operational_data: show vrf
   color: '#D2E5FF'
   config_mode: false

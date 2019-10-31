@@ -22,7 +22,7 @@
   },
   "git": {
     "automation_repository": "git@gitlab.company.com:eNMS-group/eNMS-automation-data.git",
-    "operational_data_repository": "git@gitlab.company.com:eNMS-group/eNMS-operational-data.git"
+    "data_repository": "git@gitlab.company.com:eNMS-group/eNMS-operational-data.git"
   },
   "gotty": {
     "port_redirection": false,

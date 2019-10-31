@@ -9,47 +9,47 @@ title %} {% block stylesheets %} {{ super() }}
 <div class="right_col" role="main">
   <div class="row">
     <div class="col-md-3 col-sm-3 col-xs-12">
-        <div class="x_panel">
-          <div class="x_content" style="min-height:80vh;">
-            <div class="x_title">
-              <h4 class="text-center">Miscellaneous</h4>
-            </div>
-            <br />
-            <center>
-              <div class="btn-group-vertical" style="width:100%">
-                <button
-                  type="button"
-                  class="btn btn-primary btn-file"
-                  onclick="showConfiguration()"
-                >
-                  Configuration
-                </button>
-                <button
-                  class="btn btn-primary btn-file"
-                  onclick="getGitContent()"
-                >
-                  Fetch Git Configurations
-                </button>
-                <button class="btn btn-primary btn-file" onclick="scanCluster()">
-                  Scan Cluster Subnet
-                </button>
-                <button
-                  class="btn btn-primary btn-file"
-                  onclick="scheduler('pause')"
-                >
-                  Pause Scheduler
-                </button>
-                <button
-                  class="btn btn-primary btn-file"
-                  onclick="scheduler('resume')"
-                >
-                  Resume Scheduler
-                </button>
-              </div>
-            </center>
+      <div class="x_panel">
+        <div class="x_content" style="min-height:80vh;">
+          <div class="x_title">
+            <h4 class="text-center">Miscellaneous</h4>
           </div>
+          <br />
+          <center>
+            <div class="btn-group-vertical" style="width:100%">
+              <button
+                type="button"
+                class="btn btn-primary btn-file"
+                onclick="showConfiguration()"
+              >
+                Configuration
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="getGitContent()"
+              >
+                Fetch Git Configurations
+              </button>
+              <button class="btn btn-primary btn-file" onclick="scanCluster()">
+                Scan Cluster Subnet
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="scheduler('pause')"
+              >
+                Pause Scheduler
+              </button>
+              <button
+                class="btn btn-primary btn-file"
+                onclick="scheduler('resume')"
+              >
+                Resume Scheduler
+              </button>
+            </div>
+          </center>
         </div>
       </div>
+    </div>
     <div class="col-md-3 col-sm-3 col-xs-12">
       <div class="x_panel">
         <div class="x_content" style="min-height:80vh;">

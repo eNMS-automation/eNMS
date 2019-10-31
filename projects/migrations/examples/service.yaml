@@ -320,11 +320,14 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: Configure BGP Peering with Napalm
   device_query: ''
@@ -365,17 +368,21 @@
   shared: false
   skip: true
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   type: configure_bgp_service
   validation_method: none
   vendor: ''
   vrf_name: configure_BGP_test
   waiting_time: 100
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: Configuration Backup using NAPALM
   device_query: ''
@@ -419,6 +426,7 @@
   shared: false
   skip: true
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 60
   type: napalm_backup_service
@@ -426,7 +434,8 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   commit_configuration: false
   config_mode: false
   config_mode_command: ''
@@ -435,6 +444,8 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Create a VRF "test" with Netmiko
@@ -476,6 +487,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -552,7 +564,8 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   commit_configuration: false
   config_mode: false
   config_mode_command: ''
@@ -561,6 +574,8 @@
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: Delete VRF "test"
@@ -603,6 +618,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -678,12 +694,15 @@
   vendor: Arista
   waiting_time: 0
 - action: load_merge_candidate
+  close_connection: false
   color: '#D2E5FF'
   content: "vrf definition napalm\r\n"
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: Create a VRF "test" with Napalm
   device_query: ''
@@ -723,6 +742,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: napalm_configuration_service
@@ -789,11 +809,14 @@
   vendor: ''
   verify_ssl_certificate: true
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: 'Getter: get_facts'
   device_query: ''
@@ -835,6 +858,7 @@
   shared: true
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -842,11 +866,14 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: 'Getter: get_interfaces'
   device_query: ''
@@ -887,6 +914,7 @@
   shared: true
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -894,11 +922,14 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: 'Getter: get_interfaces_ip'
   device_query: ''
@@ -939,6 +970,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -946,11 +978,14 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: 'Getter: get_config'
   device_query: ''
@@ -990,6 +1025,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1333,11 +1369,14 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -1377,6 +1416,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 60
   type: napalm_rollback_service
@@ -1515,7 +1555,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   command: show vrf a
   config_mode: false
   confirmation1: Protocols
@@ -1525,6 +1566,8 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
+  credentials: device
+  custom_username: ''
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1568,6 +1611,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1575,7 +1619,8 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   command: show vrf
   config_mode: false
   confirmation1: Protocols
@@ -1585,6 +1630,8 @@
   content_match_regex: false
   conversion_method: text
   creator: admin
+  credentials: device
+  custom_username: ''
   delay_factor: 1.0
   delete_spaces_before_matching: false
   description: ''
@@ -1628,6 +1675,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1925,11 +1973,14 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -1973,6 +2024,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -1980,11 +2032,14 @@
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2027,6 +2082,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2034,11 +2090,14 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2083,6 +2142,7 @@
   shared: true
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2090,11 +2150,14 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2137,6 +2200,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2144,11 +2208,14 @@
   validation_method: dict_equal
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: false
+  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -2191,6 +2258,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -4444,12 +4512,15 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
+- close_connection: true
+  color: '#D2E5FF'
   config_mode: false
   content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
+  credentials: device
+  custom_username: ''
   delete_spaces_before_matching: false
   description: ''
   device_query: ''
@@ -4468,7 +4539,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-31 16:04:23.306561'
+  last_modified: '2019-10-31 16:10:48.269732'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4493,6 +4564,7 @@
   shared: false
   skip: false
   skip_query: ''
+  start_new_connection: false
   time_between_retries: 10
   timeout: 10
   type: data_backup_service

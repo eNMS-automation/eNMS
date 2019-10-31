@@ -81,18 +81,20 @@ function updatePools(pool) {
 function showDeviceConfiguration(device) {
   call(`/get_device_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
-      alertify.notify("No data stored.", "error", 5)
+      alertify.notify("No data stored.", "error", 5);
     } else {
       createPanel(
         "device_data",
         `Device Data - ${device.name}`,
         device.id,
         function() {
-          $(`#data_type-${device.id}`).on("change", function() {
-            $(`#content-${device.id}`).html(
-              `<pre style="height:100%">${result[this.value]}</pre>`
-            );
-          }).change();
+          $(`#data_type-${device.id}`)
+            .on("change", function() {
+              $(`#content-${device.id}`).html(
+                `<pre style="height:100%">${result[this.value]}</pre>`
+              );
+            })
+            .change();
         }
       );
     }

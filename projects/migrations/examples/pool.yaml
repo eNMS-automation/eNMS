@@ -21,9 +21,11 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 28
+  device_number: 30
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
@@ -35,7 +37,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver]
+    SanFrancisco, Orange, Oakland, Denver, Aserver, DZEFGR, AA]
   last_modified: ''
   latitude: '0.0'
   link_color: ''
@@ -89,9 +91,11 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 28
+  device_number: 30
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
@@ -103,7 +107,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver]
+    SanFrancisco, Orange, Oakland, Denver, Aserver, DZEFGR, AA]
   last_modified: ''
   latitude: '0.0'
   link_color: ''
@@ -158,6 +162,8 @@
   device_number: 0
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
@@ -223,6 +229,8 @@
   device_number: 14
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
@@ -289,6 +297,8 @@
   device_number: 18
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
@@ -356,6 +366,8 @@
   device_number: 12
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''
@@ -422,6 +434,8 @@
   device_number: 1
   device_operating_system: ''
   device_operating_system_match: inclusion
+  device_operational_data: ''
+  device_operational_data_match: inclusion
   device_os_version: ''
   device_os_version_match: inclusion
   device_port: ''

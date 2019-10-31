@@ -256,7 +256,8 @@ function serializeForm(form) {
 function deleteInstance(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
     $(`#instance_deletion-${id}`).remove();
-    tables["service"]
+    if (type.includes("service") || type == "workflow") type = "service";
+    tables[type]
       .row($(`#${id}`))
       .remove()
       .draw(false);

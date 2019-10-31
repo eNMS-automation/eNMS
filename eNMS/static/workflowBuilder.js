@@ -294,7 +294,7 @@ function processWorkflowData(instance, id) {
         call(
           `/add_service_to_workflow/${workflow.id}/${instance.id}`,
           function() {
-            updateWorfklowService(instance);
+            updateWorkflowService(instance);
           }
         );
       }
@@ -304,7 +304,7 @@ function processWorkflowData(instance, id) {
 }
 
 // eslint-disable-next-line
-function updateWorfklowService(service) {
+function updateWorkflowService(service) {
   nodes.add(serviceToNode(service));
   workflow.services.push(service);
   alertify.notify(
@@ -322,7 +322,7 @@ function addToWorkflow() {
     function(result) {
       workflow.last_modified = result.update_time;
       $("#add_service").remove();
-      updateWorfklowService(result.service);
+      updateWorkflowService(result.service);
     }
   );
 }

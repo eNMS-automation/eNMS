@@ -37,15 +37,16 @@ class DataBackupService(ConnectionService):
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Operational Data", device)
             for data in ("configuration", "operational_data"):
-                commands = run.sub(getattr(self, data), locals())
+                commands = run.sub(getattr(self, data), locals()).splitlines()
+                print("tttt"*100, commands)
                 result = "".join(
                     f"{command}:\n{netmiko_connection.send_command(command)}"
-                    for command in getattr(self, data)
+                    for command in commands
                 )
                 for r in self.replacements:
                     result = sub(r["pattern"], r["replace_with"], result, flags=M)
                 setattr(device, data, result)
-                with open(path / device.name / data, "w") as file:
+                with open(path / data, "w") as file:
                     file.write(result)
             device.last_status = "Success"
             device.last_duration = (

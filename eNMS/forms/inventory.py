@@ -96,6 +96,18 @@ class DeviceForm(ObjectForm):
     )
 
 
+class DeviceDataForm(BaseForm):
+    template = "device_data"
+    form_type = HiddenField(default="device_data")
+    data_type = SelectField(
+        "Display",
+        choices=(
+            ("configuration", "Configuration"),
+            ("operational_data", "Operational Data"),
+        ),
+    )
+
+
 @configure_relationships
 class LinkForm(ObjectForm):
     template = "object"

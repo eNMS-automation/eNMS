@@ -183,6 +183,20 @@ class Run(AbstractBase):
     def stop(self):
         return self.run_state["status"] == "stop"
 
+    @property
+    def progress(self):
+        if self.status == "Running":
+            progress = self.run_state["progress"]["device"]
+            try:
+                return (
+                    f"{progress['passed'] + progress['failed']}/{progress['total']}"
+                    f" ({progress['failed']} failed)"
+                )
+            except KeyError:
+                return "N/A"
+        else:
+            return "N/A"
+
     def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805
         values = _self.eval(query, **locals)
         devices, not_found = set(), []

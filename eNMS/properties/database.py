@@ -31,7 +31,6 @@ dont_migrate = {
         "workflows",
         "tasks",
         "edges",
-        "start_workflows",
     ],
     "task": [
         "id",

@@ -7,25 +7,19 @@ Below is a reference list of environment variables used to configure eNMS.
 Complete List of Environment Variables
 --------------------------------------
 
+All sensitive information have to be exported as environment variables.
+They are not stored in the configuration file ``config.json``.
+
 ::
 
   - export SECRET_KEY=your_secret_key123
   - export VAULT_TOKEN=e1c70d27-7c7f-6f6a-fb18-b0c0382667b7
-  - export UNSEAL_VAULT_KEY1=nvn7aJgA1wA/z2en/rqeNxU8zxSNcl8bH6L4Voch7LQQ
-  - export UNSEAL_VAULT_KEY2=Xndum7gpEykrsRAf6UkaDOSdGFqNMuswggD7zdIYakwI
+  - export UNSEAL_VAULT_KEY1=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
+  - export UNSEAL_VAULT_KEY2=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
   - export UNSEAL_VAULT_KEY3=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
-  # Uncomment for Postgres Mode:
-  # - export DATABASE_URL=postgresql://enms:password@localhost:5432/enms
-  # - export POSTGRES_PASSWORD=password
-  # - export POSTGRES_USER=enms
-  # - export POSTGRES_HOST=localhost
-  # - export POSTGRES_PORT=5432
-  # - export POSTGRES_DB=enms
-  # Uncomment for MySQL Mode:
-  # - export DATABASE_URL=mysql://root:password@localhost/enms
-  # Uncomment for SQLite Mode:
-  - export DATABASE_URL=sqlite:///database.db?check_same_thread=False
-  - export PATH_CUSTOM_PROPERTIES=/home/user/eNMS/eNMS_properties.yml
+  - export UNSEAL_VAULT_KEY4=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
+  - export UNSEAL_VAULT_KEY5=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
   - export MAIL_PASSWORD=eNMS-user
   - export TACACS_PASSWORD=tacacs_password
-  - export POOL_FILTER=All objects
+  - export OPENNMS_PASSWORD=opennms_password
+  - export SLACK_TOKEN=SLACK_TOKEN

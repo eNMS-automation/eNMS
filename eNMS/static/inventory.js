@@ -79,18 +79,24 @@ function updatePools(pool) {
 
 // eslint-disable-next-line
 function showDeviceConfiguration(device) {
-  createPanel(
-    "display_configuration",
-    `Configuration - ${device.name}`,
-    device.id,
-    function() {
-      call(`/get_device_data/${device.id}`, (result) => {
-        $(`#content-${device.id}`).html(
-          `<pre style="height:100%">${result.configuration}</pre>`
-        );
-      });
+  call(`/get_device_data/${device.id}`, (result) => {
+    if (!result.configuration && !result.operational_data) {
+      alertify.notify("No data stored.", "error", 5)
+    } else {
+      createPanel(
+        "device_data",
+        `Device Data - ${device.name}`,
+        device.id,
+        function() {
+          $(`#data_type-${device.id}`).on("change", function() {
+            $(`#content-${device.id}`).html(
+              `<pre style="height:100%">${result[this.value]}</pre>`
+            );
+          }).change();
+        }
+      );
     }
-  );
+  });
 }
 
 // eslint-disable-next-line

@@ -103,7 +103,7 @@ class DeviceDataForm(BaseForm):
         "Display",
         choices=(
             ("configuration", "Configuration"),
-            ("operational_data", "Operational Data"),
+            ("data", "Operational Data"),
         ),
     )
 

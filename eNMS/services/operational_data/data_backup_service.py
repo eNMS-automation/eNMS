@@ -38,8 +38,7 @@ class DataBackupService(ConnectionService):
             run.log("info", "Fetching Operational Data", device)
             for data in ("configuration", "operational_data"):
                 commands = run.sub(getattr(self, data), locals()).splitlines()
-                print("tttt"*100, commands)
-                result = "".join(
+                result = "\n\n".join(
                     f"{command}:\n{netmiko_connection.send_command(command)}"
                     for command in commands
                 )

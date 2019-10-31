@@ -338,7 +338,7 @@ class Run(AbstractBase):
                     self.device_iteration(payload, device) for device in devices
                 )
                 return {"success": success, "runtime": self.runtime}
-            if self.multiprocessing:
+            if self.multiprocessing and len(devices) > 1:
                 results = []
                 processes = min(len(devices), self.max_processes)
                 process_args = [

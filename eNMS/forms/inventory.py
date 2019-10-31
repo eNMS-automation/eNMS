@@ -101,10 +101,7 @@ class DeviceDataForm(BaseForm):
     form_type = HiddenField(default="device_data")
     data_type = SelectField(
         "Display",
-        choices=(
-            ("configuration", "Configuration"),
-            ("data", "Operational Data"),
-        ),
+        choices=(("configuration", "Configuration"), ("data", "Operational Data")),
     )
 
 

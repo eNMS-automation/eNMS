@@ -102,6 +102,10 @@ class Device(CustomDevice):
             for property in ("id", "name", "icon", "latitude", "longitude")
         }
 
+    @property
+    def ui_name(self):
+        return f"{self.name} ({self.model})" if self.model else self.name
+
     def update(self, **kwargs):
         super().update(**kwargs)
         if kwargs.get("dont_update_pools", False):

@@ -56,7 +56,9 @@ class Workflow(Service):
                     clone.services.append(service)
             else:
                 service_clone = service.duplicate(clone)
-            service_clone.positions[clone.name] = service.positions.get(self.name, (0, 0))
+            service_clone.positions[clone.name] = service.positions.get(
+                self.name, (0, 0)
+            )
             clone_services[service.id] = service_clone
         Session.commit()
         for edge in self.edges:

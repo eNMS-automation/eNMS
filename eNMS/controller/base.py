@@ -468,12 +468,10 @@ class BaseController:
 
     def multiselect_filtering(self, type, **params):
         model = models[type]
-        results = Session.query(model.id, model.name).filter(
-            model.name.contains(params.get("term"))
-        )
+        results = Session.query(model).filter(model.name.contains(params.get("term")))
         return {
             "items": [
-                {"text": r.name, "id": str(r.id)}
+                {"text": r.ui_name, "id": str(r.id)}
                 for r in results.limit(10).offset((int(params["page"]) - 1) * 10).all()
             ],
             "total_count": results.count(),

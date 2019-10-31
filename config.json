@@ -21,8 +21,8 @@
     "large_string_length": 32768
   },
   "git": {
-    "automation_repository": "git@gitlab.company.com:eNMS-group/eNMS-automation-data.git",
-    "data_repository": "git@gitlab.company.com:eNMS-group/eNMS-operational-data.git"
+    "automation_repository": "",
+    "data_repository": ""
   },
   "gotty": {
     "port_redirection": false,

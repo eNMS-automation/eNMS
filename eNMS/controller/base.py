@@ -15,7 +15,7 @@ from json import load
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
-from os import environ, makedirs, remove, scandir
+from os import environ, scandir
 from os.path import exists
 from pathlib import Path
 from ruamel import yaml
@@ -249,7 +249,7 @@ class BaseController:
                     local_path.mkdir(parents=True, exist_ok=True)
                     Repo.clone_from(repo, local_path)
             except Exception as exc:
-                self.log("error", f"Git pull failed ({repository_type}, {str(e)})")
+                self.log("error", f"Git pull failed ({repository_type}, {str(exc)})")
             if repository_type == "data":
                 self.update_database_configurations_from_git()
 
@@ -281,7 +281,7 @@ class BaseController:
     def init_logs(self):
         log_level = self.config["app"]["log_level"].upper()
         folder = self.path / "logs"
-        folder.mkdir(parents=True, exist_ok=True) 
+        folder.mkdir(parents=True, exist_ok=True)
         basicConfig(
             level=getattr(import_module("logging"), log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",

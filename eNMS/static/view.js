@@ -209,7 +209,7 @@ function showViewFilteringPanel(type) {
     [config.view.latitude, config.view.longitude],
     config.view.zoom_level
   );
-  layer = L.tileLayer(layers["osm"]);
+  layer = L.tileLayer(layers[config.view.tile_layer]);
   map
     .addLayer(layer)
     .on("click", function(e) {

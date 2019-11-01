@@ -83,7 +83,7 @@
     "longitude": -96.0,
     "latitude": 33.0,
     "zoom_level": 5,
-    "view": "2D",
+    "tile_layer": "osm",
     "marker": "Image"
   }
 }

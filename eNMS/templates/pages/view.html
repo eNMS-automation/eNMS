@@ -4,6 +4,10 @@ title %} {% block stylesheets %} {{ super() }}
   href="{{ url_for('static', filename='lib/leaflet/leaflet.min.css') }}"
   rel="stylesheet"
 />
+<link
+  href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}"
+  rel="stylesheet"
+/>
 <style>
   #map {
     height: 85vh;
@@ -11,6 +15,15 @@ title %} {% block stylesheets %} {{ super() }}
 </style>
 {% endblock stylesheets %} {% block content %}
 <ul id="contextMenu" class="dropdown-menu" role="menu">
+  <li class="menu dropdown-submenu geo-menu">
+    <a class="menu-submenu menu-layer" tabindex="-1" href="#"
+      >Type of View<span class="caret-right"></span
+    ></a>
+    <ul class="dropdown-menu">
+      <li><a tabindex="-1" href="#">Normal</a></li>
+      <li><a tabindex="-1" href="#">Clustered</a></li>
+    </ul>
+  </li>
   <li class="menu dropdown-submenu geo-menu">
     <a class="menu-submenu menu-layer" tabindex="-1" href="#"
       >Tile layer<span class="caret-right"></span
@@ -79,6 +92,7 @@ title %} {% block stylesheets %} {{ super() }}
   let viewType = "{{ view_type }}";
 </script>
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
+<script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 <script src="{{ url_for('static', filename='view.js') }}"></script>
 <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
 {% endblock javascripts %}

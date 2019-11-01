@@ -35,6 +35,8 @@ let polylinesArray = [];
 let layer;
 let markerType;
 let map;
+let markers = L.markerClusterGroup();
+let clustered;
 
 for (const [key, value] of Object.entries(iconSizes)) {
   window[`icon_${key}`] = L.icon({
@@ -91,11 +93,16 @@ function createNode(node, nodeType) {
     $(`.rc-${nodeType}-menu`).show();
     selectedObject = node; // eslint-disable-line no-undef
   });
-  marker.addTo(map);
+  if (clustered) {
+    markers.addLayer(marker);
+  } else  {
+    marker.addTo(map);
+  }
 }
 
 // eslint-disable-next-line
 function createLink(link) {
+  if (clustered) return;
   let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
   let pointB = new L.LatLng(
     link.destination_latitude,
@@ -146,6 +153,8 @@ Object.assign(action, {
   Image: () => changeMarker("Image"),
   Circle: () => changeMarker("Circle"),
   "Circle Marker": () => changeMarker("Circle Marker"),
+  Normal: () => updateView(),
+  Clustered: () => updateView(true),
 });
 
 $("body").contextMenu({
@@ -158,7 +167,8 @@ $("body").contextMenu({
 });
 
 // eslint-disable-next-line
-function updateView() {
+function updateView(withCluster) {
+  clustered = withCluster;
   deleteAll();
   if (viewType == "network") {
     call("/get_view_topology", function(topology) {
@@ -175,6 +185,11 @@ function updateView() {
       }
     });
     $(".geo-menu").show();
+  }
+  if (clustered) {
+    map.addLayer(markers);
+  } else {
+    map.removeLayer(markers);
   }
 }
 

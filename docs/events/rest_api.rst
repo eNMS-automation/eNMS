@@ -236,9 +236,3 @@ Some of the functionalities available in the administration panel can be accesse
 - ``update_database_configurations_from_git``: download and update device configuration from a git repository.
 - ``update_all_pools``: update all pools.
 - ``get_git_content``: fetch git configuration and automation content.
-
-Swagger / OpenAPI Interface
-***************************
-
-The eNMS ReST API is documented with Swagger / OpenAPI3.0. JSON and Yaml definitions for the interface, as well as the HTML API
-document can be found in the 'swagger' directory of the eNMS project.

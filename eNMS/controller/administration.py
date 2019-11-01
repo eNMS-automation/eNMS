@@ -162,7 +162,7 @@ class AdministrationController(BaseController):
         for service_dict in services:
             for relation in ("devices", "pools", "events"):
                 service_dict.pop(relation)
-        with open(path / f"service.yaml", "w") as file:
+        with open(path / "service.yaml", "w") as file:
             yaml.dump(services, file)
         if service.type == "workflow":
             with open(path / "workflow_edge.yaml", "w") as file:
@@ -171,7 +171,7 @@ class AdministrationController(BaseController):
                 )
         with open_tar(f"{path}.tgz", "w:gz") as tar:
             tar.add(path, arcname=service.filename)
-        rmtree(path)
+        rmtree(path, ignore_errors=True)
 
     def get_exported_services(self):
         return listdir(self.path / "files" / "services")

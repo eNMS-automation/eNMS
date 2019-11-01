@@ -19,7 +19,6 @@ from os import environ, scandir
 from os.path import exists
 from pathlib import Path
 from ruamel import yaml
-from simplekml import Color, Style
 from smtplib import SMTP
 from string import punctuation
 from sqlalchemy import and_, func, or_
@@ -171,7 +170,6 @@ class BaseController:
             self.init_syslog_server()
         if config["paths"]["custom_code"]:
             sys_path.append(config["paths"]["custom_code"])
-        self.create_google_earth_styles()
         self.fetch_version()
         self.init_logs()
 
@@ -202,15 +200,6 @@ class BaseController:
         for run in fetch("run", all_matches=True, allow_none=True, status="Running"):
             run.status = "Aborted (app reload)"
         Session.commit()
-
-    def create_google_earth_styles(self):
-        self.google_earth_styles = {}
-        for icon in device_icons:
-            point_style = Style()
-            point_style.labelstyle.color = Color.blue
-            path_icon = f"{self.path}/eNMS/static/images/view/{icon}.gif"
-            point_style.iconstyle.icon.href = path_icon
-            self.google_earth_styles[icon] = point_style
 
     def fetch_version(self):
         with open(self.path / "package.json") as package_file:

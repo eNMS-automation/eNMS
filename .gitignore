@@ -42,11 +42,11 @@ node_modules/
 .vscode
 eNMS/.vscode
 
-# exclude everything in git subfolders, except gitkeep
-git/automation/*
-git/data/*
-!git/automation/.gitkeep
-!git/operational_data/.gitkeep
+# exclude everything in files/git subfolders, except gitkeep
+files/git/automation/*
+files/git/data/*
+!files/git/automation/.gitkeep
+!files/git/operational_data/.gitkeep
 
 # exclude Assets Bundle
 eNMS/static/bundles

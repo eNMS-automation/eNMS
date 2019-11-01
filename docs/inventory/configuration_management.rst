@@ -17,7 +17,7 @@ Device configuration
 All devices are listed in the :guilabel:`Inventory / Configuration Management` page. By default, configurations are retrieved by a service called ``Configuration Backup Service``, which:
   - Uses Netmiko to fetch the configuration
   - Updates the device ``configuration`` property (a python dictionary that contains the most recent configurations)
-  - Writes the configuration to a local text file (located in eNMS/git/configurations)
+  - Writes the configuration to a local text file (located in eNMS/files/git/data)
 
 .. image:: /_static/inventory/configuration_management/device_configuration.png
    :alt: Configuration Management table.

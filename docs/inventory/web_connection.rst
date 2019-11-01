@@ -48,7 +48,7 @@ With Nginx, this can be accomplished with the following `location` :
    proxy_set_header Connection "upgrade";
  }
 
-A full example of nginx configuration can be found in ``eNMS/nginx``.
+A full example of nginx configuration can be found in ``eNMS/files/nginx``.
 
 eNMS does not by default perform any port redirection: you must set the ``port_redirection``
 variable to ``true`` to enable it.

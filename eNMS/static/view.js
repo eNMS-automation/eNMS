@@ -111,7 +111,7 @@ function createLink(link) {
   const pointList = [pointA, pointB];
   const polyline = new L.Polyline(pointList, {
     color: link.color,
-    weight: 3,
+    weight: 2,
     opacity: 1,
     smoothFactor: 1,
   });
@@ -121,10 +121,9 @@ function createLink(link) {
     showTypePanel("link", this.link_id);
   });
   polyline.on("contextmenu", function(e) {
-    console.log("test")
     $(".menu").hide();
     $(".rc-link-menu").show();
-    selectedObject = this.link; // eslint-disable-line no-undef
+    selectedObject = link; // eslint-disable-line no-undef
   });
   polyline.bindTooltip(link.name, {
     permanent: false,
@@ -224,6 +223,12 @@ function filter(type) {
 function showViewFilteringPanel(type) {
   showFilteringPanel(`${type}_filtering`);
 }
+
+Object.assign(action, {
+  "Properties": (o) => showTypePanel(o.icon ? "device" : "link", o.id),
+  Connect: (d) => showPanel("device_connection", d.id),
+  Configuration: (d) => showDeviceConfiguration(d),
+});
 
 (function() {
   markerType = config.view.marker;

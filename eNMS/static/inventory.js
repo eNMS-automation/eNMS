@@ -107,13 +107,3 @@ function showDeviceResultsPanel(device) {
     initTable("result", device);
   });
 }
-
-Object.assign(action, {
-  "Device properties": (d) => {
-    console.log(d)
-    showTypePanel("device", d.id)
-  },
-  "Link properties": (l) => showTypePanel("link", l.id),
-  Connect: (d) => showPanel("device_connection", d.id),
-  Configuration: (d) => showDeviceConfiguration(d),
-});

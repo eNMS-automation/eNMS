@@ -13,6 +13,10 @@ __pycache__/
 *.log.*
 /eNMS/database.*
 
+# created by eNMS
+logs
+files/git
+
 # venv
 env
 venv
@@ -41,13 +45,3 @@ node_modules/
 *.code-workspace
 .vscode
 eNMS/.vscode
-
-# exclude everything in files/git subfolders, except gitkeep
-files/git/automation/*
-files/git/data/*
-!files/git/automation/.gitkeep
-!files/git/operational_data/.gitkeep
-
-# exclude Assets Bundle
-eNMS/static/bundles
-eNMS/static/.webassets-cache

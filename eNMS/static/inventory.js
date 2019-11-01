@@ -1,6 +1,5 @@
 /*
 global
-action: false
 alertify: false
 call: false
 config: true
@@ -9,8 +8,6 @@ fCall: false
 initSelect: false
 initTable: false
 openUrl: false
-showPanel: false
-showTypePanel: false
 tables: false
 */
 

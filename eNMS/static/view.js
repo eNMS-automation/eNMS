@@ -6,7 +6,9 @@ call: false
 config: true
 L: false
 serializeForm: false
+showDeviceConfiguration: false
 showFilteringPanel: false
+showPanel: false
 showPoolView: false
 showTypePanel: false
 viewType: false
@@ -95,7 +97,7 @@ function createNode(node, nodeType) {
   });
   if (clustered) {
     markers.addLayer(marker);
-  } else  {
+  } else {
     marker.addTo(map);
   }
 }
@@ -225,7 +227,7 @@ function showViewFilteringPanel(type) {
 }
 
 Object.assign(action, {
-  "Properties": (o) => showTypePanel(o.icon ? "device" : "link", o.id),
+  Properties: (o) => showTypePanel(o.icon ? "device" : "link", o.id),
   Connect: (d) => showPanel("device_connection", d.id),
   Configuration: (d) => showDeviceConfiguration(d),
 });

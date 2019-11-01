@@ -9,7 +9,6 @@ from napalm import get_network_driver
 from netmiko import ConnectHandler
 from os import environ
 from paramiko import SFTPClient
-from pathlib import Path
 from ruamel import yaml
 from re import compile, search
 from requests import post

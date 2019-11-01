@@ -121,6 +121,7 @@ function createLink(link) {
     showTypePanel("link", this.link_id);
   });
   polyline.on("contextmenu", function(e) {
+    console.log("test")
     $(".menu").hide();
     $(".rc-link-menu").show();
     selectedObject = this.link; // eslint-disable-line no-undef

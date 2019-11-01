@@ -2299,7 +2299,7 @@
   operating_system: ''
   options: {}
   pass_device_properties: true
-  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_version.yml
+  playbook_path: /media/sf_VM/eNMS/files/playbooks/arista_show_version.yml
   pools: []
   positions:
     'Regression Workflow 6: Ansible with Validation': [-466, 154]
@@ -2350,7 +2350,7 @@
   operating_system: ''
   options: {}
   pass_device_properties: true
-  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
+  playbook_path: /media/sf_VM/eNMS/files/playbooks/arista_show_running_config.yml
   pools: []
   positions:
     'Regression Workflow 6: Ansible with Validation': [179, -62]
@@ -2400,7 +2400,7 @@
   operating_system: ''
   options: {}
   pass_device_properties: true
-  playbook_path: /media/sf_VM/eNMS/playbooks/arista_show_running_config.yml
+  playbook_path: /media/sf_VM/eNMS/files/playbooks/arista_show_running_config.yml
   pools: []
   positions:
     'Regression Workflow 6: Ansible with Validation': [486, 173]

@@ -232,6 +232,6 @@ class AutomationController(BaseController):
             return {"error": "This task no longer exists."}
 
     def scan_playbook_folder(self):
-        path = Path(self.config["paths"]["playbooks"] or self.path / "playbooks")
+        path = Path(self.config["paths"]["playbooks"] or self.path / "files" / "playbooks")
         playbooks = [[str(f) for f in path.glob(e)] for e in ("*.yaml", "*.yml")]
         return sorted(sum(playbooks, []))

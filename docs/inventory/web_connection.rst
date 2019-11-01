@@ -8,7 +8,7 @@ GoTTY is a terminal sharing web solution that can be found on github: https://gi
 Installation
 ------------
 
-There is no need to install GoTTY: it is shipped with eNMS by default in ``/eNMS/applications``.
+There is no need to install GoTTY: it is shipped with eNMS by default in ``/eNMS/files/apps``.
 However, you must make sure that the file `gotty` can be executed (``chmod 755 gotty``).
 
 Port allocation

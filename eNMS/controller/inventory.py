@@ -28,7 +28,7 @@ class InventoryController(BaseController):
 
     def connection(self, device_id, **kwargs):
         device = fetch("device", id=device_id)
-        cmd = [str(self.path / "applications" / "gotty"), "-w"]
+        cmd = [str(self.path / "files" / "apps" / "gotty"), "-w"]
         port, protocol = self.get_gotty_port(), kwargs["protocol"]
         address = getattr(device, kwargs["address"])
         cmd.extend(["-p", str(port)])

@@ -33,7 +33,7 @@ From the :guilabel:`automation/service_management` page, you can:
 - Start a Service Instance (``Run`` button).
 - View and compare the results of the Service Instance.
 - Edit or duplicate the Service Instance.
-- Export the Service Instance: the service instance will be exported as a YaML file in the ``projects/exported_services`` directory. This allows migrating service instances from one VM to another if you are using different VM.
+- Export the Service Instance: the service instance will be exported as a YaML file in the ``files/exported_services`` directory. This allows migrating service instances from one VM to another if you are using different VM.
 - Delete the Service Instance.
 
 When running a service instance, the device progress (current device/total devices selected to run) will be displayed in the table, unless Multiprocessing is selected to run the devices in parallel, in which case eNMS cannot keep track of how many devices are completed until the service instance finishes.

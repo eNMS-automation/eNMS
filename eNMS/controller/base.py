@@ -427,7 +427,7 @@ class BaseController:
             value = kwargs["form"].get(property)
             if not value:
                 continue
-            filter = kwargs["form"][f"{property}_filter"]
+            filter = kwargs["form"].get(f"{property}_filter")
             if value in ("bool-true", "bool-false"):
                 constraint = getattr(model, property) == (value == "bool-true")
             elif filter == "equality":

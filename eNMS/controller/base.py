@@ -233,7 +233,7 @@ class BaseController:
             admin.password = "admin"
 
     def update_credentials(self):
-        with open(self.path / "projects" / "spreadsheets" / "usa.xls", "rb") as file:
+        with open(self.path / "files" / "spreadsheets" / "usa.xls", "rb") as file:
             self.topology_import(file)
 
     def get_git_content(self):

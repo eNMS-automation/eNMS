@@ -4515,6 +4515,7 @@
 - close_connection: true
   color: '#D2E5FF'
   config_mode: false
+  configuration: show run
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4539,7 +4540,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-31 16:10:48.269732'
+  last_modified: '2019-11-01 06:31:00.097217'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4549,6 +4550,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
+  operational_data: "show users\r\nshow ip int br\r\nshow vrf"
   pools: []
   positions:
     'Regression Workflow 9: Operational Data Backup': [-284, -43]

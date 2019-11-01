@@ -91,7 +91,7 @@ class AdministrationController(BaseController):
                 delete_all(model)
                 Session.commit()
         workflow_edges, workflow_services = [], {}
-        folder_path = self.path / "projects" / folder / kwargs["name"]
+        folder_path = self.path / "files" / folder / kwargs["name"]
         for model in models:
             path = folder_path / f"{model}.yaml"
             if not path.exists():
@@ -134,7 +134,7 @@ class AdministrationController(BaseController):
 
     def import_service(self, archive):
         service_name = archive.split(".")[0]
-        path = self.path / "projects" / "services"
+        path = self.path / "files" / "services"
         with open_tar(path / archive) as tar_file:
             tar_file.extractall(path=path)
             status = self.migration_import(
@@ -147,7 +147,7 @@ class AdministrationController(BaseController):
 
     def migration_export(self, **kwargs):
         for cls_name in kwargs["import_export_types"]:
-            path = self.path / "projects" / "migrations" / kwargs["name"]
+            path = self.path / "files" / "migrations" / kwargs["name"]
             if not exists(path):
                 makedirs(path)
             with open(path / f"{cls_name}.yaml", "w") as migration_file:
@@ -155,7 +155,7 @@ class AdministrationController(BaseController):
 
     def export_service(self, service_id):
         service = fetch("service", id=service_id)
-        path = Path(self.path / "projects" / "services" / service.filename)
+        path = Path(self.path / "files" / "services" / service.filename)
         path.mkdir(parents=True, exist_ok=True)
         services = service.deep_services if service.type == "workflow" else [service]
         services = [service.to_dict(export=True) for service in services]
@@ -174,7 +174,7 @@ class AdministrationController(BaseController):
         rmtree(path)
 
     def get_exported_services(self):
-        return listdir(self.path / "projects" / "services")
+        return listdir(self.path / "files" / "services")
 
     def save_configuration(self, **config):
         self.config = config

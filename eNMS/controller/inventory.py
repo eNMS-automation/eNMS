@@ -92,7 +92,7 @@ class InventoryController(BaseController):
             kml_color = f"ff{link.color[5:]}{link.color[3:5]}{link.color[1:3]}"
             line.style.linestyle.color = kml_color
             line.style.linestyle.width = kwargs["line_width"]
-        filepath = self.path / "projects" / "google_earth" / f'{kwargs["name"]}.kmz'
+        filepath = self.path / "files" / "google_earth" / f'{kwargs["name"]}.kmz'
         kml_file.save(filepath)
 
     def export_topology(self, **kwargs):
@@ -106,7 +106,7 @@ class InventoryController(BaseController):
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))
-        workbook.save(self.path / "projects" / "spreadsheets" / filename)
+        workbook.save(self.path / "files" / "spreadsheets" / filename)
 
     def query_netbox(self, **kwargs):
         nb = netbox_api(kwargs["netbox_address"], token=kwargs["netbox_token"])

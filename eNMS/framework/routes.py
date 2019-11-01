@@ -91,7 +91,7 @@ def administration():
         f"pages/administration.html",
         **{
             "endpoint": "administration",
-            "folders": listdir(app.path / "projects" / "migrations"),
+            "folders": listdir(app.path / "files" / "migrations"),
         },
     )
 

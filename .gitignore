@@ -15,7 +15,7 @@ __pycache__/
 
 # created by eNMS
 logs
-files/git
+git
 
 # venv
 env

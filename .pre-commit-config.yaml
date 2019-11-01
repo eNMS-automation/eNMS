@@ -8,4 +8,4 @@ repos:
       rev: master
       hooks:
       -   id: flake8
-          args: ['--config=linting/.flake8']
+          args: ['--config=tests/linting/.flake8']

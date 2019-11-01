@@ -33,11 +33,11 @@ Before opening a pull request with your changes, you should make sure that:
  black --check --verbose .
 
  # your code is PEP8 (flake8) compliant (python)
- flake8 --config linting/.flake8 .
+ flake8 --config tests/linting/.flake8 .
 
  # your code is mypy compliant
  # Mypy is a adds static type hinting to Python for the whole project; see (http://mypy-lang.org/)
- mypy --config-file linting/mypy.ini .
+ mypy --config-file tests/linting/mypy.ini .
 
  # your code is prettier compliant (javascript)
  npm run prettier

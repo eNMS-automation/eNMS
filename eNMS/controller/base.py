@@ -15,7 +15,8 @@ from json import load
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
-from os import environ, remove, scandir
+from os import environ, makedirs, remove, scandir
+from os.path import exists
 from pathlib import Path
 from ruamel import yaml
 from simplekml import Color, Style
@@ -289,13 +290,15 @@ class BaseController:
 
     def init_logs(self):
         log_level = self.config["app"]["log_level"].upper()
+        folder = self.path / "logs"
+        folder.mkdir(parents=True, exist_ok=True) 
         basicConfig(
             level=getattr(import_module("logging"), log_level),
             format="%(asctime)s %(levelname)-8s %(message)s",
             datefmt="%m-%d-%Y %H:%M:%S",
             handlers=[
                 RotatingFileHandler(
-                    self.path / "logs" / "enms.log", maxBytes=20_000_000, backupCount=10
+                    folder / "enms.log", maxBytes=20_000_000, backupCount=10
                 ),
                 StreamHandler(),
             ],

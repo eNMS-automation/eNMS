@@ -43,15 +43,16 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def git_push_configurations(self, run, payload):
-        if app.git_configurations:
-            repo = Repo(Path.cwd() / "git" / "configurations")
-            try:
-                repo.remotes.origin.pull()
-                repo.git.add(A=True)
-                repo.git.commit(m="Automatic commit (configurations)")
-            except GitCommandError as e:
-                info(f"Git commit failed ({str(e)}")
-            repo.remotes.origin.push()
+        if not app.config["git_repository"]:
+            return
+        repo = Repo(Path.cwd() / "network_data")
+        try:
+            repo.remotes.origin.pull()
+            repo.git.add(A=True)
+            repo.git.commit(m="Automatic commit (configurations)")
+        except GitCommandError as e:
+            info(f"Git commit failed ({str(e)}")
+        repo.remotes.origin.push()
         return {"success": True}
 
     def process_payload1(self, run, payload, device):

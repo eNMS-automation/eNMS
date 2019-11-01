@@ -237,21 +237,19 @@ class BaseController:
             self.topology_import(file)
 
     def get_git_content(self):
-        for repository_type in ("data", "automation"):
-            repo = self.config["git"][f"{repository_type}_repository"]
-            if not repo:
-                continue
-            local_path = self.path / "git" / repository_type
-            try:
-                if exists(local_path):
-                    Repo(local_path).remotes.origin.pull()
-                else:
-                    local_path.mkdir(parents=True, exist_ok=True)
-                    Repo.clone_from(repo, local_path)
-            except Exception as exc:
-                self.log("error", f"Git pull failed ({repository_type}, {str(exc)})")
-            if repository_type == "data":
-                self.update_database_configurations_from_git()
+        repo = self.config["app"]["git_repository"]
+        if not repo:
+            return
+        local_path = self.path / "network_data"
+        try:
+            if exists(local_path):
+                Repo(local_path).remotes.origin.pull()
+            else:
+                local_path.mkdir(parents=True, exist_ok=True)
+                Repo.clone_from(repo, local_path)
+        except Exception as exc:
+            self.log("error", f"Git pull failed ({str(exc)})")
+        self.update_database_configurations_from_git()
 
     def load_custom_properties(self):
         filepath = self.config["paths"]["custom_properties"]
@@ -565,7 +563,7 @@ class BaseController:
         return input.translate(str.maketrans("", "", f"{punctuation} "))
 
     def update_database_configurations_from_git(self):
-        for dir in scandir(self.path / "git" / "data"):
+        for dir in scandir(self.path / "network_data"):
             if dir.name == ".git":
                 continue
             device = fetch("device", allow_none=True, name=dir.name)

@@ -2,8 +2,6 @@ from builtins import __dict__ as builtins
 from collections import defaultdict
 from copy import deepcopy
 from functools import partial
-from git import Repo
-from git.exc import GitCommandError
 from json import dumps, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
@@ -462,18 +460,6 @@ class Run(AbstractBase):
         if not self.display_only_failed_nodes:
             notification.append(f"PASSED :\n{passed}")
         return "\n\n".join(notification)
-
-    def git_push(self, results):
-        path_git_folder = Path.cwd() / "git" / "automation"
-        with open(path_git_folder / self.name, "w") as file:
-            file.write(app.str_dict(results))
-        repo = Repo(str(path_git_folder))
-        try:
-            repo.git.add(A=True)
-            repo.git.commit(m=f"Automatic commit ({self.name})")
-        except GitCommandError:
-            pass
-        repo.remotes.origin.push()
 
     def notify(self, results):
         notification = self.build_notification(results)

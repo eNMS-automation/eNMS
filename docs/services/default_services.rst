@@ -21,7 +21,6 @@ Parameters common to all services
     - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
     - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
     - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next service.
-    - ``Push to Git`` Push the results of the service to a remote Git repository configured from the administration panel.
 - ``Targets``
     - ``Devices`` Multi-selection list of devices from the inventory
     - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.

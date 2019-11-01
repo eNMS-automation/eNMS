@@ -29,9 +29,3 @@ You can compare two versions of the results by clicking on the ``Compare`` butto
 .. image:: /_static/runs/run_results.png
    :alt: Results of a run
    :align: center
-
-Gitlab Export
--------------
-
-In the :guilabel:`admin/administration` page, you can configure a remote Git repository with the property ``Git Repository Automation``. Each service has a ``Push to Git`` option to push the results of the service to this remote repository.
-This allows comparing the results of a service between any two runs.

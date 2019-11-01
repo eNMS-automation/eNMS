@@ -4,7 +4,8 @@
     "config_mode": "debug",
     "create_examples": true,
     "documentation_url": "https://enms.readthedocs.io/en/latest/",
-    "log_level": "debug"
+    "log_level": "debug",
+    "git_repository": ""
   },
   "cluster": {
     "active": false,
@@ -19,10 +20,6 @@
     "pool_size": 1000,
     "small_string_length": 255,
     "large_string_length": 32768
-  },
-  "git": {
-    "automation_repository": "",
-    "data_repository": ""
   },
   "gotty": {
     "port_redirection": false,

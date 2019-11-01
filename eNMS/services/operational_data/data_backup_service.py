@@ -31,7 +31,7 @@ class DataBackupService(ConnectionService):
     __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
 
     def job(self, run, payload, device):
-        path = Path.cwd() / "git" / "data" / device.name
+        path = Path.cwd() / "network_data" / device.name
         path.mkdir(parents=True, exist_ok=True)
         try:
             device.last_runtime = datetime.now()

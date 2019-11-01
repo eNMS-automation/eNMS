@@ -434,7 +434,7 @@ class BaseController:
             value = kwargs["form"].get(property)
             if not value:
                 continue
-            filter = kwargs.get(f"form[{property}_filter]")
+            filter = kwargs["form"][f"{property}_filter"]
             if value in ("bool-true", "bool-false"):
                 constraint = getattr(model, property) == (value == "bool-true")
             elif filter == "equality":
@@ -447,7 +447,7 @@ class BaseController:
             constraints.append(constraint)
         for related_model, relation_properties in relationships[obj_type].items():
             relation_ids = [int(id) for id in kwargs["form"].get(related_model, [])]
-            filter = kwargs["form"].get(f"{related_model}_filter]")
+            filter = kwargs["form"].get(f"{related_model}_filter")
             if filter == "none":
                 constraint = ~getattr(model, related_model).any()
             elif not relation_ids:

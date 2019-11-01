@@ -7,7 +7,7 @@ Backup & Restore and Database Migration
 
 From the ``Admin / Administration`` page, eNMS also supports backup and restore, as well as migration from one eNMS version to another, utilizing an Import and Export feature.
 
-By providing a directory name and selecting which eNMS object types to export/backup, eNMS serializes the stored objects in the directory ``(eNMS_HOME)/projects/migrations/directory_name``. These yaml files can then be copied into the same directory (``(eNMS_HOME)/projects/migrations/``) on a new VM instance of eNMS, and then the Import function can be used to import/restore the configuration and living data of those object types.
+By providing a directory name and selecting which eNMS object types to export/backup, eNMS serializes the stored objects in the directory ``(eNMS_HOME)/files/migrations/directory_name``. These yaml files can then be copied into the same directory (``(eNMS_HOME)/files/migrations/``) on a new VM instance of eNMS, and then the Import function can be used to import/restore the configuration and living data of those object types.
 
 .. image:: /_static/administration/migrations.png
    :alt: Migrations

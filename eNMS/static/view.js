@@ -132,7 +132,13 @@ function createLink(link) {
 }
 
 function deleteAllDevices() {
-  markersArray.map((d) => d.removeFrom(map));
+  for (let i = 0; i < markersArray.length; i++) {
+    if (clustered) {
+      markers.removeLayer(markersArray[i]);
+    } else {
+      markersArray[i].removeFrom(map);
+    }
+  }
   markersArray = [];
 }
 
@@ -168,8 +174,8 @@ $("body").contextMenu({
 
 // eslint-disable-next-line
 function updateView(withCluster) {
-  clustered = withCluster;
   deleteAll();
+  clustered = withCluster;
   if (viewType == "network") {
     call("/get_view_topology", function(topology) {
       topology.devices.map((d) => createNode(d, "device"));

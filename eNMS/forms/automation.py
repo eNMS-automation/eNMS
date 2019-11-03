@@ -274,9 +274,8 @@ class AddServiceForm(BaseForm):
 
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
-    template = "object"
     action = "createLabel"
-    content = StringField(widget=TextArea(), render_kw={"rows": 15})
+    text = StringField(widget=TextArea(), render_kw={"rows": 15})
     alignment = SelectField(
         "Text Alignment",
         choices=(("left", "Left"), ("center", "Center"), ("right", "Right")),

@@ -75,7 +75,7 @@ class AutomationController(BaseController):
         workflow, label_id = fetch("workflow", id=workflow_id), str(uuid4())
         label = {
             "positions": [x, y],
-            "content": kwargs["content"],
+            "content": kwargs["text"],
             "alignment": kwargs["alignment"],
         }
         workflow.labels[label_id] = label

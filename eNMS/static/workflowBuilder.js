@@ -347,12 +347,12 @@ function deleteNode(id) {
   }
 }
 
-function deleteLabel(label) {
+function deleteLabel(label, noNotification) {
   nodes.remove(label.id);
   call(`/delete_label/${workflow.id}/${label.id}`, function(updateTime) {
     delete workflow.labels[label.id];
     workflow.last_modified = updateTime;
-    alertify.notify("Label removed.", "success", 5);
+    if (!noNotification) alertify.notify("Label removed.", "success", 5);
   });
 }
 
@@ -622,11 +622,15 @@ Object.assign(action, {
 
 // eslint-disable-next-line
 function createLabel() {
-  const pos = mousePosition ? [mousePosition.x, mousePosition.y] : [0, 0];
+  const pos = currLabel
+    ? [currLabel.x, currLabel.y]
+    : mousePosition
+    ? [mousePosition.x, mousePosition.y]
+    : [0, 0];
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
   fCall(`/create_label/${params}`, "#workflow_label-form", function(result) {
     if (currLabel) {
-      deleteLabel(currLabel);
+      deleteLabel(currLabel, true);
       currLabel = null;
     }
     drawLabel(result.id, result);
@@ -636,9 +640,9 @@ function createLabel() {
 }
 
 function editLabel(label) {
-  showPanel("workflow_label", label.id, () => {
-    $(`#workflow_label-content-${label.id}`).val(label.label);
-    $(`#workflow_label-alignment-${label.id}`)
+  showPanel("workflow_label", null, () => {
+    $("#text").val(label.label);
+    $("#alignment")
       .val(label.font.align)
       .selectpicker("refresh");
     currLabel = label;

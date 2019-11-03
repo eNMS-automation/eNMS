@@ -443,7 +443,11 @@ function serviceToNode(service) {
       align: "center",
       bold: { color: "#000000" },
     },
-    borderWidth: service.shared ? 3 : 1,
+    shadow: {
+      enabled: !defaultService,
+      color: service.shared ? "#6666FF" : "grey",
+      size: 15,
+    },
     label: getServiceLabel(service),
     name: service.scoped_name,
     type: service.type,

@@ -426,6 +426,7 @@ function getServiceLabel(service) {
 }
 
 function serviceToNode(service) {
+  console.log(service.shared)
   const defaultService = ["Start", "End"].includes(service.scoped_name);
   return {
     id: service.id,
@@ -442,6 +443,7 @@ function serviceToNode(service) {
       align: "center",
       bold: { color: "#000000" },
     },
+    borderWidth: service.shared ? 3 : 1,
     label: getServiceLabel(service),
     name: service.scoped_name,
     type: service.type,

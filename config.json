@@ -23,7 +23,7 @@
   },
   "gotty": {
     "port_redirection": false,
-    "bypass_key_prompt": false,
+    "bypass_key_prompt": true,
     "port": -1,
     "start_port": 9000,
     "end_port": 9100

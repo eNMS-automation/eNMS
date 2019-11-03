@@ -46,3 +46,9 @@ node_modules/
 *.code-workspace
 .vscode
 eNMS/.vscode
+
+# Pycharm files
+.idea/
+
+# Apple files
+._*

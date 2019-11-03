@@ -115,12 +115,15 @@ function displayWorkflow(workflowData) {
   });
   graph.on("doubleClick", function(event) {
     event.event.preventDefault();
-    const service = nodes.get(this.getNodeAt(event.pointer.DOM));
-    if (!service.id || service.type == "label") return;
-    if (service.type == "workflow") {
-      switchToWorkflow(service.id);
+    const node = nodes.get(this.getNodeAt(event.pointer.DOM));
+    if (!node.id) {
+      return;
+    } else if (node.type == "label") {
+      editLabel(node);
+    } else if (node.type == "workflow") {
+      switchToWorkflow(node.id);
     } else {
-      showTypePanel(service.type, service.id);
+      showTypePanel(node.type, node.id);
     }
   });
   $("#current-runtime").empty();

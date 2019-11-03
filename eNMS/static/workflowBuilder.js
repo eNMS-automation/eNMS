@@ -633,9 +633,9 @@ function createLabel() {
 }
 
 function editLabel(label) {
-  showPanel("workflow_label", null, () => {
-    $("#content").val(label.label);
-    $("#alignment")
+  showPanel("workflow_label", label.id, () => {
+    $(`#workflow_label-content-${label.id}`).val(label.label);
+    $(`#workflow_label-alignment-${label.id}`)
       .val(label.font.align)
       .selectpicker("refresh");
     currLabel = label;

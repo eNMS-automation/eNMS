@@ -20,6 +20,7 @@ from os.path import exists
 from pathlib import Path
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 from ruamel import yaml
 from smtplib import SMTP
 from string import punctuation
@@ -285,8 +286,12 @@ class BaseController:
 
     def init_connection_pools(self):
         self.request_session = RequestSession()
-        for pool in ("http://", "https://"):
-            self.request_session.mount(pool, HTTPAdapter(**self.config["requests"]))
+        retry = Retry(**self.config["requests"]["retries"])
+        for protocol in ("http", "https"):
+            self.request_session.mount(
+                f"{protocol}://",
+                HTTPAdapter(max_retries=retry, **self.config["requests"]["pool"],),
+            )
 
     def init_scheduler(self):
         self.scheduler = BackgroundScheduler(

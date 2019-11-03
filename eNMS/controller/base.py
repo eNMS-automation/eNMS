@@ -18,6 +18,8 @@ from logging.handlers import RotatingFileHandler
 from os import environ, scandir
 from os.path import exists
 from pathlib import Path
+from requests import Session as RequestSession
+from requests.adapters import HTTPAdapter
 from ruamel import yaml
 from smtplib import SMTP
 from string import punctuation
@@ -171,6 +173,7 @@ class BaseController:
             sys_path.append(config["paths"]["custom_code"])
         self.fetch_version()
         self.init_logs()
+        self.init_connection_pools()
 
     def configure_database(self):
         self.init_services()
@@ -279,6 +282,11 @@ class BaseController:
                 StreamHandler(),
             ],
         )
+
+    def init_connection_pools(self):
+        self.request_session = RequestSession()
+        for pool in ("http://", "https://"):
+            self.request_session.mount(pool, HTTPAdapter(**self.config["requests"]))
 
     def init_scheduler(self):
         self.scheduler = BackgroundScheduler(

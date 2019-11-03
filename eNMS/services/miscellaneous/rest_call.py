@@ -1,11 +1,4 @@
 from json import dumps
-from requests import (
-    get as rest_get,
-    post as rest_post,
-    put as rest_put,
-    delete as rest_delete,
-    patch as rest_patch,
-)
 from requests.auth import HTTPBasicAuth
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.types import JSON
@@ -18,6 +11,7 @@ from wtforms import (
     StringField,
 )
 
+from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
 from eNMS.forms.automation import ServiceForm
 from eNMS.forms.fields import (
@@ -43,14 +37,6 @@ class RestCallService(Service):
     username = Column(SmallString)
     password = Column(SmallString)
 
-    request_dict = {
-        "GET": rest_get,
-        "POST": rest_post,
-        "PUT": rest_put,
-        "DELETE": rest_delete,
-        "PATCH": rest_patch,
-    }
-
     __mapper_args__ = {"polymorphic_identity": "rest_call_service"}
 
     def job(self, run, payload, device=None):
@@ -65,7 +51,8 @@ class RestCallService(Service):
             kwargs["auth"] = HTTPBasicAuth(self.username, self.password)
         if run.call_type in ("POST", "PUT", "PATCH"):
             kwargs["data"] = dumps(run.sub(run.payload, locals()))
-        response = self.request_dict[run.call_type](rest_url, **kwargs)
+        call = getattr(app.request_session, run.call_type.lower())
+        response = call(rest_url, **kwargs)
         if response.status_code not in range(200, 300):
             result = {
                 "success": False,

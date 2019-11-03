@@ -59,6 +59,12 @@
     "custom_services": "",
     "playbooks": ""
   },
+  "requests": {
+    "pool_connections": 10,
+    "pool_maxsize": 100,
+    "max_retries": 2,
+    "pool_block": false
+  },
   "slack": {
     "channel": ""
   },

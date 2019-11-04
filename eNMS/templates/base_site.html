@@ -59,6 +59,14 @@
       rel="stylesheet"
     />
     <link
+      href="{{ url_for('static', filename='lib/base/codemirror/dialog/dialog.css') }}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='lib/base/codemirror/search/matchesonscrollbar.css') }}"
+      rel="stylesheet"
+    />
+    <link
       href="{{ url_for('static', filename='lib/base/select2/select2.min.css') }}"
       rel="stylesheet"
     />
@@ -121,6 +129,12 @@
     <script src="{{ url_for('static', filename='lib/base/jspanel/jspanel.tooltip.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/jsoneditor/jsoneditor.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/codemirror/codemirror.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/codemirror/search/search.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/codemirror/search/searchcursor.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/codemirror/search/jump-to-line.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/codemirror/annotatescrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/codemirror/search/matchesonscrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/codemirror/dialog/dialog.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/select2/select2.min.js') }}"></script>
     <script src="{{ url_for('static', filename='base.js') }}"></script>
     <script src="{{ url_for('static', filename='inventory.js') }}"></script>

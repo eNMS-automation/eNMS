@@ -176,11 +176,13 @@ function refreshLogs(service, runtime, displayResults) {
   ) {
     let myTextarea = document.getElementById(`log-${service.id}`);
     let editor = CodeMirror(myTextarea, {
+      mode: "text/html",
       value: result.logs,
       lineWrapping: true,
       lineNumbers: true,
       readOnly: true,
       theme: "cobalt",
+      
     });
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);

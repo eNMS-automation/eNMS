@@ -541,7 +541,8 @@ class BaseController:
         server = SMTP(self.config["mail"]["server"], self.config["mail"]["port"])
         if self.config["mail"]["use_tls"]:
             server.starttls()
-            server.login(self.config["mail"]["username"], environ.get("MAIL_PASSWORD"))
+            password = environ.get("MAIL_PASSWORD", "")
+            server.login(self.config["mail"]["username"], password)
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 

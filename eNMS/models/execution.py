@@ -351,7 +351,12 @@ class Run(AbstractBase):
 
     def create_result(self, results, device=None):
         self.success = results["success"]
-        result_kw = {"run": self, "result": results, "service": self.service_id, "runtime": self.parent_runtime}
+        result_kw = {
+            "run": self,
+            "result": results,
+            "service": self.service_id,
+            "parent_runtime": self.parent_runtime,
+        }
         if self.service.type == "workflow":
             result_kw["workflow"] = self.service_id
         elif self.workflow_id:
@@ -492,7 +497,9 @@ class Run(AbstractBase):
                 )
             results["notification"].update({"success": True, "result": result})
         except Exception:
-            results["notification"].update({"success": False, "error": "\n".join(format_exc().splitlines())})
+            results["notification"].update(
+                {"success": False, "error": "\n".join(format_exc().splitlines())}
+            )
         return results
 
     def get_credentials(self, device):

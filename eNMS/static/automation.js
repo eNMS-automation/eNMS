@@ -131,7 +131,8 @@ function initPanel(type, service, runtime, displayResults) {
     if (!runtimes.length) {
       return alertify.notify("Nothing to display.", "error", 5);
     }
-    if (!runtime) runtime = runtimes[runtimes.length - 1][0];
+    if (!runtime || runtime == "normal")
+      runtime = runtimes[runtimes.length - 1][0];
     $(`#${type}_runtime-${service.id}`)
       .val(runtime)
       .selectpicker("refresh");

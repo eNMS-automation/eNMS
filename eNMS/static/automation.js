@@ -181,7 +181,8 @@ function refreshLogs(service, runtime, displayResults) {
       lineNumbers: true,
       readOnly: true,
       theme: "cobalt",
-      extraKeys: {"Ctrl-F": "findPersistent"}
+      extraKeys: {"Ctrl-F": "findPersistent"},
+      scrollbarStyle: "overlay",
     });
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);

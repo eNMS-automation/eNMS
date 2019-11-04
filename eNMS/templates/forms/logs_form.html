@@ -2,18 +2,14 @@
   id="logs-form"
   class="form-horizontal form-label-left add-id"
   method="post"
+  style="background: #002240; height: 100%"
 >
   {{ form.csrf_token() }} {{ form.form_type() }}
   <div class="modal-body">
-    {{ form.logs_runtime(class="form-control add-id") }} {{
-    form.filter(class="form-control add-id", placeholder="Filter") }}
+    {{ form.logs_runtime(class="form-control add-id") }}
     <hr />
     <div class="row">
-      <pre
-        id="log"
-        class="add-id"
-        style="border: 0; background-color: transparent; color: black;"
-      ></pre>
+      <div id="log" class="add-id"></div>
     </div>
   </div>
 </form>

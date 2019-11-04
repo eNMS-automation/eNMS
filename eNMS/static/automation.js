@@ -180,6 +180,7 @@ function refreshLogs(service, runtime, displayResults) {
       lineWrapping: true,
       lineNumbers: true,
       readOnly: true,
+      theme: "cobalt",
     });
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);

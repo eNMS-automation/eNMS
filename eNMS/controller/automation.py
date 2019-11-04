@@ -113,8 +113,7 @@ class AutomationController(BaseController):
         run = fetch("run", allow_none=True, runtime=runtime)
         result = run.result() if run else None
         logs = result["logs"] if result else self.run_logs.get(runtime, [])
-        filtered_logs = (log for log in logs if kwargs["filter"] in log)
-        return {"logs": "\n".join(filtered_logs), "refresh": not bool(result)}
+        return {"logs": "\n".join(logs), "refresh": not bool(result)}
 
     def get_runtimes(self, type, id):
         runs = fetch("run", allow_none=True, all_matches=True, service_id=id)

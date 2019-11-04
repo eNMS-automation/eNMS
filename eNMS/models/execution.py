@@ -224,7 +224,7 @@ class Run(AbstractBase):
             for pool in self.service.pools:
                 devices |= set(pool.devices)
         self.run_state["progress"]["device"]["total"] += len(devices)
-        return devices
+        return list(devices)
 
     def init_state(self):
         state = {
@@ -324,27 +324,28 @@ class Run(AbstractBase):
         return derived_run.run(payload)["success"]
 
     def device_run(self, payload):
-        devices, success = self.compute_devices(payload), True
-        if not devices:
+        self.devices, success = self.compute_devices(payload), True
+        if not self.devices:
             results = [self.get_results(payload)]
         else:
             if self.iteration_devices and not self.parent_device:
                 success = all(
-                    self.device_iteration(payload, device) for device in devices
+                    self.device_iteration(payload, device) for device in self.devices
                 )
                 return {"success": success, "runtime": self.runtime}
-            if self.multiprocessing and len(devices) > 1:
+            if self.multiprocessing and len(self.devices) > 1:
                 results = []
-                processes = min(len(devices), self.max_processes)
+                processes = min(len(self.devices), self.max_processes)
                 process_args = [
-                    (device.id, self.runtime, payload, results) for device in devices
+                    (device.id, self.runtime, payload, results)
+                    for device in self.devices
                 ]
                 pool = ThreadPool(processes=processes)
                 pool.map(self.get_device_result, process_args)
                 pool.close()
                 pool.join()
             else:
-                results = [self.get_results(payload, device) for device in devices]
+                results = [self.get_results(payload, device) for device in self.devices]
         return {"success": all(results), "runtime": self.runtime}
 
     def create_result(self, results, device=None):
@@ -467,15 +468,14 @@ class Run(AbstractBase):
         notification = self.build_notification(results)
         file_content = deepcopy(notification)
         if self.include_device_results:
-            device_results = fetch(
-                "result",
-                service_id=self.service_id,
-                parent_runtime=self.parent_runtime,
-                allow_none=True,
-                all_matches=True,
-            )
             file_content["Device Results"] = {
-                result.device_name: result.result for result in device_results
+                device.name: fetch(
+                    "result",
+                    service_id=self.service_id,
+                    parent_runtime=self.parent_runtime,
+                    device_id=device.id,
+                ).result
+                for device in self.devices
             }
         try:
             if self.send_notification_method == "mail":
@@ -506,7 +506,10 @@ class Run(AbstractBase):
                 )
             results["notification"] = {"success": True, "result": result}
         except Exception:
-            results["notification"] = {"success": False, "error": "\n".join(format_exc().splitlines())}
+            results["notification"] = {
+                "success": False,
+                "error": "\n".join(format_exc().splitlines()),
+            }
         return results
 
     def get_credentials(self, device):

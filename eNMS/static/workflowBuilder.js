@@ -592,6 +592,7 @@ function createNew(instanceType) {
 
 Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
+  Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
   Run: (service) => normalRun(service.id),
   "Parametrized Run": (service) =>
     showTypePanel(service.type, service.id, "run"),

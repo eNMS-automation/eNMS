@@ -20,6 +20,7 @@ class DateField(StringField):
 
 class JsonField(StringField):
     def __init__(self, *args, **kwargs):
+        kwargs["default"] = kwargs.get("default", "{}")
         super().__init__(*args, **kwargs)
 
     def pre_validate(self, form):

@@ -446,22 +446,12 @@ class Run(AbstractBase):
 
     def build_notification(self, results):
         notification = {
-            "Header": self.notification_header,
             "Service": f"{self.service.name} ({self.service.type})",
             "Runtime": self.runtime,
             "Status": "PASS" if results["success"] else "FAILED",
         }
-        if self.include_device_results:
-            device_results = fetch(
-                "result",
-                service_id=self.service_id,
-                parent_runtime=self.parent_runtime,
-                allow_none=True,
-                all_matches=True,
-            )
-            notification["Device Results"] = {
-                result.device_name: result.result for result in device_results
-            }
+        if self.notification_header:
+            notification["Header"] = self.notification_header
         if self.include_link_in_summary:
             address = app.config["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
@@ -471,20 +461,31 @@ class Run(AbstractBase):
             notification["FAILED"] = failed
         if not self.display_only_failed_nodes:
             notification["PASSED"] = passed
-        return app.str_dict(notification)
+        return notification
 
     def notify(self, results):
         notification = self.build_notification(results)
-        results["notification"] = {"content": notification}
+        file_content = deepcopy(notification)
+        if self.include_device_results:
+            device_results = fetch(
+                "result",
+                service_id=self.service_id,
+                parent_runtime=self.parent_runtime,
+                allow_none=True,
+                all_matches=True,
+            )
+            file_content["Device Results"] = {
+                result.device_name: result.result for result in device_results
+            }
         try:
             if self.send_notification_method == "mail":
                 filename = self.runtime.replace(".", "").replace(":", "")
                 result = app.send_email(
                     f"{self.name} ({'PASS' if results['success'] else 'FAILED'})",
-                    notification,
+                    app.str_dict(notification),
                     recipients=self.mail_recipient,
                     filename=f"results-{filename}.txt",
-                    file_content=app.str_dict(results),
+                    file_content=app.str_dict(file_content),
                 )
             elif self.send_notification_method == "slack":
                 result = SlackClient(environ.get("SLACK_TOKEN")).api_call(
@@ -503,11 +504,9 @@ class Run(AbstractBase):
                         }
                     ),
                 )
-            results["notification"].update({"success": True, "result": result})
+            results["notification"] = {"success": True, "result": result}
         except Exception:
-            results["notification"].update(
-                {"success": False, "error": "\n".join(format_exc().splitlines())}
-            )
+            results["notification"] = {"success": False, "error": "\n".join(format_exc().splitlines())}
         return results
 
     def get_credentials(self, device):

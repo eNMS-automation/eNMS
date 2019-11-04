@@ -445,23 +445,33 @@ class Run(AbstractBase):
         app.run_logs[self.parent_runtime].append(log)
 
     def build_notification(self, results):
-        notification = [
-            f"Service: {self.service.name} ({self.service.type})",
-            f"Runtime: {self.runtime}",
-            f'Status: {"PASS" if results["success"] else "FAILED"}',
-        ]
-        notification.append(self.notification_header)
+        notification = {
+            "Header": self.notification_header,
+            "Service": f"{self.service.name} ({self.service.type})",
+            "Runtime": self.runtime,
+            "Status": "PASS" if results["success"] else "FAILED",
+        }
+        if self.include_device_results:
+            device_results = fetch(
+                "result",
+                service_id=self.service_id,
+                parent_runtime=self.parent_runtime,
+                allow_none=True,
+                all_matches=True,
+            )
+            notification["Device Results"] = {
+                result.device_name: result.result for result in device_results
+            }
         if self.include_link_in_summary:
             address = app.config["app"]["address"]
-            link = f"Results: {address}/view_service_results/{self.id}"
-            notification.append(link)
+            notification["Link"] = f"{address}/view_service_results/{self.id}"
         summary = self.run_state["summary"]
         failed, passed = "\n".join(summary["failed"]), "\n".join(summary["passed"])
         if failed:
-            notification.append(f"FAILED :\n{failed}")
+            notification["FAILED"] = failed
         if not self.display_only_failed_nodes:
-            notification.append(f"PASSED :\n{passed}")
-        return "\n\n".join(notification)
+            notification["PASSED"] = passed
+        return app.str_dict(notification)
 
     def notify(self, results):
         notification = self.build_notification(results)

@@ -174,7 +174,13 @@ function refreshLogs(service, runtime, displayResults) {
   fCall(`/get_service_logs/${runtime}`, `#logs-form-${service.id}`, function(
     result
   ) {
-    $(`#log-${service.id}`).text(result.logs);
+    let myTextarea = document.getElementById(`log-${service.id}`);
+    let editor = CodeMirror(myTextarea, {
+      value: result.logs,
+      lineWrapping: true,
+      lineNumbers: true,
+      readOnly: true,
+    });
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);
     } else if (displayResults) {

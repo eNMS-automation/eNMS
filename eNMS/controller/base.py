@@ -463,8 +463,10 @@ class BaseController:
         results = Session.query(model).filter(model.name.contains(params.get("term")))
         return {
             "items": [
-                {"text": r.ui_name, "id": str(r.id)}
-                for r in results.limit(10).offset((int(params["page"]) - 1) * 10).all()
+                {"text": result.ui_name, "id": str(result.id)}
+                for result in results.limit(10)
+                .offset((int(params["page"]) - 1) * 10)
+                .all()
             ],
             "total_count": results.count(),
         }
@@ -574,7 +576,6 @@ class BaseController:
                 with open(Path(dir.path) / "data.yml") as data:
                     parameters = yaml.load(data)
                     device.update(**{"dont_update_pools": True, **parameters})
-
                 for data in ("configuration", "operational_data"):
                     filepath = Path(dir.path) / dir.name / data
                     if not filepath.exists():

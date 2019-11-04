@@ -375,7 +375,7 @@ function deleteEdge(edgeId) {
 function stopWorkflow() {
   call(`/stop_workflow/${currentRuntime}`, (result) => {
     if (!result) {
-      alertify.notify("The workflow is not currently running", "error", 5);
+      alertify.notify("The workflow is not currently running.", "error", 5);
     } else {
       alertify.notify(
         "Workflow will stop after current service...",

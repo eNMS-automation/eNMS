@@ -25,8 +25,8 @@ class AutomationController(BaseController):
     run_logs = defaultdict(list)
 
     def stop_workflow(self, runtime):
-        run = fetch("run", runtime=runtime)
-        if run.run_state["status"] == "Running":
+        run = fetch("run", allow_none=True, runtime=runtime)
+        if run and run.run_state["status"] == "Running":
             run.run_state["status"] = "stop"
             return True
 

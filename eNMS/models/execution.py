@@ -616,7 +616,7 @@ class Run(AbstractBase):
             if not run:
                 return None
             query = Session.query(models["run"]).filter(
-                models["run"].parent_id == run.parent_id
+                models["run"].parent_runtime == run.parent_runtime
             )
             if workflow or self.workflow:
                 name = workflow or self.workflow.name

@@ -292,8 +292,6 @@ class Run(AbstractBase):
             }
             if self.send_notification:
                 results = self.notify(results)
-            if self.push_to_git:
-                self.git_push(results)
             if self.runtime == self.parent_runtime:
                 self.create_result(results)
             Session.commit()

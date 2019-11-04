@@ -36,7 +36,6 @@ class Service(AbstractBase):
     operating_system = Column(SmallString)
     waiting_time = Column(Integer, default=0)
     creator = Column(SmallString, default="admin")
-    push_to_git = Column(Boolean, default=False)
     workflows = relationship(
         "Workflow", secondary=service_workflow_table, back_populates="services"
     )

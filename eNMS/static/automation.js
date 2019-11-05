@@ -129,9 +129,10 @@ function initPanel(type, service, runtime, displayResults) {
       );
     });
     if (!runtimes.length) {
-      return alertify.notify("Nothing to display.", "error", 5);
+      return alertify.notify(`No ${type} yet.`, "error", 5);
     } else {
-      createPanel(type, `${type} - ${service.name}`, service.id, function() {
+      console.log(type, service)
+      createPanel(type.substring(0, type.length - 1), `${type} - ${service.name}`, service.id, function() {
         if (!runtime || runtime == "normal")
           runtime = runtimes[runtimes.length - 1][0];
         $(`#${type}_runtime-${service.id}`)
@@ -147,12 +148,12 @@ function initPanel(type, service, runtime, displayResults) {
           refreshLogs(service, runtime, displayResults);
         } else {
           $("#result").remove();
-          initTable("result", service, runtime || currentRuntime);
           $(`#results_runtime-${service.id}`).on("change", function() {
             tables["result"].ajax.reload(null, false);
           });
+          initTable("result", service, runtime || currentRuntime);
         }
-      }
+      });
     }
   });
 }

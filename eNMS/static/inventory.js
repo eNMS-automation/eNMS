@@ -100,7 +100,7 @@ function showDeviceConfiguration(device) {
 
 // eslint-disable-next-line
 function showDeviceResultsPanel(device) {
-  createPanel("result", `Results - ${device.name}`, null, function() {
+  createPanel("results", `Results - ${device.name}`, null, function() {
     initTable("result", device);
   });
 }

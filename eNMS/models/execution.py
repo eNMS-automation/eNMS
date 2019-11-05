@@ -503,7 +503,7 @@ class Run(AbstractBase):
                             "text": notification,
                         }
                     ),
-                )
+                ).text
             results["notification"] = {"success": True, "result": result}
         except Exception:
             results["notification"] = {

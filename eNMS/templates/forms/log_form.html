@@ -1,13 +1,5 @@
-<form
-  id="logs-form"
-  class="form-horizontal form-label-left add-id"
-  method="post"
-  style="background: #002240; height: 100%"
->
-  {{ form.csrf_token() }} {{ form.form_type() }}
-  <div class="modal-body">
-    {{ form.logs_runtime(class="form-control add-id") }}
-    <hr />
-    <div id="content" class="add-id"></div>
-  </div>
-</form>
+<div class="modal-body" style="background: #002240"> 
+  {{ form.logs_runtime(class="form-control add-id") }}
+  <hr>
+  <div id="content" class="add-id" style="height: 500px"></div>
+</div>

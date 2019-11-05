@@ -120,18 +120,19 @@ function clearResults(id) {
 
 function initPanel(type, service, runtime, displayResults) {
   call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-    $(`#${type}_runtime-${service.id}`).empty();
-    runtimes.forEach((runtime) => {
-      $(`#${type}_runtime-${service.id}`).append(
-        $("<option></option>")
-          .attr("value", runtime[0])
-          .text(runtime[1])
-      );
-    });
     if (!runtimes.length) {
       return alertify.notify(`No ${type} yet.`, "error", 5);
     } else {
-      createPanel(type.substring(0, type.length - 1), `${type} - ${service.name}`, service.id, function() {
+      const panel = type.substring(0, type.length - 1);
+      createPanel(panel, `${type} - ${service.name}`, service.id, function() {
+        $(`#${type}_runtime-${service.id}`).empty();
+        runtimes.forEach((runtime) => {
+          $(`#${type}_runtime-${service.id}`).append(
+            $("<option></option>")
+              .attr("value", runtime[0])
+              .text(runtime[1])
+          );
+        });
         if (!runtime || runtime == "normal")
           runtime = runtimes[runtimes.length - 1][0];
         $(`#${type}_runtime-${service.id}`)
@@ -169,10 +170,8 @@ function showLogsPanel(service, runtime, displayResults) {
 
 // eslint-disable-next-line
 function refreshLogs(service, runtime, displayResults) {
-  if (!$(`#logs-form-${service.id}`).length) return;
-  fCall(`/get_service_logs/${runtime}`, `#logs-form-${service.id}`, function(
-    result
-  ) {
+  if (!$(`#log-${service.id}`).length) return;
+  call(`/get_service_logs/${runtime}`, function(result) {
     let myTextarea = document.getElementById(`content-${service.id}`);
     let editor = CodeMirror(myTextarea, {
       value: result.logs,
@@ -183,6 +182,7 @@ function refreshLogs(service, runtime, displayResults) {
       extraKeys: {"Ctrl-F": "findPersistent"},
       scrollbarStyle: "overlay",
     });
+    editor.setSize("100%", "95%");
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);
     } else if (displayResults) {

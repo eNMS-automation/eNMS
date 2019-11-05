@@ -189,11 +189,11 @@ class AutomationController(BaseController):
         runs = fetch_all("run", service_id=service_id)
         if runs and runtime != "normal":
             if runtime == "latest":
-                runtime = runs[-1].runtime
+                runtime = runs[-1].parent_runtime
             state = self.run_db.get(runtime) or fetch("run", runtime=runtime).state
         return {
             "service": service.to_dict(include=["services", "edges"]),
-            "runtimes": [(r.runtime, r.creator) for r in runs],
+            "runtimes": [(r.parent_runtime, r.creator) for r in runs],
             "state": state,
             "runtime": runtime,
         }

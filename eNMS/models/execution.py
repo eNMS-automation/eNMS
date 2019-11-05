@@ -356,9 +356,7 @@ class Run(AbstractBase):
             "service": self.service_id,
             "parent_runtime": self.parent_runtime,
         }
-        if self.service.type == "workflow":
-            result_kw["workflow"] = self.service_id
-        elif self.workflow_id:
+        if self.workflow_id:
             result_kw["workflow"] = self.workflow_id
         if device:
             result_kw["device"] = device.id

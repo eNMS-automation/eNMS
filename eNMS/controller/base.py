@@ -482,17 +482,17 @@ class BaseController:
             order_function = None
         constraints = self.build_filtering_constraints(table, **kwargs)
         if table == "result":
+            print(kwargs["runtime"], kwargs["instance"])
+            constraints.append(
+                getattr(
+                    models["result"],
+                    "service"
+                    if "service" in kwargs["instance"]["type"]
+                    else kwargs["instance"]["type"],
+                ).has(id=kwargs["instance"]["id"])
+            )
             if kwargs.get("runtime"):
                 constraints.append(models["result"].parent_runtime == kwargs["runtime"])
-            else:
-                constraints.append(
-                    getattr(
-                        models["result"],
-                        "service"
-                        if "service" in kwargs["instance"]["type"]
-                        else kwargs["instance"]["type"],
-                    ).has(id=kwargs["instance"]["id"])
-                )
         result = Session.query(model).filter(operator(*constraints))
         if order_function:
             result = result.order_by(order_function())

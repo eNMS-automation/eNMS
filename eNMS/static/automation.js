@@ -139,13 +139,19 @@ function initPanel(type, service, runtime, displayResults) {
           .val(runtime)
           .selectpicker("refresh");
         if (type == "logs") {
-          $(`#filter-${service.id}`).on("input", function() {
-            refreshLogs(service, runtime, false);
+          editor = CodeMirror(document.getElementById(`content-${service.id}`), {
+            lineWrapping: true,
+            lineNumbers: true,
+            readOnly: true,
+            theme: "cobalt",
+            extraKeys: {"Ctrl-F": "findPersistent"},
+            scrollbarStyle: "overlay",
           });
+          editor.setSize("100%", "100%");
           $(`#logs_runtime-${service.id}`).on("change", function() {
-            refreshLogs(service, this.value, false);
+            refreshLogs(service, this.value, false, editor);
           });
-          refreshLogs(service, runtime, displayResults);
+          refreshLogs(service, runtime, displayResults, editor);
         } else {
           $("#result").remove();
           $(`#results_runtime-${service.id}`).on("change", function() {
@@ -172,22 +178,8 @@ function showLogsPanel(service, runtime, displayResults) {
 function refreshLogs(service, runtime, displayResults, editor) {
   if (!$(`#log-${service.id}`).length) return;
   call(`/get_service_logs/${runtime}`, function(result) {
-    let myTextarea = document.getElementById(`content-${service.id}`);
-    if (!editor) {
-      editor = CodeMirror(myTextarea, {
-        value: result.logs,
-        lineWrapping: true,
-        lineNumbers: true,
-        readOnly: true,
-        theme: "cobalt",
-        extraKeys: {"Ctrl-F": "findPersistent"},
-        scrollbarStyle: "overlay",
-      });
-      editor.setSize("100%", "100%");
-    } else {
-      editor.setValue(result.logs)
-      editor.setCursor(editor.lineCount(), 0);
-    }
+    editor.setValue(result.logs)
+    editor.setCursor(editor.lineCount(), 0);
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, displayResults, editor), 1000);
     } else if (displayResults) {

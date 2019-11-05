@@ -131,7 +131,6 @@ function initPanel(type, service, runtime, displayResults) {
     if (!runtimes.length) {
       return alertify.notify(`No ${type} yet.`, "error", 5);
     } else {
-      console.log(type, service)
       createPanel(type.substring(0, type.length - 1), `${type} - ${service.name}`, service.id, function() {
         if (!runtime || runtime == "normal")
           runtime = runtimes[runtimes.length - 1][0];
@@ -174,7 +173,7 @@ function refreshLogs(service, runtime, displayResults) {
   fCall(`/get_service_logs/${runtime}`, `#logs-form-${service.id}`, function(
     result
   ) {
-    let myTextarea = document.getElementById(`log-${service.id}`);
+    let myTextarea = document.getElementById(`content-${service.id}`);
     let editor = CodeMirror(myTextarea, {
       value: result.logs,
       lineWrapping: true,

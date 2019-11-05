@@ -235,8 +235,8 @@ class RestartWorkflowForm(BaseForm):
 
 
 class LogsForm(BaseForm):
-    template = "logs"
-    form_type = HiddenField(default="logs")
+    template = "log"
+    form_type = HiddenField(default="log")
     filter = StringField("Filter")
     logs_runtime = NoValidationSelectField("Runtime", choices=())
 

@@ -28,7 +28,7 @@ const panelSize = {
   add_service: "800 500",
   changelog: "700 300",
   changelog_filtering: "700 300",
-  compare: "1000 800",
+  compare: "auto 700",
   configuration: "1000 700",
   configuration_filtering: "700 600",
   database_deletion: "700 400",

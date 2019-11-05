@@ -169,24 +169,29 @@ function showLogsPanel(service, runtime, displayResults) {
 }
 
 // eslint-disable-next-line
-function refreshLogs(service, runtime, displayResults) {
+function refreshLogs(service, runtime, displayResults, editor) {
   if (!$(`#log-${service.id}`).length) return;
   call(`/get_service_logs/${runtime}`, function(result) {
     let myTextarea = document.getElementById(`content-${service.id}`);
-    let editor = CodeMirror(myTextarea, {
-      value: result.logs,
-      lineWrapping: true,
-      lineNumbers: true,
-      readOnly: true,
-      theme: "cobalt",
-      extraKeys: {"Ctrl-F": "findPersistent"},
-      scrollbarStyle: "overlay",
-    });
-    editor.setSize("100%", "95%");
+    if (!editor) {
+      editor = CodeMirror(myTextarea, {
+        value: result.logs,
+        lineWrapping: true,
+        lineNumbers: true,
+        readOnly: true,
+        theme: "cobalt",
+        extraKeys: {"Ctrl-F": "findPersistent"},
+        scrollbarStyle: "overlay",
+      });
+      editor.setSize("100%", "100%");
+    } else {
+      editor.setValue(result.logs)
+      editor.setCursor(editor.lineCount(), 0);
+    }
     if (result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, displayResults), 1000);
+      setTimeout(() => refreshLogs(service, runtime, displayResults, editor), 1000);
     } else if (displayResults) {
-      $(`#logs-${service.id}`).remove();
+      $(`#log-${service.id}`).remove();
       showResultsPanel(service, runtime);
     }
   });

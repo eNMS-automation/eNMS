@@ -139,7 +139,8 @@ function initPanel(type, service, runtime, displayResults) {
           .val(runtime)
           .selectpicker("refresh");
         if (type == "logs") {
-          editor = CodeMirror(document.getElementById(`content-${service.id}`), {
+          const content = document.getElementById(`content-${service.id}`);
+          editor = CodeMirror(content, {
             lineWrapping: true,
             lineNumbers: true,
             readOnly: true,

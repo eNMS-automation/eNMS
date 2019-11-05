@@ -6,7 +6,7 @@ call: false
 config: true
 L: false
 serializeForm: false
-showDeviceConfiguration: false
+showDeviceNetworkData: false
 showFilteringPanel: false
 showPanel: false
 showPoolView: false
@@ -229,7 +229,7 @@ function showViewFilteringPanel(type) {
 Object.assign(action, {
   Properties: (o) => showTypePanel(o.icon ? "device" : "link", o.id),
   Connect: (d) => showPanel("device_connection", d.id),
-  Configuration: (d) => showDeviceConfiguration(d),
+  Configuration: (d) => showDeviceNetworkData(d),
 });
 
 (function() {

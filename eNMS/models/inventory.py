@@ -127,8 +127,8 @@ class Device(CustomDevice):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showDeviceConfiguration({self.row_properties})"
-            data-tooltip="Configuration"
+            onclick="showDeviceNetworkData({self.row_properties})"
+            data-tooltip="Network Data"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>
           </li>

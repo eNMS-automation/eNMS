@@ -67,7 +67,7 @@ class InventoryController(BaseController):
         ]
         return "\n".join(device_logs)
 
-    def get_device_data(self, device_id):
+    def get_device_network_data(self, device_id):
         device = fetch("device", id=device_id)
         return {"configuration": device.configuration, "data": device.operational_data}
 

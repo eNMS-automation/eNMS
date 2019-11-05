@@ -73,7 +73,7 @@ class Result(AbstractBase):
         btn = "success" if self.success else "danger"
         label = "Success" if self.success else "Failure"
         return (
-            f'<button type="button" class="btn btn-{btn}"'
+            f'<button type="button" class="btn btn-{btn} btn-sm"'
             f'style="width:100%">{label}</button>'
         )
 

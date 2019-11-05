@@ -115,7 +115,7 @@ class BaseController:
         "get",
         "get_all",
         "get_cluster_status",
-        "get_device_data",
+        "get_device_network_data",
         "get_device_logs",
         "get_exported_services",
         "get_git_content",

@@ -29,8 +29,7 @@ const panelSize = {
   changelog: "700 300",
   changelog_filtering: "700 300",
   compare: "auto 700",
-  configuration: "1000 700",
-  configuration_filtering: "700 600",
+  configuration: "800 auto",
   database_deletion: "700 400",
   database_migration: "700 300",
   device: "700 500",
@@ -77,7 +76,6 @@ const panelSize = {
 const panelName = {
   add_service: "Add service",
   configuration: "Configuration",
-  configuration_filtering: "Configuration Filtering",
   database_deletion: "Database Deletion",
   database_migration: "Database Migration",
   device_connection: "Connect to device",

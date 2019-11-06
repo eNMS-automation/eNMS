@@ -52,7 +52,7 @@ def configure_events(app):
         name = getattr(target, "name", target.id)
         app.log("info", f"DELETION: {target.type} '{name}'")
 
-    @event.listens_for(Base, "before_update", propagate=True)
+    """ @event.listens_for(Base, "before_update", propagate=True)
     def log_instance_update(mapper, connection, target):
         state, changelog = inspect(target), []
         for attr in state.attrs:
@@ -75,4 +75,4 @@ def configure_events(app):
             changelog.append(change)
         if changelog:
             name, changes = getattr(target, "name", target.id), " | ".join(changelog)
-            app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
+            app.log("info", f"UPDATE: {target.type} '{name}': ({changes})") """

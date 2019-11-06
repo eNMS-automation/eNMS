@@ -197,19 +197,20 @@ class InventoryController(BaseController):
     def save_pool_objects(self, pool_id, **kwargs):
         pool = fetch("pool", id=pool_id)
         for obj_type in ("device", "link"):
-            string_value = kwargs[f"string_{obj_type}s"]
-            setattr(
-                pool,
-                f"{obj_type}s",
-                (
-                    [
-                        fetch(obj_type, name=name)
-                        for name in string_value.strip().split(",")
-                    ]
-                    if string_value
-                    else objectify(obj_type, kwargs[f"{obj_type}s"])
-                ),
-            )
+            string_objects = kwargs[f"string_{obj_type}s"]
+            if string_objects:
+                objects = []
+                for name in string_objects.strip().split(","):
+                    obj = fetch(obj_type, allow_none=True, name=name)
+                    if not obj:
+                        return {
+                            "error": f"{obj_type.capitalize()} '{name}' does not exist."
+                        }
+                    objects.append(obj)
+            else:
+                objects = objectify(obj_type, kwargs[f"{obj_type}s"])
+            setattr(pool, f"{obj_type}_number", len(objects))
+            setattr(pool, f"{obj_type}s", objects)
         return pool.serialized
 
     def update_pool(self, pool_id):

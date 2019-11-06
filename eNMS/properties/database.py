@@ -7,8 +7,14 @@ dont_track_changes = [
     "labels",
     "last_modified",
     "operational_data",
+    "parent_id",
     "positions",
+    "running",
+    "runtime",
+    "endtime",
     "state",
+    "status",
+    "success",
 ]
 
 dont_migrate = {

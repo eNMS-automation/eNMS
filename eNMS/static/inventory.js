@@ -2,6 +2,7 @@
 global
 alertify: false
 call: false
+CodeMirror: false
 config: true
 createPanel: false
 fCall: false
@@ -86,13 +87,14 @@ function showDeviceNetworkData(device) {
         `Device Data - ${device.name}`,
         device.id,
         function() {
-          const content = document.getElementById(`content-${device.id}`)
+          const content = document.getElementById(`content-${device.id}`);
+          // eslint-disable-next-line new-cap
           const editor = CodeMirror(content, {
             lineWrapping: true,
             lineNumbers: true,
             readOnly: true,
             theme: "cobalt",
-            extraKeys: {"Ctrl-F": "findPersistent"},
+            extraKeys: { "Ctrl-F": "findPersistent" },
             scrollbarStyle: "overlay",
           });
           editor.setSize("100%", "100%");

@@ -3,6 +3,7 @@ global
 alertify: false
 call: false
 cantorPairing: false
+CodeMirror: false
 createPanel: false
 diffview: false
 fCall: false
@@ -133,19 +134,21 @@ function initPanel(type, service, runtime, fromRun) {
               .text(runtime[1])
           );
         });
-        if (!runtime || runtime == "normal")
+        if (!runtime || runtime == "normal") {
           runtime = runtimes[runtimes.length - 1][0];
+        }
         $(`#${type}_runtime-${service.id}`)
           .val(runtime)
           .selectpicker("refresh");
         if (type == "logs") {
           const content = document.getElementById(`content-${service.id}`);
-          editor = CodeMirror(content, {
+          // eslint-disable-next-line new-cap
+          let editor = CodeMirror(content, {
             lineWrapping: true,
             lineNumbers: true,
             readOnly: true,
             theme: "cobalt",
-            extraKeys: {"Ctrl-F": "findPersistent"},
+            extraKeys: { "Ctrl-F": "findPersistent" },
             scrollbarStyle: "overlay",
           });
           editor.setSize("100%", "100%");
@@ -179,7 +182,7 @@ function showLogsPanel(service, runtime, fromRun) {
 function refreshLogs(service, runtime, fromRun, editor) {
   if (!$(`#log-${service.id}`).length) return;
   call(`/get_service_logs/${runtime}`, function(result) {
-    editor.setValue(result.logs)
+    editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
     if (result.refresh) {
       setTimeout(() => refreshLogs(service, runtime, fromRun, editor), 1000);

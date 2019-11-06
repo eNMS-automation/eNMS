@@ -40,7 +40,7 @@ class PingService(Service):
             try:
                 output = check_output(command).decode().strip().splitlines()
             except CalledProcessError:
-                return {"success": False, "error": "Device not pingable"}
+                return {"success": False, "result": "Device not pingable"}
             total = output[-2].split(",")[3].split()[1]
             loss = output[-2].split(",")[2].split()[0]
             timing = output[-1].split()[3].split("/")

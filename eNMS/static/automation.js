@@ -118,9 +118,9 @@ function clearResults(id) {
   });
 }
 
-function initPanel(type, service, runtime, displayResults) {
+function initPanel(type, service, runtime, fromRun) {
   call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-    if (!runtimes.length) {
+    if (!runtimes.length && !fromRun) {
       return alertify.notify(`No ${type} yet.`, "error", 5);
     } else {
       const panel = type.substring(0, type.length - 1);
@@ -152,7 +152,7 @@ function initPanel(type, service, runtime, displayResults) {
           $(`#logs_runtime-${service.id}`).on("change", function() {
             refreshLogs(service, this.value, false, editor);
           });
-          refreshLogs(service, runtime, displayResults, editor);
+          refreshLogs(service, runtime, fromRun, editor);
         } else {
           $("#result").remove();
           $(`#results_runtime-${service.id}`).on("change", function() {
@@ -171,19 +171,19 @@ function showResultsPanel(service, runtime) {
 }
 
 // eslint-disable-next-line
-function showLogsPanel(service, runtime, displayResults) {
-  initPanel("logs", service, runtime || currentRuntime, displayResults);
+function showLogsPanel(service, runtime, fromRun) {
+  initPanel("logs", service, runtime || currentRuntime, fromRun);
 }
 
 // eslint-disable-next-line
-function refreshLogs(service, runtime, displayResults, editor) {
+function refreshLogs(service, runtime, fromRun, editor) {
   if (!$(`#log-${service.id}`).length) return;
   call(`/get_service_logs/${runtime}`, function(result) {
     editor.setValue(result.logs)
     editor.setCursor(editor.lineCount(), 0);
     if (result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, displayResults, editor), 1000);
-    } else if (displayResults) {
+      setTimeout(() => refreshLogs(service, runtime, fromRun, editor), 1000);
+    } else if (fromRun) {
       $(`#log-${service.id}`).remove();
       showResultsPanel(service, runtime);
     }

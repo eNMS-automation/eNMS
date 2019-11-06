@@ -43,10 +43,11 @@ class Result(AbstractBase):
     run_id = Column(Integer, ForeignKey("run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
     parent_runtime = Column(SmallString)
+    parent_device_id = Column(Integer, ForeignKey("device.id"))
+    parent_device = relationship("Device", uselist=False, foreign_keys=parent_device_id)
+    parent_device_name = association_proxy("parent_device", "name")
     device_id = Column(Integer, ForeignKey("device.id"))
-    device = relationship(
-        "Device", back_populates="results", foreign_keys="Result.device_id"
-    )
+    device = relationship("Device", uselist=False, foreign_keys=device_id)
     device_name = association_proxy("device", "name")
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Result.service_id")
@@ -358,6 +359,8 @@ class Run(AbstractBase):
         }
         if self.workflow_id:
             result_kw["workflow"] = self.workflow_id
+        if self.parent_device_id:
+            result_kw["parent_device"] = self.parent_device_id
         if device:
             result_kw["device"] = device.id
         factory("result", **result_kw)

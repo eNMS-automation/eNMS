@@ -58,9 +58,10 @@ run_table_properties = [
 result_table_properties = [
     "runtime",
     "endtime",
-    "service_name",
-    "device_name",
     "workflow_name",
+    "service_name",
+    "parent_device_name",
+    "device_name",
     "success",
 ]
 

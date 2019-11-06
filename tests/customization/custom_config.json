@@ -6,7 +6,7 @@
     "parameter1_int": 3
   },
 	"app": {
-	  "address": "",
+	  "address": "http://192.168.105.3",
 	  "config_mode": "debug",
 	  "create_examples": true,
 	  "documentation_url": "https://enms.readthedocs.io/en/latest/",

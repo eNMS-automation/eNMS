@@ -358,6 +358,8 @@ class Run(AbstractBase):
         }
         if self.workflow_id:
             result_kw["workflow"] = self.workflow_id
+        elif self.service.type == "workflow":
+            result_kw["workflow"] = self.service.id
         if device:
             result_kw["device"] = device.id
         factory("result", **result_kw)

@@ -482,7 +482,6 @@ class BaseController:
             order_function = None
         constraints = self.build_filtering_constraints(table, **kwargs)
         if table == "result":
-            print(kwargs["runtime"], kwargs["instance"])
             constraints.append(
                 getattr(
                     models["result"],

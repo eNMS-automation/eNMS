@@ -148,7 +148,7 @@ function displayWorkflow(workflowData) {
   });
   displayWorkflowState(workflowData);
   rectangleSelection($("#network"), graph, nodes);
-  currentMode = "motion";
+  switchMode(currentMode, true);
   return graph;
 }
 

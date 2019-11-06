@@ -454,12 +454,10 @@ class Run(AbstractBase):
         if self.include_link_in_summary:
             address = app.config["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
-        summary = self.run_state["summary"]
-        failed, passed = "\n".join(summary["failed"]), "\n".join(summary["passed"])
-        if failed:
-            notification["FAILED"] = failed
-        if not self.display_only_failed_nodes:
-            notification["PASSED"] = passed
+        if self.run_state["summary"]["failed"]:
+            notification["FAILED"] = self.run_state["summary"]["failed"]
+        if self.run_state["summary"]["passed"] and not self.display_only_failed_nodes:
+            notification["PASSED"] = self.run_state["summary"]["passed"]
         return notification
 
     def notify(self, results):

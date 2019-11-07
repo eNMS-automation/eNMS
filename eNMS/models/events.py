@@ -236,8 +236,8 @@ class Changelog(Baselog):
     __mapper_args__ = {"polymorphic_identity": "changelog"}
     parent_type = "baselog"
     id = Column(Integer, ForeignKey("baselog.id"), primary_key=True)
-    severity = Column(SmallString, default="N/A")
-    user = Column(LargeString, default="")
+    severity = Column(SmallString, default="debug")
+    user = Column(SmallString, default="admin")
 
 
 class Event(AbstractBase):

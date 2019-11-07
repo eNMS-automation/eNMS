@@ -381,7 +381,7 @@ class BaseController:
                 if arg in kwargs:
                     kwargs[arg] = kwargs[arg].strip()
             kwargs["last_modified"] = self.get_time()
-            kwargs["creator"] = getattr(current_user, "name", "admin")
+            kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "admin")
             instance = factory(cls, must_be_new=must_be_new, **kwargs)
             Session.flush()
             return instance.serialized

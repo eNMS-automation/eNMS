@@ -673,9 +673,10 @@ function runWorkflow(withUpdates) {
 }
 
 function showRestartWorkflowPanel(workflow, service) {
+  console.log(service)
   createPanel(
     "restart_workflow",
-    `Restart Workflow '${workflow.name}' from '${service.scoped_name}'`,
+    `Restart Workflow '${workflow.name}' from '${service.name}'`,
     workflow.id,
     function() {
       $("#start_services").append(new Option(service.name, service.id));

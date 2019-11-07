@@ -389,13 +389,9 @@ function stopWorkflow() {
 // eslint-disable-next-line
 function skipServices() {
   const selectedNodes = graph.getSelectedNodes().filter((x) => !isNaN(x));
-  call(`/skip_services/${selectedNodes.join("-")}`, (skip) => {
-    workflow.services
-      .filter((j) => selectedNodes.includes(j.id))
-      .map((j) => {
-        j.skip = skip == "skip";
-      });
-    resetDisplay();
+  if (!selectedNodes.length) return;
+  call(`/skip_services/${workflow.id}/${selectedNodes.join("-")}`, (skip) => {
+    getWorkflowState();
     alertify.notify(`Services ${skip}ped.`, "success", 5);
   });
 }

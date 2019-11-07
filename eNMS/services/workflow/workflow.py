@@ -35,7 +35,8 @@ class Workflow(Service):
         end = fetch("service", scoped_name="End")
         self.services.extend([start, end])
         super().__init__(**kwargs)
-        end.positions[self.name] = (500, 0)
+        if self.name not in end.positions:
+            end.positions[self.name] = (500, 0)
 
     def set_name(self, name=None):
         old_name = self.name

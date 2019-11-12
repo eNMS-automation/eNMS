@@ -184,9 +184,21 @@ class NetmikoForm(ConnectionForm):
     )
     config_mode = BooleanField("Config mode", default=False)
     fast_cli = BooleanField()
-    timeout = IntegerField(default=10)
-    delay_factor = FloatField(label="Delay Factor (Changing from default of 1 will nullify Netmiko Timeout setting)", default=1.0)
-    global_delay_factor = FloatField(label="Global Delay Factor (Changing from default of 1 will nullify Netmiko Timeout setting)", default=1.0)
+    timeout = FloatField(default=10.0)
+    delay_factor = FloatField(
+        (
+            "Delay Factor (Changing from default of 1"
+            " will nullify Netmiko Timeout setting)"
+        ),
+        default=1.0,
+    )
+    global_delay_factor = FloatField(
+        (
+            "Global Delay Factor (Changing from default of 1"
+            " will nullify Netmiko Timeout setting)"
+        ),
+        default=1.0,
+    )
     groups = {
         "Netmiko Parameters": {
             "commands": [

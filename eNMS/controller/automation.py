@@ -51,9 +51,10 @@ class AutomationController(BaseController):
         workflow.services.append(fetch("service", id=service))
 
     def copy_service_in_workflow(self, workflow_id, **kwargs):
-        services = objectify("service", kwargs["services"].split(","))
+        service_instances = objectify("service", kwargs["services"].split(","))
         workflow = fetch("workflow", id=workflow_id)
-        for service in services:
+        serialized_services = []
+        for service in service_instances:
             if kwargs["mode"] == "deep":
                 service = service.duplicate(workflow)
             elif not service.shared:
@@ -62,9 +63,10 @@ class AutomationController(BaseController):
                 return {"error": f"This workflow already contains {service.name}."}
             else:
                 workflow.services.append(service)
-            workflow.last_modified = self.get_time()
-            Session.commit()
-            return {"service": service.serialized, "update_time": workflow.last_modified}
+            serialized_services.append(service.serialized)
+        workflow.last_modified = self.get_time()
+        Session.commit()
+        return {"services": serialized_services, "update_time": workflow.last_modified}
 
     def clear_results(self, service_id):
         for result in fetch(
@@ -192,7 +194,7 @@ class AutomationController(BaseController):
         for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
             if "-" in id:
-                old_position = workflow.labels[id].pop("positions")
+                old_position = workflow.labels[id].pop("positions", (0, 0))
                 workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
             else:
                 service = fetch("service", id=id)

@@ -275,7 +275,6 @@ class DisplayConfigurationForm(DisplayForm):
 class AddServiceForm(BaseForm):
     form_type = HiddenField(default="add_service")
     template = "add_service"
-    action = "addToWorkflow"
     mode = SelectField(
         "Mode",
         choices=(

@@ -11,7 +11,7 @@ from uuid import uuid4
 
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
-from eNMS.database.functions import delete, factory, fetch, fetch_all
+from eNMS.database.functions import delete, factory, fetch, fetch_all, objectify
 
 
 class AutomationController(BaseController):
@@ -51,20 +51,20 @@ class AutomationController(BaseController):
         workflow.services.append(fetch("service", id=service))
 
     def copy_service_in_workflow(self, workflow_id, **kwargs):
-        print(kwargs)
-        service = fetch("service", id=kwargs["services"])
+        services = objectify("service", kwargs["services"].split(","))
         workflow = fetch("workflow", id=workflow_id)
-        if kwargs["mode"] == "deep":
-            service = service.duplicate(workflow)
-        elif not service.shared:
-            return {"error": "This is not a shared service."}
-        elif service in workflow.services:
-            return {"error": f"This workflow already contains {service.name}."}
-        else:
-            workflow.services.append(service)
-        workflow.last_modified = self.get_time()
-        Session.commit()
-        return {"service": service.serialized, "update_time": workflow.last_modified}
+        for service in services:
+            if kwargs["mode"] == "deep":
+                service = service.duplicate(workflow)
+            elif not service.shared:
+                return {"error": "This is not a shared service."}
+            elif service in workflow.services:
+                return {"error": f"This workflow already contains {service.name}."}
+            else:
+                workflow.services.append(service)
+            workflow.last_modified = self.get_time()
+            Session.commit()
+            return {"service": service.serialized, "update_time": workflow.last_modified}
 
     def clear_results(self, service_id):
         for result in fetch(

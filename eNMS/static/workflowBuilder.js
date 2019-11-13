@@ -318,10 +318,13 @@ function updateWorkflowService(service) {
 }
 
 // eslint-disable-next-line
-function addToWorkflow() {
+function addServicesToWorkflow() {
+  const selection = $('#service-tree').jstree("get_checked");
+  if (!selection.length) alertify.notify("Nothing selected.", "error", 5);
+  $('#services').val(selection);
   fCall(
     `/copy_service_in_workflow/${workflow.id}`,
-    "#add_service-form",
+    "#add-services-form",
     function(result) {
       workflow.last_modified = result.update_time;
       $("#add_service").remove();

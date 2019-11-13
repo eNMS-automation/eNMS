@@ -125,7 +125,7 @@ class AutomationController(BaseController):
     def get_workflow_services(self, workflow):
         if not workflow:
             return [
-                {"id": workflow.id, "text": workflow.name, "children": True}
+                {"id": workflow.id, "text": workflow.name, "children": True, "type": "workflow"}
                 for workflow in fetch_all("workflow")
                 if not workflow.workflows
             ]
@@ -135,6 +135,7 @@ class AutomationController(BaseController):
                     "id": service.id,
                     "text": service.scoped_name,
                     "children": service.type == "workflow",
+                    "type": "workflow" if service.type == "workflow" else "service",
                 }
                 for service in fetch("workflow", id=workflow).services
                 if service.scoped_name not in ("Start", "End")

@@ -585,25 +585,19 @@ function addServicePanel() {
         "themes" : { "stripes" : true },
         'data' : {
           'url' : function (node) {
-            console.log(node.id);
+            console.log(node);
             return `/get_workflow_services/${node.id}`;
           },
           type: "POST",
         }
       },
       "types" : {
-        "#" : {
-          "max_children" : 1,
-          "max_depth" : 4,
-          "valid_children" : ["root"]
+        "default": {
+          "icon": "glyphicon glyphicon-file",
         },
-        "default" : {
-          "valid_children" : ["default","file"]
+        "workflow" : {
+          "icon" : "fa fa-sitemap",
         },
-        "file" : {
-          "icon" : "glyphicon glyphicon-file",
-          "valid_children" : []
-        }
       },
       "plugins" : [
         "contextmenu", "dnd", "search",

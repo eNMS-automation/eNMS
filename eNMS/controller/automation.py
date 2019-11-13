@@ -51,6 +51,7 @@ class AutomationController(BaseController):
         workflow.services.append(fetch("service", id=service))
 
     def copy_service_in_workflow(self, workflow_id, **kwargs):
+        print(kwargs)
         service = fetch("service", id=kwargs["services"])
         workflow = fetch("workflow", id=workflow_id)
         if kwargs["mode"] == "deep":
@@ -125,7 +126,12 @@ class AutomationController(BaseController):
     def get_workflow_services(self, workflow):
         if not workflow:
             return [
-                {"id": workflow.id, "text": workflow.name, "children": True, "type": "workflow"}
+                {
+                    "id": workflow.id,
+                    "text": workflow.name,
+                    "children": True,
+                    "type": "workflow",
+                }
                 for workflow in fetch_all("workflow")
                 if not workflow.workflows
             ]

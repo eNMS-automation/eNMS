@@ -585,11 +585,14 @@ function addServicePanel() {
         "themes" : { "stripes" : true },
         'data' : {
           'url' : function (node) {
-            console.log(node);
             return `/get_workflow_services/${node.id}`;
           },
           type: "POST",
         }
+      },
+      "plugins" : ["checkbox", "types"],
+      "checkbox": {
+        "three_state": false,
       },
       "types" : {
         "default": {
@@ -599,10 +602,6 @@ function addServicePanel() {
           "icon" : "fa fa-sitemap",
         },
       },
-      "plugins" : [
-        "contextmenu", "dnd", "search",
-        "state", "types", "wholerow"
-      ]
     });
   });
 }

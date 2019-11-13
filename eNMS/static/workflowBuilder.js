@@ -581,8 +581,7 @@ function addServicePanel() {
   showPanel("add_service", null, function() {
     $('#service-tree').jstree({
       "core" : {
-        "animation" : 0,
-        "check_callback" : true,
+        "animation" : 200,
         "themes" : { "stripes" : true },
         'data' : {
           'url' : function (node) {

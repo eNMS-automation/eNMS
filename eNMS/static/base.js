@@ -448,7 +448,7 @@ function showTypePanel(type, id, mode) {
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
-        if (workflow && creationMode == "service") {
+        if (page == "workflow_builder" && creationMode == "service") {
           $(`#${type}-workflows`).append(
             new Option(workflow.name, workflow.id)
           );

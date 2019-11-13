@@ -577,6 +577,43 @@ function savePositions() {
   });
 }
 
+function addServicePanel() {
+  showPanel("add_service", null, function() {
+    $('#service-tree').jstree({
+      "core" : {
+        "animation" : 0,
+        "check_callback" : true,
+        "themes" : { "stripes" : true },
+        'data' : {
+          'url' : function (node) {
+            console.log(node.id);
+            return `/get_workflow_services/${node.id}`;
+          },
+          type: "POST",
+        }
+      },
+      "types" : {
+        "#" : {
+          "max_children" : 1,
+          "max_depth" : 4,
+          "valid_children" : ["root"]
+        },
+        "default" : {
+          "valid_children" : ["default","file"]
+        },
+        "file" : {
+          "icon" : "glyphicon glyphicon-file",
+          "valid_children" : []
+        }
+      },
+      "plugins" : [
+        "contextmenu", "dnd", "search",
+        "state", "types", "wholerow"
+      ]
+    });
+  });
+}
+
 function createNew(instanceType) {
   creationMode = instanceType;
   if (instanceType == "workflow") {
@@ -602,7 +639,7 @@ Object.assign(action, {
     showRestartWorkflowPanel(workflow, service),
   "Workflow Results": () => showResultsPanel(workflow),
   "Workflow Logs": () => showLogsPanel(workflow),
-  "Add to Workflow": () => showPanel("add_service"),
+  "Add to Workflow": addServicePanel,
   "Stop Workflow": () => stopWorkflow(),
   Delete: deleteSelection,
   "Create 'Success' edge": () => switchMode("success"),

@@ -122,6 +122,24 @@ class AutomationController(BaseController):
     def get_result(self, id):
         return fetch("result", id=id).result
 
+    def get_workflow_services(self, workflow):
+        if not workflow:
+            return [
+                {"id": workflow.id, "text": workflow.name, "children": True}
+                for workflow in fetch_all("workflow")
+                if not workflow.workflows
+            ]
+        else:
+            return [
+                {
+                    "id": service.id,
+                    "text": service.scoped_name,
+                    "children": service.type == "workflow",
+                }
+                for service in fetch("workflow", id=workflow).services
+                if service.scoped_name not in ("Start", "End")
+            ]
+
     @staticmethod
     def run(service, **kwargs):
         run_kwargs = {

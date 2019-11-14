@@ -162,7 +162,7 @@ function showRuntimePanel(type, service, runtime) {
   );
 }
 
-function displayLogs(service, runtime, fetchRuntimes) {
+function displayLogs(service, runtime) {
   const content = document.getElementById(`content-${service.id}`);
   // eslint-disable-next-line new-cap
   let editor = CodeMirror(content, {
@@ -177,17 +177,17 @@ function displayLogs(service, runtime, fetchRuntimes) {
   $(`#runtimes-${service.id}`).on("change", function() {
     refreshLogs(service, this.value, editor);
   });
-  refreshLogs(service, runtime, editor, fetchRuntimes);
+  refreshLogs(service, runtime, editor, true);
 }
 
 function displayResultsTree(service, runtime) {
-  $("#content").jstree({
+  $(`#content-${service.id}`).jstree({
     core: {
       animation: 200,
       themes: { stripes: true },
       data: {
         url: function(node) {
-          return `/get_workflow_services/${node.id}`;
+          return `/get_workflow_results/${node.id}`;
         },
         type: "POST",
       },
@@ -216,15 +216,15 @@ function displayResultsPanel(service, runtime) {
 }
 
 // eslint-disable-next-line
-function refreshLogs(service, runtime, editor, openResults) {
-  if (!$(`#log-${service.id}`).length) return;
+function refreshLogs(service, runtime, editor, first) {
+  if (!$(`#runtime-${service.id}`).length) return;
   call(`/get_service_logs/${runtime}`, function(result) {
     editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
-    if (result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, editor, true), 1000);
-    } else if (openResults) {
-      $(`#log-${service.id}`).remove();
+    if (first || result.refresh) {
+      setTimeout(() => refreshLogs(service, runtime, editor), 1000);
+    } else {
+      $(`#runtime-${service.id}`).remove();
       showRuntimePanel("results", service, runtime);
     }
   });

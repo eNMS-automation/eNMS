@@ -168,14 +168,56 @@ function initPanel(type, service, runtime, fromRun) {
   });
 }
 
+function initResultsTree(service, runtime) {
+  createPanel(panel, `${type} - ${service.name}`, service.id, function() {
+    $('#service-tree').jstree({
+      "core" : {
+        "animation" : 200,
+        "themes" : { "stripes" : true },
+        'data' : {
+          'url' : function (node) {
+            return `/get_workflow_services/${node.id}`;
+          },
+          type: "POST",
+        }
+      },
+      "plugins" : ["checkbox", "types"],
+      "checkbox": {
+        "three_state": false,
+      },
+      "types" : {
+        "default": {
+          "icon": "glyphicon glyphicon-file",
+        },
+        "workflow" : {
+          "icon" : "fa fa-sitemap",
+        },
+      },
+    });
+  });
+}
+
 // eslint-disable-next-line
-function showResultsPanel(service, runtime) {
-  initPanel("results", service, runtime || currentRuntime);
+function showRuntimePanel(type, service, runtime) {
+  call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
+    if (!runtimes.length) {
+      return alertify.notify(`No ${type} yet.`, "error", 5);
+    } else if (type == "logs") {
+      initPanel("logs", service, runtime || currentRuntime, fromRun);
+    } else if (service.type == "workflow") {
+
+    } else {
+      initPanel("results", service, runtime || currentRuntime);
+    }
+    });
+  } else {
+    
+  }
 }
 
 // eslint-disable-next-line
 function showLogsPanel(service, runtime, fromRun) {
-  initPanel("logs", service, runtime || currentRuntime, fromRun);
+  
 }
 
 // eslint-disable-next-line

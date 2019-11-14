@@ -120,22 +120,21 @@ function clearResults(id) {
 }
 
 // eslint-disable-next-line
-function showRuntimePanel(type, service, runtime, fetchRuntimes) {
+function showRuntimePanel(type, service, runtime) {
   displayFunction =
     type == "logs"
       ? displayLogs
       : service.type == "workflow"
       ? displayResultsTree
       : displayResultsPanel;
-  panel = service.type != "workflow" && type == "results" ? "result" : "log";
   createPanel(
-    panel,
+    service.type != "workflow" && type == "results" ? "result" : "runtime",
     `${type} - ${service.name}`,
     service.id,
     function() {
-      if (!fetchRuntimes) {
-        $(`#runtimes-${service.id}`).hide();
-        displayFunction(service, runtime, fetchRuntimes);
+      if (runtime) {
+        $(`#div-runtimes-${service.id}`).hide();
+        displayFunction(service, runtime);
       } else {
         call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
           if (!runtimes.length) {
@@ -155,7 +154,7 @@ function showRuntimePanel(type, service, runtime, fetchRuntimes) {
             $(`#runtimes-${service.id}`)
               .val(runtime)
               .selectpicker("refresh");
-            displayFunction(service, runtime, fetchRuntimes);
+            displayFunction(service, runtime);
           }
         });
       }
@@ -176,13 +175,13 @@ function displayLogs(service, runtime, fetchRuntimes) {
   });
   editor.setSize("100%", "100%");
   $(`#runtimes-${service.id}`).on("change", function() {
-    refreshLogs(service, this.value, false, editor);
+    refreshLogs(service, this.value, editor);
   });
-  refreshLogs(service, runtime, fetchRuntimes, editor);
+  refreshLogs(service, runtime, editor, fetchRuntimes);
 }
 
 function displayResultsTree(service, runtime) {
-  $("#service-tree").jstree({
+  $("#content").jstree({
     core: {
       animation: 200,
       themes: { stripes: true },
@@ -217,14 +216,14 @@ function displayResultsPanel(service, runtime) {
 }
 
 // eslint-disable-next-line
-function refreshLogs(service, runtime, fetchRuntimes, editor) {
+function refreshLogs(service, runtime, editor, openResults) {
   if (!$(`#log-${service.id}`).length) return;
   call(`/get_service_logs/${runtime}`, function(result) {
     editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
     if (result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, fetchRuntimes, editor), 1000);
-    } else if (fetchRuntimes) {
+      setTimeout(() => refreshLogs(service, runtime, editor, true), 1000);
+    } else if (openResults) {
       $(`#log-${service.id}`).remove();
       showRuntimePanel("results", service, runtime);
     }
@@ -247,7 +246,7 @@ function parametrizedRun(type, id) {
 }
 
 function runLogic(result) {
-  showRuntimePanel("logs", result.service, result.runtime, true);
+  showRuntimePanel("logs", result.service, result.runtime);
   alertify.notify(`Service '${result.service.name}' started.`, "success", 5);
   if (page == "workflow_builder" && workflow) {
     if (result.service.id != workflow.id) {

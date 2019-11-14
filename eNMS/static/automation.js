@@ -127,8 +127,9 @@ function showRuntimePanel(type, service, runtime, fromRun) {
       : service.type == "workflow"
       ? displayResultsTree
       : displayResultsPanel;
+  panel = service.type != "workflow" && type == "results" ? "result" : "log";
   createPanel(
-    type.substring(0, type.length - 1),
+    panel,
     `${type} - ${service.name}`,
     service.id,
     function() {
@@ -173,7 +174,7 @@ function displayLogs(service, runtime, fromRun) {
     scrollbarStyle: "overlay",
   });
   editor.setSize("100%", "100%");
-  $(`#logs_runtime-${service.id}`).on("change", function() {
+  $(`#runtimes-${service.id}`).on("change", function() {
     refreshLogs(service, this.value, false, editor);
   });
   refreshLogs(service, runtime, fromRun, editor);
@@ -208,7 +209,7 @@ function displayResultsTree(service, runtime) {
 
 function displayResultsPanel(service, runtime) {
   $("#result").remove();
-  $(`#results_runtime-${service.id}`).on("change", function() {
+  $(`#runtimes-${service.id}`).on("change", function() {
     tables["result"].ajax.reload(null, false);
   });
   initTable("result", service, runtime || currentRuntime);

@@ -578,7 +578,7 @@ function initTable(type, instance, runtime) {
         d.form = serializeForm(form);
         d.instance = instance;
         if (runtime) {
-          d.runtime = $(`#results_runtime-${instance.id}`).val() || runtime;
+          d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
         }
         return JSON.stringify(d);
       },

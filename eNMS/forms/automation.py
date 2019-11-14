@@ -250,13 +250,13 @@ class LogsForm(BaseForm):
     template = "log"
     form_type = HiddenField(default="log")
     filter = StringField("Filter")
-    logs_runtime = NoValidationSelectField("Runtime", choices=())
+    runtimes = NoValidationSelectField("Runtime", choices=())
 
 
 class ResultForm(BaseForm):
     template = "result"
     form_type = HiddenField(default="result")
-    results_runtime = NoValidationSelectField("Runtime", choices=())
+    runtimes = NoValidationSelectField("Runtime", choices=())
 
 
 class DisplayForm(BaseForm):

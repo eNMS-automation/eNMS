@@ -588,6 +588,11 @@ function initTable(type, instance, runtime) {
   if (["changelog", "syslog", "run", "result"].includes(type)) {
     tables[type].order([0, "desc"]).draw();
   }
+  if (type == "service") {
+    $("#parent-filtering").on("change", function() {
+      tables["service"].ajax.reload(null, false);
+    });
+  }
   if (["run", "service", "task", "workflow"].includes(type)) {
     refreshTablePeriodically(type, 3000);
   }

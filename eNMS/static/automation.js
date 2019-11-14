@@ -121,30 +121,30 @@ function clearResults(id) {
 
 // eslint-disable-next-line
 function showRuntimePanel(type, service, runtime, fromRun) {
-  call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-    if (!runtimes.length) {
-      return alertify.notify(`No ${type} yet.`, "error", 5);
+  displayFunction = type == "logs" ? displayLogs : service.type == "workflow" ? displayResultsTree : displayResultsPanel;
+  createPanel(type.substring(0, type.length - 1), `${type} - ${service.name}`, service.id, function() {
+    if (fromRun) {
+      displayFunction(service, runtime, fromRun);
     } else {
-      const panel = type.substring(0, type.length - 1);
-      createPanel(panel, `${type} - ${service.name}`, service.id, function() {
-        $(`#${type}_runtime-${service.id}`).empty();
-        runtimes.forEach((runtime) => {
-          $(`#${type}_runtime-${service.id}`).append(
-            $("<option></option>")
-              .attr("value", runtime[0])
-              .text(runtime[1])
-          );
-        });
-        if (!runtime || runtime == "normal") {
-          runtime = runtimes[runtimes.length - 1][0];
-        }
-        $(`#${type}_runtime-${service.id}`)
-          .val(runtime)
-          .selectpicker("refresh");
-        if (service.type == "workflow" && type == "results") {
-          initResultsTree(service, runtime || currentRuntime);
+      call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
+        if (!runtimes.length) {
+          return alertify.notify(`No ${type} yet.`, "error", 5);
         } else {
-          initPanel(type, service, runtimes, runtime || currentRuntime, fromRun);
+          $(`#${type}_runtime-${service.id}`).empty();
+          runtimes.forEach((runtime) => {
+            $(`#${type}_runtime-${service.id}`).append(
+              $("<option></option>")
+                .attr("value", runtime[0])
+                .text(runtime[1])
+            );
+          });
+          if (!runtime || runtime == "normal") {
+            runtime = runtimes[runtimes.length - 1][0];
+          }
+          $(`#${type}_runtime-${service.id}`)
+            .val(runtime)
+            .selectpicker("refresh");
+            displayFunction(service, runtime, fromRun);
         }
       });
     }

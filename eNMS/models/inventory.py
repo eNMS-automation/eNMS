@@ -118,7 +118,7 @@ class Device(CustomDevice):
                 pool.devices.remove(self)
                 pool.device_number -= 1
 
-    def generate_row(self, table):
+    def generate_row(self):
         return [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
@@ -234,7 +234,7 @@ class Link(Object):
             elif self in pool.links:
                 pool.links.remove(self)
 
-    def generate_row(self, table):
+    def generate_row(self):
         return [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
@@ -320,7 +320,7 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
-    def generate_row(self, table):
+    def generate_row(self):
         return [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">

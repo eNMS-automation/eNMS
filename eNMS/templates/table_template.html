@@ -62,16 +62,18 @@
       {{ form.results_runtime(class="form-control add-id") }}
     </button>
     {% endif %}
-    <div class="pull-right">
-      <select
-      id="parent-filtering"
-      name="parent-filtering"
-      class="form-control"
-    >
-      <option value="true">Display top-level services only</option>
-      <option value="false">Display all services</option>
-    </select>
-    </div>
+    {% if type == "service" %}
+      <div class="pull-right">
+        <select
+        id="parent-filtering"
+        name="parent-filtering"
+        class="form-control"
+      >
+        <option value="true">Display top-level services only</option>
+        <option value="false">Display all services</option>
+      </select>
+      </div>
+    {% endif %}
   </div>
   <table
     id="{{ type }}-table"

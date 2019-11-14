@@ -114,7 +114,7 @@ class Service(AbstractBase):
             workflow = f"[{self.workflows[0].name}] "
         self.name = f"{workflow}{name or self.scoped_name}"
 
-    def generate_row(self, table):
+    def generate_row(self):
         return [
             f"Running" if app.service_db[self.id]["runs"] else "Idle",
             f"""

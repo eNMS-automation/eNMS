@@ -473,7 +473,6 @@ class BaseController:
         }
 
     def table_filtering(self, table, **kwargs):
-        print(kwargs)
         model, properties = models[table], table_properties[table]
         operator = and_ if kwargs["form"].get("operator", "all") == "all" else or_
         column_index = int(kwargs["order"][0]["column"])
@@ -511,7 +510,7 @@ class BaseController:
                     getattr(obj, f"table_{property}", getattr(obj, property))
                     for property in properties
                 ]
-                + obj.generate_row(table)
+                + obj.generate_row()
                 for obj in result.limit(int(kwargs["length"]))
                 .offset(int(kwargs["start"]))
                 .all()

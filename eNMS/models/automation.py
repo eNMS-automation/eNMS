@@ -118,7 +118,7 @@ class Service(AbstractBase):
         return [
             f"Running" if app.service_db[self.id]["runs"] else "Idle",
             f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 400px">
+            <ul class="pagination pagination-lg" style="margin: 0px; width: 350px">
           <li>
             <button type="button" class="btn btn-info"
             onclick="showResultsPanel({self.row_properties})" data-tooltip="Results"
@@ -148,13 +148,6 @@ class Service(AbstractBase):
             <button type="button" class="btn btn-primary"
             onclick="showTypePanel('{self.type}', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'duplicate')"
-            data-tooltip="Duplicate"
-              ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
           </li>
           <li>

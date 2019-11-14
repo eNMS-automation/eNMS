@@ -519,7 +519,7 @@ function processInstance(type, instance) {
 }
 
 // eslint-disable-next-line
-function processData(type, id, duplicate) {
+function processData(type, id) {
   if (type.includes("service") || type == "workflow") {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
       "disabled",

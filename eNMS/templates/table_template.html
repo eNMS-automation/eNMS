@@ -1,62 +1,65 @@
-<div class="page-title">
-  {% if type == "service" %}
-  <button
-    style="background:transparent; border:none; color:transparent; width: 20vw;"
-  >
-    <select id="service-type" class="form-control"></select>
-  </button>
-  {% endif %} {% if type not in ("run", "result", "syslog") %} {% set func =
-  "openServicePanel" if type == "service" else "showTypePanel" %}
-  <button
-    class="btn btn-primary"
-    onclick="{{ func }}('{{ type }}')"
-    data-tooltip="New"
-  >
-    <span class="glyphicon glyphicon-plus"></span>
-  </button>
-  {% endif %} {% if type == "pool" %}
-  <button
-    class="btn btn-primary btn-file"
-    onclick="updatePools()"
-    data-tooltip="Update all pools"
-  >
-    <span class="glyphicon glyphicon-flash"></span>
-  </button>
-  {% endif %} {% if type != "result" %}
-  <button
-    class="btn btn-info btn-file"
-    onclick="showFilteringPanel('{{ type }}_filtering')"
-    data-tooltip="Advanced Search"
-  >
-    <span class="glyphicon glyphicon-search"></span>
-  </button>
-  {% endif %}
-  <button
-    class="btn btn-info btn-file"
-    onclick="refreshTable('{{ type }}', true)"
-    data-tooltip="Refresh"
-  >
-    <span class="glyphicon glyphicon-refresh"></span>
-  </button>
-  {% if type == "result" %}
-  <button
-    class="btn btn-info btn-file"
-    onclick="compare('{{ type }}')"
-    data-tooltip="Compare"
-  >
-    <span class="glyphicon glyphicon-adjust"></span>
-  </button>
-  {% endif %} {% if type == "result" %}
-  <button style="background:transparent; border:none; color:transparent;">
-    {{ form.results_runtime(class="form-control add-id") }}
-  </button>
-  {% endif %}
-</div>
 <form
   id="search-{{ type }}-form"
   class="form-horizontal form-label-left"
   method="post"
 >
+  <div class="page-title">
+    {% if type == "service" %}
+    <button
+      style="background:transparent; border:none; color:transparent; width: 20vw;"
+    >
+      <select id="service-type" class="form-control"></select>
+    </button>
+    {% endif %} {% if type not in ("run", "result", "syslog") %} {% set func =
+    "openServicePanel" if type == "service" else "showTypePanel" %}
+    <button
+      class="btn btn-primary"
+      onclick="{{ func }}('{{ type }}')"
+      data-tooltip="New"
+    >
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+    {% endif %} {% if type == "pool" %}
+    <button
+      class="btn btn-primary btn-file"
+      onclick="updatePools()"
+      data-tooltip="Update all pools"
+    >
+      <span class="glyphicon glyphicon-flash"></span>
+    </button>
+    {% endif %} {% if type != "result" %}
+    <button
+      class="btn btn-info btn-file"
+      onclick="showFilteringPanel('{{ type }}_filtering')"
+      data-tooltip="Advanced Search"
+    >
+      <span class="glyphicon glyphicon-search"></span>
+    </button>
+    {% endif %}
+    <button
+      class="btn btn-info btn-file"
+      onclick="refreshTable('{{ type }}', true)"
+      data-tooltip="Refresh"
+    >
+      <span class="glyphicon glyphicon-refresh"></span>
+    </button>
+    {% if type == "result" %}
+    <button
+      class="btn btn-info btn-file"
+      onclick="compare('{{ type }}')"
+      data-tooltip="Compare"
+    >
+      <span class="glyphicon glyphicon-adjust"></span>
+    </button>
+    {% endif %} {% if type == "result" %}
+    <button style="background:transparent; border:none; color:transparent;">
+      {{ form.results_runtime(class="form-control add-id") }}
+    </button>
+    {% endif %}
+    <div class="pull-right">
+
+    </div>
+  </div>
   <table
     id="{{ type }}-table"
     class="table table-striped table-bordered dt-responsive nowrap"

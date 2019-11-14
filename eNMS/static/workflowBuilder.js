@@ -9,7 +9,6 @@ fCall: false
 normalRun: false
 runLogic: false
 serviceTypes: false
-showLogsPanel: false
 showPanel: false
 showRuntimePanel: false
 showTypePanel: false
@@ -633,7 +632,7 @@ Object.assign(action, {
   "Restart Workflow from Here": (service) =>
     showRestartWorkflowPanel(workflow, service),
   "Workflow Results": () => showRuntimePanel("results", workflow),
-  "Workflow Logs": () => showLogsPanel(workflow),
+  "Workflow Logs": () => showRuntimePanel("logs", workflow),
   "Add to Workflow": addServicePanel,
   "Stop Workflow": () => stopWorkflow(),
   Delete: deleteSelection,

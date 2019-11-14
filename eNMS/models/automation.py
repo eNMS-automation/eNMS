@@ -131,8 +131,8 @@ class Service(AbstractBase):
           </li>
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showLogsPanel({self.row_properties})" data-tooltip="Logs"
-              ><span class="glyphicon glyphicon-list"></span
+            onclick="showRuntimePanel('logs', {self.row_properties})"
+            data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
             ></button>
           </li>
           <li>

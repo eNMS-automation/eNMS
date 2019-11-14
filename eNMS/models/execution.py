@@ -153,17 +153,15 @@ class Run(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showRuntimePanel('results', {self.service.row_properties}, '{self.runtime}')"
-            data-tooltip="Results"
-              ><span class="glyphicon glyphicon-list-alt"></span
-            ></button>
+            onclick="showRuntimePanel('results', {self.service.row_properties},
+            '{self.runtime}')"data-tooltip="Results">
+            <span class="glyphicon glyphicon-list-alt"></span></button>
           </li>
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showLogsPanel({self.service.row_properties}, '{self.runtime}')"
-            data-tooltip="Logs"
-              ><span class="glyphicon glyphicon-list"></span
-            ></button>
+            onclick="showRuntimePanel('logs', {self.service.row_properties},
+            '{self.runtime}')"data-tooltip="Logs">
+            <span class="glyphicon glyphicon-list"></span></button>
           </li>
         </ul>"""
         ]

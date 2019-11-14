@@ -120,7 +120,7 @@ function clearResults(id) {
 }
 
 // eslint-disable-next-line
-function showRuntimePanel(type, service, runtime, fromRun) {
+function showRuntimePanel(type, service, runtime, fetchRuntimes) {
   displayFunction =
     type == "logs"
       ? displayLogs
@@ -133,16 +133,17 @@ function showRuntimePanel(type, service, runtime, fromRun) {
     `${type} - ${service.name}`,
     service.id,
     function() {
-      if (fromRun) {
-        displayFunction(service, runtime, fromRun);
+      if (!fetchRuntimes) {
+        $(`#runtimes-${service.id}`).hide();
+        displayFunction(service, runtime, fetchRuntimes);
       } else {
         call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
           if (!runtimes.length) {
             return alertify.notify(`No ${type} yet.`, "error", 5);
           } else {
-            $(`#${type}_runtime-${service.id}`).empty();
+            $(`#runtimes-${service.id}`).empty();
             runtimes.forEach((runtime) => {
-              $(`#${type}_runtime-${service.id}`).append(
+              $(`#runtimes-${service.id}`).append(
                 $("<option></option>")
                   .attr("value", runtime[0])
                   .text(runtime[1])
@@ -151,10 +152,10 @@ function showRuntimePanel(type, service, runtime, fromRun) {
             if (!runtime || runtime == "normal") {
               runtime = runtimes[runtimes.length - 1][0];
             }
-            $(`#${type}_runtime-${service.id}`)
+            $(`#runtimes-${service.id}`)
               .val(runtime)
               .selectpicker("refresh");
-            displayFunction(service, runtime, fromRun);
+            displayFunction(service, runtime, fetchRuntimes);
           }
         });
       }
@@ -162,7 +163,7 @@ function showRuntimePanel(type, service, runtime, fromRun) {
   );
 }
 
-function displayLogs(service, runtime, fromRun) {
+function displayLogs(service, runtime, fetchRuntimes) {
   const content = document.getElementById(`content-${service.id}`);
   // eslint-disable-next-line new-cap
   let editor = CodeMirror(content, {
@@ -177,7 +178,7 @@ function displayLogs(service, runtime, fromRun) {
   $(`#runtimes-${service.id}`).on("change", function() {
     refreshLogs(service, this.value, false, editor);
   });
-  refreshLogs(service, runtime, fromRun, editor);
+  refreshLogs(service, runtime, fetchRuntimes, editor);
 }
 
 function displayResultsTree(service, runtime) {
@@ -216,14 +217,14 @@ function displayResultsPanel(service, runtime) {
 }
 
 // eslint-disable-next-line
-function refreshLogs(service, runtime, fromRun, editor) {
+function refreshLogs(service, runtime, fetchRuntimes, editor) {
   if (!$(`#log-${service.id}`).length) return;
   call(`/get_service_logs/${runtime}`, function(result) {
     editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
     if (result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, fromRun, editor), 1000);
-    } else if (fromRun) {
+      setTimeout(() => refreshLogs(service, runtime, fetchRuntimes, editor), 1000);
+    } else if (fetchRuntimes) {
       $(`#log-${service.id}`).remove();
       showRuntimePanel("results", service, runtime);
     }

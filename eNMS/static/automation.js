@@ -119,47 +119,57 @@ function clearResults(id) {
   });
 }
 
-function initPanel(type, service, runtime, fromRun) {
-  $(`#${type}_runtime-${service.id}`).empty();
-  runtimes.forEach((runtime) => {
-    $(`#${type}_runtime-${service.id}`).append(
-      $("<option></option>")
-        .attr("value", runtime[0])
-        .text(runtime[1])
-    );
+// eslint-disable-next-line
+function showRuntimePanel(type, service, runtime, fromRun) {
+  call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
+    if (!runtimes.length) {
+      return alertify.notify(`No ${type} yet.`, "error", 5);
+    } else {
+      const panel = type.substring(0, type.length - 1);
+      createPanel(panel, `${type} - ${service.name}`, service.id, function() {
+        $(`#${type}_runtime-${service.id}`).empty();
+        runtimes.forEach((runtime) => {
+          $(`#${type}_runtime-${service.id}`).append(
+            $("<option></option>")
+              .attr("value", runtime[0])
+              .text(runtime[1])
+          );
+        });
+        if (!runtime || runtime == "normal") {
+          runtime = runtimes[runtimes.length - 1][0];
+        }
+        $(`#${type}_runtime-${service.id}`)
+          .val(runtime)
+          .selectpicker("refresh");
+        if (service.type == "workflow" && type == "results") {
+          initResultsTree(service, runtime || currentRuntime);
+        } else {
+          initPanel(type, service, runtimes, runtime || currentRuntime, fromRun);
+        }
+      });
+    }
   });
-  if (!runtime || runtime == "normal") {
-    runtime = runtimes[runtimes.length - 1][0];
-  }
-  $(`#${type}_runtime-${service.id}`)
-    .val(runtime)
-    .selectpicker("refresh");
-  if (type == "logs") {
-    const content = document.getElementById(`content-${service.id}`);
-    // eslint-disable-next-line new-cap
-    let editor = CodeMirror(content, {
-      lineWrapping: true,
-      lineNumbers: true,
-      readOnly: true,
-      theme: "cobalt",
-      extraKeys: { "Ctrl-F": "findPersistent" },
-      scrollbarStyle: "overlay",
-    });
-    editor.setSize("100%", "100%");
-    $(`#logs_runtime-${service.id}`).on("change", function() {
-      refreshLogs(service, this.value, false, editor);
-    });
-    refreshLogs(service, runtime, fromRun, editor);
-  } else {
-    $("#result").remove();
-    $(`#results_runtime-${service.id}`).on("change", function() {
-      tables["result"].ajax.reload(null, false);
-    });
-    initTable("result", service, runtime || currentRuntime);
-  }
 }
 
-function initResultsTree(service, runtime) {
+function displayLogs(service, runtime, fromRun) {
+  const content = document.getElementById(`content-${service.id}`);
+  // eslint-disable-next-line new-cap
+  let editor = CodeMirror(content, {
+    lineWrapping: true,
+    lineNumbers: true,
+    readOnly: true,
+    theme: "cobalt",
+    extraKeys: { "Ctrl-F": "findPersistent" },
+    scrollbarStyle: "overlay",
+  });
+  editor.setSize("100%", "100%");
+  $(`#logs_runtime-${service.id}`).on("change", function() {
+    refreshLogs(service, this.value, false, editor);
+  });
+  refreshLogs(service, runtime, fromRun, editor);
+}
+
+function displayResultsTree(service, runtime) {
   $('#service-tree').jstree({
     "core" : {
       "animation" : 200,
@@ -186,22 +196,12 @@ function initResultsTree(service, runtime) {
   });
 }
 
-// eslint-disable-next-line
-function showRuntimePanel(type, service, runtime, fromRun) {
-  call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-    if (!runtimes.length) {
-      return alertify.notify(`No ${type} yet.`, "error", 5);
-    } else {
-      const panel = type.substring(0, type.length - 1);
-      createPanel(panel, `${type} - ${service.name}`, service.id, function() {
-        if (service.type == "workflow" && type == "results") {
-          initResultsTree(service, runtime || currentRuntime);
-        } else {
-          initPanel(type, service, runtimes, runtime || currentRuntime, fromRun);
-        }
-      });
-    }
+function displayResultsPanel(service, runtime) {
+  $("#result").remove();
+  $(`#results_runtime-${service.id}`).on("change", function() {
+    tables["result"].ajax.reload(null, false);
   });
+  initTable("result", service, runtime || currentRuntime);
 }
 
 // eslint-disable-next-line

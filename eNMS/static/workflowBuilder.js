@@ -11,7 +11,7 @@ runLogic: false
 serviceTypes: false
 showLogsPanel: false
 showPanel: false
-showResultsPanel: false
+showRuntimePanel: false
 showTypePanel: false
 userIsActive: true
 vis: false
@@ -626,13 +626,13 @@ Object.assign(action, {
     showTypePanel(service.type, service.id, "run"),
   "Run Workflow": () => runWorkflow(),
   "Parametrized Workflow Run": () => runWorkflow(true),
-  Results: showResultsPanel,
+  Results: () => showRuntimePanel("results", service),
   "Create Workflow": () => createNew("workflow"),
   "Create New Service": () => createNew("service"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Restart Workflow from Here": (service) =>
     showRestartWorkflowPanel(workflow, service),
-  "Workflow Results": () => showResultsPanel(workflow),
+  "Workflow Results": () => showRuntimePanel("results", workflow),
   "Workflow Logs": () => showLogsPanel(workflow),
   "Add to Workflow": addServicePanel,
   "Stop Workflow": () => stopWorkflow(),

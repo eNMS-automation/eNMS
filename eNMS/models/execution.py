@@ -153,7 +153,7 @@ class Run(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showResultsPanel({self.service.row_properties}, '{self.runtime}')"
+            onclick="showRuntimePanel('results', {self.service.row_properties}, '{self.runtime}')"
             data-tooltip="Results"
               ><span class="glyphicon glyphicon-list-alt"></span
             ></button>

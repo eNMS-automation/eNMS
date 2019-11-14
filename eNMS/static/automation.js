@@ -169,50 +169,48 @@ function initPanel(type, service, runtime, fromRun) {
 }
 
 function initResultsTree(service, runtime) {
-  createPanel(panel, `${type} - ${service.name}`, service.id, function() {
-    $('#service-tree').jstree({
-      "core" : {
-        "animation" : 200,
-        "themes" : { "stripes" : true },
-        'data' : {
-          'url' : function (node) {
-            return `/get_workflow_services/${node.id}`;
-          },
-          type: "POST",
-        }
-      },
-      "plugins" : ["checkbox", "types"],
-      "checkbox": {
-        "three_state": false,
-      },
-      "types" : {
-        "default": {
-          "icon": "glyphicon glyphicon-file",
+  $('#service-tree').jstree({
+    "core" : {
+      "animation" : 200,
+      "themes" : { "stripes" : true },
+      'data' : {
+        'url' : function (node) {
+          return `/get_workflow_services/${node.id}`;
         },
-        "workflow" : {
-          "icon" : "fa fa-sitemap",
-        },
+        type: "POST",
+      }
+    },
+    "plugins" : ["checkbox", "types"],
+    "checkbox": {
+      "three_state": false,
+    },
+    "types" : {
+      "default": {
+        "icon": "glyphicon glyphicon-file",
       },
-    });
+      "workflow" : {
+        "icon" : "fa fa-sitemap",
+      },
+    },
   });
 }
 
 // eslint-disable-next-line
-function showRuntimePanel(type, service, runtime) {
+function showRuntimePanel(type, service, runtime, fromRun) {
   call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
     if (!runtimes.length) {
       return alertify.notify(`No ${type} yet.`, "error", 5);
-    } else if (type == "logs") {
-      initPanel("logs", service, runtime || currentRuntime, fromRun);
-    } else if (service.type == "workflow") {
-
     } else {
-      initPanel("results", service, runtime || currentRuntime);
+      const panel = type.substring(0, type.length - 1);
+      createPanel(panel, `${type} - ${service.name}`, service.id, function() {
+        if (service.type == "workflow" && type == "results") {
+          initResultsTree(service, runtime || currentRuntime);
+        } else {
+          initPanel(type, service, runtimes, runtime || currentRuntime, fromRun);
+        }
+      });
     }
-    });
-  } else {
-    
-  }
+  });
 }
 
 // eslint-disable-next-line
@@ -230,7 +228,7 @@ function refreshLogs(service, runtime, fromRun, editor) {
       setTimeout(() => refreshLogs(service, runtime, fromRun, editor), 1000);
     } else if (fromRun) {
       $(`#log-${service.id}`).remove();
-      showResultsPanel(service, runtime);
+      showRuntimePanel("results", service, runtime);
     }
   });
 }

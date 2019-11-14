@@ -2,7 +2,7 @@
 global
 calendarType: false
 call: false
-showResultsPanel: false
+showRuntimePanel: false
 showTypePanel: false
 */
 
@@ -35,7 +35,7 @@ $(function() {
         if (calendarType == "task") {
           showTypePanel("task", e.id);
         } else {
-          showResultsPanel(e.service, e.title, e.runtime);
+          showRuntimePanel("results", e.service, e.title, e.runtime);
         }
       },
       editable: true,

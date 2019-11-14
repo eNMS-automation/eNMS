@@ -125,8 +125,8 @@ class Service(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 350px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showResultsPanel({self.row_properties})" data-tooltip="Results"
-              ><span class="glyphicon glyphicon-list-alt"></span
+            onclick="showRuntimePanel('results', {self.row_properties})"
+            data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
             ></button>
           </li>
           <li>

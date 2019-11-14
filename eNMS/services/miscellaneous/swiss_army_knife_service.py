@@ -42,7 +42,7 @@ class SwissArmyKnifeService(Service):
             )
         return {"success": True}
 
-    def git_push_configurations(self, run, payload):
+    def git_push_configurations(self, run, payload, device=None):
         if not app.config["app"]["git_repository"]:
             return
         repo = Repo(Path.cwd() / "network_data")

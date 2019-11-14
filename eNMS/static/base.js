@@ -331,11 +331,6 @@ function showPanel(type, id, processing) {
 }
 
 // eslint-disable-next-line
-function showFilteringPanel(panelType) {
-  showPanel(panelType);
-}
-
-// eslint-disable-next-line
 function showDeletionPanel(instance) {
   createPanel(
     "instance_deletion",

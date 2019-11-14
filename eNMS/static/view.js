@@ -7,7 +7,6 @@ config: true
 L: false
 serializeForm: false
 showDeviceNetworkData: false
-showFilteringPanel: false
 showPanel: false
 showPoolView: false
 showTypePanel: false
@@ -219,11 +218,6 @@ function filter(type) {
       alertify.notify("Filter applied.", "success", 5);
     },
   });
-}
-
-// eslint-disable-next-line
-function showViewFilteringPanel(type) {
-  showFilteringPanel(`${type}_filtering`);
 }
 
 Object.assign(action, {

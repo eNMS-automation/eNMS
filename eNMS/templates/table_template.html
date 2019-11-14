@@ -57,7 +57,14 @@
     </button>
     {% endif %}
     <div class="pull-right">
-
+      <select
+      id="parent-filtering"
+      name="parent-filtering"
+      class="form-control"
+    >
+      <option value="true">Display top-level services only</option>
+      <option value="false">Display all services</option>
+    </select>
     </div>
   </div>
   <table

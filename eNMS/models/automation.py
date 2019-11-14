@@ -115,7 +115,11 @@ class Service(AbstractBase):
         self.name = f"{workflow}{name or self.scoped_name}"
 
     def generate_row(self):
-        return [
+        rows = super().generate_row()
+        if self.type == "workflow":
+            onclick = f'javascript:filterTable("{self.id}")';
+            rows[0] = f'<b><a href="#" onclick="{onclick}">{rows[0]}</a></b>'
+        return rows + [
             f"Running" if app.service_db[self.id]["runs"] else "Idle",
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 350px">

@@ -19,7 +19,7 @@ class Server(AbstractBase):
     cpu_load = Column(Float)
 
     def generate_row(self):
-        return [
+        return super().generate_row() + [
             f"""<center>
             <ul class="pagination pagination-lg" style="margin: 0px;">
           <li>
@@ -56,7 +56,7 @@ class User(AbstractBase, UserMixin):
     password = Column(SmallString)
 
     def generate_row(self):
-        return [
+        return super().generate_row() + [
             f"""<center>
             <ul class="pagination pagination-lg" style="margin: 0px;">
           <li>

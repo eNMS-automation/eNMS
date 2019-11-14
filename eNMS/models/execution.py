@@ -79,7 +79,7 @@ class Result(AbstractBase):
         )
 
     def generate_row(self):
-        return [
+        return super().generate_row() + [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showResult('{self.id}')">Results</button>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
@@ -148,7 +148,7 @@ class Run(AbstractBase):
         return result.pop() if result else None
 
     def generate_row(self):
-        return [
+        return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>

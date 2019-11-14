@@ -6,6 +6,7 @@ from eNMS.database.functions import factory, fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
 from eNMS.properties import dont_serialize, private_properties
 from eNMS.properties.database import dont_migrate
+from eNMS.properties.table import table_properties
 
 
 class AbstractBase(Base):
@@ -42,6 +43,16 @@ class AbstractBase(Base):
                 super().__setattr__(property, value)
         else:
             super().__setattr__(property, value)
+
+    def generate_row(self):
+        if "service" in self.type or self.type == "workflow":
+            table_type = "service"
+        else:
+            table_type = self.type
+        return [
+            getattr(self, f"table_{property}", getattr(self, property))
+            for property in table_properties[table_type]
+        ]
 
     @property
     def row_properties(self):

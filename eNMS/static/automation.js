@@ -186,9 +186,7 @@ function displayResultsTree(service, runtime) {
       animation: 200,
       themes: { stripes: true },
       data: {
-        url: function(node) {
-          return `/get_workflow_results/${node.id}`;
-        },
+        url: `/get_workflow_results/${service.id}`,
         type: "POST",
       },
     },

@@ -149,6 +149,17 @@ class AutomationController(BaseController):
                 if service.scoped_name not in ("Start", "End")
             ]
 
+    def get_workflow_results(self, workflow):
+        def rec(service):
+            result = {"id": service.id, "text": service.scoped_name}
+            if service.type == "workflow":
+                children = [rec(child) for child in service.services]
+                return {"children": children, "type": "workflow", **result}
+            else:
+                return {"type": "service", **result}
+
+        return rec(fetch("workflow", id=workflow))
+
     @staticmethod
     def run(service, **kwargs):
         run_kwargs = {

@@ -153,7 +153,11 @@ class AutomationController(BaseController):
         def rec(service):
             result = {"id": service.id, "text": service.scoped_name}
             if service.type == "workflow":
-                children = [rec(child) for child in service.services]
+                children = [
+                    rec(child)
+                    for child in service.services
+                    if child.scoped_name not in ("Start", "End")
+                ]
                 return {"children": children, "type": "workflow", **result}
             else:
                 return {"type": "service", **result}

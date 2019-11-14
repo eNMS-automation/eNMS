@@ -163,6 +163,7 @@ function showRuntimePanel(type, service, runtime) {
 }
 
 function displayLogs(service, runtime) {
+  $("#body-runtime").css('background-color', '#1B1B1B');
   const content = document.getElementById(`content-${service.id}`);
   // eslint-disable-next-line new-cap
   let editor = CodeMirror(content, {
@@ -181,7 +182,7 @@ function displayLogs(service, runtime) {
 }
 
 function displayResultsTree(service, runtime) {
-  $(`#content-${service.id}`).jstree({
+  let tree = $(`#content-${service.id}`).jstree({
     core: {
       animation: 200,
       themes: { stripes: true },
@@ -190,10 +191,7 @@ function displayResultsTree(service, runtime) {
         type: "POST",
       },
     },
-    plugins: ["checkbox", "types"],
-    checkbox: {
-      three_state: false,
-    },
+    plugins: ["types"],
     types: {
       default: {
         icon: "glyphicon glyphicon-file",
@@ -202,6 +200,9 @@ function displayResultsTree(service, runtime) {
         icon: "fa fa-sitemap",
       },
     },
+  });
+  tree.bind("loaded.jstree", function () {
+    tree.jstree("open_all");
   });
 }
 

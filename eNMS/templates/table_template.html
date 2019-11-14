@@ -58,22 +58,24 @@
       <span class="glyphicon glyphicon-adjust"></span>
     </button>
     {% endif %} {% if type == "result" %}
-    <button style="background:transparent; border:none; color:transparent;" type="button">
+    <button
+      style="background:transparent; border:none; color:transparent;"
+      type="button"
+    >
       {{ form.results_runtime(class="form-control add-id") }}
     </button>
-    {% endif %}
-    {% if type == "service" %}
-      <div class="pull-right">
-        <select
+    {% endif %} {% if type == "service" %}
+    <div class="pull-right">
+      <select
         id="parent-filtering"
         name="parent-filtering"
         class="form-control"
       >
-          <option value="true">Display top-level services only</option>
-          <option value="false">Display all services</option>
-        </select>
-      </div>
-      <input type="hidden" id="workflow-filtering" name="workflow-filtering">
+        <option value="true">Display top-level services only</option>
+        <option value="false">Display all services</option>
+      </select>
+    </div>
+    <input type="hidden" id="workflow-filtering" name="workflow-filtering" />
     {% endif %}
   </div>
   <table

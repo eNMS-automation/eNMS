@@ -499,9 +499,11 @@ class BaseController:
         if table == "service":
             workflow_id = kwargs["form"].get("workflow-filtering")
             if workflow_id:
-                constraints.append(models["service"].workflows.any(
-                    models["workflow"].id == int(workflow_id)
-                ))
+                constraints.append(
+                    models["service"].workflows.any(
+                        models["workflow"].id == int(workflow_id)
+                    )
+                )
             else:
                 if kwargs["form"].get("parent-filtering") == "true":
                     constraints.append(~models["service"].workflows.any())

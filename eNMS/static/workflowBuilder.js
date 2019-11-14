@@ -318,9 +318,9 @@ function updateWorkflowService(service) {
 
 // eslint-disable-next-line
 function addServicesToWorkflow() {
-  const selection = $('#service-tree').jstree("get_checked");
+  const selection = $("#service-tree").jstree("get_checked");
   if (!selection.length) alertify.notify("Nothing selected.", "error", 5);
-  $('#services').val(selection);
+  $("#services").val(selection);
   fCall(
     `/copy_service_in_workflow/${workflow.id}`,
     "#add-services-form",
@@ -581,27 +581,27 @@ function savePositions() {
 
 function addServicePanel() {
   showPanel("add_service", null, function() {
-    $('#service-tree').jstree({
-      "core" : {
-        "animation" : 200,
-        "themes" : { "stripes" : true },
-        'data' : {
-          'url' : function (node) {
+    $("#service-tree").jstree({
+      core: {
+        animation: 200,
+        themes: { stripes: true },
+        data: {
+          url: function(node) {
             return `/get_workflow_services/${node.id}`;
           },
           type: "POST",
-        }
-      },
-      "plugins" : ["checkbox", "types"],
-      "checkbox": {
-        "three_state": false,
-      },
-      "types" : {
-        "default": {
-          "icon": "glyphicon glyphicon-file",
         },
-        "workflow" : {
-          "icon" : "fa fa-sitemap",
+      },
+      plugins: ["checkbox", "types"],
+      checkbox: {
+        three_state: false,
+      },
+      types: {
+        default: {
+          icon: "glyphicon glyphicon-file",
+        },
+        workflow: {
+          icon: "fa fa-sitemap",
         },
       },
     });

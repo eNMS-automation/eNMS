@@ -121,34 +121,44 @@ function clearResults(id) {
 
 // eslint-disable-next-line
 function showRuntimePanel(type, service, runtime, fromRun) {
-  displayFunction = type == "logs" ? displayLogs : service.type == "workflow" ? displayResultsTree : displayResultsPanel;
-  createPanel(type.substring(0, type.length - 1), `${type} - ${service.name}`, service.id, function() {
-    if (fromRun) {
-      displayFunction(service, runtime, fromRun);
-    } else {
-      call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-        if (!runtimes.length) {
-          return alertify.notify(`No ${type} yet.`, "error", 5);
-        } else {
-          $(`#${type}_runtime-${service.id}`).empty();
-          runtimes.forEach((runtime) => {
-            $(`#${type}_runtime-${service.id}`).append(
-              $("<option></option>")
-                .attr("value", runtime[0])
-                .text(runtime[1])
-            );
-          });
-          if (!runtime || runtime == "normal") {
-            runtime = runtimes[runtimes.length - 1][0];
-          }
-          $(`#${type}_runtime-${service.id}`)
-            .val(runtime)
-            .selectpicker("refresh");
+  displayFunction =
+    type == "logs"
+      ? displayLogs
+      : service.type == "workflow"
+      ? displayResultsTree
+      : displayResultsPanel;
+  createPanel(
+    type.substring(0, type.length - 1),
+    `${type} - ${service.name}`,
+    service.id,
+    function() {
+      if (fromRun) {
+        displayFunction(service, runtime, fromRun);
+      } else {
+        call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
+          if (!runtimes.length) {
+            return alertify.notify(`No ${type} yet.`, "error", 5);
+          } else {
+            $(`#${type}_runtime-${service.id}`).empty();
+            runtimes.forEach((runtime) => {
+              $(`#${type}_runtime-${service.id}`).append(
+                $("<option></option>")
+                  .attr("value", runtime[0])
+                  .text(runtime[1])
+              );
+            });
+            if (!runtime || runtime == "normal") {
+              runtime = runtimes[runtimes.length - 1][0];
+            }
+            $(`#${type}_runtime-${service.id}`)
+              .val(runtime)
+              .selectpicker("refresh");
             displayFunction(service, runtime, fromRun);
-        }
-      });
+          }
+        });
+      }
     }
-  });
+  );
 }
 
 function displayLogs(service, runtime, fromRun) {
@@ -170,27 +180,27 @@ function displayLogs(service, runtime, fromRun) {
 }
 
 function displayResultsTree(service, runtime) {
-  $('#service-tree').jstree({
-    "core" : {
-      "animation" : 200,
-      "themes" : { "stripes" : true },
-      'data' : {
-        'url' : function (node) {
+  $("#service-tree").jstree({
+    core: {
+      animation: 200,
+      themes: { stripes: true },
+      data: {
+        url: function(node) {
           return `/get_workflow_services/${node.id}`;
         },
         type: "POST",
-      }
-    },
-    "plugins" : ["checkbox", "types"],
-    "checkbox": {
-      "three_state": false,
-    },
-    "types" : {
-      "default": {
-        "icon": "glyphicon glyphicon-file",
       },
-      "workflow" : {
-        "icon" : "fa fa-sitemap",
+    },
+    plugins: ["checkbox", "types"],
+    checkbox: {
+      three_state: false,
+    },
+    types: {
+      default: {
+        icon: "glyphicon glyphicon-file",
+      },
+      workflow: {
+        icon: "fa fa-sitemap",
       },
     },
   });

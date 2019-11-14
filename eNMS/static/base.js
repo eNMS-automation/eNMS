@@ -604,6 +604,11 @@ function filter(formType) {
   alertify.notify("Filter applied.", "success", 5);
 }
 
+function filterTable(id) {
+  $("#workflow-filtering").val(id);
+  tables["service"].ajax.reload(null, false);
+}
+
 // eslint-disable-next-line
 function refreshTable(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);

@@ -117,8 +117,8 @@ class Service(AbstractBase):
     def generate_row(self):
         rows = super().generate_row()
         if self.type == "workflow":
-            onclick = f'javascript:filterTable("{self.id}")';
-            rows[0] = f'<b><a href="#" onclick="{onclick}">{rows[0]}</a></b>'
+            onclick = f"filterTable('{self.id}')"
+            rows[0] = f'''<b><a href="#" onclick="{onclick}">{rows[0]}</a></b>'''
         return rows + [
             f"Running" if app.service_db[self.id]["runs"] else "Idle",
             f"""

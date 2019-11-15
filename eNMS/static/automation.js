@@ -184,6 +184,7 @@ function displayLogs(service, runtime) {
 function displayResultsTree(service, runtime) {
   call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
     function customMenu(node) {
+      console.log("test");
       var items = {
         item1: {
           label: "item1",
@@ -198,13 +199,6 @@ function displayResultsTree(service, runtime) {
           },
         },
       };
-
-      if (node.type === "level_1") {
-        delete items.item2;
-      } else if (node.type === "level_2") {
-        delete items.item1;
-      }
-
       return items;
     }
     let tree = $(`#content-${service.id}`).jstree({

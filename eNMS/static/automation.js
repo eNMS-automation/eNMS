@@ -233,7 +233,7 @@ function displayResultsTable(service, runtime) {
 // eslint-disable-next-line
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   if (!$(`#runtime-${service.id}`).length) return;
-  call(`/get_service_logs/${runtime}`, function(result) {
+  call(`/get_service_logs/${service.id}/${runtime}`, function(result) {
     editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
     if (first || result.refresh) {

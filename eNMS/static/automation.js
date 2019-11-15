@@ -215,14 +215,14 @@ function displayResultsPanel(service, runtime) {
 }
 
 // eslint-disable-next-line
-function refreshLogs(service, runtime, editor, first) {
+function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   if (!$(`#runtime-${service.id}`).length) return;
   call(`/get_service_logs/${runtime}`, function(result) {
     editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
     if (first || result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, editor), 1000);
-    } else {
+      setTimeout(() => refreshLogs(service, runtime, editor, false, result.refresh), 1000);
+    } else if (wasRefreshed) {
       $(`#runtime-${service.id}`).remove();
       showRuntimePanel("results", service, runtime);
     }

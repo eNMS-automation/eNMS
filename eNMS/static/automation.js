@@ -189,7 +189,19 @@ function displayResultsTree(service, runtime) {
         themes: { stripes: true },
         data: data,
       },
-      plugins: ["types"],
+      plugins: ["types", "contextmenu"],
+      contextmenu : {
+        items: {
+          renameItem: {
+            label: "Rename",
+            action: function () {}
+          },
+          renameItem: {
+            label: "Rename",
+            action: function () {}
+          },
+        },
+      },
       types: {
         default: {
           icon: "glyphicon glyphicon-file",
@@ -209,8 +221,6 @@ function displayResultsPanel(service, runtime) {
   $("#result").remove();
   $(`#runtimes-${service.id}`).on("change", function() {
     tables["result"].ajax.reload(null, false);
-    $("#node_"+nodeid+" >a").css("color","red");
-    // .jstree-classic li[rel="Role"] > a { color:red; }
   });
   initTable("result", service, runtime || currentRuntime);
 }

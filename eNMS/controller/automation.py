@@ -154,13 +154,13 @@ class AutomationController(BaseController):
             service_run = fetch(
                 "run", parent_runtime=runtime, allow_none=True, service_id=service.id
             )
-            color = "32CD32" if service_run else "FF6666"
             if service.scoped_name in ("Start", "End") or not service_run:
                 return
+            color = "32CD32" if service_run.success else "FF6666"
             result = {
                 "id": service.id,
                 "text": service.scoped_name,
-                "a_attr": {"style": f"background: #{color}"},
+                "a_attr": {"style": f"color: #{color}"},
             }
             if service.type == "workflow":
                 children = list(

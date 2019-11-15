@@ -120,13 +120,13 @@ function clearResults(id) {
 }
 
 // eslint-disable-next-line
-function showRuntimePanel(type, service, runtime) {
+function showRuntimePanel(type, service, runtime, displayTable) {
   displayFunction =
     type == "logs"
       ? displayLogs
-      : service.type == "workflow"
+      : service.type == "workflow" && !displayTable
       ? displayResultsTree
-      : displayResultsPanel;
+      : displayResultsTable;
   createPanel(
     service.type != "workflow" && type == "results" ? "result" : "runtime",
     `${type} - ${service.name}`,
@@ -184,22 +184,16 @@ function displayLogs(service, runtime) {
 function displayResultsTree(service, runtime) {
   call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
     function customMenu(node) {
-      console.log("test");
-      var items = {
+      return {
         item1: {
-          label: "item1",
-          action: function() {
-            /* action */
-          },
+          label: "Results",
+          action: () => showRuntimePanel("results", node, runtime, true),
         },
         item2: {
-          label: "item2",
-          action: function() {
-            /* action */
-          },
+          label: "Logs",
+          action: () => showRuntimePanel("logs", node, runtime),
         },
       };
-      return items;
     }
     let tree = $(`#content-${service.id}`).jstree({
       core: {
@@ -224,7 +218,8 @@ function displayResultsTree(service, runtime) {
   });
 }
 
-function displayResultsPanel(service, runtime) {
+function displayResultsTable(service, runtime) {
+  console.log(service)
   $("#result").remove();
   $(`#runtimes-${service.id}`).on("change", function() {
     tables["result"].ajax.reload(null, false);

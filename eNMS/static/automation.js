@@ -163,7 +163,7 @@ function showRuntimePanel(type, service, runtime, displayTable) {
 }
 
 function displayLogs(service, runtime) {
-  $("#body-runtime").css("background-color", "#1B1B1B");
+  $(`#body-runtime-${service.id}`).css("background-color", "#1B1B1B");
   const content = document.getElementById(`content-${service.id}`);
   // eslint-disable-next-line new-cap
   let editor = CodeMirror(content, {
@@ -183,18 +183,6 @@ function displayLogs(service, runtime) {
 
 function displayResultsTree(service, runtime) {
   call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
-    function customMenu(node) {
-      return {
-        item1: {
-          label: "Results",
-          action: () => showRuntimePanel("results", node, runtime, true),
-        },
-        item2: {
-          label: "Logs",
-          action: () => showRuntimePanel("logs", node, runtime),
-        },
-      };
-    }
     let tree = $(`#content-${service.id}`).jstree({
       core: {
         animation: 200,
@@ -202,7 +190,22 @@ function displayResultsTree(service, runtime) {
         data: data,
       },
       plugins: ["contextmenu", "types"],
-      contextmenu: { items: customMenu },
+      contextmenu: {
+        items: function customMenu(node) {
+          return {
+            item1: {
+              label: "Results",
+              action: () => showRuntimePanel("results", node, runtime, true),
+              icon: "glyphicon glyphicon-list-alt",
+            },
+            item2: {
+              label: "Logs",
+              action: () => showRuntimePanel("logs", node, runtime),
+              icon: "glyphicon glyphicon-list",
+            },
+          };
+        },
+      },
       types: {
         default: {
           icon: "glyphicon glyphicon-file",
@@ -219,7 +222,7 @@ function displayResultsTree(service, runtime) {
 }
 
 function displayResultsTable(service, runtime) {
-  console.log(service)
+  console.log(service);
   $("#result").remove();
   $(`#runtimes-${service.id}`).on("change", function() {
     tables["result"].ajax.reload(null, false);

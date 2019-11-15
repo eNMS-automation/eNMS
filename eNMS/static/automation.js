@@ -182,27 +182,26 @@ function displayLogs(service, runtime) {
 }
 
 function displayResultsTree(service, runtime) {
-  let tree = $(`#content-${service.id}`).jstree({
-    core: {
-      animation: 200,
-      themes: { stripes: true },
-      data: {
-        url: `/get_workflow_results/${service.id}`,
-        type: "POST",
+  call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
+    let tree = $(`#content-${service.id}`).jstree({
+      core: {
+        animation: 200,
+        themes: { stripes: true },
+        data: data,
       },
-    },
-    plugins: ["types"],
-    types: {
-      default: {
-        icon: "glyphicon glyphicon-file",
+      plugins: ["types"],
+      types: {
+        default: {
+          icon: "glyphicon glyphicon-file",
+        },
+        workflow: {
+          icon: "fa fa-sitemap",
+        },
       },
-      workflow: {
-        icon: "fa fa-sitemap",
-      },
-    },
-  });
-  tree.bind("loaded.jstree", function () {
-    tree.jstree("open_all");
+    });
+    tree.bind("loaded.jstree", function () {
+      tree.jstree("open_all");
+    });
   });
 }
 
@@ -210,6 +209,8 @@ function displayResultsPanel(service, runtime) {
   $("#result").remove();
   $(`#runtimes-${service.id}`).on("change", function() {
     tables["result"].ajax.reload(null, false);
+    $("#node_"+nodeid+" >a").css("color","red");
+    // .jstree-classic li[rel="Role"] > a { color:red; }
   });
   initTable("result", service, runtime || currentRuntime);
 }

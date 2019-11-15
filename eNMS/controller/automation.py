@@ -149,15 +149,23 @@ class AutomationController(BaseController):
                 if service.scoped_name not in ("Start", "End")
             ]
 
-    def get_workflow_results(self, workflow):
+    def get_workflow_results(self, workflow, runtime):
         def rec(service):
-            result = {"id": service.id, "text": service.scoped_name}
+            service_run = fetch(
+                "run", parent_runtime=runtime, allow_none=True, service_id=service.id
+            )
+            color = "32CD32" if service_run else "FF6666"
+            if service.scoped_name in ("Start", "End") or not service_run:
+                return
+            result = {
+                "id": service.id,
+                "text": service.scoped_name,
+                "a_attr": {"style": f"background: #{color}"},
+            }
             if service.type == "workflow":
-                children = [
-                    rec(child)
-                    for child in service.services
-                    if child.scoped_name not in ("Start", "End")
-                ]
+                children = list(
+                    filter(None, (rec(child) for child in service.services))
+                )
                 return {"children": children, "type": "workflow", **result}
             else:
                 return {"type": "service", **result}

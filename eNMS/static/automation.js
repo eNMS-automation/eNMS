@@ -163,7 +163,7 @@ function showRuntimePanel(type, service, runtime) {
 }
 
 function displayLogs(service, runtime) {
-  $("#body-runtime").css('background-color', '#1B1B1B');
+  $("#body-runtime").css("background-color", "#1B1B1B");
   const content = document.getElementById(`content-${service.id}`);
   // eslint-disable-next-line new-cap
   let editor = CodeMirror(content, {
@@ -183,25 +183,38 @@ function displayLogs(service, runtime) {
 
 function displayResultsTree(service, runtime) {
   call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
+    function customMenu(node) {
+      var items = {
+        item1: {
+          label: "item1",
+          action: function() {
+            /* action */
+          },
+        },
+        item2: {
+          label: "item2",
+          action: function() {
+            /* action */
+          },
+        },
+      };
+
+      if (node.type === "level_1") {
+        delete items.item2;
+      } else if (node.type === "level_2") {
+        delete items.item1;
+      }
+
+      return items;
+    }
     let tree = $(`#content-${service.id}`).jstree({
       core: {
         animation: 200,
         themes: { stripes: true },
         data: data,
       },
-      plugins: ["types", "contextmenu"],
-      contextmenu : {
-        items: {
-          renameItem: {
-            label: "Rename",
-            action: function () {}
-          },
-          renameItem: {
-            label: "Rename",
-            action: function () {}
-          },
-        },
-      },
+      plugins: ["contextmenu", "types"],
+      contextmenu: { items: customMenu },
       types: {
         default: {
           icon: "glyphicon glyphicon-file",
@@ -211,7 +224,7 @@ function displayResultsTree(service, runtime) {
         },
       },
     });
-    tree.bind("loaded.jstree", function () {
+    tree.bind("loaded.jstree", function() {
       tree.jstree("open_all");
     });
   });
@@ -232,7 +245,10 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
     editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
     if (first || result.refresh) {
-      setTimeout(() => refreshLogs(service, runtime, editor, false, result.refresh), 1000);
+      setTimeout(
+        () => refreshLogs(service, runtime, editor, false, result.refresh),
+        1000
+      );
     } else if (wasRefreshed) {
       $(`#runtime-${service.id}`).remove();
       showRuntimePanel("results", service, runtime);

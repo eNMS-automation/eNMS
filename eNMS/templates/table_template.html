@@ -66,6 +66,22 @@
     </button>
     {% endif %} {% if type == "service" %}
     <div class="pull-right">
+      <button
+        class="btn btn-info btn-file"
+        onclick="menu('Backward')"
+        data-tooltip="Previous Workflow"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </button>
+      <button
+        class="btn btn-info btn-file"
+        onclick="menu('Forward')"
+        data-tooltip="Next Workflow"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>
       <select
         id="parent-filtering"
         name="parent-filtering"

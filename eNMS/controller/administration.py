@@ -130,6 +130,7 @@ class AdministrationController(BaseController):
             Session.commit()
         for service in fetch_all("service"):
             service.set_name()
+        self.log("info", status)
         return status
 
     def import_service(self, archive):

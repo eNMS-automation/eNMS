@@ -162,7 +162,7 @@ class InventoryController(BaseController):
 
     def topology_import(self, file):
         book = open_workbook(file_contents=file.read())
-        result = "Topology successfully imported."
+        status = "Topology successfully imported."
         for obj_type in ("device", "link"):
             try:
                 sheet = book.sheet_by_name(obj_type)
@@ -178,11 +178,12 @@ class InventoryController(BaseController):
                     factory(obj_type, **values).serialized
                 except Exception as e:
                     info(f"{str(values)} could not be imported ({str(e)})")
-                    result = "Partial import (see logs)."
+                    status = "Partial import (see logs)."
             Session.commit()
         for pool in fetch_all("pool"):
             pool.compute_pool()
-        return result
+        self.log("info", status)
+        return status
 
     def import_topology(self, **kwargs):
         file = kwargs["file"]

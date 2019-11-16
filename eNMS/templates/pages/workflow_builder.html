@@ -11,37 +11,39 @@ block content %}
             style="margin: 0px; padding-top: 9px;"
           >
             <li>
-              <a onclick="menu('Edit Workflow')" data-tooltip="Edit Workflow"
+              <a
+                onclick="action['Edit Workflow']()"
+                data-tooltip="Edit Workflow"
                 ><span class="glyphicon glyphicon-edit"></span
               ></a>
             </li>
             <li>
               <a
-                onclick="menu('Create Workflow')"
+                onclick="action['Create Workflow']()"
                 data-tooltip="Create Workflow"
                 ><span class="glyphicon glyphicon-plus"></span
               ></a>
             </li>
             <li>
               <a
-                onclick="menu('Add to Workflow')"
+                onclick="action['Add to Workflow']()"
                 data-tooltip="Add to Workflow"
                 ><span class="glyphicon glyphicon-book"></span
               ></a>
             </li>
             <li>
-              <a onclick="menu('Create Label')" data-tooltip="Create Label"
+              <a onclick="action['Create Label']()" data-tooltip="Create Label"
                 ><span class="glyphicon glyphicon-font"></span
               ></a>
             </li>
             <li>
-              <a onclick="menu('Skip')" data-tooltip="Skip"
+              <a onclick="action['Skip']()" data-tooltip="Skip"
                 ><span class="glyphicon glyphicon-ban-circle"></span
               ></a>
             </li>
 
             <li>
-              <a onclick="menu('Delete')" data-tooltip="Delete"
+              <a onclick="action['Delete']()" data-tooltip="Delete"
                 ><span class="glyphicon glyphicon-trash"></span
               ></a>
             </li>
@@ -51,30 +53,34 @@ block content %}
             style="margin: 0px; padding-left: 30px; padding-top: 9px"
           >
             <li>
-              <a onclick="menu('Run Workflow')" data-tooltip="Run Workflow"
+              <a onclick="action['Run Workflow']()" data-tooltip="Run Workflow"
                 ><span class="glyphicon glyphicon-play"></span
               ></a>
             </li>
             <li>
               <a
-                onclick="menu('Parametrized Workflow Run')"
+                onclick="action['Parametrized Workflow Run']()"
                 data-tooltip="Parametrized Run"
                 ><span class="glyphicon glyphicon-play-circle"></span
               ></a>
             </li>
             <li>
-              <a onclick="menu('Stop Workflow')" data-tooltip="Stop Workflow"
+              <a
+                onclick="action['Stop Workflow']()"
+                data-tooltip="Stop Workflow"
                 ><span class="glyphicon glyphicon-pause"></span
               ></a>
             </li>
             <li>
-              <a onclick="menu('Workflow Logs')" data-tooltip="Workflow Logs"
+              <a
+                onclick="action['Workflow Logs']()"
+                data-tooltip="Workflow Logs"
                 ><span class="glyphicon glyphicon-list"></span
               ></a>
             </li>
             <li>
               <a
-                onclick="menu('Workflow Results')"
+                onclick="action['Workflow Results']()"
                 data-tooltip="Workflow Results"
                 ><span class="glyphicon glyphicon-list-alt"></span
               ></a>
@@ -90,22 +96,22 @@ block content %}
               ></a>
             </li>
             <li>
-              <a onclick="menu('Zoom In')" data-tooltip="Zoom In"
+              <a onclick="action['Zoom In']()" data-tooltip="Zoom In"
                 ><span class="glyphicon glyphicon-zoom-in"></span
               ></a>
             </li>
             <li>
-              <a onclick="menu('Zoom Out')" data-tooltip="Zoom Out"
+              <a onclick="action['Zoom Out']()" data-tooltip="Zoom Out"
                 ><span class="glyphicon glyphicon-zoom-out"></span
               ></a>
             </li>
             <li id="left-arrow">
-              <a onclick="menu('Backward')" data-tooltip="Previous Workflow"
+              <a onclick="action['Backward']()" data-tooltip="Previous Workflow"
                 ><span class="glyphicon glyphicon-chevron-left"></span
               ></a>
             </li>
             <li id="right-arrow">
-              <a onclick="menu('Forward')" data-tooltip="Next Workflow"
+              <a onclick="action['Forward']()" data-tooltip="Next Workflow"
                 ><span class="glyphicon glyphicon-chevron-right"></span
               ></a>
             </li>
@@ -134,7 +140,7 @@ block content %}
                     <button
                       type="button"
                       class="btn btn-primary"
-                      onclick="menu('Create New Service')"
+                      onclick="action['Create New Service']()"
                       data-tooltip="Create New Service"
                     >
                       <span class="glyphicon glyphicon-plus"></span>

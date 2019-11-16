@@ -309,6 +309,7 @@ function resumeTask(id) {
 }
 
 function switchToWorkflow(workflowId, arrow) {
+  console.log("test");
   if (!workflowId) return;
   if (!arrow) {
     arrowPointer++;
@@ -333,6 +334,7 @@ function switchToWorkflow(workflowId, arrow) {
       alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
     });
   } else {
+    console.log("test");
     filterTable(workflowId);
   }
 }

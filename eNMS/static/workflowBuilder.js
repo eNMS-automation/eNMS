@@ -239,11 +239,6 @@ function switchToSubworkflow() {
 }
 
 // eslint-disable-next-line
-function menu(entry) {
-  action[entry]();
-}
-
-// eslint-disable-next-line
 function processWorkflowData(instance, id) {
   if (instance.type == "workflow_edge") edges.update(edgeToEdge(instance));
   if (instance.type.includes("service") || instance.type == "workflow") {

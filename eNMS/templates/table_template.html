@@ -65,22 +65,22 @@
       {{ form.runtimes(class="form-control add-id") }}
     </button>
     {% endif %} {% if type == "service" %}
-    <button
+    <a
       class="btn btn-info btn-file"
-      onclick="menu('Backward')"
+      onclick="action['Backward']()"
       data-tooltip="Previous Workflow"
       type="button"
     >
       <span class="glyphicon glyphicon-chevron-left"></span>
-    </button>
-    <button
+    </a>
+    <a
       class="btn btn-info btn-file"
-      onclick="menu('Forward')"
+      onclick="() => action['Forward']()"
       data-tooltip="Next Workflow"
       type="button"
     >
       <span class="glyphicon glyphicon-chevron-right"></span>
-    </button>
+    </a>
     <div class="pull-right">
       <select
         id="parent-filtering"

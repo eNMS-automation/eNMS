@@ -131,7 +131,7 @@ class AutomationController(BaseController):
             yield from self.get_parent_workflows(parent_workflow)
 
     def get_workflow_services(self, id, node):
-        parent_workflows = list(self.get_parent_workflows(fetch("workflow", id=id)))
+        parents = list(self.get_parent_workflows(fetch("workflow", id=id)))
         if node == "all":
             return [
                 {
@@ -139,7 +139,7 @@ class AutomationController(BaseController):
                     "text": workflow.name,
                     "children": True,
                     "type": "workflow",
-                    "a_attr": {"class": "no_checkbox" if workflow in parent_workflows else ""}
+                    "a_attr": {"class": "no_checkbox" if workflow in parents else ""},
                 }
                 for workflow in fetch_all("workflow")
                 if not workflow.workflows
@@ -151,7 +151,7 @@ class AutomationController(BaseController):
                     "text": service.scoped_name,
                     "children": service.type == "workflow",
                     "type": "workflow" if service.type == "workflow" else "service",
-                    "a_attr": {"class": "no_checkbox" if service in parent_workflows else ""}
+                    "a_attr": {"class": "no_checkbox" if service in parents else ""},
                 }
                 for service in fetch("workflow", id=node).services
                 if service.scoped_name not in ("Start", "End")
@@ -224,8 +224,8 @@ class AutomationController(BaseController):
         session["workflow"] = workflow.id
         for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
-            if "-" in id:
-                old_position = workflow.labels[id].pop("positions", (0, 0))
+            if "-" in id and id in workflow.labels:
+                old_position = workflow.labels[id].pop("positions")
                 workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
             else:
                 service = fetch("service", id=id)

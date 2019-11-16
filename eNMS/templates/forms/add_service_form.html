@@ -6,18 +6,19 @@
 >
   {{ form.csrf_token() }} {{ form.form_type() }}
   <div class="modal-body">
+    <center>
+      <button
+        type="button"
+        class="btn btn-primary"
+        onclick="addServicesToWorkflow()"
+        style="width:100%;"
+      >
+        Add Selected Services to the Workflow
+      </button>
+    </center>
     {{ form.mode(class="form-control required no-search") }}
     <hr />
     <div id="service-tree" class="add-id" style="height: 500px"></div>
     <input type="hidden" name="services" id="services" />
-    <center>
-      <button
-        type="button"
-        class="btn btn-success"
-        onclick="addServicesToWorkflow()"
-      >
-        Add to Workflow
-      </button>
-    </center>
   </div>
 </form>

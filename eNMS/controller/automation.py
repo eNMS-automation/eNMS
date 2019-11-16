@@ -125,14 +125,22 @@ class AutomationController(BaseController):
     def get_result(self, id):
         return fetch("result", id=id).result
 
-    def get_workflow_services(self, workflow):
-        if not workflow:
+    def get_parent_workflows(self, workflow):
+        yield workflow
+        for parent_workflow in workflow.workflows:
+            yield from self.get_parent_workflows(parent_workflow)
+
+    def get_workflow_services(self, workflow_id, node):
+        workflow = fetch("workflow", id=workflow_id)
+        parent_workflows = list(self.get_parent_workflows(workflow))
+        if node == "all":
             return [
                 {
                     "id": workflow.id,
                     "text": workflow.name,
                     "children": True,
                     "type": "workflow",
+                    "a_attr": {"class": "no_checkbox"}
                 }
                 for workflow in fetch_all("workflow")
                 if not workflow.workflows
@@ -145,7 +153,7 @@ class AutomationController(BaseController):
                     "children": service.type == "workflow",
                     "type": "workflow" if service.type == "workflow" else "service",
                 }
-                for service in fetch("workflow", id=workflow).services
+                for service in fetch("workflow", id=node).services
                 if service.scoped_name not in ("Start", "End")
             ]
 

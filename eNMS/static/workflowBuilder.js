@@ -555,7 +555,8 @@ function addServicePanel() {
         themes: { stripes: true },
         data: {
           url: function(node) {
-            return `/get_workflow_services/${node.id}`;
+            const nodeId = node.id == "#" ? "all" : node.id;
+            return `/get_workflow_services/${workflow.id}/${nodeId}`;
           },
           type: "POST",
         },

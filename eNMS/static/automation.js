@@ -18,7 +18,7 @@ workflow: true
 */
 
 let currentRuntime;
-let arrowHistory = [];
+let arrowHistory = [""];
 let arrowPointer = -1;
 
 // eslint-disable-next-line
@@ -309,8 +309,7 @@ function resumeTask(id) {
 }
 
 function switchToWorkflow(workflowId, arrow) {
-  console.log("test");
-  if (!workflowId) return;
+  if (typeof workflowId === "undefined") return;
   if (!arrow) {
     arrowPointer++;
     arrowHistory.splice(arrowPointer, 9e9, workflowId);
@@ -334,8 +333,8 @@ function switchToWorkflow(workflowId, arrow) {
       alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
     });
   } else {
-    console.log("test");
-    filterTable(workflowId);
+    $("#workflow-filtering").val(workflowId);
+    if (tables["service"]) tables["service"].ajax.reload(null, false);
   }
 }
 
@@ -358,4 +357,5 @@ Object.assign(action, {
     }
     $("#service-type").selectpicker("refresh");
   }
+  if (page == "table/service") switchToWorkflow("");
 })();

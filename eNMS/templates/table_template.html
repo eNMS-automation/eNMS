@@ -66,6 +66,7 @@
     </button>
     {% endif %} {% if type == "service" %}
     <a
+      id="left-arrow"
       class="btn btn-info btn-file"
       onclick="action['Backward']()"
       data-tooltip="Previous Workflow"
@@ -74,8 +75,9 @@
       <span class="glyphicon glyphicon-chevron-left"></span>
     </a>
     <a
+      id="right-arrow"
       class="btn btn-info btn-file"
-      onclick="() => action['Forward']()"
+      onclick="action['Forward']()"
       data-tooltip="Next Workflow"
       type="button"
     >

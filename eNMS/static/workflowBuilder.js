@@ -442,7 +442,7 @@ function serviceToNode(service) {
     },
     shadow: {
       enabled: !defaultService,
-      color: service.shared ? "red" : "#6666FF",
+      color: service.shared ? "#FF1694" : "#6666FF",
       size: 15,
     },
     label: getServiceLabel(service),

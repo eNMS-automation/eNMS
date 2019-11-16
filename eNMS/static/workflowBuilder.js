@@ -69,8 +69,6 @@ let currentMode = "motion";
 let creationMode;
 let mousePosition;
 let currLabel;
-let arrowHistory = [];
-let arrowPointer = -1;
 let triggerMenu;
 
 function displayWorkflow(workflowData) {
@@ -229,31 +227,6 @@ const rectangleSelection = (container, network, nodes) => {
     }
   });
 };
-
-function switchToWorkflow(workflowId, arrow) {
-  if (!workflowId) return;
-  if (!arrow) {
-    arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, workflowId);
-  } else {
-    arrowPointer += arrow == "right" ? 1 : -1;
-  }
-  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
-    $("#left-arrow").removeClass("disabled");
-  } else {
-    $("#left-arrow").addClass("disabled");
-  }
-  if (arrowPointer < arrowHistory.length - 1) {
-    $("#right-arrow").removeClass("disabled");
-  } else {
-    $("#right-arrow").addClass("disabled");
-  }
-  call(`/get_service_state/${workflowId}/latest`, function(result) {
-    workflow = result.service;
-    graph = displayWorkflow(result);
-    alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
-  });
-}
 
 // eslint-disable-next-line
 function switchToSubworkflow() {
@@ -618,14 +591,8 @@ function createNew(instanceType) {
 }
 
 Object.assign(action, {
-  Edit: (service) => showTypePanel(service.type, service.id),
-  Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
-  Run: (service) => normalRun(service.id),
-  "Parametrized Run": (service) =>
-    showTypePanel(service.type, service.id, "run"),
   "Run Workflow": () => runWorkflow(),
   "Parametrized Workflow Run": () => runWorkflow(true),
-  Results: () => showRuntimePanel("results", service),
   "Create Workflow": () => createNew("workflow"),
   "Create New Service": () => createNew("service"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),

@@ -18,6 +18,8 @@ workflow: true
 */
 
 let currentRuntime;
+let arrowHistory = [];
+let arrowPointer = -1;
 
 // eslint-disable-next-line
 function openServicePanel() {
@@ -305,6 +307,46 @@ function resumeTask(id) {
     alertify.notify("Task resumed.", "success", 5);
   });
 }
+
+function switchToWorkflow(workflowId, arrow) {
+  if (!workflowId) return;
+  if (!arrow) {
+    arrowPointer++;
+    arrowHistory.splice(arrowPointer, 9e9, workflowId);
+  } else {
+    arrowPointer += arrow == "right" ? 1 : -1;
+  }
+  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
+    $("#left-arrow").removeClass("disabled");
+  } else {
+    $("#left-arrow").addClass("disabled");
+  }
+  if (arrowPointer < arrowHistory.length - 1) {
+    $("#right-arrow").removeClass("disabled");
+  } else {
+    $("#right-arrow").addClass("disabled");
+  }
+  if (page == "workflow_builder") {
+    call(`/get_service_state/${workflowId}/latest`, function(result) {
+      workflow = result.service;
+      graph = displayWorkflow(result);
+      alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
+    });
+  } else {
+    filterTable(workflowId);
+  }
+}
+
+Object.assign(action, {
+  Edit: (service) => showTypePanel(service.type, service.id),
+  Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
+  Run: (service) => normalRun(service.id),
+  "Parametrized Run": (service) =>
+    showTypePanel(service.type, service.id, "run"),
+  Results: () => showRuntimePanel("results", service),
+  Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
+  Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
+});
 
 (function() {
   if (page == "table/service" || page == "workflow_builder") {

@@ -291,7 +291,7 @@ class Run(AbstractBase):
             }
             if self.send_notification:
                 results = self.notify(results)
-            if self.runtime == self.parent_runtime:
+            if self.runtime == self.parent_runtime or len(self.devices) > 1:
                 self.create_result(results)
             Session.commit()
         return results

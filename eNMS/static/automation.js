@@ -199,9 +199,9 @@ function displayResultsTree(service, runtime) {
               icon: "glyphicon glyphicon-list-alt",
             },
             item2: {
-              label: "Logs",
-              action: () => showRuntimePanel("logs", node, runtime),
-              icon: "glyphicon glyphicon-list",
+              label: "Edit",
+              action: () => showTypePanel("service", node.id),
+              icon: "glyphicon glyphicon-edit",
             },
           };
         },
@@ -218,11 +218,14 @@ function displayResultsTree(service, runtime) {
     tree.bind("loaded.jstree", function() {
       tree.jstree("open_all");
     });
+    tree.bind("dblclick.jstree", function (event) {
+      const service = tree.jstree().get_node(event.target);
+      showRuntimePanel("results", service, runtime, true);
+   });
   });
 }
 
 function displayResultsTable(service, runtime) {
-  console.log(service);
   $("#result").remove();
   $(`#runtimes-${service.id}`).on("change", function() {
     tables["result"].ajax.reload(null, false);

@@ -577,20 +577,27 @@ function addServicePanel() {
   });
 }
 
-function createNew(instanceType) {
-  creationMode = instanceType;
-  if (instanceType == "workflow") {
+function createNew(mode) {
+  creationMode = mode;
+  if (mode == "edit_workflow") {
     showTypePanel("workflow");
-  } else {
+  } else if (mode == "duplicate_workflow") {
+    showTypePanel("workflow", workflow.id, "duplicate");
+  }
     showTypePanel($("#service-type").val());
   }
 }
 
+function duplicateWorkflow() {
+  call(`/duplicate_workflow/${workflow.id}`, function(runtimes) {
+  }
+
 Object.assign(action, {
   "Run Workflow": () => runWorkflow(),
   "Parametrized Workflow Run": () => runWorkflow(true),
-  "Create Workflow": () => createNew("workflow"),
-  "Create New Service": () => createNew("service"),
+  "Create Workflow": () => createNew("edit_workflow"),
+  "Duplicate Workflow": createNew("duplicate_workflow"),
+  "Create New Service": () => createNew("create_service"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Restart Workflow from Here": (service) =>
     showRestartWorkflowPanel(workflow, service),

@@ -583,7 +583,7 @@ function createNew(mode) {
     showTypePanel("workflow");
   } else if (mode == "duplicate_workflow") {
     call(`/duplicate_workflow/${workflow.id}`, function(instance) {
-      console.log(instance.id);
+      switchToWorkflow(instance.id);
     });
   } else {
     showTypePanel($("#service-type").val());

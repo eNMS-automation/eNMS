@@ -582,21 +582,19 @@ function createNew(mode) {
   if (mode == "edit_workflow") {
     showTypePanel("workflow");
   } else if (mode == "duplicate_workflow") {
-    showTypePanel("workflow", workflow.id, "duplicate");
-  }
+    call(`/duplicate_workflow/${workflow.id}`, function(instance) {
+      console.log(instance.id);
+    });
+  } else {
     showTypePanel($("#service-type").val());
   }
 }
-
-function duplicateWorkflow() {
-  call(`/duplicate_workflow/${workflow.id}`, function(runtimes) {
-  }
 
 Object.assign(action, {
   "Run Workflow": () => runWorkflow(),
   "Parametrized Workflow Run": () => runWorkflow(true),
   "Create Workflow": () => createNew("edit_workflow"),
-  "Duplicate Workflow": createNew("duplicate_workflow"),
+  "Duplicate Workflow": () => createNew("duplicate_workflow"),
   "Create New Service": () => createNew("create_service"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),
   "Restart Workflow from Here": (service) =>

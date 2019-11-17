@@ -98,7 +98,8 @@ class Service(AbstractBase):
                     name=name, scoped_name=scoped_name, shared=False
                 )
                 break
-        workflow.services.append(service)
+        if workflow:
+            workflow.services.append(service)
         return service
 
     @property

@@ -109,8 +109,9 @@ class AutomationController(BaseController):
         workflow.last_modified = now
         return now
 
-    def duplicate_workflow(self, workflow_id, **kwargs):
-        return fetch("workflow", id=workflow_id).duplicate(**kwargs).serialized
+    def duplicate_workflow(self, workflow_id):
+        workflow = fetch("workflow", id=workflow_id)
+        return workflow.duplicate().serialized
 
     def get_service_logs(self, service, runtime):
         run = fetch("run", allow_none=True, parent_runtime=runtime, service_id=service)

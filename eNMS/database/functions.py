@@ -56,7 +56,7 @@ def export(model):
 
 
 def factory(cls_name, **kwargs):
-    if {"/", '"', "'"} & set(kwargs.get("name", "")):
+    if {"/", '"', "'"} & set(kwargs.get("name", "") + kwargs.get("scoped_name", "")):
         raise Exception("Names cannot contain a slash or a quote.")
     instance, instance_id = None, kwargs.pop("id", 0)
     if instance_id:

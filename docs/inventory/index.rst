@@ -5,7 +5,7 @@ Inventory
 .. toctree::
    :maxdepth: 1
 
-   objects
-   configuration_management
+   network_creation
    pool_management
+   configuration_management
    web_connection

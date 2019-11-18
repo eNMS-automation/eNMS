@@ -2,6 +2,8 @@
 global
 action: false
 alertify: false
+arrowHistory: false
+arrowPointer: false
 call: false
 createPanel: false
 currentRuntime: true
@@ -12,6 +14,7 @@ serviceTypes: false
 showPanel: false
 showRuntimePanel: false
 showTypePanel: false
+switchToWorkflow: false
 userIsActive: true
 vis: false
 workflow: true

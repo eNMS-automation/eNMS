@@ -4,6 +4,7 @@ Configuration Management
 
 eNMS can work as a network device configuration backup tool and replace Oxidized/Rancid with the following features:
   - Poll network elements and store the latest configuration in the database
+  - Store any operational data that can be retrieved from the device CLI (``show version``, etc)
   - Search for any text or regular-expression in all configurations
   - Download device configuration to a local text file
   - Use the ReST API support to return a specified device’s configuration
@@ -12,14 +13,10 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
 Device configuration
 --------------------
 
-Configurations are retrieved by a service called ``Configuration Backup Service``, which:
-  - Uses Netmiko to fetch the configuration
-  - Updates the device ``configuration`` property (a python dictionary that contains the most recent configurations)
+Configurations are retrieved by a service called ``Operational Data Backup``, which:
+  - Uses Netmiko to fetch the configuration and any operational data
+  - Updates the device ``Configuration`` and ``Operational Data`` properties
   - Writes the configuration to a local text file (located in eNMS/files/git/data)
-
-.. image:: /_static/inventory/configuration_management/device_configuration.png
-   :alt: Configuration Management table.
-   :align: center
 
 For some devices, the configuration cannot be retrieved with only a netmiko command. You can create your own configuration backup service(s) if need be. Targets are defined at the service level, like any other services.
 A service intended to retrieve configurations must have a special ``configuration_backup_service`` set to True.

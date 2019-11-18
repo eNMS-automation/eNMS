@@ -30,7 +30,7 @@ Creation of the network
 ***********************
 
 Your network topology can be created manually (from the UI or an Excel spreadsheet) or imported from an
-external Source of Truth (OpenNMS, LibreNMS, Netbox).
+external Source of Truth (OpenNMS, LibreNMS, or Netbox).
 Once created, it is are displayed in a sortable and searchable table.
 A dashboard provides a graphical overview of your network with dynamic charts.
 
@@ -74,7 +74,9 @@ When a workflow is executed, its status will be updated in real-time on the web 
 Scheduling
 **********
 
-While services and workflows can be run directly and immediately from the web UI, you can also schedule them to run at a later time, or periodically by defining a frequency, a start date and an end date. All scheduled tasks are displayed in a calendar.
+While services and workflows can be run directly and immediately from the web UI,
+you can also schedule them to run at a later time, or periodically by defining a frequency,
+a start date and an end date. All scheduled tasks are displayed in a calendar.
 
 .. image:: /_static/base/calendar.png
   :alt: Calendar
@@ -84,17 +86,11 @@ Configuration Management
 ************************
 
 eNMS can work as a network device configuration backup tool and replace Oxidized/Rancid with the following features:
-  - Poll network elements; download configurations when they change
-  - Easily view the current configuration of a device in the inventory
-  - Search for any text in any configuration
-  - View differences between various revisions of a configuration
+  - Poll network elements and store the latest configuration in the database
+  - Search for any text or regular-expression in all configurations
   - Download device configuration to a local text file
   - Use the ReST API support to return a specified device’s configuration
-  - Export all device configurations to a remote Git repository (e.g. Gitlab)
-
-.. image:: /_static/base/configuration_management.png
-  :alt: Configuration Management
-  :align: center
+  - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
 
 Event-driven automation
 ***********************
@@ -111,13 +107,13 @@ eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :g
 +----------------------------------------+------------------------------------+
 |Function                                |Component                           |
 +========================================+====================================+
-|HTTP Service                            |nginx or Apache                     |
+|HTTP Service                            |nginx                               |
 +----------------------------------------+------------------------------------+
-|WSGI Service                            |gunicorn or uWSGI                   |
+|WSGI Service                            |gunicorn                            |
 +----------------------------------------+------------------------------------+
 |Application                             |Flask/Python 3.6+                   |
 +----------------------------------------+------------------------------------+
-|Database                                |SQLite, MySQL or PostgreSQL                |
+|Database                                |SQLite, MySQL or PostgreSQL         |
 +----------------------------------------+------------------------------------+
 |Credentials storage                     |Hashicorp vault                     |
 +----------------------------------------+------------------------------------+

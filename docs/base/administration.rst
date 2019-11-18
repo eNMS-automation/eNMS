@@ -66,9 +66,3 @@ This is useful when you have multiple VMs deployed with eNMS, and you need to se
 
 To import a service, you need to move the archive to the ``files/services`` folder,
 then go to the "Administration" page and click on the ``Import services`` button.
-
-=========================
-Role-based Access Control
-=========================
-
-TBD

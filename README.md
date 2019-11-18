@@ -40,7 +40,7 @@ ___
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-[![eNMS](docs/_static/base/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
+[![eNMS](docs/_static/base/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
 
 It encompasses the following aspects of network automation:
 - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmiko.
@@ -82,7 +82,7 @@ You can click on a device to display its properties or start a Web SSH terminal 
 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](docs/_static/base/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/base/logical_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
+[![Geographical](docs/_static/base/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/base/logical_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
 
 - Online demo: _[Geographical View](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical View](http://afourmy.pythonanywhere.com/views/logical_view)_
 - Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_

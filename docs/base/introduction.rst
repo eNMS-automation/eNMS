@@ -4,18 +4,18 @@ What is eNMS
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-.. image:: /_static/base/enms.png
+.. image:: /_static/base/network_view.png
    :alt: eNMS Introduction
    :align: center
 
 It encompasses the following aspects of network automation:
-  - **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmiko.
-  - **Ansible Service**: Sending and managing Ansible playbooks.
-  - **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
-  - **Custom Services**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
+  - **Configuration Management Service**: Backup, change and rollback of configurations, saved in git.
+  - **Ansible Service**: Storing and running Ansible playbooks.
+  - **REST Service**: Sending REST calls with variable URL and payload.
+  - **Python Script Service**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
   - **Workflows**: Services can be combined together graphically in a workflow.
-  - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
-  - **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
+  - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
+  - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
 
 .. image:: /_static/base/workflow.gif
    :alt: eNMS workflow system
@@ -45,7 +45,7 @@ Network visualization
 Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...):
   - Network View: each device is displayed on the map at its GPS coordinates.
 
-  .. image:: /_static/base/enms.png
+  .. image:: /_static/base/network_view.png
     :alt: Geographical View
     :align: center
 

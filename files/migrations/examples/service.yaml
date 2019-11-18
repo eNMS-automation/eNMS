@@ -55,7 +55,7 @@
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
-      -611, 2]
+      -684, -34]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       -418, -147]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
@@ -142,7 +142,7 @@
     Workflow with iteration target subworkflows: [617, 0]
     Workflow with iteration targets: [500, 0]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
-      -623, 83]
+      -696, 47]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       -447, 191]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
@@ -719,13 +719,13 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-10 13:35:44.715460'
+  last_modified: '2019-11-18 08:25:59.346737'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF
-    creation and deletion with Napalm] napalm_create_vrf_test'
+    creation and deletion with Napalm] Create a VRF with NAPALM'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -734,9 +734,9 @@
   pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
-      -301, -128]
+      -374, -164]
   result_postprocessing: ''
-  scoped_name: napalm_create_vrf_test
+  scoped_name: Create a VRF with NAPALM
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -1393,13 +1393,13 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-24 20:09:49.603685'
+  last_modified: '2019-11-18 08:26:18.990107'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF
-    creation and deletion with Napalm] napalm_rollback'
+    creation and deletion with Napalm] Rollback Configuration with NAPALM'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1408,9 +1408,9 @@
   pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
-      360, 172]
+      287, 136]
   result_postprocessing: ''
-  scoped_name: napalm_rollback
+  scoped_name: Rollback Configuration with NAPALM
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -1456,13 +1456,13 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-08-03 20:31:33.242467'
+  last_modified: '2019-11-18 08:26:08.788541'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
   name: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF
-    creation and deletion with Napalm] netmiko_check_vrf_napalm'
+    creation and deletion with Napalm] Check VRF exists with Netmiko'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1472,9 +1472,9 @@
     'Regression Workflow A: get_var, set_var, get_result': ['266', '161']
     'Regression Workflow C: Advanced multiprocessing': [123, -187]
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
-      340, -110]
+      267, -146]
   result_postprocessing: ''
-  scoped_name: netmiko_check_vrf_napalm
+  scoped_name: Check VRF exists with Netmiko
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -1522,13 +1522,13 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-07-24 20:09:50.574617'
+  last_modified: '2019-11-18 08:26:31.713881'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
   multiprocessing: false
-  name: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF
-    creation and deletion with Napalm] netmiko_check_no_vrf_napalm'
+  name: "[[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF\
+    \ creation and deletion with Napalm] Check VRF isn't configured with Netmiko"
   negative_logic: true
   notification_header: ''
   number_of_retries: 0
@@ -1536,10 +1536,10 @@
   pools: []
   positions:
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
-      -275, 196]
+      -348, 160]
     iteration_devices_workflow: ['245', '32']
   result_postprocessing: ''
-  scoped_name: netmiko_check_no_vrf_napalm
+  scoped_name: Check VRF isn't configured with Netmiko
   send_notification: false
   send_notification_method: mail
   shared: false
@@ -3398,8 +3398,8 @@
       content: "This workflow tests :\r\n- The configuration and rollback mechanism\
         \ with Napalm\r\n- The connection cache mechanism. Both netmiko and napalm\
         \ connections\r\nmust be closed at the end of the workflow"
-      positions: [-217, -229]
-  last_modified: '2019-10-10 09:44:34.931818'
+      positions: [-121, -29]
+  last_modified: '2019-11-18 08:26:43.897869'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3419,11 +3419,12 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[[Regression Workflow F: Workflow
       of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm]
-      napalm_create_vrf_test', '[[Regression Workflow F: Workflow of Workflows] Regression
-      Workflow 5: VRF creation and deletion with Napalm] napalm_rollback', '[[Regression
-      Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
-      with Napalm] netmiko_check_vrf_napalm', '[[Regression Workflow F: Workflow of
-      Workflows] Regression Workflow 5: VRF creation and deletion with Napalm] netmiko_check_no_vrf_napalm']
+      Create a VRF with NAPALM', '[[Regression Workflow F: Workflow of Workflows]
+      Regression Workflow 5: VRF creation and deletion with Napalm] Rollback Configuration
+      with NAPALM', '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
+      5: VRF creation and deletion with Napalm] Check VRF exists with Netmiko', "[[Regression\
+      \ Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and\
+      \ deletion with Napalm] Check VRF isn't configured with Netmiko"]
   shared: false
   skip: false
   skip_query: ''

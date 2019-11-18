@@ -17,7 +17,7 @@
     (test) does not exist', subtype: success, workflow: 'Regression Workflow 4: VRF
     creation and deletion with Netmiko'}
 - {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm] napalm_create_vrf_test', label: success,
+    5: VRF creation and deletion with Napalm] Create a VRF with NAPALM', label: success,
   source: '[Shared] Start', subtype: success, workflow: '[Regression Workflow F: Workflow
     of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm'}
 - {destination: '[Regression Workflow 3: Napalm getters (postprocessing)] get_interfaces_ip',
@@ -70,28 +70,28 @@
     Regression Workflow F S1: Subworkflow of Workflow] Regression Workflow 7: Payload
     Extraction & Validation'}
 - {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm] netmiko_check_vrf_napalm', label: success,
+    5: VRF creation and deletion with Napalm] Check VRF exists with Netmiko', label: success,
   source: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow 5:
-    VRF creation and deletion with Napalm] napalm_create_vrf_test', subtype: success,
+    VRF creation and deletion with Napalm] Create a VRF with NAPALM', subtype: success,
   workflow: '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5:
     VRF creation and deletion with Napalm'}
 - {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm] napalm_rollback', label: success, source: '[[Regression
-    Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
-    with Napalm] netmiko_check_vrf_napalm', subtype: success, workflow: '[Regression
+    5: VRF creation and deletion with Napalm] Rollback Configuration with NAPALM',
+  label: success, source: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm] Check VRF exists with Netmiko',
+  subtype: success, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm'}
+- {destination: "[[Regression Workflow F: Workflow of Workflows] Regression Workflow\
+    \ 5: VRF creation and deletion with Napalm] Check VRF isn't configured with Netmiko",
+  label: success, source: '[[Regression Workflow F: Workflow of Workflows] Regression
+    Workflow 5: VRF creation and deletion with Napalm] Rollback Configuration with
+    NAPALM', subtype: success, workflow: '[Regression Workflow F: Workflow of Workflows]
+    Regression Workflow 5: VRF creation and deletion with Napalm'}
+- {destination: '[Shared] End', label: success, source: "[[Regression Workflow F:\
+    \ Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with\
+    \ Napalm] Check VRF isn't configured with Netmiko", subtype: success, workflow: '[Regression
     Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
     with Napalm'}
-- {destination: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow
-    5: VRF creation and deletion with Napalm] netmiko_check_no_vrf_napalm', label: success,
-  source: '[[Regression Workflow F: Workflow of Workflows] Regression Workflow 5:
-    VRF creation and deletion with Napalm] napalm_rollback', subtype: success, workflow: '[Regression
-    Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
-    with Napalm'}
-- {destination: '[Shared] End', label: success, source: '[[Regression Workflow F:
-    Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm]
-    netmiko_check_no_vrf_napalm', subtype: success, workflow: '[Regression Workflow
-    F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with
-    Napalm'}
 - {destination: '[Shared] NAPALM: Get Facts', label: success, source: '[Shared] Start',
   subtype: success, workflow: 'Regression Workflow 3: Napalm getters (postprocessing)'}
 - {destination: '[Shared] NAPALM: Get interfaces', label: success, source: '[Shared]

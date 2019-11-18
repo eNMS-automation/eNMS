@@ -22,9 +22,18 @@ Migration, Backup, and Restore
 ------------------------------
 
 The eNMS migration system handles exporting the complete database content into YAML files.
+By providing a directory name and selecting which eNMS object types to export/backup,
+eNMS serializes the stored objects in the directory ``eNMS/files/migrations/project_name``.
+These yaml files can then be copied into the same directory on a new VM instance of eNMS,
+and then the Import function can be used to import/restore the configuration and living data of
+those object types.
 These migration files are used for migrating from one version of eNMS to the next version. 
-hey are also used for Backup and Restore of eNMS.
+They are also used for Backup and Restore of eNMS.
 The migration system is accessed from the :guilabel:`Admin / Administration` or from the ReST API.
+
+.. image:: /_static/base/administration/migrations.png
+   :alt: Migrations
+   :align: center
 
 When creating a new instance of eNMS:
   - Install eNMS.
@@ -35,14 +44,6 @@ When backing up eNMS, it is only necessary to perform :guilabel:`Admin / Adminis
   - Select a directory name for storing the migration files into, and select all object types to Export
   - the Topology Export of device and link data from :guilabel:`Admin / Administration / Topology Import` and :guilabel:`Admin / Administration / Topology Export` is not needed for Backup.
     It is intended for sharing of device and link data.
-
-From the ``Admin / Administration`` page, eNMS also supports backup and restore, as well as migration from one eNMS version to another, utilizing an Import and Export feature.
-
-By providing a directory name and selecting which eNMS object types to export/backup, eNMS serializes the stored objects in the directory ``(eNMS_HOME)/files/migrations/directory_name``. These yaml files can then be copied into the same directory (``(eNMS_HOME)/files/migrations/``) on a new VM instance of eNMS, and then the Import function can be used to import/restore the configuration and living data of those object types.
-
-.. image:: /_static/base/administration/migrations.png
-   :alt: Migrations
-   :align: center
 
 .. note:: the exported backup files do not contain the secure credentials for each of the inventory devices in plain text, as credentials are considered to be stored in a Vault in production mode.
 

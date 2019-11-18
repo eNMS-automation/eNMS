@@ -332,7 +332,7 @@ function switchToWorkflow(workflowId, arrow) {
     call(`/get_service_state/${workflowId}/latest`, function(result) {
       workflow = result.service;
       displayWorkflow(result);
-      alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
+      alertify.notify(`Workflow '${workflow.scoped_name}' displayed.`, "success", 5);
     });
   } else {
     $("#workflow-filtering").val(workflowId);

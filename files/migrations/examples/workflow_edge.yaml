@@ -82,14 +82,14 @@
   subtype: success, workflow: '[Regression Workflow F: Workflow of Workflows] Regression
     Workflow 5: VRF creation and deletion with Napalm'}
 - {destination: "[[Regression Workflow F: Workflow of Workflows] Regression Workflow\
-    \ 5: VRF creation and deletion with Napalm] Check VRF isn't configured with Netmiko",
+    \ 5: VRF creation and deletion with Napalm] Check VRF is not configured with Netmiko",
   label: success, source: '[[Regression Workflow F: Workflow of Workflows] Regression
     Workflow 5: VRF creation and deletion with Napalm] Rollback Configuration with
     NAPALM', subtype: success, workflow: '[Regression Workflow F: Workflow of Workflows]
     Regression Workflow 5: VRF creation and deletion with Napalm'}
 - {destination: '[Shared] End', label: success, source: "[[Regression Workflow F:\
     \ Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with\
-    \ Napalm] Check VRF isn't configured with Netmiko", subtype: success, workflow: '[Regression
+    \ Napalm] Check VRF is not configured with Netmiko", subtype: success, workflow: '[Regression
     Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion
     with Napalm'}
 - {destination: '[Shared] NAPALM: Get Facts', label: success, source: '[Shared] Start',

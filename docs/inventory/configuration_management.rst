@@ -12,7 +12,7 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
 Device configuration
 --------------------
 
-All devices are listed in the :guilabel:`Inventory / Configuration Management` page. By default, configurations are retrieved by a service called ``Configuration Backup Service``, which:
+Configurations are retrieved by a service called ``Configuration Backup Service``, which:
   - Uses Netmiko to fetch the configuration
   - Updates the device ``configuration`` property (a python dictionary that contains the most recent configurations)
   - Writes the configuration to a local text file (located in eNMS/files/git/data)
@@ -56,10 +56,3 @@ Comparing two configurations will display a git-like line-by-line diff similar t
 .. image:: /_static/inventory/configuration_management/compare_configurations.png
    :alt: Compare Configurations.
    :align: center
-
-Advanced
---------
-
-- Number of configurations stored in the database: by default, eNMS stores the 10 most recent configurations in the database. The polling process is controlled by the ``configuration_backup`` service. You can change the number of stored configurations by changing the ``Number of configurations stored`` property.
-- Configurations are retrieved with Netmiko. By default, eNMS uses the driver defined at device level to run the command. You can use a driver configured at service level instead, by unticking the ``Use driver from device`` check box.
-- Configurations are pushed to the git 'configurations' repository automatically.

@@ -1,11 +1,13 @@
 /*
 global
+action: true
 alertify: false
 call: false
 cantorPairing: false
 CodeMirror: false
 createPanel: false
 diffview: false
+displayWorkflow: false
 fCall: false
 getServiceState: false
 initTable: false
@@ -123,7 +125,7 @@ function clearResults(id) {
 
 // eslint-disable-next-line
 function showRuntimePanel(type, service, runtime, displayTable) {
-  displayFunction =
+  const displayFunction =
     type == "logs"
       ? displayLogs
       : service.type == "workflow" && !displayTable
@@ -329,7 +331,7 @@ function switchToWorkflow(workflowId, arrow) {
   if (page == "workflow_builder") {
     call(`/get_service_state/${workflowId}/latest`, function(result) {
       workflow = result.service;
-      graph = displayWorkflow(result);
+      displayWorkflow(result);
       alertify.notify(`Workflow '${workflow.name}' displayed.`, "success", 5);
     });
   } else {
@@ -338,13 +340,17 @@ function switchToWorkflow(workflowId, arrow) {
   }
 }
 
+function field(name, type, id) {
+  return id ? `${type}-${name}-${id}` : `${type}-${name}`;
+}
+
 Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
   Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
   Run: (service) => normalRun(service.id),
   "Parametrized Run": (service) =>
     showTypePanel(service.type, service.id, "run"),
-  Results: () => showRuntimePanel("results", service),
+  Results: (service) => showRuntimePanel("results", service),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
 });

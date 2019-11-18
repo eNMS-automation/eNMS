@@ -15,7 +15,6 @@ from eNMS.forms import BaseForm
 from eNMS.forms.fields import (
     DictField,
     DictSubstitutionField,
-    InstanceField,
     MultipleInstanceField,
     NoValidationSelectField,
     PasswordSubstitutionField,

@@ -6,4 +6,6 @@ flake8-print
 pep8-naming
 pre-commit
 pytest
+sphinx
+sphinx_rtd_theme
 -r requirements.txt

@@ -16,14 +16,14 @@ Device configuration
 Configurations are retrieved by a service called ``Operational Data Backup``, which:
   - Uses Netmiko to fetch the configuration and any operational data
   - Updates the device ``Configuration`` and ``Operational Data`` properties
-  - Writes the configuration to a local text file (located in eNMS/files/git/data)
+  - Writes the configuration to a local text file (located in eNMS/network_data)
 
-For some devices, the configuration cannot be retrieved with only a netmiko command. You can create your own configuration backup service(s) if need be. Targets are defined at the service level, like any other services.
-A service intended to retrieve configurations must have a special ``configuration_backup_service`` set to True.
-The service ``poller_service`` runs all services whose ``configuration_backup_service`` parameter is set to ``True``, as shown in the default configuration backup service `here <https://github.com/afourmy/eNMS/blob/master/eNMS/services/configuration_management/netmiko_backup_service.py#L26>`_
+For some devices, the configuration cannot be retrieved with only a netmiko command.
+You can create your own configuration backup service(s) if need be.
+Targets are defined at the service level, like any other services.
 
-Configure polling
------------------
+Push configurations to git
+--------------------------
 
 The polling process is controlled by the ``Poller`` task. The ``Poller`` task is configured to run the ``Configuration Management Workflow``.
 

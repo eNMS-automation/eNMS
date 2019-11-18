@@ -85,9 +85,3 @@ Contributing
    :maxdepth: 2
 
    base/contributing
-
-Indices and Tables
-==================
-
-* :ref:`genindex`
-* :ref:`glossary`

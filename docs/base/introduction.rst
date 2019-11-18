@@ -27,9 +27,10 @@ Main features
 Creation of the network
 ***********************
 
-Devices and links can be created either one by one, or all at once by importing an Excel spreadsheet.
-Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
-A dashboard provides a graphical overview of all objects with dynamic charts.
+Your network topology can be created manually (from the UI or an Excel spreadsheet) or imported from an
+external Source of Truth (OpenNMS, LibreNMS, Netbox).
+Once created, it is are displayed in a sortable and searchable table.
+A dashboard provides a graphical overview of your network with dynamic charts.
 
 .. image:: /_static/base/inventory.png
    :alt: Inventory
@@ -42,20 +43,19 @@ A dashboard provides a graphical overview of all objects with dynamic charts.
 Network visualization
 *********************
 
-Once created, eNMS can display your network geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...):
-  - Network View: each device is displayed on the map at its GPS coordinates.
+Once created, eNMS can display your network on a world map with either the Google Map
+or the Open Street Map tile layers. Each device is displayed on the map at its GPS coordinates.
+Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
+and displayed logically with a force-directed layout.
+You can click on a device to display its properties or start a Web SSH terminal session.
 
-  .. image:: /_static/base/network_view.png
-    :alt: Geographical View
-    :align: center
-
-  - Site View: colocated devices can be grouped into geographical sites (building, campus, ...). eNMS then uses a force-based algorithm to display a "logical" view of the site's internal devices.
+.. image:: /_static/base/network_view.png
+  :alt: Geographical View
+  :align: center
 
 .. image:: /_static/views/site_view/site_view.png
    :alt: Logical view
    :align: center
-
-You can click on a device to display its properties or start a Web SSH terminal session.
 
 Service creation
 ****************

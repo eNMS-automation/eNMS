@@ -43,13 +43,13 @@ eNMS is a vendor-agnostic NMS designed for building workflow-based network autom
 [![eNMS](docs/_static/base/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
 
 It encompasses the following aspects of network automation:
-- **Configuration Management Service**: Commit / Rollback of a configuration with Napalm or Netmiko.
-- **Ansible Service**: Sending and managing Ansible playbooks.
-- **ReST Service**: Sending a ReST call (GET/POST/UPDATE/DELETE) with variable URL and payload.
-- **Custom Services**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
-- **Workflows**: Services can be combined together graphically in a workflow.
-- **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically.
-- **Event-driven automation**: Services and workflows can be triggered by an external event (ReST call or Syslog message).
+  - **Configuration Management Service**: Backup, change and rollback of configurations, saved in git.
+  - **Ansible Service**: Storing and running Ansible playbooks.
+  - **REST Service**: Sending REST calls with variable URL and payload.
+  - **Python Script Service**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
+  - **Workflows**: Services can be combined together graphically in a workflow.
+  - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
+  - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
 
 [![Workflow System](docs/_static/base/workflow.gif)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
 
@@ -59,11 +59,10 @@ ___
 
 ## 1. Network creation
 
-Devices and links can be created either one by one, or all at once by importing an Excel spreadsheet.
-
-Once created, all objects are displayed in a sortable and searchable table, from which they can be edited and deleted.
-
-A dashboard provides a graphical overview of all objects with dynamic charts.
+Your network topology can be created manually (from the UI or an Excel spreadsheet) or imported from an
+external Source of Truth (OpenNMS, LibreNMS, Netbox).
+Once created, it is are displayed in a sortable and searchable table.
+A dashboard provides a graphical overview of your network with dynamic charts.
 
 Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
@@ -74,10 +73,10 @@ Inventory                           |  Dashboard
 
 ## 2. Network visualization
 
-Once created, eNMS can display your network:
-- geographically on a 2D or 3D world map (with the tile layer of your choice: Open Street Map, Google Map...)
-- logically with a force-based algorithm (`d3.js`).
-
+Once created, eNMS can display your network on a world map with either the Google Map
+or the Open Street Map tile layers. Each device is displayed on the map at its GPS coordinates.
+Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
+and displayed logically with a force-directed layout.
 You can click on a device to display its properties or start a Web SSH terminal session.
 
 Geographical View                             |  Logical View

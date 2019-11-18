@@ -9,10 +9,12 @@ eNMS is a vendor-agnostic NMS designed for building workflow-based network autom
    :align: center
 
 It encompasses the following aspects of network automation:
-  - **Configuration Management Service**: Backup, change and rollback of configurations, saved in git.
-  - **Ansible Service**: Storing and running Ansible playbooks.
-  - **REST Service**: Sending REST calls with variable URL and payload.
-  - **Python Script Service**: Any python script can be integrated into the web UI. If the script takes input parameters, a form will be automatically generated.
+  - **Configuration Management Service**: Backup, change and rollback of configurations (saved in git).
+  - **Validation Services**: Retrieve data about the state of a device with Netmiko and NAPALM.
+  - **Ansible Service**: Store and run Ansible playbooks.
+  - **REST Service**: Send REST calls with variable URL and payload.
+  - **Python Script Service**: Any python script can be integrated into the web UI. eNMS will automatically generate
+a form in the web UI for the script input parameters.
   - **Workflows**: Services can be combined together graphically in a workflow.
   - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
   - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
@@ -56,28 +58,6 @@ You can click on a device to display its properties or start a Web SSH terminal 
 .. image:: /_static/views/site_view/site_view.png
    :alt: Logical view
    :align: center
-
-Service creation
-****************
-
-eNMS comes with a number of "default services" leveraging libraries such as `ansible`, `requests`, `netmiko`, `napalm`  to perform simple automation tasks. However, absolutely any python script can be turned into a "service".
-If your python script takes input parameters, eNMS will automatically generate a form in the web UI.
-
-To generate a form that matches your service, eNMS will perform the following conversion:
-  - python `string` -> Text box (single line or multiline)
-  - python `list` -> Drop-down list (single or multiselect).
-  - python `bool` -> Checkbox.
-  - python `dict` -> Text box expecting a dictionary.
-
-.. image:: /_static/base/form_generation.png
-  :alt: Form Generation
-  :align: center
-
-Once created, you can have as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
-
-.. image:: /_static/base/service_management.png
-  :alt: Service Management
-  :align: center
 
 Workflows
 *********

@@ -25,31 +25,18 @@ Targets are defined at the service level, like any other services.
 Push configurations to git
 --------------------------
 
-The polling process is controlled by the ``Poller`` task. The ``Poller`` task is configured to run the ``Configuration Management Workflow``.
 
-.. image:: /_static/inventory/configuration_management/configuration_management_workflow.png
-   :alt: Configuration Management Workflow.
-   :align: center
-
-To configure the polling mechanism to run periodically, you need to go to the :guilabel:`Scheduling / Task Management` page and start the ``Poller`` task by pressing the ``Resume`` button.
-By default, the ``Poller`` task will run every hour (3600 seconds), but you can change the frequency from the ``Edit`` form.
 
 Search and display the configuration
 ------------------------------------
 
-From the :guilabel:`Inventory / Device Management` and :guilabel:`Inventory / Configuration Management` pages, you can search for a specific word in the current configuration of all devices with the ``Advanced Search`` mechanism, column ``Current Configuration``. eNMS will filter the list of devices based on whether the current configuration of the device contains this word.
-By clicking on the ``Configuration`` button, you can display and compare the device configurations.
+From the :guilabel:`Inventory / Device Management`, you can search for a specific word
+in the current configuration of all devices with the ``Advanced Search`` mechanism,
+column ``Current Configuration``.
+eNMS will filter the list of devices based on whether the current configuration of the device
+contains this word.
+By clicking on the ``Configuration`` button, you can display the device configuration.
 
 .. image:: /_static/inventory/configuration_management/display_configuration.png
    :alt: Display Configuration.
-   :align: center
-
-All runs are stored in the ``Display`` and ``Compare With`` pull-down lists:
-  - Selecting a run from ``Display`` will display the associated configuration.
-  - Selecting a run from ``Compare With`` will compare the configuration with the one selected in ``Display``.
-
-Comparing two configurations will display a git-like line-by-line diff similar to the one below:
-
-.. image:: /_static/inventory/configuration_management/compare_configurations.png
-   :alt: Compare Configurations.
    :align: center

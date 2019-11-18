@@ -162,24 +162,6 @@ Logging
 You can configure eNMS as well as Gunicorn log level in the configuration with the `log_level`
 variable.
 
-Migration, Backup, and Restore
-------------------------------
-
-The eNMS migration system handles exporting the complete database content into YAML files.
-These migration files are used for migrating from one version of eNMS to the next version. 
-hey are also used for Backup and Restore of eNMS.
-The migration system is accessed from the :guilabel:`Admin / Administration` or from the ReST API.
-
-When creating a new instance of eNMS:
-  - Install eNMS.
-  - Run the :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API. Select 'Empty_database_before_import' = True, specify
-    the location of the file to import, and select all object types to be imported: "user", "device", "link", "pool", "service", "workflow_edge", "task"
-
-When backing up eNMS, it is only necessary to perform :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API.
-  - Select a directory name for storing the migration files into, and select all object types to Export
-  - the Topology Export of device and link data from :guilabel:`Admin / Administration / Topology Import` and :guilabel:`Admin / Administration / Topology Export` is not needed for Backup.
-    It is intended for sharing of device and link data.
-
 Change the documentation base URL
 ---------------------------------
 

@@ -1,46 +1,46 @@
-===========
+==============
+Administration
+==============
+
 Credentials
-===========
+***********
 
-Hashicorp Vault
----------------
+Credentials are stored in a Hashicorp Vault, or in the database if no Vault has been configured.
+If you are using eNMS in production, it is recommended to set up a Hashicorp Vault to handle the storage of all credentials.
 
-If you are using eNMS in production, you MUST set up a Hashicorp Vault to handle the storage of all credentials.
-Refer to the Installation section for notes on how to setup and configure the properties of Hashicorp Vault.
-
-User credentials
-----------------
-
-The eNMS user credentials can be used to authenticate to eNMS, as well as to authenticate to a network device.
-They are stored in the database (test mode) or in the Hashicorp Vault (production mode).
-
-Device credentials
-------------------
-
-The credentials of a device are a property of the device itself within the inventory.
+- User credentials can be used to authenticate to eNMS, as well as to authenticate to a network device.
+- Device credentials are a property of the device itself within the inventory. The credentials of a device are a ``username``, a ``password``, and an ``enable password`` required on some devices to enter the "enable" mode.
     
-.. image:: /_static/administration/credentials.png
+.. image:: /_static/base/administration/credentials.png
    :alt: Set password
    :align: center
 
-They are stored in the Hashicorp Vault, or in the database if no Vault has been configured.
-The credentials of a device are :
-
-- a ``username`` and a ``password`` (authentication).
-- an ``enable password`` required on some devices to enter the "enable" mode.
-
-========
 Database
-========
+********
 
-Backup & Restore and Database Migration
-***************************************
+Migration, Backup, and Restore
+------------------------------
+
+The eNMS migration system handles exporting the complete database content into YAML files.
+These migration files are used for migrating from one version of eNMS to the next version. 
+hey are also used for Backup and Restore of eNMS.
+The migration system is accessed from the :guilabel:`Admin / Administration` or from the ReST API.
+
+When creating a new instance of eNMS:
+  - Install eNMS.
+  - Run the :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API. Select 'Empty_database_before_import' = True, specify
+    the location of the file to import, and select all object types to be imported: "user", "device", "link", "pool", "service", "workflow_edge", "task"
+
+When backing up eNMS, it is only necessary to perform :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API.
+  - Select a directory name for storing the migration files into, and select all object types to Export
+  - the Topology Export of device and link data from :guilabel:`Admin / Administration / Topology Import` and :guilabel:`Admin / Administration / Topology Export` is not needed for Backup.
+    It is intended for sharing of device and link data.
 
 From the ``Admin / Administration`` page, eNMS also supports backup and restore, as well as migration from one eNMS version to another, utilizing an Import and Export feature.
 
 By providing a directory name and selecting which eNMS object types to export/backup, eNMS serializes the stored objects in the directory ``(eNMS_HOME)/files/migrations/directory_name``. These yaml files can then be copied into the same directory (``(eNMS_HOME)/files/migrations/``) on a new VM instance of eNMS, and then the Import function can be used to import/restore the configuration and living data of those object types.
 
-.. image:: /_static/administration/migrations.png
+.. image:: /_static/base/administration/migrations.png
    :alt: Migrations
    :align: center
 
@@ -50,23 +50,15 @@ By providing a directory name and selecting which eNMS object types to export/ba
 
 .. note:: See additional discussion of migration in the Installation Section
 
-Database Helpers
-****************
-
-Services and Workflow logs can take up a lot of space in the database.
-From the ``Admin / Administration`` page, you can clear all logs older than a given date.
-
-There is also a Mass Deletion function that allows for deleting all objects of a particular type. This is particularly useful if you want to delete all devices and links from a particular instance and then export the remaining services and workflows to be re-used with another inventory. After mass deleting devices and links, export the migration files to be used in another instance. Without first deleting devices and links, importing services and workflows on another instance that have embedded devices and links can result in errors.
-
 Miscellaneous
-*************
+-------------
 
 - ``Fetch Git Configurations and Update Devices``: this feature will retrieve configurations from the git 'configurations' repository and load those into the database for each matching inventory device. This is performed automatically when eNMS starts up: the git configurations repository is quietly cloned and loaded into the database. This feature allows for manual pulling of updated configurations data.
 - ``Pause and Resume Scheduler``: this feature will pause and resume all scheduler tasks currently waiting to run.
 - ``Reset Service Statuses``: when a service or workflow fails, it is sometimes stuck in a "Running" mode and cannot be executed. This button will reset the status of all services and workflows.
 
 Individual export
-*****************
+-----------------
 
 Services and workflows can be exported and imported individually, as a .tgz archive.
 This is useful when you have multiple VMs deployed with eNMS, and you need to send a service / workflow from one VM to another.

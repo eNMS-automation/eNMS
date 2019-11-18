@@ -40,7 +40,7 @@ ___
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-[![eNMS](docs/_static/base/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
+[![eNMS](docs/_static/base/introduction/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
 
 It encompasses the following aspects of network automation:
   - **Configuration Management Service**: Backup, change and rollback of configurations (saved in git).
@@ -53,7 +53,7 @@ a form in the web UI for the script input parameters.
   - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
   - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
 
-[![Workflow System](docs/_static/base/workflow.gif)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
+[![Workflow System](docs/_static/base/introduction/workflow.gif)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
 
 ___
 
@@ -68,7 +68,7 @@ A dashboard provides a graphical overview of your network with dynamic charts.
 
 Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
-[![Inventory](docs/_static/base/inventory.png)](http://afourmy.pythonanywhere.com/objects/device_management) |  [![Dashboard](docs/_static/base/dashboard.png)](http://afourmy.pythonanywhere.com/dashboard)
+[![Inventory](docs/_static/base/introduction/inventory.png)](http://afourmy.pythonanywhere.com/objects/device_management) |  [![Dashboard](docs/_static/base/introduction/dashboard.png)](http://afourmy.pythonanywhere.com/dashboard)
 
 - Online demo: _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_, _[Inventory](http://afourmy.pythonanywhere.com/objects/device_management)_
 - Docs: _[Objects](https://enms.readthedocs.io/en/latest/inventory/objects.html)_
@@ -83,7 +83,7 @@ You can click on a device to display its properties or start a Web SSH terminal 
 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](docs/_static/base/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/base/logical_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
+[![Geographical](docs/_static/base/introduction/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/base/introduction/logical_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
 
 - Online demo: _[Geographical View](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical View](http://afourmy.pythonanywhere.com/views/logical_view)_
 - Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_
@@ -99,11 +99,11 @@ To generate a form that matches your service, eNMS will perform the following co
 - python `bool` -> Checkbox.
 - python `dict` -> Text box expecting a dictionary.
 
-![eNMS](docs/_static/base/form_generation.png)
+![eNMS](docs/_static/base/introduction/form_generation.png)
 
 Once created, you can have as many instances of your service as you need. Service instances can be executed, edited and deleted from the web UI.
 
-[![Service Management](docs/_static/base/service_management.png)](http://afourmy.pythonanywhere.com/automation/service_management)
+[![Service Management](docs/_static/base/introduction/service_management.png)](http://afourmy.pythonanywhere.com/automation/service_management)
 
 - Online demo: _[Services](http://afourmy.pythonanywhere.com/automation/service_management)_
 - Docs: _[Services](https://enms.readthedocs.io/en/latest/services/service_system.html)_, _[Default Services](https://enms.readthedocs.io/en/latest/services/default_services.html)_
@@ -118,7 +118,7 @@ A workflow keeps track of a `payload` dictionary, such that when a service start
 
 When a workflow is executed, its status will be updated in real-time on the web UI.
 
-[![Workflow Builder](docs/_static/base/workflow.png)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
+[![Workflow Builder](docs/_static/base/introduction/workflow.png)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
 
 - Online demo: _[Workflow Builder](http://afourmy.pythonanywhere.com/automation/workflow_builder/)_
 - Docs: _[Workflow System](https://enms.readthedocs.io/en/latest/workflows/workflow_system.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
@@ -127,7 +127,7 @@ When a workflow is executed, its status will be updated in real-time on the web 
 
 While services and workflows can be run directly and immediately from the web UI, you can also schedule them to run at a later time, or periodically by defining a frequency, a start date and an end date. All scheduled tasks are displayed in a calendar.
 
-[![Calendar](docs/_static/base/calendar.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
+[![Calendar](docs/_static/base/introduction/calendar.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
 
 - Online Demo: _[Calendar](http://afourmy.pythonanywhere.com/scheduling/calendar)_
 - Docs: _[Scheduling](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)_
@@ -143,7 +143,7 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
 - Use the ReST API support to return a specified device’s configuration
 - Export all device configurations to a remote Git repository (e.g. Gitlab)
 
-[![Configuration Management](docs/_static/base/configuration_management.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
+[![Configuration Management](docs/_static/base/introduction/configuration_management.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
 
 ## 6. Event-driven automation
 

@@ -7,4 +7,4 @@ General
 
    introduction
    installation
-   environment_variables
+   administration

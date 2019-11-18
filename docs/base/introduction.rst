@@ -4,7 +4,7 @@ What is eNMS
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-.. image:: /_static/base/network_view.png
+.. image:: /_static/base/introduction/network_view.png
    :alt: eNMS Introduction
    :align: center
 
@@ -19,7 +19,7 @@ a form in the web UI for the script input parameters.
   - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
   - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
 
-.. image:: /_static/base/workflow.gif
+.. image:: /_static/base/introduction/workflow.gif
    :alt: eNMS workflow system
    :align: center
 
@@ -34,11 +34,11 @@ external Source of Truth (OpenNMS, LibreNMS, or Netbox).
 Once created, it is are displayed in a sortable and searchable table.
 A dashboard provides a graphical overview of your network with dynamic charts.
 
-.. image:: /_static/base/inventory.png
+.. image:: /_static/base/introduction/inventory.png
    :alt: Inventory
    :align: center
 
-.. image:: /_static/base/dashboard.png
+.. image:: /_static/base/introduction/dashboard.png
    :alt: Dashboard
    :align: center
 
@@ -51,7 +51,7 @@ Colocated devices can be grouped into geographical sites (campus, dacacenter, ..
 and displayed logically with a force-directed layout.
 You can click on a device to display its properties or start a Web SSH terminal session.
 
-.. image:: /_static/base/network_view.png
+.. image:: /_static/base/introduction/network_view.png
   :alt: Geographical View
   :align: center
 
@@ -67,7 +67,7 @@ Within a workflow, services can be connected with two edge types: `Success` edge
 A workflow keeps track of a `payload` dictionary, such that when a service starts, it has access to the results of all previously executed services.
 When a workflow is executed, its status will be updated in real-time on the web UI.
 
-.. image:: /_static/base/workflow.png
+.. image:: /_static/base/introduction/workflow.png
   :alt: Workflow Builder
   :align: center
 
@@ -78,7 +78,7 @@ While services and workflows can be run directly and immediately from the web UI
 you can also schedule them to run at a later time, or periodically by defining a frequency,
 a start date and an end date. All scheduled tasks are displayed in a calendar.
 
-.. image:: /_static/base/calendar.png
+.. image:: /_static/base/introduction/calendar.png
   :alt: Calendar
   :align: center
 

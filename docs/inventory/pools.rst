@@ -69,48 +69,6 @@ Three pools are created by default in eNMS:
 - "Devices only": matches all devices, no link.
 - "Links only": matches all links, no device.
 
-Never Update pools
-------------------
-
-Pools with manually selected objects (by selecting them using the Edit Objects button) need to have the 'Never Update' checkbox
-selected. This prevents manually selected pools from being re-calculated based on pool criteria.  If the user wants to run against
-a pool that has some criteria specified as well as some manually specified devices, it is advised to have 2 pools-one with the criteria
-specified and another with the manually selected devices.  When running a service, multiple pools and multiple devices can be specified, and
-the service will run against all specified objects.
-
-Manual definition
------------------
-
-By default, the devices and links within a pool are determined based on the pool properties. However, the ``Edit objects`` button lets you define the pool devices and links by selecting them directly instead.
-There are two ways to manually select the objects of a pool:
-
-- By selecting them from a drop-down list.
-- By copy/pasting a string made of devices' and links' names, separated by a comma.
-
-.. image:: /_static/inventory/pools/manual_definition.png
-   :alt: Manual definition of a pool
-   :align: center
-
-How Pools get Updated
----------------------
-
-A pool is automatically updated by eNMS:
-
-- after being created (as long as its 'never update' flag is not set)
-
-All pools are updated (as long as their 'never update' flag is not set):
-
-- when eNMS starts, or restarts
-- when a device is manually added to the inventory
-- when a device is modified
-- after pulling or cloning the content from the git configuration repository
-- when the `poller service` runs (service responsible for fetching all device configurations), all pools for which the device ``Current Configuration`` is not empty are updated (and only those).
-
-Pools are manually updated:
-
-- when you click on the update button of a pool in pool management
-- when you click on the "update all pools" in pool management
-
 Pools based on Configuration
 ----------------------------
 
@@ -140,5 +98,51 @@ You can select multiple devices, as well as multiple pools as targets.
 Use a pool to restrict an eNMS user to a subset of objects
 ----------------------------------------------------------
 
-From the :guilabel:`Admin / User Management` panel, you can select a pool used as a database filtering mechanism for a particular user.
-All mechanisms and all pages in eNMS will be restricted to the objects of that pool for that particular user. The exception is Service and Workflows that have been already configured to run against particular set of devices and links. If those devices and links are outside of the pool that the user is restricted to, the user will still be able to see them.
+From the :guilabel:`Admin / User Management` panel, you can select a pool used as a database filtering
+mechanism for a particular user.
+All mechanisms and all pages in eNMS will be restricted to the objects of that pool for that particular user.
+The exception is Service and Workflows that have been already configured to run against particular
+set of devices and links. If those devices and links are outside of the pool that the user is restricted to,
+the user will still be able to see them.
+
+Pool recalculation
+------------------
+
+A pool is automatically updated by eNMS:
+
+- after being created (as long as its 'never update' flag is not set)
+
+All pools are updated (as long as their 'never update' flag is not set):
+
+- when eNMS starts, or restarts
+- when a device is manually added to the inventory
+- when a device is modified
+- after pulling or cloning the content from the git configuration repository
+- when the `poller service` runs (service responsible for fetching all device configurations), all pools for which the device ``Current Configuration`` is not empty are updated (and only those).
+
+Pools are manually updated:
+
+- when you click on the update button of a pool in pool management
+- when you click on the "update all pools" in pool management
+
+Manual definition and "Never Update" option
+-------------------------------------------
+
+By default, the devices and links within a pool are determined based on the pool properties.
+However, the ``Edit objects`` button lets you define the pool devices and links by selecting them directly instead.
+There are two ways to manually select the objects of a pool:
+
+- By selecting them from a drop-down list.
+- By copy/pasting a string made of devices' and links' names, separated by a comma.
+
+.. image:: /_static/inventory/pools/manual_definition.png
+   :alt: Manual definition of a pool
+   :align: center
+
+.. note:: Pools with manually selected objects need to have the 'Never Update' checkbox selected.
+  This prevents manually selected pools from being re-calculated based on pool criteria.
+  If the user wants to run against a pool that has some criteria specified as well as some manually
+  specified devices, it is advised to have 2 pools-one with the criteria
+  specified and another with the manually selected devices.
+  When running a service, multiple pools and multiple devices can be specified, and the service will run
+  against all specified objects.

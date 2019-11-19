@@ -4558,6 +4558,9 @@
   number_of_retries: 0
   operating_system: ''
   operational_data: "show users\r\nshow ip int br\r\nshow vrf"
+  - {command: 'show users', prefix: 'shusers'}
+  - {command: 'show ip interfaces brief', prefix: 'shipintbr'}
+  - {command: 'show vrf', prefix: ''}
   pools: []
   positions:
     'Regression Workflow 9: Operational Data Backup': [-284, -43]

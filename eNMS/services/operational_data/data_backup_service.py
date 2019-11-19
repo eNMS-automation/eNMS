@@ -38,13 +38,17 @@ class DataBackupService(ConnectionService):
             netmiko_connection = run.netmiko_connection(device)
             run.log("info", "Fetching Operational Data", device)
             for data in ("configuration", "operational_data"):
-                commands = run.sub(getattr(self, data), locals()).splitlines()
-                result = "\n\n".join(
-                    f"{command}:\n{netmiko_connection.send_command(command)}"
-                    for command in commands
-                )
-                for r in self.replacements:
-                    result = sub(r["pattern"], r["replace_with"], result, flags=M)
+                value = run.sub(getattr(self, data), locals())
+                if data == "configurations":
+                    result = netmiko_connection.send_command(value)
+                    for r in self.replacements:
+                        result = sub(r["pattern"], r["replace_with"], result, flags=M)
+                else:
+                    result = []
+                    for command in value:
+                        output = netmiko_connection.send_command(command["command"])
+                        output = "".join(f"{command['prefix']}:{line}" for line in output.splitlines())
+                    result = "\n\n".join(result)
                 setattr(device, data, result)
                 with open(path / data, "w") as file:
                     file.write(result)
@@ -74,7 +78,7 @@ class OperationalDataForm(FlaskForm):
 
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
-    configuration = StringField(widget=TextArea(), render_kw={"rows": 2})
+    configuration = StringField()
     operational_data = FieldList(FormField(OperationalDataForm), min_entries=3)
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {

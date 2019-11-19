@@ -342,7 +342,8 @@ function switchToWorkflow(workflowId, arrow) {
 
 // eslint-disable-next-line
 function field(name, type, id) {
-  return id ? `${type}-${name}-${id}` : `${type}-${name}`;
+  fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
+  return $(`#${fieldId}`);
 }
 
 Object.assign(action, {

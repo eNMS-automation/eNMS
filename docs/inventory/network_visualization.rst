@@ -14,7 +14,12 @@ Devices have an ``icon`` property that defines which image is used, and links ha
 Clustered view
 --------------
 
+You can right-click on the map and select ``Type of View`` > ``Clustered`` to display your network devices
+as a set of clusters.
 
+.. image:: /_static/inventory/network_visualization/clustered_view.png
+   :alt: Clustered View
+   :align: center
 
 Tile layers
 -----------

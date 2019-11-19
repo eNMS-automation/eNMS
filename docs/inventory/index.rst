@@ -9,3 +9,4 @@ Inventory
    pools
    configuration_management
    web_connection
+   network_visualization

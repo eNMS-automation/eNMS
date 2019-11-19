@@ -1,47 +1,35 @@
-General
-=======
+.. toctree::
+
+   :maxdepth: 1
+   :hidden:
+   :caption: Getting started
+
+   base/introduction
+   base/installation
+   base/administration
+   base/contributing
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
+   :hidden:
+   :caption: Inventory
 
-   base/index
-
-Inventory
-=========
-
-.. toctree::
-   :maxdepth: 2
-
-   inventory/index
+   inventory/network_creation
+   inventory/pools
+   inventory/configuration_management
+   inventory/web_connection
+   inventory/network_visualization
 
 Automation
 ==========
 
 .. toctree::
-   :maxdepth: 2
 
    automation/index
-
-Runs
-====
-
-.. toctree::
-   :maxdepth: 2
-
-   runs/index
 
 Events
 ======
 
 .. toctree::
-   :maxdepth: 2
 
    events/index
-
-Administration
-==============
-
-.. toctree::
-   :maxdepth: 2
-
-   administration/index

@@ -36,14 +36,16 @@ A first example
    :align: center
 
 This pool enforces the following conditions:
- * name: ``node.*`` --- this regular expression matches all devices which name starts with ``node``.
- * type: ``Router|Switch`` --- matches routers and switches (devices which type is either ``Router``, or ``Switch``.
+ * name: ``device.*`` --- this regular expression matches all devices whose name starts with ``device``.
+ * subtype: ``Router|Switch`` --- matches routers and switches (devices whose subtype is either ``Router``, or ``Switch``).
  * vendor: ``Cisco`` --- for this property, the regular expression box is not ticked. This means the value must be exactly ``Cisco``.
 
-In summary, all ``Cisco`` ``routers or switches`` whose name begins with ``node`` will match these conditions, and they will be a member of the pool.
+In summary, all ``Cisco`` ``routers or switches`` whose name begins with ``device`` will match these conditions, and they will be a member of the pool.
 
 .. note:: All properties left with empty fields are simply ignored.
-.. note:: Along with all properties of a device, you can use the device **configuration** as a constraint for the pool.
+.. note:: Along with all properties of a device, you can use the device **Configuration** and 
+  **Operational Data** as a constraint for the pool. Refer to the Configuration Management page
+  for more information.
 
 A pool of links
 ---------------

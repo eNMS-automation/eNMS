@@ -25,7 +25,7 @@ class DataBackupService(ConnectionService):
     timeout = Column(Integer, default=10.0)
     global_delay_factor = Column(Float, default=1.0)
     configuration = Column(LargeString)
-    operational_data = Column(LargeString)
+    operational_data = Column(MutableList)
     replacements = Column(MutableList)
 
     __mapper_args__ = {"polymorphic_identity": "data_backup_service"}
@@ -39,16 +39,21 @@ class DataBackupService(ConnectionService):
             run.log("info", "Fetching Operational Data", device)
             for data in ("configuration", "operational_data"):
                 value = run.sub(getattr(self, data), locals())
-                if data == "configurations":
+                print("oo" * 300, value)
+                if data == "configuration":
                     result = netmiko_connection.send_command(value)
                     for r in self.replacements:
                         result = sub(r["pattern"], r["replace_with"], result, flags=M)
                 else:
-                    result = []
-                    for command in value:
-                        output = netmiko_connection.send_command(command["command"])
-                        output = "".join(f"{command['prefix']}:{line}" for line in output.splitlines())
-                    result = "\n\n".join(result)
+                    result = "\n\n".join(
+                        "\n".join(
+                            f"{cmd['prefix']} - {line}" if cmd["prefix"] else line
+                            for line in netmiko_connection.send_command(
+                                cmd["command"]
+                            ).splitlines()
+                        )
+                        for cmd in value
+                    )
                 setattr(device, data, result)
                 with open(path / data, "w") as file:
                     file.write(result)

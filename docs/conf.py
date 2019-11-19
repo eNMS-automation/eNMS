@@ -16,10 +16,10 @@ project = u"eNMS"
 copyright = u"Antoine Fourmy"
 
 # The short X.Y version.
-version = "1.0"
+version = "3.17.2"
 
 # The full version, including alpha/beta/rc tags.
-release = "1.0"
+release = "3.17.2"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

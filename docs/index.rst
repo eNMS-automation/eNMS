@@ -14,29 +14,13 @@ Inventory
 
    inventory/index
 
-Views
-=====
+Automation
+==========
 
 .. toctree::
    :maxdepth: 2
 
-   views/index
-
-Services
-========
-
-.. toctree::
-   :maxdepth: 2
-
-   services/index
-
-Workflows
-=========
-
-.. toctree::
-   :maxdepth: 2
-
-   workflows/index
+   automation/index
 
 Runs
 ====

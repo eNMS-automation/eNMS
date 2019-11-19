@@ -190,7 +190,7 @@ ___
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS
     pip3 install -r requirements.txt
-    export FLASK_APP=app.py (on Windows, use `set` instead of `export`)
+    export FLASK_APP=app.py
     flask run --host=0.0.0.0
     Log in (default credentials: admin / admin)
 

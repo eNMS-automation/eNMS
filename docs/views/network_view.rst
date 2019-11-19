@@ -4,7 +4,8 @@ Network view
 
 Once the network has been created, it can be displayed on a geographical map.
 
-All devices are displayed on a map at their exact location (they must have been created with a longitude and latitude) on the map. The icon of a device and the color of a link depend on their type.
+All devices with a longitude and a latitude are displayed on a map at their exact location.
+Devices have an ``icon`` property that defines which image is used, and links have a ``color`` property.
 
 .. image:: /_static/views/network_view/network_view.png
    :alt: Classic 2D map

@@ -22,12 +22,10 @@ Start eNMS in debugging mode :
 ::
 
  # set the FLASK_APP environment variable
- (Windows) set FLASK_APP=app.py
- (Unix) export FLASK_APP=app.py
+ export FLASK_APP=app.py
 
  # (Optional) set the FLASK_DEBUG environment variable
- (Windows) set FLASK_DEBUG=1
- (Unix) export FLASK_DEBUG=1
+ export FLASK_DEBUG=1
 
  # run the application
  flask run --host=0.0.0.0

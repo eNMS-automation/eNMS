@@ -23,7 +23,7 @@ edited to manually select devices and links instead of using criteria based on p
 Additionally, a logical view force-based layout of a pool is available using the ``Internal View`` button.
 
 .. image:: /_static/inventory/pools/pool_visualization.png
-   :alt: Pool Visualization
+   :alt: Pool Internal View
    :align: center
 
 .. note:: When you add a new device A whose properties are matched by pool B, A is automatically added to B.

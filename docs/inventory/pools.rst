@@ -55,8 +55,8 @@ A pool of links
    :align: center
 
 This pool enforces the following conditions:
- * type: ``Ethernet link`` --- matches all Ethernet links.
- * source: ``bnet6`` --- matches all links whose source is the device ``bnet6``.
+ * subtype: ``Ethernet link`` --- matches all Ethernet links.
+ * source name: ``bnet6`` --- matches all links whose source is the device ``bnet6``.
 
 In summary, all ``Ethernet`` links starting from the device ``bnet6`` will be part of the pool.
 

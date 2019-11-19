@@ -220,12 +220,12 @@ class AutomationController(BaseController):
         return {"service": service.serialized, "runtime": runtime}
 
     def save_positions(self, workflow_id):
-        now = self.get_time()
+        now, old_position = self.get_time(), None
         workflow = fetch("workflow", allow_none=True, id=workflow_id)
         session["workflow"] = workflow.id
         for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
-            if "-" in id and id in workflow.labels:
+            if "-" in id:
                 old_position = workflow.labels[id].pop("positions")
                 workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
             else:

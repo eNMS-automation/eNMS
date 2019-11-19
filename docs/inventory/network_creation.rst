@@ -15,18 +15,18 @@ Clicking on the ``Create`` button will open a form with the list of all properti
 Fill the form and click on the ``Save`` button.
 
 .. note:: Some properties are mandatory:
- * Name: objects are uniquely defined by their name.
- * Source and destination: a link needs a source and a destination to be created.
+ - Name: objects are uniquely defined by their name.
+ - Source and destination: a link needs a source and a destination to be created.
 
 .. note:: In order to visualize the network topology on a map,
-devices must have geographical coordinates (longitude and latitude).
+  devices must have geographical coordinates (longitude and latitude).
 
 Importing an Excel Spreadsheet
 ------------------------------
 
 From the :guilabel:`Admin / Administration` page by importing an Excel file (.xls, .xlsx), objects can be created all at once by importing an Excel file.
 
-.. image:: /_static/inventory/inventory_creation/import_export.png
+.. image:: /_static/inventory/network_creation/import_export.png
    :alt: Example of excel spreadsheet for import
    :align: center
 
@@ -35,13 +35,12 @@ called "link".
 The first line of a spreadsheet contains the properties, the following lines define the objects,
 as demonstrated in the example below.
 
-.. image:: /_static/inventory/inventory_creation/inventory_spreadsheet.png
+.. image:: /_static/inventory/network_creation/inventory_spreadsheet.png
    :alt: Example of excel spreadsheet for import
    :align: center
 
-.. note:: You can export the existing data, you can export an Excel spreadsheet containing all the object data by clicking on the ``Export`` button in the ``Topology Export`` column.
+.. note:: You can export an Excel spreadsheet containing the network topology by clicking on the ``Export`` button in the ``Topology Export`` column.
 .. note:: If an imported object already exists, its properties will be updated.
-.. note:: eNMS currently has no way to check the spreadsheet import for valid data, nor duplicates. It is important to pass good data to eNMS.
 
 Querying an external API
 ------------------------

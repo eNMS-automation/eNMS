@@ -45,27 +45,3 @@ Administration
    :maxdepth: 2
 
    administration/index
-
-Advanced
-========
-
-.. toctree::
-   :maxdepth: 2
-
-   advanced/index
-
-License
-=======
-
-.. toctree::
-   :maxdepth: 2
-
-   base/license
-
-Contributing
-============
-
-.. toctree::
-   :maxdepth: 2
-
-   base/contributing

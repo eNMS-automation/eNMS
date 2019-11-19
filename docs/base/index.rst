@@ -8,3 +8,4 @@ General
    introduction
    installation
    administration
+   contributing

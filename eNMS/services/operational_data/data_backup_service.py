@@ -67,10 +67,15 @@ class ReplacementForm(FlaskForm):
     replace_with = StringField("Replace With")
 
 
+class OperationalDataForm(FlaskForm):
+    command = StringField("Command")
+    prefix = StringField("Prefix")
+
+
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
     configuration = StringField(widget=TextArea(), render_kw={"rows": 2})
-    operational_data = StringField(widget=TextArea(), render_kw={"rows": 6})
+    operational_data = FieldList(FormField(OperationalDataForm), min_entries=3)
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
         "Main Parameters": {

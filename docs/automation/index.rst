@@ -8,5 +8,3 @@ Automation
    services
    default_services
    workflows
-   default_services
-   custom_services

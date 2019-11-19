@@ -13,16 +13,16 @@ depending on your needs), the object will belong to the pool.
 Pool Management
 ---------------
 
-Pools can be created, updated, duplicated and deleted from the :guilabel:`Inventory / Pool Management` page, and they can be
-edited to manually select Objects instead of using criteria based on properties to select them.
+Pools can be created, updated, duplicated and deleted from :guilabel:`Inventory / Pools`, and they can be
+edited to manually select devices and links instead of using criteria based on properties.
 
-.. image:: /_static/inventory/pool_management/pool_management.png
+.. image:: /_static/inventory/pools/pool_table.png
    :alt: Pool Management
    :align: center
 
-Additionally, a logical view force diagram of a pool is available using the ``Visualize`` button.
+Additionally, a logical view force-based layout of a pool is available using the ``Internal View`` button.
 
-.. image:: /_static/inventory/pool_management/pool_visualization.png
+.. image:: /_static/inventory/pools/pool_visualization.png
    :alt: Pool Visualization
    :align: center
 
@@ -31,7 +31,7 @@ Additionally, a logical view force diagram of a pool is available using the ``Vi
 A first example
 ---------------
 
-.. image:: /_static/inventory/pool_management/device_filtering.png
+.. image:: /_static/inventory/pools/device_filtering.png
    :alt: Device Filtering
    :align: center
 
@@ -48,7 +48,7 @@ In summary, all ``Cisco`` ``routers or switches`` whose name begins with ``node`
 A pool of links
 ---------------
 
-.. image:: /_static/inventory/pool_management/link_filtering.png
+.. image:: /_static/inventory/pools/link_filtering.png
    :alt: Link filtering
    :align: center
 
@@ -85,7 +85,7 @@ There are two ways to manually select the objects of a pool:
 - By selecting them from a drop-down list.
 - By copy/pasting a string made of devices' and links' names, separated by a comma.
 
-.. image:: /_static/inventory/pool_management/manual_definition.png
+.. image:: /_static/inventory/pools/manual_definition.png
    :alt: Manual definition of a pool
    :align: center
 
@@ -122,7 +122,7 @@ Filter the view with a pool
 Pools can be used as filters for the inventory devices and links tables, as well as the geographical views. You can click on the ``Filter Devices`` and ``Filter Links`` buttons to open the "Advanced Search" panel.
 These panels both contain a ``Pools`` drop-down list (multiple selection) to filter objects in the view.
 
-.. image:: /_static/inventory/pool_management/view_filter.png
+.. image:: /_static/inventory/pools/view_filter.png
    :alt: Pool filtering of the view
    :align: center
 
@@ -131,7 +131,7 @@ Use a pool as target of a Service or a Workflow
 
 You can select multiple devices, as well as multiple pools as targets.
 
-.. image:: /_static/inventory/pool_management/target_pool.png
+.. image:: /_static/inventory/pools/target_pool.png
    :alt: Use a pool as a target
    :align: center
 

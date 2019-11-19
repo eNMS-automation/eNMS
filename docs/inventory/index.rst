@@ -6,6 +6,6 @@ Inventory
    :maxdepth: 1
 
    network_creation
-   pool_management
+   pools
    configuration_management
    web_connection

@@ -39,14 +39,13 @@ class DataBackupService(ConnectionService):
             run.log("info", "Fetching Operational Data", device)
             for data in ("configuration", "operational_data"):
                 value = run.sub(getattr(self, data), locals())
-                print("oo" * 300, value)
                 if data == "configuration":
                     result = netmiko_connection.send_command(value)
                     for r in self.replacements:
                         result = sub(r["pattern"], r["replace_with"], result, flags=M)
                 else:
-                    result = "\n\n".join(
-                        "\n".join(
+                    result = f"\n\n".join(
+                        f"{cmd['command']}\n" + "\n".join(
                             f"{cmd['prefix']} - {line}" if cmd["prefix"] else line
                             for line in netmiko_connection.send_command(
                                 cmd["command"]

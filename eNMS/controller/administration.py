@@ -119,7 +119,6 @@ class AdministrationController(BaseController):
                         status = "Partial import (see logs)."
         try:
             for name, services in workflow_services.items():
-                print(name, services)
                 workflow = fetch("workflow", name=name)
                 workflow.services = [
                     fetch("service", name=service_name) for service_name in services

@@ -20,7 +20,7 @@ In the :guilabel:`Automation / Workflow Management` page, click on the button ``
 The new workflow will be automatically added to the table of workflows.
 From the same page, workflows can be edited, deleted, and duplicated. They can also be ran, and their result logs examined.
 
-.. image:: /_static/workflows/workflow_management.png
+.. image:: /_static/automation/workflows/workflow_management.png
    :alt: Workflow management
    :align: center
 
@@ -48,7 +48,7 @@ The ``general right-click menu`` contains the following entries:
 - Workflow Logs
 - Refresh View
 
-.. image:: /_static/workflows/workflow_background_menu.png
+.. image:: /_static/automation/workflows/workflow_background_menu.png
    :alt: Workflow management
    :align: center
 
@@ -59,7 +59,7 @@ From the ``service-specific right-click menu``, you can:
 - Display the Results
 - Delete a service (remove from the workflow)
 
-.. image:: /_static/workflows/workflow_service_menu.png
+.. image:: /_static/automation/workflows/workflow_service_menu.png
    :alt: Workflow management
    :align: center
 
@@ -136,7 +136,7 @@ restart from scratch all the time.
 
 You must click on "Run with Updates" and go to the "Workflow" section to access these parameters.
 
-.. image:: /_static/workflows/workflow_restartability.png
+.. image:: /_static/automation/workflows/workflow_restartability.png
    :alt: Workflow Restartability
    :align: center
 
@@ -147,7 +147,7 @@ If a service ``A`` must be executed before a service ``B`` in the workflow, eNMS
 
 In the example below, the service ``process_payload1`` uses the results from ``get_facts`` and ``get_interfaces``. By creating two prerequisite edges (from ``get_facts`` to ``process_payload1`` and from ``get_interfaces`` to ``process_payload1``), we ensure that eNMS will not run ``process_payload1`` until both ``get_interfaces`` and ``get_config`` have been executed.
 
-.. image:: /_static/workflows/payload_transfer_workflow.png
+.. image:: /_static/automation/workflows/payload_transfer_workflow.png
    :alt: Payload Transfer Workflow
    :align: center
 

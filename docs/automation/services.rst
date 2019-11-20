@@ -24,7 +24,7 @@ Service Management
 
 Once a service has been customized with parameters, devices selected, etc, we refer to it as a Service Instance. All Service Instances are displayed in the :guilabel:`automation/service_management` page in the ``Automation`` section.
 
-.. image:: /_static/services/service_system/service_management.png
+.. image:: /_static/automation/services/service_management.png
    :alt: Service Management page
    :align: center
 
@@ -44,7 +44,7 @@ Service device targets
 
 When you create a new Service Instance, the form will also contain multiple selection fields for you to select "devices".
 
-.. image:: /_static/services/service_system/device_selection.png
+.. image:: /_static/automation/services/device_selection.png
    :alt: Device selection
    :align: center
 
@@ -68,7 +68,7 @@ For example, you can POST a request on several devices at ``/url/{{device.name}}
 
 Let's consider the following ReST call service:
 
-.. image:: /_static/services/service_system/variable_substitution.png
+.. image:: /_static/automation/services/variable_substitution.png
    :alt: Variable substitution
    :align: center
 

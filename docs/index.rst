@@ -23,8 +23,6 @@ It encompasses the following aspects of network automation:
 Application stack
 -----------------
 
-eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :guilabel:`SQLite`, :guilabel:`MySQL`, or a :guilabel:`PostgreSQL` database. It runs as a WSGI service behind your choice of HTTP server.
-
 +----------------------------------------+------------------------------------+
 |Function                                |Component                           |
 +========================================+====================================+

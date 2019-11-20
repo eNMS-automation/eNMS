@@ -27,7 +27,7 @@ If you are using eNMS in production, it is recommended to set up a Hashicorp Vau
 - User credentials can be used to authenticate to eNMS, as well as to authenticate to a network device.
 - Device credentials are a property of the device itself within the inventory. The credentials of a device are a ``username``, a ``password``, and an ``enable password`` required on some devices to enter the "enable" mode.
     
-.. image:: /_static/base/administration/credentials.png
+.. image:: /_static/advanced/administration/credentials.png
    :alt: Set password
    :align: center
 
@@ -47,7 +47,7 @@ These migration files are used for migrating from one version of eNMS to the nex
 They are also used for Backup and Restore of eNMS.
 The migration system is accessed from the :guilabel:`Admin / Administration` or from the ReST API.
 
-.. image:: /_static/base/administration/migrations.png
+.. image:: /_static/administration/administration/migrations.png
    :alt: Migrations
    :align: center
 

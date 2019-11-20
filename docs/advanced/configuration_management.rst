@@ -37,6 +37,6 @@ eNMS will filter the list of devices based on whether the current configuration 
 contains this word.
 By clicking on the ``Configuration`` button, you can display the device configuration.
 
-.. image:: /_static/inventory/configuration_management/display_configuration.png
+.. image:: /_static/advanced/configuration_management/display_configuration.png
    :alt: Display Configuration.
    :align: center

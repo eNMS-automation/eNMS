@@ -59,8 +59,11 @@ Parameters common to the services that use Napalm
 - ``Use driver from device`` If set to True, the driver defined at device level (``napalm_driver`` property of the device) is used, otherwise the driver defined at service level (``driver`` property of the service) is used.
 - ``Optional arguments`` Napalm supports a number of optional arguments that are documented here: (https://napalm.readthedocs.io/en/latest/support/index.html#optional-arguments)
 
+Service Parameters
+------------------
+
 Netmiko Configuration Service
------------------------------
+*****************************
 
 Uses Netmiko to send a list of commands to be configured on the devices.
 
@@ -73,24 +76,8 @@ Configuration parameters for creating this service instance:
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
-Netmiko Data Extraction Service
--------------------------------
-
-Uses Netmiko to send commands to a device and uses a regular expression for each command to capture the matching data to a user define variable name.
-The user defined variables are then used in subsequent services within a workflow and can be accessed from the UI form via: ``{{payload[data extraction service instance name]["result"][variable name]}}``
-
-Configuration parameters for creating this service instance:
-
-- All Netmiko parameters (see above)
-- ``Variable1`` User defined variable to store the regular expression matching data in the payload dictionary that is passed between services instances in a workflow
-- ``Command1`` CLI command to send to the device via SSH
-- ``Regular Expression1`` Regular expression match to use in filtering the response data from the command
-- Same fields replicated twice (2, 3 instead of 1)
-
-.. note:: This Service supports variable substitution (as mentioned in the previous section) in the ``command`` input field of its configuration form.
-
 Netmiko File Transfer Service
------------------------------
+*****************************
 
 Uses Netmiko to send a file to a device, or retrieve a file from a device.
 
@@ -106,7 +93,7 @@ Configuration parameters for creating this service instance:
 - ``Source file`` Source absolute path and filename of the file to send
 
 Netmiko Prompts Service
------------------------
+***********************
 
 Similar to Netmiko Validation Service, but expects up to 3 interactive prompts for your remote command, such as 'Are you sure? Y/N'.
 This service allows the user to specify the expected prompt and response to send for it.
@@ -127,7 +114,7 @@ Configuration parameters for creating this service instance:
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
 Netmiko Validation Service
---------------------------
+**************************
 
 Uses Netmiko to send commands to a device and validates the output to determine the state of that device. See the ``Workflow`` section for examples of how it is used in a workflow.
 
@@ -143,7 +130,7 @@ Configuration parameters for creating this service instance:
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
 Napalm Configuration service
-----------------------------
+****************************
 
 Uses Napalm to configure a device.
 
@@ -158,7 +145,7 @@ Configuration parameters for creating this service instance:
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content` input field of its configuration form.
 
 Napalm Rollback Service
------------------------
+***********************
 
 Use Napalm to rollback a configuration.
 
@@ -167,7 +154,7 @@ Configuration parameters for creating this service instance:
 - All Napalm parameters (see above)
 
 Napalm Getters service
-----------------------
+**********************
 
 Uses Napalm to retrieve a list of getters whose output is displayed in the logs. The output can be validated with a command / pattern mechanism like the ``Netmiko Validation Service``.
 
@@ -180,7 +167,7 @@ Configuration parameters for creating this service instance:
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `content_match` input field of its configuration form.
 
 Napalm Ping service
--------------------
+*******************
 
 Uses Napalm to connect to the selected target devices and performs a ping to a designated target. The output contains ping round trip time statistics.
 Note that the iosxr driver does not support ping, but you can use the ios driver in its place by not selecting ``use_device_driver``.
@@ -196,7 +183,7 @@ Configuration parameters for creating this service instance:
 - ``vrf`` Ping a specific virtual routing and forwarding interface
 
 Napalm Traceroute service
--------------------------
+*************************
 
 Uses Napalm to connect to the selected target devices and performs a traceroute to a designated target.
 
@@ -209,7 +196,7 @@ Configuration parameters for creating this service instance:
 - ``vrf`` Ping a specific virtual routing and forwarding interface
 
 Ansible Playbook Service
-------------------------
+************************
 
 An ``Ansible Playbook`` service sends an ansible playbook to the devices.
 The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
@@ -226,8 +213,8 @@ Configuration parameters for creating this service instance:
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `playbook_path` and `content_match` input fields of its configuration form.
 
-ReST Call Service
------------------
+REST Call Service
+*****************
 
 Send a ReST call (GET, POST, PUT or DELETE) to a URL with optional payload.
 The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
@@ -248,19 +235,8 @@ Configuration parameters for creating this service instance:
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
-Update Inventory Service
-------------------------
-
-Update the properties of one or several devices in eNMS inventory.
-This service takes a dictionary as input: all key/value pairs of that dictionary are used to update properties in the inventory.
-Example: if you create a workflow to perform the upgrade of a device, you might want to change the value of the ``operating_system`` property in eNMS to keep the inventory up-to-date.
-
-Configuration parameters for creating this service instance:
-
-- ``Update dictionary`` Dictionary of properties to be updated. For example, the dictionary to update the "Model" and operating_system property of all target devices: ``{"model":"ao", "operating_system":"13.4.2"}``.
-
 Generic File Transfer Service
------------------------------
+*****************************
 
 Transfer a single file to/from the eNMS server to the device using either SFTP or SCP.
 
@@ -278,7 +254,7 @@ Configuration parameters for creating this service instance:
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
 Ping Service
-------------
+************
 
 Implements a Ping from this automation server to the selected devices from inventory using either ICMP or TCP.
 
@@ -292,7 +268,7 @@ Configuration parameters for creating this service instance:
 - ``packet_size`` Size of the ping packet payload to send in bytes
 
 UNIX Command Service
---------------------
+********************
 
 Runs a UNIX command **on the server where eNMS is installed**.
 
@@ -303,7 +279,7 @@ Configuration parameters for creating this service instance:
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 
 Python Snippet Service
-----------------------
+**********************
 
 Runs any python code.
 
@@ -319,7 +295,7 @@ Configuration parameters for creating this service instance:
 - ``Source code``: source code of the python script to run.
 
 Payload Extraction Service
---------------------------
+**************************
 
 Extract some data from the payload with a python query, and optionally post-process the result with a regular expression or a TextFSM template.
 
@@ -332,7 +308,7 @@ Configuration parameters for creating this service instance:
 - Same fields replicated twice (2,3 instead of 1): the service can extract / post-process up to 3 variables.
 
 Payload Validation Service
---------------------------
+**************************
 
 Extract some data from the payload, and validate it against a string or a dictionary.
 

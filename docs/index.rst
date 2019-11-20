@@ -47,7 +47,7 @@ eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :g
 .. toctree::
    :caption: Getting started
 
-   base/main_features
+   base/features
    base/installation
    base/administration
    base/contributing

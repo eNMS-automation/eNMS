@@ -1,6 +1,6 @@
-=============
-Main features
-=============
+========
+Features
+========
     
 Creation of the network
 -----------------------

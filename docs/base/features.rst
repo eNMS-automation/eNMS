@@ -27,20 +27,18 @@ Colocated devices can be grouped into geographical sites (campus, dacacenter, ..
 and displayed logically with a force-directed layout.
 You can click on a device to display its properties or start a Web SSH terminal session.
 
-.. image:: /_static/base/features/network_view.png
+.. image:: /_static/inventory/network_visualization/network_view.png
   :alt: Geographical View
   :align: center
 
-.. image:: /_static/views/site_view/site_view.png
+.. image:: /_static/inventory/network_visualization/site_view.png
    :alt: Logical view
    :align: center
 
 Workflows
 ---------
 
-Services (and other Workflows) can be combined into a single workflow.
-Within a workflow, services can be connected with two edge types: `Success` edge and `Failure` edge. The `Success` edge (versus `Failure` edge) indicates which path to follow in the graph if the source service is successfully executed (versus failed).
-A workflow keeps track of a `payload` dictionary, such that when a service starts, it has access to the results of all previously executed services.
+Services can be combined into a single workflow.
 When a workflow is executed, its status will be updated in real-time on the web UI.
 
 .. image:: /_static/base/features/workflow.png

@@ -1,7 +1,5 @@
 .. toctree::
-
    :maxdepth: 1
-   :hidden:
    :caption: Getting started
 
    base/introduction
@@ -11,7 +9,6 @@
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
    :caption: Inventory
 
    inventory/network_creation
@@ -20,16 +17,11 @@
    inventory/web_connection
    inventory/network_visualization
 
-Automation
-==========
-
 .. toctree::
+   :maxdepth: 1
+   :caption: Automation
 
-   automation/index
-
-Events
-======
-
-.. toctree::
-
-   events/index
+   automation/services
+   automation/default_services
+   automation/workflows
+   automation/execution

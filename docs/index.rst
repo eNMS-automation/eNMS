@@ -1,14 +1,58 @@
+============
+What is eNMS
+============
+
+eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
+
+.. image:: /_static/base/introduction/network_view.png
+   :alt: eNMS Introduction
+   :align: center
+
+It encompasses the following aspects of network automation:
+  - **Configuration Management Service**: Backup, change and rollback of configurations (saved in git).
+  - **Validation Services**: Retrieve data about the state of a device with Netmiko and NAPALM.
+  - **Ansible Service**: Store and run Ansible playbooks.
+  - **REST Service**: Send REST calls with variable URL and payload.
+  - **Python Script Service**: Any python script can be integrated into the web UI. eNMS will automatically generate
+a form in the web UI for the script input parameters.
+  - **Workflows**: Services can be combined together graphically in a workflow.
+  - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
+  - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
+
+Application stack
+-----------------
+
+eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :guilabel:`SQLite`, :guilabel:`MySQL`, or a :guilabel:`PostgreSQL` database. It runs as a WSGI service behind your choice of HTTP server.
+
++----------------------------------------+------------------------------------+
+|Function                                |Component                           |
++========================================+====================================+
+|HTTP Service                            |nginx                               |
++----------------------------------------+------------------------------------+
+|WSGI Service                            |gunicorn                            |
++----------------------------------------+------------------------------------+
+|Application                             |Flask/Python 3.6+                   |
++----------------------------------------+------------------------------------+
+|Database                                |SQLite, MySQL or PostgreSQL         |
++----------------------------------------+------------------------------------+
+|Credentials storage                     |Hashicorp vault                     |
++----------------------------------------+------------------------------------+
+|WebSSH connection                       |GoTTY                               |
++----------------------------------------+------------------------------------+
+
+.. image:: /_static/base/introduction/workflow.gif
+   :alt: eNMS workflow system
+   :align: center
+
 .. toctree::
-   :maxdepth: 1
    :caption: Getting started
 
-   base/introduction
+   base/main_features
    base/installation
    base/administration
    base/contributing
 
 .. toctree::
-   :maxdepth: 1
    :caption: Inventory
 
    inventory/network_creation
@@ -18,7 +62,6 @@
    inventory/network_visualization
 
 .. toctree::
-   :maxdepth: 1
    :caption: Automation
 
    automation/services

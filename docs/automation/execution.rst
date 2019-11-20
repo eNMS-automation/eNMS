@@ -62,7 +62,7 @@ will automatically disappear and the run results will be displayed instead.
 You can go to the "Run Management" page to see what's happening in real-time: logs, current status, and progress
 (if the service has device targets, eNMS tells you in real-time how many devices have been done and how many are left).
 
-.. image:: /_static/runs/run_management.png
+.. image:: /_static/automation/execution/run_management.png
    :alt: Run management
    :align: center
 
@@ -78,7 +78,7 @@ starting with attempt2.
 
 You can compare two versions of the results by clicking on the ``Compare`` button (a line-by-line diff is generated).
 
-.. image:: /_static/runs/run_results.png
+.. image:: /_static/automation/execution/run_results.png
    :alt: Results of a run
    :align: center
 
@@ -99,7 +99,7 @@ You need to:
     can also choose an ``End date`` if you want the task to automatically stop running.
   - Cron scheduling: enter a crontab expression.
 
-.. image:: /_static/automation/executioncreate_task.png
+.. image:: /_static/automation/execution/create_task.png
    :alt: Schedule from view
    :align: center
 
@@ -107,7 +107,7 @@ Tasks are displayed in a table where they can be edited, duplicated, deleted, pa
 Active tasks display the date that they will next be run by the Scheduler, as well as the amount of time
 until the next run.
 
-.. image:: /_static/automation/executiontask_management.png
+.. image:: /_static/automation/execution/task_management.png
    :alt: Task management
    :align: center
 

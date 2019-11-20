@@ -1,33 +1,9 @@
-============
-What is eNMS
-============
-
-eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
-
-.. image:: /_static/base/introduction/network_view.png
-   :alt: eNMS Introduction
-   :align: center
-
-It encompasses the following aspects of network automation:
-  - **Configuration Management Service**: Backup, change and rollback of configurations (saved in git).
-  - **Validation Services**: Retrieve data about the state of a device with Netmiko and NAPALM.
-  - **Ansible Service**: Store and run Ansible playbooks.
-  - **REST Service**: Send REST calls with variable URL and payload.
-  - **Python Script Service**: Any python script can be integrated into the web UI. eNMS will automatically generate
-a form in the web UI for the script input parameters.
-  - **Workflows**: Services can be combined together graphically in a workflow.
-  - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
-  - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
-
-.. image:: /_static/base/introduction/workflow.gif
-   :alt: eNMS workflow system
-   :align: center
-
+=============
 Main features
--------------
+=============
     
 Creation of the network
-***********************
+-----------------------
 
 Your network topology can be created manually (from the UI or an Excel spreadsheet) or imported from an
 external Source of Truth (OpenNMS, LibreNMS, or Netbox).
@@ -43,7 +19,7 @@ A dashboard provides a graphical overview of your network with dynamic charts.
    :align: center
 
 Network visualization
-*********************
+---------------------
 
 Once created, eNMS can display your network on a world map with either the Google Map
 or the Open Street Map tile layers. Each device is displayed on the map at its GPS coordinates.
@@ -60,7 +36,7 @@ You can click on a device to display its properties or start a Web SSH terminal 
    :align: center
 
 Workflows
-*********
+---------
 
 Services (and other Workflows) can be combined into a single workflow.
 Within a workflow, services can be connected with two edge types: `Success` edge and `Failure` edge. The `Success` edge (versus `Failure` edge) indicates which path to follow in the graph if the source service is successfully executed (versus failed).
@@ -72,7 +48,7 @@ When a workflow is executed, its status will be updated in real-time on the web 
   :align: center
 
 Scheduling
-**********
+----------
 
 While services and workflows can be run directly and immediately from the web UI,
 you can also schedule them to run at a later time, or periodically by defining a frequency,
@@ -83,7 +59,7 @@ a start date and an end date. All scheduled tasks are displayed in a calendar.
   :align: center
 
 Configuration Management
-************************
+------------------------
 
 eNMS can work as a network device configuration backup tool and replace Oxidized/Rancid with the following features:
   - Poll network elements and store the latest configuration in the database
@@ -93,29 +69,8 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
   - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
 
 Event-driven automation
-***********************
+-----------------------
 
 Event-driven automation in eNMS has two aspects:
   - eNMS has a ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a workflow. 
   - eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
-
-Application stack
------------------
-
-eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :guilabel:`SQLite`, :guilabel:`MySQL`, or a :guilabel:`PostgreSQL` database. It runs as a WSGI service behind your choice of HTTP server.
-
-+----------------------------------------+------------------------------------+
-|Function                                |Component                           |
-+========================================+====================================+
-|HTTP Service                            |nginx                               |
-+----------------------------------------+------------------------------------+
-|WSGI Service                            |gunicorn                            |
-+----------------------------------------+------------------------------------+
-|Application                             |Flask/Python 3.6+                   |
-+----------------------------------------+------------------------------------+
-|Database                                |SQLite, MySQL or PostgreSQL         |
-+----------------------------------------+------------------------------------+
-|Credentials storage                     |Hashicorp vault                     |
-+----------------------------------------+------------------------------------+
-|WebSSH connection                       |GoTTY                               |
-+----------------------------------------+------------------------------------+

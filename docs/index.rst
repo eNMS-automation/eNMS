@@ -4,7 +4,7 @@ What is eNMS
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-.. image:: /_static/enms.png
+.. image:: /_static/base/features/workflow.png
    :alt: eNMS Introduction
    :align: center
 
@@ -40,10 +40,6 @@ eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :g
 +----------------------------------------+------------------------------------+
 |WebSSH connection                       |GoTTY                               |
 +----------------------------------------+------------------------------------+
-
-.. image:: /_static/base/introduction/workflow.gif
-   :alt: eNMS workflow system
-   :align: center
 
 .. toctree::
    :caption: Getting started

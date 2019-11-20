@@ -53,8 +53,6 @@ a form in the web UI for the script input parameters.
   - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
   - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
 
-[![Workflow System](docs/_static/base/introduction/workflow.gif)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
-
 ___
 
 # Main features

@@ -4,17 +4,18 @@ What is eNMS
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-.. image:: /_static/base/introduction/network_view.png
+.. image:: /_static/enms.png
    :alt: eNMS Introduction
    :align: center
 
 It encompasses the following aspects of network automation:
+
   - **Configuration Management Service**: Backup, change and rollback of configurations (saved in git).
   - **Validation Services**: Retrieve data about the state of a device with Netmiko and NAPALM.
   - **Ansible Service**: Store and run Ansible playbooks.
   - **REST Service**: Send REST calls with variable URL and payload.
-  - **Python Script Service**: Any python script can be integrated into the web UI. eNMS will automatically generate
-a form in the web UI for the script input parameters.
+  - **Python Script Service**: Any python script can be integrated into the web UI. 
+    eNMS will automatically generate a form in the web UI for the script input parameters.
   - **Workflows**: Services can be combined together graphically in a workflow.
   - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
   - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).

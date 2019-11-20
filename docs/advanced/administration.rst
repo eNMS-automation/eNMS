@@ -45,7 +45,7 @@ and then the Import function can be used to import/restore the configuration and
 those object types.
 These migration files are used for migrating from one version of eNMS to the next version. 
 They are also used for Backup and Restore of eNMS.
-The migration system is accessed from the :guilabel:`Admin / Administration` or from the ReST API.
+The migration system is accessed from the :guilabel:`Admin / Administration` or from the REST API.
 
 .. image:: /_static/administration/administration/migrations.png
    :alt: Migrations
@@ -53,10 +53,10 @@ The migration system is accessed from the :guilabel:`Admin / Administration` or 
 
 When creating a new instance of eNMS:
   - Install eNMS.
-  - Run the :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API. Select 'Empty_database_before_import' = True, specify
+  - Run the :guilabel:`Admin / Administration / Migration` either from the UI or from the REST API. Select 'Empty_database_before_import' = True, specify
     the location of the file to import, and select all object types to be imported: "user", "device", "link", "pool", "service", "workflow_edge", "task"
 
-When backing up eNMS, it is only necessary to perform :guilabel:`Admin / Administration / Migration` either from the UI or from the ReST API.
+When backing up eNMS, it is only necessary to perform :guilabel:`Admin / Administration / Migration` either from the UI or from the REST API.
   - Select a directory name for storing the migration files into, and select all object types to Export
   - the Topology Export of device and link data from :guilabel:`Admin / Administration / Topology Import` and :guilabel:`Admin / Administration / Topology Export` is not needed for Backup.
     It is intended for sharing of device and link data.

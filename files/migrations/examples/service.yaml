@@ -3440,7 +3440,7 @@
   conversion_method: none
   creator: admin
   delete_spaces_before_matching: false
-  description: ReST call, Napalm getters, etc
+  description: REST call, Napalm getters, etc
   device_query: ''
   device_query_property: ip_address
   devices: [Washington, Atlanta]

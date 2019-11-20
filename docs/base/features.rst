@@ -63,12 +63,12 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
   - Poll network elements and store the latest configuration in the database
   - Search for any text or regular-expression in all configurations
   - Download device configuration to a local text file
-  - Use the ReST API support to return a specified device’s configuration
+  - Use the REST API support to return a specified device’s configuration
   - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
 
 Event-driven automation
 -----------------------
 
 Event-driven automation in eNMS has two aspects:
-  - eNMS has a ReST API that can be used to create, update and delete any type of objects (services, workflows, tasks), but also to trigger the execution of a service or a workflow. 
-  - eNMS can be configured as a Syslog server: all logs are stored in the database, and rules can be created to trigger the execution of a service or a workflow upon receiving a log matched by the rule.
+  - eNMS has a REST API that can be used to create, update and delete any type of objects, but also to trigger the execution of a service or a workflow. 
+  - eNMS can be configured as a Syslog server, and rules can be created for syslog messges to trigger the execution of a service or a workflow.

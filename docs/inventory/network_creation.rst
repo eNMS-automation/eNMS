@@ -49,9 +49,9 @@ OpenNMS
 *******
 
 You can configure the following properties for OpenNMS:
- * ReST API: URL of the ReST API
+ * REST API: URL of the REST API
  * Devices: URL of the devices that you want to import (this could be a subset of all available devices in the API, like ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``)
- * Login & Password: credentials of the ReST API.
+ * Login & Password: credentials of the REST API.
 
 Netbox
 ******

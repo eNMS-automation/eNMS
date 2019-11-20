@@ -1,10 +1,10 @@
 ========
-ReST API
+REST API
 ========
 
 In this section, instance refers to any device, link, service, workflow, or task in eNMS database.
 
-eNMS has a ReST API allowing to:
+eNMS has a REST API allowing to:
 
 - make sure eNMS is alive
 - create, update or delete an instance or a list of instances
@@ -16,9 +16,9 @@ eNMS has a ReST API allowing to:
 - initiate a device inventory bulk import or export
 - start a subset of the functionalities that are otherwise available in the admin panel.
 
-This ReST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
+This REST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
 
-Expected ReST API Headers:
+Expected REST API Headers:
 
 - Accept:"application/json"
 - Content-Type:"application/json"
@@ -146,7 +146,7 @@ This task schedules the service ``netmiko_check_vrf_test`` to run at ``20/06/201
 Migrations
 **********
 
-The migration system can be triggered from the ReST API:
+The migration system can be triggered from the REST API:
 
 ::
 
@@ -190,7 +190,7 @@ You can also trigger the import/export programmatically. Here's an example with 
 Topology Import / Export
 ************************
 
-The import and export of topology can be triggered from the ReST API, with a POST request to the following URL:
+The import and export of topology can be triggered from the REST API, with a POST request to the following URL:
 
 ::
 

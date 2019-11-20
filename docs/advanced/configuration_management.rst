@@ -7,7 +7,7 @@ eNMS can work as a network device configuration backup tool and replace Oxidized
   - Store any operational data that can be retrieved from the device CLI (``show version``, etc)
   - Search for any text or regular-expression in all configurations
   - Download device configuration to a local text file
-  - Use the ReST API support to return a specified device’s configuration
+  - Use the REST API support to return a specified device’s configuration
   - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
 
 Device configuration

@@ -61,12 +61,12 @@ Variable substitution
 ---------------------
 
 For some services, it is useful for a string to include variables such as a timestamp or device parameters.
-For example, if you run a ReST call script on several devices to send a request at a given URL, you might want the URL to depend on the name of the device.
+For example, if you run a REST call script on several devices to send a request at a given URL, you might want the URL to depend on the name of the device.
 Any code between double curved brackets will be evaluated at runtime and replaced with the appropriate value.
 
 For example, you can POST a request on several devices at ``/url/{{device.name}}``, and ``{{device.name}}`` will be replaced on each execution iteration by the name of each device.
 
-Let's consider the following ReST call service:
+Let's consider the following REST call service:
 
 .. image:: /_static/automation/services/variable_substitution.png
    :alt: Variable substitution

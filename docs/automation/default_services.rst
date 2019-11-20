@@ -216,22 +216,22 @@ Configuration parameters for creating this service instance:
 REST Call Service
 *****************
 
-Send a ReST call (GET, POST, PUT or DELETE) to a URL with optional payload.
+Send a REST call (GET, POST, PUT or DELETE) to a URL with optional payload.
 The output can be validated with a command / pattern mechanism, like the ``Netmiko Validation Service``.
 
 Configuration parameters for creating this service instance:
 
 - All Validation parameters (see above)
 - ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
-- ``Type of call`` ReST type operation to be performed: GET, POST, PUT, DELETE
-- ``URL`` URL to make the ReST connection to
+- ``Type of call`` REST type operation to be performed: GET, POST, PUT, DELETE
+- ``URL`` URL to make the REST connection to
 - ``Payload`` The data to be sent in POST Or PUT operation
 - ``Parameters`` Additional parameters to pass in the request. From the requests library, params can be a dictionary, list of tuples or bytes that are sent in the body of the request.
 - ``Headers`` Dictionary of HTTP Header information to send with the request, such as the type of data to be passed. For example, {"accept":"application/json","content-type":"application/json"}
 - ``Verify SSL Certificate`` If checked (default), the SSL certificate is verified.
 - ``Timeout`` Requests library timeout, which is the Float value in seconds to wait for the server to send data before giving up
-- ``Username`` Username to use for authenticating with the ReST server
-- ``Password`` Password to use for authenticating with the ReST server
+- ``Username`` Username to use for authenticating with the REST server
+- ``Password`` Password to use for authenticating with the REST server
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `url` and `content_match` input fields of its configuration form.
 

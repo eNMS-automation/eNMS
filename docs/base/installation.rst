@@ -2,8 +2,7 @@
 Installation
 ============
 
-Requirements: python 3.6+
-(Earlier versions of python not supported.)
+Requirements: Unix server with python 3.6+
 
 Run eNMS in test mode
 ---------------------
@@ -36,9 +35,6 @@ Start eNMS with gunicorn :
 
  # start gunicorn in command-line
  gunicorn --config gunicorn.py app:app
-
- # or simply
- ./boot.sh
 
 Run eNMS in Production (Unix only)
 ----------------------------------

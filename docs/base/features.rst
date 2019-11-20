@@ -5,7 +5,7 @@ Features
 Creation of the network
 -----------------------
 
-Your network topology can be created manually (from the UI or an Excel spreadsheet) or imported from an
+Your network topology can be created manually or imported from an
 external Source of Truth (OpenNMS, LibreNMS, or Netbox).
 Once created, it is are displayed in a sortable and searchable table.
 A dashboard provides a graphical overview of your network with dynamic charts.
@@ -21,15 +21,16 @@ A dashboard provides a graphical overview of your network with dynamic charts.
 Network visualization
 ---------------------
 
-Once created, eNMS can display your network on a world map with either the Google Map
-or the Open Street Map tile layers. Each device is displayed on the map at its GPS coordinates.
-Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
-and displayed logically with a force-directed layout.
+Once created, eNMS can display your network on a world map with either Google Map
+or Open Street Map. Each device is displayed on the map at its GPS coordinates.
 You can click on a device to display its properties or start a Web SSH terminal session.
 
 .. image:: /_static/inventory/network_visualization/network_view.png
   :alt: Geographical View
   :align: center
+
+Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
+and displayed logically with a force-directed layout.
 
 .. image:: /_static/inventory/network_visualization/site_view.png
    :alt: Logical view

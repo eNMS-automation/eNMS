@@ -46,15 +46,13 @@ eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :g
 
    base/features
    base/installation
-   base/administration
-   base/contributing
+   base/release_notes
 
 .. toctree::
    :caption: Inventory
 
    inventory/network_creation
    inventory/pools
-   inventory/configuration_management
    inventory/web_connection
    inventory/network_visualization
 
@@ -65,4 +63,11 @@ eNMS is built on the :guilabel:`Flask` Python framework and utilizes either a :g
    automation/default_services
    automation/workflows
    automation/execution
-   automation/rest_api
+
+.. toctree::
+   :caption: Advanced
+
+   advanced/configuration_management
+   advanced/rest_api
+   advanced/administration
+   advanced/contributing

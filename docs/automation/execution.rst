@@ -99,7 +99,7 @@ You need to:
     can also choose an ``End date`` if you want the task to automatically stop running.
   - Cron scheduling: enter a crontab expression.
 
-.. image:: /_static/events/create_task.png
+.. image:: /_static/automation/executioncreate_task.png
    :alt: Schedule from view
    :align: center
 
@@ -107,7 +107,7 @@ Tasks are displayed in a table where they can be edited, duplicated, deleted, pa
 Active tasks display the date that they will next be run by the Scheduler, as well as the amount of time
 until the next run.
 
-.. image:: /_static/events/task_management.png
+.. image:: /_static/automation/executiontask_management.png
    :alt: Task management
    :align: center
 
@@ -132,6 +132,13 @@ Also, newly created tasks are set to Paused by default unless the 'Schedule task
   - ``30 4 1 * 0,6``	at 4:30 on the 1st day of every month, plus on Sun and Sat
   - ``00,30 * * * *``   at 00 and 30 minutes past every hour
   - ``30 9 * * * *``    at 9:30 am every day
+
+Targets and payload
+*******************
+
+When creating a task, you can select a list of devices and pools. If these fields are left empty, the service will run on its own targets.
+Otherwise, the task targets (all selected devices, plus all devices of all selected pools) will override the service targets when the service runs.
+A task can also have a payload (dictionary) that will be passed to the service when it runs.
 
 Syslog-triggered automation
 ---------------------------
@@ -160,10 +167,3 @@ All log rules are listed in a table in :guilabel:`logs/log_automation`:
    :align: center
 
 Whenever a log triggers a log rule, it is saved by eNMS in a separate table in :guilabel:`logs/log_management`.
-
-Targets and payload
-*******************
-
-When creating a task, you can select a list of devices and pools. If these fields are left empty, the service will run on its own targets.
-Otherwise, the task targets (all selected devices, plus all devices of all selected pools) will override the service targets when the service runs.
-A task can also have a payload (dictionary) that will be passed to the service when it runs.

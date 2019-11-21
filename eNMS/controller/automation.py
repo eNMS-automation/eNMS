@@ -127,7 +127,11 @@ class AutomationController(BaseController):
         return fetch("result", id=id).result
 
     def get_top_level_workflows(self):
-        return [workflow.get_properties() for workflow in fetch_all("workflow") if not workflow.workflows]
+        return [
+            workflow.get_properties()
+            for workflow in fetch_all("workflow")
+            if not workflow.workflows
+        ]
 
     def get_parent_workflows(self, workflow=None):
         yield workflow

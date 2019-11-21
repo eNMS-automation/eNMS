@@ -102,7 +102,7 @@ class Workflow(Service):
         if track_devices:
             targets = defaultdict(set)
             for service in services:
-                targets[service.name] |= set(run.devices)
+                targets[service.name] |= {device.name for device in run.devices}
         while services:
             if run.stop:
                 return {"payload": payload, "success": False}
@@ -118,7 +118,13 @@ class Workflow(Service):
             if service.skip_query:
                 skip_service = run.eval(service.skip_query, **locals())
             if skip_service or service.skip or service.scoped_name in ("Start", "End"):
-                results = {"success": "skipped"}
+                results = {
+                    "success": "skipped",
+                    "summary": {
+                        "success": {device.name for device in run.devices},
+                        "failure": [],
+                    },
+                }
                 run.run_state["progress"]["service"]["skipped"] += 1
             else:
                 kwargs = {
@@ -131,7 +137,9 @@ class Workflow(Service):
                 if device:
                     kwargs["devices"] = [device.id]
                 elif track_devices:
-                    kwargs["devices"] = [device.id for device in targets[service.name]]
+                    kwargs["devices"] = [
+                        fetch("device", name=name).id for name in targets[service.name]
+                    ]
                 service_run = factory("run", **kwargs)
                 results = service_run.run(payload)
                 status = "success" if results["success"] else "failed"
@@ -139,14 +147,16 @@ class Workflow(Service):
                     run.run_state["progress"]["service"][status] += 1
             successors = []
             if track_devices:
-                summary = results.pop("summary", {"success": run.devices, "failure": []})
+                summary = results.get("summary")
                 for edge_type in ("success", "failure"):
                     for successor, edge in service.adjacent_services(
                         self, "destination", edge_type,
                     ):
                         if not summary[edge_type]:
                             continue
-                        targets[successor.name] |= set(summary[edge_type])
+                        targets[successor.name] |= set(
+                            fetch("device", name=name) for name in summary[edge_type]
+                        )
                         successors.append(successor)
                         run.run_state["edges"][edge.id] += len(summary[edge_type])
             else:

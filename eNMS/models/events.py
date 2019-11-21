@@ -204,7 +204,7 @@ class Task(AbstractBase):
             app.scheduler.reschedule_job(default.pop("id"), **trigger)
 
 
-class Baselog(AbstractBase):
+class Changelog(AbstractBase):
 
     __tablename__ = "baselog"
     type = Column(SmallString)
@@ -212,29 +212,12 @@ class Baselog(AbstractBase):
     id = Column(Integer, primary_key=True)
     time = Column(SmallString)
     content = Column(LargeString, default="")
+    severity = Column(SmallString, default="debug")
+    user = Column(SmallString, default="admin")
 
     def update(self, **kwargs):
         kwargs["time"] = str(datetime.now())
         super().update(**kwargs)
-
-
-class Syslog(Baselog):
-
-    __tablename__ = "syslog"
-    __mapper_args__ = {"polymorphic_identity": "syslog"}
-    parent_type = "baselog"
-    id = Column(Integer, ForeignKey("baselog.id"), primary_key=True)
-    source = Column(LargeString, default="")
-
-
-class Changelog(Baselog):
-
-    __tablename__ = "changelog"
-    __mapper_args__ = {"polymorphic_identity": "changelog"}
-    parent_type = "baselog"
-    id = Column(Integer, ForeignKey("baselog.id"), primary_key=True)
-    severity = Column(SmallString, default="debug")
-    user = Column(SmallString, default="admin")
 
 
 class Event(AbstractBase):

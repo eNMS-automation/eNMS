@@ -126,10 +126,13 @@ class AutomationController(BaseController):
     def get_result(self, id):
         return fetch("result", id=id).result
 
-    def get_parent_workflows(self, workflow):
-        yield workflow
-        for parent_workflow in workflow.workflows:
-            yield from self.get_parent_workflows(parent_workflow)
+    def get_parent_workflows(self, workflow=None):
+        if not workflow:
+            return [w for w in fetch_all("workflow") if not w.workflows]
+        else:
+            yield workflow
+            for parent_workflow in workflow.workflows:
+                yield from self.get_parent_workflows(parent_workflow)
 
     def get_workflow_services(self, id, node):
         parents = list(self.get_parent_workflows(fetch("workflow", id=id)))

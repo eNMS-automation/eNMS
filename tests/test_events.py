@@ -33,7 +33,7 @@ scheduled_task = ImmutableMultiDict(
 )
 
 
-@check_pages("table/task", "calendar/task")
+@check_pages("table/task")
 def test_netmiko_napalm_config(user_client):
     create_from_file(user_client, "europe.xls")
     user_client.post("/update/task", data=instant_task)

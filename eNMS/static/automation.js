@@ -347,8 +347,7 @@ function field(name, type, id) {
 }
 
 function displayCalendar(calendarType) {
-  showPanel("display", calendarType, () => {
-    console.log($(`#content-${calendarType}`).length, calendarType)
+  showPanel("calendar", calendarType, () => {
     call(`/calendar_init/${calendarType}`, function(tasks) {
       let events = [];
       for (const [name, properties] of Object.entries(tasks)) {
@@ -362,7 +361,8 @@ function displayCalendar(calendarType) {
           service: properties.service,
         });
       }
-      $(`#content-${calendarType}`).fullCalendar({
+      $("#calendar").fullCalendar({
+        height: 600,
         header: {
           left: "prev,next today",
           center: "title",

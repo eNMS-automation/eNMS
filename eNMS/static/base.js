@@ -26,6 +26,7 @@ let topZ = 1000;
 
 const panelSize = {
   add_service: "800 500",
+  calendar: "1200 650",
   changelog: "700 300",
   changelog_filtering: "700 300",
   compare: "auto 700",

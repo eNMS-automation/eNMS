@@ -270,6 +270,11 @@ class DisplayForm(BaseForm):
     form_type = HiddenField(default="display")
 
 
+class CalendarForm(BaseForm):
+    template = "calendar"
+    form_type = HiddenField(default="calendar")
+
+
 class CompareForm(DisplayForm):
     form_type = HiddenField(default="compare")
 

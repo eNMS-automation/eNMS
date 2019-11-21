@@ -154,9 +154,7 @@ class Workflow(Service):
                     ):
                         if not summary[edge_type]:
                             continue
-                        targets[successor.name] |= set(
-                            fetch("device", name=name) for name in summary[edge_type]
-                        )
+                        targets[successor.name] |= set(summary[edge_type])
                         successors.append(successor)
                         run.run_state["edges"][edge.id] += len(summary[edge_type])
             else:

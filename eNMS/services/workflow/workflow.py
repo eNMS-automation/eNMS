@@ -96,11 +96,13 @@ class Workflow(Service):
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
-        track_devices = self.run_method == "per_service_with_workflow_targets"
+        track_devices = run.run_method == "per_service_with_workflow_targets"
         services = [fetch("service", id=id) for id in run.start_services]
         visited, success = set(), False
         if track_devices:
-            targets = {service.name: run.devices for service in services}
+            targets = defaultdict(set)
+            for service in services:
+                targets[service.name] |= set(run.devices)
         while services:
             if run.stop:
                 return {"payload": payload, "success": False}
@@ -129,20 +131,25 @@ class Workflow(Service):
                 if device:
                     kwargs["devices"] = [device.id]
                 elif track_devices:
-                    kwargs["devices"] = targets[service.name]
+                    kwargs["devices"] = [device.id for device in targets[service.name]]
                 service_run = factory("run", **kwargs)
                 service_results = service_run.run(payload)
                 status = "passed" if service_results["success"] else "failed"
                 if not device:
                     run.run_state["progress"]["service"][status] += 1
             successors = []
-            for successor, edge in service.adjacent_services(
-                self,
-                "destination",
-                "success" if service_results["success"] else "failure",
-            ):
-                successors.append(successor)
-                run.run_state["edges"][edge.id] += 1
+            if track_devices:
+                edge_types = ("success", "failure")
+            else:
+                edge_types = ("success" if service_results["success"] else "failure",)
+            for edge_type in edge_types:
+                for successor, edge in service.adjacent_services(
+                    self, "destination", edge_type,
+                ):
+                    print("tttt"*100, run.run_state["progress"])
+                    targets[successor.name] |= set(run.devices)
+                    successors.append(successor)
+                    run.run_state["edges"][edge.id] += 1
             for successor in successors:
                 services.append(successor)
                 if successor == self.services[1]:

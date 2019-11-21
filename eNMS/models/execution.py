@@ -289,6 +289,7 @@ class Run(AbstractBase):
                 "run": self.properties,
                 "service": self.service.get_properties(exclude=["positions"]),
             }
+            results["summary"] = self.run_state.pop("summary")
             if self.send_notification:
                 results = self.notify(results)
             if self.runtime == self.parent_runtime or len(self.devices) > 1:
@@ -324,7 +325,7 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices, success = self.compute_devices(payload), True
-        if not self.devices:
+        if not self.devices or self.run_method != "per_device":
             results = [self.get_results(payload)]
         else:
             if self.iteration_devices and not self.parent_device:
@@ -365,10 +366,10 @@ class Run(AbstractBase):
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
-        for i in range(self.number_of_retries + 1):
+        for retry in range(self.number_of_retries + 1):
             try:
-                if i:
-                    self.log("error", f"RETRY n°{i}", device)
+                if retry:
+                    self.log("error", f"RETRY n°{retry}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
                     getattr(self, "close_connection", False)
@@ -388,7 +389,7 @@ class Run(AbstractBase):
                     self.validate_result(results, payload, device)
                 if results["success"]:
                     return results
-                elif i < self.number_of_retries:
+                elif retry < self.number_of_retries:
                     sleep(self.time_between_retries)
             except Exception:
                 result = (
@@ -455,10 +456,10 @@ class Run(AbstractBase):
         if self.include_link_in_summary:
             address = app.config["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
-        if self.run_state["summary"]["failed"]:
-            notification["FAILED"] = self.run_state["summary"]["failed"]
-        if self.run_state["summary"]["passed"] and not self.display_only_failed_nodes:
-            notification["PASSED"] = self.run_state["summary"]["passed"]
+        if results["summary"]["failed"]:
+            notification["FAILED"] = results["failed"]
+        if results["summary"]["passed"] and not self.display_only_failed_nodes:
+            notification["PASSED"] = results["passed"]
         return notification
 
     def notify(self, results):

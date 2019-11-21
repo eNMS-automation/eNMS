@@ -76,7 +76,6 @@ class BaseController:
         "/table/run",
         "/table/server",
         "/table/service",
-        "/table/syslog",
         "/table/task",
         "/table/user",
         "/view/network",

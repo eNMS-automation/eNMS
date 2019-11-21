@@ -252,7 +252,7 @@ function processWorkflowData(instance, id) {
       );
       workflow.services[serviceIndex] = instance;
     } else {
-      if (creationMode == "workflow") {
+      if (creationMode == "create_workflow") {
         if (instance.type === "workflow" && !id) {
           $("#current-workflow").append(
             `<option value="${instance.id}">${instance.name}</option>`
@@ -581,7 +581,7 @@ function addServicePanel() {
 
 function createNew(mode) {
   creationMode = mode;
-  if (mode == "edit_workflow") {
+  if (mode == "create_workflow") {
     showTypePanel("workflow");
   } else if (mode == "duplicate_workflow") {
     call(`/duplicate_workflow/${workflow.id}`, function(instance) {
@@ -595,7 +595,7 @@ function createNew(mode) {
 Object.assign(action, {
   "Run Workflow": () => runWorkflow(),
   "Parametrized Workflow Run": () => runWorkflow(true),
-  "Create Workflow": () => createNew("edit_workflow"),
+  "Create Workflow": () => createNew("create_workflow"),
   "Duplicate Workflow": () => createNew("duplicate_workflow"),
   "Create New Service": () => createNew("create_service"),
   "Edit Workflow": () => showTypePanel("workflow", workflow.id),

@@ -64,7 +64,7 @@ const panelSize = {
   service: "1300 600",
   service_filtering: "1000 600",
   ssh: "700 200",
-  task: "900 500",
+  task: "900 600",
   task_filtering: "900 650",
   user: "600 300",
   user_filtering: "700 250",

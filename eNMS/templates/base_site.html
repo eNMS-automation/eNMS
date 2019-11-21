@@ -23,6 +23,10 @@
       rel="stylesheet"
     />
     <link
+      href="{{ url_for('static', filename='lib/base/full_calendar/fullcalendar.min.css') }}"
+      rel="stylesheet"
+    />
+    <link
       href="{{ url_for('static', filename='lib/base/bootstrap-select/bootstrap-select.min.css') }}"
       rel="stylesheet"
     />
@@ -111,6 +115,7 @@
     </script>
     <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/moment/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/base/full_calendar/fullcalendar.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/bootstrap-select/bootstrap-select.min.js') }}"></script>

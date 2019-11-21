@@ -348,9 +348,7 @@ function field(name, type, id) {
 
 function displayCalendar(calendarType) {
   showPanel("display", calendarType, () => {
-    if (typeof $.fn.fullCalendar === "undefined") {
-      return;
-    }
+    console.log($(`#content-${calendarType}`).length, calendarType)
     call(`/calendar_init/${calendarType}`, function(tasks) {
       let events = [];
       for (const [name, properties] of Object.entries(tasks)) {

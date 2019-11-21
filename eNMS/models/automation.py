@@ -57,7 +57,6 @@ class Service(AbstractBase):
     include_device_results = Column(Boolean, default=True)
     include_link_in_summary = Column(Boolean, default=True)
     mail_recipient = Column(SmallString)
-    color = Column(SmallString, default="#D2E5FF")
     initial_payload = Column(MutableDict)
     skip = Column(Boolean, default=False)
     skip_query = Column(SmallString)
@@ -77,6 +76,7 @@ class Service(AbstractBase):
     dict_match = Column(MutableDict)
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
+    run_method = Column(SmallString)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

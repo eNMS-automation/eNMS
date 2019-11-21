@@ -27,6 +27,7 @@ class Workflow(Service):
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
     )
+    traversal_method = Column(SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
@@ -151,6 +152,13 @@ class Workflow(Service):
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
     close_connection = BooleanField(default=False)
+    run_method = SelectField(
+        "Traversal Method",
+        choices=(
+            ("per_device", "Run the workflow device by device"),
+            ("per_service", "Run the workflow service by service"),
+        ),
+    )
 
 
 class WorkflowEdge(AbstractBase):

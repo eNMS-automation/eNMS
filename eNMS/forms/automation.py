@@ -93,6 +93,13 @@ class ServiceForm(BaseForm):
     dict_match = DictSubstitutionField("Dictionary to Match Against")
     negative_logic = BooleanField("Negative logic")
     delete_spaces_before_matching = BooleanField("Delete Spaces before Matching")
+    run_method = SelectField(
+        "Run Method",
+        choices=(
+            ("per_device", "Run the service once per device"),
+            ("once", "Run the service once for all devices"),
+        ),
+    )
     query_fields = [
         "device_query",
         "skip_query",

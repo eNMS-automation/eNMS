@@ -48,6 +48,16 @@
     >
       <span class="glyphicon glyphicon-refresh"></span>
     </button>
+    {% if type in ("run", "task") %}
+      <button
+        class="btn btn-info btn-file"
+        onclick="displayCalendar('{{ type }}')"
+        data-tooltip="Calendar"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-calendar"></span>
+      </button>
+    {% endif %}
     {% if type == "result" %}
     <button
       class="btn btn-info btn-file"

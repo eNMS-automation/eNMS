@@ -101,7 +101,9 @@ class Run(AbstractBase):
     runtime = Column(SmallString)
     endtime = Column(SmallString)
     parent_id = Column(Integer, ForeignKey("run.id"))
-    parent = relationship("Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children")
+    parent = relationship(
+        "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
+    )
     children = relationship("Run", foreign_keys="Run.parent_id")
     parent_runtime = Column(SmallString)
     parent_device_id = Column(Integer, ForeignKey("device.id"))

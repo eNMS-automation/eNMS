@@ -127,7 +127,6 @@ class Workflow(Service):
                 }
                 run.run_state["progress"]["service"]["skipped"] += 1
             else:
-                print("ooo"*300, run.id)
                 kwargs = {
                     "service": service.id,
                     "workflow": self.id,
@@ -142,8 +141,6 @@ class Workflow(Service):
                         fetch("device", name=name).id for name in targets[service.name]
                     ]
                 service_run = factory("run", **kwargs)
-                run.children.append(service_run)
-                Session.commit()
                 results = service_run.run(payload)
                 status = "success" if results["success"] else "failed"
                 if not device and not track_devices:

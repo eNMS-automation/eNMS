@@ -1913,7 +1913,7 @@
 - auto_find_prompt: true
   close_connection: false
   color: '#D2E5FF'
-  command: show vrf {{get_result("Payload editor, with device")["endtime"]}}
+  command: show vrf {{get_result("Payload editor, with device")["duration"]}}
   config_mode: false
   content_match: ''
   content_match_regex: false

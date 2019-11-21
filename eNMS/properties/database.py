@@ -11,7 +11,7 @@ dont_track_changes = [
     "positions",
     "running",
     "runtime",
-    "endtime",
+    "duration",
     "state",
     "status",
     "success",

@@ -38,7 +38,7 @@ class Result(AbstractBase):
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
     runtime = Column(SmallString)
-    endtime = Column(SmallString)
+    duration = Column(SmallString)
     result = Column(MutableDict)
     run_id = Column(Integer, ForeignKey("run.id"))
     run = relationship("Run", back_populates="results", foreign_keys="Result.run_id")
@@ -65,7 +65,7 @@ class Result(AbstractBase):
     def __init__(self, **kwargs):
         self.success = kwargs["result"]["success"]
         self.runtime = kwargs["result"]["runtime"]
-        self.endtime = kwargs["result"]["endtime"]
+        self.duration = kwargs["result"]["duration"]
         super().__init__(**kwargs)
         self.parent_runtime = self.run.parent_runtime
 
@@ -99,7 +99,7 @@ class Run(AbstractBase):
     success = Column(Boolean, default=False)
     status = Column(SmallString, default="Running")
     runtime = Column(SmallString)
-    endtime = Column(SmallString)
+    duration = Column(SmallString)
     parent_id = Column(Integer, ForeignKey("run.id"))
     parent = relationship(
         "Run", remote_side=[id], foreign_keys="Run.parent_id", back_populates="children"
@@ -260,6 +260,7 @@ class Run(AbstractBase):
     def run(self, payload=None):
         self.init_state()
         self.run_state["status"] = "Running"
+        start_time = datetime.now()
         if payload is None:
             payload = self.service.initial_payload
         try:
@@ -282,7 +283,7 @@ class Run(AbstractBase):
             if self.run_state["success"] is not False:
                 self.run_state["success"] = results["success"]
             app.service_db[self.service.id]["runs"] -= 1
-            results["endtime"] = self.endtime = app.get_time()
+            results["duration"] = str(datetime.now() - start_time)
             results["logs"] = app.run_logs.pop(self.runtime, None)
             if self.runtime == self.parent_runtime:
                 self.state = results["state"] = app.run_db.pop(self.runtime)
@@ -407,6 +408,7 @@ class Run(AbstractBase):
 
     def get_results(self, payload, device=None):
         self.log("info", "STARTING", device)
+        start_time = datetime.now()
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":
@@ -431,7 +433,7 @@ class Run(AbstractBase):
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
             self.log("error", chr(10).join(format_exc().splitlines()), device)
-        results["endtime"] = app.get_time()
+        results["duration"] = str(datetime.now() - start_time)
         if device:
             status = "success" if results["success"] else "failure"
             self.run_state["progress"]["device"][status] += 1

@@ -46,7 +46,7 @@ event_table_properties = ["name", "service_name", "log_source", "log_content"]
 
 run_table_properties = [
     "runtime",
-    "endtime",
+    "duration",
     "service_name",
     "workflow_name",
     "status",
@@ -55,7 +55,7 @@ run_table_properties = [
 
 result_table_properties = [
     "runtime",
-    "endtime",
+    "duration",
     "workflow_name",
     "service_name",
     "parent_device_name",

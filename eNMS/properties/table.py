@@ -42,7 +42,7 @@ server_table_properties = [
 
 changelog_table_properties = ["time", "user", "severity", "content"]
 
-event_table_properties = ["name", "log_source", "log_content"]
+event_table_properties = ["name", "service_name", "log_source", "log_content"]
 
 run_table_properties = [
     "runtime",

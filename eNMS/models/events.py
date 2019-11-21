@@ -10,7 +10,6 @@ from eNMS import app
 from eNMS.database import Session
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.associations import (
-    service_event_table,
     task_device_table,
     task_pool_table,
 )
@@ -206,9 +205,9 @@ class Task(AbstractBase):
 
 class Changelog(AbstractBase):
 
-    __tablename__ = "baselog"
+    __tablename__ = "changelog"
     type = Column(SmallString)
-    __mapper_args__ = {"polymorphic_identity": "baselog", "polymorphic_on": type}
+    __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     time = Column(SmallString)
     content = Column(LargeString, default="")
@@ -230,7 +229,7 @@ class Event(AbstractBase):
     log_content = Column(SmallString)
     log_content_regex = Column(Boolean, default=False)
     service_id = Column(Integer, ForeignKey("service.id"))
-    service = relationship("Service", back_populates="tasks")
+    service = relationship("Service", back_populates="events")
     service_name = association_proxy("service", "name")
 
     def generate_row(self):

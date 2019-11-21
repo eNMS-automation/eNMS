@@ -44,13 +44,6 @@ task_pool_table = Table(
     Column("task_id", Integer, ForeignKey("task.id")),
 )
 
-service_event_table = Table(
-    "service_event_association",
-    Base.metadata,
-    Column("service_id", Integer, ForeignKey("service.id")),
-    Column("event_id", Integer, ForeignKey("event.id")),
-)
-
 service_workflow_table = Table(
     "service_workflow_association",
     Base.metadata,

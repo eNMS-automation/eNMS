@@ -5,7 +5,6 @@ from eNMS import app
 from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
 from eNMS.database.associations import (
     service_device_table,
-    service_event_table,
     service_pool_table,
     service_workflow_table,
 )
@@ -47,9 +46,6 @@ class Service(AbstractBase):
     )
     pools = relationship(
         "Pool", secondary=service_pool_table, back_populates="services"
-    )
-    events = relationship(
-        "Event", secondary=service_event_table, back_populates="services"
     )
     send_notification = Column(Boolean, default=False)
     send_notification_method = Column(SmallString, default="mail")

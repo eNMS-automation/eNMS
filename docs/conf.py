@@ -31,7 +31,7 @@ pygments_style = "sphinx"
 # A list of ignored prefixes for module index sorting.
 modindex_common_prefix = []
 
-html_theme_options = {'navigation_depth': 4}
+html_theme_options = {"navigation_depth": 4}
 
 # -- Options for HTML output ---------------------------------------------------
 

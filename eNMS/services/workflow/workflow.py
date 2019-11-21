@@ -96,8 +96,11 @@ class Workflow(Service):
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
+        track_devices = self.run_method == "per_service_with_workflow_targets"
         services = [fetch("service", id=id) for id in run.start_services]
         visited, success = set(), False
+        if track_devices:
+            targets = {service.name: run.devices for service in services}
         while services:
             if run.stop:
                 return {"payload": payload, "success": False}
@@ -125,6 +128,8 @@ class Workflow(Service):
                 }
                 if device:
                     kwargs["devices"] = [device.id]
+                elif track_devices:
+                    kwargs["devices"] = targets[service.name]
                 service_run = factory("run", **kwargs)
                 service_results = service_run.run(payload)
                 status = "passed" if service_results["success"] else "failed"
@@ -155,7 +160,14 @@ class WorkflowForm(ServiceForm):
         "Run Method",
         choices=(
             ("per_device", "Run the workflow device by device"),
-            ("per_service", "Run the workflow service by service"),
+            (
+                "per_service_with_workflow_targets",
+                "Run the workflow service by service using workflow targets",
+            ),
+            (
+                "per_service_with_service_targets",
+                "Run the workflow service by service using service targets",
+            ),
         ),
     )
 

@@ -45,7 +45,8 @@ class DataBackupService(ConnectionService):
                         result = sub(r["pattern"], r["replace_with"], result, flags=M)
                 else:
                     result = f"\n\n".join(
-                        f"{cmd['command']}\n" + "\n".join(
+                        f"{cmd['command']}\n"
+                        + "\n".join(
                             f"{cmd['prefix']} - {line}" if cmd["prefix"] else line
                             for line in netmiko_connection.send_command(
                                 cmd["command"]

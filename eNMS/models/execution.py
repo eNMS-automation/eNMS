@@ -1,6 +1,7 @@
 from builtins import __dict__ as builtins
 from collections import defaultdict
 from copy import deepcopy
+from datetime import datetime
 from functools import partial
 from json import dumps, loads
 from json.decoder import JSONDecodeError
@@ -260,7 +261,7 @@ class Run(AbstractBase):
     def run(self, payload=None):
         self.init_state()
         self.run_state["status"] = "Running"
-        start_time = datetime.now()
+        start = datetime.now().replace(microsecond=0)
         if payload is None:
             payload = self.service.initial_payload
         try:
@@ -283,7 +284,7 @@ class Run(AbstractBase):
             if self.run_state["success"] is not False:
                 self.run_state["success"] = results["success"]
             app.service_db[self.service.id]["runs"] -= 1
-            results["duration"] = str(datetime.now() - start_time)
+            results["duration"] = self.duration = str(datetime.now().replace(microsecond=0) - start)
             results["logs"] = app.run_logs.pop(self.runtime, None)
             if self.runtime == self.parent_runtime:
                 self.state = results["state"] = app.run_db.pop(self.runtime)
@@ -408,7 +409,7 @@ class Run(AbstractBase):
 
     def get_results(self, payload, device=None):
         self.log("info", "STARTING", device)
-        start_time = datetime.now()
+        start = datetime.now().replace(microsecond=0)
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":
@@ -433,7 +434,7 @@ class Run(AbstractBase):
                 {"success": False, "result": chr(10).join(format_exc().splitlines())}
             )
             self.log("error", chr(10).join(format_exc().splitlines()), device)
-        results["duration"] = str(datetime.now() - start_time)
+        results["duration"] = str(datetime.now().replace(microsecond=0) - start)
         if device:
             status = "success" if results["success"] else "failure"
             self.run_state["progress"]["device"][status] += 1

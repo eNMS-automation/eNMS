@@ -294,10 +294,10 @@ class Run(AbstractBase):
                 "run": self.properties,
                 "service": self.service.get_properties(exclude=["positions"]),
             }
-            if self.send_notification:
-                results = self.notify(results)
             if self.runtime == self.parent_runtime or len(self.devices) > 1:
                 results["summary"] = self.run_state.pop("summary", None)
+            if self.send_notification:
+                results = self.notify(results)
                 self.create_result(results)
             Session.commit()
         return results

@@ -12,7 +12,7 @@ from eNMS.database.base import AbstractBase
 from eNMS.database.functions import fetch
 from eNMS.models.inventory import Device  # noqa: F401
 from eNMS.models.execution import Run  # noqa: F401
-from eNMS.models.events import Task  # noqa: F401
+from eNMS.models.scheduling import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
 
 

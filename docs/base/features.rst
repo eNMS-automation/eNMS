@@ -7,7 +7,7 @@ Creation of the network
 
 Your network topology can be created manually or imported from an
 external Source of Truth (OpenNMS, LibreNMS, or Netbox).
-Once created, it is are displayed in a sortable and searchable table.
+Once created, it is displayed in a sortable and searchable table.
 A dashboard provides a graphical overview of your network with dynamic charts.
 
 .. image:: /_static/base/features/inventory.png
@@ -21,9 +21,9 @@ A dashboard provides a graphical overview of your network with dynamic charts.
 Network visualization
 ---------------------
 
-Once created, eNMS can display your network on a world map with either Google Map
-or Open Street Map. Each device is displayed on the map at its GPS coordinates.
-You can click on a device to display its properties or start a Web SSH terminal session.
+eNMS can display your network on a world map (Google Map or Open Street Map).
+Each device is displayed on the map at its GPS coordinates.
+You can click on a device to display its properties, configuration, or start a Web SSH terminal session.
 
 .. image:: /_static/inventory/network_visualization/network_view.png
   :alt: Geographical View
@@ -39,8 +39,8 @@ and displayed logically with a force-directed layout.
 Workflows
 ---------
 
-Services can be combined into a single workflow.
-When a workflow is executed, its status will be updated in real-time on the web UI.
+Services can be combined into a workflow.
+When a workflow is executed, its status is updated in real-time on the web UI.
 
 .. image:: /_static/base/features/workflow.png
   :alt: Workflow Builder
@@ -60,7 +60,9 @@ a start date and an end date. All scheduled tasks are displayed in a calendar.
 Configuration Management
 ------------------------
 
-eNMS can work as a network device configuration backup tool and replace Oxidized/Rancid with the following features:
+eNMS can work as a network device configuration backup tool and replace
+Oxidized/Rancid with the following features:
+
   - Poll network elements and store the latest configuration in the database
   - Search for any text or regular-expression in all configurations
   - Download device configuration to a local text file
@@ -71,5 +73,8 @@ Event-driven automation
 -----------------------
 
 Event-driven automation in eNMS has two aspects:
-  - eNMS has a REST API that can be used to create, update and delete any type of objects, but also to trigger the execution of a service or a workflow. 
-  - eNMS can be configured as a Syslog server, and rules can be created for syslog messges to trigger the execution of a service or a workflow.
+
+  - eNMS has a REST API that can be used to create, update and delete any type of objects,
+    but also to trigger the execution of a service or a workflow. 
+  - eNMS can be configured as a Syslog server, and rules can be created for syslog messges
+    to trigger the execution of a service or a workflow.

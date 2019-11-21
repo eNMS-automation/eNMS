@@ -143,7 +143,7 @@ class Workflow(Service):
                 service_run = factory("run", **kwargs)
                 results = service_run.run(payload)
                 status = "success" if results["success"] else "failed"
-                if not device:
+                if not device and not track_devices:
                     run.run_state["progress"]["service"][status] += 1
             successors = []
             if track_devices:

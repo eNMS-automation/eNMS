@@ -2,7 +2,7 @@ from collections import defaultdict
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
 from time import sleep
-from wtforms import BooleanField, HiddenField
+from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.database import Session
 from eNMS.database.base import AbstractBase
@@ -27,7 +27,6 @@ class Workflow(Service):
     edges = relationship(
         "WorkflowEdge", back_populates="workflow", cascade="all, delete-orphan"
     )
-    traversal_method = Column(SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "workflow"}
 
@@ -153,7 +152,7 @@ class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
     close_connection = BooleanField(default=False)
     run_method = SelectField(
-        "Traversal Method",
+        "Run Method",
         choices=(
             ("per_device", "Run the workflow device by device"),
             ("per_service", "Run the workflow service by service"),

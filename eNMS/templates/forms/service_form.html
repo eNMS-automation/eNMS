@@ -186,7 +186,9 @@
               aria-labelledby="heading-{{ group_id }}"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {% for field_name in group.commands %} {% if
+                {% for field_name in group.commands %} 
+                {% if field_name == "run_method" %}
+                {% elif
                 form[field_name].type == "BooleanField" %}
                 <fieldset>
                   <div class="item">
@@ -259,6 +261,11 @@
         </div>
       </div>
       <div id="step-4" style="min-height: 300px">
+        <label for="run_method">Run method</label>
+        <div class="form-group">
+          {{ form.run_method(id=form_type + '-run_method', class="form-control
+          add-id no-search") }}
+        </div>
         <label for="devices">Devices</label>
         <div class="form-group">
           {{ form.devices(id=form_type + '-devices', class="form-control

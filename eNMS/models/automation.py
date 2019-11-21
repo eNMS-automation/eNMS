@@ -76,7 +76,7 @@ class Service(AbstractBase):
     dict_match = Column(MutableDict)
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
-    run_method = Column(SmallString)
+    run_method = Column(SmallString, default="per_device")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

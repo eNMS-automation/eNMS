@@ -125,6 +125,7 @@ class BaseController:
         "get_runtimes",
         "get_view_topology",
         "get_service_state",
+        "get_top_level_workflows",
         "get_workflow_results",
         "get_workflow_services",
         "import_service",

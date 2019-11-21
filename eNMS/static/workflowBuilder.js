@@ -822,7 +822,7 @@ function getWorkflowState(periodic) {
   $("#edge-type").on("change", function() {
     switchMode(this.value);
   });
-  call("/get_all/workflow", function(workflows) {
+  call("/get_top_level_workflows", function(workflows) {
     workflows.sort((a, b) => a.name.localeCompare(b.name));
     for (let i = 0; i < workflows.length; i++) {
       $("#current-workflow").append(

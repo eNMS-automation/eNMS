@@ -733,13 +733,13 @@ function displayWorkflowState(result) {
     const progress = result.state.progress[mode];
     $("#progress").show();
     $("#progress-success").width(
-      `${(progress.passed * 100) / progress.total}%`
+      `${(progress.success * 100) / progress.total}%`
     );
     $("#progress-failure").width(
-      `${(progress.failed * 100) / progress.total}%`
+      `${(progress.failure * 100) / progress.total}%`
     );
-    if (progress.passed) $("#progress-success-span").text(progress.passed);
-    if (progress.failed) $("#progress-failure-span").text(progress.failed);
+    if (progress.success) $("#progress-success-span").text(progress.success);
+    if (progress.failure) $("#progress-failure-span").text(progress.failure);
     $("#status").text(`Status: ${result.state.status}`);
     if (result.state.services) {
       $.each(result.state.services, (id, state) => {
@@ -755,10 +755,10 @@ function displayWorkflowState(result) {
           if (progress.total) {
             let label = `<b>${nodes.get(id).name}</b>\n`;
             label += "—————\n";
-            let progressLabel = `Progress - ${progress.passed +
-              progress.failed}/${progress.total}`;
-            progressLabel += ` (${progress.passed} passed, ${
-              progress.failed
+            let progressLabel = `Progress - ${progress.success +
+              progress.failure}/${progress.total}`;
+            progressLabel += ` (${progress.success} passed, ${
+              progress.failure
             } failed)`;
             label += progressLabel;
             nodes.update({

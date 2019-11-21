@@ -185,8 +185,8 @@ class Run(AbstractBase):
             progress = self.run_state["progress"]["device"]
             try:
                 return (
-                    f"{progress['passed'] + progress['failed']}/{progress['total']}"
-                    f" ({progress['failed']} failed)"
+                    f"{progress['success'] + progress['failure']}/{progress['total']}"
+                    f" ({progress['failure']} failed)"
                 )
             except KeyError:
                 return "N/A"
@@ -229,20 +229,20 @@ class Run(AbstractBase):
         state = {
             "status": "Idle",
             "success": None,
-            "progress": {"device": {"total": 0, "passed": 0, "failed": 0}},
+            "progress": {"device": {"total": 0, "success": 0, "failure": 0}},
             "attempt": 0,
             "waiting_time": {
                 "total": self.service.waiting_time,
                 "left": self.service.waiting_time,
             },
-            "summary": {"passed": [], "failed": []},
+            "summary": {"success": [], "failure": []},
         }
         if self.service.type == "workflow":
             state.update({"edges": defaultdict(int), "services": defaultdict(dict)})
             state["progress"]["service"] = {
                 "total": len(self.service.services),
-                "passed": 0,
-                "failed": 0,
+                "success": 0,
+                "failure": 0,
                 "skipped": 0,
             }
         if self.runtime == self.parent_runtime:
@@ -430,7 +430,7 @@ class Run(AbstractBase):
             self.log("error", chr(10).join(format_exc().splitlines()), device)
         results["endtime"] = app.get_time()
         if device:
-            status = "passed" if results["success"] else "failed"
+            status = "success" if results["success"] else "failure"
             self.run_state["progress"]["device"][status] += 1
             self.run_state["summary"][status].append(device.name)
             self.create_result(results, device)
@@ -456,10 +456,10 @@ class Run(AbstractBase):
         if self.include_link_in_summary:
             address = app.config["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
-        if results["summary"]["failed"]:
-            notification["FAILED"] = results["failed"]
-        if results["summary"]["passed"] and not self.display_only_failed_nodes:
-            notification["PASSED"] = results["passed"]
+        if results["summary"]["failure"]:
+            notification["FAILED"] = results["failure"]
+        if results["summary"]["success"] and not self.display_only_failed_nodes:
+            notification["PASSED"] = results["success"]
         return notification
 
     def notify(self, results):

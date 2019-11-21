@@ -229,9 +229,9 @@ class Event(AbstractBase):
     log_source_regex = Column(Boolean, default=False)
     log_content = Column(SmallString)
     log_content_regex = Column(Boolean, default=False)
-    services = relationship(
-        "Service", secondary=service_event_table, back_populates="events"
-    )
+    service_id = Column(Integer, ForeignKey("service.id"))
+    service = relationship("Service", back_populates="tasks")
+    service_name = association_proxy("service", "name")
 
     def generate_row(self):
         return super().generate_row() + [
@@ -270,5 +270,4 @@ class Event(AbstractBase):
             else self.log_content in content
         )
         if source_match and content_match:
-            for service in self.services:
-                service.run()
+            self.service.run()

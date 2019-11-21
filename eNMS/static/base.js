@@ -89,7 +89,6 @@ const panelName = {
   changelog_filtering: "Changelog Filtering",
   pool_filtering: "Pool Filtering",
   service_filtering: "Service Filtering",
-  syslog_filtering: "Syslog Filtering",
   task_filtering: "Task Filtering",
   user_filtering: "User Filtering",
   workflow_filtering: "Workflow Filtering",
@@ -105,7 +104,6 @@ function doc(page) {
     "table/device": "inventory/objects.html",
     "table/event": "events/index.html",
     "table/link": "inventory/objects.html",
-    "table/syslog": "events/logs.html",
     "table/changelog": "events/logs.html",
     "table/pool": "inventory/pool_management.html",
     "table/run": "services/index.html",
@@ -586,7 +584,7 @@ function initTable(type, instance, runtime) {
     },
   });
   createSearchHeaders(type);
-  if (["changelog", "syslog", "run", "result"].includes(type)) {
+  if (["changelog", "run", "result"].includes(type)) {
     tables[type].order([0, "desc"]).draw();
   }
   if (type == "service") {

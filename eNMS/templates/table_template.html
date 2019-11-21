@@ -11,7 +11,7 @@
     >
       <select id="service-type" class="form-control"></select>
     </button>
-    {% endif %} {% if type not in ("run", "result", "syslog") %} {% set func =
+    {% endif %} {% if type not in ("run", "result") %} {% set func =
     "openServicePanel" if type == "service" else "showTypePanel" %}
     <button
       class="btn btn-primary"

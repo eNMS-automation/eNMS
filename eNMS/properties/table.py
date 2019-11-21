@@ -40,8 +40,6 @@ server_table_properties = [
     "cpu_load",
 ]
 
-syslog_table_properties = ["time", "source", "content"]
-
 changelog_table_properties = ["time", "user", "severity", "content"]
 
 event_table_properties = ["name", "log_source", "log_content"]
@@ -90,7 +88,6 @@ table_properties = {
     "run": run_table_properties,
     "server": server_table_properties,
     "service": service_table_properties,
-    "syslog": syslog_table_properties,
     "task": task_table_properties,
     "user": user_table_properties,
 }
@@ -122,7 +119,6 @@ filtering_properties = {
     "run": run_table_properties[:-1],
     "server": server_table_properties,
     "service": service_filtering_properties,
-    "syslog": syslog_table_properties,
     "task": task_table_properties[:-2],
     "user": user_table_properties,
 }
@@ -136,7 +132,6 @@ table_fixed_columns = {
     "result": ["Result", "V1", "V2"],
     "server": [""],
     "service": ["Status", ""],
-    "syslog": [],
     "task": [""],
     "user": [""],
     "pool": [""],

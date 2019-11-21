@@ -32,6 +32,7 @@ class Service(AbstractBase):
     time_between_retries = Column(Integer, default=10)
     positions = Column(MutableDict)
     tasks = relationship("Task", back_populates="service", cascade="all,delete")
+    events = relationship("Event", back_populates="service", cascade="all,delete")
     vendor = Column(SmallString)
     operating_system = Column(SmallString)
     waiting_time = Column(Integer, default=0)

@@ -95,48 +95,125 @@ that user gets added to eNMS locally.
   In the event that services are already scheduled with User Credentials, these might fail if the credentials
   are not updated in eNMS.
 
-GIT Integration
----------------
+Configuration
+-------------
 
-.. literalinclude:: ../config.json
-   :language: json
-   :linenos:
-   :emphasize-lines: 14
-   :caption: Object description
+The configuration is divided into:
+  - private variables (passwords, tokens, keys) set as environment variables.
+  - public variables defined in the ``config.json`` file.
 
-Git is used as a version control system for device configurations.
-Set the ``git_repository`` variable in `config.json` to the URL of your remote git repository.
+Public configuration
+********************
 
+.. code-block:: python
+  {
+    "app": {
+      "address": "",
+      "config_mode": "debug",
+      "create_examples": true,
+      "documentation_url": "https://enms.readthedocs.io/en/latest/",
+      # Gunicorn log level
+      "log_level": "debug",
 
-Default Examples
-----------------
+      # Git is used as a version control system for device configurations.
+      "git_repository": ""
+    },
+    "cluster": {
+      "active": false,
+      "id": true,
+      "scan_subnet": "192.168.105.0/24",
+      "scan_protocol": "http",
+      "scan_timeout": 0.05
+    },
+    "database": {
+      "url": "sqlite:///database.db?check_same_thread=False",
+      "max_overflow": 10,
+      "pool_size": 1000,
+      "small_string_length": 255,
+      "large_string_length": 32768
+    },
+    "gotty": {
+      "port_redirection": false,
+      "bypass_key_prompt": true,
+      "port": -1,
+      "start_port": 9000,
+      "end_port": 9100
+    },
+    "ldap": {
+      "active": false,
+      "server": "ldap://domain.ad.company.com",
+      "userdn": "domain.ad.company.com",
+      "basedn": "DC=domain,DC=ad,DC=company,DC=com",
+      "admin_group": "eNMS.Users,network.Admins"
+    },
+    "mail": {
+      "server": "smtp.googlemail.com",
+      "port": 587,
+      "use_tls": true,
+      "username": "eNMS-user",
+      "sender": "eNMS@company.com",
+      "recipients": "eNMS-user@company.com"
+    },
+    "mattermost": {
+      "url": "https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w",
+      "channel": "",
+      "verify_certificate": true
+    },
+    "opennms": {
+      "opennms_login": "",
+      "opennms_devices": "",
+      "opennms_rest_api": ""
+    },
+    "paths": {
+      "custom_code": "",
+      "custom_properties": "",
+      "custom_services": "",
+      "playbooks": ""
+    },
+    "requests": {
+      "pool": {
+        "pool_connections": 10,
+        "pool_maxsize": 100,
+        "pool_block": false
+      },
+      "retries": {
+        "total": 2,
+        "read": 2,
+        "connect": 2,
+        "backoff_factor": 0.5
+      }
+    },
+    "slack": {
+      "channel": ""
+    },
+    "syslog": {
+      "active": false,
+      "address": "0.0.0.0",
+      "port": 514
+    },
+    "tacacs": {
+      "active": false,
+      "address": ""
+    },
+    "vault": {
+      "active": false,
+      "address": "http://127.0.0.1:8200",
+      "unseal": false
+    },
+    "view": {
+      "longitude": -96.0,
+      "latitude": 33.0,
+      "zoom_level": 5,
+      "tile_layer": "osm",
+      "marker": "Image"
+    }
+  }
 
-By default, eNMS will create a few examples of each type of object (devices, links, services, workflows...).
-If you run eNMS in production, you might want to deactivate this.
-
-To deactivate, set the ``create_examples`` variable to `false`.
-
-Logging
--------
-
-You can configure eNMS as well as Gunicorn log level in the configuration with the `log_level` variable.
-
-Change the documentation base URL
----------------------------------
-
-If you prefer to host your own version of the documentation, you can set the ``documentation_url`` variable in the configuration.
-By default, this variable is set to https://enms.readthedocs.io/en/latest/: it points to the online documentation.
-
-Complete List of Environment Variables
---------------------------------------
-
-Below is a reference list of environment variables used to configure eNMS.
-All sensitive information have to be exported as environment variables.
-They are not stored in the configuration file ``config.json``.
+Private configuration
+*********************
 
 ::
 
-  - export FLASK_APP=app.py
   - export SECRET_KEY=your_secret_key123
   - export VAULT_TOKEN=e1c70d27-7c7f-6f6a-fb18-b0c0382667b7
   - export UNSEAL_VAULT_KEY1=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
@@ -148,3 +225,19 @@ They are not stored in the configuration file ``config.json``.
   - export TACACS_PASSWORD=tacacs_password
   - export OPENNMS_PASSWORD=opennms_password
   - export SLACK_TOKEN=SLACK_TOKEN
+
+
+Default Examples
+----------------
+
+By default, eNMS will create a few examples of each type of object (devices, links, services, workflows...).
+If you run eNMS in production, you might want to deactivate this.
+
+To deactivate, set the ``create_examples`` variable to `false`.
+
+Change the documentation base URL
+---------------------------------
+
+If you prefer to host your own version of the documentation, you can set the ``documentation_url`` variable in the configuration.
+By default, this variable is set to https://enms.readthedocs.io/en/latest/: it points to the online documentation.
+

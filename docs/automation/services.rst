@@ -71,10 +71,34 @@ Validation
 Notification
 ************
 
-- ``Send Notification`` Enable sending results notification checkbox
-- ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
-- ``Display only failed nodes`` Include only the failed devices in the email notification body summary
-- ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
+Type of notification
+********************
+
+When a service (or a workflow) finishes, you can choose to receive a notification that contains the logs of the service (whether it was successful or not for each device, etc).
+
+There are three types of notification:
+
+- Mail notification: eNMS sends a mail to an address of your choice.
+- Slack notification: eNMS sends a message to a channel of your choice.
+- Mattermost notification: same as Slack, with Mattermost.
+
+To set up the mail system, you must set the following variables in the configuration:
+``server``, ``port``, ``use_tls``, ``username``, ``sender``, ``recipients``.
+Besides, you must set the password via the ``MAIL_PASSWORD`` environment variable.
+
+The ``Mail Recipients`` parameter must be set for the mail system to work; the `Admin / Administration` panel parameter can
+also be overriden from Step2 of the Service Instance and Workflow configuration panels. For Mail notification, there is
+also an option in the Service Instance configuration to display only failed objects in the email summary versus seeing a
+list of all passed and failed objects.
+
+In Mattermost, if the ``Mattermost Channel`` is not set, the default ``Town Square`` will be used.
+
+- "Send notification" Enable sending results notification checkbox
+- "Notification Method": choose among mail, slack or mattermost.
+- "Notification header": will be displayed at the beginning of the notification.
+- "Include Result Link in summary": whether the notification contains a link to the results.
+- "Mail recipients": (separated by comma) if left empty, the recipients defined in the administration panel will be used.
+- "Display only failed nodes": the notification will not include devices for which the service ran successfully.
 
 Variable substitution
 ---------------------
@@ -113,8 +137,8 @@ The validation can consist in:
 
 In addition to text matching, for some services where output is either expected in JSON/dictionary format, or where expected XML output can be converted to dictionary format, matching against a dictionary becomes possible:
 
-- Dictionary matching can be by inclusion:  Are my provided key:value pairs included in the output?
-- Dictionary matching can be by equality: Are my provided key:value pairs exactly matching the output key:value pairs?
+- Dictionary matching can be by inclusion:  Are all "key:value" pairs included in the output?
+- Dictionary matching can be by equality: Are all provided "key:value" pairs exactly matching the output key:value pairs?
 
 A few options are available to the user:
 

@@ -56,26 +56,6 @@ until the next run.
 
 Also, newly created tasks are set to Paused by default unless the 'Schedule task' checkbox is selected in the Create Task panel.
 
-.. note:: 
-
-  Crontab expression consists of a string of five numbers:  A  B  C  D  E   where:
-
-  - A is minute 0-59
-  - B is hour 0-23
-  - C is day of the month 1-31
-  - D is month 1-12
-  - E is day of the week 0-6 (Sunday to Saturday)
-
-  and where any of the fields can be defaulted to any with wildcard '*', and there are some extra special characters for defining repetition (see reference).
-
-.. note:: Examples of crontab expressions:
-
-  - ``*/5 1-2 * * *``   every 5 minutes between the hours of 1:00 and 2:00 am
-  - ``*/1 * * * *``     every minute
-  - ``30 4 1 * 0,6``	at 4:30 on the 1st day of every month, plus on Sun and Sat
-  - ``00,30 * * * *``   at 00 and 30 minutes past every hour
-  - ``30 9 * * * *``    at 9:30 am every day
-
 Targets and payload
 *******************
 
@@ -105,5 +85,3 @@ For an incoming Syslog message to match the rule, both the "Source IP" and "Cont
 The match can be configured to be a regular expression.
 
 .. note:: When a field is left blank, it is considered a match.
-
-Whenever a log matches a rule ad triggers a service, it will be indicated in the results.

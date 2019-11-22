@@ -374,7 +374,7 @@ function displayCalendar(calendarType) {
           if (calendarType == "task") {
             showTypePanel("task", e.id);
           } else {
-            showRuntimePanel("results", e.service, e.title, e.runtime);
+            showRuntimePanel('results', e.service, e.runtime);
           }
         },
         editable: true,

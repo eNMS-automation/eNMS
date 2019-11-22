@@ -474,15 +474,17 @@ class Run(AbstractBase):
         notification = self.build_notification(results)
         file_content = deepcopy(notification)
         if self.include_device_results:
-            file_content["Device Results"] = {
-                device.name: fetch(
+            file_content["Device Results"] = {}
+            for device in self.devices:
+                device_result = fetch(
                     "result",
                     service_id=self.service_id,
                     parent_runtime=self.parent_runtime,
                     device_id=device.id,
-                ).result
-                for device in self.devices
-            }
+                    allow_none=True,
+                )
+                if device_result:
+                    file_content["Device Results"][device.name] = device_result.result
         try:
             if self.send_notification_method == "mail":
                 filename = self.runtime.replace(".", "").replace(":", "")

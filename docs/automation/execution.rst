@@ -1,6 +1,6 @@
-=========
-Execution
-=========
+========================
+Execution and Scheduling
+========================
 
 Running a service
 -----------------
@@ -28,33 +28,19 @@ starting with attempt2.
 Scheduling
 ----------
 
-Instead of running services immediately, they can be scheduled by creating a Task,
-from the :guilabel:`Scheduling / Tasks` page.
-
-You need to:
-
-- Choose a name.
-- Choose a scheduling mode: standard (start date / end date / frequency) or CRON.
-- Select the service that you want to execute.
-- Select a type of scheduling:
-  - Standard scheduling: choose a start date and optionally, choose a frequency
-    and an end date. If a ``Frequency`` is defined, the service will run periodically, in which case you
-    can also choose an ``End date`` if you want the task to automatically stop running.
-  - Cron scheduling: enter a crontab expression.
+Instead of running services immediately, they can be scheduled by creating a task, from :guilabel:`Scheduling / Tasks`.
+You need to enter a name, which service you want the task to execute, and a scheduling mode.
+There are two scheduling modes:
+  - Date Scheduling: enter a start date and optionally a frequency and an end date.
+    If a ``Frequency`` is defined without an end date, the service will keep running until manually stopped.
+  - Cron Scheduling: enter a crontab expression.
 
 .. image:: /_static/automation/execution/create_task.png
    :alt: Schedule from view
    :align: center
 
-Tasks are displayed in a table where they can be edited, duplicated, deleted, paused and resumed.
-Active tasks display the date that they will next be run by the Scheduler, as well as the amount of time
-until the next run.
-
-.. image:: /_static/automation/execution/task_management.png
-   :alt: Task management
-   :align: center
-
-Also, newly created tasks are set to Paused by default unless the 'Schedule task' checkbox is selected in the Create Task panel.
+Tasks can be paused and resumed. Active tasks display the date that they will next be run by the scheduler,
+as well as the amount of time left until then. Newly created tasks are set to pause by default.
 
 Targets and payload
 *******************

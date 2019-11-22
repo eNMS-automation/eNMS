@@ -99,22 +99,24 @@ Configuration
 -------------
 
 The configuration is divided into:
-  - private variables (passwords, tokens, keys) set as environment variables.
-  - public variables defined in the ``config.json`` file.
+
+- private variables (passwords, tokens, keys) set as environment variables.
+- public variables defined in the ``config.json`` file.
 
 Public configuration
 ********************
 
-.. code-block:: python
-  {
-    "app": {
-      "address": "",
-      "config_mode": "debug",
-      "create_examples": true,
-      "documentation_url": "https://enms.readthedocs.io/en/latest/",
-      # Gunicorn log level
-      "log_level": "debug",
+- Section ``app``
 
+  - ``address`` (default: ``""``) The address is needed when eNMS needs to provide a link back to the application,
+    which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
+    not work all the time depending on your environment (nginx configuration, proxy, ...)
+  - ``config_mode`` (default: ``"debug"``) Must be set to "debug" or "production".
+  - ``create_examples`` (default: ``true``)
+  - ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host a
+    customized version of the documentation locally.
+  - ``log_level`` (default: ``"debug"``) Gunicorn log level.
+  - ``
       # Git is used as a version control system for device configurations.
       "git_repository": ""
     },

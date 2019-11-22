@@ -86,28 +86,24 @@ A task can also have a payload (dictionary) that will be passed to the service w
 Syslog-triggered automation
 ---------------------------
 
-eNMS can be configured to receive Syslog, and run services upon receiving Syslog messages matching a user-defined pattern.
+eNMS can be configured to receive Syslog messages, and run a service upon receiving a message that
+matches a particular pattern.
 
-From :guilabel:`Events`, you can define "log rules":
+From :guilabel:`Scheduling / Events`, you can create these pattern-matching rules:
 
 .. image:: /_static/automation/logs/log_rule_creation.png
    :alt: Creation of a log rule
    :align: center
 
-A log rule is defined by the following properties:
-    - Name of the rule.
-    - Source IP: the IP address of the source, used to match a log received by eNMS against the log rule. This can also be a regular expression.
-    - Content: the content of the log, used to match a log received by eNMS against the log rule. This can also be a regular expression.
-    - Services: which services and workflows are triggered by eNMS when the rule is matched by an incoming log. A single log rule can have multiple services: they will be triggered sequentially by eNMS.
+A rule is defined by the following properties,
+  - Name
+  - Source IP: the IP address of the source.
+  - Content: the content of the log.
+  - Service: which service is triggered when the rule is matched by an incoming log.
 
 For an incoming Syslog message to match the rule, both the "Source IP" and "Content" fields must match.
+The match can be configured to be a regular expression.
 
 .. note:: When a field is left blank, it is considered a match.
 
-All log rules are listed in a table in :guilabel:`logs/log_automation`:
-
-.. image:: /_static/automation/logs/log_rule_table.png
-   :alt: Log Rule table
-   :align: center
-
-Whenever a log triggers a log rule, it is saved by eNMS in a separate table in :guilabel:`logs/log_management`.
+Whenever a log matches a rule ad triggers a service, it will be indicated in the results.

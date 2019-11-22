@@ -8,26 +8,12 @@ If a service is executed successfully, the workflow continues down the ``success
 it goes down the ``failure`` path.
 Workflows are created and managed from the :guilabel:`Workflow Builder`.
 
-Workflow Management
--------------------
-
-In the :guilabel:`Automation / Workflow Management` page, click on the button ``Create`` and fill the workflow creation form.
-The new workflow will be automatically added to the table of workflows.
-From the same page, workflows can be edited, deleted, and duplicated. They can also be ran, and their result logs examined.
-
-.. image:: /_static/automation/workflows/workflow_management.png
-   :alt: Workflow management
-   :align: center
-
-Workflows can also be created from the Workflow Builder page.
-
 Workflow Builder
 ----------------
 
-The :guilabel:`Automation/Workflow Builder` is the place where services (or other workflows) are organized into workflows.
-It contains:
+The workflow builder contains:
 
-- A drop-down list containing all existing workflows. This list allows switching between workflows.
+- A drop-down list containing all existing top-level workflows. This list allows switching between workflows.
 - The workflow itself is displayed as a graph. The  services are connected by arrows of type success edge or failure edge.
 - A ``general right-click menu`` can be accessed by clicking on the background or white-space.
 - A ``service-specific right-click menu`` can be accessed by right clicking on a specific service.

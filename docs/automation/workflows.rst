@@ -2,16 +2,11 @@
 Workflow System
 ===============
 
-A workflow is comprised of one or more services that when followed from start to end will execute an activity, such as a software upgrade. These services are constructed into a directed graph instructing the machine which service is next. The services in the workflow can be either a service or another workflow. A service can range from a simple query to a more complex set of commands.
-
-Each service in eNMS returns a boolean value:
-
-- ``True`` if it ran successfully.
-- ``False`` otherwise.
-
-There are two types of results from a workflow service: ``Success`` edge and ``Failure`` edge. If a service is executed as designed, it returns a success edge, and the workflow continues down the path to the next service as indicated in the graph. However, if a service returns atypical or correctable output it give us the failure edge, which takes a different path if provided in the graph, or stops the workflow when no path is provided in the graph. Each workflow must have a Start service and an End service for eNMS to know which service should be executed first and when to stop running the workflow.
-
-Workflows are created and managed from the :guilabel:`Automation / Workflow Management` and :guilabel:`Automation / Workflow Builder` page.
+A workflow is a graph of services connected with ``success`` and ``failure`` edges.
+Each service returns a ``success`` boolean value that indicates whether it ran successfully or not.
+If a service is executed successfully, the workflow continues down the ``success`` path to the next service, otherwise
+it goes down the ``failure`` path.
+Workflows are created and managed from the :guilabel:`Workflow Builder`.
 
 Workflow Management
 -------------------

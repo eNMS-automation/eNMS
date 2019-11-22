@@ -279,10 +279,13 @@ class Run(AbstractBase):
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             Session.commit()
+            results["summary"] = self.run_state.pop("summary", None)
             self.status = "Aborted" if self.stop else "Completed"
             self.run_state["status"] = self.status
             if self.run_state["success"] is not False:
                 self.run_state["success"] = results["success"]
+            if self.send_notification:
+                results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
             results["duration"] = self.duration = str(datetime.now().replace(microsecond=0) - start)
             results["logs"] = app.run_logs.pop(self.runtime, None)
@@ -295,9 +298,6 @@ class Run(AbstractBase):
                 "service": self.service.get_properties(exclude=["positions"]),
             }
             if self.runtime == self.parent_runtime or len(self.devices) > 1:
-                results["summary"] = self.run_state.pop("summary", None)
-            if self.send_notification:
-                results = self.notify(results)
                 self.create_result(results)
             Session.commit()
         return results
@@ -462,13 +462,15 @@ class Run(AbstractBase):
         if self.include_link_in_summary:
             address = app.config["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
-        if results["summary"]["failure"]:
-            notification["FAILED"] = results["failure"]
-        if results["summary"]["success"] and not self.display_only_failed_nodes:
-            notification["PASSED"] = results["success"]
+        if results["summary"]:
+            if results["summary"]["failure"]:
+                notification["FAILED"] = results["summary"]["failure"]
+            if results["summary"]["success"] and not self.display_only_failed_nodes:
+                notification["PASSED"] = results["summary"]["success"]
         return notification
 
     def notify(self, results):
+        self.log("info", f"Sending {self.send_notification_method} notification...")
         notification = self.build_notification(results)
         file_content = deepcopy(notification)
         if self.include_device_results:

@@ -16,38 +16,26 @@ Run eNMS in test mode
  # install the requirements:
  pip install -r requirements.txt
 
-Start eNMS in debugging mode :
-
-::
-
  # set the FLASK_APP environment variable
  export FLASK_APP=app.py
 
- # (Optional) set the FLASK_DEBUG environment variable
- export FLASK_DEBUG=1
-
- # run the application
+ # start the application with Flask
  flask run --host=0.0.0.0
 
-Start eNMS with gunicorn :
-
-::
-
- # start gunicorn in command-line
+ # or with gunicorn
  gunicorn --config gunicorn.py app:app
 
-Run eNMS in Production (Unix only)
-----------------------------------
+Run eNMS in production
+----------------------
 
 To start eNMS in production mode, you must change the value of the  "config_mode" in the config.json file.
-The Flask secret key is used for securely signing the session cookie and other security related needs.
-In production mode, the secret key is not automatically set to a default value in case it is missing. Therefore, you must configure it yourself:
+In production mode, the secret key is not automatically set to a default value in case it is missing.
+Therefore, you must configure it yourself:
 
 ::
 
  # set the SECRET_KEY environment variable
  export SECRET_KEY=value-of-your-secret-key
-
 
 All credentials should be stored in a Hashicorp Vault: the config variable ``active``
 tells eNMS that a Vault has been setup and can be used.
@@ -82,18 +70,17 @@ You also have to tell eNMS the address of your database by setting the "DATABASE
 
 In case this environment variable is not set, eNMS will default to using a SQLite database.
 
-LDAP/Active Directory Integration
----------------------------------
+Authentication with LDAP/Active Directory
+-----------------------------------------
 
-The following configuration variables control how eNMS integrates with
-LDAP/Active Directory for user authentication:
-
+The following variables control how eNMS integrates with LDAP/Active Directory for user authentication:
   - ``active``: Set to ``true`` to enable LDAP authentication; otherwise ``false``
   - ``ldap_server``: LDAP Server URL (also called LDAP Provider URL):
-  - ``ldap_userdn``: LDAP Distinguished Name (DN) for the user. This gets combined inside eNMS as "domain.ad.company.com\\username" before being sent to the server.
+  - ``ldap_userdn``: LDAP Distinguished Name (DN) for the user. This gets combined inside eNMS as
+    "domain.ad.company.com\\username" before being sent to the server.
   - ``ldap_basedn``: LDAP base distinguished name subtree that is used when
-  searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF)
-  syntax for the entries.
+    searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF)
+    syntax for the entries.
   - ``ldap_admin_group``: string to match against 'memberOf' attributes of the matched user to determine if the user is allowed to log in.
 
 eNMS first checks to see if the user exists locally inside eNMS.
@@ -101,46 +88,34 @@ If not and if LDAP/Active Directory is enabled, eNMS tries to authenticate
 against LDAP/AD using the pure python ldap3 library, and if successful,
 that user gets added to eNMS locally.
 
-.. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in an 403 authentication error. An LDAP user MUST be a member of one of the "LDAP_ADMIN_GROUP" groups to authenticate.
-.. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage. In the event that services are already scheduled with User Credentials, these might fail if the credentials are not updated in eNMS.
-
+.. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in an 403 authentication error.
+  An LDAP user MUST be a member of one of the "LDAP_ADMIN_GROUP" groups to authenticate.
+.. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire
+  due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage.
+  In the event that services are already scheduled with User Credentials, these might fail if the credentials
+  are not updated in eNMS.
 
 GIT Integration
 ---------------
 
-To enable sending device configs captured by configuration management, as well as service and workflow service logs, to GIT for revision control you will need to configure the following:
-
-First, create two separate git projects in your repository. Assign a single GIT userid to have write access to both.
-
-Additionally, the following commands need to be run to properly configure GIT in the eNMS environment. These commands populate ~/.gitconfig:
+Git is used as a version control system for device configurations.
+You need to configure the URL of your remote git repository in `config.json`.
 
 ::
 
+  # populate populate ~/.gitconfig
   git config --global user.name "git_username"
   git config --global user.email "git_username_email@company.com"
   git config --global push.default simple
 
-Similarly, if your environment already has an SSH key created for other purposes, you will need to create a new SSH key to register with the GIT server:
-
-::
-
+  # Create a new SSH key to register on the git server
   ssh-keygen -t rsa -f ~/.ssh/id_rsa.git
 
-And to instruct SSH to use the new key when connecting with the GIT server, create an entry in ~/.ssh/config:
-
-::
-
+  # instruct SSH to use the new key when connecting with the GIT server, create an entry in ~/.ssh/config
   Host git-server
     Hostname git-server.company.com
     IdentityFile ~/.ssh/id_rsa.git
     IdentitiesOnly yes
-
-Additionally, the URLs of each of the GIT server repositories needs to be populated in the Administration Panel of the UI:
-  - for the Automation repository to be able tp store the results of services and workflows in git.
-  - for the Configurations repository to be able to store device configurations in git.
-
-.. note:: When setting up new groups/projects in GitLab, know that the Master branch by default is protected, and unfortunately in the current version of GitLab, it will not show you that it is protected until a file is added to the repository first. A trick is to press the 'Add README' convenience button in the GitLab UI; this will add a file. Then go to repository, protected branches, and set access rights for Masters and Developers and click 'Unprotect'.
-
 
 Default Examples
 ----------------

@@ -74,5 +74,3 @@ Oxidized/Rancid with the following features:
   - Download device configuration to a local text file
   - Use the REST API support to return a specified device’s configuration
   - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
-
-

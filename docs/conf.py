@@ -44,10 +44,6 @@ html_theme = "sphinx_rtd_theme"  # winner, mobile friendly
 # html_static_path. Default is the stylesheet given by the selected theme.
 html_style = "custom.css"
 
-# The name of an image file (relative to this directory) to place at the top
-# of the sidebar.
-html_logo = "logo.png"
-
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".

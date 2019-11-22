@@ -98,24 +98,15 @@ that user gets added to eNMS locally.
 GIT Integration
 ---------------
 
+.. literalinclude:: ../config.json
+   :language: json
+   :linenos:
+   :emphasize-lines: 14
+   :caption: Object description
+
 Git is used as a version control system for device configurations.
-You need to configure the URL of your remote git repository in `config.json`.
+Set the ``git_repository`` variable in `config.json` to the URL of your remote git repository.
 
-::
-
-  # populate populate ~/.gitconfig
-  git config --global user.name "git_username"
-  git config --global user.email "git_username_email@company.com"
-  git config --global push.default simple
-
-  # Create a new SSH key to register on the git server
-  ssh-keygen -t rsa -f ~/.ssh/id_rsa.git
-
-  # instruct SSH to use the new key when connecting with the GIT server, create an entry in ~/.ssh/config
-  Host git-server
-    Hostname git-server.company.com
-    IdentityFile ~/.ssh/id_rsa.git
-    IdentitiesOnly yes
 
 Default Examples
 ----------------
@@ -123,13 +114,12 @@ Default Examples
 By default, eNMS will create a few examples of each type of object (devices, links, services, workflows...).
 If you run eNMS in production, you might want to deactivate this.
 
-To deactivate, set the ``create_examples`` config parameter to `false`.
+To deactivate, set the ``create_examples`` variable to `false`.
 
 Logging
 -------
 
-You can configure eNMS as well as Gunicorn log level in the configuration with the `log_level`
-variable.
+You can configure eNMS as well as Gunicorn log level in the configuration with the `log_level` variable.
 
 Change the documentation base URL
 ---------------------------------

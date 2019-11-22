@@ -46,16 +46,22 @@ When a workflow is executed, its status is updated in real-time on the web UI.
   :alt: Workflow Builder
   :align: center
 
-Scheduling
-----------
+Event-driven automation
+-----------------------
 
-While services and workflows can be run directly and immediately from the web UI,
+While services can be run directly and immediately from the web UI,
 you can also schedule them to run at a later time, or periodically by defining a frequency,
 a start date and an end date. All scheduled tasks are displayed in a calendar.
 
 .. image:: /_static/base/features/calendar.png
   :alt: Calendar
   :align: center
+
+Services can also be executed programmatically:
+  - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,
+    but also to trigger the execution of a service.
+  - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
+    to trigger the execution of a service.
 
 Configuration Management
 ------------------------
@@ -69,12 +75,4 @@ Oxidized/Rancid with the following features:
   - Use the REST API support to return a specified device’s configuration
   - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
 
-Event-driven automation
------------------------
 
-Event-driven automation in eNMS has two aspects:
-
-  - eNMS has a REST API that can be used to create, update and delete any type of objects,
-    but also to trigger the execution of a service or a workflow. 
-  - eNMS can be configured as a Syslog server, and rules can be created for syslog messges
-    to trigger the execution of a service or a workflow.

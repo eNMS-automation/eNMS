@@ -112,14 +112,19 @@ Public configuration
     which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
     not work all the time depending on your environment (nginx configuration, proxy, ...)
   - ``config_mode`` (default: ``"debug"``) Must be set to "debug" or "production".
-  - ``create_examples`` (default: ``true``)
-  - ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host a
-    customized version of the documentation locally.
+  - ``create_examples`` (default: ``true``) By default, eNMS will create a network topology and a number of services
+    and workflows as an example of what you can do.
+  - ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host your
+    own version of the documentation locally. Points to the online documentation by default.
   - ``log_level`` (default: ``"debug"``) Gunicorn log level.
-  - ``
-      # Git is used as a version control system for device configurations.
-      "git_repository": ""
-    },
+  - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
+    is the address of the remote git repository where eNMS will push all device configurations.
+
+- Section ``database``
+
+  - 
+
+- Section ``cluster``
     "cluster": {
       "active": false,
       "id": true,
@@ -227,19 +232,3 @@ Private configuration
   - export TACACS_PASSWORD=tacacs_password
   - export OPENNMS_PASSWORD=opennms_password
   - export SLACK_TOKEN=SLACK_TOKEN
-
-
-Default Examples
-----------------
-
-By default, eNMS will create a few examples of each type of object (devices, links, services, workflows...).
-If you run eNMS in production, you might want to deactivate this.
-
-To deactivate, set the ``create_examples`` variable to `false`.
-
-Change the documentation base URL
----------------------------------
-
-If you prefer to host your own version of the documentation, you can set the ``documentation_url`` variable in the configuration.
-By default, this variable is set to https://enms.readthedocs.io/en/latest/: it points to the online documentation.
-

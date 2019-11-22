@@ -2,32 +2,6 @@
 Default Services
 ================
 
-The following services are present by default in eNMS.
-They can be used as templates to create more complex services, or used as-is if they meet your needs.
-
-Parameters common to all services
----------------------------------
-
-- ``General``
-    - ``Name`` Service Instance names (must be unique).
-    - ``Description`` Freeform description of what the service instance does
-    - ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
-    - ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
-- ``Advanced``
-    - ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
-    - ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
-    - ``Send Notification`` Enable sending results notification checkbox
-    - ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
-    - ``Display only failed nodes`` Include only the failed devices in the email notification body summary
-    - ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
-    - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next service.
-- ``Targets``
-    - ``Devices`` Multi-selection list of devices from the inventory
-    - ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-    - ``Multiprocessing`` Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
-    - ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
-    - ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
-
 Parameters common to all services that validate data
 ----------------------------------------------------
 

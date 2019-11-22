@@ -25,11 +25,28 @@ This allows migrating services from one VM to another if you are using multiple 
 Service panel
 -------------
 
-When you create a new service, the form will also contain multiple selection fields for you to select "devices".
+General
+*******
 
-.. image:: /_static/automation/services/device_selection.png
-   :alt: Device selection
-   :align: center
+- ``Name`` Service Instance names (must be unique).
+- ``Description`` Freeform description of what the service instance does
+- ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
+- ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
+- ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
+- ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+
+Specific
+********
+
+Workflow
+********
+
+- ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next service.
+
+Devices
+*******
+
+Some services have no devices at all: it depends on what the service is doing.
 
 There are two ways to select devices:
 
@@ -38,8 +55,26 @@ as well as on the devices of all selected pools.
 - With a python query to extract devices (either IP address or names) from the payload.
 The python query can use the variables and functions described in the "Advanced" section of the documentation.
 
-A service can run on its devices either sequentially, or in parallel if the ``Multiprocessing`` checkbox is ticked.
-Some services have no devices at all: it depends on what the service is doing.
+- ``Devices`` Multi-selection list of devices from the inventory
+- ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
+- ``Multiprocessing`` A service can run on its devices either sequentially, or in parallel if the ``Multiprocessing`` checkbox is ticked.
+Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
+- ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
+- ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+
+Iteration
+*********
+
+Validation
+**********
+
+Notification
+************
+
+- ``Send Notification`` Enable sending results notification checkbox
+- ``Send Notification Method`` Choose Mail, Mattermost, or Slack to send the results summary to. See the previous section on Service Notification for more details.
+- ``Display only failed nodes`` Include only the failed devices in the email notification body summary
+- ``Mail Recipients (separated by comma)`` Overrides the Mail Recipients specified in the Administration Panel
 
 Variable substitution
 ---------------------

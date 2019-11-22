@@ -10,35 +10,22 @@ A service is a Python script that performs an action. A service is defined by:
 eNMS comes with a number of "default" services based on network automation frameworks such as
 ``netmiko``, ``napalm`` and ``ansible``, but you are free to create your own services.
 
-Custom Services Path
---------------------
-
-
-
 Service Management
 ------------------
 
-Once a service has been customized with parameters, devices selected, etc, we refer to it as a Service Instance. All Service Instances are displayed in the :guilabel:`automation/service_management` page in the ``Automation`` section.
+All services are displayed in the :guilabel:`Automation / Services` page in the ``Automation`` section,
+where you can edit, duplicate, delete, export and run existing services, and create new ones.
+Export creates a YaML representation of a service in the ``files / exported_services`` directory.
+This allows migrating services from one VM to another if you are using multiple VMs.
 
 .. image:: /_static/automation/services/service_management.png
    :alt: Service Management page
    :align: center
 
-From the :guilabel:`automation/service_management` page, you can:
-
-- Start a Service Instance (``Run`` button).
-- View and compare the results of the Service Instance.
-- Edit or duplicate the Service Instance.
-- Export the Service Instance: the service instance will be exported as a YaML file in the ``files/exported_services`` directory. This allows migrating service instances from one VM to another if you are using different VM.
-- Delete the Service Instance.
-
-When running a service instance, the device progress (current device/total devices selected to run) will be displayed in the table, unless Multiprocessing is selected to run the devices in parallel, in which case eNMS cannot keep track of how many devices are completed until the service instance finishes.
-Each field in the table allows for searching that field by inclusion match.
-
 Service device targets
 ----------------------
 
-When you create a new Service Instance, the form will also contain multiple selection fields for you to select "devices".
+When you create a new service, the form will also contain multiple selection fields for you to select "devices".
 
 .. image:: /_static/automation/services/device_selection.png
    :alt: Device selection
@@ -46,7 +33,8 @@ When you create a new Service Instance, the form will also contain multiple sele
 
 There are two ways to select devices:
 
-- Directly from the "Devices" and "Pools" drop-down. The service will run on all selected devices, as well as on the devices of all selected pools.
+- Directly from the "Devices" and "Pools" drop-down. The service will run on all selected devices,
+as well as on the devices of all selected pools.
 - With a python query to extract devices (either IP address or names) from the payload.
 The python query can use the variables and functions described in the "Advanced" section of the documentation.
 
@@ -146,20 +134,19 @@ A "Swiss Army Knife Service" has only one parameter: a name. The function that w
 service is scheduled is the one that carries the same name as the service itself.
 The "Swiss Army Knife Service" ``job`` function can be seen as a "service multiplexer".
 
-Helper function
-***************
+Available functions
+*******************
 
 In your custom python code, there is a number of function that are made available by eNMS and that you can reuse:
 
 - Netmiko connection (``netmiko_connection = run.netmiko_connection(device)``)
 give you a working netmiko connection, and takes care of caching the connection when running inside a workflow.
-- Napalm connection (``napalm_connection = run.napalm_connection(device)``)
-give you a working napalm connection, and takes care of caching the connection when running inside a workflow.
-- Send email (``controller.send_email``) lets you send an email with optional attached file.
+- Napalm connection (``napalm_connection = run.napalm_connection(device)``) does the same thing for Napalm.
+- Send email (``app.send_email``) lets you send an email with optional attached file.
 
 ::
 
-  controller.send_email(
+  app.send_email(
       title,
       content,
       sender=sender,

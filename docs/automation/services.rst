@@ -22,8 +22,8 @@ This allows migrating services from one VM to another if you are using multiple 
    :alt: Service Management page
    :align: center
 
-Service device targets
-----------------------
+Service panel
+-------------
 
 When you create a new service, the form will also contain multiple selection fields for you to select "devices".
 

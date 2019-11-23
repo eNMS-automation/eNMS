@@ -1,6 +1,6 @@
-============================
-Web SSH / Telnet (Unix only)
-============================
+=================
+WebSSH Connection
+=================
 
 eNMS uses GoTTY to automatically start an SSH or Telnet session to any device.
 GoTTY is a terminal sharing web solution that can be found on github: https://github.com/yudai/gotty

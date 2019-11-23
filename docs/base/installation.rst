@@ -122,6 +122,19 @@ Public configuration
 
 - Section ``database``
 
+  - ``url`` (default: ``"sqlite:///database.db?check_same_thread=False"``) `SQL Alchemy database URL
+    <https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls/>`_, configured
+    for SQLite by default.
+  - ``pool_size`` (default: ``1000``) Number of connections kept persistently in `SQL Alchemy pool
+    <https://docs.sqlalchemy.org/en/13/core/pooling.html#sqlalchemy.pool.QueuePool/>`_.
+  - ``max_overflow`` (default: ``10``) Maximum overflow size of the connection pool.
+  - ``small_string_length`` (default: ``255``) Length of a small string in the database.
+  - ``small_string_length`` (default: ``32768``) Length of a large string in the database.
+
+- Section ``gotty``
+
+  - ``port_redirection`` (default: ``false``)
+  - ``bypass_key_prompt`` (default: ``true``)
   - 
 
 - Section ``cluster``
@@ -132,13 +145,7 @@ Public configuration
       "scan_protocol": "http",
       "scan_timeout": 0.05
     },
-    "database": {
-      "url": "sqlite:///database.db?check_same_thread=False",
-      "max_overflow": 10,
-      "pool_size": 1000,
-      "small_string_length": 255,
-      "large_string_length": 32768
-    },
+
     "gotty": {
       "port_redirection": false,
       "bypass_key_prompt": true,

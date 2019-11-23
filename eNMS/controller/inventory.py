@@ -19,11 +19,14 @@ from eNMS.properties.table import table_properties
 
 
 class InventoryController(BaseController):
+
+    gotty_port = -1
+
     def get_gotty_port(self):
-        self.config["gotty"]["port"] += 1
+        self.gotty_port += 1
         start = self.config["gotty"]["start_port"]
         end = self.config["gotty"]["end_port"]
-        return start + self.config["gotty"]["port"] % (end - start)
+        return start + self.gotty_port % (end - start)
 
     def connection(self, device_id, **kwargs):
         device = fetch("device", id=device_id)

@@ -5,7 +5,7 @@ Search System
 All network devices are displayed in a table where they can be edited and deleted, 
 and filtered. There are two filtering systems.
 
-.. image:: /_static/inventory/network_creation/table_filtering.png
+.. image:: /_static/advanced/search_system/table_filtering.png
    :alt: Filtering System.
    :align: center
 
@@ -24,7 +24,7 @@ Advanced search
 The first list in the "Advanced Search" panel lets you decide whether you want to display an object if **all** properties
 are a match (boolean AND) or if **any** property is a match (boolean OR).
 
-.. image:: /_static/inventory/network_creation/advanced_filtering.png
+.. image:: /_static/advanced/search_system/advanced_filtering.png
    :alt: Filtering System.
    :align: center
 

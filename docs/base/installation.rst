@@ -4,8 +4,8 @@ Installation
 
 Requirements: Unix server with python 3.6+
 
-Run eNMS in test mode
----------------------
+First steps
+-----------
 
 ::
 
@@ -147,6 +147,7 @@ Public configuration
   - ``scan_timeout`` (default: ``0.05``)
 
 - Section ``ldap``
+
   - ``active`` (default: ``false``)
   - ``server`` (default: ``"ldap://domain.ad.company.com"``)
   - ``userdn`` (default: ``"domain.ad.company.com"``)
@@ -154,6 +155,7 @@ Public configuration
   - ``admin_group`` (default: ``"eNMS.Users,network.Admins"``)
 
 - Section ``mail``
+
   - ``server`` (default: ``"smtp.googlemail.com"``)
   - ``port`` (default: ``587``)
   - ``use_tls`` (default: ``true``)
@@ -162,16 +164,19 @@ Public configuration
   - ``recipients`` (default: ``"eNMS-user@company.com"``)
 
 - Section ``mattermost``
+
   - ``url`` (default: ``"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"``)
   - ``channel`` (default: ``""``)
   - ``verify_certificate`` (default: ``true``)
 
 - Section ``opennms``
+
   - ``opennms_login`` (default: ``""``)
   - ``opennms_devices`` (default: ``""``)
   - ``opennms_rest_api`` (default: ``""``)
 
 - Section ``paths``
+
   - ``custom_code`` (default: ``""``)
   - ``custom_properties`` (default: ``""``)
   - ``custom_services`` (default: ``""``)

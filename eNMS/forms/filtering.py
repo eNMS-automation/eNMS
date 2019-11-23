@@ -22,7 +22,7 @@ def filtering_form_generator():
                 "properties": list(relations) + properties,
                 "form_type": HiddenField(default=f"{table}_filtering"),
                 "operator": SelectField(
-                    "Match Condition",
+                    "Type of match",
                     choices=(
                         ("all", "Match if all properties match"),
                         ("any", "Match if any property matches"),

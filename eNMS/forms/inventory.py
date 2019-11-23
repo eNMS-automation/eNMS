@@ -123,7 +123,7 @@ class PoolForm(BaseForm):
     longitude = StringField("Longitude", default=0.0)
     latitude = StringField("Latitude", default=0.0)
     operator = SelectField(
-        "Match Condition",
+        "Type of match",
         choices=(
             ("all", "Match if all properties match"),
             ("any", "Match if any property matches"),

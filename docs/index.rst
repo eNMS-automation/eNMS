@@ -69,6 +69,7 @@ Application stack
    :maxdepth: 2
    :caption: Advanced
 
+   advanced/search_system
    advanced/configuration_management
    advanced/rest_api
    advanced/administration

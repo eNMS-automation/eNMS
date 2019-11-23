@@ -106,7 +106,7 @@ The configuration is divided into:
 Public configuration
 ********************
 
-- Section ``app``
+- Section ``Application``
 
   - ``address`` (default: ``""``) The address is needed when eNMS needs to provide a link back to the application,
     which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
@@ -120,7 +120,7 @@ Public configuration
   - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
     is the address of the remote git repository where eNMS will push all device configurations.
 
-- Section ``database``
+- Section ``Database``
 
   - ``url`` (default: ``"sqlite:///database.db?check_same_thread=False"``) `SQL Alchemy database URL
     <https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls/>`_, configured
@@ -131,14 +131,14 @@ Public configuration
   - ``small_string_length`` (default: ``255``) Length of a small string in the database.
   - ``small_string_length`` (default: ``32768``) Length of a large string in the database.
 
-- Section ``gotty``
+- Section ``GoTTy``
 
   - ``port_redirection`` (default: ``false``)
   - ``bypass_key_prompt`` (default: ``true``)
   - ``start_port`` (default: ``9000``)
   - ``end_port`` (default: ``91000``)
 
-- Section ``cluster``
+- Section ``Cluster``
 
   - ``active`` (default: ``false``)
   - ``id`` (default: ``true``)
@@ -154,7 +154,7 @@ Public configuration
   - ``basedn`` (default: ``"DC=domain,DC=ad,DC=company,DC=com"``)
   - ``admin_group`` (default: ``"eNMS.Users,network.Admins"``)
 
-- Section ``mail``
+- Section ``Mail``
 
   - ``server`` (default: ``"smtp.googlemail.com"``)
   - ``port`` (default: ``587``)
@@ -163,50 +163,60 @@ Public configuration
   - ``sender`` (default: ``"eNMS@company.com"``)
   - ``recipients`` (default: ``"eNMS-user@company.com"``)
 
-- Section ``mattermost``
+- Section ``Mattermost``
 
   - ``url`` (default: ``"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"``)
   - ``channel`` (default: ``""``)
   - ``verify_certificate`` (default: ``true``)
 
-- Section ``opennms``
+- Section ``OpenNMS``
 
   - ``opennms_login`` (default: ``""``)
   - ``opennms_devices`` (default: ``""``)
   - ``opennms_rest_api`` (default: ``""``)
 
-- Section ``paths``
+- Section ``Paths``
 
   - ``custom_code`` (default: ``""``)
   - ``custom_properties`` (default: ``""``)
   - ``custom_services`` (default: ``""``)
   - ``playbooks`` (default: ``""``)
-    },
-    "requests": {
-      "pool": {
-        "pool_connections": 10,
-        "pool_maxsize": 100,
-        "pool_block": false
-      },
-      "retries": {
-        "total": 2,
-        "read": 2,
-        "connect": 2,
-        "backoff_factor": 0.5
-      }
-    },
-    "slack": {
-      "channel": ""
-    },
-    "syslog": {
-      "active": false,
-      "address": "0.0.0.0",
-      "port": 514
-    },
-    "tacacs": {
-      "active": false,
-      "address": ""
-    },
+
+- Section ``Requests``
+
+    - Pool
+        - ``pool_maxsize`` (default: ``10``)
+        - ``pool_connections`` (default: ``100``)
+        - ``pool_block`` (default: ``false``)
+
+    - Retries
+        - ``total`` (default: ``2``)
+        - ``read`` (default: ``2``)
+        - ``connect`` (default: ``2``)
+        - ``backoff_factor`` (default: ``0.5``)
+
+  - Section ``Slack``
+
+      - ``channel`` (default: ``""``)
+
+  - Section ``Syslog``
+
+    - ``active`` (default: ``false``)
+    - ``address`` (default: ``"0.0.0.0"``)
+    - ``port`` (default: ``514``)
+
+  - Section ``TACACS``
+
+    - ``active`` (default: ``false``)
+    - ``address`` (default: ``""``)
+    - ``port`` (default: ``514``)
+
+  - Section ``TACACS``
+
+    - ``active`` (default: ``false``)
+    - ``address`` (default: ``""``)
+    - ``port`` (default: ``514``)
+
     "vault": {
       "active": false,
       "address": "http://127.0.0.1:8200",

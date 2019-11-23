@@ -185,11 +185,13 @@ Public configuration
 - Section ``Requests``
 
     - Pool
-        - ``pool_maxsize`` (default: ``10``)
-        - ``pool_connections`` (default: ``100``)
-        - ``pool_block`` (default: ``false``)
+
+      - ``pool_maxsize`` (default: ``10``)
+      - ``pool_connections`` (default: ``100``)
+      - ``pool_block`` (default: ``false``)
 
     - Retries
+
         - ``total`` (default: ``2``)
         - ``read`` (default: ``2``)
         - ``connect`` (default: ``2``)
@@ -211,25 +213,19 @@ Public configuration
     - ``address`` (default: ``""``)
     - ``port`` (default: ``514``)
 
-  - Section ``TACACS``
+  - Section ``Vault``
 
     - ``active`` (default: ``false``)
-    - ``address`` (default: ``""``)
-    - ``port`` (default: ``514``)
+    - ``address`` (default: ``"http://127.0.0.1:8200"``)
+    - ``unseal`` (default: ``false``)
 
-    "vault": {
-      "active": false,
-      "address": "http://127.0.0.1:8200",
-      "unseal": false
-    },
-    "view": {
-      "longitude": -96.0,
-      "latitude": 33.0,
-      "zoom_level": 5,
-      "tile_layer": "osm",
-      "marker": "Image"
-    }
-  }
+  - Section ``View``
+
+    - ``longitude`` (default: ``-96.0``)
+    - ``latitude`` (default: ``33.0``)
+    - ``zoom_level`` (default: ``5``)
+    - ``tile_layer`` (default: ``"osm"``)
+    - ``marker`` (default: ``"Image"``)
 
 Private configuration
 *********************

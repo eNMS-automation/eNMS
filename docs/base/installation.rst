@@ -135,54 +135,47 @@ Public configuration
 
   - ``port_redirection`` (default: ``false``)
   - ``bypass_key_prompt`` (default: ``true``)
-  - 
+  - ``start_port`` (default: ``9000``)
+  - ``end_port`` (default: ``91000``)
 
 - Section ``cluster``
-    "cluster": {
-      "active": false,
-      "id": true,
-      "scan_subnet": "192.168.105.0/24",
-      "scan_protocol": "http",
-      "scan_timeout": 0.05
-    },
 
-    "gotty": {
-      "port_redirection": false,
-      "bypass_key_prompt": true,
-      "port": -1,
-      "start_port": 9000,
-      "end_port": 9100
-    },
-    "ldap": {
-      "active": false,
-      "server": "ldap://domain.ad.company.com",
-      "userdn": "domain.ad.company.com",
-      "basedn": "DC=domain,DC=ad,DC=company,DC=com",
-      "admin_group": "eNMS.Users,network.Admins"
-    },
-    "mail": {
-      "server": "smtp.googlemail.com",
-      "port": 587,
-      "use_tls": true,
-      "username": "eNMS-user",
-      "sender": "eNMS@company.com",
-      "recipients": "eNMS-user@company.com"
-    },
-    "mattermost": {
-      "url": "https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w",
-      "channel": "",
-      "verify_certificate": true
-    },
-    "opennms": {
-      "opennms_login": "",
-      "opennms_devices": "",
-      "opennms_rest_api": ""
-    },
-    "paths": {
-      "custom_code": "",
-      "custom_properties": "",
-      "custom_services": "",
-      "playbooks": ""
+  - ``active`` (default: ``false``)
+  - ``id`` (default: ``true``)
+  - ``scan_subnet`` (default: ``"192.168.105.0/24"``)
+  - ``scan_protocol`` (default: ``"http"``)
+  - ``scan_timeout`` (default: ``0.05``)
+
+- Section ``ldap``
+  - ``active`` (default: ``false``)
+  - ``server`` (default: ``"ldap://domain.ad.company.com"``)
+  - ``userdn`` (default: ``"domain.ad.company.com"``)
+  - ``basedn`` (default: ``"DC=domain,DC=ad,DC=company,DC=com"``)
+  - ``admin_group`` (default: ``"eNMS.Users,network.Admins"``)
+
+- Section ``mail``
+  - ``server`` (default: ``"smtp.googlemail.com"``)
+  - ``port`` (default: ``587``)
+  - ``use_tls`` (default: ``true``)
+  - ``username`` (default: ``"eNMS-user"``)
+  - ``sender`` (default: ``"eNMS@company.com"``)
+  - ``recipients`` (default: ``"eNMS-user@company.com"``)
+
+- Section ``mattermost``
+  - ``url`` (default: ``"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"``)
+  - ``channel`` (default: ``""``)
+  - ``verify_certificate`` (default: ``true``)
+
+- Section ``opennms``
+  - ``opennms_login`` (default: ``""``)
+  - ``opennms_devices`` (default: ``""``)
+  - ``opennms_rest_api`` (default: ``""``)
+
+- Section ``paths``
+  - ``custom_code`` (default: ``""``)
+  - ``custom_properties`` (default: ``""``)
+  - ``custom_services`` (default: ``""``)
+  - ``playbooks`` (default: ``""``)
     },
     "requests": {
       "pool": {

@@ -2,23 +2,23 @@
 Search System
 =============
 
-All network devices are displayed in a table where they can be edited and deleted, 
-and filtered. There are two filtering systems.
+All objects stored in the database are displayed in tables that you can filter using a search mechanism.
 
-.. image:: /_static/advanced/search_system/table_filtering.png
+.. image:: /_static/advanced/search_system/filtering.png
    :alt: Filtering System.
    :align: center
 
-Quick search
+Quick Search
 ************
 
 For a quick search, you can use the textbox displayed above some of the columns in the table.
-This search is case-insensitive and based on **inclusion**. If you enter a value in several of these fields,
-the results is the list of objects that match all fields (boolean AND).
-If you enter "a" in the textbox above "Location" in the "Device Management" table, eNMS will return all devices
-for which the location contains either "a" or "A".
+This search is **case-insensitive** and based on **inclusion**. ,
 
-Advanced search
+.. note:: If you enter ``a`` under ``Name``, eNMS will return all objects whose name contains ``a`` or ``A``.
+
+.. note:: If you use several of these fields, all fields must match (boolean AND).
+
+Advanced Search
 ***************
 
 The first list in the "Advanced Search" panel lets you decide whether you want to display an object if **all** properties

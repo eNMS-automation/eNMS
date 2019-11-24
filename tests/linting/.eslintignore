@@ -1,2 +1,3 @@
 **/*.min.js
 **/bundles
+docs/**

@@ -15,4 +15,5 @@
 *.txt
 *.md
 __pycache__/
+docs/**
 LICENSE

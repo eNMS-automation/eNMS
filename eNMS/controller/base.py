@@ -64,8 +64,6 @@ class BaseController:
 
     get_endpoints = [
         "/administration",
-        "/calendar/run",
-        "/calendar/task",
         "/dashboard",
         "/login",
         "/table/changelog",

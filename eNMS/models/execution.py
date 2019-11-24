@@ -287,7 +287,9 @@ class Run(AbstractBase):
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1
-            results["duration"] = self.duration = str(datetime.now().replace(microsecond=0) - start)
+            results["duration"] = self.duration = str(
+                datetime.now().replace(microsecond=0) - start
+            )
             results["logs"] = app.run_logs.pop(self.runtime, None)
             if self.runtime == self.parent_runtime:
                 self.state = results["state"] = app.run_db.pop(self.runtime)

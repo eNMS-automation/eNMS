@@ -14,6 +14,7 @@ initTable: false
 JSONEditor: false
 page: false
 serviceTypes: false
+showPanel: false
 showTypePanel: false
 tables: false
 workflow: true
@@ -332,7 +333,11 @@ function switchToWorkflow(workflowId, arrow) {
     call(`/get_service_state/${workflowId}/latest`, function(result) {
       workflow = result.service;
       displayWorkflow(result);
-      alertify.notify(`Workflow '${workflow.scoped_name}' displayed.`, "success", 5);
+      alertify.notify(
+        `Workflow '${workflow.scoped_name}' displayed.`,
+        "success",
+        5
+      );
     });
   } else {
     $("#workflow-filtering").val(workflowId);
@@ -342,10 +347,11 @@ function switchToWorkflow(workflowId, arrow) {
 
 // eslint-disable-next-line
 function field(name, type, id) {
-  fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
+  const fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
   return $(`#${fieldId}`);
 }
 
+// eslint-disable-next-line
 function displayCalendar(calendarType) {
   showPanel("calendar", calendarType, () => {
     call(`/calendar_init/${calendarType}`, function(tasks) {
@@ -374,7 +380,7 @@ function displayCalendar(calendarType) {
           if (calendarType == "task") {
             showTypePanel("task", e.id);
           } else {
-            showRuntimePanel('results', e.service, e.runtime);
+            showRuntimePanel("results", e.service, e.runtime);
           }
         },
         editable: true,

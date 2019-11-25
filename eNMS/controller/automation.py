@@ -67,10 +67,13 @@ class AutomationController(BaseController):
                 service = service.duplicate(workflow)
             else:
                 workflow.services.append(service)
-            services.append(service.serialized)
+            services.append(service)
         workflow.last_modified = self.get_time()
         Session.commit()
-        return {"services": services, "update_time": workflow.last_modified}
+        return {
+            "services": [service.serialized for service in services],
+            "update_time": workflow.last_modified,
+        }
 
     def clear_results(self, service_id):
         for result in fetch(

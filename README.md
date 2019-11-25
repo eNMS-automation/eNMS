@@ -127,12 +127,14 @@ Docs: _[REST API](https://enms.readthedocs.io/en/develop/advanced/rest_api.html)
 
 ___
 
-# Online content
+# Getting started
+
+## Online content
 
 - An _[overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_ on youtube
 - A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_
 
-# Installation
+## Quick Installation
     Install python 3.6+ (earlier versions not supported)
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS
@@ -141,6 +143,6 @@ ___
     flask run --host=0.0.0.0
     Log in (default credentials: admin / admin)
 
-# Contact
+## Contact
 
 For any feedback, advice, feature request, join us on the [Network to Code slack](http://networktocode.herokuapp.com "Network to Code slack"), channel **#enms**.

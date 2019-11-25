@@ -270,6 +270,12 @@ class DisplayForm(BaseForm):
     form_type = HiddenField(default="display")
 
 
+class TreeForm(BaseForm):
+    template = "tree"
+    form_type = HiddenField(default="tree")
+    runtimes = NoValidationSelectField("Runtime", choices=())
+
+
 class CalendarForm(BaseForm):
     template = "calendar"
     form_type = HiddenField(default="calendar")

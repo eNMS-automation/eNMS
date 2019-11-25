@@ -132,8 +132,14 @@ function showRuntimePanel(type, service, runtime, displayTable) {
       : service.type == "workflow" && !displayTable
       ? displayResultsTree
       : displayResultsTable;
+  const panelType =
+      type == "logs"
+      ? "runtime"
+      : service.type == "workflow" && !displayTable
+      ? "tree"
+      : "result";
   createPanel(
-    service.type != "workflow" && type == "results" ? "result" : "runtime",
+    panelType,
     `${type} - ${service.name}`,
     service.id,
     function() {
@@ -188,7 +194,7 @@ function displayLogs(service, runtime) {
 
 function displayResultsTree(service, runtime) {
   call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
-    let tree = $(`#content-${service.id}`).jstree({
+    let tree = $(`#result-tree-${service.id}`).jstree({
       core: {
         animation: 200,
         themes: { stripes: true },

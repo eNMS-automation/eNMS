@@ -3,20 +3,19 @@ REST API
 ========
 
 In this section, instance refers to any device, link, service, workflow, or task in eNMS database.
+The REST API only supports JSON.
 
 eNMS has a REST API allowing to:
 
 - make sure eNMS is alive
 - create, update or delete an instance or a list of instances
-- run a Service or a Workflow
+- run a service or a workflow
 - schedule a task
 - retrieve the current configuration of an device
 - retrieve a list of devices matching a specific set of parameters
 - initiate a database backup or restore (also used for version upgrade migration)
 - initiate a device inventory bulk import or export
 - start a subset of the functionalities that are otherwise available in the admin panel.
-
-This REST API allows other/external automation entities to invoke eNMS functions remotely/programmatically. In this way, eNMS can be integrated into a larger automation solution.
 
 Expected REST API Headers:
 
@@ -26,43 +25,57 @@ Expected REST API Headers:
 
 
 Heartbeat
-*********
+---------
 
-::
+Test that eNMS is alive.
 
- # Test that eNMS is still alive (used for high availability mechanisms)
- https://<IP_address>/rest/is_alive
+.. code-block:: python
+  :caption: GET Request
 
-eNMS returns either "True" or the ``name`` and ``cpu_load`` if the application is alive.
+  /rest/is_alive
 
+.. code-block:: python
+  :caption: Response
 
-Run a service, or a workflow
-****************************
+  {
+      "name": 153558346480170,
+      "cluster_id": true,
+      "cpu_load": 6.3
+  }
 
-::
+Run a service
+-------------
 
- # via a POST method to the following URL
- https://<IP_address>/rest/run_service
+.. code-block:: python
+  :caption: POST Request
 
-The body must contain the follwoing:
+  /rest/run_service
 
-- A key titled ``name`` which is assocated to a value indicating the service you want run.
-- A key titled ``devices`` which is associated to a value list of target devices. If the ``device`` value list is empty, the service will run on the devices configured from the web UI.
+Payload
+*******
 
-The body may contain the follwoing:
+- ``name`` Name of the service.
+- ``devices`` (default: ``[]``) List of target devices. By default, the service will run on the devices configured from the web UI
+- ``pools`` (default: ``[]``) Same as devices for pools.
+- ``ip_addresses`` (default: ``[]``) Same as devices for pools.
+- ``payload`` (default: ``{}``) Payload of the service.
+- ``async`` (default: ``False``)
 
-- A key titled ``pools`` which is associated to a value list of the specific pools you want to run.
-- A key titled ``ip_addresses`` which is associated to a value list of the IPs you want to run.
-- A key titled ``payload" which contains a dictionary of the keys: values specific to the service being run.
+  - ``True`` eNMS starts it in a different thread and immediately respond with the service ID.
+  - ``False`` eNMS runs the service and it responds to your request when the service is done running.
+    The response will contain the result of the service, but the connection might time out
+    if the service takes too much time to run.
+
 
 The service can be run asynchronously or not with the ``async`` key:
-  - ``async`` False, you send a request to the REST API, eNMS runs the service and it responds to your request when the service is done running. The response will contain the result of the service, but the connection might time out if the service takes too much time to run.
-  - ``async`` True, you run the service, eNMS starts it in a different thread and immediately respond with the service ID, so that you can fetch the result later on.
+  - ``async`` False, you send a request to the REST API, 
+  - ``async`` True, you run the service, , so that you can fetch the result later on.
   - Async will default to ``False`` if not in the payload.
 
 Example of body:
 
-::
+.. code-block:: python
+  :caption: Example
 
  {
    "name": "my_service_or_workflow",

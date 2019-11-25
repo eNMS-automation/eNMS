@@ -232,13 +232,13 @@ class AutomationController(BaseController):
         session["workflow"] = workflow.id
         for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
-            if "-" in id:
-                old_position = workflow.labels[id].pop("positions")
-                workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
-            else:
+            if "-" not in id:
                 service = fetch("service", id=id)
                 old_position = service.positions.get(workflow.name)
                 service.positions[workflow.name] = new_position
+            elif id in workflow.labels:
+                old_position = workflow.labels[id].pop("positions")
+                workflow.labels[id] = {"positions": new_position, **workflow.labels[id]}
             if new_position != old_position:
                 workflow.last_modified = now
         return now

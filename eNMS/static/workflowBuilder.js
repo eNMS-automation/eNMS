@@ -296,7 +296,7 @@ function addServicesToWorkflow() {
     "#add-services-form",
     function(result) {
       workflow.last_modified = result.update_time;
-      $("#add_service").remove();
+      $("#add_services").remove();
       result.services.map(updateWorkflowService);
     }
   );

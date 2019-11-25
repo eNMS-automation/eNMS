@@ -34,6 +34,22 @@ class Object(AbstractBase):
     location = Column(SmallString)
     vendor = Column(SmallString)
 
+    def update(self, **kwargs):
+        super().update(**kwargs)
+        if kwargs.get("dont_update_pools", False):
+            return
+        for pool in fetch_all("pool"):
+            if pool.never_update:
+                continue
+            match = pool.object_match(self)
+            relation, number = f"{self.class_type}s", f"{self.class_type}_number"
+            if match and self not in pool.devices:
+                getattr(pool, relation).append(self)
+                setattr(pool, number, getattr(pool, number) + 1)
+            if self in pool.devices and not match:
+                getattr(pool, relation).remove(self)
+                setattr(pool, number, getattr(pool, number) - 1)
+
 
 CustomDevice = type(
     "CustomDevice",
@@ -102,21 +118,6 @@ class Device(CustomDevice):
     @property
     def ui_name(self):
         return f"{self.name} ({self.model})" if self.model else self.name
-
-    def update(self, **kwargs):
-        super().update(**kwargs)
-        if kwargs.get("dont_update_pools", False):
-            return
-        for pool in fetch_all("pool"):
-            if pool.never_update:
-                continue
-            match = pool.object_match(self)
-            if match and self not in pool.devices:
-                pool.devices.append(self)
-                pool.device_number += 1
-            if self in pool.devices and not match:
-                pool.devices.remove(self)
-                pool.device_number -= 1
 
     def generate_row(self):
         return super().generate_row() + [
@@ -224,15 +225,6 @@ class Link(Object):
             {"source_id": kwargs["source"], "destination_id": kwargs["destination"]}
         )
         super().update(**kwargs)
-        if kwargs.get("dont_update_pools", False):
-            return
-        for pool in fetch_all("pool"):
-            if pool.never_update:
-                continue
-            if pool.object_match(self):
-                pool.links.append(self)
-            elif self in pool.links:
-                pool.links.remove(self)
 
     def generate_row(self):
         return super().generate_row() + [

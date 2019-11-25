@@ -2,7 +2,10 @@
 REST API
 ========
 
-In this section, instance refers to any device, link, service, workflow, or task in eNMS database.
+In this section, the word ``instance`` refers to any object type supported by eNMS. In a request,
+``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``,
+``workflow``, ``task``, ``pool``.
+
 eNMS has a REST API allowing to:
 
 .. contents::
@@ -35,8 +38,6 @@ Run a service
 
   /rest/run_service
 
-Payload
-*******
 
 - ``name`` Name of the service.
 - ``devices`` (default: ``[]``) List of target devices. By default, the service will run on the devices configured from the web UI
@@ -45,10 +46,10 @@ Payload
 - ``payload`` (default: ``{}``) Payload of the service.
 - ``async`` (default: ``False``)
 
-  - ``True`` eNMS starts it in a different thread and immediately respond with the service ID.
   - ``False`` eNMS runs the service and it responds to your request when the service is done running.
     The response will contain the result of the service, but the connection might time out
     if the service takes too much time to run.
+  - ``True`` eNMS starts it in a different thread and immediately respond with the service ID.
 
 .. code-block:: python
   :caption: Example
@@ -68,16 +69,14 @@ Note:
 - For Postman use the type "raw" for entering key/value pairs into the body. Body must also be formatted as application/JSON.
 - Extra form data parameters passed in the body of the POST are available to that service or workflow in payload["rest_data"][your_key_name1] and payload["rest_data"][your_key_name2], and they can be accessed within a Service Instance UI form as {{payload["rest_data"][your_key_name].
 
-
 Retrieve or delete an instance
-******************************
+------------------------------
 
 ::
 
  # via a GET or DELETE method to the following URL
  https://<IP_address>/rest/instance/<instance_type>/<instance_name>
 
-``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``workflow``, ``task``, ``pool``.
 ``<instance_name>`` is to be replaced by the name of the instance.
 
 .. image:: /_static/advanced/rest_api/get_instance.png
@@ -85,7 +84,7 @@ Retrieve or delete an instance
    :align: center
 
 Retrieve a list of instances with a query
-*****************************************
+-----------------------------------------
 
 You can retrieve in one query all instances that match a given set of parameters.
 
@@ -94,24 +93,24 @@ You can retrieve in one query all instances that match a given set of parameters
  # via a GET method to the following URL
  https://<IP_address>/rest/query/<instance_type>?parameter1=value1&parameter2=value2...
 
- Example: http://enms_url/rest/query/device?port=22&operating_system=eos (returns all devices whose port is 22 and operating system EOS)
- Example: http://enms_url/rest/query/device (returns all devices)
+ Example: http://enms_url/rest/query/device
+ Returns all devices
 
-.. note:: As shown in the second example, if no parameters are provided, the API will return all instances of the requested instance type.
+ Example: http://enms_url/rest/query/device?port=22&operating_system=eos
+ Returns all devices whose port is 22 and operating system EOS
 
-Retrieve the current configuration for a device
-***********************************************
 
-::
 
- # via a GET method to thet following URL
- https://<IP_address>/rest/configuration/<device_name>
+Retrieve the configuration of a device
+--------------------------------------
 
-will retrieve the latest/current configuration for that device.
+.. code-block:: python
+  :caption: GET Request
 
+  /rest/configuration/<device_name>
 
 Create or update an instance
-****************************
+----------------------------
 
 ::
 

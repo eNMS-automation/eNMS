@@ -133,44 +133,39 @@ function showRuntimePanel(type, service, runtime, displayTable) {
       ? displayResultsTree
       : displayResultsTable;
   const panelType =
-      type == "logs"
+    type == "logs"
       ? "runtime"
       : service.type == "workflow" && !displayTable
       ? "tree"
       : "result";
-  createPanel(
-    panelType,
-    `${type} - ${service.name}`,
-    service.id,
-    function() {
-      if (runtime) {
-        $(`#div-runtimes-${service.id}`).hide();
-        displayFunction(service, runtime);
-      } else {
-        call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-          if (!runtimes.length) {
-            return alertify.notify(`No ${type} yet.`, "error", 5);
-          } else {
-            $(`#runtimes-${service.id}`).empty();
-            runtimes.forEach((runtime) => {
-              $(`#runtimes-${service.id}`).append(
-                $("<option></option>")
-                  .attr("value", runtime[0])
-                  .text(runtime[1])
-              );
-            });
-            if (!runtime || runtime == "normal") {
-              runtime = runtimes[runtimes.length - 1][0];
-            }
-            $(`#runtimes-${service.id}`)
-              .val(runtime)
-              .selectpicker("refresh");
-            displayFunction(service, runtime);
+  createPanel(panelType, `${type} - ${service.name}`, service.id, function() {
+    if (runtime) {
+      $(`#div-runtimes-${service.id}`).hide();
+      displayFunction(service, runtime);
+    } else {
+      call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
+        if (!runtimes.length) {
+          return alertify.notify(`No ${type} yet.`, "error", 5);
+        } else {
+          $(`#runtimes-${service.id}`).empty();
+          runtimes.forEach((runtime) => {
+            $(`#runtimes-${service.id}`).append(
+              $("<option></option>")
+                .attr("value", runtime[0])
+                .text(runtime[1])
+            );
+          });
+          if (!runtime || runtime == "normal") {
+            runtime = runtimes[runtimes.length - 1][0];
           }
-        });
-      }
+          $(`#runtimes-${service.id}`)
+            .val(runtime)
+            .selectpicker("refresh");
+          displayFunction(service, runtime);
+        }
+      });
     }
-  );
+  });
 }
 
 function displayLogs(service, runtime) {

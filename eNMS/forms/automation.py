@@ -284,8 +284,8 @@ class DisplayConfigurationForm(DisplayForm):
 
 
 class AddServiceForm(BaseForm):
-    form_type = HiddenField(default="add_service")
-    template = "add_service"
+    form_type = HiddenField(default="add_services")
+    template = "add_services"
     mode = SelectField(
         "Mode",
         choices=(

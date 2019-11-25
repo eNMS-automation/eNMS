@@ -550,7 +550,7 @@ function savePositions() {
 }
 
 function addServicePanel() {
-  showPanel("add_service", null, function() {
+  showPanel("add_services", null, function() {
     $("#service-tree").jstree({
       core: {
         animation: 200,

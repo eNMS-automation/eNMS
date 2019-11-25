@@ -55,6 +55,13 @@ a form in the web UI for the script input parameters.
 
 ___
 
+# Online content
+
+- An _[overview of eNMS](http://afourmy.pythonanywhere.com/views/logical_view)_ on youtube
+- A _[podcast](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_ about eNMS and network automation
+
+___
+
 # Main features
 
 ## 1. Network creation
@@ -79,7 +86,7 @@ You can click on a device to display its properties, configuration, or start a W
 Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
 and displayed logically with a force-directed layout.
 
-Geographical View                             |  Logical View
+Network View                                  |  Sites View
 :--------------------------------------------:|:-------------------------------:
 [![Geographical](docs/_static/inventory/network_visualization/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
 
@@ -88,9 +95,9 @@ Geographical View                             |  Logical View
 
 ## 3. Service creation
 
-eNMS comes with a number of "default services" leveraging libraries such as `ansible`, `requests`, `netmiko`, `napalm`  to perform simple automation tasks. However, absolutely any python script can be turned into a "service".
-If your python script takes input parameters, eNMS will automatically generate a form in the web UI.
-Services (and other Workflows) can be combined into a single workflow.
+eNMS comes with a number of "default services" leveraging libraries such as `ansible`, `requests`, `netmiko`, `napalm`  to perform simple automation tasks. However, absolutely any python script can be turned into a service. If your python script takes input parameters, eNMS will automatically generate a form in the web UI.
+
+Services can be combined into a workflow.
 
 [![Workflow Builder](docs/_static/base/features/workflow.png)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
 

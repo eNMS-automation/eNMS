@@ -81,7 +81,7 @@ and displayed logically with a force-directed layout.
 
 Geographical View                             |  Logical View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](docs/_static/inventory/network_visualization/network_view)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
+[![Geographical](docs/_static/inventory/network_visualization/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
 
 - Online demo: _[Geographical View](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical View](http://afourmy.pythonanywhere.com/views/logical_view)_
 - Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_

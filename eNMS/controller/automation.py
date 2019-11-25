@@ -53,20 +53,26 @@ class AutomationController(BaseController):
     def copy_service_in_workflow(self, workflow_id, **kwargs):
         service_instances = objectify("service", kwargs["services"].split(","))
         workflow = fetch("workflow", id=workflow_id)
-        serialized_services = []
+        errors = []
+        if kwargs["mode"] == "shallow":
+            for service in service_instances:
+                if not service.shared:
+                    errors.append(f"'{service.name}' is not a shared service.")
+                if kwargs["mode"] == "shallow" and service in workflow.services:
+                    errors.append(f"This workflow already contains '{service.name}'.")
+        if errors:
+            return {"error": "\n\n".join(errors)}
         for service in service_instances:
             if kwargs["mode"] == "deep":
                 service = service.duplicate(workflow)
-            elif not service.shared:
-                return {"error": "This is not a shared service."}
-            elif service in workflow.services:
-                return {"error": f"This workflow already contains {service.name}."}
             else:
                 workflow.services.append(service)
-            serialized_services.append(service.serialized)
         workflow.last_modified = self.get_time()
         Session.commit()
-        return {"services": serialized_services, "update_time": workflow.last_modified}
+        return {
+            "services": [service.serialized for service in service_instances],
+            "update_time": workflow.last_modified,
+        }
 
     def clear_results(self, service_id):
         for result in fetch(

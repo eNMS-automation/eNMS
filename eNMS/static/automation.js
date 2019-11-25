@@ -229,7 +229,7 @@ function displayResultsTree(service, runtime) {
     tree.bind("loaded.jstree", function() {
       tree.jstree("open_all");
     });
-    tree.bind("dblclick.jstree", function(event) {
+    tree.unbind("dblclick.jstree").bind("dblclick.jstree", function(event) {
       const service = tree.jstree().get_node(event.target);
       showRuntimePanel("results", service, runtime, true);
     });

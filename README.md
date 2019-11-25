@@ -129,7 +129,7 @@ ___
 
 # Online content
 
-- An _[overview of eNMS](http://afourmy.pythonanywhere.com/views/logical_view)_ on youtube
+- An _[overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_ on youtube
 - A _[podcast](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_ about eNMS and network automation
 
 ___

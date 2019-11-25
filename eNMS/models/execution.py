@@ -279,7 +279,7 @@ class Run(AbstractBase):
             results = {"success": False, "runtime": self.runtime, "result": result}
         finally:
             Session.commit()
-            results["summary"] = self.run_state.pop("summary", None)
+            results["summary"] = self.run_state.get("summary", None)
             self.status = "Aborted" if self.stop else "Completed"
             self.run_state["status"] = self.status
             if self.run_state["success"] is not False:

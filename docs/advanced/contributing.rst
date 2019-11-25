@@ -51,7 +51,6 @@ Before opening a pull request with your changes, you should make sure that:
 If one of these checks fails, so will Travis CI after opening the pull request.
 
 The CI/CD and PR processes are the same, because when you open a PR, this automatically triggers Travis.
-Pre-commit is included in the dev requirements, and a pre-commit hook is available, so that each time you commit, it fails if the commit is not black-compliant AND flake8-compliant, AND it automatically reformats your code to be black-compliant (and then you have to recommit).
 
 If you are updating the documentation, you can build a local version of the docs:
 

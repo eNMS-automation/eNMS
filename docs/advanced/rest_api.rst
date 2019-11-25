@@ -10,6 +10,7 @@ eNMS has a REST API allowing to:
 
 .. contents::
   :local:
+  :depth: 1
 
 Ping eNMS
 ---------
@@ -33,13 +34,18 @@ Test that eNMS is alive.
 Run a service
 -------------
 
+Request
+*******
+
 .. code-block:: python
-  :caption: POST Request
+  :caption: **POST** Request
 
   /rest/run_service
 
+Payload
+*******
 
-- ``name`` Name of the service.
+- ``name`` (**mandatory**) Name of the service.
 - ``devices`` (default: ``[]``) List of target devices. By default, the service will run on the devices configured from the web UI
 - ``pools`` (default: ``[]``) Same as devices for pools.
 - ``ip_addresses`` (default: ``[]``) Same as devices for pools.
@@ -73,7 +79,7 @@ Retrieve or delete an instance
 ------------------------------
 
 .. code-block:: python
-  :caption: GET or DELETE Request
+  :caption: **GET** or **DELETE** Request
 
   /rest/instance/<instance_type>/<instance_name>
 

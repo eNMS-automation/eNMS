@@ -75,7 +75,6 @@ Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
 [![Inventory](docs/_static/base/features/inventory.png)](http://afourmy.pythonanywhere.com/objects/device_management) |  [![Dashboard](docs/_static/base/features/dashboard.png)](http://afourmy.pythonanywhere.com/dashboard)
 
-- Online demo: _[Dashboard](http://afourmy.pythonanywhere.com/dashboard)_, _[Inventory](http://afourmy.pythonanywhere.com/objects/device_management)_
 - Docs: _[Objects](https://enms.readthedocs.io/en/latest/inventory/objects.html)_
 
 ## 2. Network visualization
@@ -90,7 +89,6 @@ Network View                                  |  Sites View
 :--------------------------------------------:|:-------------------------------:
 [![Geographical](docs/_static/inventory/network_visualization/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
 
-- Online demo: _[Geographical View](http://afourmy.pythonanywhere.com/views/geographical_view)_, _[Logical View](http://afourmy.pythonanywhere.com/views/logical_view)_
 - Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_
 
 ## 3. Service creation
@@ -101,7 +99,6 @@ Services can be combined into a workflow.
 
 [![Workflow Builder](docs/_static/base/features/workflow.png)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
 
-- Online demo: _[Workflow Builder](http://afourmy.pythonanywhere.com/automation/workflow_builder/)_
 - Docs: _[Workflow System](https://enms.readthedocs.io/en/latest/workflows/workflow_system.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
 
 ## 5. Event-driven automation
@@ -112,7 +109,6 @@ a start date and an end date. All scheduled tasks are displayed in a calendar.
 
 [![Calendar](docs/_static/base/features/calendar.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
 
-- Online Demo: _[Calendar](http://afourmy.pythonanywhere.com/scheduling/calendar)_
 - Docs: _[Scheduling](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)_
 
 ## 6. Configuration Management

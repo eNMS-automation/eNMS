@@ -3,28 +3,12 @@ REST API
 ========
 
 In this section, instance refers to any device, link, service, workflow, or task in eNMS database.
-The REST API only supports JSON.
-
 eNMS has a REST API allowing to:
 
-- make sure eNMS is alive
-- create, update or delete an instance or a list of instances
-- run a service or a workflow
-- schedule a task
-- retrieve the current configuration of an device
-- retrieve a list of devices matching a specific set of parameters
-- initiate a database backup or restore (also used for version upgrade migration)
-- initiate a device inventory bulk import or export
-- start a subset of the functionalities that are otherwise available in the admin panel.
+.. contents::
+  :local:
 
-Expected REST API Headers:
-
-- Accept:"application/json"
-- Content-Type:"application/json"
-- Authorization:"Basic <xxx>"
-
-
-Heartbeat
+Ping eNMS
 ---------
 
 Test that eNMS is alive.
@@ -66,25 +50,17 @@ Payload
     The response will contain the result of the service, but the connection might time out
     if the service takes too much time to run.
 
-
-The service can be run asynchronously or not with the ``async`` key:
-  - ``async`` False, you send a request to the REST API, 
-  - ``async`` True, you run the service, , so that you can fetch the result later on.
-  - Async will default to ``False`` if not in the payload.
-
-Example of body:
-
 .. code-block:: python
   :caption: Example
 
- {
-   "name": "my_service_or_workflow",
-   "devices": ["Washington"],
-   "pools": ["Pool1", "Pool2"],
-   "ip_addresses": ["127.0.0.1"],
-   "async": True,
-   "payload": {"aid": "1-2-3", "user_identified_key": "user_identified_value"}
- }
+  {
+    "name": "my_service_or_workflow",
+    "devices": ["Washington"],
+    "pools": ["Pool1", "Pool2"],
+    "ip_addresses": ["127.0.0.1"],
+    "async": True,
+    "payload": {"aid": "1-2-3", "user_identified_key": "user_identified_value"}
+  }
 
 Note:
 

@@ -55,13 +55,6 @@ a form in the web UI for the script input parameters.
 
 ___
 
-# Online content
-
-- An _[overview of eNMS](http://afourmy.pythonanywhere.com/views/logical_view)_ on youtube
-- A _[podcast](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_ about eNMS and network automation
-
-___
-
 # Main features
 
 ## 1. Network creation
@@ -73,7 +66,7 @@ A dashboard provides a graphical overview of your network with dynamic charts.
 
 Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
-[![Inventory](docs/_static/base/features/inventory.png)](http://afourmy.pythonanywhere.com/objects/device_management) |  [![Dashboard](docs/_static/base/features/dashboard.png)](http://afourmy.pythonanywhere.com/dashboard)
+[![Inventory](docs/_static/base/features/inventory.png)](https://enms.readthedocs.io/en/latest/inventory/objects.html) |  [![Dashboard](docs/_static/base/features/dashboard.png)](https://enms.readthedocs.io/en/latest/inventory/objects.html)
 
 - Docs: _[Objects](https://enms.readthedocs.io/en/latest/inventory/objects.html)_
 
@@ -87,7 +80,7 @@ and displayed logically with a force-directed layout.
 
 Network View                                  |  Sites View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](docs/_static/inventory/network_visualization/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](http://afourmy.pythonanywhere.com/views/logical_view)
+[![Geographical](docs/_static/inventory/network_visualization/network_view.png)](https://enms.readthedocs.io/en/latest/views/geographical_view.html) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](https://enms.readthedocs.io/en/latest/views/logical_view.html)
 
 - Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_
 
@@ -97,7 +90,7 @@ eNMS comes with a number of "default services" leveraging libraries such as `ans
 
 Services can be combined into a workflow.
 
-[![Workflow Builder](docs/_static/base/features/workflow.png)](http://afourmy.pythonanywhere.com/automation/workflow_builder/)
+[![Workflow Builder](docs/_static/base/features/workflow.png)](https://enms.readthedocs.io/en/latest/workflows/workflow_system.html)
 
 - Docs: _[Workflow System](https://enms.readthedocs.io/en/latest/workflows/workflow_system.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
 
@@ -107,7 +100,7 @@ While services can be run directly and immediately from the web UI,
 you can also schedule them to run at a later time, or periodically by defining a frequency,
 a start date and an end date. All scheduled tasks are displayed in a calendar.
 
-[![Calendar](docs/_static/base/features/calendar.png)](http://afourmy.pythonanywhere.com/scheduling/calendar)
+[![Calendar](docs/_static/base/features/calendar.png)](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)
 
 - Docs: _[Scheduling](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)_
 
@@ -131,6 +124,13 @@ Services can also be executed programmatically:
     to trigger the execution of a service.
 
 Docs: _[REST API](https://enms.readthedocs.io/en/latest/event_driven/rest_api.html)_
+
+___
+
+# Online content
+
+- An _[overview of eNMS](http://afourmy.pythonanywhere.com/views/logical_view)_ on youtube
+- A _[podcast](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_ about eNMS and network automation
 
 ___
 

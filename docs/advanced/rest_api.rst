@@ -46,10 +46,10 @@ Run a service
 - ``payload`` (default: ``{}``) Payload of the service.
 - ``async`` (default: ``False``)
 
-  - ``False`` eNMS runs the service and it responds to your request when the service is done running.
+  - ``False`` eNMS runs the service and responds to your request when the service is done running.
     The response will contain the result of the service, but the connection might time out
     if the service takes too much time to run.
-  - ``True`` eNMS starts it in a different thread and immediately respond with the service ID.
+  - ``True`` eNMS runs the service in a different thread and immediately respond with the service ID.
 
 .. code-block:: python
   :caption: Example
@@ -72,16 +72,10 @@ Note:
 Retrieve or delete an instance
 ------------------------------
 
-::
+.. code-block:: python
+  :caption: GET or DELETE Request
 
- # via a GET or DELETE method to the following URL
- https://<IP_address>/rest/instance/<instance_type>/<instance_name>
-
-``<instance_name>`` is to be replaced by the name of the instance.
-
-.. image:: /_static/advanced/rest_api/get_instance.png
-   :alt: GET method to retrieve a device
-   :align: center
+  /rest/instance/<instance_type>/<instance_name>
 
 Retrieve a list of instances with a query
 -----------------------------------------

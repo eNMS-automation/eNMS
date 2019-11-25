@@ -130,13 +130,9 @@ ___
 # Online content
 
 - An _[overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_ on youtube
-- A _[podcast](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_ about eNMS and network automation
+- A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_
 
-___
-
-# Getting started
-
-## Installation
+# Installation
     Install python 3.6+ (earlier versions not supported)
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS

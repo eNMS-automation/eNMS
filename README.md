@@ -66,9 +66,9 @@ A dashboard provides a graphical overview of your network with dynamic charts.
 
 Inventory                           |  Dashboard
 :----------------------------------:|:-----------------------------------:
-[![Inventory](docs/_static/base/features/inventory.png)](https://enms.readthedocs.io/en/latest/inventory/objects.html) |  [![Dashboard](docs/_static/base/features/dashboard.png)](https://enms.readthedocs.io/en/latest/inventory/objects.html)
+[![Inventory](docs/_static/base/features/inventory.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html) |  [![Dashboard](docs/_static/base/features/dashboard.png)](https://enms.readthedocs.io/en/develop/inventory/network_creation.html)
 
-- Docs: _[Objects](https://enms.readthedocs.io/en/latest/inventory/objects.html)_
+- Docs: _[Objects](https://enms.readthedocs.io/en/develop/inventory/network_creation.html)_
 
 ## 2. Network visualization
 
@@ -80,9 +80,9 @@ and displayed logically with a force-directed layout.
 
 Network View                                  |  Sites View
 :--------------------------------------------:|:-------------------------------:
-[![Geographical](docs/_static/inventory/network_visualization/network_view.png)](https://enms.readthedocs.io/en/latest/views/geographical_view.html) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](https://enms.readthedocs.io/en/latest/views/logical_view.html)
+[![Geographical](docs/_static/inventory/network_visualization/network_view.png)](https://enms.readthedocs.io/en/develop/inventory/network_visualization.html) |  [![Logical](docs/_static/inventory/network_visualization/site_view.png)](https://enms.readthedocs.io/en/develop/inventory/network_visualization.html)
 
-- Docs: _[Geographical View](https://enms.readthedocs.io/en/latest/views/geographical_view.html)_, _[Logical View](https://enms.readthedocs.io/en/latest/views/logical_view.html)_
+- Docs: _[Geographical View](https://enms.readthedocs.io/en/develop/inventory/network_visualization.html)_
 
 ## 3. Service creation
 
@@ -90,9 +90,9 @@ eNMS comes with a number of "default services" leveraging libraries such as `ans
 
 Services can be combined into a workflow.
 
-[![Workflow Builder](docs/_static/base/features/workflow.png)](https://enms.readthedocs.io/en/latest/workflows/workflow_system.html)
+[![Workflow Builder](docs/_static/base/features/workflow.png)](https://enms.readthedocs.io/en/develop/automation/workflows.html)
 
-- Docs: _[Workflow System](https://enms.readthedocs.io/en/latest/workflows/workflow_system.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
+- Docs: _[Workflow System](https://enms.readthedocs.io/en/develop/automation/workflows.html)_, _[Workflow Payload](https://enms.readthedocs.io/en/latest/workflows/workflow_payload.html)_
 
 ## 5. Event-driven automation
 
@@ -100,9 +100,9 @@ While services can be run directly and immediately from the web UI,
 you can also schedule them to run at a later time, or periodically by defining a frequency,
 a start date and an end date. All scheduled tasks are displayed in a calendar.
 
-[![Calendar](docs/_static/base/features/calendar.png)](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)
+[![Calendar](docs/_static/base/features/calendar.png)](https://enms.readthedocs.io/en/develop/automation/execution.html)
 
-- Docs: _[Scheduling](https://enms.readthedocs.io/en/latest/scheduling/task_management.html)_
+- Docs: _[Scheduling](https://enms.readthedocs.io/en/develop/automation/execution.html)_
 
 ## 6. Configuration Management
 
@@ -123,7 +123,7 @@ Services can also be executed programmatically:
   - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
     to trigger the execution of a service.
 
-Docs: _[REST API](https://enms.readthedocs.io/en/latest/event_driven/rest_api.html)_
+Docs: _[REST API](https://enms.readthedocs.io/en/develop/advanced/rest_api.html)_
 
 ___
 

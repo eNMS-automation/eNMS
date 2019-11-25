@@ -40,7 +40,7 @@ ___
 
 eNMS is a vendor-agnostic NMS designed for building workflow-based network automation solutions.
 
-[![eNMS](docs/_static/base/introduction/network_view.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
+[![eNMS](docs/_static/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
 
 It encompasses the following aspects of network automation:
   - **Configuration Management Service**: Backup, change and rollback of configurations (saved in git).

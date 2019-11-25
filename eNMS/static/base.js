@@ -204,7 +204,11 @@ function processResults(callback, results) {
   if (results === false) {
     alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
   } else if (results && results.error) {
-    alertify.notify(results.error, "error", 5);
+    if (Array.isArray(results.error)) {
+      results.error.map((e) => alertify.notify(e, "error", 5));
+    } else {
+      alertify.notify(results.error, "error", 5);
+    }
   } else if (results && results.invalid_form) {
     for (const [field, error] of Object.entries(results.errors)) {
       alertify.notify(`Wrong input for "${field}": ${error}`, "error", 20);

@@ -49,9 +49,8 @@ When a workflow is executed, its status is updated in real-time on the web UI.
 Event-driven automation
 -----------------------
 
-While services can be run directly and immediately from the web UI,
-you can also schedule them to run at a later time, or periodically by defining a frequency,
-a start date and an end date. All scheduled tasks are displayed in a calendar.
+While services can be run directly and immediately from the UI, you can also schedule them to run at a later time,
+or periodically by defining a frequency or a CRON expression. All scheduled tasks are displayed in a calendar.
 
 .. image:: /_static/base/features/calendar.png
   :alt: Calendar
@@ -70,8 +69,9 @@ Configuration Management
 eNMS can work as a network device configuration backup tool and replace
 Oxidized/Rancid with the following features:
 
-  - Poll network elements and store the latest configuration in the database
-  - Search for any text or regular-expression in all configurations
-  - Download device configuration to a local text file
-  - Use the REST API support to return a specified device’s configuration
-  - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
+  - Poll network elements and store the latest configuration in the database.
+  - Search for any text or regular-expression in all configurations.
+  - Download device configuration to a local text file.
+  - Use the REST API support to return a specified device’s configuration.
+  - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions
+    of a configuration.

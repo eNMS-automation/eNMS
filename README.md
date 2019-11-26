@@ -96,9 +96,7 @@ Services can be combined into a workflow.
 
 ## 5. Event-driven automation
 
-While services can be run directly and immediately from the web UI,
-you can also schedule them to run at a later time, or periodically by defining a frequency,
-a start date and an end date. All scheduled tasks are displayed in a calendar.
+While services can be run directly and immediately from the UI, you can also schedule them to run at a later time, or periodically by defining a frequency or a CRON expression. All scheduled tasks are displayed in a calendar.
 
 [![Calendar](docs/_static/base/features/calendar.png)](https://enms.readthedocs.io/en/develop/automation/execution.html)
 
@@ -115,11 +113,11 @@ Services can also be executed programmatically:
 eNMS can work as a network device configuration backup tool and replace
 Oxidized/Rancid with the following features:
 
-  - Poll network elements and store the latest configuration in the database
-  - Search for any text or regular-expression in all configurations
-  - Download device configuration to a local text file
-  - Use the REST API support to return a specified device’s configuration
-  - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
+  - Poll network elements and store the latest configuration in the database.
+  - Search for any text or regular-expression in all configurations.
+  - Download device configuration to a local text file.
+  - Use the REST API support to return a specified device’s configuration.
+  - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration.
 
 ___
 
@@ -130,7 +128,7 @@ ___
 - An _[overview of eNMS](https://www.youtube.com/watch?v=XwU0yom_aY0&t=1205s)_ on youtube
 - A _[podcast about eNMS and network automation](https://www.pythonpodcast.com/enms-network-automation-episode-232/)_
 
-## Quick Installation
+## Quick Install
     Install python 3.6+ (earlier versions not supported)
     git clone https://github.com/afourmy/eNMS.git
     cd eNMS

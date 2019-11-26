@@ -43,12 +43,12 @@ eNMS is a vendor-agnostic NMS designed for building workflow-based network autom
 [![eNMS](docs/_static/enms.png)](http://afourmy.pythonanywhere.com/views/geographical_view)
 
 It encompasses the following aspects of network automation:
-  - **Configuration Management Service**: Backup, change and rollback of configurations (saved in git).
-  - **Validation Services**: Retrieve data about the state of a device with Netmiko and NAPALM.
+  - **Configuration Management Service**: Backup with Git, change and rollback of configurations.
+  - **Validation Services**: Validate data about the state of a device with Netmiko and NAPALM.
   - **Ansible Service**: Store and run Ansible playbooks.
   - **REST Service**: Send REST calls with variable URL and payload.
   - **Python Script Service**: Any python script can be integrated into the web UI. eNMS will automatically generate
-a form in the web UI for the script input parameters.
+a form in the UI for the script input parameters.
   - **Workflows**: Services can be combined together graphically in a workflow.
   - **Scheduling**: Services and workflows can be scheduled to start at a later time, or run periodically with CRON.
   - **Event-driven automation**: Services and workflows can be triggered by an external event (REST call, Syslog message, etc).
@@ -73,8 +73,8 @@ Inventory                           |  Dashboard
 ## 2. Network visualization
 
 eNMS can display your network on a world map (Google Map or Open Street Map).
-Each device is displayed on the map at its GPS coordinates.
-You can click on a device to display its properties, configuration, or start a Web SSH terminal session.
+Each device is displayed at its GPS coordinates.
+You can click on a device to display its properties, configuration, or start an SSH terminal session.
 Colocated devices can be grouped into geographical sites (campus, dacacenter, ...),
 and displayed logically with a force-directed layout.
 
@@ -102,7 +102,13 @@ a start date and an end date. All scheduled tasks are displayed in a calendar.
 
 [![Calendar](docs/_static/base/features/calendar.png)](https://enms.readthedocs.io/en/develop/automation/execution.html)
 
-- Docs: _[Scheduling](https://enms.readthedocs.io/en/develop/automation/execution.html)_
+Services can also be executed programmatically:
+  - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,
+    but also to trigger the execution of a service.
+  - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
+    to trigger the execution of a service.
+
+- Docs: _[Scheduling](https://enms.readthedocs.io/en/develop/automation/execution.html)_, _[REST API](https://enms.readthedocs.io/en/develop/advanced/rest_api.html)_
 
 ## 6. Configuration Management
 
@@ -114,16 +120,6 @@ Oxidized/Rancid with the following features:
   - Download device configuration to a local text file
   - Use the REST API support to return a specified device’s configuration
   - Export all configurations to a remote Git repository (e.g. Gitlab) to view differences between various revisions of a configuration
-
-## 6. Event-driven automation
-
-Services can also be executed programmatically:
-  - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,
-    but also to trigger the execution of a service.
-  - eNMS can be configured as a Syslog server, and rules can be created for syslog messages
-    to trigger the execution of a service.
-
-Docs: _[REST API](https://enms.readthedocs.io/en/develop/advanced/rest_api.html)_
 
 ___
 

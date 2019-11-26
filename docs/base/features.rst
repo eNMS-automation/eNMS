@@ -22,8 +22,8 @@ Network visualization
 ---------------------
 
 eNMS can display your network on a world map (Google Map or Open Street Map).
-Each device is displayed on the map at its GPS coordinates.
-You can click on a device to display its properties, configuration, or start a Web SSH terminal session.
+Each device is displayed at its GPS coordinates.
+You can click on a device to display its properties, configuration, or start an SSH terminal session.
 
 .. image:: /_static/inventory/network_visualization/network_view.png
   :alt: Geographical View
@@ -58,6 +58,7 @@ a start date and an end date. All scheduled tasks are displayed in a calendar.
   :align: center
 
 Services can also be executed programmatically:
+
   - eNMS has a REST API and a CLI interface that can be used to create, update and delete any type of objects,
     but also to trigger the execution of a service.
   - eNMS can be configured as a Syslog server, and rules can be created for syslog messages

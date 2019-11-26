@@ -28,12 +28,10 @@ Service panel
 General
 *******
 
-- ``Name`` (**mandatory**) Service Instance names (must be unique).
-- ``Description``
-- ``Vendor``
-- ``Operating System``
+- ``Name`` (**mandatory**) Must be unique.
+- ``Description`` / ``Vendor`` / ``Operating System`` Useful for filtering services in the table.
 - ``Number of retries`` Number of retry attempts when the service fails (per-device if the service has device targets).
-- ``Time between retries (in seconds)``
+- ``Time between retries (in seconds)`` Number of seconds between each attempt.
 
 Specific
 ********
@@ -46,27 +44,30 @@ The content of this section is described for each service in the ``Default Servi
 Workflow
 ********
 
-This section contains the parameters that only apply when the service runs inside a workflow.
+This section contains the parameters that apply **when the service runs inside a workflow only**.
 
 - ``Skip this Service Regardless`` Always skip the service
 - ``Skip Service If Python Query evaluates to True`` This fields expect a python code that will evaluates to either ``True``
   or ``False``. The service will be skipped or not depending the result.
 - ``Maximum number of runs`` (default: ``1``) Number of time a service is allowed to run in a workflow (de
-- ``Waiting time (in seconds)`` Number of seconds to wait when the service is done running.
+- ``Waiting time (in seconds)`` (default: ``0``) Number of seconds to wait after the service is done running.
 
 Devices
 *******
 
-Most services run on "device targets". There are three properties for selecting devices.
+Most services are designed to run on devices from the inventory. There are three properties for selecting devices.
 The list of targets will be the union of all devices coming from these properties.
 
 - ``Devices`` Direct selection by device names
-- ``Pools`` Direct selection by choosing pools. The set of all devices from all selected pools will be used.
+- ``Pools`` Direct selection from pools. The set of all devices from all selected pools will be used.
 - ``Device query`` and ``Query Property Type`` Programmatic selection with a python query
 
   - ``Device query`` Query that must return an **iterable** (e.g python list) of **strings (either IP addresses or names)**.
   - ``Query Property Type`` Indicates whether the iterable contains IP addresses of names, for eNMS to convert the list
     to actual devices from the inventory.
+
+By default, services run on devices **sequentially**.
+You can active multiprocessing to run on devices **in parallel** instead.
 
 - ``Multiprocessing`` Run the service on all devices in parallel.
 - ``Maximum Number of Processes``
@@ -86,14 +87,15 @@ Validation
 
 - ``Validation Method`` The validation method depends on whether the result is a string or a dictionary.
 
-  -  ``Text match`` Matches the result against ``Content Match`` (string inclusion, or regular expression if
+  - ``Text match`` Matches the result against ``Content Match`` (string inclusion, or regular expression if 
     ``Match content against Regular expression`` is selected)
   - ``dictionary Equality`` Check for equality against the dictionary provided in ``Dictionary Match``
   - ``dictionary Inclusion`` Check for dictionary inclusion, in the sense that all ``key`` : ``value`` pairs from
     the dictionary provided in ``Dictionary Match`` can be found in the result.
 
-- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
-- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+- ``Negative Logic`` Reverses the ``success`` boolean value in the results.
+- ``Delete spaces before matching`` (``Text`` match only) Removes white spaces and carraige returns
+  in the result and ``Content Match`` (spaces and newlines can cause the match to fail)
 
 Notification
 ************

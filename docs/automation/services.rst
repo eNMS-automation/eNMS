@@ -18,7 +18,7 @@ delete, export and run existing services, and create new ones.
 Export creates a YaML representation of a service in the ``files / exported_services`` directory.
 This allows migrating services from one VM to another if you are using multiple VMs.
 
-.. image:: /_static/automation/services/service_management.png
+.. image:: /_static/automation/services/services.png
    :alt: Service Management page
    :align: center
 
@@ -28,12 +28,12 @@ Service panel
 General
 *******
 
-- ``Name`` Service Instance names (must be unique).
-- ``Description`` Freeform description of what the service instance does
-- ``Vendor`` Label the service instance with a vendor identifier string. This is useful in sorting and searching service instances.
-- ``Operating System`` Label the service instance with an operating system identifier string. This is useful in sorting and searching service instances.
-- ``Number of retries`` Add a number of retry attempts for targets that have reliability issues and occassionally fail. See the previous section on Retry Mechanism for more details.
-- ``Time between retries (in seconds)`` Specify a number of seconds to wait before attempting the service instance again when a failure occurs.
+- ``Name`` (**mandatory**) Service Instance names (must be unique).
+- ``Description``
+- ``Vendor``
+- ``Operating System``
+- ``Number of retries`` Number of retry attempts when the service fails (per-device if the service has device targets).
+- ``Time between retries (in seconds)``
 
 Specific
 ********
@@ -45,6 +45,8 @@ The content of this section is described for each service in the ``Default Servi
 
 Workflow
 ********
+
+This section contains the parameters that only apply when the service runs inside a workflow.
 
 - ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next service.
 

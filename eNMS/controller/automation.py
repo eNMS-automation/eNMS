@@ -147,7 +147,6 @@ class AutomationController(BaseController):
 
     def get_workflow_services(self, id, node):
         parents = list(self.get_parent_workflows(fetch("workflow", id=id)))
-        print(node)
         if node == "all":
             return [
                 {

@@ -13,8 +13,8 @@ eNMS comes with a number of "default" services based on network automation frame
 Service Management
 ------------------
 
-All services are displayed in the :guilabel:`Automation / Services` page in the ``Automation`` section,
-where you can edit, duplicate, delete, export and run existing services, and create new ones.
+All services are displayed in :guilabel:`Automation / Services` , where you can edit, duplicate,
+delete, export and run existing services, and create new ones.
 Export creates a YaML representation of a service in the ``files / exported_services`` directory.
 This allows migrating services from one VM to another if you are using multiple VMs.
 
@@ -37,6 +37,11 @@ General
 
 Specific
 ********
+
+This section contains all parameters that are specific to the service type. For the "Netmiko Configuration"
+service that uses Netmiko to push a configuration, you will find Netmiko parameters (delay factor,
+timeout, etc) and a field to enter the configuration that you want to push.
+The content of this section is described for each service in the ``Default Services`` section of the docs.
 
 Workflow
 ********

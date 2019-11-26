@@ -3,8 +3,7 @@ REST API
 ========
 
 In this section, the word ``instance`` refers to any object type supported by eNMS. In a request,
-``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``,
-``workflow``, ``task``, ``pool``.
+``<instance_type>`` can be any of the following: ``device``, ``link``, ``user``, ``service``, ``task``, ``pool``.
 
 eNMS has a REST API allowing to:
 

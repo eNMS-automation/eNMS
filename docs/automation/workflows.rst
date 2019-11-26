@@ -31,41 +31,23 @@ create labels, skip or unskip services, and delete selected services and edges.
 Some of these actions are also available from the right-click menus (clicking on the background, on a service or on an
 edge generate different menus).
 
-From the ``service-specific right-click menu``, you can:
-
-- Edit a service (service or workflow)
-- Run a service (service or workflow)
-- Display the Results
-- Delete a service (remove from the workflow)
-
-.. image:: /_static/automation/workflows/workflow_service_menu.png
-   :alt: Workflow management
-   :align: center
-
-Waiting time
-------------
-
-Services and Workflows have a ``Waiting time`` property: this tells eNMS how much time it should wait after the Service/Subworkflow has run before it begins the next service.
-This is useful if the service you're running needs time to be processed or operated upon before another service can be started.
-
-A service can also be configured to "retry"  if the results returned are not as designed. An example execution of a service in a workflow, in terms of waiting times and retries, is as follows:
-
-::
-
-  First try
-  time between retries pause
-  Retry 1
-  time between retries pause
-  Retry 2  (Successful, or only 2 Retries specified)
-  Waiting time pause
-
-Workflow devices
+Workflow Devices
 ----------------
 
-When you create a workflow, just like with services instances, the form will also contain multiple selection fields for you to select "target devices", as well as an option ``Use Workflow Targets``:
+The devices used when running a workflow depend on the workflow ``Run Method`` that you can configure in the edit panel,
+section ``Devices``.
+There are three run methods for a workflow:
 
-- If selected, the devices for the workflow will be used for execution.
-- If not selected, the devices selected at the individual service level will be used for execution.
+- Run the workflow device by device: the devices configured **at workflow level** are considered. The workflow will run for
+  each device independently from the other devices. With multiprocessing disabled, devices will run the workflow 
+  **sequentially**, one at a time. If multiprocessing **at workflow level** is enabled, you can have as many devices
+  running the workflow in parallel as you have available processes.
+- Run the workflow service by service using workflow targets: the devices configured **at workflow level** are considered.
+  Each device can follow a different path depending on whether a service is successful or not, but services are always
+  run **one at a time**. eNMS will compute the targets of a service by keeping track of the path of each device throughout
+  the workflow. Multiprocessing must be enabled **at service level**.
+- Run the workflow service by service using service targets: only the devices selected at the individual service level
+  are considered. Devices selected at workflow level are ignored.
 
 
 If ``Use Workflow Targets`` is unticked, services will run on their own targets. A service is considered successful if it ran successfully on all of its targets (if it fails on at least one target, it is considered to have failed).
@@ -85,16 +67,11 @@ make it the new cached connection.
 Success of a Workflow
 ---------------------
 
-The behavior of the workflow is such that the workflow is considered to have an overall Success status if the END service is reached. So, the END service should only be reached by an edge when the overall status of the workflow is considered successful. If a particular service service fails, then the workflow should just stop there (with the workflow thus having an overall Failure status), or it should call a cleanup/remediation service (after which the workflow will just stop there).
-
-Position saving
----------------
-
-Note that the positions of the services of a workflow in the Workflow Builder page is saved to the database only when the user navigates away from the workflow.
-- Upon leaving the Workflow Builder page.
-- When switching to another workflow.
-
-All other changes to the Workflow Builder are saved immediately.
+The behavior of the workflow is such that the workflow is considered to have an overall Success status
+if the END service is reached. So, the END service should only be reached by an edge when the overall status
+of the workflow is considered successful. If a particular service service fails,
+then the workflow should just stop there (with the workflow thus having an overall Failure status),
+or it should call a cleanup/remediation service (after which the workflow will just stop there).
 
 Automatic refresh
 -----------------
@@ -118,6 +95,24 @@ You must click on "Run with Updates" and go to the "Workflow" section to access 
 .. image:: /_static/automation/workflows/workflow_restartability.png
    :alt: Workflow Restartability
    :align: center
+
+Waiting times
+-------------
+
+Services and Workflows have a ``Waiting time`` property: this tells eNMS how much time it should wait after
+the service has run before it begins the next service.
+
+A service can also be configured to "retry"  if the results returned are not as designed.
+An example execution of a service in a workflow, in terms of waiting times and retries, is as follows:
+
+::
+
+  First try
+  time between retries pause
+  Retry 1
+  time between retries pause
+  Retry 2  (Successful, or only 2 Retries specified)
+  Waiting time pause
 
 Service dependency
 ------------------

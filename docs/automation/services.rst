@@ -77,21 +77,44 @@ Iteration
 Validation
 **********
 
+- ``Conversion Method`` (default: ``No conversion``) Some services will fetch a result from an external source.
+  There are three conversion modes:
+
+  - ``Text`` Convert the result to a python string.
+  - ``JSON`` Convert a string representing JSON data to a python dictionary.
+  - ``XML`` Convert a string representing XML data to a python dictionary.
+
+- ``Validation Method`` The validation method depends on whether the result is a string or a dictionary.
+
+  -  ``Text match`` Matches the result against ``Content Match`` (string inclusion, or regular expression if
+    ``Match content against Regular expression`` is selected)
+  - ``dictionary Equality`` Check for equality against the dictionary provided in ``Dictionary Match``
+  - ``dictionary Inclusion`` Check for dictionary inclusion, in the sense that all ``key`` : ``value`` pairs from
+    the dictionary provided in ``Dictionary Match`` can be found in the result.
+
+- ``Negative Logic`` Simply reverses the pass/fail decision if checked. This is useful in the following situations:  Run a netmiko command to check active alarm status. If a specific alarm of interest is active (thus producing success on content match), negative logic will cause it to fail. Then with retries configured, keep checking the alarm status until the alarm clears (and negative logic produces a success result).
+- ``Delete spaces before matching`` Removes white spaces in the result and content_match strings to increase the likelihood of getting a match. This is particularly helpful for multi-line content matches.
+
 Notification
 ************
 
-Type of notification
-********************
+When a service finishes, you can choose to receive a notification with the results. There are three types of notification:
 
-When a service (or a workflow) finishes, you can choose to receive a notification that contains the logs of the service (whether it was successful or not for each device, etc).
-
-There are three types of notification:
-
-- Mail notification: eNMS sends a mail to an address of your choice.
+- Mail notification: eNMS sends a mail to the address(es) of your choice.
 - Slack notification: eNMS sends a message to a channel of your choice.
 - Mattermost notification: same as Slack, with Mattermost.
 
-To set up the mail system, you must set the following variables in the configuration:
+You can configure the following parameters:
+
+- ``Send notification`` Enable sending results notification
+- ``Notification Method`` Mail, Slack or Mattermost.
+- ``Notification header`` A header displayed at the beginning of the notification.
+- ``Include Result Link in summary``: whether the notification contains a link to the results.
+- ``Mail recipients`` Must be a list of email addresses, separated by comma. if left empty, the recipients defined
+  in the configuration.
+- ``Display only failed nodes`` the notification will not include devices for which the service ran successfully.
+
+To set up the mail system, you must set the variable of the ``mail`` section in the configuration.
 ``server``, ``port``, ``use_tls``, ``username``, ``sender``, ``recipients``.
 Besides, you must set the password via the ``MAIL_PASSWORD`` environment variable.
 
@@ -101,13 +124,6 @@ also an option in the Service Instance configuration to display only failed obje
 list of all passed and failed objects.
 
 In Mattermost, if the ``Mattermost Channel`` is not set, the default ``Town Square`` will be used.
-
-- "Send notification" Enable sending results notification checkbox
-- "Notification Method": choose among mail, slack or mattermost.
-- "Notification header": will be displayed at the beginning of the notification.
-- "Include Result Link in summary": whether the notification contains a link to the results.
-- "Mail recipients": (separated by comma) if left empty, the recipients defined in the administration panel will be used.
-- "Display only failed nodes": the notification will not include devices for which the service ran successfully.
 
 Variable substitution
 ---------------------

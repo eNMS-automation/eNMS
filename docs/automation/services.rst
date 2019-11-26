@@ -9,6 +9,8 @@ A service is a Python script that performs an action. A service is defined by:
 
 eNMS comes with a number of "default" services based on network automation frameworks such as
 ``netmiko``, ``napalm`` and ``ansible``, but you are free to create your own services.
+Each service will return a python dictionary as a result. This dictionary will always contains
+a ``success`` boolean value that indicates whether it ran successfully or not.
 
 Service Management
 ------------------
@@ -66,11 +68,8 @@ The list of targets will be the union of all devices coming from these propertie
   - ``Query Property Type`` Indicates whether the iterable contains IP addresses of names, for eNMS to convert the list
     to actual devices from the inventory.
 
-By default, services run on devices **sequentially**.
-You can active multiprocessing to run on devices **in parallel** instead.
-
-- ``Multiprocessing`` Run the service on all devices in parallel.
-- ``Maximum Number of Processes``
+- ``Multiprocessing`` Run on devices **in parallel** instead of **sequentially**.
+- ``Maximum Number of Processes`` (default: ``5``)
 
 Iteration
 *********

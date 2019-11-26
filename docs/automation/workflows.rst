@@ -3,31 +3,27 @@ Workflow System
 ===============
 
 A workflow is a graph of services connected with ``success`` and ``failure`` edges.
-Each service returns a ``success`` boolean value that indicates whether it ran successfully or not.
-If a service is executed successfully, the workflow continues down the ``success`` path to the next service, otherwise
-it goes down the ``failure`` path.
-Workflows are created and managed from the :guilabel:`Workflow Builder`.
+If a service is executed successfully, the workflow continues down the ``success`` path to the next service,
+otherwise it goes down the ``failure`` path.
+Workflows are managed from the :guilabel:`Workflow Builder`.
 
 Workflow Builder
 ----------------
 
-The workflow builder contains:
+.. image:: /_static/automation/workflows/workflow_service_menu.png
+   :alt: Workflow builder
+   :align: center
+
+- Section 1 is used for creating services and edges.
+
+    - The first row lets you choose a service type and click on the "plus" button to create a new service that
+      will be added to the workflow.
+    - On the second row, you can change the mode to "Edge creation" and select which type of edge you want to create.
 
 - A drop-down list containing all existing top-level workflows. This list allows switching between workflows.
 - The workflow itself is displayed as a graph. The  services are connected by arrows of type success edge or failure edge.
 - A ``general right-click menu`` can be accessed by clicking on the background or white-space.
 - A ``service-specific right-click menu`` can be accessed by right clicking on a specific service.
-
-The ``general right-click menu`` contains the following entries:
-
-- Change Mode (create edges or move a service in the Workflow Builder)
-- Create Workflow
-- Add to Workflow (lets you choose which services to add amongst all existing services)
-- Run Workflow (starts the workflow)
-- Edit Workflow (same Workflow editor from the Workflow Management page)
-- Workflow Results
-- Workflow Logs
-- Refresh View
 
 .. image:: /_static/automation/workflows/workflow_background_menu.png
    :alt: Workflow management

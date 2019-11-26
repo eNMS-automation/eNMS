@@ -2,7 +2,7 @@
 Installation
 ============
 
-Requirements: Unix server with python 3.6+
+eNMS is designed to run on a **Unix server** with Python **3.6+**.
 
 First steps
 -----------
@@ -25,8 +25,8 @@ First steps
  # or with gunicorn
  gunicorn --config gunicorn.py app:app
 
-Run eNMS in production
-----------------------
+Production mode
+---------------
 
 To start eNMS in production mode, you must change the value of the  "config_mode" in the config.json file.
 In production mode, the secret key is not automatically set to a default value in case it is missing.
@@ -70,31 +70,6 @@ You also have to tell eNMS the address of your database by setting the "DATABASE
 
 In case this environment variable is not set, eNMS will default to using a SQLite database.
 
-Authentication with LDAP/Active Directory
------------------------------------------
-
-The following variables control how eNMS integrates with LDAP/Active Directory for user authentication:
-  - ``active``: Set to ``true`` to enable LDAP authentication; otherwise ``false``
-  - ``ldap_server``: LDAP Server URL (also called LDAP Provider URL):
-  - ``ldap_userdn``: LDAP Distinguished Name (DN) for the user. This gets combined inside eNMS as
-    "domain.ad.company.com\\username" before being sent to the server.
-  - ``ldap_basedn``: LDAP base distinguished name subtree that is used when
-    searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF)
-    syntax for the entries.
-  - ``ldap_admin_group``: string to match against 'memberOf' attributes of the matched user to determine if the user is allowed to log in.
-
-eNMS first checks to see if the user exists locally inside eNMS.
-If not and if LDAP/Active Directory is enabled, eNMS tries to authenticate
-against LDAP/AD using the pure python ldap3 library, and if successful,
-that user gets added to eNMS locally.
-
-.. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in an 403 authentication error.
-  An LDAP user MUST be a member of one of the "LDAP_ADMIN_GROUP" groups to authenticate.
-.. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire
-  due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage.
-  In the event that services are already scheduled with User Credentials, these might fail if the credentials
-  are not updated in eNMS.
-
 Configuration
 -------------
 
@@ -103,56 +78,70 @@ The configuration is divided into:
 - private variables (passwords, tokens, keys) set as environment variables.
 - public variables defined in the ``config.json`` file.
 
-Public configuration
+Section ``Application``
+***********************
+
+- ``address`` (default: ``""``) The address is needed when eNMS needs to provide a link back to the application,
+  which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
+  not work all the time depending on your environment (nginx configuration, proxy, ...)
+- ``config_mode`` (default: ``"debug"``) Must be set to "debug" or "production".
+- ``create_examples`` (default: ``true``) By default, eNMS will create a network topology and a number of services
+  and workflows as an example of what you can do.
+- ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host your
+  own version of the documentation locally. Points to the online documentation by default.
+- ``log_level`` (default: ``"debug"``) Gunicorn log level.
+- ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
+  is the address of the remote git repository where eNMS will push all device configurations.
+
+Section ``Database``
 ********************
 
-- Section ``Application``
+- ``url`` (default: ``"sqlite:///database.db?check_same_thread=False"``) `SQL Alchemy database URL
+  <https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls/>`_, configured
+  for SQLite by default.
+- ``pool_size`` (default: ``1000``) Number of connections kept persistently in `SQL Alchemy pool
+  <https://docs.sqlalchemy.org/en/13/core/pooling.html#sqlalchemy.pool.QueuePool/>`_.
+- ``max_overflow`` (default: ``10``) Maximum overflow size of the connection pool.
+- ``small_string_length`` (default: ``255``) Length of a small string in the database.
+- ``small_string_length`` (default: ``32768``) Length of a large string in the database.
 
-  - ``address`` (default: ``""``) The address is needed when eNMS needs to provide a link back to the application,
-    which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
-    not work all the time depending on your environment (nginx configuration, proxy, ...)
-  - ``config_mode`` (default: ``"debug"``) Must be set to "debug" or "production".
-  - ``create_examples`` (default: ``true``) By default, eNMS will create a network topology and a number of services
-    and workflows as an example of what you can do.
-  - ``documentation_url`` (default: ``"https://enms.readthedocs.io/en/latest/"``) Can be changed if you want to host your
-    own version of the documentation locally. Points to the online documentation by default.
-  - ``log_level`` (default: ``"debug"``) Gunicorn log level.
-  - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
-    is the address of the remote git repository where eNMS will push all device configurations.
+Section ``GoTTY``
+*****************
 
-- Section ``Database``
+- ``port_redirection`` (default: ``false``)
+- ``bypass_key_prompt`` (default: ``true``)
+- ``start_port`` (default: ``9000``)
+- ``end_port`` (default: ``91000``)
 
-  - ``url`` (default: ``"sqlite:///database.db?check_same_thread=False"``) `SQL Alchemy database URL
-    <https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls/>`_, configured
-    for SQLite by default.
-  - ``pool_size`` (default: ``1000``) Number of connections kept persistently in `SQL Alchemy pool
-    <https://docs.sqlalchemy.org/en/13/core/pooling.html#sqlalchemy.pool.QueuePool/>`_.
-  - ``max_overflow`` (default: ``10``) Maximum overflow size of the connection pool.
-  - ``small_string_length`` (default: ``255``) Length of a small string in the database.
-  - ``small_string_length`` (default: ``32768``) Length of a large string in the database.
+Section ``Cluster``
+*******************
 
-- Section ``GoTTy``
+- ``active`` (default: ``false``)
+- ``id`` (default: ``true``)
+- ``scan_subnet`` (default: ``"192.168.105.0/24"``)
+- ``scan_protocol`` (default: ``"http"``)
+- ``scan_timeout`` (default: ``0.05``)
 
-  - ``port_redirection`` (default: ``false``)
-  - ``bypass_key_prompt`` (default: ``true``)
-  - ``start_port`` (default: ``9000``)
-  - ``end_port`` (default: ``91000``)
+Section ``LDAP``
+****************
 
-- Section ``Cluster``
+If LDAP/Active Directory is enabled and the user doesn't exist in the database yet, eNMS tries to authenticate against
+LDAP/AD using the `ldap3` library, and if successful, that user gets added to eNMS locally.
 
-  - ``active`` (default: ``false``)
-  - ``id`` (default: ``true``)
-  - ``scan_subnet`` (default: ``"192.168.105.0/24"``)
-  - ``scan_protocol`` (default: ``"http"``)
-  - ``scan_timeout`` (default: ``0.05``)
+- ``active`` (default: ``false``) Enable LDAP authentication.
+- ``server`` (default: ``"ldap://domain.ad.company.com"``) LDAP Server URL (also called LDAP Provider URL)
+- ``userdn`` (default: ``"domain.ad.company.com"``) LDAP Distinguished Name (DN) for the user
+- ``basedn`` (default: ``"DC=domain,DC=ad,DC=company,DC=com"``) LDAP base distinguished name subtree that is used when
+  searching for user entries on the LDAP server. Use LDAP Data Interchange Format (LDIF) syntax for the entries.
+- ``admin_group`` (default: ``"eNMS.Users,network.Admins"``) string to match against 'memberOf' attributes of the
+  matched user to determine if the user is allowed to log in.
 
-- Section ``ldap``
-
-  - ``active`` (default: ``false``)
-  - ``server`` (default: ``"ldap://domain.ad.company.com"``)
-  - ``userdn`` (default: ``"domain.ad.company.com"``)
-  - ``basedn`` (default: ``"DC=domain,DC=ad,DC=company,DC=com"``)
-  - ``admin_group`` (default: ``"eNMS.Users,network.Admins"``)
+.. note:: Failure to match memberOf attribute output against LDAP_ADMIN_GROUP results in an 403 authentication error.
+  An LDAP user MUST be a member of one of the "LDAP_ADMIN_GROUP" groups to authenticate.
+.. note:: Because eNMS saves the user credentials for LDAP and TACACS+ into the Vault, if a user's credentials expire
+  due to password aging, that user needs to login to eNMS in order for the updated credentials to be replaced in Vault storage.
+  In the event that services are already scheduled with User Credentials, these might fail if the credentials
+  are not updated in eNMS.
 
 - Section ``Mail``
 

@@ -137,136 +137,53 @@ Version 3.15.2
 Version 3.15.1
 --------------
 
-Waiting time is now skipped when the job is skipped.
-
-change result to mediumblob pickletype
-
-remove configurations from ansible command
-
-remove table filtering N/A
-
-Update docs
-
-Add more regression tests (including sip job feature)
-
-Bug fixes
-
+- Waiting time is now skipped when the job is skipped.
+- Change result to mediumblob pickletype
+- remove Configurations from ansible command
+- remove table filtering N/A
+- Add more regression tests (including skip job feature)
 
 Version 3.15
 ------------
 
-New env variable: CUSTOM_CODE_PATH. Lets you define a path to a folder that contains custom code that
-you can use in your custom services.
-
-Advanced search: per relationship system
-
-eNMS version is now displayed in the UI. The version number is read from the package.json file.
-
-Refactoring of the results window:
-
-the order of the Services within the Workflow are now sequential with the order in which they were run.
-collapsable sections for devices / jobs
-new "workflow" section
-"advanced" section removed
-Refactoring of the logs: real-time logs is now working
-even with multiprocessing enabled.
-LOG FOLDER CHANGE: there is no more logs/app_logs and logs/job_logs. job_logs no longer exist,
-and the content of app_logs in now in /logs.
-
-Workflow restartability improvement:
-
-default to the latest payload
-you can now choose exactly what jobs you want to see included in that payload
-you can select not just one but multiple start points for the workflow
-the restartability is now in the "Run Window"
-custom credentials made blue: substitution fields
-
-Bug in tables: jump to bottom after page 1 when table is refreshed: fixed.
-
-Panel repaint bug when pulling it down: fixed.
-
-Relationship are now displayed in the edit window: you can edit which service/workflow a device/task is a target of, etc...
-
-Spinning GIF to indicate that its 'working...'
-
-Add new services in a workflow: services are spread in a stairsteps in the workflow builder.
-
-Workflow Builder: edit the service when it's double clicked
-
-Copy to clipboard for device configuration
-
-Fix bug subworkflow edit panel
-
-Export Jobs needs to automatically delete devices and pools
-
-Service should fail if a python query produces a device target that does not match inventory/database
-
-timeout and other parameters getting updated for all services using cached Netmiko connections.
-
-Ability to close a cached connection and re-originate the connection in a service.
-
-Logs work with Multiprocessing enabled
-
-Start time of each Service within a Workflow displayed,
-
-User can now track the progress of a workflow even if the workflow was started with a REST call
-
-New GET Result Endpoint for the REST API to get the result of a job run asynchronously:
-if async run_job was invoked, you can use the runtime returned in the REST response
-to collect the results after completion
-via a GET request to /result/name/runtime
-
-New Run Management window:
-
-you can filter per run status ("Running", ...)
-The progress of a run (number of devices completed, failed) now works with multiprocessing.
-Slashes are now forbidden from services and worklfow names (conflict with Unix path)
-
-Services and workflows cannot be stuck anymore: the exceptions are caught are a higher level
-and they should always terminate and return the stacktrace.
-
-The command sent to a device is not displayed in the results
-
-Credentials are now hidden when using gotty.
-
-Job Parametrization.
-
-Service type now displayed in the workflow builder.
-
-NEW "Custom configuration". You have a new env variable "PATH_CUSTOM_CONFIG" where you can set
-the path to a valid JSON valid.
-You can find an example of such a file in the tests/customization folder.
-In this file, you can set any property you want (for example if you're running in LAB or PRODUCTION).
-
-New parameter: Skip (boolean)
-If that property is ticked, the job is ticked when run in a workflow.
-
-New parameter: Skip query (string)
-Same as skip, except that it takes a python query.
-You can use a variable from the payload to decided whether or not to skip a job (via the get_result function, or the get_var function)
-or a variable from the "custom configuration" available as a dictionary called "config".
-
-Added number of successful / failed devices on workflow edges.
-
-Run status automatically switched from "Running" to "Aborted" upon reloading the app.
-
-napalm getter service: default dict match mode becomes inclusion.
-
-Renaming 'History' => 'Job Run Status'
-
-Replaced pyyaml with ruamel
-
-Both true and True are now accepted when saving a dictionary field.
-
-Running an ansible playbook in the /playbooks folder doesn't work because of ansible/ansible#12862.
-In order to work around that, I am now using the optional "cwd" argument of subprocess.check_output in the ansible service to tell eNMS to run the ansible-playbook command from the /playbooks folder.
-
-Set stdout_callback = json in ansible config to get a json output by default.
-
-Change in the LDAP authentication: LDAP users that are not admin should now longer be allowed to log in (403 error).
-
-The "dictionary match" mechanism should support lists now.
-
-New "Logs" window to see the different logs of a service/workflow for each runtime.
-
-show the user that initiated the job, along with the runtime when selecting a run
+- New env variable: CUSTOM_CODE_PATH to define a path to a folder that contains custom code that
+  you can use in your custom services.
+- Advanced search: per relationship system
+- eNMS version now displayed in the UI. The version number is read from the package.json file.
+- Real-time log mechanism with multiprocessing enabled.
+- Workflow restartability improvement:
+- Fixed bug in tables: jump to bottom after page 1 when table is refreshed.
+- Fixed panel repaint bug when pulling it down.
+- Relationship are now displayed in the edit window: you can edit which service/workflow a device/task is a target of, etc...
+- Spinning GIF when AJAX requests
+- Add new services in a workflow: services are spread in a stairsteps in the workflow builder.
+- Workflow Builder: edit the service when it's double clicked
+- Copy to clipboard for device configuration
+- Fix bug subworkflow edit panel
+- Export Jobs needs to automatically delete devices and pools
+- Service should fail if a python query produces a device target that does not match inventory/database
+- timeout and other parameters getting updated for all services using cached Netmiko connections.
+- Ability to close a cached connection and re-originate the connection in a service.
+- Start time of each Service within a Workflow displayed,
+- User can now track the progress of a workflow even if the workflow was started with a REST call
+- New GET Result Endpoint for the REST API to get the result of a job run asynchronously:
+  if async run_job was invoked, you can use the runtime returned in the REST response to collect the results
+  after completion via a GET request to /result/name/runtime
+- New Run Management window:
+- Slashes are now forbidden from services and worklfow names (conflict with Unix path)
+- The command sent to a device is now displayed in the results
+- Credentials are now hidden when using gotty.
+- Job Parametrization.
+- Service type now displayed in the workflow builder.
+- New service parameter: Skip (boolean)
+- New parameter: Skip query (string) Same as skip, except that it takes a python query.
+- Added number of successful / failed devices on workflow edges.
+- Run status automatically switched from "Running" to "Aborted" upon reloading the app.
+- napalm getter service: default dict match mode becomes inclusion.
+- Replaced pyyaml with ruamel
+- Both true and True are now accepted when saving a dictionary field.
+- Set stdout_callback = json in ansible config to get a json output by default.
+- Change in the LDAP authentication: LDAP users that are not admin should now longer be allowed to log in (403 error).
+- The "dictionary match" mechanism now supports lists.
+- New "Logs" window to see the different logs of a service/workflow for each runtime.
+- Show the user that initiated the job, along with the runtime when selecting a run

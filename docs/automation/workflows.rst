@@ -6,6 +6,7 @@ A workflow is a graph of services connected with ``success`` and ``failure`` edg
 If a service is executed successfully, the workflow continues down the ``success`` path to the next service,
 otherwise it goes down the ``failure`` path.
 Workflows are managed from the :guilabel:`Workflow Builder`.
+When a workflow is running, the results are automatically updated in real-time in the workflow builder.
 
 Workflow Builder
 ----------------
@@ -14,20 +15,21 @@ Workflow Builder
    :alt: Workflow builder
    :align: center
 
-- Section 1 is used for creating services and edges.
+- Section 1: services and edges creation.
 
     - The first row lets you choose a service type and click on the "plus" button to create a new service that
       will be added to the workflow.
     - On the second row, you can change the mode to "Edge creation" and select which type of edge you want to create.
 
-- A drop-down list containing all existing top-level workflows. This list allows switching between workflows.
-- The workflow itself is displayed as a graph. The  services are connected by arrows of type success edge or failure edge.
-- A ``general right-click menu`` can be accessed by clicking on the background or white-space.
-- A ``service-specific right-click menu`` can be accessed by right clicking on a specific service.
+- Section 2: edit and duplicate the current workflow, create a new workflow, add existing services to the workflow,
+create labels, skip or unskip services, and delete selected services and edges.
+- Section 3: run or pause a workflow, and display the workflow logs and results.
+- Section 4: refresh the workflow, zoom and unzoom, move to the previous or next workflow, and move to the selected
+  subworkflow.
+- Section 5: choose which workflow to display, and which results.
 
-.. image:: /_static/automation/workflows/workflow_background_menu.png
-   :alt: Workflow management
-   :align: center
+Some of these actions are also available from the right-click menus (clicking on the background, on a service or on an
+edge generate different menus).
 
 From the ``service-specific right-click menu``, you can:
 

@@ -48,26 +48,28 @@ Workflow
 
 This section contains the parameters that only apply when the service runs inside a workflow.
 
-- ``Waiting time (in seconds)`` How many seconds to wait after the service instance has completed running before running the next service.
+- ``Skip this Service Regardless`` Always skip the service
+- ``Skip Service If Python Query evaluates to True`` This fields expect a python code that will evaluates to either ``True``
+  or ``False``. The service will be skipped or not depending the result.
+- ``Maximum number of runs`` (default: ``1``) Number of time a service is allowed to run in a workflow (de
+- ``Waiting time (in seconds)`` Number of seconds to wait when the service is done running.
 
 Devices
 *******
 
-Some services have no devices at all: it depends on what the service is doing.
+Most services run on "device targets". There are three properties for selecting devices.
+The list of targets will be the union of all devices coming from these properties.
 
-There are two ways to select devices:
+- ``Devices`` Direct selection by device names
+- ``Pools`` Direct selection by choosing pools. The set of all devices from all selected pools will be used.
+- ``Device query`` and ``Query Property Type`` Programmatic selection with a python query
 
-- Directly from the "Devices" and "Pools" drop-down. The service will run on all selected devices,
-as well as on the devices of all selected pools.
-- With a python query to extract devices (either IP address or names) from the payload.
-The python query can use the variables and functions described in the "Advanced" section of the documentation.
+  - ``Device query`` Query that must return an **iterable** (e.g python list) of **strings (either IP addresses or names)**.
+  - ``Query Property Type`` Indicates whether the iterable contains IP addresses of names, for eNMS to convert the list
+    to actual devices from the inventory.
 
-- ``Devices`` Multi-selection list of devices from the inventory
-- ``Pools`` (Filtered) pools of devices can be selected instead of, or in addition to, selecting individual devices. Multiple pools may also be selected.
-- ``Multiprocessing`` A service can run on its devices either sequentially, or in parallel if the ``Multiprocessing`` checkbox is ticked.
-Checkbox enables parallel execution behavior when multiple devices are selected. See the document section on the Workflow System and Workflow Devices for discussion on this behavior.
-- ``Maximum Number of Processes`` Set the maximum number of device processes allowed per service instance (assumes devices selected at the service instance level)
-- ``Credentials`` Choose between device credentials from the inventory or user credentials (login credentials for the eNMS user) when connecting to each device.
+- ``Multiprocessing`` Run the service on all devices in parallel.
+- ``Maximum Number of Processes``
 
 Iteration
 *********

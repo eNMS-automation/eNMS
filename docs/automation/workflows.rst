@@ -38,31 +38,22 @@ The devices used when running a workflow depend on the workflow ``Run Method`` t
 section ``Devices``.
 There are three run methods for a workflow:
 
-- Run the workflow device by device: the devices configured **at workflow level** are considered. The workflow will run for
+- **device by device**: the devices configured **at workflow level** are considered. The workflow will run for
   each device independently from the other devices. With multiprocessing disabled, devices will run the workflow 
   **sequentially**, one at a time. If multiprocessing **at workflow level** is enabled, you can have as many devices
   running the workflow in parallel as you have available processes.
-- Run the workflow service by service using workflow targets: the devices configured **at workflow level** are considered.
+- **service by service using workflow targets**: the devices configured **at workflow level** are considered.
   Each device can follow a different path depending on whether a service is successful or not, but services are always
   run **one at a time**. eNMS will compute the targets of a service by keeping track of the path of each device throughout
   the workflow. Multiprocessing must be enabled **at service level**.
-- Run the workflow service by service using service targets: only the devices selected at the individual service level
-  are considered. Devices selected at workflow level are ignored.
+- **service by service using service targets**: only the devices selected **at the individual service level**
+  are considered. Devices selected at workflow level are ignored. A service is considered successful if it ran successfully
+  on all of its targets (if it fails on at least one target, it is considered to have failed).
+  This mode is useful for workflows where services have different targets
 
-
-If ``Use Workflow Targets`` is unticked, services will run on their own targets. A service is considered successful if it ran successfully on all of its targets (if it fails on at least one target, it is considered to have failed).
-The "Use service targets" mode can be used for workflows where services have different targets (for example, a first service would run on devices A, B, C and the next one on devices D, E).
-
-If ``Use Workflow Targets`` is ticked, the workflow will run on its own targets (all devices configured at service level are ignored). Devices are independent from each other: one device may run on all services in the workflow if it is successful while another one could stop at the first step: they run the workflow independently and will likely follow different path in the workflow depending on whether they fail or pass services thoughout the workflow.
-
-Connection Cache
-----------------
-
-When using several netmiko and napalm connections in a workflow, the connection object is cached and reused automatically.
-If for some reason you want a service to create a fresh connection, you can tick the ``Start New Connection`` box
-in the "Workflow" section of the creation panel.
-Upon running this service, eNMS will automatically discard the current cached connection, start a new one and
-make it the new cached connection.
+For the first two modes, devices are independent from each other: one device may run on all services in the workflow
+if it is successful while another one could stop at the first step: they run the workflow independently and will likely
+follow different paths in the workflow depending on whether they fail or pass services thoughout the workflow.
 
 Success of a Workflow
 ---------------------
@@ -73,14 +64,14 @@ of the workflow is considered successful. If a particular service service fails,
 then the workflow should just stop there (with the workflow thus having an overall Failure status),
 or it should call a cleanup/remediation service (after which the workflow will just stop there).
 
-Automatic refresh
------------------
+Connection Cache
+----------------
 
-A workflow displayed in the Workflow Builder page is automatically updated:
-- Every 0.7 second if the workflow is currently running
-- Every 15 seconds otherwise
-
-This allows multiple users to work concurrently on a single Workflow in the Workflow Builder.
+When using several netmiko and napalm connections in a workflow, the connection object is cached and reused automatically.
+If for some reason you want a service to create a fresh connection, you can tick the ``Start New Connection`` box
+in the "Workflow" section of the creation panel.
+Upon running this service, eNMS will automatically discard the current cached connection, start a new one and
+make it the new cached connection.
 
 Workflow Restartability
 -----------------------

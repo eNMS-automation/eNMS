@@ -123,31 +123,6 @@ The most important characteristic of workflows is the transfer of data between s
 When a service starts, it is provided with the results of ALL services in the workflow
 that have already been executed (and not only the results of its "predecessors").
 
-The base code for a job function is the following:
-
-::
-
-    def job(self, payload: dict) -> dict:
-        self.logs.append(f"Real-time logs displayed when the service is running.")
-        # The "job" function is called when the service is executed.
-        # The parameters of the service can be accessed with self (self.string1,
-        # self.boolean1, etc)
-        # You can look at how default services (netmiko, napalm, etc.) are
-        # implemented in other folders.
-        # The resulting dictionary will be displayed in the logs.
-        # It must contain at least a key "success" that indicates whether
-        # the execution of the service was a success or a failure.
-        # In a workflow, the "success" value will determine whether to move
-        # forward with a "Success" edge or a "Failure" edge.
-        return {"success": True, "result": "example"}
-
-
-The dictionary that is returned by ``job`` is the result of the job,
-i.e the information that will be transferred to the next jobs to run in the workflow.
-It MUST contain a key ``success``, to tell eNMS whether the job was considered a
-success or not (therefore influencing how to move forward in the workflow:
-either via a ``Success`` edge or a ``Failure`` edge).
-
 In case the job has "device targets", it will receive an additional argument ``device``
 
 ::

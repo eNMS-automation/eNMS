@@ -16,7 +16,7 @@ Version 3.18
 - Duplicate button at workflow level to duplicate any workflow as top-level workflow
 - Update to the operational data backup service to include rancid-like prefixes
 - Add new "run method" property to define how a service is running (once per device, or once for all devices),
-    and the equivalent property for workflow: run device by device, or service by service.
+  and the equivalent property for workflow: run device by device, or service by service.
 - Replace endtime with "duration" in the results and run table
 - Fix bug infinite loop when adding a workflow to itself
 - New "run method" option for services: : 

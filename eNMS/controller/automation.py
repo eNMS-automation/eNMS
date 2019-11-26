@@ -147,6 +147,7 @@ class AutomationController(BaseController):
 
     def get_workflow_services(self, id, node):
         parents = list(self.get_parent_workflows(fetch("workflow", id=id)))
+        print(node)
         if node == "all":
             return [
                 {
@@ -158,6 +159,12 @@ class AutomationController(BaseController):
                 }
                 for workflow in fetch_all("workflow")
                 if not workflow.workflows
+            ] + [{"id": "standalone", "text": "Standalone services", "children": True}]
+        elif node == "standalone":
+            return [
+                {"id": service.id, "text": service.name}
+                for service in fetch_all("service")
+                if not service.workflows and service.type != "workflow"
             ]
         else:
             return [

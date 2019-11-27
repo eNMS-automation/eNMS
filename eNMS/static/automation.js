@@ -161,6 +161,9 @@ function showRuntimePanel(type, service, runtime, displayTable) {
           $(`#runtimes-${service.id}`)
             .val(runtime)
             .selectpicker("refresh");
+          $(`#runtimes-${service.id}`).on("change", function() {
+            displayFunction(service, this.value);
+          });
           displayFunction(service, runtime);
         }
       });
@@ -189,6 +192,7 @@ function displayLogs(service, runtime) {
 
 function displayResultsTree(service, runtime) {
   call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
+    $(`#result-tree-${service.id}`).jstree("destroy").empty();
     let tree = $(`#result-tree-${service.id}`).jstree({
       core: {
         animation: 200,
@@ -221,6 +225,7 @@ function displayResultsTree(service, runtime) {
         },
       },
     });
+
     tree.bind("loaded.jstree", function() {
       tree.jstree("open_all");
     });

@@ -1,5 +1,4 @@
-- color: pink
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -71,6 +70,7 @@
     : [-604, 9]
     iteration_devices_workflow: ['-164', '15']
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Start
   send_notification: false
   send_notification_method: mail
@@ -82,8 +82,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: pink
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -158,6 +157,7 @@
     : [-600, 63]
     iteration_devices_workflow: ['651', '20']
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: End
   send_notification: false
   send_notification_method: mail
@@ -169,8 +169,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -202,6 +201,7 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: cluster_monitoring
   send_notification: false
   send_notification_method: mail
@@ -213,8 +213,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -247,6 +246,7 @@
   positions:
     'Regression Workflow 9: Operational Data Backup': [207, 117]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Push Configurations to Git
   send_notification: false
   send_notification_method: mail
@@ -264,7 +264,6 @@
   an_integer: 10
   boolean1: true
   boolean2: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -306,6 +305,7 @@
     'Regression Workflow C: Advanced multiprocessing': [-266, -204]
   regex: ''
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Example Service (does nothing)
   send_notification: false
   send_notification_method: mail
@@ -321,7 +321,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -362,6 +361,7 @@
     'Regression Workflow C: Advanced multiprocessing': [299, -170]
   remote_as: 200
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: napalm_configure_bgp_1
   send_notification: false
   send_notification_method: mail
@@ -376,7 +376,6 @@
   vrf_name: configure_BGP_test
   waiting_time: 100
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -420,6 +419,7 @@
   regex_replace_2: ''
   regex_replace_3: ''
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Configuration Backup (NAPALM)
   send_notification: false
   send_notification_method: mail
@@ -435,7 +435,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   commit_configuration: false
   config_mode: false
   config_mode_command: ''
@@ -481,6 +480,7 @@
   positions:
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [-4, -120]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: netmiko_create_vrf_test
   send_notification: false
   send_notification_method: mail
@@ -499,7 +499,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: true
-  color: '#D2E5FF'
   command: show vrf
   config_mode: false
   content_match: test
@@ -548,6 +547,7 @@
     'Regression Workflow A: get_var, set_var, get_result': ['355', '-25']
     iteration_devices_workflow: ['414', '-154']
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: netmiko_check_vrf_test
   send_notification: false
   send_notification_method: mail
@@ -565,7 +565,6 @@
   vendor: Arista
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   commit_configuration: false
   config_mode: false
   config_mode_command: ''
@@ -612,6 +611,7 @@
     'Regression Workflow 4: VRF creation and deletion with Netmiko': [476, 119]
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '50']
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: netmiko_delete_vrf_test
   send_notification: false
   send_notification_method: mail
@@ -630,7 +630,6 @@
   waiting_time: 1
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show vrf
   config_mode: false
   content_match: test
@@ -677,6 +676,7 @@
     'Regression Workflow 5: VRF creation and deletion with Napalm': ['0', '150']
     iteration_devices_workflow: ['337', '-145']
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Netmiko: Check VRF (test) does not exist'
   send_notification: false
   send_notification_method: mail
@@ -695,7 +695,6 @@
   waiting_time: 0
 - action: load_merge_candidate
   close_connection: false
-  color: '#D2E5FF'
   content: "vrf definition napalm\r\n"
   content_match: ''
   content_match_regex: false
@@ -736,6 +735,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       -374, -164]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Create a VRF with NAPALM
   send_notification: false
   send_notification_method: mail
@@ -751,7 +751,6 @@
   vendor: Arista
   waiting_time: 0
 - call_type: GET
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: text
@@ -795,6 +794,7 @@
     'Regression Workflow D: Prompts': [405, -103]
   rest_url: http://127.0.0.1:5000/rest/is_alive
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'REST API: call *is_alive* endpoint'
   send_notification: false
   send_notification_method: mail
@@ -810,7 +810,6 @@
   verify_ssl_certificate: true
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -852,6 +851,7 @@
     'Regression Workflow A: get_var, set_var, get_result': ['39', '-32']
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'NAPALM: Get Facts'
   send_notification: false
   send_notification_method: mail
@@ -867,7 +867,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -908,6 +907,7 @@
     'Regression Workflow 3: Napalm getters (postprocessing)': [-111, 213]
     'Regression Workflow F: Workflow of Workflows': [-336, 217]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'NAPALM: Get interfaces'
   send_notification: false
   send_notification_method: mail
@@ -923,7 +923,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -964,6 +963,7 @@
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   result_postprocessing: "# Will change the IPv6 of the Management Interface to ::1\r\
     \nresults[\"result\"][\"get_interfaces_ip\"][\"Management1\"][\"ipv6\"] = \"::1\""
+  run_method: per_device
   scoped_name: get_interfaces_ip
   send_notification: false
   send_notification_method: mail
@@ -979,7 +979,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1019,6 +1018,7 @@
     'Regression Workflow 3: Napalm getters (postprocessing)': [531, -9]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: get_config
   send_notification: false
   send_notification_method: mail
@@ -1033,8 +1033,7 @@
   validation_method: dict_included
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -1068,6 +1067,7 @@
     'Regression Workflow 3: Napalm getters (postprocessing)': [360, 210]
     'Regression Workflow F: Workflow of Workflows': [3, -51]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: process_payload1
   send_notification: false
   send_notification_method: mail
@@ -1079,8 +1079,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -1104,7 +1103,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1116,6 +1115,7 @@
     'Regression Workflow F: Workflow of Workflows': [-790, 110]
     Workflow with iteration target subworkflows: [283, -152]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Modify Payload for Iteration
   send_notification: false
   send_notification_method: mail
@@ -1135,7 +1135,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: true
-  color: '#D2E5FF'
   command: show ip route
   config_mode: false
   content_match: ''
@@ -1183,6 +1182,7 @@
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
     : [49, -207]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: netmiko_show_ip_route
   send_notification: true
   send_notification_method: mail
@@ -1199,8 +1199,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -1254,6 +1253,7 @@
   query2: get_result("netmiko_show_ip_route", device.name)["result"]
   query3: get_result("netmiko_show_ip_route", device=device.name)["result"]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Payload Extraction
   send_notification: false
   send_notification_method: mail
@@ -1268,8 +1268,7 @@
   variable3: textfsm_variable
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -1308,6 +1307,7 @@
     : [-345, -11]
   query: get_result("Payload Extraction", device.name)["result"]["regex_variable"]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Validate dict via results'
   send_notification: false
   send_notification_method: mail
@@ -1319,8 +1319,7 @@
   validation_method: dict_included
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: (\d\.){3}\d
+- content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: none
   creator: admin
@@ -1358,6 +1357,7 @@
     : [-233, 211]
   query: get_result("Payload Extraction", device.name)["result"]["textfsm_variable"]["value"][0][1]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Validate text via results'
   send_notification: false
   send_notification_method: mail
@@ -1370,7 +1370,6 @@
   vendor: Arista
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -1410,6 +1409,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       287, 136]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Rollback Configuration with NAPALM
   send_notification: false
   send_notification_method: mail
@@ -1426,7 +1426,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show vrf
   config_mode: false
   content_match: napalm
@@ -1474,6 +1473,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow 5: VRF creation and deletion with Napalm': [
       267, -146]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Check VRF exists with Netmiko
   send_notification: false
   send_notification_method: mail
@@ -1492,7 +1492,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show vrf
   config_mode: false
   content_match: napalm
@@ -1539,6 +1538,7 @@
       -348, 160]
     iteration_devices_workflow: ['245', '32']
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Check VRF is not configured with Netmiko
   send_notification: false
   send_notification_method: mail
@@ -1556,7 +1556,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   command: show vrf a
   config_mode: false
   confirmation1: Protocols
@@ -1605,6 +1604,7 @@
   response2: show vrf c
   response3: ''
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Test Netmiko Prompt Service
   send_notification: false
   send_notification_method: mail
@@ -1620,7 +1620,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   command: show vrf
   config_mode: false
   confirmation1: Protocols
@@ -1669,6 +1668,7 @@
   response2: ''
   response3: ''
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Test netmiko prompts pass
   send_notification: false
   send_notification_method: mail
@@ -1683,8 +1683,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -1718,6 +1717,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-376, -138]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Modify payload (no device)
   send_notification: false
   send_notification_method: mail
@@ -1732,8 +1732,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -1767,6 +1766,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [0, -144]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Modify payload (per device)
   send_notification: false
   send_notification_method: mail
@@ -1786,7 +1786,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show vrf {{get_var("iteration_simple", section="pools")}}
   config_mode: false
   content_match: ''
@@ -1831,6 +1830,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [474, -11]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Show vrf with payload helper
   send_notification: false
   send_notification_method: mail
@@ -1849,7 +1849,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show vrf test
   config_mode: false
   content_match: ''
@@ -1894,6 +1893,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [425, 190]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Show vrf with python query
   send_notification: false
   send_notification_method: mail
@@ -1912,7 +1912,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show vrf {{get_result("Payload editor, with device")["duration"]}}
   config_mode: false
   content_match: ''
@@ -1957,6 +1956,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-445, 128]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: show runtime with get_result helper
   send_notification: false
   send_notification_method: mail
@@ -1974,7 +1974,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2018,6 +2017,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [-405, -99]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Getters Workflow: is alive'
   send_notification: false
   send_notification_method: mail
@@ -2033,7 +2033,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2076,6 +2075,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [18, -122]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Getters Workflow: get facts'
   send_notification: false
   send_notification_method: mail
@@ -2091,7 +2091,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2136,6 +2135,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [581, 136]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Getters Workflow: Interface IP'
   send_notification: false
   send_notification_method: mail
@@ -2151,7 +2151,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2194,6 +2193,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [-45, 144]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Getters Workflow: MAC address'
   send_notification: false
   send_notification_method: mail
@@ -2209,7 +2209,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -2252,6 +2251,7 @@
       of Workflow] Regression Workflow B: Napalm getters validation'
     : [535, -147]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Getters Workflow: get facts failed match'
   send_notification: false
   send_notification_method: mail
@@ -2267,7 +2267,6 @@
   vendor: ''
   waiting_time: 0
 - arguments: ''
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: json
@@ -2306,6 +2305,7 @@
     'Regression Workflow 6: Ansible with Validation': [-466, 154]
     'Regression Workflow B: Napalm getters validation': [-30, 126]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show version'
   send_notification: false
   send_notification_method: mail
@@ -2318,7 +2318,6 @@
   vendor: ''
   waiting_time: 0
 - arguments: ''
-  color: '#D2E5FF'
   content_match: ip address\s.*/32
   content_match_regex: true
   conversion_method: text
@@ -2356,6 +2355,7 @@
   positions:
     'Regression Workflow 6: Ansible with Validation': [179, -62]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (regex match)'
   send_notification: false
   send_notification_method: mail
@@ -2368,7 +2368,6 @@
   vendor: ''
   waiting_time: 0
 - arguments: ''
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: json
@@ -2406,6 +2405,7 @@
   positions:
     'Regression Workflow 6: Ansible with Validation': [486, 173]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Ansible Workflow: Arista show configuration (dict match)'
   send_notification: false
   send_notification_method: mail
@@ -2419,7 +2419,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show version
   config_mode: false
   content_match: ''
@@ -2464,6 +2463,7 @@
     'Regression Workflow C: Advanced multiprocessing': [-367, 143]
     'Regression Workflow F: Workflow of Workflows': [678, 52]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Show version with multiprocessing
   send_notification: false
   send_notification_method: mail
@@ -2482,7 +2482,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show interface {{get_var('non_default_iteration_value_name')}}
   config_mode: false
   content_match: 255.255.255.255
@@ -2527,6 +2526,7 @@
   positions:
     'Regression Workflow E: Iteration Targets': [240, -144]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 1
   send_notification: false
   send_notification_method: mail
@@ -2545,7 +2545,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show interface {{get_var('iteration_value')}}
   config_mode: false
   content_match: 255.255.255.255
@@ -2590,6 +2589,7 @@
   positions:
     'Regression Workflow E: Iteration Targets': [572, -4]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Iteration Target Workflow - Test 2
   send_notification: false
   send_notification_method: mail
@@ -2608,7 +2608,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show interface {{get_var('iteration_value')}}
   config_mode: false
   content_match: 255.255.255.255
@@ -2653,6 +2652,7 @@
   positions:
     'Regression Workflow E: Iteration Targets': [556, 123]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Iteration Target Workflow - Test 3
   send_notification: false
   send_notification_method: mail
@@ -2669,8 +2669,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: (\d\.){3}\d
+- content_match: (\d\.){3}\d
   content_match_regex: true
   conversion_method: text
   creator: admin
@@ -2708,6 +2707,7 @@
     : [776, 146]
   query: get_var("textfsm_variable", device=device.name)[0][1]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Validate text via payload'
   send_notification: false
   send_notification_method: mail
@@ -2719,8 +2719,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -2759,6 +2758,7 @@
     : [708, -114]
   query: get_var("regex_variable", device=device.name)
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Validate dict via payload'
   send_notification: false
   send_notification_method: mail
@@ -2770,8 +2770,7 @@
   validation_method: text
   vendor: Arista
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -2808,6 +2807,7 @@
       of Workflow] Regression Workflow 8: Payload Extraction with Operations'
     : [118, -243]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Add initial variables'
   send_notification: false
   send_notification_method: mail
@@ -2822,8 +2822,7 @@
   validation_method: none
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -2872,6 +2871,7 @@
   query2: 'get_result("Getters Workflow: Interface IP", device=device.name)["negative_logic"]'
   query3: 'get_result("Getters Workflow: Interface IP", device=device.name)["match"]'
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 1'
   send_notification: false
   send_notification_method: mail
@@ -2886,8 +2886,7 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -2936,6 +2935,7 @@
   query2: get_result("Start")["logs"]
   query3: get_result("Start")["state"]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Extraction 2'
   send_notification: false
   send_notification_method: mail
@@ -2950,8 +2950,7 @@
   variable3: dict
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: \[1,2,False,1.*\]
+- content_match: \[1,2,False,1.*\]
   content_match_regex: true
   conversion_method: text
   creator: admin
@@ -2989,6 +2988,7 @@
     : [62, 62]
   query: get_var("list", device=device.name)
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Validation 1'
   send_notification: false
   send_notification_method: mail
@@ -3000,8 +3000,7 @@
   validation_method: text
   vendor: ''
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
+- content_match: '{"a": ["o", True, 4], "prefix_length": 24, "failed": 0}'
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -3039,6 +3038,7 @@
     : [-565, 68]
   query: get_var("dict", device=device.name)
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Payload Workflow: Validation 2'
   send_notification: false
   send_notification_method: mail
@@ -3051,7 +3051,6 @@
   vendor: ''
   waiting_time: 0
 - call_type: GET
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3090,6 +3089,7 @@
     'Regression Workflow E: Iteration Targets': [-135, 91]
   rest_url: http://127.0.0.1:5000/rest/instance/device/{{get_var('iteration_value')}}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Iteration Targets Workflow - Test 4
   send_notification: false
   send_notification_method: mail
@@ -3104,8 +3104,7 @@
   vendor: ''
   verify_ssl_certificate: false
   waiting_time: 0
-- color: '#D2E5FF'
-  content_match: ''
+- content_match: ''
   content_match_regex: false
   conversion_method: none
   creator: admin
@@ -3142,6 +3141,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
       240, -101]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Variable Access Subworkflow: Access variable from snippet'
   send_notification: false
   send_notification_method: mail
@@ -3164,7 +3164,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show interface {{get_var('iteration_value')}}
   config_mode: false
   content_match: ''
@@ -3211,6 +3210,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent Workflow': [
       244, 113]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Variable Access Subworkflow: Access variables for iteration'
   send_notification: false
   send_notification_method: mail
@@ -3228,7 +3228,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3267,6 +3266,7 @@
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow 9: Operational Data Backup'
   send_notification: false
   send_notification_method: mail
@@ -3283,7 +3283,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3355,6 +3354,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow 4: VRF creation and deletion with Netmiko'
   send_notification: false
   send_notification_method: mail
@@ -3372,7 +3372,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3414,6 +3413,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [152, 75]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow 5: VRF creation and deletion with Napalm'
   send_notification: false
   send_notification_method: mail
@@ -3434,7 +3434,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3479,6 +3478,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [464, 224]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow 3: Napalm getters (postprocessing)'
   send_notification: false
   send_notification_method: mail
@@ -3495,7 +3495,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3572,6 +3571,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       134, -147]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow 7: Payload Extraction & Validation'
   send_notification: false
   send_notification_method: mail
@@ -3599,7 +3599,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3643,16 +3642,17 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow F: Workflow of Workflows'
   send_notification: true
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -3662,7 +3662,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3702,6 +3701,7 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow 2: Separate Failure - Success paths'
   send_notification: false
   send_notification_method: mail
@@ -3718,7 +3718,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3757,6 +3756,7 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow D: Prompts'
   send_notification: false
   send_notification_method: mail
@@ -3772,7 +3772,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3825,6 +3824,7 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow A: get_var, set_var, get_result'
   send_notification: false
   send_notification_method: mail
@@ -3844,7 +3844,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3916,6 +3915,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       678, 11]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow B: Napalm getters validation'
   send_notification: false
   send_notification_method: mail
@@ -3939,7 +3939,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -3999,6 +3998,7 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow 6: Ansible with Validation'
   send_notification: false
   send_notification_method: mail
@@ -4016,7 +4016,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4062,6 +4061,7 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow C: Advanced multiprocessing'
   send_notification: false
   send_notification_method: mail
@@ -4078,7 +4078,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4147,15 +4146,16 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -4165,7 +4165,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4202,6 +4201,7 @@
     '[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow of Workflow': [
       135, 187]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow 8: Payload Extraction with Operations'
   send_notification: false
   send_notification_method: mail
@@ -4228,7 +4228,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4264,6 +4263,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [164, 375]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow F S2: Access Variables from Parent Workflow'
   send_notification: false
   send_notification_method: mail
@@ -4281,7 +4281,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4317,6 +4316,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [-655, 369]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: 'Regression Workflow F S1: Subworkflow of Workflow'
   send_notification: false
   send_notification_method: mail
@@ -4336,7 +4336,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: false
-  color: '#D2E5FF'
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4367,7 +4366,7 @@
         \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
         \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
       positions: [-147, -217]
-  last_modified: '2019-10-24 22:58:13.326990'
+  last_modified: '2019-11-27 06:31:32.129852'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4380,6 +4379,7 @@
   pools: []
   positions: {}
   result_postprocessing: ''
+  run_method: per_service_with_service_targets
   scoped_name: 'Regression Workflow 1: Netmiko with validation and retries'
   send_notification: false
   send_notification_method: mail
@@ -4395,7 +4395,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show vrf
   config_mode: false
   content_match: NOVRF
@@ -4440,6 +4439,7 @@
   positions:
     'Regression Workflow 1: Netmiko with validation and retries': [-142, -137]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Check VRF (NOVRF) exists
   send_notification: false
   send_notification_method: mail
@@ -4458,7 +4458,6 @@
   waiting_time: 0
 - auto_find_prompt: true
   close_connection: false
-  color: '#D2E5FF'
   command: show interfaces
   config_mode: false
   content_match: ''
@@ -4502,6 +4501,7 @@
   positions:
     'Regression Workflow F: Workflow of Workflows': [-408, 34]
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Show interfaces with Netmiko
   send_notification: false
   send_notification_method: mail
@@ -4519,7 +4519,6 @@
   vendor: ''
   waiting_time: 0
 - close_connection: true
-  color: '#D2E5FF'
   config_mode: false
   configuration: show run
   content_match: ''
@@ -4569,6 +4568,7 @@
   - {pattern: '', replace_with: ''}
   - {pattern: '', replace_with: ''}
   result_postprocessing: ''
+  run_method: per_device
   scoped_name: Retrieve Operational Data
   send_notification: false
   send_notification_method: mail

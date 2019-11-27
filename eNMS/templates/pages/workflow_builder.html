@@ -123,7 +123,7 @@ block content %}
               ></a>
             </li>
             <li>
-              <a onclick="switchToSubworkflow()" data-tooltip="Display Workflow"
+              <a onclick="switchToSubworkflow()" data-tooltip="Display Subworkflow"
                 ><span class="glyphicon glyphicon-chevron-down"></span
               ></a>
             </li>
@@ -253,6 +253,10 @@ block content %}
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Duplicate</a>
   </li>
+  <li class="menu-entry node-selection">
+    <a tabindex="-1" href="#">Results</a>
+  </li>
+  <li class="menu-entry divider node-selection">&nbsp</li>
   <li class="menu-entry node-selection"><a tabindex="-1" href="#">Run</a></li>
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Parameterized Run</a>
@@ -260,9 +264,7 @@ block content %}
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Restart Workflow from Here</a>
   </li>
-  <li class="menu-entry node-selection">
-    <a tabindex="-1" href="#">Results</a>
-  </li>
+  <li class="menu-entry divider node-selection">&nbsp</li>
   <li class="menu-entry node-selection edge-selection">
     <a tabindex="-1" href="#">Delete</a>
   </li>
@@ -281,6 +283,7 @@ block content %}
     ></a>
     <ul class="dropdown-menu">
       <li><a tabindex="-1" href="#">Move Nodes</a></li>
+      <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
       <li><a tabindex="-1" href="#">Create 'Success' edge</a></li>
       <li><a tabindex="-1" href="#">Create 'Failure' edge</a></li>
       <li><a tabindex="-1" href="#">Create 'Prerequisite' edge</a></li>
@@ -294,9 +297,11 @@ block content %}
       <li><a tabindex="-1" href="#">Edit Workflow</a></li>
       <li><a tabindex="-1" href="#">Create Workflow</a></li>
       <li><a tabindex="-1" href="#">Add to Workflow</a></li>
+      <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
       <li><a tabindex="-1" href="#">Run Workflow</a></li>
       <li><a tabindex="-1" href="#">Parameterized Workflow Run</a></li>
       <li><a tabindex="-1" href="#">Stop Workflow</a></li>
+      <li class="divider"><a tabindex="-1" href="#">&nbsp</a></li>
       <li><a tabindex="-1" href="#">Workflow Results</a></li>
       <li><a tabindex="-1" href="#">Workflow Logs</a></li>
     </ul>

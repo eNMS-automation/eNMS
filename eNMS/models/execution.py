@@ -53,7 +53,7 @@ class Result(AbstractBase):
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Result.service_id")
     service_name = association_proxy("service", "name")
-    workflow_id = Column(Integer, ForeignKey("workflow.id"))
+    workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
     workflow_name = association_proxy("workflow", "name")
 
@@ -116,7 +116,7 @@ class Run(AbstractBase):
         "Service", back_populates="runs", foreign_keys="Run.service_id"
     )
     service_name = association_proxy("service", "name")
-    workflow_id = Column(Integer, ForeignKey("workflow.id"))
+    workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
     workflow_name = association_proxy("workflow", "name")
     task_id = Column(Integer, ForeignKey("task.id"))

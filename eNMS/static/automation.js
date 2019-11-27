@@ -192,7 +192,9 @@ function displayLogs(service, runtime) {
 
 function displayResultsTree(service, runtime) {
   call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
-    $(`#result-tree-${service.id}`).jstree("destroy").empty();
+    $(`#result-tree-${service.id}`)
+      .jstree("destroy")
+      .empty();
     let tree = $(`#result-tree-${service.id}`).jstree({
       core: {
         animation: 200,

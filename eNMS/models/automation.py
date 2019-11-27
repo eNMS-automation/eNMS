@@ -142,7 +142,7 @@ class Service(AbstractBase):
           <li>
             <button type="button" class="btn btn-success"
             onclick="showTypePanel('{self.type}', '{self.id}', 'run')"
-            data-tooltip="Parametrized Run"
+            data-tooltip="Parameterized Run"
               ><span class="glyphicon glyphicon-play-circle"></span
             ></button>
           </li>

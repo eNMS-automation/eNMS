@@ -597,7 +597,7 @@ function createNew(mode) {
 
 Object.assign(action, {
   "Run Workflow": () => runWorkflow(),
-  "Parametrized Workflow Run": () => runWorkflow(true),
+  "Parameterized Workflow Run": () => runWorkflow(true),
   "Create Workflow": () => createNew("create_workflow"),
   "Duplicate Workflow": () => createNew("duplicate_workflow"),
   "Create New Service": () => createNew("create_service"),

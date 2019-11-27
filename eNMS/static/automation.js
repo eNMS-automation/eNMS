@@ -51,7 +51,7 @@ function panelCode(type, id, mode) {
     $(`#${type}-btn-${id}`)
       .removeClass("btn-success")
       .addClass("btn-primary")
-      .attr("onclick", `parametrizedRun('${type}', ${id})`)
+      .attr("onclick", `parameterizedRun('${type}', ${id})`)
       .text("Run");
     $(".readonly-when-run").prop("readonly", true);
   }
@@ -265,7 +265,7 @@ function normalRun(id) {
 }
 
 // eslint-disable-next-line
-function parametrizedRun(type, id) {
+function parameterizedRun(type, id) {
   fCall("/run_service", `#edit-${type}-form-${id}`, function(result) {
     $(`#${type}-${id}`).remove();
     runLogic(result);
@@ -395,7 +395,7 @@ Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
   Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
   Run: (service) => normalRun(service.id),
-  "Parametrized Run": (service) =>
+  "Parameterized Run": (service) =>
     showTypePanel(service.type, service.id, "run"),
   Results: (service) => showRuntimePanel("results", service),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),

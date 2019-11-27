@@ -568,6 +568,9 @@ function addServicePanel() {
         three_state: false,
       },
       types: {
+        category: {
+          icon: "fa fa-folder",
+        },
         default: {
           icon: "glyphicon glyphicon-file",
         },

@@ -150,6 +150,14 @@ class AutomationController(BaseController):
         if node == "all":
             return [
                 {
+                    "id": "standalone",
+                    "text": "Standalone services",
+                    "children": True,
+                    "a_attr": {"class": "no_checkbox", "style": "color: #034EA2"},
+                    "type": "category",
+                }
+            ] + [
+                {
                     "id": workflow.id,
                     "text": workflow.name,
                     "children": True,
@@ -158,7 +166,7 @@ class AutomationController(BaseController):
                 }
                 for workflow in fetch_all("workflow")
                 if not workflow.workflows
-            ] + [{"id": "standalone", "text": "Standalone services", "children": True}]
+            ]
         elif node == "standalone":
             return [
                 {"id": service.id, "text": service.name}

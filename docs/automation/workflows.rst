@@ -59,11 +59,12 @@ follow different paths in the workflow depending on whether they fail or pass se
 Connection Cache
 ----------------
 
-When using several netmiko and napalm connections in a workflow, the connection object is cached and reused automatically.
-If for some reason you want a service to create a fresh connection, you can tick the ``Start New Connection`` box
-in the "Workflow" section of the creation panel.
-Upon running this service, eNMS will automatically discard the current cached connection, start a new one and
-make it the new cached connection.
+When using netmiko and napalm services in a workflow, eNMS will cache and reuse the connection automatically.
+In the ``Specifics`` section of a service, there are two properties to change this behavior :
+
+- ``Start New Connection``: **before the service runs**, the current cached connection is discarded and a new one
+  is started.
+- ``Close Connection``: once the service is done running, the current connection will be closed.
 
 Workflow Restartability
 -----------------------

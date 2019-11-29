@@ -32,8 +32,14 @@ General
 
 - ``Name`` (**mandatory**) Must be unique.
 - ``Description`` / ``Vendor`` / ``Operating System`` Useful for filtering services in the table.
-- ``Number of retries`` Number of retry attempts when the service fails (per-device if the service has device targets).
-- ``Time between retries (in seconds)`` Number of seconds between each attempt.
+- ``Number of retries`` (default: ``0``) Number of retry attempts when the service fails (per-device if the
+  service has device targets).
+- ``Time between retries (in seconds)`` (default: ``10``) Number of seconds between each attempt.
+
+.. note:: The retry will affect only the devices for which the service failed. Let's consider a service configured
+to run on 3 devices D1, D2, and D3 with 2 "retries". If it fails on D2 and D3 when the service runs for the first time,
+eNMS will run the service again for D2 and D3 at the first retry. If D2 succeeds and D3 fails, the second and last
+retry will run on D3 only.
 
 Specific
 ********
@@ -171,26 +177,16 @@ A few options are available to the user:
 - ``Negative logic``: the result is inverted: a success becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
 - ``Delete spaces before matching``: the output returned by the device will be stripped from all spaces and newlines, as those can sometimes result in false negative.
 
-Retry mechanism
+Custom services
 ---------------
-
-Each service can be configured to run again in case of failures.
-There are two parameters to configure:
-
-- The number of retries (default: 0)
-- The time between retries (default: 10 seconds)
-
-.. note:: The retry will affect only the devices for which the service failed. Let's consider a service configured to run on 3 devices D1, D2, and D3 with 2 "retries". If it fails on D2 and D3 when the service runs for the first time, eNMS will run the service again for D2 and D3 at the first retry. If D2 succeeds and D3 fails, the second and last retry will run on D3 only.
 
 In addition to the services provided by default, you are free to create your own "custom" services.
 Creating a custom services means adding a new python file in the ``eNMS/eNMS/services`` folder.
 This python file must contain:
 
 - A model class, where you define what the service parameters are, and what the service is doing (``job`` function).
-- A form class, where you define what the service looks like in the GUI: the different fields in the service form and their corresponding validation.
-
-Custom services
----------------
+- A form class, where you define what the service looks like in the GUI: the different fields in the service form and
+their corresponding validation.
 
 Create a new service model
 **************************

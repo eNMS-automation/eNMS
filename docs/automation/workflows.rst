@@ -4,14 +4,15 @@ Workflow System
 
 A workflow is a graph of services connected with ``success`` and ``failure`` edges.
 If a service is executed successfully, the workflow continues down the ``success`` path to the next service,
-otherwise it goes down the ``failure`` path.
+otherwise it goes down the ``failure`` path. A workflow is considered to have run successfully if the "End"
+service is reached.
 Workflows are managed from the :guilabel:`Workflow Builder`.
 When a workflow is running, the results are automatically updated in real-time in the workflow builder.
 
 Workflow Builder
 ----------------
 
-.. image:: /_static/automation/workflows/workflow_service_menu.png
+.. image:: /_static/automation/workflows/workflow_builder.png
    :alt: Workflow builder
    :align: center
 
@@ -40,29 +41,20 @@ There are three run methods for a workflow:
 
 - **device by device**: the devices configured **at workflow level** are considered. The workflow will run for
   each device independently from the other devices. With multiprocessing disabled, devices will run the workflow 
-  **sequentially**, one at a time. If multiprocessing **at workflow level** is enabled, you can have as many devices
-  running the workflow in parallel as you have available processes.
+  **sequentially**, one at a time. If multiprocessing **at workflow level** is enabled, you can have as many
+  devices running the workflow in parallel as you have available processes.
 - **service by service using workflow targets**: the devices configured **at workflow level** are considered.
   Each device can follow a different path depending on whether a service is successful or not, but services are always
-  run **one at a time**. eNMS will compute the targets of a service by keeping track of the path of each device throughout
-  the workflow. Multiprocessing must be enabled **at service level**.
+  run **one at a time**. eNMS will compute the targets of a service by keeping track of the path of each device
+  throughout the workflow. Multiprocessing must be enabled **at service level**.
 - **service by service using service targets**: only the devices selected **at the individual service level**
-  are considered. Devices selected at workflow level are ignored. A service is considered successful if it ran successfully
-  on all of its targets (if it fails on at least one target, it is considered to have failed).
+  are considered. Devices selected at workflow level are ignored. A service is considered successful if it ran
+  successfully on all of its targets (if it fails on at least one target, it is considered to have failed).
   This mode is useful for workflows where services have different targets
 
 For the first two modes, devices are independent from each other: one device may run on all services in the workflow
 if it is successful while another one could stop at the first step: they run the workflow independently and will likely
 follow different paths in the workflow depending on whether they fail or pass services thoughout the workflow.
-
-Success of a Workflow
----------------------
-
-The behavior of the workflow is such that the workflow is considered to have an overall Success status
-if the END service is reached. So, the END service should only be reached by an edge when the overall status
-of the workflow is considered successful. If a particular service service fails,
-then the workflow should just stop there (with the workflow thus having an overall Failure status),
-or it should call a cleanup/remediation service (after which the workflow will just stop there).
 
 Connection Cache
 ----------------

@@ -4,27 +4,29 @@ Services
 
 A service is a Python script that performs an action. A service is defined by:
 
-- A model: what eNMS stores in the database.
-- A form: what eNMS displays in the UI.
+- A **model** class: what eNMS stores in the database. The model defines what the service parameters are,
+  and what the service is doing via a ``job`` function.
+- A **form**: the different fields eNMS displays in the UI, and their corresponding validation.
 
 eNMS comes with a number of "default" services based on network automation frameworks such as
 ``netmiko``, ``napalm`` and ``ansible``, but you are free to create your own services.
 Each service will return a python dictionary as a result. This dictionary will always contains
 a ``success`` boolean value that indicates whether it ran successfully or not.
 
-Service Management
-------------------
-
-All services are displayed in :guilabel:`Automation / Services` , where you can edit, duplicate,
-delete, export and run existing services, and create new ones.
-Export creates a YaML representation of a service in the ``files / exported_services`` directory.
-This allows migrating services from one VM to another if you are using multiple VMs.
+All services are displayed in :guilabel:`Automation / Services`, where you can create new services and
+edit, duplicate, delete, and run existing ones.
 
 .. image:: /_static/automation/services/services.png
    :alt: Service Management page
    :align: center
 
-Service panel
+.. note::
+
+  You can also export services: this creates a YAML file with all service properties in the
+  ``files / exported_services`` directory.
+  This allows migrating services from one VM to another if you are using multiple VMs.
+
+Service Panel
 -------------
 
 General
@@ -187,10 +189,11 @@ When the service is running, eNMS will evaluate the python code in brackets and 
 
 Running the service on two devices ``D1`` and ``D2`` will result in sending the following GET requests:
 
-```
-"GET /rest/get/device/D1 HTTP/1.1" 302 219
-"GET /rest/get/device/D2 HTTP/1.1" 302 219
-```
+.. code::
+
+  "GET /rest/get/device/D1 HTTP/1.1" 302 219
+  "GET /rest/get/device/D2 HTTP/1.1" 302 219
+
 
 Python fields
 *************
@@ -222,26 +225,20 @@ A few options are available to the user:
 - ``Negative logic``: the result is inverted: a success becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
 - ``Delete spaces before matching``: the output returned by the device will be stripped from all spaces and newlines, as those can sometimes result in false negative.
 
-Custom services
+Custom Services
 ---------------
 
-In addition to the services provided by default, you are free to create your own "custom" services.
-Creating a custom services means adding a new python file in the ``eNMS/eNMS/services`` folder.
-This python file must contain:
-
-- A model class, where you define what the service parameters are, and what the service is doing (``job`` function).
-- A form class, where you define what the service looks like in the GUI: the different fields in the service form and
-their corresponding validation.
+In addition to the services provided by default, you are free to create your own services.
+When the application starts, it loads all python files in ``eNMS / eNMS / services`` folder.
+Creating a service means adding a new python file in that folder.
+You are free to create subfolders to organize your own services any way you want:
+eNMS will automatically detect them.
+Just like all other services, this python file must contain a model and a form.
+After adding a new custom service, you must reload the application before it appears in the web UI.
 
 Create a new service model
 **************************
 
-When the application starts, it loads all python files in , and adds all models to the database.
-Inside the ``eNMS/eNMS/services`` folder, you are free to create subfolders to organize your own services
-any way you want: eNMS will automatically detect all python files.
-After adding a new custom service, you must reload the application before it appears in the web UI.
-In ``eNMS/eNMS/services/examples``, you will find the file ``example_service.py`` with a service template
-that you can use as starting point to create your own services.
 By default, eNMS will scan the ``eNMS/eNMS/services`` folder to instantiate all services you created in that folder.
 If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory,
 so that you can safely pull the latest code from Github), you can set the ``custom_services``
@@ -263,20 +260,27 @@ The "Swiss Army Knife Service" ``job`` function can be seen as a "service multip
 Available functions
 *******************
 
-In your custom python code, there is a number of function that are made available by eNMS and that you can reuse:
+In your custom python code, there is a number of function that are made available by eNMS and that
+you can reuse:
 
-- Netmiko connection (``netmiko_connection = run.netmiko_connection(device)``)
-give you a working netmiko connection, and takes care of caching the connection when running inside a workflow.
-- Napalm connection (``napalm_connection = run.napalm_connection(device)``) does the same thing for Napalm.
 - Send email (``app.send_email``) lets you send an email with optional attached file.
 
-::
+  - ``title`` (mandatory, type ``string``)
+  - ``content`` (mandatory, type ``string``)
+  - ``sender`` (optional, type ``string``) Email address of the sender. Default to the sender address
+    of eNMS configuration.
+  - ``recipients`` (optional, type ``string``) Mail addresses of the recipients, separated by comma.
+    Default to the recipients addresses of eNMS configuration.
+  - ``filename`` (optional, type ``string``) Name of the attached file.
+  - ``file_content`` (optional, type ``string``) Content of the attached file.
 
-  app.send_email(
-      title,
-      content,
-      sender=sender,
-      recipients=recipients,
-      filename=filename,
-      file_content=file_content
-  )
+  .. code::
+
+    app.send_email(
+        title,
+        content,
+        sender=sender,
+        recipients=recipients,
+        filename=filename,
+        file_content=file_content
+    )

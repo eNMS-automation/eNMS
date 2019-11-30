@@ -73,7 +73,6 @@ Configuration parameters for creating this service instance:
 - ``response2`` response to second confirmation question prompted by the device
 - ``confirmation3`` third expected confirmation question prompted by the device
 - ``response3`` response to third confirmation question prompted by the device
-- ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
@@ -89,7 +88,6 @@ Configuration parameters for creating this service instance:
 - All Netmiko parameters (see above)
 - All Validation parameters (see above)
 - ``Command`` CLI command to send to the device
-- ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).
 
 .. note:: This Service supports variable substitution (as mentioned in the previous section) in the `command` input field of its configuration form.
 
@@ -280,4 +278,3 @@ Configuration parameters for creating this service instance:
 - All Validation parameters (see above)
 - ``Has Device Targets`` If checked, indicates that the selected inventory devices will be made available for variable substitution in the URL and payload fields. For example, URL could be: /rest/get/{{device.ip_address}}
 - ``Python Query``: a python query to retrieve data from the payload.
-- ``conversion_method`` Whether the response text should be considered just text, or should it try to convert to XML or JSON. Converting to JSON allows for using the Dictionary Match by providing a dictionary {"key1":"value1", "key2":"value2"} and and choosing Validation Match by dictionary equality (exact match) or inclusion (contains).

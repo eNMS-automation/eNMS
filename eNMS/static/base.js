@@ -363,6 +363,9 @@ function preprocessForm(panel, id, type, duplicate) {
       $(el).attr("onclick", type ? `${el.value}("${type}")` : `${el.value}()`);
     }
   });
+  panel.querySelectorAll(".doc-link").forEach((el) => {
+    $(el).attr("href", `${config.app.documentation_url}${$(el).attr('href')}`);
+  });
 }
 
 function initSelect(el, model, parentId, single) {

@@ -41,22 +41,29 @@ The devices used when running a workflow depend on the workflow ``Run Method`` t
 edit panel, section ``Devices``.
 There are three run methods for a workflow:
 
-- **device by device**: the devices configured **at workflow level** are considered. The workflow will run for
-  each device independently from the other devices. With multiprocessing disabled, devices will run the workflow 
-  **sequentially**, one at a time. If multiprocessing **at workflow level** is enabled, you can have as many
-  devices running the workflow in parallel as you have available processes.
-- **service by service using workflow targets**: the devices configured **at workflow level** are considered.
-  Each device can follow a different path depending on whether a service is successful or not, but services
-  are always run **one at a time**. eNMS will compute the targets of a service by keeping track of the path
-  of each device throughout the workflow. Multiprocessing must be enabled **at service level**.
-- **service by service using service targets**: only the devices selected **at the individual service level**
-  are considered. Devices selected at workflow level are ignored. A service is considered successful if it ran
-  successfully on all of its targets (if it fails on at least one target, it is considered to have failed).
-  This mode is useful for workflows where services have different targets
+Device by device
+****************
 
-For the first two modes, devices are independent from each other: one device may run on all services in the workflow
-if it is successful while another one could stop at the first step: they run the workflow independently and will likely
-follow different paths in the workflow depending on whether they fail or pass services thoughout the workflow.
+  - Uses the devices configured at **workflow** level.
+  - Multiprocessing must be enabled at **workflow** level.
+  - Workflow will run for each device independently, one at a time if multiprocessig is disabled
+    in parallel otherwise.
+
+Service by service using workflow targets
+*****************************************
+
+  - Uses the devices configured at **workflow** level.
+  - Multiprocessing must be enabled at **service** level.
+  - The workflow will run one service at a time, but each device can follow a different path depending on
+    the results of each service for that device.
+
+Service by service using service targets
+****************************************
+
+  - Uses the devices configured at **service** level.
+  - Multiprocessing must be enabled at **service** level.
+  - The workflow will run one service at a time. A service is considered successful if it ran successfully
+    on all of its targets (if it fails on at least one target, it is considered to have failed).
 
 Connection Cache
 ----------------

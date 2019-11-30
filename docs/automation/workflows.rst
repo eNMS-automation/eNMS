@@ -65,17 +65,6 @@ Service by service using service targets
   - The workflow will run one service at a time. A service is considered successful if it ran successfully
     on all of its targets (if it fails on at least one target, it is considered to have failed).
 
-Service dependency
-------------------
-
-If a service ``A`` must be executed before a service ``B`` in the workflow, eNMS must be made aware of that dependency by creating a  ``Prerequisite`` edge.
-
-In the example below, the service ``process_payload1`` uses the results from ``get_facts`` and ``get_interfaces``. By creating two prerequisite edges (from ``get_facts`` to ``process_payload1`` and from ``get_interfaces`` to ``process_payload1``), we ensure that eNMS will not run ``process_payload1`` until both ``get_interfaces`` and ``get_config`` have been executed.
-
-.. image:: /_static/automation/workflows/payload_transfer_workflow.png
-   :alt: Payload Transfer Workflow
-   :align: center
-
 Payload transfer
 ----------------
 
@@ -228,6 +217,19 @@ And the following functions:
 
 Miscellaneous
 -------------
+
+Service dependency
+******************
+
+If a service ``A`` must be executed before a service ``B`` in the workflow, you can force that order by
+creating a ``Prerequisite`` edge.
+In the example below, the service ``process_payload1`` uses the results from ``Get Facts`` and
+``Get Interfaces``. By creating two prerequisite edges, we ensure that ``process_payload1`` will not be run
+until both ``Get Facts`` and ``Get Interfaces`` have been executed.
+
+.. image:: /_static/automation/workflows/service_dependency.png
+   :alt: Service Dependency
+   :align: center
 
 Workflow Restartability
 ***********************

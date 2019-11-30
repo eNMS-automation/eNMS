@@ -65,48 +65,6 @@ Service by service using service targets
   - The workflow will run one service at a time. A service is considered successful if it ran successfully
     on all of its targets (if it fails on at least one target, it is considered to have failed).
 
-Connection Cache
-----------------
-
-When using netmiko and napalm services in a workflow, eNMS will cache and reuse the connection automatically.
-In the ``Specifics`` section of a service, there are two properties to change this behavior :
-
-- ``Start New Connection``: **before the service runs**, the current cached connection is discarded and a new one
-  is started.
-- ``Close Connection``: once the service is done running, the current connection will be closed.
-
-Workflow Restartability
------------------------
-
-A workflow can be restarted with any services set as "Entry points"
-and with the payload from a previous runs.
-This is useful if you are testing a workflow with a lot of services, and you don't want it to
-restart from scratch all the time.
-
-You must click on "Run with Updates" and go to the "Workflow" section to access these parameters.
-
-.. image:: /_static/automation/workflows/workflow_restartability.png
-   :alt: Workflow Restartability
-   :align: center
-
-Waiting times
--------------
-
-Services and Workflows have a ``Waiting time`` property: this tells eNMS how much time it should wait after
-the service has run before it begins the next service.
-
-A service can also be configured to "retry"  if the results returned are not as designed.
-An example execution of a service in a workflow, in terms of waiting times and retries, is as follows:
-
-::
-
-  First try
-  time between retries pause
-  Retry 1
-  time between retries pause
-  Retry 2  (Successful, or only 2 Retries specified)
-  Waiting time pause
-
 Service dependency
 ------------------
 
@@ -267,3 +225,42 @@ And the following functions:
     The use of these two functions is explained in the section ""Set and get data in a workflow" of the workflow payload docs.
 - ``get_result``: function to retrieve a result for a given service (and for an optional device).
     The use of this function is described in the section "Use data from a previous service in the workflow" of the workflow payload docs.
+
+Miscellaneous
+-------------
+
+Workflow Restartability
+***********************
+
+A workflow can be restarted with any services set as "Entry points"
+and with the payload from a previous runs.
+This is useful if you are testing a workflow with a lot of services, and you don't want it to
+restart from scratch all the time.
+
+Connection cache
+****************
+
+When using netmiko and napalm services in a workflow, eNMS will cache and reuse the connection automatically.
+In the ``Specifics`` section of a service, there are two properties to change this behavior :
+
+- ``Start New Connection``: **before the service runs**, the current cached connection is discarded and a new one
+  is started.
+- ``Close Connection``: once the service is done running, the current connection will be closed.
+
+Waiting times
+*************
+
+Services and Workflows have a ``Waiting time`` property: this tells eNMS how much time it should wait after
+the service has run before it begins the next service.
+
+A service can also be configured to "retry"  if the results returned are not as designed.
+An example execution of a service in a workflow, in terms of waiting times and retries, is as follows:
+
+::
+
+  First try
+  time between retries pause
+  Retry 1
+  time between retries pause
+  Retry 2  (Successful, or only 2 Retries specified)
+  Waiting time pause

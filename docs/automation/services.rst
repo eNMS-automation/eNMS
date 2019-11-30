@@ -169,13 +169,13 @@ Variables
   - **Type** Database Object.
   - **Available**: when the iteration mechanism is used to compute derived devices.
 
-- ``workflow`` **(only in a workflow)**
+- ``workflow`` (only in a **workflow**)
 
   - **Meaning**: current workflow.
   - **Type** Database Object.
   - **Available**: when the service runs inside a workflow.
 
-- ``get_result`` **(only in a workflow)**
+- ``get_result`` (only in a **workflow**, see :ref:`get_result`)
 
   - **Meaning**: Fetch the result of a service in the workflow that have already been executed.
   - **Type** Function.
@@ -200,7 +200,7 @@ Variables
     - First argument: Name of the variable
     - Second argument: Value
     - ``device`` (**optional**) The value is stored for a specific device.
-    - ``section``(**optional**) The value is stored in a specific "section".
+    - ``section`` (**optional**) The value is stored in a specific "section".
 
 - ``app.send_email`` lets you send an email with optional attached file. It takes the following parameters:
 
@@ -285,11 +285,3 @@ You are free to create subfolders to organize your own services any way you want
 eNMS will automatically detect them.
 Just like all other services, this python file must contain a model and a form.
 After adding a new custom service, you must reload the application before it appears in the web UI.
-
-Create a new service model
-**************************
-
-By default, eNMS will scan the ``eNMS/eNMS/services`` folder to instantiate all services you created in that folder.
-If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory,
-so that you can safely pull the latest code from Github), you can set the ``custom_services``
-variable in the configuration.

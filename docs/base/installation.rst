@@ -168,7 +168,8 @@ LDAP/AD using the `ldap3` library, and if successful, that user gets added to eN
 
   - ``custom_code`` (default: ``""``)
   - ``custom_properties`` (default: ``""``)
-  - ``custom_services`` (default: ``""``)
+  - ``custom_services`` (default: ``""``) By default, eNMS scans ``eNMS / eNMS / services`` (cf.  for custom
+    services, but you can configure a different folder instead.
   - ``playbooks`` (default: ``""``)
 
 - Section ``Requests``

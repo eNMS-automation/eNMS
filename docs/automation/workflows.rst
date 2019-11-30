@@ -68,6 +68,8 @@ Service by service using service targets
 Transfer of data among services
 -------------------------------
 
+.. _get_result:
+
 Using the result of previous services
 *************************************
 

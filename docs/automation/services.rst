@@ -147,6 +147,12 @@ Global variables
   - **Type** Database Object.
   - **Available**: when the service is running on a device.
 
+- ``result``
+
+  - **Meaning**: this is the result of the current service.
+  - **Type** Dictionary.
+  - **Available**: after a service has run.
+
 - ``config``
 
   - **Meaning**: eNMS configuration, editable from :guilabel:`Admin / Administration`, button
@@ -154,10 +160,17 @@ Global variables
   - **Type** Dictionary.
   - **Available**: Always.
 
-- ``workflow`` (Available when the service runs inside a workflow) Current workflow.
-- ``parent_device`` (Available when the iteration mechanism is used) Parent device, from which the actual
-  targets of the service are computed.
-- ``result`` (Available after a service has run) Result of the service
+- ``workflow``
+
+  - **Meaning**: current workflow.
+  - **Type** Database Object.
+  - **Available**: when the service runs inside a workflow.
+
+- ``parent_device``
+
+  - **Meaning**: Parent device used to compute derived devices.
+  - **Type** Database Object.
+  - **Available**: when the iteration mechanism is used to compute derived devices.
 
 Substitution fields
 *******************
@@ -179,24 +192,15 @@ Running the service on two devices ``D1`` and ``D2`` will result in sending the 
 "GET /rest/get/device/D2 HTTP/1.1" 302 219
 ```
 
-Pure python fields
-******************
+Python fields
+*************
 
-Some services accept python code only. Their 
+Python fields, marked with a light red background, accept python code only.
 
 - In the ``Device Query`` field of the "Devices" section of a service. This field lets the user define the targets of a service programmatically.
 - In the ``Skip Service If Python Query evaluates to True`` field of the "Workflow" section of a service. This field lets the user define whether or not a service should be skipped programmatically.
 - In the ``Query`` field of the Variable Extraction Service.
 - In the code of a Python Snippet Service.
-
-And the following functions:
-
-- ``get_var`` and ``set_var``: function to save data to and retrieve data from the payload.
-    The use of these two functions is explained in the section ""Set and get data in a workflow" of the workflow payload docs.
-- ``get_result``: function to retrieve a result for a given service (and for an optional device).
-    The use of this function is described in the section "Use data from a previous service in the workflow" of the workflow payload docs.
-
-
 
 Validation
 ----------

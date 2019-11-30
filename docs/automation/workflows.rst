@@ -77,12 +77,6 @@ returned by the ``job`` function of the service, and calling ``get_result`` will
 There are two types of results: top-level and per-device. If a service runs on 5 devices, 6 results will be
 created: one for each device and one top-level result for the service itself.
 
-- ``service`` (**mandatory**) Name of the service
-- ``device`` (**optional**) Name of the device, when you want to get the result of the service for a
-  specific device.
-- ``workflow`` (**optional**) If your workflow has multiple subworkflows, you can specify
-  a device in case you want to get the result of the service for a specific device.
-
 Examples:
 
 - ``get_result("get_facts")`` Get the top-level result for the service ``get_facts``
@@ -100,13 +94,6 @@ Saving and retrieving values in a workflow
 
 You can define variables in the payload with the ``set_var`` function, and retrieve data from the payload
 with the ``get_var`` function.
-
-``set_var`` takes the following arguments:
-
-- First argument: Name of the variable
-- Second argument: Value
-- ``device`` (**optional**) A unique value will be stored for each device.
-- ``section``(**optional**) Store the value in a separate "section".
 
 Variables can be scoped in different ways: global, per-device, user-defined,
 and a combination of per-device and user-defined.

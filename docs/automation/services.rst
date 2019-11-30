@@ -163,17 +163,44 @@ Variables
   - **Type** Dictionary.
   - **Available**: Always.
 
-- ``workflow``
-
-  - **Meaning**: current workflow.
-  - **Type** Database Object.
-  - **Available**: when the service runs inside a workflow.
-
 - ``parent_device``
 
   - **Meaning**: Parent device used to compute derived devices.
   - **Type** Database Object.
   - **Available**: when the iteration mechanism is used to compute derived devices.
+
+- ``workflow`` **(only in a workflow)**
+
+  - **Meaning**: current workflow.
+  - **Type** Database Object.
+  - **Available**: when the service runs inside a workflow.
+
+- ``get_result`` **(only in a workflow)**
+
+  - **Meaning**: Fetch the result of a service in the workflow that have already been executed.
+  - **Type** Function.
+  - **Return Type** Dictionary
+  - **Available**: when the service runs inside a workflow.
+  - **Parameters**:
+
+    - ``service`` (**mandatory**) Name of the service
+    - ``device`` (**optional**) Name of the device, when you want to get the result of the service for a
+      specific device.
+    - ``workflow`` (**optional**) If your workflow has multiple subworkflows, you can specify
+      a device in case you want to get the result of the service for a specific device.
+
+- ``set_var`` **(only in a workflow)**
+
+  - **Meaning**: Save a variable in the workflow payload for later.
+  - **Type** Function.
+  - **Return Type** None
+  - **Available**: when the service runs inside a workflow.
+  - **Parameters**:
+
+    - First argument: Name of the variable
+    - Second argument: Value
+    - ``device`` (**optional**) The value is stored for a specific device.
+    - ``section``(**optional**) The value is stored in a specific "section".
 
 - ``app.send_email`` lets you send an email with optional attached file. It takes the following parameters:
 
@@ -196,7 +223,6 @@ Variables
         filename=filename,
         file_content=file_content
     )
-
 
 Substitution fields
 *******************

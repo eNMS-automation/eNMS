@@ -141,43 +141,49 @@ Depending on the context, a number of global variables is made available by eNMS
 Global variables
 ****************
 
-- ``device`` (Available when the service is running on a device) Current device.
-- ``config`` (Always available) Configuration. This is a python dictionary available in
-  :guilabel:`Admin / Administration`, button ``Configuration``. By default, it is set to the content
-  of ``config.json``.
+- ``device``
+
+  - **Meaning**: this is the device on which the service is running.
+  - **Type** Database Object.
+  - **Available**: when the service is running on a device.
+
+- ``config``
+
+  - **Meaning**: eNMS configuration, editable from :guilabel:`Admin / Administration`, button
+    ``Configuration``. It is initially set to the content of ``config.json``.
+  - **Type** Dictionary.
+  - **Available**: Always.
+
 - ``workflow`` (Available when the service runs inside a workflow) Current workflow.
 - ``parent_device`` (Available when the iteration mechanism is used) Parent device, from which the actual
   targets of the service are computed.
+- ``result`` (Available after a service has run) Result of the service
 
-Variable Substitution
-*********************
+Substitution fields
+*******************
 
-There are some fields 
-For some services, it is useful for a string to include variables such as a timestamp or device parameters.
-For example, if you run a REST call script on several devices to send a request at a given URL, you might
-want the URL to depend on the name of the device.
-Any code between double curved brackets will be evaluated at runtime and replaced with the appropriate value.
-
-For example, you can POST a request on several devices at ``/url/{{device.name}}``, and ``{{device.name}}``
-will be replaced on each execution iteration by the name of each device.
-
-Let's consider the following REST call service:
+Substitution fields, marked in the interface with a light blue background, lets you include python code
+inside double curved brackets (``{{your python code}}``).
+For example, the URL of a REST call service is a substitution field. If the service is running on device
+targets, you can use the global variable ``device`` in the URL.
+When the service is running, eNMS will evaluate the python code in brackets and replace it with its value.
 
 .. image:: /_static/automation/services/variable_substitution.png
    :alt: Variable substitution
    :align: center
 
-When this service is executed, the following GET requests will be sent in parallel:
+Running the service on two devices ``D1`` and ``D2`` will result in sending the following GET requests:
 
 ```
-INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router18 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router14 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router8 HTTP/1.1" 200 -
+"GET /rest/get/device/D1 HTTP/1.1" 302 219
+"GET /rest/get/device/D2 HTTP/1.1" 302 219
 ```
 
+Pure python fields
+******************
 
+Some services accept python code only. Their 
 
-- Inside double curved brackets in the service parameters (``{{python expression}}``). This is called "Variable substitution" (fields that support variable substitution are marked with a light blue background).
 - In the ``Device Query`` field of the "Devices" section of a service. This field lets the user define the targets of a service programmatically.
 - In the ``Skip Service If Python Query evaluates to True`` field of the "Workflow" section of a service. This field lets the user define whether or not a service should be skipped programmatically.
 - In the ``Query`` field of the Variable Extraction Service.

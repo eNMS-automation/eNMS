@@ -18,6 +18,7 @@ from eNMS.forms.fields import (
     MultipleInstanceField,
     NoValidationSelectField,
     PasswordSubstitutionField,
+    PythonField,
     SubstitutionField,
 )
 
@@ -31,7 +32,7 @@ class ServiceForm(BaseForm):
     shared = BooleanField("Shared Service")
     scoped_name = StringField("Scoped Name", [InputRequired()])
     description = StringField("Description")
-    device_query = StringField("Device Query")
+    device_query = PythonField("Device Query")
     device_query_property = SelectField(
         "Query Property Type", choices=(("name", "Name"), ("ip_address", "IP address"))
     )
@@ -53,20 +54,20 @@ class ServiceForm(BaseForm):
     time_between_retries = IntegerField("Time between retries (in seconds)", default=10)
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip = BooleanField("Skip")
-    skip_query = StringField("Skip Query (Python)")
+    skip_query = PythonField("Skip Query (Python)")
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     initial_payload = DictField()
-    iteration_values = StringField("Iteration Values (Python Query)")
+    iteration_values = PythonField("Iteration Values")
     iteration_variable_name = StringField(
         "Iteration Variable Name", default="iteration_value"
     )
-    iteration_devices = StringField("Iteration Devices (Python Query)")
+    iteration_devices = PythonField("Iteration Devices")
     iteration_devices_property = SelectField(
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    result_postprocessing = StringField(widget=TextArea(), render_kw={"rows": 7})
+    result_postprocessing = PythonField(widget=TextArea(), render_kw={"rows": 7})
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
     conversion_method = SelectField(

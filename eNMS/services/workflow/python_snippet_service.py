@@ -4,6 +4,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import PythonField
 from eNMS.models.automation import Service
 
 
@@ -68,7 +69,7 @@ class PythonSnippetService(Service):
 
 class PythonSnippetForm(ServiceForm):
     form_type = HiddenField(default="python_snippet_service")
-    source_code = StringField(
+    source_code = PythonField(
         widget=TextArea(),
         render_kw={"rows": 15},
         default="""

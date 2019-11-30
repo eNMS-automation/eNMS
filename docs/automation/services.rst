@@ -132,14 +132,34 @@ list of all passed and failed objects.
 
 In Mattermost, if the ``Mattermost Channel`` is not set, the default ``Town Square`` will be used.
 
-Variable substitution
----------------------
+Using python code in the service panel
+--------------------------------------
 
+There are many places in the service panel where the user is allowed to use pure python code.
+Depending on the context, a number of global variables is made available by eNMS.
+
+Global variables
+****************
+
+- ``device`` (Available when the service is running on a device) Current device.
+- ``config`` (Always available) Configuration. This is a python dictionary available in
+  :guilabel:`Admin / Administration`, button ``Configuration``. By default, it is set to the content
+  of ``config.json``.
+- ``workflow`` (Available when the service runs inside a workflow) Current workflow.
+- ``parent_device`` (Available when the iteration mechanism is used) Parent device, from which the actual
+  targets of the service are computed.
+
+Variable Substitution
+*********************
+
+There are some fields 
 For some services, it is useful for a string to include variables such as a timestamp or device parameters.
-For example, if you run a REST call script on several devices to send a request at a given URL, you might want the URL to depend on the name of the device.
+For example, if you run a REST call script on several devices to send a request at a given URL, you might
+want the URL to depend on the name of the device.
 Any code between double curved brackets will be evaluated at runtime and replaced with the appropriate value.
 
-For example, you can POST a request on several devices at ``/url/{{device.name}}``, and ``{{device.name}}`` will be replaced on each execution iteration by the name of each device.
+For example, you can POST a request on several devices at ``/url/{{device.name}}``, and ``{{device.name}}``
+will be replaced on each execution iteration by the name of each device.
 
 Let's consider the following REST call service:
 
@@ -149,13 +169,28 @@ Let's consider the following REST call service:
 
 When this service is executed, the following GET requests will be sent in parallel:
 
-::
+```
+INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router18 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router14 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router8 HTTP/1.1" 200 -
+```
 
-  INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router18 HTTP/1.1" 200 -
-  INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router14 HTTP/1.1" 200 -
-  INFO:werkzeug:127.0.0.1 - - [13/Oct/2018 14:07:49] "GET /rest/object/device/router8 HTTP/1.1" 200 -
 
-Variable substitution is also valid in a configuration string (for a Netmiko or Napalm configuration) service, as well as a validation string (Netmiko validation service, Ansible playbook, etc).
+
+- Inside double curved brackets in the service parameters (``{{python expression}}``). This is called "Variable substitution" (fields that support variable substitution are marked with a light blue background).
+- In the ``Device Query`` field of the "Devices" section of a service. This field lets the user define the targets of a service programmatically.
+- In the ``Skip Service If Python Query evaluates to True`` field of the "Workflow" section of a service. This field lets the user define whether or not a service should be skipped programmatically.
+- In the ``Query`` field of the Variable Extraction Service.
+- In the code of a Python Snippet Service.
+
+And the following functions:
+
+- ``get_var`` and ``set_var``: function to save data to and retrieve data from the payload.
+    The use of these two functions is explained in the section ""Set and get data in a workflow" of the workflow payload docs.
+- ``get_result``: function to retrieve a result for a given service (and for an optional device).
+    The use of this function is described in the section "Use data from a previous service in the workflow" of the workflow payload docs.
+
+
 
 Validation
 ----------

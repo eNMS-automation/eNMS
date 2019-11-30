@@ -55,7 +55,7 @@ Workflow
 This section contains the parameters that apply **when the service runs inside a workflow only**.
 
 - ``Skip this Service Regardless`` Always skip the service
-- ``Skip Service If Python Query evaluates to True`` This fields expect a python code that will evaluates to either ``True``
+- ``Skip Service if True`` This fields expect a python code that will evaluates to either ``True``
   or ``False``. The service will be skipped or not depending the result.
 - ``Maximum number of runs`` (default: ``1``) Number of time a service is allowed to run in a workflow (de
 - ``Waiting time (in seconds)`` (default: ``0``) Number of seconds to wait after the service is done running.
@@ -198,7 +198,7 @@ Python fields
 Python fields, marked with a light red background, accept python code only.
 
 - In the ``Device Query`` field of the "Devices" section of a service. This field lets the user define the targets of a service programmatically.
-- In the ``Skip Service If Python Query evaluates to True`` field of the "Workflow" section of a service. This field lets the user define whether or not a service should be skipped programmatically.
+- In the ``Skip Service if True`` field of the "Workflow" section of a service. This field lets the user define whether or not a service should be skipped programmatically.
 - In the ``Query`` field of the Variable Extraction Service.
 - In the code of a Python Snippet Service.
 

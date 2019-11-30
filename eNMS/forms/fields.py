@@ -92,7 +92,7 @@ class SubstitutionField(StringField):
 
 class PythonField(StringField):
     def __call__(self, *args, **kwargs):
-        kwargs["style"] = "background-color: #FFCCCB"
+        kwargs["style"] = "background-color: #FFE8F6"
         return super().__call__(*args, **kwargs)
 
 

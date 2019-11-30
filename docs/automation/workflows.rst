@@ -65,48 +65,31 @@ Service by service using service targets
   - The workflow will run one service at a time. A service is considered successful if it ran successfully
     on all of its targets (if it fails on at least one target, it is considered to have failed).
 
-Payload transfer
-----------------
+Using the result of previous services
+-------------------------------------
+When a service starts, you can have access to the results of all services in the workflow that have already
+been executed with a special function called ``get_result``. The result of a service is the dictionary that is
+returned by the ``job`` function of the service, and calling ``get_result`` will return that dictionary.
+There are two types of results: top-level and per-device. If a service runs on 5 devices, 6 results will be
+created: one for each device and one top-level result for the service itself.
 
-The most important characteristic of workflows is the transfer of data between services.
-When a service starts, it is provided with the results of ALL services in the workflow
-that have already been executed (and not only the results of its "predecessors").
+- ``service`` (**mandatory**) Name of the service
+- ``device`` (**optional**) Name of the device, when you want to get the result of the service for a
+  specific device.
+- ``workflow`` (**optional**) If your workflow has multiple subworkflows, you can specify
+  a device in case you want to get the result of the service for a specific device.
 
-In case the job has "device targets", it will receive an additional argument ``device``
-
-::
-
-    def job(self, payload: dict, device: Device) -> dict:
-        return {"success": True, "result": "example"}
-
-The first argument of the ``job`` function is ``payload``: it is a dictionary that
-contains the results of all services that have already been executed.
-
-If we consider the aforementioned workflow, the job ``process_payload1`` receives
-the variable ``payload`` that contains the results of all other services in the workflow
-(because it is the last one to be executed).
-
-It can access the results with the ``get_result`` function, that takes two arguments:
-
-- service (mandatory): the name of the service whose result you want to retrieve
-- device (optional): if the service has device targets, you can specify 
-    a device in case you want to get the result of the service for a specific device.
-
-::
-
-    def get_result(self, service: str, device: Optional[str] = None) -> dict:
-        ...
-        return result
-
-You should access the result of previous services with the ``get_result`` function.
 Examples:
 
-- ``get_result("get_facts")``
-- ``get_result("get_interfaces", device="Austin")``
-- ``get_result("get_interfaces", device=device.name)``
+- ``get_result("get_facts")`` Get the top-level result for the service ``get_facts``
+- ``get_result("get_interfaces", device="Austin")`` Get the result of the device ``Austin`` for
+  ``get_interfaces``
+- ``get_result("get_interfaces", device=device.name)`` Get the result of the current device for
+  ``get_interfaces``
+- ``get_result("Payload editor")["runtime"]`` Get the ``runtime`` key of the top-level result of the
+  ``Payload editor`` service.
 
-You can use the ``get_result`` function everywhere python code is accepted.
-See the "Advanced / python code" section of the docs for more information.
+The ``get_result`` function everywhere python code is accepted.
 
 Saving and retrieving values in a workflow
 ------------------------------------------
@@ -137,24 +120,6 @@ For example, let's consider the following python snippet:
   set_var("iteration_simple", "192.168.105.5", section="pools")
   devices = ["Boston", "Cincinnati"] if device.name == "Chicago" else ["Cleveland", "Washington"]
   set_var("iteration_device", devices, section="pools", device=device.name)
-
-
-Use data from a previous service in the workflow
---------------------------------------------
-
-If a service "B" needs to use the results from a previous service "A", it can access the results of service "A"
-with the ``get_result`` function.
-The ``get_result`` function takes two arguments:
-
-- the name of the service (name of the service or workflow whose results you want to retrieve)
-- (Optional) the name of a device, if you want to retrieve the service results for a specific device.
-
-Example: ``get_result("Payload editor", device="Test_device")``
-
-The results of a service is always a dictionary: this is what the ``get_result`` function returns.
-You can therefore treat it as a dictionary to access the content of the results:
-
-``get_result("Payload editor")["runtime"]``
 
 Use of a SwissArmyKnifeService instance to process the payload
 --------------------------------------------------------------
@@ -221,8 +186,7 @@ Miscellaneous
 Service dependency
 ******************
 
-If a service ``A`` must be executed before a service ``B`` in the workflow, you can force that order by
-creating a ``Prerequisite`` edge.
+If a service must be run after another service, you can force that order by creating a ``Prerequisite`` edge.
 In the example below, the service ``process_payload1`` uses the results from ``Get Facts`` and
 ``Get Interfaces``. By creating two prerequisite edges, we ensure that ``process_payload1`` will not be run
 until both ``Get Facts`` and ``Get Interfaces`` have been executed.

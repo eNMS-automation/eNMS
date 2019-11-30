@@ -4,9 +4,8 @@ Services
 
 A service is a Python script that performs an action. A service is defined by:
 
-- A **model** class: what eNMS stores in the database. The model defines what the service parameters are,
-  and what the service is doing via a ``job`` function.
-- A **form**: the different fields eNMS displays in the UI, and their corresponding validation.
+- A **model** class: the service parameters, and what the service is doing via a ``job`` function.
+- A **form** class: the different fields eNMS displays in the UI, and their corresponding validation.
 
 eNMS comes with a number of "default" services based on network automation frameworks such as
 ``netmiko``, ``napalm`` and ``ansible``, but you are free to create your own services.
@@ -137,11 +136,13 @@ In Mattermost, if the ``Mattermost Channel`` is not set, the default ``Town Squa
 Using python code in the service panel
 --------------------------------------
 
-There are many places in the service panel where the user is allowed to use pure python code.
-Depending on the context, a number of global variables is made available by eNMS.
+There are two types of field in the service panel where the user is allowed to use pure python code:
+substitution fields (light blue background) and python fields (light red background).
+In these fields, you can use any python code, including a number of **variables** that are made available
+to the user.
 
-Global variables
-****************
+Variables
+*********
 
 - ``device``
 
@@ -174,6 +175,29 @@ Global variables
   - **Type** Database Object.
   - **Available**: when the iteration mechanism is used to compute derived devices.
 
+- ``app.send_email`` lets you send an email with optional attached file. It takes the following parameters:
+
+  - ``title`` (mandatory, type ``string``)
+  - ``content`` (mandatory, type ``string``)
+  - ``sender`` (optional, type ``string``) Email address of the sender. Default to the sender address
+    of eNMS configuration.
+  - ``recipients`` (optional, type ``string``) Mail addresses of the recipients, separated by comma.
+    Default to the recipients addresses of eNMS configuration.
+  - ``filename`` (optional, type ``string``) Name of the attached file.
+  - ``file_content`` (optional, type ``string``) Content of the attached file.
+
+  .. code::
+
+    app.send_email(
+        title,
+        content,
+        sender=sender,
+        recipients=recipients,
+        filename=filename,
+        file_content=file_content
+    )
+
+
 Substitution fields
 *******************
 
@@ -198,7 +222,7 @@ Running the service on two devices ``D1`` and ``D2`` will result in sending the 
 Python fields
 *************
 
-Python fields, marked with a light red background, accept python code only.
+Python fields, marked with a light red background, accept pure python code only.
 
 - In the ``Device Query`` field of the "Devices" section of a service. This field lets the user define the targets of a service programmatically.
 - In the ``Skip Service if True`` field of the "Workflow" section of a service. This field lets the user define whether or not a service should be skipped programmatically.
@@ -243,44 +267,3 @@ By default, eNMS will scan the ``eNMS/eNMS/services`` folder to instantiate all 
 If you want eNMS to scan another folder (e.g to not have custom services in eNMS .git directory,
 so that you can safely pull the latest code from Github), you can set the ``custom_services``
 variable in the configuration.
-
-Swiss Army Knife Service
-************************
-
-Whenever your services require input parameters, eNMS automatically displays a form in the UI.
-The "Swiss Army Knife Service" acts as a catch-all of utility methods that do not require GUI input,
-and will only exist as a single instance.
-It also serves to reduce the number of custom services that a user might need, and thus reduces the complexity
-of performing database migrations.
-
-A "Swiss Army Knife Service" has only one parameter: a name. The function that will run when this
-service is scheduled is the one that carries the same name as the service itself.
-The "Swiss Army Knife Service" ``job`` function can be seen as a "service multiplexer".
-
-Available functions
-*******************
-
-In your custom python code, there is a number of function that are made available by eNMS and that
-you can reuse:
-
-- Send email (``app.send_email``) lets you send an email with optional attached file.
-
-  - ``title`` (mandatory, type ``string``)
-  - ``content`` (mandatory, type ``string``)
-  - ``sender`` (optional, type ``string``) Email address of the sender. Default to the sender address
-    of eNMS configuration.
-  - ``recipients`` (optional, type ``string``) Mail addresses of the recipients, separated by comma.
-    Default to the recipients addresses of eNMS configuration.
-  - ``filename`` (optional, type ``string``) Name of the attached file.
-  - ``file_content`` (optional, type ``string``) Content of the attached file.
-
-  .. code::
-
-    app.send_email(
-        title,
-        content,
-        sender=sender,
-        recipients=recipients,
-        filename=filename,
-        file_content=file_content
-    )

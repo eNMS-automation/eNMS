@@ -84,6 +84,11 @@ Iteration
 Validation
 **********
 
+The validation can consist in:
+  - Text matching: looking for a string in the result, or matching the result against a regular expression.
+  - Dictionary matching: check that a dictionary is included or equal to the result.
+  - Anything else: you can use python code to change the result, including the value of the ``success`` key.
+
 - ``Conversion Method`` (default: ``No conversion``) Some services will fetch a result from an external source.
   There are three conversion modes:
 
@@ -96,12 +101,13 @@ Validation
   - ``Text match`` Matches the result against ``Content Match`` (string inclusion, or regular expression if 
     ``Match content against Regular expression`` is selected)
   - ``dictionary Equality`` Check for equality against the dictionary provided in ``Dictionary Match``
-  - ``dictionary Inclusion`` Check for dictionary inclusion, in the sense that all ``key`` : ``value`` pairs from
-    the dictionary provided in ``Dictionary Match`` can be found in the result.
+  - ``dictionary Inclusion`` Check for dictionary inclusion, in the sense that all ``key`` : ``value``
+    pairs from the dictionary provided in ``Dictionary Match`` can be found in the result.
 
-- ``Negative Logic`` Reverses the ``success`` boolean value in the results.
-- ``Delete spaces before matching`` (``Text`` match only) Removes white spaces and carraige returns
-  in the result and ``Content Match`` (spaces and newlines can cause the match to fail)
+- ``Negative Logic`` Reverses the ``success`` boolean value in the results: the result is inverted: a success
+  becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
+- ``Delete spaces before matching`` (``Text`` match only) The output is stripped from all spaces and newlines.
+  in the result and ``Content Match`` (they can cause the match to fail)
 
 Notification
 ************
@@ -254,26 +260,6 @@ Python fields, marked with a light red background, accept pure python code only.
 - In the ``Skip Service if True`` field of the "Workflow" section of a service. This field lets the user define whether or not a service should be skipped programmatically.
 - In the ``Query`` field of the Variable Extraction Service.
 - In the code of a Python Snippet Service.
-
-Validation
-----------
-
-For some services, the success or failure of the service is decided by a "Validation" process.
-The validation can consist in:
-
-- Looking for a string in the output of the service.
-- Matching the output of the service against a regular expression.
-- Anything else: you can implement any validation mechanism you want in your custom services.
-
-In addition to text matching, for some services where output is either expected in JSON/dictionary format, or where expected XML output can be converted to dictionary format, matching against a dictionary becomes possible:
-
-- Dictionary matching can be by inclusion:  Are all "key:value" pairs included in the output?
-- Dictionary matching can be by equality: Are all provided "key:value" pairs exactly matching the output key:value pairs?
-
-A few options are available to the user:
-
-- ``Negative logic``: the result is inverted: a success becomes a failure and vice-versa. This prevents the user from using negative look-ahead regular expressions.
-- ``Delete spaces before matching``: the output returned by the device will be stripped from all spaces and newlines, as those can sometimes result in false negative.
 
 Custom Services
 ---------------

@@ -22,21 +22,23 @@ Workflow Builder
       will be added to the workflow.
     - On the second row, you can change the mode to "Edge creation" and select which type of edge you want to create.
 
-- Section 2: edit and duplicate the current workflow, create a new workflow, add existing services to the workflow,
-create labels, skip or unskip services, and delete selected services and edges.
+- Section 2: edit and duplicate the current workflow, create a new workflow, add existing services to the
+  workflow, create labels, skip or unskip services, and delete selected services and edges.
 - Section 3: run or pause a workflow, and display the workflow logs and results.
-- Section 4: refresh the workflow, zoom and unzoom, move to the previous or next workflow, and move to the selected
-  subworkflow.
+- Section 4: refresh the workflow, zoom and unzoom, move to the previous or next workflow, and move to the
+  selected subworkflow.
 - Section 5: choose which workflow to display, and which results.
 
-Some of these actions are also available from the right-click menus (clicking on the background, on a service or on an
-edge generate different menus).
+.. note::
+
+  Some of these actions are also available from the right-click menus (clicking on the background, on a service
+  or on an edge generate different menus).
 
 Workflow Devices
 ----------------
 
-The devices used when running a workflow depend on the workflow ``Run Method`` that you can configure in the edit panel,
-section ``Devices``.
+The devices used when running a workflow depend on the workflow ``Run Method`` that you can configure in the
+edit panel, section ``Devices``.
 There are three run methods for a workflow:
 
 - **device by device**: the devices configured **at workflow level** are considered. The workflow will run for
@@ -44,9 +46,9 @@ There are three run methods for a workflow:
   **sequentially**, one at a time. If multiprocessing **at workflow level** is enabled, you can have as many
   devices running the workflow in parallel as you have available processes.
 - **service by service using workflow targets**: the devices configured **at workflow level** are considered.
-  Each device can follow a different path depending on whether a service is successful or not, but services are always
-  run **one at a time**. eNMS will compute the targets of a service by keeping track of the path of each device
-  throughout the workflow. Multiprocessing must be enabled **at service level**.
+  Each device can follow a different path depending on whether a service is successful or not, but services
+  are always run **one at a time**. eNMS will compute the targets of a service by keeping track of the path
+  of each device throughout the workflow. Multiprocessing must be enabled **at service level**.
 - **service by service using service targets**: only the devices selected **at the individual service level**
   are considered. Devices selected at workflow level are ignored. A service is considered successful if it ran
   successfully on all of its targets (if it fails on at least one target, it is considered to have failed).

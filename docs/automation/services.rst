@@ -269,7 +269,7 @@ Custom Services
 In addition to the services provided by default, you are free to create your own services.
 When the application starts, it loads all python files in ``eNMS / eNMS / services`` folder.
 If you want your custom services to be in a different folder, you can set a different path in the
-:ref:`Configuration`, section ``Paths``.
+:ref:`Configuration`, section ``paths``.
 Creating a service means adding a new python file in that folder.
 You are free to create subfolders to organize your own services any way you want:
 eNMS will automatically detect them.

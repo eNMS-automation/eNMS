@@ -36,37 +36,22 @@ Check out the :ref:`Configuration` sections for each API, then click on the impo
 Custom properties
 -----------------
 
-It is possible to create custom properties for devices.
-There are four types of properties that you can add: string, integer, float, and boolean.
+You can extend the properties of a device with your own properties. Custom properties are read
+from a YAML file whose path must be set in the :ref:`Configuration`, section ``Paths``,
+with the following variables:
 
-Custom properties are read from a YAML file when eNMS starts.
-The YAML file must have the following format:
+  - ``type`` (mandatory): ``string``, ``integer``, ``float``, and ``boolean``
+  - ``pretty_name`` (optional): Name of the property in the UI.
+  - ``default`` (optional): Default value.
+  - ``add_to_dashboard`` (optional): Whether the property should appear in the dashboard or not.
+  - ``private`` (optional): If ``true``, the value will be stored in the Vault.
+  - ``is_address``: Set to ``true`` if you want to property to be usable by GoTTY to connect to address
+    network device (e.g hostnames, IP adddresses, etc)
 
-::
+An example is provided in :guilabel:`eNMS / tests / customization / device_properties.yml`
 
- property1:
-   pretty_name: Property 1
-   type: integer
-   default: 4
-   add_to_dashboard: False
- property2:
-   pretty_name: Property 2
-   type: string
-   default: "10.145.14.1"
-   add_to_dashboard: True
-   is_address: True
+.. include:: ../../tests/customization/device_properties.yml
+   :literal:
 
-This YAML file will create two properties:
-
-- "property1": an integer property defaulting to 4, displayed "Property 1" in the GUI.
-- "property2": a string property defaulting to "a" displayed "Property 2" in the GUI.
-
-If you want the custom property to appear in the dashboard, set ``add_to_dashboard`` to ``True`` in the YaML file.
-The ``pretty_name`` is the name of the property in the web UI.
-
-If you want the custom property to appear as a choice in the GoTTY Web SSH window (e.g if the property is a hostname or an IP address, and you want GoTTY to use it for SSH or Telnet), you can set ``is_address`` to True.
-
-.. note:: You can find examples of YAML files with custom propertyes in :guilabel:`eNMS/tests/custom_properties`.
-
-For eNMS to know where the file with custom properties is located on the server, 
-you must set the ``custom_properties`` configuration variable to the path of the YAML file.
+.. note:: Custom properties must be defined once and for all before eNMS starts for the time,
+  as they are part of the database schema.

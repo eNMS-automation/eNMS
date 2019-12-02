@@ -77,11 +77,15 @@ Configuration
 
 The configuration is divided into:
 
-- private variables (passwords, tokens, keys) set as environment variables.
-- public variables defined in the ``config.json`` file.
+- Environment variables for all sensitive data (passwords, tokens, keys). Environment are export
+  from Unix with the ``export`` keyword: ``export VARIABLE_NAME=value``.
+- Public variables defined in the ``config.json`` file, and later modifiable from the administration
+  panel.
 
-Section ``Application``
-***********************
+Section ``app``
+***************
+
+**Public variables**
 
 - ``address`` (default: ``""``) The address is needed when eNMS needs to provide a link back to the application,
   which is the case with GoTTY and mail notifications. When left empty, eNMS will try to guess the URL. This might
@@ -95,7 +99,11 @@ Section ``Application``
 - ``git_repository`` (default: ``""``) Git is used as a version control system for device configurations: this variable
   is the address of the remote git repository where eNMS will push all device configurations.
 
-Section ``Database``
+**Environment variables**
+
+- ``SECRET_KEY``: Secret key of the Flask application.
+
+Section ``database``
 ********************
 
 - ``url`` (default: ``"sqlite:///database.db?check_same_thread=False"``) `SQL Alchemy database URL
@@ -107,7 +115,7 @@ Section ``Database``
 - ``small_string_length`` (default: ``255``) Length of a small string in the database.
 - ``small_string_length`` (default: ``32768``) Length of a large string in the database.
 
-Section ``GoTTY``
+Section ``gotty``
 *****************
 
 - ``port_redirection`` (default: ``false``)
@@ -115,7 +123,7 @@ Section ``GoTTY``
 - ``start_port`` (default: ``9000``)
 - ``end_port`` (default: ``91000``)
 
-Section ``Cluster``
+Section ``cluster``
 *******************
 
 - ``active`` (default: ``false``)
@@ -158,9 +166,9 @@ Section ``mail``
 Section ``mattermost``
 **********************
 
-  - ``url`` (default: ``"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"``)
-  - ``channel`` (default: ``""``)
-  - ``verify_certificate`` (default: ``true``)
+- ``url`` (default: ``"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"``)
+- ``channel`` (default: ``""``)
+- ``verify_certificate`` (default: ``true``)
 
 Section ``opennms``
 *******************
@@ -177,33 +185,33 @@ Section ``netbox``
 - ``address`` (default: ``""``) Address of Netbox server.
 
 Section ``librenms``
-******************
+********************
 
 - ``address`` (default: ``""``) Address of LibreNMS server
 
 Section ``paths``
 *****************
 
-  - ``custom_code`` (default: ``""``)
-  - ``custom_properties`` (default: ``""``) Path 
-  - ``custom_services`` (default: ``""``) Path to a folder that contains :ref:`Custom Services`.
-  - ``playbooks`` (default: ``""``)
+- ``custom_code`` (default: ``""``)
+- ``custom_properties`` (default: ``""``) Path 
+- ``custom_services`` (default: ``""``) Path to a folder that contains :ref:`Custom Services`.
+- ``playbooks`` (default: ``""``)
 
 Section ``Requests``
 ********************
 
-    - Pool
+- Pool
 
-      - ``pool_maxsize`` (default: ``10``)
-      - ``pool_connections`` (default: ``100``)
-      - ``pool_block`` (default: ``false``)
+  - ``pool_maxsize`` (default: ``10``)
+  - ``pool_connections`` (default: ``100``)
+  - ``pool_block`` (default: ``false``)
 
-    - Retries
+- Retries
 
-        - ``total`` (default: ``2``)
-        - ``read`` (default: ``2``)
-        - ``connect`` (default: ``2``)
-        - ``backoff_factor`` (default: ``0.5``)
+    - ``total`` (default: ``2``)
+    - ``read`` (default: ``2``)
+    - ``connect`` (default: ``2``)
+    - ``backoff_factor`` (default: ``0.5``)
 
 Section ``Slack``
 *****************
@@ -211,7 +219,7 @@ Section ``Slack``
 - ``channel`` (default: ``""``)
 
 Section ``Syslog``
-*****************
+******************
 
 - ``active`` (default: ``false``)
 - ``address`` (default: ``"0.0.0.0"``)
@@ -227,9 +235,24 @@ Section ``TACACS``
 Section ``Vault``
 *****************
 
+For eNMS to use a Vault to store all sensitive data (user and network credentials), you must set
+the ``active`` variable to ``true``, provide an address and export 
+
+**Public variables**
+
 - ``active`` (default: ``false``)
 - ``address`` (default: ``"http://127.0.0.1:8200"``)
-- ``unseal`` (default: ``false``)
+- ``unseal`` (default: ``false``) Automatically unseal the Vault. You must export the keys as
+  environment variables.
+
+**Environment variables**
+
+- ``VAULT_TOKEN``
+- ``UNSEAL_VAULT_KEY1``
+- ``UNSEAL_VAULT_KEY2``
+- ``UNSEAL_VAULT_KEY3``
+- ``UNSEAL_VAULT_KEY4``
+- ``UNSEAL_VAULT_KEY5``
 
 Section ``View``
 ****************
@@ -245,16 +268,10 @@ Private configuration
 
 ::
 
-  - export SECRET_KEY=your_secret_key123
-  - export VAULT_TOKEN=e1c70d27-7c7f-6f6a-fb18-b0c0382667b7
-  - export UNSEAL_VAULT_KEY1=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
-  - export UNSEAL_VAULT_KEY2=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
-  - export UNSEAL_VAULT_KEY3=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
-  - export UNSEAL_VAULT_KEY4=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
-  - export UNSEAL_VAULT_KEY5=+17lQib+Z/MP5I30Fhd9/yoox9XKzk8bWERv9v3nZ5Ow
-  - export MAIL_PASSWORD=eNMS-user
-  - export TACACS_PASSWORD=tacacs_password
-  - export OPENNMS_PASSWORD=opennms_password
-  - export LIBRENMS_TOKEN=librenms_token
-  - export NETBOX_TOKEN=netbox_token
-  - export SLACK_TOKEN=SLACK_TOKEN
+
+  - MAIL_PASSWORD=eNMS-user
+  - TACACS_PASSWORD=tacacs_password
+  - OPENNMS_PASSWORD=opennms_password
+  - LIBRENMS_TOKEN=librenms_token
+  - NETBOX_TOKEN=netbox_token
+  - SLACK_TOKEN=SLACK_TOKEN

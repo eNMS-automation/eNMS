@@ -49,8 +49,6 @@ const panelSize = {
   link_filtering: "700 600",
   log_filtering: "700 350",
   notifications: "1100 400",
-  netbox: "700 250",
-  opennms: "700 300",
   pool: "800 600",
   pool_filtering: "1000 700",
   pool_objects: "700 550",

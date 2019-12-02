@@ -147,13 +147,6 @@ class ExcelImportForm(BaseForm):
     replace = BooleanField("Replace Existing Topology")
 
 
-class NetboxForm(BaseForm):
-    action = "queryNetbox"
-    form_type = HiddenField(default="netbox")
-    netbox_address = StringField("URL", default="http://0.0.0.0:8000")
-    netbox_token = PasswordField("Token")
-
-
 class ExportForm(BaseForm):
     action = "exportTopology"
     form_type = HiddenField(default="excel_export")

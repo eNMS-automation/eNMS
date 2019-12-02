@@ -51,6 +51,9 @@
   "librenms": {
     "address": "http://librenms.example.com"
   },
+  "netbox": {
+    "address": "http://0.0.0.0:8000"
+  },
   "opennms": {
     "address": "",
     "login": "",

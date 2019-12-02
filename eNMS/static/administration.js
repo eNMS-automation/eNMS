@@ -54,7 +54,7 @@ function queryOpenNMS() {
 
 // eslint-disable-next-line
 function queryNetbox() {
-  fCall("/query_netbox", "#netbox-form", function() {
+  call("/query_netbox", function() {
     alertify.notify("Topology imported from Netbox.", "success", 5);
   });
 }

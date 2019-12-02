@@ -57,7 +57,7 @@ class PythonSnippetService(Service):
                 },
             }
 
-        return result
+        return {"result": result}
 
 
 class PythonSnippetForm(ServiceForm):

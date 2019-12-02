@@ -98,7 +98,7 @@ class ServiceForm(BaseForm):
         "Run Method",
         choices=(
             ("per_device", "Run the service once per device"),
-            ("once", "Run the service once for all devices"),
+            ("once", "Run the service once"),
         ),
     )
     query_fields = [

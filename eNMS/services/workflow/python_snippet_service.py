@@ -24,19 +24,19 @@ class PythonSnippetService(Service):
         except Exception as exc:
             run.log("info", f"Compile error: {str(exc)}")
             return {"success": False, "result": {"step": "compile", "error": str(exc)}}
-        _code_result_ = {}
+        result = {}
 
         class TerminateException(Exception):
             pass
 
         def save_result(success, result, **kwargs):
-            _code_result_.update({"success": success, "result": result, **kwargs})
+            result.update({"success": success, "result": result, **kwargs})
             if kwargs.get("exit"):
                 raise TerminateException()
 
         globals = {
             "__builtins__": __builtins__,
-            "_code_result_": _code_result_,
+            "result": result,
             "log": run.log,
             "save_result": save_result,
             **run.python_code_kwargs(**locals()),
@@ -53,18 +53,11 @@ class PythonSnippetService(Service):
                 "result": {
                     "step": "execute",
                     "error": str(exc),
-                    "result": _code_result_,
+                    "result": result,
                 },
             }
 
-        if not _code_result_:
-            run.log("info", "Error: Result not set by user code on service instance")
-            _code_result_ = {
-                "success": False,
-                "result": {"error": "Result not set by user code on service instance"},
-            }
-
-        return _code_result_
+        return result
 
 
 class PythonSnippetForm(ServiceForm):

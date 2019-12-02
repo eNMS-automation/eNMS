@@ -299,7 +299,8 @@ class Run(AbstractBase):
                 "run": self.properties,
                 "service": self.service.get_properties(exclude=["positions"]),
             }
-            if self.runtime == self.parent_runtime or len(self.devices) > 1:
+            print("oooo"*100, results, self.runtime == self.parent_runtime or len(self.devices) > 1 or self.run_method == "once")
+            if self.runtime == self.parent_runtime or len(self.devices) > 1 or self.run_method == "once":
                 self.create_result(results)
             Session.commit()
         return results
@@ -332,6 +333,7 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices, success = self.compute_devices(payload), True
+        print("tttt"*100, not self.devices, self.run_method != "per_device")
         if not self.devices or self.run_method != "per_device":
             results = [self.get_results(payload)]
         else:

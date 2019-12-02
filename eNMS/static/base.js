@@ -360,7 +360,7 @@ function preprocessForm(panel, id, type, duplicate) {
     }
   });
   panel.querySelectorAll(".doc-link").forEach((el) => {
-    $(el).attr("href", `${config.app.documentation_url}${$(el).attr('href')}`);
+    $(el).attr("href", `${config.app.documentation_url}${$(el).attr("href")}`);
   });
 }
 

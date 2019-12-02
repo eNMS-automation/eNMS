@@ -91,7 +91,9 @@ class InventoryController(BaseController):
         workbook.save(self.path / "files" / "spreadsheets" / filename)
 
     def query_netbox(self, **kwargs):
-        nb = netbox_api(self.config["netbox"]["address"], token=environ.get("NETBOX_TOKEN"))
+        nb = netbox_api(
+            self.config["netbox"]["address"], token=environ.get("NETBOX_TOKEN")
+        )
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
             factory(

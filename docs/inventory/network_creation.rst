@@ -40,18 +40,18 @@ You can extend the properties of a device with your own properties. Custom prope
 from a YAML file whose path must be set in the :ref:`Configuration`, section ``Paths``,
 with the following variables:
 
-  - ``type`` (mandatory): ``string``, ``integer``, ``float``, and ``boolean``
-  - ``pretty_name`` (optional): Name of the property in the UI.
-  - ``default`` (optional): Default value.
-  - ``add_to_dashboard`` (optional): Whether the property should appear in the dashboard or not.
-  - ``private`` (optional): If ``true``, the value will be stored in the Vault.
-  - ``is_address``: Set to ``true`` if you want to property to be usable by GoTTY to connect to address
-    network device (e.g hostnames, IP adddresses, etc)
-
-An example is provided in :guilabel:`eNMS / tests / customization / device_properties.yml`
-
-.. include:: ../../tests/customization/device_properties.yml
-   :literal:
+  - ``type`` (**mandatory**): ``string``, ``integer``, ``float``, and ``boolean``
+  - ``pretty_name`` (**optional**): Name of the property in the UI.
+  - ``default`` (**optional**): Default value.
+  - ``add_to_dashboard`` (**optional**): Whether the property should appear in the dashboard or not.
+  - ``private`` (**optional**): If ``true``, the value will be stored in the Vault.
+  - ``is_address`` (**optional**): Set to ``true`` if you want to property to be usable by GoTTY to
+    connect to network devices (e.g hostnames, IP adddresses, etc)
 
 .. note:: Custom properties must be defined once and for all before eNMS starts for the time,
   as they are part of the database schema.
+
+You can find the following example in :guilabel:`eNMS / tests / customization`:
+
+.. include:: ../../tests/customization/device_properties.yml
+   :literal:

@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField, StringField
+from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString
@@ -50,11 +50,7 @@ class PythonSnippetService(Service):
             run.log("info", f"Execution error: {str(exc)}")
             return {
                 "success": False,
-                "result": {
-                    "step": "execute",
-                    "error": str(exc),
-                    "result": result,
-                },
+                "result": {"step": "execute", "error": str(exc), "result": result},
             }
 
         return {"result": result}

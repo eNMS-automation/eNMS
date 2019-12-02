@@ -299,7 +299,11 @@ class Run(AbstractBase):
                 "run": self.properties,
                 "service": self.service.get_properties(exclude=["positions"]),
             }
-            if self.runtime == self.parent_runtime or len(self.devices) > 1 or self.run_method == "once":
+            if (
+                self.runtime == self.parent_runtime
+                or len(self.devices) > 1
+                or self.run_method == "once"
+            ):
                 self.create_result(results)
             Session.commit()
         return results
@@ -353,7 +357,10 @@ class Run(AbstractBase):
                 pool.join()
             else:
                 results = [self.get_results(payload, device) for device in self.devices]
-            return {"success": all(result["success"] for result in results), "runtime": self.runtime}
+            return {
+                "success": all(result["success"] for result in results),
+                "runtime": self.runtime,
+            }
 
     def create_result(self, results, device=None):
         self.success = results["success"]

@@ -48,6 +48,9 @@
     "channel": "",
     "verify_certificate": true
   },
+  "librenms": {
+    "address": "http://librenms.example.com"
+  },
   "opennms": {
     "address": "",
     "login": "",

@@ -47,7 +47,7 @@ function showImportTopologyPanel(type) {
 
 // eslint-disable-next-line
 function queryOpenNMS() {
-  fCall("/query_opennms", function() {
+  call("/query_opennms", function() {
     alertify.notify("Topology imported from OpenNMS.", "success", 5);
   });
 }
@@ -61,7 +61,7 @@ function queryNetbox() {
 
 // eslint-disable-next-line
 function queryLibreNMS() {
-  fCall("/query_librenms", "#librenms-form", function() {
+  call("/query_librenms", function() {
     alertify.notify("Topology imported from LibreNMS.", "success", 5);
   });
 }

@@ -235,4 +235,5 @@ Private configuration
   - export MAIL_PASSWORD=eNMS-user
   - export TACACS_PASSWORD=tacacs_password
   - export OPENNMS_PASSWORD=opennms_password
+  - export LIBRENMS_TOKEN=librenms_token
   - export SLACK_TOKEN=SLACK_TOKEN

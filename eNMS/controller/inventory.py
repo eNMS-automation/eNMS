@@ -111,8 +111,8 @@ class InventoryController(BaseController):
 
     def query_librenms(self, **kwargs):
         devices = http_get(
-            f'{kwargs["librenms_address"]}/api/v0/devices',
-            headers={"X-Auth-Token": kwargs["librenms_token"]},
+            f'{self.config["opennms"]["address"]}/api/v0/devices',
+            headers={"X-Auth-Token": environ.get("LIBRENMS_TOKEN")},
         ).json()["devices"]
         for device in devices:
             factory(

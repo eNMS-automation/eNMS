@@ -165,11 +165,3 @@ class ExportForm(BaseForm):
     action = "exportTopology"
     form_type = HiddenField(default="excel_export")
     export_filename = StringField("Filename")
-
-
-class GoogleEarthForm(BaseForm):
-    action = "exportToGoogleEarth"
-    form_type = HiddenField(default="google_earth_export")
-    name = StringField("Name", [InputRequired()])
-    label_size = IntegerField("Label Size", default=1)
-    line_width = IntegerField("Link Width", default=2)

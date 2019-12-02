@@ -43,7 +43,6 @@ const panelSize = {
   excel_import: "400 150",
   excel_export: "400 150",
   git: "900 200",
-  google_earth_export: "700 200",
   import_service: "500 400",
   instance_deletion: "400 130",
   librenms: "700 250",

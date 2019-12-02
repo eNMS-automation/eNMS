@@ -67,13 +67,6 @@ function queryLibreNMS() {
 }
 
 // eslint-disable-next-line
-function exportToGoogleEarth() {
-  fCall("/export_to_google_earth", "#google_earth_export-form", function() {
-    alertify.notify("Project exported to Google Earth.", "success", 5);
-  });
-}
-
-// eslint-disable-next-line
 function exportTopology() {
   alertify.notify("Topology export starting...", "success", 5);
   fCall("/export_topology", "#excel_export-form", function() {

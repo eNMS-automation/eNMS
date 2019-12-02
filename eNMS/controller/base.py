@@ -107,7 +107,6 @@ class BaseController:
         "delete_node",
         "duplicate_workflow",
         "export_service",
-        "export_to_google_earth",
         "export_topology",
         "get",
         "get_all",

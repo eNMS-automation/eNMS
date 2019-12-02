@@ -36,9 +36,6 @@ _templates
 package-lock.json
 node_modules/
 
-# google earth file
-*.kmz
-
 # AP Scheduler
 *.sqlite
 

@@ -49,9 +49,9 @@
     "verify_certificate": true
   },
   "opennms": {
-    "opennms_login": "",
-    "opennms_devices": "",
-    "opennms_rest_api": ""
+    "address": "",
+    "login": "",
+    "devices": ""
   },
   "paths": {
     "custom_code": "",

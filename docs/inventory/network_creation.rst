@@ -32,13 +32,6 @@ Querying an external API
 Another way to create your network is to query an external API: OpenNMS, Netbox, or LibreNMS.
 This can be done from :guilabel:`Admin / Administration`, column "Topology Import".
 
-OpenNMS
-*******
-
- * REST API: URL of the REST API
- * Devices: URL of the devices that you want to import (this could be a subset of all available devices in the API, like ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``)
- * Credentials of the REST API.
-
 Netbox
 ******
 

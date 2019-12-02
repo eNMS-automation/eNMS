@@ -158,11 +158,14 @@ LDAP/AD using the `ldap3` library, and if successful, that user gets added to eN
   - ``channel`` (default: ``""``)
   - ``verify_certificate`` (default: ``true``)
 
-- Section ``OpenNMS``
+Section ``OpenNMS``
+*******************
 
-  - ``opennms_login`` (default: ``""``)
-  - ``opennms_devices`` (default: ``""``)
-  - ``opennms_rest_api`` (default: ``""``)
+- ``address`` (default: ``""``) URL of the REST API.
+- ``login`` (default: ``""``) REST login.
+- ``devices`` (default: ``""``) URL of the devices to import. This could be a subset of
+  all available devices in the API, like
+  ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``.
 
 - Section ``Paths``
 

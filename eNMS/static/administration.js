@@ -47,7 +47,7 @@ function showImportTopologyPanel(type) {
 
 // eslint-disable-next-line
 function queryOpenNMS() {
-  fCall("/query_opennms", "#opennms-form", function() {
+  fCall("/query_opennms", function() {
     alertify.notify("Topology imported from OpenNMS.", "success", 5);
   });
 }

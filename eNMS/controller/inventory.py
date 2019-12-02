@@ -129,7 +129,7 @@ class InventoryController(BaseController):
                 },
             )
 
-    def query_opennms(self, **kwargs):
+    def query_opennms(self):
         login = self.config["opennms"]["login"]
         password = environ.get("OPENNMS_PASSWORD")
         Session.commit()

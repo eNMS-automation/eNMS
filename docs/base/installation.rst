@@ -124,7 +124,7 @@ Section ``Cluster``
 - ``scan_protocol`` (default: ``"http"``)
 - ``scan_timeout`` (default: ``0.05``)
 
-Section ``LDAP``
+Section ``ldap``
 ****************
 
 If LDAP/Active Directory is enabled and the user doesn't exist in the database yet, eNMS tries to authenticate against
@@ -145,7 +145,8 @@ LDAP/AD using the `ldap3` library, and if successful, that user gets added to eN
   In the event that services are already scheduled with User Credentials, these might fail if the credentials
   are not updated in eNMS.
 
-- Section ``Mail``
+Section ``mail``
+****************
 
   - ``server`` (default: ``"smtp.googlemail.com"``)
   - ``port`` (default: ``587``)
@@ -154,13 +155,14 @@ LDAP/AD using the `ldap3` library, and if successful, that user gets added to eN
   - ``sender`` (default: ``"eNMS@company.com"``)
   - ``recipients`` (default: ``"eNMS-user@company.com"``)
 
-- Section ``Mattermost``
+Section ``mattermost``
+**********************
 
   - ``url`` (default: ``"https://mattermost.company.com/hooks/i1phfh6fxjfwpy586bwqq5sk8w"``)
   - ``channel`` (default: ``""``)
   - ``verify_certificate`` (default: ``true``)
 
-Section ``OpenNMS``
+Section ``opennms``
 *******************
 
 - ``address`` (default: ``""``) Address of OpenNMS server.
@@ -169,25 +171,26 @@ Section ``OpenNMS``
   all available devices in the API, like
   ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``.
 
-Section ``Netbox``
+Section ``netbox``
 ******************
 
 - ``address`` (default: ``""``) Address of Netbox server.
 
-Section ``LibreNMS``
+Section ``librenms``
 ******************
 
 - ``address`` (default: ``""``) Address of LibreNMS server
 
-- Section ``Paths``
+Section ``paths``
+*****************
 
   - ``custom_code`` (default: ``""``)
-  - ``custom_properties`` (default: ``""``)
-  - ``custom_services`` (default: ``""``) By default, eNMS scans ``eNMS / eNMS / services`` (cf.  for custom
-    services, but you can configure a different folder instead.
+  - ``custom_properties`` (default: ``""``) Path 
+  - ``custom_services`` (default: ``""``) Path to a folder that contains :ref:`Custom Services`.
   - ``playbooks`` (default: ``""``)
 
-- Section ``Requests``
+Section ``Requests``
+********************
 
     - Pool
 
@@ -202,35 +205,40 @@ Section ``LibreNMS``
         - ``connect`` (default: ``2``)
         - ``backoff_factor`` (default: ``0.5``)
 
-  - Section ``Slack``
+Section ``Slack``
+*****************
 
-      - ``channel`` (default: ``""``)
+- ``channel`` (default: ``""``)
 
-  - Section ``Syslog``
+Section ``Syslog``
+*****************
 
-    - ``active`` (default: ``false``)
-    - ``address`` (default: ``"0.0.0.0"``)
-    - ``port`` (default: ``514``)
+- ``active`` (default: ``false``)
+- ``address`` (default: ``"0.0.0.0"``)
+- ``port`` (default: ``514``)
 
-  - Section ``TACACS``
+Section ``TACACS``
+******************
 
-    - ``active`` (default: ``false``)
-    - ``address`` (default: ``""``)
-    - ``port`` (default: ``514``)
+- ``active`` (default: ``false``)
+- ``address`` (default: ``""``)
+- ``port`` (default: ``514``)
 
-  - Section ``Vault``
+Section ``Vault``
+*****************
 
-    - ``active`` (default: ``false``)
-    - ``address`` (default: ``"http://127.0.0.1:8200"``)
-    - ``unseal`` (default: ``false``)
+- ``active`` (default: ``false``)
+- ``address`` (default: ``"http://127.0.0.1:8200"``)
+- ``unseal`` (default: ``false``)
 
-  - Section ``View``
+Section ``View``
+****************
 
-    - ``longitude`` (default: ``-96.0``)
-    - ``latitude`` (default: ``33.0``)
-    - ``zoom_level`` (default: ``5``)
-    - ``tile_layer`` (default: ``"osm"``)
-    - ``marker`` (default: ``"Image"``)
+- ``longitude`` (default: ``-96.0``)
+- ``latitude`` (default: ``33.0``)
+- ``zoom_level`` (default: ``5``)
+- ``tile_layer`` (default: ``"osm"``)
+- ``marker`` (default: ``"Image"``)
 
 Private configuration
 *********************

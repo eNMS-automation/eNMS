@@ -261,13 +261,18 @@ Python fields, marked with a light red background, accept pure python code only.
 - In the ``Query`` field of the Variable Extraction Service.
 - In the code of a Python Snippet Service.
 
+.. _Custom Services:
+
 Custom Services
 ---------------
 
 In addition to the services provided by default, you are free to create your own services.
 When the application starts, it loads all python files in ``eNMS / eNMS / services`` folder.
+If you want your custom services to be in a different folder, you can set a different path in the
+:ref:`Configuration`, section ``Paths``.
 Creating a service means adding a new python file in that folder.
 You are free to create subfolders to organize your own services any way you want:
 eNMS will automatically detect them.
 Just like all other services, this python file must contain a model and a form.
 After adding a new custom service, you must reload the application before it appears in the web UI.
+

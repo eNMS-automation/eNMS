@@ -70,6 +70,8 @@ You also have to tell eNMS the address of your database by setting the "DATABASE
 
 In case this environment variable is not set, eNMS will default to using a SQLite database.
 
+.. _Configuration:
+
 Configuration
 -------------
 
@@ -161,11 +163,21 @@ LDAP/AD using the `ldap3` library, and if successful, that user gets added to eN
 Section ``OpenNMS``
 *******************
 
-- ``address`` (default: ``""``) URL of the REST API.
+- ``address`` (default: ``""``) Address of OpenNMS server.
 - ``login`` (default: ``""``) REST login.
 - ``devices`` (default: ``""``) URL of the devices to import. This could be a subset of
   all available devices in the API, like
   ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``.
+
+Section ``Netbox``
+******************
+
+- ``address`` (default: ``""``) Address of Netbox server.
+
+Section ``LibreNMS``
+******************
+
+- ``address`` (default: ``""``) Address of LibreNMS server
 
 - Section ``Paths``
 

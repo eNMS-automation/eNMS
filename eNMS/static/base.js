@@ -45,7 +45,6 @@ const panelSize = {
   git: "900 200",
   import_service: "500 400",
   instance_deletion: "400 130",
-  librenms: "700 250",
   link: "700 400",
   link_filtering: "700 600",
   log_filtering: "700 350",

@@ -154,13 +154,6 @@ class NetboxForm(BaseForm):
     netbox_token = PasswordField("Token")
 
 
-class LibreNmsForm(BaseForm):
-    action = "queryLibreNMS"
-    form_type = HiddenField(default="librenms")
-    librenms_address = StringField("URL", default="http://librenms.example.com")
-    librenms_token = PasswordField("Token")
-
-
 class ExportForm(BaseForm):
     action = "exportTopology"
     form_type = HiddenField(default="excel_export")

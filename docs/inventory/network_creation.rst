@@ -55,3 +55,4 @@ You can find the following example in :guilabel:`eNMS / tests / customization`:
 
 .. include:: ../../tests/customization/device_properties.yml
    :literal:
+   :lines: 1-8

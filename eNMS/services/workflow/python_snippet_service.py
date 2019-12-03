@@ -1,10 +1,10 @@
+import traceback
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField
+from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString
 from eNMS.forms.automation import ServiceForm
-from eNMS.forms.fields import PythonField
 from eNMS.models.automation import Service
 
 
@@ -12,6 +12,7 @@ class PythonSnippetService(Service):
 
     __tablename__ = "python_snippet_service"
     pretty_name = "Python Snippet"
+
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     source_code = Column(LargeString)
 
@@ -24,53 +25,64 @@ class PythonSnippetService(Service):
         except Exception as exc:
             run.log("info", f"Compile error: {str(exc)}")
             return {"success": False, "result": {"step": "compile", "error": str(exc)}}
-        result = {}
-
-        class TerminateException(Exception):
-            pass
+        results = {}
 
         def save_result(success, result, **kwargs):
-            result.update({"success": success, "result": result, **kwargs})
+            results.update({"success": success, "result": result, **kwargs})
             if kwargs.get("exit"):
-                raise TerminateException()
+                raise SystemExit()
 
         globals = {
             "__builtins__": __builtins__,
-            "result": result,
-            "log": run.log,
+            "results": results,
             "save_result": save_result,
             **run.python_code_kwargs(**locals()),
         }
 
         try:
             exec(code_object, globals)
-        except TerminateException:
+        except SystemExit:
             pass  # Clean exit from middle of snippet
         except Exception as exc:
-            run.log("info", f"Execution error: {str(exc)}")
+            lineno = traceback.extract_tb(exc.__traceback__)[-1][1]
+            run.log("info", f"Execution error(line {lineno}): {str(exc)}")
             return {
                 "success": False,
-                "result": {"step": "execute", "error": str(exc), "result": result},
+                "result": {
+                    "step": "execute",
+                    "error": str(exc),
+                    "result": results,
+                },
             }
 
-        return {"result": result}
+        if not results:
+            run.log("info", "Error: Result not set by user code on service instance")
+            results = {
+                "success": False,
+                "result": {"error": "Result not set by user code on service instance"},
+            }
+
+        return results
 
 
 class PythonSnippetForm(ServiceForm):
     form_type = HiddenField(default="python_snippet_service")
-    source_code = PythonField(
+    source_code = StringField(
         widget=TextArea(),
         render_kw={"rows": 15},
         default="""
-# The following input variables are available: payload, device
-# You must call save_result() to return a result:
-#    save_result(success=True, result={...})
-#    The result dict can return any data pertinent to service execution.
-#    Add exit=True to terminate execution in the middle of the python snippet.
-# You can log strings using the log() function:
-#    log("important message")
+# Availble variables: device, results, run
+# Returning state:
+#    results["success"] = True
+#    results["result"] = <return data>
+# Logging: run.log(level, text)
+#    run.log("info", "My log message")
+# Exit in the middle of the script:
+#    exit()
+#    Note: exit() is not required as the last line
 
 result = {}
-save_result(success=True, result=result)""",
+results["success"] = True
+results["result"] = result,"""
     )
     query_fields = ServiceForm.query_fields + ["source_code"]

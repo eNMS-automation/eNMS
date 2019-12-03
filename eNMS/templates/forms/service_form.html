@@ -74,7 +74,7 @@
             <span class="step_no">6</span>
             <span class="step_descr"
               >Step 6<br />
-              <small>Validation</small>
+              <small>Python</small>
             </span>
           </a>
         </li>
@@ -83,6 +83,15 @@
             <span class="step_no">7</span>
             <span class="step_descr"
               >Step 7<br />
+              <small>Validation</small>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#step-8">
+            <span class="step_no">8</span>
+            <span class="step_descr"
+              >Step 8<br />
               <small>Notification</small>
             </span>
           </a>
@@ -332,6 +341,11 @@
         </div>
       </div>
       <div id="step-6">
+        <div class="form-group">
+          <div id="{{ form_type }}-result_postprocessing" name="result_postprocessing" class="add-id"></div>
+        </div>
+      </div>
+      <div id="step-7">
         <label>Conversion Method</label>
         <div class="form-group">
           {{ form.conversion_method(id=form_type + '-conversion_method',
@@ -340,10 +354,7 @@
         <label
           >Python Post-processing after conversion (variable "results")</label
         >
-        <div class="form-group">
-          {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
-          class="form-control add-id") }}
-        </div>
+
         <label>Validation Method</label>
         <div class="form-group">
           {{ form.validation_method(id=form_type + '-validation_method',
@@ -396,7 +407,7 @@
           </div>
         </fieldset>
       </div>
-      <div id="step-7">
+      <div id="step-8">
         <fieldset>
           <div class="item">
             <input

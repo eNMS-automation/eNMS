@@ -26,6 +26,9 @@ Version 3.18
   - run device by device
   - service by service with workflow targets
   - service by service with service targets
+- Fix inner scrollbar service panel bug
+- Add Admin permission for LDAP authentication
+- Fix Python snippet service
 
 Version 3.17.2
 --------------

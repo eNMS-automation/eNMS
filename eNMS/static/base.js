@@ -414,6 +414,15 @@ function configureForm(form, id, panelId) {
         actionsBox: true,
         selectedTextFormat: "count > 3",
       });
+    } else if (field.type == "code") {
+      let editor = CodeMirror(el[0], {
+        lineWrapping: true,
+        lineNumbers: true,
+        extraKeys: { "Ctrl-F": "findPersistent" },
+        mode: "python",
+        scrollbarStyle: "overlay",
+      });
+      editor.setSize("100%", 400);
     } else if (["object", "object-list"].includes(field.type)) {
       let model;
       if (relationships[form]) {
@@ -495,6 +504,9 @@ function updateProperty(instance, el, property, value, type) {
     el.append(new Option(value.name, value.id))
       .val(value.id)
       .trigger("change");
+  } else if (propertyType == "code") {
+    console.log(el[0]);
+    el[0].value = value;
   } else if (propertyType == "field-list") {
     for (let [index, form] of value.entries()) {
       for (const [key, value] of Object.entries(form)) {

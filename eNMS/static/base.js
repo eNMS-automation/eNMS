@@ -422,6 +422,7 @@ function configureForm(form, id, panelId) {
         lineWrapping: true,
         lineNumbers: true,
         extraKeys: { "Ctrl-F": "findPersistent" },
+        matchBrackets: true,
         mode: "python",
         scrollbarStyle: "overlay",
       });

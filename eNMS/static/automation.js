@@ -44,8 +44,8 @@ function panelCode(type, id, mode) {
     keyNavigation: false,
     transitionEffect: "none",
     onShowStep: function() {
-      for (let field in editors) {
-        editors[field].refresh();
+      for (let field in editors[id]) {
+        editors[id][field].refresh();
       }
     },
   });

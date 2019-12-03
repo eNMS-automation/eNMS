@@ -427,7 +427,8 @@ function configureForm(form, id, panelId) {
         scrollbarStyle: "overlay",
       });
       editor.on('change', () => editor.save());
-      editors[fieldId] = editor;
+      if (!editors.id) editors[id] = {};
+      editors[id][property] = editor;
     } else if (["object", "object-list"].includes(field.type)) {
       let model;
       if (relationships[form]) {
@@ -510,7 +511,7 @@ function updateProperty(instance, el, property, value, type) {
       .val(value.id)
       .trigger("change");
   } else if (propertyType == "code") {
-    const editor = editors[el.attr("id")];
+    const editor = editors[instance.id][property];
     if (editor) editor.setValue(value);
   } else if (propertyType == "field-list") {
     for (let [index, form] of value.entries()) {

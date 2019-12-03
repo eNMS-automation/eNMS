@@ -40,7 +40,6 @@ function panelCode(type, id, mode) {
     true
   );
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
-    autoAdjustHeight: false,
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",

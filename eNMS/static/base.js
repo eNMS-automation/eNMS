@@ -418,15 +418,15 @@ function configureForm(form, id, panelId) {
       });
     } else if (field.type == "code") {
       console.log(fieldId);
-      let editor = CodeMirror(el[0], {
+      let editor = CodeMirror.fromTextArea(el[0], {
         lineWrapping: true,
         lineNumbers: true,
         extraKeys: { "Ctrl-F": "findPersistent" },
         mode: "python",
         scrollbarStyle: "overlay",
       });
+      editor.on('change', () => editor.save());
       editors[fieldId] = editor;
-      editor.setSize("100%", 400);
     } else if (["object", "object-list"].includes(field.type)) {
       let model;
       if (relationships[form]) {

@@ -68,7 +68,7 @@ class ServiceForm(BaseForm):
         "Iteration Devices Property",
         choices=(("name", "Name"), ("ip_address", "IP address")),
     )
-    result_postprocessing = CodeField()
+    result_postprocessing = CodeField(widget=TextArea(), render_kw={"rows": 8})
     multiprocessing = BooleanField("Multiprocessing")
     max_processes = IntegerField("Maximum number of processes", default=50)
     conversion_method = SelectField(

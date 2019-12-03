@@ -342,7 +342,8 @@
       </div>
       <div id="step-6">
         <div class="form-group">
-          <div id="{{ form_type }}-result_postprocessing" name="result_postprocessing" class="add-id"></div>
+          {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
+          class="form-control add-id") }}
         </div>
       </div>
       <div id="step-7">
@@ -351,10 +352,6 @@
           {{ form.conversion_method(id=form_type + '-conversion_method',
           class="form-control add-id") }}
         </div>
-        <label
-          >Python Post-processing after conversion (variable "results")</label
-        >
-
         <label>Validation Method</label>
         <div class="form-group">
           {{ form.validation_method(id=form_type + '-validation_method',

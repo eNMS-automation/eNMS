@@ -1,10 +1,11 @@
 import traceback
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField, StringField
+from wtforms import HiddenField
 from wtforms.widgets import TextArea
 
 from eNMS.database.dialect import Column, LargeString
 from eNMS.forms.automation import ServiceForm
+from eNMS.forms.fields import CodeField
 from eNMS.models.automation import Service
 
 
@@ -67,7 +68,7 @@ class PythonSnippetService(Service):
 
 class PythonSnippetForm(ServiceForm):
     form_type = HiddenField(default="python_snippet_service")
-    source_code = StringField(
+    source_code = CodeField(
         widget=TextArea(),
         render_kw={"rows": 15},
         default="""

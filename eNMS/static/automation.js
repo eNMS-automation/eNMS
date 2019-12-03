@@ -43,6 +43,11 @@ function panelCode(type, id, mode) {
     enableAllSteps: true,
     keyNavigation: false,
     transitionEffect: "none",
+    onShowStep: function() {
+      for (let field in editors) {
+        editors[field].refresh();
+      }
+    },
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");

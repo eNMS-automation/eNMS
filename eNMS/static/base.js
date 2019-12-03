@@ -20,6 +20,7 @@ workflow: true
 */
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
+let editors = {};
 let tables = {};
 let userIsActive = true;
 let topZ = 1000;
@@ -396,7 +397,8 @@ function initSelect(el, model, parentId, single) {
 function configureForm(form, id, panelId) {
   if (!formProperties[form]) return;
   for (const [property, field] of Object.entries(formProperties[form])) {
-    let el = $(id ? `#${form}-${property}-${id}` : `#${form}-${property}`);
+    const fieldId = id ? `${form}-${property}-${id}` : `${form}-${property}`;
+    let el = $(`#${fieldId}`);
     if (!el.length) el = $(`#${property}`);
     if (field.type == "date") {
       el.datetimepicker({
@@ -415,6 +417,7 @@ function configureForm(form, id, panelId) {
         selectedTextFormat: "count > 3",
       });
     } else if (field.type == "code") {
+      console.log(fieldId);
       let editor = CodeMirror(el[0], {
         lineWrapping: true,
         lineNumbers: true,
@@ -422,6 +425,7 @@ function configureForm(form, id, panelId) {
         mode: "python",
         scrollbarStyle: "overlay",
       });
+      editors[fieldId] = editor;
       editor.setSize("100%", 400);
     } else if (["object", "object-list"].includes(field.type)) {
       let model;
@@ -505,8 +509,8 @@ function updateProperty(instance, el, property, value, type) {
       .val(value.id)
       .trigger("change");
   } else if (propertyType == "code") {
-    console.log(el[0]);
-    el[0].value = value;
+    const editor = editors[el.attr("id")];
+    if (editor) editor.setValue(value);
   } else if (propertyType == "field-list") {
     for (let [index, form] of value.entries()) {
       for (const [key, value] of Object.entries(form)) {

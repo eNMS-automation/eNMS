@@ -184,6 +184,7 @@ function displayLogs(service, runtime) {
     lineNumbers: true,
     readOnly: true,
     theme: "cobalt",
+    mode: "null",
     extraKeys: { "Ctrl-F": "findPersistent" },
     scrollbarStyle: "overlay",
   });
@@ -245,7 +246,7 @@ function displayResultsTree(service, runtime) {
 function displayResultsTable(service, runtime) {
   $("#result").remove();
   $(`#runtimes-${service.id}`).on("change", function() {
-    tables["result"].ajax.reload(null, false);
+    tables[`result-${service.id}`].ajax.reload(null, false);
   });
   initTable("result", service, runtime || currentRuntime);
 }

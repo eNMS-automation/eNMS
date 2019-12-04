@@ -29,6 +29,10 @@ Version 3.18
 - Fix inner scrollbar service panel bug
 - Add Admin permission for LDAP authentication
 - Fix Python snippet service
+- Refactor service panel
+- New CodeField: python coloring + line numbers + bracket matching mechanism
+- Tree service improvement: sort alphabetically + change color based on shared property
+
 
 Version 3.17.2
 --------------

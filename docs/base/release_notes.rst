@@ -32,7 +32,7 @@ Version 3.18
 - Refactor service panel
 - New CodeField: python coloring + line numbers + bracket matching mechanism
 - Tree service improvement: sort alphabetically + change color based on shared property
-
+- Fix Error when trying to view multiple Results
 
 Version 3.17.2
 --------------

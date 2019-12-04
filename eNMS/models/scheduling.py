@@ -53,6 +53,9 @@ class Task(AbstractBase):
         if self.is_active:
             self.schedule()
 
+    def delete(self):
+        self.delete_task()
+
     def generate_row(self):
         return super().generate_row() + [
             f"""

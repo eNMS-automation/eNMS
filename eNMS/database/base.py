@@ -77,6 +77,9 @@ class AbstractBase(Base):
                 value = value not in (False, "false")
             setattr(self, property, value)
 
+    def delete(self):
+        pass
+
     def get_properties(self, export=False, exclude=None, include=None):
         result = {}
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])

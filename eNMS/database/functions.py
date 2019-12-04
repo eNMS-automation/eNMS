@@ -38,8 +38,7 @@ def delete(model, allow_none=False, **kwargs):
     instance = Session.query(models[model]).filter_by(**kwargs).first()
     if allow_none and not instance:
         return None
-    if hasattr(instance, "type") and instance.type == "task":
-        instance.delete_task()
+    instance.delete()
     serialized_instance = instance.serialized
     Session.delete(instance)
     return serialized_instance

@@ -152,7 +152,7 @@ class Workflow(Service):
                     run.run_state["progress"]["service"][status] += 1
             successors = []
             if track_devices:
-                if service.run_method == "once":
+                if service.run_method in ("once", "per_service_with_service_targets"):
                     edge_type = "success" if results["success"] else "failure"
                     for successor, edge in service.adjacent_services(
                         self, "destination", edge_type

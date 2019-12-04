@@ -7,7 +7,7 @@ from wtforms import BooleanField, HiddenField, SelectField
 from eNMS.database import Session
 from eNMS.database.base import AbstractBase
 from eNMS.database.dialect import Column, MutableDict, SmallString
-from eNMS.database.functions import factory, fetch
+from eNMS.database.functions import delete, factory, fetch
 from eNMS.database.associations import service_workflow_table
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
@@ -37,6 +37,11 @@ class Workflow(Service):
         super().__init__(**kwargs)
         if self.name not in end.positions:
             end.positions[self.name] = (500, 0)
+
+    def delete(self):
+        for service in self.services:
+            if not service.shared:
+                delete("service", id=service.id)
 
     def set_name(self, name=None):
         old_name = self.name

@@ -54,7 +54,9 @@ class Task(AbstractBase):
             self.schedule()
 
     def delete(self):
-        self.delete_task()
+        if app.scheduler.get_job(self.aps_job_id):
+            app.scheduler.remove_job(self.aps_job_id)
+        Session.commit()
 
     def generate_row(self):
         return super().generate_row() + [
@@ -140,11 +142,6 @@ class Task(AbstractBase):
         self.schedule()
         app.scheduler.resume_job(self.aps_job_id)
         self.is_active = True
-        Session.commit()
-
-    def delete_task(self):
-        if app.scheduler.get_job(self.aps_job_id):
-            app.scheduler.remove_job(self.aps_job_id)
         Session.commit()
 
     def run_properties(self):

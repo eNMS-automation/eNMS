@@ -141,6 +141,7 @@ function displayWorkflow(workflowData) {
     );
   });
   $("#current-runtime").val("latest");
+  console.log(workflow.id)
   $("#current-workflow").val(workflow.id);
   $("#current-runtime,#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", (event) => {
@@ -588,6 +589,9 @@ function createNew(mode) {
     showTypePanel("workflow");
   } else if (mode == "duplicate_workflow") {
     call(`/duplicate_workflow/${workflow.id}`, function(instance) {
+      $("#current-workflow").append(
+        `<option value="${instance.id}">${instance.name}</option>`
+      );
       switchToWorkflow(instance.id);
     });
   } else {

@@ -5,6 +5,7 @@ from flask import request, session
 from flask_login import current_user
 from napalm._SUPPORTED_DRIVERS import SUPPORTED_DRIVERS
 from netmiko.ssh_dispatcher import CLASS_MAPPER, FILE_TRANSFER_MAP
+from operator import itemgetter
 from pathlib import Path
 from re import search, sub
 from uuid import uuid4
@@ -156,7 +157,7 @@ class AutomationController(BaseController):
                     "a_attr": {"class": "no_checkbox", "style": "color: #034EA2"},
                     "type": "category",
                 }
-            ] + [
+            ] + sorted((
                 {
                     "id": workflow.id,
                     "text": workflow.name,
@@ -165,8 +166,9 @@ class AutomationController(BaseController):
                     "a_attr": {"class": "no_checkbox" if workflow in parents else ""},
                 }
                 for workflow in fetch_all("workflow")
-                if not workflow.workflows
-            ]
+                if not workflow.workflows),
+                key=itemgetter("text")
+            )
         elif node == "standalone":
             return [
                 {"id": service.id, "text": service.name}
@@ -174,7 +176,7 @@ class AutomationController(BaseController):
                 if not service.workflows and service.type != "workflow"
             ]
         else:
-            return [
+            return sorted((
                 {
                     "id": service.id,
                     "text": service.scoped_name,
@@ -183,8 +185,9 @@ class AutomationController(BaseController):
                     "a_attr": {"class": "no_checkbox" if service in parents else ""},
                 }
                 for service in fetch("workflow", id=node).services
-                if service.scoped_name not in ("Start", "End")
-            ]
+                if service.scoped_name not in ("Start", "End")),
+            key=itemgetter("text")
+            )
 
     def get_workflow_results(self, workflow, runtime):
         def rec(service):

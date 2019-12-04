@@ -74,7 +74,7 @@
             <span class="step_no">6</span>
             <span class="step_descr"
               >Step 6<br />
-              <small>Python</small>
+              <small>Result</small>
             </span>
           </a>
         </li>
@@ -454,68 +454,172 @@
 
       </div>
       <div id="step-6">
-        <div class="form-group">
-          {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
-          class="form-control add-id") }}
+          <div
+          class="accordion"
+          id="accordion-step2"
+          role="tablist"
+          aria-multiselectable="true"
+        >
+          <div class="panel" style="border-color: #000">
+            <a
+              class="panel-heading collapsed"
+              style="background-color:#ddd;"
+              role="tab"
+              id="heading-step2"
+              data-toggle="collapse"
+              href="#collapse-step2"
+              aria-expanded="false"
+              aria-controls="collapse-step2"
+            >
+              <h4 class="panel-title" style="color:#000;">Devices</h4>
+            </a>
+            <div
+              id="collapse-step2"
+              class="panel-collapse collapse in"
+              role="tabpanel"
+              aria-labelledby="heading-step2"
+            >
+              <div class="panel-body" style="background-color:#fafafa;">
+                <div class="form-group">
+                  {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
+                  class="form-control add-id") }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="border-color: #000">
+            <a
+              class="panel-heading collapsed"
+              style="background-color:#ddd;"
+              role="tab"
+              id="heading-step2-2"
+              data-toggle="collapse"
+              href="#collapse-step2-2"
+              aria-expanded="false"
+              aria-controls="collapse-step2-2"
+            >
+              <h4 class="panel-title" style="color:#000;">
+                Validation
+              </h4>
+            </a>
+            <div
+              id="collapse-step2-2"
+              class="panel-collapse collapse in"
+              role="tabpanel"
+              aria-labelledby="heading-step2-2"
+            >
+              <div class="panel-body" style="background-color:#fafafa;">
+                  <label>Conversion Method</label>
+                  <div class="form-group">
+                    {{ form.conversion_method(id=form_type + '-conversion_method',
+                    class="form-control add-id") }}
+                  </div>
+                  <label>Validation Method</label>
+                  <div class="form-group">
+                    {{ form.validation_method(id=form_type + '-validation_method',
+                    class="form-control add-id") }}
+                  </div>
+                  <label>Content Match</label>
+                  <div class="form-group">
+                    {{ form.content_match(id=form_type + '-content_match',
+                    class="form-control add-id") }}
+                  </div>
+                  <fieldset>
+                    <div class="item">
+                      <input
+                        id="{{ form_type }}-content_match_regex"
+                        name="content_match_regex"
+                        class="add-id"
+                        type="checkbox"
+                        value="y"
+                      />
+                      <label>"Content Match" is a regular expression</label>
+                    </div>
+                  </fieldset>
+                  <label>Dictionary Match</label>
+                  <div class="form-group">
+                    {{ form.dict_match(id=form_type + '-dict_match', class="form-control
+                    add-id") }}
+                  </div>
+                  <fieldset>
+                    <div class="item">
+                      <input
+                        id="{{ form_type }}-delete_spaces_before_matching"
+                        name="delete_spaces_before_matching"
+                        class="add-id"
+                        type="checkbox"
+                        value="y"
+                      />
+                      <label>Delete spaces before matching</label>
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <div class="item">
+                      <input
+                        id="{{ form_type }}-negative_logic"
+                        name="negative_logic"
+                        class="add-id"
+                        type="checkbox"
+                        value="y"
+                      />
+                      <label>Negative Logic</label>
+                    </div>
+                  </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="border-color: #000">
+              <a
+                class="panel-heading collapsed"
+                style="background-color:#ddd;"
+                role="tab"
+                id="heading-step2-2"
+                data-toggle="collapse"
+                href="#collapse-step2-2"
+                aria-expanded="false"
+                aria-controls="collapse-step2-2"
+              >
+                <h4 class="panel-title" style="color:#000;">
+                  Iteration
+                </h4>
+              </a>
+              <div
+                id="collapse-step2-2"
+                class="panel-collapse collapse in"
+                role="tabpanel"
+                aria-labelledby="heading-step2-2"
+              >
+                <div class="panel-body" style="background-color:#fafafa;">
+                    <label>Iteration devices</label>
+                    <div class="form-group">
+                      {{ form.iteration_devices(id=form_type + '-iteration_devices',
+                      class="form-control add-id") }}
+                    </div>
+                    <label>Iteration Devices Property</label>
+                    <div class="form-group">
+                      {{ form.iteration_devices_property(id=form_type +
+                      '-iteration_devices_property', class="form-control add-id") }}
+                    </div>
+                    <label
+                      >Iteration values: run service for each value (python query)</label
+                    >
+                    <div class="form-group">
+                      {{ form.iteration_values(id=form_type + '-iteration_values',
+                      class="form-control add-id") }}
+                    </div>
+                    <label>Iteration Variable Name</label>
+                    <div class="form-group">
+                      {{ form.iteration_variable_name(id=form_type +
+                      '-iteration_variable_name', class="form-control add-id") }}
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>
+
       </div>
       <div id="step-7">
-        <label>Conversion Method</label>
-        <div class="form-group">
-          {{ form.conversion_method(id=form_type + '-conversion_method',
-          class="form-control add-id") }}
-        </div>
-        <label>Validation Method</label>
-        <div class="form-group">
-          {{ form.validation_method(id=form_type + '-validation_method',
-          class="form-control add-id") }}
-        </div>
-        <label>Content Match</label>
-        <div class="form-group">
-          {{ form.content_match(id=form_type + '-content_match',
-          class="form-control add-id") }}
-        </div>
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-content_match_regex"
-              name="content_match_regex"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>"Content Match" is a regular expression</label>
-          </div>
-        </fieldset>
-        <label>Dictionary Match</label>
-        <div class="form-group">
-          {{ form.dict_match(id=form_type + '-dict_match', class="form-control
-          add-id") }}
-        </div>
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-delete_spaces_before_matching"
-              name="delete_spaces_before_matching"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Delete spaces before matching</label>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-negative_logic"
-              name="negative_logic"
-              class="add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label>Negative Logic</label>
-          </div>
-        </fieldset>
+
       </div>
       <div id="step-8">
         <fieldset>

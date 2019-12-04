@@ -214,12 +214,12 @@ class AutomationController(BaseController):
 
     def get_workflow_results(self, workflow, runtime):
         def rec(service):
-            service_run = fetch(
-                "run", parent_runtime=runtime, allow_none=True, service_id=service.id
+            runs = fetch(
+                "run", parent_runtime=runtime, allow_none=True, all_matches=True, service_id=service.id
             )
-            if service.scoped_name in ("Start", "End") or not service_run:
+            if service.scoped_name in ("Start", "End") or not runs:
                 return
-            color = "32CD32" if service_run.success else "FF6666"
+            color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
                 "id": service.id,
                 "text": service.scoped_name,

@@ -152,16 +152,23 @@ class Workflow(Service):
                     run.run_state["progress"]["service"][status] += 1
             successors = []
             if track_devices:
-                summary = results.get("summary")
-                for edge_type in ("success", "failure"):
-                    for successor, edge in service.adjacent_services(
-                        self, "destination", edge_type,
-                    ):
-                        if not summary[edge_type]:
-                            continue
-                        targets[successor.name] |= set(summary[edge_type])
+                if service.run_method == "once":
+                    edge_type = "success" if results["success"] else "failure"
+                    for successor, edge in service.adjacent_services(self, "destination", edge_type):
+                        targets[successor.name] |= targets[service.name]
                         successors.append(successor)
-                        run.run_state["edges"][edge.id] += len(summary[edge_type])
+                        run.run_state["edges"][edge.id] += len(targets[service.name])
+                else:
+                    summary = results.get("summary")
+                    for edge_type in ("success", "failure"):
+                        for successor, edge in service.adjacent_services(
+                            self, "destination", edge_type,
+                        ):
+                            if not summary[edge_type]:
+                                continue
+                            targets[successor.name] |= set(summary[edge_type])
+                            successors.append(successor)
+                            run.run_state["edges"][edge.id] += len(summary[edge_type])
             else:
                 for successor, edge in service.adjacent_services(
                     self, "destination", "success" if results["success"] else "failure",

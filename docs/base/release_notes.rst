@@ -26,17 +26,6 @@ Version 3.18
   - run device by device
   - service by service with workflow targets
   - service by service with service targets
-- Fix inner scrollbar service panel bug
-- Add Admin permission for LDAP authentication
-- Fix Python snippet service
-- Refactor service panel
-- New CodeField: python coloring + line numbers + bracket matching mechanism
-- Tree service improvement: sort alphabetically + change color based on shared property
-- Fix Error when trying to view multiple Results
-- Add duplicated workflow to drop-down list of workflows in workflow builder
-- Cascade delete all non-shared services recursively when deleting a workflow
-- Fix bug reported by Aaron where a service in run once mode in a workflow in service by service
-  mode does not transfer the devices after running
 
 Version 3.17.2
 --------------

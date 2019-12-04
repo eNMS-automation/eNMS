@@ -49,11 +49,7 @@ class PythonSnippetService(Service):
             run.log("info", f"Execution error(line {lineno}): {str(exc)}")
             return {
                 "success": False,
-                "result": {
-                    "step": "execute",
-                    "error": str(exc),
-                    "result": results,
-                },
+                "result": {"step": "execute", "error": str(exc), "result": results,},
             }
 
         if not results:
@@ -84,6 +80,6 @@ class PythonSnippetForm(ServiceForm):
 
 result = {}
 results["success"] = True
-results["result"] = result,"""
+results["result"] = result,""",
     )
     query_fields = ServiceForm.query_fields + ["source_code"]

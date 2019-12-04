@@ -157,17 +157,21 @@ class AutomationController(BaseController):
                     "a_attr": {"class": "no_checkbox", "style": "color: #034EA2"},
                     "type": "category",
                 }
-            ] + sorted((
-                {
-                    "id": workflow.id,
-                    "text": workflow.name,
-                    "children": True,
-                    "type": "workflow",
-                    "a_attr": {"class": "no_checkbox" if workflow in parents else ""},
-                }
-                for workflow in fetch_all("workflow")
-                if not workflow.workflows),
-                key=itemgetter("text")
+            ] + sorted(
+                (
+                    {
+                        "id": workflow.id,
+                        "text": workflow.name,
+                        "children": True,
+                        "type": "workflow",
+                        "a_attr": {
+                            "class": "no_checkbox" if workflow in parents else ""
+                        },
+                    }
+                    for workflow in fetch_all("workflow")
+                    if not workflow.workflows
+                ),
+                key=itemgetter("text"),
             )
         elif node == "standalone":
             return [
@@ -176,17 +180,22 @@ class AutomationController(BaseController):
                 if not service.workflows and service.type != "workflow"
             ]
         else:
-            return sorted((
-                {
-                    "id": service.id,
-                    "text": service.scoped_name,
-                    "children": service.type == "workflow",
-                    "type": "workflow" if service.type == "workflow" else "service",
-                    "a_attr": {"class": "no_checkbox" if service in parents else ""},
-                }
-                for service in fetch("workflow", id=node).services
-                if service.scoped_name not in ("Start", "End")),
-            key=itemgetter("text")
+            return sorted(
+                (
+                    {
+                        "id": service.id,
+                        "text": service.scoped_name,
+                        "children": service.type == "workflow",
+                        "type": "workflow" if service.type == "workflow" else "service",
+                        "a_attr": {
+                            "class": "no_checkbox" if service in parents else "",
+                            "style": f"color: #{'FF1694' if service.shared else '6666FF'}",
+                        },
+                    }
+                    for service in fetch("workflow", id=node).services
+                    if service.scoped_name not in ("Start", "End")
+                ),
+                key=itemgetter("text"),
             )
 
     def get_workflow_results(self, workflow, runtime):

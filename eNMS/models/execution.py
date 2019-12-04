@@ -429,7 +429,7 @@ class Run(AbstractBase):
                 targets_results = {}
                 for target in self.eval(self.service.iteration_values, **locals()):
                     self.payload_helper(payload, self.iteration_variable_name, target)
-                    targets_results[target] = self.run_service_job(payload, device)
+                    targets_results[str(target)] = self.run_service_job(payload, device)
                 results.update(
                     {
                         "result": targets_results,

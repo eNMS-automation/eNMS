@@ -215,7 +215,11 @@ class AutomationController(BaseController):
     def get_workflow_results(self, workflow, runtime):
         def rec(service):
             runs = fetch(
-                "run", parent_runtime=runtime, allow_none=True, all_matches=True, service_id=service.id
+                "run",
+                parent_runtime=runtime,
+                allow_none=True,
+                all_matches=True,
+                service_id=service.id,
             )
             if service.scoped_name in ("Start", "End") or not runs:
                 return

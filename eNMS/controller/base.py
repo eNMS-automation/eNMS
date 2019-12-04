@@ -374,7 +374,6 @@ class BaseController:
         return [instance.get_properties() for instance in fetch_all(cls)]
 
     def update(self, cls, **kwargs):
-        print(kwargs)
         try:
             must_be_new = kwargs.get("id") == ""
             for arg in ("name", "scoped_name"):
@@ -482,17 +481,9 @@ class BaseController:
             order_function = None
         constraints = self.build_filtering_constraints(table, **kwargs)
         if table == "result":
-            if kwargs["instance"]["type"] == "workflow":
-                constraints.append(
-                    or_(
-                        models["result"].service.has(id=kwargs["instance"]["id"]),
-                        models["result"].workflow.has(id=kwargs["instance"]["id"]),
-                    )
-                )
-            else:
-                constraints.append(
-                    models["result"].service.has(id=kwargs["instance"]["id"])
-                )
+            constraints.append(
+                models["result"].service.has(id=kwargs["instance"]["id"])
+            )
             if kwargs.get("runtime"):
                 constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         if table == "service":

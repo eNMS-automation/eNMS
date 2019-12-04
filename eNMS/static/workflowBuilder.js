@@ -141,7 +141,6 @@ function displayWorkflow(workflowData) {
     );
   });
   $("#current-runtime").val("latest");
-  console.log(workflow.id)
   $("#current-workflow").val(workflow.id);
   $("#current-runtime,#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", (event) => {

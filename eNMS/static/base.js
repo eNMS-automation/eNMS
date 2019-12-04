@@ -417,7 +417,6 @@ function configureForm(form, id, panelId) {
         selectedTextFormat: "count > 3",
       });
     } else if (field.type == "code") {
-      console.log(fieldId);
       let editor = CodeMirror.fromTextArea(el[0], {
         lineWrapping: true,
         lineNumbers: true,

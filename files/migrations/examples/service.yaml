@@ -1702,7 +1702,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-04 00:20:05.475732'
+  last_modified: '2019-12-04 08:24:31.142435'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -1717,7 +1717,7 @@
   positions:
     'Regression Workflow A: get_var, set_var, get_result': [-376, -138]
   result_postprocessing: ''
-  run_method: per_device
+  run_method: once
   scoped_name: Modify payload (no device)
   send_notification: false
   send_notification_method: mail
@@ -3792,18 +3792,20 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    30b1954f-08d6-4799-a2be-36c5b0a07c4b:
-      alignment: left
-      content: "This workflow uses \"set_var\" to modify the payload, and get_var\
-        \ to\r\nretrieve a variable.\r\nIt also uses \"get_result\" to retrieve the\
-        \ result of a previously run job."
-      positions: [-92, -34]
     8d64652f-dbc6-4916-ba06-a49ae0ed36fb:
       alignment: left
       content: "Will run on 4 \"iterated devices\" in total.\r\nTests that \"parent_device\"\
         \ and \"device\"\r\ncan both be used from the \"Service\" tab.\r\nTests sending\
         \ multiple commands with a Netmiko service."
       positions: [568, -123]
+    afb8aaab-be91-4d46-8de9-9f7803682323:
+      alignment: left
+      content: "This service is configured to run SERVICE BY SERVICE.\r\nThe first\
+        \ service is set to \"Run once\": it must run only once for both devices.\r\
+        \nThis workflow uses \"set_var\" to modify the payload, and get_var to\r\n\
+        retrieve a variable.\r\nIt also uses \"get_result\" to retrieve the result\
+        \ of a previously run job."
+      positions: ['-92', '-34']
     d98b7c19-9d7b-4ddf-bada-2c47e492dbef:
       alignment: left
       content: "Set a variable called \"iteration_device\" that we will use in the\
@@ -3811,7 +3813,7 @@
         , \"Cincinnati\"] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"\
         ]\r\nset_var(\"iteration_device\", devices, section=\"pools\", device=device.name)"
       positions: [103, -224]
-  last_modified: '2019-10-24 22:42:17.981520'
+  last_modified: '2019-12-04 08:26:26.548250'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3824,7 +3826,7 @@
   pools: []
   positions: {}
   result_postprocessing: ''
-  run_method: per_device
+  run_method: per_service_with_workflow_targets
   scoped_name: 'Regression Workflow A: get_var, set_var, get_result'
   send_notification: false
   send_notification_method: mail

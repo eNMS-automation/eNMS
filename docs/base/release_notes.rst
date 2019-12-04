@@ -33,6 +33,8 @@ Version 3.18
 - New CodeField: python coloring + line numbers + bracket matching mechanism
 - Tree service improvement: sort alphabetically + change color based on shared property
 - Fix Error when trying to view multiple Results
+- Add duplicated workflow to drop-down list of workflows in workflow builder
+- Cascade delete all non-shared services recursively when deleting a workflow
 
 Version 3.17.2
 --------------

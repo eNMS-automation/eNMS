@@ -49,7 +49,7 @@ class PythonSnippetService(Service):
             run.log("info", f"Execution error(line {lineno}): {str(exc)}")
             return {
                 "success": False,
-                "result": {"step": "execute", "error": str(exc), "result": results,},
+                "result": {"step": "execute", "error": str(exc), "result": results},
             }
 
         if not results:

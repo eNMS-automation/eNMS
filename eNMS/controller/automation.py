@@ -181,7 +181,9 @@ class AutomationController(BaseController):
                         "id": service.id,
                         "text": service.scoped_name,
                         "a_attr": {
-                            "style": f"color: #{'FF1694' if service.shared else '6666FF'}",
+                            "style": (
+                                f"color: #{'FF1694' if service.shared else '6666FF'}"
+                            ),
                         },
                     }
                     for service in fetch_all("service")
@@ -199,7 +201,9 @@ class AutomationController(BaseController):
                         "type": "workflow" if service.type == "workflow" else "service",
                         "a_attr": {
                             "class": "no_checkbox" if service in parents else "",
-                            "style": f"color: #{'FF1694' if service.shared else '6666FF'}",
+                            "style": (
+                                f"color: #{'FF1694' if service.shared else '6666FF'}"
+                            ),
                         },
                     }
                     for service in fetch("workflow", id=node).services

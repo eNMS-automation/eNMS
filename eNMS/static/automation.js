@@ -8,6 +8,7 @@ CodeMirror: false
 createPanel: false
 diffview: false
 displayWorkflow: false
+editors: true
 fCall: false
 getServiceState: false
 initTable: false
@@ -44,9 +45,9 @@ function panelCode(type, id, mode) {
     keyNavigation: false,
     transitionEffect: "none",
     onShowStep: function() {
-      for (let field in editors[id]) {
+      Object.keys(editors[id]).forEach(function(field) {
         editors[id][field].refresh();
-      }
+      });
     },
   });
   $(".buttonFinish,.buttonNext,.buttonPrevious").hide();

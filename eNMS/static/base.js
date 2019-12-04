@@ -1,6 +1,7 @@
 /*
 global
 alertify: false
+CodeMirror: false
 config: true
 creationMode: true
 csrf_token: false
@@ -573,8 +574,8 @@ function createSearchHeaders(type) {
 
 // eslint-disable-next-line
 function initTable(type, instance, runtime) {
+  const tableId = instance ? `#${type}-table-${instance.id}` : `#${type}-table`;
   // eslint-disable-next-line new-cap
-  tableId = instance ? `#${type}-table-${instance.id}` : `#${type}-table`
   tables[type] = $(tableId).DataTable({
     serverSide: true,
     orderCellsTop: true,

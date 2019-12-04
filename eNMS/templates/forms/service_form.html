@@ -119,73 +119,139 @@
             </a>
             <div
               id="collapse-step1"
-              class="panel-collapse collapse {{ position }}"
+              class="panel-collapse collapse in"
               role="tabpanel"
               aria-labelledby="heading-step1"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                  <label class="readonly-when-run">Name</label>
-                  <div class="form-group">
-                    {{ form.scoped_name(id=form_type + '-scoped_name',
-                    class="form-control readonly-when-run add-id required") }}
+                <label class="readonly-when-run">Name</label>
+                <div class="form-group">
+                  {{ form.scoped_name(id=form_type + '-scoped_name',
+                  class="form-control readonly-when-run add-id required") }}
+                </div>
+                <label class="readonly-when-run">Fully Qualified Name</label>
+                <div class="form-group">
+                  {{ form.name(id=form_type + '-name', class="form-control
+                  readonly-when-run add-id required") }}
+                </div>
+                <label class="readonly-when-run">Type</label>
+                <div class="form-group">
+                  {{ form.type(id=form_type + '-class', class="form-control
+                  readonly-when-run add-id") }}
+                </div>
+                <fieldset class="readonly-when-run">
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-shared"
+                      name="shared"
+                      class="add-id"
+                      type="checkbox"
+                      value="y"
+                    />
+                    <label>Shared</label>
                   </div>
-                  <label class="readonly-when-run">Fully Qualified Name</label>
-                  <div class="form-group">
-                    {{ form.name(id=form_type + '-name', class="form-control
-                    readonly-when-run add-id required") }}
+                </fieldset>
+                <label for="workflows">Workflows</label>
+                <div class="form-group">
+                  {{ form.workflows(id=form_type + '-workflows',
+                  class="form-control add-id") }}
+                </div>
+                <label class="readonly-when-run">Description</label>
+                <div class="form-group">
+                  {{ form.description(id=form_type + '-description',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
+                <label class="readonly-when-run">Vendor</label>
+                <div class="form-group">
+                  {{ form.vendor(id=form_type + '-vendor', class="form-control
+                  readonly-when-run add-id") }}
+                </div>
+                <label class="readonly-when-run">Operating System</label>
+                <div class="form-group">
+                  {{ form.operating_system(id=form_type + '-operating_system',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
+                <label>Initial Payload</label>
+                <div class="form-group">
+                  {{ form.initial_payload(id=form_type + '-initial_payload',
+                  class="form-control add-id") }}
+                </div>
+                <label>Number of retries</label>
+                <div class="form-group">
+                  {{ form.number_of_retries(id=form_type + '-number_of_retries',
+                  class="form-control add-id") }}
+                </div>
+                <label>Time between retries (in seconds)</label>
+                <div class="form-group">
+                  {{ form.time_between_retries(id=form_type +
+                  '-time_between_retries', class="form-control add-id") }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel" style="border-color: #000">
+            <a
+              class="panel-heading collapsed"
+              style="background-color:#ddd;"
+              role="tab"
+              id="heading-step1-2"
+              data-toggle="collapse"
+              href="#collapse-step1-2"
+              aria-expanded="false"
+              aria-controls="collapse-step1-2"
+            >
+              <h4 class="panel-title" style="color:#000;">
+                Workflow Parameters
+              </h4>
+            </a>
+            <div
+              id="collapse-step1-2"
+              class="panel-collapse collapse in"
+              role="tabpanel"
+              aria-labelledby="heading-step1-2"
+            >
+              <div class="panel-body" style="background-color:#fafafa;">
+                <fieldset>
+                  <div class="item">
+                    <input
+                      id="{{ form_type }}-skip"
+                      name="skip"
+                      class="readonly-when-run add-id"
+                      type="checkbox"
+                      value="y"
+                    />
+                    <label class="readonly-when-run"
+                      >Skip this Service Regardless</label
+                    >
                   </div>
-                  <label class="readonly-when-run">Type</label>
-                  <div class="form-group">
-                    {{ form.type(id=form_type + '-class', class="form-control
-                    readonly-when-run add-id") }}
-                  </div>
-                  <fieldset class="readonly-when-run">
-                    <div class="item">
-                      <input
-                        id="{{ form_type }}-shared"
-                        name="shared"
-                        class="add-id"
-                        type="checkbox"
-                        value="y"
-                      />
-                      <label>Shared</label>
-                    </div>
-                  </fieldset>
-                  <label for="workflows">Workflows</label>
-                  <div class="form-group">
-                    {{ form.workflows(id=form_type + '-workflows', class="form-control
-                    add-id") }}
-                  </div>
-                  <label class="readonly-when-run">Description</label>
-                  <div class="form-group">
-                    {{ form.description(id=form_type + '-description',
-                    class="form-control readonly-when-run add-id") }}
-                  </div>
-                  <label class="readonly-when-run">Vendor</label>
-                  <div class="form-group">
-                    {{ form.vendor(id=form_type + '-vendor', class="form-control
-                    readonly-when-run add-id") }}
-                  </div>
-                  <label class="readonly-when-run">Operating System</label>
-                  <div class="form-group">
-                    {{ form.operating_system(id=form_type + '-operating_system',
-                    class="form-control readonly-when-run add-id") }}
-                  </div>
-                  <label>Initial Payload</label>
-                  <div class="form-group">
-                    {{ form.initial_payload(id=form_type + '-initial_payload',
-                    class="form-control add-id") }}
-                  </div>
-                  <label>Number of retries</label>
-                  <div class="form-group">
-                    {{ form.number_of_retries(id=form_type + '-number_of_retries',
-                    class="form-control add-id") }}
-                  </div>
-                  <label>Time between retries (in seconds)</label>
-                  <div class="form-group">
-                    {{ form.time_between_retries(id=form_type + '-time_between_retries',
-                    class="form-control add-id") }}
-                  </div>
+                </fieldset>
+                <label class="readonly-when-run"
+                  >Skip Service If True
+                  <a
+                    class="doc-link"
+                    href="inventory/web_connection.html#port-allocation"
+                    target="_blank"
+                    ><i
+                      class="fa fa-question-circle"
+                      style="cursor: pointer"
+                    ></i></a
+                ></label>
+                <div class="form-group">
+                  {{ form.skip_query(id=form_type + '-skip_query',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
+                <label class="readonly-when-run">Maximum number of runs</label>
+                <div class="form-group">
+                  {{ form.maximum_runs(id=form_type + '-maximum_runs',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
+                <label class="readonly-when-run"
+                  >Waiting time (in seconds)</label
+                >
+                <div class="form-group">
+                  {{ form.waiting_time(id=form_type + '-waiting_time',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
               </div>
             </div>
           </div>
@@ -263,44 +329,7 @@
           {% endfor %}
         </div>
       </div>
-      <div id="step-3">
-        <fieldset>
-          <div class="item">
-            <input
-              id="{{ form_type }}-skip"
-              name="skip"
-              class="readonly-when-run add-id"
-              type="checkbox"
-              value="y"
-            />
-            <label class="readonly-when-run"
-              >Skip this Service Regardless</label
-            >
-          </div>
-        </fieldset>
-        <label class="readonly-when-run"
-          >Skip Service If True
-          <a
-            class="doc-link"
-            href="inventory/web_connection.html#port-allocation"
-            target="_blank"
-            ><i class="fa fa-question-circle" style="cursor: pointer"></i></a
-        ></label>
-        <div class="form-group">
-          {{ form.skip_query(id=form_type + '-skip_query', class="form-control
-          readonly-when-run add-id") }}
-        </div>
-        <label class="readonly-when-run">Maximum number of runs</label>
-        <div class="form-group">
-          {{ form.maximum_runs(id=form_type + '-maximum_runs',
-          class="form-control readonly-when-run add-id") }}
-        </div>
-        <label class="readonly-when-run">Waiting time (in seconds)</label>
-        <div class="form-group">
-          {{ form.waiting_time(id=form_type + '-waiting_time',
-          class="form-control readonly-when-run add-id") }}
-        </div>
-      </div>
+      <div id="step-3"></div>
       <div id="step-4">
         <label for="run_method">Run method</label>
         <div class="form-group">

@@ -426,7 +426,7 @@ function configureForm(form, id, panelId) {
         mode: "python",
         scrollbarStyle: "overlay",
       });
-      editor.on('change', () => editor.save());
+      editor.on("change", () => editor.save());
       if (!editors.id) editors[id] = {};
       editors[id][property] = editor;
     } else if (["object", "object-list"].includes(field.type)) {

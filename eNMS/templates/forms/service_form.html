@@ -70,6 +70,13 @@
         >
           <div class="panel" style="border-color: #000">
             <a
+              class="doc-link"
+              style="position: absolute; top: 10px; right: 10px"
+              href="inventory/web_connection.html#port-allocation"
+              target="_blank"
+              ><i class="glyphicon glyphicon-info-sign fa-2x" style="cursor: pointer"></i
+            ></a>
+            <a
               class="panel-heading collapsed"
               style="background-color:#ddd;"
               role="tab"
@@ -88,13 +95,7 @@
               aria-labelledby="heading-step1"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                <label class="readonly-when-run">Name</label
-                ><a
-                  class="doc-link"
-                  href="inventory/web_connection.html#port-allocation"
-                  target="_blank"
-                  ><i class="fa fa-question-circle" style="cursor: pointer"></i
-                ></a>
+                <label class="readonly-when-run">Name</label>
                 <div class="form-group">
                   {{ form.scoped_name(id=form_type + '-scoped_name',
                   class="form-control readonly-when-run add-id required") }}

@@ -35,6 +35,8 @@ Version 3.18
 - Fix Error when trying to view multiple Results
 - Add duplicated workflow to drop-down list of workflows in workflow builder
 - Cascade delete all non-shared services recursively when deleting a workflow
+- Fix bug reported by Aaron where a service in run once mode in a workflow in service by service
+  mode does not transfer the devices after running
 
 Version 3.17.2
 --------------

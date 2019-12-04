@@ -154,7 +154,7 @@ class AutomationController(BaseController):
                     "id": "standalone",
                     "text": "Standalone services",
                     "children": True,
-                    "a_attr": {"class": "no_checkbox", "style": "color: #034EA2"},
+                    "a_attr": {"class": "no_checkbox", "style": "color: #000000"},
                     "type": "category",
                 }
             ] + sorted(
@@ -165,7 +165,8 @@ class AutomationController(BaseController):
                         "children": True,
                         "type": "workflow",
                         "a_attr": {
-                            "class": "no_checkbox" if workflow in parents else ""
+                            "class": "no_checkbox" if workflow in parents else "",
+                            "style": "color: #6666FF",
                         },
                     }
                     for workflow in fetch_all("workflow")
@@ -174,11 +175,20 @@ class AutomationController(BaseController):
                 key=itemgetter("text"),
             )
         elif node == "standalone":
-            return [
-                {"id": service.id, "text": service.name}
-                for service in fetch_all("service")
-                if not service.workflows and service.type != "workflow"
-            ]
+            return sorted(
+                (
+                    {
+                        "id": service.id,
+                        "text": service.scoped_name,
+                        "a_attr": {
+                            "style": f"color: #{'FF1694' if service.shared else '6666FF'}",
+                        },
+                    }
+                    for service in fetch_all("service")
+                    if not service.workflows and service.type != "workflow"
+                ),
+                key=itemgetter("text"),
+            )
         else:
             return sorted(
                 (

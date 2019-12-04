@@ -154,7 +154,9 @@ class Workflow(Service):
             if track_devices:
                 if service.run_method == "once":
                     edge_type = "success" if results["success"] else "failure"
-                    for successor, edge in service.adjacent_services(self, "destination", edge_type):
+                    for successor, edge in service.adjacent_services(
+                        self, "destination", edge_type
+                    ):
                         targets[successor.name] |= targets[service.name]
                         successors.append(successor)
                         run.run_state["edges"][edge.id] += len(targets[service.name])

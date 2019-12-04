@@ -664,6 +664,7 @@ class Run(AbstractBase):
             "config": app.config,
             "get_var": partial(_self.get_var, locals.get("payload", {})),
             "get_result": _self.get_result,
+            "log": _self.log,
             "workflow": _self.workflow,
             "set_var": partial(_self.payload_helper, locals.get("payload", {})),
             "parent_device": _self.parent_device or locals.get("device"),

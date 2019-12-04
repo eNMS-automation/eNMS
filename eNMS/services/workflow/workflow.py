@@ -184,6 +184,15 @@ class Workflow(Service):
             if not results["success"] == "skipped":
                 sleep(service.waiting_time)
         Session.refresh(run)
+        if track_devices:
+            success_devices = targets["[Shared] End"]
+            failure_devices = targets["[Shared] Start"] - targets["[Shared] End"]
+            success = not failure_devices
+            summary = {
+                "success": [device.name for device in success_devices],
+                "failure": [device.name for device in failure_devices],
+            }
+            run.run_state["summary"] = summary
         return {"payload": payload, "success": success}
 
 

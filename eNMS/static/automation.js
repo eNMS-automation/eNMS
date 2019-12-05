@@ -35,7 +35,10 @@ function panelCode(type, id, mode) {
   const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
   typeInput.val(type).prop("disabled", true);
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
-  if (id) $(`#${type}-shared-${id}`).prop("disabled", true);
+  if (id) {
+    $(`#${type}-shared-${id}`).prop("disabled", true);
+    $(`#${type}-duplicate-${id}`).val(true);
+  }
   $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
     "disabled",
     true

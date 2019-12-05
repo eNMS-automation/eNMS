@@ -154,6 +154,7 @@ class AutomationController(BaseController):
                     "id": "standalone",
                     "text": "Standalone services",
                     "children": True,
+                    "state": {"disabled": True},
                     "a_attr": {"class": "no_checkbox", "style": "color: #000000"},
                     "type": "category",
                 }
@@ -164,6 +165,7 @@ class AutomationController(BaseController):
                         "text": workflow.name,
                         "children": True,
                         "type": "workflow",
+                        "state": {"disabled": workflow in parents},
                         "a_attr": {
                             "class": "no_checkbox" if workflow in parents else "",
                             "style": "color: #6666FF",
@@ -199,6 +201,7 @@ class AutomationController(BaseController):
                         "text": service.scoped_name,
                         "children": service.type == "workflow",
                         "type": "workflow" if service.type == "workflow" else "service",
+                        "state": {"disabled": service in parents},
                         "a_attr": {
                             "class": "no_checkbox" if service in parents else "",
                             "style": (

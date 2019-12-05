@@ -242,6 +242,7 @@ class Workflow(Service):
 class WorkflowForm(ServiceForm):
     form_type = HiddenField(default="workflow")
     close_connection = BooleanField(default=False)
+    duplicate = HiddenField(default=False)
     run_method = SelectField(
         "Run Method",
         choices=(

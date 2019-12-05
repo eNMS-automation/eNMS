@@ -95,22 +95,19 @@ const panelName = {
 // eslint-disable-next-line
 function doc(page) {
   let endpoint = {
-    administration: "administration/index.html",
-    calendar: "events/tasks.html",
-    dashboard: "base/introduction.html",
-    "table/configuration": "inventory/configuration_management.html",
-    "table/device": "inventory/objects.html",
-    "table/event": "events/index.html",
-    "table/link": "inventory/objects.html",
-    "table/changelog": "events/logs.html",
-    "table/pool": "inventory/pool_management.html",
-    "table/run": "services/index.html",
-    "table/server": "administration/index.html",
-    "table/service": "services/index.html",
-    "table/task": "events/tasks.html",
+    administration: "base/installation.html",
+    dashboard: "base/features.html",
+    "table/device": "inventory/network_creation.html",
+    "table/event": "automation/scheduling.html",
+    "table/link": "inventory/network_creation.html",
+    "table/changelog": "advanced/administration.html",
+    "table/pool": "inventory/pools.html",
+    "table/run": "automation/services.html",
+    "table/service": "automation/services.html",
+    "table/task": "automation/scheduling.html",
     "table/user": "administration/index.html",
-    view: "views/geographical_view.html",
-    workflow_builder: "workflows/index.html",
+    view: "inventory/network_visualization.html",
+    workflow_builder: "automation/workflows.html",
   }[page];
   $("#doc-link").attr("href", `${config.app.documentation_url}${endpoint}`);
 }

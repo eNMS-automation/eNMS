@@ -424,7 +424,7 @@ function configureForm(form, id, panelId) {
         scrollbarStyle: "overlay",
       });
       editor.on("change", () => editor.save());
-      if (!editors.id) editors[id] = {};
+      if (!editors[id]) editors[id] = {};
       editors[id][property] = editor;
     } else if (["object", "object-list"].includes(field.type)) {
       let model;

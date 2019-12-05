@@ -29,6 +29,9 @@ Version 3.18
 
 - fix selection in tree of services: standalone no longer selectable
 - fix workflow duplication bug
+- fix result postprocessing code field bug in python snippet service
+- prevent start and end services from being deleted.
+- fix bug about rest credentials not update when renaming a service
 
 Version 3.17.2
 --------------

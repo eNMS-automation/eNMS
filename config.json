@@ -91,8 +91,7 @@
     "address": ""
   },
   "vault": {
-    "active": false,
-    "address": "http://127.0.0.1:8200",
+    "active": true,
     "unseal": false
   },
   "view": {

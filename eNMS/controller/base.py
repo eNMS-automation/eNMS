@@ -345,7 +345,6 @@ class BaseController:
 
     def init_vault_client(self):
         self.vault_client = VaultClient()
-        self.vault_client.url = self.config["vault"]["address"]
         self.vault_client.token = environ.get("VAULT_TOKEN")
         if self.vault_client.sys.is_sealed() and self.config["vault"]["unseal"]:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]

@@ -99,7 +99,94 @@ class Workflow(Service):
     def start_services(self):
         return [fetch("service", scoped_name="Start").id]
 
-    def job(self, run, payload, device=None):
+    def job(self, run, *args):
+        track_devices = run.run_method == "per_service_with_workflow_targets"
+        bfs = self.tracking_bfs if track_devices else self.standard_bfs
+        return bfs(run, *args)
+
+    def tracking_bfs(self, run, payload):
+        number_of_runs = defaultdict(int)
+        start = fetch("service", scoped_name="Start")
+        end = fetch("service", scoped_name="End")
+        track_devices = run.run_method == "per_service_with_workflow_targets"
+        services = [fetch("service", id=id) for id in run.start_services]
+        visited, success = set(), False
+        if track_devices:
+            targets = defaultdict(set)
+            for service in services:
+                targets[service.name] |= {device.name for device in run.devices}
+        while services:
+            if run.stop:
+                return {"payload": payload, "success": False}
+            service = services.pop()
+            if number_of_runs[service.name] >= service.maximum_runs or any(
+                node not in visited
+                for node, _ in service.adjacent_services(self, "source", "prerequisite")
+            ):
+                continue
+            number_of_runs[service.name] += 1
+            visited.add(service)
+            skip_service = False
+            if service.skip_query:
+                skip_service = run.eval(service.skip_query, **locals())
+            if skip_service or service.skip or service in (start, end):
+                results = {
+                    "success": "skipped",
+                    "summary": {
+                        "success": {device.name for device in run.devices},
+                        "failure": [],
+                    },
+                }
+                run.run_state["progress"]["service"]["skipped"] += 1
+            else:
+                kwargs = {
+                    "devices": [
+                        fetch("device", name=name).id for name in targets[service.name]
+                    ],
+                    "service": service.id,
+                    "workflow": self.id,
+                    "restart_run": run.restart_run,
+                    "parent": run,
+                    "parent_runtime": run.parent_runtime,
+                }
+                service_run = factory("run", **kwargs)
+                results = service_run.run(payload)
+                status = "success" if results["success"] else "failure"
+            if service.run_method in ("once", "per_service_with_service_targets"):
+                edge_type = "success" if results["success"] else "failure"
+                for successor, edge in service.adjacent_services(
+                    self, "destination", edge_type
+                ):
+                    targets[successor.name] |= targets[service.name]
+                    services.append(successor)
+                    run.edge_state[edge.id] += len(targets[service.name])
+            else:
+                summary = results.get("summary")
+                for edge_type in ("success", "failure"):
+                    for successor, edge in service.adjacent_services(
+                        self, "destination", edge_type,
+                    ):
+                        if not summary[edge_type]:
+                            continue
+                        targets[successor.name] |= set(summary[edge_type])
+                        services.append(successor)
+                        run.edge_state[edge.id] += len(summary[edge_type])
+            if not results["success"] == "skipped":
+                sleep(service.waiting_time)
+        success_devices = targets[end.name]
+        failure_devices = targets[start.name] - success_devices
+        success = not failure_devices
+        summary = {
+            "success": list(success_devices),
+            "failure": list(failure_devices),
+        }
+        run.run_state["progress"]["device"]["success"] = len(success_devices)
+        run.run_state["progress"]["device"]["failure"] = len(failure_devices)
+        run.run_state["summary"] = summary
+        Session.refresh(run)
+        return {"payload": payload, "success": success}
+
+    def standard_bfs(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
         start = fetch("service", scoped_name="Start")
         end = fetch("service", scoped_name="End")
@@ -187,9 +274,11 @@ class Workflow(Service):
             failure_devices = targets[start.name] - success_devices
             success = not failure_devices
             summary = {
-                "success": [device.name for device in success_devices],
-                "failure": [device.name for device in failure_devices],
+                "success": list(success_devices),
+                "failure": list(failure_devices),
             }
+            run.run_state["progress"]["device"]["success"] = len(success_devices)
+            run.run_state["progress"]["device"]["failure"] = len(failure_devices)
             run.run_state["summary"] = summary
         Session.refresh(run)
         return {"payload": payload, "success": success}

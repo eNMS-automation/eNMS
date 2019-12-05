@@ -203,7 +203,7 @@ function displayResultsTree(service, runtime) {
       .empty();
     let tree = $(`#result-tree-${service.id}`).jstree({
       core: {
-        animation: 200,
+        animation: 100,
         themes: { stripes: true },
         data: data,
       },

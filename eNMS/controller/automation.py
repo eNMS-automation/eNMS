@@ -228,8 +228,8 @@ class AutomationController(BaseController):
             progress = state["services"][service.id].get("progress")
             label = (
                 (
-                    f" ({progress['device']['success']} passed,"
-                    f" {progress['device']['failure']} failed)"
+                    f"({progress['device']['success']} passed,"
+                    f" {progress['device']['failure']} failed)</div>"
                 )
                 if progress
                 else ""
@@ -237,7 +237,7 @@ class AutomationController(BaseController):
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
                 "id": service.id,
-                "text": f"{service.scoped_name}{label}",
+                "text": f"{service.scoped_name} {label}",
                 "a_attr": {"style": f"color: #{color}"},
             }
             if service.type == "workflow":

@@ -78,5 +78,12 @@ def configure_events(app):
             app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
     @event.listens_for(models["service"].name, 'set', propagate=True)
-    def vault_update(target, value, old_value, initiator):
-        print("ttt"*200, target, value, old_value)
+    def vault_update(target, new_value, old_value, *_):
+        path = f"secret/data/{target.type}/{old_value}/password"
+        data = app.vault_client.read(path)
+        if not data:
+            return
+        app.vault_client.write(
+            f"secret/data/{target.type}/{new_value}/password",
+            data={"password": data["data"]["data"]["password"]},
+        )

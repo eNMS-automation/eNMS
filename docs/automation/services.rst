@@ -28,8 +28,11 @@ edit, duplicate, delete, and run existing ones.
 Service Panel
 -------------
 
-General
-*******
+Section ``General``
+*******************
+
+Main Parameters
+"""""""""""""""
 
 - ``Name`` (**mandatory**) Must be unique.
 - ``Description`` / ``Vendor`` / ``Operating System`` Useful for filtering services in the table.
@@ -42,16 +45,8 @@ to run on 3 devices D1, D2, and D3 with 2 "retries". If it fails on D2 and D3 wh
 eNMS will run the service again for D2 and D3 at the first retry. If D2 succeeds and D3 fails, the second and last
 retry will run on D3 only.
 
-Specific
-********
-
-This section contains all parameters that are specific to the service type. For the "Netmiko Configuration"
-service that uses Netmiko to push a configuration, you will find Netmiko parameters (delay factor,
-timeout, etc) and a field to enter the configuration that you want to push.
-The content of this section is described for each service in the ``Default Services`` section of the docs.
-
-Workflow
-********
+Workflow Parameters
+"""""""""""""""""""
 
 This section contains the parameters that apply **when the service runs inside a workflow only**.
 
@@ -61,8 +56,19 @@ This section contains the parameters that apply **when the service runs inside a
 - ``Maximum number of runs`` (default: ``1``) Number of time a service is allowed to run in a workflow (de
 - ``Waiting time (in seconds)`` (default: ``0``) Number of seconds to wait after the service is done running.
 
+Section ``Specific``
+********************
+
+This section contains all parameters that are specific to the service type. For the "Netmiko Configuration"
+service that uses Netmiko to push a configuration, you will find Netmiko parameters (delay factor,
+timeout, etc) and a field to enter the configuration that you want to push.
+The content of this section is described for each service in the ``Default Services`` section of the docs.
+
+Section ``Targets``
+*******************
+
 Devices
-*******
+"""""""
 
 Most services are designed to run on devices from the inventory. There are three properties for selecting devices.
 The list of targets will be the union of all devices coming from these properties.
@@ -79,7 +85,7 @@ The list of targets will be the union of all devices coming from these propertie
 - ``Maximum Number of Processes`` (default: ``5``)
 
 Iteration
-*********
+"""""""""
 
 Validation
 **********

@@ -80,6 +80,6 @@ class PythonSnippetForm(ServiceForm):
 
 result = {}
 results["success"] = True
-results["result"] = result,""",
+results["result"] = result""",
     )
     query_fields = ServiceForm.query_fields + ["source_code"]

@@ -214,7 +214,7 @@ class AutomationController(BaseController):
 
     def get_workflow_results(self, workflow, runtime):
         state = fetch("run", parent_runtime=runtime).result().result["state"]
-        
+
         def rec(service):
             runs = fetch(
                 "run",
@@ -227,9 +227,13 @@ class AutomationController(BaseController):
                 return
             progress = state["services"][service.id].get("progress")
             label = (
-                f" ({progress['device']['success']} passed,"
-                f" {progress['device']['failure']} failed)"
-            ) if progress else ""
+                (
+                    f" ({progress['device']['success']} passed,"
+                    f" {progress['device']['failure']} failed)"
+                )
+                if progress
+                else ""
+            )
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
                 "id": service.id,

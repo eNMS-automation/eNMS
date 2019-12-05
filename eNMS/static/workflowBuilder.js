@@ -499,7 +499,10 @@ function edgeToEdge(edge) {
 }
 
 function deleteSelection() {
-  graph.getSelectedNodes().filter((node) => ![1, 2].includes(node)).map((node) => deleteNode(node));
+  graph
+    .getSelectedNodes()
+    .filter((node) => ![1, 2].includes(node))
+    .map((node) => deleteNode(node));
   graph.getSelectedEdges().map((edge) => deleteEdge(edge));
   graph.deleteSelected();
   switchMode(currentMode, true);

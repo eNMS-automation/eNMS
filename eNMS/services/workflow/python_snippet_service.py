@@ -72,8 +72,8 @@ class PythonSnippetForm(ServiceForm):
 # Returning state:
 #    results["success"] = True
 #    results["result"] = <return data>
-# Logging: run.log(level, text)
-#    run.log("info", "My log message")
+# Logging: log(level, text)
+#    log("info", "My log message")
 # Exit in the middle of the script:
 #    exit()
 #    Note: exit() is not required as the last line

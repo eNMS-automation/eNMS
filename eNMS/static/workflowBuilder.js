@@ -61,6 +61,10 @@ const dsoptions = {
         saveEdge(data);
       }
     },
+    deleteNode: function(data, callback) {
+      data.nodes = data.nodes.filter((node) => ![1, 2].includes(node));
+      callback(data);
+    },
   },
 };
 
@@ -495,7 +499,7 @@ function edgeToEdge(edge) {
 }
 
 function deleteSelection() {
-  graph.getSelectedNodes().map((node) => deleteNode(node));
+  graph.getSelectedNodes().filter((node) => ![1, 2].includes(node)).map((node) => deleteNode(node));
   graph.getSelectedEdges().map((edge) => deleteEdge(edge));
   graph.deleteSelected();
   switchMode(currentMode, true);

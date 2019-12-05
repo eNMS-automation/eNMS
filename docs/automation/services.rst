@@ -276,3 +276,25 @@ eNMS will automatically detect them.
 Just like all other services, this python file must contain a model and a form.
 After adding a new custom service, you must reload the application before it appears in the web UI.
 
+Running a service
+-----------------
+
+You can run a service from the "Services" page ("Run" button) or from the "Workflow Builder"
+(right-click menu).
+
+There are two types of runs:
+
+- Standard run: uses the service properties during the run.
+- Parameterized run: a window is displayed with all properties initialized to the service
+properties. You can change any property for the current run, but these changes won't be saved
+back to the service properties.
+
+Results
+*******
+
+Results are stored for each run of the service / workflow.
+The results are displayed as a JSON object. If the service ran on several device, you can display the results for a
+specific device, or display the list of all "failed" / "success" device.
+In the event that retries are configured, the Logs dictionary will contain an overall results section,
+as well as a section for each attempt, where failed and retried devices are shown in subsequent sections
+starting with attempt2.

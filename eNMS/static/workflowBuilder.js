@@ -748,6 +748,7 @@ function displayWorkflowState(result) {
     if (progress.failure) $("#progress-failure-span").text(progress.failure);
     $("#status").text(`Status: ${result.state.status}`);
     if (result.state.services) {
+      console.log(result.state.services)
       $.each(result.state.services, (id, state) => {
         const color = {
           true: "#32cd32",
@@ -776,6 +777,7 @@ function displayWorkflowState(result) {
       });
     }
     if (result.state.edges) {
+      console.log(result.state.edges)
       $.each(result.state.edges, (id, devices) => {
         if (!edges.get(id)) return;
         edges.update({

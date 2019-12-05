@@ -101,6 +101,8 @@ class Workflow(Service):
 
     def job(self, run, payload, device=None):
         number_of_runs = defaultdict(int)
+        start = fetch("service", scoped_name="Start")
+        end = fetch("service", scoped_name="End")
         track_devices = run.run_method == "per_service_with_workflow_targets"
         services = [fetch("service", id=id) for id in run.start_services]
         visited, success = set(), False
@@ -122,7 +124,7 @@ class Workflow(Service):
             skip_service = False
             if service.skip_query:
                 skip_service = run.eval(service.skip_query, **locals())
-            if skip_service or service.skip or service.scoped_name in ("Start", "End"):
+            if skip_service or service.skip or service in (start, end):
                 results = {
                     "success": "skipped",
                     "summary": {
@@ -150,7 +152,6 @@ class Workflow(Service):
                 status = "success" if results["success"] else "failure"
                 if not device and not track_devices:
                     run.run_state["progress"]["service"][status] += 1
-            successors = []
             if track_devices:
                 if service.run_method in ("once", "per_service_with_service_targets"):
                     edge_type = "success" if results["success"] else "failure"
@@ -158,8 +159,8 @@ class Workflow(Service):
                         self, "destination", edge_type
                     ):
                         targets[successor.name] |= targets[service.name]
-                        successors.append(successor)
-                        run.run_state["edges"][edge.id] += len(targets[service.name])
+                        services.append(successor)
+                        run.edge_state[edge.id] += len(targets[service.name])
                 else:
                     summary = results.get("summary")
                     for edge_type in ("success", "failure"):
@@ -169,30 +170,28 @@ class Workflow(Service):
                             if not summary[edge_type]:
                                 continue
                             targets[successor.name] |= set(summary[edge_type])
-                            successors.append(successor)
-                            run.run_state["edges"][edge.id] += len(summary[edge_type])
+                            services.append(successor)
+                            run.edge_state[edge.id] += len(summary[edge_type])
             else:
                 for successor, edge in service.adjacent_services(
                     self, "destination", "success" if results["success"] else "failure",
                 ):
-                    successors.append(successor)
-                    run.run_state["edges"][edge.id] += 1
-            for successor in successors:
-                services.append(successor)
-                if successor.scoped_name == "End":
-                    success = True
+                    services.append(successor)
+                    run.edge_state[edge.id] += 1
+            if not track_devices and end in services:
+                success = True
             if not results["success"] == "skipped":
                 sleep(service.waiting_time)
-        Session.refresh(run)
         if track_devices:
-            success_devices = targets["[Shared] End"]
-            failure_devices = targets["[Shared] Start"] - targets["[Shared] End"]
+            success_devices = targets[end.name]
+            failure_devices = targets[start.name] - success_devices
             success = not failure_devices
             summary = {
                 "success": [device.name for device in success_devices],
                 "failure": [device.name for device in failure_devices],
             }
             run.run_state["summary"] = summary
+        Session.refresh(run)
         return {"payload": payload, "success": success}
 
 

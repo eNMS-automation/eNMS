@@ -180,6 +180,10 @@ class Run(AbstractBase):
             return app.run_db[self.parent_runtime]["services"][self.service.id]
 
     @property
+    def edge_state(self):
+        return app.run_db[self.parent_runtime]["edges"]
+
+    @property
     def stop(self):
         return self.run_state["status"] == "stop"
 

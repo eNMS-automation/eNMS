@@ -91,7 +91,7 @@
     "address": ""
   },
   "vault": {
-    "active": true,
+    "active": false,
     "unseal": false
   },
   "view": {

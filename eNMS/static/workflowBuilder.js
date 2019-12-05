@@ -234,7 +234,7 @@ const rectangleSelection = (container, network, nodes) => {
 function switchToSubworkflow() {
   const service = nodes.get(graph.getSelectedNodes()[0]);
   if (service.type != "workflow") {
-    alertify.notify("You must select a workflow.", "error", 5);
+    alertify.notify("You must select a subworkflow.", "error", 5);
   } else {
     switchToWorkflow(service.id);
   }

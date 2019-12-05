@@ -361,19 +361,19 @@ class BaseController:
         Session.query(models["parameters"]).one().update(**kwargs)
         self.__dict__.update(**kwargs)
 
-    def delete_instance(self, cls, instance_id):
-        return delete(cls, id=instance_id)
+    def delete_instance(self, instance_type, instance_id):
+        return delete(instance_type, id=instance_id)
 
-    def get(self, cls, id):
-        return fetch(cls, id=id).serialized
+    def get(self, instance_type, id):
+        return fetch(instance_type, id=id).serialized
 
-    def get_properties(self, cls, id):
-        return fetch(cls, id=id).get_properties()
+    def get_properties(self, instance_type, id):
+        return fetch(instance_type, id=id).get_properties()
 
-    def get_all(self, cls):
-        return [instance.get_properties() for instance in fetch_all(cls)]
+    def get_all(self, instance_type):
+        return [instance.get_properties() for instance in fetch_all(instance_type)]
 
-    def update(self, cls, **kwargs):
+    def update(self, instance_type, **kwargs):
         try:
             must_be_new = kwargs.get("id") == ""
             for arg in ("name", "scoped_name"):
@@ -381,13 +381,15 @@ class BaseController:
                     kwargs[arg] = kwargs[arg].strip()
             kwargs["last_modified"] = self.get_time()
             kwargs["creator"] = kwargs["user"] = getattr(current_user, "name", "admin")
-            instance = factory(cls, must_be_new=must_be_new, **kwargs)
+            instance = factory(instance_type, must_be_new=must_be_new, **kwargs)
             Session.flush()
             return instance.serialized
         except Exception as exc:
             Session.rollback()
             if isinstance(exc, IntegrityError):
-                return {"error": (f"There already is a {cls} with the same name")}
+                return {
+                    "error": (f"There already is a {instance_type} with the same name")
+                }
             return {"error": str(exc)}
 
     def log(self, severity, content):
@@ -403,13 +405,15 @@ class BaseController:
 
     def count_models(self):
         return {
-            "counters": {cls: count(cls) for cls in diagram_classes},
+            "counters": {
+                instance_type: count(instance_type) for instance_type in diagram_classes
+            },
             "properties": {
-                cls: Counter(
-                    str(getattr(instance, type_to_diagram_properties[cls][0]))
-                    for instance in fetch_all(cls)
+                instance_type: Counter(
+                    str(getattr(instance, type_to_diagram_properties[instance_type][0]))
+                    for instance in fetch_all(instance_type)
                 )
-                for cls in diagram_classes
+                for instance_type in diagram_classes
             },
         }
 

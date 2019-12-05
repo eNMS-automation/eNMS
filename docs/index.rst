@@ -63,7 +63,7 @@ Application stack
    automation/services
    automation/default_services
    automation/workflows
-   automation/execution
+   automation/scheduling
 
 .. toctree::
    :maxdepth: 2

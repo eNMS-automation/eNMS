@@ -105,7 +105,7 @@ function doc(page) {
     "table/run": "automation/services.html",
     "table/service": "automation/services.html",
     "table/task": "automation/scheduling.html",
-    "table/user": "administration/index.html",
+    "table/user": "advanced/administration.html",
     view: "inventory/network_visualization.html",
     workflow_builder: "automation/workflows.html",
   }[page];

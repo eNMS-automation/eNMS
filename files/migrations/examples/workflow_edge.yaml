@@ -455,3 +455,27 @@
 - {destination: '[Shared] End', label: success, source: '[Regression Workflow G: run
     methods (BFS)] Workflow in service targets mode', subtype: success, workflow: 'Regression
     Workflow G: run methods (BFS)'}
+- {destination: '[[Regression Workflow G: run methods (BFS)] Workflow  in device by
+    device mode] Validation show VRF', label: success, source: '[Shared] Start', subtype: success,
+  workflow: '[Regression Workflow G: run methods (BFS)] Workflow  in device by device
+    mode'}
+- {destination: '[Shared] End', label: success, source: '[[Regression Workflow G:
+    run methods (BFS)] Workflow  in device by device mode] Validation show VRF', subtype: success,
+  workflow: '[Regression Workflow G: run methods (BFS)] Workflow  in device by device
+    mode'}
+- {destination: '[[Regression Workflow G: run methods (BFS)] Workflow in service by
+    service mode (workflow targets)] Validation show VRF', label: success, source: '[Shared]
+    Start', subtype: success, workflow: '[Regression Workflow G: run methods (BFS)]
+    Workflow in service by service mode (workflow targets)'}
+- {destination: '[Shared] End', label: success, source: '[[Regression Workflow G:
+    run methods (BFS)] Workflow in service by service mode (workflow targets)] Validation
+    show VRF', subtype: success, workflow: '[Regression Workflow G: run methods (BFS)]
+    Workflow in service by service mode (workflow targets)'}
+- {destination: '[[Regression Workflow G: run methods (BFS)] Workflow in service targets
+    mode] Validation show VRF', label: success, source: '[Shared] Start', subtype: success,
+  workflow: '[Regression Workflow G: run methods (BFS)] Workflow in service targets
+    mode'}
+- {destination: '[Shared] End', label: success, source: '[[Regression Workflow G:
+    run methods (BFS)] Workflow in service targets mode] Validation show VRF', subtype: success,
+  workflow: '[Regression Workflow G: run methods (BFS)] Workflow in service targets
+    mode'}

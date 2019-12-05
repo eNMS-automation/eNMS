@@ -52,8 +52,9 @@ class Workflow(Service):
             service.set_name()
             service.positions[self.name] = service.positions.pop(old_name, (0, 0))
 
-    def duplicate(self, workflow=None):
-        clone = super().duplicate(workflow)
+    def duplicate(self, workflow=None, clone=None):
+        if not clone:
+            clone = super().duplicate(workflow)
         clone_services = {}
         Session.commit()
         for service in self.services:

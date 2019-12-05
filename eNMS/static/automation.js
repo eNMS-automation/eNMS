@@ -37,7 +37,9 @@ function panelCode(type, id, mode) {
   $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
   if (id) {
     $(`#${type}-shared-${id}`).prop("disabled", true);
-    if (mode == "duplicate") $(`#duplicate-${id}`).val("true");
+    if (mode == "duplicate" && type == "workflow") {
+      $(`#original-${id}`).val(id);
+    }
   }
   $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
     "disabled",

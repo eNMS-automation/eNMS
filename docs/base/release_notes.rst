@@ -27,6 +27,9 @@ Version 3.18
   - service by service with workflow targets
   - service by service with service targets
 
+- fix selection in tree of services: standalone no longer selectable
+- fix workflow duplication bug
+
 Version 3.17.2
 --------------
 

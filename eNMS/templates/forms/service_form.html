@@ -6,7 +6,7 @@
 >
   {{ form.csrf_token() }} {{ form.form_type(value=form_type) }} {{
   form.id(id=form_type + '-id', class="add-id") }}
-  <input type="hidden" id="duplicate" name="duplicate" class="add-id">
+  <input type="hidden" id="original" name="original" class="add-id">
   <div style="padding:20px">
     <center>
       <button

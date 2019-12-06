@@ -247,7 +247,7 @@ class AutomationController(BaseController):
             }
             if service.type == "workflow":
                 children = sorted(
-                    (c for child in service.services if (c := rec(child))),
+                    filter(None, (rec(child) for child in service.services)),
                     key=itemgetter("runtime"),
                 )
                 return {"children": children, "type": "workflow", **result}

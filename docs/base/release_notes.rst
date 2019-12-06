@@ -29,7 +29,9 @@ Version 3.18
 
 - Fix start/end deletion issue + display
 - Fix tree bug with shared service in different subworkflows not properly displayed
-
+- Run Only Once services show no longer displays ( 0 failed / 0 passed).
+- Fix services displayed as red when successful
+- Fix service order in the workflow
 
 Version 3.17.2
 --------------

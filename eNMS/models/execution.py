@@ -287,7 +287,7 @@ class Run(AbstractBase):
             self.status = "Aborted" if self.stop else "Completed"
             self.run_state["status"] = self.status
             if self.run_state["success"] is not False:
-                self.run_state["success"] = results["success"]
+                self.success = self.run_state["success"] = results["success"]
             if self.send_notification:
                 results = self.notify(results)
             app.service_db[self.service.id]["runs"] -= 1

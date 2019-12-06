@@ -28,6 +28,8 @@ Version 3.18
   - service by service with service targets
 
 - Fix start/end deletion issue + display
+- Fix tree bug with shared service in different subworkflows not properly displayed
+
 
 Version 3.17.2
 --------------

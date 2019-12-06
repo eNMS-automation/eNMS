@@ -236,9 +236,12 @@ class AutomationController(BaseController):
                     f"({progress['device']['success']} passed,"
                     f" {progress['device']['failure']} failed)</div>"
                 )
-                if progress
+                if progress and progress["device"]["total"]
                 else ""
             )
+            print(runs)
+            for run in runs:
+                print(run.success)
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
                 "data": service.serialized,

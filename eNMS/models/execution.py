@@ -294,7 +294,7 @@ class Run(AbstractBase):
             results["duration"] = self.duration = str(
                 datetime.now().replace(microsecond=0) - start
             )
-            results["logs"] = app.run_logs.pop(self.runtime, None)
+            results["logs"] = app.run_logs.pop(self.runtime, [])
             if self.runtime == self.parent_runtime:
                 self.state = results["state"] = app.run_db.pop(self.runtime)
             if self.task and not self.task.frequency:
@@ -340,7 +340,7 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices, success = self.compute_devices(payload), True
-        if not self.devices or self.run_method != "per_device":
+        if self.run_method != "per_device":
             return self.get_results(payload)
         else:
             if self.iteration_devices and not self.parent_device:

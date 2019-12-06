@@ -293,7 +293,8 @@ function updateWorkflowService(service) {
 
 // eslint-disable-next-line
 function addServicesToWorkflow() {
-  const selection = $("#service-tree").jstree("get_checked");
+  const selection = $("#service-tree").jstree("get_checked", true);
+  console.log(selection)
   if (!selection.length) alertify.notify("Nothing selected.", "error", 5);
   $("#services").val(selection);
   fCall(
@@ -566,7 +567,7 @@ function addServicePanel() {
         themes: { stripes: true },
         data: {
           url: function(node) {
-            const nodeId = node.id == "#" ? "all" : node.id;
+            const nodeId = node.id == "#" ? "all" : node.data.service_id;
             return `/get_workflow_services/${workflow.id}/${nodeId}`;
           },
           type: "POST",

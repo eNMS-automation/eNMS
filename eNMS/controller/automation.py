@@ -161,7 +161,7 @@ class AutomationController(BaseController):
             ] + sorted(
                 (
                     {
-                        "id": workflow.id,
+                        "data": {"service_id": workflow.id},
                         "text": workflow.name,
                         "children": True,
                         "type": "workflow",
@@ -180,7 +180,7 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
-                        "id": service.id,
+                        "data": {"service_id": service.id},
                         "text": service.scoped_name,
                         "a_attr": {
                             "style": (
@@ -197,7 +197,7 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
-                        "id": service.id,
+                        "data": {"service_id": service.id},
                         "text": service.scoped_name,
                         "children": service.type == "workflow",
                         "type": "workflow" if service.type == "workflow" else "service",

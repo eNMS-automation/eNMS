@@ -27,6 +27,8 @@ Version 3.18
   - service by service with workflow targets
   - service by service with service targets
 
+- Fix start/end deletion issue + display
+
 Version 3.17.2
 --------------
 

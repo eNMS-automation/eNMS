@@ -241,7 +241,7 @@ class AutomationController(BaseController):
             )
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
-                "id": service.id,
+                "data": service.serialized,
                 "text": f"{service.scoped_name} {label}",
                 "a_attr": {"style": f"color: #{color}"},
             }

@@ -52,9 +52,9 @@ const dsoptions = {
     enabled: false,
     addNode: function(data, callback) {},
     addEdge: function(data, callback) {
-      if (data.to == 1) {
+      if (data.to == "Start") {
         alertify.notify("You cannot draw an edge to 'Start'.", "error", 5);
-      } else if (data.from == 2) {
+      } else if (data.from == "End") {
         alertify.notify("You cannot draw an edge from 'End'.", "error", 5);
       } else if (data.from != data.to) {
         data.subtype = currentMode;
@@ -62,7 +62,7 @@ const dsoptions = {
       }
     },
     deleteNode: function(data, callback) {
-      data.nodes = data.nodes.filter((node) => ![1, 2].includes(node));
+      data.nodes = data.nodes.filter((node) => !ends.has(node));
       callback(data);
     },
   },
@@ -72,6 +72,7 @@ let nodes;
 let edges;
 let graph;
 let selectedObject;
+let ends = new Set();
 let currentMode = "motion";
 let creationMode;
 let mousePosition;
@@ -98,12 +99,12 @@ function displayWorkflow(workflowData) {
       properties.event.preventDefault();
       const node = this.getNodeAt(properties.pointer.DOM);
       const edge = this.getEdgeAt(properties.pointer.DOM);
-      if (typeof node !== "undefined" && node != 1 && node != 2) {
+      if (typeof node !== "undefined" && !ends.has(node)) {
         graph.selectNodes([node]);
         $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
-      } else if (typeof edge !== "undefined" && node != 1 && node != 2) {
+      } else if (typeof edge !== "undefined" && !ends.has(node)) {
         graph.selectEdges([edge]);
         $(".menu-entry ").hide();
         $(".edge-selection").show();
@@ -384,7 +385,7 @@ function formatServiceTitle(service) {
 }
 
 function getServiceLabel(service) {
-  if (["Start", "End"].includes(service.scoped_name)) {
+  if (ends.has(service.id)) {
     return service.scoped_name;
   }
   let label =
@@ -399,6 +400,7 @@ function getServiceLabel(service) {
 
 function serviceToNode(service) {
   const defaultService = ["Start", "End"].includes(service.scoped_name);
+  if (defaultService) ends.add(service.id);
   return {
     id: service.id,
     shape:
@@ -501,7 +503,7 @@ function edgeToEdge(edge) {
 function deleteSelection() {
   graph
     .getSelectedNodes()
-    .filter((node) => ![1, 2].includes(node))
+    .filter((node) => !ends.has(node))
     .map((node) => deleteNode(node));
   graph.getSelectedEdges().map((edge) => deleteEdge(edge));
   graph.deleteSelected();
@@ -718,7 +720,9 @@ function restartWorkflow() {
 }
 
 function colorService(id, color) {
-  if (id != 1 && id != 2 && nodes) nodes.update({ id: id, color: color });
+  if (!ends.has(id) && nodes) {
+    nodes.update({ id: id, color: color });
+  }
 }
 
 // eslint-disable-next-line
@@ -762,7 +766,7 @@ function displayWorkflowState(result) {
           skipped: "#D3D3D3",
           null: "#00CCFF",
         };
-        if (id in nodes._data && !["1", "2"].includes(id)) {
+        if (id in nodes._data && !ends.has(id)) {
           colorService(id, color[state.success]);
           const progress = state.progress.device;
           if (progress.total) {
@@ -800,7 +804,7 @@ function displayWorkflowState(result) {
 function resetDisplay() {
   $("#progressbar").hide();
   workflow.services.forEach((service) => {
-    if ([1, 2].includes(service.id)) return;
+    if (ends.has(service.id)) return;
     nodes.update({
       id: service.id,
       label: getServiceLabel(service),

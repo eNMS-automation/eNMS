@@ -14,7 +14,6 @@ ldap3
 napalm
 netmiko
 pathlib
-psutil
 pynetbox
 ruamel.yaml
 slackclient>=1.3,<2

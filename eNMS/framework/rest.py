@@ -2,7 +2,6 @@ from datetime import datetime
 from flask import request
 from flask_restful import abort, Api, Resource
 from logging import info
-from psutil import cpu_percent
 from uuid import getnode
 
 from eNMS import app
@@ -53,7 +52,6 @@ class Heartbeat(Resource):
         return {
             "name": getnode(),
             "cluster_id": app.config["cluster"]["id"],
-            "cpu_load": cpu_percent(),
         }
 
 

@@ -218,7 +218,8 @@ function displayResultsTree(service, runtime) {
           return {
             item1: {
               label: "Results",
-              action: () => showRuntimePanel("results", node.data, runtime, true),
+              action: () =>
+                showRuntimePanel("results", node.data, runtime, true),
               icon: "glyphicon glyphicon-list-alt",
             },
             item2: {

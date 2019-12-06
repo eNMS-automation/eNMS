@@ -240,13 +240,14 @@ class AutomationController(BaseController):
             )
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
+                "runtime": runs[0].runtime,
                 "data": service.get_properties(),
                 "text": f"{service.scoped_name} {label}",
                 "a_attr": {"style": f"color: #{color}"},
             }
             if service.type == "workflow":
-                children = list(
-                    filter(None, (rec(child) for child in service.services))
+                children = sorted(
+                    filter(None, (rec(child) for child in service.services)), key=itemgetter("runtime")
                 )
                 return {"children": children, "type": "workflow", **result}
             else:

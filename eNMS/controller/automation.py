@@ -56,7 +56,6 @@ class AutomationController(BaseController):
         service_instances = objectify("service", service_sets)
         workflow = fetch("workflow", id=workflow_id)
         services, errors = [], []
-        print(service_instances, kwargs["mode"])
         if kwargs["mode"] == "shallow":
             for service in service_instances:
                 if not service.shared:
@@ -239,9 +238,6 @@ class AutomationController(BaseController):
                 if progress and progress["device"]["total"]
                 else ""
             )
-            print(runs)
-            for run in runs:
-                print(run.success)
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
                 "data": service.get_properties(),

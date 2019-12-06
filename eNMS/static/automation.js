@@ -238,7 +238,6 @@ function displayResultsTree(service, runtime) {
         },
       },
     });
-
     tree.bind("loaded.jstree", function() {
       tree.jstree("open_all");
     });

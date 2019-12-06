@@ -230,7 +230,6 @@ class Run(AbstractBase):
             devices |= set(self.service.devices)
             for pool in self.service.pools:
                 devices |= set(pool.devices)
-        self.run_state["progress"]["device"]["total"] += len(devices)
         return list(devices)
 
     def init_state(self):
@@ -343,6 +342,7 @@ class Run(AbstractBase):
         if self.run_method != "per_device":
             return self.get_results(payload)
         else:
+            self.run_state["progress"]["device"]["total"] += len(self.devices)
             if self.iteration_devices and not self.parent_device:
                 success = all(
                     self.device_iteration(payload, device) for device in self.devices

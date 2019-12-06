@@ -426,7 +426,7 @@ class Run(AbstractBase):
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":
-                old_result = self.restart_run.result(device=device.name)
+                old_result = self.restart_run.result(device=device.name if device else None)
                 if old_result and "payload" in old_result.result:
                     payload.update(old_result["payload"])
             if self.service.iteration_values:

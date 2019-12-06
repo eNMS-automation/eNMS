@@ -52,9 +52,11 @@ class AutomationController(BaseController):
         workflow.services.append(fetch("service", id=service))
 
     def copy_service_in_workflow(self, workflow_id, **kwargs):
-        service_instances = objectify("service", kwargs["services"].split(","))
+        service_sets = list(set(kwargs["services"].split(",")))
+        service_instances = objectify("service", service_sets)
         workflow = fetch("workflow", id=workflow_id)
         services, errors = [], []
+        print(service_instances, kwargs["mode"])
         if kwargs["mode"] == "shallow":
             for service in service_instances:
                 if not service.shared:
@@ -161,7 +163,7 @@ class AutomationController(BaseController):
             ] + sorted(
                 (
                     {
-                        "data": {"service_id": workflow.id},
+                        "data": {"id": workflow.id},
                         "text": workflow.name,
                         "children": True,
                         "type": "workflow",
@@ -180,7 +182,7 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
-                        "data": {"service_id": service.id},
+                        "data": {"id": service.id},
                         "text": service.scoped_name,
                         "a_attr": {
                             "style": (
@@ -197,7 +199,7 @@ class AutomationController(BaseController):
             return sorted(
                 (
                     {
-                        "data": {"service_id": service.id},
+                        "data": {"id": service.id},
                         "text": service.scoped_name,
                         "children": service.type == "workflow",
                         "type": "workflow" if service.type == "workflow" else "service",

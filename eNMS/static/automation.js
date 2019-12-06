@@ -244,7 +244,7 @@ function displayResultsTree(service, runtime) {
     });
     tree.unbind("dblclick.jstree").bind("dblclick.jstree", function(event) {
       const service = tree.jstree().get_node(event.target);
-      showRuntimePanel("results", service, runtime, true);
+      showRuntimePanel("results", service.data, runtime, true);
     });
   });
 }

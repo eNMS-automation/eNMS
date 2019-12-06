@@ -152,6 +152,7 @@ class AutomationController(BaseController):
         if node == "all":
             return [
                 {
+                    "data": {"id": "standalone"},
                     "id": "standalone",
                     "text": "Standalone services",
                     "children": True,

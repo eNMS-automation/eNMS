@@ -639,7 +639,9 @@ function downloadFile(file) {
 }
 
 function deleteFile(file) {
-  console.log(file);
+  call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
+    $("#files-tree").jstree().delete_node(file.id);
+  });
 }
 
 (function($, jstree, undefined) {
@@ -651,7 +653,6 @@ function deleteFile(file) {
       var el = parent.redraw_node.apply(this, arguments);
       if (el) {
         var node = this._model.data[node_id];
-        console.log(node);
         this.settings.node_customize.default(el, node);
       }
       return el;
@@ -665,6 +666,7 @@ function displayFiles() {
       core: {
         animation: 200,
         themes: { stripes: true, variant: "large" },
+        check_callback: true,
         data: {
           url: function(node) {
             const path = node.id == "#" ? "root" : node.data.path;

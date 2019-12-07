@@ -15,7 +15,7 @@ from json import load
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
-from os import environ, scandir
+from os import environ, remove, scandir
 from os.path import exists, getmtime
 from pathlib import Path
 from requests import Session as RequestSession
@@ -108,6 +108,7 @@ class BaseController:
         "duplicate_workflow",
         "export_service",
         "export_topology",
+        "delete_file",
         "get",
         "get_all",
         "get_cluster_status",
@@ -543,6 +544,9 @@ class BaseController:
             }
             for file in Path(path).iterdir()
         ]
+
+    def delete_file(self, filepath):
+        remove(Path(filepath.replace(">", "/")))
 
     def get_time(self):
         return str(datetime.now())

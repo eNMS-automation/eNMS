@@ -326,7 +326,7 @@ class AutomationController(BaseController):
         if not runtime:
             runtime = "latest"
         else:
-            session["workflow"] = path
+            session["path"] = path
         if runs and runtime != "normal":
             if runtime == "latest":
                 runtime = runs[-1].parent_runtime

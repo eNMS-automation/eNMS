@@ -332,7 +332,7 @@ function resumeTask(id) {
 }
 
 function switchToWorkflow(path, arrow) {
-  console.log(path)
+  currentPath = path;
   if (typeof path === "undefined") return;
   if (!arrow) {
     arrowPointer++;

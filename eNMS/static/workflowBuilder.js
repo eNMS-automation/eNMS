@@ -863,7 +863,7 @@ function getWorkflowState(periodic) {
         );
       }
     }
-    if (workflow) currentPath = workflow.id;
+    if (workflow) currentPath = path;
     $("#current-workflow,#current-runtimes").selectpicker({
       liveSearch: true,
     });

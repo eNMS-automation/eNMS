@@ -24,7 +24,6 @@ workflow: true
 let currentRuntime;
 let arrowHistory = [""];
 let arrowPointer = -1;
-let currentPath;
 
 // eslint-disable-next-line
 function openServicePanel() {
@@ -332,8 +331,8 @@ function resumeTask(id) {
 }
 
 function switchToWorkflow(path, arrow) {
-  currentPath = path;
   if (typeof path === "undefined") return;
+  currentPath = path;
   if (!arrow) {
     arrowPointer++;
     arrowHistory.splice(arrowPointer, 9e9, path);

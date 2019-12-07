@@ -147,7 +147,7 @@ function displayWorkflow(workflowData) {
     );
   });
   $("#current-runtime").val("latest");
-  $("#current-workflow").val(workflow.id);
+  $("#current-workflow").val(currentPath.split(">")[0]);
   $("#current-runtime,#current-workflow").selectpicker("refresh");
   graph.on("dragEnd", (event) => {
     if (graph.getNodeAt(event.pointer.DOM)) savePositions();
@@ -822,7 +822,7 @@ function getWorkflowState(periodic) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
-    call(`/get_service_state/${workflow.id}${url}`, function(result) {
+    call(`/get_service_state/${currentPath}${url}`, function(result) {
       if (result.service.id != workflow.id) return;
       currentRuntime = result.runtime;
       if (result.service.last_modified !== workflow.last_modified) {
@@ -848,8 +848,8 @@ function getWorkflowState(periodic) {
       );
     }
     if (workflow) {
-      $("#current-workflow").val(workflow.id);
-      switchToWorkflow(workflow.id);
+      $("#current-workflow").val(currentPath.split(">")[0]);
+      switchToWorkflow(currentPath);
     } else {
       workflow = $("#current-workflow").val();
       if (workflow) {
@@ -863,7 +863,6 @@ function getWorkflowState(periodic) {
         );
       }
     }
-    if (workflow) currentPath = path;
     $("#current-workflow,#current-runtimes").selectpicker({
       liveSearch: true,
     });

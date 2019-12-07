@@ -351,8 +351,7 @@ block content %}
 {% endblock content %} {% block javascripts %} {{ super()}}
 <script>
   let workflow = {{ workflow|tojson|safe }};
-  let path = {{ path|tojson|safe }};
-  console.log(path)
+  let currentPath = {{ path|tojson|safe }};
 </script>
 <script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
 <script src="{{ url_for('static', filename='workflowBuilder.js') }}"></script>

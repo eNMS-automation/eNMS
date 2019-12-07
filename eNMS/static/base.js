@@ -648,7 +648,7 @@ function displayFiles() {
           type: "POST",
         },
       },
-      plugins: ["types", "wholerow"],
+      plugins: ["types", "wholerow", "state"],
       types: {
         "default" : {
         },

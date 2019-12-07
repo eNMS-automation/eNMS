@@ -530,25 +530,19 @@ class BaseController:
             path = self.config["paths"]["files"] or self.path / "files"
         else:
             path = path.replace(">", "/")
-
-        table = []
-        for file in Path(path).iterdir():
-            filetype = "folder" if file.is_dir() else "file"
-            row = {
+        return [
+            {
+                "a_attr": {"style": "width: 100%" if file.is_file() else ""},
                 "data": {
                     "modified": getmtime(str(file)),
                     "path": str(file)
                 },
                 "text": file.name,
                 "children": file.is_dir(),
-                "type": filetype,
+                "type": "folder" if file.is_dir() else "file",
             }
-            if file.is_file():
-                a = """"""
-                row["a_attr"] = {"style": "width: 100%"}
-                row["text"] += a
-            table.append(row)
-        return table
+            for file in Path(path).iterdir()
+        ]
 
     def get_time(self):
         return str(datetime.now())

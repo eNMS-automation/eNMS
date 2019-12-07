@@ -690,18 +690,24 @@ function displayFiles() {
         default: function(el, node) {
           if (node.type == "file") {
             $(el).find("a").append(`
-              <div style="position: absolute; top: 5px; right: 50px">
+              <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
-                  class="btn btn-xs btn-success"
-                  onclick="normalRun('test')"
+                  class="btn btn-xs btn-primary"
+                  onclick="editFile('${node.data.id}')"
                 >
-                  <span class="glyphicon glyphicon-play"></span>
+                  <span class="glyphicon glyphicon-edit"></span>
                 </button>
                 <button type="button"
-                class="btn btn-xs btn-success"
-                onclick="normalRun('test')"
+                class="btn btn-xs btn-info"
+                onclick="downloadFile('${node.data.id}')"
                 >
-                <span class="glyphicon glyphicon-play"></span>
+                <span class="glyphicon glyphicon-download"></span>
+                </button>
+                <button type="button"
+                  class="btn btn-xs btn-danger"
+                  onclick="deleteFile('${node.data.id}')"
+                >
+                  <span class="glyphicon glyphicon-trash"></span>
                 </button>
               </div>
               `

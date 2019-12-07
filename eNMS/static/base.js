@@ -640,7 +640,14 @@ function downloadFile(file) {
 
 function deleteFile(file) {
   call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
-    $("#files-tree").jstree().delete_node(file.id);
+    $("#files-tree")
+      .jstree()
+      .delete_node(file.id);
+    alertify.notify(
+      `File ${file.data.name} successfully deleted.`,
+      "success",
+      5
+    );
   });
 }
 
@@ -694,6 +701,7 @@ function displayFiles() {
       },
       node_customize: {
         default: function(el, node) {
+          if (!node) return;
           if (node.type == "file") {
             data = JSON.stringify(node);
             $(el).find("a").append(`
@@ -717,8 +725,7 @@ function displayFiles() {
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>
               </div>
-              `
-            );
+              `);
           }
         },
       },

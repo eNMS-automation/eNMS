@@ -536,7 +536,8 @@ class BaseController:
                 "a_attr": {"style": "width: 100%" if file.is_file() else ""},
                 "data": {
                     "modified": getmtime(str(file)),
-                    "path": str(file)
+                    "path": str(file),
+                    "name": file.name,
                 },
                 "text": file.name,
                 "children": file.is_dir(),

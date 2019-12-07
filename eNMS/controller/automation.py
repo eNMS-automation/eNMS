@@ -298,7 +298,6 @@ class AutomationController(BaseController):
     def save_positions(self, workflow_id):
         now, old_position = self.get_time(), None
         workflow = fetch("workflow", allow_none=True, id=workflow_id)
-        session["workflow"] = workflow.id
         for id, position in request.json.items():
             new_position = [position["x"], position["y"]]
             if "-" not in id:
@@ -323,6 +322,8 @@ class AutomationController(BaseController):
     def get_service_state(self, service_id, runtime="latest"):
         state, service = None, fetch("service", id=service_id)
         runs = fetch_all("run", service_id=service_id)
+        if runtime:
+            session["workflow"] = service_id
         if runs and runtime != "normal":
             if runtime == "latest":
                 runtime = runs[-1].parent_runtime

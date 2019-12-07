@@ -690,10 +690,22 @@ function displayFiles() {
         default: function(el, node) {
           if (node.type == "file") {
             $(el).find("a").append(`
-              <button type="button" style="position: absolute; top: 5px; right: 50px" class="btn btn-xs btn-success"
-              onclick="normalRun('test')" data-tooltip="Run"
-              ><span class="glyphicon glyphicon-play"></span
-              ></button>`);
+              <div style="position: absolute; top: 5px; right: 50px">
+                <button type="button"
+                  class="btn btn-xs btn-success"
+                  onclick="normalRun('test')"
+                >
+                  <span class="glyphicon glyphicon-play"></span>
+                </button>
+                <button type="button"
+                class="btn btn-xs btn-success"
+                onclick="normalRun('test')"
+                >
+                <span class="glyphicon glyphicon-play"></span>
+                </button>
+              </div>
+              `
+            );
           }
         },
       },

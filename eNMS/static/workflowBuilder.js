@@ -127,7 +127,7 @@ function displayWorkflow(workflowData) {
     } else if (node.type == "label") {
       editLabel(node);
     } else if (node.type == "workflow") {
-      switchToWorkflow(node.id);
+      switchToWorkflow(`${currentPath}>${node.id}`);
     } else {
       showTypePanel(node.type, node.id);
     }
@@ -863,6 +863,7 @@ function getWorkflowState(periodic) {
         );
       }
     }
+    if (workflow) currentPath = workflow.id;
     $("#current-workflow,#current-runtimes").selectpicker({
       liveSearch: true,
     });

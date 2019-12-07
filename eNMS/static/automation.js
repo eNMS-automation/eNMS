@@ -24,6 +24,7 @@ workflow: true
 let currentRuntime;
 let arrowHistory = [""];
 let arrowPointer = -1;
+let currentPath;
 
 // eslint-disable-next-line
 function openServicePanel() {
@@ -330,11 +331,12 @@ function resumeTask(id) {
   });
 }
 
-function switchToWorkflow(workflowId, arrow) {
-  if (typeof workflowId === "undefined") return;
+function switchToWorkflow(path, arrow) {
+  console.log(path)
+  if (typeof path === "undefined") return;
   if (!arrow) {
     arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, workflowId);
+    arrowHistory.splice(arrowPointer, 9e9, path);
   } else {
     arrowPointer += arrow == "right" ? 1 : -1;
   }
@@ -349,7 +351,7 @@ function switchToWorkflow(workflowId, arrow) {
     $("#right-arrow").addClass("disabled");
   }
   if (page == "workflow_builder") {
-    call(`/get_service_state/${workflowId}/latest`, function(result) {
+    call(`/get_service_state/${path}/latest`, function(result) {
       workflow = result.service;
       displayWorkflow(result);
       alertify.notify(
@@ -359,7 +361,7 @@ function switchToWorkflow(workflowId, arrow) {
       );
     });
   } else {
-    $("#workflow-filtering").val(workflowId);
+    $("#workflow-filtering").val(path);
     if (tables["service"]) tables["service"].ajax.reload(null, false);
   }
 }

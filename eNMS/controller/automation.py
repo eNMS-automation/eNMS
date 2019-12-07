@@ -319,11 +319,14 @@ class AutomationController(BaseController):
         fetch("workflow", id=workflow_id).last_modified = self.get_time()
         return "skip" if skip else "unskip"
 
-    def get_service_state(self, service_id, runtime="latest"):
+    def get_service_state(self, path, runtime=None):
+        service_id = path.split(">")[-1]
         state, service = None, fetch("service", id=service_id)
         runs = fetch_all("run", service_id=service_id)
-        if runtime:
-            session["workflow"] = service_id
+        if not runtime:
+            runtime = "latest"
+        else:
+            session["workflow"] = path
         if runs and runtime != "normal":
             if runtime == "latest":
                 runtime = runs[-1].parent_runtime

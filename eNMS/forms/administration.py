@@ -18,6 +18,11 @@ class ConfigurationForm(BaseForm):
     form_type = HiddenField(default="configuration")
 
 
+class FilesForm(BaseForm):
+    template = "files"
+    form_type = HiddenField(default="files")
+
+
 class DatabaseDeletionForm(BaseForm):
     action = "databaseDeletion"
     form_type = HiddenField(default="database_deletion")

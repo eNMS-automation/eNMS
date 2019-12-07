@@ -634,6 +634,12 @@ function refreshTablePeriodically(tableType, interval) {
   setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
 }
 
+function displayFiles() {
+  showPanel('files', null, () => {
+    console.log("test");
+  });
+}
+
 function initSidebar() {
   let setContentHeight = function() {
     $(".right_col").css("min-height", $(window).height());

@@ -525,17 +525,19 @@ class BaseController:
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
 
-    def get_tree_files(self, folder):
-        path = self.config["paths"]["files"] or self.path / "files"
-        print(folder)
-        if folder == "root":
-            return [
-                {
-                    "text": file.name,
-                    "children": file.is_dir(),
-                    "type": "file" if file.is_dir() else "folder",
-                } for file in Path(path).iterdir()
-            ]
+    def get_tree_files(self, path):
+        if path == "root":
+            path = self.config["paths"]["files"] or self.path / "files"
+            path = str(path).replace("/", ">")
+        return [
+            {
+                "id": str(file).replace("/", ">"),
+                "text": file.name,
+                "children": file.is_dir(),
+                "type": "folder" if file.is_dir() else "file",
+            } for file in Path(path.replace(">", "/")).iterdir()
+        ]
+
 
     def get_time(self):
         return str(datetime.now())

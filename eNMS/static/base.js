@@ -642,9 +642,8 @@ function displayFiles() {
         themes: { stripes: true },
         data: {
           url: function(node) {
-            console.log(node)
-            const nodeId = node.id == "#" ? "root" : node.data.id;
-            return `/get_tree_files/${nodeId}`;
+            const path = node.id == "#" ? "root" : node.id;
+            return `/get_tree_files/${path}`;
           },
           type: "POST",
         },

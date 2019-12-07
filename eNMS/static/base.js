@@ -638,6 +638,10 @@ function downloadFile(file) {
   console.log(file);
 }
 
+function deleteFile(file) {
+  console.log(file);
+}
+
 (function($, jstree, undefined) {
   "use strict";
 
@@ -689,23 +693,24 @@ function displayFiles() {
       node_customize: {
         default: function(el, node) {
           if (node.type == "file") {
+            data = JSON.stringify(node);
             $(el).find("a").append(`
               <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
                   class="btn btn-xs btn-primary"
-                  onclick="editFile('${node.data.id}')"
+                  onclick='editFile(${data})'
                 >
                   <span class="glyphicon glyphicon-edit"></span>
                 </button>
                 <button type="button"
                 class="btn btn-xs btn-info"
-                onclick="downloadFile('${node.data.id}')"
+                onclick='downloadFile(${data})'
                 >
                 <span class="glyphicon glyphicon-download"></span>
                 </button>
                 <button type="button"
                   class="btn btn-xs btn-danger"
-                  onclick="deleteFile('${node.data.id}')"
+                  onclick='deleteFile(${data})'
                 >
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>

@@ -638,21 +638,38 @@ function downloadFile(file) {
   console.log(file);
 }
 
+(function ($, jstree, undefined) {
+	"use strict";
+
+	$.jstree.plugins.node_customize = function (options, parent) {
+		this.redraw_node = function (obj, deep, callback, force_draw) {
+			var node_id = obj;
+      var el = parent.redraw_node.apply(this, arguments);
+			if (el) {
+        var node = this._model.data[node_id];
+        console.log(node)
+				this.settings.node_customize.default(el, node);
+			}
+			return el;
+		};
+	}
+})(jQuery);
+
 function displayFiles() {
   showPanel('files', null, function() {
     let tree = $("#files-tree").jstree({
       core: {
         animation: 200,
-        themes: { stripes: true },
+        themes: { stripes: true, variant : "large"},
         data: {
           url: function(node) {
-            const path = node.id == "#" ? "root" : node.id;
+            const path = node.id == "#" ? "root" : node.data.path;
             return `/get_tree_files/${path.replace(/\//g, '>')}`;
           },
           type: "POST",
         },
       },
-      plugins: ["contextmenu", "state", "types", "wholerow"],
+      plugins: ["contextmenu", "node_customize", "state", "types", "wholerow"],
       contextmenu: {
         items: function customMenu(node) {
           return {
@@ -665,15 +682,20 @@ function displayFiles() {
         },
       },
       types: {
-        "default" : {
-        },
         "file" : {
           "icon" : "jstree-icon jstree-file",
         }
       },
-    });
-    tree.bind("hover_node.jstree", function (e, data) {
-      console.log(data);
+      node_customize: {
+        default: function(el, node) {
+          if (node.type == "file") {
+            $(el).find('a').append(`<button type="button" style="float: right" class="btn btn-xs btn-success"
+            onclick="normalRun('test')" data-tooltip="Run"
+            ><span class="glyphicon glyphicon-play"></span
+            ></button>`);
+          }
+        }
+      },
     });
   });
 }

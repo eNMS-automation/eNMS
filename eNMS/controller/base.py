@@ -122,6 +122,7 @@ class BaseController:
         "get_view_topology",
         "get_service_state",
         "get_top_level_workflows",
+        "get_tree_files",
         "get_workflow_results",
         "get_workflow_services",
         "import_service",
@@ -524,60 +525,17 @@ class BaseController:
         allowed_extension = name.rsplit(".", 1)[1].lower() in allowed_modules
         return allowed_syntax and allowed_extension
 
-    def get_workflow_services(self, folder):
+    def get_tree_files(self, folder):
         path = self.config["paths"]["files"] or self.path / "files"
-        for file in path.glob('**/*'):
-            print(file)
-        if node == "all":
+        print(folder)
+        if folder == "root":
             return [
                 {
-                    "data": {"id": "standalone"},
-                    "id": "standalone",
-                    "text": "Standalone services",
-                    "children": True,
-                    "state": {"disabled": True},
-                    "a_attr": {"class": "no_checkbox", "style": "color: #000000"},
-                    "type": "category",
-                }
+                    "text": file.name,
+                    "children": file.is_dir(),
+                    "type": "file" if file.is_dir() else "folder",
+                } for file in Path(path).iterdir()
             ]
-        elif node == "standalone":
-            return sorted(
-                (
-                    {
-                        "data": {"id": service.id},
-                        "text": service.scoped_name,
-                        "a_attr": {
-                            "style": (
-                                f"color: #{'FF1694' if service.shared else '6666FF'}"
-                            ),
-                        },
-                    }
-                    for service in fetch_all("service")
-                    if not service.workflows and service.type != "workflow"
-                ),
-                key=itemgetter("text"),
-            )
-        else:
-            return sorted(
-                (
-                    {
-                        "data": {"id": service.id},
-                        "text": service.scoped_name,
-                        "children": service.type == "workflow",
-                        "type": "workflow" if service.type == "workflow" else "service",
-                        "state": {"disabled": service in parents},
-                        "a_attr": {
-                            "class": "no_checkbox" if service in parents else "",
-                            "style": (
-                                f"color: #{'FF1694' if service.shared else '6666FF'}"
-                            ),
-                        },
-                    }
-                    for service in fetch("workflow", id=node).services
-                    if service.scoped_name not in ("Start", "End")
-                ),
-                key=itemgetter("text"),
-            )
 
     def get_time(self):
         return str(datetime.now())

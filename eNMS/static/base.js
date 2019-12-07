@@ -642,18 +642,19 @@ function displayFiles() {
         themes: { stripes: true },
         data: {
           url: function(node) {
-            const nodeId = node.id == "#" ? "all" : node.data.id;
-            return `/get_files/${nodeId}`;
+            console.log(node)
+            const nodeId = node.id == "#" ? "root" : node.data.id;
+            return `/get_tree_files/${nodeId}`;
           },
           type: "POST",
         },
       },
       plugins: ["types"],
       types: {
-        category: {
+        folder: {
           icon: "fa fa-folder",
         },
-        default: {
+        file: {
           icon: "glyphicon glyphicon-file",
         },
       },

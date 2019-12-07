@@ -648,14 +648,13 @@ function displayFiles() {
           type: "POST",
         },
       },
-      plugins: ["types"],
+      plugins: ["types", "wholerow"],
       types: {
-        folder: {
-          icon: "fa fa-folder",
+        "default" : {
         },
-        file: {
-          icon: "glyphicon glyphicon-file",
-        },
+        "file" : {
+          "icon" : "jstree-icon jstree-file",
+        }
       },
     });
   });

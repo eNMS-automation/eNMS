@@ -573,7 +573,7 @@ function addServicePanel() {
           type: "POST",
         },
       },
-      plugins: ["checkbox", "types"],
+      plugins: ["checkbox", "types", "wholerow"],
       checkbox: {
         three_state: false,
       },

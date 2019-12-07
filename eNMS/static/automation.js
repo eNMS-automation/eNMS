@@ -212,7 +212,7 @@ function displayResultsTree(service, runtime) {
         themes: { stripes: true },
         data: data,
       },
-      plugins: ["contextmenu", "types"],
+      plugins: ["contextmenu", "types", "wholerow"],
       contextmenu: {
         items: function customMenu(node) {
           return {

@@ -534,7 +534,7 @@ class BaseController:
                 "id": str(file).replace("/", ">"),
                 "text": file.name,
                 "children": file.is_dir(),
-                "type": "folder" if file.is_dir() else "file",
+                "type": "default" if file.is_dir() else "file",
             } for file in Path(path.replace(">", "/")).iterdir()
         ]
 

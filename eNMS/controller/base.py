@@ -545,7 +545,7 @@ class BaseController:
             }
             if file.is_file():
                 a = """"""
-                row["a_attr"] = {"style": "width: 90%"}
+                row["a_attr"] = {"style": "width: 100%"}
                 row["text"] += a
             table.append(row)
         return table

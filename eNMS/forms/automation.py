@@ -297,8 +297,8 @@ class AddServiceForm(BaseForm):
     mode = SelectField(
         "Mode",
         choices=(
-            ("deep", "Deep Copy (creates a duplicate from the service"),
-            ("shallow", "Shallow Copy (creates a reference to the service"),
+            ("deep", "Deep Copy (creates a duplicate from the service)"),
+            ("shallow", "Shallow Copy (creates a reference to the service)"),
         ),
     )
 

@@ -638,33 +638,33 @@ function downloadFile(file) {
   console.log(file);
 }
 
-(function ($, jstree, undefined) {
-	"use strict";
+(function($, jstree, undefined) {
+  "use strict";
 
-	$.jstree.plugins.node_customize = function (options, parent) {
-		this.redraw_node = function (obj, deep, callback, force_draw) {
-			var node_id = obj;
+  $.jstree.plugins.node_customize = function(options, parent) {
+    this.redraw_node = function(obj, deep, callback, force_draw) {
+      var node_id = obj;
       var el = parent.redraw_node.apply(this, arguments);
-			if (el) {
+      if (el) {
         var node = this._model.data[node_id];
-        console.log(node)
-				this.settings.node_customize.default(el, node);
-			}
-			return el;
-		};
-	}
+        console.log(node);
+        this.settings.node_customize.default(el, node);
+      }
+      return el;
+    };
+  };
 })(jQuery);
 
 function displayFiles() {
-  showPanel('files', null, function() {
+  showPanel("files", null, function() {
     let tree = $("#files-tree").jstree({
       core: {
         animation: 200,
-        themes: { stripes: true, variant : "large"},
+        themes: { stripes: true, variant: "large" },
         data: {
           url: function(node) {
             const path = node.id == "#" ? "root" : node.data.path;
-            return `/get_tree_files/${path.replace(/\//g, '>')}`;
+            return `/get_tree_files/${path.replace(/\//g, ">")}`;
           },
           type: "POST",
         },
@@ -682,19 +682,20 @@ function displayFiles() {
         },
       },
       types: {
-        "file" : {
-          "icon" : "jstree-icon jstree-file",
-        }
+        file: {
+          icon: "jstree-icon jstree-file",
+        },
       },
       node_customize: {
         default: function(el, node) {
           if (node.type == "file") {
-            $(el).find('a').append(`<button type="button" style="float: right" class="btn btn-xs btn-success"
-            onclick="normalRun('test')" data-tooltip="Run"
-            ><span class="glyphicon glyphicon-play"></span
-            ></button>`);
+            $(el).find("a").append(`
+              <button type="button" style="position: absolute; top: 5px; right: 50px" class="btn btn-xs btn-success"
+              onclick="normalRun('test')" data-tooltip="Run"
+              ><span class="glyphicon glyphicon-play"></span
+              ></button>`);
           }
-        }
+        },
       },
     });
   });

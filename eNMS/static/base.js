@@ -634,10 +634,6 @@ function refreshTablePeriodically(tableType, interval) {
   setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
 }
 
-function downloadFile(file) {
-  console.log(file);
-}
-
 function deleteFile(file) {
   call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
     $("#files-tree")
@@ -714,7 +710,7 @@ function displayFiles() {
                 </button>
                 <button type="button"
                 class="btn btn-xs btn-info"
-                onclick='downloadFile(${data})'
+                onclick="location.href='download_file/${node.data.path}'"
                 >
                 <span class="glyphicon glyphicon-download"></span>
                 </button>

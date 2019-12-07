@@ -5,6 +5,7 @@ from flask import (
     redirect,
     render_template,
     request,
+    send_file,
     session,
     url_for,
 )
@@ -176,6 +177,13 @@ def download_output(id):
         mimetype="text/plain",
         headers={"Content-Disposition": f"attachment;filename={filename}.txt"},
     )
+
+
+@blueprint.route("/download_file/<path:path>")
+@monitor_requests
+def download_file(path):
+    print(path)
+    return send_file(f"/{path}", as_attachment=True)
 
 
 @blueprint.route("/<path:_>")

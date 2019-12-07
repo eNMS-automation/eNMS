@@ -635,8 +635,29 @@ function refreshTablePeriodically(tableType, interval) {
 }
 
 function displayFiles() {
-  showPanel('files', null, () => {
-    console.log("test");
+  showPanel('files', null, function() {
+    $("#files-tree").jstree({
+      core: {
+        animation: 200,
+        themes: { stripes: true },
+        data: {
+          url: function(node) {
+            const nodeId = node.id == "#" ? "all" : node.data.id;
+            return `/get_files/${nodeId}`;
+          },
+          type: "POST",
+        },
+      },
+      plugins: ["types"],
+      types: {
+        category: {
+          icon: "fa fa-folder",
+        },
+        default: {
+          icon: "glyphicon glyphicon-file",
+        },
+      },
+    });
   });
 }
 

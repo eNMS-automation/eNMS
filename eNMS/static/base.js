@@ -634,21 +634,36 @@ function refreshTablePeriodically(tableType, interval) {
   setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
 }
 
+function downloadFile(file) {
+  console.log(file);
+}
+
 function displayFiles() {
   showPanel('files', null, function() {
-    $("#files-tree").jstree({
+    let tree = $("#files-tree").jstree({
       core: {
         animation: 200,
         themes: { stripes: true },
         data: {
           url: function(node) {
             const path = node.id == "#" ? "root" : node.id;
-            return `/get_tree_files/${path}`;
+            return `/get_tree_files/${path.replace(/\//g, '>')}`;
           },
           type: "POST",
         },
       },
-      plugins: ["types", "wholerow", "state"],
+      plugins: ["contextmenu", "state", "types", "wholerow"],
+      contextmenu: {
+        items: function customMenu(node) {
+          return {
+            item1: {
+              label: "Download",
+              action: () => downloadFile(node),
+              icon: "glyphicon glyphicon-download",
+            },
+          };
+        },
+      },
       types: {
         "default" : {
         },
@@ -656,6 +671,9 @@ function displayFiles() {
           "icon" : "jstree-icon jstree-file",
         }
       },
+    });
+    tree.bind("hover_node.jstree", function (e, data) {
+      console.log(data);
     });
   });
 }

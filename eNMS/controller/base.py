@@ -16,7 +16,7 @@ from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
 from os import environ, scandir
-from os.path import exists
+from os.path import exists, getmtime
 from pathlib import Path
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
@@ -528,14 +528,18 @@ class BaseController:
     def get_tree_files(self, path):
         if path == "root":
             path = self.config["paths"]["files"] or self.path / "files"
-            path = str(path).replace("/", ">")
+        else:
+            path = path.replace(">", "/")
         return [
             {
-                "id": str(file).replace("/", ">"),
+                "id": str(file),
+                "data": {
+                    "modified": getmtime(str(file))
+                },
                 "text": file.name,
                 "children": file.is_dir(),
                 "type": "default" if file.is_dir() else "file",
-            } for file in Path(path.replace(">", "/")).iterdir()
+            } for file in Path(path).iterdir()
         ]
 
 

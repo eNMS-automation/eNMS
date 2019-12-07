@@ -222,11 +222,6 @@ function displayResultsTree(service, runtime) {
                 showRuntimePanel("results", node.data, runtime, true),
               icon: "glyphicon glyphicon-list-alt",
             },
-            item2: {
-              label: "Edit",
-              action: () => showTypePanel("service", node.data.id),
-              icon: "glyphicon glyphicon-edit",
-            },
           };
         },
       },

@@ -676,8 +676,11 @@ function saveFile(file) {
   });
 }
 
-function uploadFiles(folder) {
-  console.log(folder);
+function showFileUploadPanel(folder) {
+  const path = folder.replace(/\//g, ">");
+  createPanel("upload_files", `Upload files to ${folder}`, path, () => {
+    $(`[id="dropzone-${path}"]`).dropzone({ url: "/upload_files" });
+  });
 }
 
 (function($, jstree, undefined) {
@@ -749,7 +752,7 @@ function displayFiles() {
               <div style="position: absolute; top: 0px; right: 50px">
               <button type="button"
               class="btn btn-xs btn-primary"
-              onclick="uploadFiles('${node.data.path}')"
+              onclick="showFileUploadPanel('${node.data.path}')"
             >
               <span class="glyphicon glyphicon-plus"></span>
             </button>

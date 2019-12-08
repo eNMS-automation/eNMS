@@ -1,0 +1,15 @@
+<div class="modal-body">
+  <center>
+    <button
+      type="button"
+      class="btn btn-success btn-sm add-id btn-id"
+      value="uploadFiles"
+      data-tooltip="Upload Files"
+    >
+      <span class="glyphicon glyphicon-ok"></span>
+    </button>
+  </center>
+  <form id="dropzone" class="dropzone add-id" style="height: 500px">
+    {{ form.csrf_token() }} {{ form.form_type() }}
+  </form>
+</div>

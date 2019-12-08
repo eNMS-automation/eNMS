@@ -23,6 +23,11 @@ class FilesForm(BaseForm):
     form_type = HiddenField(default="files")
 
 
+class UploadFilesForm(BaseForm):
+    template = "upload_files"
+    form_type = HiddenField(default="upload_files")
+
+
 class DatabaseDeletionForm(BaseForm):
     action = "databaseDeletion"
     form_type = HiddenField(default="database_deletion")

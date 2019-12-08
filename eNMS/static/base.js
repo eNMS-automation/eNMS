@@ -227,7 +227,7 @@ function fCall(url, form, callback) {
   $.ajax({
     type: "POST",
     url: url,
-    data: $(form).serialize(),
+    data: $(`[id="${form}"]`).serialize(),
     success: function(results) {
       processResults(callback, results);
     },
@@ -352,7 +352,7 @@ function preprocessForm(panel, id, type, duplicate) {
     if (id) {
       $(el).attr(
         "onclick",
-        type ? `${el.value}("${type}", ${id})` : `${el.value}(${id})`
+        type ? `${el.value}("${type}", "${id}")` : `${el.value}("${id}")`
       );
     } else {
       $(el).attr("onclick", type ? `${el.value}("${type}")` : `${el.value}()`);
@@ -649,11 +649,13 @@ function deleteFile(file) {
 
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
+  console.log(filepath)
   call(`/edit_file/${filepath}`, function(content) {
+    console.log(content)
     createPanel("file", `Edit ${file.data.path}`, filepath, () => {
       const display = document.getElementById(`file-content-${filepath}`);
       // eslint-disable-next-line new-cap
-      let editor = CodeMirror(display, {
+      let editor = CodeMirror.fromTextArea(display, {
         lineWrapping: true,
         lineNumbers: true,
         theme: "cobalt",
@@ -666,6 +668,12 @@ function editFile(file) {
       editors[filepath] = editor;
       editor.setValue(content);
     });
+  });
+}
+
+function saveFile(file) {
+  fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
+    alertify.notify("File successfully saved.", "success", 5);
   });
 }
 

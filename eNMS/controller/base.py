@@ -136,6 +136,7 @@ class BaseController:
         "query_opennms",
         "reset_status",
         "run_service",
+        "save_file",
         "save_parameters",
         "save_pool_objects",
         "save_positions",
@@ -556,6 +557,14 @@ class BaseController:
                 return file.read()
         except Exception as exc:
             return {"error": f"Cannot read file (unsupported type)."}
+
+    def save_file(self, filepath, **kwargs):
+        print(kwargs)
+        if "content" in kwargs:
+                
+            with open(Path(filepath.replace(">", "/")), "w") as file:
+                return file.write(content)
+
 
     def get_time(self):
         return str(datetime.now())

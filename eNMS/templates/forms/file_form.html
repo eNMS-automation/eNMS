@@ -1,21 +1,22 @@
-<div class="modal-body add-id" style="background-color: #1B1B1B; height: 100%">
-  <center>
+
+  <div class="modal-body add-id" style="background-color: #1B1B1B; height: 100%">
+      <form
+      id="file-content-form"
+      class="form-horizontal form-label-left add-id"
+      method="post"
+      autocomplete="off"
+      >
+    <center>
       <button
-      type="button"
-      class="btn btn-success btn-sm"
-      onclick="showDeletionPanel({self.row_properties})"
-      data-tooltip="Delete"
-    >
-      <span class="glyphicon glyphicon-ok"></span>
-    </button>
-  <button
-    type="button"
-    class="btn btn-info btn-sm"
-    onclick="showDeletionPanel({self.row_properties})"
-    data-tooltip="Delete"
-  >
-    <span class="glyphicon glyphicon-download"></span>
-  </button>
-</center>
-  <div id="file-content" class="add-id" style="height: 100%"></div>
-</div>
+        type="button"
+        class="btn btn-success btn-sm add-id btn-id"
+        value="saveFile"
+        data-tooltip="Save"
+      >
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+    </center>
+    <textarea id="file-content" class="add-id" style="height: 100%"></textarea>
+  </form>
+  </div>
+

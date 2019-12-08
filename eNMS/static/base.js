@@ -678,18 +678,7 @@ function displayFiles() {
           type: "POST",
         },
       },
-      plugins: ["contextmenu", "node_customize", "state", "types", "wholerow"],
-      contextmenu: {
-        items: function customMenu(node) {
-          return {
-            item1: {
-              label: "Download",
-              action: () => downloadFile(node),
-              icon: "glyphicon glyphicon-download",
-            },
-          };
-        },
-      },
+      plugins: ["node_customize", "state", "types", "wholerow"],
       types: {
         file: {
           icon: "jstree-icon jstree-file",

@@ -679,7 +679,20 @@ function saveFile(file) {
 function showFileUploadPanel(folder) {
   const path = folder.replace(/\//g, ">");
   createPanel("upload_files", `Upload files to ${folder}`, path, () => {
-    $(`[id="dropzone-${path}"]`).dropzone({ url: "/upload_files" });
+    element = document.getElementById(`dropzone-${path}`);
+    let dropzone = new Dropzone(element, {
+      url: "/upload_files",
+      autoProcessQueue: false,
+    });
+    $(`[id="dropzone-submit-${path}"]`).click(function() {
+      dropzone.processQueue();
+    });
+  });
+}
+
+function uploadFiles() {
+  call(`/upload_files`, function() {
+    alertify.notify("File successfully saved.", "success", 5);
   });
 }
 

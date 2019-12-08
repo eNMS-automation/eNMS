@@ -185,6 +185,13 @@ def download_file(path):
     return send_file(f"/{path}", as_attachment=True)
 
 
+@blueprint.route("/upload_files", methods=["POST"])
+@monitor_requests
+def upload_files():
+    print(request.files)
+    return send_file(f"/{path}", as_attachment=True)
+
+
 @blueprint.route("/<path:_>")
 @monitor_requests
 def get_requests_sink(_):

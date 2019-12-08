@@ -650,7 +650,7 @@ function deleteFile(file) {
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
   call(`/edit_file/${filepath}`, function(content) {
-    showPanel("file", filepath, () => {
+    createPanel("file", `Edit ${file.data.path}`, filepath, () => {
       const display = document.getElementById(`file-content-${filepath}`);
       // eslint-disable-next-line new-cap
       let editor = CodeMirror(display, {
@@ -663,11 +663,10 @@ function editFile(file) {
         scrollbarStyle: "overlay",
       });
       editor.setSize("100%", "100%");
-      editors[filepath] = editor
-      editor.setValue(content)
+      editors[filepath] = editor;
+      editor.setValue(content);
     });
   });
-
 }
 
 (function($, jstree, undefined) {

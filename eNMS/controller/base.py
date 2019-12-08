@@ -555,7 +555,7 @@ class BaseController:
             with open(Path(filepath.replace(">", "/"))) as file:
                 return file.read()
         except Exception as exc:
-            return {"error": f"Cannot open {filepath} ({exc})"}
+            return {"error": f"Cannot read file (unsupported type)."}
 
     def get_time(self):
         return str(datetime.now())

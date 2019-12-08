@@ -559,12 +559,9 @@ class BaseController:
             return {"error": f"Cannot read file (unsupported type)."}
 
     def save_file(self, filepath, **kwargs):
-        print(kwargs)
-        if "content" in kwargs:
-                
+        if kwargs.get("file_content"):
             with open(Path(filepath.replace(">", "/")), "w") as file:
-                return file.write(content)
-
+                return file.write(kwargs["file_content"])
 
     def get_time(self):
         return str(datetime.now())

@@ -182,7 +182,6 @@ def download_output(id):
 @blueprint.route("/download_file/<path:path>")
 @monitor_requests
 def download_file(path):
-    print(path)
     return send_file(f"/{path}", as_attachment=True)
 
 

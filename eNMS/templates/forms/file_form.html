@@ -1,11 +1,11 @@
-
-  <div class="modal-body add-id" style="background-color: #1B1B1B; height: 100%">
-      <form
-      id="file-content-form"
-      class="form-horizontal form-label-left add-id"
-      method="post"
-      autocomplete="off"
-      >
+<div class="modal-body" style="background-color: #1B1B1B; height: 100%">
+  <form
+    id="file-content-form"
+    class="form-horizontal form-label-left add-id"
+    method="post"
+    autocomplete="off"
+  >
+  {{ form.csrf_token() }} {{ form.form_type() }}
     <center>
       <button
         type="button"
@@ -16,7 +16,6 @@
         <span class="glyphicon glyphicon-ok"></span>
       </button>
     </center>
-    <textarea id="file-content" class="add-id" style="height: 100%"></textarea>
+    {{ form.file_content(id='file_content', class="form-control add-id") }}
   </form>
-  </div>
-
+</div>

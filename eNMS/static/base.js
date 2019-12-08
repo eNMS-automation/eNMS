@@ -649,11 +649,9 @@ function deleteFile(file) {
 
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
-  console.log(filepath)
   call(`/edit_file/${filepath}`, function(content) {
-    console.log(content)
     createPanel("file", `Edit ${file.data.path}`, filepath, () => {
-      const display = document.getElementById(`file-content-${filepath}`);
+      const display = document.getElementById(`file_content-${filepath}`);
       // eslint-disable-next-line new-cap
       let editor = CodeMirror.fromTextArea(display, {
         lineWrapping: true,
@@ -672,6 +670,7 @@ function editFile(file) {
 }
 
 function saveFile(file) {
+  $(`[id="file_content-${file}"]`).text(editors[file].getValue());
   fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
     alertify.notify("File successfully saved.", "success", 5);
   });

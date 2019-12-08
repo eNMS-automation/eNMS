@@ -294,6 +294,7 @@ class DisplayConfigurationForm(DisplayForm):
 class FileForm(DisplayForm):
     template = "file"
     form_type = HiddenField(default="file")
+    file_content = StringField(widget=TextArea(), render_kw={"rows": 8})
 
 
 class AddServiceForm(BaseForm):

@@ -535,7 +535,7 @@ class BaseController:
             path = path.replace(">", "/")
         return [
             {
-                "a_attr": {"style": "width: 100%" if file.is_file() else ""},
+                "a_attr": {"style": "width: 100%"},
                 "data": {
                     "modified": getmtime(str(file)),
                     "path": str(file),

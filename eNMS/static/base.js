@@ -676,6 +676,10 @@ function saveFile(file) {
   });
 }
 
+function uploadFiles(folder) {
+  console.log(folder);
+}
+
 (function($, jstree, undefined) {
   "use strict";
 
@@ -694,7 +698,7 @@ function saveFile(file) {
 
 function displayFiles() {
   showPanel("files", null, function() {
-    let tree = $("#files-tree").jstree({
+    $("#files-tree").jstree({
       core: {
         animation: 200,
         themes: { stripes: true, variant: "large" },
@@ -718,7 +722,6 @@ function displayFiles() {
           if (!node) return;
           if (node.type == "file") {
             data = JSON.stringify(node);
-            console.log(node.data.path)
             $(el).find("a").append(`
               <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
@@ -739,6 +742,17 @@ function displayFiles() {
                 >
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>
+              </div>
+              `);
+          } else {
+            $(el).find("a").append(`
+              <div style="position: absolute; top: 0px; right: 50px">
+              <button type="button"
+              class="btn btn-xs btn-primary"
+              onclick="uploadFiles('${node.data.path}')"
+            >
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
               </div>
               `);
           }

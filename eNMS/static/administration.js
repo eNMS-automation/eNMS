@@ -69,7 +69,7 @@ function queryLibreNMS() {
 // eslint-disable-next-line
 function exportTopology() {
   alertify.notify("Topology export starting...", "success", 5);
-  fCall("/export_topology", "#excel_export-form", function() {
+  fCall("/export_topology", "excel_export-form", function() {
     alertify.notify("Topology successfully exported.", "success", 5);
   });
 }
@@ -103,7 +103,7 @@ function getClusterStatus() {
 // eslint-disable-next-line
 function migrationsExport() {
   alertify.notify("Export initiated.", "success", 5);
-  fCall("/migration_export", "#migration-form", function() {
+  fCall("/migration_export", "migration-form", function() {
     alertify.notify("Export successful.", "success", 5);
   });
 }
@@ -123,7 +123,7 @@ function showMigrationPanel() {
 // eslint-disable-next-line
 function migrationsImport() {
   alertify.notify("Import initiated.", "success", 5);
-  fCall("/migration_import", "#migration-form", function(result) {
+  fCall("/migration_import", "migration-form", function(result) {
     alertify.notify(result, "success", 5);
   });
 }
@@ -158,7 +158,7 @@ function importService() {
 // eslint-disable-next-line
 function databaseDeletion() {
   alertify.notify("Starting to delete...", "success", 5);
-  fCall("/database_deletion", "#database_deletion-form", function(result) {
+  fCall("/database_deletion", "database_deletion-form", function(result) {
     alertify.notify("Deletion done.", "success", 5);
     $("#deletion-form").remove();
   });

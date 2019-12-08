@@ -299,7 +299,7 @@ function addServicesToWorkflow() {
   $("#services").val(selection.map((n) => n.data.id));
   fCall(
     `/copy_service_in_workflow/${workflow.id}`,
-    "#add-services-form",
+    "add-services-form",
     function(result) {
       workflow.last_modified = result.update_time;
       $("#add_services").remove();
@@ -647,7 +647,7 @@ function createLabel() {
     ? [mousePosition.x, mousePosition.y]
     : [0, 0];
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
-  fCall(`/create_label/${params}`, "#workflow_label-form", function(result) {
+  fCall(`/create_label/${params}`, "workflow_label-form", function(result) {
     if (currLabel) {
       deleteLabel(currLabel, true);
       currLabel = null;
@@ -712,7 +712,7 @@ function showRestartWorkflowPanel(workflow, service) {
 
 // eslint-disable-next-line
 function restartWorkflow() {
-  fCall(`/run_service/${workflow.id}`, `#restart_workflow-form`, function(
+  fCall(`/run_service/${workflow.id}`, `restart_workflow-form`, function(
     result
   ) {
     $(`#restart_workflow-${workflow.id}`).remove();

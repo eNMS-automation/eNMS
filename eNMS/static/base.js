@@ -541,7 +541,7 @@ function processData(type, id) {
   }
   fCall(
     `/update/${type}`,
-    id ? `#edit-${type}-form-${id}` : `#edit-${type}-form`,
+    id ? `edit-${type}-form-${id}` : `edit-${type}-form`,
     (instance) => {
       const tableType =
         type.includes("service") || type == "workflow" ? "service" : type;

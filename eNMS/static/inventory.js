@@ -14,7 +14,7 @@ tables: false
 
 // eslint-disable-next-line
 function sshConnection(id) {
-  fCall(`/connection/${id}`, `#connection-parameters-form-${id}`, function(
+  fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
     let url = config.app.address;
@@ -38,7 +38,7 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function savePoolObjects(id) {
-  fCall(`/save_pool_objects/${id}`, `#pool-objects-form-${id}`, function() {
+  fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);
     alertify.notify("Changes saved.", "success", 5);
     $(`#pool_objects-${id}`).remove();

@@ -718,6 +718,7 @@ function displayFiles() {
           if (!node) return;
           if (node.type == "file") {
             data = JSON.stringify(node);
+            console.log(node.data.path)
             $(el).find("a").append(`
               <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
@@ -728,7 +729,7 @@ function displayFiles() {
                 </button>
                 <button type="button"
                 class="btn btn-xs btn-info"
-                onclick="location.href='download_file/${node.data.path}'"
+                onclick="location.href='/download_file/${node.data.path}'"
                 >
                 <span class="glyphicon glyphicon-download"></span>
                 </button>

@@ -291,6 +291,11 @@ class DisplayConfigurationForm(DisplayForm):
     form_type = HiddenField(default="display_configuration")
 
 
+class FileForm(DisplayForm):
+    template = "file"
+    form_type = HiddenField(default="file")
+
+
 class AddServiceForm(BaseForm):
     form_type = HiddenField(default="add_services")
     template = "add_services"

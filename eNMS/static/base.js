@@ -649,10 +649,9 @@ function deleteFile(file) {
 
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
-  showPanel("display", filepath, () => {
-    call(`/edit_file/${filepath}`, function(content) {
-      console.log(`display-${filepath}`)
-      const display = document.getElementById(`display-${filepath}`);
+  call(`/edit_file/${filepath}`, function(content) {
+    showPanel("file", filepath, () => {
+      const display = document.getElementById(`file-content-${filepath}`);
       // eslint-disable-next-line new-cap
       let editor = CodeMirror(display, {
         lineWrapping: true,
@@ -668,6 +667,7 @@ function editFile(file) {
       editor.setValue(content)
     });
   });
+
 }
 
 (function($, jstree, undefined) {

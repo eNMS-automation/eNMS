@@ -551,8 +551,11 @@ class BaseController:
         remove(Path(filepath.replace(">", "/")))
 
     def edit_file(self, filepath):
-        with open(Path(filepath.replace(">", "/"))) as file:
-            return file.read()
+        try:
+            with open(Path(filepath.replace(">", "/"))) as file:
+                return file.read()
+        except Exception as exc:
+            return {"error": f"Cannot open {filepath} ({exc})"}
 
     def get_time(self):
         return str(datetime.now())

@@ -555,7 +555,7 @@ class BaseController:
         try:
             with open(Path(filepath.replace(">", "/"))) as file:
                 return file.read()
-        except Exception as exc:
+        except UnicodeDecodeError:
             return {"error": f"Cannot read file (unsupported type)."}
 
     def save_file(self, filepath, **kwargs):

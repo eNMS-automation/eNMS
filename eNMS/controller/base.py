@@ -109,6 +109,7 @@ class BaseController:
         "export_service",
         "export_topology",
         "delete_file",
+        "edit_file",
         "get",
         "get_all",
         "get_cluster_status",
@@ -548,6 +549,10 @@ class BaseController:
 
     def delete_file(self, filepath):
         remove(Path(filepath.replace(">", "/")))
+
+    def edit_file(self, filepath):
+        with open(Path(filepath.replace(">", "/"))) as file:
+            return file.read()
 
     def get_time(self):
         return str(datetime.now())

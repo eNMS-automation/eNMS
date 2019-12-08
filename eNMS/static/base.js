@@ -647,6 +647,29 @@ function deleteFile(file) {
   });
 }
 
+function editFile(file) {
+  const filepath = file.data.path.replace(/\//g, ">");
+  showPanel("display", filepath, () => {
+    call(`/edit_file/${filepath}`, function(content) {
+      console.log(`display-${filepath}`)
+      const display = document.getElementById(`display-${filepath}`);
+      // eslint-disable-next-line new-cap
+      let editor = CodeMirror(display, {
+        lineWrapping: true,
+        lineNumbers: true,
+        theme: "cobalt",
+        matchBrackets: true,
+        mode: "python",
+        extraKeys: { "Ctrl-F": "findPersistent" },
+        scrollbarStyle: "overlay",
+      });
+      editor.setSize("100%", "100%");
+      editors[filepath] = editor
+      editor.setValue(content)
+    });
+  });
+}
+
 (function($, jstree, undefined) {
   "use strict";
 

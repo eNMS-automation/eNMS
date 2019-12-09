@@ -6,6 +6,7 @@ call: false
 cantorPairing: false
 CodeMirror: false
 createPanel: false
+currentPath: true
 diffview: false
 displayWorkflow: false
 editors: true
@@ -186,7 +187,7 @@ function displayLogs(service, runtime, change) {
   const content = document.getElementById(`content-${service.id}`);
   let editor;
   if (change) {
-    editor = $(`#content-${service.id}`).data('CodeMirrorInstance');
+    editor = $(`#content-${service.id}`).data("CodeMirrorInstance");
     editor.setValue("");
   } else {
     // eslint-disable-next-line new-cap
@@ -199,7 +200,7 @@ function displayLogs(service, runtime, change) {
       extraKeys: { "Ctrl-F": "findPersistent" },
       scrollbarStyle: "overlay",
     });
-    $(`#content-${service.id}`).data('CodeMirrorInstance', editor);
+    $(`#content-${service.id}`).data("CodeMirrorInstance", editor);
     editor.setSize("100%", "100%");
   }
   $(`#runtimes-${service.id}`).on("change", function() {
@@ -342,7 +343,7 @@ function switchToWorkflow(path, arrow) {
   currentPath = path;
   if (!arrow) {
     arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, path);
+    arrowHistory.splice(arrowPointer, 9e9, currentPath);
   } else {
     arrowPointer += arrow == "right" ? 1 : -1;
   }
@@ -357,7 +358,7 @@ function switchToWorkflow(path, arrow) {
     $("#right-arrow").addClass("disabled");
   }
   if (page == "workflow_builder") {
-    call(`/get_service_state/${path}/latest`, function(result) {
+    call(`/get_service_state/${currentPath}/latest`, function(result) {
       workflow = result.service;
       displayWorkflow(result);
       alertify.notify(
@@ -367,7 +368,7 @@ function switchToWorkflow(path, arrow) {
       );
     });
   } else {
-    $("#workflow-filtering").val(path);
+    $("#workflow-filtering").val(currentPath);
     if (tables["service"]) tables["service"].ajax.reload(null, false);
   }
 }

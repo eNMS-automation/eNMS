@@ -340,7 +340,7 @@ class Run(AbstractBase):
         return derived_run.run(payload)["success"]
 
     def device_run(self, payload):
-        self.devices, success = self.compute_devices(payload), True
+        self.devices = self.compute_devices(payload)
         if self.run_method != "per_device":
             return self.get_results(payload)
         else:
@@ -349,7 +349,7 @@ class Run(AbstractBase):
                 if not self.workflow:
                     return {
                         "success": False,
-                        "result": "Device iteration is not allowed outside of a workflow",
+                        "result": "Device iteration not allowed outside of a workflow",
                         "runtime": self.runtime,
                     }
                 results = [

@@ -6,6 +6,7 @@ arrowHistory: false
 arrowPointer: false
 call: false
 createPanel: false
+currentPath: true
 currentRuntime: true
 fCall: false
 normalRun: false
@@ -792,9 +793,10 @@ function displayWorkflowState(result) {
         if (!edges.get(id)) return;
         edges.update({
           id: id,
-          label: typeof devices == "string" 
-            ? `<b>${devices}</b>`
-            : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
+          label:
+            typeof devices == "string"
+              ? `<b>${devices}</b>`
+              : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
           font: { size: 15, multi: "html" },
         });
       });

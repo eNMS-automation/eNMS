@@ -190,7 +190,7 @@ function displayLogs(service, runtime) {
     lineNumbers: true,
     readOnly: true,
     theme: "cobalt",
-    mode: "null",
+    mode: "logs",
     extraKeys: { "Ctrl-F": "findPersistent" },
     scrollbarStyle: "overlay",
   });

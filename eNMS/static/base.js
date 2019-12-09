@@ -694,6 +694,10 @@ function showFileUploadPanel(folder) {
   });
 }
 
+function createNewFolder() {
+  console.log("Not implemented yet.")
+}
+
 (function($, jstree, undefined) {
   "use strict";
 
@@ -737,6 +741,9 @@ function displayFiles() {
           if (node.type == "file") {
             data = JSON.stringify(node);
             $(el).find("a").append(`
+              <div style="position: absolute; top: 0px; right: 200px">
+                ${node.data.modified}
+              </div>
               <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
                   class="btn btn-xs btn-primary"

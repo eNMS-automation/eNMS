@@ -29,6 +29,7 @@ from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
+from time import ctime
 from uuid import getnode
 
 from eNMS.config import config
@@ -538,7 +539,7 @@ class BaseController:
             {
                 "a_attr": {"style": "width: 100%"},
                 "data": {
-                    "modified": getmtime(str(file)),
+                    "modified": ctime(getmtime(str(file))),
                     "path": str(file),
                     "name": file.name,
                 },

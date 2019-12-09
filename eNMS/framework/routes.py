@@ -129,12 +129,12 @@ def view(view_type):
 def workflow_builder():
     workflow, workflow_path = None, session.get("path", None)
     if workflow_path:
-        workflow = fetch("workflow", id=workflow_path.split(">")[-1]).serialized
+        workflow = fetch("workflow", allow_none=True, id=workflow_path.split(">")[-1])
     return render_template(
         f"pages/workflow_builder.html",
         **{
             "endpoint": "workflow_builder",
-            "workflow": workflow,
+            "workflow": workflow.serialized if workflow else None,
             "path": session.get("path", ""),
         },
     )

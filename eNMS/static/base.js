@@ -685,14 +685,11 @@ function showFileUploadPanel(folder) {
       autoProcessQueue: false,
     });
     $(`[id="dropzone-submit-${path}"]`).click(function() {
+      console.log(folder)
+      console.log($(`[id="folder-${path}"]`).length)
+      $(`[id="folder-${path}"]`).val(folder);
       dropzone.processQueue();
     });
-  });
-}
-
-function uploadFiles() {
-  call(`/upload_files`, function() {
-    alertify.notify("File successfully saved.", "success", 5);
   });
 }
 

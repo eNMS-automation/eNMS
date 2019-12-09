@@ -25,6 +25,7 @@ class FilesForm(BaseForm):
 
 class UploadFilesForm(BaseForm):
     template = "upload_files"
+    folder = HiddenField()
     form_type = HiddenField(default="upload_files")
 
 

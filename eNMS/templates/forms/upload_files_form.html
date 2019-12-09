@@ -10,6 +10,6 @@
     </button>
   </center>
   <form id="dropzone" class="dropzone add-id" style="height: 500px">
-    {{ form.csrf_token() }} {{ form.form_type() }}
+    {{ form.csrf_token() }} {{ form.form_type() }} {{ form.folder(class="add-id") }}
   </form>
 </div>

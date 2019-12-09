@@ -151,6 +151,7 @@ class BaseController:
         "update_parameters",
         "update_pool",
         "update_all_pools",
+        "upload_files",
     ]
 
     rest_endpoints = [
@@ -562,6 +563,10 @@ class BaseController:
         if kwargs.get("file_content"):
             with open(Path(filepath.replace(">", "/")), "w") as file:
                 return file.write(kwargs["file_content"])
+
+    def upload_files(self, **kwargs):
+        file = kwargs['file']
+        file.save(f"{kwargs['folder']}/{file.filename}")
 
     def get_time(self):
         return str(datetime.now())

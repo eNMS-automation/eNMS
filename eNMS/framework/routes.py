@@ -13,6 +13,7 @@ from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from logging import info
 from os import listdir
+from pathlib import Path
 from werkzeug.wrappers import Response
 
 from eNMS import app
@@ -182,13 +183,6 @@ def download_output(id):
 @blueprint.route("/download_file/<path:path>")
 @monitor_requests
 def download_file(path):
-    return send_file(f"/{path}", as_attachment=True)
-
-
-@blueprint.route("/upload_files", methods=["POST"])
-@monitor_requests
-def upload_files():
-    print(request.files)
     return send_file(f"/{path}", as_attachment=True)
 
 

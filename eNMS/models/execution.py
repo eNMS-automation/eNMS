@@ -320,7 +320,9 @@ class Run(AbstractBase):
 
     def device_iteration(self, payload, device):
         derived_devices = self.compute_devices_from_query(
-            self.iteration_devices, self.iteration_devices_property, **locals()
+            self.service.iteration_devices,
+            self.service.iteration_devices_property,
+            **locals(),
         )
         derived_run = factory(
             "run",
@@ -350,10 +352,10 @@ class Run(AbstractBase):
                         "result": "Device iteration is not allowed outside of a workflow",
                         "runtime": self.runtime,
                     }
-                success = all(
+                results = [
                     self.device_iteration(payload, device) for device in self.devices
-                )
-                return {"success": success, "runtime": self.runtime}
+                ]
+                return {"success": all(results), "runtime": self.runtime}
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)

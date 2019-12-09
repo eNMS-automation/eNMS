@@ -138,7 +138,9 @@ class Workflow(Service):
                         "failure": [],
                     },
                 }
-                run.run_state["progress"]["service"]["skipped"] += len(targets[service.name])
+                run.run_state["progress"]["service"]["skipped"] += len(
+                    targets[service.name]
+                )
             else:
                 kwargs = {
                     "devices": [

@@ -106,7 +106,7 @@ class AutomationController(BaseController):
         )
         workflow.services.remove(service)
         if not service.shared:
-            Session.delete(service)
+            delete("service", id=service.id)
         now = self.get_time()
         workflow.last_modified = now
         return {"service": service.serialized, "update_time": now}

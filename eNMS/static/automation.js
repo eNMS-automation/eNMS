@@ -172,7 +172,7 @@ function showRuntimePanel(type, service, runtime, displayTable) {
             .val(runtime)
             .selectpicker("refresh");
           $(`#runtimes-${service.id}`).on("change", function() {
-            displayFunction(service, this.value);
+            displayFunction(service, this.value, true);
           });
           displayFunction(service, runtime);
         }
@@ -181,20 +181,27 @@ function showRuntimePanel(type, service, runtime, displayTable) {
   });
 }
 
-function displayLogs(service, runtime) {
+function displayLogs(service, runtime, change) {
   $(`#body-runtime-${service.id}`).css("background-color", "#1B1B1B");
   const content = document.getElementById(`content-${service.id}`);
-  // eslint-disable-next-line new-cap
-  let editor = CodeMirror(content, {
-    lineWrapping: true,
-    lineNumbers: true,
-    readOnly: true,
-    theme: "cobalt",
-    mode: "null",
-    extraKeys: { "Ctrl-F": "findPersistent" },
-    scrollbarStyle: "overlay",
-  });
-  editor.setSize("100%", "100%");
+  let editor;
+  if (change) {
+    editor = $(`#content-${service.id}`).data('CodeMirrorInstance');
+    editor.setValue("");
+  } else {
+    // eslint-disable-next-line new-cap
+    editor = CodeMirror(content, {
+      lineWrapping: true,
+      lineNumbers: true,
+      readOnly: true,
+      theme: "cobalt",
+      mode: "null",
+      extraKeys: { "Ctrl-F": "findPersistent" },
+      scrollbarStyle: "overlay",
+    });
+    $(`#content-${service.id}`).data('CodeMirrorInstance', editor);
+    editor.setSize("100%", "100%");
+  }
   $(`#runtimes-${service.id}`).on("change", function() {
     refreshLogs(service, this.value, editor);
   });

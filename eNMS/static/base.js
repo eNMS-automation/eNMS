@@ -673,6 +673,7 @@ function saveFile(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
   fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
     alertify.notify("File successfully saved.", "success", 5);
+    $(`[id="file-${file}"`).remove();
   });
 }
 
@@ -685,10 +686,10 @@ function showFileUploadPanel(folder) {
       autoProcessQueue: false,
     });
     $(`[id="dropzone-submit-${path}"]`).click(function() {
-      console.log(folder)
-      console.log($(`[id="folder-${path}"]`).length)
       $(`[id="folder-${path}"]`).val(folder);
       dropzone.processQueue();
+      alertify.notify("File successfully uploaded.", "success", 5);
+      $(`[id="upload_files-${path}"]`).remove();
     });
   });
 }

@@ -2,6 +2,13 @@
 Release Notes
 =============
 
+Version 3.19
+------------
+
+- Add new File Management mechanism: browse, download, upload, delete and rename local files.
+  Use local files as part of the automation services.
+- Add new color code for the logs window. 
+
 Version 3.18
 ------------
 
@@ -26,12 +33,6 @@ Version 3.18
   - run device by device
   - service by service with workflow targets
   - service by service with service targets
-
-- Fix start/end deletion issue + display
-- Fix tree bug with shared service in different subworkflows not properly displayed
-- Run Only Once services show no longer displays ( 0 failed / 0 passed).
-- Fix services displayed as red when successful
-- Fix service order in the workflow
 
 Version 3.17.2
 --------------

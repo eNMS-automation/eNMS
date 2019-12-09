@@ -409,14 +409,14 @@ class Run(AbstractBase):
                     return results
                 elif retry < self.number_of_retries:
                     sleep(self.time_between_retries)
-            except Exception:
+            except Exception as exc:
                 result = (
                     f"Running {self.service.type} '{self.service.name}'"
                     " raised the following exception:\n"
                     f"{chr(10).join(format_exc().splitlines())}\n\n"
                     "Run aborted..."
                 )
-                self.log("error", result, device)
+                self.log("error", str(exc), device)
                 return {"success": False, "result": result}
         return results
 

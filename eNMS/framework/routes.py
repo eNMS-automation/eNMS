@@ -129,17 +129,15 @@ def view(view_type):
 @blueprint.route("/workflow_builder")
 @monitor_requests
 def workflow_builder():
-    path = session.get("path", None)
+    workflow, path = None, session.get("path", "")
     if path:
-        workflow = fetch("workflow", id=path.split(">")[-1]).serialized
-    else:
-        workflow = None
+        workflow = fetch("workflow", allow_none=True, id=path.split(">")[-1])
     return render_template(
         f"pages/workflow_builder.html",
         **{
             "endpoint": "workflow_builder",
-            "workflow": workflow,
-            "path": session.get("path", ""),
+            "workflow": workflow.serialized if workflow else None,
+            "path": path,
         },
     )
 

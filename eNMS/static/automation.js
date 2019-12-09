@@ -6,6 +6,7 @@ call: false
 cantorPairing: false
 CodeMirror: false
 createPanel: false
+currentPath: true
 diffview: false
 displayWorkflow: false
 editors: true
@@ -172,7 +173,7 @@ function showRuntimePanel(type, service, runtime, displayTable) {
             .val(runtime)
             .selectpicker("refresh");
           $(`#runtimes-${service.id}`).on("change", function() {
-            displayFunction(service, this.value);
+            displayFunction(service, this.value, true);
           });
           displayFunction(service, runtime);
         }
@@ -181,20 +182,27 @@ function showRuntimePanel(type, service, runtime, displayTable) {
   });
 }
 
-function displayLogs(service, runtime) {
+function displayLogs(service, runtime, change) {
   $(`#body-runtime-${service.id}`).css("background-color", "#1B1B1B");
   const content = document.getElementById(`content-${service.id}`);
-  // eslint-disable-next-line new-cap
-  let editor = CodeMirror(content, {
-    lineWrapping: true,
-    lineNumbers: true,
-    readOnly: true,
-    theme: "cobalt",
-    mode: "logs",
-    extraKeys: { "Ctrl-F": "findPersistent" },
-    scrollbarStyle: "overlay",
-  });
-  editor.setSize("100%", "100%");
+  let editor;
+  if (change) {
+    editor = $(`#content-${service.id}`).data("CodeMirrorInstance");
+    editor.setValue("");
+  } else {
+    // eslint-disable-next-line new-cap
+    editor = CodeMirror(content, {
+      lineWrapping: true,
+      lineNumbers: true,
+      readOnly: true,
+      theme: "cobalt",
+      mode: "logs",
+      extraKeys: { "Ctrl-F": "findPersistent" },
+      scrollbarStyle: "overlay",
+    });
+    $(`#content-${service.id}`).data("CodeMirrorInstance", editor);
+    editor.setSize("100%", "100%");
+  }
   $(`#runtimes-${service.id}`).on("change", function() {
     refreshLogs(service, this.value, editor);
   });
@@ -330,7 +338,7 @@ function switchToWorkflow(path, arrow) {
   currentPath = path;
   if (!arrow) {
     arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, path);
+    arrowHistory.splice(arrowPointer, 9e9, currentPath);
   } else {
     arrowPointer += arrow == "right" ? 1 : -1;
   }
@@ -345,7 +353,7 @@ function switchToWorkflow(path, arrow) {
     $("#right-arrow").addClass("disabled");
   }
   if (page == "workflow_builder") {
-    call(`/get_service_state/${path}/latest`, function(result) {
+    call(`/get_service_state/${currentPath}/latest`, function(result) {
       workflow = result.service;
       displayWorkflow(result);
       alertify.notify(
@@ -355,7 +363,7 @@ function switchToWorkflow(path, arrow) {
       );
     });
   } else {
-    $("#workflow-filtering").val(path);
+    $("#workflow-filtering").val(currentPath);
     if (tables["service"]) tables["service"].ajax.reload(null, false);
   }
 }

@@ -138,7 +138,9 @@ class Workflow(Service):
                         "failure": [],
                     },
                 }
-                run.run_state["progress"]["service"]["skipped"] += 1
+                run.run_state["progress"]["service"]["skipped"] += len(
+                    targets[service.name]
+                )
             else:
                 kwargs = {
                     "devices": [
@@ -235,7 +237,10 @@ class Workflow(Service):
                 self, "destination", "success" if results["success"] else "failure",
             ):
                 services.append(successor)
-                run.edge_state[edge.id] += 1
+                if device:
+                    run.edge_state[edge.id] += 1
+                else:
+                    run.edge_state[edge.id] = "DONE"
             if not results["success"] == "skipped":
                 sleep(service.waiting_time)
         Session.refresh(run)

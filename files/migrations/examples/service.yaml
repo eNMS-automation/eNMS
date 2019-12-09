@@ -1112,12 +1112,12 @@
   iteration_devices_property: ip_address
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-10-21 19:20:48.247271'
+  last_modified: '2019-12-09 12:30:00.373117'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1139,9 +1139,9 @@
   source_code: "# Interfaces 1\r\ntargets = ['Loopback101', 'Loopback15'] if device.name\
     \ == \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('Interfaces\
     \ 1', targets, device=device.name)\r\n\r\n# Derived Devices\r\nset_var(\"Derived\
-    \ Devices\", [\"Washington\", \"Austin\"], device=device.name)\r\n\r\n# Interfaces\
-    \ 2\r\nset_var('Interfaces 2', ['Loopback333', 'Loopback334'])\r\nsave_result(True,\
-    \ {})"
+    \ Devices\", [\"Atlanta\", \"Austin\"] if device.name == \"Austin\" else [\"Washington\"\
+    ], device=device.name)\r\n\r\n# Interfaces 2\r\nset_var('Interfaces 2', ['Loopback333',\
+    \ 'Loopback334'])\r\nsave_result(True, {})"
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -2521,11 +2521,11 @@
   include_device_results: true
   include_link_in_summary: true
   initial_payload: {}
-  iteration_devices: ''
-  iteration_devices_property: ip_address
+  iteration_devices: get_var("Derived Devices", device=device.name)
+  iteration_devices_property: name
   iteration_values: '["Loopback11","Loopback15"]'
   iteration_variable_name: non_default_iteration_value_name
-  last_modified: '2019-10-04 14:54:34.006032'
+  last_modified: '2019-12-09 12:28:55.349573'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3662,11 +3662,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4166,12 +4166,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''

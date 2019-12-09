@@ -320,7 +320,9 @@ class Run(AbstractBase):
 
     def device_iteration(self, payload, device):
         derived_devices = self.compute_devices_from_query(
-            self.iteration_devices, self.iteration_devices_property, **locals()
+            self.service.iteration_devices,
+            self.service.iteration_devices_property,
+            **locals(),
         )
         derived_run = factory(
             "run",
@@ -338,16 +340,22 @@ class Run(AbstractBase):
         return derived_run.run(payload)["success"]
 
     def device_run(self, payload):
-        self.devices, success = self.compute_devices(payload), True
+        self.devices = self.compute_devices(payload)
         if self.run_method != "per_device":
             return self.get_results(payload)
         else:
             self.run_state["progress"]["device"]["total"] += len(self.devices)
             if self.iteration_devices and not self.parent_device:
-                success = all(
+                if not self.workflow:
+                    return {
+                        "success": False,
+                        "result": "Device iteration not allowed outside of a workflow",
+                        "runtime": self.runtime,
+                    }
+                results = [
                     self.device_iteration(payload, device) for device in self.devices
-                )
-                return {"success": success, "runtime": self.runtime}
+                ]
+                return {"success": all(results), "runtime": self.runtime}
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)
@@ -421,7 +429,9 @@ class Run(AbstractBase):
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":
-                old_result = self.restart_run.result(device=device.name if device else None)
+                old_result = self.restart_run.result(
+                    device=device.name if device else None
+                )
                 if old_result and "payload" in old_result.result:
                     payload.update(old_result["payload"])
             if self.service.iteration_values:

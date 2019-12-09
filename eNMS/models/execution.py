@@ -344,6 +344,12 @@ class Run(AbstractBase):
         else:
             self.run_state["progress"]["device"]["total"] += len(self.devices)
             if self.iteration_devices and not self.parent_device:
+                if not self.workflow:
+                    return {
+                        "success": False,
+                        "result": "Device iteration is not allowed outside of a workflow",
+                        "runtime": self.runtime,
+                    }
                 success = all(
                     self.device_iteration(payload, device) for device in self.devices
                 )
@@ -426,7 +432,9 @@ class Run(AbstractBase):
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":
-                old_result = self.restart_run.result(device=device.name if device else None)
+                old_result = self.restart_run.result(
+                    device=device.name if device else None
+                )
                 if old_result and "payload" in old_result.result:
                     payload.update(old_result["payload"])
             if self.service.iteration_values:

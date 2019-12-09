@@ -5,6 +5,7 @@ CodeMirror: false
 config: true
 creationMode: true
 csrf_token: false
+Dropzone: false
 filteringProperties: false
 formProperties: false
 job: false
@@ -634,6 +635,7 @@ function refreshTablePeriodically(tableType, interval) {
   setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
 }
 
+// eslint-disable-next-line
 function deleteFile(file) {
   call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
     $("#files-tree")
@@ -647,6 +649,7 @@ function deleteFile(file) {
   });
 }
 
+// eslint-disable-next-line
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
   call(`/edit_file/${filepath}`, function(content) {
@@ -669,6 +672,7 @@ function editFile(file) {
   });
 }
 
+// eslint-disable-next-line
 function saveFile(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
   fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
@@ -677,10 +681,11 @@ function saveFile(file) {
   });
 }
 
+// eslint-disable-next-line
 function showFileUploadPanel(folder) {
   const path = folder.replace(/\//g, ">");
   createPanel("upload_files", `Upload files to ${folder}`, path, () => {
-    element = document.getElementById(`dropzone-${path}`);
+    const element = document.getElementById(`dropzone-${path}`);
     let dropzone = new Dropzone(element, {
       url: "/upload_files",
       autoProcessQueue: false,
@@ -694,19 +699,19 @@ function showFileUploadPanel(folder) {
   });
 }
 
+// eslint-disable-next-line
 function createNewFolder() {
-  console.log("Not implemented yet.");
 }
 
 (function($, jstree, undefined) {
   "use strict";
 
   $.jstree.plugins.node_customize = function(options, parent) {
-    this.redraw_node = function(obj, deep, callback, force_draw) {
-      var node_id = obj;
-      var el = parent.redraw_node.apply(this, arguments);
+    // eslint-disable-next-line
+    this.redraw_node = function(nodeId, ...args) {
+      let el = parent.redraw_node.apply(this, [nodeId, ...args]);
       if (el) {
-        var node = this._model.data[node_id];
+        let node = this._model.data[nodeId];
         this.settings.node_customize.default(el, node);
       }
       return el;
@@ -714,6 +719,7 @@ function createNewFolder() {
   };
 })(jQuery);
 
+// eslint-disable-next-line
 function displayFiles() {
   showPanel("files", null, function() {
     $("#files-tree").jstree({
@@ -739,7 +745,7 @@ function displayFiles() {
         default: function(el, node) {
           if (!node) return;
           if (node.type == "file") {
-            data = JSON.stringify(node);
+            const data = JSON.stringify(node);
             $(el).find("a").append(`
               <div style="position: absolute; top: 0px; right: 200px">
                 ${node.data.modified}

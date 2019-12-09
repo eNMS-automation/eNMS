@@ -695,7 +695,7 @@ function showFileUploadPanel(folder) {
 }
 
 function createNewFolder() {
-  console.log("Not implemented yet.")
+  console.log("Not implemented yet.");
 }
 
 (function($, jstree, undefined) {

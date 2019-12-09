@@ -326,7 +326,6 @@ class AutomationController(BaseController):
         if not runtime:
             runtime = "latest"
         else:
-            print(path)
             session["path"] = path
         if runs and runtime != "normal":
             if runtime == "latest":

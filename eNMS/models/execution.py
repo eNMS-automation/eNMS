@@ -458,7 +458,7 @@ class Run(AbstractBase):
         return results
 
     def log(self, severity, content, device=None):
-        log = f"{app.get_time()} - {severity} - {self.service.name}"
+        log = f"{app.get_time()} - {severity} - SERVICE {self.service.scoped_name}"
         if device:
             log += f" - DEVICE {device.name}"
         log += f" : {content}"

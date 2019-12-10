@@ -52,10 +52,10 @@ class Result(AbstractBase):
     device_name = association_proxy("device", "name")
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Result.service_id")
-    service_name = association_proxy("service", "name")
+    service_name = association_proxy("service", "scoped_name")
     workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
-    workflow_name = association_proxy("workflow", "name")
+    workflow_name = association_proxy("workflow", "scoped_name")
 
     def __repr__(self):
         return f"{self.service_name} on {self.device_name}"
@@ -115,10 +115,10 @@ class Run(AbstractBase):
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"
     )
-    service_name = association_proxy("service", "name")
+    service_name = association_proxy("service", "scoped_name")
     workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
-    workflow_name = association_proxy("workflow", "name")
+    workflow_name = association_proxy("workflow", "scoped_name")
     task_id = Column(Integer, ForeignKey("task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
     state = Column(MutableDict)
@@ -154,18 +154,18 @@ class Run(AbstractBase):
     def generate_row(self):
         return super().generate_row() + [
             f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="showRuntimePanel('results', {self.service.row_properties},
-            '{self.runtime}')"data-tooltip="Results">
-            <span class="glyphicon glyphicon-list-alt"></span></button>
-          </li>
+        <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
           <li>
             <button type="button" class="btn btn-info"
             onclick="showRuntimePanel('logs', {self.service.row_properties},
             '{self.runtime}')"data-tooltip="Logs">
             <span class="glyphicon glyphicon-list"></span></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-info"
+            onclick="showRuntimePanel('results', {self.service.row_properties},
+            '{self.runtime}')"data-tooltip="Results">
+            <span class="glyphicon glyphicon-list-alt"></span></button>
           </li>
         </ul>"""
         ]

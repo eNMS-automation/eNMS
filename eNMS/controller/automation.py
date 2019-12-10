@@ -233,19 +233,13 @@ class AutomationController(BaseController):
             if service.scoped_name in ("Start", "End") or not runs:
                 return
             progress = state["services"][service.id].get("progress")
-            label = (
-                (
-                    f"({progress['device']['success']} passed,"
-                    f" {progress['device']['failure']} failed)</div>"
-                )
-                if progress and progress["device"]["total"]
-                else ""
-            )
+            track_progress = progress and progress["device"]["total"]
+            data = {"progress": progress['device']} if track_progress else {}
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
                 "runtime": min(run.runtime for run in runs),
-                "data": service.get_properties(),
-                "text": f"{service.scoped_name} {label}",
+                "data": {"properties": service.get_properties(), **data},
+                "text": service.scoped_name,
                 "a_attr": {"style": f"color: #{color};width: 100%"},
             }
             if service.type == "workflow":
@@ -253,9 +247,9 @@ class AutomationController(BaseController):
                     filter(None, (rec(child) for child in service.services)),
                     key=itemgetter("runtime"),
                 )
-                return {"children": children, "type": "workflow", **result}
+                return {"children": children, **result}
             else:
-                return {"type": "service", **result}
+                return result
 
         return rec(fetch("workflow", id=workflow))
 

@@ -233,8 +233,19 @@ function displayResultsTree(service, runtime) {
       html_row: {
         default: function(el, node) {
           if (!node) return;
-          const data = JSON.stringify(node.data);
+          const data = JSON.stringify(node.data.properties);
+          if (node.data.progress) {
+            progressSummary = `
+              <div style="position: absolute; top: 0px; right: 200px">
+                <span style="color: #32cd32">${node.data.progress.success} passed</span> -
+                <span style="color: #FF6666">${node.data.progress.failure} failed</span>
+              </div>
+            `;
+          } else {
+            progressSummary = "";
+          }
           $(el).find("a").append(`
+            ${progressSummary}
             <div style="position: absolute; top: 0px; right: 50px">
               <button type="button"
                 class="btn btn-xs btn-primary"

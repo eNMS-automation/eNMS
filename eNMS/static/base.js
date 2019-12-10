@@ -706,13 +706,13 @@ function createNewFolder() {
 (function($, jstree, undefined) {
   "use strict";
 
-  $.jstree.plugins.node_customize = function(options, parent) {
+  $.jstree.plugins.html_row = function(options, parent) {
     // eslint-disable-next-line
     this.redraw_node = function(nodeId, ...args) {
       let el = parent.redraw_node.apply(this, [nodeId, ...args]);
       if (el) {
         let node = this._model.data[nodeId];
-        this.settings.node_customize.default(el, node);
+        this.settings.html_row.default(el, node);
       }
       return el;
     };
@@ -735,13 +735,13 @@ function displayFiles() {
           type: "POST",
         },
       },
-      plugins: ["node_customize", "state", "types", "wholerow"],
+      plugins: ["html_row", "state", "types", "wholerow"],
       types: {
         file: {
           icon: "jstree-icon jstree-file",
         },
       },
-      node_customize: {
+      html_row: {
         default: function(el, node) {
           if (!node) return;
           if (node.type == "file") {

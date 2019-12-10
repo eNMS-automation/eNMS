@@ -157,7 +157,7 @@ class AutomationController(BaseController):
                     "text": "Standalone services",
                     "children": True,
                     "state": {"disabled": True},
-                    "a_attr": {"class": "no_checkbox", "style": "color: #000000"},
+                    "a_attr": {"class": "no_checkbox", "style": "color: #000000; width: 100%"},
                     "type": "category",
                 }
             ] + sorted(
@@ -170,7 +170,7 @@ class AutomationController(BaseController):
                         "state": {"disabled": workflow in parents},
                         "a_attr": {
                             "class": "no_checkbox" if workflow in parents else "",
-                            "style": "color: #6666FF",
+                            "style": "color: #6666FF; width: 100%",
                         },
                     }
                     for workflow in fetch_all("workflow")
@@ -186,7 +186,8 @@ class AutomationController(BaseController):
                         "text": service.scoped_name,
                         "a_attr": {
                             "style": (
-                                f"color: #{'FF1694' if service.shared else '6666FF'}"
+                                f"color: #{'FF1694' if service.shared else '6666FF'};"
+                                "width: 100%"
                             ),
                         },
                     }
@@ -207,7 +208,8 @@ class AutomationController(BaseController):
                         "a_attr": {
                             "class": "no_checkbox" if service in parents else "",
                             "style": (
-                                f"color: #{'FF1694' if service.shared else '6666FF'}"
+                                f"color: #{'FF1694' if service.shared else '6666FF'};"
+                                "width: 100%"
                             ),
                         },
                     }
@@ -244,7 +246,7 @@ class AutomationController(BaseController):
                 "runtime": min(run.runtime for run in runs),
                 "data": service.get_properties(),
                 "text": f"{service.scoped_name} {label}",
-                "a_attr": {"style": f"color: #{color}"},
+                "a_attr": {"style": f"color: #{color};width: 100%"},
             }
             if service.type == "workflow":
                 children = sorted(

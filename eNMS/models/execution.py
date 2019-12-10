@@ -81,8 +81,14 @@ class Result(AbstractBase):
 
     def generate_row(self):
         return super().generate_row() + [
-            f"""<button type="button" class="btn btn-info btn-sm"
-            onclick="showResult('{self.id}')">Results</button>""",
+            f"""
+              <ul class="pagination pagination-lg" style="margin: 0px; width: 50px">
+              <li>
+                  <button type="button" class="btn btn-info btn-sm"
+                  onclick="showResult('{self.id}')" data-tooltip="Results">
+                  <span class="glyphicon glyphicon-list-alt"></span></button>
+              </li>
+            </ul>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",
         ]

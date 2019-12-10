@@ -244,45 +244,24 @@ function displayResultsTree(service, runtime) {
       html_row: {
         default: function(el, node) {
           if (!node) return;
-          if (node.type == "file") {
-            const data = JSON.stringify(node);
-            $(el).find("a").append(`
-              <div style="position: absolute; top: 0px; right: 200px">
-                ${node.data.modified}
-              </div>
-              <div style="position: absolute; top: 0px; right: 50px">
-                <button type="button"
-                  class="btn btn-xs btn-primary"
-                  onclick='editFile(${data})'
-                >
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-                <button type="button"
-                class="btn btn-xs btn-info"
-                onclick="location.href='/download_file/${node.data.path}'"
-                >
-                <span class="glyphicon glyphicon-download"></span>
-                </button>
-                <button type="button"
-                  class="btn btn-xs btn-danger"
-                  onclick='deleteFile(${data})'
-                >
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
-              </div>
-              `);
-          } else {
-            $(el).find("a").append(`
-              <div style="position: absolute; top: 0px; right: 50px">
+          const data = JSON.stringify(node.data);
+          console.log(data)
+          $(el).find("a").append(`
+            <div style="position: absolute; top: 0px; right: 50px">
               <button type="button"
-              class="btn btn-xs btn-primary"
-              onclick="showFileUploadPanel('${node.data.path}')"
-            >
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
-              </div>
-              `);
-          }
+                class="btn btn-xs btn-primary"
+                onclick='showRuntimePanel("logs", ${data}, "${runtime}", true)'
+              >
+                <span class="glyphicon glyphicon-list"></span>
+              </button>
+              <button type="button"
+                class="btn btn-xs btn-primary"
+                onclick='showRuntimePanel("results", ${data}, "${runtime}", true)'
+              >
+                <span class="glyphicon glyphicon-list-alt"></span>
+              </button>
+            </div>
+          `);
         },
       },
     });

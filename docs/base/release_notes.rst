@@ -6,8 +6,8 @@ Version 3.19
 ------------
 
 - Add new File Management mechanism: browse, download, upload, delete and rename local files.
-  Use local files as part of the automation services.
-- Add new color code for the logs window. 
+  Mechanism to use local files as part of the automation services.
+- Add new color code for the logs window.
 
 Version 3.18
 ------------

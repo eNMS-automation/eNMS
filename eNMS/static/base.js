@@ -719,6 +719,26 @@ function createNewFolder() {
   };
 })(jQuery);
 
+function copyClipboard(elementId) {
+  target = document.getElementById(elementId);
+  jsPanel.tooltip.create({
+    id: `tooltip-${elementId}`,
+    content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
+      <b>test</b></p>`,
+    contentSize: "auto",
+    connector: true,
+    delay: 0,
+    header: false,
+    position: {
+      my: "center-bottom",
+      at: "center-top",
+      of: target,
+    },
+    target: target,
+    theme: "primary filledlight",
+  });
+}
+
 // eslint-disable-next-line
 function displayFiles() {
   showPanel("files", null, function() {

@@ -723,18 +723,25 @@ function copyClipboard(elementId) {
   target = document.getElementById(elementId);
   jsPanel.tooltip.create({
     id: `tooltip-${elementId}`,
-    content: `<p style="margin-right: 10px; margin-left: 10px; color: black">
-      <b>test</b></p>`,
+    content: `<div class="input-group">
+    <input id="foo" type="text" value="https://github.com/zenorocha/clipboard.js.git">
+    <span class="input-group-button">
+    <button class="btn" type="button" data-clipboard-demo="" data-clipboard-target="#foo">
+    <img class="clippy" src="assets/images/clippy.svg" width="13" alt="Copy to clipboard">
+    </button>
+    </span>
+    </div>`,
     contentSize: "auto",
     connector: true,
     delay: 0,
     header: false,
+    mode: 'sticky',
     position: {
-      my: "center-bottom",
-      at: "center-top",
-      of: target,
+      my: "center-top",
+      at: "center-bottom",
     },
     target: target,
+    ttipEvent: 'click',
     theme: "primary filledlight",
   });
 }

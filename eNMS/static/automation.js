@@ -145,22 +145,23 @@ function showRuntimePanel(type, service, runtime, displayTable) {
       : displayResultsTable;
   const panelType =
     type == "logs"
-      ? "runtime"
+      ? "logs"
       : service.type == "workflow" && !displayTable
       ? "tree"
       : "result";
-  createPanel(panelType, `${type} - ${service.name}`, service.id, function() {
+  const panelId = `${panelType}-${service.id}`;
+  createPanel(panelType, `${type} - ${service.name}`, panelId, function() {
     if (runtime) {
-      $(`#div-runtimes-${service.id}`).hide();
+      $(`#div-runtimes-${panelId}`).hide();
       displayFunction(service, runtime);
     } else {
       call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
         if (!runtimes.length) {
           return alertify.notify(`No ${type} yet.`, "error", 5);
         } else {
-          $(`#runtimes-${service.id}`).empty();
+          $(`#runtimes-${panelId}`).empty();
           runtimes.forEach((runtime) => {
-            $(`#runtimes-${service.id}`).append(
+            $(`#runtimes-${panelId}`).append(
               $("<option></option>")
                 .attr("value", runtime[0])
                 .text(runtime[1])
@@ -169,10 +170,10 @@ function showRuntimePanel(type, service, runtime, displayTable) {
           if (!runtime || runtime == "normal") {
             runtime = runtimes[runtimes.length - 1][0];
           }
-          $(`#runtimes-${service.id}`)
+          $(`#runtimes-${panelId}`)
             .val(runtime)
             .selectpicker("refresh");
-          $(`#runtimes-${service.id}`).on("change", function() {
+          $(`#runtimes-${panelId}`).on("change", function() {
             displayFunction(service, this.value, true);
           });
           displayFunction(service, runtime);
@@ -183,11 +184,11 @@ function showRuntimePanel(type, service, runtime, displayTable) {
 }
 
 function displayLogs(service, runtime, change) {
-  $(`#body-runtime-${service.id}`).css("background-color", "#1B1B1B");
-  const content = document.getElementById(`content-${service.id}`);
+  $(`#body-runtime-logs-${service.id}`).css("background-color", "#1B1B1B");
+  const content = document.getElementById(`content-logs-${service.id}`);
   let editor;
   if (change) {
-    editor = $(`#content-${service.id}`).data("CodeMirrorInstance");
+    editor = $(`#content-logs-${service.id}`).data("CodeMirrorInstance");
     editor.setValue("");
   } else {
     // eslint-disable-next-line new-cap
@@ -200,10 +201,10 @@ function displayLogs(service, runtime, change) {
       extraKeys: { "Ctrl-F": "findPersistent" },
       scrollbarStyle: "overlay",
     });
-    $(`#content-${service.id}`).data("CodeMirrorInstance", editor);
+    $(`#content-logs-${service.id}`).data("CodeMirrorInstance", editor);
     editor.setSize("100%", "100%");
   }
-  $(`#runtimes-${service.id}`).on("change", function() {
+  $(`#runtimes-logs-${service.id}`).on("change", function() {
     refreshLogs(service, this.value, editor);
   });
   refreshLogs(service, runtime, editor, true);
@@ -211,28 +212,16 @@ function displayLogs(service, runtime, change) {
 
 function displayResultsTree(service, runtime) {
   call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
-    $(`#result-tree-${service.id}`)
+    $(`#result-tree-tree-${service.id}`)
       .jstree("destroy")
       .empty();
-    let tree = $(`#result-tree-${service.id}`).jstree({
+    let tree = $(`#result-tree-tree-${service.id}`).jstree({
       core: {
         animation: 100,
         themes: { stripes: true },
         data: data,
       },
-      plugins: ["contextmenu", "html_row", "types", "wholerow"],
-      contextmenu: {
-        items: function customMenu(node) {
-          return {
-            item1: {
-              label: "Results",
-              action: () =>
-                showRuntimePanel("results", node.data, runtime, true),
-              icon: "glyphicon glyphicon-list-alt",
-            },
-          };
-        },
-      },
+      plugins: ["html_row", "types", "wholerow"],
       types: {
         default: {
           icon: "glyphicon glyphicon-file",
@@ -245,12 +234,11 @@ function displayResultsTree(service, runtime) {
         default: function(el, node) {
           if (!node) return;
           const data = JSON.stringify(node.data);
-          console.log(data)
           $(el).find("a").append(`
             <div style="position: absolute; top: 0px; right: 50px">
               <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick='showRuntimePanel("logs", ${data}, "${runtime}", true)'
+                onclick='showRuntimePanel("logs", ${data}, "${runtime}")'
               >
                 <span class="glyphicon glyphicon-list"></span>
               </button>
@@ -277,15 +265,15 @@ function displayResultsTree(service, runtime) {
 
 function displayResultsTable(service, runtime) {
   $("#result").remove();
-  $(`#runtimes-${service.id}`).on("change", function() {
+  $(`#runtimes-result-${service.id}`).on("change", function() {
     tables[`result-${service.id}`].ajax.reload(null, false);
   });
-  initTable("result", service, runtime || currentRuntime);
+  initTable("result", service, runtime || currentRuntime, `result-${service.id}`);
 }
 
 // eslint-disable-next-line
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {
-  if (!$(`#runtime-${service.id}`).length) return;
+  if (!$(`#runtimes-logs-${service.id}`).length) return;
   call(`/get_service_logs/${service.id}/${runtime}`, function(result) {
     editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
@@ -295,7 +283,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
         1000
       );
     } else if (wasRefreshed) {
-      $(`#runtime-${service.id}`).remove();
+      $(`#runtime-logs-${service.id}`).remove();
       showRuntimePanel("results", service, runtime);
     }
   });

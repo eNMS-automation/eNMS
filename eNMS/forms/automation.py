@@ -254,10 +254,9 @@ class RestartWorkflowForm(BaseForm):
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
 
 
-class RuntimeForm(BaseForm):
-    template = "runtime"
-    form_type = HiddenField(default="runtime")
-    filter = StringField("Filter")
+class LogsForm(BaseForm):
+    template = "logs"
+    form_type = HiddenField(default="logs")
     runtimes = NoValidationSelectField("Runtime", choices=())
 
 

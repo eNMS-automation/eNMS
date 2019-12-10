@@ -50,13 +50,13 @@ const panelSize = {
   instance_deletion: "400 130",
   link: "700 400",
   link_filtering: "700 600",
+  logs: "1200 auto",
   log_filtering: "700 350",
   notifications: "1100 400",
   pool: "800 600",
   pool_filtering: "1000 700",
   pool_objects: "700 550",
   result: "1200 700",
-  runtime: "1200 auto",
   service_results: "1200 700",
   server: "600 250",
   server_filtering: "700 450",
@@ -571,8 +571,8 @@ function createSearchHeaders(type) {
 }
 
 // eslint-disable-next-line
-function initTable(type, instance, runtime) {
-  const tableId = instance ? `#${type}-table-${instance.id}` : `#${type}-table`;
+function initTable(type, instance, runtime, id) {
+  const tableId = id ? `#${type}-table-${id}` : `#${type}-table`;
   // eslint-disable-next-line new-cap
   tables[type] = $(tableId).DataTable({
     serverSide: true,

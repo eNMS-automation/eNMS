@@ -719,34 +719,43 @@ function createNewFolder() {
   };
 })(jQuery);
 
-function copyClipboard(elementId) {
+function getResultLink(result) {
+  const base = `get_result("${result.service}"`
+  return result.device ? `${base}, device="${result.device}")` : `${base})`;
+}
+
+function copyClipboard(elementId, result) {
   target = document.getElementById(elementId);
-  jsPanel.tooltip.create({
-    id: `tooltip-${elementId}`,
-    content: `
-    <div class="modal-body">
-      <div class="input-group">
-        <input type="text" class="form-control">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-copy"></span>
-          </button>
-        </span>
-      </div>
-    </div>`,
-    contentSize: "auto",
-    connector: true,
-    delay: 0,
-    header: false,
-    mode: 'sticky',
-    position: {
-      my: "center-top",
-      at: "center-bottom",
-    },
-    target: target,
-    ttipEvent: 'click',
-    theme: "light",
-  });
+  const link = getResultLink(result);
+  if (!$(`#tooltip-${elementId}`).length) {
+    jsPanel.tooltip.create({
+      id: `tooltip-${elementId}`,
+      content: `
+        <div class="modal-body">
+          <div class="input-group" style="width: 600px">
+            <input type="text" class="form-control" value='${link}'>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-copy"></span>
+              </button>
+            </span>
+          </div>
+        </div>`,
+      contentSize: "auto",
+      connector: true,
+      delay: 0,
+      header: false,
+      mode: 'sticky',
+      position: {
+        my: 'right-top',
+        at: 'left-bottom'
+      },
+      target: target,
+      ttipEvent: 'click',
+      theme: "light",
+    });
+  }
+  target.click();
 }
 
 // eslint-disable-next-line

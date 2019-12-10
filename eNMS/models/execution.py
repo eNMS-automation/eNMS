@@ -79,10 +79,17 @@ class Result(AbstractBase):
             f'style="width:100%">{label}</button>'
         )
 
+    @property
+    def row_properties(self):
+        return {
+            "service": self.service.scoped_name,
+            "device": self.device_name or "",
+        }
+
     def generate_row(self):
         return super().generate_row() + [
             f"""
-              <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
+              <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
               <li>
                   <button type="button" class="btn btn-info btn-sm"
                   onclick="showResult('{self.id}')" data-tooltip="Results">
@@ -90,7 +97,8 @@ class Result(AbstractBase):
               </li>
               <li>
                   <button type="button" id="btn-result-{self.id}" class="btn btn-info btn-sm"
-                  onclick="copyClipboard('btn-result-{self.id}')" data-tooltip="Copy to clipboard">
+                  onclick="copyClipboard('btn-result-{self.id}', {self.row_properties})"
+                  data-tooltip="Copy to clipboard">
                   <span class="glyphicon glyphicon-copy"></span></button>
               </li>
             </ul>""",

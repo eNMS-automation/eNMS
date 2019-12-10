@@ -733,9 +733,9 @@ function copyClipboard(elementId, result) {
       content: `
         <div class="modal-body">
           <div class="input-group" style="width: 600px">
-            <input type="text" class="form-control" value='${link}'>
+            <input id="input-${elementId}" type="text" class="form-control" value='${link}'>
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button">
+              <button class="btn btn-default" data-clipboard-target="#input-${elementId}" type="button">
                 <span class="glyphicon glyphicon-copy"></span>
               </button>
             </span>
@@ -1006,6 +1006,7 @@ $(document).ready(function() {
   if (page.includes("table")) initTable(page.split("/")[1]);
   configureForm(page);
   doc(page);
+  new ClipboardJS('.btn');
   detectUserInactivity();
   createTooltips();
 });

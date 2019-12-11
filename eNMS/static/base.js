@@ -722,13 +722,32 @@ function createNewFolder() {
 function buildLinks(result, id) {
   const base = `get_result("${result.service}"`
   if (result.device) {
-    return [
-      `${base}, device="${result.device}")`,
-      `${base}, device="device.name")`
+    links = [
+      [`${result.device}`, `${base}, device="${result.device}")`],
+      [`Current Device`, `${base}, device=device.name)`]
     ]
   } else {
-    return [`${base})`];
+    links = [["Top-level result", `${base})`]];
   }
+  console.log(links)
+  const table = links.map((link, index) => `
+    <tr>
+      <td style="text-align: center; vertical-align: middle;">
+        ${link[0]}
+      </td>
+      <td>
+        <div class="input-group" style="width: 800px">
+          <input id="input-${index}-${id}" type="text" class="form-control" value='${link[1]}'>
+          <span class="input-group-btn">
+            <button class="btn btn-default" data-clipboard-target="#input-${index}-${id}" type="button">
+              <span class="glyphicon glyphicon-copy"></span>
+            </button>
+          </span>
+        </div>
+      </td>
+    </tr>`
+  ).join("");
+  console.log(table);
   return `
     <div class="modal-body">
       <table
@@ -737,29 +756,7 @@ function buildLinks(result, id) {
         width="100%"
       >
         <tbody>
-          <tr>
-            <td style="text-align: center; vertical-align: middle;">
-              Workflow
-            </td>
-            <td>
-              <div class="input-group" style="width: 600px">
-                <input id="input-${id}" type="text" class="form-control" value='${link}'>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" data-clipboard-target="#input-${id}" type="button">
-                    <span class="glyphicon glyphicon-copy"></span>
-                  </button>
-                </span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td style="text-align: center; vertical-align: middle;">
-              Runtime
-            </td>
-            <td>
-              <select id="current-runtime" class="form-control"></select>
-            </td>
-          </tr>
+          ${table}
         </tbody>
       </table>
     </div>`
@@ -770,7 +767,7 @@ function copyClipboard(elementId, result) {
   if (!$(`#tooltip-${elementId}`).length) {
     jsPanel.tooltip.create({
       id: `tooltip-${elementId}`,
-      content: buildLinks(elementId, result),
+      content: buildLinks(result, elementId),
       contentSize: "auto",
       connector: true,
       delay: 0,

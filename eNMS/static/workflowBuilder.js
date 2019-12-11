@@ -609,6 +609,14 @@ function createNew(mode) {
   }
 }
 
+function getResultLink(service, perDevice) {
+  let link = `get_result("${service.name}"`;
+  if (perDevice) link += ", device=device.name";
+  link += ")";
+  alertify.notify(`Copied to Clipboard: ${link}`, "success", 5);
+  return link
+}
+
 Object.assign(action, {
   "Run Workflow": () => runWorkflow(),
   "Parameterized Workflow Run": () => runWorkflow(true),
@@ -623,6 +631,8 @@ Object.assign(action, {
   "Add to Workflow": addServicePanel,
   "Stop Workflow": () => stopWorkflow(),
   Delete: deleteSelection,
+  "Top-level Result": getResultLink,
+  "Per-device Result": (node) => getResultLink(node, true),
   "Create 'Success' edge": () => switchMode("success"),
   "Create 'Failure' edge": () => switchMode("failure"),
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),

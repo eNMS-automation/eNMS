@@ -50,7 +50,7 @@ const panelSize = {
   instance_deletion: "400 130",
   link: "700 400",
   link_filtering: "700 600",
-  logs: "1200 auto",
+  logs: "1200 500",
   log_filtering: "700 350",
   notifications: "1100 400",
   pool: "800 600",

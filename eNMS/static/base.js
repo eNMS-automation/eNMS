@@ -719,28 +719,58 @@ function createNewFolder() {
   };
 })(jQuery);
 
-function getResultLink(result) {
+function buildLinks(result, id) {
   const base = `get_result("${result.service}"`
-  return result.device ? `${base}, device="${result.device}")` : `${base})`;
+  if (result.device) {
+    return [
+      `${base}, device="${result.device}")`,
+      `${base}, device="device.name")`
+    ]
+  } else {
+    return [`${base})`];
+  }
+  return `
+    <div class="modal-body">
+      <table
+        class="table table-bordered dt-responsive nowrap"
+        cellspacing="0"
+        width="100%"
+      >
+        <tbody>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;">
+              Workflow
+            </td>
+            <td>
+              <div class="input-group" style="width: 600px">
+                <input id="input-${id}" type="text" class="form-control" value='${link}'>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" data-clipboard-target="#input-${id}" type="button">
+                    <span class="glyphicon glyphicon-copy"></span>
+                  </button>
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;">
+              Runtime
+            </td>
+            <td>
+              <select id="current-runtime" class="form-control"></select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>`
 }
 
 function copyClipboard(elementId, result) {
   target = document.getElementById(elementId);
-  const link = getResultLink(result);
   if (!$(`#tooltip-${elementId}`).length) {
     jsPanel.tooltip.create({
       id: `tooltip-${elementId}`,
-      content: `
-        <div class="modal-body">
-          <div class="input-group" style="width: 600px">
-            <input id="input-${elementId}" type="text" class="form-control" value='${link}'>
-            <span class="input-group-btn">
-              <button class="btn btn-default" data-clipboard-target="#input-${elementId}" type="button">
-                <span class="glyphicon glyphicon-copy"></span>
-              </button>
-            </span>
-          </div>
-        </div>`,
+      content: buildLinks(elementId, result),
       contentSize: "auto",
       connector: true,
       delay: 0,

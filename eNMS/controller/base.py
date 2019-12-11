@@ -435,7 +435,7 @@ class BaseController:
                 constraint = getattr(model, property) == (value == "bool-true")
             elif filter == "equality":
                 constraint = getattr(model, property) == value
-            elif filter == "inclusion" or DIALECT == "sqlite":
+            elif not filter or filter == "inclusion" or DIALECT == "sqlite":
                 constraint = getattr(model, property).contains(value)
             else:
                 regex_operator = "regexp" if DIALECT == "mysql" else "~"

@@ -609,12 +609,19 @@ function createNew(mode) {
   }
 }
 
-function getResultLink(service, perDevice) {
-  let link = `get_result("${service.name}"`;
-  if (perDevice) link += ", device=device.name";
-  link += ")";
+function copyToClipboard(text) {
+  let dummy = document.createElement("textarea");
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand("copy");
+  document.body.removeChild(dummy);
+}
+
+function getResultLink(service, device) {
+  const link = `get_result("${service.name}"${device ? ", device=device.name" : ""})`;
+  copyToClipboard(link);
   alertify.notify(`Copied to Clipboard: ${link}`, "success", 5);
-  return link
 }
 
 Object.assign(action, {

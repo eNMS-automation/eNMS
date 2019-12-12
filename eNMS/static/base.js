@@ -956,12 +956,13 @@ function initSidebar() {
   }
 
   $("#menu_toggle").on("click", function() {
-    call(`/change_menu/${user.id}`, function(result) {
-      console.log(
+    call(`/switch_menu/${user.id}`, function(result) {
+      console.log();
     });
     switchMenu();
   });
-  if (user.menu == "normal") {
+  console.log(user.small_menu)
+  if (user.small_menu) {
     switchMenu();
   } else {
     const url = "a[href='" + currentUrl + "']";

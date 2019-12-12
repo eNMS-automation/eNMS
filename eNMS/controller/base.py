@@ -146,6 +146,7 @@ class BaseController:
         "scheduler",
         "skip_services",
         "stop_workflow",
+        "switch_menu",
         "task_action",
         "topology_import",
         "update",

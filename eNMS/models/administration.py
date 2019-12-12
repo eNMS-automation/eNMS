@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from sqlalchemy import Float, Integer
+from sqlalchemy import Boolean, Float, Integer
 from sqlalchemy.orm import relationship
 
 from eNMS.database.dialect import Column, MutableList, SmallString
@@ -54,7 +54,7 @@ class User(AbstractBase, UserMixin):
     permissions = Column(MutableList)
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(SmallString)
-    menu = Column(SmallString, default="normal")
+    small_menu = Column(Boolean, default=False)
 
     def generate_row(self):
         return super().generate_row() + [

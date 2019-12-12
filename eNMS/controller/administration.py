@@ -198,3 +198,7 @@ class AdministrationController(BaseController):
                 factory("server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
                 continue
+
+    def switch_menu(self, user_id):
+        user = fetch("user", id=user_id)
+        user.expanded_menu = not user.expanded_menu

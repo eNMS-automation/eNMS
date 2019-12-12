@@ -261,12 +261,10 @@ class Run(AbstractBase):
             if self.service.id not in service_states:
                 service_states[self.service.id] = state
 
-    def run(self, payload=None):
+    def run(self, payload):
         self.init_state()
         self.run_state["status"] = "Running"
         start = datetime.now().replace(microsecond=0)
-        if payload is None:
-            payload = self.service.initial_payload
         try:
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()

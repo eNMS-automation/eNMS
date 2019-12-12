@@ -272,9 +272,11 @@ class AutomationController(BaseController):
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
+        initial_payload = fetch("service", id=service).initial_payload
         run = factory("run", service=service, **run_kwargs)
         run.properties = kwargs
-        return run.run(kwargs.get("payload"))
+        payload = {**initial_payload, **kwargs}
+        return run.run(payload)
 
     def run_service(self, id=None, **kwargs):
         for property in ("user", "csrf_token", "form_type"):

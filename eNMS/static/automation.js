@@ -237,8 +237,12 @@ function displayResultsTree(service, runtime) {
           if (node.data.progress) {
             progressSummary = `
               <div style="position: absolute; top: 0px; right: 200px">
-                <span style="color: #32cd32">${node.data.progress.success} passed</span> -
-                <span style="color: #FF6666">${node.data.progress.failure} failed</span>
+                <span style="color: #32cd32">${
+                  node.data.progress.success
+                } passed</span> -
+                <span style="color: #FF6666">${
+                  node.data.progress.failure
+                } failed</span>
               </div>
             `;
           } else {
@@ -279,7 +283,12 @@ function displayResultsTable(service, runtime) {
   $(`#runtimes-result-${service.id}`).on("change", function() {
     tables[`result-${service.id}`].ajax.reload(null, false);
   });
-  initTable("result", service, runtime || currentRuntime, `result-${service.id}`);
+  initTable(
+    "result",
+    service,
+    runtime || currentRuntime,
+    `result-${service.id}`
+  );
 }
 
 // eslint-disable-next-line

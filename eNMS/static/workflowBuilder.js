@@ -610,7 +610,9 @@ function createNew(mode) {
 }
 
 function getResultLink(service, device) {
-  const link = `get_result("${service.name}"${device ? ", device=device.name" : ""})`;
+  const link = `get_result("${service.name}"${
+    device ? ", device=device.name" : ""
+  })`;
   copyToClipboard(link);
 }
 

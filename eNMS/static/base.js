@@ -701,8 +701,7 @@ function showFileUploadPanel(folder) {
 }
 
 // eslint-disable-next-line
-function createNewFolder() {
-}
+function createNewFolder() {}
 
 (function($, jstree, undefined) {
   "use strict";
@@ -732,16 +731,17 @@ function copyToClipboard(text, isId) {
 }
 
 function buildLinks(result, id) {
-  const base = `get_result("${result.service}"`
+  const base = `get_result("${result.service}"`;
   if (result.device) {
     links = [
       [`${result.device}`, `${base}, device="${result.device}")`],
-      [`Current Device`, `${base}, device=device.name)`]
-    ]
+      [`Current Device`, `${base}, device=device.name)`],
+    ];
   } else {
     links = [["Top-level result", `${base})`]];
   }
-  const table = links.map((link, index) => {
+  const table = links
+    .map((link, index) => {
       const inputId = `input-${index}-${id}`;
       return `<tr>
         <td style="text-align: center; vertical-align: middle;">
@@ -749,7 +749,9 @@ function buildLinks(result, id) {
         </td>
         <td>
           <div class="input-group" style="width: 800px">
-            <input id="${inputId}" type="text" class="form-control" value='${link[1]}'>
+            <input id="${inputId}" type="text" class="form-control" value='${
+        link[1]
+      }'>
             <span class="input-group-btn">
               <button class="btn btn-default" onclick="copyToClipboard('${inputId}', true)" type="button">
                 <span class="glyphicon glyphicon-copy"></span>
@@ -757,9 +759,9 @@ function buildLinks(result, id) {
             </span>
           </div>
         </td>
-      </tr>`
-    }
-  ).join("");
+      </tr>`;
+    })
+    .join("");
   return `
     <div class="modal-body">
       <table
@@ -771,7 +773,7 @@ function buildLinks(result, id) {
           ${table}
         </tbody>
       </table>
-    </div>`
+    </div>`;
 }
 
 function copyClipboard(elementId, result) {
@@ -784,13 +786,13 @@ function copyClipboard(elementId, result) {
       connector: true,
       delay: 0,
       header: false,
-      mode: 'sticky',
+      mode: "sticky",
       position: {
-        my: 'right-top',
-        at: 'left-bottom'
+        my: "right-top",
+        at: "left-bottom",
       },
       target: target,
-      ttipEvent: 'click',
+      ttipEvent: "click",
       theme: "light",
     });
   }

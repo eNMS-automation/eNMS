@@ -104,7 +104,12 @@ class Device(CustomDevice):
     services = relationship(
         "Service", secondary=service_device_table, back_populates="devices"
     )
-    runs = relationship("Run", secondary=run_device_table, back_populates="devices")
+    runs = relationship(
+        "Run",
+        secondary=run_device_table,
+        back_populates="devices",
+        cascade="all,delete",
+    )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 

@@ -1,7 +1,7 @@
 {% extends "base_site.html" %} {% block title %} Workflow Builder {% endblock
 title %} {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {%
 block content %}
-<div class="right_col" role="main">
+<div class="right_col" role="main" id="workflow-container">
   <div class="row">
     <div class="col-md-12 col-xs-12">
       <nav class="navbar navbar-default" role="navigation">
@@ -139,6 +139,14 @@ block content %}
                 data-tooltip="Zoom Out"
                 style="cursor: pointer"
                 ><span class="glyphicon glyphicon-zoom-out"></span
+              ></a>
+            </li>
+            <li>
+              <a
+                onclick="fullScreen()"
+                data-tooltip="Full screen"
+                style="cursor: pointer"
+                ><span class="glyphicon glyphicon-fullscreen"></span
               ></a>
             </li>
             <li id="left-arrow">

@@ -8,6 +8,12 @@ Version 3.19
 - Add new File Management mechanism: browse, download, upload, delete and rename local files.
   Mechanism to use local files as part of the automation services.
 - Add new color code for the logs window.
+- Add New Copy to clipboard mechanism:
+
+    - copy from RC on a service in Workflow builder
+    - copy from icon in result tables
+
+- Full screen workflow builder
 
 Version 3.18
 ------------

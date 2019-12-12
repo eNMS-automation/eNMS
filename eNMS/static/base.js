@@ -870,7 +870,6 @@ function displayFiles() {
 }
 
 function initSidebar() {
-  if (user.small_menu) $("body").toggleClass("nav-md nav-sm");
   let setContentHeight = function() {
     $(".right_col").css("min-height", $(window).height());
     let bodyHeight = $("body").outerHeight();

@@ -267,6 +267,12 @@
       let action = {};
       let config = {{ config|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";
+      if (user.small_menu) {
+        document.querySelector('body').classList.add("nav-sm");
+        document.querySelector('body').classList.remove("nav-md");
+        $("#eNMS").css({ "font-size": "17px" });
+        $("#eNMS-version").css({ "font-size": "15px" });
+      }
     </script>
     <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/moment/moment.min.js') }}"></script>

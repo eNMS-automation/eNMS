@@ -612,7 +612,6 @@ function createNew(mode) {
 function getResultLink(service, device) {
   const link = `get_result("${service.name}"${device ? ", device=device.name" : ""})`;
   copyToClipboard(link);
-  alertify.notify(`Copied to Clipboard: ${link}`, "success", 5);
 }
 
 Object.assign(action, {

@@ -719,17 +719,15 @@ function createNewFolder() {
   };
 })(jQuery);
 
-function copyToClipboard(text) {
+function copyToClipboard(text, isId) {
+  if (isId) text = $(`#${text}`).val();
   let dummy = document.createElement("textarea");
   document.body.appendChild(dummy);
   dummy.value = text;
   dummy.select();
   document.execCommand("copy");
   document.body.removeChild(dummy);
-}
-
-function copyInputToClipboard(index, id) {
-  copyToClipboard($(`#input-${index}-${id}`).val());
+  alertify.notify(`Copied to Clipboard: ${text}`, "success", 5);
 }
 
 function buildLinks(result, id) {
@@ -742,22 +740,24 @@ function buildLinks(result, id) {
   } else {
     links = [["Top-level result", `${base})`]];
   }
-  const table = links.map((link, index) => `
-    <tr>
-      <td style="text-align: center; vertical-align: middle;">
-        ${link[0]}
-      </td>
-      <td>
-        <div class="input-group" style="width: 800px">
-          <input id="input-${index}-${id}" type="text" class="form-control" value='${link[1]}'>
-          <span class="input-group-btn">
-            <button class="btn btn-default" onclick="copyInputToClipboard(${index}, '${id}')"  type="button">
-              <span class="glyphicon glyphicon-copy"></span>
-            </button>
-          </span>
-        </div>
-      </td>
-    </tr>`
+  const table = links.map((link, index) => {
+      const inputId = `input-${index}-${id}`;
+      return `<tr>
+        <td style="text-align: center; vertical-align: middle;">
+          ${link[0]}
+        </td>
+        <td>
+          <div class="input-group" style="width: 800px">
+            <input id="${inputId}" type="text" class="form-control" value='${link[1]}'>
+            <span class="input-group-btn">
+              <button class="btn btn-default" onclick="copyToClipboard('${inputId}', true)" type="button">
+                <span class="glyphicon glyphicon-copy"></span>
+              </button>
+            </span>
+          </div>
+        </td>
+      </tr>`
+    }
   ).join("");
   return `
     <div class="modal-body">

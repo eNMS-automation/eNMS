@@ -1033,7 +1033,7 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   e.preventDefault();
 });
 
-function fullScreen(containerId) {
+function fullScreen() {
   if (
     document.fullscreenElement ||
     document.webkitFullscreenElement ||
@@ -1050,7 +1050,7 @@ function fullScreen(containerId) {
       document.msExitFullscreen();
     }
   } else {
-    element = $(`#${containerId}`).get(0);
+    element = $("#container-body").get(0);
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {

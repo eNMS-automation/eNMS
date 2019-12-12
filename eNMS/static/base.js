@@ -870,6 +870,7 @@ function displayFiles() {
 }
 
 function initSidebar() {
+  console.log(user.menu)
   let setContentHeight = function() {
     $(".right_col").css("min-height", $(window).height());
     let bodyHeight = $("body").outerHeight();
@@ -919,7 +920,7 @@ function initSidebar() {
       }
     });
 
-  $("#menu_toggle").on("click", function() {
+  let switchMenu = function() {
     if ($("body").hasClass("nav-md")) {
       $("#eNMS").css({ "font-size": "17px" });
       $("#eNMS-version").css({ "font-size": "15px" });
@@ -952,34 +953,44 @@ function initSidebar() {
         .dataTable()
         .fnDraw();
     });
-  });
+  }
 
-  const url = "a[href='" + currentUrl + "']";
-  $("#sidebar-menu")
-    .find(url)
-    .parent("li")
-    .addClass("current-page");
-  $("#sidebar-menu")
-    .find("a")
-    .filter(function() {
-      return this.href == currentUrl;
-    })
-    .parent("li")
-    .addClass("current-page")
-    .parents("ul")
-    .slideDown(function() {
-      setContentHeight();
-    })
-    .parent()
-    .addClass("active");
-
-  setContentHeight();
-  if ($.fn.mCustomScrollbar) {
-    $(".menu_fixed").mCustomScrollbar({
-      autoHideScrollbar: true,
-      theme: "minimal",
-      mouseWheel: { preventDefault: true },
+  $("#menu_toggle").on("click", function() {
+    call(`/change_menu/${user.id}`, function(result) {
+      console.log(
     });
+    switchMenu();
+  });
+  if (user.menu == "normal") {
+    switchMenu();
+  } else {
+    const url = "a[href='" + currentUrl + "']";
+    $("#sidebar-menu")
+      .find(url)
+      .parent("li")
+      .addClass("current-page");
+    $("#sidebar-menu")
+      .find("a")
+      .filter(function() {
+        return this.href == currentUrl;
+      })
+      .parent("li")
+      .addClass("current-page")
+      .parents("ul")
+      .slideDown(function() {
+        setContentHeight();
+      })
+      .parent()
+      .addClass("active");
+
+    setContentHeight();
+    if ($.fn.mCustomScrollbar) {
+      $(".menu_fixed").mCustomScrollbar({
+        autoHideScrollbar: true,
+        theme: "minimal",
+        mouseWheel: { preventDefault: true },
+      });
+    }
   }
 }
 

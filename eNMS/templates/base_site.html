@@ -255,6 +255,7 @@
     {% block javascripts %}
     <script>
       const page = "{{ endpoint }}";
+      const user = {{ user|tojson|safe }};
       const propertyTypes = {{ property_types|tojson|safe }};
       const formProperties = {{ form_properties|tojson|safe }};
       const tableProperties = {{ table_properties|tojson|safe }};

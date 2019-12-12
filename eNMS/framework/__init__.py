@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, make_response, render_template
+from flask_login import current_user
 from itertools import chain
 
 from eNMS import app
@@ -46,6 +47,7 @@ def configure_context_processor(flask_app):
                 for service, service_class in sorted(models.items())
                 if hasattr(service_class, "pretty_name")
             },
+            "user": current_user.serialized,
             "version": app.version,
         }
 

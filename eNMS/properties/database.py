@@ -12,6 +12,7 @@ dont_track_changes = [
     "running",
     "runtime",
     "duration",
+    "small_menu",
     "state",
     "status",
     "success",

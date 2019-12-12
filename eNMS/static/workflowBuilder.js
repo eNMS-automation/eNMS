@@ -609,15 +609,6 @@ function createNew(mode) {
   }
 }
 
-function copyToClipboard(text) {
-  let dummy = document.createElement("textarea");
-  document.body.appendChild(dummy);
-  dummy.value = text;
-  dummy.select();
-  document.execCommand("copy");
-  document.body.removeChild(dummy);
-}
-
 function getResultLink(service, device) {
   const link = `get_result("${service.name}"${device ? ", device=device.name" : ""})`;
   copyToClipboard(link);

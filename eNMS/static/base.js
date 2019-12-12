@@ -719,6 +719,19 @@ function createNewFolder() {
   };
 })(jQuery);
 
+function copyToClipboard(text) {
+  let dummy = document.createElement("textarea");
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand("copy");
+  document.body.removeChild(dummy);
+}
+
+function copyInputToClipboard(index, id) {
+  copyToClipboard($(`#input-${index}-${id}`).val());
+}
+
 function buildLinks(result, id) {
   const base = `get_result("${result.service}"`
   if (result.device) {
@@ -729,7 +742,6 @@ function buildLinks(result, id) {
   } else {
     links = [["Top-level result", `${base})`]];
   }
-  console.log(links)
   const table = links.map((link, index) => `
     <tr>
       <td style="text-align: center; vertical-align: middle;">
@@ -739,7 +751,7 @@ function buildLinks(result, id) {
         <div class="input-group" style="width: 800px">
           <input id="input-${index}-${id}" type="text" class="form-control" value='${link[1]}'>
           <span class="input-group-btn">
-            <button class="btn btn-default" data-clipboard-target="#input-${index}-${id}" type="button">
+            <button class="btn btn-default" onclick="copyInputToClipboard(${index}, '${id}')"  type="button">
               <span class="glyphicon glyphicon-copy"></span>
             </button>
           </span>
@@ -747,7 +759,6 @@ function buildLinks(result, id) {
       </td>
     </tr>`
   ).join("");
-  console.log(table);
   return `
     <div class="modal-body">
       <table

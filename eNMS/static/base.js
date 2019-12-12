@@ -210,7 +210,7 @@ function processResults(callback, results) {
       alertify.notify(`Wrong input for "${field}": ${error}`, "error", 20);
     }
   } else {
-    callback(results);
+    if (callback) callback(results);
   }
 }
 
@@ -870,7 +870,6 @@ function displayFiles() {
 }
 
 function initSidebar() {
-  console.log(user.menu)
   let setContentHeight = function() {
     $(".right_col").css("min-height", $(window).height());
     let bodyHeight = $("body").outerHeight();
@@ -921,7 +920,8 @@ function initSidebar() {
     });
 
   let switchMenu = function() {
-    if ($("body").hasClass("nav-md")) {
+    $("body").toggleClass("nav-md nav-sm");
+    if ($("body").hasClass("nav-sm")) {
       $("#eNMS").css({ "font-size": "17px" });
       $("#eNMS-version").css({ "font-size": "15px" });
       $("#sidebar-menu")
@@ -946,7 +946,6 @@ function initSidebar() {
         .find("li.active-sm")
         .removeClass("active-sm");
     }
-    $("body").toggleClass("nav-md nav-sm");
     setContentHeight();
     $(".dataTable").each(function() {
       $(this)
@@ -956,12 +955,10 @@ function initSidebar() {
   }
 
   $("#menu_toggle").on("click", function() {
-    call(`/switch_menu/${user.id}`, function(result) {
-      console.log();
-    });
+    call(`/switch_menu/${user.id}`);
     switchMenu();
   });
-  console.log(user.small_menu)
+
   if (user.small_menu) {
     switchMenu();
   } else {

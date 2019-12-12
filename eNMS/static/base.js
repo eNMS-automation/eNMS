@@ -1044,7 +1044,6 @@ $(document).ready(function() {
   if (page.includes("table")) initTable(page.split("/")[1]);
   configureForm(page);
   doc(page);
-  new ClipboardJS('.btn');
   detectUserInactivity();
   createTooltips();
 });

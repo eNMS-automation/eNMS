@@ -297,6 +297,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     return;
   }
   return jsPanel.create({
+    container: "#container-body",
     id: panelId,
     border: "2px solid #2A3F52",
     theme: "light filledlight",

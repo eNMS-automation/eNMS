@@ -631,7 +631,7 @@ function fullScreen() {
       document.msExitFullscreen();
     }
   } else {
-    element = $('#test').get(0);
+    element = $("#workflow-container").get(0);
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {

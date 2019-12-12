@@ -89,11 +89,159 @@
           id="sidebar"
           class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}"
         >
-          {% include "sidebar.html" %}
+          <div class="left_col scroll-view">
+            <br />
+            <div class="navbar nav_title" style="border:0;">
+              <center>
+                <h3 id="eNMS" style="font-size:30px; color:#30C2A5">eNMS</h3>
+                <h3 id="eNMS-version" style="font-size:20px;">{{ version }}</h3>
+              </center>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div
+              id="sidebar-menu"
+              class="main_menu_side hidden-print main_menu"
+            >
+              <div class="menu_section">
+                <ul class="nav side-menu">
+                  <li>
+                    <a
+                      ><i class="fa fa-home"></i>Home<span
+                        class="fa fa-chevron-down"
+                      ></span
+                    ></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/dashboard">Dashboard</a></li>
+                      <li><a href="/table/changelog">Changelog</a></li>
+                    </ul>
+                  </li>
+                  <li id="Admin">
+                    <a
+                      ><i class="fa fa-users"></i>Admin<span
+                        class="fa fa-chevron-down"
+                      ></span
+                    ></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/table/user">Users</a></li>
+                      {% if config["cluster"]["active"] %}
+                      <li><a href="/table/server">Servers</a></li>
+                      {% endif %}
+                      <li><a href="/administration">Administration</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a
+                      ><i class="fa fa-database"></i>Inventory<span
+                        class="fa fa-chevron-down"
+                      ></span
+                    ></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/table/device">Devices</a></li>
+                      <li><a href="/table/link">Links</a></li>
+                      <li><a href="/table/pool">Pools</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a
+                      ><i class="fa fa-map-marker"></i>Visualization<span
+                        class="fa fa-chevron-down"
+                      ></span
+                    ></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/view/network">Network</a></li>
+                      <li><a href="/view/site">Sites</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a
+                      ><i class="fa fa-sitemap"></i>Automation<span
+                        class="fa fa-chevron-down"
+                      ></span
+                    ></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/table/service">Services</a></li>
+                      <li><a href="/workflow_builder">Workflow Builder</a></li>
+                      <li><a href="/table/run">Results</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a
+                      ><i class="fa fa-clock-o"></i>Scheduling<span
+                        class="fa fa-chevron-down"
+                      ></span
+                    ></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/table/task">Tasks</a></li>
+                      <li><a href="/table/event">Events</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         {% endblock sidebar %} {% block header %}
         <div class="top_nav">
-          {% include "header.html" %}
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <div class="nav toggle">
+                <a onclick="fullScreen('container-body')"
+                  ><i class="glyphicon glyphicon-fullscreen"></i
+                ></a>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a
+                    href="javascript:;"
+                    class="user-profile dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="{{ url_for('static', filename='images/logo.png') }}"
+                      alt=""
+                    />
+                    {{ current_user.name }}
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li>
+                      <a href="/logout"
+                        ><i class="fa fa-sign-out pull-right"></i>Log out</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li class="">
+                  <a
+                    id="doc-link"
+                    target="_blank"
+                    href="https://enms.readthedocs.io/en/latest/base/introduction.html"
+                  >
+                    <img
+                      src="{{ url_for('static', filename='images/readthedocs.png') }}"
+                      alt=""
+                    />
+                    Docs
+                  </a>
+                </li>
+                <li class="">
+                  <a onclick="displayFiles()" style="cursor:pointer">
+                    <img
+                      src="{{ url_for('static', filename='images/files.png') }}"
+                      height="35"
+                      width="35"
+                    />
+                    Files
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
         {% endblock header %} {% block content %} {% endblock content %}
       </div>

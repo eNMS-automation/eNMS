@@ -145,7 +145,7 @@ class Task(AbstractBase):
         Session.commit()
 
     def run_properties(self):
-        properties = {"task_payload": self.initial_payload, "task": self.id}
+        properties = {"task": self.id, **self.initial_payload}
         if self.devices:
             properties["devices"] = [device.id for device in self.devices]
         if self.pools:

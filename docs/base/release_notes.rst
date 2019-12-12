@@ -14,6 +14,7 @@ Version 3.19
     - copy from icon in result tables
 
 - Full screen workflow builder
+- Remember menu size PER USER (parameter stored in DB, not just session)
 
 Version 3.18
 ------------

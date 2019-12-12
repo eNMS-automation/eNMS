@@ -870,6 +870,7 @@ function displayFiles() {
 }
 
 function initSidebar() {
+  if (user.small_menu) $("body").toggleClass("nav-md nav-sm");
   let setContentHeight = function() {
     $(".right_col").css("min-height", $(window).height());
     let bodyHeight = $("body").outerHeight();
@@ -920,7 +921,6 @@ function initSidebar() {
     });
 
   let switchMenu = function() {
-    $("body").toggleClass("nav-md nav-sm");
     if ($("body").hasClass("nav-sm")) {
       $("#eNMS").css({ "font-size": "17px" });
       $("#eNMS-version").css({ "font-size": "15px" });
@@ -945,7 +945,26 @@ function initSidebar() {
       $("#sidebar-menu")
         .find("li.active-sm")
         .removeClass("active-sm");
+      const url = "a[href='" + currentUrl + "']";
+      $("#sidebar-menu")
+        .find(url)
+        .parent("li")
+        .addClass("current-page");
+      $("#sidebar-menu")
+        .find("a")
+        .filter(function() {
+          return this.href == currentUrl;
+        })
+        .parent("li")
+        .addClass("current-page")
+        .parents("ul")
+        .slideDown(function() {
+          setContentHeight();
+        })
+        .parent()
+        .addClass("active");
     }
+
     setContentHeight();
     $(".dataTable").each(function() {
       $(this)
@@ -954,42 +973,13 @@ function initSidebar() {
     });
   }
 
+  switchMenu();
   $("#menu_toggle").on("click", function() {
     call(`/switch_menu/${user.id}`);
-    switchMenu();
+      $("body").toggleClass("nav-md nav-sm");
+      switchMenu();
   });
-
-  if (user.small_menu) {
-    switchMenu();
-  } else {
-    const url = "a[href='" + currentUrl + "']";
-    $("#sidebar-menu")
-      .find(url)
-      .parent("li")
-      .addClass("current-page");
-    $("#sidebar-menu")
-      .find("a")
-      .filter(function() {
-        return this.href == currentUrl;
-      })
-      .parent("li")
-      .addClass("current-page")
-      .parents("ul")
-      .slideDown(function() {
-        setContentHeight();
-      })
-      .parent()
-      .addClass("active");
-
-    setContentHeight();
-    if ($.fn.mCustomScrollbar) {
-      $(".menu_fixed").mCustomScrollbar({
-        autoHideScrollbar: true,
-        theme: "minimal",
-        mouseWheel: { preventDefault: true },
-      });
-    }
-  }
+  
 }
 
 (function($, window) {

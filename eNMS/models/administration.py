@@ -54,6 +54,7 @@ class User(AbstractBase, UserMixin):
     permissions = Column(MutableList)
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(SmallString)
+    menu = Column(SmallString, default="normal")
 
     def generate_row(self):
         return super().generate_row() + [

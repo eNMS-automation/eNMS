@@ -921,7 +921,7 @@ function initSidebar() {
 
   $("#menu_toggle").on("click", function() {
     if ($("body").hasClass("nav-md")) {
-      $("#eNMS").css({ "font-size": "20px" });
+      $("#eNMS").css({ "font-size": "17px" });
       $("#eNMS-version").css({ "font-size": "15px" });
       $("#sidebar-menu")
         .find("li.active ul")

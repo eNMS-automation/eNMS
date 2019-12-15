@@ -401,14 +401,14 @@ class Run(AbstractBase):
                 ):
                     self.close_device_connection(device)
                 self.convert_result(results)
+                if "success" not in results:
+                    results["success"] = True
                 try:
                     self.eval(
                         self.service.result_postprocessing, function="exec", **locals()
                     )
                 except SystemExit:
                     pass
-                if "success" not in results:
-                    results["success"] = True
                 if results["success"] and self.validation_method != "none":
                     self.validate_result(results, payload, device)
                 if results["success"]:

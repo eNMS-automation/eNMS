@@ -6,7 +6,9 @@ Version 3.18.1
 --------------
 
 - Display scoped name in hierarchial display mode
-- Invalid post request editing edge
+- Fix bug "Invalid post request" editing edge
+- Improve display of filtering forms
+- Reduce size of the service and workflow edit panel for low-resolution screens
 
 Version 3.18
 ------------

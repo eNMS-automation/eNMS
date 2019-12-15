@@ -269,7 +269,7 @@ function processWorkflowData(instance, id) {
           $("#current-workflow")
             .val(instance.id)
             .trigger("change");
-          displayWorkflow({ workflow: instance, runtimes: [] });
+          displayWorkflow({ service: instance, runtimes: [] });
         }
       } else {
         call(
@@ -642,7 +642,10 @@ Object.assign(action, {
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
   Upward: () => {
-    parentPath = currentPath.split(">").slice(0, -1).join(">");
+    const parentPath = currentPath
+      .split(">")
+      .slice(0, -1)
+      .join(">");
     if (parentPath) switchToWorkflow(parentPath);
   },
 });

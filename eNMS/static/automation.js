@@ -340,7 +340,10 @@ function resumeTask(id) {
 
 function switchToWorkflow(path, arrow) {
   if (typeof path === "undefined") return;
+  console.log(path)
   if (!path.includes(">")) {
+    $("#up-arrow").addClass("disabled");
+  } else {
     $("#up-arrow").removeClass("disabled");
   }
   currentPath = path;

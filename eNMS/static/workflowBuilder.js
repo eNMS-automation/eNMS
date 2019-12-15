@@ -106,6 +106,7 @@ function displayWorkflow(workflowData) {
         $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
+        $(".workflow-selection").toggle(selectedObject.type == "workflow");
       } else if (typeof edge !== "undefined" && !ends.has(node)) {
         graph.selectEdges([edge]);
         $(".menu-entry ").hide();
@@ -637,6 +638,7 @@ Object.assign(action, {
   Skip: () => skipServices(),
   "Zoom In": () => graph.zoom(0.2),
   "Zoom Out": () => graph.zoom(-0.2),
+  "Enter Workflow": (node) => switchToWorkflow(`${currentPath}>${node.id}`),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
   Upward: () => {

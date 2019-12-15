@@ -14,6 +14,7 @@ from eNMS.models.inventory import Device  # noqa: F401
 from eNMS.models.execution import Run  # noqa: F401
 from eNMS.models.scheduling import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
+from eNMS.properties.table import table_properties
 
 
 class Service(AbstractBase):
@@ -112,8 +113,12 @@ class Service(AbstractBase):
             workflow = f"[{self.workflows[0].name}] "
         self.name = f"{workflow}{name or self.scoped_name}"
 
-    def generate_row(self):
-        rows = super().generate_row()
+    def generate_row(self, **kwargs):
+        hierarchical_display = kwargs["form"]["parent-filtering"] == "true"
+        rows = [self.scoped_name if hierarchical_display else self.name] + [
+            getattr(self, f"table_{property}", getattr(self, property))
+            for property in table_properties["service"][1:]
+        ]
         if self.type == "workflow":
             onclick = f"switchToWorkflow('{self.id}')"
             rows[0] = f"""<b><a href="#" onclick="{onclick}">{rows[0]}</a></b>"""

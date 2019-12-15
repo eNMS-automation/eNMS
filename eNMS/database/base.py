@@ -44,7 +44,7 @@ class AbstractBase(Base):
         else:
             super().__setattr__(property, value)
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return [
             getattr(self, f"table_{property}", getattr(self, property))
             for property in table_properties[self.type]

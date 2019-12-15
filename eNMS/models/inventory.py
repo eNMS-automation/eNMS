@@ -124,7 +124,7 @@ class Device(CustomDevice):
     def ui_name(self):
         return f"{self.name} ({self.model})" if self.model else self.name
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
@@ -231,7 +231,7 @@ class Link(Object):
         )
         super().update(**kwargs)
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
@@ -317,7 +317,7 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">

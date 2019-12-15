@@ -79,7 +79,7 @@ class Result(AbstractBase):
             f'style="width:100%">{label}</button>'
         )
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""<button type="button" class="btn btn-info btn-sm"
             onclick="showResult('{self.id}')">Results</button>""",
@@ -151,7 +151,7 @@ class Run(AbstractBase):
         result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">

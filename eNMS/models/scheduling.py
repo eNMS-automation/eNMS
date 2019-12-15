@@ -58,7 +58,7 @@ class Task(AbstractBase):
             app.scheduler.remove_job(self.aps_job_id)
         Session.commit()
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 250px">
@@ -232,7 +232,7 @@ class Event(AbstractBase):
     service = relationship("Service", back_populates="events")
     service_name = association_proxy("service", "name")
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">

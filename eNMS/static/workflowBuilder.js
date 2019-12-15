@@ -821,7 +821,7 @@ function resetDisplay() {
   });
 }
 
-function getWorkflowState(periodic) {
+function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
@@ -836,6 +836,7 @@ function getWorkflowState(periodic) {
     });
   }
   if (periodic) setTimeout(() => getWorkflowState(true), 4000);
+  if (notification) alertify.notify("Workflow refreshed.", "success", 5);
 }
 
 (function() {

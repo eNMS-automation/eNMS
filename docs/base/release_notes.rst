@@ -2,6 +2,12 @@
 Release Notes
 =============
 
+Version 3.18.1
+--------------
+
+- Display scoped name in hierarchial display mode
+- Invalid post request editing edge
+
 Version 3.18
 ------------
 
@@ -26,12 +32,6 @@ Version 3.18
   - run device by device
   - service by service with workflow targets
   - service by service with service targets
-
-- Fix start/end deletion issue + display
-- Fix tree bug with shared service in different subworkflows not properly displayed
-- Run Only Once services show no longer displays ( 0 failed / 0 passed).
-- Fix services displayed as red when successful
-- Fix service order in the workflow
 
 Version 3.17.2
 --------------

@@ -63,7 +63,7 @@ class AutomationController(BaseController):
                 elif service in workflow.services:
                     errors.append(f"This workflow already contains '{service.name}'.")
         if errors:
-            return {"error": errors}
+            return {"alert": errors}
         for service in service_instances:
             if kwargs["mode"] == "deep":
                 service = service.duplicate(workflow)
@@ -370,7 +370,7 @@ class AutomationController(BaseController):
         try:
             return getattr(fetch("task", id=task_id), action)()
         except JobLookupError:
-            return {"error": "This task no longer exists."}
+            return {"alert": "This task no longer exists."}
 
     def scan_playbook_folder(self):
         path = Path(

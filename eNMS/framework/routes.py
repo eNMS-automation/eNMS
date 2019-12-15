@@ -191,7 +191,7 @@ def get_requests_sink(_):
 def route(page):
     f, *args = page.split("/")
     if f not in app.json_endpoints + app.form_endpoints:
-        return jsonify({"error": "Invalid POST request."})
+        return jsonify({"alert": "Invalid POST request."})
     form_type = request.form.get("form_type")
     if f in app.json_endpoints:
         result = getattr(app, f)(*args, **request.json)
@@ -210,4 +210,4 @@ def route(page):
         Session.rollback()
         if app.config["app"]["config_mode"] == "debug":
             raise
-        return jsonify({"error": handle_exception(str(exc))})
+        return jsonify({"alert": handle_exception(str(exc))})

@@ -192,11 +192,11 @@ function cantorPairing(x, y) {
 function processResults(callback, results) {
   if (results === false) {
     alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
-  } else if (results && results.error) {
-    if (Array.isArray(results.error)) {
-      results.error.map((e) => alertify.notify(e, "error", 5));
+  } else if (results && results.alert) {
+    if (Array.isArray(results.alert)) {
+      results.alert.map((e) => alertify.notify(e, "error", 5));
     } else {
-      alertify.notify(results.error, "error", 5);
+      alertify.notify(results.alert, "error", 5);
     }
   } else if (results && results.invalid_form) {
     for (const [field, error] of Object.entries(results.errors)) {

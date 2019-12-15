@@ -639,7 +639,13 @@ Object.assign(action, {
   "Zoom Out": () => graph.zoom(-0.2),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
+  Upward: () => parentWorkflow(),
 });
+
+function parentWorkflow() {
+  parentPath = currentPath.split(">").slice(0, -1).join(">");
+  if (parentPath) switchToWorkflow(parentPath);
+}
 
 // eslint-disable-next-line
 function createLabel() {

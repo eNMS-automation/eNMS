@@ -114,7 +114,7 @@ class Service(AbstractBase):
         self.name = f"{workflow}{name or self.scoped_name}"
 
     def generate_row(self, **kwargs):
-        hierarchical_display = kwargs["form"]["parent-filtering"] == "true"
+        hierarchical_display = kwargs["form"].get("parent-filtering") == "true"
         rows = [self.scoped_name if hierarchical_display else self.name] + [
             getattr(self, f"table_{property}", getattr(self, property))
             for property in table_properties["service"][1:]

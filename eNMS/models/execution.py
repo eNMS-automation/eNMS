@@ -130,10 +130,9 @@ class Run(AbstractBase):
         super().__init__(**kwargs)
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
-            self.path = str(self.service_id)
+            self.path = str(self.service.id)
         else:
-            self.path = f"{self.parent.path}>{self.service_id}"
-        print("tttt"*100, self.path)
+            self.path = f"{self.parent.path}>{self.service.id}"
 
     @property
     def name(self):
@@ -182,7 +181,7 @@ class Run(AbstractBase):
         elif self.runtime == self.parent_runtime:
             return app.run_db[self.runtime]
         else:
-            return app.run_db[self.parent_runtime]["services"][self.service.id]
+            return app.run_db[self.parent_runtime]["services"][self.path]
 
     @property
     def edge_state(self):
@@ -263,8 +262,8 @@ class Run(AbstractBase):
             app.run_db[self.runtime] = state
         else:
             service_states = app.run_db[self.parent_runtime]["services"]
-            if self.service.id not in service_states:
-                service_states[self.service.id] = state
+            if self.path not in service_states:
+                service_states[self.path] = state
 
     def run(self, payload):
         self.init_state()

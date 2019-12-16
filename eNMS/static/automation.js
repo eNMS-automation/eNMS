@@ -157,7 +157,9 @@ function showRuntimePanel(type, service, runtime, displayTable) {
       : "result_table";
   const panelId = `${panelType}-${service.id}`;
   call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-    if (!runtimes.length) return alertify.notify(`No ${type} yet.`, "error", 5);
+    if (!runtime && !runtimes.length) {
+      return alertify.notify(`No ${type} yet.`, "error", 5);
+    }
     createPanel(panelType, `${type} - ${service.name}`, panelId, function() {
       $(`#runtimes-${panelId}`).empty();
       runtimes.forEach((runtime) => {

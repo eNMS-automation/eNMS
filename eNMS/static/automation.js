@@ -134,8 +134,8 @@ function showResult(id) {
         options,
         jsonResult
       );
-      $(".json-editor-node").forEach((value) => {
-        console.log(value);
+      document.querySelectorAll(".jsoneditor-string").forEach((el) => {
+        el.innerText = el.innerText.replace(/(?:\\n)/g, '\n');
       });
     });
   });

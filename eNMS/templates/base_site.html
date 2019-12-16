@@ -253,6 +253,7 @@
       </div>
     </div>
     {% block javascripts %}
+    <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
     <script>
       const page = "{{ endpoint }}";
       const user = {{ user|tojson|safe }};
@@ -274,7 +275,6 @@
         $("#eNMS-version").css({ "font-size": "15px" });
       }
     </script>
-    <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/moment/moment.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/full_calendar/fullcalendar.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/base/bootstrap/bootstrap.min.js') }}"></script>

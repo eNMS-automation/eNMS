@@ -107,6 +107,7 @@ class Run(AbstractBase):
     )
     children = relationship("Run", foreign_keys="Run.parent_id")
     parent_runtime = Column(SmallString)
+    path = Column(SmallString)
     parent_device_id = Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     devices = relationship("Device", secondary=run_device_table, back_populates="runs")
@@ -129,6 +130,10 @@ class Run(AbstractBase):
         super().__init__(**kwargs)
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
+            self.path = str(self.service_id)
+        else:
+            self.path = f"{self.parent.path}>{self.service_id}"
+        print("tttt"*100, self.path)
 
     @property
     def name(self):

@@ -150,36 +150,28 @@ function showRuntimePanel(type, service, runtime, displayTable) {
       ? "tree"
       : "result";
   const panelId = `${panelType}-${service.id}`;
-  createPanel(panelType, `${type} - ${service.name}`, panelId, function() {
-    if (runtime) {
-      $(`#div-runtimes-${panelId}`).hide();
-      displayFunction(service, runtime);
-    } else {
-      call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
-        if (!runtimes.length) {
-          return alertify.notify(`No ${type} yet.`, "error", 5);
-        } else {
-          $(`#runtimes-${panelId}`).empty();
-          runtimes.forEach((runtime) => {
-            $(`#runtimes-${panelId}`).append(
-              $("<option></option>")
-                .attr("value", runtime[0])
-                .text(runtime[1])
-            );
-          });
-          if (!runtime || runtime == "normal") {
-            runtime = runtimes[runtimes.length - 1][0];
-          }
-          $(`#runtimes-${panelId}`)
-            .val(runtime)
-            .selectpicker("refresh");
-          $(`#runtimes-${panelId}`).on("change", function() {
-            displayFunction(service, this.value, true);
-          });
-          displayFunction(service, runtime);
-        }
+  call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
+    if (!runtimes.length) return alertify.notify(`No ${type} yet.`, "error", 5);
+    createPanel(panelType, `${type} - ${service.name}`, panelId, function() {
+      $(`#runtimes-${panelId}`).empty();
+      runtimes.forEach((runtime) => {
+        $(`#runtimes-${panelId}`).append(
+          $("<option></option>")
+            .attr("value", runtime[0])
+            .text(runtime[1])
+        );
       });
-    }
+      if (!runtime || runtime == "normal") {
+        runtime = runtimes[runtimes.length - 1][0];
+      }
+      $(`#runtimes-${panelId}`)
+        .val(runtime)
+        .selectpicker("refresh");
+      $(`#runtimes-${panelId}`).on("change", function() {
+        displayFunction(service, this.value, true);
+      });
+      displayFunction(service, runtime);
+    });
   });
 }
 

@@ -104,7 +104,12 @@ class Device(CustomDevice):
     services = relationship(
         "Service", secondary=service_device_table, back_populates="devices"
     )
-    runs = relationship("Run", secondary=run_device_table, back_populates="devices")
+    runs = relationship(
+        "Run",
+        secondary=run_device_table,
+        back_populates="devices",
+        cascade="all,delete",
+    )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
 
@@ -119,7 +124,7 @@ class Device(CustomDevice):
     def ui_name(self):
         return f"{self.name} ({self.model})" if self.model else self.name
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
@@ -226,7 +231,7 @@ class Link(Object):
         )
         super().update(**kwargs)
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
@@ -312,7 +317,7 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">

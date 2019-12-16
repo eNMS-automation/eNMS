@@ -210,7 +210,7 @@ class InventoryController(BaseController):
                     obj = fetch(obj_type, allow_none=True, name=name)
                     if not obj:
                         return {
-                            "error": f"{obj_type.capitalize()} '{name}' does not exist."
+                            "alert": f"{obj_type.capitalize()} '{name}' does not exist."
                         }
                     objects.append(obj)
             else:

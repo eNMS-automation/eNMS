@@ -63,7 +63,7 @@ class AutomationController(BaseController):
                 elif service in workflow.services:
                     errors.append(f"This workflow already contains '{service.name}'.")
         if errors:
-            return {"error": errors}
+            return {"alert": errors}
         for service in service_instances:
             if kwargs["mode"] == "deep":
                 service = service.duplicate(workflow)
@@ -268,9 +268,11 @@ class AutomationController(BaseController):
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
+        initial_payload = fetch("service", id=service).initial_payload
         run = factory("run", service=service, **run_kwargs)
         run.properties = kwargs
-        return run.run(kwargs.get("payload"))
+        payload = {**initial_payload, **kwargs}
+        return run.run(payload)
 
     def run_service(self, id=None, **kwargs):
         for property in ("user", "csrf_token", "form_type"):
@@ -364,7 +366,7 @@ class AutomationController(BaseController):
         try:
             return getattr(fetch("task", id=task_id), action)()
         except JobLookupError:
-            return {"error": "This task no longer exists."}
+            return {"alert": "This task no longer exists."}
 
     def scan_playbook_folder(self):
         path = Path(

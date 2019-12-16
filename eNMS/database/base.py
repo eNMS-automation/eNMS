@@ -44,14 +44,10 @@ class AbstractBase(Base):
         else:
             super().__setattr__(property, value)
 
-    def generate_row(self):
-        if "service" in self.type or self.type == "workflow":
-            table_type = "service"
-        else:
-            table_type = self.type
+    def generate_row(self, **kwargs):
         return [
             getattr(self, f"table_{property}", getattr(self, property))
-            for property in table_properties[table_type]
+            for property in table_properties[self.type]
         ]
 
     @property

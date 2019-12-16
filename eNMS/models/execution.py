@@ -86,7 +86,7 @@ class Result(AbstractBase):
             "device": self.device_name or "",
         }
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
               <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
@@ -170,7 +170,7 @@ class Run(AbstractBase):
         result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
 
-    def generate_row(self):
+    def generate_row(self, **kwargs):
         return super().generate_row() + [
             f"""
         <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
@@ -280,12 +280,10 @@ class Run(AbstractBase):
             if self.service.id not in service_states:
                 service_states[self.service.id] = state
 
-    def run(self, payload=None):
+    def run(self, payload):
         self.init_state()
         self.run_state["status"] = "Running"
         start = datetime.now().replace(microsecond=0)
-        if payload is None:
-            payload = self.service.initial_payload
         try:
             app.service_db[self.service.id]["runs"] += 1
             Session.commit()
@@ -422,14 +420,14 @@ class Run(AbstractBase):
                 ):
                     self.close_device_connection(device)
                 self.convert_result(results)
+                if "success" not in results:
+                    results["success"] = True
                 try:
                     self.eval(
                         self.service.result_postprocessing, function="exec", **locals()
                     )
                 except SystemExit:
                     pass
-                if "success" not in results:
-                    results["success"] = True
                 if results["success"] and self.validation_method != "none":
                     self.validate_result(results, payload, device)
                 if results["success"]:

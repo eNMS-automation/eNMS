@@ -396,9 +396,9 @@ class BaseController:
             Session.rollback()
             if isinstance(exc, IntegrityError):
                 return {
-                    "error": (f"There already is a {instance_type} with the same name")
+                    "alert": (f"There already is a {instance_type} with the same name")
                 }
-            return {"error": str(exc)}
+            return {"alert": str(exc)}
 
     def log(self, severity, content):
         factory(
@@ -442,7 +442,7 @@ class BaseController:
                 constraint = getattr(model, property) == (value == "bool-true")
             elif filter == "equality":
                 constraint = getattr(model, property) == value
-            elif filter == "inclusion" or DIALECT == "sqlite":
+            elif not filter or filter == "inclusion" or DIALECT == "sqlite":
                 constraint = getattr(model, property).contains(value)
             else:
                 regex_operator = "regexp" if DIALECT == "mysql" else "~"
@@ -519,7 +519,7 @@ class BaseController:
             "recordsTotal": Session.query(func.count(model.id)).scalar(),
             "recordsFiltered": get_query_count(result),
             "data": [
-                obj.generate_row()
+                obj.generate_row(**kwargs)
                 for obj in result.limit(int(kwargs["length"]))
                 .offset(int(kwargs["start"]))
                 .all()

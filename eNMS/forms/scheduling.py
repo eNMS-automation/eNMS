@@ -47,7 +47,7 @@ class TaskForm(BaseForm):
         ),
     )
     crontab_expression = StringField("Crontab Expression")
-    payload = DictField("Payload")
+    initial_payload = DictField("Payload")
 
     def validate(self):
         valid_form = super().validate()

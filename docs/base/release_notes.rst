@@ -16,6 +16,17 @@ Version 3.19
 - Full screen workflow builder
 - Remember menu size PER USER (parameter stored in DB, not just session)
 
+Version 3.18.1
+--------------
+
+- Display scoped name in hierarchial display mode
+- Fix bug "Invalid post request" editing edge
+- Improve display of filtering forms
+- Reduce size of the service and workflow edit panel for low-resolution screens
+- Add "success" key before result postprocessing
+- Remove "Enter subworfklow" button in toolbar and add the same button in right-click menu
+- Add button to switch to parent workflow
+
 Version 3.18
 ------------
 

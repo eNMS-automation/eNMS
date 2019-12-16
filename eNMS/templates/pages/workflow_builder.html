@@ -119,7 +119,7 @@ block content %}
           >
             <li>
               <a
-                onclick="getWorkflowState()"
+                onclick="getWorkflowState(false, true)"
                 data-tooltip="Refresh"
                 style="cursor: pointer"
                 ><span class="glyphicon glyphicon-refresh"></span
@@ -157,12 +157,12 @@ block content %}
                 ><span class="glyphicon glyphicon-chevron-right"></span
               ></a>
             </li>
-            <li>
+            <li id="up-arrow">
               <a
-                onclick="switchToSubworkflow()"
-                data-tooltip="Enter Subworkflow"
+                onclick="action['Upward']()"
+                data-tooltip="Switch to Parent Workflow"
                 style="cursor: pointer"
-                ><span class="glyphicon glyphicon-chevron-down"></span
+                ><span class="glyphicon glyphicon-chevron-up"></span
               ></a>
             </li>
           </ul>
@@ -293,6 +293,9 @@ block content %}
   </li>
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Results</a>
+  </li>
+  <li class="menu-entry node-selection workflow-selection">
+    <a tabindex="-1" href="#">Enter Workflow</a>
   </li>
   <li class="menu-entry divider node-selection">&nbsp</li>
   <li class="menu-entry node-selection">

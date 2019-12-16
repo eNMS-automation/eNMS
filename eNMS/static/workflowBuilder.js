@@ -106,6 +106,7 @@ function displayWorkflow(workflowData) {
         $(".menu-entry ").hide();
         $(`.${node.length == 36 ? "label" : "node"}-selection`).show();
         selectedObject = nodes.get(node);
+        $(".workflow-selection").toggle(selectedObject.type == "workflow");
       } else if (typeof edge !== "undefined" && !ends.has(node)) {
         graph.selectEdges([edge]);
         $(".menu-entry ").hide();
@@ -249,8 +250,9 @@ function switchToSubworkflow() {
 
 // eslint-disable-next-line
 function processWorkflowData(instance, id) {
-  if (instance.type == "workflow_edge") edges.update(edgeToEdge(instance));
-  if (instance.type.includes("service") || instance.type == "workflow") {
+  if (!instance.type) {
+    edges.update(edgeToEdge(instance));
+  } else if (instance.type.includes("service") || instance.type == "workflow") {
     if (id) {
       if (workflow.id == id) return;
       nodes.update(serviceToNode(instance));
@@ -267,7 +269,7 @@ function processWorkflowData(instance, id) {
           $("#current-workflow")
             .val(instance.id)
             .trigger("change");
-          displayWorkflow({ workflow: instance, runtimes: [] });
+          displayWorkflow({ service: instance, runtimes: [] });
         }
       } else {
         call(
@@ -645,8 +647,16 @@ Object.assign(action, {
   Skip: () => skipServices(),
   "Zoom In": () => graph.zoom(0.2),
   "Zoom Out": () => graph.zoom(-0.2),
+  "Enter Workflow": (node) => switchToWorkflow(`${currentPath}>${node.id}`),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
+  Upward: () => {
+    const parentPath = currentPath
+      .split(">")
+      .slice(0, -1)
+      .join(">");
+    if (parentPath) switchToWorkflow(parentPath);
+  },
 });
 
 // eslint-disable-next-line
@@ -829,7 +839,7 @@ function resetDisplay() {
   });
 }
 
-function getWorkflowState(periodic) {
+function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
@@ -844,6 +854,7 @@ function getWorkflowState(periodic) {
     });
   }
   if (periodic) setTimeout(() => getWorkflowState(true), 4000);
+  if (notification) alertify.notify("Workflow refreshed.", "success", 5);
 }
 
 (function() {

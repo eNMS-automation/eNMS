@@ -36,9 +36,7 @@ const panelSize = {
   configuration: "800 auto",
   database_deletion: "700 400",
   database_migration: "700 300",
-  device: "700 500",
   device_connection: "400 500",
-  device_filtering: "700 600",
   device_results: "1200 700",
   display: "700 700",
   display_configuration: "1200 800",
@@ -60,16 +58,12 @@ const panelSize = {
   service_results: "1200 700",
   server: "600 250",
   server_filtering: "700 450",
-  service: "1300 600",
-  service_filtering: "1000 600",
   ssh: "700 200",
   task: "900 600",
   task_filtering: "900 650",
   user: "600 300",
   user_filtering: "700 250",
   view: "700 300",
-  workflow: "1300 600",
-  workflow_filtering: "1000 600",
   workflow_results: "1200 700",
 };
 
@@ -199,11 +193,11 @@ function cantorPairing(x, y) {
 function processResults(callback, results) {
   if (results === false) {
     alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
-  } else if (results && results.error) {
-    if (Array.isArray(results.error)) {
-      results.error.map((e) => alertify.notify(e, "error", 5));
+  } else if (results && results.alert) {
+    if (Array.isArray(results.alert)) {
+      results.alert.map((e) => alertify.notify(e, "error", 5));
     } else {
-      alertify.notify(results.error, "error", 5);
+      alertify.notify(results.alert, "error", 5);
     }
   } else if (results && results.invalid_form) {
     for (const [field, error] of Object.entries(results.errors)) {
@@ -303,7 +297,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     theme: "light filledlight",
     headerLogo: "../static/images/logo.png",
     contentOverflow: "hidden scroll",
-    contentSize: panelSize[name] || "1000 600",
+    contentSize: panelSize[name] || "800 600",
     position: "center-top 0 10",
     headerTitle: title,
     contentAjax: {

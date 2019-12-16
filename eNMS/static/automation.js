@@ -113,10 +113,15 @@ function showResult(id) {
       const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
       const options = {
         mode: "view",
-        modes: ["code", "view"],
+        modes: ["code", "view", "form"],
         onModeChange: function(newMode) {
           editor.set(newMode == "code" ? result : jsonResult);
         },
+        onEvent(node, event) {
+          if (event.type === 'click') {
+            console.log(`results["${node.path.join('"]["')}"]`);
+          }
+        }
       };
       let editor = new JSONEditor(
         document.getElementById(`content-${id}`),

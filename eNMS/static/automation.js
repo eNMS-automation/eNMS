@@ -113,9 +113,9 @@ function showResult(id) {
       const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
       const options = {
         mode: "view",
-        modes: ["text", "view"],
+        modes: ["code", "view"],
         onModeChange: function(newMode) {
-          editor.set(newMode == "text" ? result : jsonResult);
+          editor.set(newMode == "code" ? result : jsonResult);
         },
       };
       let editor = new JSONEditor(

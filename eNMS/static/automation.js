@@ -108,7 +108,7 @@ function compare(type) {
 
 // eslint-disable-next-line
 function showResult(id) {
-  createPanel("display", "Result", id, function() {
+  createPanel("result", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
       const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
       const options = {
@@ -153,7 +153,7 @@ function showRuntimePanel(type, service, runtime, displayTable) {
       ? "logs"
       : service.type == "workflow" && !displayTable
       ? "tree"
-      : "result";
+      : "result_table";
   const panelId = `${panelType}-${service.id}`;
   call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
     if (!runtimes.length) return alertify.notify(`No ${type} yet.`, "error", 5);
@@ -276,7 +276,7 @@ function displayResultsTree(service, runtime) {
 }
 
 function displayResultsTable(service, runtime) {
-  $("#result").remove();
+  $("#result_table").remove();
   $(`#runtimes-result-${service.id}`).on("change", function() {
     tables[`result-${service.id}`].ajax.reload(null, false);
   });
@@ -284,7 +284,7 @@ function displayResultsTable(service, runtime) {
     "result",
     service,
     runtime || currentRuntime,
-    `result-${service.id}`
+    `result_table-${service.id}`
   );
 }
 

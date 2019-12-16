@@ -144,12 +144,9 @@ def workflow_builder():
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
-def form(form_type):
-    kwargs = (
-        {"fixed_columns": table_fixed_columns[form_type], "type": form_type}
-        if form_type == "result"
-        else {}
-    )
+def form(form_type, **kwargs):
+    if form_type == "result_table":
+        kwargs = {"fixed_columns": table_fixed_columns["result"], "type": "result"}
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",
         **{

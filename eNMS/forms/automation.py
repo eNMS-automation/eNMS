@@ -263,6 +263,11 @@ class LogsForm(BaseForm):
 class ResultForm(BaseForm):
     template = "result"
     form_type = HiddenField(default="result")
+
+
+class ResultTableForm(BaseForm):
+    template = "result_table"
+    form_type = HiddenField(default="result_table")
     runtimes = NoValidationSelectField("Runtime", choices=())
 
 

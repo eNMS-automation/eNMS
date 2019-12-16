@@ -119,7 +119,8 @@ function showResult(id) {
         },
         onEvent(node, event) {
           if (event.type === 'click') {
-            console.log(`results["${node.path.join('"]["')}"]`);
+            path = node.path.map((key) => typeof key == "string" ? `"${key}"` : key);
+            $(`#result-path-${id}`).val(`results[${path.join("][")}]`);
           }
         }
       };

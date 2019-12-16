@@ -54,7 +54,7 @@ const panelSize = {
   pool: "800 600",
   pool_filtering: "1000 700",
   pool_objects: "700 550",
-  result: "1200 700",
+  result_table: "1200 700",
   service_results: "1200 700",
   server: "600 250",
   server_filtering: "700 450",

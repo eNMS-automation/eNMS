@@ -47,7 +47,7 @@ def configure_context_processor(flask_app):
                 for service, service_class in sorted(models.items())
                 if hasattr(service_class, "pretty_name")
             },
-            "user": current_user.serialized,
+            "user": current_user.serialized if current_user.is_authenticated else None,
             "version": app.version,
         }
 

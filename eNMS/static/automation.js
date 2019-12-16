@@ -110,25 +110,33 @@ function compare(type) {
 function showResult(id) {
   createPanel("result", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
-      const jsonResult = parseObject(JSON.parse(JSON.stringify(result)));
+      const jsonResult = result; //parseObject(JSON.parse(JSON.stringify(result)));
       const options = {
         mode: "view",
         modes: ["code", "view", "form"],
         onModeChange: function(newMode) {
           editor.set(newMode == "code" ? result : jsonResult);
         },
+        onClassName: function() {
+          return "json-editor-node";
+        },
         onEvent(node, event) {
-          if (event.type === 'click') {
-            path = node.path.map((key) => typeof key == "string" ? `"${key}"` : key);
+          if (event.type === "click") {
+            path = node.path.map((key) =>
+              typeof key == "string" ? `"${key}"` : key
+            );
             $(`#result-path-${id}`).val(`results[${path.join("][")}]`);
           }
-        }
+        },
       };
       let editor = new JSONEditor(
         document.getElementById(`content-${id}`),
         options,
         jsonResult
       );
+      $(".json-editor-node").forEach((value) => {
+        console.log(value);
+      });
     });
   });
 }

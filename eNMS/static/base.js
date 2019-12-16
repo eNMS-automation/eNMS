@@ -964,15 +964,14 @@ function initSidebar() {
         .dataTable()
         .fnDraw();
     });
-  }
+  };
 
   switchMenu();
   $("#menu_toggle").on("click", function() {
     call(`/switch_menu/${user.id}`);
-      $("body").toggleClass("nav-md nav-sm");
-      switchMenu();
+    $("body").toggleClass("nav-md nav-sm");
+    switchMenu();
   });
-  
 }
 
 (function($, window) {

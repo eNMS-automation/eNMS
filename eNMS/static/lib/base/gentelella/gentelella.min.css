@@ -9,3 +9,12 @@
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
 }
+
+.different_element {
+    display: block;
+    white-space: pre-line !important;
+}
+
+.cell-pre {
+    white-space: pre;
+}

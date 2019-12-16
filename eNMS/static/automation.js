@@ -68,18 +68,6 @@ function panelCode(type, id, mode) {
   }
 }
 
-function parseObject(obj) {
-  for (let k in obj) {
-    if (typeof obj[k] === "object" && obj[k] !== null) {
-      parseObject(obj[k]);
-    } else if (obj.hasOwnProperty(k) && typeof obj[k] === "string") {
-      const lines = obj[k].replace(/(?:\\[rn]|[\r\n]+)+/g, "\n").split("\n");
-      if (lines.length > 1) obj[k] = lines;
-    }
-  }
-  return obj;
-}
-
 // eslint-disable-next-line
 function compare(type) {
   const v1 = $("input[name=v1]:checked").val();
@@ -110,15 +98,12 @@ function compare(type) {
 function showResult(id) {
   createPanel("result", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
-      const jsonResult = result; //parseObject(JSON.parse(JSON.stringify(result)));
+      const jsonResult = result;
       const options = {
         mode: "view",
         modes: ["code", "view", "form"],
         onModeChange: function(newMode) {
           editor.set(newMode == "code" ? result : jsonResult);
-        },
-        onClassName: function() {
-          return "json-editor-node";
         },
         onEvent(node, event) {
           if (event.type === "click") {

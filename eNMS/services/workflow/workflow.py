@@ -152,6 +152,8 @@ class Workflow(Service):
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
                 }
+                if run.parent_device_id:
+                    kwargs["parent_device"] = run.parent_device_id
                 service_run = factory("run", **kwargs)
                 results = service_run.run(payload)
             if service.run_method in ("once", "per_service_with_service_targets"):
@@ -226,6 +228,8 @@ class Workflow(Service):
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
                 }
+                if run.parent_device_id:
+                    kwargs["parent_device"] = run.parent_device_id
                 if device:
                     kwargs["devices"] = [device.id]
                 service_run = factory("run", **kwargs)

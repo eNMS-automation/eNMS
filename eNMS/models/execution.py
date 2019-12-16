@@ -343,21 +343,21 @@ class Run(AbstractBase):
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        if self.run_method != "per_device":
+        self.run_state["progress"]["device"]["total"] += len(self.devices)
+        if self.iteration_devices and not self.parent_device:
+            if not self.workflow:
+                return {
+                    "success": False,
+                    "result": "Device iteration not allowed outside of a workflow",
+                    "runtime": self.runtime,
+                }
+            results = [
+                self.device_iteration(payload, device) for device in self.devices
+            ]
+            return {"success": all(results), "runtime": self.runtime}
+        elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
-            self.run_state["progress"]["device"]["total"] += len(self.devices)
-            if self.iteration_devices and not self.parent_device:
-                if not self.workflow:
-                    return {
-                        "success": False,
-                        "result": "Device iteration not allowed outside of a workflow",
-                        "runtime": self.runtime,
-                    }
-                results = [
-                    self.device_iteration(payload, device) for device in self.devices
-                ]
-                return {"success": all(results), "runtime": self.runtime}
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)

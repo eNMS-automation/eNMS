@@ -340,8 +340,9 @@ class Run(AbstractBase):
         )
         derived_run.properties = self.properties
         success = derived_run.run(payload)["success"]
-        self.run_state["summary"]["success" if success else "failure"].append(device.name)
-        return derived_run.run(payload)["success"]
+        key = "success" if success else "failure"
+        self.run_state["summary"][key].append(device.name)
+        return success
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
@@ -462,7 +463,7 @@ class Run(AbstractBase):
             )
             self.log("error", chr(10).join(format_exc().splitlines()), device)
         results["duration"] = str(datetime.now().replace(microsecond=0) - start)
-        if device and not self.parent_device:
+        if device:
             status = "success" if results["success"] else "failure"
             self.run_state["progress"]["device"][status] += 1
             self.run_state["summary"][status].append(device.name)

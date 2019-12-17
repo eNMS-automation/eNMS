@@ -126,6 +126,7 @@ class Run(AbstractBase):
     )
     children = relationship("Run", foreign_keys="Run.parent_id")
     parent_runtime = Column(SmallString)
+    path = Column(SmallString)
     parent_device_id = Column(Integer, ForeignKey("device.id"))
     parent_device = relationship("Device", foreign_keys="Run.parent_device_id")
     devices = relationship("Device", secondary=run_device_table, back_populates="runs")
@@ -148,6 +149,9 @@ class Run(AbstractBase):
         super().__init__(**kwargs)
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
+            self.path = str(self.service.id)
+        else:
+            self.path = f"{self.parent.path}>{self.service.id}"
 
     @property
     def name(self):
@@ -196,7 +200,7 @@ class Run(AbstractBase):
         elif self.runtime == self.parent_runtime:
             return app.run_db[self.runtime]
         else:
-            return app.run_db[self.parent_runtime]["services"][self.service.id]
+            return app.run_db[self.parent_runtime]["services"][self.path]
 
     @property
     def edge_state(self):
@@ -277,8 +281,8 @@ class Run(AbstractBase):
             app.run_db[self.runtime] = state
         else:
             service_states = app.run_db[self.parent_runtime]["services"]
-            if self.service.id not in service_states:
-                service_states[self.service.id] = state
+            if self.path not in service_states:
+                service_states[self.path] = state
 
     def run(self, payload):
         self.init_state()
@@ -354,25 +358,28 @@ class Run(AbstractBase):
             },
         )
         derived_run.properties = self.properties
-        return derived_run.run(payload)["success"]
+        success = derived_run.run(payload)["success"]
+        key = "success" if success else "failure"
+        self.run_state["summary"][key].append(device.name)
+        return success
 
     def device_run(self, payload):
         self.devices = self.compute_devices(payload)
-        if self.run_method != "per_device":
+        self.run_state["progress"]["device"]["total"] += len(self.devices)
+        if self.iteration_devices and not self.parent_device:
+            if not self.workflow:
+                return {
+                    "success": False,
+                    "result": "Device iteration not allowed outside of a workflow",
+                    "runtime": self.runtime,
+                }
+            results = [
+                self.device_iteration(payload, device) for device in self.devices
+            ]
+            return {"success": all(results), "runtime": self.runtime}
+        elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
-            self.run_state["progress"]["device"]["total"] += len(self.devices)
-            if self.iteration_devices and not self.parent_device:
-                if not self.workflow:
-                    return {
-                        "success": False,
-                        "result": "Device iteration not allowed outside of a workflow",
-                        "runtime": self.runtime,
-                    }
-                results = [
-                    self.device_iteration(payload, device) for device in self.devices
-                ]
-                return {"success": all(results), "runtime": self.runtime}
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)
@@ -688,6 +695,7 @@ class Run(AbstractBase):
     def python_code_kwargs(_self, **locals):  # noqa: N805
         return {
             "config": app.config,
+            "devices": _self.devices,
             "get_var": partial(_self.get_var, locals.get("payload", {})),
             "get_result": _self.get_result,
             "log": _self.log,

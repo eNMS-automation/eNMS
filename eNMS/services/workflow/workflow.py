@@ -110,7 +110,6 @@ class Workflow(Service):
         number_of_runs = defaultdict(int)
         start = fetch("service", scoped_name="Start")
         end = fetch("service", scoped_name="End")
-        track_devices = run.run_method == "per_service_with_workflow_targets"
         services = [fetch("service", id=id) for id in run.start_services]
         visited, success, targets = set(), False, defaultdict(set)
         restart_run = run.restart_run
@@ -152,6 +151,8 @@ class Workflow(Service):
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
                 }
+                if run.parent_device_id:
+                    kwargs["parent_device"] = run.parent_device_id
                 service_run = factory("run", **kwargs)
                 results = service_run.run(payload)
             if service.run_method in ("once", "per_service_with_service_targets"):
@@ -226,6 +227,8 @@ class Workflow(Service):
                     "parent": run,
                     "parent_runtime": run.parent_runtime,
                 }
+                if run.parent_device_id:
+                    kwargs["parent_device"] = run.parent_device_id
                 if device:
                     kwargs["devices"] = [device.id]
                 service_run = factory("run", **kwargs)

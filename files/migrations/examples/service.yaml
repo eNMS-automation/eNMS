@@ -51,6 +51,7 @@
       0, 0]
     'Regression Workflow F: Workflow of Workflows': [-882, 246]
     'Regression Workflow G: run methods (BFS)': [-438, 172]
+    'Regression Workflow H: shared service in multiple subworkflows': [258, 233]
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
@@ -65,6 +66,10 @@
     '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': [
       -2, 14]
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': [
+      0, 0]
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': [
+      -118, 0]
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': [
       0, 0]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -142,6 +147,7 @@
       0, 0]
     'Regression Workflow F: Workflow of Workflows': [-807, 243]
     'Regression Workflow G: run methods (BFS)': [649, 182]
+    'Regression Workflow H: shared service in multiple subworkflows': [777, -47]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
@@ -159,6 +165,10 @@
     '[Regression Workflow G: run methods (BFS)] Workflow in service by service mode (workflow targets)': [
       500, 0]
     '[Regression Workflow G: run methods (BFS)] Workflow in service targets mode': [
+      500, 0]
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': [
+      610, 4]
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': [
       500, 0]
     ? '[[Regression Workflow F: Workflow of Workflows] Regression Workflow F S1: Subworkflow
       of Workflow] Regression Workflow 7: Payload Extraction & Validation'
@@ -1117,7 +1127,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
+  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3364,7 +3374,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [Washington]
+  pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   result_postprocessing: ''
@@ -3662,11 +3672,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
-      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
-      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
-      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
-      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
+      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
+      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
+      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
+      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4166,12 +4176,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
-      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
-      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
-      Targets] Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
+      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
+      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
+      Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -4382,7 +4392,7 @@
         \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
         \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
       positions: [-147, -217]
-  last_modified: '2019-11-27 06:31:32.129852'
+  last_modified: '2019-12-17 02:59:33.573592'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -5098,5 +5108,241 @@
   type: netmiko_validation_service
   use_device_driver: true
   validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: [PaloAlto]
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels:
+    2e441343-09bb-478c-91d2-78225ce412a7:
+      alignment: left
+      content: "This workflow tests:\r\n- subworkflow iteration (to run both in device\
+        \ by device and service by service mode)\r\n- having the same shared service\
+        \ in different subworkflow (make sure the progress\r\nis displayed per subworkflow\
+        \ and not for the whole runtime)"
+      positions: [146, -81]
+    468e9cf3-85da-4e97-9a1c-0acc89076aeb:
+      alignment: left
+      content: "This first subworkflow will run on Washington and Austin\r\nas hardcoded\
+        \ iterated devices.\r\nWashington should pass the shared service, Austin fail.\r\
+        \nA failure edge is drawn to the end, so both iterated devices\r\nshould pass\
+        \ the workflow, and it should be a success\r\nfor PaloAlto (iteration device)."
+      positions: [-213, 46]
+    77bbb8a5-d4ab-4eed-818d-da17f6ec405d:
+      alignment: left
+      content: "This subworkflow contains the same shared service, but :\r\n- it runs\
+        \ on Washington and Atlanta\r\n- Atlanta should fail and no failure edge exists\
+        \ to the end\r\n=> The workflow should fail for PaloAlto.\r\nPaloAlto should\
+        \ still reach end through the failure edge,\r\nso the top-level workflow should\
+        \ be a success."
+      positions: [580, 192]
+  last_modified: '2019-12-17 03:15:25.040630'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: 'Regression Workflow H: shared service in multiple subworkflows'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions: {}
+  result_postprocessing: ''
+  run_method: per_service_with_workflow_targets
+  scoped_name: 'Regression Workflow H: shared service in multiple subworkflows'
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow H: shared service
+      in multiple subworkflows] Subworkflow 1', '[Regression Workflow H: shared service
+      in multiple subworkflows] Subworkflow 2']
+  shared: false
+  skip: false
+  skip_query: ''
+  time_between_retries: 10
+  type: workflow
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: '["Washington", "Austin"]'
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-12-17 03:10:34.811397'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow
+    1'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow H: shared service in multiple subworkflows': [-241, 197]
+  result_postprocessing: ''
+  run_method: per_service_with_workflow_targets
+  scoped_name: Subworkflow 1
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Shared] Shared Service for Regression
+      Workflow H']
+  shared: false
+  skip: false
+  skip_query: ''
+  time_between_retries: 10
+  type: workflow
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- close_connection: false
+  content_match: ''
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  events: []
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: '["Washington", "Atlanta"]'
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  labels: {}
+  last_modified: '2019-12-17 02:05:53.291560'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow
+    2'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    'Regression Workflow H: shared service in multiple subworkflows': [548, 48]
+  result_postprocessing: ''
+  run_method: per_service_with_workflow_targets
+  scoped_name: Subworkflow 2
+  send_notification: false
+  send_notification_method: mail
+  services: ['[Shared] Start', '[Shared] End', '[Shared] Shared Service for Regression
+      Workflow H']
+  shared: false
+  skip: false
+  skip_query: ''
+  time_between_retries: 10
+  type: workflow
+  validation_method: none
+  vendor: ''
+  waiting_time: 0
+- auto_find_prompt: true
+  close_connection: false
+  command: show vrf
+  config_mode: false
+  content_match: NOMATCH
+  content_match_regex: false
+  conversion_method: none
+  creator: admin
+  credentials: device
+  custom_username: ''
+  delay_factor: 1.0
+  delete_spaces_before_matching: false
+  description: ''
+  device_query: ''
+  device_query_property: name
+  devices: []
+  dict_match: {}
+  display_only_failed_nodes: false
+  driver: a10
+  enable_mode: true
+  events: []
+  expect_string: ''
+  fast_cli: false
+  global_delay_factor: 1.0
+  include_device_results: false
+  include_link_in_summary: false
+  initial_payload: {}
+  iteration_devices: ''
+  iteration_devices_property: name
+  iteration_values: ''
+  iteration_variable_name: iteration_value
+  last_modified: '2019-12-16 16:46:16.211030'
+  mail_recipient: ''
+  max_processes: 50
+  maximum_runs: 1
+  multiprocessing: false
+  name: '[Shared] Shared Service for Regression Workflow H'
+  negative_logic: false
+  notification_header: ''
+  number_of_retries: 0
+  operating_system: ''
+  pools: []
+  positions:
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 1': [
+      167, -185]
+    '[Regression Workflow H: shared service in multiple subworkflows] Subworkflow 2': [
+      243, -104]
+  result_postprocessing: ''
+  run_method: per_device
+  scoped_name: Shared Service for Regression Workflow H
+  send_notification: false
+  send_notification_method: mail
+  shared: true
+  skip: false
+  skip_query: ''
+  start_new_connection: false
+  strip_command: true
+  strip_prompt: true
+  time_between_retries: 10
+  timeout: 10.0
+  type: netmiko_validation_service
+  use_device_driver: true
+  validation_method: text
   vendor: ''
   waiting_time: 0

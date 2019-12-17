@@ -101,7 +101,7 @@ function showResult(id) {
       const jsonResult = result;
       const options = {
         mode: "view",
-        modes: ["code", "view", "form"],
+        modes: ["code", "view"],
         onModeChange: function(newMode) {
           editor.set(newMode == "code" ? result : jsonResult);
         },
@@ -177,7 +177,6 @@ function showRuntimePanel(type, service, runtime, displayTable) {
 }
 
 function displayLogs(service, runtime, change) {
-  $(`#body-runtime-logs-${service.id}`).css("background-color", "#1B1B1B");
   const content = document.getElementById(`content-logs-${service.id}`);
   let editor;
   if (change) {

@@ -87,6 +87,10 @@ const panelName = {
   workflow_filtering: "Workflow Filtering",
 };
 
+const panelThemes = {
+  logs: {bgContent: '#1B1B1B'},
+}
+
 // eslint-disable-next-line
 function doc(page) {
   let endpoint = {
@@ -294,7 +298,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
     container: "#container-body",
     id: panelId,
     border: "2px solid #2A3F52",
-    theme: "light filledlight",
+    theme: panelThemes[name] || "light filledlight",
     headerLogo: "../static/images/logo.png",
     contentOverflow: "hidden scroll",
     contentSize: panelSize[name] || "800 600",

@@ -501,3 +501,9 @@
 - {destination: '[Shared] End', label: success, source: '[Shared] Shared Service for
     Regression Workflow H', subtype: success, workflow: '[Regression Workflow H: shared
     service in multiple subworkflows] Subworkflow 2'}
+- {destination: '[Shared] End', label: failure, source: '[Shared] Shared Service for
+    Regression Workflow H', subtype: failure, workflow: '[Regression Workflow H: shared
+    service in multiple subworkflows] Subworkflow 1'}
+- {destination: '[Shared] End', label: failure, source: '[Regression Workflow H: shared
+    service in multiple subworkflows] Subworkflow 2', subtype: failure, workflow: 'Regression
+    Workflow H: shared service in multiple subworkflows'}

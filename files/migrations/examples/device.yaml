@@ -642,3 +642,26 @@
   type: device
   username: minto
   vendor: Cisco
+- description: ''
+  icon: antenna
+  ip_address: ''
+  last_duration: ''
+  last_failure: Never
+  last_runtime: ''
+  last_status: Never
+  last_update: Never
+  latitude: '0.0'
+  location: ''
+  longitude: '0.0'
+  model: ''
+  name: EFRGTHYJW
+  napalm_driver: ios
+  netmiko_driver: cisco_ios
+  operating_system: ''
+  os_version: ''
+  port: 22
+  subtype: ''
+  tasks: []
+  type: device
+  username: ''
+  vendor: ''

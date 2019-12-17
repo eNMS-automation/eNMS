@@ -51,7 +51,7 @@
       0, 0]
     'Regression Workflow F: Workflow of Workflows': [-882, 246]
     'Regression Workflow G: run methods (BFS)': [-438, 172]
-    'Regression Workflow H: shared service in multiple subworkflows': [-229, 78]
+    'Regression Workflow H: shared service in multiple subworkflows': [258, 233]
     Workflow with device and value iteration: [0, 0]
     Workflow with iteration target subworkflows: [-118, 4]
     Workflow with iteration targets: [0, 0]
@@ -147,7 +147,7 @@
       0, 0]
     'Regression Workflow F: Workflow of Workflows': [-807, 243]
     'Regression Workflow G: run methods (BFS)': [649, 182]
-    'Regression Workflow H: shared service in multiple subworkflows': [583, -33]
+    'Regression Workflow H: shared service in multiple subworkflows': [777, -47]
     T: !!python/tuple [500, 0]
     TEST: !!python/tuple [500, 0]
     TEST2: !!python/tuple [500, 0]
@@ -3374,7 +3374,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: eos
-  pools: [Washington]
+  pools: []
   positions:
     'Regression Workflow F: Workflow of Workflows': [-423, -31]
   result_postprocessing: ''
@@ -4392,7 +4392,7 @@
         \ to check for the string \"NOVRF\".\r\nThere is no such VRF configured so\
         \ the service is expected to fail.\r\nRetry twice with 2 seconds between retries."
       positions: [-147, -217]
-  last_modified: '2019-11-27 06:31:32.129852'
+  last_modified: '2019-12-17 02:59:33.573592'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -5131,14 +5131,29 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels:
-    92f57a09-b3be-4ad9-b732-317f6e8d431c:
+    2e441343-09bb-478c-91d2-78225ce412a7:
       alignment: left
       content: "This workflow tests:\r\n- subworkflow iteration (to run both in device\
         \ by device and service by service mode)\r\n- having the same shared service\
-        \ in different subworkflow (make sure the progress is displayed per subworkflow\
+        \ in different subworkflow (make sure the progress\r\nis displayed per subworkflow\
         \ and not for the whole runtime)"
-      positions: [205, 239]
-  last_modified: '2019-12-17 02:07:40.200174'
+      positions: [146, -81]
+    468e9cf3-85da-4e97-9a1c-0acc89076aeb:
+      alignment: left
+      content: "This first subworkflow will run on Washington and Austin\r\nas hardcoded\
+        \ iterated devices.\r\nWashington should pass the shared service, Austin fail.\r\
+        \nA failure edge is drawn to the end, so both iterated devices\r\nshould pass\
+        \ the workflow, and it should be a success\r\nfor PaloAlto (iteration device)."
+      positions: [-213, 46]
+    77bbb8a5-d4ab-4eed-818d-da17f6ec405d:
+      alignment: left
+      content: "This subworkflow contains the same shared service, but :\r\n- it runs\
+        \ on Washington and Atlanta\r\n- Atlanta should fail and no failure edge exists\
+        \ to the end\r\n=> The workflow should fail for PaloAlto.\r\nPaloAlto should\
+        \ still reach end through the failure edge,\r\nso the top-level workflow should\
+        \ be a success."
+      positions: [580, 192]
+  last_modified: '2019-12-17 03:15:25.040630'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -5187,7 +5202,7 @@
   iteration_values: ''
   iteration_variable_name: iteration_value
   labels: {}
-  last_modified: '2019-12-17 02:05:44.846069'
+  last_modified: '2019-12-17 03:10:34.811397'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -5200,7 +5215,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow H: shared service in multiple subworkflows': [87, -62]
+    'Regression Workflow H: shared service in multiple subworkflows': [-241, 197]
   result_postprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 1
@@ -5250,7 +5265,7 @@
   operating_system: ''
   pools: []
   positions:
-    'Regression Workflow H: shared service in multiple subworkflows': [410, 136]
+    'Regression Workflow H: shared service in multiple subworkflows': [548, 48]
   result_postprocessing: ''
   run_method: per_service_with_workflow_targets
   scoped_name: Subworkflow 2

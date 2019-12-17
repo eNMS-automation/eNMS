@@ -21,7 +21,7 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 28
+  device_number: 29
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -37,7 +37,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver]
+    SanFrancisco, Orange, Oakland, Denver, Aserver, EFRGTHYJW]
   last_modified: ''
   latitude: '0.0'
   link_color: ''
@@ -52,7 +52,7 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 28
+  link_number: 29
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -61,7 +61,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27]
+    link21, link22, link23, link24, link25, link26, link27, AAAB]
   longitude: '0.0'
   name: All objects
   never_update: false
@@ -91,7 +91,7 @@
   device_napalm_driver_match: inclusion
   device_netmiko_driver: ''
   device_netmiko_driver_match: inclusion
-  device_number: 28
+  device_number: 29
   device_operating_system: ''
   device_operating_system_match: inclusion
   device_operational_data: ''
@@ -107,7 +107,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver]
+    SanFrancisco, Orange, Oakland, Denver, Aserver, EFRGTHYJW]
   last_modified: ''
   latitude: '0.0'
   link_color: ''
@@ -187,7 +187,7 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 28
+  link_number: 29
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -196,7 +196,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27]
+    link21, link22, link23, link24, link25, link26, link27, AAAB]
   longitude: '0.0'
   name: Links only
   never_update: false
@@ -255,7 +255,7 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 28
+  link_number: 29
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -264,7 +264,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27]
+    link21, link22, link23, link24, link25, link26, link27, AAAB]
   longitude: '-122.43'
   name: Datacenter San Francisco
   never_update: false
@@ -324,7 +324,7 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 28
+  link_number: 29
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -333,7 +333,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27]
+    link21, link22, link23, link24, link25, link26, link27, AAAB]
   longitude: '-74.0'
   name: Datacenter New York
   never_update: false
@@ -392,7 +392,7 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 28
+  link_number: 29
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -401,7 +401,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27]
+    link21, link22, link23, link24, link25, link26, link27, AAAB]
   longitude: '-87.62'
   name: Datacenter Chicago
   never_update: false
@@ -459,7 +459,7 @@
   link_model_match: inclusion
   link_name: ''
   link_name_match: inclusion
-  link_number: 28
+  link_number: 29
   link_source_name: ''
   link_source_name_match: inclusion
   link_subtype: ''
@@ -468,7 +468,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27]
+    link21, link22, link23, link24, link25, link26, link27, AAAB]
   longitude: '0.0'
   name: Washington
   never_update: false

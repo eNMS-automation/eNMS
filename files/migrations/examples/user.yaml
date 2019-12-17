@@ -1,3 +1,4 @@
 - email: admin@admin.com
   name: admin
   permissions: [Admin]
+  small_menu: false

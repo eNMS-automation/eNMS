@@ -1127,7 +1127,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -3276,7 +3276,7 @@
       content: "This workflow calls netmiko and napalm backup services.\r\nThe devices\
         \ must be defined in the service, not in the workflow."
       positions: [-280, 128]
-  last_modified: '2019-10-27 14:19:06.951859'
+  last_modified: '2019-12-17 09:30:36.173471'
   mail_recipient: ''
   max_processes: 5
   maximum_runs: 1
@@ -3290,7 +3290,7 @@
   positions:
     'Regression Workflow F S1: Subworkflow of Workflow': [200, -205]
   result_postprocessing: ''
-  run_method: per_device
+  run_method: per_service_with_service_targets
   scoped_name: 'Regression Workflow 9: Operational Data Backup'
   send_notification: false
   send_notification_method: mail
@@ -3672,11 +3672,11 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
@@ -4176,12 +4176,12 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
@@ -4557,7 +4557,7 @@
   description: ''
   device_query: ''
   device_query_property: name
-  devices: [Washington]
+  devices: []
   dict_match: {}
   display_only_failed_nodes: false
   driver: a10
@@ -4572,7 +4572,7 @@
   iteration_devices_property: name
   iteration_values: ''
   iteration_variable_name: iteration_value
-  last_modified: '2019-11-19 14:46:05.589808'
+  last_modified: '2019-12-17 09:30:47.573296'
   mail_recipient: ''
   max_processes: 50
   maximum_runs: 1
@@ -4586,7 +4586,7 @@
   - {command: show users, prefix: shusers}
   - {command: show ip interface brief, prefix: shipintbr}
   - {command: show vrf, prefix: ''}
-  pools: []
+  pools: [Washington]
   positions:
     'Regression Workflow 9: Operational Data Backup': [-284, -43]
   replacements:

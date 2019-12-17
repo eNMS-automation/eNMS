@@ -166,10 +166,12 @@ class Workflow(Service):
                     run.edge_state[edge.id] += len(targets[service.name])
             else:
                 summary = results.get("summary")
+                print("oooo"*200, summary)
                 for edge_type in ("success", "failure"):
                     for successor, edge in service.adjacent_services(
                         self, "destination", edge_type,
                     ):
+                        print(successor)
                         if not summary[edge_type]:
                             continue
                         targets[successor.name] |= set(summary[edge_type])

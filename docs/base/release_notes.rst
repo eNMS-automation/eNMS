@@ -2,6 +2,13 @@
 Release Notes
 =============
 
+Version 3.18.2
+--------------
+
+- Fix subworkflow iteration bug
+- Fix workflow display with same shared services in multiple subworkflows
+- Add "devices" keyword for result postprocessing
+
 Version 3.18.1
 --------------
 

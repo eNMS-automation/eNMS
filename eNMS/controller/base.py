@@ -15,8 +15,8 @@ from json import load
 from ldap3 import ALL, Server
 from logging import basicConfig, error, info, StreamHandler, warning
 from logging.handlers import RotatingFileHandler
-from os import environ, remove, scandir
-from os.path import exists, getmtime
+from os import environ, scandir
+from os.path import exists
 from pathlib import Path
 from requests import Session as RequestSession
 from requests.adapters import HTTPAdapter
@@ -29,7 +29,6 @@ from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.orm import configure_mappers
 from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
-from time import ctime
 from uuid import getnode
 
 from eNMS.config import config

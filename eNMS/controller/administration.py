@@ -4,13 +4,14 @@ from ipaddress import IPv4Network
 from json import loads
 from logging import info
 from ldap3 import Connection, NTLM, SUBTREE
-from os import listdir, makedirs
-from os.path import exists
+from os import listdir, makedirs, remove
+from os.path import exists, getmtime
 from pathlib import Path
 from shutil import rmtree
 from requests import get as http_get
 from ruamel import yaml
 from tarfile import open as open_tar
+from time import ctime
 from traceback import format_exc
 
 from eNMS.controller.base import BaseController

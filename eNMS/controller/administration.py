@@ -199,6 +199,41 @@ class AdministrationController(BaseController):
             except ConnectionError:
                 continue
 
-    def switch_menu(self, user_id):
-        user = fetch("user", id=user_id)
-        user.small_menu = not user.small_menu
+    def get_tree_files(self, path):
+        if path == "root":
+            path = self.config["paths"]["files"] or self.path / "files"
+        else:
+            path = path.replace(">", "/")
+        return [
+            {
+                "a_attr": {"style": "width: 100%"},
+                "data": {
+                    "modified": ctime(getmtime(str(file))),
+                    "path": str(file),
+                    "name": file.name,
+                },
+                "text": file.name,
+                "children": file.is_dir(),
+                "type": "folder" if file.is_dir() else "file",
+            }
+            for file in Path(path).iterdir()
+        ]
+
+    def delete_file(self, filepath):
+        remove(Path(filepath.replace(">", "/")))
+
+    def edit_file(self, filepath):
+        try:
+            with open(Path(filepath.replace(">", "/"))) as file:
+                return file.read()
+        except UnicodeDecodeError:
+            return {"error": f"Cannot read file (unsupported type)."}
+
+    def save_file(self, filepath, **kwargs):
+        if kwargs.get("file_content"):
+            with open(Path(filepath.replace(">", "/")), "w") as file:
+                return file.write(kwargs["file_content"])
+
+    def upload_files(self, **kwargs):
+        file = kwargs['file']
+        file.save(f"{kwargs['folder']}/{file.filename}")

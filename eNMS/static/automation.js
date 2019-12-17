@@ -120,7 +120,7 @@ function showResult(id) {
         jsonResult
       );
       document.querySelectorAll(".jsoneditor-string").forEach((el) => {
-        el.innerText = el.innerText.replace(/(?:\\n)/g, '\n');
+        el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
       });
     });
   });

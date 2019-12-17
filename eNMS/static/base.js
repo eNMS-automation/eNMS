@@ -88,8 +88,10 @@ const panelName = {
 };
 
 const panelThemes = {
-  logs: {bgContent: '#1B1B1B'},
-}
+  logs: { bgContent: "#1B1B1B" },
+  device_data: { bgContent: "#1B1B1B" },
+  file: { bgContent: "#1B1B1B" },
+};
 
 // eslint-disable-next-line
 function doc(page) {

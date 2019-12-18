@@ -1,12 +1,3 @@
-const classToObject = theClass => {
-  const originalClass = theClass || {}
-  const keys = Object.getOwnPropertyNames(originalClass);
-  return keys.reduce((classAsObj, key) => {
-    classAsObj[key] = originalClass[key]
-    return classAsObj
-  }, {})
-}
-
 class Device {
 
   constructor (properties) {
@@ -14,19 +5,19 @@ class Device {
   }
 
   get buttons() {
-    console.log(classToObject(this))
+    const instance = JSON.stringify(this).replace(/"/g, "'");
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-sn btn-info"
-          onclick="showDeviceNetworkData(${this})"
+          onclick="eNMS.showDeviceNetworkData(${instance})"
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="showDeviceResultsPanel(${this})"
+          onclick="showDeviceResultsPanel(${instance})"
           data-tooltip="Results"
             ><span class="glyphicon glyphicon-list-alt"></span
           ></button>
@@ -53,7 +44,7 @@ class Device {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="showDeletionPanel(${this})" data-tooltip="Delete"
+          onclick="showDeletionPanel(${instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>

@@ -130,7 +130,7 @@ class Device(CustomDevice):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
           <li>
             <button type="button" class="btn btn-info"
-            onclick="showDeviceNetworkData({self.row_properties})"
+            onclick="eNMS.showDeviceNetworkData({self.row_properties})"
             data-tooltip="Network Data"
               ><span class="glyphicon glyphicon-cog"></span
             ></button>

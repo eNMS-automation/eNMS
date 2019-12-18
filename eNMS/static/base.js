@@ -217,7 +217,7 @@ function processResults(callback, results) {
   }
 }
 
-function call(url, callback) {
+export function call(url, callback) {
   $.ajax({
     type: "POST",
     url: url,

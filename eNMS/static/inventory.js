@@ -12,6 +12,8 @@ openUrl: false
 tables: false
 */
 
+import { call } from './base.js';
+
 // eslint-disable-next-line
 function sshConnection(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
@@ -77,7 +79,7 @@ function updatePools(pool) {
 }
 
 // eslint-disable-next-line
-function showDeviceNetworkData(device) {
+export function showDeviceNetworkData(device) {
   call(`/get_device_network_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
       alertify.notify("No data stored.", "error", 5);

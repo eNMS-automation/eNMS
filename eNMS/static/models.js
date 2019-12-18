@@ -1,5 +1,14 @@
-class Device {
-  row() {
+export default class Device {
+
+  constructor (properties) {
+    Object.assign(this, properties);
+  }
+
+  get test() {
+    return "3";
+  }
+
+  get buttons() {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
         <li>

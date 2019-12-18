@@ -21,6 +21,8 @@ tableProperties: false
 workflow: true
 */
 
+import Device from './models.js';
+
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 let editors = {};
 let tables = {};
@@ -587,6 +589,10 @@ function initTable(type, instance, runtime, id) {
       createTooltips();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
+    columns: [
+      { "data": "name" },
+      { "data": "test" },
+    ],
     ajax: {
       url: `/table_filtering/${type}`,
       type: "POST",
@@ -602,9 +608,9 @@ function initTable(type, instance, runtime, id) {
         }
         return JSON.stringify(d);
       },
-      "render": function(data, type, row, meta) {
-        console.log(data, type, row, meta)
-        return data;
+      dataSrc: function(result) {
+        const devices = result.data.map((device) => new Device(device));
+        return devices
       }
     },
   });
@@ -690,7 +696,8 @@ function buildLinks(result, id) {
         link[1]
       }'>
             <span class="input-group-btn">
-              <button class="btn btn-default" onclick="copyToClipboard('${inputId}', true)" type="button">
+              <button class="btn btn-default" onclick="copyToClipboard('${inputId}',
+              true)" type="button">
                 <span class="glyphicon glyphicon-copy"></span>
               </button>
             </span>

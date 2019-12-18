@@ -589,10 +589,7 @@ function initTable(type, instance, runtime, id) {
       createTooltips();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
-    columns: [
-      { "data": "name" },
-      { "data": "test" },
-    ],
+    columns: Device.columns.map((c) => ({data: c})),
     ajax: {
       url: `/table_filtering/${type}`,
       type: "POST",

@@ -1,12 +1,5 @@
 import { displayFiles } from "./administration.js";
-import {
-  copyToClipboard,
-  filterTable,
-  processData,
-  refreshTable,
-  showPanel,
-  showTypePanel,
-} from "./base.js";
+import * as baseController from "./base.js";
 import { showDeviceNetworkData } from "./inventory.js";
 
 const fullScreen = function() {
@@ -40,13 +33,13 @@ const fullScreen = function() {
 };
 
 window.eNMS = {
-  copyToClipboard: copyToClipboard,
+  copyToClipboard: baseController.copyToClipboard,
   displayFiles: displayFiles,
-  filterTable: filterTable,
+  filterTable: baseController.filterTable,
   fullScreen: fullScreen,
-  processData: processData,
-  refreshTable: refreshTable,
-  showPanel: showPanel,
-  showTypePanel: showTypePanel,
+  processData: baseController.processData,
+  refreshTable: baseController.refreshTable,
+  showPanel: baseController.showPanel,
+  showTypePanel: baseController.showTypePanel,
   showDeviceNetworkData: showDeviceNetworkData,
 };

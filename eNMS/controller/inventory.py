@@ -212,7 +212,8 @@ class InventoryController(BaseController):
                         return {
                             "alert": f"{obj_type.capitalize()} '{name}' does not exist."
                         }
-                    objects.append(obj)
+                    if obj not in objects:
+                        objects.append(obj)
             else:
                 objects = objectify(obj_type, kwargs[f"{obj_type}s"])
             setattr(pool, f"{obj_type}_number", len(objects))

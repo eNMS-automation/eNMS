@@ -55,29 +55,28 @@ class Device {
 class Link {
 
   constructor (properties) {
-    console.log(properties)
     Object.assign(this, properties);
   }
 
   get buttons() {
     const instance = JSON.stringify(this);
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.showTypePanel('link', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.showTypePanel('link', '${this.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-danger"
+          <button type="button" class="btn btn-sm btn-danger"
           onclick='showDeletionPanel(${instance})' data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>

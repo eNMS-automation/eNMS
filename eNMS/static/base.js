@@ -628,7 +628,7 @@ function initTable(type, instance, runtime, id) {
 }
 
 // eslint-disable-next-line
-function filter(formType) {
+export function filterTable(formType) {
   tables[formType].ajax.reload(null, false);
   alertify.notify("Filter applied.", "success", 5);
 }

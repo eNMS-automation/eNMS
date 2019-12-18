@@ -55,6 +55,7 @@ class Device {
 class Link {
 
   constructor (properties) {
+    console.log(properties)
     Object.assign(this, properties);
   }
 
@@ -90,7 +91,11 @@ Link.columns = [
   "description",
   "subtype",
   "model",
-
+  "location",
+  "vendor",
+  "source_name",
+  "destination_name",
+  "buttons",
 ];
 
 Device.columns = [
@@ -108,7 +113,8 @@ Device.columns = [
 ];
 
 const models = {
-  device: Device
+  device: Device,
+  link: Link,
 }
 
 export default models

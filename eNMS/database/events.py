@@ -1,4 +1,5 @@
 from sqlalchemy import Boolean, event, Float, inspect, Integer, PickleType
+from sqlalchemy.ext.associationproxy import ASSOCIATION_PROXY
 from sqlalchemy.orm.collections import InstrumentedList
 from sqlalchemy.types import JSON
 
@@ -11,7 +12,7 @@ from eNMS.properties.database import dont_track_changes
 @event.listens_for(Base, "mapper_configured", propagate=True)
 def model_inspection(mapper, cls):
     name = cls.__tablename__
-    for col in cls.__table__.columns:
+    for col in inspect(cls).columns:
         model_properties[name].append(col.key)
         if col.type == PickleType and isinstance(col.default.arg, list):
             property_types[col.key] = "list"
@@ -25,6 +26,10 @@ def model_inspection(mapper, cls):
             }.get(type(col.type), "str")
             if col.key not in property_types:
                 property_types[col.key] = column_type
+    for descriptor in inspect(cls).all_orm_descriptors:
+        if descriptor.extension_type is ASSOCIATION_PROXY:
+            property = f"{descriptor.target_collection}_{descriptor.value_attr}"
+            model_properties[name].append(property)
     if hasattr(cls, "parent_type"):
         model_properties[name].extend(model_properties[cls.parent_type])
     if "service" in name and name != "service":

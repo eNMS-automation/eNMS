@@ -602,6 +602,10 @@ function initTable(type, instance, runtime, id) {
         }
         return JSON.stringify(d);
       },
+      "render": function(data, type, row, meta) {
+        console.log(data, type, row, meta)
+        return data;
+      }
     },
   });
   createSearchHeaders(type);

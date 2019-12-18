@@ -184,32 +184,6 @@ class Link(Object):
         )
         super().update(**kwargs)
 
-    def generate_row(self, **kwargs):
-        return super().generate_row() + [
-            f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="eNMS.showTypePanel('link', '{self.id}')" data-tooltip="Edit"
-              ><span class="glyphicon glyphicon-edit"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="eNMS.showTypePanel('link', '{self.id}', 'duplicate')"
-            data-tooltip="Duplicate"
-              ><span class="glyphicon glyphicon-duplicate"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
-              ><span class="glyphicon glyphicon-trash"></span
-            ></button>
-          </li>
-        </ul>"""
-        ]
-
 
 AbstractPool = type(
     "AbstractPool",

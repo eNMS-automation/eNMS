@@ -124,53 +124,6 @@ class Device(CustomDevice):
     def ui_name(self):
         return f"{self.name} ({self.model})" if self.model else self.name
 
-    def generate_row(self, **kwargs):
-        return super().generate_row() + [
-            f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="eNMS.showDeviceNetworkData({self.row_properties})"
-            data-tooltip="Network Data"
-              ><span class="glyphicon glyphicon-cog"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="showDeviceResultsPanel({self.row_properties})"
-            data-tooltip="Results"
-              ><span class="glyphicon glyphicon-list-alt"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-success"
-            onclick="eNMS.showPanel('device_connection', '{self.id}')"
-            data-tooltip="Connection"
-              ><span class="glyphicon glyphicon-console"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="eNMS.showTypePanel('device', '{self.id}')" data-tooltip="Edit"
-              ><span class="glyphicon glyphicon-edit"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="eNMS.showTypePanel('device', '{self.id}', 'duplicate')"
-            data-tooltip="Duplicate"
-              ><span class="glyphicon glyphicon-duplicate"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
-              ><span class="glyphicon glyphicon-trash"></span
-            ></button>
-          </li>
-        </ul>"""
-        ]
-
     def __repr__(self):
         return f"{self.name} ({self.model})" if self.model else self.name
 

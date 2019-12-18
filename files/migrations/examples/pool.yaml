@@ -61,7 +61,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, AAAB]
+    link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
   name: All objects
   never_update: false
@@ -196,7 +196,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, AAAB]
+    link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
   name: Links only
   never_update: false
@@ -264,7 +264,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, AAAB]
+    link21, link22, link23, link24, link25, link26, link27]
   longitude: '-122.43'
   name: Datacenter San Francisco
   never_update: false
@@ -333,7 +333,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, AAAB]
+    link21, link22, link23, link24, link25, link26, link27]
   longitude: '-74.0'
   name: Datacenter New York
   never_update: false
@@ -401,7 +401,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, AAAB]
+    link21, link22, link23, link24, link25, link26, link27]
   longitude: '-87.62'
   name: Datacenter Chicago
   never_update: false
@@ -468,7 +468,7 @@
   link_vendor_match: inclusion
   links: [link0, link1, link2, link3, link4, link5, link6, link7, link8, link9, link10,
     link11, link12, link13, link14, link15, link16, link17, link18, link19, link20,
-    link21, link22, link23, link24, link25, link26, link27, AAAB]
+    link21, link22, link23, link24, link25, link26, link27]
   longitude: '0.0'
   name: Washington
   never_update: false

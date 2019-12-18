@@ -1,8 +1,9 @@
 /*
 global
-call: false
 echarts: false
 */
+
+import { call } from './base.js';
 
 const diagrams = {};
 const defaultProperties = {

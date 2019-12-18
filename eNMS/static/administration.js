@@ -256,7 +256,7 @@ function showFileUploadPanel(folder) {
 function createNewFolder() {}
 
 // eslint-disable-next-line
-window.eNMS.displayFiles = function() {
+export function displayFiles() {
   showPanel("files", null, function() {
     $("#files-tree").jstree({
       core: {

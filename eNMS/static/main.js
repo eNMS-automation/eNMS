@@ -1,4 +1,5 @@
-import { showPanel, showTypePanel } from './base.js';
+import { displayFiles } from './administration.js';
+import { processData, refreshTable, showPanel, showTypePanel } from './base.js';
 import { showDeviceNetworkData } from './inventory.js';
 
 const fullScreen = function() {
@@ -32,7 +33,10 @@ const fullScreen = function() {
 }
 
 window.eNMS = {
+  displayFiles: displayFiles,
   fullScreen: fullScreen,
+  processData: processData,
+  refreshTable: refreshTable,
   showPanel: showPanel,
   showTypePanel: showTypePanel,
   showDeviceNetworkData: showDeviceNetworkData

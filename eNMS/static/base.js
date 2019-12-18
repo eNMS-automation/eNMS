@@ -49,7 +49,6 @@ const panelSize = {
   git: "900 200",
   import_service: "500 400",
   instance_deletion: "400 130",
-  link: "700 400",
   link_filtering: "700 600",
   logs: "1200 500",
   log_filtering: "700 350",
@@ -536,7 +535,7 @@ function processInstance(type, instance) {
 }
 
 // eslint-disable-next-line
-function processData(type, id) {
+export function processData(type, id) {
   if (type.includes("service") || type == "workflow") {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
       "disabled",
@@ -635,7 +634,7 @@ function filter(formType) {
 }
 
 // eslint-disable-next-line
-function refreshTable(tableType, displayNotification) {
+export function refreshTable(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);
   if (displayNotification) alertify.notify("Table refreshed.", "success", 5);
 }

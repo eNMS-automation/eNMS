@@ -1,6 +1,5 @@
 class Device {
-
-  constructor (properties) {
+  constructor(properties) {
     Object.assign(this, properties);
   }
 
@@ -31,7 +30,9 @@ class Device {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('device', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.showTypePanel('device', '${
+            this.id
+          }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -48,13 +49,12 @@ class Device {
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
-      </ul>`
+      </ul>`;
   }
 }
 
 class Link {
-
-  constructor (properties) {
+  constructor(properties) {
     Object.assign(this, properties);
   }
 
@@ -81,7 +81,7 @@ class Link {
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
-      </ul>`
+      </ul>`;
   }
 }
 
@@ -114,6 +114,6 @@ Device.columns = [
 const models = {
   device: Device,
   link: Link,
-}
+};
 
-export default models
+export default models;

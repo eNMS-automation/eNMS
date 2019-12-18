@@ -13,14 +13,14 @@ normalRun: false
 runLogic: false
 serviceTypes: false
 Set: false
-showPanel: false
 showRuntimePanel: false
-showTypePanel: false
 switchToWorkflow: false
 userIsActive: true
 vis: false
 workflow: true
 */
+
+import { copyToClipboard, showPanel, showTypePanel } from "./base.js";
 
 vis.Network.prototype.zoom = function(scale) {
   const animationOptions = {

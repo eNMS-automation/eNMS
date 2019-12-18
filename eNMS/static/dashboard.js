@@ -3,7 +3,7 @@ global
 echarts: false
 */
 
-import { call } from './base.js';
+import { call } from "./base.js";
 
 const diagrams = {};
 const defaultProperties = {

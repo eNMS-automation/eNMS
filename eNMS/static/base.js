@@ -21,7 +21,7 @@ tableProperties: false
 workflow: true
 */
 
-import models from './models.js';
+import models from "./models.js";
 
 window.eNMS = {};
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
@@ -589,10 +589,8 @@ function initTable(type, instance, runtime, id) {
       createTooltips();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
-    columns: models[type].columns.map((c) => ({data: c})),
-    columnDefs: [
-      {"className": "dt-center", "targets": "_all"}
-    ],
+    columns: models[type].columns.map((c) => ({ data: c })),
+    columnDefs: [{ className: "dt-center", targets: "_all" }],
     ajax: {
       url: `/table_filtering/${type}`,
       type: "POST",
@@ -610,7 +608,7 @@ function initTable(type, instance, runtime, id) {
       },
       dataSrc: function(result) {
         return result.data.map((instance) => new models[type](instance));
-      }
+      },
     },
   });
   createSearchHeaders(type);
@@ -627,19 +625,16 @@ function initTable(type, instance, runtime, id) {
   }
 }
 
-// eslint-disable-next-line
 export function filterTable(formType) {
   tables[formType].ajax.reload(null, false);
   alertify.notify("Filter applied.", "success", 5);
 }
 
-// eslint-disable-next-line
 export function refreshTable(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);
   if (displayNotification) alertify.notify("Table refreshed.", "success", 5);
 }
 
-// eslint-disable-next-line
 function refreshTablePeriodically(tableType, interval) {
   if (userIsActive) refreshTable(tableType, false);
   setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
@@ -661,7 +656,7 @@ function refreshTablePeriodically(tableType, interval) {
   };
 })(jQuery);
 
-function copyToClipboard(text, isId) {
+export function copyToClipboard(text, isId) {
   if (isId) text = $(`#${text}`).val();
   let dummy = document.createElement("textarea");
   document.body.appendChild(dummy);
@@ -695,7 +690,7 @@ function buildLinks(result, id) {
         link[1]
       }'>
             <span class="input-group-btn">
-              <button class="btn btn-default" onclick="copyToClipboard('${inputId}',
+              <button class="btn btn-default" onclick="eNMS.copyToClipboard('${inputId}',
               true)" type="button">
                 <span class="glyphicon glyphicon-copy"></span>
               </button>

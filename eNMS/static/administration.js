@@ -12,7 +12,7 @@ showPanel: false
 tables: false
 */
 
-import { showPanel } from './base.js';
+import { showPanel } from "./base.js";
 
 let editor;
 

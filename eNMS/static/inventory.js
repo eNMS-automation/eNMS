@@ -12,7 +12,7 @@ openUrl: false
 tables: false
 */
 
-import { call } from './base.js';
+import { call } from "./base.js";
 
 // eslint-disable-next-line
 function sshConnection(id) {

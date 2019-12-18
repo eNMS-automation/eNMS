@@ -1,6 +1,13 @@
-import { displayFiles } from './administration.js';
-import { filterTable, processData, refreshTable, showPanel, showTypePanel } from './base.js';
-import { showDeviceNetworkData } from './inventory.js';
+import { displayFiles } from "./administration.js";
+import {
+  copyToClipboard,
+  filterTable,
+  processData,
+  refreshTable,
+  showPanel,
+  showTypePanel,
+} from "./base.js";
+import { showDeviceNetworkData } from "./inventory.js";
 
 const fullScreen = function() {
   if (
@@ -30,9 +37,10 @@ const fullScreen = function() {
       element.msRequestFullscreen();
     }
   }
-}
+};
 
 window.eNMS = {
+  copyToClipboard: copyToClipboard,
   displayFiles: displayFiles,
   filterTable: filterTable,
   fullScreen: fullScreen,
@@ -40,5 +48,5 @@ window.eNMS = {
   refreshTable: refreshTable,
   showPanel: showPanel,
   showTypePanel: showTypePanel,
-  showDeviceNetworkData: showDeviceNetworkData
-}
+  showDeviceNetworkData: showDeviceNetworkData,
+};

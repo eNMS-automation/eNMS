@@ -5,12 +5,12 @@ class Device {
   }
 
   get buttons() {
-    const instance = JSON.stringify(this).replace(/"/g, "'");
+    const instance = JSON.stringify(this);
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-sn btn-info"
-          onclick="eNMS.showDeviceNetworkData(${instance})"
+          onclick='eNMS.showDeviceNetworkData(${instance})'
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>

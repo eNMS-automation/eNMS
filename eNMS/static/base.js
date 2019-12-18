@@ -333,8 +333,6 @@ export function showPanel(type, id, processing) {
   return createPanel(type, panelName[type] || type, id, processing);
 }
 
-window.eNMS.showPanel = showPanel;
-
 // eslint-disable-next-line
 function showDeletionPanel(instance) {
   createPanel(

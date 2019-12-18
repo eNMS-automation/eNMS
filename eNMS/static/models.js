@@ -1,6 +1,6 @@
 
 
-export default class Device {
+class Device {
 
   constructor (properties) {
     Object.assign(this, properties);
@@ -25,7 +25,7 @@ export default class Device {
         </li>
         <li>
           <button type="button" class="btn btn-success"
-          onclick="showPanel('device_connection', '${this.id}')"
+          onclick="eNMS.showPanel('device_connection', '${this.id}')"
           data-tooltip="Connection"
             ><span class="glyphicon glyphicon-console"></span
           ></button>
@@ -66,3 +66,9 @@ Device.columns = [
   "port",
   "buttons",
 ];
+
+const models = {
+  device: Device
+}
+
+export default models

@@ -21,7 +21,7 @@ tableProperties: false
 workflow: true
 */
 
-import Device from './models.js';
+import models from './models.js';
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 let editors = {};
@@ -328,7 +328,7 @@ function createPanel(name, title, id, processing, type, duplicate) {
 }
 
 // eslint-disable-next-line
-function showPanel(type, id, processing) {
+window.eNMS.showPanel = function(type, id, processing) {
   return createPanel(type, panelName[type] || type, id, processing);
 }
 
@@ -589,7 +589,7 @@ function initTable(type, instance, runtime, id) {
       createTooltips();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
-    columns: Device.columns.map((c) => ({data: c})),
+    columns: models[type].columns.map((c) => ({data: c})),
     ajax: {
       url: `/table_filtering/${type}`,
       type: "POST",
@@ -606,8 +606,7 @@ function initTable(type, instance, runtime, id) {
         return JSON.stringify(d);
       },
       dataSrc: function(result) {
-        const devices = result.data.map((device) => new Device(device));
-        return devices
+        return result.data.map((instance) => new models[type](instance));
       }
     },
   });
@@ -901,7 +900,7 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   e.preventDefault();
 });
 
-function fullScreen() {
+window.fullScreen = function() {
   if (
     document.fullscreenElement ||
     document.webkitFullscreenElement ||

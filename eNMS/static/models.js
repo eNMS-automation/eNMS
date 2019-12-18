@@ -1,5 +1,3 @@
-
-
 class Device {
 
   constructor (properties) {

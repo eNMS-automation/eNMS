@@ -12,6 +12,8 @@ showPanel: false
 tables: false
 */
 
+import { showPanel } from './base.js';
+
 let editor;
 
 // eslint-disable-next-line
@@ -254,7 +256,7 @@ function showFileUploadPanel(folder) {
 function createNewFolder() {}
 
 // eslint-disable-next-line
-function displayFiles() {
+window.eNMS.displayFiles = function() {
   showPanel("files", null, function() {
     $("#files-tree").jstree({
       core: {
@@ -322,9 +324,3 @@ function displayFiles() {
     });
   });
 }
-
-(function() {
-  if (page == "server_management") {
-    getClusterStatus();
-  }
-})();

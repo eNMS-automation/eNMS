@@ -144,7 +144,7 @@ class Device(CustomDevice):
           </li>
           <li>
             <button type="button" class="btn btn-success"
-            onclick="showPanel('device_connection', '{self.id}')"
+            onclick="eNMS.showPanel('device_connection', '{self.id}')"
             data-tooltip="Connection"
               ><span class="glyphicon glyphicon-console"></span
             ></button>

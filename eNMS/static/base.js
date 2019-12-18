@@ -23,6 +23,7 @@ workflow: true
 
 import models from './models.js';
 
+window.eNMS = {};
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 let editors = {};
 let tables = {};
@@ -328,9 +329,11 @@ function createPanel(name, title, id, processing, type, duplicate) {
 }
 
 // eslint-disable-next-line
-window.eNMS.showPanel = function(type, id, processing) {
+export function showPanel(type, id, processing) {
   return createPanel(type, panelName[type] || type, id, processing);
 }
+
+window.eNMS.showPanel = showPanel;
 
 // eslint-disable-next-line
 function showDeletionPanel(instance) {
@@ -900,7 +903,7 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   e.preventDefault();
 });
 
-window.fullScreen = function() {
+window.eNMS.fullScreen = function() {
   if (
     document.fullscreenElement ||
     document.webkitFullscreenElement ||

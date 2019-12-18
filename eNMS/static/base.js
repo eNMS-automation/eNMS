@@ -591,6 +591,9 @@ function initTable(type, instance, runtime, id) {
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     columns: models[type].columns.map((c) => ({data: c})),
+    columnDefs: [
+      {"className": "dt-center", "targets": "_all"}
+    ],
     ajax: {
       url: `/table_filtering/${type}`,
       type: "POST",

@@ -151,13 +151,13 @@ class Device(CustomDevice):
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('device', '{self.id}')" data-tooltip="Edit"
+            onclick="eNMS.showTypePanel('device', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('device', '{self.id}', 'duplicate')"
+            onclick="eNMS.showTypePanel('device', '{self.id}', 'duplicate')"
             data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
@@ -237,13 +237,13 @@ class Link(Object):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('link', '{self.id}')" data-tooltip="Edit"
+            onclick="eNMS.showTypePanel('link', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('link', '{self.id}', 'duplicate')"
+            onclick="eNMS.showTypePanel('link', '{self.id}', 'duplicate')"
             data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
@@ -341,13 +341,13 @@ class Pool(AbstractPool):
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('pool', '{self.id}')" data-tooltip="Edit"
+            onclick="eNMS.showTypePanel('pool', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('pool', '{self.id}', 'duplicate')"
+            onclick="eNMS.showTypePanel('pool', '{self.id}', 'duplicate')"
             data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>

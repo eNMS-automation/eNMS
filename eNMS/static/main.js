@@ -1,3 +1,6 @@
-import { showPanel } from './base.js';
+import { showPanel, showTypePanel } from './base.js';
 
-window.eNMS.showPanel = showPanel;
+window.eNMS = {
+  showPanel: showPanel,
+  showTypePanel: showTypePanel,
+}

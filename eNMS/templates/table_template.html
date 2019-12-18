@@ -12,7 +12,7 @@
       <select id="service-type" class="form-control"></select>
     </button>
     {% endif %} {% if type not in ("run", "result") %} {% set func =
-    "openServicePanel" if type == "service" else "showTypePanel" %}
+    "openServicePanel" if type == "service" else "eNMS.showTypePanel" %}
     <button
       class="btn btn-primary"
       onclick="{{ func }}('{{ type }}')"
@@ -33,7 +33,7 @@
     {% endif %} {% if type != "result" %}
     <button
       class="btn btn-info btn-file"
-      onclick="showPanel('{{ type }}_filtering')"
+      onclick="eNMS.showPanel('{{ type }}_filtering')"
       data-tooltip="Advanced Search"
       type="button"
     >

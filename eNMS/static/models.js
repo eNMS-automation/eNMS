@@ -30,7 +30,7 @@ class Device {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="showTypePanel('device', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.showTypePanel('device', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>

@@ -444,7 +444,7 @@ function configureForm(form, id, panelId) {
 }
 
 // eslint-disable-next-line
-function showTypePanel(type, id, mode) {
+export function showTypePanel(type, id, mode) {
   createPanel(
     type,
     "",

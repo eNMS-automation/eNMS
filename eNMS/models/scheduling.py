@@ -80,13 +80,13 @@ class Task(AbstractBase):
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('task', '{self.id}')" data-tooltip="Edit"
+            onclick="eNMS.showTypePanel('task', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('task', '{self.id}', 'duplicate')"
+            onclick="eNMS.showTypePanel('task', '{self.id}', 'duplicate')"
             data-tooltip="Duplicate">
             <span class="glyphicon glyphicon-duplicate"></span></button>
           </li>
@@ -238,13 +238,13 @@ class Event(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('event', '{self.id}')" data-tooltip="Edit"
+            onclick="eNMS.showTypePanel('event', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('event', '{self.id}', 'duplicate')"
+            onclick="eNMS.showTypePanel('event', '{self.id}', 'duplicate')"
             data-tooltip="Duplicate">
             <span class="glyphicon glyphicon-duplicate"></span></button>
           </li>

@@ -146,14 +146,14 @@ class Service(AbstractBase):
           </li>
           <li>
             <button type="button" class="btn btn-success"
-            onclick="showTypePanel('{self.type}', '{self.id}', 'run')"
+            onclick="eNMS.showTypePanel('{self.type}', '{self.id}', 'run')"
             data-tooltip="Parameterized Run"
               ><span class="glyphicon glyphicon-play-circle"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('{self.type}', '{self.id}')" data-tooltip="Edit"
+            onclick="eNMS.showTypePanel('{self.type}', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>

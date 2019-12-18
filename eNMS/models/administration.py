@@ -24,13 +24,13 @@ class Server(AbstractBase):
             <ul class="pagination pagination-lg" style="margin: 0px;">
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('server', '{self.id}')" data-tooltip="Edit"
+            onclick="eNMS.showTypePanel('server', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('server', '{self.id}', 'duplicate')"
+            onclick="eNMS.showTypePanel('server', '{self.id}', 'duplicate')"
             data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>
@@ -62,13 +62,13 @@ class User(AbstractBase, UserMixin):
             <ul class="pagination pagination-lg" style="margin: 0px;">
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('user', '{self.id}')" data-tooltip="Edit"
+            onclick="eNMS.showTypePanel('user', '{self.id}')" data-tooltip="Edit"
               ><span class="glyphicon glyphicon-edit"></span
             ></button>
           </li>
           <li>
             <button type="button" class="btn btn-primary"
-            onclick="showTypePanel('user', '{self.id}', 'duplicate')"
+            onclick="eNMS.showTypePanel('user', '{self.id}', 'duplicate')"
             data-tooltip="Duplicate"
               ><span class="glyphicon glyphicon-duplicate"></span
             ></button>

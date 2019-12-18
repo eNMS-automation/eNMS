@@ -918,7 +918,7 @@ window.eNMS.fullScreen = function() {
       document.msExitFullscreen();
     }
   } else {
-    element = $("#container-body").get(0);
+    const element = $("#container-body").get(0);
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {

@@ -1,3 +1,12 @@
+const classToObject = theClass => {
+  const originalClass = theClass || {}
+  const keys = Object.getOwnPropertyNames(originalClass);
+  return keys.reduce((classAsObj, key) => {
+    classAsObj[key] = originalClass[key]
+    return classAsObj
+  }, {})
+}
+
 class Device {
 
   constructor (properties) {
@@ -5,6 +14,7 @@ class Device {
   }
 
   get buttons() {
+    console.log(classToObject(this))
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>

@@ -42,7 +42,7 @@ from eNMS.database.functions import (
     fetch_all,
     get_query_count,
 )
-from eNMS.models import models, relationships
+from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
 from eNMS.properties.diagram import (
@@ -50,7 +50,6 @@ from eNMS.properties.diagram import (
     diagram_classes,
     type_to_diagram_properties,
 )
-from eNMS.properties.table import filtering_properties, table_properties
 from eNMS.properties.objects import (
     device_properties,
     pool_device_properties,
@@ -263,8 +262,7 @@ class BaseController:
         }
         device_properties.extend(list(custom_properties))
         pool_device_properties.extend(list(public_custom_properties))
-        for properties_table in table_properties, filtering_properties:
-            properties_table["device"].extend(list(public_custom_properties))
+        model_properties["device"].extend(list(public_custom_properties))
         device_diagram_properties.extend(
             list(p for p, v in custom_properties.items() if v["add_to_dashboard"])
         )
@@ -432,7 +430,7 @@ class BaseController:
 
     def build_filtering_constraints(self, obj_type, **kwargs):
         model, constraints = models[obj_type], []
-        for property in filtering_properties[obj_type]:
+        for property in model_properties[obj_type]:
             value = kwargs["form"].get(property)
             if not value:
                 continue
@@ -482,7 +480,7 @@ class BaseController:
         }
 
     def table_filtering(self, table, **kwargs):
-        model, properties = models[table], table_properties[table]
+        model, properties = models[table], model_properties[table]
         operator = and_ if kwargs["form"].get("operator", "all") == "all" else or_
         column_index = int(kwargs["order"][0]["column"])
         if column_index < len(properties):

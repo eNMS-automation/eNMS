@@ -12,7 +12,7 @@ from eNMS.framework.rest import configure_rest_api
 from eNMS.framework.routes import blueprint
 from eNMS.models import models, property_types, relationships
 from eNMS.properties import property_names
-from eNMS.properties.table import filtering_properties, table_properties
+from eNMS.properties.table import table_properties
 
 
 def register_extensions(flask_app):

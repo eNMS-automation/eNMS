@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from wtforms import HiddenField, SelectField, StringField
 
 from eNMS.forms import BaseForm

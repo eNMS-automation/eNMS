@@ -585,17 +585,20 @@ function initTable(type, instance, runtime, id) {
       this.api()
         .columns()
         .every(function(index) {
-          const property = models[type].columns[index].data;
+          const data = models[type].columns[index];
           let input = $(`
             <input
-              id="${type}_filtering-${property}"
-              name="${property}"
+              id="${type}_filtering-${data.data}"
+              name="${data.data}"
               type="text"
+              placeholder="&#xF002;"
               class="form-control"
-              style="width: 100%;"
-            />`
-          )
-          .appendTo($(this.header()))
+              style="font-family:Arial, FontAwesome; width: 100%; height: 25px; margin-top: 5px"
+            >`)
+            .appendTo($(this.header()))
+            .on("keyup change", function() {
+              tables[type].ajax.reload(null, false);
+            });
         });
     },
     ajax: {

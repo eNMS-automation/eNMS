@@ -85,6 +85,57 @@ class Link {
   }
 }
 
+class Pool {
+  constructor(properties) {
+    Object.assign(this, properties);
+  }
+
+  get buttons() {
+    const instance = JSON.stringify(this);
+    return `
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
+        <li>
+          <button type="button" class="btn btn-info"
+          onclick="showPoolView('${this.id}')" data-tooltip="Internal View"
+            ><span class="glyphicon glyphicon-eye-open"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-primary"
+          onclick="showPoolObjectsPanel('${this.id}')" data-tooltip="Pool Objects"
+            ><span class="glyphicon glyphicon-wrench"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-primary"
+          onclick="updatePools('${this.id}')" data-tooltip="Update"
+            ><span class="glyphicon glyphicon-refresh"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-primary"
+          onclick="eNMS.showTypePanel('pool', '${this.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-primary"
+          onclick="eNMS.showTypePanel('pool', '${this.id}', 'duplicate')"
+          data-tooltip="Duplicate"
+            ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-danger"
+          onclick="showDeletionPanel(${instance})" data-tooltip="Delete"
+            ><span class="glyphicon glyphicon-trash"></span
+          ></button>
+        </li>
+      </ul>
+    `;
+  }
+}
+
 Link.columns = [
   "name",
   "description",

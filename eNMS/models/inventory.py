@@ -244,49 +244,6 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
-    def generate_row(self, **kwargs):
-        return super().generate_row() + [
-            f"""
-            <ul class="pagination pagination-lg" style="margin: 0px; width: 300px">
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="showPoolView('{self.id}')" data-tooltip="Internal View"
-              ><span class="glyphicon glyphicon-eye-open"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="showPoolObjectsPanel('{self.id}')" data-tooltip="Pool Objects"
-              ><span class="glyphicon glyphicon-wrench"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="updatePools('{self.id}')" data-tooltip="Update"
-              ><span class="glyphicon glyphicon-refresh"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="eNMS.showTypePanel('pool', '{self.id}')" data-tooltip="Edit"
-              ><span class="glyphicon glyphicon-edit"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-primary"
-            onclick="eNMS.showTypePanel('pool', '{self.id}', 'duplicate')"
-            data-tooltip="Duplicate"
-              ><span class="glyphicon glyphicon-duplicate"></span
-            ></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
-              ><span class="glyphicon glyphicon-trash"></span
-            ></button>
-          </li></ul>"""
-        ]
-
     @property
     def object_number(self):
         return f"{self.device_number} devices - {self.link_number} links"

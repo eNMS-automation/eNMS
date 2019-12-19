@@ -143,9 +143,6 @@ class Link extends Base {
 }
 
 class Pool extends Base {
-  get object_number() {
-    return `${this.device_number} devices - ${this.link_number} links`;
-  }
 
   static get columns() {
     return [
@@ -158,6 +155,10 @@ class Pool extends Base {
       { data: "object_number", title: "Object Count" },
       { data: "buttons" },
     ];
+  }
+
+  get object_number() {
+    return `${this.device_number} devices - ${this.link_number} links`;
   }
 
   get buttons() {
@@ -219,45 +220,55 @@ class Service extends Base {
       { data: "vendor", title: "Vendor", search: "text" },
       { data: "operating_system", title: "Operating System", search: "text" },
       { data: "creator", title: "Creator", search: "text" },
+      { data: "creator", title: "Creator", search: "text" },
+      { data: "status", title: "Status", search: "text" },
       { data: "buttons" },
     ];
+  }
+
+  get status() {
+    return "Idle";
   }
 
   get buttons() {
     const instance = JSON.stringify(this);
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="showPoolView('${this.id}')" data-tooltip="Internal View"
-            ><span class="glyphicon glyphicon-eye-open"></span
+          onclick="showRuntimePanel('results', ${instance})"
+          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="showRuntimePanel('logs', ${instance})"
+          data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-success"
+          onclick="normalRun('${this.id}')" data-tooltip="Run"
+            ><span class="glyphicon glyphicon-play"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-success"
+          onclick="eNMS.showTypePanel('{self.type}', '${this.id}', 'run')"
+          data-tooltip="Parameterized Run"
+            ><span class="glyphicon glyphicon-play-circle"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="showPoolObjectsPanel('${
-            this.id
-          }')" data-tooltip="Pool Objects"
-            ><span class="glyphicon glyphicon-wrench"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="updatePools('${this.id}')" data-tooltip="Update"
-            ><span class="glyphicon glyphicon-refresh"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('pool', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.showTypePanel('{self.type}', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('pool', '${this.id}', 'duplicate')"
-          data-tooltip="Duplicate"
-            ><span class="glyphicon glyphicon-duplicate"></span
+          onclick="exportService('${this.id}')" data-tooltip="Export"
+            ><span class="glyphicon glyphicon-download"></span
           ></button>
         </li>
         <li>
@@ -275,6 +286,7 @@ const models = {
   device: Device,
   link: Link,
   pool: Pool,
+  service: Service,
 };
 
 export default models;

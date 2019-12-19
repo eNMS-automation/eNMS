@@ -26,7 +26,7 @@ import models from "./models.js";
 window.eNMS = {};
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 let editors = {};
-let tables = {};
+export let tables = {};
 let userIsActive = true;
 let topZ = 1000;
 

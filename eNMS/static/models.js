@@ -143,7 +143,6 @@ class Link extends Base {
 }
 
 class Pool extends Base {
-
   static get columns() {
     return [
       { data: "name", title: "Name", search: "text" },
@@ -210,10 +209,18 @@ class Pool extends Base {
 }
 
 class Service extends Base {
-
   static get columns() {
     return [
-      { data: "name", title: "Name", search: "text" },
+      {
+        data: "name",
+        title: "Name",
+        search: "text",
+        render: function(data, type, row, meta) {
+          return `<b><a href="#" onclick="eNMS.switchToWorkflow('${row.id}')">${
+            row.scoped_name
+          }</a></b>`;
+        },
+      },
       { data: "last_modified", title: "Last modified", search: "text" },
       { data: "type", title: "Type", search: "text" },
       { data: "description", title: "Description", search: "text" },
@@ -261,7 +268,9 @@ class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('{self.type}', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.showTypePanel('{self.type}', '${
+            this.id
+          }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>

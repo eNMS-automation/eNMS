@@ -119,9 +119,6 @@ class Service(AbstractBase):
             getattr(self, f"table_{property}", getattr(self, property))
             for property in table_properties["service"][1:]
         ]
-        if self.type == "workflow":
-            onclick = f"switchToWorkflow('{self.id}')"
-            rows[0] = f"""<b><a href="#" onclick="{onclick}">{rows[0]}</a></b>"""
         return rows + [
             f"Running" if app.service_db[self.id]["runs"] else "Idle",
             f"""

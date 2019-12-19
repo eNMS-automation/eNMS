@@ -1,5 +1,6 @@
 import { displayFiles } from "./administration.js";
 import * as baseController from "./base.js";
+import * as automationController from "./automation.js";
 import { showDeviceNetworkData } from "./inventory.js";
 
 const fullScreen = function() {
@@ -42,4 +43,5 @@ window.eNMS = {
   showPanel: baseController.showPanel,
   showTypePanel: baseController.showTypePanel,
   showDeviceNetworkData: showDeviceNetworkData,
+  switchToWorkflow: automationController.switchToWorkflow,
 };

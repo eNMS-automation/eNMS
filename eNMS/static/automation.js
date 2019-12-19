@@ -22,6 +22,8 @@ tables: false
 workflow: true
 */
 
+import { tables } from "./base.js";
+
 let currentRuntime;
 let arrowHistory = [""];
 let arrowPointer = -1;
@@ -356,17 +358,17 @@ function resumeTask(id) {
   });
 }
 
-function switchToWorkflow(path, arrow) {
+export function switchToWorkflow(path, arrow) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
   } else {
     $("#up-arrow").addClass("disabled");
   }
-  currentPath = path;
+  if (typeof currentPath != "undefined") currentPath = path;
   if (!arrow) {
     arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, currentPath);
+    arrowHistory.splice(arrowPointer, 9e9, path);
   } else {
     arrowPointer += arrow == "right" ? 1 : -1;
   }
@@ -381,7 +383,7 @@ function switchToWorkflow(path, arrow) {
     $("#right-arrow").addClass("disabled");
   }
   if (page == "workflow_builder") {
-    call(`/get_service_state/${currentPath}/latest`, function(result) {
+    call(`/get_service_state/${path}/latest`, function(result) {
       workflow = result.service;
       displayWorkflow(result);
       alertify.notify(
@@ -391,7 +393,7 @@ function switchToWorkflow(path, arrow) {
       );
     });
   } else {
-    $("#workflow-filtering").val(currentPath);
+    $("#workflow-filtering").val(path);
     if (tables["service"]) tables["service"].ajax.reload(null, false);
   }
 }

@@ -1,4 +1,4 @@
-import { displayFiles } from "./administration.js";
+import * as administrationController from "./administration.js";
 import * as baseController from "./base.js";
 import * as automationController from "./automation.js";
 import { showDeviceNetworkData } from "./inventory.js";
@@ -35,7 +35,8 @@ const fullScreen = function() {
 
 window.eNMS = {
   copyToClipboard: baseController.copyToClipboard,
-  displayFiles: displayFiles,
+  displayFiles: administrationController.displayFiles,
+  exportTopology: administrationController.exportTopology,
   filterTable: baseController.filterTable,
   fullScreen: fullScreen,
   processData: baseController.processData,

@@ -14,7 +14,6 @@ from eNMS.models.inventory import Device  # noqa: F401
 from eNMS.models.execution import Run  # noqa: F401
 from eNMS.models.scheduling import Task  # noqa: F401
 from eNMS.models.administration import User  # noqa: F401
-from eNMS.properties.table import table_properties
 
 
 class Service(AbstractBase):

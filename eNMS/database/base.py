@@ -6,7 +6,6 @@ from eNMS.database.functions import factory, fetch, objectify
 from eNMS.models import model_properties, property_types, relationships
 from eNMS.properties import dont_serialize, private_properties
 from eNMS.properties.database import dont_migrate
-from eNMS.properties.table import table_properties
 
 
 class AbstractBase(Base):
@@ -43,16 +42,6 @@ class AbstractBase(Base):
                 super().__setattr__(property, value)
         else:
             super().__setattr__(property, value)
-
-    def generate_row(self, **kwargs):
-        return [
-            getattr(self, f"table_{property}", getattr(self, property))
-            for property in table_properties[self.type]
-        ]
-
-    @property
-    def row_properties(self):
-        return {p: getattr(self, p) for p in ("id", "name", "type")}
 
     @property
     def ui_name(self):

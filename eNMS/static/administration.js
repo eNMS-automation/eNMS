@@ -12,7 +12,7 @@ showPanel: false
 tables: false
 */
 
-import { showPanel } from "./base.js";
+import { fCall, showPanel } from "./base.js";
 
 let editor;
 
@@ -69,7 +69,7 @@ function queryLibreNMS() {
 }
 
 // eslint-disable-next-line
-function exportTopology() {
+export function exportTopology() {
   alertify.notify("Topology export starting...", "success", 5);
   fCall("/export_topology", "excel_export-form", function() {
     alertify.notify("Topology successfully exported.", "success", 5);

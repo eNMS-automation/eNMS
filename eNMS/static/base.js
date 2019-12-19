@@ -225,7 +225,7 @@ export function call(url, callback) {
   });
 }
 
-function fCall(url, form, callback) {
+export function fCall(url, form, callback) {
   $.ajax({
     type: "POST",
     url: url,

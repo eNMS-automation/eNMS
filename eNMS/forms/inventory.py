@@ -148,6 +148,6 @@ class ExcelImportForm(BaseForm):
 
 
 class ExportForm(BaseForm):
-    action = "exportTopology"
+    action = "eNMS.exportTopology"
     form_type = HiddenField(default="excel_export")
     export_filename = StringField("Filename")

@@ -13,9 +13,8 @@ from xlwt import Workbook
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
-from eNMS.models import models, property_types
+from eNMS.models import models, model_properties, property_types
 from eNMS.properties import field_conversion
-from eNMS.properties.table import table_properties
 
 
 class InventoryController(BaseController):
@@ -84,7 +83,7 @@ class InventoryController(BaseController):
             filename += ".xls"
         for obj_type in ("device", "link"):
             sheet = workbook.add_sheet(obj_type)
-            for index, property in enumerate(table_properties[obj_type]):
+            for index, property in enumerate(model_properties[obj_type]):
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))

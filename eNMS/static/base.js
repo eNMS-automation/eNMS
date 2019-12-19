@@ -573,6 +573,7 @@ function initTable(type, instance, runtime, id) {
     autoWidth: false,
     scrollX: true,
     fnDrawCallback: () => {
+      console.log("test");
       $(".paginate_button > a").on("focus", function() {
         $(this).blur();
       });
@@ -581,7 +582,7 @@ function initTable(type, instance, runtime, id) {
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     columns: models[type].columns,
     columnDefs: [{ className: "dt-center", targets: "_all" }],
-    initComplete: function() {
+    initComplete: function(settings) {
       this.api()
         .columns()
         .every(function(index) {
@@ -616,6 +617,7 @@ function initTable(type, instance, runtime, id) {
             e.stopPropagation();
           });
         });
+      this.api().columns.adjust();
     },
     ajax: {
       url: `/table_filtering/${type}`,

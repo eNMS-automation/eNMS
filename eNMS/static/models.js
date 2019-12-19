@@ -56,7 +56,7 @@ class Device extends Base {
   }
 }
 
-class Link {
+class Link extends Base {
 
   get buttons() {
     const instance = JSON.stringify(this);
@@ -163,17 +163,17 @@ Link.columns = [
 ];
 
 Device.columns = [
-  "name",
-  "description",
-  "subtype",
-  "model",
-  "location",
-  "vendor",
-  "operating_system",
-  "os_version",
-  "ip_address",
-  "port",
-  "buttons",
+  { data: "name", title: "Name", search: "text" },
+  { data: "description", title: "Description", search: "text" },
+  { data: "subtype", title: "Subtype", search: "text" },
+  { data: "model", title: "Model", search: "text" },
+  { data: "location", title: "Location", search: "text" },
+  { data: "vendor", title: "Vendor", search: "text" },
+  { data: "operating_system", title: "Operating System", search: "text" },
+  { data: "os_version", title: "OS Version", search: "text" },
+  { data: "ip_address", title: "IP Address", search: "text" },
+  { data: "port", title: "Port", search: "text" },
+  { data: "buttons" },
 ];
 
 const models = {

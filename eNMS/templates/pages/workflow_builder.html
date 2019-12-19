@@ -364,5 +364,5 @@ block content %}
   let currentPath = {{ path|tojson|safe }};
 </script>
 <script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
-<script src="{{ url_for('static', filename='workflowBuilder.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='workflowBuilder.js') }}"></script>
 {% endblock javascripts %}

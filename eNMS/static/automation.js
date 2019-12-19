@@ -22,9 +22,9 @@ tables: false
 workflow: true
 */
 
-import { tables } from "./base.js";
+import { call, tables } from "./base.js";
+import { currentRuntime, displayWorkflow } from "./workflowBuilder.js";
 
-let currentRuntime;
 let arrowHistory = [""];
 let arrowPointer = -1;
 

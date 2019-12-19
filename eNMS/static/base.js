@@ -26,7 +26,7 @@ window.eNMS = {};
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 let editors = {};
 export let tables = {};
-let userIsActive = true;
+export let userIsActive = true;
 let topZ = 1000;
 
 const panelSize = {
@@ -571,7 +571,7 @@ function initTable(type, instance, runtime, id) {
     orderCellsTop: true,
     autoWidth: false,
     scrollX: true,
-    fnDrawCallback: () => {
+    drawCallback: function() {
       $(".paginate_button > a").on("focus", function() {
         $(this).blur();
       });

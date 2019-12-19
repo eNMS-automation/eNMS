@@ -257,7 +257,7 @@ class Service extends Base {
   }
 
   static get controls() {
-    return `
+    return [`
       <button
         class="btn btn-primary"
         onclick="eNMS.openServicePanel()"
@@ -309,7 +309,7 @@ class Service extends Base {
       </select>
     </div>
     <input type="hidden" id="workflow-filtering" name="workflow-filtering">
-      `;
+      `];
   }
 
   get status() {

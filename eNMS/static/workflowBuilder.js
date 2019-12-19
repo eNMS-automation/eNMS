@@ -7,7 +7,6 @@ arrowPointer: false
 call: false
 createPanel: false
 currentPath: true
-currentRuntime: true
 fCall: false
 normalRun: false
 runLogic: false
@@ -20,7 +19,10 @@ vis: false
 workflow: true
 */
 
-import { copyToClipboard, showPanel, showTypePanel } from "./base.js";
+import { switchToWorkflow } from "./automation.js";
+import { call, copyToClipboard, showPanel, showTypePanel, userIsActive } from "./base.js";
+
+export let currentRuntime;
 
 vis.Network.prototype.zoom = function(scale) {
   const animationOptions = {
@@ -81,7 +83,7 @@ let mousePosition;
 let currLabel;
 let triggerMenu;
 
-function displayWorkflow(workflowData) {
+export function displayWorkflow(workflowData) {
   workflow = workflowData.service;
   nodes = new vis.DataSet(workflow.services.map(serviceToNode));
   edges = new vis.DataSet(workflow.edges.map(edgeToEdge));

@@ -803,8 +803,7 @@ function copyClipboard(elementId, result) {
 
 function initSidebar() {
   let setContentHeight = function() {
-    //$(".right_col").css("min-height", $(window).height());
-    $(".right_col").css("min-height", $("body").outerHeight());
+    $(".right_col").css("min-height", $(window).height());
   };
 
   $("#sidebar-menu")

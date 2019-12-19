@@ -109,47 +109,5 @@
     cellspacing="0"
     width="100%"
   >
-    <thead>
-      <tr>
-        {% for field in table_properties[type] + fixed_columns %}
-        <th>
-          {{ names.get(field, field.replace("_", " ").capitalize() ) }}
-        </th>
-        {% endfor %}
-      </tr>
-      <tr>
-        {% for property in table_properties[type] %} {% if property in
-        filtering_properties[type] %} {% if property_types[property] == "bool"
-        %}
-        <th>
-          <select
-            id="{{ type }}_filtering-{{ property }}"
-            name="{{ property }}"
-            class="form-control"
-            style="min-width: 100px;"
-          >
-            <option value="">Any</option>
-            <option value="bool-true">Success</option>
-            <option value="bool-false">Failure</option>
-          </select>
-        </th>
-        {% else %}
-        <th>
-          <input
-            id="{{ type }}_filtering-{{ property }}"
-            name="{{ property }}"
-            type="text"
-            class="form-control"
-            style="width: 100%;"
-          />
-        </th>
-        {% endif %} {% else %}
-        <th></th>
-        {% endif %} {% endfor %} {% for field in fixed_columns %}
-        <th></th>
-        {% endfor %}
-      </tr>
-    </thead>
-    <tbody></tbody>
   </table>
 </form>

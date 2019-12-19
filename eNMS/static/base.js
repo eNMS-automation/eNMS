@@ -589,7 +589,7 @@ function initTable(type, instance, runtime, id) {
       createTooltips();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
-    columns: models[type].columns.map((c) => ({ data: c })),
+    columns: models[type].columns,
     columnDefs: [{ className: "dt-center", targets: "_all" }],
     ajax: {
       url: `/table_filtering/${type}`,

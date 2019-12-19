@@ -244,10 +244,6 @@ class Pool(AbstractPool):
         super().update(**kwargs)
         self.compute_pool()
 
-    @property
-    def object_number(self):
-        return f"{self.device_number} devices - {self.link_number} links"
-
     def property_match(self, obj, property):
         pool_value = getattr(self, f"{obj.class_type}_{property}")
         object_value = str(getattr(obj, property))

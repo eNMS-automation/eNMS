@@ -29,7 +29,7 @@ dont_migrate = {
         "pools",
     ],
     "link": ["id", "pools"],
-    "pool": ["id", "services", "object_number"],
+    "pool": ["id", "services"],
     "service": [
         "id",
         "sources",

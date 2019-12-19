@@ -97,7 +97,7 @@ class Pool {
   get buttons() {
     const instance = JSON.stringify(this);
     return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 250px">
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="showPoolView('${this.id}')" data-tooltip="Internal View"
@@ -106,7 +106,9 @@ class Pool {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="showPoolObjectsPanel('${this.id}')" data-tooltip="Pool Objects"
+          onclick="showPoolObjectsPanel('${
+            this.id
+          }')" data-tooltip="Pool Objects"
             ><span class="glyphicon glyphicon-wrench"></span
           ></button>
         </li>
@@ -141,15 +143,15 @@ class Pool {
 }
 
 Pool.columns = [
-  {data: "name", title: "Name"},
-  {data: "last_modified", title: "Last modified"},
-  {data: "description", title: "Description"},
-  {data: "never_update", title: "Never update"},
-  {data: "longitude", title: "Longitude"},
-  {data: "latitude", title: "Latitude"},
-  {data: "object_number", title: "Object Count"},
-  {data: "buttons"},
-]
+  { data: "name", title: "Name" },
+  { data: "last_modified", title: "Last modified" },
+  { data: "description", title: "Description" },
+  { data: "never_update", title: "Never update" },
+  { data: "longitude", title: "Longitude" },
+  { data: "latitude", title: "Latitude" },
+  { data: "object_number", title: "Object Count" },
+  { data: "buttons" },
+];
 
 Link.columns = [
   "name",

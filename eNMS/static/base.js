@@ -564,16 +564,6 @@ export function processData(type, id) {
 }
 
 // eslint-disable-next-line
-function createSearchHeaders(type) {
-  tableProperties[type || "result"].forEach((property) => {
-    if (!filteringProperties[type || "result"].includes(property)) return;
-    $(`#${type}_filtering-${property}`).on("keyup change", function() {
-      tables[type].ajax.reload(null, false);
-    });
-  });
-}
-
-// eslint-disable-next-line
 function initTable(type, instance, runtime, id) {
   const tableId = id ? `#${type}-table-${id}` : `#${type}-table`;
   // eslint-disable-next-line new-cap
@@ -591,6 +581,23 @@ function initTable(type, instance, runtime, id) {
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     columns: models[type].columns,
     columnDefs: [{ className: "dt-center", targets: "_all" }],
+    initComplete: function() {
+      this.api()
+        .columns()
+        .every(function(index) {
+          const property = models[type].columns[index].data;
+          let input = $(`
+            <input
+              id="${type}_filtering-${property}"
+              name="${property}"
+              type="text"
+              class="form-control"
+              style="width: 100%;"
+            />`
+          )
+          .appendTo($(this.header()))
+        });
+    },
     ajax: {
       url: `/table_filtering/${type}`,
       type: "POST",
@@ -611,7 +618,6 @@ function initTable(type, instance, runtime, id) {
       },
     },
   });
-  createSearchHeaders(type);
   if (["changelog", "run", "result"].includes(type)) {
     tables[type].order([0, "desc"]).draw();
   }

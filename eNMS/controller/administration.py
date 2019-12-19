@@ -236,5 +236,5 @@ class AdministrationController(BaseController):
                 return file.write(kwargs["file_content"])
 
     def upload_files(self, **kwargs):
-        file = kwargs['file']
+        file = kwargs["file"]
         file.save(f"{kwargs['folder']}/{file.filename}")

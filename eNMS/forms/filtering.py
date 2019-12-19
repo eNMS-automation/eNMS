@@ -2,25 +2,30 @@ from wtforms import HiddenField, SelectField, StringField
 
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField
-from eNMS.models import relationships
-from eNMS.properties.table import filtering_properties
+from eNMS.models import model_properties, relationships
+from eNMS.properties import private_properties
 
 
 def filtering_form_generator():
-    for table, properties in filtering_properties.items():
+    for form_type, properties in model_properties.items():
         relations = {}
-        for model, relation in relationships[table].items():
+        properties = list(
+            OrderedDict.fromkeys(
+                p for p in properties if p not in private_properties + ["type", "id"]
+            )
+        )
+        for model, relation in relationships[form_type].items():
             if model in ("edges", "results"):
                 continue
             relations[model] = MultipleInstanceField(model)
-            relationships[f"{table}_filtering"][model] = relation
+            relationships[f"{form_type}_filtering"][model] = relation
         type(
-            f"{table.capitalize()}FilteringForm",
+            f"{form_type.capitalize()}FilteringForm",
             (BaseForm,),
             {
                 "template": "filtering",
-                "properties": list(relations) + properties,
-                "form_type": HiddenField(default=f"{table}_filtering"),
+                "properties": list(relations) + list(properties),
+                "form_type": HiddenField(default=f"{form_type}_filtering"),
                 "operator": SelectField(
                     "Type of match",
                     choices=(

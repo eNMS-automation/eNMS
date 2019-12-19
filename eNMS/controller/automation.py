@@ -157,7 +157,10 @@ class AutomationController(BaseController):
                     "text": "Standalone services",
                     "children": True,
                     "state": {"disabled": True},
-                    "a_attr": {"class": "no_checkbox", "style": "color: #000000; width: 100%"},
+                    "a_attr": {
+                        "class": "no_checkbox",
+                        "style": "color: #000000; width: 100%",
+                    },
                     "type": "category",
                 }
             ] + sorted(
@@ -234,7 +237,7 @@ class AutomationController(BaseController):
                 return
             progress = state["services"][service.id].get("progress")
             track_progress = progress and progress["device"]["total"]
-            data = {"progress": progress['device']} if track_progress else {}
+            data = {"progress": progress["device"]} if track_progress else {}
             color = "32CD32" if all(run.success for run in runs) else "FF6666"
             result = {
                 "runtime": min(run.runtime for run in runs),

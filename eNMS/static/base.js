@@ -6,7 +6,6 @@ config: true
 creationMode: true
 csrf_token: false
 Dropzone: false
-filteringProperties: false
 formProperties: false
 job: false
 jsPanel: false
@@ -619,7 +618,6 @@ function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
-      console.log(models[type].controls)
       $("#controls").append(models[type].controls.join(""));
       this.api().columns.adjust();
     },

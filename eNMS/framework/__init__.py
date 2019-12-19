@@ -37,7 +37,6 @@ def configure_context_processor(flask_app):
             "property_types": property_types,
             "form_properties": form_properties,
             "table_properties": table_properties,
-            "filtering_properties": filtering_properties,
             "names": property_names,
             "config": app.config,
             "relations": list(set(chain.from_iterable(relationships.values()))),

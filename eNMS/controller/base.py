@@ -586,19 +586,18 @@ class BaseController:
 
     def update_database_configurations_from_git(self):
         for dir in scandir(self.path / "network_data"):
-            if dir.name == ".git":
-                continue
             device = fetch("device", allow_none=True, name=dir.name)
-            if device:
-                with open(Path(dir.path) / "data.yml") as data:
-                    parameters = yaml.load(data)
-                    device.update(**{"dont_update_pools": True, **parameters})
-                for data in ("configuration", "operational_data"):
-                    filepath = Path(dir.path) / dir.name / data
-                    if not filepath.exists():
-                        continue
-                    with open(filepath) as file:
-                        setattr(device, data, file.read())
+            if not device:
+                continue
+            with open(Path(dir.path) / "data.yml") as data:
+                parameters = yaml.load(data)
+                device.update(**{"dont_update_pools": True, **parameters})
+            for data in ("configuration", "operational_data"):
+                filepath = Path(dir.path) / dir.name / data
+                if not filepath.exists():
+                    continue
+                with open(filepath) as file:
+                    setattr(device, data, file.read())
         Session.commit()
         for pool in fetch_all("pool"):
             if pool.device_configuration or pool.device_operational_data:

@@ -2,6 +2,43 @@ class Base {
   constructor(properties) {
     Object.assign(this, properties);
   }
+
+  static createNewButton(type) {
+    return `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.showTypePanel('${type}')"
+        data-tooltip="New"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>`;
+  }
+
+  static searchTableButton(type) {
+    return `
+      <button
+        class="btn btn-info btn-file"
+        onclick="eNMS.showPanel('${type}_filtering')"
+        data-tooltip="Advanced Search"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-search"></span>
+      </button>`;
+  }
+
+  static refreshTableButton(type) {
+    return `
+      <button
+        class="btn btn-info btn-file"
+        onclick="eNMS.refreshTable('${type}', true)"
+        data-tooltip="Refresh"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-refresh"></span>
+      </button>`;
+  }
+
 }
 
 class Device extends Base {
@@ -22,32 +59,11 @@ class Device extends Base {
   }
 
   static get controls() {
-    return `
-      <button
-        class="btn btn-primary"
-        onclick="eNMS.showTypePanel('device')"
-        data-tooltip="New"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
-      <button
-        class="btn btn-info btn-file"
-        onclick="eNMS.showPanel('device_filtering')"
-        data-tooltip="Advanced Search"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-search"></span>
-      </button>
-      <button
-        class="btn btn-info btn-file"
-        onclick="eNMS.refreshTable('device', true)"
-        data-tooltip="Refresh"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-refresh"></span>
-      </button>
-      `;
+    return [
+      super.createNewButton("device"),
+      super.searchTableButton("device"),
+      super.refreshTableButton("device"),
+    ];
   }
 
   get buttons() {
@@ -112,6 +128,14 @@ class Link extends Base {
       { data: "source_name", title: "Source", search: "text" },
       { data: "destination_name", title: "Destination", search: "text" },
       { data: "buttons" },
+    ];
+  }
+
+  static get controls() {
+    return [
+      super.createNewButton("link"),
+      super.searchTableButton("link"),
+      super.refreshTableButton("link"),
     ];
   }
 

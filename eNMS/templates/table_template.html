@@ -3,7 +3,8 @@
   class="form-horizontal form-label-left"
   method="post"
 >
-  <div id="controls" style="margin-bottom: 8px">
+<center>
+  <div id="controls" style="padding: 5px">
     {% if type == "service" %}
     <button
       style="background:transparent; border:none; color:transparent; width: 200px;"
@@ -49,6 +50,7 @@
     </button>
     {% endif %}
   </div>
+</center>
   <table
     id="{{ type }}-table"
     class="table table-striped table-bordered table-hover add-id"

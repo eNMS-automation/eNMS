@@ -573,7 +573,6 @@ function initTable(type, instance, runtime, id) {
     autoWidth: false,
     scrollX: true,
     fnDrawCallback: () => {
-      console.log("test");
       $(".paginate_button > a").on("focus", function() {
         $(this).blur();
       });
@@ -620,7 +619,8 @@ function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
-      $("#controls").append(models[type].controls);
+      console.log(models[type].controls)
+      $("#controls").append(models[type].controls.join(""));
       this.api().columns.adjust();
     },
     ajax: {

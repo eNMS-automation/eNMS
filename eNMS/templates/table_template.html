@@ -3,54 +3,52 @@
   class="form-horizontal form-label-left"
   method="post"
 >
-<center>
-  <div id="controls">
-    {% if type == "service" %}
-    <button
-      style="background:transparent; border:none; color:transparent; width: 200px;"
-      type="button"
-    >
-      <select id="service-type" class="form-control"></select>
-    </button>
-    {% endif %} 
-    {% if type == "pool" %}
-    <button
-      class="btn btn-primary btn-file"
-      onclick="updatePools()"
-      data-tooltip="Update all pools"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-flash"></span>
-    </button>
-    {% endif %}
-    {% if type in ("run", "task") %}
-    <button
-      class="btn btn-info btn-file"
-      onclick="displayCalendar('{{ type }}')"
-      data-tooltip="Calendar"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-calendar"></span>
-    </button>
-    {% endif %} {% if type == "result" %}
-    <button
-      class="btn btn-info btn-file"
-      onclick="compare('{{ type }}')"
-      data-tooltip="Compare"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-adjust"></span>
-    </button>
-    {% endif %} {% if type == "result" %}
-    <button
-      style="background:transparent; border:none; color:transparent;"
-      type="button"
-    >
-      {{ form.runtimes(class="form-control add-id") }}
-    </button>
-    {% endif %}
-  </div>
-</center>
+  <center>
+    <div id="controls">
+      {% if type == "service" %}
+      <button
+        style="background:transparent; border:none; color:transparent; width: 200px;"
+        type="button"
+      >
+        <select id="service-type" class="form-control"></select>
+      </button>
+      {% endif %} {% if type == "pool" %}
+      <button
+        class="btn btn-primary btn-file"
+        onclick="updatePools()"
+        data-tooltip="Update all pools"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-flash"></span>
+      </button>
+      {% endif %} {% if type in ("run", "task") %}
+      <button
+        class="btn btn-info btn-file"
+        onclick="displayCalendar('{{ type }}')"
+        data-tooltip="Calendar"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-calendar"></span>
+      </button>
+      {% endif %} {% if type == "result" %}
+      <button
+        class="btn btn-info btn-file"
+        onclick="compare('{{ type }}')"
+        data-tooltip="Compare"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-adjust"></span>
+      </button>
+      {% endif %} {% if type == "result" %}
+      <button
+        style="background:transparent; border:none; color:transparent;"
+        type="button"
+      >
+        {{ form.runtimes(class="form-control add-id") }}
+      </button>
+      {% endif %}
+    </div>
+  </center>
   <table
     id="{{ type }}-table"
     class="table table-striped table-bordered table-hover add-id"

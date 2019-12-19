@@ -38,7 +38,6 @@ class Base {
         <span class="glyphicon glyphicon-refresh"></span>
       </button>`;
   }
-
 }
 
 class Device extends Base {

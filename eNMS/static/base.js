@@ -580,7 +580,7 @@ function initTable(type, instance, runtime, id) {
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     columns: models[type].columns,
     columnDefs: [{ className: "dt-center", targets: "_all" }],
-    initComplete: function(settings) {
+    initComplete: function() {
       this.api()
         .columns()
         .every(function(index) {

@@ -1,7 +1,10 @@
-class Device {
+class Base {
   constructor(properties) {
     Object.assign(this, properties);
   }
+}
+
+class Device extends Base {
 
   get buttons() {
     const instance = JSON.stringify(this);
@@ -54,9 +57,6 @@ class Device {
 }
 
 class Link {
-  constructor(properties) {
-    Object.assign(this, properties);
-  }
 
   get buttons() {
     const instance = JSON.stringify(this);
@@ -85,10 +85,7 @@ class Link {
   }
 }
 
-class Pool {
-  constructor(properties) {
-    Object.assign(this, properties);
-  }
+class Pool extends Base {
 
   get object_number() {
     return `${this.device_number} devices - ${this.link_number} links`;
@@ -154,15 +151,15 @@ Pool.columns = [
 ];
 
 Link.columns = [
-  "name",
-  "description",
-  "subtype",
-  "model",
-  "location",
-  "vendor",
-  "source_name",
-  "destination_name",
-  "buttons",
+  { data: "name", title: "Name", search: "text" },
+  { data: "description", title: "Description", search: "text" },
+  { data: "subtype", title: "Subtype", search: "text" },
+  { data: "model", title: "Model", search: "text" },
+  { data: "location", title: "Location", search: "text" },
+  { data: "vendor", title: "Vendor", search: "text" },
+  { data: "source_name", title: "Source", search: "text" },
+  { data: "destination_name", title: "Destination", search: "text" },
+  { data: "buttons" },
 ];
 
 Device.columns = [

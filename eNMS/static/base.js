@@ -586,9 +586,9 @@ function initTable(type, instance, runtime, id) {
         .columns()
         .every(function(index) {
           const data = models[type].columns[index];
-          let input;
+          let element;
           if (data.search == "text") {
-            input = $(`
+            element = `
               <input
                 id="${type}_filtering-${data.data}"
                 name="${data.data}"
@@ -596,22 +596,24 @@ function initTable(type, instance, runtime, id) {
                 placeholder="&#xF002;"
                 class="form-control"
                 style="font-family:Arial, FontAwesome; width: 100%; height: 30px; margin-top: 5px"
-              >`);
+              >`;
           } else if (data.search == "bool") {
-            input = $(`
+            element = `
               <select
                 id="${type}_filtering-${data.data}"
                 name="${data.data}"
                 class="form-control"
-                style="width: 100px; height: 30px; margin-top: 5px"
+                style="width: 100%; height: 30px; margin-top: 5px"
               >
                 <option value="">Any</option>
-                <option value="bool-true">Success</option>
-                <option value="bool-false">Failure</option>
-              </select>`);
+                <option value="bool-true">True</option>
+                <option value="bool-false">False</option>
+              </select>`;
           }
-          input.appendTo($(this.header())).on("change", function() {
+          $(element).appendTo($(this.header())).on("keyup change", function() {
             tables[type].ajax.reload(null, false);
+          }).on("click", function(e) {
+            e.stopPropagation();
           });
         });
     },

@@ -610,12 +610,17 @@ function initTable(type, instance, runtime, id) {
                 <option value="bool-true">True</option>
                 <option value="bool-false">False</option>
               </select>`;
+          } else if (data.data == "buttons") {
+            element = models[type].controls;
           }
-          $(element).appendTo($(this.header())).on("keyup change", function() {
-            tables[type].ajax.reload(null, false);
-          }).on("click", function(e) {
-            e.stopPropagation();
-          });
+          $(element)
+            .appendTo($(this.header()))
+            .on("keyup change", function() {
+              tables[type].ajax.reload(null, false);
+            })
+            .on("click", function(e) {
+              e.stopPropagation();
+            });
         });
       this.api().columns.adjust();
     },

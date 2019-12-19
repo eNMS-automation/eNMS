@@ -842,7 +842,7 @@ function resetDisplay() {
   });
 }
 
-function getWorkflowState(periodic, notification) {
+export function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {

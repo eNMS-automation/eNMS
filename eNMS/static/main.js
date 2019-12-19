@@ -1,6 +1,7 @@
 import * as administrationController from "./administration.js";
 import * as baseController from "./base.js";
 import * as automationController from "./automation.js";
+import * as workflowController from "./workflow.js";
 import { showDeviceNetworkData } from "./inventory.js";
 
 const fullScreen = function() {
@@ -39,6 +40,7 @@ window.eNMS = {
   exportTopology: administrationController.exportTopology,
   filterTable: baseController.filterTable,
   fullScreen: fullScreen,
+  getWorkflowState: workflowController.getWorkflowState,
   processData: baseController.processData,
   refreshTable: baseController.refreshTable,
   showPanel: baseController.showPanel,

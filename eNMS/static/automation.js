@@ -23,7 +23,7 @@ workflow: true
 */
 
 import { call, tables } from "./base.js";
-import { currentRuntime, displayWorkflow } from "./workflowBuilder.js";
+import { currentRuntime, displayWorkflow } from "./workflow.js";
 
 let arrowHistory = [""];
 let arrowPointer = -1;
@@ -31,43 +31,6 @@ let arrowPointer = -1;
 // eslint-disable-next-line
 function openServicePanel() {
   showTypePanel($("#service-type").val());
-}
-
-// eslint-disable-next-line
-function panelCode(type, id, mode) {
-  const typeInput = $(id ? `#${type}-class-${id}` : `#${type}-class`);
-  typeInput.val(type).prop("disabled", true);
-  $(id ? `#${type}-name-${id}` : `#${type}-name`).prop("disabled", true);
-  if (id) {
-    $(`#${type}-shared-${id}`).prop("disabled", true);
-    if (mode == "duplicate" && type == "workflow") {
-      $(`#original-${id}`).val(id);
-    }
-  }
-  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
-    "disabled",
-    true
-  );
-  $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
-    enableAllSteps: true,
-    keyNavigation: false,
-    transitionEffect: "none",
-    onShowStep: function() {
-      Object.keys(editors[id]).forEach(function(field) {
-        editors[id][field].refresh();
-      });
-    },
-  });
-  $(".buttonFinish,.buttonNext,.buttonPrevious").hide();
-  $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard("fixHeight");
-  if (mode == "run") {
-    $(`#${type}-btn-${id}`)
-      .removeClass("btn-success")
-      .addClass("btn-primary")
-      .attr("onclick", `parameterizedRun('${type}', ${id})`)
-      .text("Run");
-    $(".readonly-when-run").prop("readonly", true);
-  }
 }
 
 // eslint-disable-next-line

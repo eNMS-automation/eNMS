@@ -803,18 +803,8 @@ function copyClipboard(elementId, result) {
 
 function initSidebar() {
   let setContentHeight = function() {
-    $(".right_col").css("min-height", $(window).height());
-    let bodyHeight = $("body").outerHeight();
-    let footerHeight = $("body").hasClass("footer_fixed")
-      ? -10
-      : $("footer").height();
-    let leftColHeight =
-      $(".left_col")
-        .eq(1)
-        .height() + $(".sidebar-footer").height();
-    let contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-    contentHeight -= $(".nav_menu").height() + footerHeight;
-    $(".right_col").css("min-height", contentHeight);
+    //$(".right_col").css("min-height", $(window).height());
+    $(".right_col").css("min-height", $("body").outerHeight());
   };
 
   $("#sidebar-menu")

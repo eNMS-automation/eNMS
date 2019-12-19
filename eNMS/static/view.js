@@ -13,7 +13,7 @@ showTypePanel: false
 viewType: false
 */
 
-import { call } from "./base.js";
+import { call, showTypePanel } from "./base.js";
 
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",

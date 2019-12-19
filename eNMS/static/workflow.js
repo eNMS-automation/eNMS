@@ -860,7 +860,7 @@ export function getWorkflowState(periodic, notification) {
   if (notification) alertify.notify("Workflow refreshed.", "success", 5);
 }
 
-(function() {
+function initWorkflowBuilder() {
   $("#left-arrow,#right-arrow").addClass("disabled");
   $("#edge-type").on("change", function() {
     switchMode(this.value);
@@ -894,4 +894,8 @@ export function getWorkflowState(periodic, notification) {
     $("#edge-type").selectpicker();
     getWorkflowState(true);
   });
+}
+
+(function() {
+  if (page == "workflow_builder") initWorkflowBuilder();
 })();

@@ -3,25 +3,16 @@
   class="form-horizontal form-label-left"
   method="post"
 >
-  <div class="page-title">
+  <div id="controls" style="margin-bottom: 8px">
     {% if type == "service" %}
     <button
-      style="background:transparent; border:none; color:transparent; width: 20vw;"
+      style="background:transparent; border:none; color:transparent; width: 200px;"
       type="button"
     >
       <select id="service-type" class="form-control"></select>
     </button>
-    {% endif %} {% if type not in ("run", "result") %} {% set func =
-    "openServicePanel" if type == "service" else "eNMS.showTypePanel" %}
-    <button
-      class="btn btn-primary"
-      onclick="{{ func }}('{{ type }}')"
-      data-tooltip="New"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-plus"></span>
-    </button>
-    {% endif %} {% if type == "pool" %}
+    {% endif %} 
+    {% if type == "pool" %}
     <button
       class="btn btn-primary btn-file"
       onclick="updatePools()"
@@ -30,24 +21,7 @@
     >
       <span class="glyphicon glyphicon-flash"></span>
     </button>
-    {% endif %} {% if type != "result" %}
-    <button
-      class="btn btn-info btn-file"
-      onclick="eNMS.showPanel('{{ type }}_filtering')"
-      data-tooltip="Advanced Search"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-search"></span>
-    </button>
     {% endif %}
-    <button
-      class="btn btn-info btn-file"
-      onclick="eNMS.refreshTable('{{ type }}', true)"
-      data-tooltip="Refresh"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-refresh"></span>
-    </button>
     {% if type in ("run", "task") %}
     <button
       class="btn btn-info btn-file"
@@ -73,34 +47,6 @@
     >
       {{ form.runtimes(class="form-control add-id") }}
     </button>
-    {% endif %} {% if type == "service" %}
-    <a
-      id="left-arrow"
-      class="btn btn-info btn-file"
-      onclick="action['Backward']()"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a
-      id="right-arrow"
-      class="btn btn-info btn-file"
-      onclick="action['Forward']()"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-    <div class="pull-right">
-      <select
-        id="parent-filtering"
-        name="parent-filtering"
-        class="form-control"
-      >
-        <option value="true">Display services hierarchically</option>
-        <option value="false">Display all services</option>
-      </select>
-    </div>
-    <input type="hidden" id="workflow-filtering" name="workflow-filtering" />
     {% endif %}
   </div>
   <table

@@ -113,18 +113,6 @@ class Service(AbstractBase):
             workflow = f"[{self.workflows[0].name}] "
         self.name = f"{workflow}{name or self.scoped_name}"
 
-    def generate_row(self, **kwargs):
-        hierarchical_display = kwargs["form"].get("parent-filtering") == "true"
-        rows = [self.scoped_name if hierarchical_display else self.name] + [
-            getattr(self, f"table_{property}", getattr(self, property))
-            for property in table_properties["service"][1:]
-        ]
-        return rows + [
-            f"Running" if app.service_db[self.id]["runs"] else "Idle",
-            f"""
-            """,
-        ]
-
     def adjacent_services(self, workflow, direction, subtype):
         for edge in getattr(self, f"{direction}s"):
             if edge.subtype == subtype and edge.workflow == workflow:

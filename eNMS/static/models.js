@@ -233,6 +233,62 @@ class Service extends Base {
     ];
   }
 
+  static get controls() {
+    return `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.openServicePanel()"
+        data-tooltip="New"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+      <button
+        class="btn btn-info btn-file"
+        onclick="eNMS.showPanel('service_filtering')"
+        data-tooltip="Advanced Search"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
+      <button
+        class="btn btn-info btn-file"
+        onclick="eNMS.refreshTable('service', true)"
+        data-tooltip="Refresh"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-refresh"></span>
+      </button>
+      <a
+      id="left-arrow"
+      class="btn btn-info btn-file"
+      onclick="action['Backward']()"
+      type="button"
+    >
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a
+      id="right-arrow"
+      class="btn btn-info btn-file"
+      onclick="action['Forward']()"
+      type="button"
+    >
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+    <div class="pull-right">
+      <select
+        id="parent-filtering"
+        name="parent-filtering"
+        class="form-control"
+      >
+        <option value="true">Display services hierarchically</option>
+        <option value="false">Display all services</option>
+      </select>
+    </div>
+    <input type="hidden" id="workflow-filtering" name="workflow-filtering">
+      `;
+  }
+
   get status() {
     return "Idle";
   }

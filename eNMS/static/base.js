@@ -610,8 +610,6 @@ function initTable(type, instance, runtime, id) {
                 <option value="bool-true">True</option>
                 <option value="bool-false">False</option>
               </select>`;
-          } else if (data.data == "buttons") {
-            element = models[type].controls;
           }
           $(element)
             .appendTo($(this.header()))
@@ -622,6 +620,7 @@ function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
+      $("#controls").append(models[type].controls);
       this.api().columns.adjust();
     },
     ajax: {

@@ -143,12 +143,12 @@ class Pool {
 }
 
 Pool.columns = [
-  { data: "name", title: "Name" },
-  { data: "last_modified", title: "Last modified" },
-  { data: "description", title: "Description" },
-  { data: "never_update", title: "Never update" },
-  { data: "longitude", title: "Longitude" },
-  { data: "latitude", title: "Latitude" },
+  { data: "name", title: "Name", search: "text" },
+  { data: "last_modified", title: "Last modified", search: "text" },
+  { data: "description", title: "Description", search: "text" },
+  { data: "never_update", title: "Never update", search: "bool" },
+  { data: "longitude", title: "Longitude", search: "text" },
+  { data: "latitude", title: "Latitude", search: "text" },
   { data: "object_number", title: "Object Count" },
   { data: "buttons" },
 ];

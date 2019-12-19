@@ -586,19 +586,33 @@ function initTable(type, instance, runtime, id) {
         .columns()
         .every(function(index) {
           const data = models[type].columns[index];
-          let input = $(`
-            <input
-              id="${type}_filtering-${data.data}"
-              name="${data.data}"
-              type="text"
-              placeholder="&#xF002;"
-              class="form-control"
-              style="font-family:Arial, FontAwesome; width: 100%; height: 25px; margin-top: 5px"
-            >`)
-            .appendTo($(this.header()))
-            .on("keyup change", function() {
-              tables[type].ajax.reload(null, false);
-            });
+          let input;
+          if (data.search == "text") {
+            input = $(`
+              <input
+                id="${type}_filtering-${data.data}"
+                name="${data.data}"
+                type="text"
+                placeholder="&#xF002;"
+                class="form-control"
+                style="font-family:Arial, FontAwesome; width: 100%; height: 30px; margin-top: 5px"
+              >`);
+          } else if (data.search == "bool") {
+            input = $(`
+              <select
+                id="${type}_filtering-${data.data}"
+                name="${data.data}"
+                class="form-control"
+                style="width: 100px; height: 30px; margin-top: 5px"
+              >
+                <option value="">Any</option>
+                <option value="bool-true">Success</option>
+                <option value="bool-false">Failure</option>
+              </select>`);
+          }
+          input.appendTo($(this.header())).on("change", function() {
+            tables[type].ajax.reload(null, false);
+          });
         });
     },
     ajax: {

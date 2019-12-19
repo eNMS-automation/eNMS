@@ -91,34 +91,3 @@ table_properties = {
     "task": task_table_properties,
     "user": user_table_properties,
 }
-
-service_filtering_properties = [
-    "name",
-    "last_modified",
-    "type",
-    "description",
-    "vendor",
-    "operating_system",
-    "creator",
-    "max_processes",
-    "credentials",
-    "waiting_time",
-    "send_notification_method",
-    "mail_recipient",
-    "number_of_retries",
-    "time_between_retries",
-]
-
-table_fixed_columns = {
-    "changelog": [],
-    "device": [""],
-    "event": [""],
-    "link": [""],
-    "run": [""],
-    "result": ["Result", "V1", "V2"],
-    "server": [""],
-    "service": ["Status", ""],
-    "task": [""],
-    "user": [""],
-    "pool": [""],
-}

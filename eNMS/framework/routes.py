@@ -22,7 +22,6 @@ from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.properties.diagram import type_to_diagram_properties
-from eNMS.properties.table import table_fixed_columns
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -110,12 +109,10 @@ def dashboard():
 @blueprint.route("/table/<table_type>")
 @monitor_requests
 def table(table_type):
-    kwargs = {
+    return render_template(f"pages/table.html", **{
         "endpoint": f"table/{table_type}",
-        "fixed_columns": table_fixed_columns[table_type],
         "type": table_type,
-    }
-    return render_template(f"pages/table.html", **kwargs)
+    })
 
 
 @blueprint.route("/view/<view_type>")
@@ -144,9 +141,7 @@ def workflow_builder():
 
 @blueprint.route("/form/<form_type>")
 @monitor_requests
-def form(form_type, **kwargs):
-    if form_type == "result_table":
-        kwargs = {"fixed_columns": table_fixed_columns["result"], "type": "result"}
+def form(form_type):
     return render_template(
         f"forms/{form_templates.get(form_type, 'base')}_form.html",
         **{
@@ -154,7 +149,6 @@ def form(form_type, **kwargs):
             "action": form_actions.get(form_type),
             "form": form_classes[form_type](request.form),
             "form_type": form_type,
-            **kwargs,
         },
     )
 

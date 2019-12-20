@@ -2,7 +2,7 @@ import * as administrationController from "./administration.js";
 import * as baseController from "./base.js";
 import * as automationController from "./automation.js";
 import * as workflowController from "./workflow.js";
-import { showDeviceNetworkData } from "./inventory.js";
+import * as inventoryController from "./inventory.js";
 
 const fullScreen = function() {
   if (
@@ -45,6 +45,7 @@ window.eNMS = {
   refreshTable: baseController.refreshTable,
   showPanel: baseController.showPanel,
   showTypePanel: baseController.showTypePanel,
-  showDeviceNetworkData: showDeviceNetworkData,
+  showDeviceNetworkData: inventoryController.showDeviceNetworkData,
+  sshConnection: inventoryController.sshConnection,
   switchToWorkflow: automationController.switchToWorkflow,
 };

@@ -14,8 +14,7 @@ tables: false
 
 import { call } from "./base.js";
 
-// eslint-disable-next-line
-function sshConnection(id) {
+export function sshConnection(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {

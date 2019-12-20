@@ -253,6 +253,7 @@ class Service extends Base {
       {
         data: "name",
         title: "Name",
+        width: "20%",
         search: "text",
         render: function(data, type, row, meta) {
           return `<b><a href="#" onclick="eNMS.switchToWorkflow('${row.id}')">${
@@ -265,7 +266,6 @@ class Service extends Base {
       { data: "description", title: "Description", search: "text" },
       { data: "vendor", title: "Vendor", search: "text" },
       { data: "operating_system", title: "Operating System", search: "text" },
-      { data: "creator", title: "Creator", search: "text" },
       { data: "creator", title: "Creator", search: "text" },
       { data: "status", title: "Status", search: "text" },
       { data: "buttons" },

@@ -12,8 +12,7 @@
       >
         <select id="service-type" class="form-control"></select>
       </button>
-      {% endif %}
-      {% if type in ("run", "task") %}
+      {% endif %} {% if type in ("run", "task") %}
       <button
         class="btn btn-info btn-file"
         onclick="displayCalendar('{{ type }}')"
@@ -22,7 +21,7 @@
       >
         <span class="glyphicon glyphicon-calendar"></span>
       </button>
-      {% endif %} 
+      {% endif %}
     </div>
   </center>
   <table

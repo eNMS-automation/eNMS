@@ -372,7 +372,7 @@ function initSelect(el, model, parentId, single) {
 }
 
 export function configureForm(form, id, panelId) {
-  console.log(formProperties[form])
+  console.log(formProperties[form]);
   if (!formProperties[form]) return;
   for (const [property, field] of Object.entries(formProperties[form])) {
     const fieldId = id ? `${form}-${property}-${id}` : `${form}-${property}`;

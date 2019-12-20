@@ -1,6 +1,6 @@
 class Base {
   constructor(properties) {
-    console.log(properties)
+    console.log(properties);
     Object.assign(this, properties);
   }
 
@@ -196,7 +196,7 @@ class Pool extends Base {
         type="button"
       >
         <span class="glyphicon glyphicon-flash"></span>
-      </button>`
+      </button>`,
     ];
   }
 
@@ -390,7 +390,6 @@ class Service extends Base {
 }
 
 class Result extends Base {
-
   constructor(properties) {
     delete properties.result;
     super(properties);
@@ -417,13 +416,14 @@ class Result extends Base {
         type="button"
       >
         <span class="glyphicon glyphicon-adjust"></span>
-      </button>`
+      </button>`,
     ];
   }
 
   get buttons() {
     const instance = JSON.stringify(this);
-    return [`
+    return [
+      `
     <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
       <li>
           <button type="button" class="btn btn-info btn-sm"
@@ -431,12 +431,15 @@ class Result extends Base {
           <span class="glyphicon glyphicon-list-alt"></span></button>
       </li>
       <li>
-          <button type="button" id="btn-result-${this.id}" class="btn btn-info btn-sm"
+          <button type="button" id="btn-result-${
+            this.id
+          }" class="btn btn-info btn-sm"
           onclick='eNMS.copyClipboard("btn-result-${this.id}", ${instance})'
           data-tooltip="Copy to clipboard">
           <span class="glyphicon glyphicon-copy"></span></button>
       </li>
-    </ul>`];
+    </ul>`,
+    ];
   }
 }
 

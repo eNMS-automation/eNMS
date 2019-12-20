@@ -59,30 +59,9 @@ function compare(type) {
 
 function buildLinks(result, id) {
   const base = `get_result("${result.service_name}"`;
-  const links = result.device_name ? [`Per-device result`, `${base}, device=device.name)`] : ["Top-level result", `${base})`];
-  const table = links
-    .map((link, index) => {
-      const inputId = `input-${index}-${id}`;
-      return `<tr>
-        <td style="text-align: center; vertical-align: middle;">
-          ${link[0]}
-        </td>
-        <td>
-          <div class="input-group" style="width: 800px">
-            <input id="${inputId}" type="text" class="form-control" value='${
-        link[1]
-      }'>
-            <span class="input-group-btn">
-              <button class="btn btn-default" onclick="eNMS.copyToClipboard('${inputId}',
-              true)" type="button">
-                <span class="glyphicon glyphicon-copy"></span>
-              </button>
-            </span>
-          </div>
-        </td>
-      </tr>`;
-    })
-    .join("");
+  const link = result.device_name
+    ? [`Per-device result`, `${base}, device=device.name)`]
+    : ["Top-level result", `${base})`];
   return `
     <div class="modal-body">
       <table
@@ -91,7 +70,24 @@ function buildLinks(result, id) {
         width="100%"
       >
         <tbody>
-          ${table}
+          <tr>
+            <td style="text-align: center; vertical-align: middle;">
+              ${link[0]}
+            </td>
+            <td>
+              <div class="input-group" style="width: 800px">
+                <input id="link-${id}" type="text" class="form-control" value='${
+    link[1]
+  }'>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" onclick="eNMS.copyToClipboard('link-${id}',
+                  true)" type="button">
+                    <span class="glyphicon glyphicon-copy"></span>
+                  </button>
+                </span>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>`;

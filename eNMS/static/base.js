@@ -611,6 +611,7 @@ function initTable(type, instance, runtime, id) {
         $(this).blur();
       });
       createTooltips();
+      adjustHeight();
     },
     sDom: "<'top'i>rt<'bottom'lp><'clear'>",
     columns: models[type].columns,
@@ -781,9 +782,9 @@ function buildLinks(result, id) {
 
 function adjustHeight() {
   const height =
-    $("body")[0].scrollHeight > $(window).height()
+    $("body")[0].scrollHeight > window.innerHeight
       ? document.body.clientHeight
-      : $(window).height();
+      : window.innerHeight;
   $("#sidebar").css("min-height", height);
   $(".x_panel").css("min-height", height - $(".nav_menu").height() - 20);
   Object.keys(tables).forEach((table) => tables[table].columns.adjust());
@@ -894,7 +895,6 @@ function initSidebar() {
         .dataTable()
         .fnDraw();
     });
-    console.log("test");
   };
 
   switchMenu();

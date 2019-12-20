@@ -655,6 +655,7 @@ function initTable(type, instance, runtime, id) {
         });
       $("#controls").append(models[type].controls.join(""));
       this.api().columns.adjust();
+      adjustHeight();
     },
     ajax: {
       url: `/table_filtering/${type}`,
@@ -778,6 +779,16 @@ function buildLinks(result, id) {
     </div>`;
 }
 
+function adjustHeight() {
+  if ($("body")[0].scrollHeight > $(window).height()) {
+    $("#sidebar").css("min-height", $(document).height());
+  } else {
+    $("#sidebar").css("min-height", $(window).height());
+  }
+}
+
+$(window).resize(adjustHeight);
+
 function copyClipboard(elementId, result) {
   target = document.getElementById(elementId);
   if (!$(`#tooltip-${elementId}`).length) {
@@ -882,6 +893,7 @@ function initSidebar() {
         .dataTable()
         .fnDraw();
     });
+    console.log("test")
   };
 
   switchMenu();

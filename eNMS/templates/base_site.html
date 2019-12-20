@@ -87,11 +87,11 @@
         {% block sidebar %}
         <div
           id="sidebar"
-          class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}"
-          style="min-height: 100%;"
+          class="col-md-3 left_col"
+          style="min-height: 100%"
         >
-          <div class="left_col scroll-view" style="min-height: 100%">
-            <br />
+          <div class="left_col" style="min-height: 100%">
+            <br>
             <div class="navbar nav_title" style="border:0;">
               <center>
                 <h3 id="eNMS" style="font-size:30px; color:#30C2A5">
@@ -189,7 +189,8 @@
             </div>
           </div>
         </div>
-        {% endblock sidebar %} {% block header %}
+        {% endblock sidebar %}
+        {% block header %}
         <div class="top_nav">
           <div class="nav_menu">
             <nav>

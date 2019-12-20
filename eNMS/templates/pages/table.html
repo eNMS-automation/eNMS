@@ -1,6 +1,6 @@
 {% extends "base_site.html" %} {% block stylesheets %} {{ super() }} {% endblock
 stylesheets %} {% block content %} {% if type == "pool" %} {% endif %}
-<div style="height: 100%" class="right_col" role="main">
+<div class="right_col" role="main">
   <div class="row">
     <div class="x_panel">
       <div class="x_content">
@@ -12,6 +12,4 @@ stylesheets %} {% block content %} {% if type == "pool" %} {% endif %}
 {% endblock content %} {% block javascripts %} {{ super() }} {% if type ==
 "pool" %}
 <script src="{{ url_for('static', filename='logicalView.js') }}"></script>
-{% elif type == "instance" %}
-<script src="{{ url_for('static', filename='administration.js') }}"></script>
 {% endif %} {% endblock javascripts %}

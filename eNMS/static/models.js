@@ -1,5 +1,6 @@
 class Base {
   constructor(properties) {
+    console.log(properties)
     Object.assign(this, properties);
   }
 
@@ -396,7 +397,7 @@ class Result extends Base {
       { data: "duration", title: "Duration", search: "text" },
       { data: "workflow_name", title: "Workflow", search: "text" },
       { data: "service_name", title: "Service", search: "text" },
-      { data: "parent_device_name", title: "Parent Device", search: "text" },
+      { data: "device_name", title: "Device", search: "text" },
       { data: "success", title: "Success", search: "text" },
       { data: "buttons" },
     ];
@@ -430,7 +431,7 @@ class Result extends Base {
           data-tooltip="Copy to clipboard">
           <span class="glyphicon glyphicon-copy"></span></button>
       </li>
-    </ul>`;
+    </ul>`];
   }
 }
 

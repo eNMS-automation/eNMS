@@ -156,6 +156,7 @@ $(document).ready(function() {
 });
 
 window.eNMS = {
+  copyClipboard: automationController.copyClipboard,
   copyToClipboard: baseController.copyToClipboard,
   displayFiles: administrationController.displayFiles,
   exportTopology: administrationController.exportTopology,

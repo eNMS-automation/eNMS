@@ -802,9 +802,6 @@ function copyClipboard(elementId, result) {
 }
 
 function initSidebar() {
-  let setContentHeight = function() {
-    $(".right_col").css("min-height", $(window).height());
-  };
 
   $("#sidebar-menu")
     .find("a")
@@ -834,9 +831,7 @@ function initSidebar() {
           }
         }
         $li.addClass("active");
-        $("ul:first", $li).slideDown(function() {
-          setContentHeight();
-        });
+        $("ul:first", $li).slideDown();
       }
     });
 
@@ -878,14 +873,10 @@ function initSidebar() {
         .parent("li")
         .addClass("current-page")
         .parents("ul")
-        .slideDown(function() {
-          setContentHeight();
-        })
+        .slideDown()
         .parent()
         .addClass("active");
     }
-
-    setContentHeight();
     $(".dataTable").each(function() {
       $(this)
         .dataTable()

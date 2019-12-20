@@ -83,13 +83,14 @@
   <body class="{% block body_class %}nav-md {% endblock body_class %}">
     {% block body %}
     <div class="container body" id="container-body">
-      <div class="main_container">
+      <div class="main_container" style="min-height: 100%">
         {% block sidebar %}
         <div
           id="sidebar"
           class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}"
+          style="min-height: 100%;"
         >
-          <div class="left_col scroll-view">
+          <div class="left_col scroll-view" style="min-height: 100%">
             <br />
             <div class="navbar nav_title" style="border:0;">
               <center>

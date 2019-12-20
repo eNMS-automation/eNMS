@@ -83,15 +83,11 @@
   <body class="{% block body_class %}nav-md {% endblock body_class %}">
     {% block body %}
     <div class="container body" id="container-body">
-      <div class="main_container" style="min-height: 100%">
+      <div class="main_container">
         {% block sidebar %}
-        <div
-          id="sidebar"
-          class="col-md-3 left_col"
-          style="min-height: 100%"
-        >
-          <div class="left_col" style="min-height: 100%">
-            <br>
+        <div id="sidebar" class="col-md-3 left_col">
+          <div class="left_col">
+            <br />
             <div class="navbar nav_title" style="border:0;">
               <center>
                 <h3 id="eNMS" style="font-size:30px; color:#30C2A5">
@@ -189,8 +185,7 @@
             </div>
           </div>
         </div>
-        {% endblock sidebar %}
-        {% block header %}
+        {% endblock sidebar %} {% block header %}
         <div class="top_nav">
           <div class="nav_menu">
             <nav>

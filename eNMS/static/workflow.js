@@ -20,7 +20,13 @@ workflow: true
 */
 
 import { switchToWorkflow } from "./automation.js";
-import { call, copyToClipboard, showPanel, showTypePanel, userIsActive } from "./base.js";
+import {
+  call,
+  copyToClipboard,
+  showPanel,
+  showTypePanel,
+  userIsActive,
+} from "./base.js";
 
 export let currentRuntime;
 

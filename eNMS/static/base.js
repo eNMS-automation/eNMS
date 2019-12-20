@@ -780,11 +780,12 @@ function buildLinks(result, id) {
 }
 
 function adjustHeight() {
-  if ($("body")[0].scrollHeight > $(window).height()) {
-    $("#sidebar").css("min-height", $(document).height());
-  } else {
-    $("#sidebar").css("min-height", $(window).height());
-  }
+  const height =
+    $("body")[0].scrollHeight > $(window).height()
+      ? $(document).height()
+      : $(window).height();
+  $("#sidebar").css("min-height", height);
+  $(".x_panel").css("min-height", height - $(".nav_menu").height() - 20);
 }
 
 $(window).resize(adjustHeight);
@@ -813,7 +814,6 @@ function copyClipboard(elementId, result) {
 }
 
 function initSidebar() {
-
   $("#sidebar-menu")
     .find("a")
     .on("click", function(ev) {
@@ -893,7 +893,7 @@ function initSidebar() {
         .dataTable()
         .fnDraw();
     });
-    console.log("test")
+    console.log("test");
   };
 
   switchMenu();

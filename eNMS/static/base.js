@@ -782,10 +782,11 @@ function buildLinks(result, id) {
 function adjustHeight() {
   const height =
     $("body")[0].scrollHeight > $(window).height()
-      ? $(document).height()
+      ? document.body.clientHeight
       : $(window).height();
   $("#sidebar").css("min-height", height);
   $(".x_panel").css("min-height", height - $(".nav_menu").height() - 20);
+  Object.keys(tables).forEach((table) => tables[table].columns.adjust());
 }
 
 $(window).resize(adjustHeight);

@@ -505,6 +505,68 @@ class Result extends Base {
   }
 }
 
+class Task extends Base {
+
+  static get columns() {
+    return [
+      { data: "name", title: "Name", search: "text" },
+      { data: "description", title: "Description", search: "text" },
+      { data: "service_name", title: "Service", search: "text" },
+      { data: "status", title: "Status", search: "text" },
+      { data: "scheduling_mode", title: "Scheduling", search: "text" },
+      { data: "start_date", title: "Start Date", search: "text" },
+      { data: "end_date", title: "End Date", search: "text" },
+      { data: "frequency", title: "Frequency", search: "text" },
+      { data: "frequency_unit", title: "Unit", search: "text" },
+      { data: "crontab_expression", title: "Crontab Expression", search: "text" },
+      { data: "next_run_time", title: "Next run time", search: "text" },
+      { data: "time_before_next_run", title: "Time left", search: "text" },
+      { data: "buttons" },
+    ];
+  }
+
+  get next_run_time() {
+    return `b`;
+  }
+
+  get time_before_next_run() {
+    return `a`;
+  }
+
+  static get controls() {
+    return [
+      `<button
+        class="btn btn-info btn-file"
+        onclick="eNMS.displayCalendar('${this.type}')"
+        data-tooltip="Calendar"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-calendar"></span>
+      </button>`
+    ];
+  }
+
+  get buttons() {
+    const instance = JSON.stringify(this);
+    return [
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
+        <li>
+          <button type="button" class="btn btn-info"
+          onclick="eNMS.showRuntimePanel('logs', {self.service.row_properties},
+          '${this.runtime}')"data-tooltip="Logs">
+          <span class="glyphicon glyphicon-list"></span></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-info"
+          onclick="eNMS.showRuntimePanel('results', {self.service.row_properties},
+          '${this.runtime}')"data-tooltip="Results">
+          <span class="glyphicon glyphicon-list-alt"></span></button>
+        </li>
+      </ul>`
+    ];
+  }
+}
+
 const models = {
   device: Device,
   link: Link,

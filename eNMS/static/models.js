@@ -410,7 +410,7 @@ class Run extends Base {
     return [
       `<button
         class="btn btn-info btn-file"
-        onclick="eNMS.displayCalendar('${this.type}')"
+        onclick="eNMS.displayCalendar('run')"
         data-tooltip="Calendar"
         type="button"
       >
@@ -551,7 +551,7 @@ class Task extends Base {
     return [
       `<button
         class="btn btn-info btn-file"
-        onclick="eNMS.displayCalendar('${this.type}')"
+        onclick="eNMS.displayCalendar('task')"
         data-tooltip="Calendar"
         type="button"
       >

@@ -190,7 +190,7 @@ AbstractPool = type(
     (AbstractBase,),
     {
         "__tablename__": "abstract_pool",
-        "type": Column(SmallString, default="pool"),
+        "type": "pool",
         "__mapper_args__": {"polymorphic_identity": "abstract_pool"},
         "id": Column(Integer, primary_key=True),
         **{
@@ -239,6 +239,7 @@ class Pool(AbstractPool):
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)
+    properties = ["type"]
 
     def update(self, **kwargs):
         super().update(**kwargs)

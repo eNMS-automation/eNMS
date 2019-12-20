@@ -6,7 +6,7 @@ class Base {
   static createNewButton(type) {
     return `
       <button
-        class="btn btn-primary"
+        class="btn btn-sm btn-primary"
         onclick="eNMS.showTypePanel('${type}')"
         data-tooltip="New"
         type="button"
@@ -18,7 +18,7 @@ class Base {
   static searchTableButton(type) {
     return `
       <button
-        class="btn btn-info btn-file"
+        class="btn btn-sm btn-info btn-file"
         onclick="eNMS.showPanel('${type}_filtering')"
         data-tooltip="Advanced Search"
         type="button"
@@ -30,7 +30,7 @@ class Base {
   static refreshTableButton(type) {
     return `
       <button
-        class="btn btn-info btn-file"
+        class="btn btn-sm btn-info btn-file"
         onclick="eNMS.refreshTable('${type}', true)"
         data-tooltip="Refresh"
         type="button"
@@ -183,6 +183,22 @@ class Pool extends Base {
     return `${this.device_number} devices - ${this.link_number} links`;
   }
 
+  static get controls() {
+    return [
+      super.createNewButton("pool"),
+      super.searchTableButton("pool"),
+      super.refreshTableButton("pool"),
+      `<button
+        class="btn btn-primary btn-file"
+        onclick="eNMS.updatePools()"
+        data-tooltip="Update all pools"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-flash"></span>
+      </button>`
+    ];
+  }
+
   get buttons() {
     const instance = JSON.stringify(this);
     return `
@@ -252,6 +268,136 @@ class Service extends Base {
       { data: "creator", title: "Creator", search: "text" },
       { data: "creator", title: "Creator", search: "text" },
       { data: "status", title: "Status", search: "text" },
+      { data: "buttons" },
+    ];
+  }
+
+  static get controls() {
+    return [
+      `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.openServicePanel()"
+        data-tooltip="New"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+      <button
+        class="btn btn-info btn-file"
+        onclick="eNMS.showPanel('service_filtering')"
+        data-tooltip="Advanced Search"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
+      <button
+        class="btn btn-info btn-file"
+        onclick="eNMS.refreshTable('service', true)"
+        data-tooltip="Refresh"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-refresh"></span>
+      </button>
+      <a
+      id="left-arrow"
+      class="btn btn-info btn-file"
+      onclick="action['Backward']()"
+      type="button"
+    >
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a
+      id="right-arrow"
+      class="btn btn-info btn-file"
+      onclick="action['Forward']()"
+      type="button"
+    >
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+    <div class="pull-right">
+      <select
+        id="parent-filtering"
+        name="parent-filtering"
+        class="form-control"
+      >
+        <option value="true">Display services hierarchically</option>
+        <option value="false">Display all services</option>
+      </select>
+    </div>
+    <input type="hidden" id="workflow-filtering" name="workflow-filtering">
+      `,
+    ];
+  }
+
+  get status() {
+    return "Idle";
+  }
+
+  get buttons() {
+    const instance = JSON.stringify(this);
+    return `
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.showRuntimePanel('results', ${instance})"
+          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.showRuntimePanel('logs', ${instance})"
+          data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-success"
+          onclick="eNMS.normalRun('${this.id}')" data-tooltip="Run"
+            ><span class="glyphicon glyphicon-play"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-success"
+          onclick="eNMS.showTypePanel('{self.type}', '${this.id}', 'run')"
+          data-tooltip="Parameterized Run"
+            ><span class="glyphicon glyphicon-play-circle"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.showTypePanel('{self.type}', '${
+            this.id
+          }')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="exportService('${this.id}')" data-tooltip="Export"
+            ><span class="glyphicon glyphicon-download"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-danger"
+          onclick="showDeletionPanel(${instance})" data-tooltip="Delete"
+            ><span class="glyphicon glyphicon-trash"></span
+          ></button>
+        </li>
+      </ul>
+    `;
+  }
+}
+
+class Result extends Base {
+
+  static get columns() {
+    return [
+      { data: "runtime", title: "Runtime", search: "text" },
+      { data: "duration", title: "Duration", search: "text" },
+      { data: "workflow_name", title: "Workflow", search: "text" },
+      { data: "service_name", title: "Service", search: "text" },
+      { data: "parent_device_name", title: "Parent Device", search: "text" },
+      { data: "success", title: "Success", search: "text" },
       { data: "buttons" },
     ];
   }

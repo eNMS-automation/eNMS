@@ -12,16 +12,8 @@
       >
         <select id="service-type" class="form-control"></select>
       </button>
-      {% endif %} {% if type == "pool" %}
-      <button
-        class="btn btn-primary btn-file"
-        onclick="updatePools()"
-        data-tooltip="Update all pools"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-flash"></span>
-      </button>
-      {% endif %} {% if type in ("run", "task") %}
+      {% endif %}
+      {% if type in ("run", "task") %}
       <button
         class="btn btn-info btn-file"
         onclick="displayCalendar('{{ type }}')"
@@ -30,23 +22,7 @@
       >
         <span class="glyphicon glyphicon-calendar"></span>
       </button>
-      {% endif %} {% if type == "result" %}
-      <button
-        class="btn btn-info btn-file"
-        onclick="compare('{{ type }}')"
-        data-tooltip="Compare"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-adjust"></span>
-      </button>
-      {% endif %} {% if type == "result" %}
-      <button
-        style="background:transparent; border:none; color:transparent;"
-        type="button"
-      >
-        {{ form.runtimes(class="form-control add-id") }}
-      </button>
-      {% endif %}
+      {% endif %} 
     </div>
   </center>
   <table

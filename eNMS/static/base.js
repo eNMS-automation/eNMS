@@ -764,6 +764,7 @@ export function adjustHeight() {
       ? document.body.clientHeight
       : window.innerHeight;
   $("#sidebar").css("min-height", height);
+  $(".x_panel").css("min-height", height - $(".nav_menu").height() - 30);
   $(".right_col").css("min-height", height - $(".nav_menu").height());
   Object.keys(tables).forEach((table) => tables[table].columns.adjust());
 }

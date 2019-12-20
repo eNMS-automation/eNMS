@@ -41,11 +41,13 @@ window.eNMS = {
   filterTable: baseController.filterTable,
   fullScreen: fullScreen,
   getWorkflowState: workflowController.getWorkflowState,
+  normalRun: automationController.normalRun,
   processData: baseController.processData,
   refreshTable: baseController.refreshTable,
   showPanel: baseController.showPanel,
   showTypePanel: baseController.showTypePanel,
   showDeviceNetworkData: inventoryController.showDeviceNetworkData,
+  showRuntimePanel: inventoryController.showRuntimePanel,
   sshConnection: inventoryController.sshConnection,
   switchToWorkflow: automationController.switchToWorkflow,
 };

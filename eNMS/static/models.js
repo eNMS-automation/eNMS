@@ -324,19 +324,19 @@ class Service extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="showRuntimePanel('results', ${instance})"
+          onclick="eNMS.showRuntimePanel('results', ${instance})"
           data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="showRuntimePanel('logs', ${instance})"
+          onclick="eNMS.showRuntimePanel('logs', ${instance})"
           data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="normalRun('${this.id}')" data-tooltip="Run"
+          onclick="eNMS.normalRun('${this.id}')" data-tooltip="Run"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>

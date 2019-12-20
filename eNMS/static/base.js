@@ -289,8 +289,7 @@ function createTooltips() {
   });
 }
 
-// eslint-disable-next-line
-function createPanel(name, title, id, processing, type, duplicate) {
+export function createPanel(name, title, id, processing, type, duplicate) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);

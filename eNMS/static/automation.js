@@ -5,7 +5,6 @@ alertify: false
 call: false
 cantorPairing: false
 CodeMirror: false
-createPanel: false
 currentPath: true
 diffview: false
 displayWorkflow: false
@@ -22,11 +21,11 @@ tables: false
 workflow: true
 */
 
-import { call, tables } from "./base.js";
+import { call, createPanel, tables } from "./base.js";
 import { currentRuntime, displayWorkflow } from "./workflow.js";
 
-let arrowHistory = [""];
-let arrowPointer = -1;
+export let arrowHistory = [""];
+export let arrowPointer = -1;
 
 // eslint-disable-next-line
 function openServicePanel() {
@@ -100,7 +99,7 @@ function clearResults(id) {
 }
 
 // eslint-disable-next-line
-function showRuntimePanel(type, service, runtime, displayTable) {
+export function showRuntimePanel(type, service, runtime, displayTable) {
   const displayFunction =
     type == "logs"
       ? displayLogs
@@ -210,13 +209,13 @@ function displayResultsTree(service, runtime) {
             <div style="position: absolute; top: 0px; right: 50px">
               <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick='showRuntimePanel("logs", ${data}, "${runtime}")'
+                onclick='eNMS.showRuntimePanel("logs", ${data}, "${runtime}")'
               >
                 <span class="glyphicon glyphicon-list"></span>
               </button>
               <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick='showRuntimePanel("results", ${data}, "${runtime}", true)'
+                onclick='eNMS.showRuntimePanel("results", ${data}, "${runtime}", true)'
               >
                 <span class="glyphicon glyphicon-list-alt"></span>
               </button>
@@ -266,22 +265,20 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   });
 }
 
-// eslint-disable-next-line
 export function normalRun(id) {
   call(`/run_service/${id}`, function(result) {
     runLogic(result);
   });
 }
 
-// eslint-disable-next-line
-function parameterizedRun(type, id) {
+export function parameterizedRun(type, id) {
   fCall("/run_service", `edit-${type}-form-${id}`, function(result) {
     $(`#${type}-${id}`).remove();
     runLogic(result);
   });
 }
 
-function runLogic(result) {
+export function runLogic(result) {
   showRuntimePanel("logs", result.service, result.runtime);
   alertify.notify(`Service '${result.service.name}' started.`, "success", 5);
   if (page == "workflow_builder" && workflow) {

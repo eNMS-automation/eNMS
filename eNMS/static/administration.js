@@ -3,7 +3,6 @@ global
 alertify: false
 call: false
 config: true
-createPanel: false
 fCall: false
 folders: false
 JSONEditor: false
@@ -12,7 +11,7 @@ showPanel: false
 tables: false
 */
 
-import { fCall, showPanel } from "./base.js";
+import { createPanel, fCall, showPanel } from "./base.js";
 
 let editor;
 

@@ -2,27 +2,25 @@
 global
 action: false
 alertify: false
-arrowHistory: false
-arrowPointer: false
-call: false
-createPanel: false
 currentPath: true
-fCall: false
-normalRun: false
-runLogic: false
 serviceTypes: false
 Set: false
-showRuntimePanel: false
-switchToWorkflow: false
-userIsActive: true
 vis: false
 workflow: true
 */
 
-import { switchToWorkflow } from "./automation.js";
+import {
+  arrowHistory,
+  arrowPointer,
+  normalRun,
+  runLogic,
+  showRuntimePanel,
+  switchToWorkflow,
+} from "./automation.js";
 import {
   call,
   copyToClipboard,
+  createPanel,
   showPanel,
   showTypePanel,
   userIsActive,

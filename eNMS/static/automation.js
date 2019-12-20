@@ -267,7 +267,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
 }
 
 // eslint-disable-next-line
-function normalRun(id) {
+export function normalRun(id) {
   call(`/run_service/${id}`, function(result) {
     runLogic(result);
   });

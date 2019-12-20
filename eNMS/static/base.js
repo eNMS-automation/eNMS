@@ -186,7 +186,7 @@ function detectUserInactivity() {
 }
 
 // eslint-disable-next-line
-function openUrl(url) {
+export function openUrl(url) {
   let win = window.open(url, "_blank");
   win.focus();
 }

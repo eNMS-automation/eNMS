@@ -307,10 +307,7 @@ function displayPool(poolId, nodes, edges) {
 }
 
 Object.assign(action, {
-  Properties: (o) => {
-    console.log(o);
-    showTypePanel(o.type, o.id);
-  },
+  Properties: (o) => showTypePanel(o.type, o.id),
   Connect: (d) => showPanel("device_connection", d.id),
   Configuration: (d) => showDeviceNetworkData(d),
 });

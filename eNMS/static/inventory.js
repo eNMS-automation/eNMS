@@ -1,18 +1,15 @@
 /*
 global
 alertify: false
-call: false
 CodeMirror: false
 config: true
 createPanel: false
-fCall: false
 initSelect: false
 initTable: false
-openUrl: false
 tables: false
 */
 
-import { call } from "./base.js";
+import { call, fCall, openUrl } from "./base.js";
 
 export function sshConnection(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(

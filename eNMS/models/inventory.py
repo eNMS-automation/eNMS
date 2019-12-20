@@ -117,7 +117,7 @@ class Device(CustomDevice):
     def view_properties(self):
         return {
             property: getattr(self, property)
-            for property in ("id", "name", "icon", "latitude", "longitude")
+            for property in ("id", "type", "name", "icon", "latitude", "longitude")
         }
 
     @property
@@ -161,7 +161,7 @@ class Link(Object):
         return {
             **{
                 property: getattr(self, property)
-                for property in ("id", "name", "color")
+                for property in ("id", "type", "name", "color")
             },
             **{
                 f"source_{property}": getattr(self.source, property)

@@ -147,6 +147,7 @@ function initSidebar() {
 }
 
 $(document).ready(function() {
+  $(window).resize(baseController.adjustHeight);
   initSidebar();
   if (page.includes("table")) baseController.initTable(page.split("/")[1]);
   doc(page);

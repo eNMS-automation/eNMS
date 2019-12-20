@@ -9,7 +9,5 @@ stylesheets %} {% block content %} {% if type == "pool" %} {% endif %}
     </div>
   </div>
 </div>
-{% endblock content %} {% block javascripts %} {{ super() }} {% if type ==
-"pool" %}
-<script src="{{ url_for('static', filename='logicalView.js') }}"></script>
-{% endif %} {% endblock javascripts %}
+{% endblock content %} {% block javascripts %} {{ super() }}
+{% endblock javascripts %}

@@ -92,10 +92,6 @@ title %} {% block stylesheets %} {{ super() }}
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
 <script
   type="module"
-  src="{{ url_for('static', filename='view.js') }}"
-></script>
-<script
-  type="module"
-  src="{{ url_for('static', filename='logicalView.js') }}"
+  src="{{ url_for('static', filename='visualization.js') }}"
 ></script>
 {% endblock javascripts %}

@@ -158,6 +158,7 @@ $(document).ready(function() {
 window.eNMS = {
   copyClipboard: automationController.copyClipboard,
   copyToClipboard: baseController.copyToClipboard,
+  displayCalendar: automationController.displayCalendar,
   displayFiles: administrationController.displayFiles,
   exportTopology: administrationController.exportTopology,
   filterTable: baseController.filterTable,

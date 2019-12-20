@@ -12,15 +12,6 @@
       >
         <select id="service-type" class="form-control"></select>
       </button>
-      {% endif %} {% if type in ("run", "task") %}
-      <button
-        class="btn btn-info btn-file"
-        onclick="displayCalendar('{{ type }}')"
-        data-tooltip="Calendar"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-calendar"></span>
-      </button>
       {% endif %}
     </div>
   </center>

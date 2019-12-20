@@ -57,9 +57,6 @@ class Result(AbstractBase):
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
     workflow_name = association_proxy("workflow", "scoped_name", info={"name": "workflow_name"})
 
-    def __repr__(self):
-        return f"{self.service_name} on {self.device_name}"
-
     def __getitem__(self, key):
         return self.result[key]
 
@@ -69,28 +66,6 @@ class Result(AbstractBase):
         self.duration = kwargs["result"]["duration"]
         super().__init__(**kwargs)
         self.parent_runtime = self.run.parent_runtime
-
-    @property
-    def table_success(self):
-        btn = "success" if self.success else "danger"
-        label = "Success" if self.success else "Failure"
-        return (
-            f'<button type="button" class="btn btn-{btn} btn-sm"'
-            f'style="width:100%">{label}</button>'
-        )
-
-    @property
-    def row_properties(self):
-        return {
-            "service": self.service.scoped_name,
-            "device": self.device_name or "",
-        }
-
-    def generate_row(self, **kwargs):
-        return super().generate_row() + [
-            f"""<input type="radio" name="v1" value="{self.id}"/>""",
-            f"""<input type="radio" name="v2" value="{self.id}"/>""",
-        ]
 
 
 class Run(AbstractBase):

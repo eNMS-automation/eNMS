@@ -1,6 +1,5 @@
 class Base {
   constructor(properties) {
-    console.log(properties);
     Object.assign(this, properties);
   }
 
@@ -461,6 +460,17 @@ class Result extends Base {
     ];
   }
 
+  /*
+      @property
+    def table_success(self):
+        btn = "success" if self.success else "danger"
+        label = "Success" if self.success else "Failure"
+        return (
+            f'<button type="button" class="btn btn-{btn} btn-sm"'
+            f'style="width:100%">{label}</button>'
+        )
+  */
+
   static get controls() {
     return [
       `<button
@@ -533,6 +543,10 @@ class Task extends Base {
     return `a`;
   }
 
+  get status() {
+    return `a`;
+  }
+
   static get controls() {
     return [
       `<button
@@ -548,19 +562,38 @@ class Task extends Base {
 
   get buttons() {
     const instance = JSON.stringify(this);
+    const state = instance.is_active ? ["disabled", "active"] : ["active", "disabled"];
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 250px">
         <li>
-          <button type="button" class="btn btn-info"
-          onclick="eNMS.showRuntimePanel('logs', {self.service.row_properties},
-          '${this.runtime}')"data-tooltip="Logs">
-          <span class="glyphicon glyphicon-list"></span></button>
+          <button type="button" class="btn btn-success ${state[0]}" ${state[0]}
+          onclick="resumeTask('${this.id}')" data-tooltip="Play"
+            ><span class="glyphicon glyphicon-play"></span
+          ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-info"
-          onclick="eNMS.showRuntimePanel('results', {self.service.row_properties},
-          '${this.runtime}')"data-tooltip="Results">
-          <span class="glyphicon glyphicon-list-alt"></span></button>
+          <button type="button" class="btn btn-default ${state[1]}" ${state[1]}
+          onclick="pauseTask('${this.id}')" data-tooltip="Pause"
+            ><span class="glyphicon glyphicon-pause"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-primary"
+          onclick="eNMS.showTypePanel('task', '${this.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-primary"
+          onclick="eNMS.showTypePanel('task', '${this.id}', 'duplicate')"
+          data-tooltip="Duplicate">
+          <span class="glyphicon glyphicon-duplicate"></span></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-danger"
+          onclick='showDeletionPanel(${instance})' data-tooltip="Delete"
+            ><span class="glyphicon glyphicon-trash"></span
+          ></button>
         </li>
       </ul>`
     ];
@@ -574,6 +607,7 @@ const models = {
   result: Result,
   run: Run,
   service: Service,
+  task: Task,
 };
 
 export default models;

@@ -20,7 +20,7 @@ tables: false
 workflow: true
 */
 
-import { call, createPanel, initTable, tables } from "./base.js";
+import { call, createPanel, initTable, showPanel, tables } from "./base.js";
 import { currentRuntime, displayWorkflow } from "./workflow.js";
 
 export let arrowHistory = [""];
@@ -423,8 +423,7 @@ function field(name, type, id) {
   return $(`#${fieldId}`);
 }
 
-// eslint-disable-next-line
-function displayCalendar(calendarType) {
+export function displayCalendar(calendarType) {
   showPanel("calendar", calendarType, () => {
     call(`/calendar_init/${calendarType}`, function(tasks) {
       let events = [];

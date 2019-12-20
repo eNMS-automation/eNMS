@@ -52,10 +52,10 @@ class Result(AbstractBase):
     device_name = association_proxy("device", "name")
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Result.service_id")
-    service_name = association_proxy("service", "scoped_name")
+    service_name = association_proxy("service", "scoped_name", info={"name": "service_name"})
     workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
-    workflow_name = association_proxy("workflow", "scoped_name")
+    workflow_name = association_proxy("workflow", "scoped_name", info={"name": "workflow_name"})
 
     def __repr__(self):
         return f"{self.service_name} on {self.device_name}"

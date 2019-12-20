@@ -58,16 +58,8 @@ function compare(type) {
 }
 
 function buildLinks(result, id) {
-  const base = `get_result("${result.service}"`;
-  let links;
-  if (result.device) {
-    links = [
-      [`${result.device}`, `${base}, device="${result.device}")`],
-      [`Current Device`, `${base}, device=device.name)`],
-    ];
-  } else {
-    links = [["Top-level result", `${base})`]];
-  }
+  const base = `get_result("${result.service_name}"`;
+  const links = result.device_name ? [`Per-device result`, `${base}, device=device.name)`] : ["Top-level result", `${base})`];
   const table = links
     .map((link, index) => {
       const inputId = `input-${index}-${id}`;

@@ -391,6 +391,11 @@ class Service extends Base {
 
 class Result extends Base {
 
+  constructor(properties) {
+    delete properties.result;
+    super(properties);
+  }
+
   static get columns() {
     return [
       { data: "runtime", title: "Runtime", search: "text" },
@@ -424,8 +429,8 @@ class Result extends Base {
           <button type="button" class="btn btn-info btn-sm"
           onclick="eNMS.showResult('${this.id}')" data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
-      </li>`,
-      `<li>
+      </li>
+      <li>
           <button type="button" id="btn-result-${this.id}" class="btn btn-info btn-sm"
           onclick='eNMS.copyClipboard("btn-result-${this.id}", ${instance})'
           data-tooltip="Copy to clipboard">

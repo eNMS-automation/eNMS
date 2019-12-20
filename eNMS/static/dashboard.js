@@ -3,7 +3,7 @@ global
 echarts: false
 */
 
-import { call } from "./base.js";
+import { adjustHeight, call } from "./base.js";
 
 const diagrams = {};
 const defaultProperties = {
@@ -50,6 +50,7 @@ $(function() {
       drawDiagrams(diagram, parseData(objects));
       diagrams[type] = diagram;
     }
+    adjustHeight();
   });
 
   $.each(defaultProperties, function(type) {

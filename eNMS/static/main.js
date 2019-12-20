@@ -140,7 +140,7 @@ function initSidebar() {
 
   switchMenu();
   $("#menu_toggle").on("click", function() {
-    call(`/switch_menu/${user.id}`);
+    baseController.call(`/switch_menu/${user.id}`);
     $("body").toggleClass("nav-md nav-sm");
     switchMenu();
   });
@@ -148,8 +148,7 @@ function initSidebar() {
 
 $(document).ready(function() {
   initSidebar();
-  if (page.includes("table")) initTable(page.split("/")[1]);
-  baseController.configureForm(page);
+  if (page.includes("table")) baseController.initTable(page.split("/")[1]);
   doc(page);
   baseController.detectUserInactivity();
   baseController.createTooltips();

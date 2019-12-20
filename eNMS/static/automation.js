@@ -11,7 +11,6 @@ displayWorkflow: false
 editors: true
 fCall: false
 getServiceState: false
-initTable: false
 JSONEditor: false
 page: false
 serviceTypes: false
@@ -21,7 +20,7 @@ tables: false
 workflow: true
 */
 
-import { call, createPanel, tables } from "./base.js";
+import { call, createPanel, initTable, tables } from "./base.js";
 import { currentRuntime, displayWorkflow } from "./workflow.js";
 
 export let arrowHistory = [""];

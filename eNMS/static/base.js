@@ -372,6 +372,7 @@ function initSelect(el, model, parentId, single) {
 }
 
 export function configureForm(form, id, panelId) {
+  console.log(formProperties[form])
   if (!formProperties[form]) return;
   for (const [property, field] of Object.entries(formProperties[form])) {
     const fieldId = id ? `${form}-${property}-${id}` : `${form}-${property}`;
@@ -574,8 +575,7 @@ export function processData(type, id) {
   );
 }
 
-// eslint-disable-next-line
-function initTable(type, instance, runtime, id) {
+export function initTable(type, instance, runtime, id) {
   const tableId = id ? `#${type}-table-${id}` : `#${type}-table`;
   // eslint-disable-next-line new-cap
   tables[type] = $(tableId).DataTable({
@@ -757,13 +757,13 @@ function buildLinks(result, id) {
     </div>`;
 }
 
-function adjustHeight() {
+export function adjustHeight() {
   const height =
     $("body")[0].scrollHeight > window.innerHeight
       ? document.body.clientHeight
       : window.innerHeight;
   $("#sidebar").css("min-height", height);
-  $(".x_panel").css("min-height", height - $(".nav_menu").height() - 20);
+  $(".right_col").css("min-height", height - $(".nav_menu").height() - 20);
   Object.keys(tables).forEach((table) => tables[table].columns.adjust());
 }
 

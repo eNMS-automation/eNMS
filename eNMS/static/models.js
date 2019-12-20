@@ -389,6 +389,58 @@ class Service extends Base {
   }
 }
 
+class Run extends Base {
+
+  static get columns() {
+    return [
+      { data: "runtime", title: "Runtime", search: "text" },
+      { data: "duration", title: "Duration", search: "text" },
+      { data: "workflow_name", title: "Workflow", search: "text" },
+      { data: "service_name", title: "Service", search: "text" },
+      { data: "device_name", title: "Device", search: "text" },
+      { data: "success", title: "Success", search: "text" },
+      { data: "buttons" },
+      { data: "version_1", title: "V1"},
+      { data: "version_2", title: "V2"},
+    ];
+  }
+
+  static get controls() {
+    return [
+      `<button
+        class="btn btn-info btn-file"
+        onclick="eNMS.compare('result')"
+        data-tooltip="Compare"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-adjust"></span>
+      </button>`,
+    ];
+  }
+
+  get buttons() {
+    const instance = JSON.stringify(this);
+    return [
+      `
+    <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
+      <li>
+          <button type="button" class="btn btn-info btn-sm"
+          onclick="eNMS.showResult('${this.id}')" data-tooltip="Results">
+          <span class="glyphicon glyphicon-list-alt"></span></button>
+      </li>
+      <li>
+          <button type="button" id="btn-result-${
+            this.id
+          }" class="btn btn-info btn-sm"
+          onclick='eNMS.copyClipboard("btn-result-${this.id}", ${instance})'
+          data-tooltip="Copy to clipboard">
+          <span class="glyphicon glyphicon-copy"></span></button>
+      </li>
+    </ul>`,
+    ];
+  }
+}
+
 class Result extends Base {
   constructor(properties) {
     delete properties.result;
@@ -404,6 +456,8 @@ class Result extends Base {
       { data: "device_name", title: "Device", search: "text" },
       { data: "success", title: "Success", search: "text" },
       { data: "buttons" },
+      { data: "version_1", title: "V1"},
+      { data: "version_2", title: "V2"},
     ];
   }
 
@@ -418,6 +472,14 @@ class Result extends Base {
         <span class="glyphicon glyphicon-adjust"></span>
       </button>`,
     ];
+  }
+
+  get version_1() {
+    return `<input type="radio" name="v1" value="${this.id}">`;
+  }
+
+  get version_2() {
+    return `<input type="radio" name="v1" value="${this.id}">`;
   }
 
   get buttons() {

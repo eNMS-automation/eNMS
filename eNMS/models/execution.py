@@ -121,10 +121,10 @@ class Run(AbstractBase):
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"
     )
-    service_name = association_proxy("service", "scoped_name")
+    service_name = association_proxy("service", "scoped_name", info={"name": "service_name"})
     workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
-    workflow_name = association_proxy("workflow", "scoped_name")
+    workflow_name = association_proxy("workflow", "scoped_name", info={"name": "workflow_name"})
     task_id = Column(Integer, ForeignKey("task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
     state = Column(MutableDict)
@@ -159,25 +159,6 @@ class Run(AbstractBase):
     def result(self, device=None):
         result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
-
-    def generate_row(self, **kwargs):
-        return super().generate_row() + [
-            f"""
-        <ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="showRuntimePanel('logs', {self.service.row_properties},
-            '{self.runtime}')"data-tooltip="Logs">
-            <span class="glyphicon glyphicon-list"></span></button>
-          </li>
-          <li>
-            <button type="button" class="btn btn-info"
-            onclick="showRuntimePanel('results', {self.service.row_properties},
-            '{self.runtime}')"data-tooltip="Results">
-            <span class="glyphicon glyphicon-list-alt"></span></button>
-          </li>
-        </ul>"""
-        ]
 
     @property
     def run_state(self):

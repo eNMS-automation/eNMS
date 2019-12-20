@@ -190,7 +190,7 @@ AbstractPool = type(
     (AbstractBase,),
     {
         "__tablename__": "abstract_pool",
-        "type": "abstract_pool",
+        "type": Column(SmallString, default="pool"),
         "__mapper_args__": {"polymorphic_identity": "abstract_pool"},
         "id": Column(Integer, primary_key=True),
         **{
@@ -217,7 +217,7 @@ AbstractPool = type(
 
 class Pool(AbstractPool):
 
-    __tablename__ = type = "pool"
+    __tablename__ = "pool"
     parent_type = "abstract_pool"
     id = Column(Integer, ForeignKey("abstract_pool.id"), primary_key=True)
     name = Column(SmallString, unique=True)

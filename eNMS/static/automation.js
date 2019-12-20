@@ -57,8 +57,31 @@ function compare(type) {
   }
 }
 
+export function copyClipboard(elementId, result) {
+  target = document.getElementById(elementId);
+  if (!$(`#tooltip-${elementId}`).length) {
+    jsPanel.tooltip.create({
+      id: `tooltip-${elementId}`,
+      content: buildLinks(result, elementId),
+      contentSize: "auto",
+      connector: true,
+      delay: 0,
+      header: false,
+      mode: "sticky",
+      position: {
+        my: "right-top",
+        at: "left-bottom",
+      },
+      target: target,
+      ttipEvent: "click",
+      theme: "light",
+    });
+  }
+  target.click();
+}
+
 // eslint-disable-next-line
-function showResult(id) {
+export function showResult(id) {
   createPanel("result", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
       const jsonResult = result;
@@ -189,6 +212,7 @@ function displayResultsTree(service, runtime) {
         default: function(el, node) {
           if (!node) return;
           const data = JSON.stringify(node.data.properties);
+          let progressSummary;
           if (node.data.progress) {
             progressSummary = `
               <div style="position: absolute; top: 0px; right: 200px">

@@ -576,9 +576,8 @@ export function processData(type, id) {
 }
 
 export function initTable(type, instance, runtime, id) {
-  const tableId = id ? `#${type}-table-${id}` : `#${type}-table`;
   // eslint-disable-next-line new-cap
-  tables[type] = $(tableId).DataTable({
+  tables[type] = $(id ? `#table-${id}` : "#table").DataTable({
     serverSide: true,
     orderCellsTop: true,
     autoWidth: false,
@@ -767,29 +766,6 @@ export function adjustHeight() {
   $(".x_panel").css("min-height", height - $(".nav_menu").height() - 30);
   $(".right_col").css("min-height", height - $(".nav_menu").height());
   Object.keys(tables).forEach((table) => tables[table].columns.adjust());
-}
-
-function copyClipboard(elementId, result) {
-  target = document.getElementById(elementId);
-  if (!$(`#tooltip-${elementId}`).length) {
-    jsPanel.tooltip.create({
-      id: `tooltip-${elementId}`,
-      content: buildLinks(result, elementId),
-      contentSize: "auto",
-      connector: true,
-      delay: 0,
-      header: false,
-      mode: "sticky",
-      position: {
-        my: "right-top",
-        at: "left-bottom",
-      },
-      target: target,
-      ttipEvent: "click",
-      theme: "light",
-    });
-  }
-  target.click();
 }
 
 (function($, window) {

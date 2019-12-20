@@ -88,20 +88,6 @@ class Result(AbstractBase):
 
     def generate_row(self, **kwargs):
         return super().generate_row() + [
-            f"""
-              <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
-              <li>
-                  <button type="button" class="btn btn-info btn-sm"
-                  onclick="showResult('{self.id}')" data-tooltip="Results">
-                  <span class="glyphicon glyphicon-list-alt"></span></button>
-              </li>
-              <li>
-                  <button type="button" id="btn-result-{self.id}" class="btn btn-info btn-sm"
-                  onclick="copyClipboard('btn-result-{self.id}', {self.row_properties})"
-                  data-tooltip="Copy to clipboard">
-                  <span class="glyphicon glyphicon-copy"></span></button>
-              </li>
-            </ul>""",
             f"""<input type="radio" name="v1" value="{self.id}"/>""",
             f"""<input type="radio" name="v2" value="{self.id}"/>""",
         ]

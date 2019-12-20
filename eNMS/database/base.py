@@ -69,6 +69,8 @@ class AbstractBase(Base):
         result = {}
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
         for property in model_properties[self.type]:
+            if not hasattr(self, property):
+                continue
             if property in dont_serialize.get(self.type, []):
                 continue
             if property in private_properties:

@@ -404,117 +404,33 @@ class Result extends Base {
 
   static get controls() {
     return [
-      `
-      <button
-        class="btn btn-primary"
-        onclick="eNMS.openServicePanel()"
-        data-tooltip="New"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
-      <button
+      `<button
         class="btn btn-info btn-file"
-        onclick="eNMS.showPanel('service_filtering')"
-        data-tooltip="Advanced Search"
+        onclick="eNMS.compare('result')"
+        data-tooltip="Compare"
         type="button"
       >
-        <span class="glyphicon glyphicon-search"></span>
-      </button>
-      <button
-        class="btn btn-info btn-file"
-        onclick="eNMS.refreshTable('service', true)"
-        data-tooltip="Refresh"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-refresh"></span>
-      </button>
-      <a
-      id="left-arrow"
-      class="btn btn-info btn-file"
-      onclick="action['Backward']()"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a
-      id="right-arrow"
-      class="btn btn-info btn-file"
-      onclick="action['Forward']()"
-      type="button"
-    >
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-    <div class="pull-right">
-      <select
-        id="parent-filtering"
-        name="parent-filtering"
-        class="form-control"
-      >
-        <option value="true">Display services hierarchically</option>
-        <option value="false">Display all services</option>
-      </select>
-    </div>
-    <input type="hidden" id="workflow-filtering" name="workflow-filtering">
-      `,
+        <span class="glyphicon glyphicon-adjust"></span>
+      </button>`
     ];
-  }
-
-  get status() {
-    return "Idle";
   }
 
   get buttons() {
     const instance = JSON.stringify(this);
-    return `
-      <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
-        <li>
-          <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.showRuntimePanel('results', ${instance})"
-          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.showRuntimePanel('logs', ${instance})"
-          data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.normalRun('${this.id}')" data-tooltip="Run"
-            ><span class="glyphicon glyphicon-play"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.showTypePanel('{self.type}', '${this.id}', 'run')"
-          data-tooltip="Parameterized Run"
-            ><span class="glyphicon glyphicon-play-circle"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('{self.type}', '${
-            this.id
-          }')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="exportService('${this.id}')" data-tooltip="Export"
-            ><span class="glyphicon glyphicon-download"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-danger"
-          onclick="showDeletionPanel(${instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
-        </li>
-      </ul>
-    `;
+    return [`
+    <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
+      <li>
+          <button type="button" class="btn btn-info btn-sm"
+          onclick="eNMS.showResult('${this.id}')" data-tooltip="Results">
+          <span class="glyphicon glyphicon-list-alt"></span></button>
+      </li>`,
+      `<li>
+          <button type="button" id="btn-result-${this.id}" class="btn btn-info btn-sm"
+          onclick='eNMS.copyClipboard("btn-result-${this.id}", ${instance})'
+          data-tooltip="Copy to clipboard">
+          <span class="glyphicon glyphicon-copy"></span></button>
+      </li>
+    </ul>`;
   }
 }
 
@@ -522,6 +438,7 @@ const models = {
   device: Device,
   link: Link,
   pool: Pool,
+  result: Result,
   service: Service,
 };
 

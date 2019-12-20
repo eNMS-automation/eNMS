@@ -168,7 +168,8 @@ window.eNMS = {
   showPanel: baseController.showPanel,
   showTypePanel: baseController.showTypePanel,
   showDeviceNetworkData: inventoryController.showDeviceNetworkData,
-  showRuntimePanel: inventoryController.showRuntimePanel,
+  showResult: automationController.showResult,
+  showRuntimePanel: automationController.showRuntimePanel,
   sshConnection: inventoryController.sshConnection,
   switchToWorkflow: automationController.switchToWorkflow,
 };

@@ -767,9 +767,51 @@ class Changelog extends Base {
   }
 }
 
+class Event extends Base {
+
+  static get columns() {
+    return [
+      { data: "name", title: "Name", search: "text" },
+      { data: "service_name", title: "Service", search: "text" },
+      { data: "log_source", title: "Log", search: "text" },
+      { data: "log_content", title: "Content", search: "text" },
+      { data: "buttons", width: "120px" },
+    ];
+  }
+
+  static get controls() {
+    return [
+      super.createNewButton("event"),
+      super.searchTableButton("event"),
+      super.refreshTableButton("event"),
+    ];
+  }
+
+  get buttons() {
+    return [`
+      <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('event', '{self.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('event', '{self.id}', 'duplicate')"
+          data-tooltip="Duplicate">
+          <span class="glyphicon glyphicon-duplicate"></span></button>
+        </li>
+        ${this.deleteInstanceButton}
+      </ul>
+    `];
+  }
+}
+
 export const models = {
   changelog: Changelog,
   device: Device,
+  event: Event,
   link: Link,
   pool: Pool,
   result: Result,

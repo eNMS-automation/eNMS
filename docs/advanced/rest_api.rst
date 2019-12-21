@@ -27,7 +27,6 @@ Test that eNMS is alive.
   {
       "name": 153558346480170,
       "cluster_id": true,
-      "cpu_load": 6.3
   }
 
 Run a service

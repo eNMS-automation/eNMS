@@ -105,17 +105,20 @@ export function initTable(type, instance, runtime, id) {
 table.filterTable = function(formType) {
   tables[formType].ajax.reload(null, false);
   alertify.notify("Filter applied.", "success", 5);
-}
+};
 
 table.refreshTable = function(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);
   if (displayNotification) alertify.notify("Table refreshed.", "success", 5);
-}
+};
 
 table.refreshTablePeriodically = function(tableType, interval) {
   if (userIsActive) refreshTable(tableType, false);
-  setTimeout(() => table.refreshTablePeriodically(tableType, interval), interval);
-}
+  setTimeout(
+    () => table.refreshTablePeriodically(tableType, interval),
+    interval
+  );
+};
 
 class Base {
   constructor(properties) {
@@ -243,7 +246,7 @@ models.device = class Device extends Base {
         ${this.deleteInstanceButton}
       </ul>`;
   }
-}
+};
 
 models.link = class Link extends Base {
   static get columns() {
@@ -296,7 +299,7 @@ models.link = class Link extends Base {
         </li>
       </ul>`;
   }
-}
+};
 
 models.pool = class Pool extends Base {
   static get columns() {
@@ -381,7 +384,7 @@ models.pool = class Pool extends Base {
       </ul>
     `;
   }
-}
+};
 
 models.service = class Service extends Base {
   static get columns() {
@@ -525,7 +528,7 @@ models.service = class Service extends Base {
       </ul>
     `;
   }
-}
+};
 
 models.run = class Run extends Base {
   static get columns() {
@@ -575,7 +578,7 @@ models.run = class Run extends Base {
       </ul>`,
     ];
   }
-}
+};
 
 models.result = class Result extends Base {
   constructor(properties) {
@@ -590,23 +593,26 @@ models.result = class Result extends Base {
       { data: "workflow_name", title: "Workflow", search: "text" },
       { data: "service_name", title: "Service", search: "text" },
       { data: "device_name", title: "Device", search: "text" },
-      { data: "success", title: "Success", search: "text" },
+      {
+        data: "success",
+        title: "Success",
+        render: function(data, type, row, meta) {
+          const btn = row.success ? "success" : "danger";
+          const label = row.success ? "Success" : "Failure";
+          return `
+            <button
+              type="button"
+              class="btn btn-${btn} btn-sm"
+              style="width:100%">${label}
+            </button>`;
+        },
+        search: "text",
+      },
       { data: "buttons" },
       { data: "version_1", title: "V1" },
       { data: "version_2", title: "V2" },
     ];
   }
-
-  /*
-      @property
-    def table_success(self):
-        btn = "success" if self.success else "danger"
-        label = "Success" if self.success else "Failure"
-        return (
-            f'<button type="button" class="btn btn-{btn} btn-sm"'
-            f'style="width:100%">{label}</button>'
-        )
-  */
 
   static get controls() {
     return [
@@ -653,7 +659,7 @@ models.result = class Result extends Base {
     </ul>`,
     ];
   }
-}
+};
 
 models.task = class Task extends Base {
   static get columns() {
@@ -746,7 +752,7 @@ models.task = class Task extends Base {
       </ul>`,
     ];
   }
-}
+};
 
 models.user = class User extends Base {
   static get columns() {
@@ -795,7 +801,7 @@ models.user = class User extends Base {
       </ul>`,
     ];
   }
-}
+};
 
 models.server = class Server extends Base {
   static get columns() {
@@ -847,7 +853,7 @@ models.server = class Server extends Base {
       </ul>`,
     ];
   }
-}
+};
 
 models.changelog = class Changelog extends Base {
   static get columns() {
@@ -875,10 +881,9 @@ models.changelog = class Changelog extends Base {
       </ul>`,
     ];
   }
-}
+};
 
 models.event = class Event extends Base {
-
   static get columns() {
     return [
       { data: "name", title: "Name", search: "text" },
@@ -898,7 +903,8 @@ models.event = class Event extends Base {
   }
 
   get buttons() {
-    return [`
+    return [
+      `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -914,6 +920,7 @@ models.event = class Event extends Base {
         </li>
         ${this.deleteInstanceButton}
       </ul>
-    `];
+    `,
+    ];
   }
-}
+};

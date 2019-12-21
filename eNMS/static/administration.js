@@ -59,7 +59,11 @@ administration.saveConfiguration = function() {
 
 administration.showConfiguration = function() {
   createPanel("configuration", "Configuration", null, function() {
-    configurationEditor = new JSONEditor(document.getElementById("content"), {}, config);
+    configurationEditor = new JSONEditor(
+      document.getElementById("content"),
+      {},
+      config
+    );
   });
 };
 
@@ -200,7 +204,7 @@ administration.editFile = function(file) {
     createPanel("file", `Edit ${file.data.path}`, filepath, () => {
       const display = document.getElementById(`file_content-${filepath}`);
       // eslint-disable-next-line new-cap
-      let fileEditor = editors[filepath] = CodeMirror.fromTextArea(display, {
+      let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
         lineWrapping: true,
         lineNumbers: true,
         theme: "cobalt",
@@ -208,7 +212,7 @@ administration.editFile = function(file) {
         mode: "python",
         extraKeys: { "Ctrl-F": "findPersistent" },
         scrollbarStyle: "overlay",
-      });
+      }));
       fileEditor.setSize("100%", "100%");
       fileEditor.setValue(content);
       fileEditor.refresh();

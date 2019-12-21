@@ -629,12 +629,11 @@ class Task extends Base {
 }
 
 class User extends Base {
+
   static get columns() {
     return [
-      { data: "time", title: "Time", search: "text" },
-      { data: "user", title: "User", search: "text" },
-      { data: "severity", title: "Severity", search: "text" },
-      { data: "content", title: "Content", search: "text" },
+      { data: "name", title: "Username", search: "text" },
+      { data: "email", title: "Email Address", search: "text" },
       { data: "buttons", width: "120px"},
     ];
   }
@@ -648,9 +647,72 @@ class User extends Base {
   }
 
   get buttons() {
+    return [`
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('user', '${this.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('user', '${this.id}', 'duplicate')"
+          data-tooltip="Duplicate"
+            ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-danger"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
+            ><span class="glyphicon glyphicon-trash"></span
+          ></button>
+        </li>
+      </ul>`
+    ];
+  }
+}
+
+class Server extends Base {
+
+  static get columns() {
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px;">
-      ${this.deleteInstanceButton}
+      { data: "name", title: "Username", search: "text" },
+      { data: "email", title: "Email Address", search: "text" },
+      { data: "buttons", width: "120px"},
+    ];
+  }
+
+  static get controls() {
+    return [
+      super.createNewButton("changelog"),
+      super.searchTableButton("changelog"),
+      super.refreshTableButton("changelog"),
+    ];
+  }
+
+  get buttons() {
+    return [`
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('user', '${this.id}')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('user', '${this.id}', 'duplicate')"
+          data-tooltip="Duplicate"
+            ><span class="glyphicon glyphicon-duplicate"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-danger"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
+            ><span class="glyphicon glyphicon-trash"></span
+          ></button>
+        </li>
       </ul>`
     ];
   }
@@ -693,6 +755,7 @@ export const models = {
   run: Run,
   service: Service,
   task: Task,
+  user: User,
 };
 
 export function initTable(type, instance, runtime, id) {

@@ -29,8 +29,6 @@ service_table_properties = [
     "creator",
 ]
 
-user_table_properties = ["name", "email"]
-
 server_table_properties = [
     "name",
     "description",
@@ -39,7 +37,5 @@ server_table_properties = [
     "status",
     "cpu_load",
 ]
-
-changelog_table_properties = ["time", "user", "severity", "content"]
 
 event_table_properties = ["name", "service_name", "log_source", "log_content"]

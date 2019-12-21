@@ -20,6 +20,7 @@ workflow: true
 
 import { tables } from "./table.js";
 
+let base = window.eNMS.base = {};
 export let editors = {};
 export let userIsActive = true;
 let topZ = 1000;
@@ -224,7 +225,7 @@ export function serializeForm(form) {
 }
 
 // eslint-disable-next-line
-export function deleteInstance(type, id) {
+export const deleteInstance = base.deleteInstance = function(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
     $(`#instance_deletion-${id}`).remove();
     if (type.includes("service") || type == "workflow") type = "service";
@@ -657,11 +658,10 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   e.preventDefault();
 });
 
-window.eNMS.base = {
+Object.assign(window.eNMS.base, {
   copyToClipboard: copyToClipboard,
-  deleteInstance: deleteInstance,
   processData: processData,
   showDeletionPanel: showDeletionPanel,
   showPanel: showPanel,
   showTypePanel: showTypePanel,
-};
+});

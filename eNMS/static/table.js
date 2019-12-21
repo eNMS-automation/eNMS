@@ -698,20 +698,20 @@ class Server extends Base {
     return [`
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showTypePanel('server', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showTypePanel('server', '${this.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-danger"
+          <button type="button" class="btn btn-sm btn-danger"
           onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
@@ -756,6 +756,7 @@ export const models = {
   pool: Pool,
   result: Result,
   run: Run,
+  server: Server,
   service: Service,
   task: Task,
   user: User,

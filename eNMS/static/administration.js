@@ -8,10 +8,10 @@ folders: false
 JSONEditor: false
 page: false
 showPanel: false
-tables: false
 */
 
 import { createPanel, fCall, showPanel } from "./base.js";
+import { tables } from "./table.js";
 
 let editor;
 

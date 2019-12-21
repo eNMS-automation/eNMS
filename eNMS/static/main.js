@@ -1,6 +1,7 @@
 import * as administrationController from "./administration.js";
 import * as baseController from "./base.js";
 import * as automationController from "./automation.js";
+import * as table from "./table.js";
 import * as workflowController from "./workflow.js";
 import * as inventoryController from "./inventory.js";
 
@@ -149,7 +150,7 @@ function initSidebar() {
 $(document).ready(function() {
   $(window).resize(baseController.adjustHeight);
   initSidebar();
-  if (page.includes("table")) baseController.initTable(page.split("/")[1]);
+  if (page.includes("table")) table.initTable(page.split("/")[1]);
   doc(page);
   baseController.detectUserInactivity();
   baseController.createTooltips();

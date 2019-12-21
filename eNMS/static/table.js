@@ -1,3 +1,7 @@
+import { adjustHeight, serializeForm, userIsActive, createTooltips } from "./base.js";
+
+export let tables = {};
+
 class Base {
   constructor(properties) {
     Object.assign(this, properties);
@@ -600,7 +604,7 @@ class Task extends Base {
   }
 }
 
-const models = {
+export const models = {
   device: Device,
   link: Link,
   pool: Pool,
@@ -610,4 +614,110 @@ const models = {
   task: Task,
 };
 
-export default models;
+export function initTable(type, instance, runtime, id) {
+  // eslint-disable-next-line new-cap
+  tables[type] = $(id ? `#table-${id}` : "#table").DataTable({
+    serverSide: true,
+    orderCellsTop: true,
+    autoWidth: false,
+    scrollX: true,
+    drawCallback: function() {
+      $(".paginate_button > a").on("focus", function() {
+        $(this).blur();
+      });
+      createTooltips();
+      adjustHeight();
+    },
+    sDom: "<'top'i>rt<'bottom'lp><'clear'>",
+    columns: models[type].columns,
+    columnDefs: [{ className: "dt-center", targets: "_all" }],
+    initComplete: function() {
+      this.api()
+        .columns()
+        .every(function(index) {
+          const data = models[type].columns[index];
+          let element;
+          if (data.search == "text") {
+            element = `
+              <input
+                id="${type}_filtering-${data.data}"
+                name="${data.data}"
+                type="text"
+                placeholder="&#xF002;"
+                class="form-control"
+                style="font-family:Arial, FontAwesome; width: 100%; height: 30px; margin-top: 5px"
+              >`;
+          } else if (data.search == "bool") {
+            element = `
+              <select
+                id="${type}_filtering-${data.data}"
+                name="${data.data}"
+                class="form-control"
+                style="width: 100%; height: 30px; margin-top: 5px"
+              >
+                <option value="">Any</option>
+                <option value="bool-true">True</option>
+                <option value="bool-false">False</option>
+              </select>`;
+          } else if (data.data == "buttons") {
+            element = models[type].controls.join("");
+          }
+          $(element)
+            .appendTo($(this.header()))
+            .on("keyup change", function() {
+              tables[type].ajax.reload(null, false);
+            })
+            .on("click", function(e) {
+              e.stopPropagation();
+            });
+        });
+      this.api().columns.adjust();
+      adjustHeight();
+    },
+    ajax: {
+      url: `/table_filtering/${type}`,
+      type: "POST",
+      contentType: "application/json",
+      data: (d) => {
+        const form = $(`#${type}_filtering`).length
+          ? `#${type}_filtering-form`
+          : `#search-${type}-form`;
+        d.form = serializeForm(form);
+        d.instance = instance;
+        if (runtime) {
+          d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
+        }
+        return JSON.stringify(d);
+      },
+      dataSrc: function(result) {
+        return result.data.map((instance) => new models[type](instance));
+      },
+    },
+  });
+  if (["changelog", "run", "result"].includes(type)) {
+    tables[type].order([0, "desc"]).draw();
+  }
+  if (type == "service") {
+    $("#parent-filtering").on("change", function() {
+      tables["service"].ajax.reload(null, false);
+    });
+  }
+  if (["run", "service", "task", "workflow"].includes(type)) {
+    refreshTablePeriodically(type, 3000);
+  }
+}
+
+export function filterTable(formType) {
+  tables[formType].ajax.reload(null, false);
+  alertify.notify("Filter applied.", "success", 5);
+}
+
+export function refreshTable(tableType, displayNotification) {
+  tables[tableType].ajax.reload(null, false);
+  if (displayNotification) alertify.notify("Table refreshed.", "success", 5);
+}
+
+function refreshTablePeriodically(tableType, interval) {
+  if (userIsActive) refreshTable(tableType, false);
+  setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
+}

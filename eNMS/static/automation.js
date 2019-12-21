@@ -16,11 +16,11 @@ page: false
 serviceTypes: false
 showPanel: false
 showTypePanel: false
-tables: false
 workflow: true
 */
 
-import { call, createPanel, initTable, showPanel, tables } from "./base.js";
+import { call, createPanel, showPanel } from "./base.js";
+import { initTable, tables } from "./table.js";
 import { currentRuntime, displayWorkflow } from "./workflow.js";
 
 export let arrowHistory = [""];

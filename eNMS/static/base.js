@@ -9,7 +9,6 @@ Dropzone: false
 formProperties: false
 job: false
 jsPanel: false
-NProgress: false
 page: false
 processWorkflowData: false
 Promise: false
@@ -657,15 +656,6 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   e.stopPropagation();
   e.preventDefault();
 });
-
-if (typeof NProgress != "undefined") {
-  $(document).ready(function() {
-    NProgress.start();
-  });
-  $(window).load(function() {
-    NProgress.done();
-  });
-}
 
 window.eNMS.base = {
   copyToClipboard: copyToClipboard,

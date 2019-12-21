@@ -628,6 +628,34 @@ class Task extends Base {
   }
 }
 
+class User extends Base {
+  static get columns() {
+    return [
+      { data: "time", title: "Time", search: "text" },
+      { data: "user", title: "User", search: "text" },
+      { data: "severity", title: "Severity", search: "text" },
+      { data: "content", title: "Content", search: "text" },
+      { data: "buttons", width: "120px"},
+    ];
+  }
+
+  static get controls() {
+    return [
+      super.createNewButton("changelog"),
+      super.searchTableButton("changelog"),
+      super.refreshTableButton("changelog"),
+    ];
+  }
+
+  get buttons() {
+    return [
+      `<ul class="pagination pagination-lg" style="margin: 0px;">
+      ${this.deleteInstanceButton}
+      </ul>`
+    ];
+  }
+}
+
 class Changelog extends Base {
   static get columns() {
     return [

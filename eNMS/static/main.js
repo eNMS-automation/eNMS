@@ -1,3 +1,7 @@
+/*
+NProgress: false
+*/
+
 import { adjustHeight, call, createTooltips, detectUserInactivity } from "./base.js";
 import { initTable } from "./table.js";
 
@@ -144,12 +148,17 @@ function initSidebar() {
 }
 
 $(document).ready(function() {
+  NProgress.start();
   $(window).resize(adjustHeight);
   initSidebar();
   if (page.includes("table")) initTable(page.split("/")[1]);
   doc(page);
   detectUserInactivity();
   createTooltips();
+});
+
+$(window).load(function() {
+  NProgress.done();
 });
 
 window.eNMS.main = {

@@ -98,7 +98,7 @@ export function initTable(type, instance, runtime, id) {
     });
   }
   if (["run", "service", "task", "workflow"].includes(type)) {
-    refreshTablePeriodically(type, 3000);
+    table.refreshTablePeriodically(type, 3000);
   }
 }
 
@@ -113,7 +113,7 @@ table.refreshTable = function(tableType, displayNotification) {
 };
 
 table.refreshTablePeriodically = function(tableType, interval) {
-  if (userIsActive) refreshTable(tableType, false);
+  if (userIsActive) table.refreshTable(tableType, false);
   setTimeout(
     () => table.refreshTablePeriodically(tableType, interval),
     interval
@@ -550,7 +550,7 @@ models.run = class Run extends Base {
   static get controls() {
     return [
       `<button
-        class="btn btn-info btn-file"
+        class="btn btn-sm btn-info btn-file"
         onclick="eNMS.automation.displayCalendar('run')"
         data-tooltip="Calendar"
         type="button"
@@ -564,13 +564,13 @@ models.run = class Run extends Base {
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
         <li>
-          <button type="button" class="btn btn-info"
+          <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('logs', {self.service.row_properties},
           '${this.runtime}')"data-tooltip="Logs">
           <span class="glyphicon glyphicon-list"></span></button>
         </li>
         <li>
-          <button type="button" class="btn btn-info"
+          <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.automation.showRuntimePanel('results', {self.service.row_properties},
           '${this.runtime}')"data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
@@ -607,6 +607,7 @@ models.result = class Result extends Base {
             </button>`;
         },
         search: "text",
+        width: "80px",
       },
       { data: "buttons" },
       { data: "version_1", title: "V1" },
@@ -640,16 +641,15 @@ models.result = class Result extends Base {
       `
     <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
       <li>
-          <button type="button" class="btn btn-info btn-sm"
-          onclick="eNMS.automation.showResult('${
-            this.id
-          }')" data-tooltip="Results">
-          <span class="glyphicon glyphicon-list-alt"></span></button>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.automation.showResult('${this.id}')"
+          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt">
+          </span></button>
       </li>
       <li>
           <button type="button" id="btn-result-${
             this.id
-          }" class="btn btn-info btn-sm"
+          }" class="btn btn-sm btn-info"
           onclick='eNMS.automation.copyClipboard("btn-result-${this.id}", ${
         this.instance
       })'
@@ -699,7 +699,7 @@ models.task = class Task extends Base {
   static get controls() {
     return [
       `<button
-        class="btn btn-info btn-file"
+        class="btn btn-sm btn-info btn-file"
         onclick="eNMS.automation.displayCalendar('task')"
         data-tooltip="Calendar"
         type="button"
@@ -714,21 +714,9 @@ models.task = class Task extends Base {
       ? ["disabled", "active"]
       : ["active", "disabled"];
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 250px">
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 200px">
         <li>
-          <button type="button" class="btn btn-success ${state[0]}" ${state[0]}
-          onclick="resumeTask('${this.id}')" data-tooltip="Play"
-            ><span class="glyphicon glyphicon-play"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-default ${state[1]}" ${state[1]}
-          onclick="pauseTask('${this.id}')" data-tooltip="Pause"
-            ><span class="glyphicon glyphicon-pause"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showTypePanel('task', '${
             this.id
           }')" data-tooltip="Edit"
@@ -736,13 +724,25 @@ models.task = class Task extends Base {
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-primary"
+          <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showTypePanel('task', '${this.id}', 'duplicate')"
           data-tooltip="Duplicate">
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
         <li>
-          <button type="button" class="btn btn-danger"
+          <button type="button" class="btn btn-sm btn-success ${state[0]}" ${state[0]}
+          onclick="resumeTask('${this.id}')" data-tooltip="Play"
+            ><span class="glyphicon glyphicon-play"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${state[1]}
+          onclick="pauseTask('${this.id}')" data-tooltip="Pause"
+            ><span class="glyphicon glyphicon-pause"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-danger"
           onclick='eNMS.base.showDeletionPanel(${
             this.instance
           })' data-tooltip="Delete"

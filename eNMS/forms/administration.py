@@ -14,7 +14,7 @@ from eNMS.properties.database import import_classes
 
 
 class ConfigurationForm(BaseForm):
-    action = "saveConfiguration"
+    action = "eNMS.administration.saveConfiguration"
     form_type = HiddenField(default="configuration")
 
 

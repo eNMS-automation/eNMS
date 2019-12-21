@@ -4,36 +4,13 @@ alertify: false
 config: true
 folders: false
 JSONEditor: false
-page: false
 */
 
 import { call, createPanel, editors, fCall, showPanel } from "./base.js";
 import { tables } from "./table.js";
 
 let editor;
-window.eNMS.administration = {};
-
-// eslint-disable-next-line
-function showConfiguration() {
-  createPanel("configuration", "Configuration", null, function() {
-    editor = new JSONEditor(document.getElementById("content"), {}, config);
-  });
-}
-
-// eslint-disable-next-line
-function saveConfiguration() {
-  $.ajax({
-    type: "POST",
-    url: "/save_configuration",
-    contentType: "application/json",
-    data: JSON.stringify(editor.get()),
-    success: function() {
-      config = editor.get();
-      $("#configuration").remove();
-      alertify.notify("Configuration saved.", "success", 5);
-    },
-  });
-}
+let administration = window.eNMS.administration = {};
 
 // eslint-disable-next-line
 function showImportTopologyPanel(type) {
@@ -65,8 +42,27 @@ function queryLibreNMS() {
   });
 }
 
-// eslint-disable-next-line
-export function exportTopology() {
+administration.saveConfiguration = function() {
+  $.ajax({
+    type: "POST",
+    url: "/save_configuration",
+    contentType: "application/json",
+    data: JSON.stringify(editor.get()),
+    success: function() {
+      config = editor.get();
+      $("#configuration").remove();
+      alertify.notify("Configuration saved.", "success", 5);
+    },
+  });
+}
+
+administration.showConfiguration = function() {
+  createPanel("configuration", "Configuration", null, function() {
+    editor = new JSONEditor(document.getElementById("content"), {}, config);
+  });
+}
+
+administration.exportTopology = function() {
   alertify.notify("Topology export starting...", "success", 5);
   fCall("/export_topology", "excel_export-form", function() {
     alertify.notify("Topology successfully exported.", "success", 5);
@@ -185,7 +181,7 @@ function scanCluster() {
   });
 }
 
-function deleteFile(file) {
+administration.deleteFile = function(file) {
   call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
     $("#files-tree")
       .jstree()
@@ -198,7 +194,7 @@ function deleteFile(file) {
   });
 }
 
-window.eNMS.administration.editFile = function(file) {
+administration.editFile = function(file) {
   const filepath = file.data.path.replace(/\//g, ">");
   call(`/edit_file/${filepath}`, function(content) {
     createPanel("file", `Edit ${file.data.path}`, filepath, () => {
@@ -220,7 +216,7 @@ window.eNMS.administration.editFile = function(file) {
   });
 }
 
-function saveFile(file) {
+administration.saveFile = function(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
   fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
     alertify.notify("File successfully saved.", "success", 5);
@@ -228,7 +224,7 @@ function saveFile(file) {
   });
 }
 
-function showFileUploadPanel(folder) {
+administration.showFileUploadPanel = function(folder) {
   const path = folder.replace(/\//g, ">");
   createPanel("upload_files", `Upload files to ${folder}`, path, () => {
     const element = document.getElementById(`dropzone-${path}`);
@@ -249,7 +245,7 @@ function showFileUploadPanel(folder) {
 function createNewFolder() {}
 
 // eslint-disable-next-line
-export function displayFiles() {
+administration.displayFiles = function() {
   showPanel("files", null, function() {
     $("#files-tree").jstree({
       core: {
@@ -317,11 +313,3 @@ export function displayFiles() {
     });
   });
 }
-
-Object.assign(window.eNMS.administration, {
-  deleteFile: deleteFile,
-  displayFiles: displayFiles,
-  exportTopology: exportTopology,
-  saveFile: saveFile,
-  showFileUploadPanel: showFileUploadPanel,
-});

@@ -1,5 +1,7 @@
 /*
-NProgress: false
+config: false
+page: false
+user: false
 */
 
 import {
@@ -10,9 +12,10 @@ import {
 } from "./base.js";
 import { initTable } from "./table.js";
 
+let main = (window.eNMS.main = {});
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
-const fullScreen = function() {
+main.fullScreen = function() {
   if (
     document.fullscreenElement ||
     document.webkitFullscreenElement ||
@@ -42,7 +45,6 @@ const fullScreen = function() {
   }
 };
 
-// eslint-disable-next-line
 function doc(page) {
   let endpoint = {
     administration: "base/installation.html",
@@ -69,9 +71,7 @@ function initSidebar() {
       let $li = $(this).parent();
       if ($li.is(".active")) {
         $li.removeClass("active active-sm");
-        $("ul:first", $li).slideUp(function() {
-          setContentHeight();
-        });
+        $("ul:first", $li).slideUp();
       } else {
         if (!$li.parent().is(".child_menu")) {
           $("#sidebar-menu")
@@ -165,7 +165,3 @@ $(document).ready(function() {
 $(window).load(function() {
   NProgress.done();
 });
-
-window.eNMS.main = {
-  fullScreen: fullScreen,
-};

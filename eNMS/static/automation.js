@@ -2,25 +2,30 @@
 global
 action: true
 alertify: false
-call: false
-cantorPairing: false
 CodeMirror: false
 currentPath: true
 diffview: false
-displayWorkflow: false
-fCall: false
-getServiceState: false
 JSONEditor: false
+jsPanel: false
 page: false
 serviceTypes: false
-showPanel: false
-showTypePanel: false
 workflow: true
 */
 
-import { call, createPanel, showPanel } from "./base.js";
+import {
+  call,
+  cantorPairing,
+  createPanel,
+  fCall,
+  showPanel,
+  showTypePanel,
+} from "./base.js";
 import { initTable, tables } from "./table.js";
-import { currentRuntime, displayWorkflow } from "./workflow.js";
+import {
+  currentRuntime,
+  displayWorkflow,
+  getServiceState,
+} from "./workflow.js";
 
 export let arrowHistory = [""];
 export let arrowPointer = -1;
@@ -75,14 +80,12 @@ function buildLinks(result, id) {
             </td>
             <td>
               <div class="input-group" style="width: 800px">
-                <input id="link-${id}" type="text" class="form-control" value='${
-    link[1]
-  }'>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" onclick="eNMS.base.copyToClipboard('link-${id}',
-                  true)" type="button">
-                    <span class="glyphicon glyphicon-copy"></span>
-                  </button>
+                <input id="link-${id}" type="text" class="form-control"
+                value='${link[1]}'><span class="input-group-btn">
+                <button class="btn btn-default"
+                onclick="eNMS.base.copyToClipboard('link-${id}', true)"
+                type="button"><span class="glyphicon glyphicon-copy"></span>
+                </button>
                 </span>
               </div>
             </td>
@@ -128,7 +131,7 @@ export function showResult(id) {
         },
         onEvent(node, event) {
           if (event.type === "click") {
-            path = node.path.map((key) =>
+            let path = node.path.map((key) =>
               typeof key == "string" ? `"${key}"` : key
             );
             $(`#result-path-${id}`).val(`results[${path.join("][")}]`);
@@ -267,14 +270,15 @@ function displayResultsTree(service, runtime) {
             <div style="position: absolute; top: 0px; right: 50px">
               <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick='eNMS.automation.showRuntimePanel("logs", ${data}, "${runtime}")'
-              >
-                <span class="glyphicon glyphicon-list"></span>
+                onclick='eNMS.automation.showRuntimePanel(
+                  "logs", ${data}, "${runtime}"
+                )'><span class="glyphicon glyphicon-list"></span>
               </button>
               <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick='eNMS.automation.showRuntimePanel("results", ${data}, "${runtime}", true)'
-              >
+                onclick='eNMS.automation.showRuntimePanel(
+                  "results", ${data}, "${runtime}", true
+                )'>
                 <span class="glyphicon glyphicon-list-alt"></span>
               </button>
             </div>

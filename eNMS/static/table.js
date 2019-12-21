@@ -730,13 +730,17 @@ models.task = class Task extends Base {
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-success ${state[0]}" ${state[0]}
+          <button type="button" class="btn btn-sm btn-success ${state[0]}" ${
+        state[0]
+      }
           onclick="resumeTask('${this.id}')" data-tooltip="Play"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${state[1]}
+          <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${
+        state[1]
+      }
           onclick="pauseTask('${this.id}')" data-tooltip="Pause"
             ><span class="glyphicon glyphicon-pause"></span
           ></button>
@@ -759,7 +763,7 @@ models.user = class User extends Base {
     return [
       { data: "name", title: "Username", search: "text" },
       { data: "email", title: "Email Address", search: "text" },
-      { data: "buttons", width: "120px" },
+      { data: "buttons", width: "130px" },
     ];
   }
 

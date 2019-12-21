@@ -752,8 +752,7 @@ function colorService(id, color) {
   }
 }
 
-// eslint-disable-next-line
-function getServiceState(id, first) {
+export function getServiceState(id, first) {
   call(`/get_service_state/${id}`, function(result) {
     if (first || result.state.status == "Running") {
       colorService(id, "#89CFF0");

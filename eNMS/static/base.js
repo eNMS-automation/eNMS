@@ -5,7 +5,6 @@ CodeMirror: false
 config: true
 creationMode: true
 csrf_token: false
-Dropzone: false
 formProperties: false
 job: false
 jsPanel: false
@@ -14,7 +13,6 @@ processWorkflowData: false
 Promise: false
 relations: false
 relationships: false
-tableProperties: false
 workflow: true
 */
 
@@ -166,8 +164,7 @@ export function openUrl(url) {
   win.focus();
 }
 
-// eslint-disable-next-line
-function cantorPairing(x, y) {
+export function cantorPairing(x, y) {
   return ((x + y) * (x + y + 1)) / 2 + y;
 }
 

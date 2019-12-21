@@ -20,28 +20,28 @@ title %} {% block stylesheets %} {{ super() }}
               <button
                 type="button"
                 class="btn btn-primary btn-file"
-                onclick="showConfiguration()"
+                onclick="eNMS.administration.showConfiguration()"
               >
                 Configuration
               </button>
               <button
                 class="btn btn-primary btn-file"
-                onclick="getGitContent()"
+                onclick="eNMS.administration.getGitContent()"
               >
                 Fetch Git Configurations
               </button>
-              <button class="btn btn-primary btn-file" onclick="scanCluster()">
+              <button class="btn btn-primary btn-file" onclick="eNMS.administration.scanCluster()">
                 Scan Cluster Subnet
               </button>
               <button
                 class="btn btn-primary btn-file"
-                onclick="scheduler('pause')"
+                onclick="eNMS.administration.scheduler('pause')"
               >
                 Pause Scheduler
               </button>
               <button
                 class="btn btn-primary btn-file"
-                onclick="scheduler('resume')"
+                onclick="eNMS.administration.scheduler('resume')"
               >
                 Resume Scheduler
               </button>
@@ -61,7 +61,7 @@ title %} {% block stylesheets %} {{ super() }}
             <div class="btn-group-vertical" style="width:100%">
               <button
                 class="btn btn-primary btn-file"
-                onclick="showMigrationPanel()"
+                onclick="eNMS.administration.showMigrationPanel()"
               >
                 Migration
               </button>
@@ -73,7 +73,7 @@ title %} {% block stylesheets %} {{ super() }}
               </button>
               <button
                 class="btn btn-primary btn-file"
-                onclick="showImportServicePanel()"
+                onclick="eNMS.administration.showImportServicePanel()"
               >
                 Import Service
               </button>
@@ -93,19 +93,19 @@ title %} {% block stylesheets %} {{ super() }}
             <div class="btn-group-vertical" style="width:100%">
               <button
                 class="btn btn-primary btn-file"
-                onclick="showImportTopologyPanel()"
+                onclick="eNMS.administration.showImportTopologyPanel()"
               >
                 Excel
               </button>
-              <button class="btn btn-primary btn-file" onclick="queryOpenNMS()">
+              <button class="btn btn-primary btn-file" onclick="eNMS.administration.queryOpenNMS()">
                 OpenNMS
               </button>
-              <button class="btn btn-primary btn-file" onclick="queryNetbox()">
+              <button class="btn btn-primary btn-file" onclick="eNMS.administration.queryNetbox()">
                 Netbox
               </button>
               <button
                 class="btn btn-primary btn-file"
-                onclick="queryLibreNMS()"
+                onclick="eNMS.administration.queryLibreNMS()"
               >
                 LibreNMS
               </button>

@@ -69,8 +69,7 @@ administration.exportTopology = function() {
   });
 }
 
-// eslint-disable-next-line
-function importTopology() {
+administration.importTopology = function() {
   alertify.notify("Topology import: starting...", "success", 5);
   const formData = new FormData($("#import-form")[0]);
   $.ajax({
@@ -88,15 +87,15 @@ function importTopology() {
   $("#file")[0].value = "";
 }
 
-function getClusterStatus() {
-  call("/get_cluster_status", function(cluster) {
+administration.getClusterStatus = function() {
+  call("/get_cluster_status", function() {
     tables["server"].ajax.reload(null, false);
     setTimeout(getClusterStatus, 15000);
   });
 }
 
 // eslint-disable-next-line
-function migrationsExport() {
+administration.migrationsExport = function() {
   alertify.notify("Export initiated.", "success", 5);
   fCall("/migration_export", "migration-form", function() {
     alertify.notify("Export successful.", "success", 5);
@@ -104,7 +103,7 @@ function migrationsExport() {
 }
 
 // eslint-disable-next-line
-function showMigrationPanel() {
+administration.showMigrationPanel = function() {
   showPanel("database_migration", null, () => {
     let list = document.getElementById("versions");
     folders.forEach((item) => {
@@ -116,14 +115,14 @@ function showMigrationPanel() {
 }
 
 // eslint-disable-next-line
-function migrationsImport() {
+administration.migrationsImport = function() {
   alertify.notify("Import initiated.", "success", 5);
   fCall("/migration_import", "migration-form", function(result) {
     alertify.notify(result, "success", 5);
   });
 }
 
-function refreshExportedServices() {
+administration.refreshExportedServices = function (){
   call("/get_exported_services", function(services) {
     let list = document.getElementById("service");
     services.forEach((item) => {
@@ -136,14 +135,14 @@ function refreshExportedServices() {
 }
 
 // eslint-disable-next-line
-function showImportServicePanel() {
+administration.function showImportServicePanel() {
   showPanel("import_service", null, () => {
     refreshExportedServices();
   });
 }
 
 // eslint-disable-next-line
-function importService() {
+administration.function importService() {
   call(`/import_service/${$("#service").val()}`, function(result) {
     alertify.notify("Import successful.", "success", 5);
     $("#import_service").remove();
@@ -151,7 +150,7 @@ function importService() {
 }
 
 // eslint-disable-next-line
-function databaseDeletion() {
+administration.databaseDeletion = function() {
   alertify.notify("Starting to delete...", "success", 5);
   fCall("/database_deletion", "database_deletion-form", function(result) {
     alertify.notify("Deletion done.", "success", 5);
@@ -160,7 +159,7 @@ function databaseDeletion() {
 }
 
 // eslint-disable-next-line
-function getGitContent() {
+administration.getGitContent = function() {
   call("/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);
   });
@@ -174,7 +173,7 @@ function scheduler(action) {
 }
 
 // eslint-disable-next-line
-function scanCluster() {
+administration.scanCluster function() {
   alertify.notify("Scan started.", "success", 5);
   call("/scan_cluster", function(cluster) {
     alertify.notify("Scan completed.", "success", 5);

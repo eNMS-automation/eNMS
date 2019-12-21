@@ -8,7 +8,6 @@ CodeMirror: false
 currentPath: true
 diffview: false
 displayWorkflow: false
-editors: true
 fCall: false
 getServiceState: false
 JSONEditor: false

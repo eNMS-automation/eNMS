@@ -20,7 +20,7 @@ workflow: true
 
 import { tables } from "./table.js";
 
-let editors = {};
+export let editors = {};
 export let userIsActive = true;
 let topZ = 1000;
 

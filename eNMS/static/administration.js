@@ -1,19 +1,17 @@
 /*
 global
 alertify: false
-call: false
 config: true
-fCall: false
 folders: false
 JSONEditor: false
 page: false
-showPanel: false
 */
 
-import { createPanel, fCall, showPanel } from "./base.js";
+import { call, createPanel, editors, fCall, showPanel } from "./base.js";
 import { tables } from "./table.js";
 
 let editor;
+window.eNMS.administration = {};
 
 // eslint-disable-next-line
 function showConfiguration() {
@@ -187,7 +185,6 @@ function scanCluster() {
   });
 }
 
-// eslint-disable-next-line
 function deleteFile(file) {
   call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
     $("#files-tree")
@@ -201,8 +198,7 @@ function deleteFile(file) {
   });
 }
 
-// eslint-disable-next-line
-function editFile(file) {
+window.eNMS.administration.editFile = function(file) {
   const filepath = file.data.path.replace(/\//g, ">");
   call(`/edit_file/${filepath}`, function(content) {
     createPanel("file", `Edit ${file.data.path}`, filepath, () => {
@@ -224,7 +220,6 @@ function editFile(file) {
   });
 }
 
-// eslint-disable-next-line
 function saveFile(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
   fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
@@ -233,7 +228,6 @@ function saveFile(file) {
   });
 }
 
-// eslint-disable-next-line
 function showFileUploadPanel(folder) {
   const path = folder.replace(/\//g, ">");
   createPanel("upload_files", `Upload files to ${folder}`, path, () => {
@@ -288,7 +282,7 @@ export function displayFiles() {
               <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
                   class="btn btn-xs btn-primary"
-                  onclick='editFile(${data})'
+                  onclick='eNMS.administration.editFile(${data})'
                 >
                   <span class="glyphicon glyphicon-edit"></span>
                 </button>
@@ -300,7 +294,7 @@ export function displayFiles() {
                 </button>
                 <button type="button"
                   class="btn btn-xs btn-danger"
-                  onclick='deleteFile(${data})'
+                  onclick='eNMS.administration.deleteFile(${data})'
                 >
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>
@@ -324,7 +318,10 @@ export function displayFiles() {
   });
 }
 
-window.eNMS.administration = {
+Object.assign(window.eNMS.administration, {
+  deleteFile: deleteFile,
   displayFiles: displayFiles,
   exportTopology: exportTopology,
-};
+  saveFile: saveFile,
+  showFileUploadPanel: showFileUploadPanel,
+});

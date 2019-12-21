@@ -211,6 +211,7 @@ administration.editFile = function(file) {
       });
       fileEditor.setSize("100%", "100%");
       fileEditor.setValue(content);
+      fileEditor.refresh();
     });
   });
 };

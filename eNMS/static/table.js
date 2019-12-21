@@ -1,11 +1,20 @@
-import { adjustHeight, serializeForm, userIsActive, createTooltips } from "./base.js";
+import {
+  adjustHeight,
+  serializeForm,
+  userIsActive,
+  createTooltips,
+} from "./base.js";
 
 export let tables = {};
 
 class Base {
   constructor(properties) {
     Object.assign(this, properties);
-    this.instance = JSON.stringify(this).replace(/"/g, '\\x22').replace(/'/g, '\\x27');
+    this.instance = JSON.stringify({
+      id: this.id,
+      name: this.name,
+      type: this.type,
+    }).replace(/"/g, "'");
   }
 
   static createNewButton(type) {
@@ -44,11 +53,13 @@ class Base {
       </button>`;
   }
 
-  deleteInstanceButton() {
+  get deleteInstanceButton() {
     return `
       <li>
         <button type="button" class="btn btn-sm btn-danger"
-        onclick='eNMS.base.showDeletionPanel(${this.instance})' data-tooltip="Delete"
+        onclick="eNMS.base.showDeletionPanel(${
+          this.instance
+        })" data-tooltip="Delete"
           ><span class="glyphicon glyphicon-trash"></span
         ></button>
       </li>`;
@@ -81,7 +92,6 @@ class Device extends Base {
   }
 
   get buttons() {
-    const instance = JSON.stringify(this);
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
@@ -120,7 +130,7 @@ class Device extends Base {
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        ${this.deleteInstanceButton(instance)}
+        ${this.deleteInstanceButton}
       </ul>`;
   }
 }
@@ -149,12 +159,13 @@ class Link extends Base {
   }
 
   get buttons() {
-    const instance = JSON.stringify(this);
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('link', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('link', '${
+            this.id
+          }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -167,7 +178,7 @@ class Link extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick='eNMS.base.showDeletionPanel(${instance})' data-tooltip="Delete"
+          onclick='eNMS.base.showDeletionPanel(${this.instance})' data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -210,7 +221,6 @@ class Pool extends Base {
   }
 
   get buttons() {
-    const instance = JSON.stringify(this);
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
@@ -235,7 +245,9 @@ class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('pool', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('pool', '${
+            this.id
+          }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -248,7 +260,7 @@ class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${instance})" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -266,9 +278,9 @@ class Service extends Base {
         width: "20%",
         search: "text",
         render: function(data, type, row, meta) {
-          return `<b><a href="#" onclick="eNMS.automation.switchToWorkflow('${row.id}')">${
-            row.scoped_name
-          }</a></b>`;
+          return `<b><a href="#" onclick="eNMS.automation.switchToWorkflow('${
+            row.id
+          }')">${row.scoped_name}</a></b>`;
         },
       },
       { data: "last_modified", title: "Last modified", search: "text" },
@@ -345,18 +357,17 @@ class Service extends Base {
   }
 
   get buttons() {
-    const instance = JSON.stringify(this);
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${instance})"
+          onclick="eNMS.automation.showRuntimePanel('results', ${this.instance})"
           data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('logs', ${instance})"
+          onclick="eNMS.automation.showRuntimePanel('logs', ${this.instance})"
           data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
           ></button>
         </li>
@@ -389,7 +400,7 @@ class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${instance})" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -399,7 +410,6 @@ class Service extends Base {
 }
 
 class Run extends Base {
-
   static get columns() {
     return [
       { data: "runtime", title: "Runtime", search: "text" },
@@ -425,12 +435,11 @@ class Run extends Base {
         type="button"
       >
         <span class="glyphicon glyphicon-calendar"></span>
-      </button>`
+      </button>`,
     ];
   }
 
   get buttons() {
-    const instance = JSON.stringify(this);
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
         <li>
@@ -445,7 +454,7 @@ class Run extends Base {
           '${this.runtime}')"data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>
-      </ul>`
+      </ul>`,
     ];
   }
 }
@@ -465,8 +474,8 @@ class Result extends Base {
       { data: "device_name", title: "Device", search: "text" },
       { data: "success", title: "Success", search: "text" },
       { data: "buttons" },
-      { data: "version_1", title: "V1"},
-      { data: "version_2", title: "V2"},
+      { data: "version_1", title: "V1" },
+      { data: "version_2", title: "V2" },
     ];
   }
 
@@ -503,20 +512,23 @@ class Result extends Base {
   }
 
   get buttons() {
-    const instance = JSON.stringify(this);
     return [
       `
     <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
       <li>
           <button type="button" class="btn btn-info btn-sm"
-          onclick="eNMS.automation.showResult('${this.id}')" data-tooltip="Results">
+          onclick="eNMS.automation.showResult('${
+            this.id
+          }')" data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
       </li>
       <li>
           <button type="button" id="btn-result-${
             this.id
           }" class="btn btn-info btn-sm"
-          onclick='eNMS.automation.copyClipboard("btn-result-${this.id}", ${instance})'
+          onclick='eNMS.automation.copyClipboard("btn-result-${
+            this.id
+          }", ${this.instance})'
           data-tooltip="Copy to clipboard">
           <span class="glyphicon glyphicon-copy"></span></button>
       </li>
@@ -526,7 +538,6 @@ class Result extends Base {
 }
 
 class Task extends Base {
-
   static get columns() {
     return [
       { data: "name", title: "Name", search: "text" },
@@ -538,7 +549,11 @@ class Task extends Base {
       { data: "end_date", title: "End Date", search: "text" },
       { data: "frequency", title: "Frequency", search: "text" },
       { data: "frequency_unit", title: "Unit", search: "text" },
-      { data: "crontab_expression", title: "Crontab Expression", search: "text" },
+      {
+        data: "crontab_expression",
+        title: "Crontab Expression",
+        search: "text",
+      },
       { data: "next_run_time", title: "Next run time", search: "text" },
       { data: "time_before_next_run", title: "Time left", search: "text" },
       { data: "buttons" },
@@ -566,13 +581,14 @@ class Task extends Base {
         type="button"
       >
         <span class="glyphicon glyphicon-calendar"></span>
-      </button>`
+      </button>`,
     ];
   }
 
   get buttons() {
-    const instance = JSON.stringify(this);
-    const state = instance.is_active ? ["disabled", "active"] : ["active", "disabled"];
+    const state = this.is_active
+      ? ["disabled", "active"]
+      : ["active", "disabled"];
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 250px">
         <li>
@@ -589,7 +605,9 @@ class Task extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-primary"
-          onclick="eNMS.base.showTypePanel('task', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('task', '${
+            this.id
+          }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -601,17 +619,16 @@ class Task extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-danger"
-          onclick='eNMS.base.showDeletionPanel(${instance})' data-tooltip="Delete"
+          onclick='eNMS.base.showDeletionPanel(${this.instance})' data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
-      </ul>`
+      </ul>`,
     ];
   }
 }
 
 class Changelog extends Base {
-
   static get columns() {
     return [
       { data: "time", title: "Time", search: "text" },
@@ -627,7 +644,7 @@ class Changelog extends Base {
   }
 
   get buttons() {
-    return [this.deleteInstanceButton()];
+    return [this.deleteInstanceButton];
   }
 }
 

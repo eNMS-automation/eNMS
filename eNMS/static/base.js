@@ -227,7 +227,7 @@ export function serializeForm(form) {
 }
 
 // eslint-disable-next-line
-function deleteInstance(type, id) {
+export function deleteInstance(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
     $(`#instance_deletion-${id}`).remove();
     if (type.includes("service") || type == "workflow") type = "service";
@@ -671,6 +671,7 @@ if (typeof NProgress != "undefined") {
 
 window.eNMS.base = {
   copyToClipboard: copyToClipboard,
+  deleteInstance: deleteInstance,
   processData: processData,
   showDeletionPanel: showDeletionPanel,
   showPanel: showPanel,

@@ -5,6 +5,7 @@ export let tables = {};
 class Base {
   constructor(properties) {
     Object.assign(this, properties);
+    this.instance = JSON.stringify(this).replace(/"/g, '\\x22').replace(/'/g, '\\x27');
   }
 
   static createNewButton(type) {
@@ -43,11 +44,11 @@ class Base {
       </button>`;
   }
 
-  deleteInstanceButton(instance) {
+  deleteInstanceButton() {
     return `
       <li>
         <button type="button" class="btn btn-sm btn-danger"
-        onclick='showDeletionPanel(${instance})' data-tooltip="Delete"
+        onclick='eNMS.base.showDeletionPanel(${this.instance})' data-tooltip="Delete"
           ><span class="glyphicon glyphicon-trash"></span
         ></button>
       </li>`;
@@ -166,7 +167,7 @@ class Link extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick='showDeletionPanel(${instance})' data-tooltip="Delete"
+          onclick='eNMS.base.showDeletionPanel(${instance})' data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -600,7 +601,7 @@ class Task extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-danger"
-          onclick='showDeletionPanel(${instance})' data-tooltip="Delete"
+          onclick='eNMS.base.showDeletionPanel(${instance})' data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -617,6 +618,7 @@ class Changelog extends Base {
       { data: "user", title: "User", search: "text" },
       { data: "severity", title: "Severity", search: "text" },
       { data: "content", title: "Content", search: "text" },
+      { data: "buttons" },
     ];
   }
 
@@ -625,7 +627,7 @@ class Changelog extends Base {
   }
 
   get buttons() {
-    return [];
+    return [this.deleteInstanceButton()];
   }
 }
 

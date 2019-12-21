@@ -1,9 +1,9 @@
-import * as administrationController from "./administration.js";
-import * as baseController from "./base.js";
-import * as automationController from "./automation.js";
+import * as administration from "./administration.js";
+import * as automation from "./automation.js";
+import * as base from "./base.js";
+import * as inventory from "./inventory.js";
 import * as table from "./table.js";
-import * as workflowController from "./workflow.js";
-import * as inventoryController from "./inventory.js";
+import * as workflow from "./workflow.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
@@ -141,38 +141,38 @@ function initSidebar() {
 
   switchMenu();
   $("#menu_toggle").on("click", function() {
-    baseController.call(`/switch_menu/${user.id}`);
+    base.call(`/switch_menu/${user.id}`);
     $("body").toggleClass("nav-md nav-sm");
     switchMenu();
   });
 }
 
 $(document).ready(function() {
-  $(window).resize(baseController.adjustHeight);
+  $(window).resize(base.adjustHeight);
   initSidebar();
   if (page.includes("table")) table.initTable(page.split("/")[1]);
   doc(page);
-  baseController.detectUserInactivity();
-  baseController.createTooltips();
+  base.detectUserInactivity();
+  base.createTooltips();
 });
 
 window.eNMS = {
-  copyClipboard: automationController.copyClipboard,
-  copyToClipboard: baseController.copyToClipboard,
-  displayCalendar: automationController.displayCalendar,
-  displayFiles: administrationController.displayFiles,
-  exportTopology: administrationController.exportTopology,
-  filterTable: baseController.filterTable,
+  copyClipboard: automation.copyClipboard,
+  copyToClipboard: base.copyToClipboard,
+  displayCalendar: automation.displayCalendar,
+  displayFiles: administration.displayFiles,
+  exportTopology: administration.exportTopology,
+  filterTable: base.filterTable,
   fullScreen: fullScreen,
-  getWorkflowState: workflowController.getWorkflowState,
-  normalRun: automationController.normalRun,
-  processData: baseController.processData,
-  refreshTable: baseController.refreshTable,
-  showPanel: baseController.showPanel,
-  showTypePanel: baseController.showTypePanel,
-  showDeviceNetworkData: inventoryController.showDeviceNetworkData,
-  showResult: automationController.showResult,
-  showRuntimePanel: automationController.showRuntimePanel,
-  sshConnection: inventoryController.sshConnection,
-  switchToWorkflow: automationController.switchToWorkflow,
+  getWorkflowState: workflow.getWorkflowState,
+  normalRun: automation.normalRun,
+  processData: base.processData,
+  refreshTable: base.refreshTable,
+  showPanel: base.showPanel,
+  showTypePanel: base.showTypePanel,
+  showDeviceNetworkData: inventory.showDeviceNetworkData,
+  showResult: automation.showResult,
+  showRuntimePanel: automation.showRuntimePanel,
+  sshConnection: inventory.sshConnection,
+  switchToWorkflow: automation.switchToWorkflow,
 };

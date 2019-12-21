@@ -157,22 +157,34 @@ $(document).ready(function() {
 });
 
 window.eNMS = {
-  copyClipboard: automation.copyClipboard,
-  copyToClipboard: base.copyToClipboard,
-  displayCalendar: automation.displayCalendar,
-  displayFiles: administration.displayFiles,
-  exportTopology: administration.exportTopology,
-  filterTable: base.filterTable,
-  fullScreen: fullScreen,
-  getWorkflowState: workflow.getWorkflowState,
-  normalRun: automation.normalRun,
-  processData: base.processData,
-  refreshTable: base.refreshTable,
-  showPanel: base.showPanel,
-  showTypePanel: base.showTypePanel,
-  showDeviceNetworkData: inventory.showDeviceNetworkData,
-  showResult: automation.showResult,
-  showRuntimePanel: automation.showRuntimePanel,
-  sshConnection: inventory.sshConnection,
-  switchToWorkflow: automation.switchToWorkflow,
+  administration: {
+    displayFiles: administration.displayFiles,
+    exportTopology: administration.exportTopology,
+  },
+  automation: {
+    copyClipboard: automation.copyClipboard,
+    displayCalendar: automation.displayCalendar,
+    normalRun: automation.normalRun,
+    showResult: automation.showResult,
+    showRuntimePanel: automation.showRuntimePanel,
+    switchToWorkflow: automation.switchToWorkflow,
+  },
+  base: {
+    copyToClipboard: base.copyToClipboard,
+    filterTable: base.filterTable,
+    processData: base.processData,
+    refreshTable: base.refreshTable,
+    showPanel: base.showPanel,
+    showTypePanel: base.showTypePanel,
+  },
+  main: {
+    fullScreen: fullScreen,
+  },
+  inventory: {
+    showDeviceNetworkData: inventory.showDeviceNetworkData,
+    sshConnection: inventory.sshConnection,
+  },
+  workflow: {
+    getWorkflowState: workflow.getWorkflowState,
+  },
 };

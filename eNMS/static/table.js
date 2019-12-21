@@ -96,14 +96,14 @@ class Device extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick='eNMS.inventory.showDeviceNetworkData(${instance})'
+          onclick='eNMS.inventory.showDeviceNetworkData(${this.instance})'
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="showDeviceResultsPanel(${instance})"
+          onclick="showDeviceResultsPanel(${this.instance})"
           data-tooltip="Results"
             ><span class="glyphicon glyphicon-list-alt"></span
           ></button>
@@ -635,7 +635,7 @@ class Changelog extends Base {
       { data: "user", title: "User", search: "text" },
       { data: "severity", title: "Severity", search: "text" },
       { data: "content", title: "Content", search: "text" },
-      { data: "buttons" },
+      { data: "buttons", width: "30px"},
     ];
   }
 
@@ -644,7 +644,11 @@ class Changelog extends Base {
   }
 
   get buttons() {
-    return [this.deleteInstanceButton];
+    return [
+      `<ul class="pagination pagination-lg" style="margin: 0px; width: 30px">
+      ${this.deleteInstanceButton}
+      </ul>`
+    ];
   }
 }
 

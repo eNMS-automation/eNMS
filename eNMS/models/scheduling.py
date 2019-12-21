@@ -209,7 +209,7 @@ class Event(AbstractBase):
           </li>
           <li>
             <button type="button" class="btn btn-danger"
-            onclick="showDeletionPanel({self.row_properties})" data-tooltip="Delete"
+            onclick="eNMS.base.showDeletionPanel({self.row_properties})" data-tooltip="Delete"
               ><span class="glyphicon glyphicon-trash"></span
             ></button>
           </li>

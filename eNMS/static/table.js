@@ -42,6 +42,16 @@ class Base {
         <span class="glyphicon glyphicon-refresh"></span>
       </button>`;
   }
+
+  deleteInstanceButton(instance) {
+    return `
+      <li>
+        <button type="button" class="btn btn-sm btn-danger"
+        onclick='showDeletionPanel(${instance})' data-tooltip="Delete"
+          ><span class="glyphicon glyphicon-trash"></span
+        ></button>
+      </li>`;
+  }
 }
 
 class Device extends Base {
@@ -109,12 +119,7 @@ class Device extends Base {
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
         </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-danger"
-          onclick="showDeletionPanel(${instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
-        </li>
+        ${this.deleteInstanceButton(instance)}
       </ul>`;
   }
 }
@@ -242,7 +247,7 @@ class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="showDeletionPanel(${instance})" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -383,7 +388,7 @@ class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="showDeletionPanel(${instance})" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -604,7 +609,28 @@ class Task extends Base {
   }
 }
 
+class Changelog extends Base {
+
+  static get columns() {
+    return [
+      { data: "time", title: "Time", search: "text" },
+      { data: "user", title: "User", search: "text" },
+      { data: "severity", title: "Severity", search: "text" },
+      { data: "content", title: "Content", search: "text" },
+    ];
+  }
+
+  static get controls() {
+    return [super.createNewButton("changelog")];
+  }
+
+  get buttons() {
+    return [];
+  }
+}
+
 export const models = {
+  changelog: Changelog,
   device: Device,
   link: Link,
   pool: Pool,

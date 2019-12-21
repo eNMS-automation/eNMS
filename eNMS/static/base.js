@@ -306,8 +306,7 @@ export function showPanel(type, id, processing) {
   return createPanel(type, panelName[type] || type, id, processing);
 }
 
-// eslint-disable-next-line
-function showDeletionPanel(instance) {
+export function showDeletionPanel(instance) {
   createPanel(
     "instance_deletion",
     `Delete ${instance.name}`,
@@ -673,6 +672,7 @@ if (typeof NProgress != "undefined") {
 window.eNMS.base = {
   copyToClipboard: copyToClipboard,
   processData: processData,
+  showDeletionPanel: showDeletionPanel,
   showPanel: showPanel,
   showTypePanel: showTypePanel,
 };

@@ -41,8 +41,7 @@ function savePoolObjects(id) {
   });
 }
 
-// eslint-disable-next-line
-function showPoolObjectsPanel(id) {
+export function showPoolObjectsPanel(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       if (pool.devices.length > 1000 || pool.links.length > 1000) {
@@ -114,5 +113,6 @@ function showDeviceResultsPanel(device) {
 
 window.eNMS.inventory = {
   showDeviceNetworkData: showDeviceNetworkData,
+  showPoolObjectsPanel: showPoolObjectsPanel,
   sshConnection: sshConnection,
 };

@@ -1,9 +1,5 @@
-import * as administration from "./administration.js";
-import * as automation from "./automation.js";
-import * as base from "./base.js";
-import * as inventory from "./inventory.js";
-import * as table from "./table.js";
-import * as workflow from "./workflow.js";
+import { adjustHeight, call, createTooltips, detectUserInactivity } from "./base.js";
+import { initTable } from "./table.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
@@ -141,19 +137,19 @@ function initSidebar() {
 
   switchMenu();
   $("#menu_toggle").on("click", function() {
-    base.call(`/switch_menu/${user.id}`);
+    call(`/switch_menu/${user.id}`);
     $("body").toggleClass("nav-md nav-sm");
     switchMenu();
   });
 }
 
 $(document).ready(function() {
-  $(window).resize(base.adjustHeight);
+  $(window).resize(adjustHeight);
   initSidebar();
-  if (page.includes("table")) table.initTable(page.split("/")[1]);
+  if (page.includes("table")) initTable(page.split("/")[1]);
   doc(page);
-  base.detectUserInactivity();
-  base.createTooltips();
+  detectUserInactivity();
+  createTooltips();
 });
 
 window.eNMS.main = {

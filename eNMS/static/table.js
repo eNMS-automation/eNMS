@@ -231,7 +231,7 @@ class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="showPoolObjectsPanel('${
+          onclick="eNMS.inventory.showPoolObjectsPanel('${
             this.id
           }')" data-tooltip="Pool Objects"
             ><span class="glyphicon glyphicon-wrench"></span
@@ -635,17 +635,21 @@ class Changelog extends Base {
       { data: "user", title: "User", search: "text" },
       { data: "severity", title: "Severity", search: "text" },
       { data: "content", title: "Content", search: "text" },
-      { data: "buttons", width: "30px"},
+      { data: "buttons", width: "120px"},
     ];
   }
 
   static get controls() {
-    return [super.createNewButton("changelog")];
+    return [
+      super.createNewButton("changelog"),
+      super.searchTableButton("changelog"),
+      super.refreshTableButton("changelog"),
+    ];
   }
 
   get buttons() {
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 30px">
+      `<ul class="pagination pagination-lg" style="margin: 0px;">
       ${this.deleteInstanceButton}
       </ul>`
     ];

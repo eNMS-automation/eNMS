@@ -15,6 +15,7 @@ Version 3.19
 
 - Full screen workflow builder
 - Remember menu size PER USER (parameter stored in DB, not just session)
+- Refactoring of all the tables
 
 Version 3.18.2
 --------------

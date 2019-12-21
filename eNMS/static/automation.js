@@ -80,7 +80,7 @@ function buildLinks(result, id) {
     link[1]
   }'>
                 <span class="input-group-btn">
-                  <button class="btn btn-default" onclick="eNMS.copyToClipboard('link-${id}',
+                  <button class="btn btn-default" onclick="eNMS.base.copyToClipboard('link-${id}',
                   true)" type="button">
                     <span class="glyphicon glyphicon-copy"></span>
                   </button>
@@ -268,13 +268,13 @@ function displayResultsTree(service, runtime) {
             <div style="position: absolute; top: 0px; right: 50px">
               <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick='eNMS.showRuntimePanel("logs", ${data}, "${runtime}")'
+                onclick='eNMS.automation.showRuntimePanel("logs", ${data}, "${runtime}")'
               >
                 <span class="glyphicon glyphicon-list"></span>
               </button>
               <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick='eNMS.showRuntimePanel("results", ${data}, "${runtime}", true)'
+                onclick='eNMS.automation.showRuntimePanel("results", ${data}, "${runtime}", true)'
               >
                 <span class="glyphicon glyphicon-list-alt"></span>
               </button>
@@ -482,3 +482,12 @@ Object.assign(action, {
   }
   if (page == "table/service") switchToWorkflow("");
 })();
+
+window.eNMS.automation = {
+  copyClipboard: copyClipboard,
+  displayCalendar: displayCalendar,
+  normalRun: normalRun,
+  showResult: showResult,
+  showRuntimePanel: showRuntimePanel,
+  switchToWorkflow: switchToWorkflow,
+};

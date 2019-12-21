@@ -669,3 +669,10 @@ if (typeof NProgress != "undefined") {
     NProgress.done();
   });
 }
+
+window.eNMS.base = {
+  copyToClipboard: copyToClipboard,
+  processData: processData,
+  showPanel: showPanel,
+  showTypePanel: showTypePanel,
+};

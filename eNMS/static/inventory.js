@@ -111,3 +111,8 @@ function showDeviceResultsPanel(device) {
     initTable("result", device);
   });
 }
+
+window.eNMS.inventory = {
+  showDeviceNetworkData: showDeviceNetworkData,
+  sshConnection: sshConnection,
+};

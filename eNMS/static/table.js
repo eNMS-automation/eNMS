@@ -11,7 +11,7 @@ class Base {
     return `
       <button
         class="btn btn-sm btn-primary"
-        onclick="eNMS.showTypePanel('${type}')"
+        onclick="eNMS.base.showTypePanel('${type}')"
         data-tooltip="New"
         type="button"
       >
@@ -23,7 +23,7 @@ class Base {
     return `
       <button
         class="btn btn-sm btn-info btn-file"
-        onclick="eNMS.showPanel('${type}_filtering')"
+        onclick="eNMS.base.showPanel('${type}_filtering')"
         data-tooltip="Advanced Search"
         type="button"
       >
@@ -35,7 +35,7 @@ class Base {
     return `
       <button
         class="btn btn-sm btn-info btn-file"
-        onclick="eNMS.refreshTable('${type}', true)"
+        onclick="eNMS.table.refreshTable('${type}', true)"
         data-tooltip="Refresh"
         type="button"
       >
@@ -75,7 +75,7 @@ class Device extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick='eNMS.showDeviceNetworkData(${instance})'
+          onclick='eNMS.inventory.showDeviceNetworkData(${instance})'
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>
@@ -89,14 +89,14 @@ class Device extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.showPanel('device_connection', '${this.id}')"
+          onclick="eNMS.base.showPanel('device_connection', '${this.id}')"
           data-tooltip="Connection"
             ><span class="glyphicon glyphicon-console"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('device', '${
+          onclick="eNMS.base.showTypePanel('device', '${
             this.id
           }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
@@ -104,7 +104,7 @@ class Device extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('device', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('device', '${this.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -148,13 +148,13 @@ class Link extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('link', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('link', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('link', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('link', '${this.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -229,13 +229,13 @@ class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('pool', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('pool', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('pool', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('pool', '${this.id}', 'duplicate')"
           data-tooltip="Duplicate"
             ><span class="glyphicon glyphicon-duplicate"></span
           ></button>
@@ -260,7 +260,7 @@ class Service extends Base {
         width: "20%",
         search: "text",
         render: function(data, type, row, meta) {
-          return `<b><a href="#" onclick="eNMS.switchToWorkflow('${row.id}')">${
+          return `<b><a href="#" onclick="eNMS.automation.switchToWorkflow('${row.id}')">${
             row.scoped_name
           }</a></b>`;
         },
@@ -289,7 +289,7 @@ class Service extends Base {
       </button>
       <button
         class="btn btn-info btn-file"
-        onclick="eNMS.showPanel('service_filtering')"
+        onclick="eNMS.base.showPanel('service_filtering')"
         data-tooltip="Advanced Search"
         type="button"
       >
@@ -297,7 +297,7 @@ class Service extends Base {
       </button>
       <button
         class="btn btn-info btn-file"
-        onclick="eNMS.refreshTable('service', true)"
+        onclick="eNMS.table.refreshTable('service', true)"
         data-tooltip="Refresh"
         type="button"
       >
@@ -344,32 +344,32 @@ class Service extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.showRuntimePanel('results', ${instance})"
+          onclick="eNMS.automation.showRuntimePanel('results', ${instance})"
           data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.showRuntimePanel('logs', ${instance})"
+          onclick="eNMS.automation.showRuntimePanel('logs', ${instance})"
           data-tooltip="Logs"><span class="glyphicon glyphicon-list"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.normalRun('${this.id}')" data-tooltip="Run"
+          onclick="eNMS.automation.normalRun('${this.id}')" data-tooltip="Run"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-success"
-          onclick="eNMS.showTypePanel('{self.type}', '${this.id}', 'run')"
+          onclick="eNMS.base.showTypePanel('{self.type}', '${this.id}', 'run')"
           data-tooltip="Parameterized Run"
             ><span class="glyphicon glyphicon-play-circle"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.showTypePanel('{self.type}', '${
+          onclick="eNMS.base.showTypePanel('{self.type}', '${
             this.id
           }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
@@ -414,7 +414,7 @@ class Run extends Base {
     return [
       `<button
         class="btn btn-info btn-file"
-        onclick="eNMS.displayCalendar('run')"
+        onclick="eNMS.automation.displayCalendar('run')"
         data-tooltip="Calendar"
         type="button"
       >
@@ -429,13 +429,13 @@ class Run extends Base {
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
         <li>
           <button type="button" class="btn btn-info"
-          onclick="eNMS.showRuntimePanel('logs', {self.service.row_properties},
+          onclick="eNMS.automation.showRuntimePanel('logs', {self.service.row_properties},
           '${this.runtime}')"data-tooltip="Logs">
           <span class="glyphicon glyphicon-list"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-info"
-          onclick="eNMS.showRuntimePanel('results', {self.service.row_properties},
+          onclick="eNMS.automation.showRuntimePanel('results', {self.service.row_properties},
           '${this.runtime}')"data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>
@@ -503,14 +503,14 @@ class Result extends Base {
     <ul class="pagination pagination-lg" style="margin: 0px; width: 90px">
       <li>
           <button type="button" class="btn btn-info btn-sm"
-          onclick="eNMS.showResult('${this.id}')" data-tooltip="Results">
+          onclick="eNMS.automation.showResult('${this.id}')" data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
       </li>
       <li>
           <button type="button" id="btn-result-${
             this.id
           }" class="btn btn-info btn-sm"
-          onclick='eNMS.copyClipboard("btn-result-${this.id}", ${instance})'
+          onclick='eNMS.automation.copyClipboard("btn-result-${this.id}", ${instance})'
           data-tooltip="Copy to clipboard">
           <span class="glyphicon glyphicon-copy"></span></button>
       </li>
@@ -555,7 +555,7 @@ class Task extends Base {
     return [
       `<button
         class="btn btn-info btn-file"
-        onclick="eNMS.displayCalendar('task')"
+        onclick="eNMS.automation.displayCalendar('task')"
         data-tooltip="Calendar"
         type="button"
       >
@@ -583,13 +583,13 @@ class Task extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-primary"
-          onclick="eNMS.showTypePanel('task', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('task', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-primary"
-          onclick="eNMS.showTypePanel('task', '${this.id}', 'duplicate')"
+          onclick="eNMS.base.showTypePanel('task', '${this.id}', 'duplicate')"
           data-tooltip="Duplicate">
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
@@ -721,3 +721,8 @@ function refreshTablePeriodically(tableType, interval) {
   if (userIsActive) refreshTable(tableType, false);
   setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
 }
+
+window.eNMS.table = {
+  filterTable: filterTable,
+  refreshTable: refreshTable,
+};

@@ -193,7 +193,7 @@
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
               <div class="nav toggle">
-                <a onclick="eNMS.fullScreen()"
+                <a onclick="eNMS.main.fullScreen()"
                   ><i class="glyphicon glyphicon-fullscreen"></i
                 ></a>
               </div>
@@ -234,7 +234,7 @@
                   </a>
                 </li>
                 <li class="">
-                  <a onclick="eNMS.displayFiles()" style="cursor:pointer">
+                  <a onclick="eNMS.administration.displayFiles()" style="cursor:pointer">
                     <img
                       src="{{ url_for('static', filename='images/files.png') }}"
                       height="35"
@@ -253,6 +253,7 @@
     {% block javascripts %}
     <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
     <script>
+      window.eNMS = {};
       const page = "{{ endpoint }}";
       const user = {{ user|tojson|safe }};
       const propertyTypes = {{ property_types|tojson|safe }};

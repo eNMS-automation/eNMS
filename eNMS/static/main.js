@@ -156,35 +156,6 @@ $(document).ready(function() {
   base.createTooltips();
 });
 
-window.eNMS = {
-  administration: {
-    displayFiles: administration.displayFiles,
-    exportTopology: administration.exportTopology,
-  },
-  automation: {
-    copyClipboard: automation.copyClipboard,
-    displayCalendar: automation.displayCalendar,
-    normalRun: automation.normalRun,
-    showResult: automation.showResult,
-    showRuntimePanel: automation.showRuntimePanel,
-    switchToWorkflow: automation.switchToWorkflow,
-  },
-  base: {
-    copyToClipboard: base.copyToClipboard,
-    filterTable: base.filterTable,
-    processData: base.processData,
-    refreshTable: base.refreshTable,
-    showPanel: base.showPanel,
-    showTypePanel: base.showTypePanel,
-  },
-  main: {
-    fullScreen: fullScreen,
-  },
-  inventory: {
-    showDeviceNetworkData: inventory.showDeviceNetworkData,
-    sshConnection: inventory.sshConnection,
-  },
-  workflow: {
-    getWorkflowState: workflow.getWorkflowState,
-  },
+window.eNMS.main = {
+  fullScreen: fullScreen,
 };

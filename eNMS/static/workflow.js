@@ -903,3 +903,7 @@ function initWorkflowBuilder() {
 (function() {
   if (page == "workflow_builder") initWorkflowBuilder();
 })();
+
+window.eNMS.workflow = {
+  getWorkflowState: getWorkflowState,
+};

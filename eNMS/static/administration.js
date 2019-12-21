@@ -323,3 +323,8 @@ export function displayFiles() {
     });
   });
 }
+
+window.eNMS.administration = {
+  displayFiles: displayFiles,
+  exportTopology: exportTopology,
+};

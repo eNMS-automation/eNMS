@@ -69,10 +69,7 @@ class AdministrationController(BaseController):
         delete_all(*kwargs["deletion_types"])
 
     def get_cluster_status(self):
-        return {
-            attr: [getattr(server, attr) for server in fetch_all("server")]
-            for attr in ("status", "cpu_load")
-        }
+        return [server.status for server in fetch_all("server")]
 
     def objectify(self, model, obj):
         for property, relation in relationships[model].items():

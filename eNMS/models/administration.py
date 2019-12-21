@@ -16,7 +16,6 @@ class Server(AbstractBase):
     ip_address = Column(SmallString)
     weight = Column(Integer, default=1)
     status = Column(SmallString, default="down")
-    cpu_load = Column(Float)
 
 
 class User(AbstractBase, UserMixin):

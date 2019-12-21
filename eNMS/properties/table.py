@@ -29,13 +29,4 @@ service_table_properties = [
     "creator",
 ]
 
-server_table_properties = [
-    "name",
-    "description",
-    "ip_address",
-    "weight",
-    "status",
-    "cpu_load",
-]
-
 event_table_properties = ["name", "service_name", "log_source", "log_content"]

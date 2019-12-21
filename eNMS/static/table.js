@@ -178,7 +178,9 @@ class Link extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick='eNMS.base.showDeletionPanel(${this.instance})' data-tooltip="Delete"
+          onclick='eNMS.base.showDeletionPanel(${
+            this.instance
+          })' data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -260,7 +262,9 @@ class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${
+            this.instance
+          })" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -361,7 +365,9 @@ class Service extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${this.instance})"
+          onclick="eNMS.automation.showRuntimePanel('results', ${
+            this.instance
+          })"
           data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
           ></button>
         </li>
@@ -400,7 +406,9 @@ class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${
+            this.instance
+          })" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -526,9 +534,9 @@ class Result extends Base {
           <button type="button" id="btn-result-${
             this.id
           }" class="btn btn-info btn-sm"
-          onclick='eNMS.automation.copyClipboard("btn-result-${
-            this.id
-          }", ${this.instance})'
+          onclick='eNMS.automation.copyClipboard("btn-result-${this.id}", ${
+        this.instance
+      })'
           data-tooltip="Copy to clipboard">
           <span class="glyphicon glyphicon-copy"></span></button>
       </li>
@@ -619,7 +627,9 @@ class Task extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-danger"
-          onclick='eNMS.base.showDeletionPanel(${this.instance})' data-tooltip="Delete"
+          onclick='eNMS.base.showDeletionPanel(${
+            this.instance
+          })' data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -629,12 +639,11 @@ class Task extends Base {
 }
 
 class User extends Base {
-
   static get columns() {
     return [
       { data: "name", title: "Username", search: "text" },
       { data: "email", title: "Email Address", search: "text" },
-      { data: "buttons", width: "120px"},
+      { data: "buttons", width: "120px" },
     ];
   }
 
@@ -647,11 +656,14 @@ class User extends Base {
   }
 
   get buttons() {
-    return [`
+    return [
+      `
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('user', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('user', '${
+            this.id
+          }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -664,17 +676,18 @@ class User extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${
+            this.instance
+          })" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
-      </ul>`
+      </ul>`,
     ];
   }
 }
 
 class Server extends Base {
-
   static get columns() {
     return [
       { data: "name", title: "Username", search: "text" },
@@ -682,7 +695,7 @@ class Server extends Base {
       { data: "ip_address", title: "IP address", search: "text" },
       { data: "weight", title: "Weight", search: "text" },
       { data: "status", title: "Status", search: "text" },
-      { data: "buttons", width: "120px"},
+      { data: "buttons", width: "120px" },
     ];
   }
 
@@ -695,11 +708,14 @@ class Server extends Base {
   }
 
   get buttons() {
-    return [`
+    return [
+      `
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('server', '${this.id}')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('server', '${
+            this.id
+          }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -712,11 +728,13 @@ class Server extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${
+            this.instance
+          })" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
-      </ul>`
+      </ul>`,
     ];
   }
 }
@@ -728,7 +746,7 @@ class Changelog extends Base {
       { data: "user", title: "User", search: "text" },
       { data: "severity", title: "Severity", search: "text" },
       { data: "content", title: "Content", search: "text" },
-      { data: "buttons", width: "120px"},
+      { data: "buttons", width: "120px" },
     ];
   }
 
@@ -744,7 +762,7 @@ class Changelog extends Base {
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px;">
       ${this.deleteInstanceButton}
-      </ul>`
+      </ul>`,
     ];
   }
 }

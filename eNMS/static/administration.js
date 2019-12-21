@@ -1,7 +1,9 @@
 /*
 global
 alertify: false
+CodeMirror: false
 config: true
+Dropzone: false
 folders: false
 JSONEditor: false
 */
@@ -9,65 +11,64 @@ JSONEditor: false
 import { call, createPanel, editors, fCall, showPanel } from "./base.js";
 import { tables } from "./table.js";
 
-let editor;
-let administration = window.eNMS.administration = {};
+let configurationEditor;
+let administration = (window.eNMS.administration = {});
 
 // eslint-disable-next-line
-function showImportTopologyPanel(type) {
+administration.showImportTopologyPanel = function() {
   createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
     document.getElementById("file").onchange = function() {
-      importTopology();
+      administration.importTopology();
     };
   });
-}
+};
 
 // eslint-disable-next-line
-function queryOpenNMS() {
+administration.queryOpenNMS = function() {
   call("/query_opennms", function() {
     alertify.notify("Topology imported from OpenNMS.", "success", 5);
   });
-}
+};
 
 // eslint-disable-next-line
-function queryNetbox() {
+administration.queryNetbox = function() {
   call("/query_netbox", function() {
     alertify.notify("Topology imported from Netbox.", "success", 5);
   });
-}
+};
 
-// eslint-disable-next-line
-function queryLibreNMS() {
+administration.queryLibreNMS = function() {
   call("/query_librenms", function() {
     alertify.notify("Topology imported from LibreNMS.", "success", 5);
   });
-}
+};
 
 administration.saveConfiguration = function() {
   $.ajax({
     type: "POST",
     url: "/save_configuration",
     contentType: "application/json",
-    data: JSON.stringify(editor.get()),
+    data: JSON.stringify(configurationEditor.get()),
     success: function() {
-      config = editor.get();
+      config = configurationEditor.get();
       $("#configuration").remove();
       alertify.notify("Configuration saved.", "success", 5);
     },
   });
-}
+};
 
 administration.showConfiguration = function() {
   createPanel("configuration", "Configuration", null, function() {
-    editor = new JSONEditor(document.getElementById("content"), {}, config);
+    configurationEditor = new JSONEditor(document.getElementById("content"), {}, config);
   });
-}
+};
 
 administration.exportTopology = function() {
   alertify.notify("Topology export starting...", "success", 5);
   fCall("/export_topology", "excel_export-form", function() {
     alertify.notify("Topology successfully exported.", "success", 5);
   });
-}
+};
 
 administration.importTopology = function() {
   alertify.notify("Topology import: starting...", "success", 5);
@@ -85,14 +86,14 @@ administration.importTopology = function() {
     },
   });
   $("#file")[0].value = "";
-}
+};
 
 administration.getClusterStatus = function() {
   call("/get_cluster_status", function() {
     tables["server"].ajax.reload(null, false);
-    setTimeout(getClusterStatus, 15000);
+    setTimeout(administration.getClusterStatus, 15000);
   });
-}
+};
 
 // eslint-disable-next-line
 administration.migrationsExport = function() {
@@ -100,7 +101,7 @@ administration.migrationsExport = function() {
   fCall("/migration_export", "migration-form", function() {
     alertify.notify("Export successful.", "success", 5);
   });
-}
+};
 
 // eslint-disable-next-line
 administration.showMigrationPanel = function() {
@@ -112,7 +113,7 @@ administration.showMigrationPanel = function() {
       list.appendChild(option);
     });
   });
-}
+};
 
 // eslint-disable-next-line
 administration.migrationsImport = function() {
@@ -120,9 +121,9 @@ administration.migrationsImport = function() {
   fCall("/migration_import", "migration-form", function(result) {
     alertify.notify(result, "success", 5);
   });
-}
+};
 
-administration.refreshExportedServices = function (){
+administration.refreshExportedServices = function() {
   call("/get_exported_services", function(services) {
     let list = document.getElementById("service");
     services.forEach((item) => {
@@ -132,22 +133,22 @@ administration.refreshExportedServices = function (){
     });
     $("#service").selectpicker("refresh");
   });
-}
+};
 
 // eslint-disable-next-line
-administration.function showImportServicePanel() {
+administration.showImportServicePanel = function() {
   showPanel("import_service", null, () => {
-    refreshExportedServices();
+    administration.refreshExportedServices();
   });
-}
+};
 
 // eslint-disable-next-line
-administration.function importService() {
+administration.importService = function() {
   call(`/import_service/${$("#service").val()}`, function(result) {
     alertify.notify("Import successful.", "success", 5);
     $("#import_service").remove();
   });
-}
+};
 
 // eslint-disable-next-line
 administration.databaseDeletion = function() {
@@ -156,14 +157,14 @@ administration.databaseDeletion = function() {
     alertify.notify("Deletion done.", "success", 5);
     $("#deletion-form").remove();
   });
-}
+};
 
 // eslint-disable-next-line
 administration.getGitContent = function() {
   call("/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);
   });
-}
+};
 
 // eslint-disable-next-line
 function scheduler(action) {
@@ -173,12 +174,12 @@ function scheduler(action) {
 }
 
 // eslint-disable-next-line
-administration.scanCluster function() {
+administration.scanCluster = function() {
   alertify.notify("Scan started.", "success", 5);
   call("/scan_cluster", function(cluster) {
     alertify.notify("Scan completed.", "success", 5);
   });
-}
+};
 
 administration.deleteFile = function(file) {
   call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
@@ -191,7 +192,7 @@ administration.deleteFile = function(file) {
       5
     );
   });
-}
+};
 
 administration.editFile = function(file) {
   const filepath = file.data.path.replace(/\//g, ">");
@@ -199,7 +200,7 @@ administration.editFile = function(file) {
     createPanel("file", `Edit ${file.data.path}`, filepath, () => {
       const display = document.getElementById(`file_content-${filepath}`);
       // eslint-disable-next-line new-cap
-      let editor = CodeMirror.fromTextArea(display, {
+      let fileEditor = editors[filepath] = CodeMirror.fromTextArea(display, {
         lineWrapping: true,
         lineNumbers: true,
         theme: "cobalt",
@@ -208,12 +209,11 @@ administration.editFile = function(file) {
         extraKeys: { "Ctrl-F": "findPersistent" },
         scrollbarStyle: "overlay",
       });
-      editor.setSize("100%", "100%");
-      editors[filepath] = editor;
-      editor.setValue(content);
+      fileEditor.setSize("100%", "100%");
+      fileEditor.setValue(content);
     });
   });
-}
+};
 
 administration.saveFile = function(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
@@ -221,7 +221,7 @@ administration.saveFile = function(file) {
     alertify.notify("File successfully saved.", "success", 5);
     $(`[id="file-${file}"`).remove();
   });
-}
+};
 
 administration.showFileUploadPanel = function(folder) {
   const path = folder.replace(/\//g, ">");
@@ -238,7 +238,7 @@ administration.showFileUploadPanel = function(folder) {
       $(`[id="upload_files-${path}"]`).remove();
     });
   });
-}
+};
 
 // eslint-disable-next-line
 function createNewFolder() {}
@@ -311,4 +311,4 @@ administration.displayFiles = function() {
       },
     });
   });
-}
+};

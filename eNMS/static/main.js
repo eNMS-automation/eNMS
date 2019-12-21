@@ -2,7 +2,12 @@
 NProgress: false
 */
 
-import { adjustHeight, call, createTooltips, detectUserInactivity } from "./base.js";
+import {
+  adjustHeight,
+  call,
+  createTooltips,
+  detectUserInactivity,
+} from "./base.js";
 import { initTable } from "./table.js";
 
 const currentUrl = window.location.href.split("#")[0].split("?")[0];

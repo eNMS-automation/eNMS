@@ -30,7 +30,10 @@ title %} {% block stylesheets %} {{ super() }}
               >
                 Fetch Git Configurations
               </button>
-              <button class="btn btn-primary btn-file" onclick="eNMS.administration.scanCluster()">
+              <button
+                class="btn btn-primary btn-file"
+                onclick="eNMS.administration.scanCluster()"
+              >
                 Scan Cluster Subnet
               </button>
               <button
@@ -97,10 +100,16 @@ title %} {% block stylesheets %} {{ super() }}
               >
                 Excel
               </button>
-              <button class="btn btn-primary btn-file" onclick="eNMS.administration.queryOpenNMS()">
+              <button
+                class="btn btn-primary btn-file"
+                onclick="eNMS.administration.queryOpenNMS()"
+              >
                 OpenNMS
               </button>
-              <button class="btn btn-primary btn-file" onclick="eNMS.administration.queryNetbox()">
+              <button
+                class="btn btn-primary btn-file"
+                onclick="eNMS.administration.queryNetbox()"
+              >
                 Netbox
               </button>
               <button

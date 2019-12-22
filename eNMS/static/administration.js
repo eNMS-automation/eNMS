@@ -238,10 +238,8 @@ administration.showFileUploadPanel = function(folder) {
   });
 };
 
-// eslint-disable-next-line
-function createNewFolder() {}
+administration.createNewFolder = function() {}
 
-// eslint-disable-next-line
 administration.displayFiles = function() {
   showPanel("files", null, function() {
     $("#files-tree").jstree({
@@ -298,7 +296,7 @@ administration.displayFiles = function() {
               <div style="position: absolute; top: 0px; right: 50px">
               <button type="button"
               class="btn btn-xs btn-primary"
-              onclick="showFileUploadPanel('${node.data.path}')"
+              onclick="eNMS.administration.showFileUploadPanel('${node.data.path}')"
             >
               <span class="glyphicon glyphicon-plus"></span>
             </button>

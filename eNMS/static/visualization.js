@@ -2,13 +2,10 @@
 global
 action: false
 alertify: false
-call: false
 config: true
 jsPanel: false
 L: false
 serializeForm: false
-showDeviceNetworkData: false
-showPoolView: false
 viewType: false
 vis: false
 */
@@ -16,6 +13,7 @@ vis: false
 import { call, showPanel, showTypePanel } from "./base.js";
 import { showDeviceNetworkData } from "./inventory.js";
 
+let visualization = (window.eNMS.visualization = {});
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
@@ -248,7 +246,6 @@ function linkToEdge(link) {
   return logicalLink;
 }
 
-// eslint-disable-next-line
 function showPoolView(poolId) {
   jsPanel.create({
     id: `pool-view-${poolId}`,

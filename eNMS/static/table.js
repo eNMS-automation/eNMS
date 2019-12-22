@@ -340,9 +340,9 @@ models.pool = class Pool extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="showPoolView('${this.id}')" data-tooltip="Internal View"
-            ><span class="glyphicon glyphicon-eye-open"></span
-          ></button>
+          onclick="eNMS.visualization.showPoolView('${this.id}')"
+          data-tooltip="Internal View"><span class="glyphicon glyphicon-eye-open">
+          </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -610,8 +610,20 @@ models.result = class Result extends Base {
         width: "80px",
       },
       { data: "buttons" },
-      { data: "version_1", title: "V1" },
-      { data: "version_2", title: "V2" },
+      {
+        data: "version_1",
+        title: "V1",
+        render: function(data, type, row, meta) {
+          return `<input type="radio" name="v1" value="${this.id}">`;
+        },
+      },
+      {
+        data: "version_2",
+        title: "V2",
+        render: function(data, type, row, meta) {
+          return `<input type="radio" name="v2" value="${this.id}">`;
+        },
+      },
     ];
   }
 
@@ -626,14 +638,6 @@ models.result = class Result extends Base {
         <span class="glyphicon glyphicon-adjust"></span>
       </button>`,
     ];
-  }
-
-  get version_1() {
-    return `<input type="radio" name="v1" value="${this.id}">`;
-  }
-
-  get version_2() {
-    return `<input type="radio" name="v1" value="${this.id}">`;
   }
 
   get buttons() {
@@ -682,18 +686,6 @@ models.task = class Task extends Base {
       { data: "time_before_next_run", title: "Time left", search: "text" },
       { data: "buttons" },
     ];
-  }
-
-  get next_run_time() {
-    return `b`;
-  }
-
-  get time_before_next_run() {
-    return `a`;
-  }
-
-  get status() {
-    return `a`;
   }
 
   static get controls() {

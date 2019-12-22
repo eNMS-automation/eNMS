@@ -1,5 +1,7 @@
 /*
+global
 config: false
+NProgress: false
 page: false
 user: false
 */

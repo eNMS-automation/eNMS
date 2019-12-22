@@ -3,6 +3,7 @@ global
 action: false
 alertify: false
 currentPath: true
+page: false
 serviceTypes: false
 Set: false
 vis: false
@@ -21,6 +22,7 @@ import {
   call,
   copyToClipboard,
   createPanel,
+  fCall,
   showPanel,
   showTypePanel,
   userIsActive,

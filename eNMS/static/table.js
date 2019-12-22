@@ -55,6 +55,7 @@ export function initTable(type, instance, runtime, id) {
                 <option value="bool-false">False</option>
               </select>`;
           } else if (data.data == "buttons") {
+            console.log(models[type].controls.join(""))
             element = models[type].controls.join("");
           }
           $(element)
@@ -145,7 +146,7 @@ class Base {
   static searchTableButton(type) {
     return `
       <button
-        class="btn btn-sm btn-info btn-file"
+        class="btn btn-sm btn-info"
         onclick="eNMS.base.showPanel('${type}_filtering')"
         data-tooltip="Advanced Search"
         type="button"
@@ -157,7 +158,7 @@ class Base {
   static refreshTableButton(type) {
     return `
       <button
-        class="btn btn-sm btn-info btn-file"
+        class="btn btn-sm btn-info"
         onclick="eNMS.table.refreshTable('${type}', true)"
         data-tooltip="Refresh"
         type="button"
@@ -669,29 +670,35 @@ models.task = class Task extends Base {
   static get columns() {
     return [
       { data: "name", title: "Name", search: "text" },
-      { data: "description", title: "Description", search: "text" },
       { data: "service_name", title: "Service", search: "text" },
-      { data: "status", title: "Status", search: "text" },
-      { data: "scheduling_mode", title: "Scheduling", search: "text" },
-      { data: "start_date", title: "Start Date", search: "text" },
-      { data: "end_date", title: "End Date", search: "text" },
-      { data: "frequency", title: "Frequency", search: "text" },
-      { data: "frequency_unit", title: "Unit", search: "text" },
+      { data: "status", title: "Status", search: "text", width: "5%" },
+      { data: "scheduling_mode", title: "Scheduling", search: "text", width: "5%" },
       {
-        data: "crontab_expression",
-        title: "Crontab Expression",
+        data: "periodicity",
+        title: "Periodicity",
         search: "text",
+        render: function(data, type, instance, meta) {
+          if (instance.scheduling_mode == "standard") {
+            return `${instance.frequency} ${instance.frequency_unit}`;
+          } else {
+            return instance.crontab_expression;
+          }
+        },
+        width: "10%",
       },
-      { data: "next_run_time", title: "Next run time", search: "text" },
-      { data: "time_before_next_run", title: "Time left", search: "text" },
+      { data: "next_run_time", title: "Next run time", search: "text", width: "10%" },
+      { data: "time_before_next_run", title: "Time left", search: "text", width: "10%" },
       { data: "buttons" },
     ];
   }
 
   static get controls() {
     return [
-      `<button
-        class="btn btn-sm btn-info btn-file"
+      super.createNewButton("task"),
+      super.searchTableButton("task"),
+      super.refreshTableButton("task"),
+      ` <button
+        class="btn btn-sm btn-info"
         onclick="eNMS.automation.displayCalendar('task')"
         data-tooltip="Calendar"
         type="button"

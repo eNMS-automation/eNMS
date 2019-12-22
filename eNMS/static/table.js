@@ -201,6 +201,15 @@ models.device = class Device extends Base {
       super.createNewButton("device"),
       super.searchTableButton("device"),
       super.refreshTableButton("device"),
+      `
+      <button type="button" class="btn btn-sm btn-primary"
+      onclick="eNMS.administration.showImportTopologyPanel()" data-tooltip="Export"
+        ><span class="glyphicon glyphicon-download"></span
+      ></button>
+      <button type="button" class="btn btn-sm btn-primary"
+      onclick="eNMS.base.showPanel('excel_export')" data-tooltip="Export"
+        ><span class="glyphicon glyphicon-upload"></span
+      ></button>`,
     ];
   }
 

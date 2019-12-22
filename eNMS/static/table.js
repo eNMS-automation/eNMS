@@ -55,9 +55,10 @@ export function initTable(type, instance, runtime, id) {
                 <option value="bool-false">False</option>
               </select>`;
           } else if (data.data == "buttons") {
-            console.log(models[type].controls.join(""))
             element = models[type].controls.join("");
           }
+          $("#controls-right").html(models[type].controlsRight)
+          $("#controls-left").html(models[type].controlsRight)
           $(element)
             .appendTo($(this.header()))
             .on("keyup change", function() {
@@ -470,6 +471,24 @@ models.service = class Service extends Base {
     ];
   }
 
+  static get controlsRight() {
+    return `
+      <button
+        class="btn btn-primary"
+        onclick="eNMS.openServicePanel()"
+        data-tooltip="New"
+        type="button"
+      >
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+      <button
+        style="background:transparent; border:none; color:transparent; width: 200px;"
+        type="button"
+      >
+        <select id="service-type" class="form-control"></select>
+      </button>`;
+  }
+
   get status() {
     return "Idle";
   }
@@ -686,8 +705,8 @@ models.task = class Task extends Base {
         },
         width: "10%",
       },
-      { data: "next_run_time", title: "Next run time", search: "text", width: "10%" },
-      { data: "time_before_next_run", title: "Time left", search: "text", width: "10%" },
+      { data: "next_run_time", title: "Next run time", search: "text", width: "12%" },
+      { data: "time_before_next_run", title: "Time left", search: "text", width: "12%" },
       { data: "buttons" },
     ];
   }

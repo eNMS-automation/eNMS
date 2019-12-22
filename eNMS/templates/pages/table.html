@@ -9,18 +9,8 @@ stylesheets %} {% block content %} {% if type == "pool" %} {% endif %}
         class="form-horizontal form-label-left"
         method="post"
       >
-        <center>
-          <div id="controls">
-            {% if type == "service" %}
-            <button
-              style="background:transparent; border:none; color:transparent; width: 200px;"
-              type="button"
-            >
-              <select id="service-type" class="form-control"></select>
-            </button>
-            {% endif %}
-          </div>
-        </center>
+        <div id="controls-right" class="pull-right add-id"></div>
+        <div id="controls-left" class="pull-left add-id"></div>
         <table
           id="table"
           class="table table-striped table-bordered table-hover add-id"

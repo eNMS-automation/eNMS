@@ -725,7 +725,7 @@ models.task = class Task extends Base {
           <button type="button" class="btn btn-sm btn-success ${state[0]}" ${
         state[0]
       }
-          onclick="resumeTask('${this.id}')" data-tooltip="Play"
+          onclick="eNMS.automation.resumeTask('${this.id}')" data-tooltip="Play"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
@@ -733,7 +733,7 @@ models.task = class Task extends Base {
           <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${
         state[1]
       }
-          onclick="pauseTask('${this.id}')" data-tooltip="Pause"
+          onclick="eNMS.automation.pauseTask('${this.id}')" data-tooltip="Pause"
             ><span class="glyphicon glyphicon-pause"></span
           ></button>
         </li>

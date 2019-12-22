@@ -40,6 +40,7 @@ class Task(AbstractBase):
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", back_populates="tasks")
     service_name = association_proxy("service", "name")
+    model_properties = ["next_run_time", "time_before_next_run", "status"]
 
     def __init__(self, **kwargs):
         super().update(**kwargs)

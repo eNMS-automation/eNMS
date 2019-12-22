@@ -27,6 +27,7 @@ import {
   getServiceState,
 } from "./workflow.js";
 
+let automation = (window.eNMS.automation = {});
 export let arrowHistory = [""];
 export let arrowPointer = -1;
 
@@ -358,27 +359,23 @@ function exportService(id) {
   });
 }
 
-// eslint-disable-next-line
-function pauseTask(id) {
-  // eslint-disable-line no-unused-vars
+automation.pauseTask = function(id) {
   call(`/task_action/pause/${id}`, function(result) {
     $(`#pause-resume-${id}`)
-      .attr("onclick", `resumeTask('${id}')`)
+      .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
       .text("Resume");
     alertify.notify("Task paused.", "success", 5);
   });
-}
+};
 
-// eslint-disable-next-line
-function resumeTask(id) {
-  // eslint-disable-line no-unused-vars
+automation.resumeTask = function(id) {
   call(`/task_action/resume/${id}`, function() {
     $(`#pause-resume-${id}`)
-      .attr("onclick", `pauseTask('${id}')`)
+      .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
       .text("Pause");
     alertify.notify("Task resumed.", "success", 5);
   });
-}
+};
 
 export function switchToWorkflow(path, arrow) {
   if (typeof path === "undefined") return;

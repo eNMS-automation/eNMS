@@ -221,7 +221,6 @@ export function serializeForm(form) {
   return result;
 }
 
-// eslint-disable-next-line
 export const deleteInstance = (base.deleteInstance = function(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
     $(`#instance_deletion-${id}`).remove();

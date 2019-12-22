@@ -33,7 +33,7 @@ export let arrowPointer = -1;
 
 automation.openServicePanel = function() {
   showTypePanel($("#service-type").val());
-}
+};
 
 automation.compare = function(type) {
   const v1 = $("input[name=v1]:checked").val();
@@ -421,11 +421,10 @@ export const switchToWorkflow = (automation.switchToWorkflow = function(
   }
 });
 
-// eslint-disable-next-line
-function field(name, type, id) {
+automation.field = function(name, type, id) {
   const fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
   return $(`#${fieldId}`);
-}
+};
 
 automation.displayCalendar = function(calendarType) {
   showPanel("calendar", calendarType, () => {

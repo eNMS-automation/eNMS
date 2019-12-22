@@ -723,7 +723,7 @@ models.task = class Task extends Base {
         search: "text",
         width: "12%",
       },
-      { data: "buttons" },
+      { data: "buttons", width: "240px" },
     ];
   }
 
@@ -739,7 +739,15 @@ models.task = class Task extends Base {
         type="button"
       >
         <span class="glyphicon glyphicon-calendar"></span>
-      </button>`,
+      </button>
+      <button type="button" class="btn btn-sm btn-success"
+      onclick="eNMS.automation.schedulerAction('stop')" data-tooltip="Play"
+        ><span class="glyphicon glyphicon-play"></span
+      ></button>
+      <button type="button" class="btn btn-sm btn-danger"
+      onclick="eNMS.automation.schedulerAction('start')" data-tooltip="Pause"
+        ><span class="glyphicon glyphicon-pause"></span
+      ></button>`,
     ];
   }
 
@@ -748,7 +756,7 @@ models.task = class Task extends Base {
       ? ["disabled", "active"]
       : ["active", "disabled"];
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px; width: 200px">
+      `<ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showTypePanel('task', '${

@@ -467,6 +467,12 @@ automation.displayCalendar = function(calendarType) {
   });
 };
 
+automation.schedulerAction = function(action) {
+  call(`/scheduler_action/${action}`, function() {
+    alertify.notify(`Scheduler ${action}d.`, "success", 5);
+  });
+}
+
 Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
   Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),

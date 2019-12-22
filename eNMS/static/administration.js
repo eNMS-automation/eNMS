@@ -171,13 +171,6 @@ administration.getGitContent = function() {
 };
 
 // eslint-disable-next-line
-function scheduler(action) {
-  call(`/scheduler_action/${action}`, function() {
-    alertify.notify(`Scheduler ${action}d.`, "success", 5);
-  });
-}
-
-// eslint-disable-next-line
 administration.scanCluster = function() {
   alertify.notify("Scan started.", "success", 5);
   call("/scan_cluster", function(cluster) {

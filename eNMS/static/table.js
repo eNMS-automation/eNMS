@@ -1,3 +1,8 @@
+/*
+global
+alertify: false
+*/
+
 import {
   adjustHeight,
   serializeForm,
@@ -42,7 +47,8 @@ export function initTable(type, instance, runtime, id) {
                 type="text"
                 placeholder="&#xF002;"
                 class="form-control"
-                style="font-family:Arial, FontAwesome; width: 100%; height: 30px; margin-top: 5px"
+                style="font-family:Arial, FontAwesome; width: 100%;
+                height: 30px; margin-top: 5px"
               >`;
           } else if (data.search == "bool") {
             element = `
@@ -177,6 +183,18 @@ class Base {
         ></button>
       </li>`;
   }
+
+  static get lastModifiedColumn() {
+    return {
+      data: "last_modified",
+      title: "Last modified",
+      search: "text",
+      render: function(data, type, instance, meta) {
+        return instance.last_modified.slice(0, -7);
+      },
+      width: "150px",
+    };
+  }
 }
 
 models.device = class Device extends Base {
@@ -203,9 +221,9 @@ models.device = class Device extends Base {
       super.refreshTableButton("device"),
       `
       <button type="button" class="btn btn-sm btn-primary"
-      onclick="eNMS.administration.showImportTopologyPanel()" data-tooltip="Export"
-        ><span class="glyphicon glyphicon-download"></span
-      ></button>
+      onclick="eNMS.administration.showImportTopologyPanel()"
+      data-tooltip="Export"><span class="glyphicon glyphicon-download">
+      </span></button>
       <button type="button" class="btn btn-sm btn-primary"
       onclick="eNMS.base.showPanel('excel_export')" data-tooltip="Export"
         ><span class="glyphicon glyphicon-upload"></span
@@ -314,17 +332,17 @@ models.pool = class Pool extends Base {
   static get columns() {
     return [
       { data: "name", title: "Name", search: "text" },
-      { data: "last_modified", title: "Last modified", search: "text" },
+      super.lastModifiedColumn,
       { data: "description", title: "Description", search: "text" },
       { data: "never_update", title: "Never update", search: "bool" },
       { data: "longitude", title: "Longitude", search: "text" },
       { data: "latitude", title: "Latitude", search: "text" },
-      { data: "object_number", title: "Object Count" },
+      { data: "objectNumber", title: "Object Count", width: "150px" },
       { data: "buttons" },
     ];
   }
 
-  get object_number() {
+  get objectNumber() {
     return `${this.device_number} devices - ${this.link_number} links`;
   }
 
@@ -410,15 +428,7 @@ models.service = class Service extends Base {
           }')">${instance.scoped_name}</a></b>`;
         },
       },
-      {
-        data: "last_modified",
-        title: "Last modified",
-        search: "text",
-        render: function(data, type, instance, meta) {
-          return instance.last_modified.slice(0, -7);
-        },
-        width: "150px",
-      },
+      super.lastModifiedColumn,
       { data: "type", title: "Type", search: "text" },
       { data: "vendor", title: "Vendor", search: "text" },
       { data: "operating_system", title: "Operating System", search: "text" },

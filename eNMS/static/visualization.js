@@ -51,20 +51,17 @@ for (const [key, value] of Object.entries(iconSizes)) {
 
 const routerIcon = window["icon_router"];
 
-// eslint-disable-next-line
 function switchLayer(layerType) {
   map.removeLayer(layer);
   layer = L.tileLayer(layers[layerType]);
   map.addLayer(layer);
 }
 
-// eslint-disable-next-line
 function changeMarker(type) {
   markerType = type;
   updateView();
 }
 
-// eslint-disable-next-line
 function createNode(node, nodeType) {
   if (!node.latitude && !node.longitude) return;
   const marker =
@@ -102,7 +99,6 @@ function createNode(node, nodeType) {
   }
 }
 
-// eslint-disable-next-line
 function createLink(link) {
   if (clustered) return;
   let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
@@ -174,7 +170,6 @@ $("body").contextMenu({
   },
 });
 
-// eslint-disable-next-line
 function updateView(withCluster) {
   deleteAll();
   clustered = withCluster;
@@ -201,8 +196,7 @@ function updateView(withCluster) {
   }
 }
 
-// eslint-disable-next-line
-function filter(type) {
+visualization.filter = function(type) {
   $.ajax({
     type: "POST",
     url: `/view_filtering/${type}`,
@@ -219,7 +213,7 @@ function filter(type) {
       alertify.notify("Filter applied.", "success", 5);
     },
   });
-}
+};
 
 let selected; // eslint-disable-line no-unused-vars
 let logicalDevices = [];

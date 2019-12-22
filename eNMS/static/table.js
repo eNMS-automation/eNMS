@@ -368,8 +368,8 @@ models.pool = class Pool extends Base {
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.visualization.showPoolView('${this.id}')"
-          data-tooltip="Internal View"><span class="glyphicon glyphicon-eye-open">
-          </span></button>
+          data-tooltip="Internal View">
+          <span class="glyphicon glyphicon-eye-open"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -472,7 +472,8 @@ models.service = class Service extends Base {
     >
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
-    <input type="hidden" id="workflow-filtering" name="workflow-filtering"></input>
+    <input type="hidden" id="workflow-filtering" name="workflow-filtering">
+    </input>
     `,
     ];
   }
@@ -500,7 +501,8 @@ models.service = class Service extends Base {
         <span class="glyphicon glyphicon-plus"></span>
       </button>
       <button
-        style="background:transparent; border:none; color:transparent; width: 200px;"
+        style="background:transparent; border:none; 
+        color:transparent; width: 200px;"
         type="button"
       >
         <select id="service-type" class="form-control"></select>
@@ -515,8 +517,8 @@ models.service = class Service extends Base {
           onclick="eNMS.automation.showRuntimePanel('results', ${
             this.instance
           })"
-          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt"></span
-          ></button>
+          data-tooltip="Results"><span class="glyphicon glyphicon-list-alt">
+          </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
@@ -980,9 +982,9 @@ models.event = class Event extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 150px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('event', '{self.id}')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
+          onclick="eNMS.base.showTypePanel('event', '{self.id}')"
+          data-tooltip="Edit"><span class="glyphicon glyphicon-edit">
+          </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"

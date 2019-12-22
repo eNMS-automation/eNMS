@@ -3,7 +3,6 @@ global
 action: false
 alertify: false
 currentPath: true
-page: false
 serviceTypes: false
 Set: false
 vis: false

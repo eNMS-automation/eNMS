@@ -96,7 +96,7 @@ function buildLinks(result, id) {
     </div>`;
 }
 
-export function copyClipboard(elementId, result) {
+automation.copyClipboard = function(elementId, result) {
   const target = document.getElementById(elementId);
   if (!$(`#tooltip-${elementId}`).length) {
     jsPanel.tooltip.create({
@@ -117,10 +117,9 @@ export function copyClipboard(elementId, result) {
     });
   }
   target.click();
-}
+};
 
-// eslint-disable-next-line
-export function showResult(id) {
+automation.showResult = function(id) {
   createPanel("result", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
       const jsonResult = result;
@@ -149,7 +148,7 @@ export function showResult(id) {
       });
     });
   });
-}
+};
 
 // eslint-disable-next-line
 function clearResults(id) {
@@ -159,8 +158,12 @@ function clearResults(id) {
   });
 }
 
-// eslint-disable-next-line
-export function showRuntimePanel(type, service, runtime, displayTable) {
+export const showRuntimePanel = (automation.showRuntimePanel = function(
+  type,
+  service,
+  runtime,
+  displayTable
+) {
   const displayFunction =
     type == "logs"
       ? displayLogs
@@ -199,7 +202,7 @@ export function showRuntimePanel(type, service, runtime, displayTable) {
       displayFunction(service, runtime);
     });
   });
-}
+});
 
 function displayLogs(service, runtime, change) {
   const content = document.getElementById(`content-logs-${service.id}`);
@@ -328,11 +331,11 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   });
 }
 
-export function normalRun(id) {
+export const normalRun = (automation.normalRun = function(id) {
   call(`/run_service/${id}`, function(result) {
     runLogic(result);
   });
-}
+});
 
 export function parameterizedRun(type, id) {
   fCall("/run_service", `edit-${type}-form-${id}`, function(result) {
@@ -377,7 +380,10 @@ automation.resumeTask = function(id) {
   });
 };
 
-export function switchToWorkflow(path, arrow) {
+export const switchToWorkflow = (automation.switchToWorkflow = function(
+  path,
+  arrow
+) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -415,7 +421,7 @@ export function switchToWorkflow(path, arrow) {
     $("#workflow-filtering").val(path);
     if (tables["service"]) tables["service"].ajax.reload(null, false);
   }
-}
+});
 
 // eslint-disable-next-line
 function field(name, type, id) {
@@ -423,7 +429,7 @@ function field(name, type, id) {
   return $(`#${fieldId}`);
 }
 
-export function displayCalendar(calendarType) {
+automation.displayCalendar = function(calendarType) {
   showPanel("calendar", calendarType, () => {
     call(`/calendar_init/${calendarType}`, function(tasks) {
       let events = [];
@@ -459,7 +465,7 @@ export function displayCalendar(calendarType) {
       });
     });
   });
-}
+};
 
 Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
@@ -482,12 +488,3 @@ Object.assign(action, {
   }
   if (page == "table/service") switchToWorkflow("");
 })();
-
-window.eNMS.automation = {
-  copyClipboard: copyClipboard,
-  displayCalendar: displayCalendar,
-  normalRun: normalRun,
-  showResult: showResult,
-  showRuntimePanel: showRuntimePanel,
-  switchToWorkflow: switchToWorkflow,
-};

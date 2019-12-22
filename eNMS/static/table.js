@@ -4,6 +4,8 @@ import {
   userIsActive,
   createTooltips,
 } from "./base.js";
+import { loadServiceTypes } from "./automation.js";
+
 
 let table = (window.eNMS.table = {});
 export let tables = {};
@@ -548,11 +550,7 @@ models.service = class Service extends Base {
   }
 
   static postProcessing() {
-    $("#service-type").selectpicker({ liveSearch: true });
-    for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
-      $("#service-type").append(new Option(serviceName, serviceType));
-    }
-    $("#service-type").selectpicker("refresh");
+    loadServiceTypes();
   }
 };
 

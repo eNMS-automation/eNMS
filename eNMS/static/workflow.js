@@ -696,14 +696,6 @@ function editLabel(label) {
   });
 }
 
-$("#network").contextMenu({
-  menuSelector: "#contextMenu",
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    action[row](selectedObject);
-  },
-});
-
 function runWorkflow(withUpdates) {
   resetDisplay();
   if (withUpdates) {
@@ -865,7 +857,7 @@ export function getWorkflowState(periodic, notification) {
   if (notification) alertify.notify("Workflow refreshed.", "success", 5);
 }
 
-function initWorkflowBuilder() {
+export function initWorkflowBuilder() {
   $("#left-arrow,#right-arrow").addClass("disabled");
   $("#edge-type").on("change", function() {
     switchMode(this.value);
@@ -900,10 +892,6 @@ function initWorkflowBuilder() {
     getWorkflowState(true);
   });
 }
-
-(function() {
-  if (page == "workflow_builder") initWorkflowBuilder();
-})();
 
 window.eNMS.workflow = {
   getWorkflowState: getWorkflowState,

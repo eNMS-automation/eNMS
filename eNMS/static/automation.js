@@ -478,7 +478,7 @@ Object.assign(action, {
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),
 });
 
-(function() {
+export function loadServiceTypes() {
   if (page == "table/service" || page == "workflow_builder") {
     $("#service-type").selectpicker({ liveSearch: true });
     for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
@@ -486,5 +486,4 @@ Object.assign(action, {
     }
     $("#service-type").selectpicker("refresh");
   }
-  if (page == "table/service") switchToWorkflow("");
-})();
+}

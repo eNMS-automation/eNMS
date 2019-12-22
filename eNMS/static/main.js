@@ -13,6 +13,7 @@ import {
   detectUserInactivity,
 } from "./base.js";
 import { initTable } from "./table.js";
+import {initWorkflowBuilder} from "./workflow.js";
 
 let main = (window.eNMS.main = {});
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
@@ -159,6 +160,16 @@ $(document).ready(function() {
   $(window).resize(adjustHeight);
   initSidebar();
   if (page.includes("table")) initTable(page.split("/")[1]);
+  if (page == "workflow_builder") {
+    $("#network").contextMenu({
+      menuSelector: "#contextMenu",
+      menuSelected: function(invokedOn, selectedMenu) {
+        const row = selectedMenu.text();
+        action[row](selectedObject);
+      },
+    });
+    initWorkflowBuilder();
+  }
   doc(page);
   detectUserInactivity();
   createTooltips();

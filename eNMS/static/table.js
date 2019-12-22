@@ -6,7 +6,6 @@ import {
 } from "./base.js";
 import { loadServiceTypes } from "./automation.js";
 
-
 let table = (window.eNMS.table = {});
 export let tables = {};
 export const models = {};
@@ -401,20 +400,29 @@ models.service = class Service extends Base {
       {
         data: "name",
         title: "Name",
-        width: "20%",
+        width: "25%",
         search: "text",
+        className: "dt-body-left",
         render: function(data, type, instance, meta) {
           return `<b><a href="#" onclick="eNMS.automation.switchToWorkflow('${
             instance.id
           }')">${instance.scoped_name}</a></b>`;
         },
       },
-      { data: "last_modified", title: "Last modified", search: "text" },
+      {
+        data: "last_modified",
+        title: "Last modified",
+        search: "text",
+        render: function(data, type, instance, meta) {
+          return instance.last_modified.slice(0, -7);
+        },
+        width: "150px",
+      },
       { data: "type", title: "Type", search: "text" },
       { data: "vendor", title: "Vendor", search: "text" },
       { data: "operating_system", title: "Operating System", search: "text" },
       { data: "creator", title: "Creator", search: "text" },
-      { data: "status", title: "Status", search: "text" },
+      { data: "status", title: "Status", search: "text", width: "60px" },
       { data: "buttons" },
     ];
   }
@@ -463,7 +471,8 @@ models.service = class Service extends Base {
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
     <input type="hidden" id="workflow-filtering" name="workflow-filtering"></input>
-    `];
+    `,
+    ];
   }
 
   static get controlsLeft() {
@@ -561,9 +570,8 @@ models.service = class Service extends Base {
 };
 
 models.run = class Run extends Base {
-
   constructor(properties) {
-    super(properties)
+    super(properties);
     this.service = JSON.stringify({
       id: this.service_properties.id,
       name: this.service_properties.name,
@@ -668,7 +676,7 @@ models.result = class Result extends Base {
     return [
       `<button
         class="btn btn-info btn-file"
-        onclick="eNMS.compare('result')"
+        onclick="eNMS.automation.compare('result')"
         data-tooltip="Compare"
         type="button"
       >

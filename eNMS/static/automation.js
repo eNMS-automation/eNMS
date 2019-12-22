@@ -36,8 +36,7 @@ function openServicePanel() {
   showTypePanel($("#service-type").val());
 }
 
-// eslint-disable-next-line
-function compare(type) {
+automation.compare = function(type) {
   const v1 = $("input[name=v1]:checked").val();
   const v2 = $("input[name=v2]:checked").val();
   if (v1 && v2) {
@@ -60,7 +59,7 @@ function compare(type) {
   } else {
     alertify.notify("Select two versions to compare first.", "error", 5);
   }
-}
+};
 
 function buildLinks(result, id) {
   const base = `get_result("${result.service_name}"`;
@@ -471,7 +470,7 @@ automation.schedulerAction = function(action) {
   call(`/scheduler_action/${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);
   });
-}
+};
 
 Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),

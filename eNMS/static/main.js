@@ -13,7 +13,7 @@ import {
   detectUserInactivity,
 } from "./base.js";
 import { initTable } from "./table.js";
-import {initWorkflowBuilder} from "./workflow.js";
+import { initWorkflowBuilder } from "./workflow.js";
 
 let main = (window.eNMS.main = {});
 const currentUrl = window.location.href.split("#")[0].split("?")[0];

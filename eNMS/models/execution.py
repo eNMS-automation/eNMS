@@ -104,6 +104,7 @@ class Run(AbstractBase):
     task = relationship("Task", foreign_keys="Run.task_id")
     state = Column(MutableDict)
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
+    model_properties = ["progress"]
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or app.get_time()

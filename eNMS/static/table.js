@@ -563,23 +563,20 @@ models.service = class Service extends Base {
 models.run = class Run extends Base {
   static get columns() {
     return [
-      { data: "runtime", title: "Runtime", search: "text" },
-      { data: "duration", title: "Duration", search: "text" },
-      { data: "workflow_name", title: "Workflow", search: "text" },
+      { data: "runtime", title: "Runtime", search: "text", width: "15%" },
+      { data: "duration", title: "Duration", search: "text", width: "5%" },
       { data: "service_name", title: "Service", search: "text" },
-      { data: "status", title: "Status", search: "text" },
-      { data: "progress", title: "Progress", search: "text" },
-      { data: "buttons" },
+      { data: "status", title: "Status", search: "text", width: "7%" },
+      { data: "progress", title: "Progress", search: "text", width: "12%" },
+      { data: "buttons", width: "130px" },
     ];
-  }
-
-  get progress() {
-    return `progress`;
   }
 
   static get controls() {
     return [
-      `<button
+      super.searchTableButton("run"),
+      super.refreshTableButton("run"),
+      ` <button
         class="btn btn-sm btn-info btn-file"
         onclick="eNMS.automation.displayCalendar('run')"
         data-tooltip="Calendar"

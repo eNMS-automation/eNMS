@@ -504,7 +504,7 @@ class BaseController:
                     )
                 )
             else:
-                if kwargs["form"].get("parent-filtering") == "true":
+                if kwargs["form"].get("parent-filtering", "true") == "true":
                     constraints.append(~models["service"].workflows.any())
         if table == "run":
             constraints.append(models["run"].children.any())

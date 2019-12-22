@@ -104,7 +104,7 @@ class Run(AbstractBase):
     task = relationship("Task", foreign_keys="Run.task_id")
     state = Column(MutableDict)
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
-    model_properties = ["progress"]
+    model_properties = ["progress", "service_properties"]
 
     def __init__(self, **kwargs):
         self.runtime = kwargs.get("runtime") or app.get_time()
@@ -135,6 +135,10 @@ class Run(AbstractBase):
     def result(self, device=None):
         result = [r for r in self.results if r.device_name == device]
         return result.pop() if result else None
+
+    @property
+    def service_properties(self):
+        return {k: getattr(self.service, k) for k in ("id", "type", "name")}
 
     @property
     def run_state(self):

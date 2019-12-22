@@ -70,8 +70,7 @@ export function initTable(type, instance, runtime, id) {
         });
       $("#controls-right").html(models[type].controlsRight);
       $("#controls-left").html(models[type].controlsLeft);
-      console.log(models[type].controlsLeft)
-      models[type].postProcessing();
+      if (models[type].postProcessing) models[type].postProcessing();
       this.api().columns.adjust();
       adjustHeight();
     },
@@ -97,11 +96,6 @@ export function initTable(type, instance, runtime, id) {
   });
   if (["changelog", "run", "result"].includes(type)) {
     tables[type].order([0, "desc"]).draw();
-  }
-  if (type == "service") {
-    $("#parent-filtering").on("change", function() {
-      tables["service"].ajax.reload(null, false);
-    });
   }
   if (["run", "service", "task", "workflow"].includes(type)) {
     table.refreshTablePeriodically(type, 3000);
@@ -551,6 +545,9 @@ models.service = class Service extends Base {
 
   static postProcessing() {
     loadServiceTypes();
+    $("#parent-filtering").on("change", function() {
+      tables["service"].ajax.reload(null, false);
+    });
   }
 };
 

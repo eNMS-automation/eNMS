@@ -15,12 +15,12 @@ def configure_form(cls):
 
 
 @configure_form
+@configure_relationships
 class EventForm(BaseForm):
     template = "event"
     form_type = HiddenField(default="event")
     id = HiddenField()
     name = StringField("Name", [InputRequired()])
-    services = MultipleInstanceField("Services")
 
 
 @configure_relationships

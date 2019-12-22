@@ -430,16 +430,7 @@ models.service = class Service extends Base {
 
   static get controls() {
     return [
-      `
-      <button
-        class="btn btn-primary"
-        onclick="eNMS.openServicePanel()"
-        data-tooltip="New"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
-      <button
+      `<button
         class="btn btn-info btn-file"
         onclick="eNMS.base.showPanel('service_filtering')"
         data-tooltip="Advanced Search"
@@ -492,7 +483,7 @@ models.service = class Service extends Base {
     return `
       <button
         class="btn btn-primary"
-        onclick="eNMS.openServicePanel()"
+        onclick="eNMS.automation.openServicePanel()"
         data-tooltip="New"
         type="button"
       >

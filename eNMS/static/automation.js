@@ -31,8 +31,7 @@ let automation = (window.eNMS.automation = {});
 export let arrowHistory = [""];
 export let arrowPointer = -1;
 
-// eslint-disable-next-line
-function openServicePanel() {
+automation.openServicePanel = function() {
   showTypePanel($("#service-type").val());
 }
 

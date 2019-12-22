@@ -1,6 +1,6 @@
 /*
 global
-call: false
+eNMS: false
 */
 
 /**
@@ -9,7 +9,7 @@ call: false
  */
 // eslint-disable-next-line
 function job(id) {
-  call(`/scan_playbook_folder`, function(playbooks) {
+  eNMS.base.call(`/scan_playbook_folder`, function(playbooks) {
     const fieldId = id ? `playbook_path-${id}` : "playbook_path";
     const field = $(`#ansible_playbook_service-${fieldId}`);
     playbooks.forEach((playbook) => {
@@ -19,7 +19,7 @@ function job(id) {
     });
     field.selectpicker("refresh");
     if (id) {
-      call(`/get/ansible_playbook_service/${id}`, function(instance) {
+      eNMS.base.call(`/get/ansible_playbook_service/${id}`, function(instance) {
         field.val(instance.playbook_path);
         field.selectpicker("refresh");
       });

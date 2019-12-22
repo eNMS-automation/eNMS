@@ -186,7 +186,7 @@ function processResults(callback, results) {
   }
 }
 
-export function call(url, callback) {
+export const call = (base.call = function(url, callback) {
   $.ajax({
     type: "POST",
     url: url,
@@ -194,7 +194,7 @@ export function call(url, callback) {
       processResults(callback, results);
     },
   });
-}
+});
 
 export function fCall(url, form, callback) {
   $.ajax({
@@ -475,6 +475,7 @@ export function showTypePanel(type, id, mode) {
       }
       if (type.includes("service")) {
         loadScript(`../static/services/${type}.js`).then(() => {
+          job(id);
           try {
             job(id);
           } catch (e) {

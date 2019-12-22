@@ -395,10 +395,10 @@ models.service = class Service extends Base {
         title: "Name",
         width: "20%",
         search: "text",
-        render: function(data, type, row, meta) {
+        render: function(data, type, instance, meta) {
           return `<b><a href="#" onclick="eNMS.automation.switchToWorkflow('${
-            row.id
-          }')">${row.scoped_name}</a></b>`;
+            instance.id
+          }')">${instance.scoped_name}</a></b>`;
         },
       },
       { data: "last_modified", title: "Last modified", search: "text" },
@@ -597,9 +597,9 @@ models.result = class Result extends Base {
       {
         data: "success",
         title: "Success",
-        render: function(data, type, row, meta) {
-          const btn = row.success ? "success" : "danger";
-          const label = row.success ? "Success" : "Failure";
+        render: function(data, type, instance, meta) {
+          const btn = instance.success ? "success" : "danger";
+          const label = instance.success ? "Success" : "Failure";
           return `
             <button
               type="button"
@@ -614,15 +614,15 @@ models.result = class Result extends Base {
       {
         data: "version_1",
         title: "V1",
-        render: function(data, type, row, meta) {
-          return `<input type="radio" name="v1" value="${this.id}">`;
+        render: function(data, type, instance, meta) {
+          return `<input type="radio" name="v1" value="${instance.id}">`;
         },
       },
       {
         data: "version_2",
         title: "V2",
-        render: function(data, type, row, meta) {
-          return `<input type="radio" name="v2" value="${this.id}">`;
+        render: function(data, type, instance, meta) {
+          return `<input type="radio" name="v2" value="${instance.id}">`;
         },
       },
     ];

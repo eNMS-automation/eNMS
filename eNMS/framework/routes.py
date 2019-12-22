@@ -13,7 +13,6 @@ from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from logging import info
 from os import listdir
-from pathlib import Path
 from werkzeug.wrappers import Response
 
 from eNMS import app
@@ -109,10 +108,9 @@ def dashboard():
 @blueprint.route("/table/<table_type>")
 @monitor_requests
 def table(table_type):
-    return render_template(f"pages/table.html", **{
-        "endpoint": f"table/{table_type}",
-        "type": table_type,
-    })
+    return render_template(
+        f"pages/table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
+    )
 
 
 @blueprint.route("/view/<view_type>")

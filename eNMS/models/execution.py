@@ -52,10 +52,14 @@ class Result(AbstractBase):
     device_name = association_proxy("device", "name")
     service_id = Column(Integer, ForeignKey("service.id"))
     service = relationship("Service", foreign_keys="Result.service_id")
-    service_name = association_proxy("service", "scoped_name", info={"name": "service_name"})
+    service_name = association_proxy(
+        "service", "scoped_name", info={"name": "service_name"}
+    )
     workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Result.workflow_id")
-    workflow_name = association_proxy("workflow", "scoped_name", info={"name": "workflow_name"})
+    workflow_name = association_proxy(
+        "workflow", "scoped_name", info={"name": "workflow_name"}
+    )
 
     def __getitem__(self, key):
         return self.result[key]
@@ -96,10 +100,14 @@ class Run(AbstractBase):
     service = relationship(
         "Service", back_populates="runs", foreign_keys="Run.service_id"
     )
-    service_name = association_proxy("service", "scoped_name", info={"name": "service_name"})
+    service_name = association_proxy(
+        "service", "scoped_name", info={"name": "service_name"}
+    )
     workflow_id = Column(Integer, ForeignKey("workflow.id", ondelete="cascade"))
     workflow = relationship("Workflow", foreign_keys="Run.workflow_id")
-    workflow_name = association_proxy("workflow", "scoped_name", info={"name": "workflow_name"})
+    workflow_name = association_proxy(
+        "workflow", "scoped_name", info={"name": "workflow_name"}
+    )
     task_id = Column(Integer, ForeignKey("task.id"))
     task = relationship("Task", foreign_keys="Run.task_id")
     state = Column(MutableDict)

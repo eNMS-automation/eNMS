@@ -28,7 +28,10 @@ def model_inspection(mapper, cls):
                 property_types[col.key] = column_type
     for descriptor in inspect(cls).all_orm_descriptors:
         if descriptor.extension_type is ASSOCIATION_PROXY:
-            property = descriptor.info.get("name") or f"{descriptor.target_collection}_{descriptor.value_attr}"
+            property = (
+                descriptor.info.get("name")
+                or f"{descriptor.target_collection}_{descriptor.value_attr}"
+            )
             model_properties[name].append(property)
     if hasattr(cls, "parent_type"):
         model_properties[name].extend(model_properties[cls.parent_type])

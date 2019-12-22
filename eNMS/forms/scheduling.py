@@ -3,7 +3,7 @@ from wtforms.validators import InputRequired
 from wtforms.widgets import TextArea
 
 from eNMS.forms import BaseForm, configure_relationships
-from eNMS.forms.fields import DateField, DictField, MultipleInstanceField
+from eNMS.forms.fields import DateField, DictField
 
 
 def configure_form(cls):

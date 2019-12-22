@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from sqlalchemy import Boolean, Float, Integer
+from sqlalchemy import Boolean, Integer
 from sqlalchemy.orm import relationship
 
 from eNMS.database.dialect import Column, MutableList, SmallString

@@ -57,8 +57,6 @@ export function initTable(type, instance, runtime, id) {
           } else if (data.data == "buttons") {
             element = models[type].controls.join("");
           }
-          $("#controls-right").html(models[type].controlsRight)
-          $("#controls-left").html(models[type].controlsRight)
           $(element)
             .appendTo($(this.header()))
             .on("keyup change", function() {
@@ -68,6 +66,10 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
+      $("#controls-right").html(models[type].controlsRight);
+      $("#controls-left").html(models[type].controlsLeft);
+      console.log(models[type].controlsLeft)
+      models[type].postProcessing();
       this.api().columns.adjust();
       adjustHeight();
     },
@@ -404,7 +406,6 @@ models.service = class Service extends Base {
       },
       { data: "last_modified", title: "Last modified", search: "text" },
       { data: "type", title: "Type", search: "text" },
-      { data: "description", title: "Description", search: "text" },
       { data: "vendor", title: "Vendor", search: "text" },
       { data: "operating_system", title: "Operating System", search: "text" },
       { data: "creator", title: "Creator", search: "text" },
@@ -456,7 +457,12 @@ models.service = class Service extends Base {
     >
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
-    <div class="pull-right">
+    <input type="hidden" id="workflow-filtering" name="workflow-filtering"></input>
+    `];
+  }
+
+  static get controlsLeft() {
+    return `
       <select
         id="parent-filtering"
         name="parent-filtering"
@@ -464,11 +470,7 @@ models.service = class Service extends Base {
       >
         <option value="true">Display services hierarchically</option>
         <option value="false">Display all services</option>
-      </select>
-    </div>
-    <input type="hidden" id="workflow-filtering" name="workflow-filtering">
-      `,
-    ];
+      </select>`;
   }
 
   static get controlsRight() {
@@ -487,10 +489,6 @@ models.service = class Service extends Base {
       >
         <select id="service-type" class="form-control"></select>
       </button>`;
-  }
-
-  get status() {
-    return "Idle";
   }
 
   get buttons() {
@@ -547,6 +545,14 @@ models.service = class Service extends Base {
         </li>
       </ul>
     `;
+  }
+
+  static postProcessing() {
+    $("#service-type").selectpicker({ liveSearch: true });
+    for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
+      $("#service-type").append(new Option(serviceName, serviceType));
+    }
+    $("#service-type").selectpicker("refresh");
   }
 };
 
@@ -691,7 +697,12 @@ models.task = class Task extends Base {
       { data: "name", title: "Name", search: "text" },
       { data: "service_name", title: "Service", search: "text" },
       { data: "status", title: "Status", search: "text", width: "5%" },
-      { data: "scheduling_mode", title: "Scheduling", search: "text", width: "5%" },
+      {
+        data: "scheduling_mode",
+        title: "Scheduling",
+        search: "text",
+        width: "5%",
+      },
       {
         data: "periodicity",
         title: "Periodicity",
@@ -705,8 +716,18 @@ models.task = class Task extends Base {
         },
         width: "10%",
       },
-      { data: "next_run_time", title: "Next run time", search: "text", width: "12%" },
-      { data: "time_before_next_run", title: "Time left", search: "text", width: "12%" },
+      {
+        data: "next_run_time",
+        title: "Next run time",
+        search: "text",
+        width: "12%",
+      },
+      {
+        data: "time_before_next_run",
+        title: "Time left",
+        search: "text",
+        width: "12%",
+      },
       { data: "buttons" },
     ];
   }

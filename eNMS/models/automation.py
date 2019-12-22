@@ -74,6 +74,7 @@ class Service(AbstractBase):
     negative_logic = Column(Boolean, default=False)
     delete_spaces_before_matching = Column(Boolean, default=False)
     run_method = Column(SmallString, default="per_device")
+    model_properties = ["status"]
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -98,6 +99,10 @@ class Service(AbstractBase):
         if workflow:
             workflow.services.append(service)
         return service
+
+    @property
+    def status(self):
+        return "Running" if app.service_db[self.id]["runs"] else "Idle"
 
     @property
     def filename(self):

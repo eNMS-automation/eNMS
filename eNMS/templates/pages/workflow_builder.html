@@ -70,7 +70,89 @@ block content %}
               </li>
             </ul>
           </div>
-          <div style="float: right">
+          <div style="float: left;">
+            <table
+              class="table table-bordered dt-responsive nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <tbody>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="action['Create New Service']()"
+                      data-tooltip="Create New Service"
+                    >
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </td>
+                  <td style="min-width: 10vw">
+                    <select
+                      id="service-type"
+                      class="form-control"
+                      data-width="170px"
+                    ></select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; vertical-align: middle;">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="switchMode()"
+                      data-tooltip="Change Mode"
+                    >
+                      <span
+                        id="mode-icon"
+                        class="glyphicon glyphicon-move"
+                      ></span>
+                    </button>
+                  </td>
+                  <td style="min-width: 150px">
+                    <select id="edge-type" class="form-control">
+                      <option value="success">Success</option>
+                      <option value="failure">Failure</option>
+                      <option value="prerequisite">Prerequisite</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="float: left;">
+            <table
+            class="table table-bordered dt-responsive nowrap"
+            cellspacing="0"
+            width="100%"
+          >
+            <tbody>
+              <tr>
+                <td style="text-align: center; vertical-align: middle;">
+                  Workflow
+                </td>
+                <td>
+                  <select
+                    id="current-workflow"
+                    class="form-control"
+                    data-width="400px"
+                    data-dropdown-align-right="true"
+                  ></select>
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: center; vertical-align: middle;">
+                  Runtime
+                </td>
+                <td>
+                  <select id="current-runtime" class="form-control"></select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <div style="float: right; width: 300px">
             <ul
               class="pagination pagination-lg"
               style="margin: 0px; padding-left: 30px; padding-top: 9px"
@@ -174,90 +256,12 @@ block content %}
         <div
           class="btn-group"
           style="width: 10vw; z-index:2; position: absolute;"
-        >
-          <table
-            class="table table-bordered dt-responsive nowrap"
-            cellspacing="0"
-            width="100%"
-          >
-            <tbody>
-              <tr>
-                <td style="text-align: center; vertical-align: middle;">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    onclick="action['Create New Service']()"
-                    data-tooltip="Create New Service"
-                  >
-                    <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                </td>
-                <td style="min-width: 10vw">
-                  <select
-                    id="service-type"
-                    class="form-control"
-                    data-width="170px"
-                  ></select>
-                </td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle;">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    onclick="switchMode()"
-                    data-tooltip="Change Mode"
-                  >
-                    <span
-                      id="mode-icon"
-                      class="glyphicon glyphicon-move"
-                    ></span>
-                  </button>
-                </td>
-                <td style="min-width: 150px">
-                  <select id="edge-type" class="form-control">
-                    <option value="success">Success</option>
-                    <option value="failure">Failure</option>
-                    <option value="prerequisite">Prerequisite</option>
-                  </select>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        ></div>
         <div
           class="btn-group"
           style="z-index:2; position: absolute; right: 0vw;"
         >
-          <table
-            class="table table-bordered dt-responsive nowrap"
-            cellspacing="0"
-            width="100%"
-          >
-            <tbody>
-              <tr>
-                <td style="text-align: center; vertical-align: middle;">
-                  Workflow
-                </td>
-                <td>
-                  <select
-                    id="current-workflow"
-                    class="form-control"
-                    data-width="400px"
-                    data-dropdown-align-right="true"
-                  ></select>
-                </td>
-              </tr>
-              <tr>
-                <td style="text-align: center; vertical-align: middle;">
-                  Runtime
-                </td>
-                <td>
-                  <select id="current-runtime" class="form-control"></select>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
         </div>
         <div
           class="btn-group"

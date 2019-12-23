@@ -5,8 +5,11 @@ block content %}
   <div class="row">
     <div class="x_panel">
       <div class="x_content">
-        <div id="network" style="width:100%; height: 100%; position: absolute;"></div>
-        <div style="overflow:auto;">
+        <div
+          id="network"
+          style="width:100%; height: 100%; position: absolute;"
+        ></div>
+        <div style="height: 100%">
           <div style="float: left; width: 300px;">
             <ul
               class="pagination pagination-lg"
@@ -69,6 +72,24 @@ block content %}
                   ><span class="glyphicon glyphicon-trash"></span
                 ></a>
               </li>
+              <li>
+                <a
+                  onclick="action['Create New Service']()"
+                  data-tooltip="Create New Service"
+                  style="cursor: pointer"
+                >
+                  <span class="glyphicon glyphicon-plus"></span>
+              </a>
+              </li>
+              <li>
+                <a
+                  onclick="switchMode()"
+                  data-tooltip="Change Mode"
+                  style="cursor: pointer"
+                >
+                  <span id="mode-icon" class="glyphicon glyphicon-move"></span>
+              </a>
+              </li>
             </ul>
           </div>
           <div style="float: left;">
@@ -79,16 +100,6 @@ block content %}
             >
               <tbody>
                 <tr>
-                  <td style="text-align: center; vertical-align: middle;">
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      onclick="action['Create New Service']()"
-                      data-tooltip="Create New Service"
-                    >
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </td>
                   <td style="min-width: 10vw">
                     <select
                       id="service-type"
@@ -98,19 +109,7 @@ block content %}
                   </td>
                 </tr>
                 <tr>
-                  <td style="text-align: center; vertical-align: middle;">
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      onclick="switchMode()"
-                      data-tooltip="Change Mode"
-                    >
-                      <span
-                        id="mode-icon"
-                        class="glyphicon glyphicon-move"
-                      ></span>
-                    </button>
-                  </td>
+                  <td style="text-align: center; vertical-align: middle;"></td>
                   <td style="min-width: 150px">
                     <select id="edge-type" class="form-control">
                       <option value="success">Success</option>
@@ -271,7 +270,6 @@ block content %}
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   </div>

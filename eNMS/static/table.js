@@ -189,7 +189,7 @@ class Base {
       data: "last_modified",
       title: "Last modified",
       search: "text",
-      render: function(data, type, instance, meta) {
+      render: function(_, __, instance) {
         return instance.last_modified.slice(0, -7);
       },
       width: "150px",
@@ -351,8 +351,8 @@ models.pool = class Pool extends Base {
       super.createNewButton("pool"),
       super.searchTableButton("pool"),
       super.refreshTableButton("pool"),
-      `<button
-        class="btn btn-primary btn-file"
+      ` <button
+        class="btn btm-sm btn-primary"
         onclick="eNMS.updatePools()"
         data-tooltip="Update all pools"
         type="button"
@@ -422,7 +422,7 @@ models.service = class Service extends Base {
         width: "25%",
         search: "text",
         className: "dt-body-left",
-        render: function(data, type, instance, meta) {
+        render: function(_, __, instance) {
           return `<b><a href="#" onclick="eNMS.automation.switchToWorkflow('${
             instance.id
           }')">${instance.scoped_name}</a></b>`;
@@ -441,7 +441,7 @@ models.service = class Service extends Base {
   static get controls() {
     return [
       `<button
-        class="btn btn-info btn-file"
+        class="btn btn-info"
         onclick="eNMS.base.showPanel('service_filtering')"
         data-tooltip="Advanced Search"
         type="button"
@@ -449,7 +449,7 @@ models.service = class Service extends Base {
         <span class="glyphicon glyphicon-search"></span>
       </button>
       <button
-        class="btn btn-info btn-file"
+        class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
         data-tooltip="Refresh"
         type="button"
@@ -458,7 +458,7 @@ models.service = class Service extends Base {
       </button>
       <a
       id="left-arrow"
-      class="btn btn-info btn-file"
+      class="btn btn-info"
       onclick="action['Backward']()"
       type="button"
     >
@@ -466,7 +466,7 @@ models.service = class Service extends Base {
     </a>
     <a
       id="right-arrow"
-      class="btn btn-info btn-file"
+      class="btn btn-info"
       onclick="action['Forward']()"
       type="button"
     >
@@ -599,7 +599,7 @@ models.run = class Run extends Base {
       super.searchTableButton("run"),
       super.refreshTableButton("run"),
       ` <button
-        class="btn btn-sm btn-info btn-file"
+        class="btn btn-sm btn-info"
         onclick="eNMS.automation.displayCalendar('run')"
         data-tooltip="Calendar"
         type="button"
@@ -645,7 +645,7 @@ models.result = class Result extends Base {
       {
         data: "success",
         title: "Success",
-        render: function(data, type, instance, meta) {
+        render: function(_, __, instance) {
           const btn = instance.success ? "success" : "danger";
           const label = instance.success ? "Success" : "Failure";
           return `
@@ -662,14 +662,14 @@ models.result = class Result extends Base {
       {
         data: "version_1",
         title: "V1",
-        render: function(data, type, instance, meta) {
+        render: function(_, __, instance) {
           return `<input type="radio" name="v1" value="${instance.id}">`;
         },
       },
       {
         data: "version_2",
         title: "V2",
-        render: function(data, type, instance, meta) {
+        render: function(_, __, instance) {
           return `<input type="radio" name="v2" value="${instance.id}">`;
         },
       },
@@ -679,7 +679,7 @@ models.result = class Result extends Base {
   static get controls() {
     return [
       `<button
-        class="btn btn-info btn-file"
+        class="btn btn-info"
         onclick="eNMS.automation.compare('result')"
         data-tooltip="Compare"
         type="button"
@@ -730,7 +730,7 @@ models.task = class Task extends Base {
         data: "periodicity",
         title: "Periodicity",
         search: "text",
-        render: function(data, type, instance, meta) {
+        render: function(_, __, instance) {
           if (instance.scheduling_mode == "standard") {
             return `${instance.frequency} ${instance.frequency_unit}`;
           } else {

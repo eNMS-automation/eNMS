@@ -890,8 +890,9 @@ export function initWorkflowBuilder() {
     });
     $("#edge-type").selectpicker();
     getWorkflowState(true);
+    adjustHeight();
+    $("#network").height($(".x_panel").height() - $("#header").height());
   });
-  adjustHeight();
 }
 
 window.eNMS.workflow = {

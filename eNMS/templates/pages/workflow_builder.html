@@ -79,7 +79,7 @@ block content %}
                   style="cursor: pointer"
                 >
                   <span class="glyphicon glyphicon-plus"></span>
-              </a>
+                </a>
               </li>
               <li>
                 <a
@@ -88,38 +88,29 @@ block content %}
                   style="cursor: pointer"
                 >
                   <span id="mode-icon" class="glyphicon glyphicon-move"></span>
-              </a>
+                </a>
+              </li>
+              <li>
+                <a
+                  onclick="eNMS.workflow.getWorkflowState(false, true)"
+                  data-tooltip="Refresh"
+                  style="cursor: pointer"
+                  ><span class="glyphicon glyphicon-refresh"></span
+                ></a>
               </li>
             </ul>
           </div>
           <div style="float: left;">
-            <table
-              class="table table-bordered dt-responsive nowrap"
-              cellspacing="0"
-              width="100%"
-            >
-              <tbody>
-                <tr>
-                  <td style="min-width: 10vw">
-                    <select
-                      id="service-type"
-                      class="form-control"
-                      data-width="170px"
-                    ></select>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="text-align: center; vertical-align: middle;"></td>
-                  <td style="min-width: 150px">
-                    <select id="edge-type" class="form-control">
-                      <option value="success">Success</option>
-                      <option value="failure">Failure</option>
-                      <option value="prerequisite">Prerequisite</option>
-                    </select>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <select
+              id="service-type"
+              class="form-control"
+              data-width="170px"
+            ></select>
+            <select id="edge-type" class="form-control">
+              <option value="success">Success</option>
+              <option value="failure">Failure</option>
+              <option value="prerequisite">Prerequisite</option>
+            </select>
           </div>
           <div style="float: left;">
             <table
@@ -202,14 +193,6 @@ block content %}
               class="pagination pagination-lg"
               style="margin: 0px; padding-left: 30px; padding-top: 9px"
             >
-              <li>
-                <a
-                  onclick="eNMS.workflow.getWorkflowState(false, true)"
-                  data-tooltip="Refresh"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-refresh"></span
-                ></a>
-              </li>
               <li>
                 <a
                   onclick="action['Zoom In']()"

@@ -9,7 +9,9 @@ initSelect: false
 import { call, createPanel, fCall, openUrl } from "./base.js";
 import { initTable, tables } from "./table.js";
 
-export function sshConnection(id) {
+let inventory = (window.eNMS.inventory = {});
+
+inventory.sshConnection = function(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
@@ -41,7 +43,7 @@ function savePoolObjects(id) {
   });
 }
 
-export function showPoolObjectsPanel(id) {
+inventory.showPoolObjectsPanel = function(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       if (pool.devices.length > 1000 || pool.links.length > 1000) {
@@ -61,8 +63,7 @@ export function showPoolObjectsPanel(id) {
   });
 }
 
-// eslint-disable-next-line
-function updatePools(pool) {
+inventory.updatePools = function(pool) {
   alertify.notify("Update starting...", "success", 5);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call(endpoint, function() {
@@ -71,8 +72,7 @@ function updatePools(pool) {
   });
 }
 
-// eslint-disable-next-line
-export function showDeviceNetworkData(device) {
+export const showDeviceNetworkData = inventory.showDeviceNetworkData = function (device) {
   call(`/get_device_network_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
       alertify.notify("No data stored.", "error", 5);
@@ -110,9 +110,3 @@ function showDeviceResultsPanel(device) {
     initTable("result", device);
   });
 }
-
-window.eNMS.inventory = {
-  showDeviceNetworkData: showDeviceNetworkData,
-  showPoolObjectsPanel: showPoolObjectsPanel,
-  sshConnection: sshConnection,
-};

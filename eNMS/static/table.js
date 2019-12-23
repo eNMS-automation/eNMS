@@ -353,7 +353,7 @@ models.pool = class Pool extends Base {
       super.refreshTableButton("pool"),
       ` <button
         class="btn btm-sm btn-primary"
-        onclick="eNMS.updatePools()"
+        onclick="eNMS.inventory.updatePools()"
         data-tooltip="Update all pools"
         type="button"
       >
@@ -381,9 +381,9 @@ models.pool = class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="updatePools('${this.id}')" data-tooltip="Update"
-            ><span class="glyphicon glyphicon-refresh"></span
-          ></button>
+          onclick="eNMS.inventory.updatePools('${this.id}')"
+          data-tooltip="Update"><span class="glyphicon glyphicon-refresh">
+          </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"

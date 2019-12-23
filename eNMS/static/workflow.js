@@ -25,6 +25,7 @@ import {
   showPanel,
   showTypePanel,
   userIsActive,
+  adjustHeight,
 } from "./base.js";
 
 export let currentRuntime;
@@ -890,6 +891,7 @@ export function initWorkflowBuilder() {
     $("#edge-type").selectpicker();
     getWorkflowState(true);
   });
+  adjustHeight();
 }
 
 window.eNMS.workflow = {

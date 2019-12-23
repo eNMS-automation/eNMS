@@ -32,7 +32,7 @@ inventory.sshConnection = function(id) {
     alertify.notify(warning, "error", 20);
     $(`#connection-${id}`).remove();
   });
-}
+};
 
 // eslint-disable-next-line
 function savePoolObjects(id) {
@@ -61,7 +61,7 @@ inventory.showPoolObjectsPanel = function(id) {
       }
     });
   });
-}
+};
 
 inventory.updatePools = function(pool) {
   alertify.notify("Update starting...", "success", 5);
@@ -70,9 +70,11 @@ inventory.updatePools = function(pool) {
     tables["pool"].ajax.reload(null, false);
     alertify.notify("Update successful.", "success", 5);
   });
-}
+};
 
-export const showDeviceNetworkData = inventory.showDeviceNetworkData = function (device) {
+export const showDeviceNetworkData = (inventory.showDeviceNetworkData = function(
+  device
+) {
   call(`/get_device_network_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
       alertify.notify("No data stored.", "error", 5);
@@ -102,11 +104,10 @@ export const showDeviceNetworkData = inventory.showDeviceNetworkData = function 
       );
     }
   });
-}
+});
 
-// eslint-disable-next-line
-function showDeviceResultsPanel(device) {
+inventory.showDeviceResultsPanel = function(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
     initTable("result", device);
   });
-}
+};

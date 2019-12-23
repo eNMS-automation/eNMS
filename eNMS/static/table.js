@@ -243,7 +243,7 @@ models.device = class Device extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="showDeviceResultsPanel(${this.instance})"
+          onclick="eNMS.inventory.showDeviceResultsPanel(${this.instance})"
           data-tooltip="Results"
             ><span class="glyphicon glyphicon-list-alt"></span
           ></button>
@@ -334,7 +334,12 @@ models.pool = class Pool extends Base {
       { data: "name", title: "Name", search: "text" },
       super.lastModifiedColumn,
       { data: "description", title: "Description", search: "text" },
-      { data: "never_update", title: "Never update", search: "bool", width: "100px" },
+      {
+        data: "never_update",
+        title: "Never update",
+        search: "bool",
+        width: "100px",
+      },
       { data: "longitude", title: "Longitude", search: "text", width: "70px" },
       { data: "latitude", title: "Latitude", search: "text", width: "70px" },
       { data: "objectNumber", title: "Object Count", width: "150px" },
@@ -352,7 +357,7 @@ models.pool = class Pool extends Base {
       super.searchTableButton("pool"),
       super.refreshTableButton("pool"),
       ` <button
-        class="btn btm-sm btn-primary"
+        class="btn btn-sm btn-primary"
         onclick="eNMS.inventory.updatePools()"
         data-tooltip="Update all pools"
         type="button"

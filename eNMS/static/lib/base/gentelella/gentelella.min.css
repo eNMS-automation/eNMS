@@ -3162,45 +3162,11 @@ ul.social li {
     max-width: 310px
 }
 
-.widget_tally_box .btn-group button {
-    text-align: center;
-    color: inherit;
-    font-weight: 500;
-    background-color: #f5f5f5;
-    border: 1px solid #e7e7e7
-}
-
-ul.widget_tally,
-ul.widget_tally li {
-    width: 100%
-}
-
-ul.widget_tally li {
-    padding: 2px 10px 4px;
-    border-bottom: 1px solid #ececec
-}
-
-ul.widget_tally .month {
-    width: 70%;
-    float: left
-}
-
-ul.widget_tally .count {
-    width: 30%;
-    float: left;
-    text-align: right
-}
-
 .pie_bg {
     border-bottom: 1px solid rgba(101, 204, 182, .16);
     border-radius: 4px;
     padding-bottom: 10px;
     box-shadow: 0 4px 6px -6px #222
-}
-
-.widget_tally_box .flex {
-    display: -ms-flexbox;
-    display: flex
 }
 
 ul.widget_profile_box {
@@ -3250,53 +3216,6 @@ ul.widget_profile_box li .profile_img {
     width: 85px;
     height: 85px;
     margin: -28px 0 0
-}
-
-.widget_tally_box p,
-.widget_tally_box span {
-    text-align: center
-}
-
-.widget_tally_box .name {
-    text-align: center;
-    margin: 25px
-}
-
-.widget_tally_box .name_title {
-    text-align: center;
-    margin: 5px
-}
-
-.widget_tally_box ul.legend {
-    margin: 0
-}
-
-.widget_tally_box ul.legend p,
-.widget_tally_box ul.legend span {
-    text-align: left
-}
-
-.widget_tally_box ul.legend li .icon {
-    font-size: 20px;
-    float: left;
-    width: 14px
-}
-
-.widget_tally_box ul.legend li .name {
-    font-size: 14px;
-    margin: 5px 0 0 14px;
-    text-overflow: ellipsis;
-    float: left
-}
-
-.widget_tally_box ul.legend p {
-    display: inline-block;
-    margin: 0
-}
-
-.widget_tally_box ul.verticle_bars li {
-    height: 140px;
-    width: 23%
 }
 
 .widget .verticle_bars li .progress.vertical.progress_wide {

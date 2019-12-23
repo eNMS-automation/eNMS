@@ -524,7 +524,7 @@ function deleteSelection() {
   switchMode(currentMode, true);
 }
 
-const switchMode = workflow.switchMode =function(mode, noNotification) {
+const switchMode = (workflow.switchMode = function(mode, noNotification) {
   const oldMode = currentMode;
   currentMode =
     mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
@@ -545,7 +545,7 @@ const switchMode = workflow.switchMode =function(mode, noNotification) {
     notification = `Mode: Creation of '${currentMode}' Edge.`;
   }
   if (!noNotification) alertify.notify(notification, "success", 5);
-}
+});
 
 $("#current-workflow").on("change", function() {
   if (!workflow || this.value != workflow.id) switchToWorkflow(this.value);
@@ -841,7 +841,10 @@ function resetDisplay() {
   });
 }
 
-const getWorkflowState = workflow.getWorkflowState = function(periodic, notification) {
+const getWorkflowState = (workflow.getWorkflowState = function(
+  periodic,
+  notification
+) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
@@ -857,7 +860,7 @@ const getWorkflowState = workflow.getWorkflowState = function(periodic, notifica
   }
   if (periodic) setTimeout(() => getWorkflowState(true), 4000);
   if (notification) alertify.notify("Workflow refreshed.", "success", 5);
-}
+});
 
 export function initWorkflowBuilder() {
   loadServiceTypes();

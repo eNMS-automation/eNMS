@@ -25,15 +25,6 @@ block content %}
               </li>
               <li>
                 <a
-                  onclick="action['Create New Service']()"
-                  data-tooltip="Create New Service"
-                  style="cursor: pointer"
-                >
-                  <span class="glyphicon glyphicon-plus"></span>
-                </a>
-              </li>
-              <li>
-                <a
                   onclick="action['Add to Workflow']()"
                   data-tooltip="Add to Workflow"
                   style="cursor: pointer"
@@ -91,26 +82,35 @@ block content %}
             </ul>
           </div>
           <div style="float: left">
+
+              <button
+                onclick="action['Create New Service']()"
+                data-tooltip="Create New Service"
+                style="cursor: pointer"
+              >
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+
             <button
-            type="button"
-            class="btn btn-primary"
-            style="width: 75px; height: 70px; margin-top: 20px; margin-right: 20px"
-            onclick="eNMS.workflow.switchMode()"
-            data-tooltip="Change Mode"
-          >
-            <span
-              id="mode-icon"
-              class="glyphicon glyphicon-move fa-3x"
-            ></span>
-          </button>
+              type="button"
+              class="btn btn-primary"
+              style="width: 75px; height: 70px; margin-top: 20px; margin-right: 10px"
+              onclick="eNMS.workflow.switchMode()"
+              data-tooltip="Change Mode"
+            >
+              <span
+                id="mode-icon"
+                class="glyphicon glyphicon-move fa-3x"
+              ></span>
+            </button>
           </div>
-          <div style="float: left;">
+          <div style="float: left; width: 180px; margin-top: 20px">
             <select
               id="service-type"
               class="form-control"
               data-width="170px"
             ></select>
-            <select id="edge-type" class="form-control">
+            <select id="edge-type" class="form-control" data-width="170px">
               <option value="success">Success</option>
               <option value="failure">Failure</option>
               <option value="prerequisite">Prerequisite</option>

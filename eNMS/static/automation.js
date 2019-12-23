@@ -482,11 +482,9 @@ Object.assign(action, {
 });
 
 export function loadServiceTypes() {
-  if (page == "table/service" || page == "workflow_builder") {
-    $("#service-type").selectpicker({ liveSearch: true });
-    for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
-      $("#service-type").append(new Option(serviceName, serviceType));
-    }
-    $("#service-type").selectpicker("refresh");
+  $("#service-type").selectpicker({ liveSearch: true });
+  for (const [serviceType, serviceName] of Object.entries(serviceTypes)) {
+    $("#service-type").append(new Option(serviceName, serviceType));
   }
+  $("#service-type").selectpicker("refresh");
 }

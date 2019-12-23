@@ -12,6 +12,7 @@ workflow: true
 import {
   arrowHistory,
   arrowPointer,
+  loadServiceTypes,
   normalRun,
   runLogic,
   showRuntimePanel,
@@ -858,6 +859,7 @@ export function getWorkflowState(periodic, notification) {
 }
 
 export function initWorkflowBuilder() {
+  loadServiceTypes();
   $("#left-arrow,#right-arrow").addClass("disabled");
   $("#edge-type").on("change", function() {
     switchMode(this.value);

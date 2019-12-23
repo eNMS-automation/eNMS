@@ -29,6 +29,7 @@ import {
   adjustHeight,
 } from "./base.js";
 
+let workflow = (window.eNMS.workflow = {});
 export let currentRuntime;
 
 vis.Network.prototype.zoom = function(scale) {
@@ -523,7 +524,7 @@ function deleteSelection() {
   switchMode(currentMode, true);
 }
 
-function switchMode(mode, noNotification) {
+const switchMode = workflow.switchMode =function(mode, noNotification) {
   const oldMode = currentMode;
   currentMode =
     mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
@@ -840,7 +841,7 @@ function resetDisplay() {
   });
 }
 
-export function getWorkflowState(periodic, notification) {
+const getWorkflowState = workflow.getWorkflowState = function(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
@@ -896,7 +897,3 @@ export function initWorkflowBuilder() {
     $("#network").height($(".x_panel").height());
   });
 }
-
-window.eNMS.workflow = {
-  getWorkflowState: getWorkflowState,
-};

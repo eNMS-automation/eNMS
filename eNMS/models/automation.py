@@ -40,7 +40,7 @@ class Service(AbstractBase):
     workflows = relationship(
         "Workflow", secondary=service_workflow_table, back_populates="services"
     )
-    device_query = Column(SmallString)
+    device_query = Column(LargeString)
     device_query_property = Column(SmallString, default="ip_address")
     devices = relationship(
         "Device", secondary=service_device_table, back_populates="services"
@@ -57,7 +57,7 @@ class Service(AbstractBase):
     mail_recipient = Column(SmallString)
     initial_payload = Column(MutableDict)
     skip = Column(Boolean, default=False)
-    skip_query = Column(SmallString)
+    skip_query = Column(LargeString)
     iteration_values = Column(LargeString)
     iteration_variable_name = Column(SmallString, default="iteration_value")
     iteration_devices = Column(LargeString)

@@ -14,17 +14,15 @@ block content %}
             <fieldset class="section">
               <legend class="section">Edit</legend>
               <div style="float: left; margin: 20px">
-                <button
-                  type="button"
-                  class="btn btn-lg btn-primary"
-                  onclick="eNMS.workflow.switchMode()"
+                <input
+                  type="checkbox"
+                  data-toggle="toggle"
+                  data-on="<i class='glyphicon glyphicon-move fa-3x'></i>"
+                  data-off="<i class='glyphicon glyphicon-random fa-3x'></i>"
+                  data-height="60"
                   data-tooltip="Change Mode"
-                >
-                  <span
-                    id="mode-icon"
-                    class="glyphicon glyphicon-move fa-2x"
-                  ></span>
-                </button>
+                  onclick="eNMS.workflow.switchMode()"
+                />
               </div>
               <div style="float: left; width: 100px">
                 <select

@@ -74,8 +74,7 @@ def factory(cls_name, **kwargs):
 
 
 def handle_exception(exc):
-    match = search("UNIQUE constraint failed: (\w+).(\w+)", exc)
-    if match:
+    if match := search("UNIQUE constraint failed: (\w+).(\w+)", exc):
         return f"There already is a {match.group(1)} with the same {match.group(2)}."
     else:
         return exc

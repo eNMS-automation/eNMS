@@ -4735,42 +4735,6 @@ ul.notifications {
     overflow: auto!important
 }
 
-.flip-container {
-    perspective: 1000px
-}
-
-.flip-container,
-.front,
-.back {
-    width: 100%;
-    height: 100%
-}
-
-.flip-container.hover .flipper {
-    transform: rotateY(180deg)
-}
-
-.flipper {
-    transition: 2s;
-    transform-style: preserve-3d;
-    position: relative
-}
-
-.front,
-.back {
-    position: absolute;
-    top: 0;
-    left: 0
-}
-
-.front {
-    transform: rotateY(0deg)
-}
-
-.back {
-    transform: rotateY(180deg)
-}
-
 .dropdown-submenu>.dropdown-menu {
     left: 100%;
     top: auto;
@@ -4825,7 +4789,7 @@ legend.section {
 
 fieldset.section {
     border: 1px groove #ddd !important;
-    padding: 0 1.4em 1.4em 1.4em !important;
+    padding: 5px !important;
     margin: 0 0 1.5em 0 !important;
     -webkit-box-shadow:  0px 0px 0px 0px #000;
             box-shadow:  0px 0px 0px 0px #000;

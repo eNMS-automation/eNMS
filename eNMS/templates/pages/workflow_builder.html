@@ -12,14 +12,26 @@ block content %}
         <div style="height: 100%">
           <div style="float: left">
             <fieldset class="section">
-              <legend class="section">Editing</legend>
+              <legend class="section">Edit</legend>
               <table
                 width="100%"
                 style="border-spacing: 5px; border-collapse: separate;"
               >
                 <tbody>
                   <tr>
-                    <td>
+                    <td rowspan="2">
+                      <button
+                      type="button"
+                      class="btn btn-lg btn-primary"
+                      onclick="eNMS.workflow.switchMode()"
+                      data-tooltip="Change Mode"
+                    >
+                      <span
+                        id="mode-icon"
+                        class="glyphicon glyphicon-move fa-2x"
+                      ></span>
+                    </button>
+                  </td><td>
                       <select
                         id="service-type"
                         class="form-control"
@@ -67,19 +79,6 @@ block content %}
                     </td>
                   </tr>
                   <tr>
-                    <td style="text-align: center; vertical-align: middle;">
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        onclick="eNMS.workflow.switchMode()"
-                        data-tooltip="Change Mode"
-                      >
-                        <span
-                          id="mode-icon"
-                          class="glyphicon glyphicon-move"
-                        ></span>
-                      </button>
-                    </td>
                     <td>
                       <select
                         id="edge-type"

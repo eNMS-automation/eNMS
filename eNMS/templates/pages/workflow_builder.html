@@ -10,82 +10,6 @@ block content %}
           style="width:100%; height: 100%; position: absolute;"
         ></div>
         <div style="height: 100%">
-          <div style="float: left; width: 240px;">
-            <ul
-              class="pagination pagination-lg"
-              style="margin: 0px; padding-top: 9px;"
-            >
-              <li>
-                <a
-                  onclick="action['Edit Workflow']()"
-                  data-tooltip="Edit Workflow"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-edit cursor"></span
-                ></a>
-              </li>
-              <li>
-                <a
-                  onclick="action['Add to Workflow']()"
-                  data-tooltip="Add to Workflow"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-book"></span
-                ></a>
-              </li>
-              <li>
-                <a
-                  onclick="action['Create Label']()"
-                  data-tooltip="Create Label"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-font"></span
-                ></a>
-              </li>
-              <li>
-                <a
-                  onclick="action['Delete']()"
-                  data-tooltip="Delete"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-trash"></span
-                ></a>
-              </li>
-            </ul>
-            <ul
-              class="pagination pagination-lg"
-              style="margin: 0px; padding-top: 9px;"
-            >
-              <li>
-                <a
-                  onclick="action['Create Workflow']()"
-                  data-tooltip="Create Top Level Workflow"
-                  style="cursor: pointer"
-                  ><span class="fa fa-sitemap"></span
-                ></a>
-              </li>
-              <li>
-                <a
-                  onclick="action['Duplicate Workflow']()"
-                  data-tooltip="Duplicate Workflow"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-duplicate"></span
-                ></a>
-              </li>
-              <li>
-                <a
-                  onclick="action['Skip']()"
-                  data-tooltip="Skip"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-ban-circle"></span
-                ></a>
-              </li>
-              <li>
-                <a
-                  onclick="eNMS.workflow.getWorkflowState(false, true)"
-                  data-tooltip="Refresh"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-refresh"></span
-                ></a>
-              </li>
-            </ul>
-          </div>
           <div style="float: left">
             <fieldset class="section">
               <legend class="section">Editing</legend>
@@ -95,22 +19,51 @@ block content %}
               >
                 <tbody>
                   <tr>
-                    <td style="text-align: center; vertical-align: middle;">
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        onclick="action['Create New Service']()"
-                        data-tooltip="Create New Service"
-                      >
-                        <span class="glyphicon glyphicon-plus"></span>
-                      </button>
-                    </td>
                     <td>
                       <select
                         id="service-type"
                         class="form-control"
                         data-width="170px"
                       ></select>
+                    </td>
+                    <td>
+                      <ul
+                      class="pagination pagination-lg"
+                      style="margin: 0px; padding-top: 9px;"
+                    >
+                      <li>
+                        <a
+                          onclick="action['Create New Service']()"
+                          data-tooltip="Create New Service"
+                          style="cursor: pointer"
+                          ><span class="glyphicon glyphicon-plus"></span
+                        ></a>
+                      </li>
+                      <li>
+                        <a
+                          onclick="action['Edit Workflow']()"
+                          data-tooltip="Edit Workflow"
+                          style="cursor: pointer"
+                          ><span class="glyphicon glyphicon-edit cursor"></span
+                        ></a>
+                      </li>
+                      <li>
+                        <a
+                          onclick="action['Add to Workflow']()"
+                          data-tooltip="Add to Workflow"
+                          style="cursor: pointer"
+                          ><span class="glyphicon glyphicon-book"></span
+                        ></a>
+                      </li>
+                      <li>
+                        <a
+                          onclick="action['Create Label']()"
+                          data-tooltip="Create Label"
+                          style="cursor: pointer"
+                          ><span class="glyphicon glyphicon-font"></span
+                        ></a>
+                      </li>
+                    </ul>
                     </td>
                   </tr>
                   <tr>
@@ -138,6 +91,45 @@ block content %}
                         <option value="prerequisite">Prerequisite</option>
                       </select>
                     </td>
+                   <td>
+                    <ul
+                    class="pagination pagination-lg"
+                    style="margin: 0px"
+                  >
+                    <li>
+                      <a
+                        onclick="action['Create Workflow']()"
+                        data-tooltip="Create Top Level Workflow"
+                        style="cursor: pointer"
+                        ><span class="fa fa-sitemap"></span
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        onclick="action['Duplicate Workflow']()"
+                        data-tooltip="Duplicate Workflow"
+                        style="cursor: pointer"
+                        ><span class="glyphicon glyphicon-duplicate"></span
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        onclick="action['Skip']()"
+                        data-tooltip="Skip"
+                        style="cursor: pointer"
+                        ><span class="glyphicon glyphicon-ban-circle"></span
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        onclick="action['Delete']()"
+                        data-tooltip="Delete"
+                        style="cursor: pointer"
+                        ><span class="glyphicon glyphicon-trash"></span
+                      ></a>
+                    </li>
+                  </ul>
+                   </td>  
                   </tr>
                 </tbody>
               </table>
@@ -166,6 +158,14 @@ block content %}
                         class="pagination pagination-lg"
                         style="margin: 0px; padding-left: 30px; padding-top: 9px"
                       >
+                      <li>
+                        <a
+                          onclick="eNMS.workflow.getWorkflowState(false, true)"
+                          data-tooltip="Refresh"
+                          style="cursor: pointer"
+                          ><span class="glyphicon glyphicon-refresh"></span
+                        ></a>
+                      </li>
                         <li>
                           <a
                             onclick="action['Zoom In']()"

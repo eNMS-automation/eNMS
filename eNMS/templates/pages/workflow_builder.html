@@ -88,59 +88,133 @@ block content %}
           </div>
           <div style="float: left">
             <fieldset class="section">
-              <legend class="section">Creation</legend>
-                <table
-                  width="100%"
-                  style="border-spacing: 5px; border-collapse: separate;"
-                >
-                  <tbody>
-                    <tr>
-                      <td style="text-align: center; vertical-align: middle;">
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          onclick="action['Create New Service']()"
-                          data-tooltip="Create New Service"
-                        >
-                          <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <select
-                          id="service-type"
-                          class="form-control"
-                          data-width="170px"
-                        ></select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="text-align: center; vertical-align: middle;">
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          onclick="eNMS.workflow.switchMode()"
-                          data-tooltip="Change Mode"
-                        >
-                          <span
-                            id="mode-icon"
-                            class="glyphicon glyphicon-move"
-                          ></span>
-                        </button>
-                      </td>
-                      <td>
-                        <select
-                          id="edge-type"
-                          class="form-control"
-                          data-width="170px"
-                        >
-                          <option value="success">Success</option>
-                          <option value="failure">Failure</option>
-                          <option value="prerequisite">Prerequisite</option>
-                        </select>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <legend class="section">Editing</legend>
+              <table
+                width="100%"
+                style="border-spacing: 5px; border-collapse: separate;"
+              >
+                <tbody>
+                  <tr>
+                    <td style="text-align: center; vertical-align: middle;">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        onclick="action['Create New Service']()"
+                        data-tooltip="Create New Service"
+                      >
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                    </td>
+                    <td>
+                      <select
+                        id="service-type"
+                        class="form-control"
+                        data-width="170px"
+                      ></select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; vertical-align: middle;">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        onclick="eNMS.workflow.switchMode()"
+                        data-tooltip="Change Mode"
+                      >
+                        <span
+                          id="mode-icon"
+                          class="glyphicon glyphicon-move"
+                        ></span>
+                      </button>
+                    </td>
+                    <td>
+                      <select
+                        id="edge-type"
+                        class="form-control"
+                        data-width="170px"
+                      >
+                        <option value="success">Success</option>
+                        <option value="failure">Failure</option>
+                        <option value="prerequisite">Prerequisite</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </fieldset>
+          </div>
+          <div style="float: left">
+            <fieldset class="section">
+              <legend class="section">Display</legend>
+              <table
+                width="100%"
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      <select
+                        id="current-workflow"
+                        class="form-control"
+                        data-width="400px"
+                        data-dropdown-align-right="true"
+                      ></select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <ul
+                        class="pagination pagination-lg"
+                        style="margin: 0px; padding-left: 30px; padding-top: 9px"
+                      >
+                        <li>
+                          <a
+                            onclick="action['Zoom In']()"
+                            data-tooltip="Zoom In"
+                            style="cursor: pointer"
+                            ><span class="glyphicon glyphicon-zoom-in"></span
+                          ></a>
+                        </li>
+                        <li>
+                          <a
+                            onclick="action['Zoom Out']()"
+                            data-tooltip="Zoom Out"
+                            style="cursor: pointer"
+                            ><span class="glyphicon glyphicon-zoom-out"></span
+                          ></a>
+                        </li>
+                        <li id="left-arrow">
+                          <a
+                            onclick="action['Backward']()"
+                            data-tooltip="Previous Workflow"
+                            style="cursor: pointer"
+                            ><span
+                              class="glyphicon glyphicon-chevron-left"
+                            ></span
+                          ></a>
+                        </li>
+                        <li id="up-arrow">
+                          <a
+                            onclick="action['Upward']()"
+                            data-tooltip="Switch to Parent Workflow"
+                            style="cursor: pointer"
+                            ><span class="glyphicon glyphicon-chevron-up"></span
+                          ></a>
+                        </li>
+                        <li id="right-arrow">
+                          <a
+                            onclick="action['Forward']()"
+                            data-tooltip="Next Workflow"
+                            style="cursor: pointer"
+                            ><span
+                              class="glyphicon glyphicon-chevron-right"
+                            ></span
+                          ></a>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </fieldset>
           </div>
           <div style="float: left;">
@@ -154,14 +228,7 @@ block content %}
                   <td style="text-align: center; vertical-align: middle;">
                     Workflow
                   </td>
-                  <td>
-                    <select
-                      id="current-workflow"
-                      class="form-control"
-                      data-width="400px"
-                      data-dropdown-align-right="true"
-                    ></select>
-                  </td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td style="text-align: center; vertical-align: middle;">
@@ -217,51 +284,6 @@ block content %}
                   data-tooltip="Workflow Results"
                   style="cursor: pointer"
                   ><span class="glyphicon glyphicon-list-alt"></span
-                ></a>
-              </li>
-            </ul>
-            <ul
-              class="pagination pagination-lg"
-              style="margin: 0px; padding-left: 30px; padding-top: 9px"
-            >
-              <li>
-                <a
-                  onclick="action['Zoom In']()"
-                  data-tooltip="Zoom In"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-zoom-in"></span
-                ></a>
-              </li>
-              <li>
-                <a
-                  onclick="action['Zoom Out']()"
-                  data-tooltip="Zoom Out"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-zoom-out"></span
-                ></a>
-              </li>
-              <li id="left-arrow">
-                <a
-                  onclick="action['Backward']()"
-                  data-tooltip="Previous Workflow"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-chevron-left"></span
-                ></a>
-              </li>
-              <li id="up-arrow">
-                <a
-                  onclick="action['Upward']()"
-                  data-tooltip="Switch to Parent Workflow"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-chevron-up"></span
-                ></a>
-              </li>
-              <li id="right-arrow">
-                <a
-                  onclick="action['Forward']()"
-                  data-tooltip="Next Workflow"
-                  style="cursor: pointer"
-                  ><span class="glyphicon glyphicon-chevron-right"></span
                 ></a>
               </li>
             </ul>

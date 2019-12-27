@@ -4820,6 +4820,7 @@ legend.section {
     width:inherit; /* Or auto */
     padding:0 10px; /* To give a bit of padding on the left and right */
     border-bottom:none;
+    margin-bottom: 5px;
 }
 
 fieldset.section {

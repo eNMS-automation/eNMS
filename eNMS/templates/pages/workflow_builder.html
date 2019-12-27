@@ -86,43 +86,62 @@ block content %}
               </li>
             </ul>
           </div>
-          <div style="float: left; width: 800px">
+          <div style="float: left">
             <fieldset class="section">
               <legend class="section">Creation</legend>
-              <div style="float: left;">
-              <button
-                type="button"
-                class="btn btn-primary"
-                onclick="action['Create New Service']()"
-                data-tooltip="Create New Service"
-              >
-                <span class="glyphicon glyphicon-plus"></span>
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                onclick="eNMS.workflow.switchMode()"
-                data-tooltip="Change Mode"
-              >
-                <span
-                  id="mode-icon"
-                  class="glyphicon glyphicon-move"
-                ></span>
-              </button>
-            </div>
-            <div style="float: left;">
-              <select
-              id="service-type"
-              class="form-control"
-              data-width="170px"
-            ></select>
-            <select id="edge-type" class="form-control" data-width="170px">
-              <option value="success">Success</option>
-              <option value="failure">Failure</option>
-              <option value="prerequisite">Prerequisite</option>
-            </select>
-          </div>
-          </fieldset>
+                <table
+                  width="100%"
+                  style="border-spacing: 5px; border-collapse: separate;"
+                >
+                  <tbody>
+                    <tr>
+                      <td style="text-align: center; vertical-align: middle;">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          onclick="action['Create New Service']()"
+                          data-tooltip="Create New Service"
+                        >
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <select
+                          id="service-type"
+                          class="form-control"
+                          data-width="170px"
+                        ></select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center; vertical-align: middle;">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          onclick="eNMS.workflow.switchMode()"
+                          data-tooltip="Change Mode"
+                        >
+                          <span
+                            id="mode-icon"
+                            class="glyphicon glyphicon-move"
+                          ></span>
+                        </button>
+                      </td>
+                      <td>
+                        <select
+                          id="edge-type"
+                          class="form-control"
+                          data-width="170px"
+                        >
+                          <option value="success">Success</option>
+                          <option value="failure">Failure</option>
+                          <option value="prerequisite">Prerequisite</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </fieldset>
           </div>
           <div style="float: left;">
             <table

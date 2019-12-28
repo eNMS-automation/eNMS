@@ -121,10 +121,13 @@ block content %}
                       <select
                         id="current-workflow"
                         class="form-control"
-                        data-width="400px"
-                        data-dropdown-align-right="true"
+                        data-width="auto"
+                        data-dropdown-align-left="true"
                       ></select>
                     </td>
+                  </tr>
+                  <tr>
+                    <select id="current-runtime" class="form-control"></select>
                   </tr>
                   <tr>
                     <td>
@@ -184,6 +187,22 @@ block content %}
                             ></span
                           ></a>
                         </li>
+                        <li>
+                          <a
+                            onclick="action['Workflow Logs']()"
+                            data-tooltip="Workflow Logs"
+                            style="cursor: pointer"
+                            ><span class="glyphicon glyphicon-list"></span
+                          ></a>
+                        </li>
+                        <li>
+                          <a
+                            onclick="action['Workflow Results']()"
+                            data-tooltip="Workflow Results"
+                            style="cursor: pointer"
+                            ><span class="glyphicon glyphicon-list-alt"></span
+                          ></a>
+                        </li>
                       </ul>
                     </td>
                   </tr>
@@ -192,72 +211,47 @@ block content %}
             </fieldset>
           </div>
           <div style="display: table; margin: auto">
-            <fieldset class="section" style="width: 300px">
-              <legend class="section">Run</legend>
-              <ul
-                class="pagination pagination-lg"
-                style="margin: 0px; padding-left: 30px; padding-top: 9px"
+            <strong><p id="status"></p></strong>
+            <div id="progress" class="progress" style="display: none">
+              <div
+                id="progress-success"
+                class="progress-bar progress-bar-success"
               >
-                <li>
-                  <a
-                    onclick="action['Run Workflow']()"
-                    data-tooltip="Run Workflow"
-                    style="cursor: pointer"
-                    ><span class="glyphicon glyphicon-play"></span
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    onclick="action['Parameterized Workflow Run']()"
-                    data-tooltip="Parameterized Run"
-                    style="cursor: pointer"
-                    ><span class="glyphicon glyphicon-play-circle"></span
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    onclick="action['Stop Workflow']()"
-                    data-tooltip="Stop Workflow"
-                    style="cursor: pointer"
-                    ><span class="glyphicon glyphicon-pause"></span
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    onclick="action['Workflow Logs']()"
-                    data-tooltip="Workflow Logs"
-                    style="cursor: pointer"
-                    ><span class="glyphicon glyphicon-list"></span
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    onclick="action['Workflow Results']()"
-                    data-tooltip="Workflow Results"
-                    style="cursor: pointer"
-                    ><span class="glyphicon glyphicon-list-alt"></span
-                  ></a>
-                </li>
-              </ul>
-              <select id="current-runtime" class="form-control"></select>
-            </fieldset>
-          </div>
-        </div>
-        <div
-          class="btn-group"
-          style="width: 20vw; z-index:2; position: absolute; left: 25vw"
-        >
-          <strong><p id="status"></p></strong>
-          <div id="progress" class="progress" style="display: none">
-            <div
-              id="progress-success"
-              class="progress-bar progress-bar-success"
+                <span id="progress-success-span" style="color:black;"></span>
+              </div>
+              <div id="progress-failure" class="progress-bar progress-bar-danger">
+                <span id="progress-failure-span" style="color:black;"></span>
+              </div>
+            </div>
+            <ul
+              class="pagination pagination-lg"
+              style="margin: 0px; padding-left: 30px; padding-top: 9px"
             >
-              <span id="progress-success-span" style="color:black;"></span>
-            </div>
-            <div id="progress-failure" class="progress-bar progress-bar-danger">
-              <span id="progress-failure-span" style="color:black;"></span>
-            </div>
+              <li>
+                <a
+                  onclick="action['Run Workflow']()"
+                  data-tooltip="Run Workflow"
+                  style="cursor: pointer"
+                  ><span class="glyphicon glyphicon-play"></span
+                ></a>
+              </li>
+              <li>
+                <a
+                  onclick="action['Parameterized Workflow Run']()"
+                  data-tooltip="Parameterized Run"
+                  style="cursor: pointer"
+                  ><span class="glyphicon glyphicon-play-circle"></span
+                ></a>
+              </li>
+              <li>
+                <a
+                  onclick="action['Stop Workflow']()"
+                  data-tooltip="Stop Workflow"
+                  style="cursor: pointer"
+                  ><span class="glyphicon glyphicon-pause"></span
+                ></a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

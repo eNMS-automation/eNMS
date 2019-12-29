@@ -1320,65 +1320,6 @@ legend {
     height: 280px
 }
 
-.profile_details:nth-child(3n) {
-    clear: both
-}
-
-.profile_details .profile_view {
-    display: inline-block;
-    padding: 10px 0 0;
-    background: #fff
-}
-
-.profile_details .profile_view .divider {
-    border-top: 1px solid #e5e5e5;
-    padding-top: 5px;
-    margin-top: 5px
-}
-
-.profile_details .profile_view .ratings {
-    margin-bottom: 0;
-    text-align: left;
-    font-size: 16px
-}
-
-.profile_details .profile_view .bottom {
-    background: #e3ebf3;
-    padding: 9px 0;
-    border-top: 1px solid #e6e9ed
-}
-
-.profile_details .profile_view .left {
-    margin-top: 20px
-}
-
-.profile_details .profile_view .left p {
-    margin-bottom: 3px
-}
-
-.profile_details .profile_view .right {
-    margin-top: 0;
-    padding: 10px
-}
-
-.profile_details .profile_view .img-circle {
-    border: 1px solid #e6e9ed;
-    padding: 2px
-}
-
-.profile_details .profile_view h2 {
-    margin: 5px 0
-}
-
-.profile_details .profile_view .brief {
-    margin: 0;
-    font-weight: 300
-}
-
-.profile_details .profile_left {
-    background: #fff
-}
-
 .pagination.pagination-split li {
     display: inline-block;
     margin-right: 3px

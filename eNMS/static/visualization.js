@@ -172,7 +172,7 @@ function updateView(withCluster) {
     });
     $(".geo-menu").show();
   }
-  map[clustered ? "addLayer" : "removeLayer"](markerGroup)
+  map[clustered ? "addLayer" : "removeLayer"](markerGroup);
 }
 
 function deviceToNode(device) {
@@ -314,4 +314,4 @@ export function filterView(type) {
       alertify.notify("Filter applied.", "success", 5);
     },
   });
-};
+}

@@ -27,29 +27,6 @@ a:hover {
     -webkit-font-smoothing: antialiased
 }
 
-.calendar-exibit .show-calendar {
-    float: none;
-    display: block;
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-    border: 1px solid rgba(0, 0, 0, .15);
-    overflow: hidden
-}
-
-.calendar-exibit .show-calendar .calendar {
-    margin: 0 0 4px
-}
-
-.calendar-exibit .show-calendar.picker_1 {
-    background: #34495e
-}
-
-.calendar-exibit .calendar-table {
-    padding: 0 0 4px
-}
-
 .left_col {
     background: #002240
 }
@@ -2271,50 +2248,6 @@ button {
     display: inline-block
 }
 
-.compose {
-    padding: 0;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    background: #fff;
-    border: 1px solid #d9dee4;
-    border-right: 0;
-    border-bottom: 0;
-    border-top-left-radius: 5px;
-    z-index: 9999;
-    display: none
-}
-
-.compose .compose-header {
-    padding: 5px;
-    background: #169f85;
-    color: #fff;
-    border-top-left-radius: 5px
-}
-
-.compose .compose-header .close {
-    text-shadow: 0 1px 0 #fff;
-    line-height: .8
-}
-
-.compose .compose-body .editor.btn-toolbar {
-    margin: 0
-}
-
-.compose .compose-body .editor-wrapper {
-    height: 100%;
-    min-height: 50px;
-    max-height: 180px;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    overflow: auto
-}
-
-.compose .compose-footer {
-    padding: 10px
-}
-
 .editor.btn-toolbar {
     zoom: 1;
     background: #f7f7f7;
@@ -2412,35 +2345,6 @@ legend {
 
 .invalid-form-error-message.filled {
     border-left: 2px solid #e74c3c
-}
-
-p.parsley-success {
-    color: #468847;
-    background-color: #dff0d8;
-    border: 1px solid #d6e9c6
-}
-
-p.parsley-error {
-    color: #b94a48;
-    background-color: #f2dede;
-    border: 1px solid #eed3d7
-}
-
-ul.parsley-errors-list {
-    list-style: none;
-    color: #e74c3c;
-    padding-left: 0
-}
-
-input.parsley-error,
-select.parsley-error,
-textarea.parsley-error {
-    background: #faedec;
-    border: 1px solid #e85445
-}
-
-.btn-group .parsley-errors-list {
-    display: none
 }
 
 .bad input,

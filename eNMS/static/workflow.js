@@ -29,7 +29,7 @@ import {
   adjustHeight,
 } from "./base.js";
 
-let workflow = (window.eNMS.workflow = {});
+let workflowNamespace = (window.eNMS.workflow = {});
 export let currentRuntime;
 
 vis.Network.prototype.zoom = function(scale) {
@@ -524,7 +524,7 @@ function deleteSelection() {
   switchMode(currentMode, true);
 }
 
-const switchMode = (workflow.switchMode = function(mode, noNotification) {
+const switchMode = (workflowNamespace.switchMode = function(mode, noNotification) {
   const oldMode = currentMode;
   currentMode =
     mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
@@ -841,7 +841,7 @@ function resetDisplay() {
   });
 }
 
-const getWorkflowState = (workflow.getWorkflowState = function(
+const getWorkflowState = (workflowNamespace.getWorkflowState = function(
   periodic,
   notification
 ) {

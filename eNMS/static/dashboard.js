@@ -45,11 +45,11 @@ function drawDiagrams(diagram, result) {
 function parseData(data) {
   let result = [];
   let legend = [];
-  for (const [key, value] of Object.entries(data)) {
-    console.log(key)
+  for (let [key, value] of Object.entries(data)) {
+    key = key || "Empty string";
     result.push({
       value: value,
-      name: key || "Empty string",
+      name: key,
     });
     legend.push(key)
   }

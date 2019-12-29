@@ -36,22 +36,12 @@ let polylinesArray = [];
 let layer;
 let markerType;
 let map;
-let markers = L.markerClusterGroup();
+let markerGroup;
 let clustered;
 let selected;
 let logicalDevices = [];
 let logicalLinks = [];
-
-for (const [key, value] of Object.entries(iconSizes)) {
-  window[`icon_${key}`] = L.icon({
-    iconUrl: `../static/images/view/${key}.gif`,
-    iconSize: value,
-    iconAnchor: [9, 6],
-    popupAnchor: [8, -5],
-  });
-}
-
-const routerIcon = window["icon_router"];
+let routerIcon;
 
 function switchLayer(layerType) {
   map.removeLayer(layer);
@@ -95,7 +85,7 @@ function createNode(node, nodeType) {
     selectedObject = node; // eslint-disable-line no-undef
   });
   if (clustered) {
-    markers.addLayer(marker);
+    markerGroup.addLayer(marker);
   } else {
     marker.addTo(map);
   }
@@ -134,7 +124,7 @@ function createLink(link) {
 function deleteAllDevices() {
   for (let i = 0; i < markersArray.length; i++) {
     if (clustered) {
-      markers.removeLayer(markersArray[i]);
+      markerGroup.removeLayer(markersArray[i]);
     } else {
       markersArray[i].removeFrom(map);
     }
@@ -191,11 +181,7 @@ function updateView(withCluster) {
     });
     $(".geo-menu").show();
   }
-  if (clustered) {
-    map.addLayer(markers);
-  } else {
-    map.removeLayer(markers);
-  }
+  map[clustered ? "addLayer" : "removeLayer"](markerGroup)
 }
 
 function deviceToNode(device) {
@@ -283,6 +269,16 @@ Object.assign(action, {
 });
 
 export function initView() {
+  for (const [key, value] of Object.entries(iconSizes)) {
+    window[`icon_${key}`] = L.icon({
+      iconUrl: `../static/images/view/${key}.gif`,
+      iconSize: value,
+      iconAnchor: [9, 6],
+      popupAnchor: [8, -5],
+    });
+  }
+  routerIcon = window["icon_router"];
+  markerGroup = L.markerClusterGroup();
   markerType = config.view.marker;
   map = L.map("map", { preferCanvas: true }).setView(
     [config.view.latitude, config.view.longitude],

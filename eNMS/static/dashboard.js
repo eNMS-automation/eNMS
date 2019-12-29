@@ -26,6 +26,11 @@ function drawDiagrams(diagram, result) {
         data: result.data,
       },
     ],
+    label: {
+      normal: {
+        formatter: '{b} ({c})',
+      }
+    }
   }
   if (result.legend.length < 10) {
     options.legend = {
@@ -41,9 +46,10 @@ function parseData(data) {
   let result = [];
   let legend = [];
   for (const [key, value] of Object.entries(data)) {
+    console.log(key)
     result.push({
       value: value,
-      name: key,
+      name: key || "Empty string",
     });
     legend.push(key)
   }

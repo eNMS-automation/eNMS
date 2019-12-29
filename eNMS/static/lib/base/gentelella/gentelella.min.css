@@ -1830,16 +1830,6 @@ span.right {
     width: 12px
 }
 
-.dashboard_graph {
-    background: #fff;
-    padding: 7px 10px
-}
-
-.dashboard_graph .col-md-3,
-.dashboard_graph .col-md-9 {
-    padding: 0
-}
-
 a.user-profile {
     color: #5e6974!important
 }
@@ -2453,15 +2443,6 @@ ul.social li {
     border-radius: 50%
 }
 
-.dashboard_graph .x_title {
-    padding: 5px 5px 7px
-}
-
-.dashboard_graph .x_title h3 {
-    margin: 0;
-    font-weight: 400
-}
-
 .angular {
     margin-top: 100px
 }
@@ -2905,46 +2886,6 @@ ul.project_files li a i {
     background: #000;
     color: #fff;
     box-shadow: 0 0 1px #000
-}
-
-.view-first img {
-    transition: all .2s linear
-}
-
-.view-first .mask {
-    opacity: 0;
-    background-color: rgba(0, 0, 0, .5);
-    transition: all .4s ease-in-out
-}
-
-.view-first .tools {
-    transform: translateY(-100px);
-    opacity: 0;
-    transition: all .2s ease-in-out
-}
-
-.view-first p {
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all .2s linear
-}
-
-.view-first:hover img {
-    transform: scale(1.1)
-}
-
-.view-first:hover .mask {
-    opacity: 1
-}
-
-.view-first:hover .tools,
-.view-first:hover p {
-    opacity: 1;
-    transform: translateY(0)
-}
-
-.view-first:hover p {
-    transition-delay: .1s
 }
 
 .form-group.has-feedback span {
@@ -3735,10 +3676,6 @@ fieldset {
 .progress.progress_sm {
     border-radius: 0;
     margin-bottom: 18px
-}
-
-.dashboard_graph p {
-    margin: 0 0 4px
 }
 
 ul.verticle_bars {

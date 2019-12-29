@@ -13,7 +13,6 @@ vis: false
 import { call, serializeForm, showPanel, showTypePanel } from "./base.js";
 import { showDeviceNetworkData } from "./inventory.js";
 
-let visualization = (window.eNMS.visualization = {});
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
@@ -254,12 +253,6 @@ function displayPool(poolId, nodes, edges) {
   });
 }
 
-Object.assign(action, {
-  Properties: (o) => showTypePanel(o.type, o.id),
-  Connect: (d) => showPanel("device_connection", d.id),
-  Configuration: (d) => showDeviceNetworkData(d),
-});
-
 export function initView() {
   for (const [key, value] of Object.entries(iconSizes)) {
     window[`icon_${key}`] = L.icon({
@@ -296,6 +289,11 @@ export function initView() {
       action[row](selectedObject);
       selectedObject = null;
     },
+  });
+  Object.assign(action, {
+    Properties: (o) => showTypePanel(o.type, o.id),
+    Connect: (d) => showPanel("device_connection", d.id),
+    Configuration: (d) => showDeviceNetworkData(d),
   });
 }
 

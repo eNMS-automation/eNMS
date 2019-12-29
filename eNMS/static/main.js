@@ -39,7 +39,7 @@ main.fullScreen = function() {
       document.msExitFullscreen();
     }
   } else {
-    const element = $("#container-body").get(0);
+    const element = document.documentElement;
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {

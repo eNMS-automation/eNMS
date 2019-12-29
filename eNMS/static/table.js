@@ -254,7 +254,7 @@ models.device = class Device extends Base {
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-success"
+          <button type="button" class="btn btn-sm btn-dark"
           onclick="eNMS.base.showPanel('device_connection', '${this.id}')"
           data-tooltip="Connection"
             ><span class="glyphicon glyphicon-console"></span

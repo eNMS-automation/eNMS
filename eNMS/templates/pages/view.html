@@ -53,34 +53,31 @@ title %} {% block stylesheets %} {{ super() }}
 </ul>
 <div class="right_col" role="main">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_content">
-          <div style="z-index:0;" id="map"></div>
-          {% if view_type == "network" %}
-          <div
-            class="btn-group-horizontal"
-            style="z-index:1; position: absolute; top: 10px; left: 5vw"
+    <div class="x_panel">
+        <div style="z-index:0;" id="map"></div>
+        {% if view_type == "network" %}
+        <div
+          class="btn-group-horizontal"
+          style="z-index:1; position: absolute; top: 10px; left: 5vw"
+        >
+          <button
+            class="btn btn-primary"
+            style="width: 8vw;"
+            onclick="eNMS.base.showPanel('device_filtering')"
           >
-            <button
-              class="btn btn-primary"
-              style="width: 8vw;"
-              onclick="eNMS.base.showPanel('device_filtering')"
-            >
-              <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
-            </button>
-            <button
-              class="btn btn-primary"
-              style="width: 8vw;"
-              onclick="eNMS.base.showPanel('link_filtering')"
-            >
-              <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
-            </button>
-          </div>
-          {% endif %}
+            <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
+          </button>
+          <button
+            class="btn btn-primary"
+            style="width: 8vw;"
+            onclick="eNMS.base.showPanel('link_filtering')"
+          >
+            <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
+          </button>
         </div>
+        {% endif %}
       </div>
-    </div>
+
   </div>
 </div>
 {% endblock content %} {% block javascripts %} {{ super()}}
@@ -89,8 +86,4 @@ title %} {% block stylesheets %} {{ super() }}
 </script>
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>
-<script
-  type="module"
-  src="{{ url_for('static', filename='visualization.js') }}"
-></script>
 {% endblock javascripts %}

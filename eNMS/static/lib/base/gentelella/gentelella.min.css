@@ -947,7 +947,6 @@ footer {
 }
 
 .degrees:after,
-.x_content,
 .x_panel {
     position: relative
 }
@@ -1123,7 +1122,6 @@ h2 {
     float: right
 }
 
-.x_content,
 table.tile td ul li a,
 table.tile_info {
     width: 100%
@@ -1141,18 +1139,6 @@ table.tile_info {
 
 .x_title span {
     color: #bdbdbd
-}
-
-.x_content {
-    padding: 0 5px 6px;
-    float: left;
-    clear: both;
-    margin-top: 5px
-}
-
-.x_content h4 {
-    font-size: 16px;
-    font-weight: 500
 }
 
 legend {

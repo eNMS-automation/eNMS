@@ -15,6 +15,7 @@ import {
   detectUserInactivity,
 } from "./base.js";
 import { initTable } from "./table.js";
+import { initView } from "./visualization.js";
 import { initWorkflowBuilder } from "./workflow.js";
 
 let main = (window.eNMS.main = {});
@@ -171,6 +172,8 @@ $(document).ready(function() {
       },
     });
     initWorkflowBuilder();
+  } else if (page.includes("view")) {
+    initView();
   }
   doc(page);
   detectUserInactivity();

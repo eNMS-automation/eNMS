@@ -303,7 +303,7 @@ Object.assign(action, {
   Configuration: (d) => showDeviceNetworkData(d),
 });
 
-(function() {
+export function initView() {
   markerType = config.view.marker;
   map = L.map("map", { preferCanvas: true }).setView(
     [config.view.latitude, config.view.longitude],
@@ -322,4 +322,4 @@ Object.assign(action, {
       }
     });
   updateView();
-})();
+}

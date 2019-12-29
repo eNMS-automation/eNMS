@@ -14,6 +14,7 @@ import {
   createTooltips,
   detectUserInactivity,
 } from "./base.js";
+import { initDashboard } from "./dashboard.js";
 import { initTable } from "./table.js";
 import { initView } from "./visualization.js";
 import { initWorkflowBuilder } from "./workflow.js";
@@ -168,6 +169,8 @@ $(document).ready(function() {
     initWorkflowBuilder();
   } else if (page.includes("view")) {
     initView();
+  } else if (page == "dashboard") {
+    initDashboard();
   }
   doc(page);
   detectUserInactivity();

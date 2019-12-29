@@ -14,7 +14,6 @@ import { tables } from "./table.js";
 let configurationEditor;
 let administration = (window.eNMS.administration = {});
 
-// eslint-disable-next-line
 administration.showImportTopologyPanel = function() {
   createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
     document.getElementById("file").onchange = function() {
@@ -23,14 +22,12 @@ administration.showImportTopologyPanel = function() {
   });
 };
 
-// eslint-disable-next-line
 administration.queryOpenNMS = function() {
   call("/query_opennms", function() {
     alertify.notify("Topology imported from OpenNMS.", "success", 5);
   });
 };
 
-// eslint-disable-next-line
 administration.queryNetbox = function() {
   call("/query_netbox", function() {
     alertify.notify("Topology imported from Netbox.", "success", 5);
@@ -99,7 +96,6 @@ administration.getClusterStatus = function() {
   });
 };
 
-// eslint-disable-next-line
 administration.migrationsExport = function() {
   alertify.notify("Export initiated.", "success", 5);
   fCall("/migration_export", "migration-form", function() {
@@ -107,7 +103,6 @@ administration.migrationsExport = function() {
   });
 };
 
-// eslint-disable-next-line
 administration.showMigrationPanel = function() {
   showPanel("database_migration", null, () => {
     let list = document.getElementById("versions");
@@ -119,7 +114,6 @@ administration.showMigrationPanel = function() {
   });
 };
 
-// eslint-disable-next-line
 administration.migrationsImport = function() {
   alertify.notify("Import initiated.", "success", 5);
   fCall("/migration_import", "migration-form", function(result) {
@@ -139,14 +133,12 @@ administration.refreshExportedServices = function() {
   });
 };
 
-// eslint-disable-next-line
 administration.showImportServicePanel = function() {
   showPanel("import_service", null, () => {
     administration.refreshExportedServices();
   });
 };
 
-// eslint-disable-next-line
 administration.importService = function() {
   call(`/import_service/${$("#service").val()}`, function(result) {
     alertify.notify("Import successful.", "success", 5);
@@ -154,7 +146,6 @@ administration.importService = function() {
   });
 };
 
-// eslint-disable-next-line
 administration.databaseDeletion = function() {
   alertify.notify("Starting to delete...", "success", 5);
   fCall("/database_deletion", "database_deletion-form", function(result) {
@@ -163,14 +154,12 @@ administration.databaseDeletion = function() {
   });
 };
 
-// eslint-disable-next-line
 administration.getGitContent = function() {
   call("/get_git_content", function(result) {
     alertify.notify("Action successful.", "success", 5);
   });
 };
 
-// eslint-disable-next-line
 administration.scanCluster = function() {
   alertify.notify("Scan started.", "success", 5);
   call("/scan_cluster", function(cluster) {

@@ -40,7 +40,7 @@ function parseData(data) {
   return result;
 }
 
-$(function() {
+export function initDashboard() {
   call("/count_models", function(result) {
     for (const type of Object.keys(defaultProperties)) {
       $(`#count-${type}`).text(result.counters[type]);
@@ -62,4 +62,4 @@ $(function() {
         });
       });
   });
-});
+}

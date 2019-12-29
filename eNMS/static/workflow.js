@@ -899,4 +899,11 @@ export function initWorkflowBuilder() {
     adjustHeight();
     $("#network").height($(".x_panel").height());
   });
+  $("#network").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function(invokedOn, selectedMenu) {
+      const row = selectedMenu.text();
+      action[row](selectedObject);
+    },
+  });
 }

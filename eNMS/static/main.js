@@ -162,15 +162,9 @@ $(document).ready(function() {
   NProgress.start();
   $(window).resize(adjustHeight);
   initSidebar();
-  if (page.includes("table")) initTable(page.split("/")[1]);
-  if (page == "workflow_builder") {
-    $("#network").contextMenu({
-      menuSelector: "#contextMenu",
-      menuSelected: function(invokedOn, selectedMenu) {
-        const row = selectedMenu.text();
-        action[row](selectedObject);
-      },
-    });
+  if (page.includes("table")) {
+    initTable(page.split("/")[1]);
+  } else if (page == "workflow_builder") {
     initWorkflowBuilder();
   } else if (page.includes("view")) {
     initView();

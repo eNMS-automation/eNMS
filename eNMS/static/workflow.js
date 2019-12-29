@@ -524,7 +524,10 @@ function deleteSelection() {
   switchMode(currentMode, true);
 }
 
-const switchMode = (workflowNamespace.switchMode = function(mode, noNotification) {
+const switchMode = (workflowNamespace.switchMode = function(
+  mode,
+  noNotification
+) {
   const oldMode = currentMode;
   currentMode =
     mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");

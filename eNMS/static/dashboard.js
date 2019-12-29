@@ -28,13 +28,13 @@ function drawDiagrams(diagram, result) {
     ],
     label: {
       normal: {
-        formatter: '{b} ({c})',
-      }
-    }
-  }
+        formatter: "{b} ({c})",
+      },
+    },
+  };
   if (result.legend.length < 10) {
     options.legend = {
-      orient: 'horizontal',
+      orient: "horizontal",
       bottom: 0,
       data: result.legend,
     };
@@ -51,9 +51,9 @@ function parseData(data) {
       value: value,
       name: key,
     });
-    legend.push(key)
+    legend.push(key);
   }
-  return {data: result, legend: legend};
+  return { data: result, legend: legend };
 }
 
 export function initDashboard() {

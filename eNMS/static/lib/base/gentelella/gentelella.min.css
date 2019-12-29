@@ -22,7 +22,6 @@ a:hover {
     text-decoration: none
 }
 
-.byline,
 .main_menu .fa {
     -webkit-font-smoothing: antialiased
 }
@@ -1485,7 +1484,6 @@ td.details {
 
 .login_content .btn-default:hover,
 .login_content a,
-.tagsinput span.tag a,
 .tile-stats>.dash-box-footer,
 .tile:hover,
 .view a.info,
@@ -2114,7 +2112,6 @@ a.star {
     padding: 0 5px
 }
 
-.byline,
 .view p {
     font-style: italic
 }
@@ -2388,14 +2385,6 @@ textarea:focus {
     outline-width: 2px
 }
 
-.tagsinput {
-    border: 1px solid #ccc;
-    background: #fff;
-    padding: 6px 6px 0;
-    width: 300px;
-    overflow-y: auto
-}
-
 span.tag {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -2414,29 +2403,6 @@ span.tag a {
     color: #f1f6f7!important
 }
 
-.tagsinput span.tag a {
-    font-weight: 700;
-    color: #82ad2b;
-    font-size: 11px
-}
-
-.tagsinput input {
-    width: 80px;
-    margin: 0;
-    font-family: helvetica;
-    font-size: 13px;
-    border: 1px solid transparent;
-    padding: 3px;
-    background: 0 0;
-    color: #000;
-    outline: 0
-}
-
-.tagsinput div {
-    display: block;
-    float: left
-}
-
 .tags_clear {
     clear: both;
     width: 100%;
@@ -2445,50 +2411,6 @@ span.tag a {
 
 a:focus {
     outline: 0
-}
-
-ul.timeline li {
-    position: relative;
-    border-bottom: 1px solid #e8e8e8;
-    clear: both
-}
-
-.timeline .block {
-    margin: 0 0 0 105px;
-    border-left: 3px solid #e8e8e8;
-    overflow: visible;
-    padding: 10px 15px
-}
-
-.timeline.widget {
-    min-width: 0;
-    max-width: inherit
-}
-
-.timeline.widget .block {
-    margin-left: 5px
-}
-
-.timeline .tags {
-    position: absolute;
-    top: 15px;
-    left: 0;
-    width: 84px
-}
-
-.timeline .tag {
-    display: block;
-    height: 30px;
-    font-size: 13px;
-    padding: 8px
-}
-
-.timeline .tag span {
-    display: block;
-    overflow: hidden;
-    width: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis
 }
 
 .tag {
@@ -2509,35 +2431,6 @@ ul.timeline li {
     border-top: 14px solid transparent;
     border-bottom: 14px solid transparent;
     border-left: 11px solid #1abb9c
-}
-
-.timeline h2.title {
-    position: relative;
-    font-size: 16px;
-    margin: 0
-}
-
-.timeline h2.title:before {
-    content: "";
-    position: absolute;
-    left: -23px;
-    top: 3px;
-    display: block;
-    width: 14px;
-    height: 14px;
-    border: 3px solid #d2d3d2;
-    border-radius: 14px;
-    background: #f9f9f9
-}
-
-.timeline .byline {
-    padding: .25em 0
-}
-
-.byline {
-    font-size: .9375em;
-    line-height: 1.3;
-    color: #aab6aa
 }
 
 ul.social li {

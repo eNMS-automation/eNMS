@@ -1196,29 +1196,6 @@ table.tile td ul li a big {
     margin-right: 13px
 }
 
-table.tile_info td {
-    text-align: left;
-    padding: 1px;
-    font-size: 15px
-}
-
-table.tile_info td p {
-    margin: 0;
-    line-height: 18px
-}
-
-table.tile_info td i {
-    margin-right: 8px;
-    font-size: 17px;
-    float: left;
-    width: 18px;
-    line-height: 18px
-}
-
-table.tile_info td:first-child {
-    width: 83%
-}
-
 td span {
     line-height: 18px
 }
@@ -1231,56 +1208,6 @@ td span {
 
 .col-middle {
     margin-top: 5%
-}
-
-.mid_center {
-    width: 370px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 10px 20px
-}
-
-h3.degrees {
-    font-size: 22px;
-    font-weight: 400;
-    text-align: center
-}
-
-.degrees:after {
-    content: "o";
-    top: -12px;
-    font-size: 13px;
-    font-weight: 300
-}
-
-.daily-weather .day {
-    font-size: 14px;
-    border-top: 2px solid rgba(115, 135, 156, .36);
-    text-align: center;
-    border-bottom: 2px solid rgba(115, 135, 156, .36);
-    padding: 5px 0
-}
-
-.weather-days .col-sm-2 {
-    width: 16.66666667%
-}
-
-.weather .row {
-    margin-bottom: 0
-}
-
-.bulk-actions {
-    display: none
-}
-
-table.countries_list {
-    width: 100%
-}
-
-table.countries_list td {
-    padding: 0 10px;
-    line-height: 30px;
-    border-top: 1px solid #eee
 }
 
 .dataTables_paginate a {

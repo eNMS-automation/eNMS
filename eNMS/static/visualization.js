@@ -10,9 +10,10 @@ viewType: false
 vis: false
 */
 
-import { call, showPanel, showTypePanel } from "./base.js";
-import { inventory } from "./inventory.js";
+import { call, serializeForm, showPanel, showTypePanel } from "./base.js";
+import { showDeviceNetworkData } from "./inventory.js";
 
+let visualization = (window.eNMS.visualization = {});
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
@@ -153,15 +154,6 @@ Object.assign(action, {
   Clustered: () => updateView(true),
 });
 
-$("body").contextMenu({
-  menuSelector: "#contextMenu",
-  menuSelected: function(invokedOn, selectedMenu) {
-    const row = selectedMenu.text();
-    action[row](selectedObject);
-    selectedObject = null;
-  },
-});
-
 function updateView(withCluster) {
   deleteAll();
   clustered = withCluster;
@@ -265,7 +257,7 @@ function displayPool(poolId, nodes, edges) {
 Object.assign(action, {
   Properties: (o) => showTypePanel(o.type, o.id),
   Connect: (d) => showPanel("device_connection", d.id),
-  Configuration: (d) => inventory.showDeviceNetworkData(d),
+  Configuration: (d) => showDeviceNetworkData(d),
 });
 
 export function initView() {
@@ -297,25 +289,31 @@ export function initView() {
       }
     });
   updateView();
+  $("body").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function(invokedOn, selectedMenu) {
+      const row = selectedMenu.text();
+      action[row](selectedObject);
+      selectedObject = null;
+    },
+  });
 }
 
-window.eNMS.visualization = {
-  filter: function(type) {
-    $.ajax({
-      type: "POST",
-      url: `/view_filtering/${type}`,
-      contentType: "application/json",
-      data: JSON.stringify({ form: serializeForm(`#${type}_filtering-form`) }),
-      success: function(results) {
-        if (type == "device") {
-          deleteAllDevices();
-          results.map((d) => createNode(d, "device"));
-        } else {
-          deleteAllLinks();
-          results.map(createLink);
-        }
-        alertify.notify("Filter applied.", "success", 5);
-      },
-    });
-  },
+export function filterView(type) {
+  $.ajax({
+    type: "POST",
+    url: `/view_filtering/${type}`,
+    contentType: "application/json",
+    data: JSON.stringify({ form: serializeForm(`#${type}_filtering-form`) }),
+    success: function(results) {
+      if (type == "device") {
+        deleteAllDevices();
+        results.map((d) => createNode(d, "device"));
+      } else {
+        deleteAllLinks();
+        results.map(createLink);
+      }
+      alertify.notify("Filter applied.", "success", 5);
+    },
+  });
 };

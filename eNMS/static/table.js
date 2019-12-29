@@ -10,6 +10,7 @@ import {
   createTooltips,
 } from "./base.js";
 import { loadServiceTypes } from "./automation.js";
+import { filterView } from "./visualization.js";
 
 let table = (window.eNMS.table = {});
 export let tables = {};
@@ -109,7 +110,11 @@ export function initTable(type, instance, runtime, id) {
 }
 
 table.filterTable = function(formType) {
-  tables[formType].ajax.reload(null, false);
+  if (page.includes("table")) {
+    tables[formType].ajax.reload(null, false);
+  } else {
+    filterView(formType);
+  }
   alertify.notify("Filter applied.", "success", 5);
 };
 

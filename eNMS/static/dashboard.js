@@ -15,29 +15,39 @@ const defaultProperties = {
   task: "status",
 };
 
-function drawDiagrams(diagram, data) {
-  diagram.setOption({
+function drawDiagrams(diagram, result) {
+  const options = {
     tooltip: {
       formatter: "{b} : {c} ({d}%)",
     },
     series: [
       {
         type: "pie",
-        data: data,
+        data: result.data,
       },
     ],
-  });
+  }
+  if (result.legend.length < 10) {
+    options.legend = {
+      orient: 'horizontal',
+      bottom: 0,
+      data: result.legend,
+    };
+  }
+  diagram.setOption(options);
 }
 
 function parseData(data) {
   let result = [];
+  let legend = [];
   for (const [key, value] of Object.entries(data)) {
     result.push({
       value: value,
       name: key,
     });
+    legend.push(key)
   }
-  return result;
+  return {data: result, legend: legend};
 }
 
 export function initDashboard() {

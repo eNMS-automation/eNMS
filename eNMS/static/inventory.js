@@ -18,8 +18,7 @@ function savePoolObjects(id) {
   });
 }
 
-let inventory = (window.eNMS.inventory = {
-
+export const inventory = (window.eNMS.inventory = {
   sshConnection: function(id) {
     fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
       result
@@ -78,9 +77,7 @@ let inventory = (window.eNMS.inventory = {
     });
   },
 
-  showDeviceNetworkData: function(
-    device
-  ) {
+  showDeviceNetworkData: function(device) {
     call(`/get_device_network_data/${device.id}`, (result) => {
       if (!result.configuration && !result.operational_data) {
         alertify.notify("No data stored.", "error", 5);
@@ -112,5 +109,3 @@ let inventory = (window.eNMS.inventory = {
     });
   },
 });
-
-export const showDeviceNetworkData = inventory.showDeviceNetworkData;

@@ -11,9 +11,8 @@ vis: false
 */
 
 import { call, showPanel, showTypePanel } from "./base.js";
-import { showDeviceNetworkData } from "./inventory.js";
+import { inventory } from "./inventory.js";
 
-let visualization = (window.eNMS.visualization = {});
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
   gm: "http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}&s=Ga",
@@ -39,6 +38,9 @@ let markerType;
 let map;
 let markers = L.markerClusterGroup();
 let clustered;
+let selected;
+let logicalDevices = [];
+let logicalLinks = [];
 
 for (const [key, value] of Object.entries(iconSizes)) {
   window[`icon_${key}`] = L.icon({
@@ -196,29 +198,6 @@ function updateView(withCluster) {
   }
 }
 
-visualization.filter = function(type) {
-  $.ajax({
-    type: "POST",
-    url: `/view_filtering/${type}`,
-    contentType: "application/json",
-    data: JSON.stringify({ form: serializeForm(`#${type}_filtering-form`) }),
-    success: function(results) {
-      if (type == "device") {
-        deleteAllDevices();
-        results.map((d) => createNode(d, "device"));
-      } else {
-        deleteAllLinks();
-        results.map(createLink);
-      }
-      alertify.notify("Filter applied.", "success", 5);
-    },
-  });
-};
-
-let selected; // eslint-disable-line no-unused-vars
-let logicalDevices = [];
-let logicalLinks = [];
-
 function deviceToNode(device) {
   const logicalDevice = {
     id: device.id,
@@ -300,7 +279,7 @@ function displayPool(poolId, nodes, edges) {
 Object.assign(action, {
   Properties: (o) => showTypePanel(o.type, o.id),
   Connect: (d) => showPanel("device_connection", d.id),
-  Configuration: (d) => showDeviceNetworkData(d),
+  Configuration: (d) => inventory.showDeviceNetworkData(d),
 });
 
 export function initView() {
@@ -323,3 +302,24 @@ export function initView() {
     });
   updateView();
 }
+
+window.eNMS.visualization = {
+  filter: function(type) {
+    $.ajax({
+      type: "POST",
+      url: `/view_filtering/${type}`,
+      contentType: "application/json",
+      data: JSON.stringify({ form: serializeForm(`#${type}_filtering-form`) }),
+      success: function(results) {
+        if (type == "device") {
+          deleteAllDevices();
+          results.map((d) => createNode(d, "device"));
+        } else {
+          deleteAllLinks();
+          results.map(createLink);
+        }
+        alertify.notify("Filter applied.", "success", 5);
+      },
+    });
+  },
+};

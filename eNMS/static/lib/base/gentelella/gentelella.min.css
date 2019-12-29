@@ -2377,47 +2377,6 @@ a.btn-warning {
     border-radius: 30px
 }
 
-.btn.btn-app {
-    position: relative;
-    padding: 15px 5px;
-    margin: 0 0 10px 10px;
-    min-width: 80px;
-    height: 60px;
-    box-shadow: none;
-    border-radius: 0;
-    text-align: center;
-    color: #666;
-    border: 1px solid #ddd;
-    background-color: #fafafa;
-    font-size: 12px
-}
-
-.btn.btn-app>.fa,
-.btn.btn-app>.glyphicon,
-.btn.btn-app>.ion {
-    font-size: 20px;
-    display: block
-}
-
-.btn.btn-app:hover {
-    background: #f4f4f4;
-    color: #444;
-    border-color: #aaa
-}
-
-.btn.btn-app:active,
-.btn.btn-app:focus {
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125)
-}
-
-.btn.btn-app>.badge {
-    position: absolute;
-    top: -3px;
-    right: -10px;
-    font-size: 10px;
-    font-weight: 400
-}
-
 textarea {
     padding: 10px;
     vertical-align: top;

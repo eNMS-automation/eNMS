@@ -723,7 +723,7 @@ function showRestartWorkflowPanel(workflow, service) {
 
 // eslint-disable-next-line
 function restartWorkflow() {
-  fCall(`/run_service/${workflow.id}`, `#restart_workflow-form`, function(
+  fCall(`/run_service/${currentPath}`, `#restart_workflow-form`, function(
     result
   ) {
     $(`#restart_workflow-${workflow.id}`).remove();

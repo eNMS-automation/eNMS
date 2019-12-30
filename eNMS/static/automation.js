@@ -292,7 +292,7 @@ function normalRun(id) {
 
 // eslint-disable-next-line
 function parameterizedRun(type, id) {
-  fCall("/run_service", `#edit-${type}-form-${id}`, function(result) {
+  fCall(`/run_service/${id}`, `#edit-${type}-form-${id}`, function(result) {
     $(`#${type}-${id}`).remove();
     runLogic(result);
   });

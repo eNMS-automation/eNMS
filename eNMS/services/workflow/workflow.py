@@ -96,10 +96,6 @@ class Workflow(Service):
     def deep_edges(self):
         return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
 
-    @property
-    def start_services(self):
-        return [fetch("service", scoped_name="Start").id]
-
     def job(self, run, *args):
         if run.run_method == "per_service_with_workflow_targets":
             return self.tracking_bfs(run, *args)

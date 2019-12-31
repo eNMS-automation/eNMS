@@ -216,10 +216,7 @@
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <img
-                      src="{{ url_for('static', filename='images/logo.png') }}"
-                      alt=""
-                    />
+                    <img src="{{ url_for('static', filename='images/logo.png') }}">
                     {{ current_user.name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
@@ -239,8 +236,9 @@
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i class="fa fa-envelope-o"></i>
+                    <span class="fa fa-envelope-o f fa-2x"></span>
                     <span class="badge bg-green">6</span>
+                    &nbsp;Alerts
                   </a>
                   <ul
                     class="dropdown-menu list-unstyled msg_list"
@@ -325,9 +323,10 @@
                   >
                     <img
                       src="{{ url_for('static', filename='images/readthedocs.png') }}"
-                      alt=""
+                      height="25"
+                      width="25"
                     />
-                    Docs
+                    &nbsp;Docs
                   </a>
                 </li>
                 <li class="nav-item">
@@ -337,10 +336,10 @@
                   >
                     <img
                       src="{{ url_for('static', filename='images/files.png') }}"
-                      height="35"
-                      width="35"
+                      height="25"
+                      width="25"
                     />
-                    Files
+                    &nbsp;Files
                   </a>
                 </li>
                 <li class="nav-item">
@@ -350,10 +349,10 @@
                   >
                     <img
                       src="{{ url_for('static', filename='images/configuration.png') }}"
-                      height="35"
-                      width="35"
+                      height="25"
+                      width="25"
                     />
-                    Configuation
+                    &nbsp;Config
                   </a>
                 </li>
                 <li class="nav-item">
@@ -363,10 +362,10 @@
                   >
                     <img
                       src="{{ url_for('static', filename='images/administration.png') }}"
-                      height="35"
-                      width="35"
+                      height="25"
+                      width="25"
                     />
-                    Administration
+                    &nbsp;Admin
                   </a>
                 </li>
               </ul>

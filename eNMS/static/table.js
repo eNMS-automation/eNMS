@@ -241,7 +241,7 @@ models.device = class Device extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick='eNMS.inventory.showDeviceNetworkData(${this.instance})'
+          onclick="eNMS.inventory.showDeviceNetworkData(${this.instance})"
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>
@@ -323,9 +323,9 @@ models.link = class Link extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick='eNMS.base.showDeletionPanel(${
+          onclick="eNMS.base.showDeletionPanel(${
             this.instance
-          })' data-tooltip="Delete"
+          })" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -713,9 +713,9 @@ models.result = class Result extends Base {
           <button type="button" id="btn-result-${
             this.id
           }" class="btn btn-sm btn-info"
-          onclick='eNMS.automation.copyClipboard("btn-result-${this.id}", ${
+          onclick="eNMS.automation.copyClipboard("btn-result-${this.id}", ${
         this.instance
-      })'
+      })"
           data-tooltip="Copy to clipboard">
           <span class="glyphicon glyphicon-copy"></span></button>
       </li>
@@ -827,9 +827,9 @@ models.task = class Task extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick='eNMS.base.showDeletionPanel(${
+          onclick="eNMS.base.showDeletionPanel(${
             this.instance
-          })' data-tooltip="Delete"
+          })" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>

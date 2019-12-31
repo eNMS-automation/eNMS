@@ -2628,8 +2628,6 @@ ul.project_files li a i {
     font-weight: 400
 }
 
-.notifications a,
-.tabbed_notifications h2,
 .view .tools,
 .view a.info {
     text-transform: uppercase
@@ -3434,70 +3432,6 @@ ul.verticle_bars li {
     border-color: rgba(52, 73, 94, .88)
 }
 
-.custom-notifications {
-    position: fixed;
-    margin: 15px;
-    right: 0;
-    float: right;
-    width: 400px;
-    z-index: 4000;
-    bottom: 0
-}
-
-ul.notifications {
-    float: right;
-    display: block;
-    margin-bottom: 7px;
-    padding: 0;
-    width: 100%
-}
-
-.notifications li {
-    float: right;
-    margin: 3px;
-    width: 36px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, .3)
-}
-
-.notifications li:last-child {
-    margin-left: 0
-}
-
-.notifications a {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    padding: 9px 8px
-}
-
-.tabbed_notifications .text {
-    padding: 5px 15px;
-    height: 140px;
-    border-radius: 7px;
-    box-shadow: 6px 6px 6px rgba(0, 0, 0, .3)
-}
-
-.tabbed_notifications div p {
-    display: inline-block
-}
-
-.tabbed_notifications h2 {
-    font-weight: 700;
-    width: 80%;
-    float: left;
-    height: 20px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: block
-}
-
-.tabbed_notifications .close {
-    padding: 5px;
-    color: #e9edef;
-    float: right;
-    opacity: 1
-}
-
 .fc-state-default {
     background: #f5f5f5;
     color: #73879c
@@ -3512,31 +3446,6 @@ ul.notifications {
 .dropzone {
     min-height: 300px;
     border: 1px solid #e5e5e5
-}
-
-.main_menu .label {
-    line-height: 11px;
-    margin-top: 4px
-}
-
-@media (max-width:460px) {
-    .dataTables_wrapper .col-sm-6 {
-        width: 100%;
-        margin-bottom: 5px
-    }
-    .dataTables_wrapper .col-sm-6 .dataTables_filter {
-        float: none
-    }
-}
-
-@media (max-width:767px) {
-    .dataTables_length {
-        float: none
-    }
-}
-
-.daterangepicker.xdisplay {
-    width: 228px
 }
 
 .dataTables_wrapper>.row {

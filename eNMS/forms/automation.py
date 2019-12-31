@@ -315,7 +315,7 @@ class AddServiceForm(BaseForm):
 
 class WorkflowLabelForm(BaseForm):
     form_type = HiddenField(default="workflow_label")
-    action = "createLabel"
+    action = "eNMS.workflow.createLabel"
     text = StringField(widget=TextArea(), render_kw={"rows": 15})
     alignment = SelectField(
         "Text Alignment",

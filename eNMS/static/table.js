@@ -105,11 +105,11 @@ export function initTable(type, instance, runtime, id) {
     tables[type].order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type)) {
-    table.refreshTablePeriodically(type, 3000);
+    tableNamespace.refreshTablePeriodically(type, 3000);
   }
 }
 
-table.filterTable = function(formType) {
+tableNamespace.filterTable = function(formType) {
   if (page.includes("table")) {
     tables[formType].ajax.reload(null, false);
   } else {
@@ -118,15 +118,15 @@ table.filterTable = function(formType) {
   alertify.notify("Filter applied.", "success", 5);
 };
 
-table.refreshTable = function(tableType, displayNotification) {
+tableNamespace.refreshTable = function(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);
   if (displayNotification) alertify.notify("Table refreshed.", "success", 5);
 };
 
-table.refreshTablePeriodically = function(tableType, interval) {
-  if (userIsActive) table.refreshTable(tableType, false);
+tableNamespace.refreshTablePeriodically = function(tableType, interval) {
+  if (userIsActive) tableNamespace.refreshTable(tableType, false);
   setTimeout(
-    () => table.refreshTablePeriodically(tableType, interval),
+    () => tableNamespace.refreshTablePeriodically(tableType, interval),
     interval
   );
 };
@@ -559,7 +559,9 @@ models.service = class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.automation.exportService('${this.id}')" data-tooltip="Export"
+          onclick="eNMS.automation.exportService('${
+            this.id
+          }')" data-tooltip="Export"
             ><span class="glyphicon glyphicon-download"></span
           ></button>
         </li>

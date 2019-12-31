@@ -306,7 +306,7 @@ workflowNamespace.addServicesToWorkflow = function() {
       result.services.map(updateWorkflowService);
     }
   );
-}
+};
 
 function deleteNode(id) {
   let node = nodes.get(id);
@@ -674,7 +674,7 @@ workflowNamespace.createLabel = function() {
     $("#workflow_label").remove();
     alertify.notify("Label created.", "success", 5);
   });
-}
+};
 
 function editLabel(label) {
   showPanel("workflow_label", null, () => {
@@ -727,7 +727,7 @@ workflowNamespace.restartWorkflow = function() {
     $(`#restart_workflow-${workflow.id}`).remove();
     runLogic(result);
   });
-}
+};
 
 function colorService(id, color) {
   if (!ends.has(id) && nodes) {

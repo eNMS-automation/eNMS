@@ -27,15 +27,15 @@ import {
   getServiceState,
 } from "./workflow.js";
 
-let automation = (window.eNMS.automation = {});
+let automationNamespace = (window.eNMS.automation = {});
 export let arrowHistory = [""];
 export let arrowPointer = -1;
 
-automation.openServicePanel = function() {
+automationNamespace.openServicePanel = function() {
   showTypePanel($("#service-type").val());
 };
 
-automation.compare = function(type) {
+automationNamespace.compare = function(type) {
   const v1 = $("input[name=v1]:checked").val();
   const v2 = $("input[name=v2]:checked").val();
   if (v1 && v2) {
@@ -94,7 +94,7 @@ function buildLinks(result, id) {
     </div>`;
 }
 
-automation.copyClipboard = function(elementId, result) {
+automationNamespace.copyClipboard = function(elementId, result) {
   const target = document.getElementById(elementId);
   if (!$(`#tooltip-${elementId}`).length) {
     jsPanel.tooltip.create({
@@ -117,7 +117,7 @@ automation.copyClipboard = function(elementId, result) {
   target.click();
 };
 
-automation.showResult = function(id) {
+automationNamespace.showResult = function(id) {
   createPanel("result", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
       const jsonResult = result;
@@ -148,7 +148,7 @@ automation.showResult = function(id) {
   });
 };
 
-export const showRuntimePanel = (automation.showRuntimePanel = function(
+export const showRuntimePanel = (automationNamespace.showRuntimePanel = function(
   type,
   service,
   runtime,
@@ -320,7 +320,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   });
 }
 
-export const normalRun = (automation.normalRun = function(id) {
+export const normalRun = (automationNamespace.normalRun = function(id) {
   call(`/run_service/${id}`, function(result) {
     runLogic(result);
   });
@@ -344,13 +344,13 @@ export function runLogic(result) {
   $(`#${result.service.type}-${result.service.id}`).remove();
 }
 
-automation.exportService = function(id) {
+automationNamespace.exportService = function(id) {
   call(`/export_service/${id}`, () => {
     alertify.notify("Export successful.", "success", 5);
   });
-}
+};
 
-automation.pauseTask = function(id) {
+automationNamespace.pauseTask = function(id) {
   call(`/task_action/pause/${id}`, function(result) {
     $(`#pause-resume-${id}`)
       .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
@@ -359,7 +359,7 @@ automation.pauseTask = function(id) {
   });
 };
 
-automation.resumeTask = function(id) {
+automationNamespace.resumeTask = function(id) {
   call(`/task_action/resume/${id}`, function() {
     $(`#pause-resume-${id}`)
       .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
@@ -368,7 +368,7 @@ automation.resumeTask = function(id) {
   });
 };
 
-export const switchToWorkflow = (automation.switchToWorkflow = function(
+export const switchToWorkflow = (automationNamespace.switchToWorkflow = function(
   path,
   arrow
 ) {
@@ -411,12 +411,12 @@ export const switchToWorkflow = (automation.switchToWorkflow = function(
   }
 });
 
-automation.field = function(name, type, id) {
+automationNamespace.field = function(name, type, id) {
   const fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
   return $(`#${fieldId}`);
 };
 
-automation.displayCalendar = function(calendarType) {
+automationNamespace.displayCalendar = function(calendarType) {
   showPanel("calendar", calendarType, () => {
     call(`/calendar_init/${calendarType}`, function(tasks) {
       let events = [];
@@ -454,7 +454,7 @@ automation.displayCalendar = function(calendarType) {
   });
 };
 
-automation.schedulerAction = function(action) {
+automationNamespace.schedulerAction = function(action) {
   call(`/scheduler_action/${action}`, function() {
     alertify.notify(`Scheduler ${action}d.`, "success", 5);
   });

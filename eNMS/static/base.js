@@ -18,7 +18,7 @@ workflow: true
 
 import { tables } from "./table.js";
 
-let base = (window.eNMS.base = {});
+let baseNamespace = (window.eNMS.base = {});
 export let editors = {};
 export let userIsActive = true;
 let topZ = 1000;
@@ -185,7 +185,7 @@ function processResults(callback, results) {
   }
 }
 
-export const call = (base.call = function(url, callback) {
+export const call = (baseNamespace.call = function(url, callback) {
   $.ajax({
     type: "POST",
     url: url,
@@ -220,7 +220,10 @@ export function serializeForm(form) {
   return result;
 }
 
-export const deleteInstance = (base.deleteInstance = function(type, id) {
+export const deleteInstance = (baseNamespace.deleteInstance = function(
+  type,
+  id
+) {
   call(`/delete_instance/${type}/${id}`, function(result) {
     $(`#instance_deletion-${id}`).remove();
     if (type.includes("service") || type == "workflow") type = "service";

@@ -9,7 +9,7 @@ initSelect: false
 import { adjustHeight, call, createPanel, fCall, openUrl } from "./base.js";
 import { initTable, tables } from "./table.js";
 
-let inventory = (window.eNMS.inventory = {});
+let inventoryNamespace = (window.eNMS.inventory = {});
 
 function drawDiagrams(diagram, result) {
   const options = {
@@ -85,7 +85,7 @@ export function initDashboard() {
   });
 }
 
-inventory.sshConnection = function(id) {
+inventoryNamespace.sshConnection = function(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
@@ -108,15 +108,15 @@ inventory.sshConnection = function(id) {
   });
 };
 
-inventory.savePoolObjects = function(id) {
+inventoryNamespace.savePoolObjects = function(id) {
   fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);
     alertify.notify("Changes saved.", "success", 5);
     $(`#pool_objects-${id}`).remove();
   });
-}
+};
 
-inventory.showPoolObjectsPanel = function(id) {
+inventoryNamespace.showPoolObjectsPanel = function(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       if (pool.devices.length > 1000 || pool.links.length > 1000) {
@@ -136,7 +136,7 @@ inventory.showPoolObjectsPanel = function(id) {
   });
 };
 
-inventory.updatePools = function(pool) {
+inventoryNamespace.updatePools = function(pool) {
   alertify.notify("Update starting...", "success", 5);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call(endpoint, function() {
@@ -145,7 +145,7 @@ inventory.updatePools = function(pool) {
   });
 };
 
-export const showDeviceNetworkData = (inventory.showDeviceNetworkData = function(
+export const showDeviceNetworkData = (inventoryNamespace.showDeviceNetworkData = function(
   device
 ) {
   call(`/get_device_network_data/${device.id}`, (result) => {
@@ -179,7 +179,7 @@ export const showDeviceNetworkData = (inventory.showDeviceNetworkData = function
   });
 });
 
-inventory.showDeviceResultsPanel = function(device) {
+inventoryNamespace.showDeviceResultsPanel = function(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
     initTable("result", device);
   });

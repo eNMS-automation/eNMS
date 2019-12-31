@@ -248,17 +248,6 @@ const rectangleSelection = (container, network, nodes) => {
   });
 };
 
-// eslint-disable-next-line
-function switchToSubworkflow() {
-  const service = nodes.get(graph.getSelectedNodes()[0]);
-  if (service.type != "workflow") {
-    alertify.notify("You must select a subworkflow.", "error", 5);
-  } else {
-    switchToWorkflow(service.id);
-  }
-}
-
-// eslint-disable-next-line
 function processWorkflowData(instance, id) {
   if (!instance.type) {
     edges.update(edgeToEdge(instance));
@@ -294,7 +283,6 @@ function processWorkflowData(instance, id) {
   }
 }
 
-// eslint-disable-next-line
 function updateWorkflowService(service) {
   nodes.add(serviceToNode(service));
   workflow.services.push(service);
@@ -305,8 +293,7 @@ function updateWorkflowService(service) {
   );
 }
 
-// eslint-disable-next-line
-function addServicesToWorkflow() {
+workflowNamespace.addServicesToWorkflow = function() {
   const selection = $("#service-tree").jstree("get_checked", true);
   if (!selection.length) alertify.notify("Nothing selected.", "error", 5);
   $("#services").val(selection.map((n) => n.data.id));
@@ -377,7 +364,6 @@ function stopWorkflow() {
   });
 }
 
-// eslint-disable-next-line
 function skipServices() {
   const selectedNodes = graph.getSelectedNodes().filter((x) => !isNaN(x));
   if (!selectedNodes.length) return;
@@ -672,8 +658,7 @@ Object.assign(action, {
   },
 });
 
-// eslint-disable-next-line
-function createLabel() {
+workflowNamespace.createLabel = function() {
   const pos = currLabel
     ? [currLabel.x, currLabel.y]
     : mousePosition
@@ -735,8 +720,7 @@ function showRestartWorkflowPanel(workflow, service) {
   );
 }
 
-// eslint-disable-next-line
-function restartWorkflow() {
+workflowNamespace.restartWorkflow = function() {
   fCall(`/run_service/${workflow.id}`, `restart_workflow-form`, function(
     result
   ) {
@@ -764,7 +748,6 @@ export function getServiceState(id, first) {
   });
 }
 
-// eslint-disable-next-line
 function displayWorkflowState(result) {
   if (!nodes || !edges) return;
   resetDisplay();

@@ -248,7 +248,7 @@ class RunForm(BaseForm):
 
 
 class RestartWorkflowForm(BaseForm):
-    action = "restartWorkflow"
+    action = "eNMS.workflow.restartWorkflow"
     form_type = HiddenField(default="restart_workflow")
     start_services = MultipleInstanceField("Services", model="service")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())

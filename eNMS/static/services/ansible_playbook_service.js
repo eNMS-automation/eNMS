@@ -3,10 +3,6 @@ global
 eNMS: false
 */
 
-/**
- * Job Function for the Ansible Service Creation.
- * @param {id} id - Service id.
- */
 // eslint-disable-next-line
 function job(id) {
   eNMS.base.call(`/scan_playbook_folder`, function(playbooks) {

@@ -82,7 +82,7 @@ function createNode(node, nodeType) {
   marker.on("contextmenu", function(e) {
     $(".menu").hide();
     $(`.rc-${nodeType}-menu`).show();
-    selectedObject = node; // eslint-disable-line no-undef
+    selectedObject = node;
   });
   if (clustered) {
     markerGroup.addLayer(marker);
@@ -113,7 +113,7 @@ function createLink(link) {
   polyline.on("contextmenu", function(e) {
     $(".menu").hide();
     $(".rc-link-menu").show();
-    selectedObject = link; // eslint-disable-line no-undef
+    selectedObject = link;
   });
   polyline.bindTooltip(link.name, {
     permanent: false,
@@ -143,7 +143,6 @@ function deleteAll() {
 }
 
 Object.assign(action, {
-  // eslint-disable-line no-unused-vars
   "Open Street Map": () => switchLayer("osm"),
   "Google Maps": () => switchLayer("gm"),
   Image: () => changeMarker("Image"),
@@ -224,7 +223,6 @@ function showPoolView(poolId) {
   });
 }
 
-// eslint-disable-next-line
 function displayPool(poolId, nodes, edges) {
   let container = document.getElementById(`network-${poolId}`);
   nodes = new vis.DataSet(nodes.map(deviceToNode));

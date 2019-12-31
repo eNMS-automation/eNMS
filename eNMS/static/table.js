@@ -559,7 +559,7 @@ models.service = class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="exportService('${this.id}')" data-tooltip="Export"
+          onclick="eNMS.automation.exportService('${this.id}')" data-tooltip="Export"
             ><span class="glyphicon glyphicon-download"></span
           ></button>
         </li>

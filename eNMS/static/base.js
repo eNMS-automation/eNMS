@@ -158,7 +158,6 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
   });
 };
 
-// eslint-disable-next-line
 export function openUrl(url) {
   let win = window.open(url, "_blank");
   win.focus();
@@ -295,7 +294,6 @@ export function createPanel(name, title, id, processing, type, duplicate) {
   });
 }
 
-// eslint-disable-next-line
 export function showPanel(type, id, processing) {
   return createPanel(type, panelName[type] || type, id, processing);
 }
@@ -445,7 +443,6 @@ function showServicePanel(type, id, mode) {
   }
 }
 
-// eslint-disable-next-line
 export function showTypePanel(type, id, mode) {
   createPanel(
     type,
@@ -537,7 +534,6 @@ function processInstance(type, instance) {
   }
 }
 
-// eslint-disable-next-line
 export function processData(type, id) {
   if (type.includes("service") || type == "workflow") {
     $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(

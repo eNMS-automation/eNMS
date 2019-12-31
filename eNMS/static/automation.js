@@ -148,14 +148,6 @@ automation.showResult = function(id) {
   });
 };
 
-// eslint-disable-next-line
-function clearResults(id) {
-  call(`/clear_results/${id}`, () => {
-    alertify.notify("Results cleared.", "success", 5);
-    $(`#results-${id}`).remove();
-  });
-}
-
 export const showRuntimePanel = (automation.showRuntimePanel = function(
   type,
   service,
@@ -311,7 +303,6 @@ function displayResultsTable(service, runtime) {
   );
 }
 
-// eslint-disable-next-line
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   if (!$(`#runtimes-logs-${service.id}`).length) return;
   call(`/get_service_logs/${service.id}/${runtime}`, function(result) {
@@ -353,8 +344,7 @@ export function runLogic(result) {
   $(`#${result.service.type}-${result.service.id}`).remove();
 }
 
-// eslint-disable-next-line
-function exportService(id) {
+automation.exportService = function(id) {
   call(`/export_service/${id}`, () => {
     alertify.notify("Export successful.", "success", 5);
   });

@@ -14,7 +14,7 @@ import {
   createTooltips,
   detectUserInactivity,
 } from "./base.js";
-import { initDashboard } from "./dashboard.js";
+import { initDashboard } from "./inventory.js";
 import { initTable } from "./table.js";
 import { initView } from "./visualization.js";
 import { initWorkflowBuilder } from "./workflow.js";

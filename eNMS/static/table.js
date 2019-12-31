@@ -12,7 +12,7 @@ import {
 import { loadServiceTypes } from "./automation.js";
 import { filterView } from "./visualization.js";
 
-let table = (window.eNMS.table = {});
+let tableNamespace = (window.eNMS.table = {});
 export let tables = {};
 export const models = {};
 

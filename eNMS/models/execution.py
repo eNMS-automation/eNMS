@@ -460,14 +460,13 @@ class Run(AbstractBase):
         if self.skip_query:
             skip_service = self.eval(self.skip_query, **locals())
         if skip_service or self.skip:
-            self.run_state["progress"]["device"]["skipped"] += 1
+            if device:
+                self.run_state["progress"]["device"]["skipped"] += 1
+                key = "success" if self.skip_value == "True" else "failure"
+                self.run_state["summary"][key].append(device.name)
             return {
                 "result": "skipped",
                 "success": self.skip_value == "True",
-                "summary": {
-                    "success": {device.name for device in self.devices},
-                    "failure": [],
-                },
             }
         results = {"runtime": app.get_time(), "logs": []}
         try:

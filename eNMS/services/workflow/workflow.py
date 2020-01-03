@@ -123,7 +123,13 @@ class Workflow(Service):
             number_of_runs[service.name] += 1
             visited.add(service)
             if service in (start, end):
-                results = {"result": "skipped", "success": True}
+                results = {
+                    "summary": {
+                        "success": {device.name for device in run.devices},
+                        "failure": [],
+                    },
+                    "success": True,
+                }
             else:
                 kwargs = {
                     "devices": [
@@ -148,7 +154,7 @@ class Workflow(Service):
                     services.append(successor)
                     run.edge_state[edge.id] += len(targets[service.name])
             else:
-                summary = results.get("summary")
+                summary = results.get("summary", {})
                 for edge_type in ("success", "failure"):
                     for successor, edge in service.adjacent_services(
                         self, "destination", edge_type,

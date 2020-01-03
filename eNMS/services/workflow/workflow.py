@@ -128,7 +128,7 @@ class Workflow(Service):
             if skip_service or service.skip or service in (start, end):
                 results = {
                     "result": "skipped",
-                    "success": service.skip_value,
+                    "success": service.skip_value == "True",
                     "summary": {
                         "success": {device.name for device in run.devices},
                         "failure": [],
@@ -209,9 +209,10 @@ class Workflow(Service):
             if service.skip_query:
                 skip_service = run.eval(service.skip_query, **locals())
             if skip_service or service.skip or service in (start, end):
+                print("tttt"*100, service.skip_value)
                 results = {
                     "result": "skipped",
-                    "success": service.skip_value,
+                    "success": service.skip_value == "True",
                     "summary": {
                         "success": {device.name for device in run.devices},
                         "failure": [],

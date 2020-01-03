@@ -56,7 +56,13 @@ class ServiceForm(BaseForm):
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip = BooleanField("Skip")
     skip_query = PythonField("Skip Query (Python)")
-    skip_value = BooleanField(default=True)
+    skip_value = SelectField(
+        "Skip Value",
+        choices=(
+            ("True", "True"),
+            ("False", "False"),
+        ),
+    )
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     initial_payload = DictField()

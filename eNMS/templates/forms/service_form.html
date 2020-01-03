@@ -215,18 +215,11 @@
                   {{ form.skip_query(id=form_type + '-skip_query',
                   class="form-control readonly-when-run add-id") }}
                 </div>
-                <fieldset>
-                  <div class="item">
-                    <input
-                      id="{{ form_type }}-skip_value"
-                      name="skip_value"
-                      class="add-id"
-                      type="checkbox"
-                      value="y"
-                    />
-                    <label>Success Value of Skipped Devices (True if ticked, False otherwise)</label>
-                  </div>
-                </fieldset>
+                <label class="readonly-when-run">Skip Success Value</label>
+                <div class="form-group">
+                  {{ form.skip_value(id=form_type + '-skip_value',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
                 <label class="readonly-when-run">Maximum number of runs</label>
                 <div class="form-group">
                   {{ form.maximum_runs(id=form_type + '-maximum_runs',

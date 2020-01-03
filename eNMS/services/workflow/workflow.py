@@ -127,7 +127,8 @@ class Workflow(Service):
                 skip_service = run.eval(service.skip_query, **locals())
             if skip_service or service.skip or service in (start, end):
                 results = {
-                    "success": "skipped",
+                    "result": "skipped",
+                    "success": service.skip_value,
                     "summary": {
                         "success": {device.name for device in run.devices},
                         "failure": [],
@@ -170,7 +171,7 @@ class Workflow(Service):
                         targets[successor.name] |= set(summary[edge_type])
                         services.append(successor)
                         run.edge_state[edge.id] += len(summary[edge_type])
-            if not results["success"] == "skipped":
+            if not results.get("result") == "skipped":
                 sleep(service.waiting_time)
         success_devices = targets[end.name]
         failure_devices = targets[start.name] - success_devices
@@ -209,7 +210,8 @@ class Workflow(Service):
                 skip_service = run.eval(service.skip_query, **locals())
             if skip_service or service.skip or service in (start, end):
                 results = {
-                    "success": "skipped",
+                    "result": "skipped",
+                    "success": service.skip_value,
                     "summary": {
                         "success": {device.name for device in run.devices},
                         "failure": [],
@@ -241,7 +243,7 @@ class Workflow(Service):
                     run.edge_state[edge.id] += 1
                 else:
                     run.edge_state[edge.id] = "DONE"
-            if not results["success"] == "skipped":
+            if not results.get("result") == "skipped":
                 sleep(service.waiting_time)
         Session.refresh(run)
         run.restart_run = restart_run 

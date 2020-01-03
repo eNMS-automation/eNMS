@@ -10,6 +10,8 @@ Version 3.18.2
 - Fix task / run cascade deletion bug on MySQL
 - Add "devices" keyword for result postprocessing
 - Allow restart from top-level workflow when restarting from a subworkflow service
+- New "Skip value" property to decide whether skip means success or failure
+- Marc's Netmiko session log code
 
 Version 3.18.1
 --------------

@@ -651,8 +651,6 @@ models.result = class Result extends Base {
     return [
       { data: "runtime", title: "Runtime", search: "text" },
       { data: "duration", title: "Duration", search: "text" },
-      { data: "workflow_name", title: "Workflow", search: "text" },
-      { data: "service_name", title: "Service", search: "text" },
       { data: "device_name", title: "Device", search: "text" },
       {
         data: "success",

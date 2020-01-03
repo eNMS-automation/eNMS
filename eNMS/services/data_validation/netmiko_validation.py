@@ -1,3 +1,5 @@
+import traceback
+
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
 from wtforms import BooleanField, HiddenField
 
@@ -34,14 +36,23 @@ class NetmikoValidationService(ConnectionService):
         command = run.sub(run.command, locals())
         run.log("info", f"Sending '{run.command}' with Netmiko", device)
         expect_string = run.sub(run.expect_string, locals())
-        result = netmiko_connection.send_command(
-            command,
-            delay_factor=run.delay_factor,
-            expect_string=run.expect_string or None,
-            auto_find_prompt=run.auto_find_prompt,
-            strip_prompt=run.strip_prompt,
-            strip_command=run.strip_command,
-        )
+        netmiko_connection.session_log.truncate(0)
+        try:
+            result = netmiko_connection.send_command(
+                command,
+                delay_factor=run.delay_factor,
+                expect_string=run.expect_string or None,
+                auto_find_prompt=run.auto_find_prompt,
+                strip_prompt=run.strip_prompt,
+                strip_command=run.strip_command,
+            )
+        except Exception as exc:
+            return {
+                "command": command,
+                "error": traceback.format_exc(),
+                "result": netmiko_connection.session_log.getvalue().decode(),
+                "success": False,
+                }
         return {"command": command, "result": result}
 
 

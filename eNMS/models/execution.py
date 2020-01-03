@@ -3,6 +3,7 @@ from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
 from functools import partial
+from io import BytesIO
 from json import dumps, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
@@ -783,6 +784,7 @@ class Run(AbstractBase):
             fast_cli=self.fast_cli,
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
+            session_log=BytesIO(),
         )
         if self.enable_mode:
             netmiko_connection.enable()

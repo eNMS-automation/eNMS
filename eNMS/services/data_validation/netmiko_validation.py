@@ -1,6 +1,5 @@
-import traceback
-
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
+from traceback import format_exc
 from wtforms import BooleanField, HiddenField
 
 from eNMS.database.dialect import Column, LargeString, SmallString
@@ -46,13 +45,13 @@ class NetmikoValidationService(ConnectionService):
                 strip_prompt=run.strip_prompt,
                 strip_command=run.strip_command,
             )
-        except Exception as exc:
+        except Exception:
             return {
                 "command": command,
-                "error": traceback.format_exc(),
+                "error": format_exc(),
                 "result": netmiko_connection.session_log.getvalue().decode(),
                 "success": False,
-                }
+            }
         return {"command": command, "result": result}
 
 

@@ -791,11 +791,12 @@ function displayWorkflowState(result) {
           let progressLabel = `Progress - ${progress.success +
             progress.failure +
             progress.skipped}/${progress.total}`;
-          progressInfo = [];
+          let progressInfo = [];
           if (progress.success) progressInfo.push(`${progress.success} passed`);
           if (progress.failure) progressInfo.push(`${progress.failure} failed`);
-          if (progress.skipped)
+          if (progress.skipped) {
             progressInfo.push(`${progress.skipped} skipped`);
+          }
           label += `${progressLabel} (${progressInfo.join(", ")})`;
           nodes.update({
             id: id,

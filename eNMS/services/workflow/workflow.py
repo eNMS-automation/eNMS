@@ -186,7 +186,7 @@ class Workflow(Service):
         end = fetch("service", scoped_name="End")
         services = [fetch("service", id=id) for id in run.start_services]
         restart_run = run.restart_run
-        visited, success = set(), False
+        visited = set()
         while services:
             if run.stop:
                 return {"payload": payload, "success": False}

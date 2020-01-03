@@ -1,6 +1,5 @@
-import traceback
-
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
+from traceback import format_exc
 from wtforms import HiddenField
 
 from eNMS.database.dialect import Column, LargeString, SmallString
@@ -35,38 +34,37 @@ class NetmikoPromptsService(ConnectionService):
 
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
-
         send_strings = (run.command, run.response1, run.response2, run.response3)
         expect_strings = (run.confirmation1, run.confirmation2, run.confirmation3, None)
-
         commands = []
         results = {"commands": commands}
         for send_string, expect_string in zip(send_strings, expect_strings):
             command = run.sub(send_string, locals())
-            if len(command) == 0:
-                break # Stop when no commmand or response
+            if not command:
+                break
             commands.append(command)
             run.log("info", f"Sending '{command}' with Netmiko", device)
-            
+            confirmation = run.sub(expect_string, locals())
             try:
                 result = netmiko_connection.send_command_timing(
                     command, delay_factor=run.delay_factor
                 )
-            except Exception as exc:
-                results.update({
-                    "error": traceback.format_exc(),
-                    "result": netmiko_connection.session_log.getvalue().decode(),
-                    "match": confirmation,
-                    "success": False,
-                    })
-                return results
-
-            confirmation = run.sub(expect_string, locals())
+            except Exception:
+                return {
+                    **results,
+                    **{
+                        "error": format_exc(),
+                        "result": netmiko_connection.session_log.getvalue().decode(),
+                        "match": confirmation,
+                        "success": False,
+                    },
+                }
             results[command] = {"result": result, "match": confirmation}
             if confirmation and confirmation not in result:
-                results.update({"success": False, "result": result, "match": confirmation})
+                results.update(
+                    {"success": False, "result": result, "match": confirmation}
+                )
                 return results
-
         return {"commands": commands, "result": result}
 
 

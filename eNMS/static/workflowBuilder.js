@@ -773,29 +773,28 @@ function displayWorkflowState(result) {
     if (result.state.services) {
       $.each(result.state.services, (path, state) => {
         const id = parseInt(path.split(">").slice(-1)[0]);
+        if (ends.has(id) || !(id in nodes._data)) return;
         const color = {
           true: "#32cd32",
           false: "#FF6666",
           skipped: "#D3D3D3",
           null: "#00CCFF",
         };
-        if (id in nodes._data && !ends.has(id)) {
-          colorService(id, color[state.success]);
-          const progress = state.progress.device;
-          if (progress.total) {
-            let label = `<b>${nodes.get(id).name}</b>\n`;
-            label += "—————\n";
-            let progressLabel = `Progress - ${progress.success +
-              progress.failure}/${progress.total}`;
-            progressLabel += ` (${progress.success} passed, ${
-              progress.failure
-            } failed)`;
-            label += progressLabel;
-            nodes.update({
-              id: id,
-              label: label,
-            });
-          }
+        colorService(id, color[state.success]);
+        const progress = state.progress.device;
+        if (progress.total) {
+          let label = `<b>${nodes.get(id).name}</b>\n`;
+          label += "—————\n";
+          let progressLabel = `Progress - ${progress.success +
+            progress.failure}/${progress.total}`;
+          progressLabel += ` (${progress.success} passed, ${
+            progress.failure
+          } failed)`;
+          label += progressLabel;
+          nodes.update({
+            id: id,
+            label: label,
+          });
         }
       });
     }

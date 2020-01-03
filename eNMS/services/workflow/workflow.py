@@ -184,7 +184,7 @@ class Workflow(Service):
         run.run_state["progress"]["device"]["failure"] = len(failure_devices)
         run.run_state["summary"] = summary
         Session.refresh(run)
-        run.restart_run = restart_run 
+        run.restart_run = restart_run
         return {"payload": payload, "success": success}
 
     def standard_bfs(self, run, payload, device=None):
@@ -210,7 +210,7 @@ class Workflow(Service):
             kwargs = {
                 "service": service.id,
                 "workflow": self.id,
-                "restart_run": restart_run ,
+                "restart_run": restart_run,
                 "parent": run,
                 "parent_runtime": run.parent_runtime,
             }
@@ -234,7 +234,7 @@ class Workflow(Service):
             if not results.get("result") == "skipped":
                 sleep(service.waiting_time)
         Session.refresh(run)
-        run.restart_run = restart_run 
+        run.restart_run = restart_run
         return {"payload": payload, "success": end in visited}
 
 

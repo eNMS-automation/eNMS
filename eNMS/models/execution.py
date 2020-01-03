@@ -258,7 +258,9 @@ class Run(AbstractBase):
         state = {
             "status": "Idle",
             "success": None,
-            "progress": {"device": {"total": 0, "success": 0, "failure": 0}},
+            "progress": {
+                "device": {"total": 0, "success": 0, "failure": 0, "skipped": 0}
+            },
             "attempt": 0,
             "waiting_time": {
                 "total": self.service.waiting_time,
@@ -458,7 +460,7 @@ class Run(AbstractBase):
         if self.skip_query:
             skip_service = self.eval(self.skip_query, **locals())
         if skip_service or self.skip:
-            self.run_state["progress"]["service"]["skipped"] += 1
+            self.run_state["progress"]["device"]["skipped"] += 1
             return {
                 "result": "skipped",
                 "success": self.skip_value == "True",

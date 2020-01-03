@@ -57,11 +57,7 @@ class ServiceForm(BaseForm):
     skip = BooleanField("Skip")
     skip_query = PythonField("Skip Query (Python)")
     skip_value = SelectField(
-        "Skip Value",
-        choices=(
-            ("True", "True"),
-            ("False", "False"),
-        ),
+        "Skip Value", choices=(("True", "True"), ("False", "False"),),
     )
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")

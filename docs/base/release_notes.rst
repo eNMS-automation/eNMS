@@ -7,7 +7,9 @@ Version 3.18.2
 
 - Fix subworkflow iteration bug
 - Fix workflow display with same shared services in multiple subworkflows
+- Fix task / run cascade deletion bug on MySQL
 - Add "devices" keyword for result postprocessing
+- Allow restart from top-level workflow when restarting from a subworkflow service
 
 Version 3.18.1
 --------------

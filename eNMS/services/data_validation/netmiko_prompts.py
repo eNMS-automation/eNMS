@@ -39,9 +39,9 @@ class NetmikoPromptsService(ConnectionService):
         commands = []
         results = {"commands": commands}
         for send_string, expect_string in zip(send_strings, expect_strings):
-            command = run.sub(send_string, locals())
-            if not command:
+            if not send_string:
                 break
+            command = run.sub(send_string, locals())
             commands.append(command)
             run.log("info", f"Sending '{command}' with Netmiko", device)
             confirmation = run.sub(expect_string, locals())

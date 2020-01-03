@@ -58,7 +58,7 @@ class Service(AbstractBase):
     initial_payload = Column(MutableDict)
     skip = Column(Boolean, default=False)
     skip_query = Column(LargeString)
-    skip_value = Column(SmallString)
+    skip_value = Column(Boolean, default=True)
     iteration_values = Column(LargeString)
     iteration_variable_name = Column(SmallString, default="iteration_value")
     iteration_devices = Column(LargeString)

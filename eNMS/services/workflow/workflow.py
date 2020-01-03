@@ -205,37 +205,24 @@ class Workflow(Service):
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
-            skip_service = False
-            if service.skip_query:
-                skip_service = run.eval(service.skip_query, **locals())
-            if skip_service or service.skip or service in (start, end):
-                print("tttt"*100, service.skip_value)
-                results = {
-                    "result": "skipped",
-                    "success": service.skip_value == "True",
-                    "summary": {
-                        "success": {device.name for device in run.devices},
-                        "failure": [],
-                    },
-                }
-                run.run_state["progress"]["service"]["skipped"] += 1
-            else:
-                kwargs = {
-                    "service": service.id,
-                    "workflow": self.id,
-                    "restart_run": restart_run ,
-                    "parent": run,
-                    "parent_runtime": run.parent_runtime,
-                }
-                if run.parent_device_id:
-                    kwargs["parent_device"] = run.parent_device_id
-                if device:
-                    kwargs["devices"] = [device.id]
-                service_run = factory("run", **kwargs)
-                results = service_run.run(payload)
-                if not device:
-                    status = "success" if results["success"] else "failure"
-                    run.run_state["progress"]["service"][status] += 1
+            if service in (start, end):
+                results = {"result": "skipped", "success": True}
+            kwargs = {
+                "service": service.id,
+                "workflow": self.id,
+                "restart_run": restart_run ,
+                "parent": run,
+                "parent_runtime": run.parent_runtime,
+            }
+            if run.parent_device_id:
+                kwargs["parent_device"] = run.parent_device_id
+            if device:
+                kwargs["devices"] = [device.id]
+            service_run = factory("run", **kwargs)
+            results = service_run.run(payload)
+            if not device:
+                status = "success" if results["success"] else "failure"
+                run.run_state["progress"]["service"][status] += 1
             for successor, edge in service.adjacent_services(
                 self, "destination", "success" if results["success"] else "failure",
             ):

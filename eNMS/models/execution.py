@@ -454,6 +454,19 @@ class Run(AbstractBase):
     def get_results(self, payload, device=None):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
+        skip_service = False
+        if self.skip_query:
+            skip_service = self.eval(self.skip_query, **locals())
+        if skip_service or self.skip:
+            self.run_state["progress"]["service"]["skipped"] += 1
+            return {
+                "result": "skipped",
+                "success": self.skip_value == "True",
+                "summary": {
+                    "success": {device.name for device in self.devices},
+                    "failure": [],
+                },
+            }
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":

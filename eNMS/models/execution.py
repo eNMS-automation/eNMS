@@ -157,7 +157,7 @@ class Run(AbstractBase):
         return self if not self.parent else self.parent.original
 
     def __repr__(self):
-        return f"{self.runtime} ({self.service_name} run by {self.creator})"
+        return f"{self.runtime} (run by '{self.creator}')"
 
     def __getattr__(self, key):
         if key in self.__dict__:

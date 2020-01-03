@@ -130,7 +130,12 @@ class AutomationController(BaseController):
 
     def get_runtimes(self, type, id):
         runs = fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(set((run.parent_runtime, run.name) for run in runs))
+        return sorted(
+            set(
+                (run.parent_runtime, f"{run.parent_runtime} (run by '{run.creator}')")
+                for run in runs
+            )
+        )
 
     def get_result(self, id):
         return fetch("result", id=id).result
@@ -273,9 +278,7 @@ class AutomationController(BaseController):
             if kwargs.get(key)
         }
         restart_run = fetch(
-            "run",
-            allow_none=True,
-            runtime=kwargs.get("restart_runtime"),
+            "run", allow_none=True, runtime=kwargs.get("restart_runtime"),
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run

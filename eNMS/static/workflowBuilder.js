@@ -711,7 +711,7 @@ function showRestartWorkflowPanel(workflow, service) {
           $("#restart_runtime").append(
             $("<option></option>")
               .attr("value", runtime[0])
-              .text(runtime[0])
+              .text(runtime[1])
           );
         });
         $("#restart_runtime").val(runtimes[runtimes.length - 1]);

@@ -772,7 +772,7 @@ function displayWorkflowState(result) {
     $("#status").text(`Status: ${result.state.status}`);
     if (result.state.services) {
       $.each(result.state.services, (path, state) => {
-        const id = path.split(">").slice(-1)[0];
+        const id = parseInt(path.split(">").slice(-1)[0]);
         const color = {
           true: "#32cd32",
           false: "#FF6666",

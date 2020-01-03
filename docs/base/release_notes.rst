@@ -11,6 +11,8 @@ Version 3.18.2
 - Add "devices" keyword for result postprocessing
 - Allow restart from top-level workflow when restarting from a subworkflow service
 - New "Skip value" property to decide whether skip means success or failure
+- Fix the workflow builder progress display when devices are skipped. Now eNMS shows how many devices
+are skipped, and it no longer shows anything when it's 0 ("0 failed", "0 passed" etc)
 - Marc's Netmiko session log code
 
 Version 3.18.1

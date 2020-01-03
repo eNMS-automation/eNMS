@@ -210,9 +210,14 @@
                     >
                   </div>
                 </fieldset>
-                <label class="readonly-when-run">Skip Service If True </label>
+                <label class="readonly-when-run">Skip Service If True</label>
                 <div class="form-group">
                   {{ form.skip_query(id=form_type + '-skip_query',
+                  class="form-control readonly-when-run add-id") }}
+                </div>
+                <label class="readonly-when-run">Success Value of Skipped Devices</label>
+                <div class="form-group">
+                  {{ form.skip_value(id=form_type + '-skip_value',
                   class="form-control readonly-when-run add-id") }}
                 </div>
                 <label class="readonly-when-run">Maximum number of runs</label>

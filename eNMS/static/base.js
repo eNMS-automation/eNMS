@@ -256,7 +256,15 @@ export function createTooltips() {
   });
 }
 
-export function createPanel(name, title, id, processing, type, duplicate, content) {
+export function createPanel(
+  name,
+  title,
+  id,
+  processing,
+  type,
+  duplicate,
+  content
+) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
@@ -279,10 +287,10 @@ export function createPanel(name, title, id, processing, type, duplicate, conten
     resizeit: {
       containment: 0,
     },
-  }
+  };
   if (content) {
     kwargs.content = content;
-  } else { 
+  } else {
     kwargs.contentAjax = {
       url: `../form/${name}`,
       done: function(panel) {
@@ -293,11 +301,20 @@ export function createPanel(name, title, id, processing, type, duplicate, conten
       },
     };
   }
-  return jsPanel.create(kwargs);
+  jsPanel.create(kwargs);
+  if (processing && content) processing(content);
 }
 
 export function showPanel(type, id, processing, content) {
-  return createPanel(type, panelName[type] || type, id, processing, null, null, content);
+  return createPanel(
+    type,
+    panelName[type] || type,
+    id,
+    processing,
+    null,
+    null,
+    content
+  );
 }
 
 export function showDeletionPanel(instance) {
@@ -659,28 +676,67 @@ export function notify(...args) {
 }
 
 function showAllAlerts() {
-  showPanel("Alerts", null, null, `
-    <ul
-      class="list-unstyled msg_list"
-      role="menu"
-    >
-      ${getAlerts()}
-    </ul>
-  `)
+  showPanel(
+    "Alerts",
+    null,
+    () => {
+      $("#example").DataTable({
+        "columns": [
+          { "width": "200px" },
+          { "width": "60px" },
+          null,
+        ],
+
+      });
+    },
+    `
+    <div class="modal-body">
+      <table 
+        id="example"
+        class="table table-striped table-bordered table-hover wrap"
+        style="width:100%"
+      >
+        <thead>
+          <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th style="word-wrap: break-word">Content</th>
+          </tr>
+        </thead>
+        <tbody>
+        ${getAlerts()}
+        </tbody>
+      </table>
+    <div>
+  `
+  );
 }
 
 function getAlerts(preview) {
   let alerts = JSON.parse(localStorage.getItem("alerts")).reverse();
-  if (preview) alerts.splice(0, 6);
-  return alerts.map((alert) => {
-    const color = alert[1] == "error" ? "f87979" : "5BBD72";
-    const fontSize = preview ? "11px" : "14px";
-    return `<li style="background: #${color}; pointer-events: none; margin: 2px 6px">
-      <a style="word-wrap: break-word; color: #FFFFFF">
-      <span class="time" style="font-size: ${fontSize}">${alert[3]}</span><span>${alert[0]}</span>
-      </a>
-    </li>`;
-  }).join("");
+  if (preview) alerts = alerts.splice(0, 6);
+  return alerts
+    .map((alert) => {
+      if (preview) {
+        const color = alert[1] == "error" ? "f87979" : "5BBD72";
+        const fontSize = preview ? "11px" : "14px";
+        return `<li style="background: #${color}; pointer-events: none; margin: 2px 6px">
+        <a style="word-wrap: break-word; color: #FFFFFF">
+        <span class="time" style="font-size: ${fontSize}">${
+          alert[3]
+        }</span><span>${alert[0]}</span>
+        </a>
+      </li>`;
+      } else {
+        return `
+        <tr>
+          <td>${alert[3]}</td>
+          <td>${alert[1]}</td>
+          <td>${alert[0]}</td>
+        </tr>`;
+      }
+    })
+    .join("");
 }
 
 export function createAlerts() {

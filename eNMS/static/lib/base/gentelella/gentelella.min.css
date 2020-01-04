@@ -3287,10 +3287,6 @@ ul.verticle_bars li {
     white-space: pre-line !important;
 }
 
-.cell-pre {
-    white-space: pre;
-}
-
 th.dt-center,
 td.dt-center {
     text-align: center;

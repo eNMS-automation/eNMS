@@ -230,9 +230,10 @@
                 </li>
                 <li role="presentation" class="nav-item dropdown">
                   <a
-                    href="javascript:;"
+                    onclick="eNMS.base.createAlerts()"
                     class="dropdown-toggle info-number"
-                    id="navbarDropdown1"
+                    style="cursor: pointer"
+                    id="alerts-menu"
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
@@ -241,9 +242,10 @@
                     &nbsp;Alerts
                   </a>
                   <ul
+                    id="alerts"
                     class="dropdown-menu list-unstyled msg_list"
                     role="menu"
-                    aria-labelledby="navbarDropdown1"
+                    aria-labelledby="alerts-menu"
                   >
                     <li>
                       <a class="dropdown-item">

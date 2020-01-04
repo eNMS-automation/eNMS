@@ -128,7 +128,6 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
   return new Promise((resolve, reject) => {
     let script = document.createElement("script");
     const prior = beforeEl || document.getElementsByTagName("script")[0];
-
     script.async = async;
     script.defer = defer;
 
@@ -149,10 +148,8 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
         }
       }
     }
-
     script.onload = onloadHander;
     script.onreadystatechange = onloadHander;
-
     script.src = source;
     prior.parentNode.insertBefore(script, prior);
   });
@@ -648,6 +645,27 @@ export function adjustHeight() {
   };
 })(jQuery, window);
 
+export function createAlerts() {
+  console.log("test")
+  $("#alerts").empty().append(`
+    <li>
+      <a class="dropdown-item">
+        <span class="image"
+          ><img src="images/img.jpg" alt="Profile Image"
+        /></span>
+        <span>
+          <span>John Smith</span>
+          <span class="time">3 mins ago</span>
+        </span>
+        <span class="message">
+          Film festivals used to be do-or-die moments for movie
+          makers. They were where...
+        </span>
+      </a>
+    </li>`
+  )
+}
+
 $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   $(this)
     .next("ul")
@@ -658,6 +676,7 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
 
 Object.assign(window.eNMS.base, {
   copyToClipboard: copyToClipboard,
+  createAlerts: createAlerts,
   processData: processData,
   showDeletionPanel: showDeletionPanel,
   showPanel: showPanel,

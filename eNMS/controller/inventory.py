@@ -88,26 +88,6 @@ class InventoryController(BaseController):
                     sheet.write(obj_index, index, getattr(obj, property))
         workbook.save(self.path / "files" / "spreadsheets" / filename)
 
-    def query_librenms(self, **kwargs):
-        devices = http_get(
-            f'{self.config["opennms"]["address"]}/api/v0/devices',
-            headers={"X-Auth-Token": environ.get("LIBRENMS_TOKEN")},
-        ).json()["devices"]
-        for device in devices:
-            factory(
-                "device",
-                **{
-                    "name": device["hostname"],
-                    "ip_address": device["ip"] or device["hostname"],
-                    "model": device["hardware"],
-                    "operating_system": device["os"],
-                    "os_version": device["version"],
-                    "location": device["location"],
-                    "longitude": device["lng"],
-                    "latitude": device["lat"],
-                },
-            )
-
     def topology_import(self, file):
         book = open_workbook(file_contents=file.read())
         status = "Topology successfully imported."

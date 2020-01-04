@@ -131,7 +131,6 @@ class BaseController:
         "migration_export",
         "migration_import",
         "query_librenms",
-        "query_opennms",
         "reset_status",
         "run_service",
         "save_file",

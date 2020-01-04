@@ -29,12 +29,6 @@ administrationNamespace.showImportTopologyPanel = function() {
   });
 };
 
-administrationNamespace.queryOpenNMS = function() {
-  call("/query_opennms", function() {
-    notify("Topology imported from OpenNMS.", "success", 5);
-  });
-};
-
 administrationNamespace.queryLibreNMS = function() {
   call("/query_librenms", function() {
     notify("Topology imported from LibreNMS.", "success", 5);

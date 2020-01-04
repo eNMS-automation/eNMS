@@ -77,11 +77,32 @@ class TopologyImportService(Service):
                     devices[device]["ip_address"] = interface["ipAddress"]
                     factory("device", **devices[device])
 
+    def query_librenms(self):
+        devices = http_get(
+            f'{app.config["librenms"]["address"]}/api/v0/devices',
+            headers={"X-Auth-Token": environ.get("LIBRENMS_TOKEN")},
+        ).json()["devices"]
+        for device in devices:
+            factory(
+                "device",
+                **{
+                    "name": device["hostname"],
+                    "ip_address": device["ip"] or device["hostname"],
+                    "model": device["hardware"],
+                    "operating_system": device["os"],
+                    "os_version": device["version"],
+                    "location": device["location"],
+                    "longitude": device["lng"],
+                    "latitude": device["lat"],
+                },
+            )
+
 
 class TopologyImportForm(ServiceForm):
     form_type = HiddenField(default="topology_import")
     import_type = SelectField(
         choices=(
+            ("librenms", "LibreNMS"),
             ("netbox", "Netbox"),
             ("opennms", "OpenNMS"),
         )

@@ -1436,19 +1436,13 @@ div.box {
 
 ul.msg_list li {
     background: #f7f7f7;
-    padding: 5px;
     display: -ms-flexbox;
-    display: flex;
-    margin: 6px 6px 0;
+    display: flex; 
     width: 96%!important
 }
 
-ul.msg_list li:last-child {
-    margin-bottom: 6px;
-    padding: 10px
-}
-
 ul.msg_list li a {
+    width: 100%;
     padding: 5px 8px!important;
 }
 

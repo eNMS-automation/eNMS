@@ -660,30 +660,34 @@ export function notify(...args) {
 
 function showAllAlerts() {
   showPanel("Alerts", null, null, `
-    <div>${getAlerts().join("")}</div>
+    <ul
+      class="list-unstyled"
+      role="menu"
+    >
+      ${getAlerts()}
+    </ul>
   `)
 }
-
-function getAlerts() {
-  return JSON.parse(localStorage.getItem("alerts"))
-    .reverse()
-    .splice(0, 6)
-    .map((alert) => {
-      const color = alert[1] == "error" ? "f87979" : "5BBD72";
-      return `
-      <li style="background: #${color}; pointer-events: none">
-        <a style="word-wrap: break-word; color: #FFFFFF">
-          <span class="time">${alert[3]}</span>
-          <span>${alert[0]}</span>
-        </a>
-      </li>`;
-  });
+function getAlerts(preview) {
+  let alerts = JSON.parse(localStorage.getItem("alerts")).reverse();
+  if (preview) alerts.splice(0, 6);
+  return alerts.map((alert) => {
+    const color = alert[1] == "error" ? "f87979" : "5BBD72";
+    const alertLine = preview
+      ? `<span class="time">${alert[3]}</span><span>${alert[0]}</span>`
+      : `<b>${alert[3]}</b><br> ${alert[0]}`;
+    return `<li style="background: #${color}; pointer-events: none; margin: 2px 6px">
+      <a style="word-wrap: break-word; color: #FFFFFF">
+        ${alertLine}
+      </a>
+    </li>`;
+  }).join("");
 }
 
 export function createAlerts() {
   $("#alerts").empty().append(`
-    ${getAlerts().join("")}
-    <li>
+    ${getAlerts(true)}
+    <li style="margin: 3px 6px 0; padding: 10px; margin-bottom: 6px;">
       <div class="text-center">
         <a class="dropdown-item" onclick="eNMS.base.showAllAlerts()">
           <strong>See All Alerts</strong>

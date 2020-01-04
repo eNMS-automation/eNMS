@@ -256,13 +256,13 @@ export function createTooltips() {
   });
 }
 
-export function createPanel(name, title, id, processing, type, duplicate) {
+export function createPanel(name, title, id, processing, type, duplicate, content) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
     return;
   }
-  return jsPanel.create({
+  let kwargs = {
     container: "#container-body",
     id: panelId,
     border: "2px solid #2A3F52",
@@ -272,15 +272,6 @@ export function createPanel(name, title, id, processing, type, duplicate) {
     contentSize: panelSize[name] || "800 600",
     position: "center-top 0 10",
     headerTitle: title,
-    contentAjax: {
-      url: `../form/${name}`,
-      done: function(panel) {
-        panel.content.innerHTML = this.responseText;
-        preprocessForm(panel, id, type, duplicate);
-        configureForm(name, id, panelId);
-        if (processing) processing(panel);
-      },
-    },
     dragit: {
       opacity: 0.6,
       containment: 0,
@@ -288,11 +279,25 @@ export function createPanel(name, title, id, processing, type, duplicate) {
     resizeit: {
       containment: 0,
     },
-  });
+  }
+  if (content) {
+    kwargs.content = content;
+  } else { 
+    kwargs.contentAjax = {
+      url: `../form/${name}`,
+      done: function(panel) {
+        panel.content.innerHTML = this.responseText;
+        preprocessForm(panel, id, type, duplicate);
+        configureForm(name, id, panelId);
+        if (processing) processing(panel);
+      },
+    };
+  }
+  return jsPanel.create(kwargs);
 }
 
-export function showPanel(type, id, processing) {
-  return createPanel(type, panelName[type] || type, id, processing);
+export function showPanel(type, id, processing, content) {
+  return createPanel(type, panelName[type] || type, id, processing, null, null, content);
 }
 
 export function showDeletionPanel(instance) {
@@ -653,24 +658,34 @@ export function notify(...args) {
   alertify.notify(...args);
 }
 
-export function createAlerts() {
-  const alerts = JSON.parse(localStorage.getItem("alerts"))
-    .splice(Math.max(this.length - 6, 1))
+function showAllAlerts() {
+  showPanel("Alerts", null, null, `
+    <div>${getAlerts().join("")}</div>
+  `)
+}
+
+function getAlerts() {
+  return JSON.parse(localStorage.getItem("alerts"))
+    .reverse()
+    .splice(0, 6)
     .map((alert) => {
       const color = alert[1] == "error" ? "f87979" : "5BBD72";
       return `
-      <li style="background: #${color}">
+      <li style="background: #${color}; pointer-events: none">
         <a style="word-wrap: break-word; color: #FFFFFF">
           <span class="time">${alert[3]}</span>
           <span>${alert[0]}</span>
         </a>
       </li>`;
-    });
+  });
+}
+
+export function createAlerts() {
   $("#alerts").empty().append(`
-    ${alerts.join("")}
+    ${getAlerts().join("")}
     <li>
       <div class="text-center">
-        <a class="dropdown-item">
+        <a class="dropdown-item" onclick="eNMS.base.showAllAlerts()">
           <strong>See All Alerts</strong>
           <i class="fa fa-angle-right"></i>
         </a>
@@ -691,6 +706,7 @@ Object.assign(window.eNMS.base, {
   copyToClipboard: copyToClipboard,
   createAlerts: createAlerts,
   processData: processData,
+  showAllAlerts: showAllAlerts,
   showDeletionPanel: showDeletionPanel,
   showPanel: showPanel,
   showTypePanel: showTypePanel,

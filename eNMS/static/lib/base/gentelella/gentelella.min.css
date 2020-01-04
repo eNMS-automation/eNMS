@@ -1452,14 +1452,6 @@ ul.msg_list li a {
     padding: 5px 8px!important;
 }
 
-ul.msg_list li a .image img {
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    float: left;
-    margin-right: 10px;
-    width: 11%
-}
-
 ul.msg_list li a .time {
     font-size: 11px;
     font-style: italic;

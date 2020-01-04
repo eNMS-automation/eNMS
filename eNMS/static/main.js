@@ -162,6 +162,7 @@ function initSidebar() {
 $(document).ready(function() {
   NProgress.start();
   $(window).resize(adjustHeight);
+  if (!localStorage.getItem("alerts")) localStorage.setItem("alerts", "[]");
   initSidebar();
   if (page.includes("table")) {
     initTable(page.split("/")[1]);

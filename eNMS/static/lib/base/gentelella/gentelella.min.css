@@ -1449,7 +1449,7 @@ ul.msg_list li:last-child {
 }
 
 ul.msg_list li a {
-    padding: 3px 5px!important
+    padding: 5px 8px!important;
 }
 
 ul.msg_list li a .image img {
@@ -3485,4 +3485,9 @@ fieldset.section {
     min-width: 100px;
     display: inline-block;
     text-align: center;
+}
+
+/* Prevent alertify.js alerts from going off screen */
+.ajs-message {
+    word-wrap: break-word;
 }

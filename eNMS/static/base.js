@@ -642,27 +642,27 @@ export function adjustHeight() {
 })(jQuery, window);
 
 export function notify(...args) {
-  //localStorage.getItem('alerts').push(alert, type, duration)
+  let alerts = JSON.parse(localStorage.getItem('alerts'));
+  localStorage.setItem('alerts', JSON.stringify([...alerts, args]));
   alertify.notify(...args);
 }
 
 export function createAlerts() {
-  $("#alerts").empty().append(`
-    <li>
-      <a class="dropdown-item">
-        <span class="image"
-          ><img src="images/img.jpg" alt="Profile Image"
-        /></span>
-        <span>
-          <span>John Smith</span>
+  // # red #D95C5C / green : 5BBD72
+  const alerts = JSON.parse(localStorage.getItem('alerts')).map((alert) => {
+    const color = alert[1] == "error" ? "f87979" : "5BBD72";
+    return `
+      <li style="background: #${color}">
+        <a class="dropdown-item" style="word-wrap: break-word; color: #FFFFFF">
           <span class="time">3 mins ago</span>
-        </span>
-        <span class="message">
-          Film festivals used to be do-or-die moments for movie
-          makers. They were where...
-        </span>
-      </a>
-    </li>
+          <span class="message">
+            ${alert[0]}
+          </span>
+        </a>
+      </li>`;
+  });
+  $("#alerts").empty().append(`
+    ${alerts.join("")}
     <li>
       <div class="text-center">
         <a class="dropdown-item">
@@ -671,7 +671,7 @@ export function createAlerts() {
         </a>
       </div>
     </li>
-    `);
+  `);
 }
 
 $(".dropdown-submenu a.menu-submenu").on("click", function(e) {

@@ -13,7 +13,6 @@ table.tile_info td p {
 .detail a,
 .expand,
 .jqstooltip,
-.paging_full_numbers a:hover,
 .site_title:focus,
 .site_title:hover,
 a,
@@ -1216,11 +1215,6 @@ td span {
     border-color: #ddd!important
 }
 
-.paging_full_numbers a.paginate_active {
-    background-color: rgba(38, 185, 154, .59)!important;
-    border-color: rgba(38, 185, 154, .59)!important
-}
-
 a.DTTT_button,
 button.DTTT_button,
 div.DTTT_button {
@@ -1312,7 +1306,6 @@ table.dataTable th.focus {
     outline-offset: -1px
 }
 
-.paging_full_numbers a:active,
 table.display thead td:active,
 table.display thead th:active {
     outline: 0
@@ -1384,31 +1377,6 @@ td.details {
     width: 40%
 }
 
-.paging_full_numbers {
-    width: 400px;
-    height: 22px;
-    line-height: 22px
-}
-
-.paging_full_numbers a.paginate_active,
-.paging_full_numbers a.paginate_button {
-    border: 1px solid #aaa;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    padding: 2px 5px;
-    margin: 0 3px;
-    cursor: pointer
-}
-
-.paging_full_numbers a.paginate_button {
-    background-color: #ddd
-}
-
-.paging_full_numbers a.paginate_button:hover {
-    background-color: #ccc;
-    text-decoration: none!important
-}
-
 .login_content .btn-default:hover,
 .login_content a,
 .tile-stats>.dash-box-footer,
@@ -1418,44 +1386,17 @@ span.tag {
     text-decoration: none
 }
 
-table.display tr.even.row_selected td {
-    background-color: #b0bed9
-}
-
-table.display tr.odd.row_selected td {
-    background-color: #9fafd1
-}
-
-div.box {
-    height: 100px;
-    padding: 10px;
-    overflow: auto;
-    border: 1px solid #8080ff;
-    background-color: #e5e5ff
-}
-
 ul.msg_list li {
     background: #f7f7f7;
     width: 96%!important
 }
 
-ul.msg_list li a {
-    width: 100%;
-    padding: 5px 8px!important;
-}
-
 ul.msg_list li a .time {
-    font-size: 11px;
     font-style: italic;
     font-weight: 700;
     width: 100%;
     display: inline-block;
     text-align: center
-}
-
-ul.msg_list li a .message {
-    display: block!important;
-    font-size: 11px
 }
 
 .dropdown-menu.msg_list span {

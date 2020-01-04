@@ -8,6 +8,7 @@ csrf_token: false
 formProperties: false
 job: false
 jsPanel: false
+moment: false
 page: false
 processWorkflowData: false
 Promise: false
@@ -642,25 +643,29 @@ export function adjustHeight() {
 })(jQuery, window);
 
 export function notify(...args) {
-  let alerts = JSON.parse(localStorage.getItem('alerts'));
-  localStorage.setItem('alerts', JSON.stringify([...alerts, args]));
+  localStorage.setItem(
+    "alerts",
+    JSON.stringify([
+      ...JSON.parse(localStorage.getItem("alerts")),
+      [...args, moment().format("MMMM Do YYYY, h:mm:ss a")],
+    ])
+  );
   alertify.notify(...args);
 }
 
 export function createAlerts() {
-  // # red #D95C5C / green : 5BBD72
-  const alerts = JSON.parse(localStorage.getItem('alerts')).map((alert) => {
-    const color = alert[1] == "error" ? "f87979" : "5BBD72";
-    return `
+  const alerts = JSON.parse(localStorage.getItem("alerts"))
+    .splice(Math.max(this.length - 6, 1))
+    .map((alert) => {
+      const color = alert[1] == "error" ? "f87979" : "5BBD72";
+      return `
       <li style="background: #${color}">
-        <a class="dropdown-item" style="word-wrap: break-word; color: #FFFFFF">
-          <span class="time">3 mins ago</span>
-          <span class="message">
-            ${alert[0]}
-          </span>
+        <a style="word-wrap: break-word; color: #FFFFFF">
+          <span class="time">${alert[3]}</span>
+          <span>${alert[0]}</span>
         </a>
       </li>`;
-  });
+    });
   $("#alerts").empty().append(`
     ${alerts.join("")}
     <li>

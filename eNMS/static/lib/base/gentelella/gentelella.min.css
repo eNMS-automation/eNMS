@@ -1464,8 +1464,9 @@ ul.msg_list li a .time {
     font-size: 11px;
     font-style: italic;
     font-weight: 700;
-    position: absolute;
-    right: 35px
+    width: 100%;
+    display: inline-block;
+    text-align: center
 }
 
 ul.msg_list li a .message {

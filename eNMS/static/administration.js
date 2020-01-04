@@ -35,12 +35,6 @@ administrationNamespace.queryOpenNMS = function() {
   });
 };
 
-administrationNamespace.queryNetbox = function() {
-  call("/query_netbox", function() {
-    notify("Topology imported from Netbox.", "success", 5);
-  });
-};
-
 administrationNamespace.queryLibreNMS = function() {
   call("/query_librenms", function() {
     notify("Topology imported from LibreNMS.", "success", 5);

@@ -1,7 +1,6 @@
 from collections import Counter
 from logging import info
 from os import environ
-from pynetbox import api as netbox_api
 from requests import get as http_get
 from sqlalchemy import and_
 from subprocess import Popen
@@ -89,27 +88,6 @@ class InventoryController(BaseController):
                     sheet.write(obj_index, index, getattr(obj, property))
         workbook.save(self.path / "files" / "spreadsheets" / filename)
 
-    def query_netbox(self, **kwargs):
-        nb = netbox_api(
-            self.config["netbox"]["address"], token=environ.get("NETBOX_TOKEN")
-        )
-        for device in nb.dcim.devices.all():
-            device_ip = device.primary_ip4 or device.primary_ip6
-            factory(
-                "device",
-                **{
-                    "name": device.name,
-                    "ip_address": str(device_ip).split("/")[0],
-                    "subtype": str(device.device_role),
-                    "model": str(device.device_type),
-                    "location": str(device.site),
-                    "vendor": str(device.device_type.manufacturer),
-                    "operating_system": str(device.platform),
-                    "longitude": str(nb.dcim.sites.get(name=device.site).longitude),
-                    "latitude": str(nb.dcim.sites.get(name=device.site).latitude),
-                },
-            )
-
     def query_librenms(self, **kwargs):
         devices = http_get(
             f'{self.config["opennms"]["address"]}/api/v0/devices',
@@ -129,40 +107,6 @@ class InventoryController(BaseController):
                     "latitude": device["lat"],
                 },
             )
-
-    def query_opennms(self):
-        login = self.config["opennms"]["login"]
-        password = environ.get("OPENNMS_PASSWORD")
-        Session.commit()
-        json_devices = http_get(
-            self.config["opennms"]["devices"],
-            headers={"Accept": "application/json"},
-            auth=(login, password),
-        ).json()["node"]
-        devices = {
-            device["id"]: {
-                "name": device.get("label", device["id"]),
-                "description": device["assetRecord"].get("description", ""),
-                "location": device["assetRecord"].get("building", ""),
-                "vendor": device["assetRecord"].get("manufacturer", ""),
-                "model": device["assetRecord"].get("modelNumber", ""),
-                "operating_system": device.get("operatingSystem", ""),
-                "os_version": device["assetRecord"].get("sysDescription", ""),
-                "longitude": device["assetRecord"].get("longitude", 0.0),
-                "latitude": device["assetRecord"].get("latitude", 0.0),
-            }
-            for device in json_devices
-        }
-        for device in list(devices):
-            link = http_get(
-                f"{self.config['opennms']['address']}/nodes/{device}/ipinterfaces",
-                headers={"Accept": "application/json"},
-                auth=(login, password),
-            ).json()
-            for interface in link["ipInterface"]:
-                if interface["snmpPrimary"] == "P":
-                    devices[device]["ip_address"] = interface["ipAddress"]
-                    factory("device", **devices[device])
 
     def topology_import(self, file):
         book = open_workbook(file_contents=file.read())

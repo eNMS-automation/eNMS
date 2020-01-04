@@ -130,7 +130,6 @@ class BaseController:
         "import_topology",
         "migration_export",
         "migration_import",
-        "query_netbox",
         "query_librenms",
         "query_opennms",
         "reset_status",

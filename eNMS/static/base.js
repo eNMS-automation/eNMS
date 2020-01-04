@@ -661,7 +661,7 @@ export function notify(...args) {
 function showAllAlerts() {
   showPanel("Alerts", null, null, `
     <ul
-      class="list-unstyled"
+      class="list-unstyled msg_list"
       role="menu"
     >
       ${getAlerts()}
@@ -673,12 +673,9 @@ function getAlerts(preview) {
   if (preview) alerts.splice(0, 6);
   return alerts.map((alert) => {
     const color = alert[1] == "error" ? "f87979" : "5BBD72";
-    const alertLine = preview
-      ? `<span class="time">${alert[3]}</span><span>${alert[0]}</span>`
-      : `<b>${alert[3]}</b><br> ${alert[0]}`;
     return `<li style="background: #${color}; pointer-events: none; margin: 2px 6px">
       <a style="word-wrap: break-word; color: #FFFFFF">
-        ${alertLine}
+      <span class="time">${alert[3]}</span><span>${alert[0]}</span>
       </a>
     </li>`;
   }).join("");

@@ -1436,8 +1436,6 @@ div.box {
 
 ul.msg_list li {
     background: #f7f7f7;
-    display: -ms-flexbox;
-    display: flex; 
     width: 96%!important
 }
 

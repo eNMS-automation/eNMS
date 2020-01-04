@@ -130,7 +130,6 @@ class BaseController:
         "import_topology",
         "migration_export",
         "migration_import",
-        "query_librenms",
         "reset_status",
         "run_service",
         "save_file",

@@ -8,7 +8,7 @@ title %} {% block stylesheets %} {{ super() }}
 {% endblock stylesheets %} {% block content %}
 <div class="right_col" role="main">
   <div class="row">
-    <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12">
       <div class="x_panel">
         <div class="x_content" style="min-height:80vh;">
           <div class="x_title">
@@ -34,7 +34,7 @@ title %} {% block stylesheets %} {{ super() }}
         </div>
       </div>
     </div>
-    <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12">
       <div class="x_panel">
         <div class="x_content" style="min-height:80vh;">
           <div class="x_title">
@@ -60,32 +60,6 @@ title %} {% block stylesheets %} {{ super() }}
                 onclick="eNMS.administration.showImportServicePanel()"
               >
                 Import Service
-              </button>
-            </div>
-          </center>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="x_panel">
-        <div class="x_content" style="min-height:80vh;">
-          <div class="x_title">
-            <h4 class="text-center">Topology Import</h4>
-          </div>
-          <br />
-          <center>
-            <div class="btn-group-vertical" style="width:100%">
-              <button
-                class="btn btn-primary btn-file"
-                onclick="eNMS.administration.queryOpenNMS()"
-              >
-                OpenNMS
-              </button>
-              <button
-                class="btn btn-primary btn-file"
-                onclick="eNMS.administration.queryLibreNMS()"
-              >
-                LibreNMS
               </button>
             </div>
           </center>

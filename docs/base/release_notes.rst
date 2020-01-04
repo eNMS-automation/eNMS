@@ -12,11 +12,13 @@ Version 3.19
 
     - copy from RC on a service in Workflow builder
     - copy from icon in result tables
+    - copy dict path to result in the json window.
 
 - Full screen workflow builder
 - Remember menu size PER USER (parameter stored in DB, not just session)
 - Refactoring of all the tables
 - Refactoring of the top-level menu
+- Alerts are saved and displayed in the UI, top menubar.
 
 Version 3.18.2
 --------------

@@ -1,7 +1,6 @@
 from collections import Counter
 from logging import info
 from os import environ
-from requests import get as http_get
 from sqlalchemy import and_
 from subprocess import Popen
 from werkzeug.utils import secure_filename

@@ -1,10 +1,12 @@
 from os import environ
 from pynetbox import api as netbox_api
+from requests import get as http_get
 from sqlalchemy import ForeignKey, Integer
 from wtforms import HiddenField, SelectField
 
 from eNMS import app
-from eNMS.database.dialect import Column
+from eNMS.database.dialect import Column, SmallString
+from eNMS.database.functions import factory
 from eNMS.forms.automation import ServiceForm
 from eNMS.models.automation import Service
 
@@ -13,8 +15,8 @@ class TopologyImportService(Service):
 
     __tablename__ = "topology_import"
     pretty_name = "Topology Import"
-    driver = Column(SmallString)
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    driver = Column(SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "topology_import"}
 
@@ -46,7 +48,6 @@ class TopologyImportService(Service):
     def query_opennms(self):
         login = app.config["opennms"]["login"]
         password = environ.get("OPENNMS_PASSWORD")
-        Session.commit()
         json_devices = http_get(
             app.config["opennms"]["devices"],
             headers={"Accept": "application/json"},

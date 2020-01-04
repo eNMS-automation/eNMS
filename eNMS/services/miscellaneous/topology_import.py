@@ -13,12 +13,12 @@ from eNMS.models.automation import Service
 
 class TopologyImportService(Service):
 
-    __tablename__ = "topology_import"
+    __tablename__ = "topology_import_service"
     pretty_name = "Topology Import"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    driver = Column(SmallString)
+    import_type = Column(SmallString)
 
-    __mapper_args__ = {"polymorphic_identity": "topology_import"}
+    __mapper_args__ = {"polymorphic_identity": "topology_import_service"}
 
     def job(self, run, payload):
         getattr(self, f"query_{self.import_type}")()
@@ -100,7 +100,7 @@ class TopologyImportService(Service):
 
 
 class TopologyImportForm(ServiceForm):
-    form_type = HiddenField(default="topology_import")
+    form_type = HiddenField(default="topology_import_service")
     import_type = SelectField(
         choices=(
             ("librenms", "LibreNMS"),

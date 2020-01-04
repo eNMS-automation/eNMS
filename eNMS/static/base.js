@@ -25,6 +25,7 @@ export let userIsActive = true;
 let topZ = 1000;
 
 const panelSize = {
+  alerts_table: "900 600",
   add_services: "800 700",
   calendar: "1200 650",
   compare: "auto 700",
@@ -62,6 +63,7 @@ const panelSize = {
 };
 
 const panelName = {
+  alerts_table: "Alerts",
   add_services: "Add services",
   configuration: "Configuration",
   database_deletion: "Database Deletion",
@@ -677,10 +679,10 @@ export function notify(...args) {
 
 function showAllAlerts() {
   showPanel(
-    "Alerts",
+    "alerts_table",
     null,
     () => {
-      $("#example").DataTable({
+      $("#alerts-table").DataTable({
         "columns": [
           { "width": "200px" },
           { "width": "60px" },
@@ -692,7 +694,7 @@ function showAllAlerts() {
     `
     <div class="modal-body">
       <table 
-        id="example"
+        id="alerts-table"
         class="table table-striped table-bordered table-hover wrap"
         style="width:100%"
       >
@@ -708,8 +710,7 @@ function showAllAlerts() {
         </tbody>
       </table>
     <div>
-  `
-  );
+  `);
 }
 
 function getAlerts(preview) {

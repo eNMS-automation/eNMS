@@ -646,7 +646,6 @@ export function adjustHeight() {
 })(jQuery, window);
 
 export function createAlerts() {
-  console.log("test")
   $("#alerts").empty().append(`
     <li>
       <a class="dropdown-item">
@@ -662,7 +661,16 @@ export function createAlerts() {
           makers. They were where...
         </span>
       </a>
-    </li>`
+    </li>
+    <li>
+      <div class="text-center">
+        <a class="dropdown-item">
+          <strong>See All Alerts</strong>
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </li>
+    `
   )
 }
 

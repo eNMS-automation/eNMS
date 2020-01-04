@@ -668,6 +668,7 @@ function showAllAlerts() {
     </ul>
   `)
 }
+
 function getAlerts(preview) {
   let alerts = JSON.parse(localStorage.getItem("alerts")).reverse();
   if (preview) alerts.splice(0, 6);

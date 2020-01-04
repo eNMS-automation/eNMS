@@ -88,7 +88,7 @@ def logout():
 @monitor_requests
 def administration():
     return render_template(
-        f"pages/administration.html",
+        f"administration.html",
         **{
             "endpoint": "administration",
             "folders": listdir(app.path / "files" / "migrations"),
@@ -100,7 +100,7 @@ def administration():
 @monitor_requests
 def dashboard():
     return render_template(
-        f"pages/dashboard.html",
+        f"dashboard.html",
         **{"endpoint": "dashboard", "properties": type_to_diagram_properties},
     )
 
@@ -109,7 +109,7 @@ def dashboard():
 @monitor_requests
 def table(table_type):
     return render_template(
-        f"pages/table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
+        f"table.html", **{"endpoint": f"table/{table_type}", "type": table_type}
     )
 
 
@@ -117,7 +117,7 @@ def table(table_type):
 @monitor_requests
 def view(view_type):
     return render_template(
-        f"pages/view.html", **{"endpoint": "view", "view_type": view_type}
+        f"view.html", **{"endpoint": "view", "view_type": view_type}
     )
 
 
@@ -128,7 +128,7 @@ def workflow_builder():
     if path:
         workflow = fetch("workflow", allow_none=True, id=path.split(">")[-1])
     return render_template(
-        f"pages/workflow_builder.html",
+        f"workflow_builder.html",
         **{
             "endpoint": "workflow_builder",
             "workflow": workflow.serialized if workflow else None,

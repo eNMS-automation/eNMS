@@ -5,9 +5,10 @@ alertify: false
 
 import {
   adjustHeight,
+  createTooltips,
+  notify,
   serializeForm,
   userIsActive,
-  createTooltips,
 } from "./base.js";
 import { loadServiceTypes } from "./automation.js";
 import { filterView } from "./visualization.js";
@@ -115,12 +116,12 @@ tableNamespace.filterTable = function(formType) {
   } else {
     filterView(formType);
   }
-  alertify.notify("Filter applied.", "success", 5);
+  notify("Filter applied.", "success", 5);
 };
 
 tableNamespace.refreshTable = function(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);
-  if (displayNotification) alertify.notify("Table refreshed.", "success", 5);
+  if (displayNotification) notify("Table refreshed.", "success", 5);
 };
 
 tableNamespace.refreshTablePeriodically = function(tableType, interval) {

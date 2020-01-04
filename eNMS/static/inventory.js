@@ -6,7 +6,14 @@ config: true
 initSelect: false
 */
 
-import { adjustHeight, call, createPanel, fCall, openUrl } from "./base.js";
+import {
+  adjustHeight,
+  call,
+  createPanel,
+  fCall,
+  notify,
+  openUrl,
+} from "./base.js";
 import { initTable, tables } from "./table.js";
 
 let inventoryNamespace = (window.eNMS.inventory = {});
@@ -101,9 +108,9 @@ inventoryNamespace.sshConnection = function(id) {
     }, 300);
     const messageLink = `Click here to connect to ${result.device}.`;
     const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
-    alertify.notify(link, "success", 15);
+    notify(link, "success", 15);
     const warning = `Don't forget to turn off the pop-up blocker !`;
-    alertify.notify(warning, "error", 20);
+    notify(warning, "error", 20);
     $(`#connection-${id}`).remove();
   });
 };
@@ -111,7 +118,7 @@ inventoryNamespace.sshConnection = function(id) {
 inventoryNamespace.savePoolObjects = function(id) {
   fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);
-    alertify.notify("Changes saved.", "success", 5);
+    notify("Changes saved.", "success", 5);
     $(`#pool_objects-${id}`).remove();
   });
 };
@@ -120,7 +127,7 @@ inventoryNamespace.showPoolObjectsPanel = function(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       if (pool.devices.length > 1000 || pool.links.length > 1000) {
-        alertify.notify("Too many objects to display.", "error", 5);
+        notify("Too many objects to display.", "error", 5);
       } else {
         for (const type of ["device", "link"]) {
           initSelect($(`#${type}s-${id}`), type, `pool_objects-${id}`);
@@ -137,11 +144,11 @@ inventoryNamespace.showPoolObjectsPanel = function(id) {
 };
 
 inventoryNamespace.updatePools = function(pool) {
-  alertify.notify("Update starting...", "success", 5);
+  notify("Update starting...", "success", 5);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call(endpoint, function() {
     tables["pool"].ajax.reload(null, false);
-    alertify.notify("Update successful.", "success", 5);
+    notify("Update successful.", "success", 5);
   });
 };
 
@@ -150,7 +157,7 @@ export const showDeviceNetworkData = (inventoryNamespace.showDeviceNetworkData =
 ) {
   call(`/get_device_network_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
-      alertify.notify("No data stored.", "error", 5);
+      notify("No data stored.", "error", 5);
     } else {
       createPanel(
         "device_data",

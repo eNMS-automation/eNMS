@@ -166,16 +166,16 @@ export function cantorPairing(x, y) {
 
 function processResults(callback, results) {
   if (results === false) {
-    alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
+    notify("HTTP Error 403 – Forbidden", "error", 5);
   } else if (results && results.alert) {
     if (Array.isArray(results.alert)) {
-      results.alert.map((e) => alertify.notify(e, "error", 5));
+      results.alert.map((e) => notify(e, "error", 5));
     } else {
-      alertify.notify(results.alert, "error", 5);
+      notify(results.alert, "error", 5);
     }
   } else if (results && results.invalid_form) {
     for (const [field, error] of Object.entries(results.errors)) {
-      alertify.notify(`Wrong input for "${field}": ${error}`, "error", 20);
+      notify(`Wrong input for "${field}": ${error}`, "error", 20);
     }
   } else {
     if (callback) callback(results);
@@ -228,11 +228,7 @@ export const deleteInstance = (baseNamespace.deleteInstance = function(
       .row($(`#${id}`))
       .remove()
       .draw(false);
-    alertify.notify(
-      `${type.toUpperCase()} '${result.name}' deleted.`,
-      "error",
-      5
-    );
+    notify(`${type.toUpperCase()} '${result.name}' deleted.`, "error", 5);
   });
 });
 
@@ -475,7 +471,7 @@ export function showTypePanel(type, id, mode) {
           try {
             job(id);
           } catch (e) {
-            alertify.notify("Failed to load script", "error", 5);
+            notify("Failed to load script", "error", 5);
           }
         });
       }
@@ -551,7 +547,7 @@ export function processData(type, id) {
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
       $(id ? `#${type}-${id}` : `#${type}`).remove();
       if (page == "workflow_builder") processWorkflowData(instance, id);
-      alertify.notify(
+      notify(
         `${type.toUpperCase()} ${instance.name ? `'${instance.name}' ` : ""}${
           id ? "updated" : "created"
         }.`,
@@ -586,7 +582,7 @@ export function copyToClipboard(text, isId) {
   dummy.select();
   document.execCommand("copy");
   document.body.removeChild(dummy);
-  alertify.notify(`Copied to Clipboard: ${text}`, "success", 5);
+  notify(`Copied to Clipboard: ${text}`, "success", 5);
 }
 
 export function adjustHeight() {
@@ -645,6 +641,11 @@ export function adjustHeight() {
   };
 })(jQuery, window);
 
+export function notify(...args) {
+  //localStorage.getItem('alerts').push(alert, type, duration)
+  alertify.notify(...args);
+}
+
 export function createAlerts() {
   $("#alerts").empty().append(`
     <li>
@@ -670,8 +671,7 @@ export function createAlerts() {
         </a>
       </div>
     </li>
-    `
-  )
+    `);
 }
 
 $(".dropdown-submenu a.menu-submenu").on("click", function(e) {

@@ -216,7 +216,9 @@
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <img src="{{ url_for('static', filename='images/logo.png') }}">
+                    <img
+                      src="{{ url_for('static', filename='images/logo.png') }}"
+                    />
                     {{ current_user.name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
@@ -244,8 +246,7 @@
                     id="alerts"
                     class="dropdown-menu list-unstyled msg_list"
                     role="menu"
-                  >
-                  </ul>
+                  ></ul>
                 </li>
                 <li class="nav-item">
                   <a

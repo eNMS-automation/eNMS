@@ -10,7 +10,13 @@ viewType: false
 vis: false
 */
 
-import { call, serializeForm, showPanel, showTypePanel } from "./base.js";
+import {
+  call,
+  notify,
+  serializeForm,
+  showPanel,
+  showTypePanel,
+} from "./base.js";
 import { showDeviceNetworkData } from "./inventory.js";
 
 const layers = {
@@ -309,7 +315,7 @@ export function filterView(type) {
         deleteAllLinks();
         results.map(createLink);
       }
-      alertify.notify("Filter applied.", "success", 5);
+      notify("Filter applied.", "success", 5);
     },
   });
 }

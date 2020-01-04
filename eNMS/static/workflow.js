@@ -19,14 +19,15 @@ import {
   switchToWorkflow,
 } from "./automation.js";
 import {
+  adjustHeight,
   call,
   copyToClipboard,
   createPanel,
   fCall,
+  notify,
   showPanel,
   showTypePanel,
   userIsActive,
-  adjustHeight,
 } from "./base.js";
 
 let workflowNamespace = (window.eNMS.workflow = {});
@@ -65,9 +66,9 @@ const dsoptions = {
     addNode: function(data, callback) {},
     addEdge: function(data, callback) {
       if (data.to == "Start") {
-        alertify.notify("You cannot draw an edge to 'Start'.", "error", 5);
+        notify("You cannot draw an edge to 'Start'.", "error", 5);
       } else if (data.from == "End") {
-        alertify.notify("You cannot draw an edge from 'End'.", "error", 5);
+        notify("You cannot draw an edge from 'End'.", "error", 5);
       } else if (data.from != data.to) {
         data.subtype = currentMode;
         saveEdge(data);
@@ -286,7 +287,7 @@ function processWorkflowData(instance, id) {
 function updateWorkflowService(service) {
   nodes.add(serviceToNode(service));
   workflow.services.push(service);
-  alertify.notify(
+  notify(
     `Service '${service.scoped_name}' added to the workflow.`,
     "success",
     5
@@ -295,7 +296,7 @@ function updateWorkflowService(service) {
 
 workflowNamespace.addServicesToWorkflow = function() {
   const selection = $("#service-tree").jstree("get_checked", true);
-  if (!selection.length) alertify.notify("Nothing selected.", "error", 5);
+  if (!selection.length) notify("Nothing selected.", "error", 5);
   $("#services").val(selection.map((n) => n.data.id));
   fCall(
     `/copy_service_in_workflow/${workflow.id}`,
@@ -316,7 +317,7 @@ function deleteNode(id) {
     workflow.services = workflow.services.filter((n) => n.id != id);
     call(`/delete_node/${workflow.id}/${id}`, function(result) {
       workflow.last_modified = result.update_time;
-      alertify.notify(
+      notify(
         `'${result.service.scoped_name}' deleted from the workflow.`,
         "success",
         5
@@ -330,7 +331,7 @@ function deleteLabel(label, noNotification) {
   call(`/delete_label/${workflow.id}/${label.id}`, function(updateTime) {
     delete workflow.labels[label.id];
     workflow.last_modified = updateTime;
-    if (!noNotification) alertify.notify("Label removed.", "success", 5);
+    if (!noNotification) notify("Label removed.", "success", 5);
   });
 }
 
@@ -353,13 +354,9 @@ function deleteEdge(edgeId) {
 function stopWorkflow() {
   call(`/stop_workflow/${currentRuntime}`, (result) => {
     if (!result) {
-      alertify.notify("The workflow is not currently running.", "error", 5);
+      notify("The workflow is not currently running.", "error", 5);
     } else {
-      alertify.notify(
-        "Workflow will stop after current service...",
-        "success",
-        5
-      );
+      notify("Workflow will stop after current service...", "success", 5);
     }
   });
 }
@@ -369,7 +366,7 @@ function skipServices() {
   if (!selectedNodes.length) return;
   call(`/skip_services/${workflow.id}/${selectedNodes.join("-")}`, (skip) => {
     getWorkflowState();
-    alertify.notify(`Services ${skip}ped.`, "success", 5);
+    notify(`Services ${skip}ped.`, "success", 5);
   });
 }
 
@@ -533,7 +530,7 @@ const switchMode = (workflowNamespace.switchMode = function(
     graph.addEdgeMode();
     notification = `Mode: Creation of '${currentMode}' Edge.`;
   }
-  if (!noNotification) alertify.notify(notification, "success", 5);
+  if (!noNotification) notify(notification, "success", 5);
 });
 
 $("#current-workflow").on("change", function() {
@@ -555,7 +552,7 @@ function savePositions() {
       if (updateTime) {
         workflow.last_modified = updateTime;
       } else {
-        alertify.notify("HTTP Error 403 – Forbidden", "error", 5);
+        notify("HTTP Error 403 – Forbidden", "error", 5);
       }
     },
   });
@@ -672,7 +669,7 @@ workflowNamespace.createLabel = function() {
     }
     drawLabel(result.id, result);
     $("#workflow_label").remove();
-    alertify.notify("Label created.", "success", 5);
+    notify("Label created.", "success", 5);
   });
 };
 
@@ -845,7 +842,7 @@ const getWorkflowState = (workflowNamespace.getWorkflowState = function(
     });
   }
   if (periodic) setTimeout(() => getWorkflowState(true), 4000);
-  if (notification) alertify.notify("Workflow refreshed.", "success", 5);
+  if (notification) notify("Workflow refreshed.", "success", 5);
 });
 
 export function initWorkflowBuilder() {
@@ -869,7 +866,7 @@ export function initWorkflowBuilder() {
       if (workflow) {
         switchToWorkflow(workflow);
       } else {
-        alertify.notify(
+        notify(
           `You must create a workflow in the
         'Workflow management' page first.`,
           "error",

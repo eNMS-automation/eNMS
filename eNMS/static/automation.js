@@ -17,6 +17,7 @@ import {
   cantorPairing,
   createPanel,
   fCall,
+  notify,
   showPanel,
   showTypePanel,
 } from "./base.js";
@@ -56,7 +57,7 @@ automationNamespace.compare = function(type) {
       });
     });
   } else {
-    alertify.notify("Select two versions to compare first.", "error", 5);
+    notify("Select two versions to compare first.", "error", 5);
   }
 };
 
@@ -169,7 +170,7 @@ export const showRuntimePanel = (automationNamespace.showRuntimePanel = function
   const panelId = `${panelType}-${service.id}`;
   call(`/get_runtimes/${type}/${service.id}`, (runtimes) => {
     if (!runtime && !runtimes.length) {
-      return alertify.notify(`No ${type} yet.`, "error", 5);
+      return notify(`No ${type} yet.`, "error", 5);
     }
     createPanel(panelType, `${type} - ${service.name}`, panelId, function() {
       $(`#runtimes-${panelId}`).empty();
@@ -335,7 +336,7 @@ export function parameterizedRun(type, id) {
 
 export function runLogic(result) {
   showRuntimePanel("logs", result.service, result.runtime);
-  alertify.notify(`Service '${result.service.name}' started.`, "success", 5);
+  notify(`Service '${result.service.name}' started.`, "success", 5);
   if (page == "workflow_builder" && workflow) {
     if (result.service.id != workflow.id) {
       getServiceState(result.service.id, true);
@@ -346,7 +347,7 @@ export function runLogic(result) {
 
 automationNamespace.exportService = function(id) {
   call(`/export_service/${id}`, () => {
-    alertify.notify("Export successful.", "success", 5);
+    notify("Export successful.", "success", 5);
   });
 };
 
@@ -355,7 +356,7 @@ automationNamespace.pauseTask = function(id) {
     $(`#pause-resume-${id}`)
       .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
       .text("Resume");
-    alertify.notify("Task paused.", "success", 5);
+    notify("Task paused.", "success", 5);
   });
 };
 
@@ -364,7 +365,7 @@ automationNamespace.resumeTask = function(id) {
     $(`#pause-resume-${id}`)
       .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
       .text("Pause");
-    alertify.notify("Task resumed.", "success", 5);
+    notify("Task resumed.", "success", 5);
   });
 };
 
@@ -399,11 +400,7 @@ export const switchToWorkflow = (automationNamespace.switchToWorkflow = function
     call(`/get_service_state/${path}/latest`, function(result) {
       workflow = result.service;
       displayWorkflow(result);
-      alertify.notify(
-        `Workflow '${workflow.scoped_name}' displayed.`,
-        "success",
-        5
-      );
+      notify(`Workflow '${workflow.scoped_name}' displayed.`, "success", 5);
     });
   } else {
     $("#workflow-filtering").val(path);
@@ -456,7 +453,7 @@ automationNamespace.displayCalendar = function(calendarType) {
 
 automationNamespace.schedulerAction = function(action) {
   call(`/scheduler_action/${action}`, function() {
-    alertify.notify(`Scheduler ${action}d.`, "success", 5);
+    notify(`Scheduler ${action}d.`, "success", 5);
   });
 };
 

@@ -240,24 +240,6 @@ body .container.body .right_col {
     }
 }
 
-@media (max-width:1200px) {
-    .x_title h2 {
-        width: 62%;
-        font-size: 17px
-    }
-    .graph,
-    .tile {
-        zoom: 85%;
-        height: inherit
-    }
-}
-
-@media (max-width:1270px) and (min-width:192px) {
-    .x_title h2 small {
-        display: none
-    }
-}
-
 .left_col .mCSB_scrollTools {
     width: 6px
 }
@@ -945,39 +927,8 @@ h2 {
     padding: 1px 5px 6px
 }
 
-.x_title .filter {
-    width: 40%;
-    float: right
-}
-
 table.tile td ul li a {
     width: 100%
-}
-
-.x_title h2 {
-    margin: 5px 0 6px;
-    float: left;
-    display: block
-}
-
-.x_title h2 small {
-    margin-left: 10px
-}
-
-.x_title span {
-    color: #bdbdbd
-}
-
-.pagination.pagination-split li {
-    display: inline-block;
-    margin-right: 3px
-}
-
-.pagination.pagination-split li a {
-    border-radius: 4px;
-    color: #768399;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px
 }
 
 td span {

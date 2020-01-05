@@ -1,11 +1,5 @@
-.x_title h2,
-table.tile_info td p {
+.x_title h2 {
     white-space: nowrap;
-    text-overflow: ellipsis
-}
-
-.x_title h2,
-table.tile_info td p {
     text-overflow: ellipsis
 }
 
@@ -48,8 +42,7 @@ a:hover {
 .sidebar-widget,
 .tile,
 .weather-days .col-sm-2,
-.x_title h2,
-table.tile_info td p {
+.x_title h2 {
     overflow: hidden
 }
 
@@ -394,13 +387,6 @@ table.no-margin .progress {
 @media (min-width:1200px) {
     .col-md-55 {
         width: 20%
-    }
-}
-
-@media (min-width:192px) and (max-width:1270px) {
-    table.tile_info span.right {
-        margin-right: 7px;
-        float: left
     }
 }
 
@@ -969,8 +955,7 @@ h2 {
     float: right
 }
 
-table.tile td ul li a,
-table.tile_info {
+table.tile td ul li a {
     width: 100%
 }
 
@@ -1413,25 +1398,6 @@ ul.quick-list li i {
     width: 55%
 }
 
-h5.graph_title {
-    text-align: left;
-    margin-left: 10px
-}
-
-h5.graph_title i {
-    margin-right: 10px;
-    font-size: 17px
-}
-
-span.right {
-    float: right;
-    font-size: 14px!important
-}
-
-.tile_info a {
-    text-overflow: ellipsis
-}
-
 .sidebar-footer {
     bottom: 0;
     clear: both;
@@ -1591,11 +1557,6 @@ ul.top_profiles li:nth-child(odd) {
     margin-bottom: 0
 }
 
-h4.graph_title {
-    margin: 7px;
-    text-align: center
-}
-
 .fontawesome-icon-list .fa-hover a:hover {
     background-color: #ddd;
     color: #fff;
@@ -1726,40 +1687,6 @@ h4.graph_title {
 .tile-stats>.dash-box-footer:hover {
     color: #fff;
     background: rgba(0, 0, 0, .15)
-}
-
-table.tile_info {
-    padding: 10px 15px
-}
-
-table.tile_info span.right {
-    margin-right: 0;
-    float: right;
-    position: absolute;
-    right: 4%
-}
-
-.tile_header {
-    border-bottom: transparent;
-    padding: 7px 15px;
-    margin-bottom: 15px;
-    background: #e7e7e7
-}
-
-.tile_head h4 {
-    margin-top: 0;
-    margin-bottom: 5px
-}
-
-.tiles-bottom {
-    padding: 5px 10px;
-    margin-top: 10px;
-    background: rgba(194, 194, 194, .3);
-    text-align: left
-}
-
-a.star {
-    color: #428bca!important
 }
 
 .btn,

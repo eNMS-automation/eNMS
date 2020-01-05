@@ -1109,68 +1109,6 @@ ul.quick-list li i {
     margin-top: 10px
 }
 
-.widget_summary {
-    width: 100%;
-    display: -ms-inline-flexbox;
-    display: inline-flex
-}
-
-.widget_summary .w_left {
-    float: left;
-    text-align: left
-}
-
-.widget_summary .w_center {
-    float: left
-}
-
-.widget_summary .w_right {
-    float: left;
-    text-align: right
-}
-
-.widget_summary .w_right span {
-    font-size: 20px
-}
-
-.w_20 {
-    width: 20%
-}
-
-.w_25 {
-    width: 25%
-}
-
-.w_55 {
-    width: 55%
-}
-
-.sidebar-footer {
-    bottom: 0;
-    clear: both;
-    display: block;
-    padding: 5px 0 0;
-    position: fixed;
-    width: 230px;
-    background: #002240;
-    z-index: 999
-}
-
-.sidebar-footer a {
-    padding: 7px 0 3px;
-    text-align: center;
-    width: 25%;
-    font-size: 17px;
-    display: block;
-    float: left;
-    background: #172d44;
-    cursor: pointer
-}
-
-.sidebar-footer a:hover {
-    background: #425567
-}
-
 .tile_count {
     margin-bottom: 20px;
     margin-top: 20px

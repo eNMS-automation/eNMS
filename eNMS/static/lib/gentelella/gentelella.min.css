@@ -340,19 +340,6 @@ body {
     margin-left: 230px
 }
 
-.no-padding {
-    padding: 0!important
-}
-
-table.no-margin .progress {
-    margin-bottom: 0
-}
-
-.center-margin {
-    margin: 0 auto;
-    float: none!important
-}
-
 .col-lg-1,
 .col-lg-10,
 .col-lg-11,
@@ -1849,6 +1836,13 @@ fieldset {
     border-top: 5px solid #888;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
+}
+
+/* Align "Show 1 to 10 of X entries to the right */
+.dataTables_info {
+    font-size: 15px;
+    margin-right: 8px;
+    float: right
 }
 
 th.dt-center,

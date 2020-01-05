@@ -32,7 +32,7 @@ export function initTable(type, instance, runtime, id) {
       createTooltips();
       adjustHeight();
     },
-    sDom: "<'top'i>rt<'bottom'lp><'clear'>",
+    sDom: "tilp",
     columns: models[type].columns,
     columnDefs: [{ className: "dt-center", targets: "_all" }],
     initComplete: function() {

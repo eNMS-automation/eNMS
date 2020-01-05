@@ -667,13 +667,15 @@ export function adjustHeight() {
 })(jQuery, window);
 
 export function notify(...args) {
+  const alerts = JSON.parse(localStorage.getItem("alerts"));
   localStorage.setItem(
     "alerts",
     JSON.stringify([
-      ...JSON.parse(localStorage.getItem("alerts")),
+      ...alerts,
       [...args, moment().format("MMMM Do YYYY, h:mm:ss a")],
     ])
   );
+  $("#alert-number").text(alerts.length + 1);
   alertify.notify(...args);
 }
 

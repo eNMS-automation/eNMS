@@ -160,7 +160,12 @@ function initSidebar() {
 $(document).ready(function() {
   NProgress.start();
   $(window).resize(adjustHeight);
-  if (!localStorage.getItem("alerts")) localStorage.setItem("alerts", "[]");
+  const alerts = localStorage.getItem("alerts");
+  if (!alerts) {
+    localStorage.setItem("alerts", "[]");
+  } else {
+    $("#alert-number").text(JSON.parse(alerts).length);
+  }
   initSidebar();
   if (page.includes("table")) {
     initTable(page.split("/")[1]);

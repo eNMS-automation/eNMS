@@ -493,7 +493,8 @@ class BaseController:
             if kwargs.get("runtime"):
                 constraints.append(models["result"].parent_runtime == kwargs["runtime"])
         if table == "service":
-            if workflow_id := kwargs["form"].get("workflow-filtering"):
+            workflow_id = kwargs["form"].get("workflow-filtering")
+            if workflow_id:
                 constraints.append(
                     models["service"].workflows.any(
                         models["workflow"].id == int(workflow_id)

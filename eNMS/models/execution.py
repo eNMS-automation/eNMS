@@ -459,7 +459,8 @@ class Run(AbstractBase):
         if self.include_link_in_summary:
             address = app.config["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
-        if summary := results["summary"]:
+        summary = results["summary"]
+        if summary:
             if summary["failure"]:
                 notification["FAILED"] = summary["failure"]
             if summary["success"] and not self.display_only_failed_nodes:

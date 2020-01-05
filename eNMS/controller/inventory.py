@@ -125,7 +125,8 @@ class InventoryController(BaseController):
     def save_pool_objects(self, pool_id, **kwargs):
         pool = fetch("pool", id=pool_id)
         for obj_type in ("device", "link"):
-            if string_objects := kwargs[f"string_{obj_type}s"]:
+            string_objects = kwargs[f"string_{obj_type}s"]
+            if string_objects:
                 objects = []
                 for name in [obj.strip() for obj in string_objects.split(",")]:
                     obj = fetch(obj_type, allow_none=True, name=name)

@@ -5,7 +5,6 @@
 
 .detail a,
 .expand,
-.jqstooltip,
 a,
 a:focus,
 a:hover {
@@ -658,36 +657,6 @@ a:visited {
     background-color: transparent
 }
 
-.top_search {
-    padding: 0
-}
-
-.top_search .form-control {
-    box-shadow: inset 0 1px 0 rgba(0, 0, 0, .075);
-    border-radius: 25px 0 0 25px;
-    padding-left: 20px;
-    border: 1px solid rgba(221, 226, 232, .49)
-}
-
-.top_search .form-control:focus {
-    border: 1px solid rgba(221, 226, 232, .49);
-    border-right: 0
-}
-
-.top_search .input-group-btn button {
-    border-radius: 0 25px 25px 0;
-    border: 1px solid rgba(221, 226, 232, .49);
-    border-left: 0;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    color: #93a2b2;
-    margin-bottom: 0!important
-}
-
-.tiles,
-.top_tiles {
-    margin-bottom: 0
-}
-
 .toggle {
     float: left;
     margin: 0;
@@ -711,37 +680,12 @@ a:visited {
     padding: 9px
 }
 
-.panel_toolbox {
-    float: right;
-    min-width: 70px
-}
-
-.panel_toolbox>li {
-    float: left;
-    cursor: pointer
-}
-
-.panel_toolbox>li>a {
-    padding: 5px;
-    color: #c5c7cb;
-    font-size: 14px
-}
-
-.panel_toolbox>li>a:hover {
-    background: #f5f7fa
-}
-
 .line_30 {
     line-height: 30px
 }
 
 .main_menu_side {
     padding: 0
-}
-
-.bs-docs-sidebar .nav>li>a {
-    display: block;
-    padding: 4px 6px
 }
 
 footer {
@@ -773,27 +717,8 @@ footer {
     }
 }
 
-.jqstooltip {
-    background: #34495e!important;
-    width: 30px!important;
-    height: 22px!important
-}
-
 .tooltip {
     display: block!important
-}
-
-.tiles {
-    border-top: 1px solid #ccc;
-    margin-top: 15px;
-    padding-top: 5px
-}
-
-.top_tiles .tile h2 {
-    font-size: 30px;
-    line-height: 30px;
-    margin: 3px 0 7px;
-    font-weight: 700
 }
 
 article.media {
@@ -1335,40 +1260,6 @@ ul.top_profiles li {
 
 ul.top_profiles li:nth-child(odd) {
     background-color: #eee
-}
-
-.media .profile_thumb {
-    border: 1px solid;
-    width: 50px;
-    height: 50px;
-    margin: 5px 10px 5px 0;
-    border-radius: 50%;
-    padding: 9px 12px
-}
-
-.media .profile_thumb i {
-    font-size: 30px
-}
-
-.media .date {
-    background: #ccc;
-    width: 52px;
-    margin-right: 10px;
-    border-radius: 10px;
-    padding: 5px
-}
-
-.media .date .day,
-.media .date .month {
-    margin: 0;
-    text-align: center;
-    color: #fff
-}
-
-.media .date .day {
-    font-size: 27px;
-    line-height: 27px;
-    font-weight: 700
 }
 
 .event .media-body a.title {

@@ -2616,10 +2616,6 @@ ul.project_files li a i {
     font-size: 26px
 }
 
-a.hiddenanchor {
-    display: none
-}
-
 .login_wrapper {
     right: 0;
     margin: 5% auto 0;
@@ -2627,65 +2623,10 @@ a.hiddenanchor {
     position: relative
 }
 
-.login_form,
-.registration_form {
+.login_form {
     position: absolute;
     top: 0;
     width: 100%
-}
-
-.registration_form {
-    z-index: 21;
-    opacity: 0;
-    width: 100%
-}
-
-.login_form {
-    z-index: 22
-}
-
-#signin:target~.login_wrapper .login_form,
-#signup:target~.login_wrapper .registration_form {
-    z-index: 22;
-    animation-name: fadeInLeft;
-    animation-delay: .1s
-}
-
-#signin:target~.login_wrapper .registration_form,
-#signup:target~.login_wrapper .login_form {
-    animation-name: fadeOutLeft
-}
-
-.animate {
-    -webkit-animation-duration: .5s;
-    -webkit-animation-timing-function: ease;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-duration: .5s;
-    -moz-animation-timing-function: ease;
-    -moz-animation-fill-mode: both;
-    -o-animation-duration: .5s;
-    -o-animation-timing-function: ease;
-    -o-animation-fill-mode: both;
-    -ms-animation-duration: .5s;
-    -ms-animation-timing-function: ease;
-    -ms-animation-fill-mode: both;
-    animation-duration: .5s;
-    animation-timing-function: ease;
-    animation-fill-mode: both
-}
-
-.login_box {
-    padding: 20px;
-    margin: auto
-}
-
-.alignleft {
-    margin-right: 15px
-}
-
-.alignright {
-    float: right;
-    margin-left: 15px
 }
 
 .clearfix:after,
@@ -2805,26 +2746,6 @@ form:after {
     border-radius: 0 0 5px 5px;
     border-top: 1px solid #cfd5d9;
     padding: 15px 0
-}
-
-#content form .submit,
-.login_content form input[type=submit] {
-    float: left;
-    margin-left: 38px
-}
-
-.button a {
-    background: url(http://cssdeck.com/uploads/media/items/8/8bcLQqF.png) 0 -112px no-repeat;
-    color: #7e7e7e;
-    font-size: 17px;
-    padding: 2px 0 2px 40px;
-    text-decoration: none;
-    transition: all .3s ease
-}
-
-.button a:hover {
-    background-position: 0 -135px;
-    color: #00aeef
 }
 
 header {

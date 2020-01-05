@@ -13,7 +13,7 @@ import {
 import { loadServiceTypes } from "./automation.js";
 import { filterView } from "./visualization.js";
 
-let tableNamespace = (window.eNMS.table = {});
+let table = (window.eNMS.table = {});
 export let tables = {};
 export const models = {};
 
@@ -106,11 +106,11 @@ export function initTable(type, instance, runtime, id) {
     tables[type].order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type)) {
-    tableNamespace.refreshTablePeriodically(type, 3000);
+    table.refreshTablePeriodically(type, 3000, true);
   }
 }
 
-tableNamespace.filterTable = function(formType) {
+table.filterTable = function(formType) {
   if (page.includes("table")) {
     tables[formType].ajax.reload(null, false);
   } else {
@@ -119,15 +119,15 @@ tableNamespace.filterTable = function(formType) {
   notify("Filter applied.", "success", 5);
 };
 
-tableNamespace.refreshTable = function(tableType, displayNotification) {
+table.refreshTable = function(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);
   if (displayNotification) notify("Table refreshed.", "success", 5);
 };
 
-tableNamespace.refreshTablePeriodically = function(tableType, interval) {
-  if (userIsActive) tableNamespace.refreshTable(tableType, false);
+table.refreshTablePeriodically = function(tableType, interval, first) {
+  if (userIsActive && !first) table.refreshTable(tableType, false);
   setTimeout(
-    () => tableNamespace.refreshTablePeriodically(tableType, interval),
+    () => table.refreshTablePeriodically(tableType, interval),
     interval
   );
 };

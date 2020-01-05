@@ -15,71 +15,71 @@
     <title>eNMS | {% block title %}{% endblock %}</title>
     {% block stylesheets %}
     <link
-      href="{{ url_for('static', filename='lib/base/bootstrap/css/bootstrap.min.css') }}"
+      href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"
+      href="{{ url_for('static', filename='lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/full_calendar/fullcalendar.min.css') }}"
+      href="{{ url_for('static', filename='lib/full_calendar/fullcalendar.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/bootstrap-select/bootstrap-select.min.css') }}"
+      href="{{ url_for('static', filename='lib/bootstrap-select/bootstrap-select.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/bootstrap-toggle/bootstrap-toggle.min.css') }}"
+      href="{{ url_for('static', filename='lib/bootstrap-toggle/bootstrap-toggle.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/nprogress/nprogress.min.css') }}"
+      href="{{ url_for('static', filename='lib/nprogress/nprogress.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/alertify/alertify.min.css') }}"
+      href="{{ url_for('static', filename='lib/alertify/alertify.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/diffview/diffview.min.css') }}"
+      href="{{ url_for('static', filename='lib/diffview/diffview.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/vis/vis.min.css') }}"
+      href="{{ url_for('static', filename='lib/vis/vis.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/jspanel/jspanel.min.css') }}"
+      href="{{ url_for('static', filename='lib/jspanel/jspanel.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/font-awesome/font-awesome.min.css') }}"
+      href="{{ url_for('static', filename='lib/font-awesome/font-awesome.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/jsoneditor/jsoneditor.min.css') }}"
+      href="{{ url_for('static', filename='lib/jsoneditor/jsoneditor.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/codemirror/codemirror.min.css') }}"
+      href="{{ url_for('static', filename='lib/codemirror/codemirror.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/select2/select2.min.css') }}"
+      href="{{ url_for('static', filename='lib/select2/select2.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/jstree/themes/style.min.css') }}"
+      href="{{ url_for('static', filename='lib/jstree/themes/style.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/dropzone/dropzone.min.css') }}"
+      href="{{ url_for('static', filename='lib/dropzone/dropzone.min.css') }}"
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/base/gentelella/gentelella.min.css') }}"
+      href="{{ url_for('static', filename='lib/gentelella/gentelella.min.css') }}"
       rel="stylesheet"
     />
     {% endblock stylesheets %} {% endblock head %}
@@ -309,7 +309,7 @@
       </div>
     </div>
     {% block javascripts %}
-    <script src="{{ url_for('static', filename='lib/base/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
     <script>
       window.eNMS = {};
       const page = "{{ endpoint }}";
@@ -324,27 +324,27 @@
       let config = {{ config|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";
     </script>
-    <script src="{{ url_for('static', filename='lib/base/moment/moment.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/full_calendar/fullcalendar.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/datatables/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/nprogress/nprogress.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/alertify/alertify.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/smart-wizard/smart-wizard.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/diffview/diffview.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/vis/vis.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/jspanel/jspanel.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/jspanel/jspanel.tooltip.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/jsoneditor/jsoneditor.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/codemirror/codemirror.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/codemirror/logsMode.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/select2/select2.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/jstree/jstree.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='lib/base/dropzone/dropzone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/moment/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/full_calendar/fullcalendar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/nprogress/nprogress.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/alertify/alertify.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/smart-wizard/smart-wizard.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/diffview/diffview.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/vis/vis.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jspanel/jspanel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jspanel/jspanel.tooltip.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jsoneditor/jsoneditor.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/codemirror/codemirror.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/codemirror/logsMode.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/select2/select2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jstree/jstree.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/dropzone/dropzone.min.js') }}"></script>
     <script
       type="module"
       src="{{ url_for('static', filename='base.js') }}"

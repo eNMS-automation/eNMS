@@ -1106,11 +1106,6 @@ td.group {
     text-align: right
 }
 
-.dataTables_info {
-    width: 60%;
-    float: left
-}
-
 .dataTables_paginate {
     float: right;
     text-align: right
@@ -1145,12 +1140,6 @@ table.display thead th {
     cursor: pointer
 }
 
-table.display tfoot th {
-    padding: 3px 18px 3px 10px;
-    border-top: 1px solid #000;
-    font-weight: 700
-}
-
 table.display tr.heading2 td {
     border-bottom: 1px solid #aaa
 }
@@ -1159,43 +1148,8 @@ table.display td {
     padding: 3px 10px
 }
 
-.dataTables_scroll {
-    clear: both
-}
-
-.dataTables_scrollBody {
-    -webkit-overflow-scrolling: touch
-}
-
-.top .dataTables_info {
-    float: none
-}
-
 .clear {
     clear: both
-}
-
-tfoot input {
-    margin: .5em 0;
-    width: 100%;
-    color: #444
-}
-
-tfoot input.search_init {
-    color: #999
-}
-
-td.group {
-    border-bottom: 2px solid #a19b9e;
-    border-top: 2px solid #a19b9e
-}
-
-td.details {
-    border: 2px solid #a19b9e
-}
-
-.example_alt_pagination div.dataTables_info {
-    width: 40%
 }
 
 .login_content .btn-default:hover,

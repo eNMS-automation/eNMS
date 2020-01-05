@@ -160,61 +160,6 @@ table.tile_info td p {
     margin-top: 10px
 }
 
-.profile_pic {
-    width: 35%;
-    float: left
-}
-
-.img-circle.profile_img {
-    width: 70%;
-    background: #fff;
-    margin-left: 15%;
-    z-index: 1000;
-    position: inherit;
-    margin-top: 20px;
-    border: 1px solid rgba(52, 73, 94, .44);
-    padding: 4px
-}
-
-.profile_info {
-    padding: 25px 10px 10px;
-    width: 65%;
-    float: left
-}
-
-.profile_info span {
-    font-size: 13px;
-    line-height: 30px;
-    color: #bab8b8
-}
-
-.profile_info h2 {
-    font-size: 14px;
-    color: #ecf0f1;
-    margin: 0;
-    font-weight: 300
-}
-
-.profile.img_2 {
-    text-align: center
-}
-
-.profile.img_2 .profile_pic {
-    width: 100%
-}
-
-.profile.img_2 .profile_pic .img-circle.profile_img {
-    width: 50%;
-    margin: 10px 0 0
-}
-
-.profile.img_2 .profile_info {
-    padding: 15px 10px 0;
-    width: 100%;
-    margin-bottom: 10px;
-    float: left
-}
-
 .main_menu span.fa {
     float: right;
     text-align: center;
@@ -2899,26 +2844,6 @@ header {
     border-left-color: #1abb9c
 }
 
-.editor-wrapper {
-    min-height: 250px;
-    background-color: #fff;
-    border-collapse: separate;
-    border: 1px solid #ccc;
-    padding: 4px;
-    box-sizing: content-box;
-    box-shadow: rgba(0, 0, 0, .07451) 0 1px 1px 0 inset;
-    overflow: scroll;
-    outline: 0;
-    border-radius: 3px
-}
-
-div[data-role=editor-toolbar] {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none
-}
-
 .select2-container--default .select2-selection--multiple,
 .select2-container--default .select2-selection--single {
     background-color: #fff;
@@ -2950,16 +2875,6 @@ div[data-role=editor-toolbar] {
 
 .select2-container--default.select2-container--focus .select2-selection--multiple {
     border: 1px solid #ccc
-}
-
-.switchery {
-    width: 32px;
-    height: 20px
-}
-
-.switchery>small {
-    width: 20px;
-    height: 20px
 }
 
 fieldset {

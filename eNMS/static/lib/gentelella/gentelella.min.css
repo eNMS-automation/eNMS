@@ -915,38 +915,6 @@ table.display td.center {
     text-align: center
 }
 
-table.dataTable td.focus,
-table.dataTable th.focus {
-    outline: #1abb9c solid 2px!important;
-    outline-offset: -1px
-}
-
-table.display thead td:active,
-table.display thead th:active {
-    outline: 0
-}
-
-table.display {
-    margin: 0 auto;
-    clear: both;
-    width: 100%
-}
-
-table.display thead th {
-    padding: 8px 18px 8px 10px;
-    border-bottom: 1px solid #000;
-    font-weight: 700;
-    cursor: pointer
-}
-
-table.display tr.heading2 td {
-    border-bottom: 1px solid #aaa
-}
-
-table.display td {
-    padding: 3px 10px
-}
-
 .clear {
     clear: both
 }
@@ -976,8 +944,7 @@ ul.msg_list li a .time {
     white-space: normal
 }
 
-.tile_count .tile_stats_count,
-ul.quick-list li {
+.tile_count .tile_stats_count {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis
@@ -1071,42 +1038,6 @@ ul.to_do p {
     border: 1px solid #abd9ea;
     border-radius: 5px;
     background: #fff
-}
-
-ul.quick-list {
-    width: 45%;
-    padding-left: 0;
-    display: inline-block
-}
-
-ul.quick-list li {
-    padding-left: 10px;
-    list-style: none;
-    margin: 0;
-    padding-bottom: 6px;
-    padding-top: 4px
-}
-
-ul.quick-list li i {
-    padding-right: 10px;
-    color: #757679
-}
-
-.dashboard-widget-content {
-    padding-top: 9px
-}
-
-.dashboard-widget-content .sidebar-widget {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-    background: #fff;
-    border: 1px solid #abd9ea;
-    border-radius: 5px;
-    text-align: center;
-    float: right;
-    padding: 2px;
-    margin-top: 10px
 }
 
 .tile_count {

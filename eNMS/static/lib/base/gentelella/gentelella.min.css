@@ -1997,29 +1997,12 @@ legend {
     right: 13px
 }
 
-.form-control.has-feedback-left {
-    padding-left: 45px
-}
-
-.form-control.has-feedback-right {
-    padding-right: 45px
-}
-
 .form-group {
     margin-bottom: 10px
 }
 
 .validate {
     margin-top: 10px
-}
-
-.invalid-form-error-message {
-    margin-top: 10px;
-    padding: 5px
-}
-
-.invalid-form-error-message.filled {
-    border-left: 2px solid #e74c3c
 }
 
 .btn {
@@ -2518,77 +2501,8 @@ ul.project_files li a i {
     overflow: hidden
 }
 
-.view {
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    box-shadow: 1px 1px 2px #e6e6e6;
-    cursor: default
-}
-
 .dropdown-menu a {
     cursor: pointer
-}
-
-.view .content,
-.view .mask {
-    position: absolute;
-    width: 100%;
-    overflow: hidden;
-    top: 0;
-    left: 0
-}
-
-.sideways,
-.view .tools,
-.view img,
-.view p {
-    position: relative
-}
-
-.view img {
-    display: block
-}
-
-.view .tools {
-    color: #fff;
-    text-align: center;
-    font-size: 17px;
-    padding: 3px;
-    background: rgba(0, 0, 0, .35);
-    margin: 43px 0 0
-}
-
-.mask.no-caption .tools {
-    margin: 90px 0 0
-}
-
-.view .tools a {
-    display: inline-block;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 400;
-    padding: 0 4px
-}
-
-.view p {
-    font-family: Georgia, serif;
-    font-size: 12px;
-    color: #fff;
-    padding: 10px 20px 20px;
-    text-align: center
-}
-
-.view a.info {
-    display: inline-block;
-    padding: 7px 14px;
-    background: #000;
-    color: #fff;
-    box-shadow: 0 0 1px #000
-}
-
-.form-group.has-feedback span {
-    display: block!important
 }
 
 .form-group .btn {

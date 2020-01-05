@@ -37,7 +37,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver, EFRGTHYJW]
+    SanFrancisco, Orange, Oakland, Denver, Aserver]
   last_modified: ''
   latitude: '0.0'
   link_color: ''
@@ -107,7 +107,7 @@
   devices: [Jackson, PaloAlto, Austin, Washington, Chicago, SanJose, SanDiego, Dallas,
     Philadelphia, LosAngeles, Detroit, Richmond, Atlanta, Boston, Houston, Baltimore,
     Cleveland, Columbus, Cincinnati, Cambridge, Minneapolis, NewYork, Sacramento,
-    SanFrancisco, Orange, Oakland, Denver, Aserver, EFRGTHYJW]
+    SanFrancisco, Orange, Oakland, Denver, Aserver]
   last_modified: ''
   latitude: '0.0'
   link_color: ''

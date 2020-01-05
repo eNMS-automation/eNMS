@@ -68,8 +68,10 @@ class AbstractBase(Base):
     def get_properties(self, export=False, exclude=None, include=None):
         result = {}
         no_migrate = dont_migrate.get(self.type, dont_migrate["service"])
-        additional_properties = getattr(self, "model_properties", [])
-        for property in model_properties[self.type] + additional_properties:
+        properties = model_properties[self.type]
+        if not export:
+            properties.extend(getattr(self, "model_properties", []))
+        for property in properties:
             if not hasattr(self, property):
                 continue
             if property in dont_serialize.get(self.type, []):

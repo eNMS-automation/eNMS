@@ -1,10 +1,8 @@
 /*
 global
-action: false
 config: false
 NProgress: false
 page: false
-selectedObject: true
 user: false
 */
 

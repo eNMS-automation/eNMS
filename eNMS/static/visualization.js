@@ -1,11 +1,9 @@
 /*
 global
 action: false
-alertify: false
 config: true
 jsPanel: false
 L: false
-serializeForm: false
 viewType: false
 vis: false
 */
@@ -17,7 +15,7 @@ import {
   showPanel,
   showTypePanel,
 } from "./base.js";
-import { showDeviceNetworkData } from "./inventory.js";
+import { showDeviceData } from "./inventory.js";
 
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -297,7 +295,7 @@ export function initView() {
   Object.assign(action, {
     Properties: (o) => showTypePanel(o.type, o.id),
     Connect: (d) => showPanel("device_connection", d.id),
-    Configuration: (d) => showDeviceNetworkData(d),
+    Configuration: (d) => showDeviceData(d),
   });
 }
 

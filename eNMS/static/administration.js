@@ -1,6 +1,5 @@
 /*
 global
-alertify: false
 CodeMirror: false
 config: true
 Dropzone: false

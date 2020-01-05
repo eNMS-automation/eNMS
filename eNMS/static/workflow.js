@@ -1,7 +1,6 @@
 /*
 global
 action: false
-alertify: false
 currentPath: true
 serviceTypes: false
 Set: false
@@ -249,7 +248,7 @@ const rectangleSelection = (container, network, nodes) => {
   });
 };
 
-function processWorkflowData(instance, id) {
+export function processWorkflowData(instance, id) {
   if (!instance.type) {
     edges.update(edgeToEdge(instance));
   } else if (instance.type.includes("service") || instance.type == "workflow") {

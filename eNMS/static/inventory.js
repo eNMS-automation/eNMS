@@ -1,8 +1,8 @@
 /*
 global
-alertify: false
 CodeMirror: false
 config: true
+echarts: false
 initSelect: false
 */
 
@@ -16,7 +16,7 @@ import {
 } from "./base.js";
 import { initTable, tables } from "./table.js";
 
-let inventoryNamespace = (window.eNMS.inventory = {});
+let inventory = (window.eNMS.inventory = {});
 
 function drawDiagrams(diagram, result) {
   const options = {
@@ -92,7 +92,7 @@ export function initDashboard() {
   });
 }
 
-inventoryNamespace.sshConnection = function(id) {
+inventory.sshConnection = function(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
@@ -115,7 +115,7 @@ inventoryNamespace.sshConnection = function(id) {
   });
 };
 
-inventoryNamespace.savePoolObjects = function(id) {
+inventory.savePoolObjects = function(id) {
   fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);
     notify("Changes saved.", "success", 5);
@@ -123,7 +123,7 @@ inventoryNamespace.savePoolObjects = function(id) {
   });
 };
 
-inventoryNamespace.showPoolObjectsPanel = function(id) {
+inventory.showPoolObjectsPanel = function(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       if (pool.devices.length > 1000 || pool.links.length > 1000) {
@@ -143,7 +143,7 @@ inventoryNamespace.showPoolObjectsPanel = function(id) {
   });
 };
 
-inventoryNamespace.updatePools = function(pool) {
+inventory.updatePools = function(pool) {
   notify("Update starting...", "success", 5);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call(endpoint, function() {
@@ -152,9 +152,7 @@ inventoryNamespace.updatePools = function(pool) {
   });
 };
 
-export const showDeviceNetworkData = (inventoryNamespace.showDeviceNetworkData = function(
-  device
-) {
+export const showDeviceData = (inventory.showDeviceData = function(device) {
   call(`/get_device_network_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
       notify("No data stored.", "error", 5);
@@ -186,7 +184,7 @@ export const showDeviceNetworkData = (inventoryNamespace.showDeviceNetworkData =
   });
 });
 
-inventoryNamespace.showDeviceResultsPanel = function(device) {
+inventory.showDeviceResultsPanel = function(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
     initTable("result", device);
   });

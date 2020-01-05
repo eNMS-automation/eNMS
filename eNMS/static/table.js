@@ -1,6 +1,6 @@
 /*
 global
-alertify: false
+page: false
 */
 
 import {
@@ -249,7 +249,7 @@ models.device = class Device extends Base {
     </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showDeviceNetworkData(${this.instance})"
+          onclick="eNMS.inventory.showDeviceData(${this.instance})"
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span
           ></button>

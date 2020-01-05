@@ -682,6 +682,7 @@ function showAllAlerts() {
     "alerts_table",
     null,
     () => {
+      // eslint-disable-next-line new-cap
       $("#alerts-table").DataTable({
         columns: [{ width: "200px" }, { width: "60px" }, null],
       });
@@ -717,13 +718,16 @@ function getAlerts(preview) {
       if (preview) {
         const color = alert[1] == "error" ? "f87979" : "5BBD72";
         const fontSize = preview ? "11px" : "14px";
-        return `<li style="background: #${color}; pointer-events: none; margin: 2px 6px">
-        <a style="word-wrap: break-word; color: #FFFFFF">
-        <span class="time" style="font-size: ${fontSize}">${
+        return `
+          <li
+            style="background: #${color}; pointer-events: none; margin: 2px 6px"
+          >
+          <a style="word-wrap: break-word; color: #FFFFFF">
+          <span class="time" style="font-size: ${fontSize}">${
           alert[3]
         }</span><span>${alert[0]}</span>
-        </a>
-      </li>`;
+          </a>
+        </li>`;
       } else {
         return `
         <tr>

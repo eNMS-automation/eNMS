@@ -709,10 +709,6 @@ h2 {
     padding: 1px 5px 6px
 }
 
-table.tile td ul li a {
-    width: 100%
-}
-
 td span {
     line-height: 18px
 }
@@ -725,14 +721,6 @@ td span {
 
 .col-middle {
     margin-top: 5%
-}
-
-a.DTTT_button,
-button.DTTT_button,
-div.DTTT_button {
-    border: 1px solid #e7e7e7!important;
-    background: #e7e7e7!important;
-    box-shadow: none!important
 }
 
 td.details,
@@ -752,15 +740,9 @@ table.display td.center {
     text-align: center
 }
 
-.clear {
-    clear: both
-}
-
 .login_content .btn-default:hover,
 .login_content a,
-.tile:hover,
-.view a.info,
-span.tag {
+.tile:hover {
     text-decoration: none
 }
 
@@ -1086,80 +1068,8 @@ textarea:focus {
     outline-width: 2px
 }
 
-span.tag {
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    display: block;
-    float: left;
-    padding: 5px 9px;
-    background: #1abb9c;
-    color: #f1f6f7;
-    margin-right: 5px;
-    font-weight: 500;
-    margin-bottom: 5px;
-    font-family: helvetica
-}
-
-span.tag a {
-    color: #f1f6f7!important
-}
-
-.tags_clear {
-    clear: both;
-    width: 100%;
-    height: 0
-}
-
 a:focus {
     outline: 0
-}
-
-.tag {
-    line-height: 1;
-    background: #1abb9c;
-    color: #fff!important
-}
-
-.tag:after {
-    content: " ";
-    height: 30px;
-    width: 0;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    margin: 0;
-    pointer-events: none;
-    border-top: 14px solid transparent;
-    border-bottom: 14px solid transparent;
-    border-left: 11px solid #1abb9c
-}
-
-ul.social li {
-    border: 0
-}
-
-.social-sidebar {
-    background: #ededed;
-    width: 22%
-}
-
-.social-body {
-    border: 1px solid #ccc;
-    width: 78%
-}
-
-.thumb img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%
-}
-
-.angular {
-    margin-top: 100px
-}
-
-.angular .chart {
-    margin-top: 0
 }
 
 .widget {
@@ -2014,11 +1924,6 @@ ul.verticle_bars li {
     border-top: 5px solid #888;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-}
-
-.different_element {
-    display: block;
-    white-space: pre-line !important;
 }
 
 th.dt-center,

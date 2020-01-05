@@ -988,14 +988,6 @@ table.tile_info {
     color: #bdbdbd
 }
 
-legend {
-    padding-bottom: 7px
-}
-
-.demo-placeholder {
-    height: 280px
-}
-
 .pagination.pagination-split li {
     display: inline-block;
     margin-right: 3px
@@ -1770,50 +1762,6 @@ a.star {
     color: #428bca!important
 }
 
-.mail_content {
-    background: #fff;
-    border-radius: 4px;
-    margin-top: 20px;
-    min-height: 500px;
-    padding: 10px 11px;
-    width: 100%
-}
-
-.list-btn-mail {
-    margin-bottom: 15px
-}
-
-.list-btn-mail.active {
-    border-bottom: 1px solid #39b3d7;
-    padding: 0 0 14px
-}
-
-.list-btn-mail>i {
-    float: left;
-    font-size: 18px;
-    font-style: normal;
-    width: 33px
-}
-
-.list-btn-mail>.cn {
-    background: #39b3d7;
-    border-radius: 12px;
-    color: #fff;
-    float: right;
-    font-style: normal;
-    padding: 0 5px
-}
-
-.view p {
-    font-style: italic
-}
-
-.button-mail {
-    margin: 0 0 15px!important;
-    text-align: left;
-    width: 100%
-}
-
 .btn,
 .buttons,
 .modal-footer .btn+.btn,
@@ -1826,109 +1774,6 @@ button {
 .btn-group-vertical .btn {
     margin-bottom: 0;
     margin-right: 0
-}
-
-.mail_list_column,
-.mail_view {
-    border-left: 1px solid #dbdbdb
-}
-
-.mail_list {
-    width: 100%;
-    border-bottom: 1px solid #dbdbdb;
-    margin-bottom: 2px;
-    display: inline-block
-}
-
-.mail_list .left {
-    width: 5%;
-    float: left;
-    margin-right: 3%
-}
-
-.mail_list .right {
-    width: 90%;
-    float: left
-}
-
-.mail_list h3 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0 0 6px
-}
-
-.mail_list h3 small {
-    float: right;
-    color: #adabab;
-    font-size: 11px;
-    line-height: 20px
-}
-
-.mail_list .badge {
-    padding: 3px 6px;
-    font-size: 8px;
-    background: #bab7b7
-}
-
-@media (max-width:767px) {
-    .mail_list {
-        margin-bottom: 5px;
-        display: inline-block
-    }
-}
-
-.mail_heading h4 {
-    font-size: 18px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-top: 20px
-}
-
-.attachment {
-    margin-top: 30px
-}
-
-.attachment ul {
-    width: 100%;
-    list-style: none;
-    padding-left: 0;
-    display: inline-block;
-    margin-bottom: 30px
-}
-
-.attachment ul li {
-    float: left;
-    width: 150px;
-    margin-right: 10px;
-    margin-bottom: 10px
-}
-
-.attachment ul li img {
-    height: 150px;
-    border: 1px solid #ddd;
-    padding: 5px;
-    margin-bottom: 10px
-}
-
-.attachment ul li span {
-    float: right
-}
-
-.attachment .file-name {
-    float: left
-}
-
-.attachment .links {
-    width: 100%;
-    display: inline-block
-}
-
-.editor.btn-toolbar {
-    zoom: 1;
-    background: #f7f7f7;
-    margin: 5px 2px;
-    padding: 3px 0;
-    border: 1px solid #efefef
 }
 
 .input-group {
@@ -1971,7 +1816,8 @@ span.section {
 
 legend {
     font-size: 18px;
-    color: inherit
+    color: inherit;
+    padding-bottom: 7px
 }
 
 .form-horizontal .form-group {
@@ -3047,8 +2893,8 @@ td.dt-center {
 }
 
 legend.section {
-    width:inherit; /* Or auto */
-    padding:0 10px; /* To give a bit of padding on the left and right */
+    width:inherit;
+    padding:0 10px;
     border-bottom:none;
     margin-bottom: 5px;
 }

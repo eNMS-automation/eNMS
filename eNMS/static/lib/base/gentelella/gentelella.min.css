@@ -1237,63 +1237,9 @@ ul.quick-list li i {
     width: 12px
 }
 
-a.user-profile {
-    color: #5e6974!important
-}
-
 .user-profile img {
     width: 29px;
     height: 29px;
-    border-radius: 50%;
-    margin-right: 10px
-}
-
-ul.top_profiles {
-    height: 330px;
-    width: 100%
-}
-
-ul.top_profiles li {
-    margin: 0;
-    padding: 3px 5px
-}
-
-ul.top_profiles li:nth-child(odd) {
-    background-color: #eee
-}
-
-.event .media-body a.title {
-    font-weight: 700
-}
-
-.event .media-body p {
-    margin-bottom: 0
-}
-
-.fontawesome-icon-list .fa-hover a:hover {
-    background-color: #ddd;
-    color: #fff;
-    text-decoration: none
-}
-
-.fontawesome-icon-list .fa-hover a {
-    display: block;
-    line-height: 32px;
-    height: 32px;
-    padding-left: 10px;
-    border-radius: 4px
-}
-
-.fontawesome-icon-list .fa-hover a:hover .fa {
-    font-size: 28px;
-    vertical-align: -6px
-}
-
-.fontawesome-icon-list .fa-hover a .fa {
-    width: 32px;
-    font-size: 16px;
-    display: inline-block;
-    text-align: right;
     margin-right: 10px
 }
 

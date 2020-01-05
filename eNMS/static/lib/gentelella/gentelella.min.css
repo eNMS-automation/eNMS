@@ -295,24 +295,6 @@ body .container.body .right_col {
     border-color: #34495e!important
 }
 
-.bg-white {
-    background: #fff!important;
-    border: 1px solid #fff!important;
-    color: #73879c
-}
-
-.bg-green {
-    background: #1abb9c!important;
-    border: 1px solid #1abb9c!important;
-    color: #fff
-}
-
-.bg-red {
-    background: #e74c3c!important;
-    border: 1px solid #e74c3c!important;
-    color: #fff
-}
-
 .container {
     width: 100%;
     padding: 0
@@ -792,14 +774,17 @@ ul.msg_list li a .time {
     width: 300px
 }
 
-.info-number .badge {
+.badge {
     font-size: 10px;
     font-weight: 400;
     line-height: 13px;
     padding: 2px 6px;
     position: absolute;
     right: 50px;
-    top: 8px
+    top: 8px;
+    background: #35bee7!important;
+    border: 1px solid #35bee7!important;
+    color: #fff
 }
 
 ul.to_do {

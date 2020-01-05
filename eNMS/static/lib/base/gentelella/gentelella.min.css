@@ -2663,6 +2663,10 @@ ul.project_files li a i {
     background: #f7f7f7
 }
 
+.error_page {
+    background: #002240
+}
+
 .login .fa-paw {
     font-size: 26px
 }

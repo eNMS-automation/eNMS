@@ -683,12 +683,7 @@ function showAllAlerts() {
     null,
     () => {
       $("#alerts-table").DataTable({
-        "columns": [
-          { "width": "200px" },
-          { "width": "60px" },
-          null,
-        ],
-
+        columns: [{ width: "200px" }, { width: "60px" }, null],
       });
     },
     `
@@ -710,7 +705,8 @@ function showAllAlerts() {
         </tbody>
       </table>
     <div>
-  `);
+  `
+  );
 }
 
 function getAlerts(preview) {

@@ -980,42 +980,6 @@ table.tile td ul li a {
     -webkit-border-radius: 4px
 }
 
-table.tile h3,
-table.tile h4,
-table.tile span {
-    font-weight: 700;
-    vertical-align: middle!important
-}
-
-table.tile td,
-table.tile th {
-    text-align: center
-}
-
-table.tile th {
-    border-bottom: 1px solid #e6ecee
-}
-
-table.tile td {
-    padding: 5px 0
-}
-
-table.tile td ul {
-    text-align: left;
-    padding-left: 0
-}
-
-table.tile td ul li {
-    list-style: none;
-    width: 100%
-}
-
-table.tile td ul li a big {
-    right: 0;
-    float: right;
-    margin-right: 13px
-}
-
 td span {
     line-height: 18px
 }
@@ -1030,42 +994,12 @@ td span {
     margin-top: 5%
 }
 
-.dataTables_paginate a {
-    padding: 6px 9px!important;
-    background: #ddd!important;
-    border-color: #ddd!important
-}
-
 a.DTTT_button,
 button.DTTT_button,
 div.DTTT_button {
     border: 1px solid #e7e7e7!important;
     background: #e7e7e7!important;
     box-shadow: none!important
-}
-
-table.jambo_table {
-    border: 1px solid rgba(221, 221, 221, .78)
-}
-
-table.jambo_table thead {
-    background: rgba(52, 73, 94, .94);
-    color: #ecf0f1
-}
-
-table.jambo_table tbody tr:hover td {
-    background: rgba(38, 185, 154, .07);
-    border-top: 1px solid rgba(38, 185, 154, .11);
-    border-bottom: 1px solid rgba(38, 185, 154, .11)
-}
-
-table.jambo_table tbody tr.selected {
-    background: rgba(38, 185, 154, .16)
-}
-
-table.jambo_table tbody tr.selected td {
-    border-top: 1px solid rgba(38, 185, 154, .4);
-    border-bottom: 1px solid rgba(38, 185, 154, .4)
 }
 
 .dataTables_wrapper {
@@ -1098,17 +1032,6 @@ td.group {
 .dataTables_length {
     width: 40%;
     float: left
-}
-
-.dataTables_filter {
-    width: 50%;
-    float: right;
-    text-align: right
-}
-
-.dataTables_paginate {
-    float: right;
-    text-align: right
 }
 
 .dataTables_empty,

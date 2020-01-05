@@ -50,10 +50,6 @@ def configure_context_processor(flask_app):
 
 
 def configure_errors(flask_app):
-    @login_manager.unauthorized_handler
-    def unauthorized_handler():
-        return render_template("error.html", error=403), 403
-
     @flask_app.errorhandler(403)
     def authorization_required(error):
         return render_template("error.html", error=403), 403

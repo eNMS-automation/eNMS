@@ -878,38 +878,18 @@ div.DTTT_button {
     box-shadow: none!important
 }
 
-.dataTables_wrapper {
-    position: relative;
-    clear: both;
-    zoom: 1
-}
-
-.dataTables_processing {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 250px;
-    height: 30px;
-    margin-left: -125px;
-    margin-top: -15px;
-    padding: 14px 0 2px;
-    border: 1px solid #ddd;
-    text-align: center;
-    color: #999;
-    font-size: 14px;
-    background-color: #fff
-}
-
 td.details,
 td.group {
     background-color: #d1cfd0
 }
 
+/* Set the table pages in the middle */
 .dataTables_length {
     width: 40%;
     float: left
 }
 
+/* Align center for "No data available in table" when empty table */
 .dataTables_empty,
 table.display td.center {
     text-align: center
@@ -1184,24 +1164,6 @@ legend {
 .form-horizontal .form-group {
     margin-right: 0;
     margin-left: 0
-}
-
-.form-control-feedback {
-    margin-top: 8px;
-    height: 23px;
-    color: #bbb;
-    line-height: 24px;
-    font-size: 15px
-}
-
-.form-control-feedback.left {
-    border-right: 1px solid #ccc;
-    left: 13px
-}
-
-.form-control-feedback.right {
-    border-left: 1px solid #ccc;
-    right: 13px
 }
 
 .form-group {
@@ -2127,50 +2089,8 @@ fieldset {
     display: none
 }
 
-.progress {
-    border-radius: 0
-}
-
-.progress-bar-info {
-    background-color: #3498db
-}
-
 .progress-bar-success {
     background-color: #26b99a
-}
-
-.progress_summary .progress {
-    margin: 5px 0 12px!important
-}
-
-.progress_summary .row {
-    margin-bottom: 5px
-}
-
-.progress_summary .row .col-xs-2 {
-    padding: 0
-}
-
-.progress_summary .data span,
-.progress_summary .more_info span {
-    text-align: right;
-    float: right
-}
-
-.progress_summary p {
-    margin-bottom: 3px;
-    width: 100%
-}
-
-.progress_title .left {
-    float: left;
-    text-align: left
-}
-
-.progress_title .right {
-    float: right;
-    text-align: right;
-    font-weight: 300
 }
 
 .progress.progress_sm {
@@ -2206,10 +2126,6 @@ ul.verticle_bars li {
 .dropzone {
     min-height: 300px;
     border: 1px solid #e5e5e5
-}
-
-.dataTables_wrapper>.row {
-    overflow: auto!important
 }
 
 .dropdown-submenu>.dropdown-menu {

@@ -400,7 +400,6 @@ export const switchToWorkflow = (automationNamespace.switchToWorkflow = function
     call(`/get_service_state/${path}/latest`, function(result) {
       workflow = result.service;
       displayWorkflow(result);
-      notify(`Workflow '${workflow.scoped_name}' displayed.`, "success", 5);
     });
   } else {
     $("#workflow-filtering").val(path);

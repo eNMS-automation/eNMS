@@ -1072,71 +1072,6 @@ a:focus {
     outline: 0
 }
 
-.widget {
-    min-width: 250px;
-    max-width: 310px
-}
-
-.pie_bg {
-    border-bottom: 1px solid rgba(101, 204, 182, .16);
-    border-radius: 4px;
-    padding-bottom: 10px;
-    box-shadow: 0 4px 6px -6px #222
-}
-
-ul.widget_profile_box {
-    width: 100%;
-    height: 42px;
-    padding: 3px;
-    background: #ececec;
-    margin-top: 40px;
-    margin-left: 1px
-}
-
-ul.widget_profile_box li:first-child {
-    width: 25%;
-    float: left
-}
-
-ul.widget_profile_box li:first-child a {
-    float: left
-}
-
-ul.widget_profile_box li:last-child {
-    width: 25%;
-    float: right
-}
-
-ul.widget_profile_box li:last-child a {
-    float: right
-}
-
-ul.widget_profile_box li a {
-    font-size: 22px;
-    text-align: center;
-    width: 35px;
-    height: 35px;
-    border: 1px solid rgba(52, 73, 94, .44);
-    display: block;
-    border-radius: 50%;
-    padding: 0
-}
-
-ul.widget_profile_box li a:hover {
-    color: #1abb9c!important;
-    border: 1px solid #26b99a
-}
-
-ul.widget_profile_box li .profile_img {
-    width: 85px;
-    height: 85px;
-    margin: -28px 0 0
-}
-
-.widget .verticle_bars li .progress.vertical.progress_wide {
-    width: 65%
-}
-
 ul.count2 {
     width: 100%;
     margin-left: 1px;
@@ -1863,16 +1798,6 @@ fieldset {
 .progress.progress_sm {
     border-radius: 0;
     margin-bottom: 18px
-}
-
-ul.verticle_bars {
-    width: 100%
-}
-
-ul.verticle_bars li {
-    width: 23%;
-    height: 200px;
-    margin: 0
 }
 
 .progress.vertical.progress_wide {

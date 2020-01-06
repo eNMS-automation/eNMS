@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship
 
 from eNMS import app
 from eNMS.database import Session
-from eNMS.database.dialect import Column, LargeString, MutableDict, SmallString
+from eNMS.database.dialect import Column, MutableDict, SmallString
 from eNMS.database.associations import (
     task_device_table,
     task_pool_table,
@@ -161,22 +161,6 @@ class Task(AbstractBase):
             app.scheduler.add_job(**{**default, **trigger})
         else:
             app.scheduler.reschedule_job(default.pop("id"), **trigger)
-
-
-class Changelog(AbstractBase):
-
-    __tablename__ = "changelog"
-    type = Column(SmallString)
-    __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
-    id = Column(Integer, primary_key=True)
-    time = Column(SmallString)
-    content = Column(LargeString, default="")
-    severity = Column(SmallString, default="debug")
-    user = Column(SmallString, default="admin")
-
-    def update(self, **kwargs):
-        kwargs["time"] = str(datetime.now())
-        super().update(**kwargs)
 
 
 class Event(AbstractBase):

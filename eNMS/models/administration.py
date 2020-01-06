@@ -1,8 +1,9 @@
+from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Integer
 from sqlalchemy.orm import relationship
 
-from eNMS.database.dialect import Column, MutableList, SmallString
+from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
 from eNMS.database.associations import pool_user_table
 from eNMS.database.base import AbstractBase
 
@@ -35,3 +36,19 @@ class User(AbstractBase, UserMixin):
 
     def allowed(self, permission):
         return self.is_admin or permission in self.permissions
+
+
+class Changelog(AbstractBase):
+
+    __tablename__ = "changelog"
+    type = Column(SmallString)
+    __mapper_args__ = {"polymorphic_identity": "changelog", "polymorphic_on": type}
+    id = Column(Integer, primary_key=True)
+    time = Column(SmallString)
+    content = Column(LargeString, default="")
+    severity = Column(SmallString, default="debug")
+    user = Column(SmallString, default="admin")
+
+    def update(self, **kwargs):
+        kwargs["time"] = str(datetime.now())
+        super().update(**kwargs)

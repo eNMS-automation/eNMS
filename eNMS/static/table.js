@@ -135,6 +135,7 @@ table.refreshTablePeriodically = function(tableType, interval, first) {
 class Base {
   constructor(properties) {
     Object.assign(this, properties);
+    console.log(this.type)
     this.instance = JSON.stringify({
       id: this.id,
       name: this.name,
@@ -850,9 +851,9 @@ models.user = class User extends Base {
 
   static get controls() {
     return [
-      super.createNewButton("changelog"),
-      super.searchTableButton("changelog"),
-      super.refreshTableButton("changelog"),
+      super.createNewButton("user"),
+      super.searchTableButton("user"),
+      super.refreshTableButton("user"),
     ];
   }
 
@@ -902,9 +903,9 @@ models.server = class Server extends Base {
 
   static get controls() {
     return [
-      super.createNewButton("changelog"),
-      super.searchTableButton("changelog"),
-      super.refreshTableButton("changelog"),
+      super.createNewButton("server"),
+      super.searchTableButton("server"),
+      super.refreshTableButton("server"),
     ];
   }
 

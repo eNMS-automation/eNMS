@@ -240,7 +240,6 @@ class Pool(AbstractPool):
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
     users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)
-    model_properties = ["type"]
 
     def update(self, **kwargs):
         super().update(**kwargs)

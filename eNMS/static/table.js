@@ -486,8 +486,6 @@ models.service = class Service extends Base {
     >
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
-    <input type="hidden" id="workflow-filtering" name="workflow-filtering">
-    </input>
     `,
     ];
   }
@@ -501,7 +499,9 @@ models.service = class Service extends Base {
       >
         <option value="true">Display services hierarchically</option>
         <option value="false">Display all services</option>
-      </select>`;
+      </select>
+      <input type="hidden" id="workflow-filtering" name="workflow-filtering">
+      </input>`;
   }
 
   static get controlsRight() {

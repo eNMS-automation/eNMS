@@ -9,13 +9,10 @@ workflow: true
 */
 
 import {
-  arrowHistory,
-  arrowPointer,
   loadServiceTypes,
   normalRun,
   runLogic,
   showRuntimePanel,
-  switchToWorkflow,
 } from "./automation.js";
 import {
   adjustHeight,
@@ -30,6 +27,10 @@ import {
 } from "./base.js";
 
 let workflowNamespace = (window.eNMS.workflow = {});
+export let arrowHistory = [""];
+export let arrowPointer = -1;
+export let currentPath = localStorage.getItem("path");
+export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
 
 vis.Network.prototype.zoom = function(scale) {
@@ -247,6 +248,44 @@ const rectangleSelection = (container, network, nodes) => {
     }
   });
 };
+
+export const switchToWorkflow = (workflowNamespace.switchToWorkflow = function(
+  path,
+  arrow
+) {
+  if (typeof path === "undefined") return;
+  if (path.toString().includes(">")) {
+    $("#up-arrow").removeClass("disabled");
+  } else {
+    $("#up-arrow").addClass("disabled");
+  }
+  if (typeof currentPath != "undefined") currentPath = path;
+  if (!arrow) {
+    arrowPointer++;
+    arrowHistory.splice(arrowPointer, 9e9, path);
+  } else {
+    arrowPointer += arrow == "right" ? 1 : -1;
+  }
+  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
+    $("#left-arrow").removeClass("disabled");
+  } else {
+    $("#left-arrow").addClass("disabled");
+  }
+  if (arrowPointer < arrowHistory.length - 1) {
+    $("#right-arrow").removeClass("disabled");
+  } else {
+    $("#right-arrow").addClass("disabled");
+  }
+  if (page == "workflow_builder") {
+    call(`/get_service_state/${path}/latest`, function(result) {
+      workflow = result.service;
+      displayWorkflow(result);
+    });
+  } else {
+    $("#workflow-filtering").val(path);
+    if (tables["service"]) tables["service"].ajax.reload(null, false);
+  }
+});
 
 export function processWorkflowData(instance, id) {
   if (!instance.type) {
@@ -736,6 +775,8 @@ export function getServiceState(id, first) {
     if (first || result.state.status == "Running") {
       colorService(id, "#89CFF0");
       $("#status").text("Status: Running.");
+      localStorage.setItem("path", id)
+      localStorage.setItem("workflow", JSON.stringify(result.service))
       setTimeout(() => getServiceState(id), 300);
     } else {
       $("#status").text("Status: Idle.");

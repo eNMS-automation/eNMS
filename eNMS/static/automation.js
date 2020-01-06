@@ -22,14 +22,16 @@ import {
 } from "./base.js";
 import { initTable, tables } from "./table.js";
 import {
+  arrowHistory,
+  arrowPointer,
   currentRuntime,
   displayWorkflow,
   getServiceState,
+  switchToWorkflow,
+  workflow,
 } from "./workflow.js";
 
 let automation = (window.eNMS.automation = {});
-export let arrowHistory = [""];
-export let arrowPointer = -1;
 
 automation.openServicePanel = function() {
   showTypePanel($("#service-type").val());
@@ -367,44 +369,6 @@ automation.resumeTask = function(id) {
     notify("Task resumed.", "success", 5);
   });
 };
-
-export const switchToWorkflow = (automation.switchToWorkflow = function(
-  path,
-  arrow
-) {
-  if (typeof path === "undefined") return;
-  if (path.toString().includes(">")) {
-    $("#up-arrow").removeClass("disabled");
-  } else {
-    $("#up-arrow").addClass("disabled");
-  }
-  if (typeof currentPath != "undefined") currentPath = path;
-  if (!arrow) {
-    arrowPointer++;
-    arrowHistory.splice(arrowPointer, 9e9, path);
-  } else {
-    arrowPointer += arrow == "right" ? 1 : -1;
-  }
-  if (arrowHistory.length >= 1 && arrowPointer !== 0) {
-    $("#left-arrow").removeClass("disabled");
-  } else {
-    $("#left-arrow").addClass("disabled");
-  }
-  if (arrowPointer < arrowHistory.length - 1) {
-    $("#right-arrow").removeClass("disabled");
-  } else {
-    $("#right-arrow").addClass("disabled");
-  }
-  if (page == "workflow_builder") {
-    call(`/get_service_state/${path}/latest`, function(result) {
-      workflow = result.service;
-      displayWorkflow(result);
-    });
-  } else {
-    $("#workflow-filtering").val(path);
-    if (tables["service"]) tables["service"].ajax.reload(null, false);
-  }
-});
 
 automation.field = function(name, type, id) {
   const fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;

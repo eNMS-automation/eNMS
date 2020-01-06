@@ -353,10 +353,6 @@ block content %}
   </li>
 </ul>
 {% endblock content %} {% block javascripts %} {{ super()}}
-<script>
-  let workflow = {{ workflow|tojson|safe }};
-  let currentPath = {{ path|tojson|safe }};
-</script>
 <script
   type="module"
   src="{{ url_for('static', filename='workflow.js') }}"

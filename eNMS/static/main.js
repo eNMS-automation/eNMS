@@ -164,7 +164,8 @@ $(document).ready(function() {
   if (!alerts) {
     localStorage.setItem("alerts", "[]");
   } else {
-    $("#alert-number").text(JSON.parse(alerts).length);
+    const alertNumber = JSON.parse(alerts).length;
+    $("#alert-number").text(alertNumber > 99 ? "99+" : alertNumber || "");
   }
   initSidebar();
   if (page.includes("table")) {

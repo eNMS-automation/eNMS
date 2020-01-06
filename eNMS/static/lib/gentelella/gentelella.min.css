@@ -780,8 +780,8 @@ ul.msg_list li a .time {
     line-height: 13px;
     padding: 2px 6px;
     position: absolute;
-    right: 50px;
-    top: 8px;
+    left: 32px;
+    top: 4px;
     background: #35bee7!important;
     border: 1px solid #35bee7!important;
     color: #fff

@@ -745,6 +745,11 @@ function getAlerts(preview) {
     .join("");
 }
 
+function clearAlerts() {
+  localStorage.setItem('alerts', '[]');
+  $("#alert-number").empty();
+}
+
 export function createAlerts() {
   $("#alerts").empty().append(`
     ${getAlerts(true)}
@@ -753,6 +758,14 @@ export function createAlerts() {
         <a class="dropdown-item" onclick="eNMS.base.showAllAlerts()">
           <strong>See All Alerts</strong>
           <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </li>
+    <li style="margin: 3px 6px 0; padding: 10px; margin-bottom: 6px;">
+      <div class="text-center">
+        <a class="dropdown-item" onclick="eNMS.base.clearAlerts()">
+          <strong>Clear All Alerts</strong>
+          <i class="fa fa-remove"></i>
         </a>
       </div>
     </li>
@@ -768,6 +781,7 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
 });
 
 Object.assign(window.eNMS.base, {
+  clearAlerts: clearAlerts,
   copyToClipboard: copyToClipboard,
   createAlerts: createAlerts,
   processData: processData,

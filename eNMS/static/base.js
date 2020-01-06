@@ -231,7 +231,8 @@ export const deleteInstance = (baseNamespace.deleteInstance = function(
       .row($(`#${id}`))
       .remove()
       .draw(false);
-    notify(`${type.toUpperCase()} '${result.name}' deleted.`, "error", 5);
+    const name = result.name ? `'${result.name}'` : "";
+    notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5);
   });
 });
 

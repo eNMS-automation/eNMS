@@ -342,8 +342,6 @@ class AutomationController(BaseController):
         runs = fetch_all("run", service_id=service_id)
         if not runtime:
             runtime = "latest"
-        else:
-            session["path"] = path
         if runs and runtime != "normal":
             if runtime == "latest":
                 runtime = runs[-1].parent_runtime

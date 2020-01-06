@@ -120,10 +120,10 @@ table.filterTable = function(formType) {
   notify("Filter applied.", "success", 5);
 };
 
-table.refreshTable = function(tableType, displayNotification) {
+export const refreshTable = (table.refreshTable = function(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);
   if (displayNotification) notify("Table refreshed.", "success", 5);
-};
+});
 
 table.refreshTablePeriodically = function(tableType, interval, first) {
   if (userIsActive && !first) table.refreshTable(tableType, false);

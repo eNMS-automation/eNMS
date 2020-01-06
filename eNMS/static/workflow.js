@@ -25,11 +25,11 @@ import {
   showTypePanel,
   userIsActive,
 } from "./base.js";
-import { tables } from "./table.js";
+import { refreshTable } from "./table.js";
 
 let workflowNamespace = (window.eNMS.workflow = {});
 export let arrowHistory = [""];
-export let arrowPointer = -1;
+export let arrowPointer = page == "workflow_builder" ? -1 : 0;
 export let currentPath = localStorage.getItem("path");
 export let workflow = JSON.parse(localStorage.getItem("workflow"));
 export let currentRuntime;
@@ -261,7 +261,6 @@ export const switchToWorkflow = (workflowNamespace.switchToWorkflow = function(
     $("#up-arrow").addClass("disabled");
   }
   currentPath = path;
-  console.log(currentPath, arrow, arrowPointer, arrowHistory)
   if (!arrow) {
     arrowPointer++;
     arrowHistory.splice(arrowPointer, 9e9, path);
@@ -287,7 +286,7 @@ export const switchToWorkflow = (workflowNamespace.switchToWorkflow = function(
     });
   } else {
     $("#workflow-filtering").val(path);
-    if (tables["service"]) tables["service"].ajax.reload(null, false);
+    refreshTable("service")
   }
 });
 

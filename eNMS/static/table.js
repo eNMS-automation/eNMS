@@ -92,6 +92,7 @@ export function initTable(type, instance, runtime, id) {
           : `#search-${type}-form`;
         d.form = serializeForm(form);
         d.instance = instance;
+        d.columns = models[type].columns;
         if (runtime) {
           d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
         }
@@ -103,7 +104,7 @@ export function initTable(type, instance, runtime, id) {
     },
   });
   if (["changelog", "run", "result"].includes(type)) {
-    tables[type].order([0, "desc"]).draw();
+    tables[type].order([0, "asc", "test"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type)) {
     table.refreshTablePeriodically(type, 3000, true);
@@ -135,7 +136,6 @@ table.refreshTablePeriodically = function(tableType, interval, first) {
 class Base {
   constructor(properties) {
     Object.assign(this, properties);
-    console.log(this.type)
     this.instance = JSON.stringify({
       id: this.id,
       name: this.name,

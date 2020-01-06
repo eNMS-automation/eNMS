@@ -479,12 +479,15 @@ class BaseController:
     def table_filtering(self, table, **kwargs):
         model, properties = models[table], model_properties[table]
         operator = and_ if kwargs["form"].get("operator", "all") == "all" else or_
-        column_index = int(kwargs["order"][0]["column"])
-        if column_index < len(properties):
-            order_property = getattr(model, properties[column_index])
-            order_function = getattr(order_property, kwargs["order"][0]["dir"], None)
-        else:
-            order_function = None
+        ordering = getattr(
+            getattr(
+                model,
+                kwargs["columns"][int(kwargs["order"][0]["column"])]["data"],
+                None,
+            ),
+            kwargs["order"][0]["dir"],
+            None,
+        )
         constraints = self.build_filtering_constraints(table, **kwargs)
         if table == "result":
             constraints.append(
@@ -506,8 +509,8 @@ class BaseController:
         if table == "run":
             constraints.append(models["run"].children.any())
         result = Session.query(model).filter(operator(*constraints))
-        if order_function:
-            result = result.order_by(order_function())
+        if ordering:
+            result = result.order_by(ordering())
         return {
             "draw": int(kwargs["draw"]),
             "recordsTotal": Session.query(func.count(model.id)).scalar(),

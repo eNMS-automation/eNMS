@@ -104,7 +104,7 @@ export function initTable(type, instance, runtime, id) {
     },
   });
   if (["changelog", "run", "result"].includes(type)) {
-    tables[type].order([0, "asc", "test"]).draw();
+    tables[type].order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type)) {
     table.refreshTablePeriodically(type, 3000, true);
@@ -944,10 +944,10 @@ models.server = class Server extends Base {
 models.changelog = class Changelog extends Base {
   static get columns() {
     return [
-      { data: "time", title: "Time", search: "text" },
-      { data: "user", title: "User", search: "text" },
-      { data: "severity", title: "Severity", search: "text" },
-      { data: "content", title: "Content", search: "text" },
+      { data: "time", title: "Time", search: "text", width: "200px" },
+      { data: "user", title: "User", search: "text", width: "100px" },
+      { data: "severity", title: "Severity", search: "text", width: "80px" },
+      { data: "content", title: "Content", search: "text", className: "dt-body-left" },
       { data: "buttons", width: "120px" },
     ];
   }

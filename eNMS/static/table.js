@@ -25,7 +25,7 @@ export function initTable(type, instance, runtime, id) {
     autoWidth: false,
     scrollX: true,
     stateSave: true,
-    drawCallback: function() {
+    drawCallback: function(settings) {
       $(".paginate_button > a").on("focus", function() {
         $(this).blur();
       });
@@ -70,7 +70,7 @@ export function initTable(type, instance, runtime, id) {
           $(element)
             .appendTo($(this.header()))
             .on("keyup change", function() {
-              tables[type].ajax.reload(null, false);
+              tables[type].page(0).ajax.reload(null, false);
             })
             .on("click", function(e) {
               e.stopPropagation();
@@ -113,7 +113,7 @@ export function initTable(type, instance, runtime, id) {
 
 table.filterTable = function(formType) {
   if (page.includes("table")) {
-    tables[formType].ajax.reload(null, false);
+    tables[formType].page(0).ajax.reload(null, false);
   } else {
     filterView(formType);
   }

@@ -25,7 +25,13 @@ Version 3.18.2
 
 - Fix subworkflow iteration bug
 - Fix workflow display with same shared services in multiple subworkflows
+- Fix task / run cascade deletion bug on MySQL
 - Add "devices" keyword for result postprocessing
+- Allow restart from top-level workflow when restarting from a subworkflow service
+- New "Skip value" property to decide whether skip means success or failure
+- Fix the workflow builder progress display when devices are skipped. Now eNMS shows how many devices
+are skipped, and it no longer shows anything when it's 0 ("0 failed", "0 passed" etc are no longer displayed)
+- Netmiko session log code improvement for netmiko validation / prompt service
 
 Version 3.18.1
 --------------

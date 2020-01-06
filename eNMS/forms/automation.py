@@ -56,6 +56,9 @@ class ServiceForm(BaseForm):
     maximum_runs = IntegerField("Maximum number of runs", default=1)
     skip = BooleanField("Skip")
     skip_query = PythonField("Skip Query (Python)")
+    skip_value = SelectField(
+        "Skip Value", choices=(("True", "True"), ("False", "False"),),
+    )
     vendor = StringField("Vendor")
     operating_system = StringField("Operating System")
     initial_payload = DictField()
@@ -252,6 +255,7 @@ class RestartWorkflowForm(BaseForm):
     form_type = HiddenField(default="restart_workflow")
     start_services = MultipleInstanceField("Services", model="service")
     restart_runtime = NoValidationSelectField("Restart Runtime", choices=())
+    restart_from_top_level_workflow = BooleanField(default=True)
 
 
 class LogsForm(BaseForm):

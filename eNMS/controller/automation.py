@@ -130,7 +130,12 @@ class AutomationController(BaseController):
 
     def get_runtimes(self, type, id):
         runs = fetch("run", allow_none=True, all_matches=True, service_id=id)
-        return sorted(set((run.parent_runtime, run.name) for run in runs))
+        return sorted(
+            set(
+                (run.parent_runtime, f"{run.parent_runtime} (run by '{run.creator}')")
+                for run in runs
+            )
+        )
 
     def get_result(self, id):
         return fetch("result", id=id).result
@@ -260,14 +265,19 @@ class AutomationController(BaseController):
     def run(service, **kwargs):
         run_kwargs = {
             key: kwargs.pop(key)
-            for key in ("creator", "runtime", "task", "devices", "pools")
+            for key in (
+                "creator",
+                "restart_path",
+                "start_services",
+                "runtime",
+                "task",
+                "devices",
+                "pools",
+            )
             if kwargs.get(key)
         }
         restart_run = fetch(
-            "run",
-            allow_none=True,
-            service_id=service,
-            runtime=kwargs.get("restart_runtime"),
+            "run", allow_none=True, runtime=kwargs.get("restart_runtime"),
         )
         if restart_run:
             run_kwargs["restart_run"] = restart_run
@@ -277,18 +287,24 @@ class AutomationController(BaseController):
         payload = {**initial_payload, **kwargs}
         return run.run(payload)
 
-    def run_service(self, id=None, **kwargs):
+    def run_service(self, path, **kwargs):
+        path_ids = str(path).split(">")
+        if kwargs.get("restart_from_top_level_workflow", False):
+            kwargs["restart_path"] = f"{path}>{'-'.join(kwargs['start_services'])}"
+            service_id = path_ids[0]
+        else:
+            service_id = path_ids[-1]
         for property in ("user", "csrf_token", "form_type"):
             kwargs.pop(property, None)
         kwargs["creator"] = getattr(current_user, "name", "admin")
-        service = fetch("service", id=id)
+        service = fetch("service", id=service_id)
         kwargs["runtime"] = runtime = self.get_time()
         if kwargs.get("asynchronous", True):
             self.scheduler.add_job(
                 id=self.get_time(),
                 func=self.run,
                 run_date=datetime.now(),
-                args=[id],
+                args=[service_id],
                 kwargs=kwargs,
                 trigger="date",
             )

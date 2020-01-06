@@ -3,6 +3,7 @@ from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
 from functools import partial
+from io import BytesIO
 from json import dumps, loads
 from json.decoder import JSONDecodeError
 from multiprocessing.pool import ThreadPool
@@ -26,7 +27,7 @@ from xml.parsers.expat import ExpatError
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.associations import run_pool_table, run_device_table
-from eNMS.database.dialect import Column, MutableDict, SmallString
+from eNMS.database.dialect import Column, MutableDict, MutableList, SmallString
 from eNMS.database.functions import factory, fetch
 from eNMS.database.base import AbstractBase
 from eNMS.models import models
@@ -77,8 +78,10 @@ class Run(AbstractBase):
     __tablename__ = type = "run"
     private = True
     id = Column(Integer, primary_key=True)
+    restart_path = Column(SmallString)
     restart_run_id = Column(Integer, ForeignKey("run.id"))
     restart_run = relationship("Run", uselist=False, foreign_keys=restart_run_id)
+    start_services = Column(MutableList)
     creator = Column(SmallString, default="admin")
     properties = Column(MutableDict)
     success = Column(Boolean, default=False)
@@ -108,7 +111,7 @@ class Run(AbstractBase):
     workflow_name = association_proxy(
         "workflow", "scoped_name", info={"name": "workflow_name"}
     )
-    task_id = Column(Integer, ForeignKey("task.id"))
+    task_id = Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
     state = Column(MutableDict)
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
@@ -119,16 +122,32 @@ class Run(AbstractBase):
         super().__init__(**kwargs)
         if not kwargs.get("parent_runtime"):
             self.parent_runtime = self.runtime
+            self.restart_path = kwargs.get("restart_path")
             self.path = str(self.service.id)
         else:
             self.path = f"{self.parent.path}>{self.service.id}"
+        restart_path = self.original.restart_path
+        if restart_path:
+            path_ids = restart_path.split(">")
+            if str(self.service.id) in path_ids:
+                workflow_index = path_ids.index(str(self.service.id))
+                if workflow_index == len(path_ids) - 2:
+                    self.start_services = path_ids[-1].split("-")
+                elif workflow_index < len(path_ids) - 2:
+                    self.start_services = [path_ids[workflow_index + 1]]
+        if not self.start_services:
+            self.start_services = [fetch("service", scoped_name="Start").id]
 
     @property
     def name(self):
         return repr(self)
 
+    @property
+    def original(self):
+        return self if not self.parent else self.parent.original
+
     def __repr__(self):
-        return f"{self.runtime} ({self.service_name} run by {self.creator})"
+        return f"{self.runtime} (run by '{self.creator}')"
 
     def __getattr__(self, key):
         if key in self.__dict__:
@@ -214,7 +233,9 @@ class Run(AbstractBase):
         state = {
             "status": "Idle",
             "success": None,
-            "progress": {"device": {"total": 0, "success": 0, "failure": 0}},
+            "progress": {
+                "device": {"total": 0, "success": 0, "failure": 0, "skipped": 0}
+            },
             "attempt": 0,
             "waiting_time": {
                 "total": self.service.waiting_time,
@@ -405,6 +426,18 @@ class Run(AbstractBase):
     def get_results(self, payload, device=None):
         self.log("info", "STARTING", device)
         start = datetime.now().replace(microsecond=0)
+        skip_service = False
+        if self.skip_query:
+            skip_service = self.eval(self.skip_query, **locals())
+        if skip_service or self.skip:
+            if device:
+                self.run_state["progress"]["device"]["skipped"] += 1
+                key = "success" if self.skip_value == "True" else "failure"
+                self.run_state["summary"][key].append(device.name)
+            return {
+                "result": "skipped",
+                "success": self.skip_value == "True",
+            }
         results = {"runtime": app.get_time(), "logs": []}
         try:
             if self.restart_run and self.service.type == "workflow":
@@ -721,6 +754,7 @@ class Run(AbstractBase):
             fast_cli=self.fast_cli,
             timeout=self.timeout,
             global_delay_factor=self.global_delay_factor,
+            session_log=BytesIO(),
         )
         if self.enable_mode:
             netmiko_connection.enable()

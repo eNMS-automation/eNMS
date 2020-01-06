@@ -96,10 +96,6 @@ class Workflow(Service):
     def deep_edges(self):
         return sum([w.edges for w in self.deep_services if w.type == "workflow"], [])
 
-    @property
-    def start_services(self):
-        return [fetch("service", scoped_name="Start").id]
-
     def job(self, run, *args):
         if run.run_method == "per_service_with_workflow_targets":
             return self.tracking_bfs(run, *args)
@@ -126,20 +122,14 @@ class Workflow(Service):
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
-            skip_service = False
-            if service.skip_query:
-                skip_service = run.eval(service.skip_query, **locals())
-            if skip_service or service.skip or service in (start, end):
+            if service in (start, end):
                 results = {
-                    "success": "skipped",
                     "summary": {
                         "success": {device.name for device in run.devices},
                         "failure": [],
                     },
+                    "success": True,
                 }
-                run.run_state["progress"]["service"]["skipped"] += len(
-                    targets[service.name]
-                )
             else:
                 kwargs = {
                     "devices": [
@@ -164,7 +154,7 @@ class Workflow(Service):
                     services.append(successor)
                     run.edge_state[edge.id] += len(targets[service.name])
             else:
-                summary = results.get("summary")
+                summary = results.get("summary", {})
                 for edge_type in ("success", "failure"):
                     for successor, edge in service.adjacent_services(
                         self, "destination", edge_type,
@@ -174,7 +164,7 @@ class Workflow(Service):
                         targets[successor.name] |= set(summary[edge_type])
                         services.append(successor)
                         run.edge_state[edge.id] += len(summary[edge_type])
-            if not results["success"] == "skipped":
+            if not results.get("result") == "skipped":
                 sleep(service.waiting_time)
         success_devices = targets[end.name]
         failure_devices = targets[start.name] - success_devices
@@ -187,6 +177,7 @@ class Workflow(Service):
         run.run_state["progress"]["device"]["failure"] = len(failure_devices)
         run.run_state["summary"] = summary
         Session.refresh(run)
+        run.restart_run = restart_run
         return {"payload": payload, "success": success}
 
     def standard_bfs(self, run, payload, device=None):
@@ -194,8 +185,8 @@ class Workflow(Service):
         start = fetch("service", scoped_name="Start")
         end = fetch("service", scoped_name="End")
         services = [fetch("service", id=id) for id in run.start_services]
-        visited, success = set(), False
         restart_run = run.restart_run
+        visited = set()
         while services:
             if run.stop:
                 return {"payload": payload, "success": False}
@@ -207,18 +198,8 @@ class Workflow(Service):
                 continue
             number_of_runs[service.name] += 1
             visited.add(service)
-            skip_service = False
-            if service.skip_query:
-                skip_service = run.eval(service.skip_query, **locals())
-            if skip_service or service.skip or service in (start, end):
-                results = {
-                    "success": "skipped",
-                    "summary": {
-                        "success": {device.name for device in run.devices},
-                        "failure": [],
-                    },
-                }
-                run.run_state["progress"]["service"]["skipped"] += 1
+            if service in (start, end):
+                results = {"result": "skipped", "success": True}
             else:
                 kwargs = {
                     "service": service.id,
@@ -233,9 +214,9 @@ class Workflow(Service):
                     kwargs["devices"] = [device.id]
                 service_run = factory("run", **kwargs)
                 results = service_run.run(payload)
-                if not device:
-                    status = "success" if results["success"] else "failure"
-                    run.run_state["progress"]["service"][status] += 1
+            if not device:
+                status = "success" if results["success"] else "failure"
+                run.run_state["progress"]["service"][status] += 1
             for successor, edge in service.adjacent_services(
                 self, "destination", "success" if results["success"] else "failure",
             ):
@@ -244,9 +225,10 @@ class Workflow(Service):
                     run.edge_state[edge.id] += 1
                 else:
                     run.edge_state[edge.id] = "DONE"
-            if not results["success"] == "skipped":
+            if not results.get("result") == "skipped":
                 sleep(service.waiting_time)
         Session.refresh(run)
+        run.restart_run = restart_run
         return {"payload": payload, "success": end in visited}
 
 

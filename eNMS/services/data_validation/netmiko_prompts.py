@@ -1,4 +1,5 @@
 from sqlalchemy import Boolean, Float, ForeignKey, Integer
+from traceback import format_exc
 from wtforms import HiddenField
 
 from eNMS.database.dialect import Column, LargeString, SmallString
@@ -33,49 +34,37 @@ class NetmikoPromptsService(ConnectionService):
 
     def job(self, run, payload, device):
         netmiko_connection = run.netmiko_connection(device)
-        command = run.sub(run.command, locals())
-        run.log("info", f"Sending '{command}' with Netmiko", device)
-        commands = [command]
+        send_strings = (run.command, run.response1, run.response2, run.response3)
+        expect_strings = (run.confirmation1, run.confirmation2, run.confirmation3, None)
+        commands = []
         results = {"commands": commands}
-        result = netmiko_connection.send_command_timing(
-            command, delay_factor=run.delay_factor
-        )
-        response1 = run.sub(run.response1, locals())
-        confirmation1 = run.sub(run.confirmation1, locals())
-        results[command] = {"result": result, "match": confirmation1}
-        if confirmation1 not in result:
-            results.update({"success": False, "result": result, "match": confirmation1})
-            return results
-        elif response1:
-            result = netmiko_connection.send_command_timing(
-                response1, delay_factor=run.delay_factor
-            )
-            confirmation2 = run.sub(run.confirmation2, locals())
-            commands.append(confirmation2)
-            results[response1] = {"result": result, "match": confirmation2}
-            response2 = run.sub(run.response2, locals())
-            if confirmation2 not in result:
+        for send_string, expect_string in zip(send_strings, expect_strings):
+            if not send_string:
+                break
+            command = run.sub(send_string, locals())
+            commands.append(command)
+            run.log("info", f"Sending '{command}' with Netmiko", device)
+            confirmation = run.sub(expect_string, locals())
+            try:
+                result = netmiko_connection.send_command_timing(
+                    command, delay_factor=run.delay_factor
+                )
+            except Exception:
+                return {
+                    **results,
+                    **{
+                        "error": format_exc(),
+                        "result": netmiko_connection.session_log.getvalue().decode(),
+                        "match": confirmation,
+                        "success": False,
+                    },
+                }
+            results[command] = {"result": result, "match": confirmation}
+            if confirmation and confirmation not in result:
                 results.update(
-                    {"success": False, "result": result, "match": confirmation2}
+                    {"success": False, "result": result, "match": confirmation}
                 )
                 return results
-            elif response2:
-                result = netmiko_connection.send_command_timing(
-                    response2, delay_factor=run.delay_factor
-                )
-                confirmation3 = run.sub(run.confirmation3, locals())
-                commands.append(confirmation3)
-                results[response2] = {"result": result, "match": confirmation3}
-                response3 = run.sub(run.response3, locals())
-                if confirmation3 not in result:
-                    results.update(
-                        {"success": False, "result": result, "match": confirmation3}
-                    )
-                    return results
-                elif response3:
-                    result = netmiko_connection.send_command_timing(
-                        response3, delay_factor=run.delay_factor
-                    )
         return {"commands": commands, "result": result}
 
 

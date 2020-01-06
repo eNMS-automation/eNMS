@@ -327,7 +327,7 @@ export const normalRun = (automation.normalRun = function(id) {
 });
 
 export function parameterizedRun(type, id) {
-  fCall("/run_service", `edit-${type}-form-${id}`, function(result) {
+  fCall(`/run_service/${id}`, `edit-${type}-form-${id}`, function(result) {
     $(`#${type}-${id}`).remove();
     runLogic(result);
   });

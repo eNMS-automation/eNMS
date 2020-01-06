@@ -685,9 +685,12 @@ function showAllAlerts() {
     null,
     () => {
       // eslint-disable-next-line new-cap
-      $("#alerts-table").DataTable({
-        columns: [{ width: "200px" }, { width: "60px" }, null],
-      });
+      $("#alerts-table")
+        .DataTable({
+          columns: [{ width: "200px" }, { width: "60px" }, null],
+        })
+        .order([0, "desc"])
+        .draw();
     },
     `
     <div class="modal-body">

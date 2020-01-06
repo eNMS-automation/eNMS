@@ -25,7 +25,6 @@ import {
   arrowHistory,
   arrowPointer,
   currentRuntime,
-  displayWorkflow,
   getServiceState,
   switchToWorkflow,
   workflow,

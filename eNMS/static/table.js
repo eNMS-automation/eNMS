@@ -435,9 +435,11 @@ models.service = class Service extends Base {
         search: "text",
         className: "dt-body-left",
         render: function(_, __, instance) {
-          return `<b><a href="#" onclick="eNMS.automation.switchToWorkflow('${
+          return instance.type === "workflow"
+          ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${
             instance.id
-          }')">${instance.scoped_name}</a></b>`;
+          }')">${instance.scoped_name}</a></b>`
+          : instance.scoped_name;
         },
       },
       super.lastModifiedColumn,
@@ -470,7 +472,7 @@ models.service = class Service extends Base {
       </button>
       <a
       id="left-arrow"
-      class="btn btn-info"
+      class="btn btn-info disabled"
       onclick="action['Backward']()"
       type="button"
     >
@@ -478,7 +480,7 @@ models.service = class Service extends Base {
     </a>
     <a
       id="right-arrow"
-      class="btn btn-info"
+      class="btn btn-info disabled"
       onclick="action['Forward']()"
       type="button"
     >

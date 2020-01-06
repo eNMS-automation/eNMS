@@ -25,6 +25,7 @@ import {
   showTypePanel,
   userIsActive,
 } from "./base.js";
+import { tables } from "./table.js";
 
 let workflowNamespace = (window.eNMS.workflow = {});
 export let arrowHistory = [""];
@@ -259,7 +260,8 @@ export const switchToWorkflow = (workflowNamespace.switchToWorkflow = function(
   } else {
     $("#up-arrow").addClass("disabled");
   }
-  if (typeof currentPath != "undefined") currentPath = path;
+  currentPath = path;
+  console.log(currentPath, arrow, arrowPointer, arrowHistory)
   if (!arrow) {
     arrowPointer++;
     arrowHistory.splice(arrowPointer, 9e9, path);
@@ -279,6 +281,8 @@ export const switchToWorkflow = (workflowNamespace.switchToWorkflow = function(
   if (page == "workflow_builder") {
     call(`/get_service_state/${path}/latest`, function(result) {
       workflow = result.service;
+      localStorage.setItem("path", workflow.id);
+      localStorage.setItem("workflow", JSON.stringify(workflow))
       displayWorkflow(result);
     });
   } else {

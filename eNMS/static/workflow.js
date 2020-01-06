@@ -25,7 +25,7 @@ import {
   showTypePanel,
   userIsActive,
 } from "./base.js";
-import { refreshTable } from "./table.js";
+import { tables } from "./table.js";
 
 let workflowNamespace = (window.eNMS.workflow = {});
 export let arrowHistory = [""];
@@ -286,7 +286,7 @@ export const switchToWorkflow = (workflowNamespace.switchToWorkflow = function(
     });
   } else {
     $("#workflow-filtering").val(path);
-    refreshTable("service")
+    tables["service"].page(0).ajax.reload(null, false);
   }
 });
 

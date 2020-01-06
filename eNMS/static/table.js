@@ -224,10 +224,7 @@ models.device = class Device extends Base {
   static get controls() {
     return [
       super.createNewButton("device"),
-      super.searchTableButton("device"),
-      super.refreshTableButton("device"),
-      `
-      <button type="button" class="btn btn-sm btn-primary"
+      ` <button type="button" class="btn btn-sm btn-primary"
       onclick="eNMS.administration.showImportTopologyPanel()"
       data-tooltip="Export"><span class="glyphicon glyphicon-download">
       </span></button>
@@ -235,19 +232,21 @@ models.device = class Device extends Base {
       onclick="eNMS.base.showPanel('excel_export')" data-tooltip="Export"
         ><span class="glyphicon glyphicon-upload"></span
       ></button>`,
+      super.searchTableButton("device"),
+      super.refreshTableButton("device"),
     ];
   }
 
   get buttons() {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
-      <li>
-      <button type="button" class="btn btn-sm btn-dark"
-      onclick="eNMS.base.showPanel('device_connection', '${this.id}')"
-      data-tooltip="Connection"
-        ><span class="glyphicon glyphicon-console"></span
-      ></button>
-    </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-dark"
+          onclick="eNMS.base.showPanel('device_connection', '${this.id}')"
+          data-tooltip="Connection"
+            ><span class="glyphicon glyphicon-console"></span
+          ></button>
+        </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.inventory.showDeviceData(${this.instance})"
@@ -361,8 +360,6 @@ models.pool = class Pool extends Base {
   static get controls() {
     return [
       super.createNewButton("pool"),
-      super.searchTableButton("pool"),
-      super.refreshTableButton("pool"),
       ` <button
         class="btn btn-sm btn-primary"
         onclick="eNMS.inventory.updatePools()"
@@ -371,6 +368,8 @@ models.pool = class Pool extends Base {
       >
         <span class="glyphicon glyphicon-flash"></span>
       </button>`,
+      super.searchTableButton("pool"),
+      super.refreshTableButton("pool"),
     ];
   }
 
@@ -950,7 +949,7 @@ models.changelog = class Changelog extends Base {
       { data: "user", title: "User", search: "text", width: "100px" },
       { data: "severity", title: "Severity", search: "text", width: "80px" },
       { data: "content", title: "Content", search: "text", className: "dt-body-left" },
-      { data: "buttons", width: "120px" },
+      { data: "buttons", width: "130px" },
     ];
   }
 

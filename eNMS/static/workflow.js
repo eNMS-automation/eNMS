@@ -920,7 +920,10 @@ export function initWorkflowBuilder() {
     $("#edge-type").selectpicker();
     getWorkflowState(true);
     adjustHeight();
-    $("#network").height($(".x_panel").height());
+    console.log($("#content-header").height());
+    $("#network").height(
+      $(".x_panel").height() - $("#content-header").height()
+    );
   });
   $("#network").contextMenu({
     menuSelector: "#contextMenu",

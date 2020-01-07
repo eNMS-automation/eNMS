@@ -552,8 +552,8 @@ models.service = class Service extends Base {
         <li>
           <button type="button" class="btn btn-sm btn-primary"
           onclick="eNMS.base.showTypePanel('${this.type}', '${
-            this.id
-          }')" data-tooltip="Edit"
+      this.id
+    }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>

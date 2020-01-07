@@ -16,7 +16,7 @@ workflow: true
 */
 
 import { tables } from "./table.js";
-import { creationMode, processWorkflowData, workflow } from "./workflow.js"
+import { creationMode, processWorkflowData, workflow } from "./workflow.js";
 
 export let editors = {};
 export let userIsActive = true;

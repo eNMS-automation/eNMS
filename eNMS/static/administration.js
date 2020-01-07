@@ -26,7 +26,7 @@ function showImportTopologyPanel() {
       importTopology();
     };
   });
-};
+}
 
 function saveConfiguration() {
   $.ajax({
@@ -40,7 +40,7 @@ function saveConfiguration() {
       notify("Configuration saved.", "success", 5);
     },
   });
-};
+}
 
 function showConfiguration() {
   createPanel("configuration", "Configuration", null, function() {
@@ -50,14 +50,14 @@ function showConfiguration() {
       config
     );
   });
-};
+}
 
 function exportTopology() {
   notify("Topology export starting...", "success", 5);
   fCall("/export_topology", "excel_export-form", function() {
     notify("Topology successfully exported.", "success", 5);
   });
-};
+}
 
 function importTopology() {
   notify("Topology import: starting...", "success", 5);
@@ -75,21 +75,21 @@ function importTopology() {
     },
   });
   $("#file")[0].value = "";
-};
+}
 
 function getClusterStatus() {
   call("/get_cluster_status", function() {
     tables["server"].ajax.reload(null, false);
     setTimeout(getClusterStatus, 15000);
   });
-};
+}
 
 function migrationsExport() {
   notify("Export initiated.", "success", 5);
   fCall("/migration_export", "migration-form", function() {
     notify("Export successful.", "success", 5);
   });
-};
+}
 
 function showMigrationPanel() {
   showPanel("database_migration", null, () => {
@@ -100,14 +100,14 @@ function showMigrationPanel() {
       list.appendChild(option);
     });
   });
-};
+}
 
 function migrationsImport() {
   notify("Import initiated.", "success", 5);
   fCall("/migration_import", "migration-form", function(result) {
     notify(result, "success", 5);
   });
-};
+}
 
 function showImportServicePanel() {
   showPanel("import_service", null, () => {
@@ -121,14 +121,14 @@ function showImportServicePanel() {
       $("#service").selectpicker("refresh");
     });
   });
-};
+}
 
 function importService() {
   call(`/import_service/${$("#service").val()}`, function(result) {
     notify("Import successful.", "success", 5);
     $("#import_service").remove();
   });
-};
+}
 
 function databaseDeletion() {
   notify("Starting to delete...", "success", 5);
@@ -136,20 +136,20 @@ function databaseDeletion() {
     notify("Deletion done.", "success", 5);
     $("#deletion-form").remove();
   });
-};
+}
 
 function getGitContent() {
   call("/get_git_content", function(result) {
     notify("Action successful.", "success", 5);
   });
-};
+}
 
 function scanCluster() {
   notify("Scan started.", "success", 5);
   call("/scan_cluster", function(cluster) {
     notify("Scan completed.", "success", 5);
   });
-};
+}
 
 function deleteFile(file) {
   call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
@@ -158,7 +158,7 @@ function deleteFile(file) {
       .delete_node(file.id);
     notify(`File ${file.data.name} successfully deleted.`, "success", 5);
   });
-};
+}
 
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
@@ -180,7 +180,7 @@ function editFile(file) {
       fileEditor.refresh();
     });
   });
-};
+}
 
 function saveFile(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
@@ -188,7 +188,7 @@ function saveFile(file) {
     notify("File successfully saved.", "success", 5);
     $(`[id="file-${file}"`).remove();
   });
-};
+}
 
 function showFileUploadPanel(folder) {
   const path = folder.replace(/\//g, ">");
@@ -205,7 +205,7 @@ function showFileUploadPanel(folder) {
       $(`[id="upload_files-${path}"]`).remove();
     });
   });
-};
+}
 
 function displayFiles() {
   showPanel("files", null, function() {
@@ -276,7 +276,7 @@ function displayFiles() {
       },
     });
   });
-};
+}
 
 configureNamespace("administration", [
   databaseDeletion,

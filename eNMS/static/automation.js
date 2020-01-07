@@ -14,6 +14,7 @@ workflow: true
 import {
   call,
   cantorPairing,
+  configureNamespace,
   createPanel,
   fCall,
   notify,
@@ -30,13 +31,11 @@ import {
   workflow,
 } from "./workflow.js";
 
-let automation = (window.eNMS.automation = {});
-
-automation.openServicePanel = function() {
+function openServicePanel() {
   showTypePanel($("#service-type").val());
-};
+}
 
-automation.compare = function(type) {
+function compare(type) {
   const v1 = $("input[name=v1]:checked").val();
   const v2 = $("input[name=v2]:checked").val();
   if (v1 && v2) {
@@ -59,7 +58,7 @@ automation.compare = function(type) {
   } else {
     notify("Select two versions to compare first.", "error", 5);
   }
-};
+}
 
 function buildLinks(result, id) {
   const base = `get_result("${result.service_name}"`;
@@ -95,7 +94,7 @@ function buildLinks(result, id) {
     </div>`;
 }
 
-automation.copyClipboard = function(elementId, result) {
+function copyClipboard(elementId, result) {
   const target = document.getElementById(elementId);
   if (!$(`#tooltip-${elementId}`).length) {
     jsPanel.tooltip.create({
@@ -116,9 +115,9 @@ automation.copyClipboard = function(elementId, result) {
     });
   }
   target.click();
-};
+}
 
-automation.showResult = function(id) {
+function showResult(id) {
   createPanel("result", "Result", id, function() {
     call(`/get_result/${id}`, (result) => {
       const jsonResult = result;
@@ -147,14 +146,9 @@ automation.showResult = function(id) {
       });
     });
   });
-};
+}
 
-export const showRuntimePanel = (automation.showRuntimePanel = function(
-  type,
-  service,
-  runtime,
-  displayTable
-) {
+export const showRuntimePanel = function(type, service, runtime, displayTable) {
   const displayFunction =
     type == "logs"
       ? displayLogs
@@ -193,7 +187,7 @@ export const showRuntimePanel = (automation.showRuntimePanel = function(
       displayFunction(service, runtime);
     });
   });
-});
+};
 
 function displayLogs(service, runtime, change) {
   const content = document.getElementById(`content-logs-${service.id}`);
@@ -321,11 +315,11 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   });
 }
 
-export const normalRun = (automation.normalRun = function(id) {
+export const normalRun = function(id) {
   call(`/run_service/${id}`, function(result) {
     runLogic(result);
   });
-});
+}
 
 export function parameterizedRun(type, id) {
   fCall(`/run_service/${id}`, `edit-${type}-form-${id}`, function(result) {
@@ -345,13 +339,13 @@ export function runLogic(result) {
   $(`#${result.service.type}-${result.service.id}`).remove();
 }
 
-automation.exportService = function(id) {
+function exportService(id) {
   call(`/export_service/${id}`, () => {
     notify("Export successful.", "success", 5);
   });
 };
 
-automation.pauseTask = function(id) {
+function pauseTask(id) {
   call(`/task_action/pause/${id}`, function(result) {
     $(`#pause-resume-${id}`)
       .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
@@ -360,7 +354,7 @@ automation.pauseTask = function(id) {
   });
 };
 
-automation.resumeTask = function(id) {
+function resumeTask(id) {
   call(`/task_action/resume/${id}`, function() {
     $(`#pause-resume-${id}`)
       .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
@@ -369,12 +363,12 @@ automation.resumeTask = function(id) {
   });
 };
 
-automation.field = function(name, type, id) {
+function field(name, type, id) {
   const fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
   return $(`#${fieldId}`);
 };
 
-automation.displayCalendar = function(calendarType) {
+function displayCalendar(calendarType) {
   showPanel("calendar", calendarType, () => {
     call(`/calendar_init/${calendarType}`, function(tasks) {
       let events = [];
@@ -412,7 +406,7 @@ automation.displayCalendar = function(calendarType) {
   });
 };
 
-automation.schedulerAction = function(action) {
+function schedulerAction(action) {
   call(`/scheduler_action/${action}`, function() {
     notify(`Scheduler ${action}d.`, "success", 5);
   });
@@ -436,3 +430,18 @@ export function loadServiceTypes() {
   }
   $("#service-type").selectpicker("refresh");
 }
+
+configureNamespace("automation", [
+  compare,
+  copyClipboard,
+  displayCalendar,
+  exportService,
+  field,
+  normalRun,
+  openServicePanel,
+  pauseTask,
+  resumeTask,
+  schedulerAction,
+  showResult,
+  showRuntimePanel
+]);

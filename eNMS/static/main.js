@@ -17,10 +17,10 @@ import { initTable } from "./table.js";
 import { initView } from "./visualization.js";
 import { initWorkflowBuilder } from "./workflow.js";
 
-let mainNamespace = (window.eNMS.main = {});
+let ns = (window.eNMS.main = {});
 const currentUrl = window.location.href.split("#")[0].split("?")[0];
 
-mainNamespace.fullScreen = function() {
+ns.fullScreen = function() {
   if (
     document.fullscreenElement ||
     document.webkitFullscreenElement ||

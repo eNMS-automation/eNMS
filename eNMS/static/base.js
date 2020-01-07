@@ -747,7 +747,7 @@ function getAlerts(preview) {
 }
 
 function clearAlerts() {
-  localStorage.setItem('alerts', '[]');
+  localStorage.setItem("alerts", "[]");
   $("#alert-number").empty();
 }
 

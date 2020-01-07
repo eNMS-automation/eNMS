@@ -107,11 +107,11 @@ export function initTable(type, instance, runtime, id) {
     tables[type].order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type)) {
-    table.refreshTablePeriodically(type, 3000, true);
+    ns.refreshTablePeriodically(type, 3000, true);
   }
 }
 
-table.filterTable = function(formType) {
+ns.filterTable = function(formType) {
   if (page.includes("table")) {
     tables[formType].page(0).ajax.reload(null, false);
   } else {
@@ -120,15 +120,18 @@ table.filterTable = function(formType) {
   notify("Filter applied.", "success", 5);
 };
 
-export const refreshTable = (table.refreshTable = function(tableType, displayNotification) {
+export const refreshTable = (ns.refreshTable = function(
+  tableType,
+  displayNotification
+) {
   tables[tableType].ajax.reload(null, false);
   if (displayNotification) notify("Table refreshed.", "success", 5);
 });
 
-table.refreshTablePeriodically = function(tableType, interval, first) {
-  if (userIsActive && !first) table.refreshTable(tableType, false);
+ns.refreshTablePeriodically = function(tableType, interval, first) {
+  if (userIsActive && !first) ns.refreshTable(tableType, false);
   setTimeout(
-    () => table.refreshTablePeriodically(tableType, interval),
+    () => ns.refreshTablePeriodically(tableType, interval),
     interval
   );
 };
@@ -435,10 +438,10 @@ models.service = class Service extends Base {
         className: "dt-body-left",
         render: function(_, __, instance) {
           return instance.type === "workflow"
-          ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${
-            instance.id
-          }')">${instance.scoped_name}</a></b>`
-          : instance.scoped_name;
+            ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${
+                instance.id
+              }')">${instance.scoped_name}</a></b>`
+            : instance.scoped_name;
         },
       },
       super.lastModifiedColumn,
@@ -948,7 +951,12 @@ models.changelog = class Changelog extends Base {
       { data: "time", title: "Time", search: "text", width: "200px" },
       { data: "user", title: "User", search: "text", width: "100px" },
       { data: "severity", title: "Severity", search: "text", width: "80px" },
-      { data: "content", title: "Content", search: "text", className: "dt-body-left" },
+      {
+        data: "content",
+        title: "Content",
+        search: "text",
+        className: "dt-body-left",
+      },
       { data: "buttons", width: "130px" },
     ];
   }

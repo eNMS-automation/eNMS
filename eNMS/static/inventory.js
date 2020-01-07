@@ -92,7 +92,7 @@ export function initDashboard() {
   });
 }
 
-inventory.sshConnection = function(id) {
+ns.sshConnection = function(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
@@ -115,7 +115,7 @@ inventory.sshConnection = function(id) {
   });
 };
 
-inventory.savePoolObjects = function(id) {
+ns.savePoolObjects = function(id) {
   fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);
     notify("Changes saved.", "success", 5);
@@ -123,7 +123,7 @@ inventory.savePoolObjects = function(id) {
   });
 };
 
-inventory.showPoolObjectsPanel = function(id) {
+ns.showPoolObjectsPanel = function(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       if (pool.devices.length > 1000 || pool.links.length > 1000) {
@@ -143,7 +143,7 @@ inventory.showPoolObjectsPanel = function(id) {
   });
 };
 
-inventory.updatePools = function(pool) {
+ns.updatePools = function(pool) {
   notify("Update starting...", "success", 5);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call(endpoint, function() {
@@ -152,7 +152,7 @@ inventory.updatePools = function(pool) {
   });
 };
 
-export const showDeviceData = (inventory.showDeviceData = function(device) {
+export const showDeviceData = (ns.showDeviceData = function(device) {
   call(`/get_device_network_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
       notify("No data stored.", "error", 5);
@@ -184,7 +184,7 @@ export const showDeviceData = (inventory.showDeviceData = function(device) {
   });
 });
 
-inventory.showDeviceResultsPanel = function(device) {
+ns.showDeviceResultsPanel = function(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
     initTable("result", device);
   });

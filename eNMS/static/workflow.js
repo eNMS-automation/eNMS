@@ -27,7 +27,7 @@ import {
 } from "./base.js";
 import { tables } from "./table.js";
 
-let workflowNamespace = (window.eNMS.workflow = {});
+let ns = (window.eNMS.workflow = {});
 export let arrowHistory = [""];
 export let arrowPointer = page == "workflow_builder" ? -1 : 0;
 export let currentPath = localStorage.getItem("path");
@@ -250,10 +250,7 @@ const rectangleSelection = (container, network, nodes) => {
   });
 };
 
-export const switchToWorkflow = (workflowNamespace.switchToWorkflow = function(
-  path,
-  arrow
-) {
+export const switchToWorkflow = (ns.switchToWorkflow = function(path, arrow) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -281,7 +278,7 @@ export const switchToWorkflow = (workflowNamespace.switchToWorkflow = function(
     call(`/get_service_state/${path}/latest`, function(result) {
       workflow = result.service;
       localStorage.setItem("path", workflow.id);
-      localStorage.setItem("workflow", JSON.stringify(workflow))
+      localStorage.setItem("workflow", JSON.stringify(workflow));
       displayWorkflow(result);
     });
   } else {
@@ -335,7 +332,7 @@ function updateWorkflowService(service) {
   );
 }
 
-workflowNamespace.addServicesToWorkflow = function() {
+ns.addServicesToWorkflow = function() {
   const selection = $("#service-tree").jstree("get_checked", true);
   if (!selection.length) notify("Nothing selected.", "error", 5);
   $("#services").val(selection.map((n) => n.data.id));
@@ -548,10 +545,7 @@ function deleteSelection() {
   switchMode(currentMode, true);
 }
 
-const switchMode = (workflowNamespace.switchMode = function(
-  mode,
-  noNotification
-) {
+const switchMode = (ns.switchMode = function(mode, noNotification) {
   const oldMode = currentMode;
   currentMode =
     mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
@@ -696,7 +690,7 @@ Object.assign(action, {
   },
 });
 
-workflowNamespace.createLabel = function() {
+ns.createLabel = function() {
   const pos = currLabel
     ? [currLabel.x, currLabel.y]
     : mousePosition
@@ -758,7 +752,7 @@ function showRestartWorkflowPanel(workflow, service) {
   );
 }
 
-workflowNamespace.restartWorkflow = function() {
+ns.restartWorkflow = function() {
   fCall(`/run_service/${currentPath}`, `restart_workflow-form`, function(
     result
   ) {
@@ -778,8 +772,8 @@ export function getServiceState(id, first) {
     if (first || result.state.status == "Running") {
       colorService(id, "#89CFF0");
       $("#status").text("Status: Running.");
-      localStorage.setItem("path", id)
-      localStorage.setItem("workflow", JSON.stringify(result.service))
+      localStorage.setItem("path", id);
+      localStorage.setItem("workflow", JSON.stringify(result.service));
       setTimeout(() => getServiceState(id), 300);
     } else {
       $("#status").text("Status: Idle.");
@@ -873,7 +867,7 @@ function resetDisplay() {
   });
 }
 
-const getWorkflowState = (workflowNamespace.getWorkflowState = function(
+const getWorkflowState = (ns.getWorkflowState = function(
   periodic,
   notification
 ) {

@@ -3,14 +3,12 @@ global
 alertify: false
 CodeMirror: false
 config: true
-creationMode: true
 csrf_token: false
 formProperties: false
 job: false
 jsPanel: false
 moment: false
 page: false
-processWorkflowData: false
 Promise: false
 relations: false
 relationships: false
@@ -18,6 +16,7 @@ workflow: true
 */
 
 import { tables } from "./table.js";
+import { creationMode, processWorkflowData, workflow } from "./workflow.js"
 
 export let editors = {};
 export let userIsActive = true;

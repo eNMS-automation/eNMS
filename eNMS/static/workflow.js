@@ -88,7 +88,7 @@ let graph;
 let selectedObject;
 let ends = new Set();
 let currentMode = "motion";
-let creationMode;
+export let creationMode;
 let mousePosition;
 let currLabel;
 let triggerMenu;

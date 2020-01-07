@@ -5,6 +5,7 @@ page: false
 
 import {
   adjustHeight,
+  configureNamespace,
   createTooltips,
   notify,
   serializeForm,
@@ -13,7 +14,6 @@ import {
 import { loadServiceTypes } from "./automation.js";
 import { filterView } from "./visualization.js";
 
-let ns = (window.eNMS.table = {});
 export let tables = {};
 export const models = {};
 
@@ -111,27 +111,24 @@ export function initTable(type, instance, runtime, id) {
   }
 }
 
-ns.filterTable = function(formType) {
+function filterTable(formType) {
   if (page.includes("table")) {
     tables[formType].page(0).ajax.reload(null, false);
   } else {
     filterView(formType);
   }
   notify("Filter applied.", "success", 5);
-};
+}
 
-export const refreshTable = (ns.refreshTable = function(
-  tableType,
-  displayNotification
-) {
+export const refreshTable = function(tableType, displayNotification) {
   tables[tableType].ajax.reload(null, false);
   if (displayNotification) notify("Table refreshed.", "success", 5);
-});
+};
 
-ns.refreshTablePeriodically = function(tableType, interval, first) {
+function refreshTablePeriodically(tableType, interval, first) {
   if (userIsActive && !first) ns.refreshTable(tableType, false);
   setTimeout(() => ns.refreshTablePeriodically(tableType, interval), interval);
-};
+}
 
 class Base {
   constructor(properties) {
@@ -1016,3 +1013,5 @@ models.event = class Event extends Base {
     ];
   }
 };
+
+configureNamespace("table", [filterTable, refreshTable, refreshTablePeriodically]);

@@ -16,7 +16,7 @@ import {
 } from "./base.js";
 import { initTable, tables } from "./table.js";
 
-let inventory = (window.eNMS.inventory = {});
+let ns = (window.eNMS.inventory = {});
 
 function drawDiagrams(diagram, result) {
   const options = {

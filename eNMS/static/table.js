@@ -13,7 +13,7 @@ import {
 import { loadServiceTypes } from "./automation.js";
 import { filterView } from "./visualization.js";
 
-let table = (window.eNMS.table = {});
+let ns = (window.eNMS.table = {});
 export let tables = {};
 export const models = {};
 
@@ -130,10 +130,7 @@ export const refreshTable = (ns.refreshTable = function(
 
 ns.refreshTablePeriodically = function(tableType, interval, first) {
   if (userIsActive && !first) ns.refreshTable(tableType, false);
-  setTimeout(
-    () => ns.refreshTablePeriodically(tableType, interval),
-    interval
-  );
+  setTimeout(() => ns.refreshTablePeriodically(tableType, interval), interval);
 };
 
 class Base {

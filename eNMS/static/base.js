@@ -19,7 +19,6 @@ workflow: true
 
 import { tables } from "./table.js";
 
-let baseNamespace = (window.eNMS.base = {});
 export let editors = {};
 export let userIsActive = true;
 let topZ = 1000;
@@ -185,7 +184,7 @@ function processResults(callback, results) {
   }
 }
 
-export const call = (baseNamespace.call = function(url, callback) {
+export const call = function(url, callback) {
   $.ajax({
     type: "POST",
     url: url,
@@ -193,7 +192,7 @@ export const call = (baseNamespace.call = function(url, callback) {
       processResults(callback, results);
     },
   });
-});
+};
 
 export function fCall(url, form, callback) {
   $.ajax({
@@ -220,10 +219,7 @@ export function serializeForm(form) {
   return result;
 }
 
-export const deleteInstance = (baseNamespace.deleteInstance = function(
-  type,
-  id
-) {
+export const deleteInstance = function(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
     $(`#instance_deletion-${id}`).remove();
     if (type.includes("service") || type == "workflow") type = "service";
@@ -234,7 +230,7 @@ export const deleteInstance = (baseNamespace.deleteInstance = function(
     const name = result.name ? `'${result.name}'` : "";
     notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5);
   });
-});
+};
 
 export function createTooltips() {
   $("[data-tooltip]").each(function() {
@@ -781,13 +777,21 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   e.preventDefault();
 });
 
-Object.assign(window.eNMS.base, {
-  clearAlerts: clearAlerts,
-  copyToClipboard: copyToClipboard,
-  createAlerts: createAlerts,
-  processData: processData,
-  showAllAlerts: showAllAlerts,
-  showDeletionPanel: showDeletionPanel,
-  showPanel: showPanel,
-  showTypePanel: showTypePanel,
-});
+export function configureNamespace(namespace, ...functions) {
+  eNMS[namespace] = {};
+  functions.forEach((f) => (eNMS[namespace][f.name] = f));
+}
+
+configureNamespace(
+  "base",
+  call,
+  clearAlerts,
+  copyToClipboard,
+  createAlerts,
+  deleteInstance,
+  processData,
+  showAllAlerts,
+  showDeletionPanel,
+  showPanel,
+  showTypePanel
+);

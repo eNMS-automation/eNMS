@@ -9,14 +9,13 @@ initSelect: false
 import {
   adjustHeight,
   call,
+  configureNamespace,
   createPanel,
   fCall,
   notify,
   openUrl,
 } from "./base.js";
 import { initTable, tables } from "./table.js";
-
-let ns = (window.eNMS.inventory = {});
 
 function drawDiagrams(diagram, result) {
   const options = {
@@ -92,7 +91,7 @@ export function initDashboard() {
   });
 }
 
-ns.sshConnection = function(id) {
+function sshConnection(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
@@ -113,17 +112,17 @@ ns.sshConnection = function(id) {
     notify(warning, "error", 20);
     $(`#connection-${id}`).remove();
   });
-};
+}
 
-ns.savePoolObjects = function(id) {
+function savePoolObjects(id) {
   fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);
     notify("Changes saved.", "success", 5);
     $(`#pool_objects-${id}`).remove();
   });
-};
+}
 
-ns.showPoolObjectsPanel = function(id) {
+function showPoolObjectsPanel(id) {
   createPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       if (pool.devices.length > 1000 || pool.links.length > 1000) {
@@ -141,18 +140,18 @@ ns.showPoolObjectsPanel = function(id) {
       }
     });
   });
-};
+}
 
-ns.updatePools = function(pool) {
+function updatePools(pool) {
   notify("Update starting...", "success", 5);
   const endpoint = pool ? `/update_pool/${pool}` : "/update_all_pools";
   call(endpoint, function() {
     tables["pool"].ajax.reload(null, false);
     notify("Update successful.", "success", 5);
   });
-};
+}
 
-export const showDeviceData = (ns.showDeviceData = function(device) {
+export const showDeviceData = function(device) {
   call(`/get_device_network_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
       notify("No data stored.", "error", 5);
@@ -182,10 +181,19 @@ export const showDeviceData = (ns.showDeviceData = function(device) {
       );
     }
   });
-});
+};
 
-ns.showDeviceResultsPanel = function(device) {
+function showDeviceResultsPanel(device) {
   createPanel("result", `Results - ${device.name}`, null, function() {
     initTable("result", device);
   });
-};
+}
+
+configureNamespace("inventory", [
+  sshConnection,
+  savePoolObjects,
+  showPoolObjectsPanel,
+  updatePools,
+  showDeviceData,
+  showDeviceResultsPanel,
+]);

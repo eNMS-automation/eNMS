@@ -319,7 +319,7 @@ export const normalRun = function(id) {
   call(`/run_service/${id}`, function(result) {
     runLogic(result);
   });
-}
+};
 
 export function parameterizedRun(type, id) {
   fCall(`/run_service/${id}`, `edit-${type}-form-${id}`, function(result) {
@@ -343,7 +343,7 @@ function exportService(id) {
   call(`/export_service/${id}`, () => {
     notify("Export successful.", "success", 5);
   });
-};
+}
 
 function pauseTask(id) {
   call(`/task_action/pause/${id}`, function(result) {
@@ -352,7 +352,7 @@ function pauseTask(id) {
       .text("Resume");
     notify("Task paused.", "success", 5);
   });
-};
+}
 
 function resumeTask(id) {
   call(`/task_action/resume/${id}`, function() {
@@ -361,12 +361,12 @@ function resumeTask(id) {
       .text("Pause");
     notify("Task resumed.", "success", 5);
   });
-};
+}
 
 function field(name, type, id) {
   const fieldId = id ? `${type}-${name}-${id}` : `${type}-${name}`;
   return $(`#${fieldId}`);
-};
+}
 
 function displayCalendar(calendarType) {
   showPanel("calendar", calendarType, () => {
@@ -404,13 +404,13 @@ function displayCalendar(calendarType) {
       });
     });
   });
-};
+}
 
 function schedulerAction(action) {
   call(`/scheduler_action/${action}`, function() {
     notify(`Scheduler ${action}d.`, "success", 5);
   });
-};
+}
 
 Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
@@ -443,5 +443,5 @@ configureNamespace("automation", [
   resumeTask,
   schedulerAction,
   showResult,
-  showRuntimePanel
+  showRuntimePanel,
 ]);

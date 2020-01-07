@@ -299,7 +299,7 @@ function displayResultsTable(service, runtime) {
 }
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {
-  if (!$(`#runtimes-logs-${service.id}`).length) return;
+  if (!$(`#logs-logs-${service.id}`).length) return;
   call(`/get_service_logs/${service.id}/${runtime}`, function(result) {
     editor.setValue(result.logs);
     editor.setCursor(editor.lineCount(), 0);
@@ -309,7 +309,7 @@ function refreshLogs(service, runtime, editor, first, wasRefreshed) {
         1000
       );
     } else if (wasRefreshed) {
-      $(`#runtime-logs-${service.id}`).remove();
+      $(`#logs-logs-${service.id}`).remove();
       showRuntimePanel("results", service, runtime);
     }
   });
@@ -321,7 +321,7 @@ export const normalRun = function(id) {
   });
 };
 
-export function parameterizedRun(type, id) {
+function parameterizedRun(type, id) {
   fCall(`/run_service/${id}`, `edit-${type}-form-${id}`, function(result) {
     $(`#${type}-${id}`).remove();
     runLogic(result);
@@ -439,6 +439,7 @@ configureNamespace("automation", [
   field,
   normalRun,
   openServicePanel,
+  parameterizedRun,
   pauseTask,
   resumeTask,
   schedulerAction,

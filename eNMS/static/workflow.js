@@ -817,17 +817,17 @@ function displayWorkflowState(result) {
         );
         if (progress.total) {
           let label = `<b>${nodes.get(id).name}</b>\n`;
-          label += "—————\n";
           let progressLabel = `Progress - ${progress.success +
             progress.failure +
             progress.skipped}/${progress.total}`;
+          label += `—————\n${progressLabel}`;
           let progressInfo = [];
           if (progress.success) progressInfo.push(`${progress.success} passed`);
           if (progress.failure) progressInfo.push(`${progress.failure} failed`);
           if (progress.skipped) {
             progressInfo.push(`${progress.skipped} skipped`);
           }
-          label += `${progressLabel} (${progressInfo.join(", ")})`;
+          if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
           nodes.update({
             id: id,
             label: label,

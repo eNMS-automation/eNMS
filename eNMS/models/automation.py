@@ -78,6 +78,7 @@ class Service(AbstractBase):
     model_properties = ["status"]
 
     def __init__(self, **kwargs):
+        kwargs.pop("status", None)
         super().__init__(**kwargs)
         if "name" not in kwargs:
             self.set_name()

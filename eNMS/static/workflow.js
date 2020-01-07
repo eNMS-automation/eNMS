@@ -277,7 +277,7 @@ export const switchToWorkflow = function(path, arrow) {
   if (page == "workflow_builder") {
     call(`/get_service_state/${path}/latest`, function(result) {
       workflow = result.service;
-      localStorage.setItem("path", workflow.id);
+      localStorage.setItem("path", path);
       localStorage.setItem("workflow", JSON.stringify(workflow));
       displayWorkflow(result);
     });

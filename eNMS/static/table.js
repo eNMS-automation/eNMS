@@ -779,11 +779,11 @@ models.task = class Task extends Base {
         <span class="glyphicon glyphicon-calendar"></span>
       </button>
       <button type="button" class="btn btn-sm btn-success"
-      onclick="eNMS.automation.schedulerAction('pause')" data-tooltip="Play"
+      onclick="eNMS.automation.schedulerAction('resume')" data-tooltip="Play"
         ><span class="glyphicon glyphicon-play"></span
       ></button>
       <button type="button" class="btn btn-sm btn-danger"
-      onclick="eNMS.automation.schedulerAction('resume')" data-tooltip="Pause"
+      onclick="eNMS.automation.schedulerAction('pause')" data-tooltip="Pause"
         ><span class="glyphicon glyphicon-pause"></span
       ></button>`,
     ];

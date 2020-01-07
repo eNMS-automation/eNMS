@@ -9,6 +9,7 @@ JSONEditor: false
 
 import {
   call,
+  configureNamespace,
   createPanel,
   editors,
   fCall,
@@ -18,17 +19,16 @@ import {
 import { tables } from "./table.js";
 
 let configurationEditor;
-let administrationNamespace = (window.eNMS.administration = {});
 
-administrationNamespace.showImportTopologyPanel = function() {
+function showImportTopologyPanel() {
   createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
     document.getElementById("file").onchange = function() {
-      administrationNamespace.importTopology();
+      importTopology();
     };
   });
 };
 
-administrationNamespace.saveConfiguration = function() {
+function saveConfiguration() {
   $.ajax({
     type: "POST",
     url: "/save_configuration",
@@ -42,7 +42,7 @@ administrationNamespace.saveConfiguration = function() {
   });
 };
 
-administrationNamespace.showConfiguration = function() {
+function showConfiguration() {
   createPanel("configuration", "Configuration", null, function() {
     configurationEditor = new JSONEditor(
       document.getElementById("content"),
@@ -52,14 +52,14 @@ administrationNamespace.showConfiguration = function() {
   });
 };
 
-administrationNamespace.exportTopology = function() {
+function exportTopology() {
   notify("Topology export starting...", "success", 5);
   fCall("/export_topology", "excel_export-form", function() {
     notify("Topology successfully exported.", "success", 5);
   });
 };
 
-administrationNamespace.importTopology = function() {
+function importTopology() {
   notify("Topology import: starting...", "success", 5);
   const formData = new FormData($("#import-form")[0]);
   $.ajax({
@@ -77,21 +77,21 @@ administrationNamespace.importTopology = function() {
   $("#file")[0].value = "";
 };
 
-administrationNamespace.getClusterStatus = function() {
+function getClusterStatus() {
   call("/get_cluster_status", function() {
     tables["server"].ajax.reload(null, false);
-    setTimeout(administrationNamespace.getClusterStatus, 15000);
+    setTimeout(getClusterStatus, 15000);
   });
 };
 
-administrationNamespace.migrationsExport = function() {
+function migrationsExport() {
   notify("Export initiated.", "success", 5);
   fCall("/migration_export", "migration-form", function() {
     notify("Export successful.", "success", 5);
   });
 };
 
-administrationNamespace.showMigrationPanel = function() {
+function showMigrationPanel() {
   showPanel("database_migration", null, () => {
     let list = document.getElementById("versions");
     folders.forEach((item) => {
@@ -102,39 +102,35 @@ administrationNamespace.showMigrationPanel = function() {
   });
 };
 
-administrationNamespace.migrationsImport = function() {
+function migrationsImport() {
   notify("Import initiated.", "success", 5);
   fCall("/migration_import", "migration-form", function(result) {
     notify(result, "success", 5);
   });
 };
 
-administrationNamespace.refreshExportedServices = function() {
-  call("/get_exported_services", function(services) {
-    let list = document.getElementById("service");
-    services.forEach((item) => {
-      let option = document.createElement("option");
-      option.textContent = option.value = item;
-      list.appendChild(option);
-    });
-    $("#service").selectpicker("refresh");
-  });
-};
-
-administrationNamespace.showImportServicePanel = function() {
+function showImportServicePanel() {
   showPanel("import_service", null, () => {
-    administrationNamespace.refreshExportedServices();
+    call("/get_exported_services", function(services) {
+      let list = document.getElementById("service");
+      services.forEach((item) => {
+        let option = document.createElement("option");
+        option.textContent = option.value = item;
+        list.appendChild(option);
+      });
+      $("#service").selectpicker("refresh");
+    });
   });
 };
 
-administrationNamespace.importService = function() {
+function importService() {
   call(`/import_service/${$("#service").val()}`, function(result) {
     notify("Import successful.", "success", 5);
     $("#import_service").remove();
   });
 };
 
-administrationNamespace.databaseDeletion = function() {
+function databaseDeletion() {
   notify("Starting to delete...", "success", 5);
   fCall("/database_deletion", "database_deletion-form", function(result) {
     notify("Deletion done.", "success", 5);
@@ -142,20 +138,20 @@ administrationNamespace.databaseDeletion = function() {
   });
 };
 
-administrationNamespace.getGitContent = function() {
+function getGitContent() {
   call("/get_git_content", function(result) {
     notify("Action successful.", "success", 5);
   });
 };
 
-administrationNamespace.scanCluster = function() {
+function scanCluster() {
   notify("Scan started.", "success", 5);
   call("/scan_cluster", function(cluster) {
     notify("Scan completed.", "success", 5);
   });
 };
 
-administrationNamespace.deleteFile = function(file) {
+function deleteFile(file) {
   call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
     $("#files-tree")
       .jstree()
@@ -164,7 +160,7 @@ administrationNamespace.deleteFile = function(file) {
   });
 };
 
-administrationNamespace.editFile = function(file) {
+function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
   call(`/edit_file/${filepath}`, function(content) {
     createPanel("file", `Edit ${file.data.path}`, filepath, () => {
@@ -186,7 +182,7 @@ administrationNamespace.editFile = function(file) {
   });
 };
 
-administrationNamespace.saveFile = function(file) {
+function saveFile(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
   fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
     notify("File successfully saved.", "success", 5);
@@ -194,7 +190,7 @@ administrationNamespace.saveFile = function(file) {
   });
 };
 
-administrationNamespace.showFileUploadPanel = function(folder) {
+function showFileUploadPanel(folder) {
   const path = folder.replace(/\//g, ">");
   createPanel("upload_files", `Upload files to ${folder}`, path, () => {
     const element = document.getElementById(`dropzone-${path}`);
@@ -211,9 +207,7 @@ administrationNamespace.showFileUploadPanel = function(folder) {
   });
 };
 
-administrationNamespace.createNewFolder = function() {};
-
-administrationNamespace.displayFiles = function() {
+function displayFiles() {
   showPanel("files", null, function() {
     $("#files-tree").jstree({
       core: {
@@ -283,3 +277,24 @@ administrationNamespace.displayFiles = function() {
     });
   });
 };
+
+configureNamespace("administration", [
+  databaseDeletion,
+  deleteFile,
+  displayFiles,
+  editFile,
+  exportTopology,
+  getClusterStatus,
+  getGitContent,
+  importService,
+  migrationsExport,
+  migrationsImport,
+  saveConfiguration,
+  saveFile,
+  scanCluster,
+  showConfiguration,
+  showFileUploadPanel,
+  showImportServicePanel,
+  showImportTopologyPanel,
+  showMigrationPanel,
+]);

@@ -777,13 +777,12 @@ $(".dropdown-submenu a.menu-submenu").on("click", function(e) {
   e.preventDefault();
 });
 
-export function configureNamespace(namespace, ...functions) {
+export function configureNamespace(namespace, functions) {
   eNMS[namespace] = {};
   functions.forEach((f) => (eNMS[namespace][f.name] = f));
 }
 
-configureNamespace(
-  "base",
+configureNamespace("base", [
   call,
   clearAlerts,
   copyToClipboard,
@@ -793,5 +792,5 @@ configureNamespace(
   showAllAlerts,
   showDeletionPanel,
   showPanel,
-  showTypePanel
-);
+  showTypePanel,
+]);

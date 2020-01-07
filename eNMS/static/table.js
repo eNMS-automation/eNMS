@@ -1014,4 +1014,8 @@ models.event = class Event extends Base {
   }
 };
 
-configureNamespace("table", [filterTable, refreshTable, refreshTablePeriodically]);
+configureNamespace("table", [
+  filterTable,
+  refreshTable,
+  refreshTablePeriodically,
+]);

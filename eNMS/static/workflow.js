@@ -17,6 +17,7 @@ import {
 import {
   adjustHeight,
   call,
+  configureNamespace,
   copyToClipboard,
   createPanel,
   fCall,
@@ -27,7 +28,6 @@ import {
 } from "./base.js";
 import { tables } from "./table.js";
 
-let ns = (window.eNMS.workflow = {});
 export let arrowHistory = [""];
 export let arrowPointer = page == "workflow_builder" ? -1 : 0;
 export let currentPath = localStorage.getItem("path");
@@ -250,7 +250,7 @@ const rectangleSelection = (container, network, nodes) => {
   });
 };
 
-export const switchToWorkflow = (ns.switchToWorkflow = function(path, arrow) {
+export const switchToWorkflow = function(path, arrow) {
   if (typeof path === "undefined") return;
   if (path.toString().includes(">")) {
     $("#up-arrow").removeClass("disabled");
@@ -285,7 +285,7 @@ export const switchToWorkflow = (ns.switchToWorkflow = function(path, arrow) {
     $("#workflow-filtering").val(path);
     tables["service"].page(0).ajax.reload(null, false);
   }
-});
+};
 
 export function processWorkflowData(instance, id) {
   if (!instance.type) {
@@ -332,7 +332,7 @@ function updateWorkflowService(service) {
   );
 }
 
-ns.addServicesToWorkflow = function() {
+function addServicesToWorkflow() {
   const selection = $("#service-tree").jstree("get_checked", true);
   if (!selection.length) notify("Nothing selected.", "error", 5);
   $("#services").val(selection.map((n) => n.data.id));
@@ -345,7 +345,7 @@ ns.addServicesToWorkflow = function() {
       result.services.map(updateWorkflowService);
     }
   );
-};
+}
 
 function deleteNode(id) {
   let node = nodes.get(id);
@@ -545,7 +545,7 @@ function deleteSelection() {
   switchMode(currentMode, true);
 }
 
-const switchMode = (ns.switchMode = function(mode, noNotification) {
+function switchMode(mode, noNotification) {
   const oldMode = currentMode;
   currentMode =
     mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
@@ -566,7 +566,7 @@ const switchMode = (ns.switchMode = function(mode, noNotification) {
     notification = `Mode: Creation of '${currentMode}' Edge.`;
   }
   if (!noNotification) notify(notification, "success", 5);
-});
+}
 
 $("#current-workflow").on("change", function() {
   if (!workflow || this.value != workflow.id) switchToWorkflow(this.value);
@@ -690,7 +690,7 @@ Object.assign(action, {
   },
 });
 
-ns.createLabel = function() {
+function createLabel() {
   const pos = currLabel
     ? [currLabel.x, currLabel.y]
     : mousePosition
@@ -706,7 +706,7 @@ ns.createLabel = function() {
     $("#workflow_label").remove();
     notify("Label created.", "success", 5);
   });
-};
+}
 
 function editLabel(label) {
   showPanel("workflow_label", null, () => {
@@ -752,14 +752,14 @@ function showRestartWorkflowPanel(workflow, service) {
   );
 }
 
-ns.restartWorkflow = function() {
+function restartWorkflow() {
   fCall(`/run_service/${currentPath}`, `restart_workflow-form`, function(
     result
   ) {
     $(`#restart_workflow-${workflow.id}`).remove();
     runLogic(result);
   });
-};
+}
 
 function colorService(id, color) {
   if (!ends.has(id) && nodes) {
@@ -867,10 +867,7 @@ function resetDisplay() {
   });
 }
 
-const getWorkflowState = (ns.getWorkflowState = function(
-  periodic,
-  notification
-) {
+function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
@@ -886,7 +883,7 @@ const getWorkflowState = (ns.getWorkflowState = function(
   }
   if (periodic) setTimeout(() => getWorkflowState(true), 4000);
   if (notification) notify("Workflow refreshed.", "success", 5);
-});
+}
 
 export function initWorkflowBuilder() {
   loadServiceTypes();
@@ -933,3 +930,12 @@ export function initWorkflowBuilder() {
     },
   });
 }
+
+configureNamespace("workflow", [
+  addServicesToWorkflow,
+  createLabel,
+  getWorkflowState,
+  restartWorkflow,
+  switchMode,
+  switchToWorkflow,
+]);

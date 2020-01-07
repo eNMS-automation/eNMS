@@ -107,7 +107,7 @@ export function initTable(type, instance, runtime, id) {
     tables[type].order([0, "desc"]).draw();
   }
   if (["run", "service", "task", "workflow"].includes(type)) {
-    ns.refreshTablePeriodically(type, 3000, true);
+    refreshTablePeriodically(type, 3000, true);
   }
 }
 
@@ -126,8 +126,8 @@ export const refreshTable = function(tableType, displayNotification) {
 };
 
 function refreshTablePeriodically(tableType, interval, first) {
-  if (userIsActive && !first) ns.refreshTable(tableType, false);
-  setTimeout(() => ns.refreshTablePeriodically(tableType, interval), interval);
+  if (userIsActive && !first) refreshTable(tableType, false);
+  setTimeout(() => refreshTablePeriodically(tableType, interval), interval);
 }
 
 class Base {
@@ -551,7 +551,7 @@ models.service = class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('{self.type}', '${
+          onclick="eNMS.base.showTypePanel('${this.type}', '${
             this.id
           }')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span

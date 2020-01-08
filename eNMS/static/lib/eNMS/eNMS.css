@@ -962,71 +962,6 @@ a:focus {
   margin: 0;
 }
 
-.view .tools,
-.view a.info {
-  text-transform: uppercase;
-}
-
-.ui-ribbon-container {
-  position: relative;
-}
-
-.ui-ribbon-container .ui-ribbon-wrapper {
-  position: absolute;
-  overflow: hidden;
-  width: 85px;
-  height: 88px;
-  top: -3px;
-  right: -3px;
-}
-
-.ui-ribbon-container.ui-ribbon-primary .ui-ribbon {
-  background-color: #5b90bf;
-}
-
-.ui-ribbon-container .ui-ribbon {
-  position: relative;
-  display: block;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
-  color: #fff;
-  transform: rotate(45deg);
-  padding: 7px 0;
-  left: -5px;
-  top: 15px;
-  width: 120px;
-  line-height: 20px;
-  background-color: #555;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-}
-
-.ui-ribbon-container.ui-ribbon-primary .ui-ribbon:after,
-.ui-ribbon-container.ui-ribbon-primary .ui-ribbon:before {
-  border-top: 2px solid #5b90bf;
-}
-
-.ui-ribbon-container .ui-ribbon:before {
-  left: 0;
-  bottom: -1px;
-  right: 0;
-}
-
-.ui-ribbon-container .ui-ribbon:after,
-.ui-ribbon-container .ui-ribbon:before {
-  position: absolute;
-  content: " ";
-  line-height: 0;
-  border-top: 2px solid #555;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-}
-
-.thumbnail .image {
-  height: 120px;
-  overflow: hidden;
-}
-
 .caption {
   padding: 9px 5px;
   background: #f7f7f7;
@@ -1034,11 +969,6 @@ a:focus {
 
 .caption p {
   margin-bottom: 5px;
-}
-
-.thumbnail {
-  height: 190px;
-  overflow: hidden;
 }
 
 .dropdown-menu a {

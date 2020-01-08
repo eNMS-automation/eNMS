@@ -607,17 +607,19 @@ export function copyToClipboard(text, isId) {
 }
 
 export function adjustHeight() {
+  /*
   const height =
     $("body")[0].scrollHeight > window.innerHeight
       ? document.body.clientHeight
       : window.innerHeight;
-  $("#sidebar").css("min-height", height);
   $(".x_panel").css(
-    "min-height",
-    height - $("#content-header").height() - $(".nav_menu").height() - 30
+    "height",
+    height -
+      $("#content-header").outerHeight() -
+      $(".nav_menu").outerHeight()
   );
-  console.log($("#content-header").height())
-  $(".right_col").css("min-height", height - $(".nav_menu").height());
+  */
+ //$(".right_col").css("height", "100vh");
   Object.keys(tables).forEach((table) => tables[table].columns.adjust());
 }
 

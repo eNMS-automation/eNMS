@@ -16,25 +16,17 @@ a:hover {
 }
 
 .left_col {
-    background: #002240
+    background: #002240;
+    position: absolute;
+    bottom: auto;
+    min-height: 100%;
 }
 
 .nav-sm .container.body .col-md-3.left_col {
-    min-height: 100%;
+    bottom: 0;
     width: 70px;
     padding: 0;
     z-index: 9999;
-    position: absolute
-}
-
-.nav-sm .container.body .col-md-3.left_col.menu_fixed {
-    position: fixed;
-    min-height: 100%
-}
-
-.nav-sm .container.body .col-md-3.left_col .mCSB_container,
-.nav-sm .container.body .col-md-3.left_col .mCustomScrollBox {
-    overflow: visible
 }
 
 .overflow_hidden,
@@ -205,7 +197,7 @@ a:hover {
 }
 
 body .container.body .right_col {
-    background: #f7f7f7
+    background: #f7f7f7;
 }
 
 .nav-md .container.body .right_col {
@@ -310,7 +302,7 @@ body .container.body .right_col {
 
 body {
     color: #73879c;
-    background: #f7f7f7;
+    background: #002240;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -1859,4 +1851,11 @@ fieldset.section {
 /* Prevent alertify.js alerts from going off screen */
 .ajs-message {
     word-wrap: break-word;
+}
+
+#content-header {
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: space-between; /* switched from default (flex-start, see below) */
 }

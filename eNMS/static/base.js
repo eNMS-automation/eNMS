@@ -616,6 +616,7 @@ export function adjustHeight() {
     "min-height",
     height - $("#content-header").height() - $(".nav_menu").height() - 30
   );
+  console.log($("#content-header").height())
   $(".right_col").css("min-height", height - $(".nav_menu").height());
   Object.keys(tables).forEach((table) => tables[table].columns.adjust());
 }

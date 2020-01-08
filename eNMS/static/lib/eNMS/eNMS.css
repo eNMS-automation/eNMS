@@ -1128,14 +1128,6 @@ fieldset {
   padding: 0;
 }
 
-.form_wizard .stepContainer {
-  display: block;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  border: 0 solid #ccc;
-}
-
 .wizard_horizontal ul.wizard_steps {
   display: table;
   list-style: none;
@@ -1208,121 +1200,14 @@ fieldset {
   left: auto;
 }
 
-.wizard_verticle .stepContainer {
-  width: 80%;
-  float: left;
-  padding: 0 10px;
-}
-
-.actionBar {
-  width: 100%;
-  border-top: 1px solid #ddd;
-  padding: 10px 5px;
-  text-align: right;
-  margin-top: 10px;
-}
-
-.actionBar .buttonDisabled {
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.65;
-  box-shadow: none;
-}
-
-.actionBar a {
-  margin: 0 3px;
-}
-
-.wizard_verticle .wizard_content {
-  width: 80%;
-  float: left;
-  padding-left: 20px;
-}
-
-.wizard_verticle ul.wizard_steps {
-  display: table;
-  list-style: none;
-  position: relative;
-  width: 20%;
-  float: left;
-  margin: 0 0 20px;
-}
-
-.wizard_verticle ul.wizard_steps li {
-  display: list-item;
-  text-align: center;
-}
-
-.wizard_verticle ul.wizard_steps li a {
-  height: 80px;
-}
-
-.wizard_verticle ul.wizard_steps li a:first-child {
-  margin-top: 20px;
-}
-
-.wizard_verticle ul.wizard_steps li a,
-.wizard_verticle ul.wizard_steps li:hover {
-  display: block;
-  position: relative;
-  -moz-opacity: 1;
-  opacity: 1;
-  color: #666;
-}
-
-.wizard_verticle ul.wizard_steps li a:before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  background: #ccc;
-  top: 20px;
-  width: 4px;
-  z-index: 4;
-  left: 49%;
-}
-
-.wizard_verticle ul.wizard_steps li a.disabled .step_no {
-  background: #ccc;
-}
-
-.wizard_verticle ul.wizard_steps li a .step_no {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 100px;
-  display: block;
-  margin: 0 auto 5px;
-  font-size: 16px;
-  text-align: center;
-  position: relative;
-  z-index: 5;
-}
-
 .progress.progress_sm,
 .progress.progress_sm .progress-bar {
   height: 10px !important;
 }
 
-.step_no,
-.wizard_verticle ul.wizard_steps li a.selected:before {
+.step_no {
   background: #34495e;
   color: #fff;
-}
-
-.wizard_verticle ul.wizard_steps li a.done .step_no,
-.wizard_verticle ul.wizard_steps li a.done:before {
-  background: #1abb9c;
-  color: #fff;
-}
-
-.wizard_verticle ul.wizard_steps li:first-child a:before {
-  left: 49%;
-}
-
-.wizard_verticle ul.wizard_steps li:last-child a:before {
-  left: 49%;
-  left: auto;
-  width: 0;
 }
 
 .form_wizard .loader,

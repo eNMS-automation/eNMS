@@ -41,7 +41,7 @@ a:hover {
     visibility: hidden
 }
 
-#container-body, .main_container {
+#container-body {
     height: 100%;
 }
 
@@ -65,7 +65,7 @@ a:hover {
     margin: 13px 0 0 3px
 }
 
-.nav-sm .main_container .top_nav {
+.nav-sm .top_nav {
     display: block;
     margin-left: 70px;
     z-index: 2
@@ -313,7 +313,7 @@ body {
     line-height: 1.471
 }
 
-.main_container .top_nav {
+.top_nav {
     display: block;
     margin-left: 230px
 }

@@ -612,6 +612,7 @@ export function adjustHeight() {
     $("body")[0].scrollHeight > window.innerHeight
       ? document.body.clientHeight
       : window.innerHeight;
+  
   $(".x_panel").css(
     "height",
     height -
@@ -619,7 +620,6 @@ export function adjustHeight() {
       $(".nav_menu").outerHeight()
   );
   */
- //$(".right_col").css("height", "100vh");
   Object.keys(tables).forEach((table) => tables[table].columns.adjust());
 }
 

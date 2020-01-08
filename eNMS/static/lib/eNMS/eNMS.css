@@ -996,10 +996,6 @@ a:focus {
   background: #002240;
 }
 
-.login .fa-paw {
-  font-size: 26px;
-}
-
 .login_wrapper {
   right: 0;
   margin: 5% auto 0;
@@ -1090,29 +1086,6 @@ form:after {
   background-color: #fff;
   border: 1px solid #a878af;
   outline: 0;
-}
-
-#username {
-  background-position: 10px 10px !important;
-}
-
-#password {
-  background-position: 10px -53px !important;
-}
-
-.login_content form div a {
-  font-size: 12px;
-  margin: 10px 15px 0 0;
-}
-
-.reset_pass {
-  margin-top: 10px !important;
-}
-
-.login_content div .reset_pass {
-  margin-top: 13px !important;
-  margin-right: 39px;
-  float: right;
 }
 
 .separator {

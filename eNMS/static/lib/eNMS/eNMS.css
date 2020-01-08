@@ -947,85 +947,10 @@ a:focus {
   outline: 0;
 }
 
-ul.count2 {
-  width: 100%;
-  margin-left: 1px;
-  border: 1px solid #ddd;
-  border-left: 0;
-  border-right: 0;
-  padding: 10px 0;
-}
-
-ul.count2 li {
-  width: 30%;
-  text-align: center;
-}
-
-ul.count2 li h3 {
-  font-weight: 400;
-  margin: 0;
-}
-
-ul.count2 li span {
-  font-weight: 300;
-}
-
+/* Separator for the right-click menu */
 .divider {
   border-bottom: 1px solid #ddd;
   margin: 10px;
-}
-
-.divider-dashed {
-  border-top: 1px dashed #e7eaec;
-  background-color: #fff;
-  height: 1px;
-  margin: 10px 0;
-}
-
-ul.messages {
-  padding: 0;
-  list-style: none;
-}
-
-.tasks li,
-ul.messages li {
-  border-bottom: 1px dotted #e6e6e6;
-  padding: 8px 0;
-}
-
-img.avatar,
-ul.messages li img.avatar {
-  height: 32px;
-  width: 32px;
-  float: left;
-  display: inline-block;
-  border-radius: 2px;
-  padding: 2px;
-  background: #f7f7f7;
-  border: 1px solid #e6e6e6;
-}
-
-ul.messages li .message_date {
-  float: right;
-  text-align: right;
-}
-
-ul.messages li .message_wrapper {
-  margin-left: 50px;
-  margin-right: 40px;
-}
-
-ul.messages li .message_wrapper h4.heading {
-  font-weight: 600;
-  margin: 0 0 10px;
-  cursor: pointer;
-  line-height: 100%;
-}
-
-ul.messages li .message_wrapper blockquote {
-  padding: 0 10px;
-  margin: 0;
-  border-left: 5px solid #eee;
 }
 
 ul.user_data li {

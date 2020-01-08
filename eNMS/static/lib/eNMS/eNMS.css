@@ -56,19 +56,9 @@ a:hover {
   width: 70px;
 }
 
-.nav-sm .navbar.nav_title a span {
-  display: none;
-}
-
-.nav-sm .navbar.nav_title a i {
-  font-size: 27px;
-  margin: 13px 0 0 3px;
-}
-
+/* For the top_var to align with the left-side menu */
 .nav-sm .top_nav {
-  display: block;
   margin-left: 70px;
-  z-index: 2;
 }
 
 .nav-sm .nav.side-menu li a {
@@ -1265,16 +1255,6 @@ fieldset {
   margin-right: -8px;
 }
 
-.select2-selection--multiple:before {
-  content: "";
-  position: absolute;
-  right: 7px;
-  top: 42%;
-  border-top: 5px solid #888;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-}
-
 /* Align "Show 1 to 10 of X entries to the right */
 .dataTables_info {
   font-size: 15px;
@@ -1302,6 +1282,7 @@ fieldset.section {
   box-shadow: 0px 0px 0px 0px #000;
 }
 
+/* Display of the buttons of the top menu */
 .nav-item {
   min-width: 100px;
   display: inline-block;
@@ -1313,9 +1294,8 @@ fieldset.section {
   word-wrap: break-word;
 }
 
+/* For the workflow builder navbar div to be: left | center | right */
 #content-header {
-  display: flex; /* establish flex container */
-  flex-direction: row; /* default value; can be omitted */
-  flex-wrap: nowrap; /* default value; can be omitted */
-  justify-content: space-between; /* switched from default (flex-start, see below) */
+  display: flex;
+  justify-content: space-between;
 }

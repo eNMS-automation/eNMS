@@ -27,17 +27,8 @@ a:hover {
   visibility: hidden;
 }
 
-#container-body {
-  height: 100%;
-}
-
 .nav-sm .navbar.nav_title {
   width: 70px;
-}
-
-/* For the top_var to align with the left-side menu */
-.nav-sm .top_nav {
-  margin-left: 70px;
 }
 
 .nav-sm .nav.side-menu li a {
@@ -187,10 +178,6 @@ body {
   line-height: 1.471;
 }
 
-.top_nav {
-  display: block;
-}
-
 .col-lg-1,
 .col-lg-10,
 .col-lg-11,
@@ -244,11 +231,6 @@ body {
   float: left;
   padding-right: 10px;
   padding-left: 10px;
-}
-
-.row {
-  margin-right: -10px;
-  margin-left: -10px;
 }
 
 .grid_slider .col-md-6 {

@@ -6,11 +6,7 @@ page: false
 user: false
 */
 
-import {
-  call,
-  createTooltips,
-  detectUserInactivity,
-} from "./base.js";
+import { call, createTooltips, detectUserInactivity } from "./base.js";
 import { initDashboard } from "./inventory.js";
 import { initTable, tables } from "./table.js";
 import { initView } from "./visualization.js";

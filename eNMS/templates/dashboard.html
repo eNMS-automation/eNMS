@@ -1,61 +1,58 @@
 {% extends "base_site.html" %} {% block title %} Dashboard {% endblock title %}
 {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block
 content %}
-<div class="right_col" role="main">
-  <div id="content-header" class="row tile_count">
-    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>
-      <div id="count-device" class="count"></div>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <span class="count_top"><i class="fa fa-clock-o"></i> Links</span>
-      <div id="count-link" class="count"></div>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <span class="count_top"><i class="fa fa-user"></i> Services</span>
-      <div id="count-service" class="count"></div>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <span class="count_top"><i class="fa fa-user"></i> Workflows</span>
-      <div id="count-workflow" class="count"></div>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <span class="count_top"><i class="fa fa-user"></i> Tasks</span>
-      <div id="count-task" class="count"></div>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-      <span class="count_top"><i class="fa fa-user"></i> Users</span>
-      <div id="count-user" class="count"></div>
-    </div>
+<div id="content-header" class="row tile_count">
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>
+    <div id="count-device" class="count"></div>
   </div>
-  <div class="row">
-    <div class="x_panel">
-      {% for type, type_properties in properties.items() %}
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <fieldset class="section">
-          <legend align="center" class="section">
-            {{ type|capitalize }}s
-          </legend>
-          <div
-            class="form-group"
-            style="width: 60%; display: block; margin: 0 auto;"
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-clock-o"></i> Links</span>
+    <div id="count-link" class="count"></div>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-user"></i> Services</span>
+    <div id="count-service" class="count"></div>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-user"></i> Workflows</span>
+    <div id="count-workflow" class="count"></div>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-user"></i> Tasks</span>
+    <div id="count-task" class="count"></div>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-user"></i> Users</span>
+    <div id="count-user" class="count"></div>
+  </div>
+</div>
+<div class="x_panel">
+  {% for type, type_properties in properties.items() %}
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <fieldset class="section">
+      <legend align="center" class="section">
+        {{ type|capitalize }}s
+      </legend>
+      <div
+        class="form-group"
+        style="width: 60%; display: block; margin: 0 auto;"
+      >
+        <select id="{{ type }}-properties" class="form-control">
+          {% for property in type_properties %}
+          <option value="{{ property }}"
+            >{{ names.get(property, property.replace("_", " ").capitalize()
+            ) }}</option
           >
-            <select id="{{ type }}-properties" class="form-control">
-              {% for property in type_properties %}
-              <option value="{{ property }}"
-                >{{ names.get(property, property.replace("_", " ").capitalize()
-                ) }}</option
-              >
-              {% endfor %}
-            </select>
-          </div>
-          <div id="{{ type }}" style="height:550px;"></div>
-        </fieldset>
+          {% endfor %}
+        </select>
       </div>
-      {% endfor %}
-    </div>
+      <div id="{{ type }}" style="height:550px;"></div>
+    </fieldset>
   </div>
-  {% endblock content %} {% block javascripts %} {{ super() }}
-  <script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
-  {% endblock javascripts %}
+  {% endfor %}
+</div>
+{% endblock content %} {% block javascripts %} {{ super() }}
+<script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
+{% endblock javascripts %}
 </div>

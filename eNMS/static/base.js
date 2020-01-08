@@ -269,7 +269,7 @@ export function createPanel(
     return;
   }
   let kwargs = {
-    container: "#container-body",
+    container: "body",
     id: panelId,
     border: "2px solid #2A3F52",
     theme: panelThemes[name] || "light filledlight",

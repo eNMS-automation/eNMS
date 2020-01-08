@@ -15,20 +15,6 @@ a:hover {
   -webkit-font-smoothing: antialiased;
 }
 
-.left_col {
-  background: #002240;
-  position: absolute;
-  bottom: auto;
-  min-height: 100%;
-}
-
-.nav-sm .container.body .col-md-3.left_col {
-  bottom: 0;
-  width: 70px;
-  padding: 0;
-  z-index: 9999;
-}
-
 .overflow_hidden,
 .sidebar-widget,
 .tile,
@@ -43,12 +29,6 @@ a:hover {
 
 #container-body {
   height: 100%;
-}
-
-.nav-sm .container.body .right_col {
-  padding: 10px 20px;
-  margin-left: 70px;
-  z-index: 2;
 }
 
 .nav-sm .navbar.nav_title {
@@ -175,51 +155,12 @@ a:hover {
   }
 }
 
-.nav-md .container.body .col-md-3.left_col {
-  min-height: 100%;
-  width: 230px;
-  padding: 0;
-  z-index: 1;
-}
-
-.nav-md .container.body .col-md-3.left_col.menu_fixed {
-  height: 100%;
-  position: fixed;
-}
-
-body .container.body .right_col {
-  background: #f7f7f7;
-}
-
-.nav-md .container.body .right_col {
-  padding: 10px 20px 0;
-  margin-left: 230px;
-}
-
 .nav_title {
   width: 230px;
   float: left;
   background: #002240;
   border-radius: 0;
   height: 57px;
-}
-
-@media (max-width: 991px) {
-  .nav-md .container.body .right_col,
-  .nav-md .container.body .top_nav {
-    width: 100%;
-    margin: 0;
-  }
-  .nav-md .container.body .col-md-3.left_col {
-    display: none;
-  }
-  .nav-md .container.body .right_col {
-    width: 100%;
-    padding-right: 0;
-  }
-  .right_col {
-    padding: 10px !important;
-  }
 }
 
 .container {
@@ -240,7 +181,6 @@ body {
 
 body {
   color: #73879c;
-  background: #002240;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -249,7 +189,6 @@ body {
 
 .top_nav {
   display: block;
-  margin-left: 230px;
 }
 
 .col-lg-1,

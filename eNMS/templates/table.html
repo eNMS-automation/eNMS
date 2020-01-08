@@ -1,29 +1,26 @@
 {% extends "base_site.html" %} {% block stylesheets %} {{ super() }} {% endblock
 stylesheets %} {% block content %}
-<div class="right_col" role="main">
-  <div class="row">
-    <div class="x_panel">
-      <form
-        id="search-{{ type }}-form"
-        class="form-horizontal form-label-left"
-        method="post"
-      >
-        <div id="controls-right" class="pull-right add-id"></div>
-        <div
-          id="controls-left"
-          style="display: block"
-          class="pull-left add-id"
-        ></div>
-        <table
-          id="table"
-          style="margin-top: 10px"
-          class="table table-striped table-bordered table-hover add-id"
-          cellspacing="0"
-          width="100%"
-        ></table>
-      </form>
-    </div>
-  </div>
+<div class="x_panel">
+  <form
+    id="search-{{ type }}-form"
+    class="form-horizontal form-label-left"
+    method="post"
+  >
+    <div id="controls-right" class="pull-right add-id"></div>
+    <div
+      id="controls-left"
+      style="display: block"
+      class="pull-left add-id"
+    ></div>
+    <table
+      id="table"
+      style="margin-top: 10px"
+      class="table table-striped table-bordered table-hover add-id"
+      cellspacing="0"
+      width="100%"
+      height="100%"
+    ></table>
+  </form>
 </div>
 {% endblock content %} {% block javascripts %} {{ super() }} {% endblock
 javascripts %}

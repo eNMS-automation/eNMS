@@ -84,11 +84,15 @@
     />
     {% endblock stylesheets %} {% endblock head %}
   </head>
-  <body style="height: 100%; width: 100%; padding:0; margin:0; background: #002240;">
-    <div style="background: #002240; width: 230px; height: 100%; float: left">
+  {% set menu_class = "nav-sm" if current_user.small_menu else "nav-md" %}
+  <body
+    class="{{ menu_class }} {% block body_class %} {% endblock body_class %}"
+  >
+    {% block body %}
+    <div class="container body" id="container-body">
       {% block sidebar %}
-      <div id="sidebar" style="height: 100%; width: 100%">
-
+      <div id="sidebar" class="col-md-3 left_col">
+        <div class="left_col">
           <br />
           <div class="navbar nav_title" style="border:0;">
             <center>
@@ -184,123 +188,118 @@
               </ul>
             </div>
           </div>
-      </div>
-      {% endblock sidebar %}
-    </div>
-    <div style="background: #aa1212; width: calc(100% - 230px); left: 230px; position: absolute; height: 100%;">
-      <div style="position: absolute; background: #38f351; height: 60px; width: 100%">
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-              <div class="nav toggle">
-                <a onclick="eNMS.base.fullScreen()"
-                  ><i class="glyphicon glyphicon-fullscreen"></i
-                ></a>
-              </div>
-              <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item">
-                  <a
-                    href="javascript:;"
-                    class="user-profile dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <img
-                      src="{{ url_for('static', filename='images/logo.png') }}"
-                    />
-                    {{ current_user.name }}
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li>
-                      <a href="/logout"
-                        ><i class="fa fa-sign-out pull-right"></i>Log out</a
-                      >
-                    </li>
-                  </ul>
-                </li>
-                <li role="presentation" class="nav-item dropdown">
-                  <a
-                    onclick="eNMS.base.createAlerts()"
-                    class="dropdown-toggle info-number"
-                    style="cursor: pointer"
-                    data-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <span class="fa fa-envelope-o f fa-2x"></span>
-                    <span id="alert-number" class="badge"></span>
-                    &nbsp;Alerts
-                  </a>
-                  <ul
-                    id="alerts"
-                    class="dropdown-menu list-unstyled msg_list"
-                    role="menu"
-                  ></ul>
-                </li>
-                <li class="nav-item">
-                  <a
-                    id="doc-link"
-                    target="_blank"
-                    href="https://enms.readthedocs.io/en/latest/base/introduction.html"
-                  >
-                    <img
-                      src="{{ url_for('static', filename='images/readthedocs.png') }}"
-                      height="25"
-                      width="25"
-                    />
-                    &nbsp;Docs
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    onclick="eNMS.administration.displayFiles()"
-                    style="cursor:pointer"
-                  >
-                    <img
-                      src="{{ url_for('static', filename='images/files.png') }}"
-                      height="25"
-                      width="25"
-                    />
-                    &nbsp;Files
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    onclick="eNMS.administration.showConfiguration()"
-                    style="cursor:pointer"
-                  >
-                    <img
-                      src="{{ url_for('static', filename='images/configuration.png') }}"
-                      height="25"
-                      width="25"
-                    />
-                    &nbsp;Config
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    onclick="eNMS.administration.showConfiguration()"
-                    style="cursor:pointer"
-                  >
-                    <img
-                      src="{{ url_for('static', filename='images/administration.png') }}"
-                      height="25"
-                      width="25"
-                    />
-                    &nbsp;Admin
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
       </div>
-      <div style="background: #4bdbff; height: calc(100% - 60px); top: 60px; width:100%; position: absolute">
-        {% block content %} {% endblock content %}
+      {% endblock sidebar %} {% block header %}
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <div class="nav toggle">
+              <a onclick="eNMS.base.fullScreen()"
+                ><i class="glyphicon glyphicon-fullscreen"></i
+              ></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="nav-item">
+                <a
+                  href="javascript:;"
+                  class="user-profile dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="{{ url_for('static', filename='images/logo.png') }}"
+                  />
+                  {{ current_user.name }}
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li>
+                    <a href="/logout"
+                      ><i class="fa fa-sign-out pull-right"></i>Log out</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li role="presentation" class="nav-item dropdown">
+                <a
+                  onclick="eNMS.base.createAlerts()"
+                  class="dropdown-toggle info-number"
+                  style="cursor: pointer"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span class="fa fa-envelope-o f fa-2x"></span>
+                  <span id="alert-number" class="badge"></span>
+                  &nbsp;Alerts
+                </a>
+                <ul
+                  id="alerts"
+                  class="dropdown-menu list-unstyled msg_list"
+                  role="menu"
+                ></ul>
+              </li>
+              <li class="nav-item">
+                <a
+                  id="doc-link"
+                  target="_blank"
+                  href="https://enms.readthedocs.io/en/latest/base/introduction.html"
+                >
+                  <img
+                    src="{{ url_for('static', filename='images/readthedocs.png') }}"
+                    height="25"
+                    width="25"
+                  />
+                  &nbsp;Docs
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  onclick="eNMS.administration.displayFiles()"
+                  style="cursor:pointer"
+                >
+                  <img
+                    src="{{ url_for('static', filename='images/files.png') }}"
+                    height="25"
+                    width="25"
+                  />
+                  &nbsp;Files
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  onclick="eNMS.administration.showConfiguration()"
+                  style="cursor:pointer"
+                >
+                  <img
+                    src="{{ url_for('static', filename='images/configuration.png') }}"
+                    height="25"
+                    width="25"
+                  />
+                  &nbsp;Config
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  onclick="eNMS.administration.showConfiguration()"
+                  style="cursor:pointer"
+                >
+                  <img
+                    src="{{ url_for('static', filename='images/administration.png') }}"
+                    height="25"
+                    width="25"
+                  />
+                  &nbsp;Admin
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
+      {% endblock header %} {% block content %} {% endblock content %}
     </div>
     {% block javascripts %}
     <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
@@ -359,6 +358,6 @@
       type="module"
       src="{{ url_for('static', filename='main.js') }}"
     ></script>
-    {% endblock %}
+    {% endblock %} {% endblock body %}
   </body>
 </html>

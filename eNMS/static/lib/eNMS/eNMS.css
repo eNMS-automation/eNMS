@@ -241,54 +241,6 @@ body .container.body .right_col {
   max-height: 400px !important;
 }
 
-.blue {
-  color: #3498db;
-}
-
-.purple {
-  color: #9b59b6;
-}
-
-.green {
-  color: #1abb9c;
-}
-
-.aero {
-  color: #9cc2cb;
-}
-
-.red {
-  color: #e74c3c;
-}
-
-.dark {
-  color: #34495e;
-}
-
-.border-blue {
-  border-color: #3498db !important;
-}
-
-.border-purple {
-  border-color: #9b59b6 !important;
-}
-
-.border-green {
-  border-color: #1abb9c !important;
-}
-
-.border-aero {
-  border-color: #9cc2cb !important;
-}
-
-.border-red {
-  border-color: #e74c3c !important;
-}
-
-.border-dark {
-  border-color: #34495e !important;
-}
-
 .container {
   width: 100%;
   padding: 0;

@@ -15,7 +15,6 @@ import {
   showRuntimePanel,
 } from "./automation.js";
 import {
-  adjustHeight,
   call,
   configureNamespace,
   copyToClipboard,
@@ -919,7 +918,6 @@ export function initWorkflowBuilder() {
     });
     $("#edge-type").selectpicker();
     getWorkflowState(true);
-    adjustHeight();
     $("#network").height($(".x_panel").height());
   });
   $("#network").contextMenu({

@@ -7,7 +7,6 @@ initSelect: false
 */
 
 import {
-  adjustHeight,
   call,
   configureNamespace,
   createPanel,
@@ -77,7 +76,6 @@ export function initDashboard() {
       drawDiagrams(diagram, parseData(objects));
       diagrams[type] = diagram;
     }
-    adjustHeight();
   });
 
   $.each(defaultProperties, function(type) {

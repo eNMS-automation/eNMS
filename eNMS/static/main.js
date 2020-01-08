@@ -7,7 +7,6 @@ user: false
 */
 
 import {
-  adjustHeight,
   call,
   createTooltips,
   detectUserInactivity,
@@ -128,7 +127,6 @@ function initSidebar() {
 
 $(document).ready(function() {
   NProgress.start();
-  $(window).resize(adjustHeight);
   const alerts = localStorage.getItem("alerts");
   if (!alerts) {
     localStorage.setItem("alerts", "[]");

@@ -233,14 +233,6 @@ body .container.body .right_col {
   }
 }
 
-.left_col .mCSB_scrollTools {
-  width: 6px;
-}
-
-.left_col .mCSB_dragger {
-  max-height: 400px !important;
-}
-
 .container {
   width: 100%;
   padding: 0;

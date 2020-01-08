@@ -4,7 +4,6 @@ page: false
 */
 
 import {
-  adjustHeight,
   configureNamespace,
   createTooltips,
   notify,
@@ -30,7 +29,6 @@ export function initTable(type, instance, runtime, id) {
         $(this).blur();
       });
       createTooltips();
-      adjustHeight();
     },
     sDom: "tilp",
     columns: models[type].columns,
@@ -80,7 +78,6 @@ export function initTable(type, instance, runtime, id) {
       $("#controls-left").html(models[type].controlsLeft);
       if (models[type].postProcessing) models[type].postProcessing();
       this.api().columns.adjust();
-      adjustHeight();
     },
     ajax: {
       url: `/table_filtering/${type}`,

@@ -606,23 +606,6 @@ export function copyToClipboard(text, isId) {
   notify(`Copied to Clipboard: ${text}`, "success", 5);
 }
 
-export function adjustHeight() {
-  /*
-  const height =
-    $("body")[0].scrollHeight > window.innerHeight
-      ? document.body.clientHeight
-      : window.innerHeight;
-  
-  $(".x_panel").css(
-    "height",
-    height -
-      $("#content-header").outerHeight() -
-      $(".nav_menu").outerHeight()
-  );
-  */
-  Object.keys(tables).forEach((table) => tables[table].columns.adjust());
-}
-
 (function($, window) {
   $.fn.contextMenu = function(settings) {
     return this.each(function() {

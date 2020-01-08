@@ -953,18 +953,6 @@ a:focus {
   margin: 10px;
 }
 
-ul.user_data li {
-  margin-bottom: 6px;
-}
-
-ul.user_data li p {
-  margin-bottom: 0;
-}
-
-ul.user_data li .progress {
-  width: 90%;
-}
-
 .project_progress .progress {
   margin-bottom: 3px !important;
   margin-top: 5px;
@@ -974,128 +962,9 @@ ul.user_data li .progress {
   margin: 0;
 }
 
-.profile_title {
-  background: #f5f7fa;
-  border: 0;
-  padding: 7px 0;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-ul.stats-overview {
-  border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
-ul.stats-overview li {
-  display: inline-block;
-  text-align: center;
-  padding: 0 15px;
-  width: 30%;
-  font-size: 14px;
-  border-right: 1px solid #e8e8e8;
-}
-
-ul.stats-overview li:last-child {
-  border-right: 0;
-}
-
-ul.stats-overview li .name {
-  font-size: 12px;
-}
-
-ul.stats-overview li .value {
-  font-size: 14px;
-  font-weight: 700;
-  display: block;
-}
-
-ul.stats-overview li:first-child {
-  padding-left: 0;
-}
-
-ul.project_files li {
-  margin-bottom: 5px;
-}
-
-ul.project_files li a i {
-  width: 20px;
-}
-
-.project_detail p {
-  margin-bottom: 10px;
-}
-
-.project_detail p.title {
-  font-weight: 700;
-  margin-bottom: 0;
-}
-
-.avatar img {
-  border-radius: 50%;
-  max-width: 45px;
-}
-
-.pricing {
-  background: #fff;
-}
-
-.pricing .title {
-  background: #1abb9c;
-  height: 110px;
-  color: #fff;
-  padding: 15px 0 0;
-  text-align: center;
-}
-
-.pricing .title h2 {
-  text-transform: capitalize;
-  font-size: 18px;
-  border-radius: 5px 5px 0 0;
-  margin: 0;
-  font-weight: 400;
-}
-
 .view .tools,
 .view a.info {
   text-transform: uppercase;
-}
-
-.pricing .title h1 {
-  font-size: 30px;
-  margin: 12px;
-}
-
-.pricing .title span {
-  background: rgba(51, 51, 51, 0.28);
-  padding: 2px 5px;
-}
-
-.pricing_features {
-  background: #fafafa;
-  padding: 20px 15px;
-  min-height: 230px;
-  font-size: 13.5px;
-}
-
-.pricing_features ul li {
-  margin-top: 10px;
-}
-
-.pricing_footer {
-  padding: 10px 15px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  text-align: center;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-
-.pricing_footer p {
-  font-size: 13px;
-  padding: 10px 0 2px;
-  display: block;
 }
 
 .ui-ribbon-container {

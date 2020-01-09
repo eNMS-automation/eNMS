@@ -517,18 +517,6 @@ button {
   margin: 20px 0;
 }
 
-span.section {
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 20px;
-  font-size: 21px;
-  line-height: inherit;
-  color: #333;
-  border: 0;
-  border-bottom: 1px solid #e5e5e5;
-}
-
 .form-control {
   border-radius: 0;
   width: 100%;
@@ -623,24 +611,6 @@ a:focus {
   margin: 10px;
 }
 
-.project_progress .progress {
-  margin-bottom: 3px !important;
-  margin-top: 5px;
-}
-
-.projects .list-inline {
-  margin: 0;
-}
-
-.caption {
-  padding: 9px 5px;
-  background: #f7f7f7;
-}
-
-.caption p {
-  margin-bottom: 5px;
-}
-
 .dropdown-menu a {
   cursor: pointer;
 }
@@ -656,10 +626,6 @@ a:focus {
 .input-group.date .input-group-addon {
   border-radius: 0 !important;
   background-color: #ffff !important;
-}
-
-.error_page {
-  background: #002240;
 }
 
 .clearfix:after,

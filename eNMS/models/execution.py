@@ -418,10 +418,15 @@ class Run(AbstractBase):
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
-        for retry in range(self.number_of_retries + 1):
+        retries = self.number_of_retries + 1
+        def set_retries(retry_count: int):
+            nonlocal retries
+            retries = retry_count
+
+        while retries > 0:
             try:
-                if retry:
-                    self.log("error", f"RETRY n°{retry}", device)
+                if retries:
+                    self.log("error", f"RETRY n°{self.number_of_retries-retries+2}", device)
                 results = self.service.job(self, payload, *args)
                 if device and (
                     getattr(self, "close_connection", False)
@@ -441,7 +446,7 @@ class Run(AbstractBase):
                     self.validate_result(results, payload, device)
                 if results["success"]:
                     return results
-                elif retry < self.number_of_retries:
+                elif retries:
                     sleep(self.time_between_retries)
             except Exception:
                 result = (
@@ -452,6 +457,7 @@ class Run(AbstractBase):
                 )
                 self.log("error", result, device)
                 return {"success": False, "result": result}
+            retries -= 1
         return results
 
     def get_results(self, payload, device=None):

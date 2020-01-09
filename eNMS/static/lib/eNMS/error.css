@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  background: #002240;
+  color: #73879c;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  line-height: 2;
+}
+
+.col-middle {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.error-number {
+  font-size: 150px;
+  line-height: 90px;
+  margin: 50px 0;
+}

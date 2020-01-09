@@ -11,13 +11,6 @@ body {
   line-height: 1.471;
 }
 
-/* error page */
-
-.col-middle {
-  margin-top: 10%;
-  text-align: center;
-}
-
 /* login page */
 
 .login {
@@ -492,12 +485,6 @@ h2 {
 
 td span {
   line-height: 18px;
-}
-
-.error-number {
-  font-size: 150px;
-  line-height: 90px;
-  margin: 50px 0;
 }
 
 /* Set the table pages in the middle */

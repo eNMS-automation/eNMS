@@ -1,8 +1,5 @@
-{% extends "base_site.html" %} {% block title %} Page 403 {% endblock title %}
-{% block sidebar %}{% endblock sidebar %} {% block header %}{% endblock header
-%} {% block body_class %} error_page {% endblock body_class %} {% block content
-%}
-<div class="col-md-12">
+
+<body>
   <div class="col-middle">
     <div class="text-center text-center">
       <h1 class="error-number">{{ error }}</h1>
@@ -15,5 +12,4 @@
       {% endif %}
     </div>
   </div>
-</div>
-{% endblock content %} {% block footer %}{% endblock footer %}
+</body>

@@ -602,7 +602,8 @@ td span {
 }
 
 .col-middle {
-  margin-top: 5%;
+  margin-top: 15%;
+  text-align: center;
 }
 
 td.details,

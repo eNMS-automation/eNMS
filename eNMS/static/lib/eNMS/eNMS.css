@@ -596,13 +596,13 @@ td span {
 }
 
 .error-number {
-  font-size: 90px;
+  font-size: 150px;
   line-height: 90px;
-  margin: 20px 0;
+  margin: 50px 0;
 }
 
 .col-middle {
-  margin-top: 15%;
+  margin-top: 10%;
   text-align: center;
 }
 

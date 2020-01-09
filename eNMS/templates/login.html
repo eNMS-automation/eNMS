@@ -13,7 +13,7 @@ block stylesheets %}
   <section class="login_content">
     <form method="post" autocomplete="off">
       {{ login_form.csrf_token }}
-      <h1>Sign in</h1>
+      <h1>eNMS</h1>
       <label>Authentication method</label>
       <div>
         {{ login_form.authentication_method(class="form-control") }}
@@ -28,7 +28,7 @@ block stylesheets %}
       </div>
       <div>
         <button type="submit" class="btn btn-default submit" name="login">
-          Submit
+          Sign in
         </button>
       </div>
       <div class="separator"></div>

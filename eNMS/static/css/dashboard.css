@@ -1,65 +1,86 @@
 .tile_count {
-    margin-bottom: 20px;
-    margin-top: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.tile_count .tile_stats_count {
+  border-bottom: 1px solid #d9dee4;
+  padding: 0 10px 0 20px;
+  position: relative;
+}
+
+.tile_count .tile_stats_count:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 65px;
+  border-left: 2px solid #adb2b5;
+  margin-top: 10px;
+}
+
+@media (min-width: 992px) {
+  footer {
+    margin-left: 230px;
   }
-  
   .tile_count .tile_stats_count {
-    border-bottom: 1px solid #d9dee4;
-    padding: 0 10px 0 20px;
-    position: relative;
+    margin-bottom: 10px;
+    border-bottom: 0;
+    padding-bottom: 10px;
   }
-  
-  .tile_count .tile_stats_count:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    height: 65px;
-    border-left: 2px solid #adb2b5;
-    margin-top: 10px;
+  .tile_count .tile_stats_count:first-child:before {
+    border-left: 0;
   }
-  
-  @media (min-width: 992px) {
-    footer {
-      margin-left: 230px;
-    }
-    .tile_count .tile_stats_count {
-      margin-bottom: 10px;
-      border-bottom: 0;
-      padding-bottom: 10px;
-    }
-    .tile_count .tile_stats_count:first-child:before {
-      border-left: 0;
-    }
+}
+
+.tile_count .tile_stats_count .count {
+  font-size: 30px;
+  line-height: 47px;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .tile_count .tile_stats_count .count {
+    font-size: 40px;
   }
-  
+}
+
+@media (min-width: 992px) and (max-width: 1100px) {
   .tile_count .tile_stats_count .count {
     font-size: 30px;
-    line-height: 47px;
-    font-weight: 600;
   }
-  
-  @media (min-width: 768px) {
-    .tile_count .tile_stats_count .count {
-      font-size: 40px;
-    }
-  }
-  
-  @media (min-width: 992px) and (max-width: 1100px) {
-    .tile_count .tile_stats_count .count {
-      font-size: 30px;
-    }
-  }
-  
+}
+
+.tile_count .tile_stats_count span {
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
   .tile_count .tile_stats_count span {
-    font-size: 12px;
+    font-size: 13px;
   }
-  
-  @media (min-width: 768px) {
-    .tile_count .tile_stats_count span {
-      font-size: 13px;
-    }
-  }
-  
-  .tile_count .tile_stats_count i {
-    width: 12px;
-  }
+}
+
+.tile_count .tile_stats_count i {
+  width: 12px;
+}
+
+.tile_count .tile_stats_count {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+legend.section {
+  width: inherit;
+  padding: 0 10px;
+  border-bottom: none;
+  margin-bottom: 5px;
+}
+
+fieldset.section {
+  border: 1px groove #ddd !important;
+  padding: 5px !important;
+  margin: 0 0 1.5em 0 !important;
+  -webkit-box-shadow: 0px 0px 0px 0px #000;
+  box-shadow: 0px 0px 0px 0px #000;
+}

@@ -1,0 +1,27 @@
+td span {
+  line-height: 18px;
+}
+
+/* Set the table pages in the middle */
+.dataTables_length {
+  width: 40%;
+  float: left;
+}
+
+/* Align center for "No data available in table" when empty table */
+.dataTables_empty,
+table.display td.center {
+  text-align: center;
+}
+
+/* Align "Show 1 to 10 of X entries to the right */
+.dataTables_info {
+  font-size: 15px;
+  margin-right: 8px;
+  float: right;
+}
+
+th.dt-center,
+td.dt-center {
+  text-align: center;
+}

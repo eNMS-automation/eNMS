@@ -124,6 +124,7 @@ function initSidebar() {
 $(document).ready(function() {
   NProgress.start();
   $(window).resize(() => {
+    console.log("test");
     Object.keys(tables).forEach((table) => tables[table].columns.adjust());
   });
   const alerts = localStorage.getItem("alerts");

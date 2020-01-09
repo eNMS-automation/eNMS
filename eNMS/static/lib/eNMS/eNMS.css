@@ -11,10 +11,6 @@ a:hover {
   text-decoration: none;
 }
 
-.main_menu .fa {
-  -webkit-font-smoothing: antialiased;
-}
-
 .overflow_hidden,
 .sidebar-widget,
 .tile,
@@ -163,11 +159,6 @@ a:hover {
 .top_nav .nav .open > a,
 .top_nav .nav > li > a:hover {
   background: #d9dee4;
-}
-
-html,
-body {
-  height: 100%;
 }
 
 body {
@@ -499,18 +490,10 @@ h2 {
 }
 
 .x_panel {
-  position: relative;
   width: 100%;
-  height: 100%;
   padding: 10px 17px;
-  display: inline-block;
   background: #fff;
   border: 1px solid #e6e9ed;
-  -webkit-column-break-inside: avoid;
-  -moz-column-break-inside: avoid;
-  column-break-inside: avoid;
-  opacity: 1;
-  transition: all 0.2s ease;
 }
 
 .x_title {

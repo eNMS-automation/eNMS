@@ -1,7 +1,7 @@
 {% extends "base_site.html" %} {% block title %} Dashboard {% endblock title %}
 {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block
 content %}
-<div id="content-header" class="row tile_count">
+<div class="tile_count">
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>
     <div id="count-device" class="count"></div>
@@ -41,8 +41,8 @@ content %}
         <select id="{{ type }}-properties" class="form-control">
           {% for property in type_properties %}
           <option value="{{ property }}"
-            >{{ names.get(property, property.replace("_", " ").capitalize()
-            ) }}</option
+            >{{ names.get(property, property.replace("_", " ").capitalize() )
+            }}</option
           >
           {% endfor %}
         </select>
@@ -55,4 +55,3 @@ content %}
 {% endblock content %} {% block javascripts %} {{ super() }}
 <script src="{{ url_for('static', filename='lib/echarts/echarts.min.js') }}"></script>
 {% endblock javascripts %}
-</div>

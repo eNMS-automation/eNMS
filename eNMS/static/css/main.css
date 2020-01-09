@@ -16,22 +16,6 @@ body {
   text-overflow: ellipsis;
 }
 
-.detail a,
-.expand,
-a,
-a:focus,
-a:hover {
-  text-decoration: none;
-}
-
-.overflow_hidden,
-.sidebar-widget,
-.tile,
-.weather-days .col-sm-2,
-.x_title h2 {
-  overflow: hidden;
-}
-
 .nav-sm .hidden-small {
   visibility: hidden;
 }
@@ -161,11 +145,6 @@ a:hover {
   background: #002240;
   border-radius: 0;
   height: 57px;
-}
-
-.container {
-  width: 100%;
-  padding: 0;
 }
 
 /* Change background color upper menu item on hover */

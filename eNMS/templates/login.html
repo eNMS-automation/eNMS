@@ -1,43 +1,42 @@
-{% extends "base_site.html" %} {% block title %} Login {% endblock title %} {%
-block stylesheets %}
-<link
-  href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}"
-  rel="stylesheet"
-/>
-<link
-  href="{{ url_for('static', filename='lib/eNMS/eNMS.css') }}"
-  rel="stylesheet"
-/>
-{% endblock stylesheets %} {% block body %}
-<div class="login_wrapper">
-  <section class="login_content">
-    <form method="post" autocomplete="off">
-      {{ login_form.csrf_token }}
-      <h1>eNMS</h1>
-      <label>Authentication method</label>
-      <div>
-        {{ login_form.authentication_method(class="form-control") }}
-      </div>
-      <br />
-      <div>
-        {{ login_form.name(class="form-control required", placeholder="Name") }}
-      </div>
-      <div>
-        {{ login_form.password(class="form-control required",
-        placeholder="Password") }}
-      </div>
-      <div>
-        <button type="submit" class="btn btn-default submit" name="login">
-          Sign in
-        </button>
-      </div>
-      <div class="separator"></div>
-    </form>
-  </section>
-</div>
-{% endblock body %} {% block javascripts %}
-<script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
-<script>
-  $("body").css("background", "#f7f7f7");
-</script>
-{% endblock javascripts %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ error }}</title>
+    <link
+      href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='lib/eNMS/eNMS.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+<body style="background: #f7f7f7">
+  <div class="login_wrapper">
+    <section class="login_content">
+      <form method="post" autocomplete="off">
+        {{ login_form.csrf_token }}
+        <h1>eNMS</h1>
+        <label>Authentication method</label>
+        <div>
+          {{ login_form.authentication_method(class="form-control") }}
+        </div>
+        <br />
+        <div>
+          {{ login_form.name(class="form-control required", placeholder="Name") }}
+        </div>
+        <div>
+          {{ login_form.password(class="form-control required",
+          placeholder="Password") }}
+        </div>
+        <div>
+          <button type="submit" class="btn btn-default submit" name="login">
+            Sign in
+          </button>
+        </div>
+        <div class="separator"></div>
+      </form>
+    </section>
+  </div>
+</body>

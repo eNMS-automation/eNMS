@@ -257,46 +257,8 @@ a:hover {
   background: #d9dee4;
 }
 
-.grid_slider .col-md-6 {
-  padding: 0 40px;
-}
-
-.h1,
-.h2,
-.h3,
-h1,
-h2,
-h3 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 a {
   color: #5a738e;
-}
-
-.btn.active.focus,
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn:active:focus,
-.btn:focus,
-:active,
-:focus,
-:visited,
-a,
-a:active,
-a:focus,
-a:visited {
-  outline: 0;
-}
-
-.navbar {
-  margin-bottom: 0;
-}
-
-.navbar-right {
-  margin-right: 0;
 }
 
 .top_nav .navbar-right {

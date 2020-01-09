@@ -84,11 +84,9 @@
     />
     {% endblock stylesheets %} {% endblock head %}
   </head>
-  {% set menu_class = "nav-sm" if current_user.small_menu else "nav-md" %}
-  <body
-    class="{{ menu_class }} {% block body_class %} {% endblock body_class %}"
-    style="height: 100%; width: 100%; padding:0; margin:0; background: #002240;"
-  >
+  {% block body %} {% set menu_class = "nav-sm" if current_user.small_menu else
+  "nav-md" %}
+  <body class="{{ menu_class }}">
     <div style="background: #002240; width: 230px; height: 100%; float: left">
       {% block sidebar %}
       <div id="sidebar" style="height: 100%; width: 100%">
@@ -194,9 +192,7 @@
     <div
       style="background: #FFFFFF; width: calc(100% - 230px); left: 230px; position: absolute; height: 100%;"
     >
-      <div
-        style="position: absolute; height: 60px; width: 100%"
-      >
+      <div style="position: absolute; height: 60px; width: 100%">
         <div class="top_nav">
           <div class="nav_menu">
             <nav>
@@ -313,7 +309,7 @@
         {% block content %} {% endblock content %}
       </div>
     </div>
-    {% block javascripts %}
+    {% endblock body %} {% block javascripts %}
     <script src="{{ url_for('static', filename='lib/jquery/jquery.min.js') }}"></script>
     <script>
       window.eNMS = {};

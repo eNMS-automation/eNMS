@@ -1,3 +1,16 @@
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #002240;
+  color: #73879c;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.471;
+}
+
 .x_title h2 {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -159,14 +172,6 @@ a:hover {
 .top_nav .nav .open > a,
 .top_nav .nav > li > a:hover {
   background: #d9dee4;
-}
-
-body {
-  color: #73879c;
-  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.471;
 }
 
 .col-lg-1,
@@ -878,10 +883,6 @@ a:focus {
 .input-group.date .input-group-addon {
   border-radius: 0 !important;
   background-color: #ffff !important;
-}
-
-.login {
-  background: #f7f7f7;
 }
 
 .error_page {

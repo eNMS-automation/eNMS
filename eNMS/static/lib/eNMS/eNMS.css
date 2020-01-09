@@ -11,28 +11,27 @@ body {
   line-height: 1.471;
 }
 
+/* error page */
+
+.col-middle {
+  margin-top: 10%;
+  text-align: center;
+}
+
 /* login page */
 
 .login {
   background: #f7f7f7;
 }
 
-.login_wrapper {
-  right: 0;
-  margin: 5% auto 0;
-  max-width: 350px;
-  position: relative;
-}
-
+/* center login box + text in the center + limit input width */
 .login_content {
-  margin: 0 auto;
-  padding: 25px 0 0;
-  position: relative;
+  margin: 10% auto 0;
+  max-width: 350px;
   text-align: center;
-  text-shadow: 0 1px 0 #fff;
-  min-width: 280px;
 }
 
+/* style for "eNMS" */
 .login_content h1 {
   font: 400 35px Helvetica, Arial, sans-serif;
   line-height: 20px;
@@ -256,61 +255,6 @@ a:hover {
 .top_nav .nav .open > a,
 .top_nav .nav > li > a:hover {
   background: #d9dee4;
-}
-
-.col-lg-1,
-.col-lg-10,
-.col-lg-11,
-.col-lg-12,
-.col-lg-2,
-.col-lg-3,
-.col-lg-4,
-.col-lg-5,
-.col-lg-6,
-.col-lg-7,
-.col-lg-8,
-.col-lg-9,
-.col-md-1,
-.col-md-10,
-.col-md-11,
-.col-md-12,
-.col-md-2,
-.col-md-3,
-.col-md-4,
-.col-md-5,
-.col-md-6,
-.col-md-7,
-.col-md-8,
-.col-md-9,
-.col-sm-1,
-.col-sm-10,
-.col-sm-11,
-.col-sm-12,
-.col-sm-2,
-.col-sm-3,
-.col-sm-4,
-.col-sm-5,
-.col-sm-6,
-.col-sm-7,
-.col-sm-8,
-.col-sm-9,
-.col-xs-1,
-.col-xs-10,
-.col-xs-11,
-.col-xs-12,
-.col-xs-2,
-.col-xs-3,
-.col-xs-4,
-.col-xs-5,
-.col-xs-6,
-.col-xs-7,
-.col-xs-8,
-.col-xs-9 {
-  position: relative;
-  min-height: 1px;
-  float: left;
-  padding-right: 10px;
-  padding-left: 10px;
 }
 
 .grid_slider .col-md-6 {
@@ -549,11 +493,6 @@ h2 {
   font-weight: 400;
 }
 
-#left,
-#right {
-  display: table;
-}
-
 .right-arrow {
   width: 10px;
   float: right;
@@ -599,16 +538,6 @@ td span {
   margin: 50px 0;
 }
 
-.col-middle {
-  margin-top: 10%;
-  text-align: center;
-}
-
-td.details,
-td.group {
-  background-color: #d1cfd0;
-}
-
 /* Set the table pages in the middle */
 .dataTables_length {
   width: 40%;
@@ -619,12 +548,6 @@ td.group {
 .dataTables_empty,
 table.display td.center {
   text-align: center;
-}
-
-.login_content .btn-default:hover,
-.login_content a,
-.tile:hover {
-  text-decoration: none;
 }
 
 ul.msg_list li {
@@ -697,23 +620,6 @@ ul.msg_list li a .time {
   background: #35bee7 !important;
   border: 1px solid #35bee7 !important;
   color: #fff;
-}
-
-ul.to_do {
-  padding: 0;
-}
-
-ul.to_do li {
-  background: #f3f3f3;
-  border-radius: 3px;
-  position: relative;
-  padding: 7px;
-  margin-bottom: 5px;
-  list-style: none;
-}
-
-ul.to_do p {
-  margin: 0;
 }
 
 .tile_count {
@@ -908,10 +814,6 @@ a.btn-warning {
   color: #fff;
   background-color: #394d5f;
   border-color: #394d5f;
-}
-
-.btn-round {
-  border-radius: 30px;
 }
 
 textarea {

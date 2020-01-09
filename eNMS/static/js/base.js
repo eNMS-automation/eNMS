@@ -488,7 +488,7 @@ export function showTypePanel(type, id, mode) {
         }
       }
       if (type.includes("service")) {
-        loadScript(`../static/services/${type}.js`).then(() => {
+        loadScript(`../static/js/services/${type}.js`).then(() => {
           try {
             job(id);
           } catch (e) {

@@ -79,7 +79,7 @@
       rel="stylesheet"
     />
     <link
-      href="{{ url_for('static', filename='lib/eNMS/main.css') }}"
+      href="{{ url_for('static', filename='css/main.css') }}"
       rel="stylesheet"
     />
     {% endblock stylesheets %} {% endblock head %}
@@ -348,23 +348,23 @@
     <script src="{{ url_for('static', filename='lib/dropzone/dropzone.min.js') }}"></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='base.js') }}"
+      src="{{ url_for('static', filename='js/base.js') }}"
     ></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='administration.js') }}"
+      src="{{ url_for('static', filename='js/administration.js') }}"
     ></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='inventory.js') }}"
+      src="{{ url_for('static', filename='js/inventory.js') }}"
     ></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='automation.js') }}"
+      src="{{ url_for('static', filename='js/automation.js') }}"
     ></script>
     <script
       type="module"
-      src="{{ url_for('static', filename='main.js') }}"
+      src="{{ url_for('static', filename='js/main.js') }}"
     ></script>
     {% endblock %}
   </body>

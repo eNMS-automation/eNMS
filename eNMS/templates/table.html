@@ -1,4 +1,9 @@
-{% extends "base_site.html" %} {% block stylesheets %} {{ super() }} {% endblock
+{% extends "base_site.html" %} {% block stylesheets %} {{ super() }}
+<link
+  href="{{ url_for('static', filename='css/table.css') }}"
+  rel="stylesheet"
+/>
+{% endblock
 stylesheets %} {% block content %}
 <div class="x_panel">
   <form id="search-{{ type }}-form" method="post">

@@ -1,6 +1,10 @@
 {% extends "base_site.html" %} {% block title %} Dashboard {% endblock title %}
-{% block stylesheets %} {{ super() }} {% endblock stylesheets %} {% block
-content %}
+{% block stylesheets %} {{ super() }}
+<link
+  href="{{ url_for('static', filename='css/dashboard.css') }}"
+  rel="stylesheet"
+/>
+{% endblock stylesheets %} {% block content %}
 <div class="tile_count">
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-clock-o"></i> Devices</span>

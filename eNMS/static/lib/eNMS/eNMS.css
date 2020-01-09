@@ -13,6 +13,10 @@ body {
 
 /* login page */
 
+.login {
+  background: #f7f7f7;
+}
+
 .login_wrapper {
   right: 0;
   margin: 5% auto 0;
@@ -29,13 +33,8 @@ body {
   min-width: 280px;
 }
 
-.login_content a:hover {
-  text-decoration: underline;
-}
-
 .login_content h1 {
-  font: 400 25px Helvetica, Arial, sans-serif;
-  letter-spacing: -0.05em;
+  font: 400 35px Helvetica, Arial, sans-serif;
   line-height: 20px;
   margin: 10px 0 30px;
 }
@@ -95,7 +94,6 @@ body {
   top: 0;
   width: 100%;
 }
-
 
 .x_title h2 {
   white-space: nowrap;

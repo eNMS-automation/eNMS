@@ -137,7 +137,7 @@ class Base {
   static createNewButton(type) {
     return `
       <button
-        class="btn btn-sm btn-primary"
+        class="btn btn-primary"
         onclick="eNMS.base.showTypePanel('${type}')"
         data-tooltip="New"
         type="button"
@@ -149,7 +149,7 @@ class Base {
   static searchTableButton(type) {
     return `
       <button
-        class="btn btn-sm btn-info"
+        class="btn btn-info"
         onclick="eNMS.base.showPanel('${type}_filtering')"
         data-tooltip="Advanced Search"
         type="button"
@@ -161,7 +161,7 @@ class Base {
   static refreshTableButton(type) {
     return `
       <button
-        class="btn btn-sm btn-info"
+        class="btn btn-info"
         onclick="eNMS.table.refreshTable('${type}', true)"
         data-tooltip="Refresh"
         type="button"
@@ -215,11 +215,11 @@ models.device = class Device extends Base {
   static get controls() {
     return [
       super.createNewButton("device"),
-      ` <button type="button" class="btn btn-sm btn-primary"
+      ` <button type="button" class="btn btn-primary"
       onclick="eNMS.administration.showImportTopologyPanel()"
       data-tooltip="Export"><span class="glyphicon glyphicon-download">
       </span></button>
-      <button type="button" class="btn btn-sm btn-primary"
+      <button type="button" class="btn btn-primary"
       onclick="eNMS.base.showPanel('excel_export')" data-tooltip="Export"
         ><span class="glyphicon glyphicon-upload"></span
       ></button>`,
@@ -352,7 +352,7 @@ models.pool = class Pool extends Base {
     return [
       super.createNewButton("pool"),
       ` <button
-        class="btn btn-sm btn-primary"
+        class="btn btn-primary"
         onclick="eNMS.inventory.updatePools()"
         data-tooltip="Update all pools"
         type="button"
@@ -596,7 +596,7 @@ models.run = class Run extends Base {
       super.searchTableButton("run"),
       super.refreshTableButton("run"),
       ` <button
-        class="btn btn-sm btn-info"
+        class="btn btn-info"
         onclick="eNMS.automation.displayCalendar('run')"
         data-tooltip="Calendar"
         type="button"
@@ -756,18 +756,18 @@ models.task = class Task extends Base {
       super.searchTableButton("task"),
       super.refreshTableButton("task"),
       ` <button
-        class="btn btn-sm btn-info"
+        class="btn btn-info"
         onclick="eNMS.automation.displayCalendar('task')"
         data-tooltip="Calendar"
         type="button"
       >
         <span class="glyphicon glyphicon-calendar"></span>
       </button>
-      <button type="button" class="btn btn-sm btn-success"
+      <button type="button" class="btn btn-success"
       onclick="eNMS.automation.schedulerAction('resume')" data-tooltip="Play"
         ><span class="glyphicon glyphicon-play"></span
       ></button>
-      <button type="button" class="btn btn-sm btn-danger"
+      <button type="button" class="btn btn-danger"
       onclick="eNMS.automation.schedulerAction('pause')" data-tooltip="Pause"
         ><span class="glyphicon glyphicon-pause"></span
       ></button>`,

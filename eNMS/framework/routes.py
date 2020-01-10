@@ -129,7 +129,7 @@ def workflow_builder():
 @monitor_requests
 def form(form_type):
     return render_template(
-        f"forms/{form_templates.get(form_type, 'base')}_form.html",
+        f"forms/{form_templates.get(form_type, 'base')}.html",
         **{
             "endpoint": f"form/{form_type}",
             "action": form_actions.get(form_type),

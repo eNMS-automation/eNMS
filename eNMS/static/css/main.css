@@ -389,10 +389,12 @@ h2 {
   background: #e3ebf3;
 }
 
-.x_panel {
+.main_frame {
+  background: #FFFFFF;
+  top: 60px;
+  position: absolute;
   width: 100%;
   padding: 10px 17px;
-  background: #fff;
 }
 
 .x_title {
@@ -745,6 +747,7 @@ fieldset {
 
 /* For the workflow builder navbar div to be: left | center | right */
 #content-header {
+  height: 150px;
   display: flex;
   justify-content: space-between;
 }

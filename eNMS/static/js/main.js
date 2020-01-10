@@ -66,7 +66,6 @@ function initSidebar() {
 
   let switchMenu = function() {
     if ($("body").hasClass("nav-sm")) {
-      console.log("test");
       $(".left_column").css("width", "70px");
       $(".right_column").css({"width": "calc(100% - 70px)", "left": "70px"});
       $("#eNMS").css({ "font-size": "17px" });
@@ -129,7 +128,6 @@ function initSidebar() {
 $(document).ready(function() {
   NProgress.start();
   $(window).resize(() => {
-    console.log("test");
     Object.keys(tables).forEach((table) => tables[table].columns.adjust());
   });
   const alerts = localStorage.getItem("alerts");

@@ -918,7 +918,6 @@ export function initWorkflowBuilder() {
     });
     $("#edge-type").selectpicker();
     getWorkflowState(true);
-    $("#network").height($(".main_frame").height());
   });
   $("#network").contextMenu({
     menuSelector: "#contextMenu",

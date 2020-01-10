@@ -1,7 +1,12 @@
 {% extends "base_site.html" %} {% block title %} Workflow Builder {% endblock
-title %} {% block stylesheets %} {{ super() }} {% endblock stylesheets %} {%
+title %} {% block stylesheets %} {{ super() }}
+<link
+href="{{ url_for('static', filename='css/workflow.css') }}"
+rel="stylesheet"
+/>
+{% endblock stylesheets %} {%
 block content %}
-<div id="content-header">
+<div class="workflow_header">
   <div style="width: 250px">
     <table
       class="table table-bordered dt-responsive nowrap"
@@ -245,7 +250,7 @@ block content %}
     </div>
   </div>
 </div>
-<div id="network" style="height:100%; width:100%;"></div>
+<div id="network"></div>
 <ul id="contextMenu" class="dropdown-menu" role="menu">
   <li class="menu-entry node-selection">
     <a tabindex="-1" href="#">Edit</a>

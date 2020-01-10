@@ -1,0 +1,10 @@
+#network {
+    height: calc(100vh - 230px)
+}
+
+/* For the workflow builder navbar div to be: left | center | right */
+.workflow_header {
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+}

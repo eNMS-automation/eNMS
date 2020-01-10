@@ -543,15 +543,10 @@ legend {
   margin-top: 10px;
 }
 
+/* Buttons styling */
+
 .btn {
   border-radius: 3px;
-}
-
-a.btn-danger,
-a.btn-primary,
-a.btn-success,
-a.btn-warning {
-  color: #fff;
 }
 
 .btn-success {
@@ -559,11 +554,7 @@ a.btn-warning {
   border: 1px solid #169f85;
 }
 
-.btn-success.active,
-.btn-success:active,
-.btn-success:focus,
-.btn-success:hover,
-.open .dropdown-toggle.btn-success {
+.btn-success:hover {
   background: #169f85;
 }
 
@@ -573,25 +564,10 @@ a.btn-warning {
   border-color: #364b5f;
 }
 
-.btn-dark.active,
-.btn-dark:active,
-.btn-dark:focus,
-.btn-dark:hover,
-.open .dropdown-toggle.btn-dark {
+.btn-dark:hover {
   color: #fff;
   background-color: #394d5f;
   border-color: #394d5f;
-}
-
-textarea {
-  padding: 10px;
-  vertical-align: top;
-  width: 200px;
-}
-
-textarea:focus {
-  outline-style: solid;
-  outline-width: 2px;
 }
 
 a:focus {
@@ -626,17 +602,6 @@ form:after {
   display: block;
   clear: both;
   visibility: hidden;
-}
-
-.button {
-  background: #f7f9fa;
-  background: linear-gradient(top, #f7f9fa 0, #f0f0f0 100%);
-  -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
-  -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
-  border-radius: 0 0 5px 5px;
-  border-top: 1px solid #cfd5d9;
-  padding: 15px 0;
 }
 
 fieldset {

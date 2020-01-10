@@ -1,0 +1,51 @@
+
+<div class="x_content" style="min-height:80vh;">
+  <div class="x_title">
+    <h4 class="text-center">Miscellaneous</h4>
+  </div>
+  <br />
+  <center>
+    <div class="btn-group-vertical" style="width:100%">
+      <button
+        class="btn btn-primary btn-file"
+        onclick="eNMS.administration.getGitContent()"
+      >
+        Fetch Git Configurations
+      </button>
+      <button
+        class="btn btn-primary btn-file"
+        onclick="eNMS.administration.scanCluster()"
+      >
+        Scan Cluster Subnet
+      </button>
+    </div>
+  </center>
+</div>
+<div class="x_content" style="min-height:80vh;">
+  <div class="x_title">
+    <h4 class="text-center">Database</h4>
+  </div>
+  <br />
+  <center>
+    <div class="btn-group-vertical" style="width:100%">
+      <button
+        class="btn btn-primary btn-file"
+        onclick="eNMS.administration.showMigrationPanel()"
+      >
+        Migration
+      </button>
+      <button
+        class="btn btn-primary btn-file"
+        onclick="eNMS.base.showPanel('database_deletion')"
+      >
+        Deletion
+      </button>
+      <button
+        class="btn btn-primary btn-file"
+        onclick="eNMS.administration.showImportServicePanel()"
+      >
+        Import Service
+      </button>
+    </div>
+  </center>
+</div>

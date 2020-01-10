@@ -3,7 +3,6 @@ global
 CodeMirror: false
 config: true
 Dropzone: false
-folders: false
 JSONEditor: false
 */
 
@@ -102,6 +101,7 @@ function migrationsExport() {
 
 function showMigrationPanel() {
   showPanel("database_migration", null, () => {
+    call("/get_migration_folders", function(folders) {
     let list = document.getElementById("versions");
     folders.forEach((item) => {
       let option = document.createElement("option");

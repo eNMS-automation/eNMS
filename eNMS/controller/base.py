@@ -116,6 +116,7 @@ class BaseController:
         "get_device_logs",
         "get_exported_services",
         "get_git_content",
+        "get_migration_folders",
         "get_service_logs",
         "get_properties",
         "get_result",

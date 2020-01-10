@@ -71,6 +71,9 @@ class AdministrationController(BaseController):
     def get_cluster_status(self):
         return [server.status for server in fetch_all("server")]
 
+    def get_migration_folders(self):
+        return listdir(self.path / "files" / "migrations")
+
     def objectify(self, model, obj):
         for property, relation in relationships[model].items():
             if property not in obj:

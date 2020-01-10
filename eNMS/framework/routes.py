@@ -84,18 +84,6 @@ def logout():
     return redirect(url_for("blueprint.route", page="login"))
 
 
-@blueprint.route("/administration")
-@monitor_requests
-def administration():
-    return render_template(
-        f"administration.html",
-        **{
-            "endpoint": "administration",
-            "folders": listdir(app.path / "files" / "migrations"),
-        },
-    )
-
-
 @blueprint.route("/dashboard")
 @monitor_requests
 def dashboard():

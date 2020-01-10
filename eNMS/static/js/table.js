@@ -583,14 +583,6 @@ models.service = class Service extends Base {
 };
 
 models.run = class Run extends Base {
-  constructor(properties) {
-    super(properties);
-    this.service = JSON.stringify({
-      id: this.service_properties.id,
-      name: this.service_properties.name,
-      type: this.service_properties.type,
-    }).replace(/"/g, "'");
-  }
 
   static get columns() {
     return [
@@ -623,13 +615,13 @@ models.run = class Run extends Base {
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('logs', ${this.service},
+          onclick="eNMS.automation.showRuntimePanel('logs', ${this.instance},
           '${this.runtime}')" data-tooltip="Logs">
           <span class="glyphicon glyphicon-list"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${this.service},
+          onclick="eNMS.automation.showRuntimePanel('results', ${this.instance},
           '${this.runtime}')" data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>

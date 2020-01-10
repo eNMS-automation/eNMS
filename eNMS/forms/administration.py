@@ -18,6 +18,11 @@ class ConfigurationForm(BaseForm):
     form_type = HiddenField(default="configuration")
 
 
+class AdminForm(BaseForm):
+    template = "administration"
+    form_type = HiddenField(default="administration")
+
+
 class FilesForm(BaseForm):
     template = "files"
     form_type = HiddenField(default="files")

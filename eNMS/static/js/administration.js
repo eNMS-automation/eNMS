@@ -52,6 +52,15 @@ function showConfiguration() {
   });
 }
 
+function showAdminPanel() {
+  createPanel("administration", "Administration", null, function() {
+    call(`/import_service/${$("#service").val()}`, function(result) {
+      notify("Import successful.", "success", 5);
+      $("#import_service").remove();
+    });
+  });
+}
+
 function exportTopology() {
   notify("Topology export starting...", "success", 5);
   fCall("/export_topology", "excel_export-form", function() {
@@ -292,6 +301,7 @@ configureNamespace("administration", [
   saveConfiguration,
   saveFile,
   scanCluster,
+  showAdminPanel,
   showConfiguration,
   showFileUploadPanel,
   showImportServicePanel,

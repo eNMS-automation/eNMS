@@ -11,6 +11,11 @@
     <div class="form-group">
       {{ form.name(id='event-name', class="form-control required add-id") }}
     </div>
+    <label>Service</label>
+    <div class="form-group">
+      {{ form.service(id='event-service', class="form-control required add-id")
+      }}
+    </div><br>
     <table
       class="table table-striped table-bordered dt-responsive nowrap"
       cellspacing="0"
@@ -44,23 +49,15 @@
         {% endfor %}
       </tbody>
     </table>
-    <label>Service</label>
-    <div class="form-group">
-      {{ form.service(id='event-service', class="form-control required add-id")
-      }}
-    </div>
-    <div class="ln_solid"></div>
-    <div class="form-group">
-      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
-        <button
-          id="save"
-          type="button"
-          class="btn btn-success btn-id add-id"
-          value="eNMS.base.processData"
-        >
-          Save
-        </button>
-      </div>
-    </div>
+    <center>
+      <button
+        id="save"
+        type="button"
+        class="btn btn-success btn-id add-id"
+        value="eNMS.base.processData"
+      >
+        Save
+      </button>
+    </center>
   </div>
 </form>

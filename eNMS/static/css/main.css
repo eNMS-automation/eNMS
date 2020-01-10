@@ -502,14 +502,7 @@ button {
   margin-bottom: 0px;
 }
 
-.ln_solid {
-  border-top: 1px solid #e5e5e5;
-  color: #fff;
-  background-color: #fff;
-  height: 1px;
-  margin: 20px 0;
-}
-
+/* Form styling */
 .form-control {
   border-radius: 0;
   width: 100%;
@@ -517,11 +510,6 @@ button {
 
 .form-horizontal .control-label {
   padding-top: 8px;
-}
-
-.form-control:focus {
-  border-color: #ccd0d7;
-  box-shadow: none !important;
 }
 
 legend {
@@ -537,10 +525,6 @@ legend {
 
 .form-group {
   margin-bottom: 10px;
-}
-
-.validate {
-  margin-top: 10px;
 }
 
 /* Buttons styling */

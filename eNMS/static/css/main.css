@@ -32,10 +32,10 @@ body {
 
 .right_column {
   background: #FFFFFF;
-  width: calc(100% - 230px);
+  height: 100%;
   left: 230px;
   position: absolute;
-  height: 100%;
+  width: calc(100% - 230px);
 }
 
 .header {
@@ -51,10 +51,6 @@ body {
 
 .nav-sm .hidden-small {
   visibility: hidden;
-}
-
-.nav-sm .navbar.nav_title {
-  width: 70px;
 }
 
 .nav-sm .nav.side-menu li a {
@@ -170,14 +166,6 @@ body {
   .nav_menu {
     position: static;
   }
-}
-
-.nav_title {
-  width: 230px;
-  float: left;
-  background: #002240;
-  border-radius: 0;
-  height: 57px;
 }
 
 /* Change background color upper menu item on hover */
@@ -633,7 +621,6 @@ a:focus {
   background-color: #ffff !important;
 }
 
-.clearfix:after,
 form:after {
   content: ".";
   display: block;

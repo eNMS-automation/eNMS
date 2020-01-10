@@ -16,7 +16,7 @@ class PayloadValidationService(Service):
     __mapper_args__ = {"polymorphic_identity": "payload_validation_service"}
 
     def job(self, run, payload, device=None):
-        return {"query": run.query, "result": run.eval(run.query, **locals())}
+        return {"query": run.query, "result": run.eval(run.query, **locals())[0]}
 
 
 class PayloadValidationForm(ServiceForm):

@@ -225,7 +225,7 @@ class Run(AbstractBase):
             return "N/A"
 
     def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805
-        values = _self.eval(query, **locals)
+        values = _self.eval(query, **locals)[0]
         devices, not_found = set(), []
         if isinstance(values, str):
             values = [values]
@@ -419,11 +419,8 @@ class Run(AbstractBase):
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
         retries = self.number_of_retries + 1
-        def set_retries(retry_count: int):
-            nonlocal retries
-            retries = retry_count
-
-        while retries > 0:
+        total_retries = 0
+        while retries > 0 and total_retries < 1000:
             try:
                 if retries:
                     self.log("error", f"RETRY n°{self.number_of_retries-retries+2}", device)
@@ -437,9 +434,11 @@ class Run(AbstractBase):
                 if "success" not in results:
                     results["success"] = True
                 try:
-                    self.eval(
+                    _, exec_variables = self.eval(
                         self.service.result_postprocessing, function="exec", **locals()
                     )
+                    if isinstance(exec_variables.get("retries"), int):
+                        retries = exec_variables["retries"]
                 except SystemExit:
                     pass
                 if results["success"] and self.validation_method != "none":
@@ -458,6 +457,7 @@ class Run(AbstractBase):
                 self.log("error", result, device)
                 return {"success": False, "result": result}
             retries -= 1
+            total_retries += 1
         return results
 
     def get_results(self, payload, device=None):
@@ -465,7 +465,7 @@ class Run(AbstractBase):
         start = datetime.now().replace(microsecond=0)
         skip_service = False
         if self.skip_query:
-            skip_service = self.eval(self.skip_query, **locals())
+            skip_service = self.eval(self.skip_query, **locals())[0]
         if skip_service or self.skip:
             if device:
                 self.run_state["progress"]["device"]["skipped"] += 1
@@ -485,7 +485,7 @@ class Run(AbstractBase):
                     payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
-                for target in self.eval(self.service.iteration_values, **locals()):
+                for target in self.eval(self.service.iteration_values, **locals())[0]:
                     self.payload_helper(payload, self.iteration_variable_name, target)
                     targets_results[str(target)] = self.run_service_job(payload, device)
                 results.update(
@@ -731,13 +731,15 @@ class Run(AbstractBase):
         }
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805
-        return builtins[function](query, _self.python_code_kwargs(**locals))
+        exec_variables = _self.python_code_kwargs(**locals)
+        results = builtins[function](query, exec_variables)
+        return results, exec_variables
 
     def sub(self, input, variables):
         r = compile("{{(.*?)}}")
 
         def replace(match):
-            return str(self.eval(match.group()[2:-2], **variables))
+            return str(self.eval(match.group()[2:-2], **variables)[0])
 
         def rec(input):
             if isinstance(input, str):

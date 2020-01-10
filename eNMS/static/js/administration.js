@@ -51,15 +51,6 @@ function showConfiguration() {
   });
 }
 
-function showAdminPanel() {
-  createPanel("administration", "Administration", null, function() {
-    call(`/import_service/${$("#service").val()}`, function(result) {
-      notify("Import successful.", "success", 5);
-      $("#import_service").remove();
-    });
-  });
-}
-
 function exportTopology() {
   notify("Topology export starting...", "success", 5);
   fCall("/export_topology", "excel_export-form", function() {
@@ -102,11 +93,12 @@ function migrationsExport() {
 function showMigrationPanel() {
   showPanel("database_migration", null, () => {
     call("/get_migration_folders", function(folders) {
-    let list = document.getElementById("versions");
-    folders.forEach((item) => {
-      let option = document.createElement("option");
-      option.textContent = option.value = item;
-      list.appendChild(option);
+      let list = document.getElementById("versions");
+      folders.forEach((item) => {
+        let option = document.createElement("option");
+        option.textContent = option.value = item;
+        list.appendChild(option);
+      });
     });
   });
 }
@@ -301,7 +293,6 @@ configureNamespace("administration", [
   saveConfiguration,
   saveFile,
   scanCluster,
-  showAdminPanel,
   showConfiguration,
   showFileUploadPanel,
   showImportServicePanel,

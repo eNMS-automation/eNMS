@@ -43,7 +43,7 @@ class PayloadExtractionService(Service):
             try:
                 variables = locals()
                 variables.pop("query")
-                value = run.eval(query, **variables)
+                value = run.eval(query, **variables)[0]
             except Exception as exc:
                 success = False
                 result[variable] = f"Wrong Python query for {variable} ({exc})"

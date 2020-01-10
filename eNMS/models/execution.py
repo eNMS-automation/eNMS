@@ -423,7 +423,9 @@ class Run(AbstractBase):
         while retries > 0 and total_retries < 1000:
             try:
                 if retries:
-                    self.log("error", f"RETRY n°{self.number_of_retries-retries+2}", device)
+                    self.log(
+                        "error", f"RETRY n°{self.number_of_retries-retries+2}", device
+                    )
                 results = self.service.job(self, payload, *args)
                 if device and (
                     getattr(self, "close_connection", False)

@@ -87,112 +87,108 @@
   {% block body %} {% set menu_class = "nav-sm" if current_user.small_menu else
   "nav-md" %}
   <body class="{{ menu_class }}">
-    <div style="background: #002240; width: 230px; height: 100%; float: left">
-      {% block sidebar %}
-      <div id="sidebar" style="height: 100%; width: 100%">
-        <br />
-        <div class="nav_title">
-          <center>
-            {% set logo_size = "17" if current_user.small_menu else "30" %}
-            <h3 id="eNMS" style="font-size:{{ logo_size }}px; color:#30C2A5">
-              eNMS
-            </h3>
-            <img
-              id="img-enms"
-              src="{{ url_for('static', filename='images/logo.png') }}"
-              style="width: 30px; display: none"
-            />
-            {% set version_size = "15" if current_user.small_menu else "20" %}
-            <h3 id="eNMS-version" style="font-size: {{ version_size }}px;">
-              {{ version }}
-            </h3>
-          </center>
-        </div>
-        <div class="clearfix"></div>
-        <br />
-        <div id="sidebar-menu" class="hidden-print main_menu">
-          <div class="menu_section">
-            <ul class="nav side-menu">
-              <li>
-                <a
-                  ><i class="fa fa-home"></i>Home<span
-                    class="fa fa-chevron-down"
-                  ></span
-                ></a>
-                <ul class="nav child_menu">
-                  <li><a href="/dashboard">Dashboard</a></li>
-                  <li><a href="/table/changelog">Changelog</a></li>
-                </ul>
-              </li>
-              <li id="Admin">
-                <a
-                  ><i class="fa fa-users"></i>Admin<span
-                    class="fa fa-chevron-down"
-                  ></span
-                ></a>
-                <ul class="nav child_menu">
-                  <li><a href="/table/user">Users</a></li>
-                  <li><a href="/table/server">Servers</a></li>
-                  <li><a href="/administration">Administration</a></li>
-                </ul>
-              </li>
-              <li>
-                <a
-                  ><i class="fa fa-database"></i>Inventory<span
-                    class="fa fa-chevron-down"
-                  ></span
-                ></a>
-                <ul class="nav child_menu">
-                  <li><a href="/table/device">Devices</a></li>
-                  <li><a href="/table/link">Links</a></li>
-                  <li><a href="/table/pool">Pools</a></li>
-                </ul>
-              </li>
-              <li>
-                <a
-                  ><i class="fa fa-map-marker"></i>Visualization<span
-                    class="fa fa-chevron-down"
-                  ></span
-                ></a>
-                <ul class="nav child_menu">
-                  <li><a href="/view/network">Network</a></li>
-                  <li><a href="/view/site">Sites</a></li>
-                </ul>
-              </li>
-              <li>
-                <a
-                  ><i class="fa fa-sitemap"></i>Automation<span
-                    class="fa fa-chevron-down"
-                  ></span
-                ></a>
-                <ul class="nav child_menu">
-                  <li><a href="/table/service">Services</a></li>
-                  <li><a href="/workflow_builder">Workflow Builder</a></li>
-                  <li><a href="/table/run">Results</a></li>
-                </ul>
-              </li>
-              <li>
-                <a
-                  ><i class="fa fa-clock-o"></i>Scheduling<span
-                    class="fa fa-chevron-down"
-                  ></span
-                ></a>
-                <ul class="nav child_menu">
-                  <li><a href="/table/task">Tasks</a></li>
-                  <li><a href="/table/event">Events</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+    {% block sidebar %}
+    <div id="sidebar" class="left_column">
+      <br />
+      <div class="nav_title">
+        <center>
+          {% set logo_size = "17" if current_user.small_menu else "30" %}
+          <h3 id="eNMS" style="font-size:{{ logo_size }}px; color:#30C2A5">
+            eNMS
+          </h3>
+          <img
+            id="img-enms"
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            style="width: 30px; display: none"
+          />
+          {% set version_size = "15" if current_user.small_menu else "20" %}
+          <h3 id="eNMS-version" style="font-size: {{ version_size }}px;">
+            {{ version }}
+          </h3>
+        </center>
+      </div>
+      <div class="clearfix"></div>
+      <br />
+      <div id="sidebar-menu" class="hidden-print main_menu">
+        <div class="menu_section">
+          <ul class="nav side-menu">
+            <li>
+              <a
+                ><i class="fa fa-home"></i>Home<span
+                  class="fa fa-chevron-down"
+                ></span
+              ></a>
+              <ul class="nav child_menu">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/table/changelog">Changelog</a></li>
+              </ul>
+            </li>
+            <li id="Admin">
+              <a
+                ><i class="fa fa-users"></i>Admin<span
+                  class="fa fa-chevron-down"
+                ></span
+              ></a>
+              <ul class="nav child_menu">
+                <li><a href="/table/user">Users</a></li>
+                <li><a href="/table/server">Servers</a></li>
+                <li><a href="/administration">Administration</a></li>
+              </ul>
+            </li>
+            <li>
+              <a
+                ><i class="fa fa-database"></i>Inventory<span
+                  class="fa fa-chevron-down"
+                ></span
+              ></a>
+              <ul class="nav child_menu">
+                <li><a href="/table/device">Devices</a></li>
+                <li><a href="/table/link">Links</a></li>
+                <li><a href="/table/pool">Pools</a></li>
+              </ul>
+            </li>
+            <li>
+              <a
+                ><i class="fa fa-map-marker"></i>Visualization<span
+                  class="fa fa-chevron-down"
+                ></span
+              ></a>
+              <ul class="nav child_menu">
+                <li><a href="/view/network">Network</a></li>
+                <li><a href="/view/site">Sites</a></li>
+              </ul>
+            </li>
+            <li>
+              <a
+                ><i class="fa fa-sitemap"></i>Automation<span
+                  class="fa fa-chevron-down"
+                ></span
+              ></a>
+              <ul class="nav child_menu">
+                <li><a href="/table/service">Services</a></li>
+                <li><a href="/workflow_builder">Workflow Builder</a></li>
+                <li><a href="/table/run">Results</a></li>
+              </ul>
+            </li>
+            <li>
+              <a
+                ><i class="fa fa-clock-o"></i>Scheduling<span
+                  class="fa fa-chevron-down"
+                ></span
+              ></a>
+              <ul class="nav child_menu">
+                <li><a href="/table/task">Tasks</a></li>
+                <li><a href="/table/event">Events</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
-      {% endblock sidebar %}
     </div>
+    {% endblock sidebar %}
     {% block header %}
-    <div
-      style="background: #FFFFFF; width: calc(100% - 230px); left: 230px; position: absolute; height: 100%;"
-    >
-      <div style="position: absolute; height: 60px; width: 100%">
+    <div  class="right_column">
+      <div class="header">
         <div class="top_nav">
           <div class="nav_menu">
             <nav>

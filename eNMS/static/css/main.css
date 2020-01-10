@@ -1,3 +1,15 @@
+/* Architecture
++------------------------+------------------------------+
+| .left_column {         | .right_column {              |
+|   background: #002240; |   background: #FFFFFF;       |
+|   width: 230px;        |   width: calc(100% - 230px); |
+|   height: 100%;        |   left: 230px;               |
+|   float: left          |   position: absolute;        |
+| }                      |   height: 100%               |
+|                        | }                            |
++------------------------+------------------------------+
+*/
+
 body {
   height: 100%;
   width: 100%;
@@ -9,6 +21,27 @@ body {
   font-size: 13px;
   font-weight: 400;
   line-height: 1.471;
+}
+
+.left_column {
+  background: #002240;
+  width: 230px;
+  height: 100%;
+  float: left
+}
+
+.right_column {
+  background: #FFFFFF;
+  width: calc(100% - 230px);
+  left: 230px;
+  position: absolute;
+  height: 100%;
+}
+
+.header {
+  position: absolute;
+  height: 60px;
+  width: 100%
 }
 
 .x_title h2 {
@@ -349,13 +382,6 @@ a {
 h2 {
   font-size: 18px;
   font-weight: 400;
-}
-
-.right-arrow {
-  width: 10px;
-  float: right;
-  font-weight: 700;
-  font-size: 20px;
 }
 
 .accordion .panel {

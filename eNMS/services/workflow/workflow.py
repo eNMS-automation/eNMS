@@ -20,7 +20,7 @@ class Workflow(Service):
     parent_type = "service"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
     close_connection = Column(Boolean, default=False)
-    labels = Column(MutableDict)
+    labels = Column(MutableDict, info={"dont_track_changes": True})
     services = relationship(
         "Service", secondary=service_workflow_table, back_populates="workflows"
     )

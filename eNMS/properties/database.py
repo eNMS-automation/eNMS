@@ -1,22 +1,5 @@
 import_classes = ["user", "device", "link", "pool", "service", "workflow_edge", "task"]
 
-dont_track_changes = [
-    "configuration",
-    "current_device",
-    "current_service",
-    "labels",
-    "last_modified",
-    "operational_data",
-    "parent_id",
-    "positions",
-    "running",
-    "runtime",
-    "duration",
-    "small_menu",
-    "state",
-    "status",
-    "success",
-]
 
 dont_migrate = {
     "device": [

@@ -6,7 +6,6 @@ from sqlalchemy.types import JSON
 from eNMS.database import Base
 from eNMS.models import model_properties, models, property_types, relationships
 from eNMS.properties import private_properties
-from eNMS.properties.database import dont_track_changes
 
 
 @event.listens_for(Base, "mapper_configured", propagate=True)
@@ -64,7 +63,9 @@ def configure_events(app):
     def log_instance_update(mapper, connection, target):
         state, changelog = inspect(target), []
         for attr in state.attrs:
-            if attr.key in private_properties or attr.key in dont_track_changes:
+            if getattr(state.class_, attr.key).info.get("dont_track_changes"):
+                continue
+            if attr.key in private_properties:
                 continue
             hist = state.get_history(attr.key, True)
             if not hist.has_changes():

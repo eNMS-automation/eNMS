@@ -28,7 +28,7 @@ class Object(AbstractBase):
     __mapper_args__ = {"polymorphic_identity": "object", "polymorphic_on": type}
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, unique=True)
-    last_modified = Column(SmallString)
+    last_modified = Column(SmallString, info={"dont_track_changes": True})
     subtype = Column(SmallString)
     description = Column(SmallString)
     model = Column(SmallString)
@@ -95,8 +95,8 @@ class Device(CustomDevice):
     enable_password = Column(SmallString)
     netmiko_driver = Column(SmallString, default="cisco_ios")
     napalm_driver = Column(SmallString, default="ios")
-    configuration = Column(LargeString)
-    operational_data = Column(LargeString)
+    configuration = Column(LargeString, info={"dont_track_changes": True})
+    operational_data = Column(LargeString, info={"dont_track_changes": True})
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")
     last_update = Column(SmallString, default="Never")
@@ -222,7 +222,7 @@ class Pool(AbstractPool):
     parent_type = "abstract_pool"
     id = Column(Integer, ForeignKey("abstract_pool.id"), primary_key=True)
     name = Column(SmallString, unique=True)
-    last_modified = Column(SmallString)
+    last_modified = Column(SmallString, info={"dont_track_changes": True})
     description = Column(SmallString)
     operator = Column(SmallString, default="all")
     devices = relationship(

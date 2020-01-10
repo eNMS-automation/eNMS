@@ -28,7 +28,7 @@ class User(AbstractBase, UserMixin):
     permissions = Column(MutableList)
     pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(SmallString)
-    small_menu = Column(Boolean, default=False)
+    small_menu = Column(Boolean, default=False, info={"dont_track_changes": True})
 
     @property
     def is_admin(self):

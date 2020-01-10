@@ -297,8 +297,6 @@ export function initView() {
     Connect: (d) => showPanel("device_connection", d.id),
     Configuration: (d) => showDeviceData(d),
   });
-  map.invalidateSize();
-  $("#map").css("height", "calc(100vh - 80px)");
 }
 
 export function filterView(type) {

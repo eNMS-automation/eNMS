@@ -25,3 +25,8 @@ th.dt-center,
 td.dt-center {
   text-align: center;
 }
+
+.controls {
+    text-align: center;
+    padding: 5px 5px;
+}

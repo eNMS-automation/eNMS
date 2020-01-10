@@ -38,6 +38,14 @@ body {
   width: calc(100% - 230px);
 }
 
+.main_frame {
+  background: #FFFFFF;
+  top: 60px;
+  position: absolute;
+  width: 100%;
+  padding: 10px 17px;
+}
+
 .header {
   position: absolute;
   height: 60px;
@@ -387,14 +395,6 @@ h2 {
 
 .accordion .panel:hover {
   background: #e3ebf3;
-}
-
-.main_frame {
-  background: #FFFFFF;
-  top: 60px;
-  position: absolute;
-  width: 100%;
-  padding: 10px 17px;
 }
 
 .x_title {

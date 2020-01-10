@@ -62,8 +62,6 @@ export function initTable(type, instance, runtime, id) {
                 <option value="bool-true">True</option>
                 <option value="bool-false">False</option>
               </select>`;
-          } else if (data.data == "buttons") {
-            element = models[type].controls.join("");
           }
           $(element)
             .appendTo($(this.header()))
@@ -74,8 +72,7 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
-      $("#controls-right").html(models[type].controlsRight);
-      $("#controls-left").html(models[type].controlsLeft);
+      $(".controls").html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing();
       this.api().columns.adjust();
     },
@@ -447,7 +444,24 @@ models.service = class Service extends Base {
 
   static get controls() {
     return [
-      `<button
+      `
+      <input type="hidden" id="workflow-filtering" name="workflow-filtering">
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 300px;"
+        type="button"
+      >
+        <select
+          id="parent-filtering"
+          name="parent-filtering"
+          class="form-control"
+        >
+          <option value="true">Display services hierarchically</option>
+          <option value="false">Display all services</option>
+        </select>
+      </button>
+      </input>
+      <button
         class="btn btn-info"
         onclick="eNMS.base.showPanel('service_filtering')"
         data-tooltip="Advanced Search"
@@ -479,41 +493,23 @@ models.service = class Service extends Base {
     >
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
+    <button
+    class="btn btn-primary"
+    onclick="eNMS.automation.openServicePanel()"
+    data-tooltip="New"
+    type="button"
+  >
+    <span class="glyphicon glyphicon-plus"></span>
+  </button>
+  <button
+    style="background:transparent; border:none; 
+    color:transparent; width: 200px;"
+    type="button"
+  >
+    <select id="service-type" class="form-control"></select>
+  </button>
     `,
     ];
-  }
-
-  static get controlsLeft() {
-    return `
-      <select
-        id="parent-filtering"
-        name="parent-filtering"
-        class="form-control"
-      >
-        <option value="true">Display services hierarchically</option>
-        <option value="false">Display all services</option>
-      </select>
-      <input type="hidden" id="workflow-filtering" name="workflow-filtering">
-      </input>`;
-  }
-
-  static get controlsRight() {
-    return `
-      <button
-        class="btn btn-primary"
-        onclick="eNMS.automation.openServicePanel()"
-        data-tooltip="New"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
-      <button
-        style="background:transparent; border:none; 
-        color:transparent; width: 200px;"
-        type="button"
-      >
-        <select id="service-type" class="form-control"></select>
-      </button>`;
   }
 
   get buttons() {

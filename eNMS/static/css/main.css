@@ -475,6 +475,10 @@ ul.msg_list li a .time {
   margin-right: 10px;
 }
 
+.main_menu {
+  padding-top: 5px;
+}
+
 .main_menu .fa {
   width: 26px;
   opacity: 0.99;

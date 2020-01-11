@@ -89,7 +89,6 @@
   <body class="{{ menu_class }}">
     {% block sidebar %}
     <div id="sidebar" class="left_column">
-      <br />
       <center>
         {% set logo_size = "17" if current_user.small_menu else "30" %}
         <h3 id="eNMS" style="font-size:{{ logo_size }}px; color:#30C2A5">
@@ -105,7 +104,6 @@
           {{ version }}
         </h3>
       </center>
-      <br />
       <div id="sidebar-menu" class="hidden-print main_menu">
         <div class="menu_section">
           <ul class="nav side-menu">

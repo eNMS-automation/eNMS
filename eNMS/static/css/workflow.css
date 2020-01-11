@@ -1,10 +1,10 @@
 #network {
-    height: calc(100vh - 80px)
+  height: calc(100vh - 80px);
 }
 
 .controls {
-    margin: auto;
-    padding: 7px 7px;
-    margin-bottom: 5px;
-    width: fit-content
+  margin: auto;
+  padding: 7px 7px;
+  margin-bottom: 5px;
+  width: fit-content;
 }

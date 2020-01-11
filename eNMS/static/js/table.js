@@ -579,7 +579,6 @@ models.service = class Service extends Base {
 };
 
 models.run = class Run extends Base {
-
   static get columns() {
     return [
       { data: "runtime", title: "Runtime", search: "text", width: "15%" },

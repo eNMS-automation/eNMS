@@ -27,11 +27,11 @@ body {
   background: #002240;
   width: 230px;
   height: 100%;
-  float: left
+  float: left;
 }
 
 .right_column {
-  background: #FFFFFF;
+  background: #ffffff;
   height: 100%;
   left: 230px;
   position: absolute;
@@ -39,7 +39,7 @@ body {
 }
 
 .main_frame {
-  background: #FFFFFF;
+  background: #ffffff;
   top: 60px;
   position: absolute;
   width: 100%;
@@ -49,7 +49,7 @@ body {
 .header {
   position: absolute;
   height: 60px;
-  width: 100%
+  width: 100%;
 }
 
 .x_title h2 {
@@ -755,5 +755,5 @@ We cannot use 100% because main_frame is not set to 100%
 */
 
 #map {
-  height: calc(100vh - 80px)
+  height: calc(100vh - 80px);
 }

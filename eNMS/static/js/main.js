@@ -67,7 +67,7 @@ function initSidebar() {
   let switchMenu = function() {
     if ($("body").hasClass("nav-sm")) {
       $(".left_column").css("width", "70px");
-      $(".right_column").css({"width": "calc(100% - 70px)", "left": "70px"});
+      $(".right_column").css({ width: "calc(100% - 70px)", left: "70px" });
       $("#eNMS").css({ "font-size": "17px" });
       $("#eNMS-version").css({ "font-size": "15px" });
       $("#sidebar-menu")
@@ -81,7 +81,7 @@ function initSidebar() {
         .removeClass("active");
     } else {
       $(".left_column").css("width", "230px");
-      $(".right_column").css({"width": "calc(100% - 230px)", "left": "230px"});
+      $(".right_column").css({ width: "calc(100% - 230px)", left: "230px" });
       $("#eNMS").css({ "font-size": "30px" });
       $("#eNMS-version").css({ "font-size": "20px" });
       $("#sidebar-menu")

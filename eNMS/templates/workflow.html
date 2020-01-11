@@ -5,58 +5,56 @@ title %} {% block stylesheets %} {{ super() }}
   rel="stylesheet"
 />
 {% endblock stylesheets %} {% block content %}
-<div style="width: 250px; position: absolute; top: 0; left:0">
-
-</div>
+<div style="width: 250px; position: absolute; top: 0; left:0"></div>
 <div class="controls">
   <div class="controls_mode">
     <table
-    class="table table-bordered dt-responsive nowrap"
-    cellspacing="0"
-    style="margin: 0px"
-    width="100%"
-  >
-    <tbody>
-      <tr>
-        <td style="text-align: center; vertical-align: middle;">
-          <button
-            type="button"
-            class="btn btn-primary"
-            onclick="action['Create New Service']()"
-            data-tooltip="Create New Service"
-          >
-            <span class="glyphicon glyphicon-plus"></span>
-          </button>
-        </td>
-        <td style="min-width: 200px">
-          <select
-            id="service-type"
-            class="form-control"
-            data-width="200px"
-          ></select>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align: center; vertical-align: middle;">
-          <button
-            type="button"
-            class="btn btn-primary"
-            onclick="eNMS.workflow.switchMode()"
-            data-tooltip="Change Mode"
-          >
-            <span id="mode-icon" class="glyphicon glyphicon-move"></span>
-          </button>
-        </td>
-        <td style="min-width: 200px">
-          <select id="edge-type" class="form-control">
-            <option value="success">Success</option>
-            <option value="failure">Failure</option>
-            <option value="prerequisite">Prerequisite</option>
-          </select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      class="table table-bordered dt-responsive nowrap"
+      cellspacing="0"
+      style="margin: 0px"
+      width="100%"
+    >
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: middle;">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="action['Create New Service']()"
+              data-tooltip="Create New Service"
+            >
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </td>
+          <td style="min-width: 200px">
+            <select
+              id="service-type"
+              class="form-control"
+              data-width="200px"
+            ></select>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center; vertical-align: middle;">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="eNMS.workflow.switchMode()"
+              data-tooltip="Change Mode"
+            >
+              <span id="mode-icon" class="glyphicon glyphicon-move"></span>
+            </button>
+          </td>
+          <td style="min-width: 200px">
+            <select id="edge-type" class="form-control">
+              <option value="success">Success</option>
+              <option value="failure">Failure</option>
+              <option value="prerequisite">Prerequisite</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <nav class="navbar navbar-default navbar-custom" role="navigation">
     <ul class="pagination" style="margin: 0px; padding-top: 0px;">
@@ -216,7 +214,7 @@ title %} {% block stylesheets %} {{ super() }}
     ></select>
   </nav>
 </div>
-<div style="width: 500px; position: absolute; top: 0; left:0">
+<div style="width: 500px; position: absolute; top: 600; left:0">
   <table
     class="table table-bordered dt-responsive nowrap"
     cellspacing="0"
@@ -241,7 +239,7 @@ title %} {% block stylesheets %} {{ super() }}
     </tbody>
   </table>
 </div>
-<div style="width: 20vw; z-index:2; position: absolute; left: 25vw">
+<div style="width: 20vw; z-index:2; position: absolute; bottom: 15px">
   <strong><p id="status"></p></strong>
   <div id="progress" class="progress" style="display: none">
     <div id="progress-success" class="progress-bar progress-bar-success">

@@ -104,13 +104,13 @@ def table(table_type):
 @blueprint.route("/view/<view_type>")
 @monitor_requests
 def view(view_type):
-    return render_template(f"view.html", **{"endpoint": "view", "view_type": view_type})
+    return render_template(f"visualization.html", **{"endpoint": "view", "view_type": view_type})
 
 
 @blueprint.route("/workflow_builder")
 @monitor_requests
 def workflow_builder():
-    return render_template(f"workflow_builder.html", endpoint="workflow_builder")
+    return render_template(f"workflow.html", endpoint="workflow_builder")
 
 
 @blueprint.route("/form/<form_type>")

@@ -4,7 +4,15 @@
 
 .controls {
   margin: auto;
-  padding: 7px 7px;
-  margin-bottom: 5px;
-  width: fit-content;
+  display: table;
+}
+
+.navbar-custom {
+    float: left;
+    padding: 7px 7px;
+}
+
+.controls_mode {
+    float: left;
+    padding-right: 10px;
 }

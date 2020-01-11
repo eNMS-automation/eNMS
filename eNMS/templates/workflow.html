@@ -5,7 +5,6 @@ title %} {% block stylesheets %} {{ super() }}
   rel="stylesheet"
 />
 {% endblock stylesheets %} {% block content %}
-<div style="width: 250px; position: absolute; top: 0; left:0"></div>
 <div class="controls">
   <div class="controls_mode">
     <table
@@ -57,7 +56,20 @@ title %} {% block stylesheets %} {{ super() }}
     </table>
   </div>
   <nav class="navbar navbar-default navbar-custom" role="navigation">
-    <ul class="pagination" style="margin: 0px; padding-top: 0px;">
+    <div style="width: 100%; margin: 0px">
+      <div style="width: 70%; float: left">
+        <select
+          id="current-workflow"
+          class="form-control"
+          data-width="100%"
+          data-dropdown-align-right="true"
+        ></select>
+      </div>
+      <div style="width: 30%; float: left">
+        <select id="current-runtime" class="form-control"></select>
+      </div>
+    </div>
+    <ul class="pagination" style="margin: 0px; padding-top: 5px;">
       <li>
         <a
           onclick="action['Edit Workflow']()"
@@ -205,39 +217,7 @@ title %} {% block stylesheets %} {{ super() }}
         ></a>
       </li>
     </ul>
-    <br />
-    <select
-      id="current-workflow"
-      class="form-control"
-      data-width="100%"
-      data-dropdown-align-right="true"
-    ></select>
   </nav>
-</div>
-<div style="width: 500px; position: absolute; top: 600; left:0">
-  <table
-    class="table table-bordered dt-responsive nowrap"
-    cellspacing="0"
-    style="margin: 0px"
-    width="100%"
-  >
-    <tbody>
-      <tr>
-        <td style="text-align: center; vertical-align: middle;">
-          Workflow
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td style="text-align: center; vertical-align: middle;">
-          Runtime
-        </td>
-        <td>
-          <select id="current-runtime" class="form-control"></select>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 <div style="width: 20vw; z-index:2; position: absolute; bottom: 15px">
   <strong><p id="status"></p></strong>

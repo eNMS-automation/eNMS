@@ -770,83 +770,65 @@ export function getServiceState(id, first) {
   call(`/get_service_state/${id}`, function(result) {
     if (first || result.state.status == "Running") {
       colorService(id, "#89CFF0");
-      $("#status").text("Status: Running.");
       localStorage.setItem("path", id);
       localStorage.setItem("workflow", JSON.stringify(result.service));
       setTimeout(() => getServiceState(id), 300);
     } else {
-      $("#status").text("Status: Idle.");
       colorService(id, "#D2E5FF");
     }
   });
 }
 
 function displayWorkflowState(result) {
-  if (!nodes || !edges) return;
+  if (!nodes || !edges || !result.state || !result.state.progress) return;
   resetDisplay();
-  if (!result.state) {
-    $("#progress").hide();
-  } else if (result.state.progress) {
-    const mode = result.state.progress.device.total ? "device" : "service";
-    const progress = result.state.progress[mode];
-    $("#progress").show();
-    $("#progress-success").width(
-      `${(progress.success * 100) / progress.total}%`
-    );
-    $("#progress-failure").width(
-      `${(progress.failure * 100) / progress.total}%`
-    );
-    if (progress.success) $("#progress-success-span").text(progress.success);
-    if (progress.failure) $("#progress-failure-span").text(progress.failure);
-    $("#status").text(`Status: ${result.state.status}`);
-    if (result.state.services) {
-      $.each(result.state.services, (path, state) => {
-        const id = parseInt(path.split(">").slice(-1)[0]);
-        if (ends.has(id) || !(id in nodes._data)) return;
-        const progress = state.progress.device;
-        colorService(
-          id,
-          progress.skipped == progress.total
-            ? "#D3D3D3"
-            : state.success === true
-            ? "#32cd32"
-            : state.success === false
-            ? "#FF6666"
-            : "#00CCFF"
-        );
-        if (progress.total) {
-          let label = `<b>${nodes.get(id).name}</b>\n`;
-          let progressLabel = `Progress - ${progress.success +
-            progress.failure +
-            progress.skipped}/${progress.total}`;
-          label += `—————\n${progressLabel}`;
-          let progressInfo = [];
-          if (progress.success) progressInfo.push(`${progress.success} passed`);
-          if (progress.failure) progressInfo.push(`${progress.failure} failed`);
-          if (progress.skipped) {
-            progressInfo.push(`${progress.skipped} skipped`);
-          }
-          if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
-          nodes.update({
-            id: id,
-            label: label,
-          });
+  if (result.state.services) {
+    $.each(result.state.services, (path, state) => {
+      const id = parseInt(path.split(">").slice(-1)[0]);
+      if (ends.has(id) || !(id in nodes._data)) return;
+      const progress = state.progress.device;
+      colorService(
+        id,
+        progress.skipped == progress.total
+          ? "#D3D3D3"
+          : state.success === true
+          ? "#32cd32"
+          : state.success === false
+          ? "#FF6666"
+          : "#00CCFF"
+      );
+      if (progress.total) {
+        let label = `<b>${nodes.get(id).name}</b>\n`;
+        let progressLabel = `Progress - ${progress.success +
+          progress.failure +
+          progress.skipped}/${progress.total}`;
+        label += `—————\n${progressLabel}`;
+        let progressInfo = [];
+        if (progress.success) progressInfo.push(`${progress.success} passed`);
+        if (progress.failure) progressInfo.push(`${progress.failure} failed`);
+        if (progress.skipped) {
+          progressInfo.push(`${progress.skipped} skipped`);
         }
-      });
-    }
-    if (result.state.edges) {
-      $.each(result.state.edges, (id, devices) => {
-        if (!edges.get(id)) return;
-        edges.update({
+        if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
+        nodes.update({
           id: id,
-          label:
-            typeof devices == "string"
-              ? `<b>${devices}</b>`
-              : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
-          font: { size: 15, multi: "html" },
+          label: label,
         });
+      }
+    });
+  }
+  if (result.state.edges) {
+    $.each(result.state.edges, (id, devices) => {
+      if (!edges.get(id)) return;
+      edges.update({
+        id: id,
+        label:
+          typeof devices == "string"
+            ? `<b>${devices}</b>`
+            : `<b>${devices} DEVICE${devices == 1 ? "" : "S"}</b>`,
+        font: { size: 15, multi: "html" },
       });
-    }
+    });
   }
 }
 

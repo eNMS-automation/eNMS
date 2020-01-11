@@ -30,5 +30,7 @@ td.dt-center {
   margin: auto;
   padding: 7px 7px;
   margin-bottom: 5px;
-  width: fit-content;
+  width: intrinsic;
+  width: -moz-max-content;
+  width: -webkit-max-content;
 }

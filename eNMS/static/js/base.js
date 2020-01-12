@@ -639,7 +639,11 @@ export function copyToClipboard(text, isId) {
       const win = $(window)[direction]();
       const scroll = $(window)[scrollDir]();
       const menu = $(settings.menuSelector)[direction]();
-      let position = mouse + scroll;
+      const offset =
+        direction == "width"
+          ? $(".left_column").width()
+          : $(".header").height() + 2;
+      let position = mouse + scroll - offset;
       if (mouse + menu > win && menu < mouse) {
         position -= menu;
       }

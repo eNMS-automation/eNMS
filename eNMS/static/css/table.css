@@ -26,6 +26,7 @@ td.dt-center {
   text-align: center;
 }
 
+/* Cross-browser control alignment in the middle */
 .controls {
   margin: auto;
   padding: 7px 7px;

@@ -560,10 +560,6 @@ legend {
   border-color: #394d5f;
 }
 
-a:focus {
-  outline: 0;
-}
-
 /* Separator for the right-click menu */
 .divider {
   border-bottom: 1px solid #ddd;

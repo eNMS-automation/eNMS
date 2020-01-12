@@ -23,3 +23,8 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
   float: left;
   margin-right: 10px;
 }
+
+/* Prevent Chrome from highlight the workflow builder div with an outline */
+*:focus {
+  outline: none;
+}

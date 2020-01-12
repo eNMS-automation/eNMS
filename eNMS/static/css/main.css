@@ -30,11 +30,28 @@ body {
   float: left;
 }
 
+.nav-md .left_column {
+  width: 230px;
+}
+
+.nav-sm .left_column {
+  width: 70px;
+}
+
 .right_column {
   background: #ffffff;
   height: 100%;
   left: 230px;
   position: absolute;
+}
+
+.nav-sm .right_column {
+  left: 70px;
+  width: calc(100% - 70px);
+}
+
+.nav-md .right_column {
+  left: 230px;
   width: calc(100% - 230px);
 }
 

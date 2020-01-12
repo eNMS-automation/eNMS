@@ -1,6 +1,7 @@
 .tile_count {
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 5px;
+  padding: 20px 0px
 }
 
 .tile_count .tile_stats_count {
@@ -19,9 +20,6 @@
 }
 
 @media (min-width: 992px) {
-  footer {
-    margin-left: 230px;
-  }
   .tile_count .tile_stats_count {
     margin-bottom: 10px;
     border-bottom: 0;
@@ -33,35 +31,13 @@
 }
 
 .tile_count .tile_stats_count .count {
-  font-size: 30px;
   line-height: 47px;
   font-weight: 600;
-}
-
-@media (min-width: 768px) {
-  .tile_count .tile_stats_count .count {
-    font-size: 40px;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1100px) {
-  .tile_count .tile_stats_count .count {
-    font-size: 30px;
-  }
+  font-size: 45px;
 }
 
 .tile_count .tile_stats_count span {
-  font-size: 12px;
-}
-
-@media (min-width: 768px) {
-  .tile_count .tile_stats_count span {
-    font-size: 13px;
-  }
-}
-
-.tile_count .tile_stats_count i {
-  width: 12px;
+  font-size: 15px;
 }
 
 .tile_count .tile_stats_count {

@@ -600,13 +600,6 @@ legend {
   background-color: #ffff !important;
 }
 
-form:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-}
-
 fieldset {
   border: none;
   margin: 0;

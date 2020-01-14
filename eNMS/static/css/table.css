@@ -21,6 +21,14 @@ table.display td.center {
   float: right;
 }
 
+.dataTables_scrollBody {
+  margin-bottom: -10px;
+}
+
+.dataTables_paginate .pagination {
+  margin: 0;
+}
+
 th.dt-center,
 td.dt-center {
   text-align: center;

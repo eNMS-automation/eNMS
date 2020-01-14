@@ -46,22 +46,22 @@ title %} {% block stylesheets %} {{ super() }}
     <a tabindex="-1" href="#">Configuration</a>
   </li>
 </ul>
-<div style="z-index:100;" id="map"></div>
+<div style="z-index:2" id="map"></div>
 {% if view_type == "network" %}
 <div
   class="btn-group-horizontal"
-  style="z-index:1; position: absolute; top: 20px; left: 5vw"
+  style="z-index:3; position: absolute; top: 20px; left: 5vw"
 >
   <button
     class="btn btn-primary"
-    style="width: 8vw;"
+    style="width: 8vw"
     onclick="eNMS.base.showPanel('device_filtering')"
   >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
   </button>
   <button
     class="btn btn-primary"
-    style="width: 8vw;"
+    style="width: 8vw"
     onclick="eNMS.base.showPanel('link_filtering')"
   >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
@@ -70,6 +70,7 @@ title %} {% block stylesheets %} {{ super() }}
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
 <script>
   let viewType = "{{ view_type }}";
+  console.log(viewType)
 </script>
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>

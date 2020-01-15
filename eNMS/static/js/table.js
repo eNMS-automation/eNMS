@@ -697,7 +697,7 @@ models.result = class Result extends Base {
           <button type="button" id="btn-result-${
             this.id
           }" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.copyClipboard("btn-result-${this.id}", ${
+          onclick="eNMS.automation.copyClipboard('btn-result-${this.id}', ${
         this.instance
       })"
           data-tooltip="Copy to clipboard">

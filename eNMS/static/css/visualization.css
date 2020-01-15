@@ -5,7 +5,9 @@
 /* Cross-browser compatibility for width: fit-content needed 
 intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
 .controls {
-  z-index: 1;
+  display: none;
+  z-index: 3;
+  top: 15px;
   position: absolute;
   width: intrinsic;
   width: -moz-max-content;
@@ -14,7 +16,7 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
   transform: translate(-50%, 0);
 }
 
-.navbar-custom {
-  float: left;
-  padding: 7px 7px;
+.btn-search {
+  padding: 10 10;
+  width: 100px;
 }

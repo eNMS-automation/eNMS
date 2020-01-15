@@ -8,6 +8,10 @@ title %} {% block stylesheets %} {{ super() }}
   href="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.css') }}"
   rel="stylesheet"
 />
+<link
+  href="{{ url_for('static', filename='css/visualization.css') }}"
+  rel="stylesheet"
+/>
 {% endblock stylesheets %} {% block content %}
 <ul id="contextMenu" class="dropdown-menu" role="menu">
   <li class="menu dropdown-submenu geo-menu">
@@ -48,25 +52,20 @@ title %} {% block stylesheets %} {{ super() }}
 </ul>
 <div id="map"></div>
 {% if view_type == "network" %}
-<div
-  class="btn-group-horizontal"
-  style="z-index:3; position: absolute; top: 20px; left: 5vw"
->
+<nav class="navbar navbar-default controls" role="navigation">
   <button
-    class="btn btn-primary"
-    style="width: 8vw"
+    class="btn btn-primary btn-search"
     onclick="eNMS.base.showPanel('device_filtering')"
   >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
   </button>
   <button
-    class="btn btn-primary"
-    style="width: 8vw"
+    class="btn btn-primary btn-search"
     onclick="eNMS.base.showPanel('link_filtering')"
   >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
   </button>
-</div>
+</nav>
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
 <script>
   let viewType = "{{ view_type }}";

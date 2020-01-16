@@ -13,14 +13,19 @@ from functools import wraps
 from logging import info
 from os import listdir
 from werkzeug.wrappers import Response
+import threading
 
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.functions import fetch, handle_exception
-from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
+from eNMS.forms import form_actions, form_classes, form_postprocessing, \
+    form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.properties.diagram import type_to_diagram_properties
 from eNMS.properties.table import table_fixed_columns
+from eNMS.handoffssh.ssh_proxy import SshConnection
+
+# from eNMS.handoffssh.client import sshclient
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -129,7 +134,9 @@ def view(view_type):
 def workflow_builder():
     workflow, workflow_path = None, session.get("path", None)
     if workflow_path:
-        workflow = fetch("workflow", allow_none=True, id=workflow_path.split(">")[-1])
+        workflow = fetch("workflow",
+                         allow_none=True,
+                         id=workflow_path.split(">")[-1])
     return render_template(
         f"pages/workflow_builder.html",
         **{
@@ -160,6 +167,43 @@ def form(form_type):
     )
 
 
+@blueprint.route("/handoffssh/<id>", methods=["POST"])
+@monitor_requests
+def gensshhandoff(id):
+    calling_data = request.values
+    # device = fetch("device", id=calling_data['id'])
+    device = fetch("device", id=id)
+
+    # Setup and start server for user
+    if calling_data["credentials"] == "device":
+        userserver = SshConnection(
+            device.ip_address,
+            device.port,
+            device.username,
+            device.password,
+            current_user.name,
+        )
+    elif calling_data["credentials"] == "user":
+        userserver = SshConnection(
+            device.ip_address, device.port, None, None, current_user.name,
+        )
+
+    ts = threading.Thread(
+        target=userserver.start,
+        args=(device, calling_data["credentials"]),
+        name="ServerThread",
+    )
+    ts.start()
+
+    return {
+        "listeningport": userserver.listeningport,
+        "username": current_user.name,
+        "calling_password": userserver.calling_password,
+        "device": device.name,
+        "device_ip": device.ip_address,
+    }
+
+
 @blueprint.route("/view_service_results/<int:id>")
 @monitor_requests
 def view_service_results(id):
@@ -171,7 +215,9 @@ def view_service_results(id):
 @monitor_requests
 def download_output(id):
     data = fetch("data", id=id)
-    filename = f"{data.device_name}-{data.command}-{app.strip_all(data.runtime)}"
+    filename = f"{data.device_name}-\
+                {data.command}-\
+                {app.strip_all(data.runtime)}"
     return Response(
         (f"{line}\n" for line in data.output.splitlines()),
         mimetype="text/plain",
@@ -199,7 +245,8 @@ def route(page):
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        result = getattr(app, f)(*args, **form_postprocessing(form, request.form))
+        result = getattr(app, f)(*args,
+                                 **form_postprocessing(form, request.form))
     else:
         result = getattr(app, f)(*args)
     try:

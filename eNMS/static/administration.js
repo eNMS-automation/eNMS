@@ -8,7 +8,7 @@ fCall: false
 folders: false
 JSONEditor: false
 page: false
-showPanel: false
+showPanel: false 
 tables: false
 */
 

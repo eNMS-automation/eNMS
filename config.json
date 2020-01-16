@@ -100,5 +100,8 @@
     "zoom_level": 5,
     "tile_layer": "osm",
     "marker": "Image"
+  },
+  "handoffssh":{
+    "enabled": true
   }
 }

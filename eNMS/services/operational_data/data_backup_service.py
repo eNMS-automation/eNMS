@@ -13,7 +13,7 @@ from eNMS.models.automation import ConnectionService
 class DataBackupService(ConnectionService):
 
     __tablename__ = "data_backup_service"
-    pretty_name = "Operational Data Backup"
+    pretty_name = "Netmiko Operational Data Backup"
     parent_type = "connection_service"
     id = Column(Integer, ForeignKey("connection_service.id"), primary_key=True)
     enable_mode = Column(Boolean, default=True)
@@ -76,18 +76,26 @@ class ReplacementForm(FlaskForm):
 
 
 class OperationalDataForm(FlaskForm):
-    command = StringField("Command")
-    prefix = StringField("Prefix")
+    command = StringField("Result of this Command stored as Operational Data")
+    prefix = StringField("Label for this Command (Prefix)")
 
 
 class DataBackupForm(NetmikoForm):
     form_type = HiddenField(default="data_backup_service")
-    configuration = StringField()
+    configuration = StringField("Result of this Command stored as Configuration")
     operational_data = FieldList(FormField(OperationalDataForm), min_entries=3)
     replacements = FieldList(FormField(ReplacementForm), min_entries=3)
     groups = {
-        "Main Parameters": {
-            "commands": ["configuration", "operational_data", "replacements"],
+        "Create Configuration File": {
+            "commands": ["configuration"],
+            "default": "expanded",
+        },
+        "Create Operational Data File": {
+            "commands": ["operational_data"],
+            "default": "expanded",
+        },
+        "Search Response & Replace": {
+            "commands": ["replacements"],
             "default": "expanded",
         },
         **NetmikoForm.groups,

@@ -382,6 +382,7 @@ class Run(AbstractBase):
         elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
+
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)
@@ -421,6 +422,8 @@ class Run(AbstractBase):
         retries = self.number_of_retries + 1
         total_retries = 0
         while retries > 0 and total_retries < 1000:
+            retries -= 1
+            total_retries += 1
             try:
                 if retries:
                     self.log(
@@ -458,8 +461,6 @@ class Run(AbstractBase):
                 )
                 self.log("error", result, device)
                 return {"success": False, "result": result}
-            retries -= 1
-            total_retries += 1
         return results
 
     def get_results(self, payload, device=None):

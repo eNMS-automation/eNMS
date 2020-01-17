@@ -5,7 +5,7 @@ from re import M, sub
 from sqlalchemy import Boolean, ForeignKey, Integer
 from wtforms import HiddenField, StringField, SelectMultipleField, FieldList, FormField
 
-
+from eNMS import app
 from eNMS.database.dialect import Column, MutableList, SmallString, MutableDict
 from eNMS.forms.automation import NapalmForm
 from eNMS.models.automation import ConnectionService
@@ -35,21 +35,20 @@ class NapalmBackupService(ConnectionService):
             napalm_connection = run.napalm_connection(device)
             run.log("info", "Fetching Operational Data", device)
             for data_type in ("configuration", "operational_data"):
+                result = {}
                 for getter in getattr(run, data_type):
                     try:
-                        result = getattr(napalm_connection, getter)()
+                        result[getter] = str(getattr(napalm_connection, getter)())
                         for r in self.replacements:
-                            result = sub(
-                                r["pattern"],
-                                r["replace_with"],
-                                str(result),
-                                flags=M,
+                            result[getter] = sub(
+                                r["pattern"], r["replace_with"], result, flags=M,
                             )
                     except Exception as e:
-                        result = f"{getter} failed because of {e}"
+                        result[getter] = f"{getter} failed because of {e}"
+                result = app.str_dict(result)
                 setattr(device, data_type, result)
                 with open(path / data_type, "w") as file:
-                    file.write(str(result))
+                    file.write(result)
             device.last_status = "Success"
             device.last_duration = (
                 f"{(datetime.now() - device.last_runtime).total_seconds()}s"

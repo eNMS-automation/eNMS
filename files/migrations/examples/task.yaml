@@ -1,5 +1,5 @@
 - aps_job_id: Poller
-  creation_time: '2020-01-05 09:50:05.324649'
+  creation_time: '2020-01-19 13:31:12.628060'
   crontab_expression: ''
   description: Back-up device configurations
   devices: []
@@ -14,8 +14,9 @@
   service: 'Regression Workflow 9: Operational Data Backup'
   service_id: 56
   start_date: 09/10/2019 21:17:13
+  type: task
 - aps_job_id: Cluster Monitoring
-  creation_time: '2020-01-05 09:50:05.389943'
+  creation_time: '2020-01-19 13:31:12.837063'
   crontab_expression: ''
   description: Monitor eNMS cluster
   devices: []
@@ -29,3 +30,4 @@
   service: cluster_monitoring
   service_id: 3
   start_date: ''
+  type: task

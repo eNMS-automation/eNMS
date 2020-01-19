@@ -89,6 +89,8 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -188,6 +190,8 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -232,6 +236,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -277,6 +283,8 @@
   shared: false
   skip: true
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -336,6 +344,8 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   string1: cisco
   string2: s2
   time_between_retries: 10
@@ -392,7 +402,9 @@
   shared: false
   skip: true
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   type: configure_bgp_service
   validation_method: none
@@ -450,7 +462,9 @@
   shared: false
   skip: true
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_backup_service
@@ -511,7 +525,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -578,7 +594,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -642,7 +660,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: false
   strip_prompt: false
   time_between_retries: 10
@@ -707,7 +727,9 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: true
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 1
@@ -766,6 +788,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
   time_between_retries: 10
   timeout: 10
@@ -825,6 +848,8 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -882,7 +907,9 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -938,7 +965,9 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -994,7 +1023,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1049,7 +1080,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -1098,6 +1131,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: swiss_army_knife_service
   validation_method: none
@@ -1127,7 +1162,7 @@
   max_processes: 5
   maximum_runs: 1
   multiprocessing: false
-  name: '[Regression Workflow E: Iteration Targets] Modify Payload for Iteration'
+  name: '[Regression Workflow F: Workflow of Workflows] Modify Payload for Iteration'
   negative_logic: false
   notification_header: ''
   number_of_retries: 0
@@ -1146,12 +1181,14 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   source_code: "# Interfaces 1\r\ntargets = ['Loopback101', 'Loopback15'] if device.name\
     \ == \"Washington\" else ['Loopback9', 'Loopback1000']\r\nset_var('Interfaces\
     \ 1', targets, device=device.name)\r\n\r\n# Derived Devices\r\nset_var(\"Derived\
     \ Devices\", [\"Atlanta\", \"Austin\"] if device.name == \"Austin\" else [\"Washington\"\
     ], device=device.name)\r\n\r\n# Interfaces 2\r\nset_var('Interfaces 2', ['Loopback333',\
     \ 'Loopback334'])\r\nsave_result(True, {})"
+  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1213,7 +1250,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1284,6 +1323,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_extraction_service
   validation_method: none
@@ -1338,6 +1378,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_validation_service
   validation_method: dict_included
@@ -1388,6 +1429,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -1440,6 +1482,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
   time_between_retries: 10
   timeout: 60
@@ -1504,7 +1547,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1569,7 +1614,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1635,7 +1682,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1699,7 +1748,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 10
   type: netmiko_prompts_service
@@ -1748,9 +1799,11 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   source_code: "set_var(\"global_variable\", value=1050)\r\nset_var(\"variable\",\
     \ \"variable_in_variables\", section=\"variables\")\r\nsave_result(success=True,\
     \ result={})"
+  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1797,12 +1850,14 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   source_code: "set_var(\"variable1\", 999, device=device.name)\r\nset_var(\"variable2\"\
     , \"1000\", device=device.name, section=\"variables\")\r\nset_var(\"iteration_simple\"\
     , \"192.168.105.5\", section=\"pools\")\r\ndevices = [\"Boston\", \"Cincinnati\"\
     ] if device.name == \"Chicago\" else [\"Cleveland\", \"Washington\"]\r\nset_var(\"\
     iteration_device\", devices, section=\"pools\", device=device.name)\r\nsave_result(success=True,\
     \ result={})"
+  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -1861,7 +1916,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1924,7 +1981,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -1987,7 +2046,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2048,7 +2109,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 1
   type: napalm_getters_service
@@ -2106,7 +2169,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2166,7 +2231,9 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2224,7 +2291,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2282,7 +2351,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 60
   type: napalm_getters_service
@@ -2336,6 +2407,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2386,6 +2459,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: text
@@ -2436,6 +2511,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: ansible_playbook_service
   validation_method: dict_included
@@ -2494,7 +2571,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2557,7 +2636,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2620,7 +2701,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2683,7 +2766,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -2738,6 +2823,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -2789,6 +2875,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -2838,9 +2925,11 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   source_code: "set_var(\"list\", [1, 2], device=device.name)\r\nset_var(\"dict\"\
     , {\"a\": [\"o\", True, 4]}, device=device.name)\r\nsave_result(success=True,\
     \ result={})"
+  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -2902,6 +2991,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_extraction_service
   validation_method: none
@@ -2966,6 +3056,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_extraction_service
   validation_method: none
@@ -3019,6 +3110,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_validation_service
   validation_method: text
@@ -3069,6 +3161,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   time_between_retries: 10
   type: payload_validation_service
   validation_method: dict_included
@@ -3120,6 +3213,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -3172,6 +3267,7 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   source_code: "result = {\r\n \"get_var\": get_var(\"Interfaces 2\"),\r\n\"version\
     \ in parent workflow\": get_result(\"Show interfaces with Netmiko\", device=device.name,\
     \ workflow=\"Regression Workflow F: Workflow of Workflows\"),\r\n\"napalm workflow\
@@ -3181,6 +3277,7 @@
     \ get_result(\"netmiko_check_vrf_napalm\", device=device.name, workflow=\"Regression\
     \ Workflow 5: VRF creation and deletion with Napalm\"),\r\n}\r\nsave_result(success=True,\
     \ result=result)"
+  status: Idle
   time_between_retries: 10
   type: python_snippet_service
   validation_method: none
@@ -3241,7 +3338,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -3301,6 +3400,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3390,6 +3491,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3452,6 +3555,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3513,6 +3618,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3617,6 +3724,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3672,14 +3781,16 @@
   send_notification_method: mail
   services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
       Workflows] Regression Workflow 5: VRF creation and deletion with Napalm', '[Regression
-      Workflow E: Iteration Targets] Modify Payload for Iteration', '[Regression Workflow
-      F: Workflow of Workflows] Regression Workflow F S2: Access Variables from Parent
-      Workflow', '[Regression Workflow F: Workflow of Workflows] Regression Workflow
-      F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of Workflows]
-      Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
+      Workflow F: Workflow of Workflows] Modify Payload for Iteration', '[Regression
+      Workflow F: Workflow of Workflows] Regression Workflow F S2: Access Variables
+      from Parent Workflow', '[Regression Workflow F: Workflow of Workflows] Regression
+      Workflow F S1: Subworkflow of Workflow', '[Regression Workflow F: Workflow of
+      Workflows] Show interfaces with Netmiko', '[Shared] NAPALM: Get interfaces']
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3736,6 +3847,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3790,6 +3903,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3864,6 +3979,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -3959,6 +4076,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4036,6 +4155,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4098,6 +4219,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4176,15 +4299,17 @@
   scoped_name: 'Regression Workflow E: Iteration Targets'
   send_notification: false
   send_notification_method: mail
-  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow E: Iteration
-      Targets] Modify Payload for Iteration', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration Targets]
-      Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration Targets]
-      Iteration Targets Workflow - Test 4']
+  services: ['[Shared] Start', '[Shared] End', '[Regression Workflow F: Workflow of
+      Workflows] Modify Payload for Iteration', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 2', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 1', '[Regression Workflow E: Iteration
+      Targets] Iteration Target Workflow - Test 3', '[Regression Workflow E: Iteration
+      Targets] Iteration Targets Workflow - Test 4']
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4248,6 +4373,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4301,6 +4428,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4356,6 +4485,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4414,6 +4545,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4472,7 +4605,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 2
@@ -4534,7 +4669,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -4601,7 +4738,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   time_between_retries: 10
   timeout: 10
   type: data_backup_service
@@ -4656,6 +4795,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4706,6 +4847,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4756,6 +4899,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -4810,6 +4955,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4861,6 +5008,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   timeout: 15
   type: rest_call_service
@@ -4913,6 +5062,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -4972,7 +5123,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -5036,7 +5189,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -5100,7 +5255,9 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10
@@ -5176,6 +5333,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -5226,6 +5385,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -5276,6 +5437,8 @@
   shared: false
   skip: false
   skip_query: ''
+  skip_value: 'True'
+  status: Idle
   time_between_retries: 10
   type: workflow
   validation_method: none
@@ -5336,7 +5499,9 @@
   shared: true
   skip: false
   skip_query: ''
+  skip_value: 'True'
   start_new_connection: false
+  status: Idle
   strip_command: true
   strip_prompt: true
   time_between_retries: 10

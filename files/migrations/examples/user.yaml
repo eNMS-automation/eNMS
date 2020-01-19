@@ -2,3 +2,4 @@
   name: admin
   permissions: [Admin]
   small_menu: false
+  type: user

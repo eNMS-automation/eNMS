@@ -67,6 +67,7 @@
   never_update: false
   operator: all
   tasks: []
+  type: pool
   users: []
 - description: Devices only
   device_configuration: ''
@@ -135,6 +136,7 @@
   never_update: false
   operator: all
   tasks: []
+  type: pool
   users: []
 - description: Links only
   device_configuration: ''
@@ -202,6 +204,7 @@
   never_update: false
   operator: all
   tasks: []
+  type: pool
   users: []
 - description: Datacenter San Francisco
   device_configuration: ''
@@ -270,6 +273,7 @@
   never_update: false
   operator: all
   tasks: []
+  type: pool
   users: []
 - description: Datacenter New York
   device_configuration: ''
@@ -339,6 +343,7 @@
   never_update: false
   operator: all
   tasks: []
+  type: pool
   users: []
 - description: Datacenter Chicago
   device_configuration: ''
@@ -407,6 +412,7 @@
   never_update: false
   operator: all
   tasks: []
+  type: pool
   users: []
 - description: ''
   device_configuration: ''
@@ -474,4 +480,5 @@
   never_update: false
   operator: all
   tasks: []
+  type: pool
   users: []

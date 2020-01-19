@@ -27,7 +27,6 @@ const panelSize = {
   add_services: "800 700",
   calendar: "1200 650",
   compare: "auto 700",
-  configuration: "800 auto",
   database_deletion: "700 400",
   database_migration: "700 300",
   device_connection: "400 500",
@@ -38,16 +37,13 @@ const panelSize = {
   excel_import: "400 150",
   excel_export: "400 150",
   git: "900 200",
-  import_service: "500 400",
   instance_deletion: "400 130",
   link_filtering: "700 600",
-  logs: "1200 500",
-  log_filtering: "700 350",
-  notifications: "1100 400",
+  logs: "800 500",
   pool: "800 600",
   pool_filtering: "1000 700",
   pool_objects: "700 550",
-  result_table: "1200 700",
+  result_table: "800 500",
   service_results: "1200 700",
   server: "600 250",
   server_filtering: "700 450",
@@ -275,7 +271,7 @@ export function createPanel(
     theme: panelThemes[name] || "light filledlight",
     headerLogo: "../static/images/logo.png",
     contentOverflow: "hidden scroll",
-    contentSize: panelSize[name] || "800 600",
+    contentSize: panelSize[name] || "600 400",
     position: "center-top 0 10",
     headerTitle: title,
     dragit: {
@@ -326,6 +322,7 @@ export function showDeletionPanel(instance) {
 }
 
 function preprocessForm(panel, id, type, duplicate) {
+  console.log(id)
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
       const property =
@@ -703,7 +700,7 @@ function showAllAlerts() {
 
 function getAlerts(preview) {
   let alerts = JSON.parse(localStorage.getItem("alerts")).reverse();
-  if (preview) alerts = alerts.splice(0, 6);
+  if (preview) alerts = alerts.splice(0, 4);
   return alerts
     .map((alert) => {
       if (preview) {

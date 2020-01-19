@@ -1,15 +1,3 @@
-/* Architecture
-+------------------------+------------------------------+
-| .left_column {         | .right_column {              |
-|   background: #002240; |   background: #FFFFFF;       |
-|   width: 230px;        |   width: calc(100% - 230px); |
-|   height: 100%;        |   left: 230px;               |
-|   float: left          |   position: absolute;        |
-| }                      |   height: 100%               |
-|                        | }                            |
-+------------------------+------------------------------+
-*/
-
 body {
   height: 100%;
   width: 100%;
@@ -25,7 +13,6 @@ body {
 
 .left_column {
   background: #002240;
-  width: 230px;
   height: 100%;
   float: left;
 }
@@ -41,7 +28,6 @@ body {
 .right_column {
   background: #ffffff;
   height: 100%;
-  left: 230px;
   position: absolute;
 }
 

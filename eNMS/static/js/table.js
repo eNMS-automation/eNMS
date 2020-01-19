@@ -72,7 +72,7 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
         });
-      $(".controls").html(models[type].controls);
+      $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing();
       this.api().columns.adjust();
     },

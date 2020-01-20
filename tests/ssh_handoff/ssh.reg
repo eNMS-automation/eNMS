@@ -1,0 +1,8 @@
+REGEDIT4
+[HKEY_CLASSES_ROOT\ssh]
+@="URL:ssh Protocol"
+"URL Protocol"=""
+[HKEY_CLASSES_ROOT\ssh\shell]
+[HKEY_CLASSES_ROOT\ssh\shell\open]
+[HKEY_CLASSES_ROOT\ssh\shell\open\command]
+@="\"C:\\Users\\minto\\Desktop\\VM\\eNMS\\tests\\ssh_handoff\\putty_ssh.bat\" %1"

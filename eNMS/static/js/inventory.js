@@ -112,6 +112,33 @@ function sshConnection(id) {
   });
 }
 
+// eslint-disable-next-line
+function handOffSSHConnection(id) {
+  fCall(`/handoffssh/${id}`, `#connection-parameters-form-${id}`, function(result) {
+    // console.log(result)
+    url = config.app.address;
+    if (!url) {
+      url = `${window.location.protocol}//${window.location.host}`;
+    }
+    console.log(result)
+    const messageLink = `Click here to connect to ${result.device} (${result.device_ip})`;
+    const link = `<a href='ssh://${result.username}@${window.location.hostname}:${result.listeningport}'>${messageLink}</a>`;
+
+    alertify.notify(link, "success", 30);
+})
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomStr() {
+  return randomstring = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+}
+
+// eslint-disable-next-line
 function savePoolObjects(id) {
   fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);

@@ -127,6 +127,7 @@ class BaseController:
         "get_tree_files",
         "get_workflow_results",
         "get_workflow_services",
+        "handoffssh",
         "import_service",
         "import_topology",
         "migration_export",

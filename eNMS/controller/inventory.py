@@ -1,7 +1,9 @@
 from collections import Counter
+from flask_login import current_user
 from logging import info
 from sqlalchemy import and_
 from subprocess import Popen
+from threading import Thread
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -10,6 +12,7 @@ from xlwt import Workbook
 from eNMS.controller.base import BaseController
 from eNMS.database import Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
+from eNMS.handoffssh.ssh_proxy import SshConnection
 from eNMS.models import models, model_properties, property_types
 from eNMS.properties import field_conversion
 
@@ -65,6 +68,38 @@ class InventoryController(BaseController):
             if log.source == fetch("device", id=device_id).ip_address
         ]
         return "\n".join(device_logs)
+
+    def handoffssh(self, id, **kwargs):
+        # device = fetch("device", id=calling_data['id'])
+        device = fetch("device", id=id)
+
+        # Setup and start server for user
+        if kwargs["credentials"] == "device":
+            userserver = SshConnection(
+                device.ip_address,
+                device.port,
+                device.username,
+                device.password,
+                current_user.name,
+            )
+        elif kwargs["credentials"] == "user":
+            userserver = SshConnection(
+                device.ip_address, device.port, None, None, current_user.name,
+            )
+
+        ts = Thread(
+            target=userserver.start,
+            args=(device, kwargs["credentials"]),
+            name="ServerThread",
+        )
+        ts.start()
+
+        return {
+            "listeningport": userserver.listeningport,
+            "username": userserver.sshlogin,
+            "device": device.name,
+            "device_ip": device.ip_address,
+        }
 
     def get_device_network_data(self, device_id):
         device = fetch("device", id=device_id)

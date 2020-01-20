@@ -114,9 +114,8 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function handOffSSHConnection(id) {
-  fCall(`/handoffssh/${id}`, `#connection-parameters-form-${id}`, function(result) {
-    // console.log(result)
-    url = config.app.address;
+  fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(result) {
+    let url = config.app.address;
     if (!url) {
       url = `${window.location.protocol}//${window.location.host}`;
     }
@@ -215,6 +214,7 @@ function showDeviceResultsPanel(device) {
 }
 
 configureNamespace("inventory", [
+  handOffSSHConnection,
   sshConnection,
   savePoolObjects,
   showPoolObjectsPanel,

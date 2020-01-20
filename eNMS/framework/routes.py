@@ -14,7 +14,6 @@ from functools import wraps
 from logging import info
 from os import listdir
 from werkzeug.wrappers import Response
-import threading
 
 from eNMS import app
 from eNMS.database import Session
@@ -22,7 +21,6 @@ from eNMS.database.functions import fetch, handle_exception
 from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.properties.diagram import type_to_diagram_properties
-from eNMS.handoffssh.ssh_proxy import SshConnection
 
 
 blueprint = Blueprint("blueprint", __name__, template_folder="../templates")
@@ -127,42 +125,6 @@ def form(form_type):
             "form_type": form_type,
         },
     )
-
-
-@blueprint.route("/handoffssh/<id>", methods=["POST"])
-@monitor_requests
-def gensshhandoff(id):
-    calling_data = request.values
-    # device = fetch("device", id=calling_data['id'])
-    device = fetch("device", id=id)
-
-    # Setup and start server for user
-    if calling_data["credentials"] == "device":
-        userserver = SshConnection(
-            device.ip_address,
-            device.port,
-            device.username,
-            device.password,
-            current_user.name,
-        )
-    elif calling_data["credentials"] == "user":
-        userserver = SshConnection(
-            device.ip_address, device.port, None, None, current_user.name,
-        )
-
-    ts = threading.Thread(
-        target=userserver.start,
-        args=(device, calling_data["credentials"]),
-        name="ServerThread",
-    )
-    ts.start()
-
-    return {
-        "listeningport": userserver.listeningport,
-        "username": userserver.sshlogin,
-        "device": device.name,
-        "device_ip": device.ip_address,
-    }
 
 
 @blueprint.route("/view_service_results/<int:id>")

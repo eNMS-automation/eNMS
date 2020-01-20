@@ -46,7 +46,7 @@ function handOffSSHConnection(id) {
     }
     console.log(result)
     const messageLink = `Click here to connect to ${result.device} (${result.device_ip})`;
-    const link = `<a href='ssh://${result.username}:${result.calling_password}@${window.location.hostname}:${result.listeningport}'>${messageLink}</a>`;
+    const link = `<a href='ssh://${result.username}@${window.location.hostname}:${result.listeningport}'>${messageLink}</a>`;
 
     alertify.notify(link, "success", 30);
 })

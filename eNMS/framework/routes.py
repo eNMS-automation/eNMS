@@ -18,8 +18,7 @@ import threading
 from eNMS import app
 from eNMS.database import Session
 from eNMS.database.functions import fetch, handle_exception
-from eNMS.forms import form_actions, form_classes, form_postprocessing, \
-    form_templates
+from eNMS.forms import form_actions, form_classes, form_postprocessing, form_templates
 from eNMS.forms.administration import LoginForm
 from eNMS.properties.diagram import type_to_diagram_properties
 from eNMS.properties.table import table_fixed_columns
@@ -134,9 +133,7 @@ def view(view_type):
 def workflow_builder():
     workflow, workflow_path = None, session.get("path", None)
     if workflow_path:
-        workflow = fetch("workflow",
-                         allow_none=True,
-                         id=workflow_path.split(">")[-1])
+        workflow = fetch("workflow", allow_none=True, id=workflow_path.split(">")[-1])
     return render_template(
         f"pages/workflow_builder.html",
         **{
@@ -197,8 +194,7 @@ def gensshhandoff(id):
 
     return {
         "listeningport": userserver.listeningport,
-        "username": current_user.name,
-        "calling_password": userserver.calling_password,
+        "username": userserver.sshlogin,
         "device": device.name,
         "device_ip": device.ip_address,
     }
@@ -245,8 +241,7 @@ def route(page):
         form = form_classes[form_type](request.form)
         if not form.validate_on_submit():
             return jsonify({"invalid_form": True, **{"errors": form.errors}})
-        result = getattr(app, f)(*args,
-                                 **form_postprocessing(form, request.form))
+        result = getattr(app, f)(*args, **form_postprocessing(form, request.form))
     else:
         result = getattr(app, f)(*args)
     try:

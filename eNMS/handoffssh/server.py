@@ -37,10 +37,9 @@ class Server(paramiko.ServerInterface):
 
     good_pub_key = paramiko.RSAKey(data=decodebytes(data))
 
-    def __init__(self, calling_user=None, calling_password=None):
+    def __init__(self, sshlogin=None):
         self.event = threading.Event()
-        self.calling_user = calling_user
-        self.calling_password = calling_password
+        self.sshlogin = sshlogin
 
     def check_channel_request(self, kind, chanid):
         if kind == "session":
@@ -48,49 +47,52 @@ class Server(paramiko.ServerInterface):
         return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
 
     def check_auth_password(self, username, password):
-        if (username == self.calling_user) and (password == self.calling_password):
+        return paramiko.AUTH_FAILED
+
+    def check_auth_none(self, username):
+        if username == self.sshlogin:
             return paramiko.AUTH_SUCCESSFUL
         return paramiko.AUTH_FAILED
 
-    def check_auth_publickey(self, username, key):
-        # print("Auth attempt with key: " + u(hexlify(key.get_fingerprint())))
-        if (username == "robey") and (key == self.good_pub_key):
-            return paramiko.AUTH_SUCCESSFUL
-        return paramiko.AUTH_FAILED
+    # def check_auth_publickey(self, username, key):
+    #     # print("Auth attempt with key: " + u(hexlify(key.get_fingerprint())))
+    #     if (username == self.sshlogin) and (key == self.good_pub_key):
+    #         return paramiko.AUTH_SUCCESSFUL
+    #     return paramiko.AUTH_FAILED
 
-    def check_auth_gssapi_with_mic(
-        self, username, gss_authenticated=paramiko.AUTH_FAILED, cc_file=None
-    ):
-        """
-        .. note::
-            We are just checking in `AuthHandler` that the given user is a
-            valid krb5 principal! We don't check if the krb5 principal is
-            allowed to log in on the server, because there is no way to do that
-            in python. So if you develop your own SSH server with paramiko for
-            a certain platform like Linux, you should call ``krb5_kuserok()`` in
-            your local kerberos library to make sure that the krb5_principal
-            has an account on the server and is allowed to log in as a user.
+    # def check_auth_gssapi_with_mic(
+    #     self, username, gss_authenticated=paramiko.AUTH_FAILED, cc_file=None
+    # ):
+    #     """
+    #     .. note::
+    #         We are just checking in `AuthHandler` that the given user is a
+    #         valid krb5 principal! We don't check if the krb5 principal is
+    #         allowed to log in on the server, because there is no way to do that
+    #         in python. So if you develop your own SSH server with paramiko for
+    #         a certain platform like Linux, you should call ``krb5_kuserok()`` in
+    #         your local kerberos library to make sure that the krb5_principal
+    #         has an account on the server and is allowed to log in as a user.
 
-        .. seealso::
-            `krb5_kuserok() man page
-            <http://www.unix.com/man-page/all/3/krb5_kuserok/>`_
-        """
-        if gss_authenticated == paramiko.AUTH_SUCCESSFUL:
-            return paramiko.AUTH_SUCCESSFUL
-        return paramiko.AUTH_FAILED
+    #     .. seealso::
+    #         `krb5_kuserok() man page
+    #         <http://www.unix.com/man-page/all/3/krb5_kuserok/>`_
+    #     """
+    #     if gss_authenticated == paramiko.AUTH_SUCCESSFUL:
+    #         return paramiko.AUTH_SUCCESSFUL
+    #     return paramiko.AUTH_FAILED
 
-    def check_auth_gssapi_keyex(
-        self, username, gss_authenticated=paramiko.AUTH_FAILED, cc_file=None
-    ):
-        if gss_authenticated == paramiko.AUTH_SUCCESSFUL:
-            return paramiko.AUTH_SUCCESSFUL
-        return paramiko.AUTH_FAILED
+    # def check_auth_gssapi_keyex(
+    #     self, username, gss_authenticated=paramiko.AUTH_FAILED, cc_file=None
+    # ):
+    #     if gss_authenticated == paramiko.AUTH_SUCCESSFUL:
+    #         return paramiko.AUTH_SUCCESSFUL
+    #     return paramiko.AUTH_FAILED
 
-    def enable_auth_gssapi(self):
-        return True
+    # def enable_auth_gssapi(self):
+    #     return True
 
     def get_allowed_auths(self, username):
-        return "gssapi-keyex,gssapi-with-mic,password,publickey"
+        return "none,password"
 
     def check_channel_shell_request(self, channel):
         self.event.set()

@@ -11,9 +11,6 @@ import traceback
 import random
 import string
 import paramiko
-# from paramiko.py3compat import u
-
-# from paramiko.py3compat import b, u, decodebytes
 
 
 class SshConnection:
@@ -35,8 +32,12 @@ class SshConnection:
         self.chan = None
         self.calling_user = calling_user
         all_chars = string.ascii_letters + string.digits
-        self.calling_password = "".join(random.choice(all_chars)
-                                        for i in range(32))
+        self.sshlogin = (
+            self.calling_user
+            + "___"
+            + "".join(random.choice(all_chars) for i in range(32))
+        )
+        self.calling_password = "".join(random.choice(all_chars) for i in range(32))
         # setup logging
 
         logstring = "".join(random.choice(all_chars) for i in range(6))
@@ -48,8 +49,8 @@ class SshConnection:
         logging.getLogger(logstring).setLevel(logging.INFO)
         fmt = logging.Formatter("%(message)s")
         fh = logging.FileHandler(
-            filename=f'{self.logpath}/{hostname}-\
-                {datetime.datetime.now().strftime("%m%d%y_%H%M%S")}.log'
+            filename=f'{self.logpath}/{hostname}\
+                -{datetime.datetime.now().strftime("%m%d%y_%H%M%S")}.log'
         )
         fh.terminator = ""
         fh.setFormatter(fmt)
@@ -85,8 +86,7 @@ class SshConnection:
             sock.settimeout(30)
             client, addr = sock.accept()
         except Exception as e:
-            self.sessionLogger.info("*** Listen/accept failed: " + str(e)
-                                    + "\n")
+            self.sessionLogger.info("*** Listen/accept failed: " + str(e) + "\n")
             traceback.print_exc()
             sys.exit(1)
 
@@ -104,8 +104,10 @@ class SshConnection:
                 )
                 raise
             t.add_server_key(self.host_key)
-            server = Server(self.calling_user, self.calling_password)
+            # server = Server(self.calling_user, self.calling_password)
+            server = Server(self.sshlogin)
             try:
+                # t.start()
                 t.start_server(server=server)
             except paramiko.SSHException:
                 self.sessionLogger.info("*** SSH negotiation failed.\n")
@@ -120,17 +122,13 @@ class SshConnection:
 
             server.event.wait(10)
             if not server.event.is_set():
-                self.sessionLogger.info("*** Client never asked \
-                                        for a shell.\n")
+                self.sessionLogger.info("*** Client never asked for a shell.\n")
                 sys.exit(1)
-            self.chan.send(f"\r\n\r\n\
-                            Connecting you to {self.hostname}...\
-                            \r\n\r\n")
+            self.chan.send(f"\r\n\r\nConnecting you to {self.hostname}...\r\n\r\n")
 
         except Exception as e:
             self.sessionLogger.info(
-                "*** Caught exception: " + str(e.__class__) + ": " + str(e)
-                + "\n"
+                "*** Caught exception: " + str(e.__class__) + ": " + str(e) + "\n"
             )
             traceback.print_exc()
             try:
@@ -190,8 +188,8 @@ class SshConnection:
                 password += self.chan.recv(8).decode("utf-8")
             self.chan.send("\r\n\r\n")
         self.sessionLogger.info(
-            f"\r\n\r\nConnecting {self.calling_user} to {username.strip()}@\
-                {self.hostname}\r\n\r\n"
+            f"\r\n\r\nConnecting {self.calling_user} \
+            to {username.strip()}@{self.hostname}\r\n\r\n"
         )
         return (username.strip(), password.strip())
 
@@ -222,17 +220,15 @@ class SshConnection:
             threading.Event().clear()
         except Exception as e:
             self.sessionLogger.info(
-                f"There was an error attempting to connect to\
-                     {device.ip_address}.  Error: {e}\n"
+                f"There was an error attempting to connect to \
+                {device.ip_address}.  Error: {e}\n"
             )
             sshdevice.close()
             self.transport.close()
             threading.currentThread().exit(1)
 
-        tc = threading.Thread(target=self.recv_data,
-                              args=(sshdevice, self.chan))
+        tc = threading.Thread(target=self.recv_data, args=(sshdevice, self.chan))
         tc.start()
 
-        ts = threading.Thread(target=self.send_data, args=(sshdevice,
-                                                           self.chan))
+        ts = threading.Thread(target=self.send_data, args=(sshdevice, self.chan))
         ts.start()

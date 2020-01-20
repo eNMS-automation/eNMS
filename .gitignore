@@ -49,3 +49,6 @@ eNMS/.vscode
 
 # Apple files
 ._*
+
+# RSA Key (needs to be unique per instance)
+rsa.key

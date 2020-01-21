@@ -103,10 +103,8 @@ class SshConnection:
                 )
                 raise
             t.add_server_key(self.host_key)
-            # server = Server(self.calling_user, self.calling_password)
             server = Server(self.sshlogin)
             try:
-                # t.start()
                 t.start_server(server=server)
             except paramiko.SSHException:
                 self.sessionLogger.info("*** SSH negotiation failed.\n")
@@ -166,33 +164,7 @@ class SshConnection:
             else:
                 svr_chan.close()
 
-    def get_usercreds(self):
-        """
-        Request user credentials.
-        Convert from bytes to str and strip whitespace.
-        """
-        username = ""
-        password = ""
-        self.chan.send("Username: ")
-        while username == "":
-            while "\r" not in username:
-                chars = ""
-                chars += self.chan.recv(8).decode("utf-8")
-                self.chan.send(chars)
-                username += chars
-
-        self.chan.send("\r\nPassword: ")
-        while password == "":
-            while "\r" not in password:
-                password += self.chan.recv(8).decode("utf-8")
-            self.chan.send("\r\n\r\n")
-        self.sessionLogger.info(
-            f"\r\n\r\nConnecting {self.calling_user} \
-            to {username.strip()}@{self.hostname}\r\n\r\n"
-        )
-        return (username.strip(), password.strip())
-
-    def start(self, device, cred_type):
+    def start(self, device):
         """
         Starts the server session and then
         connects to the device when a connection is received.
@@ -200,11 +172,9 @@ class SshConnection:
         self.create_server()
         while self.chan is None:
             time.sleep(0.5)
-        if cred_type == "user":
-            username, password = self.get_usercreds()
-        else:
-            username = device.username
-            password = device.password
+
+        username, password = self.username, self.password
+
         sshdevice = SshClient(
             device.ip_address, username, password, self.chan, port=device.port
         )

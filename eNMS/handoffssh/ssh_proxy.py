@@ -37,7 +37,6 @@ class SshConnection:
             + "___"
             + "".join(random.choice(all_chars) for i in range(32))
         )
-        print("tt"*100, self.sshlogin)
         self.calling_password = "".join(random.choice(all_chars) for i in range(32))
         # setup logging
 
@@ -65,7 +64,6 @@ class SshConnection:
             )
             genkey = paramiko.RSAKey.generate(2048)
             genkey.write_private_key_file("rsa.key")
-        self.DoGSSAPIKeyExchange = True
         if listeningport is None:
             self.listeningport = random.choice(range(50000, 50999))
         else:
@@ -94,7 +92,7 @@ class SshConnection:
         self.sessionLogger.info(f"Got a connection from {addr[0]}!\n")
 
         try:
-            t = paramiko.Transport(client, gss_kex=self.DoGSSAPIKeyExchange)
+            t = paramiko.Transport(client)
             self.transport = t
             t.set_gss_host(socket.getfqdn(""))
             try:

@@ -17,11 +17,9 @@ class SshConnection:
     def __init__(
         self,
         hostname,
-        port,
         username,
         password,
         calling_user=None,
-        listeningport=None,
         logpath="./logs/handoffssh_logs/",
         loglevel="info",
     ):
@@ -64,17 +62,13 @@ class SshConnection:
             )
             genkey = paramiko.RSAKey.generate(2048)
             genkey.write_private_key_file("rsa.key")
-        if listeningport is None:
-            self.listeningport = random.choice(range(50000, 50999))
-        else:
-            self.listeningport = int(listeningport)
+        self.port = random.choice(range(50000, 50999))
 
     def create_server(self):
-        # now connect
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            sock.bind(("", self.listeningport))
+            sock.bind(("", self.port))
         except Exception as e:
             self.sessionLogger.info("*** Bind failed: " + str(e) + "\n")
             traceback.print_exc()
@@ -96,7 +90,9 @@ class SshConnection:
             self.transport = t
             t.set_gss_host(socket.getfqdn(""))
             try:
+                print("ttt"*100)
                 t.load_server_moduli()
+                print("taat"*100)
             except Exception:
                 self.sessionLogger.info(
                     "(Failed to load moduli -- gex will be unsupported.)\n'"
@@ -165,10 +161,6 @@ class SshConnection:
                 svr_chan.close()
 
     def start(self, device):
-        """
-        Starts the server session and then
-        connects to the device when a connection is received.
-        """
         self.create_server()
         while self.chan is None:
             time.sleep(0.5)

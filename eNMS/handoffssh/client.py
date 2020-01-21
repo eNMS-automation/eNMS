@@ -1,17 +1,17 @@
-import paramiko
+from paramiko import client, SSHClient, WarningPolicy
 import time
 
 
-class SshClient(paramiko.SSHClient):
+class SshClient(SSHClient):
     def __init__(self, hostname, username, password, channel, port=22, timeout=5):
         self.hostname = hostname
         self.port = port
         self.username = username
         self.password = password
         self.channel = channel
-        self._client = paramiko.client.SSHClient()
+        self._client = client.SSHClient()
         self._client.load_system_host_keys()
-        self._client.set_missing_host_key_policy(paramiko.WarningPolicy)
+        self._client.set_missing_host_key_policy(WarningPolicy)
 
     def connect(self):
         self._client.connect(

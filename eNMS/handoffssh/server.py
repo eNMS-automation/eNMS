@@ -37,9 +37,9 @@ class Server(paramiko.ServerInterface):
 
     good_pub_key = paramiko.RSAKey(data=decodebytes(data))
 
-    def __init__(self, sshlogin=None):
+    def __init__(self, username=None):
         self.event = threading.Event()
-        self.sshlogin = sshlogin
+        self.username = username
 
     def check_channel_request(self, kind, chanid):
         if kind == "session":
@@ -50,7 +50,7 @@ class Server(paramiko.ServerInterface):
         return paramiko.AUTH_FAILED
 
     def check_auth_none(self, username):
-        if username == self.sshlogin:
+        if username == self.username:
             return paramiko.AUTH_SUCCESSFUL
         return paramiko.AUTH_FAILED
 

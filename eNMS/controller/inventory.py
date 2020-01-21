@@ -70,32 +70,24 @@ class InventoryController(BaseController):
         return "\n".join(device_logs)
 
     def handoffssh(self, id, **kwargs):
-        # device = fetch("device", id=calling_data['id'])
         device = fetch("device", id=id)
-
-        # Setup and start server for user
         if kwargs["credentials"] == "device":
             userserver = SshConnection(
                 device.ip_address,
-                device.port,
                 device.username,
                 device.password,
                 current_user.name,
             )
         elif kwargs["credentials"] == "user":
             userserver = SshConnection(
-                device.ip_address, device.port, None, None, current_user.name,
+                device.ip_address, None, None, current_user.name,
             )
 
-        ts = Thread(
-            target=userserver.start,
-            args=(device, kwargs["credentials"]),
-            name="ServerThread",
-        )
+        ts = Thread(target=userserver.start, args=(device,),)
         ts.start()
 
         return {
-            "listeningport": userserver.listeningport,
+            "port": userserver.port,
             "username": userserver.sshlogin,
             "device": device.name,
             "device_ip": device.ip_address,

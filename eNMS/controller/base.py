@@ -312,7 +312,6 @@ class BaseController:
                 "apscheduler.job_defaults.max_instances": "3",
             }
         )
-
         self.scheduler.start()
 
     def init_forms(self):

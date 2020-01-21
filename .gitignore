@@ -49,3 +49,6 @@ eNMS/.vscode
 
 # Apple files
 ._*
+
+# SSH handoff
+rsa.key

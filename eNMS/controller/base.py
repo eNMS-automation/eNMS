@@ -584,7 +584,7 @@ class BaseController:
                     parameters = yaml.load(data)
                     device.update(**{"dont_update_pools": True, **parameters})
                 for data in ("configuration", "operational_data"):
-                    filepath = Path(dir.path) / dir.name / data
+                    filepath = Path(dir.path) / data
                     if not filepath.exists():
                         continue
                     with open(filepath) as file:

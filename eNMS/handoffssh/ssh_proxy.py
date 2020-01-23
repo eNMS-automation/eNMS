@@ -31,9 +31,7 @@ class SshConnection:
         self.calling_user = calling_user
         all_chars = string.ascii_letters + string.digits
         self.sshlogin = (
-            self.calling_user
-            + "___"
-            + "".join(choice(all_chars) for i in range(32))
+            self.calling_user + "___" + "".join(choice(all_chars) for i in range(32))
         )
         self.calling_password = "".join(choice(all_chars) for i in range(32))
         logstring = "".join(choice(all_chars) for i in range(6))

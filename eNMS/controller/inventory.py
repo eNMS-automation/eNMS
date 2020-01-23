@@ -73,10 +73,7 @@ class InventoryController(BaseController):
         device = fetch("device", id=id)
         if kwargs["credentials"] == "device":
             userserver = SshConnection(
-                device.ip_address,
-                device.username,
-                device.password,
-                current_user.name,
+                device.ip_address, device.username, device.password, current_user.name,
             )
         elif kwargs["credentials"] == "user":
             userserver = SshConnection(

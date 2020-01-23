@@ -493,7 +493,10 @@ class BaseController:
         constraints = self.build_filtering_constraints(table, **kwargs)
         if table == "result":
             constraints.append(
-                models["result"].service.has(id=kwargs["instance"]["id"])
+                getattr(
+                    models["result"],
+                    "device" if kwargs["instance"]["type"] == "device" else "service",
+                ).has(id=kwargs["instance"]["id"])
             )
             if kwargs.get("runtime"):
                 constraints.append(models["result"].parent_runtime == kwargs["runtime"])

@@ -18,7 +18,6 @@ export const models = {};
 
 export function initTable(type, instance, runtime, id) {
   // eslint-disable-next-line new-cap
-  console.log($(id ? `#${id}` : "#table").length)
   tables[type] = $(id ? `#${id}` : "#table").DataTable({
     serverSide: true,
     orderCellsTop: true,

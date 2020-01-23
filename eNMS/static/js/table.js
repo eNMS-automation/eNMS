@@ -935,7 +935,6 @@ models.changelog = class Changelog extends Base {
         search: "text",
         className: "dt-body-left",
       },
-      { data: "buttons", width: "130px" },
     ];
   }
 
@@ -947,13 +946,6 @@ models.changelog = class Changelog extends Base {
     ];
   }
 
-  get buttons() {
-    return [
-      `<ul class="pagination pagination-lg" style="margin: 0px;">
-      ${this.deleteInstanceButton}
-      </ul>`,
-    ];
-  }
 };
 
 models.event = class Event extends Base {

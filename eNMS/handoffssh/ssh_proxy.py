@@ -8,7 +8,7 @@ import datetime
 import socket
 import sys
 import traceback
-import random
+from random import choice
 import string
 import paramiko
 
@@ -33,12 +33,10 @@ class SshConnection:
         self.sshlogin = (
             self.calling_user
             + "___"
-            + "".join(random.choice(all_chars) for i in range(32))
+            + "".join(choice(all_chars) for i in range(32))
         )
-        self.calling_password = "".join(random.choice(all_chars) for i in range(32))
-        # setup logging
-
-        logstring = "".join(random.choice(all_chars) for i in range(6))
+        self.calling_password = "".join(choice(all_chars) for i in range(32))
+        logstring = "".join(choice(all_chars) for i in range(6))
         self.loglevel = loglevel
         self.logpath = logpath
         if not os.path.exists(self.logpath):
@@ -53,61 +51,34 @@ class SshConnection:
         fh.terminator = ""
         fh.setFormatter(fmt)
         self.sessionLogger.addHandler(fh)
-
         try:
             self.host_key = paramiko.RSAKey.from_private_key_file("rsa.key")
         except FileNotFoundError:
-            self.sessionLogger.info(
-                "Error - RSA Key file does not exist.  Generating..."
-            )
             genkey = paramiko.RSAKey.generate(2048)
             genkey.write_private_key_file("rsa.key")
-        self.port = random.choice(range(50000, 50999))
+        self.port = choice(range(50000, 50999))
 
     def create_server(self):
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            sock.bind(("", self.port))
-        except Exception as e:
-            self.sessionLogger.info("*** Bind failed: " + str(e) + "\n")
-            traceback.print_exc()
-            sys.exit(1)
 
-        try:
-            sock.listen(100)
-            sock.settimeout(30)
-            client, addr = sock.accept()
-        except Exception as e:
-            self.sessionLogger.info("*** Listen/accept failed: " + str(e) + "\n")
-            traceback.print_exc()
-            sys.exit(1)
-
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        sock.bind(("", self.port))
+        sock.listen(100)
+        sock.settimeout(30)
+        client, addr = sock.accept()
         self.sessionLogger.info(f"Got a connection from {addr[0]}!\n")
 
         try:
-            t = paramiko.Transport(client)
-            self.transport = t
-            t.set_gss_host(socket.getfqdn(""))
-            try:
-                print("ttt"*100)
-                t.load_server_moduli()
-                print("taat"*100)
-            except Exception:
-                self.sessionLogger.info(
-                    "(Failed to load moduli -- gex will be unsupported.)\n'"
-                )
-                raise
-            t.add_server_key(self.host_key)
+            self.transport = paramiko.Transport(client)
+            self.transport.set_gss_host(socket.getfqdn(""))
+            self.transport.add_server_key(self.host_key)
             server = Server(self.sshlogin)
             try:
-                t.start_server(server=server)
+                self.transport.start_server(server=server)
             except paramiko.SSHException:
                 self.sessionLogger.info("*** SSH negotiation failed.\n")
                 sys.exit(1)
-
-            # wait for auth
-            self.chan = t.accept(20)
+            self.chan = self.transport.accept(20)
             if self.chan is None:
                 self.sessionLogger.info("*** No channel.\n")
                 sys.exit(1)
@@ -125,7 +96,7 @@ class SshConnection:
             )
             traceback.print_exc()
             try:
-                t.close()
+                self.transport.close()
             except Exception:
                 pass
             sys.exit(1)

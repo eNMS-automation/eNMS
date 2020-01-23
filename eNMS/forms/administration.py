@@ -8,6 +8,7 @@ from wtforms import (
     SelectMultipleField,
 )
 from wtforms.validators import InputRequired
+from wtforms.widgets import TextArea
 
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.properties.database import import_classes
@@ -96,3 +97,20 @@ class UserForm(BaseForm):
         ("Edit", "Edit"),
     ]
     permissions = SelectMultipleField("Permissions", choices=permission_choices)
+
+
+class ChangelogForm(BaseForm):
+    template = "object"
+    form_type = HiddenField(default="changelog")
+    id = HiddenField()
+    severity = SelectField(
+        "Severity",
+        choices=(
+            ("debug", "Debug"),
+            ("info", "Info"),
+            ("warning", "Warning"),
+            ("error", "Error"),
+            ("critical", "Critical"),
+        ),
+    )
+    content = StringField(widget=TextArea(), render_kw={"rows": 10})

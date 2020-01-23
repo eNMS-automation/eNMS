@@ -51,7 +51,6 @@ const panelSize = {
   task: "900 600",
   task_filtering: "900 650",
   user: "600 300",
-  user_filtering: "700 250",
   view: "700 300",
   workflow_results: "1200 700",
 };
@@ -322,7 +321,6 @@ export function showDeletionPanel(instance) {
 }
 
 function preprocessForm(panel, id, type, duplicate) {
-  console.log(id)
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
       const property =

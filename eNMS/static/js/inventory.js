@@ -208,8 +208,8 @@ export const showDeviceData = function(device) {
 };
 
 function showDeviceResultsPanel(device) {
-  createPanel("result", `Results - ${device.name}`, null, function() {
-    initTable("result", device);
+  createPanel("result_table", `Results - ${device.name}`, null, function() {
+    initTable("result", device, null, "table-result");
   });
 }
 

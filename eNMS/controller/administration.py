@@ -87,7 +87,9 @@ class AdministrationController(BaseController):
 
     def migration_import(self, folder="migrations", **kwargs):
         status, models = "Import successful.", kwargs["import_export_types"]
-        skip_update_pools_after_import = kwargs.get("skip_update_pools_after_import", False)
+        skip_update_pools_after_import = kwargs.get(
+            "skip_update_pools_after_import", False
+        )
         if kwargs.get("empty_database_before_import", False):
             for model in models:
                 delete_all(model)
@@ -111,7 +113,9 @@ class AdministrationController(BaseController):
                         workflow_services[instance["name"]] = instance.pop("services")
                     try:
                         instance = self.objectify(instance_type, instance)
-                        factory(instance_type, **{"dont_update_pools": True, **instance})
+                        factory(
+                            instance_type, **{"dont_update_pools": True, **instance}
+                        )
                         Session.commit()
                     except Exception:
                         info(

@@ -558,8 +558,9 @@ class Run(AbstractBase):
         try:
             if self.send_notification_method == "mail":
                 filename = self.runtime.replace(".", "").replace(":", "")
+                status = "PASS" if results["success"] else "FAILED"
                 result = app.send_email(
-                    f"{self.name} ({'PASS' if results['success'] else 'FAILED'})",
+                    f"{self.service.name} ({status})",
                     app.str_dict(notification),
                     recipients=self.mail_recipient,
                     filename=f"results-{filename}.txt",

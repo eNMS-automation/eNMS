@@ -80,7 +80,7 @@ class InventoryController(BaseController):
                 device.ip_address, None, None, current_user.name,
             )
 
-        ts = Thread(target=userserver.start, args=(device,),)
+        ts = Thread(target=userserver.start, kwargs=device.get_properties())
         ts.start()
 
         return {

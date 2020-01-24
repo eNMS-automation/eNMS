@@ -129,7 +129,7 @@ class SshConnection:
             else:
                 svr_chan.close()
 
-    def start(self, device):
+    def start(self, **device):
         self.create_server()
         while self.chan is None:
             time.sleep(0.5)
@@ -137,7 +137,7 @@ class SshConnection:
         username, password = self.username, self.password
 
         sshdevice = SshClient(
-            device.ip_address, username, password, self.chan, port=device.port
+            device["ip_address"], username, password, self.chan, port=device["port"]
         )
         try:
             sshdevice.connect()
@@ -151,7 +151,7 @@ class SshConnection:
         except Exception as e:
             self.sessionLogger.info(
                 f"There was an error attempting to connect to \
-                {device.ip_address}.  Error: {e}\n"
+                {device['ip_address']}.  Error: {e}\n"
             )
             sshdevice.close()
             self.transport.close()

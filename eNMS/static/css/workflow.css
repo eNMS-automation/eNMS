@@ -28,3 +28,13 @@ intrinsic (Safari) - moz (Firefox) - webkit (Chrome) */
 *:focus {
   outline: none;
 }
+
+/* Cross-browser control alignment in the middle */
+.table-actions {
+  margin: auto;
+  padding: 7px 7px;
+  margin-bottom: 5px;
+  width: intrinsic;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+}

@@ -35,7 +35,7 @@ td.dt-center {
 }
 
 /* Cross-browser control alignment in the middle */
-.controls {
+.table-actions {
   margin: auto;
   padding: 7px 7px;
   margin-bottom: 5px;

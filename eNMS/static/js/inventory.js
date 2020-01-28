@@ -131,7 +131,6 @@ function handOffSSHConnection(id) {
     if (!url) {
       url = `${window.location.protocol}//${window.location.host}`;
     }
-    console.log(result)
     const messageLink = `Click here to connect to ${result.device} (${result.device_ip})`;
     const link = `<a href='ssh://${result.username}@${window.location.hostname}:${result.port}'>${messageLink}</a>`;
 

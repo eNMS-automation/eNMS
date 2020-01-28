@@ -93,43 +93,29 @@ class SshConnection:
                 pass
             sys.exit(1)
 
-    def recv_data(self, client, svr_chan):
-        log = ""
-        replace_chars = ["\r\n", "\n\r"]
+    def recv_data(self, client, channel):
         while client.is_shell_open():
-            recv = client.receive_response()
-            if recv is None:
-                pass
-            else:
-                svr_chan.send(recv)
-                log += recv.decode("utf-8", "replace")
-                if "\n" in log:
-                    # remove double new-line interpretation
-                    # by '\r\n' or '\n\r' in the logger.
-                    for char in replace_chars:
-                        if char in log:
-                            log = log.replace(char, "\n")
-                    # remove whitespace chars from being printed in the logger.
-                    self.sessionLogger.info(log)
-                    log = ""
-                time.sleep(0.001)
+            response = client.receive_response()
+            if not response:
+                continue
+            channel.send(response)
+            self.sessionLogger.info(response.decode("utf-8", "replace"))
+            time.sleep(0.001)
         client._client.get_transport().close()
 
-    def send_data(self, client, svr_chan):
+    def send_data(self, client, channel):
         while client.is_shell_open():
-            com = svr_chan.recv(512)
+            com = channel.recv(512)
             if client.is_shell_open():
                 client.shell.send(com)
             else:
-                svr_chan.close()
+                channel.close()
 
     def start(self, **device):
         self.create_server()
         while self.chan is None:
             time.sleep(0.5)
-
         username, password = self.username, self.password
-
         sshdevice = SshClient(
             device["ip_address"], username, password, self.chan, port=device["port"]
         )

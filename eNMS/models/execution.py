@@ -37,6 +37,7 @@ class Result(AbstractBase):
 
     __tablename__ = type = "result"
     private = True
+    dont_track_changes = True
     id = Column(Integer, primary_key=True)
     success = Column(Boolean, default=False)
     runtime = Column(SmallString)
@@ -147,7 +148,7 @@ class Run(AbstractBase):
         return self if not self.parent else self.parent.original
 
     def __repr__(self):
-        return f"{self.runtime} (run by '{self.creator}')"
+        return f"{self.runtime}: SERVICE '{self.service}' run by USER '{self.creator}'"
 
     def __getattr__(self, key):
         if key in self.__dict__:

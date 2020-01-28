@@ -63,12 +63,13 @@ def configure_events(app):
     def log_instance_update(mapper, connection, target):
         state, changelog = inspect(target), []
         for attr in state.attrs:
-            if getattr(state.class_, attr.key).info.get("dont_track_changes"):
-                continue
-            if attr.key in private_properties:
-                continue
             hist = state.get_history(attr.key, True)
-            if not hist.has_changes():
+            if (
+                getattr(state.class_, "dont_track_changes", False)
+                or getattr(state.class_, attr.key).info.get("dont_track_changes")
+                or attr.key in private_properties
+                or not hist.has_changes()
+            ):
                 continue
             change = f"{attr.key}: "
             if type(getattr(target, attr.key)) == InstrumentedList:

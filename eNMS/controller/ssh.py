@@ -1,27 +1,31 @@
-from paramiko import client, SSHClient, WarningPolicy
+from datetime import datetime
 from time import sleep
-from threading import Event
 from paramiko import (
     AUTH_FAILED,
     AUTH_SUCCESSFUL,
+    client,
     RSAKey,
     OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED as OPEN_FAILED,
     OPEN_SUCCEEDED,
     ServerInterface,
+    SSHClient,
+    Transport,
+    WarningPolicy,
 )
-import threading
+from random import choice
+from socket import (
+    AF_INET,
+    socket,
+    SOCK_STREAM,
+    SOL_SOCKET,
+    SO_REUSEADDR
+)
+from threading import currentThread, Event, Thread
+
 import logging
 import os
-import time
-import datetime
-import socket
 import sys
-import traceback
-from random import choice
 import string
-import paramiko
-from re import sub
-from threading import Thread, currentThread
 
 
 class Client(SSHClient):
@@ -36,21 +40,17 @@ class Client(SSHClient):
         )
         self.shell = self.invoke_shell()
 
-    def receive_response(self):
-        while self.shell.recv_ready():
-            return self.shell.recv(1024)
-
 
 class Server(ServerInterface):
     def __init__(self, connection):
         self.event = Event()
         self.username = connection.sshlogin
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        sock = socket(AF_INET, SOCK_STREAM)
+        sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
         sock.bind(("", connection.port))
         sock.listen(100)
         sock.settimeout(30)
-        self.transport = paramiko.Transport(sock.accept()[0])
+        self.transport = Transport(sock.accept()[0])
         self.transport.add_server_key(connection.host_key)
         self.transport.start_server(server=self)
         self.channel = self.transport.accept(10)
@@ -92,20 +92,20 @@ class SshConnection:
             os.makedirs(logpath)
         self.sessionLogger = logging.getLogger(logstring)
         fh = logging.FileHandler(
-            filename=f'{logpath}/{hostname}-{datetime.datetime.now().strftime("%m%d%y_%H%M%S")}.log'
+            filename=f'{logpath}/{hostname}-{datetime.now().strftime("%m%d%y_%H%M%S")}.log'
         )
         self.sessionLogger.addHandler(fh)
         try:
-            self.host_key = paramiko.RSAKey.from_private_key_file("rsa.key")
+            self.host_key = RSAKey.from_private_key_file("rsa.key")
         except FileNotFoundError:
-            genkey = paramiko.RSAKey.generate(2048)
+            genkey = RSAKey.generate(2048)
             genkey.write_private_key_file("rsa.key")
         self.port = choice(range(50000, 50999))
 
-    def receive_data(self, client, channel):
+    def receive_data(self, shell, channel):
         log = ""
-        while not client.shell.closed:
-            response = client.receive_response()
+        while not shell.closed:
+            response = shell.recv(1024)
             if not response:
                 continue
             channel.send(response)
@@ -113,14 +113,13 @@ class SshConnection:
             if "\n" in log:
                 self.sessionLogger.info("\n".join(l for l in log.splitlines() if l))
                 log = ""
-            time.sleep(0.001)
+            sleep(0.001)
 
-    def send_data(self, client, channel):
-        while not client.shell.closed:
-            client.shell.send(channel.recv(512))
+    def send_data(self, shell, channel):
+        while not shell.closed:
+            shell.send(channel.recv(512))
 
     def start(self):
-        server = Server(self)
-        client = Client(self)
-        Thread(target=self.receive_data, args=(client, server.channel)).start()
-        Thread(target=self.send_data, args=(client, server.channel)).start()
+        args = (Client(self).shell, Server(self).channel)
+        Thread(target=self.receive_data, args=args).start()
+        Thread(target=self.send_data, args=args).start()

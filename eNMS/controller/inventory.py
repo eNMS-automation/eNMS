@@ -4,6 +4,7 @@ from logging import info
 from sqlalchemy import and_
 from subprocess import Popen
 from threading import Thread
+from uuid import uuid4
 from werkzeug.utils import secure_filename
 from xlrd import open_workbook
 from xlrd.biffh import XLRDError
@@ -78,13 +79,14 @@ class InventoryController(BaseController):
             if kwargs["credentials"] == "user"
             else (kwargs["username"], kwargs["password"])
         )
+        uuid = uuid4()
         connection = SshConnection(
-            device.ip_address, *credentials, current_user.name,
+            device.ip_address, *credentials, uuid,
         )
         Thread(target=connection.start).start()
         return {
             "port": connection.port,
-            "username": connection.sshlogin,
+            "username": uuid,
             "device_name": device.name,
             "device_ip": device.ip_address,
         }

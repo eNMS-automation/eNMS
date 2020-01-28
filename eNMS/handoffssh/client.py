@@ -1,5 +1,5 @@
 from paramiko import client, SSHClient, WarningPolicy
-import time
+from time import sleep
 
 
 class SshClient(SSHClient):
@@ -31,11 +31,11 @@ class SshClient(SSHClient):
     def send_command(self, commands):
         if isinstance(commands, str):
             self.shell.send(commands)
-            time.sleep(0.2)
+            sleep(0.2)
         else:
             for com in commands:
                 self.shell.send(com)
-                time.sleep(0.2)
+                sleep(0.2)
 
     def receive_response(self, buff_size=1024):
         while self.shell.recv_ready():

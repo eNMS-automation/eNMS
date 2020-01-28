@@ -21,7 +21,6 @@ class SshConnection:
         password,
         calling_user=None,
         logpath="./logs/handoffssh_logs/",
-        loglevel="info",
     ):
         # setup basic parameters
         self.hostname = hostname
@@ -35,15 +34,13 @@ class SshConnection:
         )
         self.calling_password = "".join(choice(all_chars) for i in range(32))
         logstring = "".join(choice(all_chars) for i in range(6))
-        self.loglevel = loglevel
-        self.logpath = logpath
-        if not os.path.exists(self.logpath):
-            os.makedirs(self.logpath)
+        if not os.path.exists(logpath):
+            os.makedirs(logpath)
         self.sessionLogger = logging.getLogger(logstring)
         logging.getLogger(logstring).setLevel(logging.INFO)
         fmt = logging.Formatter("%(message)s")
         fh = logging.FileHandler(
-            filename=f'{self.logpath}/{hostname}\
+            filename=f'{logpath}/{hostname}\
                 -{datetime.datetime.now().strftime("%m%d%y_%H%M%S")}.log'
         )
         fh.terminator = ""
@@ -81,7 +78,6 @@ class SshConnection:
                 self.sessionLogger.info("*** No channel.\n")
                 sys.exit(1)
             self.sessionLogger.info("Authenticated!\n")
-
             server.event.wait(10)
             if not server.event.is_set():
                 self.sessionLogger.info("*** Client never asked for a shell.\n")
@@ -156,9 +152,7 @@ class SshConnection:
             sshdevice.close()
             self.transport.close()
             threading.currentThread().exit(1)
-
         tc = threading.Thread(target=self.recv_data, args=(sshdevice, self.chan))
         tc.start()
-
         ts = threading.Thread(target=self.send_data, args=(sshdevice, self.chan))
         ts.start()

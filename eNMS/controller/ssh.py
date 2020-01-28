@@ -13,19 +13,12 @@ from paramiko import (
     WarningPolicy,
 )
 from random import choice
-from socket import (
-    AF_INET,
-    socket,
-    SOCK_STREAM,
-    SOL_SOCKET,
-    SO_REUSEADDR
-)
+from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
 from threading import currentThread, Event, Thread
 
 import logging
 import os
 import sys
-import string
 
 
 class Client(SSHClient):
@@ -44,7 +37,7 @@ class Client(SSHClient):
 class Server(ServerInterface):
     def __init__(self, connection):
         self.event = Event()
-        self.username = connection.sshlogin
+        self.username = connection.login
         sock = socket(AF_INET, SOCK_STREAM)
         sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
         sock.bind(("", connection.port))
@@ -71,26 +64,16 @@ class Server(ServerInterface):
 
 class SshConnection:
     def __init__(
-        self,
-        hostname,
-        username,
-        password,
-        calling_user=None,
-        logpath="./logs/handoffssh_logs/",
+        self, hostname, username, password, login,
     ):
         self.hostname = hostname
         self.username = username
         self.password = password
-        self.calling_user = calling_user
-        all_chars = string.ascii_letters + string.digits
-        self.sshlogin = (
-            self.calling_user + "___" + "".join(choice(all_chars) for i in range(32))
-        )
-        self.calling_password = "".join(choice(all_chars) for i in range(32))
-        logstring = "".join(choice(all_chars) for i in range(6))
+        self.login = login
+        logpath = "./logs/handoffssh_logs"
         if not os.path.exists(logpath):
             os.makedirs(logpath)
-        self.sessionLogger = logging.getLogger(logstring)
+        self.sessionLogger = logging.getLogger(login)
         fh = logging.FileHandler(
             filename=f'{logpath}/{hostname}-{datetime.now().strftime("%m%d%y_%H%M%S")}.log'
         )
@@ -98,8 +81,8 @@ class SshConnection:
         try:
             self.host_key = RSAKey.from_private_key_file("rsa.key")
         except FileNotFoundError:
-            genkey = RSAKey.generate(2048)
-            genkey.write_private_key_file("rsa.key")
+            self.host_key = RSAKey.generate(2048)
+            self.host_key.write_private_key_file("rsa.key")
         self.port = choice(range(50000, 50999))
 
     def receive_data(self, shell, channel):

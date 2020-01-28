@@ -109,17 +109,16 @@ function sshConnection(id) {
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
     }
-    const terminal = result.redirection
+    const link = result.redirection
       ? `${url}/terminal${result.port}/`
       : `${url}:${result.port}`;
     setTimeout(function() {
-      openUrl(terminal);
+      openUrl(link);
     }, 300);
-    const messageLink = `Click here to connect to ${result.device}.`;
-    const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
-    notify(link, "success", 15);
+    const message = `Click here to connect to ${result.device}.`;
+    notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15);
     const warning = `Don't forget to turn off the pop-up blocker !`;
-    notify(warning, "error", 20);
+    notify(warning, "error", 15);
     $(`#connection-${id}`).remove();
   });
 }
@@ -131,10 +130,9 @@ function handOffSSHConnection(id) {
     if (!url) {
       url = `${window.location.protocol}//${window.location.host}`;
     }
-    const messageLink = `Click here to connect to ${result.device} (${result.device_ip})`;
-    const link = `<a href='ssh://${result.username}@${window.location.hostname}:${result.port}'>${messageLink}</a>`;
-
-    alertify.notify(link, "success", 30);
+    const link = `${result.username}@${window.location.hostname}:${result.port}`
+    const message = `Click here to connect to ${result.device_name}.`;
+    notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
 })
 }
 

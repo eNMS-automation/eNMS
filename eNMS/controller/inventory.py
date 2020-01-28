@@ -71,19 +71,21 @@ class InventoryController(BaseController):
 
     def handoffssh(self, id, **kwargs):
         device = fetch("device", id=id)
-        if kwargs["credentials"] == "device":
-            ssh_connection = SshConnection(
-                device.ip_address, device.username, device.password, current_user.name,
-            )
-        elif kwargs["credentials"] == "user":
-            ssh_connection = SshConnection(
-                device.ip_address, None, None, current_user.name,
-            )
-        Thread(target=ssh_connection.start, kwargs=device.get_properties()).start()
+        credentials = (
+            (device.username, device.password)
+            if kwargs["credentials"] == "device"
+            else self.get_user_credentials()
+            if kwargs["credentials"] == "user"
+            else (kwargs["username"], kwargs["password"])
+        )
+        connection = SshConnection(
+            device.ip_address, *credentials, current_user.name,
+        )
+        Thread(target=connection.start).start()
         return {
-            "port": ssh_connection.port,
-            "username": ssh_connection.sshlogin,
-            "device": device.name,
+            "port": connection.port,
+            "username": connection.sshlogin,
+            "device_name": device.name,
             "device_ip": device.ip_address,
         }
 

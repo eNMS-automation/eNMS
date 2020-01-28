@@ -25,12 +25,14 @@ from threading import Thread, currentThread
 
 
 class Client(SSHClient):
-    def __init__(self, hostname, username, password):
+    def __init__(self, connection):
         super().__init__()
         self.load_system_host_keys()
         self.set_missing_host_key_policy(WarningPolicy)
         self.connect(
-            hostname=hostname, username=username, password=password,
+            hostname=connection.hostname,
+            username=connection.username,
+            password=connection.password,
         )
         self.shell = self.invoke_shell()
 
@@ -40,9 +42,18 @@ class Client(SSHClient):
 
 
 class Server(ServerInterface):
-    def __init__(self, username=None):
+    def __init__(self, connection):
         self.event = Event()
-        self.username = username
+        self.username = connection.sshlogin
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        sock.bind(("", connection.port))
+        sock.listen(100)
+        sock.settimeout(30)
+        self.transport = paramiko.Transport(sock.accept()[0])
+        self.transport.add_server_key(connection.host_key)
+        self.transport.start_server(server=self)
+        self.channel = self.transport.accept(10)
 
     def check_channel_request(self, kind, *_):
         return OPEN_SUCCEEDED if kind == "session" else OPEN_FAILED
@@ -91,19 +102,6 @@ class SshConnection:
             genkey.write_private_key_file("rsa.key")
         self.port = choice(range(50000, 50999))
 
-    def create_server(self):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        sock.bind(("", self.port))
-        sock.listen(100)
-        sock.settimeout(30)
-        self.transport = paramiko.Transport(sock.accept()[0])
-        self.transport.add_server_key(self.host_key)
-        server = Server(self.sshlogin)
-        self.transport.start_server(server=server)
-        self.channel = self.transport.accept(20)
-        server.event.wait(10)
-
     def receive_data(self, client, channel):
         log = ""
         while not client.shell.closed:
@@ -121,11 +119,8 @@ class SshConnection:
         while not client.shell.closed:
             client.shell.send(channel.recv(512))
 
-    def start(self, **kwargs):
-        self.create_server()
-        while not self.channel:
-            time.sleep(0.5)
-        username, password = self.username, self.password
-        device = Client(kwargs["ip_address"], username, password)
-        Thread(target=self.receive_data, args=(device, self.channel)).start()
-        Thread(target=self.send_data, args=(device, self.channel)).start()
+    def start(self):
+        server = Server(self)
+        client = Client(self)
+        Thread(target=self.receive_data, args=(client, server.channel)).start()
+        Thread(target=self.send_data, args=(client, server.channel)).start()

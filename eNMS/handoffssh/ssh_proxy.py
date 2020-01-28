@@ -11,7 +11,8 @@ import traceback
 from random import choice
 import string
 import paramiko
-
+from re import sub
+from threading import Thread, currentThread
 
 class SshConnection:
     def __init__(
@@ -22,11 +23,9 @@ class SshConnection:
         calling_user=None,
         logpath="./logs/handoffssh_logs/",
     ):
-        # setup basic parameters
         self.hostname = hostname
         self.username = username
         self.password = password
-        self.chan = None
         self.calling_user = calling_user
         all_chars = string.ascii_letters + string.digits
         self.sshlogin = (
@@ -37,14 +36,9 @@ class SshConnection:
         if not os.path.exists(logpath):
             os.makedirs(logpath)
         self.sessionLogger = logging.getLogger(logstring)
-        logging.getLogger(logstring).setLevel(logging.INFO)
-        fmt = logging.Formatter("%(message)s")
         fh = logging.FileHandler(
-            filename=f'{logpath}/{hostname}\
-                -{datetime.datetime.now().strftime("%m%d%y_%H%M%S")}.log'
+            filename=f'{logpath}/{hostname}-{datetime.datetime.now().strftime("%m%d%y_%H%M%S")}.log'
         )
-        fh.terminator = ""
-        fh.setFormatter(fmt)
         self.sessionLogger.addHandler(fh)
         try:
             self.host_key = paramiko.RSAKey.from_private_key_file("rsa.key")
@@ -59,84 +53,52 @@ class SshConnection:
         sock.bind(("", self.port))
         sock.listen(100)
         sock.settimeout(30)
-        client, addr = sock.accept()
-        self.sessionLogger.info(f"Got a connection from {addr[0]}!\n")
-        try:
-            self.transport = paramiko.Transport(client)
-            self.transport.set_gss_host(socket.getfqdn(""))
-            self.transport.add_server_key(self.host_key)
-            server = Server(self.sshlogin)
-            try:
-                self.transport.start_server(server=server)
-            except paramiko.SSHException:
-                self.sessionLogger.info("*** SSH negotiation failed.\n")
-                sys.exit(1)
-            self.chan = self.transport.accept(20)
-            if self.chan is None:
-                self.sessionLogger.info("*** No channel.\n")
-                sys.exit(1)
-            self.sessionLogger.info("Authenticated!\n")
-            server.event.wait(10)
-            if not server.event.is_set():
-                self.sessionLogger.info("*** Client never asked for a shell.\n")
-                sys.exit(1)
-            self.chan.send(f"\r\n\r\nConnecting you to {self.hostname}...\r\n\r\n")
+        self.transport = paramiko.Transport(sock.accept()[0])
+        self.transport.add_server_key(self.host_key)
+        server = Server(self.sshlogin)
+        self.transport.start_server(server=server)
+        self.chan = self.transport.accept(20)
+        server.event.wait(10)
 
-        except Exception as e:
-            self.sessionLogger.info(
-                "*** Caught exception: " + str(e.__class__) + ": " + str(e) + "\n"
-            )
-            traceback.print_exc()
-            try:
-                self.transport.close()
-            except Exception:
-                pass
-            sys.exit(1)
-
-    def recv_data(self, client, channel):
+    def receive_data(self, client, channel):
+        log = ""
         while client.is_shell_open():
             response = client.receive_response()
             if not response:
                 continue
             channel.send(response)
-            self.sessionLogger.info(response.decode("utf-8", "replace"))
+            log += response.decode("utf-8", "replace")
+            if "\n" in log:
+                log = "\n".join(l for l in log.splitlines() if l)
+                self.sessionLogger.info(log)
+                log = ""
             time.sleep(0.001)
         client._client.get_transport().close()
 
     def send_data(self, client, channel):
         while client.is_shell_open():
-            com = channel.recv(512)
-            if client.is_shell_open():
-                client.shell.send(com)
-            else:
-                channel.close()
+            client.shell.send(channel.recv(512))
+        else:
+            channel.close()
 
-    def start(self, **device):
+    def start(self, **kwargs):
         self.create_server()
-        while self.chan is None:
+        while not self.chan:
             time.sleep(0.5)
         username, password = self.username, self.password
-        sshdevice = SshClient(
-            device["ip_address"], username, password, self.chan, port=device["port"]
+        device = SshClient(
+            kwargs["ip_address"], username, password, self.chan, port=kwargs["port"]
         )
         try:
-            sshdevice.connect()
-            sshdevice.invoke_shell()
+            device.connect()
+            device.invoke_shell()
         except paramiko.ssh_exception.AuthenticationException as e:
-            self.sessionLogger.info(f"{e}\n")
-            sshdevice.close()
-            self.chan.send(f"{e}")
+            device.close()
             self.transport.close()
             threading.Event().clear()
         except Exception as e:
-            self.sessionLogger.info(
-                f"There was an error attempting to connect to \
-                {device['ip_address']}.  Error: {e}\n"
-            )
-            sshdevice.close()
+            device.close()
             self.transport.close()
             threading.currentThread().exit(1)
-        tc = threading.Thread(target=self.recv_data, args=(sshdevice, self.chan))
-        tc.start()
-        ts = threading.Thread(target=self.send_data, args=(sshdevice, self.chan))
-        ts.start()
+        Thread(target=self.receive_data, args=(device, self.chan)).start()
+        Thread(target=self.send_data, args=(device, self.chan)).start()

@@ -54,7 +54,6 @@ class SshConnection:
         self.port = choice(range(50000, 50999))
 
     def create_server(self):
-
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         sock.bind(("", self.port))
@@ -62,7 +61,6 @@ class SshConnection:
         sock.settimeout(30)
         client, addr = sock.accept()
         self.sessionLogger.info(f"Got a connection from {addr[0]}!\n")
-
         try:
             self.transport = paramiko.Transport(client)
             self.transport.set_gss_host(socket.getfqdn(""))

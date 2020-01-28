@@ -114,7 +114,7 @@ class Run(AbstractBase):
     )
     task_id = Column(Integer, ForeignKey("task.id", ondelete="SET NULL"))
     task = relationship("Task", foreign_keys="Run.task_id")
-    state = Column(MutableDict)
+    state = Column(MutableDict, info={"dont_track_changes": True})
     results = relationship("Result", back_populates="run", cascade="all, delete-orphan")
     model_properties = ["progress", "service_properties"]
 
@@ -146,6 +146,10 @@ class Run(AbstractBase):
     @property
     def original(self):
         return self if not self.parent else self.parent.original
+
+    @property
+    def dont_track_changes(self):
+        return self.runtime != self.parent_runtime
 
     def __repr__(self):
         return f"{self.runtime}: SERVICE '{self.service}' run by USER '{self.creator}'"

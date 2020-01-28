@@ -25,40 +25,27 @@ from threading import Thread, currentThread
 
 
 class Client(SSHClient):
-    def __init__(self, hostname, username, password, channel, port=22, timeout=5):
+    def __init__(self, hostname, username, password):
         super().__init__()
-        self.hostname = hostname
-        self.port = port
-        self.username = username
-        self.password = password
-        self.channel = channel
         self.load_system_host_keys()
         self.set_missing_host_key_policy(WarningPolicy)
         self.connect(
-            hostname=self.hostname,
-            port=self.port,
-            username=self.username,
-            password=self.password,
-            timeout=5,
+            hostname=hostname, username=username, password=password,
         )
         self.shell = self.invoke_shell()
 
-    def receive_response(self, buff_size=1024):
+    def receive_response(self):
         while self.shell.recv_ready():
-            return self.shell.recv(buff_size)
+            return self.shell.recv(1024)
 
 
 class Server(ServerInterface):
-
     def __init__(self, username=None):
         self.event = Event()
         self.username = username
 
     def check_channel_request(self, kind, *_):
         return OPEN_SUCCEEDED if kind == "session" else OPEN_FAILED
-
-    def check_auth_password(self, username, password):
-        return AUTH_FAILED
 
     def check_auth_none(self, username):
         return AUTH_SUCCESSFUL if username == self.username else AUTH_FAILED
@@ -114,7 +101,7 @@ class SshConnection:
         self.transport.add_server_key(self.host_key)
         server = Server(self.sshlogin)
         self.transport.start_server(server=server)
-        self.chan = self.transport.accept(20)
+        self.channel = self.transport.accept(20)
         server.event.wait(10)
 
     def receive_data(self, client, channel):
@@ -136,21 +123,9 @@ class SshConnection:
 
     def start(self, **kwargs):
         self.create_server()
-        while not self.chan:
+        while not self.channel:
             time.sleep(0.5)
         username, password = self.username, self.password
-        device = Client(
-            kwargs["ip_address"], username, password, self.chan, port=kwargs["port"]
-        )
-        try:
-            pass
-        except paramiko.ssh_exception.AuthenticationException as e:
-            device.close()
-            self.transport.close()
-            threading.Event().clear()
-        except Exception as e:
-            device.close()
-            self.transport.close()
-            threading.currentThread().exit(1)
-        Thread(target=self.receive_data, args=(device, self.chan)).start()
-        Thread(target=self.send_data, args=(device, self.chan)).start()
+        device = Client(kwargs["ip_address"], username, password)
+        Thread(target=self.receive_data, args=(device, self.channel)).start()
+        Thread(target=self.send_data, args=(device, self.channel)).start()

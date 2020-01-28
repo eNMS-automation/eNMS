@@ -29,7 +29,7 @@ const panelSize = {
   compare: "auto 700",
   database_deletion: "700 400",
   database_migration: "700 300",
-  device_connection: "400 500",
+  device_connection: "400 auto",
   device_results: "1200 700",
   display: "700 700",
   display_configuration: "1200 800",

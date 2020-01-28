@@ -13,6 +13,7 @@ import {
   fCall,
   notify,
   openUrl,
+  showPanel,
 } from "./base.js";
 import { initTable, tables } from "./table.js";
 
@@ -55,6 +56,17 @@ function parseData(data) {
     legend.push(key);
   }
   return { data: result, legend: legend };
+}
+
+export function showConnectionPanel(id) {
+  showPanel("device_connection", id, () => {
+    $(`#custom-credentials-${id}`).change(function() {
+      $(`#credentials-fields-${id}`).show();
+    });
+    $(`#device-credentials-${id},#user-credentials-${id}`).change(function() {
+      $(`#credentials-fields-${id}`).hide();
+    });
+  });
 }
 
 export function initDashboard() {
@@ -215,6 +227,7 @@ function showDeviceResultsPanel(device) {
 
 configureNamespace("inventory", [
   handOffSSHConnection,
+  showConnectionPanel,
   sshConnection,
   savePoolObjects,
   showPoolObjectsPanel,

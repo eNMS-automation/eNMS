@@ -76,12 +76,13 @@
         Authentication with custom credentials
       </label>
     </div><br>
-    
-    <div class="form-group">
-      {{ form.username(class="form-control", placeholder="Username") }}
-    </div>
-    <div class="form-group">
-      {{ form.password(class="form-control", placeholder="Password") }}
+    <div id="credentials-fields" class="add-id" style="display: none">
+      <div class="form-group">
+        {{ form.username(class="form-control", placeholder="Username") }}
+      </div>
+      <div class="form-group">
+        {{ form.password(class="form-control", placeholder="Password") }}
+      </div>
     </div>
     <div class="x_title">
       <h4 class="text-center">Protocol</h4>

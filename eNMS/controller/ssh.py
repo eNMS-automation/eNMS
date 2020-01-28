@@ -26,48 +26,26 @@ from threading import Thread, currentThread
 
 class Client(SSHClient):
     def __init__(self, hostname, username, password, channel, port=22, timeout=5):
+        super().__init__()
         self.hostname = hostname
         self.port = port
         self.username = username
         self.password = password
         self.channel = channel
-        self._client = client.SSHClient()
-        self._client.load_system_host_keys()
-        self._client.set_missing_host_key_policy(WarningPolicy)
-
-    def connect(self):
-        self._client.connect(
+        self.load_system_host_keys()
+        self.set_missing_host_key_policy(WarningPolicy)
+        self.connect(
             hostname=self.hostname,
             port=self.port,
             username=self.username,
             password=self.password,
             timeout=5,
         )
-
-    def close(self):
-        self._client.get_transport().close()
-
-    def invoke_shell(self):
-        self.shell = self._client.invoke_shell()
-
-    def send_command(self, commands):
-        if isinstance(commands, str):
-            self.shell.send(commands)
-            sleep(0.2)
-        else:
-            for com in commands:
-                self.shell.send(com)
-                sleep(0.2)
+        self.shell = self.invoke_shell()
 
     def receive_response(self, buff_size=1024):
         while self.shell.recv_ready():
             return self.shell.recv(buff_size)
-
-    def is_shell_open(self):
-        if self.shell.closed is True:
-            return False
-        else:
-            return True
 
 
 class Server(ServerInterface):
@@ -141,7 +119,7 @@ class SshConnection:
 
     def receive_data(self, client, channel):
         log = ""
-        while client.is_shell_open():
+        while not client.shell.closed:
             response = client.receive_response()
             if not response:
                 continue
@@ -153,7 +131,7 @@ class SshConnection:
             time.sleep(0.001)
 
     def send_data(self, client, channel):
-        while client.is_shell_open():
+        while not client.shell.closed:
             client.shell.send(channel.recv(512))
 
     def start(self, **kwargs):
@@ -165,8 +143,7 @@ class SshConnection:
             kwargs["ip_address"], username, password, self.chan, port=kwargs["port"]
         )
         try:
-            device.connect()
-            device.invoke_shell()
+            pass
         except paramiko.ssh_exception.AuthenticationException as e:
             device.close()
             self.transport.close()

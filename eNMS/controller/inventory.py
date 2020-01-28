@@ -10,9 +10,9 @@ from xlrd.biffh import XLRDError
 from xlwt import Workbook
 
 from eNMS.controller.base import BaseController
+from eNMS.controller.ssh import SshConnection
 from eNMS.database import Session
 from eNMS.database.functions import delete_all, factory, fetch, fetch_all, objectify
-from eNMS.handoffssh.ssh_proxy import SshConnection
 from eNMS.models import models, model_properties, property_types
 from eNMS.properties import field_conversion
 
@@ -72,20 +72,17 @@ class InventoryController(BaseController):
     def handoffssh(self, id, **kwargs):
         device = fetch("device", id=id)
         if kwargs["credentials"] == "device":
-            userserver = SshConnection(
+            ssh_connection = SshConnection(
                 device.ip_address, device.username, device.password, current_user.name,
             )
         elif kwargs["credentials"] == "user":
-            userserver = SshConnection(
+            ssh_connection = SshConnection(
                 device.ip_address, None, None, current_user.name,
             )
-
-        ts = Thread(target=userserver.start, kwargs=device.get_properties())
-        ts.start()
-
+        Thread(target=ssh_connection.start, kwargs=device.get_properties()).start()
         return {
-            "port": userserver.port,
-            "username": userserver.sshlogin,
+            "port": ssh_connection.port,
+            "username": ssh_connection.sshlogin,
             "device": device.name,
             "device_ip": device.ip_address,
         }

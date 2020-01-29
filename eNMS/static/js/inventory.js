@@ -231,25 +231,29 @@ export const showDeviceData = function(device) {
 
 function showSessionLog(sessionId) {
   call(`/get_session_log/${sessionId}`, (log) => {
-    createPanel(
-      "display",
-      "Session log",
-      sessionId,
-      function() {
-        const content = document.getElementById(`content-${sessionId}`);
-        // eslint-disable-next-line new-cap
-        const editor = CodeMirror(content, {
-          lineWrapping: true,
-          lineNumbers: true,
-          readOnly: true,
-          theme: "cobalt",
-          extraKeys: { "Ctrl-F": "findPersistent" },
-          scrollbarStyle: "overlay",
-        });
-        editor.setSize("100%", "100%");
-        editor.setValue(log);
-      }
-    );
+    if (!log) {
+      notify("No log stored for this session (e.g device unreachable or authentication error).", "error", 5);
+    } else {
+      createPanel(
+        "display",
+        "Session log",
+        sessionId,
+        function() {
+          const content = document.getElementById(`content-${sessionId}`);
+          // eslint-disable-next-line new-cap
+          const editor = CodeMirror(content, {
+            lineWrapping: true,
+            lineNumbers: true,
+            readOnly: true,
+            theme: "cobalt",
+            extraKeys: { "Ctrl-F": "findPersistent" },
+            scrollbarStyle: "overlay",
+          });
+          editor.setSize("100%", "100%");
+          editor.setValue(log);
+        }
+      );
+    }
   });
 };
 

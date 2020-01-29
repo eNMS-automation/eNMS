@@ -1,6 +1,7 @@
 from collections import Counter
 from flask_login import current_user
 from logging import info
+from random import choice
 from sqlalchemy import and_
 from subprocess import Popen
 from threading import Thread
@@ -80,10 +81,10 @@ class InventoryController(BaseController):
             else (kwargs["username"], kwargs["password"])
         )
         uuid = str(uuid4())
-        connection = SshConnection(device.ip_address, *credentials, uuid,)
-        Thread(target=connection.start).start()
+        port = choice(range(50000, 50999))
+        Thread(target=SshConnection, args=(device.ip_address, *credentials, uuid, port)).start()
         return {
-            "port": connection.port,
+            "port": port,
             "username": uuid,
             "device_name": device.name,
             "device_ip": device.ip_address,

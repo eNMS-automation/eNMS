@@ -12,7 +12,6 @@ from paramiko import (
     Transport,
     WarningPolicy,
 )
-from random import choice
 from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
 from threading import currentThread, Event, Thread
 
@@ -64,8 +63,9 @@ class Server(ServerInterface):
 
 class SshConnection:
     def __init__(
-        self, hostname, username, password, login,
+        self, hostname, username, password, login, port
     ):
+        self.port = port
         self.hostname = hostname
         self.username = username
         self.password = password
@@ -83,7 +83,8 @@ class SshConnection:
         except FileNotFoundError:
             self.host_key = RSAKey.generate(2048)
             self.host_key.write_private_key_file("rsa.key")
-        self.port = choice(range(50000, 50999))
+        self.start()
+        
 
     def receive_data(self, shell, channel):
         log = ""

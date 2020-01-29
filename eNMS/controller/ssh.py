@@ -18,6 +18,7 @@ from string import printable
 from threading import currentThread, Event, Thread
 from time import sleep
 
+from eNMS.database import Session
 from eNMS.database.functions import fetch
 
 
@@ -67,35 +68,40 @@ class Server(ServerInterface):
 
 class SshConnection:
     def __init__(self, hostname, username, password, session_id, uuid, port):
-        self.session = fetch("session", id=session_id)
-        self.shell = Client(hostname, username, password).shell
-        self.channel = Server(port, uuid).channel
+        self.client = Client(hostname, username, password)
+        self.server = Server(port, uuid)
         path = Path.cwd() / "logs" / "ssh_sessions"
         path.mkdir(parents=True, exist_ok=True)
         self.logger = getLogger(hostname)
         if not self.logger.handlers:
             filehandler = FileHandler(filename=path / f"{hostname}.log")
             self.logger.addHandler(filehandler)
-        Thread(target=self.receive_data).start()
+        Thread(target=self.receive_data, args=(session_id,)).start()
         Thread(target=self.send_data).start()
 
-    def receive_data(self):
-        log = ""
-        while not self.shell.closed:
-            response = self.shell.recv(1024)
+    def receive_data(self, session_id):
+        log, session = "", fetch("session", id=session_id)
+        while not self.client.shell.closed:
+            response = self.client.shell.recv(1024)
             if not response:
                 continue
-            self.channel.send(response)
+            self.server.channel.send(response)
             log += "".join(c for c in str(response, "utf-8") if c in printable)
             if "\n" not in log:
                 continue
             else:
-                log = "\n".join(l for l in log.splitlines() if l)
-                self.logger.info(log)
+                parsed_log = "\n".join(l for l in log.splitlines() if l)
+                self.logger.info(parsed_log)
+                session.content += parsed_log
                 log = ""
-                self.session.content += log
             sleep(0.1)
+        Session.commit()
 
     def send_data(self):
-        while not self.shell.closed:
-            self.shell.send(self.channel.recv(512))
+        counter = 0
+        while not self.client.shell.closed and counter < 100:
+            counter += 1
+            self.client.shell.send(self.server.channel.recv(512))
+            sleep(0.1)
+        self.client.shell.close()
+        self.server.transport.close()

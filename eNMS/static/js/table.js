@@ -948,6 +948,28 @@ models.changelog = class Changelog extends Base {
 
 };
 
+models.session = class Session extends Base {
+  static get columns() {
+    return [
+      { data: "name", title: "Name", search: "text", width: "200px" },
+      {
+        data: "content",
+        title: "Content",
+        search: "text",
+        className: "dt-body-left",
+      },
+    ];
+  }
+
+  static get controls() {
+    return [
+      super.searchTableButton("session"),
+      super.refreshTableButton("session"),
+    ];
+  }
+
+};
+
 models.event = class Event extends Base {
   static get columns() {
     return [

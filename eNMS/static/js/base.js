@@ -4,6 +4,7 @@ alertify: false
 CodeMirror: false
 config: true
 csrf_token: false
+eNMS: true
 formProperties: false
 job: false
 jsPanel: false
@@ -12,7 +13,6 @@ page: false
 Promise: false
 relations: false
 relationships: false
-workflow: true
 */
 
 import { tables } from "./table.js";
@@ -29,9 +29,9 @@ const panelSize = {
   compare: "auto 700",
   database_deletion: "700 400",
   database_migration: "700 300",
-  device_connection: "400 500",
+  device_connection: "400 auto",
   device_results: "1200 700",
-  display: "700 700",
+  display: "600 600",
   display_configuration: "1200 800",
   event_filtering: "700 400",
   excel_import: "400 150",
@@ -51,7 +51,6 @@ const panelSize = {
   task: "900 600",
   task_filtering: "900 650",
   user: "600 300",
-  user_filtering: "700 250",
   view: "700 300",
   workflow_results: "1200 700",
 };
@@ -325,7 +324,6 @@ export function showDeletionPanel(instance) {
 }
 
 function preprocessForm(panel, id, type, duplicate) {
-  console.log(id)
   panel.querySelectorAll(".add-id").forEach((el) => {
     if (duplicate) {
       const property =
@@ -670,8 +668,8 @@ function showAllAlerts() {
     "alerts_table",
     null,
     () => {
-      // eslint-disable-next-line new-cap
       $("#alerts-table")
+        // eslint-disable-next-line new-cap
         .DataTable({
           columns: [{ width: "200px" }, { width: "60px" }, null],
         })

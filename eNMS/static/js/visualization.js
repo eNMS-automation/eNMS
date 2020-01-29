@@ -8,14 +8,8 @@ viewType: false
 vis: false
 */
 
-import {
-  call,
-  notify,
-  serializeForm,
-  showPanel,
-  showTypePanel,
-} from "./base.js";
-import { showDeviceData } from "./inventory.js";
+import { call, notify, serializeForm, showTypePanel } from "./base.js";
+import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -294,7 +288,7 @@ export function initView() {
   });
   Object.assign(action, {
     Properties: (o) => showTypePanel(o.type, o.id),
-    Connect: (d) => showPanel("device_connection", d.id),
+    Connect: (d) => showConnectionPanel(d.id),
     Configuration: (d) => showDeviceData(d),
   });
 }

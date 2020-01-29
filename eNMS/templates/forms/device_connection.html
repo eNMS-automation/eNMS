@@ -64,6 +64,27 @@
         Authentication with device credentials
       </label>
     </div>
+    <div class="radio">
+      <label>
+        <input
+          type="radio"
+          value="custom"
+          id="custom-credentials"
+          name="credentials"
+          class="add-id"
+        />
+        Authentication with custom credentials
+      </label>
+    </div>
+    <br />
+    <div id="credentials-fields" class="add-id" style="display: none">
+      <div class="form-group">
+        {{ form.username(class="form-control", placeholder="Username") }}
+      </div>
+      <div class="form-group">
+        {{ form.password(class="form-control", placeholder="Password") }}
+      </div>
+    </div>
     <div class="x_title">
       <h4 class="text-center">Protocol</h4>
     </div>
@@ -95,11 +116,23 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button
-    type="button"
-    class="btn btn-primary btn-id add-id"
-    value="eNMS.inventory.sshConnection"
-  >
-    Connect
-  </button>
+  <center>
+    {% if config["ssh"]["enabled"]["web"] %}
+    <button
+      type="button"
+      class="btn btn-primary btn-id add-id"
+      value="eNMS.inventory.sshConnection"
+    >
+      Web Session
+    </button>
+    {% endif %} {% if config["ssh"]["enabled"]["desktop"] %}
+    <button
+      type="button"
+      class="btn btn-primary btn-id add-id"
+      value="eNMS.inventory.handOffSSHConnection"
+    >
+      Desktop Session
+    </button>
+    {% endif %}
+  </center>
 </div>

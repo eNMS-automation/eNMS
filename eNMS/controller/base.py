@@ -62,7 +62,6 @@ class BaseController:
     log_severity = {"error": error, "info": info, "warning": warning}
 
     get_endpoints = [
-        "/administration",
         "/dashboard",
         "/login",
         "/table/changelog",
@@ -123,10 +122,12 @@ class BaseController:
         "get_runtimes",
         "get_view_topology",
         "get_service_state",
+        "get_session_log",
         "get_top_level_workflows",
         "get_tree_files",
         "get_workflow_results",
         "get_workflow_services",
+        "handoffssh",
         "import_service",
         "import_topology",
         "migration_export",
@@ -311,7 +312,6 @@ class BaseController:
                 "apscheduler.job_defaults.max_instances": "3",
             }
         )
-
         self.scheduler.start()
 
     def init_forms(self):
@@ -479,7 +479,7 @@ class BaseController:
         }
 
     def table_filtering(self, table, **kwargs):
-        model, properties = models[table], model_properties[table]
+        model = models[table]
         operator = and_ if kwargs["form"].get("operator", "all") == "all" else or_
         ordering = getattr(
             getattr(
@@ -493,7 +493,10 @@ class BaseController:
         constraints = self.build_filtering_constraints(table, **kwargs)
         if table == "result":
             constraints.append(
-                models["result"].service.has(id=kwargs["instance"]["id"])
+                getattr(
+                    models["result"],
+                    "device" if kwargs["instance"]["type"] == "device" else "service",
+                ).has(id=kwargs["instance"]["id"])
             )
             if kwargs.get("runtime"):
                 constraints.append(models["result"].parent_runtime == kwargs["runtime"])

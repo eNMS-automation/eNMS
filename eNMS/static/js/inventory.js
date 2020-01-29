@@ -13,6 +13,7 @@ import {
   fCall,
   notify,
   openUrl,
+  showPanel,
 } from "./base.js";
 import { initTable, tables } from "./table.js";
 
@@ -57,6 +58,17 @@ function parseData(data) {
   return { data: result, legend: legend };
 }
 
+export function showConnectionPanel(id) {
+  showPanel("device_connection", id, () => {
+    $(`#custom-credentials-${id}`).change(function() {
+      $(`#credentials-fields-${id}`).show();
+    });
+    $(`#device-credentials-${id},#user-credentials-${id}`).change(function() {
+      $(`#credentials-fields-${id}`).hide();
+    });
+  });
+}
+
 export function initDashboard() {
   const diagrams = {};
   const defaultProperties = {
@@ -97,21 +109,38 @@ function sshConnection(id) {
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
     }
-    const terminal = result.redirection
+    const link = result.redirection
       ? `${url}/terminal${result.port}/`
       : `${url}:${result.port}`;
     setTimeout(function() {
-      openUrl(terminal);
+      openUrl(link);
     }, 300);
-    const messageLink = `Click here to connect to ${result.device}.`;
-    const link = `<a target='_blank' href='${terminal}'>${messageLink}</a>`;
-    notify(link, "success", 15);
+    const message = `Click here to connect to ${result.device}.`;
+    notify(`<a target='_blank' href='${link}'>${message}</a>`, "success", 15);
     const warning = `Don't forget to turn off the pop-up blocker !`;
-    notify(warning, "error", 20);
+    notify(warning, "error", 15);
     $(`#connection-${id}`).remove();
   });
 }
 
+// eslint-disable-next-line
+function handOffSSHConnection(id) {
+  fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(
+    result
+  ) {
+    let url = config.app.address;
+    if (!url) {
+      url = `${window.location.protocol}//${window.location.host}`;
+    }
+    const link = `${result.username}@${window.location.hostname}:${
+      result.port
+    }`;
+    const message = `Click here to connect to ${result.device_name}.`;
+    notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
+  });
+}
+
+// eslint-disable-next-line
 function savePoolObjects(id) {
   fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);
@@ -181,17 +210,47 @@ export const showDeviceData = function(device) {
   });
 };
 
+function showSessionLog(sessionId) {
+  call(`/get_session_log/${sessionId}`, (log) => {
+    if (!log) {
+      notify(
+        "No log stored (e.g device unreachable or authentication error).",
+        "error",
+        5
+      );
+    } else {
+      createPanel("display", "Session log", sessionId, function() {
+        const content = document.getElementById(`content-${sessionId}`);
+        // eslint-disable-next-line new-cap
+        const editor = CodeMirror(content, {
+          lineWrapping: true,
+          lineNumbers: true,
+          readOnly: true,
+          theme: "cobalt",
+          extraKeys: { "Ctrl-F": "findPersistent" },
+          scrollbarStyle: "overlay",
+        });
+        editor.setSize("100%", "100%");
+        editor.setValue(log);
+      });
+    }
+  });
+}
+
 function showDeviceResultsPanel(device) {
-  createPanel("result", `Results - ${device.name}`, null, function() {
-    initTable("result", device);
+  createPanel("result_table", `Results - ${device.name}`, null, function() {
+    initTable("result", device, null, "table-result");
   });
 }
 
 configureNamespace("inventory", [
+  handOffSSHConnection,
+  showConnectionPanel,
   sshConnection,
   savePoolObjects,
   showPoolObjectsPanel,
   updatePools,
   showDeviceData,
   showDeviceResultsPanel,
+  showSessionLog,
 ]);

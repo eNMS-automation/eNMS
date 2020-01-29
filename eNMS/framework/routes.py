@@ -6,13 +6,11 @@ from flask import (
     render_template,
     request,
     send_file,
-    session,
     url_for,
 )
 from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from logging import info
-from os import listdir
 from werkzeug.wrappers import Response
 
 from eNMS import app
@@ -104,7 +102,9 @@ def table(table_type):
 @blueprint.route("/view/<view_type>")
 @monitor_requests
 def view(view_type):
-    return render_template(f"visualization.html", **{"endpoint": "view", "view_type": view_type})
+    return render_template(
+        f"visualization.html", **{"endpoint": "view", "view_type": view_type}
+    )
 
 
 @blueprint.route("/workflow_builder")
@@ -138,7 +138,9 @@ def view_service_results(id):
 @monitor_requests
 def download_output(id):
     data = fetch("data", id=id)
-    filename = f"{data.device_name}-{data.command}-{app.strip_all(data.runtime)}"
+    filename = f"{data.device_name}-\
+                {data.command}-\
+                {app.strip_all(data.runtime)}"
     return Response(
         (f"{line}\n" for line in data.output.splitlines()),
         mimetype="text/plain",

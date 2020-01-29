@@ -2,13 +2,11 @@
 global
 action: true
 CodeMirror: false
-currentPath: true
 diffview: false
 JSONEditor: false
 jsPanel: false
 page: false
 serviceTypes: false
-workflow: true
 */
 
 import {
@@ -294,7 +292,7 @@ function displayResultsTable(service, runtime) {
     "result",
     service,
     runtime || currentRuntime,
-    `result_table-${service.id}`
+    `table-result-result_table-${service.id}`
   );
 }
 

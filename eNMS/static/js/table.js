@@ -18,7 +18,7 @@ export const models = {};
 
 export function initTable(type, instance, runtime, id) {
   // eslint-disable-next-line new-cap
-  tables[type] = $(id ? `#table-${type}-${id}` : "#table").DataTable({
+  tables[type] = $(id ? `#${id}` : "#table").DataTable({
     serverSide: true,
     orderCellsTop: true,
     autoWidth: false,
@@ -233,7 +233,7 @@ models.device = class Device extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-dark"
-          onclick="eNMS.base.showPanel('device_connection', '${this.id}')"
+          onclick="eNMS.inventory.showConnectionPanel(${this.id})"
           data-tooltip="Connection"
             ><span class="glyphicon glyphicon-console"></span
           ></button>
@@ -935,7 +935,6 @@ models.changelog = class Changelog extends Base {
         search: "text",
         className: "dt-body-left",
       },
-      { data: "buttons", width: "130px" },
     ];
   }
 
@@ -946,11 +945,38 @@ models.changelog = class Changelog extends Base {
       super.refreshTableButton("changelog"),
     ];
   }
+};
+
+models.session = class Session extends Base {
+  static get columns() {
+    return [
+      { data: "timestamp", title: "Timestamp", search: "text", width: "200px" },
+      { data: "device_name", title: "Device", search: "text", width: "150px" },
+      { data: "user", title: "User", search: "text", width: "100px" },
+      { data: "name", title: "Session UUID", search: "text", width: "300px" },
+      { data: "buttons", width: "40px" },
+    ];
+  }
+
+  static get controls() {
+    return [
+      super.searchTableButton("session"),
+      super.refreshTableButton("session"),
+    ];
+  }
 
   get buttons() {
     return [
-      `<ul class="pagination pagination-lg" style="margin: 0px;">
-      ${this.deleteInstanceButton}
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.inventory.showSessionLog(${
+            this.id
+          })" data-tooltip="Session Log"
+            ><span class="glyphicon glyphicon-list"></span
+          ></button>
+        </li>
       </ul>`,
     ];
   }

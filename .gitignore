@@ -50,5 +50,5 @@ eNMS/.vscode
 # Apple files
 ._*
 
-# SSH handoff
+# SSH handoff (needs to be unique per instance)
 rsa.key

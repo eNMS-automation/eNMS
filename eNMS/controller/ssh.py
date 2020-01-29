@@ -1,5 +1,5 @@
 from datetime import datetime
-from time import sleep
+from logging import getLogger, FileHandler
 from paramiko import (
     AUTH_FAILED,
     AUTH_SUCCESSFUL,
@@ -16,10 +16,7 @@ from pathlib import Path
 from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
 from string import printable
 from threading import currentThread, Event, Thread
-
-import logging
-import os
-import sys
+from time import sleep
 
 
 class Client(SSHClient):
@@ -72,11 +69,10 @@ class SshConnection:
         self.channel = Server(port, uuid).channel
         path = Path.cwd() / "logs" / "ssh_sessions"
         path.mkdir(parents=True, exist_ok=True)
-        self.logger = logging.getLogger(uuid)
-        fh = logging.FileHandler(
-            filename=f'{logpath}/{hostname}-{datetime.now().strftime("%m%d%y_%H%M%S")}.log'
-        )
-        self.logger.addHandler(fh)
+        self.logger = getLogger(hostname)
+        if not self.logger.handlers:
+            filehandler = FileHandler(filename= path / f"{hostname}.log")
+            self.logger.addHandler(filehandler)
         Thread(target=self.receive_data).start()
         Thread(target=self.send_data).start()
 

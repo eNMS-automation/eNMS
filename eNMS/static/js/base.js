@@ -31,7 +31,7 @@ const panelSize = {
   database_migration: "700 300",
   device_connection: "400 auto",
   device_results: "1200 700",
-  display: "700 700",
+  display: "600 600",
   display_configuration: "1200 800",
   event_filtering: "700 400",
   excel_import: "400 150",

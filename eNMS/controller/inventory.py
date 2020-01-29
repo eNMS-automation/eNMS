@@ -100,6 +100,9 @@ class InventoryController(BaseController):
         device = fetch("device", id=device_id)
         return {"configuration": device.configuration, "data": device.operational_data}
 
+    def get_session_log(self, session_id):
+        return fetch("session", id=session_id).content
+
     def counters(self, property, type):
         return Counter(str(getattr(instance, property)) for instance in fetch_all(type))
 

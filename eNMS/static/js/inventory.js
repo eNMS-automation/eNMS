@@ -229,6 +229,30 @@ export const showDeviceData = function(device) {
   });
 };
 
+function showSessionLog(sessionId) {
+  call(`/get_session_log/${sessionId}`, (log) => {
+    createPanel(
+      "display",
+      "Session log",
+      sessionId,
+      function() {
+        const content = document.getElementById(`content-${sessionId}`);
+        // eslint-disable-next-line new-cap
+        const editor = CodeMirror(content, {
+          lineWrapping: true,
+          lineNumbers: true,
+          readOnly: true,
+          theme: "cobalt",
+          extraKeys: { "Ctrl-F": "findPersistent" },
+          scrollbarStyle: "overlay",
+        });
+        editor.setSize("100%", "100%");
+        editor.setValue(log);
+      }
+    );
+  });
+};
+
 function showDeviceResultsPanel(device) {
   createPanel("result_table", `Results - ${device.name}`, null, function() {
     initTable("result", device, null, "table-result");
@@ -244,4 +268,5 @@ configureNamespace("inventory", [
   updatePools,
   showDeviceData,
   showDeviceResultsPanel,
+  showSessionLog,
 ]);

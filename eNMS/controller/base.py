@@ -123,6 +123,7 @@ class BaseController:
         "get_runtimes",
         "get_view_topology",
         "get_service_state",
+        "get_session_log",
         "get_top_level_workflows",
         "get_tree_files",
         "get_workflow_results",

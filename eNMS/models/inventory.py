@@ -281,9 +281,8 @@ class Pool(AbstractPool):
 
 class Session(AbstractBase):
 
-    __tablename__ = "session"
-    type = Column(SmallString)
-    __mapper_args__ = {"polymorphic_identity": "session", "polymorphic_on": type}
+    __tablename__ = type = "session"
+    id = Column(Integer, primary_key=True)
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="sessions", foreign_keys="Session.device_id"

@@ -283,6 +283,8 @@ class Session(AbstractBase):
 
     __tablename__ = type = "session"
     id = Column(Integer, primary_key=True)
+    name = Column(SmallString, unique=True)
+    content = Column(LargeString, info={"dont_track_changes": True})
     device_id = Column(Integer, ForeignKey("device.id"))
     device = relationship(
         "Device", back_populates="sessions", foreign_keys="Session.device_id"

@@ -18,6 +18,8 @@ from string import printable
 from threading import currentThread, Event, Thread
 from time import sleep
 
+from eNMS.database.functions import fetch
+
 
 class Client(SSHClient):
     def __init__(self, hostname, username, password):
@@ -64,7 +66,8 @@ class Server(ServerInterface):
 
 
 class SshConnection:
-    def __init__(self, hostname, username, password, uuid, port):
+    def __init__(self, hostname, username, password, session_id, uuid, port):
+        self.session = fetch("session", id=session_id)
         self.shell = Client(hostname, username, password).shell
         self.channel = Server(port, uuid).channel
         path = Path.cwd() / "logs" / "ssh_sessions"
@@ -86,8 +89,11 @@ class SshConnection:
             log += "".join(c for c in str(response, "utf-8") if c in printable)
             if "\n" not in log:
                 continue
-            self.logger.info("\n".join(l for l in log.splitlines() if l))
-            log = ""
+            else:
+                log = "\n".join(l for l in log.splitlines() if l)
+                self.logger.info(log)
+                log = ""
+                self.session.content += log
             sleep(0.1)
 
     def send_data(self):

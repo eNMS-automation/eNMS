@@ -79,9 +79,12 @@ class InventoryController(BaseController):
             if kwargs["credentials"] == "user"
             else (kwargs["username"], kwargs["password"])
         )
-        uuid, port = str(uuid4()), get_ssh_port()
+        uuid, port = str(uuid4()), self.get_ssh_port()
+        session = factory("session", name=uuid)
+        Session.commit()
+        print(session.id)
         Thread(
-            target=SshConnection, args=(device.ip_address, *credentials, uuid, port)
+            target=SshConnection, args=(device.ip_address, *credentials, session.id, uuid, port)
         ).start()
         return {
             "port": port,

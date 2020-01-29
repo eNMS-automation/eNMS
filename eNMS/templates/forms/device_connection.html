@@ -116,20 +116,24 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button
-    type="button"
-    class="btn btn-primary btn-id add-id"
-    value="eNMS.inventory.sshConnection"
-  >
-    Web Connect
-  </button>
-  {% if config["handoffssh"]["enabled"] %}
-  <button
-    type="button"
-    class="btn btn-primary btn-id add-id"
-    value="eNMS.inventory.handOffSSHConnection"
-  >
-    SSH HandOff Connect
-  </button>
-  {% endif %}
+  <center>
+    {% if config["ssh"]["enabled"]["web"] %}
+      <button
+        type="button"
+        class="btn btn-primary btn-id add-id"
+        value="eNMS.inventory.sshConnection"
+      >
+        Web Session
+      </button>
+    {% endif %}
+    {% if config["ssh"]["enabled"]["desktop"] %}
+      <button
+        type="button"
+        class="btn btn-primary btn-id add-id"
+        value="eNMS.inventory.handOffSSHConnection"
+      >
+        Desktop Session
+      </button>
+    {% endif %}
+  </center>
 </div>

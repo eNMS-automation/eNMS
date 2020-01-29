@@ -24,8 +24,8 @@ class InventoryController(BaseController):
 
     def get_ssh_port(self):
         self.ssh_port += 1
-        start = self.config["gotty"]["start_port"]
-        end = self.config["gotty"]["end_port"]
+        start = self.config["ssh"]["start_port"]
+        end = self.config["ssh"]["end_port"]
         return start + self.ssh_port % (end - start)
 
     def connection(self, device_id, **kwargs):
@@ -38,7 +38,7 @@ class InventoryController(BaseController):
             cmd.append("--once")
         if "multiplexing" in kwargs:
             cmd.extend(f"tmux new -A -s gotty{port}".split())
-        if self.config["gotty"]["bypass_key_prompt"]:
+        if self.config["ssh"]["bypass_key_prompt"]:
             options = "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         else:
             options = ""
@@ -58,7 +58,7 @@ class InventoryController(BaseController):
         return {
             "device": device.name,
             "port": port,
-            "redirection": self.config["gotty"]["port_redirection"],
+            "redirection": self.config["ssh"]["port_redirection"],
             "server_addr": self.config["app"]["address"],
         }
 

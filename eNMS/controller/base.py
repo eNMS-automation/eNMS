@@ -62,7 +62,6 @@ class BaseController:
     log_severity = {"error": error, "info": info, "warning": warning}
 
     get_endpoints = [
-        "/administration",
         "/dashboard",
         "/login",
         "/table/changelog",

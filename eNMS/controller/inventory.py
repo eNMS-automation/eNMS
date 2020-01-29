@@ -80,11 +80,14 @@ class InventoryController(BaseController):
             else (kwargs["username"], kwargs["password"])
         )
         uuid, port = str(uuid4()), self.get_ssh_port()
-        session = factory("session", name=uuid)
+        session = factory(
+            "session", name=uuid, user=current_user.name, timestamp=self.get_time()
+        )
         Session.commit()
         print(session.id)
         Thread(
-            target=SshConnection, args=(device.ip_address, *credentials, session.id, uuid, port)
+            target=SshConnection,
+            args=(device.ip_address, *credentials, session.id, uuid, port),
         ).start()
         return {
             "port": port,

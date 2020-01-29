@@ -951,7 +951,9 @@ models.changelog = class Changelog extends Base {
 models.session = class Session extends Base {
   static get columns() {
     return [
-      { data: "name", title: "Name", search: "text", width: "200px" },
+      { data: "timestamp", title: "Timestamp", search: "text", width: "200px" },
+      { data: "user", title: "User", search: "text", width: "200px" },
+      { data: "name", title: "Session UUID", search: "text", width: "200px" },
       {
         data: "content",
         title: "Content",

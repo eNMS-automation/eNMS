@@ -125,15 +125,19 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function handOffSSHConnection(id) {
-  fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(result) {
+  fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(
+    result
+  ) {
     let url = config.app.address;
     if (!url) {
       url = `${window.location.protocol}//${window.location.host}`;
     }
-    const link = `${result.username}@${window.location.hostname}:${result.port}`
+    const link = `${result.username}@${window.location.hostname}:${
+      result.port
+    }`;
     const message = `Click here to connect to ${result.device_name}.`;
     notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
-})
+  });
 }
 
 function getRandomInt(min, max) {
@@ -143,7 +147,16 @@ function getRandomInt(min, max) {
 }
 
 function getRandomStr() {
-  return randomstring = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+  return (randomstring =
+    Math.random()
+      .toString(36)
+      .slice(2) +
+    Math.random()
+      .toString(36)
+      .slice(2) +
+    Math.random()
+      .toString(36)
+      .slice(2));
 }
 
 // eslint-disable-next-line

@@ -945,21 +945,15 @@ models.changelog = class Changelog extends Base {
       super.refreshTableButton("changelog"),
     ];
   }
-
 };
 
 models.session = class Session extends Base {
   static get columns() {
     return [
       { data: "timestamp", title: "Timestamp", search: "text", width: "200px" },
-      { data: "user", title: "User", search: "text", width: "200px" },
-      { data: "name", title: "Session UUID", search: "text", width: "200px" },
-      {
-        data: "content",
-        title: "Content",
-        search: "text",
-        className: "dt-body-left",
-      },
+      { data: "user", title: "User", search: "text", width: "100px" },
+      { data: "name", title: "Session UUID", search: "text", width: "300px" },
+      { data: "buttons", width: "40px" },
     ];
   }
 
@@ -970,6 +964,21 @@ models.session = class Session extends Base {
     ];
   }
 
+  get buttons() {
+    return [
+      `
+      <ul class="pagination pagination-lg" style="margin: 0px;">
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.inventory.showSessionLog(${
+            this.id
+          })" data-tooltip="Session Log"
+            ><span class="glyphicon glyphicon-list"></span
+          ></button>
+        </li>
+      </ul>`,
+    ];
+  }
 };
 
 models.event = class Event extends Base {

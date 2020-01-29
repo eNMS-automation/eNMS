@@ -96,10 +96,11 @@ class SshConnection:
         Session.commit()
 
     def send_data(self):
-        counter = 0
-        while not self.client.shell.closed and counter < 100:
-            counter += 1
-            self.client.shell.send(self.server.channel.recv(512))
+        while not self.client.shell.closed:
+            data = self.server.channel.recv(512)
+            if not data:
+                break
+            self.client.shell.send(data)
             sleep(0.1)
         self.client.shell.close()
         self.server.transport.close()

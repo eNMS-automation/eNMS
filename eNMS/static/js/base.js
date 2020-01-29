@@ -271,8 +271,8 @@ export function createPanel(
     headerLogo: "../static/images/logo.png",
     contentOverflow: "hidden scroll",
     contentSize: panelSize[name] || {
-      width: _ => window.innerWidth * 0.5,
-      height: _ => window.innerHeight*0.75
+      width: () => window.innerWidth * 0.5,
+      height: () => window.innerHeight * 0.75,
     },
     position: "center-top 0 10",
     headerTitle: title,

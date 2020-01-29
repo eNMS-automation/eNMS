@@ -12,7 +12,9 @@ from paramiko import (
     Transport,
     WarningPolicy,
 )
+from pathlib import Path
 from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
+from string import printable
 from threading import currentThread, Event, Thread
 
 import logging
@@ -21,29 +23,32 @@ import sys
 
 
 class Client(SSHClient):
-    def __init__(self, connection):
+    def __init__(self, hostname, username, password):
         super().__init__()
         self.load_system_host_keys()
         self.set_missing_host_key_policy(WarningPolicy)
         self.connect(
-            hostname=connection.hostname,
-            username=connection.username,
-            password=connection.password,
+            hostname=hostname, username=username, password=password,
         )
         self.shell = self.invoke_shell()
 
 
 class Server(ServerInterface):
-    def __init__(self, connection):
+    def __init__(self, port, uuid):
         self.event = Event()
-        self.username = connection.login
+        self.username = uuid
         sock = socket(AF_INET, SOCK_STREAM)
         sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-        sock.bind(("", connection.port))
+        sock.bind(("", port))
         sock.listen(100)
         sock.settimeout(30)
         self.transport = Transport(sock.accept()[0])
-        self.transport.add_server_key(connection.host_key)
+        try:
+            host_key = RSAKey.from_private_key_file("rsa.key")
+        except FileNotFoundError:
+            host_key = RSAKey.generate(2048)
+            host_key.write_private_key_file("rsa.key")
+        self.transport.add_server_key(host_key)
         self.transport.start_server(server=self)
         self.channel = self.transport.accept(10)
 
@@ -62,48 +67,33 @@ class Server(ServerInterface):
 
 
 class SshConnection:
-    def __init__(
-        self, hostname, username, password, login, port
-    ):
-        self.port = port
-        self.hostname = hostname
-        self.username = username
-        self.password = password
-        self.login = login
-        logpath = "./logs/handoffssh_logs"
-        if not os.path.exists(logpath):
-            os.makedirs(logpath)
-        self.sessionLogger = logging.getLogger(login)
+    def __init__(self, hostname, username, password, uuid, port):
+        self.shell = Client(hostname, username, password).shell
+        self.channel = Server(port, uuid).channel
+        path = Path.cwd() / "logs" / "ssh_sessions"
+        path.mkdir(parents=True, exist_ok=True)
+        self.logger = logging.getLogger(uuid)
         fh = logging.FileHandler(
             filename=f'{logpath}/{hostname}-{datetime.now().strftime("%m%d%y_%H%M%S")}.log'
         )
-        self.sessionLogger.addHandler(fh)
-        try:
-            self.host_key = RSAKey.from_private_key_file("rsa.key")
-        except FileNotFoundError:
-            self.host_key = RSAKey.generate(2048)
-            self.host_key.write_private_key_file("rsa.key")
-        self.start()
-        
+        self.logger.addHandler(fh)
+        Thread(target=self.receive_data).start()
+        Thread(target=self.send_data).start()
 
-    def receive_data(self, shell, channel):
+    def receive_data(self):
         log = ""
-        while not shell.closed:
-            response = shell.recv(1024)
+        while not self.shell.closed:
+            response = self.shell.recv(1024)
             if not response:
                 continue
-            channel.send(response)
-            log += response.decode("utf-8", "replace")
-            if "\n" in log:
-                self.sessionLogger.info("\n".join(l for l in log.splitlines() if l))
-                log = ""
-            sleep(0.001)
+            self.channel.send(response)
+            log += "".join(c for c in str(response, "utf-8") if c in printable)
+            if "\n" not in log:
+                continue
+            self.logger.info("\n".join(l for l in log.splitlines() if l))
+            log = ""
+            sleep(0.1)
 
-    def send_data(self, shell, channel):
-        while not shell.closed:
-            shell.send(channel.recv(512))
-
-    def start(self):
-        args = (Client(self).shell, Server(self).channel)
-        Thread(target=self.receive_data, args=args).start()
-        Thread(target=self.send_data, args=args).start()
+    def send_data(self):
+        while not self.shell.closed:
+            self.shell.send(self.channel.recv(512))

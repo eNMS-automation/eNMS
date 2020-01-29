@@ -2,13 +2,11 @@
 global
 action: true
 CodeMirror: false
-currentPath: true
 diffview: false
 JSONEditor: false
 jsPanel: false
 page: false
 serviceTypes: false
-workflow: true
 */
 
 import {

@@ -1,11 +1,10 @@
 /*
 global
 action: false
-currentPath: true
+page: false
 serviceTypes: false
 Set: false
 vis: false
-workflow: true
 */
 
 import {

@@ -1,9 +1,7 @@
-from datetime import datetime
 from logging import getLogger, FileHandler
 from paramiko import (
     AUTH_FAILED,
     AUTH_SUCCESSFUL,
-    client,
     RSAKey,
     OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED as OPEN_FAILED,
     OPEN_SUCCEEDED,
@@ -15,7 +13,7 @@ from paramiko import (
 from pathlib import Path
 from socket import AF_INET, socket, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
 from string import printable
-from threading import currentThread, Event, Thread
+from threading import Event, Thread
 from time import sleep
 
 from eNMS.database import Session

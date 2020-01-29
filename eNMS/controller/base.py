@@ -480,7 +480,7 @@ class BaseController:
         }
 
     def table_filtering(self, table, **kwargs):
-        model, properties = models[table], model_properties[table]
+        model = models[table]
         operator = and_ if kwargs["form"].get("operator", "all") == "all" else or_
         ordering = getattr(
             getattr(

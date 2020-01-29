@@ -140,25 +140,6 @@ function handOffSSHConnection(id) {
   });
 }
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomStr() {
-  return (randomstring =
-    Math.random()
-      .toString(36)
-      .slice(2) +
-    Math.random()
-      .toString(36)
-      .slice(2) +
-    Math.random()
-      .toString(36)
-      .slice(2));
-}
-
 // eslint-disable-next-line
 function savePoolObjects(id) {
   fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
@@ -232,30 +213,29 @@ export const showDeviceData = function(device) {
 function showSessionLog(sessionId) {
   call(`/get_session_log/${sessionId}`, (log) => {
     if (!log) {
-      notify("No log stored for this session (e.g device unreachable or authentication error).", "error", 5);
-    } else {
-      createPanel(
-        "display",
-        "Session log",
-        sessionId,
-        function() {
-          const content = document.getElementById(`content-${sessionId}`);
-          // eslint-disable-next-line new-cap
-          const editor = CodeMirror(content, {
-            lineWrapping: true,
-            lineNumbers: true,
-            readOnly: true,
-            theme: "cobalt",
-            extraKeys: { "Ctrl-F": "findPersistent" },
-            scrollbarStyle: "overlay",
-          });
-          editor.setSize("100%", "100%");
-          editor.setValue(log);
-        }
+      notify(
+        "No log stored (e.g device unreachable or authentication error).",
+        "error",
+        5
       );
+    } else {
+      createPanel("display", "Session log", sessionId, function() {
+        const content = document.getElementById(`content-${sessionId}`);
+        // eslint-disable-next-line new-cap
+        const editor = CodeMirror(content, {
+          lineWrapping: true,
+          lineNumbers: true,
+          readOnly: true,
+          theme: "cobalt",
+          extraKeys: { "Ctrl-F": "findPersistent" },
+          scrollbarStyle: "overlay",
+        });
+        editor.setSize("100%", "100%");
+        editor.setValue(log);
+      });
     }
   });
-};
+}
 
 function showDeviceResultsPanel(device) {
   createPanel("result_table", `Results - ${device.name}`, null, function() {

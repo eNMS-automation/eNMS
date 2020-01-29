@@ -4,6 +4,7 @@ alertify: false
 CodeMirror: false
 config: true
 csrf_token: false
+eNMS: true
 formProperties: false
 job: false
 jsPanel: false
@@ -12,7 +13,6 @@ page: false
 Promise: false
 relations: false
 relationships: false
-workflow: true
 */
 
 import { tables } from "./table.js";
@@ -665,8 +665,8 @@ function showAllAlerts() {
     "alerts_table",
     null,
     () => {
-      // eslint-disable-next-line new-cap
       $("#alerts-table")
+        // eslint-disable-next-line new-cap
         .DataTable({
           columns: [{ width: "200px" }, { width: "60px" }, null],
         })

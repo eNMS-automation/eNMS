@@ -8,13 +8,7 @@ viewType: false
 vis: false
 */
 
-import {
-  call,
-  notify,
-  serializeForm,
-  showPanel,
-  showTypePanel,
-} from "./base.js";
+import { call, notify, serializeForm, showTypePanel } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
 
 const layers = {

@@ -951,6 +951,7 @@ models.session = class Session extends Base {
   static get columns() {
     return [
       { data: "timestamp", title: "Timestamp", search: "text", width: "200px" },
+      { data: "device_name", title: "Device", search: "text", width: "150px" },
       { data: "user", title: "User", search: "text", width: "100px" },
       { data: "name", title: "Session UUID", search: "text", width: "300px" },
       { data: "buttons", width: "40px" },

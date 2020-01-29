@@ -24,3 +24,4 @@ wtforms
 xlrd
 xlwt
 xmltodict
+pyats

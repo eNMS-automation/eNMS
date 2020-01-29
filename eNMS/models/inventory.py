@@ -113,6 +113,9 @@ class Device(CustomDevice):
     )
     tasks = relationship("Task", secondary=task_device_table, back_populates="devices")
     pools = relationship("Pool", secondary=pool_device_table, back_populates="devices")
+    sessions = relationship(
+        "Session", back_populates="device", cascade="all, delete-orphan"
+    )
 
     @property
     def view_properties(self):
@@ -274,3 +277,14 @@ class Pool(AbstractPool):
         self.device_number = len(self.devices)
         self.links = list(filter(self.object_match, fetch_all("link")))
         self.link_number = len(self.links)
+
+
+class Session(AbstractBase):
+
+    __tablename__ = "session"
+    type = Column(SmallString)
+    __mapper_args__ = {"polymorphic_identity": "session", "polymorphic_on": type}
+    device_id = Column(Integer, ForeignKey("device.id"))
+    device = relationship(
+        "Device", back_populates="sessions", foreign_keys="Session.device_id"
+    )

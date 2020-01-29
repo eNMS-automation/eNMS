@@ -71,7 +71,7 @@ class SshConnection:
         path.mkdir(parents=True, exist_ok=True)
         self.logger = getLogger(hostname)
         if not self.logger.handlers:
-            filehandler = FileHandler(filename= path / f"{hostname}.log")
+            filehandler = FileHandler(filename=path / f"{hostname}.log")
             self.logger.addHandler(filehandler)
         Thread(target=self.receive_data).start()
         Thread(target=self.send_data).start()

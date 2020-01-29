@@ -1,7 +1,6 @@
 from collections import Counter
 from flask_login import current_user
 from logging import info
-from random import choice
 from sqlalchemy import and_
 from subprocess import Popen
 from threading import Thread
@@ -21,18 +20,18 @@ from eNMS.properties import field_conversion
 
 class InventoryController(BaseController):
 
-    gotty_port = -1
+    ssh_port = -1
 
-    def get_gotty_port(self):
-        self.gotty_port += 1
+    def get_ssh_port(self):
+        self.ssh_port += 1
         start = self.config["gotty"]["start_port"]
         end = self.config["gotty"]["end_port"]
-        return start + self.gotty_port % (end - start)
+        return start + self.ssh_port % (end - start)
 
     def connection(self, device_id, **kwargs):
         device = fetch("device", id=device_id)
         cmd = [str(self.path / "files" / "apps" / "gotty"), "-w"]
-        port, protocol = self.get_gotty_port(), kwargs["protocol"]
+        port, protocol = self.get_ssh_port(), kwargs["protocol"]
         address = getattr(device, kwargs["address"])
         cmd.extend(["-p", str(port)])
         if "accept-once" in kwargs:
@@ -80,7 +79,7 @@ class InventoryController(BaseController):
             if kwargs["credentials"] == "user"
             else (kwargs["username"], kwargs["password"])
         )
-        uuid, port = str(uuid4()), choice(range(50000, 50999))
+        uuid, port = str(uuid4()), get_ssh_port()
         Thread(
             target=SshConnection, args=(device.ip_address, *credentials, uuid, port)
         ).start()

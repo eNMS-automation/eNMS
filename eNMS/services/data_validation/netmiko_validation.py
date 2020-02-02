@@ -27,6 +27,7 @@ class NetmikoValidationService(ConnectionService):
     auto_find_prompt = Column(Boolean, default=True)
     strip_prompt = Column(Boolean, default=True)
     strip_command = Column(Boolean, default=True)
+    use_genie = Column(Boolean, default=False)
 
     __mapper_args__ = {"polymorphic_identity": "netmiko_validation_service"}
 
@@ -44,6 +45,7 @@ class NetmikoValidationService(ConnectionService):
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,
                 strip_command=run.strip_command,
+                use_genie=self.use_genie
             )
         except Exception:
             return {
@@ -62,6 +64,7 @@ class NetmikoValidationForm(NetmikoForm):
     auto_find_prompt = BooleanField(default=True)
     strip_prompt = BooleanField(default=True)
     strip_command = BooleanField(default=True)
+    use_genie = BooleanField(default=False)
     groups = {
         "Main Parameters": {"commands": ["command"], "default": "expanded"},
         "Advanced Netmiko Parameters": {
@@ -70,6 +73,7 @@ class NetmikoValidationForm(NetmikoForm):
                 "auto_find_prompt",
                 "strip_prompt",
                 "strip_command",
+                "use_genie"
             ],
             "default": "hidden",
         },

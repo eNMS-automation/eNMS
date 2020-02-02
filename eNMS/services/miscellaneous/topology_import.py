@@ -16,6 +16,15 @@ class TopologyImportService(Service):
     __tablename__ = "topology_import_service"
     pretty_name = "Topology Import"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
+    self.netbox_address = Column(SmallString)
+    self.netbox_token = Column(SmallString)
+    self.opennms_address = Column(SmallString)
+    self.opennms_devices = Column(SmallString)
+    self.opennms_login = Column(SmallString)
+    self.opennms_password = Column(SmallString)
+    self.librenms_login = Column(SmallString)
+    self.librenms_token = Column(SmallString)
+    
     import_type = Column(SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "topology_import_service"}
@@ -26,7 +35,7 @@ class TopologyImportService(Service):
 
     def query_netbox(self):
         nb = netbox_api(
-            app.settings["netbox"]["address"], token=environ.get("NETBOX_TOKEN")
+            self.netbox_address, self.netbox_token
         )
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
@@ -46,12 +55,10 @@ class TopologyImportService(Service):
             )
 
     def query_opennms(self):
-        login = app.settings["opennms"]["login"]
-        password = environ.get("OPENNMS_PASSWORD")
         json_devices = http_get(
-            app.settings["opennms"]["devices"],
+            self.opennms_devices,
             headers={"Accept": "application/json"},
-            auth=(login, password),
+            auth=(self.opennms_login, self.opennms_password),
         ).json()["node"]
         devices = {
             device["id"]: {
@@ -69,9 +76,9 @@ class TopologyImportService(Service):
         }
         for device in list(devices):
             link = http_get(
-                f"{app.settings['opennms']['address']}/nodes/{device}/ipinterfaces",
+                f"{self.opennms_address}/nodes/{device}/ipinterfaces",
                 headers={"Accept": "application/json"},
-                auth=(login, password),
+                auth=(self.opennms_login, self.opennms_password),
             ).json()
             for interface in link["ipInterface"]:
                 if interface["snmpPrimary"] == "P":
@@ -80,8 +87,8 @@ class TopologyImportService(Service):
 
     def query_librenms(self):
         devices = http_get(
-            f'{app.settings["librenms"]["address"]}/api/v0/devices',
-            headers={"X-Auth-Token": environ.get("LIBRENMS_TOKEN")},
+            f'{self.librenms_login}/api/v0/devices',
+            headers={"X-Auth-Token": self.librenms_token},
         ).json()["devices"]
         for device in devices:
             factory(

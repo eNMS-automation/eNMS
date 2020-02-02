@@ -476,7 +476,7 @@
   commit_configuration: false
   config_mode: false
   config_mode_command: ''
-  content: vrf definition test
+  content: vrf instance test
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -610,7 +610,7 @@
   commit_configuration: false
   config_mode: false
   config_mode_command: ''
-  content: no vrf definition test
+  content: no vrf instance test
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -741,7 +741,7 @@
   waiting_time: 0
 - action: load_merge_candidate
   close_connection: false
-  content: "vrf definition napalm\r\n"
+  content: "vrf instance napalm\r\n"
   content_match: ''
   content_match_regex: false
   conversion_method: none

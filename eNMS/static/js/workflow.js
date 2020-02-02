@@ -323,6 +323,7 @@ export function processWorkflowData(instance, id) {
 function updateWorkflowService(service) {
   nodes.add(serviceToNode(service));
   workflow.services.push(service);
+  switchMode("motion", true);
   notify(
     `Service '${service.scoped_name}' added to the workflow.`,
     "success",

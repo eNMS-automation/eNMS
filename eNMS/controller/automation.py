@@ -200,7 +200,8 @@ class AutomationController(BaseController):
                         },
                     }
                     for service in fetch_all("service")
-                    if not service.workflows and service.type != "workflow"
+                    if (not service.workflows and service.type != "workflow")
+                    or service.shared
                 ),
                 key=itemgetter("text"),
             )

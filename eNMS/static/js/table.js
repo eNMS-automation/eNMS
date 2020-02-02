@@ -77,7 +77,7 @@ export function initTable(type, instance, runtime, id) {
       this.api().columns.adjust();
     },
     ajax: {
-      url: `/table_filtering/${type}`,
+      url: `/table_filtering/${models[type].modelFiltering || type}`,
       type: "POST",
       contentType: "application/json",
       data: (d) => {
@@ -268,6 +268,54 @@ models.device = class Device extends Base {
           ></button>
         </li>
         ${this.deleteInstanceButton}
+      </ul>`;
+  }
+};
+
+models.configuration = class Configuration extends Base {
+
+  static get modelFiltering() {
+    return "device";
+  }
+
+  static get columns() {
+    return [
+      { data: "name", title: "Name", search: "text", width: "150px" },
+      { data: "configuration", title: "Configuration", search: "text" },
+      { data: "buttons", width: "90px" },
+    ];
+  }
+
+  static get controls() {
+    return `
+      <select
+        id="data-type"
+        name="data-type"
+        class="form-control"
+      >
+        <option value="configuration">Configuration</option>
+        <option value="operational_data">Operational Data</option>
+      </select>`;
+  }
+
+  get buttons() {
+    return `
+      <ul class="pagination pagination-lg" style="margin: 0px">
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.inventory.showDeviceData(${this.instance})"
+          data-tooltip="Network Data"
+            ><span class="glyphicon glyphicon-cog"></span
+          ></button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-sm btn-primary"
+          onclick="eNMS.base.showTypePanel('device', '${
+            this.id
+          }')" data-tooltip="Edit"
+            ><span class="glyphicon glyphicon-edit"></span
+          ></button>
+        </li>
       </ul>`;
   }
 };

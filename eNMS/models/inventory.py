@@ -117,6 +117,12 @@ class Device(CustomDevice):
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
 
+    def table_properties(self, table):
+        if table == "device":
+            return super().get_properties()
+        else:
+            return super().get_properties()
+
     @property
     def view_properties(self):
         return {

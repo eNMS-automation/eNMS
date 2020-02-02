@@ -263,15 +263,15 @@
                 </li>
                 <li class="nav-item">
                   <a
-                    onclick="eNMS.administration.showConfiguration()"
+                    onclick="eNMS.administration.showSettings()"
                     style="cursor:pointer"
                   >
                     <img
-                      src="{{ url_for('static', filename='images/configuration.png') }}"
+                      src="{{ url_for('static', filename='images/settings.png') }}"
                       height="25"
                       width="25"
                     />
-                    &nbsp;Config
+                    &nbsp;Settings
                   </a>
                 </li>
                 <li class="nav-item">
@@ -310,7 +310,7 @@
       const relationships = {{ relationships|tojson|safe }};
       const serviceTypes = {{ service_types|tojson|safe }};
       let action = {};
-      let config = {{ config|tojson|safe }};
+      let settings = {{ settings|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";
     </script>
     <script src="{{ url_for('static', filename='lib/moment/moment.min.js') }}"></script>

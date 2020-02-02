@@ -24,7 +24,7 @@ Custom URL
 eNMS automatically redirects you to the address and port GoTTY is listening to,
 using JavaScript variables ``window.location.hostname`` and ``window.location.protocol``.
 If these variables do not redirect to the right URL, you can tell eNMS which protocol
-and URL to use by setting the ``address`` variable in the configuration. (just the URL, and 
+and URL to use by setting the ``address`` variable in the settings. (just the URL, and 
 eNMS will add the port GoTTY is listening to)
 
 Port redirection

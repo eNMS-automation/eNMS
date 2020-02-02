@@ -52,7 +52,7 @@ in that case, it is best to use circles or circle markers for scalability.
    :align: center
 
 You can change the type of marker and tiles from the right-click menu.
-You can also configure, from the :guilabel:`Admin / Administration Panel` page, which are used by default when you open the view.
+You can also configure in the settings which are used by default when you open the view.
 
 Site View
 ---------

@@ -1,7 +1,7 @@
 /*
 global
 CodeMirror: false
-config: true
+settings: true
 echarts: false
 initSelect: false
 */
@@ -105,7 +105,7 @@ function sshConnection(id) {
   fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
-    let url = config.app.address;
+    let url = settings.app.address;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
     }
@@ -128,7 +128,7 @@ function handOffSSHConnection(id) {
   fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
-    let url = config.app.address;
+    let url = settings.app.address;
     if (!url) {
       url = `${window.location.protocol}//${window.location.host}`;
     }

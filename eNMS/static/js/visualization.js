@@ -1,7 +1,7 @@
 /*
 global
 action: false
-config: true
+settings: true
 jsPanel: false
 L: false
 viewType: false
@@ -260,12 +260,12 @@ export function initView() {
   }
   routerIcon = window["icon_router"];
   markerGroup = L.markerClusterGroup();
-  markerType = config.view.marker;
+  markerType = settings.view.marker;
   map = L.map("map", { preferCanvas: true }).setView(
-    [config.view.latitude, config.view.longitude],
-    config.view.zoom_level
+    [settings.view.latitude, settings.view.longitude],
+    settings.view.zoom_level
   );
-  layer = L.tileLayer(layers[config.view.tile_layer]);
+  layer = L.tileLayer(layers[settings.view.tile_layer]);
   map
     .addLayer(layer)
     .on("click", function(e) {

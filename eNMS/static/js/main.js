@@ -1,8 +1,8 @@
 /*
 global
-config: false
 NProgress: false
 page: false
+settings: false
 user: false
 */
 
@@ -30,7 +30,7 @@ function doc(page) {
     view: "inventory/network_visualization.html",
     workflow_builder: "automation/workflows.html",
   }[page];
-  $("#doc-link").attr("href", `${config.app.documentation_url}${endpoint}`);
+  $("#doc-link").attr("href", `${settings.app.documentation_url}${endpoint}`);
 }
 
 function initSidebar() {

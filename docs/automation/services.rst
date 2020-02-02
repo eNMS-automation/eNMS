@@ -131,10 +131,10 @@ You can configure the following parameters:
 - ``Notification header`` A header displayed at the beginning of the notification.
 - ``Include Result Link in summary``: whether the notification contains a link to the results.
 - ``Mail recipients`` Must be a list of email addresses, separated by comma. if left empty, the recipients defined
-  in the configuration.
+  in the settings.
 - ``Display only failed nodes`` the notification will not include devices for which the service ran successfully.
 
-To set up the mail system, you must set the variable of the ``mail`` section in the configuration.
+To set up the mail system, you must set the variable of the ``mail`` section in the settings.
 ``server``, ``port``, ``use_tls``, ``username``, ``sender``, ``recipients``.
 Besides, you must set the password via the ``MAIL_PASSWORD`` environment variable.
 
@@ -168,10 +168,10 @@ Variables
   - **Type** Dictionary.
   - **Available**: after a service has run.
 
-- ``config``
+- ``settings``
 
-  - **Meaning**: eNMS configuration, editable from :guilabel:`Admin / Administration`, button
-    ``Configuration``. It is initially set to the content of ``config.json``.
+  - **Meaning**: eNMS settings, editable from the top-level menu.
+    It is initially set to the content of ``settings.json``.
   - **Type** Dictionary.
   - **Available**: Always.
 
@@ -219,9 +219,9 @@ Variables
   - ``title`` (mandatory, type ``string``)
   - ``content`` (mandatory, type ``string``)
   - ``sender`` (optional, type ``string``) Email address of the sender. Default to the sender address
-    of eNMS configuration.
+    of eNMS settings.
   - ``recipients`` (optional, type ``string``) Mail addresses of the recipients, separated by comma.
-    Default to the recipients addresses of eNMS configuration.
+    Default to the recipients addresses of eNMS settings.
   - ``filename`` (optional, type ``string``) Name of the attached file.
   - ``file_content`` (optional, type ``string``) Content of the attached file.
 
@@ -275,7 +275,7 @@ Custom Services
 In addition to the services provided by default, you are free to create your own services.
 When the application starts, it loads all python files in ``eNMS / eNMS / services`` folder.
 If you want your custom services to be in a different folder, you can set a different path in the
-:ref:`Configuration`, section ``paths``.
+:ref:`settings`, section ``paths``.
 Creating a service means adding a new python file in that folder.
 You are free to create subfolders to organize your own services any way you want:
 eNMS will automatically detect them.

@@ -2,7 +2,7 @@
 global
 alertify: false
 CodeMirror: false
-config: true
+settings: true
 csrf_token: false
 eNMS: true
 formProperties: false
@@ -57,7 +57,7 @@ const panelSize = {
 const panelName = {
   alerts_table: "Alerts",
   add_services: "Add services",
-  configuration: "Configuration",
+  settings: "Settings",
   database_deletion: "Database Deletion",
   database_migration: "Database Migration",
   device_connection: "Connect to device",
@@ -342,7 +342,7 @@ function preprocessForm(panel, id, type, duplicate) {
     }
   });
   panel.querySelectorAll(".doc-link").forEach((el) => {
-    $(el).attr("href", `${config.app.documentation_url}${$(el).attr("href")}`);
+    $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
   });
 }
 

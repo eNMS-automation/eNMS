@@ -31,7 +31,7 @@ from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from uuid import getnode
 
-from eNMS.config import config
+from eNMS.settings import settings
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import (
@@ -81,7 +81,7 @@ class BaseController:
 
     json_endpoints = [
         "multiselect_filtering",
-        "save_configuration",
+        "save_settings",
         "table_filtering",
         "view_filtering",
     ]
@@ -162,20 +162,20 @@ class BaseController:
     ]
 
     def __init__(self):
-        self.config = config
+        self.settings = settings
         self.path = Path.cwd()
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()
-        if config["tacacs"]["active"]:
+        if settings["tacacs"]["active"]:
             self.init_tacacs_client()
-        if config["ldap"]["active"]:
+        if settings["ldap"]["active"]:
             self.init_ldap_client()
-        if config["vault"]["active"]:
+        if settings["vault"]["active"]:
             self.init_vault_client()
-        if config["syslog"]["active"]:
+        if settings["syslog"]["active"]:
             self.init_syslog_server()
-        if config["paths"]["custom_code"]:
-            sys_path.append(config["paths"]["custom_code"])
+        if settings["paths"]["custom_code"]:
+            sys_path.append(settings["paths"]["custom_code"])
         self.fetch_version()
         self.init_logs()
         self.init_connection_pools()
@@ -191,7 +191,7 @@ class BaseController:
             self.configure_server_id()
             self.create_admin_user()
             Session.commit()
-            if self.config["app"]["create_examples"]:
+            if self.settings["app"]["create_examples"]:
                 self.migration_import(
                     name="examples", import_export_types=import_classes
                 )
@@ -233,7 +233,7 @@ class BaseController:
             self.topology_import(file)
 
     def get_git_content(self):
-        repo = self.config["app"]["git_repository"]
+        repo = self.settings["app"]["git_repository"]
         if not repo:
             return
         local_path = self.path / "network_data"
@@ -248,7 +248,7 @@ class BaseController:
         self.update_database_configurations_from_git()
 
     def load_custom_properties(self):
-        filepath = self.config["paths"]["custom_properties"]
+        filepath = self.settings["paths"]["custom_properties"]
         if not filepath:
             custom_properties = {}
         else:
@@ -272,7 +272,7 @@ class BaseController:
         return custom_properties
 
     def init_logs(self):
-        log_level = self.config["app"]["log_level"].upper()
+        log_level = self.settings["app"]["log_level"].upper()
         folder = self.path / "logs"
         folder.mkdir(parents=True, exist_ok=True)
         basicConfig(
@@ -289,11 +289,11 @@ class BaseController:
 
     def init_connection_pools(self):
         self.request_session = RequestSession()
-        retry = Retry(**self.config["requests"]["retries"])
+        retry = Retry(**self.settings["requests"]["retries"])
         for protocol in ("http", "https"):
             self.request_session.mount(
                 f"{protocol}://",
-                HTTPAdapter(max_retries=retry, **self.config["requests"]["pool"],),
+                HTTPAdapter(max_retries=retry, **self.settings["requests"]["pool"],),
             )
 
     def init_scheduler(self):
@@ -321,13 +321,13 @@ class BaseController:
 
     def init_services(self):
         path_services = [self.path / "eNMS" / "services"]
-        if self.config["paths"]["custom_services"]:
-            path_services.append(Path(self.config["paths"]["custom_services"]))
+        if self.settings["paths"]["custom_services"]:
+            path_services.append(Path(self.settings["paths"]["custom_services"]))
         for path in path_services:
             for file in path.glob("**/*.py"):
                 if "init" in str(file):
                     continue
-                if not self.config["app"]["create_examples"] and "examples" in str(
+                if not self.settings["app"]["create_examples"] and "examples" in str(
                     file
                 ):
                     continue
@@ -339,23 +339,23 @@ class BaseController:
                     error(f"Error loading custom service '{file}' ({str(e)})")
 
     def init_ldap_client(self):
-        self.ldap_client = Server(self.config["ldap"]["server"], get_info=ALL)
+        self.ldap_client = Server(self.settings["ldap"]["server"], get_info=ALL)
 
     def init_tacacs_client(self):
         self.tacacs_client = TACACSClient(
-            self.config["tacacs"]["address"], 49, environ.get("TACACS_PASSWORD")
+            self.settings["tacacs"]["address"], 49, environ.get("TACACS_PASSWORD")
         )
 
     def init_vault_client(self):
         self.vault_client = VaultClient()
         self.vault_client.token = environ.get("VAULT_TOKEN")
-        if self.vault_client.sys.is_sealed() and self.config["vault"]["unseal"]:
+        if self.vault_client.sys.is_sealed() and self.settings["vault"]["unseal"]:
             keys = [environ.get(f"UNSEAL_VAULT_KEY{i}") for i in range(1, 6)]
             self.vault_client.sys.submit_unseal_keys(filter(None, keys))
 
     def init_syslog_server(self):
         self.syslog_server = SyslogServer(
-            self.config["syslog"]["address"], self.config["syslog"]["port"]
+            self.settings["syslog"]["address"], self.settings["syslog"]["port"]
         )
         self.syslog_server.start()
 
@@ -545,8 +545,8 @@ class BaseController:
         filename=None,
         file_content=None,
     ):
-        sender = sender or self.config["mail"]["sender"]
-        recipients = recipients or self.config["mail"]["recipients"]
+        sender = sender or self.settings["mail"]["sender"]
+        recipients = recipients or self.settings["mail"]["recipients"]
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients
@@ -557,11 +557,11 @@ class BaseController:
             attached_file = MIMEApplication(file_content, Name=filename)
             attached_file["Content-Disposition"] = f'attachment; filename="{filename}"'
             message.attach(attached_file)
-        server = SMTP(self.config["mail"]["server"], self.config["mail"]["port"])
-        if self.config["mail"]["use_tls"]:
+        server = SMTP(self.settings["mail"]["server"], self.settings["mail"]["port"])
+        if self.settings["mail"]["use_tls"]:
             server.starttls()
             password = environ.get("MAIL_PASSWORD", "")
-            server.login(self.config["mail"]["username"], password)
+            server.login(self.settings["mail"]["username"], password)
         server.sendmail(sender, recipients.split(","), message.as_string())
         server.close()
 

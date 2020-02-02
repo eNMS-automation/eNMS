@@ -29,13 +29,13 @@ class AdministrationController(BaseController):
         elif kwargs["authentication_method"] == "LDAP Domain":
             with Connection(
                 self.ldap_client,
-                user=f"{self.config['ldap']['userdn']}\\{name}",
+                user=f"{self.settings['ldap']['userdn']}\\{name}",
                 password=password,
                 auto_bind=True,
                 authentication=NTLM,
             ) as connection:
                 connection.search(
-                    self.config["ldap"]["basedn"],
+                    self.settings["ldap"]["basedn"],
                     f"(&(objectClass=person)(samaccountname={name}))",
                     search_scope=SUBTREE,
                     get_operational_attributes=True,
@@ -44,7 +44,7 @@ class AdministrationController(BaseController):
                 json_response = loads(connection.response_to_json())["entries"][0]
                 if json_response and any(
                     group in s
-                    for group in self.config["ldap"]["admin_group"].split(",")
+                    for group in self.settings["ldap"]["admin_group"].split(",")
                     for s in json_response["attributes"]["memberOf"]
                 ):
                     user = factory(
@@ -183,18 +183,18 @@ class AdministrationController(BaseController):
     def get_exported_services(self):
         return listdir(self.path / "files" / "services")
 
-    def save_configuration(self, **config):
-        self.config = config
+    def save_settings(self, **settings):
+        self.settings = settings
 
     def scan_cluster(self, **kwargs):
-        protocol = self.config["cluster"]["scan_protocol"]
-        for ip_address in IPv4Network(self.config["cluster"]["scan_subnet"]):
+        protocol = self.settings["cluster"]["scan_protocol"]
+        for ip_address in IPv4Network(self.settings["cluster"]["scan_subnet"]):
             try:
                 server = http_get(
                     f"{protocol}://{ip_address}/rest/is_alive",
-                    timeout=self.config["cluster"]["scan_timeout"],
+                    timeout=self.settings["cluster"]["scan_timeout"],
                 ).json()
-                if self.config["cluster"]["id"] != server.pop("cluster_id"):
+                if self.settings["cluster"]["id"] != server.pop("cluster_id"):
                     continue
                 factory("server", **{**server, **{"ip_address": str(ip_address)}})
             except ConnectionError:
@@ -202,7 +202,7 @@ class AdministrationController(BaseController):
 
     def get_tree_files(self, path):
         if path == "root":
-            path = self.config["paths"]["files"] or self.path / "files"
+            path = self.settings["paths"]["files"] or self.path / "files"
         else:
             path = path.replace(">", "/")
         return [

@@ -1,5 +1,5 @@
 from pathlib import Path
 from json import load
 
-with open(Path.cwd() / "config.json", "r") as file:
-    config = load(file)
+with open(Path.cwd() / "settings.json", "r") as file:
+    settings = load(file)

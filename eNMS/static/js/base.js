@@ -24,7 +24,6 @@ let topZ = 1000;
 
 const panelSize = {
   alerts_table: "900 600",
-  add_services: "800 700",
   calendar: "1200 650",
   compare: "auto 700",
   database_deletion: "700 400",

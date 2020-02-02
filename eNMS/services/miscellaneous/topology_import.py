@@ -2,7 +2,7 @@ from os import environ
 from pynetbox import api as netbox_api
 from requests import get as http_get
 from sqlalchemy import ForeignKey, Integer
-from wtforms import HiddenField, SelectField
+from wtforms import HiddenField, PasswordField, SelectField, StringField
 
 from eNMS import app
 from eNMS.database.dialect import Column, SmallString
@@ -16,15 +16,15 @@ class TopologyImportService(Service):
     __tablename__ = "topology_import_service"
     pretty_name = "Topology Import"
     id = Column(Integer, ForeignKey("service.id"), primary_key=True)
-    self.netbox_address = Column(SmallString)
-    self.netbox_token = Column(SmallString)
-    self.opennms_address = Column(SmallString)
-    self.opennms_devices = Column(SmallString)
-    self.opennms_login = Column(SmallString)
-    self.opennms_password = Column(SmallString)
-    self.librenms_login = Column(SmallString)
-    self.librenms_token = Column(SmallString)
-    
+    netbox_address = Column(SmallString)
+    netbox_token = Column(SmallString)
+    opennms_address = Column(SmallString)
+    opennms_devices = Column(SmallString)
+    opennms_login = Column(SmallString)
+    opennms_password = Column(SmallString)
+    librenms_login = Column(SmallString)
+    librenms_token = Column(SmallString)
+
     import_type = Column(SmallString)
 
     __mapper_args__ = {"polymorphic_identity": "topology_import_service"}
@@ -34,9 +34,7 @@ class TopologyImportService(Service):
         return {"success": True}
 
     def query_netbox(self):
-        nb = netbox_api(
-            self.netbox_address, self.netbox_token
-        )
+        nb = netbox_api(self.netbox_address, self.netbox_token)
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
             factory(
@@ -87,7 +85,7 @@ class TopologyImportService(Service):
 
     def query_librenms(self):
         devices = http_get(
-            f'{self.librenms_login}/api/v0/devices',
+            f"{self.librenms_login}/api/v0/devices",
             headers={"X-Auth-Token": self.librenms_token},
         ).json()["devices"]
         for device in devices:
@@ -115,3 +113,31 @@ class TopologyImportForm(ServiceForm):
             ("opennms", "OpenNMS"),
         )
     )
+    netbox_address = StringField()
+    netbox_token = PasswordField()
+    opennms_address = StringField()
+    opennms_devices = StringField()
+    opennms_login = StringField()
+    opennms_password = PasswordField()
+    librenms_login = StringField()
+    librenms_token = PasswordField()
+    groups = {
+        "Type of Import": {"commands": ["import_type"], "default": "expanded"},
+        "Netbox": {
+            "commands": ["netbox_address", "netbox_token"],
+            "default": "expanded",
+        },
+        "OpenNMS": {
+            "commands": [
+                "opennms_address",
+                "opennms_devices",
+                "opennms_login",
+                "opennms_password",
+            ],
+            "default": "expanded",
+        },
+        "LibreNMS": {
+            "commands": ["librenms_address", "librenms_token"],
+            "default": "expanded",
+        },
+    }

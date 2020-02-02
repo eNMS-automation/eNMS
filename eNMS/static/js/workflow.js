@@ -727,11 +727,11 @@ function runWorkflow(withUpdates) {
 }
 
 function showRestartWorkflowPanel(workflow, service) {
-  openPanel(
-    "restart_workflow",
-    `Restart Workflow '${workflow.name}' from '${service.name}'`,
-    workflow.id,
-    function() {
+  openPanel({
+    name: "restart_workflow",
+    title: `Restart Workflow '${workflow.name}' from '${service.name}'`,
+    id: workflow.id,
+    processing: function() {
       $("#start_services").append(new Option(service.name, service.id));
       $("#start_services")
         .val(service.id)
@@ -748,7 +748,7 @@ function showRestartWorkflowPanel(workflow, service) {
         $("#restart_runtime").selectpicker("refresh");
       });
     }
-  );
+  })
 }
 
 function restartWorkflow() {

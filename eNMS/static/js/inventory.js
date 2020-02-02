@@ -150,22 +150,27 @@ function savePoolObjects(id) {
 }
 
 function showPoolObjectsPanel(id) {
-  openPanel("pool_objects", "Pool Objects", id, function() {
-    call(`/get/pool/${id}`, function(pool) {
-      if (pool.devices.length > 1000 || pool.links.length > 1000) {
-        notify("Too many objects to display.", "error", 5);
-      } else {
-        for (const type of ["device", "link"]) {
-          initSelect($(`#${type}s-${id}`), type, `pool_objects-${id}`);
-          pool[`${type}s`].forEach((o) => {
-            $(`#${type}s-${id}`).append(new Option(o.name, o.id));
-          });
-          $(`#${type}s-${id}`)
-            .val(pool[`${type}s`].map((n) => n.id))
-            .trigger("change");
+  openPanel({
+    name: "pool_objects",
+    title: "Pool Objects",
+    id: id,
+    processing: function() {
+      call(`/get/pool/${id}`, function(pool) {
+        if (pool.devices.length > 1000 || pool.links.length > 1000) {
+          notify("Too many objects to display.", "error", 5);
+        } else {
+          for (const type of ["device", "link"]) {
+            initSelect($(`#${type}s-${id}`), type, `pool_objects-${id}`);
+            pool[`${type}s`].forEach((o) => {
+              $(`#${type}s-${id}`).append(new Option(o.name, o.id));
+            });
+            $(`#${type}s-${id}`)
+              .val(pool[`${type}s`].map((n) => n.id))
+              .trigger("change");
+          }
         }
-      }
-    });
+      });
+    }
   });
 }
 
@@ -183,11 +188,11 @@ export const showDeviceData = function(device) {
     if (!result.configuration && !result.operational_data) {
       notify("No data stored.", "error", 5);
     } else {
-      openPanel(
-        "device_data",
-        `Device Data - ${device.name}`,
-        device.id,
-        function() {
+      openPanel({
+        name: "device_data",
+        title: `Device Data - ${device.name}`,
+        id: device.id,
+        processing: function() {
           const content = document.getElementById(`content-${device.id}`);
           // eslint-disable-next-line new-cap
           const editor = CodeMirror(content, {
@@ -205,7 +210,7 @@ export const showDeviceData = function(device) {
             })
             .change();
         }
-      );
+      });
     }
   });
 };
@@ -219,27 +224,36 @@ function showSessionLog(sessionId) {
         5
       );
     } else {
-      openPanel("display", "Session log", sessionId, function() {
-        const content = document.getElementById(`content-${sessionId}`);
-        // eslint-disable-next-line new-cap
-        const editor = CodeMirror(content, {
-          lineWrapping: true,
-          lineNumbers: true,
-          readOnly: true,
-          theme: "cobalt",
-          extraKeys: { "Ctrl-F": "findPersistent" },
-          scrollbarStyle: "overlay",
-        });
-        editor.setSize("100%", "100%");
-        editor.setValue(log);
-      });
+      openPanel({
+        name: "display",
+        title: "Session log",
+        id: sessionId,
+        processing: function() {
+          const content = document.getElementById(`content-${sessionId}`);
+          // eslint-disable-next-line new-cap
+          const editor = CodeMirror(content, {
+            lineWrapping: true,
+            lineNumbers: true,
+            readOnly: true,
+            theme: "cobalt",
+            extraKeys: { "Ctrl-F": "findPersistent" },
+            scrollbarStyle: "overlay",
+          });
+          editor.setSize("100%", "100%");
+          editor.setValue(log);
+        }
+      }):
     }
   });
 }
 
 function showDeviceResultsPanel(device) {
-  openPanel("result_table", `Results - ${device.name}`, null, function() {
-    initTable("result", device, null, "table-result");
+  openPanel({
+    name: "result_table",
+    title: `Results - ${device.name}`,
+    processing: function() {
+      initTable("result", device, null, "table-result");
+    }
   });
 }
 

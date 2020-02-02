@@ -512,7 +512,7 @@ class BaseController:
                 if kwargs["form"].get("parent-filtering", "true") == "true":
                     constraints.append(~models["service"].workflows.any())
         if table == "run":
-            constraints.append(models["run"].children.any())
+            constraints.append(models["run"].parent_runtime == models["run"].runtime)
         result = Session.query(model).filter(operator(*constraints))
         if ordering:
             result = result.order_by(ordering())

@@ -22,7 +22,7 @@ class AbstractBase(Base):
         return self.name
 
     def __getattribute__(self, property):
-        if property in private_properties and app.config["vault"]["active"]:
+        if property in private_properties and app.settings["vault"]["active"]:
             path = f"secret/data/{self.__tablename__}/{self.name}/{property}"
             data = app.vault_client.read(path)
             return data["data"]["data"][property] if data else ""
@@ -33,7 +33,7 @@ class AbstractBase(Base):
         if property in private_properties:
             if not value:
                 return
-            if app.config["vault"]["active"]:
+            if app.settings["vault"]["active"]:
                 app.vault_client.write(
                     f"secret/data/{self.__tablename__}/{self.name}/{property}",
                     data={property: value},

@@ -2,7 +2,7 @@ from sqlalchemy import Column as SQLA_Column, PickleType, String, Text
 from sqlalchemy.dialects.mysql.base import MSMediumBlob
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 
-from eNMS.config import config
+from eNMS.settings import settings
 from eNMS.database import DIALECT
 
 
@@ -13,8 +13,8 @@ class CustomPickleType(PickleType):
 
 MutableDict = MutableDict.as_mutable(CustomPickleType)
 MutableList = MutableList.as_mutable(CustomPickleType)
-LargeString = Text(config["database"]["large_string_length"])
-SmallString = String(config["database"]["small_string_length"])
+LargeString = Text(settings["database"]["large_string_length"])
+SmallString = String(settings["database"]["small_string_length"])
 
 
 default_ctypes = {

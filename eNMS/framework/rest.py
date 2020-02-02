@@ -51,7 +51,7 @@ class Heartbeat(Resource):
     def get(self):
         return {
             "name": getnode(),
-            "cluster_id": app.config["cluster"]["id"],
+            "cluster_id": app.settings["cluster"]["id"],
         }
 
 

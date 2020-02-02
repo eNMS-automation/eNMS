@@ -45,9 +45,9 @@ def login():
     if not current_user.is_authenticated:
         login_form = LoginForm(request.form)
         authentication_methods = [("Local User",) * 2]
-        if app.config["ldap"]["active"]:
+        if app.settings["ldap"]["active"]:
             authentication_methods.append(("LDAP Domain",) * 2)
-        if app.config["tacacs"]["active"]:
+        if app.settings["tacacs"]["active"]:
             authentication_methods.append(("TACACS",) * 2)
         login_form.authentication_method.choices = authentication_methods
         return render_template("login.html", login_form=login_form)
@@ -183,6 +183,6 @@ def route(page):
     except Exception as exc:
         raise exc
         Session.rollback()
-        if app.config["app"]["config_mode"] == "debug":
+        if app.settings["app"]["config_mode"] == "debug":
             raise
         return jsonify({"alert": handle_exception(str(exc))})

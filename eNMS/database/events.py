@@ -87,7 +87,7 @@ def configure_events(app):
             name, changes = getattr(target, "name", target.id), " | ".join(changelog)
             app.log("info", f"UPDATE: {target.type} '{name}': ({changes})")
 
-    if app.config["vault"]["active"]:
+    if app.settings["vault"]["active"]:
 
         @event.listens_for(models["service"].name, "set", propagate=True)
         def vault_update(target, new_value, old_value, *_):

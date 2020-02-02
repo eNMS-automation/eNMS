@@ -495,7 +495,7 @@ class Run(AbstractBase):
         if self.notification_header:
             notification["Header"] = self.notification_header
         if self.include_link_in_summary:
-            address = app.config["app"]["address"]
+            address = app.settings["app"]["address"]
             notification["Link"] = f"{address}/view_service_results/{self.id}"
         summary = results["summary"]
         if summary:
@@ -534,16 +534,16 @@ class Run(AbstractBase):
             elif self.send_notification_method == "slack":
                 result = SlackClient(environ.get("SLACK_TOKEN")).api_call(
                     "chat.postMessage",
-                    channel=app.config["slack"]["channel"],
+                    channel=app.settings["slack"]["channel"],
                     text=notification,
                 )
             else:
                 result = post(
-                    app.config["mattermost"]["url"],
-                    verify=app.config["mattermost"]["verify_certificate"],
+                    app.settings["mattermost"]["url"],
+                    verify=app.settings["mattermost"]["verify_certificate"],
                     data=dumps(
                         {
-                            "channel": app.config["mattermost"]["channel"],
+                            "channel": app.settings["mattermost"]["channel"],
                             "text": notification,
                         }
                     ),
@@ -688,7 +688,7 @@ class Run(AbstractBase):
 
     def python_code_kwargs(_self, **locals):  # noqa: N805
         return {
-            "config": app.config,
+            "settings": app.settings,
             "devices": _self.devices,
             "get_var": partial(_self.get_var, locals.get("payload", {})),
             "get_result": _self.get_result,

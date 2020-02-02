@@ -36,7 +36,7 @@ def configure_context_processor(flask_app):
             "property_types": property_types,
             "form_properties": form_properties,
             "names": property_names,
-            "config": app.config,
+            "settings": app.settings,
             "relations": list(set(chain.from_iterable(relationships.values()))),
             "relationships": relationships,
             "service_types": {
@@ -71,7 +71,7 @@ def configure_authentication():
 
 def create_app(config_mode=None):
     flask_app = Flask(__name__, static_folder=app.path / "eNMS" / "static")
-    config = config_mapper[config_mode or app.config["app"]["config_mode"]]
+    config = config_mapper[config_mode or app.settings["app"]["config_mode"]]
     flask_app.config.from_object(config)
     register_extensions(flask_app)
     configure_login_manager()

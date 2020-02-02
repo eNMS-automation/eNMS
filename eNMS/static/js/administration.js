@@ -9,11 +9,10 @@ JSONEditor: false
 import {
   call,
   configureNamespace,
-  openPanel,
   editors,
   fCall,
   notify,
-  showPanel,
+  openPanel,
 } from "./base.js";
 import { tables } from "./table.js";
 
@@ -98,7 +97,7 @@ function migrationsExport() {
 }
 
 function showMigrationPanel() {
-  showPanel({
+  openPanel({
     name: "database_migration",
     processing: () => {
       call("/get_migration_folders", function(folders) {
@@ -121,7 +120,7 @@ function migrationsImport() {
 }
 
 function showImportServicePanel() {
-  showPanel({
+  openPanel({
     name: "import_service",
     processing: () => {
       call("/get_exported_services", function(services) {
@@ -232,7 +231,7 @@ function showFileUploadPanel(folder) {
 }
 
 function displayFiles() {
-  showPanel({
+  openPanel({
     name: "files",
     processing: function() {
       $("#files-tree").jstree({

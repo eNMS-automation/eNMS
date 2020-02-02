@@ -17,10 +17,9 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
-  openPanel,
   fCall,
   notify,
-  showPanel,
+  openPanel,
   showTypePanel,
   userIsActive,
 } from "./base.js";
@@ -593,7 +592,7 @@ function savePositions() {
 }
 
 function addServicePanel() {
-  showPanel({
+  openPanel({
     name: "add_services",
     processing: function() {
       $("#service-tree").jstree({
@@ -671,7 +670,7 @@ Object.assign(action, {
   "Create 'Failure' edge": () => switchMode("failure"),
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
   "Move Nodes": () => switchMode("motion"),
-  "Create Label": () => showPanel("workflow_label"),
+  "Create Label": () => openPanel("workflow_label"),
   "Edit Label": editLabel,
   "Edit Edge": (edge) => {
     showTypePanel("workflow_edge", edge.id);
@@ -711,7 +710,7 @@ function createLabel() {
 }
 
 function editLabel(label) {
-  showPanel({
+  openPanel({
     name: "workflow_label",
     processing: () => {
       $("#text").val(label.label);

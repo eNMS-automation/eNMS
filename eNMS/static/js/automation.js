@@ -13,10 +13,9 @@ import {
   call,
   cantorPairing,
   configureNamespace,
-  openPanel,
   fCall,
   notify,
-  showPanel,
+  openPanel,
   showTypePanel,
 } from "./base.js";
 import { initTable, tables } from "./table.js";
@@ -382,7 +381,7 @@ function field(name, type, id) {
 }
 
 function displayCalendar(calendarType) {
-  showPanel({
+  openPanel({
     name: "calendar",
     id: calendarType,
     processing: () => {

@@ -649,7 +649,7 @@ export function notify(...args) {
 }
 
 function showAllAlerts() {
-  showPanel({
+  openPanel({
     name: "alerts_table",
     processing: () => {
       $("#alerts-table")
@@ -793,6 +793,6 @@ configureNamespace("base", [
   processData,
   showAllAlerts,
   showDeletionPanel,
-  showPanel,
+  openPanel,
   showTypePanel,
 ]);

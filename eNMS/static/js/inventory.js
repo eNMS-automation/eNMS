@@ -9,11 +9,10 @@ initSelect: false
 import {
   call,
   configureNamespace,
-  openPanel,
   fCall,
   notify,
+  openPanel,
   openUrl,
-  showPanel,
 } from "./base.js";
 import { initTable, tables } from "./table.js";
 
@@ -59,7 +58,7 @@ function parseData(data) {
 }
 
 export function showConnectionPanel(id) {
-  showPanel({
+  openPanel({
     name: "device_connection",
     id: id,
     processing: () => {

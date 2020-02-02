@@ -6,7 +6,7 @@ from eNMS.database import Session
 from eNMS.database.functions import delete, factory, fetch
 
 
-def ure_cli(flask_app):
+def configure_cli(flask_app):
     @flask_app.cli.command(name="fetch")
     @argument("table")
     @argument("name")

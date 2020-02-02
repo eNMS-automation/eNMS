@@ -118,7 +118,7 @@ class ServiceForm(BaseForm):
             self.send_notification.data
             and self.send_notification_method.data == "mail"
             and not self.mail_recipient.data
-            and not app.["mail"]["recipients"]
+            and not app.settings["mail"]["recipients"]
         )
         if no_recipient_error:
             self.mail_recipient.errors.append(

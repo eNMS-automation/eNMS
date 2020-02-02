@@ -593,35 +593,38 @@ function savePositions() {
 }
 
 function addServicePanel() {
-  showPanel("add_services", null, function() {
-    $("#service-tree").jstree({
-      core: {
-        animation: 200,
-        themes: { stripes: true },
-        data: {
-          url: function(node) {
-            const nodeId = node.id == "#" ? "all" : node.data.id;
-            return `/get_workflow_services/${workflow.id}/${nodeId}`;
+  showPanel({
+    name: "add_services",
+    processing: function() {
+      $("#service-tree").jstree({
+        core: {
+          animation: 200,
+          themes: { stripes: true },
+          data: {
+            url: function(node) {
+              const nodeId = node.id == "#" ? "all" : node.data.id;
+              return `/get_workflow_services/${workflow.id}/${nodeId}`;
+            },
+            type: "POST",
           },
-          type: "POST",
         },
-      },
-      plugins: ["checkbox", "types", "wholerow"],
-      checkbox: {
-        three_state: false,
-      },
-      types: {
-        category: {
-          icon: "fa fa-folder",
+        plugins: ["checkbox", "types", "wholerow"],
+        checkbox: {
+          three_state: false,
         },
-        default: {
-          icon: "glyphicon glyphicon-file",
+        types: {
+          category: {
+            icon: "fa fa-folder",
+          },
+          default: {
+            icon: "glyphicon glyphicon-file",
+          },
+          workflow: {
+            icon: "fa fa-sitemap",
+          },
         },
-        workflow: {
-          icon: "fa fa-sitemap",
-        },
-      },
-    });
+      });
+    }
   });
 }
 
@@ -708,12 +711,15 @@ function createLabel() {
 }
 
 function editLabel(label) {
-  showPanel("workflow_label", null, () => {
-    $("#text").val(label.label);
-    $("#alignment")
-      .val(label.font.align)
-      .selectpicker("refresh");
-    currLabel = label;
+  showPanel({
+    name: "workflow_label",
+    processing: () => {
+      $("#text").val(label.label);
+      $("#alignment")
+        .val(label.font.align)
+        .selectpicker("refresh");
+      currLabel = label;
+    }
   });
 }
 

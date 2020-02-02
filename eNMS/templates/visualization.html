@@ -55,13 +55,13 @@ title %} {% block stylesheets %} {{ super() }}
 <nav class="navbar navbar-default controls" role="navigation">
   <button
     class="btn btn-primary btn-search"
-    onclick="eNMS.base.showPanel('device_filtering')"
+    onclick="eNMS.base.showPanel({name: 'device_filtering'})"
   >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
   </button>
   <button
     class="btn btn-primary btn-search"
-    onclick="eNMS.base.showPanel('link_filtering')"
+    onclick="eNMS.base.showPanel({name: 'link_filtering'})"
   >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
   </button>

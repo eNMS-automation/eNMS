@@ -246,7 +246,7 @@ function showSessionLog(sessionId) {
           editor.setSize("100%", "100%");
           editor.setValue(log);
         }
-      }):
+      });
     }
   });
 }

@@ -1,6 +1,5 @@
 apscheduler
 dicttoxml
-fabric
 flask
 flask_httpauth
 flask_login

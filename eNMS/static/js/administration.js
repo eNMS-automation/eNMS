@@ -1,7 +1,7 @@
 /*
 global
 CodeMirror: false
-config: true
+settings: true
 Dropzone: false
 JSONEditor: false
 */
@@ -17,7 +17,7 @@ import {
 } from "./base.js";
 import { tables } from "./table.js";
 
-let configurationEditor;
+let settingsEditor;
 
 function showImportTopologyPanel() {
   createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
@@ -27,26 +27,26 @@ function showImportTopologyPanel() {
   });
 }
 
-function saveConfiguration() {
+function saveSettings() {
   $.ajax({
     type: "POST",
-    url: "/save_configuration",
+    url: "/save_settings",
     contentType: "application/json",
-    data: JSON.stringify(configurationEditor.get()),
+    data: JSON.stringify(settingsEditor.get()),
     success: function() {
-      config = configurationEditor.get();
-      $("#configuration").remove();
-      notify("Configuration saved.", "success", 5);
+      settings = settingsEditor.get();
+      $("#settings").remove();
+      notify("Settings saved.", "success", 5);
     },
   });
 }
 
-function showConfiguration() {
-  createPanel("configuration", "Configuration", null, function() {
-    configurationEditor = new JSONEditor(
+function showSettings() {
+  createPanel("settings", "Settings", null, function() {
+    settingsEditor = new JSONEditor(
       document.getElementById("content"),
       {},
-      config
+      settings
     );
   });
 }

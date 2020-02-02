@@ -31,19 +31,19 @@ class SwissArmyKnifeService(Service):
         return {"success": True}
 
     def cluster_monitoring(self, run, payload):
-        protocol = app.config["cluster"]["scan_protocol"]
+        protocol = app.settings["cluster"]["scan_protocol"]
         for instance in fetch_all("instance"):
             factory(
                 "instance",
                 **get(
                     f"{protocol}://{instance.ip_address}/rest/is_alive",
-                    timeout=app.config["cluster"]["scan_timeout"],
+                    timeout=app.settings["cluster"]["scan_timeout"],
                 ).json(),
             )
         return {"success": True}
 
     def git_push_configurations(self, run, payload, device=None):
-        if not app.config["app"]["git_repository"]:
+        if not app.settings["app"]["git_repository"]:
             return
         repo = Repo(Path.cwd() / "network_data")
         try:

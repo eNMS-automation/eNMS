@@ -26,7 +26,7 @@ class TopologyImportService(Service):
 
     def query_netbox(self):
         nb = netbox_api(
-            app.config["netbox"]["address"], token=environ.get("NETBOX_TOKEN")
+            app.settings["netbox"]["address"], token=environ.get("NETBOX_TOKEN")
         )
         for device in nb.dcim.devices.all():
             device_ip = device.primary_ip4 or device.primary_ip6
@@ -46,10 +46,10 @@ class TopologyImportService(Service):
             )
 
     def query_opennms(self):
-        login = app.config["opennms"]["login"]
+        login = app.settings["opennms"]["login"]
         password = environ.get("OPENNMS_PASSWORD")
         json_devices = http_get(
-            app.config["opennms"]["devices"],
+            app.settings["opennms"]["devices"],
             headers={"Accept": "application/json"},
             auth=(login, password),
         ).json()["node"]
@@ -69,7 +69,7 @@ class TopologyImportService(Service):
         }
         for device in list(devices):
             link = http_get(
-                f"{app.config['opennms']['address']}/nodes/{device}/ipinterfaces",
+                f"{app.settings['opennms']['address']}/nodes/{device}/ipinterfaces",
                 headers={"Accept": "application/json"},
                 auth=(login, password),
             ).json()
@@ -80,7 +80,7 @@ class TopologyImportService(Service):
 
     def query_librenms(self):
         devices = http_get(
-            f'{app.config["librenms"]["address"]}/api/v0/devices',
+            f'{app.settings["librenms"]["address"]}/api/v0/devices',
             headers={"X-Auth-Token": environ.get("LIBRENMS_TOKEN")},
         ).json()["devices"]
         for device in devices:

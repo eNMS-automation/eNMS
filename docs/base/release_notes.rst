@@ -15,10 +15,13 @@ Version 3.19
     - copy dict path to result in the json window.
 
 - Full screen workflow builder
-- Remember menu size PER USER (parameter stored in DB, not just session)
+- Remember menu size PER USER
 - Refactoring of all the tables
 - Refactoring of the top-level menu
 - Alerts are saved and displayed in the UI, top menubar.
+
+MIGRATION:
+- Renaming "config" -> "settings". All services that use the "config" global variable must change it to "settings".
 
 Version 3.18.2
 --------------

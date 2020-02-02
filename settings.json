@@ -52,17 +52,6 @@
     "channel": "",
     "verify_certificate": true
   },
-  "librenms": {
-    "address": "http://librenms.example.com"
-  },
-  "netbox": {
-    "address": "http://0.0.0.0:8000"
-  },
-  "opennms": {
-    "address": "",
-    "login": "",
-    "devices": ""
-  },
   "paths": {
     "files": "",
     "custom_code": "",

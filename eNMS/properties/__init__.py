@@ -21,6 +21,13 @@ field_conversion = {
 
 property_names = {}
 
-private_properties = ["password", "enable_password", "custom_password"]
+private_properties = [
+    "password",
+    "enable_password",
+    "custom_password",
+    "netbox_token",
+    "librenms_token",
+    "opennms_password",
+]
 
 dont_serialize = {"device": ["configuration", "operational_data"]}

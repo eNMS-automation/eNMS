@@ -22,7 +22,7 @@ class TopologyImportService(Service):
     opennms_devices = Column(SmallString)
     opennms_login = Column(SmallString)
     opennms_password = Column(SmallString)
-    librenms_login = Column(SmallString)
+    librenms_address = Column(SmallString)
     librenms_token = Column(SmallString)
 
     import_type = Column(SmallString)
@@ -85,7 +85,7 @@ class TopologyImportService(Service):
 
     def query_librenms(self):
         devices = http_get(
-            f"{self.librenms_login}/api/v0/devices",
+            f"{self.librenms_address}/api/v0/devices",
             headers={"X-Auth-Token": self.librenms_token},
         ).json()["devices"]
         for device in devices:
@@ -113,13 +113,13 @@ class TopologyImportForm(ServiceForm):
             ("opennms", "OpenNMS"),
         )
     )
-    netbox_address = StringField()
+    netbox_address = StringField(default="http://0.0.0.0:8000")
     netbox_token = PasswordField()
     opennms_address = StringField()
     opennms_devices = StringField()
     opennms_login = StringField()
     opennms_password = PasswordField()
-    librenms_login = StringField()
+    librenms_address = StringField(default="http://librenms.example.com")
     librenms_token = PasswordField()
     groups = {
         "Type of Import": {"commands": ["import_type"], "default": "expanded"},

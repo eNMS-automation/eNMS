@@ -170,25 +170,6 @@ Section ``mattermost``
 - ``channel`` (default: ``""``)
 - ``verify_certificate`` (default: ``true``)
 
-Section ``opennms``
-*******************
-
-- ``address`` (default: ``""``) Address of OpenNMS server.
-- ``login`` (default: ``""``) REST login.
-- ``devices`` (default: ``""``) URL of the devices to import. This could be a subset of
-  all available devices in the API, like
-  ``https://demo.opennms.org/opennms/rest/nodes?foreignSource=OpenNMS_ATL``.
-
-Section ``netbox``
-******************
-
-- ``address`` (default: ``""``) Address of Netbox server.
-
-Section ``librenms``
-********************
-
-- ``address`` (default: ``""``) Address of LibreNMS server
-
 Section ``paths``
 *****************
 
@@ -271,7 +252,4 @@ Private settings
 
   - MAIL_PASSWORD=eNMS-user
   - TACACS_PASSWORD=tacacs_password
-  - OPENNMS_PASSWORD=opennms_password
-  - LIBRENMS_TOKEN=librenms_token
-  - NETBOX_TOKEN=netbox_token
   - SLACK_TOKEN=SLACK_TOKEN

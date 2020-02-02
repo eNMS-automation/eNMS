@@ -68,7 +68,7 @@ export function showConnectionPanel(id) {
       $(`#device-credentials-${id},#user-credentials-${id}`).change(function() {
         $(`#credentials-fields-${id}`).hide();
       });
-    }
+    },
   });
 }
 
@@ -135,9 +135,7 @@ function handOffSSHConnection(id) {
     if (!url) {
       url = `${window.location.protocol}//${window.location.host}`;
     }
-    const link = `${result.username}@${window.location.hostname}:${
-      result.port
-    }`;
+    const link = `${result.username}@${window.location.hostname}:${result.port}`;
     const message = `Click here to connect to ${result.device_name}.`;
     notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
   });
@@ -173,7 +171,7 @@ function showPoolObjectsPanel(id) {
           }
         }
       });
-    }
+    },
   });
 }
 
@@ -212,7 +210,7 @@ export const showDeviceData = function(device) {
               editor.setValue(result[this.value]);
             })
             .change();
-        }
+        },
       });
     }
   });
@@ -244,7 +242,7 @@ function showSessionLog(sessionId) {
           });
           editor.setSize("100%", "100%");
           editor.setValue(log);
-        }
+        },
       });
     }
   });
@@ -256,7 +254,7 @@ function showDeviceResultsPanel(device) {
     title: `Results - ${device.name}`,
     processing: function() {
       initTable("result", device, null, "table-result");
-    }
+    },
   });
 }
 

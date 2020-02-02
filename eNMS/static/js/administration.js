@@ -20,12 +20,13 @@ let settingsEditor;
 
 function showImportTopologyPanel() {
   openPanel({
-    name: "excel_import", title: "Import Topology as an Excel file",
+    name: "excel_import",
+    title: "Import Topology as an Excel file",
     processing: () => {
       document.getElementById("file").onchange = function() {
         importTopology();
       };
-    }
+    },
   });
 }
 
@@ -53,7 +54,7 @@ function showSettings() {
         {},
         settings
       );
-    }
+    },
   });
 }
 
@@ -108,7 +109,7 @@ function showMigrationPanel() {
           list.appendChild(option);
         });
       });
-    }
+    },
   });
 }
 
@@ -132,7 +133,7 @@ function showImportServicePanel() {
         });
         $("#service").selectpicker("refresh");
       });
-    }
+    },
   });
 }
 
@@ -195,9 +196,9 @@ function editFile(file) {
         fileEditor.setSize("100%", "100%");
         fileEditor.setValue(content);
         fileEditor.refresh();
-      }
+      },
     });
-  })
+  });
 }
 
 function saveFile(file) {
@@ -226,7 +227,7 @@ function showFileUploadPanel(folder) {
         notify("File successfully uploaded.", "success", 5);
         $(`[id="upload_files-${path}"]`).remove();
       });
-    }
+    },
   });
 }
 
@@ -288,9 +289,7 @@ function displayFiles() {
                 <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
                 class="btn btn-xs btn-primary"
-                onclick="eNMS.administration.showFileUploadPanel('${
-                  node.data.path
-                }')"
+                onclick="eNMS.administration.showFileUploadPanel('${node.data.path}')"
               >
                 <span class="glyphicon glyphicon-plus"></span>
               </button>
@@ -300,7 +299,7 @@ function displayFiles() {
           },
         },
       });
-    }
+    },
   });
 }
 

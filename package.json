@@ -3,7 +3,7 @@
   "version": "3.19.0",
   "description": "A enterprise-grade vendor-agnostic network automation platform.",
   "scripts": {
-    "prettier": "prettier --config tests/linting/.prettierrc --ignore-path tests/linting/.prettierignore --check eNMS/**/*",
+    "prettier": "prettier --config tests/linting/.prettierrc --ignore-path tests/linting/.prettierignore --write eNMS/**/*",
     "lint": "eslint --config tests/linting/.eslintrc --ignore-path tests/linting/.eslintignore ."
   },
   "engines": {
@@ -12,7 +12,7 @@
   "devDependencies": {
     "eslint": "5.16.0",
     "eslint-config-google": "0.9.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.19.1"
   },
   "repository": {
     "type": "git",

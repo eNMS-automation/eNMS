@@ -118,16 +118,12 @@ class Device(CustomDevice):
     )
 
     def table_properties(self, **kwargs):
-        if kwargs["type"] == "device":
-            return super().get_properties()
-        else:
-            configuration = ""
-            search = kwargs["form"].get("configuration")
-            if search:
-                configuration = "<br>".join(line for line in self.configuration.splitlines() if search in line)
-            properties = {"configuration": configuration, **super().get_properties()}
-            return properties
-
+        properties = super().get_properties()
+        data = kwargs["form"].get("configuration")
+        properties["configuration"] = "<br>".join(
+            line for line in self.configuration.splitlines() if data in line
+        ) if data else ""
+        return properties
 
     @property
     def view_properties(self):

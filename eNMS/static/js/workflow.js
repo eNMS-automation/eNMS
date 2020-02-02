@@ -152,9 +152,7 @@ export function displayWorkflow(workflowData) {
   );
   workflowData.runtimes.forEach((runtime) => {
     $("#current-runtime").append(
-      `<option value='${runtime[0]}'>${runtime[0]} (run by ${
-        runtime[1]
-      })</option>`
+      `<option value='${runtime[0]}'>${runtime[0]} (run by ${runtime[1]})</option>`
     );
   });
   $("#current-runtime").val("latest");
@@ -492,9 +490,7 @@ function drawIterationEdge(service) {
     if (service.iteration_values) {
       title += `<b>Iteration Values</b>: ${service.iteration_values}<br>`;
     }
-    title += `<b>Iteration Variable Name</b>: ${
-      service.iteration_variable_name
-    }`;
+    title += `<b>Iteration Variable Name</b>: ${service.iteration_variable_name}`;
     {
       edges.add({
         id: -service.id,
@@ -623,7 +619,7 @@ function addServicePanel() {
           },
         },
       });
-    }
+    },
   });
 }
 
@@ -718,7 +714,7 @@ function editLabel(label) {
         .val(label.font.align)
         .selectpicker("refresh");
       currLabel = label;
-    }
+    },
   });
 }
 
@@ -752,8 +748,8 @@ function showRestartWorkflowPanel(workflow, service) {
         $("#restart_runtime").val(runtimes[runtimes.length - 1]);
         $("#restart_runtime").selectpicker("refresh");
       });
-    }
-  })
+    },
+  });
 }
 
 function restartWorkflow() {

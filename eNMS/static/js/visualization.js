@@ -176,7 +176,7 @@ function deviceToNode(device) {
   const logicalDevice = {
     id: device.id,
     label: device.name,
-    image: `/static/images/view/${device.icon}.gif`,
+    image: `/static/img/view/${device.icon}.gif`,
     shape: "image",
   };
   logicalDevices[device.id] = device;
@@ -252,7 +252,7 @@ function displayPool(poolId, nodes, edges) {
 export function initView() {
   for (const [key, value] of Object.entries(iconSizes)) {
     window[`icon_${key}`] = L.icon({
-      iconUrl: `../static/images/view/${key}.gif`,
+      iconUrl: `../static/img/view/${key}.gif`,
       iconSize: value,
       iconAnchor: [9, 6],
       popupAnchor: [8, -5],

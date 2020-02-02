@@ -267,7 +267,7 @@ export function createPanel(
     id: panelId,
     border: "2px solid #2A3F52",
     theme: panelThemes[name] || "light filledlight",
-    headerLogo: "../static/images/logo.png",
+    headerLogo: "../static/img/logo.png",
     contentOverflow: "hidden scroll",
     contentSize: panelSize[name] || {
       width: () => window.innerWidth * 0.5,

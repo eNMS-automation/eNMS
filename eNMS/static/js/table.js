@@ -150,7 +150,7 @@ class Base {
     return `
       <button
         class="btn btn-info"
-        onclick="eNMS.base.showPanel('${type}_filtering')"
+        onclick="eNMS.base.showPanel({name: '${type}_filtering'})"
         data-tooltip="Advanced Search"
         type="button"
       >
@@ -220,7 +220,7 @@ models.device = class Device extends Base {
       data-tooltip="Export"><span class="glyphicon glyphicon-download">
       </span></button>
       <button type="button" class="btn btn-primary"
-      onclick="eNMS.base.showPanel('excel_export')" data-tooltip="Export"
+      onclick="eNMS.base.showPanel({name: 'excel_export'})" data-tooltip="Export"
         ><span class="glyphicon glyphicon-upload"></span
       ></button>`,
       super.searchTableButton("device"),
@@ -463,7 +463,7 @@ models.service = class Service extends Base {
       </input>
       <button
         class="btn btn-info"
-        onclick="eNMS.base.showPanel('service_filtering')"
+        onclick="eNMS.base.showPanel({name: 'service_filtering'})"
         data-tooltip="Advanced Search"
         type="button"
       >

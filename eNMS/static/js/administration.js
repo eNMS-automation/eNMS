@@ -98,15 +98,18 @@ function migrationsExport() {
 }
 
 function showMigrationPanel() {
-  showPanel("database_migration", null, () => {
-    call("/get_migration_folders", function(folders) {
-      let list = document.getElementById("versions");
-      folders.forEach((item) => {
-        let option = document.createElement("option");
-        option.textContent = option.value = item;
-        list.appendChild(option);
+  showPanel({
+    name: "database_migration",
+    processing: () => {
+      call("/get_migration_folders", function(folders) {
+        let list = document.getElementById("versions");
+        folders.forEach((item) => {
+          let option = document.createElement("option");
+          option.textContent = option.value = item;
+          list.appendChild(option);
+        });
       });
-    });
+    }
   });
 }
 
@@ -118,16 +121,19 @@ function migrationsImport() {
 }
 
 function showImportServicePanel() {
-  showPanel("import_service", null, () => {
-    call("/get_exported_services", function(services) {
-      let list = document.getElementById("service");
-      services.forEach((item) => {
-        let option = document.createElement("option");
-        option.textContent = option.value = item;
-        list.appendChild(option);
+  showPanel({
+    name: "import_service",
+    processing: () => {
+      call("/get_exported_services", function(services) {
+        let list = document.getElementById("service");
+        services.forEach((item) => {
+          let option = document.createElement("option");
+          option.textContent = option.value = item;
+          list.appendChild(option);
+        });
+        $("#service").selectpicker("refresh");
       });
-      $("#service").selectpicker("refresh");
-    });
+    }
   });
 }
 
@@ -226,73 +232,76 @@ function showFileUploadPanel(folder) {
 }
 
 function displayFiles() {
-  showPanel("files", null, function() {
-    $("#files-tree").jstree({
-      core: {
-        animation: 200,
-        themes: { stripes: true, variant: "large" },
-        check_callback: true,
-        data: {
-          url: function(node) {
-            const path = node.id == "#" ? "root" : node.data.path;
-            return `/get_tree_files/${path.replace(/\//g, ">")}`;
+  showPanel({
+    name: "files",
+    processing: function() {
+      $("#files-tree").jstree({
+        core: {
+          animation: 200,
+          themes: { stripes: true, variant: "large" },
+          check_callback: true,
+          data: {
+            url: function(node) {
+              const path = node.id == "#" ? "root" : node.data.path;
+              return `/get_tree_files/${path.replace(/\//g, ">")}`;
+            },
+            type: "POST",
           },
-          type: "POST",
         },
-      },
-      plugins: ["html_row", "state", "types", "wholerow"],
-      types: {
-        file: {
-          icon: "jstree-icon jstree-file",
+        plugins: ["html_row", "state", "types", "wholerow"],
+        types: {
+          file: {
+            icon: "jstree-icon jstree-file",
+          },
         },
-      },
-      html_row: {
-        default: function(el, node) {
-          if (!node) return;
-          if (node.type == "file") {
-            const data = JSON.stringify(node);
-            $(el).find("a").append(`
-              <div style="position: absolute; top: 0px; right: 200px">
-                ${node.data.modified}
-              </div>
-              <div style="position: absolute; top: 0px; right: 50px">
+        html_row: {
+          default: function(el, node) {
+            if (!node) return;
+            if (node.type == "file") {
+              const data = JSON.stringify(node);
+              $(el).find("a").append(`
+                <div style="position: absolute; top: 0px; right: 200px">
+                  ${node.data.modified}
+                </div>
+                <div style="position: absolute; top: 0px; right: 50px">
+                  <button type="button"
+                    class="btn btn-xs btn-primary"
+                    onclick='eNMS.administration.editFile(${data})'
+                  >
+                    <span class="glyphicon glyphicon-edit"></span>
+                  </button>
+                  <button type="button"
+                  class="btn btn-xs btn-info"
+                  onclick="location.href='/download_file/${node.data.path}'"
+                  >
+                  <span class="glyphicon glyphicon-download"></span>
+                  </button>
+                  <button type="button"
+                    class="btn btn-xs btn-danger"
+                    onclick='eNMS.administration.deleteFile(${data})'
+                  >
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </div>
+                `);
+            } else {
+              $(el).find("a").append(`
+                <div style="position: absolute; top: 0px; right: 50px">
                 <button type="button"
-                  class="btn btn-xs btn-primary"
-                  onclick='eNMS.administration.editFile(${data})'
-                >
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button>
-                <button type="button"
-                class="btn btn-xs btn-info"
-                onclick="location.href='/download_file/${node.data.path}'"
-                >
-                <span class="glyphicon glyphicon-download"></span>
-                </button>
-                <button type="button"
-                  class="btn btn-xs btn-danger"
-                  onclick='eNMS.administration.deleteFile(${data})'
-                >
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
-              </div>
-              `);
-          } else {
-            $(el).find("a").append(`
-              <div style="position: absolute; top: 0px; right: 50px">
-              <button type="button"
-              class="btn btn-xs btn-primary"
-              onclick="eNMS.administration.showFileUploadPanel('${
-                node.data.path
-              }')"
-            >
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
-              </div>
-              `);
-          }
+                class="btn btn-xs btn-primary"
+                onclick="eNMS.administration.showFileUploadPanel('${
+                  node.data.path
+                }')"
+              >
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+                </div>
+                `);
+            }
+          },
         },
-      },
-    });
+      });
+    }
   });
 }
 

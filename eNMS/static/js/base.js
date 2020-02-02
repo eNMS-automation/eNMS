@@ -300,18 +300,6 @@ export function openPanel({
   if (processing && content) processing(content);
 }
 
-export function showPanel(type, id, processing, content) {
-  return openPanel(
-    type,
-    panelName[type] || type,
-    id,
-    processing,
-    null,
-    null,
-    content
-  );
-}
-
 export function showDeletionPanel(instance) {
   openPanel({
     name: "instance_deletion",
@@ -661,10 +649,9 @@ export function notify(...args) {
 }
 
 function showAllAlerts() {
-  showPanel(
-    "alerts_table",
-    null,
-    () => {
+  showPanel({
+    name: "alerts_table",
+    processing: () => {
       $("#alerts-table")
         // eslint-disable-next-line new-cap
         .DataTable({
@@ -673,27 +660,27 @@ function showAllAlerts() {
         .order([0, "desc"])
         .draw();
     },
+    content: `
+      <div class="modal-body">
+        <table 
+          id="alerts-table"
+          class="table table-striped table-bordered table-hover wrap"
+          style="width:100%"
+        >
+          <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th style="word-wrap: break-word">Content</th>
+            </tr>
+          </thead>
+          <tbody>
+          ${getAlerts()}
+          </tbody>
+        </table>
+      <div>
     `
-    <div class="modal-body">
-      <table 
-        id="alerts-table"
-        class="table table-striped table-bordered table-hover wrap"
-        style="width:100%"
-      >
-        <thead>
-          <tr>
-              <th>Date</th>
-              <th>Type</th>
-              <th style="word-wrap: break-word">Content</th>
-          </tr>
-        </thead>
-        <tbody>
-        ${getAlerts()}
-        </tbody>
-      </table>
-    <div>
-  `
-  );
+  });
 }
 
 function getAlerts(preview) {

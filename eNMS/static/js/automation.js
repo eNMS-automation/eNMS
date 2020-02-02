@@ -382,40 +382,44 @@ function field(name, type, id) {
 }
 
 function displayCalendar(calendarType) {
-  showPanel("calendar", calendarType, () => {
-    call(`/calendar_init/${calendarType}`, function(tasks) {
-      let events = [];
-      for (const [name, properties] of Object.entries(tasks)) {
-        if (properties.service === undefined) continue;
-        events.push({
-          title: name,
-          id: properties.id,
-          description: properties.description,
-          start: new Date(...properties.start),
-          runtime: properties.runtime,
-          service: properties.service,
+  showPanel({
+    name: "calendar",
+    id: calendarType,
+    processing: () => {
+      call(`/calendar_init/${calendarType}`, function(tasks) {
+        let events = [];
+        for (const [name, properties] of Object.entries(tasks)) {
+          if (properties.service === undefined) continue;
+          events.push({
+            title: name,
+            id: properties.id,
+            description: properties.description,
+            start: new Date(...properties.start),
+            runtime: properties.runtime,
+            service: properties.service,
+          });
+        }
+        $("#calendar").fullCalendar({
+          height: 600,
+          header: {
+            left: "prev,next today",
+            center: "title",
+            right: "month,agendaWeek,agendaDay,listMonth",
+          },
+          selectable: true,
+          selectHelper: true,
+          eventClick: function(e) {
+            if (calendarType == "task") {
+              showTypePanel("task", e.id);
+            } else {
+              showRuntimePanel("results", e.service, e.runtime);
+            }
+          },
+          editable: true,
+          events: events,
         });
-      }
-      $("#calendar").fullCalendar({
-        height: 600,
-        header: {
-          left: "prev,next today",
-          center: "title",
-          right: "month,agendaWeek,agendaDay,listMonth",
-        },
-        selectable: true,
-        selectHelper: true,
-        eventClick: function(e) {
-          if (calendarType == "task") {
-            showTypePanel("task", e.id);
-          } else {
-            showRuntimePanel("results", e.service, e.runtime);
-          }
-        },
-        editable: true,
-        events: events,
       });
-    });
+    }
   });
 }
 

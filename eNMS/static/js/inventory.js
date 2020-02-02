@@ -59,13 +59,17 @@ function parseData(data) {
 }
 
 export function showConnectionPanel(id) {
-  showPanel("device_connection", id, () => {
-    $(`#custom-credentials-${id}`).change(function() {
-      $(`#credentials-fields-${id}`).show();
-    });
-    $(`#device-credentials-${id},#user-credentials-${id}`).change(function() {
-      $(`#credentials-fields-${id}`).hide();
-    });
+  showPanel({
+    name: "device_connection",
+    id: id,
+    processing: () => {
+      $(`#custom-credentials-${id}`).change(function() {
+        $(`#credentials-fields-${id}`).show();
+      });
+      $(`#device-credentials-${id},#user-credentials-${id}`).change(function() {
+        $(`#credentials-fields-${id}`).hide();
+      });
+    }
   });
 }
 

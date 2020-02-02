@@ -248,7 +248,7 @@ export function createTooltips() {
   });
 }
 
-export function createPanel(
+export function openPanel({
   name,
   title,
   id,
@@ -256,7 +256,7 @@ export function createPanel(
   type,
   duplicate,
   content
-) {
+}) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
@@ -301,7 +301,7 @@ export function createPanel(
 }
 
 export function showPanel(type, id, processing, content) {
-  return createPanel(
+  return openPanel(
     type,
     panelName[type] || type,
     id,
@@ -313,13 +313,12 @@ export function showPanel(type, id, processing, content) {
 }
 
 export function showDeletionPanel(instance) {
-  createPanel(
-    "instance_deletion",
-    `Delete ${instance.name}`,
-    instance.id,
-    () => {},
-    instance.type
-  );
+  openPanel({
+    name: "instance_deletion",
+    title: `Delete ${instance.name}`,
+    id: instance.id,
+    type: instance.type
+  });
 }
 
 function preprocessForm(panel, id, type, duplicate) {
@@ -458,11 +457,10 @@ function showServicePanel(type, id, mode) {
 }
 
 export function showTypePanel(type, id, mode) {
-  createPanel(
-    type,
-    "",
-    id,
-    function(panel) {
+  openPanel({
+    name: type,
+    id: id,
+    processing: function(panel) {
       if (type == "workflow" || type.includes("service")) {
         showServicePanel(type, id, mode);
       }
@@ -494,9 +492,9 @@ export function showTypePanel(type, id, mode) {
         });
       }
     },
-    type,
-    mode == "duplicate"
-  );
+    type: type,
+    duplicate: mode == "duplicate"
+  });
 }
 
 function updateProperty(instance, el, property, value, type) {

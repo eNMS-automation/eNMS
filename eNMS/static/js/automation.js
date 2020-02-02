@@ -13,7 +13,7 @@ import {
   call,
   cantorPairing,
   configureNamespace,
-  createPanel,
+  openPanel,
   fCall,
   notify,
   showPanel,
@@ -38,20 +38,25 @@ function compare(type) {
   const v2 = $("input[name=v2]:checked").val();
   if (v1 && v2) {
     const cantorId = cantorPairing(parseInt(v1), parseInt(v2));
-    createPanel("compare", `Compare ${type}s`, cantorId, () => {
-      call(`/compare/${type}/${v1}/${v2}`, (result) => {
-        $(`#content-${cantorId}`).append(
-          diffview.buildView({
-            baseTextLines: result.first,
-            newTextLines: result.second,
-            opcodes: result.opcodes,
-            baseTextName: "V1",
-            newTextName: "V2",
-            contextSize: null,
-            viewType: 0,
-          })
-        );
-      });
+    openPanel({
+      name: "compare",
+      title: `Compare ${type}s`,
+      id: cantorId,
+      processing: () => {
+        call(`/compare/${type}/${v1}/${v2}`, (result) => {
+          $(`#content-${cantorId}`).append(
+            diffview.buildView({
+              baseTextLines: result.first,
+              newTextLines: result.second,
+              opcodes: result.opcodes,
+              baseTextName: "V1",
+              newTextName: "V2",
+              contextSize: null,
+              viewType: 0,
+            })
+          );
+        });
+      }
     });
   } else {
     notify("Select two versions to compare first.", "error", 5);
@@ -116,33 +121,38 @@ function copyClipboard(elementId, result) {
 }
 
 function showResult(id) {
-  createPanel("result", "Result", id, function() {
-    call(`/get_result/${id}`, (result) => {
-      const jsonResult = result;
-      const options = {
-        mode: "view",
-        modes: ["code", "view"],
-        onModeChange: function(newMode) {
-          editor.set(newMode == "code" ? result : jsonResult);
-        },
-        onEvent(node, event) {
-          if (event.type === "click") {
-            let path = node.path.map((key) =>
-              typeof key == "string" ? `"${key}"` : key
-            );
-            $(`#result-path-${id}`).val(`results[${path.join("][")}]`);
-          }
-        },
-      };
-      let editor = new JSONEditor(
-        document.getElementById(`content-${id}`),
-        options,
-        jsonResult
-      );
-      document.querySelectorAll(".jsoneditor-string").forEach((el) => {
-        el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
+  openPanel({
+    name: "result",
+    title: "Result",
+    id: id,
+    processing: function() {
+      call(`/get_result/${id}`, (result) => {
+        const jsonResult = result;
+        const options = {
+          mode: "view",
+          modes: ["code", "view"],
+          onModeChange: function(newMode) {
+            editor.set(newMode == "code" ? result : jsonResult);
+          },
+          onEvent(node, event) {
+            if (event.type === "click") {
+              let path = node.path.map((key) =>
+                typeof key == "string" ? `"${key}"` : key
+              );
+              $(`#result-path-${id}`).val(`results[${path.join("][")}]`);
+            }
+          },
+        };
+        let editor = new JSONEditor(
+          document.getElementById(`content-${id}`),
+          options,
+          jsonResult
+        );
+        document.querySelectorAll(".jsoneditor-string").forEach((el) => {
+          el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
+        });
       });
-    });
+    }
   });
 }
 
@@ -164,27 +174,32 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
     if (!runtime && !runtimes.length) {
       return notify(`No ${type} yet.`, "error", 5);
     }
-    createPanel(panelType, `${type} - ${service.name}`, panelId, function() {
-      $(`#runtimes-${panelId}`).empty();
-      runtimes.forEach((runtime) => {
-        $(`#runtimes-${panelId}`).append(
-          $("<option></option>")
-            .attr("value", runtime[0])
-            .text(runtime[1])
-        );
-      });
-      if (!runtime || runtime == "normal") {
-        runtime = runtimes[runtimes.length - 1][0];
+    openPanel({
+      name: panelType,
+      title: `${type} - ${service.name}`,
+      id: panelId,
+      processing: function() {
+        $(`#runtimes-${panelId}`).empty();
+        runtimes.forEach((runtime) => {
+          $(`#runtimes-${panelId}`).append(
+            $("<option></option>")
+              .attr("value", runtime[0])
+              .text(runtime[1])
+          );
+        });
+        if (!runtime || runtime == "normal") {
+          runtime = runtimes[runtimes.length - 1][0];
+        }
+        $(`#runtimes-${panelId}`)
+          .val(runtime)
+          .selectpicker("refresh");
+        $(`#runtimes-${panelId}`).on("change", function() {
+          displayFunction(service, this.value, true);
+        });
+        displayFunction(service, runtime);
       }
-      $(`#runtimes-${panelId}`)
-        .val(runtime)
-        .selectpicker("refresh");
-      $(`#runtimes-${panelId}`).on("change", function() {
-        displayFunction(service, this.value, true);
-      });
-      displayFunction(service, runtime);
     });
-  });
+  })
 };
 
 function displayLogs(service, runtime, change) {

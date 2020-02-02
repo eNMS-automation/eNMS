@@ -17,7 +17,7 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
-  createPanel,
+  openPanel,
   fCall,
   notify,
   showPanel,
@@ -727,7 +727,7 @@ function runWorkflow(withUpdates) {
 }
 
 function showRestartWorkflowPanel(workflow, service) {
-  createPanel(
+  openPanel(
     "restart_workflow",
     `Restart Workflow '${workflow.name}' from '${service.name}'`,
     workflow.id,

@@ -9,7 +9,7 @@ initSelect: false
 import {
   call,
   configureNamespace,
-  createPanel,
+  openPanel,
   fCall,
   notify,
   openUrl,
@@ -150,7 +150,7 @@ function savePoolObjects(id) {
 }
 
 function showPoolObjectsPanel(id) {
-  createPanel("pool_objects", "Pool Objects", id, function() {
+  openPanel("pool_objects", "Pool Objects", id, function() {
     call(`/get/pool/${id}`, function(pool) {
       if (pool.devices.length > 1000 || pool.links.length > 1000) {
         notify("Too many objects to display.", "error", 5);
@@ -183,7 +183,7 @@ export const showDeviceData = function(device) {
     if (!result.configuration && !result.operational_data) {
       notify("No data stored.", "error", 5);
     } else {
-      createPanel(
+      openPanel(
         "device_data",
         `Device Data - ${device.name}`,
         device.id,
@@ -219,7 +219,7 @@ function showSessionLog(sessionId) {
         5
       );
     } else {
-      createPanel("display", "Session log", sessionId, function() {
+      openPanel("display", "Session log", sessionId, function() {
         const content = document.getElementById(`content-${sessionId}`);
         // eslint-disable-next-line new-cap
         const editor = CodeMirror(content, {
@@ -238,7 +238,7 @@ function showSessionLog(sessionId) {
 }
 
 function showDeviceResultsPanel(device) {
-  createPanel("result_table", `Results - ${device.name}`, null, function() {
+  openPanel("result_table", `Results - ${device.name}`, null, function() {
     initTable("result", device, null, "table-result");
   });
 }

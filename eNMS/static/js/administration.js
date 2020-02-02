@@ -9,7 +9,7 @@ JSONEditor: false
 import {
   call,
   configureNamespace,
-  createPanel,
+  openPanel,
   editors,
   fCall,
   notify,
@@ -20,10 +20,13 @@ import { tables } from "./table.js";
 let settingsEditor;
 
 function showImportTopologyPanel() {
-  createPanel("excel_import", "Import Topology as an Excel file", 0, () => {
-    document.getElementById("file").onchange = function() {
-      importTopology();
-    };
+  openPanel({
+    name: "excel_import", title: "Import Topology as an Excel file",
+    processing: () => {
+      document.getElementById("file").onchange = function() {
+        importTopology();
+      };
+    }
   });
 }
 
@@ -42,12 +45,16 @@ function saveSettings() {
 }
 
 function showSettings() {
-  createPanel("settings", "Settings", null, function() {
-    settingsEditor = new JSONEditor(
-      document.getElementById("content"),
-      {},
-      settings
-    );
+  openPanel({
+    name: "settings",
+    title: "Settings",
+    processing: function() {
+      settingsEditor = new JSONEditor(
+        document.getElementById("content"),
+        {},
+        settings
+      );
+    }
   });
 }
 
@@ -164,23 +171,28 @@ function deleteFile(file) {
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
   call(`/edit_file/${filepath}`, function(content) {
-    createPanel("file", `Edit ${file.data.path}`, filepath, () => {
-      const display = document.getElementById(`file_content-${filepath}`);
-      // eslint-disable-next-line new-cap
-      let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
-        lineWrapping: true,
-        lineNumbers: true,
-        theme: "cobalt",
-        matchBrackets: true,
-        mode: "python",
-        extraKeys: { "Ctrl-F": "findPersistent" },
-        scrollbarStyle: "overlay",
-      }));
-      fileEditor.setSize("100%", "100%");
-      fileEditor.setValue(content);
-      fileEditor.refresh();
+    openPanel({
+      name: "file",
+      title: `Edit ${file.data.path}`,
+      id: filepath,
+      processing: () => {
+        const display = document.getElementById(`file_content-${filepath}`);
+        // eslint-disable-next-line new-cap
+        let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
+          lineWrapping: true,
+          lineNumbers: true,
+          theme: "cobalt",
+          matchBrackets: true,
+          mode: "python",
+          extraKeys: { "Ctrl-F": "findPersistent" },
+          scrollbarStyle: "overlay",
+        }));
+        fileEditor.setSize("100%", "100%");
+        fileEditor.setValue(content);
+        fileEditor.refresh();
+      }
     });
-  });
+  })
 }
 
 function saveFile(file) {
@@ -193,18 +205,23 @@ function saveFile(file) {
 
 function showFileUploadPanel(folder) {
   const path = folder.replace(/\//g, ">");
-  createPanel("upload_files", `Upload files to ${folder}`, path, () => {
-    const element = document.getElementById(`dropzone-${path}`);
-    let dropzone = new Dropzone(element, {
-      url: "/upload_files",
-      autoProcessQueue: false,
-    });
-    $(`[id="dropzone-submit-${path}"]`).click(function() {
-      $(`[id="folder-${path}"]`).val(folder);
-      dropzone.processQueue();
-      notify("File successfully uploaded.", "success", 5);
-      $(`[id="upload_files-${path}"]`).remove();
-    });
+  openPanel({
+    name: "upload_files",
+    title: `Upload files to ${folder}`,
+    id: path,
+    processing: () => {
+      const element = document.getElementById(`dropzone-${path}`);
+      let dropzone = new Dropzone(element, {
+        url: "/upload_files",
+        autoProcessQueue: false,
+      });
+      $(`[id="dropzone-submit-${path}"]`).click(function() {
+        $(`[id="folder-${path}"]`).val(folder);
+        dropzone.processQueue();
+        notify("File successfully uploaded.", "success", 5);
+        $(`[id="upload_files-${path}"]`).remove();
+      });
+    }
   });
 }
 

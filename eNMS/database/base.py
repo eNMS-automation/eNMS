@@ -93,7 +93,7 @@ class AbstractBase(Base):
             result[property] = value
         return result
 
-    def table_properties(self, table):
+    def table_properties(self, **_):
         return self.get_properties()
 
     def duplicate(self, **kwargs):

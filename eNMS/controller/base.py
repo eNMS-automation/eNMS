@@ -521,7 +521,7 @@ class BaseController:
             "recordsTotal": Session.query(func.count(model.id)).scalar(),
             "recordsFiltered": get_query_count(result),
             "data": [
-                obj.table_properties(table)
+                obj.table_properties(**kwargs)
                 for obj in result.limit(int(kwargs["length"]))
                 .offset(int(kwargs["start"]))
                 .all()

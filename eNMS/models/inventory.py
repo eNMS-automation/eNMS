@@ -117,11 +117,17 @@ class Device(CustomDevice):
         "Session", back_populates="device", cascade="all, delete-orphan"
     )
 
-    def table_properties(self, table):
-        if table == "device":
+    def table_properties(self, **kwargs):
+        if kwargs["type"] == "device":
             return super().get_properties()
         else:
-            return super().get_properties()
+            configuration = ""
+            search = kwargs["form"].get("configuration")
+            if search:
+                configuration = "<br>".join(line for line in self.configuration.splitlines() if search in line)
+            properties = {"configuration": configuration, **super().get_properties()}
+            return properties
+
 
     @property
     def view_properties(self):

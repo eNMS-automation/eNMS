@@ -87,6 +87,7 @@ export function initTable(type, instance, runtime, id) {
         d.form = serializeForm(form);
         d.instance = instance;
         d.columns = models[type].columns;
+        d.type = type
         if (runtime) {
           d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
         }
@@ -281,7 +282,7 @@ models.configuration = class Configuration extends Base {
   static get columns() {
     return [
       { data: "name", title: "Name", search: "text", width: "150px" },
-      { data: "configuration", title: "Configuration", search: "text" },
+      { data: "configuration", title: "Configuration", search: "text", className: "dt-body-right" },
       { data: "buttons", width: "90px" },
     ];
   }

@@ -119,6 +119,7 @@ class Device(CustomDevice):
 
     def table_properties(self, **kwargs):
         properties = super().get_properties()
+        print(kwargs)
         for property in ("configuration", "operational_data"):
             data = kwargs["form"].get(property)
             properties[property] = "<br>".join(

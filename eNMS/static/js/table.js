@@ -97,6 +97,7 @@ export function initTable(type, instance, runtime, id) {
         if (runtime) {
           d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
         }
+        if (models[type].filteringData) models[type].filteringData(d);
         return JSON.stringify(d);
       },
       dataSrc: function(result) {
@@ -299,17 +300,29 @@ models.configuration = class Configuration extends Base {
   }
 
   static postProcessing(table) {
-    $('#data-type').bootstrapToggle({
-      on: 'Operational Data',
-      off: 'Configuration',
-      width: "100%"
+    $("#data-type").bootstrapToggle({
+      on: "Operational Data",
+      onstyle: "dark",
+      off: "Configuration",
+      offstyle: "info",
+      width: "100%",
     });
     $("#data-type").on("change", function() {
-      table.columns($(this).prop('checked') ? 2 : 1).visible(true);
-      table.columns($(this).prop('checked') ? 1 : 2).visible(false);
+      table.columns($(this).prop("checked") ? 2 : 1).visible(true);
+      table.columns($(this).prop("checked") ? 1 : 2).visible(false);
       table.page(0).ajax.reload(null, false);
     });
+    if (settings.database.url.includes("sqlite")) {
+      $("#search-type").prop("disabled", true);
+    }
+  }
 
+  static filteringData(data) {
+    const dataType = $("#data-type").prop("checked")
+      ? "operational_data"
+      : "configuration";
+    const filter = $("#search-type").prop("checked") ? "regex" : "inclusion";
+    data.form[`${dataType}_filter`] = filter;
   }
 
   static get controls() {

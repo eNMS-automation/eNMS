@@ -292,7 +292,7 @@ models.configuration = class Configuration extends Base {
         data: "operational_data",
         title: "Operational Data",
         search: "text",
-        show: false,
+        visible: false,
       },
       { data: "buttons", width: "90px" },
     ];

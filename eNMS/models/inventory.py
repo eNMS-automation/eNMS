@@ -119,10 +119,11 @@ class Device(CustomDevice):
 
     def table_properties(self, **kwargs):
         properties = super().get_properties()
-        data = kwargs["form"].get("configuration")
-        properties["configuration"] = "<br>".join(
-            line for line in self.configuration.splitlines() if data in line
-        ) if data else ""
+        for property in ("configuration", "operational_data"):
+            data = kwargs["form"].get(property)
+            properties[property] = "<br>".join(
+                line for line in getattr(self, property).splitlines() if data in line
+            ) if data else ""
         return properties
 
     @property

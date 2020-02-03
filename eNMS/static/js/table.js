@@ -79,7 +79,7 @@ export function initTable(type, instance, runtime, id) {
             });
         });
       $(`#controls-${type}`).html(models[type].controls);
-      if (models[type].postProcessing) models[type].postProcessing();
+      if (models[type].postProcessing) models[type].postProcessing(this.api());
       this.api().columns.adjust();
     },
     ajax: {
@@ -287,10 +287,23 @@ models.configuration = class Configuration extends Base {
         data: "configuration",
         title: "Configuration",
         search: "text",
-        className: "dt-body-right",
+      },
+      {
+        data: "operational_data",
+        title: "Operational Data",
+        search: "text",
+        show: false,
       },
       { data: "buttons", width: "90px" },
     ];
+  }
+
+  static postProcessing(table) {
+    $("#data-type").on("change", function() {
+      table.columns(this.value === "configuration" ? 1 : 2).visible(true);
+      table.columns(this.value === "configuration" ? 2 : 1).visible(false);
+      table.page(0).ajax.reload(null, false);
+    });
   }
 
   static get controls() {

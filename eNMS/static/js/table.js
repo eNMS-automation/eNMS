@@ -299,23 +299,36 @@ models.configuration = class Configuration extends Base {
   }
 
   static postProcessing(table) {
+    $('#data-type').bootstrapToggle({
+      on: 'Operational Data',
+      off: 'Configuration',
+      width: "100%"
+    });
     $("#data-type").on("change", function() {
-      table.columns(this.value === "configuration" ? 1 : 2).visible(true);
-      table.columns(this.value === "configuration" ? 2 : 1).visible(false);
+      table.columns($(this).prop('checked') ? 2 : 1).visible(true);
+      table.columns($(this).prop('checked') ? 1 : 2).visible(false);
       table.page(0).ajax.reload(null, false);
     });
+
   }
 
   static get controls() {
     return `
-      <select
-        id="data-type"
-        name="data-type"
-        class="form-control"
-      >
-        <option value="configuration">Configuration</option>
-        <option value="operational_data">Operational Data</option>
-      </select>`;
+      <div class="form-group" style="width: 400px">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input id="data-type" name="data-type" style="width: 200px" type="checkbox">
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-12">
+        <div class="checkbox">
+          <label >
+            <input
+              id="search-type"
+              name="search-type"
+              type="checkbox"
+            > Regular Expression
+          </label>
+        </div>
+      </div>`;
   }
 
   get buttons() {

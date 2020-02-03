@@ -15,6 +15,7 @@ import { filterView } from "./visualization.js";
 
 export let tables = {};
 export const models = {};
+let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
   // eslint-disable-next-line new-cap
@@ -66,8 +67,11 @@ export function initTable(type, instance, runtime, id) {
           $(element)
             .appendTo($(this.header()))
             .on("keyup change", function() {
+              if (waitForSearch) return;
+              waitForSearch = true;
               setTimeout(function() {
                 tables[type].page(0).ajax.reload(null, false);
+                waitForSearch = false;
               }, 500);
             })
             .on("click", function(e) {

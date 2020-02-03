@@ -66,13 +66,13 @@ export function initTable(type, instance, runtime, id) {
           }
           $(element)
             .appendTo($(this.header()))
-            .on("keyup change", function() {
+            .on("keyup", function() {
               if (waitForSearch) return;
               waitForSearch = true;
               setTimeout(function() {
                 tables[type].page(0).ajax.reload(null, false);
                 waitForSearch = false;
-              }, 500);
+              }, 800);
             })
             .on("click", function(e) {
               e.stopPropagation();

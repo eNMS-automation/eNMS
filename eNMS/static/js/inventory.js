@@ -201,6 +201,7 @@ export const showDeviceData = function(device) {
             lineNumbers: true,
             readOnly: true,
             theme: "cobalt",
+            mode: null,
             extraKeys: { "Ctrl-F": "findPersistent" },
             scrollbarStyle: "overlay",
           });
@@ -237,6 +238,7 @@ function showSessionLog(sessionId) {
             lineNumbers: true,
             readOnly: true,
             theme: "cobalt",
+            mode: null,
             extraKeys: { "Ctrl-F": "findPersistent" },
             scrollbarStyle: "overlay",
           });

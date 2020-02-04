@@ -313,7 +313,14 @@ models.configuration = class Configuration extends Base {
     });
     if (settings.database.url.includes("sqlite")) {
       $("#search-type").prop("disabled", true);
+      notify("Regex-based search is not supported with SQLite.", "error", 5);
     }
+    $("#slider").bootstrapSlider({
+      value: 0,
+      ticks: [0, 1, 2, 3],
+      ticks_labels: [0, 1, 2, 3],
+      formatter: (value) => `Lines of context: ${value}`,
+    });
   }
 
   static filteringData(data) {
@@ -326,19 +333,23 @@ models.configuration = class Configuration extends Base {
 
   static get controls() {
     return `
-      <div class="form-group" style="width: 400px">
-        <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="form-group" style="width: 700px">
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <input type="text" id="slider" style="width: 200px">
+      </div>
+        <div class="col-md-5 col-sm-5 col-xs-12">
           <input id="data-type" name="data-type" style="width: 200px" type="checkbox">
         </div>
-        <div class="col-md-5 col-sm-5 col-xs-12">
-        <div class="checkbox">
-          <label >
-            <input
-              id="search-type"
-              name="search-type"
-              type="checkbox"
-            > Regular Expression
-          </label>
+        <div class="col-md-3 col-sm-3 col-xs-12">
+          <div class="checkbox">
+            <label>
+              <input
+                id="search-type"
+                name="search-type"
+                type="checkbox"
+              > Regular Expression
+            </label>
+          </div>
         </div>
       </div>`;
   }

@@ -24,7 +24,6 @@ export function initTable(type, instance, runtime, id) {
     orderCellsTop: true,
     autoWidth: false,
     scrollX: true,
-    stateSave: true,
     drawCallback: function() {
       $(".paginate_button > a").on("focus", function() {
         $(this).blur();

@@ -121,9 +121,9 @@ class Device(CustomDevice):
         properties = super().get_properties()
         for property in ("configuration", "operational_data"):
             data = kwargs["form"].get(property)
-            properties[property] = "<br>".join(
-                line for line in getattr(self, property).splitlines() if data in line
-            ) if data else ""
+            properties[property] = f"""<pre style="text-align: left">{'<br>'.join(
+                f'<b>L{index}:</b> {line.strip()}' for (index, line) in enumerate(getattr(self, property).splitlines()) if data in line
+            )}</pre>""" if data else ""
         return properties
 
     @property

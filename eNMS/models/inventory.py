@@ -119,19 +119,25 @@ class Device(CustomDevice):
 
     def table_properties(self, **kwargs):
         properties = super().get_properties()
+        context = int(kwargs["form"].get("context-lines", 0))
+        print(context)
         for property in ("configuration", "operational_data"):
             data = kwargs["form"].get(property)
             if not data:
                 properties[property] = ""
             else:
-                match_lines = []
-                for (index, line) in enumerate(getattr(self, property).splitlines()):
-                    if data not in line:
+                result = []
+                config, visited = getattr(self, property).splitlines(), set()
+                for (index, line) in enumerate(config):
+                    match_lines = []
+                    if data not in line or index in visited:
                         continue
-                    line = line.strip().replace(data, f"<mark>{data}</mark>")
-                    match_lines.append(f"<b>L{index + 1}:</b> {line}")
-                content = "<br>".join(match_lines)
-                properties[property] = f"<pre style='text-align: left'>{content}</pre>"
+                    for i in range(-context, context + 1):
+                        visited.add(index + i)
+                        line = config[index + i].strip().replace(data, f"<mark>{data}</mark>")
+                        match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
+                    result.append(f"<pre style='text-align: left'>{'<br>'.join(match_lines)}</pre>")
+                properties[property] = "".join(result)
         return properties
 
     @property

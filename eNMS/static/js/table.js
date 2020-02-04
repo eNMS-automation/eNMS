@@ -321,6 +321,9 @@ models.configuration = class Configuration extends Base {
       ticks_labels: [0, 1, 2, 3],
       formatter: (value) => `Lines of context: ${value}`,
     });
+    $("#slider").on("change", function() {
+      refreshTable("configuration");
+    });
   }
 
   static filteringData(data) {

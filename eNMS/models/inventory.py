@@ -128,23 +128,29 @@ class Device(CustomDevice):
                 result = []
                 config, visited = getattr(self, property).splitlines(), set()
                 for (index, line) in enumerate(config):
-                    match_lines, merge = [], False
+                    match_lines, merge = [], index - context - 1 in visited
                     if data not in line:
                         continue
                     for i in range(-context, context + 1):
-                        if index + i < 0 or index + i > len(config):
+                        if index + i < 0 or index + i > len(config) - 1:
                             continue
                         if index + i in visited:
                             merge = True
                             continue
                         visited.add(index + i)
-                        line = config[index + i].strip().replace(data, f"<mark>{data}</mark>")
+                        line = (
+                            config[index + i]
+                            .strip()
+                            .replace(data, f"<mark>{data}</mark>")
+                        )
                         match_lines.append(f"<b>L{index + i + 1}:</b> {line}")
                     if merge:
                         result[-1] += f"<br>{'<br>'.join(match_lines)}"
                     else:
                         result.append("<br>".join(match_lines))
-                properties[property] = "".join(f"<pre style='text-align: left'>{match}</pre>" for match in result)
+                properties[property] = "".join(
+                    f"<pre style='text-align: left'>{match}</pre>" for match in result
+                )
         return properties
 
     @property

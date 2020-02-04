@@ -126,20 +126,20 @@ class Device(CustomDevice):
                 properties[property] = ""
             else:
                 result = []
-                config, visited = getattr(self, property).splitlines(), set()
-                for (index, line) in enumerate(config):
+                content, visited = getattr(self, property).splitlines(), set()
+                for (index, line) in enumerate(content):
                     match_lines, merge = [], index - context - 1 in visited
                     if data not in line:
                         continue
                     for i in range(-context, context + 1):
-                        if index + i < 0 or index + i > len(config) - 1:
+                        if index + i < 0 or index + i > len(content) - 1:
                             continue
                         if index + i in visited:
                             merge = True
                             continue
                         visited.add(index + i)
                         line = (
-                            config[index + i]
+                            content[index + i]
                             .strip()
                             .replace(data, f"<mark>{data}</mark>")
                         )

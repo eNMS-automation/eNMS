@@ -80,6 +80,7 @@ class BaseController:
     ]
 
     json_endpoints = [
+        "get_configuration_context",
         "multiselect_filtering",
         "save_settings",
         "table_filtering",
@@ -111,6 +112,7 @@ class BaseController:
         "get",
         "get_all",
         "get_cluster_status",
+        "get_configuration_context",
         "get_device_network_data",
         "get_device_logs",
         "get_exported_services",

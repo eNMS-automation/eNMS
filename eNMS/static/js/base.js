@@ -187,6 +187,19 @@ export const call = function(url, callback) {
   });
 };
 
+export function oCall(url, data, callback) {
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: 'json',
+    success: function(results) {
+      processResults(callback, results);
+    },
+  });
+}
+
 export function fCall(url, form, callback) {
   $.ajax({
     type: "POST",

@@ -9,10 +9,11 @@ initSelect: false
 import {
   call,
   configureNamespace,
-  fCall,
   notify,
+  oCall,
   openPanel,
   openUrl,
+  serializeForm,
 } from "./base.js";
 import { initTable, tables } from "./table.js";
 
@@ -184,6 +185,20 @@ function updatePools(pool) {
   });
 }
 
+export const showConfigurationContext = function(device) {
+  openPanel({
+    name: "display",
+    title: `Configuration Context - ${device.name}`,
+    id: device.id,
+    processing: function() {
+      const data = serializeForm($("#search-configuration-form"));
+      oCall(`/get_configuration_context/${device.id}`, data, function(result) {
+        console.log(result)
+      });
+    },
+  });
+};
+
 export const showDeviceData = function(device) {
   call(`/get_device_network_data/${device.id}`, (result) => {
     if (!result.configuration && !result.operational_data) {
@@ -267,6 +282,7 @@ configureNamespace("inventory", [
   savePoolObjects,
   showPoolObjectsPanel,
   updatePools,
+  showConfigurationContext,
   showDeviceData,
   showDeviceResultsPanel,
   showSessionLog,

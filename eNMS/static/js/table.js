@@ -295,7 +295,7 @@ models.configuration = class Configuration extends Base {
         search: "text",
         visible: false,
       },
-      { data: "buttons", width: "90px" },
+      { data: "buttons", width: "130px" },
     ];
   }
 
@@ -347,6 +347,13 @@ models.configuration = class Configuration extends Base {
   get buttons() {
     return `
       <ul class="pagination pagination-lg" style="margin: 0px">
+        <li>
+          <button type="button" class="btn btn-sm btn-info"
+          onclick="eNMS.inventory.showConfigurationContext(${this.instance})"
+          data-tooltip="Configuration Context"
+            ><span class="glyphicon glyphicon-list"></span
+          ></button>
+        </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.inventory.showDeviceData(${this.instance})"

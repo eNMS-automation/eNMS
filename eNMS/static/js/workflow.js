@@ -367,45 +367,60 @@ function deleteNode(id) {
 
 function deleteLabel(label, noNotification) {
   nodes.remove(label.id);
-  call(`/delete_label/${workflow.id}/${label.id}`, function(updateTime) {
-    delete workflow.labels[label.id];
-    workflow.last_modified = updateTime;
-    if (!noNotification) notify("Label removed.", "success", 5);
+  call({
+    url: `/delete_label/${workflow.id}/${label.id}`,
+    callback: function(updateTime) {
+      delete workflow.labels[label.id];
+      workflow.last_modified = updateTime;
+      if (!noNotification) notify("Label removed.", "success", 5);
+    },
   });
 }
 
 function saveEdge(edge) {
   const param = `${workflow.id}/${edge.subtype}/${edge.from}/${edge.to}`;
-  call(`/add_edge/${param}`, function(result) {
-    workflow.last_modified = result.update_time;
-    edges.add(edgeToEdge(result.edge));
-    graph.addEdgeMode();
+  call({
+    url: `/add_edge/${param}`,
+    callback: function(result) {
+      workflow.last_modified = result.update_time;
+      edges.add(edgeToEdge(result.edge));
+      graph.addEdgeMode();
+    },
   });
 }
 
 function deleteEdge(edgeId) {
   workflow.edges = workflow.edges.filter((e) => e.id != edgeId);
-  call(`/delete_edge/${workflow.id}/${edgeId}`, (updateTime) => {
-    workflow.last_modified = updateTime;
+  call({
+    url: `/delete_edge/${workflow.id}/${edgeId}`,
+    callback: (updateTime) => {
+      workflow.last_modified = updateTime;
+    },
   });
 }
 
 function stopWorkflow() {
-  call(`/stop_workflow/${currentRuntime}`, (result) => {
-    if (!result) {
-      notify("The workflow is not currently running.", "error", 5);
-    } else {
-      notify("Workflow will stop after current service...", "success", 5);
-    }
+  call({
+    url: `/stop_workflow/${currentRuntime}`,
+    callback: (result) => {
+      if (!result) {
+        notify("The workflow is not currently running.", "error", 5);
+      } else {
+        notify("Workflow will stop after current service...", "success", 5);
+      }
+    },
   });
 }
 
 function skipServices() {
   const selectedNodes = graph.getSelectedNodes().filter((x) => !isNaN(x));
   if (!selectedNodes.length) return;
-  call(`/skip_services/${workflow.id}/${selectedNodes.join("-")}`, (skip) => {
-    getWorkflowState();
-    notify(`Services ${skip}ped.`, "success", 5);
+  call({
+    url: `/skip_services/${workflow.id}/${selectedNodes.join("-")}`,
+    callback: (skip) => {
+      getWorkflowState();
+      notify(`Services ${skip}ped.`, "success", 5);
+    },
   });
 }
 
@@ -633,11 +648,14 @@ function createNew(mode) {
   if (mode == "create_workflow") {
     showTypePanel("workflow");
   } else if (mode == "duplicate_workflow") {
-    call(`/duplicate_workflow/${workflow.id}`, function(instance) {
-      $("#current-workflow").append(
-        `<option value="${instance.id}">${instance.name}</option>`
-      );
-      switchToWorkflow(instance.id);
+    call({
+      url: `/duplicate_workflow/${workflow.id}`,
+      callback: function(instance) {
+        $("#current-workflow").append(
+          `<option value="${instance.id}">${instance.name}</option>`
+        );
+        switchToWorkflow(instance.id);
+      },
     });
   } else {
     showTypePanel($("#service-type").val());
@@ -699,14 +717,18 @@ function createLabel() {
     ? [mousePosition.x, mousePosition.y]
     : [0, 0];
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
-  call(`/create_label/${params}`, "workflow_label-form", function(result) {
-    if (currLabel) {
-      deleteLabel(currLabel, true);
-      currLabel = null;
-    }
-    drawLabel(result.id, result);
-    $("#workflow_label").remove();
-    notify("Label created.", "success", 5);
+  call({
+    url: `/create_label/${params}`,
+    form: "workflow_label-form",
+    callback: function(result) {
+      if (currLabel) {
+        deleteLabel(currLabel, true);
+        currLabel = null;
+      }
+      drawLabel(result.id, result);
+      $("#workflow_label").remove();
+      notify("Label created.", "success", 5);
+    },
   });
 }
 
@@ -742,27 +764,31 @@ function showRestartWorkflowPanel(workflow, service) {
       $("#start_services")
         .val(service.id)
         .trigger("change");
-      call(`/get_runtimes/service/${workflow.id}`, function(runtimes) {
-        runtimes.forEach((runtime) => {
-          $("#restart_runtime").append(
-            $("<option></option>")
-              .attr("value", runtime[0])
-              .text(runtime[1])
-          );
-        });
-        $("#restart_runtime").val(runtimes[runtimes.length - 1]);
-        $("#restart_runtime").selectpicker("refresh");
+      call({
+        url: `/get_runtimes/service/${workflow.id}`,
+        callback: function(runtimes) {
+          runtimes.forEach((runtime) => {
+            $("#restart_runtime").append(
+              $("<option></option>")
+                .attr("value", runtime[0])
+                .text(runtime[1])
+            );
+          });
+          $("#restart_runtime").val(runtimes[runtimes.length - 1]);
+          $("#restart_runtime").selectpicker("refresh");
+        },
       });
     },
   });
 }
 
 function restartWorkflow() {
-  call(`/run_service/${currentPath}`, `restart_workflow-form`, function(
-    result
-  ) {
-    $(`#restart_workflow-${workflow.id}`).remove();
-    runLogic(result);
+  call({
+    url: `/run_service/${currentPath}`,
+    form: `restart_workflow-form`, function(result) {
+      $(`#restart_workflow-${workflow.id}`).remove();
+      runLogic(result);
+    },
   });
 }
 

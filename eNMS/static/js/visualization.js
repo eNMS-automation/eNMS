@@ -225,8 +225,8 @@ function showPoolView(poolId) {
           action[row](selected);
         },
       });
+      displayPool(poolId, pool.devices, pool.links);
     },
-    displayPool(poolId, pool.devices, pool.links);
   });
 }
 

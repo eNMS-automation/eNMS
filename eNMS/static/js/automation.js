@@ -236,68 +236,71 @@ function displayLogs(service, runtime, change) {
 }
 
 function displayResultsTree(service, runtime) {
-  call(`/get_workflow_results/${service.id}/${runtime}`, function(data) {
-    $(`#result-tree-tree-${service.id}`)
-      .jstree("destroy")
-      .empty();
-    let tree = $(`#result-tree-tree-${service.id}`).jstree({
-      core: {
-        animation: 100,
-        themes: { stripes: true },
-        data: data,
-      },
-      plugins: ["html_row", "types", "wholerow"],
-      types: {
-        default: {
-          icon: "glyphicon glyphicon-file",
+  call({
+    url: `/get_workflow_results/${service.id}/${runtime}`,
+    callback: function(data) {
+      $(`#result-tree-tree-${service.id}`)
+        .jstree("destroy")
+        .empty();
+      let tree = $(`#result-tree-tree-${service.id}`).jstree({
+        core: {
+          animation: 100,
+          themes: { stripes: true },
+          data: data,
         },
-        workflow: {
-          icon: "fa fa-sitemap",
+        plugins: ["html_row", "types", "wholerow"],
+        types: {
+          default: {
+            icon: "glyphicon glyphicon-file",
+          },
+          workflow: {
+            icon: "fa fa-sitemap",
+          },
         },
-      },
-      html_row: {
-        default: function(el, node) {
-          if (!node) return;
-          const data = JSON.stringify(node.data.properties);
-          let progressSummary;
-          if (node.data.progress) {
-            progressSummary = `
-              <div style="position: absolute; top: 0px; right: 200px">
-                <span style="color: #32cd32">${node.data.progress.success} passed</span> -
-                <span style="color: #FF6666">${node.data.progress.failure} failed</span>
+        html_row: {
+          default: function(el, node) {
+            if (!node) return;
+            const data = JSON.stringify(node.data.properties);
+            let progressSummary;
+            if (node.data.progress) {
+              progressSummary = `
+                <div style="position: absolute; top: 0px; right: 200px">
+                  <span style="color: #32cd32">${node.data.progress.success} passed</span> -
+                  <span style="color: #FF6666">${node.data.progress.failure} failed</span>
+                </div>
+              `;
+            } else {
+              progressSummary = "";
+            }
+            $(el).find("a").append(`
+              ${progressSummary}
+              <div style="position: absolute; top: 0px; right: 50px">
+                <button type="button"
+                  class="btn btn-xs btn-primary"
+                  onclick='eNMS.automation.showRuntimePanel(
+                    "logs", ${data}, "${runtime}"
+                  )'><span class="glyphicon glyphicon-list"></span>
+                </button>
+                <button type="button"
+                  class="btn btn-xs btn-primary"
+                  onclick='eNMS.automation.showRuntimePanel(
+                    "results", ${data}, "${runtime}", true
+                  )'>
+                  <span class="glyphicon glyphicon-list-alt"></span>
+                </button>
               </div>
-            `;
-          } else {
-            progressSummary = "";
-          }
-          $(el).find("a").append(`
-            ${progressSummary}
-            <div style="position: absolute; top: 0px; right: 50px">
-              <button type="button"
-                class="btn btn-xs btn-primary"
-                onclick='eNMS.automation.showRuntimePanel(
-                  "logs", ${data}, "${runtime}"
-                )'><span class="glyphicon glyphicon-list"></span>
-              </button>
-              <button type="button"
-                class="btn btn-xs btn-primary"
-                onclick='eNMS.automation.showRuntimePanel(
-                  "results", ${data}, "${runtime}", true
-                )'>
-                <span class="glyphicon glyphicon-list-alt"></span>
-              </button>
-            </div>
-          `);
+            `);
+          },
         },
-      },
-    });
-    tree.bind("loaded.jstree", function() {
-      tree.jstree("open_all");
-    });
-    tree.unbind("dblclick.jstree").bind("dblclick.jstree", function(event) {
-      const service = tree.jstree().get_node(event.target);
-      showRuntimePanel("results", service.data.properties, runtime, true);
-    });
+      });
+      tree.bind("loaded.jstree", function() {
+        tree.jstree("open_all");
+      });
+      tree.unbind("dblclick.jstree").bind("dblclick.jstree", function(event) {
+        const service = tree.jstree().get_node(event.target);
+        showRuntimePanel("results", service.data.properties, runtime, true);
+      });
+    },
   });
 }
 
@@ -316,31 +319,41 @@ function displayResultsTable(service, runtime) {
 
 function refreshLogs(service, runtime, editor, first, wasRefreshed) {
   if (!$(`#logs-logs-${service.id}`).length) return;
-  call(`/get_service_logs/${service.id}/${runtime}`, function(result) {
-    editor.setValue(result.logs);
-    editor.setCursor(editor.lineCount(), 0);
-    if (first || result.refresh) {
-      setTimeout(
-        () => refreshLogs(service, runtime, editor, false, result.refresh),
-        1000
-      );
-    } else if (wasRefreshed) {
-      $(`#logs-logs-${service.id}`).remove();
-      showRuntimePanel("results", service, runtime);
-    }
+  call({
+    url: `/get_service_logs/${service.id}/${runtime}`,
+    callback: function(result) {
+      editor.setValue(result.logs);
+      editor.setCursor(editor.lineCount(), 0);
+      if (first || result.refresh) {
+        setTimeout(
+          () => refreshLogs(service, runtime, editor, false, result.refresh),
+          1000
+        );
+      } else if (wasRefreshed) {
+        $(`#logs-logs-${service.id}`).remove();
+        showRuntimePanel("results", service, runtime);
+      }
+    },
   });
 }
 
 export const normalRun = function(id) {
-  call(`/run_service/${id}`, function(result) {
-    runLogic(result);
+  call({
+    url: `/run_service/${id}`,
+    callback: function(result) {
+      runLogic(result);
+    },
   });
 };
 
 function parameterizedRun(type, id) {
-  call(`/run_service/${id}`, `edit-${type}-form-${id}`, function(result) {
-    $(`#${type}-${id}`).remove();
-    runLogic(result);
+  call({
+    url: `/run_service/${id}`,
+    form: `edit-${type}-form-${id}`,
+    callback: function(result) {
+      $(`#${type}-${id}`).remove();
+      runLogic(result);
+    },
   });
 }
 
@@ -356,26 +369,35 @@ export function runLogic(result) {
 }
 
 function exportService(id) {
-  call(`/export_service/${id}`, () => {
-    notify("Export successful.", "success", 5);
+  call({
+    url: `/export_service/${id}`,
+    callback: () => {
+      notify("Export successful.", "success", 5);
+    },
   });
 }
 
 function pauseTask(id) {
-  call(`/task_action/pause/${id}`, function(result) {
-    $(`#pause-resume-${id}`)
-      .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
-      .text("Resume");
-    notify("Task paused.", "success", 5);
+  call({
+    url: `/task_action/pause/${id}`,
+    callback: function(result) {
+      $(`#pause-resume-${id}`)
+        .attr("onclick", `eNMS.automation.resumeTask('${id}')`)
+        .text("Resume");
+      notify("Task paused.", "success", 5);
+    },
   });
 }
 
 function resumeTask(id) {
-  call(`/task_action/resume/${id}`, function() {
-    $(`#pause-resume-${id}`)
-      .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
-      .text("Pause");
-    notify("Task resumed.", "success", 5);
+  call({
+    url: `/task_action/resume/${id}`,
+    callback: function() {
+      $(`#pause-resume-${id}`)
+        .attr("onclick", `eNMS.automation.pauseTask('${id}')`)
+        .text("Pause");
+      notify("Task resumed.", "success", 5);
+    },
   });
 }
 

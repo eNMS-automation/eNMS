@@ -578,8 +578,8 @@ models.service = class Service extends Base {
 
   static postProcessing() {
     loadServiceTypes();
-    $("#parent-filtering").on("change", function() {
-      tables["service"].ajax.reload(null, false);
+    $("#parent-filtering").selectpicker().on("change", function() {
+      tables["service"].page(0).ajax.reload(null, false);
     });
   }
 };

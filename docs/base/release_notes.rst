@@ -20,6 +20,7 @@ Version 3.19
 - Refactoring of the top-level menu
 - Alerts are saved and displayed in the UI, top menubar.
 - Remove recipients from settings.json. Recipients is now a mandatory field if mail notification is ticked.
+- Add support for netmiko genie / pyATS (`use_genie`) option.
 
 MIGRATION:
 - Renaming "config" -> "settings". All services that use the "config" global variable must change it to "settings".

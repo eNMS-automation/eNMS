@@ -38,6 +38,7 @@ def model_inspection(mapper, cls):
         model_properties[name].extend(model_properties["service"])
     model = {name: cls, name.lower(): cls}
     models.update(model)
+    model_properties[name] = list(set(model_properties[name]))
     for relation in mapper.relationships:
         if getattr(relation.mapper.class_, "private", False):
             continue

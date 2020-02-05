@@ -44,7 +44,7 @@ class MetaForm(FormMeta):
         )
         form_properties[form_type].update(properties)
         for property, value in properties.items():
-            if property not in property_types:
+            if property not in property_types and value["type"] != "field-list":
                 property_types[property] = value["type"]
         for base in form.__bases__:
             if not hasattr(base, "form_type"):

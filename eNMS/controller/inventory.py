@@ -134,6 +134,8 @@ class InventoryController(BaseController):
             for row_index in range(1, sheet.nrows):
                 values = {"dont_update_pools": True}
                 for index, property in enumerate(properties):
+                    if property in ("id", "source_id", "destination_id"):
+                        continue
                     func = field_conversion[property_types[property]]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:

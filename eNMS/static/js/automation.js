@@ -64,35 +64,21 @@ function compare(type) {
 
 function buildLinks(result, id) {
   const base = `get_result("${result.service_name}"`;
-  const link = result.device_name
-    ? [`Per-device result`, `${base}, device=device.name)`]
-    : ["Top-level result", `${base})`];
+  const link = result.device_name ? `${base}, device=device.name)` : `${base})`;
   return `
     <div class="modal-body">
-      <table
-        class="table table-bordered dt-responsive nowrap"
-        cellspacing="0"
-        width="100%"
-      >
-        <tbody>
-          <tr>
-            <td style="text-align: center; vertical-align: middle;">
-              ${link[0]}
-            </td>
-            <td>
-              <div class="input-group" style="width: 800px">
-                <input id="link-${id}" type="text" class="form-control"
-                value='${link[1]}'><span class="input-group-btn">
-                <button class="btn btn-default"
-                onclick="eNMS.base.copyToClipboard('link-${id}', true)"
-                type="button"><span class="glyphicon glyphicon-copy"></span>
-                </button>
-                </span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="input-group" style="width: 500px">
+        <input id="link-${id}" type="text" class="form-control"
+        value='${link}'>
+        <span class="input-group-btn">
+          <button class="btn btn-default"
+            onclick="eNMS.base.copyToClipboard('link-${id}', true)"
+            type="button"
+          >
+            <span class="glyphicon glyphicon-copy"></span>
+          </button>
+        </span>
+      </div>
     </div>`;
 }
 

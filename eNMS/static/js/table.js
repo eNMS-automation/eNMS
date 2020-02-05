@@ -294,7 +294,7 @@ models.configuration = class Configuration extends Base {
         search: "text",
         visible: false,
       },
-      { data: "buttons", width: "130px" },
+      { data: "buttons", width: "90px" },
     ];
   }
 

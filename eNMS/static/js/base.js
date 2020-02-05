@@ -177,28 +177,25 @@ function processResults(callback, results) {
   }
 }
 
-export const call = function(url, callback) {
-  $.ajax({
+export const call = function({url, data, form, callback}) {
+  let params = {
     type: "POST",
     url: url,
     success: function(results) {
       processResults(callback, results);
     },
-  });
+  }
+  if (data) {
+    params.apply({
+      data: JSON.stringify(data),
+      contentType: "application/json; charset=utf-8",
+      dataType: 'json',
+    });
+  } else if (form) {
+    params.data = $(`[id="${form}"]`).serialize();
+  }
+  $.ajax(params)
 };
-
-export function oCall(url, data, callback) {
-  $.ajax({
-    type: "POST",
-    url: url,
-    data: JSON.stringify(data),
-    contentType: "application/json; charset=utf-8",
-    dataType: 'json',
-    success: function(results) {
-      processResults(callback, results);
-    },
-  });
-}
 
 export function fCall(url, form, callback) {
   $.ajax({
@@ -470,10 +467,13 @@ export function showTypePanel(type, id, mode) {
       }
       if (id) {
         const properties = type === "pool" ? "_properties" : "";
-        call(`/get${properties}/${type}/${id}`, function(instance) {
-          const action = mode ? mode.toUpperCase() : "EDIT";
-          panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
-          processInstance(type, instance);
+        call({
+          url: `/get${properties}/${type}/${id}`,
+          callback: function(instance) {
+            const action = mode ? mode.toUpperCase() : "EDIT";
+            panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
+            processInstance(type, instance);
+          }
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
@@ -558,10 +558,10 @@ export function processData(type, id) {
     );
     if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
-  fCall(
-    `/update/${type}`,
-    id ? `edit-${type}-form-${id}` : `edit-${type}-form`,
-    (instance) => {
+  call({
+    url: `/update/${type}`,
+    form: id ? `edit-${type}-form-${id}` : `edit-${type}-form`,
+    callback: (instance) => {
       const tableType =
         type.includes("service") || type == "workflow" ? "service" : type;
       if (page.includes("table")) tables[tableType].ajax.reload(null, false);
@@ -574,8 +574,8 @@ export function processData(type, id) {
         "success",
         5
       );
-    }
-  );
+    },
+  });
 }
 
 (function($, jstree, undefined) {

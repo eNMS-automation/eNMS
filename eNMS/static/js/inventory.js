@@ -10,7 +10,6 @@ import {
   call,
   configureNamespace,
   notify,
-  oCall,
   openPanel,
   openUrl,
   serializeForm,

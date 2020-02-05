@@ -269,11 +269,14 @@ export const switchToWorkflow = function(path, arrow) {
     $("#right-arrow").addClass("disabled");
   }
   if (page == "workflow_builder") {
-    call(`/get_service_state/${path}/latest`, function(result) {
-      workflow = result.service;
-      localStorage.setItem("path", path);
-      localStorage.setItem("workflow", JSON.stringify(workflow));
-      displayWorkflow(result);
+    call({
+      url: `/get_service_state/${path}/latest`,
+      callback: function(result) {
+        workflow = result.service;
+        localStorage.setItem("path", path);
+        localStorage.setItem("workflow", JSON.stringify(workflow));
+        displayWorkflow(result);
+      },
     });
   } else {
     $("#workflow-filtering").val(path);
@@ -304,12 +307,12 @@ export function processWorkflowData(instance, id) {
           displayWorkflow({ service: instance, runtimes: [] });
         }
       } else {
-        call(
-          `/add_service_to_workflow/${workflow.id}/${instance.id}`,
-          function() {
+        call({
+          url: `/add_service_to_workflow/${workflow.id}/${instance.id}`,
+          callback: function() {
             updateWorkflowService(instance);
           }
-        );
+        });
       }
     }
     drawIterationEdge(instance);
@@ -331,15 +334,15 @@ function addServicesToWorkflow() {
   const selection = $("#service-tree").jstree("get_checked", true);
   if (!selection.length) notify("Nothing selected.", "error", 5);
   $("#services").val(selection.map((n) => n.data.id));
-  call(
-    `/copy_service_in_workflow/${workflow.id}`,
-    "add-services-form",
-    function(result) {
+  call({
+    url: `/copy_service_in_workflow/${workflow.id}`,
+    form: "add-services-form",
+    callback: function(result) {
       workflow.last_modified = result.update_time;
       $("#add_services").remove();
       result.services.map(updateWorkflowService);
     }
-  );
+  });
 }
 
 function deleteNode(id) {
@@ -348,13 +351,16 @@ function deleteNode(id) {
     deleteLabel(node);
   } else {
     workflow.services = workflow.services.filter((n) => n.id != id);
-    call(`/delete_node/${workflow.id}/${id}`, function(result) {
-      workflow.last_modified = result.update_time;
-      notify(
-        `'${result.service.scoped_name}' deleted from the workflow.`,
-        "success",
-        5
-      );
+    call({
+      url: `/delete_node/${workflow.id}/${id}`,
+      callback: function(result) {
+        workflow.last_modified = result.update_time;
+        notify(
+          `'${result.service.scoped_name}' deleted from the workflow.`,
+          "success",
+          5
+        );
+      },
     });
   }
 }

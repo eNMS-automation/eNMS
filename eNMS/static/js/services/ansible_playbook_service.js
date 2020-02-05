@@ -15,9 +15,12 @@ function job(id) {
     });
     field.selectpicker("refresh");
     if (id) {
-      eNMS.base.call(`/get/ansible_playbook_service/${id}`, function(instance) {
-        field.val(instance.playbook_path);
-        field.selectpicker("refresh");
+      eNMS.base.call({
+        url: `/get/ansible_playbook_service/${id}`,*
+        callback: function(instance) {
+          field.val(instance.playbook_path);
+          field.selectpicker("refresh");
+        },
       });
     }
   });

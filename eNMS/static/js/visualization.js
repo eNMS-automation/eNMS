@@ -154,18 +154,24 @@ function updateView(withCluster) {
   deleteAll();
   clustered = withCluster;
   if (viewType == "network") {
-    call("/get_view_topology", function(topology) {
-      topology.devices.map((d) => createNode(d, "device"));
-      topology.links.map(createLink);
+    call({
+      url: "/get_view_topology",
+      callback: function(topology) {
+        topology.devices.map((d) => createNode(d, "device"));
+        topology.links.map(createLink);
+      },
     });
   } else {
     $(".menu").hide();
-    call("/get_all/pool", function(pools) {
-      for (let i = 0; i < pools.length; i++) {
-        if (pools[i].longitude) {
-          createNode(pools[i], "site");
+    call({
+      url: "/get_all/pool",
+      callback: function(pools) {
+        for (let i = 0; i < pools.length; i++) {
+          if (pools[i].longitude) {
+            createNode(pools[i], "site");
+          }
         }
-      }
+      },
     });
     $(".geo-menu").show();
   }
@@ -209,14 +215,17 @@ function showPoolView(poolId) {
       containment: [5, 5, 5, 5],
     },
   });
-  call(`/get/pool/${poolId}`, function(pool) {
-    $(`#network-${poolId}`).contextMenu({
-      menuSelector: "#contextMenu",
-      menuSelected: function(invokedOn, selectedMenu) {
-        const row = selectedMenu.text();
-        action[row](selected);
-      },
-    });
+  call({
+    url: `/get/pool/${poolId}`,
+    callback: function(pool) {
+      $(`#network-${poolId}`).contextMenu({
+        menuSelector: "#contextMenu",
+        menuSelected: function(invokedOn, selectedMenu) {
+          const row = selectedMenu.text();
+          action[row](selected);
+        },
+      });
+    },
     displayPool(poolId, pool.devices, pool.links);
   });
 }

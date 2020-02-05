@@ -119,7 +119,7 @@ function initSidebar() {
 
   switchMenu();
   $("#menu_toggle").on("click", function() {
-    call(`/switch_menu/${user.id}`);
+    call({url: `/switch_menu/${user.id}`});
     $("body").toggleClass("nav-md nav-sm");
     switchMenu();
   });

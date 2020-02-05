@@ -748,3 +748,13 @@ We cannot use 100% because main_frame is not set to 100%
 #map {
   height: calc(100vh - 80px);
 }
+
+/* Cross-browser control alignment in the middle */
+.nav-controls {
+  margin: auto;
+  padding: 7px 7px;
+  margin-bottom: 5px;
+  width: intrinsic;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+}

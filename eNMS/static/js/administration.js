@@ -59,8 +59,12 @@ function showSettings() {
 
 function exportTopology() {
   notify("Topology export starting...", "success", 5);
-  call("/export_topology", "excel_export-form", function() {
-    notify("Topology successfully exported.", "success", 5);
+  call({
+    url: "/export_topology",
+    form: "excel_export-form",
+    callback: function() {
+      notify("Topology successfully exported.", "success", 5);
+    },
   });
 }
 
@@ -83,16 +87,23 @@ function importTopology() {
 }
 
 function getClusterStatus() {
-  call("/get_cluster_status", function() {
-    tables["server"].ajax.reload(null, false);
-    setTimeout(getClusterStatus, 15000);
+  call({
+    url: "/get_cluster_status",
+    callback: function() {
+      tables["server"].ajax.reload(null, false);
+      setTimeout(getClusterStatus, 15000);
+    },
   });
 }
 
 function migrationsExport() {
   notify("Export initiated.", "success", 5);
-  call("/migration_export", "migration-form", function() {
-    notify("Export successful.", "success", 5);
+  call({
+    url: "/migration_export",
+    form: "migration-form",
+    callback: function() {
+      notify("Export successful.", "success", 5);
+    },
   });
 }
 
@@ -100,13 +111,16 @@ function showMigrationPanel() {
   openPanel({
     name: "database_migration",
     processing: () => {
-      call("/get_migration_folders", function(folders) {
-        let list = document.getElementById("versions");
-        folders.forEach((item) => {
-          let option = document.createElement("option");
-          option.textContent = option.value = item;
-          list.appendChild(option);
-        });
+      call({
+        url: "/get_migration_folders",
+        callback: function(folders) {
+          let list = document.getElementById("versions");
+          folders.forEach((item) => {
+            let option = document.createElement("option");
+            option.textContent = option.value = item;
+            list.appendChild(option);
+          });
+        },
       });
     },
   });
@@ -114,8 +128,12 @@ function showMigrationPanel() {
 
 function migrationsImport() {
   notify("Import initiated.", "success", 5);
-  call("/migration_import", "migration-form", function(result) {
-    notify(result, "success", 5);
+  call({
+    url: "/migration_import",
+    form: "migration-form",
+    callback: function(result) {
+      notify(result, "success", 5);
+    },
   });
 }
 
@@ -123,44 +141,60 @@ function showImportServicePanel() {
   openPanel({
     name: "import_service",
     processing: () => {
-      call("/get_exported_services", function(services) {
-        let list = document.getElementById("service");
-        services.forEach((item) => {
-          let option = document.createElement("option");
-          option.textContent = option.value = item;
-          list.appendChild(option);
-        });
-        $("#service").selectpicker("refresh");
+      call({
+        url: "/get_exported_services",
+        callback: function(services) {
+          let list = document.getElementById("service");
+          services.forEach((item) => {
+            let option = document.createElement("option");
+            option.textContent = option.value = item;
+            list.appendChild(option);
+          });
+          $("#service").selectpicker("refresh");
+        },
       });
     },
   });
 }
 
 function importService() {
-  call(`/import_service/${$("#service").val()}`, function(result) {
-    notify("Import successful.", "success", 5);
-    $("#import_service").remove();
+  call({
+    url: `/import_service/${$("#service").val()}`,
+    callback: function(result) {
+      notify("Import successful.", "success", 5);
+      $("#import_service").remove();
+    },
   });
 }
 
 function databaseDeletion() {
   notify("Starting to delete...", "success", 5);
-  call("/database_deletion", "database_deletion-form", function(result) {
-    notify("Deletion done.", "success", 5);
-    $("#deletion-form").remove();
+  call({
+    url: "/database_deletion",
+    form: "database_deletion-form",
+    callback: function(result) {
+      notify("Deletion done.", "success", 5);
+      $("#deletion-form").remove();
+    },
   });
 }
 
 function getGitContent() {
-  call("/get_git_content", function(result) {
-    notify("Action successful.", "success", 5);
+  call({
+    url: "/get_git_content",
+    callback: function(result) {
+      notify("Action successful.", "success", 5);
+    },
   });
 }
 
 function scanCluster() {
   notify("Scan started.", "success", 5);
-  call("/scan_cluster", function(cluster) {
-    notify("Scan completed.", "success", 5);
+  call({
+    url: "/scan_cluster",
+    callback: function(cluster) {
+      notify("Scan completed.", "success", 5);
+    },
   });
 }
 

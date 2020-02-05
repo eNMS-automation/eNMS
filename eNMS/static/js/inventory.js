@@ -61,7 +61,7 @@ export function showConnectionPanel(id) {
   openPanel({
     name: "device_connection",
     id: id,
-    processing: () => {
+    callback: () => {
       $(`#custom-credentials-${id}`).change(function() {
         $(`#credentials-fields-${id}`).show();
       });
@@ -155,7 +155,7 @@ function showPoolObjectsPanel(id) {
     name: "pool_objects",
     title: "Pool Objects",
     id: id,
-    processing: function() {
+    callback: function() {
       call(`/get/pool/${id}`, function(pool) {
         if (pool.devices.length > 1000 || pool.links.length > 1000) {
           notify("Too many objects to display.", "error", 5);
@@ -193,7 +193,7 @@ export const showDeviceData = function(device) {
         name: "device_data",
         title: `Device Data - ${device.name}`,
         id: device.id,
-        processing: function() {
+        callback: function() {
           const content = document.getElementById(`content-${device.id}`);
           // eslint-disable-next-line new-cap
           const editor = CodeMirror(content, {
@@ -230,7 +230,7 @@ function showSessionLog(sessionId) {
         name: "display",
         title: "Session log",
         id: sessionId,
-        processing: function() {
+        callback: function() {
           const content = document.getElementById(`content-${sessionId}`);
           // eslint-disable-next-line new-cap
           const editor = CodeMirror(content, {
@@ -254,7 +254,7 @@ function showDeviceResultsPanel(device) {
   openPanel({
     name: "result_table",
     title: `Results - ${device.name}`,
-    processing: function() {
+    callback: function() {
       initTable("result", device, null, "table-result");
     },
   });

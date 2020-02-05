@@ -21,7 +21,7 @@ function showImportTopologyPanel() {
   openPanel({
     name: "excel_import",
     title: "Import Topology as an Excel file",
-    processing: () => {
+    callback: () => {
       document.getElementById("file").onchange = function() {
         importTopology();
       };
@@ -47,7 +47,7 @@ function showSettings() {
   openPanel({
     name: "settings",
     title: "Settings",
-    processing: function() {
+    callback: function() {
       settingsEditor = new JSONEditor(
         document.getElementById("content"),
         {},
@@ -110,7 +110,7 @@ function migrationsExport() {
 function showMigrationPanel() {
   openPanel({
     name: "database_migration",
-    processing: () => {
+    callback: () => {
       call({
         url: "/get_migration_folders",
         callback: function(folders) {
@@ -140,7 +140,7 @@ function migrationsImport() {
 function showImportServicePanel() {
   openPanel({
     name: "import_service",
-    processing: () => {
+    callback: () => {
       call({
         url: "/get_exported_services",
         callback: function(services) {
@@ -199,46 +199,56 @@ function scanCluster() {
 }
 
 function deleteFile(file) {
-  call(`/delete_file/${file.data.path.replace(/\//g, ">")}`, function() {
-    $("#files-tree")
-      .jstree()
-      .delete_node(file.id);
-    notify(`File ${file.data.name} successfully deleted.`, "success", 5);
+  call({
+    url: `/delete_file/${file.data.path.replace(/\//g, ">")}`,
+    callback: function() {
+      $("#files-tree")
+        .jstree()
+        .delete_node(file.id);
+      notify(`File ${file.data.name} successfully deleted.`, "success", 5);
+    },
   });
 }
 
 function editFile(file) {
   const filepath = file.data.path.replace(/\//g, ">");
-  call(`/edit_file/${filepath}`, function(content) {
-    openPanel({
-      name: "file",
-      title: `Edit ${file.data.path}`,
-      id: filepath,
-      processing: () => {
-        const display = document.getElementById(`file_content-${filepath}`);
-        // eslint-disable-next-line new-cap
-        let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
-          lineWrapping: true,
-          lineNumbers: true,
-          theme: "cobalt",
-          matchBrackets: true,
-          mode: "python",
-          extraKeys: { "Ctrl-F": "findPersistent" },
-          scrollbarStyle: "overlay",
-        }));
-        fileEditor.setSize("100%", "100%");
-        fileEditor.setValue(content);
-        fileEditor.refresh();
-      },
-    });
+  call({
+    url: `/edit_file/${filepath}`,
+    callback: function(content) {
+      openPanel({
+        name: "file",
+        title: `Edit ${file.data.path}`,
+        id: filepath,
+        callback: () => {
+          const display = document.getElementById(`file_content-${filepath}`);
+          // eslint-disable-next-line new-cap
+          let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
+            lineWrapping: true,
+            lineNumbers: true,
+            theme: "cobalt",
+            matchBrackets: true,
+            mode: "python",
+            extraKeys: { "Ctrl-F": "findPersistent" },
+            scrollbarStyle: "overlay",
+          }));
+          fileEditor.setSize("100%", "100%");
+          fileEditor.setValue(content);
+          fileEditor.refresh();
+        },
+      });
+    },
   });
 }
 
 function saveFile(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
-  call(`/save_file/${file}`, `file-content-form-${file}`, function() {
-    notify("File successfully saved.", "success", 5);
-    $(`[id="file-${file}"`).remove();
+  call({
+    url: `/save_file/${file}`,
+    form: `file-content-form-${file}`,
+    callback: function() {
+      notify("File successfully saved.", "success", 5);
+      $(`[id="file-${file}"`).remove();
+    },
   });
 }
 
@@ -248,7 +258,7 @@ function showFileUploadPanel(folder) {
     name: "upload_files",
     title: `Upload files to ${folder}`,
     id: path,
-    processing: () => {
+    callback: () => {
       const element = document.getElementById(`dropzone-${path}`);
       let dropzone = new Dropzone(element, {
         url: "/upload_files",
@@ -267,7 +277,7 @@ function showFileUploadPanel(folder) {
 function displayFiles() {
   openPanel({
     name: "files",
-    processing: function() {
+    callback: function() {
       $("#files-tree").jstree({
         core: {
           animation: 200,

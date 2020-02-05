@@ -251,7 +251,7 @@ export function openPanel({
   name,
   title,
   id,
-  processing,
+  callback,
   type,
   duplicate,
   content,
@@ -291,12 +291,12 @@ export function openPanel({
         panel.content.innerHTML = this.responseText;
         preprocessForm(panel, id, type, duplicate);
         configureForm(name, id, panelId);
-        if (processing) processing(panel);
+        if (callback) callback(panel);
       },
     };
   }
   jsPanel.create(kwargs);
-  if (processing && content) processing(content);
+  if (callback && content) callback(content);
 }
 
 export function showDeletionPanel(instance) {
@@ -450,7 +450,7 @@ export function showTypePanel(type, id, mode) {
   openPanel({
     name: type,
     id: id,
-    processing: function(panel) {
+    callback: function(panel) {
       if (type == "workflow" || type.includes("service")) {
         showServicePanel(type, id, mode);
       }
@@ -656,7 +656,7 @@ export function notify(...args) {
 function showAllAlerts() {
   openPanel({
     name: "alerts_table",
-    processing: () => {
+    callback: () => {
       $("#alerts-table")
         // eslint-disable-next-line new-cap
         .DataTable({

@@ -589,7 +589,7 @@ function savePositions() {
 function addServicePanel() {
   openPanel({
     name: "add_services",
-    processing: function() {
+    callback: function() {
       $("#service-tree").jstree({
         core: {
           animation: 200,
@@ -707,7 +707,7 @@ function createLabel() {
 function editLabel(label) {
   openPanel({
     name: "workflow_label",
-    processing: () => {
+    callback: () => {
       $("#text").val(label.label);
       $("#alignment")
         .val(label.font.align)
@@ -731,7 +731,7 @@ function showRestartWorkflowPanel(workflow, service) {
     name: "restart_workflow",
     title: `Restart Workflow '${workflow.name}' from '${service.name}'`,
     id: workflow.id,
-    processing: function() {
+    callback: function() {
       $("#start_services").append(new Option(service.name, service.id));
       $("#start_services")
         .val(service.id)

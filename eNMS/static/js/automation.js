@@ -97,6 +97,7 @@ function buildLinks(result, id) {
 }
 
 function copyClipboard(elementId, result) {
+  console.log(result)
   const target = document.getElementById(elementId);
   if (!$(`#tooltip-${elementId}`).length) {
     jsPanel.tooltip.create({

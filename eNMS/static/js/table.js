@@ -125,13 +125,19 @@ function refreshTablePeriodically(tableType, interval, first) {
 }
 
 class Base {
-  constructor(properties) {
+  constructor(properties, derivedProperties) {
     Object.assign(this, properties);
-    this.instance = JSON.stringify({
+    let instanceProperties = {
       id: this.id,
       name: this.name,
       type: this.type,
-    }).replace(/"/g, "'");
+    };
+    if (derivedProperties) {
+      derivedProperties.forEach((property) => {
+        instanceProperties[property] = this[property];
+      });
+    }
+    this.instance = JSON.stringify(instanceProperties).replace(/"/g, "'");
   }
 
   static createNewButton(type) {
@@ -628,7 +634,7 @@ models.run = class Run extends Base {
 models.result = class Result extends Base {
   constructor(properties) {
     delete properties.result;
-    super(properties);
+    super(properties, ["service_name", "device_name"]);
   }
 
   static get columns() {

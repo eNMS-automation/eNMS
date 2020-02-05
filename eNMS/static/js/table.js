@@ -362,13 +362,6 @@ models.configuration = class Configuration extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showConfigurationContext(${this.instance})"
-          data-tooltip="Configuration Context"
-            ><span class="glyphicon glyphicon-list"></span
-          ></button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-sm btn-info"
           onclick="eNMS.inventory.showDeviceData(${this.instance})"
           data-tooltip="Network Data"
             ><span class="glyphicon glyphicon-cog"></span

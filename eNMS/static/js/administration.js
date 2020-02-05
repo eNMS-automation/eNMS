@@ -222,15 +222,18 @@ function editFile(file) {
         callback: () => {
           const display = document.getElementById(`file_content-${filepath}`);
           // eslint-disable-next-line new-cap
-          let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
-            lineWrapping: true,
-            lineNumbers: true,
-            theme: "cobalt",
-            matchBrackets: true,
-            mode: "python",
-            extraKeys: { "Ctrl-F": "findPersistent" },
-            scrollbarStyle: "overlay",
-          }));
+          let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(
+            display,
+            {
+              lineWrapping: true,
+              lineNumbers: true,
+              theme: "cobalt",
+              matchBrackets: true,
+              mode: "python",
+              extraKeys: { "Ctrl-F": "findPersistent" },
+              scrollbarStyle: "overlay",
+            }
+          ));
           fileEditor.setSize("100%", "100%");
           fileEditor.setValue(content);
           fileEditor.refresh();

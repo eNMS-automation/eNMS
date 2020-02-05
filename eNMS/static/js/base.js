@@ -177,24 +177,24 @@ function processResults(callback, results) {
   }
 }
 
-export const call = function({url, data, form, callback}) {
+export const call = function({ url, data, form, callback }) {
   let params = {
     type: "POST",
     url: url,
     success: function(results) {
       processResults(callback, results);
     },
-  }
+  };
   if (data) {
     params.apply({
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8",
-      dataType: 'json',
+      dataType: "json",
     });
   } else if (form) {
     params.data = $(`[id="${form}"]`).serialize();
   }
-  $.ajax(params)
+  $.ajax(params);
 };
 
 export function serializeForm(form) {
@@ -465,7 +465,7 @@ export function showTypePanel(type, id, mode) {
             const action = mode ? mode.toUpperCase() : "EDIT";
             panel.setHeaderTitle(`${action} ${type} - ${instance.name}`);
             processInstance(type, instance);
-          }
+          },
         });
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);

@@ -311,7 +311,7 @@ export function processWorkflowData(instance, id) {
           url: `/add_service_to_workflow/${workflow.id}/${instance.id}`,
           callback: function() {
             updateWorkflowService(instance);
-          }
+          },
         });
       }
     }
@@ -341,7 +341,7 @@ function addServicesToWorkflow() {
       workflow.last_modified = result.update_time;
       $("#add_services").remove();
       result.services.map(updateWorkflowService);
-    }
+    },
   });
 }
 
@@ -785,7 +785,8 @@ function showRestartWorkflowPanel(workflow, service) {
 function restartWorkflow() {
   call({
     url: `/run_service/${currentPath}`,
-    form: `restart_workflow-form`, function(result) {
+    form: `restart_workflow-form`,
+    function(result) {
       $(`#restart_workflow-${workflow.id}`).remove();
       runLogic(result);
     },
@@ -799,15 +800,18 @@ function colorService(id, color) {
 }
 
 export function getServiceState(id, first) {
-  call(`/get_service_state/${id}`, function(result) {
-    if (first || result.state.status == "Running") {
-      colorService(id, "#89CFF0");
-      localStorage.setItem("path", id);
-      localStorage.setItem("workflow", JSON.stringify(result.service));
-      setTimeout(() => getServiceState(id), 300);
-    } else {
-      colorService(id, "#D2E5FF");
-    }
+  call({
+    url: `/get_service_state/${id}`,
+    callback: function(result) {
+      if (first || result.state.status == "Running") {
+        colorService(id, "#89CFF0");
+        localStorage.setItem("path", id);
+        localStorage.setItem("workflow", JSON.stringify(result.service));
+        setTimeout(() => getServiceState(id), 300);
+      } else {
+        colorService(id, "#D2E5FF");
+      }
+    },
   });
 }
 
@@ -884,14 +888,17 @@ function getWorkflowState(periodic, notification) {
   const runtime = $("#current-runtime").val();
   const url = runtime ? `/${runtime}` : "";
   if (userIsActive && workflow && workflow.id) {
-    call(`/get_service_state/${currentPath}${url}`, function(result) {
-      if (result.service.id != workflow.id) return;
-      currentRuntime = result.runtime;
-      if (result.service.last_modified !== workflow.last_modified) {
-        displayWorkflow(result);
-      } else {
-        displayWorkflowState(result);
-      }
+    call({
+      url: `/get_service_state/${currentPath}${url}`,
+      callback: function(result) {
+        if (result.service.id != workflow.id) return;
+        currentRuntime = result.runtime;
+        if (result.service.last_modified !== workflow.last_modified) {
+          displayWorkflow(result);
+        } else {
+          displayWorkflowState(result);
+        }
+      },
     });
   }
   if (periodic) setTimeout(() => getWorkflowState(true), 4000);
@@ -904,34 +911,37 @@ export function initWorkflowBuilder() {
   $("#edge-type").on("change", function() {
     switchMode(this.value);
   });
-  call("/get_top_level_workflows", function(workflows) {
-    workflows.sort((a, b) => a.name.localeCompare(b.name));
-    for (let i = 0; i < workflows.length; i++) {
-      $("#current-workflow").append(
-        `<option value="${workflows[i].id}">${workflows[i].name}</option>`
-      );
-    }
-    if (workflow) {
-      $("#current-workflow").val(currentPath.split(">")[0]);
-      switchToWorkflow(currentPath);
-    } else {
-      workflow = $("#current-workflow").val();
-      if (workflow) {
-        switchToWorkflow(workflow);
-      } else {
-        notify(
-          `You must create a workflow in the
-        'Workflow management' page first.`,
-          "error",
-          5
+  call({
+    url: "/get_top_level_workflows",
+    callback: function(workflows) {
+      workflows.sort((a, b) => a.name.localeCompare(b.name));
+      for (let i = 0; i < workflows.length; i++) {
+        $("#current-workflow").append(
+          `<option value="${workflows[i].id}">${workflows[i].name}</option>`
         );
       }
-    }
-    $("#current-workflow,#current-runtimes").selectpicker({
-      liveSearch: true,
-    });
-    $("#edge-type").selectpicker();
-    getWorkflowState(true);
+      if (workflow) {
+        $("#current-workflow").val(currentPath.split(">")[0]);
+        switchToWorkflow(currentPath);
+      } else {
+        workflow = $("#current-workflow").val();
+        if (workflow) {
+          switchToWorkflow(workflow);
+        } else {
+          notify(
+            `You must create a workflow in the
+          'Workflow management' page first.`,
+            "error",
+            5
+          );
+        }
+      }
+      $("#current-workflow,#current-runtimes").selectpicker({
+        liveSearch: true,
+      });
+      $("#edge-type").selectpicker();
+      getWorkflowState(true);
+    },
   });
   $("#network").contextMenu({
     menuSelector: "#contextMenu",

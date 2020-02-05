@@ -55,7 +55,7 @@ function compare(type) {
                 viewType: 0,
               })
             );
-          }
+          },
         });
       },
     });
@@ -154,7 +154,7 @@ function showResult(id) {
           document.querySelectorAll(".jsoneditor-string").forEach((el) => {
             el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
           });
-        }
+        },
       });
     },
   });
@@ -445,7 +445,7 @@ function displayCalendar(calendarType) {
             editable: true,
             events: events,
           });
-        }
+        },
       });
     },
   });

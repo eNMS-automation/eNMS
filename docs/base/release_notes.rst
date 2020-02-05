@@ -19,9 +19,19 @@ Version 3.19
 - Refactoring of all the tables
 - Refactoring of the top-level menu
 - Alerts are saved and displayed in the UI, top menubar.
+- Remove recipients from settings.json. Recipients is now a mandatory field if mail notification is ticked.
 
 MIGRATION:
 - Renaming "config" -> "settings". All services that use the "config" global variable must change it to "settings".
+- Session change log: some traceback previously returned as "result" key of service "results" now returned as "error":
+can create backward-compatibility issue when a workflow relies on the content of the traceback.
+- Moved the following "optional" requirements to a dedicated files called "requirements_optional.txt":
+ansible
+ldap3
+pyats
+pynetbox
+slackclient>=1.3,<2
+tacacs_plus
 
 Version 3.18.2
 --------------

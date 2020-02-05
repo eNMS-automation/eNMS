@@ -208,6 +208,10 @@ function saveFile(file) {
   });
 }
 
+function createNewFolder() {
+  notify("Not implemented yet.", "error", 5);
+}
+
 function showFileUploadPanel(folder) {
   const path = folder.replace(/\//g, ">");
   openPanel({
@@ -305,6 +309,7 @@ function displayFiles() {
 }
 
 configureNamespace("administration", [
+  createNewFolder,
   databaseDeletion,
   deleteFile,
   displayFiles,

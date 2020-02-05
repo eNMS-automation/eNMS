@@ -156,7 +156,9 @@ class Base {
     return `
       <button
         class="btn btn-info"
-        onclick="eNMS.base.openPanel({name: '${type}_filtering'})"
+        onclick="eNMS.base.openPanel(
+          {name: '${type}_filtering', title: 'Advanced Search'}
+        )"
         data-tooltip="Advanced Search"
         type="button"
       >

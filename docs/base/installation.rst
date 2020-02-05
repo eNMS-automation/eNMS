@@ -161,7 +161,6 @@ Section ``mail``
   - ``use_tls`` (default: ``true``)
   - ``username`` (default: ``"eNMS-user"``)
   - ``sender`` (default: ``"eNMS@company.com"``)
-  - ``recipients`` (default: ``"eNMS-user@company.com"``)
 
 Section ``mattermost``
 **********************

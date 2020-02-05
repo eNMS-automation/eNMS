@@ -546,7 +546,6 @@ class BaseController:
         file_content=None,
     ):
         sender = sender or self.settings["mail"]["sender"]
-        recipients = recipients
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients

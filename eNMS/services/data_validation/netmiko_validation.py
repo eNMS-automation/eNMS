@@ -45,7 +45,7 @@ class NetmikoValidationService(ConnectionService):
                 auto_find_prompt=run.auto_find_prompt,
                 strip_prompt=run.strip_prompt,
                 strip_command=run.strip_command,
-                use_genie=self.use_genie
+                use_genie=self.use_genie,
             )
         except Exception:
             return {
@@ -73,7 +73,7 @@ class NetmikoValidationForm(NetmikoForm):
                 "auto_find_prompt",
                 "strip_prompt",
                 "strip_command",
-                "use_genie"
+                "use_genie",
             ],
             "default": "hidden",
         },

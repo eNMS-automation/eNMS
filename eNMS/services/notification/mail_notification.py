@@ -1,6 +1,7 @@
 from sqlalchemy import ForeignKey, Integer
 from wtforms import HiddenField, StringField
 from wtforms.widgets import TextArea
+from wtforms.validators import ValidationError
 
 from eNMS import app
 from eNMS.database.dialect import Column, LargeString, SmallString
@@ -37,3 +38,9 @@ class MailNotificationForm(ServiceForm):
     sender = StringField()
     recipients = StringField()
     body = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
+
+    def validate(self):
+        valid_form = super().validate()
+        for field in ("title", "sender", "recipients", "body"):
+            if not getattr(self, field).data:
+                getattr(self, field).errors.append(f"{field.capitalize()} is missing.")

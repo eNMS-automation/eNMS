@@ -10,7 +10,6 @@ import {
   call,
   configureNamespace,
   editors,
-  fCall,
   notify,
   openPanel,
 } from "./base.js";
@@ -60,7 +59,7 @@ function showSettings() {
 
 function exportTopology() {
   notify("Topology export starting...", "success", 5);
-  fCall("/export_topology", "excel_export-form", function() {
+  call("/export_topology", "excel_export-form", function() {
     notify("Topology successfully exported.", "success", 5);
   });
 }
@@ -92,7 +91,7 @@ function getClusterStatus() {
 
 function migrationsExport() {
   notify("Export initiated.", "success", 5);
-  fCall("/migration_export", "migration-form", function() {
+  call("/migration_export", "migration-form", function() {
     notify("Export successful.", "success", 5);
   });
 }
@@ -115,7 +114,7 @@ function showMigrationPanel() {
 
 function migrationsImport() {
   notify("Import initiated.", "success", 5);
-  fCall("/migration_import", "migration-form", function(result) {
+  call("/migration_import", "migration-form", function(result) {
     notify(result, "success", 5);
   });
 }
@@ -146,7 +145,7 @@ function importService() {
 
 function databaseDeletion() {
   notify("Starting to delete...", "success", 5);
-  fCall("/database_deletion", "database_deletion-form", function(result) {
+  call("/database_deletion", "database_deletion-form", function(result) {
     notify("Deletion done.", "success", 5);
     $("#deletion-form").remove();
   });
@@ -203,7 +202,7 @@ function editFile(file) {
 
 function saveFile(file) {
   $(`[id="file_content-${file}"]`).text(editors[file].getValue());
-  fCall(`/save_file/${file}`, `file-content-form-${file}`, function() {
+  call(`/save_file/${file}`, `file-content-form-${file}`, function() {
     notify("File successfully saved.", "success", 5);
     $(`[id="file-${file}"`).remove();
   });

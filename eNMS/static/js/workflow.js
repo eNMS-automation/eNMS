@@ -17,7 +17,6 @@ import {
   call,
   configureNamespace,
   copyToClipboard,
-  fCall,
   notify,
   openPanel,
   showTypePanel,
@@ -332,7 +331,7 @@ function addServicesToWorkflow() {
   const selection = $("#service-tree").jstree("get_checked", true);
   if (!selection.length) notify("Nothing selected.", "error", 5);
   $("#services").val(selection.map((n) => n.data.id));
-  fCall(
+  call(
     `/copy_service_in_workflow/${workflow.id}`,
     "add-services-form",
     function(result) {
@@ -694,7 +693,7 @@ function createLabel() {
     ? [mousePosition.x, mousePosition.y]
     : [0, 0];
   const params = `${workflow.id}/${pos[0]}/${pos[1]}`;
-  fCall(`/create_label/${params}`, "workflow_label-form", function(result) {
+  call(`/create_label/${params}`, "workflow_label-form", function(result) {
     if (currLabel) {
       deleteLabel(currLabel, true);
       currLabel = null;
@@ -753,7 +752,7 @@ function showRestartWorkflowPanel(workflow, service) {
 }
 
 function restartWorkflow() {
-  fCall(`/run_service/${currentPath}`, `restart_workflow-form`, function(
+  call(`/run_service/${currentPath}`, `restart_workflow-form`, function(
     result
   ) {
     $(`#restart_workflow-${workflow.id}`).remove();

@@ -105,7 +105,7 @@ export function initDashboard() {
 }
 
 function sshConnection(id) {
-  fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
+  call(`/connection/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
     let url = settings.app.address;
@@ -128,7 +128,7 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function handOffSSHConnection(id) {
-  fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(
+  call(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
     let url = settings.app.address;
@@ -143,7 +143,7 @@ function handOffSSHConnection(id) {
 
 // eslint-disable-next-line
 function savePoolObjects(id) {
-  fCall(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
+  call(`/save_pool_objects/${id}`, `pool-objects-form-${id}`, function() {
     tables["pool"].ajax.reload(null, false);
     notify("Changes saved.", "success", 5);
     $(`#pool_objects-${id}`).remove();

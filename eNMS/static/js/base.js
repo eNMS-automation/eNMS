@@ -197,17 +197,6 @@ export const call = function({url, data, form, callback}) {
   $.ajax(params)
 };
 
-export function fCall(url, form, callback) {
-  $.ajax({
-    type: "POST",
-    url: url,
-    data: $(`[id="${form}"]`).serialize(),
-    success: function(results) {
-      processResults(callback, results);
-    },
-  });
-}
-
 export function serializeForm(form) {
   const data = JSON.parse(JSON.stringify($(form).serializeArray()));
   let result = {};

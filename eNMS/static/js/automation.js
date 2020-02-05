@@ -13,7 +13,6 @@ import {
   call,
   cantorPairing,
   configureNamespace,
-  fCall,
   notify,
   openPanel,
   showTypePanel,
@@ -330,7 +329,7 @@ export const normalRun = function(id) {
 };
 
 function parameterizedRun(type, id) {
-  fCall(`/run_service/${id}`, `edit-${type}-form-${id}`, function(result) {
+  call(`/run_service/${id}`, `edit-${type}-form-${id}`, function(result) {
     $(`#${type}-${id}`).remove();
     runLogic(result);
   });

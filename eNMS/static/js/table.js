@@ -238,7 +238,7 @@ models.device = class Device extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 230px">
         <li>
           <button type="button" class="btn btn-sm btn-dark"
-          onclick="eNMS.inventory.showConnectionPanel(${this.id})"
+          onclick="eNMS.inventory.showConnectionPanel(${this.instance})"
           data-tooltip="Connection"
             ><span class="glyphicon glyphicon-console"></span
           ></button>

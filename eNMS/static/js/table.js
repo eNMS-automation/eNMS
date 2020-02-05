@@ -431,12 +431,16 @@ models.service = class Service extends Base {
         search: "text",
         className: "dt-body-left",
         render: function(_, __, instance) {
+          console.log($("#parent-filtering").val())
           return instance.type === "workflow"
             ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${
                 instance.id
               }')">${instance.scoped_name}</a></b>`
-            : instance.scoped_name;
-        },
+            : $("#parent-filtering").val() == "true"
+            ? instance.scoped_name
+            : instance.name;
+            
+        },  
       },
       super.lastModifiedColumn,
       { data: "type", title: "Type", search: "text" },

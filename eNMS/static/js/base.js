@@ -212,15 +212,18 @@ export function serializeForm(form) {
 }
 
 export const deleteInstance = function(type, id) {
-  call(`/delete_instance/${type}/${id}`, function(result) {
-    $(`#instance_deletion-${id}`).remove();
-    if (type.includes("service") || type == "workflow") type = "service";
-    tables[type]
-      .row($(`#${id}`))
-      .remove()
-      .draw(false);
-    const name = result.name ? `'${result.name}'` : "";
-    notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5);
+  call({
+    url: `/delete_instance/${type}/${id}`,
+    callback: function(result) {
+      $(`#instance_deletion-${id}`).remove();
+      if (type.includes("service") || type == "workflow") type = "service";
+      tables[type]
+        .row($(`#${id}`))
+        .remove()
+        .draw(false);
+      const name = result.name ? `'${result.name}'` : "";
+      notify(`${type.toUpperCase()} ${name} deleted.`, "error", 5);
+    },
   });
 };
 

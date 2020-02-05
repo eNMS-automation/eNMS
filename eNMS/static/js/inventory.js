@@ -260,7 +260,44 @@ function showDeviceResultsPanel(device) {
   });
 }
 
+function showImportTopologyPanel() {
+  openPanel({
+    name: "excel_import", title: "Import Topology as an Excel file",
+    processing: () => {
+      document.getElementById("file").onchange = function() {
+        importTopology();
+      };
+    }
+  });
+}
+
+function exportTopology() {
+  notify("Topology export starting...", "success", 5);
+  fCall("/export_topology", "excel_export-form", function() {
+    notify("Topology successfully exported.", "success", 5);
+  });
+}
+
+function importTopology() {
+  notify("Topology import: starting...", "success", 5);
+  const formData = new FormData($("#import-form")[0]);
+  $.ajax({
+    type: "POST",
+    url: "/import_topology",
+    dataType: "json",
+    data: formData,
+    contentType: false,
+    processData: false,
+    async: true,
+    success: function(result) {
+      notify(result, "success", 5);
+    },
+  });
+  $("#file")[0].value = "";
+}
+
 configureNamespace("inventory", [
+  exportTopology,
   handOffSSHConnection,
   showConnectionPanel,
   sshConnection,
@@ -269,5 +306,6 @@ configureNamespace("inventory", [
   updatePools,
   showDeviceData,
   showDeviceResultsPanel,
+  showImportTopologyPanel,
   showSessionLog,
 ]);

@@ -222,7 +222,7 @@ models.device = class Device extends Base {
     return [
       super.createNewButton("device"),
       ` <button type="button" class="btn btn-primary"
-      onclick="eNMS.administration.showImportTopologyPanel()"
+      onclick="eNMS.inventory.showImportTopologyPanel()"
       data-tooltip="Export"><span class="glyphicon glyphicon-download">
       </span></button>
       <button type="button" class="btn btn-primary"

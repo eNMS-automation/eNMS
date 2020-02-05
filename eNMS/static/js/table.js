@@ -431,7 +431,6 @@ models.service = class Service extends Base {
         search: "text",
         className: "dt-body-left",
         render: function(_, __, instance) {
-          console.log($("#parent-filtering").val())
           return instance.type === "workflow"
             ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${
                 instance.id
@@ -439,7 +438,6 @@ models.service = class Service extends Base {
             : $("#parent-filtering").val() == "true"
             ? instance.scoped_name
             : instance.name;
-            
         },  
       },
       super.lastModifiedColumn,
@@ -589,6 +587,12 @@ models.service = class Service extends Base {
 };
 
 models.run = class Run extends Base {
+
+  constructor(properties) {
+    super(properties);
+    this.service = JSON.stringify(this.service_properties).replace(/"/g, "'");
+  }
+
   static get columns() {
     return [
       { data: "runtime", title: "Runtime", search: "text", width: "15%" },
@@ -620,13 +624,13 @@ models.run = class Run extends Base {
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('logs', ${this.instance},
+          onclick="eNMS.automation.showRuntimePanel('logs', ${this.service},
           '${this.runtime}')" data-tooltip="Logs">
           <span class="glyphicon glyphicon-list"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${this.instance},
+          onclick="eNMS.automation.showRuntimePanel('results', ${this.service},
           '${this.runtime}')" data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>

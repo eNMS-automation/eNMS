@@ -286,6 +286,7 @@ class Pool(AbstractPool):
 class Session(AbstractBase):
 
     __tablename__ = type = "session"
+    private = True
     id = Column(Integer, primary_key=True)
     name = Column(SmallString, unique=True)
     timestamp = Column(SmallString)

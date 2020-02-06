@@ -91,30 +91,35 @@ Examples:
 
 The ``get_result`` function everywhere python code is accepted.
 
+
 Saving and retrieving values in a workflow
 ------------------------------------------
 
 You can define variables in the payload with the ``set_var`` function, and retrieve data from the payload
-with the ``get_var`` function.
+with the ``get_var`` function using the first postional argument and the same optional arguments defined in ``set_var``.
+If neither of the opotional arguments are used the variable will be global. 
 
-Variables can be scoped in different ways: global, per-device, user-defined,
-and a combination of per-device and user-defined.
-When no device or section is specified, the variable stores a single global value.
-Specifying a device or section saves a unique value for the device or section.
-Specifying both a device and section stores a unique value for each combination
-of device and section.
+- The first argument for set_var is postional and names the variable being set.
+- The second argument for set_var is postional and assigns the value for the variable.
+- An optional arugment for set_var uses keyword "device", which can scope the variable to the device the service is using when variable is set.
+- An optional argument for set_var uses keyword "section", which can scope the variable as user defines.
 
-For example, let's consider the following python snippet:
+Examples:
 
 ::
 
   set_var("global_variable", value=1050)
+  get_var("global_variable")
   set_var("variable", "variable_in_variables", section="variables")
+  get_var("variable", section="variables")
   set_var("variable1", 999, device=device.name)
+  get_var("variable1", device=device.name)
   set_var("variable2", "1000", device=device.name, section="variables")
+  get_var("variable2", device=device.name, section="variables")
   set_var("iteration_simple", "192.168.105.5", section="pools")
-  devices = ["Boston", "Cincinnati"] if device.name == "Chicago" else ["Cleveland", "Washington"]
+  get_var("iteration_simple", section="pools")
   set_var("iteration_device", devices, section="pools", device=device.name)
+  get_var("iteration_device", section="pools", device=device.name)
 
 Miscellaneous
 -------------

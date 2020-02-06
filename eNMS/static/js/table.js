@@ -183,9 +183,7 @@ class Base {
     return `
       <li>
         <button type="button" class="btn btn-sm btn-danger"
-        onclick="eNMS.base.showDeletionPanel(${
-          this.instance
-        })" data-tooltip="Delete"
+        onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
           ><span class="glyphicon glyphicon-trash"></span
         ></button>
       </li>`;
@@ -263,9 +261,7 @@ models.device = class Device extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('device', '${
-            this.id
-          }')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('device', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -309,9 +305,7 @@ models.link = class Link extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('link', '${
-            this.id
-          }')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('link', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -324,9 +318,7 @@ models.link = class Link extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${
-            this.instance
-          })" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -384,9 +376,7 @@ models.pool = class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.inventory.showPoolObjectsPanel('${
-            this.id
-          }')" data-tooltip="Pool Objects"
+          onclick="eNMS.inventory.showPoolObjectsPanel('${this.id}')" data-tooltip="Pool Objects"
             ><span class="glyphicon glyphicon-wrench"></span
           ></button>
         </li>
@@ -398,9 +388,7 @@ models.pool = class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('pool', '${
-            this.id
-          }')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('pool', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -413,9 +401,7 @@ models.pool = class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${
-            this.instance
-          })" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -435,13 +421,11 @@ models.service = class Service extends Base {
         className: "dt-body-left",
         render: function(_, __, instance) {
           return instance.type === "workflow"
-            ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${
-                instance.id
-              }')">${instance.scoped_name}</a></b>`
+            ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${instance.id}')">${instance.scoped_name}</a></b>`
             : $("#parent-filtering").val() == "true"
             ? instance.scoped_name
             : instance.name;
-        },  
+        },
       },
       super.lastModifiedColumn,
       { data: "type", title: "Type", search: "text" },
@@ -528,9 +512,7 @@ models.service = class Service extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 270px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${
-            this.instance
-          })"
+          onclick="eNMS.automation.showRuntimePanel('results', ${this.instance})"
           data-tooltip="Results"><span class="glyphicon glyphicon-list-alt">
           </span></button>
         </li>
@@ -555,25 +537,19 @@ models.service = class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('${this.type}', '${
-      this.id
-    }')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('${this.type}', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.automation.exportService('${
-            this.id
-          }')" data-tooltip="Export"
+          onclick="eNMS.automation.exportService('${this.id}')" data-tooltip="Export"
             ><span class="glyphicon glyphicon-download"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${
-            this.instance
-          })" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -583,14 +559,15 @@ models.service = class Service extends Base {
 
   static postProcessing() {
     loadServiceTypes();
-    $("#parent-filtering").selectpicker().on("change", function() {
-      tables["service"].page(0).ajax.reload(null, false);
-    });
+    $("#parent-filtering")
+      .selectpicker()
+      .on("change", function() {
+        tables["service"].page(0).ajax.reload(null, false);
+      });
   }
 };
 
 models.run = class Run extends Base {
-
   constructor(properties) {
     super(properties);
     this.service = JSON.stringify(this.service_properties).replace(/"/g, "'");
@@ -711,12 +688,8 @@ models.result = class Result extends Base {
           </span></button>
       </li>
       <li>
-          <button type="button" id="btn-result-${
-            this.id
-          }" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.copyClipboard('btn-result-${this.id}', ${
-        this.instance
-      })"
+          <button type="button" id="btn-result-${this.id}" class="btn btn-sm btn-info"
+          onclick="eNMS.automation.copyClipboard('btn-result-${this.id}', ${this.instance})"
           data-tooltip="Copy to clipboard">
           <span class="glyphicon glyphicon-copy"></span></button>
       </li>
@@ -798,9 +771,7 @@ models.task = class Task extends Base {
       `<ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('task', '${
-            this.id
-          }')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('task', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -811,26 +782,20 @@ models.task = class Task extends Base {
           <span class="glyphicon glyphicon-duplicate"></span></button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-success ${state[0]}" ${
-        state[0]
-      }
+          <button type="button" class="btn btn-sm btn-success ${state[0]}" ${state[0]}
           onclick="eNMS.automation.resumeTask('${this.id}')" data-tooltip="Play"
             ><span class="glyphicon glyphicon-play"></span
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${
-        state[1]
-      }
+          <button type="button" class="btn btn-sm btn-danger ${state[1]}" ${state[1]}
           onclick="eNMS.automation.pauseTask('${this.id}')" data-tooltip="Pause"
             ><span class="glyphicon glyphicon-pause"></span
           ></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${
-            this.instance
-          })" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -862,9 +827,7 @@ models.user = class User extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('user', '${
-            this.id
-          }')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('user', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -877,9 +840,7 @@ models.user = class User extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${
-            this.instance
-          })" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -914,9 +875,7 @@ models.server = class Server extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('server', '${
-            this.id
-          }')" data-tooltip="Edit"
+          onclick="eNMS.base.showTypePanel('server', '${this.id}')" data-tooltip="Edit"
             ><span class="glyphicon glyphicon-edit"></span
           ></button>
         </li>
@@ -929,9 +888,7 @@ models.server = class Server extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${
-            this.instance
-          })" data-tooltip="Delete"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
             ><span class="glyphicon glyphicon-trash"></span
           ></button>
         </li>
@@ -988,9 +945,7 @@ models.session = class Session extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.inventory.showSessionLog(${
-            this.id
-          })" data-tooltip="Session Log"
+          onclick="eNMS.inventory.showSessionLog(${this.id})" data-tooltip="Session Log"
             ><span class="glyphicon glyphicon-list"></span
           ></button>
         </li>

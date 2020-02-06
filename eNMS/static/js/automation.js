@@ -55,7 +55,7 @@ function compare(type) {
             })
           );
         });
-      }
+      },
     });
   } else {
     notify("Select two versions to compare first.", "error", 5);
@@ -137,7 +137,7 @@ function showResult(id) {
           el.innerText = el.innerText.replace(/(?:\\n)/g, "\n");
         });
       });
-    }
+    },
   });
 }
 
@@ -182,9 +182,9 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
           displayFunction(service, this.value, true);
         });
         displayFunction(service, runtime);
-      }
+      },
     });
-  })
+  });
 };
 
 function displayLogs(service, runtime, change) {
@@ -241,12 +241,8 @@ function displayResultsTree(service, runtime) {
           if (node.data.progress) {
             progressSummary = `
               <div style="position: absolute; top: 0px; right: 200px">
-                <span style="color: #32cd32">${
-                  node.data.progress.success
-                } passed</span> -
-                <span style="color: #FF6666">${
-                  node.data.progress.failure
-                } failed</span>
+                <span style="color: #32cd32">${node.data.progress.success} passed</span> -
+                <span style="color: #FF6666">${node.data.progress.failure} failed</span>
               </div>
             `;
           } else {
@@ -404,7 +400,7 @@ function displayCalendar(calendarType) {
           events: events,
         });
       });
-    }
+    },
   });
 }
 

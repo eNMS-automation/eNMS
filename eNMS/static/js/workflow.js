@@ -152,9 +152,7 @@ export function displayWorkflow(workflowData) {
   );
   workflowData.runtimes.forEach((runtime) => {
     $("#current-runtime").append(
-      `<option value='${runtime[0]}'>${runtime[0]} (run by ${
-        runtime[1]
-      })</option>`
+      `<option value='${runtime[0]}'>${runtime[0]} (run by ${runtime[1]})</option>`
     );
   });
   $("#current-runtime").val("latest");
@@ -400,9 +398,18 @@ function stopWorkflow() {
 function skipServices() {
   const selectedNodes = graph.getSelectedNodes().filter((x) => !isNaN(x));
   if (!selectedNodes.length) return;
-  call(`/skip_services/${workflow.id}/${selectedNodes.join("-")}`, (skip) => {
-    getWorkflowState();
-    notify(`Services ${skip}ped.`, "success", 5);
+  call(`/skip_services/${workflow.id}/${selectedNodes.join("-")}`, (result) => {
+    workflow.last_modified = result.update_time;
+    workflow.services.forEach((service) => {
+      if (selectedNodes.includes(service.id)) {
+        service.skip = result.skip === "skip";
+        nodes.update({
+          id: service.id,
+          color: result.skip === "skip" ? "#D3D3D3" : "#D2E5FF",
+        });
+      }
+    });
+    notify(`Services ${result.skip}ped.`, "success", 5);
   });
 }
 
@@ -492,9 +499,7 @@ function drawIterationEdge(service) {
     if (service.iteration_values) {
       title += `<b>Iteration Values</b>: ${service.iteration_values}<br>`;
     }
-    title += `<b>Iteration Variable Name</b>: ${
-      service.iteration_variable_name
-    }`;
+    title += `<b>Iteration Variable Name</b>: ${service.iteration_variable_name}`;
     {
       edges.add({
         id: -service.id,
@@ -623,7 +628,7 @@ function addServicePanel() {
           },
         },
       });
-    }
+    },
   });
 }
 
@@ -718,7 +723,7 @@ function editLabel(label) {
         .val(label.font.align)
         .selectpicker("refresh");
       currLabel = label;
-    }
+    },
   });
 }
 
@@ -752,8 +757,8 @@ function showRestartWorkflowPanel(workflow, service) {
         $("#restart_runtime").val(runtimes[runtimes.length - 1]);
         $("#restart_runtime").selectpicker("refresh");
       });
-    }
-  })
+    },
+  });
 }
 
 function restartWorkflow() {
@@ -785,8 +790,8 @@ export function getServiceState(id, first) {
 }
 
 function displayWorkflowState(result) {
-  if (!nodes || !edges || !result.state || !result.state.progress) return;
   resetDisplay();
+  if (!nodes || !edges || !result.state || !result.state.progress) return;
   if (result.state.services) {
     $.each(result.state.services, (path, state) => {
       const id = parseInt(path.split(">").slice(-1)[0]);

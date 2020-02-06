@@ -66,10 +66,12 @@ export function showConnectionPanel(device) {
       $(`#custom-credentials-${device.id}`).change(function() {
         $(`#credentials-fields-${device.id}`).show();
       });
-      $(`#device-credentials-${device.id},#user-credentials-${device.id}`).change(function() {
+      $(
+        `#device-credentials-${device.id},#user-credentials-${device.id}`
+      ).change(function() {
         $(`#credentials-fields-${device.id}`).hide();
       });
-    }
+    },
   });
 }
 
@@ -136,9 +138,7 @@ function handOffSSHConnection(id) {
     if (!url) {
       url = `${window.location.protocol}//${window.location.host}`;
     }
-    const link = `${result.username}@${window.location.hostname}:${
-      result.port
-    }`;
+    const link = `${result.username}@${window.location.hostname}:${result.port}`;
     const message = `Click here to connect to ${result.device_name}.`;
     notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
   });
@@ -174,7 +174,7 @@ function showPoolObjectsPanel(id) {
           }
         }
       });
-    }
+    },
   });
 }
 
@@ -213,7 +213,7 @@ export const showDeviceData = function(device) {
               editor.setValue(result[this.value]);
             })
             .change();
-        }
+        },
       });
     }
   });
@@ -245,7 +245,7 @@ function showSessionLog(sessionId) {
           });
           editor.setSize("100%", "100%");
           editor.setValue(log);
-        }
+        },
       });
     }
   });
@@ -257,18 +257,19 @@ function showDeviceResultsPanel(device) {
     title: `Results - ${device.name}`,
     processing: function() {
       initTable("result", device, null, "table-result");
-    }
+    },
   });
 }
 
 function showImportTopologyPanel() {
   openPanel({
-    name: "excel_import", title: "Import Topology as an Excel file",
+    name: "excel_import",
+    title: "Import Topology as an Excel file",
     processing: () => {
       document.getElementById("file").onchange = function() {
         importTopology();
       };
-    }
+    },
   });
 }
 

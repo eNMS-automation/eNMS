@@ -255,7 +255,7 @@ export function openPanel({
   processing,
   type,
   duplicate,
-  content
+  content,
 }) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
@@ -305,7 +305,7 @@ export function showDeletionPanel(instance) {
     name: "instance_deletion",
     title: `Delete ${instance.name}`,
     id: instance.id,
-    type: instance.type
+    type: instance.type,
   });
 }
 
@@ -329,7 +329,10 @@ function preprocessForm(panel, id, type, duplicate) {
     }
   });
   panel.querySelectorAll(".doc-link").forEach((el) => {
-    $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
+    $(el).attr(
+      "href",
+      `${settings.app.documentation_url}${$(el).attr("href")}`
+    );
   });
 }
 
@@ -481,7 +484,7 @@ export function showTypePanel(type, id, mode) {
       }
     },
     type: type,
-    duplicate: mode == "duplicate"
+    duplicate: mode == "duplicate",
   });
 }
 
@@ -679,7 +682,7 @@ function showAllAlerts() {
           </tbody>
         </table>
       <div>
-    `
+    `,
   });
 }
 
@@ -696,9 +699,7 @@ function getAlerts(preview) {
             style="background: #${color}; pointer-events: none; margin: 2px 6px"
           >
           <a style="word-wrap: break-word; color: #FFFFFF">
-          <span class="time" style="font-size: ${fontSize}">${
-          alert[3]
-        }</span><span>${alert[0]}</span>
+          <span class="time" style="font-size: ${fontSize}">${alert[3]}</span><span>${alert[0]}</span>
           </a>
         </li>`;
       } else {

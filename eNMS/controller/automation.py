@@ -331,11 +331,13 @@ class AutomationController(BaseController):
 
     def skip_services(self, workflow_id, service_ids):
         services = [fetch("service", id=id) for id in service_ids.split("-")]
+        workflow = fetch("workflow", id=workflow_id)
         skip = not all(service.skip for service in services)
         for service in services:
             service.skip = skip
-        fetch("workflow", id=workflow_id).last_modified = self.get_time()
-        return "skip" if skip else "unskip"
+        
+        workflow.last_modified = self.get_time()
+        return {"skip": "skip" if skip else "unskip", "update_time": workflow.last_modified}
 
     def get_service_state(self, path, runtime=None):
         service_id = path.split(">")[-1]

@@ -215,7 +215,12 @@ export function serializeForm(form) {
 export const deleteInstance = function(type, id) {
   call(`/delete_instance/${type}/${id}`, function(result) {
     $(`#instance_deletion-${id}`).remove();
-    if (type.includes("service") || type == "workflow") type = "service";
+    if (type.includes("service") || type == "workflow") {
+      type = "service";
+      if (localStorage.getItem("path").includes(id)) {
+        localStorage.removeItem("path");
+      }
+    }
     tables[type]
       .row($(`#${id}`))
       .remove()

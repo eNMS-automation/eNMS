@@ -890,7 +890,11 @@ export function initWorkflowBuilder() {
       );
     }
     if (workflow) {
-      $("#current-workflow").val(currentPath.split(">")[0]);
+      if (currentPath) {
+        $("#current-workflow").val(currentPath.split(">")[0]);
+      } else {
+        currentPath = $("#current-workflow").val();
+      }
       switchToWorkflow(currentPath);
     } else {
       workflow = $("#current-workflow").val();

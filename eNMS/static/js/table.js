@@ -182,9 +182,13 @@ class Base {
   get deleteInstanceButton() {
     return `
       <li>
-        <button type="button" class="btn btn-sm btn-danger"
-        onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-          ><span class="glyphicon glyphicon-trash"></span
+        <button
+          type="button"
+          class="btn btn-sm btn-danger"
+          onclick="eNMS.base.showDeletionPanel(${this.instance})"
+          data-tooltip="Delete"
+        >
+          <span class="glyphicon glyphicon-trash"></span
         ></button>
       </li>`;
   }
@@ -227,9 +231,11 @@ models.device = class Device extends Base {
       data-tooltip="Export"><span class="glyphicon glyphicon-download">
       </span></button>
       <button type="button" class="btn btn-primary"
-      onclick="eNMS.base.openPanel({name: 'excel_export'})" data-tooltip="Export"
-        ><span class="glyphicon glyphicon-upload"></span
-      ></button>`,
+        onclick="eNMS.base.openPanel({name: 'excel_export'})"
+        data-tooltip="Export"
+      >
+        <span class="glyphicon glyphicon-upload"></span>
+      </button>`,
       super.searchTableButton("device"),
       super.refreshTableButton("device"),
     ];
@@ -261,9 +267,10 @@ models.device = class Device extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('device', '${this.id}')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
+          onclick="eNMS.base.showTypePanel('device', '${this.id}')"
+          data-tooltip="Edit">
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -305,9 +312,10 @@ models.link = class Link extends Base {
       <ul class="pagination pagination-lg" style="margin: 0px; width: 120px">
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('link', '${this.id}')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
+          onclick="eNMS.base.showTypePanel('link', '${this.id}')"
+          data-tooltip="Edit">
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -318,9 +326,10 @@ models.link = class Link extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
+          onclick="eNMS.base.showDeletionPanel(${this.instance})"
+          data-tooltip="Delete">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
         </li>
       </ul>`;
   }
@@ -376,9 +385,10 @@ models.pool = class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.inventory.showPoolObjectsPanel('${this.id}')" data-tooltip="Pool Objects"
-            ><span class="glyphicon glyphicon-wrench"></span
-          ></button>
+          onclick="eNMS.inventory.showPoolObjectsPanel('${this.id}')"
+          data-tooltip="Pool Objects">
+            <span class="glyphicon glyphicon-wrench">
+          </span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -388,9 +398,10 @@ models.pool = class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('pool', '${this.id}')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
+          onclick="eNMS.base.showTypePanel('pool', '${this.id}')"
+          data-tooltip="Edit">
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -401,9 +412,10 @@ models.pool = class Pool extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-danger"
-          onclick="eNMS.base.showDeletionPanel(${this.instance})" data-tooltip="Delete"
-            ><span class="glyphicon glyphicon-trash"></span
-          ></button>
+          onclick="eNMS.base.showDeletionPanel(${this.instance})"
+          data-tooltip="Delete">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
         </li>
       </ul>
     `;
@@ -421,7 +433,8 @@ models.service = class Service extends Base {
         className: "dt-body-left",
         render: function(_, __, instance) {
           return instance.type === "workflow"
-            ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${instance.id}')">${instance.scoped_name}</a></b>`
+            ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
+              '${instance.id}')">${instance.scoped_name}</a></b>`
             : $("#parent-filtering").val() == "true"
             ? instance.scoped_name
             : instance.name;
@@ -537,9 +550,10 @@ models.service = class Service extends Base {
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('${this.type}', '${this.id}')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
+          onclick="eNMS.base.showTypePanel('${this.type}', '${this.id}')"
+          data-tooltip="Edit">
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -689,7 +703,9 @@ models.result = class Result extends Base {
       </li>
       <li>
           <button type="button" id="btn-result-${this.id}" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.copyClipboard('btn-result-${this.id}', ${this.instance})"
+          onclick="eNMS.automation.copyClipboard(
+            'btn-result-${this.id}', ${this.instance}
+          )"
           data-tooltip="Copy to clipboard">
           <span class="glyphicon glyphicon-copy"></span></button>
       </li>

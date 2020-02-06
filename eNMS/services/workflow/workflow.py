@@ -1,7 +1,6 @@
 from collections import defaultdict
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.orm import backref, relationship
-from time import sleep
 from wtforms import BooleanField, HiddenField, SelectField
 
 from eNMS.database import Session

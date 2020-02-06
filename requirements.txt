@@ -9,11 +9,15 @@ gitpython
 gunicorn
 hvac
 jinja2
+ldap3
 napalm
 netmiko
 pathlib
+pynetbox
 ruamel.yaml
 sqlalchemy
+slackclient>=1.3,<2
+tacacs_plus
 textfsm
 wtforms
 xlrd

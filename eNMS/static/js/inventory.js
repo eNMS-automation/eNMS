@@ -134,12 +134,10 @@ function handOffSSHConnection(id) {
   fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(
     result
   ) {
-    let url = settings.app.address;
-    if (!url) {
-      url = `${window.location.protocol}//${window.location.host}`;
-    }
-    const link = `${result.username}@${window.location.hostname}:${result.port}`;
+    let loc = window.location;
+    const link = `${result.username}@${loc.hostname}:${result.port}`;
     const message = `Click here to connect to ${result.device_name}.`;
+    console.log(link)
     notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
   });
 }

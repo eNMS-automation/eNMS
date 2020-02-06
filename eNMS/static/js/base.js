@@ -54,27 +54,6 @@ const panelSize = {
   workflow_results: "1200 700",
 };
 
-const panelName = {
-  alerts_table: "Alerts",
-  add_services: "Add services",
-  settings: "Settings",
-  database_deletion: "Database Deletion",
-  database_migration: "Database Migration",
-  device_connection: "Connect to device",
-  device_filtering: "Device Filtering",
-  event_filtering: "Event Filtering",
-  excel_export: "Export Topology as an Excel file",
-  import_service: "Import Service",
-  server_filtering: "Server Filtering",
-  link_filtering: "Link Filtering",
-  changelog_filtering: "Changelog Filtering",
-  pool_filtering: "Pool Filtering",
-  service_filtering: "Service Filtering",
-  task_filtering: "Task Filtering",
-  user_filtering: "User Filtering",
-  workflow_filtering: "Workflow Filtering",
-};
-
 export function detectUserInactivity() {
   let timer;
   window.onload = resetTimer;
@@ -704,7 +683,9 @@ function getAlerts(preview) {
             style="background: #${color}; pointer-events: none; margin: 2px 6px"
           >
           <a style="word-wrap: break-word; color: #FFFFFF">
-          <span class="time" style="font-size: ${fontSize}">${alert[3]}</span><span>${alert[0]}</span>
+            <span class="time" style="font-size: ${fontSize}">
+              ${alert[3]}</span><span>${alert[0]}
+            </span>
           </a>
         </li>`;
       } else {

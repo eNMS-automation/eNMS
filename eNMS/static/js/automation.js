@@ -241,8 +241,12 @@ function displayResultsTree(service, runtime) {
           if (node.data.progress) {
             progressSummary = `
               <div style="position: absolute; top: 0px; right: 200px">
-                <span style="color: #32cd32">${node.data.progress.success} passed</span> -
-                <span style="color: #FF6666">${node.data.progress.failure} failed</span>
+                <span style="color: #32cd32">
+                  ${node.data.progress.success} passed
+                </span> -
+                <span style="color: #FF6666">
+                  ${node.data.progress.failure} failed
+                </span>
               </div>
             `;
           } else {

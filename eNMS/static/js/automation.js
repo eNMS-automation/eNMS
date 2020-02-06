@@ -418,8 +418,7 @@ Object.assign(action, {
   Edit: (service) => showTypePanel(service.type, service.id),
   Duplicate: (service) => showTypePanel(service.type, service.id, "duplicate"),
   Run: (service) => normalRun(service.id),
-  "Parameterized Run": (service) =>
-    showTypePanel(service.type, service.id, "run"),
+  "Parameterized Run": (service) => showTypePanel(service.type, service.id, "run"),
   Results: (service) => showRuntimePanel("results", service),
   Backward: () => switchToWorkflow(arrowHistory[arrowPointer - 1], "left"),
   Forward: () => switchToWorkflow(arrowHistory[arrowPointer + 1], "right"),

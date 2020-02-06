@@ -1,9 +1,6 @@
-{% extends "base_site.html" %} {% block title %} Dashboard {% endblock title %}
-{% block stylesheets %} {{ super() }}
-<link
-  href="{{ url_for('static', filename='css/dashboard.css') }}"
-  rel="stylesheet"
-/>
+{% extends "base_site.html" %} {% block title %} Dashboard {% endblock title %} {% block
+stylesheets %} {{ super() }}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet" />
 {% endblock stylesheets %} {% block content %}
 <nav class="navbar navbar-default" role="navigation">
   <div class="tile_count">
@@ -43,8 +40,7 @@
       <select id="{{ type }}-properties" class="form-control">
         {% for property in type_properties %}
         <option value="{{ property }}"
-          >{{ names.get(property, property.replace("_", " ").capitalize() )
-          }}</option
+          >{{ names.get(property, property.replace("_", " ").capitalize() ) }}</option
         >
         {% endfor %}
       </select>

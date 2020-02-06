@@ -3,10 +3,7 @@
   <head>
     {% block head %} {% block meta %}
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link
-      rel="shortcut icon"
-      href="{{ url_for('static', filename='img/logo.png') }}"
-    />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -78,14 +75,11 @@
       href="{{ url_for('static', filename='lib/dropzone/dropzone.min.css') }}"
       rel="stylesheet"
     />
-    <link
-      href="{{ url_for('static', filename='css/main.css') }}"
-      rel="stylesheet"
-    />
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
     {% endblock stylesheets %} {% endblock head %}
   </head>
-  {% block body %} {% set menu_class = "nav-sm" if current_user.small_menu else
-  "nav-md" %}
+  {% block body %} {% set menu_class = "nav-sm" if current_user.small_menu else "nav-md"
+  %}
   <body class="{{ menu_class }}">
     {% block sidebar %}
     <div id="sidebar" class="left_column">
@@ -109,9 +103,7 @@
           <ul class="nav side-menu">
             <li>
               <a
-                ><i class="fa fa-home"></i>Home<span
-                  class="fa fa-chevron-down"
-                ></span
+                ><i class="fa fa-home"></i>Home<span class="fa fa-chevron-down"></span
               ></a>
               <ul class="nav child_menu">
                 <li><a href="/dashboard">Dashboard</a></li>
@@ -121,9 +113,7 @@
             </li>
             <li id="Admin">
               <a
-                ><i class="fa fa-users"></i>Admin<span
-                  class="fa fa-chevron-down"
-                ></span
+                ><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span
               ></a>
               <ul class="nav child_menu">
                 <li><a href="/table/user">Users</a></li>
@@ -202,9 +192,7 @@
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <img
-                      src="{{ url_for('static', filename='img/logo.png') }}"
-                    />
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" />
                     {{ current_user.name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
@@ -334,10 +322,7 @@
     <script src="{{ url_for('static', filename='lib/select2/select2.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/jstree/jstree.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/dropzone/dropzone.min.js') }}"></script>
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/base.js') }}"
-    ></script>
+    <script type="module" src="{{ url_for('static', filename='js/base.js') }}"></script>
     <script
       type="module"
       src="{{ url_for('static', filename='js/administration.js') }}"
@@ -350,10 +335,7 @@
       type="module"
       src="{{ url_for('static', filename='js/automation.js') }}"
     ></script>
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/main.js') }}"
-    ></script>
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% endblock %}
   </body>
 </html>

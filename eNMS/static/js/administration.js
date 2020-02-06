@@ -6,14 +6,7 @@ Dropzone: false
 JSONEditor: false
 */
 
-import {
-  call,
-  configureNamespace,
-  editors,
-  fCall,
-  notify,
-  openPanel,
-} from "./base.js";
+import { call, configureNamespace, editors, fCall, notify, openPanel } from "./base.js";
 import { tables } from "./table.js";
 
 let settingsEditor;
@@ -37,11 +30,7 @@ function showSettings() {
     name: "settings",
     title: "Settings",
     processing: function() {
-      settingsEditor = new JSONEditor(
-        document.getElementById("content"),
-        {},
-        settings
-      );
+      settingsEditor = new JSONEditor(document.getElementById("content"), {}, settings);
     },
   });
 }

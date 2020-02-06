@@ -83,10 +83,7 @@ const panelThemes = {
 
 $.ajaxSetup({
   beforeSend: function(xhr, settings) {
-    if (
-      !/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) &&
-      !this.crossDomain
-    ) {
+    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
       xhr.setRequestHeader("X-CSRFToken", csrf_token);
     }
     if (!settings.url.includes("filtering")) {
@@ -106,11 +103,7 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
     script.defer = defer;
 
     function onloadHander(_, isAbort) {
-      if (
-        isAbort ||
-        !script.readyState ||
-        /loaded|complete/.test(script.readyState)
-      ) {
+      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
         script.onload = null;
         script.onreadystatechange = null;
         script = undefined;
@@ -232,15 +225,7 @@ export function createTooltips() {
   });
 }
 
-export function openPanel({
-  name,
-  title,
-  id,
-  processing,
-  type,
-  duplicate,
-  content,
-}) {
+export function openPanel({ name, title, id, processing, type, duplicate, content }) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
@@ -313,10 +298,7 @@ function preprocessForm(panel, id, type, duplicate) {
     }
   });
   panel.querySelectorAll(".doc-link").forEach((el) => {
-    $(el).attr(
-      "href",
-      `${settings.app.documentation_url}${$(el).attr("href")}`
-    );
+    $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
   });
 }
 
@@ -405,10 +387,7 @@ function showServicePanel(type, id, mode) {
       $(`#original-${id}`).val(id);
     }
   }
-  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
-    "disabled",
-    true
-  );
+  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", true);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -449,9 +428,7 @@ export function showTypePanel(type, id, mode) {
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {
-          $(`#${type}-workflows`).append(
-            new Option(workflow.name, workflow.id)
-          );
+          $(`#${type}-workflows`).append(new Option(workflow.name, workflow.id));
           $(`#${type}-workflows`)
             .val(workflow.id)
             .trigger("change");
@@ -523,10 +500,7 @@ function processInstance(type, instance) {
 
 export function processData(type, id) {
   if (type.includes("service") || type == "workflow") {
-    $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
-      "disabled",
-      false
-    );
+    $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
     if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
   fCall(
@@ -610,9 +584,7 @@ export function copyToClipboard(text, isId) {
       const scroll = $(window)[scrollDir]();
       const menu = $(settings.menuSelector)[direction]();
       const offset =
-        direction == "width"
-          ? $(".left_column").width()
-          : $(".header").height() + 2;
+        direction == "width" ? $(".left_column").width() : $(".header").height() + 2;
       let position = mouse + scroll - offset;
       if (mouse + menu > win && menu < mouse) {
         position -= menu;
@@ -626,10 +598,7 @@ export function notify(...args) {
   const alerts = JSON.parse(localStorage.getItem("alerts"));
   localStorage.setItem(
     "alerts",
-    JSON.stringify([
-      ...alerts,
-      [...args, moment().format("MMMM Do YYYY, h:mm:ss a")],
-    ])
+    JSON.stringify([...alerts, [...args, moment().format("MMMM Do YYYY, h:mm:ss a")]])
   );
   $("#alert-number").text(alerts.length + 1);
   alertify.notify(...args);

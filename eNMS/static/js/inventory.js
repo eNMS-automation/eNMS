@@ -6,14 +6,7 @@ echarts: false
 initSelect: false
 */
 
-import {
-  call,
-  configureNamespace,
-  fCall,
-  notify,
-  openPanel,
-  openUrl,
-} from "./base.js";
+import { call, configureNamespace, fCall, notify, openPanel, openUrl } from "./base.js";
 import { initTable, tables } from "./table.js";
 
 function drawDiagrams(diagram, result) {
@@ -66,11 +59,11 @@ export function showConnectionPanel(device) {
       $(`#custom-credentials-${device.id}`).change(function() {
         $(`#credentials-fields-${device.id}`).show();
       });
-      $(
-        `#device-credentials-${device.id},#user-credentials-${device.id}`
-      ).change(function() {
-        $(`#credentials-fields-${device.id}`).hide();
-      });
+      $(`#device-credentials-${device.id},#user-credentials-${device.id}`).change(
+        function() {
+          $(`#credentials-fields-${device.id}`).hide();
+        }
+      );
     },
   });
 }
@@ -108,9 +101,7 @@ export function initDashboard() {
 }
 
 function sshConnection(id) {
-  fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(
-    result
-  ) {
+  fCall(`/connection/${id}`, `connection-parameters-form-${id}`, function(result) {
     let url = settings.app.address;
     if (!url) {
       url = `${window.location.protocol}//${window.location.hostname}`;
@@ -131,9 +122,7 @@ function sshConnection(id) {
 
 // eslint-disable-next-line
 function handOffSSHConnection(id) {
-  fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(
-    result
-  ) {
+  fCall(`/handoffssh/${id}`, `connection-parameters-form-${id}`, function(result) {
     let loc = window.location;
     const link = `${result.username}@${loc.hostname}:${result.port}`;
     const message = `Click here to connect to ${result.device_name}.`;

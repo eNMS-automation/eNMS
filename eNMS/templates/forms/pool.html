@@ -30,8 +30,7 @@
       </div>
       <label>Type of match</label>
       <div class="form-group">
-        {{ form.operator(id="pool-operator", class="form-control required
-        add-id") }}
+        {{ form.operator(id="pool-operator", class="form-control required add-id") }}
       </div>
       <fieldset>
         <div class="item">
@@ -59,16 +58,15 @@
           {% for property in form.device_properties %}
           <tr>
             <td>
-              {{ names.get(property, property.replace("_", " ").capitalize() )
-              }}
+              {{ names.get(property, property.replace("_", " ").capitalize() ) }}
             </td>
             <td>
               {{ form['device_' + property](id="pool-" + 'device_' + property,
               class="form-control add-id") }}
             </td>
             <td>
-              {{ form['device_' + property + '_match'](id="pool-" +'device_' +
-              property + '_match', class="form-control add-id") }}
+              {{ form['device_' + property + '_match'](id="pool-" +'device_' + property
+              + '_match', class="form-control add-id") }}
             </td>
           </tr>
           {% endfor %}
@@ -93,16 +91,15 @@
           {% for property in form.link_properties %}
           <tr>
             <td>
-              {{ names.get(property, property.replace("_", " ").capitalize() )
-              }}
+              {{ names.get(property, property.replace("_", " ").capitalize() ) }}
             </td>
             <td>
               {{ form['link_' + property](id="pool-" + 'link_' + property,
               class="form-control add-id") }}
             </td>
             <td>
-              {{ form['link_' + property + '_match'](id="pool-" +'link_' +
-              property + '_match', class="form-control add-id") }}
+              {{ form['link_' + property + '_match'](id="pool-" +'link_' + property +
+              '_match', class="form-control add-id") }}
             </td>
           </tr>
           {% endfor %}

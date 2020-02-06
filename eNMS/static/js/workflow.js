@@ -144,12 +144,8 @@ export function displayWorkflow(workflowData) {
     }
   });
   $("#current-runtime").empty();
-  $("#current-runtime").append(
-    "<option value='normal'>Normal Display</option>"
-  );
-  $("#current-runtime").append(
-    "<option value='latest'>Latest Runtime</option>"
-  );
+  $("#current-runtime").append("<option value='normal'>Normal Display</option>");
+  $("#current-runtime").append("<option value='latest'>Latest Runtime</option>");
   workflowData.runtimes.forEach((runtime) => {
     $("#current-runtime").append(
       `<option value='${runtime[0]}'>${runtime[0]} (run by ${runtime[1]})</option>`
@@ -178,8 +174,7 @@ const rectangleSelection = (container, network, nodes) => {
     return [x, y];
   };
 
-  const correctRange = (start, end) =>
-    start < end ? [start, end] : [end, start];
+  const correctRange = (start, end) => (start < end ? [start, end] : [end, start]);
 
   const selectFromDOMRect = () => {
     const [sX, sY] = canvasify(DOMRect.startX, DOMRect.startY);
@@ -289,9 +284,7 @@ export function processWorkflowData(instance, id) {
     if (id) {
       if (workflow.id == id) return;
       nodes.update(serviceToNode(instance));
-      let serviceIndex = workflow.services.findIndex(
-        (s) => s.id == instance.id
-      );
+      let serviceIndex = workflow.services.findIndex((s) => s.id == instance.id);
       workflow.services[serviceIndex] = instance;
     } else {
       if (creationMode == "create_workflow") {
@@ -305,12 +298,9 @@ export function processWorkflowData(instance, id) {
           displayWorkflow({ service: instance, runtimes: [] });
         }
       } else {
-        call(
-          `/add_service_to_workflow/${workflow.id}/${instance.id}`,
-          function() {
-            updateWorkflowService(instance);
-          }
-        );
+        call(`/add_service_to_workflow/${workflow.id}/${instance.id}`, function() {
+          updateWorkflowService(instance);
+        });
       }
     }
     drawIterationEdge(instance);
@@ -321,26 +311,20 @@ function updateWorkflowService(service) {
   nodes.add(serviceToNode(service));
   workflow.services.push(service);
   switchMode("motion", true);
-  notify(
-    `Service '${service.scoped_name}' added to the workflow.`,
-    "success",
-    5
-  );
+  notify(`Service '${service.scoped_name}' added to the workflow.`, "success", 5);
 }
 
 function addServicesToWorkflow() {
   const selection = $("#service-tree").jstree("get_checked", true);
   if (!selection.length) notify("Nothing selected.", "error", 5);
   $("#services").val(selection.map((n) => n.data.id));
-  fCall(
-    `/copy_service_in_workflow/${workflow.id}`,
-    "add-services-form",
-    function(result) {
-      workflow.last_modified = result.update_time;
-      $("#add_services").remove();
-      result.services.map(updateWorkflowService);
-    }
-  );
+  fCall(`/copy_service_in_workflow/${workflow.id}`, "add-services-form", function(
+    result
+  ) {
+    workflow.last_modified = result.update_time;
+    $("#add_services").remove();
+    result.services.map(updateWorkflowService);
+  });
 }
 
 function deleteNode(id) {
@@ -433,8 +417,7 @@ function getServiceLabel(service) {
       ? `\n     ${service.scoped_name}     \n`
       : `${service.scoped_name}\n`;
   label += "—————\n";
-  label +=
-    service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
+  label += service.type == "workflow" ? "Subworkflow" : serviceTypes[service.type];
   return label;
 }
 
@@ -443,12 +426,7 @@ function serviceToNode(service) {
   if (defaultService) ends.add(service.id);
   return {
     id: service.id,
-    shape:
-      service.type == "workflow"
-        ? "ellipse"
-        : defaultService
-        ? "circle"
-        : "box",
+    shape: service.type == "workflow" ? "ellipse" : defaultService ? "circle" : "box",
     color: defaultService ? "pink" : "#D2E5FF",
     font: {
       size: 15,
@@ -465,12 +443,8 @@ function serviceToNode(service) {
     name: service.scoped_name,
     type: service.type,
     title: formatServiceTitle(service),
-    x: service.positions[workflow.name]
-      ? service.positions[workflow.name][0]
-      : 0,
-    y: service.positions[workflow.name]
-      ? service.positions[workflow.name][1]
-      : 0,
+    x: service.positions[workflow.name] ? service.positions[workflow.name][0] : 0,
+    y: service.positions[workflow.name] ? service.positions[workflow.name][1] : 0,
   };
 }
 
@@ -523,8 +497,7 @@ function edgeToEdge(edge) {
     to: edge.destination_id,
     smooth: {
       type: "curvedCW",
-      roundness:
-        edge.subtype == "success" ? 0.1 : edge.subtype == "failure" ? -0.1 : 0,
+      roundness: edge.subtype == "success" ? 0.1 : edge.subtype == "failure" ? -0.1 : 0,
     },
     color: {
       color:
@@ -550,12 +523,8 @@ function deleteSelection() {
 
 function switchMode(mode, noNotification) {
   const oldMode = currentMode;
-  currentMode =
-    mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
-  if (
-    (oldMode == "motion" || currentMode == "motion") &&
-    oldMode != currentMode
-  ) {
+  currentMode = mode || (currentMode == "motion" ? $("#edge-type").val() : "motion");
+  if ((oldMode == "motion" || currentMode == "motion") && oldMode != currentMode) {
     $("#mode-icon")
       .toggleClass("glyphicon-move")
       .toggleClass("glyphicon-random");
@@ -649,9 +618,7 @@ function createNew(mode) {
 }
 
 function getResultLink(service, device) {
-  const link = `get_result("${service.name}"${
-    device ? ", device=device.name" : ""
-  })`;
+  const link = `get_result("${service.name}"${device ? ", device=device.name" : ""})`;
   copyToClipboard(link);
 }
 
@@ -763,9 +730,7 @@ function showRestartWorkflowPanel(workflow, service) {
 }
 
 function restartWorkflow() {
-  fCall(`/run_service/${currentPath}`, `restart_workflow-form`, function(
-    result
-  ) {
+  fCall(`/run_service/${currentPath}`, `restart_workflow-form`, function(result) {
     $(`#restart_workflow-${workflow.id}`).remove();
     runLogic(result);
   });
@@ -817,9 +782,7 @@ function displayWorkflowState(result) {
         let progressInfo = [];
         if (progress.success) progressInfo.push(`${progress.success} passed`);
         if (progress.failure) progressInfo.push(`${progress.failure} failed`);
-        if (progress.skipped) {
-          progressInfo.push(`${progress.skipped} skipped`);
-        }
+        if (progress.skipped) progressInfo.push(`${progress.skipped} skipped`);
         if (progressInfo.length) label += ` (${progressInfo.join(", ")})`;
         nodes.update({
           id: id,

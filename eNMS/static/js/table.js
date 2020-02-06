@@ -780,9 +780,7 @@ models.task = class Task extends Base {
   }
 
   get buttons() {
-    const state = this.is_active
-      ? ["disabled", "active"]
-      : ["active", "disabled"];
+    const state = this.is_active ? ["disabled", "active"] : ["active", "disabled"];
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
@@ -949,10 +947,7 @@ models.session = class Session extends Base {
   }
 
   static get controls() {
-    return [
-      super.searchTableButton("session"),
-      super.refreshTableButton("session"),
-    ];
+    return [super.searchTableButton("session"), super.refreshTableButton("session")];
   }
 
   get buttons() {
@@ -1012,8 +1007,4 @@ models.event = class Event extends Base {
   }
 };
 
-configureNamespace("table", [
-  filterTable,
-  refreshTable,
-  refreshTablePeriodically,
-]);
+configureNamespace("table", [filterTable, refreshTable, refreshTablePeriodically]);

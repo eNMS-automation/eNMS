@@ -13,8 +13,7 @@
     </div>
     <label>Service</label>
     <div class="form-group">
-      {{ form.service(id='event-service', class="form-control required add-id")
-      }}
+      {{ form.service(id='event-service', class="form-control required add-id") }}
     </div>
     <br />
     <table
@@ -39,8 +38,7 @@
             {{ names.get(property, property.replace("_", " ").capitalize() ) }}
           </td>
           <td>
-            {{ form[property](id='event-' + property, class="form-control
-            add-id") }}
+            {{ form[property](id='event-' + property, class="form-control add-id") }}
           </td>
           <td>
             {{ form[property + '_regex'](id='event-' + property + '_regex',

@@ -675,7 +675,7 @@ Object.assign(action, {
   "Create 'Failure' edge": () => switchMode("failure"),
   "Create 'Prerequisite' edge": () => switchMode("prerequisite"),
   "Move Nodes": () => switchMode("motion"),
-  "Create Label": () => openPanel("workflow_label"),
+  "Create Label": () => openPanel({name: "workflow_label", title: "Create a new label"}),
   "Edit Label": editLabel,
   "Edit Edge": (edge) => {
     showTypePanel("workflow_edge", edge.id);

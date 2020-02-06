@@ -57,16 +57,17 @@ function parseData(data) {
   return { data: result, legend: legend };
 }
 
-export function showConnectionPanel(id) {
+export function showConnectionPanel(device) {
   openPanel({
     name: "device_connection",
-    id: id,
+    title: `Connect to ${device.name}`,
+    id: device.id,
     processing: () => {
-      $(`#custom-credentials-${id}`).change(function() {
-        $(`#credentials-fields-${id}`).show();
+      $(`#custom-credentials-${device.id}`).change(function() {
+        $(`#credentials-fields-${device.id}`).show();
       });
-      $(`#device-credentials-${id},#user-credentials-${id}`).change(function() {
-        $(`#credentials-fields-${id}`).hide();
+      $(`#device-credentials-${device.id},#user-credentials-${device.id}`).change(function() {
+        $(`#credentials-fields-${device.id}`).hide();
       });
     }
   });

@@ -288,7 +288,7 @@ export function initView() {
   });
   Object.assign(action, {
     Properties: (o) => showTypePanel(o.type, o.id),
-    Connect: (d) => showConnectionPanel(d.id),
+    Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
   });
 }

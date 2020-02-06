@@ -96,10 +96,10 @@ class Device(CustomDevice):
     netmiko_driver = Column(SmallString, default="cisco_ios")
     napalm_driver = Column(SmallString, default="ios")
     configuration = Column(
-        LargeString, info={"dont_track_changes": True, "model_properties": False}
+        LargeString, info={"dont_track_changes": True}
     )
     operational_data = Column(
-        LargeString, info={"dont_track_changes": True, "model_properties": False}
+        LargeString, info={"dont_track_changes": True}
     )
     last_failure = Column(SmallString, default="Never")
     last_status = Column(SmallString, default="Never")

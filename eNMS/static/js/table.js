@@ -348,21 +348,26 @@ models.configuration = class Configuration extends Base {
   static get controls() {
     return `
       <div class="form-group" style="width: 700px">
-      <div class="col-md-4 col-sm-4 col-xs-12">
-        <input name="context-lines" id="slider" style="width: 200px">
-      </div>
-        <div class="col-md-5 col-sm-5 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          <input name="context-lines" id="slider" style="width: 200px">
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
           <input id="data-type" name="data-type" style="width: 200px" type="checkbox">
         </div>
-        <div class="col-md-3 col-sm-3 col-xs-12">
-          <div class="checkbox">
-            <label>
-              <input
-                id="search-type"
-                name="search-type"
-                type="checkbox"
-              > Regular Expression
-            </label>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          <div style="display: inline-flex">
+            <div>${super.searchTableButton("device")}</div>
+            <div style="padding-left: 20px">
+              <div class="checkbox">
+                <label>
+                  <input
+                    id="search-type"
+                    name="search-type"
+                    type="checkbox"
+                  > Regular Expression
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>`;

@@ -45,10 +45,13 @@ class InventoryController(BaseController):
         if protocol == "telnet":
             cmd.extend(f"telnet {address}".split())
         elif "authentication" in kwargs:
-            if kwargs["credentials"] == "device":
-                login, pwd = device.username, device.password
-            else:
-                login, pwd = kwargs["user"].name, kwargs["user"].password
+            login, pwd = (
+                (device.username, device.password)
+                if kwargs["credentials"] == "device"
+                else self.get_user_credentials()
+                if kwargs["credentials"] == "user"
+                else (kwargs["username"], kwargs["password"])
+            )
             cmd.extend(f"sshpass -p {pwd} ssh {options} {login}@{address}".split())
         else:
             cmd.extend(f"ssh {options} {address}".split())
@@ -79,6 +82,7 @@ class InventoryController(BaseController):
             if kwargs["credentials"] == "user"
             else (kwargs["username"], kwargs["password"])
         )
+        print(credentials)
         uuid, port = str(uuid4()), self.get_ssh_port()
         session = factory(
             "session",

@@ -74,6 +74,7 @@ export function initTable(type, instance, runtime, id) {
         });
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing();
+      createTooltips();
       this.api().columns.adjust();
     },
     ajax: {

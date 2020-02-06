@@ -205,7 +205,7 @@ class Run(AbstractBase):
             return "N/A"
 
     def compute_devices_from_query(_self, query, property, **locals):  # noqa: N805
-        values = _self.eval(query, **locals)
+        values = _self.eval(query, **locals)[0]
         devices, not_found = set(), []
         if isinstance(values, str):
             values = [values]
@@ -363,6 +363,7 @@ class Run(AbstractBase):
         elif self.run_method != "per_device":
             return self.get_results(payload)
         else:
+
             if self.multiprocessing and len(self.devices) > 1:
                 results = []
                 processes = min(len(self.devices), self.max_processes)
@@ -399,10 +400,16 @@ class Run(AbstractBase):
 
     def run_service_job(self, payload, device):
         args = (device,) if device else ()
-        for retry in range(self.number_of_retries + 1):
+        retries = self.number_of_retries + 1
+        total_retries = 0
+        while retries > 0 and total_retries < 1000:
+            retries -= 1
+            total_retries += 1
             try:
-                if retry:
-                    self.log("error", f"RETRY n°{retry}", device)
+                if retries:
+                    self.log(
+                        "error", f"RETRY n°{self.number_of_retries-retries+2}", device
+                    )
                 results = self.service.job(self, payload, *args)
                 if device and (
                     getattr(self, "close_connection", False)
@@ -413,16 +420,18 @@ class Run(AbstractBase):
                 if "success" not in results:
                     results["success"] = True
                 try:
-                    self.eval(
+                    _, exec_variables = self.eval(
                         self.service.result_postprocessing, function="exec", **locals()
                     )
+                    if isinstance(exec_variables.get("retries"), int):
+                        retries = exec_variables["retries"]
                 except SystemExit:
                     pass
                 if results["success"] and self.validation_method != "none":
                     self.validate_result(results, payload, device)
                 if results["success"]:
                     return results
-                elif retry < self.number_of_retries:
+                elif retries:
                     sleep(self.time_between_retries)
             except Exception as exc:
                 self.log("error", str(exc), device)
@@ -435,7 +444,7 @@ class Run(AbstractBase):
         start = datetime.now().replace(microsecond=0)
         skip_service = False
         if self.skip_query:
-            skip_service = self.eval(self.skip_query, **locals())
+            skip_service = self.eval(self.skip_query, **locals())[0]
         if skip_service or self.skip:
             if device:
                 self.run_state["progress"]["device"]["skipped"] += 1
@@ -455,7 +464,7 @@ class Run(AbstractBase):
                     payload.update(old_result["payload"])
             if self.service.iteration_values:
                 targets_results = {}
-                for target in self.eval(self.service.iteration_values, **locals()):
+                for target in self.eval(self.service.iteration_values, **locals())[0]:
                     self.payload_helper(payload, self.iteration_variable_name, target)
                     targets_results[str(target)] = self.run_service_job(payload, device)
                 results.update(
@@ -529,8 +538,9 @@ class Run(AbstractBase):
         try:
             if self.send_notification_method == "mail":
                 filename = self.runtime.replace(".", "").replace(":", "")
+                status = "PASS" if results["success"] else "FAILED"
                 result = app.send_email(
-                    f"{self.name} ({'PASS' if results['success'] else 'FAILED'})",
+                    f"{self.service.name} ({status})",
                     app.str_dict(notification),
                     recipients=self.mail_recipient,
                     filename=f"results-{filename}.txt",
@@ -705,13 +715,15 @@ class Run(AbstractBase):
         }
 
     def eval(_self, query, function="eval", **locals):  # noqa: N805
-        return builtins[function](query, _self.python_code_kwargs(**locals))
+        exec_variables = _self.python_code_kwargs(**locals)
+        results = builtins[function](query, exec_variables)
+        return results, exec_variables
 
     def sub(self, input, variables):
         r = compile("{{(.*?)}}")
 
         def replace(match):
-            return str(self.eval(match.group()[2:-2], **variables))
+            return str(self.eval(match.group()[2:-2], **variables)[0])
 
         def rec(input):
             if isinstance(input, str):

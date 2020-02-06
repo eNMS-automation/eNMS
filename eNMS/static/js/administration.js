@@ -17,18 +17,6 @@ import { tables } from "./table.js";
 
 let settingsEditor;
 
-function showImportTopologyPanel() {
-  openPanel({
-    name: "excel_import",
-    title: "Import Topology as an Excel file",
-    callback: () => {
-      document.getElementById("file").onchange = function() {
-        importTopology();
-      };
-    },
-  });
-}
-
 function saveSettings() {
   $.ajax({
     type: "POST",
@@ -53,34 +41,6 @@ function showSettings() {
         {},
         settings
       );
-    },
-  });
-}
-
-function exportTopology() {
-  notify("Topology export starting...", "success", 5);
-  call({
-    url: "/export_topology",
-    form: "excel_export-form",
-    callback: function() {
-      notify("Topology successfully exported.", "success", 5);
-    },
-  });
-}
-
-function importTopology() {
-  notify("Topology import: starting...", "success", 5);
-  const formData = new FormData($("#import-form")[0]);
-  $.ajax({
-    type: "POST",
-    url: "/import_topology",
-    dataType: "json",
-    data: formData,
-    contentType: false,
-    processData: false,
-    async: true,
-    success: function(result) {
-      notify(result, "success", 5);
     },
   });
 }

@@ -12,6 +12,8 @@ from eNMS.properties import private_properties
 def model_inspection(mapper, cls):
     name = cls.__tablename__
     for col in inspect(cls).columns:
+        if not col.info.get("model_properties", True):
+            continue
         model_properties[name].append(col.key)
         if col.type == PickleType and isinstance(col.default.arg, list):
             property_types[col.key] = "list"
@@ -38,6 +40,7 @@ def model_inspection(mapper, cls):
         model_properties[name].extend(model_properties["service"])
     model = {name: cls, name.lower(): cls}
     models.update(model)
+    model_properties[name] = list(set(model_properties[name]))
     for relation in mapper.relationships:
         if getattr(relation.mapper.class_, "private", False):
             continue

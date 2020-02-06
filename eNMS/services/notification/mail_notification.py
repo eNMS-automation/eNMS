@@ -37,3 +37,11 @@ class MailNotificationForm(ServiceForm):
     sender = StringField()
     recipients = StringField()
     body = SubstitutionField(widget=TextArea(), render_kw={"rows": 5})
+
+    def validate(self):
+        valid_form = super().validate()
+        for field in ("title", "sender", "recipients", "body"):
+            if not getattr(self, field).data:
+                getattr(self, field).errors.append(f"{field.capitalize()} is missing.")
+                valid_form = False
+        return valid_form

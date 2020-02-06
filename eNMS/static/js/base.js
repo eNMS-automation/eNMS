@@ -54,27 +54,6 @@ const panelSize = {
   workflow_results: "1200 700",
 };
 
-const panelName = {
-  alerts_table: "Alerts",
-  add_services: "Add services",
-  settings: "Settings",
-  database_deletion: "Database Deletion",
-  database_migration: "Database Migration",
-  device_connection: "Connect to device",
-  device_filtering: "Device Filtering",
-  event_filtering: "Event Filtering",
-  excel_export: "Export Topology as an Excel file",
-  import_service: "Import Service",
-  server_filtering: "Server Filtering",
-  link_filtering: "Link Filtering",
-  changelog_filtering: "Changelog Filtering",
-  pool_filtering: "Pool Filtering",
-  service_filtering: "Service Filtering",
-  task_filtering: "Task Filtering",
-  user_filtering: "User Filtering",
-  workflow_filtering: "Workflow Filtering",
-};
-
 export function detectUserInactivity() {
   let timer;
   window.onload = resetTimer;
@@ -104,10 +83,7 @@ const panelThemes = {
 
 $.ajaxSetup({
   beforeSend: function(xhr, settings) {
-    if (
-      !/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) &&
-      !this.crossDomain
-    ) {
+    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
       xhr.setRequestHeader("X-CSRFToken", csrf_token);
     }
     if (!settings.url.includes("filtering")) {
@@ -127,11 +103,7 @@ const loadScript = (source, beforeEl, async = true, defer = true) => {
     script.defer = defer;
 
     function onloadHander(_, isAbort) {
-      if (
-        isAbort ||
-        !script.readyState ||
-        /loaded|complete/.test(script.readyState)
-      ) {
+      if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
         script.onload = null;
         script.onreadystatechange = null;
         script = undefined;
@@ -216,7 +188,12 @@ export const deleteInstance = function(type, id) {
     url: `/delete_instance/${type}/${id}`,
     callback: function(result) {
       $(`#instance_deletion-${id}`).remove();
-      if (type.includes("service") || type == "workflow") type = "service";
+      if (type.includes("service") || type == "workflow") {
+        type = "service";
+        if (localStorage.getItem("path").includes(id)) {
+          localStorage.removeItem("path");
+        }
+      }
       tables[type]
         .row($(`#${id}`))
         .remove()
@@ -423,10 +400,7 @@ function showServicePanel(type, id, mode) {
       $(`#original-${id}`).val(id);
     }
   }
-  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
-    "disabled",
-    true
-  );
+  $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", true);
   $(id ? `#${type}-wizard-${id}` : `#${type}-wizard`).smartWizard({
     enableAllSteps: true,
     keyNavigation: false,
@@ -470,9 +444,7 @@ export function showTypePanel(type, id, mode) {
       } else {
         panel.setHeaderTitle(`Create a New ${type}`);
         if (page == "workflow_builder" && creationMode == "create_service") {
-          $(`#${type}-workflows`).append(
-            new Option(workflow.name, workflow.id)
-          );
+          $(`#${type}-workflows`).append(new Option(workflow.name, workflow.id));
           $(`#${type}-workflows`)
             .val(workflow.id)
             .trigger("change");
@@ -544,10 +516,7 @@ function processInstance(type, instance) {
 
 export function processData(type, id) {
   if (type.includes("service") || type == "workflow") {
-    $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop(
-      "disabled",
-      false
-    );
+    $(id ? `#${type}-workflows-${id}` : `#${type}-workflows`).prop("disabled", false);
     if (id) $(`#${type}-shared-${id}`).prop("disabled", false);
   }
   call({
@@ -631,9 +600,7 @@ export function copyToClipboard(text, isId) {
       const scroll = $(window)[scrollDir]();
       const menu = $(settings.menuSelector)[direction]();
       const offset =
-        direction == "width"
-          ? $(".left_column").width()
-          : $(".header").height() + 2;
+        direction == "width" ? $(".left_column").width() : $(".header").height() + 2;
       let position = mouse + scroll - offset;
       if (mouse + menu > win && menu < mouse) {
         position -= menu;
@@ -647,10 +614,7 @@ export function notify(...args) {
   const alerts = JSON.parse(localStorage.getItem("alerts"));
   localStorage.setItem(
     "alerts",
-    JSON.stringify([
-      ...alerts,
-      [...args, moment().format("MMMM Do YYYY, h:mm:ss a")],
-    ])
+    JSON.stringify([...alerts, [...args, moment().format("MMMM Do YYYY, h:mm:ss a")]])
   );
   $("#alert-number").text(alerts.length + 1);
   alertify.notify(...args);

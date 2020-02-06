@@ -92,10 +92,7 @@ function createNode(node, nodeType) {
 function createLink(link) {
   if (clustered) return;
   let pointA = new L.LatLng(link.source_latitude, link.source_longitude);
-  let pointB = new L.LatLng(
-    link.destination_latitude,
-    link.destination_longitude
-  );
+  let pointB = new L.LatLng(link.destination_latitude, link.destination_longitude);
   const pointList = [pointA, pointB];
   const polyline = new L.Polyline(pointList, {
     color: link.color,
@@ -234,11 +231,7 @@ function displayPool(poolId, nodes, edges) {
   let container = document.getElementById(`network-${poolId}`);
   nodes = new vis.DataSet(nodes.map(deviceToNode));
   edges = new vis.DataSet(edges.map(linkToEdge));
-  const network = new vis.Network(
-    container,
-    { nodes: nodes, edges: edges },
-    {}
-  );
+  const network = new vis.Network(container, { nodes: nodes, edges: edges }, {});
   network.on("oncontext", function(properties) {
     properties.event.preventDefault();
     const node = this.getNodeAt(properties.pointer.DOM);
@@ -297,7 +290,7 @@ export function initView() {
   });
   Object.assign(action, {
     Properties: (o) => showTypePanel(o.type, o.id),
-    Connect: (d) => showConnectionPanel(d.id),
+    Connect: (d) => showConnectionPanel(d),
     Configuration: (d) => showDeviceData(d),
   });
 }

@@ -45,10 +45,13 @@ class InventoryController(BaseController):
         if protocol == "telnet":
             cmd.extend(f"telnet {address}".split())
         elif "authentication" in kwargs:
-            if kwargs["credentials"] == "device":
-                login, pwd = device.username, device.password
-            else:
-                login, pwd = kwargs["user"].name, kwargs["user"].password
+            login, pwd = (
+                (device.username, device.password)
+                if kwargs["credentials"] == "device"
+                else self.get_user_credentials()
+                if kwargs["credentials"] == "user"
+                else (kwargs["username"], kwargs["password"])
+            )
             cmd.extend(f"sshpass -p {pwd} ssh {options} {login}@{address}".split())
         else:
             cmd.extend(f"ssh {options} {address}".split())
@@ -120,6 +123,8 @@ class InventoryController(BaseController):
         for obj_type in ("device", "link"):
             sheet = workbook.add_sheet(obj_type)
             for index, property in enumerate(model_properties[obj_type]):
+                if property in ("id", "source_id", "destination_id"):
+                    continue
                 sheet.write(0, index, property)
                 for obj_index, obj in enumerate(fetch_all(obj_type), 1):
                     sheet.write(obj_index, index, getattr(obj, property))
@@ -137,6 +142,8 @@ class InventoryController(BaseController):
             for row_index in range(1, sheet.nrows):
                 values = {"dont_update_pools": True}
                 for index, property in enumerate(properties):
+                    if not property:
+                        continue
                     func = field_conversion[property_types[property]]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:

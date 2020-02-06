@@ -79,6 +79,7 @@ export function initTable(type, instance, runtime, id) {
         });
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
+      createTooltips();
       this.api().columns.adjust();
     },
     ajax: {
@@ -132,13 +133,19 @@ function refreshTablePeriodically(tableType, interval, first) {
 }
 
 class Base {
-  constructor(properties) {
+  constructor(properties, derivedProperties) {
     Object.assign(this, properties);
-    this.instance = JSON.stringify({
+    let instanceProperties = {
       id: this.id,
       name: this.name,
       type: this.type,
-    }).replace(/"/g, "'");
+    };
+    if (derivedProperties) {
+      derivedProperties.forEach((property) => {
+        instanceProperties[property] = this[property];
+      });
+    }
+    this.instance = JSON.stringify(instanceProperties).replace(/"/g, "'");
   }
 
   static createNewButton(type) {
@@ -157,7 +164,9 @@ class Base {
     return `
       <button
         class="btn btn-info"
-        onclick="eNMS.base.openPanel({name: '${type}_filtering'})"
+        onclick="eNMS.base.openPanel(
+          {name: '${type}_filtering', title: 'Advanced Search'}
+        )"
         data-tooltip="Advanced Search"
         type="button"
       >
@@ -221,13 +230,15 @@ models.device = class Device extends Base {
     return [
       super.createNewButton("device"),
       ` <button type="button" class="btn btn-primary"
-      onclick="eNMS.administration.showImportTopologyPanel()"
+      onclick="eNMS.inventory.showImportTopologyPanel()"
       data-tooltip="Export"><span class="glyphicon glyphicon-download">
       </span></button>
       <button type="button" class="btn btn-primary"
-      onclick="eNMS.base.openPanel({name: 'excel_export'})" data-tooltip="Export"
-        ><span class="glyphicon glyphicon-upload"></span
-      ></button>`,
+        onclick="eNMS.base.openPanel({name: 'excel_export'})"
+        data-tooltip="Export"
+      >
+        <span class="glyphicon glyphicon-upload"></span>
+      </button>`,
       super.searchTableButton("device"),
       super.refreshTableButton("device"),
     ];
@@ -521,8 +532,11 @@ models.service = class Service extends Base {
         className: "dt-body-left",
         render: function(_, __, instance) {
           return instance.type === "workflow"
-            ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow('${instance.id}')">${instance.scoped_name}</a></b>`
-            : instance.scoped_name;
+            ? `<b><a href="#" onclick="eNMS.workflow.switchToWorkflow(
+              '${instance.id}')">${instance.scoped_name}</a></b>`
+            : $("#parent-filtering").val() == "true"
+            ? instance.scoped_name
+            : instance.name;
         },
       },
       super.lastModifiedColumn,
@@ -657,13 +671,20 @@ models.service = class Service extends Base {
 
   static postProcessing() {
     loadServiceTypes();
-    $("#parent-filtering").on("change", function() {
-      tables["service"].ajax.reload(null, false);
-    });
+    $("#parent-filtering")
+      .selectpicker()
+      .on("change", function() {
+        tables["service"].page(0).ajax.reload(null, false);
+      });
   }
 };
 
 models.run = class Run extends Base {
+  constructor(properties) {
+    super(properties);
+    this.service = JSON.stringify(this.service_properties).replace(/"/g, "'");
+  }
+
   static get columns() {
     return [
       { data: "runtime", title: "Runtime", search: "text", width: "15%" },
@@ -695,13 +716,13 @@ models.run = class Run extends Base {
       `<ul class="pagination pagination-lg" style="margin: 0px; width: 100px">
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('logs', ${this.instance},
+          onclick="eNMS.automation.showRuntimePanel('logs', ${this.service},
           '${this.runtime}')" data-tooltip="Logs">
           <span class="glyphicon glyphicon-list"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.showRuntimePanel('results', ${this.instance},
+          onclick="eNMS.automation.showRuntimePanel('results', ${this.service},
           '${this.runtime}')" data-tooltip="Results">
           <span class="glyphicon glyphicon-list-alt"></span></button>
         </li>
@@ -713,7 +734,7 @@ models.run = class Run extends Base {
 models.result = class Result extends Base {
   constructor(properties) {
     delete properties.result;
-    super(properties);
+    super(properties, ["service_name", "device_name"]);
   }
 
   static get columns() {
@@ -855,9 +876,7 @@ models.task = class Task extends Base {
   }
 
   get buttons() {
-    const state = this.is_active
-      ? ["disabled", "active"]
-      : ["active", "disabled"];
+    const state = this.is_active ? ["disabled", "active"] : ["active", "disabled"];
     return [
       `<ul class="pagination pagination-lg" style="margin: 0px;">
         <li>
@@ -1024,10 +1043,7 @@ models.session = class Session extends Base {
   }
 
   static get controls() {
-    return [
-      super.searchTableButton("session"),
-      super.refreshTableButton("session"),
-    ];
+    return [super.searchTableButton("session"), super.refreshTableButton("session")];
   }
 
   get buttons() {
@@ -1087,8 +1103,4 @@ models.event = class Event extends Base {
   }
 };
 
-configureNamespace("table", [
-  filterTable,
-  refreshTable,
-  refreshTablePeriodically,
-]);
+configureNamespace("table", [filterTable, refreshTable, refreshTablePeriodically]);

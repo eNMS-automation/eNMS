@@ -130,8 +130,7 @@ You can configure the following parameters:
 - ``Notification Method`` Mail, Slack or Mattermost.
 - ``Notification header`` A header displayed at the beginning of the notification.
 - ``Include Result Link in summary``: whether the notification contains a link to the results.
-- ``Mail recipients`` Must be a list of email addresses, separated by comma. if left empty, the recipients defined
-  in the settings.
+- ``Mail recipients`` Must be a list of email addresses, separated by comma.
 - ``Display only failed nodes`` the notification will not include devices for which the service ran successfully.
 
 To set up the mail system, you must set the variable of the ``mail`` section in the settings.

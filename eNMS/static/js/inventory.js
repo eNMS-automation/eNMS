@@ -143,11 +143,8 @@ function handOffSSHConnection(id) {
     url: `/handoffssh/${id}`,
     form: `connection-parameters-form-${id}`,
     callback: function(result) {
-      let url = settings.app.address;
-      if (!url) {
-        url = `${window.location.protocol}//${window.location.host}`;
-      }
-      const link = `${result.username}@${window.location.hostname}:${result.port}`;
+      let loc = window.location;
+      const link = `${result.username}@${loc.hostname}:${result.port}`;
       const message = `Click here to connect to ${result.device_name}.`;
       notify(`<a href='ssh://${link}'>${message}</a>`, "success", 15);
     },
@@ -287,9 +284,11 @@ function showDeviceResultsPanel(device) {
       initTable("result", device, null, "table-result");
     },
   });
+  $("#file")[0].value = "";
 }
 
 configureNamespace("inventory", [
+  exportTopology,
   handOffSSHConnection,
   showConnectionPanel,
   sshConnection,
@@ -298,5 +297,6 @@ configureNamespace("inventory", [
   updatePools,
   showDeviceData,
   showDeviceResultsPanel,
+  showImportTopologyPanel,
   showSessionLog,
 ]);

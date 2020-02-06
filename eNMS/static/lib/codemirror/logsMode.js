@@ -7,10 +7,7 @@ CodeMirror: false
   "use strict";
 
   CodeMirror.defineMode("logs", function(conf, parserConf) {
-    let stringPrefixes = new RegExp(
-      "^(([rbuf]|(br)|(fr))?('{3}|\"{3}|['\"]))",
-      "i"
-    );
+    let stringPrefixes = new RegExp("^(([rbuf]|(br)|(fr))?('{3}|\"{3}|['\"]))", "i");
     let external = {
       startState: function(basecolumn) {
         return {

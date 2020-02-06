@@ -4,8 +4,8 @@
   method="post"
   autocomplete="off"
 >
-  {{ form.csrf_token() }} {{ form.form_type(value=form_type) }} {{
-  form.id(id=form_type + '-id', class="add-id") }}
+  {{ form.csrf_token() }} {{ form.form_type(value=form_type) }} {{ form.id(id=form_type
+  + '-id', class="add-id") }}
   <input type="hidden" id="original" name="original" class="add-id" />
   <div style="padding:20px">
     <center>
@@ -20,10 +20,7 @@
       </button>
     </center>
     <br />
-    <div
-      id="{{ form_type }}-wizard"
-      class="form_wizard wizard_horizontal add-id"
-    >
+    <div id="{{ form_type }}-wizard" class="form_wizard wizard_horizontal add-id">
       <ul class="wizard_steps">
         <li>
           <a href="#step-1">
@@ -101,8 +98,8 @@
               <div class="panel-body" style="background-color:#fafafa;">
                 <label class="readonly-when-run">Name</label>
                 <div class="form-group">
-                  {{ form.scoped_name(id=form_type + '-scoped_name',
-                  class="form-control readonly-when-run add-id required") }}
+                  {{ form.scoped_name(id=form_type + '-scoped_name', class="form-control
+                  readonly-when-run add-id required") }}
                 </div>
                 <label class="readonly-when-run">Fully Qualified Name</label>
                 <div class="form-group">
@@ -128,13 +125,13 @@
                 </fieldset>
                 <label for="workflows">Workflows</label>
                 <div class="form-group">
-                  {{ form.workflows(id=form_type + '-workflows',
-                  class="form-control add-id") }}
+                  {{ form.workflows(id=form_type + '-workflows', class="form-control
+                  add-id") }}
                 </div>
                 <label class="readonly-when-run">Description</label>
                 <div class="form-group">
-                  {{ form.description(id=form_type + '-description',
-                  class="form-control readonly-when-run add-id") }}
+                  {{ form.description(id=form_type + '-description', class="form-control
+                  readonly-when-run add-id") }}
                 </div>
                 <label class="readonly-when-run">Vendor</label>
                 <div class="form-group">
@@ -158,8 +155,8 @@
                 </div>
                 <label>Time between retries (in seconds)</label>
                 <div class="form-group">
-                  {{ form.time_between_retries(id=form_type +
-                  '-time_between_retries', class="form-control add-id") }}
+                  {{ form.time_between_retries(id=form_type + '-time_between_retries',
+                  class="form-control add-id") }}
                 </div>
               </div>
             </div>
@@ -212,22 +209,20 @@
                 </fieldset>
                 <label class="readonly-when-run">Skip Service If True</label>
                 <div class="form-group">
-                  {{ form.skip_query(id=form_type + '-skip_query',
-                  class="form-control readonly-when-run add-id") }}
+                  {{ form.skip_query(id=form_type + '-skip_query', class="form-control
+                  readonly-when-run add-id") }}
                 </div>
                 <label class="readonly-when-run">Skip Success Value</label>
                 <div class="form-group">
-                  {{ form.skip_value(id=form_type + '-skip_value',
-                  class="form-control readonly-when-run add-id") }}
+                  {{ form.skip_value(id=form_type + '-skip_value', class="form-control
+                  readonly-when-run add-id") }}
                 </div>
                 <label class="readonly-when-run">Maximum number of runs</label>
                 <div class="form-group">
                   {{ form.maximum_runs(id=form_type + '-maximum_runs',
                   class="form-control readonly-when-run add-id") }}
                 </div>
-                <label class="readonly-when-run"
-                  >Waiting time (in seconds)</label
-                >
+                <label class="readonly-when-run">Waiting time (in seconds)</label>
                 <div class="form-group">
                   {{ form.waiting_time(id=form_type + '-waiting_time',
                   class="form-control readonly-when-run add-id") }}
@@ -238,17 +233,16 @@
         </div>
       </div>
       <div id="step-2">
-        {% set groups = form.groups or {"Parameters": {"commands":
-        form.service_fields, "default": "expanded"}} %}
+        {% set groups = form.groups or {"Parameters": {"commands": form.service_fields,
+        "default": "expanded"}} %}
         <div
           class="accordion"
           id="accordion"
           role="tablist"
           aria-multiselectable="true"
         >
-          {% for group_name, group in groups.items() %} {% set group_id =
-          range(10000) | random %} {% set position = "in" if group.default ==
-          "expanded" else "" %}
+          {% for group_name, group in groups.items() %} {% set group_id = range(10000) |
+          random %} {% set position = "in" if group.default == "expanded" else "" %}
           <div class="panel" style="border-color: #000; position: relative">
             <a
               class="doc-link"
@@ -279,9 +273,8 @@
               aria-labelledby="heading-{{ group_id }}"
             >
               <div class="panel-body" style="background-color:#fafafa;">
-                {% for field_name in group.commands %} {% if field_name ==
-                "run_method" %} {% elif form[field_name].type == "BooleanField"
-                %}
+                {% for field_name in group.commands %} {% if field_name == "run_method"
+                %} {% elif form[field_name].type == "BooleanField" %}
                 <fieldset>
                   <div class="item">
                     {% if form[field_name].default %} {{
@@ -301,8 +294,8 @@
                   {% for l in entry %} {% if l.widget.input_type != 'hidden' %}
                   <label>{{ l.label }}</label>
                   <div class="form-group">
-                    {{ l(id="{}-{}".format(form_type, l.name),
-                    class="form-control add-id") }}
+                    {{ l(id="{}-{}".format(form_type, l.name), class="form-control
+                    add-id") }}
                   </div>
                   {% endif %} {% endfor %}
                 </fieldset>
@@ -358,8 +351,8 @@
               <div class="panel-body" style="background-color:#fafafa;">
                 <label for="run_method">Run method</label>
                 <div class="form-group">
-                  {{ form.run_method(id=form_type + '-run_method',
-                  class="form-control add-id no-search") }}
+                  {{ form.run_method(id=form_type + '-run_method', class="form-control
+                  add-id no-search") }}
                 </div>
                 <label for="devices">Devices</label>
                 <div class="form-group">
@@ -368,8 +361,7 @@
                 </div>
                 <label for="pools">Pools</label>
                 <div class="form-group">
-                  {{ form.pools(id=form_type + '-pools', class="form-control
-                  add-id") }}
+                  {{ form.pools(id=form_type + '-pools', class="form-control add-id") }}
                 </div>
                 <label>Device Query (define targets from a python query)</label>
                 <div class="form-group">
@@ -378,8 +370,8 @@
                 </div>
                 <label>Query Property Type</label>
                 <div class="form-group">
-                  {{ form.device_query_property(id=form_type +
-                  '-device_query_property', class="form-control add-id") }}
+                  {{ form.device_query_property(id=form_type + '-device_query_property',
+                  class="form-control add-id") }}
                 </div>
                 <fieldset>
                   <div class="item">
@@ -444,8 +436,7 @@
                   '-iteration_devices_property', class="form-control add-id") }}
                 </div>
                 <label
-                  >Iteration values: run service for each value (python
-                  query)</label
+                  >Iteration values: run service for each value (python query)</label
                 >
                 <div class="form-group">
                   {{ form.iteration_values(id=form_type + '-iteration_values',
@@ -501,8 +492,8 @@
             >
               <div class="panel-body" style="background-color:#fafafa;">
                 <div class="form-group">
-                  {{ form.result_postprocessing(id=form_type +
-                  '-result_postprocessing', class="form-control add-id") }}
+                  {{ form.result_postprocessing(id=form_type + '-result_postprocessing',
+                  class="form-control add-id") }}
                 </div>
               </div>
             </div>
@@ -568,8 +559,8 @@
                 </fieldset>
                 <label>Dictionary Match</label>
                 <div class="form-group">
-                  {{ form.dict_match(id=form_type + '-dict_match',
-                  class="form-control add-id") }}
+                  {{ form.dict_match(id=form_type + '-dict_match', class="form-control
+                  add-id") }}
                 </div>
                 <fieldset>
                   <div class="item">
@@ -649,8 +640,8 @@
                 </div>
                 <label>Notification Header</label>
                 <div class="form-group">
-                  {{ form.notification_header(id=form_type +
-                  '-notification_header', class="form-control add-id") }}
+                  {{ form.notification_header(id=form_type + '-notification_header',
+                  class="form-control add-id") }}
                 </div>
                 <fieldset>
                   <div class="item">

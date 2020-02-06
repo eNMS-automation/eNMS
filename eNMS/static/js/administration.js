@@ -83,7 +83,6 @@ function importTopology() {
       notify(result, "success", 5);
     },
   });
-  $("#file")[0].value = "";
 }
 
 function getClusterStatus() {
@@ -255,6 +254,10 @@ function saveFile(file) {
   });
 }
 
+function createNewFolder() {
+  notify("Not implemented yet.", "error", 5);
+}
+
 function showFileUploadPanel(folder) {
   const path = folder.replace(/\//g, ">");
   openPanel({
@@ -350,11 +353,11 @@ function displayFiles() {
 }
 
 configureNamespace("administration", [
+  createNewFolder,
   databaseDeletion,
   deleteFile,
   displayFiles,
   editFile,
-  exportTopology,
   getClusterStatus,
   getGitContent,
   importService,
@@ -366,6 +369,5 @@ configureNamespace("administration", [
   showSettings,
   showFileUploadPanel,
   showImportServicePanel,
-  showImportTopologyPanel,
   showMigrationPanel,
 ]);

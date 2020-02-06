@@ -542,13 +542,12 @@ class BaseController:
         self,
         subject,
         content,
+        recipients="",
         sender=None,
-        recipients=None,
         filename=None,
         file_content=None,
     ):
         sender = sender or self.settings["mail"]["sender"]
-        recipients = recipients or self.settings["mail"]["recipients"]
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = recipients
@@ -598,7 +597,7 @@ class BaseController:
                 parameters = yaml.load(data)
                 device.update(**{"dont_update_pools": True, **parameters})
             for data in ("configuration", "operational_data"):
-                filepath = Path(dir.path) / dir.name / data
+                filepath = Path(dir.path) / data
                 if not filepath.exists():
                     continue
                 with open(filepath) as file:

@@ -19,6 +19,7 @@ from slackclient import SlackClient
 from sqlalchemy import Boolean, ForeignKey, Integer
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
+from threading import currentThread, enumerate, Thread
 from time import sleep
 from traceback import format_exc
 from xmltodict import parse
@@ -298,6 +299,7 @@ class Run(AbstractBase):
             results["logs"] = app.run_logs.pop(self.runtime, [])
             if self.runtime == self.parent_runtime:
                 self.state = results["state"] = app.run_db.pop(self.runtime)
+                self.close_remaining_connections()
             if self.task and not self.task.frequency:
                 self.task.is_active = False
             results["properties"] = {
@@ -406,7 +408,7 @@ class Run(AbstractBase):
                     getattr(self, "close_connection", False)
                     or self.runtime == self.parent_runtime
                 ):
-                    self.close_device_connection(device)
+                    self.close_device_connection(device.name)
                 self.convert_result(results)
                 if "success" not in results:
                     results["success"] = True
@@ -485,7 +487,7 @@ class Run(AbstractBase):
     def log(self, severity, content, device=None):
         log = f"{app.get_time()} - {severity} - SERVICE {self.service.scoped_name}"
         if device:
-            log += f" - DEVICE {device.name}"
+            log += f" - DEVICE {device if isinstance(device, str) else device.name}"
         log += f" : {content}"
         app.run_logs[self.parent_runtime].append(log)
 
@@ -745,7 +747,7 @@ class Run(AbstractBase):
         return connection
 
     def netmiko_connection(self, device):
-        connection = self.get_or_close_connection("netmiko", device)
+        connection = self.get_or_close_connection("netmiko", device.name)
         if connection:
             self.log("info", "Using cached Netmiko connection", device)
             return self.update_netmiko_connection(connection)
@@ -774,7 +776,7 @@ class Run(AbstractBase):
         return netmiko_connection
 
     def napalm_connection(self, device):
-        connection = self.get_or_close_connection("napalm", device)
+        connection = self.get_or_close_connection("napalm", device.name)
         if connection:
             self.log("info", "Using cached NAPALM connection", device)
             return connection
@@ -821,7 +823,7 @@ class Run(AbstractBase):
 
     def get_connection(self, library, device):
         cache = app.connections_cache[library].get(self.parent_runtime, {})
-        return cache.get(device.name)
+        return cache.get(device)
 
     def close_device_connection(self, device):
         for library in ("netmiko", "napalm"):
@@ -829,10 +831,19 @@ class Run(AbstractBase):
             if connection:
                 self.disconnect(library, device, connection)
 
+    def close_remaining_connections(self):
+        for library in ("netmiko", "napalm"):
+            for connection in app.connections_cache[library][self.runtime].items():
+                Thread(target=self.disconnect, args=(library, *connection)).start()
+        current_thread = currentThread()
+        for thread in enumerate():
+            if thread != current_thread:
+                thread.join()
+
     def disconnect(self, library, device, connection):
         try:
             connection.disconnect() if library == "netmiko" else connection.close()
-            app.connections_cache[library][self.parent_runtime].pop(device.name)
+            app.connections_cache[library][self.parent_runtime].pop(device)
             self.log("info", f"Closed {library} connection", device)
         except Exception as exc:
             self.log(

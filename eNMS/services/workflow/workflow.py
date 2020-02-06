@@ -164,8 +164,6 @@ class Workflow(Service):
                         targets[successor.name] |= set(summary[edge_type])
                         services.append(successor)
                         run.edge_state[edge.id] += len(summary[edge_type])
-            if not results.get("result") == "skipped":
-                sleep(service.waiting_time)
         success_devices = targets[end.name]
         failure_devices = targets[start.name] - success_devices
         success = not failure_devices
@@ -225,8 +223,6 @@ class Workflow(Service):
                     run.edge_state[edge.id] += 1
                 else:
                     run.edge_state[edge.id] = "DONE"
-            if not results.get("result") == "skipped":
-                sleep(service.waiting_time)
         Session.refresh(run)
         run.restart_run = restart_run
         return {"payload": payload, "success": end in visited}

@@ -477,6 +477,9 @@ class Run(AbstractBase):
             self.create_result(results, device)
         Session.commit()
         self.log("info", "FINISHED", device)
+        if self.waiting_time:
+            self.log("info", f"SLEEP {self.waiting_time} seconds...", device)
+            sleep(self.waiting_time)
         return results
 
     def log(self, severity, content, device=None):

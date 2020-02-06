@@ -8,6 +8,7 @@ from eNMS.properties import private_properties
 
 
 def filtering_form_generator():
+    device_form = None
     for form_type, properties in model_properties.items():
         relations = {}
         properties = list(
@@ -20,7 +21,7 @@ def filtering_form_generator():
                 continue
             relations[model] = MultipleInstanceField(model)
             relationships[f"{form_type}_filtering"][model] = relation
-        type(
+        form = type(
             f"{form_type.capitalize()}FilteringForm",
             (BaseForm,),
             {
@@ -60,6 +61,13 @@ def filtering_form_generator():
                 },
             },
         )
+        if form_type == "device":
+            device_form = form
+    return device_form
 
 
-filtering_form_generator()
+device_form = filtering_form_generator()
+
+
+class ConfigurationFilteringForm(device_form):
+    form_type = HiddenField(default="configuration_filtering")

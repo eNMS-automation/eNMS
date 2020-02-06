@@ -356,7 +356,7 @@ models.configuration = class Configuration extends Base {
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
           <div style="display: inline-flex">
-            <div>${super.searchTableButton("device")}</div>
+            <div>${super.searchTableButton("configuration")}</div>
             <div style="padding-left: 20px">
               <div class="checkbox">
                 <label>

@@ -123,6 +123,11 @@ export function initTable(type, instance, runtime, id) {
               target: `#${elementId}-search`,
               ttipEvent: "click",
               theme: "light",
+              callback: function () {
+                $(`#${data.data}_filter`).on("change", function() {
+                  filterTable(type);
+                });
+              },
               onbeforeclose: function (panel) {
                 filterTable(type);
                 $(this).css("z-index", -1);
@@ -133,10 +138,6 @@ export function initTable(type, instance, runtime, id) {
             });
           }
         });
-      console.log($(".search-select").length)
-      $(".search-select").on("change", function() {
-        
-      });
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
       createTooltips();

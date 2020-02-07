@@ -483,7 +483,6 @@ class BaseController:
 
     def table_filtering(self, table, **kwargs):
         model = models[table]
-        operator = and_ if kwargs["form"].get("operator", "all") == "all" else or_
         ordering = getattr(
             getattr(
                 model,
@@ -516,7 +515,7 @@ class BaseController:
                     constraints.append(~models["service"].workflows.any())
         if table == "run":
             constraints.append(models["run"].parent_runtime == models["run"].runtime)
-        result = Session.query(model).filter(operator(*constraints))
+        result = Session.query(model).filter(and_(*constraints))
         if ordering:
             result = result.order_by(ordering())
         return {

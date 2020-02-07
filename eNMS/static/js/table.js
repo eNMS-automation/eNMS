@@ -94,9 +94,21 @@ export function initTable(type, instance, runtime, id) {
             });
             if (data.search == "text") {
               const target = document.getElementById(`${elementId}-search`);
-              jsPanel.tooltip.create({
+              const tt = jsPanel.tooltip.create({
                 id: `tooltip-${elementId}`,
-                content: "test",
+                content: `
+                  <div class="modal-body">
+                    <select
+                      id="${elementId}_filter"
+                      name="${elementId}_filter"
+                      class="form-control search-select"
+                      style="width: 100%; height: 30px; margin-top: 5px"
+                    >
+                      <option value="inclusion">Inclusion</option>
+                      <option value="equality">Equality</option>
+                      <option value="regex">Regular Expression</option>
+                    </select>
+                  </div>`,
                 contentSize: "auto",
                 connector: true,
                 delay: 0,
@@ -104,15 +116,29 @@ export function initTable(type, instance, runtime, id) {
                 mode: "sticky",
                 position: {
                   my: "right-top",
-                  at: "left-bottom",
+                  at: "right-bottom",
                 },
                 target: target,
                 ttipEvent: "click",
                 theme: "light",
+                onbeforeclose: function (panel) {
+                  $(this).hide();
+                  return;
+                },
+                onclosed: function(panel){
+                  $(this).hide();
+                }
+              });
+              $(target).on("click", function() {
+                $(`#tooltip-${elementId}`).show();
+              });
+              $(`#${elementId}_filter`).on("change", function() {
+                console.log("test");
+                filterTable(type);
               });
             }
         });
-
+      $(".search-select").selectpicker();
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
       createTooltips();

@@ -92,53 +92,51 @@ export function initTable(type, instance, runtime, id) {
             .on("click", function(e) {
               e.stopPropagation();
             });
-            if (data.search == "text") {
-              const target = document.getElementById(`${elementId}-search`);
-              const tt = jsPanel.tooltip.create({
-                id: `tooltip-${elementId}`,
-                content: `
-                  <div class="modal-body">
-                    <select
-                      id="${elementId}_filter"
-                      name="${elementId}_filter"
-                      class="form-control search-select"
-                      style="width: 100%; height: 30px; margin-top: 5px"
-                    >
-                      <option value="inclusion">Inclusion</option>
-                      <option value="equality">Equality</option>
-                      <option value="regex">Regular Expression</option>
-                    </select>
-                  </div>`,
-                contentSize: "auto",
-                connector: true,
-                delay: 0,
-                header: false,
-                mode: "sticky",
-                position: {
-                  my: "right-top",
-                  at: "right-bottom",
-                },
-                target: target,
-                ttipEvent: "click",
-                theme: "light",
-                onbeforeclose: function (panel) {
-                  $(this).hide();
-                  return;
-                },
-                onclosed: function(panel){
-                  $(this).hide();
-                }
-              });
-              $(target).on("click", function() {
-                $(`#tooltip-${elementId}`).show();
-              });
-              $(`#${elementId}_filter`).on("change", function() {
-                console.log("test");
+          if (data.search == "text") {
+            const target = document.getElementById(`${elementId}-search`);
+            jsPanel.tooltip.create({
+              id: `tooltip-${elementId}`,
+              container: `#controls-${type}`,
+              content: `
+                <div class="modal-body">
+                  <select
+                    id="${data.data}_filter"
+                    name="${data.data}_filter"
+                    class="form-control search-select"
+                    style="width: 100%; height: 30px; margin-top: 5px"
+                  >
+                    <option value="inclusion">Inclusion</option>
+                    <option value="equality">Equality</option>
+                    <option value="regex">Regular Expression</option>
+                  </select>
+                </div>`,
+              contentSize: "auto",
+              connector: true,
+              delay: 0,
+              headerTitle: 'Filtering Mode',
+              headerControls: 'closeonly sm',
+              mode: "sticky",
+              position: {
+                my: "right-top",
+                at: "right-bottom",
+              },
+              target: `#${elementId}-search`,
+              ttipEvent: "click",
+              theme: "light",
+              onbeforeclose: function (panel) {
                 filterTable(type);
-              });
-            }
+                $(this).css("z-index", -1);
+              },
+            });
+            $(target).on("click", function() {
+              $(`#tooltip-${elementId}`).css("z-index", 10);
+            });
+          }
         });
-      $(".search-select").selectpicker();
+      console.log($(".search-select").length)
+      $(".search-select").on("change", function() {
+        
+      });
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
       createTooltips();

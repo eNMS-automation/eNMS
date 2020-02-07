@@ -21,53 +21,48 @@ def filtering_form_generator():
                 continue
             relations[model] = MultipleInstanceField(model)
             relationships[f"{form_type}_filtering"][model] = relation
-        form = type(
-            f"{form_type.capitalize()}FilteringForm",
-            (BaseForm,),
-            {
-                "template": "filtering",
-                "properties": list(relations) + list(properties),
-                "form_type": HiddenField(default=f"{form_type}_filtering"),
-                "operator": SelectField(
-                    "Type of match",
-                    choices=(
-                        ("all", "Match if all properties match"),
-                        ("any", "Match if any property matches"),
+        forms = ("device", "configuration") if form_type == "device" else (form_type,)
+        for form in forms:
+            type(
+                f"{form.capitalize()}FilteringForm",
+                (BaseForm,),
+                {
+                    "template": "filtering",
+                    "properties": sorted(properties) + sorted(relations),
+                    "form_type": HiddenField(default=f"{form}_filtering"),
+                    "operator": SelectField(
+                        "Type of match",
+                        choices=(
+                            ("all", "Match if all properties match"),
+                            ("any", "Match if any property matches"),
+                        ),
                     ),
-                ),
-                **{
-                    **{property: StringField() for property in properties},
                     **{
-                        f"{property}_filter": SelectField(
-                            choices=(
-                                ("inclusion", "Inclusion"),
-                                ("equality", "Equality"),
-                                ("regex", "Regular Expression"),
+                        **{property: StringField() for property in properties},
+                        **{
+                            f"{property}_filter": SelectField(
+                                choices=(
+                                    ("inclusion", "Inclusion"),
+                                    ("equality", "Equality"),
+                                    ("regex", "Regular Expression"),
+                                )
                             )
-                        )
-                        for property in properties
-                    },
-                    **relations,
-                    **{
-                        f"{relation}_filter": SelectField(
-                            choices=(
-                                ("any", "Any"),
-                                ("not_any", "Not related to Any"),
-                                ("none", "None"),
+                            for property in properties
+                        },
+                        **relations,
+                        **{
+                            f"{relation}_filter": SelectField(
+                                choices=(
+                                    ("any", "Any"),
+                                    ("not_any", "Not related to Any"),
+                                    ("none", "None"),
+                                )
                             )
-                        )
-                        for relation in relations
+                            for relation in relations
+                        },
                     },
                 },
-            },
-        )
-        if form_type == "device":
-            device_form = form
-    return device_form
+            )
 
 
-device_form = filtering_form_generator()
-
-
-class ConfigurationFilteringForm(device_form):
-    form_type = HiddenField(default="configuration_filtering")
+filtering_form_generator()

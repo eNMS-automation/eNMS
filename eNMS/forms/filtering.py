@@ -10,11 +10,6 @@ from eNMS.properties import private_properties
 def filtering_form_generator():
     for form_type, properties in model_properties.items():
         relations = {}
-        properties = list(
-            OrderedDict.fromkeys(
-                p for p in properties if p not in private_properties + ["type", "id"]
-            )
-        )
         for model, relation in relationships[form_type].items():
             if model in ("edges", "results"):
                 continue
@@ -25,27 +20,9 @@ def filtering_form_generator():
             (BaseForm,),
             {
                 "template": "filtering",
-                "properties": sorted(properties) + sorted(relations),
+                "properties": sorted(relations),
                 "form_type": HiddenField(default=f"{form_type}_filtering"),
-                "operator": SelectField(
-                    "Type of match",
-                    choices=(
-                        ("all", "Match if all properties match"),
-                        ("any", "Match if any property matches"),
-                    ),
-                ),
                 **{
-                    **{property: StringField() for property in properties},
-                    **{
-                        f"{property}_filter": SelectField(
-                            choices=(
-                                ("inclusion", "Inclusion"),
-                                ("equality", "Equality"),
-                                ("regex", "Regular Expression"),
-                            )
-                        )
-                        for property in properties
-                    },
                     **relations,
                     **{
                         f"{relation}_filter": SelectField(

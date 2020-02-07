@@ -130,11 +130,11 @@ export function initTable(type, instance, runtime, id) {
               },
               onbeforeclose: function (panel) {
                 filterTable(type);
-                $(this).css("z-index", -1);
+                $(this).hide();
               },
             });
             $(target).on("click", function() {
-              $(`#tooltip-${elementId}`).css("z-index", 10);
+              $(`#tooltip-${elementId}`).show();
             });
           }
         });

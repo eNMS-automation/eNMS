@@ -125,13 +125,7 @@ export function initTable(type, instance, runtime, id) {
               target: `#${elementId}-search`,
               ttipEvent: "click",
               theme: "light",
-              callback: function () {
-                $(`#${data.data}_filter`).on("change", function() {
-                  filterTable(type);
-                });
-              },
               onbeforeclose: function (panel) {
-                filterTable(type);
                 $(this).hide();
               },
             });
@@ -156,12 +150,13 @@ export function initTable(type, instance, runtime, id) {
         contentSize: "auto",
         connector: true,
         delay: 0,
-        headerTitle: 'Filtering Mode',
-        headerControls: 'closeonly sm',
+        headerTitle: 'Relationship-based Filtering',
+        headerControls: 'closeonly',
         mode: "sticky",
         position: {
-          my: "right-top",
-          at: "right-bottom",
+          my: "center-top",
+          at: "center-bottom",
+          offsetY: 18,
         },
         target: `#advanced-search`,
         ttipEvent: "click",

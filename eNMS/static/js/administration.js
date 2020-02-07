@@ -6,13 +6,7 @@ Dropzone: false
 JSONEditor: false
 */
 
-import {
-  call,
-  configureNamespace,
-  editors,
-  notify,
-  openPanel,
-} from "./base.js";
+import { call, configureNamespace, editors, notify, openPanel } from "./base.js";
 import { tables } from "./table.js";
 
 let settingsEditor;
@@ -36,11 +30,7 @@ function showSettings() {
     name: "settings",
     title: "Settings",
     callback: function() {
-      settingsEditor = new JSONEditor(
-        document.getElementById("content"),
-        {},
-        settings
-      );
+      settingsEditor = new JSONEditor(document.getElementById("content"), {}, settings);
     },
   });
 }
@@ -181,18 +171,15 @@ function editFile(file) {
         callback: () => {
           const display = document.getElementById(`file_content-${filepath}`);
           // eslint-disable-next-line new-cap
-          let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(
-            display,
-            {
-              lineWrapping: true,
-              lineNumbers: true,
-              theme: "cobalt",
-              matchBrackets: true,
-              mode: "python",
-              extraKeys: { "Ctrl-F": "findPersistent" },
-              scrollbarStyle: "overlay",
-            }
-          ));
+          let fileEditor = (editors[filepath] = CodeMirror.fromTextArea(display, {
+            lineWrapping: true,
+            lineNumbers: true,
+            theme: "cobalt",
+            matchBrackets: true,
+            mode: "python",
+            extraKeys: { "Ctrl-F": "findPersistent" },
+            scrollbarStyle: "overlay",
+          }));
           fileEditor.setSize("100%", "100%");
           fileEditor.setValue(content);
           fileEditor.refresh();

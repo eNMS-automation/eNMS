@@ -66,11 +66,11 @@ export function showConnectionPanel(device) {
       $(`#custom-credentials-${device.id}`).change(function() {
         $(`#credentials-fields-${device.id}`).show();
       });
-      $(
-        `#device-credentials-${device.id},#user-credentials-${device.id}`
-      ).change(function() {
-        $(`#credentials-fields-${device.id}`).hide();
-      });
+      $(`#device-credentials-${device.id},#user-credentials-${device.id}`).change(
+        function() {
+          $(`#credentials-fields-${device.id}`).hide();
+        }
+      );
     },
   });
 }

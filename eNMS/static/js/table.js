@@ -38,20 +38,9 @@ export function initTable(type, instance, runtime, id) {
         .columns()
         .every(function(index) {
           const data = models[type].columns[index];
-          let element;
-          if (data.search == "text") {
-            element = `
-              <input
-                id="${type}_filtering-${data.data}"
-                name="${data.data}"
-                type="text"
-                placeholder="&#xF002;"
-                class="form-control"
-                style="font-family:Arial, FontAwesome; width: 100%;
-                height: 30px; margin-top: 5px"
-              >`;
-          } else if (data.search == "bool") {
-            element = `
+          const element =
+            data.search == "bool"
+              ? `
               <select
                 id="${type}_filtering-${data.data}"
                 name="${data.data}"
@@ -61,8 +50,18 @@ export function initTable(type, instance, runtime, id) {
                 <option value="">Any</option>
                 <option value="bool-true">True</option>
                 <option value="bool-false">False</option>
-              </select>`;
-          }
+              </select>
+              `
+              : `
+              <input
+                id="${type}_filtering-${data.data}"
+                name="${data.data}"
+                type="text"
+                placeholder="&#xF002;"
+                class="form-control"
+                style="font-family:Arial, FontAwesome; width: 100%;
+                height: 30px; margin-top: 5px"
+              >`;
           $(element)
             .appendTo($(this.header()))
             .on("keyup", function() {

@@ -227,15 +227,7 @@ export function createTooltips() {
   });
 }
 
-export function openPanel({
-  name,
-  title,
-  id,
-  callback,
-  type,
-  duplicate,
-  content,
-}) {
+export function openPanel({ name, title, id, callback, type, duplicate, content }) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
@@ -308,10 +300,7 @@ function preprocessForm(panel, id, type, duplicate) {
     }
   });
   panel.querySelectorAll(".doc-link").forEach((el) => {
-    $(el).attr(
-      "href",
-      `${settings.app.documentation_url}${$(el).attr("href")}`
-    );
+    $(el).attr("href", `${settings.app.documentation_url}${$(el).attr("href")}`);
   });
 }
 

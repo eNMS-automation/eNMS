@@ -39,11 +39,12 @@ export function initTable(type, instance, runtime, id) {
         .every(function(index) {
           const data = models[type].columns[index];
           let element;
+          const elementId = `${type}_filtering-${data.data}`;
           if (data.search == "text") {
             element = `
             <div class="input-group">
               <input
-                id="${type}_filtering-${data.data}"
+                id="${elementId}"
                 name="${data.data}"
                 type="text"
                 placeholder="&#xF002;"
@@ -53,6 +54,7 @@ export function initTable(type, instance, runtime, id) {
               >
               <span class="input-group-btn">
                 <button
+                  id="${elementId}-search"
                   class="btn btn-default"
                   type="button"
                   style="width: 10px; height: 30px; margin-top: 5px; padding: 15 0; ">
@@ -63,11 +65,11 @@ export function initTable(type, instance, runtime, id) {
                     </span>
                 </button>
               </span>
-            </div>`
+            </div>`;
           } else if (data.search == "bool") {
             element = `
               <select
-                id="${type}_filtering-${data.data}"
+                id="${elementId}"
                 name="${data.data}"
                 class="form-control"
                 style="width: 100%; height: 30px; margin-top: 5px"
@@ -90,7 +92,27 @@ export function initTable(type, instance, runtime, id) {
             .on("click", function(e) {
               e.stopPropagation();
             });
+            if (data.search == "text") {
+              const target = document.getElementById(`${elementId}-search`);
+              jsPanel.tooltip.create({
+                id: `tooltip-${elementId}`,
+                content: "test",
+                contentSize: "auto",
+                connector: true,
+                delay: 0,
+                header: false,
+                mode: "sticky",
+                position: {
+                  my: "right-top",
+                  at: "left-bottom",
+                },
+                target: target,
+                ttipEvent: "click",
+                theme: "light",
+              });
+            }
         });
+
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
       createTooltips();

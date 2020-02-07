@@ -41,6 +41,7 @@ export function initTable(type, instance, runtime, id) {
           let element;
           if (data.search == "text") {
             element = `
+            <div class="input-group">
               <input
                 id="${type}_filtering-${data.data}"
                 name="${data.data}"
@@ -49,7 +50,20 @@ export function initTable(type, instance, runtime, id) {
                 class="form-control"
                 style="font-family:Arial, FontAwesome; width: 100%;
                 height: 30px; margin-top: 5px"
-              >`;
+              >
+              <span class="input-group-btn">
+                <button
+                  class="btn btn-default"
+                  type="button"
+                  style="width: 10px; height: 30px; margin-top: 5px; padding: 15 0; ">
+                    <span
+                      class="glyphicon glyphicon-center glyphicon-menu-down"
+                      aria-hidden="true"
+                      style="font-size: 10px">
+                    </span>
+                </button>
+              </span>
+            </div>`
           } else if (data.search == "bool") {
             element = `
               <select

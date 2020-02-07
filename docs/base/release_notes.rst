@@ -2,6 +2,16 @@
 Release Notes
 =============
 
+Version 3.20
+------------
+
+- Add configuration management mechanism
+
+MIGRATION:
+- In netmiko configuration backup service, rename:
+  * "configuration" -> "configuration_command"
+  * "operational_data" -> "operational_data_command"
+
 Version 3.19
 ------------
 

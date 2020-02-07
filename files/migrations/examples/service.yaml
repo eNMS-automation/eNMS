@@ -4683,7 +4683,7 @@
   waiting_time: 0
 - close_connection: true
   config_mode: false
-  configuration: show run
+  configuration_command: show run
   content_match: ''
   content_match_regex: false
   conversion_method: none
@@ -4719,7 +4719,7 @@
   notification_header: ''
   number_of_retries: 0
   operating_system: ''
-  operational_data:
+  operational_data_command:
   - {command: show users, prefix: shusers}
   - {command: show ip interface brief, prefix: shipintbr}
   - {command: show vrf, prefix: ''}

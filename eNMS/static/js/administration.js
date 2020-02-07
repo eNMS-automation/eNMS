@@ -104,6 +104,15 @@ function databaseDeletion() {
   });
 }
 
+// eslint-disable-next-line
+function resultLogDeletion() {
+  alertify.notify("Starting to delete...", "success", 5);
+  fCall("/result_log_deletion", "result_log_deletion-form", function(result) {
+    alertify.notify("Deletion done.", "success", 5);
+    $("#result_log_deletion").remove();
+  });
+}
+
 function getGitContent() {
   call("/get_git_content", function(result) {
     notify("Action successful.", "success", 5);
@@ -272,6 +281,7 @@ configureNamespace("administration", [
   importService,
   migrationsExport,
   migrationsImport,
+  resultLogDeletion,
   saveSettings,
   saveFile,
   scanCluster,

@@ -133,6 +133,7 @@ class BaseController:
         "migration_export",
         "migration_import",
         "reset_status",
+        "result_log_deletion",
         "run_service",
         "save_file",
         "save_parameters",

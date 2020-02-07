@@ -137,7 +137,7 @@ export function initTable(type, instance, runtime, id) {
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
       jsPanel.tooltip.create({
-        id: `filtering`,
+        id: "filtering",
         container: `#controls-${type}`,
         contentAjax: {
           url: `../form/device_filtering`,
@@ -161,6 +161,12 @@ export function initTable(type, instance, runtime, id) {
         target: `#advanced-search`,
         ttipEvent: "click",
         theme: "light",
+        onbeforeclose: function (panel) {
+          $(this).hide();
+        },
+      });
+      $("#advanced-search").on("click", function() {
+        $("#filtering").show();
       });
       createTooltips();
       this.api().columns.adjust();

@@ -38,21 +38,9 @@ export function initTable(type, instance, runtime, id) {
         .columns()
         .every(function(index) {
           const data = models[type].columns[index];
-          const element =
-            data.search == "bool"
-              ? `
-              <select
-                id="${type}_filtering-${data.data}"
-                name="${data.data}"
-                class="form-control"
-                style="width: 100%; height: 30px; margin-top: 5px"
-              >
-                <option value="">Any</option>
-                <option value="bool-true">True</option>
-                <option value="bool-false">False</option>
-              </select>
-              `
-              : `
+          let element;
+          if (data.search == "text") {
+            element = `
               <input
                 id="${type}_filtering-${data.data}"
                 name="${data.data}"
@@ -62,6 +50,19 @@ export function initTable(type, instance, runtime, id) {
                 style="font-family:Arial, FontAwesome; width: 100%;
                 height: 30px; margin-top: 5px"
               >`;
+          } else if (data.search == "bool") {
+            element = `
+              <select
+                id="${type}_filtering-${data.data}"
+                name="${data.data}"
+                class="form-control"
+                style="width: 100%; height: 30px; margin-top: 5px"
+              >
+                <option value="">Any</option>
+                <option value="bool-true">True</option>
+                <option value="bool-false">False</option>
+              </select>`;
+          }
           $(element)
             .appendTo($(this.header()))
             .on("keyup", function() {
@@ -354,18 +355,15 @@ models.configuration = class Configuration extends Base {
           <input id="data-type" name="data-type" style="width: 200px" type="checkbox">
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
-          <div style="display: inline-flex">
-            <div>${super.searchTableButton("configuration")}</div>
-            <div style="padding-left: 20px">
-              <div class="checkbox">
-                <label>
-                  <input
-                    id="search-type"
-                    name="search-type"
-                    type="checkbox"
-                  > Regular Expression
-                </label>
-              </div>
+          <div style="padding-left: 20px">
+            <div class="checkbox">
+              <label>
+                <input
+                  id="search-type"
+                  name="search-type"
+                  type="checkbox"
+                > Regular Expression
+              </label>
             </div>
           </div>
         </div>

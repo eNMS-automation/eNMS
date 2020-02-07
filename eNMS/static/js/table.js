@@ -4,9 +4,11 @@ page: false
 */
 
 import {
+  configureForm,
   configureNamespace,
   createTooltips,
   notify,
+  preprocessForm,
   serializeForm,
   userIsActive,
 } from "./base.js";
@@ -140,6 +142,31 @@ export function initTable(type, instance, runtime, id) {
         });
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
+      jsPanel.tooltip.create({
+        id: `filtering`,
+        container: `#controls-${type}`,
+        contentAjax: {
+          url: `../form/device_filtering`,
+          done: function(panel) {
+            panel.content.innerHTML = this.responseText;
+            preprocessForm(panel);
+            configureForm(`${type}_filtering`);
+          },
+        },
+        contentSize: "auto",
+        connector: true,
+        delay: 0,
+        headerTitle: 'Filtering Mode',
+        headerControls: 'closeonly sm',
+        mode: "sticky",
+        position: {
+          my: "right-top",
+          at: "right-bottom",
+        },
+        target: `#advanced-search`,
+        ttipEvent: "click",
+        theme: "light",
+      });
       createTooltips();
       this.api().columns.adjust();
     },
@@ -224,10 +251,8 @@ class Base {
   static searchTableButton(type) {
     return `
       <button
+        id="advanced-search"
         class="btn btn-info"
-        onclick="eNMS.base.openPanel(
-          {name: '${type}_filtering', title: 'Advanced Search'}
-        )"
         data-tooltip="Advanced Search"
         type="button"
       >

@@ -137,10 +137,11 @@ export function initTable(type, instance, runtime, id) {
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
       jsPanel.tooltip.create({
+        autoshow: true,
         id: "filtering",
         container: `#controls-${type}`,
         contentAjax: {
-          url: `../form/device_filtering`,
+          url: `../form/${type}_filtering`,
           done: function(panel) {
             panel.content.innerHTML = this.responseText;
             preprocessForm(panel);

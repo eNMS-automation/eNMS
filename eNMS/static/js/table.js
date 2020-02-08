@@ -44,22 +44,22 @@ export function initTable(type, instance, runtime, id) {
           const elementId = `${type}_filtering-${data.data}`;
           if (data.search == "text") {
             element = `
-            <div class="input-group">
+            <div class="input-group" style="width:100%">
               <input
                 id="${elementId}"
                 name="${data.data}"
                 type="text"
                 placeholder="&#xF002;"
                 class="form-control"
-                style="font-family:Arial, FontAwesome; width: 100%;
+                style="font-family:Arial, FontAwesome;
                 height: 30px; margin-top: 5px"
               >
-              <span class="input-group-btn">
+              <span class="input-group-btn" style="width: 10px;">
                 <button
                   id="${elementId}-search"
-                  class="btn btn-default"
+                  class="btn btn-default pull-right"
                   type="button"
-                  style="width: 10px; height: 30px; margin-top: 5px; padding: 15 0; ">
+                  style="height: 30px; margin-top: 5px">
                     <span
                       class="glyphicon glyphicon-center glyphicon-menu-down"
                       aria-hidden="true"
@@ -136,39 +136,41 @@ export function initTable(type, instance, runtime, id) {
         });
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
-      jsPanel.tooltip.create({
-        autoshow: true,
-        id: "filtering",
-        container: `#controls-${type}`,
-        contentAjax: {
-          url: `../form/${type}_filtering`,
-          done: function(panel) {
-            panel.content.innerHTML = this.responseText;
-            preprocessForm(panel);
-            configureForm(`${type}_filtering`);
+      if ($("#advanced-search").length) {
+        jsPanel.tooltip.create({
+          autoshow: true,
+          id: "filtering",
+          container: `#controls-${type}`,
+          contentAjax: {
+            url: `../form/${type}_filtering`,
+            done: function(panel) {
+              panel.content.innerHTML = this.responseText;
+              preprocessForm(panel);
+              configureForm(`${type}_filtering`);
+            },
           },
-        },
-        contentSize: "auto",
-        connector: true,
-        delay: 0,
-        headerTitle: 'Relationship-based Filtering',
-        headerControls: 'closeonly',
-        mode: "sticky",
-        position: {
-          my: "center-top",
-          at: "center-bottom",
-          offsetY: 18,
-        },
-        target: `#advanced-search`,
-        ttipEvent: "click",
-        theme: "light",
-        onbeforeclose: function (panel) {
-          $(this).hide();
-        },
-      });
-      $("#advanced-search").on("click", function() {
-        $("#filtering").show();
-      });
+          contentSize: "auto",
+          connector: true,
+          delay: 0,
+          headerTitle: 'Relationship-based Filtering',
+          headerControls: 'closeonly',
+          mode: "sticky",
+          position: {
+            my: "center-top",
+            at: "center-bottom",
+            offsetY: 18,
+          },
+          target: `#advanced-search`,
+          ttipEvent: "click",
+          theme: "light",
+          onbeforeclose: function (panel) {
+            $(this).hide();
+          },
+        });
+        $("#advanced-search").on("click", function() {
+          $("#filtering").show();
+        });
+      }
       createTooltips();
       this.api().columns.adjust();
     },
@@ -1115,7 +1117,6 @@ models.changelog = class Changelog extends Base {
   static get controls() {
     return [
       super.createNewButton("changelog"),
-      super.searchTableButton("changelog"),
       super.refreshTableButton("changelog"),
     ];
   }
@@ -1133,7 +1134,7 @@ models.session = class Session extends Base {
   }
 
   static get controls() {
-    return [super.searchTableButton("session"), super.refreshTableButton("session")];
+    return [super.refreshTableButton("session")];
   }
 
   get buttons() {

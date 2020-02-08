@@ -4,7 +4,6 @@ from sqlalchemy import Boolean, Integer
 from sqlalchemy.orm import relationship
 
 from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
-from eNMS.database.associations import pool_user_table
 from eNMS.database.base import AbstractBase
 
 
@@ -26,7 +25,6 @@ class User(AbstractBase, UserMixin):
     email = Column(SmallString)
     name = Column(SmallString)
     permissions = Column(MutableList)
-    pools = relationship("Pool", secondary=pool_user_table, back_populates="users")
     password = Column(SmallString)
     small_menu = Column(Boolean, default=False, info={"dont_track_changes": True})
 

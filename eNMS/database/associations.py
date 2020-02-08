@@ -64,10 +64,3 @@ pool_link_table = Table(
     Column("pool_id", Integer, ForeignKey("pool.id")),
     Column("link_id", Integer, ForeignKey("link.id")),
 )
-
-pool_user_table = Table(
-    "pool_user_association",
-    Base.metadata,
-    Column("pool_id", Integer, ForeignKey("pool.id")),
-    Column("user_id", Integer, ForeignKey("user.id")),
-)

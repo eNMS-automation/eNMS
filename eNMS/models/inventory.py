@@ -9,7 +9,6 @@ from eNMS.database.functions import fetch, fetch_all
 from eNMS.database.associations import (
     pool_device_table,
     pool_link_table,
-    pool_user_table,
     run_pool_table,
     run_device_table,
     service_device_table,
@@ -277,7 +276,6 @@ class Pool(AbstractPool):
     )
     runs = relationship("Run", secondary=run_pool_table, back_populates="pools")
     tasks = relationship("Task", secondary=task_pool_table, back_populates="pools")
-    users = relationship("User", secondary=pool_user_table, back_populates="pools")
     never_update = Column(Boolean, default=False)
 
     def update(self, **kwargs):

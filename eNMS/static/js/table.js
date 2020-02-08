@@ -221,12 +221,12 @@ class Base {
     return `
       <button
         style="background:transparent; border:none; 
-        color:transparent; width: 200px;"
+        color:transparent; width: 120px;"
         type="button"
       >
         <select multiple
           id="column-display"
-          title="Column Visibility"
+          title="Columns"
           class="form-control"
           data-selected-text-format="static"
         ></select>
@@ -296,19 +296,16 @@ class Base {
       const visible = "visible" in column ? column.visible : true;
       $("#column-display")
         .selectpicker({ liveSearch: true })
-        .append(
-          new Option(
-            column.title || column.data,
-            column.data,
-            visible,
-            visible,
-          )
-        )
+        .append(new Option(column.title || column.data, column.data, visible, visible))
         .selectpicker("refresh");
     });
     $("#column-display").on("change", function() {
       columns.forEach((col) => {
-        table.column(`${col.name}:name`).visible($(this).val().includes(col.data));
+        table.column(`${col.name}:name`).visible(
+          $(this)
+            .val()
+            .includes(col.data)
+        );
       });
       table.ajax.reload(null, false);
     });
@@ -438,10 +435,10 @@ models.configuration = class Configuration extends models.device {
   }
 
   static get controls() {
-    return `
-      <div class="form-group" style="width: 700px">
-        <input name="context-lines" id="slider" style="width: 200px">>
-      </div>`;
+    return [
+      super.columnDisplay(),
+      `<input name="context-lines" id="slider" style="width: 200px">`,
+    ];
   }
 
   get buttons() {
@@ -481,6 +478,7 @@ models.link = class Link extends Base {
 
   static get controls() {
     return [
+      super.columnDisplay(),
       super.createNewButton("link"),
       super.searchTableButton(),
       super.refreshTableButton("link"),
@@ -536,6 +534,7 @@ models.pool = class Pool extends Base {
 
   static get controls() {
     return [
+      super.columnDisplay(),
       super.createNewButton("pool"),
       ` <button
         class="btn btn-primary"
@@ -625,6 +624,7 @@ models.service = class Service extends Base {
 
   static get controls() {
     return [
+      super.columnDisplay(),
       `
       <input type="hidden" id="workflow-filtering" name="workflow-filtering">
       <button
@@ -766,6 +766,7 @@ models.run = class Run extends Base {
 
   static get controls() {
     return [
+      super.columnDisplay(),
       super.searchTableButton(),
       super.refreshTableButton("run"),
       ` <button
@@ -846,6 +847,7 @@ models.result = class Result extends Base {
 
   static get controls() {
     return [
+      super.columnDisplay(),
       `<button
         class="btn btn-info"
         onclick="eNMS.automation.compare('result')"
@@ -921,6 +923,7 @@ models.task = class Task extends Base {
 
   static get controls() {
     return [
+      super.columnDisplay(),
       super.createNewButton("task"),
       super.searchTableButton(),
       super.refreshTableButton("task"),
@@ -992,7 +995,11 @@ models.user = class User extends Base {
   }
 
   static get controls() {
-    return [super.createNewButton("user"), super.refreshTableButton("user")];
+    return [
+      super.columnDisplay(),
+      super.createNewButton("user"),
+      super.refreshTableButton("user"),
+    ];
   }
 
   get buttons() {
@@ -1036,7 +1043,11 @@ models.server = class Server extends Base {
   }
 
   static get controls() {
-    return [super.createNewButton("server"), super.refreshTableButton("server")];
+    return [
+      super.columnDisplay(),
+      super.createNewButton("server"),
+      super.refreshTableButton("server"),
+    ];
   }
 
   get buttons() {
@@ -1083,7 +1094,11 @@ models.changelog = class Changelog extends Base {
   }
 
   static get controls() {
-    return [super.createNewButton("changelog"), super.refreshTableButton("changelog")];
+    return [
+      super.columnDisplay(),
+      super.createNewButton("changelog"),
+      super.refreshTableButton("changelog"),
+    ];
   }
 };
 
@@ -1099,7 +1114,7 @@ models.session = class Session extends Base {
   }
 
   static get controls() {
-    return [super.refreshTableButton("session")];
+    return [super.columnDisplay(), super.refreshTableButton("session")];
   }
 
   get buttons() {
@@ -1129,7 +1144,11 @@ models.event = class Event extends Base {
   }
 
   static get controls() {
-    return [super.createNewButton("event"), super.refreshTableButton("event")];
+    return [
+      super.columnDisplay(),
+      super.createNewButton("event"),
+      super.refreshTableButton("event"),
+    ];
   }
 
   get buttons() {

@@ -22,11 +22,12 @@ let waitForSearch = false;
 export function initTable(type, instance, runtime, id) {
   // eslint-disable-next-line new-cap
   let columns = models[type].columns;
-  if (tableProperties[type]) {
-    columns.forEach((property) => {
+  columns.forEach((property) => {
+    if (tableProperties[type]) {
       Object.assign(property, tableProperties[type][property.data] || {});
-    });
-  }
+    }
+    property.name = property.data;
+  });
   tables[type] = $(id ? `#${id}` : "#table").DataTable({
     serverSide: true,
     orderCellsTop: true,
@@ -290,10 +291,9 @@ class Base {
     };
   }
 
-  static postProcessing(_, columns) {
+  static postProcessing(table, columns) {
     columns.forEach((column) => {
       const visible = "visible" in column ? column.visible : true;
-      console.log(visible)
       $("#column-display")
         .selectpicker({ liveSearch: true })
         .append(
@@ -305,6 +305,12 @@ class Base {
           )
         )
         .selectpicker("refresh");
+    });
+    $("#column-display").on("change", function() {
+      columns.forEach((col) => {
+        table.column(`${col.name}:name`).visible($(this).val().includes(col.data));
+      });
+      table.ajax.reload(null, false);
     });
   }
 }

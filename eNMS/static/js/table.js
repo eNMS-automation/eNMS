@@ -223,7 +223,12 @@ class Base {
         color:transparent; width: 200px;"
         type="button"
       >
-        <select id="column-display" class="form-control"></select>
+        <select multiple
+          id="column-display"
+          title="Column Visibility"
+          class="form-control"
+          data-selected-text-format="static"
+        ></select>
       </button>`;
   }
 
@@ -287,16 +292,19 @@ class Base {
 
   static postProcessing(_, columns) {
     columns.forEach((column) => {
+      const visible = "visible" in column ? column.visible : true;
+      console.log(visible)
       $("#column-display")
         .selectpicker({ liveSearch: true })
         .append(
           new Option(
             column.title || column.data,
             column.data,
-            column.visible,
-            column.visible
+            visible,
+            visible,
           )
-        );
+        )
+        .selectpicker("refresh");
     });
   }
 }
@@ -402,8 +410,8 @@ models.configuration = class Configuration extends Base {
     ];
   }
 
-  static postProcessing(table) {
-    super.postProcessing();
+  static postProcessing(table, columns) {
+    super.postProcessing(table, columns);
     $("#data-type").bootstrapToggle({
       on: "Operational Data",
       onstyle: "dark",
@@ -756,8 +764,8 @@ models.service = class Service extends Base {
     `;
   }
 
-  static postProcessing() {
-    super.postProcessing();
+  static postProcessing(...args) {
+    super.postProcessing(...args);
     loadServiceTypes();
     $("#parent-filtering")
       .selectpicker()

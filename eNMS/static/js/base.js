@@ -280,39 +280,45 @@ export function createTooltip({
   position,
   autoshow,
   title,
+  content,
+  callback,
 }) {
   if ($(target).length) {
     let kwargs = {
       autoshow: autoshow,
-      id: name,
+      id: `tooltip-${name}`,
       container: container,
-      contentAjax: {
-        url: url,
-        done: function(panel) {
-          panel.content.innerHTML = this.responseText;
-          preprocessForm(panel);
-          configureForm(name);
-        },
-      },
       contentSize: "auto",
       connector: true,
       delay: 0,
-      headerTitle: title,
-      headerControls: "closeonly",
       mode: "sticky",
       position: position,
       target: target,
       ttipEvent: "click",
       theme: "light",
     };
+    if (content) {
+      kwargs.content = content;
+    } else {
+      kwargs.contentAjax = {
+        url: url,
+        done: function(panel) {
+          panel.content.innerHTML = this.responseText;
+          preprocessForm(panel);
+          configureForm(name);
+          if (callback) callback(panel);
+        },
+      };
+    }
+    if (title) Object.assign(kwargs, {headerTitle: title, headerControls: "closeonly"});
     if (persistent)
       kwargs.onbeforeclose = function() {
         $(this).hide();
       };
     jsPanel.tooltip.create(kwargs);
     if (persistent) {
-      $("#advanced-search").on("click", function() {
-        $("#filtering").show();
+      $(target).on("click", function() {
+        $(`#tooltip-${name}`).show();
       });
     }
   }

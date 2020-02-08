@@ -95,41 +95,33 @@ export function initTable(type, instance, runtime, id) {
             });
           if (data.search == "text") {
             const target = document.getElementById(`${elementId}-search`);
-            jsPanel.tooltip.create({
-              id: `tooltip-${elementId}`,
+            createTooltip({
+              persistent: true,
+              name: elementId,
+              target: `#${elementId}-search`,
               container: `#controls-${type}`,
+              position: {
+                my: "center-top",
+                at: "center-bottom",
+                offset: 18,
+              },
               content: `
-                <div class="modal-body">
-                  <select
-                    id="${data.data}_filter"
-                    name="${data.data}_filter"
-                    class="form-control search-select"
-                    style="width: 100%; height: 30px; margin-top: 5px"
-                  >
-                    <option value="inclusion">Inclusion</option>
-                    <option value="equality">Equality</option>
-                    <option value="regex">Regular Expression</option>
-                  </select>
-                </div>`,
-              contentSize: "auto",
-              connector: true,
-              delay: 0,
-              headerTitle: "Filtering Mode",
-              headerControls: "closeonly sm",
-              mode: "sticky",
+              <div class="modal-body">
+                <select
+                  id="${data.data}_filter"
+                  name="${data.data}_filter"
+                  class="form-control search-select"
+                  style="width: 100%; height: 30px; margin-top: 5px"
+                >
+                  <option value="inclusion">Inclusion</option>
+                  <option value="equality">Equality</option>
+                  <option value="regex">Regular Expression</option>
+                </select>
+              </div>`,
               position: {
                 my: "right-top",
                 at: "right-bottom",
               },
-              target: `#${elementId}-search`,
-              ttipEvent: "click",
-              theme: "light",
-              onbeforeclose: function(panel) {
-                $(this).hide();
-              },
-            });
-            $(target).on("click", function() {
-              $(`#tooltip-${elementId}`).show();
             });
           }
         });

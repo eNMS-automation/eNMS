@@ -393,7 +393,7 @@ models.device = class Device extends Base {
   }
 };
 
-models.configuration = class Configuration extends Base {
+models.configuration = class Configuration extends models.device {
   static get modelFiltering() {
     return "device";
   }
@@ -418,22 +418,6 @@ models.configuration = class Configuration extends Base {
 
   static postProcessing(table, columns) {
     super.postProcessing(table, columns);
-    $("#data-type").bootstrapToggle({
-      on: "Operational Data",
-      onstyle: "dark",
-      off: "Configuration",
-      offstyle: "info",
-      width: "100%",
-    });
-    $("#data-type").on("change", function() {
-      table.columns($(this).prop("checked") ? 2 : 1).visible(true);
-      table.columns($(this).prop("checked") ? 1 : 2).visible(false);
-      table.page(0).ajax.reload(null, false);
-    });
-    if (settings.database.url.includes("sqlite")) {
-      $("#search-type").prop("disabled", true);
-      notify("Regex-based search is not supported with SQLite.", "error", 5);
-    }
     $("#slider").bootstrapSlider({
       value: 0,
       ticks: [0, 1, 2, 3],
@@ -456,25 +440,7 @@ models.configuration = class Configuration extends Base {
   static get controls() {
     return `
       <div class="form-group" style="width: 700px">
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <input name="context-lines" id="slider" style="width: 200px">
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <input id="data-type" name="data-type" style="width: 200px" type="checkbox">
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <div style="padding-left: 20px">
-            <div class="checkbox">
-              <label>
-                <input
-                  id="search-type"
-                  name="search-type"
-                  type="checkbox"
-                > Regular Expression
-              </label>
-            </div>
-          </div>
-        </div>
+        <input name="context-lines" id="slider" style="width: 200px">>
       </div>`;
   }
 

@@ -101,7 +101,6 @@ export function initTable(type, instance, runtime, id) {
               e.stopPropagation();
             });
           if (data.search == "text") {
-            const target = document.getElementById(`${elementId}-search`);
             createTooltip({
               persistent: true,
               name: elementId,
@@ -133,7 +132,7 @@ export function initTable(type, instance, runtime, id) {
           }
         });
       $(`#controls-${type}`).html(models[type].controls);
-      if (models[type].postProcessing) models[type].postProcessing(this.api());
+      models[type].postProcessing(this.api(), columns);
       createTooltip({
         autoshow: true,
         persistent: true,
@@ -217,6 +216,17 @@ class Base {
     this.instance = JSON.stringify(instanceProperties).replace(/"/g, "'");
   }
 
+  static columnDisplay() {
+    return `
+      <button
+        style="background:transparent; border:none; 
+        color:transparent; width: 200px;"
+        type="button"
+      >
+        <select id="column-display" class="form-control"></select>
+      </button>`;
+  }
+
   static createNewButton(type) {
     return `
       <button
@@ -274,10 +284,24 @@ class Base {
       width: "150px",
     };
   }
+
+  static postProcessing(_, columns) {
+    columns.forEach((column) => {
+      $("#column-display")
+        .selectpicker({ liveSearch: true })
+        .append(
+          new Option(
+            column.title || column.data,
+            column.data,
+            column.visible,
+            column.visible
+          )
+        );
+    });
+  }
 }
 
 models.device = class Device extends Base {
-
   static get columns() {
     return [
       { data: "name", title: "Name", search: "text" },
@@ -290,12 +314,13 @@ models.device = class Device extends Base {
       { data: "os_version", title: "OS Version", search: "text" },
       { data: "ip_address", title: "IP Address", search: "text" },
       { data: "port", title: "Port", search: "text", visible: false },
-      { data: "buttons" }
+      { data: "buttons" },
     ];
   }
 
   static get controls() {
     return [
+      super.columnDisplay(),
       super.createNewButton("device"),
       ` <button type="button" class="btn btn-primary"
       onclick="eNMS.inventory.showImportTopologyPanel()"
@@ -378,6 +403,7 @@ models.configuration = class Configuration extends Base {
   }
 
   static postProcessing(table) {
+    super.postProcessing();
     $("#data-type").bootstrapToggle({
       on: "Operational Data",
       onstyle: "dark",
@@ -731,6 +757,7 @@ models.service = class Service extends Base {
   }
 
   static postProcessing() {
+    super.postProcessing();
     loadServiceTypes();
     $("#parent-filtering")
       .selectpicker()
@@ -1122,10 +1149,7 @@ models.event = class Event extends Base {
   }
 
   static get controls() {
-    return [
-      super.createNewButton("event"),
-      super.refreshTableButton("event"),
-    ];
+    return [super.createNewButton("event"), super.refreshTableButton("event")];
   }
 
   get buttons() {

@@ -34,6 +34,7 @@ Version 3.19
 - New "Desktop session" mechanism to SSH to a device using teraterm / putty / etc.
 - New Table properties mechanism: all table properties are displayed in a JSON file: you can configure which ones
 appear in each table by default, whether they are searchable or not, etc, their label in the UI, etc.
+You will need to add your CUSTOM properties to that file if you want them to appear in the table.
 
 MIGRATION:
 - Renaming "config" -> "settings". All services that use the "config" global variable must change it to "settings".

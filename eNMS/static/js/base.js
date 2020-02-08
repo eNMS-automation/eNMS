@@ -311,7 +311,7 @@ export function createTooltip({
       };
     }
     if (title) {
-      Object.assign(kwargs, {headerTitle: title, headerControls: "closeonly"});
+      Object.assign(kwargs, { headerTitle: title, headerControls: "closeonly" });
     } else {
       kwargs.header = false;
     }

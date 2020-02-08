@@ -278,7 +278,7 @@ function showSessionLog(sessionId) {
 
 function showDeviceResultsPanel(device) {
   openPanel({
-    name: "result_table",
+    name: "table",
     title: `Results - ${device.name}`,
     callback: function() {
       initTable("result", device, null, "table-result");

@@ -158,7 +158,7 @@ export const showRuntimePanel = function(type, service, runtime, displayTable) {
       ? "logs"
       : service.type == "workflow" && !displayTable
       ? "tree"
-      : "result_table";
+      : "table";
   const panelId = `${panelType}-${service.id}`;
   call({
     url: `/get_runtimes/${type}/${service.id}`,
@@ -291,7 +291,7 @@ function displayResultsTree(service, runtime) {
 }
 
 function displayResultsTable(service, runtime) {
-  $("#result_table").remove();
+  $("#table_result").remove();
   $(`#runtimes-result-${service.id}`).on("change", function() {
     tables[`result-${service.id}`].ajax.reload(null, false);
   });
@@ -299,7 +299,7 @@ function displayResultsTable(service, runtime) {
     "result",
     service,
     runtime || currentRuntime,
-    `table-result-result_table-${service.id}`
+    `table-result-table-${service.id}`
   );
 }
 

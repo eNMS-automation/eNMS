@@ -52,16 +52,16 @@
 </ul>
 <div id="map"></div>
 {% if view_type == "network" %}
-<nav class="navbar navbar-default controls" role="navigation">
+<nav class="navbar navbar-default controls nav-controls" role="navigation">
   <button
     class="btn btn-primary btn-search"
-    onclick="eNMS.base.openPanel({name: 'device_filtering'})"
+    onclick="eNMS.visualization.filterViewPanel('device')"
   >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Device
   </button>
   <button
     class="btn btn-primary btn-search"
-    onclick="eNMS.base.openPanel({name: 'link_filtering'})"
+    onclick="eNMS.visualization.filterViewPanel('link')"
   >
     <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Link
   </button>
@@ -69,6 +69,7 @@
 {% endif %} {% endblock content %} {% block javascripts %} {{ super()}}
 <script>
   let viewType = "{{ view_type }}";
+  console.log(viewType)
 </script>
 <script src="{{ url_for('static', filename='lib/leaflet/leaflet.min.js') }}"></script>
 <script src="{{ url_for('static', filename='lib/leaflet-markercluster/leaflet.markercluster.min.js') }}"></script>

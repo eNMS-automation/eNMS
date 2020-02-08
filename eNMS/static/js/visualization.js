@@ -8,8 +8,9 @@ viewType: false
 vis: false
 */
 
-import { call, notify, serializeForm, showTypePanel } from "./base.js";
+import { call, configureNamespace, notify, serializeForm, showTypePanel, openPanel } from "./base.js";
 import { showConnectionPanel, showDeviceData } from "./inventory.js";
+import { initTable } from "./table.js";
 
 const layers = {
   osm: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
@@ -295,12 +296,20 @@ export function initView() {
   });
 }
 
+function filterViewPanel(type) {
+  openPanel({
+    name: "table",
+    callback: function() {
+      initTable("device");
+      console.log("test");
+    },
+  });
+}
+
 export function filterView(type) {
-  $.ajax({
-    type: "POST",
+  call({
     url: `/view_filtering/${type}`,
-    contentType: "application/json",
-    data: JSON.stringify({ form: serializeForm(`#${type}_filtering-form`) }),
+    data: { form: serializeForm(`#${type}_filtering-form`) },
     success: function(results) {
       if (type == "device") {
         deleteAllDevices();
@@ -313,3 +322,5 @@ export function filterView(type) {
     },
   });
 }
+
+configureNamespace("visualization", [filterViewPanel]);

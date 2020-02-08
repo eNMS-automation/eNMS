@@ -1,15 +1,45 @@
 {
-  "device": [
-    { "data": "name", "title": "Name", "search": "text" },
-    { "data": "description", "title": "Description", "search": "text" },
-    { "data": "subtype", "title": "Subtype", "search": "text" },
-    { "data": "model", "title": "Model", "search": "text" },
-    { "data": "location", "title": "Location", "search": "text" },
-    { "data": "vendor", "title": "Vendor", "search": "text" },
-    { "data": "operating_system", "title": "Operating System", "search": "text" },
-    { "data": "os_version", "title": "OS Version", "search": "text" },
-    { "data": "ip_address", "title": "IP Address", "search": "text" },
-    { "data": "port", "title": "Port", "search": "text", "visible": false },
-    { "data": "buttons" }
-  ]
+  "configuration": {
+    "configuration": {
+      "visible": true
+    }
+  },
+  "device": {
+    "description": {
+      "visible": false
+    },
+    "location": {
+      "visible": false
+    },
+    "subtype": {
+      "visible": false
+    }
+  },
+  "link": {
+    "description": {
+      "visible": false
+    },
+    "subtype": {
+      "visible": false
+    }
+  },
+  "pool": {
+    "last_modified": {
+      "visible": false
+    }
+  },
+  "service": {
+    "last_modified": {
+      "visible": false
+    },
+    "name": {
+      "width": "600px"
+    },
+    "operating_system": {
+      "visible": false
+    },
+    "vendor": {
+      "visible": false
+    }
+  }
 }

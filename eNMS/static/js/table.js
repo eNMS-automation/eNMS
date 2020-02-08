@@ -21,6 +21,12 @@ let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
   // eslint-disable-next-line new-cap
+  let columns = models[type].columns;
+  if (tableProperties[type]) {
+    columns.forEach((property) => {
+      Object.assign(property, tableProperties[type][property.data] || {});
+    });
+  }
   tables[type] = $(id ? `#${id}` : "#table").DataTable({
     serverSide: true,
     orderCellsTop: true,
@@ -33,13 +39,13 @@ export function initTable(type, instance, runtime, id) {
       createTooltips();
     },
     sDom: "tilp",
-    columns: tableProperties[type],
+    columns: columns,
     columnDefs: [{ className: "dt-center", targets: "_all" }],
     initComplete: function() {
       this.api()
         .columns()
         .every(function(index) {
-          const data = tableProperties[type][index];
+          const data = columns[index];
           let element;
           const elementId = `${type}_filtering-${data.data}`;
           if (data.search == "text") {
@@ -155,7 +161,7 @@ export function initTable(type, instance, runtime, id) {
           : `#search-${type}-form`;
         d.form = serializeForm(form);
         d.instance = instance;
-        d.columns = tableProperties[type];
+        d.columns = columns;
         d.type = type;
         if (runtime) {
           d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
@@ -271,6 +277,22 @@ class Base {
 }
 
 models.device = class Device extends Base {
+
+  static get columns() {
+    return [
+      { data: "name", title: "Name", search: "text" },
+      { data: "description", title: "Description", search: "text" },
+      { data: "subtype", title: "Subtype", search: "text" },
+      { data: "model", title: "Model", search: "text" },
+      { data: "location", title: "Location", search: "text" },
+      { data: "vendor", title: "Vendor", search: "text" },
+      { data: "operating_system", title: "Operating System", search: "text" },
+      { data: "os_version", title: "OS Version", search: "text" },
+      { data: "ip_address", title: "IP Address", search: "text" },
+      { data: "port", title: "Port", search: "text", visible: false },
+      { data: "buttons" }
+    ];
+  }
 
   static get controls() {
     return [

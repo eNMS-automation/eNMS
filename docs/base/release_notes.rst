@@ -31,6 +31,9 @@ Version 3.19
 - Alerts are saved and displayed in the UI, top menubar.
 - Remove recipients from settings.json. Recipients is now a mandatory field if mail notification is ticked.
 - Add support for netmiko genie / pyATS (`use_genie`) option.
+- New "Desktop session" mechanism to SSH to a device using teraterm / putty / etc.
+- New Table properties mechanism: all table properties are displayed in a JSON file: you can configure which ones
+appear in each table by default, whether they are searchable or not, etc, their label in the UI, etc.
 
 MIGRATION:
 - Renaming "config" -> "settings". All services that use the "config" global variable must change it to "settings".

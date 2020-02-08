@@ -271,12 +271,19 @@ export function openPanel({ name, title, id, callback, type, duplicate, content 
   if (callback && content) callback(content);
 }
 
-export function createTooltip({name, target, container, url}) {
-  console.log(target, $(target).length)
+export function createTooltip({
+  name,
+  target,
+  container,
+  url,
+  persistent,
+  position,
+  autoshow,
+  title,
+}) {
   if ($(target).length) {
-    console.log(name, target, container, url)
-    jsPanel.tooltip.create({
-      autoshow: true,
+    let kwargs = {
+      autoshow: autoshow,
       id: name,
       container: container,
       contentAjax: {
@@ -290,24 +297,24 @@ export function createTooltip({name, target, container, url}) {
       contentSize: "auto",
       connector: true,
       delay: 0,
-      headerTitle: 'Relationship-based Filtering',
-      headerControls: 'closeonly',
+      headerTitle: title,
+      headerControls: "closeonly",
       mode: "sticky",
-      position: {
-        my: "center-top",
-        at: "center-bottom",
-        offsetY: 18,
-      },
+      position: position,
       target: target,
       ttipEvent: "click",
       theme: "light",
-      onbeforeclose: function (panel) {
+    };
+    if (persistent)
+      kwargs.onbeforeclose = function() {
         $(this).hide();
-      },
-    });
-    $("#advanced-search").on("click", function() {
-      $("#filtering").show();
-    });
+      };
+    jsPanel.tooltip.create(kwargs);
+    if (persistent) {
+      $("#advanced-search").on("click", function() {
+        $("#filtering").show();
+      });
+    }
   }
 }
 
@@ -374,7 +381,7 @@ function initSelect(el, model, parentId, single) {
 }
 
 export function configureForm(form, id, panelId) {
-  console.log(form)
+  console.log(form);
   if (!formProperties[form]) return;
   for (const [property, field] of Object.entries(formProperties[form])) {
     const fieldId = id ? `${form}-${property}-${id}` : `${form}-${property}`;

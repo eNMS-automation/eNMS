@@ -114,8 +114,8 @@ export function initTable(type, instance, runtime, id) {
               contentSize: "auto",
               connector: true,
               delay: 0,
-              headerTitle: 'Filtering Mode',
-              headerControls: 'closeonly sm',
+              headerTitle: "Filtering Mode",
+              headerControls: "closeonly sm",
               mode: "sticky",
               position: {
                 my: "right-top",
@@ -124,7 +124,7 @@ export function initTable(type, instance, runtime, id) {
               target: `#${elementId}-search`,
               ttipEvent: "click",
               theme: "light",
-              onbeforeclose: function (panel) {
+              onbeforeclose: function(panel) {
                 $(this).hide();
               },
             });
@@ -136,10 +136,18 @@ export function initTable(type, instance, runtime, id) {
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
       createTooltip({
+        autoshow: true,
+        persistent: true,
         name: `${type}_filtering`,
         target: "#advanced-search",
         container: `#controls-${type}`,
-        url: `../form/${type}_filtering`
+        position: {
+          my: "center-top",
+          at: "center-bottom",
+          offset: 18,
+        },
+        url: `../form/${type}_filtering`,
+        title: "Relationship-based Filtering",
       });
       createTooltips();
       this.api().columns.adjust();
@@ -986,10 +994,7 @@ models.user = class User extends Base {
   }
 
   static get controls() {
-    return [
-      super.createNewButton("user"),
-      super.refreshTableButton("user"),
-    ];
+    return [super.createNewButton("user"), super.refreshTableButton("user")];
   }
 
   get buttons() {
@@ -1033,10 +1038,7 @@ models.server = class Server extends Base {
   }
 
   static get controls() {
-    return [
-      super.createNewButton("server"),
-      super.refreshTableButton("server"),
-    ];
+    return [super.createNewButton("server"), super.refreshTableButton("server")];
   }
 
   get buttons() {
@@ -1083,10 +1085,7 @@ models.changelog = class Changelog extends Base {
   }
 
   static get controls() {
-    return [
-      super.createNewButton("changelog"),
-      super.refreshTableButton("changelog"),
-    ];
+    return [super.createNewButton("changelog"), super.refreshTableButton("changelog")];
   }
 };
 

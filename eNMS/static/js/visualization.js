@@ -299,6 +299,7 @@ export function initView() {
 function filterViewPanel(type) {
   openPanel({
     name: "table",
+    type: "device",
     callback: function() {
       initTable("device");
       console.log("test");

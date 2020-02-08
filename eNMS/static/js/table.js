@@ -133,23 +133,7 @@ export function initTable(type, instance, runtime, id) {
           }
         });
       $(`#controls-${type}`).html(models[type].controls);
-      models[type].postProcessing(this.api(), columns);
-      createTooltip({
-        autoshow: true,
-        persistent: true,
-        name: `${type}_filtering`,
-        target: "#advanced-search",
-        container: `#controls-${type}`,
-        position: {
-          my: "center-top",
-          at: "center-bottom",
-          offset: 18,
-        },
-        url: `../form/${type}_filtering`,
-        title: "Relationship-based Filtering",
-      });
-      createTooltips();
-      this.api().columns.adjust();
+      models[type].postProcessing(this.api(), columns, type);
     },
     ajax: {
       url: `/table_filtering/${models[type].modelFiltering || type}`,
@@ -291,7 +275,22 @@ class Base {
     };
   }
 
-  static postProcessing(table, columns) {
+  static postProcessing(table, columns, type) {
+    createTooltip({
+      autoshow: true,
+      persistent: true,
+      name: `${type}_filtering`,
+      target: "#advanced-search",
+      container: `#controls-${type}`,
+      position: {
+        my: "center-top",
+        at: "center-bottom",
+        offset: 18,
+      },
+      url: `../form/${type}_filtering`,
+      title: "Relationship-based Filtering",
+    });
+    createTooltips();
     columns.forEach((column) => {
       const visible = "visible" in column ? column.visible : true;
       $("#column-display")
@@ -309,6 +308,7 @@ class Base {
       });
       table.ajax.reload(null, false);
     });
+    table.columns.adjust();
   }
 }
 
@@ -413,8 +413,8 @@ models.configuration = class Configuration extends models.device {
     ];
   }
 
-  static postProcessing(table, columns) {
-    super.postProcessing(table, columns);
+  static postProcessing(...args) {
+    super.postProcessing(...args);
     $("#slider").bootstrapSlider({
       value: 0,
       ticks: [0, 1, 2, 3],
@@ -756,10 +756,10 @@ models.run = class Run extends Base {
   static get columns() {
     return [
       { data: "runtime", title: "Runtime", search: "text", width: "15%" },
-      { data: "duration", title: "Duration", search: "text", width: "5%" },
+      { data: "duration", title: "Duration", search: "text", width: "10%" },
       { data: "service_name", title: "Service", search: "text" },
       { data: "status", title: "Status", search: "text", width: "7%" },
-      { data: "progress", title: "Progress", search: "text", width: "12%" },
+      { data: "progress", title: "Progress", width: "12%" },
       { data: "buttons", width: "130px" },
     ];
   }
@@ -847,7 +847,6 @@ models.result = class Result extends Base {
 
   static get controls() {
     return [
-      super.columnDisplay(),
       `<button
         class="btn btn-info"
         onclick="eNMS.automation.compare('result')"

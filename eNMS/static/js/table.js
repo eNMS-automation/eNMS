@@ -1018,7 +1018,6 @@ models.user = class User extends Base {
   static get controls() {
     return [
       super.createNewButton("user"),
-      super.searchTableButton("user"),
       super.refreshTableButton("user"),
     ];
   }
@@ -1066,7 +1065,6 @@ models.server = class Server extends Base {
   static get controls() {
     return [
       super.createNewButton("server"),
-      super.searchTableButton("server"),
       super.refreshTableButton("server"),
     ];
   }

@@ -12,12 +12,10 @@ import { tables } from "./table.js";
 let settingsEditor;
 
 function saveSettings() {
-  $.ajax({
-    type: "POST",
+  call({
     url: "/save_settings",
-    contentType: "application/json",
-    data: JSON.stringify(settingsEditor.get()),
-    success: function() {
+    data: settingsEditor.get(),
+    callback: function() {
       settings = settingsEditor.get();
       $("#settings").remove();
       notify("Settings saved.", "success", 5);

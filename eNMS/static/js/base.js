@@ -158,7 +158,7 @@ export const call = function({ url, data, form, callback }) {
     },
   };
   if (data) {
-    params.apply({
+    Object.assign(params, {
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8",
       dataType: "json",

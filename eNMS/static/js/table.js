@@ -106,11 +106,10 @@ export function initTable(type, instance, runtime, id) {
               persistent: true,
               name: elementId,
               target: `#${elementId}-search`,
-              container: `#controls-${type}`,
+              container: `.right_column`,
               position: {
                 my: "center-top",
                 at: "center-bottom",
-                offset: 18,
               },
               content: `
               <div class="modal-body">
@@ -118,17 +117,13 @@ export function initTable(type, instance, runtime, id) {
                   id="${data.data}_filter"
                   name="${data.data}_filter"
                   class="form-control search-select"
-                  style="width: 100%; height: 30px; margin-top: 5px"
+                  style="width: 100%; height: 30px; margin-top: 15px"
                 >
                   <option value="inclusion">Inclusion</option>
                   <option value="equality">Equality</option>
                   <option value="regex">Regular Expression</option>
                 </select>
               </div>`,
-              position: {
-                my: "right-top",
-                at: "right-bottom",
-              },
             });
           }
         });
@@ -285,7 +280,7 @@ class Base {
       position: {
         my: "center-top",
         at: "center-bottom",
-        offset: 18,
+        offsetY: 18,
       },
       url: `../form/${type}_filtering`,
       title: "Relationship-based Filtering",

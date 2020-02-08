@@ -31,7 +31,7 @@ from sys import path as sys_path
 from tacacs_plus.client import TACACSClient
 from uuid import getnode
 
-from eNMS.settings import settings
+from eNMS.settings import settings, table_properties
 from eNMS.database import Base, DIALECT, engine, Session
 from eNMS.database.events import configure_events
 from eNMS.database.functions import (
@@ -165,6 +165,7 @@ class BaseController:
 
     def __init__(self):
         self.settings = settings
+        self.table_properties = table_properties
         self.path = Path.cwd()
         self.custom_properties = self.load_custom_properties()
         self.init_scheduler()

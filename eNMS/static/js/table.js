@@ -1,6 +1,7 @@
 /*
 global
 page: false
+tableProperties: false
 */
 
 import {
@@ -32,13 +33,13 @@ export function initTable(type, instance, runtime, id) {
       createTooltips();
     },
     sDom: "tilp",
-    columns: models[type].columns,
+    columns: tableProperties[type],
     columnDefs: [{ className: "dt-center", targets: "_all" }],
     initComplete: function() {
       this.api()
         .columns()
         .every(function(index) {
-          const data = models[type].columns[index];
+          const data = tableProperties[type][index];
           let element;
           const elementId = `${type}_filtering-${data.data}`;
           if (data.search == "text") {
@@ -154,7 +155,7 @@ export function initTable(type, instance, runtime, id) {
           : `#search-${type}-form`;
         d.form = serializeForm(form);
         d.instance = instance;
-        d.columns = models[type].columns;
+        d.columns = tableProperties[type];
         d.type = type;
         if (runtime) {
           d.runtime = $(`#runtimes-${instance.id}`).val() || runtime;
@@ -222,7 +223,7 @@ class Base {
       </button>`;
   }
 
-  static searchTableButton(type) {
+  static searchTableButton() {
     return `
       <button
         id="advanced-search"
@@ -270,21 +271,6 @@ class Base {
 }
 
 models.device = class Device extends Base {
-  static get columns() {
-    return [
-      { data: "name", title: "Name", search: "text" },
-      { data: "description", title: "Description", search: "text" },
-      { data: "subtype", title: "Subtype", search: "text" },
-      { data: "model", title: "Model", search: "text" },
-      { data: "location", title: "Location", search: "text" },
-      { data: "vendor", title: "Vendor", search: "text" },
-      { data: "operating_system", title: "Operating System", search: "text" },
-      { data: "os_version", title: "OS Version", search: "text" },
-      { data: "ip_address", title: "IP Address", search: "text" },
-      { data: "port", title: "Port", search: "text" },
-      { data: "buttons" },
-    ];
-  }
 
   static get controls() {
     return [
@@ -299,7 +285,7 @@ models.device = class Device extends Base {
       >
         <span class="glyphicon glyphicon-upload"></span>
       </button>`,
-      super.searchTableButton("device"),
+      super.searchTableButton(),
       super.refreshTableButton("device"),
     ];
   }
@@ -468,7 +454,7 @@ models.link = class Link extends Base {
   static get controls() {
     return [
       super.createNewButton("link"),
-      super.searchTableButton("link"),
+      super.searchTableButton(),
       super.refreshTableButton("link"),
     ];
   }
@@ -511,8 +497,6 @@ models.pool = class Pool extends Base {
         search: "bool",
         width: "100px",
       },
-      { data: "longitude", title: "Longitude", search: "text", width: "70px" },
-      { data: "latitude", title: "Latitude", search: "text", width: "70px" },
       { data: "objectNumber", title: "Object Count", width: "150px" },
       { data: "buttons" },
     ];
@@ -533,7 +517,7 @@ models.pool = class Pool extends Base {
       >
         <span class="glyphicon glyphicon-flash"></span>
       </button>`,
-      super.searchTableButton("pool"),
+      super.searchTableButton(),
       super.refreshTableButton("pool"),
     ];
   }
@@ -630,14 +614,7 @@ models.service = class Service extends Base {
         </select>
       </button>
       </input>
-      <button
-        class="btn btn-info"
-        onclick="eNMS.base.openPanel({name: 'service_filtering'})"
-        data-tooltip="Advanced Search"
-        type="button"
-      >
-        <span class="glyphicon glyphicon-search"></span>
-      </button>
+      ${super.searchTableButton()}
       <button
         class="btn btn-info"
         onclick="eNMS.table.refreshTable('service', true)"
@@ -760,7 +737,7 @@ models.run = class Run extends Base {
 
   static get controls() {
     return [
-      super.searchTableButton("run"),
+      super.searchTableButton(),
       super.refreshTableButton("run"),
       ` <button
         class="btn btn-info"
@@ -916,7 +893,7 @@ models.task = class Task extends Base {
   static get controls() {
     return [
       super.createNewButton("task"),
-      super.searchTableButton("task"),
+      super.searchTableButton(),
       super.refreshTableButton("task"),
       ` <button
         class="btn btn-info"
@@ -1125,7 +1102,6 @@ models.event = class Event extends Base {
   static get controls() {
     return [
       super.createNewButton("event"),
-      super.searchTableButton("event"),
       super.refreshTableButton("event"),
     ];
   }

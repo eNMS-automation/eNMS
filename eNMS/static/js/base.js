@@ -310,7 +310,11 @@ export function createTooltip({
         },
       };
     }
-    if (title) Object.assign(kwargs, {headerTitle: title, headerControls: "closeonly"});
+    if (title) {
+      Object.assign(kwargs, {headerTitle: title, headerControls: "closeonly"});
+    } else {
+      kwargs.header = false;
+    }
     if (persistent)
       kwargs.onbeforeclose = function() {
         $(this).hide();

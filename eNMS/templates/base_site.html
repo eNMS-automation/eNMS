@@ -302,6 +302,8 @@
       const relations = {{ relations|tojson|safe }};
       const relationships = {{ relationships|tojson|safe }};
       const serviceTypes = {{ service_types|tojson|safe }};
+      const tableProperties = {{ table_properties|tojson|safe }};
+      console.log(tableProperties)
       let action = {};
       let settings = {{ settings|tojson|safe }};
       let csrf_token = "{{ csrf_token() }}";

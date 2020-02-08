@@ -4,11 +4,10 @@ page: false
 */
 
 import {
-  configureForm,
   configureNamespace,
+  createTooltip,
   createTooltips,
   notify,
-  preprocessForm,
   serializeForm,
   userIsActive,
 } from "./base.js";
@@ -136,41 +135,12 @@ export function initTable(type, instance, runtime, id) {
         });
       $(`#controls-${type}`).html(models[type].controls);
       if (models[type].postProcessing) models[type].postProcessing(this.api());
-      if ($("#advanced-search").length) {
-        jsPanel.tooltip.create({
-          autoshow: true,
-          id: "filtering",
-          container: `#controls-${type}`,
-          contentAjax: {
-            url: `../form/${type}_filtering`,
-            done: function(panel) {
-              panel.content.innerHTML = this.responseText;
-              preprocessForm(panel);
-              configureForm(`${type}_filtering`);
-            },
-          },
-          contentSize: "auto",
-          connector: true,
-          delay: 0,
-          headerTitle: 'Relationship-based Filtering',
-          headerControls: 'closeonly',
-          mode: "sticky",
-          position: {
-            my: "center-top",
-            at: "center-bottom",
-            offsetY: 18,
-          },
-          target: `#advanced-search`,
-          ttipEvent: "click",
-          theme: "light",
-          onbeforeclose: function (panel) {
-            $(this).hide();
-          },
-        });
-        $("#advanced-search").on("click", function() {
-          $("#filtering").show();
-        });
-      }
+      createTooltip({
+        name: `${type}_filtering`,
+        target: "#advanced-search",
+        container: `#controls-${type}`,
+        url: `../form/${type}_filtering`
+      });
       createTooltips();
       this.api().columns.adjust();
     },

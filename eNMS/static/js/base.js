@@ -160,7 +160,7 @@ export const call = function({ url, data, form, callback }) {
   if (data) {
     Object.assign(params, {
       data: JSON.stringify(data),
-      contentType: "application/json; charset=utf-8",
+      contentType: "application/json",
       dataType: "json",
     });
   } else if (form) {
@@ -269,6 +269,46 @@ export function openPanel({ name, title, id, callback, type, duplicate, content 
   }
   jsPanel.create(kwargs);
   if (callback && content) callback(content);
+}
+
+export function createTooltip({name, target, container, url}) {
+  console.log(target, $(target).length)
+  if ($(target).length) {
+    console.log(name, target, container, url)
+    jsPanel.tooltip.create({
+      autoshow: true,
+      id: name,
+      container: container,
+      contentAjax: {
+        url: url,
+        done: function(panel) {
+          panel.content.innerHTML = this.responseText;
+          preprocessForm(panel);
+          configureForm(name);
+        },
+      },
+      contentSize: "auto",
+      connector: true,
+      delay: 0,
+      headerTitle: 'Relationship-based Filtering',
+      headerControls: 'closeonly',
+      mode: "sticky",
+      position: {
+        my: "center-top",
+        at: "center-bottom",
+        offsetY: 18,
+      },
+      target: target,
+      ttipEvent: "click",
+      theme: "light",
+      onbeforeclose: function (panel) {
+        $(this).hide();
+      },
+    });
+    $("#advanced-search").on("click", function() {
+      $("#filtering").show();
+    });
+  }
 }
 
 export function showDeletionPanel(instance) {

@@ -23,32 +23,20 @@ export let userIsActive = true;
 let topZ = 1000;
 
 const panelSize = {
-  alerts_table: "900 600",
-  calendar: "1200 650",
-  compare: "auto 700",
-  database_deletion: "700 400",
-  database_migration: "700 300",
   device_connection: "400 auto",
   device_results: "1200 700",
   display: "600 600",
-  display_configuration: "1200 800",
-  event_filtering: "700 400",
   excel_import: "400 150",
   excel_export: "400 150",
   git: "900 200",
   instance_deletion: "400 130",
-  link_filtering: "700 600",
   logs: "800 500",
-  pool: "800 600",
-  pool_filtering: "1000 700",
   pool_objects: "700 550",
   table: "800 500",
   service_results: "1200 700",
   server: "600 250",
-  server_filtering: "700 450",
   ssh: "700 200",
   task: "900 600",
-  task_filtering: "900 650",
   user: "600 300",
   view: "700 300",
   workflow_results: "1200 700",
@@ -227,7 +215,7 @@ export function createTooltips() {
   });
 }
 
-export function openPanel({ name, title, id, callback, type, duplicate, content }) {
+export function openPanel({ name, title, id, callback, type, duplicate, content, size }) {
   const panelId = id ? `${name}-${id}` : name;
   if ($(`#${panelId}`).length) {
     $(`#${panelId}`).css("zIndex", ++topZ);
@@ -240,7 +228,7 @@ export function openPanel({ name, title, id, callback, type, duplicate, content 
     theme: panelThemes[name] || "light filledlight",
     headerLogo: "../static/img/logo.png",
     contentOverflow: "hidden scroll",
-    contentSize: panelSize[name] || {
+    contentSize: size || {
       width: () => window.innerWidth * 0.5,
       height: () => window.innerHeight * 0.75,
     },

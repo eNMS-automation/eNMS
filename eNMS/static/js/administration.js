@@ -57,6 +57,8 @@ function migrationsExport() {
 function showMigrationPanel() {
   openPanel({
     name: "database_migration",
+    title: "Database Migration",
+    size: "auto",
     callback: () => {
       call({
         url: "/get_migration_folders",

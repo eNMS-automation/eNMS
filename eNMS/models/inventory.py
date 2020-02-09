@@ -17,7 +17,7 @@ from eNMS.database.associations import (
     task_pool_table,
 )
 from eNMS.database.base import AbstractBase
-from eNMS.settings import pool_properties
+from eNMS.settings import custom_properties, pool_properties
 
 
 class Object(AbstractBase):
@@ -69,7 +69,7 @@ CustomDevice = type(
                 }[values["type"]],
                 default=values["default"],
             )
-            for property, values in app.custom_properties.items()
+            for property, values in custom_properties["device"].items()
         },
     },
 )

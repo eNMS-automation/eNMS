@@ -46,7 +46,7 @@ from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
 from eNMS.controller.syslog import SyslogServer
-from eNMS.settings import dashboard_properties
+from eNMS.settings import custom_properties, dashboard_properties
 
 
 class BaseController:
@@ -243,22 +243,14 @@ class BaseController:
         self.update_database_configurations_from_git()
 
     def load_custom_properties(self):
-        filepath = self.settings["paths"]["custom_properties"]
-        if not filepath:
-            custom_properties = {}
-        else:
-            with open(filepath, "r") as properties:
-                custom_properties = yaml.load(properties)
-        property_names.update(
-            {k: v["pretty_name"] for k, v in custom_properties.items()}
-        )
-        public_custom_properties = {
-            k: v for k, v in custom_properties.items() if not v.get("private", False)
-        }
-        model_properties["device"].extend(list(public_custom_properties))
-        private_properties.extend(
-            list(p for p, v in custom_properties.items() if v.get("private", False))
-        )
+        for model, properties in custom_properties.items():
+            property_names.update(
+                {k: v["pretty_name"] for k, v in properties.items()}
+            )
+            model_properties[model].extend(list(properties))
+            private_properties.extend(
+                list(p for p, v in properties.items() if v.get("private", False))
+            )
         return custom_properties
 
     def init_logs(self):

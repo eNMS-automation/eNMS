@@ -13,11 +13,11 @@ from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import private_properties
-from eNMS.settings import pool_properties
+from eNMS.settings import custom_properties, pool_properties
 
 
 def configure_device_form(cls):
-    for property in app.custom_properties:
+    for property in custom_properties["device"]:
         field = PasswordField if property in private_properties else StringField
         setattr(cls, property, field())
     return cls
@@ -52,7 +52,7 @@ class DeviceConnectionForm(BaseForm):
     form_type = HiddenField(default="device_connection")
     address_choices = [("ip_address", "IP address"), ("name", "Name")] + [
         (property, values["pretty_name"])
-        for property, values in app.custom_properties.items()
+        for property, values in custom_properties["device"].items()
         if values.get("is_address", False)
     ]
     address = SelectField(choices=address_choices)

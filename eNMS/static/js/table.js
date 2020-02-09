@@ -329,7 +329,7 @@ models.device = class Device extends Base {
       { data: "os_version", title: "OS Version", search: "text" },
       { data: "ip_address", title: "IP Address", search: "text" },
       { data: "port", title: "Port", search: "text", visible: false },
-      { data: "buttons" },
+      { data: "buttons", width: "230px" },
     ];
   }
 
@@ -482,7 +482,7 @@ models.configuration = class Configuration extends models.device {
 models.link = class Link extends Base {
   static get columns() {
     return [
-      { data: "name", title: "Name", search: "text" },
+      { data: "name", title: "Name", search: "text"  },
       { data: "description", title: "Description", search: "text" },
       { data: "subtype", title: "Subtype", search: "text" },
       { data: "model", title: "Model", search: "text" },
@@ -490,7 +490,7 @@ models.link = class Link extends Base {
       { data: "vendor", title: "Vendor", search: "text" },
       { data: "source_name", title: "Source", search: "text" },
       { data: "destination_name", title: "Destination", search: "text" },
-      { data: "buttons" },
+      { data: "buttons", width: "130px" },
     ];
   }
 
@@ -542,7 +542,7 @@ models.pool = class Pool extends Base {
         width: "100px",
       },
       { data: "objectNumber", title: "Object Count", width: "150px" },
-      { data: "buttons" },
+      { data: "buttons", width: "250px" },
     ];
   }
 
@@ -621,7 +621,6 @@ models.service = class Service extends Base {
       {
         data: "name",
         title: "Name",
-        width: "25%",
         search: "text",
         className: "dt-body-left",
         render: function(_, __, instance) {
@@ -639,7 +638,7 @@ models.service = class Service extends Base {
       { data: "operating_system", title: "Operating System", search: "text" },
       { data: "creator", title: "Creator", search: "text" },
       { data: "status", title: "Status", search: "text", width: "60px" },
-      { data: "buttons" },
+      { data: "buttons", width: "260px" },
     ];
   }
 
@@ -778,12 +777,12 @@ models.run = class Run extends Base {
 
   static get columns() {
     return [
-      { data: "runtime", title: "Runtime", search: "text", width: "15%" },
-      { data: "duration", title: "Duration", search: "text", width: "10%" },
+      { data: "runtime", title: "Runtime", search: "text", width: "200px" },
+      { data: "duration", title: "Duration", search: "text", width: "100px" },
       { data: "service_name", title: "Service", search: "text" },
-      { data: "status", title: "Status", search: "text", width: "7%" },
-      { data: "progress", title: "Progress", width: "12%" },
-      { data: "buttons", width: "130px" },
+      { data: "status", title: "Status", search: "text", width: "100px" },
+      { data: "progress", title: "Progress", width: "150px" },
+      { data: "buttons", width: "90px" },
     ];
   }
 
@@ -912,12 +911,12 @@ models.task = class Task extends Base {
     return [
       { data: "name", title: "Name", search: "text" },
       { data: "service_name", title: "Service", search: "text" },
-      { data: "status", title: "Status", search: "text", width: "5%" },
+      { data: "status", title: "Status", search: "text", width: "100px" },
       {
         data: "scheduling_mode",
         title: "Scheduling",
         search: "text",
-        width: "5%",
+        width: "100px",
       },
       {
         data: "periodicity",
@@ -930,21 +929,21 @@ models.task = class Task extends Base {
             return instance.crontab_expression;
           }
         },
-        width: "10%",
+        width: "100px",
       },
       {
         data: "next_run_time",
         title: "Next run time",
         search: "text",
-        width: "12%",
+        width: "150px",
       },
       {
         data: "time_before_next_run",
         title: "Time left",
         search: "text",
-        width: "12%",
+        width: "150px",
       },
-      { data: "buttons", width: "240px" },
+      { data: "buttons", width: "200px" },
     ];
   }
 

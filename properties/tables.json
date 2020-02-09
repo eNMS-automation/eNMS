@@ -47,5 +47,10 @@
     "vendor": {
       "visible": false
     }
+  },
+  "task": {
+    "scheduling_mode": {
+      "visible": false
+    }
   }
 }

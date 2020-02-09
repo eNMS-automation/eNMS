@@ -16,7 +16,8 @@
      "longitude",
      "latitude",
      "configuration",
-     "operational_data"
+     "operational_data",
+     "property1"
   ],
   "link":[ 
      "name",

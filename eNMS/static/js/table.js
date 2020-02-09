@@ -391,21 +391,30 @@ models.configuration = class Configuration extends models.device {
   }
 
   static get columns() {
-    return [
-      { data: "name", title: "Name", search: "text", width: "150px" },
+    let columns = super.columns;
+    columns.pop();
+    columns.forEach((column) => column.visible = column.data === "name");
+    columns.push(...[
       {
         data: "configuration",
         title: "Configuration",
         search: "text",
+        width: "80%",
       },
       {
         data: "operational_data",
         title: "Operational Data",
         search: "text",
+        width: "80%",
         visible: false,
       },
-      { data: "buttons", width: "90px" },
-    ];
+      {
+        data: "buttons",
+        width: "90px",
+      }
+    ]);
+    
+    return columns;
   }
 
   static postProcessing(...args) {
@@ -413,7 +422,6 @@ models.configuration = class Configuration extends models.device {
     $("#slider").bootstrapSlider({
       value: 0,
       ticks: [0, 1, 2, 3],
-      ticks_labels: [0, 1, 2, 3],
       formatter: (value) => `Lines of context: ${value}`,
     });
     $("#slider").on("change", function() {
@@ -432,7 +440,12 @@ models.configuration = class Configuration extends models.device {
   static get controls() {
     return [
       super.columnDisplay(),
-      `<input name="context-lines" id="slider" style="width: 200px">`,
+      `<input
+        name="context-lines"
+        id="slider"
+        class="slider"
+        style="width: 200px"
+      >`,
     ];
   }
 

@@ -33,3 +33,8 @@ th.dt-center,
 td.dt-center {
   text-align: center;
 }
+
+.slider {
+  margin-left: 25px;
+  margin-right: 25px;
+}

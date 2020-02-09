@@ -1,4 +1,4 @@
-diagram_classes = ["device", "link", "user", "service", "workflow", "task"]
+
 
 object_diagram_properties = ["model", "vendor", "subtype", "icon", "location"]
 

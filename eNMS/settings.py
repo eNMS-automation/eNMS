@@ -6,3 +6,6 @@ with open(Path.cwd() / "settings.json", "r") as file:
 
 with open(Path.cwd() / "properties.json", "r") as file:
     table_properties = load(file)
+
+with open(Path.cwd() / "dashboard.json", "r") as file:
+    dashboard_properties = load(file)

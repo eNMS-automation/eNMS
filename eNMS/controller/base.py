@@ -47,7 +47,6 @@ from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
 from eNMS.properties.diagram import (
     device_diagram_properties,
-    diagram_classes,
     type_to_diagram_properties,
 )
 from eNMS.properties.objects import (
@@ -55,6 +54,7 @@ from eNMS.properties.objects import (
     pool_device_properties,
 )
 from eNMS.controller.syslog import SyslogServer
+from eNMS.settings import dashboard_properties
 
 
 class BaseController:
@@ -413,14 +413,14 @@ class BaseController:
     def count_models(self):
         return {
             "counters": {
-                instance_type: count(instance_type) for instance_type in diagram_classes
+                instance_type: count(instance_type) for instance_type in dashboard_properties
             },
             "properties": {
                 instance_type: Counter(
                     str(getattr(instance, type_to_diagram_properties[instance_type][0]))
                     for instance in fetch_all(instance_type)
                 )
-                for instance_type in diagram_classes
+                for instance_type in dashboard_properties
             },
         }
 

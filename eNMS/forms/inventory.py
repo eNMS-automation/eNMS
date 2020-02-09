@@ -13,10 +13,7 @@ from eNMS import app
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.properties import private_properties
-from eNMS.properties.objects import (
-    pool_link_properties,
-    pool_device_properties,
-)
+from eNMS.settings import pool_properties
 
 
 def configure_device_form(cls):
@@ -27,11 +24,11 @@ def configure_device_form(cls):
 
 
 def configure_pool_form(cls):
-    cls.device_properties = pool_device_properties
-    cls.link_properties = pool_link_properties
+    cls.device_properties = pool_properties["device"]
+    cls.link_properties = pool_properties["link"]
     for cls_name, properties in (
-        ("device", pool_device_properties),
-        ("link", pool_link_properties),
+        ("device", pool_properties["device"]),
+        ("link", pool_properties["link"]),
     ):
         for property in properties:
             match_field = f"{cls_name}_{property}_match"

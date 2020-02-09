@@ -121,21 +121,11 @@ pool2 = {
 }
 
 
-def create_pool(pool: dict) -> dict:
-    for property in pool_device_properties:
-        if f"device_{property}_match" not in pool:
-            pool[f"device_{property}_match"] = "inclusion"
-    for property in pool_link_properties:
-        if f"link_{property}_match" not in pool:
-            pool[f"link_{property}_match"] = "inclusion"
-    return pool
-
-
 @check_pages("table/device", "table/link", "view/network")
 def test_pool_management(user_client):
     create_from_file(user_client, "europe.xls")
-    user_client.post("/update/pool", data=create_pool(pool1))
-    user_client.post("/update/pool", data=create_pool(pool2))
+    user_client.post("/update/pool", data=pool1)
+    user_client.post("/update/pool", data=pool2)
     p1, p2 = fetch("pool", name="pool1"), fetch("pool", name="pool2")
     assert len(p1.devices) == 21
     assert len(p1.links) == 20

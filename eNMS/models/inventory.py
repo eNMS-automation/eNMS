@@ -17,7 +17,7 @@ from eNMS.database.associations import (
     task_pool_table,
 )
 from eNMS.database.base import AbstractBase
-from eNMS.properties.objects import pool_link_properties, pool_device_properties
+from eNMS.settings import pool_properties
 
 
 class Object(AbstractBase):
@@ -235,19 +235,19 @@ AbstractPool = type(
         **{
             **{
                 f"device_{property}": Column(LargeString, default="")
-                for property in pool_device_properties
+                for property in pool_properties["device"]
             },
             **{
                 f"device_{property}_match": Column(SmallString, default="inclusion")
-                for property in pool_device_properties
+                for property in pool_properties["device"]
             },
             **{
                 f"link_{property}": Column(LargeString, default="")
-                for property in pool_link_properties
+                for property in pool_properties["link"]
             },
             **{
                 f"link_{property}_match": Column(SmallString, default="inclusion")
-                for property in pool_link_properties
+                for property in pool_properties["link"]
             },
         },
     },
@@ -296,13 +296,8 @@ class Pool(AbstractPool):
             return bool(search(pool_value, object_value))
 
     def object_match(self, obj):
-        properties = (
-            pool_device_properties
-            if obj.class_type == "device"
-            else pool_link_properties
-        )
         operator = all if self.operator == "all" else any
-        return operator(self.property_match(obj, property) for property in properties)
+        return operator(self.property_match(obj, property) for property in pool_properties[obj.class_type])
 
     def compute_pool(self):
         if self.never_update:

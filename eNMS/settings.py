@@ -9,3 +9,6 @@ with open(Path.cwd() / "properties.json", "r") as file:
 
 with open(Path.cwd() / "dashboard.json", "r") as file:
     dashboard_properties = load(file)
+
+with open(Path.cwd() / "pools.json", "r") as file:
+    pool_properties = load(file)

@@ -1,13 +1,3 @@
-device_icons = {
-    "antenna": "Antenna",
-    "firewall": "Firewall",
-    "host": "Host",
-    "optical_switch": "Optical switch",
-    "regenerator": "Regenerator",
-    "router": "Router",
-    "server": "Server",
-    "switch": "Switch",
-}
 
 object_common_properties = [
     "name",

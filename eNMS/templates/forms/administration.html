@@ -2,8 +2,11 @@
   <div class="x_title">
     <h4 class="text-center">Miscellaneous</h4>
   </div>
-  <br />
-  <div class="btn-group-vertical" style="width:100%">
+  <nav
+    class="navbar navbar-default nav-controls"
+    style="margin-top: 5px"
+    role="navigation"
+  >
     <button
       class="btn btn-primary btn-file"
       onclick="eNMS.administration.getGitContent()"
@@ -16,24 +19,27 @@
     >
       Scan Cluster Subnet
     </button>
-  </div>
+  </nav>
   <div class="x_title">
     <h4 class="text-center">Database</h4>
   </div>
   <br />
-
-  <div class="btn-group-vertical" style="width:100%">
+  <nav
+    class="navbar navbar-default nav-controls"
+    style="margin-top: 5px"
+    role="navigation"
+  >
     <button
       class="btn btn-primary btn-file"
       onclick="eNMS.administration.showMigrationPanel()"
     >
-      Migration
+      Migration Import / Export
     </button>
     <button
       class="btn btn-primary btn-file"
       onclick="eNMS.base.openPanel({name: 'database_deletion'})"
     >
-      Deletion
+      Per-type Mass Deletion
     </button>
     <button
       class="btn btn-primary btn-file"
@@ -41,5 +47,5 @@
     >
       Import Service
     </button>
-  </div>
+  </nav>
 </div>

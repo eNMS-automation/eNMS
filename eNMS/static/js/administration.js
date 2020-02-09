@@ -109,6 +109,7 @@ function showImportServicePanel() {
 function importService() {
   call({
     url: `/import_service/${$("#service").val()}`,
+    title: "Import Service",
     callback: function(result) {
       notify("Import successful.", "success", 5);
       $("#import_service").remove();
@@ -120,6 +121,7 @@ function databaseDeletion() {
   notify("Starting to delete...", "success", 5);
   call({
     url: "/database_deletion",
+    title: "Database Deletion",
     form: "database_deletion-form",
     callback: function(result) {
       notify("Deletion done.", "success", 5);

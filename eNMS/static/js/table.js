@@ -20,6 +20,7 @@ export const models = {};
 let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
+  console.log(type, instance, runtime, id)
   // eslint-disable-next-line new-cap
   let columns = models[type].columns;
   columns.forEach((property) => {
@@ -200,13 +201,14 @@ class Base {
     return `
       <button
         style="background:transparent; border:none; 
-        color:transparent; width: 120px;"
+        color:transparent; width: 200px;"
         type="button"
       >
         <select multiple
           id="column-display"
           title="Columns"
           class="form-control"
+          data-actions-box="true"
           data-selected-text-format="static"
         ></select>
       </button>`;
@@ -289,7 +291,7 @@ class Base {
     columns.forEach((column) => {
       const visible = "visible" in column ? column.visible : true;
       $("#column-display")
-        .selectpicker({ liveSearch: true })
+        .selectpicker()
         .append(new Option(column.title || column.data, column.data, visible, visible))
         .selectpicker("refresh");
     });
@@ -413,7 +415,6 @@ models.configuration = class Configuration extends models.device {
         width: "90px",
       }
     ]);
-    
     return columns;
   }
 
@@ -421,7 +422,7 @@ models.configuration = class Configuration extends models.device {
     super.postProcessing(...args);
     $("#slider").bootstrapSlider({
       value: 0,
-      ticks: [0, 1, 2, 3],
+      ticks: [...Array(6).keys()],
       formatter: (value) => `Lines of context: ${value}`,
     });
     $("#slider").on("change", function() {

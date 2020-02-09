@@ -279,12 +279,12 @@ function showSessionLog(sessionId) {
 function showDeviceResultsPanel(device) {
   openPanel({
     name: "table",
+    id: device.id,
     title: `Results - ${device.name}`,
     callback: function() {
-      initTable("result", device, null, "table-result");
+      initTable("result", device, null, `table-result-${device.id}`);
     },
   });
-  $("#file")[0].value = "";
 }
 
 function showImportTopologyPanel() {

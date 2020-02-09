@@ -750,6 +750,7 @@ We cannot use 100% because main_frame is not set to 100%
 
 /* Cross-browser control alignment in the middle */
 .nav-controls {
+  border-radius: 10px;
   margin: auto;
   padding: 7px 7px;
   margin-bottom: 5px;

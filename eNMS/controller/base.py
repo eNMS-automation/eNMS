@@ -45,10 +45,6 @@ from eNMS.database.functions import (
 from eNMS.models import models, model_properties, relationships
 from eNMS.properties import private_properties, property_names
 from eNMS.properties.database import import_classes
-from eNMS.properties.objects import (
-    device_properties,
-    pool_device_properties,
-)
 from eNMS.controller.syslog import SyslogServer
 from eNMS.settings import dashboard_properties
 
@@ -259,8 +255,6 @@ class BaseController:
         public_custom_properties = {
             k: v for k, v in custom_properties.items() if not v.get("private", False)
         }
-        device_properties.extend(list(custom_properties))
-        pool_device_properties.extend(list(public_custom_properties))
         model_properties["device"].extend(list(public_custom_properties))
         private_properties.extend(
             list(p for p, v in custom_properties.items() if v.get("private", False))

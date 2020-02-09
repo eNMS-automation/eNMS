@@ -25,6 +25,7 @@ class User(AbstractBase, UserMixin):
     name = Column(SmallString)
     permissions = Column(MutableList)
     password = Column(SmallString)
+    group = Column(SmallString)
     small_menu = Column(Boolean, default=False, info={"dont_track_changes": True})
 
     @property

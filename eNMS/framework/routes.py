@@ -11,6 +11,7 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 from functools import wraps
 from logging import info
+from re import search
 from werkzeug.wrappers import Response
 
 from eNMS import app
@@ -164,6 +165,8 @@ def get_requests_sink(_):
 @blueprint.route("/<path:page>", methods=["POST"])
 @monitor_requests
 def route(page):
+    if search(r"update\/\w+", page):
+        return jsonify({"alert": "Error 403 Forbidden."})
     f, *args = page.split("/")
     if f not in app.json_endpoints + app.form_endpoints:
         return jsonify({"alert": "Invalid POST request."})

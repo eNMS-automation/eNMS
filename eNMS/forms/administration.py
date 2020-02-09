@@ -12,6 +12,7 @@ from wtforms.widgets import TextArea
 
 from eNMS.forms import BaseForm, configure_relationships
 from eNMS.properties.database import import_classes
+from eNMS.settings import rbac
 
 
 class SettingsForm(BaseForm):
@@ -93,13 +94,7 @@ class UserForm(BaseForm):
     name = StringField("Name", [InputRequired()])
     password = PasswordField("Password")
     email = StringField("Email")
-    permission_choices = [
-        ("Admin", "Admin"),
-        ("Connect to device", "Connect to device"),
-        ("View", "View"),
-        ("Edit", "Edit"),
-    ]
-    permissions = SelectMultipleField("Permissions", choices=permission_choices)
+    group = SelectField("Permissions", choices=[(g, g) for g in rbac])
 
 
 class ChangelogForm(BaseForm):

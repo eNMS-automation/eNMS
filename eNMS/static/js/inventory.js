@@ -3,16 +3,15 @@ global
 CodeMirror: false
 settings: true
 echarts: false
-initSelect: false
 */
 
 import {
   call,
   configureNamespace,
+  initSelect,
   notify,
   openPanel,
   openUrl,
-  serializeForm,
 } from "./base.js";
 import { initTable, tables } from "./table.js";
 
@@ -61,6 +60,7 @@ export function showConnectionPanel(device) {
   openPanel({
     name: "device_connection",
     title: `Connect to ${device.name}`,
+    size: "auto",
     id: device.id,
     callback: () => {
       $(`#custom-credentials-${device.id}`).change(function() {

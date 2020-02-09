@@ -23,13 +23,9 @@ export let userIsActive = true;
 let topZ = 1000;
 
 const panelSize = {
-  device_connection: "400 auto",
-  device_results: "1200 700",
-  display: "600 600",
   excel_import: "400 150",
   excel_export: "400 150",
   git: "900 200",
-  instance_deletion: "400 130",
   logs: "800 500",
   pool_objects: "700 550",
   table: "800 500",
@@ -320,6 +316,7 @@ export function showDeletionPanel(instance) {
   openPanel({
     name: "instance_deletion",
     title: `Delete ${instance.name}`,
+    size: "auto",
     id: instance.id,
     type: instance.type,
   });
@@ -349,7 +346,7 @@ export function preprocessForm(panel, id, type, duplicate) {
   });
 }
 
-function initSelect(el, model, parentId, single) {
+export function initSelect(el, model, parentId, single) {
   el.select2({
     multiple: !single,
     closeOnSelect: single ? true : false,

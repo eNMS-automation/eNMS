@@ -6,11 +6,24 @@ Version 3.20
 ------------
 
 - Add configuration management mechanism
+- New Table properties mechanism: all table properties are displayed in a JSON file: you can configure which ones
+appear in each table by default, whether they are searchable or not, etc, their label in the UI, etc.
+You will need to add your CUSTOM properties to that file if you want them to appear in the table.
+- Same with dashboard properties and pool properties
+- New Column visibility feature
+- New Configuration Management Mechanism
 
 MIGRATION:
 - In netmiko configuration backup service, rename:
   * "configuration" -> "configuration_command"
   * "operational_data" -> "operational_data_command"
+- Moved the following "optional" requirements to a dedicated files called "requirements_optional.txt":
+ansible
+ldap3
+pyats
+pynetbox
+slackclient>=1.3,<2
+tacacs_plus
 
 Version 3.19
 ------------
@@ -32,24 +45,11 @@ Version 3.19
 - Remove recipients from settings.json. Recipients is now a mandatory field if mail notification is ticked.
 - Add support for netmiko genie / pyATS (`use_genie`) option.
 - New "Desktop session" mechanism to SSH to a device using teraterm / putty / etc.
-- New Table properties mechanism: all table properties are displayed in a JSON file: you can configure which ones
-appear in each table by default, whether they are searchable or not, etc, their label in the UI, etc.
-You will need to add your CUSTOM properties to that file if you want them to appear in the table.
-- Same with dashboard properties and pool properties
-- New Column visibility feature
-- New Configuration Management Mechanism
 
 MIGRATION:
 - Renaming "config" -> "settings". All services that use the "config" global variable must change it to "settings".
 - Session change log: some traceback previously returned as "result" key of service "results" now returned as "error":
 can create backward-compatibility issue when a workflow relies on the content of the traceback.
-- Moved the following "optional" requirements to a dedicated files called "requirements_optional.txt":
-ansible
-ldap3
-pyats
-pynetbox
-slackclient>=1.3,<2
-tacacs_plus
 
 Version 3.18.2
 --------------

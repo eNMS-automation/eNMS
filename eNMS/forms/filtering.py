@@ -1,10 +1,8 @@
-from collections import OrderedDict
-from wtforms import HiddenField, SelectField, StringField
+from wtforms import HiddenField, SelectField
 
 from eNMS.forms import BaseForm
 from eNMS.forms.fields import MultipleInstanceField
 from eNMS.models import model_properties, relationships
-from eNMS.properties import private_properties
 
 
 def filtering_form_generator():

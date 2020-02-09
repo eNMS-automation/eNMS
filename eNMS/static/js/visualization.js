@@ -309,7 +309,6 @@ function filterViewPanel(type) {
     type: "device",
     callback: function() {
       initTable("device");
-      console.log("test");
     },
   });
 }

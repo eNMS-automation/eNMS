@@ -20,7 +20,6 @@ export const models = {};
 let waitForSearch = false;
 
 export function initTable(type, instance, runtime, id) {
-  // eslint-disable-next-line new-cap
   let columns = models[type].columns;
   columns.forEach((property) => {
     if (tableProperties[type]) {
@@ -28,6 +27,7 @@ export function initTable(type, instance, runtime, id) {
     }
     property.name = property.data;
   });
+  // eslint-disable-next-line new-cap
   tables[type] = $(id ? `#${id}` : "#table").DataTable({
     serverSide: true,
     orderCellsTop: true,
@@ -569,9 +569,12 @@ models.pool = class Pool extends Base {
           <span class="glyphicon glyphicon-eye-open"></span></button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.inventory.showPoolObjectsPanel('${this.id}')" data-tooltip="Pool Objects"
-            ><span class="glyphicon glyphicon-wrench"></span
+          <button
+            type="button"
+            class="btn btn-sm btn-primary"
+            onclick="eNMS.inventory.showPoolObjectsPanel('${this.id}')"
+            data-tooltip="Pool Objects"
+          ><span class="glyphicon glyphicon-wrench"></span
           ></button>
         </li>
         <li>
@@ -725,10 +728,12 @@ models.service = class Service extends Base {
           ></button>
         </li>
         <li>
-          <button type="button" class="btn btn-sm btn-primary"
-          onclick="eNMS.base.showTypePanel('${this.type}', '${this.id}')" data-tooltip="Edit"
-            ><span class="glyphicon glyphicon-edit"></span
-          ></button>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary"
+            onclick="eNMS.base.showTypePanel('${this.type}', '${this.id}')"
+            data-tooltip="Edit"
+          ><span class="glyphicon glyphicon-edit"></span></button>
         </li>
         <li>
           <button type="button" class="btn btn-sm btn-primary"
@@ -879,10 +884,15 @@ models.result = class Result extends Base {
           </span></button>
       </li>
       <li>
-          <button type="button" id="btn-result-${this.id}" class="btn btn-sm btn-info"
-          onclick="eNMS.automation.copyClipboard('btn-result-${this.id}', ${this.instance})"
-          data-tooltip="Copy to clipboard">
-          <span class="glyphicon glyphicon-copy"></span></button>
+          <button
+            type="button"
+            id="btn-result-${this.id}"
+            class="btn btn-sm btn-info"
+            onclick="eNMS.automation.copyClipboard(
+              'btn-result-${this.id}', ${this.instance}
+            )"
+            data-tooltip="Copy to clipboard"
+          ><span class="glyphicon glyphicon-copy"></span></button>
       </li>
     </ul>`,
     ];

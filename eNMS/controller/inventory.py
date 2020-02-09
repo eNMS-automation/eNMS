@@ -150,7 +150,7 @@ class InventoryController(BaseController):
                 for index, property in enumerate(properties):
                     if not property:
                         continue
-                    func = field_conversion[property_types[property]]
+                    func = field_conversion[property_types.get(property, "str")]
                     values[property] = func(sheet.row_values(row_index)[index])
                 try:
                     factory(obj_type, **values).serialized

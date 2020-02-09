@@ -406,7 +406,7 @@ function skipServices() {
   if (!selectedNodes.length) return;
   call({
     url: `/skip_services/${workflow.id}/${selectedNodes.join("-")}`,
-    callback: (skip) => {
+    callback: (result) => {
       workflow.last_modified = result.update_time;
       workflow.services.forEach((service) => {
         if (selectedNodes.includes(service.id)) {

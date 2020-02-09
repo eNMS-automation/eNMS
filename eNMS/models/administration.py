@@ -1,7 +1,6 @@
 from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy import Boolean, Integer
-from sqlalchemy.orm import relationship
 
 from eNMS.database.dialect import Column, MutableList, LargeString, SmallString
 from eNMS.database.base import AbstractBase

@@ -292,10 +292,11 @@ export function createTooltip({
     } else {
       kwargs.header = false;
     }
-    if (persistent)
+    if (persistent) {
       kwargs.onbeforeclose = function() {
         $(this).hide();
       };
+    }
     jsPanel.tooltip.create(kwargs);
     if (persistent) {
       $(target).on("click", function() {
@@ -692,7 +693,10 @@ function getAlerts(preview) {
             style="background: #${color}; pointer-events: none; margin: 2px 6px"
           >
           <a style="word-wrap: break-word; color: #FFFFFF">
-          <span class="time" style="font-size: ${fontSize}">${alert[3]}</span><span>${alert[0]}</span>
+          <span class="time" style="font-size: ${fontSize}">
+            ${alert[3]}
+          </span>
+          <span>${alert[0]}</span>
           </a>
         </li>`;
       } else {

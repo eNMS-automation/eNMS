@@ -297,7 +297,10 @@ class Pool(AbstractPool):
 
     def object_match(self, obj):
         operator = all if self.operator == "all" else any
-        return operator(self.property_match(obj, property) for property in pool_properties[obj.class_type])
+        return operator(
+            self.property_match(obj, property)
+            for property in pool_properties[obj.class_type]
+        )
 
     def compute_pool(self):
         if self.never_update:
